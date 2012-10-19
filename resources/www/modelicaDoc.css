@@ -1,6 +1,6 @@
 /* Style sheet for Modelica documentation
 
-From the Modelica Buildings library
+Adapted for the Modelica Buildings library
 (http://simulationresearch.lbl.gov/modelica, 10/18/2012)
 */
 html {
@@ -20,18 +20,13 @@ body {
     border: 1px solid #aaa;
     background-color: white;
     text-align: left;
-//    margin-left: auto;
-//    margin-right: auto;
-//    margin-top: 50px;
-//    margin-bottom: 50px;
-//    width: 870px;
     margin: 0px 80px 0px 80px;
     min-width: 740px;
 //    box-shadow: 2px -2px 10px 0px rgba(0,0,0,0.4);
 }
 
 // begin header css
-div.headerStyle{
+div.headerStyle {
     background-color: white;
     text-align: left;
     padding: 10px 10px 15px 15px;
@@ -58,7 +53,6 @@ div.headerLinks ul li {
     float: left;
     list-style: none;
     margin-left: 0em;
-
 }
 
 div.headerLinks ul li a {
@@ -98,18 +92,13 @@ h4 {
     color: #022e4d;
 }
 
-/* Adding padding helps readability of subscripts */
-sub, sup {
-//    padding: 2px;
-      font-size:x-small
-}
-
+sub, sup {font-size:x-small}
 
 /* Links */
 a {color: #8F0000;}
 h2 a {
-  color: #8F0000;
-  font-size: 1em;
+    color: #8F0000;
+    font-size: 1em;
 }
 
 /* a:visited {color: #597BB3;} */
@@ -118,14 +107,9 @@ h2 a {
 a.nonexistent:visited, a.nonexistent
 {color: red;}
 
+li p {margin: .25em 0;}
 
-li p {
-    margin: .25em 0;
-}
-
-li.gap {
-    margin-top: 0.5em;
-}
+li.gap {margin-top: 0.5em;}
 
 dt {
     margin-top: 0.5em;
@@ -138,13 +122,9 @@ dd {
     margin-bottom: 0;
 }
 
-ol, ul {
-    font-weight: normal;
-}
+ol, ul {font-weight: normal;}
 
-dd p {
-    margin: 0.25em 0;
-}
+dd p {margin: 0.25em 0;}
 
 a, img, img.drawing {
     border: 0;
@@ -157,7 +137,6 @@ a, img, img.drawing {
 code {
     font-family: 'Consolas', 'Deja Vu Sans Mono',
                  'Bitstream Vera Sans Mono', monospace;
-//    background-color: #F3F5F7;
     font-size: 1.1em;
     letter-spacing: 0.01em;
 }
@@ -171,9 +150,6 @@ pre {
     padding: 0.5em;
     border: 1px solid #ccc;
     background-color: #f8f8f8;
-//   border: 1pt solid #AEBDCC;
-//    background-color: #F3F5F7;
-//    padding: 5pt;
     white-space: pre;
     /* begin css 3 or browser specific rules - do not remove!
     see: http://forums.techguy.org/archive/index.php/t-249849.html */
@@ -194,23 +170,23 @@ pre.comment {
 }
 
 /* .comment css definition must be top of .red/.green/.blue or it won't work */
-.comment { color: #555555; background-color: #DDDDFF; }
+.comment {color: #555555; background-color: #DDDDFF;}
 
-.red { background-color: #FFCCCC; }
-.red { background-color: #FF0000; }
-.green { background-color: #CCFFCC; }
-.blue { background-color: #CCCCFF; }
-.yellow { background-color: #FFF29F; }
-.orange { background-color: #FFD59B; }
+.red {background-color: #FFCCCC;}
+.red {background-color: #FF0000;}
+.green {background-color: #CCFFCC;}
+.blue {background-color: #CCCCFF;}
+.yellow {background-color: #FFF29F;}
+.orange {background-color: #FFD59B;}
 
-.solid { border: 2px solid #000000; padding: 2px; }
-.dashed { border: 2px dashed #000000; padding: 2px; }
-.dotted { border: 2px dotted #000000; padding: 2px; }
+.solid {border: 2px solid #000000; padding: 2px;}
+.dashed {border: 2px dashed #000000; padding: 2px;}
+.dotted {border: 2px dotted #000000; padding: 2px;}
 
-.left { text-align: left; }
-.center { text-align: center; }
-.right { text-align: right; }
-.justify { text-align: justify; }
+.left {text-align: left;}
+.center {text-align: center;}
+.right {text-align: right;}
+.justify {text-align: justify;}
 
 table
 {
@@ -241,6 +217,7 @@ td p {
     margin: 0;
     padding: 0;
 }
+
 /* TableOfContents macro */
 div.table-of-contents {
     border: 1px solid #bbbbbb;
@@ -288,8 +265,7 @@ table.navigation {
     margin: 0 0 1em;
 }
 
-.footnotes li {
-}
+.footnotes li { }
 
 .info {
     float: right;
@@ -301,13 +277,13 @@ table.navigation {
     margin-top: 2em;
 }
 
-.seperator {
+.separator {
     color: gray;
 }
 
 #pagebottom {clear: both;}
 
-/* standard rule ---- */
+/* horizontal rule ---- */
 hr {
     height: 1.15pt;
     background-color: #022e4d;

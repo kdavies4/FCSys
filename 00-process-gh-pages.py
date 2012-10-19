@@ -23,8 +23,8 @@ rpls = [
     ('([A-z.]+).png', r'images/\1.png'),
     # Use the SVG version of some images.
     ('"images/cell\.png"', '"images/cell.svg" width=450'),
-    ('"images/FCSys\.Subassemblies\.Cells\.CellD\.png"', '"images/FCSys.Subassemblies.Cells.CellD.svg" width=600'),
-    ('"images/FCSys\.Subassemblies\.Cells\.Examples\.CellProfileD\.png"', '"images/FCSys.Subassemblies.Cells.Examples.CellProfileD.svg" width=250'),
+    #('"images/FCSys\.Subassemblies\.Cells\.CellD\.png"', '"images/FCSys.Subassemblies.Cells.CellD.svg" width=600'),
+    #('"images/FCSys\.Subassemblies\.Cells\.Examples\.CellProfileD\.png"', '"images/FCSys.Subassemblies.Cells.Examples.CellProfileD.svg" width=250'),
     # FCSys.html will be index.html.
     ('FCSys.html', r'index.html'),
     # Move the style sheet and icon.
