@@ -1,0 +1,104 @@
+# List of files and folders to exclude when extracting a copy of this folder for
+# distribution
+#
+# This is the order of precedence for determining if a file or folder will be
+# included (top priority first):
+#   1. The files and folders in .include are included.
+#   2. The files and folders in .exclude (this file) are excluded.
+#   3. By default, all files and folders are included.
+#
+# This is used by rsync via 00-release.sh.
+# KLD 5/22/12
+
+# Blocks
+Blocks.mo
+help/FCSys_Blocks*.html
+help/FCSys.Blocks*.png
+
+# Figures (for documentation only)
+*Figures*
+
+# Systems
+Systems.mo
+help/FCSys_Systems*.html
+help/FCSys.Systems*.png
+resources/images/system.png
+install/*qpOASES*
+
+# Figures (for documentation only)
+*Figures*
+
+# HNEI data
+# (also blocked by other means, but be sure)
+resources/scripts/Dymola/ValidationData.mos
+resources/images/Regions/*.pdf
+test/LOOCV
+
+# Georgia Tech files
+# TODO:  Ask Chris Paredis if they can be shared, and include them.
+test/Morris
+
+# Built and compiled files
+build
+Python/control/build
+Python/doc
+*.pyc
+
+# Supporting libraries
+resources/images/matplotlib.svg
+
+# Installation scripts
+install/*
+
+# Support for MATLAB and model-predictive control (MPC)
+resources/source/MATLAB
+test/MPC
+resources/source/C/qpOASES_C.h
+
+# Program to translate Dymosim initialization files (needed only for MATLAB
+# scripts; may be copyrighted by Dassault Systemes)
+resources/source/alist.exe
+
+# Simulation files (in case they're in the directory by mistake)
+dsin.txt
+dsfinal.txt
+dsu.txt
+dslog.txt
+dsmodel.c
+dsmodel.mof
+dymosim
+
+# Scripts for development
+00-*
+resources/source/Python/create-matplotlib-icon.py
+resources/source/Python/00-autoformat.sh
+resources/source/Python/tictoc.sh
+
+# Quadratic programming
+*qpOASES*
+
+# Hidden, synchronization, temporary, and backup files
+.*
+SyncToy_*.dat
+*.bak
+resources/source/Python/temp_plot.pdf
+resources/source/Python/temp_plot.png
+
+# Work in progress
+resources/source/Python/demos/arrowline.py
+WorkInProgress.mo
+help/FCSys_WorkInProgress*.html
+help/FCSys.WorkInProgress*.png
+old
+resources/*.xls
+resources/*.m
+resources/*.nb
+resources/*.cdf
+resources/source/Python/EOS-fit.py
+resources/source/Python/hierarchial.py
+resources/source/Python/sankey.py
+resources/source/Python/killall-fcsysres.sh
+resources/source/Python/exp.py
+resources/source/Python/demos/demo-sim-and-plot.py
+resources/source/Python/run-exps.py
+resources/source/Python/demos/placeholders

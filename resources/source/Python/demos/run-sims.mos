@@ -1,0 +1,9 @@
+openModel("/media/Storage/Documents/Dymola/FCSys/package.mo");
+cd("/media/Storage/Documents/Dymola")
+
+ok = simulateModel("FCSys.Subassemblies.Cells.Examples.Polarization", stopTime=1.000000e-22, tolerance=1.000000e-06, resultFile="Polarization");
+if ok then
+    system("cp Polarization.mat /media/Storage/Documents/Dymola/FCSys/resources/source/Python/demos");
+end if;
+
+exit();
