@@ -40,6 +40,7 @@ rpls = [
     (' ALT *= *', ' alt='),
     (' WIDTH *= *', ' width='),
     (' HEIGHT *= *', ' height='),
+    (' ALIGN *= *TOP *', ' align=top'), # Dymola adds spaces.
     (' ALIGN *= *', ' align='), # Dymola adds spaces.
     # Upgrade the main heading level.
     ('<h2><a name="FCSys"></a>FCSys</h2>\n<b>([^<]+)</b>', '<h1><a name="FCSys"></a>FCSys</h1>\n' + r'<h2>\1<h2>'),

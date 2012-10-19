@@ -14,7 +14,7 @@ rm help/*Figures*.html
 ./00-process-help.py
 
 ## Update the Github web pages.
-git commit -am "Auto-clean documentation"
+git commit -am "Before auto-clean documentation"
 git checkout gh-pages
 git checkout master 00-process-gh-pages.py
 
