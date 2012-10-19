@@ -1,0 +1,196 @@
+<html>
+<head>
+<title>FCSys</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta name="description" content="&quot;Modelica library of fuel cell models&quot;">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/modelicaDoc.css">
+<link rel="images/shortcut.icon" href="../resources/images/images/favicon.ico">
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img class="logo" src="../resources/images/images.icon.gif" alt="Logo" width=150>
+  </a></p>
+<h3>Table of Contents</h3>
+  <ul>
+  <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+  <li><a href="FCSys_BCs.html">BCs</a></li>
+  <li><a href="FCSys_Sensors.html">Sensors</a></li>
+  <li><a href="FCSys_Subassemblies.html">Subassemblies</a></li>
+  <li><a href="FCSys_Regions.html">Regions</a></li>
+  <li><a href="FCSys_Regions.html">Subregions</a></li>
+  <li><a href="FCSys_Connectors.html">Connectors</a></li>
+  <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+  <li><a href="FCSys_Units.html">Units</a></li>
+  <li><a href="FCSys_Quantities.html">Quantities</a></li>
+  <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+  </ul><h3>Download</h3>
+  <ul>
+    <li>Latest: <a href="release/FCSys-2.0.zip"
+           rel="nofollow">FCSys-2.0.zip</a> (**Check back soon)</li>
+  </ul>
+
+  </div>
+</div>
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys"></a>FCSys</h2>
+<b>Modelica library of fuel cell models</b>
+<p>
+<p><h3>Information</h3></p>
+
+    <p><a href="index.html#FCSys">FCSys</a> is a library of
+    declarative, dynamic, and flexible models of proton exchange membrane
+    fuel cells (PEMFCs) in the <a href = "http://www.modelica.org/">Modelica</a>
+    language.  The dynamics include material, momentum, thermal, and electrical 
+    effects.  There are options to adjust the assumptions, spatial discretization 
+    and dimensionality (1D, 2D, or 3D), and the present chemical species and material 
+    phases.</p>
+    
+    <p>A fuel cell is an electrochemical device which is similar to a battery
+    except that the reactants (fuel and oxidant) are externally stored or drawn
+    from the environment.  The electrochemical reactions of a PEMFC are:
+
+    <table border=0 cellspacing=0 cellpadding=2 align=center class="equation">
+      <tr>
+        <td align=right style="white-space:nowrap; text-align:right;" class="noBorder">
+          2(H<sub>2</sub>
+        </td>
+        <td align=center style="white-space:nowrap; text-align:center;" class="noBorder">
+          &#8652;
+        </td>
+        <td align=left style="white-space:nowrap;" class="noBorder">
+          2e<sup>-</sup> + 2H<sup>+</sup>)
+        </td>
+        <td class="noBorder">
+          (anode)
+        </td>
+      </tr>
+      <tr>
+        <td align=right style="white-space:nowrap; text-align=right;" class="noBorder">
+          4e<sup>-</sup> + 4H<sup>+</sup> + O<sub>2</sub>
+        </td>
+        <td align=center style="white-space:nowrap; text-align:center;" class="noBorder">
+          &#8652;
+        </td>
+        <td align=left style="white-space:nowrap;" class="noBorder">
+          2H<sub>2</sub>O
+        </td>
+        <td class="noBorder">
+          (cathode)
+        </td>
+      </tr>
+      <tr>
+        <td colspan=4 class="noBorder">
+          <hr>
+        </td>
+      </tr>
+      <tr>
+        <td align=right style="white-space:nowrap; text-align=right;" class="noBorder">
+          2H<sub>2</sub> + O<sub>2</sub>
+        </td>
+        <td align=center style="white-space:nowrap; text-align:center;" class="noBorder">
+          &#8652;
+        </td>
+        <td align=left style="white-space:nowrap;" class="noBorder">
+          2H<sub>2</sub>O
+        </td>
+        <td class="noBorder">
+          (net)
+        </td>
+      </tr>
+    </table></p>
+    
+    <p><a href="#Fig1">Figure 1</a> shows the seven primary physical layers of a typical PEMFC.  As
+    shown in <a href="#Fig2">Figure 2</a>, a PEMFC model may be constructed in
+    <a href="index.html#FCSys">FCSys</a> from models of the same layers.
+    The model is modular; the gas diffusion and catalyst layers could be combined,
+    or microporous layers could be inserted.</p>
+
+    <a name="Fig1"></a>
+    <p align=center><img src="images/cell.svg" width=450>
+    <br>Figure 1: Physical layers of a PEMFC</p>
+
+    <a name="Fig2"></a>
+    <!-- <p align=center><img width=900 src="../help/images/FCSys.Subassemblies.Cells.CellD.png"> -->
+    <p align=center><a href="FCSys_Subassemblies_Cells.html#FCSys.Subassemblies.Cells.Cell"><img src="images/FCSys.Subassemblies.Cells.CellD.png"></a>
+    <br>Figure 2: Diagram of the PEMFC model (<a href="FCSys_Subassemblies_Cells.html#FCSys.Subassemblies.Cells.Cell">FCSys.Subassemblies.Cells.Cell</a>).</p>
+
+    <p>The models describe the advection, diffusion, and storage of 
+    material, linear momentum, and energy.  Upstream
+    discretization is applied, but it is regularized and reduces to pure
+    diffusion when the bulk velocity is zero.  The transport equations do 
+    not use the <a href = "http://www.modelica.org/">Modelica</a>
+    <code>stream</code> operator since both diffusion and advection are
+    important in fuel cells.</p>
+
+    <p>Each layer may be divided into a number of rectilinear regions.  Storage and 
+    transport phenomena are co-located (e.g., no distinction between a vessel and a 
+    pipe).  Regions may be directly connected without producing nonlinear systems of 
+    equations, and species may be independently included in each region.  This is 
+    different than 
+    <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Media.html#Modelica.Media">Modelica.Media</a>,
+    where each media model contains a predefined set of species.</p>
+
+    <p>A cell may simulated under specified boundary conditions, as shown in
+    <a href="#Fig3">Figure 3</a>.  Adapters are available to interface with 
+    <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Fluid.html#Modelica.Fluid">Modelica.Fluid</a>.</p>
+
+    <a name="Fig3"></a>
+    <p align=center><a href="FCSys_Subassemblies_Cells_Examples.html#FCSys.Subassemblies.Cells.Examples.CellProfile"><img src="images/FCSys.Subassemblies.Cells.Examples.CellProfileD.png"></a>
+    <br>Figure 3: Diagram of a test model (<a href="FCSys_Subassemblies_Cells_Examples.html#FCSys.Subassemblies.Cells.Examples.CellProfile">FCSys.Subassemblies.Cells.Examples.CellProfile</a>).</p>
+
+    <p><b>Licensed by Kevin Davies under the Modelica License 2</b>
+    <br>Copyright 2007&ndash;2012, Kevin Davies.</p>
+
+    <p><i>This Modelica package is <u>free</u> software and the use is completely
+    at <u>your own risk</u>; it can be redistributed and/or modified under the
+    terms of the Modelica License 2. For license conditions (including the
+    disclaimer of warranty) see
+    <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.ModelicaLicense2">
+    FCSys.UsersGuide.ModelicaLicense2</a>
+    or visit <a href="http://www.modelica.org/licenses/ModelicaLicense2">
+    http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p><p>
+Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.UsersGuideS.png" alt="FCSys.UsersGuide" width=20  height=20 align=top>&nbsp;<a href="FCSys_UsersGuide.html#FCSys.UsersGuide">UsersGuide</a>
+</td><td>User&#39;s Guide</td></tr>
+<tr><td><img src="images/FCSys.BCsS.png" alt="FCSys.BCs" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs.html#FCSys.BCs">BCs</a>
+</td><td>Models that impose boundary conditions (including actuators)</td></tr>
+<tr><td><img src="images/FCSys.SensorsS.png" alt="FCSys.Sensors" width=20  height=20 align=top>&nbsp;<a href="FCSys_Sensors.html#FCSys.Sensors">Sensors</a>
+</td><td>Models that provide outputs representing operating conditions</td></tr>
+<tr><td><img src="images/FCSys.SubassembliesS.png" alt="FCSys.Subassemblies" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subassemblies.html#FCSys.Subassemblies">Subassemblies</a>
+</td><td>Direct assemblies of dissimilar arrays of regions (e.g., cells)</td></tr>
+<tr><td><img src="images/FCSys.SubassembliesS.png" alt="FCSys.Regions" width=20  height=20 align=top>&nbsp;<a href="FCSys_Regions.html#FCSys.Regions">Regions</a>
+</td><td>3D arrays of discrete, interconnected subregions</td></tr>
+<tr><td><img src="images/FCSys.SubassembliesS.png" alt="FCSys.Subregions" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions">Subregions</a>
+</td><td>Discrete subregions for multi-species transport, exchange, and storage</td></tr>
+<tr><td><img src="images/FCSys.ConnectorsS.png" alt="FCSys.Connectors" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a>
+</td><td>Declarative and imperative connectors</td></tr>
+<tr><td><img src="images/FCSys.CharacteristicsS.png" alt="FCSys.Characteristics" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics.html#FCSys.Characteristics">Characteristics</a>
+</td><td>Data and functions to correlate physical properties</td></tr>
+<tr><td><img src="images/FCSys.UnitsS.png" alt="FCSys.Units" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units.html#FCSys.Units">Units</a>
+</td><td>Constants and units of physical measure</td></tr>
+<tr><td><img src="images/FCSys.UnitsS.png" alt="FCSys.Quantities" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities">Quantities</a>
+</td><td>Quantities to represent physical properties</td></tr>
+<tr><td><img src="images/FCSys.BaseClassesS.png" alt="FCSys.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses.html#FCSys.BaseClasses">BaseClasses</a>
+</td><td>Base classes (not for direct use)</td></tr>
+<tr><td><img src="images/FCSys.BlocksS.png" alt="FCSys.Blocks" width=20  height=20 align=top>&nbsp;<a href="FCSys_Blocks.html#FCSys.Blocks">Blocks</a>
+</td><td>Imperative models (e.g., controllers and observers)</td></tr>
+</table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+        &copy; Copyright 2012, Kevin Davies.
+      Last updated Sat Oct 20 09:17:25 2012.
+    </div></body>
+</html>

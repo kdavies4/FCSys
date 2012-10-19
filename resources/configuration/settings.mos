@@ -1,0 +1,25 @@
+// Set the current directory.
+cd("../");
+
+// Establish the system of units.
+RunScript("FCSys/resources/configuration/units.mos");
+
+// Misc settings
+// Note:  Dymola's list() function lists all possible settings.
+Advanced.AutoFormatting = true "Automatic indentation of code. Can be changed without new translation of model";
+Advanced.CancelFactors = true "Try to eliminate possible divisions by zero when solving equations";
+//Advanced.CheckPackageRestriction = false "Check package restriction";
+Advanced.CheckUnits = false "Check unit consistency of equations";
+Advanced.Define.AutoRemoveAuxiliaries = true "Automatically remove code to compute auxilaries that are not needed";
+//Advanced.EnableCodeExport = true "Enable code export";
+Advanced.HighlightReplaceable = false "Highlight replaceable and redeclared components in diagram";
+Advanced.IncludeLibrariesForSimulink = false "Also link with libraries in Simulink";
+Advanced.Legend.Horizontal = false "Horizontal layout of plot legend by default";
+Advanced.Legend.Location = 5 "Default location of plot legend (1-7)";
+//Advanced.NewParLayout = true "Revised layout of parameter dialog";
+//Advanced.OutputModelicaCode = true "Output dsmodel in Modelica style";
+Advanced.OutputModelicaCodeWithAliasVariables = true "List eliminated alias variables when outputting dsmodel in Modelica style";
+Advanced.SubstituteVariablesUsedOnce = true "Substitute variables used only once";
+//Evaluate = true "Evaluate parameters to reduce models (improves simulation speed).";
+LogDefaultInitialConditions = true "Log selected default initial conditions";
+OutputFlatModelica = false "Generate listing of flat Modelica code in .mof file";
