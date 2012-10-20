@@ -888,6 +888,18 @@ printing and shipping costs may be recovered.</p>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 annotation (
   uses(Modelica(version="3.2"), Modelica_LinearSystems2(version="2.1")),
   preferedView="info",
@@ -906,10 +918,10 @@ annotation (
 
     <table border=0 cellspacing=0 cellpadding=2 align=center class=\"equation\">
       <tr>
-        <td align=right style=\"white-space:nowrap;\" class=\"noBorder\">
+        <td align=right style=\"white-space:nowrap; text-align:right;\" class=\"noBorder\">
           2(H<sub>2</sub>
         </td>
-        <td align=center style=\"white-space:nowrap;\" class=\"noBorder\">
+        <td align=center style=\"white-space:nowrap; text-align:center;\" class=\"noBorder\">
           &#8652;
         </td>
         <td align=left style=\"white-space:nowrap;\" class=\"noBorder\">
@@ -920,10 +932,10 @@ annotation (
         </td>
       </tr>
       <tr>
-        <td align=right style=\"white-space:nowrap;\" class=\"noBorder\">
+        <td align=right style=\"white-space:nowrap; text-align=right;\" class=\"noBorder\">
           4e<sup>-</sup> + 4H<sup>+</sup> + O<sub>2</sub>
         </td>
-        <td align=center style=\"white-space:nowrap;\" class=\"noBorder\">
+        <td align=center style=\"white-space:nowrap; text-align:center;\" class=\"noBorder\">
           &#8652;
         </td>
         <td align=left style=\"white-space:nowrap;\" class=\"noBorder\">
@@ -933,16 +945,16 @@ annotation (
           (cathode)
         </td>
       </tr>
-      <tr align=center class=\"noBorder\">
+      <tr>
         <td colspan=4 class=\"noBorder\">
           <hr>
         </td>
       </tr>
       <tr>
-        <td align=right style=\"white-space:nowrap;\" class=\"noBorder\">
+        <td align=right style=\"white-space:nowrap; text-align=right;\" class=\"noBorder\">
           2H<sub>2</sub> + O<sub>2</sub>
         </td>
-        <td align=center style=\"white-space:nowrap;\" class=\"noBorder\">
+        <td align=center style=\"white-space:nowrap; text-align:center;\" class=\"noBorder\">
           &#8652;
         </td>
         <td align=left style=\"white-space:nowrap;\" class=\"noBorder\">

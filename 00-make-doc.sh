@@ -2,6 +2,9 @@
 # Process the help files and upload a version to github pages
 # (http://kdavies4.github.com/FCSys/).
 
+# Original working branch
+branch=`git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3`
+
 # Remove some of the help files.
 rm help/FCSSys.Blocks*
 rm help/FCSSys_Blocks*
@@ -16,16 +19,16 @@ rm help/*WorkInProgress*
 ## Update the Github web pages.
 git commit -am "Before auto-clean documentation"
 git checkout gh-pages
-git checkout master 00-process-gh-pages.py
+git checkout $branch 00-process-gh-pages.py
 
 # Update the style sheet.
-git checkout master resources/www/modelicaDoc.css
+git checkout $branch resources/www/modelicaDoc.css
 cp -f resources/www/modelicaDoc.css stylesheets
 
 # Update the images.
 rm images/*
 cp help/*png images/
-for f in `find ./resources/images -iname *.png -o -iname *.svg -o -iname *.ico`
+for f in `find ./resources/images -iname *.png -o -iname *.svg -o -iname *.ico -o -iname *.gif`
 do
     cp $f images/
 done
@@ -42,10 +45,10 @@ mv -f FCSys.html index.html
 #    git add $f
 #done
 
-# Update the Github web pages and return to master.
+# Update the Github web pages and return to the original branch.
 git commit -am "Auto-update github pages"
-git push origin gh-pages
-git checkout master
+#git push origin gh-pages
+git checkout $branch
 
 # Clean up.
 rm *.html

@@ -1,119 +1,222 @@
 /* Style sheet for Modelica documentation
+ *
+ * Based on:
+ * 1. Sphinx stylesheet -- sphinxdoc theme.  Originally created by Armin
+ *    Ronacher for Werkzeug.  BSD license, 2007-2011.
+ * 2. Sphinx stylesheet -- basic theme,  Sphinx team, BSD license, 2007-2011.
+ * 3. Modelica Buildings library, http://simulationresearch.lbl.gov/modelica,
+ *    10/18/2012
+ */
 
-Adapted for the Modelica Buildings library
-(http://simulationresearch.lbl.gov/modelica, 10/18/2012)
-*/
-html {
-    color: #191970;
-    background-color: #FFFFFF;
-    font-style: normal;
-    font-family: "Lucida Grande", Helvetica, Verdana, sans-serif;
-    font-size: 1em;
-    background-color: #BFD1D4;
+/* -- main layout ----------------------------------------------------------- */
+
+div.clearer {
+    clear: both;
 }
+
+/* -- page layout ----------------------------------------------------------- */
 
 body {
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva',
+                 'Verdana', sans-serif;
     font-size: 14px;
+    letter-spacing: -0.01em;
     line-height: 150%;
-    color: #022e4d;
-    padding: 10px;
+    text-align: center;
+    background-color: #BFD1D4;
+    color: black;
+    padding: 0;
     border: 1px solid #aaa;
-    background-color: white;
-    text-align: left;
     margin: 0px 80px 0px 80px;
     min-width: 740px;
-//    box-shadow: 2px -2px 10px 0px rgba(0,0,0,0.4);
+    min-height: 865px;
 }
 
-// begin header css
+div.document {
+    background-color: white;
+    text-align: left;
+}
+
+div.bodywrapper {
+    margin: 0 215px 0 0;
+    border-right: 1px solid #ccc;
+}
+
+div.body {
+    margin: 0;
+    padding: 0.5em 20px 20px 20px;
+}
+
+/* -- sidebar -------------------------------------------------------------- */
+
+div.sidebarwrapper {
+    padding: 10px 5px 0 10px;
+}
+
+div.sidebar {
+    margin: 0;
+    padding: 0 15px 15px 0;
+    width: 190px;
+    float: right;
+    font-size: 0.9em;
+    text-align: left;
+    margin-left: -100%;
+}
+
+div.sidebar h3, div.sidebar h4 {
+    margin: 1em 0 0.5em 0;
+    font-size: 1em;
+    padding: 0.1em 0 0.1em 0.5em;
+    color: white;
+    border: 1px solid #86989B;
+    background-color: #AFC1C4;
+}
+
+div.sidebar h3 a {
+    color: white;
+}
+
+div.sidebar ul {
+    padding-left: 1.5em;
+    margin-top: 7px;
+    padding: 0;
+    line-height: 130%;
+    list-style: none;
+}
+
+div.sidebar ul ul {
+    margin-left: 20px;
+}
+
+p.logo {
+    text-align: center;
+}
+
+p.sidebar-title {
+    font-weight: bold;
+	text-align: center;
+//    margin: 0;
+//    padding: 0.7em 0 0.3em 0;
+    font-size: 2em;
+    color: #000000;
+//    color: #11557C;
+    text-decoration: none;
+}
+
+/* -- body styles ----------------------------------------------------------- */
+
+div.body p.caption {
+    text-align: inherit;
+}
+
+div.body td {
+    text-align: left;
+}
+
+img {
+    border: 0;
+}
+
+p {
+    margin: 0.8em 0 0.5em 0;
+}
+
+a {
+    color: #CA7900;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #2491CF;
+}
+
 div.headerStyle {
     background-color: white;
     text-align: left;
     padding: 10px 10px 15px 15px;
 }
 
-div.headerLinks {
-    font-size: 1em;
+div.body a {
+    text-decoration: underline;
 }
 
-div.headerLinks ul {
-    background-image: url("navigation.png");
-    height: 2em;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    padding-left: 10px;
-    margin-left: -10px;
-    margin-right: -10px;
-}
-
-div.headerLinks ul li {
-    margin: 0;
-    padding: 0;
-    height: 2em;
+img.align-left, .figure.align-left {
+    clear: left;
     float: left;
-    list-style: none;
-    margin-left: 0em;
+    margin-right: 1em;
 }
 
-div.headerLinks ul li a {
-    margin: 0;
-    padding: 0 5px 0 5px;
-    line-height: 1.75em;
-    text-decoration: none;
+img.align-right, .figure.align-right {
+    clear: right;
+    float: right;
+    margin-left: 1em;
 }
 
-div.headerLinks ul li a:hover {
-    color: #3CA8E7;
+img.align-center, .figure.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
-// end header css
 
 h1 {
-    margin: 0px;
+    margin: 0;
     padding: 0.7em 0 0.3em 0;
     font-size: 1.5em;
-    color: #022e4d;
+    color: #11557C;
 }
 
 h2 {
-    margin: 0em 0 0.2em 0;
+    margin: 1.3em 0 0.2em 0;
     font-size: 1.35em;
     padding: 0;
-    color: #022e4d;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.align-center {
+    clear: both;
+    text-align: center;
+}
+
+.align-right {
+    text-align: right;
 }
 
 h3 {
     margin: 1em 0 -0.3em 0;
     font-size: 1.2em;
-    color: #022e4d;
 }
-h4 {
-    margin: 1em 0 -0.3em 0;
-    font-size: 1em;
-    color: #022e4d;
+
+div.body h1 a, div.body h2 a, div.body h3 a, div.body h4 a, div.body h5 a, div.body h6 a {
+    color: black!important;
+}
+
+h1 a.anchor, h2 a.anchor, h3 a.anchor, h4 a.anchor, h5 a.anchor, h6 a.anchor {
+    display: none;
+    margin: 0 0 0 0.3em;
+    padding: 0 0.2em 0 0.2em;
+    color: #aaa!important;
+}
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor,
+h5:hover a.anchor, h6:hover a.anchor {
+    display: inline;
+}
+
+h1 a.anchor:hover, h2 a.anchor:hover, h3 a.anchor:hover, h4 a.anchor:hover,
+h5 a.anchor:hover, h6 a.anchor:hover {
+    color: #777;
+    background-color: #eee;
 }
 
 sub, sup {font-size:x-small}
 
-/* Links */
-a {color: #8F0000;}
-h2 a {
-    color: #8F0000;
-    font-size: 1em;
-}
-
-/* a:visited {color: #597BB3;} */
-/* a:visited {color: #750000;} */
-
-a.nonexistent:visited, a.nonexistent
-{color: red;}
-
-li p {margin: .25em 0;}
-
-li.gap {margin-top: 0.5em;}
-
-dt {
-    margin-top: 0.5em;
-    font-weight: bold;
+hr {
+    height: 1.15pt;
+    background-color: #022e4d;
+    border: 0;
 }
 
 dd {
@@ -122,23 +225,53 @@ dd {
     margin-bottom: 0;
 }
 
-ol, ul {font-weight: normal;}
-
-dd p {margin: 0.25em 0;}
-
-a, img, img.drawing {
+a tt {
     border: 0;
+    color: #CA7900;
+}
+
+a tt:hover {
+    color: #2491CF;
+}
+
+a, img {
     /* Restrict image size to width of text.
      Otherwise, very large image overlap the screen
     */
     max-width: 865px;
 }
 
-code {
+div.footer {
+    background-color: #E3EFF1;
+    color: #86989B;
+    padding: 3px 8px 3px 0;
+    clear: both;
+    font-size: 0.8em;
+    text-align: right;
+}
+
+div.footer a {
+    color: #86989B;
+    text-decoration: underline;
+}
+
+/* -- code displays --------------------------------------------------------- */
+
+h1 tt, h2 tt, h3 tt, h4 tt, h5 tt, h6 tt {
+    background-color: transparent;
+}
+
+cite, code, tt {
     font-family: 'Consolas', 'Deja Vu Sans Mono',
                  'Bitstream Vera Sans Mono', monospace;
-    font-size: 1.1em;
+    font-size: 0.95em;
     letter-spacing: 0.01em;
+}
+
+tt {
+    background-color: #f2f2f2;
+    border-bottom: 1px solid #ddd;
+    color: #333;
 }
 
 pre {
@@ -161,6 +294,11 @@ pre {
     /* end css 3 or browser specific rules */
 }
 
+pre a {
+    color: inherit;
+    text-decoration: underline;
+}
+
 pre.comment {
     background-color: #CCCCCC;
     color: red;
@@ -172,7 +310,6 @@ pre.comment {
 /* .comment css definition must be top of .red/.green/.blue or it won't work */
 .comment {color: #555555; background-color: #DDDDFF;}
 
-.red {background-color: #FFCCCC;}
 .red {background-color: #FF0000;}
 .green {background-color: #CCFFCC;}
 .blue {background-color: #CCCCFF;}
@@ -188,15 +325,16 @@ pre.comment {
 .right {text-align: right;}
 .justify {text-align: justify;}
 
-table
-{
+/* -- tables --------------------------------------------------------- */
+
+table {
     font-size: 14px;
     margin: 0.5em 0 0 0.5em;
     border-collapse: collapse;
     border: 1px solid #022e4d;
 }
 
-table.noBorder, th.noBorder, td.noBorder, tr.noBorder  {
+table.noBorder, th.noBorder, td.noBorder, tr.noBorder {
     border: none;
 }
 
@@ -207,8 +345,7 @@ table.equation {
     border: none;
   }
 
-th, td
-{
+th, td {
     padding: 0.25em 0.5em 0.25em 0.5em;
     border: 1px solid #ADB9CC;
 }
@@ -216,76 +353,4 @@ th, td
 td p {
     margin: 0;
     padding: 0;
-}
-
-/* TableOfContents macro */
-div.table-of-contents {
-    border: 1px solid #bbbbbb;
-    color: black;
-    background-color: #eeeeee;
-    font-size: 80%;
-    text-align: left;
-    margin: 0.5em 0 0.5em 1em;
-    padding: 0.5em 0.75em 0.5em 0.5em;
-    max-width: 50%;
-    display: inline-table;
-}
-div.table-of-contents ol {
-    margin: 0;
-    padding: 0 0 0 2em;
-}
-div.table-of-contents ul {
-    margin: 0;
-    list-style:none;
-}
-div.table-of-contents li {
-    margin:0;
-    padding: 0;
-}
-p.table-of-contents-heading {
-    font-weight:bold;
-    padding:0;
-    margin: 0 0 0.5em 0;
-    letter-spacing: 0.075em;
-}
-
-/* Navigation macro */
-table.navigation {
-    background: #fff;
-    margin: 0;
-}
-
-.footnotes div {
-    width: 5em;
-    border-top: 1pt solid gray;
-}
-
-.footnotes ol {
-    padding: 0 2em;
-    margin: 0 0 1em;
-}
-
-.footnotes li { }
-
-.info {
-    float: right;
-    font-size: 0.7em;
-    color: gray;
-}
-
-#pageinfo {
-    margin-top: 2em;
-}
-
-.separator {
-    color: gray;
-}
-
-#pagebottom {clear: both;}
-
-/* horizontal rule ---- */
-hr {
-    height: 1.15pt;
-    background-color: #022e4d;
-    border: 0;
 }
