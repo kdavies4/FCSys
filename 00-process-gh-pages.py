@@ -20,15 +20,17 @@ rpls = [
     ('<img src="[A-z.]+/', '<img src="'),
     ('<img src="[A-z.]+/', '<img src="'),
     ('<img src="[A-z.]+/', '<img src="'),
-    ('([A-z.]+).png', r'images/\1.png'),
-    ('([A-z.]+).ico', r'images/\1.ico'),
-    ('([A-z.]+).svg', r'images/\1.svg'),
+    ('([A-z.]+)\.png', r'images/\1.png'),
+    ('([A-z.]+)\.svg', r'images/\1.svg'),
+    ('([A-z.]+)\.gif', r'images/\1.gif'),
+    ('../resources/images/images/favicon.ico', r'images/favicon.ico'),
     # FCSys.html will be index.html.
     ('"FCSys.html"', '"index.html"'),
     # Add the download link.
     ('BaseClasses</a></li>\n  </ul>\n  </div>', 'BaseClasses</a></li>\n  </ul><h3>Download</h3>\n  <ul>\n    <li>Latest: <a href="release/FCSys-2.0.zip"\n           rel="nofollow">FCSys-2.0.zip</a> (**Check back soon)</li>\n  </ul>\n\n  </div>'),    ('FCSys.html', r'index.html'),
-    # Move the style sheet.
+    # Move the style sheet and icon.
     ('"../resources/www/modelicaDoc.css"', '"stylesheets/modelicaDoc.css"'),
+    ('"../resources/images/favicon.ico"', '"images/favicon.ico"'),
     ]
 
 # Directory specification

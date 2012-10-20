@@ -5,6 +5,13 @@
 *.bak
 .~lock*
 
+# Modelica files
+*.mo
+
+# Spelling files
+.fcsys.pws
+.modelica.pws
+
 # Simulation files
 dsin.txt
 dsfinal.txt
@@ -21,6 +28,10 @@ status
 # Compiled files
 *.pyc
 *.exe
+
+# Documentation scripts
+*.sh
+*.py
 
 # Internal link to demos
 resources/source/Python/doc/demos
