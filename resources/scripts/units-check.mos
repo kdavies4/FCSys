@@ -1,0 +1,260 @@
+// ***********************************************************************
+// Settings
+// ***********************************************************************
+
+tolCheck =  1E-7 "tolerance to imprecision in relations among constants and units";
+
+// ***********************************************************************
+// Check the constants and units.
+// ***********************************************************************
+
+// Set 1:  Mathematical constants and relations
+// These must be correct to the computer's numerical accuracy.
+x = {pi/3.14159265358979323846264338327950288419716939937510,
+     // The value is from
+     // http://en.wikipedia.org/wiki/Pi#Approximate_value.
+     e/2.71828182845904523536028747135266249775724709369995,
+     // The value is from http://en.wikipedia.org/wiki/E_(mathematical_constant).
+     2*pi*rad/(360*degree),
+     '%'/0.01};
+for i in 1:size(x,1) loop
+    assert(max(abs(x[i] - 1.0)) < tolCheck, "Entry " + String(i) + " in set 1 is incorrect.\nIt must be approximately 1.0 but is " + String(x[i]) + ".");
+end for;
+
+// Set 2:  Relations from BIPM (2006)
+x = {q/(1.602176487E-19*C),
+     C*V/J};
+for i in 1:size(x,1) loop
+    assert(max(abs(x[i] - 1.0)) < tolCheck, "Entry " + String(i) + " in set 2 is incorrect.\nIt must be approximately 1.0 but is " + String(x[i]) + ".");
+end for;
+
+// Set 3:  Coherent derived units in the SI with special names and
+// symbols (BIPM, 2006)
+// These must be correct to the computer's numerical accuracy.
+x = {sr,
+     Hz/(cyc/s),
+     // BIPM implicitly assumes that the unit cycle is 1, but the unit rad is 1
+     // too---a discrepency.
+     N/(kg*m/s^2),
+     Pa/(N/m^2),
+     J/(N*m),
+     W/(J/s),
+     C/(A*s),
+     V/(W/A),
+     F/(C/V),
+     ohm/(V/A),
+     // 11
+     S/(A/V),
+     Wb/(V*s),
+     T/(Wb/m^2),
+     H/(Wb/A),
+     lm/('cd'*sr),
+     lx/(lm/m^2),
+     Bq/(cyc/s),
+     // See Hz.
+     Gy/(J/kg),
+     Sv/(J/kg),
+     kat/(mol/s)};
+for i in 1:size(x,1) loop
+    assert(max(abs(x[i] - 1.0)) < tolCheck, "Entry " + String(i) + " in set 3 is incorrect.\nIt must be approximately 1.0 but is " + String(x[i]) + ".");
+end for;
+
+// Set 4:  Relations from NIST (2010)
+// This has been generated from FCSys/misc/NIST.xls.
+x = {1/alpha/137.035999074,
+     1/G_0/(12906.4037217*ohm),
+     1/m*h*c/(1.239841930E-6*eV),
+     1/m*h*c/(4.556335252755E-8*E_h),
+     1/m*h*c/(1.986445684E-25*J),
+     1/m*h*c/k_B/(1.4387770E-2*K),
+     1/m*h/c/(2.210218902E-42*kg),
+     100*kPa/(k_B*273.15*K)/(2.6516462E25/m^3),
+     101.325*kPa/(k_B*273.15*K)/(2.6867805E25/m^3),
+     12*g/mol/(12E-3*kg/mol),
+     alpha/7.2973525698E-3,
+     atm/(101325*Pa),
+     c/(299792458*m/s),
+     c_1/(3.74177153E-16*W*m^2),
+     c_2/(1.4387770E-2*m*K),
+     c_3_f*cyc/(5.8789254E10*Hz/K),
+     // Factor of cyc due to inconsistencies b/w rad and cyc in BIPM (2006).
+     c_3_lambda/(2.8977721E-3*m*K),
+     cyc/m*c/(299792458*Hz),
+     E_h/(4.35974434E-18*J),
+     E_h/(27.21138505*eV),
+     E_h/(27.21138505*eV),
+     E_h/(4.35974434E-18*J),
+     E_h/(h*c)/(2.194746313708E7/m),
+     E_h/c^2/(4.85086979E-35*kg),
+     E_h/h*cyc/(6.579683920729E15*Hz),
+     // Factor of cyc due to inconsistencies b/w rad and cyc in BIPM (2006).
+     E_h/k_B/(3.1577504E5*K),
+     epsilon_0/(8.854187817E-12*F/m),
+     eV/(1.602176565E-19*J),
+     eV/(3.674932379E-2*E_h),
+     eV/(1.602176565E-19*J),
+     eV/(h*c)/(8.06554429E5/m),
+     eV/c^2/(1.782661845E-36*kg),
+     eV/h*cyc/(2.417989348E14*Hz),
+     // Factor of cyc due to inconsistencies b/w rad and cyc in BIPM (2006).
+     eV/k_B/(1.1604519E4*K),
+     G_0/(7.7480917346E-5*S),
+     g/mol/(1E-3*kg/mol),
+     h/(6.62606957E-34*J*s),
+     h/(4.135667516E-15*eV*s),
+     h*c/(2*pi)/(197.3269718*mega*eV*femto*m),
+     h/(2*pi)/(1.054571726E-34*J*s),
+     h/(2*pi)/(6.58211928E-16*eV*s),
+     Hz*h/cyc/(4.135667516E-15*eV),
+     // Factor of 1/cyc due to inconsistencies b/w rad and cyc in BIPM (2006).
+     Hz*h/cyc/(1.5198298460045E-16*E_h),
+     // Factor of 1/cyc due to inconsistencies b/w rad and cyc in BIPM (2006).
+     Hz*h/cyc/(6.62606957E-34*J),
+     // Factor of 1/cyc due to inconsistencies b/w rad and cyc in BIPM (2006).
+     Hz*h/c^2/cyc/(7.37249668E-51*kg),
+     // Factor of 1/cyc due to inconsistencies b/w rad and cyc in BIPM (2006).
+     Hz*h/k_B/cyc/(4.7992434E-11*K),
+     // Factor of 1/cyc due to inconsistencies b/w rad and cyc in BIPM (2006).
+     Hz/c/cyc/(3.335640951E-9/m),
+     // Factor of 1/cyc due to inconsistencies b/w rad and cyc in BIPM (2006).
+     J/(6.24150934E18*eV),
+     J/(2.29371248E17*E_h),
+     J/(h*c)/(5.03411701E24/m),
+     J/c^2/(1.112650056E-17*kg),
+     J/h*cyc/(1.509190311E33*Hz),
+     J/k_B/(7.2429716E22*K),
+     k_B/(1.3806488E-23*J/K),
+     k_B/(8.6173324E-5*eV/K),
+     k_B/(h*c)/(69.503476/(m*K)),
+     k_B/h*cyc/(2.0836618E10*Hz/K),
+     // Factor of cyc due to inconsistencies b/w rad and cyc in BIPM (2006).
+     k_F/(96485.3365*C/mol),
+     k_J*cyc/(483597.9E9*Hz/V),
+     k_J*cyc/(483597.870E9*Hz/V),
+     // Factor of cyc due to inconsistencies b/w rad and cyc in BIPM (2006).
+     K*k_B/(8.6173324E-5*eV),
+     K*k_B/(3.1668114E-6*E_h),
+     K*k_B/(1.3806488E-23*J),
+     K*k_B/(h*c)/(69.503476/m),
+     K*k_B/c^2/(1.5361790E-40*kg),
+     K*k_B/h*cyc/(2.0836618E10*Hz),
+     // Factor of cyc due to inconsistencies b/w rad and cyc in BIPM (2006).
+     kg*c^2/(5.60958885E35*eV),
+     kg*c^2/(2.061485968E34*E_h),
+     kg*c^2/(8.987551787E16*J),
+     kg*c^2/h*cyc/(1.356392608E50*Hz),
+     // Factor of cyc due to inconsistencies b/w rad and cyc in BIPM (2006).
+     kg*c^2/k_B/(6.5096582E39*K),
+     kg*c/h/(4.52443873E41/m),
+     mu_0/(12.566370614E-7*N/A^2),
+     N_A/(6.02214129E23/mol),
+     N_A*h/(3.9903127176E-10*J*s/mol),
+     N_A*h*c/(0.119626565779*J*m/mol),
+     Phi_0/(2.067833758E-15*Wb),
+     q/(1.602176565E-19*C),
+     q/h/(2.417989348E14*A/J),
+     R/(8.3144621*J/(mol*K)),
+     R_inf/(10973731.568539/m),
+     R_inf*c*cyc/(3.289841960364E15*Hz),
+     // Factor of cyc due to inconsistencies b/w rad and cyc in BIPM (2006).
+     R_inf*h*c/(13.60569253*eV),
+     R_inf*h*c/(2.179872171E-18*J),
+     R_K/(25812.807*ohm),
+     R_K/(25812.8074434*ohm),
+     R*273.15*K/(100*kPa)/(22.710953E-3*m^3/mol),
+     R*273.15*K/(101.325*kPa)/(22.413968E-3*m^3/mol),
+     sigma/(5.670373E-8*W/(m^2*K^4)),
+     Z_0/(376.730313461*ohm)};
+names = {"inverse fine-structure constant",
+         "inverse of conductance quantum",
+         "inverse meter-electron volt relationship",
+         "inverse meter-hartree relationship",
+         "inverse meter-joule relationship",
+         "inverse meter-kelvin relationship",
+         "inverse meter-kilogram relationship",
+         "Loschmidt constant (273.15 K, 100 kPa)",
+         "Loschmidt constant (273.15 K, 101.325 kPa)",
+         "molar mass of carbon-12",
+         "fine-structure constant",
+         "standard atmosphere",
+         "speed of light in vacuum",
+         "first radiation constant",
+         "second radiation constant",
+         "Wien frequency displacement law constant",
+         "Wien wavelength displacement law constant",
+         "inverse meter-hertz relationship",
+         "Hartree energy",
+         "Hartree energy in eV",
+         "hartree-electron volt relationship",
+         "hartree-joule relationship",
+         "hartree-inverse meter relationship",
+         "hartree-kilogram relationship",
+         "hartree-hertz relationship",
+         "hartree-kelvin relationship",
+         "electric constant",
+         "electron volt",
+         "electron volt-hartree relationship",
+         "electron volt-joule relationship",
+         "electron volt-inverse meter relationship",
+         "electron volt-kilogram relationship",
+         "electron volt-hertz relationship",
+         "electron volt-kelvin relationship",
+         "conductance quantum",
+         "molar mass constant",
+         "Planck constant",
+         "Planck constant in eV s",
+         "Planck constant over 2 pi times c in MeV fm",
+         "Planck constant over 2 pi",
+         "Planck constant over 2 pi in eV s",
+         "hertz-electron volt relationship",
+         "hertz-hartree relationship",
+         "hertz-joule relationship",
+         "hertz-kilogram relationship",
+         "hertz-kelvin relationship",
+         "hertz-inverse meter relationship",
+         "joule-electron volt relationship",
+         "joule-hartree relationship",
+         "joule-inverse meter relationship",
+         "joule-kilogram relationship",
+         "joule-hertz relationship",
+         "joule-kelvin relationship",
+         "Boltzmann constant",
+         "Boltzmann constant in eV/K",
+         "Boltzmann constant in inverse meters per kelvin",
+         "Boltzmann constant in Hz/K",
+         "Faraday constant",
+         "conventional value of Josephson constant",
+         "Josephson constant",
+         "kelvin-electron volt relationship",
+         "kelvin-hartree relationship",
+         "kelvin-joule relationship",
+         "kelvin-inverse meter relationship",
+         "kelvin-kilogram relationship",
+         "kelvin-hertz relationship",
+         "kilogram-electron volt relationship",
+         "kilogram-hartree relationship",
+         "kilogram-joule relationship",
+         "kilogram-hertz relationship",
+         "kilogram-kelvin relationship",
+         "kilogram-inverse meter relationship",
+         "mag. constant",
+         "Avogadro constant",
+         "molar Planck constant",
+         "molar Planck constant times c",
+         "mag. flux quantum",
+         "elementary charge",
+         "elementary charge over h",
+         "molar gas constant",
+         "Rydberg constant",
+         "Rydberg constant times c in Hz",
+         "Rydberg constant times hc in eV",
+         "Rydberg constant times hc in J",
+         "conventional value of von Klitzing constant",
+         "von Klitzing constant",
+         "molar volume of ideal gas (273.15 K, 100 kPa)",
+         "molar volume of ideal gas (273.15 K, 101.325 kPa)",
+         "Stefan-Boltzmann constant",
+         "characteristic impedance of vacuum"};
+for i in 1:size(x,1) loop
+    assert(max(abs(x[i] - 1.0)) < tolCheck, "Entry " + String(i) + " in set 4 (\"" + names[i] + "\") is incorrect.\nIt must be approximately 1.0 but is " + String(x[i]) + ".");
+end for;

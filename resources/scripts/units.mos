@@ -1,0 +1,236 @@
+// Modelica script to establish conversions to display quantities in
+// units.
+// For more information, see FCSys.UsersGuide.Units and FCSys.Units.
+
+// ***********************************************************************
+// Settings
+// ***********************************************************************
+
+checkUnits = false "true, if the constants and units should be checked";
+
+// -----------------------------------------------------------------------
+// Default display units
+// If units other than those in the displayUnit attribute of the
+// quantities in FCSys.Quantities should be used by default, then specify
+// them here.  Be sure that the desired unit is included in a
+// defineUnitConversion command below.
+// Generated from FCSys/resources/quantities.xls, 10/5/2012
+defineDefaultDisplayUnit("l/(T.s)", "cm/s2");
+defineDefaultDisplayUnit("l/T2", "cm/s2");
+defineDefaultDisplayUnit("A", "rad");
+defineDefaultDisplayUnit("A2", "sr");
+defineDefaultDisplayUnit("l2", "cm2");
+defineDefaultDisplayUnit("N2.T2/(l2.m)", "uF");
+defineDefaultDisplayUnit("N2.T/(l2.m)", "S");
+defineDefaultDisplayUnit("N/s", "A");
+defineDefaultDisplayUnit("N/T", "A");
+defineDefaultDisplayUnit("N/(l2.T)", "A/cm2");
+defineDefaultDisplayUnit("N/(T.s)", "A/s");
+defineDefaultDisplayUnit("N/T2", "A/s");
+defineDefaultDisplayUnit("l2.m/T2", "J");
+defineDefaultDisplayUnit("l2/T2", "Sv");
+defineDefaultDisplayUnit("l.m/(T.s)", "N");
+defineDefaultDisplayUnit("l.m/T2", "N");
+defineDefaultDisplayUnit("l2.m/N2", "uH");
+defineDefaultDisplayUnit("l", "cm");
+defineDefaultDisplayUnit("l/N", "m/mol");
+defineDefaultDisplayUnit("l2.m/(A.N.T)", "Wb");
+defineDefaultDisplayUnit("m/(A.N.T)", "T");
+defineDefaultDisplayUnit("A.N.T/(l2.m)", "1/Wb");
+defineDefaultDisplayUnit("m", "g");
+defineDefaultDisplayUnit("m/N", "g/mol");
+defineDefaultDisplayUnit("l2.m/(A.T)", "J.s/rad");
+defineDefaultDisplayUnit("s-1", "1/s");
+defineDefaultDisplayUnit("1/T", "1/s");
+defineDefaultDisplayUnit("N", "C");
+defineDefaultDisplayUnit("1/N", "1/mol");
+defineDefaultDisplayUnit("N/l3", "mol/cm3");
+defineDefaultDisplayUnit("l.m/N2", "H/m");
+defineDefaultDisplayUnit("N2.T2/(l3.m)", "F/m");
+defineDefaultDisplayUnit("l3.m/(N2.T2)", "m/H");
+defineDefaultDisplayUnit("l2.m/(N.T2)", "V");
+defineDefaultDisplayUnit("l3.m/(A.N.T2)", "V.m/rad");
+defineDefaultDisplayUnit("l2.m/(N.T2.s)", "V/s");
+defineDefaultDisplayUnit("l2.m/(N.T3)", "V/s");
+defineDefaultDisplayUnit("l2.m/T3", "W");
+defineDefaultDisplayUnit("l4.m/T3", "W.m2");
+defineDefaultDisplayUnit("m/T3", "W/m2");
+defineDefaultDisplayUnit("m.T5/l8", "W/(m2.K4)");
+defineDefaultDisplayUnit("l2.m/(A2.T3)", "cd");
+defineDefaultDisplayUnit("m/(l.T2)", "kPa");
+defineDefaultDisplayUnit("m/(l.T2.s)", "Pa/s");
+defineDefaultDisplayUnit("m/(l.T3)", "Pa/s");
+defineDefaultDisplayUnit("T/N", "1/A");
+defineDefaultDisplayUnit("l2.m/(N2.T)", "ohm");
+defineDefaultDisplayUnit("l.T/N", "cm/A");
+defineDefaultDisplayUnit("T", "s");
+defineDefaultDisplayUnit("l/T", "cm/s");
+defineDefaultDisplayUnit("l.m/(N.T)", "kg.m/(C.s)");
+defineDefaultDisplayUnit("l3", "cm3");
+defineDefaultDisplayUnit("l3/T", "L/min");
+defineDefaultDisplayUnit("l3/N", "cm3/C");
+defineDefaultDisplayUnit("l3/(N.s)", "cm3/(mol.s)");
+defineDefaultDisplayUnit("l3/(N.T)", "cm3/(mol.s)");
+defineDefaultDisplayUnit("A/l", "rad/m");
+
+// ***********************************************************************
+// Establish the constants and units.
+// ***********************************************************************
+
+// Translate the package that contains all the constants and units.  The
+// constants and units will be available in the workspace, but only until
+// the next model is simulated.  To load the and retain the variables
+// until Dymola is closed, translate a model besides Units.Evaluate and
+// then run "units-values.mos" as a script.
+Advanced.OutputModelicaCode = true "Output dsmodel in Modelica style";
+translateModel("FCSys.Units.Evaluate");
+Modelica.Utilities.Files.copy("dsmodel.mof", "FCSys/resources/scripts/units-values.mos", true);
+
+// ***********************************************************************
+// Check the constants and units (conditional).
+// ***********************************************************************
+
+if checkUnits then
+    assert(RunScript(script="FCSys/resources/scripts/units-check.mos", silent=true), "The constants and units did not pass the check.\nThe unit conversions have not been updated.");
+end if;
+
+// ***********************************************************************
+// Establish conversions to display quantities in units.
+// ***********************************************************************
+
+// Conversions with offsets
+defineUnitConversion("l2.m/(N.T2)", "degC", 1/K, -273.15) "Temperature";
+// See BIPM (2006, Table 3).
+defineUnitConversion("l2.m/(N.T2)", "degF", 9/(5*K), 32 - (9/5)*273.15) "Temperature";
+defineUnitConversion("m/(l.T2)", "kPag", 1/kPa, -101.325) "Pressure";
+// Value from "standard atmosphere" NIST (2010)
+// See BIPM (2006, p. 129 Sec. 4.2).
+
+// Conversions without offsets (generated from FCSys/resources/quantities.xls,
+// 10/5/2012)
+defineUnitConversion("l/(T.s)", "cm/s2", s/cm) "for derivative of Velocity in Dymola";
+defineUnitConversion("l/T2", "cm/s2", s^2/cm) "Acceleration";
+defineUnitConversion("l/(T.s)", "m/s2", s/m) "for derivative of Velocity in Dymola";
+defineUnitConversion("l/T2", "m/s2", s^2/m) "Acceleration";
+defineUnitConversion("A", "degree", 1/degree) "Angle";
+defineUnitConversion("A", "rad", 1/rad) "Angle";
+defineUnitConversion("A2", "sr", 1/sr) "Solid angle";
+defineUnitConversion("l2", "cm2", 1/((centi*m)^2)) "Area";
+defineUnitConversion("l2", "m2", 1/m^2) "Area";
+defineUnitConversion("N2.T2/(l2.m)", "uF", 1/(micro*F)) "Capacitance";
+defineUnitConversion("N2.T2/(l2.m)", "F", 1/F) "Capacitance";
+defineUnitConversion("N2.T/(l2.m)", "S", 1/S) "Electrical conductance";
+defineUnitConversion("N/s", "A", 1/C) "for derivative of ParticleNumber in Dymola";
+defineUnitConversion("N/s", "kat", 1/mol) "for derivative of ParticleNumber in Dymola";
+defineUnitConversion("N/T", "kat", 1/kat) "Current";
+defineUnitConversion("N/s", "W/K", K/J) "for derivative of ParticleNumber in Dymola";
+defineUnitConversion("N/T", "W/K", K/W) "Current";
+defineUnitConversion("N/T", "A", 1/A) "Current";
+defineUnitConversion("N/(l2.T)", "A/cm2", (centi*m)^2/A) "Areic current";
+defineUnitConversion("N/(l2.T)", "kat/cm2", (centi*m)^2/kat) "Areic current";
+defineUnitConversion("N/(l2.T)", "kat/m2", m^2/kat) "Areic current";
+defineUnitConversion("N/(l2.T)", "A/m2", m^2/A) "Areic current";
+defineUnitConversion("N/(T.s)", "A/s", 1/A) "for derivative of Current in Dymola";
+defineUnitConversion("N/(T.s)", "kat/s", 1/kat) "for derivative of Current in Dymola";
+defineUnitConversion("N/T2", "kat/s", s/kat) "Rate of current";
+defineUnitConversion("N/T2", "A/s", s/A) "Rate of current";
+defineUnitConversion("l2.m/T2", "J", 1/J) "Energy";
+defineUnitConversion("l2/T2", "Sv", 1/Sv) "Massic energy";
+defineUnitConversion("l.m/(T.s)", "N", 1/(N*s)) "for derivative of MomentumLineic in Dymola";
+defineUnitConversion("l.m/T2", "N", 1/N) "Force";
+defineUnitConversion("A/T", "Hz", 1/Hz) "Frequency";
+defineUnitConversion("A/T", "rad/s", s/rad) "Frequency";
+defineUnitConversion("l2.m/N2", "uH", 1/(micro*H)) "Inductance";
+defineUnitConversion("l2.m/N2", "H", 1/H) "Inductance";
+defineUnitConversion("l", "cm", 1/(centi*m)) "Length";
+defineUnitConversion("l", "mm", 1/(milli*m)) "Length";
+defineUnitConversion("l", "m", 1/m) "Length";
+defineUnitConversion("l/N", "m/mol", mol/m) "Specific length";
+defineUnitConversion("l/N", "m/C", C/m) "Specific length";
+defineUnitConversion("l2.m/(A.N.T)", "Wb", 1/Wb) "Magnetic flux";
+defineUnitConversion("m/(A.N.T)", "T", 1/T) "Areic magnetic flux";
+defineUnitConversion("A.N.T/(l2.m)", "1/Wb", Wb) "Reciprocal magnetic flux";
+defineUnitConversion("m", "g", 1/g) "Mass";
+defineUnitConversion("m", "kg", 1/kg) "Mass";
+defineUnitConversion("m/N", "g/mol", mol/g) "Specific mass";
+defineUnitConversion("m/N", "kg/mol", mol/kg) "Specific mass";
+defineUnitConversion("m/N", "kg/C", C/kg) "Specific mass";
+defineUnitConversion("l2.m/(A.T)", "J.s/rad", rad/(J*s)) "Angular momentum";
+defineUnitConversion("1", "J/(mol.K)", mol*K/J) "Number";
+defineUnitConversion("1", "V/K", K/V) "Number";
+defineUnitConversion("1", "%", 1/'%') "Absolute number";
+defineUnitConversion("J", "mol.K", 1/(mol*K)) "Absolute number";
+defineUnitConversion("s-1", "1/s", 1) "for derivative of Number in Dymola";
+defineUnitConversion("1/T", "W/(mol.K)", mol*K/W) "Rate of number";
+defineUnitConversion("s-1", "W/(mol.K)", mol*K/J) "for derivative of Number in Dymola";
+defineUnitConversion("1/T", "1/s", s) "Rate of number";
+defineUnitConversion("N", "mol", 1/mol) "Particle number";
+defineUnitConversion("N", "C", 1/C) "Particle number";
+defineUnitConversion("N", "q", 1/q) "Particle number";
+defineUnitConversion("1/N", "1/mol", mol) "Reciprocal particle number";
+defineUnitConversion("1/N", "1/C", C) "Reciprocal particle number";
+defineUnitConversion("N/l3", "C/cm3", (centi*m)^3/C) "Volumic particle number";
+defineUnitConversion("N/l3", "mol/cm3", cm^3/mol) "Volumic particle number";
+defineUnitConversion("N/l3", "mol/m3", m^3/mol) "Volumic particle number";
+defineUnitConversion("N/l3", "C/m3", m^3/C) "Volumic particle number";
+defineUnitConversion("l.m/N2", "H/m", m/H) "Permeability";
+defineUnitConversion("N2.T2/(l3.m)", "F/m", m/F) "Permittivity";
+defineUnitConversion("l3.m/(N2.T2)", "m/H", H/m) "Reciprocal permittivity";
+defineUnitConversion("l2.m/(N.T2)", "J/mol", mol/J) "Potential";
+defineUnitConversion("l2.m/(N.T2)", "V", 1/V) "Potential";
+defineUnitConversion("l2.m/(N.T2)", "K", 1/K) "Absolute potential";
+defineUnitConversion("l3.m/(A.N.T2)", "K.m/rad", rad/(K*m)) "Potential per wavenumber";
+defineUnitConversion("l3.m/(A.N.T2)", "V.m/rad", rad/(V*m)) "Potential per wavenumber";
+defineUnitConversion("l2.m/(N.T2.s)", "K/s", 1/K) "for derivative of Potential in Dymola";
+defineUnitConversion("l2.m/(N.T3)", "K/s", s/K) "Rate of potential";
+defineUnitConversion("l2.m/(N.T2.s)", "V/s", 1/V) "for derivative of Potential in Dymola";
+defineUnitConversion("l2.m/(N.T3)", "V/s", s/V) "Rate of potential";
+defineUnitConversion("l2.m/T3", "lm", 1/lm) "Power";
+defineUnitConversion("l2.m/T3", "W", 1/W) "Power";
+defineUnitConversion("l4.m/T3", "W.m2", 1/(W*m^2)) "Power times area";
+defineUnitConversion("m/T3", "lm/m2", m^2/lm) "Areic power";
+defineUnitConversion("m/T3", "W/m2", m^2/W) "Areic power";
+defineUnitConversion("m.T5/l8", "W/(m2.K4)", m^2*K^4/W) "Areic power per 4th power of potential";
+defineUnitConversion("l2.m/(A2.T3)", "W/sr", sr/W) "Radiant power";
+defineUnitConversion("l2.m/(A2.T3)", "cd", 1/'cd') "Radiant power";
+defineUnitConversion("m/(l.T2)", "atm", 1/atm) "Pressure";
+defineUnitConversion("m/(l.T2)", "bar", 1/bar) "Pressure";
+defineUnitConversion("m/(l.T2)", "kPa", 1/(kilo*Pa)) "Pressure";
+defineUnitConversion("m/(l.T2)", "Pa", 1/Pa) "Pressure";
+defineUnitConversion("m/(l.T2.s)", "Pa/s", 1/Pa) "for derivative of Pressure in Dymola";
+defineUnitConversion("m/(l.T3)", "Pa/s", s/Pa) "Rate of pressure";
+defineUnitConversion("T/N", "1/A", A) "Resistance";
+defineUnitConversion("l2.m/(N2.T)", "ohm", 1/ohm) "Electrical resistance";
+defineUnitConversion("l.T/N", "cm/A", A/cm) "Resistivity";
+defineUnitConversion("l.T/N", "m/A", A/m) "Resistivity";
+defineUnitConversion("T", "day", 1/day) "Time";
+defineUnitConversion("T", "hr", 1/hr) "Time";
+defineUnitConversion("T", "us", 1/(micro*s)) "Time";
+defineUnitConversion("T", "ms", 1/(milli*s)) "Time";
+defineUnitConversion("T", "min", 1/min) "Time";
+defineUnitConversion("T", "s", 1/s) "Time";
+defineUnitConversion("l/T", "cm/s", s/(centi*m)) "Velocity";
+defineUnitConversion("l/T", "mm/s", s/(milli*m)) "Velocity";
+defineUnitConversion("l/T", "m/s", s/m) "Velocity";
+defineUnitConversion("l.m/(N.T)", "kg.m/(mol.s)", mol*s/(kg*m)) "Velocity times specific mass";
+defineUnitConversion("l.m/(N.T)", "kg.m/(C.s)", C*s/(kg*m)) "Velocity times specific mass";
+defineUnitConversion("l3", "cm3", 1/((centi*m)^3)) "Volume";
+defineUnitConversion("l3", "L", 1/L) "Volume";
+defineUnitConversion("l3", "m3", 1/m^3) "Volume";
+defineUnitConversion("l3/s", "cm3/s", 1/(centi*m)^3) "for derivative of Volume in Dymola";
+defineUnitConversion("l3/T", "cm3/s", s/((centi*m)^3)) "Rate of volume";
+defineUnitConversion("l3/s", "L/min", min/(L*s)) "for derivative of Volume in Dymola";
+defineUnitConversion("l3/T", "L/min", min/L) "Rate of volume";
+defineUnitConversion("l3/s", "m3/s", 1/m^3) "for derivative of Volume in Dymola";
+defineUnitConversion("l3/T", "m3/s", s/m^3) "Rate of volume";
+defineUnitConversion("l3/N", "cm3/C", C/cm^3) "Specific volume";
+defineUnitConversion("l3/N", "m3/mol", mol/m^3) "Specific volume";
+defineUnitConversion("l3/N", "m3/C", C/m^3) "Specific volume";
+defineUnitConversion("l3/(N.s)", "cm3/(mol.s)", mol/cm^3) "for derivative of VolumeSpecific in Dymola";
+defineUnitConversion("l3/(N.T)", "cm3/(mol.s)", mol*s/cm^3) "Rate of specific volume";
+defineUnitConversion("l3/(N.s)", "m3/(C.s)", C/m^3) "for derivative of VolumeSpecific in Dymola";
+defineUnitConversion("l3/(N.s)", "m3/(mol.s)", mol/m^3) "for derivative of VolumeSpecific in Dymola";
+defineUnitConversion("l3/(N.T)", "m3/(mol.s)", mol*s/m^3) "Rate of specific volume";
+defineUnitConversion("l3/(N.T)", "m3/(C.s)", C*s/m^3) "Rate of specific volume";
+defineUnitConversion("A/l", "cyc/m", m/cyc) "Wavenumber";
+defineUnitConversion("A/l", "rad/m", m/rad) "Wavenumber";

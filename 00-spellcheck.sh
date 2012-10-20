@@ -7,3 +7,5 @@ for f in help/*.html
     do
         aspell --extra-dicts=./.modelica.pws --personal=./.fcsys.pws -c $f
     done
+echo Done.  Press enter to exit.
+read answer

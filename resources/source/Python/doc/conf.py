@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# fcres documentation build configuration file, created by
+# FCRes documentation build configuration file, created by
 # sphinx-quickstart on Mon Oct 15 09:06:21 2012.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -40,7 +40,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'fcres'
+project = 'FCRes'
 copyright = '2012, Kevin Davies'
 
 # The default replacements for |version| and |release|, also used in various
@@ -148,7 +148,7 @@ html_show_sourcelink = False
 html_use_opensearch = 'False'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'fcresdoc'
+htmlhelp_basename = 'FCResDoc'
 
 math_output = 'MathML'
 
@@ -164,7 +164,7 @@ math_output = 'MathML'
 # (source start file, target name, title, author, document class [howto/manual]).
 
 latex_documents = [
-  ('index', 'fcres.tex', r"fcres Documentation", 'Kevin Davies', 'manual'),
+  ('index', 'FCRes.tex', r"FCRes Documentation", 'Kevin Davies', 'manual'),
 ]
 
 latex_elements = { 'classoptions': ',openany,openside',

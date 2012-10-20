@@ -7,7 +7,7 @@ package FCSys "Modelica library of fuel cell models"
 //-----------------------------------------------------------------------------
 // Maximum line width before a new word is wrapped in the code listing in
 // the LaTeX document:
-// -----------------------------------------------------------------------
+//------------------------------------------------------------------------
 
 
 extends Modelica.Icons.Package;
@@ -31,10 +31,10 @@ import FCSys.BaseClasses.Utilities.*;
 
 // Enumerations
 import FCSys.BaseClasses.Axis;
-import FCSys.Subregions.Species.BaseClasses.ScalarInitMeth;
-import FCSys.Subregions.Species.BaseClasses.MomentumInitMeth;
+import FCSys.Subregions.BaseClasses.InitMethScalar;
+import FCSys.Subregions.BaseClasses.InitMethLinear;
 import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
-import FCSys.Connectors.BaseClasses.MaterialEntropyOptions;
+import FCSys.Connectors.BaseClasses.MaterialEntropyOpt;
 
 
 package UsersGuide "User's Guide"
@@ -55,7 +55,7 @@ package UsersGuide "User's Guide"
       <tr bgcolor=#f7f7f7>
         <td>
         <a href=\"modelica://FCSys\">FCSys</a> should be compatible with any
-        modeling environment that supports Modelica 3.2.  The following tools have been tested:
+        modeling environment that supports Modelica 3.1.  The following tools have been tested:
         <ul>
           <li>Dymola: Supported by versions 7.4 and 2012 FD01.
           Dymola's annotations for parameter dialogs and replaceable choices are included.</li>
@@ -68,15 +68,15 @@ package UsersGuide "User's Guide"
         </td>
       </tr>
     </table>
-    
+
     <p>In order to begin using <a href=\"modelica://FCSys\">FCSys</a>, one is recommended to follow these steps (roughly in order):
     <ol>
         <li>Read the overview in the top-level documentation of <a href=\"modelica://FCSys\">FCSys</a>.</li>
         <li>Browse the subpackages of <a href=\"modelica://FCSys\">FCSys</a>.  In general, the packages are
         ordered by level of model and physical hierarchy (high-level at the top).
-        <li>Run the \"FCSys/resources/configuration/units.mos\" script to establish the display units (see below).  This is
+        <li>Run the \"FCSys/resources/scripts/units.mos\" script to establish the display units (see below).  This is
         automatic if <a href=\"modelica://FCSys\">FCSys</a> is loaded via the \"FCSys/load.mos\" script.
-        <li>Simulate the <a href=\"modelica://FCSys.Subassemblies.Cells.Examples.CellProfile\">FCSys.Subassemblies.Cells.Examples.CellProfile</a>
+        <li>Simulate the <a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\">FCSys.Assemblies.Cells.Examples.CellProfile</a>
         model.
         There are scripts in \"FCSys/resources/scripts/Dymola/\" to create plots of that model and others.
         The scripts should be accessible from the \"Command\" menu of the Modelica environment.
@@ -90,7 +90,7 @@ package UsersGuide "User's Guide"
             Information about the system of units, which is different
             than <a href=\"modelica://Modelica.SIunits\">Modelica.Siunits</a></li>
             <li><a href=\"modelica://FCSys.Connectors\">FCSys.Connectors</a> package:
-            Overview of the connectors and explanation of the effort and flow variables in terms of thermodynamics</li>
+            Overview of the connectors and an explanation of the effort and flow variables in terms of thermodynamics</li>
             <li><a href=\"modelica://FCSys.Connectors.InertAmagat\">FCSys.Connectors.InertAmagat</a> connector:
             Introduction to the \"additivity of volume\" concept</li>
             <li><a href=\"modelica://FCSys.Connectors.InertDalton\">FCSys.Connectors.InertDalton</a> connector:
@@ -105,7 +105,7 @@ package UsersGuide "User's Guide"
         </ul>In general, overviews are given in the documentation of containing packages and
         specific information is given at the appropriate level of inheritance.  If a model does not
         have sufficient documentation, please look at its base model(s) and the package(s) that
-        contain it.  Assumptions are only listed at the lowest level of ineritance at which they apply.  Therefore, the 
+        contain it.  Assumptions are only listed at the lowest level of inheritance at which they apply.  Therefore, the
         list of assumptions in a model should be considered in conjunction with the assumptions in all
         the models it inherits from.
         </li>
@@ -302,21 +302,20 @@ package UsersGuide "User's Guide"
       preferedView="info",
       DocumentationClass=true,
       Documentation(info="<html>
-    <p>The library is available at <a href=\"http://modelica.org/libraries\">http://modelica.org/libraries</a>, and updates may
-be available there.  Development will be carried out at
-<a href=\"http://github.com\">http://github.com</a>.</p>
+    <p>The website for this package is <a href=\"http://kdavies4.github.com/FCSys/\">http://kdavies4.github.com/FCSys/</a>.
+    Updates may be available there.  Development is being carried out at
+    <a href=\"https://github.com/kdavies4/FCSys\">https://github.com/kdavies4/FCSys</a>.</p>
 
     <p><b>Author:</p>
-<dd>Kevin Davies</dd>
-<dd>George W. Woodruff School of Mechanical Engineering</dd>
-<dd>Georgia Institute of Technology</dd>
-<dd>813 Ferst Drive</dd>
-<dd>Atlanta, GA 30332-0405</dd>
-<dd>USA</dd>
-<dd><a href=\"mailto:kld@alumni.carnegiemellon.edu\">kld@alumni.carnegiemellon.edu</a></dd>
-<dd><a href=\"www.srl.gatech.edu/Members/kdavies\">www.srl.gatech.edu/Members/kdavies</a></dd>
+    <dd>Kevin Davies</dd>
+    <dd>George W. Woodruff School of Mechanical Engineering</dd>
+    <dd>Georgia Institute of Technology</dd>
+    <dd>813 Ferst Drive</dd>
+    <dd>Atlanta, GA 30332-0405</dd>
+    <dd>USA</dd>
+    <dd><a href=\"mailto:kld@alumni.carnegiemellon.edu\">kld@alumni.carnegiemellon.edu</a></dd>
 
-<p><b>Acknowledgments:</b><ul>
+    <p><b>Acknowledgments:</b><ul>
     <li>Technical guidance from Robert Moore, Chris Paredis, and Comas Haynes
     <li>Feedback, technical expertise, and other help from Guido Bender, Chris Ford, George Nelson,
     Mike Angelo, Severine Busquet, Mebs Virji, Kevin Bandy, Mohammad Ali, Francois Steinmetz,
@@ -331,9 +330,9 @@ be available there.  Development will be carried out at
     <li>Grant #N00014-04-0682 from the <a href=\"http://www.onr.navy.mil\">Office of Naval Research</a>
     to the <a href=\"http://www.hnei.hawaii.edu\">Hawaii Natural Energy Institute</a></li>
     </ul></p>
-    
+
 </html>"));
-    // TODO: Create the Modelica and Github webpages.
+    // TODO: Create the Modelica page and included it too.
     end Contact;
 
   class ModelicaLicense2 "Modelica License 2"
@@ -881,7 +880,6 @@ a selling fee for a (in this case physical) copy. However, mere
 printing and shipping costs may be recovered.</p>
 </body>
 </html>"));
-
     end ModelicaLicense2;
   annotation (preferedView="info", DocumentationClass=true);
   end UsersGuide;
@@ -907,11 +905,11 @@ annotation (
     <p><a href=\"modelica://FCSys\">FCSys</a> is a library of
     declarative, dynamic, and flexible models of proton exchange membrane
     fuel cells (PEMFCs) in the <a href = \"http://www.modelica.org/\">Modelica</a>
-    language.  The dynamics include material, momentum, thermal, and electrical 
-    effects.  There are options to adjust the assumptions, spatial discretization 
-    and dimensionality (1D, 2D, or 3D), and the present chemical species and material 
+    language.  The dynamics include material, momentum, thermal, and electrical
+    effects.  There are options to adjust the assumptions, spatial discretization
+    and dimensionality (1D, 2D, or 3D), and the present chemical species and material
     phases.</p>
-    
+
     <p>A fuel cell is an electrochemical device which is similar to a battery
     except that the reactants (fuel and oxidant) are externally stored or drawn
     from the environment.  The electrochemical reactions of a PEMFC are:
@@ -965,8 +963,12 @@ annotation (
         </td>
       </tr>
     </table></p>
-    
-    <p><A HREF=\"#Fig1\">Figure 1</a> shows the seven primary physical layers of a typical PEMFC.  As
+
+    <p><A HREF=\"#Fig1\">Figure 1</a> shows the seven primary layers of a typical PEMFC.
+    Fluid enters and exits the cell through channels in the flow plates (FPs).  It spreads through
+    the gas diffusion diffusion layers (GDLs) and reacts in the catalyst layers (CLs).  The
+    proton exchange membrane (PEM) prevents electronic transport; therefore, electrons must
+    travel an external circuit to sustain the net reaction.    As
     shown in <A HREF=\"#Fig2\">Figure 2</a>, a PEMFC model may be constructed in
     <a href=\"modelica://FCSys\">FCSys</a> from models of the same layers.
     The model is modular; the gas diffusion and catalyst layers could be combined,
@@ -974,36 +976,36 @@ annotation (
 
     <a name=\"Fig1\"></a>
     <p align=center><img src=\"modelica://FCSys/resources/images/cell.png\">
-    <br>Figure 1: Physical layers of a PEMFC</p>
+    <br>Figure 1: Layers and primary flows of a PEMFC</p>
 
     <a name=\"Fig2\"></a>
-    <!-- <p align=center><img width=900 src=\"modelica://FCSys/help/FCSys.Subassemblies.Cells.CellD.png\"> -->
-    <p align=center><a href=\"modelica://FCSys.Subassemblies.Cells.Cell\"><img src=\"modelica://FCSys/resources/images/FCSys.Subassemblies.Cells.CellD.png\"></a>
-    <br>Figure 2: Diagram of the PEMFC model (<a href=\"modelica://FCSys.Subassemblies.Cells.Cell\">FCSys.Subassemblies.Cells.Cell</a>).</p>
+    <!--<p align=center><img src=\"modelica://FCSys/help/FCSys.Assemblies.Cells.CellD.png\" width=600>-->
+    <p align=center><a href=\"modelica://FCSys.Assemblies.Cells.Cell\"><img src=\"modelica://FCSys/resources/images/FCSys.Assemblies.Cells.CellD.png\"></a>
+    <br>Figure 2: Diagram of the PEMFC model (<a href=\"modelica://FCSys.Assemblies.Cells.Cell\">FCSys.Assemblies.Cells.Cell</a>).</p>
 
-    <p>The models describe the advection, diffusion, and storage of 
+    <p>The models describe the advection, diffusion, and storage of
     material, linear momentum, and energy.  Upstream
     discretization is applied, but it is regularized and reduces to pure
-    diffusion when the bulk velocity is zero.  The transport equations do 
+    diffusion when the bulk velocity is zero.  The transport equations do
     not use the <a href = \"http://www.modelica.org/\">Modelica</a>
     <code>stream</code> operator since both diffusion and advection are
     important in fuel cells.</p>
 
-    <p>Each layer may be divided into a number of rectilinear regions.  Storage and 
-    transport phenomena are co-located (e.g., no distinction between a vessel and a 
-    pipe).  Regions may be directly connected without producing nonlinear systems of 
-    equations, and species may be independently included in each region.  This is 
-    different than 
+    <p>Each layer may be divided into a number of rectilinear regions.  Storage and
+    transport phenomena are co-located (e.g., no distinction between a vessel and a
+    pipe).  Regions may be directly connected without producing nonlinear systems of
+    equations, and species may be independently included in each region.  This is
+    different than
     <a href=\"modelica://Modelica.Media\">Modelica.Media</a>,
     where each media model contains a predefined set of species.</p>
 
     <p>A cell may simulated under specified boundary conditions, as shown in
-    <a href=\"#Fig3\">Figure 3</a>.  Adapters are available to interface with 
+    <a href=\"#Fig3\">Figure 3</a>.  Adapters are available to interface with
     <a href=\"modelica://Modelica.Fluid\">Modelica.Fluid</a>.</p>
 
     <a name=\"Fig3\"></a>
-    <p align=center><a href=\"modelica://FCSys.Subassemblies.Cells.Examples.CellProfile\"><img src=\"modelica://FCSys/help/FCSys.Subassemblies.Cells.Examples.CellProfileD.png\"></a>
-    <br>Figure 3: Diagram of a test model (<a href=\"modelica://FCSys.Subassemblies.Cells.Examples.CellProfile\">FCSys.Subassemblies.Cells.Examples.CellProfile</a>).</p>
+    <p align=center><a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\"><img src=\"modelica://FCSys/help/FCSys.Assemblies.Cells.Examples.CellProfileD.png\"></a>
+    <br>Figure 3: Diagram of a test model (<a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\">FCSys.Assemblies.Cells.Examples.CellProfile</a>).</p>
 
     <p><b>Licensed by Kevin Davies under the Modelica License 2</b>
     <br>Copyright 2007&ndash;2012, Kevin Davies.</p>
@@ -1197,8 +1199,7 @@ annotation (
         fillPattern=FillPattern.Solid,
         fillColor={0,0,0},
         pattern=LinePattern.None)}),
-  Commands(file="resources/configuration/units.mos" "Re-initialize the units."),
-
+  Commands(file="resources/scripts/units.mos" "Re-initialize the units."),
   version="2.0 beta",
   versionBuild=0,
   dateModified="",

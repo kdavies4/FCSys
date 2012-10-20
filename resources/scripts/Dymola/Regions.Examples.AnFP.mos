@@ -1,0 +1,12 @@
+// Define signals.
+filename = "AnFP.mat";
+y1 = {"anFP.subregions[1, 1, 1].gas.H2.N", "anFP.subregions[1, 1, 1].gas.H2O.N", "anFP.subregions[1, 1, 1].graphite.C.N", "anFP.subregions[1, 1, 1].graphite.'e-'.N"};
+y2 = {"anFP.subregions[1, 1, 1].gas.H2.phi[1]", "anFP.subregions[1, 1, 1].gas.H2O.phi[1]", "anFP.subregions[1, 1, 1].graphite.C.phi[1]", "anFP.subregions[1, 1, 1].graphite.'e-'.phi[1]"};
+y3 = {"anFP.subregions[1, 1, 1].gas.H2.p", "anFP.subregions[1, 1, 1].gas.H2O.p", "anFP.subregions[1, 1, 1].graphite.C.p", "anFP.subregions[1, 1, 1].graphite.'e-'.p"};
+y4 = {"anFP.subregions[1, 1, 1].gas.H2.T", "anFP.subregions[1, 1, 1].gas.H2O.T", "anFP.subregions[1, 1, 1].graphite.C.T", "anFP.subregions[1, 1, 1].graphite.'e-'.T"};
+y5 = {"anFP.subregions[1, 1, 1].gas.H2.v", "anFP.subregions[1, 1, 1].gas.H2O.v", "anFP.subregions[1, 1, 1].graphite.C.v", "anFP.subregions[1, 1, 1].graphite.'e-'.v"};
+y6 = {"anFP.subregions[1, 1, 1].gas.H2.mu", "anFP.subregions[1, 1, 1].gas.H2O.mu", "anFP.subregions[1, 1, 1].graphite.C.mu", "anFP.subregions[1, 1, 1].graphite.'e-'.mu"};
+
+// Make plots.
+removePlots();
+RunScript("FCSys/resources/scripts/Dymola/plot6.mos");

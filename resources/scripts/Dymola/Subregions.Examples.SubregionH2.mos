@@ -1,0 +1,12 @@
+// Define signals.
+filename = "SubregionH2.mat";
+y1 = {"subregion.gas.H2.N"};
+y2 = {"subregion.gas.H2.phi[1]"};
+y3 = {"subregion.gas.H2.p"};
+y4 = {"subregion.gas.H2.T"};
+y5 = {"subregion.gas.H2.v"};
+y6 = {"subregion.gas.H2.mu"};
+
+// Make plots.
+removePlots();
+RunScript("FCSys/resources/scripts/Dymola/plot6.mos");

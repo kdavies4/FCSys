@@ -2,9 +2,6 @@
 # Process the help files and upload a version to github pages
 # (http://kdavies4.github.com/FCSys/).
 
-# Original working branch
-branch=`git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3`
-
 # Remove some of the help files.
 rm help/FCSSys.Blocks*.png
 rm help/FCSSys_Blocks*.html
@@ -18,9 +15,9 @@ rm help/*WorkInProgress*
 ./00-process-help.py
 
 ## Update the Github web pages.
-git commit -am "Before auto-clean documentation"
+branch=`git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3` # Original branch
+stash_msg=`git stash save`
 git checkout gh-pages
-git checkout $branch 00-process-gh-pages.py
 
 # Update the style sheet.
 git checkout $branch resources/www/modelicaDoc.css
@@ -52,6 +49,9 @@ mv -f FCSys.html index.html
 git commit -am "Auto-update github pages"
 #git push origin gh-pages
 git checkout $branch
+if [ "$stash_msg" = "No local changes to save" ]; then
+   git stash pop
+fi
 
 # Clean up.
 rm *.html

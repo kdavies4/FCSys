@@ -1,0 +1,47 @@
+// Define signals.
+filename = "Polarization.mat";
+y1 = {""};
+y2 = {""};
+y3 = {""};
+y4 = {""};
+y5 = {""};
+y6 = {""};
+
+// Make plots.
+removePlots();
+RunScript("FCSys/resources/scripts/Dymola/plot6.mos");
+
+createPlot(id = 1,
+ position = {0, 0, 440, 650},
+ x = "cell.I",
+ y = {"cell.v"},
+ erase = false,
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true,
+ description = false,
+ grid = true,
+ color = true,
+ filename = filename,
+ online = false,
+ legendLocation = 5,
+ legendHorizontal = false,
+ leftTitleType = 1,
+ bottomTitleType = 1);
+createPlot(id = 1,
+ position = {0, 0, 440, 325},
+ x = "cell.I",
+ y = {"cell.Wdot"},
+ erase = false,
+ autoscale = true,
+ autoerase = true,
+ autoreplot = true,
+ description = false,
+ grid = true,
+ color = true,
+ online = false,
+ legendLocation = 5,
+ legendHorizontal = false,
+ subPlot = 2,
+ leftTitleType = 1,
+ bottomTitleType = 1);

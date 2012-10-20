@@ -1,0 +1,12 @@
+// Define signals.
+filename = "eminusAdapt.mat";
+y1 = {"fixedTemperature.T", "subregion.graphite.'e-'.T", "eminusAdapt.face.graphite.'e-'.entropy.T"};
+y2 = {"subregion.graphite.'e-'.N"};
+y3 = {"subregion.graphite.'e-'.mu"};
+y4 = {"subregion.graphite.'e-'.phi[1]"};
+y5 = {""};
+y6 = {""};
+
+// Make plots.
+removePlots();
+RunScript("FCSys/resources/scripts/Dymola/plot6.mos");

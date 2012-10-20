@@ -105,6 +105,10 @@ p.sidebar-title {
 
 /* -- body styles ----------------------------------------------------------- */
 
+div.body {
+    min-height:430px; // Be sure there's room for the sidebar.
+}
+
 div.body p.caption {
     text-align: inherit;
 }

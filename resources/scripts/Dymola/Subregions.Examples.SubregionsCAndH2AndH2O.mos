@@ -1,0 +1,12 @@
+// Define signals.
+filename = "SubregionsCAndH2AndH2O.mat";
+y1 = {"subregion1.graphite.C.N","subregion2.graphite.C.N","subregion1.gas.H2.N","subregion2.gas.H2.N","subregion1.gas.H2O.N","subregion2.gas.H2O.N"};
+y2 = {"subregion1.graphite.C.phi[1]","subregion2.graphite.C.phi[1]","subregion1.gas.H2.phi[1]","subregion2.gas.H2.phi[1]","subregion1.gas.H2O.phi[1]","subregion2.gas.H2O.phi[1]"};
+y3 = {"subregion1.graphite.C.p","subregion2.graphite.C.p","subregion1.gas.H2.p","subregion2.gas.H2.p","subregion1.gas.H2O.p","subregion2.gas.H2O.p"};
+y4 = {"subregion1.graphite.C.T","subregion2.graphite.C.T","subregion1.gas.H2.T","subregion2.gas.H2.T","subregion1.gas.H2O.T","subregion2.gas.H2O.T"};
+y5 = {"subregion1.graphite.C.v","subregion2.graphite.C.v","subregion1.gas.H2.v","subregion2.gas.H2.v","subregion1.gas.H2O.v","subregion2.gas.H2O.v"};
+y6 = {"subregion1.graphite.C.mu","subregion2.graphite.C.mu","subregion1.gas.H2.mu","subregion2.gas.H2.mu","subregion1.gas.H2O.mu","subregion2.gas.H2O.mu"};
+
+// Make plots.
+removePlots();
+RunScript("FCSys/resources/scripts/Dymola/plot6.mos");

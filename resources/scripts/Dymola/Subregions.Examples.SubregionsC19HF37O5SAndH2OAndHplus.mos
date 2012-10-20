@@ -1,0 +1,12 @@
+// Define signals.
+filename = "SubregionsC19HF37O5SAndH2OAndHplus.mat";
+y1 = {"subregion1.ionomer.C19HF37O5S.N","subregion2.ionomer.C19HF37O5S.N","subregion1.ionomer.'H+'.N","subregion2.ionomer.'H+'.N","subregion1.gas.H2O.N","subregion2.gas.H2O.N"};
+y2 = {"subregion1.ionomer.C19HF37O5S.phi[1]","subregion2.ionomer.C19HF37O5S.phi[1]","subregion1.ionomer.'H+'.phi[1]","subregion2.ionomer.'H+'.phi[1]","subregion1.gas.H2O.phi[1]","subregion2.gas.H2O.phi[1]"};
+y3 = {"subregion1.ionomer.C19HF37O5S.p","subregion2.ionomer.C19HF37O5S.p","subregion1.ionomer.'H+'.p","subregion2.ionomer.'H+'.p","subregion1.gas.H2O.p","subregion2.gas.H2O.p"};
+y4 = {"subregion1.ionomer.C19HF37O5S.T","subregion2.ionomer.C19HF37O5S.T","subregion1.ionomer.'H+'.T","subregion2.ionomer.'H+'.T","subregion1.gas.H2O.T","subregion2.gas.H2O.T"};
+y5 = {"subregion1.ionomer.C19HF37O5S.v","subregion2.ionomer.C19HF37O5S.v","subregion1.ionomer.'H+'.v","subregion2.ionomer.'H+'.v","subregion1.gas.H2O.v","subregion2.gas.H2O.v"};
+y6 = {"subregion1.ionomer.C19HF37O5S.mu","subregion2.ionomer.C19HF37O5S.mu","subregion1.ionomer.'H+'.mu","subregion2.ionomer.'H+'.mu","subregion1.gas.H2O.mu","subregion2.gas.H2O.mu"};
+
+// Make plots.
+removePlots();
+RunScript("FCSys/resources/scripts/Dymola/plot6.mos");

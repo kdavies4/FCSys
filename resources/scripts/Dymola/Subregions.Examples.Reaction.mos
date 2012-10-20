@@ -1,0 +1,12 @@
+// Define signals.
+filename = "Reaction.mat";
+y1 = {"reaction.chemical[1].mu", "reaction.chemical[2].mu", "reaction.chemical[3].mu"};
+y2 = {"reaction.nu[1]", "reaction.nu[2]", "reaction.nu[3]"};
+y3 = {"reaction.Xidot"};
+y4 = {"reaction.mphi[1]"};
+y5 = {"reaction.Ts"};
+y6 = {""};
+
+// Make plots.
+removePlots();
+RunScript("FCSys/resources/scripts/Dymola/plot6.mos");

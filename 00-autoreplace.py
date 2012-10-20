@@ -5,7 +5,10 @@
 #
 # Created by Kevin Davies, 5/30/12
 
-import re, glob, sys, os
+import re
+import glob
+import sys
+import os
 
 ## Settings
 
@@ -17,8 +20,8 @@ rpls = [# Remove extra spacing.
         (r' *<br> +(<br>)', r'<br><br>'),
         (r'<br><br>(<br>)+', r'<br><br>'),
         # Use shortcuts for Units and Quantities.
-        (r'FCSys.Quantities\.', r'Q.'),
-        (r'FCSys.Units\.', r'U.'),
+        (r'FCSys\.Quantities\.', r'Q.'),
+        (r'FCSys\.Units\.', r'U.'),
         # No empty line before "end x;".
         (r'\n(\n +end )([^; ]+);', r'\1\2;'),
         # Two spaces after "Note:".
@@ -27,13 +30,21 @@ rpls = [# Remove extra spacing.
         (r'([0-9]+)E(-?)([0-9]+)', r'\1e\2\3'),
         # Don't use a "+" for positive powers of 10 in engineering notation.
         (r'([0-9]+)e+?([0-9]+)', r'\1e\2'),
+        # Use some contractions in comments,
+        (r'(// .*)do not', r"\1don't"),
+        (r'(// .*)does not', r"\1doesn't"),
+        (r'(// .*)is not', r"\1isn't"),
+        (r'(// .*)will not', r"\1won't"),
+        (r'(// .*)cannot', r"\1can't"),
+        # but not others.
+        (r"(// .*)it's", r'\1it is'),
        ]
 
 # Directory specification
 if (len(sys.argv) > 1):
     directory = sys.argv[1]
 else:
-    directory = '.'
+    directory = ''
 
 ## Procedure
 # Method to remove non-ASCII characters.
@@ -48,13 +59,14 @@ for i, rpl in enumerate(rpls):
 # Replace strings.
 for fname in glob.glob(os.path.join(directory, '*.mo')):
     # Read the source file.
-    print "Processing " + fname + "..."
+    print("Processing %s ... " % fname)
     src = open(fname, 'r')
     text = src.read()
     src.close()
     #text = removeNonAscii(text)
     # **Add a method to warn about non-ASCII characters before removing them.
 
+    print len(text)
     # Make the replacements.
     for rpl in rpls:
         text = rpl[0].sub(rpl[1], text)

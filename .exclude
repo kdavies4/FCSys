@@ -23,7 +23,7 @@ Systems.mo
 help/FCSys_Systems*.html
 help/FCSys.Systems*.png
 resources/images/system.png
-install/*qpOASES*
+install
 
 # Figures (for documentation only)
 *Figures*
@@ -40,20 +40,12 @@ test/Morris
 
 # Built and compiled files
 build
-Python/control/build
-Python/doc
 *.pyc
-
-# Supporting libraries
-resources/images/matplotlib.svg
-
-# Installation scripts
-install/*
 
 # Support for MATLAB and model-predictive control (MPC)
 resources/source/MATLAB
 test/MPC
-resources/source/C/qpOASES_C.h
+*qpOASES*
 
 # Program to translate Dymosim initialization files (needed only for MATLAB
 # scripts; may be copyrighted by Dassault Systemes)
@@ -70,22 +62,21 @@ dymosim
 
 # Scripts for development
 00-*
-resources/source/Python/create-matplotlib-icon.py
-resources/source/Python/00-autoformat.sh
-resources/source/Python/tictoc.sh
-
-# Quadratic programming
-*qpOASES*
+resources/source/Python/fcres/00-autoformat.sh
+resources/source/Python/fcres/tictoc.sh
 
 # Hidden, synchronization, temporary, and backup files
 .*
 SyncToy_*.dat
 *.bak
-resources/source/Python/temp_plot.pdf
-resources/source/Python/temp_plot.png
+resources/source/Python/fcres/temp_plot.pdf
+resources/source/Python/fcres/temp_plot.png
+
+# Web documentation
+images/
+javascripts
 
 # Work in progress
-resources/source/Python/demos/arrowline.py
 WorkInProgress.mo
 help/FCSys_WorkInProgress*.html
 help/FCSys.WorkInProgress*.png
@@ -94,11 +85,8 @@ resources/*.xls
 resources/*.m
 resources/*.nb
 resources/*.cdf
-resources/source/Python/EOS-fit.py
-resources/source/Python/hierarchial.py
-resources/source/Python/sankey.py
-resources/source/Python/killall-fcsysres.sh
-resources/source/Python/exp.py
-resources/source/Python/demos/demo-sim-and-plot.py
-resources/source/Python/run-exps.py
-resources/source/Python/demos/placeholders
+resources/source/Python/bin/killall-fcsysres.sh
+resources/source/Python/bin/run-exps.py
+resources/source/Python/fcres/EOS-fit.py
+resources/source/Python/fcres/sankey.py
+resources/source/Python/fcres/exp.py

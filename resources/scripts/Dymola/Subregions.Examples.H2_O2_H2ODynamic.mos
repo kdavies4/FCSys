@@ -1,0 +1,12 @@
+// Define signals.
+filename = "H2_O2_H2ODynamic.mat";
+y1 = {"species1.N", "species2.N", "species3.N"};
+y2 = {"species1.v", "species3.v", "species2.v"};
+y3 = {"species1.p", "species2.p", "species3.p"};
+y4 = {"reaction.Xidot"};
+y5 = {"species1.h", "species2.h", "species3.h"};
+y6 = {"species1.mu", "species2.mu", "species3.mu"};
+
+// Make plots.
+removePlots();
+RunScript("FCSys/resources/scripts/Dymola/plot6.mos");

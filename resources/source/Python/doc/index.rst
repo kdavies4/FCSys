@@ -1,9 +1,9 @@
 #########
-  fcres
+  FCRes
 #########
    **Python utilities to analyze and plot results from FCSys**
 
-   The *fcres* module provides open-source tools to interpret the results of
+   The FCRes module provides open-source tools to interpret the results of
    simulations from the FCSys_ package and create publishable figures.  It is
    based on the modelicares_ modules, which use matplotlib_ for plotting
    routines.  There are specific methods to handle results of fuel cell
@@ -32,7 +32,7 @@
          and `DyMat <http://www.j-raedler.de/projects/dymat/>`_ projects provide
          other Python_ modules that are related.
 
-      A PDF version of this documentation is available `here <fcres.pdf>`_.
+      A PDF version of this documentation is available `here <FCRes.pdf>`_.
 
 .. _Python: http://www.python.org/
 .. _Modelica: http://www.modelica.org/
