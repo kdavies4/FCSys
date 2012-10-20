@@ -183,7 +183,7 @@ package Quantities "Quantities to represent physical properties"
   type TemperatureRate = PotentialRate (displayUnit="K/s")
     "Rate of temperature";
   type ResistivityThermal = Resistivity (displayUnit="m.K/W")
-    "Thermal resistivity";
+    "Thermal transport resistivity";
 
   annotation (Documentation(info="<html><p>Here, the <code>unit</code> attribute of each <code>Real</code> variable actually denotes the
   dimension.  The dimensions are noted in terms

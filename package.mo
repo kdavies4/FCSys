@@ -362,8 +362,8 @@ License 2</u></b> (below) with the additional condition:<ul>
       software cannot be exported or reexported to sanctioned countries that
       are controlled for Anti-Terrorism (15 CFR Part 738 Supplement 1) or to
       denied parties, <a
-      href=\"http://beta-www.bis.doc.gov/index.php/policy-guidance/lists-of-parties-of-concern\">
-      http://beta-www.bis.doc.gov/index.php/policy-guidance/lists-of-parties-of-concern</a>.
+      href=\"http://alpha-www.bis.doc.gov/index.php/policy-guidance/lists-of-parties-of-concern\">
+      http://alpha-www.bis.doc.gov/index.php/policy-guidance/lists-of-parties-of-concern</a>.
       EAR99 items cannot be exported or reexported to Iraq for a military
       purpose or to a military end-user (15 CFR Part 746.3).  Export and
       reexport include any release of technology to a foreign national within
@@ -1021,7 +1021,7 @@ annotation (
     <ul>
     <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 8/1/2007:<br>Version 1.0 (as <code>PEMFCSim</code>)</li>
     <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 8/20/2008:<br>Version 1.1 (to model CO contamination for <a href=\"http://www.hnei.hawaii.edu\">HNEI</a>)</li>
-    <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, TBD/2012:<br>Version 2.0 beta (released in the public domain)</li>
+    <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, TBD/2012:<br>Version 2.0 alpha (released in the public domain)</li>
     </ul>
     </html>"),
   Icon(graphics={
@@ -1199,7 +1199,7 @@ annotation (
         fillColor={0,0,0},
         pattern=LinePattern.None)}),
   Commands(file="resources/scripts/units.mos" "Re-initialize the units."),
-  version="2.0 beta",
+  version="2.0 alpha",
   versionBuild=0,
   dateModified="",
   revisionID="");

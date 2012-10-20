@@ -146,15 +146,15 @@ package Characteristics "Data and functions to correlate physical properties"
       output Q.Potential g_N2_indirect=h_N2 - T*s_N2;
       output Q.Potential g_O2_indirect=h_O2 - T*s_O2;
       // Resistivity
-      output Q.Resistivity gamma=DataC.gamma(T);
-      output Q.Resistivity gamma_SH2_Phi=DataH2.gamma_Phi(T);
-      output Q.Resistivity gamma_SH2_U=DataH2.gamma_S(T);
-      output Q.Resistivity gamma_SH2O_Phi=DataH2O.gamma_Phi(T);
-      output Q.Resistivity gamma_SH2O_U=DataH2O.gamma_S(T);
-      output Q.Resistivity gamma_N2_Phi=DataN2.gamma_Phi(T);
-      output Q.Resistivity gamma_N2_U=DataN2.gamma_S(T);
-      output Q.Resistivity gamma_SO2_Phi=DataO2.gamma_Phi(T);
-      output Q.Resistivity gamma_SO2_U=DataO2.gamma_S(T);
+      output Q.Resistivity beta=DataC.beta(T);
+      output Q.Resistivity alpha_SdotH2_Phi=DataH2.alpha_tau(T);
+      output Q.Resistivity alpha_SdotH2_U=DataH2.alpha_Sdot(T);
+      output Q.Resistivity alpha_SdotH2O_Phi=DataH2O.alpha_tau(T);
+      output Q.Resistivity alpha_SdotH2O_U=DataH2O.alpha_Sdot(T);
+      output Q.Resistivity alpha_Ndot2_Phi=DataN2.alpha_tau(T);
+      output Q.Resistivity alpha_Ndot2_U=DataN2.alpha_Sdot(T);
+      output Q.Resistivity alpha_SdotO2_Phi=DataO2.alpha_tau(T);
+      output Q.Resistivity alpha_SdotO2_U=DataO2.alpha_Sdot(T);
 
     equation
       assert(abs(g_C - g_C_indirect) < epsilon_tol,
@@ -238,8 +238,10 @@ package Characteristics "Data and functions to correlate physical properties"
 
   package C19HF37O5S "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S</html>"
     extends Modelica.Icons.MaterialPropertiesPackage;
-    record Solid
-      "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S solid</html>"
+    record Solid "C9HF17O5S solid"
+      // Note:  HTML formatting isn't used in the description because
+      // Dymola 7.4 doesn't support it in the GUI for replaceable lists.
+      // The same applies to other species.
 
       extends BaseClasses.Characteristic(
         final formula="C9HF17O5S",
@@ -297,7 +299,7 @@ package Characteristics "Data and functions to correlate physical properties"
 
   package 'e-' "<html>e<sup>-</sup></html>"
     extends Modelica.Icons.MaterialPropertiesPackage;
-    record Gas "<html>e<sup>-</sup> gas</html>"
+    record Gas "e- gas"
       import Data = Modelica.Media.IdealGases.Common.SingleGasesData.eminus;
 
       extends BaseClasses.Characteristic(
@@ -337,7 +339,7 @@ package Characteristics "Data and functions to correlate physical properties"
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
     end Gas;
 
-    record Graphite "<html>e<sup>-</sup> in graphite</html>"
+    record Graphite "e- in graphite"
       extends Gas(
         final phase="graphite",
         specVolPow=C.Graphite.specVolPow,
@@ -356,7 +358,7 @@ package Characteristics "Data and functions to correlate physical properties"
 
   package H2 "<html>H<sub>2</sub></html>"
     extends Modelica.Icons.MaterialPropertiesPackage;
-    record Gas "<html>H<sub>2</sub> gas</html>"
+    record Gas "H2 gas"
       import Data = Modelica.Media.IdealGases.Common.SingleGasesData.H2;
 
       extends BaseClasses.CharacteristicNASA(
@@ -377,7 +379,7 @@ package Characteristics "Data and functions to correlate physical properties"
         B_c0={Data.blow,Data.bhigh,{2.488433516e6,-6.695728110e2}} .* fill({U.K,
             1}, size(T_lim_c0, 1) - 1) - b_c0[:, 2:3]*ln(U.K),
         r=(120 + 100.3/2)*U.pico*U.m/U.q,
-        T_lim_beta={200.0,1000.0,5000.0,15000.0}*U.K,
+        T_lim_alpha={200.0,1000.0,5000.0,15000.0}*U.K,
         b_eta={{0.74553182,43.555109*U.K,-0.32579340e4*U.K^2,0.13556243},{
             0.96730605,679.31897*U.K,-0.21025179e6*U.K^2,-1.8251697},{1.0126129,
             0.14973739e4*U.K,-0.14428484e7*U.K^2,-2.3254928}},
@@ -407,7 +409,7 @@ package Characteristics "Data and functions to correlate physical properties"
 
   package H2O "<html>H<sub>2</sub>O</html>"
     extends Modelica.Icons.MaterialPropertiesPackage;
-    record Gas "<html>H<sub>2</sub>O gas</html>"
+    record Gas "H2O gas"
       import Data = Modelica.Media.IdealGases.Common.SingleGasesData.H2O;
 
       extends BaseClasses.CharacteristicNASA(
@@ -426,7 +428,7 @@ package Characteristics "Data and functions to correlate physical properties"
         B_c0={Data.blow,Data.bhigh} .* fill({U.K,1}, size(T_lim_c0, 1) - 1) -
             b_c0[:, 2:3]*ln(U.K),
         r=(282/2)*U.pico*U.m/U.q,
-        T_lim_beta={373.2,1073.2,5000.0,15000.0}*U.K,
+        T_lim_alpha={373.2,1073.2,5000.0,15000.0}*U.K,
         b_eta={{0.50019557,-697.12796*U.K,0.88163892e5*U.K^2,3.0836508},{
             0.58988538,-537.69814*U.K,0.54263513e5*U.K^2,2.3386375},{0.64330087,
             -95.668913*U.K,-0.37742283e6*U.K^2,1.8125190}},
@@ -453,7 +455,7 @@ package Characteristics "Data and functions to correlate physical properties"
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
     end Gas;
 
-    record Liquid "<html>H<sub>2</sub>O liquid</html>"
+    record Liquid "H2O liquid"
 
       extends BaseClasses.Characteristic(
         final formula="H2O",
@@ -493,7 +495,7 @@ package Characteristics "Data and functions to correlate physical properties"
 
   package 'H+' "<html>H<sup>+</sup></html>"
     extends Modelica.Icons.MaterialPropertiesPackage;
-    record Gas "<html>H<sup>+</sup> gas</html>"
+    record Gas "H+ gas"
       import Data = Modelica.Media.IdealGases.Common.SingleGasesData.Hplus;
 
       extends BaseClasses.Characteristic(
@@ -541,7 +543,7 @@ package Characteristics "Data and functions to correlate physical properties"
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
     end Gas;
 
-    record Solid "<html>H<sup>+</sup> in solid</html>"
+    record Solid "H+ in solid"
       extends Gas(
         final phase="solid",
         specVolPow={0,0},
@@ -570,7 +572,7 @@ package Characteristics "Data and functions to correlate physical properties"
 
   package N2 "<html>N<sub>2</sub></html>"
     extends Modelica.Icons.MaterialPropertiesPackage;
-    record Gas "<html>N<sub>2</sub> gas</html>"
+    record Gas "N2 gas"
       import Data = Modelica.Media.IdealGases.Common.SingleGasesData.N2;
 
       extends BaseClasses.CharacteristicNASA(
@@ -591,7 +593,7 @@ package Characteristics "Data and functions to correlate physical properties"
         B_c0={Data.blow,Data.bhigh,{4.938707040e6,-1.672099740e3}} .* fill({U.K,
             1}, size(T_lim_c0, 1) - 1) - b_c0[:, 2:3]*ln(U.K),
         r=(155 + 145.2/2)*U.pico*U.m/U.q,
-        T_lim_beta={200.0,1000.0,5000.0,15000.0}*U.K,
+        T_lim_alpha={200.0,1000.0,5000.0,15000.0}*U.K,
         b_eta={{0.62526577,-31.779652*U.K,-0.16407983e4*U.K^2,1.7454992},{
             0.87395209,561.52222*U.K,-0.17394809e6*U.K^2,-0.39335958},{
             0.88503551,909.02171*U.K,-0.73129061e6*U.K^2,-0.53503838}},
@@ -620,7 +622,7 @@ package Characteristics "Data and functions to correlate physical properties"
 
   package O2 "<html>O<sub>2</sub></html>"
     extends Modelica.Icons.MaterialPropertiesPackage;
-    record Gas "<html>O<sub>2</sub> gas</html>"
+    record Gas "O2 gas"
       import Data = Modelica.Media.IdealGases.Common.SingleGasesData.O2;
 
       extends BaseClasses.CharacteristicNASA(
@@ -641,7 +643,7 @@ package Characteristics "Data and functions to correlate physical properties"
         B_c0={Data.blow,Data.bhigh,{2.293554027e6,-5.530621610e2}} .* fill({U.K,
             1}, size(T_lim_c0, 1) - 1) - b_c0[:, 2:3]*ln(U.K),
         r=(152 + 128.2/2)*U.pico*U.m/U.q,
-        T_lim_beta={200.0,1000.0,5000.0,15000.0}*U.K,
+        T_lim_alpha={200.0,1000.0,5000.0,15000.0}*U.K,
         b_eta={{0.60916180,-52.244847*U.K,-599.74009*U.K^2,2.0410801},{
             0.72216486,175.50839*U.K,-0.57974816e5*U.K^2,1.0901044},{0.73981127,
             391.94906*U.K,-0.37833168e6*U.K^2,0.90931780}},
@@ -672,102 +674,102 @@ package Characteristics "Data and functions to correlate physical properties"
 
       extends FCSys.Characteristics.BaseClasses.Characteristic;
 
-      constant Q.TemperatureAbsolute T_lim_beta[:]={0,Modelica.Constants.inf}
+      constant Q.TemperatureAbsolute T_lim_alpha[:]={0,Modelica.Constants.inf}
         "Temperature limits for the rows of b_eta and b_lambda";
-      constant Real b_eta[size(T_lim_beta, 1) - 1, 4]
+      constant Real b_eta[size(T_lim_alpha, 1) - 1, 4]
         "Constants in the NASA CEA correlation for viscosity";
-      constant Real b_lambda[size(T_lim_beta, 1) - 1, 4]
+      constant Real b_lambda[size(T_lim_alpha, 1) - 1, 4]
         "Constants in the NASA CEA correlation for thermal conductivity";
 
-      function gamma_Phi
-        "<html>Resistivity to transverse transport of linear momentum as a function of temperature (&gamma;<sub>&Phi;</sub>)</html>"
+      function alpha_tau
+        "<html>Fluidity as a function of temperature (&alpha;<sub>&tau;</sub>)</html>"
 
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T "Temperature";
-        output Q.Resistivity gamma_Phi "Transverse resistivity";
+        output Q.Resistivity alpha_tau "Transverse resistivity";
 
       protected
         function b_eta_adj
           "Return unit-adjusted NASA CEA constants for viscosity"
-          // See note in b_eta_adj() in gamma_Phi().
-          output Real b_eta_adj[size(T_lim_beta, 1) - 1, 4]
+          // See note in b_eta_adj() in alpha_tau().
+          output Real b_eta_adj[size(T_lim_alpha, 1) - 1, 4]
             "Unit-adjusted NASA CEA constants for viscosity";
         algorithm
           b_eta_adj := transpose({b_eta[:, 1],b_eta[:, 2],b_eta[:, 3],b_eta[:,
             4] - b_eta[:, 1]*ln(U.K) + fill(ln(1e-6*U.g/(U.cm*U.s*m)), size(
-            T_lim_beta, 1) - 1)}) annotation (Inline=true);
+            T_lim_alpha, 1) - 1)}) annotation (Inline=true);
         end b_eta_adj;
 
       algorithm
         /*
-  assert(T_lim_beta[1] <= T and T <= T_lim_beta[size(T_lim_beta, 1)], "Temperature "
+  assert(T_lim_alpha[1] <= T and T <= T_lim_alpha[size(T_lim_alpha, 1)], "Temperature "
      + String(T/(U.K)) + " K is out of range for the diffusion properties ([" +
-    String(T_lim_beta[1]/U.K) + ", " + String(T_lim_beta[size(T_lim_beta, 1)]
+    String(T_lim_alpha[1]/U.K) + ", " + String(T_lim_alpha[size(T_lim_alpha, 1)]
     /U.K) + "] K).");
   */
         // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4, T_lim_beta[end] can't be used instead of
-        // T_lim_beta[size(T_lim_beta, 1)] due to:
+        // Note:  In Dymola 7.4, T_lim_alpha[end] can't be used instead of
+        // T_lim_alpha[size(T_lim_alpha, 1)] due to:
         //     "Error, not all "end" could be expanded."
 
-        gamma_Phi := smooth(0, exp(-sum(if (T_lim_beta[i] <= T or i == 1) and (
-          T <= T_lim_beta[i + 1] or i == size(T_lim_beta, 1) - 1) then (
+        alpha_tau := smooth(0, exp(-sum(if (T_lim_alpha[i] <= T or i == 1) and
+          (T <= T_lim_alpha[i + 1] or i == size(T_lim_alpha, 1) - 1) then (
           b_eta_adj())[i, 1]*ln(T) + ((b_eta_adj())[i, 2] + (b_eta_adj())[i, 3]
-          /T)/T + (b_eta_adj())[i, 4] else 0 for i in 1:size(T_lim_beta, 1) - 1)))
-          annotation (Inline=true, smoothOrder=2);
+          /T)/T + (b_eta_adj())[i, 4] else 0 for i in 1:size(T_lim_alpha, 1) -
+          1))) annotation (Inline=true, smoothOrder=2);
         // Note:  The annotation is set assuming that the values of the constants
         // result in a function that is first-order continuous.
 
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p></html>"));
-      end gamma_Phi;
+      end alpha_tau;
 
-      function gamma_S
-        "<html>Thermal transport resistivity as a function of temperature (&gamma;<sub><i>S</i></sub>)</html>"
+      function alpha_Sdot
+        "<html>Thermal resistivity as a function of temperature (&alpha;<sub><i>S&#775;</i></sub>)</html>"
 
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T "Temperature";
-        output Q.Resistivity gamma_S "Thermal resistivity";
+        output Q.Resistivity alpha_Sdot "Thermal transport resistivity";
 
       protected
         function b_lambda_adj
           "Return unit-adjusted NASA CEA constants for thermal conductivity"
           // Note:  If b_lambda were defined as a local constant instead of a
-          // function, it would prevent the gamma_Phi function from
+          // function, it would prevent the alpha_tau function from
           // being inlined.  If it were defined as a global final constant, it
           // would need to be updated manually when b_eta is changed.
-          output Real b_lambda_adj[size(T_lim_beta, 1) - 1, 4]
+          output Real b_lambda_adj[size(T_lim_alpha, 1) - 1, 4]
             "Unit-adjusted NASA CEA constants for thermal conductivity";
         algorithm
           b_lambda_adj := transpose({b_lambda[:, 1],b_lambda[:, 2],b_lambda[:,
             3],b_lambda[:, 4] - b_lambda[:, 1]*ln(U.K) + fill(ln(1e-6*U.W/(U.cm
-            *U.K)), size(T_lim_beta, 1) - 1)}) annotation (Inline=true);
+            *U.K)), size(T_lim_alpha, 1) - 1)}) annotation (Inline=true);
         end b_lambda_adj;
 
       algorithm
         /*
-  assert(T_lim_beta[1] <= T and T <= T_lim_beta[size(T_lim_beta, 1)], "Temperature "
+  assert(T_lim_alpha[1] <= T and T <= T_lim_alpha[size(T_lim_alpha, 1)], "Temperature "
      + String(T/(U.K)) + " K is out of range for the diffusion properties ([" +
-    String(T_lim_beta[1]/U.K) + ", " + String(T_lim_beta[size(T_lim_beta, 1)]
+    String(T_lim_alpha[1]/U.K) + ", " + String(T_lim_alpha[size(T_lim_alpha, 1)]
     /U.K) + "] K).");
   */
         // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4, T_lim_beta[end] can't be used instead of
-        // T_lim_beta[size(T_lim_beta, 1)] due to:
+        // Note:  In Dymola 7.4, T_lim_alpha[end] can't be used instead of
+        // T_lim_alpha[size(T_lim_alpha, 1)] due to:
         //     "Error, not all "end" could be expanded."
 
-        gamma_S := smooth(0, exp(-sum(if (T_lim_beta[i] <= T or i == 1) and (T
-           <= T_lim_beta[i + 1] or i == size(T_lim_beta, 1) - 1) then (
-          b_lambda_adj())[i, 1]*ln(T) + ((b_lambda_adj())[i, 2] + (b_lambda_adj())
-          [i, 3]/T)/T + (b_lambda_adj())[i, 4] else 0 for i in 1:size(
-          T_lim_beta, 1) - 1))) annotation (Inline=true, smoothOrder=2);
+        alpha_Sdot := smooth(0, exp(-sum(if (T_lim_alpha[i] <= T or i == 1)
+           and (T <= T_lim_alpha[i + 1] or i == size(T_lim_alpha, 1) - 1) then
+          (b_lambda_adj())[i, 1]*ln(T) + ((b_lambda_adj())[i, 2] + (
+          b_lambda_adj())[i, 3]/T)/T + (b_lambda_adj())[i, 4] else 0 for i in 1
+          :size(T_lim_alpha, 1) - 1))) annotation (Inline=true, smoothOrder=2);
         // Note:  The annotation is set assuming that the values of the constants
         // result in a function that is first-order continuous.
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p></html>"));
-      end gamma_S;
+      end alpha_Sdot;
 
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html><p>The correlations for transport properties are available in
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>,
@@ -780,7 +782,10 @@ package Characteristics "Data and functions to correlate physical properties"
 
       constant String formula "Chemical formula";
       constant String phase "Phase (e.g., \"gas\")";
-      constant Q.MassSpecific m "Specific mass";
+      constant Q.MassSpecific m(min=Modelica.Constants.small) "Specific mass";
+      // Note:  The positive minimum value prevents a structural singularity
+      // when checking FCSys.Subregions.Species.SpeciesInertStagnant in Dymola
+      // 7.4.
       constant Q.LengthSpecific r "Specific radius";
       final constant Integer z=Chemistry.charge(formula) "Charge number";
       constant Q.PressureAbsolute p0=U.bar "Reference pressure";
@@ -833,21 +838,21 @@ package Characteristics "Data and functions to correlate physical properties"
       final constant Integer size2b_v=size(b_v, 2) "Number of columns in b_v";
 
     public
-      partial function gamma
-        "<html>Ideal transport resistivity as a function of temperature (&gamma;)</html>"
+      partial function alpha
+        "<html>Ideal transport resistivity as a function of temperature (&alpha;)</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        output Q.Resistivity gamma "Resistivity";
+        output Q.Resistivity beta "Resistivity";
 
       algorithm
-        gamma := U.pi*r^2*U.q*sqrt(U.pi*m/T)*6 annotation (
+        beta := U.pi*r^2*U.q*sqrt(U.pi*m/T)*6 annotation (
           Inline=true,
           smoothOrder=999,
           Documentation(info="<html>
   <p>This function is based on kinetic theory of gases with the rigid-sphere (\"billiard-ball\")
   assumption [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].</p></html>"));
-      end gamma;
+      end alpha;
 
       function c0_T
         "<html>Specific heat capacity at reference pressure as a function of temperature (<i>c</i>&deg;)</html>"

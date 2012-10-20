@@ -2572,8 +2572,8 @@ sensor</a> models.
           annotation (Dialog(compact=true));
 
         // Material
-        final parameter Boolean open=thermoOpt == ThermoOpt.OpenDiabatic
-          "Open" annotation (choices(__Dymola_checkBox=true), Dialog(
+        final parameter Boolean open=thermoOpt == ThermoOpt.OpenDiabatic "Open"
+          annotation (choices(__Dymola_checkBox=true), Dialog(
             group="Material",
             compact=true,
             __Dymola_label="Included",
@@ -2766,7 +2766,7 @@ sensor</a> models.
       model Velocity "Sensor for velocity"
         extends FCSys.Sensors.BaseClasses.PartialSensor(redeclare
             Connectors.RealOutput y(final unit="l/T"));
-        Connectors.MomentumLineic momentum
+        FCSys.Connectors.Mechanical momentum
           annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
@@ -2781,7 +2781,7 @@ sensor</a> models.
       model Temperature "Sensor for temperature"
         extends FCSys.Sensors.BaseClasses.PartialSensor(redeclare
             Connectors.RealOutput y(final unit="l2.m/(N.T2)", displayUnit="K"));
-        Connectors.Entropy entropy "Entropy connector for the face"
+        FCSys.Connectors.Thermal entropy "Entropy connector for the face"
           annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       equation
         y = entropy.T "Measurement";
@@ -4870,8 +4870,8 @@ sensor</a> model.
           annotation (Dialog(compact=true));
 
         // Material
-        final parameter Boolean open=thermoOpt == ThermoOpt.OpenDiabatic
-          "Open" annotation (choices(__Dymola_checkBox=true), Dialog(
+        final parameter Boolean open=thermoOpt == ThermoOpt.OpenDiabatic "Open"
+          annotation (choices(__Dymola_checkBox=true), Dialog(
             group="Material",
             compact=true,
             __Dymola_label="Included",
@@ -5293,11 +5293,11 @@ sensor</a> model.
 
             extends FCSys.Sensors.BaseClasses.PartialSensor;
 
-            Connectors.MomentumLineic negative
+            FCSys.Connectors.Mechanical negative
               "Linear momentum connector for the negative face" annotation (
                 Placement(transformation(extent={{-110,-10},{-90,10}}),
                   iconTransformation(extent={{-110,-10},{-90,10}})));
-            Connectors.MomentumLineic positive
+            FCSys.Connectors.Mechanical positive
               "Linear momentum connector for the positive face" annotation (
                 Placement(transformation(extent={{90,-10},{110,10}}),
                   iconTransformation(extent={{90,-10},{110,10}})));
@@ -5382,11 +5382,11 @@ sensor</a> model.
 
             extends FCSys.Sensors.BaseClasses.PartialSensor;
 
-            Connectors.Entropy negative(T(min=Modelica.Constants.small))
+            FCSys.Connectors.Thermal negative(T(min=Modelica.Constants.small))
               "Entropy connector for the negative face" annotation (Placement(
                   transformation(extent={{-110,-10},{-90,10}}),
                   iconTransformation(extent={{-110,-10},{-90,10}})));
-            Connectors.Entropy positive(T(min=Modelica.Constants.small))
+            FCSys.Connectors.Thermal positive(T(min=Modelica.Constants.small))
               "Entropy connector for the positive face" annotation (Placement(
                   transformation(extent={{90,-10},{110,10}}),
                   iconTransformation(extent={{90,-10},{110,10}})));

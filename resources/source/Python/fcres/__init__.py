@@ -129,6 +129,30 @@ class SimRes(modelicares.SimRes):
        <https://modelica.org/events/modelica2012/Proceedings>`_).
     """
 
+    def __init__(self, fname="dsres.mat"):
+        """On initialization, load the data Dymola simulation file *fname*
+        (MATLAB format)
+
+        *fname* should have
+        **Example:**
+
+           >>> from modelicares import SimRes
+           >>> sim = SimRes('examples/ChuaCircuit.mat')
+        """
+        super(SimRes, self).__init__(fname)
+        try:
+            self._set_constants()
+
+        # **Base constants and units
+        rad = self.get_IV('defaults.base.rad')
+        R_inf = self.get_IV('defaults.base.R_inf')
+        c = self.get_IV('defaults.base.c')
+        k_J = self.get_IV('defaults.base.k_J')
+        R_K = self.get_IV('defaults.base.R_K')
+        cd = self.get_IV("defaults.base.'cd'")
+        k_F = self.get_IV('defaults.base.k_F')
+        R = self.get_IV('defaults.base.R')
+
     def get_unit(self, names):
         """Return the unit(s) for trajectory variable(s).
 
@@ -725,30 +749,6 @@ class SimRes(modelicares.SimRes):
         percent = centi
         self.U.update(atm=atm, kPa=kPa, cm=cm, mm=mm)
         self.U.update({'%': percent})
-
-    def __init__(self, fname="dsres.mat"):
-        """On initialization, load the data Dymola simulation file *fname*
-        (MATLAB format)
-
-        *fname* should have
-        **Example:**
-
-           >>> from modelicares import SimRes
-           >>> sim = SimRes('examples/ChuaCircuit.mat')
-        """
-        super(SimRes, self).__init__(fname)
-        try:
-            self._set_constants()
-
-        # **Base constants and units
-        rad = self.get_IV('defaults.base.rad')
-        R_inf = self.get_IV('defaults.base.R_inf')
-        c = self.get_IV('defaults.base.c')
-        k_J = self.get_IV('defaults.base.k_J')
-        R_K = self.get_IV('defaults.base.R_K')
-        cd = self.get_IV("defaults.base.'cd'")
-        k_F = self.get_IV('defaults.base.k_F')
-        R = self.get_IV('defaults.base.R')
 
 
 def gen_subtitle_conditions(params, details):

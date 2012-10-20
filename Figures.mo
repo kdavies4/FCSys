@@ -1490,9 +1490,10 @@ package Figures "Layouts for documentation"
     //protected
     Connectors.Material Material annotation (Placement(transformation(extent={{
               20,-30},{40,-10}}), iconTransformation(extent={{10,-40},{30,-20}})));
-    Connectors.Entropy Entropy annotation (Placement(transformation(extent={{0,
-              -30},{20,-10}}), iconTransformation(extent={{-10,-40},{10,-20}})));
-    Connectors.MomentumLineic momentum annotation (Placement(transformation(
+    FCSys.Connectors.Thermal Entropy annotation (Placement(transformation(
+            extent={{0,-30},{20,-10}}), iconTransformation(extent={{-10,-40},{
+              10,-20}})));
+    FCSys.Connectors.Mechanical momentum annotation (Placement(transformation(
             extent={{-20,-30},{0,-10}}), iconTransformation(extent={{-30,-40},{
               -10,-20}})));
     VolumeOrPressure pressure annotation (Placement(transformation(extent={{-40,

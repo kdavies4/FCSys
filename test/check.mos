@@ -1,9 +1,9 @@
 // Strings identifying the packages or models to be checked (in Modelica dot
 // notation).
 packages = {"FCSys.UsersGuide",
-            "FCSys.BCs",
-            "FCSys.Sensors",
-            //"FCSys.Subassemblies",
+            //"FCSys.BCs",
+            //"FCSys.Sensors",
+            //"FCSys.Assemblies",
             "FCSys.Regions",
             "FCSys.Subregions",
             "FCSys.Connectors",

@@ -19,14 +19,14 @@ package Connectors "Declarative and imperative connectors"
             fillColor={255,128,0},
             lineThickness=0.5)}),
       Diagram(graphics={Text(
-              extent={{-100,36},{100,76}},
-              textString="%name",
-              lineColor={0,0,0}),Ellipse(
-              extent={{-30,30},{30,-30}},
-              lineColor={208,104,0},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,128,0},
-              lineThickness=0.5)}));
+            extent={{-100,36},{100,76}},
+            textString="%name",
+            lineColor={0,0,0}), Ellipse(
+            extent={{-30,30},{30,-30}},
+            lineColor={208,104,0},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,128,0},
+            lineThickness=0.5)}));
   end ChemicalBus;
 
   expandable connector ChemicalBusInternal
@@ -168,33 +168,34 @@ package Connectors "Declarative and imperative connectors"
             lineThickness=0.5)}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics={Ellipse(
-              extent={{-10,10},{10,-10}},
-              lineColor={127,127,127},
-              fillColor={191,191,191},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{-100,20},{100,60}},
-              textString="%name",
-              lineColor={0,0,0})}));
+            extent={{-10,10},{10,-10}},
+            lineColor={127,127,127},
+            fillColor={191,191,191},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5), Text(
+            extent={{-100,20},{100,60}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end FaceBusInternal;
 
   connector FaceX
-    "X-axis connector to transport material, linear momentum, and entropy of a single species"
-
+    "X-axis connector to transport material, transverse displacement, and entropy of a single species"
     extends BaseClasses.PartialFace;
 
-    parameter Boolean viscousY=false "Viscous along the y axis" annotation (
+    parameter Boolean slipY=false "Include displacement along the y axis"
+      annotation (
       HideResult=true,
       choices(__Dymola_checkBox=true),
       Dialog(compact=true));
-    parameter Boolean viscousZ=false "Viscous along the z axis" annotation (
+    parameter Boolean slipZ=false "Include displacement along the z axis"
+      annotation (
       HideResult=true,
       choices(__Dymola_checkBox=true),
       Dialog(compact=true));
 
-    FCSys.Connectors.MomentumLineic momentumY if viscousY "Y-axis momentum";
-    FCSys.Connectors.MomentumLineic momentumZ if viscousZ "Z-axis momentum";
+    Mechanical mechanicalY if slipY "Y-axis displacement";
+    Mechanical mechanicalZ if slipZ "Z-axis displacement";
 
     annotation (
       Documentation(info="<html>
@@ -216,20 +217,22 @@ package Connectors "Declarative and imperative connectors"
   end FaceX;
 
   connector FaceY
-    "Y-axis connector to transport material, linear momentum, and entropy of a single species"
+    "Y-axis connector to transport material, transverse displacement, and entropy of a single species"
     extends BaseClasses.PartialFace;
 
-    parameter Boolean viscousZ=false "Viscous along the z axis" annotation (
+    parameter Boolean slipZ=false "Include displacement along the z axis"
+      annotation (
       HideResult=true,
       choices(__Dymola_checkBox=true),
       Dialog(compact=true));
-    parameter Boolean viscousX=false "Viscous along the x axis" annotation (
+    parameter Boolean slipX=false "Include displacement along the x axis"
+      annotation (
       HideResult=true,
       choices(__Dymola_checkBox=true),
       Dialog(compact=true));
 
-    FCSys.Connectors.MomentumLineic momentumZ if viscousZ "Z-axis momentum";
-    FCSys.Connectors.MomentumLineic momentumX if viscousX "X-axis momentum";
+    Mechanical mechanicalZ if slipZ "Z-axis displacement";
+    Mechanical mechanicalX if slipX "X-axis displacement";
 
     annotation (
       Documentation(info="<html>
@@ -251,20 +254,22 @@ package Connectors "Declarative and imperative connectors"
   end FaceY;
 
   connector FaceZ
-    "Z-axis connector to transport material, linear momentum, and entropy of a single species"
+    "Z-axis connector to transport material, transverse displacement, and entropy of a single species"
     extends BaseClasses.PartialFace;
 
-    parameter Boolean viscousX=false "Viscous along the x axis" annotation (
+    parameter Boolean slipX=false "Include displacement along the x axis"
+      annotation (
       HideResult=true,
       choices(__Dymola_checkBox=true),
       Dialog(compact=true));
-    parameter Boolean viscousY=false "Viscous along the y axis" annotation (
+    parameter Boolean slipY=false "Include displacement along the y axis"
+      annotation (
       HideResult=true,
       choices(__Dymola_checkBox=true),
       Dialog(compact=true));
 
-    FCSys.Connectors.MomentumLineic momentumX if viscousX "X-axis momentum";
-    FCSys.Connectors.MomentumLineic momentumY if viscousY "Y-axis momentum";
+    Mechanical mechanicalX if slipX "X-axis displacement";
+    Mechanical mechanicalY if slipY "Y-axis displacement";
 
     annotation (
       Documentation(info="<html>
@@ -286,26 +291,24 @@ package Connectors "Declarative and imperative connectors"
   end FaceZ;
 
   connector FaceGeneric
-    "Connector to transport material, linear momentum, and entropy of a single species along a generic axis"
+    "Connector to transport material, transverse displacement, and entropy of a single species along a generic axis"
     extends BaseClasses.PartialFace;
 
-    parameter Boolean viscous1=false
-      "<html>Viscous along the 1<sup>st</sup> transverse axis</html>"
+    parameter Boolean slip1=false
+      "<html>Slippage along the 1<sup>st</sup> transverse axis</html>"
       annotation (
       HideResult=true,
       choices(__Dymola_checkBox=true),
       Dialog(compact=true));
-    parameter Boolean viscous2=false
-      "<html>Viscous along the 2<sup>nd</sup> transverse axis</html>"
+    parameter Boolean slip2=false
+      "<html>Slippage along the 2<sup>nd</sup> transverse axis</html>"
       annotation (
       HideResult=true,
       choices(__Dymola_checkBox=true),
       Dialog(compact=true));
 
-    FCSys.Connectors.MomentumLineic momentum1 if viscous1
-      "1st transverse momentum";
-    FCSys.Connectors.MomentumLineic momentum2 if viscous2
-      "2nd transverse momentum";
+    Mechanical mechanical1 if slip1 "1st transverse displacement";
+    Mechanical mechanical2 if slip2 "2nd transverse displacement";
 
     annotation (
       defaultComponentName="face",
@@ -515,18 +518,21 @@ package Connectors "Declarative and imperative connectors"
     This is copy of the <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> connector, except that it
     has a smaller icon and a default <code>protected</code> prefix.  For more information, see that connector.</p></html>"),
 
-      Diagram(graphics={Text(
-              extent={{-100,20},{100,60}},
-              textString="%name",
-              lineColor={0,0,0}),Ellipse(
-              extent={{-10,10},{10,-10}},
-              lineColor={72,90,180},
-              fillPattern=FillPattern.Solid,
-              fillColor={102,128,255}),Ellipse(
-              extent={{-6,6},{6,-6}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineColor={72,90,180})}),
+      Diagram(graphics={
+          Text(
+            extent={{-100,20},{100,60}},
+            textString="%name",
+            lineColor={0,0,0}),
+          Ellipse(
+            extent={{-10,10},{10,-10}},
+            lineColor={72,90,180},
+            fillPattern=FillPattern.Solid,
+            fillColor={102,128,255}),
+          Ellipse(
+            extent={{-6,6},{6,-6}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            lineColor={72,90,180})}),
       Icon(graphics={Ellipse(
             extent={{-100,100},{100,-100}},
             lineColor={72,90,180},
@@ -539,9 +545,9 @@ package Connectors "Declarative and imperative connectors"
 
   end InertInternal;
 
-  connector Material "Connector for material"
+  connector Material "Connector for material transport"
 
-    Q.Pressure p(nominal=1*U.atm) "Pressure";
+    Q.Potential mu(nominal=1*U.V) "Electrochemical potential";
     flow Q.Current Ndot(nominal=1*U.A) "Current";
 
     annotation (
@@ -573,32 +579,36 @@ package Connectors "Declarative and imperative connectors"
 
   end Material;
 
-  connector MomentumLineic
-    "Connector for linear momentum in a single direction"
+  connector Mechanical "Connector for transverse displacement"
 
-    Q.Velocity phi(nominal=1*U.cm/U.s) "Velocity" annotation (HideResult=true);
-    flow Q.Force mPhidot(nominal=1*U.N) "Force" annotation (HideResult=true);
+    Q.Pressure tau(nominal=1*U.Pa) "Shear stress";
+    flow Q.VolumeRate APdot(nominal=1*U.cm^3/U.s)
+      "Shear velocity times surface area";
+
     annotation (
-      defaultComponentName="momentum",
-      Documentation(info="<html>
-  <p>Note that the orientation is referenced globally.  For example, force may be in the positive-x
+      Documentation(info="<html>   
+      
+  <p>**Update: now locally! Note that the orientation is referenced globally.  For example, force may be in the positive-x
   direction&mdash;not from the interface into component as is pressure.  Thus, force is the rate of
   globally-referenced linear momentum into the component.
   </p>
     <p>For more information, see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Diagram(graphics={Text(
-              extent={{-100,36},{100,76}},
-              textString="%name",
-              lineColor={0,0,0}),Rectangle(
-              extent={{-30,30},{30,-30}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Line(
-              points={{0,30},{0,-30}},
-              color={0,0,0},
-              smooth=Smooth.None)}),
+      Diagram(graphics={
+          Text(
+            extent={{-100,36},{100,76}},
+            textString="%name",
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-30,30},{30,-30}},
+            lineColor={0,0,0},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Line(
+            points={{0,30},{0,-30}},
+            color={0,0,0},
+            smooth=Smooth.None)}),
       Icon(graphics={Rectangle(
             extent={{-100,100},{100,-100}},
             lineColor={0,0,0},
@@ -608,29 +618,35 @@ package Connectors "Declarative and imperative connectors"
             color={0,0,0},
             smooth=Smooth.None)}));
 
-  end MomentumLineic;
+  end Mechanical;
 
-  connector Entropy "Connector for entropy"
+  connector Thermal "Connector to transport entropy"
+
     Q.TemperatureAbsolute T(nominal=298.15*U.K) "Temperature";
     flow Q.Current Sdot(nominal=1*U.W/(298.15*U.K)) "Entropy flow rate";
+
     annotation (
       Documentation(info="<html>For information, see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Diagram(graphics={Text(
-              extent={{-100,36},{100,76}},
-              textString="%name",
-              lineColor={0,0,0}),Rectangle(
-              extent={{-30,30},{30,-30}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Line(
-              points={{-30,30},{30,-30}},
-              color={0,0,0},
-              smooth=Smooth.None),Line(
-              points={{30,30},{-30,-30}},
-              color={0,0,0},
-              smooth=Smooth.None)}),
+      Diagram(graphics={
+          Text(
+            extent={{-100,36},{100,76}},
+            textString="%name",
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-30,30},{30,-30}},
+            lineColor={0,0,0},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Line(
+            points={{-30,30},{30,-30}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{30,30},{-30,-30}},
+            color={0,0,0},
+            smooth=Smooth.None)}),
       Icon(graphics={
           Rectangle(
             extent={{-100,100},{100,-100}},
@@ -646,7 +662,7 @@ package Connectors "Declarative and imperative connectors"
             color={0,0,0},
             smooth=Smooth.None)}));
 
-  end Entropy;
+  end Thermal;
 
   connector RealInput = input Real
     "<html>\"<code>input Real</code>\" as a connector</html>" annotation (
@@ -730,14 +746,14 @@ Protected connector with one input signal of type <code>Real</code>.</p>
           initialScale=0.1,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-            points={{0,50},{100,0},{0,-50},{0,50}},
-            lineColor={0,0,127},
-            fillColor={0,0,127},
-            fillPattern=FillPattern.Solid,
-            lineThickness=0.5), Text(
-            extent={{-200,50},{200,90}},
-            textString="%name",
-            lineColor={0,0,0})}));
+              points={{0,50},{100,0},{0,-50},{0,50}},
+              lineColor={0,0,127},
+              fillColor={0,0,127},
+              fillPattern=FillPattern.Solid,
+              lineThickness=0.5),Text(
+              extent={{-200,50},{200,90}},
+              textString="%name",
+              lineColor={0,0,0})}));
 
   end RealInputBus;
 
@@ -949,7 +965,7 @@ Protected connector with one output signal of type <code>Real</code>.</p>
         annotation (HideResult=true,Dialog(compact=true));
 
       FCSys.Connectors.Material material if thermoOpt == ThermoOpt.OpenDiabatic;
-      FCSys.Connectors.Entropy entropy if thermoOpt == ThermoOpt.ClosedDiabatic
+      FCSys.Connectors.Thermal thermal if thermoOpt == ThermoOpt.ClosedDiabatic
          or thermoOpt == ThermoOpt.OpenDiabatic;
 
       annotation (

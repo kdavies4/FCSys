@@ -42,8 +42,8 @@ package Subregions
           final inclC19HF37O5S=inclC19HF37O5S,
           final 'inclH+'='inclH+',
           C19HF37O5S(V_IC=subregion.V/4)),
-        inclLinY=false,
-        inclLinZ=false,
+        inclVelY=false,
+        inclVelZ=false,
         inclYFaces=false,
         inclZFaces=false,
         gas(
@@ -253,8 +253,8 @@ package Subregions
             yPositive(viscousZ=false, viscousX=false),
             zNegative(viscousX=false, viscousY=false),
             zPositive(viscousX=false, viscousY=false))),
-        inclLinY=false,
-        inclLinZ=false,
+        inclVelY=false,
+        inclVelZ=false,
         inclYFaces=false,
         inclZFaces=false)
         annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
@@ -308,8 +308,8 @@ package Subregions
             each yPositive(viscousZ=false,viscousX=false),
             each zNegative(viscousX=false,viscousY=false),
             each zPositive(viscousX=false,viscousY=false))),
-        each inclLinY=false,
-        each inclLinZ=false,
+        each inclVelY=false,
+        each inclVelZ=false,
         each inclYFaces=false,
         each inclZFaces=false) if n_x > 0
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -363,8 +363,8 @@ package Subregions
             yPositive(viscousZ=false, viscousX=false),
             zNegative(viscousX=false, viscousY=false),
             zPositive(viscousX=false, viscousY=false))),
-        inclLinY=false,
-        inclLinZ=false,
+        inclVelY=false,
+        inclVelZ=false,
         inclYFaces=false,
         inclZFaces=false)
         annotation (Placement(transformation(extent={{20,-10},{40,10}})));
@@ -550,7 +550,7 @@ package Subregions
               V_IC=0.99*subregion1.V,
               T_IC=1.1*defaults.T,
               T(displayUnit="degC"),
-              beta_S=Modelica.Constants.inf))),
+              alpha_Sdot=Modelica.Constants.inf))),
         subregions(graphite(C(
               each initMethPartNum=InitMethScalar.Pressure,
               each V_IC=0.99*subregions[1].V,
@@ -585,7 +585,7 @@ package Subregions
               V_IC=0.5*subregion1.V,
               T_IC=1.1*defaults.T,
               T(displayUnit="degC"),
-              beta_S=Modelica.Constants.inf))),
+              alpha_Sdot=Modelica.Constants.inf))),
         subregions(gas(N2(each p_IC=defaults.p, phi(each displayUnit="mm/s"))),
             graphite(C(each V_IC=0.5*subregions[1].V, each T(displayUnit="degC")))),
 
@@ -832,8 +832,8 @@ package Subregions
             yPositive(viscousZ=false, viscousX=false),
             zNegative(viscousX=false, viscousY=false),
             zPositive(viscousX=false, viscousY=false))),
-        inclLinY=false,
-        inclLinZ=false,
+        inclVelY=false,
+        inclVelZ=false,
         inclYFaces=false,
         inclZFaces=false)
         annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
@@ -850,8 +850,8 @@ package Subregions
             each yPositive(viscousZ=false,viscousX=false),
             each zNegative(viscousX=false,viscousY=false),
             each zPositive(viscousX=false,viscousY=false))),
-        each inclLinY=false,
-        each inclLinZ=false,
+        each inclVelY=false,
+        each inclVelZ=false,
         each inclYFaces=false,
         each inclZFaces=false,
         each setVolume=false) if n_x > 0
@@ -900,8 +900,8 @@ package Subregions
             yPositive(viscousZ=false, viscousX=false),
             zNegative(viscousX=false, viscousY=false),
             zPositive(viscousX=false, viscousY=false))),
-        inclLinY=false,
-        inclLinZ=false,
+        inclVelY=false,
+        inclVelZ=false,
         inclYFaces=false,
         inclZFaces=false)
         annotation (Placement(transformation(extent={{20,-10},{40,10}})));
@@ -1016,20 +1016,20 @@ package Subregions
     // first in the parameter dialog.
     extends BaseClasses.PartialSubregion;
 
-    replaceable Phases.Gas gas(inclH2O=true, final inclLin={inclLinX,inclLinY,
-          inclLinZ}) "Gas" annotation (Dialog(group="Phases"), Placement(
+    replaceable Phases.Gas gas(inclH2O=true, final inclVel={inclVelX,inclVelY,
+          inclVelZ}) "Gas" annotation (Dialog(group="Phases"), Placement(
           transformation(extent={{-10,-10},{10,10}})));
 
-    replaceable Phases.Graphite graphite(final inclLin={inclLinX,inclLinY,
-          inclLinZ}) "Graphite" annotation (Dialog(group="Phases"), Placement(
+    replaceable Phases.Graphite graphite(final inclVel={inclVelX,inclVelY,
+          inclVelZ}) "Graphite" annotation (Dialog(group="Phases"), Placement(
           transformation(extent={{-10,-10},{10,10}})));
 
-    replaceable Phases.Ionomer ionomer(final inclLin={inclLinX,inclLinY,
-          inclLinZ}) "Ionomer" annotation (Dialog(group="Phases"), Placement(
+    replaceable Phases.Ionomer ionomer(final inclVel={inclVelX,inclVelY,
+          inclVelZ}) "Ionomer" annotation (Dialog(group="Phases"), Placement(
           transformation(extent={{-10,-10},{10,10}})));
     /*
-  replaceable Phases.Liquid liquid(final inclLin={inclLinX,
-        inclLinY,inclLinZ})  "Liquid" annotation (
+  replaceable Phases.Liquid liquid(final inclVel={inclVelX,
+        inclVelY,inclVelZ})  "Liquid" annotation (
 
     Dialog(group="Phases"),
     Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -1311,13 +1311,13 @@ package Subregions
     replaceable Phases.Gas gas(
       inclH2O=true,
       inclReact=inclReact,
-      final inclLin={inclLinX,inclLinY,inclLinZ}) "Gas" annotation (
+      final inclVel={inclVelX,inclVelY,inclVelZ}) "Gas" annotation (
       __Dymola_choicesFromPackage=true,
       Dialog(group="Phases"),
       Placement(transformation(extent={{-10,-10},{10,10}})));
 
-    replaceable Phases.Ionomer ionomer(final inclLin={inclLinX,inclLinY,
-          inclLinZ}) "Ionomer" annotation (Dialog(group="Phases"), Placement(
+    replaceable Phases.Ionomer ionomer(final inclVel={inclVelX,inclVelY,
+          inclVelZ}) "Ionomer" annotation (Dialog(group="Phases"), Placement(
           transformation(extent={{-10,-10},{10,10}})));
 
   equation
@@ -1438,11 +1438,11 @@ package Subregions
     replaceable Phases.Gas gas(
       inclH2O=true,
       inclReact=inclReact,
-      final inclLin={inclLinX,inclLinY,inclLinZ}) "Gas" annotation (Dialog(
+      final inclVel={inclVelX,inclVelY,inclVelZ}) "Gas" annotation (Dialog(
           group="Phases"), Placement(transformation(extent={{-10,-10},{10,10}})));
 
-    replaceable Phases.Graphite graphite(final inclLin={inclLinX,inclLinY,
-          inclLinZ}) "Graphite" annotation (Dialog(group="Phases"), Placement(
+    replaceable Phases.Graphite graphite(final inclVel={inclVelX,inclVelY,
+          inclVelZ}) "Graphite" annotation (Dialog(group="Phases"), Placement(
           transformation(extent={{-10,-10},{10,10}})));
 
   equation
@@ -1576,7 +1576,7 @@ package Subregions
       replaceable Species.C.Graphite.Fixed C if inclC constrainedby
         Species.Species(
         final k=k,
-        final inclLin=inclLin,
+        final inclVel=inclVel,
         initMethTemp=if initTemp and reduceFinal then InitMethScalar.None else
             InitMethScalar.Temperature,
         phi(each stateSelect=if reduceFinal then StateSelect.default else
@@ -1603,7 +1603,7 @@ package Subregions
       replaceable Species.C19HF37O5S.Solid.Fixed C19HF37O5S if inclC19HF37O5S
         constrainedby Species.Species(
         final k=k,
-        final inclLin=inclLin,
+        final inclVel=inclVel,
         initMethTemp=if initTemp and reduceFinal then InitMethScalar.None else
             InitMethScalar.Temperature,
         phi(each stateSelect=if reduceFinal then StateSelect.default else
@@ -1630,7 +1630,7 @@ package Subregions
       replaceable Species.'e-'.Graphite.Fixed 'e-' if 'incle-' constrainedby
         Species.Species(
         final k=k,
-        final inclLin=inclLin,
+        final inclVel=inclVel,
         initMethX=if (initXVel or inclC or inclC19HF37O5S) and reduceFinal
              then InitMethLinMom.None else InitMethLinMom.Velocity,
         initMethY=if (initYVel or inclC or inclC19HF37O5S) and reduceFinal
@@ -1662,7 +1662,7 @@ package Subregions
       replaceable Species.H2.Gas.Fixed H2 if inclH2 constrainedby
         Species.Species(
         final k=k,
-        final inclLin=inclLin,
+        final inclVel=inclVel,
         initMethX=if (initXVel or inclC or inclC19HF37O5S) and reduceFinal
              then InitMethLinMom.None else InitMethLinMom.Velocity,
         initMethY=if (initYVel or inclC or inclC19HF37O5S) and reduceFinal
@@ -1694,7 +1694,7 @@ package Subregions
       replaceable Species.H2O.Gas.Fixed H2O if inclH2O constrainedby
         Species.Species(
         final k=k,
-        final inclLin=inclLin,
+        final inclVel=inclVel,
         initMethX=if (initXVel or inclC or inclC19HF37O5S) and reduceFinal
              then InitMethLinMom.None else InitMethLinMom.Velocity,
         initMethY=if (initYVel or inclC or inclC19HF37O5S) and reduceFinal
@@ -1726,7 +1726,7 @@ package Subregions
       replaceable Species.'H+'.Solid.Fixed 'H+' if 'inclH+' constrainedby
         Species.Species(
         final k=k,
-        final inclLin=inclLin,
+        final inclVel=inclVel,
         initMethX=if initXVel and reduceFinal then InitMethLinMom.None else
             InitMethLinMom.Velocity,
         initMethY=if initYVel and reduceFinal then InitMethLinMom.None else
@@ -1758,7 +1758,7 @@ package Subregions
       replaceable Species.N2.Gas.Fixed N2 if inclN2 constrainedby
         Species.Species(
         final k=k,
-        final inclLin=inclLin,
+        final inclVel=inclVel,
         initMethX=if (initXVel or inclC or inclC19HF37O5S) and reduceFinal
              then InitMethLinMom.None else InitMethLinMom.Velocity,
         initMethY=if (initYVel or inclC or inclC19HF37O5S) and reduceFinal
@@ -1790,7 +1790,7 @@ package Subregions
       replaceable Species.O2.Gas.Fixed O2 if inclO2 constrainedby
         Species.Species(
         final k=k,
-        final inclLin=inclLin,
+        final inclVel=inclVel,
         initMethX=if (initXVel or inclC or inclC19HF37O5S) and reduceFinal
              then InitMethLinMom.None else InitMethLinMom.Velocity,
         initMethY=if (initYVel or inclC or inclC19HF37O5S) and reduceFinal
@@ -3125,7 +3125,7 @@ package Subregions
       replaceable Species.H2.Gas.Fixed H2 if inclH2 constrainedby
         Species.Species(
         final k=k,
-        final inclLin=inclLin,
+        final inclVel=inclVel,
         initMethX=if initXVel and reduceFinal then InitMethLinMom.None else
             InitMethLinMom.Velocity,
         initMethY=if initYVel and reduceFinal then InitMethLinMom.None else
@@ -3157,7 +3157,7 @@ package Subregions
       replaceable Species.H2O.Gas.Fixed H2O if inclH2O constrainedby
         Species.Species(
         final k=k,
-        final inclLin=inclLin,
+        final inclVel=inclVel,
         initMethX=if initXVel and reduceFinal then InitMethLinMom.None else
             InitMethLinMom.Velocity,
         initMethY=if initYVel and reduceFinal then InitMethLinMom.None else
@@ -3189,7 +3189,7 @@ package Subregions
       replaceable Species.N2.Gas.Fixed N2 if inclN2 constrainedby
         Species.Species(
         final k=k,
-        final inclLin=inclLin,
+        final inclVel=inclVel,
         initMethX=if initXVel and reduceFinal then InitMethLinMom.None else
             InitMethLinMom.Velocity,
         initMethY=if initYVel and reduceFinal then InitMethLinMom.None else
@@ -3221,7 +3221,7 @@ package Subregions
       replaceable Species.O2.Gas.Fixed O2 if inclO2 constrainedby
         Species.Species(
         final k=k,
-        final inclLin=inclLin,
+        final inclVel=inclVel,
         initMethX=if initXVel and reduceFinal then InitMethLinMom.None else
             InitMethLinMom.Velocity,
         initMethY=if initYVel and reduceFinal then InitMethLinMom.None else
@@ -3716,7 +3716,7 @@ package Subregions
           color={72,90,180},
           smooth=Smooth.None));
       connect(O2.inert, phaseBoundary.inertD) annotation (Line(
-          points={{7,-7},{7,-7},{7,-7},{7,-7}},
+          points={{7,-7},{8,-8},{8,-7},{7,-7}},
           color={72,90,180},
           smooth=Smooth.None));
       // Material transport
@@ -3877,7 +3877,7 @@ package Subregions
       replaceable Species.C.Graphite.Fixed C if inclC constrainedby
         Species.Species(
         final k=k,
-        final inclLin=inclLin,
+        final inclVel=inclVel,
         initMethTemp=if initTemp and reduceFinal then InitMethScalar.None else
             InitMethScalar.Temperature,
         phi(each stateSelect=if reduceFinal then StateSelect.default else
@@ -3903,7 +3903,7 @@ package Subregions
       replaceable Species.'e-'.Graphite.Fixed 'e-' if 'incle-' constrainedby
         Species.Species(
         final k=k,
-        final inclLin=inclLin,
+        final inclVel=inclVel,
         initMethX=if (initXVel or inclC) and reduceFinal then InitMethLinMom.None
              else InitMethLinMom.Velocity,
         initMethY=if (initYVel or inclC) and reduceFinal then InitMethLinMom.None
@@ -4072,7 +4072,7 @@ package Subregions
           color={72,90,180},
           smooth=Smooth.None));
       connect('e-'.inert, phaseBoundary.inertD) annotation (Line(
-          points={{7,-7},{7,-7},{7,-7}},
+          points={{7,-7},{8,-8},{8,-7},{7,-7}},
           color={72,90,180},
           smooth=Smooth.None));
       // Material transport
@@ -4244,7 +4244,7 @@ package Subregions
       replaceable Species.C19HF37O5S.Solid.Fixed C19HF37O5S if inclC19HF37O5S
         constrainedby Species.Species(
         final k=k,
-        final inclLin=inclLin,
+        final inclVel=inclVel,
         initMethTemp=if initTemp and reduceFinal then InitMethScalar.None else
             InitMethScalar.Temperature,
         phi(each stateSelect=if reduceFinal then StateSelect.default else
@@ -4271,7 +4271,7 @@ package Subregions
       replaceable Species.H2O.Gas.Fixed H2O if inclH2O constrainedby
         Species.Species(
         final k=k,
-        final inclLin=inclLin,
+        final inclVel=inclVel,
         initMethX=if (initXVel or inclC19HF37O5S) and reduceFinal then
             InitMethLinMom.None else InitMethLinMom.Velocity,
         initMethY=if (initYVel or inclC19HF37O5S) and reduceFinal then
@@ -4303,7 +4303,7 @@ package Subregions
       replaceable Species.'H+'.Solid.Fixed 'H+' if 'inclH+' constrainedby
         Species.Species(
         final k=k,
-        final inclLin=inclLin,
+        final inclVel=inclVel,
         initMethX=if (initXVel or inclC19HF37O5S) and reduceFinal then
             InitMethLinMom.None else InitMethLinMom.Velocity,
         initMethY=if (initYVel or inclC19HF37O5S) and reduceFinal then
@@ -4839,7 +4839,7 @@ package Subregions
       replaceable Species.H2O.Gas.Fixed H2O if inclH2O constrainedby
         Species.Species(
         final k=k,
-        final inclLin=inclLin,
+        final inclVel=inclVel,
         initMethX=if initXVel and reduceFinal then InitMethLinMom.None else
             InitMethLinMom.Velocity,
         initMethY=if initYVel and reduceFinal then InitMethLinMom.None else
@@ -5035,7 +5035,7 @@ package Subregions
         parameter Q.NumberAbsolute k[3](
           each min=Modelica.Constants.small,
           each final nominal=1) = {1,1,1}
-          "<html>Adjustment factor for transport (<b>k</b>)</html>"
+          "<html>Area fill factor for transport (<b>k</b>)</html>"
           annotation (Dialog(group="Geometry"));
         outer parameter Q.Length L[Axis](each final min=Modelica.Constants.small)
           "Length" annotation (HideResult=true,missingInnerMessage=
@@ -5096,7 +5096,7 @@ package Subregions
           annotation (Dialog(tab="Initialization", group="Temperature"));
         // This is always enabled in the dialog since it is used as a guess value.
 
-        parameter Boolean inclLin[3]={true,false,false}
+        parameter Boolean inclVel[3]={true,false,false}
           "true, if each component of linear momentum is included"
           annotation (Evaluate=true,Dialog(tab="Assumptions"));
 
@@ -5145,10 +5145,10 @@ package Subregions
         parameter Integer n_spec "Number of species";
         final parameter Boolean reduceFinal=reduce and n_spec > 1
           "true, if same velocity and temperature for all (more than 1) species ";
-        final parameter Integer n_lin=countTrue(inclLin)
+        final parameter Integer n_lin=countTrue(inclVel)
           "Number of components of linear momentum"
           annotation (Evaluate=true, HideResult=true);
-        final parameter Integer cartAxes[n_lin]=index(inclLin)
+        final parameter Integer cartAxes[n_lin]=index(inclVel)
           "Cartesian-axis indices of the axes of linear momentum";
 
         Connectors.InertInternal common(
@@ -5194,51 +5194,60 @@ package Subregions
 <p>Notes:<ul>
   <li>The x-axis component of linear momentum is included by default.  At least one component must be included.</li></ul></html>"),
 
-          Icon(graphics={Ellipse(
-                      extent={{-40,100},{40,20}},
-                      lineColor={127,127,127},
-                      startAngle=30,
-                      endAngle=149,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{20,-4},{100,-84}},
-                      lineColor={127,127,127},
-                      startAngle=270,
-                      endAngle=390,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{-100,-4},{-20,-84}},
-                      lineColor={127,127,127},
-                      startAngle=149,
-                      endAngle=270,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Polygon(
-                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
-                  80},{94.5,-24},{60,-84}},
-                      pattern=LinePattern.None,
-                      fillPattern=FillPattern.Sphere,
-                      smooth=Smooth.None,
-                      fillColor={225,225,225},
-                      lineColor={0,0,0}),Line(
-                      points={{-60,-84},{60,-84}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{34.5,80},{94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{-34.5,80},{-94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}),
+          Icon(graphics={
+              Ellipse(
+                extent={{-40,100},{40,20}},
+                lineColor={127,127,127},
+                startAngle=30,
+                endAngle=149,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{20,-4},{100,-84}},
+                lineColor={127,127,127},
+                startAngle=270,
+                endAngle=390,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{-100,-4},{-20,-84}},
+                lineColor={127,127,127},
+                startAngle=149,
+                endAngle=270,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Polygon(
+                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
+                    94.5,-24},{60,-84}},
+                pattern=LinePattern.None,
+                fillPattern=FillPattern.Sphere,
+                smooth=Smooth.None,
+                fillColor={225,225,225},
+                lineColor={0,0,0}),
+              Line(
+                points={{-60,-84},{60,-84}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{34.5,80},{94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{-34.5,80},{-94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}),
           Diagram(graphics));
+
       end NullPhase;
     end BaseClasses;
   end Phases;
@@ -5251,20 +5260,15 @@ package Subregions
       package Graphite "C graphite"
         extends Modelica.Icons.Package;
         model Calibrated "Ideal correlations, with adjustment factors"
-          extends SpeciesInertStagnant(
-            redeclare FCSys.Characteristics.C.Graphite Data,
-            redeclare Q.Resistivity beta_Phi=k_beta_Phi*Data.gamma(T),
-            redeclare Q.ResistivityThermal beta_S=k_beta_S*Data.gamma(T),
-            redeclare Q.ResistivityThermal gamma_S=k_gamma_S*Data.gamma(T));
+          extends SpeciesInertStagnant(redeclare
+              FCSys.Characteristics.C.Graphite Data, redeclare
+              Q.ResistivityThermal alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
 
-          parameter Q.NumberAbsolute k_beta_Phi(final nominal=1) = 1
-            "<html>Adjustment factor for exchange of linear momentum (<i>k</i><sub>&beta;&Phi;</sub>)</html>"
+          parameter Q.NumberAbsolute k_alpha_tau(final nominal=1) = 1
+            "<html>Adjustment factor for fluidity (<i>k</i><sub>&alpha; &tau;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_beta_S(final nominal=1) = 1
-            "<html>Adjustment factor for thermal exchange (<i>k</i><sub>&beta;<i>S</i></sub>)</html>"
-            annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_gamma_S(final nominal=1) = 1
-            "<html>Adjustment factor for thermal transport (<i>k</i>&gamma;<sub><i>S</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_alpha_Sdot(final nominal=1) = 1
+            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
 
           annotation (
@@ -5277,18 +5281,16 @@ package Subregions
                     {100,100}}), graphics),
             Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics={Text(
-                          extent={{-150,90},{-118,52}},
-                          lineColor={0,0,255},
-                          textString="%t.test")}));
+                  extent={{-150,90},{-118,52}},
+                  lineColor={0,0,255},
+                  textString="%t.test")}));
 
         end Calibrated;
 
         model Correlated "Ideal correlations from kinetic theory"
-          extends SpeciesInertStagnant(
-            redeclare FCSys.Characteristics.C.Graphite Data,
-            redeclare Q.Resistivity beta_Phi=Data.gamma(T),
-            redeclare Q.ResistivityThermal beta_S=Data.gamma(T),
-            redeclare Q.ResistivityThermal gamma_S=Data.gamma(T));
+          extends SpeciesInertStagnant(redeclare
+              FCSys.Characteristics.C.Graphite Data, redeclare
+              Q.ResistivityThermal alpha_Sdot=Data.alpha(T));
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -5302,17 +5304,15 @@ package Subregions
         end Correlated;
 
         model Fixed "Fixed properties"
-          extends SpeciesInertStagnant(
-            redeclare FCSys.Characteristics.C.Graphite Data(
+          extends SpeciesInertStagnant(redeclare
+              FCSys.Characteristics.C.Graphite Data(
               Deltah0_f=0,
               Deltah0=0,
               specHeatCapPow=0,
               T_lim_c0={0,Modelica.Constants.inf},
               b_c0=[935*U.J*Data.m/(U.kg*U.K)],
               B_c0=[-300*U.K*935*U.J*Data.m/(U.kg*U.K) + Data.Deltah0_f, 0]),
-            redeclare parameter Q.Resistivity beta_Phi=Data.gamma(),
-            redeclare parameter Q.ResistivityThermal beta_S=Data.gamma(),
-            redeclare parameter Q.ResistivityThermal gamma_S=U.m*U.K/(11.1*U.W));
+              redeclare parameter Q.ResistivityThermal alpha_Sdot=Data.alpha());
           // See the documentation for a table of values.
           // Note:  Parameter expressions (e.g., involving defaults.T) are not used
           // here since they would render the parameters unadjustable in Dymola 7.4.
@@ -5323,11 +5323,11 @@ package Subregions
             defaultComponentName="C",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Fixed specific heat capacity (independent of temperature)
-    <li>Transport and exchange properties (&beta;<sub><i>S</i></sub>, &gamma;<sub><i>S</i></sub>, etc.) are fixed (e.g., independent of temperature)</li>
+    <li>Transport and exchange properties (&alpha;<sub><i>S&#775;</i></sub>, &alpha;<sub><i>S&#775;</i></sub>, etc.) are fixed (e.g., independent of temperature)</li>
     </ol></p>
 
     <p>The default specific heat capacity at constant pressure (<code>b_c0=[0, 935*U.J*Data.m/(U.kg*U.K)]</code>) and thermal
-   resistivity (<code>gamma_S=U.m*U.K/(11.1*U.W)</code>) is based on data of graphite fiber epoxy (25% vol)<br>composite at 300 K from
+   resistivity (<code>alpha_Sdot=U.m*U.K/(11.1*U.W)</code>) is based on data of graphite fiber epoxy (25% vol)<br>composite at 300 K from
    Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 909].
    Related data is listed in Table 1.</p>
 
@@ -5342,12 +5342,12 @@ package Subregions
     </tr>
     <tr>
       <th rowspan=2 valign=\"middle\"><code>c0*U.kg<br>*U.K<br>/(U.J<br>*Data.m)</code></th>
-      <th rowspan=2 valign=\"middle\"><code>gamma_S<br>*U.K<br>/(U.m<br>*U.K)</code></th>
-      <th rowspan=2 valign=\"middle\"><code>gamma_S<br>*U.W<br>/(U.m<br>*U.K)</code></th>
+      <th rowspan=2 valign=\"middle\"><code>alpha_Sdot<br>*U.K<br>/(U.m<br>*U.K)</code></th>
+      <th rowspan=2 valign=\"middle\"><code>alpha_Sdot<br>*U.W<br>/(U.m<br>*U.K)</code></th>
       <th rowspan=2 valign=\"middle\"><code>c0*U.kg<br>*U.W<br>/(U.J<br>*Data.m)</code></th>
-      <th rowspan=1 colspan=2><code>gamma_S*U.W/(U.m*U.K)</code></th>
+      <th rowspan=1 colspan=2><code>alpha_Sdot*U.W/(U.m*U.K)</code></th>
       <th rowspan=2 valign=\"middle\"><code>c0*U.kg<br>*U.K<br>/(U.J<br>*Data.m)</code></th>
-      <th rowspan=1 colspan=2><code>gamma_S*U.W/(U.m*U.K)</code></th>
+      <th rowspan=1 colspan=2><code>alpha_Sdot*U.W/(U.m*U.K)</code></th>
     </tr>
     <tr>
       <th valign=\"middle\">Parallel<br>to layers</th>
@@ -5379,19 +5379,15 @@ package Subregions
         "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S solid</html>"
         extends Modelica.Icons.Package;
         model Calibrated "Ideal correlations, with adjustment factors"
-          extends SpeciesInertStagnant(
-            redeclare FCSys.Characteristics.C19HF37O5S.Solid Data,
-            redeclare Q.Resistivity beta_Phi=k_beta_Phi*Data.gamma(T),
-            redeclare Q.ResistivityThermal gamma_S=k_gamma_S*Data.gamma(T));
+          extends SpeciesInertStagnant(redeclare
+              FCSys.Characteristics.C19HF37O5S.Solid Data, redeclare
+              Q.ResistivityThermal alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
 
-          parameter Q.NumberAbsolute k_beta_Phi(final nominal=1) = 1
-            "<html>Adjustment factor for exchange of linear momentum (<i>k</i><sub>&beta;&Phi;</sub>)</html>"
+          parameter Q.NumberAbsolute k_alpha_tau(final nominal=1) = 1
+            "<html>Adjustment factor for fluidity (<i>k</i><sub>&alpha; &tau;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_beta_S(final nominal=1) = 1
-            "<html>Adjustment factor for thermal exchange (<i>k</i><sub>&beta;<i>S</i></sub>)</html>"
-            annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_gamma_S(final nominal=1) = 1
-            "<html>Adjustment factor for thermal transport (<i>k</i>&gamma;<sub><i>S</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_alpha_Sdot(final nominal=1) = 1
+            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -5405,11 +5401,9 @@ package Subregions
         end Calibrated;
 
         model Correlated "Ideal correlations from kinetic theory"
-          extends SpeciesInertStagnant(
-            redeclare FCSys.Characteristics.C19HF37O5S.Solid Data,
-            redeclare Q.Resistivity beta_Phi=Data.gamma(T),
-            redeclare Q.ResistivityThermal beta_S=Data.gamma(T),
-            redeclare Q.ResistivityThermal gamma_S=Data.gamma(T));
+          extends SpeciesInertStagnant(redeclare
+              FCSys.Characteristics.C19HF37O5S.Solid Data, redeclare
+              Q.ResistivityThermal alpha_Sdot=Data.alpha(T));
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -5419,22 +5413,20 @@ package Subregions
         end Correlated;
 
         model Fixed "Fixed properties"
-          extends SpeciesInertStagnant(
-            redeclare FCSys.Characteristics.C19HF37O5S.Solid Data,
-            redeclare parameter Q.Resistivity beta_Phi=Data.gamma(),
-            redeclare parameter Q.ResistivityThermal beta_S=Data.gamma(),
-            redeclare parameter Q.ResistivityThermal gamma_S=U.m*U.K/(0.16*U.W));
+          extends SpeciesInertStagnant(redeclare
+              FCSys.Characteristics.C19HF37O5S.Solid Data, redeclare parameter
+              Q.ResistivityThermal alpha_Sdot=Data.alpha());
 
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="C19HF37O5S",
             Documentation(info="<html><p>Assumptions:
     <ol>
-    <li>Transport and exchange properties (&beta;<sub><i>S</i></sub>, &gamma;<sub><i>S</i></sub>, etc.) are fixed (e.g., independent of temperature)</li>
+    <li>Transport and exchange properties (&alpha;<sub><i>S&#775;</i></sub>, &alpha;<sub><i>S&#775;</i></sub>, etc.) are fixed (e.g., independent of temperature)</li>
     </ol></p>
 
     <p>Notes:
-    <ul><li>The default thermal transport resistivity (<code>gamma_S=U.m*U.K/(0.16*U.W)</code>) is of dry
+    <ul><li>The default thermal transport resistivity (<code>alpha_Sdot=U.m*U.K/(0.16*U.W)</code>) is of dry
   Nafion 115 [<a href=\"modelica://FCSys.UsersGuide.References\">Kandlikar2009</a>, p. 1277.</li>
   </ul>
   </p><p>For more information, see the
@@ -5451,25 +5443,21 @@ package Subregions
           extends Species0Amount(
             redeclare FCSys.Characteristics.'e-'.Graphite Data,
             initMethPartNum=InitMethScalar.Amount,
-            redeclare Q.Resistivity beta_Phi=k_beta_Phi*Data.gamma(T),
-            redeclare Q.Resistivity gamma_N=k_gamma_N*Data.gamma(T),
-            redeclare Q.Resistivity gamma_Phi=k_gamma_Phi*Data.gamma(T),
-            redeclare Q.ResistivityThermal gamma_S=k_gamma_S*Data.gamma(T));
+            redeclare Q.Resistivity alpha_Ndot=k_alpha_Ndot*Data.alpha(T),
+            redeclare Q.Resistivity alpha_tau=k_alpha_tau*Data.alpha(T),
+            redeclare Q.ResistivityThermal alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
 
           // Note:  initMethPartNum may not be Pressure (which is default) since the
           // EOS doesn't involve pressure.
 
-          parameter Q.NumberAbsolute k_beta_Phi(final nominal=1) = 1
-            "<html>Adjustment factor for exchange of linear momentum (<i>k</i><sub>&beta;&Phi;</sub>)</html>"
+          parameter Q.NumberAbsolute k_alpha_Ndot(final nominal=1) = 1
+            "<html>Adjustment factor for material transport resistivity (<i>k</i><sub>&alpha; <i>N&#775;</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_gamma_N(final nominal=1) = 1
-            "<html>Adjustment factor for material transport (<i>k</i>&gamma;<sub><i>N</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_alpha_tau(final nominal=1) = 1
+            "<html>Adjustment factor for fluidity (<i>k</i><sub>&alpha; &tau;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_gamma_Phi(final nominal=1) = 1
-            "<html>Adjustment factor for transport of linear momentum (<i>k</i>&gamma;<sub>&Phi;</sub>)</html>"
-            annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_gamma_S(final nominal=1) = 1
-            "<html>Adjustment factor for thermal transport (<i>k</i>&gamma;<sub><i>S</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_alpha_Sdot(final nominal=1) = 1
+            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S&#775;</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
 
           annotation (
@@ -5483,10 +5471,9 @@ package Subregions
           extends Species0Amount(
             redeclare FCSys.Characteristics.'e-'.Graphite Data,
             initMethPartNum=InitMethScalar.Amount,
-            redeclare Q.Resistivity beta_Phi=Data.gamma(T),
-            redeclare Q.Resistivity gamma_N=Data.gamma(T),
-            redeclare Q.Resistivity gamma_Phi=Data.gamma(T),
-            redeclare Q.ResistivityThermal gamma_S=Data.gamma(T));
+            redeclare Q.Resistivity alpha_Ndot=Data.alpha(T),
+            redeclare Q.Resistivity alpha_tau=Data.alpha(T),
+            redeclare Q.ResistivityThermal alpha_Sdot=Data.alpha(T));
           // Note:  initMethPartNum may not be Pressure (which is default) since the
           // EOS doesn't involve pressure.
 
@@ -5501,11 +5488,9 @@ package Subregions
           extends Species0Amount(
             redeclare FCSys.Characteristics.'e-'.Graphite Data,
             initMethPartNum=InitMethScalar.Amount,
-            redeclare parameter Q.Resistivity beta_Phi=Data.gamma(),
-            redeclare parameter Q.ResistivityThermal beta_S=Data.gamma(),
-            redeclare parameter Q.Resistivity gamma_N=Data.gamma(),
-            redeclare parameter Q.Resistivity gamma_Phi=Data.gamma(),
-            redeclare parameter Q.ResistivityThermal gamma_S=Data.gamma());
+            redeclare parameter Q.Resistivity alpha_Ndot=Data.alpha(),
+            redeclare parameter Q.Resistivity alpha_tau=Data.alpha(),
+            redeclare parameter Q.ResistivityThermal alpha_Sdot=Data.alpha());
 
           // Note:  initMethPartNum may not be Pressure (which is default) since the
           // EOS doesn't involve pressure.
@@ -5532,32 +5517,21 @@ package Subregions
           extends Species(
             redeclare FCSys.Characteristics.H2.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity beta_Phi=k_beta_Phi*Data.gamma(T),
-            redeclare Q.ResistivityThermal beta_S=k_beta_S*Data.gamma(T),
-            redeclare Q.Resistivity gamma_N=k_gamma_N*Data.gamma(T),
-            redeclare Q.Resistivity gamma_Phi=k_gamma_Phi*(if
-                empiricalTransverse then Data.gamma_Phi(T) else Data.gamma(T)),
+            redeclare Q.Resistivity alpha_Ndot=k_alpha_Ndot*Data.alpha(T),
+            redeclare Q.Resistivity alpha_tau=k_alpha_tau*Data.alpha(T),
+            redeclare Q.ResistivityThermal alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
 
-            redeclare Q.ResistivityThermal gamma_S=k_gamma_S*(if
-                empiricalThermal then Data.gamma_S(T) else Data.gamma(T)));
-
-          parameter Q.NumberAbsolute k_beta_Phi(final nominal=1) = 1
-            "<html>Adjustment factor for exchange of linear momentum (<i>k</i><sub>&beta;&Phi;</sub>)</html>"
+          parameter Q.NumberAbsolute k_alpha_Ndot(final nominal=1) = 1
+            "<html>Adjustment factor for material transport resistivity (<i>k</i><sub>&alpha; <i>N&#775;</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_beta_S(final nominal=1) = 1
-            "<html>Adjustment factor for thermal exchange (<i>k</i><sub>&beta;<i>S</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_alpha_tau(final nominal=1) = 1
+            "<html>Adjustment factor for fluidity (<i>k</i><sub>&alpha; &tau;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_gamma_N(final nominal=1) = 1
-            "<html>Adjustment factor for material transport (<i>k</i>&gamma;<sub><i>N</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_alpha_Sdot(final nominal=1) = 1
+            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_gamma_Phi(final nominal=1) = 1
-            "<html>Adjustment factor for transport of linear momentum (<i>k</i>&gamma;<sub>&Phi;</sub>)</html>"
-            annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_gamma_S(final nominal=1) = 1
-            "<html>Adjustment factor for thermal transport (<i>k</i>&gamma;<sub><i>S</i></sub>)</html>"
-            annotation (Dialog(group="Material properties"));
-          parameter Boolean empiricalTransverse=true
-            "Use empirical correlation for transverse resistivity (otherwise, theoretical)"
+          parameter Boolean empiricalMechanical=true
+            "Use empirical correlation for fluidity (otherwise, theoretical)"
             annotation (
             Evaluate=true,
             choices(__Dymola_checkBox=true),
@@ -5588,16 +5562,12 @@ package Subregions
           extends Species(
             redeclare FCSys.Characteristics.H2.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity beta_Phi=Data.gamma(T),
-            redeclare Q.ResistivityThermal beta_S=Data.gamma(T),
-            redeclare Q.Resistivity gamma_N=Data.gamma(T),
-            redeclare Q.Resistivity gamma_Phi=if empiricalTransverse then
-                Data.gamma_Phi(T) else Data.gamma(T),
-            redeclare Q.ResistivityThermal gamma_S=if empiricalThermal then
-                Data.gamma_S(T) else Data.gamma(T));
+            redeclare Q.Resistivity alpha_Ndot=Data.alpha(T),
+            redeclare Q.Resistivity alpha_tau=Data.alpha(T),
+            redeclare Q.ResistivityThermal alpha_Sdot=Data.alpha(T));
 
-          parameter Boolean empiricalTransverse=true
-            "Use empirical correlation for transverse resistivity (otherwise, theoretical)"
+          parameter Boolean empiricalMechanical=true
+            "Use empirical correlation for fluidity (otherwise, theoretical)"
             annotation (
             Evaluate=true,
             choices(__Dymola_checkBox=true),
@@ -5627,23 +5597,20 @@ package Subregions
           extends Species(
             redeclare FCSys.Characteristics.H2.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare parameter Q.Resistivity beta_Phi=Data.gamma(),
-            redeclare parameter Q.ResistivityThermal beta_S=U.m*U.K/(183e-3*U.W),
-
-            redeclare parameter Q.Resistivity gamma_N=Data.gamma(),
-            redeclare parameter Q.Resistivity gamma_Phi=Data.m/(89.6e-7*U.Pa*U.s),
-
-            redeclare parameter Q.ResistivityThermal gamma_S=U.m*U.K/(183e-3*U.W)
-                /100);
+            redeclare parameter Q.Resistivity alpha_Ndot=Data.alpha(),
+            redeclare parameter Q.Resistivity alpha_tau=Data.alpha(),
+            redeclare parameter Q.ResistivityThermal alpha_Sdot=U.m*U.K/(183e-3
+                *U.W));
 
           // See the documentation for a table of values.
+          // **Update the tables for this and other species.
 
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
-    <li>Transport and exchange properties (&beta;<sub>&Phi;</sub>, &gamma;<sub>&Phi;</sub>, etc.) are fixed (e.g., independent of temperature)</li>
+    <li>Transport and exchange properties (&alpha;<sub>&tau;</sub>, &alpha;<sub>&tau;</sub>, etc.) are fixed (e.g., independent of temperature)</li>
 </ol></p>
 
 <p>Additional notes:<ul>
@@ -5652,8 +5619,8 @@ package Subregions
   affect the chemical potential and result in an incorrect cell
   potential.</li></ul></p>
 
-<p>The default transport resistivities (<code>gamma_Phi=Data.m/(89.6e-7*U.Pa*U.s)</code>
-and <code>gamma_S=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas at 1 atm and
+<p>The default transport resistivities (<code>alpha_tau=Data.m/(89.6e-7*U.Pa*U.s)</code>
+and <code>alpha_Sdot=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas at 1 atm and
   300 K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 919&ndash;920].
   Table 1 lists the properties at  other temperatures. </p>
 
@@ -5662,8 +5629,8 @@ and <code>gamma_S=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub
   <tr>
       <th rowspan=2 valign=\"middle\"><code>T/U.K</code></th>
       <th rowspan=2 width=1><code>c*U.kg*U.K<br>/(U.J*Data.m)</code></th>
-      <th rowspan=2 width=1 ><code>gamma_Phi<br>*U.Pa*U.s/Data.m</code></th>
-      <th rowspan=2 width=1 ><code>gamma_S*U.W<br>/(U.m*U.K)</code></th>
+      <th rowspan=2 width=1 ><code>alpha_tau<br>*U.Pa*U.s/Data.m</code></th>
+      <th rowspan=2 width=1 ><code>alpha_Sdot*U.W<br>/(U.m*U.K)</code></th>
     </tr>
     <tr>
 <tr><td>100</td><td>11.23e3</td><td>1/42.1e-7</td><td>1/67.0e-3</td></tr>
@@ -5710,32 +5677,21 @@ and <code>gamma_S=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub
           extends Species(
             redeclare FCSys.Characteristics.H2O.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity beta_Phi=k_beta_Phi*Data.gamma(T),
-            redeclare Q.ResistivityThermal beta_S=k_beta_S*Data.gamma(T),
-            redeclare Q.Resistivity gamma_N=k_gamma_N*Data.gamma(T),
-            redeclare Q.Resistivity gamma_Phi=k_gamma_Phi*(if
-                empiricalTransverse then Data.gamma_Phi(T) else Data.gamma(T)),
+            redeclare Q.Resistivity alpha_Ndot=k_alpha_Ndot*Data.alpha(T),
+            redeclare Q.Resistivity alpha_tau=k_alpha_tau*Data.alpha(T),
+            redeclare Q.ResistivityThermal alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
 
-            redeclare Q.ResistivityThermal gamma_S=k_gamma_S*(if
-                empiricalThermal then Data.gamma_S(T) else Data.gamma(T)));
-
-          parameter Q.NumberAbsolute k_beta_Phi(final nominal=1) = 1
-            "<html>Adjustment factor for exchange of linear momentum (<i>k</i><sub>&beta;&Phi;</sub>)</html>"
+          parameter Q.NumberAbsolute k_alpha_Ndot(final nominal=1) = 1
+            "<html>Adjustment factor for material transport resistivity (<i>k</i><sub>&alpha; <i>N&#775;</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_beta_S(final nominal=1) = 1
-            "<html>Adjustment factor for thermal exchange (<i>k</i><sub>&beta;<i>S</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_alpha_tau(final nominal=1) = 1
+            "<html>Adjustment factor for fluidity (<i>k</i><sub>&alpha; &tau;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_gamma_N(final nominal=1) = 1
-            "<html>Adjustment factor for material transport (<i>k</i>&gamma;<sub><i>N</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_alpha_Sdot(final nominal=1) = 1
+            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_gamma_Phi(final nominal=1) = 1
-            "<html>Adjustment factor for transport of linear momentum (<i>k</i>&gamma;<sub>&Phi;</sub>)</html>"
-            annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_gamma_S(final nominal=1) = 1
-            "<html>Adjustment factor for thermal transport (<i>k</i>&gamma;<sub><i>S</i></sub>)</html>"
-            annotation (Dialog(group="Material properties"));
-          parameter Boolean empiricalTransverse=true
-            "Use empirical correlation for transverse resistivity (otherwise, theoretical)"
+          parameter Boolean empiricalMechanical=true
+            "Use empirical correlation for fluidity (otherwise, theoretical)"
             annotation (
             Evaluate=true,
             choices(__Dymola_checkBox=true),
@@ -5766,16 +5722,12 @@ and <code>gamma_S=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub
           extends Species(
             redeclare FCSys.Characteristics.H2O.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity beta_Phi=Data.gamma(T),
-            redeclare Q.ResistivityThermal beta_S=Data.gamma(T),
-            redeclare Q.Resistivity gamma_N=Data.gamma(T),
-            redeclare Q.Resistivity gamma_Phi=if empiricalTransverse then
-                Data.gamma_Phi(T) else Data.gamma(T),
-            redeclare Q.ResistivityThermal gamma_S=if empiricalThermal then
-                Data.gamma_S(T) else Data.gamma(T));
+            redeclare Q.Resistivity alpha_Ndot=Data.alpha(T),
+            redeclare Q.Resistivity alpha_tau=Data.alpha(T),
+            redeclare Q.ResistivityThermal alpha_Sdot=Data.alpha(T));
 
-          parameter Boolean empiricalTransverse=true
-            "Use empirical correlation for transverse resistivity (otherwise, theoretical)"
+          parameter Boolean empiricalMechanical=true
+            "Use empirical correlation for fluidity (otherwise, theoretical)"
             annotation (
             Evaluate=true,
             choices(__Dymola_checkBox=true),
@@ -5806,13 +5758,10 @@ and <code>gamma_S=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub
           extends Species(
             redeclare FCSys.Characteristics.H2O.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare parameter Q.Resistivity beta_Phi=Data.gamma(),
-            redeclare parameter Q.ResistivityThermal beta_S=U.m*U.K/(19.6e-3*U.W),
-
-            redeclare parameter Q.Resistivity gamma_N=Data.gamma(),
-            redeclare parameter Q.Resistivity gamma_Phi=Data.m/(9.09e-6*U.Pa*U.s),
-
-            redeclare parameter Q.ResistivityThermal gamma_S=U.m*U.K/(19.6e-3*U.W));
+            redeclare parameter Q.Resistivity alpha_Ndot=Data.alpha(),
+            redeclare parameter Q.Resistivity alpha_tau=Data.alpha(),
+            redeclare parameter Q.ResistivityThermal alpha_Sdot=U.m*U.K/(
+                19.6e-3*U.W));
 
           // See the documentation for tables of values.
 
@@ -5821,7 +5770,7 @@ and <code>gamma_S=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub
             defaultComponentName="H2O",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
-    <li>Transport and exchange properties (&beta;<sub>&Phi;</sub>, &gamma;<sub>&Phi;</sub>, etc.) are fixed (e.g., independent of temperature)</li>
+    <li>Transport and exchange properties (&alpha;<sub>&tau;</sub>, &alpha;<sub>&tau;</sub>, etc.) are fixed (e.g., independent of temperature)</li>
   </ol></p>
 
           <p>Notes:<ul>
@@ -5830,8 +5779,8 @@ and <code>gamma_S=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub
   affect the chemical potential and result in an incorrect cell
   potential.</li></ul></p>
 
-<p>The default transport resistivities (<code>gamma_Phi=Data.m/(9.09e-6*U.Pa*U.s)</code>
-and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturation pressure and
+<p>The default transport resistivities (<code>alpha_tau=Data.m/(9.09e-6*U.Pa*U.s)</code>
+and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturation pressure and
   300 K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 921].  Table 1 lists the properties at
   saturation pressure and other temperatures.  Table 2 lists the properties of H<sub>2</sub>O gas at 1 atm.
   Table 3 lists resistivity to transport of linear momentum (inverse of bulk viscosity) based on its ratio to
@@ -5843,8 +5792,8 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
   <tr>
       <th rowspan=2 valign=\"middle\"><code>T/U.K</code></th>
       <th rowspan=1 colspan=2 width=1><code>c*U.kg*U.K<br>/(U.J*Data.m)</code></th>
-      <th rowspan=1 colspan=2 width=1><code>gamma_Phi<br>*U.Pa*U.s/Data.m</code></th>
-      <th rowspan=1 colspan=2 width=1><code>gamma_S*U.W<br>/(U.m*U.K)</code></th>
+      <th rowspan=1 colspan=2 width=1><code>alpha_tau<br>*U.Pa*U.s/Data.m</code></th>
+      <th rowspan=1 colspan=2 width=1><code>alpha_Sdot*U.W<br>/(U.m*U.K)</code></th>
     </tr>
     <tr>
       <th>Gas</th>
@@ -5917,8 +5866,8 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
   <tr>
       <th valign=\"middle\"><code>T/U.K</code></th>
       <th width=1><code>c*U.kg*U.K<br>/(U.J*Data.m)</code></th>
-      <th width=1 ><code>gamma_Phi<br>*U.Pa*U.s/Data.m</code></th>
-      <th width=1 ><code>gamma_S*U.W<br>/(U.m*U.K)</code></th>
+      <th width=1 ><code>alpha_tau<br>*U.Pa*U.s/Data.m</code></th>
+      <th width=1 ><code>alpha_Sdot*U.W<br>/(U.m*U.K)</code></th>
     </tr>
 <tr><td>380</td><td>2.060e3</td><td>1/127.1e-7</td><td>1/24.6e-3</td></tr>
 <tr><td>400</td><td>2.014e3</td><td>1/134.4e-7</td><td>1/26.1e-3</td></tr>
@@ -5947,25 +5896,21 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
           extends Species0Amount(
             redeclare FCSys.Characteristics.'H+'.Solid Data,
             initMethPartNum=InitMethScalar.Amount,
-            redeclare Q.Resistivity beta_Phi=k_beta_Phi*Data.gamma(T),
-            redeclare Q.Resistivity gamma_N=k_gamma_N*Data.gamma(T),
-            redeclare Q.Resistivity gamma_Phi=k_gamma_Phi*Data.gamma(T),
-            redeclare Q.ResistivityThermal gamma_S=k_gamma_S*Data.gamma(T));
+            redeclare Q.Resistivity alpha_Ndot=k_alpha_Ndot*Data.alpha(T),
+            redeclare Q.Resistivity alpha_tau=k_alpha_tau*Data.alpha(T),
+            redeclare Q.ResistivityThermal alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
 
           // Note:  initMethPartNum may not be Pressure (which is default) since the
           // EOS doesn't involve pressure.
 
-          parameter Q.NumberAbsolute k_beta_Phi(final nominal=1) = 1
-            "<html>Adjustment factor for exchange of linear momentum (<i>k</i><sub>&beta;&Phi;</sub>)</html>"
+          parameter Q.NumberAbsolute k_alpha_Ndot(final nominal=1) = 1
+            "<html>Adjustment factor for material transport resistivity (<i>k</i><sub>&alpha; <i>N&#775;</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_gamma_N(final nominal=1) = 1
-            "<html>Adjustment factor for material transport (<i>k</i>&gamma;<sub><i>N</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_alpha_tau(final nominal=1) = 1
+            "<html>Adjustment factor for fluidity (<i>k</i><sub>&alpha; &tau;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_gamma_Phi(final nominal=1) = 1
-            "<html>Adjustment factor for transport of linear momentum (<i>k</i>&gamma;<sub>&Phi;</sub>)</html>"
-            annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_gamma_S(final nominal=1) = 1
-            "<html>Adjustment factor for thermal transport (<i>k</i>&gamma;<sub><i>S</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_alpha_Sdot(final nominal=1) = 1
+            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S&#775;</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
 
           annotation (
@@ -5979,10 +5924,9 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
           extends Species0Amount(
             redeclare FCSys.Characteristics.'H+'.Solid Data,
             initMethPartNum=InitMethScalar.Amount,
-            redeclare Q.Resistivity beta_Phi=Data.gamma(T),
-            redeclare Q.Resistivity gamma_N=Data.gamma(T),
-            redeclare Q.Resistivity gamma_Phi=Data.gamma(T),
-            redeclare Q.ResistivityThermal gamma_S=Data.gamma(T));
+            redeclare Q.Resistivity alpha_Ndot=Data.alpha(T),
+            redeclare Q.Resistivity alpha_tau=Data.alpha(T),
+            redeclare Q.ResistivityThermal alpha_Sdot=Data.alpha(T));
           // Note:  initMethPartNum may not be Pressure (which is default) since the
           // EOS doesn't involve pressure.
 
@@ -5997,13 +5941,10 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
           extends Species0Amount(
             redeclare FCSys.Characteristics.'H+'.Solid Data,
             initMethPartNum=InitMethScalar.Amount,
-            redeclare parameter Q.Resistivity beta_Phi=Data.gamma(),
-            redeclare parameter Q.ResistivityThermal beta_S=U.m*U.K/(0.1661*U.W),
-
-            redeclare parameter Q.Resistivity gamma_N=Data.gamma(),
-            redeclare parameter Q.Resistivity gamma_Phi=Data.m/(5.3e-6*U.Pa*U.s),
-
-            redeclare parameter Q.ResistivityThermal gamma_S=U.m*U.K/(0.1661*U.W));
+            redeclare parameter Q.Resistivity alpha_Ndot=Data.alpha(),
+            redeclare parameter Q.Resistivity alpha_tau=Data.alpha(),
+            redeclare parameter Q.ResistivityThermal alpha_Sdot=U.m*U.K/(0.1661
+                *U.W));
 
           // Note:  initMethPartNum may not be Pressure (which is default) since
           // overrideEOS is true.
@@ -6014,11 +5955,11 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'H+'",
             Documentation(info="<html><p>Assumptions:<ol>
-    <li>Transport and exchange properties (&beta;<sub>&Phi;</sub>, &gamma;<sub>&Phi;</sub>, etc.) are fixed 
+    <li>Transport and exchange properties (&alpha;<sub>&tau;</sub>, &alpha;<sub>&tau;</sub>, etc.) are fixed 
     (e.g., independent of temperature)</li>
     </ol></p>
 
-  <p>The default transport resistivities (<code>gamma_Phi=Data.m/(5.3e-6*U.Pa*U.s)</code> and <code>gamma_S=U.m*U.K/(0.1661*U.W)</code>) are of H gas
+  <p>The default transport resistivities (<code>alpha_tau=Data.m/(5.3e-6*U.Pa*U.s)</code> and <code>alpha_Sdot=U.m*U.K/(0.1661*U.W)</code>) are of H gas
   (rather than H<sup>+</sup>) at 300 K from [<a href=\"modelica://FCSys.UsersGuide.References\">Schetz1996</a>, p. 139].
   Table 1 lists the properties at other temperatures.</p>
 
@@ -6026,8 +5967,8 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
   <caption align=\"bottom\"><b>Table 1:</b> Properties of H gas (not H<sup>+</sup>) (<a href=\"modelica://FCSys.UsersGuide.References\">Schetz and Fuhs, 1996</a>, p. 139)</caption>
 <tr>
       <th valign=\"middle\"><code>T/U.K</code></th>
-      <th width=1><code>beta_Phi<br>*U.Pa*U.s/Data.m</code></th>
-      <th width=1><code>beta_S*U.W<br>/(U.m*U.K)</code></th>
+      <th width=1><code>alpha_tau<br>*U.Pa*U.s/Data.m</code></th>
+      <th width=1><code>alpha_Sdot*U.W<br>/(U.m*U.K)</code></th>
     </tr>
 <tr><td>200</td><td>1/3.8e-6</td><td>1/0.1197</td></tr>
 <tr><td>300</td><td>1/5.3e-6</td><td>1/0.1661</td></tr>
@@ -6094,32 +6035,21 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
           extends Species(
             redeclare FCSys.Characteristics.N2.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity beta_Phi=k_beta_Phi*Data.gamma(T),
-            redeclare Q.ResistivityThermal beta_S=k_beta_S*Data.gamma(T),
-            redeclare Q.Resistivity gamma_N=k_gamma_N*Data.gamma(T),
-            redeclare Q.Resistivity gamma_Phi=k_gamma_Phi*(if
-                empiricalTransverse then Data.gamma_Phi(T) else Data.gamma(T)),
+            redeclare Q.Resistivity alpha_Ndot=k_alpha_Ndot*Data.alpha(T),
+            redeclare Q.Resistivity alpha_tau=k_alpha_tau*Data.alpha(T),
+            redeclare Q.ResistivityThermal alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
 
-            redeclare Q.ResistivityThermal gamma_S=k_gamma_S*(if
-                empiricalThermal then Data.gamma_S(T) else Data.gamma(T)));
-
-          parameter Q.NumberAbsolute k_beta_Phi(final nominal=1) = 1
-            "<html>Adjustment factor for exchange of linear momentum (<i>k</i><sub>&beta;&Phi;</sub>)</html>"
+          parameter Q.NumberAbsolute k_alpha_Ndot(final nominal=1) = 1
+            "<html>Adjustment factor for material transport resistivity (<i>k</i><sub>&alpha; <i>N&#775;</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_beta_S(final nominal=1) = 1
-            "<html>Adjustment factor for thermal exchange (<i>k</i><sub>&beta;<i>S</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_alpha_tau(final nominal=1) = 1
+            "<html>Adjustment factor for fluidity (<i>k</i><sub>&alpha; &tau;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_gamma_N(final nominal=1) = 1
-            "<html>Adjustment factor for material transport (<i>k</i>&gamma;<sub><i>N</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_alpha_Sdot(final nominal=1) = 1
+            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_gamma_Phi(final nominal=1) = 1
-            "<html>Adjustment factor for transport of linear momentum (<i>k</i>&gamma;<sub>&Phi;</sub>)</html>"
-            annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_gamma_S(final nominal=1) = 1
-            "<html>Adjustment factor for thermal transport (<i>k</i>&gamma;<sub><i>S</i></sub>)</html>"
-            annotation (Dialog(group="Material properties"));
-          parameter Boolean empiricalTransverse=true
-            "Use empirical correlation for transverse resistivity (otherwise, theoretical)"
+          parameter Boolean empiricalMechanical=true
+            "Use empirical correlation for fluidity (otherwise, theoretical)"
             annotation (
             Evaluate=true,
             choices(__Dymola_checkBox=true),
@@ -6150,16 +6080,12 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
           extends Species(
             redeclare FCSys.Characteristics.N2.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity beta_Phi=Data.gamma(T),
-            redeclare Q.ResistivityThermal beta_S=Data.gamma(T),
-            redeclare Q.Resistivity gamma_N=Data.gamma(T),
-            redeclare Q.Resistivity gamma_Phi=if empiricalTransverse then
-                Data.gamma_Phi(T) else Data.gamma(T),
-            redeclare Q.ResistivityThermal gamma_S=if empiricalThermal then
-                Data.gamma_S(T) else Data.gamma(T));
+            redeclare Q.Resistivity alpha_Ndot=Data.alpha(T),
+            redeclare Q.Resistivity alpha_tau=Data.alpha(T),
+            redeclare Q.ResistivityThermal alpha_Sdot=Data.alpha(T));
 
-          parameter Boolean empiricalTransverse=true
-            "Use empirical correlation for transverse resistivity (otherwise, theoretical)"
+          parameter Boolean empiricalMechanical=true
+            "Use empirical correlation for fluidity (otherwise, theoretical)"
             annotation (
             Evaluate=true,
             choices(__Dymola_checkBox=true),
@@ -6196,13 +6122,10 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
               b_c0=[1.041e3*U.J*Data.m/(U.kg*U.K)],
               B_c0=[-300*U.K*1.041e3*U.J*Data.m/(U.kg*U.K) + Data.Deltah0_f, 0]),
 
-            redeclare parameter Q.Resistivity beta_Phi=Data.gamma(),
-            redeclare parameter Q.ResistivityThermal beta_S=U.m*U.K/(25.9e-3*U.W),
-
-            redeclare parameter Q.Resistivity gamma_N=Data.gamma(),
-            redeclare parameter Q.Resistivity gamma_Phi=Data.m/(178.2e-7*U.Pa*U.s),
-
-            redeclare parameter Q.ResistivityThermal gamma_S=U.m*U.K/(25.9e-3*U.W));
+            redeclare parameter Q.Resistivity alpha_Ndot=Data.alpha(),
+            redeclare parameter Q.Resistivity alpha_tau=Data.alpha(),
+            redeclare parameter Q.ResistivityThermal alpha_Sdot=U.m*U.K/(
+                25.9e-3*U.W));
 
           // See the documentation for a table of values.
 
@@ -6212,9 +6135,9 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
     <li>Fixed specific heat capacity (independent of temperature)</ol>
-    <li>Transport and exchange properties (&beta;<sub>&Phi;</sub>, &gamma;<sub>&Phi;</sub>, etc.) are fixed (e.g., independent of temperature)</li></p>
+    <li>Transport and exchange properties (&alpha;<sub>&tau;</sub>, &alpha;<sub>&tau;</sub>, etc.) are fixed (e.g., independent of temperature)</li></p>
 
-<p>The default specific heat capacity (<code>b_c0=[1.041e3*U.J*Data.m/(U.kg*U.K)]</code>) and transport resistivities (<code>gamma_Phi=Data.m/(178.2e-7*U.Pa*U.s)</code> and <code>gamma_S=U.m*U.K/(25.9e-3*U.W))</code>) are based on data of gas at 1 atm and
+<p>The default specific heat capacity (<code>b_c0=[1.041e3*U.J*Data.m/(U.kg*U.K)]</code>) and transport resistivities (<code>alpha_tau=Data.m/(178.2e-7*U.Pa*U.s)</code> and <code>alpha_Sdot=U.m*U.K/(25.9e-3*U.W))</code>) are based on data of gas at 1 atm and
   300 K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 920].
   Table 1 lists the properties at  other temperatures. Note that the value for specific heat capacity at constant pressure at
   800 K (<code>c=1.22e3*U.J*Data.m/(U.kg*U.K)</code>) seems unusual, but it matches the
@@ -6225,8 +6148,8 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
   <tr>
       <th valign=\"middle\"><code>T/U.K</code></th>
       <th width=1><code>c*U.kg*U.K<br>/(U.J*Data.m)</code></th>
-      <th width=1><code>gamma_Phi<br>*U.Pa*U.s/Data.m</code></th>
-      <th width=1><code>gamma_S*U.W<br>/(U.m*U.K)</code></th>
+      <th width=1><code>alpha_tau<br>*U.Pa*U.s/Data.m</code></th>
+      <th width=1><code>alpha_Sdot*U.W<br>/(U.m*U.K)</code></th>
     </tr>
 <tr><td>100</td><td>1.070e3</td><td>1/68.8e-7</td><td>1/9.58e-3</td></tr>
 <tr><td>150</td><td>1.050e3</td><td>1/100.6e-7</td><td>1/13.9e-3</td></tr>
@@ -6249,7 +6172,7 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
   </table>
 
   <p>The transverse resistivity of air at 15.0 &deg;C and 1 atm is given by
-       <code>gamma_Phi=Data.m*U.s/(178e-7*U.Pa)</code>
+       <code>alpha_tau=Data.m*U.s/(178e-7*U.Pa)</code>
    (<a href=\"http://en.wikipedia.org/wiki/Viscosity\">http://en.wikipedia.org/wiki/Viscosity</a>).</p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSpeciesAmagat\">PartialSpeciesAmagat</a> model.</p></html>"));
         end Fixed;
       end Gas;
@@ -6264,32 +6187,21 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
           extends Species(
             redeclare FCSys.Characteristics.O2.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity beta_Phi=k_beta_Phi*Data.gamma(T),
-            redeclare Q.ResistivityThermal beta_S=k_beta_S*Data.gamma(T),
-            redeclare Q.Resistivity gamma_N=k_gamma_N*Data.gamma(T),
-            redeclare Q.Resistivity gamma_Phi=k_gamma_Phi*(if
-                empiricalTransverse then Data.gamma_Phi(T) else Data.gamma(T)),
+            redeclare Q.Resistivity alpha_Ndot=k_alpha_Ndot*Data.alpha(T),
+            redeclare Q.Resistivity alpha_tau=k_alpha_tau*Data.alpha(T),
+            redeclare Q.ResistivityThermal alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
 
-            redeclare Q.ResistivityThermal gamma_S=k_gamma_S*(if
-                empiricalThermal then Data.gamma_S(T) else Data.gamma(T)));
-
-          parameter Q.NumberAbsolute k_beta_Phi(final nominal=1) = 1
-            "<html>Adjustment factor for exchange of linear momentum (<i>k</i><sub>&beta;&Phi;</sub>)</html>"
+          parameter Q.NumberAbsolute k_alpha_Ndot(final nominal=1) = 1
+            "<html>Adjustment factor for material transport resistivity (<i>k</i><sub>&alpha; <i>N&#775;</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_beta_S(final nominal=1) = 1
-            "<html>Adjustment factor for thermal exchange (<i>k</i><sub>&beta;<i>S</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_alpha_tau(final nominal=1) = 1
+            "<html>Adjustment factor for fluidity (<i>k</i><sub>&alpha; &tau;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_gamma_N(final nominal=1) = 1
-            "<html>Adjustment factor for material transport (<i>k</i>&gamma;<sub><i>N</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_alpha_Sdot(final nominal=1) = 1
+            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_gamma_Phi(final nominal=1) = 1
-            "<html>Adjustment factor for transport of linear momentum (<i>k</i>&gamma;<sub>&Phi;</sub>)</html>"
-            annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_gamma_S(final nominal=1) = 1
-            "<html>Adjustment factor for thermal transport (<i>k</i>&gamma;<sub><i>S</i></sub>)</html>"
-            annotation (Dialog(group="Material properties"));
-          parameter Boolean empiricalTransverse=true
-            "Use empirical correlation for transverse resistivity (otherwise, theoretical)"
+          parameter Boolean empiricalMechanical=true
+            "Use empirical correlation for fluidity (otherwise, theoretical)"
             annotation (
             Evaluate=true,
             choices(__Dymola_checkBox=true),
@@ -6319,16 +6231,12 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
           extends Species(
             redeclare FCSys.Characteristics.O2.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity beta_Phi=Data.gamma(T),
-            redeclare Q.ResistivityThermal beta_S=Data.gamma(T),
-            redeclare Q.Resistivity gamma_N=Data.gamma(T),
-            redeclare Q.Resistivity gamma_Phi=if empiricalTransverse then
-                Data.gamma_Phi(T) else Data.gamma(T),
-            redeclare Q.ResistivityThermal gamma_S=if empiricalThermal then
-                Data.gamma_S(T) else Data.gamma(T));
+            redeclare Q.Resistivity alpha_Ndot=Data.alpha(T),
+            redeclare Q.Resistivity alpha_tau=Data.alpha(T),
+            redeclare Q.ResistivityThermal alpha_Sdot=Data.alpha(T));
 
-          parameter Boolean empiricalTransverse=true
-            "Use empirical correlation for transverse resistivity (otherwise, theoretical)"
+          parameter Boolean empiricalMechanical=true
+            "Use empirical correlation for fluidity (otherwise, theoretical)"
             annotation (
             Evaluate=true,
             choices(__Dymola_checkBox=true),
@@ -6359,13 +6267,10 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
           extends Species(
             redeclare FCSys.Characteristics.O2.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare parameter Q.Resistivity beta_Phi=Data.gamma(),
-            redeclare parameter Q.ResistivityThermal beta_S=U.m*U.K/(26.8e-3*U.W),
-
-            redeclare parameter Q.Resistivity gamma_N=Data.gamma(),
-            redeclare parameter Q.Resistivity gamma_Phi=Data.m/(207.2e-7*U.Pa*U.s),
-
-            redeclare parameter Q.ResistivityThermal gamma_S=U.m*U.K/(26.8e-3*U.W));
+            redeclare parameter Q.Resistivity alpha_Ndot=Data.alpha(),
+            redeclare parameter Q.Resistivity alpha_tau=Data.alpha(),
+            redeclare parameter Q.ResistivityThermal alpha_Sdot=U.m*U.K/(
+                26.8e-3*U.W));
 
           // See the documentation for a table of values.
 
@@ -6374,7 +6279,7 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
             defaultComponentName="O2",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
-    <li>Transport and exchange properties (&beta;<sub>&Phi;</sub>, &gamma;<sub>&Phi;</sub>, etc.) are fixed (e.g., independent of temperature)</li>
+    <li>Transport and exchange properties (&alpha;<sub>&tau;</sub>, &alpha;<sub>&tau;</sub>, etc.) are fixed (e.g., independent of temperature)</li>
     </ol></p>
 
 <p>Additional notes:
@@ -6384,7 +6289,7 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
   affect the chemical potential and result in an incorrect cell
   potential.</li></ul></p>
 
-  <p>The default transport resistivities (<code>gamma_Phi=Data.m/(207.2e-7*U.Pa*U.s)</code> and <code>gamma_S=U.m*U.K/(26.8e-3*U.W)</code>) are based on data of gas at 1 atm and
+  <p>The default transport resistivities (<code>alpha_tau=Data.m/(207.2e-7*U.Pa*U.s)</code> and <code>alpha_Sdot=U.m*U.K/(26.8e-3*U.W)</code>) are based on data of gas at 1 atm and
   300 K from Incropera and DeWitt  [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 920&ndash;921].
   Table 1 lists the properties at other temperatures.</p>
 
@@ -6393,8 +6298,8 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
   <tr>
       <th valign=\"middle\"><code>T/U.K</code></th>
       <th width=1><code>c*U.kg*U.K<br>/(U.J*Data.m)</code></th>
-      <th width=1><code>gamma_Phi<br>*U.Pa*U.s/Data.m</code></th>
-      <th width=1><code>gamma_S*U.W<br>/(U.m*U.K)</code></th>
+      <th width=1><code>alpha_tau<br>*U.Pa*U.s/Data.m</code></th>
+      <th width=1><code>alpha_Sdot*U.W<br>/(U.m*U.K)</code></th>
     </tr>
 <tr><td>100</td><td>0.962e3</td><td>1/76.4e-7</td><td>1/9.25e-3</td></tr>
 <tr><td>150</td><td>0.921e3</td><td>1/114.8e-7</td><td>1/13.8e-3</td></tr>
@@ -6424,12 +6329,13 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
       extends Species(
         final overrideEOS=true,
         final rho_IC=0,
-        xNegative(viscousY=false, viscousZ=false),
-        xPositive(viscousY=false, viscousZ=false),
-        yNegative(viscousZ=false, viscousX=false),
-        yPositive(viscousZ=false, viscousX=false),
-        zNegative(viscousX=false, viscousY=false),
-        zPositive(viscousX=false, viscousY=false),
+        final derrho_IC=0,
+        xNegative(slipY=false, slipZ=false),
+        xPositive(slipY=false, slipZ=false),
+        yNegative(slipZ=false, slipX=false),
+        yPositive(slipZ=false, slipX=false),
+        zNegative(slipX=false, slipY=false),
+        zPositive(slipX=false, slipY=false),
         N(stateSelect=StateSelect.never),
         phi(each stateSelect=StateSelect.never),
         T(stateSelect=StateSelect.never));
@@ -6445,50 +6351,51 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
 
     model SpeciesInertStagnant "Inert and stagnant species"
       extends Species(
-        redeclare final parameter Q.Resistivity gamma_N=Modelica.Constants.inf,
+        redeclare final parameter Q.Resistivity alpha_Ndot=Modelica.Constants.inf,
 
-        redeclare final parameter Q.Resistivity gamma_Phi=0,
+        redeclare final parameter Q.Resistivity alpha_tau=0,
         final upstreamX,
         final upstreamY,
         final upstreamZ,
         final setPartNum=true,
-        final setXVel=true,
-        final setYVel=true,
-        final setZVel=true,
+        final setVelX=true,
+        final setVelY=true,
+        final setVelZ=true,
         initMethPartNum=InitMethScalar.Volume,
         final initMethX=InitMethLinMom.Velocity,
         final initMethY=InitMethLinMom.Velocity,
         final initMethZ=InitMethLinMom.Velocity,
+        final Ndot_IC=0,
         final phi_IC=zeros(3),
         final derphi_IC,
         final I_IC,
         final derI_IC,
         xNegative(
           thermoOpt=ThermoOpt.ClosedDiabatic,
-          final viscousY=false,
-          final viscousZ=false),
+          final slipY=false,
+          final slipZ=false),
         xPositive(
           thermoOpt=ThermoOpt.ClosedDiabatic,
-          final viscousY=false,
-          final viscousZ=false),
+          final slipY=false,
+          final slipZ=false),
         yNegative(
           thermoOpt=ThermoOpt.ClosedDiabatic,
-          final viscousZ=false,
-          final viscousX=false),
+          final slipZ=false,
+          final slipX=false),
         yPositive(
           thermoOpt=ThermoOpt.ClosedDiabatic,
-          final viscousZ=false,
-          final viscousX=false),
+          final slipZ=false,
+          final slipX=false),
         zNegative(
           thermoOpt=ThermoOpt.ClosedDiabatic,
-          final viscousX=false,
-          final viscousY=false),
+          final slipX=false,
+          final slipY=false),
         zPositive(
           thermoOpt=ThermoOpt.ClosedDiabatic,
-          final viscousX=false,
-          final viscousY=false));
+          final slipX=false,
+          final slipY=false));
 
-      // Note:  gamma_N and gamma_Phi don't matter since material and linear
+      // Note:  alpha_Ndot and alpha_tau don't matter since material and linear
       // momentum aren't transported.  upstreamX, upstreamY, and upstreamZ don't
       // matter since bulk current is zero.
 
@@ -6511,20 +6418,21 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
       outer parameter Q.Area A[Axis] "Cross-sectional area" annotation (
           HideResult=true, missingInnerMessage=
             "This model should be used within the Subregion model.");
-      parameter Q.NumberAbsolute k[Axis](
-        each min=Modelica.Constants.small,
-        each final nominal=1) = {1,1,1}
-        "<html>Anisotropic factor for transport (<b>k</b>)</html>"
-        annotation (HideResult=true, Dialog(group="Geometry"));
       parameter Q.Length Lstar(
         min=Modelica.Constants.small,
         nominal=10*U.m,
         start=1e3*product(L)^(1/3))
         "<html>Characteristic length for exchange (<i>L</i><sup>&#9733;</sup>)</html>"
         annotation (Dialog(group="Geometry"));
+      parameter Q.NumberAbsolute k[Axis](
+        each min=Modelica.Constants.small,
+        each final nominal=1) = {1,1,1}
+        "<html>Area fill factor for transport (<b>k</b>)</html>"
+        annotation (HideResult=true, Dialog(group="Geometry"));
 
       // Material properties
       replaceable FCSys.Characteristics.BaseClasses.Characteristic Data
+        constrainedby FCSys.Characteristics.BaseClasses.Characteristic
         "Characteristic data of the species" annotation (
         Dialog(group="Material properties"),
         __Dymola_choicesAllMatching=true,
@@ -6532,9 +6440,6 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
             iconTransformation(extent={{-10,90},{10,110}})));
 
       // General assumptions
-      parameter Boolean inclLin[Axis]={true,false,false}
-        "true, if each component of linear momentum is included"
-        annotation (Evaluate=true,Dialog(tab="Assumptions"));
       parameter Boolean overrideEOS=false
         "<html>Override the equation of state with the value of &rho;<sub>IC</sub></html>"
         annotation (
@@ -6542,6 +6447,15 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
         HideResult=true,
         Dialog(tab="Assumptions", compact=true),
         choices(__Dymola_checkBox=true));
+      parameter Boolean inclVel[Axis]={true,false,false}
+        "<html>true, if each component of velocity is included (<i>Do not adjust here.</i>)</html>"
+        annotation (
+        HideResult=true,
+        Evaluate=true,
+        Dialog(tab="Assumptions", enable=false));
+      // Even though this parameter is set as final within the constrainedby
+      // clauses of the Phase models, Dymola 7.4 still shows it in the
+      // parameter dialog (hence the "Do not adjust").
 
       // Assumptions about upstream discretization
       parameter Boolean upstreamX=true "X" annotation (
@@ -6577,31 +6491,31 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
           group="Prescribed states (via initialization parameters)",
           compact=true),
         choices(__Dymola_checkBox=true));
-      parameter Boolean setXVel=false "X-axis component of velocity"
+      parameter Boolean setVelX=false "X-axis component of velocity"
         annotation (
         Evaluate=true,
         Dialog(
           tab="Assumptions",
           group="Prescribed states (via initialization parameters)",
-          enable=inclLin[1],
+          enable=inclVel[1],
           compact=true),
         choices(__Dymola_checkBox=true));
-      parameter Boolean setYVel=false "Y-axis component of velocity"
+      parameter Boolean setVelY=false "Y-axis component of velocity"
         annotation (
         Evaluate=true,
         Dialog(
           tab="Assumptions",
           group="Prescribed states (via initialization parameters)",
-          enable=inclLin[2],
+          enable=inclVel[2],
           compact=true),
         choices(__Dymola_checkBox=true));
-      parameter Boolean setZVel=false "Z-axis component of velocity"
+      parameter Boolean setVelZ=false "Z-axis component of velocity"
         annotation (
         Evaluate=true,
         Dialog(
           tab="Assumptions",
           group="Prescribed states (via initialization parameters)",
-          enable=inclLin[3],
+          enable=inclVel[3],
           compact=true),
         choices(__Dymola_checkBox=true));
       parameter Boolean setTemp=false "Temperature" annotation (
@@ -6708,41 +6622,41 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
           group="Scalar properties",
           enable=initMethPartNum == 18 or initMethTemp == 18));
 
-      // Initialization parameters for linear momentum
+      // Initialization parameters for velocity
       parameter BaseClasses.InitMethLinMom initMethX=InitMethLinMom.Velocity
         "Method of initializing the x-axis component" annotation (Dialog(
           tab="Initialization",
-          group="Linear momentum",
-          enable=inclLin[1]));
+          group="Velocity",
+          enable=inclVel[1]));
       parameter BaseClasses.InitMethLinMom initMethY=InitMethLinMom.Velocity
         "Method of initializing the y-axis component" annotation (Dialog(
           tab="Initialization",
-          group="Linear momentum",
-          enable=inclLin[2]));
+          group="Velocity",
+          enable=inclVel[2]));
       parameter BaseClasses.InitMethLinMom initMethZ=InitMethLinMom.Velocity
         "Method of initializing the z-axis component" annotation (Dialog(
           tab="Initialization",
-          group="Linear momentum",
-          enable=inclLin[3]));
+          group="Velocity",
+          enable=inclVel[3]));
       // Note:  Dymola 7.4 doesn't provide pull-down lists for arrays of
       // enumerations; therefore, a parameter is used for each axis.
       parameter Q.Velocity phi_IC[Axis]={0,0,0}
         "<html>Initial velocity (<b>&phi;</b><sub>IC</sub>)</html>"
-        annotation (Dialog(tab="Initialization",group="Linear momentum"));
+        annotation (Dialog(tab="Initialization",group="Velocity"));
       parameter Q.Acceleration derphi_IC[Axis]={0,0,0}
         "<html>Initial acceleration ((&part;<b>&phi;</b>/&part;<i>t</i>)<sub>IC</sub>)</html>"
         annotation (Dialog(
           tab="Initialization",
-          group="Linear momentum",
+          group="Velocity",
           enable=initMethX == 3 or initMethY == 3 or initMethZ == 3));
       parameter Q.Current I_IC[Axis]={0,0,0}
         "<html>Initial current (<i><b>I</b></i><sub>IC</sub>)</html>"
-        annotation (Dialog(tab="Initialization",group="Linear momentum"));
+        annotation (Dialog(tab="Initialization",group="Velocity"));
       parameter Q.CurrentRate derI_IC[Axis]={0,0,0}
         "<html>Initial rate of current ((&part;<i><b>I</b></i>/&part;<i>t</i>)<sub>IC</sub>)</html>"
         annotation (Dialog(
           tab="Initialization",
-          group="Linear momentum",
+          group="Velocity",
           enable=initMethX == 5 or initMethY == 5 or initMethZ == 5));
 
       // Preferred states
@@ -6795,22 +6709,15 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
         each final fixed=false) "Current";
 
       // Material properties
-      input Q.Resistivity beta_Phi(nominal=10*U.cm/U.A, start=Data.gamma(T_IC))
-        "<html>Exchange resistivity for linear momentum (&beta;<sub>&Phi;</sub>)</html>"
+      input Q.Resistivity alpha_Ndot(nominal=10*U.cm/U.A, start=Data.alpha(T_IC))
+        "<html>Material transport resistivity (&alpha;<sub><i>N&#775;</i></sub>)</html>"
         annotation (Dialog(group="Material properties"));
-      input Q.ResistivityThermal beta_S(nominal=10*U.cm/U.A, start=Data.gamma(
-            T_IC))
-        "<html>Thermal exchange resistivity (&beta;<sub><i>S</i></sub>)</html>"
+      input Q.Resistivity alpha_tau(nominal=10*U.cm/U.A, start=Data.alpha(T_IC))
+        "<html>Fluidity (&alpha;<sub>&tau;</sub>)</html>"
         annotation (Dialog(group="Material properties"));
-      input Q.Resistivity gamma_N(nominal=10*U.cm/U.A, start=Data.gamma(T_IC))
-        "<html>Material transport resistivity (&gamma;<sub><i>N</i></sub>)</html>"
-        annotation (Dialog(group="Material properties"));
-      input Q.Resistivity gamma_Phi(nominal=10*U.cm/U.A, start=Data.gamma(T_IC))
-        "<html>Transport resistivity for linear momentum (&gamma;<sub>&Phi;</sub>)</html>"
-        annotation (Dialog(group="Material properties"));
-      input Q.ResistivityThermal gamma_S(nominal=10*U.cm/U.A, start=Data.gamma(
-            T_IC))
-        "<html>Thermal transport resistivity (&gamma;<sub><i>S</i></sub>)</html>"
+      input Q.ResistivityThermal alpha_Sdot(nominal=10*U.cm/U.A, start=
+            Data.alpha(T_IC))
+        "<html>Thermal resistivity (&alpha;<sub><i>S&#775;</i></sub>)</html>"
         annotation (Dialog(group="Material properties"));
       // Note:  The properties are defined as inputs so that they can be
       // redeclared as parameters or acausal time-varying variables.
@@ -6830,40 +6737,40 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
         Data.m*phi .* I ./ A[cartAxes] if defaults.analysis "Dynamic pressure";
       //
       // Time constants
-      output Q.Time tau_exch_Phi(stateSelect=StateSelect.never) = beta_Phi*N/
+      output Q.Time t_exch_Phi(stateSelect=StateSelect.never) = alpha_tau*N/
         Lstar if defaults.analysis
         "Time constant for exchange of linear momentum";
-      output Q.Time tau_exch_S(stateSelect=StateSelect.never) = beta_S*C_p/
+      output Q.Time t_exch_S(stateSelect=StateSelect.never) = alpha_Sdot*C_p/
         Lstar if defaults.analysis "Time constant for thermal exchange";
-      output Q.Time tau_trans_N[Axis](each stateSelect=StateSelect.never) = -
-        fill(gamma_N*N*p/Data.dp(
+      output Q.Time t_trans_N[Axis](each stateSelect=StateSelect.never) = -fill(
+        alpha_Ndot*N*p/Data.dp(
             v=1/rho,
             T=T,
             dv=1,
             dT=0), 3) ./ Lstar_trans if defaults.analysis and Data.isCompressible
         "Time constants for material transport";
-      output Q.Time tau_trans_Phi[Axis](each stateSelect=StateSelect.never) =
-        fill(gamma_Phi*N, 3) ./ Lstar_trans if defaults.analysis
+      output Q.Time t_trans_Phi[Axis](each stateSelect=StateSelect.never) =
+        fill(alpha_tau*N, 3) ./ Lstar_trans if defaults.analysis
         "Time constants for transport of linear momentum";
-      output Q.Time tau_trans_S[Axis](each stateSelect=StateSelect.never) =
-        fill(gamma_S*N*c_p, 3) ./ Lstar_trans if defaults.analysis
+      output Q.Time t_trans_S[Axis](each stateSelect=StateSelect.never) = fill(
+        alpha_Sdot*N*c_p, 3) ./ Lstar_trans if defaults.analysis
         "Time constants for thermal transport";
       //
       // Peclet numbers (only for the axes with linear momentum included; others
       // are zero)
       output Q.Number Pe_N[n_lin](each stateSelect=StateSelect.never) = I*
-        gamma_N ./ Lstar_trans[cartAxes] if defaults.analysis
+        alpha_Ndot ./ Lstar_trans[cartAxes] if defaults.analysis
         "Material Peclet numbers";
       output Q.Number Pe_Phi[n_lin](each stateSelect=StateSelect.never) = I*
-        gamma_Phi ./ Lstar_trans[cartAxes] if defaults.analysis
+        alpha_tau ./ Lstar_trans[cartAxes] if defaults.analysis
         "Peclet numbers for linear momentum";
       output Q.Number Pe_S[n_lin](each stateSelect=StateSelect.never) = I*
-        gamma_S ./ Lstar_trans[cartAxes] if defaults.analysis
+        alpha_Sdot ./ Lstar_trans[cartAxes] if defaults.analysis
         "Thermal Peclet numbers";
       //
       // Bulk flow rates
       output Q.Force mphiI[n_lin, Orientation](each stateSelect=StateSelect.never)
-         = {(if inclLin[cartWrap(cartAxes[axis] + orientation)] then Data.m*phi[
+         = {(if inclVel[cartWrap(cartAxes[axis] + orientation)] then Data.m*phi[
         linAxes[cartWrap(cartAxes[axis] + orientation)]]*I[axis] else 0) for
         orientation in Orientation, axis in 1:n_lin} if n_lin > 0 and defaults.analysis
         "Bulk rate of advection of 1st and 2nd transverse linear momentum";
@@ -6885,9 +6792,9 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
         ThermoOpt.OpenDiabatic,yPositive.thermoOpt == ThermoOpt.OpenDiabatic},{
         zNegative.thermoOpt == ThermoOpt.OpenDiabatic,zPositive.thermoOpt ==
         ThermoOpt.OpenDiabatic}}[cartAxes[axis], side] then inSign(side)*
-        Data.v_pT(p_face[cartAxes[axis], side], T_face[cartAxes[axis], side])*
+        Data.v_pT(mu_face[cartAxes[axis], side], T_face[cartAxes[axis], side])*
         Ndot_face[cartAxes[axis], side]^2/A[cartAxes[axis]] else 0 for side in
-        Side) + sum(phi_face[cartWrap(cartAxes[axis] - orientation), :,
+        Side) + sum(tau_face[cartWrap(cartAxes[axis] - orientation), :,
         orientation]*Ndot_face[cartWrap(cartAxes[axis] - orientation), :] for
         orientation in Orientation) for axis in 1:n_lin} - phi*sum(Ndot_face))
         if defaults.analysis and not overrideEOS
@@ -6897,9 +6804,9 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
          == ThermoOpt.OpenDiabatic},{yNegative.thermoOpt == ThermoOpt.OpenDiabatic,
         yPositive.thermoOpt == ThermoOpt.OpenDiabatic},{zNegative.thermoOpt ==
         ThermoOpt.OpenDiabatic,zPositive.thermoOpt == ThermoOpt.OpenDiabatic}}[
-        cartAxes[axis], side] then inSign(side)*(p_face[cartAxes[axis], side]
+        cartAxes[axis], side] then inSign(side)*(mu_face[cartAxes[axis], side]
          - p)*A[cartAxes[axis]] else 0 for side in Side) for axis in 1:n_lin}
-         + {sum(Sigma(mPhidot_face[cartWrap(cartAxes[axis] - orientation), :,
+         + {sum(Sigma(APdot_face[cartWrap(cartAxes[axis] - orientation), :,
         orientation]) for orientation in Orientation) for axis in 1:n_lin} if
         defaults.analysis
         "Friction from other subregions (diffusive transport; includes volume viscosity)";
@@ -6920,13 +6827,13 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
          + inert.T*inert.Sdot if defaults.analysis
         "Rate of thermal conduction from other species";
       output Q.Power Wdot_trans(stateSelect=StateSelect.never) = -sum(sum((
-        Data.h0_T(T_face[axis, side]) + Data.m*(Data.v_pT(p_face[axis, side],
-        T_face[axis, side])*Ndot_face[axis, side]/A[axis])^2 + phi_face[axis,
-        side, :]*phi_face[axis, side, :] - phi*phi - h)*Ndot_face[axis, side]
+        Data.h0_T(T_face[axis, side]) + Data.m*(Data.v_pT(mu_face[axis, side],
+        T_face[axis, side])*Ndot_face[axis, side]/A[axis])^2 + tau_face[axis,
+        side, :]*tau_face[axis, side, :] - phi*phi - h)*Ndot_face[axis, side]
         for side in Side) for axis in Axis) if defaults.analysis
         "Rate of work (internal, flow, and kinetic) done by material transport (advection)";
       output Q.Power Qdot_gen_trans(stateSelect=StateSelect.never) = sum(
-        phi_face .* mPhidot_face) if defaults.analysis
+        tau_face .* APdot_face) if defaults.analysis
         "Rate of heat generation due to friction with other subregions";
       output Q.Power Qdot_trans(stateSelect=StateSelect.never) = sum(T_face .*
         Sdot_face) if defaults.analysis
@@ -6964,20 +6871,19 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
         "Connector to add pressure and exchange linear momentum and entropy by diffusion"
         annotation (Placement(transformation(extent={{10,-30},{30,-10}}),
             iconTransformation(extent={{60,-80},{80,-60}})));
-
       replaceable FCSys.Connectors.FaceX xNegative(
         thermoOpt=ThermoOpt.OpenDiabatic,
-        viscousY=inclLin[Axis.y],
-        viscousZ=inclLin[Axis.z],
-        material(final p(start=p_IC) = p_face[Axis.x, Side.n], final Ndot(start
-              =I_IC[Axis.x]) = Ndot_face[Axis.x, Side.n]),
-        momentumY(final phi(start=phi_IC[Axis.y]) = phi_face[Axis.x, Side.n,
-            Orientation.following], final mPhidot=mPhidot_face[Axis.x, Side.n,
-              Orientation.following]),
-        momentumZ(final phi(start=phi_IC[Axis.z]) = phi_face[Axis.x, Side.n,
-            Orientation.preceding], final mPhidot=mPhidot_face[Axis.x, Side.n,
-              Orientation.preceding]),
-        entropy(final T(start=T_IC) = T_face[Axis.x, Side.n],final Sdot(start=0)
+        slipY=xNegative.thermoOpt == ThermoOpt.OpenDiabatic,
+        slipZ=xNegative.thermoOpt == ThermoOpt.OpenDiabatic,
+        material(final mu(start=mu_IC) = mu_face[Axis.x, Side.n], final Ndot(
+              start=I_IC[Axis.x]) = Ndot_face[Axis.x, Side.n]),
+        mechanicalY(final tau=tau_face[Axis.x, Side.n, Orientation.following],
+            final APdot(start=A[Axis.x]*phi_IC[Axis.y]) = APdot_face[Axis.x,
+            Side.n, Orientation.following]),
+        mechanicalZ(final tau=tau_face[Axis.x, Side.n, Orientation.preceding],
+            final APdot(start=A[Axis.x]*phi_IC[Axis.z]) = APdot_face[Axis.x,
+            Side.n, Orientation.preceding]),
+        thermal(final T(start=T_IC) = T_face[Axis.x, Side.n],final Sdot(start=0)
              = Sdot_face[Axis.x, Side.n])) "Negative face along the x axis"
         annotation (Dialog(
           tab="Assumptions",
@@ -6987,17 +6893,17 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
                 -10},{-30,10}}), iconTransformation(extent={{-110,-10},{-90,10}})));
       replaceable FCSys.Connectors.FaceX xPositive(
         thermoOpt=xNegative.thermoOpt,
-        viscousY=inclLin[Axis.y],
-        viscousZ=inclLin[Axis.z],
-        material(final p(start=p_IC) = p_face[Axis.x, Side.p], final Ndot(start
-              =-I_IC[Axis.x]) = Ndot_face[Axis.x, Side.p]),
-        momentumY(final phi(start=phi_IC[Axis.y]) = phi_face[Axis.x, Side.p,
-            Orientation.following], final mPhidot=mPhidot_face[Axis.x, Side.p,
-              Orientation.following]),
-        momentumZ(final phi(start=phi_IC[Axis.z]) = phi_face[Axis.x, Side.p,
-            Orientation.preceding], final mPhidot=mPhidot_face[Axis.x, Side.p,
-              Orientation.preceding]),
-        entropy(final T(start=T_IC) = T_face[Axis.x, Side.p],final Sdot(start=0)
+        slipY=xPositive.thermoOpt == ThermoOpt.OpenDiabatic,
+        slipZ=xPositive.thermoOpt == ThermoOpt.OpenDiabatic,
+        material(final mu(start=mu_IC) = mu_face[Axis.x, Side.p], final Ndot(
+              start=-I_IC[Axis.x]) = Ndot_face[Axis.x, Side.p]),
+        mechanicalY(final tau=tau_face[Axis.x, Side.p, Orientation.following],
+            final APdot(start=A[Axis.x]*phi_IC[Axis.y]) = APdot_face[Axis.x,
+            Side.p, Orientation.following]),
+        mechanicalZ(final tau=tau_face[Axis.x, Side.p, Orientation.preceding],
+            final APdot(start=A[Axis.x]*phi_IC[Axis.z]) = APdot_face[Axis.x,
+            Side.p, Orientation.preceding]),
+        thermal(final T(start=T_IC) = T_face[Axis.x, Side.p],final Sdot(start=0)
              = Sdot_face[Axis.x, Side.p])) "Positive face along the x axis"
         annotation (Dialog(
           tab="Assumptions",
@@ -7005,19 +6911,18 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
           __Dymola_label="xPositive",
           __Dymola_descriptionLabel=true),Placement(transformation(extent={{30,
                 -10},{50,10}}), iconTransformation(extent={{90,-10},{110,10}})));
-
       replaceable FCSys.Connectors.FaceY yNegative(
-        viscousZ=inclLin[Axis.z],
-        viscousX=inclLin[Axis.x],
-        material(final p(start=p_IC) = p_face[Axis.y, Side.n], final Ndot(start
-              =I_IC[Axis.y]) = Ndot_face[Axis.y, Side.n]),
-        momentumZ(final phi(start=phi_IC[Axis.z]) = phi_face[Axis.y, Side.n,
-            Side.n], final mPhidot=mPhidot_face[Axis.y, Side.n, Orientation.following]),
-
-        momentumX(final phi(start=phi_IC[Axis.x]) = phi_face[Axis.y, Side.n,
-            Side.p], final mPhidot=mPhidot_face[Axis.y, Side.n, Orientation.preceding]),
-
-        entropy(final T(start=T_IC) = T_face[Axis.y, Side.n],final Sdot(start=0)
+        slipZ=yNegative.thermoOpt == ThermoOpt.OpenDiabatic,
+        slipX=yNegative.thermoOpt == ThermoOpt.OpenDiabatic,
+        material(final mu(start=mu_IC) = mu_face[Axis.y, Side.n], final Ndot(
+              start=I_IC[Axis.y]) = Ndot_face[Axis.y, Side.n]),
+        mechanicalZ(final tau=tau_face[Axis.y, Side.n, Side.n], final APdot(
+              start=A[Axis.y]*phi_IC[Axis.z]) = APdot_face[Axis.y, Side.n,
+            Orientation.following]),
+        mechanicalX(final tau=tau_face[Axis.y, Side.n, Side.p], final APdot(
+              start=A[Axis.y]*phi_IC[Axis.x]) = APdot_face[Axis.y, Side.n,
+            Orientation.preceding]),
+        thermal(final T(start=T_IC) = T_face[Axis.y, Side.n],final Sdot(start=0)
              = Sdot_face[Axis.y, Side.n])) "Negative face along the y axis"
         annotation (Dialog(
           tab="Assumptions",
@@ -7028,17 +6933,17 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
 
       replaceable FCSys.Connectors.FaceY yPositive(
         thermoOpt=yNegative.thermoOpt,
-        viscousZ=inclLin[Axis.z],
-        viscousX=inclLin[Axis.x],
-        material(final p(start=p_IC) = p_face[Axis.y, Side.p], final Ndot(start
-              =-I_IC[Axis.y]) = Ndot_face[Axis.y, Side.p]),
-        momentumZ(final phi(start=phi_IC[Axis.z]) = phi_face[Axis.y, Side.p,
-            Orientation.following], final mPhidot=mPhidot_face[Axis.y, Side.p,
-              Orientation.following]),
-        momentumX(final phi(start=phi_IC[Axis.x]) = phi_face[Axis.y, Side.p,
-            Orientation.preceding], final mPhidot=mPhidot_face[Axis.y, Side.p,
-              Orientation.preceding]),
-        entropy(final T(start=T_IC) = T_face[Axis.y, Side.p],final Sdot(start=0)
+        slipZ=yPositive.thermoOpt == ThermoOpt.OpenDiabatic,
+        slipX=yPositive.thermoOpt == ThermoOpt.OpenDiabatic,
+        material(final mu(start=mu_IC) = mu_face[Axis.y, Side.p], final Ndot(
+              start=-I_IC[Axis.y]) = Ndot_face[Axis.y, Side.p]),
+        mechanicalZ(final tau=tau_face[Axis.y, Side.p, Orientation.following],
+            final APdot(start=A[Axis.y]*phi_IC[Axis.z]) = APdot_face[Axis.y,
+            Side.p, Orientation.following]),
+        mechanicalX(final tau=tau_face[Axis.y, Side.p, Orientation.preceding],
+            final APdot(start=A[Axis.y]*phi_IC[Axis.x]) = APdot_face[Axis.y,
+            Side.p, Orientation.preceding]),
+        thermal(final T(start=T_IC) = T_face[Axis.y, Side.p],final Sdot(start=0)
              = Sdot_face[Axis.y, Side.p])) "Positive face along the y axis"
         annotation (Dialog(
           tab="Assumptions",
@@ -7046,19 +6951,18 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
           __Dymola_label="yPositive",
           __Dymola_descriptionLabel=true),Placement(transformation(extent={{-10,
                 30},{10,50}}), iconTransformation(extent={{-10,90},{10,110}})));
-
       replaceable FCSys.Connectors.FaceZ zNegative(
-        viscousX=inclLin[Axis.x],
-        viscousY=inclLin[Axis.y],
-        material(final p(start=p_IC) = p_face[Axis.z, Side.n], final Ndot(start
-              =I_IC[Axis.z]) = Ndot_face[Axis.z, Side.n]),
-        momentumX(final phi(start=phi_IC[Axis.x]) = phi_face[Axis.z, Side.n,
-            Orientation.following], final mPhidot=mPhidot_face[Axis.z, Side.n,
-              Orientation.following]),
-        momentumY(final phi(start=phi_IC[Axis.y]) = phi_face[Axis.z, Side.n,
-            Orientation.preceding], final mPhidot=mPhidot_face[Axis.z, Side.n,
-              Orientation.preceding]),
-        entropy(final T(start=T_IC) = T_face[Axis.z, Side.n],final Sdot(start=0)
+        slipX=zNegative.thermoOpt == ThermoOpt.OpenDiabatic,
+        slipY=zNegative.thermoOpt == ThermoOpt.OpenDiabatic,
+        material(final mu(start=mu_IC) = mu_face[Axis.z, Side.n], final Ndot(
+              start=I_IC[Axis.z]) = Ndot_face[Axis.z, Side.n]),
+        mechanicalX(final tau=tau_face[Axis.z, Side.n, Orientation.following],
+            final APdot(start=A[Axis.z]*phi_IC[Axis.x]) = APdot_face[Axis.z,
+            Side.n, Orientation.following]),
+        mechanicalY(final tau=tau_face[Axis.z, Side.n, Orientation.preceding],
+            final APdot(start=A[Axis.z]*phi_IC[Axis.y]) = APdot_face[Axis.z,
+            Side.n, Orientation.preceding]),
+        thermal(final T(start=T_IC) = T_face[Axis.z, Side.n],final Sdot(start=0)
              = Sdot_face[Axis.z, Side.n])) "Negative face along the z axis"
         annotation (Dialog(
           tab="Assumptions",
@@ -7068,17 +6972,17 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
                 10},{30,30}}), iconTransformation(extent={{60,60},{80,80}})));
       replaceable FCSys.Connectors.FaceZ zPositive(
         thermoOpt=zNegative.thermoOpt,
-        viscousX=inclLin[Axis.x],
-        viscousY=inclLin[Axis.y],
-        material(final p(start=p_IC) = p_face[Axis.z, Side.p], final Ndot(start
-              =-I_IC[Axis.z]) = Ndot_face[Axis.z, Side.p]),
-        momentumX(final phi(start=phi_IC[Axis.x]) = phi_face[Axis.z, Side.p,
-            Orientation.following], final mPhidot=mPhidot_face[Axis.z, Side.p,
-              Orientation.following]),
-        momentumY(final phi(start=phi_IC[Axis.y]) = phi_face[Axis.z, Side.p,
-            Orientation.preceding], final mPhidot=mPhidot_face[Axis.z, Side.p,
-              Orientation.preceding]),
-        entropy(final T(start=T_IC) = T_face[Axis.z, Side.p],final Sdot(start=0)
+        slipX=zPositive.thermoOpt == ThermoOpt.OpenDiabatic,
+        slipY=zPositive.thermoOpt == ThermoOpt.OpenDiabatic,
+        material(final mu(start=mu_IC) = mu_face[Axis.z, Side.p], final Ndot(
+              start=-I_IC[Axis.z]) = Ndot_face[Axis.z, Side.p]),
+        mechanicalX(final tau=tau_face[Axis.z, Side.p, Orientation.following],
+            final APdot(start=A[Axis.z]*phi_IC[Axis.x]) = APdot_face[Axis.z,
+            Side.p, Orientation.following]),
+        mechanicalY(final tau=tau_face[Axis.z, Side.p, Orientation.preceding],
+            final APdot(start=A[Axis.z]*phi_IC[Axis.y]) = APdot_face[Axis.z,
+            Side.p, Orientation.preceding]),
+        thermal(final T(start=T_IC) = T_face[Axis.z, Side.p],final Sdot(start=0)
              = Sdot_face[Axis.z, Side.p])) "Positive face along the z axis"
         annotation (Dialog(
           tab="Assumptions",
@@ -7093,29 +6997,29 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
     protected
       final parameter Q.Length Lstar_trans[Axis]=k .* A ./ L
         "Effective cross-sectional area per length";
-      final parameter Integer n_lin=countTrue(inclLin)
+      final parameter Integer n_lin=countTrue(inclVel)
         "Number of components of linear momentum";
-      final parameter Integer cartAxes[n_lin]=index(inclLin)
+      final parameter Integer cartAxes[n_lin]=index(inclVel)
         "Cartesian-axis indices of the axes of linear momentum";
-      final parameter Integer linAxes[Axis]=enumerate(inclLin)
+      final parameter Integer linAxes[Axis]=enumerate(inclVel)
         "Linear momentum indices of the Cartesian axes";
       final parameter Boolean upstream[Axis]={upstreamX,upstreamY,upstreamZ}
         "true, if each Cartesian axis uses upstream discretization";
-      final parameter Boolean setVel[Axis]={setXVel,setYVel,setZVel}
+      final parameter Boolean setVel[Axis]={setVelX,setVelY,setVelZ}
         "true, if each component of velocity is prescribed";
       final parameter FCSys.Subregions.Species.BaseClasses.InitMethLinMom
         initMethLin[Axis]={initMethX,initMethY,initMethZ}
         "Initialization methods for linear momentum";
 
       // Efforts and flows of the conditional faces
-      Q.Potential p_face[Axis, Side](each start=p_IC)
-        "Static pressures at the faces";
+      Q.Potential mu_face[Axis, Side](each start=p_IC)
+        "Electrochemical potentials at the faces";
       Q.Current Ndot_face[Axis, Side](start=outerProduct(I_IC, {1,-1}))
         "Currents into the faces";
-      Q.Velocity phi_face[Axis, Side, Orientation](start={fill({phi_IC[cartWrap(
+      Q.Velocity tau_face[Axis, Side, Orientation](start={fill({phi_IC[cartWrap(
             axis + orientation)] for orientation in Orientation}, 2) for axis
              in Axis}) "Transverse velocities at the faces";
-      Q.Force mPhidot_face[Axis, Side, Orientation]
+      Q.Force APdot_face[Axis, Side, Orientation]
         "Transverse forces on the faces";
       Q.TemperatureAbsolute T_face[Axis, Side](each start=T_IC)
         "Temperatures at the faces";
@@ -7158,27 +7062,27 @@ The default global default settings will be used for the current simulation.",
 
       /* This is commented out because it may be annoying.
   // Warn when index reduction may be necessary.
-  if abs(beta_Phi) > Modelica.Constants.small then
+  if abs(alpha_tau) > Modelica.Constants.small then
     Modelica.Utilities.Streams.print("Warning: The resistivity to exchange of linear momentum is zero.
     This may directly couple the velocities of species within a subregion.
-    Consider setting the value of beta_Phi as final (if not already) so that index reduction may be performed.");
+    Consider setting the value of alpha_tau as final (if not already) so that index reduction may be performed.");
   end if;
-  if abs(beta_S) > Modelica.Constants.small then
+  if abs(alpha_Sdot) > Modelica.Constants.small then
     Modelica.Utilities.Streams.print("Warning: The thermal resistance to exchange is zero.
     This may directly couple the temperatures of species within a subregion.
-    Consider setting the value of beta_S as final (if not already) so that index reduction may be performed.");
+    Consider setting the value of alpha_Sdot as final (if not already) so that index reduction may be performed.");
   end if;
-  if abs(gamma_N) < Modelica.Constants.small then
+  if abs(alpha_Ndot) < Modelica.Constants.small then
     Modelica.Utilities.Streams.print("Warning: The material resistance to transport is zero.
-    This may directly couple the density within neighboring subregions.\nConsider setting the value of gamma_N as final (if not already) so that index reduction may be performed.");
+    This may directly couple the density within neighboring subregions.\nConsider setting the value of alpha_Ndot as final (if not already) so that index reduction may be performed.");
   end if;
-  if abs(gamma_Phi) > Modelica.Constants.small then
+  if abs(alpha_tau) > Modelica.Constants.small then
     Modelica.Utilities.Streams.print("Warning: The resistance to transport of linear momentum is zero.
-    This may directly couple the velocity within neighboring subregions.\nConsider setting the value of gamma_Phi as final (if not already) so that index reduction may be performed.");
+    This may directly couple the velocity within neighboring subregions.\nConsider setting the value of alpha_tau as final (if not already) so that index reduction may be performed.");
   end if;
-  if abs(gamma_S) > Modelica.Constants.small then
+  if abs(alpha_Sdot) > Modelica.Constants.small then
     Modelica.Utilities.Streams.print("Warning: The thermal resistance to transport is zero.
-    This may directly couple the temperature within neighboring subregions.\nConsider setting the value of gamma_S as final (if not already) so that index reduction may be performed.");
+    This may directly couple the temperature within neighboring subregions.\nConsider setting the value of alpha_Sdot as final (if not already) so that index reduction may be performed.");
   end if;
   // Note:  According to the Modelica 3.0 specification (and later), these
   // checks should be possible using the assert() command with
@@ -7235,7 +7139,7 @@ The default global default settings will be used for the current simulation.",
 
       // Linear momentum
       for axis in Axis loop
-        if inclLin[axis] then
+        if inclVel[axis] then
           if setVel[axis] then
             // Ensure that a condition is selected, since the state is
             // prescribed.
@@ -7334,14 +7238,14 @@ The default global default settings will be used for the current simulation.",
             Data.m*chemical.Ndot,
             chemical.phi,
             phi) "Advection";
-      beta_Phi*inert.mPhidot = 2*Lstar*Data.m*(inert.phi - phi) "Diffusion";
+      alpha_tau*inert.mPhidot = Data.m*2*Lstar*(inert.phi - phi) "Diffusion";
       //
       // Energy
       chemical.Hdot = semiLinear(
             chemical.Ndot,
             chemical.hbar*Data.m,
             h) "Advection";
-      beta_S*inert.Sdot = 2*Lstar*(inert.T/T - 1) "Diffusion";
+      alpha_Sdot*inert.Sdot = 2*Lstar*(inert.T/T - 1) "Diffusion";
 
       // Transport
       for axis in Axis loop
@@ -7352,31 +7256,33 @@ The default global default settings will be used for the current simulation.",
               yPositive.thermoOpt == ThermoOpt.OpenDiabatic; zNegative.thermoOpt
                == ThermoOpt.OpenDiabatic, zPositive.thermoOpt == ThermoOpt.OpenDiabatic]
               [axis, side] then
-            p*gamma_N*(Ndot_face[axis, side] - inSign(side)*(if inclLin[axis]
-               then I[linAxes[axis]] else 0)) = Lstar_trans[axis]*(p_face[axis,
-              side] - p)*(if upstream[axis] and inclLin[axis] then (exp(inSign(
-              side)*I[linAxes[axis]]*gamma_N/(2*Lstar_trans[axis])) + 1) else 2);
+            T*alpha_Ndot*(Ndot_face[axis, side] - inSign(side)*(if inclVel[axis]
+               then I[linAxes[axis]] else 0)) = Lstar_trans[axis]*(mu_face[axis,
+              side] - mu)*(if upstream[axis] and inclVel[axis] then (exp(inSign(
+              side)*I[linAxes[axis]]*alpha_Ndot/(2*Lstar_trans[axis])) + 1)
+               else 2);
           else
-            p_face[axis, side] = 0;
+            mu_face[axis, side] = mu;
             Ndot_face[axis, side] = 0;
           end if;
 
           // Linear momentum
           for orientation in Orientation loop
-            if {{{xNegative.viscousY,xNegative.viscousZ},{xPositive.viscousY,
-                xPositive.viscousZ}},{{yNegative.viscousZ,yNegative.viscousX},{
-                yPositive.viscousZ,yPositive.viscousX}},{{zNegative.viscousX,
-                zNegative.viscousY},{zPositive.viscousX,zPositive.viscousY}}}[
-                axis, side, orientation] then
-              gamma_Phi*mPhidot_face[axis, side, orientation]/Data.m =
-                Lstar_trans[axis]*(phi_face[axis, side, orientation] - (if
-                inclLin[cartWrap(axis + orientation)] then phi[linAxes[cartWrap(
-                axis + orientation)]] else 0))*(if upstream[axis] and inclLin[
-                axis] then (exp(inSign(side)*I[linAxes[axis]]*gamma_Phi/(2*
-                Lstar_trans[axis])) + 1) else 2);
+            if {{{xNegative.slipY,xNegative.slipZ},{xPositive.slipY,xPositive.slipZ}},
+                {{yNegative.slipZ,yNegative.slipX},{yPositive.slipZ,yPositive.slipX}},
+                {{zNegative.slipX,zNegative.slipY},{zPositive.slipX,zPositive.slipY}}}
+                [axis, side, orientation] then
+              APdot_face[axis, side, orientation]/Data.m = alpha_tau*
+                Lstar_trans[axis]*(tau_face[axis, side, orientation] - (if
+                inclVel[cartWrap(axis + orientation)] then phi[linAxes[cartWrap(
+                axis + orientation)]] else 0))*(if upstream[axis] and inclVel[
+                axis] then (exp(inSign(side)*I[linAxes[axis]]*alpha_tau/(2*
+                Lstar_trans[axis])) + 1) else 2) "**";
             else
-              phi_face[axis, side, orientation] = 0;
-              mPhidot_face[axis, side, orientation] = 0;
+              tau_face[axis, side, orientation] = (if inclVel[cartWrap(axis +
+                orientation)] then inSign(side)*A[axis]*phi[linAxes[cartWrap(
+                axis + orientation)]] else 0);
+              APdot_face[axis, side, orientation] = 0;
             end if;
           end for;
 
@@ -7390,11 +7296,12 @@ The default global default settings will be used for the current simulation.",
                or zNegative.thermoOpt == ThermoOpt.ClosedDiabatic, zPositive.thermoOpt
                == ThermoOpt.OpenDiabatic or zPositive.thermoOpt == ThermoOpt.ClosedDiabatic]
               [axis, side] then
-            T*gamma_S*Sdot_face[axis, side] = 2*Lstar_trans[axis]*(T_face[axis,
-              side] - T)*(if upstream[axis] and inclLin[axis] then (exp(inSign(
-              side)*I[linAxes[axis]]*gamma_S/(2*Lstar_trans[axis])) + 1) else 2);
+            T*k[axis]*alpha_Sdot*Sdot_face[axis, side] = 2*Lstar_trans[axis]*(
+              T_face[axis, side] - T)*(if upstream[axis] and inclVel[axis]
+               then (exp(inSign(side)*I[linAxes[axis]]*alpha_Sdot/(2*
+              Lstar_trans[axis])) + 1) else 2);
           else
-            T_face[axis, side] = 0;
+            T_face[axis, side] = T;
             Sdot_face[axis, side] = 0;
           end if;
         end for;
@@ -7470,12 +7377,12 @@ The default global default settings will be used for the current simulation.",
              == ThermoOpt.OpenDiabatic,yPositive.thermoOpt == ThermoOpt.OpenDiabatic},
             {zNegative.thermoOpt == ThermoOpt.OpenDiabatic,zPositive.thermoOpt
              == ThermoOpt.OpenDiabatic}}[cartAxes[axis], side] then inSign(side)
-            *((p_face[cartAxes[axis], side] - p)*A[cartAxes[axis]] + Data.m*
-            Data.v_pT(p_face[cartAxes[axis], side], T_face[cartAxes[axis], side])
-            *Ndot_face[cartAxes[axis], side]^2/A[cartAxes[axis]]) else 0 for
-            side in Side) + sum(Data.m*phi_face[cartWrap(cartAxes[axis] -
+            *((mu_face[cartAxes[axis], side] - p)*A[cartAxes[axis]] + Data.m*
+            Data.v_pT(mu_face[cartAxes[axis], side], T_face[cartAxes[axis],
+            side])*Ndot_face[cartAxes[axis], side]^2/A[cartAxes[axis]]) else 0
+            for side in Side) + sum(Data.m*tau_face[cartWrap(cartAxes[axis] -
             orientation), :, orientation]*Ndot_face[cartWrap(cartAxes[axis] -
-            orientation), :] + Sigma(mPhidot_face[cartWrap(cartAxes[axis] -
+            orientation), :] + Sigma(APdot_face[cartWrap(cartAxes[axis] -
             orientation), :, orientation]) for orientation in Orientation)
             "Conservation of linear momentum";
         end if;
@@ -7532,10 +7439,10 @@ The default global default settings will be used for the current simulation.",
            == ThermoOpt.OpenDiabatic, yPositive.thermoOpt == ThermoOpt.OpenDiabatic;
           zNegative.thermoOpt == ThermoOpt.OpenDiabatic, zPositive.thermoOpt
            == ThermoOpt.OpenDiabatic][axis, side] then (Data.h0_T(T_face[axis,
-          side]) + Data.m*((Data.v_pT(p_face[axis, side], T_face[axis, side])*
-          Ndot_face[axis, side]/A[axis])^2 + phi_face[axis, side, :]*phi_face[
+          side]) + Data.m*((Data.v_pT(mu_face[axis, side], T_face[axis, side])*
+          Ndot_face[axis, side]/A[axis])^2 + tau_face[axis, side, :]*tau_face[
           axis, side, :]) - h)*Ndot_face[axis, side] else 0 for side in Side)
-          for axis in Axis) + sum(phi_face .* mPhidot_face) + sum(T_face .*
+          for axis in Axis) + sum(tau_face .* APdot_face) + sum(T_face .*
           Sdot_face) "Conservation of energy";
         // Note:  Although it is mathematically equivalent,
         // der(Data.p_vT(V/N, T)) is used instead of der(inert.p) or der(p)
@@ -7634,16 +7541,18 @@ The default global default settings will be used for the current simulation.",
     quantity, then index reduction is necessary.</li>
     <li>Even if an initialization parameter is not selected for explicit use,
     it may be used a guess value.</li>
-    <li>The <b><i>k</i></b> factor can be used to account for reduced cross-sectional area
-    (e.g., porosity).  It affects all the transport coefficients (for material, linear momentum, and entropy) equally.
-    Its components are unity by default.</li>
-    <li>By default, only the x-axis component of linear momentum is included.  Also by default,
+    <li>The <b><i>k</i></b> factor can be used to account for the effects of porosity and tortousity. 
+    It increases directly with effective area and inversely with effective length. 
+    The factor may reflect anisotropic properties; it is a vector with independent components for each axis.
+    It affects all of the diffusive transport rates (material, transverse displacement, 
+    and entropy) by the same factor.  By default, its components are unity.</li>
+    <li>By default, only the x-axis component of velocity is included.  Also by default,
     only material and thermal transport are included through the x-axis faces and only
-    x-direction momentum is included through the y- and z-axis faces.</li>
+    x-axis displacement is included through the y- and z-axis faces.</li>
     <li>If a state is prescribed, then the
     associated initial condition (IC) will be applied for all time.  The
     corresponding conservation equation will not be imposed.
-    If <code>setPartNum</code>, <code>setXVel</code>, <code>setYVel</code>, or <code>setZVel</code> is
+    If <code>setPartNum</code>, <code>setVelX</code>, <code>setVelY</code>, or <code>setVelZ</code> is
     <code>true</code>, then there will generally be a secondary effect on the energy conservation equation
     and thus temperature.
     In that case, it may be helpful to set <code>setTemp</code> to <code>true</code> so that
@@ -7674,7 +7583,7 @@ The default global default settings will be used for the current simulation.",
     only the electrochemical double-layer state, &Delta;&mu;, if applicable).  If a species
     is included with this setting, then there must be an external reference
     for electrochemical potential (i.e., ground).  There must be at least one other
-    species in the subregion or the velocity must be set (e.g., <code>setXVel = true</code>).</li>
+    species in the subregion or the velocity must be set (e.g., <code>setVelX = true</code>).</li>
     </p>
 
     <p>In order to reduce numerical error during simulation, enthalpy of formation
@@ -7690,17 +7599,17 @@ The default global default settings will be used for the current simulation.",
     are usually
     much shorter than the time span of interest.
     This assumption can be applied in the model by setting the thermal exchange resistivities
-    (&beta;<sub><i>S</i></sub>) of the species as <code>final</code> parameters equal to zero.
+    (&alpha;<sub><i>S&#775;</i></sub>) of the species as <code>final</code> parameters equal to zero.
     Then, the translator can perform index reduction and retain only one
     state associated with temperature.  However, this will likely lead to nonlinear systems of equations
     and may reduce the performance of the simulation. Likewise, if the reaction rates are very fast with respect to the
     observed time span,
-    then the reaction resistivities (&beta;<sub><i>N</i></sub>) of the species may be redeclared as
+    then the reaction resistivities (&alpha;<sub><i>N</i></sub>) of the species may be redeclared as
     <code>final</code> parameters and set to zero.  A similar situation applies to
-    momentum exchange (&beta;<sub>&Phi;</sub>), material transport (&gamma;<sub><i>N</i></sub>),
+    momentum exchange (&alpha;<sub>&tau;</sub>), material transport (&alpha;<sub><i>N&#775;</i></sub>),
     compressive momentum transport
-    (&gamma;<sub>&#8214;</sub>), transverse momentum transport (&gamma;<sub>&Phi;</sub>),
-    and thermal transport (&gamma;<sub><i>S</i></sub>).</p>
+    (&alpha;<sub>&#8214;</sub>), transverse momentum transport (&alpha;<sub>&tau;</sub>),
+    and thermal transport (&alpha;<sub><i>S&#775;</i></sub>).</p>
 
     <p>In the variables that relate to transport,
     the first index is the axis and the second index is the side.  The sides
@@ -7875,13 +7784,10 @@ The default global default settings will be used for the current simulation.",
     parameter Integer n_lin=1
       "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
       annotation (Evaluate=true, HideResult=true);
-    parameter Q.Number alpha(
-      min=0,
-      max=1) = 0.5 "<html>Symmetry factor (&alpha;)</html>";
     parameter Q.Number epsilonPerT=0
       "<html>Additional activation barrier (&epsilon;/<i>T</i> )</html>";
-    input Q.Resistance betaPerLstar=10/U.A
-      "<html>Quotient of resistivity and characteristic length (&beta;/<i>L</i><sup>&#9733;</sup>)</html>"
+    input Q.Resistance alphaPerLstar=10/U.A
+      "<html>Quotient of resistivity and characteristic length (&alpha;/<i>L</i><sup>&#9733;</sup>)</html>"
       annotation (Dialog);
 
     Real nu[n_spec]=Chemistry.stoich(chemical.formula)
@@ -7956,7 +7862,7 @@ The default global default settings will be used for the current simulation.",
     it is included in the inert connections among species
     (see the <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSpecies\">PartialSpecies</a> model).<p>
 
-    <p>The parameter &beta;/<i>L</i><sup>&#9733;</sup> is the reciprocal of exchange current density.</p>
+    <p>The parameter &alpha;/<i>L</i><sup>&#9733;</sup> is the reciprocal of exchange current density.</p>
 
     <p>Assumptions:<ul>
     <li>No storage of material, linear momentum, or energy</li></ul>
@@ -8077,7 +7983,7 @@ value (<code>p</code>).</p>
         annotation (Dialog(group="Geometry"), choices(__Dymola_checkBox=true));
 
       // Assumptions about components of linear momentum
-      parameter Boolean inclLinX=true "X" annotation (
+      parameter Boolean inclVelX=true "X" annotation (
         Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
@@ -8085,7 +7991,7 @@ value (<code>p</code>).</p>
           tab="Assumptions",
           group="Axes with linear momentum included",
           compact=true));
-      parameter Boolean inclLinY=false "Y" annotation (
+      parameter Boolean inclVelY=false "Y" annotation (
         Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
@@ -8093,7 +7999,7 @@ value (<code>p</code>).</p>
           tab="Assumptions",
           group="Axes with linear momentum included",
           compact=true));
-      parameter Boolean inclLinZ=false "Z" annotation (
+      parameter Boolean inclVelZ=false "Z" annotation (
         Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
@@ -8159,7 +8065,7 @@ value (<code>p</code>).</p>
         final setVolume=setVolume) "Model to establish space for species"
         annotation (Placement(transformation(extent={{-16,-16},{16,16}})));
     protected
-      final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
+      final parameter Integer n_lin=countTrue({inclVelX,inclVelY,inclVelZ})
         "Number of components of linear momentum" annotation (Evaluate=true);
 
       annotation (

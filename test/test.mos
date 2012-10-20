@@ -1,0 +1,58 @@
+// List of simulations to run
+// The first column contains the models to be tested (in Modelica dot
+// notation).  The second column contains the stop times of the simulations (as
+// strings).
+list = ["FCSys.BCs.Examples.Defaults", "1";
+        //"FCSys.BCs.Examples.FaceBC", "1;"
+        //"FCSys.BCs.Examples.FaceBCMixtures", "1";
+        "FCSys.BCs.Examples.Router", "1";
+        //"FCSys.BCs.Examples.Adapteminus", "1";
+        //"FCSys.BCs.Examples.AdaptFluid", "1";
+        //"FCSys.Assemblies.Examples.Cell", "1";
+        //"FCSys.Assemblies.Examples.CellProfile", "1";
+        //"FCSys.Assemblies.Examples.Polarization", "1";
+        //"FCSys.Assemblies.Examples.CellProfileIO", "1";
+        //"FCSys.Assemblies.Examples.CellModelica", "1";
+        "FCSys.Regions.Examples.FPToFP", "10";
+        "FCSys.Regions.Examples.GDLToGDL", "10";
+        "FCSys.Regions.Examples.CLToCL", "500";
+        "FCSys.Regions.Examples.AnFP", "10";
+        "FCSys.Regions.Examples.AnGDL", "10";
+        "FCSys.Regions.Examples.AnCL", "500";
+        "FCSys.Regions.Examples.PEM", "10";
+        "FCSys.Regions.Examples.CaCL", "500";
+        "FCSys.Regions.Examples.CaGDL", "10";
+        "FCSys.Regions.Examples.CaFP", "10";
+        "FCSys.Subregions.Examples.SubregionH2", "10";
+        "FCSys.Subregions.Examples.SubregionHOR", "1000";
+        "FCSys.Subregions.Examples.SubregionORR", "1000";
+        "FCSys.Subregions.Examples.SubregionsH2", "1";
+        "FCSys.Subregions.Examples.SubregionsCAndH2", "1";
+        "FCSys.Subregions.Examples.SubregionsCAndH2AndH2O", "6";
+        "FCSys.Subregions.Examples.SubregionsCAndN2", "20";
+        "FCSys.Subregions.Examples.SubregionsCAndO2", "20";
+        "FCSys.Subregions.Examples.SubregionsC19HF37O5SAndH2OAndHplus", "1";
+        "FCSys.Subregions.Examples.SubregionsCAndeminus", "1";
+        "FCSys.Subregions.Examples.ThermalConduction", "298.15";
+        "FCSys.Subregions.Examples.ThermalConductionConvection", "200";
+        "FCSys.Subregions.Examples.ReactionRamp", "36000";
+        "FCSys.Subregions.Examples.Reaction", "100";
+        "FCSys.Subregions.Examples.SpeciesH2", "10";
+        "FCSys.Subregions.Examples.Specieseminus", "10";
+        "FCSys.Subregions.Examples.SubregionsCell", "4";
+        "FCSys.Characteristics.Examples.TestCorrelations", "1";
+        "FCSys.Units.Evaluate", "1";
+        "FCSys.Quantities.Examples.TestQuantities", "1";
+        "FCSys.BaseClasses.Utilities.Examples.TranslatePoly", "1"
+       ];
+
+// Test the functions.
+FCSys.BaseClasses.Utilities.Examples.TestFunctions();
+
+// Test the models (low to high level).
+for i in size(list, 1):-1:1 loop
+    Modelica.Utilities.Streams.print("Testing " + list[i, 1] + " (" + String(size(list, 1) - i + 1) + " of " + String(size(list, 1)) + ")...");
+    ""; // This is necessary to flush the print buffer.
+    stopTime= Modelica.Utilities.Strings.scanReal(list[i, 2]);
+    assert(simulateModel(list[i, 1], stopTime=stopTime), "Model " + list[i, 1] + " failed.");
+end for;

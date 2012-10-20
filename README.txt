@@ -1,6 +1,3 @@
-**Note: Currently, the core code is not available here, but it will be uploaded
-upon legal/licensing approval.
-
 This library contains models of proton exchange membrane fuel cells in the
 Modelica language.  There are utilities for plotting and analysis in
 resources/source/Python.  More information is available in the documentation,

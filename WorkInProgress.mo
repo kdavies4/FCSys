@@ -15,26 +15,26 @@ package WorkInProgress "Incomplete classes under development"
     // listed first in the parameter dialog.
     extends Subregions.BaseClasses.PartialSubregion;
 
-    replaceable FCSys.Subregions.Phases.Gas gas(inclH2O=true, final inclLin={
-          inclLinX,inclLinY,inclLinZ}) "Gas" annotation (Dialog(group="Phases"),
+    replaceable FCSys.Subregions.Phases.Gas gas(inclH2O=true, final inclVel={
+          inclVelX,inclVelY,inclVelZ}) "Gas" annotation (Dialog(group="Phases"),
         Placement(transformation(extent={{-10,-10},{10,10}})));
 
     // **Currently, both reactions must be included at this level.
 
-    replaceable FCSys.Subregions.Phases.Graphite graphite(final inclLin={
-          inclLinX,inclLinY,inclLinZ}) "Graphite" annotation (Dialog(group=
+    replaceable FCSys.Subregions.Phases.Graphite graphite(final inclVel={
+          inclVelX,inclVelY,inclVelZ}) "Graphite" annotation (Dialog(group=
             "Phases"), Placement(transformation(extent={{-10,-10},{10,10}})));
 
-    replaceable FCSys.Subregions.Phases.Ionomer ionomer(final inclLin={inclLinX,
-          inclLinY,inclLinZ},C19HF37O5S(initMethTemp=if graphite.inclC then
+    replaceable FCSys.Subregions.Phases.Ionomer ionomer(final inclVel={inclVelX,
+          inclVelY,inclVelZ},C19HF37O5S(initMethTemp=if graphite.inclC then
             InitMethScalar.None else InitMethScalar.Temperature,T(stateSelect=
               if graphite.inclC then StateSelect.never else StateSelect.prefer)))
       "Ionomer" annotation (Dialog(group="Phases"), Placement(transformation(
             extent={{-10,-10},{10,10}})));
     // **temp stateselect, initmeth
     /*
-  replaceable FCSys.Subregions.Phases.Liquid liquid(final inclLin={inclLinX,
-        inclLinY,inclLinZ})  "Liquid" annotation (
+  replaceable FCSys.Subregions.Phases.Liquid liquid(final inclVel={inclVelX,
+        inclVelY,inclVelZ})  "Liquid" annotation (
 
     Dialog(group="Phases"),
     Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -390,19 +390,23 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
     <p>**
     </p>
     </html>"),
-      Icon(graphics={Line(
-              points={{-60,0},{-10,0}},
-              color={208,104,0},
-              smooth=Smooth.None),Line(
-              points={{10,0},{60,0}},
-              color={208,104,0},
-              smooth=Smooth.None),Line(
-              points={{-10,36},{-10,-36}},
-              color={208,104,0},
-              smooth=Smooth.None),Line(
-              points={{10,36},{10,-36}},
-              color={208,104,0},
-              smooth=Smooth.None)}),
+      Icon(graphics={
+          Line(
+            points={{-60,0},{-10,0}},
+            color={208,104,0},
+            smooth=Smooth.None),
+          Line(
+            points={{10,0},{60,0}},
+            color={208,104,0},
+            smooth=Smooth.None),
+          Line(
+            points={{-10,36},{-10,-36}},
+            color={208,104,0},
+            smooth=Smooth.None),
+          Line(
+            points={{10,36},{10,-36}},
+            color={208,104,0},
+            smooth=Smooth.None)}),
       Diagram(graphics));
   end Capacitor;
 
@@ -676,21 +680,25 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
 
     // Conservation of material
     der(N)/U.s = chemical.Ndot;
-    annotation (defaultComponentName="species", Icon(graphics={Rectangle(
-              extent={{-100,40},{100,-40}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Line(
-              points={{-100,-40},{100,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{-100,-40},{-100,40},{100,40},{100,-40}},
-              pattern=LinePattern.None,
-              smooth=Smooth.None),Text(
-              extent={{-100,-20},{100,20}},
-              textString="%name",
-              lineColor={0,0,0})}));
+    annotation (defaultComponentName="species", Icon(graphics={
+          Rectangle(
+            extent={{-100,40},{100,-40}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Line(
+            points={{-100,-40},{100,-40}},
+            color={0,0,0},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{-100,-40},{-100,40},{100,40},{100,-40}},
+            pattern=LinePattern.None,
+            smooth=Smooth.None),
+          Text(
+            extent={{-100,-20},{100,20}},
+            textString="%name",
+            lineColor={0,0,0})}));
   end SimpleSpecies;
   annotation (Commands(file="resources/scripts/units-values.mos"
         "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate)."));

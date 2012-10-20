@@ -8,7 +8,7 @@
 #*.mo text
 #*.mos text
 #*.sh text
-#*.py text
+#*.py eol=crlf
 #package.order text
 
 # Declare files that will always have CRLF line endings on checkout.
