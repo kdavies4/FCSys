@@ -6,11 +6,12 @@
 branch=`git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3`
 
 # Remove some of the help files.
-rm help/FCSSys.Blocks*
-rm help/FCSSys_Blocks*
-rm help/*Figures*.html
-rm help/FCSSys.Systems*
-rm help/FCSSys_Systems*
+rm help/FCSSys.Blocks*.png
+rm help/FCSSys_Blocks*.html
+rm help/FCSSys.Figures*.png
+rm help/FCSSys_Figures*.html
+rm help/FCSSys.Systems*.png
+rm help/FCSSys_Systems*.html
 rm help/*WorkInProgress*
 
 # Clean up the help files (for local browsing as well as web).
@@ -27,11 +28,13 @@ cp -f resources/www/modelicaDoc.css stylesheets
 
 # Update the images.
 rm images/*
-cp help/*png images/
 for f in `find ./resources/images -iname *.png -o -iname *.svg -o -iname *.ico -o -iname *.gif`
 do
     cp $f images/
 done
+cp help/*png images/
+# This replaces resources/images/FCSys.Subassemblies.Cells.CellD.png (copied
+# above), which is lower resolution.
 
 # Copy and process the HTML files.
 cp help/*.html ./

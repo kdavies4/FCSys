@@ -70,3 +70,7 @@ resources/source/Python/00-autoformat.sh
 # Eclipse project files
 lib/Python/.project
 lib/Python/.pydevproject
+
+# Files for Github web pages
+images
+javascripts
