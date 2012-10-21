@@ -72,5 +72,5 @@ lib/Python/.project
 lib/Python/.pydevproject
 
 # Files for Github web pages
-images
+./images/
 javascripts
