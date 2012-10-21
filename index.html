@@ -18,9 +18,9 @@
   <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
   <li><a href="FCSys_BCs.html">BCs</a></li>
   <li><a href="FCSys_Sensors.html">Sensors</a></li>
-  <li><a href="FCSys_Subassemblies.html">Subassemblies</a></li>
+  <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
   <li><a href="FCSys_Regions.html">Regions</a></li>
-  <li><a href="FCSys_Regions.html">Subregions</a></li>
+  <li><a href="FCSys_Subregions.html">Subregions</a></li>
   <li><a href="FCSys_Connectors.html">Connectors</a></li>
   <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
   <li><a href="FCSys_Units.html">Units</a></li>
@@ -47,11 +47,11 @@
     <p><a href="index.html#FCSys">FCSys</a> is a library of
     declarative, dynamic, and flexible models of proton exchange membrane
     fuel cells (PEMFCs) in the <a href = "http://www.modelica.org/">Modelica</a>
-    language.  The dynamics include material, momentum, thermal, and electrical 
-    effects.  There are options to adjust the assumptions, spatial discretization 
-    and dimensionality (1D, 2D, or 3D), and the present chemical species and material 
+    language.  The dynamics include material, momentum, thermal, and electrical
+    effects.  There are options to adjust the assumptions, spatial discretization
+    and dimensionality (1D, 2D, or 3D), and the present chemical species and material
     phases.</p>
-    
+
     <p>A fuel cell is an electrochemical device which is similar to a battery
     except that the reactants (fuel and oxidant) are externally stored or drawn
     from the environment.  The electrochemical reactions of a PEMFC are:
@@ -105,8 +105,12 @@
         </td>
       </tr>
     </table></p>
-    
-    <p><a href="#Fig1">Figure 1</a> shows the seven primary physical layers of a typical PEMFC.  As
+
+    <p><a href="#Fig1">Figure 1</a> shows the seven primary layers of a typical PEMFC.
+    Fluid enters and exits the cell through channels in the flow plates (FPs).  It spreads through
+    the gas diffusion diffusion layers (GDLs) and reacts in the catalyst layers (CLs).  The
+    proton exchange membrane (PEM) prevents electronic transport; therefore, electrons must
+    travel an external circuit to sustain the net reaction.    As
     shown in <a href="#Fig2">Figure 2</a>, a PEMFC model may be constructed in
     <a href="index.html#FCSys">FCSys</a> from models of the same layers.
     The model is modular; the gas diffusion and catalyst layers could be combined,
@@ -114,36 +118,36 @@
 
     <a name="Fig1"></a>
     <p align=center><img src="images/cell.svg" width=450>
-    <br>Figure 1: Physical layers of a PEMFC</p>
+    <br>Figure 1: Layers and primary flows of a PEMFC</p>
 
     <a name="Fig2"></a>
-    <!-- <p align=center><img width=900 src="../help/images/FCSys.Subassemblies.Cells.CellD.png"> -->
-    <p align=center><a href="FCSys_Subassemblies_Cells.html#FCSys.Subassemblies.Cells.Cell"><img src="images/FCSys.Subassemblies.Cells.CellD.png"></a>
-    <br>Figure 2: Diagram of the PEMFC model (<a href="FCSys_Subassemblies_Cells.html#FCSys.Subassemblies.Cells.Cell">FCSys.Subassemblies.Cells.Cell</a>).</p>
+    <!--<p align=center><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600 width=600>-->
+    <p align=center><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell"><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600></a>
+    <br>Figure 2: Diagram of the PEMFC model (<a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">FCSys.Assemblies.Cells.Cell</a>).</p>
 
-    <p>The models describe the advection, diffusion, and storage of 
+    <p>The models describe the advection, diffusion, and storage of
     material, linear momentum, and energy.  Upstream
     discretization is applied, but it is regularized and reduces to pure
-    diffusion when the bulk velocity is zero.  The transport equations do 
+    diffusion when the bulk velocity is zero.  The transport equations do
     not use the <a href = "http://www.modelica.org/">Modelica</a>
     <code>stream</code> operator since both diffusion and advection are
     important in fuel cells.</p>
 
-    <p>Each layer may be divided into a number of rectilinear regions.  Storage and 
-    transport phenomena are co-located (e.g., no distinction between a vessel and a 
-    pipe).  Regions may be directly connected without producing nonlinear systems of 
-    equations, and species may be independently included in each region.  This is 
-    different than 
+    <p>Each layer may be divided into a number of rectilinear regions.  Storage and
+    transport phenomena are co-located (e.g., no distinction between a vessel and a
+    pipe).  Regions may be directly connected without producing nonlinear systems of
+    equations, and species may be independently included in each region.  This is
+    different than
     <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Media.html#Modelica.Media">Modelica.Media</a>,
     where each media model contains a predefined set of species.</p>
 
     <p>A cell may simulated under specified boundary conditions, as shown in
-    <a href="#Fig3">Figure 3</a>.  Adapters are available to interface with 
+    <a href="#Fig3">Figure 3</a>.  Adapters are available to interface with
     <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Fluid.html#Modelica.Fluid">Modelica.Fluid</a>.</p>
 
     <a name="Fig3"></a>
-    <p align=center><a href="FCSys_Subassemblies_Cells_Examples.html#FCSys.Subassemblies.Cells.Examples.CellProfile"><img src="images/FCSys.Subassemblies.Cells.Examples.CellProfileD.png"></a>
-    <br>Figure 3: Diagram of a test model (<a href="FCSys_Subassemblies_Cells_Examples.html#FCSys.Subassemblies.Cells.Examples.CellProfile">FCSys.Subassemblies.Cells.Examples.CellProfile</a>).</p>
+    <p align=center><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile"><img src="images/FCSys.Assemblies.Cells.Examples.CellProfileD.png"></a>
+    <br>Figure 3: Diagram of a test model (<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile">FCSys.Assemblies.Cells.Examples.CellProfile</a>).</p>
 
     <p><b>Licensed by Kevin Davies under the Modelica License 2</b>
     <br>Copyright 2007&ndash;2012, Kevin Davies.</p>
@@ -163,15 +167,15 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 <tr><td><img src="images/FCSys.UsersGuideS.png" alt="FCSys.UsersGuide" width=20  height=20 align=top>&nbsp;<a href="FCSys_UsersGuide.html#FCSys.UsersGuide">UsersGuide</a>
 </td><td>User&#39;s Guide</td></tr>
 <tr><td><img src="images/FCSys.BCsS.png" alt="FCSys.BCs" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs.html#FCSys.BCs">BCs</a>
-</td><td>Models that impose boundary conditions (including actuators)</td></tr>
+</td><td>Models for boundary conditions</td></tr>
 <tr><td><img src="images/FCSys.SensorsS.png" alt="FCSys.Sensors" width=20  height=20 align=top>&nbsp;<a href="FCSys_Sensors.html#FCSys.Sensors">Sensors</a>
-</td><td>Models that provide outputs representing operating conditions</td></tr>
-<tr><td><img src="images/FCSys.SubassembliesS.png" alt="FCSys.Subassemblies" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subassemblies.html#FCSys.Subassemblies">Subassemblies</a>
-</td><td>Direct assemblies of dissimilar arrays of regions (e.g., cells)</td></tr>
-<tr><td><img src="images/FCSys.SubassembliesS.png" alt="FCSys.Regions" width=20  height=20 align=top>&nbsp;<a href="FCSys_Regions.html#FCSys.Regions">Regions</a>
+</td><td>Models to measure conditions</td></tr>
+<tr><td><img src="images/FCSys.AssembliesS.png" alt="FCSys.Assemblies" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies.html#FCSys.Assemblies">Assemblies</a>
+</td><td>Combinations of regions (e.g., cells)</td></tr>
+<tr><td><img src="images/FCSys.AssembliesS.png" alt="FCSys.Regions" width=20  height=20 align=top>&nbsp;<a href="FCSys_Regions.html#FCSys.Regions">Regions</a>
 </td><td>3D arrays of discrete, interconnected subregions</td></tr>
-<tr><td><img src="images/FCSys.SubassembliesS.png" alt="FCSys.Subregions" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions">Subregions</a>
-</td><td>Discrete subregions for multi-species transport, exchange, and storage</td></tr>
+<tr><td><img src="images/FCSys.AssembliesS.png" alt="FCSys.Subregions" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions">Subregions</a>
+</td><td>Control volumes with multi-species transport, exchange, and storage</td></tr>
 <tr><td><img src="images/FCSys.ConnectorsS.png" alt="FCSys.Connectors" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a>
 </td><td>Declarative and imperative connectors</td></tr>
 <tr><td><img src="images/FCSys.CharacteristicsS.png" alt="FCSys.Characteristics" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics.html#FCSys.Characteristics">Characteristics</a>
@@ -189,6 +193,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 </div>
 <div class="footer">
         &copy; Copyright 2012, Kevin Davies.
-      Last updated Sat Oct 20 09:17:25 2012.
-    </div></body>
+      Last updated Tue Oct 30 13:26:43 2012.
+</div>
+</body>
 </html>

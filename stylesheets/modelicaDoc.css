@@ -105,6 +105,10 @@ p.sidebar-title {
 
 /* -- body styles ----------------------------------------------------------- */
 
+div.body {
+    min-height:430px; // Be sure there's room for the sidebar.
+}
+
 div.body p.caption {
     text-align: inherit;
 }
@@ -238,7 +242,7 @@ a, img {
     /* Restrict image size to width of text.
      Otherwise, very large image overlap the screen
     */
-    max-width: 865px;
+    max-width: 620px;
 }
 
 div.footer {
@@ -295,8 +299,8 @@ pre {
 }
 
 pre a {
-    color: inherit;
-    text-decoration: underline;
+    color: red;
+    text-decoration: none;
 }
 
 pre.comment {

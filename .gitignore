@@ -4,6 +4,7 @@
 *.asv
 *.bak
 .~lock*
+*.fuse_hidden*
 
 # Modelica files
 *.mo
@@ -69,6 +70,31 @@ resources/images/Regions/*.pdf
 # Georgia Tech files
 # TODO:  Ask Chris Paredis if they can be shared, and include them.
 test/Morris
+
+# Files from the main branch
+*.mo
+*.mos
+package.order
+resources/
+install/
+test/
+*.pws
+.include
+.exclude
+resources/configuration
+resources/documentation
+resources/source
+resources/scripts
+resources/www
+*.m
+*.sh
+00-process-gh-pages.py
+
+# Unused packages
+images/FCSys.Systems
+images/FCSys.Blocks
+images/FCSys.Figures
+
 
 # Internal links
 resources/source/Python/.modelica.pws
