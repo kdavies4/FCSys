@@ -1666,8 +1666,8 @@ a simple model of a variable pressure loss is needed.</p>
   end BaseClasses;
 
   annotation (Documentation(info="<html><p>
-<b>Licensed by Kevin Davies under the Modelica License 2</b><br>
-Copyright 2007&ndash;2012, Kevin Davies.
+<b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2012, Georgia Tech Research Corporation.
 </p>
 <p>
 <i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;

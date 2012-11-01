@@ -4,9 +4,11 @@ analyze the results.
 
 This file can be executed at the command line.  It will accept as an argument
 the name of a results file or a directory with multiple files.  If no arguments
-are provided, it gives a dialog to choose the file or folder. Finally, it
+are provided, it gives a dialog to choose the file or folder.  Finally, it
 provides a working session of `IPython <http://www.ipython.org/>`_ with those
-results preloaded.
+results preloaded.  pylab is directly imported (``from pylab import *``) to
+provide many functions of numpy_ and matplotlib_ (e.g., :meth:`sin` and
+:meth:`plot`)
 
 **Example:**
 
@@ -21,8 +23,7 @@ results preloaded.
 .. _Modelica: http://www.modelica.org/
 .. _Python: http://www.python.org/
 """
-from fcres import CellSimRes, CellLinRes, multi_load
-from pylab import *
+from fcres import CellSimRes, CellLinRes, multiload
 from sys import argv
 from time import sleep
 from modelicares.gui import boolbox
@@ -63,14 +64,14 @@ if __name__ == '__main__':
         if len(argv) == 1: # Prompt for a directory.
             loc = diropenbox("Choose the folder with the data file(s).",
                              default=default_path)
-            # easygui is ugly, but wx seems make the working session slow:
+            # easygui is ugly, but wx seems to make the working session slow:
             #app = App()
             #loc = DirSelector("Choose the folder with the data file(s).",
             #    defaultPath=default_path)
             if loc == '': _local_exit()
         else:
             loc = argv[1:]
-        sims, lins = multi_load(loc)
+        sims, lins = multiload(loc)
         n_sim = len(sims)
         n_lin = len(lins)
         if n_sim == 0:
@@ -101,7 +102,7 @@ if __name__ == '__main__':
             fname = fileopenbox(msg="Select a data file.",
                 default=os.path.join(default_path, "*.mat"),
                 filetypes=['*.mat'])
-            # easygui is ugly, but wx seems to slow down the working session:
+            # easygui is ugly, but wx seems to make the working session slow:
             #app = App()
             #fname = FileSelector("Select a data file.",
             #    default_path=default_path, wildcard='*.mat')
@@ -127,6 +128,7 @@ if __name__ == '__main__':
     # Open the IPython or standard Python interpreter.
     #    http://writeonly.wordpress.com/2008/09/08/embedding-a-python-shell-in-a-python-script/,
     #    accessed 11/2/2010
+    from pylab import *
     try:
         from IPython.Shell import IPShellEmbed
         IPShellEmbed(argv=['-noconfirm_exit'])()

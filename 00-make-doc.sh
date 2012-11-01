@@ -3,12 +3,13 @@
 # (http://kdavies4.github.com/FCSys/).
 
 # Remove some of the help files.
-rm help/FCSSys.Blocks*.png
-rm help/FCSSys_Blocks*.html
-rm help/FCSSys.Figures*.png
-rm help/FCSSys_Figures*.html
-rm help/FCSSys.Systems*.png
-rm help/FCSSys_Systems*.html
+rm help/FCSys.Blocks*.png
+rm help/FCSys_Blocks*.html
+cp -f help/FCSys.Figures.VolumeOrPressureI.png resources/images/Connectors/VolumeOrPressureI.png
+rm help/FCSys.Figures*.png
+rm help/FCSys_Figures*.html
+rm help/FCSys.Systems*.png
+rm help/FCSys_Systems*.html
 rm help/*WorkInProgress*
 
 # Clean up the help files (for local browsing as well as web).
@@ -20,8 +21,8 @@ stash_msg=`git stash save`
 git checkout gh-pages
 
 # Update the style sheet.
-git checkout $branch resources/www/modelicaDoc.css
-cp -f resources/www/modelicaDoc.css stylesheets
+git checkout $branch resources/documentation/ModelicaDoc.css
+cp -f resources/documentation/ModelicaDoc.css stylesheets
 
 # Update the images.
 rm images/*
@@ -29,27 +30,29 @@ for f in `find ./resources/images -iname *.png -o -iname *.svg -o -iname *.ico -
 do
     cp $f images/
 done
-cp help/*png images/
+IFS=$'\n'
+for f in `find ./resources/documentation -iname *.pdf`
+do
+    cp $f images/
+done
+cp help/*.png images/
 # This replaces resources/images/FCSys.Subassemblies.Cells.CellD.png (copied
 # above), which is lower resolution.
 
 # Copy and process the HTML files.
-cp help/*.html ./
+cp -f help/*.html ./
 mv -f FCSys.html index.html
 ./00-process-gh-pages.py
 
 # Be sure that all of the files are added to git.
 #git add images
-#for f in *.html
-#do
-#    git add $f
-#done
+#git add *.html
 
 # Update the Github web pages and return to the original branch.
 git commit -am "Auto-update github pages"
 #git push origin gh-pages
 git checkout $branch
-if [ "$stash_msg" = "No local changes to save" ]; then
+if [ "$stash_msg" != "No local changes to save" ]; then
    git stash pop
 fi
 

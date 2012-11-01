@@ -99,7 +99,7 @@ package Blocks "Imperative models (e.g., controllers and observers)"
         Documentation(revisions="<html>
 <p><ul>
 <li>[Carnegie Mellon, 2009]:<br/>Original example for MATLAB</li>
-<li><a href=\"mailto:kld@alumni.carnegiemellon.edu\">Kevin Davies</a>, 2009/12/9:<br/>Implemented in Modelica</li>
+<li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/12/9:<br/>Implemented in Modelica</li>
 </ul></p>
 </html>"),
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
@@ -163,11 +163,11 @@ package Blocks "Imperative models (e.g., controllers and observers)"
  They can be calculated in MATLAB by:
  <table border=\"0\" bgcolor=\"lightgray\"><tr><td><code>
  csys = ss(A,B,C,D); % where A,B,C,D are the matrices of the continuous-time model
- <br>T_s = 0.5; % sampling period [s]
- <br>dsys = c2d(csys,'zoh',T_s);
- <br>[A,B,C,D] = ssdata(dsys) % where A,B,C,D are now the matrices of the discrete-time model</code>
+<br>T_s = 0.5; % sampling period [s]
+<br>dsys = c2d(csys,'zoh',T_s);
+<br>[A,B,C,D] = ssdata(dsys) % where A,B,C,D are now the matrices of the discrete-time model</code>
  </td></tr></code></table></html>", revisions="<html><ul><li>Jan Gall, 2009/12/7:<br>Initial verion</li>
-  <li><a href=\"mailto:kld@alumni.carnegiemellon.edu\">Kevin Davies</a>, 2009/12/11:<br>Modified</li></ul></html>"));
+  <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/12/11:<br>Modified</li></ul></html>"));
     end MaciejowskiAircraftMPC;
 
     model RossiterExample2MPC "Example2_mimo.m in Rossiter (2003)"
@@ -1290,18 +1290,18 @@ package Blocks "Imperative models (e.g., controllers and observers)"
    <table border=\"0\" bgcolor=\"lightgray\"><tr><td><code>
    %% Read results
  <code>csys = ss(A,B,C,D); % where A, B, C, D are the matrices of the continuous-time model
- <br>T_s = 0.5; % sampling period [s]
- <br>dsys = c2d(csys,'zoh',T_s);
- <br>[A,B,C,D] = ssdata(dsys) % where A, B, C, D are now the matrices of the discrete-time model</code>
+<br>T_s = 0.5; % sampling period [s]
+<br>dsys = c2d(csys,'zoh',T_s);
+<br>[A,B,C,D] = ssdata(dsys) % where A, B, C, D are now the matrices of the discrete-time model</code>
 </td></tr></code></table>
  <p>The observer gain matrix, L, can be calculated in MATLAB via the following, where A and C are
  the system and output matrices of the plant model in discrete time:
    <table border=\"0\" bgcolor=\"lightgray\"><tr><td><code>
   LT = dlqr(A',C',eye(n_x),eye(n_sen)*1e-5);
-  <br>L = LT'</code>
+<br>L = LT'</code>
 </td></tr></code></table>
   </html>", revisions="<html><ul><li>J. A. Rossiter, <a href=\"http://www.mathworks.com/matlabcentral/fileexchange/3410-model-based-predictive-control-a-practical-approach\">http://www.mathworks.com/matlabcentral/fileexchange/3410-model-based-predictive-control-a-practical-approach</a>, accessed 2009/12/3:<br>Original example for MATLAB (example2_mimo.m)</li>
-  <li><a href=\"mailto:kld@alumni.carnegiemellon.edu\">Kevin Davies</a>, 2009/12/9:<br>Adapted for use with Modelica</li></ul></html>"),
+  <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/12/9:<br>Adapted for use with Modelica</li></ul></html>"),
 
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
@@ -1372,18 +1372,18 @@ package Blocks "Imperative models (e.g., controllers and observers)"
    <table border=\"0\" bgcolor=\"lightgray\"><tr><td><code>
    %% Read results
  <code>csys = ss(A,B,C,D); % where A, B, C, D are the matrices of the continuous-time model
- <br>T_s = 0.5; % sampling period [s]
- <br>dsys = c2d(csys,'zoh',T_s);
- <br>[A,B,C,D] = ssdata(dsys) % where A, B, C, D are now the matrices of the discrete-time model</code>
+<br>T_s = 0.5; % sampling period [s]
+<br>dsys = c2d(csys,'zoh',T_s);
+<br>[A,B,C,D] = ssdata(dsys) % where A, B, C, D are now the matrices of the discrete-time model</code>
 </td></tr></code></table>
  <p>The observer gain matrix, L, can be calculated in MATLAB via the following, where A and C are
  the system and output matrices of the plant model in discrete time:
    <table border=\"0\" bgcolor=\"lightgray\"><tr><td><code>
   LT = dlqr(A',C',eye(n_x),eye(n_sen)*1e-5);
-  <br>L = LT'</code>
+<br>L = LT'</code>
 </td></tr></code></table>
   </html>", revisions="<html><ul><li>J. A. Rossiter, <a href=\"http://www.mathworks.com/matlabcentral/fileexchange/3410-model-based-predictive-control-a-practical-approach\">http://www.mathworks.com/matlabcentral/fileexchange/3410-model-based-predictive-control-a-practical-approach</a>, accessed 2009/12/3:<br>Original example for MATLAB (example2_mimo.m)</li>
-  <li><a href=\"mailto:kld@alumni.carnegiemellon.edu\">Kevin Davies</a>, 2009/12/9:<br>Adapted for use with Modelica</li></ul></html>"),
+  <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/12/9:<br>Adapted for use with Modelica</li></ul></html>"),
 
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
@@ -2223,7 +2223,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
   <p>The model uses the Box-Muller transform to generate normal random numbers from uniform random numbers.  It generates the uniform random numbers using <code>internal_twister_uniform()</code>.  This function uses the Mersenne twister pseudorandom number generator and its implementation is specific to Dymola (i.e., not general to Modelica).</p></html>",
               revisions="<html>
 <p><ul>
-<li><a href=\"mailto:kld@alumni.carnegiemellon.edu\">Kevin Davies</a>, 2010/1/6:<br/>Original version using the Box-Muller transform; copied and modified portions of code from Modelica.Blocks.Sources.CombiTimeTable</li>
+<li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2010/1/6:<br/>Original version using the Box-Muller transform; copied and modified portions of code from Modelica.Blocks.Sources.CombiTimeTable</li>
 </ul></p>
 </html>"),
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
@@ -2338,8 +2338,8 @@ ALT=\"model Examples.Elementary.Pendulum\">
   <p>The model generates uniform random numbers using <code>internal_twister_uniform()</code>.  This function uses the Mersenne twister pseudorandom number generator and its implementation is specific to Dymola (i.e., not general to Modelica).</p></html>",
               revisions="<html>
 <p><ul>
-<li><a href=\"mailto:kld@alumni.carnegiemellon.edu\">Kevin Davies</a>, 2009/12/15:<br/>Original version; extended from Modelica.Blocks.Sources.CombiTimeTable</li>
-<li><a href=\"mailto:kld@alumni.carnegiemellon.edu\">Kevin Davies</a>, 2010/1/6:<br/>Copied and modified portions of code from Modelica.Blocks.Sources.CombiTimeTable</li>
+<li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/12/15:<br/>Original version; extended from Modelica.Blocks.Sources.CombiTimeTable</li>
+<li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2010/1/6:<br/>Copied and modified portions of code from Modelica.Blocks.Sources.CombiTimeTable</li>
 </ul></p>
 </html>"),
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
@@ -2409,7 +2409,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
                     extrapolation);
           annotation (Documentation(revisions="<html>
 <p><ul>
-<li><a href=\"mailto:kld@alumni.carnegiemellon.edu\">Kevin Davies</a>, 2009/1/7:<br/>Original version; copied from Modelica.Blocks.Sources.CombiTimeTable</li>
+<li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/1/7:<br/>Original version; copied from Modelica.Blocks.Sources.CombiTimeTable</li>
 </ul></p>
 </html>"), Library="ModelicaExternalC");
         end tableTimeInit;
@@ -2427,7 +2427,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
                     timeIn);
           annotation (Documentation(revisions="<html>
 <p><ul>
-<li><a href=\"mailto:kld@alumni.carnegiemellon.edu\">Kevin Davies</a>, 2009/1/7:<br/>Original version; copied from Modelica.Blocks.Sources.CombiTimeTable</li>
+<li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/1/7:<br/>Original version; copied from Modelica.Blocks.Sources.CombiTimeTable</li>
 </ul></p>
 </html>"), Library="ModelicaExternalC");
         end tableTimeIpo;
@@ -2440,7 +2440,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
         external"C" Tmin = ModelicaTables_CombiTimeTable_minimumTime(tableID);
           annotation (Documentation(revisions="<html>
 <p><ul>
-<li><a href=\"mailto:kld@alumni.carnegiemellon.edu\">Kevin Davies</a>, 2009/1/7:<br/>Original version; copied from Modelica.Blocks.Sources.CombiTimeTable</li>
+<li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/1/7:<br/>Original version; copied from Modelica.Blocks.Sources.CombiTimeTable</li>
 </ul></p>
 </html>"), Library="ModelicaExternalC");
         end tableTimeTmin;
@@ -2453,7 +2453,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
         external"C" Tmax = ModelicaTables_CombiTimeTable_maximumTime(tableID);
           annotation (Documentation(revisions="<html>
 <p><ul>
-<li><a href=\"mailto:kld@alumni.carnegiemellon.edu\">Kevin Davies</a>, 2009/1/7:<br/>Original version; copied from Modelica.Blocks.Sources.CombiTimeTable</li>
+<li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/1/7:<br/>Original version; copied from Modelica.Blocks.Sources.CombiTimeTable</li>
 </ul></p>
 </html>"), Library="ModelicaExternalC");
         end tableTimeTmax;
@@ -4067,7 +4067,7 @@ results in the following equations:
   <p>The model uses the Box-Muller transform to generate normal random numbers from uniform random numbers.  It generates the uniform random numbers using <code>internal_twister_uniform()</code>.  This function uses the Mersenne twister pseudorandom number generator and its implementation is specific to Dymola (i.e., not general to Modelica).</p></html>",
               revisions="<html>
 <p><ul>
-<li><a href=\"mailto:kld@alumni.carnegiemellon.edu\">Kevin Davies</a>, 2010/1/6:<br/>Original version using the Box-Muller transform; copied and modified portions of code from Modelica.Blocks.Sources.CombiTimeTable</li>
+<li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2010/1/6:<br/>Original version using the Box-Muller transform; copied and modified portions of code from Modelica.Blocks.Sources.CombiTimeTable</li>
 </ul></p>
 </html>"), Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}),graphics={Polygon(
@@ -4180,8 +4180,8 @@ results in the following equations:
   <p>The model generates uniform random numbers using <code>internal_twister_uniform()</code>.  This function uses the Mersenne twister pseudorandom number generator and its implementation is specific to Dymola (i.e., not general to Modelica).</p></html>",
               revisions="<html>
 <p><ul>
-<li><a href=\"mailto:kld@alumni.carnegiemellon.edu\">Kevin Davies</a>, 2009/12/15:<br/>Original version; extended from Modelica.Blocks.Sources.CombiTimeTable</li>
-<li><a href=\"mailto:kld@alumni.carnegiemellon.edu\">Kevin Davies</a>, 2010/1/6:<br/>Copied and modified portions of code from Modelica.Blocks.Sources.CombiTimeTable</li>
+<li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/12/15:<br/>Original version; extended from Modelica.Blocks.Sources.CombiTimeTable</li>
+<li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2010/1/6:<br/>Copied and modified portions of code from Modelica.Blocks.Sources.CombiTimeTable</li>
 </ul></p>
 </html>"),
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
@@ -5299,8 +5299,8 @@ Block has one continuous Real output signal vector.
     end randn;
   end BaseClasses;
   annotation (Documentation(info="<html><p>
-<b>Licensed by Kevin Davies under the Modelica License 2</b><br>
-Copyright 2007&ndash;2012, Kevin Davies.
+<b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2012, Georgia Tech Research Corporation.
 </p>
 <p>
 <i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;

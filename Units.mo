@@ -29,7 +29,7 @@ package Units "Constants and units of physical measure"
     final constant Q.Time s=U.s "second";
     final constant Q.MagneticFlux Wb=U.Wb "weber";
     final constant Q.ConductanceElectrical S=U.S "siemen";
-    final constant Q.ParticleNumber mol=U.mol "mole";
+    final constant Q.Amount mol=U.mol "mole";
     final constant Q.Potential K=U.K "kelvin";
 
     // -----------------------------------------------------------------------
@@ -61,9 +61,9 @@ package Units "Constants and units of physical measure"
 
     final constant Q.Potential V=U.V "volt";
     final constant Q.Current A=U.A "ampere";
-    final constant Q.ParticleNumber C=U.C "coulomb";
+    final constant Q.Amount C=U.C "coulomb";
     final constant Q.Energy J=U.J "joule";
-    final constant Q.EnergyMassic Sv=U.Sv "sievert";
+    final constant Q.Velocity2 Sv=U.Sv "sievert";
     final constant Q.Mass kg=U.kg "kilogram ";
 
     // -----------------------------------------------------------------------
@@ -83,7 +83,7 @@ package Units "Constants and units of physical measure"
     final constant Q.Power lm=U.lm "lumen";
     final constant Q.PowerAreic lx=U.lx "lux";
     final constant Q.Frequency Bq=U.Bq "becquerel";
-    final constant Q.EnergyMassic Gy=U.Gy "gray";
+    final constant Q.Velocity2 Gy=U.Gy "gray";
     final constant Q.Current kat=U.kat "katal";
     final constant Q.Mass g=U.g "gram";
 
@@ -102,7 +102,7 @@ package Units "Constants and units of physical measure"
     // Electromagnetism
     final constant Q.ConductanceElectrical G_0=U.G_0 "conductance quantum";
     final constant Q.MagneticFlux Phi_0=U.Phi_0 "magnetic flux quantum";
-    final constant Q.ParticleNumber q=U.q "elementary charge";
+    final constant Q.Amount q=U.q "elementary charge";
     final constant Q.MomentumAngular h=U.h "Planck constant";
     final constant Q.Number alpha=U.alpha "fine-structure constant";
     final constant Q.ResistanceElectrical Z_0=U.Z_0
@@ -115,10 +115,10 @@ package Units "Constants and units of physical measure"
     final constant Q.Energy eV=U.eV "electron volt";
 
     // Electrochemistry
-    final constant Q.ParticleNumberReciprocal N_A=U.N_A "Avogadro constant";
+    final constant Q.AmountReciprocal N_A=U.N_A "Avogadro constant";
 
     // Thermal physics
-    final constant Q.ParticleNumber k_B=U.k_B "Boltzmann constant";
+    final constant Q.Amount k_B=U.k_B "Boltzmann constant";
     final constant Q.PowerArea c_1=U.c_1 "first radiation constant";
     final constant Q.PotentialPerWavenumber c_2=U.c_2
       "second radiation constant";
@@ -513,7 +513,7 @@ package Units "Constants and units of physical measure"
   // it is one by the current defition [BIPM2006].  The von Klitzing
   // constant may be determined by measuring the quantum hall effect
   // (http://en.wikipedia.org/wiki/Quantum_Hall_effect).
-  constant Q.ParticleNumber mol=96485.3365*Wb*S/k_F "mole";
+  constant Q.Amount mol=96485.3365*Wb*S/k_F "mole";
   // SI unit of amount of substance
   // This is the "Faraday constant" relation [NIST2010].  The factor Wb*S
   // is the coulomb, which is defined below.  The ratio may be determined by
@@ -542,12 +542,12 @@ package Units "Constants and units of physical measure"
   // consistency when considering angle.
   final constant Q.Current A=V*S "ampere";
   // SI unit of MMF and rate of charge
-  final constant Q.ParticleNumber C=A*s "coulomb";
+  final constant Q.Amount C=A*s "coulomb";
   // SI unit of charge
   final constant Q.Energy J=V*C "joule";
   // SI unit of energy
-  final constant Q.EnergyMassic Sv=(m/s)^2 "sievert";
-  // SI unit of specific energy
+  final constant Q.Velocity2 Gy=(m/s)^2 "gray";
+  // SI unit of specific energy (imparted by radiation into material)
   final constant Q.Mass kg=J/Sv "kilogram ";
   // SI unit of mass
 
@@ -619,8 +619,9 @@ package Units "Constants and units of physical measure"
   final constant Q.PowerAreic lx=lm/m^2 "lux";
   final constant Q.Frequency Bq=Hz "becquerel";
   // SI unit of frequency
-  final constant Q.EnergyMassic Gy=Sv "gray";
-  // SI unit of specific energy
+  final constant Q.Velocity2 Sv=Gy "sievert";
+  // SI unit of specific energy (imparted by radiation into biological
+  // tissue)
   final constant Q.Current kat=mol/s "katal";
   final constant Q.Mass g=kg/kilo "gram";
   // CGS unit of mass
@@ -634,7 +635,7 @@ package Units "Constants and units of physical measure"
   final constant Q.Time hr=60*min "hour";
   final constant Q.Time day=24*hr "day";
   final constant Q.Angle degree=2*pi*rad/360 "<html>degree (&deg;)</html>";
-  final constant Q.Volume L=(0.1*m)^3 "liter (L or l)";
+  final constant Q.Volume L=(deci*m)^3 "liter (L or l)";
 
   // -----------------------------------------------------------------------
   // Derived physical constants
@@ -646,7 +647,7 @@ package Units "Constants and units of physical measure"
     "<html>conductance quantum (<i>G</i><sub>0</sub>)</html>";
   final constant Q.MagneticFlux Phi_0=1/k_J
     "<html>magnetic flux quantum (&Phi;<sub>0</sub>)</html>";
-  final constant Q.ParticleNumber q=G_0*Phi_0 "elementary charge";
+  final constant Q.Amount q=G_0*Phi_0 "elementary charge";
   final constant Q.MomentumAngular h=2*q*Phi_0 "Planck constant";
   // The Planck constant over 2*pi (hbar) isn't included as a unique
   // variable.  The unit of angle (rad or cyc) should be factored into the
@@ -684,11 +685,11 @@ package Units "Constants and units of physical measure"
   final constant Q.Energy eV=q*V "electron volt";
 
   // Electrochemistry
-  final constant Q.ParticleNumberReciprocal N_A=k_F/q
+  final constant Q.AmountReciprocal N_A=k_F/q
     "<html>Avogadro constant (<i>N</i><sub>A</sub>)</html>";
 
   // Thermal physics
-  final constant Q.ParticleNumber k_B=R/N_A
+  final constant Q.Amount k_B=R/N_A
     "<html>Boltzmann constant (<i>k</i><sub>B</sub>)</html>";
   final constant Q.PowerArea c_1=cyc*h*c^2
     "<html>first radiation constant (<i>c</i><sub>1</sub>)</html>";
@@ -752,13 +753,14 @@ package Units "Constants and units of physical measure"
   final constant Q.Length cm=centi*m "centimeter";
   final constant Q.Length mm=milli*m "millimeter";
   final constant Q.Number '%'=centi "percent (%)";
+  final constant Q.AmountVolumic M=U.mol/U.L "molar";
 
   annotation (Documentation(info="<html><p>When a physical variable is assigned a quantity, it is the product of a number
-    and a unit.  In <a href=\"modelica://FCSys\">FCSys</a>, units are also assigned numeric values in a consistent
+    and a unit [<a href=\"modelica://FCSys.UsersGuide.References\">BIPM2006</a>].  In <a href=\"modelica://FCSys\">FCSys</a>, units are also assigned numeric values in a consistent
     manner.  A unit
     may be the product of any of the units defined in <a href=\"modelica://FCSys.Units\">FCSys.Units</a> raised to any power.
     When a quantity is converted to a number for display, it is divided by its unit.
-    This conveniently handles unit conversion&mdash;without preference towards any particular set of units.
+    This conveniently handles unit conversion&mdash;without preference to any particular set of units.
      It can also be used to scale
     the floating point values associated with quantities.  In order to provide
     well-scaled quantities, the value of the unit should be increased in inverse proportion
@@ -825,8 +827,8 @@ package Units "Constants and units of physical measure"
 
   <p>For more information, see the paper on natural units [<a href=\"modelica://FCSys.UsersGuide.References\">Davies and Paredis, 2012</a>].</p>
   <p>
-  <b>Licensed by Kevin Davies under the Modelica License 2</b><br>
-  Copyright 2007&ndash;2012, Kevin Davies.
+  <b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+  Copyright 2007&ndash;2012, Georgia Tech Research Corporation.
   </p>
   <p>
   <i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;

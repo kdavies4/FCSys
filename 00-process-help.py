@@ -8,7 +8,7 @@
 import re, glob, sys, os
 
 ## Settings
-stylesheet = '../resources/www/modelicaDoc.css'
+stylesheet = '../resources/documentation/ModelicaDoc.css'
 favicon = '../resources/images/favicon.ico'
 
 # Replacement pairs
@@ -63,7 +63,7 @@ rpls = [
     #(r'<a href="FCSys[^>]+\n*[^>]*>(.*)</a>', r'<code>\1</code>'),
     #(r'<a href="file://[^>]+>(.*)</A>', r'<code>\1</code>'),
     # Remove Dymola tags for Microsoft office template
-    ("<!--\[if supportFields\]><span style='mso-element:field-begin'></span>\n<span style='mso-spacerun:yes'></span>XE [A-z.]+<!\[endif\]-->\n<!--\[if supportFields\]><span style='mso-element:field-end'></span><!\[endif\]-->", ''),
+    ("<!--\[if supportFields\]><span style='mso-element:field-begin'></span>\n<span style='mso-spacerun:yes'></span>XE [A-Za-z.]+<!\[endif\]-->\n<!--\[if supportFields\]><span style='mso-element:field-end'></span><!\[endif\]-->", ''),
     # Make the local links local again.
     ('<a href="FCSys\.html#Fig([1-3])">', r'<a href="#Fig\1">'),
     # Use the better versions of some images.

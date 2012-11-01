@@ -21,8 +21,8 @@ with those results preloaded.
 """
 # This file is part of FCSys (a Modelica package).
 #
-# Licensed by Kevin Davies under the Modelica License 2
-# Copyright 2012--2012, Kevin Davies.
+# Licensed by the Georgia Tech Research Corporation under the Modelica License 2
+# Copyright 2012--2012, Georgia Tech Research Corporation.
 #
 # This Modelica package is free software and the use is completely at your own
 # risk; it can be redistributed and/or modified under the terms of the Modelica
@@ -32,7 +32,7 @@ with those results preloaded.
 __author__ = "Kevin Davies"
 __credits__ = "Kevin Bandy"
 __version__ = "0.1"
-__email__ = "kld@alumni.carnegiemellon.edu"
+__email__ = "kdavies4@gmail.com"
 __status__ = "Development"
 
 import os
@@ -55,64 +55,66 @@ Conditions = namedtuple('Conditions',
 # These units are used to display a variable's quantity if its displayUnit
 # attribute is empty ('').  Each key is a dimension string and each entry is a
 # unit string.  Both are formatted in Modelica unit notation.
-# Generated from FCSys/resources/quantities.xls, 10/8/2012
-default_units = {'l/(T.s)': 'cm/s2',
-                 'l/T2': 'cm/s2',
-                 'A': 'rad',
-                 'A2': 'sr',
-                 'l2': 'cm2',
-                 'N2.T2/(l2.m)': 'uF',
-                 'N2.T/(l2.m)': 'S',
-                 'N/s': 'A',
-                 'N/T': 'A',
-                 'N/(l2.T)': 'A/cm2',
-                 'N/(T.s)': 'A/s',
-                 'N/T2': 'A/s',
-                 'l2.m/T2': 'J',
-                 'l2/T2': 'Sv',
-                 'l.m/(T.s)': 'N',
-                 'l.m/T2': 'N',
-                 'l2.m/N2': 'uH',
-                 'l': 'cm',
-                 'l/N': 'm/mol',
-                 'l2.m/(A.N.T)': 'Wb',
-                 'm/(A.N.T)': 'T',
-                 'A.N.T/(l2.m)': '1/Wb',
-                 'm': 'g',
-                 'm/N': 'g/mol',
-                 'l2.m/(A.T)': 'J.s/rad',
-                 's-1': '1/s',
+# Generated from FCSys/resources/quantities.xls, 2012-11-10
+default_units = {'1/N': '1/mol',
                  '1/T': '1/s',
-                 'N': 'C',
-                 '1/N': '1/mol',
-                 'N/l3': 'mol/cm3',
-                 'l.m/N2': 'H/m',
-                 'N2.T2/(l3.m)': 'F/m',
-                 'l3.m/(N2.T2)': 'm/H',
-                 'l2.m/(N.T2)': 'V',
-                 'l3.m/(A.N.T2)': 'V.m/rad',
-                 'l2.m/(N.T2.s)': 'V/s',
-                 'l2.m/(N.T3)': 'V/s',
-                 'l2.m/T3': 'W',
-                 'l4.m/T3': 'W.m2',
-                 'm/T3': 'W/m2',
-                 'm.T5/l8': 'W/(m2.K4)',
-                 'l2.m/(A2.T3)': 'cd',
-                 'm/(l.T2)': 'kPa',
-                 'm/(l.T2.s)': 'Pa/s',
-                 'm/(l.T3)': 'Pa/s',
-                 'T/N': '1/A',
-                 'l2.m/(N2.T)': 'ohm',
-                 'l.T/N': 'cm/A',
-                 'T': 's',
-                 'l/T': 'cm/s',
+                 'A': 'rad',
+                 'A.N.T/(l2.m)': '1/Wb',
+                 'A/l': 'rad/m',
+                 'A2': 'sr',
+                 'l': 'cm',
                  'l.m/(N.T)': 'kg.m/(C.s)',
+                 'l.m/N2': 'H/m',
+                 'l.m/T2': 'N',
+                 'l.T/N': 'cm/A',
+                 'l/(T.s)': 'cm/s2',
+                 'l/N': 'm/mol',
+                 'l/T': 'cm/s',
+                 'l/T2': 'cm/s2',
+                 'l2': 'cm2',
+                 'l2.m/(A.N.T)': 'Wb',
+                 'l2.m/(A.T)': 'J.s/rad',
+                 'l2.m/(A2.T3)': 'cd',
+                 'l2.m/(N.T2.s)': 'V/s',
+                 'l2.m/(N.T2)': 'K',
+                 'l2.m/(N.T2)': 'V',
+                 'l2.m/(N.T3)': 'V/s',
+                 'l2.m/(N2.T)': 'ohm',
+                 'l2.m/N2': 'uH',
+                 'l2.m/T2': 'J',
+                 'l2.m/T3': 'W',
+                 'l2/T2': 'Sv',
                  'l3': 'cm3',
-                 'l3/T': 'L/min',
-                 'l3/N': 'cm3/C',
+                 'l3.m/(A.N.T2)': 'V.m/rad',
+                 'l3.m/(N2.T2)': 'm/H',
                  'l3/(N.s)': 'cm3/(mol.s)',
                  'l3/(N.T)': 'cm3/(mol.s)',
-                 'A/l': 'rad/m'}
+                 'l3/N': 'cm3/C',
+                 'l3/T': 'L/min',
+                 'l4.m/T3': 'W.m2',
+                 'm': 'g',
+                 'm.T5/l8': 'W/(m2.K4)',
+                 'm/(A.N.T)': 'T',
+                 'm/(l.T2.s)': 'Pa/s',
+                 'm/(l.T2)': 'kPa',
+                 'm/(l.T3)': 'Pa/s',
+                 'm/N': 'g/mol',
+                 'm/T3': 'W/m2',
+                 'N': 'C',
+                 'N.T2/(l2.m)': '1/V',
+                 'N/(l2.T)': 'A/cm2',
+                 'N/(l3.T)': 'mol/(cm3.s)',
+                 'N/(T.s)': 'A/s',
+                 'N/l3': 'mol/cm3',
+                 'N/s': 'A',
+                 'N/T': 'A',
+                 'N/T2': 'A/s',
+                 'N2.T/(l2.m)': 'S',
+                 'N2.T2/(l2.m)': 'uF',
+                 'N2.T2/(l3.m)': 'F/m',
+                 's-1': '1/s',
+                 'T': 's',
+                 'T/N': '1/A'}
 
 class SimRes(modelicares.SimRes):
     """Base class for Modelica_-based simulation results and methods to analyze
@@ -326,6 +328,7 @@ class SimRes(modelicares.SimRes):
                 ax2=None, ynames2=[], ylabel2=None, legends2=[], yunit2=None,
                 leg2_kwargs=dict(loc='best'),
                 prefix=False, **kwargs):
+        # TODO: Update this from modelicares.SimRes.plotfig.
         """Create a figure (or subfigure) of 1D data as points and/or curves in
         2D Cartesian coordinates.
 
@@ -417,7 +420,7 @@ class SimRes(modelicares.SimRes):
            ...             title="Cell Polarization",
            ...             label='examples/Polarization') # doctest: +ELLIPSIS
            (<matplotlib.axes.AxesSubplot object at 0x...>, <matplotlib.axes.AxesSubplot object at 0x...>)
-           >>> helpers.save_figs()
+           >>> helpers.saveall()
            Saved examples/Polarization.pdf
            Saved examples/Polarization.png
 
@@ -723,25 +726,30 @@ class SimRes(modelicares.SimRes):
         self.U.update(atm=atm, kPa=kPa, cm=cm, mm=mm)
         self.U.update({'%': percent})
 
-    def __init__(self, fname="Cell.mat", cell='cell'):
-        """On initialization, load and preprocess the data.
+    def __init__(self, fname="dsres.mat"):
+        """On initialization, load the data Dymola simulation file *fname*
+        (MATLAB format)
 
-        **Arguments:**
+        *fname* should have
+        **Example:**
 
-        - *fname*: Name of the Dymosim results trajectory file (\*.mat)
-
-        - *cell*: Name of the cell model in the trajectory file.
-
-             This should be relative to the top level of the simulated model
-             and expressed in Modelica_ dot notation.  If the cell **is** the
-             simulated model, then this should be an empty string.
+           >>> from modelicares import SimRes
+           >>> sim = SimRes('examples/ChuaCircuit.mat')
         """
-        self._load(fname)
-        self._set_constants()
+        super(SimRes, self).__init__(fname)
+        try:
+            self._set_constants()
 
-        # Save the base filename and the directory.
-        self.dir, self.fbase = os.path.split(fname)
-        self.fbase = os.path.splitext(self.fbase)[0]
+        # **Base constants and units
+        rad = self.get_IV('defaults.base.rad')
+        R_inf = self.get_IV('defaults.base.R_inf')
+        c = self.get_IV('defaults.base.c')
+        k_J = self.get_IV('defaults.base.k_J')
+        R_K = self.get_IV('defaults.base.R_K')
+        cd = self.get_IV("defaults.base.'cd'")
+        k_F = self.get_IV('defaults.base.k_F')
+        R = self.get_IV('defaults.base.R')
+
 
 def gen_subtitle_conditions(params, details):
     """Create a description of the operating conditions (to be used as a
@@ -832,7 +840,7 @@ def presuffix(items, prefix='', suffix=''):
         else:
             return [presuffix(item, prefix, suffix) for item in items]
 
-def multi_load(location):
+def multiload(location):
     """Load multiple FCSys_ cell simulation and/or linearization results.
 
     **Arguments:**
@@ -932,7 +940,7 @@ class CellSimRes(SimRes):
 
             ".mpg" will be appended if necessary.
         """
-        from res import animate, save_figs
+        from res import animate, saveall
         # TODO 10/28/11: Use the new movie utilities in matplotlib.
 
         # Set up.
@@ -948,7 +956,7 @@ class CellSimRes(SimRes):
             figure_w_label(os.path.join(output_dir, '_tmp%03d' % i))
             #self.currentx_at_times(time=time)
             plt.plot(time, np.sin(time), '*') # Temporary; for debug
-        save_figs('png')
+        saveall('png')
         animate(fname)
 
     def colorfig(self, suffix, times=[0], n_rows=1, title="", subtitles=[],

@@ -2766,7 +2766,7 @@ sensor</a> models.
       model Velocity "Sensor for velocity"
         extends FCSys.Sensors.BaseClasses.PartialSensor(redeclare
             Connectors.RealOutput y(final unit="l/T"));
-        Connectors.LinearMomentum momentum
+        Connectors.MomentumLineic momentum
           annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
@@ -3080,62 +3080,62 @@ sensor</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum1, negativeX.C.momentumY) annotation (Line(
+        connect(C.negative.momentum1, xNegative.C.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum1, positiveX.C.momentumY) annotation (Line(
+        connect(C.positive.momentum1, xPositive.C.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum1, negativeY.C.momentumZ) annotation (Line(
+        connect(C.negative.momentum1, yNegative.C.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum1, positiveY.C.momentumZ) annotation (Line(
+        connect(C.positive.momentum1, yPositive.C.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum1, negativeZ.C.momentumX) annotation (Line(
+        connect(C.negative.momentum1, zNegative.C.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum1, positiveZ.C.momentumX) annotation (Line(
+        connect(C.positive.momentum1, zPositive.C.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum2, negativeX.C.momentumZ) annotation (Line(
+        connect(C.negative.momentum2, xNegative.C.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum2, positiveX.C.momentumZ) annotation (Line(
+        connect(C.positive.momentum2, xPositive.C.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum2, negativeY.C.momentumX) annotation (Line(
+        connect(C.negative.momentum2, yNegative.C.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum2, positiveY.C.momentumX) annotation (Line(
+        connect(C.positive.momentum2, yPositive.C.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum2, negativeZ.C.momentumY) annotation (Line(
+        connect(C.negative.momentum2, zNegative.C.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum2, positiveZ.C.momentumY) annotation (Line(
+        connect(C.positive.momentum2, zPositive.C.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3169,73 +3169,73 @@ sensor</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum1, negativeX.C19HF37O5S.momentumY)
+        connect(C19HF37O5S.negative.momentum1, xNegative.C19HF37O5S.momentumY)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum1, positiveX.C19HF37O5S.momentumY)
+        connect(C19HF37O5S.positive.momentum1, xPositive.C19HF37O5S.momentumY)
           annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum1, negativeY.C19HF37O5S.momentumZ)
+        connect(C19HF37O5S.negative.momentum1, yNegative.C19HF37O5S.momentumZ)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum1, positiveY.C19HF37O5S.momentumZ)
+        connect(C19HF37O5S.positive.momentum1, yPositive.C19HF37O5S.momentumZ)
           annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum1, negativeZ.C19HF37O5S.momentumX)
+        connect(C19HF37O5S.negative.momentum1, zNegative.C19HF37O5S.momentumX)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum1, positiveZ.C19HF37O5S.momentumX)
+        connect(C19HF37O5S.positive.momentum1, zPositive.C19HF37O5S.momentumX)
           annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum2, negativeX.C19HF37O5S.momentumZ)
+        connect(C19HF37O5S.negative.momentum2, xNegative.C19HF37O5S.momentumZ)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum2, positiveX.C19HF37O5S.momentumZ)
+        connect(C19HF37O5S.positive.momentum2, xPositive.C19HF37O5S.momentumZ)
           annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum2, negativeY.C19HF37O5S.momentumX)
+        connect(C19HF37O5S.negative.momentum2, yNegative.C19HF37O5S.momentumX)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum2, positiveY.C19HF37O5S.momentumX)
+        connect(C19HF37O5S.positive.momentum2, yPositive.C19HF37O5S.momentumX)
           annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum2, negativeZ.C19HF37O5S.momentumY)
+        connect(C19HF37O5S.negative.momentum2, zNegative.C19HF37O5S.momentumY)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum2, positiveZ.C19HF37O5S.momentumY)
+        connect(C19HF37O5S.positive.momentum2, zPositive.C19HF37O5S.momentumY)
           annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
@@ -3272,73 +3272,73 @@ sensor</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum1, negativeX.'e-'.momentumY) annotation (
+        connect('e-'.negative.momentum1, xNegative.'e-'.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum1, positiveX.'e-'.momentumY) annotation (
+        connect('e-'.positive.momentum1, xPositive.'e-'.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum1, negativeY.'e-'.momentumZ) annotation (
+        connect('e-'.negative.momentum1, yNegative.'e-'.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum1, positiveY.'e-'.momentumZ) annotation (
+        connect('e-'.positive.momentum1, yPositive.'e-'.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum1, negativeZ.'e-'.momentumX) annotation (
+        connect('e-'.negative.momentum1, zNegative.'e-'.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum1, positiveZ.'e-'.momentumX) annotation (
+        connect('e-'.positive.momentum1, zPositive.'e-'.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum2, negativeX.'e-'.momentumZ) annotation (
+        connect('e-'.negative.momentum2, xNegative.'e-'.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum2, positiveX.'e-'.momentumZ) annotation (
+        connect('e-'.positive.momentum2, xPositive.'e-'.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum2, negativeY.'e-'.momentumX) annotation (
+        connect('e-'.negative.momentum2, yNegative.'e-'.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum2, positiveY.'e-'.momentumX) annotation (
+        connect('e-'.positive.momentum2, yPositive.'e-'.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum2, negativeZ.'e-'.momentumY) annotation (
+        connect('e-'.negative.momentum2, zNegative.'e-'.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum2, positiveZ.'e-'.momentumY) annotation (
+        connect('e-'.positive.momentum2, zPositive.'e-'.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
@@ -3371,62 +3371,62 @@ sensor</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum1, negativeX.H2.momentumY) annotation (Line(
+        connect(H2.negative.momentum1, xNegative.H2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum1, positiveX.H2.momentumY) annotation (Line(
+        connect(H2.positive.momentum1, xPositive.H2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum1, negativeY.H2.momentumZ) annotation (Line(
+        connect(H2.negative.momentum1, yNegative.H2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum1, positiveY.H2.momentumZ) annotation (Line(
+        connect(H2.positive.momentum1, yPositive.H2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum1, negativeZ.H2.momentumX) annotation (Line(
+        connect(H2.negative.momentum1, zNegative.H2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum1, positiveZ.H2.momentumX) annotation (Line(
+        connect(H2.positive.momentum1, zPositive.H2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum2, negativeX.H2.momentumZ) annotation (Line(
+        connect(H2.negative.momentum2, xNegative.H2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum2, positiveX.H2.momentumZ) annotation (Line(
+        connect(H2.positive.momentum2, xPositive.H2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum2, negativeY.H2.momentumX) annotation (Line(
+        connect(H2.negative.momentum2, yNegative.H2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum2, positiveY.H2.momentumX) annotation (Line(
+        connect(H2.positive.momentum2, yPositive.H2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum2, negativeZ.H2.momentumY) annotation (Line(
+        connect(H2.negative.momentum2, zNegative.H2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum2, positiveZ.H2.momentumY) annotation (Line(
+        connect(H2.positive.momentum2, zPositive.H2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3458,73 +3458,73 @@ sensor</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum1, negativeX.H2O.momentumY) annotation (
+        connect(H2O.negative.momentum1, xNegative.H2O.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum1, positiveX.H2O.momentumY) annotation (
+        connect(H2O.positive.momentum1, xPositive.H2O.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum1, negativeY.H2O.momentumZ) annotation (
+        connect(H2O.negative.momentum1, yNegative.H2O.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum1, positiveY.H2O.momentumZ) annotation (
+        connect(H2O.positive.momentum1, yPositive.H2O.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum1, negativeZ.H2O.momentumX) annotation (
+        connect(H2O.negative.momentum1, zNegative.H2O.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum1, positiveZ.H2O.momentumX) annotation (
+        connect(H2O.positive.momentum1, zPositive.H2O.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum2, negativeX.H2O.momentumZ) annotation (
+        connect(H2O.negative.momentum2, xNegative.H2O.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum2, positiveX.H2O.momentumZ) annotation (
+        connect(H2O.positive.momentum2, xPositive.H2O.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum2, negativeY.H2O.momentumX) annotation (
+        connect(H2O.negative.momentum2, yNegative.H2O.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum2, positiveY.H2O.momentumX) annotation (
+        connect(H2O.positive.momentum2, yPositive.H2O.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum2, negativeZ.H2O.momentumY) annotation (
+        connect(H2O.negative.momentum2, zNegative.H2O.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum2, positiveZ.H2O.momentumY) annotation (
+        connect(H2O.positive.momentum2, zPositive.H2O.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
@@ -3559,73 +3559,73 @@ sensor</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum1, negativeX.'H+'.momentumY) annotation (
+        connect('H+'.negative.momentum1, xNegative.'H+'.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum1, positiveX.'H+'.momentumY) annotation (
+        connect('H+'.positive.momentum1, xPositive.'H+'.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum1, negativeY.'H+'.momentumZ) annotation (
+        connect('H+'.negative.momentum1, yNegative.'H+'.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum1, positiveY.'H+'.momentumZ) annotation (
+        connect('H+'.positive.momentum1, yPositive.'H+'.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum1, negativeZ.'H+'.momentumX) annotation (
+        connect('H+'.negative.momentum1, zNegative.'H+'.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum1, positiveZ.'H+'.momentumX) annotation (
+        connect('H+'.positive.momentum1, zPositive.'H+'.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum2, negativeX.'H+'.momentumZ) annotation (
+        connect('H+'.negative.momentum2, xNegative.'H+'.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum2, positiveX.'H+'.momentumZ) annotation (
+        connect('H+'.positive.momentum2, xPositive.'H+'.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum2, negativeY.'H+'.momentumX) annotation (
+        connect('H+'.negative.momentum2, yNegative.'H+'.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum2, positiveY.'H+'.momentumX) annotation (
+        connect('H+'.positive.momentum2, yPositive.'H+'.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum2, negativeZ.'H+'.momentumY) annotation (
+        connect('H+'.negative.momentum2, zNegative.'H+'.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum2, positiveZ.'H+'.momentumY) annotation (
+        connect('H+'.positive.momentum2, zPositive.'H+'.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
@@ -3658,62 +3658,62 @@ sensor</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum1, negativeX.N2.momentumY) annotation (Line(
+        connect(N2.negative.momentum1, xNegative.N2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum1, positiveX.N2.momentumY) annotation (Line(
+        connect(N2.positive.momentum1, xPositive.N2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum1, negativeY.N2.momentumZ) annotation (Line(
+        connect(N2.negative.momentum1, yNegative.N2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum1, positiveY.N2.momentumZ) annotation (Line(
+        connect(N2.positive.momentum1, yPositive.N2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum1, negativeZ.N2.momentumX) annotation (Line(
+        connect(N2.negative.momentum1, zNegative.N2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum1, positiveZ.N2.momentumX) annotation (Line(
+        connect(N2.positive.momentum1, zPositive.N2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum2, negativeX.N2.momentumZ) annotation (Line(
+        connect(N2.negative.momentum2, xNegative.N2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum2, positiveX.N2.momentumZ) annotation (Line(
+        connect(N2.positive.momentum2, xPositive.N2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum2, negativeY.N2.momentumX) annotation (Line(
+        connect(N2.negative.momentum2, yNegative.N2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum2, positiveY.N2.momentumX) annotation (Line(
+        connect(N2.positive.momentum2, yPositive.N2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum2, negativeZ.N2.momentumY) annotation (Line(
+        connect(N2.negative.momentum2, zNegative.N2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum2, positiveZ.N2.momentumY) annotation (Line(
+        connect(N2.positive.momentum2, zPositive.N2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3745,62 +3745,62 @@ sensor</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum1, negativeX.O2.momentumY) annotation (Line(
+        connect(O2.negative.momentum1, xNegative.O2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum1, positiveX.O2.momentumY) annotation (Line(
+        connect(O2.positive.momentum1, xPositive.O2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum1, negativeY.O2.momentumZ) annotation (Line(
+        connect(O2.negative.momentum1, yNegative.O2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum1, positiveY.O2.momentumZ) annotation (Line(
+        connect(O2.positive.momentum1, yPositive.O2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum1, negativeZ.O2.momentumX) annotation (Line(
+        connect(O2.negative.momentum1, zNegative.O2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum1, positiveZ.O2.momentumX) annotation (Line(
+        connect(O2.positive.momentum1, zPositive.O2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum2, negativeX.O2.momentumZ) annotation (Line(
+        connect(O2.negative.momentum2, xNegative.O2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum2, positiveX.O2.momentumZ) annotation (Line(
+        connect(O2.positive.momentum2, xPositive.O2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum2, negativeY.O2.momentumX) annotation (Line(
+        connect(O2.negative.momentum2, yNegative.O2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum2, positiveY.O2.momentumX) annotation (Line(
+        connect(O2.positive.momentum2, yPositive.O2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum2, negativeZ.O2.momentumY) annotation (Line(
+        connect(O2.negative.momentum2, zNegative.O2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum2, positiveZ.O2.momentumY) annotation (Line(
+        connect(O2.positive.momentum2, zPositive.O2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3907,62 +3907,62 @@ sensor</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum1, negativeX.H2.momentumY) annotation (Line(
+        connect(H2.negative.momentum1, xNegative.H2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum1, positiveX.H2.momentumY) annotation (Line(
+        connect(H2.positive.momentum1, xPositive.H2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum1, negativeY.H2.momentumZ) annotation (Line(
+        connect(H2.negative.momentum1, yNegative.H2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum1, positiveY.H2.momentumZ) annotation (Line(
+        connect(H2.positive.momentum1, yPositive.H2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum1, negativeZ.H2.momentumX) annotation (Line(
+        connect(H2.negative.momentum1, zNegative.H2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum1, positiveZ.H2.momentumX) annotation (Line(
+        connect(H2.positive.momentum1, zPositive.H2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum2, negativeX.H2.momentumZ) annotation (Line(
+        connect(H2.negative.momentum2, xNegative.H2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum2, positiveX.H2.momentumZ) annotation (Line(
+        connect(H2.positive.momentum2, xPositive.H2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum2, negativeY.H2.momentumX) annotation (Line(
+        connect(H2.negative.momentum2, yNegative.H2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum2, positiveY.H2.momentumX) annotation (Line(
+        connect(H2.positive.momentum2, yPositive.H2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum2, negativeZ.H2.momentumY) annotation (Line(
+        connect(H2.negative.momentum2, zNegative.H2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum2, positiveZ.H2.momentumY) annotation (Line(
+        connect(H2.positive.momentum2, zPositive.H2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3994,73 +3994,73 @@ sensor</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum1, negativeX.H2O.momentumY) annotation (
+        connect(H2O.negative.momentum1, xNegative.H2O.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum1, positiveX.H2O.momentumY) annotation (
+        connect(H2O.positive.momentum1, xPositive.H2O.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum1, negativeY.H2O.momentumZ) annotation (
+        connect(H2O.negative.momentum1, yNegative.H2O.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum1, positiveY.H2O.momentumZ) annotation (
+        connect(H2O.positive.momentum1, yPositive.H2O.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum1, negativeZ.H2O.momentumX) annotation (
+        connect(H2O.negative.momentum1, zNegative.H2O.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum1, positiveZ.H2O.momentumX) annotation (
+        connect(H2O.positive.momentum1, zPositive.H2O.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum2, negativeX.H2O.momentumZ) annotation (
+        connect(H2O.negative.momentum2, xNegative.H2O.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum2, positiveX.H2O.momentumZ) annotation (
+        connect(H2O.positive.momentum2, xPositive.H2O.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum2, negativeY.H2O.momentumX) annotation (
+        connect(H2O.negative.momentum2, yNegative.H2O.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum2, positiveY.H2O.momentumX) annotation (
+        connect(H2O.positive.momentum2, yPositive.H2O.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum2, negativeZ.H2O.momentumY) annotation (
+        connect(H2O.negative.momentum2, zNegative.H2O.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum2, positiveZ.H2O.momentumY) annotation (
+        connect(H2O.positive.momentum2, zPositive.H2O.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
@@ -4093,62 +4093,62 @@ sensor</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum1, negativeX.N2.momentumY) annotation (Line(
+        connect(N2.negative.momentum1, xNegative.N2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum1, positiveX.N2.momentumY) annotation (Line(
+        connect(N2.positive.momentum1, xPositive.N2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum1, negativeY.N2.momentumZ) annotation (Line(
+        connect(N2.negative.momentum1, yNegative.N2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum1, positiveY.N2.momentumZ) annotation (Line(
+        connect(N2.positive.momentum1, yPositive.N2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum1, negativeZ.N2.momentumX) annotation (Line(
+        connect(N2.negative.momentum1, zNegative.N2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum1, positiveZ.N2.momentumX) annotation (Line(
+        connect(N2.positive.momentum1, zPositive.N2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum2, negativeX.N2.momentumZ) annotation (Line(
+        connect(N2.negative.momentum2, xNegative.N2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum2, positiveX.N2.momentumZ) annotation (Line(
+        connect(N2.positive.momentum2, xPositive.N2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum2, negativeY.N2.momentumX) annotation (Line(
+        connect(N2.negative.momentum2, yNegative.N2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum2, positiveY.N2.momentumX) annotation (Line(
+        connect(N2.positive.momentum2, yPositive.N2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum2, negativeZ.N2.momentumY) annotation (Line(
+        connect(N2.negative.momentum2, zNegative.N2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum2, positiveZ.N2.momentumY) annotation (Line(
+        connect(N2.positive.momentum2, zPositive.N2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4180,62 +4180,62 @@ sensor</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum1, negativeX.O2.momentumY) annotation (Line(
+        connect(O2.negative.momentum1, xNegative.O2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum1, positiveX.O2.momentumY) annotation (Line(
+        connect(O2.positive.momentum1, xPositive.O2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum1, negativeY.O2.momentumZ) annotation (Line(
+        connect(O2.negative.momentum1, yNegative.O2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum1, positiveY.O2.momentumZ) annotation (Line(
+        connect(O2.positive.momentum1, yPositive.O2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum1, negativeZ.O2.momentumX) annotation (Line(
+        connect(O2.negative.momentum1, zNegative.O2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum1, positiveZ.O2.momentumX) annotation (Line(
+        connect(O2.positive.momentum1, zPositive.O2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum2, negativeX.O2.momentumZ) annotation (Line(
+        connect(O2.negative.momentum2, xNegative.O2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum2, positiveX.O2.momentumZ) annotation (Line(
+        connect(O2.positive.momentum2, xPositive.O2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum2, negativeY.O2.momentumX) annotation (Line(
+        connect(O2.negative.momentum2, yNegative.O2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum2, positiveY.O2.momentumX) annotation (Line(
+        connect(O2.positive.momentum2, yPositive.O2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum2, negativeZ.O2.momentumY) annotation (Line(
+        connect(O2.negative.momentum2, zNegative.O2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum2, positiveZ.O2.momentumY) annotation (Line(
+        connect(O2.positive.momentum2, zPositive.O2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4306,62 +4306,62 @@ sensor</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum1, negativeX.C.momentumY) annotation (Line(
+        connect(C.negative.momentum1, xNegative.C.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum1, positiveX.C.momentumY) annotation (Line(
+        connect(C.positive.momentum1, xPositive.C.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum1, negativeY.C.momentumZ) annotation (Line(
+        connect(C.negative.momentum1, yNegative.C.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum1, positiveY.C.momentumZ) annotation (Line(
+        connect(C.positive.momentum1, yPositive.C.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum1, negativeZ.C.momentumX) annotation (Line(
+        connect(C.negative.momentum1, zNegative.C.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum1, positiveZ.C.momentumX) annotation (Line(
+        connect(C.positive.momentum1, zPositive.C.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum2, negativeX.C.momentumZ) annotation (Line(
+        connect(C.negative.momentum2, xNegative.C.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum2, positiveX.C.momentumZ) annotation (Line(
+        connect(C.positive.momentum2, xPositive.C.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum2, negativeY.C.momentumX) annotation (Line(
+        connect(C.negative.momentum2, yNegative.C.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum2, positiveY.C.momentumX) annotation (Line(
+        connect(C.positive.momentum2, yPositive.C.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum2, negativeZ.C.momentumY) annotation (Line(
+        connect(C.negative.momentum2, zNegative.C.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum2, positiveZ.C.momentumY) annotation (Line(
+        connect(C.positive.momentum2, zPositive.C.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4395,73 +4395,73 @@ sensor</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum1, negativeX.'e-'.momentumY) annotation (
+        connect('e-'.negative.momentum1, xNegative.'e-'.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum1, positiveX.'e-'.momentumY) annotation (
+        connect('e-'.positive.momentum1, xPositive.'e-'.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum1, negativeY.'e-'.momentumZ) annotation (
+        connect('e-'.negative.momentum1, yNegative.'e-'.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum1, positiveY.'e-'.momentumZ) annotation (
+        connect('e-'.positive.momentum1, yPositive.'e-'.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum1, negativeZ.'e-'.momentumX) annotation (
+        connect('e-'.negative.momentum1, zNegative.'e-'.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum1, positiveZ.'e-'.momentumX) annotation (
+        connect('e-'.positive.momentum1, zPositive.'e-'.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum2, negativeX.'e-'.momentumZ) annotation (
+        connect('e-'.negative.momentum2, xNegative.'e-'.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum2, positiveX.'e-'.momentumZ) annotation (
+        connect('e-'.positive.momentum2, xPositive.'e-'.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum2, negativeY.'e-'.momentumX) annotation (
+        connect('e-'.negative.momentum2, yNegative.'e-'.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum2, positiveY.'e-'.momentumX) annotation (
+        connect('e-'.positive.momentum2, yPositive.'e-'.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum2, negativeZ.'e-'.momentumY) annotation (
+        connect('e-'.negative.momentum2, zNegative.'e-'.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum2, positiveZ.'e-'.momentumY) annotation (
+        connect('e-'.positive.momentum2, zPositive.'e-'.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
@@ -4541,73 +4541,73 @@ sensor</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum1, negativeX.C19HF37O5S.momentumY)
+        connect(C19HF37O5S.negative.momentum1, xNegative.C19HF37O5S.momentumY)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum1, positiveX.C19HF37O5S.momentumY)
+        connect(C19HF37O5S.positive.momentum1, xPositive.C19HF37O5S.momentumY)
           annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum1, negativeY.C19HF37O5S.momentumZ)
+        connect(C19HF37O5S.negative.momentum1, yNegative.C19HF37O5S.momentumZ)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum1, positiveY.C19HF37O5S.momentumZ)
+        connect(C19HF37O5S.positive.momentum1, yPositive.C19HF37O5S.momentumZ)
           annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum1, negativeZ.C19HF37O5S.momentumX)
+        connect(C19HF37O5S.negative.momentum1, zNegative.C19HF37O5S.momentumX)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum1, positiveZ.C19HF37O5S.momentumX)
+        connect(C19HF37O5S.positive.momentum1, zPositive.C19HF37O5S.momentumX)
           annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum2, negativeX.C19HF37O5S.momentumZ)
+        connect(C19HF37O5S.negative.momentum2, xNegative.C19HF37O5S.momentumZ)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum2, positiveX.C19HF37O5S.momentumZ)
+        connect(C19HF37O5S.positive.momentum2, xPositive.C19HF37O5S.momentumZ)
           annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum2, negativeY.C19HF37O5S.momentumX)
+        connect(C19HF37O5S.negative.momentum2, yNegative.C19HF37O5S.momentumX)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum2, positiveY.C19HF37O5S.momentumX)
+        connect(C19HF37O5S.positive.momentum2, yPositive.C19HF37O5S.momentumX)
           annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum2, negativeZ.C19HF37O5S.momentumY)
+        connect(C19HF37O5S.negative.momentum2, zNegative.C19HF37O5S.momentumY)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum2, positiveZ.C19HF37O5S.momentumY)
+        connect(C19HF37O5S.positive.momentum2, zPositive.C19HF37O5S.momentumY)
           annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
@@ -4644,73 +4644,73 @@ sensor</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum1, negativeX.'H+'.momentumY) annotation (
+        connect('H+'.negative.momentum1, xNegative.'H+'.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum1, positiveX.'H+'.momentumY) annotation (
+        connect('H+'.positive.momentum1, xPositive.'H+'.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum1, negativeY.'H+'.momentumZ) annotation (
+        connect('H+'.negative.momentum1, yNegative.'H+'.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum1, positiveY.'H+'.momentumZ) annotation (
+        connect('H+'.positive.momentum1, yPositive.'H+'.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum1, negativeZ.'H+'.momentumX) annotation (
+        connect('H+'.negative.momentum1, zNegative.'H+'.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum1, positiveZ.'H+'.momentumX) annotation (
+        connect('H+'.positive.momentum1, zPositive.'H+'.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum2, negativeX.'H+'.momentumZ) annotation (
+        connect('H+'.negative.momentum2, xNegative.'H+'.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum2, positiveX.'H+'.momentumZ) annotation (
+        connect('H+'.positive.momentum2, xPositive.'H+'.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum2, negativeY.'H+'.momentumX) annotation (
+        connect('H+'.negative.momentum2, yNegative.'H+'.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum2, positiveY.'H+'.momentumX) annotation (
+        connect('H+'.positive.momentum2, yPositive.'H+'.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum2, negativeZ.'H+'.momentumY) annotation (
+        connect('H+'.negative.momentum2, zNegative.'H+'.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum2, positiveZ.'H+'.momentumY) annotation (
+        connect('H+'.positive.momentum2, zPositive.'H+'.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
@@ -4770,65 +4770,65 @@ sensor</a> model.
                 origin={0,-100})));
 
         protected
-          Connectors.FaceBusInternal negativeX if axis == Axis.x
+          Connectors.FaceBusInternal xNegative if axis == Axis.x
             "Internal negative-side connector enabled if x axis" annotation (
               Placement(transformation(extent={{-70,10},{-50,30}}),
                 iconTransformation(extent={{-30,-40},{-10,-20}})));
-          Connectors.FaceBusInternal negativeY if axis == Axis.y
+          Connectors.FaceBusInternal yNegative if axis == Axis.y
             "Internal negative-side connector enabled if y axis" annotation (
               Placement(transformation(extent={{-70,-10},{-50,10}}),
                 iconTransformation(extent={{-10,-40},{10,-20}})));
-          Connectors.FaceBusInternal negativeZ if axis == Axis.z
+          Connectors.FaceBusInternal zNegative if axis == Axis.z
             "Internal negative-side connector enabled if z axis" annotation (
               Placement(transformation(extent={{-70,-30},{-50,-10}}),
                 iconTransformation(extent={{10,-40},{30,-20}})));
-          Connectors.FaceBusInternal positiveX if axis == Axis.x
+          Connectors.FaceBusInternal xPositive if axis == Axis.x
             "Internal positive-side connector enabled if x axis" annotation (
               Placement(transformation(extent={{50,10},{70,30}}),
                 iconTransformation(extent={{-30,-40},{-10,-20}})));
-          Connectors.FaceBusInternal positiveY if axis == Axis.y
+          Connectors.FaceBusInternal yPositive if axis == Axis.y
             "Internal positive-side connector enabled if y axis" annotation (
               Placement(transformation(extent={{50,-10},{70,10}}),
                 iconTransformation(extent={{-10,-40},{10,-20}})));
-          Connectors.FaceBusInternal positiveZ if axis == Axis.z
+          Connectors.FaceBusInternal zPositive if axis == Axis.z
             "Internal positive-side connector enabled if z axis" annotation (
               Placement(transformation(extent={{50,-30},{70,-10}}),
                 iconTransformation(extent={{10,-40},{30,-20}})));
         equation
 
-          connect(negativeX, negative) annotation (Line(
+          connect(xNegative, negative) annotation (Line(
               points={{-60,20},{-100,5.55112e-16}},
               color={127,127,127},
               thickness=0.5,
               smooth=Smooth.None));
 
-          connect(negativeY, negative) annotation (Line(
+          connect(yNegative, negative) annotation (Line(
               points={{-60,5.55112e-16},{-70,5.55112e-16},{-70,5.55112e-16},{-80,
                   5.55112e-16},{-80,5.55112e-16},{-100,5.55112e-16}},
               color={127,127,127},
               thickness=0.5,
               smooth=Smooth.None));
 
-          connect(negativeZ, negative) annotation (Line(
+          connect(zNegative, negative) annotation (Line(
               points={{-60,-20},{-100,5.55112e-16}},
               color={127,127,127},
               thickness=0.5,
               smooth=Smooth.None));
 
-          connect(positiveX, positive) annotation (Line(
+          connect(xPositive, positive) annotation (Line(
               points={{60,20},{100,5.55112e-16}},
               color={127,127,127},
               thickness=0.5,
               smooth=Smooth.None));
 
-          connect(positiveY, positive) annotation (Line(
+          connect(yPositive, positive) annotation (Line(
               points={{60,5.55112e-16},{70,5.55112e-16},{70,5.55112e-16},{80,
                   5.55112e-16},{80,5.55112e-16},{100,5.55112e-16}},
               color={127,127,127},
               thickness=0.5,
               smooth=Smooth.None));
 
-          connect(positiveZ, positive) annotation (Line(
+          connect(zPositive, positive) annotation (Line(
               points={{60,-20},{100,5.55112e-16}},
               color={127,127,127},
               thickness=0.5,
@@ -5173,7 +5173,7 @@ sensor</a> model.
           y = negative.mu - positive.mu "Measurement";
           0 = negative.Ndot "Condition of no current";
           // Note:  In conjunction with the momentum rate balance, this means
-          // that there is no current into either face.
+          // that there's no current into either face.
           annotation (Icon(graphics={Text(
                           extent={{-100,-20},{100,-50}},
                           lineColor={127,127,127},
@@ -5245,7 +5245,7 @@ sensor</a> model.
           y = negative.phi - positive.phi "Measurement";
           0 = negative.mPhidot "Condition of no compressive force";
           // Note:  In conjunction with the momentum rate balance, this means
-          // that there is no force on either face.
+          // that there's no force on either face.
           annotation (
             Documentation(info="<html><p>If <code>ax=1</code>, then the difference in normal velocity
   is measured.  The relative first
@@ -5289,15 +5289,15 @@ sensor</a> model.
           extends Modelica.Icons.BasesPackage;
 
           partial model PartialSensor
-            "<html>Partial sensor for a pair of <a href=\"modelica://FCSys.Connectors.LinearMomentum\">LinearMomentum</a> connectors</html>"
+            "<html>Partial sensor for a pair of <a href=\"modelica://FCSys.Connectors.MomentumLineic\">MomentumLineic</a> connectors</html>"
 
             extends FCSys.Sensors.BaseClasses.PartialSensor;
 
-            Connectors.LinearMomentum negative
+            Connectors.MomentumLineic negative
               "Linear momentum connector for the negative face" annotation (
                 Placement(transformation(extent={{-110,-10},{-90,10}}),
                   iconTransformation(extent={{-110,-10},{-90,10}})));
-            Connectors.LinearMomentum positive
+            Connectors.MomentumLineic positive
               "Linear momentum connector for the positive face" annotation (
                 Placement(transformation(extent={{90,-10},{110,10}}),
                   iconTransformation(extent={{90,-10},{110,10}})));
@@ -5517,8 +5517,8 @@ sensor</a> model.
   end BaseClasses;
   annotation (Documentation(info="<html>
   <p>
-<b>Licensed by Kevin Davies under the Modelica License 2</b><br>
-Copyright 2007&ndash;2012, Kevin Davies.
+<b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2012, Georgia Tech Research Corporation.
 </p>
 <p>
 <i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;

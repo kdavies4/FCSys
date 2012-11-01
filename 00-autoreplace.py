@@ -15,13 +15,14 @@ import os
 # Replacement pairs
 rpls = [# Remove extra spacing.
         (r' +\n', r'\n'),
-        (r' *\n +\n+', r'\n\n'),
         (r'\n\n\n+', r'\n\n'),
-        (r' *<br> +(<br>)', r'<br><br>'),
+        (r' +<br>', r'<br>'),
         (r'<br><br>(<br>)+', r'<br><br>'),
         # Use shortcuts for Units and Quantities.
         (r'FCSys\.Quantities\.', r'Q.'),
         (r'FCSys\.Units\.', r'U.'),
+        # Sometimes Dymola adds a useless import.
+        (r'import FCSys;\n', ''),
         # No empty line before "end x;".
         (r'\n(\n +end )([^; ]+);', r'\1\2;'),
         # Two spaces after "Note:".
@@ -36,6 +37,7 @@ rpls = [# Remove extra spacing.
         (r'(// .*)is not', r"\1isn't"),
         (r'(// .*)will not', r"\1won't"),
         (r'(// .*)cannot', r"\1can't"),
+        (r'(// .*)there is', r"\1there's"),
         # but not others.
         (r"(// .*)it's", r'\1it is'),
        ]
@@ -66,7 +68,6 @@ for fname in glob.glob(os.path.join(directory, '*.mo')):
     #text = removeNonAscii(text)
     # **Add a method to warn about non-ASCII characters before removing them.
 
-    print len(text)
     # Make the replacements.
     for rpl in rpls:
         text = rpl[0].sub(rpl[1], text)

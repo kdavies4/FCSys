@@ -26,28 +26,28 @@ package BCs "Models for boundary conditions"
         inclXFaces=false,
         inclYFaces=true,
         inclZFaces=false,
-        inclXMom=false,
-        inclYMom=true,
+        inclLinX=false,
+        inclLinY=true,
         graphite(inclC=true, C(V_IC=0.5*U.cm^3,alpha_Phi=1e-3*U.cm/U.A)),
         gas(
           inclH2O=true,
           H2O(
             alpha_Phi=1e-3*U.cm/U.A,
-            negativeX(
+            xNegative(
               matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.ClosedAdiabatic,
 
               viscousY=false,
               viscousZ=false),
-            positiveX(
+            xPositive(
               matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.ClosedAdiabatic,
 
               viscousY=false,
               viscousZ=false),
-            negativeZ(viscousX=false, viscousY=false),
-            positiveZ(viscousX=false, viscousY=false),
-            positiveY(matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.OpenDiabatic),
+            zNegative(viscousX=false, viscousY=false),
+            zPositive(viscousX=false, viscousY=false),
+            yPositive(matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.OpenDiabatic),
 
-            partNumInitMeth=FCSys.Subregions.BaseClasses.InitMethScalar.PotentialElectrochemical,
+            initMethPartNum=FCSys.Subregions.BaseClasses.InitMethScalar.PotentialElectrochemical,
 
             mu_IC=-298685),
           inclH2=false,
@@ -57,7 +57,7 @@ package BCs "Models for boundary conditions"
       inner Defaults defaults
         annotation (Placement(transformation(extent={{30,30},{50,50}})));
     equation
-      connect(subregion.positiveY, subregionFaceBC.face) annotation (Line(
+      connect(subregion.yPositive, subregionFaceBC.face) annotation (Line(
           points={{6.10623e-16,10},{-3.36456e-22,16},{6.10623e-16,16},{
               6.10623e-16,20}},
           color={127,127,127},
@@ -82,26 +82,26 @@ package BCs "Models for boundary conditions"
         inclH2=false,
         inclH2O=true,
         H2O(
-          negativeX(
+          xNegative(
             matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.ClosedAdiabatic,
 
             viscousY=false,
             viscousZ=false),
-          positiveX(
+          xPositive(
             matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.ClosedAdiabatic,
 
             viscousY=false,
             viscousZ=false),
-          positiveY(matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.OpenDiabatic),
+          yPositive(matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.OpenDiabatic),
 
-          negativeZ(viscousX=false, viscousY=false),
-          positiveZ(viscousX=false, viscousY=false)))
+          zNegative(viscousX=false, viscousY=false),
+          zPositive(viscousX=false, viscousY=false)))
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
       inner Defaults defaults
         annotation (Placement(transformation(extent={{30,30},{50,50}})));
     equation
-      connect(subregion.positiveY, phaseFaceBC.face) annotation (Line(
+      connect(subregion.yPositive, phaseFaceBC.face) annotation (Line(
           points={{6.10623e-16,10},{-3.36456e-22,16},{6.10623e-16,16},{
               6.10623e-16,20}},
           color={127,127,127},
@@ -140,20 +140,20 @@ package BCs "Models for boundary conditions"
         inclZFaces=false,
         gas(inclH2=false, inclH2O=false),
         graphite('incle-'=true,'e-'(
-            negativeX(
+            xNegative(
               viscousY=false,
               viscousZ=false,
               matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.ClosedAdiabatic),
 
-            positiveX(
+            xPositive(
               viscousY=false,
               viscousZ=false,
               matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.OpenDiabatic),
 
-            negativeY(viscousZ=false, viscousX=false),
-            positiveY(viscousZ=false, viscousX=false),
-            negativeZ(viscousX=false, viscousY=false),
-            positiveZ(viscousX=false, viscousY=false),
+            yNegative(viscousZ=false, viscousX=false),
+            yPositive(viscousZ=false, viscousX=false),
+            zNegative(viscousX=false, viscousY=false),
+            zPositive(viscousX=false, viscousY=false),
             mu_IC=0.01*U.V)))
         annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
 
@@ -169,7 +169,7 @@ package BCs "Models for boundary conditions"
           color={191,0,0},
           smooth=Smooth.None));
 
-      connect(subregion.positiveX, 'e-Adapt'.face) annotation (Line(
+      connect(subregion.xPositive, 'e-Adapt'.face) annotation (Line(
           points={{-30,6.10623e-16},{-20,-3.36456e-22},{-20,6.10623e-16},{-10,
               6.10623e-16}},
           color={127,127,127},
@@ -208,12 +208,12 @@ package BCs "Models for boundary conditions"
         inclYFaces=false,
         inclZFaces=false,
         H2(
-          positiveX(
+          xPositive(
             matEntOpt=MaterialEntropyOpt.OpenDiabatic,
             viscousY=false,
             viscousZ=false),
-          partNumInitMeth=FCSys.Subregions.BaseClasses.InitMethScalar.None,
-          negativeX(
+          initMethPartNum=FCSys.Subregions.BaseClasses.InitMethScalar.None,
+          xNegative(
             final matEntOpt=MaterialEntropyOpt.ClosedAdiabatic,
             viscousY=false,
             viscousZ=false)))
@@ -227,7 +227,7 @@ package BCs "Models for boundary conditions"
           points={{10,6.10623e-16},{30,6.10623e-16},{30,10}},
           color={0,127,255},
           smooth=Smooth.None));
-      connect(subregion.positiveX, H2Adapt.face) annotation (Line(
+      connect(subregion.xPositive, H2Adapt.face) annotation (Line(
           points={{-20,6.10623e-16},{-16,-3.36456e-22},{-16,6.10623e-16},{-10,
               6.10623e-16}},
           color={127,127,127},
@@ -261,13 +261,13 @@ package BCs "Models for boundary conditions"
         inclYFaces=false,
         inclZFaces=false,
         inclXFaces=true,
-        inclXMom=true,
+        inclLinX=true,
         H2(
-          negativeX(
+          xNegative(
             viscousY=false,
             viscousZ=false,
             matEntOpt=MaterialEntropyOpt.OpenDiabatic),
-          positiveX(
+          xPositive(
             viscousY=false,
             viscousZ=false,
             final matEntOpt=MaterialEntropyOpt.ClosedAdiabatic),
@@ -277,23 +277,23 @@ package BCs "Models for boundary conditions"
         annotation (Placement(transformation(extent={{-60,70},{-40,90}})));
 
     protected
-      Connectors.FaceBusInternal negativeX "Positive face along the x axis"
+      Connectors.FaceBusInternal xNegative "Positive face along the x axis"
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
     equation
 
-      connect(negativeX.H2.material, volume.face.material) annotation (Line(
+      connect(xNegative.H2.material, volume.face.material) annotation (Line(
           points={{5.55112e-16,5.55112e-16},{-6,5.55112e-16},{-6,0},{-10,0},{-10,
               6.10623e-16},{-20,6.10623e-16}},
           color={127,127,127},
           smooth=Smooth.None,
           thickness=0.5));
-      connect(negativeX.H2.entropy, volume.face.entropy) annotation (Line(
+      connect(xNegative.H2.entropy, volume.face.entropy) annotation (Line(
           points={{5.55112e-16,5.55112e-16},{-6,5.55112e-16},{-6,0},{-10,0},{-10,
               6.10623e-16},{-20,6.10623e-16}},
           color={127,127,127},
           smooth=Smooth.None,
           thickness=0.5));
-      connect(negativeX, subregion.negativeX) annotation (Line(
+      connect(xNegative, subregion.xNegative) annotation (Line(
           points={{5.55112e-16,5.55112e-16},{6,5.55112e-16},{6,0},{10,0},{10,
               6.10623e-16},{20,6.10623e-16}},
           color={127,127,127},
@@ -591,7 +591,7 @@ package BCs "Models for boundary conditions"
 
     model 'Adapte-'
       "<html>Electrical adapter between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a> (<a href=\"modelica://Modelica.Electrical.Analog\">Electrical.Analog</a> and <a href=\"modelica://Modelica.Thermal.HeatTransfer\">Thermal.HeatTransfer</a>)</html>"
-      import Data = FCSys.Characteristics.'e-'.gas;
+      import Data = FCSys.Characteristics.'e-'.Gas;
 
       extends FCSys.BaseClasses.Icons.Names.Top3;
 
@@ -1174,7 +1174,7 @@ package BCs "Models for boundary conditions"
         Commands(file="tests/LOOCV/LOOCV.mos"
             "Perform leave-one-out cross validation on the cell model"),
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-180,-100},
-                {180,100}}),graphics),
+                {180,100}}), graphics),
         Icon(graphics),
         experiment(StopTime=15481, Algorithm="Euler"),
         experimentSetupOutput);
@@ -2332,7 +2332,7 @@ package BCs "Models for boundary conditions"
         end if;
 
         // Entropy
-        //  if entropyBCropy == BCTypeEntropy.EntropySpecific then
+        //  if entropyBC== BCTypeEntropy.EntropySpecific then
         chemical.Ts = u_S_int;
         //  end if;
 
@@ -3031,7 +3031,7 @@ boundary condition</a> models.
 
       // 1st component of linear momentum
       replaceable FCSys.BCs.InertDalton.Momentum.Velocity lin1BC(final n_lin=
-            n_lin) if n_lin > 1 constrainedby
+            n_lin) if n_lin > 0 constrainedby
         FCSys.BCs.InertDalton.Momentum.BaseClasses.PartialBC
         "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
@@ -3633,7 +3633,8 @@ boundary condition</a> models.
             redeclare replaceable Species.Momentum.Force lin2BC,
             redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
             entropySpec(k=0)), 'e-'(
-            redeclare replaceable Species.Material.Current materialBC,
+            redeclare replaceable Species.Material.PotentialElectrochemical
+              materialBC,
             redeclare replaceable Species.Momentum.Force lin1BC,
             redeclare replaceable Species.Momentum.Force lin2BC,
             redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
@@ -3657,6 +3658,7 @@ boundary condition</a> models.
             redeclare replaceable Species.Momentum.Force lin2BC,
             redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
             entropySpec(k=0))));
+      // temp EC potential for e-
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
@@ -4921,9 +4923,8 @@ boundary condition</a> models.
         //     enable=matEntOpt=MaterialEntropyOpt.OpenDiabatic.
         // Therefore, the values of the enumerations are specified numerically for
         // this initial condition and others below for material and entropy.
-        replaceable FCSys.BCs.Face.Species.Material.PotentialElectrochemical
-          materialBC if open constrainedby
-          FCSys.BCs.Face.Species.Material.BaseClasses.PartialBC
+        replaceable Material.PotentialElectrochemical materialBC if open
+          constrainedby FCSys.BCs.Face.Species.Material.BaseClasses.PartialBC
           "Type of condition" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
@@ -4965,8 +4966,8 @@ boundary condition</a> models.
             __Dymola_label="Included",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        replaceable FCSys.BCs.Face.Species.Momentum.Velocity lin1BC if viscous1
-          constrainedby FCSys.BCs.Face.Species.Momentum.BaseClasses.PartialBC
+        replaceable Momentum.Velocity lin1BC if viscous1 constrainedby
+          FCSys.BCs.Face.Species.Momentum.BaseClasses.PartialBC
           "Type of condition" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
@@ -5009,8 +5010,8 @@ boundary condition</a> models.
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
 
-        replaceable FCSys.BCs.Face.Species.Momentum.Velocity lin2BC if viscous2
-          constrainedby FCSys.BCs.Face.Species.Momentum.BaseClasses.PartialBC
+        replaceable Momentum.Velocity lin2BC if viscous2 constrainedby
+          FCSys.BCs.Face.Species.Momentum.BaseClasses.PartialBC
           "Type of condition" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
@@ -5046,8 +5047,7 @@ boundary condition</a> models.
         final parameter Boolean diabatic=matEntOpt == MaterialEntropyOpt.ClosedDiabatic
              or matEntOpt == MaterialEntropyOpt.OpenDiabatic
           "Diabatic (entropy included)";
-        replaceable FCSys.BCs.Face.Species.Entropy.Temperature entropyBC if
-          diabatic constrainedby
+        replaceable Entropy.Temperature entropyBC if diabatic constrainedby
           FCSys.BCs.Face.Species.Entropy.BaseClasses.PartialBC
           "Type of condition" annotation (
           __Dymola_choicesFromPackage=true,
@@ -5326,7 +5326,7 @@ boundary condition</a> models.
                   rotation=270,
                   origin={0,40})));
 
-            FCSys.Connectors.LinearMomentum momentum
+            FCSys.Connectors.MomentumLineic momentum
               "Linear momentum connector for the face" annotation (Placement(
                   transformation(extent={{-10,-50},{10,-30}})));
             annotation (defaultComponentPrefixes="replaceable",
@@ -5405,6 +5405,321 @@ boundary condition</a> models.
               HeatFlowRate "Heat flow rate") "Types of BCs";
         end BaseClasses;
       end Entropy;
+
+      model SpeciesX
+        "<html>BC for a face of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
+        extends FCSys.BaseClasses.Icons.BCs.Single;
+
+        parameter MaterialEntropyOpt matEntOpt=MaterialEntropyOpt.OpenDiabatic
+          "Options for material and thermal transport";
+
+        // Material
+        final parameter Boolean open=matEntOpt == MaterialEntropyOpt.OpenDiabatic
+          "Open";
+        // Note:  Dymola 7.4 doesn't recognize enumerations in the dialog enable
+        // option, e.g.,
+        //     enable=matEntOpt=MaterialEntropyOpt.OpenDiabatic.
+        // Therefore, the values of the enumerations are specified numerically for
+        // this initial condition and others below for material and entropy.
+        replaceable FCSys.BCs.Face.Species.Material.PotentialElectrochemical
+          materialBC if open constrainedby
+          FCSys.BCs.Face.Species.Material.BaseClasses.PartialBC
+          "Type of condition" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            group="Material",
+            enable=matEntOpt == 3,
+            __Dymola_descriptionLabel=true),
+          Placement(transformation(extent={{-70,-26},{-50,-6}})));
+
+        parameter Boolean internalMaterial=true "Use internal specification"
+          annotation (
+          Evaluate=true,
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            group="Material",
+            enable=matEntOpt == 3,
+            __Dymola_descriptionLabel=true,
+            __Dymola_joinNext=true));
+        replaceable Modelica.Blocks.Sources.Constant materialSpec(k(start=0))
+          if internalMaterial and open constrainedby
+          Modelica.Blocks.Interfaces.SO "Internal specification" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            group="Material",
+            enable=matEntOpt == 3 and internalMaterial,
+            __Dymola_descriptionLabel=true,
+            enable=matEntOpt == 3 and internalMaterial),
+          Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={-70,20})));
+
+        // 1st transverse linear momentum
+        parameter Boolean viscous1=false
+          "<html>Viscous (1<sup>st</sup> transverse momentum included)</html>"
+          annotation (choices(__Dymola_checkBox=true), Dialog(
+            group="1st transverse momentum",
+            compact=true,
+            __Dymola_label="Included",
+            __Dymola_descriptionLabel=true,
+            __Dymola_joinNext=true));
+        replaceable FCSys.BCs.Face.Species.Momentum.Velocity lin1BC if viscous1
+          constrainedby FCSys.BCs.Face.Species.Momentum.BaseClasses.PartialBC
+          "Type of condition" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            group="1st transverse momentum",
+            enable=viscous1,
+            __Dymola_descriptionLabel=true),
+          Placement(transformation(extent={{-30,-26},{-10,-6}})));
+        parameter Boolean internalLin1=true "Use internal specification"
+          annotation (
+          Evaluate=true,
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            group="1st transverse momentum",
+            enable=viscous1,
+            __Dymola_descriptionLabel=true,
+            __Dymola_joinNext=true));
+
+        replaceable Modelica.Blocks.Sources.Constant lin1Spec(k(start=0)) if
+          internalLin1 and viscous1 constrainedby Modelica.Blocks.Interfaces.SO
+          "Internal specification" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            group="1st transverse momentum",
+            enable=internalLin1 and viscous1,
+            __Dymola_descriptionLabel=true,
+            enable=internalLin1 and viscous1),
+          Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={-30,20})));
+
+        // 2nd transverse linear momentum
+        parameter Boolean viscous2=false
+          "<html>Viscous (2<sup>nd</sup> transverse momentum included)</html>"
+          annotation (choices(__Dymola_checkBox=true), Dialog(
+            group="2nd transverse momentum",
+            compact=true,
+            __Dymola_label="Included",
+            __Dymola_descriptionLabel=true,
+            __Dymola_joinNext=true));
+
+        replaceable FCSys.BCs.Face.Species.Momentum.Velocity lin2BC if viscous2
+          constrainedby FCSys.BCs.Face.Species.Momentum.BaseClasses.PartialBC
+          "Type of condition" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            group="2nd transverse momentum",
+            enable=viscous2,
+            __Dymola_descriptionLabel=true),
+          Placement(transformation(extent={{10,-26},{30,-6}})));
+
+        parameter Boolean internalLin2=true "Use internal specification"
+          annotation (
+          Evaluate=true,
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            group="2nd transverse momentum",
+            enable=viscous2,
+            __Dymola_descriptionLabel=true,
+            __Dymola_joinNext=true));
+        replaceable Modelica.Blocks.Sources.Constant lin2Spec(k(start=0)) if
+          internalLin2 and viscous2 constrainedby Modelica.Blocks.Interfaces.SO
+          "Internal specification" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            group="2nd transverse momentum",
+            enable=internalLin2 and viscous2,
+            __Dymola_descriptionLabel=true),
+          Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={10,20})));
+
+        // Entropy
+        final parameter Boolean diabatic=matEntOpt == MaterialEntropyOpt.ClosedDiabatic
+             or matEntOpt == MaterialEntropyOpt.OpenDiabatic
+          "Diabatic (entropy included)";
+        replaceable FCSys.BCs.Face.Species.Entropy.Temperature entropyBC if
+          diabatic constrainedby
+          FCSys.BCs.Face.Species.Entropy.BaseClasses.PartialBC
+          "Type of condition" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            group="Entropy",
+            enable=matEntOpt == 2 or matEntOpt == 3,
+            __Dymola_descriptionLabel=true),
+          Placement(transformation(extent={{50,-26},{70,-6}})));
+
+        parameter Boolean internalEntropy=true "Use internal specification"
+          annotation (
+          Evaluate=true,
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            group="Entropy",
+            enable=matEntOpt == 2 or matEntOpt == 3,
+            __Dymola_descriptionLabel=true,
+            __Dymola_joinNext=true));
+
+        replaceable Modelica.Blocks.Sources.Constant entropySpec(k(start=298.15
+                *U.K)) if internalEntropy and diabatic constrainedby
+          Modelica.Blocks.Interfaces.SO "Internal specification" annotation (
+          __Dymola_choicesFromPackage=true,
+          Dialog(
+            group="Entropy",
+            __Dymola_descriptionLabel=true,
+            enable=(matEntOpt == 2 or matEntOpt == 3) and internalEntropy,
+            enable=internalEntropy and diabatic),
+          Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={50,20})));
+
+        Connectors.FaceX face(final matEntOpt=matEntOpt)
+          "Single-species connector for material, linear momentum, and entropy"
+          annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
+              iconTransformation(extent={{-10,-50},{10,-30}})));
+        FCSys.Connectors.RealInputBus u "Input bus for external signal sources"
+          annotation (HideResult=not (internalMaterial or internalLin1 or
+              internalLin1 or internalLin2 or internalEntropy), Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={0,70}), iconTransformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={0,40})));
+
+      protected
+        Connectors.RealInputInternal u_N if not internalMaterial and open
+          "External material signal" annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={-50,40}), iconTransformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={-60,40})));
+        Connectors.RealInputInternal u_Phi_1 if not internalLin1 and viscous1
+          "External signal for 1st transverse linear momentum" annotation (
+            Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={-10,40}),iconTransformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={-20,40})));
+        Connectors.RealInputInternal u_Phi_2 if not internalLin2 and viscous2
+          "External signal for 2nd transverse linear momentum" annotation (
+            Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={30,40}), iconTransformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={-20,40})));
+        Connectors.RealInputInternal u_S if not internalEntropy and diabatic
+          "External signal for entropy" annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={70,40}),iconTransformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={60,40})));
+
+      equation
+        // Material
+        connect(materialBC.material, face.material) annotation (Line(
+            points={{-60,-20},{-60,-30},{5.55112e-16,-30},{5.55112e-16,-40}},
+            color={127,127,127},
+            pattern=LinePattern.None,
+            smooth=Smooth.None));
+        connect(materialSpec.y, materialBC.u) annotation (Line(
+            points={{-70,9},{-70,0},{-60,0},{-60,-12}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(u_N, materialBC.u) annotation (Line(
+            points={{-50,40},{-50,0},{-60,0},{-60,-12}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(u.N, u_N) annotation (Line(
+            points={{5.55112e-16,70},{5.55112e-16,50},{-50,50},{-50,40}},
+            color={0,0,127},
+            thickness=0.5,
+            smooth=Smooth.None), Text(
+            string="%first",
+            index=-1,
+            extent={{-6,3},{-6,3}}));
+
+        // 1st transverse linear momentum
+        connect(lin1Spec.y, lin1BC.u) annotation (Line(
+            points={{-30,9},{-30,0},{-20,0},{-20,-12}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(u_Phi_1, lin1BC.u) annotation (Line(
+            points={{-10,40},{-10,0},{-20,0},{-20,-12}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(u.Phi_1, u_Phi_1) annotation (Line(
+            points={{5.55112e-16,70},{5.55112e-16,50},{-10,50},{-10,40}},
+            color={0,0,127},
+            thickness=0.5,
+            smooth=Smooth.None), Text(
+            string="%first",
+            index=-1,
+            extent={{-6,3},{-6,3}}));
+
+        // 2nd transverse linear momentum
+        connect(lin2Spec.y, lin2BC.u) annotation (Line(
+            points={{10,9},{10,0},{20,0},{20,-12}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(u_Phi_2, lin2BC.u) annotation (Line(
+            points={{30,40},{30,0},{20,0},{20,-12}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(u.Phi_2, u_Phi_2) annotation (Line(
+            points={{5.55112e-16,70},{5.55112e-16,50},{30,50},{30,40}},
+            color={0,0,127},
+            thickness=0.5,
+            smooth=Smooth.None), Text(
+            string="%first",
+            index=-1,
+            extent={{-6,3},{-6,3}}));
+
+        // Entropy
+        connect(entropyBC.entropy, face.entropy) annotation (Line(
+            points={{60,-20},{60,-30},{5.55112e-16,-30},{5.55112e-16,-40}},
+            color={127,127,127},
+            pattern=LinePattern.None,
+            smooth=Smooth.None));
+        connect(entropySpec.y, entropyBC.u) annotation (Line(
+            points={{50,9},{50,0},{60,0},{60,-12}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(u_S, entropyBC.u) annotation (Line(
+            points={{70,40},{70,0},{60,0},{60,-12}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(u.S, u_S) annotation (Line(
+            points={{5.55112e-16,70},{5.55112e-16,50},{70,50},{70,40}},
+            color={0,0,127},
+            thickness=0.5,
+            smooth=Smooth.None), Text(
+            string="%first",
+            index=-1,
+            extent={{-6,3},{-6,3}}));
+        annotation (
+          defaultComponentName="speciesFaceBC",
+          Diagram(graphics),
+          Icon(graphics));
+      end SpeciesX;
     end Species;
 
     model Region
@@ -5847,32 +6162,32 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum1, negativeX.C.momentumY) annotation (Line(
+        connect(C.negative.momentum1, xNegative.C.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum1, negativeY.C.momentumZ) annotation (Line(
+        connect(C.negative.momentum1, yNegative.C.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum1, negativeZ.C.momentumX) annotation (Line(
+        connect(C.negative.momentum1, zNegative.C.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum2, negativeX.C.momentumZ) annotation (Line(
+        connect(C.negative.momentum2, xNegative.C.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum2, negativeY.C.momentumX) annotation (Line(
+        connect(C.negative.momentum2, yNegative.C.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum2, negativeZ.C.momentumY) annotation (Line(
+        connect(C.negative.momentum2, zNegative.C.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -5887,32 +6202,32 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum1, positiveX.C.momentumY) annotation (Line(
+        connect(C.positive.momentum1, xPositive.C.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum1, positiveY.C.momentumZ) annotation (Line(
+        connect(C.positive.momentum1, yPositive.C.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum1, positiveZ.C.momentumX) annotation (Line(
+        connect(C.positive.momentum1, zPositive.C.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum2, positiveX.C.momentumZ) annotation (Line(
+        connect(C.positive.momentum2, xPositive.C.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum2, positiveY.C.momentumX) annotation (Line(
+        connect(C.positive.momentum2, yPositive.C.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum2, positiveZ.C.momentumY) annotation (Line(
+        connect(C.positive.momentum2, zPositive.C.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -5937,37 +6252,37 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum1, negativeX.C19HF37O5S.momentumY)
+        connect(C19HF37O5S.negative.momentum1, xNegative.C19HF37O5S.momentumY)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum1, negativeY.C19HF37O5S.momentumZ)
+        connect(C19HF37O5S.negative.momentum1, yNegative.C19HF37O5S.momentumZ)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum1, negativeZ.C19HF37O5S.momentumX)
+        connect(C19HF37O5S.negative.momentum1, zNegative.C19HF37O5S.momentumX)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum2, negativeX.C19HF37O5S.momentumZ)
+        connect(C19HF37O5S.negative.momentum2, xNegative.C19HF37O5S.momentumZ)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum2, negativeY.C19HF37O5S.momentumX)
+        connect(C19HF37O5S.negative.momentum2, yNegative.C19HF37O5S.momentumX)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum2, negativeZ.C19HF37O5S.momentumY)
+        connect(C19HF37O5S.negative.momentum2, zNegative.C19HF37O5S.momentumY)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
@@ -5985,37 +6300,37 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum1, positiveX.C19HF37O5S.momentumY)
+        connect(C19HF37O5S.positive.momentum1, xPositive.C19HF37O5S.momentumY)
           annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum1, positiveY.C19HF37O5S.momentumZ)
+        connect(C19HF37O5S.positive.momentum1, yPositive.C19HF37O5S.momentumZ)
           annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum1, positiveZ.C19HF37O5S.momentumX)
+        connect(C19HF37O5S.positive.momentum1, zPositive.C19HF37O5S.momentumX)
           annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum2, positiveX.C19HF37O5S.momentumZ)
+        connect(C19HF37O5S.positive.momentum2, xPositive.C19HF37O5S.momentumZ)
           annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum2, positiveY.C19HF37O5S.momentumX)
+        connect(C19HF37O5S.positive.momentum2, yPositive.C19HF37O5S.momentumX)
           annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum2, positiveZ.C19HF37O5S.momentumY)
+        connect(C19HF37O5S.positive.momentum2, zPositive.C19HF37O5S.momentumY)
           annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
@@ -6040,37 +6355,37 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum1, negativeX.'e-'.momentumY) annotation (
+        connect('e-'.negative.momentum1, xNegative.'e-'.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum1, negativeY.'e-'.momentumZ) annotation (
+        connect('e-'.negative.momentum1, yNegative.'e-'.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum1, negativeZ.'e-'.momentumX) annotation (
+        connect('e-'.negative.momentum1, zNegative.'e-'.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum2, negativeX.'e-'.momentumZ) annotation (
+        connect('e-'.negative.momentum2, xNegative.'e-'.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum2, negativeY.'e-'.momentumX) annotation (
+        connect('e-'.negative.momentum2, yNegative.'e-'.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum2, negativeZ.'e-'.momentumY) annotation (
+        connect('e-'.negative.momentum2, zNegative.'e-'.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
@@ -6087,37 +6402,37 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum1, positiveX.'e-'.momentumY) annotation (
+        connect('e-'.positive.momentum1, xPositive.'e-'.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum1, positiveY.'e-'.momentumZ) annotation (
+        connect('e-'.positive.momentum1, yPositive.'e-'.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum1, positiveZ.'e-'.momentumX) annotation (
+        connect('e-'.positive.momentum1, zPositive.'e-'.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum2, positiveX.'e-'.momentumZ) annotation (
+        connect('e-'.positive.momentum2, xPositive.'e-'.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum2, positiveY.'e-'.momentumX) annotation (
+        connect('e-'.positive.momentum2, yPositive.'e-'.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum2, positiveZ.'e-'.momentumY) annotation (
+        connect('e-'.positive.momentum2, zPositive.'e-'.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
@@ -6141,32 +6456,32 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum1, negativeX.H2.momentumY) annotation (Line(
+        connect(H2.negative.momentum1, xNegative.H2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum1, negativeY.H2.momentumZ) annotation (Line(
+        connect(H2.negative.momentum1, yNegative.H2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum1, negativeZ.H2.momentumX) annotation (Line(
+        connect(H2.negative.momentum1, zNegative.H2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum2, negativeX.H2.momentumZ) annotation (Line(
+        connect(H2.negative.momentum2, xNegative.H2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum2, negativeY.H2.momentumX) annotation (Line(
+        connect(H2.negative.momentum2, yNegative.H2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum2, negativeZ.H2.momentumY) annotation (Line(
+        connect(H2.negative.momentum2, zNegative.H2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6181,32 +6496,32 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum1, positiveX.H2.momentumY) annotation (Line(
+        connect(H2.positive.momentum1, xPositive.H2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum1, positiveY.H2.momentumZ) annotation (Line(
+        connect(H2.positive.momentum1, yPositive.H2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum1, positiveZ.H2.momentumX) annotation (Line(
+        connect(H2.positive.momentum1, zPositive.H2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum2, positiveX.H2.momentumZ) annotation (Line(
+        connect(H2.positive.momentum2, xPositive.H2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum2, positiveY.H2.momentumX) annotation (Line(
+        connect(H2.positive.momentum2, yPositive.H2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum2, positiveZ.H2.momentumY) annotation (Line(
+        connect(H2.positive.momentum2, zPositive.H2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6229,37 +6544,37 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum1, negativeX.H2O.momentumY) annotation (
+        connect(H2O.negative.momentum1, xNegative.H2O.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum1, negativeY.H2O.momentumZ) annotation (
+        connect(H2O.negative.momentum1, yNegative.H2O.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum1, negativeZ.H2O.momentumX) annotation (
+        connect(H2O.negative.momentum1, zNegative.H2O.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum2, negativeX.H2O.momentumZ) annotation (
+        connect(H2O.negative.momentum2, xNegative.H2O.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum2, negativeY.H2O.momentumX) annotation (
+        connect(H2O.negative.momentum2, yNegative.H2O.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum2, negativeZ.H2O.momentumY) annotation (
+        connect(H2O.negative.momentum2, zNegative.H2O.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
@@ -6275,37 +6590,37 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum1, positiveX.H2O.momentumY) annotation (
+        connect(H2O.positive.momentum1, xPositive.H2O.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum1, positiveY.H2O.momentumZ) annotation (
+        connect(H2O.positive.momentum1, yPositive.H2O.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum1, positiveZ.H2O.momentumX) annotation (
+        connect(H2O.positive.momentum1, zPositive.H2O.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum2, positiveX.H2O.momentumZ) annotation (
+        connect(H2O.positive.momentum2, xPositive.H2O.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum2, positiveY.H2O.momentumX) annotation (
+        connect(H2O.positive.momentum2, yPositive.H2O.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum2, positiveZ.H2O.momentumY) annotation (
+        connect(H2O.positive.momentum2, zPositive.H2O.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
@@ -6330,37 +6645,37 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum1, negativeX.'H+'.momentumY) annotation (
+        connect('H+'.negative.momentum1, xNegative.'H+'.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum1, negativeY.'H+'.momentumZ) annotation (
+        connect('H+'.negative.momentum1, yNegative.'H+'.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum1, negativeZ.'H+'.momentumX) annotation (
+        connect('H+'.negative.momentum1, zNegative.'H+'.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum2, negativeX.'H+'.momentumZ) annotation (
+        connect('H+'.negative.momentum2, xNegative.'H+'.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum2, negativeY.'H+'.momentumX) annotation (
+        connect('H+'.negative.momentum2, yNegative.'H+'.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum2, negativeZ.'H+'.momentumY) annotation (
+        connect('H+'.negative.momentum2, zNegative.'H+'.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
@@ -6377,37 +6692,37 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum1, positiveX.'H+'.momentumY) annotation (
+        connect('H+'.positive.momentum1, xPositive.'H+'.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum1, positiveY.'H+'.momentumZ) annotation (
+        connect('H+'.positive.momentum1, yPositive.'H+'.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum1, positiveZ.'H+'.momentumX) annotation (
+        connect('H+'.positive.momentum1, zPositive.'H+'.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum2, positiveX.'H+'.momentumZ) annotation (
+        connect('H+'.positive.momentum2, xPositive.'H+'.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum2, positiveY.'H+'.momentumX) annotation (
+        connect('H+'.positive.momentum2, yPositive.'H+'.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum2, positiveZ.'H+'.momentumY) annotation (
+        connect('H+'.positive.momentum2, zPositive.'H+'.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
@@ -6431,32 +6746,32 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum1, negativeX.N2.momentumY) annotation (Line(
+        connect(N2.negative.momentum1, xNegative.N2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum1, negativeY.N2.momentumZ) annotation (Line(
+        connect(N2.negative.momentum1, yNegative.N2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum1, negativeZ.N2.momentumX) annotation (Line(
+        connect(N2.negative.momentum1, zNegative.N2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum2, negativeX.N2.momentumZ) annotation (Line(
+        connect(N2.negative.momentum2, xNegative.N2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum2, negativeY.N2.momentumX) annotation (Line(
+        connect(N2.negative.momentum2, yNegative.N2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum2, negativeZ.N2.momentumY) annotation (Line(
+        connect(N2.negative.momentum2, zNegative.N2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6471,32 +6786,32 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum1, positiveX.N2.momentumY) annotation (Line(
+        connect(N2.positive.momentum1, xPositive.N2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum1, positiveY.N2.momentumZ) annotation (Line(
+        connect(N2.positive.momentum1, yPositive.N2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum1, positiveZ.N2.momentumX) annotation (Line(
+        connect(N2.positive.momentum1, zPositive.N2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum2, positiveX.N2.momentumZ) annotation (Line(
+        connect(N2.positive.momentum2, xPositive.N2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum2, positiveY.N2.momentumX) annotation (Line(
+        connect(N2.positive.momentum2, yPositive.N2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum2, positiveZ.N2.momentumY) annotation (Line(
+        connect(N2.positive.momentum2, zPositive.N2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6519,32 +6834,32 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum1, negativeX.O2.momentumY) annotation (Line(
+        connect(O2.negative.momentum1, xNegative.O2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum1, negativeY.O2.momentumZ) annotation (Line(
+        connect(O2.negative.momentum1, yNegative.O2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum1, negativeZ.O2.momentumX) annotation (Line(
+        connect(O2.negative.momentum1, zNegative.O2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum2, negativeX.O2.momentumZ) annotation (Line(
+        connect(O2.negative.momentum2, xNegative.O2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum2, negativeY.O2.momentumX) annotation (Line(
+        connect(O2.negative.momentum2, yNegative.O2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum2, negativeZ.O2.momentumY) annotation (Line(
+        connect(O2.negative.momentum2, zNegative.O2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6559,32 +6874,32 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum1, positiveX.O2.momentumY) annotation (Line(
+        connect(O2.positive.momentum1, xPositive.O2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum1, positiveY.O2.momentumZ) annotation (Line(
+        connect(O2.positive.momentum1, yPositive.O2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum1, positiveZ.O2.momentumX) annotation (Line(
+        connect(O2.positive.momentum1, zPositive.O2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum2, positiveX.O2.momentumZ) annotation (Line(
+        connect(O2.positive.momentum2, xPositive.O2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum2, positiveY.O2.momentumX) annotation (Line(
+        connect(O2.positive.momentum2, yPositive.O2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum2, positiveZ.O2.momentumY) annotation (Line(
+        connect(O2.positive.momentum2, zPositive.O2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6677,32 +6992,32 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum1, negativeX.H2.momentumY) annotation (Line(
+        connect(H2.negative.momentum1, xNegative.H2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum1, negativeY.H2.momentumZ) annotation (Line(
+        connect(H2.negative.momentum1, yNegative.H2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum1, negativeZ.H2.momentumX) annotation (Line(
+        connect(H2.negative.momentum1, zNegative.H2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-10,0},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum2, negativeX.H2.momentumZ) annotation (Line(
+        connect(H2.negative.momentum2, xNegative.H2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum2, negativeY.H2.momentumX) annotation (Line(
+        connect(H2.negative.momentum2, yNegative.H2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.momentum2, negativeZ.H2.momentumY) annotation (Line(
+        connect(H2.negative.momentum2, zNegative.H2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-10,0},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6717,32 +7032,32 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum1, positiveX.H2.momentumY) annotation (Line(
+        connect(H2.positive.momentum1, xPositive.H2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum1, positiveY.H2.momentumZ) annotation (Line(
+        connect(H2.positive.momentum1, yPositive.H2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum1, positiveZ.H2.momentumX) annotation (Line(
+        connect(H2.positive.momentum1, zPositive.H2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum2, positiveX.H2.momentumZ) annotation (Line(
+        connect(H2.positive.momentum2, xPositive.H2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum2, positiveY.H2.momentumX) annotation (Line(
+        connect(H2.positive.momentum2, yPositive.H2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.momentum2, positiveZ.H2.momentumY) annotation (Line(
+        connect(H2.positive.momentum2, zPositive.H2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6765,37 +7080,37 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum1, negativeX.H2O.momentumY) annotation (
+        connect(H2O.negative.momentum1, xNegative.H2O.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum1, negativeY.H2O.momentumZ) annotation (
+        connect(H2O.negative.momentum1, yNegative.H2O.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum1, negativeZ.H2O.momentumX) annotation (
+        connect(H2O.negative.momentum1, zNegative.H2O.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-10,0},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum2, negativeX.H2O.momentumZ) annotation (
+        connect(H2O.negative.momentum2, xNegative.H2O.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum2, negativeY.H2O.momentumX) annotation (
+        connect(H2O.negative.momentum2, yNegative.H2O.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum2, negativeZ.H2O.momentumY) annotation (
+        connect(H2O.negative.momentum2, zNegative.H2O.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-10,0},{-60,-20}},
             color={127,127,127},
@@ -6811,37 +7126,37 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum1, positiveX.H2O.momentumY) annotation (
+        connect(H2O.positive.momentum1, xPositive.H2O.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum1, positiveY.H2O.momentumZ) annotation (
+        connect(H2O.positive.momentum1, yPositive.H2O.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum1, positiveZ.H2O.momentumX) annotation (
+        connect(H2O.positive.momentum1, zPositive.H2O.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum2, positiveX.H2O.momentumZ) annotation (
+        connect(H2O.positive.momentum2, xPositive.H2O.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum2, positiveY.H2O.momentumX) annotation (
+        connect(H2O.positive.momentum2, yPositive.H2O.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum2, positiveZ.H2O.momentumY) annotation (
+        connect(H2O.positive.momentum2, zPositive.H2O.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
@@ -6865,32 +7180,32 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum1, negativeX.N2.momentumY) annotation (Line(
+        connect(N2.negative.momentum1, xNegative.N2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum1, negativeY.N2.momentumZ) annotation (Line(
+        connect(N2.negative.momentum1, yNegative.N2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum1, negativeZ.N2.momentumX) annotation (Line(
+        connect(N2.negative.momentum1, zNegative.N2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-10,0},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum2, negativeX.N2.momentumZ) annotation (Line(
+        connect(N2.negative.momentum2, xNegative.N2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum2, negativeY.N2.momentumX) annotation (Line(
+        connect(N2.negative.momentum2, yNegative.N2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.momentum2, negativeZ.N2.momentumY) annotation (Line(
+        connect(N2.negative.momentum2, zNegative.N2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-10,0},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6905,32 +7220,32 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum1, positiveX.N2.momentumY) annotation (Line(
+        connect(N2.positive.momentum1, xPositive.N2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum1, positiveY.N2.momentumZ) annotation (Line(
+        connect(N2.positive.momentum1, yPositive.N2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum1, positiveZ.N2.momentumX) annotation (Line(
+        connect(N2.positive.momentum1, zPositive.N2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum2, positiveX.N2.momentumZ) annotation (Line(
+        connect(N2.positive.momentum2, xPositive.N2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum2, positiveY.N2.momentumX) annotation (Line(
+        connect(N2.positive.momentum2, yPositive.N2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.momentum2, positiveZ.N2.momentumY) annotation (Line(
+        connect(N2.positive.momentum2, zPositive.N2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6953,32 +7268,32 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum1, negativeX.O2.momentumY) annotation (Line(
+        connect(O2.negative.momentum1, xNegative.O2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum1, negativeY.O2.momentumZ) annotation (Line(
+        connect(O2.negative.momentum1, yNegative.O2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum1, negativeZ.O2.momentumX) annotation (Line(
+        connect(O2.negative.momentum1, zNegative.O2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-10,0},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum2, negativeX.O2.momentumZ) annotation (Line(
+        connect(O2.negative.momentum2, xNegative.O2.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum2, negativeY.O2.momentumX) annotation (Line(
+        connect(O2.negative.momentum2, yNegative.O2.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.momentum2, negativeZ.O2.momentumY) annotation (Line(
+        connect(O2.negative.momentum2, zNegative.O2.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6993,32 +7308,32 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum1, positiveX.O2.momentumY) annotation (Line(
+        connect(O2.positive.momentum1, xPositive.O2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum1, positiveY.O2.momentumZ) annotation (Line(
+        connect(O2.positive.momentum1, yPositive.O2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum1, positiveZ.O2.momentumX) annotation (Line(
+        connect(O2.positive.momentum1, zPositive.O2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum2, positiveX.O2.momentumZ) annotation (Line(
+        connect(O2.positive.momentum2, xPositive.O2.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum2, positiveY.O2.momentumX) annotation (Line(
+        connect(O2.positive.momentum2, yPositive.O2.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.momentum2, positiveZ.O2.momentumY) annotation (Line(
+        connect(O2.positive.momentum2, zPositive.O2.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7081,32 +7396,32 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum1, negativeX.C.momentumY) annotation (Line(
+        connect(C.negative.momentum1, xNegative.C.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum1, negativeY.C.momentumZ) annotation (Line(
+        connect(C.negative.momentum1, yNegative.C.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum1, negativeZ.C.momentumX) annotation (Line(
+        connect(C.negative.momentum1, zNegative.C.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum2, negativeX.C.momentumZ) annotation (Line(
+        connect(C.negative.momentum2, xNegative.C.momentumZ) annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum2, negativeY.C.momentumX) annotation (Line(
+        connect(C.negative.momentum2, yNegative.C.momentumX) annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.momentum2, negativeZ.C.momentumY) annotation (Line(
+        connect(C.negative.momentum2, zNegative.C.momentumY) annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7121,32 +7436,32 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum1, positiveX.C.momentumY) annotation (Line(
+        connect(C.positive.momentum1, xPositive.C.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum1, positiveY.C.momentumZ) annotation (Line(
+        connect(C.positive.momentum1, yPositive.C.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum1, positiveZ.C.momentumX) annotation (Line(
+        connect(C.positive.momentum1, zPositive.C.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum2, positiveX.C.momentumZ) annotation (Line(
+        connect(C.positive.momentum2, xPositive.C.momentumZ) annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum2, positiveY.C.momentumX) annotation (Line(
+        connect(C.positive.momentum2, yPositive.C.momentumX) annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.momentum2, positiveZ.C.momentumY) annotation (Line(
+        connect(C.positive.momentum2, zPositive.C.momentumY) annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7170,37 +7485,37 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum1, negativeX.'e-'.momentumY) annotation (
+        connect('e-'.negative.momentum1, xNegative.'e-'.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum1, negativeY.'e-'.momentumZ) annotation (
+        connect('e-'.negative.momentum1, yNegative.'e-'.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum1, negativeZ.'e-'.momentumX) annotation (
+        connect('e-'.negative.momentum1, zNegative.'e-'.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum2, negativeX.'e-'.momentumZ) annotation (
+        connect('e-'.negative.momentum2, xNegative.'e-'.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum2, negativeY.'e-'.momentumX) annotation (
+        connect('e-'.negative.momentum2, yNegative.'e-'.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.momentum2, negativeZ.'e-'.momentumY) annotation (
+        connect('e-'.negative.momentum2, zNegative.'e-'.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
@@ -7217,37 +7532,37 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum1, positiveX.'e-'.momentumY) annotation (
+        connect('e-'.positive.momentum1, xPositive.'e-'.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum1, positiveY.'e-'.momentumZ) annotation (
+        connect('e-'.positive.momentum1, yPositive.'e-'.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum1, positiveZ.'e-'.momentumX) annotation (
+        connect('e-'.positive.momentum1, zPositive.'e-'.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum2, positiveX.'e-'.momentumZ) annotation (
+        connect('e-'.positive.momentum2, xPositive.'e-'.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum2, positiveY.'e-'.momentumX) annotation (
+        connect('e-'.positive.momentum2, yPositive.'e-'.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.momentum2, positiveZ.'e-'.momentumY) annotation (
+        connect('e-'.positive.momentum2, zPositive.'e-'.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
@@ -7331,37 +7646,37 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum1, negativeX.C19HF37O5S.momentumY)
+        connect(C19HF37O5S.negative.momentum1, xNegative.C19HF37O5S.momentumY)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum1, negativeY.C19HF37O5S.momentumZ)
+        connect(C19HF37O5S.negative.momentum1, yNegative.C19HF37O5S.momentumZ)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum1, negativeZ.C19HF37O5S.momentumX)
+        connect(C19HF37O5S.negative.momentum1, zNegative.C19HF37O5S.momentumX)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum2, negativeX.C19HF37O5S.momentumZ)
+        connect(C19HF37O5S.negative.momentum2, xNegative.C19HF37O5S.momentumZ)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum2, negativeY.C19HF37O5S.momentumX)
+        connect(C19HF37O5S.negative.momentum2, yNegative.C19HF37O5S.momentumX)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.momentum2, negativeZ.C19HF37O5S.momentumY)
+        connect(C19HF37O5S.negative.momentum2, zNegative.C19HF37O5S.momentumY)
           annotation (Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
@@ -7379,37 +7694,37 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum1, positiveX.C19HF37O5S.momentumY)
+        connect(C19HF37O5S.positive.momentum1, xPositive.C19HF37O5S.momentumY)
           annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum1, positiveY.C19HF37O5S.momentumZ)
+        connect(C19HF37O5S.positive.momentum1, yPositive.C19HF37O5S.momentumZ)
           annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum1, positiveZ.C19HF37O5S.momentumX)
+        connect(C19HF37O5S.positive.momentum1, zPositive.C19HF37O5S.momentumX)
           annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum2, positiveX.C19HF37O5S.momentumZ)
+        connect(C19HF37O5S.positive.momentum2, xPositive.C19HF37O5S.momentumZ)
           annotation (Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum2, positiveY.C19HF37O5S.momentumX)
+        connect(C19HF37O5S.positive.momentum2, yPositive.C19HF37O5S.momentumX)
           annotation (Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.momentum2, positiveZ.C19HF37O5S.momentumY)
+        connect(C19HF37O5S.positive.momentum2, zPositive.C19HF37O5S.momentumY)
           annotation (Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
@@ -7433,37 +7748,37 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum1, negativeX.H2O.momentumY) annotation (
+        connect(H2O.negative.momentum1, xNegative.H2O.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum1, negativeY.H2O.momentumZ) annotation (
+        connect(H2O.negative.momentum1, yNegative.H2O.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum1, negativeZ.H2O.momentumX) annotation (
+        connect(H2O.negative.momentum1, zNegative.H2O.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum2, negativeX.H2O.momentumZ) annotation (
+        connect(H2O.negative.momentum2, xNegative.H2O.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum2, negativeY.H2O.momentumX) annotation (
+        connect(H2O.negative.momentum2, yNegative.H2O.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.momentum2, negativeZ.H2O.momentumY) annotation (
+        connect(H2O.negative.momentum2, zNegative.H2O.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
@@ -7479,37 +7794,37 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum1, positiveX.H2O.momentumY) annotation (
+        connect(H2O.positive.momentum1, xPositive.H2O.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum1, positiveY.H2O.momentumZ) annotation (
+        connect(H2O.positive.momentum1, yPositive.H2O.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum1, positiveZ.H2O.momentumX) annotation (
+        connect(H2O.positive.momentum1, zPositive.H2O.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum2, positiveX.H2O.momentumZ) annotation (
+        connect(H2O.positive.momentum2, xPositive.H2O.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum2, positiveY.H2O.momentumX) annotation (
+        connect(H2O.positive.momentum2, yPositive.H2O.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.momentum2, positiveZ.H2O.momentumY) annotation (
+        connect(H2O.positive.momentum2, zPositive.H2O.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
@@ -7534,37 +7849,37 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum1, negativeX.'H+'.momentumY) annotation (
+        connect('H+'.negative.momentum1, xNegative.'H+'.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum1, negativeY.'H+'.momentumZ) annotation (
+        connect('H+'.negative.momentum1, yNegative.'H+'.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum1, negativeZ.'H+'.momentumX) annotation (
+        connect('H+'.negative.momentum1, zNegative.'H+'.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum2, negativeX.'H+'.momentumZ) annotation (
+        connect('H+'.negative.momentum2, xNegative.'H+'.momentumZ) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum2, negativeY.'H+'.momentumX) annotation (
+        connect('H+'.negative.momentum2, yNegative.'H+'.momentumX) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.momentum2, negativeZ.'H+'.momentumY) annotation (
+        connect('H+'.negative.momentum2, zNegative.'H+'.momentumY) annotation (
             Line(
             points={{-10,6.10623e-16},{-60,-20}},
             color={127,127,127},
@@ -7581,37 +7896,37 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum1, positiveX.'H+'.momentumY) annotation (
+        connect('H+'.positive.momentum1, xPositive.'H+'.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum1, positiveY.'H+'.momentumZ) annotation (
+        connect('H+'.positive.momentum1, yPositive.'H+'.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum1, positiveZ.'H+'.momentumX) annotation (
+        connect('H+'.positive.momentum1, zPositive.'H+'.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum2, positiveX.'H+'.momentumZ) annotation (
+        connect('H+'.positive.momentum2, xPositive.'H+'.momentumZ) annotation (
             Line(
             points={{10,6.10623e-16},{60,20}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum2, positiveY.'H+'.momentumX) annotation (
+        connect('H+'.positive.momentum2, yPositive.'H+'.momentumX) annotation (
             Line(
             points={{10,6.10623e-16},{60,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.momentum2, positiveZ.'H+'.momentumY) annotation (
+        connect('H+'.positive.momentum2, zPositive.'H+'.momentumY) annotation (
             Line(
             points={{10,6.10623e-16},{60,-20}},
             color={127,127,127},
@@ -7653,56 +7968,56 @@ boundary condition</a> model.
                 origin={0,40})));
 
         protected
-          Connectors.FaceBusInternal negativeX if axis == Axis.x
+          Connectors.FaceBusInternal xNegative if axis == Axis.x
             "Internal connector for the negative face enabled if x axis"
             annotation (Placement(transformation(extent={{-70,10},{-50,30}})));
-          Connectors.FaceBusInternal negativeY if axis == Axis.y
+          Connectors.FaceBusInternal yNegative if axis == Axis.y
             "Internal connector for the negative face enabled if y axis"
             annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
-          Connectors.FaceBusInternal negativeZ if axis == Axis.z
+          Connectors.FaceBusInternal zNegative if axis == Axis.z
             "Internal connector for the negative face enabled if z axis"
             annotation (Placement(transformation(extent={{-70,-30},{-50,-10}})));
-          Connectors.FaceBusInternal positiveX if axis == Axis.x
+          Connectors.FaceBusInternal xPositive if axis == Axis.x
             "Internal connector for the positive face enabled if x axis"
             annotation (Placement(transformation(extent={{50,10},{70,30}})));
-          Connectors.FaceBusInternal positiveY if axis == Axis.y
+          Connectors.FaceBusInternal yPositive if axis == Axis.y
             "Internal connector for the positive face enabled if y axis"
             annotation (Placement(transformation(extent={{50,-10},{70,10}})));
-          Connectors.FaceBusInternal positiveZ if axis == Axis.z
+          Connectors.FaceBusInternal zPositive if axis == Axis.z
             "Internal connector for the positive face enabled if z axis"
             annotation (Placement(transformation(extent={{50,-30},{70,-10}})));
         equation
 
-          connect(negativeX, negative) annotation (Line(
+          connect(xNegative, negative) annotation (Line(
               points={{-60,20},{-80,20},{-80,0},{-100,0},{-100,5.55112e-16}},
               color={127,127,127},
               thickness=0.5,
               smooth=Smooth.None));
-          connect(negativeY, negative) annotation (Line(
+          connect(yNegative, negative) annotation (Line(
               points={{-60,5.55112e-16},{-100,0},{-100,5.55112e-16}},
               color={127,127,127},
               thickness=0.5,
               smooth=Smooth.None));
-          connect(negativeZ, negative) annotation (Line(
+          connect(zNegative, negative) annotation (Line(
               points={{-60,-20},{-80,-20},{-80,0},{-100,0},{-100,5.55112e-16}},
 
               color={127,127,127},
               thickness=0.5,
               smooth=Smooth.None));
 
-          connect(positiveX, positive) annotation (Line(
+          connect(xPositive, positive) annotation (Line(
               points={{60,20},{80,20},{80,5.55112e-16},{100,5.55112e-16}},
               color={127,127,127},
               thickness=0.5,
               smooth=Smooth.None));
-          connect(positiveY, positive) annotation (Line(
+          connect(yPositive, positive) annotation (Line(
               points={{60,5.55112e-16},{80,-4.87687e-22},{80,5.55112e-16},{100,
                   5.55112e-16}},
               color={127,127,127},
               thickness=0.5,
               smooth=Smooth.None));
 
-          connect(positiveZ, positive) annotation (Line(
+          connect(zPositive, positive) annotation (Line(
               points={{60,-20},{80,-20},{80,5.55112e-16},{100,5.55112e-16}},
               color={127,127,127},
               thickness=0.5,
@@ -8177,10 +8492,10 @@ boundary condition</a> model.
                   rotation=270,
                   origin={0,40})));
 
-            FCSys.Connectors.LinearMomentum negative
+            FCSys.Connectors.MomentumLineic negative
               "Linear momentum connector for the negative face" annotation (
                 Placement(transformation(extent={{-110,-10},{-90,10}})));
-            FCSys.Connectors.LinearMomentum positive
+            FCSys.Connectors.MomentumLineic positive
               "Linear momentum connector for the positive face" annotation (
                 Placement(transformation(extent={{90,-10},{110,10}})));
             annotation (defaultComponentPrefixes="replaceable",
@@ -8341,11 +8656,11 @@ those generated by the model's <code>connect</code> statements.</p>
       <tr align=center>
         <td align=center width=120>
           <img src=\"modelica://FCSys/resources/images/BCs/Router/PassThrough.png\">
-          <br><b>a:</b>  Pass-through
+<br><b>a:</b>  Pass-through
         </td>
         <td align=center>
           <img src=\"modelica://FCSys/resources/images/BCs/Router/CrossOver.png\">
-          <br><b>b:</b>  Cross-over
+<br><b>b:</b>  Cross-over
         </td>
       </tr>
       <tr align=center>
@@ -8353,27 +8668,31 @@ those generated by the model's <code>connect</code> statements.</p>
       </tr>
     </table>
 </html>"),
-      Icon(graphics={Line(
-              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier),Line(
-              points={{-80,40},{80,40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-80,-40},{80,-40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier)}),
+      Icon(graphics={
+          Line(
+            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier),
+          Line(
+            points={{-80,40},{80,40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{80,-40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier)}),
       Diagram(graphics));
   end Router;
 
@@ -8387,9 +8706,8 @@ those generated by the model's <code>connect</code> statements.</p>
       annotation (choices(__Dymola_checkBox=true));
 
     parameter Q.PressureAbsolute p(nominal=1*U.atm) = 1*U.atm "Pressure";
-    parameter Q.PotentialAbsolute T(
-      nominal=298.15*U.K,
-      displayUnit="K") = 298.15*U.K "Temperature";
+    parameter Q.TemperatureAbsolute T(nominal=298.15*U.K) = 298.15*U.K
+      "Temperature";
     parameter Q.NumberAbsolute RH(displayUnit="%") = 1 "Relative humidity";
     parameter Q.NumberAbsolute x_O2_dry(
       final max=1,
@@ -8409,37 +8727,45 @@ those generated by the model's <code>connect</code> statements.</p>
 For simulation, specify global default settings by dragging FCSys.BCs.Defaults into your model.
 The default global default settings will be used for the current simulation.",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-              100}}), graphics={Rectangle(
-              extent={{-21.2132,21.2132},{21.2131,-21.2131}},
-              lineColor={127,127,127},
-              fillPattern=FillPattern.HorizontalCylinder,
-              fillColor={225,225,225},
-              origin={30,30},
-              rotation=135),Polygon(
-              points={{-60,60},{-60,-100},{60,-100},{60,30},{30,30},{30,60},{-60,
-              60}},
-              lineColor={127,127,127},
-              smooth=Smooth.None,
-              fillColor={245,245,245},
-              fillPattern=FillPattern.Solid),Polygon(
-              points={{-60,60},{-60,-100},{60,-100},{60,30},{30,60},{-60,60}},
-              lineColor={127,127,127},
-              smooth=Smooth.None),Line(
-              points={{-40,4},{40,4}},
-              color={127,127,127},
-              smooth=Smooth.None),Line(
-              points={{-40,-20},{40,-20}},
-              color={127,127,127},
-              smooth=Smooth.None),Line(
-              points={{-40,-44},{40,-44}},
-              color={127,127,127},
-              smooth=Smooth.None),Line(
-              points={{-40,-68},{40,-68}},
-              color={127,127,127},
-              smooth=Smooth.None),Line(
-              points={{-40,28},{26,28}},
-              color={127,127,127},
-              smooth=Smooth.None)}),
+              100}}), graphics={
+          Rectangle(
+            extent={{-21.2132,21.2132},{21.2131,-21.2131}},
+            lineColor={127,127,127},
+            fillPattern=FillPattern.HorizontalCylinder,
+            fillColor={225,225,225},
+            origin={30,30},
+            rotation=135),
+          Polygon(
+            points={{-60,60},{-60,-100},{60,-100},{60,30},{30,30},{30,60},{-60,
+                60}},
+            lineColor={127,127,127},
+            smooth=Smooth.None,
+            fillColor={245,245,245},
+            fillPattern=FillPattern.Solid),
+          Polygon(
+            points={{-60,60},{-60,-100},{60,-100},{60,30},{30,60},{-60,60}},
+            lineColor={127,127,127},
+            smooth=Smooth.None),
+          Line(
+            points={{-40,4},{40,4}},
+            color={127,127,127},
+            smooth=Smooth.None),
+          Line(
+            points={{-40,-20},{40,-20}},
+            color={127,127,127},
+            smooth=Smooth.None),
+          Line(
+            points={{-40,-44},{40,-44}},
+            color={127,127,127},
+            smooth=Smooth.None),
+          Line(
+            points={{-40,-68},{40,-68}},
+            color={127,127,127},
+            smooth=Smooth.None),
+          Line(
+            points={{-40,28},{26,28}},
+            color={127,127,127},
+            smooth=Smooth.None)}),
       Diagram(graphics));
   end Defaults;
 
@@ -8463,13 +8789,13 @@ The default global default settings will be used for the current simulation.",
       defaultComponentName="volume",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,0},
-              fillPattern=FillPattern.Sphere,
-              fillColor={170,213,255}),Text(
-              extent={{-150,12},{150,-18}},
-              lineColor={0,0,0},
-              textString="V=%V")}),
+            extent={{-100,100},{100,-100}},
+            lineColor={0,0,0},
+            fillPattern=FillPattern.Sphere,
+            fillColor={170,213,255}), Text(
+            extent={{-150,12},{150,-18}},
+            lineColor={0,0,0},
+            textString="V=%V")}),
       Documentation(info="<html>
 <p>
 Ideally mixed volume of constant size with two fluid ports and one medium model.
@@ -8790,9 +9116,9 @@ should be used if these values are needed.
                 100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                 100,100}}), graphics={Text(
-                  extent={{-150,110},{150,150}},
-                  textString="%name",
-                  lineColor={0,0,255})}));
+              extent={{-150,110},{150,150}},
+              textString="%name",
+              lineColor={0,0,255})}));
     end PartialLumpedVessel;
 
     block RealFunction
