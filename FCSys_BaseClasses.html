@@ -1,0 +1,95 @@
+<html>
+<head>
+<title>FCSys.BaseClasses</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta name="description" content="&quot;Base classes (not for direct use)&quot;">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/modelicaDoc.css">
+<link rel="shortcut icon" href="images/favicon.ico">
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+<h3>Table of Contents</h3>
+  <ul>
+  <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+  <li><a href="FCSys_BCs.html">BCs</a></li>
+  <li><a href="FCSys_Sensors.html">Sensors</a></li>
+  <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+  <li><a href="FCSys_Regions.html">Regions</a></li>
+  <li><a href="FCSys_Subregions.html">Subregions</a></li>
+  <li><a href="FCSys_Connectors.html">Connectors</a></li>
+  <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+  <li><a href="FCSys_Units.html">Units</a></li>
+  <li><a href="FCSys_Quantities.html">Quantities</a></li>
+  <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+  </ul><h3>Download</h3>
+  <ul>
+    <li>Latest: <a href="release/FCSys-2.0.zip"
+           rel="nofollow">FCSys-2.0.zip</a> (**Check back soon)</li>
+  </ul>
+
+  </div>
+</div>
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.BaseClasses"></a><a href="index.html#FCSys">FCSys</a>.BaseClasses</h2>
+<b>Base classes (not for direct use)</b>
+<p>
+<p><h3>Information</h3></p>
+
+<p>
+<b>Licensed by Kevin Davies under the Modelica License 2</b><br>
+Copyright 2007&ndash;2012, Kevin Davies.
+</p>
+<p>
+<i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
+disclaimer of warranty) see <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.ModelicaLicense2">
+FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href="http://www.modelica.org/licenses/ModelicaLicense2">
+http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
+</p><p>
+Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_BasesPackage.html#Modelica.Icons.BasesPackage">Modelica.Icons.BasesPackage</a> (Icon for packages containing base classes).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.BaseClasses.IconsS.png" alt="FCSys.BaseClasses.Icons" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons">Icons</a>
+</td><td>Icons to annotate and represent classes</td></tr>
+<tr><td><img src="images/FCSys.BaseClasses.IconsS.png" alt="FCSys.BaseClasses.Utilities" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">Utilities</a>
+</td><td>Functions that implement useful algorithms</td></tr>
+<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis</a>
+</td><td>Enumeration for Cartesian axes</td></tr>
+<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Orientation">Orientation</a>
+</td><td>Enumeration for transverse orientations across a face</td></tr>
+<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Side">Side</a>
+</td><td>Enumeration for sides of a region or subregion</td></tr>
+</table>
+<p><h3>Types and constants</h3>
+<a name="FCSys.BaseClasses.Axis"></a><pre><font color="blue">type</font> Axis = <font color="blue">enumeration</font>(
+    x <font color="darkgreen">&quot;X&quot;</font>,
+    y <font color="darkgreen">&quot;Y&quot;</font>,
+    z <font color="darkgreen">&quot;Z&quot;</font>) <font color="darkgreen">&quot;Enumeration for Cartesian axes&quot;</font>;</pre><p>
+<a name="FCSys.BaseClasses.Orientation"></a><pre><font color="blue">type</font> Orientation = <font color="blue">enumeration</font>(
+    following <font color="darkgreen">&quot;Along axis following normal axis in Cartesian coordinates&quot;</font>,
+    preceding <font color="darkgreen">&quot;Along axis preceding normal axis in Cartesian coordinates&quot;</font>) <font color="darkgreen">
+  &quot;Enumeration for transverse orientations across a face&quot;</font>;</pre><p>
+<a name="FCSys.BaseClasses.Side"></a><pre><font color="blue">type</font> Side = <font color="blue">enumeration</font>(
+    n <font color="darkgreen">&quot;Negative&quot;</font>,
+    p <font color="darkgreen">&quot;Positive (greater position along the Cartesian axis)&quot;</font>) <font color="darkgreen">
+  &quot;Enumeration for sides of a region or subregion&quot;</font>;</pre><p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+        &copy; Copyright 2012, Kevin Davies.
+      Last updated Sat Nov 10 22:31:59 2012.
+</div>
+</body>
+</html>

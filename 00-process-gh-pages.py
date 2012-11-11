@@ -12,17 +12,17 @@ import re, glob, sys, os
 # Replacement pairs
 rpls = [
     # Update the image links.
-    ('<img src="/[A-z.]+/', '<img src="'),
-    ('<img src="[A-z.]+/', '<img src="'), # Repeated due to subdirectories
-    ('<img src="[A-z.]+/', '<img src="'),
-    ('<img src="[A-z.]+/', '<img src="'),
-    ('<img src="[A-z.]+/', '<img src="'),
-    ('<img src="[A-z.]+/', '<img src="'),
-    ('<img src="[A-z.]+/', '<img src="'),
-    ('<img src="[A-z.]+/', '<img src="'),
-    ('([A-z.]+)\.png', r'images/\1.png'),
-    ('([A-z.]+)\.svg', r'images/\1.svg'),
-    ('([A-z.]+)\.gif', r'images/\1.gif'),
+    ('<img src="/[A-Za-z0-9.]+/', '<img src="'),
+    ('<img src="[A-Za-z0-9.]+/', '<img src="'), # Repeated due to subdirectories
+    ('<img src="[A-Za-z0-9.]+/', '<img src="'),
+    ('<img src="[A-Za-z0-9.]+/', '<img src="'),
+    ('<img src="[A-Za-z0-9.]+/', '<img src="'),
+    ('<img src="[A-Za-z0-9.]+/', '<img src="'),
+    ('<img src="[A-Za-z0-9.]+/', '<img src="'),
+    ('<img src="[A-Za-z0-9.]+/', '<img src="'),
+    ('([A-Za-z0-9.]+)\.png', r'images/\1.png'),
+    ('([A-Za-z0-9.]+)\.svg', r'images/\1.svg'),
+    ('([A-Za-z0-9.]+)\.gif', r'images/\1.gif'),
     ('../resources/images/images/favicon.ico', r'images/favicon.ico'),
     # FCSys.html will be index.html.
     ('"FCSys.html"', '"index.html"'),
