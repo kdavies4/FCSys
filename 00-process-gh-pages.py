@@ -23,14 +23,15 @@ rpls = [
     ('([A-Za-z0-9.]+)\.png', r'images/\1.png'),
     ('([A-Za-z0-9.]+)\.svg', r'images/\1.svg'),
     ('([A-Za-z0-9.]+)\.gif', r'images/\1.gif'),
-    ('../resources/images/images/favicon.ico', r'images/favicon.ico'),
+    ('\.\./resources/images/images/(favicon\.ico)', r'images/\1'),
+    ('\.\./resources/documentation/UsersGuide/References/(Natural Unit Representation in Modelica \(poster\)\.pdf)', r'images/\1'),
     # FCSys.html will be index.html.
-    ('"FCSys.html"', '"index.html"'),
+    ('"FCSys\.html"', '"index.html"'),
     # Add the download link.
-    ('BaseClasses</a></li>\n  </ul>\n  </div>', 'BaseClasses</a></li>\n  </ul><h3>Download</h3>\n  <ul>\n    <li>Latest: <a href="release/FCSys-2.0.zip"\n           rel="nofollow">FCSys-2.0.zip</a> (**Check back soon)</li>\n  </ul>\n\n  </div>'),    ('FCSys.html', r'index.html'),
+    ('BaseClasses</a></li>\n  </ul>\n  </div>', 'BaseClasses</a></li>\n  </ul><h3>Download</h3>\n  <ul>\n    <li>Latest: <a href="release/FCSys-2.0.zip"\n           rel="nofollow">FCSys-2.0.zip</a> (**Check back soon)</li>\n  </ul>\n\n  </div>'),
     # Move the style sheet and icon.
-    ('"../resources/www/modelicaDoc.css"', '"stylesheets/modelicaDoc.css"'),
-    ('"../resources/images/favicon.ico"', '"images/favicon.ico"'),
+    ('"\.\./resources/documentation/ModelicaDoc\.css"', '"stylesheets/ModelicaDoc.css"'),
+    ('"\.\./resources/images/favicon\.ico"', '"images/favicon.ico"'),
     ]
 
 # Directory specification

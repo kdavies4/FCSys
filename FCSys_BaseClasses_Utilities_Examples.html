@@ -48,24 +48,33 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.BaseClasses.Utilities.SigmaS.png" alt="FCSys.BaseClasses.Utilities.Examples.TestFunctions" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Examples.html#FCSys.BaseClasses.Utilities.Examples.TestFunctions">TestFunctions</a>
-</td><td>Test the functions</td></tr>
-<tr><td><img src="images/FCSys.BaseClasses.Utilities.Examples.translatePolyS.png" alt="FCSys.BaseClasses.Utilities.Examples.translatePoly" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Examples.html#FCSys.BaseClasses.Utilities.Examples.translatePoly">translatePoly</a>
-</td><td>Evaluate the translated version of <code>poly()</code></td></tr>
+</td><td>Test all the functions</td></tr>
+<tr><td><img src="images/FCSys.BaseClasses.Utilities.Examples.TranslatePolyS.png" alt="FCSys.BaseClasses.Utilities.Examples.TranslatePoly" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Examples.html#FCSys.BaseClasses.Utilities.Examples.TranslatePoly">TranslatePoly</a>
+</td><td>Evaluate the translated version of <a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.poly">poly()</a></td></tr>
 </table>
 <hr>
 
 <h2><img src="images/FCSys.BaseClasses.Utilities.Examples.TestFunctionsI.png" alt="FCSys.BaseClasses.Utilities.Examples.TestFunctions" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.Examples.TestFunctions"></a><a href="FCSys_BaseClasses_Utilities_Examples.html#FCSys.BaseClasses.Utilities.Examples">FCSys.BaseClasses.Utilities.Examples</a>.TestFunctions</h2>
-<b>Test the functions</b><p>
+<b>Test all the functions</b><p>
 <p><h3>Information</h3></p>
+<p>
+  This function call will fail if any of the functions return an
+  incorrect result.  It will return true if all of the functions pass.
+  There are no inputs or outputs.</p><p>
 Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p><h3>Outputs</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Boolean</td><td>ok</td><td>true, if all tests passed</td></tr>
+</table>
 <p><h3>Modelica definition</h3>
 <pre>
-<font color="blue">function</font> TestFunctions <font color="darkgreen">&quot;Test the functions&quot;</font>
+<font color="blue">function</font> TestFunctions <font color="darkgreen">&quot;Test all the functions&quot;</font>
   <font color="blue">extends </font><a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
-  <font color="darkgreen">// This function call will fail if any of the functions return an</font>
-  <font color="darkgreen">// incorrect result.  There are no inputs or outputs.</font>
+  <font color="blue">output </font>Boolean ok <font color="darkgreen">&quot;true, if all tests passed&quot;</font>;
+
 <font color="blue">protected </font>
   String strings[6];
   Integer integers[6];
@@ -116,6 +125,9 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
     <font color="red">assert</font>((<font color="red">Chemistry.stoich</font>({&quot;e-&quot;,&quot;H+&quot;,&quot;O2&quot;,&quot;H2O&quot;}))[i] == {-4,-4,-1,2}[i], &quot;The Chemistry.stoich function failed on entry &quot;
        + <font color="red">String</font>(i) + &quot;.&quot;);
   <font color="blue">end for</font>;
+
+  <font color="darkgreen">// average()</font>
+  <font color="red">assert</font>(<font color="red">average</font>({1,2,3}) == 2, &quot;The average function failed.&quot;);
 
   <font color="darkgreen">// cartWrap()</font>
   <font color="red">assert</font>(<font color="red">cartWrap</font>(0) == 3, &quot;The cartWrap function failed.&quot;);
@@ -173,19 +185,21 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   <font color="blue">end for</font>;
   <font color="darkgreen">// Compare Sigma() to sum():</font>
   <font color="red">assert</font>(<font color="red">sum</font>([1, 2; 3, 4]) == 10, &quot;The sum function failed.&quot;);
-<font color="blue">end </font>TestFunctions;
+
+  ok := true;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>TestFunctions;
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.BaseClasses.Utilities.Examples.translatePolyI.png" alt="FCSys.BaseClasses.Utilities.Examples.translatePoly" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.BaseClasses.Utilities.Examples.translatePoly"></a><a href="FCSys_BaseClasses_Utilities_Examples.html#FCSys.BaseClasses.Utilities.Examples">FCSys.BaseClasses.Utilities.Examples</a>.translatePoly</h2>
-<b>Evaluate the translated version of <code>poly()</code></b><p>
+<h2><img src="images/FCSys.BaseClasses.Utilities.Examples.TranslatePolyI.png" alt="FCSys.BaseClasses.Utilities.Examples.TranslatePoly" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.BaseClasses.Utilities.Examples.TranslatePoly"></a><a href="FCSys_BaseClasses_Utilities_Examples.html#FCSys.BaseClasses.Utilities.Examples">FCSys.BaseClasses.Utilities.Examples</a>.TranslatePoly</h2>
+<b>Evaluate the translated version of <a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.poly">poly()</a></b><p>
 <p><h3>Information</h3></p>
 Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 <p><h3>Modelica definition</h3>
 <pre>
-<font color="blue">model</font> translatePoly <font color="darkgreen">
-  &quot;Evaluate the translated version of <code>poly()</code>&quot;</font>
+<font color="blue">model</font> TranslatePoly <font color="darkgreen">
+  &quot;Evaluate the translated version of <a href=\"FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.poly\">poly()</a>&quot;</font>
   <font color="blue">extends </font><a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
   Real x1;
   Real x2;
@@ -208,7 +222,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
     time + 1,
     {1,1,1,1},
     -3);
-<font color="blue">end </font>translatePoly;
+<font color="blue">end </font>TranslatePoly;
 </pre>
       </div>
     </div>
@@ -216,7 +230,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 </div>
 <div class="footer">
         &copy; Copyright 2012, Kevin Davies.
-      Last updated Sat Nov 10 22:32:01 2012.
+      Last updated Sun Nov 11 09:17:52 2012.
 </div>
 </body>
 </html>

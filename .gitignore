@@ -55,9 +55,6 @@ old/
 help/
 build/
 
-# Images
-*.pdf
-
 # Using .gif version instead
 images/icon.png
 
