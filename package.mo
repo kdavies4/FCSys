@@ -22,7 +22,7 @@ import SI = Modelica.SIunits;
 import Modelica.Math;
 import arcsin = Modelica.Math.asin;
 // Note:  The command line of Dymola 7.4 recognizes arcsin() rather than
-// asin().  In this package, arcsin() is used.  A similiar note applies
+// asin().  In this package, arcsin() is used.  A similar note applies
 // to functions below.
 import arccos = Modelica.Math.acos;
 import arctan = Modelica.Math.atan;
@@ -33,10 +33,10 @@ import FCSys.BaseClasses.Utilities.*;
 import FCSys.BaseClasses.Axis;
 import FCSys.BaseClasses.Orientation;
 import FCSys.BaseClasses.Side;
-import FCSys.Subregions.BaseClasses.InitMethScalar;
-import FCSys.Subregions.BaseClasses.InitMethLinear;
 import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
 import FCSys.Connectors.BaseClasses.MaterialEntropyOpt;
+import FCSys.Subregions.BaseClasses.InitMethLinear;
+import FCSys.Subregions.BaseClasses.InitMethScalar;
 
 
 package UsersGuide "User's Guide"
@@ -147,10 +147,6 @@ package UsersGuide "User's Guide"
     <p>These references are used throughout the library:</p>
     <table border=0 cellspacing=0 cellpadding=2 class=\"noBorder\">
     <tr>
-      <td valign=top class=\"noBorder\">[Ashcroft1976]</td>
-      <td valign=top class=\"noBorder\">N. W. Ashcroft and N. D. Mermin, <i>Solid State Physics</i>, New York: Holt, Rinehard and Winston, 1976.</td>
-    </tr>
-    <tr>
       <td valign=top class=\"noBorder\">[Avogadro1.03]</td>
       <td valign=top class=\"noBorder\">Avogadro: An Open-Source Molecular Builder and Visualization Tool, ver. 1.03. <a href=\"http://avogadro.openmolecules.net\">http://avogadro.openmolecules.net</a>.</td>
     </tr>
@@ -244,7 +240,7 @@ package UsersGuide "User's Guide"
     </tr>
     <tr>
       <td valign=top class=\"noBorder\">[Reichert2010]</td>
-      <td valign=top class=\"noBorder\">P. Reichert and N. Schuwirth, \"<a href=\"http://dx.doi.org/10.1016/j.envsoft.2010.03.002\">A Generic Framework for Deriving Process Stoichiometry inEnvironmental Models</a>,\" <i>Environmental Modelling & Software</i>, vol. 25, pp. 1241&ndash;1251, 2010.</td>
+      <td valign=top class=\"noBorder\">P. Reichert and N. Schuwirth, \"<a href=\"http://dx.doi.org/10.1016/j.envsoft.2010.03.002\">A Generic Framework for Deriving Process Stoichiometry in Environmental Models</a>,\" <i>Environmental Modelling & Software</i>, vol. 25, pp. 1241&ndash;1251, 2010.</td>
     </tr>
     <tr>
       <td valign=top class=\"noBorder\">[Salzman2004]</td>
@@ -903,6 +899,19 @@ printing and shipping costs may be recovered.</p>
     end ModelicaLicense2;
   annotation (preferedView="info", DocumentationClass=true);
   end UsersGuide;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 annotation (

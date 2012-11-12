@@ -1064,14 +1064,15 @@ package Regions "3D arrays of discrete, interconnected subregions"
       // **temp adj Lstars
       parameter Q.NumberAbsolute x(nominal=1) = 0.1 "Volumetric porosity";
 
-      // Nonessential variables (for analysis)
-      output Q.Number x_H2[n_x, n_y, n_z]=subregions.gas.H2.N ./ (subregions.gas.H2.N
-           + subregions.gas.H2O.N) if defaults.analysis and hasSubregions
-        "Molar concentration of H2";
-      output Q.Number x_H2O[n_x, n_y, n_z]=ones(
-              n_x,
-              n_y,
-              n_z) - x_H2 if defaults.analysis and hasSubregions
+      // Auxiliary variables (for analysis)
+      output Q.Number x_H2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+         = subregions.gas.H2.N ./ (subregions.gas.H2.N + subregions.gas.H2O.N)
+        if defaults.analysis and hasSubregions "Molar concentration of H2";
+      output Q.Number x_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+         = ones(
+            n_x,
+            n_y,
+            n_z) - x_H2 if defaults.analysis and hasSubregions
         "Molar concentration of H2O";
 
     protected
@@ -1354,14 +1355,15 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
       // Note:  Porosity may be lower once assembled (and compressed).  Bernardi
       // and Verbrugge give x = 0.4 [Bernardi1992, p. 2483, Table 3].
 
-      // Nonessential variables (for analysis)
-      output Q.Number x_H2[n_x, n_y, n_z]=subregions.gas.H2.N ./ (subregions.gas.H2.N
-           + subregions.gas.H2O.N) if defaults.analysis and hasSubregions
-        "Molar concentration of H2";
-      output Q.Number x_H2O[n_x, n_y, n_z]=ones(
-              n_x,
-              n_y,
-              n_z) - x_H2 if defaults.analysis and hasSubregions
+      // Auxiliary variables (for analysis)
+      output Q.Number x_H2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+         = subregions.gas.H2.N ./ (subregions.gas.H2.N + subregions.gas.H2O.N)
+        if defaults.analysis and hasSubregions "Molar concentration of H2";
+      output Q.Number x_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+         = ones(
+            n_x,
+            n_y,
+            n_z) - x_H2 if defaults.analysis and hasSubregions
         "Molar concentration of H2O";
 
     protected
@@ -1698,14 +1700,15 @@ the z axis extends across the width of the channel.</p></html>"),
         "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>)</html>"
         annotation (Dialog(group="Initialization"));
 
-      // Nonessential variables (for analysis)
-      output Q.Number x_H2[n_x, n_y, n_z]=subregions.gas.H2.N ./ (subregions.gas.H2.N
-           + subregions.gas.H2O.N) if defaults.analysis and hasSubregions
-        "Molar concentration of H2";
-      output Q.Number x_H2O[n_x, n_y, n_z]=ones(
-              n_x,
-              n_y,
-              n_z) - x_H2 if defaults.analysis and hasSubregions
+      // Auxiliary variables (for analysis)
+      output Q.Number x_H2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+         = subregions.gas.H2.N ./ (subregions.gas.H2.N + subregions.gas.H2O.N)
+        if defaults.analysis and hasSubregions "Molar concentration of H2";
+      output Q.Number x_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+         = ones(
+            n_x,
+            n_y,
+            n_z) - x_H2 if defaults.analysis and hasSubregions
         "Molar concentration of H2O";
 
     protected
@@ -2225,8 +2228,6 @@ the z axis extends across the width of the channel.</p>
               initMethPartNum=InitMethScalar.ReactionRate,
               yNegative(viscousX=false),
               yPositive(viscousX=false)))));
-
-      // **temp nonzero Ndot_IC
       //'e-'(xNegative(matEntOpt=MaterialEntropyOpt.ClosedAdiabatic),
       //'H+'(xPositive(matEntOpt=MaterialEntropyOpt.ClosedAdiabatic),
 
@@ -2252,17 +2253,20 @@ the z axis extends across the width of the channel.</p>
       // TODO: Include reaction to absorb H2O into ionomer.
       // Assume zero volume of H2O in the ionomer?
 
-      // Nonessential variables (for analysis)
-      output Q.Number x_H2O[n_x, n_y, n_z]=subregions.gas.H2O.N ./ (subregions.gas.H2O.N
-           + subregions.gas.N2.N + subregions.gas.O2.N) if defaults.analysis
-         and hasSubregions "Molar concentration of H2";
-      output Q.Number x_N2[n_x, n_y, n_z]=subregions.gas.N2.N ./ (subregions.gas.H2O.N
-           + subregions.gas.N2.N + subregions.gas.O2.N) if defaults.analysis
-         and hasSubregions "Molar concentration of N2";
-      output Q.Number x_O2[n_x, n_y, n_z]=ones(
-              n_x,
-              n_y,
-              n_z) - x_H2O - x_N2 if defaults.analysis and hasSubregions
+      // Auxiliary variables (for analysis)
+      output Q.Number x_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+         = subregions.gas.H2O.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N
+         + subregions.gas.O2.N) if defaults.analysis and hasSubregions
+        "Molar concentration of H2";
+      output Q.Number x_N2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+         = subregions.gas.N2.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N
+         + subregions.gas.O2.N) if defaults.analysis and hasSubregions
+        "Molar concentration of N2";
+      output Q.Number x_O2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+         = ones(
+            n_x,
+            n_y,
+            n_z) - x_H2O - x_N2 if defaults.analysis and hasSubregions
         "Molar concentration of O2";
 
     protected
@@ -2460,17 +2464,20 @@ the z axis extends across the width of the channel.</p>
       parameter Q.NumberAbsolute x(nominal=1) = 0.76 "Volumetric porosity";
       // The default porosity is for Sigracet 24 BC.
 
-      // Nonessential variables (for analysis)
-      output Q.Number x_H2O[n_x, n_y, n_z]=subregions.gas.H2O.N ./ (subregions.gas.H2O.N
-           + subregions.gas.N2.N + subregions.gas.O2.N) if defaults.analysis
-         and hasSubregions "Molar concentration of H2";
-      output Q.Number x_N2[n_x, n_y, n_z]=subregions.gas.N2.N ./ (subregions.gas.H2O.N
-           + subregions.gas.N2.N + subregions.gas.O2.N) if defaults.analysis
-         and hasSubregions "Molar concentration of N2";
-      output Q.Number x_O2[n_x, n_y, n_z]=ones(
-              n_x,
-              n_y,
-              n_z) - x_H2O - x_N2 if defaults.analysis and hasSubregions
+      // Auxiliary variables (for analysis)
+      output Q.Number x_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+         = subregions.gas.H2O.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N
+         + subregions.gas.O2.N) if defaults.analysis and hasSubregions
+        "Molar concentration of H2";
+      output Q.Number x_N2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+         = subregions.gas.N2.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N
+         + subregions.gas.O2.N) if defaults.analysis and hasSubregions
+        "Molar concentration of N2";
+      output Q.Number x_O2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+         = ones(
+            n_x,
+            n_y,
+            n_z) - x_H2O - x_N2 if defaults.analysis and hasSubregions
         "Molar concentration of O2";
     protected
       final parameter Q.Volume xV=x*V "Gas volume";
@@ -2801,17 +2808,20 @@ the z axis extends across the width of the channel.</p>
 
       parameter Q.NumberAbsolute x(nominal=1) = 0.1 "Volumetric porosity";
 
-      // Nonessential variables (for analysis)
-      output Q.Number x_H2O[n_x, n_y, n_z]=subregions.gas.H2O.N ./ (subregions.gas.H2O.N
-           + subregions.gas.N2.N + subregions.gas.O2.N) if defaults.analysis
-         and hasSubregions "Molar concentration of H2";
-      output Q.Number x_N2[n_x, n_y, n_z]=subregions.gas.N2.N ./ (subregions.gas.H2O.N
-           + subregions.gas.N2.N + subregions.gas.O2.N) if defaults.analysis
-         and hasSubregions "Molar concentration of N2";
-      output Q.Number x_O2[n_x, n_y, n_z]=ones(
-              n_x,
-              n_y,
-              n_z) - x_H2O - x_N2 if defaults.analysis and hasSubregions
+      // Auxiliary variables (for analysis)
+      output Q.Number x_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+         = subregions.gas.H2O.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N
+         + subregions.gas.O2.N) if defaults.analysis and hasSubregions
+        "Molar concentration of H2";
+      output Q.Number x_N2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+         = subregions.gas.N2.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N
+         + subregions.gas.O2.N) if defaults.analysis and hasSubregions
+        "Molar concentration of N2";
+      output Q.Number x_O2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+         = ones(
+            n_x,
+            n_y,
+            n_z) - x_H2O - x_N2 if defaults.analysis and hasSubregions
         "Molar concentration of O2";
     protected
       final parameter Q.Volume xV=x*V "Gas volume";

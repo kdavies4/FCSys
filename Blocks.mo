@@ -166,7 +166,7 @@ package Blocks "Imperative models (e.g., controllers and observers)"
 <br>T_s = 0.5; % sampling period [s]
 <br>dsys = c2d(csys,'zoh',T_s);
 <br>[A,B,C,D] = ssdata(dsys) % where A,B,C,D are now the matrices of the discrete-time model</code>
- </td></tr></code></table></html>", revisions="<html><ul><li>Jan Gall, 2009/12/7:<br>Initial verion</li>
+ </td></tr></code></table></html>", revisions="<html><ul><li>Jan Gall, 2009/12/7:<br>Initial version</li>
   <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/12/11:<br>Modified</li></ul></html>"));
     end MaciejowskiAircraftMPC;
 
@@ -2843,8 +2843,8 @@ This is discussed in the description of package
               color={0,0,127},
               smooth=Smooth.None));
           annotation (
-            Iocumentation(revisions=
-                  "<html><ul><li>Implemented in Modelica y K. L. Davies, 12/11/09</li></ul></html>"),
+            Documentation(revisions=
+                  "<html><ul><li>Implemented in Modelica by K. L. Davies, 12/11/09</li></ul></html>"),
 
             Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics),

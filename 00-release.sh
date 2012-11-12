@@ -31,5 +31,15 @@ cd $dest_dir
 rpl 'dateModified=""' dateModified='"'"$timestamp"'"' $foldername/package.mo
 rpl 'revisionID=""' revisionID='"SHA: '$hash'"' $foldername/package.mo
 
+# Give the text files Windows line endings.
+for f in `find $foldername -name "*.bat" -o -name "*.c" -o -name "*.css" -o -name "*.html" -o -name "*.m" -o -name "*.mo" -o -name "*.mos" -o -name "*.py" -o -name "*.txt"`; do
+    todos "$f"
+done
+todos $foldername/package.order
+todos $foldername/resources/source/Python/matplotlibrc
+
 # Make a zipped copy.
-zip -r $foldername.zip $foldername
+zip -rq $foldername.zip $foldername
+
+echo -n "Done.  Press enter to exit."
+read answer

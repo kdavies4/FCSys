@@ -3633,8 +3633,7 @@ boundary condition</a> models.
             redeclare replaceable Species.Momentum.Force lin2BC,
             redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
             entropySpec(k=0)), 'e-'(
-            redeclare replaceable Species.Material.PotentialElectrochemical
-              materialBC,
+            redeclare replaceable Species.Material.Current materialBC,
             redeclare replaceable Species.Momentum.Force lin1BC,
             redeclare replaceable Species.Momentum.Force lin2BC,
             redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
@@ -3658,11 +3657,55 @@ boundary condition</a> models.
             redeclare replaceable Species.Momentum.Force lin2BC,
             redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
             entropySpec(k=0))));
-      // temp EC potential for e-
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
     end SubregionFlow;
+
+    model SubregionFlowTemp
+      "<html>BC for a face of a <a href=\"modelica://FCSys.Subregions.Subregion\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with current and force by default</html>"
+      extends FCSys.BCs.Face.Subregion(
+        gas(
+          H2(
+            redeclare replaceable Species.Material.Current materialBC,
+            redeclare replaceable Species.Momentum.Force lin1BC,
+            redeclare replaceable Species.Momentum.Force lin2BC),
+          H2O(
+            redeclare replaceable Species.Material.Current materialBC,
+            redeclare replaceable Species.Momentum.Force lin1BC,
+            redeclare replaceable Species.Momentum.Force lin2BC),
+          N2(
+            redeclare replaceable Species.Material.Current materialBC,
+            redeclare replaceable Species.Momentum.Force lin1BC,
+            redeclare replaceable Species.Momentum.Force lin2BC),
+          O2(
+            redeclare replaceable Species.Material.Current materialBC,
+            redeclare replaceable Species.Momentum.Force lin1BC,
+            redeclare replaceable Species.Momentum.Force lin2BC)),
+        graphite(C(
+            redeclare replaceable Species.Material.Current materialBC,
+            redeclare replaceable Species.Momentum.Force lin1BC,
+            redeclare replaceable Species.Momentum.Force lin2BC), 'e-'(
+            redeclare replaceable Species.Material.Current materialBC,
+            redeclare replaceable Species.Momentum.Force lin1BC,
+            redeclare replaceable Species.Momentum.Force lin2BC)),
+        ionomer(
+          C19HF37O5S(
+            redeclare replaceable Species.Material.Current materialBC,
+            redeclare replaceable Species.Momentum.Force lin1BC,
+            redeclare replaceable Species.Momentum.Force lin2BC),
+          H2O(
+            redeclare replaceable Species.Material.Current materialBC,
+            redeclare replaceable Species.Momentum.Force lin1BC,
+            redeclare replaceable Species.Momentum.Force lin2BC),
+          'H+'(
+            redeclare replaceable Species.Material.Current materialBC,
+            redeclare replaceable Species.Momentum.Force lin1BC,
+            redeclare replaceable Species.Momentum.Force lin2BC)));
+
+      annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
+            "subregionFaceBC");
+    end SubregionFlowTemp;
 
     model Subregion0Current
       "<html>BC for a face of a <a href=\"modelica://FCSys.Subregions.Subregion\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with efforts except zero current by default</html>"

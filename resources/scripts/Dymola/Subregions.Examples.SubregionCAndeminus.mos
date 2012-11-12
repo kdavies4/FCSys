@@ -1,11 +1,11 @@
 // Define signals.
-filename = "SubregionCAndH2.mat";
-y1 = {"subregion.graphite.C.N","subregion.graphite.'e-'.N"};
-y2 = {"subregion.graphite.C.phi[1]","subregion.graphite.'e-'.phi[1]"};
-y3 = {"subregion.graphite.C.p","subregion.graphite.'e-'.p"};
-y4 = {"subregion.graphite.C.T","subregion.graphite.'e-'.T"};
-y5 = {"subregion.graphite.C.v","subregion.graphite.'e-'.v"};
-y6 = {"subregion.graphite.C.mu","subregion.graphite.'e-'.mu"};
+filename = "SubregionCAndeminus.mat";
+y1 = {"subregion.graphite.C.N", "subregion.graphite.'e-'.N"};
+y2 = {"subregion.graphite.C.phi[1]", "subregion.graphite.'e-'.phi[1]"};
+y3 = {"subregion.graphite.C.p", "subregion.graphite.'e-'.p"};
+y4 = {"subregion.graphite.C.T", "subregion.graphite.'e-'.T"};
+y5 = {"subregion.graphite.C.v", "subregion.graphite.'e-'.v"};
+y6 = {"subregion.graphite.C.mu", "subregion.graphite.'e-'.mu"};
 
 // Make plots.
 removePlots();

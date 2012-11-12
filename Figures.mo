@@ -68,8 +68,8 @@ package Figures "Layouts for documentation"
               color={0,0,127},
               smooth=Smooth.None));
           connect(imperative_vi.v, pulse.y) annotation (Line(
-              points={{-1,6.10623e-16},{-5.5,6.10623e-16},{-5.5,6.10623e-16},{
-                  -10,6.10623e-16},{-10,6.10623e-16},{-19,6.10623e-16}},
+              points={{-1,6.10623e-16},{-5.5,6.10623e-16},{-5.5,6.10623e-16},{-10,
+                  6.10623e-16},{-10,6.10623e-16},{-19,6.10623e-16}},
               color={0,0,127},
               smooth=Smooth.None));
           annotation (
@@ -328,8 +328,8 @@ package Figures "Layouts for documentation"
             color={0,0,255},
             smooth=Smooth.None));
         connect(res1.n, cap.p) annotation (Line(
-            points={{30,1.22125e-15},{30,-2.5},{30,-2.5},{30,-5},{30,-10},{30,
-                -10}},
+            points={{30,1.22125e-15},{30,-2.5},{30,-2.5},{30,-5},{30,-10},{30,-10}},
+
             color={0,0,255},
             smooth=Smooth.None));
 
@@ -434,33 +434,28 @@ package Figures "Layouts for documentation"
             color={200,0,0},
             smooth=Smooth.None));
         connect(res2.y, diff2.u2) annotation (Line(
-            points={{41,6.10623e-16},{50,6.10623e-16},{50,-20},{-70,-20},{-70,
-                -6},{-62,-6}},
+            points={{41,6.10623e-16},{50,6.10623e-16},{50,-20},{-70,-20},{-70,-6},
+                {-62,-6}},
             color={200,0,0},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
-                  {-100,-100},{100,100}}), graphics={
-              Line(
-                points={{62,76},{70,76}},
-                color={200,0,0},
-                smooth=Smooth.None),
-              Rectangle(
-                extent={{-16,8},{16,-8}},
-                lineColor={0,0,0},
-                origin={74,72},
-                rotation=180),
-              Text(
-                extent={{70,78},{88,74}},
-                lineColor={0,0,0},
-                textString="Voltage"),
-              Text(
-                extent={{70,70},{88,66}},
-                lineColor={0,0,0},
-                textString="Current"),
-              Line(
-                points={{62,68},{70,68}},
-                color={0,200,0},
-                smooth=Smooth.None)}), Icon(graphics));
+                  {-100,-100},{100,100}}), graphics={Line(
+                      points={{62,76},{70,76}},
+                      color={200,0,0},
+                      smooth=Smooth.None),Rectangle(
+                      extent={{-16,8},{16,-8}},
+                      lineColor={0,0,0},
+                      origin={74,72},
+                      rotation=180),Text(
+                      extent={{70,78},{88,74}},
+                      lineColor={0,0,0},
+                      textString="Voltage"),Text(
+                      extent={{70,70},{88,66}},
+                      lineColor={0,0,0},
+                      textString="Current"),Line(
+                      points={{62,68},{70,68}},
+                      color={0,200,0},
+                      smooth=Smooth.None)}), Icon(graphics));
       end Imperative_vi;
 
       model Imperative_iv "Imperative circuit with current in, voltage out"
@@ -533,28 +528,23 @@ package Figures "Layouts for documentation"
             color={200,0,0},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
-                  {-100,-100},{100,100}}), graphics={
-              Line(
-                points={{60,58},{68,58}},
-                color={200,0,0},
-                smooth=Smooth.None),
-              Rectangle(
-                extent={{-16,8},{16,-8}},
-                lineColor={0,0,0},
-                origin={72,54},
-                rotation=180),
-              Text(
-                extent={{68,60},{86,56}},
-                lineColor={0,0,0},
-                textString="Voltage"),
-              Text(
-                extent={{68,52},{86,48}},
-                lineColor={0,0,0},
-                textString="Current"),
-              Line(
-                points={{60,50},{68,50}},
-                color={0,200,0},
-                smooth=Smooth.None)}), Icon(graphics));
+                  {-100,-100},{100,100}}), graphics={Line(
+                      points={{60,58},{68,58}},
+                      color={200,0,0},
+                      smooth=Smooth.None),Rectangle(
+                      extent={{-16,8},{16,-8}},
+                      lineColor={0,0,0},
+                      origin={72,54},
+                      rotation=180),Text(
+                      extent={{68,60},{86,56}},
+                      lineColor={0,0,0},
+                      textString="Voltage"),Text(
+                      extent={{68,52},{86,48}},
+                      lineColor={0,0,0},
+                      textString="Current"),Line(
+                      points={{60,50},{68,50}},
+                      color={0,200,0},
+                      smooth=Smooth.None)}), Icon(graphics));
       end Imperative_iv;
 
       model ImperativeTF_vi
@@ -713,8 +703,8 @@ package Figures "Layouts for documentation"
             color={0,0,255},
             smooth=Smooth.None));
         connect(vIn, voltageSource.v) annotation (Line(
-            points={{-90,5.55112e-16},{-82,5.55112e-16},{-82,0},{-70,0},{-70,
-                -20},{-57,-20}},
+            points={{-90,5.55112e-16},{-82,5.55112e-16},{-82,0},{-70,0},{-70,-20},
+                {-57,-20}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(voltageSource.n, ground.p) annotation (Line(
@@ -859,8 +849,8 @@ package Figures "Layouts for documentation"
             color={0,0,255},
             smooth=Smooth.None));
         connect(vIn, voltageSource.v) annotation (Line(
-            points={{-90,5.55112e-16},{-82,5.55112e-16},{-82,0},{-70,0},{-70,
-                -20},{-57,-20}},
+            points={{-90,5.55112e-16},{-82,5.55112e-16},{-82,0},{-70,0},{-70,-20},
+                {-57,-20}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(res3.p, res2.n) annotation (Line(
@@ -931,8 +921,8 @@ package Figures "Layouts for documentation"
             color={0,200,0},
             smooth=Smooth.None));
         connect(res1.u, vIn) annotation (Line(
-            points={{-122,6.66134e-16},{-134,6.66134e-16},{-134,5.55112e-16},{
-                -150,5.55112e-16}},
+            points={{-122,6.66134e-16},{-134,6.66134e-16},{-134,5.55112e-16},{-150,
+                5.55112e-16}},
             color={200,0,0},
             smooth=Smooth.None));
 
@@ -943,30 +933,25 @@ package Figures "Layouts for documentation"
             smooth=Smooth.None));
 
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
-                  {-160,-40},{160,40}}), graphics={
-              Rectangle(
-                extent={{-15,7},{15,-7}},
-                lineColor={0,0,0},
-                origin={-5,27},
-                rotation=180,
-                fillPattern=FillPattern.Solid,
-                fillColor={255,255,255}),
-              Line(
-                points={{-16,30},{-10,30}},
-                color={200,0,0},
-                smooth=Smooth.None),
-              Text(
-                extent={{-10,32},{10,28}},
-                lineColor={0,0,0},
-                textString="Voltage"),
-              Text(
-                extent={{-10,26},{10,22}},
-                lineColor={0,0,0},
-                textString="Current"),
-              Line(
-                points={{-16,24},{-10,24}},
-                color={0,200,0},
-                smooth=Smooth.None)}), Icon(coordinateSystem(
+                  {-160,-40},{160,40}}), graphics={Rectangle(
+                      extent={{-15,7},{15,-7}},
+                      lineColor={0,0,0},
+                      origin={-5,27},
+                      rotation=180,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={255,255,255}),Line(
+                      points={{-16,30},{-10,30}},
+                      color={200,0,0},
+                      smooth=Smooth.None),Text(
+                      extent={{-10,32},{10,28}},
+                      lineColor={0,0,0},
+                      textString="Voltage"),Text(
+                      extent={{-10,26},{10,22}},
+                      lineColor={0,0,0},
+                      textString="Current"),Line(
+                      points={{-16,24},{-10,24}},
+                      color={0,200,0},
+                      smooth=Smooth.None)}), Icon(coordinateSystem(
                 preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
               graphics));
       end ImperativeA;
@@ -1018,30 +1003,25 @@ package Figures "Layouts for documentation"
             smooth=Smooth.None));
 
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
-                  {-160,-40},{160,40}}), graphics={
-              Rectangle(
-                extent={{-15,7},{15,-7}},
-                lineColor={0,0,0},
-                origin={135,27},
-                rotation=180,
-                fillPattern=FillPattern.Solid,
-                fillColor={255,255,255}),
-              Line(
-                points={{124,30},{130,30}},
-                color={200,0,0},
-                smooth=Smooth.None),
-              Text(
-                extent={{130,32},{150,28}},
-                lineColor={0,0,0},
-                textString="Voltage"),
-              Text(
-                extent={{130,26},{150,22}},
-                lineColor={0,0,0},
-                textString="Current"),
-              Line(
-                points={{124,24},{130,24}},
-                color={0,200,0},
-                smooth=Smooth.None)}), Icon(coordinateSystem(
+                  {-160,-40},{160,40}}), graphics={Rectangle(
+                      extent={{-15,7},{15,-7}},
+                      lineColor={0,0,0},
+                      origin={135,27},
+                      rotation=180,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={255,255,255}),Line(
+                      points={{124,30},{130,30}},
+                      color={200,0,0},
+                      smooth=Smooth.None),Text(
+                      extent={{130,32},{150,28}},
+                      lineColor={0,0,0},
+                      textString="Voltage"),Text(
+                      extent={{130,26},{150,22}},
+                      lineColor={0,0,0},
+                      textString="Current"),Line(
+                      points={{124,24},{130,24}},
+                      color={0,200,0},
+                      smooth=Smooth.None)}), Icon(coordinateSystem(
                 preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
               graphics));
       end ImperativeB;
@@ -1119,30 +1099,25 @@ package Figures "Layouts for documentation"
             smooth=Smooth.None));
 
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
-                  {-120,-80},{120,80}}), graphics={
-              Rectangle(
-                extent={{-15,7},{15,-7}},
-                lineColor={0,0,0},
-                origin={95,-67},
-                rotation=180,
-                fillPattern=FillPattern.Solid,
-                fillColor={255,255,255}),
-              Line(
-                points={{84,-64},{90,-64}},
-                color={200,0,0},
-                smooth=Smooth.None),
-              Text(
-                extent={{90,-62},{110,-66}},
-                lineColor={0,0,0},
-                textString="Voltage"),
-              Text(
-                extent={{90,-68},{110,-72}},
-                lineColor={0,0,0},
-                textString="Current"),
-              Line(
-                points={{84,-70},{90,-70}},
-                color={0,200,0},
-                smooth=Smooth.None)}), Icon(graphics));
+                  {-120,-80},{120,80}}), graphics={Rectangle(
+                      extent={{-15,7},{15,-7}},
+                      lineColor={0,0,0},
+                      origin={95,-67},
+                      rotation=180,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={255,255,255}),Line(
+                      points={{84,-64},{90,-64}},
+                      color={200,0,0},
+                      smooth=Smooth.None),Text(
+                      extent={{90,-62},{110,-66}},
+                      lineColor={0,0,0},
+                      textString="Voltage"),Text(
+                      extent={{90,-68},{110,-72}},
+                      lineColor={0,0,0},
+                      textString="Current"),Line(
+                      points={{84,-70},{90,-70}},
+                      color={0,200,0},
+                      smooth=Smooth.None)}), Icon(graphics));
       end ImperativeAB;
 
       model ImperativeABIncorrect
@@ -1218,30 +1193,25 @@ package Figures "Layouts for documentation"
             smooth=Smooth.None));
 
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
-                  {-160,-40},{160,40}}), graphics={
-              Rectangle(
-                extent={{-15,7},{15,-7}},
-                lineColor={0,0,0},
-                origin={135,27},
-                rotation=180,
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid),
-              Text(
-                extent={{130,32},{150,28}},
-                lineColor={0,0,0},
-                textString="Voltage"),
-              Line(
-                points={{124,30},{130,30}},
-                color={200,0,0},
-                smooth=Smooth.None),
-              Text(
-                extent={{130,26},{150,22}},
-                lineColor={0,0,0},
-                textString="Current"),
-              Line(
-                points={{124,24},{130,24}},
-                color={0,200,0},
-                smooth=Smooth.None)}), Icon(graphics));
+                  {-160,-40},{160,40}}), graphics={Rectangle(
+                      extent={{-15,7},{15,-7}},
+                      lineColor={0,0,0},
+                      origin={135,27},
+                      rotation=180,
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid),Text(
+                      extent={{130,32},{150,28}},
+                      lineColor={0,0,0},
+                      textString="Voltage"),Line(
+                      points={{124,30},{130,30}},
+                      color={200,0,0},
+                      smooth=Smooth.None),Text(
+                      extent={{130,26},{150,22}},
+                      lineColor={0,0,0},
+                      textString="Current"),Line(
+                      points={{124,24},{130,24}},
+                      color={0,200,0},
+                      smooth=Smooth.None)}), Icon(graphics));
       end ImperativeABIncorrect;
 
       model ImperativeABTF
@@ -1269,7 +1239,6 @@ package Figures "Layouts for documentation"
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-120,-80},{120,80}}), graphics), Icon(graphics));
       end ImperativeABTF;
-
 
       package BaseClasses "Base classes (not for direct use)"
         extends Modelica.Icons.BasesPackage;
@@ -1313,11 +1282,11 @@ package Figures "Layouts for documentation"
     extends FCSys.BaseClasses.Icons.Cell;
 
     annotation (Icon(graphics={Rectangle(
-            extent={{-100,100},{100,65}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0})}));
+              extent={{-100,100},{100,65}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0})}));
   end Logo;
 
   model AnFPIcon "Anode flow plate"
@@ -1477,7 +1446,6 @@ package Figures "Layouts for documentation"
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
   end SubregionIcon;
 
-
   partial model PhaseIcon
 
     FCSys.Subregions.Phases.Phase Phase
@@ -1510,7 +1478,6 @@ package Figures "Layouts for documentation"
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
   end VolumeIcon;
 
-
   model ConnectorHierarchy
 
     Connectors.BaseClasses.PartialInert Inert annotation (Placement(
@@ -1531,123 +1498,100 @@ package Figures "Layouts for documentation"
               -10,-20}})));
     VolumeOrPressure pressure annotation (Placement(transformation(extent={{-40,
               -30},{-20,-10}}), iconTransformation(extent={{-50,-40},{-30,-20}})));
-    annotation (Diagram(graphics={
-          Line(
-            points={{10,20},{10,0}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{30,20},{30,0}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{-10,0},{-30,-20}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{-10,0},{-10,-20}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{30,0},{30,-20}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{10,0},{10,-20}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{10,0},{-10,-20}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{10,0},{30,-20}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{-10,0},{10,-20}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Text(
-            extent={{-40,-8},{-20,-12}},
-            lineColor={0,0,0},
-            textString="Volume or"),
-          Line(
-            points={{56,16},{56,-16}},
-            color={0,0,0},
-            smooth=Smooth.None),
-          Line(
-            points={{54,12},{56,16},{58,12}},
-            color={0,0,0},
-            smooth=Smooth.None),
-          Text(
-            extent={{44,22},{68,18}},
-            lineColor={0,0,0},
-            textString="High-level"),
-          Text(
-            extent={{42,-18},{70,-22}},
-            lineColor={0,0,0},
-            textString="Fundamental"),
-          Text(
-            extent={{22,32},{38,28}},
-            lineColor={0,0,0},
-            textString="Chemical"),
-          Text(
-            extent={{22,28},{38,24}},
-            lineColor={0,0,0},
-            textString="bus"),
-          Ellipse(
-            extent={{27,23},{33,17}},
-            lineColor={208,104,0},
-            fillColor={255,128,0},
-            fillPattern=FillPattern.Solid,
-            lineThickness=0.5),
-          Text(
-            extent={{2,32},{18,28}},
-            lineColor={0,0,0},
-            textString="Face"),
-          Text(
-            extent={{2,28},{18,24}},
-            lineColor={0,0,0},
-            textString="bus"),
-          Ellipse(
-            extent={{7,23},{13,17}},
-            lineColor={127,127,127},
-            fillColor={191,191,191},
-            fillPattern=FillPattern.Solid,
-            lineThickness=0.5),
-          Text(
-            extent={{-18,-8},{-2,-12}},
-            lineColor={0,0,0},
-            textString="Linear")}), Icon(graphics));
+    annotation (Diagram(graphics={Line(
+              points={{10,20},{10,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{30,20},{30,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{-10,0},{-30,-20}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{-10,0},{-10,-20}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{30,0},{30,-20}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{10,0},{10,-20}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{10,0},{-10,-20}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{10,0},{30,-20}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{-10,0},{10,-20}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Text(
+              extent={{-40,-8},{-20,-12}},
+              lineColor={0,0,0},
+              textString="Volume or"),Line(
+              points={{56,16},{56,-16}},
+              color={0,0,0},
+              smooth=Smooth.None),Line(
+              points={{54,12},{56,16},{58,12}},
+              color={0,0,0},
+              smooth=Smooth.None),Text(
+              extent={{44,22},{68,18}},
+              lineColor={0,0,0},
+              textString="High-level"),Text(
+              extent={{42,-18},{70,-22}},
+              lineColor={0,0,0},
+              textString="Fundamental"),Text(
+              extent={{22,32},{38,28}},
+              lineColor={0,0,0},
+              textString="Chemical"),Text(
+              extent={{22,28},{38,24}},
+              lineColor={0,0,0},
+              textString="bus"),Ellipse(
+              extent={{27,23},{33,17}},
+              lineColor={208,104,0},
+              fillColor={255,128,0},
+              fillPattern=FillPattern.Solid,
+              lineThickness=0.5),Text(
+              extent={{2,32},{18,28}},
+              lineColor={0,0,0},
+              textString="Face"),Text(
+              extent={{2,28},{18,24}},
+              lineColor={0,0,0},
+              textString="bus"),Ellipse(
+              extent={{7,23},{13,17}},
+              lineColor={127,127,127},
+              fillColor={191,191,191},
+              fillPattern=FillPattern.Solid,
+              lineThickness=0.5),Text(
+              extent={{-18,-8},{-2,-12}},
+              lineColor={0,0,0},
+              textString="Linear")}), Icon(graphics));
   end ConnectorHierarchy;
 
   connector VolumeOrPressure "Icon for additivity of volume or pressure"
 
     annotation (Diagram(graphics={Text(
-            extent={{-100,36},{100,76}},
-            textString="%name",
-            lineColor={0,0,0}), Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={0,0,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid)}), Icon(graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={0,0,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid)}));
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0}),Ellipse(
+              extent={{-30,30},{30,-30}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}), Icon(graphics={Ellipse(
+              extent={{-100,100},{100,-100}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}));
   end VolumeOrPressure;
-
-
 
   package ReactionComparison
     "Comparison of traditional reaction rate to linear alternative"
@@ -1655,8 +1599,11 @@ package Figures "Layouts for documentation"
     model Test
       extends Modelica.Icons.Example;
 
-      // Nonessential variables for analysis
-      output Q.Current err(start=0,fixed=true) "Integrated squared error";
+      // Auxiliary variables (for analysis)
+      output Q.Current err(
+        start=0,
+        fixed=true,
+        stateSelect=StateSelect.never) "Integrated squared error";
 
       FCSys.Figures.ReactionComparison.TraditionalReaction traditionalReaction(
           k=0.125*U.A*{(U.cm^3/U.C)^sum(max(traditionalReaction.nu[i], 0) for i
@@ -1681,8 +1628,8 @@ package Figures "Layouts for documentation"
       der(err) = (reaction.Xidot - traditionalReaction.Xidot)^2;
 
       connect(species1.material, reaction.material[1]) annotation (Line(
-          points={{-40,6.10623e-16},{-40,-20},{5.55112e-16,-20},{5.55112e-16,
-              -40}},
+          points={{-40,6.10623e-16},{-40,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
+
           color={0,0,0},
           smooth=Smooth.None));
 
@@ -1748,13 +1695,13 @@ package Figures "Layouts for documentation"
       der(N)/U.s = -nu*Xidot "stoichiometry";
 
       annotation (Icon(graphics={Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid), Text(
-              extent={{-100,40},{100,80}},
-              textString="%name",
-              lineColor={0,0,0})}));
+                  extent={{-100,100},{100,-100}},
+                  lineColor={0,0,0},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Text(
+                  extent={{-100,40},{100,80}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
     end TraditionalReaction;
 
     model Reaction
@@ -1777,13 +1724,13 @@ package Figures "Layouts for documentation"
       material.Ndot = nu*Xidot "stoichiometry";
 
       annotation (Diagram(graphics), Icon(graphics={Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid), Text(
-              extent={{-100,40},{100,80}},
-              textString="%name",
-              lineColor={0,0,0})}));
+                  extent={{-100,100},{100,-100}},
+                  lineColor={0,0,0},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Text(
+                  extent={{-100,40},{100,80}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
     end Reaction;
 
     model Species
@@ -1818,13 +1765,13 @@ package Figures "Layouts for documentation"
       // Material conservation
       der(N)/U.s = material.Ndot;
       annotation (Icon(graphics={Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid), Text(
-              extent={{-100,40},{100,80}},
-              textString="%name",
-              lineColor={0,0,0})}));
+                  extent={{-100,100},{100,-100}},
+                  lineColor={0,0,0},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Text(
+                  extent={{-100,40},{100,80}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
     end Species;
 
     connector Material "Connector for density-driven reaction"

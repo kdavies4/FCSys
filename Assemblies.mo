@@ -230,45 +230,47 @@ package Assemblies "Combinations of regions (e.g., cells)"
       // This is the power-effective current that would create the actual
       // electrical power at the average voltage (above).
 
-      // Nonessential analysis variables
-      final parameter Q.Length L[Axis]={sum(anFP.L_x) + sum(anGDL.L_x) + sum(
-          anCL.L_x) + sum(pEM.L_x) + sum(caCL.L_x) + sum(caGDL.L_x) + sum(caFP.L_x),
-          sum(L_y),sum(L_z)} if defaults.analysis
-        "Total lengths along the x, y, and z axes";
-      final parameter Q.Area A[Axis]={L[cartWrap(ax + 2)]*L[cartWrap(ax + 2)]
-          for ax in 1:3} if defaults.analysis "Cross-sectional areas";
+      // Auxiliary variables (for analysis)
+      final parameter Q.Length L[Axis](each stateSelect=StateSelect.never) = {
+        sum(anFP.L_x) + sum(anGDL.L_x) + sum(anCL.L_x) + sum(pEM.L_x) + sum(
+        caCL.L_x) + sum(caGDL.L_x) + sum(caFP.L_x),sum(L_y),sum(L_z)} if
+        defaults.analysis "Total lengths along the x, y, and z axes";
+      final parameter Q.Area A[Axis](each stateSelect=StateSelect.never) = {L[
+        cartWrap(ax + 2)]*L[cartWrap(ax + 2)] for ax in 1:3} if defaults.analysis
+        "Cross-sectional areas";
       final parameter Q.Volume V=product(L) if defaults.analysis "Volume";
-      output Q.Potential Deltav_x_seg[n_y, n_z]=caFP.subregions[caFP.n_x, :, :].graphite.
-          'e-'.mu_face[1, 2] - anFP.subregions[1, :, :].graphite.'e-'.mu_face[1,
-          1] if defaults.analysis
+      output Q.Potential Deltav_x_seg[n_y, n_z](each stateSelect=StateSelect.never)
+         = caFP.subregions[caFP.n_x, :, :].graphite.'e-'.mu_face[1, 2] - anFP.subregions[
+        1, :, :].graphite.'e-'.mu_face[1, 1] if defaults.analysis
         "Electrical potential differences of the segments (x axis)";
-      output Q.Power 'Wdot_e-_x'[n_y, n_z]=-(anFP.subregions[1, :, :].graphite.
-          'e-'.mu_face[1, 1] .* anFP.subregions[1, :, :].graphite.'e-'.Ndot_face[
-          1, 1] + caFP.subregions[caFP.n_x, :, :].graphite.'e-'.mu_face[1, 2]
-           .* caFP.subregions[caFP.n_x, :, :].graphite.'e-'.Ndot_face[1, 2])
-        if defaults.analysis "Electrical power of the segments (x axis)";
-      output Q.Current I_x_seg[n_y, n_z]=(caFP.subregions[caFP.n_x, :, :].graphite.
-          'e-'.Ndot_face[1, 2] - anFP.subregions[1, :, :].graphite.'e-'.Ndot_face[
-          1, 1])/2 if defaults.analysis
+      output Q.Power 'Wdot_e-_x'[n_y, n_z](each stateSelect=StateSelect.never)
+         = -(anFP.subregions[1, :, :].graphite.'e-'.mu_face[1, 1] .* anFP.subregions[
+        1, :, :].graphite.'e-'.Ndot_face[1, 1] + caFP.subregions[caFP.n_x, :, :].graphite.
+        'e-'.mu_face[1, 2] .* caFP.subregions[caFP.n_x, :, :].graphite.'e-'.Ndot_face[
+        1, 2]) if defaults.analysis "Electrical power of the segments (x axis)";
+      output Q.Current I_x_seg[n_y, n_z](each stateSelect=StateSelect.never) =
+        (caFP.subregions[caFP.n_x, :, :].graphite.'e-'.Ndot_face[1, 2] - anFP.subregions[
+        1, :, :].graphite.'e-'.Ndot_face[1, 1])/2 if defaults.analysis
         "Electrical currents of the segments (x axis)";
-      output Q.CurrentAreic Iprimeprime_x[n_y, n_z]={I_x_seg[i_y, i_z]/(L_y[i_y]
-          *L_z[i_z]) for i_z in 1:n_z, i_y in 1:n_y} if defaults.analysis
+      output Q.CurrentAreic Iprimeprime_x[n_y, n_z](each stateSelect=
+            StateSelect.never) = {I_x_seg[i_y, i_z]/(L_y[i_y]*L_z[i_z]) for i_z
+         in 1:n_z, i_y in 1:n_y} if defaults.analysis
         "Areic electrical current of the segments (x axis)";
-      output Q.CurrentAreic Iprimeprime_x_avg=I/A[1] if defaults.analysis
-        "Average areic electrical current (x axis)";
-      output Q.Current Ndot_H2=sum(anFP.subregions[1, :, :].gas.H2.Ndot_face[1,
-          1]) + sum(anFP.subregions[:, 1, :].gas.H2.Ndot_face[2, 1] + anFP.subregions[
-          :, n_y, :].gas.H2.Ndot_face[2, 2]) if defaults.analysis
+      output Q.CurrentAreic Iprimeprime_x_avg(stateSelect=StateSelect.never) =
+        I/A[1] if defaults.analysis "Average areic electrical current (x axis)";
+      output Q.Current Ndot_H2(stateSelect=StateSelect.never) = sum(anFP.subregions[
+        1, :, :].gas.H2.Ndot_face[1, 1]) + sum(anFP.subregions[:, 1, :].gas.H2.Ndot_face[
+        2, 1] + anFP.subregions[:, n_y, :].gas.H2.Ndot_face[2, 2]) if defaults.analysis
         "Rate of hydrogen intake";
-      output Q.Current Ndot_H2O=sum(anFP.subregions[1, :, :].gas.H2O.Ndot_face[
-          1, 1] + caFP.subregions[caFP.n_x, :, :].gas.H2O.Ndot_face[1, 2]) +
-          sum(anFP.subregions[:, 1, :].gas.H2O.Ndot_face[1, 1] + anFP.subregions[
-          :, n_y, :].gas.H2O.Ndot_face[1, 2]) + sum(caFP.subregions[:, 1, :].gas.H2O.Ndot_face[
-          1, 1] - caFP.subregions[:, n_y, :].gas.H2O.Ndot_face[1, 2]) if
-        defaults.analysis "Rate of water intake";
-      output Q.Current Ndot_O2=sum(caFP.subregions[caFP.n_x, :, :].gas.O2.Ndot_face[
-          1, 2]) + sum(caFP.subregions[:, 1, :].gas.O2.Ndot_face[1, 1] - caFP.subregions[
-          :, n_y, :].gas.O2.Ndot_face[1, 2]) if defaults.analysis
+      output Q.Current Ndot_H2O(stateSelect=StateSelect.never) = sum(anFP.subregions[
+        1, :, :].gas.H2O.Ndot_face[1, 1] + caFP.subregions[caFP.n_x, :, :].gas.H2O.Ndot_face[
+        1, 2]) + sum(anFP.subregions[:, 1, :].gas.H2O.Ndot_face[1, 1] + anFP.subregions[
+        :, n_y, :].gas.H2O.Ndot_face[1, 2]) + sum(caFP.subregions[:, 1, :].gas.H2O.Ndot_face[
+        1, 1] - caFP.subregions[:, n_y, :].gas.H2O.Ndot_face[1, 2]) if defaults.analysis
+        "Rate of water intake";
+      output Q.Current Ndot_O2(stateSelect=StateSelect.never) = sum(caFP.subregions[
+        caFP.n_x, :, :].gas.O2.Ndot_face[1, 2]) + sum(caFP.subregions[:, 1, :].gas.O2.Ndot_face[
+        1, 1] - caFP.subregions[:, n_y, :].gas.O2.Ndot_face[1, 2]) if defaults.analysis
         "Rate of oxygen intake";
 
       FCSys.Connectors.FaceBus anFPX[n_y, n_z] "Anode plate face" annotation (
@@ -1109,56 +1111,59 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         "Number of regions across the channel";
 
       // **Update these outputs based on Cell model.
-      // Nonessential variables (for analysis)
+      // Auxiliary variables (for analysis)
       final parameter Q.Length L[Axis]={sum(anFP.L_x) + sum(anCGDL.L_x) + sum(
           pEM.L_x) + sum(caCGDL.L_x) + sum(caFP.L_x),sum(L_y),sum(L_z)} if
         defaults.analysis "Total lengths along the x, y, and z axes";
       final parameter Q.Area A[Axis]={L[cartWrap(ax + 2)]*L[cartWrap(ax + 2)]
           for ax in 1:3} if defaults.analysis "Cross-sectional areas";
       final parameter Q.Volume V=product(L) if defaults.analysis "Volume";
-      output Q.Potential Deltav_x[n_y, n_z]=caFP.subregions[caFP.n_x, :, :].graphite.
-          'e-'.mu_face[1, 2] - anFP.subregions[1, :, :].graphite.'e-'.mu_face[1,
-          1] if defaults.analysis
+      output Q.Potential Deltav_x[n_y, n_z](each stateSelect=StateSelect.never)
+         = caFP.subregions[caFP.n_x, :, :].graphite.'e-'.mu_face[1, 2] - anFP.subregions[
+        1, :, :].graphite.'e-'.mu_face[1, 1] if defaults.analysis
         "Electrical potential differences of the segments (x axis)";
-      output Q.Power 'Wdot_e-_x'[n_y, n_z]=anFP.subregions[1, :, :].graphite.
-          'e-'.Ndot_face[1, 1] .* anFP.subregions[1, :, :].graphite.'e-'.mu_face[
-          1, 1] + caFP.subregions[caFP.n_x, :, :].graphite.'e-'.Ndot_face[1, 2]
-           .* caFP.subregions[caFP.n_x, :, :].graphite.'e-'.mu_face[1, 2] if
-        defaults.analysis
+      output Q.Power 'Wdot_e-_x'[n_y, n_z](each stateSelect=StateSelect.never)
+         = anFP.subregions[1, :, :].graphite.'e-'.Ndot_face[1, 1] .* anFP.subregions[
+        1, :, :].graphite.'e-'.mu_face[1, 1] + caFP.subregions[caFP.n_x, :, :].graphite.
+        'e-'.Ndot_face[1, 2] .* caFP.subregions[caFP.n_x, :, :].graphite.'e-'.mu_face[
+        1, 2] if defaults.analysis
         "Rates of intake of electrical energy of the segments (x axis)";
-      output Q.Current I_x[n_y, n_z]=(caFP.subregions[caFP.n_x, :, :].graphite.
-          'e-'.Ndot_face[1, 2] - anFP.subregions[1, :, :].graphite.'e-'.Ndot_face[
-          1, 1])/2 if defaults.analysis
+      output Q.Current I_x[n_y, n_z](each stateSelect=StateSelect.never) = (
+        caFP.subregions[caFP.n_x, :, :].graphite.'e-'.Ndot_face[1, 2] - anFP.subregions[
+        1, :, :].graphite.'e-'.Ndot_face[1, 1])/2 if defaults.analysis
         "Electrical currents of the segments (x axis)";
-      output Q.Current I_x_tot=sum(I_x) if defaults.analysis
-        "Total electrical current (x axis)";
-      output Q.CurrentAreic Iprimeprime_x[n_y, n_z]={I_x[i_y, i_z]/(L_y[i_y]*
-          L_z[i_z]) for i_z in 1:n_z, i_y in 1:n_y} if defaults.analysis
+      output Q.Current I_x_tot(stateSelect=StateSelect.never) = sum(I_x) if
+        defaults.analysis "Total electrical current (x axis)";
+      output Q.CurrentAreic Iprimeprime_x[n_y, n_z](each stateSelect=
+            StateSelect.never) = {I_x[i_y, i_z]/(L_y[i_y]*L_z[i_z]) for i_z in
+        1:n_z, i_y in 1:n_y} if defaults.analysis
         "Areic electrical current of the segments (x axis)";
-      output Q.CurrentAreic Iprimeprime_x_avg=I_x_tot/A[1] if defaults.analysis
+      output Q.CurrentAreic Iprimeprime_x_avg(stateSelect=StateSelect.never) =
+        I_x_tot/A[1] if defaults.analysis
         "Average areic electrical current (x axis)";
-      output Q.Current Ndot_H2=sum(anFP.subregions[1, :, :].gas.H2.Ndot_face[1,
-          1]) + sum(anFP.subregions[:, 1, :].gas.H2.Ndot_face[2, 1] + anFP.subregions[
-          :, n_y, :].gas.H2.Ndot_face[2, 2]) if defaults.analysis
+      output Q.Current Ndot_H2(stateSelect=StateSelect.never) = sum(anFP.subregions[
+        1, :, :].gas.H2.Ndot_face[1, 1]) + sum(anFP.subregions[:, 1, :].gas.H2.Ndot_face[
+        2, 1] + anFP.subregions[:, n_y, :].gas.H2.Ndot_face[2, 2]) if defaults.analysis
         "Rate of hydrogen intake";
-      output Q.Current Ndot_H2O=sum(anFP.subregions[1, :, :].gas.H2O.Ndot_face[
-          1, 1] + caFP.subregions[caFP.n_x, :, :].gas.H2O.Ndot_face[1, 2]) +
-          sum(anFP.subregions[:, 1, :].gas.H2O.Ndot_face[1, 1] + anFP.subregions[
-          :, n_y, :].gas.H2O.Ndot_face[1, 2]) + sum(caFP.subregions[:, 1, :].gas.H2O.Ndot_face[
-          1, 1] - caFP.subregions[:, n_y, :].gas.H2O.Ndot_face[1, 2]) if
-        defaults.analysis "Rate of water intake";
-      output Q.Current Ndot_O2=sum(caFP.subregions[caFP.n_x, :, :].gas.O2.Ndot_face[
-          1, 2]) + sum(caFP.subregions[:, 1, :].gas.O2.Ndot_face[1, 1] - caFP.subregions[
-          :, n_y, :].gas.O2.Ndot_face[1, 2]) if defaults.analysis
+      output Q.Current Ndot_H2O(stateSelect=StateSelect.never) = sum(anFP.subregions[
+        1, :, :].gas.H2O.Ndot_face[1, 1] + caFP.subregions[caFP.n_x, :, :].gas.H2O.Ndot_face[
+        1, 2]) + sum(anFP.subregions[:, 1, :].gas.H2O.Ndot_face[1, 1] + anFP.subregions[
+        :, n_y, :].gas.H2O.Ndot_face[1, 2]) + sum(caFP.subregions[:, 1, :].gas.H2O.Ndot_face[
+        1, 1] - caFP.subregions[:, n_y, :].gas.H2O.Ndot_face[1, 2]) if defaults.analysis
+        "Rate of water intake";
+      output Q.Current Ndot_O2(stateSelect=StateSelect.never) = sum(caFP.subregions[
+        caFP.n_x, :, :].gas.O2.Ndot_face[1, 2]) + sum(caFP.subregions[:, 1, :].gas.O2.Ndot_face[
+        1, 1] - caFP.subregions[:, n_y, :].gas.O2.Ndot_face[1, 2]) if defaults.analysis
         "Rate of oxygen intake";
-      output Q.Power 'Wdot_e-'=sum('Wdot_e-_x') + sum(anFP.subregions[:, 1, :].graphite.
-          'e-'.Ndot_face[2, 1] .* anFP.subregions[:, 1, :].graphite.'e-'.mu_face[
-          2, 1] + anFP.subregions[:, n_y, :].graphite.'e-'.Ndot_face[2, 2] .*
-          anFP.subregions[:, n_y, :].graphite.'e-'.mu_face[2, 2]) + sum(caFP.subregions[
-          :, 1, :].graphite.'e-'.Ndot_face[2, 1] .* caFP.subregions[:, 1, :].graphite.
-          'e-'.mu_face[2, 1] + caFP.subregions[:, n_y, :].graphite.'e-'.Ndot_face[
-          2, 2] .* caFP.subregions[:, n_y, :].graphite.'e-'.mu_face[2, 2]) if
-        defaults.analysis "Rate of electrical work (negative for work done)";
+      output Q.Power 'Wdot_e-'(stateSelect=StateSelect.never) = sum('Wdot_e-_x')
+         + sum(anFP.subregions[:, 1, :].graphite.'e-'.Ndot_face[2, 1] .* anFP.subregions[
+        :, 1, :].graphite.'e-'.mu_face[2, 1] + anFP.subregions[:, n_y, :].graphite.
+        'e-'.Ndot_face[2, 2] .* anFP.subregions[:, n_y, :].graphite.'e-'.mu_face[
+        2, 2]) + sum(caFP.subregions[:, 1, :].graphite.'e-'.Ndot_face[2, 1] .*
+        caFP.subregions[:, 1, :].graphite.'e-'.mu_face[2, 1] + caFP.subregions[
+        :, n_y, :].graphite.'e-'.Ndot_face[2, 2] .* caFP.subregions[:, n_y, :].graphite.
+        'e-'.mu_face[2, 2]) if defaults.analysis
+        "Rate of electrical work (negative for work done)";
 
       FCSys.Connectors.FaceBus anFPX[n_y, n_z] "Anode plate face" annotation (
           Placement(transformation(extent={{-70,-10},{-50,10}},rotation=0),

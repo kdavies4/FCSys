@@ -11,16 +11,16 @@ y6 = {"caCL.subregions[1, 1, 1].gas.H2O.mu", "caCL.subregions[1, 1, 1].gas.N2.mu
 removePlots();
 RunScript("FCSys/resources/scripts/Dymola/plot6.mos");
 
-createPlot(id = 4,
- position = {350, 100, 650, 400},
- y = {"caCL.subregions[1, 1, 1].ORR.Xidot"},
- autoscale = true,
- autoerase = true,
- autoreplot = true,
- description = false,
- grid = true,
- color = true,
- online = false,
- legendHorizontal = false,
- leftTitleType = 1,
+createPlot(id = 4, 
+ position = {350, 100, 650, 400}, 
+ y = {"caCL.subregions[1, 1, 1].ORR.Xidot"}, 
+ autoscale = true, 
+ autoerase = true, 
+ autoreplot = true, 
+ description = false, 
+ grid = true, 
+ color = true, 
+ online = false, 
+ legendHorizontal = false, 
+ leftTitleType = 1, 
  bottomTitleType = 1);

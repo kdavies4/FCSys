@@ -65,6 +65,12 @@ dymosim
 resources/source/Python/fcres/00-autoformat.sh
 resources/source/Python/fcres/tictoc.sh
 
+# Scripts and other files to create documentation
+resources/source/Python/doc/*.rst
+resources/source/Python/doc/*.py
+resources/source/Python/doc/Makefile
+resources/source/Python/doc/_templates
+
 # Hidden, synchronization, temporary, and backup files
 .*
 SyncToy_*.dat

@@ -1,0 +1,27 @@
+// Define signals.
+filename = "SubregionORR.mat";
+y1 = {"subregion.graphite.C.N", "subregion.ionomer.C19HF37O5S.N", "subregion.graphite.'e-'.N", "subregion.gas.H2O.N", "subregion.ionomer.'H+'.N", "subregion.gas.O2.N"};
+y2 = {"subregion.graphite.C.phi[1]", "subregion.ionomer.C19HF37O5S.phi[1]", "subregion.graphite.'e-'.phi[1]", "subregion.gas.H2O.phi[1]", "subregion.ionomer.'H+'.phi[1]", "subregion.gas.O2.phi[1]"};
+y3 = {"subregion.graphite.C.p", "subregion.ionomer.C19HF37O5S.p", "subregion.graphite.'e-'.p", "subregion.gas.H2O.p", "subregion.ionomer.'H+'.p", "subregion.gas.O2.p"};
+y4 = {"subregion.graphite.C.T", "subregion.ionomer.C19HF37O5S.T", "subregion.graphite.'e-'.T", "subregion.gas.H2O.T", "subregion.ionomer.'H+'.T", "subregion.gas.O2.T"};
+y5 = {"subregion.graphite.C.v", "subregion.ionomer.C19HF37O5S.v", "subregion.graphite.'e-'.v", "subregion.gas.H2O.v", "subregion.ionomer.'H+'.v", "subregion.gas.O2.v"};
+y6 = {"subregion.graphite.C.mu", "subregion.ionomer.C19HF37O5S.mu", "subregion.graphite.'e-'.mu", "subregion.gas.H2O.mu", "subregion.ionomer.'H+'.mu", "subregion.gas.O2.mu"};
+
+// Make plots.
+removePlots();
+RunScript("FCSys/resources/scripts/Dymola/plot6.mos");
+
+createPlot(id = 4, 
+ position = {400, 100, 500, 400}, 
+ y = {"subregion.ORR.Xidot"}, 
+ autoscale = true, 
+ autoerase = true, 
+ autoreplot = true, 
+ description = false, 
+ grid = true, 
+ color = true, 
+ online = false, 
+ legendHorizontal = false, 
+ legendLocation = 5, 
+ leftTitleType = 1, 
+ bottomTitleType = 1);

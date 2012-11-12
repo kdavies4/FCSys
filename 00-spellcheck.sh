@@ -3,6 +3,7 @@
 #
 # Kevin L. Davies, 10/6/12
 
+#for f in *.mo
 for f in help/*.html
     do
         aspell --extra-dicts=./.modelica.pws --personal=./.fcsys.pws -c $f

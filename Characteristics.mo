@@ -147,14 +147,14 @@ package Characteristics "Data and functions to correlate physical properties"
       output Q.Potential g_O2_indirect=h_O2 - T*s_O2;
       // Resistivity
       output Q.Resistivity beta=DataC.beta(T);
-      output Q.Resistivity beta_H2_Phi=DataH2.beta_Phi(T);
-      output Q.Resistivity beta_H2_U=DataH2.beta_S(T);
-      output Q.Resistivity beta_H2O_Phi=DataH2O.beta_Phi(T);
-      output Q.Resistivity beta_H2O_U=DataH2O.beta_S(T);
+      output Q.Resistivity alpha_SH2_Phi=DataH2.beta_Phi(T);
+      output Q.Resistivity alpha_SH2_U=DataH2.beta_S(T);
+      output Q.Resistivity alpha_SH2O_Phi=DataH2O.beta_Phi(T);
+      output Q.Resistivity alpha_SH2O_U=DataH2O.beta_S(T);
       output Q.Resistivity beta_N2_Phi=DataN2.beta_Phi(T);
       output Q.Resistivity beta_N2_U=DataN2.beta_S(T);
-      output Q.Resistivity beta_O2_Phi=DataO2.beta_Phi(T);
-      output Q.Resistivity beta_O2_U=DataO2.beta_S(T);
+      output Q.Resistivity alpha_SO2_Phi=DataO2.beta_Phi(T);
+      output Q.Resistivity alpha_SO2_U=DataO2.beta_S(T);
 
     equation
       assert(abs(g_C - g_C_indirect) < epsilon_tol,
@@ -312,9 +312,6 @@ package Characteristics "Data and functions to correlate physical properties"
         B_c0={Data.blow} .* fill({U.K,1}, size(T_lim_c0, 1) - 1) - b_c0[:, 2:3]
             *ln(U.K),
         r=U.k_A/m);
-
-      // TODO: Update b_v and specVolPow according to [Ashcroft1976] (non-integer powers?).
-      //specVolPow={0,0},
 
       annotation (Documentation(info="<html>
      <p>Notes:
@@ -504,8 +501,6 @@ package Characteristics "Data and functions to correlate physical properties"
         B_c0={Data.blow} .* fill({U.K,1}, size(T_lim_c0, 1) - 1) - b_c0[:, 2:3]
             *ln(U.K),
         r=120*U.pico*U.m/U.q);
-
-      // TODO: Update b_v and specVolPow according to [Ashcroft1976] (non-integer powers?).
 
       annotation (Documentation(info="<html>
          <p>Assumptions:
@@ -779,7 +774,6 @@ package Characteristics "Data and functions to correlate physical properties"
       constant Real b_v[:, :]=[1]
         "Coefficients of specific volume as a polynomial in p/T and T"
         annotation (HideResult=false);
-      // **Clean up, allow zero density.
       constant Integer specVolPow[2]={-1,0}
         "Powers of p/T and T for 1st row and column of b_v, respectively"
         annotation (HideResult=false);
@@ -1082,7 +1076,6 @@ package Characteristics "Data and functions to correlate physical properties"
           InlineNoEvent=true,
           Inline=true,
           smoothOrder=1);
-        // **temp Math.log instead of ln
         // The first term is the integral of c0/T*dT up to T at p0 with the
         // absolute entropy at the lower bound [McBride2002, p. 2].  The
         // second polynomial is the integral of v*dP from p0 to p (at T).

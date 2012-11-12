@@ -6,34 +6,28 @@ package BaseClasses "Base classes (not for direct use)"
       extends Modelica.Icons.Package;
       partial class Double "Icon for a two-connector boundary condition"
         //extends Names.Middle;
-        annotation (Icon(graphics={
-              Rectangle(
-                extent={{-100,40},{100,-40}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Line(
-                points={{-100,40},{100,40}},
-                pattern=LinePattern.None,
-                smooth=Smooth.None),
-              Line(
-                points={{-100,-40},{-100,40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash),
-              Text(
-                extent={{-150,-20},{150,20}},
-                textString="%name",
-                lineColor={0,0,0}),
-              Line(
-                points={{-100,-40},{100,-40}},
-                pattern=LinePattern.None,
-                smooth=Smooth.None),
-              Line(
-                points={{100,-40},{100,40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash)}));
+        annotation (Icon(graphics={Rectangle(
+                      extent={{-100,40},{100,-40}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Line(
+                      points={{-100,40},{100,40}},
+                      pattern=LinePattern.None,
+                      smooth=Smooth.None),Line(
+                      points={{-100,-40},{-100,40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash),Text(
+                      extent={{-150,-20},{150,20}},
+                      textString="%name",
+                      lineColor={0,0,0}),Line(
+                      points={{-100,-40},{100,-40}},
+                      pattern=LinePattern.None,
+                      smooth=Smooth.None),Line(
+                      points={{100,-40},{100,40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash)}));
       end Double;
 
       partial class Single "Icon for a single-connector boundary condition"
@@ -85,26 +79,26 @@ from this block.
       partial class ContinuousShort "Short icon for a continuous block"
         extends Names.Middle;
         annotation (Icon(graphics={Rectangle(
-                extent={{-100,40},{100,-40}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                lineColor={0,0,0}), Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,40},{100,-40}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      lineColor={0,0,0}),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end ContinuousShort;
 
       partial class ContinuousShortWide
         "Short and wide icon for a continuous block"
         extends Names.Middle;
         annotation (Icon(graphics={Rectangle(
-                extent={{-120,40},{120,-40}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                lineColor={0,0,0}), Text(
-                extent={{-120,-20},{120,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-120,40},{120,-40}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      lineColor={0,0,0}),Text(
+                      extent={{-120,-20},{120,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end ContinuousShortWide;
 
       partial class Discrete "Icon for a discrete-time block"
@@ -131,78 +125,78 @@ from Blocks.Discrete.
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,240},{100,280}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,240},{100,280}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,240},{100,280}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,240},{100,280}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end Top12;
 
       partial class Top11
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,220},{100,260}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,220},{100,260}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,220},{100,260}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,220},{100,260}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end Top11;
 
       partial class Top10
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,200},{100,240}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,200},{100,240}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,200},{100,240}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,200},{100,240}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end Top10;
 
       partial class Top9
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,180},{100,220}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,180},{100,220}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,180},{100,220}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,180},{100,220}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end Top9;
 
       partial class Top8
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,160},{100,200}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,160},{100,200}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,160},{100,200}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,160},{100,200}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end Top8;
 
       partial class Top7
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,140},{100,180}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,140},{100,180}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,140},{100,180}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,140},{100,180}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end Top7;
 
       partial class Top6
@@ -235,13 +229,13 @@ from Blocks.Discrete.
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,80},{100,120}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,80},{100,120}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,80},{100,120}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,80},{100,120}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end Top4;
 
       partial class Top3
@@ -261,39 +255,39 @@ from Blocks.Discrete.
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,40},{100,80}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,40},{100,80}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,40},{100,80}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,40},{100,80}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end Top2;
 
       partial class Top1
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,20},{100,60}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,20},{100,60}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,20},{100,60}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,20},{100,60}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end Top1;
 
       partial class Middle
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,-20},{100,20}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,-20},{100,20}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end Middle;
     end Names;
 
@@ -306,42 +300,35 @@ from Blocks.Discrete.
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
               grid={2,2},
-              initialScale=0.2), graphics={
-              Rectangle(
-                extent={{-20,2},{20,-2}},
-                lineColor={255,204,51},
-                lineThickness=0.5),
-              Polygon(
-                points={{-80,50},{80,50},{100,30},{80,-40},{60,-50},{-60,-50},{
-                    -80,-40},{-100,30},{-80,50}},
-                lineColor={0,0,0},
-                fillColor={255,204,51},
-                fillPattern=FillPattern.Solid),
-              Ellipse(
-                extent={{-65,25},{-55,15}},
-                lineColor={0,0,0},
-                fillColor={0,0,0},
-                fillPattern=FillPattern.Solid),
-              Ellipse(
-                extent={{-5,25},{5,15}},
-                lineColor={0,0,0},
-                fillColor={0,0,0},
-                fillPattern=FillPattern.Solid),
-              Ellipse(
-                extent={{55,25},{65,15}},
-                lineColor={0,0,0},
-                fillColor={0,0,0},
-                fillPattern=FillPattern.Solid),
-              Ellipse(
-                extent={{-35,-15},{-25,-25}},
-                lineColor={0,0,0},
-                fillColor={0,0,0},
-                fillPattern=FillPattern.Solid),
-              Ellipse(
-                extent={{25,-15},{35,-25}},
-                lineColor={0,0,0},
-                fillColor={0,0,0},
-                fillPattern=FillPattern.Solid)}),
+              initialScale=0.2), graphics={Rectangle(
+                      extent={{-20,2},{20,-2}},
+                      lineColor={255,204,51},
+                      lineThickness=0.5),Polygon(
+                      points={{-80,50},{80,50},{100,30},{80,-40},{60,-50},{-60,
+                  -50},{-80,-40},{-100,30},{-80,50}},
+                      lineColor={0,0,0},
+                      fillColor={255,204,51},
+                      fillPattern=FillPattern.Solid),Ellipse(
+                      extent={{-65,25},{-55,15}},
+                      lineColor={0,0,0},
+                      fillColor={0,0,0},
+                      fillPattern=FillPattern.Solid),Ellipse(
+                      extent={{-5,25},{5,15}},
+                      lineColor={0,0,0},
+                      fillColor={0,0,0},
+                      fillPattern=FillPattern.Solid),Ellipse(
+                      extent={{55,25},{65,15}},
+                      lineColor={0,0,0},
+                      fillColor={0,0,0},
+                      fillPattern=FillPattern.Solid),Ellipse(
+                      extent={{-35,-15},{-25,-25}},
+                      lineColor={0,0,0},
+                      fillColor={0,0,0},
+                      fillPattern=FillPattern.Solid),Ellipse(
+                      extent={{25,-15},{35,-25}},
+                      lineColor={0,0,0},
+                      fillColor={0,0,0},
+                      fillPattern=FillPattern.Solid)}),
           Diagram(coordinateSystem(
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
@@ -386,16 +373,16 @@ This icon is designed for a <b>signal bus</b> connector.
         extends FCSys.BaseClasses.Icons.SignalBuses.Bidirectional;
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Polygon(
-                points={{-160,40},{40,40},{-60,-160},{-160,40}},
-                smooth=Smooth.None,
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                origin={-240,60},
-                rotation=90,
-                lineColor={255,204,51}), Rectangle(
-                extent={{-20,2},{20,-2}},
-                lineColor={255,204,51},
-                lineThickness=0.5)}), Diagram(coordinateSystem(
+                      points={{-160,40},{40,40},{-60,-160},{-160,40}},
+                      smooth=Smooth.None,
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      origin={-240,60},
+                      rotation=90,
+                      lineColor={255,204,51}),Rectangle(
+                      extent={{-20,2},{20,-2}},
+                      lineColor={255,204,51},
+                      lineThickness=0.5)}), Diagram(coordinateSystem(
                 preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
               graphics={Polygon(
                       points={{-42,40},{58,40},{8,-60},{-42,40}},
@@ -411,16 +398,16 @@ This icon is designed for a <b>signal bus</b> connector.
         extends FCSys.BaseClasses.Icons.SignalBuses.Bidirectional;
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-20,2},{20,-2}},
-                lineColor={255,204,51},
-                lineThickness=0.5), Polygon(
-                points={{-160,40},{40,40},{-60,-160},{-160,40}},
-                smooth=Smooth.None,
-                fillColor={255,204,51},
-                fillPattern=FillPattern.Solid,
-                origin={120,60},
-                rotation=90,
-                lineColor={255,204,51})}), Diagram(coordinateSystem(
+                      extent={{-20,2},{20,-2}},
+                      lineColor={255,204,51},
+                      lineThickness=0.5),Polygon(
+                      points={{-160,40},{40,40},{-60,-160},{-160,40}},
+                      smooth=Smooth.None,
+                      fillColor={255,204,51},
+                      fillPattern=FillPattern.Solid,
+                      origin={120,60},
+                      rotation=90,
+                      lineColor={255,204,51})}), Diagram(coordinateSystem(
                 preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
               graphics={Polygon(
                       points={{-10,40},{90,40},{40,140},{-10,40}},
@@ -1052,7 +1039,7 @@ This icon is designed for a <b>signal bus</b> connector.
         assert(n_species == n_tot + 1, "The reaction is ill-posed.\n" + (if
           n_species > n_tot + 1 then
           "A species may be included more than once." else
-          "A species may be missing."));
+          "A species may be missing or the wrong one has been entered."));
         (d,u,v) := Modelica_LinearSystems2.Math.Matrices.LAPACK.dgesdd(cat(
                 2,
                 elementCoeffs[:, 1:n_tot],
