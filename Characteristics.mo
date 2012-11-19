@@ -147,14 +147,14 @@ package Characteristics "Data and functions to correlate physical properties"
       output Q.Potential g_O2_indirect=h_O2 - T*s_O2;
       // Resistivity
       output Q.Resistivity beta=DataC.beta(T);
-      output Q.Resistivity alpha_SH2_Phi=DataH2.beta_Phi(T);
-      output Q.Resistivity alpha_SH2_U=DataH2.beta_S(T);
-      output Q.Resistivity alpha_SH2O_Phi=DataH2O.beta_Phi(T);
-      output Q.Resistivity alpha_SH2O_U=DataH2O.beta_S(T);
-      output Q.Resistivity beta_N2_Phi=DataN2.beta_Phi(T);
-      output Q.Resistivity beta_N2_U=DataN2.beta_S(T);
-      output Q.Resistivity alpha_SO2_Phi=DataO2.beta_Phi(T);
-      output Q.Resistivity alpha_SO2_U=DataO2.beta_S(T);
+      output Q.Resistivity beta_SH2_Phi=DataH2.gamma_Phi(T);
+      output Q.Resistivity beta_SH2_U=DataH2.gamma_S(T);
+      output Q.Resistivity beta_SH2O_Phi=DataH2O.gamma_Phi(T);
+      output Q.Resistivity beta_SH2O_U=DataH2O.gamma_S(T);
+      output Q.Resistivity gamma_N2_Phi=DataN2.gamma_Phi(T);
+      output Q.Resistivity gamma_N2_U=DataN2.gamma_S(T);
+      output Q.Resistivity beta_SO2_Phi=DataO2.gamma_Phi(T);
+      output Q.Resistivity beta_SO2_U=DataO2.gamma_S(T);
 
     equation
       assert(abs(g_C - g_C_indirect) < epsilon_tol,
@@ -338,12 +338,12 @@ package Characteristics "Data and functions to correlate physical properties"
     record Graphite "<html>e<sup>-</sup> in graphite</html>"
       extends Gas(
         final phase="graphite",
-        specVolPow={0,0},
+        specVolPow=C.Graphite.specVolPow,
         b_v=C.Graphite.b_v);
       annotation (Documentation(info="<html>
      <p>Assumptions:
      <ol>
-     <li>There is one free electron per atom of carbon.</li>
+     <li>There is one free (conduction) electron per atom of carbon.</li>
 </ol>
 </p>
 <p>For more information, see the
@@ -546,12 +546,12 @@ package Characteristics "Data and functions to correlate physical properties"
   values are not known from the NASA CEA thermodynamic data
     [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>] (it only provides data for H<sup>+</sup> gas).
   Since the same H<sup>+</sup> model is used in the anode and cathode, there is no net effect.</p>
-  
-  <p>The specific volume of protons corresponds to the concentration measured 
+
+  <p>The specific volume of protons corresponds to the concentration measured
   by Spry and Fayer (0.95 M) in Nafion<sup>&reg;</sup> at
-  &lambda; = 12, where &lambda; is the number of 
-  H<sub>2</sub>O molecules to SO<sub>3</sub>H 
-  endgroups.  At &lambda; = 22, the concentration was measured at 0.54 M 
+  &lambda; = 12, where &lambda; is the number of
+  H<sub>2</sub>O molecules to SO<sub>3</sub>H
+  endgroups.  At &lambda; = 22, the concentration was measured at 0.54 M
   [<a href=\"modelica://FCSys.UsersGuide.References\">Spry2009</a>].</p>
 </html>"));
     end Solid;
@@ -662,18 +662,18 @@ package Characteristics "Data and functions to correlate physical properties"
       constant Real b_lambda[size(T_lim_beta, 1) - 1, 4]
         "Constants in the NASA CEA correlation for thermal conductivity";
 
-      function beta_Phi
-        "<html>Resistivity to transverse transport of linear momentum as a function of temperature (&beta;<sub>&Phi;</sub>)</html>"
+      function gamma_Phi
+        "<html>Resistivity to transverse transport of linear momentum as a function of temperature (&gamma;<sub>&Phi;</sub>)</html>"
 
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T "Temperature";
-        output Q.Resistivity beta_Phi "Transverse resistivity";
+        output Q.Resistivity gamma_Phi "Transverse resistivity";
 
       protected
         function b_eta_adj
           "Return unit-adjusted NASA CEA constants for viscosity"
-          // See note in b_eta_adj() in beta_Phi().
+          // See note in b_eta_adj() in gamma_Phi().
           output Real b_eta_adj[size(T_lim_beta, 1) - 1, 4]
             "Unit-adjusted NASA CEA constants for viscosity";
         algorithm
@@ -694,31 +694,31 @@ package Characteristics "Data and functions to correlate physical properties"
         // T_lim_beta[size(T_lim_beta, 1)] due to:
         //     "Error, not all "end" could be expanded."
 
-        beta_Phi := exp(-noEvent(sum(if (T_lim_beta[i] <= T or i == 1) and (T
-           <= T_lim_beta[i + 1] or i == size(T_lim_beta, 1) - 1) then (
+        gamma_Phi := smooth(0, exp(-sum(if (T_lim_beta[i] <= T or i == 1) and (
+          T <= T_lim_beta[i + 1] or i == size(T_lim_beta, 1) - 1) then (
           b_eta_adj())[i, 1]*ln(T) + ((b_eta_adj())[i, 2] + (b_eta_adj())[i, 3]
           /T)/T + (b_eta_adj())[i, 4] else 0 for i in 1:size(T_lim_beta, 1) - 1)))
-          annotation (Inline=true, smoothOrder=1);
+          annotation (Inline=true, smoothOrder=2);
         // Note:  The annotation is set assuming that the values of the constants
         // result in a function that is first-order continuous.
 
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p></html>"));
-      end beta_Phi;
+      end gamma_Phi;
 
-      function beta_S
-        "<html>Thermal transport resistivity as a function of temperature (&beta;<sub><i>S</i></sub>)</html>"
+      function gamma_S
+        "<html>Thermal transport resistivity as a function of temperature (&gamma;<sub><i>S</i></sub>)</html>"
 
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T "Temperature";
-        output Q.Resistivity beta_S "Thermal resistivity";
+        output Q.Resistivity gamma_S "Thermal resistivity";
 
       protected
         function b_lambda_adj
           "Return unit-adjusted NASA CEA constants for thermal conductivity"
           // Note:  If b_lambda were defined as a local constant instead of a
-          // function, it would prevent the beta_Phi function from
+          // function, it would prevent the gamma_Phi function from
           // being inlined.  If it were defined as a global final constant, it
           // would need to be updated manually when b_eta is changed.
           output Real b_lambda_adj[size(T_lim_beta, 1) - 1, 4]
@@ -741,16 +741,16 @@ package Characteristics "Data and functions to correlate physical properties"
         // T_lim_beta[size(T_lim_beta, 1)] due to:
         //     "Error, not all "end" could be expanded."
 
-        beta_S := exp(-noEvent(sum(if (T_lim_beta[i] <= T or i == 1) and (T <=
-          T_lim_beta[i + 1] or i == size(T_lim_beta, 1) - 1) then (b_lambda_adj())
-          [i, 1]*ln(T) + ((b_lambda_adj())[i, 2] + (b_lambda_adj())[i, 3]/T)/T
-           + (b_lambda_adj())[i, 4] else 0 for i in 1:size(T_lim_beta, 1) - 1)))
-          annotation (Inline=true, smoothOrder=1);
+        gamma_S := smooth(0, exp(-sum(if (T_lim_beta[i] <= T or i == 1) and (T
+           <= T_lim_beta[i + 1] or i == size(T_lim_beta, 1) - 1) then (
+          b_lambda_adj())[i, 1]*ln(T) + ((b_lambda_adj())[i, 2] + (b_lambda_adj())
+          [i, 3]/T)/T + (b_lambda_adj())[i, 4] else 0 for i in 1:size(
+          T_lim_beta, 1) - 1))) annotation (Inline=true, smoothOrder=2);
         // Note:  The annotation is set assuming that the values of the constants
         // result in a function that is first-order continuous.
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p></html>"));
-      end beta_S;
+      end gamma_S;
 
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html><p>The correlations for transport properties are available in
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>,
@@ -818,21 +818,21 @@ package Characteristics "Data and functions to correlate physical properties"
       final constant Integer size2b_v=size(b_v, 2) "Number of columns in b_v";
 
     public
-      partial function beta
-        "<html>Ideal transport resistivity as a function of temperature (&beta;)</html>"
+      partial function gamma
+        "<html>Ideal transport resistivity as a function of temperature (&gamma;)</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        output Q.Resistivity beta "Resistivity";
+        output Q.Resistivity gamma "Resistivity";
 
       algorithm
-        beta := U.pi*r^2*U.q*sqrt(U.pi*m/T)*6 annotation (
+        gamma := U.pi*r^2*U.q*sqrt(U.pi*m/T)*6 annotation (
           Inline=true,
           smoothOrder=999,
           Documentation(info="<html>
   <p>This function is based on kinetic theory of gases with the rigid-sphere (\"billiard-ball\")
   assumption [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].</p></html>"));
-      end beta;
+      end gamma;
 
       function c0_T
         "<html>Specific heat capacity at reference pressure as a function of temperature (<i>c</i>&deg;)</html>"
@@ -853,15 +853,17 @@ package Characteristics "Data and functions to correlate physical properties"
         // T_lim_c0[size(T_lim_c0, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
-        c0 := smooth(0, noEvent(sum(if (T_lim_c0[i] <= T or i == 1) and (T <
-          T_lim_c0[i + 1] or i == size(T_lim_c0, 1) - 1) then poly(
+        c0 := smooth(1, sum(if (T_lim_c0[i] <= T or i == 1) and (T < T_lim_c0[i
+           + 1] or i == size(T_lim_c0, 1) - 1) then poly(
                 T,
                 b_c0[i, :],
-                specHeatCapPow) else 0 for i in 1:size(T_lim_c0, 1) - 1)))
+                specHeatCapPow) else 0 for i in 1:size(T_lim_c0, 1) - 1))
           annotation (
           InlineNoEvent=true,
           Inline=true,
-          smoothOrder=1);
+          smoothOrder=2);
+        // **If possible (with warnings), set"smooth and smoothOrder to 0 for
+        // this function and 1 for g, h, and s.
       end c0_T;
 
       function dp
@@ -929,21 +931,20 @@ package Characteristics "Data and functions to correlate physical properties"
         // T_lim_c0[size(T_lim_c0, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
-        g := smooth(0, noEvent(sum(if (T_lim_c0[i] <= T or i == 1) and (T <
-          T_lim_c0[i + 1] or i == size(T_lim_c0, 1) - 1) then g0_i(T, i) else 0
-          for i in 1:size(T_lim_c0, 1) - 1)) + (if referenceEnthalpy ==
-          ReferenceEnthalpy.ZeroAt0K then Deltah0 else 0) - (if
-          referenceEnthalpy == ReferenceEnthalpy.ZeroAt25degC then Deltah0_f
-           else 0) + h_offset + sum((if specVolPow[1] + i == 0 then ln((if
-          p_min > 0 then max(p, p_min) else p)/p0) else (p^(specVolPow[1] + i)
-           - p0^(specVolPow[1] + i))/(specVolPow[1] + i))*poly(
-                T,
+        g := smooth(1, sum(if (T_lim_c0[i] <= T or i == 1) and (T < T_lim_c0[i
+           + 1] or i == size(T_lim_c0, 1) - 1) then g0_i(T, i) else 0 for i in
+          1:size(T_lim_c0, 1) - 1) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K
+           then Deltah0 else 0) - (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt25degC
+           then Deltah0_f else 0) + h_offset + sum((if specVolPow[1] + i == 0
+           then ln((if p_min > 0 then max(p, p_min) else p)/p0) else (p^(
+          specVolPow[1] + i) - p0^(specVolPow[1] + i))/(specVolPow[1] + i))*
+          poly( T,
                 b_v[i, :],
                 specVolPow[2] - specVolPow[1] - i + 1) for i in 1:size1b_v))
           annotation (
           InlineNoEvent=true,
           Inline=true,
-          smoothOrder=1);
+          smoothOrder=2);
         // The first term is the integral of c0*dT up to T with the
         // reference enthalpy at the lower bound [McBride2002, p. 2] plus
         // T times the integral of (c0/T)*dT up to T with absolute entropy
@@ -987,16 +988,15 @@ package Characteristics "Data and functions to correlate physical properties"
         // T_lim_c0[size(T_lim_c0, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
-        h0 := smooth(0, noEvent(sum(if (T_lim_c0[i] <= T or i == 1) and (T <
-          T_lim_c0[i + 1] or i == size(T_lim_c0, 1) - 1) then h0_i(T, i) else 0
-          for i in 1:size(T_lim_c0, 1) - 1)) + (if referenceEnthalpy ==
-          ReferenceEnthalpy.ZeroAt0K then Deltah0 else 0) - (if
-          referenceEnthalpy == ReferenceEnthalpy.ZeroAt25degC then Deltah0_f
-           else 0) + h_offset)
+        h0 := smooth(1, sum(if (T_lim_c0[i] <= T or i == 1) and (T < T_lim_c0[i
+           + 1] or i == size(T_lim_c0, 1) - 1) then h0_i(T, i) else 0 for i in
+          1:size(T_lim_c0, 1) - 1) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K
+           then Deltah0 else 0) - (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt25degC
+           then Deltah0_f else 0) + h_offset)
           annotation (
           InlineNoEvent=true,
           Inline=true,
-          smoothOrder=1);
+          smoothOrder=2);
         // The first term is the integral of c0*dT up to T at p0 with the
         // reference enthalpy at the lower bound [McBride2002, p. 2].
       end h0_T;
@@ -1027,7 +1027,8 @@ package Characteristics "Data and functions to correlate physical properties"
           inverse(v=v_pT(p, T)),
           derivative=dp);
         annotation (Documentation(info="<html><p>If the species is incompressible, then <i>p</i>(<i>v</i>, <i>T</i> ) is undefined,
-  and the function will return a value of zero.</p></html>"));
+  and the function will return a value of zero.</p>
+  <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a>().</p></html>"));
       end p_vT;
 
       function s_pT
@@ -1064,18 +1065,18 @@ package Characteristics "Data and functions to correlate physical properties"
         // T_lim_c0[size(T_lim_c0, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
-        s := smooth(0, noEvent(sum(if (T_lim_c0[i] <= T or i == 1) and (T <
-          T_lim_c0[i + 1] or i == size(T_lim_c0, 1) - 1) then s0_i(T, i) else 0
-          for i in 1:size(T_lim_c0, 1) - 1)) - sum((if specVolPow[1] + i == 0
-           then ln((if p_min > 0 then max(p, p_min) else p)/p0) else (p^(
-          specVolPow[1] + i) - p0^(specVolPow[1] + i))/(specVolPow[1] + i))*
-          poly( T,
+        s := smooth(1, sum(if (T_lim_c0[i] <= T or i == 1) and (T < T_lim_c0[i
+           + 1] or i == size(T_lim_c0, 1) - 1) then s0_i(T, i) else 0 for i in
+          1:size(T_lim_c0, 1) - 1) - sum((if specVolPow[1] + i == 0 then ln((
+          if p_min > 0 then max(p, p_min) else p)/p0) else (p^(specVolPow[1] +
+          i) - p0^(specVolPow[1] + i))/(specVolPow[1] + i))*poly(
+                T,
                 b_v[i, :],
                 specVolPow[2] - specVolPow[1] - i) for i in 1:size1b_v))
           annotation (
           InlineNoEvent=true,
           Inline=true,
-          smoothOrder=1);
+          smoothOrder=2);
         // The first term is the integral of c0/T*dT up to T at p0 with the
         // absolute entropy at the lower bound [McBride2002, p. 2].  The
         // second polynomial is the integral of v*dP from p0 to p (at T).
@@ -1127,7 +1128,7 @@ package Characteristics "Data and functions to correlate physical properties"
     By default,
     the powers of <i>T</i> for the 1st column are each -2, which corresponds to [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].
     In that case, the dimensionalities of the coefficients are {M2.L4/(N2.T4), M.L2/(N.T2), 1, &hellip;}
-    for each row, where L is length, M is mass, N is number, and T is time. (In <a href=\"modelica://FCSys\">FCSys</a>, 
+    for each row, where L is length, M is mass, N is number, and T is time. (In <a href=\"modelica://FCSys\">FCSys</a>,
     temperature is a potential with dimension M.L2/(N.T2); see
     the <a href=\"modelica://FCSys.Units\">Units</a> package.)</li>
     <li><code>B_c</code>: As in <code>b_c</code>, the rows correspond to different

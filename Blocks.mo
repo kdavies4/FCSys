@@ -4682,7 +4682,7 @@ Example:
 
     block AddSkipInclIncl "Add or subtract two inputs"
       // extends FCSys.Blocks.BaseClasses.MO(final n_out=n);
-      // TODO: Fix the icon.
+      // TODO:  Fix the icon.
       parameter Boolean isPos1=true
         "true: 1st input is positive; false: negative"
         annotation (Dialog(enable=Include1));
@@ -4764,7 +4764,7 @@ Example:
 
     block AddInclInclIncl "Add or subtract three inputs"
       // extends FCSys.Blocks.BaseClasses.MO(final n_out=n);
-      // TODO: Fix the icon.
+      // TODO:  Fix the icon.
       parameter Boolean isPos1=true
         "true: 1st input is positive; false: negative";
       parameter Boolean isPos2=true
@@ -4871,7 +4871,7 @@ Example:
 
     block AddInclInclSkip "Add or subtract two inputs"
       // extends FCSys.Blocks.BaseClasses.MO(final n_out=n);
-      // TODO: Fix the icon.
+      // TODO:  Fix the icon.
       parameter Boolean isPos1=true
         "true: 1st input is positive; false: negative"
         annotation (Dialog(enable=Include1));
@@ -4955,7 +4955,7 @@ Example:
 
     block AddInclSkipIncl "Add or subtract two inputs"
       // extends FCSys.Blocks.BaseClasses.MO(final n_out=n);
-      // TODO: Fix the icon.
+      // TODO:  Fix the icon.
       parameter Boolean isPos1=true
         "true: 1st input is positive; false: negative"
         annotation (Dialog(enable=Include1));

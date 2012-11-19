@@ -60,13 +60,13 @@ package BaseClasses "Base classes (not for direct use)"
         //extends FCSys.BaseClasses.Icons.Names.Middle;
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,-100},{100,100}},
-                lineColor={0,0,127},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid), Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}), Documentation(info="<html>
+                      extent={{-100,-100},{100,100}},
+                      lineColor={0,0,127},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}), Documentation(info="<html>
 <p>
 Block that has only the basic icon for an imperative
 block (no declarations, no equations). Most blocks
@@ -105,10 +105,10 @@ from this block.
         extends FCSys.BaseClasses.Icons.Names.Top5;
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,-100},{100,100}},
-                lineColor={0,0,127},
-                fillColor={223,223,159},
-                fillPattern=FillPattern.Solid)}), Documentation(info="<html>
+                      extent={{-100,-100},{100,100}},
+                      lineColor={0,0,127},
+                      fillColor={223,223,159},
+                      fillPattern=FillPattern.Solid)}), Documentation(info="<html>
 <p>
 Block that has only the basic icon for an imperative and
 discrete block (no declarations, no equations), e.g.,
@@ -216,13 +216,13 @@ from Blocks.Discrete.
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,100},{100,140}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,100},{100,140}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,100},{100,140}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,100},{100,140}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end Top5;
 
       partial class Top4
@@ -255,13 +255,13 @@ from Blocks.Discrete.
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                      extent={{-100,40},{100,80}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Text(
-                      extent={{-100,40},{100,80}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,40},{100,80}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None), Text(
+                extent={{-100,40},{100,80}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end Top2;
 
       partial class Top1
@@ -425,176 +425,145 @@ This icon is designed for a <b>signal bus</b> connector.
       annotation (Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={
-            Rectangle(
-              extent={{-100,60},{100,100}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Polygon(
-              points={{-4,52},{-14,42},{6,42},{16,52},{-4,52}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Polygon(
-              points={{-10,52},{-20,42},{-14,42},{-4,52},{-10,52}},
-              lineColor={0,0,0},
-              fillPattern=FillPattern.HorizontalCylinder,
-              fillColor={0,0,0}),
-            Rectangle(
-              extent={{6,42},{12,-52}},
-              fillPattern=FillPattern.Solid,
-              fillColor={0,0,0},
-              pattern=LinePattern.None),
-            Polygon(
-              points={{16,52},{6,42},{12,42},{22,52},{16,52}},
-              lineColor={0,0,0},
-              fillPattern=FillPattern.HorizontalCylinder,
-              fillColor={0,0,0}),
-            Line(
-              points={{-40,42},{-40,-52}},
-              pattern=LinePattern.None,
-              smooth=Smooth.None),
-            Polygon(
-              points={{-46,64},{-66,44},{-46,44},{-26,64},{-46,64}},
-              lineColor={0,0,0},
-              fillColor={135,135,135},
-              fillPattern=FillPattern.Solid),
-            Rectangle(
-              extent={{-39.6277,31.7996},{-67.912,17.6573}},
-              lineColor={0,0,0},
-              fillPattern=FillPattern.HorizontalCylinder,
-              rotation=45,
-              fillColor={255,255,255},
-              origin={56.5067,67.5353}),
-            Rectangle(
-              extent={{-14,42},{6,-52}},
-              lineColor={0,0,0},
-              fillPattern=FillPattern.VerticalCylinder,
-              fillColor={255,255,255}),
-            Line(points={{-30,52},{32,52}}, color={0,0,0}),
-            Rectangle(
-              extent={{-5.21738,-5.21961},{-33.5017,-33.5041}},
-              lineColor={0,0,170},
-              fillPattern=FillPattern.HorizontalCylinder,
-              rotation=45,
-              fillColor={0,0,240},
-              origin={31.9983,69.3803}),
-            Rectangle(
-              extent={{12,42},{52,-52}},
-              lineColor={0,0,170},
-              fillPattern=FillPattern.VerticalCylinder,
-              fillColor={0,0,240}),
-            Polygon(
-              points={{-26,64},{-46,44},{-46,-64},{-26,-44},{-26,64}},
-              lineColor={0,0,0},
-              fillColor={95,95,95},
-              fillPattern=FillPattern.Solid),
-            Rectangle(
-              extent={{-5.21774,-5.2196},{-33.502,-33.5042}},
-              lineColor={170,0,0},
-              fillPattern=FillPattern.HorizontalCylinder,
-              rotation=45,
-              fillColor={240,0,0},
-              origin={-30.001,79.3803}),
-            Rectangle(
-              extent={{-60,42},{-20,-52}},
-              lineColor={170,0,0},
-              fillPattern=FillPattern.VerticalCylinder,
-              fillColor={240,0,0}),
-            Rectangle(
-              extent={{-76.648,66.211},{-119.073,52.0689}},
-              lineColor={95,95,95},
-              fillPattern=FillPattern.HorizontalCylinder,
-              rotation=45,
-              fillColor={135,135,135},
-              origin={65.0166,81.3801}),
-            Rectangle(
-              extent={{-76.648,66.211},{-119.073,52.0689}},
-              lineColor={95,95,95},
-              fillPattern=FillPattern.HorizontalCylinder,
-              rotation=45,
-              fillColor={135,135,135},
-              origin={157,81}),
-            Rectangle(
-              extent={{26,44},{46,-64}},
-              lineColor={95,95,95},
-              fillPattern=FillPattern.VerticalCylinder,
-              fillColor={135,135,135}),
-            Polygon(
-              points={{-26,64},{-26,52},{-30,52},{-30,60},{-26,64}},
-              smooth=Smooth.None,
-              fillColor={95,95,95},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),
-            Ellipse(
-              extent={{-44,62},{-36,58}},
-              lineColor={135,135,135},
-              fillColor={240,0,0},
-              fillPattern=FillPattern.Sphere),
-            Ellipse(
-              extent={{36,50},{44,46}},
-              lineColor={135,135,135},
-              fillColor={0,0,240},
-              fillPattern=FillPattern.Sphere),
-            Polygon(
-              points={{-26,64},{-26,52},{-30,52},{-40,42},{-40,-52},{-34,-52},{
-                  -46,-64},{-46,44},{-26,64}},
-              smooth=Smooth.None,
-              fillColor={95,95,95},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),
-            Polygon(
-              points={{66,64},{46,44},{46,-64},{66,-44},{66,64}},
-              lineColor={0,0,0},
-              fillColor={95,95,95},
-              fillPattern=FillPattern.Solid),
-            Rectangle(
-              extent={{-20,42},{-14,-52}},
-              fillPattern=FillPattern.Solid,
-              fillColor={0,0,0},
-              pattern=LinePattern.None),
-            Rectangle(extent={{26,44},{46,-64}}, lineColor={0,0,0}),
-            Rectangle(
-              extent={{-66,44},{-46,-64}},
-              lineColor={95,95,95},
-              fillPattern=FillPattern.VerticalCylinder,
-              fillColor={135,135,135}),
-            Rectangle(extent={{-66,44},{-46,-64}}, lineColor={0,0,0}),
-            Line(
-              points={{-34,-52},{-46,-64}},
-              color={0,0,0},
-              smooth=Smooth.None),
-            Polygon(
-              points={{66,74},{66,64},{46,64},{34,52},{-26,52},{-26,64},{-46,64},
-                  {-46,74},{66,74}},
-              smooth=Smooth.None,
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None),
-            Polygon(
-              points={{46,64},{66,64},{46,44},{26,44},{46,64}},
-              lineColor={0,0,0},
-              smooth=Smooth.None),
-            Polygon(
-              points={{-46,64},{-26,64},{-46,44},{-66,44},{-46,64}},
-              lineColor={0,0,0},
-              smooth=Smooth.None),
-            Line(points={{26,42},{-40,42},{-30,52},{34,52}}, color={0,0,0}),
-            Line(
-              points={{-26,64},{-26,52}},
-              color={0,0,0},
-              smooth=Smooth.None),
-            Line(
-              points={{-40,42},{-40,-52},{26,-52}},
-              color={0,0,0},
-              smooth=Smooth.None),
-            Text(
-              extent={{-150,60},{150,100}},
-              textString="%name",
-              lineColor={0,0,0})}), Diagram(coordinateSystem(
+            initialScale=0.1), graphics={Rectangle(
+                  extent={{-100,60},{100,100}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Polygon(
+                  points={{-4,52},{-14,42},{6,42},{16,52},{-4,52}},
+                  lineColor={0,0,0},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Polygon(
+                  points={{-10,52},{-20,42},{-14,42},{-4,52},{-10,52}},
+                  lineColor={0,0,0},
+                  fillPattern=FillPattern.HorizontalCylinder,
+                  fillColor={0,0,0}),Rectangle(
+                  extent={{6,42},{12,-52}},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={0,0,0},
+                  pattern=LinePattern.None),Polygon(
+                  points={{16,52},{6,42},{12,42},{22,52},{16,52}},
+                  lineColor={0,0,0},
+                  fillPattern=FillPattern.HorizontalCylinder,
+                  fillColor={0,0,0}),Line(
+                  points={{-40,42},{-40,-52}},
+                  pattern=LinePattern.None,
+                  smooth=Smooth.None),Polygon(
+                  points={{-46,64},{-66,44},{-46,44},{-26,64},{-46,64}},
+                  lineColor={0,0,0},
+                  fillColor={135,135,135},
+                  fillPattern=FillPattern.Solid),Rectangle(
+                  extent={{-39.6277,31.7996},{-67.912,17.6573}},
+                  lineColor={0,0,0},
+                  fillPattern=FillPattern.HorizontalCylinder,
+                  rotation=45,
+                  fillColor={255,255,255},
+                  origin={56.5067,67.5353}),Rectangle(
+                  extent={{-14,42},{6,-52}},
+                  lineColor={0,0,0},
+                  fillPattern=FillPattern.VerticalCylinder,
+                  fillColor={255,255,255}),Line(points={{-30,52},{32,52}},
+              color={0,0,0}),Rectangle(
+                  extent={{-5.21738,-5.21961},{-33.5017,-33.5041}},
+                  lineColor={0,0,170},
+                  fillPattern=FillPattern.HorizontalCylinder,
+                  rotation=45,
+                  fillColor={0,0,240},
+                  origin={31.9983,69.3803}),Rectangle(
+                  extent={{12,42},{52,-52}},
+                  lineColor={0,0,170},
+                  fillPattern=FillPattern.VerticalCylinder,
+                  fillColor={0,0,240}),Polygon(
+                  points={{-26,64},{-46,44},{-46,-64},{-26,-44},{-26,64}},
+                  lineColor={0,0,0},
+                  fillColor={95,95,95},
+                  fillPattern=FillPattern.Solid),Rectangle(
+                  extent={{-5.21774,-5.2196},{-33.502,-33.5042}},
+                  lineColor={170,0,0},
+                  fillPattern=FillPattern.HorizontalCylinder,
+                  rotation=45,
+                  fillColor={240,0,0},
+                  origin={-30.001,79.3803}),Rectangle(
+                  extent={{-60,42},{-20,-52}},
+                  lineColor={170,0,0},
+                  fillPattern=FillPattern.VerticalCylinder,
+                  fillColor={240,0,0}),Rectangle(
+                  extent={{-76.648,66.211},{-119.073,52.0689}},
+                  lineColor={95,95,95},
+                  fillPattern=FillPattern.HorizontalCylinder,
+                  rotation=45,
+                  fillColor={135,135,135},
+                  origin={65.0166,81.3801}),Rectangle(
+                  extent={{-76.648,66.211},{-119.073,52.0689}},
+                  lineColor={95,95,95},
+                  fillPattern=FillPattern.HorizontalCylinder,
+                  rotation=45,
+                  fillColor={135,135,135},
+                  origin={157,81}),Rectangle(
+                  extent={{26,44},{46,-64}},
+                  lineColor={95,95,95},
+                  fillPattern=FillPattern.VerticalCylinder,
+                  fillColor={135,135,135}),Polygon(
+                  points={{-26,64},{-26,52},{-30,52},{-30,60},{-26,64}},
+                  smooth=Smooth.None,
+                  fillColor={95,95,95},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None,
+                  lineColor={0,0,0}),Ellipse(
+                  extent={{-44,62},{-36,58}},
+                  lineColor={135,135,135},
+                  fillColor={240,0,0},
+                  fillPattern=FillPattern.Sphere),Ellipse(
+                  extent={{36,50},{44,46}},
+                  lineColor={135,135,135},
+                  fillColor={0,0,240},
+                  fillPattern=FillPattern.Sphere),Polygon(
+                  points={{-26,64},{-26,52},{-30,52},{-40,42},{-40,-52},{-34,-52},
+                {-46,-64},{-46,44},{-26,64}},
+                  smooth=Smooth.None,
+                  fillColor={95,95,95},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None,
+                  lineColor={0,0,0}),Polygon(
+                  points={{66,64},{46,44},{46,-64},{66,-44},{66,64}},
+                  lineColor={0,0,0},
+                  fillColor={95,95,95},
+                  fillPattern=FillPattern.Solid),Rectangle(
+                  extent={{-20,42},{-14,-52}},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={0,0,0},
+                  pattern=LinePattern.None),Rectangle(extent={{26,44},{46,-64}},
+              lineColor={0,0,0}),Rectangle(
+                  extent={{-66,44},{-46,-64}},
+                  lineColor={95,95,95},
+                  fillPattern=FillPattern.VerticalCylinder,
+                  fillColor={135,135,135}),Rectangle(extent={{-66,44},{-46,-64}},
+              lineColor={0,0,0}),Line(
+                  points={{-34,-52},{-46,-64}},
+                  color={0,0,0},
+                  smooth=Smooth.None),Polygon(
+                  points={{66,74},{66,64},{46,64},{34,52},{-26,52},{-26,64},{-46,
+                64},{-46,74},{66,74}},
+                  smooth=Smooth.None,
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,255,255},
+                  pattern=LinePattern.None),Polygon(
+                  points={{46,64},{66,64},{46,44},{26,44},{46,64}},
+                  lineColor={0,0,0},
+                  smooth=Smooth.None),Polygon(
+                  points={{-46,64},{-26,64},{-46,44},{-66,44},{-46,64}},
+                  lineColor={0,0,0},
+                  smooth=Smooth.None),Line(points={{26,42},{-40,42},{-30,52},{
+              34,52}}, color={0,0,0}),Line(
+                  points={{-26,64},{-26,52}},
+                  color={0,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{-40,42},{-40,-52},{26,-52}},
+                  color={0,0,0},
+                  smooth=Smooth.None),Text(
+                  extent={{-150,60},{150,100}},
+                  textString="%name",
+                  lineColor={0,0,0})}), Diagram(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             initialScale=0.1)));
@@ -629,38 +598,32 @@ This icon is designed for a <b>signal bus</b> connector.
     partial class Sensor "Icon for a sensor"
 
       //extends FCSys.BaseClasses.Icons.Names.Top4;
-      annotation (Icon(graphics={
-            Rectangle(
-              extent={{-100,74},{100,114}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Ellipse(
-              extent={{-70,70},{70,-70}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(points={{0,70},{0,40}}, color={0,0,0}),
-            Line(points={{22.9,32.8},{40.2,57.3}}, color={0,0,0}),
-            Line(points={{-22.9,32.8},{-40.2,57.3}}, color={0,0,0}),
-            Line(points={{37.6,13.7},{65.8,23.9}}, color={0,0,0}),
-            Line(points={{-37.6,13.7},{-65.8,23.9}}, color={0,0,0}),
-            Line(points={{0,0},{9.02,28.6}}, color={0,0,0}),
-            Polygon(
-              points={{-0.48,31.6},{18,26},{18,57.2},{-0.48,31.6}},
-              lineColor={0,0,0},
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-5,5},{5,-5}},
-              lineColor={0,0,0},
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid),
-            Line(points={{0,-100},{0,-70}}, color={0,0,127}),
-            Text(
-              extent={{-100,74},{100,114}},
-              textString="%name",
-              lineColor={0,0,0})}));
+      annotation (Icon(graphics={Rectangle(
+                  extent={{-100,74},{100,114}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Ellipse(
+                  extent={{-70,70},{70,-70}},
+                  lineColor={0,0,0},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Line(points={{0,70},{0,40}},
+              color={0,0,0}),Line(points={{22.9,32.8},{40.2,57.3}}, color={0,0,
+              0}),Line(points={{-22.9,32.8},{-40.2,57.3}}, color={0,0,0}),Line(
+              points={{37.6,13.7},{65.8,23.9}}, color={0,0,0}),Line(points={{-37.6,
+              13.7},{-65.8,23.9}}, color={0,0,0}),Line(points={{0,0},{9.02,28.6}},
+              color={0,0,0}),Polygon(
+                  points={{-0.48,31.6},{18,26},{18,57.2},{-0.48,31.6}},
+                  lineColor={0,0,0},
+                  fillColor={0,0,0},
+                  fillPattern=FillPattern.Solid),Ellipse(
+                  extent={{-5,5},{5,-5}},
+                  lineColor={0,0,0},
+                  fillColor={0,0,0},
+                  fillPattern=FillPattern.Solid),Line(points={{0,-100},{0,-70}},
+              color={0,0,127}),Text(
+                  extent={{-100,74},{100,114}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
     end Sensor;
   end Icons;
 
@@ -714,7 +677,7 @@ This icon is designed for a <b>signal bus</b> connector.
         assert(integers[1] == 2,
           "The Chemistry.readElement function failed on the coeff output.");
         assert(integers[2] == 0,
-          "The Chemistry.readElement function failed on the charge output.");
+          "The Chemistry.readElement function failed on the z output.");
         assert(integers[3] == 3,
           "The Chemistry.readElement function failed on the nextindex output.");
         (strings[1],integers[1],integers[2],integers[3]) :=
@@ -724,7 +687,7 @@ This icon is designed for a <b>signal bus</b> connector.
         assert(integers[1] == 2,
           "The Chemistry.readElement function failed on the coeff output.");
         assert(integers[2] == 2,
-          "The Chemistry.readElement function failed on the charge output.");
+          "The Chemistry.readElement function failed on the z output.");
         assert(integers[3] == 6,
           "The Chemistry.readElement function failed on the nextindex output.");
 
@@ -840,7 +803,7 @@ This icon is designed for a <b>signal bus</b> connector.
         "Return the charge of a species based on its chemical formula"
 
         input String formula "Chemical formula";
-        output Integer charge "Electrical charge";
+        output Integer z "Charge number";
 
       external"C";
         annotation (Include="#include <FCSys/resources/source/C/Chemistry.c>",
@@ -857,16 +820,16 @@ This icon is designed for a <b>signal bus</b> connector.
       end charge;
 
       function countElements
-        "Return the number of unique elements in a chemical formula"
+        "Return the number of elements in a chemical formula"
         extends Modelica.Icons.Function;
 
         input String formula "Chemical formula";
-        output Integer n "Number of unique elements";
+        output Integer n "Number of elements";
 
       external"C";
         annotation (Include="#include <FCSys/resources/source/C/Chemistry.c>",
-            Documentation(info="<html><p>This function returns the number of unique elements
-      in a chemical formula.  Electrons are counted as a unique element (or rather particle)
+            Documentation(info="<html><p>This function returns the number of elements
+      in a chemical formula.  Electrons are counted as an element (or rather particle)
       if the net charge is nonzero.
       </p>
 
@@ -889,8 +852,8 @@ This icon is designed for a <b>signal bus</b> connector.
         // computation.
 
       protected
-        Integer charge;
-        Integer netcharge=0 "Net charge";
+        Integer z "Charge number";
+        Integer z_net=0 "Net charge";
         Integer i=1 "index of element";
         Integer j=1 "index of character in formula string";
         Integer length=Modelica.Utilities.Strings.length(formula)
@@ -899,9 +862,9 @@ This icon is designed for a <b>signal bus</b> connector.
       algorithm
         // Read the elements.
         while j <= length loop
-          (symbols[i],coeffs[i],charge,j) := readElement(formula, j);
+          (symbols[i],coeffs[i],z,j) := readElement(formula, j);
           assert(j <> 0, "The formula is invalid.");
-          netcharge := netcharge + charge;
+          z_net := z_net + z;
           if symbols[i] <> "e" then
             i := i + 1;
             // Electrons are counted below.
@@ -909,9 +872,9 @@ This icon is designed for a <b>signal bus</b> connector.
         end while;
 
         // Add electrons according to the charge.
-        if netcharge <> 0 then
+        if z_net <> 0 then
           symbols[i] := "e-";
-          coeffs[i] := -netcharge;
+          coeffs[i] := -z_net;
         end if;
 
         annotation (Documentation(info="<html><p>This function reads a chemical formula
@@ -936,7 +899,7 @@ This icon is designed for a <b>signal bus</b> connector.
         input Integer startindex(min=1) = 1 "Start index";
         output String symbol "Name of element";
         output Integer coeff "stoichiometric coefficient";
-        output Integer charge "Electrical charge";
+        output Integer z "Charge number";
         output Integer nextindex "index after the found element (0 if error)";
 
       external"C" readElement(
@@ -944,12 +907,12 @@ This icon is designed for a <b>signal bus</b> connector.
                 startindex,
                 symbol,
                 coeff,
-                charge,
+                z,
                 nextindex);
         annotation (Include="#include <FCSys/resources/source/C/Chemistry.c>",
             Documentation(info="<html><p>This function returns the <code>symbol</code>,
   stoichiometric coefficient (<code>coeff</code>), and
-  electrical charge (<code>charge</code>) associated with an element as it appears in a chemical
+  electrical charge (<code>z</code>) associated with an element as it appears in a chemical
   formula (<code>formula</code>).  The <code>formula</code> string is read beginning
   at <code>startindex</code>. After any initial whitespace, which is ignored,  the
   symbol must begin with a letter and may continue with lowercase letters.  The symbol may be
@@ -965,8 +928,8 @@ This icon is designed for a <b>signal bus</b> connector.
   one-based indices (Modelica format).</p>
 
   <p><b>Example:</b><br>
-  <code>(symbol, coeff, charge, nextindex) = ReadFormula(\"Hg2+2\")</code> returns
-  <code>symbol=\"Hg\"</code>, <code>coeff=2</code>, <code>charge=2</code>, and <code>nextindex=6</code>.</p>
+  <code>(symbol, coeff, z, nextindex) = ReadFormula(\"Hg2+2\")</code> returns
+  <code>symbol=\"Hg\"</code>, <code>coeff=2</code>, <code>z=2</code>, and <code>nextindex=6</code>.</p>
   </html>"));
       end readElement;
 
@@ -980,7 +943,7 @@ This icon is designed for a <b>signal bus</b> connector.
       protected
         Integer n_species=size(formulas, 1) "Number of species";
         Integer n_elements[n_species]=countElements(formulas)
-          "Number of unique elements within each species";
+          "Number of elements within each species";
         Integer n_tot=sum(n_elements) "Total number of elements";
         String allSymbols[n_tot] "Symbols of all the elementary components";
         String symbols[n_species, max(n_elements)]
@@ -1006,7 +969,7 @@ This icon is designed for a <b>signal bus</b> connector.
           j := j + n_elements[i];
         end for;
 
-        // Reduce the list to a unique set.
+        // Reduce the list to a (unique) set.
         i := 1;
         while i < n_tot loop
           j := i + 1;
@@ -1069,14 +1032,16 @@ An unrelated species may be included.");
 
     function average "Return the arithmetic mean of numbers"
       extends Modelica.Icons.Function;
+
       input Real x[:] "Vector of numbers";
       output Real A "Arithmetic mean";
+
     algorithm
       A := sum(x)/size(x, 1) annotation (Inline=true);
     end average;
 
-    function cartWrap = mod1 (final y=3)
-      "Return the index to a Cartesian axis (1 to 3) after wrapping"
+    function cartWrap = mod1 (final den=Axis.z)
+      "<html>Return the index to a Cartesian axis (1 to 3, i.e., <a href=\"modelica://FCSys.BaseClasses.Axis\">Axis.x</a> to <a href=\"modelica://FCSys.BaseClasses.Axis\">Axis.z</a>) after wrapping</html>"
       annotation (Inline=true, Documentation(info="<html><p><b>Examples:</b><br>
     <code>cartWrap(0)</code> returns 3 and <code>cartWrap(4)</code> returns 1.</p></html>"));
 
@@ -1108,8 +1073,9 @@ An unrelated species may be included.");
     end Delta;
 
     function enumerate
-      "<html>enumerate the <code>true</code> entries in a <code>Boolean</code> array (0 for <code>false</code> entries)</html>"
+      "<html>Enumerate the <code>true</code> entries in a <code>Boolean</code> vector (0 for <code>false</code> entries)</html>"
       extends Modelica.Icons.Function;
+
       input Boolean x[:] "<html><code>Boolean</code> array</html>";
       output Integer enumerated[size(x, 1)]
         "Indices of the true entries (increasing order; 0 for false entries)";
@@ -1133,10 +1099,13 @@ An unrelated species may be included.");
     function index
       "<html>Return the indices of the <code>true</code> entries of a <code>Boolean</code> vector</html>"
       extends Modelica.Icons.Function;
+
       input Boolean x[:] "<html><code>Boolean</code> array</html>";
       output Integer indices[countTrue(x)] "Indices of the true entries";
+
     protected
       Integer count "Counter variable";
+
     algorithm
       count := 1;
       for i in 1:size(x, 1) loop
@@ -1152,19 +1121,23 @@ An unrelated species may be included.");
     function mod1
       "Modulo operator for 1-based indexing (compatible with Modelica)"
       extends Modelica.Icons.Function;
-      input Integer x "Dividend";
-      input Integer y "Divisor";
+
+      input Integer num "Dividend";
+      input Integer den "Divisor";
       output Integer index "Remainder with 1-based indexing";
+
     algorithm
-      index := mod(x - 1, y) + 1 annotation (Inline=true,Documentation(info="<html><p><b>Examples:</b><br>
+      index := mod(num - 1, den) + 1 annotation (Inline=true,Documentation(info
+            ="<html><p><b>Examples:</b><br>
   <code>Mod(4,3)</code> returns
   1.  <code>mod1(3,3)</code> returns 3, but <code>mod(3,3)</code> returns 0 where
   <code>mod()</code> is the built-in modulo operator.</html>"));
     end mod1;
 
     function poly
-      "<html>polynomial expressed in form: <i>y</i> = ((&hellip; + <i>a</i><sub><i>n</i>-2</sub>)/<i>x</i> + <i>a</i><sub><i>n</i>-1</sub>)/<i>x</i> + <i>a</i><sub><i>n</i></sub> + <i>x</i>&middot;(<i>a</i><sub><i>n</i>+1</sub> + <i>x</i>&middot;(<i>a</i><sub><i>n</i>+2</sub> + &hellip;))</html>"
+      "<html>Polynomial expressed in form: <i>y</i> = ((&hellip; + <i>a</i><sub><i>n</i>-2</sub>)/<i>x</i> + <i>a</i><sub><i>n</i>-1</sub>)/<i>x</i> + <i>a</i><sub><i>n</i></sub> + <i>x</i>&middot;(<i>a</i><sub><i>n</i>+1</sub> + <i>x</i>&middot;(<i>a</i><sub><i>n</i>+2</sub> + &hellip;))</html>"
       extends Modelica.Icons.Function;
+
       input Real x "Argument";
       input Real a[:] "Coefficients";
       input Integer n=0 "Power of the first coefficient";
@@ -1205,7 +1178,9 @@ An unrelated species may be included.");
     end poly;
 
     function round
-      "<html>round a <code>Real</code> variable to the nearest integer</html>"
+      "<html>Round a <code>Real</code> variable to the nearest integer</html>"
+      extends Modelica.Icons.Function;
+
       input Real x "<html><code>Real</code> variable</html>";
       output Integer y "Nearest integer";
 

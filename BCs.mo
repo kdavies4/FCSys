@@ -2,14 +2,14 @@ within FCSys;
 package BCs "Models for boundary conditions"
   extends Modelica.Icons.SourcesPackage;
 
-  // TODO: Recheck this package, fix errors and warnings.
+  // TODO:  Recheck this package, fix errors and warnings.
 
   package Examples "Examples and tests"
     extends Modelica.Icons.ExamplesPackage;
     model Environment "<html>Test the <code>Environment</code> model</html>"
       extends Modelica.Icons.Example;
 
-      // TODO: Make this into a meaningful example.
+      // TODO:  Make this into a meaningful example.
       FCSys.BCs.Defaults default
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
     end Environment;
@@ -28,11 +28,11 @@ package BCs "Models for boundary conditions"
         inclZFaces=false,
         inclLinX=false,
         inclLinY=true,
-        graphite(inclC=true, C(V_IC=0.5*U.cm^3,alpha_Phi=1e-3*U.cm/U.A)),
+        graphite(inclC=true, C(V_IC=0.5*U.cm^3,beta_Phi=1e-3*U.cm/U.A)),
         gas(
           inclH2O=true,
           H2O(
-            alpha_Phi=1e-3*U.cm/U.A,
+            beta_Phi=1e-3*U.cm/U.A,
             xNegative(
               matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.ClosedAdiabatic,
 
@@ -117,7 +117,7 @@ package BCs "Models for boundary conditions"
     model Router "<html>Test the <code>Router<code> model</html>"
       extends Modelica.Icons.Example;
 
-      // TODO: Make this into a meaningful example.
+      // TODO:  Make this into a meaningful example.
       FCSys.BCs.Router router
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
     end Router;
@@ -416,7 +416,7 @@ package BCs "Models for boundary conditions"
       "<html>Fluid adapter between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
       extends FCSys.BaseClasses.Icons.Names.Top3;
 
-      // TODO: Fix this; there may be issues with the energy/entropy rate balance.
+      // TODO:  Fix this; there may be issues with the energy/entropy rate balance.
 
       parameter Q.Area A=1*U.cm^2 "Area of the connection surface";
       replaceable package Medium = Modelica.Media.Interfaces.PartialMedium (
@@ -450,7 +450,7 @@ package BCs "Models for boundary conditions"
       face.material.mu = medium.h*medium.MM*U.J/U.mol - face.entropy.T*s;
       fluidPort.h_outflow = medium.h;
 
-      // Rate balances (without storage)
+      // Rate balances (no storage)
       0 = (medium.MM*U.kg/U.mol)*face.material.Ndot + fluidPort.m_flow*U.kg/U.s
         "Mass";
       face.entropy.Sdot = s*face.material.Ndot
@@ -614,7 +614,7 @@ package BCs "Models for boundary conditions"
       face.material.mu = pin.v*U.V "Electrochemical potential";
       face.entropy.T = port.T*U.K "Temperature";
 
-      // Conservation (without storage)
+      // Conservation (no storage)
       0 = face.material.Ndot - pin.i*U.A "Material";
       // In FCSys, current is material (e.g., electron) flow, not charge flow;
       // therefore, the flow rate is negated.
@@ -5333,6 +5333,17 @@ boundary condition</a> models.
               PotentialElectrochemical "Electrochemical potential",
               Current "Current") "Types of BCs";
         end BaseClasses;
+
+        model Resistance
+          "Prescribed resistance**temporary (clean up if permanent)"
+          extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.Current,
+              redeclare Connectors.RealInput u(final unit="N/T"));
+
+        equation
+          material.mu = 0.25*U.V + u*material.Ndot;
+          annotation (defaultComponentPrefixes="replaceable",
+              defaultComponentName="materialBC");
+        end Resistance;
       end Material;
 
       package Momentum "BCs for linear momentum"
@@ -8439,7 +8450,7 @@ boundary condition</a> model.
         equation
           negative.mu - positive.mu = u "Condition";
           0 = negative.Ndot + positive.Ndot
-            "Material rate balance (without storage)";
+            "Material rate balance (no storage)";
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="materialBC",
@@ -8457,7 +8468,7 @@ boundary condition</a> model.
         equation
           negative.Ndot = u "Condition";
           0 = negative.Ndot + positive.Ndot
-            "Material rate balance (without storage)";
+            "Material rate balance (no storage)";
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="materialBC");
         end Current;
@@ -8502,7 +8513,7 @@ boundary condition</a> model.
         equation
           negative.phi - positive.phi = u "Condition";
           0 = negative.mPhidot + positive.mPhidot
-            "Linear momentum rate balance (without storage)";
+            "Linear momentum rate balance (no storage)";
 
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="momBC");
@@ -8562,7 +8573,7 @@ boundary condition</a> model.
         equation
           negative.T - positive.T = u "Condition";
           0 = negative.T*negative.Sdot + positive.T*positive.Sdot
-            "Energy rate balance (without storage)";
+            "Energy rate balance (no storage)";
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="entropyBC");
         end Temperature;
@@ -8576,7 +8587,7 @@ boundary condition</a> model.
         equation
           (negative.Sdot - positive.Sdot)/2 = u "Condition";
           0 = negative.T*negative.Sdot + positive.T*positive.Sdot
-            "Energy rate balance (without storage)";
+            "Energy rate balance (no storage)";
 
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="entropyBC");
@@ -8591,7 +8602,7 @@ boundary condition</a> model.
         equation
           negative.T*negative.Sdot = u "Condition";
           0 = negative.T*negative.Sdot + positive.T*positive.Sdot
-            "Energy rate balance (without storage)";
+            "Energy rate balance (no storage)";
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -8762,7 +8773,7 @@ those generated by the model's <code>connect</code> statements.</p>
       final max=1,
       displayUnit="%") = 0.2
       "<html>Gas H<sub>2</sub>O fraction (<i>y</i><sub>H2O</sub>)</html>";
-    // TODO: Cast this in terms of relative humidity.
+    // TODO:  Cast this in terms of relative humidity.
 
     annotation (
       defaultComponentPrefixes="inner",
@@ -8933,7 +8944,7 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
         "velocities of fluid flow at device boundary";
       SI.EnergyFlowRate[nPorts] ports_E_flow
         "flow of kinetic and potential energy at device boundary";
-      // Note: should use fluidLevel_start - portsData.height
+      // Note:  should use fluidLevel_start - portsData.height
       Real[nPorts] s(each start=fluidLevel_max)
         "curve parameters for port flows vs. port pressures; for further details see, Modelica Tutorial: Ideal switching devices";
       Real[nPorts] ports_penetration
@@ -8961,7 +8972,7 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
       // Treatment of use_portsData=false to neglect portsData and to not require its specification either in this case.
       // Remove portsData conditionally if use_portsData=false. Simplify their use in model equations by always
       // providing portsData_diameter and portsData_height, independent of the use_portsData setting.
-      // Note: this moreover serves as work-around if a tool doesn't support a zero sized portsData record.
+      // Note:  this moreover serves as work-around if a tool doesn't support a zero sized portsData record.
       Modelica.Blocks.Interfaces.RealInput[nPorts] portsData_diameter_internal=
           portsData.diameter if use_portsData and nPorts > 0;
       Modelica.Blocks.Interfaces.RealInput[nPorts] portsData_height_internal=
@@ -9018,14 +9029,14 @@ of the modeler. Increase nPorts to add an additional port.
       for i in 1:nPorts loop
         if use_portsData then
           // dp = 0.5*zeta*d*v*|v|
-          // Note: assume vessel_ps_static for portDensities to avoid algebraic loops for ports.p
+          // Note:  assume vessel_ps_static for portDensities to avoid algebraic loops for ports.p
           portDensities[i] = noEvent(Medium.density(Medium.setState_phX(
                 vessel_ps_static[i],
                 actualStream(ports[i].h_outflow),
                 actualStream(ports[i].Xi_outflow))));
           portVelocities[i] = smooth(0, ports[i].m_flow/portAreas[i]/
             portDensities[i]);
-          // Note: the penetration should not go too close to zero as this would prevent a vessel from running empty
+          // Note:  the penetration should not go too close to zero as this would prevent a vessel from running empty
           ports_penetration[i] = Modelica.Fluid.Utilities.regStep(
                 fluidLevel - portsData_height[i] - 0.1*portsData_diameter[i],
                 1,
@@ -9040,7 +9051,7 @@ of the modeler. Increase nPorts to add an additional port.
         // fluid flow through ports
         if fluidLevel >= portsData_height[i] then
           // regular operation: fluidLevel is above ports[i]
-          // Note: >= covers default values of zero as well
+          // Note:  >= covers default values of zero as well
           if use_portsData then
             /* Without regularization
         ports[i].p = vessel_ps_static[i] + 0.5*ports[i].m_flow^2/portAreas[i]^2

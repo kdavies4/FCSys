@@ -9,7 +9,6 @@ package FCSys "Modelica library of fuel cell models"
 // the LaTeX document:
 //------------------------------------------------------------------------
 
-
 extends Modelica.Icons.Package;
 // extends FCSys.Icons.Cell.Small;
 
@@ -35,9 +34,9 @@ import FCSys.BaseClasses.Orientation;
 import FCSys.BaseClasses.Side;
 import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
 import FCSys.Connectors.BaseClasses.MaterialEntropyOpt;
-import FCSys.Subregions.BaseClasses.InitMethLinear;
-import FCSys.Subregions.BaseClasses.InitMethScalar;
-
+import FCSys.Subregions.Reactions.BaseClasses.InitMethCharge;
+import FCSys.Subregions.Species.BaseClasses.InitMethLinMom;
+import FCSys.Subregions.Species.BaseClasses.InitMethScalar;
 
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
@@ -126,9 +125,6 @@ package UsersGuide "User's Guide"
 
   class References "References"
     extends Modelica.Icons.References;
-    // TODO: Add external links to Modelica 2012 papers once available
-    // (check http://www.ep.liu.se/ecp/index.en.asp) and remove them from the
-    // local directory.
 
     annotation (
       preferedView="info",
@@ -136,15 +132,15 @@ package UsersGuide "User's Guide"
       Documentation(info="<html>
     <p>These papers describe work leading to the current <a href=\"modelica://FCSys\">FCSys</a> package:
     <ol>
-    <li>K. L. Davies, C. L. Haynes, and C. J. Paredis, \"<a href=\"modelica://FCSys/resources/documentation/UsersGuide/References/Library for First-Principle Models of PEMFCs in Modelica.pdf\">Library for First-Principle Models of Proton Exchange Membrane Fuel Cells in Modelica</a>,\" in <i>Modelica Conference</i>, (Munich, Germany), Modelica Assoc., Sep. 2012.</li>
-    <li>K. L. Davies, \"<a href=\"modelica://FCSys/resources/documentation/UsersGuide/References/Natural Unit Representation in Modelica.pdf\">Natural Unit Representation in Modelica</a>,\" in <i>Modelica Conference</i>, (Munich, Germany), Modelica Assoc., Sep. 2012 (<a href=\"modelica://FCSys/resources/documentation/UsersGuide/References/Natural Unit Representation in Modelica (poster).pdf\">poster</a>).</li>
+    <li>K. L. Davies, C. L. Haynes, and C. J. Paredis, \"<a href=\"http://www.ep.liu.se/ecp_article/index.en.aspx?issue=076;article=010\">Library for First-Principle Models of Proton Exchange Membrane Fuel Cells in Modelica</a>,\" in <i>Modelica Conference</i>, (Munich, Germany), Modelica Assoc., Sep. 2012.</li>
+    <li>K. L. Davies, \"<a href=\"http://www.ep.liu.se/ecp_article/index.en.aspx?issue=076;article=082\">Natural Unit Representation in Modelica</a>,\" in <i>Modelica Conference</i>, (Munich, Germany), Modelica Assoc., Sep. 2012 (<a href=\"modelica://FCSys/resources/documentation/UsersGuide/References/Natural Unit Representation in Modelica (poster).pdf\">poster</a>).</li>
     <li>K. L. Davies, C. L. Haynes, and C. J. Paredis, \"<a href=\"http://www.modelica.org/events/modelica2009/Proceedings/memorystick/pages/papers/0106/0106.pdf\">Modeling Reaction and Diffusion Processes of Fuel Cells within Modelica</a>,\" in <i>Modelica Conference</i>, (Como, Italy), Modelica Assoc., Sep. 2009.</li>
     <li>K. L. Davies, R. M. Moore, and G. Bender, \"<a href=\"http://www.modelica.org/events/modelica2009/Proceedings/memorystick/pages/papers/0107/0107.pdf\">Model Library of Polymer Electrolyte Membrane Fuel Cells for System Hardware and Control Design</a>,\" in <i>Modelica Conference</i>, (Como, Italy), Modelica Assoc., Sep. 2009.</li>
     <li>K. L. Davies and R. M. Moore,\" <a href=\"http://link.aip.org/link/abstract/ECSTF8/v11/i1/p797/s1\">Object-Oriented Fuel Cell Model Library</a>,\" <i>Electrochem. Soc. T.</i>, vol. 11, no. 1, pp. 797&ndash;808, 2007.</li>
     </ol>
     </p>
 
-    <p>These references are used throughout the library:</p>
+    <p>These references are cited throughout the library:</p>
     <table border=0 cellspacing=0 cellpadding=2 class=\"noBorder\">
     <tr>
       <td valign=top class=\"noBorder\">[Avogadro1.03]</td>
@@ -300,7 +296,7 @@ package UsersGuide "User's Guide"
       preferedView="info",
       DocumentationClass=true,
       Documentation(info="<html>
-    <p>Updates to this package may be available at the 
+    <p>Updates to this package may be available at the
     <a href=\"http://kdavies4.github.com/FCSys/\">main project site</a>.
     Development is being carried out at
     <a href=\"https://github.com/kdavies4/FCSys\">https://github.com/kdavies4/FCSys</a>.</p>
@@ -316,9 +312,9 @@ package UsersGuide "User's Guide"
 
     <p><b>Acknowledgments:</b><ul>
     <li>Technical guidance from Robert Moore, Chris Paredis, and Comas Haynes
-    <li>Technical support and feedback from Mohammad Ali, Mike Angelo, Kevin Bandy, 
+    <li>Technical support and feedback from Mohammad Ali, Mike Angelo, Kevin Bandy,
     Guido Bender, Severine Busquet, Chris Ford, George Nelson,
-    Francois Steinmetz, Mike Tiller, Hubertus Tummescheit, and Mebs Virji</li>
+    Francois Steinmetz, Mike Tiller, Hubertus Tummescheit, Mebs Virji, and Joerg Weiss-Ungeth&uuml;m</li>
     <li>Financial support from:
     <ul>
     <li>Presidential Fellowship from the <a href=\"http://www.me.gatech.edu\">George W. Woodruff
@@ -332,7 +328,7 @@ package UsersGuide "User's Guide"
     </ul></p>
 
 </html>"));
-    // TODO: Create the Modelica page and included it too.
+    // TODO:  Create the Modelica page and included it too.
     end Contact;
 
   class ModelicaLicense2 "Modelica License 2"
@@ -489,7 +485,7 @@ the duration of the copyright, to do the following:</p>
         Work</u>, alternatively to Section 2c), under <u>any other license</u>
         of your choice, especially also under a license for
         commercial/proprietary software, as long as You comply with Sections
-        3, 4 and 8 below. <br>      For the matter of clarity, no
+        3, 4 and 8 below.<br>      For the matter of clarity, no
         restrictions regarding fees, either as to a copyright-license fee or
         as to a selling fee for the copy as such apply.</p></li>
         <li><p>
@@ -563,17 +559,17 @@ as any descriptive text identified therein as an &quot;Attribution
 Notice&quot;. The same applies to the licensing notice of this
 License in the Original Work. For the matter of clarity, &ldquo;author
 notice&rdquo; means the notice that identifies the original
-author(s). <br>
+author(s).<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You must cause the Source Code for any Derivative
 Works that You create to carry a prominent Attribution Notice
 reasonably calculated to inform recipients that You have modified the
-Original Work. <br>
+Original Work.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In case the Original Work or Derivative Work is not provided in
 Source Code, the Attribution Notices shall be appropriately
 displayed, e.g., in the documentation of the Derivative Work.</p>
 
 <p><b>9. Disclaimer
-of Warranty. <br></b><u><b>The Original Work is provided under this
+of Warranty.<br></b><u><b>The Original Work is provided under this
 License on an &quot;as is&quot; basis and without warranty, either
 express or implied, including, without limitation, the warranties of
 non-infringement, merchantability or fitness for a particular
@@ -900,20 +896,6 @@ printing and shipping costs may be recovered.</p>
   annotation (preferedView="info", DocumentationClass=true);
   end UsersGuide;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 annotation (
   uses(Modelica(version="3.2"), Modelica_LinearSystems2(version="2.1")),
   preferedView="info",
@@ -921,10 +903,11 @@ annotation (
     <p><a href=\"modelica://FCSys\">FCSys</a> is a library of
     declarative, dynamic, and flexible models of proton exchange membrane
     fuel cells (PEMFCs) in the <a href = \"http://www.modelica.org/\">Modelica</a>
-    language.  The dynamics include material, momentum, thermal, and electrical
+    language.  The dynamics include chemical, fluid, thermal, and electrical
     effects.  There are options to adjust the assumptions, spatial discretization
     and dimensionality (1D, 2D, or 3D), and the present chemical species and material
-    phases.</p>
+    phases. In fact, the framework could be easily extended to model other electrochemical
+    devices like batteries.</p>
 
     <p>A fuel cell is an electrochemical device which is similar to a battery
     except that the reactants (fuel and oxidant) are externally stored or drawn
@@ -992,17 +975,18 @@ annotation (
 
     <a name=\"Fig1\"></a>
     <p align=center><img src=\"modelica://FCSys/resources/images/cell.png\">
-    <br>Figure 1: Layers and primary flows of a PEMFC</p>
+<br>Figure 1: Layers and primary flows of a PEMFC</p>
 
     <a name=\"Fig2\"></a>
     <!--<p align=center><img src=\"modelica://FCSys/help/FCSys.Assemblies.Cells.CellD.png\" width=600>-->
     <p align=center><a href=\"modelica://FCSys.Assemblies.Cells.Cell\"><img src=\"modelica://FCSys/resources/images/FCSys.Assemblies.Cells.CellD.png\"></a>
-    <br>Figure 2: Diagram of the PEMFC model (<a href=\"modelica://FCSys.Assemblies.Cells.Cell\">FCSys.Assemblies.Cells.Cell</a>).</p>
+<br>Figure 2: Diagram of the PEMFC model (<a href=\"modelica://FCSys.Assemblies.Cells.Cell\">FCSys.Assemblies.Cells.Cell</a>).</p>
 
     <p>The models describe the advection, diffusion, and storage of
     material, linear momentum, and energy.  Upstream
-    discretization is applied, but it is regularized and reduces to pure
-    diffusion when the bulk velocity is zero.  The transport equations do
+    discretization is applied in a manner that reduces to pure
+    diffusion (i.e., Ohm's law, Fick's law, Newton's law of viscosity, and Fourier's law) when the bulk velocity is zero.
+    The transport equations do
     not use the <a href = \"http://www.modelica.org/\">Modelica</a>
     <code>stream</code> operator since both diffusion and advection are
     important in fuel cells.</p>
@@ -1021,10 +1005,10 @@ annotation (
 
     <a name=\"Fig3\"></a>
     <p align=center><a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\"><img src=\"modelica://FCSys/help/FCSys.Assemblies.Cells.Examples.CellProfileD.png\"></a>
-    <br>Figure 3: Diagram of a test model (<a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\">FCSys.Assemblies.Cells.Examples.CellProfile</a>).</p>
+<br>Figure 3: Diagram of a test model (<a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\">FCSys.Assemblies.Cells.Examples.CellProfile</a>).</p>
 
     <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b>
-    <br>Copyright 2007&ndash;2012, Georgia Tech Research Corporation.</p>
+<br>Copyright 2007&ndash;2012, Georgia Tech Research Corporation.</p>
 
     <p><i>This Modelica package is <u>free</u> software and the use is completely
     at <u>your own risk</u>; it can be redistributed and/or modified under the

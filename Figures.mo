@@ -25,7 +25,7 @@ package Figures "Layouts for documentation"
       Deltav = p.v - n.v "Voltage across the resistor";
       i = (n.i - p.i)/2 "Current through the resistor";
       Deltav = i*r "Transport (Ohm's law)";
-      0 = n.i + p.i "Conservation of charge (without storage)";
+      0 = n.i + p.i "Conservation of charge (no storage)";
     end ResistorDeclarative;
 
     function ResistorImperative "Electrical resistor in imperative formalism"
@@ -1282,11 +1282,11 @@ package Figures "Layouts for documentation"
     extends FCSys.BaseClasses.Icons.Cell;
 
     annotation (Icon(graphics={Rectangle(
-              extent={{-100,100},{100,65}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0})}));
+            extent={{-100,100},{100,65}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0})}));
   end Logo;
 
   model AnFPIcon "Anode flow plate"
@@ -1468,7 +1468,7 @@ package Figures "Layouts for documentation"
 
   model ReactionIcon
 
-    FCSys.Subregions.Reaction Reaction
+    FCSys.Subregions.Reactions.Electrochemical Reaction
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
   end ReactionIcon;
 
@@ -1580,17 +1580,17 @@ package Figures "Layouts for documentation"
   connector VolumeOrPressure "Icon for additivity of volume or pressure"
 
     annotation (Diagram(graphics={Text(
-              extent={{-100,36},{100,76}},
-              textString="%name",
-              lineColor={0,0,0}),Ellipse(
-              extent={{-30,30},{30,-30}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid)}), Icon(graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid)}));
+            extent={{-100,36},{100,76}},
+            textString="%name",
+            lineColor={0,0,0}), Ellipse(
+            extent={{-30,30},{30,-30}},
+            lineColor={0,0,0},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid)}), Icon(graphics={Ellipse(
+            extent={{-100,100},{100,-100}},
+            lineColor={0,0,0},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid)}));
   end VolumeOrPressure;
 
   package ReactionComparison
@@ -1695,13 +1695,13 @@ package Figures "Layouts for documentation"
       der(N)/U.s = -nu*Xidot "stoichiometry";
 
       annotation (Icon(graphics={Rectangle(
-                  extent={{-100,100},{100,-100}},
-                  lineColor={0,0,0},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid),Text(
-                  extent={{-100,40},{100,80}},
-                  textString="%name",
-                  lineColor={0,0,0})}));
+              extent={{-100,100},{100,-100}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid), Text(
+              extent={{-100,40},{100,80}},
+              textString="%name",
+              lineColor={0,0,0})}));
     end TraditionalReaction;
 
     model Reaction
@@ -1724,13 +1724,13 @@ package Figures "Layouts for documentation"
       material.Ndot = nu*Xidot "stoichiometry";
 
       annotation (Diagram(graphics), Icon(graphics={Rectangle(
-                  extent={{-100,100},{100,-100}},
-                  lineColor={0,0,0},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid),Text(
-                  extent={{-100,40},{100,80}},
-                  textString="%name",
-                  lineColor={0,0,0})}));
+              extent={{-100,100},{100,-100}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid), Text(
+              extent={{-100,40},{100,80}},
+              textString="%name",
+              lineColor={0,0,0})}));
     end Reaction;
 
     model Species
@@ -1742,7 +1742,7 @@ package Figures "Layouts for documentation"
       // Note:  The dimensions are not consistent, but the form is correct.
       parameter Q.Volume V=1*U.cm^3 "Volume";
       parameter Q.Amount N_IC=4*U.C
-        "<html>Initial particle number (<i>N</i><sub>IC</sub></html>";
+        "<html>Initial amount (<i>N</i><sub>IC</sub></html>";
 
       Q.Amount N(
         nominal=1*U.C,
@@ -1765,13 +1765,13 @@ package Figures "Layouts for documentation"
       // Material conservation
       der(N)/U.s = material.Ndot;
       annotation (Icon(graphics={Rectangle(
-                  extent={{-100,100},{100,-100}},
-                  lineColor={0,0,0},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid),Text(
-                  extent={{-100,40},{100,80}},
-                  textString="%name",
-                  lineColor={0,0,0})}));
+              extent={{-100,100},{100,-100}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid), Text(
+              extent={{-100,40},{100,80}},
+              textString="%name",
+              lineColor={0,0,0})}));
     end Species;
 
     connector Material "Connector for density-driven reaction"

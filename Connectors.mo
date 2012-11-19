@@ -19,14 +19,14 @@ package Connectors "Declarative and imperative connectors"
             fillColor={255,128,0},
             lineThickness=0.5)}),
       Diagram(graphics={Text(
-            extent={{-100,36},{100,76}},
-            textString="%name",
-            lineColor={0,0,0}), Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={208,104,0},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,128,0},
-            lineThickness=0.5)}));
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0}),Ellipse(
+              extent={{-30,30},{30,-30}},
+              lineColor={208,104,0},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,128,0},
+              lineThickness=0.5)}));
   end ChemicalBus;
 
   expandable connector ChemicalBusInternal
@@ -61,6 +61,7 @@ package Connectors "Declarative and imperative connectors"
     "Connector to exchange material with advection of linear momentum and energy, with chemical formula as input"
 
     extends FCSys.Connectors.BaseClasses.Chemical;
+    input Q.MassSpecific m "Specific mass";
     input String formula(start="") "Chemical formula of the species";
     // Note:  The start value prevents a warning when checked in Dymola
     // 7.4.
@@ -87,6 +88,7 @@ package Connectors "Declarative and imperative connectors"
     "Connector to exchange material with advection of linear momentum and energy, with chemical formula as output"
 
     extends FCSys.Connectors.BaseClasses.Chemical;
+    output Q.MassSpecific m "Specific mass";
     output String formula "Chemical formula of the species";
 
     annotation (
@@ -787,17 +789,16 @@ Protected connector with one output signal of type <code>Real</code>.</p>
 
       // Material
       Q.Number muPerT(nominal=1*U.V)
-        "Electrochemical potential divided by temperature";
+        "Quotient of electrochemical potential and temperature";
       flow Q.Current Ndot(nominal=1*U.A) "Current";
 
       // For linear momentum
-      Q.VelocityMassSpecific mphi[n_lin](each nominal=1*U.g*U.cm/(U.mol*U.s))
-        "Specific mass times velocity";
+      Q.Velocity phi[n_lin](each nominal=1*U.cm/U.s) "Velocity";
       flow Q.Force mPhidot[n_lin](each nominal=1*U.N) "Force due to advection";
 
       // For energy
-      Q.Potential h(nominal=1*U.V) "Specific enthalpy";
-      flow Q.Power Hdot(nominal=10*U.W) "Rate of advection of enthalpy";
+      Q.Velocity2 Tsbar(nominal=1*U.V) "Temperature times massic entropy";
+      flow Q.Power Qdot(nominal=10*U.W) "Heat flow rate";
       annotation (
         Documentation(info="<html><p>For more information, see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
@@ -948,7 +949,7 @@ Protected connector with one output signal of type <code>Real</code>.</p>
 <br><b>Figure 1:</b> Hierarchy of the connectors.</p>
 
   <p>The contents of the fundamental connectors are summarized in Table 1.
-  The dimensions are noted in terms of mass (M), length (L), time (T), and particle number (N).
+  The dimensions are noted in terms of mass (M), length (L), time (T), and amount or particle number (N).
   Each effort variable is chosen such that the product of effort and the rate of the quantity is an energy
   rate<a href=\"#footnote-1\"><sup>1</sup></a>.  In most connectors, the flow variable is the
   rate of the quantity, but the additivity of volume and

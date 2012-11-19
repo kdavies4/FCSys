@@ -3,7 +3,7 @@ package Sensors "Models to measure conditions"
 
   extends Modelica.Icons.SensorsPackage;
 
-  // TODO: Recheck this package, fix errors and warnings.
+  // TODO:  Recheck this package, fix errors and warnings.
 
   package Chemical
     "<html>Sensors for the <a href=\"modelica://FCSys.Connectors.BaseClasses.Chemical\">Chemical</a> and <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> connectors</html>"
@@ -2756,7 +2756,7 @@ sensor</a> models.
           annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       equation
         y = material.mu;
-        0 = material.Ndot "Material rate balance (without storage)";
+        0 = material.Ndot "Material rate balance (no storage)";
         annotation (Icon(graphics={Text(
                       extent={{-100,-20},{100,-50}},
                       lineColor={127,127,127},
@@ -2771,7 +2771,7 @@ sensor</a> models.
 
       equation
         y = momentum.phi "Measurement";
-        0 = momentum.mPhidot "Linear momentum rate balance (without storage)";
+        0 = momentum.mPhidot "Linear momentum rate balance (no storage)";
         annotation (Icon(graphics={Text(
                       extent={{-100,-20},{100,-50}},
                       lineColor={127,127,127},
@@ -2785,7 +2785,7 @@ sensor</a> models.
           annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       equation
         y = entropy.T "Measurement";
-        0 = entropy.Sdot "Entropy rate balance (without storage)";
+        0 = entropy.Sdot "Entropy rate balance (no storage)";
         annotation (Diagram(graphics), Icon(graphics={Text(
                       extent={{-100,-20},{100,-50}},
                       lineColor={127,127,127},
@@ -5221,7 +5221,7 @@ sensor</a> model.
 
           equation
             0 = negative.Ndot + positive.Ndot
-              "Material rate balance (without storage)";
+              "Material rate balance (no storage)";
 
             annotation (Icon(graphics={Line(
                               points={{-70,0},{-100,0}},
@@ -5303,7 +5303,7 @@ sensor</a> model.
                   iconTransformation(extent={{90,-10},{110,10}})));
           equation
             0 = negative.mPhidot + positive.mPhidot
-              "Linear momentum rate balance (without storage)";
+              "Linear momentum rate balance (no storage)";
 
             annotation (Icon(graphics={Line(
                               points={{-70,0},{-100,0}},
@@ -5394,7 +5394,7 @@ sensor</a> model.
             // simplification becomes possible.
           equation
             0 = negative.T*negative.Sdot + positive.T*positive.Sdot
-              "Energy rate balance (without storage)";
+              "Energy rate balance (no storage)";
 
             annotation (Icon(graphics={Line(
                               points={{-70,0},{-100,0}},

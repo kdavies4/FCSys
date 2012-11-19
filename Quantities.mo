@@ -194,7 +194,7 @@ package Quantities "Quantities to represent physical properties"
 
   annotation (Documentation(info="<html><p>Here, the <code>unit</code> attribute of each <code>Real</code> variable actually denotes the
   dimension.  The dimensions are noted in terms
-  of angle (A), length (l), mass (m), particle number (N) and time (T).
+  of angle (A), length (l), mass (m), amount or particle number (N) and time (T).
   Capital \"L\" and \"M\" are not used to abbreviate length and mass because they are not recognized in Dymola 7.4.
   In <a href=\"modelica://FCSys.FCSys\">FCSys</a>, temperature and charge are considered
   to be derived dimensions (see the <a href=\"modelica://FCSys.Units\">Units</a> package).</p></html>"));

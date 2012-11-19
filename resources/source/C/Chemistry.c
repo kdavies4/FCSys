@@ -11,6 +11,11 @@
    FCSys/resources/documentation/ModelicaLicense2.html or in
    FCSys.UsersGuide.ModelicaLicense2.                                         */
 // Initial version: 2012-10-07
+
+// Prevent multiple inclusion.
+#ifndef _FCSYS_CHEMISTRY_INCLUDED_
+#define _FCSYS_CHEMISTRY_INCLUDED_
+
 #include <ctype.h>
 #include <string.h>
 #include "ModelicaUtilities.h"
@@ -19,7 +24,7 @@ static int charge(const char* formula)
 {
     /* Return the charge of a species based on its chemical formula.          */
 
-    int charge = 0;
+    int z = 0; // Charge number
     int i = 0; // Index
 
     while (formula[i] != '\0') {
@@ -31,7 +36,7 @@ static int charge(const char* formula)
         // Check that the symbol begins with a letter.
         if (!isalpha(formula[i])) {
             return 0; // Error
-            // Currently, an error is not distinguished from zero charge.
+            // Currently, an error cannot be distinguished from zero charge.
         }
 
         // Advance past the symbol.  It may continue with lowercase letters.
@@ -43,26 +48,26 @@ static int charge(const char* formula)
 
         // Read the charge.
         if (formula[i] != '\0' && (formula[i] == '+' || formula[i] == '-')) {
-            if isdigit(formula[i+1]){
-                charge += atoi(formula + i); // automatically continues until nondigit
+            if (isdigit(formula[i+1])) {
+                z += atoi(formula + i); // Automatically continues until nondigit
                 while (formula[++i] != '\0' && isdigit(formula[i]));
-            } else if (formula[i] == '+'){
-                charge++;
+            } else if (formula[i] == '+') {
+                z++;
                 i++;
             } else if (formula[i++] == '-')
-                charge--;
+                z--;
         }
     }
 
-    return charge;
+    return z;
 }
 
 static int countElements(const char* formula)
 {
-    /* Return the number of unique elements in a species based on its chemical
+    /* Return the number of elements in a species based on its chemical
        formula.                                                               */
 
-    int charge = 0;
+    int z = 0; // Charge number
     int i = 0; // Index
     int n = 0; // Number of unique elements
 
@@ -73,10 +78,10 @@ static int countElements(const char* formula)
             i++;
 
         // Interpret the symbol.
-        if (formula[i] == 'e'){
+        if (formula[i] == 'e') {
             n--; // Electrons are counted via their charge (below).
             i++;
-        } else if isalpha(formula[i]) {
+        } else if (isalpha(formula[i])) {
             // Advance past the symbol.  It may continue with lowercase letters.
             while (formula[++i] != '\0' && islower(formula[i]));
         } else {
@@ -90,34 +95,36 @@ static int countElements(const char* formula)
 
         // Read the charge.
         if (formula[i] != '\0' && (formula[i] == '+' || formula[i] == '-')) {
-            if isdigit(formula[i+1]){
-                charge += atoi(formula + i); // automatically continues until nondigit
+            if (isdigit(formula[i+1])) {
+                z += atoi(formula + i); // Automatically continues until nondigit
                 while (formula[++i] != '\0' && isdigit(formula[i]));
-            } else if (formula[i] == '+'){
-                charge++;
+            } else if (formula[i] == '+') {
+                z++;
                 i++;
             } else if (formula[i++] == '-')
-                charge--;
+                z--;
         }
         n++;
     }
 
     // Count electrons as a present element (or rather particle) if the charge
     // is nonzero.
-    if (charge != 0)
+    if (z != 0)
         n++;
 
     return n;
 }
 
 static void readElement(const char* formula, int startIndex, char** symbol,
-                        int* coeff, int* charge, int* nextIndex)
+                        int* coeff, int* z, int* nextIndex)
 {
     /* Read the symbol, coefficient, and charge of an element at an index in a
        chemical formula.
 
        Note: startIndex and nextIndex are 1-based indices (Modelica format), but
        all other indices are 0-based (C format).                              */
+
+	int i, symbol_length;
 
     // Ignore leading whitespace.
     int symbol_start = ModelicaStrings_skipWhiteSpace(formula, startIndex) - 1;
@@ -129,36 +136,38 @@ static void readElement(const char* formula, int startIndex, char** symbol,
     }
 
     // The symbol may continue with lowercase letters.
-    int i = symbol_start + 1; // Working index
+    i = symbol_start + 1; // Working index
     while (formula[i] != '\0' && islower(formula[i]))
         i++;
 
     // Copy the symbol (return by reference).
-    int symbol_length = i - symbol_start;
+    symbol_length = i - symbol_start;
     *symbol = ModelicaAllocateString(symbol_length);
     strncpy(*symbol, &formula[symbol_start], symbol_length);
 
     // Read the coefficient.
     if (formula[i] != '\0' && isdigit(formula[i])) {
-        *coeff = atoi(formula + i); // automatically continues until nondigit
+        *coeff = atoi(formula + i); // Automatically continues until nondigit
         while (formula[++i] != '\0' && isdigit(formula[i]));
     } else
         *coeff = 1;
 
     // Read the charge.
     if (formula[i] != '\0' && (formula[i] == '+' || formula[i] == '-')) {
-        if isdigit(formula[i+1]){
-            *charge = atoi(formula + i); // automatically continues until nondigit
+        if (isdigit(formula[i+1])) {
+            *z = atoi(formula + i); // Automatically continues until nondigit
             while (formula[++i] != '\0' && isdigit(formula[i]));
-        } else if (formula[i] == '+'){
-            *charge = 1;
+        } else if (formula[i] == '+') {
+            *z = 1;
             i++;
         } else if (formula[i++] == '-')
-            *charge = -1;
+            *z = -1;
     } else
-        *charge = 0;
+        *z = 0;
 
     // Return the index by reference.
-    *nextIndex = i + 1; // plus one for Modelica format
+    *nextIndex = i + 1; // Plus one for Modelica format
     return;
 }
+
+#endif /* _FCSYS_CHEMISTRY_INCLUDED_ */

@@ -376,10 +376,10 @@ package Units "Constants and units of physical measure"
 
       annotation (Documentation(info="<html><p>Gaussian systems of units impose:
   <ul>
-  <li><i>k</i><sub>A</sub> = 1 &rArr; <i>R</i><sub>K</sub>/<i>c</i> = 2&pi;/&alpha;</li>
-  <li><i>k</i><sub>e</sub> = 1 &rArr; <i>R</i><sub>K</sub>*<i>c</i> = 2&pi;/&alpha;</li>
+  <li><i>k</i><sub>A</sub> = 1 &rArr; <i>R</i><sub>K</sub>/<i>c</i> = 2&pi;/&beta;</li>
+  <li><i>k</i><sub>e</sub> = 1 &rArr; <i>R</i><sub>K</sub>*<i>c</i> = 2&pi;/&beta;</li>
   </ul>
-  Together, <i>c</i> = 1 and <i>R</i><sub>K</sub> = 2&pi;/&alpha;</p>  <p>For more information, see the documentation in the
+  Together, <i>c</i> = 1 and <i>R</i><sub>K</sub> = 2&pi;/&beta;</p>  <p>For more information, see the documentation in the
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"));
     end BasisGaussian;
 
@@ -389,10 +389,10 @@ package Units "Constants and units of physical measure"
 
       annotation (Documentation(info="<html><p>Lorentz-Heaviside systems of units impose:
   <ul>
-  <li>&mu;<sub>0</sub> = 1 &rArr; <i>R</i><sub>K</sub>/<i>c</i> = 1/(2&alpha;)</li>
-  <li>&epsilon;<sub>0</sub> = 1 &rArr; <i>R</i><sub>K</sub>*<i>c</i> = 1/(2&alpha;)</li>
+  <li>&mu;<sub>0</sub> = 1 &rArr; <i>R</i><sub>K</sub>/<i>c</i> = 1/(2&beta;)</li>
+  <li>&epsilon;<sub>0</sub> = 1 &rArr; <i>R</i><sub>K</sub>*<i>c</i> = 1/(2&beta;)</li>
   </ul>
-  Together, <i>c</i> = 1 and <i>R</i><sub>K</sub> = 1/(2&alpha;)</p>  <p>For more information, see the documentation in the
+  Together, <i>c</i> = 1 and <i>R</i><sub>K</sub> = 1/(2&beta;)</p>  <p>For more information, see the documentation in the
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"));
     end BasisLH;
 
@@ -656,7 +656,7 @@ package Units "Constants and units of physical measure"
   //     hbar = h ~= 1.0545e-34*J/Hz ~= 6.6260e-34*J*s/cyc,
   // where Hz = rad/s.  Currently, rad = 1 (see U.Bases.Base).
   final constant Q.Number alpha=pi*1e-7*c*s*G_0/(m*S)
-    "<html>fine-structure constant (&alpha;)</html>";
+    "<html>fine-structure constant (&beta;)</html>";
   // The fine-structure constant includes the product of the speed of light
   // in vacuum, expressed in meters per second and conductance quantum,
   // expressed in siemens.

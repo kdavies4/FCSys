@@ -25,8 +25,9 @@ rpls = [# Remove extra spacing.
         (r'import FCSys;\n', ''),
         # No empty line before "end x;".
         (r'\n(\n +end )([^; ]+);', r'\1\2;'),
-        # Two spaces after "Note:".
-        (r'\nNote: ([^ ])', r'\nNote:  \1'),
+        # Two spaces after "Note:" and "TODO:".
+        (r'Note: ([^ ])', r'Note:  \1'),
+        (r'TODO: ([^ ])', r'TODO:  \1'),
         # Use lowercase "e" for engineering notation.
         (r'([0-9]+)E(-?)([0-9]+)', r'\1e\2\3'),
         # Don't use a "+" for positive powers of 10 in engineering notation.
