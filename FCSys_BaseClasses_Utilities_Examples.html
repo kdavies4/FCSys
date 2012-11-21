@@ -2,9 +2,11 @@
 <head>
 <title>FCSys.BaseClasses.Utilities.Examples</title>
 <meta name="HTML-Generator" content="Dymola">
-<meta name="description" content="&quot;Examples and tests&quot;">
-<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/modelicaDoc.css">
+<meta name="description" content="Examples and tests">
+<meta name="keywords" content="Modelica, fuel cell, PEMFC, model">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
 </head>
 <body>
 <div class="sidebar">
@@ -13,27 +15,30 @@
   <p class="logo"><a href="index.html">
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
-<h3>Table of Contents</h3>
-  <ul>
-  <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-  <li><a href="FCSys_BCs.html">BCs</a></li>
-  <li><a href="FCSys_Sensors.html">Sensors</a></li>
-  <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
-  <li><a href="FCSys_Regions.html">Regions</a></li>
-  <li><a href="FCSys_Subregions.html">Subregions</a></li>
-  <li><a href="FCSys_Connectors.html">Connectors</a></li>
-  <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
-  <li><a href="FCSys_Units.html">Units</a></li>
-  <li><a href="FCSys_Quantities.html">Quantities</a></li>
-  <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
-  </ul><h3>Download</h3>
-  <ul>
-    <li>Latest: <a href="release/FCSys-2.0.zip"
-           rel="nofollow">FCSys-2.0.zip</a> (**Check back soon)</li>
-  </ul>
 
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_BCs.html">BCs</a>**</li>
+    <li><a href="FCSys_Sensors.html">Sensors</a>**</li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
+    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
+    <li><a href="FCSys_Connectors.html">Connectors</a>**</li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a>**</li>
+    <li><a href="FCSys_Units.html">Units</a>**</li>
+    <li><a href="FCSys_Quantities.html">Quantities</a>**</li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li>**Check back soon or contact kdavies4 at gmail.com.</li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+    </ul>
   </div>
 </div>
+
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
@@ -47,7 +52,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td><img src="images/FCSys.BaseClasses.Utilities.SigmaS.png" alt="FCSys.BaseClasses.Utilities.Examples.TestFunctions" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Examples.html#FCSys.BaseClasses.Utilities.Examples.TestFunctions">TestFunctions</a>
+<tr><td><img src="images/FCSys.BaseClasses.Utilities.averageS.png" alt="FCSys.BaseClasses.Utilities.Examples.TestFunctions" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Examples.html#FCSys.BaseClasses.Utilities.Examples.TestFunctions">TestFunctions</a>
 </td><td>Test all the functions</td></tr>
 <tr><td><img src="images/FCSys.BaseClasses.Utilities.Examples.TranslatePolyS.png" alt="FCSys.BaseClasses.Utilities.Examples.TranslatePoly" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Examples.html#FCSys.BaseClasses.Utilities.Examples.TranslatePoly">TranslatePoly</a>
 </td><td>Evaluate the translated version of <a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.poly">poly()</a></td></tr>
@@ -108,12 +113,12 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   (strings[1],integers[1],integers[2],integers[3]) := <font color="red">Chemistry.readElement</font>(&quot;H2&quot;);
   <font color="red">assert</font>(strings[1] == &quot;H&quot;, &quot;The Chemistry.readElement function failed on the element output.&quot;);
   <font color="red">assert</font>(integers[1] == 2, &quot;The Chemistry.readElement function failed on the coeff output.&quot;);
-  <font color="red">assert</font>(integers[2] == 0, &quot;The Chemistry.readElement function failed on the charge output.&quot;);
+  <font color="red">assert</font>(integers[2] == 0, &quot;The Chemistry.readElement function failed on the z output.&quot;);
   <font color="red">assert</font>(integers[3] == 3, &quot;The Chemistry.readElement function failed on the nextindex output.&quot;);
   (strings[1],integers[1],integers[2],integers[3]) := <font color="red">Chemistry.readElement</font>(&quot;Hg2+2&quot;);
   <font color="red">assert</font>(strings[1] == &quot;Hg&quot;, &quot;The Chemistry.readElement function failed on the element output.&quot;);
   <font color="red">assert</font>(integers[1] == 2, &quot;The Chemistry.readElement function failed on the coeff output.&quot;);
-  <font color="red">assert</font>(integers[2] == 2, &quot;The Chemistry.readElement function failed on the charge output.&quot;);
+  <font color="red">assert</font>(integers[2] == 2, &quot;The Chemistry.readElement function failed on the z output.&quot;);
   <font color="red">assert</font>(integers[3] == 6, &quot;The Chemistry.readElement function failed on the nextindex output.&quot;);
 
   <font color="darkgreen">// Chemistry.stoich()</font>
@@ -229,8 +234,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   </div>
 </div>
 <div class="footer">
-        &copy; Copyright 2012, Kevin Davies.
-      Last updated Sun Nov 11 09:17:52 2012.
+  &copy; Copyright 2012, Kevin Davies. Last updated Wed Nov 28 11:42:42 2012.
 </div>
 </body>
 </html>

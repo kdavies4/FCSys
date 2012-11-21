@@ -2,9 +2,11 @@
 <head>
 <title>FCSys.UsersGuide</title>
 <meta name="HTML-Generator" content="Dymola">
-<meta name="description" content="&quot;User&#39;s Guide&quot;">
-<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/modelicaDoc.css">
+<meta name="description" content="User&#39;s Guide">
+<meta name="keywords" content="Modelica, fuel cell, PEMFC, model">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
 </head>
 <body>
 <div class="sidebar">
@@ -13,27 +15,30 @@
   <p class="logo"><a href="index.html">
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
-<h3>Table of Contents</h3>
-  <ul>
-  <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-  <li><a href="FCSys_BCs.html">BCs</a></li>
-  <li><a href="FCSys_Sensors.html">Sensors</a></li>
-  <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
-  <li><a href="FCSys_Regions.html">Regions</a></li>
-  <li><a href="FCSys_Subregions.html">Subregions</a></li>
-  <li><a href="FCSys_Connectors.html">Connectors</a></li>
-  <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
-  <li><a href="FCSys_Units.html">Units</a></li>
-  <li><a href="FCSys_Quantities.html">Quantities</a></li>
-  <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
-  </ul><h3>Download</h3>
-  <ul>
-    <li>Latest: <a href="release/FCSys-2.0.zip"
-           rel="nofollow">FCSys-2.0.zip</a> (**Check back soon)</li>
-  </ul>
 
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_BCs.html">BCs</a>**</li>
+    <li><a href="FCSys_Sensors.html">Sensors</a>**</li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
+    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
+    <li><a href="FCSys_Connectors.html">Connectors</a>**</li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a>**</li>
+    <li><a href="FCSys_Units.html">Units</a>**</li>
+    <li><a href="FCSys_Quantities.html">Quantities</a>**</li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li>**Check back soon or contact kdavies4 at gmail.com.</li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+    </ul>
   </div>
 </div>
+
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
@@ -102,7 +107,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
         <ul>
             <li><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a> package:
             Information about the system of units, which is different
-            than <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_SIunits.html#Modelica.SIunits">Modelica.Siunits</a></li>
+            than <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_SIunits.html#Modelica.SIunits">Modelica.SIunits</a></li>
             <li><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a> package:
             Overview of the connectors and an explanation of the effort and flow variables in terms of thermodynamics</li>
             <li><a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">FCSys.Connectors.InertAmagat</a> connector:
@@ -130,7 +135,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
         extending the existing classes and
         following the existing framework.  It will be necessary to add species (Li<sup>+</sup>, O<sup>2-</sup>, etc.) and reactions with the
         proper stoichiometries.</li>
-        <li>Please consider offering code and/or suggestions so that the library can be improved and others may benefit from your work.
+        <li>Please offer code and/or suggestions so that the library can be improved.
         Use the <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.Contact">contact information</a>.</li>
     </ol></p>
     <p>
@@ -143,23 +148,19 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 
     <p>These papers describe work leading to the current <a href="FCSys.html#FCSys">FCSys</a> package:
     <ol>
-    <li>K. L. Davies, C. L. Haynes, and C. J. Paredis, "<a href="../resources/documentation/UsersGuide/References/Library for First-Principle Models of PEMFCs in Modelica.pdf">Library for first-principle models of proton exchange membrane fuel cells in Modelica</a>," in <i>Modelica Conference</i>, (Munich, Germany), Modelica Assoc., Sep. 2012.</li>
-    <li>K. L. Davies, "<a href="../resources/documentation/UsersGuide/References/Natural Unit Representation in Modelica.pdf">Natural unit representation in Modelica</a>," in <i>Modelica Conference</i>, (Munich, Germany), Modelica Assoc., Sep. 2012 (<a href="images/Natural Unit Representation in Modelica (poster).pdf">poster</a>).</li>
-    <li>K. L. Davies, C. L. Haynes, and C. J. Paredis, "<a href="http://www.modelica.org/events/modelica2009/Proceedings/memorystick/pages/papers/0106/0106.pdf">Modeling reaction and diffusion processes of fuel cells within Modelica</a>," in <i>Modelica Conference</i>, (Como, Italy), Modelica Assoc., Sep. 2009.</li>
-    <li>K. L. Davies, R. M. Moore, and G. Bender, "<a href="http://www.modelica.org/events/modelica2009/Proceedings/memorystick/pages/papers/0107/0107.pdf">Model library of polymer electrolyte membrane fuel cells for system hardware and control design</a>," in <i>Modelica Conference</i>, (Como, Italy), Modelica Assoc., Sep. 2009.</li>
-    <li>K. L. Davies and R. M. Moore," <a href="http://link.aip.org/link/abstract/ECSTF8/v11/i1/p797/s1">Object-oriented fuel cell model library</a>," <i>Electrochem. Soc. T.</i>, vol. 11, no. 1, pp. 797&ndash;808, 2007.</li>
+    <li>K. L. Davies, C. L. Haynes, and C. J. Paredis, "<a href="http://www.ep.liu.se/ecp_article/index.en.aspx?issue=076;article=010">Library for First-Principle Models of Proton Exchange Membrane Fuel Cells in Modelica</a>," in <i>Modelica Conference</i>, (Munich, Germany), Modelica Assoc., Sep. 2012.</li>
+    <li>K. L. Davies, "<a href="http://www.ep.liu.se/ecp_article/index.en.aspx?issue=076;article=082">Natural Unit Representation in Modelica</a>," in <i>Modelica Conference</i>, (Munich, Germany), Modelica Assoc., Sep. 2012 (<a href="images/Natural Unit Representation in Modelica (poster).pdf">poster</a>).</li>
+    <li>K. L. Davies, C. L. Haynes, and C. J. Paredis, "<a href="http://www.modelica.org/events/modelica2009/Proceedings/memorystick/pages/papers/0106/0106.pdf">Modeling Reaction and Diffusion Processes of Fuel Cells within Modelica</a>," in <i>Modelica Conference</i>, (Como, Italy), Modelica Assoc., Sep. 2009.</li>
+    <li>K. L. Davies, R. M. Moore, and G. Bender, "<a href="http://www.modelica.org/events/modelica2009/Proceedings/memorystick/pages/papers/0107/0107.pdf">Model Library of Polymer Electrolyte Membrane Fuel Cells for System Hardware and Control Design</a>," in <i>Modelica Conference</i>, (Como, Italy), Modelica Assoc., Sep. 2009.</li>
+    <li>K. L. Davies and R. M. Moore," <a href="http://link.aip.org/link/abstract/ECSTF8/v11/i1/p797/s1">Object-Oriented Fuel Cell Model Library</a>," <i>Electrochem. Soc. T.</i>, vol. 11, no. 1, pp. 797&ndash;808, 2007.</li>
     </ol>
     </p>
 
-    <p>These references are used throughout the library:</p>
+    <p>These references are cited throughout the library:</p>
     <table border=0 cellspacing=0 cellpadding=2 class="noBorder">
     <tr>
-      <td valign=top class="noBorder">[Ashcroft1976]</td>
-      <td valign=top class="noBorder">N. W. Ashcroft and N. D. Mermin, <i>Solid State Physics</i>, New York: Holt, Rinehard and Winston, 1976.</td>
-    </tr>
-    <tr>
       <td valign=top class="noBorder">[Avogadro1.03]</td>
-      <td valign=top class="noBorder">Avogadro: an open-source molecular builder and visualization tool, ver. 1.03. <a href="http://avogadro.openmolecules.net">http://avogadro.openmolecules.net</a>.</td>
+      <td valign=top class="noBorder">Avogadro: An Open-Source Molecular Builder and Visualization Tool, ver. 1.03. <a href="http://avogadro.openmolecules.net">http://avogadro.openmolecules.net</a>.</td>
     </tr>
     <tr>
       <td valign=top class="noBorder">[Bejan2006]</td>
@@ -178,12 +179,12 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
       <td valign=top class="noBorder">DuPont, "Nafion&reg; PFSA Membranes N-112, NE-1135, N-115, N-117, NE-1110</a>," <a href = http://www.fuelcells.dupont.com>http://www.fuelcells.dupont.com</a>, Feb. 2004.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[DuPont2005]</td>
-      <td valign=top class="noBorder">DuPont, "Nafion&reg; PFSA Membranes NE-1135, N-115, N-117, NE-1110</a>," <a href = http://www.fuelcells.dupont.com>http://www.fuelcells.dupont.com</a>, Feb. 2005.</td>
-    </tr>
-    <tr>
       <td valign=top class="noBorder">[DuPont2004NRE]</td>
       <td valign=top class="noBorder">DuPont, "Nafion&reg; PFSA Membranes NRE-211 and NRE-212</a>," <a href = http://www.fuelcells.dupont.com>http://www.fuelcells.dupont.com</a>, Feb. 2004.</td>
+    </tr>
+    <tr>
+      <td valign=top class="noBorder">[DuPont2005]</td>
+      <td valign=top class="noBorder">DuPont, "Nafion&reg; PFSA Membranes NE-1135, N-115, N-117, NE-1110</a>," <a href = http://www.fuelcells.dupont.com>http://www.fuelcells.dupont.com</a>, Feb. 2005.</td>
     </tr>
     <tr>
       <td valign=top class="noBorder">[Dymond2002]</td>
@@ -214,16 +215,16 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
       <td valign=top class="noBorder">International Bureau of Weights and Measures (BIPM), "<a href="http://www.bipm.org/utils/common/pdf/si_brochure_8_en.pdf">The International System of Units (SI)</a>," 8th ed., 2006.</td>
     </tr>
     <tr>
+      <td valign=top class="noBorder">[Kandlikar2009]</td>
+      <td valign=top class="noBorder">S. G. Kandlikar and Z. Lu, "<a href="http://dx.doi.org/10.1016/j.applthermaleng.2008.05.009">Thermal Management Issues in a PEMFC Stack&mdash;A Brief Review of Current Status</a>," <i>Appl. Therm. Eng.</i>, vol. 29, no. 7, pp. 1276&ndash;1280, 2009.</td>
+    </tr>
+    <tr>
       <td valign=top class="noBorder">[Lin2006]</td>
       <td valign=top class="noBorder">J. Lin, J. K. Lee, M. Kellner, R. Wycisk, and P. N. Pintauroa, "<a href="http://dx.doi.org/10.1149/1.2196687">Nafion-Flourinated Ethylene-Propylene Resin Membrane Blends for Direct Methanol Fuel Cells</a>," <i>J. Electrochem. Soc.</i>, vol. 153, no. 7, pp. A1325&ndash;A1331, 2006.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[Kandlikar2009]</td>
-      <td valign=top class="noBorder">S. G. Kandlikar and Z. Lu, "<a href="http://dx.doi.org/10.1016/j.applthermaleng.2008.05.009">Thermal management issues in a PEMFC stack&mdash;A brief review of current status</a>," <i>Appl. Therm. Eng.</i>, vol. 29, no. 7, pp. 1276&ndash;1280, 2009.</td>
-    </tr>
-    <tr>
       <td valign=top class="noBorder">[Mark1999]</td>
-      <td valign=top class="noBorder">J. E. Mark, <i>polymer Data Handbook</i>, Oxford University Press, 1999.</td>
+      <td valign=top class="noBorder">J. E. Mark, <i>Polymer Data Handbook</i>, Oxford University Press, 1999.</td>
     </tr>
     <tr>
       <td valign=top class="noBorder">[Mason1965]</td>
@@ -251,7 +252,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
     </tr>
     <tr>
       <td valign=top class="noBorder">[Reichert2010]</td>
-      <td valign=top class="noBorder">P. Reichert and N. Schuwirth, "<a href="http://dx.doi.org/10.1016/j.envsoft.2010.03.002">A generic framework for deriving process stoichiometry in environmental models</a>," <i>Environmental Modelling & Software</i>, vol. 25, pp. 1241&ndash;1251, 2010.</td>
+      <td valign=top class="noBorder">P. Reichert and N. Schuwirth, "<a href="http://dx.doi.org/10.1016/j.envsoft.2010.03.002">A Generic Framework for Deriving Process Stoichiometry in Environmental Models</a>," <i>Environmental Modelling & Software</i>, vol. 25, pp. 1241&ndash;1251, 2010.</td>
     </tr>
     <tr>
       <td valign=top class="noBorder">[Salzman2004]</td>
@@ -262,16 +263,16 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
       <td valign=top class="noBorder">J. A. Schetz and A. E. Fuhs (ed.), <i>Handbook of Fluid Dynamics and Fluid Machinery</i>, John Wiley & Sons, vol. 1: Fundamentals of Fluid Dynamics, 1996.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[SGL2007]</td>
-      <td valign=top class="noBorder">SGL Carbon Group, "Sigracet&reg; 10 Series Gas Diffusion Layer," <a href="http://www.sglcarbon.com">http://www.sglcarbon.com</a>, Apr. 2007.</td>
-    </tr>
-    <tr>
       <td valign=top class="noBorder">[SGL2004]</td>
       <td valign=top class="noBorder">SGL Carbon Group, "Sigracet&reg; 24 & 25 Series Gas Diffusion Layer," <a href="http://www.sglcarbon.com">http://www.sglcarbon.com</a>, Sep. 2004.</td>
     </tr>
     <tr>
+      <td valign=top class="noBorder">[SGL2007]</td>
+      <td valign=top class="noBorder">SGL Carbon Group, "Sigracet&reg; 10 Series Gas Diffusion Layer," <a href="http://www.sglcarbon.com">http://www.sglcarbon.com</a>, Apr. 2007.</td>
+    </tr>
+    <tr>
       <td valign=top class="noBorder">[Springer1991]</td>
-      <td valign=top class="noBorder">T. E. Springer, T. A. Zawodzinski, and S. Gottesfeld, "<a href="http://dx.doi.org/10.1149/1.2085971">polymer Electrolyte Fuel Cell Model</a>," <i>J. Electrochem. Soc.</i>, vol. 138, pp. 2334&ndash;2342, Aug. 1991.</td>
+      <td valign=top class="noBorder">T. E. Springer, T. A. Zawodzinski, and S. Gottesfeld, "<a href="http://dx.doi.org/10.1149/1.2085971">Polymer Electrolyte Fuel Cell Model</a>," <i>J. Electrochem. Soc.</i>, vol. 138, pp. 2334&ndash;2342, Aug. 1991.</td>
     </tr>
     <tr>
       <td valign=top class="noBorder">[Spry2009]</td>
@@ -295,7 +296,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
     </tr>
     <tr>
       <td valign=top class="noBorder">[Weber2004]</td>
-      <td valign=top class="noBorder">A. Z. Weber and J. Newman, "<a href="http://dx.doi.org/10.1021/cr020729l">Modeling Transport in polymer-Electrolyte Fuel Cells</a>," <i>Chem. Rev.</i>, vol. 104, pp. 4679&ndash;4726, 2004.</td>
+      <td valign=top class="noBorder">A. Z. Weber and J. Newman, "<a href="http://dx.doi.org/10.1021/cr020729l">Modeling Transport in Polymer-Electrolyte Fuel Cells</a>," <i>Chem. Rev.</i>, vol. 104, pp. 4679&ndash;4726, 2004.</td>
     </tr>
     <tr>
       <td valign=top class="noBorder">[Woo1995]</td>
@@ -310,9 +311,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 <a name="FCSys.UsersGuide.Contact"></a><a href="FCSys_UsersGuide.html#FCSys.UsersGuide">FCSys.UsersGuide</a>.Contact</h2>
 <img src="images/FCSys.UsersGuideD.png" alt="FCSys.UsersGuide.Contact">
 
-    <p>Updates to this package may be available at the 
-    <a href="http://kdavies4.github.com/FCSys/">main project site</a>.
-    Development is being carried out at
+    <p>The development site is
     <a href="https://github.com/kdavies4/FCSys">https://github.com/kdavies4/FCSys</a>.</p>
 
     <p><b>Author:</b></p>
@@ -326,9 +325,9 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 
     <p><b>Acknowledgments:</b><ul>
     <li>Technical guidance from Robert Moore, Chris Paredis, and Comas Haynes
-    <li>Technical support and feedback from Mohammad Ali, Mike Angelo, Kevin Bandy, 
+    <li>Technical support and feedback from Mohammad Ali, Mike Angelo, Kevin Bandy,
     Guido Bender, Severine Busquet, Chris Ford, George Nelson,
-    Francois Steinmetz, Mike Tiller, Hubertus Tummescheit, and Mebs Virji</li>
+    Francois Steinmetz, Mike Tiller, Hubertus Tummescheit, Mebs Virji, and Joerg Weiss-Ungeth&uuml;m</li>
     <li>Financial support from:
     <ul>
     <li>Presidential Fellowship from the <a href="http://www.me.gatech.edu">George W. Woodruff
@@ -573,17 +572,17 @@ as any descriptive text identified therein as an &quot;Attribution
 Notice&quot;. The same applies to the licensing notice of this
 License in the Original Work. For the matter of clarity, &ldquo;author
 notice&rdquo; means the notice that identifies the original
-author(s). <br>
+author(s).<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You must cause the Source Code for any Derivative
 Works that You create to carry a prominent Attribution Notice
 reasonably calculated to inform recipients that You have modified the
-Original Work. <br>
+Original Work.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In case the Original Work or Derivative Work is not provided in
 Source Code, the Attribution Notices shall be appropriately
 displayed, e.g., in the documentation of the Derivative Work.</p>
 
 <p><b>9. Disclaimer
-of Warranty. <br></b><u><b>The Original Work is provided under this
+of Warranty.<br></b><u><b>The Original Work is provided under this
 License on an &quot;as is&quot; basis and without warranty, either
 express or implied, including, without limitation, the warranties of
 non-infringement, merchantability or fitness for a particular
@@ -912,8 +911,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   </div>
 </div>
 <div class="footer">
-        &copy; Copyright 2012, Kevin Davies.
-      Last updated Sun Nov 11 09:09:50 2012.
+  &copy; Copyright 2012, Kevin Davies. Last updated Wed Nov 28 11:34:38 2012.
 </div>
 </body>
 </html>

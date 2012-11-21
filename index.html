@@ -1,10 +1,12 @@
 <html>
 <head>
-<title>FCSys</title>
+<title>FCSys &mdash; Modelica library of fuel cell models</title>
 <meta name="HTML-Generator" content="Dymola">
-<meta name="description" content="&quot;Modelica library of fuel cell models&quot;">
-<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/modelicaDoc.css">
+<meta name="description" content="Modelica library of fuel cell models">
+<meta name="keywords" content="Modelica, fuel cell, PEMFC, model">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
 </head>
 <body>
 <div class="sidebar">
@@ -13,27 +15,30 @@
   <p class="logo"><a href="index.html">
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
-<h3>Table of Contents</h3>
-  <ul>
-  <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-  <li><a href="FCSys_BCs.html">BCs</a></li>
-  <li><a href="FCSys_Sensors.html">Sensors</a></li>
-  <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
-  <li><a href="FCSys_Regions.html">Regions</a></li>
-  <li><a href="FCSys_Subregions.html">Subregions</a></li>
-  <li><a href="FCSys_Connectors.html">Connectors</a></li>
-  <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
-  <li><a href="FCSys_Units.html">Units</a></li>
-  <li><a href="FCSys_Quantities.html">Quantities</a></li>
-  <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
-  </ul><h3>Download</h3>
-  <ul>
-    <li>Latest: <a href="release/FCSys-2.0.zip"
-           rel="nofollow">FCSys-2.0.zip</a> (**Check back soon)</li>
-  </ul>
 
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_BCs.html">BCs</a>**</li>
+    <li><a href="FCSys_Sensors.html">Sensors</a>**</li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
+    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
+    <li><a href="FCSys_Connectors.html">Connectors</a>**</li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a>**</li>
+    <li><a href="FCSys_Units.html">Units</a>**</li>
+    <li><a href="FCSys_Quantities.html">Quantities</a>**</li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li>**Check back soon or contact kdavies4 at gmail.com.</li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+    </ul>
   </div>
 </div>
+
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
@@ -47,10 +52,11 @@
     <p><a href="FCSys.html#FCSys">FCSys</a> is a library of
     declarative, dynamic, and flexible models of proton exchange membrane
     fuel cells (PEMFCs) in the <a href = "http://www.modelica.org/">Modelica</a>
-    language.  The dynamics include material, momentum, thermal, and electrical
+    language.  The dynamics include chemical, fluid, thermal, and electrical
     effects.  There are options to adjust the assumptions, spatial discretization
     and dimensionality (1D, 2D, or 3D), and the present chemical species and material
-    phases.</p>
+    phases. In fact, the framework could be easily extended to model other electrochemical
+    devices like batteries.</p>
 
     <p>A fuel cell is an electrochemical device which is similar to a battery
     except that the reactants (fuel and oxidant) are externally stored or drawn
@@ -118,17 +124,18 @@
 
     <a name="Fig1"></a>
     <p align=center><img src="images/cell.svg" width=450>
-    <br>Figure 1: Layers and primary flows of a PEMFC</p>
+<br>Figure 1: Layers and primary flows of a PEMFC</p>
 
     <a name="Fig2"></a>
-    <!--<p align=center><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600 width=600 width=600>-->
-    <p align=center><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell"><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600 width=600></a>
-    <br>Figure 2: Diagram of the PEMFC model (<a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">FCSys.Assemblies.Cells.Cell</a>).</p>
+    <!--<p align=center><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600 width=600 width=600 width=600 width=600 width=600 width=600 width=600 width=600 width=600 width=600>-->
+    <p align=center><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell"><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600 width=600 width=600 width=600 width=600 width=600 width=600 width=600 width=600 width=600></a>
+<br>Figure 2: Diagram of the PEMFC model (<a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">FCSys.Assemblies.Cells.Cell</a>).</p>
 
     <p>The models describe the advection, diffusion, and storage of
     material, linear momentum, and energy.  Upstream
-    discretization is applied, but it is regularized and reduces to pure
-    diffusion when the bulk velocity is zero.  The transport equations do
+    discretization is applied in a manner that reduces to pure
+    diffusion (i.e., Ohm's law, Fick's law, Newton's law of viscosity, and Fourier's law) when the bulk velocity is zero.
+    The transport equations do
     not use the <a href = "http://www.modelica.org/">Modelica</a>
     <code>stream</code> operator since both diffusion and advection are
     important in fuel cells.</p>
@@ -147,10 +154,10 @@
 
     <a name="Fig3"></a>
     <p align=center><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile"><img src="images/FCSys.Assemblies.Cells.Examples.CellProfileD.png"></a>
-    <br>Figure 3: Diagram of a test model (<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile">FCSys.Assemblies.Cells.Examples.CellProfile</a>).</p>
+<br>Figure 3: Diagram of a test model (<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile">FCSys.Assemblies.Cells.Examples.CellProfile</a>).</p>
 
     <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b>
-    <br>Copyright 2007&ndash;2012, Georgia Tech Research Corporation.</p>
+<br>Copyright 2007&ndash;2012, Georgia Tech Research Corporation.</p>
 
     <p><i>This Modelica package is <u>free</u> software and the use is completely
     at <u>your own risk</u>; it can be redistributed and/or modified under the
@@ -192,8 +199,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   </div>
 </div>
 <div class="footer">
-        &copy; Copyright 2012, Kevin Davies.
-      Last updated Sun Nov 11 09:09:49 2012.
+  &copy; Copyright 2012, Kevin Davies. Last updated Wed Nov 28 11:34:37 2012.
 </div>
 </body>
 </html>

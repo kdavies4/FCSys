@@ -2,9 +2,11 @@
 <head>
 <title>FCSys.BaseClasses.Utilities.Chemistry</title>
 <meta name="HTML-Generator" content="Dymola">
-<meta name="description" content="&quot;Functions to support chemistry&quot;">
-<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/modelicaDoc.css">
+<meta name="description" content="Functions to support chemistry">
+<meta name="keywords" content="Modelica, fuel cell, PEMFC, model">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
 </head>
 <body>
 <div class="sidebar">
@@ -13,27 +15,30 @@
   <p class="logo"><a href="index.html">
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
-<h3>Table of Contents</h3>
-  <ul>
-  <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-  <li><a href="FCSys_BCs.html">BCs</a></li>
-  <li><a href="FCSys_Sensors.html">Sensors</a></li>
-  <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
-  <li><a href="FCSys_Regions.html">Regions</a></li>
-  <li><a href="FCSys_Subregions.html">Subregions</a></li>
-  <li><a href="FCSys_Connectors.html">Connectors</a></li>
-  <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
-  <li><a href="FCSys_Units.html">Units</a></li>
-  <li><a href="FCSys_Quantities.html">Quantities</a></li>
-  <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
-  </ul><h3>Download</h3>
-  <ul>
-    <li>Latest: <a href="release/FCSys-2.0.zip"
-           rel="nofollow">FCSys-2.0.zip</a> (**Check back soon)</li>
-  </ul>
 
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_BCs.html">BCs</a>**</li>
+    <li><a href="FCSys_Sensors.html">Sensors</a>**</li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
+    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
+    <li><a href="FCSys_Connectors.html">Connectors</a>**</li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a>**</li>
+    <li><a href="FCSys_Units.html">Units</a>**</li>
+    <li><a href="FCSys_Quantities.html">Quantities</a>**</li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li>**Check back soon or contact kdavies4 at gmail.com.</li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+    </ul>
   </div>
 </div>
+
 <div class="document">
   <div class="documentwrapper">
     <div class="bodywrapper">
@@ -50,7 +55,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 <tr><td><img src="images/FCSys.BaseClasses.Utilities.Chemistry.chargeS.png" alt="FCSys.BaseClasses.Utilities.Chemistry.charge" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry.charge">charge</a>
 </td><td>Return the charge of a species based on its chemical formula</td></tr>
 <tr><td><img src="images/FCSys.BaseClasses.Utilities.Chemistry.countElementsS.png" alt="FCSys.BaseClasses.Utilities.Chemistry.countElements" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry.countElements">countElements</a>
-</td><td>Return the number of unique elements in a chemical formula</td></tr>
+</td><td>Return the number of elements in a chemical formula</td></tr>
 <tr><td><img src="images/FCSys.BaseClasses.Utilities.Chemistry.countElementsS.png" alt="FCSys.BaseClasses.Utilities.Chemistry.elements" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry.elements">elements</a>
 </td><td>Return the symbols and coefficients of the elements in a chemical formula</td></tr>
 <tr><td><img src="images/FCSys.BaseClasses.Utilities.Chemistry.readElementS.png" alt="FCSys.BaseClasses.Utilities.Chemistry.readElement" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry.readElement">readElement</a>
@@ -82,7 +87,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 <p><h3>Outputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td>Integer</td><td>charge</td><td>Electrical charge</td></tr>
+<tr><td>Integer</td><td>z</td><td>Charge number</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -90,7 +95,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   &quot;Return the charge of a species based on its chemical formula&quot;</font>
 
   <font color="blue">input </font>String formula <font color="darkgreen">&quot;Chemical formula&quot;</font>;
-  <font color="blue">output </font>Integer charge <font color="darkgreen">&quot;Electrical charge&quot;</font>;
+  <font color="blue">output </font>Integer z <font color="darkgreen">&quot;Charge number&quot;</font>;
 
 <font color="blue">external</font>&quot;C&quot;;
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>charge;
@@ -99,10 +104,10 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 
 <h2><img src="images/FCSys.BaseClasses.Utilities.Chemistry.countElementsI.png" alt="FCSys.BaseClasses.Utilities.Chemistry.countElements" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.Chemistry.countElements"></a><a href="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry">FCSys.BaseClasses.Utilities.Chemistry</a>.countElements</h2>
-<b>Return the number of unique elements in a chemical formula</b><p>
+<b>Return the number of elements in a chemical formula</b><p>
 <p><h3>Information</h3></p>
-<p>This function returns the number of unique elements
-      in a chemical formula.  Electrons are counted as a unique element (or rather particle)
+<p>This function returns the number of elements
+      in a chemical formula.  Electrons are counted as an element (or rather particle)
       if the net charge is nonzero.
       </p>
 
@@ -121,16 +126,16 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 <p><h3>Outputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td>Integer</td><td>n</td><td>Number of unique elements</td></tr>
+<tr><td>Integer</td><td>n</td><td>Number of elements</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">function</font> countElements <font color="darkgreen">
-  &quot;Return the number of unique elements in a chemical formula&quot;</font>
+  &quot;Return the number of elements in a chemical formula&quot;</font>
   <font color="blue">extends </font><a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
   <font color="blue">input </font>String formula <font color="darkgreen">&quot;Chemical formula&quot;</font>;
-  <font color="blue">output </font>Integer n <font color="darkgreen">&quot;Number of unique elements&quot;</font>;
+  <font color="blue">output </font>Integer n <font color="darkgreen">&quot;Number of elements&quot;</font>;
 
 <font color="blue">external</font>&quot;C&quot;;
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>countElements;
@@ -179,8 +184,8 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   <font color="darkgreen">// computation.</font>
 
 <font color="blue">protected </font>
-  Integer charge;
-  Integer netcharge=0 <font color="darkgreen">&quot;Net charge&quot;</font>;
+  Integer z <font color="darkgreen">&quot;Charge number&quot;</font>;
+  Integer z_net=0 <font color="darkgreen">&quot;Net charge&quot;</font>;
   Integer i=1 <font color="darkgreen">&quot;index of element&quot;</font>;
   Integer j=1 <font color="darkgreen">&quot;index of character in formula string&quot;</font>;
   Integer length=<font color="red">Modelica.Utilities.Strings.length</font>(formula) <font color="darkgreen">&quot;Length of formula&quot;</font>;
@@ -188,9 +193,9 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 <font color="blue">algorithm </font>
   <font color="darkgreen">// Read the elements.</font>
   <font color="blue">while </font>j &lt;= length<font color="blue"> loop</font>
-    (symbols[i],coeffs[i],charge,j) := <font color="red">readElement</font>(formula, j);
+    (symbols[i],coeffs[i],z,j) := <font color="red">readElement</font>(formula, j);
     <font color="red">assert</font>(j &lt;&gt; 0, &quot;The formula is invalid.&quot;);
-    netcharge := netcharge + charge;
+    z_net := z_net + z;
     <font color="blue">if </font>symbols[i] &lt;&gt; &quot;e&quot;<font color="blue"> then</font>
       i := i + 1;
       <font color="darkgreen">// Electrons are counted below.</font>
@@ -198,9 +203,9 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   <font color="blue">end while</font>;
 
   <font color="darkgreen">// Add electrons according to the charge.</font>
-  <font color="blue">if </font>netcharge &lt;&gt; 0<font color="blue"> then</font>
+  <font color="blue">if </font>z_net &lt;&gt; 0<font color="blue"> then</font>
     symbols[i] := &quot;e-&quot;;
-    coeffs[i] := -netcharge;
+    coeffs[i] := -z_net;
   <font color="blue">end if</font>;
 
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>elements;
@@ -212,7 +217,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 <p><h3>Information</h3></p>
 <p>This function returns the <code>symbol</code>,
   stoichiometric coefficient (<code>coeff</code>), and
-  electrical charge (<code>charge</code>) associated with an element as it appears in a chemical
+  electrical charge (<code>z</code>) associated with an element as it appears in a chemical
   formula (<code>formula</code>).  The <code>formula</code> string is read beginning
   at <code>startindex</code>. After any initial whitespace, which is ignored,  the
   symbol must begin with a letter and may continue with lowercase letters.  The symbol may be
@@ -228,8 +233,8 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   one-based indices (Modelica format).</p>
 
   <p><b>Example:</b><br>
-  <code>(symbol, coeff, charge, nextindex) = ReadFormula("Hg2+2")</code> returns
-  <code>symbol="Hg"</code>, <code>coeff=2</code>, <code>charge=2</code>, and <code>nextindex=6</code>.</p>
+  <code>(symbol, coeff, z, nextindex) = ReadFormula("Hg2+2")</code> returns
+  <code>symbol="Hg"</code>, <code>coeff=2</code>, <code>z=2</code>, and <code>nextindex=6</code>.</p>
   <p>
 
 <p><h3>Inputs</h3><p>
@@ -243,7 +248,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>String</td><td>symbol</td><td>Name of element</td></tr>
 <tr><td>Integer</td><td>coeff</td><td>stoichiometric coefficient</td></tr>
-<tr><td>Integer</td><td>charge</td><td>Electrical charge</td></tr>
+<tr><td>Integer</td><td>z</td><td>Charge number</td></tr>
 <tr><td>Integer</td><td>nextindex</td><td>index after the found element (0 if error)</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
@@ -255,7 +260,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   <font color="blue">input </font>Integer startindex(min=1) = 1 <font color="darkgreen">&quot;Start index&quot;</font>;
   <font color="blue">output </font>String symbol <font color="darkgreen">&quot;Name of element&quot;</font>;
   <font color="blue">output </font>Integer coeff <font color="darkgreen">&quot;stoichiometric coefficient&quot;</font>;
-  <font color="blue">output </font>Integer charge <font color="darkgreen">&quot;Electrical charge&quot;</font>;
+  <font color="blue">output </font>Integer z <font color="darkgreen">&quot;Charge number&quot;</font>;
   <font color="blue">output </font>Integer nextindex <font color="darkgreen">&quot;index after the found element (0 if error)&quot;</font>;
 
 <font color="blue">external</font>&quot;C&quot; <font color="red">readElement</font>(
@@ -263,7 +268,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
     startindex,
     symbol,
     coeff,
-    charge,
+    z,
     nextindex);
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>readElement;
 </pre>
@@ -308,7 +313,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 <font color="blue">protected </font>
   Integer n_species=<font color="red">size</font>(formulas, 1) <font color="darkgreen">&quot;Number of species&quot;</font>;
   Integer n_elements[n_species]=<font color="red">countElements</font>(formulas) <font color="darkgreen">
-    &quot;Number of unique elements within each species&quot;</font>;
+    &quot;Number of elements within each species&quot;</font>;
   Integer n_tot=<font color="red">sum</font>(n_elements) <font color="darkgreen">&quot;Total number of elements&quot;</font>;
   String allSymbols[n_tot] <font color="darkgreen">&quot;Symbols of all the elementary components&quot;</font>;
   String symbols[n_species, <font color="red">max</font>(n_elements)] <font color="darkgreen">
@@ -334,7 +339,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
     j := j + n_elements[i];
   <font color="blue">end for</font>;
 
-  <font color="darkgreen">// Reduce the list to a unique set.</font>
+  <font color="darkgreen">// Reduce the list to a (unique) set.</font>
   i := 1;
   <font color="blue">while </font>i &lt; n_tot<font color="blue"> loop</font>
     j := i + 1;
@@ -365,7 +370,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 
   <font color="darkgreen">// Perform singular value decomposition (SVD).</font>
   <font color="red">assert</font>(n_species == n_tot + 1, &quot;The reaction is ill-posed.\n&quot; + (<font color="blue">if </font>n_species &gt;
-    n_tot + 1<font color="blue"> then </font>&quot;A species may be included more than once.&quot;<font color="blue"> else </font>&quot;A species may be missing.&quot;));
+    n_tot + 1<font color="blue"> then </font>&quot;A species may be included more than once.&quot;<font color="blue"> else </font>&quot;A species may be missing or the wrong one has been entered.&quot;));
   (d,u,v) := <font color="red">Modelica_LinearSystems2.Math.Matrices.LAPACK.dgesdd</font>(<font color="red">cat</font>(
     2,
     elementCoeffs[:, 1:n_tot],
@@ -385,8 +390,7 @@ An unrelated species may be included.&quot;);
   </div>
 </div>
 <div class="footer">
-        &copy; Copyright 2012, Kevin Davies.
-      Last updated Sun Nov 11 09:17:52 2012.
+  &copy; Copyright 2012, Kevin Davies. Last updated Wed Nov 28 11:42:42 2012.
 </div>
 </body>
 </html>
