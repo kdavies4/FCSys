@@ -19,14 +19,14 @@ package Connectors "Declarative and imperative connectors"
             fillColor={255,128,0},
             lineThickness=0.5)}),
       Diagram(graphics={Text(
-              extent={{-100,36},{100,76}},
-              textString="%name",
-              lineColor={0,0,0}),Ellipse(
-              extent={{-30,30},{30,-30}},
-              lineColor={208,104,0},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,128,0},
-              lineThickness=0.5)}));
+            extent={{-100,36},{100,76}},
+            textString="%name",
+            lineColor={0,0,0}), Ellipse(
+            extent={{-30,30},{30,-30}},
+            lineColor={208,104,0},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,128,0},
+            lineThickness=0.5)}));
   end ChemicalBus;
 
   expandable connector ChemicalBusInternal
@@ -331,7 +331,7 @@ package Connectors "Declarative and imperative connectors"
   connector InertAmagat
     "Connector to exchange linear momentum and entropy by diffusion, with additivity of volume"
 
-    extends FCSys.Connectors.BaseClasses.PartialInert;
+    extends FCSys.Connectors.Inert;
 
     // Additivity of volume
     Q.PressureAbsolute p(nominal=1*U.atm) "Pressure";
@@ -381,7 +381,7 @@ package Connectors "Declarative and imperative connectors"
   connector InertDalton
     "Connector to exchange linear momentum and entropy by diffusion, with additivity of pressure"
 
-    extends FCSys.Connectors.BaseClasses.PartialInert;
+    extends FCSys.Connectors.Inert;
 
     // Additivity of pressure
     Q.Volume V(nominal=1*U.cm^3) "Volume";
@@ -418,6 +418,88 @@ package Connectors "Declarative and imperative connectors"
             textString="D")}));
 
   end InertDalton;
+
+  connector Inert
+    "Connector to exchange linear momentum and entropy by diffusion"
+
+    parameter Integer n_lin(
+      final min=0,
+      final max=3) = 0
+      "<html>Number of axes of linear momentum (<i>n</i><sub>lin</sub>)</html>"
+      annotation (HideResult=true);
+
+    // Linear momentum
+    Q.Velocity phi[n_lin](each nominal=1*U.cm/U.s) "Velocity";
+    flow Q.Force mPhidot[n_lin](each nominal=1*U.N) "Force";
+
+    // Entropy
+    Q.TemperatureAbsolute T(nominal=298.15*U.K, displayUnit="K") "Temperature";
+    flow Q.Current Sdot(nominal=1*U.W/(298.15*U.K)) "Entropy flow rate";
+
+    annotation (
+      Documentation(info="<html>
+  <p>Note that the geometric orientation is globally referenced.  For example, force may be in the positive-x
+  direction&mdash;not from the interface into component as is pressure.  Thus, force is the rate of
+  globally-referenced linear momentum into the component.
+  </p>
+    <p>For more information, see the documentation in the
+    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
+
+      Diagram(graphics={Text(
+            extent={{-100,36},{100,76}},
+            textString="%name",
+            lineColor={0,0,0}),Ellipse(
+            extent={{-30,30},{30,-30}},
+            lineColor={72,90,180},
+            fillPattern=FillPattern.Solid,
+            fillColor={102,128,255})}),
+      Icon(graphics={Ellipse(
+            extent={{-100,100},{100,-100}},
+            lineColor={72,90,180},
+            fillPattern=FillPattern.Solid,
+            fillColor={102,128,255})}));
+
+  end Inert;
+
+  connector InertInternal
+    "Internal connector to exchange linear momentum and entropy by diffusion"
+
+    parameter Integer n_lin(
+      final min=0,
+      final max=3) = 0
+      "<html>Number of axes of linear momentum (<i>n</i><sub>lin</sub>)</html>"
+      annotation (HideResult=true);
+
+    // Linear momentum
+    Q.Velocity phi[n_lin](each nominal=1*U.cm/U.s) "Velocity";
+    flow Q.Force mPhidot[n_lin](each nominal=1*U.N) "Force";
+
+    // Entropy
+    Q.TemperatureAbsolute T(nominal=298.15*U.K, displayUnit="K") "Temperature";
+    flow Q.Current Sdot(nominal=1*U.W/(298.15*U.K)) "Entropy flow rate";
+
+    annotation (
+      defaultComponentPrefixes="protected",
+      defaultComponentName="inert",
+      Documentation(info="<html><p>
+    This is copy of the <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> connector, except that it
+    has a smaller icon and a default <code>protected</code> prefix.  For more information, see that connector.</p></html>"),
+
+      Diagram(graphics={Text(
+            extent={{-100,20},{100,60}},
+            textString="%name",
+            lineColor={0,0,0}),Ellipse(
+            extent={{-10,10},{10,-10}},
+            lineColor={72,90,180},
+            fillPattern=FillPattern.Solid,
+            fillColor={102,128,255})}),
+      Icon(graphics={Ellipse(
+            extent={{-100,100},{100,-100}},
+            lineColor={72,90,180},
+            fillPattern=FillPattern.Solid,
+            fillColor={102,128,255})}));
+
+  end InertInternal;
 
   connector Material "Connector for material"
 
@@ -854,49 +936,6 @@ Protected connector with one output signal of type <code>Real</code>.</p>
 
     end PartialFace;
 
-    partial connector PartialInert
-      "Partial connector to exchange linear momentum and entropy by diffusion"
-
-      parameter Integer n_lin(
-        final min=0,
-        final max=3) = 0
-        "<html>Number of axes of linear momentum (<i>n</i><sub>lin</sub>)</html>"
-        annotation (HideResult=true);
-
-      // Linear momentum
-      Q.Velocity phi[n_lin](each nominal=1*U.cm/U.s) "Velocity";
-      flow Q.Force mPhidot[n_lin](each nominal=1*U.N) "Force";
-
-      // Entropy
-      Q.TemperatureAbsolute T(nominal=298.15*U.K,displayUnit="K") "Temperature";
-      flow Q.Current Sdot(nominal=1*U.W/(298.15*U.K)) "Entropy flow rate";
-
-      annotation (
-        defaultComponentPrefixes="replaceable",
-        defaultComponentName="inert",
-        Documentation(info="<html>
-  <p>Note that the geometric orientation is globally referenced.  For example, force may be in the positive-x
-  direction&mdash;not from the interface into component as is pressure.  Thus, force is the rate of
-  globally-referenced linear momentum into the component.
-  </p>
-    <p>For more information, see the documentation in the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
-
-        Diagram(graphics={Text(
-              extent={{-100,36},{100,76}},
-              textString="%name",
-              lineColor={0,0,0}), Ellipse(
-              extent={{-30,30},{30,-30}},
-              lineColor={72,90,180},
-              fillPattern=FillPattern.Solid,
-              fillColor={102,128,255})}),
-        Icon(graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={72,90,180},
-              fillPattern=FillPattern.Solid,
-              fillColor={102,128,255})}));
-
-    end PartialInert;
 
     type MaterialEntropyOpt = enumeration(
         ClosedAdiabatic "Closed and adiabatic",

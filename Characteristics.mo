@@ -194,6 +194,7 @@ package Characteristics "Data and functions to correlate physical properties"
         p0=U.atm,
         specVolPow={0,0},
         b_v=[U.cm^3*m/(2.2210*U.g)],
+        p_min=-Modelica.Constants.inf,
         m=12.0107*U.g/U.mol,
         Deltah0_f=0*U.J/U.mol,
         Deltah0=1053.500*U.J/U.mol,
@@ -247,6 +248,7 @@ package Characteristics "Data and functions to correlate physical properties"
         m=1044.214*U.g/U.mol,
         specVolPow={0,0},
         b_v=[U.cm^3*m/(2.00*U.g)],
+        p_min=-Modelica.Constants.inf,
         Deltah0_f=0,
         Deltah0=0,
         specHeatCapPow=0,
@@ -339,7 +341,8 @@ package Characteristics "Data and functions to correlate physical properties"
       extends Gas(
         final phase="graphite",
         specVolPow=C.Graphite.specVolPow,
-        b_v=C.Graphite.b_v);
+        b_v=C.Graphite.b_v,
+        p_min=-Modelica.Constants.inf);
       annotation (Documentation(info="<html>
      <p>Assumptions:
      <ol>
@@ -363,6 +366,7 @@ package Characteristics "Data and functions to correlate physical properties"
         specVolPow={-1,-3},
         b_v={{0,0,0,1},{8.0282e6*U.K^3,-2.6988e5*U.K^2,-129.26*U.K,17.472}*U.cm
             ^3/U.mol},
+        p_min=1e-323*p0,
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
         Deltah0=Data.MM*Data.H0*U.J/U.mol,
         T_lim_c0={200.000,Data.Tlimit,6000.000,20000.000}*U.K,
@@ -380,6 +384,9 @@ package Characteristics "Data and functions to correlate physical properties"
         b_lambda={{1.0059461,279.51262*U.K,-0.29792018e5*U.K^2,1.1996252},{
             1.0582450,248.75372*U.K,0.11736907e5*U.K^2,0.82758695},{-0.22364420,
             -0.69650442e4*U.K,-0.77771313e5*U.K^2,13.189369}});
+
+      // Note:  In Dymola 7.4, ln(1e-323) returns a valid result, but ln(1e-324)
+      // doesn't.
 
       annotation (Documentation(info="<html>
             <p>Notes:
@@ -410,6 +417,7 @@ package Characteristics "Data and functions to correlate physical properties"
         specVolPow={-1,-3},
         b_v={{0,0,0,1},{-5.6932e10*U.K^3,1.818e8*U.K^2,-3.0107e5*U.K,158.83}*U.cm
             ^3/U.mol},
+        p_min=1e-323*p0,
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
         Deltah0=Data.MM*Data.H0*U.J/U.mol,
         T_lim_c0={200.000,Data.Tlimit,6000.000}*U.K,
@@ -425,6 +433,8 @@ package Characteristics "Data and functions to correlate physical properties"
         b_lambda={{1.0966389,-555.13429*U.K,0.10623408e6*U.K^2,-0.24664550},{
             0.39367933,-0.22524226e4*U.K,0.61217458e6*U.K^2,5.8011317},{-0.41858737,
             -0.14096649e5*U.K,0.19179190e8*U.K^2,14.345613}});
+      // Note:  In Dymola 7.4, ln(1e-323) returns a valid result, but ln(1e-324)
+      // doesn't.
 
       annotation (Documentation(info="<html>
         <p>Notes:
@@ -536,6 +546,7 @@ package Characteristics "Data and functions to correlate physical properties"
         final phase="solid",
         specVolPow={0,0},
         b_v=[1/(0.95*U.M)],
+        p_min=-Modelica.Constants.inf,
         Deltah0_f=H2O.Gas.Deltah0_f/4,
         h_offset=-'H+'.Gas.Deltah0_f + H2O.Gas.Deltah0_f/4);
 
@@ -569,6 +580,7 @@ package Characteristics "Data and functions to correlate physical properties"
         specVolPow={-1,-4},
         b_v={{0,0,0,0,1},{2.7198e9*U.K^4,6.1253e7*U.K^3,-1.4164e6*U.K^2,-9337.8
             *U.K,40.286}*U.cm^3/U.mol},
+        p_min=1e-323*p0,
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
         Deltah0=Data.MM*Data.H0*U.J/U.mol,
         T_lim_c0={200.000,Data.Tlimit,6000.000,20000.000}*U.K,
@@ -586,6 +598,8 @@ package Characteristics "Data and functions to correlate physical properties"
         b_lambda={{0.85439436,105.73224*U.K,-0.12347848e5*U.K^2,0.47793128},{
             0.88407146,133.57293*U.K,-0.11429640e5*U.K^2,0.24417019},{2.4176185,
             0.80477749e4*U.K,0.31055802e7*U.K^2,-14.517761}});
+      // Note:  In Dymola 7.4, ln(1e-323) returns a valid result, but ln(1e-324)
+      // doesn't.
 
       annotation (Documentation(info="<html>
                   <p>Notes:
@@ -616,6 +630,7 @@ package Characteristics "Data and functions to correlate physical properties"
         specVolPow={-1,-4},
         b_v={{0,0,0,0,1},{5.0855e9*U.K^4,-1.6393e8*U.K^3,5.2007e5*U.K^2,-1.7696e4
             *U.K,42.859}*U.cm^3/U.mol},
+        p_min=1e-323*p0,
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
         Deltah0=Data.MM*Data.H0*U.J/U.mol,
         T_lim_c0={200.000,Data.Tlimit,6000.000,20000.000}*U.K,
@@ -633,6 +648,8 @@ package Characteristics "Data and functions to correlate physical properties"
         b_lambda={{0.77229167,6.8463210*U.K,-0.58933377e4*U.K^2,1.2210365},{
             0.90917351,291.24182*U.K,-0.79650171e5*U.K^2,0.064851631},{-1.1218262,
             -0.19286378e5*U.K,0.23295011e8*U.K^2,20.342043}});
+      // Note:  In Dymola 7.4, ln(1e-323) returns a valid result, but ln(1e-324)
+      // doesn't.
 
       annotation (Documentation(info="<html><p>Notes:<ul>
   <li>According to [<a href=\"modelica://FCSys.UsersGuide.References\">Avogadro1.03</a>], the (center-to-center)
@@ -767,10 +784,8 @@ package Characteristics "Data and functions to correlate physical properties"
       constant Q.LengthSpecific r "Specific radius";
       final constant Integer z=Chemistry.charge(formula) "Charge number";
       constant Q.PressureAbsolute p0=U.bar "Reference pressure";
-      constant Q.Pressure p_min=1e-323*p0
+      constant Q.Pressure p_min=-Modelica.Constants.inf
         "Minimum pressure for numerical protection";
-      // Note:  In Dymola 7.4, ln(1e-323) returns a valid result, but ln(1e-324)
-      // doesn't.
       constant Real b_v[:, :]=[1]
         "Coefficients of specific volume as a polynomial in p/T and T"
         annotation (HideResult=false);
@@ -853,7 +868,7 @@ package Characteristics "Data and functions to correlate physical properties"
         // T_lim_c0[size(T_lim_c0, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
-        c0 := smooth(1, sum(if (T_lim_c0[i] <= T or i == 1) and (T < T_lim_c0[i
+        c0 := smooth(2, sum(if (T_lim_c0[i] <= T or i == 1) and (T < T_lim_c0[i
            + 1] or i == size(T_lim_c0, 1) - 1) then poly(
                 T,
                 b_c0[i, :],
@@ -862,7 +877,7 @@ package Characteristics "Data and functions to correlate physical properties"
           InlineNoEvent=true,
           Inline=true,
           smoothOrder=2);
-        // **If possible (with warnings), set"smooth and smoothOrder to 0 for
+        // **If possible (with warnings), set smooth and smoothOrder to 0 for
         // this function and 1 for g, h, and s.
       end c0_T;
 
@@ -931,7 +946,7 @@ package Characteristics "Data and functions to correlate physical properties"
         // T_lim_c0[size(T_lim_c0, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
-        g := smooth(1, sum(if (T_lim_c0[i] <= T or i == 1) and (T < T_lim_c0[i
+        g := smooth(2, sum(if (T_lim_c0[i] <= T or i == 1) and (T < T_lim_c0[i
            + 1] or i == size(T_lim_c0, 1) - 1) then g0_i(T, i) else 0 for i in
           1:size(T_lim_c0, 1) - 1) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K
            then Deltah0 else 0) - (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt25degC
@@ -988,7 +1003,7 @@ package Characteristics "Data and functions to correlate physical properties"
         // T_lim_c0[size(T_lim_c0, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
-        h0 := smooth(1, sum(if (T_lim_c0[i] <= T or i == 1) and (T < T_lim_c0[i
+        h0 := smooth(2, sum(if (T_lim_c0[i] <= T or i == 1) and (T < T_lim_c0[i
            + 1] or i == size(T_lim_c0, 1) - 1) then h0_i(T, i) else 0 for i in
           1:size(T_lim_c0, 1) - 1) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K
            then Deltah0 else 0) - (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt25degC
@@ -1065,7 +1080,7 @@ package Characteristics "Data and functions to correlate physical properties"
         // T_lim_c0[size(T_lim_c0, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
-        s := smooth(1, sum(if (T_lim_c0[i] <= T or i == 1) and (T < T_lim_c0[i
+        s := smooth(2, sum(if (T_lim_c0[i] <= T or i == 1) and (T < T_lim_c0[i
            + 1] or i == size(T_lim_c0, 1) - 1) then s0_i(T, i) else 0 for i in
           1:size(T_lim_c0, 1) - 1) - sum((if specVolPow[1] + i == 0 then ln((
           if p_min > 0 then max(p, p_min) else p)/p0) else (p^(specVolPow[1] +

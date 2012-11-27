@@ -1282,11 +1282,11 @@ package Figures "Layouts for documentation"
     extends FCSys.BaseClasses.Icons.Cell;
 
     annotation (Icon(graphics={Rectangle(
-            extent={{-100,100},{100,65}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0})}));
+              extent={{-100,100},{100,65}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0})}));
   end Logo;
 
   model AnFPIcon "Anode flow plate"
@@ -1480,9 +1480,8 @@ package Figures "Layouts for documentation"
 
   model ConnectorHierarchy
 
-    Connectors.BaseClasses.PartialInert Inert annotation (Placement(
-          transformation(extent={{-20,-10},{0,10}}),iconTransformation(extent={
-              {-30,-20},{-10,0}})));
+    FCSys.Connectors.Inert Inert annotation (Placement(transformation(extent={{
+              -20,-10},{0,10}}), iconTransformation(extent={{-30,-20},{-10,0}})));
     Connectors.ChemicalOutput Chemical annotation (Placement(transformation(
             extent={{20,-10},{40,10}}), iconTransformation(extent={{10,-20},{30,
               0}})));
@@ -1580,17 +1579,17 @@ package Figures "Layouts for documentation"
   connector VolumeOrPressure "Icon for additivity of volume or pressure"
 
     annotation (Diagram(graphics={Text(
-            extent={{-100,36},{100,76}},
-            textString="%name",
-            lineColor={0,0,0}), Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={0,0,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid)}), Icon(graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={0,0,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid)}));
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0}),Ellipse(
+              extent={{-30,30},{30,-30}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}), Icon(graphics={Ellipse(
+              extent={{-100,100},{100,-100}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}));
   end VolumeOrPressure;
 
   package ReactionComparison
@@ -1695,13 +1694,13 @@ package Figures "Layouts for documentation"
       der(N)/U.s = -nu*Xidot "stoichiometry";
 
       annotation (Icon(graphics={Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid), Text(
-              extent={{-100,40},{100,80}},
-              textString="%name",
-              lineColor={0,0,0})}));
+                  extent={{-100,100},{100,-100}},
+                  lineColor={0,0,0},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Text(
+                  extent={{-100,40},{100,80}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
     end TraditionalReaction;
 
     model Reaction
@@ -1724,13 +1723,13 @@ package Figures "Layouts for documentation"
       material.Ndot = nu*Xidot "stoichiometry";
 
       annotation (Diagram(graphics), Icon(graphics={Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid), Text(
-              extent={{-100,40},{100,80}},
-              textString="%name",
-              lineColor={0,0,0})}));
+                  extent={{-100,100},{100,-100}},
+                  lineColor={0,0,0},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Text(
+                  extent={{-100,40},{100,80}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
     end Reaction;
 
     model Species
@@ -1765,13 +1764,13 @@ package Figures "Layouts for documentation"
       // Material conservation
       der(N)/U.s = material.Ndot;
       annotation (Icon(graphics={Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid), Text(
-              extent={{-100,40},{100,80}},
-              textString="%name",
-              lineColor={0,0,0})}));
+                  extent={{-100,100},{100,-100}},
+                  lineColor={0,0,0},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Text(
+                  extent={{-100,40},{100,80}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
     end Species;
 
     connector Material "Connector for density-driven reaction"
