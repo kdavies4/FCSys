@@ -56,6 +56,11 @@ Conditions = namedtuple('Conditions',
 # attribute is empty ('').  Each key is a dimension string and each entry is a
 # unit string.  Both are formatted in Modelica unit notation.
 # Generated from FCSys/resources/quantities.xls, 2012-11-10
+# Default units
+# These units are used to display a variable's quantity if its displayUnit
+# attribute is empty ('').  Each key is a dimension string and each entry is a
+# unit string.  Both are formatted in Modelica unit notation.
+# Generated from FCSys/resources/quantities.xls, 2012-11-29
 default_units = {'1/N': '1/mol',
                  '1/T': '1/s',
                  'A': 'rad',
@@ -63,7 +68,6 @@ default_units = {'1/N': '1/mol',
                  'A/l': 'rad/m',
                  'A2': 'sr',
                  'l': 'cm',
-                 'l.m/(N.T)': 'kg.m/(C.s)',
                  'l.m/N2': 'H/m',
                  'l.m/T2': 'N',
                  'l.T/N': 'cm/A',
@@ -87,8 +91,6 @@ default_units = {'1/N': '1/mol',
                  'l3': 'cm3',
                  'l3.m/(A.N.T2)': 'V.m/rad',
                  'l3.m/(N2.T2)': 'm/H',
-                 'l3/(N.s)': 'cm3/(mol.s)',
-                 'l3/(N.T)': 'cm3/(mol.s)',
                  'l3/N': 'cm3/C',
                  'l3/T': 'L/min',
                  'l4.m/T3': 'W.m2',
@@ -103,9 +105,7 @@ default_units = {'1/N': '1/mol',
                  'N': 'C',
                  'N.T2/(l2.m)': '1/V',
                  'N/(l2.T)': 'A/cm2',
-                 'N/(l3.T)': 'mol/(cm3.s)',
                  'N/(T.s)': 'A/s',
-                 'N/l3': 'mol/cm3',
                  'N/s': 'A',
                  'N/T': 'A',
                  'N/T2': 'A/s',

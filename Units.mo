@@ -143,6 +143,7 @@ package Units "Constants and units of physical measure"
     final constant Q.Length cm=U.cm "centimeter";
     final constant Q.Length mm=U.mm "millimeter";
     final constant Q.Number '%'=U.'%' "percent";
+    final constant Q.AmountVolumic M=U.M "molar";
     annotation (Documentation(info="<html><p>This model is used by the units script (\"FCSys/resources/scripts/units.mos\") to
   establish the values of the units in order to convert values to numbers for display.</p>
   <p>For more information, see the documentation in the

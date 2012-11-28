@@ -1015,20 +1015,20 @@ package Regions "3D arrays of discrete, interconnected subregions"
             H2(
               Lstar=1e7*U.m,
               p_IC=(1 - defaults.x_H2O)*defaults.p,
-              xNegative(matEntOpt=MaterialEntropyOpt.ClosedAdiabatic),
-              xPositive(matEntOpt=MaterialEntropyOpt.OpenDiabatic),
-              yNegative(matEntOpt=MaterialEntropyOpt.OpenDiabatic, viscousX=
+              xNegative(thermoOpt=ThermoOpt.ClosedAdiabatic),
+              xPositive(thermoOpt=ThermoOpt.OpenDiabatic),
+              yNegative(thermoOpt=ThermoOpt.OpenDiabatic, viscousX=
                     false),
-              yPositive(matEntOpt=MaterialEntropyOpt.OpenDiabatic, viscousX=
+              yPositive(thermoOpt=ThermoOpt.OpenDiabatic, viscousX=
                     false)),
             H2O(
               Lstar=1e7*U.m,
               p_IC=defaults.x_H2O*defaults.p,
-              xNegative(matEntOpt=MaterialEntropyOpt.ClosedAdiabatic),
-              xPositive(matEntOpt=MaterialEntropyOpt.OpenDiabatic),
-              yNegative(matEntOpt=MaterialEntropyOpt.OpenDiabatic, viscousX=
+              xNegative(thermoOpt=ThermoOpt.ClosedAdiabatic),
+              xPositive(thermoOpt=ThermoOpt.OpenDiabatic),
+              yNegative(thermoOpt=ThermoOpt.OpenDiabatic, viscousX=
                     false),
-              yPositive(matEntOpt=MaterialEntropyOpt.OpenDiabatic, viscousX=
+              yPositive(thermoOpt=ThermoOpt.OpenDiabatic, viscousX=
                     false))),
           each graphite(
             inclC=true,
@@ -1624,8 +1624,8 @@ the z axis extends across the width of the channel.</p></html>"),
               yNegative(viscousX=false),
               yPositive(viscousX=false)))));
 
-      //'e-'( xPositive(matEntOpt=MaterialEntropyOpt.ClosedAdiabatic),
-      //'H+'xNegative(matEntOpt=MaterialEntropyOpt.ClosedAdiabatic),
+      //'e-'( xPositive(thermoOpt=ThermoOpt.ClosedAdiabatic),
+      //'H+'xNegative(thermoOpt=ThermoOpt.ClosedAdiabatic),
 
       //beta_Phi=1e-4*subregions[1,1,1].gas.H2.Data.gamma()),
       // **Note assumption:  1/2 of solid is graphite, 1/2 is ionomer
@@ -2132,8 +2132,8 @@ the z axis extends across the width of the channel.</p>
               Lstar=1e7*U.m,
               yNegative(viscousX=false),
               yPositive(viscousX=false)))));
-      //'e-'(xNegative(matEntOpt=MaterialEntropyOpt.ClosedAdiabatic),
-      //'H+'(xPositive(matEntOpt=MaterialEntropyOpt.ClosedAdiabatic),
+      //'e-'(xNegative(thermoOpt=ThermoOpt.ClosedAdiabatic),
+      //'H+'(xPositive(thermoOpt=ThermoOpt.ClosedAdiabatic),
 
       //O2(
       //     beta_N=1e49*FCSys.Characteristics.O2.Gas.beta())
@@ -2643,26 +2643,26 @@ the z axis extends across the width of the channel.</p>
             H2O(
               Lstar=1e9*U.m,
               p_IC=defaults.x_H2O*defaults.p,
-              xPositive(matEntOpt=MaterialEntropyOpt.ClosedAdiabatic),
-              yNegative(matEntOpt=MaterialEntropyOpt.OpenDiabatic, viscousX=
+              xPositive(thermoOpt=ThermoOpt.ClosedAdiabatic),
+              yNegative(thermoOpt=ThermoOpt.OpenDiabatic, viscousX=
                     false),
-              yPositive(matEntOpt=MaterialEntropyOpt.OpenDiabatic, viscousX=
+              yPositive(thermoOpt=ThermoOpt.OpenDiabatic, viscousX=
                     false)),
             N2(
               Lstar=1e9*U.m,
               p_IC=(1 - defaults.x_H2O)*(1 - defaults.x_O2_dry)*defaults.p,
-              xPositive(matEntOpt=MaterialEntropyOpt.ClosedAdiabatic),
-              yNegative(matEntOpt=MaterialEntropyOpt.OpenDiabatic, viscousX=
+              xPositive(thermoOpt=ThermoOpt.ClosedAdiabatic),
+              yNegative(thermoOpt=ThermoOpt.OpenDiabatic, viscousX=
                     false),
-              yPositive(matEntOpt=MaterialEntropyOpt.OpenDiabatic, viscousX=
+              yPositive(thermoOpt=ThermoOpt.OpenDiabatic, viscousX=
                     false)),
             O2(
               Lstar=1e9*U.m,
               p_IC=(1 - defaults.x_H2O)*defaults.x_O2_dry*defaults.p,
-              xPositive(matEntOpt=MaterialEntropyOpt.ClosedAdiabatic),
-              yNegative(matEntOpt=MaterialEntropyOpt.OpenDiabatic, viscousX=
+              xPositive(thermoOpt=ThermoOpt.ClosedAdiabatic),
+              yNegative(thermoOpt=ThermoOpt.OpenDiabatic, viscousX=
                     false),
-              yPositive(matEntOpt=MaterialEntropyOpt.OpenDiabatic, viscousX=
+              yPositive(thermoOpt=ThermoOpt.OpenDiabatic, viscousX=
                     false))),
           each graphite(
             inclC=true,

@@ -17,7 +17,7 @@ package BCs "Models for boundary conditions"
     model FaceBC "<html>Test the BCs for the face of a subregion</html>"
       extends Modelica.Icons.Example;
 
-      Face.Subregion subregionFaceBC(gas(inclH2O=true, H2O(matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.OpenDiabatic,
+      Face.Subregion subregionFaceBC(gas(inclH2O=true, H2O(thermoOpt=FCSys.Connectors.BaseClasses.ThermoOpt.OpenDiabatic,
               materialSpec(k=-0.4805*U.V))))
         annotation (Placement(transformation(extent={{-10,14},{10,34}})));
       Subregions.Subregion subregion(
@@ -34,18 +34,18 @@ package BCs "Models for boundary conditions"
           H2O(
             beta_Phi=1e-3*U.cm/U.A,
             xNegative(
-              matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.ClosedAdiabatic,
+              thermoOpt=FCSys.Connectors.BaseClasses.ThermoOpt.ClosedAdiabatic,
 
               viscousY=false,
               viscousZ=false),
             xPositive(
-              matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.ClosedAdiabatic,
+              thermoOpt=FCSys.Connectors.BaseClasses.ThermoOpt.ClosedAdiabatic,
 
               viscousY=false,
               viscousZ=false),
             zNegative(viscousX=false, viscousY=false),
             zPositive(viscousX=false, viscousY=false),
-            yPositive(matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.OpenDiabatic),
+            yPositive(thermoOpt=FCSys.Connectors.BaseClasses.ThermoOpt.OpenDiabatic),
 
             initMethPartNum=FCSys.Subregions.BaseClasses.InitMethScalar.PotentialElectrochemical,
 
@@ -74,7 +74,7 @@ package BCs "Models for boundary conditions"
       "<html>Test the BCs for the face of a subregion with phases</html>"
       extends Modelica.Icons.Example;
 
-      FCSys.BCs.Face.Phases.Phase phaseFaceBC(inclH2O=true, H2O(matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.OpenDiabatic,
+      FCSys.BCs.Face.Phases.Phase phaseFaceBC(inclH2O=true, H2O(thermoOpt=FCSys.Connectors.BaseClasses.ThermoOpt.OpenDiabatic,
             redeclare FCSys.BCs.Face.Species.Material.Current materialBC))
         annotation (Placement(transformation(extent={{-10,14},{10,34}})));
       FCSys.Subregions.Phases.Phase subregion(
@@ -83,16 +83,16 @@ package BCs "Models for boundary conditions"
         inclH2O=true,
         H2O(
           xNegative(
-            matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.ClosedAdiabatic,
+            thermoOpt=FCSys.Connectors.BaseClasses.ThermoOpt.ClosedAdiabatic,
 
             viscousY=false,
             viscousZ=false),
           xPositive(
-            matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.ClosedAdiabatic,
+            thermoOpt=FCSys.Connectors.BaseClasses.ThermoOpt.ClosedAdiabatic,
 
             viscousY=false,
             viscousZ=false),
-          yPositive(matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.OpenDiabatic),
+          yPositive(thermoOpt=FCSys.Connectors.BaseClasses.ThermoOpt.OpenDiabatic),
 
           zNegative(viscousX=false, viscousY=false),
           zPositive(viscousX=false, viscousY=false)))
@@ -143,12 +143,12 @@ package BCs "Models for boundary conditions"
             xNegative(
               viscousY=false,
               viscousZ=false,
-              matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.ClosedAdiabatic),
+              thermoOpt=FCSys.Connectors.BaseClasses.ThermoOpt.ClosedAdiabatic),
 
             xPositive(
               viscousY=false,
               viscousZ=false,
-              matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.OpenDiabatic),
+              thermoOpt=FCSys.Connectors.BaseClasses.ThermoOpt.OpenDiabatic),
 
             yNegative(viscousZ=false, viscousX=false),
             yPositive(viscousZ=false, viscousX=false),
@@ -209,12 +209,12 @@ package BCs "Models for boundary conditions"
         inclZFaces=false,
         H2(
           xPositive(
-            matEntOpt=MaterialEntropyOpt.OpenDiabatic,
+            thermoOpt=ThermoOpt.OpenDiabatic,
             viscousY=false,
             viscousZ=false),
           initMethPartNum=FCSys.Subregions.BaseClasses.InitMethScalar.None,
           xNegative(
-            final matEntOpt=MaterialEntropyOpt.ClosedAdiabatic,
+            final thermoOpt=ThermoOpt.ClosedAdiabatic,
             viscousY=false,
             viscousZ=false)))
         annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
@@ -266,11 +266,11 @@ package BCs "Models for boundary conditions"
           xNegative(
             viscousY=false,
             viscousZ=false,
-            matEntOpt=MaterialEntropyOpt.OpenDiabatic),
+            thermoOpt=ThermoOpt.OpenDiabatic),
           xPositive(
             viscousY=false,
             viscousZ=false,
-            final matEntOpt=MaterialEntropyOpt.ClosedAdiabatic),
+            final thermoOpt=ThermoOpt.ClosedAdiabatic),
           setXVel=true))
         annotation (Placement(transformation(extent={{20,-10},{40,10}})));
       inner Defaults defaults(analysis=true, T=293.15*U.K)
@@ -423,7 +423,7 @@ package BCs "Models for boundary conditions"
             final nXi=0) "Medium model" annotation (choicesAllMatching=true);
 
       FCSys.Connectors.FaceGeneric face(
-        final matEntOpt=MaterialEntropyOpt.OpenDiabatic,
+        final thermoOpt=ThermoOpt.OpenDiabatic,
         final viscous1=false,
         final viscous2=false)
         "Connector for material and entropy of a single species" annotation (
@@ -596,7 +596,7 @@ package BCs "Models for boundary conditions"
       extends FCSys.BaseClasses.Icons.Names.Top3;
 
       Connectors.FaceGeneric face(
-        final matEntOpt=MaterialEntropyOpt.OpenDiabatic,
+        final thermoOpt=ThermoOpt.OpenDiabatic,
         final viscous1=false,
         final viscous2=false)
         "Connector for material, linear momentum, and entropy of a single species"
@@ -1301,16 +1301,16 @@ package BCs "Models for boundary conditions"
         replaceable BCs.FaceDifferential.Subregion current[n_y, n_z](each
             final axis=FCSys.BaseClasses.Axis.x, graphite(
             inclC=true,
-            C(matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.ClosedAdiabatic),
+            C(thermoOpt=FCSys.Connectors.BaseClasses.ThermoOpt.ClosedAdiabatic),
 
             'incle-'=true,
-            'e-'(matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.OpenDiabatic)))
+            'e-'(thermoOpt=FCSys.Connectors.BaseClasses.ThermoOpt.OpenDiabatic)))
           if inclIO constrainedby BCs.FaceDifferential.Subregion(graphite(
             inclC=true,
-            C(matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.ClosedAdiabatic),
+            C(thermoOpt=FCSys.Connectors.BaseClasses.ThermoOpt.ClosedAdiabatic),
 
             'incle-'=true,
-            'e-'(matEntOpt=FCSys.Connectors.BaseClasses.MaterialEntropyOpt.OpenDiabatic)))
+            'e-'(thermoOpt=FCSys.Connectors.BaseClasses.ThermoOpt.OpenDiabatic)))
           annotation (Placement(transformation(extent={{-140,20},{-120,40}})));
 
         replaceable Sensors.FaceDifferential.Subregion voltage[n_y, n_z](each
@@ -1659,8 +1659,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.C, C.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1671,8 +1671,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.C19HF37O5S, C19HF37O5S.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1683,8 +1683,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.'e-', 'e-'.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1695,8 +1695,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.H2, H2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1707,8 +1707,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.H2O, H2O.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1719,8 +1719,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.'H+', 'H+'.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1731,8 +1731,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.N2, N2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1743,8 +1743,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.O2, O2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -3816,8 +3816,8 @@ boundary condition</a> models.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        replaceable FCSys.BCs.Face.Species.Species C(matEntOpt=
-              MaterialEntropyOpt.ClosedDiabatic) if inclC "Model" annotation (
+        replaceable FCSys.BCs.Face.Species.Species C(thermoOpt=
+              ThermoOpt.ClosedDiabatic) if inclC "Model" annotation (
             Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -3832,8 +3832,8 @@ boundary condition</a> models.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        replaceable FCSys.BCs.Face.Species.Species C19HF37O5S(matEntOpt=
-              MaterialEntropyOpt.ClosedDiabatic) if inclC19HF37O5S "Model"
+        replaceable FCSys.BCs.Face.Species.Species C19HF37O5S(thermoOpt=
+              ThermoOpt.ClosedDiabatic) if inclC19HF37O5S "Model"
           annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -4604,8 +4604,8 @@ boundary condition</a> models.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        replaceable FCSys.BCs.Face.Species.Species C(matEntOpt=
-              MaterialEntropyOpt.ClosedDiabatic) if inclC "Model" annotation (
+        replaceable FCSys.BCs.Face.Species.Species C(thermoOpt=
+              ThermoOpt.ClosedDiabatic) if inclC "Model" annotation (
             Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -4742,8 +4742,8 @@ boundary condition</a> models.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        replaceable FCSys.BCs.Face.Species.Species C19HF37O5S(matEntOpt=
-              MaterialEntropyOpt.ClosedDiabatic) if inclC19HF37O5S "Model"
+        replaceable FCSys.BCs.Face.Species.Species C19HF37O5S(thermoOpt=
+              ThermoOpt.ClosedDiabatic) if inclC19HF37O5S "Model"
           annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -4955,15 +4955,15 @@ boundary condition</a> models.
         "<html>BC for a face of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
         extends FCSys.BaseClasses.Icons.BCs.Single;
 
-        parameter MaterialEntropyOpt matEntOpt=MaterialEntropyOpt.OpenDiabatic
+        parameter ThermoOpt thermoOpt=ThermoOpt.OpenDiabatic
           "Options for material and thermal transport";
 
         // Material
-        final parameter Boolean open=matEntOpt == MaterialEntropyOpt.OpenDiabatic
+        final parameter Boolean open=thermoOpt == ThermoOpt.OpenDiabatic
           "Open";
         // Note:  Dymola 7.4 doesn't recognize enumerations in the dialog enable
         // option, e.g.,
-        //     enable=matEntOpt=MaterialEntropyOpt.OpenDiabatic.
+        //     enable=thermoOpt=ThermoOpt.OpenDiabatic.
         // Therefore, the values of the enumerations are specified numerically for
         // this initial condition and others below for material and entropy.
         replaceable Material.PotentialElectrochemical materialBC if open
@@ -4972,7 +4972,7 @@ boundary condition</a> models.
           __Dymola_choicesFromPackage=true,
           Dialog(
             group="Material",
-            enable=matEntOpt == 3,
+            enable=thermoOpt == 3,
             __Dymola_descriptionLabel=true),
           Placement(transformation(extent={{-70,-26},{-50,-6}})));
 
@@ -4983,7 +4983,7 @@ boundary condition</a> models.
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Material",
-            enable=matEntOpt == 3,
+            enable=thermoOpt == 3,
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
         replaceable Modelica.Blocks.Sources.Constant materialSpec(k(start=0))
@@ -4992,9 +4992,9 @@ boundary condition</a> models.
           __Dymola_choicesFromPackage=true,
           Dialog(
             group="Material",
-            enable=matEntOpt == 3 and internalMaterial,
+            enable=thermoOpt == 3 and internalMaterial,
             __Dymola_descriptionLabel=true,
-            enable=matEntOpt == 3 and internalMaterial),
+            enable=thermoOpt == 3 and internalMaterial),
           Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
@@ -5087,8 +5087,8 @@ boundary condition</a> models.
               origin={10,20})));
 
         // Entropy
-        final parameter Boolean diabatic=matEntOpt == MaterialEntropyOpt.ClosedDiabatic
-             or matEntOpt == MaterialEntropyOpt.OpenDiabatic
+        final parameter Boolean diabatic=thermoOpt == ThermoOpt.ClosedDiabatic
+             or thermoOpt == ThermoOpt.OpenDiabatic
           "Diabatic (entropy included)";
         replaceable Entropy.Temperature entropyBC if diabatic constrainedby
           FCSys.BCs.Face.Species.Entropy.BaseClasses.PartialBC
@@ -5096,7 +5096,7 @@ boundary condition</a> models.
           __Dymola_choicesFromPackage=true,
           Dialog(
             group="Entropy",
-            enable=matEntOpt == 2 or matEntOpt == 3,
+            enable=thermoOpt == 2 or thermoOpt == 3,
             __Dymola_descriptionLabel=true),
           Placement(transformation(extent={{50,-26},{70,-6}})));
 
@@ -5107,7 +5107,7 @@ boundary condition</a> models.
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Entropy",
-            enable=matEntOpt == 2 or matEntOpt == 3,
+            enable=thermoOpt == 2 or thermoOpt == 3,
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
 
@@ -5118,7 +5118,7 @@ boundary condition</a> models.
           Dialog(
             group="Entropy",
             __Dymola_descriptionLabel=true,
-            enable=(matEntOpt == 2 or matEntOpt == 3) and internalEntropy,
+            enable=(thermoOpt == 2 or thermoOpt == 3) and internalEntropy,
             enable=internalEntropy and diabatic),
           Placement(transformation(
               extent={{-10,-10},{10,10}},
@@ -5126,7 +5126,7 @@ boundary condition</a> models.
               origin={50,20})));
 
         FCSys.Connectors.FaceGeneric face(
-          final matEntOpt=matEntOpt,
+          final thermoOpt=thermoOpt,
           final viscous1=viscous1,
           final viscous2=viscous2)
           "Single-species connector for material, linear momentum, and entropy"
@@ -5464,15 +5464,15 @@ boundary condition</a> models.
         "<html>BC for a face of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
         extends FCSys.BaseClasses.Icons.BCs.Single;
 
-        parameter MaterialEntropyOpt matEntOpt=MaterialEntropyOpt.OpenDiabatic
+        parameter ThermoOpt thermoOpt=ThermoOpt.OpenDiabatic
           "Options for material and thermal transport";
 
         // Material
-        final parameter Boolean open=matEntOpt == MaterialEntropyOpt.OpenDiabatic
+        final parameter Boolean open=thermoOpt == ThermoOpt.OpenDiabatic
           "Open";
         // Note:  Dymola 7.4 doesn't recognize enumerations in the dialog enable
         // option, e.g.,
-        //     enable=matEntOpt=MaterialEntropyOpt.OpenDiabatic.
+        //     enable=thermoOpt=ThermoOpt.OpenDiabatic.
         // Therefore, the values of the enumerations are specified numerically for
         // this initial condition and others below for material and entropy.
         replaceable FCSys.BCs.Face.Species.Material.PotentialElectrochemical
@@ -5482,7 +5482,7 @@ boundary condition</a> models.
           __Dymola_choicesFromPackage=true,
           Dialog(
             group="Material",
-            enable=matEntOpt == 3,
+            enable=thermoOpt == 3,
             __Dymola_descriptionLabel=true),
           Placement(transformation(extent={{-70,-26},{-50,-6}})));
 
@@ -5493,7 +5493,7 @@ boundary condition</a> models.
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Material",
-            enable=matEntOpt == 3,
+            enable=thermoOpt == 3,
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
         replaceable Modelica.Blocks.Sources.Constant materialSpec(k(start=0))
@@ -5502,9 +5502,9 @@ boundary condition</a> models.
           __Dymola_choicesFromPackage=true,
           Dialog(
             group="Material",
-            enable=matEntOpt == 3 and internalMaterial,
+            enable=thermoOpt == 3 and internalMaterial,
             __Dymola_descriptionLabel=true,
-            enable=matEntOpt == 3 and internalMaterial),
+            enable=thermoOpt == 3 and internalMaterial),
           Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
@@ -5597,8 +5597,8 @@ boundary condition</a> models.
               origin={10,20})));
 
         // Entropy
-        final parameter Boolean diabatic=matEntOpt == MaterialEntropyOpt.ClosedDiabatic
-             or matEntOpt == MaterialEntropyOpt.OpenDiabatic
+        final parameter Boolean diabatic=thermoOpt == ThermoOpt.ClosedDiabatic
+             or thermoOpt == ThermoOpt.OpenDiabatic
           "Diabatic (entropy included)";
         replaceable FCSys.BCs.Face.Species.Entropy.Temperature entropyBC if
           diabatic constrainedby
@@ -5607,7 +5607,7 @@ boundary condition</a> models.
           __Dymola_choicesFromPackage=true,
           Dialog(
             group="Entropy",
-            enable=matEntOpt == 2 or matEntOpt == 3,
+            enable=thermoOpt == 2 or thermoOpt == 3,
             __Dymola_descriptionLabel=true),
           Placement(transformation(extent={{50,-26},{70,-6}})));
 
@@ -5618,7 +5618,7 @@ boundary condition</a> models.
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Entropy",
-            enable=matEntOpt == 2 or matEntOpt == 3,
+            enable=thermoOpt == 2 or thermoOpt == 3,
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
 
@@ -5629,14 +5629,14 @@ boundary condition</a> models.
           Dialog(
             group="Entropy",
             __Dymola_descriptionLabel=true,
-            enable=(matEntOpt == 2 or matEntOpt == 3) and internalEntropy,
+            enable=(thermoOpt == 2 or thermoOpt == 3) and internalEntropy,
             enable=internalEntropy and diabatic),
           Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={50,20})));
 
-        Connectors.FaceX face(final matEntOpt=matEntOpt)
+        Connectors.FaceX face(final thermoOpt=thermoOpt)
           "Single-species connector for material, linear momentum, and entropy"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
               iconTransformation(extent={{-10,-50},{10,-30}})));
@@ -6088,8 +6088,8 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        replaceable FCSys.BCs.FaceDifferential.Species.Species C(matEntOpt=
-              MaterialEntropyOpt.ClosedDiabatic) if inclC "Model" annotation (
+        replaceable FCSys.BCs.FaceDifferential.Species.Species C(thermoOpt=
+              ThermoOpt.ClosedDiabatic) if inclC "Model" annotation (
             Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -6105,7 +6105,7 @@ boundary condition</a> model.
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
         replaceable FCSys.BCs.FaceDifferential.Species.Species C19HF37O5S(
-            matEntOpt=MaterialEntropyOpt.ClosedDiabatic) if inclC19HF37O5S
+            thermoOpt=ThermoOpt.ClosedDiabatic) if inclC19HF37O5S
           "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -7416,8 +7416,8 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        replaceable FCSys.BCs.FaceDifferential.Species.Species C(matEntOpt=
-              MaterialEntropyOpt.ClosedDiabatic) if inclC "Model" annotation (
+        replaceable FCSys.BCs.FaceDifferential.Species.Species C(thermoOpt=
+              ThermoOpt.ClosedDiabatic) if inclC "Model" annotation (
             Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -7649,7 +7649,7 @@ boundary condition</a> model.
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
         replaceable FCSys.BCs.FaceDifferential.Species.Species C19HF37O5S(
-            matEntOpt=MaterialEntropyOpt.ClosedDiabatic) if inclC19HF37O5S
+            thermoOpt=ThermoOpt.ClosedDiabatic) if inclC19HF37O5S
           "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -8092,11 +8092,11 @@ boundary condition</a> model.
         "<html>BC for a face of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
         extends FCSys.BaseClasses.Icons.BCs.Double;
 
-        parameter MaterialEntropyOpt matEntOpt=MaterialEntropyOpt.OpenDiabatic
+        parameter ThermoOpt thermoOpt=ThermoOpt.OpenDiabatic
           "Options for material and thermal transport";
 
         // Material
-        final parameter Boolean open=matEntOpt == MaterialEntropyOpt.OpenDiabatic
+        final parameter Boolean open=thermoOpt == ThermoOpt.OpenDiabatic
           "Open";
         replaceable
           FCSys.BCs.FaceDifferential.Species.Material.PotentialElectrochemical
@@ -8106,7 +8106,7 @@ boundary condition</a> model.
           __Dymola_choicesFromPackage=true,
           Dialog(
             group="Material",
-            enable=matEntOpt == 3,
+            enable=thermoOpt == 3,
             __Dymola_descriptionLabel=true),
           Placement(transformation(extent={{-70,-30},{-50,-10}})));
 
@@ -8117,7 +8117,7 @@ boundary condition</a> model.
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Material",
-            enable=matEntOpt == 3,
+            enable=thermoOpt == 3,
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
         replaceable Modelica.Blocks.Sources.Constant materialSpec(k(start=0))
@@ -8127,7 +8127,7 @@ boundary condition</a> model.
           Dialog(
             group="Material",
             __Dymola_descriptionLabel=true,
-            enable=matEntOpt == 3 and internalMaterial),
+            enable=thermoOpt == 3 and internalMaterial),
           Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
@@ -8224,8 +8224,8 @@ boundary condition</a> model.
               origin={10,20})));
 
         // Entropy
-        final parameter Boolean diabatic=matEntOpt == MaterialEntropyOpt.ClosedDiabatic
-             or matEntOpt == MaterialEntropyOpt.OpenDiabatic
+        final parameter Boolean diabatic=thermoOpt == ThermoOpt.ClosedDiabatic
+             or thermoOpt == ThermoOpt.OpenDiabatic
           "Diabatic (entropy included)";
         replaceable FCSys.BCs.FaceDifferential.Species.Entropy.Temperature
           entropyBC if diabatic constrainedby
@@ -8234,7 +8234,7 @@ boundary condition</a> model.
           __Dymola_choicesFromPackage=true,
           Dialog(
             group="Entropy",
-            enable=matEntOpt == 2 or matEntOpt == 3,
+            enable=thermoOpt == 2 or thermoOpt == 3,
             __Dymola_descriptionLabel=true),
           Placement(transformation(extent={{50,-60},{70,-40}})));
         parameter Boolean internalEntropy=true "Use internal specification"
@@ -8244,7 +8244,7 @@ boundary condition</a> model.
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Entropy",
-            enable=matEntOpt == 2 or matEntOpt == 3,
+            enable=thermoOpt == 2 or thermoOpt == 3,
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
         replaceable Modelica.Blocks.Sources.Constant entropySpec(k(start=298.15
@@ -8254,21 +8254,21 @@ boundary condition</a> model.
           Dialog(
             group="Entropy",
             __Dymola_descriptionLabel=true,
-            enable=(matEntOpt == 2 or matEntOpt == 3) and diabatic),
+            enable=(thermoOpt == 2 or thermoOpt == 3) and diabatic),
           Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={50,20})));
 
         FCSys.Connectors.FaceGeneric negative(
-          final matEntOpt=matEntOpt,
+          final thermoOpt=thermoOpt,
           final viscous1=viscous1,
           final viscous2=viscous2)
           "Single-species connector for material, linear momentum, and entropy"
           annotation (Placement(transformation(extent={{-110,-60},{-90,-40}}),
               iconTransformation(extent={{-110,-10},{-90,10}})));
         FCSys.Connectors.FaceGeneric positive(
-          final matEntOpt=matEntOpt,
+          final thermoOpt=thermoOpt,
           final viscous1=viscous1,
           final viscous2=viscous2)
           "Single-species connector for material, linear momentum, and entropy"
@@ -8756,7 +8756,7 @@ those generated by the model's <code>connect</code> statements.</p>
     // Store the values of the base constants and units.
     final constant U.Bases.Base base=U.base "Base constants and units";
 
-    parameter Boolean analysis=false "Include optional variables for analysis"
+    parameter Boolean analysis=true "Include optional variables for analysis"
       annotation (choices(__Dymola_checkBox=true));
 
     parameter Q.PressureAbsolute p(nominal=1*U.atm) = 1*U.atm "Pressure";
@@ -8957,7 +8957,7 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
         "static pressures inside the vessel at the height of the corresponding ports, zero flow velocity";
 
       Connectors.FaceGeneric face(
-        final matEntOpt=MaterialEntropyOpt.OpenDiabatic,
+        final thermoOpt=ThermoOpt.OpenDiabatic,
         final viscous1=false,
         final viscous2=false)
         "Connection to a face of a FCSys.Subregions.Species model"

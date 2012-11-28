@@ -77,7 +77,6 @@ div.sidebar h3 a {
 }
 
 div.sidebar ul {
-    position: fixed;
     padding-left: 1.5em;
     margin-top: 7px;
     padding: 0;

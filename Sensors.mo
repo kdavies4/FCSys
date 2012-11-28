@@ -2567,12 +2567,12 @@ sensor</a> models.
 
         parameter FCSys.BaseClasses.Axis axis=Axis.x "Axis normal to the face";
 
-        parameter MaterialEntropyOpt matEntOpt=MaterialEntropyOpt.ClosedAdiabatic
+        parameter ThermoOpt thermoOpt=ThermoOpt.ClosedAdiabatic
           "Options for material and entropy subconnectors"
           annotation (Dialog(compact=true));
 
         // Material
-        final parameter Boolean open=matEntOpt == MaterialEntropyOpt.OpenDiabatic
+        final parameter Boolean open=thermoOpt == ThermoOpt.OpenDiabatic
           "Open" annotation (choices(__Dymola_checkBox=true), Dialog(
             group="Material",
             compact=true,
@@ -2600,8 +2600,8 @@ sensor</a> models.
           annotation (Placement(transformation(extent={{10,-6},{30,14}})));
 
         // Entropy
-        final parameter Boolean diabatic=matEntOpt == MaterialEntropyOpt.ClosedDiabatic
-             or matEntOpt == MaterialEntropyOpt.OpenDiabatic
+        final parameter Boolean diabatic=thermoOpt == ThermoOpt.ClosedDiabatic
+             or thermoOpt == ThermoOpt.OpenDiabatic
           "Diabatic (entropy included)"
           annotation (choices(__Dymola_checkBox=true), Dialog(compact=true));
         FCSys.Sensors.Face.Species.Temperature temperature if diabatic
@@ -2609,7 +2609,7 @@ sensor</a> models.
           annotation (Placement(transformation(extent={{50,-6},{70,14}})));
 
         FCSys.Connectors.FaceGeneric face(
-          final matEntOpt=matEntOpt,
+          final thermoOpt=thermoOpt,
           final viscous1=viscous1,
           final viscous2=viscous2)
           "Single-species connector for material, linear momentum, and entropy"
@@ -4865,12 +4865,12 @@ sensor</a> model.
 
         parameter FCSys.BaseClasses.Axis axis=Axis.x "Axis normal to the face";
 
-        parameter MaterialEntropyOpt matEntOpt=MaterialEntropyOpt.ClosedAdiabatic
+        parameter ThermoOpt thermoOpt=ThermoOpt.ClosedAdiabatic
           "Options for material and entropy subconnectors"
           annotation (Dialog(compact=true));
 
         // Material
-        final parameter Boolean open=matEntOpt == MaterialEntropyOpt.OpenDiabatic
+        final parameter Boolean open=thermoOpt == ThermoOpt.OpenDiabatic
           "Open" annotation (choices(__Dymola_checkBox=true), Dialog(
             group="Material",
             compact=true,
@@ -4901,8 +4901,8 @@ sensor</a> model.
           annotation (Placement(transformation(extent={{10,-10},{30,10}})));
 
         // Entropy
-        final parameter Boolean diabatic=matEntOpt == MaterialEntropyOpt.ClosedDiabatic
-             or matEntOpt == MaterialEntropyOpt.OpenDiabatic
+        final parameter Boolean diabatic=thermoOpt == ThermoOpt.ClosedDiabatic
+             or thermoOpt == ThermoOpt.OpenDiabatic
           "Diabatic (entropy included)"
           annotation (choices(__Dymola_checkBox=true), Dialog(compact=true));
         Entropy.Temperature temperature if diabatic and effort
@@ -4913,7 +4913,7 @@ sensor</a> model.
           annotation (Placement(transformation(extent={{50,-38},{70,-18}})));
 
         FCSys.Connectors.FaceGeneric negative(
-          final matEntOpt=matEntOpt,
+          final thermoOpt=thermoOpt,
           final viscous1=viscous1,
           final viscous2=viscous2)
           "Negative-side connector for material, linear momentum, and entropy"
@@ -4930,7 +4930,7 @@ sensor</a> model.
               origin={0,-98})));
 
         FCSys.Connectors.FaceGeneric positive(
-          final matEntOpt=matEntOpt,
+          final thermoOpt=thermoOpt,
           final viscous1=viscous1,
           final viscous2=viscous2)
           "Positive-side connector for material, linear momentum, and entropy"

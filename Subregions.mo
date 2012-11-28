@@ -164,15 +164,15 @@ package Subregions
                   =2*U.A))),
           ionomer('H+'(redeclare
                 FCSys.BCs.Face.Species.Material.PotentialElectrochemical
-                materialBC, materialSpec(k(start=10*U.ohm))))),
-        defaults(analysis=false));
+                materialBC, materialSpec(k(start=10*U.ohm))))));
 
-      // ** subregion(gas(H2(setTemp=true)), graphite(C(setTemp=true))),
+      // **Why does pressure of H2 go so high?  Need to lower the reaction resistance?
 
-      //redeclare FCSys.BCs.Face.Species.Material.Current materialBC,
-      // **temp setTemps
       annotation (
-        experiment(StopTime=1000),
+        experiment(
+          StopTime=1000,
+          NumberOfIntervals=5000,
+          Tolerance=1e-06),
         experimentSetupOutput,
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionHOR.mos"));
@@ -188,8 +188,6 @@ package Subregions
         inclH2O=true,
         'inclH+'=true,
         inclO2=true,
-        subregion(gas(H2O(setTemp=true), O2(initMethX=InitMethScalar.None,
-                initMethTemp=InitMethScalar.None))),
         bC2(
           gas(H2O(redeclare
                 FCSys.BCs.Face.Species.Material.PotentialElectrochemical
@@ -206,14 +204,12 @@ package Subregions
                 materialBC, materialSpec(k(start=10*U.ohm))))),
         defaults(analysis=false));
 
-      extends Modelica.Icons.UnderConstruction;
-      // **temp setTemps
       annotation (
-        experiment(StopTime=1000, Tolerance=1e-06),
+        experiment(StopTime=0.08, Tolerance=1e-06),
         experimentSetupOutput,
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionORR.mos"));
-
+      // **temp small stop time
     end SubregionORR;
 
     model SubregionsH2 "Test a one-dimensional array of subregions"
@@ -513,17 +509,8 @@ package Subregions
       extends SubregionsH2(
         inclC=true,
         inclH2=true,
-        inclH2O=true,
-        subregion1(gas(H2O(initMethX=InitMethScalar.None, initMethTemp=
-                  InitMethScalar.None))),
-        subregions(gas(H2O(initMethX=InitMethScalar.None, initMethTemp=
-                  InitMethScalar.None))),
-        subregion2(gas(H2O(initMethX=InitMethScalar.None, initMethTemp=
-                  InitMethScalar.None))));
+        inclH2O=true);
 
-      // **integrate the initMeth into phase model.
-      extends Modelica.Icons.UnderConstruction;
-      // **stiff
       annotation (
         experiment(StopTime=8, Tolerance=1e-06),
         experimentSetupOutput,
@@ -583,8 +570,6 @@ package Subregions
         inclH2O=true,
         'inclH+'=true,
         inclC19HF37O5S=true);
-      extends Modelica.Icons.UnderConstruction;
-      // **fails on simulation.
       annotation (
         experiment(StopTime=150, Tolerance=1e-06),
         experimentSetupOutput,
@@ -804,7 +789,6 @@ package Subregions
         experimentSetupOutput,
         Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.H2_O2_H2ODynamic.mos"));
-
     end H2_O2_H2ODynamic;
 
     model H2O_H2ODynamic
@@ -913,25 +897,21 @@ package Subregions
 
       // Conservation of material
       der(N)/U.s = chemical.Ndot;
-      annotation (defaultComponentName="species", Icon(graphics={
-            Rectangle(
-              extent={{-100,40},{100,-40}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Line(
-              points={{-100,-40},{100,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{-100,-40},{-100,40},{100,40},{100,-40}},
-              pattern=LinePattern.None,
-              smooth=Smooth.None),
-            Text(
-              extent={{-100,-20},{100,20}},
-              textString="%name",
-              lineColor={0,0,0})}));
+      annotation (defaultComponentName="species", Icon(graphics={Rectangle(
+                  extent={{-100,40},{100,-40}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Line(
+                  points={{-100,-40},{100,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),Line(
+                  points={{-100,-40},{-100,40},{100,40},{100,-40}},
+                  pattern=LinePattern.None,
+                  smooth=Smooth.None),Text(
+                  extent={{-100,-20},{100,20}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
     end SimpleSpecies;
 
     model Cell "Test both half reactions of a cell"
@@ -1370,8 +1350,8 @@ package Subregions
       HideResult=true,
       Dialog(tab="Assumptions"),
       choices(__Dymola_checkBox=true));
-    // Note:  This is listed above the extends clause so that it is
-    // listed first in the parameter dialog.
+    // Note:  This is listed above the extends clause so that it is listed
+    // first in the parameter dialog.
     extends BaseClasses.PartialSubregion;
 
     replaceable FCSys.Subregions.Phases.Gas gas(inclH2O=true, final inclLin={
@@ -1383,12 +1363,8 @@ package Subregions
             "Phases"), Placement(transformation(extent={{-10,-10},{10,10}})));
 
     replaceable FCSys.Subregions.Phases.Ionomer ionomer(final inclLin={inclLinX,
-          inclLinY,inclLinZ},C19HF37O5S(initMethTemp=if graphite.inclC then
-            InitMethScalar.None else InitMethScalar.Temperature,T(stateSelect=
-              if graphite.inclC then StateSelect.never else StateSelect.prefer)))
-      "Ionomer" annotation (Dialog(group="Phases"), Placement(transformation(
-            extent={{-10,-10},{10,10}})));
-    // **temp stateselect, initmeth
+          inclLinY,inclLinZ}) "Ionomer" annotation (Dialog(group="Phases"),
+        Placement(transformation(extent={{-10,-10},{10,10}})));
     /*
   replaceable FCSys.Subregions.Phases.Liquid liquid(final inclLin={inclLinX,
         inclLinY,inclLinZ})  "Liquid" annotation (
@@ -1663,7 +1639,6 @@ package Subregions
 
       Icon(graphics),
       Diagram(graphics));
-
   end Subregion;
 
   model SubregionNoGraphite "Subregion with all phases except graphite"
@@ -1673,8 +1648,8 @@ package Subregions
       HideResult=true,
       choices(__Dymola_checkBox=true),
       Dialog(tab="Assumptions"));
-    // Note:  This is listed above the extension clause so that it is
-    // listed first in the parameter dialog.
+    // Note:  This is listed above the extension clause so that it is listed
+    // first in the parameter dialog.
     extends BaseClasses.PartialSubregion;
 
     replaceable FCSys.Subregions.Phases.Gas gas(
@@ -1791,7 +1766,6 @@ package Subregions
 
       Icon(graphics),
       Diagram(graphics));
-
   end SubregionNoGraphite;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
@@ -1801,8 +1775,8 @@ package Subregions
       HideResult=true,
       choices(__Dymola_checkBox=true),
       Dialog(tab="Assumptions"));
-    // Note:  This is listed above the extends clause so that it is
-    // listed first in the parameter dialog.
+    // Note:  This is listed above the extends clause so that it is listed
+    // first in the parameter dialog.
     extends BaseClasses.PartialSubregion;
 
     replaceable FCSys.Subregions.Phases.Gas gas(
@@ -1917,14 +1891,15 @@ package Subregions
 
       Icon(graphics),
       Diagram(graphics));
-
   end SubregionNoIonomer;
 
   package Phases "Phases or mixtures of species"
     extends Modelica.Icons.Package;
     model Phase "Phase with all species conditionally included"
       extends BaseClasses.NullPhase(final n_spec=countTrue({inclC,
-            inclC19HF37O5S,'incle-',inclH2,inclH2O,'inclH+',inclN2,inclO2}));
+            inclC19HF37O5S,'incle-',inclH2,inclH2O,'inclH+',inclN2,inclO2}),
+          common(phi(fixed=if inclC or inclC19HF37O5S then fill(false, n_lin)
+                 else {initXVel,initYVel,initZVel}[cartAxes])));
 
       parameter Boolean inclReact=true "Include reaction(s), as appropriate"
         annotation (
@@ -1942,13 +1917,15 @@ package Subregions
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      replaceable Species.C.Graphite.Fixed C(
+      replaceable Species.C.Graphite.Fixed C if inclC constrainedby
+        Species.Species(
         final k=k,
         final inclLin=inclLin,
-        phi(each stateSelect=if reduce and n_spec > 1 then StateSelect.default
-               else StateSelect.prefer),
-        T(stateSelect=if reduce and n_spec > 1 then StateSelect.default else
-              StateSelect.prefer)) if inclC constrainedby Species.Species
+        initMethTemp=if initTemp and reduceFinal then InitMethScalar.None else
+            InitMethScalar.Temperature,
+        phi(each stateSelect=if reduceFinal then StateSelect.default else
+              StateSelect.prefer),
+        T(stateSelect=if reduceFinal then StateSelect.default else StateSelect.prefer))
         "C model" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
@@ -1967,14 +1944,15 @@ package Subregions
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      replaceable Species.C19HF37O5S.Solid.Fixed C19HF37O5S(
+      replaceable Species.C19HF37O5S.Solid.Fixed C19HF37O5S if inclC19HF37O5S
+        constrainedby Species.Species(
         final k=k,
         final inclLin=inclLin,
-        phi(each stateSelect=if reduce and n_spec > 1 then StateSelect.default
-               else StateSelect.prefer),
-        T(stateSelect=if reduce and n_spec > 1 then StateSelect.default else
-              StateSelect.prefer)) if inclC19HF37O5S constrainedby
-        Species.Species
+        initMethTemp=if initTemp and reduceFinal then InitMethScalar.None else
+            InitMethScalar.Temperature,
+        phi(each stateSelect=if reduceFinal then StateSelect.default else
+              StateSelect.prefer),
+        T(stateSelect=if reduceFinal then StateSelect.default else StateSelect.prefer))
         "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S model</html>"
         annotation (
         __Dymola_choicesFromPackage=true,
@@ -1993,13 +1971,21 @@ package Subregions
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      replaceable Species.'e-'.Graphite.Fixed 'e-'(
+      replaceable Species.'e-'.Graphite.Fixed 'e-' if 'incle-' constrainedby
+        Species.Species(
         final k=k,
         final inclLin=inclLin,
-        phi(each stateSelect=if reduce and n_spec > 1 then StateSelect.default
-               else StateSelect.prefer),
-        T(stateSelect=if reduce and n_spec > 1 then StateSelect.default else
-              StateSelect.prefer)) if 'incle-' constrainedby Species.Species
+        initMethX=if (initXVel or inclC or inclC19HF37O5S) and reduceFinal
+             then InitMethLinMom.None else InitMethLinMom.Velocity,
+        initMethY=if (initYVel or inclC or inclC19HF37O5S) and reduceFinal
+             then InitMethLinMom.None else InitMethLinMom.Velocity,
+        initMethZ=if (initZVel or inclC or inclC19HF37O5S) and reduceFinal
+             then InitMethLinMom.None else InitMethLinMom.Velocity,
+        initMethTemp=if initTemp and reduceFinal then InitMethScalar.None else
+            InitMethScalar.Temperature,
+        phi(each stateSelect=if reduceFinal then StateSelect.default else
+              StateSelect.prefer),
+        T(stateSelect=if reduceFinal then StateSelect.default else StateSelect.prefer))
         "<html>'e-' model</html>" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
@@ -2017,13 +2003,21 @@ package Subregions
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      replaceable Species.H2.Gas.Fixed H2(
+      replaceable Species.H2.Gas.Fixed H2 if inclH2 constrainedby
+        Species.Species(
         final k=k,
         final inclLin=inclLin,
-        phi(each stateSelect=if reduce and n_spec > 1 then StateSelect.default
-               else StateSelect.prefer),
-        T(stateSelect=if reduce and n_spec > 1 then StateSelect.default else
-              StateSelect.prefer)) if inclH2 constrainedby Species.Species
+        initMethX=if (initXVel or inclC or inclC19HF37O5S) and reduceFinal
+             then InitMethLinMom.None else InitMethLinMom.Velocity,
+        initMethY=if (initYVel or inclC or inclC19HF37O5S) and reduceFinal
+             then InitMethLinMom.None else InitMethLinMom.Velocity,
+        initMethZ=if (initZVel or inclC or inclC19HF37O5S) and reduceFinal
+             then InitMethLinMom.None else InitMethLinMom.Velocity,
+        initMethTemp=if initTemp and reduceFinal then InitMethScalar.None else
+            InitMethScalar.Temperature,
+        phi(each stateSelect=if reduceFinal then StateSelect.default else
+              StateSelect.prefer),
+        T(stateSelect=if reduceFinal then StateSelect.default else StateSelect.prefer))
         "<html>H<sub>2</sub> model</html>" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
@@ -2041,13 +2035,21 @@ package Subregions
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      replaceable Species.H2O.Gas.Fixed H2O(
+      replaceable Species.H2O.Gas.Fixed H2O if inclH2O constrainedby
+        Species.Species(
         final k=k,
         final inclLin=inclLin,
-        phi(each stateSelect=if reduce and n_spec > 1 then StateSelect.default
-               else StateSelect.prefer),
-        T(stateSelect=if reduce and n_spec > 1 then StateSelect.default else
-              StateSelect.prefer)) if inclH2O constrainedby Species.Species
+        initMethX=if (initXVel or inclC or inclC19HF37O5S) and reduceFinal
+             then InitMethLinMom.None else InitMethLinMom.Velocity,
+        initMethY=if (initYVel or inclC or inclC19HF37O5S) and reduceFinal
+             then InitMethLinMom.None else InitMethLinMom.Velocity,
+        initMethZ=if (initZVel or inclC or inclC19HF37O5S) and reduceFinal
+             then InitMethLinMom.None else InitMethLinMom.Velocity,
+        initMethTemp=if initTemp and reduceFinal then InitMethScalar.None else
+            InitMethScalar.Temperature,
+        phi(each stateSelect=if reduceFinal then StateSelect.default else
+              StateSelect.prefer),
+        T(stateSelect=if reduceFinal then StateSelect.default else StateSelect.prefer))
         "<html>H<sub>2</sub>O model</html>" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
@@ -2065,13 +2067,21 @@ package Subregions
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      replaceable Species.'H+'.Solid.Fixed 'H+'(
+      replaceable Species.'H+'.Solid.Fixed 'H+' if 'inclH+' constrainedby
+        Species.Species(
         final k=k,
         final inclLin=inclLin,
-        phi(each stateSelect=if reduce and n_spec > 1 then StateSelect.default
-               else StateSelect.prefer),
-        T(stateSelect=if reduce and n_spec > 1 then StateSelect.default else
-              StateSelect.prefer)) if 'inclH+' constrainedby Species.Species
+        initMethX=if initXVel and reduceFinal then InitMethLinMom.None else
+            InitMethLinMom.Velocity,
+        initMethY=if initYVel and reduceFinal then InitMethLinMom.None else
+            InitMethLinMom.Velocity,
+        initMethZ=if initZVel and reduceFinal then InitMethLinMom.None else
+            InitMethLinMom.Velocity,
+        initMethTemp=if initTemp and reduceFinal then InitMethScalar.None else
+            InitMethScalar.Temperature,
+        phi(each stateSelect=if reduceFinal then StateSelect.default else
+              StateSelect.prefer),
+        T(stateSelect=if reduceFinal then StateSelect.default else StateSelect.prefer))
         "<html>H<sup>+</sup> model</html>" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
@@ -2089,13 +2099,21 @@ package Subregions
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      replaceable Species.N2.Gas.Fixed N2(
+      replaceable Species.N2.Gas.Fixed N2 if inclN2 constrainedby
+        Species.Species(
         final k=k,
         final inclLin=inclLin,
-        phi(each stateSelect=if reduce and n_spec > 1 then StateSelect.default
-               else StateSelect.prefer),
-        T(stateSelect=if reduce and n_spec > 1 then StateSelect.default else
-              StateSelect.prefer)) if inclN2 constrainedby Species.Species
+        initMethX=if (initXVel or inclC or inclC19HF37O5S) and reduceFinal
+             then InitMethLinMom.None else InitMethLinMom.Velocity,
+        initMethY=if (initYVel or inclC or inclC19HF37O5S) and reduceFinal
+             then InitMethLinMom.None else InitMethLinMom.Velocity,
+        initMethZ=if (initZVel or inclC or inclC19HF37O5S) and reduceFinal
+             then InitMethLinMom.None else InitMethLinMom.Velocity,
+        initMethTemp=if initTemp and reduceFinal then InitMethScalar.None else
+            InitMethScalar.Temperature,
+        phi(each stateSelect=if reduceFinal then StateSelect.default else
+              StateSelect.prefer),
+        T(stateSelect=if reduceFinal then StateSelect.default else StateSelect.prefer))
         "<html>N<sub>2</sub> model</html>" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
@@ -2113,13 +2131,21 @@ package Subregions
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      replaceable Species.O2.Gas.Fixed O2(
+      replaceable Species.O2.Gas.Fixed O2 if inclO2 constrainedby
+        Species.Species(
         final k=k,
         final inclLin=inclLin,
-        phi(each stateSelect=if reduce and n_spec > 1 then StateSelect.default
-               else StateSelect.prefer),
-        T(stateSelect=if reduce and n_spec > 1 then StateSelect.default else
-              StateSelect.prefer)) if inclO2 constrainedby Species.Species
+        initMethX=if (initXVel or inclC or inclC19HF37O5S) and reduceFinal
+             then InitMethLinMom.None else InitMethLinMom.Velocity,
+        initMethY=if (initYVel or inclC or inclC19HF37O5S) and reduceFinal
+             then InitMethLinMom.None else InitMethLinMom.Velocity,
+        initMethZ=if (initZVel or inclC or inclC19HF37O5S) and reduceFinal
+             then InitMethLinMom.None else InitMethLinMom.Velocity,
+        initMethTemp=if initTemp and reduceFinal then InitMethScalar.None else
+            InitMethScalar.Temperature,
+        phi(each stateSelect=if reduceFinal then StateSelect.default else
+              StateSelect.prefer),
+        T(stateSelect=if reduceFinal then StateSelect.default else StateSelect.prefer))
         "<html>O<sub>2</sub> model</html>" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
@@ -3398,7 +3424,12 @@ package Subregions
 
       annotation (
         defaultComponentPrefixes="replaceable",
-        Documentation(info="<html>
+        Documentation(info="<html>**If C or C19HF37O5S is included, then initXVel, initYVel, and initZVel are 
+    ignored.  Velocity is not initialized because it is set by C or C19HF37O5S. 
+    
+    **If both C and C19HF37O5S are included, then reduce must be set to false (to avoid singularity, since
+    both of those species set velocity).
+    
     <p>Notes:<ul>
     <li>Only one constant-volume species may be enabled at once.  A failure will occur if
     <code>inclC</code> and <code>inclC19HF37O5S</code> are both <code>true</code>.</li>
@@ -3412,7 +3443,6 @@ package Subregions
 
         Diagram(graphics),
         Icon(graphics));
-
     end Phase;
 
     model Gas "Phase to represent gas"
@@ -3441,11 +3471,18 @@ package Subregions
         Species.Species(
         final k=k,
         final inclLin=inclLin,
-        phi(each stateSelect=if reduce and n_spec > 1 then StateSelect.default
-               else StateSelect.prefer),
-        T(stateSelect=if reduce and n_spec > 1 then StateSelect.default else
-              StateSelect.prefer)) "<html>H<sub>2</sub> model</html>"
-        annotation (
+        initMethX=if initXVel and reduceFinal then InitMethLinMom.None else
+            InitMethLinMom.Velocity,
+        initMethY=if initYVel and reduceFinal then InitMethLinMom.None else
+            InitMethLinMom.Velocity,
+        initMethZ=if initZVel and reduceFinal then InitMethLinMom.None else
+            InitMethLinMom.Velocity,
+        initMethTemp=if initTemp and reduceFinal then InitMethScalar.None else
+            InitMethScalar.Temperature,
+        phi(each stateSelect=if reduceFinal then StateSelect.default else
+              StateSelect.prefer),
+        T(stateSelect=if reduceFinal then StateSelect.default else StateSelect.prefer))
+        "<html>H<sub>2</sub> model</html>" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
           group="Species",
@@ -3466,11 +3503,18 @@ package Subregions
         Species.Species(
         final k=k,
         final inclLin=inclLin,
-        phi(each stateSelect=if reduce and n_spec > 1 then StateSelect.default
-               else StateSelect.prefer),
-        T(stateSelect=if reduce and n_spec > 1 then StateSelect.default else
-              StateSelect.prefer)) "<html>H<sub>2</sub>O model</html>"
-        annotation (
+        initMethX=if initXVel and reduceFinal then InitMethLinMom.None else
+            InitMethLinMom.Velocity,
+        initMethY=if initYVel and reduceFinal then InitMethLinMom.None else
+            InitMethLinMom.Velocity,
+        initMethZ=if initZVel and reduceFinal then InitMethLinMom.None else
+            InitMethLinMom.Velocity,
+        initMethTemp=if initTemp and reduceFinal then InitMethScalar.None else
+            InitMethScalar.Temperature,
+        phi(each stateSelect=if reduceFinal then StateSelect.default else
+              StateSelect.prefer),
+        T(stateSelect=if reduceFinal then StateSelect.default else StateSelect.prefer))
+        "<html>H<sub>2</sub>O model</html>" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
           group="Species",
@@ -3491,11 +3535,18 @@ package Subregions
         Species.Species(
         final k=k,
         final inclLin=inclLin,
-        phi(each stateSelect=if reduce and n_spec > 1 then StateSelect.default
-               else StateSelect.prefer),
-        T(stateSelect=if reduce and n_spec > 1 then StateSelect.default else
-              StateSelect.prefer)) "<html>N<sub>2</sub> model</html>"
-        annotation (
+        initMethX=if initXVel and reduceFinal then InitMethLinMom.None else
+            InitMethLinMom.Velocity,
+        initMethY=if initYVel and reduceFinal then InitMethLinMom.None else
+            InitMethLinMom.Velocity,
+        initMethZ=if initZVel and reduceFinal then InitMethLinMom.None else
+            InitMethLinMom.Velocity,
+        initMethTemp=if initTemp and reduceFinal then InitMethScalar.None else
+            InitMethScalar.Temperature,
+        phi(each stateSelect=if reduceFinal then StateSelect.default else
+              StateSelect.prefer),
+        T(stateSelect=if reduceFinal then StateSelect.default else StateSelect.prefer))
+        "<html>N<sub>2</sub> model</html>" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
           group="Species",
@@ -3516,11 +3567,18 @@ package Subregions
         Species.Species(
         final k=k,
         final inclLin=inclLin,
-        phi(each stateSelect=if reduce and n_spec > 1 then StateSelect.default
-               else StateSelect.prefer),
-        T(stateSelect=if reduce and n_spec > 1 then StateSelect.default else
-              StateSelect.prefer)) "<html>O<sub>2</sub> model</html>"
-        annotation (
+        initMethX=if initXVel and reduceFinal then InitMethLinMom.None else
+            InitMethLinMom.Velocity,
+        initMethY=if initYVel and reduceFinal then InitMethLinMom.None else
+            InitMethLinMom.Velocity,
+        initMethZ=if initZVel and reduceFinal then InitMethLinMom.None else
+            InitMethLinMom.Velocity,
+        initMethTemp=if initTemp and reduceFinal then InitMethScalar.None else
+            InitMethScalar.Temperature,
+        phi(each stateSelect=if reduceFinal then StateSelect.default else
+              StateSelect.prefer),
+        T(stateSelect=if reduceFinal then StateSelect.default else StateSelect.prefer))
+        "<html>O<sub>2</sub> model</html>" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
           group="Species",
@@ -4145,11 +4203,12 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
-
     end Gas;
 
     model Graphite "Phase to represent graphite"
-      extends BaseClasses.NullPhase(final n_spec=countTrue({inclC,'incle-'}));
+      extends BaseClasses.NullPhase(final n_spec=countTrue({inclC,'incle-'}),
+          common(phi(fixed=if inclC then fill(false, n_lin) else {initXVel,
+                initYVel,initZVel}[cartAxes])));
 
       // Conditionally include species.
       parameter Boolean inclC=false "Carbon (C)" annotation (
@@ -4164,10 +4223,12 @@ package Subregions
         Species.Species(
         final k=k,
         final inclLin=inclLin,
-        phi(each stateSelect=if reduce and n_spec > 1 then StateSelect.default
-               else StateSelect.prefer),
-        T(stateSelect=if reduce and n_spec > 1 then StateSelect.default else
-              StateSelect.prefer)) "C model" annotation (
+        initMethTemp=if initTemp and reduceFinal then InitMethScalar.None else
+            InitMethScalar.Temperature,
+        phi(each stateSelect=if reduceFinal then StateSelect.default else
+              StateSelect.prefer),
+        T(stateSelect=if reduceFinal then StateSelect.default else StateSelect.prefer))
+        "C model" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
           group="Species",
@@ -4188,11 +4249,18 @@ package Subregions
         Species.Species(
         final k=k,
         final inclLin=inclLin,
-        phi(each stateSelect=if reduce and n_spec > 1 then StateSelect.default
-               else StateSelect.prefer),
-        T(stateSelect=if reduce and n_spec > 1 then StateSelect.default else
-              StateSelect.prefer)) "<html>e<sup>-</sup> model</html>"
-        annotation (
+        initMethX=if (initXVel or inclC) and reduceFinal then InitMethLinMom.None
+             else InitMethLinMom.Velocity,
+        initMethY=if (initYVel or inclC) and reduceFinal then InitMethLinMom.None
+             else InitMethLinMom.Velocity,
+        initMethZ=if (initZVel or inclC) and reduceFinal then InitMethLinMom.None
+             else InitMethLinMom.Velocity,
+        initMethTemp=if initTemp and reduceFinal then InitMethScalar.None else
+            InitMethScalar.Temperature,
+        phi(each stateSelect=if reduceFinal then StateSelect.default else
+              StateSelect.prefer),
+        T(stateSelect=if reduceFinal then StateSelect.default else StateSelect.prefer))
+        "<html>e<sup>-</sup> model</html>" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
           group="Species",
@@ -4493,16 +4561,19 @@ package Subregions
 
       annotation (
         defaultComponentPrefixes="replaceable",
-        Documentation(info="<html><p>For more information, see the
+        Documentation(info="<html>**If C is included, then initXVel, initYVel, and initZVel are 
+    ignored.  Velocity is not initialized because it is set by C. 
+    
+    <p>For more information, see the
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
-
     end Graphite;
 
     model Ionomer "Phase to represent ionomer"
       extends BaseClasses.NullPhase(final n_spec=countTrue({inclC19HF37O5S,
-            inclH2O,'inclH+'}));
+            inclH2O,'inclH+'}), common(phi(fixed=if inclC19HF37O5S then fill(
+                false, n_lin) else {initXVel,initYVel,initZVel}[cartAxes])));
 
       // Conditionally include species.
       parameter Boolean inclC19HF37O5S=false
@@ -4519,10 +4590,11 @@ package Subregions
         constrainedby Species.Species(
         final k=k,
         final inclLin=inclLin,
-        phi(each stateSelect=if reduce and n_spec > 1 then StateSelect.default
-               else StateSelect.prefer),
-        T(stateSelect=if reduce and n_spec > 1 then StateSelect.default else
-              StateSelect.prefer))
+        initMethTemp=if initTemp and reduceFinal then InitMethScalar.None else
+            InitMethScalar.Temperature,
+        phi(each stateSelect=if reduceFinal then StateSelect.default else
+              StateSelect.prefer),
+        T(stateSelect=if reduceFinal then StateSelect.default else StateSelect.prefer))
         "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S model</html>"
         annotation (
         __Dymola_choicesFromPackage=true,
@@ -4545,11 +4617,18 @@ package Subregions
         Species.Species(
         final k=k,
         final inclLin=inclLin,
-        phi(each stateSelect=if reduce and n_spec > 1 then StateSelect.default
-               else StateSelect.prefer),
-        T(stateSelect=if reduce and n_spec > 1 then StateSelect.default else
-              StateSelect.prefer)) "<html>H<sub>2</sub>O model</html>"
-        annotation (
+        initMethX=if (initXVel or inclC19HF37O5S) and reduceFinal then
+            InitMethLinMom.None else InitMethLinMom.Velocity,
+        initMethY=if (initYVel or inclC19HF37O5S) and reduceFinal then
+            InitMethLinMom.None else InitMethLinMom.Velocity,
+        initMethZ=if (initZVel or inclC19HF37O5S) and reduceFinal then
+            InitMethLinMom.None else InitMethLinMom.Velocity,
+        initMethTemp=if initTemp then InitMethScalar.None else InitMethScalar.Temperature,
+
+        phi(each stateSelect=if reduceFinal then StateSelect.default else
+              StateSelect.prefer),
+        T(stateSelect=if reduceFinal then StateSelect.default else StateSelect.prefer))
+        "<html>H<sub>2</sub>O model</html>" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
           group="Species",
@@ -4570,11 +4649,18 @@ package Subregions
         Species.Species(
         final k=k,
         final inclLin=inclLin,
-        phi(each stateSelect=if reduce and n_spec > 1 then StateSelect.default
-               else StateSelect.prefer),
-        T(stateSelect=if reduce and n_spec > 1 then StateSelect.default else
-              StateSelect.prefer)) "<html>H<sup>+</sup> model</html>"
-        annotation (
+        initMethX=if (initXVel or inclC19HF37O5S) and reduceFinal then
+            InitMethLinMom.None else InitMethLinMom.Velocity,
+        initMethY=if (initYVel or inclC19HF37O5S) and reduceFinal then
+            InitMethLinMom.None else InitMethLinMom.Velocity,
+        initMethZ=if (initZVel or inclC19HF37O5S) and reduceFinal then
+            InitMethLinMom.None else InitMethLinMom.Velocity,
+        initMethTemp=if initTemp and reduceFinal then InitMethScalar.None else
+            InitMethScalar.Temperature,
+        phi(each stateSelect=if reduceFinal then StateSelect.default else
+              StateSelect.prefer),
+        T(stateSelect=if reduceFinal then StateSelect.default else StateSelect.prefer))
+        "<html>H<sup>+</sup> model</html>" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
           group="Species",
@@ -5072,11 +5158,13 @@ package Subregions
 
       annotation (
         defaultComponentPrefixes="replaceable",
-        Documentation(info="<html><p>For more information, see the
+        Documentation(info="<html>**If C19HF37O5S is included, then initXVel, initYVel, and initZVel are 
+    ignored.  Velocity is not initialized because it is set by C19HF37O5S. 
+    
+    <p>For more information, see the
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
-
     end Ionomer;
 
     model Liquid "Phase to represent liquid"
@@ -5097,11 +5185,18 @@ package Subregions
         Species.Species(
         final k=k,
         final inclLin=inclLin,
-        phi(each stateSelect=if reduce and n_spec > 1 then StateSelect.default
-               else StateSelect.prefer),
-        T(stateSelect=if reduce and n_spec > 1 then StateSelect.default else
-              StateSelect.prefer)) "<html>H<sub>2</sub>O model</html>"
-        annotation (
+        initMethX=if initXVel and reduceFinal then InitMethLinMom.None else
+            InitMethLinMom.Velocity,
+        initMethY=if initYVel and reduceFinal then InitMethLinMom.None else
+            InitMethLinMom.Velocity,
+        initMethZ=if initZVel and reduceFinal then InitMethLinMom.None else
+            InitMethLinMom.Velocity,
+        initMethTemp=if initTemp and reduceFinal then InitMethScalar.None else
+            InitMethScalar.Temperature,
+        phi(each stateSelect=if reduceFinal then StateSelect.default else
+              StateSelect.prefer),
+        T(stateSelect=if reduceFinal then StateSelect.default else StateSelect.prefer))
+        "<html>H<sub>2</sub>O model</html>" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
           group="Species",
@@ -5274,7 +5369,6 @@ package Subregions
 
         Diagram(graphics),
         Icon(graphics));
-
     end Liquid;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -5302,12 +5396,54 @@ package Subregions
           Dialog(tab="Assumptions", enable=n_spec > 1),
           choices(__Dymola_checkBox=true));
 
+        // Initialization
+        parameter Boolean initXVel=true "Initialize the x component"
+          annotation (
+          compact=true,
+          Dialog(
+            tab="Initialization",
+            group="Velocity",
+            enable=reduceFinal),
+          __Dymola_joinNext=true,
+          choices(__Dymola_checkBox=true));
+        parameter Boolean initYVel=true "Initialize the y component"
+          annotation (
+          compact=true,
+          Dialog(
+            tab="Initialization",
+            group="Velocity",
+            enable=reduceFinal),
+          __Dymola_joinNext=true,
+          choices(__Dymola_checkBox=true));
+        parameter Boolean initZVel=true "Initialize the z component"
+          annotation (
+          compact=true,
+          Dialog(
+            tab="Initialization",
+            group="Velocity",
+            enable=reduceFinal),
+          __Dymola_joinNext=true,
+          choices(__Dymola_checkBox=true));
+        parameter Q.Velocity phi_IC[Axis]={0,0,0}
+          "<html>Initial velocity (<b>&phi;</b><sub>IC</sub>)</html>"
+          annotation (Dialog(tab="Initialization", group="Velocity"));
+        // This is always enabled in the dialog since it is used as a guess value.
+        parameter Boolean initTemp=true "Initialize" annotation (
+          compact=true,
+          Dialog(
+            tab="Initialization",
+            group="Temperature",
+            enable=reduceFinal),
+          choices(__Dymola_checkBox=true));
+
+        parameter Q.TemperatureAbsolute T_IC(nominal=298.15*U.K, start=defaults.T)
+          "<html>Initial temperature (<i>T</i><sub>IC</sub>)</html>"
+          annotation (Dialog(tab="Initialization", group="Temperature"));
+        // This is always enabled in the dialog since it is used as a guess value.
+
         parameter Boolean inclLin[3]={true,false,false}
           "true, if each component of linear momentum is included"
           annotation (Evaluate=true,Dialog(tab="Assumptions"));
-        final parameter Integer n_lin=countTrue(inclLin)
-          "Number of components of linear momentum"
-          annotation (Evaluate=true, HideResult=true);
 
         FCSys.Connectors.InertAmagat inert(final n_lin=n_lin) if n_spec > 0
           annotation (Placement(transformation(extent={{10,-30},{30,-10}}),
@@ -5352,11 +5488,24 @@ package Subregions
 
       protected
         parameter Integer n_spec "Number of species";
+        final parameter Boolean reduceFinal=reduce and n_spec > 1
+          "true, if same velocity and temperature for all (more than 1) species ";
+        final parameter Integer n_lin=countTrue(inclLin)
+          "Number of components of linear momentum"
+          annotation (Evaluate=true, HideResult=true);
+        final parameter Integer cartAxes[n_lin]=index(inclLin)
+          "Cartesian-axis indices of the axes of linear momentum";
 
         Connectors.InertInternal common(
           n_lin=n_lin,
-          phi(each stateSelect=StateSelect.prefer),
-          T(stateSelect=StateSelect.prefer)) if reduce and n_spec > 1
+          phi(
+            each stateSelect=StateSelect.prefer,
+            final start=phi_IC[cartAxes],
+            fixed={initXVel,initYVel,initZVel}[cartAxes]),
+          T(
+            stateSelect=StateSelect.prefer,
+            final start=T_IC,
+            fixed=initTemp)) if reduceFinal
           "Internal connector to directly couple velocity and temperature"
           annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
@@ -5366,6 +5515,10 @@ package Subregions
               rotation=180,
               origin={0,0})));
 
+        outer BCs.Defaults defaults "Default settings" annotation (Placement(
+              transformation(extent={{40,40},{60,60}}), iconTransformation(
+                extent={{-10,90},{10,110}})));
+
       equation
         // Inert interactions
         connect(phaseBoundary.inertA, inert) annotation (Line(
@@ -5374,7 +5527,10 @@ package Subregions
             smooth=Smooth.None));
 
         annotation (
-          Documentation(info="<html><p>Assumptions:
+          Documentation(info="<html>**if one of the species has setTemp=true, then initTemp should be set to false.
+    The temperature should not be not initialized here since it there would be too many initialization equations.  same for initXVel, initYVel, initZVel.
+    
+    <p>Assumptions:
            <ol>
            <li>The factors that may cause anisotropic transport (<b><i>k</i></b>)
           are common to all of the species within the phase.</li>
@@ -5383,60 +5539,51 @@ package Subregions
 <p>Notes:<ul>
   <li>The x-axis component of linear momentum is included by default.  At least one component must be included.</li></ul></html>"),
 
-          Icon(graphics={
-              Ellipse(
-                extent={{-40,100},{40,20}},
-                lineColor={127,127,127},
-                startAngle=30,
-                endAngle=149,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{20,-4},{100,-84}},
-                lineColor={127,127,127},
-                startAngle=270,
-                endAngle=390,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{-100,-4},{-20,-84}},
-                lineColor={127,127,127},
-                startAngle=149,
-                endAngle=270,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Polygon(
-                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
-                    94.5,-24},{60,-84}},
-                pattern=LinePattern.None,
-                fillPattern=FillPattern.Sphere,
-                smooth=Smooth.None,
-                fillColor={225,225,225},
-                lineColor={0,0,0}),
-              Line(
-                points={{-60,-84},{60,-84}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{34.5,80},{94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{-34.5,80},{-94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}),
+          Icon(graphics={Ellipse(
+                      extent={{-40,100},{40,20}},
+                      lineColor={127,127,127},
+                      startAngle=30,
+                      endAngle=149,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{20,-4},{100,-84}},
+                      lineColor={127,127,127},
+                      startAngle=270,
+                      endAngle=390,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{-100,-4},{-20,-84}},
+                      lineColor={127,127,127},
+                      startAngle=149,
+                      endAngle=270,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Polygon(
+                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
+                  80},{94.5,-24},{60,-84}},
+                      pattern=LinePattern.None,
+                      fillPattern=FillPattern.Sphere,
+                      smooth=Smooth.None,
+                      fillColor={225,225,225},
+                      lineColor={0,0,0}),Line(
+                      points={{-60,-84},{60,-84}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{34.5,80},{94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{-34.5,80},{-94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}),
           Diagram(graphics));
-
       end NullPhase;
     end BaseClasses;
   end Phases;
@@ -5447,15 +5594,14 @@ package Subregions
       extends BaseClasses.PartialReaction(Xidot(final start=Xidot_IC,final
             fixed=false));
       // Note:  As of Dymola 7.4, the (electrolytic double layer) capacitance
-      // must be included in this model.  If it is external, then Dymola
-      // doesn't eliminate the systems of nonlinear equations that result
-      // from the Butler-Volmer equation.
+      // must be included in this model.  If it is external, then Dymola doesn't
+      // eliminate the systems of nonlinear equations that result from the
+      // Butler-Volmer equation.
 
       // Initialization parameters
-      parameter BaseClasses.InitMethCharge initMeth=InitMethCharge.None
+      parameter BaseClasses.InitMethCharge initMeth=InitMethCharge.ReactionRate
         "Method of initializing the charge"
         annotation (Evaluate=true, Dialog(tab="Initialization"));
-      // **temp None instead of ReactionRate
       parameter FCSys.Quantities.Amount Q_IC(min=-Modelica.Constants.inf) = 0
         "<html>Initial charge (<i>Q</i><sub>IC</sub>)</html>"
         annotation (Dialog(tab="Initialization", enable=initMeth == 2));
@@ -5463,7 +5609,7 @@ package Subregions
       // option, e.g.,
       //     enable=initMeth == InitMethCharge.Charge.
       // Therefore, the values of the enumerations are specified numerically for
-      // this intitial condition and others below.
+      // this initial condition and others below.
       // Note 2:  This parameter is left enabled even if it isn't used to
       // explicitly initialize any states, since it is used as a guess value.
       parameter FCSys.Quantities.Current derQ_IC=0
@@ -5482,10 +5628,10 @@ package Subregions
               {ion1.formula},
               {ion2.formula})) "Stoichiometric coefficients";
       // Note 1:  As of Modelica 3.2 and Dymola 7.4, nu can't be a parameter or
-      // constant even though it isn't time-varying.  The strings that
-      // represent the chemical formulas can't be passed through the
-      // connectors as parameter or constants.  However, the translator
-      // should recognize that these equations are static.
+      // constant even though it isn't time-varying.  The strings that represent
+      // the chemical formulas can't be passed through the connectors as
+      // parameter or constants.  However, the translator should recognize that
+      // these equations are static.
       // Note 2:  This is a Real variable (rather than Integer) to avoid the
       // following warning in Dymola 7.4:
       //     "Cannot differentiate discrete or record variable:
@@ -5498,8 +5644,8 @@ package Subregions
         final start=Q_IC,
         final fixed=false)
         "Particle number of ions, normalized by stoichiometric coefficients";
-      // Note:  The start value is based on the assumption that the product
-      // of the charge number and the stoichiometric coefficient of each ionic
+      // Note:  The start value is based on the assumption that the product of
+      // the charge number and the stoichiometric coefficient of each ionic
       // species is +1 or -1.  The start value is only used as a guess.  It is
       // Q_IC/(z[1]*nu[n_chem + 1]) for the first ionic species (and
       // Q_IC/(z[2]*nu[n_chem + 2] for the second), but z and nu are not
@@ -5511,8 +5657,8 @@ package Subregions
       // Auxiliary variables (for analysis)
       output FCSys.Quantities.Amount Q(stateSelect=StateSelect.never) = CT*
         nuetaPerT if defaults.analysis "Charge";
-      // Note:  This should not be used as a state; the structure of the
-      // problem should not change if it is included.
+      // Note:  This should not be used as a state; the structure of the problem
+      // should not change if it is included.
 
       Connectors.ChemicalInput ion1(final n_lin=n_lin)
         "Connector for 1st electrochemical species" annotation (Placement(
@@ -5542,8 +5688,8 @@ package Subregions
         der(CT*nuetaPerT)/U.s = derQ_IC;
       elseif initMeth == InitMethCharge.ReactionRate then
         Xidot = Xidot_IC;
-        // Else, initMeth == InitMethCharge.None; then, there are no
-        // initial equations.
+        // Else, initMeth == InitMethCharge.None; then, there are no initial
+        // equations.
       end if;
 
     equation
@@ -5555,7 +5701,6 @@ package Subregions
       betaPerLstar*Xidot = exp(alpha*(nu[1:n_chem]*chemical.muPerT + nuetaPerT)
          - epsilonPerT) - exp((alpha - 1)*(nu[1:n_chem]*chemical.muPerT +
         nuetaPerT) - epsilonPerT) "Butler-Volmer equation";
-      //Xidot = 0 "**temp";
       // Note:  As of Dymola 7.4, it is necessary to refer to the preferred
       // state (nuetaPerT) explicitly.  Otherwise, there will be systems of
       // nonlinear equations.
@@ -5566,23 +5711,23 @@ package Subregions
       ion1.mPhidot = semiLinear(
             ion1.m*ion1.Ndot,
             ion1.phi,
-            phi) "Velocity";
-      ion1.Qdot = semiLinear(
+            phi) "Linear momentum";
+      ion1.Hdot = semiLinear(
             ion1.m*ion1.Ndot,
-            ion1.Tsbar,
-            Tsbar) "Temperature times massic entropy";
+            ion1.hbar,
+            hbar) "Energy";
       //
       // 2nd electrochemical species
       ion2.mPhidot = semiLinear(
             ion2.m*ion2.Ndot,
             ion2.phi,
-            phi) "Velocity";
-      ion2.Qdot = semiLinear(
+            phi) "Linear momentum";
+      ion2.Hdot = semiLinear(
             ion2.m*ion2.Ndot,
-            ion2.Tsbar,
-            Tsbar) "Temperature times massic entropy";
-      // TODO:  Consider using stream connectors once they are better
-      // supported (some errors occured in Dymola 7.4).
+            ion2.hbar,
+            hbar) "Energy";
+      // TODO:  Consider using stream connectors once they are better supported
+      // (some errors occurred in Dymola 7.4).
 
       // Conservation
       nu[1:n_chem]*Xidot = chemical.Ndot "Chemical material (no storage)";
@@ -5590,8 +5735,7 @@ package Subregions
       nu[n_chem + 2]*(Xidot + der(Xi)/U.s) = ion2.Ndot "2nd ion";
       zeros(n_lin) = sum(chemical[i].mPhidot for i in 1:n_chem) + ion1.mPhidot
          + ion2.mPhidot "Linear momentum (no storage)";
-      0 = sum(chemical.Qdot) + ion1.Qdot + ion2.Qdot
-        "Thermal energy (no storage)";
+      0 = sum(chemical.Hdot) + ion1.Hdot + ion2.Hdot "Energy (no storage)";
       annotation (
         defaultComponentName="reaction",
         Documentation(info="<html>**Note:  \"voltage\" is the voltage difference across the electrolytic double layer (EDL) capacitor,
@@ -5600,39 +5744,35 @@ package Subregions
     <p>For more information, see the
    <a href=\"modelica://FCSys.Subregions.Reactions.BaseClasses.PartialReaction\">PartialReaction</a> model.</p>
     </html>"),
-        Icon(graphics={
-            Line(
-              points={{-20,26},{-20,-26}},
-              color={208,104,0},
-              smooth=Smooth.None),
-            Line(
-              points={{-100,0},{-20,0}},
-              color={208,104,0},
-              smooth=Smooth.None),
-            Line(
-              points={{20,26},{20,-26}},
-              color={208,104,0},
-              smooth=Smooth.None),
-            Line(
-              points={{20,0},{100,0}},
-              color={208,104,0},
-              smooth=Smooth.None)}),
+        Icon(graphics={Line(
+                  points={{-20,26},{-20,-26}},
+                  color={208,104,0},
+                  smooth=Smooth.None),Line(
+                  points={{-100,0},{-20,0}},
+                  color={208,104,0},
+                  smooth=Smooth.None),Line(
+                  points={{20,26},{20,-26}},
+                  color={208,104,0},
+                  smooth=Smooth.None),Line(
+                  points={{20,0},{100,0}},
+                  color={208,104,0},
+                  smooth=Smooth.None)}),
         Diagram(graphics));
     end Electrochemical;
 
     model Chemical "Model for a chemical reaction"
       extends BaseClasses.PartialReaction(n_chem(min=2) = 0);
       // Note:  In Dymola 7.4, it is necessary to reset n_chem to 0 when
-      // changing its minimum value.  Otherwise, the icon doesn't properly
-      // show the number of chemical species.
+      // changing its minimum value.  Otherwise, the icon doesn't properly show
+      // the number of chemical species.
 
       Integer nu[n_chem]=Chemistry.stoich(chemical.formula)
         "Stoichiometric coefficients";
       // Note 1:  As of Modelica 3.2 and Dymola 7.4, nu can't be a parameter or
-      // constant even though it isn't time-varying.  The strings that
-      // represent the chemical formulas can't be passed through the
-      // connectors as parameters or constants.  However, the translator
-      // should recognize that these equations are static.
+      // constant even though it isn't time-varying.  The strings that represent
+      // the chemical formulas can't be passed through the connectors as
+      // parameters or constants.  However, the translator should recognize that
+      // these equations are static.
 
     equation
       // Reaction rate
@@ -5643,12 +5783,11 @@ package Subregions
       nu[1:n_chem]*Xidot = chemical.Ndot "Chemical material (no storage)";
       zeros(n_lin) = sum(chemical[i].mPhidot for i in 1:n_chem)
         "Linear momentum (no storage)";
-      0 = sum(chemical.Qdot) "Thermal energy (no storage)";
+      0 = sum(chemical.Hdot) "Thermal energy (no storage)";
 
       // Note:  This model is marked as structurally incomplete.  It must have
       // zero species by default (for automatic connector sizing), but at least
       // one species is mathematically required (two for a meaningful reaction).
-
       annotation (
         defaultComponentName="reaction",
         structurallyIncomplete=true,
@@ -5669,19 +5808,19 @@ package Subregions
 
         parameter Integer n_chem(min=1) = 0 "Number of chemical species"
           annotation (Dialog(connectorSizing=true));
-        // Note:  The minimum is 1 for a meaningful electrochemical reaction, but
-        // the default must be 0 to use connectorSizing.
+        // Note:  The minimum is 1 for an electrochemical reaction, but the
+        // default must be 0 to use connectorSizing.
         parameter Integer n_lin=1
           "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
           annotation (Evaluate=true,HideResult=true);
-        input Q.Resistance betaPerLstar=10/U.A
-          "<html>Quotient of resistivity and characteristic length (&beta;/<i>L</i><sup>&#9733;</sup>)</html>"
-          annotation (Dialog);
         parameter Q.Number alpha(
           min=0,
           max=1) = 0.5 "<html>Symmetry factor (&alpha;)</html>";
         parameter Q.Number epsilonPerT=0
           "<html>Additional activation barrier (&epsilon;/<i>T</i> )</html>";
+        input Q.Resistance betaPerLstar=10/U.A
+          "<html>Quotient of resistivity and characteristic length (&beta;/<i>L</i><sup>&#9733;</sup>)</html>"
+          annotation (Dialog);
 
         Q.Current Xidot(nominal=1*U.A) "Reaction rate";
 
@@ -5691,8 +5830,7 @@ package Subregions
 
       protected
         Q.Velocity phi[n_lin](each nominal=1*U.cm/U.s, each start=0) "Velocity";
-        Q.Velocity2 Tsbar(nominal=1*U.V*U.mol/U.g,start=0)
-          "Temperature times massic entropy";
+        Q.Velocity2 hbar(nominal=1*U.V*U.mol/U.g,start=0) "Massic enthalpy";
 
       equation
         // Ideal mixing/upstream discretization
@@ -5701,14 +5839,14 @@ package Subregions
           chemical[i].mPhidot = semiLinear(
                   chemical[i].m*chemical[i].Ndot,
                   chemical[i].phi,
-                  phi) "Velocity";
-          chemical[i].Qdot = semiLinear(
+                  phi) "Linear momentum";
+          chemical[i].Hdot = semiLinear(
                   chemical[i].m*chemical[i].Ndot,
-                  chemical[i].Tsbar,
-                  Tsbar) "Temperature times massic entropy";
+                  chemical[i].hbar,
+                  hbar) "Energy";
         end for;
-        // TODO:  Consider using stream connectors once they are better
-        // supported (some errors occured in Dymola 7.4).
+        // TODO:  Consider using stream connectors once they are better supported
+        // (some errors occurred in Dymola 7.4).
 
         annotation (
           Documentation(info="<html>
@@ -5736,26 +5874,22 @@ package Subregions
     <li>No storage of material, linear momentum, or energy</li></ul>
     </p>
     </html>"),
-          Icon(graphics={
-              Rectangle(
-                extent={{-140,40},{140,80}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Text(
-                extent={{-140,40},{140,80}},
-                textString="%name",
-                lineColor={0,0,0}),
-              Ellipse(
-                extent={{-100,40},{100,-40}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                lineColor={127,127,127},
-                pattern=LinePattern.Dash),
-              Text(
-                extent={{-100,-16},{100,-40}},
-                lineColor={127,127,127},
-                textString="%n_chem")}),
+          Icon(graphics={Rectangle(
+                      extent={{-140,40},{140,80}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-140,40},{140,80}},
+                      textString="%name",
+                      lineColor={0,0,0}),Ellipse(
+                      extent={{-100,40},{100,-40}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      lineColor={127,127,127},
+                      pattern=LinePattern.Dash),Text(
+                      extent={{-100,-16},{100,-40}},
+                      lineColor={127,127,127},
+                      textString="%n_chem")}),
           Diagram(graphics));
       end PartialReaction;
 
@@ -5802,9 +5936,9 @@ package Subregions
                     {100,100}}), graphics),
             Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics={Text(
-                  extent={{-150,90},{-118,52}},
-                  lineColor={0,0,255},
-                  textString="%t.test")}));
+                          extent={{-150,90},{-118,52}},
+                          lineColor={0,0,255},
+                          textString="%t.test")}));
 
         end Calibrated;
 
@@ -5838,8 +5972,6 @@ package Subregions
             redeclare parameter Q.Resistivity beta_Phi=Data.gamma(),
             redeclare parameter Q.ResistivityThermal beta_S=Data.gamma(),
             redeclare parameter Q.ResistivityThermal gamma_S=U.m*U.K/(11.1*U.W));
-          // **redeclare final parameter Q.ResistivityThermal beta_S=0,
-
           // See the documentation for a table of values.
           // Note:  Parameter expressions (e.g., involving defaults.T) are not used
           // here since they would render the parameters unadjustable in Dymola 7.4.
@@ -5951,7 +6083,6 @@ package Subregions
             redeclare parameter Q.Resistivity beta_Phi=Data.gamma(),
             redeclare parameter Q.ResistivityThermal beta_S=Data.gamma(),
             redeclare parameter Q.ResistivityThermal gamma_S=U.m*U.K/(0.16*U.W));
-          // **redeclare final parameter Q.ResistivityThermal beta_S=0,
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -5984,8 +6115,8 @@ package Subregions
             redeclare Q.Resistivity gamma_N=k_gamma_N*Data.gamma(T),
             redeclare Q.Resistivity gamma_Phi=k_gamma_Phi*Data.gamma(T),
             redeclare Q.ResistivityThermal gamma_S=k_gamma_S*Data.gamma(T));
-          // Note:  initMethPartNum may not be Pressure (which is default) since
-          // the EOS doesn't involve pressure.
+          // Note:  initMethPartNum may not be Pressure (which is default) since the
+          // EOS doesn't involve pressure.
 
           parameter Q.NumberAbsolute k_beta_N(final nominal=1) = 1
             "<html>Adjustment factor for reaction (<i>k</i><sub>&beta;<i>N</i></sub>)</html>"
@@ -6019,8 +6150,8 @@ package Subregions
             redeclare Q.Resistivity gamma_N=Data.gamma(T),
             redeclare Q.Resistivity gamma_Phi=Data.gamma(T),
             redeclare Q.ResistivityThermal gamma_S=Data.gamma(T));
-          // Note:  initMethPartNum may not be Pressure (which is default) since
-          // the EOS doesn't involve pressure.
+          // Note:  initMethPartNum may not be Pressure (which is default) since the
+          // EOS doesn't involve pressure.
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -6039,15 +6170,11 @@ package Subregions
             redeclare parameter Q.Resistivity gamma_N=Data.gamma(),
             redeclare parameter Q.Resistivity gamma_Phi=Data.gamma(),
             redeclare parameter Q.ResistivityThermal gamma_S=Data.gamma());
-          // **redeclare final parameter Q.ResistivityThermal beta_S=0,
+          // Note:  initMethPartNum may not be Pressure (which is default) since the
+          // EOS doesn't involve pressure.
 
-          // Note:  initMethPartNum may not be Pressure (which is default) since
-          // the EOS doesn't involve pressure.
-
-          //    redeclare parameter Q.Resistivity beta_N=1e20*Data.gamma(),
+          // **   redeclare parameter Q.Resistivity beta_N=1e20*Data.gamma(),
           //  Lstar=1e6*product(L)^(1/3));
-          //**redeclare parameter Q.ResistivityThermal beta_S=Data.gamma(),
-          // **temp factor on beta_N
           // **temp Lstar (remove or copy to the other e- models.)
           annotation (
             group="Material properties",
@@ -6078,7 +6205,7 @@ package Subregions
           extends Species(
             redeclare FCSys.Characteristics.H2.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity beta_N=0*k_beta_N*Data.gamma(T),
+            redeclare Q.Resistivity beta_N=k_beta_N*Data.gamma(T),
             redeclare Q.Resistivity beta_Phi=k_beta_Phi*Data.gamma(T),
             redeclare Q.ResistivityThermal beta_S=k_beta_S*Data.gamma(T),
             redeclare Q.Resistivity gamma_N=k_gamma_N*Data.gamma(T),
@@ -6087,8 +6214,6 @@ package Subregions
 
             redeclare Q.ResistivityThermal gamma_S=k_gamma_S*(if
                 empiricalThermal then Data.gamma_S(T) else Data.gamma(T)));
-
-          //**temp factor 0 for beta_N
 
           parameter Q.NumberAbsolute k_beta_N(final nominal=1) = 1
             "<html>Adjustment factor for reaction (<i>k</i><sub>&beta;<i>N</i></sub>)</html>"
@@ -6522,8 +6647,8 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
             redeclare Q.Resistivity gamma_N=k_gamma_N*Data.gamma(T),
             redeclare Q.Resistivity gamma_Phi=k_gamma_Phi*Data.gamma(T),
             redeclare Q.ResistivityThermal gamma_S=k_gamma_S*Data.gamma(T));
-          // Note:  initMethPartNum may not be Pressure (which is default) since
-          // the EOS doesn't involve pressure.
+          // Note:  initMethPartNum may not be Pressure (which is default) since the
+          // EOS doesn't involve pressure.
 
           parameter Q.NumberAbsolute k_beta_N(final nominal=1) = 1
             "<html>Adjustment factor for reaction (<i>k</i><sub>&beta;<i>N</i></sub>)</html>"
@@ -6557,8 +6682,8 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
             redeclare Q.Resistivity gamma_N=Data.gamma(T),
             redeclare Q.Resistivity gamma_Phi=Data.gamma(T),
             redeclare Q.ResistivityThermal gamma_S=Data.gamma(T));
-          // Note:  initMethPartNum may not be Pressure (which is default) since
-          // the EOS doesn't involve pressure.
+          // Note:  initMethPartNum may not be Pressure (which is default) since the
+          // EOS doesn't involve pressure.
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -6573,25 +6698,21 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
             initMethPartNum=InitMethScalar.Amount,
             redeclare parameter Q.Resistivity beta_N=Data.gamma(),
             redeclare parameter Q.Resistivity beta_Phi=Data.gamma(),
-            redeclare parameter Q.ResistivityThermal beta_S=Data.gamma(),
+            redeclare parameter Q.ResistivityThermal beta_S=U.m*U.K/(0.1661*U.W),
+
             redeclare parameter Q.Resistivity gamma_N=Data.gamma(),
             redeclare parameter Q.Resistivity gamma_Phi=Data.m/(5.3e-6*U.Pa*U.s),
 
             redeclare parameter Q.ResistivityThermal gamma_S=U.m*U.K/(0.1661*U.W));
 
-          // **redeclare final parameter Q.ResistivityThermal beta_S=0,
+          // Note:  initMethPartNum may not be Pressure (which is default) since the
+          // EOS doesn't involve pressure.
 
-          // Note:  initMethPartNum may not be Pressure (which is default) since
-          // the EOS doesn't involve pressure.
-
-          //    redeclare parameter Q.Resistivity beta_N=1e5*Data.gamma(),
+          //   ** redeclare parameter Q.Resistivity beta_N=1e5*Data.gamma(),
           //Lstar=1e6*product(L)^(1/3));
-
-          // **temp factor beta_N
-          //**redeclare parameter Q.ResistivityThermal beta_S=U.m*U.K/(0.1661*U.W),
+          // **temp Lstar (remove or copy to the other e- models.)
 
           // See the documentation for a table of values.
-          // **temp Lstar (remove or copy to the other e- models.)
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -7040,11 +7161,8 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
         N(stateSelect=StateSelect.never),
         phi(each stateSelect=StateSelect.never),
         T(stateSelect=StateSelect.never));
-      // Note:  StateSelect.never is necessary to avoid dynamic state
-      // selection in Dymola 7.4.
-      //final beta_Phi=0,
-      //final beta_S=0,
-      // **note in documentation: final beta_S=0
+      // Note:  StateSelect.never is necessary to avoid dynamic state selection
+      // in Dymola 7.4.
       annotation (Documentation(info="<html>**e.g., purely electrical species without inductance
     <p>Assumptions:<ol>
   <li>**</li>
@@ -7075,33 +7193,33 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
         final I_IC,
         final derI_IC,
         xNegative(
-          matEntOpt=MaterialEntropyOpt.ClosedDiabatic,
+          thermoOpt=ThermoOpt.ClosedDiabatic,
           final viscousY=false,
           final viscousZ=false),
         xPositive(
-          matEntOpt=MaterialEntropyOpt.ClosedDiabatic,
+          thermoOpt=ThermoOpt.ClosedDiabatic,
           final viscousY=false,
           final viscousZ=false),
         yNegative(
-          matEntOpt=MaterialEntropyOpt.ClosedDiabatic,
+          thermoOpt=ThermoOpt.ClosedDiabatic,
           final viscousZ=false,
           final viscousX=false),
         yPositive(
-          matEntOpt=MaterialEntropyOpt.ClosedDiabatic,
+          thermoOpt=ThermoOpt.ClosedDiabatic,
           final viscousZ=false,
           final viscousX=false),
         zNegative(
-          matEntOpt=MaterialEntropyOpt.ClosedDiabatic,
+          thermoOpt=ThermoOpt.ClosedDiabatic,
           final viscousX=false,
           final viscousY=false),
         zPositive(
-          matEntOpt=MaterialEntropyOpt.ClosedDiabatic,
+          thermoOpt=ThermoOpt.ClosedDiabatic,
           final viscousX=false,
           final viscousY=false));
 
       // Note:  gamma_N and gamma_Phi don't matter since material and linear
-      // momentum aren't transported.  upstreamX, upstreamY, and upstreamZ
-      // don't matter since bulk current is zero.
+      // momentum aren't transported.  upstreamX, upstreamY, and upstreamZ don't
+      // matter since bulk current is zero.
 
       annotation (Documentation(info="<html><p>Assumptions:<ol>
   <li>Zero velocity</li>
@@ -7147,9 +7265,6 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
       parameter Boolean inclLin[Axis]={true,false,false}
         "true, if each component of linear momentum is included"
         annotation (Evaluate=true,Dialog(tab="Assumptions"));
-      final parameter Integer n_lin=countTrue(inclLin)
-        "Number of components of linear momentum"
-        annotation (Evaluate=true, HideResult=true);
       parameter Boolean overrideEOS=false
         "<html>Override the equation of state with the value of &rho;<sub>IC</sub></html>"
         annotation (
@@ -7366,8 +7481,8 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
         final start=N_IC,
         final fixed=false,
         stateSelect=StateSelect.prefer) "Particle number";
-      // Note:  The start value for this variable (and others below) isn't
-      // fixed because the related initial condition is applied in the initial
+      // Note:  The start value for this variable (and others below) isn't fixed
+      // because the related initial condition is applied in the initial
       // equation section.
       Q.Velocity phi[n_lin](
         each nominal=1*U.cm/U.s,
@@ -7375,13 +7490,17 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
         each final fixed=false,
         each stateSelect=StateSelect.prefer) "Velocity";
       Q.TemperatureAbsolute T(
-        min=Modelica.Constants.small,
         nominal=298.15*U.K,
         final start=T_IC,
         final fixed=false,
         stateSelect=StateSelect.prefer) "Temperature";
-      //**temp min
+
       // Aliases (for common terms)
+      Q.Volume V(
+        min=0,
+        final start=V_IC,
+        final fixed=false) "Volume";
+      Q.Pressure p(final start=p_IC, final fixed=false) "Pressure";
       Q.Potential h(
         nominal=1*U.V,
         final start=h_IC,
@@ -7398,8 +7517,10 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
         each nominal=1*U.A,
         final start=I_IC[cartAxes],
         each final fixed=false) "Current";
-      Q.Potential ke(final start=Data.m*phi_IC[cartAxes]*phi_IC[cartAxes]/2)
-        "Specific macroscopic kinetic energy";
+      //**Q.Potential ke(final start=Data.m*phi_IC[cartAxes]*phi_IC[cartAxes]/2)   = Data.m*phi*phi/2;
+      Q.Mass M(nominal=1*U.g, start=Data.m*N_IC) "Mass";
+
+      //  "Specific macroscopic kinetic energy";
 
       // Material properties
       input Q.Resistivity beta_N(nominal=10*U.cm/U.A, start=Data.gamma(T_IC))
@@ -7428,16 +7549,10 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
       // Auxiliary variables (for analysis)
       // ----------------------------------
       // General
-      output Q.Mass M(stateSelect=StateSelect.never) = Data.m*N if defaults.analysis
-        "Mass";
-      output Q.Volume V(stateSelect=StateSelect.never) = inert.V if defaults.analysis
-        "Volume";
-      output Q.PressureAbsolute p(stateSelect=StateSelect.never) = inert.p if
-        defaults.analysis "Pressure";
       output Q.AmountVolumic rho(stateSelect=StateSelect.never) = N/V if
         defaults.analysis "Molar density";
-      // Note:  Specific volume (v) isn't provided because amount (N) can
-      // be zero.
+      // Note:  Specific volume (v) isn't provided because amount (N) can be
+      // zero.
       //
       // Capacitances
       output Q.Capacitance C(stateSelect=StateSelect.never) = if Data.isCompressible
@@ -7462,7 +7577,7 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
       output Q.Time tau_exch_N(stateSelect=StateSelect.never) = T*beta_N*C/(2*
         Lstar + (if Data.z == 0 then 0 else beta_N*chemical.Ndot)) if defaults.analysis
         "Time constant for material exchange";
-      // **update with the right sign
+      // **update with the correct sign
       output Q.Time tau_exch_Phi(stateSelect=StateSelect.never) = beta_Phi*N/
         Lstar if defaults.analysis
         "Time constant for exchange of linear momentum";
@@ -7478,8 +7593,8 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
         fill(gamma_S*C_p, 3) ./ Lstar_trans if defaults.analysis
         "Time constants for thermal transport";
       //
-      // Peclet numbers (only for the axes with linear momentum included;
-      // others are zero)
+      // Peclet numbers (only for the axes with linear momentum included; others
+      // are zero)
       output Q.Number Pe_N[n_lin](each stateSelect=StateSelect.never) = I*
         gamma_N ./ Lstar_trans[cartAxes] if defaults.analysis
         "Material Peclet numbers";
@@ -7512,15 +7627,13 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
       output Q.Force mPhidot_exch_diff[n_lin](each stateSelect=StateSelect.never)
          = inert.mPhidot "Force due to friction with other species";
       output Q.Force mPhidot_parallel[n_lin](each stateSelect=StateSelect.never)
-         = {sum(if [xNegative.matEntOpt == MaterialEntropyOpt.OpenDiabatic,
-        xPositive.matEntOpt == MaterialEntropyOpt.OpenDiabatic; yNegative.matEntOpt
-         == MaterialEntropyOpt.OpenDiabatic, yPositive.matEntOpt ==
-        MaterialEntropyOpt.OpenDiabatic; zNegative.matEntOpt ==
-        MaterialEntropyOpt.OpenDiabatic, zPositive.matEntOpt ==
-        MaterialEntropyOpt.OpenDiabatic][cartAxes[axis], side] then (3 - 2*side)
-        *(mu_face[cartAxes[axis], side] - mu + Data.Deltah0_f)*N/L[cartAxes[
-        axis]] else 0 for side in Side) for axis in 1:n_lin} - Data.m*sum(
-        Ndot_face)*phi if defaults.analysis
+         = {sum(if [xNegative.thermoOpt == ThermoOpt.OpenDiabatic, xPositive.thermoOpt
+         == ThermoOpt.OpenDiabatic; yNegative.thermoOpt == ThermoOpt.OpenDiabatic,
+        yPositive.thermoOpt == ThermoOpt.OpenDiabatic; zNegative.thermoOpt ==
+        ThermoOpt.OpenDiabatic, zPositive.thermoOpt == ThermoOpt.OpenDiabatic][
+        cartAxes[axis], side] then inSign(side)*(mu_face[cartAxes[axis], side]
+         - mu + Data.Deltah0_f)*N/L[cartAxes[axis]] else 0 for side in Side)
+        for axis in 1:n_lin} - Data.m*sum(Ndot_face)*phi if defaults.analysis
         "Acceleration force through normal faces";
       output Q.Force mPhidot_perpendicular[n_lin](each stateSelect=StateSelect.never)
          = {sum(Sigma(mPhidot_face[cartWrap(cartAxes[axis] - orientation), :,
@@ -7530,15 +7643,17 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
         "Acceleration force through transverse faces";
       //
       // Energy balance
-      output Q.Power derE(stateSelect=StateSelect.never) = (N*(Data.c0_T(T)*der(
-        T) + der(ke)) + V*der(p))/U.s if defaults.analysis
-        "Rate of energy storage at constant particle number";
-      output Q.Power Edot_exch_N(stateSelect=StateSelect.never) = (-chemical.muPerT
-        *T - ke)*chemical.Ndot + semiLinear(
-            Data.m*chemical.Ndot,
-            chemical.phi*chemical.phi,
-            phi*phi) + chemical.Qdot if defaults.analysis
-        "Rate of energy intake due to chemical exchange";
+      /* **
+  output Q.Power derE(stateSelect=StateSelect.never) = (N*(Data.c0_T(T)*der(T) + 
+    der(ke)) + V*der(p))/U.s if defaults.analysis 
+    "Rate of energy storage at constant particle number";
+  output Q.Power Edot_exch_N(stateSelect=StateSelect.never) = (-chemical.muPerT*
+    T - ke)*chemical.Ndot + semiLinear(
+    Data.m*chemical.Ndot,
+    chemical.phi*chemical.phi,
+    phi*phi) + chemical.Qdot if defaults.analysis 
+    "Rate of energy intake due to chemical exchange";
+  */
       output Q.Power Edot_exch_Phi(stateSelect=StateSelect.never) = inert.phi*
         inert.mPhidot if defaults.analysis
         "Rate of energy intake due to diffusion of linear momentum from other species";
@@ -7561,17 +7676,24 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
       // Note:  These auxiliary variables should not be used as states; the
       // structure of the problem should not change if they are included.
 
-      Connectors.ChemicalOutput chemical(
+      FCSys.Connectors.ChemicalOutput chemical(
         final n_lin=n_lin,
         final m=Data.m,
         final formula=Data.formula,
         muPerT(final start=mu_IC/T_IC),
         phi(final start=phi_IC[cartAxes]),
         Ndot(final start=Ndot_IC,final fixed=false),
-        Tsbar(final start=T_IC*Data.s_pT(p_IC, T_IC)/Data.m,final fixed=false))
+        hbar(final start=Data.h0_T(T_IC)/Data.m,final fixed=false))
         "Connector to exchange material with advection of linear momentum"
         annotation (Placement(transformation(extent={{-30,10},{-10,30}}),
             iconTransformation(extent={{-80,60},{-60,80}})));
+      Connectors.Inert common(
+        final n_lin=n_lin,
+        phi(start=phi_IC[cartAxes]),
+        T(start=T_IC),
+        Sdot(start=0)) "Connector to couple velocity and temperature"
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}}),
+            iconTransformation(extent={{-10,-10},{10,10}})));
       FCSys.Connectors.InertDalton inert(
         final n_lin=n_lin,
         V(
@@ -7587,7 +7709,7 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
             iconTransformation(extent={{60,-80},{80,-60}})));
 
       replaceable FCSys.Connectors.FaceX xNegative(
-        matEntOpt=MaterialEntropyOpt.OpenDiabatic,
+        thermoOpt=ThermoOpt.OpenDiabatic,
         viscousY=inclLin[Axis.y],
         viscousZ=inclLin[Axis.z],
         material(final mu(start=mu_IC - Data.Deltah0_f) = mu_face[Axis.x, Side.n],
@@ -7607,7 +7729,7 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
           __Dymola_descriptionLabel=true),Placement(transformation(extent={{-50,
                 -10},{-30,10}}), iconTransformation(extent={{-110,-10},{-90,10}})));
       replaceable FCSys.Connectors.FaceX xPositive(
-        matEntOpt=xNegative.matEntOpt,
+        thermoOpt=xNegative.thermoOpt,
         viscousY=inclLin[Axis.y],
         viscousZ=inclLin[Axis.z],
         material(final mu(start=mu_IC - Data.Deltah0_f) = mu_face[Axis.x, Side.p],
@@ -7648,7 +7770,7 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
                 -50},{10,-30}}), iconTransformation(extent={{-10,-110},{10,-90}})));
 
       replaceable FCSys.Connectors.FaceY yPositive(
-        matEntOpt=yNegative.matEntOpt,
+        thermoOpt=yNegative.thermoOpt,
         viscousZ=inclLin[Axis.z],
         viscousX=inclLin[Axis.x],
         material(final mu(start=mu_IC - Data.Deltah0_f) = mu_face[Axis.y, Side.p],
@@ -7688,7 +7810,7 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
           __Dymola_descriptionLabel=true),Placement(transformation(extent={{10,
                 10},{30,30}}), iconTransformation(extent={{60,60},{80,80}})));
       replaceable FCSys.Connectors.FaceZ zPositive(
-        matEntOpt=zNegative.matEntOpt,
+        thermoOpt=zNegative.thermoOpt,
         viscousX=inclLin[Axis.x],
         viscousY=inclLin[Axis.y],
         material(final mu(start=mu_IC - Data.Deltah0_f) = mu_face[Axis.z, Side.p],
@@ -7714,6 +7836,8 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
     protected
       final parameter Q.Length Lstar_trans[Axis]=k .* A ./ L
         "Effective cross-sectional area per length";
+      final parameter Integer n_lin=countTrue(inclLin)
+        "Number of components of linear momentum";
       final parameter Integer cartAxes[n_lin]=index(inclLin)
         "Cartesian-axis indices of the axes of linear momentum";
       final parameter Integer linAxes[Axis]=enumerate(inclLin)
@@ -7747,17 +7871,9 @@ The default global default settings will be used for the current simulation.",
           Placement(transformation(extent={{40,40},{60,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
       // Note:  In Dymola 7.4, it is necessary to add the missing inner message
-      // here to give a warning message, even though it is included in the Defaults
-      // model too.
+      // here to give a warning message, even though it is included in the
+      // Defaults model too.
 
-    public
-      Connectors.Inert common(
-        final n_lin=n_lin,
-        phi(start=phi_IC[cartAxes]),
-        T(start=T_IC),
-        Sdot(start=0)) "Connector to couple velocity and temperature"
-        annotation (Placement(transformation(extent={{-10,-10},{10,10}}),
-            iconTransformation(extent={{-10,-10},{10,10}})));
     initial equation
       // Check that the initialization methods are valid.
       assert(initMethPartNum <> initMethTemp or initMethPartNum ==
@@ -7830,17 +7946,17 @@ The default global default settings will be used for the current simulation.",
         elseif initMethPartNum == InitMethScalar.AmountRate then
           der(N)/U.s = derN_IC;
         elseif initMethPartNum == InitMethScalar.AmountVolumic then
-          N/inert.V = rho_IC;
+          N/V = rho_IC;
         elseif initMethPartNum == InitMethScalar.AmountVolumicRate then
-          der(N/inert.V)/U.s = derrho_IC;
+          der(N/V)/U.s = derrho_IC;
         elseif initMethPartNum == InitMethScalar.Volume then
-          inert.V = V_IC;
+          V = V_IC;
         elseif initMethPartNum == InitMethScalar.VolumeRate then
-          der(inert.V)/U.s = derV_IC;
+          der(V)/U.s = derV_IC;
         elseif initMethPartNum == InitMethScalar.Pressure then
-          inert.p = p_IC;
+          p = p_IC;
         elseif initMethPartNum == InitMethScalar.PressureRate then
-          der(inert.p)/U.s = derp_IC;
+          der(p)/U.s = derp_IC;
         elseif initMethPartNum == InitMethScalar.Temperature then
           T = T_IC;
         elseif initMethPartNum == InitMethScalar.TemperatureRate then
@@ -7884,8 +8000,8 @@ The default global default settings will be used for the current simulation.",
               I[linAxes[axis]] = I_IC[axis];
             elseif initMethLin[axis] == InitMethLinMom.CurrentRate then
               der(I[linAxes[axis]])/U.s = derI_IC[axis];
-              // Else, initMethLin[axis] == InitMethLinMom.None; then, there are no
-              // initial equations.
+              // Else, initMethLin[axis] == InitMethLinMom.None; then, there are
+              // no initial equations.
             end if;
           end if;
         end if;
@@ -7903,17 +8019,17 @@ The default global default settings will be used for the current simulation.",
         elseif initMethTemp == InitMethScalar.AmountRate then
           der(N)/U.s = derN_IC;
         elseif initMethPartNum == InitMethScalar.AmountVolumic then
-          N/inert.V = rho_IC;
+          N/V = rho_IC;
         elseif initMethPartNum == InitMethScalar.AmountVolumicRate then
-          der(N/inert.V)/U.s = derrho_IC;
+          der(N/V)/U.s = derrho_IC;
         elseif initMethTemp == InitMethScalar.Volume then
-          inert.V = V_IC;
+          V = V_IC;
         elseif initMethTemp == InitMethScalar.VolumeRate then
-          der(inert.V)/U.s = derV_IC;
+          der(V)/U.s = derV_IC;
         elseif initMethTemp == InitMethScalar.Pressure then
-          inert.p = p_IC;
+          p = p_IC;
         elseif initMethTemp == InitMethScalar.PressureRate then
-          der(inert.p)/U.s = derp_IC;
+          der(p)/U.s = derp_IC;
         elseif initMethTemp == InitMethScalar.Temperature then
           T = T_IC;
         elseif initMethTemp == InitMethScalar.TemperatureRate then
@@ -7938,69 +8054,57 @@ The default global default settings will be used for the current simulation.",
       end if;
 
     equation
-      // Empirical thermodynamic correlations
+      // Aliases (only for clarity)
+      phi = common.phi;
+      T = common.T;
+      p = inert.p;
+      V = inert.V;
+      mu = T*chemical.muPerT;
+      h = mu + T*s;
+      N*phi = L[cartAxes] .* I;
+      M = Data.m*N;
+
+      // Thermodynamic correlations
       if overrideEOS then
-        N = rho_IC*inert.V;
-        // **Disable momentum and entropy transport if overrideEOS?
+        N = rho_IC*V;
       elseif Data.isCompressible then
-        inert.p = Data.p_vT(inert.V/N, T);
+        p = Data.p_vT(V/N, T);
       else
-        inert.V = N*Data.v_pT(inert.p, T);
+        V = N*Data.v_pT(p, T);
       end if;
       h = Data.h0_T(T, ReferenceEnthalpy.EnthalpyOfFormationAt25degC);
-      s = Data.s_pT(inert.p, T);
-
-      // Aliases (only for clarity)
-      T*chemical.muPerT = mu;
-      mu = h - T*s;
-      L[cartAxes] .* I = N*phi;
-      ke = Data.m*phi*phi/2;
-      common.phi = phi;
-      // **simplify
-      common.T = T;
-      // **simplify
+      s = Data.s_pT(p, T);
 
       // Exchange
       // --------
       // Linear momentum
-      /*
-  chemical.mPhidot = semiLinear(
-    Data.m*chemical.Ndot,
-    chemical.phi,
-    phi) "Advection";
-  */
-      chemical.phi = phi;
-      // **simplify
+      chemical.mPhidot = semiLinear(
+            Data.m*chemical.Ndot,
+            chemical.phi,
+            phi) "For advection";
       beta_Phi*inert.mPhidot = 2*Lstar*Data.m*(inert.phi - phi) "Diffusion";
       //
       // Energy
-      /*
-  chemical.Qdot = semiLinear(
-    Data.m*chemical.Ndot,
-    chemical.Tsbar,
-    T*s/Data.m) "Advection";
-  */
-      chemical.Tsbar = T*s/Data.m;
-      //**simplify
+      chemical.Hdot = semiLinear(
+            chemical.Ndot,
+            chemical.hbar*Data.m,
+            h) "Advection";
       beta_S*inert.Sdot = 2*Lstar*(inert.T/T - 1) "Diffusion";
 
       // Transport
       for axis in Axis loop
         for side in Side loop
           // Material
-          if [xNegative.matEntOpt == MaterialEntropyOpt.OpenDiabatic, xPositive.matEntOpt
-               == MaterialEntropyOpt.OpenDiabatic; yNegative.matEntOpt ==
-              MaterialEntropyOpt.OpenDiabatic, yPositive.matEntOpt ==
-              MaterialEntropyOpt.OpenDiabatic; zNegative.matEntOpt ==
-              MaterialEntropyOpt.OpenDiabatic, zPositive.matEntOpt ==
-              MaterialEntropyOpt.OpenDiabatic][axis, side] then
-            gamma_N*(Ndot_face[axis, side] + (2*side - 3)*(if inclLin[axis]
+          if [xNegative.thermoOpt == ThermoOpt.OpenDiabatic, xPositive.thermoOpt
+               == ThermoOpt.OpenDiabatic; yNegative.thermoOpt == ThermoOpt.OpenDiabatic,
+              yPositive.thermoOpt == ThermoOpt.OpenDiabatic; zNegative.thermoOpt
+               == ThermoOpt.OpenDiabatic, zPositive.thermoOpt == ThermoOpt.OpenDiabatic]
+              [axis, side] then
+            T*gamma_N*(Ndot_face[axis, side] - inSign(side)*(if inclLin[axis]
                then I[linAxes[axis]] else 0)) = Lstar_trans[axis]*(mu_face[axis,
-              side]/T - chemical.muPerT + Data.Deltah0_f/T)*(if upstream[axis]
-               and inclLin[axis] then (exp((3 - 2*side)*I[linAxes[axis]]*
-              gamma_N/(2*Lstar_trans[axis])) + 1) else 2)
-              "Advection and diffusion";
-            // **temp divided by T
+              side] - mu + Data.Deltah0_f)*(if upstream[axis] and inclLin[axis]
+               then (exp(inSign(side)*I[linAxes[axis]]*gamma_N/(2*Lstar_trans[
+              axis])) + 1) else 2) "Advection and diffusion";
           else
             mu_face[axis, side] = 0;
             Ndot_face[axis, side] = 0;
@@ -8013,14 +8117,14 @@ The default global default settings will be used for the current simulation.",
                 yPositive.viscousZ,yPositive.viscousX}},{{zNegative.viscousX,
                 zNegative.viscousY},{zPositive.viscousX,zPositive.viscousY}}}[
                 axis, side, orientation] then
-              gamma_Phi*(mPhidot_face[axis, side, orientation]/Data.m + (if
-                inclLin[axis] then (2*side - 3)*I[linAxes[axis]] else 0)*(if
+              gamma_Phi*(mPhidot_face[axis, side, orientation]/Data.m - (if
+                inclLin[axis] then inSign(side)*I[linAxes[axis]] else 0)*(if
                 inclLin[cartWrap(axis + orientation)] then phi[linAxes[cartWrap(
                 axis + orientation)]] else 0)) = Lstar_trans[axis]*(phi_face[
                 axis, side, orientation] - (if inclLin[cartWrap(axis +
                 orientation)] then phi[linAxes[cartWrap(axis + orientation)]]
-                 else 0))*(if upstream[axis] and inclLin[axis] then (exp((3 - 2
-                *side)*I[linAxes[axis]]*gamma_Phi/(2*Lstar_trans[axis])) + 1)
+                 else 0))*(if upstream[axis] and inclLin[axis] then (exp(inSign(
+                side)*I[linAxes[axis]]*gamma_Phi/(2*Lstar_trans[axis])) + 1)
                  else 2) "Diffusion";
             else
               phi_face[axis, side, orientation] = 0;
@@ -8029,23 +8133,19 @@ The default global default settings will be used for the current simulation.",
           end for;
 
           // Entropy
-          if [xNegative.matEntOpt == MaterialEntropyOpt.OpenDiabatic or
-              xNegative.matEntOpt == MaterialEntropyOpt.ClosedDiabatic,
-              xPositive.matEntOpt == MaterialEntropyOpt.OpenDiabatic or
-              xPositive.matEntOpt == MaterialEntropyOpt.ClosedDiabatic;
-              yNegative.matEntOpt == MaterialEntropyOpt.OpenDiabatic or
-              yNegative.matEntOpt == MaterialEntropyOpt.ClosedDiabatic,
-              yPositive.matEntOpt == MaterialEntropyOpt.OpenDiabatic or
-              yPositive.matEntOpt == MaterialEntropyOpt.ClosedDiabatic;
-              zNegative.matEntOpt == MaterialEntropyOpt.OpenDiabatic or
-              zNegative.matEntOpt == MaterialEntropyOpt.ClosedDiabatic,
-              zPositive.matEntOpt == MaterialEntropyOpt.OpenDiabatic or
-              zPositive.matEntOpt == MaterialEntropyOpt.ClosedDiabatic][axis,
-              side] then
-            gamma_S*(Sdot_face[axis, side] + (2*side - 3)*s*(if inclLin[axis]
+          if [xNegative.thermoOpt == ThermoOpt.OpenDiabatic or xNegative.thermoOpt
+               == ThermoOpt.ClosedDiabatic, xPositive.thermoOpt == ThermoOpt.OpenDiabatic
+               or xPositive.thermoOpt == ThermoOpt.ClosedDiabatic; yNegative.thermoOpt
+               == ThermoOpt.OpenDiabatic or yNegative.thermoOpt == ThermoOpt.ClosedDiabatic,
+              yPositive.thermoOpt == ThermoOpt.OpenDiabatic or yPositive.thermoOpt
+               == ThermoOpt.ClosedDiabatic; zNegative.thermoOpt == ThermoOpt.OpenDiabatic
+               or zNegative.thermoOpt == ThermoOpt.ClosedDiabatic, zPositive.thermoOpt
+               == ThermoOpt.OpenDiabatic or zPositive.thermoOpt == ThermoOpt.ClosedDiabatic]
+              [axis, side] then
+            gamma_S*(Sdot_face[axis, side] - inSign(side)*s*(if inclLin[axis]
                then I[linAxes[axis]] else 0)) = 2*Lstar_trans[axis]*(T_face[
               axis, side]/T - 1)*(if upstream[axis] and inclLin[axis] then (exp(
-              (3 - 2*side)*I[linAxes[axis]]*gamma_S/(2*Lstar_trans[axis])) + 1)
+              inSign(side)*I[linAxes[axis]]*gamma_S/(2*Lstar_trans[axis])) + 1)
                else 2) "Diffusion";
           else
             T_face[axis, side] = 0;
@@ -8062,17 +8162,17 @@ The default global default settings will be used for the current simulation.",
         elseif initMethPartNum == InitMethScalar.AmountRate then
           der(N)/U.s = derN_IC;
         elseif initMethPartNum == InitMethScalar.AmountVolumic then
-          N/inert.V = rho_IC;
+          N/V = rho_IC;
         elseif initMethPartNum == InitMethScalar.AmountVolumicRate then
-          der(N/inert.V)/U.s = derrho_IC;
+          der(N/V)/U.s = derrho_IC;
         elseif initMethPartNum == InitMethScalar.Volume then
-          inert.V = V_IC;
+          V = V_IC;
         elseif initMethPartNum == InitMethScalar.VolumeRate then
-          der(inert.V)/U.s = derV_IC;
+          der(V)/U.s = derV_IC;
         elseif initMethPartNum == InitMethScalar.Pressure then
-          inert.p = p_IC;
+          p = p_IC;
         elseif initMethPartNum == InitMethScalar.PressureRate then
-          der(inert.p)/U.s = derp_IC;
+          der(p)/U.s = derp_IC;
         elseif initMethPartNum == InitMethScalar.Temperature then
           T = T_IC;
         elseif initMethPartNum == InitMethScalar.TemperatureRate then
@@ -8093,8 +8193,8 @@ The default global default settings will be used for the current simulation.",
         else
           //if initMethPartNum == InitMethScalar.ReactionRate then
           chemical.Ndot = Ndot_IC;
-          // Note:  initMethPartNum == InitMethScalar.None can't occur due to
-          // an assertion.
+          // Note:  initMethPartNum == InitMethScalar.None can't occur due to an
+          // assertion.
         end if;
       else
         der(N)/U.s = chemical.Ndot + sum(Ndot_face) "Material conservation";
@@ -8103,8 +8203,8 @@ The default global default settings will be used for the current simulation.",
       // Dynamics of linear momentum
       for axis in 1:n_lin loop
         if setVel[cartAxes[axis]] then
-          // Apply the IC for all time (linear momentum isn't conserved
-          // along this axis).
+          // Apply the IC for all time (linear momentum isn't conserved along
+          // this axis).
           if initMethLin[cartAxes[axis]] == InitMethLinMom.Velocity then
             phi[axis] = phi_IC[cartAxes[axis]];
           elseif initMethLin[cartAxes[axis]] == InitMethLinMom.Acceleration
@@ -8118,18 +8218,16 @@ The default global default settings will be used for the current simulation.",
             // occur due to an assertion.
           end if;
         else
-          der(Data.m*N*phi[axis])/U.s = chemical.mPhidot[axis] + inert.mPhidot[
-            axis] + sum(if {{xNegative.matEntOpt == MaterialEntropyOpt.OpenDiabatic,
-            xPositive.matEntOpt == MaterialEntropyOpt.OpenDiabatic},{yNegative.matEntOpt
-             == MaterialEntropyOpt.OpenDiabatic,yPositive.matEntOpt ==
-            MaterialEntropyOpt.OpenDiabatic},{zNegative.matEntOpt ==
-            MaterialEntropyOpt.OpenDiabatic,zPositive.matEntOpt ==
-            MaterialEntropyOpt.OpenDiabatic}}[cartAxes[axis], side] then (3 - 2
-            *side)*(mu_face[cartAxes[axis], side] - mu + Data.Deltah0_f)*N/L[
-            cartAxes[axis]] else 0 for side in Side) + sum(Sigma(mPhidot_face[
-            cartWrap(cartAxes[axis] - orientation), :, orientation]) for
-            orientation in Orientation) + common.mPhidot[axis]
-            "Conservation of linear momentum";
+          der(M*phi[axis])/U.s = chemical.mPhidot[axis] + common.mPhidot[axis]
+             + inert.mPhidot[axis] + sum(if {{xNegative.thermoOpt == ThermoOpt.OpenDiabatic,
+            xPositive.thermoOpt == ThermoOpt.OpenDiabatic},{yNegative.thermoOpt
+             == ThermoOpt.OpenDiabatic,yPositive.thermoOpt == ThermoOpt.OpenDiabatic},
+            {zNegative.thermoOpt == ThermoOpt.OpenDiabatic,zPositive.thermoOpt
+             == ThermoOpt.OpenDiabatic}}[cartAxes[axis], side] then (3 - 2*side)
+            *(mu_face[cartAxes[axis], side] - mu + Data.Deltah0_f)*N/L[cartAxes[
+            axis]] else 0 for side in Side) + sum(Sigma(mPhidot_face[cartWrap(
+            cartAxes[axis] - orientation), :, orientation]) for orientation in
+            Orientation) "Conservation of linear momentum";
         end if;
       end for;
 
@@ -8141,17 +8239,17 @@ The default global default settings will be used for the current simulation.",
         elseif initMethTemp == InitMethScalar.AmountRate then
           der(N)/U.s = derN_IC;
         elseif initMethTemp == InitMethScalar.Volume then
-          inert.V = V_IC;
+          V = V_IC;
         elseif initMethPartNum == InitMethScalar.AmountVolumic then
-          N/inert.V = rho_IC;
+          N/V = rho_IC;
         elseif initMethPartNum == InitMethScalar.AmountVolumicRate then
-          der(N/inert.V)/U.s = derrho_IC;
+          der(N/V)/U.s = derrho_IC;
         elseif initMethTemp == InitMethScalar.VolumeRate then
-          der(inert.V)/U.s = derV_IC;
+          der(V)/U.s = derV_IC;
         elseif initMethTemp == InitMethScalar.Pressure then
-          inert.p = p_IC;
+          p = p_IC;
         elseif initMethTemp == InitMethScalar.PressureRate then
-          der(inert.p)/U.s = derp_IC;
+          der(p)/U.s = derp_IC;
         elseif initMethTemp == InitMethScalar.Temperature then
           T = T_IC;
         elseif initMethTemp == InitMethScalar.TemperatureRate then
@@ -8175,23 +8273,20 @@ The default global default settings will be used for the current simulation.",
           // assertion.
         end if;
       else
-        (N*(Data.c0_T(T)*der(T) + der(ke)) + (if overrideEOS then 0 else inert.V
-          *der(Data.p_vT(inert.V/N, T))))/U.s = (-mu - ke)*chemical.Ndot + 0*
-          semiLinear(
-              Data.m*chemical.Ndot,
-              phi*chemical.phi,
-              phi*phi) + inert.phi*inert.mPhidot + inert.T*inert.Sdot + sum((
-          mu_face - fill(
-              h + ke - Data.Deltah0_f,
+        (N*Data.c0_T(T)*der(T) - (if overrideEOS then 0 else V*der(Data.p_vT(V/
+          N, T))) + phi*der(M*phi))/U.s = chemical.phi*chemical.mPhidot + (
+          chemical.hbar*Data.m - h)*chemical.Ndot + common.phi*common.mPhidot
+           + common.T*common.Sdot + inert.phi*inert.mPhidot + inert.T*inert.Sdot
+           + sum((mu_face - fill(
+              h - Data.Deltah0_f,
               3,
               2)) .* Ndot_face) + sum(phi_face .* mPhidot_face) + sum(T_face
-           .* Sdot_face) + common.T*common.Sdot "Conservation of energy";
-        // **temp 0
+           .* Sdot_face) "Conservation of energy";
+        //der(T) = common.Sdot "**temp";
         // Note:  Although it is mathematically equivalent,
-        // der(Data.p_vT(inert.V/N, T)) is used instead of der(Data.p_vT(v, T)),
-        // der(inert.p), or der(inert.p) so that the term can be expanded to
-        // avoid dynamic state selection.
-        // **Check/fix terms associated with chemical connector.
+        // der(Data.p_vT(V/N, T)) is used instead of der(inert.p) or der(p)
+        // so that the term can be expanded to avoid dynamic state selection
+        // in Dymola 7.4.
       end if;
       annotation (
         defaultComponentPrefixes="replaceable",
@@ -8267,7 +8362,7 @@ The default global default settings will be used for the current simulation.",
 
     <p>**Update: The following variables reflect the actual properties of the
     species: <code>chemical.mphi</code> (specific mass times velocity), <code>chemical.Ts</code> (specific entropy times temperature),
-     <code>inert.V</code> (volume), and <code>inert.p</code> (pressure).  However, due to exchange losses
+     <code>V</code> or <code>inert.V</code> (volume), and <code>p</code> or <code>inert.p</code> (pressure).  However, due to exchange losses
     <code>chemical.mu</code> (electrochemical potential), <code>inert.phi</code> (velocity), <code>inert.T</code> (temperature)
     are generally not the bulk properties of the species.</p>
 
@@ -8368,14 +8463,14 @@ The default global default settings will be used for the current simulation.",
             extent={{-100,-100},{100,100}},
             initialScale=0.1), graphics),
         Icon(graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={127,127,127},
-              pattern=LinePattern.Dash,
-              fillColor={225,225,225},
-              fillPattern=FillPattern.Solid), Text(
-              extent={{-100,20},{100,60}},
-              textString="%name",
-              lineColor={0,0,0})}));
+                  extent={{-100,100},{100,-100}},
+                  lineColor={127,127,127},
+                  pattern=LinePattern.Dash,
+                  fillColor={225,225,225},
+                  fillPattern=FillPattern.Solid),Text(
+                  extent={{-100,20},{100,60}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
     end Species;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -8458,63 +8553,53 @@ The default global default settings will be used for the current simulation.",
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-180,-180},{180,
-              180}}), graphics={
-          Rectangle(
-            extent={{-170,120},{170,160}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Ellipse(
-            extent={{-60,188},{60,68}},
-            lineColor={127,127,127},
-            startAngle=30,
-            endAngle=149,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255}),
-          Ellipse(
-            extent={{-170,-2},{-50,-122}},
-            lineColor={127,127,127},
-            startAngle=149,
-            endAngle=270,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255}),
-          Ellipse(
-            extent={{50,-2},{170,-122}},
-            lineColor={127,127,127},
-            startAngle=270,
-            endAngle=390,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255}),
-          Polygon(
-            points={{51.5,159},{162,-32},{110,-122},{-110,-122},{-162,-32},{-51.5,
-                159},{51.5,159}},
-            smooth=Smooth.None,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Line(
-            points={{51.5,159},{162,-32}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{110,-122},{-110,-122}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{-162,-32},{-51.5,159}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Text(
-            extent={{-170,120},{170,160}},
-            textString="%name",
-            lineColor={0,0,0})}));
-
+              180}}), graphics={Rectangle(
+              extent={{-170,120},{170,160}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Ellipse(
+              extent={{-60,188},{60,68}},
+              lineColor={127,127,127},
+              startAngle=30,
+              endAngle=149,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}),Ellipse(
+              extent={{-170,-2},{-50,-122}},
+              lineColor={127,127,127},
+              startAngle=149,
+              endAngle=270,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}),Ellipse(
+              extent={{50,-2},{170,-122}},
+              lineColor={127,127,127},
+              startAngle=270,
+              endAngle=390,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}),Polygon(
+              points={{51.5,159},{162,-32},{110,-122},{-110,-122},{-162,-32},{-51.5,
+              159},{51.5,159}},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Line(
+              points={{51.5,159},{162,-32}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{110,-122},{-110,-122}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{-162,-32},{-51.5,159}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Text(
+              extent={{-170,120},{170,160}},
+              textString="%name",
+              lineColor={0,0,0})}));
   end PhaseBoundary;
 
   model Volume "Model to establish a fixed volume for phases"
@@ -8567,28 +8652,24 @@ value (<code>p</code>).</p>
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{160,
-              160}}), graphics={
-          Rectangle(
-            extent={{-160,112},{160,152}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Polygon(
-            points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,-160},
-                {-160,60}},
-            lineColor={127,127,127},
-            smooth=Smooth.None,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.Dash),
-          Text(
-            extent={{-160,112},{160,152}},
-            textString="%name",
-            lineColor={0,0,0})}),
+              160}}), graphics={Rectangle(
+              extent={{-160,112},{160,152}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Polygon(
+              points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,-160},
+              {-160,60}},
+              lineColor={127,127,127},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.Dash),Text(
+              extent={{-160,112},{160,152}},
+              textString="%name",
+              lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(graphics));
-
   end Volume;
 
   package BaseClasses "Base classes (not for direct use)"
@@ -8700,10 +8781,10 @@ value (<code>p</code>).</p>
   <ul><li>This model must be be extended so that models can be added for
   relevant species, phases, and reactions.</li>
   <li>Material will be transported between two subregions only if both of the connected faces are marked
-  as open (<code>matEntOpt==MaterialEntropyOpt.OpenDiabatic</code>)
+  as open (<code>thermoOpt==ThermoOpt.OpenDiabatic</code>)
   within the instances of the matched <a href=\"modelica://FCSys.Subregions.Species\">Species</a> models.
-  If either or both of the faces are closed (<code>matEntOpt==MaterialEntropyOpt.ClosedAdiabatic</code> or
-  <code>matEntOpt==MaterialEntropyOpt.ClosedDiabatic</code>), then the interface will be closed.
+  If either or both of the faces are closed (<code>thermoOpt==ThermoOpt.ClosedAdiabatic</code> or
+  <code>thermoOpt==ThermoOpt.ClosedDiabatic</code>), then the interface will be closed.
   note applies to the viscous/inviscous and diabatic/adiabatic properties.</li>
   <li>The x-axis component of linear momentum is included by default.  At least one component must be included.</li>
   <li>By default, <code>setVolume</code> is <code>true</code>, which sets the volume to a prescribed
@@ -8712,91 +8793,76 @@ value (<code>p</code>).</p>
   value (<code>p</code>).</li>
   </ul></p></html>"),
         Diagram(graphics),
-        Icon(graphics={
-            Line(
-              points={{-100,0},{-40,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclXFaces,
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{0,-100}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclYFaces,
-              smooth=Smooth.None),
-            Line(
-              points={{40,40},{50,50}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclZFaces,
-              smooth=Smooth.None),
-            Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                  16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-40,-40},{-16,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{-16,40},{-16,-16},{40,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{-40,0},{28,0}},
-              color={210,210,210},
-              visible=inclXFaces,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,28},{0,-40}},
-              color={210,210,210},
-              visible=inclYFaces,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{28,0},{100,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclXFaces,
-              smooth=Smooth.None),
-            Line(
-              points={{0,100},{0,28}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclYFaces,
-              smooth=Smooth.None),
-            Line(
-              points={{-12,-12},{40,40}},
-              color={210,210,210},
-              visible=inclZFaces,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-40,16},{16,16},{16,-40}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{-50,-50},{-12,-12}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclZFaces,
-              smooth=Smooth.None),
-            Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                  16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{40,40},{16,16}},
-              color={127,127,127},
-              smooth=Smooth.None)}));
+        Icon(graphics={Line(
+                  points={{-100,0},{-40,0}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclXFaces,
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{0,-100}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclYFaces,
+                  smooth=Smooth.None),Line(
+                  points={{40,40},{50,50}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclZFaces,
+                  smooth=Smooth.None),Polygon(
+                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
+                {-40,16}},
+                  lineColor={127,127,127},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Line(
+                  points={{-40,-40},{-16,-16}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),Line(
+                  points={{-16,40},{-16,-16},{40,-16}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),Line(
+                  points={{-40,0},{28,0}},
+                  color={210,210,210},
+                  visible=inclXFaces,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,28},{0,-40}},
+                  color={210,210,210},
+                  visible=inclYFaces,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{28,0},{100,0}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclXFaces,
+                  smooth=Smooth.None),Line(
+                  points={{0,100},{0,28}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclYFaces,
+                  smooth=Smooth.None),Line(
+                  points={{-12,-12},{40,40}},
+                  color={210,210,210},
+                  visible=inclZFaces,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-40,16},{16,16},{16,-40}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{-50,-50},{-12,-12}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclZFaces,
+                  smooth=Smooth.None),Polygon(
+                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
+                {-40,16}},
+                  lineColor={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{40,40},{16,16}},
+                  color={127,127,127},
+                  smooth=Smooth.None)}));
     end PartialSubregion;
   end BaseClasses;
 

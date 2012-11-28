@@ -146,15 +146,15 @@ package Characteristics "Data and functions to correlate physical properties"
       output Q.Potential g_N2_indirect=h_N2 - T*s_N2;
       output Q.Potential g_O2_indirect=h_O2 - T*s_O2;
       // Resistivity
-      output Q.Resistivity beta=DataC.beta(T);
-      output Q.Resistivity beta_SH2_Phi=DataH2.gamma_Phi(T);
-      output Q.Resistivity beta_SH2_U=DataH2.gamma_S(T);
-      output Q.Resistivity beta_SH2O_Phi=DataH2O.gamma_Phi(T);
-      output Q.Resistivity beta_SH2O_U=DataH2O.gamma_S(T);
+      output Q.Resistivity gamma=DataC.gamma(T);
+      output Q.Resistivity gamma_SH2_Phi=DataH2.gamma_Phi(T);
+      output Q.Resistivity gamma_SH2_U=DataH2.gamma_S(T);
+      output Q.Resistivity gamma_SH2O_Phi=DataH2O.gamma_Phi(T);
+      output Q.Resistivity gamma_SH2O_U=DataH2O.gamma_S(T);
       output Q.Resistivity gamma_N2_Phi=DataN2.gamma_Phi(T);
       output Q.Resistivity gamma_N2_U=DataN2.gamma_S(T);
-      output Q.Resistivity beta_SO2_Phi=DataO2.gamma_Phi(T);
-      output Q.Resistivity beta_SO2_U=DataO2.gamma_S(T);
+      output Q.Resistivity gamma_SO2_Phi=DataO2.gamma_Phi(T);
+      output Q.Resistivity gamma_SO2_U=DataO2.gamma_S(T);
 
     equation
       assert(abs(g_C - g_C_indirect) < epsilon_tol,
@@ -868,7 +868,7 @@ package Characteristics "Data and functions to correlate physical properties"
         // T_lim_c0[size(T_lim_c0, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
-        c0 := smooth(2, sum(if (T_lim_c0[i] <= T or i == 1) and (T < T_lim_c0[i
+        c0 := smooth(0, sum(if (T_lim_c0[i] <= T or i == 1) and (T < T_lim_c0[i
            + 1] or i == size(T_lim_c0, 1) - 1) then poly(
                 T,
                 b_c0[i, :],
@@ -876,9 +876,8 @@ package Characteristics "Data and functions to correlate physical properties"
           annotation (
           InlineNoEvent=true,
           Inline=true,
-          smoothOrder=2);
-        // **If possible (with warnings), set smooth and smoothOrder to 0 for
-        // this function and 1 for g, h, and s.
+          smoothOrder=0);
+
       end c0_T;
 
       function dp
@@ -946,7 +945,7 @@ package Characteristics "Data and functions to correlate physical properties"
         // T_lim_c0[size(T_lim_c0, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
-        g := smooth(2, sum(if (T_lim_c0[i] <= T or i == 1) and (T < T_lim_c0[i
+        g := smooth(1, sum(if (T_lim_c0[i] <= T or i == 1) and (T < T_lim_c0[i
            + 1] or i == size(T_lim_c0, 1) - 1) then g0_i(T, i) else 0 for i in
           1:size(T_lim_c0, 1) - 1) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K
            then Deltah0 else 0) - (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt25degC
@@ -959,12 +958,12 @@ package Characteristics "Data and functions to correlate physical properties"
           annotation (
           InlineNoEvent=true,
           Inline=true,
-          smoothOrder=2);
-        // The first term is the integral of c0*dT up to T with the
-        // reference enthalpy at the lower bound [McBride2002, p. 2] plus
-        // T times the integral of (c0/T)*dT up to T with absolute entropy
-        // at the lower bound.  Both of these integrals are taken at p0.
-        // The second polynomial is the integral of v*dP from p0 to p (at T).
+          smoothOrder=1);
+        // The first term is the integral of c0*dT up to T with the reference
+        // enthalpy at the lower bound [McBride2002, p. 2] plus T times the
+        // integral of (c0/T)*dT up to T with absolute entropy at the lower bound.
+        // Both of these integrals are taken at p0.  The second polynomial is the
+        // integral of v*dP from p0 to p (at T).
       end g_pT;
 
       function h0_T
@@ -1003,7 +1002,7 @@ package Characteristics "Data and functions to correlate physical properties"
         // T_lim_c0[size(T_lim_c0, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
-        h0 := smooth(2, sum(if (T_lim_c0[i] <= T or i == 1) and (T < T_lim_c0[i
+        h0 := smooth(1, sum(if (T_lim_c0[i] <= T or i == 1) and (T < T_lim_c0[i
            + 1] or i == size(T_lim_c0, 1) - 1) then h0_i(T, i) else 0 for i in
           1:size(T_lim_c0, 1) - 1) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K
            then Deltah0 else 0) - (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt25degC
@@ -1011,7 +1010,7 @@ package Characteristics "Data and functions to correlate physical properties"
           annotation (
           InlineNoEvent=true,
           Inline=true,
-          smoothOrder=2);
+          smoothOrder=1);
         // The first term is the integral of c0*dT up to T at p0 with the
         // reference enthalpy at the lower bound [McBride2002, p. 2].
       end h0_T;
@@ -1027,8 +1026,8 @@ package Characteristics "Data and functions to correlate physical properties"
         // assert(isCompressible,
         //  "The pressure is undefined since the material is incompressible.",
         //  AssertionLevel.warning);
-        // Note:  In Dymola 7.4, the assertion level can't be set, although it
-        // has been defined as an argument to assert() since Modelica 3.0.
+        // Note:  In Dymola 7.4, the assertion level can't be set, although it has
+        // been defined as an argument to assert() since Modelica 3.0.
 
         p := if isCompressible then poly(
                 v,
@@ -1080,7 +1079,7 @@ package Characteristics "Data and functions to correlate physical properties"
         // T_lim_c0[size(T_lim_c0, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
-        s := smooth(2, sum(if (T_lim_c0[i] <= T or i == 1) and (T < T_lim_c0[i
+        s := smooth(1, sum(if (T_lim_c0[i] <= T or i == 1) and (T < T_lim_c0[i
            + 1] or i == size(T_lim_c0, 1) - 1) then s0_i(T, i) else 0 for i in
           1:size(T_lim_c0, 1) - 1) - sum((if specVolPow[1] + i == 0 then ln((
           if p_min > 0 then max(p, p_min) else p)/p0) else (p^(specVolPow[1] +
@@ -1091,10 +1090,10 @@ package Characteristics "Data and functions to correlate physical properties"
           annotation (
           InlineNoEvent=true,
           Inline=true,
-          smoothOrder=2);
+          smoothOrder=1);
         // The first term is the integral of c0/T*dT up to T at p0 with the
-        // absolute entropy at the lower bound [McBride2002, p. 2].  The
-        // second polynomial is the integral of v*dP from p0 to p (at T).
+        // absolute entropy at the lower bound [McBride2002, p. 2].  The second
+        // polynomial is the integral of v*dP from p0 to p (at T).
       end s_pT;
 
       function v_pT "Specific volume as a function of pressure and temperature"

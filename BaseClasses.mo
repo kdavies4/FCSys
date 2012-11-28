@@ -203,13 +203,13 @@ from Blocks.Discrete.
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,120},{100,160}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,120},{100,160}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,120},{100,160}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,120},{100,160}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end Top6;
 
       partial class Top5
@@ -255,13 +255,13 @@ from Blocks.Discrete.
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,40},{100,80}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,40},{100,80}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,40},{100,80}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,40},{100,80}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end Top2;
 
       partial class Top1
@@ -732,6 +732,12 @@ This icon is designed for a <b>signal bus</b> connector.
             "The index function failed on entry " + String(i) + ".");
         end for;
 
+        // inSign()
+        assert(inSign(FCSys.BaseClasses.Side.n) == 1,
+          "The inSign function failed.");
+        assert(inSign(FCSys.BaseClasses.Side.p) == -1,
+          "The inSign function failed.");
+
         // mod1()
         assert(mod1(4, 3) == 1, "The mod1 function failed.");
         assert(mod1(3, 3) == 3, "The mod1 function failed.");
@@ -1034,10 +1040,11 @@ An unrelated species may be included.");
       extends Modelica.Icons.Function;
 
       input Real x[:] "Vector of numbers";
-      output Real A "Arithmetic mean";
+      output Real average "Arithmetic mean";
 
     algorithm
-      A := sum(x)/size(x, 1) annotation (Inline=true);
+      average := sum(x)/size(x, 1) annotation (Inline=true,Documentation(info="<html><p><b>Example:</b><br>
+    <code>average({1,2,3})</code> returns 2.</p></html>"));
     end average;
 
     function cartWrap = mod1 (final den=Axis.z)
@@ -1084,12 +1091,13 @@ An unrelated species may be included.");
       Integer count "Counter variable";
 
     algorithm
-      enumerated := zeros(size(x, 1));
       count := 1;
       for i in 1:size(x, 1) loop
         if x[i] then
           enumerated[i] := count;
           count := count + 1;
+        else
+          enumerated[i] := 0;
         end if;
       end for;
       annotation (Inline=true,Documentation(info="<html><p><b>Example:</b><br>
@@ -1117,6 +1125,17 @@ An unrelated species may be included.");
       annotation (Inline=true,Documentation(info="<html><p><b>Example:</b><br>
   <code>index({true,false,true})</code> returns <code>{1,3}</code>.</html>"));
     end index;
+
+    function inSign "Sign for direction into a side or face"
+      input FCSys.BaseClasses.Side side "Side";
+      output Integer sign "Sign indicating direction along the axis";
+    algorithm
+      sign := 3 - 2*side annotation (Inline=true);
+      annotation (Inline=true,Documentation(info="<html><p><b>Examples:</b><br>
+  <code>inSign(FCSys.BaseClasses.Side.n)</code> returns 1 and
+  <code>inSign(FCSys.BaseClasses.Side.p)</code> returns -1.
+  </html>"));
+    end inSign;
 
     function mod1
       "Modulo operator for 1-based indexing (compatible with Modelica)"

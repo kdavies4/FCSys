@@ -1,11 +1,11 @@
 KLD 8/3/2012:
 
 Steps to release the FCSys library:
-11/10/12
+11/29/12
     1.  Update and run 00-find-quantities.sh to be sure that all quantities are
         used in the code.  Remove the unused ones from resources/quantities.xls
         and update Quantities.mo and resources/scripts/units.mos.
-11/9/12
+11/29/12
     2.  Update and run 00-find-references.sh to be sure that all references are
         cited in the code.  Remove the unused ones from package.mo.
 11/11/12

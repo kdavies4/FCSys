@@ -22,7 +22,7 @@ git checkout gh-pages
 
 # Update the style sheet.
 git checkout $branch resources/documentation/ModelicaDoc.css
-cp -f resources/documentation/ModelicaDoc.css stylesheets
+mv -f resources/documentation/ModelicaDoc.css stylesheets
 
 # Update the images.
 rm images/*

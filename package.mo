@@ -9,6 +9,7 @@ package FCSys "Modelica library of fuel cell models"
 // the LaTeX document:
 //------------------------------------------------------------------------
 
+
 extends Modelica.Icons.Package;
 // extends FCSys.Icons.Cell.Small;
 
@@ -33,10 +34,11 @@ import FCSys.BaseClasses.Axis;
 import FCSys.BaseClasses.Orientation;
 import FCSys.BaseClasses.Side;
 import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
-import FCSys.Connectors.BaseClasses.MaterialEntropyOpt;
+import FCSys.Connectors.BaseClasses.ThermoOpt;
 import FCSys.Subregions.Reactions.BaseClasses.InitMethCharge;
 import FCSys.Subregions.Species.BaseClasses.InitMethLinMom;
 import FCSys.Subregions.Species.BaseClasses.InitMethScalar;
+
 
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
@@ -117,7 +119,7 @@ package UsersGuide "User's Guide"
         extending the existing classes and
         following the existing framework.  It will be necessary to add species (Li<sup>+</sup>, O<sup>2-</sup>, etc.) and reactions with the
         proper stoichiometries.</li>
-        <li>Please consider offering code and/or suggestions so that the library can be improved and others may benefit from your work.
+        <li>Please offer code and/or suggestions so that the library can be improved.
         Use the <a href=\"modelica://FCSys.UsersGuide.Contact\">contact information</a>.</li>
     </ol></p>
     </html>"));
@@ -209,10 +211,6 @@ package UsersGuide "User's Guide"
     <tr>
       <td valign=top class=\"noBorder\">[Mark1999]</td>
       <td valign=top class=\"noBorder\">J. E. Mark, <i>Polymer Data Handbook</i>, Oxford University Press, 1999.</td>
-    </tr>
-    <tr>
-      <td valign=top class=\"noBorder\">[Mason1965]</td>
-      <td valign=top class=\"noBorder\">W. P. Mason (ed.), <i>Physical Acoustics: Principles and Methods</i>, Vol. 2, Part A (Properties of Gases, Liquids, and Solutions), Academic Press, 1965.</td>
     </tr>
     <tr>
       <td valign=top class=\"noBorder\">[McBride1996]</td>
@@ -895,6 +893,7 @@ printing and shipping costs may be recovered.</p>
     end ModelicaLicense2;
   annotation (preferedView="info", DocumentationClass=true);
   end UsersGuide;
+
 
 annotation (
   uses(Modelica(version="3.2"), Modelica_LinearSystems2(version="2.1")),

@@ -20,7 +20,7 @@ package Quantities "Quantities to represent physical properties"
     model ExampleModel "Model that uses all of the quantities"
       extends FCSys.BaseClasses.Icons.Blocks.Continuous;
 
-      // Generated from FCSys/resources/quantities.xls, 2012-11-10
+      // Generated from FCSys/resources/quantities.xls, 2012-11-29
       parameter Q.Acceleration Acceleration=1*U.m/U.s^2 "Acceleration";
       parameter Q.Amount Amount=1*U.C "Amount";
       parameter Q.AmountReciprocal AmountReciprocal=1/U.C "Reciprocal amount";
@@ -83,17 +83,14 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.Time Time=1*U.s "Time";
       parameter Q.Velocity Velocity=1*U.m/U.s "Velocity";
       parameter Q.Velocity2 Velocity2=1*U.Sv "Squared velocity";
-      parameter Q.VelocityMassSpecific VelocityMassSpecific=1*U.kg*U.m/(U.C*U.s)
-        "Velocity times specific mass";
       parameter Q.Volume Volume=1*U.m^3 "Volume";
       parameter Q.VolumeRate VolumeRate=1*U.m^3/U.s "Rate of volume";
       parameter Q.VolumeSpecific VolumeSpecific=1*U.m^3/U.C "Specific volume";
-      parameter Q.VolumeSpecificRate VolumeSpecificRate=1*U.m^3/(U.C*U.s)
-        "Rate of specific volume";
       parameter Q.Wavenumber Wavenumber=1*U.rad/U.m "Wavenumber";
+
     end ExampleModel;
   end Examples;
-  // Generated from FCSys/resources/quantities.xls, 2012-11-10
+  // Generated from FCSys/resources/quantities.xls, 2012-11-29
   type Acceleration = Modelica.Icons.TypeReal (final unit="l/T2");
   type Amount = Modelica.Icons.TypeReal (final unit="N", min=0);
   type AmountReciprocal = Modelica.Icons.TypeReal (final unit="1/N", min=0)
@@ -169,15 +166,11 @@ package Quantities "Quantities to represent physical properties"
   type Velocity = Modelica.Icons.TypeReal (final unit="l/T");
   type Velocity2 = Modelica.Icons.TypeReal (final unit="l2/T2")
     "Squared velocity";
-  type VelocityMassSpecific = Modelica.Icons.TypeReal (final unit="l.m/(N.T)")
-    "Velocity times specific mass";
   type Volume = Modelica.Icons.TypeReal (final unit="l3", min=0);
   type VolumeRate = Modelica.Icons.TypeReal (final unit="l3/T")
     "Rate of volume";
   type VolumeSpecific = Modelica.Icons.TypeReal (final unit="l3/N", min=0)
     "Specific volume";
-  type VolumeSpecificRate = Modelica.Icons.TypeReal (final unit="l3/(N.T)")
-    "Rate of specific volume";
   type Wavenumber = Modelica.Icons.TypeReal (final unit="A/l");
 
   // Aliases that imply special display units
