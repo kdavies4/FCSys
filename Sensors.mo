@@ -894,15 +894,14 @@ package Sensors "Models to measure conditions"
       annotation (
         defaultComponentName="speciesChemicalSensor",
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}), graphics),
+                {100,100}}),graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
-                100,100}}), graphics={
-            Line(points={{-40,-100},{-40,-58}}, color={0,0,127}),
-            Line(points={{40,-100},{40,-58}}, color={0,0,127}),
-            Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="mu mphi sT ")}));
+                100,100}}), graphics={Line(points={{-40,-100},{-40,-58}}, color
+              ={0,0,127}),Line(points={{40,-100},{40,-58}}, color={0,0,127}),
+              Text(
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="mu mphi sT ")}));
     end Species;
     annotation (Documentation(info="<html><p>Since the connectors in
 <a href=\"modelica://FCSys\">FCSys</a> are hierarchical
@@ -1012,9 +1011,9 @@ sensor</a> models.
         defaultComponentName="volSensor",
         Diagram(graphics),
         Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="P")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="P")}));
     end Pressure;
 
     model Velocity "Measured velocity"
@@ -1043,15 +1042,15 @@ sensor</a> models.
       // Conditions
       0 = inert.V "No (additional) volume";
       zeros(n_vel) = inert.mPhidot "No force";
-      0 = inert.Sdot "Adiabatic";
+      0 = inert.Qdot "Adiabatic";
 
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="momSensor",
         Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="phi")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="phi")}));
     end Velocity;
 
     model Temperature "Measured temperature"
@@ -1063,9 +1062,9 @@ sensor</a> models.
         defaultComponentPrefixes="replaceable",
         defaultComponentName="entropySensor",
         Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="T")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="T")}));
     end Temperature;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -1095,7 +1094,7 @@ sensor</a> models.
         // Conditions
         0 = inert.V "No (additional) volume";
         zeros(n_vel) = inert.mPhidot "No force";
-        0 = inert.Sdot "Adiabatic";
+        0 = inert.Qdot "Adiabatic";
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="phaseInertSensor",
@@ -1197,9 +1196,9 @@ sensor</a> models.
       y = inert.V;
 
       annotation (Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="V")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="V")}));
     end Volume;
 
     model Velocity "Measured velocity"
@@ -1228,12 +1227,12 @@ sensor</a> models.
       // Conditions
       inert.p = 0 "No (additional) pressure";
       inert.mPhidot = zeros(n_vel) "No force";
-      0 = inert.Sdot "Adiabatic";
+      0 = inert.Qdot "Adiabatic";
 
       annotation (Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="phi")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="phi")}));
     end Velocity;
 
     model Temperature "Measured temperature"
@@ -1245,9 +1244,9 @@ sensor</a> models.
       y = inert.T "Measurement";
 
       annotation (Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="T")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="T")}));
     end Temperature;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -1270,7 +1269,7 @@ sensor</a> models.
         // Conditions
         0 = inert.p "No (additional) pressure";
         zeros(n_vel) = inert.mPhidot "No force";
-        0 = inert.Sdot "Adiabatic";
+        0 = inert.Qdot "Adiabatic";
 
         annotation (
           defaultComponentPrefixes="replaceable",
@@ -1361,11 +1360,11 @@ sensor</a> models.
         defaultComponentPrefixes="replaceable",
         defaultComponentName="subregionFaceSensor",
         Icon(graphics={Text(
-              extent={{-100,-20},{100,-60}},
-              lineColor={127,127,127},
-              fillColor={0,0,127},
-              fillPattern=FillPattern.Solid,
-              textString="mu phi T")}),
+                  extent={{-100,-20},{100,-60}},
+                  lineColor={127,127,127},
+                  fillColor={0,0,127},
+                  fillPattern=FillPattern.Solid,
+                  textString="mu phi T")}),
         Diagram(graphics));
     end Subregion;
 
@@ -2751,9 +2750,9 @@ sensor</a> models.
         y = material.mu;
         0 = material.Ndot "Material rate balance (no storage)";
         annotation (Icon(graphics={Text(
-                extent={{-100,-20},{100,-50}},
-                lineColor={127,127,127},
-                textString="mu")}));
+                      extent={{-100,-20},{100,-50}},
+                      lineColor={127,127,127},
+                      textString="mu")}));
       end PotentialElectrochemical;
 
       model Velocity "Sensor for velocity"
@@ -2766,9 +2765,9 @@ sensor</a> models.
         y = momentum.phi "Measurement";
         0 = momentum.mPhidot "Linear momentum rate balance (no storage)";
         annotation (Icon(graphics={Text(
-                extent={{-100,-20},{100,-50}},
-                lineColor={127,127,127},
-                textString="phi")}));
+                      extent={{-100,-20},{100,-50}},
+                      lineColor={127,127,127},
+                      textString="phi")}));
       end Velocity;
 
       model Temperature "Sensor for temperature"
@@ -2778,11 +2777,11 @@ sensor</a> models.
           annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       equation
         y = entropy.T "Measurement";
-        0 = entropy.Sdot "Entropy rate balance (no storage)";
+        0 = entropy.Qdot "Entropy rate balance (no storage)";
         annotation (Diagram(graphics), Icon(graphics={Text(
-                extent={{-100,-20},{100,-50}},
-                lineColor={127,127,127},
-                textString="T")}));
+                      extent={{-100,-20},{100,-50}},
+                      lineColor={127,127,127},
+                      textString="T")}));
       end Temperature;
     end Species;
     annotation (Documentation(info="<html><p>Since the connectors in
@@ -2913,12 +2912,12 @@ sensor</a> model.
         defaultComponentPrefixes="replaceable",
         defaultComponentName="subregionFaceSensor",
         Icon(graphics={Line(
-              points={{-70,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None), Line(
-              points={{100,0},{70,0}},
-              color={127,127,127},
-              smooth=Smooth.None)}),
+                  points={{-70,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{100,0},{70,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None)}),
         Diagram(graphics));
     end Subregion;
 
@@ -4778,8 +4777,8 @@ sensor</a> model.
               smooth=Smooth.None));
 
           connect(yNegative, negative) annotation (Line(
-              points={{-60,5.55112e-16},{-70,5.55112e-16},{-70,5.55112e-16},{
-                  -80,5.55112e-16},{-80,5.55112e-16},{-100,5.55112e-16}},
+              points={{-60,5.55112e-16},{-70,5.55112e-16},{-70,5.55112e-16},{-80,
+                  5.55112e-16},{-80,5.55112e-16},{-100,5.55112e-16}},
               color={127,127,127},
               thickness=0.5,
               smooth=Smooth.None));
@@ -4814,12 +4813,12 @@ sensor</a> model.
             defaultComponentName="phaseFaceSensor",
             Diagram(graphics),
             Icon(graphics={Line(
-                  points={{-70,0},{-100,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None), Line(
-                  points={{100,0},{70,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None)}));
+                          points={{-70,0},{-100,0}},
+                          color={127,127,127},
+                          smooth=Smooth.None),Line(
+                          points={{100,0},{70,0}},
+                          color={127,127,127},
+                          smooth=Smooth.None)}));
         end NullPhase;
       end BaseClasses;
     end Phases;
@@ -5106,7 +5105,7 @@ sensor</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(entropyRate.y, y.Sdot_avg) annotation (Line(
+        connect(entropyRate.y, y.Qdot_avg) annotation (Line(
             points={{60,-38},{60,-70},{5.55112e-16,-70},{5.55112e-16,-100}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -5128,12 +5127,12 @@ sensor</a> model.
           defaultComponentName="speciesFaceSensor",
           Diagram(graphics),
           Icon(graphics={Line(
-                points={{-70,0},{-100,0}},
-                color={0,0,0},
-                smooth=Smooth.None), Line(
-                points={{100,0},{70,0}},
-                color={0,0,0},
-                smooth=Smooth.None)}));
+                      points={{-70,0},{-100,0}},
+                      color={0,0,0},
+                      smooth=Smooth.None),Line(
+                      points={{100,0},{70,0}},
+                      color={0,0,0},
+                      smooth=Smooth.None)}));
       end Species;
 
       package Material "Relative sensors for material"
@@ -5150,13 +5149,13 @@ sensor</a> model.
           // Note:  In conjunction with the momentum rate balance, this means
           // that there's no current into either face.
           annotation (Icon(graphics={Text(
-                  extent={{-100,-20},{100,-50}},
-                  lineColor={127,127,127},
-                  textString="  mu"), Polygon(
-                  points={{-26,-26},{-18,-44},{-34,-44},{-26,-26}},
-                  lineColor={127,127,127},
-                  smooth=Smooth.None,
-                  lineThickness=0.5)}), Diagram(graphics));
+                          extent={{-100,-20},{100,-50}},
+                          lineColor={127,127,127},
+                          textString="  mu"),Polygon(
+                          points={{-26,-26},{-18,-44},{-34,-44},{-26,-26}},
+                          lineColor={127,127,127},
+                          smooth=Smooth.None,
+                          lineThickness=0.5)}), Diagram(graphics));
         end PotentialElectrochemical;
 
         model Current "Sensor for current"
@@ -5169,12 +5168,12 @@ sensor</a> model.
             "Condition of equal electrochemical potentials";
 
           annotation (Icon(graphics={Text(
-                  extent={{-100,-20},{100,-50}},
-                  lineColor={127,127,127},
-                  textString="N"), Text(
-                  extent={{-100,8},{100,-22}},
-                  lineColor={127,127,127},
-                  textString=".")}));
+                          extent={{-100,-20},{100,-50}},
+                          lineColor={127,127,127},
+                          textString="N"),Text(
+                          extent={{-100,8},{100,-22}},
+                          lineColor={127,127,127},
+                          textString=".")}));
         end Current;
 
         package BaseClasses "Base classes (not for direct use)"
@@ -5199,12 +5198,12 @@ sensor</a> model.
               "Material rate balance (no storage)";
 
             annotation (Icon(graphics={Line(
-                    points={{-70,0},{-100,0}},
-                    color={0,0,0},
-                    smooth=Smooth.None), Line(
-                    points={{100,0},{70,0}},
-                    color={0,0,0},
-                    smooth=Smooth.None)}), Diagram(graphics));
+                              points={{-70,0},{-100,0}},
+                              color={0,0,0},
+                              smooth=Smooth.None),Line(
+                              points={{100,0},{70,0}},
+                              color={0,0,0},
+                              smooth=Smooth.None)}), Diagram(graphics));
           end PartialSensor;
         end BaseClasses;
       end Material;
@@ -5229,13 +5228,13 @@ sensor</a> model.
    is <code>true</code>.
   </p></html>"),
             Icon(graphics={Text(
-                  extent={{-100,-20},{100,-50}},
-                  lineColor={127,127,127},
-                  textString="  phi"), Polygon(
-                  points={{-20,-26},{-12,-44},{-28,-44},{-20,-26}},
-                  lineColor={127,127,127},
-                  smooth=Smooth.None,
-                  lineThickness=0.5)}),
+                          extent={{-100,-20},{100,-50}},
+                          lineColor={127,127,127},
+                          textString="  phi"),Polygon(
+                          points={{-20,-26},{-12,-44},{-28,-44},{-20,-26}},
+                          lineColor={127,127,127},
+                          smooth=Smooth.None,
+                          lineThickness=0.5)}),
             Diagram(graphics));
         end Velocity;
 
@@ -5252,12 +5251,12 @@ sensor</a> model.
   <code>ax=2</code> and <code>ax=3</code>, but only if <code>inclTrans</code>
    is <code>true</code>.
   </p></html>"), Icon(graphics={Text(
-                  extent={{-100,-20},{100,-50}},
-                  lineColor={127,127,127},
-                  textString="mPhi"), Text(
-                  extent={{-100,8},{100,-22}},
-                  lineColor={127,127,127},
-                  textString=".")}));
+                          extent={{-100,-20},{100,-50}},
+                          lineColor={127,127,127},
+                          textString="mPhi"),Text(
+                          extent={{-100,8},{100,-22}},
+                          lineColor={127,127,127},
+                          textString=".")}));
         end Force;
 
         package BaseClasses "Base classes (not for direct use)"
@@ -5281,12 +5280,12 @@ sensor</a> model.
               "Linear momentum rate balance (no storage)";
 
             annotation (Icon(graphics={Line(
-                    points={{-70,0},{-100,0}},
-                    color={0,0,0},
-                    smooth=Smooth.None), Line(
-                    points={{100,0},{70,0}},
-                    color={0,0,0},
-                    smooth=Smooth.None)}), Diagram(graphics));
+                              points={{-70,0},{-100,0}},
+                              color={0,0,0},
+                              smooth=Smooth.None),Line(
+                              points={{100,0},{70,0}},
+                              color={0,0,0},
+                              smooth=Smooth.None)}), Diagram(graphics));
           end PartialSensor;
         end BaseClasses;
       end Momentum;
@@ -5300,17 +5299,17 @@ sensor</a> model.
 
         equation
           y = negative.T - positive.T "Measurement";
-          0 = negative.Sdot "Adiabatic condition";
+          0 = negative.Qdot "Adiabatic condition";
           // Note:  In conjunction with the energy rate balance, this means
           // that both faces are adiabatic.
           annotation (Icon(graphics={Text(
-                  extent={{-100,-20},{100,-50}},
-                  lineColor={127,127,127},
-                  textString="  T"), Polygon(
-                  points={{-10,-26},{-2,-44},{-18,-44},{-10,-26}},
-                  lineColor={127,127,127},
-                  smooth=Smooth.None,
-                  lineThickness=0.5)}), Diagram(graphics));
+                          extent={{-100,-20},{100,-50}},
+                          lineColor={127,127,127},
+                          textString="  T"),Polygon(
+                          points={{-10,-26},{-2,-44},{-18,-44},{-10,-26}},
+                          lineColor={127,127,127},
+                          smooth=Smooth.None,
+                          lineThickness=0.5)}), Diagram(graphics));
         end Temperature;
 
         model HeatRate "Sensor for heat flow rate"
@@ -5318,15 +5317,15 @@ sensor</a> model.
                 final unit="l2.m/T3"));
 
         equation
-          y = negative.T*negative.Sdot "Measurement";
+          y = negative.Qdot "Measurement";
           negative.T = positive.T "Isothermal condition";
           annotation (Icon(graphics={Text(
-                  extent={{-100,-20},{100,-50}},
-                  lineColor={127,127,127},
-                  textString="Q"), Text(
-                  extent={{-100,8},{100,-22}},
-                  lineColor={127,127,127},
-                  textString=".")}));
+                          extent={{-100,-20},{100,-50}},
+                          lineColor={127,127,127},
+                          textString="Q"),Text(
+                          extent={{-100,8},{100,-22}},
+                          lineColor={127,127,127},
+                          textString=".")}));
         end HeatRate;
 
         model EntropyRate "Sensor for entropy flow rate"
@@ -5334,22 +5333,19 @@ sensor</a> model.
                 final unit="N/T"));
 
         equation
-          y = (negative.Sdot - positive.Sdot)/2 "Measurement";
+          y = (negative.Qdot - positive.Qdot)/2 "Measurement";
           negative.T = positive.T "Isothermal condition";
-          annotation (Icon(graphics={
-                Text(
-                  extent={{-100,-20},{100,-50}},
-                  lineColor={127,127,127},
-                  textString="S/2"),
-                Text(
-                  extent={{-100,8},{100,-22}},
-                  lineColor={127,127,127},
-                  textString=".  "),
-                Polygon(
-                  points={{-32,-26},{-24,-44},{-40,-44},{-32,-26}},
-                  lineColor={127,127,127},
-                  smooth=Smooth.None,
-                  lineThickness=0.5)}));
+          annotation (Icon(graphics={Text(
+                          extent={{-100,-20},{100,-50}},
+                          lineColor={127,127,127},
+                          textString="S/2"),Text(
+                          extent={{-100,8},{100,-22}},
+                          lineColor={127,127,127},
+                          textString=".  "),Polygon(
+                          points={{-32,-26},{-24,-44},{-40,-44},{-32,-26}},
+                          lineColor={127,127,127},
+                          smooth=Smooth.None,
+                          lineThickness=0.5)}));
         end EntropyRate;
 
         package BaseClasses "Base classes (not for direct use)"
@@ -5371,16 +5367,16 @@ sensor</a> model.
             // By increasing the minimum from zero to small (1e-60), symbolic
             // simplification becomes possible.
           equation
-            0 = negative.T*negative.Sdot + positive.T*positive.Sdot
+            0 = negative.Qdot + positive.Qdot
               "Energy rate balance (no storage)";
 
             annotation (Icon(graphics={Line(
-                    points={{-70,0},{-100,0}},
-                    color={0,0,0},
-                    smooth=Smooth.None), Line(
-                    points={{100,0},{70,0}},
-                    color={0,0,0},
-                    smooth=Smooth.None)}), Diagram(graphics));
+                              points={{-70,0},{-100,0}},
+                              color={0,0,0},
+                              smooth=Smooth.None),Line(
+                              points={{100,0},{70,0}},
+                              color={0,0,0},
+                              smooth=Smooth.None)}), Diagram(graphics));
           end PartialSensor;
         end BaseClasses;
       end Entropy;
@@ -5470,8 +5466,8 @@ sensor</a> model.
           smooth=Smooth.None));
 
       connect(y, saturation.y) annotation (Line(
-          points={{5.55112e-16,-100},{5.55112e-16,-75},{-1.40998e-15,-75},{
-              -1.40998e-15,-51}},
+          points={{5.55112e-16,-100},{5.55112e-16,-75},{-1.40998e-15,-75},{-1.40998e-15,
+              -51}},
           color={0,0,127},
           smooth=Smooth.None));
       annotation (Icon(coordinateSystem(

@@ -54,6 +54,7 @@ package Connectors "Declarative and imperative connectors"
               extent={{-100,20},{100,60}},
               textString="%name",
               lineColor={0,0,0})}));
+
   end ChemicalBusInternal;
 
   connector ChemicalInput
@@ -76,10 +77,11 @@ package Connectors "Declarative and imperative connectors"
             lineColor={208,104,0}), Ellipse(extent={{-100,100},{100,-100}},
               lineColor={208,104,0})}),
       Diagram(graphics={Ellipse(
-              extent={{-18,18},{18,-18}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineColor={208,104,0})}));
+            extent={{-18,18},{18,-18}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            lineColor={208,104,0})}));
+
   end ChemicalInput;
 
   connector ChemicalOutput
@@ -98,6 +100,7 @@ package Connectors "Declarative and imperative connectors"
       Icon(graphics={Ellipse(extent={{-100,100},{100,-100}}, lineColor={208,104,
                 0})}),
       Diagram(graphics));
+
   end ChemicalOutput;
 
   expandable connector FaceBus
@@ -138,14 +141,14 @@ package Connectors "Declarative and imperative connectors"
             lineThickness=0.5)}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics={Text(
-              extent={{-100,36},{100,76}},
-              textString="%name",
-              lineColor={0,0,0}),Ellipse(
-              extent={{-30,30},{30,-30}},
-              lineColor={127,127,127},
-              fillColor={191,191,191},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5)}));
+            extent={{-100,36},{100,76}},
+            textString="%name",
+            lineColor={0,0,0}), Ellipse(
+            extent={{-30,30},{30,-30}},
+            lineColor={127,127,127},
+            fillColor={191,191,191},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5)}));
   end FaceBus;
 
   expandable connector FaceBusInternal
@@ -175,10 +178,11 @@ package Connectors "Declarative and imperative connectors"
               extent={{-100,20},{100,60}},
               textString="%name",
               lineColor={0,0,0})}));
+
   end FaceBusInternal;
 
   connector FaceX
-    "X-axis connector to transport material, transverse displacement, and entropy of a single species"
+    "X-axis connector to transport material, displacement, and heat of a single species"
     extends BaseClasses.PartialFace;
 
     parameter Boolean slipY=false "Include displacement along the y axis"
@@ -209,10 +213,11 @@ package Connectors "Declarative and imperative connectors"
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(extent={{-100,100},{100,-100}},
               lineColor={127,127,127})}));
+
   end FaceX;
 
   connector FaceY
-    "Y-axis connector to transport material, transverse displacement, and entropy of a single species"
+    "Y-axis connector to transport material, displacement, and heat of a single species"
     extends BaseClasses.PartialFace;
 
     parameter Boolean slipZ=false "Include displacement along the z axis"
@@ -243,10 +248,11 @@ package Connectors "Declarative and imperative connectors"
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(extent={{-100,100},{100,-100}},
               lineColor={127,127,127})}));
+
   end FaceY;
 
   connector FaceZ
-    "Z-axis connector to transport material, transverse displacement, and entropy of a single species"
+    "Z-axis connector to transport material, displacement, and heat of a single species"
     extends BaseClasses.PartialFace;
 
     parameter Boolean slipX=false "Include displacement along the x axis"
@@ -277,10 +283,11 @@ package Connectors "Declarative and imperative connectors"
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(extent={{-100,100},{100,-100}},
               lineColor={127,127,127})}));
+
   end FaceZ;
 
   connector FaceGeneric
-    "Connector to transport material, transverse displacement, and entropy of a single species along a generic axis"
+    "Connector to transport material, displacement, and heat of a single species along a generic axis"
     extends BaseClasses.PartialFace;
 
     parameter Boolean slip1=false
@@ -321,10 +328,10 @@ package Connectors "Declarative and imperative connectors"
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(extent={{-100,100},{100,-100}},
               lineColor={127,127,127})}));
+
   end FaceGeneric;
 
-  connector Inert
-    "Connector to exchange linear momentum and entropy by diffusion"
+  connector Inert "Connector to exchange linear momentum and heat by diffusion"
 
     parameter Integer n_vel(
       final min=0,
@@ -336,9 +343,9 @@ package Connectors "Declarative and imperative connectors"
     Q.Velocity phi[n_vel](each nominal=1*U.cm/U.s) "Velocity";
     flow Q.Force mPhidot[n_vel](each nominal=1*U.N) "Force";
 
-    // Entropy
-    Q.TemperatureAbsolute T(nominal=298.15*U.K, displayUnit="K") "Temperature";
-    flow Q.Current Sdot(nominal=1*U.W/(298.15*U.K)) "Entropy flow rate";
+    // Heat
+    Q.TemperatureAbsolute T(nominal=298.15*U.K) "Temperature";
+    flow Q.Power Qdot(nominal=1*U.W) "Heat flow rate";
 
     annotation (
       Documentation(info="<html>
@@ -349,18 +356,21 @@ package Connectors "Declarative and imperative connectors"
     <p>For more information, see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Diagram(graphics={Text(
-              extent={{-100,36},{100,76}},
-              textString="%name",
-              lineColor={0,0,0}),Ellipse(
-              extent={{-30,30},{30,-30}},
-              lineColor={72,90,180},
-              fillPattern=FillPattern.Solid,
-              fillColor={102,128,255}),Ellipse(
-              extent={{-18,18},{18,-18}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineColor={72,90,180})}),
+      Diagram(graphics={
+          Text(
+            extent={{-100,36},{100,76}},
+            textString="%name",
+            lineColor={0,0,0}),
+          Ellipse(
+            extent={{-30,30},{30,-30}},
+            lineColor={72,90,180},
+            fillPattern=FillPattern.Solid,
+            fillColor={102,128,255}),
+          Ellipse(
+            extent={{-18,18},{18,-18}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            lineColor={72,90,180})}),
       Icon(graphics={Ellipse(
             extent={{-100,100},{100,-100}},
             lineColor={72,90,180},
@@ -370,6 +380,7 @@ package Connectors "Declarative and imperative connectors"
             fillColor={255,255,255},
             fillPattern=FillPattern.Solid,
             lineColor={72,90,180})}));
+
   end Inert;
 
   connector InertAmagat
@@ -411,13 +422,13 @@ package Connectors "Declarative and imperative connectors"
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Diagram(graphics={Ellipse(
-              extent={{-30,30},{30,-30}},
-              lineColor={72,90,180},
-              fillPattern=FillPattern.Solid,
-              fillColor={102,128,255}),Text(
-              extent={{-30,20},{30,-20}},
-              lineColor={0,0,0},
-              textString="A")}),
+            extent={{-30,30},{30,-30}},
+            lineColor={72,90,180},
+            fillPattern=FillPattern.Solid,
+            fillColor={102,128,255}), Text(
+            extent={{-30,20},{30,-20}},
+            lineColor={0,0,0},
+            textString="A")}),
       Icon(graphics={
           Ellipse(
             extent={{-100,100},{100,-100}},
@@ -429,6 +440,7 @@ package Connectors "Declarative and imperative connectors"
             extent={{-100,80},{100,-90}},
             lineColor={0,0,0},
             textString="A")}));
+
   end InertAmagat;
 
   connector InertDalton
@@ -461,13 +473,13 @@ package Connectors "Declarative and imperative connectors"
   <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Diagram(graphics={Ellipse(
-              extent={{-30,30},{30,-30}},
-              lineColor={72,90,180},
-              fillPattern=FillPattern.Solid,
-              fillColor={102,128,255}),Text(
-              extent={{-30,20},{30,-20}},
-              lineColor={0,0,0},
-              textString="D")}),
+            extent={{-30,30},{30,-30}},
+            lineColor={72,90,180},
+            fillPattern=FillPattern.Solid,
+            fillColor={102,128,255}), Text(
+            extent={{-30,20},{30,-20}},
+            lineColor={0,0,0},
+            textString="D")}),
       Icon(graphics={
           Ellipse(
             extent={{-100,100},{100,-100}},
@@ -479,10 +491,11 @@ package Connectors "Declarative and imperative connectors"
             extent={{-100,80},{100,-90}},
             lineColor={0,0,0},
             textString="D")}));
+
   end InertDalton;
 
   connector InertInternal
-    "Internal connector to exchange linear momentum and entropy by diffusion"
+    "Internal connector to exchange linear momentum and heat by diffusion"
 
     parameter Integer n_vel(
       final min=0,
@@ -494,9 +507,9 @@ package Connectors "Declarative and imperative connectors"
     Q.Velocity phi[n_vel](each nominal=1*U.cm/U.s) "Velocity";
     flow Q.Force mPhidot[n_vel](each nominal=1*U.N) "Force";
 
-    // Entropy
-    Q.TemperatureAbsolute T(nominal=298.15*U.K, displayUnit="K") "Temperature";
-    flow Q.Current Sdot(nominal=1*U.W/(298.15*U.K)) "Entropy flow rate";
+    // Heat
+    Q.TemperatureAbsolute T(nominal=298.15*U.K) "Temperature";
+    flow Q.Power Qdot(nominal=1*U.W) "Heat flow rate";
 
     annotation (
       defaultComponentPrefixes="protected",
@@ -526,6 +539,7 @@ package Connectors "Declarative and imperative connectors"
             fillColor={255,255,255},
             fillPattern=FillPattern.Solid,
             lineColor={72,90,180})}));
+
   end InertInternal;
 
   connector Material "Connector for material transport"
@@ -556,6 +570,7 @@ package Connectors "Declarative and imperative connectors"
             points={{-100,0},{100,0}},
             color={0,0,0},
             smooth=Smooth.None)}));
+
   end Material;
 
   connector Mechanical "Connector for transverse displacement"
@@ -563,8 +578,6 @@ package Connectors "Declarative and imperative connectors"
     Q.Pressure tau(nominal=1*U.Pa) "Shear stress";
     flow Q.VolumeRate APdot(nominal=1*U.cm^3/U.s)
       "Shear velocity times surface area";
-
-    extends Modelica.Icons.UnderConstruction;
     annotation (
       Documentation(info="<html>
 
@@ -597,12 +610,13 @@ package Connectors "Declarative and imperative connectors"
             points={{0,100},{0,-100}},
             color={0,0,0},
             smooth=Smooth.None)}));
+
   end Mechanical;
 
-  connector Thermal "Connector to transport entropy"
+  connector Thermal "Connector to transport heat"
 
     Q.TemperatureAbsolute T(nominal=298.15*U.K) "Temperature";
-    flow Q.Current Sdot(nominal=1*U.W/(298.15*U.K)) "Entropy flow rate";
+    flow Q.Power Qdot(nominal=1*U.W) "Heat flow rate";
 
     annotation (
       Documentation(info="<html>For information, see the documentation in the
@@ -636,6 +650,7 @@ package Connectors "Declarative and imperative connectors"
             points={{-100,-100},{100,100}},
             color={0,0,0},
             smooth=Smooth.None)}));
+
   end Thermal;
 
   connector RealInput = input Real
@@ -728,6 +743,7 @@ Protected connector with one input signal of type <code>Real</code>.</p>
               extent={{-200,50},{200,90}},
               textString="%name",
               lineColor={0,0,0})}));
+
   end RealInputBus;
 
   expandable connector RealInputBusInternal
@@ -763,6 +779,7 @@ Protected connector with one input signal of type <code>Real</code>.</p>
               fillColor={0,0,127},
               fillPattern=FillPattern.Solid,
               lineThickness=0.5)}));
+
   end RealInputBusInternal;
 
   connector RealOutput = output Real
@@ -849,6 +866,7 @@ Protected connector with one output signal of type <code>Real</code>.</p>
               extent={{-200,50},{200,90}},
               textString="%name",
               lineColor={0,0,0})}));
+
   end RealOutputBus;
 
   expandable connector RealOutputBusInternal
@@ -882,6 +900,7 @@ Protected connector with one output signal of type <code>Real</code>.</p>
               extent={{-200,24},{200,64}},
               textString="%name",
               lineColor={0,0,0})}));
+
   end RealOutputBusInternal;
 
   package BaseClasses "Base classes (not for direct use)"
@@ -925,6 +944,7 @@ Protected connector with one output signal of type <code>Real</code>.</p>
               lineColor={208,104,0},
               fillPattern=FillPattern.Solid,
               fillColor={255,128,0})}));
+
     end PartialChemical;
 
     connector PartialFace
@@ -969,6 +989,7 @@ Protected connector with one output signal of type <code>Real</code>.</p>
               lineColor={127,127,127},
               fillColor={191,191,191},
               fillPattern=FillPattern.Solid)}));
+
     end PartialFace;
 
     type ThermoOpt = enumeration(
@@ -1094,9 +1115,9 @@ Protected connector with one output signal of type <code>Real</code>.</p>
           <a href=\"modelica://FCSys.Connectors.Inert\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertI.png\"></a>
           <a href=\"modelica://FCSys.Connectors.InertAmagat\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertAmagatI.png\"></a>
           <a href=\"modelica://FCSys.Connectors.InertDalton\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertDaltonI.png\"></a></td>
-        <td valign=middle>Entropy</td>
+        <td valign=middle>Heat</td>
         <td valign=middle>Temperature<br><i>T</i> [L<sup>2</sup> M N<sup>-1</sup> T<sup>-2</sup>]</td>
-        <td valign=middle>Entropy flow rate<sup><a name=\"ref1\"></a><a href=\"#footnote1\">1</a></sup><br><i>S&#775;</i> [N T<sup>-1</sup>]</td>
+        <td valign=middle>Heat flow rate<sup></sup><br><i>Q&#775;</i> [L<sup>2</sup> M T<sup>-3</sup>]</td>
       </tr>
       <tr>
         <td>
@@ -1114,8 +1135,8 @@ Protected connector with one output signal of type <code>Real</code>.</p>
       </tr>
     </table>
 
-  <p>The product of the efforts and flows of the linear momentum, transverse displacement,
-  and entropy pairs is the rate of energy associated with the interaction.
+  <p>The product of the efforts and flows of the linear momentum and displacement 
+  pairs is the rate of energy associated with the interaction.
   However, many of the pairs are different.
   The effort of the material exchange pair is electrochemical potential divided by
   temperature because it is used in the chemical equilibrium
@@ -1129,6 +1150,7 @@ Protected connector with one output signal of type <code>Real</code>.</p>
   The additivity of volume and
   pressure pairs describe static balances; therefore, their flows are the quantities
   rather than the rates of the quantities.
+  **Discuss heat pair
   </p>
 
   <p>In addition to the material exchange pair, the chemical
@@ -1258,15 +1280,6 @@ Protected connector with one output signal of type <code>Real</code>.</p>
     <a href=\"modelica://FCSys.Connectors.InertDelton\">InertDalton</a> connector (instead of
     instead of <a href=\"modelica://FCSys.Connectors.InertDelton\">InertAmagat</a>).
     </p>
-
-  <p id=\"footnote1\"><sup>1. The <a href=\"modelica://Modelica.Thermal.HeatTransfer\">Modelica.Thermal.HeatTransfer</a>
-  package uses heat rate as the flow variable rather than entropy rate.  The reason is that it is awkward to
-  apply Fourier's Law (thermal conduction) in terms of entropy flow rate to a component that does not store heat,
-  since entropy is generated [<a href=\"modelica://FCSys.UsersGuide.References\">Hogan2006</a>],
-  [<a href=\"modelica://FCSys.UsersGuide.References\">Cellier1991</a>, p. 304].  However, the
-  <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model is transient and does not directly
-  impose that the heat transfer rates sum to zero.  Therefore, it is just as convenient to write Fourier's law in terms of
-  entropy flow rate.  This approach is chosen in <a href=\"modelica://FCSys\">FCSys</a> for consistency and symmetry.<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></sup></p>
 
   <p>
   <b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>

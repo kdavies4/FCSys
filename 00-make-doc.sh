@@ -28,7 +28,7 @@ mv -f resources/documentation/ModelicaDoc.css stylesheets
 # Update the images.
 rm images/*
 IFS=$'\n' # Allow spaces in file names.
-for f in `find ./resources/documentation -iname *.png -o -iname *.svg -o -iname *.ico -o -iname *.gif -o -iname *.pdf`
+for f in `find ./resources/documentation -name "*.png" -o -name "*.svg" -o -name "*.ico" -o -name "*.gif" -o -name "*.pdf"`
 do
     cp $f images/
 done

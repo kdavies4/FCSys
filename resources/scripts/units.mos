@@ -22,7 +22,7 @@ checkUnits = false "true, if the constants and units should be checked";
 // quantities in FCSys.Quantities should be used by default, then specify
 // them here.  Be sure that the desired unit is included in a
 // defineUnitConversion command below.
-// Generated from FCSys/resources/quantities.xls, 2012-11-29
+// Generated from FCSys/resources/quantities.xls, 2012-12-16
 defineDefaultDisplayUnit("1/N", "1/mol") "Reciprocal amount";
 defineDefaultDisplayUnit("1/T", "1/s") "NumberRate";
 defineDefaultDisplayUnit("A", "rad") "Angle";
@@ -112,7 +112,7 @@ defineUnitConversion("m/(l.T2)", "kPag", 1/kPa, -101.325) "Pressure";
 // See BIPM (2006, p. 129 Sec. 4.2).
 
 // Conversions without offsets (generated from FCSys/resources/quantities.xls,
-// 2012-11-29)
+// 2012-12-16)
 defineUnitConversion("1", "%", 1/'%') "Number";
 defineUnitConversion("1", "J/(mol.K)", mol*K/J) "Absolute number";
 defineUnitConversion("1/N", "1/C", C) "Reciprocal amount";
@@ -132,6 +132,7 @@ defineUnitConversion("l", "m", 1/m) "Length";
 defineUnitConversion("l", "mm", 1/mm) "Length";
 defineUnitConversion("l.m/N2", "H/m", m/H) "Permeability";
 defineUnitConversion("l.m/T2", "N", 1/N) "Force";
+defineUnitConversion("l.T/m", "1/(Pa.s)", Pa*s) "Fluidity";
 defineUnitConversion("l.T/N", "cm/A", A/cm) "Resistivity";
 defineUnitConversion("l.T/N", "m/A", A/m) "Resistivity";
 defineUnitConversion("l.T/N", "m.K/W", W/(m*K)) "Resistivity";

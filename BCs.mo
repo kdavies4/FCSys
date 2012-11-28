@@ -279,14 +279,14 @@ package BCs "Models for boundary conditions"
     equation
 
       connect(xNegative.H2.material, volume.face.material) annotation (Line(
-          points={{5.55112e-16,5.55112e-16},{-6,5.55112e-16},{-6,0},{-10,0},{
-              -10,6.10623e-16},{-20,6.10623e-16}},
+          points={{5.55112e-16,5.55112e-16},{-6,5.55112e-16},{-6,0},{-10,0},{-10,
+              6.10623e-16},{-20,6.10623e-16}},
           color={127,127,127},
           smooth=Smooth.None,
           thickness=0.5));
       connect(xNegative.H2.thermal, volume.face.thermal) annotation (Line(
-          points={{5.55112e-16,5.55112e-16},{-6,5.55112e-16},{-6,0},{-10,0},{
-              -10,6.10623e-16},{-20,6.10623e-16}},
+          points={{5.55112e-16,5.55112e-16},{-6,5.55112e-16},{-6,0},{-10,0},{-10,
+              6.10623e-16},{-20,6.10623e-16}},
           color={127,127,127},
           smooth=Smooth.None,
           thickness=0.5));
@@ -358,6 +358,7 @@ package BCs "Models for boundary conditions"
           string="%second",
           index=1,
           extent={{-10,3},{-10,3}}));
+
     end AdaptBusH2O;
 
     model AdaptBusN2
@@ -382,6 +383,7 @@ package BCs "Models for boundary conditions"
           string="%second",
           index=1,
           extent={{-10,3},{-10,3}}));
+
     end AdaptBusN2;
 
     model AdaptBusO2
@@ -407,6 +409,7 @@ package BCs "Models for boundary conditions"
           string="%second",
           index=1,
           extent={{-10,3},{-10,3}}));
+
     end AdaptBusO2;
 
     model AdaptFluid
@@ -450,7 +453,7 @@ package BCs "Models for boundary conditions"
       // Rate balances (no storage)
       0 = (medium.MM*U.kg/U.mol)*face.material.Ndot + fluidPort.m_flow*U.kg/U.s
         "Mass";
-      face.thermal.Sdot = s*face.material.Ndot
+      face.thermal.Qdot = s*face.material.Ndot
         "No thermal conduction--advection only";
       // The rest of the energy balance cancels.
 
@@ -458,21 +461,18 @@ package BCs "Models for boundary conditions"
         Documentation(info="<html><p>Note that transverse momentum is not included.</p>
   </html>"),
         Diagram(graphics),
-        Icon(graphics={
-            Line(
-              points={{0,40},{0,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{0,0},{100,0}},
-              color={0,127,255},
-              smooth=Smooth.None)}));
+        Icon(graphics={Line(
+                  points={{0,40},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{0,0},{100,0}},
+                  color={0,127,255},
+                  smooth=Smooth.None)}));
     end AdaptFluid;
 
     model 'AdaptSubregione-'
@@ -488,7 +488,7 @@ package BCs "Models for boundary conditions"
             iconTransformation(extent={{-110,-10},{-90,10}})));
       Modelica.Electrical.Analog.Interfaces.NegativePin pin
         "Modelica electrical pin" annotation (Placement(transformation(extent={
-                {90,30},{110,50}}), iconTransformation(extent={{90,30},{110,50}})));
+                {90,30},{110,50}}),iconTransformation(extent={{90,30},{110,50}})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port
         "Modelica heat port" annotation (Placement(transformation(extent={{90,-50},
                 {110,-30}}), iconTransformation(extent={{90,-50},{110,-30}})));
@@ -511,26 +511,22 @@ package BCs "Models for boundary conditions"
           color={191,0,0},
           smooth=Smooth.None));
 
-      annotation (Diagram(graphics), Icon(graphics={
-            Line(
-              points={{0,40},{0,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,40},{100,40}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{100,-40}},
-              color={191,0,0},
-              smooth=Smooth.None)}));
+      annotation (Diagram(graphics), Icon(graphics={Line(
+                  points={{0,40},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,40},{100,40}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{100,-40}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}));
     end 'AdaptSubregione-';
 
     model 'AdaptBuse-'
@@ -575,26 +571,22 @@ package BCs "Models for boundary conditions"
           color={191,0,0},
           smooth=Smooth.None));
 
-      annotation (Diagram(graphics), Icon(graphics={
-            Line(
-              points={{0,40},{0,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,40},{100,40}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{100,-40}},
-              color={191,0,0},
-              smooth=Smooth.None)}));
+      annotation (Diagram(graphics), Icon(graphics={Line(
+                  points={{0,40},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,40},{100,40}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{100,-40}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}));
     end 'AdaptBuse-';
 
     model 'Adapte-'
@@ -626,29 +618,25 @@ package BCs "Models for boundary conditions"
       0 = face.material.Ndot - pin.i*U.A "Material";
       // In FCSys, current is material (e.g., electron) flow, not charge flow;
       // therefore, the flow rate is negated.
-      0 = face.thermal.T*face.thermal.Sdot + port.Q_flow*U.W "Energy";
+      0 = face.thermal.Qdot + port.Q_flow*U.W "Energy";
       // There is no electrical work since electrons are not stored and there
       // is no potential difference.
 
-      annotation (Diagram(graphics), Icon(graphics={
-            Line(
-              points={{0,40},{0,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{0,40},{100,40}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{100,-40}},
-              color={191,0,0},
-              smooth=Smooth.None)}));
+      annotation (Diagram(graphics), Icon(graphics={Line(
+                  points={{0,40},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{0,40},{100,40}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{100,-40}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}));
     end 'Adapte-';
 
     package BaseClasses "Base classes (not for direct use)"
@@ -682,21 +670,18 @@ package BCs "Models for boundary conditions"
             color={0,127,255},
             smooth=Smooth.None));
 
-        annotation (Diagram(graphics), Icon(graphics={
-              Line(
-                points={{0,40},{0,-40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash,
-                thickness=0.5),
-              Line(
-                points={{0,0},{-100,0}},
-                color={127,127,127},
-                smooth=Smooth.None),
-              Line(
-                points={{0,0},{100,0}},
-                color={0,127,255},
-                smooth=Smooth.None)}));
+        annotation (Diagram(graphics), Icon(graphics={Line(
+                      points={{0,40},{0,-40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash,
+                      thickness=0.5),Line(
+                      points={{0,0},{-100,0}},
+                      color={127,127,127},
+                      smooth=Smooth.None),Line(
+                      points={{0,0},{100,0}},
+                      color={0,127,255},
+                      smooth=Smooth.None)}));
       end PartialAdaptBus;
     end BaseClasses;
   end Adapters;
@@ -722,7 +707,7 @@ package BCs "Models for boundary conditions"
         defaultComponentName="testStand",
         defaultComponentPrefixes="replaceable",
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}), graphics));
+                {100,100}}),graphics));
     end TestProfile;
 
     model ReplayData
@@ -1189,7 +1174,7 @@ package BCs "Models for boundary conditions"
         Commands(file="tests/LOOCV/LOOCV.mos"
             "Perform leave-one-out cross validation on the cell model"),
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-180,-100},
-                {180,100}}), graphics),
+                {180,100}}),graphics),
         Icon(graphics),
         experiment(StopTime=15481, Algorithm="Euler"),
         experimentSetupOutput);
@@ -1409,11 +1394,11 @@ package BCs "Models for boundary conditions"
                   {160,160}}), graphics),
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
                   160,160}}), graphics={Rectangle(
-                extent={{-160,160},{160,-160}},
-                lineColor={191,191,191},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Backward), Rectangle(extent={{-160,160},
-                    {160,-160}}, lineColor={0,0,0})}));
+                      extent={{-160,160},{160,-160}},
+                      lineColor={191,191,191},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Backward),Rectangle(extent={{-160,
+                160},{160,-160}}, lineColor={0,0,0})}));
       end PartialTestStand;
 
       partial model PartialTestStandNoIO "Partial test stand"
@@ -1636,8 +1621,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.C, C.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1648,8 +1633,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.C19HF37O5S, C19HF37O5S.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1660,8 +1645,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.'e-', 'e-'.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1672,8 +1657,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.H2, H2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1684,8 +1669,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.H2O, H2O.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1696,8 +1681,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.'H+', 'H+'.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1708,8 +1693,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.N2, N2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1720,8 +1705,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.O2, O2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1802,8 +1787,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.H2, H2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1814,8 +1799,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.H2O, H2O.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1826,8 +1811,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.N2, N2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1838,8 +1823,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.O2, O2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1895,8 +1880,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.C, C.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1907,8 +1892,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.'e-', 'e-'.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1974,8 +1959,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.C19HF37O5S, C19HF37O5S.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1986,8 +1971,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.H2O, H2O.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1998,8 +1983,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.'H+', 'H+'.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -2404,9 +2389,9 @@ package BCs "Models for boundary conditions"
                   {120,100}}), graphics),
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-120,-100},{
                   120,100}}), graphics={Text(
-                extent={{0,-76},{100,-46}},
-                lineColor={127,127,127},
-                textString="%Data.formula")}));
+                      extent={{0,-76},{100,-46}},
+                      lineColor={127,127,127},
+                      textString="%Data.formula")}));
       end Species;
 
       package BaseClasses "Base classes (not for direct use)"
@@ -2823,7 +2808,7 @@ boundary condition</a> models.
           // results.
         equation
           inert.mPhidot = zeros(n_vel) "No force";
-          inert.Sdot = 0 "Adiabatic";
+          inert.Qdot = 0 "Adiabatic";
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="volBC");
         end PartialBC;
@@ -2874,7 +2859,7 @@ boundary condition</a> models.
               inert.mPhidot[i] = 0 "No force along the other axes";
             end if;
           end for;
-          inert.Sdot = 0 "Adiabatic";
+          inert.Qdot = 0 "Adiabatic";
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="momBC");
         end PartialBC;
@@ -2903,7 +2888,7 @@ boundary condition</a> models.
             bCType=BaseClasses.BCType.EntropyFlowRate, redeclare
             Connectors.RealInput u(final unit="N/T"));
       equation
-        inert.Sdot = u;
+        inert.Qdot = u;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="entropyBC");
       end EntropyFlowRate;
@@ -2913,7 +2898,7 @@ boundary condition</a> models.
             bCType=BaseClasses.BCType.HeatFlowRate, redeclare
             Connectors.RealInput u(final unit="l2.m/T3"));
       equation
-        inert.T*inert.Sdot = u;
+        inert.Qdot = u;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="entropyBC");
       end HeatFlowRate;
@@ -3354,7 +3339,7 @@ boundary condition</a> models.
           // results.
         equation
           inert.mPhidot = zeros(n_vel) "No force";
-          inert.Sdot = 0 "No entropy flow";
+          inert.Qdot = 0 "No entropy flow";
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="pressBC");
         end PartialBC;
@@ -3405,7 +3390,7 @@ boundary condition</a> models.
               inert.mPhidot[i] = 0 "No force along the other axes";
             end if;
           end for;
-          inert.Sdot = 0 "Adiabatic";
+          inert.Qdot = 0 "Adiabatic";
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="momBC");
         end PartialBC;
@@ -3434,7 +3419,7 @@ boundary condition</a> models.
             bCType=BaseClasses.BCType.EntropyFlowRate, redeclare
             Connectors.RealInput u(final unit="N/T"));
       equation
-        inert.Sdot = u;
+        inert.Qdot = u;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="entropyBC");
       end EntropyFlowRate;
@@ -3443,7 +3428,7 @@ boundary condition</a> models.
         extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.HeatFlowRate,
             redeclare Connectors.RealInput u(final unit="l2.m/T3"));
       equation
-        inert.T*inert.Sdot = u;
+        inert.Qdot = u;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="entropyBC");
       end HeatFlowRate;
@@ -5371,7 +5356,7 @@ boundary condition</a> models.
               Connectors.RealInput u(final unit="N/T"));
 
         equation
-          thermal.Sdot = u;
+          thermal.Qdot = u;
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="entropyBC");
         end EntropyFlowRate;
@@ -5382,7 +5367,7 @@ boundary condition</a> models.
               Connectors.RealInput u(final unit="l2.m/T3"));
 
         equation
-          thermal.Sdot = u;
+          thermal.Qdot = u;
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="entropyBC",
@@ -8594,8 +8579,7 @@ boundary condition</a> model.
               Connectors.RealInput u(final unit="l2.m/(N.T2)", displayUnit="K"));
         equation
           negative.T - positive.T = u "Condition";
-          0 = negative.T*negative.Sdot + positive.T*positive.Sdot
-            "Energy rate balance (no storage)";
+          0 = negative.Qdot + positive.Qdot "Energy rate balance (no storage)";
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="entropyBC");
         end Temperature;
@@ -8607,9 +8591,8 @@ boundary condition</a> model.
               Connectors.RealInput u(final unit="N/T"));
 
         equation
-          (negative.Sdot - positive.Sdot)/2 = u "Condition";
-          0 = negative.T*negative.Sdot + positive.T*positive.Sdot
-            "Energy rate balance (no storage)";
+          (negative.Qdot - positive.Qdot)/2 = u "Condition";
+          0 = negative.Qdot + positive.Qdot "Energy rate balance (no storage)";
 
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="entropyBC");
@@ -8622,9 +8605,8 @@ boundary condition</a> model.
               Connectors.RealInput u(final unit="l2.m/T3"));
 
         equation
-          negative.T*negative.Sdot = u "Condition";
-          0 = negative.T*negative.Sdot + positive.T*positive.Sdot
-            "Energy rate balance (no storage)";
+          negative.Qdot = u "Condition";
+          0 = negative.Qdot + positive.Qdot "Energy rate balance (no storage)";
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -8843,6 +8825,7 @@ The default global default settings will be used for the current simulation.",
             color={127,127,127},
             smooth=Smooth.None)}),
       Diagram(graphics));
+
   end Defaults;
 
   model ClosedVolume
@@ -9217,13 +9200,13 @@ should be used if these values are needed.
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             grid={2,2}),graphics={Rectangle(
-              extent={{-100,40},{100,-40}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineColor={0,0,0}), Text(
-              extent={{-100,-10},{100,10}},
-              lineColor={127,127,127},
-              textString="%y")}),
+                  extent={{-100,40},{100,-40}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  lineColor={0,0,0}),Text(
+                  extent={{-100,-10},{100,10}},
+                  lineColor={127,127,127},
+                  textString="%y")}),
         Diagram(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},

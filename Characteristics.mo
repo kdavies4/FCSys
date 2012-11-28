@@ -36,41 +36,28 @@ package Characteristics
       Q.TemperatureAbsolute T=273.15*U.K + 200*time*U.K/10;
 
       // Results
-      // Resistivity
-      output Q.Resistivity alpha=DataC.alpha(T);
-      output Q.Resistivity alpha_tau_H2=DataH2.alpha_tau(T);
-      output Q.ResistivityThermal alpha_Sdot_H2=DataH2.alpha_Sdot(T);
-      output Q.Resistivity alpha_tau_H2O=DataH2O.alpha_tau(T);
-      output Q.ResistivityThermal alpha_Sdot_H2O=DataH2O.alpha_Sdot(T);
-      output Q.Resistivity alpha_tau_N2=DataN2.alpha_tau(T);
-      output Q.ResistivityThermal alpha_Sdot_N2=DataN2.alpha_Sdot(T);
-      output Q.Resistivity alpha_tau_O2=DataO2.alpha_tau(T);
-      output Q.ResistivityThermal alpha_Sdot_O2=DataO2.alpha_Sdot(T);
-      //
       // Specific heat capacity at reference pressure
-      output Q.CapacityThermalSpecific c0_C=DataC.c0(T);
-      output Q.CapacityThermalSpecific c0_C19HF37O5S=DataC19HF37O5S.c0(T);
-      output Q.CapacityThermalSpecific 'c0_e-'='Datae-'.c0(T);
-      output Q.CapacityThermalSpecific c0_H2=DataH2.c0(T);
-      output Q.CapacityThermalSpecific c0_H2O=DataH2O.c0(T);
-      output Q.CapacityThermalSpecific c0_H2O_liquid=DataH2OLiquid.c0(T);
-      output Q.CapacityThermalSpecific 'c0_H+'='DataH+'.c0(T);
-      output Q.CapacityThermalSpecific c0_N2=DataN2.c0(T);
-      output Q.CapacityThermalSpecific c0_O2=DataO2.c0(T);
+      output Q.CapacityThermalSpecific c_p_C=DataC.c_p(p, T);
+      output Q.CapacityThermalSpecific c_p_C19HF37O5S=DataC19HF37O5S.c_p(p, T);
+      output Q.CapacityThermalSpecific 'c_p_e-'='Datae-'.c_p(p, T);
+      output Q.CapacityThermalSpecific c_p_H2=DataH2.c_p(p, T);
+      output Q.CapacityThermalSpecific c_p_H2O=DataH2O.c_p(p, T);
+      output Q.CapacityThermalSpecific c_p_H2O_liquid=DataH2OLiquid.c_p(p, T);
+      output Q.CapacityThermalSpecific 'c_p_H+'='DataH+'.c_p(p, T);
+      output Q.CapacityThermalSpecific c_p_N2=DataN2.c_p(p, T);
+      output Q.CapacityThermalSpecific c_p_O2=DataO2.c_p(p, T);
       //
       // Specific heat capacity at constant volume
-      output Q.CapacityThermalSpecific c_V_C=DataC.c_V(p=p, T=T);
-      output Q.CapacityThermalSpecific c_V_C19HF37O5S=DataC19HF37O5S.c_V(p=p, T
-          =T);
-      output Q.CapacityThermalSpecific 'c_V_e-'='Datae-'.c_V(p=p, T=T);
-      output Q.CapacityThermalSpecific c_V_H2=DataH2.c_V(p=p, T=T);
-      output Q.CapacityThermalSpecific c_V_H2_IG=DataH2IG.c_V(p=p_IG, T=T);
-      output Q.CapacityThermalSpecific c_V_H2O=DataH2O.c_V(p=p, T=T);
-      output Q.CapacityThermalSpecific c_V_H2O_liquid=DataH2OLiquid.c_V(p=p, T=
-          T);
-      output Q.CapacityThermalSpecific 'c_V_H+'='DataH+'.c_V(p=p, T=T);
-      output Q.CapacityThermalSpecific c_V_N2=DataN2.c_V(p=p, T=T);
-      output Q.CapacityThermalSpecific c_V_O2=DataO2.c_V(p=p, T=T);
+      output Q.CapacityThermalSpecific c_V_C=DataC.c_V(p, T);
+      output Q.CapacityThermalSpecific c_V_C19HF37O5S=DataC19HF37O5S.c_V(p, T);
+      output Q.CapacityThermalSpecific 'c_V_e-'='Datae-'.c_V(p, T);
+      output Q.CapacityThermalSpecific c_V_H2=DataH2.c_V(p, T);
+      output Q.CapacityThermalSpecific c_V_H2_IG=DataH2IG.c_V(p_IG, T);
+      output Q.CapacityThermalSpecific c_V_H2O=DataH2O.c_V(p, T);
+      output Q.CapacityThermalSpecific c_V_H2O_liquid=DataH2OLiquid.c_V(p, T);
+      output Q.CapacityThermalSpecific 'c_V_H+'='DataH+'.c_V(p, T);
+      output Q.CapacityThermalSpecific c_V_N2=DataN2.c_V(p, T);
+      output Q.CapacityThermalSpecific c_V_O2=DataO2.c_V(p, T);
       //
       // Gibbs potential
       output Q.Potential g_C=DataC.g(p, T);
@@ -95,15 +82,15 @@ package Characteristics
       output Q.Potential g_O2_indirect=h_O2 - T*s_O2;
       //
       // Specific enthalpy
-      output Q.Potential h_C=DataC.h0(T);
-      output Q.Potential h_C19HF37O5S=DataC19HF37O5S.h0(T);
-      output Q.Potential 'h_e-'='Datae-'.h0(T);
-      output Q.Potential h_H2=DataH2.h0(T);
-      output Q.Potential h_H2O=DataH2O.h0(T);
-      output Q.Potential h_H2O_liquid=DataH2OLiquid.h0(T);
-      output Q.Potential 'h_H+'='DataH+'.h0(T);
-      output Q.Potential h_N2=DataN2.h0(T);
-      output Q.Potential h_O2=DataO2.h0(T);
+      output Q.Potential h_C=DataC.h(T);
+      output Q.Potential h_C19HF37O5S=DataC19HF37O5S.h(T);
+      output Q.Potential 'h_e-'='Datae-'.h(T);
+      output Q.Potential h_H2=DataH2.h(T);
+      output Q.Potential h_H2O=DataH2O.h(T);
+      output Q.Potential h_H2O_liquid=DataH2OLiquid.h(T);
+      output Q.Potential 'h_H+'='DataH+'.h(T);
+      output Q.Potential h_N2=DataN2.h(T);
+      output Q.Potential h_O2=DataO2.h(T);
       //
       // Pressure
       output Q.PressureAbsolute p_C=DataC.p_vT(v_C, T) if DataC.isCompressible;
@@ -801,20 +788,23 @@ package Characteristics
       constant Real b_lambda[size(T_lim_alpha, 1) - 1, 4]
         "<html>Constants in NASA correlation for thermal conductivity (<i>b<sub>&lambda;</sub>)</html>";
 
-      function alpha_tau
-        "<html>Fluidity as a function of temperature (&alpha;<sub>&tau;</sub>)</html>"
+      redeclare function f_12
+        "<html>Fluidity as a function of pressure and temperature (<i>f</i><sub>12</sub>)</html>"
 
         extends Modelica.Icons.Function;
 
+        final input Q.PressureAbsolute p=1*U.atm "Pressure";
+        // Note:  Pressure is provided for generality, but isn't used here.
         input Q.TemperatureAbsolute T "Temperature";
-        output Q.Resistivity alpha_tau "Transverse resistivity";
+        output Q.Fluidity f_12 "Fluidity";
 
       protected
         function b_eta_adj
           "Return unit-adjusted NASA CEA constants for viscosity"
           // See note in b_eta_adj() in alpha_tau().
-          output Real b_eta_adj[size(T_lim_alpha, 1) - 1, 4]
+          output Real b_eta_adj[size(CharacteristicNASA.T_lim_alpha, 1) - 1, 4]
             "Unit-adjusted NASA CEA constants for viscosity";
+
         algorithm
           b_eta_adj := transpose({b_eta[:, 1],b_eta[:, 2],b_eta[:, 3],b_eta[:,
             4] - b_eta[:, 1]*ln(U.K) + fill(ln(1e-6*U.g/(U.cm*U.s*m)), size(
@@ -833,8 +823,8 @@ package Characteristics
         // T_lim_alpha[size(T_lim_alpha, 1)] due to:
         //     "Error, not all "end" could be expanded."
 
-        alpha_tau := smooth(0, exp(-sum(if (T_lim_alpha[i] <= T or i == 1) and
-          (T <= T_lim_alpha[i + 1] or i == size(T_lim_alpha, 1) - 1) then (
+        f_12 := smooth(0, exp(-sum(if (T_lim_alpha[i] <= T or i == 1) and (T
+           <= T_lim_alpha[i + 1] or i == size(T_lim_alpha, 1) - 1) then (
           b_eta_adj())[i, 1]*ln(T) + ((b_eta_adj())[i, 2] + (b_eta_adj())[i, 3]
           /T)/T + (b_eta_adj())[i, 4] else 0 for i in 1:size(T_lim_alpha, 1) -
           1))) annotation (Inline=true, smoothOrder=2);
@@ -843,15 +833,17 @@ package Characteristics
 
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p></html>"));
-      end alpha_tau;
+      end f_12;
 
-      function alpha_Sdot
-        "<html>Thermal resistivity as a function of temperature (&alpha;<sub><i>S&#775;</i></sub>)</html>"
+      redeclare function r_th
+        "<html>Thermal resistivity as a function of pressure and temperature (<i>r</i><sub>th</sub>)</html>"
 
         extends Modelica.Icons.Function;
 
+        input Q.PressureAbsolute p=1*U.atm "Pressure";
+        // Note:  Pressure is provided for generality but isn't used here.
         input Q.TemperatureAbsolute T "Temperature";
-        output Q.Resistivity alpha_Sdot "Thermal transport resistivity";
+        output Q.ResistivityThermal r_th "Thermal resistivity";
 
       protected
         function b_lambda_adj
@@ -880,7 +872,7 @@ package Characteristics
         // T_lim_alpha[size(T_lim_alpha, 1)] due to:
         //     "Error, not all "end" could be expanded."
 
-        alpha_Sdot := smooth(0, exp(-sum(if (T_lim_alpha[i] <= T or i == 1)
+        r_th := c_V(p, T)*smooth(0, exp(-sum(if (T_lim_alpha[i] <= T or i == 1)
            and (T <= T_lim_alpha[i + 1] or i == size(T_lim_alpha, 1) - 1) then
           (b_lambda_adj())[i, 1]*ln(T) + ((b_lambda_adj())[i, 2] + (
           b_lambda_adj())[i, 3]/T)/T + (b_lambda_adj())[i, 4] else 0 for i in 1
@@ -889,7 +881,7 @@ package Characteristics
         // result in a function that is first-order continuous.
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p></html>"));
-      end alpha_Sdot;
+      end r_th;
 
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html><p>The correlations for transport properties are available in
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>,
@@ -954,16 +946,15 @@ package Characteristics
       // virial coefficient.  If necessary, additional terms can be computed and
       // introduced using FCSys/resources/virial-relations.cdf.
 
-    public
       partial function alpha
-        "<html>Ideal resistivity as a function of temperature (&alpha;)</html>"
+        "<html>Ideal base resistivity factor as a function of temperature (&alpha;)</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        output Q.Resistivity beta "Resistivity";
+        output Q.Resistivity alpha "Resistivity";
 
       algorithm
-        beta := 6*U.pi*r^2*U.q*sqrt(U.pi*m/T) annotation (
+        alpha := 6*U.pi*r^2*U.q*sqrt(U.pi*m/T) annotation (
           Inline=true,
           smoothOrder=999,
           Documentation(info="<html>
@@ -975,13 +966,15 @@ package Characteristics
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 41].</p></html>"));
       end alpha;
 
-      function c0
-        "<html>Specific heat capacity at reference pressure as a function of temperature (<i>c</i>&deg;)</html>"
+    public
+      function c_p
+        "<html>Specific heat capacity at constant pressure as a function of pressure and temperature (<i>c</i><sub><i>p</i></sub>)</html>"
         extends Modelica.Icons.Function;
 
+        input Q.PressureAbsolute p=1*U.atm "Pressure";
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        output Q.CapacityThermalSpecific c0
-          "Specific heat capacity at reference pressure";
+        output Q.CapacityThermalSpecific c_p
+          "Specific heat capacity at constant pressure";
 
       algorithm
         /*
@@ -994,7 +987,7 @@ package Characteristics
         // T_lim_c[size(T_lim_c, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
-        c0 := smooth(0, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i
+        c_p := smooth(0, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i
            + 1] or i == size(T_lim_c, 1) - 1) then poly(
                 T,
                 b_c[i, :],
@@ -1003,7 +996,9 @@ package Characteristics
           InlineNoEvent=true,
           Inline=true,
           smoothOrder=0);
-      end c0;
+        // **Adjust for pressure.
+
+      end c_p;
 
       function c_V
         "<html>Specific heat capacity at constant volume as a function of pressure and temperature (<i>c</i><sub><i>V</i></sub>)</html>"
@@ -1015,7 +1010,7 @@ package Characteristics
           "Specific heat capacity at constant volume";
 
       algorithm
-        c_V := c0(T) - T*dp(
+        c_V := c_p(T) - T*dp(
                 v_pT(p, T),
                 T,
                 dv=0,
@@ -1026,9 +1021,11 @@ package Characteristics
                 dT=1) "[Moran2004, p. 546]"
           annotation (Inline=true, smoothOrder=999);
 
-        annotation (Documentation(info="<html><p>For an ideal gas, pressure (<i>p</i>)
+        annotation (Documentation(info="<html>
+  <p>For an ideal gas, pressure (<i>p</i>)
   does not matter; the function reduces to <i>c</i><sub><i>V</i></sub>(<i>T</i>) = <i>c</i>&deg;(<i>T</i>) - 1 (in
-  <a href=\"modelica://FCSys\">FCSys</a>, <i>R</i> = 1).</p></html>"));
+  <a href=\"modelica://FCSys\">FCSys</a>, <i>R</i> = 1).</p>
+    </html>"));
       end c_V;
 
       replaceable function dp
@@ -1074,6 +1071,36 @@ package Characteristics
           specVolPow[2] - i - specVolPow[1])*p*dT) for i in 1:size(b_v, 1))
           for j in 1:size(b_v, 2)) annotation (Inline=true, smoothOrder=999);
       end dv;
+
+      replaceable function f_0
+        "<html>Bulk fluidity as a function of pressure and temperature (f<sub>0</sub>)</html>"
+
+        extends Modelica.Icons.Function;
+
+        input Q.PressureAbsolute p=1*U.atm "Pressure";
+        // Note:  Pressure is provided for generality (not used here).
+        input Q.TemperatureAbsolute T "Temperature";
+        output Q.Fluidity f_12 "Bulk fluidity";
+
+      algorithm
+        f_12 := alpha(T)/m;
+
+      end f_0;
+
+      replaceable function f_12
+        "<html>Fluidity as a function of pressure and temperature (f<sub>12</sub>)</html>"
+
+        extends Modelica.Icons.Function;
+
+        input Q.PressureAbsolute p=1*U.atm "Pressure";
+        // Note:  Pressure is provided for generality (not used here).
+        input Q.TemperatureAbsolute T "Temperature";
+        output Q.Fluidity f_12 "Fluidity";
+
+      algorithm
+        f_12 := alpha(T)/m;
+
+      end f_12;
 
       function g "Gibbs potential as a function of pressure and temperature"
 
@@ -1134,15 +1161,15 @@ package Characteristics
         // integral of v*dp from p0 to p (at T).
       end g;
 
-      function h0
-        "<html>Specific enthalpy as a function of temperature at reference pressure (<i>h</i>&deg;)</html>"
+      function h "Specific enthalpy as a function of pressure and temperature"
 
         extends Modelica.Icons.Function;
 
+        input Q.PressureAbsolute p=1*U.atm "Pressure";
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input ReferenceEnthalpy referenceEnthalpy=ReferenceEnthalpy.EnthalpyOfFormationAt25degC
           "Choice of enthalpy reference";
-        output Q.Potential h0 "Specific enthalpy at reference pressure";
+        output Q.Potential h "Specific enthalpy";
 
       protected
         function h0_i
@@ -1170,9 +1197,10 @@ package Characteristics
         // T_lim_c[size(T_lim_c, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
-        h0 := smooth(1, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i
-           + 1] or i == size(T_lim_c, 1) - 1) then h0_i(T, i) else 0 for i in 1
-          :size(T_lim_c, 1) - 1) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K
+        // **use presssure
+        h := smooth(1, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i +
+          1] or i == size(T_lim_c, 1) - 1) then h0_i(T, i) else 0 for i in 1:
+          size(T_lim_c, 1) - 1) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K
            then Deltah0 else 0) - (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt25degC
            then Deltah0_f else 0) + h_offset)
           annotation (
@@ -1181,7 +1209,13 @@ package Characteristics
           smoothOrder=1);
         // The first term is the integral of c0*dT up to T at p0 with the
         // reference enthalpy at the lower bound [McBride2002, p. 2].
-      end h0;
+
+        annotation (Documentation(info="<html>
+  <p>For an ideal gas, pressure (<i>p</i>)
+  does not matter; the **function reduces to <i>c</i><sub><i>V</i></sub>(<i>T</i>) = <i>c</i>&deg;(<i>T</i>) - 1 (in
+  <a href=\"modelica://FCSys\">FCSys</a>, <i>R</i> = 1).</p>
+    </html>"));
+      end h;
 
       replaceable function p_vT
         "Pressure as a function of specific volume and temperature"
@@ -1213,6 +1247,20 @@ package Characteristics
   and the function will return a value of zero.</p>
   <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a>().</p></html>"));
       end p_vT;
+
+      replaceable function r_th
+        "<html>Thermal resistivity as a function of pressure and temperature (<i>r</i><sub>th</sub>)</html>"
+
+        extends Modelica.Icons.Function;
+
+        input Q.PressureAbsolute p=1*U.atm "Pressure";
+        input Q.TemperatureAbsolute T "Temperature";
+        output Q.ResistivityThermal r_th "Thermal resistivity";
+
+      algorithm
+        r_th := alpha(T)/c_V(p, T);
+
+      end r_th;
 
       function s "Specific entropy as a function of pressure and temperature"
         extends Modelica.Icons.Function;

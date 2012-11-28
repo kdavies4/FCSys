@@ -20,7 +20,7 @@ package Quantities "Quantities to represent physical properties"
     model ExampleModel "Model that uses all of the quantities"
       extends FCSys.BaseClasses.Icons.Blocks.Continuous;
 
-      // Generated from FCSys/resources/quantities.xls, 2012-11-29
+      // Generated from FCSys/resources/quantities.xls, 2012-12-16
       parameter Q.Acceleration Acceleration=1*U.m/U.s^2 "Acceleration";
       parameter Q.Amount Amount=1*U.C "Amount";
       parameter Q.AmountReciprocal AmountReciprocal=1/U.C "Reciprocal amount";
@@ -37,6 +37,7 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.CurrentAreic CurrentAreic=1*U.A/U.m^2 "Areic current";
       parameter Q.CurrentRate CurrentRate=1*U.A/U.s "Rate of current";
       parameter Q.Energy Energy=1*U.J "Energy";
+      parameter Q.Fluidity Fluidity=1/(U.Pa*U.s) "Fluidity";
       parameter Q.Force Force=1*U.N "Force";
       parameter Q.Frequency Frequency=1*U.rad/U.s "Frequency";
       parameter Q.Inductance Inductance=1*U.H "Inductance";
@@ -89,6 +90,7 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.VolumeSpecificAbsolute VolumeSpecificAbsolute=1*U.m^3/U.C
         "Absolute specific volume";
       parameter Q.Wavenumber Wavenumber=1*U.rad/U.m "Wavenumber";
+
     end ExampleModel;
   end Examples;
   // Generated from FCSys/resources/quantities.xls, 2012-11-29
@@ -112,6 +114,7 @@ package Quantities "Quantities to represent physical properties"
   type CurrentRate = Modelica.Icons.TypeReal (final unit="N/T2")
     "Rate of current";
   type Energy = Modelica.Icons.TypeReal (final unit="l2.m/T2");
+  type Fluidity = Modelica.Icons.TypeReal (final unit="l.T/m", min=0);
   type Force = Modelica.Icons.TypeReal (final unit="l.m/T2");
   type Frequency = Modelica.Icons.TypeReal (final unit="A/T");
   type Inductance = Modelica.Icons.TypeReal (final unit="l2.m/N2", min=0);

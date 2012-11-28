@@ -1031,7 +1031,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       //                                   ------------------------------------------------------------------------------------
       //             Aluminum (pure)       AISI 302              AISI 304              AISI 316              AISI 347
       //             ------------------    ------------------    ------------------    ------------------    ------------------
-      //             c0*U.kg    alpha_Sdot    c0*U.kg    alpha_Sdot    c0*U.kg    alpha_Sdot    c0*U.kg    alpha_Sdot    c0*U.kg    alpha_Sdot
+      //             c0*U.kg    alpha_Qdot    c0*U.kg    alpha_Qdot    c0*U.kg    alpha_Qdot    c0*U.kg    alpha_Qdot    c0*U.kg    alpha_Qdot
       //             *U.K       *U.W       *U.K       *U.W       *U.K       *U.W       *U.K       *U.W       *U.K       *U.W
       //             /(U.J      /(U.m      /(U.J      /(U.m      /(U.J      /(U.m      /(U.J      /(U.m      /(U.J      /(U.m
       //     T/K     *m)        *U.K)      *m)        *U.K)      *m)        *U.K)      *m)        *U.K)      *m)        *U.K)
@@ -1206,11 +1206,12 @@ used as the inlet. The z axis extends across the width of the channel.</p></html
               visible=not inclYFaces,
               lineColor={0,0,0})}),
         Diagram(graphics));
+
     end AnFP;
 
     model GM "General Motors cathodic test flow plate and current collector"
       extends AnFP(
-        subregions(each graphite(C(alpha_Sdot=U.m*U.K/(95*U.W), alpha_Sdot=U.m*
+        subregions(each graphite(C(alpha_Qdot=U.m*U.K/(95*U.W), alpha_Qdot=U.m*
                   U.K/(95*U.W)))),
         L_x=fill(35.22*U.mm/1, 1),
         L_y=fill(1.543*U.m, 1),
@@ -2766,7 +2767,7 @@ used as the inlet. The z axis extends across the width of the channel.</p>
 
     model GM "General Motors cathodic test flow plate and current collector"
       extends CaFP(
-        subregions(each graphite(C(alpha_Sdot=U.m*U.K/(95*U.W), alpha_Sdot=U.m*
+        subregions(each graphite(C(alpha_Qdot=U.m*U.K/(95*U.W), alpha_Qdot=U.m*
                   U.K/(95*U.W)))),
         L_x=fill(35.22*U.mm/1, 1),
         L_y=fill(1.028*U.m, 1),
