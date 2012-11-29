@@ -22,7 +22,7 @@ help/FCSys.Blocks*.png
 Systems.mo
 help/FCSys_Systems*.html
 help/FCSys.Systems*.png
-resources/images/system.png
+resources/documentation/system.png
 install
 
 # Figures (for documentation only)
@@ -31,7 +31,7 @@ install
 # HNEI data
 # (also blocked by other means, but be sure)
 resources/scripts/Dymola/ValidationData.mos
-resources/images/Regions/*.pdf
+resources/documentation/Regions/*.pdf
 test/LOOCV
 
 # Georgia Tech files

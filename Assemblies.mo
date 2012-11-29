@@ -386,14 +386,25 @@ package Assemblies "Combinations of regions (e.g., cells)"
           color={127,127,127},
           smooth=Smooth.None,
           thickness=0.5));
+      connect(anFP.yNegative, anFPNegY) annotation (Line(
+          points={{-60,-10},{-60,-20}},
+          color={240,0,0},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(anFP.yPositive, anFPPosY) annotation (Line(
+          points={{-60,10},{-60,20}},
+          color={240,0,0},
+          thickness=0.5,
+          smooth=Smooth.None));
+
       connect(caFP.xPositive, caFPX) annotation (Line(
           points={{70,6.10623e-16},{80,5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None,
           thickness=0.5));
-      connect(anFP.yPositive, anFPPosY) annotation (Line(
-          points={{-60,10},{-60,20}},
-          color={240,0,0},
+      connect(caFP.yNegative, caFPNegY) annotation (Line(
+          points={{60,-10},{60,-20}},
+          color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
       connect(caFP.yPositive, caFPPosY) annotation (Line(
@@ -401,18 +412,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
-      connect(caFP.yNegative, caFPNegY) annotation (Line(
-          points={{60,-10},{60,-20}},
-          color={0,0,240},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(anFPNegY, anFP.yNegative) annotation (Line(
-          points={{-60,-20},{-60,-10}},
-          color={240,0,0},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      // **temp bypassed FPs in x direction
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="cell",
@@ -464,55 +463,12 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
       "Cell model with calibration parameters for exchange and transport"
       import FCSys.Subregions.Species;
 
-      // Material exchange
-      /*
-  parameter Q.NumberAbsolute k_beta_N_C(
-    final min=0,
-    final nominal=1) = 1 "<html>For C (<i>k</i><sub>&beta; <i>N</i>  C</sub>)</html>"
-    annotation (Dialog(tab="Calibration factors", group="Reaction"));
-  parameter Q.NumberAbsolute k_beta_N_C19HF37O5S(
-    final min=0,
-    final nominal=1) = 1
-    "<html>For C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S (<i>k</i><sub>&beta; <i>N</i> &nbsp;C19HF37O5S</sub>)</html>"
-    annotation (Dialog(tab="Calibration factors", group="Reaction"));
-  */
-      parameter Q.NumberAbsolute 'k_beta_N_e-'(
-        final min=0,
-        final nominal=1) = 1
-        "<html>For e<sup>-</sup> (<i>k</i><sub>&beta; <i>N</i> &nbsp;e-</sub>)</html>"
-        annotation (Dialog(tab="Calibration factors", group="Reaction"));
-      parameter Q.NumberAbsolute k_beta_N_H2(
-        final min=0,
-        final nominal=1) = 1
-        "<html>For H<sub>2</sub> (<i>k</i><sub>&beta; <i>N</i> &nbsp;H2</sub>)</html>"
-        annotation (Dialog(tab="Calibration factors", group="Reaction"));
-      parameter Q.NumberAbsolute k_beta_N_H2O(
-        final min=0,
-        final nominal=1) = 1
-        "<html>For H<sub>2</sub>O (<i>k</i><sub>&beta; <i>N</i> &nbsp;H2O</sub>)</html>"
-        annotation (Dialog(tab="Calibration factors", group="Reaction"));
-      parameter Q.NumberAbsolute 'k_beta_N_H+'(
-        final min=0,
-        final nominal=1) = 1
-        "<html>For H<sup>+</sup> (<i>k</i><sub>&beta; <i>N</i> &nbsp;H+</sub>)</html>"
-        annotation (Dialog(tab="Calibration factors", group="Reaction"));
-      parameter Q.NumberAbsolute k_beta_N_N2(
-        final min=0,
-        final nominal=1) = 1
-        "<html>For N<sub>2</sub> (<i>k</i><sub>&beta; <i>N</i> &nbsp;N2</sub>)</html>"
-        annotation (Dialog(tab="Calibration factors", group="Reaction"));
-      parameter Q.NumberAbsolute k_beta_N_O2(
-        final min=0,
-        final nominal=1) = 1
-        "<html>For O<sub>2</sub> (<i>k</i><sub>&beta; <i>N</i> &nbsp;O2</sub>)</html>"
-        annotation (Dialog(tab="Calibration factors", group="Reaction"));
-
       // Exchange of linear momentum
       parameter Q.NumberAbsolute k_beta_Phi_C(
         final min=0,
         final nominal=1) = 1
         "<html>For C (<i>k</i><sub>&beta; &Phi; C</sub>)</html>" annotation (
-          Dialog(tab="Calibration factors",group="Exchange of linear momentum"));
+          Dialog(tab="Calibration factors", group="Exchange of linear momentum"));
       parameter Q.NumberAbsolute k_beta_Phi_C19HF37O5S(
         final min=0,
         final nominal=1) = 1
@@ -743,28 +699,24 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
       extends Cell(
         anFP(subregions(each gas(
               redeclare Species.H2.Gas.Calibrated H2(
-                final k_beta_N=k_beta_N_H2,
                 final k_beta_Phi=k_beta_Phi_H2,
                 final k_beta_S=k_beta_S_H2,
                 final k_gamma_N=k_gamma_N_H2,
                 final k_gamma_Phi=k_gamma_Phi_H2,
                 final k_gamma_S=k_gamma_S_H2),
               redeclare Species.H2O.Gas.Calibrated H2O(
-                final k_beta_N=k_beta_N_H2O,
                 final k_beta_Phi=k_beta_Phi_H2O,
                 final k_beta_S=k_beta_S_H2O,
                 final k_gamma_N=k_gamma_N_H2O,
                 final k_gamma_Phi=k_gamma_Phi_H2O,
                 final k_gamma_S=k_gamma_S_H2O),
               redeclare Species.N2.Gas.Calibrated N2(
-                final k_beta_N=k_beta_N_N2,
                 final k_beta_Phi=k_beta_Phi_N2,
                 final k_beta_S=k_beta_S_N2,
                 final k_gamma_N=k_gamma_N_N2,
                 final k_gamma_Phi=k_gamma_Phi_N2,
                 final k_gamma_S=k_gamma_S_N2),
               redeclare Species.O2.Gas.Calibrated O2(
-                final k_beta_N=k_beta_N_O2,
                 final k_beta_Phi=k_beta_Phi_O2,
                 final k_beta_S=k_beta_S_O2,
                 final k_gamma_N=k_gamma_N_O2,
@@ -775,7 +727,6 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                 final k_beta_S=k_beta_S_C,
                 final k_gamma_S=k_gamma_S_C), redeclare
                 Species.'e-'.solid.Calibrated 'e-'(
-                final k_beta_N='k_beta_N_e-',
                 final k_beta_Phi='k_beta_Phi_e-',
                 final k_beta_S='k_beta_S_e-',
                 final k_gamma_N='k_gamma_N_e-',
@@ -783,28 +734,24 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                 final k_gamma_S='k_gamma_S_e-')))),
         anGDL(subregions(each gas(
               redeclare Species.H2.Gas.Calibrated H2(
-                final k_beta_N=k_beta_N_H2,
                 final k_beta_Phi=k_beta_Phi_H2,
                 final k_beta_S=k_beta_S_H2,
                 final k_gamma_N=k_gamma_N_H2,
                 final k_gamma_Phi=k_gamma_Phi_H2,
                 final k_gamma_S=k_gamma_S_H2),
               redeclare Species.H2O.Gas.Calibrated H2O(
-                final k_beta_N=k_beta_N_H2O,
                 final k_beta_Phi=k_beta_Phi_H2O,
                 final k_beta_S=k_beta_S_H2O,
                 final k_gamma_N=k_gamma_N_H2O,
                 final k_gamma_Phi=k_gamma_Phi_H2O,
                 final k_gamma_S=k_gamma_S_H2O),
               redeclare Species.N2.Gas.Calibrated N2(
-                final k_beta_N=k_beta_N_N2,
                 final k_beta_Phi=k_beta_Phi_N2,
                 final k_beta_S=k_beta_S_N2,
                 final k_gamma_N=k_gamma_N_N2,
                 final k_gamma_Phi=k_gamma_Phi_N2,
                 final k_gamma_S=k_gamma_S_N2),
               redeclare Species.O2.Gas.Calibrated O2(
-                final k_beta_N=k_beta_N_O2,
                 final k_beta_Phi=k_beta_Phi_O2,
                 final k_beta_S=k_beta_S_O2,
                 final k_gamma_N=k_gamma_N_O2,
@@ -815,7 +762,6 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                 final k_beta_S=k_beta_S_C,
                 final k_gamma_S=k_gamma_S_C), redeclare
                 Species.'e-'.solid.Calibrated 'e-'(
-                final k_beta_N='k_beta_N_e-',
                 final k_beta_Phi='k_beta_Phi_e-',
                 final k_beta_S='k_beta_S_e-',
                 final k_gamma_N='k_gamma_N_e-',
@@ -824,28 +770,24 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         anCL(subregions(
             each gas(
               redeclare Species.H2.Gas.Calibrated H2(
-                final k_beta_N=k_beta_N_H2,
                 final k_beta_Phi=k_beta_Phi_H2,
                 final k_beta_S=k_beta_S_H2,
                 final k_gamma_N=k_gamma_N_H2,
                 final k_gamma_Phi=k_gamma_Phi_H2,
                 final k_gamma_S=k_gamma_S_H2),
               redeclare Species.H2O.Gas.Calibrated H2O(
-                final k_beta_N=k_beta_N_H2O,
                 final k_beta_Phi=k_beta_Phi_H2O,
                 final k_beta_S=k_beta_S_H2O,
                 final k_gamma_N=k_gamma_N_H2O,
                 final k_gamma_Phi=k_gamma_Phi_H2O,
                 final k_gamma_S=k_gamma_S_H2O),
               redeclare Species.N2.Gas.Calibrated N2(
-                final k_beta_N=k_beta_N_N2,
                 final k_beta_Phi=k_beta_Phi_N2,
                 final k_beta_S=k_beta_S_N2,
                 final k_gamma_N=k_gamma_N_N2,
                 final k_gamma_Phi=k_gamma_Phi_N2,
                 final k_gamma_S=k_gamma_S_N2),
               redeclare Species.O2.Gas.Calibrated O2(
-                final k_beta_N=k_beta_N_O2,
                 final k_beta_Phi=k_beta_Phi_O2,
                 final k_beta_S=k_beta_S_O2,
                 final k_gamma_N=k_gamma_N_O2,
@@ -856,7 +798,6 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                 final k_beta_S=k_beta_S_C,
                 final k_gamma_S=k_gamma_S_C), redeclare
                 Species.'e-'.solid.Calibrated 'e-'(
-                final k_beta_N='k_beta_N_e-',
                 final k_beta_Phi='k_beta_Phi_e-',
                 final k_beta_S='k_beta_S_e-',
                 final k_gamma_N='k_gamma_N_e-',
@@ -868,14 +809,12 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                 final k_beta_S=k_beta_S_C19HF37O5S,
                 final k_gamma_S=k_gamma_S_C19HF37O5S),
               redeclare Species.H2O.Gas.Calibrated H2O(
-                final k_beta_N=k_beta_N_H2O,
                 final k_beta_Phi=k_beta_Phi_H2O,
                 final k_beta_S=k_beta_S_H2O,
                 final k_gamma_N=k_gamma_N_H2O,
                 final k_gamma_Phi=k_gamma_Phi_H2O,
                 final k_gamma_S=k_gamma_S_H2O),
               redeclare Species.'H+'.Solid.Calibrated 'H+'(
-                final k_beta_N='k_beta_N_H+',
                 final k_beta_Phi='k_beta_Phi_H+',
                 final k_beta_S='k_beta_S_H+',
                 final k_gamma_N='k_gamma_N_H+',
@@ -883,28 +822,24 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                 final k_gamma_S='k_gamma_S_H+')))),
         pEM(subregions(each gas(
               redeclare Species.H2.Gas.Calibrated H2(
-                final k_beta_N=k_beta_N_H2,
                 final k_beta_Phi=k_beta_Phi_H2,
                 final k_beta_S=k_beta_S_H2,
                 final k_gamma_N=k_gamma_N_H2,
                 final k_gamma_Phi=k_gamma_Phi_H2,
                 final k_gamma_S=k_gamma_S_H2),
               redeclare Species.H2O.Gas.Calibrated H2O(
-                final k_beta_N=k_beta_N_H2O,
                 final k_beta_Phi=k_beta_Phi_H2O,
                 final k_beta_S=k_beta_S_H2O,
                 final k_gamma_N=k_gamma_N_H2O,
                 final k_gamma_Phi=k_gamma_Phi_H2O,
                 final k_gamma_S=k_gamma_S_H2O),
               redeclare Species.N2.Gas.Calibrated N2(
-                final k_beta_N=k_beta_N_N2,
                 final k_beta_Phi=k_beta_Phi_N2,
                 final k_beta_S=k_beta_S_N2,
                 final k_gamma_N=k_gamma_N_N2,
                 final k_gamma_Phi=k_gamma_Phi_N2,
                 final k_gamma_S=k_gamma_S_N2),
               redeclare Species.O2.Gas.Calibrated O2(
-                final k_beta_N=k_beta_N_O2,
                 final k_beta_Phi=k_beta_Phi_O2,
                 final k_beta_S=k_beta_S_O2,
                 final k_gamma_N=k_gamma_N_O2,
@@ -915,14 +850,12 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                 final k_beta_S=k_beta_S_C19HF37O5S,
                 final k_gamma_S=k_gamma_S_C19HF37O5S),
               redeclare Species.H2O.Gas.Calibrated H2O(
-                final k_beta_N=k_beta_N_H2O,
                 final k_beta_Phi=k_beta_Phi_H2O,
                 final k_beta_S=k_beta_S_H2O,
                 final k_gamma_N=k_gamma_N_H2O,
                 final k_gamma_Phi=k_gamma_Phi_H2O,
                 final k_gamma_S=k_gamma_S_H2O),
               redeclare Species.'H+'.Solid.Calibrated 'H+'(
-                final k_beta_N='k_beta_N_H+',
                 final k_beta_Phi='k_beta_Phi_H+',
                 final k_beta_S='k_beta_S_H+',
                 final k_gamma_N='k_gamma_N_H+',
@@ -931,28 +864,24 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         caCL(subregions(
             each gas(
               redeclare Species.H2.Gas.Calibrated H2(
-                final k_beta_N=k_beta_N_H2,
                 final k_beta_Phi=k_beta_Phi_H2,
                 final k_beta_S=k_beta_S_H2,
                 final k_gamma_N=k_gamma_N_H2,
                 final k_gamma_Phi=k_gamma_Phi_H2,
                 final k_gamma_S=k_gamma_S_H2),
               redeclare Species.H2O.Gas.Calibrated H2O(
-                final k_beta_N=k_beta_N_H2O,
                 final k_beta_Phi=k_beta_Phi_H2O,
                 final k_beta_S=k_beta_S_H2O,
                 final k_gamma_N=k_gamma_N_H2O,
                 final k_gamma_Phi=k_gamma_Phi_H2O,
                 final k_gamma_S=k_gamma_S_H2O),
               redeclare Species.N2.Gas.Calibrated N2(
-                final k_beta_N=k_beta_N_N2,
                 final k_beta_Phi=k_beta_Phi_N2,
                 final k_beta_S=k_beta_S_N2,
                 final k_gamma_N=k_gamma_N_N2,
                 final k_gamma_Phi=k_gamma_Phi_N2,
                 final k_gamma_S=k_gamma_S_N2),
               redeclare Species.O2.Gas.Calibrated O2(
-                final k_beta_N=k_beta_N_O2,
                 final k_beta_Phi=k_beta_Phi_O2,
                 final k_beta_S=k_beta_S_O2,
                 final k_gamma_N=k_gamma_N_O2,
@@ -963,7 +892,6 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                 final k_beta_S=k_beta_S_C,
                 final k_gamma_S=k_gamma_S_C), redeclare
                 Species.'e-'.solid.Calibrated 'e-'(
-                final k_beta_N='k_beta_N_e-',
                 final k_beta_Phi='k_beta_Phi_e-',
                 final k_beta_S='k_beta_S_e-',
                 final k_gamma_N='k_gamma_N_e-',
@@ -975,14 +903,12 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                 final k_beta_S=k_beta_S_C19HF37O5S,
                 final k_gamma_S=k_gamma_S_C19HF37O5S),
               redeclare Species.H2O.Gas.Calibrated H2O(
-                final k_beta_N=k_beta_N_H2O,
                 final k_beta_Phi=k_beta_Phi_H2O,
                 final k_beta_S=k_beta_S_H2O,
                 final k_gamma_N=k_gamma_N_H2O,
                 final k_gamma_Phi=k_gamma_Phi_H2O,
                 final k_gamma_S=k_gamma_S_H2O),
               redeclare Species.'H+'.Solid.Calibrated 'H+'(
-                final k_beta_N='k_beta_N_H+',
                 final k_beta_Phi='k_beta_Phi_H+',
                 final k_beta_S='k_beta_S_H+',
                 final k_gamma_N='k_gamma_N_H+',
@@ -990,28 +916,24 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                 final k_gamma_S='k_gamma_S_H+')))),
         caGDL(subregions(each gas(
               redeclare Species.H2.Gas.Calibrated H2(
-                final k_beta_N=k_beta_N_H2,
                 final k_beta_Phi=k_beta_Phi_H2,
                 final k_beta_S=k_beta_S_H2,
                 final k_gamma_N=k_gamma_N_H2,
                 final k_gamma_Phi=k_gamma_Phi_H2,
                 final k_gamma_S=k_gamma_S_H2),
               redeclare Species.H2O.Gas.Calibrated H2O(
-                final k_beta_N=k_beta_N_H2O,
                 final k_beta_Phi=k_beta_Phi_H2O,
                 final k_beta_S=k_beta_S_H2O,
                 final k_gamma_N=k_gamma_N_H2O,
                 final k_gamma_Phi=k_gamma_Phi_H2O,
                 final k_gamma_S=k_gamma_S_H2O),
               redeclare Species.N2.Gas.Calibrated N2(
-                final k_beta_N=k_beta_N_N2,
                 final k_beta_Phi=k_beta_Phi_N2,
                 final k_beta_S=k_beta_S_N2,
                 final k_gamma_N=k_gamma_N_N2,
                 final k_gamma_Phi=k_gamma_Phi_N2,
                 final k_gamma_S=k_gamma_S_N2),
               redeclare Species.O2.Gas.Calibrated O2(
-                final k_beta_N=k_beta_N_O2,
                 final k_beta_Phi=k_beta_Phi_O2,
                 final k_beta_S=k_beta_S_O2,
                 final k_gamma_N=k_gamma_N_O2,
@@ -1022,7 +944,6 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                 final k_beta_S=k_beta_S_C,
                 final k_gamma_S=k_gamma_S_C), redeclare
                 Species.'e-'.solid.Calibrated 'e-'(
-                final k_beta_N='k_beta_N_e-',
                 final k_beta_Phi='k_beta_Phi_e-',
                 final k_beta_S='k_beta_S_e-',
                 final k_gamma_N='k_gamma_N_e-',
@@ -1030,28 +951,24 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                 final k_gamma_S='k_gamma_S_e-')))),
         caFP(subregions(each gas(
               redeclare Species.H2.Gas.Calibrated H2(
-                final k_beta_N=k_beta_N_H2,
                 final k_beta_Phi=k_beta_Phi_H2,
                 final k_beta_S=k_beta_S_H2,
                 final k_gamma_N=k_gamma_N_H2,
                 final k_gamma_Phi=k_gamma_Phi_H2,
                 final k_gamma_S=k_gamma_S_H2),
               redeclare Species.H2O.Gas.Calibrated H2O(
-                final k_beta_N=k_beta_N_H2O,
                 final k_beta_Phi=k_beta_Phi_H2O,
                 final k_beta_S=k_beta_S_H2O,
                 final k_gamma_N=k_gamma_N_H2O,
                 final k_gamma_Phi=k_gamma_Phi_H2O,
                 final k_gamma_S=k_gamma_S_H2O),
               redeclare Species.N2.Gas.Calibrated N2(
-                final k_beta_N=k_beta_N_N2,
                 final k_beta_Phi=k_beta_Phi_N2,
                 final k_beta_S=k_beta_S_N2,
                 final k_gamma_N=k_gamma_N_N2,
                 final k_gamma_Phi=k_gamma_Phi_N2,
                 final k_gamma_S=k_gamma_S_N2),
               redeclare Species.O2.Gas.Calibrated O2(
-                final k_beta_N=k_beta_N_O2,
                 final k_beta_Phi=k_beta_Phi_O2,
                 final k_beta_S=k_beta_S_O2,
                 final k_gamma_N=k_gamma_N_O2,
@@ -1062,7 +979,6 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                 final k_beta_S=k_beta_S_C,
                 final k_gamma_S=k_gamma_S_C), redeclare
                 Species.'e-'.solid.Calibrated 'e-'(
-                final k_beta_N='k_beta_N_e-',
                 final k_beta_Phi='k_beta_Phi_e-',
                 final k_beta_S='k_beta_S_e-',
                 final k_gamma_N='k_gamma_N_e-',
@@ -1334,25 +1250,17 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
 
         anGDL(subregions(each graphite('e-'(initMethPartNum=InitMethScalar.None)))),
 
-        anCL(subregions(each graphite('e-'(
-                setXVel=true,
-                final Ndot_IC=0,
-                final initMethPartNum=InitMethScalar.ReactionRate)),each
-              ionomer('H+'(initMethPartNum=InitMethScalar.None, setXVel=true)))),
+        anCL(subregions(each graphite('e-'(final Ndot_IC=0, final
+                  initMethPartNum=InitMethScalar.ReactionRate)), each ionomer(
+                'H+'(initMethPartNum=InitMethScalar.None)))),
+        pEM(subregions(each ionomer('H+'(final initMethPartNum=InitMethScalar.None)))),
 
-        pEM(subregions(each ionomer('H+'(setXVel=true,final initMethPartNum=
-                    InitMethScalar.None)))),
-        caCL(subregions(each gas(
-              N2(setXVel=true),
-              H2O(setXVel=true),
-              O2(setXVel=true)), each ionomer('H+'(setXVel=true,
-                  initMethPartNum=InitMethScalar.Amount)))),
+        caCL(subregions(each ionomer('H+'(initMethPartNum=InitMethScalar.Amount)))),
+
         caGDL(subregions(each graphite('e-'(final initMethPartNum=
                     InitMethScalar.None)))),
-        caFP(subregions(each graphite('e-'(setTemp=true,final initMethPartNum=
-                    InitMethScalar.None)))));
+        caFP(subregions(each graphite('e-'(final initMethPartNum=InitMethScalar.None)))));
 
-      // **temp setXVels, setTemps
     initial equation
       // Equipotential
       anCL.subregions.graphite.'e-'.mu = anGDL.subregions.graphite.'e-'.mu;

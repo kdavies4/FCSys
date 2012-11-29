@@ -31,6 +31,7 @@ package Subregions
       parameter Boolean inclO2=false "<html>Oxygen (O<sub>2</sub>)</html>"
         annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
             __Dymola_descriptionLabel=true));
+
       FCSys.Subregions.Subregion subregion(
         L={1,1,1}*U.cm,
         graphite(
@@ -76,16 +77,14 @@ package Subregions
         graphite(
           final inclC=inclC,
           final 'incle-'='incle-',
-          'e-'(redeclare
-              FCSys.BCs.Face.Species.Material.PotentialElectrochemical
-              materialBC)),
+          'e-'(redeclare FCSys.BCs.Face.Species.Material.Pressure materialBC)),
+
         ionomer(
           final inclC19HF37O5S=inclC19HF37O5S,
           final 'inclH+'='inclH+',
-          'H+'(redeclare
-              FCSys.BCs.Face.Species.Material.PotentialElectrochemical
-              materialBC))) constrainedby FCSys.BCs.Face.Subregion annotation (
-          Placement(transformation(
+          'H+'(redeclare FCSys.BCs.Face.Species.Material.Pressure materialBC)))
+        constrainedby FCSys.BCs.Face.Subregion annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={20,0})));
@@ -116,37 +115,9 @@ package Subregions
             "resources/scripts/Dymola/Subregions.Examples.SubregionH2.mos"));
     end SubregionH2;
 
-    model SubregionCAndeminus
-      "<html>Test a subregion with C and H<sub>2</sub></html>"
-      extends SubregionH2(
-        inclH2=false,
-        inclC=true,
-        'incle-'=true,
-        subregion(setVolume=false),
-        defaults(analysis=true));
-
-      annotation (
-        experiment(StopTime=10, Algorithm="Dassl"),
-        experimentSetupOutput,
-        Diagram(graphics),
-        Commands(file(ensureSimulated=true) =
-            "resources/scripts/Dymola/Subregions.Examples.SubregionCAndeminus.mos"));
-    end SubregionCAndeminus;
-
-    model SubregionCAndH2
-      "<html>Test a subregion with C and H<sub>2</sub></html>"
-      extends SubregionH2(inclC=true, subregion(gas(H2(T_IC=310*U.K))));
-
-      annotation (
-        experiment(StopTime=0.003, Algorithm="Dassl"),
-        experimentSetupOutput,
-        Diagram(graphics),
-        Commands(file(ensureSimulated=true) =
-            "resources/scripts/Dymola/Subregions.Examples.SubregionCAndH2.mos"));
-    end SubregionCAndH2;
-
     model SubregionHOR
       "<html>Test a subregion with the hydrogen oxidation reaction and the essential species for it (C, C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S, e<sup>-</sup>, H<sub>2</sub>, and H<sup>+</sup>)</html>"
+
       extends SubregionH2(
         inclC=true,
         inclC19HF37O5S=true,
@@ -154,25 +125,18 @@ package Subregions
         inclH2=true,
         'inclH+'=true,
         bC2(
-          gas(H2(redeclare
-                FCSys.BCs.Face.Species.Material.PotentialElectrochemical
-                materialBC, materialSpec(k=-0.403479*U.V))),
+          gas(H2(redeclare FCSys.BCs.Face.Species.Material.Pressure materialBC,
+                materialSpec(k=1*U.atm))),
           graphite(C(redeclare FCSys.BCs.Face.Species.Entropy.Temperature
                 entropyBC, entropySpec(k=defaults.T)), 'e-'(redeclare
                 FCSys.BCs.Face.Species.Material.Current materialBC, redeclare
                 Modelica.Blocks.Sources.Ramp materialSpec(duration=1000, height
                   =2*U.A))),
-          ionomer('H+'(redeclare
-                FCSys.BCs.Face.Species.Material.PotentialElectrochemical
-                materialBC, materialSpec(k(start=10*U.ohm))))));
-
-      // **Why does pressure of H2 go so high?  Need to lower the reaction resistance?
+          ionomer('H+'(redeclare FCSys.BCs.Face.Species.Material.Pressure
+                materialBC, materialSpec(k(start=1*U.atm))))));
 
       annotation (
-        experiment(
-          StopTime=1000,
-          NumberOfIntervals=5000,
-          Tolerance=1e-06),
+        experiment(StopTime=1000, Tolerance=1e-06),
         experimentSetupOutput,
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionHOR.mos"));
@@ -189,27 +153,24 @@ package Subregions
         'inclH+'=true,
         inclO2=true,
         bC2(
-          gas(H2O(redeclare
-                FCSys.BCs.Face.Species.Material.PotentialElectrochemical
-                materialBC, materialSpec(k=-0.5831472*U.V)), O2(redeclare
-                FCSys.BCs.Face.Species.Material.PotentialElectrochemical
-                materialBC, materialSpec(k=-0.633592*U.V))),
+          gas(H2O(redeclare FCSys.BCs.Face.Species.Material.Pressure materialBC,
+                materialSpec(k=1*U.atm)), O2(redeclare
+                FCSys.BCs.Face.Species.Material.Pressure materialBC,
+                materialSpec(k=1*U.atm))),
           graphite(C(redeclare FCSys.BCs.Face.Species.Entropy.Temperature
                 entropyBC, entropySpec(k=defaults.T)), 'e-'(redeclare
                 FCSys.BCs.Face.Species.Material.Current materialBC, redeclare
                 Modelica.Blocks.Sources.Ramp materialSpec(duration=1000, height
                   =-2*U.A))),
-          ionomer('H+'(redeclare
-                FCSys.BCs.Face.Species.Material.PotentialElectrochemical
-                materialBC, materialSpec(k(start=10*U.ohm))))),
+          ionomer('H+'(redeclare FCSys.BCs.Face.Species.Material.Pressure
+                materialBC, materialSpec(k(start=1*U.atm))))),
         defaults(analysis=false));
 
       annotation (
-        experiment(StopTime=0.08, Tolerance=1e-06),
+        experiment(StopTime=1000, Tolerance=1e-06),
         experimentSetupOutput,
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionORR.mos"));
-      // **temp small stop time
     end SubregionORR;
 
     model SubregionsH2 "Test a one-dimensional array of subregions"
@@ -251,25 +212,25 @@ package Subregions
           final inclN2=inclN2,
           final inclO2=inclO2,
           H2O(
-            p_IC=1.05*defaults.p,
+            p_IC=1.1*defaults.p,
             yNegative(viscousZ=false, viscousX=false),
             yPositive(viscousZ=false, viscousX=false),
             zNegative(viscousX=false, viscousY=false),
             zPositive(viscousX=false, viscousY=false)),
           N2(
-            p_IC=1.05*defaults.p,
+            p_IC=1.1*defaults.p,
             yNegative(viscousZ=false, viscousX=false),
             yPositive(viscousZ=false, viscousX=false),
             zNegative(viscousX=false, viscousY=false),
             zPositive(viscousX=false, viscousY=false)),
           O2(
-            p_IC=1.05*defaults.p,
+            p_IC=1.1*defaults.p,
             yNegative(viscousZ=false, viscousX=false),
             yPositive(viscousZ=false, viscousX=false),
             zNegative(viscousX=false, viscousY=false),
             zPositive(viscousX=false, viscousY=false)),
           H2(
-            p_IC=1.05*defaults.p,
+            p_IC=1.1*defaults.p,
             yNegative(viscousZ=false, viscousX=false),
             yPositive(viscousZ=false, viscousX=false),
             zNegative(viscousX=false, viscousY=false),
@@ -305,48 +266,48 @@ package Subregions
           each final inclH2O=inclH2O,
           each final inclN2=inclN2,
           each final inclO2=inclO2,
-          each H2(
-            p_IC=defaults.p,
-            yNegative(viscousZ=false, viscousX=false),
-            yPositive(viscousZ=false, viscousX=false),
-            zNegative(viscousX=false, viscousY=false),
-            zPositive(viscousX=false, viscousY=false)),
-          each H2O(
-            p_IC=defaults.p,
-            yNegative(viscousZ=false, viscousX=false),
-            yPositive(viscousZ=false, viscousX=false),
-            zNegative(viscousX=false, viscousY=false),
-            zPositive(viscousX=false, viscousY=false)),
-          each N2(
-            p_IC=defaults.p,
-            yNegative(viscousZ=false, viscousX=false),
-            yPositive(viscousZ=false, viscousX=false),
-            zNegative(viscousX=false, viscousY=false),
-            zPositive(viscousX=false, viscousY=false)),
-          each O2(
+          H2(
             each p_IC=defaults.p,
-            yNegative(viscousZ=false, viscousX=false),
-            yPositive(viscousZ=false, viscousX=false),
-            zNegative(viscousX=false, viscousY=false),
-            zPositive(viscousX=false, viscousY=false))),
+            each yNegative(viscousZ=false,viscousX=false),
+            each yPositive(viscousZ=false,viscousX=false),
+            each zNegative(viscousX=false,viscousY=false),
+            each zPositive(viscousX=false,viscousY=false)),
+          H2O(
+            each p_IC=defaults.p,
+            each yNegative(viscousZ=false,viscousX=false),
+            each yPositive(viscousZ=false,viscousX=false),
+            each zNegative(viscousX=false,viscousY=false),
+            each zPositive(viscousX=false,viscousY=false)),
+          N2(
+            each p_IC=defaults.p,
+            each yNegative(viscousZ=false, viscousX=false),
+            each yPositive(viscousZ=false,viscousX=false),
+            each zNegative(viscousX=false,viscousY=false),
+            each zPositive(viscousX=false,viscousY=false)),
+          O2(
+            each p_IC=defaults.p,
+            each yNegative(viscousZ=false,viscousX=false),
+            each yPositive(viscousZ=false,viscousX=false),
+            each zNegative(viscousX=false,viscousY=false),
+            each zPositive(viscousX=false,viscousY=false))),
         graphite(
           each final inclC=inclC,
           each final 'incle-'='incle-',
           C(each V_IC=subregions[1].V/4),
           'e-'(
-            yNegative(viscousZ=false, viscousX=false),
-            yPositive(viscousZ=false, viscousX=false),
-            zNegative(viscousX=false, viscousY=false),
-            zPositive(viscousX=false, viscousY=false))),
+            each yNegative(viscousZ=false,viscousX=false),
+            each yPositive(viscousZ=false,viscousX=false),
+            each zNegative(viscousX=false,viscousY=false),
+            each zPositive(viscousX=false,viscousY=false))),
         ionomer(
           each final inclC19HF37O5S=inclC19HF37O5S,
           each final 'inclH+'='inclH+',
-          each C19HF37O5S(V_IC=subregions[1].V/4),
-          each 'H+'(
-            yNegative(viscousZ=false, viscousX=false),
-            yPositive(viscousZ=false, viscousX=false),
-            zNegative(viscousX=false, viscousY=false),
-            zPositive(viscousX=false, viscousY=false))),
+          C19HF37O5S(each V_IC=subregions[1].V/4),
+          'H+'(
+            each yNegative(viscousZ=false,viscousX=false),
+            each yPositive(viscousZ=false,viscousX=false),
+            each zNegative(viscousX=false,viscousY=false),
+            each zPositive(viscousX=false,viscousY=false))),
         each inclLinY=false,
         each inclLinZ=false,
         each inclYFaces=false,
@@ -361,25 +322,25 @@ package Subregions
           final inclN2=inclN2,
           final inclO2=inclO2,
           H2(
-            p_IC=0.95*defaults.p,
+            p_IC=0.9*defaults.p,
             yNegative(viscousZ=false, viscousX=false),
             yPositive(viscousZ=false, viscousX=false),
             zNegative(viscousX=false, viscousY=false),
             zPositive(viscousX=false, viscousY=false)),
           H2O(
-            p_IC=0.95*defaults.p,
+            p_IC=0.9*defaults.p,
             yNegative(viscousZ=false, viscousX=false),
             yPositive(viscousZ=false, viscousX=false),
             zNegative(viscousX=false, viscousY=false),
             zPositive(viscousX=false, viscousY=false)),
           N2(
-            p_IC=0.95*defaults.p,
+            p_IC=0.9*defaults.p,
             yNegative(viscousZ=false, viscousX=false),
             yPositive(viscousZ=false, viscousX=false),
             zNegative(viscousX=false, viscousY=false),
             zPositive(viscousX=false, viscousY=false)),
           O2(
-            p_IC=0.95*defaults.p,
+            p_IC=0.9*defaults.p,
             yNegative(viscousZ=false, viscousX=false),
             yPositive(viscousZ=false, viscousX=false),
             zNegative(viscousX=false, viscousY=false),
@@ -408,7 +369,7 @@ package Subregions
         inclZFaces=false)
         annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
-      inner FCSys.BCs.Defaults defaults(analysis=true)
+      inner FCSys.BCs.Defaults defaults
         annotation (Placement(transformation(extent={{60,20},{80,40}})));
       replaceable FCSys.BCs.Face.Subregion0Current bC1 constrainedby
         FCSys.BCs.Face.Subregion(
@@ -433,16 +394,13 @@ package Subregions
         graphite(
           final inclC=inclC,
           final 'incle-'='incle-',
-          'e-'(redeclare
-              FCSys.BCs.Face.Species.Material.PotentialElectrochemical
-              materialBC)),
+          'e-'(redeclare FCSys.BCs.Face.Species.Material.Pressure materialBC)),
+
         ionomer(
           final inclC19HF37O5S=inclC19HF37O5S,
           final 'inclH+'='inclH+',
-          'H+'(redeclare
-              FCSys.BCs.Face.Species.Material.PotentialElectrochemical
-              materialBC))) annotation (__Dymola_choicesFromPackage=true,
-          Placement(transformation(
+          'H+'(redeclare FCSys.BCs.Face.Species.Material.Pressure materialBC)))
+        annotation (__Dymola_choicesFromPackage=true, Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={50,0})));
@@ -517,19 +475,6 @@ package Subregions
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionsCAndH2AndH2O.mos"));
     end SubregionsCAndH2AndH2O;
-
-    model SubregionsCAndH2O
-      "<html>Test a one-dimensional array of subregions with C and H<sub>2</sub>O</html>"
-      extends SubregionsH2(
-        inclC=true,
-        inclH2=false,
-        inclH2O=true);
-      annotation (
-        experiment(StopTime=20, Tolerance=1e-06),
-        experimentSetupOutput,
-        Commands(file(ensureSimulated=true) =
-            "resources/scripts/Dymola/Subregions.Examples.SubregionsCAndH2O.mos"));
-    end SubregionsCAndH2O;
 
     model SubregionsCAndN2
       "<html>Test a one-dimensional array of subregions with C and N<sub>2</sub></html>"
@@ -616,7 +561,7 @@ package Subregions
               T(displayUnit="degC")))),
         redeclare FCSys.BCs.Face.Subregion0Current0Power bC1,
         redeclare FCSys.BCs.Face.Subregion0Current0Power bC2);
-      extends Modelica.Icons.UnderConstruction;
+
       annotation (
         Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ThermalConduction.mos"),
@@ -649,12 +594,6 @@ package Subregions
         redeclare FCSys.BCs.Face.Subregion0Current0Power bC1,
         redeclare FCSys.BCs.Face.Subregion0Current0Power bC2);
 
-      extends Modelica.Icons.UnderConstruction;
-
-      //initMethPartNum=InitMethScalar.Pressure,
-      // each initMethPartNum=InitMethScalar.Pressure,
-      // initMethPartNum=InitMethScalar.Pressure,
-
       annotation (
         Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ThermalConductionConvection.mos"),
@@ -668,47 +607,51 @@ package Subregions
       "Test chemical reaction with reaction rate ramped over time"
 
       extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
-      FCSys.Subregions.Reactions.Electrochemical reaction
+
+      FCSys.Subregions.Reaction reaction(n_spec=3)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       FCSys.BCs.Chemical.Species.Species species1(redeclare
-          FCSys.BCs.Chemical.Species.Material.PotentialElectrochemical
-          materialBC) annotation (Placement(transformation(
+          FCSys.Characteristics.'e-'.Graphite Data, materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature)
+        annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={-30,-24})));
+
       FCSys.BCs.Chemical.Species.Species species2(redeclare
-          FCSys.BCs.Chemical.Species.Material.PotentialElectrochemical
-          materialBC) annotation (Placement(transformation(
+          FCSys.Characteristics.'H+'.Gas Data, materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature)
+        annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={0,-24})));
-      FCSys.BCs.Chemical.Species.Species species3(redeclare
-          FCSys.BCs.Chemical.Species.Material.Current materialBC, redeclare
-          Modelica.Blocks.Sources.Ramp materialSpec(height=100*U.A, duration=
-              3600e2)) annotation (Placement(transformation(
+
+      FCSys.BCs.Chemical.Species.Species species3(
+        redeclare FCSys.Characteristics.H2.Gas Data,
+        materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.Current,
+
+        redeclare Modelica.Blocks.Sources.Ramp materialSpec(height=100*U.A,
+            duration=3600e2)) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={30,-24})));
+
       inner FCSys.BCs.Defaults defaults(analysis=true)
         annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
     equation
       connect(species1.chemical, reaction.chemical[1]) annotation (Line(
-          points={{-30,-20},{-30,-10},{5.55112e-16,-10},{5.55112e-16,
-              5.55112e-16}},
-          color={170,0,0},
+          points={{-30,-20},{-30,-10},{5.55112e-16,-10},{5.55112e-16,-0.666667}},
+
+          color={208,104,0},
           smooth=Smooth.None));
 
       connect(species2.chemical, reaction.chemical[2]) annotation (Line(
           points={{-1.11528e-16,-20},{0,-20},{0,5.55112e-16},{5.55112e-16,
               5.55112e-16}},
-          color={170,0,0},
+          color={208,104,0},
           smooth=Smooth.None));
 
       connect(species3.chemical, reaction.chemical[3]) annotation (Line(
-          points={{30,-20},{30,-10},{5.55112e-16,-10},{5.55112e-16,5.55112e-16}},
-
-          color={170,0,0},
+          points={{30,-20},{30,-10},{5.55112e-16,-10},{5.55112e-16,0.666667}},
+          color={208,104,0},
           smooth=Smooth.None));
 
       annotation (
@@ -719,286 +662,8 @@ package Subregions
               "resources/scripts/Dymola/Subregions.Examples.ReactionRamp.mos"));
     end ReactionRamp;
 
-    model H2_O2_H2ODynamic
-      "<html>Test the 2H<sub>2</sub> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O reaction dynamically</html>"
-
-      extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
-      parameter Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-      parameter Q.Volume V=1*U.cm^3 "Volume";
-
-      FCSys.Subregions.Reactions.'Reaction2H2+O2<=>2H2O' reaction
-        "Chemical reaction"
-        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-      SimpleSpecies species1(
-        final V=V,
-        final T=T,
-        p_IC=0.4*U.atm,
-        redeclare FCSys.Characteristics.H2.Gas Data(b_v=[1], specVolPow={-1,0}))
-        "1st species" annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=180,
-            origin={-30,-24})));
-      SimpleSpecies species2(
-        final V=V,
-        final T=T,
-        p_IC=1*U.atm,
-        redeclare FCSys.Characteristics.O2.Gas Data(b_v=[1], specVolPow={-1,0}))
-        "2nd species" annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=180,
-            origin={0,-24})));
-      SimpleSpecies species3(
-        final V=V,
-        final T=T,
-        p_IC=0.4*U.atm,
-        redeclare FCSys.Characteristics.H2O.Gas Data(b_v=[1], specVolPow={-1,0}))
-        "3rd species" annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=180,
-            origin={30,-24})));
-
-      inner FCSys.BCs.Defaults defaults(analysis=true)
-        annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
-    equation
-
-      connect(species1.chemical, reaction.chemical[1]) annotation (Line(
-          points={{-30,-20},{-30,-10},{5.55112e-16,-10},{5.55112e-16,
-              5.55112e-16}},
-          color={170,0,0},
-          smooth=Smooth.None));
-
-      connect(species2.chemical, reaction.chemical[2]) annotation (Line(
-          points={{9.89443e-16,-20},{0,-20},{0,5.55112e-16},{5.55112e-16,
-              5.55112e-16}},
-          color={170,0,0},
-          smooth=Smooth.None));
-
-      connect(species3.chemical, reaction.chemical[3]) annotation (Line(
-          points={{30,-20},{30,-10},{5.55112e-16,-10},{5.55112e-16,5.55112e-16}},
-
-          color={170,0,0},
-          smooth=Smooth.None));
-
-      annotation (
-        Diagram(graphics),
-        experiment(
-          StopTime=0.01,
-          NumberOfIntervals=5000,
-          Tolerance=1e-06),
-        experimentSetupOutput,
-        Commands(file=
-              "resources/scripts/Dymola/Subregions.Examples.H2_O2_H2ODynamic.mos"));
-    end H2_O2_H2ODynamic;
-
-    model H2O_H2ODynamic
-      "<html>Test the H<sub>2</sub>O evaporation/condensation reaction dynamically</html>"
-
-      extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
-      parameter Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-      parameter Q.Volume V=1*U.cm^3 "Volume";
-
-      FCSys.Subregions.Reactions.'ReactionH2O<=>H2O' reaction
-        "Chemical reaction"
-        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-      SimpleSpecies species1(
-        final V=V,
-        final T=T,
-        redeclare FCSys.Characteristics.H2O.Liquid Data) "1st species"
-        annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=180,
-            origin={-30,-24})));
-      SimpleSpecies species2(
-        final V=V,
-        final T=T,
-        p_IC=0.4*U.atm,
-        redeclare FCSys.Characteristics.H2O.Gas Data(b_v=[1], specVolPow={-1,0}))
-        "2nd species" annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=180,
-            origin={0,-24})));
-
-      inner FCSys.BCs.Defaults defaults(analysis=true)
-        annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
-    equation
-
-      connect(species1.chemical, reaction.chemical[1]) annotation (Line(
-          points={{-30,-20},{-30,-10},{5.55112e-16,-10},{5.55112e-16,
-              5.55112e-16}},
-          color={170,0,0},
-          smooth=Smooth.None));
-
-      connect(species2.chemical, reaction.chemical[2]) annotation (Line(
-          points={{9.89443e-16,-20},{0,-20},{0,5.55112e-16},{5.55112e-16,
-              5.55112e-16}},
-          color={170,0,0},
-          smooth=Smooth.None));
-
-      annotation (
-        Documentation(info="<html>Note that the pressure of liquid H<sub>2</sub>O shows as zero.
-  Since it is assumed to be incompressible, its pressure cannot be determined by the specific volume and temperature.
-  In that case, the <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_vT\">p_vT</a> function
-  returns zero.</html>"),
-        Diagram(graphics),
-        experiment(
-          StopTime=2,
-          NumberOfIntervals=5000,
-          Tolerance=1e-06),
-        experimentSetupOutput,
-        Commands(file=
-              "resources/scripts/Dymola/Subregions.Examples.H2O_H2ODynamic.mos"));
-    end H2O_H2ODynamic;
-
-    model SimpleSpecies "Simple species model to test reactions"
-      //extends FCSys.BaseClasses.Icons.Names.Middle;
-      extends Modelica.Icons.UnderConstruction;
-      replaceable FCSys.Characteristics.BaseClasses.Characteristic Data
-        "Characteristic data of the species"
-        annotation (Dialog(group="Material properties"));
-      parameter Q.Volume V=1*U.cm^3 "Volume";
-      parameter Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-      parameter Q.PressureAbsolute p_IC=1*U.atm
-        "<html>Initial pressure (<i>p</i><sub>IC</sub>)</html>"
-        annotation (Dialog(tab="Initialization", group="Scalar properties"));
-      parameter Q.Resistance alphaPerLstar=1/U.A
-        "<html>Material exchange resistance (&beta;/<i>L</i><sup>&#9733;</sup>)</html>";
-
-      Q.Amount N(nominal=1*U.C, start=1*U.C) "Amount";
-      Q.Pressure p(
-        nominal=1*U.atm,
-        start=p_IC,
-        fixed=true) "Pressure";
-      Q.Potential h(nominal=1*U.V) "Specific enthalpy";
-      Q.Potential mu(nominal=1*U.V) "Electrochemical potential";
-
-      FCSys.Connectors.ChemicalOutput chemical annotation (Placement(
-            transformation(extent={{-10,-50},{10,-30}}), iconTransformation(
-              extent={{-10,-50},{10,-30}})));
-
-    protected
-      outer FCSys.BCs.Defaults defaults "Default settings" annotation (
-          Placement(transformation(extent={{-10,-10},{10,10}}),
-            iconTransformation(extent={{-10,90},{10,110}})));
-
-    equation
-      // Properties
-      p = Data.p_rhoT(N/V, T);
-      h = Data.h_pT(
-            p,
-            T,
-            referenceEnthalpy=ReferenceEnthalpy.ZeroAt25degC);
-      //    referenceEnthalpy=ReferenceEnthalpy.EnthalpyOfFormationAt25degC);
-      mu = h - T*Data.s0_T(T);
-
-      // Material exchange
-      T*alphaPerLstar*chemical.Ndot = 2*(chemical.mu - mu - Data.Deltah0_f);
-
-      // Conservation of material
-      der(N)/U.s = chemical.Ndot;
-      annotation (defaultComponentName="species", Icon(graphics={Rectangle(
-                  extent={{-100,40},{100,-40}},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Line(
-                  points={{-100,-40},{100,-40}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash),Line(
-                  points={{-100,-40},{-100,40},{100,40},{100,-40}},
-                  pattern=LinePattern.None,
-                  smooth=Smooth.None),Text(
-                  extent={{-100,-20},{100,20}},
-                  textString="%name",
-                  lineColor={0,0,0})}));
-    end SimpleSpecies;
-
-    model Cell "Test both half reactions of a cell"
-      extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
-      output Q.Number DeltamuPerT='e-_an'.chemical.mu - 'e-_ca'.chemical.mu
-        "Voltage of cathode w.r.t. anode";
-      // The negative factor is due to the charge negative charge of electrons.
-
-      FCSys.Subregions.Reactions.Electrochemical HOR(nu={2,2,1})
-        "Hydrogen oxidation reaction"
-        annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
-
-      FCSys.BCs.Chemical.Species.Species 'e-_an'(redeclare
-          FCSys.BCs.Chemical.Species.Material.PotentialElectrochemical
-          materialBC) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=180,
-            origin={-52,-24})));
-      FCSys.BCs.Chemical.Species.Species H2(redeclare
-          FCSys.BCs.Chemical.Species.Material.PotentialElectrochemical
-          materialBC) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=180,
-            origin={-28,-24})));
-      inner FCSys.BCs.Defaults defaults(analysis=true)
-        annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
-      FCSys.Subregions.Reactions.Electrochemical ORR(nu={4,4,1,-2})
-        "Oxygen reduction reaction"
-        annotation (Placement(transformation(extent={{30,-10},{50,10}})));
-      FCSys.BCs.Chemical.Species.Species 'e-_ca'(redeclare
-          FCSys.BCs.Chemical.Species.Material.Current materialBC, redeclare
-          Modelica.Blocks.Sources.Ramp materialSpec(duration=3600e2, height=100
-              *U.A)) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=180,
-            origin={14,-24})));
-      FCSys.BCs.Chemical.Species.Species O2(redeclare
-          FCSys.BCs.Chemical.Species.Material.PotentialElectrochemical
-          materialBC) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=180,
-            origin={40,-24})));
-      FCSys.BCs.Chemical.Species.Species H2O(redeclare
-          FCSys.BCs.Chemical.Species.Material.PotentialElectrochemical
-          materialBC, redeclare Modelica.Blocks.Sources.Constant materialSpec(k
-            =-2*1.20646*U.V/(298.15*U.K))) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=180,
-            origin={64,-24})));
-      // Note:  The OCV of H2/O2 cell is 1.20646 V at 300 K, assuming the product is
-      // gaseous.
-    equation
-      connect('e-_an'.chemical, HOR.chemical[1]) annotation (Line(
-          points={{-52,-20},{-52,-10},{-40,-10},{-40,5.55112e-16}},
-          color={170,0,0},
-          smooth=Smooth.None));
-      connect(H2.chemical, HOR.chemical[3]) annotation (Line(
-          points={{-28,-20},{-28,-10},{-40,-10},{-40,5.55112e-16}},
-          color={170,0,0},
-          smooth=Smooth.None));
-      connect('e-_ca'.chemical, ORR.chemical[1]) annotation (Line(
-          points={{14,-20},{14,-10},{40,-10},{40,5.55112e-16}},
-          color={170,0,0},
-          smooth=Smooth.None));
-      connect(O2.chemical, ORR.chemical[3]) annotation (Line(
-          points={{40,-20},{40,5.55112e-16}},
-          color={170,0,0},
-          smooth=Smooth.None));
-      connect(H2O.chemical, ORR.chemical[4]) annotation (Line(
-          points={{64,-20},{64,-10},{40,-10},{40,5.55112e-16}},
-          color={170,0,0},
-          smooth=Smooth.None));
-      connect(HOR.chemical[2], ORR.chemical[2]) annotation (Line(
-          points={{-40,5.55112e-16},{8,-4.87687e-22},{8,5.55112e-16},{40,
-              5.55112e-16}},
-          color={170,0,0},
-          smooth=Smooth.None));
-
-      annotation (
-        Diagram(graphics),
-        experiment(StopTime=360000),
-        experimentSetupOutput,
-        Commands(file="resources/scripts/Dymola/Subregions.Examples.Cell.mos"));
-    end Cell;
-
     model Reaction "Test an electrochemical reaction"
+
       extends Modelica.Icons.Example;
 
       parameter Integer n_lin(
@@ -1007,22 +672,21 @@ package Subregions
         "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
         annotation (HideResult=true);
 
-      FCSys.Subregions.Reactions.Electrochemical reaction(final n_lin=n_lin,
-          n_spec=3)
+      FCSys.Subregions.Reaction reaction(final n_lin=n_lin, n_spec=3)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       FCSys.BCs.Chemical.Species.Species 'e-'(
-        materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.PotentialElectrochemical,
+        materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature,
 
-        formula="e-",
+        redeclare FCSys.Characteristics.'e-'.Graphite Data,
         final n_lin=n_lin) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={-30,-24})));
 
       FCSys.BCs.Chemical.Species.Species 'H+'(
-        materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.PotentialElectrochemical,
+        materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature,
 
-        formula="H+",
+        redeclare FCSys.Characteristics.'H+'.Solid Data,
         final n_lin=n_lin) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
@@ -1031,7 +695,7 @@ package Subregions
       FCSys.BCs.Chemical.Species.Species H2(
         materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.Current,
 
-        formula="H2",
+        redeclare FCSys.Characteristics.H2.Gas Data,
         final n_lin=n_lin,
         redeclare Modelica.Blocks.Sources.Ramp materialSpec(height=100*U.A,
             duration=100)) annotation (Placement(transformation(
@@ -1043,8 +707,8 @@ package Subregions
         annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
     equation
       connect('e-'.chemical, reaction.chemical[1]) annotation (Line(
-          points={{-30,-20},{-30,-10},{5.55112e-16,-10},{5.55112e-16,
-              5.55112e-16}},
+          points={{-30,-20},{-30,-10},{5.55112e-16,-10},{5.55112e-16,-0.666667}},
+
           color={208,104,0},
           smooth=Smooth.None));
 
@@ -1055,8 +719,7 @@ package Subregions
           smooth=Smooth.None));
 
       connect(H2.chemical, reaction.chemical[3]) annotation (Line(
-          points={{30,-20},{30,-10},{5.55112e-16,-10},{5.55112e-16,5.55112e-16}},
-
+          points={{30,-20},{30,-10},{5.55112e-16,-10},{5.55112e-16,0.666667}},
           color={208,104,0},
           smooth=Smooth.None));
 
@@ -1081,7 +744,8 @@ package Subregions
 
       inner FCSys.BCs.Defaults defaults(analysis=false)
         annotation (Placement(transformation(extent={{20,20},{40,40}})));
-      replaceable Species.H2.Gas.Fixed species
+      replaceable Species.H2.Gas.Fixed species constrainedby
+        FCSys.Subregions.Species.Species
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       FCSys.BCs.InertDalton.Species inertBC annotation (Placement(
             transformation(
@@ -1105,8 +769,8 @@ package Subregions
       extends SpeciesH2(redeclare FCSys.Subregions.Species.'e-'.Graphite.Fixed
           species);
       FCSys.BCs.Face.Species.SpeciesX faceBC(redeclare
-          FCSys.BCs.Face.Species.Material.PotentialElectrochemical materialBC)
-        annotation (Placement(transformation(
+          FCSys.BCs.Face.Species.Material.Pressure materialBC) annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-24,0})));
@@ -1280,11 +944,9 @@ package Subregions
             origin={50,0})));
 
       replaceable FCSys.BCs.Face.SubregionFlow ground(graphite('incle-'=true,
-            'e-'(redeclare
-              FCSys.BCs.Face.Species.Material.PotentialElectrochemical
-              materialBC, materialSpec(k=0)))) constrainedby
-        FCSys.BCs.Face.Subregion annotation (__Dymola_choicesFromPackage=true,
-          Placement(transformation(
+            'e-'(redeclare FCSys.BCs.Face.Species.Material.Pressure materialBC,
+              materialSpec(k=0)))) constrainedby FCSys.BCs.Face.Subregion
+        annotation (__Dymola_choicesFromPackage=true, Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-50,30})));
@@ -1354,80 +1016,74 @@ package Subregions
     // first in the parameter dialog.
     extends BaseClasses.PartialSubregion;
 
-    replaceable FCSys.Subregions.Phases.Gas gas(inclH2O=true, final inclLin={
-          inclLinX,inclLinY,inclLinZ}) "Gas" annotation (Dialog(group="Phases"),
-        Placement(transformation(extent={{-10,-10},{10,10}})));
+    replaceable Phases.Gas gas(inclH2O=true, final inclLin={inclLinX,inclLinY,
+          inclLinZ}) "Gas" annotation (Dialog(group="Phases"), Placement(
+          transformation(extent={{-10,-10},{10,10}})));
 
-    replaceable FCSys.Subregions.Phases.Graphite graphite(final inclLin={
-          inclLinX,inclLinY,inclLinZ}) "Graphite" annotation (Dialog(group=
-            "Phases"), Placement(transformation(extent={{-10,-10},{10,10}})));
+    replaceable Phases.Graphite graphite(final inclLin={inclLinX,inclLinY,
+          inclLinZ}) "Graphite" annotation (Dialog(group="Phases"), Placement(
+          transformation(extent={{-10,-10},{10,10}})));
 
-    replaceable FCSys.Subregions.Phases.Ionomer ionomer(final inclLin={inclLinX,
-          inclLinY,inclLinZ}) "Ionomer" annotation (Dialog(group="Phases"),
-        Placement(transformation(extent={{-10,-10},{10,10}})));
+    replaceable Phases.Ionomer ionomer(final inclLin={inclLinX,inclLinY,
+          inclLinZ}) "Ionomer" annotation (Dialog(group="Phases"), Placement(
+          transformation(extent={{-10,-10},{10,10}})));
     /*
-  replaceable FCSys.Subregions.Phases.Liquid liquid(final inclLin={inclLinX,
+  replaceable Phases.Liquid liquid(final inclLin={inclLinX,
         inclLinY,inclLinZ})  "Liquid" annotation (
 
     Dialog(group="Phases"),
     Placement(transformation(extent={{-10,-10},{10,10}})));
   */
 
-    FCSys.Subregions.Reactions.Electrochemical HOR(final n_lin=n_lin, n_chem=1)
-      if inclReact and (graphite.'incle-' and ionomer.'inclH+' and gas.inclH2
-       and not (gas.inclO2 and gas.inclH2O)) "Hydrogen oxidation reaction"
-      annotation (Placement(transformation(extent={{-40,30},{-20,50}})));
-    FCSys.Subregions.Reactions.Electrochemical ORR(final n_lin=n_lin, n_chem=2)
-      if inclReact and (graphite.'incle-' and ionomer.'inclH+' and gas.inclO2
-       and gas.inclH2O and not gas.inclH2) "Oxygen reduction reaction"
-      annotation (Placement(transformation(extent={{-40,30},{-20,50}})));
+    FCSys.Subregions.Reaction HOR(final n_lin=n_lin, n_spec=3) if inclReact
+       and (graphite.'incle-' and ionomer.'inclH+' and gas.inclH2 and not (gas.inclO2
+       and gas.inclH2O)) "Hydrogen oxidation reaction"
+      annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
+    FCSys.Subregions.Reaction ORR(final n_lin=n_lin, n_spec=4) if inclReact
+       and (graphite.'incle-' and ionomer.'inclH+' and gas.inclO2 and gas.inclH2O
+       and not gas.inclH2) "Oxygen reduction reaction"
+      annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
 
   protected
     Connectors.ChemicalBusInternal chemical
       "Internal connector to route electrochemical interactions"
-      annotation (Placement(transformation(extent={{-40,10},{-20,30}})));
+      annotation (Placement(transformation(extent={{-30,10},{-10,30}})));
 
   equation
     // Chemical interactions
-    connect(HOR.ion1, chemical.'H+') annotation (Line(
-        points={{-40,40},{-40,30},{-30,30},{-30,20}},
+    connect(HOR.chemical[1], chemical.'H+') annotation (Line(
+        points={{-40,39.3333},{-20,20}},
         color={208,104,0},
-        smooth=Smooth.None), Text(
-        string="%second",
-        index=1,
-        extent={{-7,0},{-7,0}}));
-    connect(HOR.ion2, chemical.'e-') annotation (Line(
-        points={{-20,40},{-20,30},{-30,30},{-30,20}},
+        smooth=Smooth.None));
+    connect(HOR.chemical[2], chemical.'e-') annotation (Line(
+        points={{-40,40},{-20,20}},
         color={208,104,0},
-        smooth=Smooth.None), Text(
-        string="%second",
-        index=1,
-        extent={{2,0},{2,0}}));
-    connect(HOR.chemical[1], chemical.H2) annotation (Line(
-        points={{-30,40},{-30,20}},
+        smooth=Smooth.None));
+    connect(HOR.chemical[3], chemical.H2) annotation (Line(
+        points={{-40,40.6667},{-20,20}},
         color={208,104,0},
         smooth=Smooth.None));
 
-    connect(ORR.ion1, chemical.'e-') annotation (Line(
-        points={{-40,40},{-40,30},{-30,30},{-30,20}},
+    connect(ORR.chemical[1], chemical.'e-') annotation (Line(
+        points={{-40,39.25},{-20,20}},
         color={208,104,0},
         smooth=Smooth.None));
-    connect(ORR.ion2, chemical.'H+') annotation (Line(
-        points={{-20,40},{-20,30},{-30,30},{-30,20}},
+    connect(ORR.chemical[2], chemical.'H+') annotation (Line(
+        points={{-40,39.75},{-20,20}},
         color={208,104,0},
         smooth=Smooth.None));
-    connect(ORR.chemical[1], chemical.O2) annotation (Line(
-        points={{-30,39.5},{-30,20}},
+    connect(ORR.chemical[3], chemical.O2) annotation (Line(
+        points={{-40,40.25},{-20,20}},
         color={208,104,0},
         smooth=Smooth.None));
-    connect(ORR.chemical[2], chemical.H2O) annotation (Line(
-        points={{-30,40.5},{-30,20}},
+    connect(ORR.chemical[4], chemical.H2O) annotation (Line(
+        points={{-40,40.75},{-20,20}},
         color={208,104,0},
         smooth=Smooth.None));
 
     // Gas
     connect(gas.chemical, chemical) annotation (Line(
-        points={{-5,5},{-30,20}},
+        points={{-5,5},{-20,20}},
         color={208,104,0},
         smooth=Smooth.None));
     connect(gas.inert, volume.inert) annotation (Line(
@@ -1478,7 +1134,7 @@ package Subregions
 
     // Graphite
     connect(graphite.chemical, chemical) annotation (Line(
-        points={{-5,5},{-30,20}},
+        points={{-5,5},{-20,20}},
         color={208,104,0},
         smooth=Smooth.None));
 
@@ -1530,7 +1186,7 @@ package Subregions
 
     // Ionomer
     connect(ionomer.chemical, chemical) annotation (Line(
-        points={{-5,5},{-30,20}},
+        points={{-5,5},{-20,20}},
         color={208,104,0},
         smooth=Smooth.None));
 
@@ -1652,7 +1308,7 @@ package Subregions
     // first in the parameter dialog.
     extends BaseClasses.PartialSubregion;
 
-    replaceable FCSys.Subregions.Phases.Gas gas(
+    replaceable Phases.Gas gas(
       inclH2O=true,
       inclReact=inclReact,
       final inclLin={inclLinX,inclLinY,inclLinZ}) "Gas" annotation (
@@ -1660,9 +1316,9 @@ package Subregions
       Dialog(group="Phases"),
       Placement(transformation(extent={{-10,-10},{10,10}})));
 
-    replaceable FCSys.Subregions.Phases.Ionomer ionomer(final inclLin={inclLinX,
-          inclLinY,inclLinZ}) "Ionomer" annotation (Dialog(group="Phases"),
-        Placement(transformation(extent={{-10,-10},{10,10}})));
+    replaceable Phases.Ionomer ionomer(final inclLin={inclLinX,inclLinY,
+          inclLinZ}) "Ionomer" annotation (Dialog(group="Phases"), Placement(
+          transformation(extent={{-10,-10},{10,10}})));
 
   equation
     // Gas
@@ -1779,15 +1435,15 @@ package Subregions
     // first in the parameter dialog.
     extends BaseClasses.PartialSubregion;
 
-    replaceable FCSys.Subregions.Phases.Gas gas(
+    replaceable Phases.Gas gas(
       inclH2O=true,
       inclReact=inclReact,
       final inclLin={inclLinX,inclLinY,inclLinZ}) "Gas" annotation (Dialog(
           group="Phases"), Placement(transformation(extent={{-10,-10},{10,10}})));
 
-    replaceable FCSys.Subregions.Phases.Graphite graphite(final inclLin={
-          inclLinX,inclLinY,inclLinZ}) "Graphite" annotation (Dialog(group=
-            "Phases"), Placement(transformation(extent={{-10,-10},{10,10}})));
+    replaceable Phases.Graphite graphite(final inclLin={inclLinX,inclLinY,
+          inclLinZ}) "Graphite" annotation (Dialog(group="Phases"), Placement(
+          transformation(extent={{-10,-10},{10,10}})));
 
   equation
     // Gas
@@ -2154,14 +1810,13 @@ package Subregions
           enable=inclO2),
         Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      FCSys.Subregions.Reactions.Electrochemical '2e-+2H+=H2'(final n_lin=n_lin)
-        if inclReact and (('incle-' and 'inclH+') or ('incle-' and (inclH2 or (
-        inclO2 and inclH2O))) or ('inclH+' and (inclH2 or (inclO2 and inclH2O))))
+      Reaction '2e-+2H+=H2'(final n_lin=n_lin) if inclReact and (('incle-' and
+        'inclH+') or ('incle-' and (inclH2 or (inclO2 and inclH2O))) or (
+        'inclH+' and (inclH2 or (inclO2 and inclH2O))))
         "Hydrogen oxidation reaction"
         annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
-      FCSys.Subregions.Reactions.Electrochemical '2H2+O2=2H2O'(final n_lin=
-            n_lin) if inclReact and ((inclH2 and inclO2) or (inclH2 and inclH2O)
-         or (inclO2 and inclH2O))
+      Reaction '2H2+O2=2H2O'(final n_lin=n_lin) if inclReact and ((inclH2 and
+        inclO2) or (inclH2 and inclH2O) or (inclO2 and inclH2O))
         annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
 
     equation
@@ -3290,7 +2945,7 @@ package Subregions
           color={72,90,180},
           smooth=Smooth.None));
       connect(O2.inert, phaseBoundary.inertD) annotation (Line(
-          points={{7,-7},{7,-7},{7,-7},{7,-7}},
+          points={{7,-7},{8,-8},{8,-7},{7,-7}},
           color={72,90,180},
           smooth=Smooth.None));
       // Material transport
@@ -3424,12 +3079,12 @@ package Subregions
 
       annotation (
         defaultComponentPrefixes="replaceable",
-        Documentation(info="<html>**If C or C19HF37O5S is included, then initXVel, initYVel, and initZVel are 
-    ignored.  Velocity is not initialized because it is set by C or C19HF37O5S. 
-    
+        Documentation(info="<html>**If C or C19HF37O5S is included, then initXVel, initYVel, and initZVel are
+    ignored.  Velocity is not initialized because it is set by C or C19HF37O5S.
+
     **If both C and C19HF37O5S are included, then reduce must be set to false (to avoid singularity, since
     both of those species set velocity).
-    
+
     <p>Notes:<ul>
     <li>Only one constant-volume species may be enabled at once.  A failure will occur if
     <code>inclC</code> and <code>inclC19HF37O5S</code> are both <code>true</code>.</li>
@@ -3586,8 +3241,8 @@ package Subregions
           enable=inclO2),
         Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      Reactions.Chemical '2H2+O2=2H2O'(final n_lin=n_lin, n_chem=3) if
-        inclReact and (inclH2 and inclH2O and inclO2)
+      Reaction '2H2+O2=2H2O'(final n_lin=n_lin, n_spec=3) if inclReact and (
+        inclH2 and inclH2O and inclO2)
         annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
 
     equation
@@ -4561,9 +4216,9 @@ package Subregions
 
       annotation (
         defaultComponentPrefixes="replaceable",
-        Documentation(info="<html>**If C is included, then initXVel, initYVel, and initZVel are 
-    ignored.  Velocity is not initialized because it is set by C. 
-    
+        Documentation(info="<html>**If C is included, then initXVel, initYVel, and initZVel are
+    ignored.  Velocity is not initialized because it is set by C.
+
     <p>For more information, see the
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
@@ -5158,9 +4813,9 @@ package Subregions
 
       annotation (
         defaultComponentPrefixes="replaceable",
-        Documentation(info="<html>**If C19HF37O5S is included, then initXVel, initYVel, and initZVel are 
-    ignored.  Velocity is not initialized because it is set by C19HF37O5S. 
-    
+        Documentation(info="<html>**If C19HF37O5S is included, then initXVel, initYVel, and initZVel are
+    ignored.  Velocity is not initialized because it is set by C19HF37O5S.
+
     <p>For more information, see the
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
@@ -5529,7 +5184,7 @@ package Subregions
         annotation (
           Documentation(info="<html>**if one of the species has setTemp=true, then initTemp should be set to false.
     The temperature should not be not initialized here since it there would be too many initialization equations.  same for initXVel, initYVel, initZVel.
-    
+
     <p>Assumptions:
            <ol>
            <li>The factors that may cause anisotropic transport (<b><i>k</i></b>)
@@ -5587,320 +5242,6 @@ package Subregions
       end NullPhase;
     end BaseClasses;
   end Phases;
-
-  package Reactions "Chemical and electrochemical reactions"
-    extends Modelica.Icons.Package;
-    model Electrochemical "Model for an electrochemical reaction"
-      extends BaseClasses.PartialReaction(Xidot(final start=Xidot_IC,final
-            fixed=false));
-      // Note:  As of Dymola 7.4, the (electrolytic double layer) capacitance
-      // must be included in this model.  If it is external, then Dymola doesn't
-      // eliminate the systems of nonlinear equations that result from the
-      // Butler-Volmer equation.
-
-      // Initialization parameters
-      parameter BaseClasses.InitMethCharge initMeth=InitMethCharge.ReactionRate
-        "Method of initializing the charge"
-        annotation (Evaluate=true, Dialog(tab="Initialization"));
-      parameter FCSys.Quantities.Amount Q_IC(min=-Modelica.Constants.inf) = 0
-        "<html>Initial charge (<i>Q</i><sub>IC</sub>)</html>"
-        annotation (Dialog(tab="Initialization", enable=initMeth == 2));
-      // Note 1:  Dymola 7.4 doesn't recognize enumerations in the dialog enable
-      // option, e.g.,
-      //     enable=initMeth == InitMethCharge.Charge.
-      // Therefore, the values of the enumerations are specified numerically for
-      // this initial condition and others below.
-      // Note 2:  This parameter is left enabled even if it isn't used to
-      // explicitly initialize any states, since it is used as a guess value.
-      parameter FCSys.Quantities.Current derQ_IC=0
-        "<html>Initial rate of charge ((&part;<i>Q</i>/&part;<i>t</i>)<sub>IC</sub>)</html>"
-        annotation (Dialog(tab="Initialization", enable=initMeth == 3));
-      parameter FCSys.Quantities.Current Xidot_IC=0
-        "<html>Initial reaction rate ((&Xi;dot)<sub>IC</sub>)</html>"
-        annotation (Dialog(tab="Initialization"));
-
-      input FCSys.Quantities.Amount CT(nominal=300*U.micro*U.F*U.K) = 300*U.K*U.micro
-        *U.F "Capacitance times temperature" annotation (Dialog);
-
-      Real nu[n_chem + 2]=Chemistry.stoich(cat(
-              1,
-              chemical.formula,
-              {ion1.formula},
-              {ion2.formula})) "Stoichiometric coefficients";
-      // Note 1:  As of Modelica 3.2 and Dymola 7.4, nu can't be a parameter or
-      // constant even though it isn't time-varying.  The strings that represent
-      // the chemical formulas can't be passed through the connectors as
-      // parameter or constants.  However, the translator should recognize that
-      // these equations are static.
-      // Note 2:  This is a Real variable (rather than Integer) to avoid the
-      // following warning in Dymola 7.4:
-      //     "Cannot differentiate discrete or record variable:
-      //         [...].nu[...]
-      //     with respect to time."
-      Integer z[2]=Chemistry.charge({ion1.formula,ion2.formula})
-        "Charge numbers";
-      FCSys.Quantities.Amount Xi(
-        stateSelect=StateSelect.prefer,
-        final start=Q_IC,
-        final fixed=false)
-        "Particle number of ions, normalized by stoichiometric coefficients";
-      // Note:  The start value is based on the assumption that the product of
-      // the charge number and the stoichiometric coefficient of each ionic
-      // species is +1 or -1.  The start value is only used as a guess.  It is
-      // Q_IC/(z[1]*nu[n_chem + 1]) for the first ionic species (and
-      // Q_IC/(z[2]*nu[n_chem + 2] for the second), but z and nu are not
-      // parameters or constants.
-      FCSys.Quantities.Number nuetaPerT(start=Q_IC/(300*U.K*U.micro*U.F),
-          final fixed=false)
-        "Stoichiometrically weighted quotient of overpotential and temperature";
-
-      // Auxiliary variables (for analysis)
-      output FCSys.Quantities.Amount Q(stateSelect=StateSelect.never) = CT*
-        nuetaPerT if defaults.analysis "Charge";
-      // Note:  This should not be used as a state; the structure of the problem
-      // should not change if it is included.
-
-      Connectors.ChemicalInput ion1(final n_lin=n_lin)
-        "Connector for 1st electrochemical species" annotation (Placement(
-            transformation(extent={{-110,-10},{-90,10}}), iconTransformation(
-              extent={{-110,-10},{-90,10}})));
-      Connectors.ChemicalInput ion2(final n_lin=n_lin)
-        "Connector for 2nd electrochemical species" annotation (Placement(
-            transformation(extent={{90,-10},{110,10}}), iconTransformation(
-              extent={{90,-10},{110,10}})));
-
-    protected
-      outer FCSys.BCs.Defaults defaults "Default settings" annotation (
-          Placement(transformation(extent={{-10,32},{10,52}}),
-            iconTransformation(extent={{-10,90},{10,110}})));
-
-    initial equation
-      // Check the connections.
-      assert(sign(z[1]) == -sign(z[2]),
-        "The ions must have charges of opposite sign.");
-      assert(z[1] <> 0, "The species connected to ion1 and ion2 must have nonzero charge.
-  Otherwise, consider using the FCSys.Subregions.Reactions.Chemical.");
-
-      // Initialize the charge.
-      if initMeth == InitMethCharge.Charge then
-        CT*nuetaPerT = Q_IC;
-      elseif initMeth == InitMethCharge.ChargeRate then
-        der(CT*nuetaPerT)/U.s = derQ_IC;
-      elseif initMeth == InitMethCharge.ReactionRate then
-        Xidot = Xidot_IC;
-        // Else, initMeth == InitMethCharge.None; then, there are no initial
-        // equations.
-      end if;
-
-    equation
-      // Aliases
-      2*CT*nuetaPerT = Delta(z .* nu[n_chem + 1:n_chem + 2])*Xi;
-      nuetaPerT = nu[n_chem + 1]*ion1.muPerT + nu[n_chem + 2]*ion2.muPerT;
-
-      // Reaction rate
-      betaPerLstar*Xidot = exp(alpha*(nu[1:n_chem]*chemical.muPerT + nuetaPerT)
-         - epsilonPerT) - exp((alpha - 1)*(nu[1:n_chem]*chemical.muPerT +
-        nuetaPerT) - epsilonPerT) "Butler-Volmer equation";
-      // Note:  As of Dymola 7.4, it is necessary to refer to the preferred
-      // state (nuetaPerT) explicitly.  Otherwise, there will be systems of
-      // nonlinear equations.
-
-      // Ideal mixing/upstream discretization
-      // ------------------------------------
-      // 1st electrochemical species
-      ion1.mPhidot = semiLinear(
-            ion1.m*ion1.Ndot,
-            ion1.phi,
-            phi) "Linear momentum";
-      ion1.Hdot = semiLinear(
-            ion1.m*ion1.Ndot,
-            ion1.hbar,
-            hbar) "Energy";
-      //
-      // 2nd electrochemical species
-      ion2.mPhidot = semiLinear(
-            ion2.m*ion2.Ndot,
-            ion2.phi,
-            phi) "Linear momentum";
-      ion2.Hdot = semiLinear(
-            ion2.m*ion2.Ndot,
-            ion2.hbar,
-            hbar) "Energy";
-      // TODO:  Consider using stream connectors once they are better supported
-      // (some errors occurred in Dymola 7.4).
-
-      // Conservation
-      nu[1:n_chem]*Xidot = chemical.Ndot "Chemical material (no storage)";
-      nu[n_chem + 1]*(Xidot + der(Xi)/U.s) = ion1.Ndot "1st ion";
-      nu[n_chem + 2]*(Xidot + der(Xi)/U.s) = ion2.Ndot "2nd ion";
-      zeros(n_lin) = sum(chemical[i].mPhidot for i in 1:n_chem) + ion1.mPhidot
-         + ion2.mPhidot "Linear momentum (no storage)";
-      0 = sum(chemical.Hdot) + ion1.Hdot + ion2.Hdot "Energy (no storage)";
-      annotation (
-        defaultComponentName="reaction",
-        Documentation(info="<html>**Note:  \"voltage\" is the voltage difference across the electrolytic double layer (EDL) capacitor,
-    or the potential difference between the two ionic species.  **discuss why ionic storing ionic species according to stoichiometry
-    is the same as requiring net charge is proportional to charge of chemical species (if any).  **Discuss &epsilon;/<i>T</i> vs. &beta;/<i>L</i><sup>&#9733;</sup>
-    <p>For more information, see the
-   <a href=\"modelica://FCSys.Subregions.Reactions.BaseClasses.PartialReaction\">PartialReaction</a> model.</p>
-    </html>"),
-        Icon(graphics={Line(
-                  points={{-20,26},{-20,-26}},
-                  color={208,104,0},
-                  smooth=Smooth.None),Line(
-                  points={{-100,0},{-20,0}},
-                  color={208,104,0},
-                  smooth=Smooth.None),Line(
-                  points={{20,26},{20,-26}},
-                  color={208,104,0},
-                  smooth=Smooth.None),Line(
-                  points={{20,0},{100,0}},
-                  color={208,104,0},
-                  smooth=Smooth.None)}),
-        Diagram(graphics));
-    end Electrochemical;
-
-    model Chemical "Model for a chemical reaction"
-      extends BaseClasses.PartialReaction(n_chem(min=2) = 0);
-      // Note:  In Dymola 7.4, it is necessary to reset n_chem to 0 when
-      // changing its minimum value.  Otherwise, the icon doesn't properly show
-      // the number of chemical species.
-
-      Integer nu[n_chem]=Chemistry.stoich(chemical.formula)
-        "Stoichiometric coefficients";
-      // Note 1:  As of Modelica 3.2 and Dymola 7.4, nu can't be a parameter or
-      // constant even though it isn't time-varying.  The strings that represent
-      // the chemical formulas can't be passed through the connectors as
-      // parameters or constants.  However, the translator should recognize that
-      // these equations are static.
-
-    equation
-      // Reaction rate
-      betaPerLstar*Xidot = exp(alpha*nu*chemical.muPerT - epsilonPerT) - exp((
-        alpha - 1)*nu*chemical.muPerT - epsilonPerT);
-
-      // Conservation
-      nu[1:n_chem]*Xidot = chemical.Ndot "Chemical material (no storage)";
-      zeros(n_lin) = sum(chemical[i].mPhidot for i in 1:n_chem)
-        "Linear momentum (no storage)";
-      0 = sum(chemical.Hdot) "Thermal energy (no storage)";
-
-      // Note:  This model is marked as structurally incomplete.  It must have
-      // zero species by default (for automatic connector sizing), but at least
-      // one species is mathematically required (two for a meaningful reaction).
-      annotation (
-        defaultComponentName="reaction",
-        structurallyIncomplete=true,
-        Documentation(info="<html>
-    <p>For more information, see the
-   <a href=\"modelica://FCSys.Subregions.Reactions.BaseClasses.PartialReaction\">PartialReaction</a> model.</p>
-    </html>"),
-        Icon(graphics),
-        Diagram(graphics));
-    end Chemical;
-
-    package BaseClasses "Base classes (not for direct use)"
-
-      extends Modelica.Icons.BasesPackage;
-
-      partial model PartialReaction "Partial model for a reaction"
-        //extends FCSys.BaseClasses.Icons.Names.Top2;
-
-        parameter Integer n_chem(min=1) = 0 "Number of chemical species"
-          annotation (Dialog(connectorSizing=true));
-        // Note:  The minimum is 1 for an electrochemical reaction, but the
-        // default must be 0 to use connectorSizing.
-        parameter Integer n_lin=1
-          "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
-          annotation (Evaluate=true,HideResult=true);
-        parameter Q.Number alpha(
-          min=0,
-          max=1) = 0.5 "<html>Symmetry factor (&alpha;)</html>";
-        parameter Q.Number epsilonPerT=0
-          "<html>Additional activation barrier (&epsilon;/<i>T</i> )</html>";
-        input Q.Resistance betaPerLstar=10/U.A
-          "<html>Quotient of resistivity and characteristic length (&beta;/<i>L</i><sup>&#9733;</sup>)</html>"
-          annotation (Dialog);
-
-        Q.Current Xidot(nominal=1*U.A) "Reaction rate";
-
-        Connectors.ChemicalInput chemical[n_chem](each final n_lin=n_lin)
-          "Connector for chemical species"
-          annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-
-      protected
-        Q.Velocity phi[n_lin](each nominal=1*U.cm/U.s, each start=0) "Velocity";
-        Q.Velocity2 hbar(nominal=1*U.V*U.mol/U.g,start=0) "Massic enthalpy";
-
-      equation
-        // Ideal mixing/upstream discretization
-        // Chemical species
-        for i in 1:n_chem loop
-          chemical[i].mPhidot = semiLinear(
-                  chemical[i].m*chemical[i].Ndot,
-                  chemical[i].phi,
-                  phi) "Linear momentum";
-          chemical[i].Hdot = semiLinear(
-                  chemical[i].m*chemical[i].Ndot,
-                  chemical[i].hbar,
-                  hbar) "Energy";
-        end for;
-        // TODO:  Consider using stream connectors once they are better supported
-        // (some errors occurred in Dymola 7.4).
-
-        annotation (
-          Documentation(info="<html>
-    <p>The size of the chemical connector is automatically increased each time a connection is made.
-    At least two species must be connected.
-    The stoichiometry is determined automatically from the chemical formulas
-    of the connected species.  No intermediate species are considered. Each reaction must be
-    completely and uniquely defined by the connected species.  Otherwise an error message is given.
-    If you suspect a bug in the library, please report it using the
-    <a href=\"modelica://FCSys.UsersGuide.Contact\">contact information</a>.</p>
-
-    <p>**Update this: For material, this model is essentially the opposite of a standard single-species connection.
-    The stoichiometric sum of the efforts (&Sigma; &nu;<sub><i>i</i></sub> &mu;<sub><i>i</i></sub>)
-    is zero, which is analogous to Kirchhoff's Current Law.  The flow rates divided by the
-    stoichiometric coefficients (<i>N&#775;</i><sub><i>i</i></sub> /&nu;<sub><i>i</i></sub>)
-    are equal&mdash;analogous to Kirchhoff's Voltage Law.</p>
-
-    <p>Momentum and energy are advected using the <code>semiLinear()</code> operator.  There is no diffusion;
-    it is included in the inert connections among species
-    (see the <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSpecies\">PartialSpecies</a> model).<p>
-
-    <p>The parameter &beta;/<i>L</i><sup>&#9733;</sup> is the reciprocal of exchange current density.</p>
-
-    <p>Assumptions:<ul>
-    <li>No storage of material, linear momentum, or energy</li></ul>
-    </p>
-    </html>"),
-          Icon(graphics={Rectangle(
-                      extent={{-140,40},{140,80}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Text(
-                      extent={{-140,40},{140,80}},
-                      textString="%name",
-                      lineColor={0,0,0}),Ellipse(
-                      extent={{-100,40},{100,-40}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      lineColor={127,127,127},
-                      pattern=LinePattern.Dash),Text(
-                      extent={{-100,-16},{100,-40}},
-                      lineColor={127,127,127},
-                      textString="%n_chem")}),
-          Diagram(graphics));
-      end PartialReaction;
-
-      type InitMethCharge = enumeration(
-          None "Do not explicitly initialize.",
-          Charge "Initialize the charge.",
-          ChargeRate "Initialize the rate of ditto.",
-          ReactionRate "Initialize the reaction rate.")
-        "Methods of initializing charge difference";
-    end BaseClasses;
-  end Reactions;
 
   package Species
     "Models for single-species storage, transport, and exchange of material, volume, and linear momentum"
@@ -6110,17 +5451,14 @@ package Subregions
           extends Species0Amount(
             redeclare FCSys.Characteristics.'e-'.Graphite Data,
             initMethPartNum=InitMethScalar.Amount,
-            redeclare Q.Resistivity beta_N=k_beta_N*Data.gamma(T),
             redeclare Q.Resistivity beta_Phi=k_beta_Phi*Data.gamma(T),
             redeclare Q.Resistivity gamma_N=k_gamma_N*Data.gamma(T),
             redeclare Q.Resistivity gamma_Phi=k_gamma_Phi*Data.gamma(T),
             redeclare Q.ResistivityThermal gamma_S=k_gamma_S*Data.gamma(T));
+
           // Note:  initMethPartNum may not be Pressure (which is default) since the
           // EOS doesn't involve pressure.
 
-          parameter Q.NumberAbsolute k_beta_N(final nominal=1) = 1
-            "<html>Adjustment factor for reaction (<i>k</i><sub>&beta;<i>N</i></sub>)</html>"
-            annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_beta_Phi(final nominal=1) = 1
             "<html>Adjustment factor for exchange of linear momentum (<i>k</i><sub>&beta;&Phi;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
@@ -6145,7 +5483,6 @@ package Subregions
           extends Species0Amount(
             redeclare FCSys.Characteristics.'e-'.Graphite Data,
             initMethPartNum=InitMethScalar.Amount,
-            redeclare Q.Resistivity beta_N=Data.gamma(T),
             redeclare Q.Resistivity beta_Phi=Data.gamma(T),
             redeclare Q.Resistivity gamma_N=Data.gamma(T),
             redeclare Q.Resistivity gamma_Phi=Data.gamma(T),
@@ -6164,30 +5501,20 @@ package Subregions
           extends Species0Amount(
             redeclare FCSys.Characteristics.'e-'.Graphite Data,
             initMethPartNum=InitMethScalar.Amount,
-            redeclare parameter Q.Resistivity beta_N=Data.gamma(),
             redeclare parameter Q.Resistivity beta_Phi=Data.gamma(),
             redeclare parameter Q.ResistivityThermal beta_S=Data.gamma(),
             redeclare parameter Q.Resistivity gamma_N=Data.gamma(),
             redeclare parameter Q.Resistivity gamma_Phi=Data.gamma(),
             redeclare parameter Q.ResistivityThermal gamma_S=Data.gamma());
+
           // Note:  initMethPartNum may not be Pressure (which is default) since the
           // EOS doesn't involve pressure.
 
-          // **   redeclare parameter Q.Resistivity beta_N=1e20*Data.gamma(),
-          //  Lstar=1e6*product(L)^(1/3));
-          // **temp Lstar (remove or copy to the other e- models.)
           annotation (
             group="Material properties",
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'e-'",
             Documentation(info="<html>
-          <p>Notes:<ul>
-          <li>The default value for <code>beta_N</code> (<code>1e4*Data.gamma()</code>)
-          gives reasonable reaction rates for the HOR and ORR when used in conjunction
-          with the defaults for H<sub>2</sub>, H<sub>2</sub>O, H<sup>+</sup>, and O<sub>2</sub>.
-          The default <code>beta_N</code> is greater (higher resistance) for H<sub>2</sub>O
-          and O<sub>2</sub> to slow the ORR.</li>
-          </ul></p>
     <p>For more information, see the <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSpecies\">PartialSpecies</a> model.</p></html>"),
 
             Diagram(graphics));
@@ -6205,7 +5532,6 @@ package Subregions
           extends Species(
             redeclare FCSys.Characteristics.H2.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity beta_N=k_beta_N*Data.gamma(T),
             redeclare Q.Resistivity beta_Phi=k_beta_Phi*Data.gamma(T),
             redeclare Q.ResistivityThermal beta_S=k_beta_S*Data.gamma(T),
             redeclare Q.Resistivity gamma_N=k_gamma_N*Data.gamma(T),
@@ -6215,9 +5541,6 @@ package Subregions
             redeclare Q.ResistivityThermal gamma_S=k_gamma_S*(if
                 empiricalThermal then Data.gamma_S(T) else Data.gamma(T)));
 
-          parameter Q.NumberAbsolute k_beta_N(final nominal=1) = 1
-            "<html>Adjustment factor for reaction (<i>k</i><sub>&beta;<i>N</i></sub>)</html>"
-            annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_beta_Phi(final nominal=1) = 1
             "<html>Adjustment factor for exchange of linear momentum (<i>k</i><sub>&beta;&Phi;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
@@ -6265,7 +5588,6 @@ package Subregions
           extends Species(
             redeclare FCSys.Characteristics.H2.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity beta_N=Data.gamma(T),
             redeclare Q.Resistivity beta_Phi=Data.gamma(T),
             redeclare Q.ResistivityThermal beta_S=Data.gamma(T),
             redeclare Q.Resistivity gamma_N=Data.gamma(T),
@@ -6305,7 +5627,6 @@ package Subregions
           extends Species(
             redeclare FCSys.Characteristics.H2.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare parameter Q.Resistivity beta_N=Data.gamma(),
             redeclare parameter Q.Resistivity beta_Phi=Data.gamma(),
             redeclare parameter Q.ResistivityThermal beta_S=U.m*U.K/(183e-3*U.W),
 
@@ -6326,11 +5647,6 @@ package Subregions
 </ol></p>
 
 <p>Additional notes:<ul>
-          <li>The default value for <code>beta_N</code> (<code>1e4*Data.gamma()</code>)
-          gives reasonable reaction rates for the HOR and ORR when used in conjunction
-          with the defaults for e<sup>-</sup>, H<sub>2</sub>O, H<sup>+</sup>, and O<sub>2</sub>.
-          The default <code>beta_N</code> is greater (higher resistance) for H<sub>2</sub>O
-          and O<sub>2</sub> to slow the ORR.</li>
 <li>
   The specific heat capacity is not fixed because it would
   affect the chemical potential and result in an incorrect cell
@@ -6394,7 +5710,6 @@ and <code>gamma_S=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub
           extends Species(
             redeclare FCSys.Characteristics.H2O.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity beta_N=k_beta_N*Data.gamma(T),
             redeclare Q.Resistivity beta_Phi=k_beta_Phi*Data.gamma(T),
             redeclare Q.ResistivityThermal beta_S=k_beta_S*Data.gamma(T),
             redeclare Q.Resistivity gamma_N=k_gamma_N*Data.gamma(T),
@@ -6404,9 +5719,6 @@ and <code>gamma_S=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub
             redeclare Q.ResistivityThermal gamma_S=k_gamma_S*(if
                 empiricalThermal then Data.gamma_S(T) else Data.gamma(T)));
 
-          parameter Q.NumberAbsolute k_beta_N(final nominal=1) = 1
-            "<html>Adjustment factor for reaction (<i>k</i><sub>&beta;<i>N</i></sub>)</html>"
-            annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_beta_Phi(final nominal=1) = 1
             "<html>Adjustment factor for exchange of linear momentum (<i>k</i><sub>&beta;&Phi;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
@@ -6454,7 +5766,6 @@ and <code>gamma_S=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub
           extends Species(
             redeclare FCSys.Characteristics.H2O.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity beta_N=Data.gamma(T),
             redeclare Q.Resistivity beta_Phi=Data.gamma(T),
             redeclare Q.ResistivityThermal beta_S=Data.gamma(T),
             redeclare Q.Resistivity gamma_N=Data.gamma(T),
@@ -6495,7 +5806,6 @@ and <code>gamma_S=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub
           extends Species(
             redeclare FCSys.Characteristics.H2O.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare parameter Q.Resistivity beta_N=Data.gamma(),
             redeclare parameter Q.Resistivity beta_Phi=Data.gamma(),
             redeclare parameter Q.ResistivityThermal beta_S=U.m*U.K/(19.6e-3*U.W),
 
@@ -6515,11 +5825,6 @@ and <code>gamma_S=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub
   </ol></p>
 
           <p>Notes:<ul>
-          <li>The default value for <code>beta_N</code> (<code>1e10*Data.gamma()</code>)
-          gives reasonable reaction rates for the HOR and ORR when used in conjunction
-          with the defaults for e<sup>-</sup>, H<sub>2</sub>, H<sub>2</sub>, H<sup>+</sup>, and O<sub>2</sub>.
-          The default <code>beta_N</code> is greater (higher resistance) for H<sub>2</sub>O
-          and O<sub>2</sub> to slow the ORR.</li>
 <ul><li>
   The specific heat capacity is not fixed because it would
   affect the chemical potential and result in an incorrect cell
@@ -6642,17 +5947,14 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
           extends Species0Amount(
             redeclare FCSys.Characteristics.'H+'.Solid Data,
             initMethPartNum=InitMethScalar.Amount,
-            redeclare Q.Resistivity beta_N=k_beta_N*Data.gamma(T),
             redeclare Q.Resistivity beta_Phi=k_beta_Phi*Data.gamma(T),
             redeclare Q.Resistivity gamma_N=k_gamma_N*Data.gamma(T),
             redeclare Q.Resistivity gamma_Phi=k_gamma_Phi*Data.gamma(T),
             redeclare Q.ResistivityThermal gamma_S=k_gamma_S*Data.gamma(T));
+
           // Note:  initMethPartNum may not be Pressure (which is default) since the
           // EOS doesn't involve pressure.
 
-          parameter Q.NumberAbsolute k_beta_N(final nominal=1) = 1
-            "<html>Adjustment factor for reaction (<i>k</i><sub>&beta;<i>N</i></sub>)</html>"
-            annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_beta_Phi(final nominal=1) = 1
             "<html>Adjustment factor for exchange of linear momentum (<i>k</i><sub>&beta;&Phi;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
@@ -6677,7 +5979,6 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
           extends Species0Amount(
             redeclare FCSys.Characteristics.'H+'.Solid Data,
             initMethPartNum=InitMethScalar.Amount,
-            redeclare Q.Resistivity beta_N=Data.gamma(T),
             redeclare Q.Resistivity beta_Phi=Data.gamma(T),
             redeclare Q.Resistivity gamma_N=Data.gamma(T),
             redeclare Q.Resistivity gamma_Phi=Data.gamma(T),
@@ -6696,7 +5997,6 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
           extends Species0Amount(
             redeclare FCSys.Characteristics.'H+'.Solid Data,
             initMethPartNum=InitMethScalar.Amount,
-            redeclare parameter Q.Resistivity beta_N=Data.gamma(),
             redeclare parameter Q.Resistivity beta_Phi=Data.gamma(),
             redeclare parameter Q.ResistivityThermal beta_S=U.m*U.K/(0.1661*U.W),
 
@@ -6705,12 +6005,8 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
 
             redeclare parameter Q.ResistivityThermal gamma_S=U.m*U.K/(0.1661*U.W));
 
-          // Note:  initMethPartNum may not be Pressure (which is default) since the
-          // EOS doesn't involve pressure.
-
-          //   ** redeclare parameter Q.Resistivity beta_N=1e5*Data.gamma(),
-          //Lstar=1e6*product(L)^(1/3));
-          // **temp Lstar (remove or copy to the other e- models.)
+          // Note:  initMethPartNum may not be Pressure (which is default) since
+          // overrideEOS is true.
 
           // See the documentation for a table of values.
 
@@ -6718,16 +6014,9 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'H+'",
             Documentation(info="<html><p>Assumptions:<ol>
-    <li>Transport and exchange properties (&beta;<sub>&Phi;</sub>, &gamma;<sub>&Phi;</sub>, etc.) are fixed (e.g., independent of temperature)</li>
+    <li>Transport and exchange properties (&beta;<sub>&Phi;</sub>, &gamma;<sub>&Phi;</sub>, etc.) are fixed 
+    (e.g., independent of temperature)</li>
     </ol></p>
-
-              <p>Additional notes:<ul>
-          <li>The default value for <code>beta_N</code> (<code>1e4*Data.gamma()</code>)
-          gives reasonable reaction rates for the HOR and ORR when used in conjunction
-          with the defaults for e<sup>-</sup>, H<sub>2</sub>, H<sub>2</sub>O, and O<sub>2</sub>.
-          The default <code>beta_N</code> is greater (higher resistance) for H<sub>2</sub>O
-          and O<sub>2</sub> to slow the ORR.</li>
-          </ul></p>
 
   <p>The default transport resistivities (<code>gamma_Phi=Data.m/(5.3e-6*U.Pa*U.s)</code> and <code>gamma_S=U.m*U.K/(0.1661*U.W)</code>) are of H gas
   (rather than H<sup>+</sup>) at 300 K from [<a href=\"modelica://FCSys.UsersGuide.References\">Schetz1996</a>, p. 139].
@@ -6805,7 +6094,6 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
           extends Species(
             redeclare FCSys.Characteristics.N2.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity beta_N=k_beta_N*Data.gamma(T),
             redeclare Q.Resistivity beta_Phi=k_beta_Phi*Data.gamma(T),
             redeclare Q.ResistivityThermal beta_S=k_beta_S*Data.gamma(T),
             redeclare Q.Resistivity gamma_N=k_gamma_N*Data.gamma(T),
@@ -6815,9 +6103,6 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
             redeclare Q.ResistivityThermal gamma_S=k_gamma_S*(if
                 empiricalThermal then Data.gamma_S(T) else Data.gamma(T)));
 
-          parameter Q.NumberAbsolute k_beta_N(final nominal=1) = 1
-            "<html>Adjustment factor for reaction (<i>k</i><sub>&beta;<i>N</i></sub>)</html>"
-            annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_beta_Phi(final nominal=1) = 1
             "<html>Adjustment factor for exchange of linear momentum (<i>k</i><sub>&beta;&Phi;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
@@ -6865,7 +6150,6 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
           extends Species(
             redeclare FCSys.Characteristics.N2.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity beta_N=Data.gamma(T),
             redeclare Q.Resistivity beta_Phi=Data.gamma(T),
             redeclare Q.ResistivityThermal beta_S=Data.gamma(T),
             redeclare Q.Resistivity gamma_N=Data.gamma(T),
@@ -6912,7 +6196,6 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
               b_c0=[1.041e3*U.J*Data.m/(U.kg*U.K)],
               B_c0=[-300*U.K*1.041e3*U.J*Data.m/(U.kg*U.K) + Data.Deltah0_f, 0]),
 
-            redeclare parameter Q.Resistivity beta_N=Data.gamma(),
             redeclare parameter Q.Resistivity beta_Phi=Data.gamma(),
             redeclare parameter Q.ResistivityThermal beta_S=U.m*U.K/(25.9e-3*U.W),
 
@@ -6981,7 +6264,6 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
           extends Species(
             redeclare FCSys.Characteristics.O2.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity beta_N=k_beta_N*Data.gamma(T),
             redeclare Q.Resistivity beta_Phi=k_beta_Phi*Data.gamma(T),
             redeclare Q.ResistivityThermal beta_S=k_beta_S*Data.gamma(T),
             redeclare Q.Resistivity gamma_N=k_gamma_N*Data.gamma(T),
@@ -6991,9 +6273,6 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
             redeclare Q.ResistivityThermal gamma_S=k_gamma_S*(if
                 empiricalThermal then Data.gamma_S(T) else Data.gamma(T)));
 
-          parameter Q.NumberAbsolute k_beta_N(final nominal=1) = 1
-            "<html>Adjustment factor for reaction (<i>k</i><sub>&beta;<i>N</i></sub>)</html>"
-            annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_beta_Phi(final nominal=1) = 1
             "<html>Adjustment factor for exchange of linear momentum (<i>k</i><sub>&beta;&Phi;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
@@ -7040,7 +6319,6 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
           extends Species(
             redeclare FCSys.Characteristics.O2.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity beta_N=Data.gamma(T),
             redeclare Q.Resistivity beta_Phi=Data.gamma(T),
             redeclare Q.ResistivityThermal beta_S=Data.gamma(T),
             redeclare Q.Resistivity gamma_N=Data.gamma(T),
@@ -7081,7 +6359,6 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
           extends Species(
             redeclare FCSys.Characteristics.O2.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare parameter Q.Resistivity beta_N=Data.gamma(),
             redeclare parameter Q.Resistivity beta_Phi=Data.gamma(),
             redeclare parameter Q.ResistivityThermal beta_S=U.m*U.K/(26.8e-3*U.W),
 
@@ -7102,11 +6379,6 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
 
 <p>Additional notes:
 <ul>
-          <li>The default value for <code>beta_N</code> (<code>1e10*Data.gamma()</code>)
-          gives reasonable reaction rates for the HOR and ORR when used in conjunction
-          with the defaults for e<sup>-</sup>, H<sub>2</sub>, H<sub>2</sub>O, and H<sup>+</sup>.
-          The default <code>beta_N</code> is greater (higher resistance) for H<sub>2</sub>O
-          and O<sub>2</sub> to slow the ORR.</li>
           <li>
   The specific heat capacity is not fixed because it would
   affect the chemical potential and result in an incorrect cell
@@ -7173,7 +6445,6 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
 
     model SpeciesInertStagnant "Inert and stagnant species"
       extends Species(
-        redeclare final parameter Q.Resistivity beta_N=Modelica.Constants.inf,
         redeclare final parameter Q.Resistivity gamma_N=Modelica.Constants.inf,
 
         redeclare final parameter Q.Resistivity gamma_Phi=0,
@@ -7231,7 +6502,6 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
 
     model Species
       "Model for single-species exchange, transport, and storage of material, linear momentum, and entropy"
-      import Modelica.Utilities.Strings.find;
       //extends FCSys.BaseClasses.Icons.Names.Top1;
 
       // Geometric parameters
@@ -7496,11 +6766,17 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
         stateSelect=StateSelect.prefer) "Temperature";
 
       // Aliases (for common terms)
+      Q.Mass M(nominal=1*U.g, start=Data.m*N_IC) "Mass";
       Q.Volume V(
         min=0,
         final start=V_IC,
         final fixed=false) "Volume";
-      Q.Pressure p(final start=p_IC, final fixed=false) "Pressure";
+      Q.PressureAbsolute p(
+        final start=p_IC,
+        final fixed=false,
+        stateSelect=StateSelect.never) "Pressure";
+      // Note:  In Dymola 7.4, StateSelect.never is necessary to avoid dynamic
+      // state selection.
       Q.Potential h(
         nominal=1*U.V,
         final start=h_IC,
@@ -7517,15 +6793,8 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
         each nominal=1*U.A,
         final start=I_IC[cartAxes],
         each final fixed=false) "Current";
-      //**Q.Potential ke(final start=Data.m*phi_IC[cartAxes]*phi_IC[cartAxes]/2)   = Data.m*phi*phi/2;
-      Q.Mass M(nominal=1*U.g, start=Data.m*N_IC) "Mass";
-
-      //  "Specific macroscopic kinetic energy";
 
       // Material properties
-      input Q.Resistivity beta_N(nominal=10*U.cm/U.A, start=Data.gamma(T_IC))
-        "<html>Reaction resistivity (&beta;<sub><i>N</i></sub>)</html>"
-        annotation (Dialog(group="Material properties"));
       input Q.Resistivity beta_Phi(nominal=10*U.cm/U.A, start=Data.gamma(T_IC))
         "<html>Exchange resistivity for linear momentum (&beta;<sub>&Phi;</sub>)</html>"
         annotation (Dialog(group="Material properties"));
@@ -7548,49 +6817,36 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
 
       // Auxiliary variables (for analysis)
       // ----------------------------------
-      // General
+      // General properties
       output Q.AmountVolumic rho(stateSelect=StateSelect.never) = N/V if
         defaults.analysis "Molar density";
-      // Note:  Specific volume (v) isn't provided because amount (N) can be
-      // zero.
-      //
-      // Capacitances
-      output Q.Capacitance C(stateSelect=StateSelect.never) = if Data.isCompressible
-         and not overrideEOS then -N*rho^2/Data.dp(
-            v=1/rho,
-            T=T,
-            dv=1,
-            dT=0) else 0 if defaults.analysis "Chemical capacitance";
-      // Note:  This is delN/delg at constant T and V.
-
-      // Note:  The string find functions are used instead of
-      // Data.z <> 0 due to the following error in Dymola 7.4:
-      //     "Current version of Dymola can only handle conditional
-      //      components with fixed condition."
-      // even though Data.z is calculated directly from constants.
+      // Note:  The reciprocal, specific volume (v), isn't provided because
+      // particle number (N) can be zero.
       output Q.CapacityThermalSpecific c_p(stateSelect=StateSelect.never) =
         Data.c0_T(T) if defaults.analysis "Specific heat capacity";
       output Q.CapacityThermal C_p(stateSelect=StateSelect.never) = N*c_p if
         defaults.analysis "Heat capacity";
+      output Q.PressureAbsolute q[n_lin](each stateSelect=StateSelect.never) =
+        Data.m*phi .* I ./ A[cartAxes] if defaults.analysis "Dynamic pressure";
       //
       // Time constants
-      output Q.Time tau_exch_N(stateSelect=StateSelect.never) = T*beta_N*C/(2*
-        Lstar + (if Data.z == 0 then 0 else beta_N*chemical.Ndot)) if defaults.analysis
-        "Time constant for material exchange";
-      // **update with the correct sign
       output Q.Time tau_exch_Phi(stateSelect=StateSelect.never) = beta_Phi*N/
         Lstar if defaults.analysis
         "Time constant for exchange of linear momentum";
       output Q.Time tau_exch_S(stateSelect=StateSelect.never) = beta_S*C_p/
         Lstar if defaults.analysis "Time constant for thermal exchange";
-      output Q.Time tau_trans_N[Axis](each stateSelect=StateSelect.never) =
-        fill(T*gamma_N*C, 3) ./ Lstar_trans if defaults.analysis
+      output Q.Time tau_trans_N[Axis](each stateSelect=StateSelect.never) = -
+        fill(gamma_N*N*p/Data.dp(
+            v=1/rho,
+            T=T,
+            dv=1,
+            dT=0), 3) ./ Lstar_trans if defaults.analysis and Data.isCompressible
         "Time constants for material transport";
       output Q.Time tau_trans_Phi[Axis](each stateSelect=StateSelect.never) =
         fill(gamma_Phi*N, 3) ./ Lstar_trans if defaults.analysis
         "Time constants for transport of linear momentum";
       output Q.Time tau_trans_S[Axis](each stateSelect=StateSelect.never) =
-        fill(gamma_S*C_p, 3) ./ Lstar_trans if defaults.analysis
+        fill(gamma_S*N*c_p, 3) ./ Lstar_trans if defaults.analysis
         "Time constants for thermal transport";
       //
       // Peclet numbers (only for the axes with linear momentum included; others
@@ -7605,77 +6861,78 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
         gamma_S ./ Lstar_trans[cartAxes] if defaults.analysis
         "Thermal Peclet numbers";
       //
-      // Advection
-      output Q.PressureAbsolute q[n_lin](each stateSelect=StateSelect.never) =
-        Data.m*phi .* I ./ A[cartAxes] if defaults.analysis
-        "Bulk dynamic pressure";
+      // Bulk flow rates
       output Q.Force mphiI[n_lin, Orientation](each stateSelect=StateSelect.never)
          = {(if inclLin[cartWrap(cartAxes[axis] + orientation)] then Data.m*phi[
         linAxes[cartWrap(cartAxes[axis] + orientation)]]*I[axis] else 0) for
         orientation in Orientation, axis in 1:n_lin} if n_lin > 0 and defaults.analysis
         "Bulk rate of advection of 1st and 2nd transverse linear momentum";
-      output Q.Force sI[n_lin](each stateSelect=StateSelect.never) = s*I if
-        defaults.analysis "Bulk rate of advection of entropy";
+      output Q.Force TsI[n_lin](each stateSelect=StateSelect.never) = T*s*I if
+        defaults.analysis "Bulk rate of thermal advection";
       //
       // Linear momentum balance
-      output Q.Force Mderphi[n_lin](each stateSelect=StateSelect.never) = M*der(
-        phi)/U.s if defaults.analysis
-        "Rate of storage of linear momentum at constant mass";
-      output Q.Force mPhidot_exch_adv[n_lin](each stateSelect=StateSelect.never)
-         = chemical.mPhidot - Data.m*phi*chemical.Ndot if defaults.analysis
-        "Acceleration force due to chemical exchange";
-      output Q.Force mPhidot_exch_diff[n_lin](each stateSelect=StateSelect.never)
-         = inert.mPhidot "Force due to friction with other species";
-      output Q.Force mPhidot_parallel[n_lin](each stateSelect=StateSelect.never)
-         = {sum(if [xNegative.thermoOpt == ThermoOpt.OpenDiabatic, xPositive.thermoOpt
-         == ThermoOpt.OpenDiabatic; yNegative.thermoOpt == ThermoOpt.OpenDiabatic,
-        yPositive.thermoOpt == ThermoOpt.OpenDiabatic; zNegative.thermoOpt ==
-        ThermoOpt.OpenDiabatic, zPositive.thermoOpt == ThermoOpt.OpenDiabatic][
-        cartAxes[axis], side] then inSign(side)*(mu_face[cartAxes[axis], side]
-         - mu + Data.Deltah0_f)*N/L[cartAxes[axis]] else 0 for side in Side)
-        for axis in 1:n_lin} - Data.m*sum(Ndot_face)*phi if defaults.analysis
-        "Acceleration force through normal faces";
-      output Q.Force mPhidot_perpendicular[n_lin](each stateSelect=StateSelect.never)
-         = {sum(Sigma(mPhidot_face[cartWrap(cartAxes[axis] - orientation), :,
-        orientation]) - Data.m*phi[axis]*Sigma(Ndot_face[cartWrap(cartAxes[axis]
-         - orientation), :]) for orientation in Orientation) for axis in 1:
-        n_lin} if defaults.analysis
-        "Acceleration force through transverse faces";
+      output Q.Force Ma[n_lin](each stateSelect=StateSelect.never) = M*der(phi)
+        /U.s if defaults.analysis "Acceleration force (constant mass)";
+      output Q.Force f_exch_adv[n_lin](each stateSelect=StateSelect.never) =
+        chemical.mPhidot - Data.m*phi*chemical.Ndot if defaults.analysis
+        "Acceleration force due to chemical (advective) exchange";
+      output Q.Force f_exch_diff[n_lin](each stateSelect=StateSelect.never) =
+        common.mPhidot + inert.mPhidot if defaults.analysis
+        "Friction from other species (diffusive exchange)";
+      output Q.Force f_trans_adv[n_lin](each stateSelect=StateSelect.never) =
+        Data.m*({sum(if {{xNegative.thermoOpt == ThermoOpt.OpenDiabatic,
+        xPositive.thermoOpt == ThermoOpt.OpenDiabatic},{yNegative.thermoOpt ==
+        ThermoOpt.OpenDiabatic,yPositive.thermoOpt == ThermoOpt.OpenDiabatic},{
+        zNegative.thermoOpt == ThermoOpt.OpenDiabatic,zPositive.thermoOpt ==
+        ThermoOpt.OpenDiabatic}}[cartAxes[axis], side] then inSign(side)*
+        Data.v_pT(p_face[cartAxes[axis], side], T_face[cartAxes[axis], side])*
+        Ndot_face[cartAxes[axis], side]^2/A[cartAxes[axis]] else 0 for side in
+        Side) + sum(phi_face[cartWrap(cartAxes[axis] - orientation), :,
+        orientation]*Ndot_face[cartWrap(cartAxes[axis] - orientation), :] for
+        orientation in Orientation) for axis in 1:n_lin} - phi*sum(Ndot_face))
+        if defaults.analysis and not overrideEOS
+        "Acceleration force due to material transport (dynamic pressure)";
+      output Q.Force f_trans_diff[n_lin](each stateSelect=StateSelect.never) =
+        {sum(if {{xNegative.thermoOpt == ThermoOpt.OpenDiabatic,xPositive.thermoOpt
+         == ThermoOpt.OpenDiabatic},{yNegative.thermoOpt == ThermoOpt.OpenDiabatic,
+        yPositive.thermoOpt == ThermoOpt.OpenDiabatic},{zNegative.thermoOpt ==
+        ThermoOpt.OpenDiabatic,zPositive.thermoOpt == ThermoOpt.OpenDiabatic}}[
+        cartAxes[axis], side] then inSign(side)*(p_face[cartAxes[axis], side]
+         - p)*A[cartAxes[axis]] else 0 for side in Side) for axis in 1:n_lin}
+         + {sum(Sigma(mPhidot_face[cartWrap(cartAxes[axis] - orientation), :,
+        orientation]) for orientation in Orientation) for axis in 1:n_lin} if
+        defaults.analysis
+        "Friction from other subregions (diffusive transport; includes volume viscosity)";
       //
       // Energy balance
-      /* **
-  output Q.Power derE(stateSelect=StateSelect.never) = (N*(Data.c0_T(T)*der(T) + 
-    der(ke)) + V*der(p))/U.s if defaults.analysis 
-    "Rate of energy storage at constant particle number";
-  output Q.Power Edot_exch_N(stateSelect=StateSelect.never) = (-chemical.muPerT*
-    T - ke)*chemical.Ndot + semiLinear(
-    Data.m*chemical.Ndot,
-    chemical.phi*chemical.phi,
-    phi*phi) + chemical.Qdot if defaults.analysis 
-    "Rate of energy intake due to chemical exchange";
-  */
-      output Q.Power Edot_exch_Phi(stateSelect=StateSelect.never) = inert.phi*
-        inert.mPhidot if defaults.analysis
-        "Rate of energy intake due to diffusion of linear momentum from other species";
-      output Q.Power Qdot_exch(stateSelect=StateSelect.never) = inert.T*inert.Sdot
-        if defaults.analysis "Rate of thermal conduction from other species";
-      /*
-  output Q.Power Edot_trans_N(stateSelect=StateSelect.never) = sum((mu_face -
-    fill(
-    h + ke - Data.Deltah0_f,
-    3,
-    2)) .* Ndot_face) if defaults.analysis
-    "Rate of energy intake due to material transport";
-  */
-      output Q.Power Edot_trans_Phi(stateSelect=StateSelect.never) = sum(
+      output Q.Power derE(stateSelect=StateSelect.never) = (N*Data.c0_T(T)*der(
+        T) - (if overrideEOS then 0 else V*der(Data.p_vT(V/N, T))) + Data.m*der(
+        phi*phi)/2)/U.s if defaults.analysis
+        "Rate of energy storage (internal and kinetic) at constant mass";
+      output Q.Power Wdot_exch(stateSelect=StateSelect.never) = -chemical.phi*
+        chemical.mPhidot - (Data.m*(chemical.hbar - phi*phi) - h)*chemical.Ndot
+        if defaults.analysis
+        "Rate of work (internal, flow, and kinetic) done by chemical exchange (advection)";
+      output Q.Power Qdot_gen_exch(stateSelect=StateSelect.never) = common.phi*
+        common.mPhidot + inert.phi*inert.mPhidot if defaults.analysis
+        "Rate of heat generation due to friction with other species";
+      output Q.Power Qdot_exch(stateSelect=StateSelect.never) = common.T*common.Sdot
+         + inert.T*inert.Sdot if defaults.analysis
+        "Rate of thermal conduction from other species";
+      output Q.Power Wdot_trans(stateSelect=StateSelect.never) = -sum(sum((
+        Data.h0_T(T_face[axis, side]) + Data.m*(Data.v_pT(p_face[axis, side],
+        T_face[axis, side])*Ndot_face[axis, side]/A[axis])^2 + phi_face[axis,
+        side, :]*phi_face[axis, side, :] - phi*phi - h)*Ndot_face[axis, side]
+        for side in Side) for axis in Axis) if defaults.analysis
+        "Rate of work (internal, flow, and kinetic) done by material transport (advection)";
+      output Q.Power Qdot_gen_trans(stateSelect=StateSelect.never) = sum(
         phi_face .* mPhidot_face) if defaults.analysis
-        "Rate of energy intake due to shear force";
+        "Rate of heat generation due to friction with other subregions";
       output Q.Power Qdot_trans(stateSelect=StateSelect.never) = sum(T_face .*
         Sdot_face) if defaults.analysis
-        "Rate of thermal convection from other subregions";
+        "Rate of thermal conduction from other subregions";
       // Note:  These auxiliary variables should not be used as states; the
       // structure of the problem should not change if they are included.
-
       FCSys.Connectors.ChemicalOutput chemical(
         final n_lin=n_lin,
         final m=Data.m,
@@ -7712,8 +6969,8 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
         thermoOpt=ThermoOpt.OpenDiabatic,
         viscousY=inclLin[Axis.y],
         viscousZ=inclLin[Axis.z],
-        material(final mu(start=mu_IC - Data.Deltah0_f) = mu_face[Axis.x, Side.n],
-            final Ndot(start=I_IC[Axis.x]) = Ndot_face[Axis.x, Side.n]),
+        material(final p(start=p_IC) = p_face[Axis.x, Side.n], final Ndot(start
+              =I_IC[Axis.x]) = Ndot_face[Axis.x, Side.n]),
         momentumY(final phi(start=phi_IC[Axis.y]) = phi_face[Axis.x, Side.n,
             Orientation.following], final mPhidot=mPhidot_face[Axis.x, Side.n,
               Orientation.following]),
@@ -7732,8 +6989,8 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
         thermoOpt=xNegative.thermoOpt,
         viscousY=inclLin[Axis.y],
         viscousZ=inclLin[Axis.z],
-        material(final mu(start=mu_IC - Data.Deltah0_f) = mu_face[Axis.x, Side.p],
-            final Ndot(start=-I_IC[Axis.x]) = Ndot_face[Axis.x, Side.p]),
+        material(final p(start=p_IC) = p_face[Axis.x, Side.p], final Ndot(start
+              =-I_IC[Axis.x]) = Ndot_face[Axis.x, Side.p]),
         momentumY(final phi(start=phi_IC[Axis.y]) = phi_face[Axis.x, Side.p,
             Orientation.following], final mPhidot=mPhidot_face[Axis.x, Side.p,
               Orientation.following]),
@@ -7752,8 +7009,8 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
       replaceable FCSys.Connectors.FaceY yNegative(
         viscousZ=inclLin[Axis.z],
         viscousX=inclLin[Axis.x],
-        material(final mu(start=mu_IC - Data.Deltah0_f) = mu_face[Axis.y, Side.n],
-            final Ndot(start=I_IC[Axis.y]) = Ndot_face[Axis.y, Side.n]),
+        material(final p(start=p_IC) = p_face[Axis.y, Side.n], final Ndot(start
+              =I_IC[Axis.y]) = Ndot_face[Axis.y, Side.n]),
         momentumZ(final phi(start=phi_IC[Axis.z]) = phi_face[Axis.y, Side.n,
             Side.n], final mPhidot=mPhidot_face[Axis.y, Side.n, Orientation.following]),
 
@@ -7773,8 +7030,8 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
         thermoOpt=yNegative.thermoOpt,
         viscousZ=inclLin[Axis.z],
         viscousX=inclLin[Axis.x],
-        material(final mu(start=mu_IC - Data.Deltah0_f) = mu_face[Axis.y, Side.p],
-            final Ndot(start=-I_IC[Axis.y]) = Ndot_face[Axis.y, Side.p]),
+        material(final p(start=p_IC) = p_face[Axis.y, Side.p], final Ndot(start
+              =-I_IC[Axis.y]) = Ndot_face[Axis.y, Side.p]),
         momentumZ(final phi(start=phi_IC[Axis.z]) = phi_face[Axis.y, Side.p,
             Orientation.following], final mPhidot=mPhidot_face[Axis.y, Side.p,
               Orientation.following]),
@@ -7793,8 +7050,8 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
       replaceable FCSys.Connectors.FaceZ zNegative(
         viscousX=inclLin[Axis.x],
         viscousY=inclLin[Axis.y],
-        material(final mu(start=mu_IC - Data.Deltah0_f) = mu_face[Axis.z, Side.n],
-            final Ndot(start=I_IC[Axis.z]) = Ndot_face[Axis.z, Side.n]),
+        material(final p(start=p_IC) = p_face[Axis.z, Side.n], final Ndot(start
+              =I_IC[Axis.z]) = Ndot_face[Axis.z, Side.n]),
         momentumX(final phi(start=phi_IC[Axis.x]) = phi_face[Axis.z, Side.n,
             Orientation.following], final mPhidot=mPhidot_face[Axis.z, Side.n,
               Orientation.following]),
@@ -7813,8 +7070,8 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
         thermoOpt=zNegative.thermoOpt,
         viscousX=inclLin[Axis.x],
         viscousY=inclLin[Axis.y],
-        material(final mu(start=mu_IC - Data.Deltah0_f) = mu_face[Axis.z, Side.p],
-            final Ndot(start=-I_IC[Axis.z]) = Ndot_face[Axis.z, Side.p]),
+        material(final p(start=p_IC) = p_face[Axis.z, Side.p], final Ndot(start
+              =-I_IC[Axis.z]) = Ndot_face[Axis.z, Side.p]),
         momentumX(final phi(start=phi_IC[Axis.x]) = phi_face[Axis.z, Side.p,
             Orientation.following], final mPhidot=mPhidot_face[Axis.z, Side.p,
               Orientation.following]),
@@ -7851,8 +7108,8 @@ and <code>gamma_S=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at sat
         "Initialization methods for linear momentum";
 
       // Efforts and flows of the conditional faces
-      Q.Potential mu_face[Axis, Side](each start=mu_IC - Data.Deltah0_f)
-        "Electrochemical potentials at the faces";
+      Q.Potential p_face[Axis, Side](each start=p_IC)
+        "Static pressures at the faces";
       Q.Current Ndot_face[Axis, Side](start=outerProduct(I_IC, {1,-1}))
         "Currents into the faces";
       Q.Velocity phi_face[Axis, Side, Orientation](start={fill({phi_IC[cartWrap(
@@ -7901,31 +7158,26 @@ The default global default settings will be used for the current simulation.",
 
       /* This is commented out because it may be annoying.
   // Warn when index reduction may be necessary.
-  if abs(beta_N) < Modelica.Constants.small then
-    Modelica.Utilities.Streams.print("Warning: The material resistivity to exchange is zero.
-    This may directly couple the chemical potentials of species reacting within a subregion.
-    Consider setting the value of beta_N as final (if not already) so that index reduction may be performed.");
-  end if;
   if abs(beta_Phi) > Modelica.Constants.small then
     Modelica.Utilities.Streams.print("Warning: The resistivity to exchange of linear momentum is zero.
     This may directly couple the velocities of species within a subregion.
     Consider setting the value of beta_Phi as final (if not already) so that index reduction may be performed.");
   end if;
   if abs(beta_S) > Modelica.Constants.small then
-    Modelica.Utilities.Streams.print("Warning: The thermal resistivity to exchange is zero.
+    Modelica.Utilities.Streams.print("Warning: The thermal resistance to exchange is zero.
     This may directly couple the temperatures of species within a subregion.
     Consider setting the value of beta_S as final (if not already) so that index reduction may be performed.");
   end if;
   if abs(gamma_N) < Modelica.Constants.small then
-    Modelica.Utilities.Streams.print("Warning: The material resistivity to transport is zero.
+    Modelica.Utilities.Streams.print("Warning: The material resistance to transport is zero.
     This may directly couple the density within neighboring subregions.\nConsider setting the value of gamma_N as final (if not already) so that index reduction may be performed.");
   end if;
   if abs(gamma_Phi) > Modelica.Constants.small then
-    Modelica.Utilities.Streams.print("Warning: The resistivity to transport of linear momentum is zero.
+    Modelica.Utilities.Streams.print("Warning: The resistance to transport of linear momentum is zero.
     This may directly couple the velocity within neighboring subregions.\nConsider setting the value of gamma_Phi as final (if not already) so that index reduction may be performed.");
   end if;
   if abs(gamma_S) > Modelica.Constants.small then
-    Modelica.Utilities.Streams.print("Warning: The thermal resistivity to transport is zero.
+    Modelica.Utilities.Streams.print("Warning: The thermal resistance to transport is zero.
     This may directly couple the temperature within neighboring subregions.\nConsider setting the value of gamma_S as final (if not already) so that index reduction may be performed.");
   end if;
   // Note:  According to the Modelica 3.0 specification (and later), these
@@ -8072,7 +7324,7 @@ The default global default settings will be used for the current simulation.",
       else
         V = N*Data.v_pT(p, T);
       end if;
-      h = Data.h0_T(T, ReferenceEnthalpy.EnthalpyOfFormationAt25degC);
+      h = Data.h0_T(T);
       s = Data.s_pT(p, T);
 
       // Exchange
@@ -8081,7 +7333,7 @@ The default global default settings will be used for the current simulation.",
       chemical.mPhidot = semiLinear(
             Data.m*chemical.Ndot,
             chemical.phi,
-            phi) "For advection";
+            phi) "Advection";
       beta_Phi*inert.mPhidot = 2*Lstar*Data.m*(inert.phi - phi) "Diffusion";
       //
       // Energy
@@ -8100,13 +7352,12 @@ The default global default settings will be used for the current simulation.",
               yPositive.thermoOpt == ThermoOpt.OpenDiabatic; zNegative.thermoOpt
                == ThermoOpt.OpenDiabatic, zPositive.thermoOpt == ThermoOpt.OpenDiabatic]
               [axis, side] then
-            T*gamma_N*(Ndot_face[axis, side] - inSign(side)*(if inclLin[axis]
-               then I[linAxes[axis]] else 0)) = Lstar_trans[axis]*(mu_face[axis,
-              side] - mu + Data.Deltah0_f)*(if upstream[axis] and inclLin[axis]
-               then (exp(inSign(side)*I[linAxes[axis]]*gamma_N/(2*Lstar_trans[
-              axis])) + 1) else 2) "Advection and diffusion";
+            p*gamma_N*(Ndot_face[axis, side] - inSign(side)*(if inclLin[axis]
+               then I[linAxes[axis]] else 0)) = Lstar_trans[axis]*(p_face[axis,
+              side] - p)*(if upstream[axis] and inclLin[axis] then (exp(inSign(
+              side)*I[linAxes[axis]]*gamma_N/(2*Lstar_trans[axis])) + 1) else 2);
           else
-            mu_face[axis, side] = 0;
+            p_face[axis, side] = 0;
             Ndot_face[axis, side] = 0;
           end if;
 
@@ -8117,15 +7368,12 @@ The default global default settings will be used for the current simulation.",
                 yPositive.viscousZ,yPositive.viscousX}},{{zNegative.viscousX,
                 zNegative.viscousY},{zPositive.viscousX,zPositive.viscousY}}}[
                 axis, side, orientation] then
-              gamma_Phi*(mPhidot_face[axis, side, orientation]/Data.m - (if
-                inclLin[axis] then inSign(side)*I[linAxes[axis]] else 0)*(if
+              gamma_Phi*mPhidot_face[axis, side, orientation]/Data.m =
+                Lstar_trans[axis]*(phi_face[axis, side, orientation] - (if
                 inclLin[cartWrap(axis + orientation)] then phi[linAxes[cartWrap(
-                axis + orientation)]] else 0)) = Lstar_trans[axis]*(phi_face[
-                axis, side, orientation] - (if inclLin[cartWrap(axis +
-                orientation)] then phi[linAxes[cartWrap(axis + orientation)]]
-                 else 0))*(if upstream[axis] and inclLin[axis] then (exp(inSign(
-                side)*I[linAxes[axis]]*gamma_Phi/(2*Lstar_trans[axis])) + 1)
-                 else 2) "Diffusion";
+                axis + orientation)]] else 0))*(if upstream[axis] and inclLin[
+                axis] then (exp(inSign(side)*I[linAxes[axis]]*gamma_Phi/(2*
+                Lstar_trans[axis])) + 1) else 2);
             else
               phi_face[axis, side, orientation] = 0;
               mPhidot_face[axis, side, orientation] = 0;
@@ -8142,11 +7390,9 @@ The default global default settings will be used for the current simulation.",
                or zNegative.thermoOpt == ThermoOpt.ClosedDiabatic, zPositive.thermoOpt
                == ThermoOpt.OpenDiabatic or zPositive.thermoOpt == ThermoOpt.ClosedDiabatic]
               [axis, side] then
-            gamma_S*(Sdot_face[axis, side] - inSign(side)*s*(if inclLin[axis]
-               then I[linAxes[axis]] else 0)) = 2*Lstar_trans[axis]*(T_face[
-              axis, side]/T - 1)*(if upstream[axis] and inclLin[axis] then (exp(
-              inSign(side)*I[linAxes[axis]]*gamma_S/(2*Lstar_trans[axis])) + 1)
-               else 2) "Diffusion";
+            T*gamma_S*Sdot_face[axis, side] = 2*Lstar_trans[axis]*(T_face[axis,
+              side] - T)*(if upstream[axis] and inclLin[axis] then (exp(inSign(
+              side)*I[linAxes[axis]]*gamma_S/(2*Lstar_trans[axis])) + 1) else 2);
           else
             T_face[axis, side] = 0;
             Sdot_face[axis, side] = 0;
@@ -8223,11 +7469,15 @@ The default global default settings will be used for the current simulation.",
             xPositive.thermoOpt == ThermoOpt.OpenDiabatic},{yNegative.thermoOpt
              == ThermoOpt.OpenDiabatic,yPositive.thermoOpt == ThermoOpt.OpenDiabatic},
             {zNegative.thermoOpt == ThermoOpt.OpenDiabatic,zPositive.thermoOpt
-             == ThermoOpt.OpenDiabatic}}[cartAxes[axis], side] then (3 - 2*side)
-            *(mu_face[cartAxes[axis], side] - mu + Data.Deltah0_f)*N/L[cartAxes[
-            axis]] else 0 for side in Side) + sum(Sigma(mPhidot_face[cartWrap(
-            cartAxes[axis] - orientation), :, orientation]) for orientation in
-            Orientation) "Conservation of linear momentum";
+             == ThermoOpt.OpenDiabatic}}[cartAxes[axis], side] then inSign(side)
+            *((p_face[cartAxes[axis], side] - p)*A[cartAxes[axis]] + Data.m*
+            Data.v_pT(p_face[cartAxes[axis], side], T_face[cartAxes[axis], side])
+            *Ndot_face[cartAxes[axis], side]^2/A[cartAxes[axis]]) else 0 for
+            side in Side) + sum(Data.m*phi_face[cartWrap(cartAxes[axis] -
+            orientation), :, orientation]*Ndot_face[cartWrap(cartAxes[axis] -
+            orientation), :] + Sigma(mPhidot_face[cartWrap(cartAxes[axis] -
+            orientation), :, orientation]) for orientation in Orientation)
+            "Conservation of linear momentum";
         end if;
       end for;
 
@@ -8274,15 +7524,19 @@ The default global default settings will be used for the current simulation.",
         end if;
       else
         (N*Data.c0_T(T)*der(T) - (if overrideEOS then 0 else V*der(Data.p_vT(V/
-          N, T))) + phi*der(M*phi))/U.s = chemical.phi*chemical.mPhidot + (
-          chemical.hbar*Data.m - h)*chemical.Ndot + common.phi*common.mPhidot
+          N, T))) + der(M*phi*phi)/2)/U.s = chemical.phi*chemical.mPhidot + (
+          Data.m*chemical.hbar - h)*chemical.Ndot + common.phi*common.mPhidot
            + common.T*common.Sdot + inert.phi*inert.mPhidot + inert.T*inert.Sdot
-           + sum((mu_face - fill(
-              h - Data.Deltah0_f,
-              3,
-              2)) .* Ndot_face) + sum(phi_face .* mPhidot_face) + sum(T_face
-           .* Sdot_face) "Conservation of energy";
-        //der(T) = common.Sdot "**temp";
+           + sum(sum(if [xNegative.thermoOpt == ThermoOpt.OpenDiabatic,
+          xPositive.thermoOpt == ThermoOpt.OpenDiabatic; yNegative.thermoOpt
+           == ThermoOpt.OpenDiabatic, yPositive.thermoOpt == ThermoOpt.OpenDiabatic;
+          zNegative.thermoOpt == ThermoOpt.OpenDiabatic, zPositive.thermoOpt
+           == ThermoOpt.OpenDiabatic][axis, side] then (Data.h0_T(T_face[axis,
+          side]) + Data.m*((Data.v_pT(p_face[axis, side], T_face[axis, side])*
+          Ndot_face[axis, side]/A[axis])^2 + phi_face[axis, side, :]*phi_face[
+          axis, side, :]) - h)*Ndot_face[axis, side] else 0 for side in Side)
+          for axis in Axis) + sum(phi_face .* mPhidot_face) + sum(T_face .*
+          Sdot_face) "Conservation of energy";
         // Note:  Although it is mathematically equivalent,
         // der(Data.p_vT(V/N, T)) is used instead of der(inert.p) or der(p)
         // so that the term can be expanded to avoid dynamic state selection
@@ -8322,7 +7576,7 @@ The default global default settings will be used for the current simulation.",
     and entropy between the reactant and product species; diffusion is handled separately.
     </p>
 
-    <p align=center><img src=\"modelica://FCSys/resources/images/Subregions/BaseClasses/PartialSpecies/exchange.png\">
+    <p align=center><img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/exchange.png\">
 <br><b>Figure 1:</b>  Exchange of a quantity (particle number, linear momentum, or entropy) among species (A, B, and C) within a subregion.</p>
 
     <p>Figure 2 shows the manner in which <a href=\"modelica://FCSys.Subregions.Species\">Species</a>
@@ -8333,7 +7587,7 @@ The default global default settings will be used for the current simulation.",
     are included in the same connections.
     Upstream discretization is applied if it is enabled (via the <code>upstreamX</code>, etc. parameters).
 
-    <p align=center><img src=\"modelica://FCSys/resources/images/Subregions/BaseClasses/PartialSpecies/transport.png\">
+    <p align=center><img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/transport.png\">
 <br><b>Figure 2:</b>  Transport of a quantity associated with the same chemical species between subregions (1 and 2).</p>
 
     <p>Within a phase, <a href=\"modelica://FCSys.Subregions.Species\">Species</a> instances are combined
@@ -8347,11 +7601,11 @@ The default global default settings will be used for the current simulation.",
     <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\" align=center>
       <tr align=center>
         <td align=center>
-          <img src=\"modelica://FCSys/resources/images/Subregions/BaseClasses/PartialSpecies/share_pressure.png\">
+          <img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/share_pressure.png\">
 <br><b>a:</b>  Pressures of species (A, B, and C) are additive within a phase.
         </td>
         <td align=center>
-          <img src=\"modelica://FCSys/resources/images/Subregions/BaseClasses/PartialSpecies/share_volume.png\">
+          <img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/share_volume.png\">
 <br><b>b:</b>  Volumes of phases (I, II, and III) are additive within a subregion.
         </td>
       </tr>
@@ -8463,14 +7717,14 @@ The default global default settings will be used for the current simulation.",
             extent={{-100,-100},{100,100}},
             initialScale=0.1), graphics),
         Icon(graphics={Ellipse(
-                  extent={{-100,100},{100,-100}},
-                  lineColor={127,127,127},
-                  pattern=LinePattern.Dash,
-                  fillColor={225,225,225},
-                  fillPattern=FillPattern.Solid),Text(
-                  extent={{-100,20},{100,60}},
-                  textString="%name",
-                  lineColor={0,0,0})}));
+              extent={{-100,100},{100,-100}},
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash,
+              fillColor={225,225,225},
+              fillPattern=FillPattern.Solid), Text(
+              extent={{-100,20},{100,60}},
+              textString="%name",
+              lineColor={0,0,0})}));
     end Species;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -8553,54 +7807,183 @@ The default global default settings will be used for the current simulation.",
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-180,-180},{180,
-              180}}), graphics={Rectangle(
-              extent={{-170,120},{170,160}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Ellipse(
-              extent={{-60,188},{60,68}},
-              lineColor={127,127,127},
-              startAngle=30,
-              endAngle=149,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255}),Ellipse(
-              extent={{-170,-2},{-50,-122}},
-              lineColor={127,127,127},
-              startAngle=149,
-              endAngle=270,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255}),Ellipse(
-              extent={{50,-2},{170,-122}},
-              lineColor={127,127,127},
-              startAngle=270,
-              endAngle=390,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255}),Polygon(
-              points={{51.5,159},{162,-32},{110,-122},{-110,-122},{-162,-32},{-51.5,
-              159},{51.5,159}},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Line(
-              points={{51.5,159},{162,-32}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{110,-122},{-110,-122}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{-162,-32},{-51.5,159}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Text(
-              extent={{-170,120},{170,160}},
-              textString="%name",
-              lineColor={0,0,0})}));
+              180}}), graphics={
+          Rectangle(
+            extent={{-170,120},{170,160}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Ellipse(
+            extent={{-60,188},{60,68}},
+            lineColor={127,127,127},
+            startAngle=30,
+            endAngle=149,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255}),
+          Ellipse(
+            extent={{-170,-2},{-50,-122}},
+            lineColor={127,127,127},
+            startAngle=149,
+            endAngle=270,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255}),
+          Ellipse(
+            extent={{50,-2},{170,-122}},
+            lineColor={127,127,127},
+            startAngle=270,
+            endAngle=390,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255}),
+          Polygon(
+            points={{51.5,159},{162,-32},{110,-122},{-110,-122},{-162,-32},{-51.5,
+                159},{51.5,159}},
+            smooth=Smooth.None,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Line(
+            points={{51.5,159},{162,-32}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{110,-122},{-110,-122}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{-162,-32},{-51.5,159}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Text(
+            extent={{-170,120},{170,160}},
+            textString="%name",
+            lineColor={0,0,0})}));
   end PhaseBoundary;
+
+  model Reaction "Model for a chemical/electrochemical reaction"
+    //extends FCSys.BaseClasses.Icons.Names.Top2;
+
+    parameter Integer n_spec(min=2) = 0 "Number of chemical species"
+      annotation (Dialog(connectorSizing=true));
+    // Note  The minimum is 2 for a meaningful reaction, but the default
+    // must be 0 to use connectorSizing.
+    parameter Integer n_lin=1
+      "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
+      annotation (Evaluate=true, HideResult=true);
+    parameter Q.Number alpha(
+      min=0,
+      max=1) = 0.5 "<html>Symmetry factor (&alpha;)</html>";
+    parameter Q.Number epsilonPerT=0
+      "<html>Additional activation barrier (&epsilon;/<i>T</i> )</html>";
+    input Q.Resistance betaPerLstar=10/U.A
+      "<html>Quotient of resistivity and characteristic length (&beta;/<i>L</i><sup>&#9733;</sup>)</html>"
+      annotation (Dialog);
+
+    Real nu[n_spec]=Chemistry.stoich(chemical.formula)
+      "Stoichiometric coefficients";
+    // Note 1:  As of Modelica 3.2 and Dymola 7.4, nu can't be a parameter or
+    // constant even though it isn't time-varying.  The strings that represent
+    // the chemical formulas can't be passed through the connectors as
+    // parameters or constants.  However, the translator should recognize that
+    // these equations are static.
+    // Note 2:  This is a Real variable (rather than Integer) to avoid the
+    // following warning in Dymola 7.4:
+    //     "Cannot differentiate discrete or record variable:
+    //         [...].nu[...]
+    //     with respect to time."
+    Q.Current Xidot(nominal=1*U.A) "Reaction rate";
+
+    Connectors.ChemicalInput chemical[n_spec](each final n_lin=n_lin)
+      "Connector for chemical species"
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+  protected
+    Q.Velocity phi[n_lin](each nominal=1*U.cm/U.s,each start=0) "Velocity";
+    Q.Velocity2 hbar(nominal=1*U.V*U.mol/U.g, start=0) "Massic enthalpy";
+
+  equation
+    // Equilibrium
+    0 = nu*chemical.muPerT;
+
+    // Conservation
+    nu[1:n_spec]*Xidot = chemical.Ndot "Chemical material (no storage)";
+    zeros(n_lin) = sum(chemical[i].mPhidot for i in 1:n_spec)
+      "Linear momentum (no storage)";
+    0 = sum(chemical.Hdot) "Thermal energy (no storage)";
+
+    // Ideal mixing/upstream discretization
+    // Chemical species
+    for i in 1:n_spec loop
+      chemical[i].mPhidot = semiLinear(
+          chemical[i].m*chemical[i].Ndot,
+          chemical[i].phi,
+          phi) "Linear momentum";
+      chemical[i].Hdot = semiLinear(
+          chemical[i].m*chemical[i].Ndot,
+          chemical[i].hbar,
+          hbar) "Energy";
+    end for;
+    // TODO:  Consider using stream connectors once they are better supported
+    // (some errors occurred in Dymola 7.4).
+
+    // Note:  This model is marked as structurally incomplete.  It must have
+    // zero species by default (for automatic connector sizing), but at least
+    // one species is mathematically required (two for a meaningful reaction).
+    annotation (
+      defaultComponentName="reaction",
+      structurallyIncomplete=true,
+      Documentation(info="<html>
+    <p>The size of the chemical connector is automatically increased each time a connection is made.
+    At least two species must be connected.
+    The stoichiometry is determined automatically from the chemical formulas
+    of the connected species.  No intermediate species are considered. Each reaction must be
+    completely and uniquely defined by the connected species.  Otherwise an error message is given.
+    If you suspect a bug in the library, please report it using the
+    <a href=\"modelica://FCSys.UsersGuide.Contact\">contact information</a>.</p>
+
+    <p>**Update this: For material, this model is essentially the opposite of a standard single-species connection.
+    The stoichiometric sum of the efforts (&Sigma; &nu;<sub><i>i</i></sub> &mu;<sub><i>i</i></sub>)
+    is zero, which is analogous to Kirchhoff's Current Law.  The flow rates divided by the
+    stoichiometric coefficients (<i>N&#775;</i><sub><i>i</i></sub> /&nu;<sub><i>i</i></sub>)
+    are equal&mdash;analogous to Kirchhoff's Voltage Law.</p>
+
+    <p>Momentum and energy are advected using the <code>semiLinear()</code> operator.  There is no diffusion;
+    it is included in the inert connections among species
+    (see the <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSpecies\">PartialSpecies</a> model).<p>
+
+    <p>The parameter &beta;/<i>L</i><sup>&#9733;</sup> is the reciprocal of exchange current density.</p>
+
+    <p>Assumptions:<ul>
+    <li>No storage of material, linear momentum, or energy</li></ul>
+    </p>
+    </html>"),
+      Icon(graphics={
+          Rectangle(
+            extent={{-140,40},{140,80}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Text(
+            extent={{-140,40},{140,80}},
+            textString="%name",
+            lineColor={0,0,0}),
+          Ellipse(
+            extent={{-80,40},{80,-40}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            lineColor={127,127,127},
+            pattern=LinePattern.Dash),
+          Text(
+            extent={{-100,-16},{100,-40}},
+            lineColor={127,127,127},
+            textString="%n_spec")}),
+      Diagram(graphics));
+  end Reaction;
 
   model Volume "Model to establish a fixed volume for phases"
     //extends FCSys.BaseClasses.Icons.Names.Top7;
@@ -8652,21 +8035,24 @@ value (<code>p</code>).</p>
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{160,
-              160}}), graphics={Rectangle(
-              extent={{-160,112},{160,152}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Polygon(
-              points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,-160},
-              {-160,60}},
-              lineColor={127,127,127},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.Dash),Text(
-              extent={{-160,112},{160,152}},
-              textString="%name",
-              lineColor={0,0,0})}),
+              160}}), graphics={
+          Rectangle(
+            extent={{-160,112},{160,152}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Polygon(
+            points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,-160},
+                {-160,60}},
+            lineColor={127,127,127},
+            smooth=Smooth.None,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.Dash),
+          Text(
+            extent={{-160,112},{160,152}},
+            textString="%name",
+            lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(graphics));
@@ -8793,76 +8179,91 @@ value (<code>p</code>).</p>
   value (<code>p</code>).</li>
   </ul></p></html>"),
         Diagram(graphics),
-        Icon(graphics={Line(
-                  points={{-100,0},{-40,0}},
-                  color={127,127,127},
-                  thickness=0.5,
-                  visible=inclXFaces,
-                  smooth=Smooth.None),Line(
-                  points={{0,-40},{0,-100}},
-                  color={127,127,127},
-                  thickness=0.5,
-                  visible=inclYFaces,
-                  smooth=Smooth.None),Line(
-                  points={{40,40},{50,50}},
-                  color={127,127,127},
-                  thickness=0.5,
-                  visible=inclZFaces,
-                  smooth=Smooth.None),Polygon(
-                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
-                {-40,16}},
-                  lineColor={127,127,127},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid),Line(
-                  points={{-40,-40},{-16,-16}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash),Line(
-                  points={{-16,40},{-16,-16},{40,-16}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash),Line(
-                  points={{-40,0},{28,0}},
-                  color={210,210,210},
-                  visible=inclXFaces,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,28},{0,-40}},
-                  color={210,210,210},
-                  visible=inclYFaces,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{28,0},{100,0}},
-                  color={127,127,127},
-                  thickness=0.5,
-                  visible=inclXFaces,
-                  smooth=Smooth.None),Line(
-                  points={{0,100},{0,28}},
-                  color={127,127,127},
-                  thickness=0.5,
-                  visible=inclYFaces,
-                  smooth=Smooth.None),Line(
-                  points={{-12,-12},{40,40}},
-                  color={210,210,210},
-                  visible=inclZFaces,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-40,16},{16,16},{16,-40}},
-                  color={127,127,127},
-                  smooth=Smooth.None),Line(
-                  points={{-50,-50},{-12,-12}},
-                  color={127,127,127},
-                  thickness=0.5,
-                  visible=inclZFaces,
-                  smooth=Smooth.None),Polygon(
-                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
-                {-40,16}},
-                  lineColor={127,127,127},
-                  smooth=Smooth.None),Line(
-                  points={{40,40},{16,16}},
-                  color={127,127,127},
-                  smooth=Smooth.None)}));
+        Icon(graphics={
+            Line(
+              points={{-100,0},{-40,0}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclXFaces,
+              smooth=Smooth.None),
+            Line(
+              points={{0,-40},{0,-100}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclYFaces,
+              smooth=Smooth.None),
+            Line(
+              points={{40,40},{50,50}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclZFaces,
+              smooth=Smooth.None),
+            Polygon(
+              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
+                  16}},
+              lineColor={127,127,127},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-40,-40},{-16,-16}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),
+            Line(
+              points={{-16,40},{-16,-16},{40,-16}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),
+            Line(
+              points={{-40,0},{28,0}},
+              color={210,210,210},
+              visible=inclXFaces,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,28},{0,-40}},
+              color={210,210,210},
+              visible=inclYFaces,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{28,0},{100,0}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclXFaces,
+              smooth=Smooth.None),
+            Line(
+              points={{0,100},{0,28}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclYFaces,
+              smooth=Smooth.None),
+            Line(
+              points={{-12,-12},{40,40}},
+              color={210,210,210},
+              visible=inclZFaces,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-40,16},{16,16},{16,-40}},
+              color={127,127,127},
+              smooth=Smooth.None),
+            Line(
+              points={{-50,-50},{-12,-12}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclZFaces,
+              smooth=Smooth.None),
+            Polygon(
+              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
+                  16}},
+              lineColor={127,127,127},
+              smooth=Smooth.None),
+            Line(
+              points={{40,40},{16,16}},
+              color={127,127,127},
+              smooth=Smooth.None)}));
     end PartialSubregion;
   end BaseClasses;
 

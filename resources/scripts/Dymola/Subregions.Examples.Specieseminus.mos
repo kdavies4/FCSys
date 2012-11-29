@@ -1,0 +1,12 @@
+// Define signals.
+filename = "Specieseminus.mat";
+y1 = {""};
+y2 = {""};
+y3 = {""};
+y4 = {""};
+y5 = {""};
+y6 = {""};
+
+// Make plots.
+removePlots();
+RunScript("FCSys/resources/scripts/Dymola/plot6.mos");

@@ -326,7 +326,7 @@ package UsersGuide "User's Guide"
     </ul></p>
 
 </html>"));
-    // TODO:  Create the Modelica page and included it too.
+    // TODO:  Create the Modelica page and include it in the first paragraph too.
     end Contact;
 
   class ModelicaLicense2 "Modelica License 2"
@@ -973,12 +973,12 @@ annotation (
     or microporous layers could be inserted.</p>
 
     <a name=\"Fig1\"></a>
-    <p align=center><img src=\"modelica://FCSys/resources/images/cell.png\">
+    <p align=center><img src=\"modelica://FCSys/resources/documentation/cell.png\">
 <br>Figure 1: Layers and primary flows of a PEMFC</p>
 
     <a name=\"Fig2\"></a>
     <!--<p align=center><img src=\"modelica://FCSys/help/FCSys.Assemblies.Cells.CellD.png\" width=600>-->
-    <p align=center><a href=\"modelica://FCSys.Assemblies.Cells.Cell\"><img src=\"modelica://FCSys/resources/images/FCSys.Assemblies.Cells.CellD.png\"></a>
+    <p align=center><a href=\"modelica://FCSys.Assemblies.Cells.Cell\"><img src=\"modelica://FCSys/resources/documentation/FCSys.Assemblies.Cells.CellD.png\"></a>
 <br>Figure 2: Diagram of the PEMFC model (<a href=\"modelica://FCSys.Assemblies.Cells.Cell\">FCSys.Assemblies.Cells.Cell</a>).</p>
 
     <p>The models describe the advection, diffusion, and storage of

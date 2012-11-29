@@ -5,7 +5,7 @@
 # Remove some of the help files.
 rm help/FCSys.Blocks*.png
 rm help/FCSys_Blocks*.html
-cp -f help/FCSys.Figures.VolumeOrPressureI.png resources/images/Connectors/VolumeOrPressureI.png
+cp -f help/FCSys.Figures.VolumeOrPressureI.png resources/documentation/Connectors/VolumeOrPressureI.png
 rm help/FCSys.Figures*.png
 rm help/FCSys_Figures*.html
 rm help/FCSys.Systems*.png
@@ -26,7 +26,7 @@ mv -f resources/documentation/ModelicaDoc.css stylesheets
 
 # Update the images.
 rm images/*
-for f in `find ./resources/images -iname *.png -o -iname *.svg -o -iname *.ico -o -iname *.gif`
+for f in `find ./resources/documentation -iname *.png -o -iname *.svg -o -iname *.ico -o -iname *.gif`
 do
     cp $f images/
 done
@@ -36,7 +36,7 @@ do
     cp $f images/
 done
 cp help/*.png images/
-# This replaces resources/images/FCSys.Subassemblies.Cells.CellD.png (copied
+# This replaces resources/documentation/FCSys.Subassemblies.Cells.CellD.png (copied
 # above), which is lower resolution.
 
 # Copy and process the HTML files.

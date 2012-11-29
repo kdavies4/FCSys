@@ -84,12 +84,10 @@ package BCs "Models for boundary conditions"
         H2O(
           xNegative(
             thermoOpt=FCSys.Connectors.BaseClasses.ThermoOpt.ClosedAdiabatic,
-
             viscousY=false,
             viscousZ=false),
           xPositive(
             thermoOpt=FCSys.Connectors.BaseClasses.ThermoOpt.ClosedAdiabatic,
-
             viscousY=false,
             viscousZ=false),
           yPositive(thermoOpt=FCSys.Connectors.BaseClasses.ThermoOpt.OpenDiabatic),
@@ -149,7 +147,6 @@ package BCs "Models for boundary conditions"
               viscousY=false,
               viscousZ=false,
               thermoOpt=FCSys.Connectors.BaseClasses.ThermoOpt.OpenDiabatic),
-
             yNegative(viscousZ=false, viscousX=false),
             yPositive(viscousZ=false, viscousX=false),
             zNegative(viscousX=false, viscousY=false),
@@ -1394,11 +1391,11 @@ package BCs "Models for boundary conditions"
                   {160,160}}), graphics),
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
                   160,160}}), graphics={Rectangle(
-                      extent={{-160,160},{160,-160}},
-                      lineColor={191,191,191},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Backward),Rectangle(extent={{-160,
-                160},{160,-160}}, lineColor={0,0,0})}));
+                extent={{-160,160},{160,-160}},
+                lineColor={191,191,191},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Backward), Rectangle(extent={{-160,160},
+                    {160,-160}}, lineColor={0,0,0})}));
       end PartialTestStand;
 
       partial model PartialTestStandNoIO "Partial test stand"
@@ -1414,18 +1411,18 @@ package BCs "Models for boundary conditions"
 
         FCSys.BCs.Face.Subregion0Current anEnd[n_y, n_z](each final axis=FCSys.BaseClasses.Axis.x,
             each graphite(
-            inclC=false,
+            inclC=true,
+            'incle-'=true,
             'e-'(redeclare FCSys.BCs.Face.Species.Material.Current materialBC,
                 redeclare Modelica.Blocks.Sources.Ramp materialSpec(height=1*U.A,
-                  duration=50)),
-            'incle-'=false)) annotation (Placement(transformation(
+                  duration=50)))) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=90,
               origin={-30,0})));
         FCSys.BCs.Face.Subregion0Current caEnd[n_y, n_z](each final axis=FCSys.BaseClasses.Axis.x,
             each graphite(
-            inclC=false,
-            'incle-'=false,
+            inclC=true,
+            'incle-'=true,
             'e-'(redeclare FCSys.BCs.Face.Species.Material.Current materialBC,
                 redeclare Modelica.Blocks.Sources.Ramp materialSpec(height=-1*U.A,
                   duration=50)))) annotation (Placement(transformation(
@@ -1433,34 +1430,34 @@ package BCs "Models for boundary conditions"
               rotation=270,
               origin={30,0})));
         FCSys.BCs.Face.Subregion0Current anSource[n_x_an, n_z](each final axis=
-              FCSys.BaseClasses.Axis.y, each gas(inclH2=false, inclH2O=false))
+              FCSys.BaseClasses.Axis.y, each gas(inclH2=true, inclH2O=true))
           annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=180,
               origin={-20,-30})));
         FCSys.BCs.Face.Subregion0Current anSink[n_x_an, n_z](each final axis=
-              FCSys.BaseClasses.Axis.y, each gas(inclH2=false, inclH2O=false))
+              FCSys.BaseClasses.Axis.y, each gas(inclH2=true, inclH2O=true))
           annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-20,30})));
         FCSys.BCs.Face.Subregion0Current caSource[n_x_ca, n_z](each final axis=
               FCSys.BaseClasses.Axis.y, each gas(
-            inclH2O=false,
-            inclN2=false,
-            inclO2=false)) annotation (Placement(transformation(
+            inclH2O=true,
+            inclN2=true,
+            inclO2=true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=180,
               origin={20,-30})));
         FCSys.BCs.Face.Subregion0Current caSink[n_x_ca, n_z](each final axis=
               FCSys.BaseClasses.Axis.y, each gas(
-            inclH2O=false,
-            inclN2=false,
-            inclO2=false)) annotation (Placement(transformation(
+            inclH2O=true,
+            inclN2=true,
+            inclO2=true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={20,30})));
-        // **temp falses
+
         inner Defaults defaults
           annotation (Placement(transformation(extent={{50,20},{70,40}})));
       equation
@@ -1473,43 +1470,6 @@ package BCs "Models for boundary conditions"
                   160,160}}), graphics));
       end PartialTestStandNoIO;
 
-      partial model PartialTestStandNoIO2 "Partial test stand"
-        extends FCSys.BaseClasses.Icons.Names.Top9;
-        final parameter Integer n_x_an=1
-          "<html>Number of subregions along the through-cell axis in anode FP (<i>n</i><sub>x an</sub>)</html>";
-        final parameter Integer n_x_ca=1
-          "<html>Number of subregions along the through-cell axis in anode FP (<i>n</i><sub>x ca</sub>)</html>";
-        final parameter Integer n_y=1
-          "<html>Number of subregions along the channel (<i>n</i><sub>y</sub>)</html>";
-        final parameter Integer n_z=1
-          "<html>Number of subregions across the channel (<i>n</i><sub>z</sub>)</html>";
-
-        FCSys.Connectors.FaceBus anEnd[n_y, n_z] "Anode end plate" annotation (
-            Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-160,0}), iconTransformation(
-              extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={-160,0})));
-        // **temp falses
-        Face.Region region
-          annotation (Placement(transformation(extent={{-76,34},{-56,54}})));
-      equation
-
-        connect(anEnd, region.face) annotation (Line(
-            points={{-160,5.55112e-16},{-114,5.55112e-16},{-114,44.2},{-68.2,
-                44.2}},
-            color={127,127,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-        annotation (
-          defaultComponentName="testStand",
-          Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},
-                  {160,160}}), graphics),
-          Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
-                  160,160}}), graphics));
-      end PartialTestStandNoIO2;
     end BaseClasses;
   end TestStands;
 
@@ -1659,8 +1619,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.C, C.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1671,8 +1631,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.C19HF37O5S, C19HF37O5S.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1683,8 +1643,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.'e-', 'e-'.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1695,8 +1655,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.H2, H2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1707,8 +1667,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.H2O, H2O.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1719,8 +1679,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.'H+', 'H+'.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1731,8 +1691,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.N2, N2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1743,8 +1703,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.O2, O2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -2074,10 +2034,11 @@ package BCs "Models for boundary conditions"
           final max=3) = 1
           "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
           annotation (HideResult=true);
-        parameter String formula=FCSys.Characteristics.BaseClasses.Characteristic.formula
-          "Chemical formula";
+        replaceable FCSys.Characteristics.BaseClasses.Characteristic Data
+          "Characteristic data of the species"
+          annotation (Dialog(group="Material properties"));
 
-        parameter BCTypeMaterial materialBC=BCTypeMaterial.PotentialElectrochemical
+        parameter BCTypeMaterial materialBC=BCTypeMaterial.PotentialElectrochemicalPerTemperature
           "Type of BC"
           annotation (Dialog(group="Material", __Dymola_descriptionLabel=true));
         parameter Boolean internalMaterial=true "Use internal specification"
@@ -2103,8 +2064,8 @@ package BCs "Models for boundary conditions"
               origin={-90,10})));
 
         // 1st component of linear momentum
-        parameter BCTypeMomentum lin1BC=BCTypeMomentum.MomentumSpecific
-          "Type of BC" annotation (Dialog(
+        parameter BCTypeMomentum lin1BC=BCTypeMomentum.Velocity "Type of BC"
+          annotation (Dialog(
             group="1st component of linear momentum",
             enable=n_lin > 0,
             __Dymola_descriptionLabel=true));
@@ -2131,8 +2092,8 @@ package BCs "Models for boundary conditions"
               origin={-50,10})));
 
         // 2nd component of linear momentum
-        parameter BCTypeMomentum lin2BC=BCTypeMomentum.MomentumSpecific
-          "Type of BC" annotation (Dialog(
+        parameter BCTypeMomentum lin2BC=BCTypeMomentum.Velocity "Type of BC"
+          annotation (Dialog(
             group="2nd component of linear momentum",
             enable=n_lin > 1,
             __Dymola_descriptionLabel=true));
@@ -2161,8 +2122,8 @@ package BCs "Models for boundary conditions"
               origin={30,10})));
 
         // 3rd component of linear momentum
-        parameter BCTypeMomentum lin3BC=BCTypeMomentum.MomentumSpecific
-          "Type of BC" annotation (Dialog(
+        parameter BCTypeMomentum lin3BC=BCTypeMomentum.Velocity "Type of BC"
+          annotation (Dialog(
             group="3rd component of linear momentum",
             enable=n_lin > 2,
             __Dymola_descriptionLabel=true));
@@ -2191,7 +2152,7 @@ package BCs "Models for boundary conditions"
               origin={-10,10})));
 
         // Entropy
-        parameter BCTypeMomentum entropyBC=BCTypeEntropy.TemperatureEntropySpecific
+        parameter BCTypeMomentum entropyBC=BCTypeEntropy.EnthalpyMassic
           "Type of BC"
           annotation (Dialog(group="Entropy", __Dymola_descriptionLabel=true));
         parameter Boolean internalEnt=true "Use internal specification"
@@ -2216,8 +2177,10 @@ package BCs "Models for boundary conditions"
               rotation=270,
               origin={70,10})));
 
-        Connectors.ChemicalOutput chemical(final n_lin=n_lin, final formula=
-              formula) "Single-species connector for material"
+        Connectors.ChemicalOutput chemical(
+          final n_lin=n_lin,
+          final formula=Data.formula,
+          final m=Data.m) "Single-species connector for material"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
         Connectors.RealInputBus u "Bus of inputs to specify conditions"
           annotation (Placement(transformation(
@@ -2230,9 +2193,9 @@ package BCs "Models for boundary conditions"
 
       protected
         Connectors.RealInputInternal u_N(final unit=if materialBC ==
-              BCTypeMaterial.PotentialElectrochemical then "m.l2/(N.T2)" else
-              "N/T") if not internalMaterial "Material signal" annotation (
-            Placement(transformation(
+              BCTypeMaterial.PotentialElectrochemicalPerTemperature then "1"
+               else "N/T") if not internalMaterial "Material signal"
+          annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-70,30}),iconTransformation(
@@ -2305,35 +2268,37 @@ package BCs "Models for boundary conditions"
 
       equation
         // Material
-        if materialBC == BCTypeMaterial.PotentialElectrochemical then
-          chemical.mu = u_N_int;
+        if materialBC == BCTypeMaterial.PotentialElectrochemicalPerTemperature
+             then
+          chemical.muPerT = u_N_int;
         else
           chemical.Ndot = u_N_int;
         end if;
+
         // 1st component of linear momentum
         if n_lin > 0 then
-          //  if bCTypeMomentum1 == BCTypeMomentum.MomentumSpecific then
-          chemical.mphi[1] = u_Phi_int[1];
+          //  if bCTypeMomentum1 == BCTypeMomentum.Velocity then
+          chemical.phi[1] = u_Phi_int[1];
           //  end if;
         end if;
 
         // 2nd component of linear momentum
         if n_lin > 1 then
-          //  if bCTypeMomentum2 == BCTypeMomentum.MomentumSpecific then
-          chemical.mphi[2] = u_Phi_int[2];
+          //  if bCTypeMomentum2 == BCTypeMomentum.Velocity then
+          chemical.phi[2] = u_Phi_int[2];
           //  end if;
         end if;
 
         // 3rd component of linear momentum
         if n_lin > 2 then
-          //  if bCTypeMomentum3 == BCTypeMomentum.MomentumSpecific then
-          chemical.mphi[3] = u_Phi_int[3];
+          //  if bCTypeMomentum3 == BCTypeMomentum.Velocity then
+          chemical.phi[3] = u_Phi_int[3];
           //  end if;
         end if;
 
         // Entropy
-        //  if entropyBC== BCTypeEntropy.EntropySpecific then
-        chemical.Ts = u_S_int;
+        //  if entropyBC== BCTypeEntropy.EnthalpyMassic then
+        chemical.hbar = u_S_int;
         //  end if;
 
         connect(u.N, u_N) annotation (Line(
@@ -2422,22 +2387,23 @@ package BCs "Models for boundary conditions"
                   {120,100}}), graphics),
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-120,-100},{
                   120,100}}), graphics={Text(
-                extent={{0,-76},{100,-46}},
-                lineColor={127,127,127},
-                textString="%formula")}));
+                      extent={{0,-76},{100,-46}},
+                      lineColor={127,127,127},
+                      textString="%Data.formula")}));
       end Species;
 
       package BaseClasses "Base classes (not for direct use)"
         extends Modelica.Icons.BasesPackage;
         type BCTypeMaterial = enumeration(
-            PotentialElectrochemical "Prescribed electrochemical potential",
+            PotentialElectrochemicalPerTemperature
+              "Prescribed quotient of electrochemical potential and temperature",
+
             Current "Prescribed current") "Types of BCs for material";
+
         type BCTypeMomentum = enumeration(
-            MomentumSpecific "Prescribed outflow specific momentum")
-          "Types of BCs for linear momentum";
+            Velocity "Prescribed velocity") "Types of BCs for linear momentum";
         type BCTypeEntropy = enumeration(
-            TemperatureEntropySpecific
-              "Prescribed outflow specific entropy times temperature")
+            EnthalpyMassic "Prescribed massic enthalpy")
           "Types of BCs for entropy";
       end BaseClasses;
     end Species;
@@ -3816,9 +3782,8 @@ boundary condition</a> models.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        replaceable FCSys.BCs.Face.Species.Species C(thermoOpt=
-              ThermoOpt.ClosedDiabatic) if inclC "Model" annotation (
-            Dialog(
+        replaceable FCSys.BCs.Face.Species.Species C(thermoOpt=ThermoOpt.ClosedDiabatic)
+          if inclC "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclC), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -3833,8 +3798,8 @@ boundary condition</a> models.
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
         replaceable FCSys.BCs.Face.Species.Species C19HF37O5S(thermoOpt=
-              ThermoOpt.ClosedDiabatic) if inclC19HF37O5S "Model"
-          annotation (Dialog(
+              ThermoOpt.ClosedDiabatic) if inclC19HF37O5S "Model" annotation (
+            Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclC19HF37O5S), Placement(transformation(extent={{-10,-10},
@@ -4604,9 +4569,8 @@ boundary condition</a> models.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        replaceable FCSys.BCs.Face.Species.Species C(thermoOpt=
-              ThermoOpt.ClosedDiabatic) if inclC "Model" annotation (
-            Dialog(
+        replaceable FCSys.BCs.Face.Species.Species C(thermoOpt=ThermoOpt.ClosedDiabatic)
+          if inclC "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclC), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -4743,8 +4707,8 @@ boundary condition</a> models.
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
         replaceable FCSys.BCs.Face.Species.Species C19HF37O5S(thermoOpt=
-              ThermoOpt.ClosedDiabatic) if inclC19HF37O5S "Model"
-          annotation (Dialog(
+              ThermoOpt.ClosedDiabatic) if inclC19HF37O5S "Model" annotation (
+            Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclC19HF37O5S), Placement(transformation(extent={{-10,-10},
@@ -4959,14 +4923,13 @@ boundary condition</a> models.
           "Options for material and thermal transport";
 
         // Material
-        final parameter Boolean open=thermoOpt == ThermoOpt.OpenDiabatic
-          "Open";
+        final parameter Boolean open=thermoOpt == ThermoOpt.OpenDiabatic "Open";
         // Note:  Dymola 7.4 doesn't recognize enumerations in the dialog enable
         // option, e.g.,
         //     enable=thermoOpt=ThermoOpt.OpenDiabatic.
         // Therefore, the values of the enumerations are specified numerically for
         // this initial condition and others below for material and entropy.
-        replaceable Material.PotentialElectrochemical materialBC if open
+        replaceable FCSys.BCs.Face.Species.Material.Pressure materialBC if open
           constrainedby FCSys.BCs.Face.Species.Material.BaseClasses.PartialBC
           "Type of condition" annotation (
           __Dymola_choicesFromPackage=true,
@@ -5280,13 +5243,13 @@ boundary condition</a> models.
       package Material "BCs for material"
         extends Modelica.Icons.Package;
 
-        model PotentialElectrochemical "Prescribed electrochemical potential"
+        model Pressure "Prescribed pressure"
 
-          extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.PotentialElectrochemical,
-              redeclare Connectors.RealInput u(final unit="l2.m/(N.T2)"));
+          extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.Pressure,
+              redeclare Connectors.RealInput u(final unit="m/(l.T2)"));
 
         equation
-          material.mu = u;
+          material.p = u;
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="materialBC",
@@ -5295,7 +5258,7 @@ boundary condition</a> models.
   using functions in the
   <a href=\"modelica://FCSys.Connectors.Characteristic\">Characteristics</a> package.
   </p></html>"));
-        end PotentialElectrochemical;
+        end Pressure;
 
         model Current "Prescribed current"
           extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.Current,
@@ -5306,6 +5269,7 @@ boundary condition</a> models.
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="materialBC");
         end Current;
+
 
         package BaseClasses "Base classes (not for direct use)"
           extends Modelica.Icons.BasesPackage;
@@ -5330,20 +5294,10 @@ boundary condition</a> models.
           end PartialBC;
 
           type BCType = enumeration(
-              PotentialElectrochemical "Electrochemical potential",
+              Pressure "Pressure",
               Current "Current") "Types of BCs";
         end BaseClasses;
 
-        model Resistance
-          "Prescribed resistance**temporary (clean up if permanent)"
-          extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.Current,
-              redeclare Connectors.RealInput u(final unit="N/T"));
-
-        equation
-          material.mu = 0.25*U.V + u*material.Ndot;
-          annotation (defaultComponentPrefixes="replaceable",
-              defaultComponentName="materialBC");
-        end Resistance;
       end Material;
 
       package Momentum "BCs for linear momentum"
@@ -5468,16 +5422,14 @@ boundary condition</a> models.
           "Options for material and thermal transport";
 
         // Material
-        final parameter Boolean open=thermoOpt == ThermoOpt.OpenDiabatic
-          "Open";
+        final parameter Boolean open=thermoOpt == ThermoOpt.OpenDiabatic "Open";
         // Note:  Dymola 7.4 doesn't recognize enumerations in the dialog enable
         // option, e.g.,
         //     enable=thermoOpt=ThermoOpt.OpenDiabatic.
         // Therefore, the values of the enumerations are specified numerically for
         // this initial condition and others below for material and entropy.
-        replaceable FCSys.BCs.Face.Species.Material.PotentialElectrochemical
-          materialBC if open constrainedby
-          FCSys.BCs.Face.Species.Material.BaseClasses.PartialBC
+        replaceable FCSys.BCs.Face.Species.Material.Pressure materialBC if open
+          constrainedby FCSys.BCs.Face.Species.Material.BaseClasses.PartialBC
           "Type of condition" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
@@ -5781,10 +5733,9 @@ boundary condition</a> models.
       Connectors.FaceBus face[1, 1]
         annotation (Placement(transformation(extent={{-32,-8},{-12,12}})));
       replaceable Subregion subregionFaceBC[1, 1](each graphite('incle-'=true,
-            'e-'(redeclare
-              FCSys.BCs.Face.Species.Material.PotentialElectrochemical
-              materialBC, redeclare Modelica.Blocks.Sources.Ramp materialSpec(
-                duration=50, height=1*U.V))))
+            'e-'(redeclare FCSys.BCs.Face.Species.Material.Pressure materialBC,
+              redeclare Modelica.Blocks.Sources.Ramp materialSpec(duration=50,
+                height=1*U.V))))
         annotation (Placement(transformation(extent={{32,-4},{52,16}})));
     equation
       connect(subregionFaceBC.face, face) annotation (Line(
@@ -6089,8 +6040,7 @@ boundary condition</a> model.
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
         replaceable FCSys.BCs.FaceDifferential.Species.Species C(thermoOpt=
-              ThermoOpt.ClosedDiabatic) if inclC "Model" annotation (
-            Dialog(
+              ThermoOpt.ClosedDiabatic) if inclC "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclC), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -6105,8 +6055,8 @@ boundary condition</a> model.
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
         replaceable FCSys.BCs.FaceDifferential.Species.Species C19HF37O5S(
-            thermoOpt=ThermoOpt.ClosedDiabatic) if inclC19HF37O5S
-          "Model" annotation (Dialog(
+            thermoOpt=ThermoOpt.ClosedDiabatic) if inclC19HF37O5S "Model"
+          annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclC19HF37O5S), Placement(transformation(extent={{-10,-10},
@@ -7417,8 +7367,7 @@ boundary condition</a> model.
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
         replaceable FCSys.BCs.FaceDifferential.Species.Species C(thermoOpt=
-              ThermoOpt.ClosedDiabatic) if inclC "Model" annotation (
-            Dialog(
+              ThermoOpt.ClosedDiabatic) if inclC "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclC), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -7649,8 +7598,8 @@ boundary condition</a> model.
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
         replaceable FCSys.BCs.FaceDifferential.Species.Species C19HF37O5S(
-            thermoOpt=ThermoOpt.ClosedDiabatic) if inclC19HF37O5S
-          "Model" annotation (Dialog(
+            thermoOpt=ThermoOpt.ClosedDiabatic) if inclC19HF37O5S "Model"
+          annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclC19HF37O5S), Placement(transformation(extent={{-10,-10},
@@ -8096,8 +8045,7 @@ boundary condition</a> model.
           "Options for material and thermal transport";
 
         // Material
-        final parameter Boolean open=thermoOpt == ThermoOpt.OpenDiabatic
-          "Open";
+        final parameter Boolean open=thermoOpt == ThermoOpt.OpenDiabatic "Open";
         replaceable
           FCSys.BCs.FaceDifferential.Species.Material.PotentialElectrochemical
           materialBC if open constrainedby
@@ -8709,11 +8657,11 @@ those generated by the model's <code>connect</code> statements.</p>
     <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\" align=center>
       <tr align=center>
         <td align=center width=120>
-          <img src=\"modelica://FCSys/resources/images/BCs/Router/PassThrough.png\">
+          <img src=\"modelica://FCSys/resources/documentation/BCs/Router/PassThrough.png\">
 <br><b>a:</b>  Pass-through
         </td>
         <td align=center>
-          <img src=\"modelica://FCSys/resources/images/BCs/Router/CrossOver.png\">
+          <img src=\"modelica://FCSys/resources/documentation/BCs/Router/CrossOver.png\">
 <br><b>b:</b>  Cross-over
         </td>
       </tr>

@@ -9,7 +9,7 @@ import re, glob, sys, os
 
 ## Settings
 stylesheet = '../resources/documentation/ModelicaDoc.css'
-favicon = '../resources/images/favicon.ico'
+favicon = '../resources/documentation/favicon.ico'
 
 # Replacement pairs
 rpls = [
@@ -59,7 +59,7 @@ rpls = [
   <div class="sidebarwrapper">
   <a href="FCSys.html"><p class="sidebar-title">FCSys</p></a>
   <p class="logo"><a href="FCSys.html">
-    <img src="../resources/images/icon.gif" class="logo" alt="Logo" width=150>
+    <img src="../resources/documentation/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
   <h3>Table of Contents</h3>

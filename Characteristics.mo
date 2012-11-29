@@ -913,7 +913,7 @@ package Characteristics "Data and functions to correlate physical properties"
 
         input Q.PressureAbsolute p=1*U.atm "Pressure";
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input ReferenceEnthalpy referenceEnthalpy=ReferenceEnthalpy.ZeroAt0K
+        input ReferenceEnthalpy referenceEnthalpy=ReferenceEnthalpy.EnthalpyOfFormationAt25degC
           "Choice of enthalpy reference";
         output Q.Potential g "Gibbs potential";
 

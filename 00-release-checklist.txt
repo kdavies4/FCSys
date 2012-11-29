@@ -7,7 +7,8 @@ Steps to release the FCSys library:
         and update Quantities.mo and resources/scripts/units.mos.
 11/29/12
     2.  Update and run 00-find-references.sh to be sure that all references are
-        cited in the code.  Remove the unused ones from package.mo.
+        cited in the code.  Remove the unused ones from package.mo
+        (FCSys.UsersGuide.References).
 11/11/12
     3.  Be sure that all of the embedded documentation is up-to-date.  Delete
         the FCSys/help directory and recreate it using Dymola
@@ -18,16 +19,21 @@ Steps to release the FCSys library:
         replacements, and update the documentation for the website on the
         gh-pages branch.  Push the gh-pages branch to origin (git push origin
         gh-pages).
-    4.  Address the starred (**) and to do (TODO) items in the code (or as many
+12/2/12
+    4.  Use http://www.xml-sitemaps.com/ to update the sitemap.  Put it in the
+        the gh-pages branch (base folder) and push to origin (git push origin
+        gh-pages).  Udpate it in Google Webmaster tools
+        (https://www.google.com/webmasters/tools/sitemap-list?hl=en&siteUrl=http%3A%2F%2Fkdavies4.github.com%2FFCSys%2F#MAIN_TAB=1&CARD_TAB=-1).
+    5.  Address the starred (**) and to do (TODO) items in the code (or as many
         as possible).  Run 00-list-starred.sh and 00-list-TODO.sh to list the
         occurrences of those tags.
-    5.  Update the list of checks and tests (tests/checks.mos and
+    6.  Update the list of checks and tests (tests/checks.mos and
         tests/tests.mos).  Run the checks and tests by uncommenting lines in
         configuration/load.mos and restarting Dymola through that script.
         Address any problems.
 11/9/12
-    6.  Run 00-autoreplace.py on the code.
-    7.  Add an entry to the list of revisions in package.mo.
+    7.  Run 00-autoreplace.py on the code.
+    8.  Add an entry to the list of revisions in package.mo.
     9.  Commit the revisions to git.
     10. Create a git tag for the release.
     11. Run 00-release.sh.  Browse the result to be sure that the proper files

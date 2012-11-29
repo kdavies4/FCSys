@@ -53,7 +53,7 @@ build/
 # (also blocked by other means, but be sure)
 /resources/scripts/Dymola/ValidationData.mos
 /test/LOOCV
-/resources/images/Regions/*.pdf
+/resources/documentation/Regions/*.pdf
 
 # Georgia Tech files
 # TODO:  Ask Chris Paredis if they can be shared, and include them.

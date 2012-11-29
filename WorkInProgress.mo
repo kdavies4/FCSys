@@ -405,6 +405,293 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
               smooth=Smooth.None)}),
       Diagram(graphics));
   end Capacitor;
+
+  model H2_O2_H2ODynamic
+    "<html>Test the 2H<sub>2</sub> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O reaction dynamically</html>"
+
+    extends Modelica.Icons.Example;
+    extends Modelica.Icons.UnderConstruction;
+    parameter Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+    parameter Q.Volume V=1*U.cm^3 "Volume";
+
+    FCSys.Subregions.Reaction reaction(n_spec=3) "Chemical reaction"
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+    FCSys.WorkInProgress.SimpleSpecies species1(
+      final V=V,
+      final T=T,
+      p_IC=0.4*U.atm,
+      p(fixed=false),
+      redeclare FCSys.Characteristics.H2.Gas Data(b_v=[1], specVolPow={-1,0}))
+      "1st species" annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={-30,-24})));
+    FCSys.WorkInProgress.SimpleSpecies species2(
+      final V=V,
+      final T=T,
+      p_IC=1*U.atm,
+      redeclare FCSys.Characteristics.O2.Gas Data(b_v=[1], specVolPow={-1,0}))
+      "2nd species" annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={0,-24})));
+    FCSys.WorkInProgress.SimpleSpecies species3(
+      final V=V,
+      final T=T,
+      p_IC=0.4*U.atm,
+      redeclare FCSys.Characteristics.H2O.Gas Data(b_v=[1], specVolPow={-1,0}))
+      "3rd species" annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={30,-24})));
+
+    inner FCSys.BCs.Defaults defaults(analysis=true)
+      annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
+
+  equation
+    connect(species1.chemical, reaction.chemical[1]) annotation (Line(
+        points={{-30,-20},{-30,-10},{5.55112e-16,-10},{5.55112e-16,-0.666667}},
+
+        color={170,0,0},
+        smooth=Smooth.None));
+
+    connect(species2.chemical, reaction.chemical[2]) annotation (Line(
+        points={{9.89443e-16,-20},{0,-20},{0,5.55112e-16},{5.55112e-16,
+            5.55112e-16}},
+        color={170,0,0},
+        smooth=Smooth.None));
+
+    connect(species3.chemical, reaction.chemical[3]) annotation (Line(
+        points={{30,-20},{30,-10},{5.55112e-16,-10},{5.55112e-16,0.666667}},
+        color={170,0,0},
+        smooth=Smooth.None));
+
+    annotation (
+      Diagram(graphics),
+      experiment(
+        StopTime=0.01,
+        NumberOfIntervals=5000,
+        Tolerance=1e-06),
+      experimentSetupOutput,
+      Commands(file=
+            "resources/scripts/Dymola/Subregions.Examples.H2_O2_H2ODynamic.mos"));
+  end H2_O2_H2ODynamic;
+
+  model H2O_H2ODynamic
+    "<html>Test the H<sub>2</sub>O evaporation/condensation reaction dynamically</html>"
+
+    extends Modelica.Icons.Example;
+    extends Modelica.Icons.UnderConstruction;
+    parameter Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+    parameter Q.Volume V=1*U.cm^3 "Volume";
+
+    FCSys.Subregions.Reaction reaction(n_spec=2) "Chemical reaction"
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+    FCSys.WorkInProgress.SimpleSpecies species1(
+      final V=V,
+      final T=T,
+      redeclare FCSys.Characteristics.H2O.Liquid Data,
+      p(fixed=false)) "1st species" annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={-30,-24})));
+    FCSys.WorkInProgress.SimpleSpecies species2(
+      final V=V,
+      final T=T,
+      p_IC=0.4*U.atm,
+      redeclare FCSys.Characteristics.H2O.Gas Data(b_v=[1], specVolPow={-1,0}))
+      "2nd species" annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={0,-24})));
+
+    inner FCSys.BCs.Defaults defaults(analysis=true)
+      annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
+  equation
+
+    connect(species1.chemical, reaction.chemical[1]) annotation (Line(
+        points={{-30,-20},{-30,-10},{5.55112e-16,-10},{5.55112e-16,-0.5}},
+        color={170,0,0},
+        smooth=Smooth.None));
+
+    connect(species2.chemical, reaction.chemical[2]) annotation (Line(
+        points={{9.89443e-16,-20},{0,-20},{0,0.5},{5.55112e-16,0.5}},
+        color={170,0,0},
+        smooth=Smooth.None));
+
+    annotation (
+      Documentation(info="<html>Note that the pressure of liquid H<sub>2</sub>O shows as zero.
+  Since it is assumed to be incompressible, its pressure cannot be determined by the specific volume and temperature.
+  In that case, the <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_vT\">p_vT</a> function
+  returns zero.</html>"),
+      Diagram(graphics),
+      experiment(
+        StopTime=2,
+        NumberOfIntervals=5000,
+        Tolerance=1e-06),
+      experimentSetupOutput,
+      Commands(file=
+            "resources/scripts/Dymola/Subregions.Examples.H2O_H2ODynamic.mos"));
+  end H2O_H2ODynamic;
+
+  model Cell "Test both half reactions of a cell"
+
+    extends Modelica.Icons.Example;
+    extends Modelica.Icons.UnderConstruction;
+    output Q.Number DeltamuPerT='e-_an'.chemical.muPerT - 'e-_ca'.chemical.muPerT
+      "Voltage of cathode w.r.t. anode, divided by temperature";
+    // The negative factor is due to the charge negative charge of electrons.
+
+    FCSys.Subregions.Reaction HOR(n_spec=3) "Hydrogen oxidation reaction"
+      annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
+
+    FCSys.BCs.Chemical.Species.Species 'e-_an'(materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature)
+      annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={-52,-24})));
+    FCSys.BCs.Chemical.Species.Species H2(materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature)
+      annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={-28,-24})));
+    inner FCSys.BCs.Defaults defaults(analysis=true)
+      annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
+    FCSys.Subregions.Reaction ORR(n_spec=4) "Oxygen reduction reaction"
+      annotation (Placement(transformation(extent={{30,-10},{50,10}})));
+    FCSys.BCs.Chemical.Species.Species 'e-_ca'(materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.Current,
+        redeclare Modelica.Blocks.Sources.Ramp materialSpec(duration=3600e2,
+          height=100*U.A)) annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={14,-24})));
+    FCSys.BCs.Chemical.Species.Species O2(materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature)
+      annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={40,-24})));
+    FCSys.BCs.Chemical.Species.Species H2O(materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature,
+        redeclare Modelica.Blocks.Sources.Constant materialSpec(k=-2*1.20646*U.V
+            /(298.15*U.K))) annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=180,
+          origin={64,-24})));
+    // Note:  The OCV of H2/O2 cell is 1.20646 V at 300 K, assuming the product is
+    // gaseous.
+  equation
+    connect('e-_an'.chemical, HOR.chemical[1]) annotation (Line(
+        points={{-52,-20},{-52,-10},{-40,-10},{-40,-0.666667}},
+        color={208,104,0},
+        smooth=Smooth.None));
+    connect(H2.chemical, HOR.chemical[3]) annotation (Line(
+        points={{-28,-20},{-28,-10},{-40,-10},{-40,0.666667}},
+        color={208,104,0},
+        smooth=Smooth.None));
+    connect('e-_ca'.chemical, ORR.chemical[1]) annotation (Line(
+        points={{14,-20},{14,-10},{40,-10},{40,-0.75}},
+        color={208,104,0},
+        smooth=Smooth.None));
+    connect(O2.chemical, ORR.chemical[3]) annotation (Line(
+        points={{40,-20},{40,0.25}},
+        color={208,104,0},
+        smooth=Smooth.None));
+    connect(H2O.chemical, ORR.chemical[4]) annotation (Line(
+        points={{64,-20},{64,-10},{40,-10},{40,0.75}},
+        color={208,104,0},
+        smooth=Smooth.None));
+    connect(HOR.chemical[2], ORR.chemical[2]) annotation (Line(
+        points={{-40,5.55112e-16},{8,-4.87687e-22},{8,-0.25},{40,-0.25}},
+        color={208,104,0},
+        smooth=Smooth.None));
+
+    annotation (
+      Diagram(graphics),
+      experiment(StopTime=360000),
+      experimentSetupOutput,
+      Commands(file="resources/scripts/Dymola/Subregions.Examples.Cell.mos"));
+  end Cell;
+
+  model SimpleSpecies "Simple species model to test reactions"
+    //extends FCSys.BaseClasses.Icons.Names.Middle;
+
+    replaceable FCSys.Characteristics.BaseClasses.Characteristic Data
+      "Characteristic data of the species"
+      annotation (Dialog(group="Material properties"));
+    parameter Q.Volume V=1*U.cm^3 "Volume";
+    parameter Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+    parameter Q.PressureAbsolute p_IC=1*U.atm
+      "<html>Initial pressure (<i>p</i><sub>IC</sub>)</html>"
+      annotation (Dialog(tab="Initialization", group="Scalar properties"));
+    parameter Integer n_lin(
+      final min=1,
+      final max=3) = 1
+      "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
+      annotation (HideResult=true);
+    parameter Boolean overrideEOS=false
+      "<html>Override the equation of state with the value of &rho;<sub>IC</sub></html>"
+      annotation (
+      Evaluate=true,
+      HideResult=true,
+      Dialog(tab="Assumptions", compact=true),
+      choices(__Dymola_checkBox=true));
+    parameter Q.TemperatureAbsolute T_IC(nominal=298.15*U.K, start=defaults.T)
+      "<html>Initial temperature (<i>T</i><sub>IC</sub>)</html>";
+    parameter Q.AmountVolumic rho_IC(min=if overrideEOS then 0 else Modelica.Constants.small,
+        start=1/Data.v_pT(p_IC, T_IC))
+      "<html>Initial volumic amount (&rho;<sub>IC</sub>)</html>";
+
+    Q.Amount N(nominal=1*U.C, start=1*U.C) "Amount";
+    Q.Pressure p(
+      nominal=1*U.atm,
+      start=p_IC,
+      fixed=true) "Pressure";
+    Q.Potential h(nominal=1*U.V) "Specific enthalpy";
+    Q.Potential mu(nominal=1*U.V) "Electrochemical potential";
+
+    FCSys.Connectors.ChemicalOutput chemical(
+      final n_lin=n_lin,
+      final formula=Data.formula,
+      final m=Data.m) annotation (Placement(transformation(extent={{-10,-50},{
+              10,-30}}), iconTransformation(extent={{-10,-50},{10,-30}})));
+
+  protected
+    outer FCSys.BCs.Defaults defaults "Default settings" annotation (Placement(
+          transformation(extent={{-10,-10},{10,10}}), iconTransformation(extent
+            ={{-10,90},{10,110}})));
+
+  equation
+    // Properties
+    if overrideEOS then
+      N = rho_IC*V;
+    elseif Data.isCompressible then
+      p = Data.p_vT(V/N, T);
+    else
+      V = N*Data.v_pT(p, T);
+    end if;
+    h = Data.h0_T(T);
+    mu = chemical.muPerT*T;
+    h = mu + T*Data.s_pT(p, T);
+    chemical.hbar = h/Data.m;
+    chemical.phi = zeros(n_lin);
+
+    // Conservation of material
+    der(N)/U.s = chemical.Ndot;
+    annotation (defaultComponentName="species", Icon(graphics={Rectangle(
+              extent={{-100,40},{100,-40}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Line(
+              points={{-100,-40},{100,-40}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{-100,-40},{-100,40},{100,40},{100,-40}},
+              pattern=LinePattern.None,
+              smooth=Smooth.None),Text(
+              extent={{-100,-20},{100,20}},
+              textString="%name",
+              lineColor={0,0,0})}));
+  end SimpleSpecies;
   annotation (Commands(file="resources/scripts/units-values.mos"
         "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate)."));
 end WorkInProgress;
