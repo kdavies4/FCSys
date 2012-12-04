@@ -1,0 +1,512 @@
+<html>
+<head>
+<title>FCSys.Units</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta name="description" content="Constants and units of physical measure">
+<meta name="keywords" content="Modelica, fuel cell, PEMFC, model">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_BCs.html">BCs</a>**</li>
+    <li><a href="FCSys_Sensors.html">Sensors</a>**</li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
+    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
+    <li><a href="FCSys_Connectors.html">Connectors</a>**</li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Units"></a><a href="FCSys.html#FCSys">FCSys</a>.Units</h2>
+<b>Constants and units of physical measure</b>
+<p>
+<p><h3>Information</h3></p>
+<p>When a physical variable is assigned a quantity, it is the product of a number
+    and a unit [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">BIPM2006</a>].  In <a href="FCSys.html#FCSys">FCSys</a>, units are also assigned numeric values in a consistent
+    manner.  A unit
+    may be the product of any of the units defined in <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a> raised to any power.
+    When a quantity is converted to a number for display, it is divided by its unit.
+    This conveniently handles unit conversion&mdash;without preference to any particular set of units.
+     It can also be used to scale
+    the floating point values associated with quantities.  In order to provide
+    well-scaled quantities, the value of the unit should be increased in inverse proportion
+    to a typical value of a quantity expressed as a number in that unit.  For example, if a model
+    has a length scale on the order of a nanometer, it may be best to chose a unit system that
+    results in a number of 10<sup>9</sup> for the unit meter.
+    </p>
+
+    <p>Regardless of a quantity's unit, it is mapped through the relations in <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a> (<code>U</code>)
+    to a number times a product of five independent base constants or units each raised to the appropriate powers.
+    These five are: the Rydberg constant (<code>U.R_inf</code>), speed of light in vacuum (<code>U.c</code>),
+    Josephson constant (<code>U.k_J</code>), von Klitzing constant (<code>U.R_K</code>), and
+    the candela (<code>U.'cd'</code>).  The constants are related to units through the
+    experimentally-derived definitions (e.g., <code>U.Wb=483597.870e9/U.k_J</code>).
+    Here the designation of "constant" is in the physical sense; even the units
+    are <code>constant</code> in the Modelica sense.  These experimental relations, along with
+    direct relations among the units (e.g., <code>U.V=U.Wb*U.rad/U.s</code>), establish the values
+    of all the units of the International System of Units (SI) and other convenient units for
+    modeling fuel cells.</p>
+
+    <p>This method of defining the base units from measured physical quantities (rather than
+    vice versa) is natural and reflects the way that standards organizations define units.
+    Here, the experimentally-derived relations for the physical constants are
+    used rather the "exact" or "conventional" ones, where they exist
+    [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">NIST2010</a>].</p>
+
+    <p>There are five independent constants or units in <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>,
+    but the International System of Units (SI) has seven independent base units (<code>U.kg</code>,
+    <code>U.m</code>, <code>U.s</code>, <code>U.A</code>, <code>U.mol</code>, <code>U.K</code>, and
+    <code>U.'cd'</code>).  In <a href="FCSys.html#FCSys">FCSys</a>, two additional constraints are imposed in order
+    to simplify the model equations and allow electrons and chemical species to be to represented by the
+    same base <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSpecies">Species</a> model.
+    First, the Faraday constant (<code>U.k_F</code> or <code>96485.3399*U.C/U.mol</code>)
+    is normalized to one.
+    This implies that the mole (<code>U.mol</code>) is proportional to the coulomb (<code>U.C</code> or <code>U.Wb*U.S</code>),
+    which is considered a number of reference particles given the charge number.
+    Also, the gas constant (<code>U.R</code> or <code>8.314472*U.J/(U.mol*U.K)</code>) is normalized to one.
+    Therefore, the kelvin (<code>U.K</code>) is proportional to the volt
+    (<code>U.V</code> or <code>U.J/U.C</code>). In addition, the radian <code>U.rad</code> is defined as a base constant.  However, it must
+    be set equal to one in the current version International System of Units (SI)
+    [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">BIPM2006</a>].</p>
+
+    <p>The user should be aware of several aspects of the implementation.
+    A script
+    ("FCSys/resources/scripts/units.mos") runs a model (<a href="U.html#U.Evaluate">U.Evaluate</a>)
+    to determine the values of the units and defines the conversions to display values as numbers
+    in units.  This script is set to run when <a href="FCSys.html#FCSys">FCSys</a> is loaded via
+    "FCSys/load.mos" or from a link in the "Commands" menu of <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a> (when viewed within
+    Dymola).  Unless the values of the base constants and units are changed, it should be sufficient
+    to simply allow the script to run when the package is loaded.
+    When the <code>der()</code> operator is utilized, it must be divided by
+    the unit second (<code>U.s</code>), since this scaling is not automatic in Modelica's specification
+    and Dymola's implementation.  Currently, it is not possible to define a function that implements a
+    <code>der()</code> function with scaling.</p>
+
+  <p>Note that the common "natural" units systems (Planck, Stoney, Hartree, Rydberg,
+  or Natural) cannot be implemented given the constraints that the gas and
+  Faraday constants equal one.  Since these systems set the Boltzmann constant equal
+  to one, the Planck constant must equal the von Klitzing constant.  That is not the
+  case for any of these systems of units
+  (<a href="http://en.wikipedia.org/wiki/Natural_units">http://en.wikipedia.org/wiki/Natural_units</a>).
+  The structure of <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a> allows the constraints on the Faraday and gas constants
+  to be relaxed, but the models in <a href="FCSys.html#FCSys">FCSys</a> generally do not.</p>
+
+  <p>For more information, see the paper on natural units [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Davies and Paredis, 2012</a>].</p>
+  <p>
+  <b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+  Copyright 2007&ndash;2012, Georgia Tech Research Corporation.
+  </p>
+  <p>
+  <i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+  it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
+  disclaimer of warranty) see <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.ModelicaLicense2">
+  FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href="http://www.modelica.org/licenses/ModelicaLicense2">
+  http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
+  </p><p>
+Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Units.EvaluateS.png" alt="FCSys.Units.Evaluate" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units.html#FCSys.Units.Evaluate">Evaluate</a>
+</td><td>Evaluate the values assigned to constants and units</td></tr>
+<tr><td><img src="images/FCSys.Units.BasesS.png" alt="FCSys.Units.Bases" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases">Bases</a>
+</td><td>Sets of base constants and units</td></tr>
+<tr><td>pi=2*arccos(0)</td><td>pi (<i>&pi;</i>)</td></tr>
+<tr><td>e=exp(1)</td><td>Euler number</td></tr>
+<tr><td>base</td><td>Scalable base constants and units</td></tr>
+<tr><td>rad=base.rad</td><td>radian</td></tr>
+<tr><td>R_inf=base.R_inf</td><td>Rydberg constant (<i>R</i><sub>&infin;</sub>)</td></tr>
+<tr><td>c=base.c</td><td>speed of light in vacuum (<i>c</i>)</td></tr>
+<tr><td>k_J=base.k_J</td><td>Josephson constant (<i>k</i><sub>J</sub>)</td></tr>
+<tr><td>R_K=base.R_K</td><td>von Klitzing constant (<i>R</i><sub>K</sub>)</td></tr>
+<tr><td>'cd'=base.&#39;cd&#39;</td><td>candela</td></tr>
+<tr><td>k_F=base.k_F</td><td>Faraday constant (<i>k</i><sub>F</sub>)</td></tr>
+<tr><td>R=base.R</td><td>gas constant</td></tr>
+<tr><td>m=10973731.568539*rad/R_inf</td><td>meter</td></tr>
+<tr><td>s=299792458*m/c</td><td>second</td></tr>
+<tr><td>Wb=483597.870e9/k_J</td><td>weber</td></tr>
+<tr><td>S=25812.8074434/R_K</td><td>siemen</td></tr>
+<tr><td>mol=96485.3365*Wb*S/k_F</td><td>mole</td></tr>
+<tr><td>K=8.3144621*(Wb*rad)^2*S/(s*mol*R)</td><td>kelvin</td></tr>
+<tr><td>V=Wb*rad/s</td><td>volt</td></tr>
+<tr><td>A=V*S</td><td>ampere</td></tr>
+<tr><td>C=A*s</td><td>coulomb</td></tr>
+<tr><td>J=V*C</td><td>joule</td></tr>
+<tr><td>Gy=(m/s)^2</td><td>gray</td></tr>
+<tr><td>kg=J/Sv</td><td>kilogram </td></tr>
+<tr><td>yotta=1e24</td><td>yotta (Y)</td></tr>
+<tr><td>zetta=1e21</td><td>zetta (Z)</td></tr>
+<tr><td>exa=1e18</td><td>exa (E)</td></tr>
+<tr><td>peta=1e15</td><td>peta (P)</td></tr>
+<tr><td>tera=1e12</td><td>tera (T)</td></tr>
+<tr><td>giga=1e9</td><td>giga (G)</td></tr>
+<tr><td>mega=1e6</td><td>mega (M)</td></tr>
+<tr><td>kilo=1e3</td><td>kilo (k)</td></tr>
+<tr><td>hecto=1e2</td><td>hecto (h)</td></tr>
+<tr><td>deca=1e1</td><td>deca (da)</td></tr>
+<tr><td>deci=1e-1</td><td>deci (d)</td></tr>
+<tr><td>centi=1e-2</td><td>centi (c)</td></tr>
+<tr><td>milli=1e-3</td><td>milli (m)</td></tr>
+<tr><td>micro=1e-6</td><td>micro (u)</td></tr>
+<tr><td>nano=1e-9</td><td>nano (n)</td></tr>
+<tr><td>pico=1e-12</td><td>pico (p)</td></tr>
+<tr><td>femto=1e-15</td><td>femto (f)</td></tr>
+<tr><td>atto=1e-18</td><td>atto (a)</td></tr>
+<tr><td>zepto=1e-21</td><td>zepto (z)</td></tr>
+<tr><td>yocto=1e-24</td><td>yocto (y)</td></tr>
+<tr><td>cyc=2*pi*rad</td><td>cycle</td></tr>
+<tr><td>Hz=cyc/s</td><td>hertz</td></tr>
+<tr><td>sr=rad^2</td><td>steradian</td></tr>
+<tr><td>N=J/m</td><td>newton</td></tr>
+<tr><td>Pa=N/m^2</td><td>pascal</td></tr>
+<tr><td>W=J/s</td><td>watt</td></tr>
+<tr><td>F=C/V</td><td>farad</td></tr>
+<tr><td>ohm=1/S</td><td>ohm (&Omega;)</td></tr>
+<tr><td>H=V*s/A</td><td>henry</td></tr>
+<tr><td>T=Wb/m^2</td><td>tesla</td></tr>
+<tr><td>lm=&#39;cd&#39;*sr</td><td>lumen</td></tr>
+<tr><td>lx=lm/m^2</td><td>lux</td></tr>
+<tr><td>Bq=Hz</td><td>becquerel</td></tr>
+<tr><td>Sv=Gy</td><td>sievert</td></tr>
+<tr><td>kat=mol/s</td><td>katal</td></tr>
+<tr><td>g=kg/kilo</td><td>gram</td></tr>
+<tr><td>min=60*s</td><td>minute</td></tr>
+<tr><td>hr=60*min</td><td>hour</td></tr>
+<tr><td>day=24*hr</td><td>day</td></tr>
+<tr><td>degree=2*pi*rad/360</td><td>degree (&deg;)</td></tr>
+<tr><td>L=(deci*m)^3</td><td>liter (L or l)</td></tr>
+<tr><td>G_0=2/R_K</td><td>conductance quantum (<i>G</i><sub>0</sub>)</td></tr>
+<tr><td>Phi_0=1/k_J</td><td>magnetic flux quantum (&Phi;<sub>0</sub>)</td></tr>
+<tr><td>q=G_0*Phi_0</td><td>elementary charge</td></tr>
+<tr><td>h=2*q*Phi_0</td><td>Planck constant</td></tr>
+<tr><td>alpha=pi*1e-7*c*s*G_0/(m*S)</td><td>fine-structure constant (&alpha;)</td></tr>
+<tr><td>Z_0=2*R_K*alpha</td><td>characteristic impedance of vacuum (<i>Z</i><sub>0</sub>)</td></tr>
+<tr><td>mu_0=Z_0/c</td><td>magnetic constant (&mu;<sub>0</sub>)</td></tr>
+<tr><td>epsilon_0=1/(Z_0*c)</td><td>electric constant (&epsilon;<sub>0</sub>)</td></tr>
+<tr><td>k_A=mu_0/(4*pi)</td><td>magnetic force constant (<i>k</i><sub>A</sub>)</td></tr>
+<tr><td>k_e=k_A*c^2</td><td>Coulomb constant (<i>k</i><sub>e</sub>)</td></tr>
+<tr><td>E_h=2*R_inf*h*c</td><td>Hartree energy (<i>E</i><sub>h</sub>)</td></tr>
+<tr><td>eV=q*V</td><td>electron volt</td></tr>
+<tr><td>N_A=k_F/q</td><td>Avogadro constant (<i>N</i><sub>A</sub>)</td></tr>
+<tr><td>k_B=R/N_A</td><td>Boltzmann constant (<i>k</i><sub>B</sub>)</td></tr>
+<tr><td>c_1=cyc*h*c^2</td><td>first radiation constant (<i>c</i><sub>1</sub>)</td></tr>
+<tr><td>c_2=h*c/k_B</td><td>second radiation constant (<i>c</i><sub>2</sub>)</td></tr>
+<tr><td>c_3_lambda=c_2/4.965114231744276</td><td>Wien wavelength displacement law constant (<i>c</i><sub>3 &lambda;</sub>)</td></tr>
+<tr><td>c_3_f=2.821439372122079*k_B/h</td><td>Wien frequency displacement law constant (<i>c</i><sub>3 <i>f</i></sub>)</td></tr>
+<tr><td>sigma=2*pi*(k_B*pi)^4/(15*(h*rad)^3*c^2)</td><td>Stefan-Boltzmann constant (&sigma;)</td></tr>
+<tr><td>bar=1e5*Pa</td><td>bar</td></tr>
+<tr><td>Aring=0.1*nano*m</td><td>angstrom (&#8491;)</td></tr>
+<tr><td>atm=101325*Pa</td><td>atmosphere</td></tr>
+<tr><td>kPa=kilo*Pa</td><td>kilopascal</td></tr>
+<tr><td>cm=centi*m</td><td>centimeter</td></tr>
+<tr><td>mm=milli*m</td><td>millimeter</td></tr>
+<tr><td>'%'=centi</td><td>percent (%)</td></tr>
+<tr><td>M=U.mol/U.L</td><td>molar</td></tr>
+</table>
+<p><h3>Types and constants</h3>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> pi=2*<font color="red">arccos</font>(0) <font color="darkgreen">&quot;pi (<i>&pi;</i>)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> e=<font color="red">exp</font>(1) <font color="darkgreen">&quot;Euler number&quot;</font>;</pre><p>
+<pre><font color="blue">replaceable </font><font color="blue">constant </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.ScaledFC">Bases.ScaledFC</a> base <font color="blue">constrainedby </font>Bases.Base <font color="darkgreen">
+  &quot;Scalable base constants and units&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Q.Angle</a> rad=base.rad <font color="darkgreen">&quot;radian&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Wavenumber">Q.Wavenumber</a> R_inf=base.R_inf <font color="darkgreen">
+  &quot;Rydberg constant (<i>R</i><sub>&infin;</sub>)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> c=base.c <font color="darkgreen">
+  &quot;speed of light in vacuum (<i>c</i>)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.MagneticFluxReciprocal">Q.MagneticFluxReciprocal</a> k_J=base.k_J <font color="darkgreen">
+  &quot;Josephson constant (<i>k</i><sub>J</sub>)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistanceElectrical">Q.ResistanceElectrical</a> R_K=base.R_K <font color="darkgreen">
+  &quot;von Klitzing constant (<i>R</i><sub>K</sub>)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PowerRadiant">Q.PowerRadiant</a> &#39;cd&#39;=base.'cd' <font color="darkgreen">&quot;candela&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> k_F=base.k_F <font color="darkgreen">
+  &quot;Faraday constant (<i>k</i><sub>F</sub>)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> R=base.R <font color="darkgreen">&quot;gas constant&quot;</font>;</pre><p>
+<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> m=10973731.568539*rad/R_inf <font color="darkgreen">&quot;meter&quot;</font>;</pre><p>
+<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> s=299792458*m/c <font color="darkgreen">&quot;second&quot;</font>;</pre><p>
+<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.MagneticFlux">Q.MagneticFlux</a> Wb=483597.870e9/k_J <font color="darkgreen">&quot;weber&quot;</font>;</pre><p>
+<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.ConductanceElectrical">Q.ConductanceElectrical</a> S=25812.8074434/R_K <font color="darkgreen">&quot;siemen&quot;</font>;</pre><p>
+<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> mol=96485.3365*Wb*S/k_F <font color="darkgreen">&quot;mole&quot;</font>;</pre><p>
+<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> K=8.3144621*(Wb*rad)^2*S/(s*mol*R) <font color="darkgreen">&quot;kelvin&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> V=Wb*rad/s <font color="darkgreen">&quot;volt&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> A=V*S <font color="darkgreen">&quot;ampere&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> C=A*s <font color="darkgreen">&quot;coulomb&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Energy">Q.Energy</a> J=V*C <font color="darkgreen">&quot;joule&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity2">Q.Velocity2</a> Gy=(m/s)^2 <font color="darkgreen">&quot;gray&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Mass">Q.Mass</a> kg=J/Sv <font color="darkgreen">&quot;kilogram &quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> yotta=1e24 <font color="darkgreen">&quot;yotta (Y)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> zetta=1e21 <font color="darkgreen">&quot;zetta (Z)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> exa=1e18 <font color="darkgreen">&quot;exa (E)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> peta=1e15 <font color="darkgreen">&quot;peta (P)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> tera=1e12 <font color="darkgreen">&quot;tera (T)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> giga=1e9 <font color="darkgreen">&quot;giga (G)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> mega=1e6 <font color="darkgreen">&quot;mega (M)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> kilo=1e3 <font color="darkgreen">&quot;kilo (k)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> hecto=1e2 <font color="darkgreen">&quot;hecto (h)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> deca=1e1 <font color="darkgreen">&quot;deca (da)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> deci=1e-1 <font color="darkgreen">&quot;deci (d)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> centi=1e-2 <font color="darkgreen">&quot;centi (c)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> milli=1e-3 <font color="darkgreen">&quot;milli (m)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> micro=1e-6 <font color="darkgreen">&quot;micro (u)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> nano=1e-9 <font color="darkgreen">&quot;nano (n)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> pico=1e-12 <font color="darkgreen">&quot;pico (p)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> femto=1e-15 <font color="darkgreen">&quot;femto (f)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> atto=1e-18 <font color="darkgreen">&quot;atto (a)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> zepto=1e-21 <font color="darkgreen">&quot;zepto (z)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> yocto=1e-24 <font color="darkgreen">&quot;yocto (y)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Q.Angle</a> cyc=2*pi*rad <font color="darkgreen">&quot;cycle&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Frequency">Q.Frequency</a> Hz=cyc/s <font color="darkgreen">&quot;hertz&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle2">Q.Angle2</a> sr=rad^2 <font color="darkgreen">&quot;steradian&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> N=J/m <font color="darkgreen">&quot;newton&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> Pa=N/m^2 <font color="darkgreen">&quot;pascal&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> W=J/s <font color="darkgreen">&quot;watt&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Capacitance">Q.Capacitance</a> F=C/V <font color="darkgreen">&quot;farad&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistanceElectrical">Q.ResistanceElectrical</a> ohm=1/S <font color="darkgreen">&quot;ohm (&Omega;)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Inductance">Q.Inductance</a> H=V*s/A <font color="darkgreen">&quot;henry&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.MagneticFluxAreic">Q.MagneticFluxAreic</a> T=Wb/m^2 <font color="darkgreen">&quot;tesla&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> lm='cd'*sr <font color="darkgreen">&quot;lumen&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PowerAreic">Q.PowerAreic</a> lx=lm/m^2 <font color="darkgreen">&quot;lux&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Frequency">Q.Frequency</a> Bq=Hz <font color="darkgreen">&quot;becquerel&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity2">Q.Velocity2</a> Sv=Gy <font color="darkgreen">&quot;sievert&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> kat=mol/s <font color="darkgreen">&quot;katal&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Mass">Q.Mass</a> g=kg/kilo <font color="darkgreen">&quot;gram&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> min=60*s <font color="darkgreen">&quot;minute&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> hr=60*min <font color="darkgreen">&quot;hour&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> day=24*hr <font color="darkgreen">&quot;day&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Q.Angle</a> degree=2*pi*rad/360 <font color="darkgreen">&quot;degree (&deg;)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> L=(deci*m)^3 <font color="darkgreen">&quot;liter (L or l)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.ConductanceElectrical">Q.ConductanceElectrical</a> G_0=2/R_K <font color="darkgreen">
+  &quot;conductance quantum (<i>G</i><sub>0</sub>)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.MagneticFlux">Q.MagneticFlux</a> Phi_0=1/k_J <font color="darkgreen">
+  &quot;magnetic flux quantum (&Phi;<sub>0</sub>)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> q=G_0*Phi_0 <font color="darkgreen">&quot;elementary charge&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.MomentumAngular">Q.MomentumAngular</a> h=2*q*Phi_0 <font color="darkgreen">&quot;Planck constant&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> alpha=pi*1e-7*c*s*G_0/(m*S) <font color="darkgreen">
+  &quot;fine-structure constant (&alpha;)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistanceElectrical">Q.ResistanceElectrical</a> Z_0=2*R_K*alpha <font color="darkgreen">
+  &quot;characteristic impedance of vacuum (<i>Z</i><sub>0</sub>)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Permeability">Q.Permeability</a> mu_0=Z_0/c <font color="darkgreen">
+  &quot;magnetic constant (&mu;<sub>0</sub>)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Permittivity">Q.Permittivity</a> epsilon_0=1/(Z_0*c) <font color="darkgreen">
+  &quot;electric constant (&epsilon;<sub>0</sub>)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Permeability">Q.Permeability</a> k_A=mu_0/(4*pi) <font color="darkgreen">
+  &quot;magnetic force constant (<i>k</i><sub>A</sub>)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PermittivityReciprocal">Q.PermittivityReciprocal</a> k_e=k_A*c^2 <font color="darkgreen">
+  &quot;Coulomb constant (<i>k</i><sub>e</sub>)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Energy">Q.Energy</a> E_h=2*R_inf*h*c <font color="darkgreen">
+  &quot;Hartree energy (<i>E</i><sub>h</sub>)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Energy">Q.Energy</a> eV=q*V <font color="darkgreen">&quot;electron volt&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.AmountReciprocal">Q.AmountReciprocal</a> N_A=k_F/q <font color="darkgreen">
+  &quot;Avogadro constant (<i>N</i><sub>A</sub>)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> k_B=R/N_A <font color="darkgreen">
+  &quot;Boltzmann constant (<i>k</i><sub>B</sub>)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PowerArea">Q.PowerArea</a> c_1=cyc*h*c^2 <font color="darkgreen">
+  &quot;first radiation constant (<i>c</i><sub>1</sub>)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialPerWavenumber">Q.PotentialPerWavenumber</a> c_2=h*c/k_B <font color="darkgreen">
+  &quot;second radiation constant (<i>c</i><sub>2</sub>)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialPerWavenumber">Q.PotentialPerWavenumber</a> c_3_lambda=c_2/4.965114231744276 <font color="darkgreen">
+  &quot;Wien wavelength displacement law constant (<i>c</i><sub>3 &lambda;</sub>)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.MagneticFluxReciprocal">Q.MagneticFluxReciprocal</a> c_3_f=2.821439372122079*k_B/h <font color="darkgreen">
+  &quot;Wien frequency displacement law constant (<i>c</i><sub>3 <i>f</i></sub>)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PowerAreicPerPotential4">Q.PowerAreicPerPotential4</a> sigma=2*pi*(k_B*pi)^4/(15*(h*rad)^3*c^2)
+  <font color="darkgreen">&quot;Stefan-Boltzmann constant (&sigma;)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> bar=1e5*Pa <font color="darkgreen">&quot;bar&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> Aring=0.1*nano*m <font color="darkgreen">&quot;angstrom (&#8491;)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> atm=101325*Pa <font color="darkgreen">&quot;atmosphere&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> kPa=kilo*Pa <font color="darkgreen">&quot;kilopascal&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> cm=centi*m <font color="darkgreen">&quot;centimeter&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> mm=milli*m <font color="darkgreen">&quot;millimeter&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> &#39;%&#39;=centi <font color="darkgreen">&quot;percent (%)&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.AmountVolumic">Q.AmountVolumic</a> M=U.mol/U.L <font color="darkgreen">&quot;molar&quot;</font>;</pre><p>
+<hr>
+
+<h2><img src="images/FCSys.Units.EvaluateI.png" alt="FCSys.Units.Evaluate" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Units.Evaluate"></a><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>.Evaluate</h2>
+<b>Evaluate the values assigned to constants and units</b><p>
+<p><h3>Information</h3></p>
+<p>This model is used by the units script ("FCSys/resources/scripts/units.mos") to
+  establish the values of the units in order to convert values to numbers for display.</p>
+  <p>For more information, see the documentation in the
+  <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a> package.</p><p>
+Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Evaluate <font color="darkgreen">&quot;Evaluate the values assigned to constants and units&quot;</font>
+  <font color="blue">extends </font><a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
+
+  <font color="darkgreen">// -----------------------------------------------------------------------</font>
+  <font color="darkgreen">// Mathematical constants</font>
+
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> pi=U.pi <font color="darkgreen">&quot;pi&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> e=U.e <font color="darkgreen">&quot;Euler number&quot;</font>;
+
+  <font color="darkgreen">// -----------------------------------------------------------------------</font>
+  <font color="darkgreen">// Base physical constants and units</font>
+
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Q.Angle</a> rad=U.rad <font color="darkgreen">&quot;radian&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Wavenumber">Q.Wavenumber</a> R_inf=U.R_inf <font color="darkgreen">&quot;Rydberg constant&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> c=U.c <font color="darkgreen">&quot;speed of light in vacuum&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.MagneticFluxReciprocal">Q.MagneticFluxReciprocal</a> k_J=U.k_J <font color="darkgreen">&quot;Josephson constant&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistanceElectrical">Q.ResistanceElectrical</a> R_K=U.R_K <font color="darkgreen">&quot;von Klitzing constant&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PowerRadiant">Q.PowerRadiant</a> &#39;cd&#39;=U.'cd' <font color="darkgreen">&quot;candela&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> k_F=U.k_F <font color="darkgreen">&quot;Faraday constant&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> R=U.R <font color="darkgreen">&quot;gas constant&quot;</font>;
+
+  <font color="darkgreen">// -----------------------------------------------------------------------</font>
+  <font color="darkgreen">// Empirical units</font>
+
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> m=U.m <font color="darkgreen">&quot;meter&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> s=U.s <font color="darkgreen">&quot;second&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.MagneticFlux">Q.MagneticFlux</a> Wb=U.Wb <font color="darkgreen">&quot;weber&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.ConductanceElectrical">Q.ConductanceElectrical</a> S=U.S <font color="darkgreen">&quot;siemen&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> mol=U.mol <font color="darkgreen">&quot;mole&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> K=U.K <font color="darkgreen">&quot;kelvin&quot;</font>;
+
+  <font color="darkgreen">// -----------------------------------------------------------------------</font>
+  <font color="darkgreen">// SI prefixes [BIPM2006, Table 5]</font>
+
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> yotta=U.yotta <font color="darkgreen">&quot;yotta (Y)&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> zetta=U.zetta <font color="darkgreen">&quot;zetta (Z)&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> exa=U.exa <font color="darkgreen">&quot;exa (E)&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> peta=U.peta <font color="darkgreen">&quot;peta (P)&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> tera=U.tera <font color="darkgreen">&quot;tera (T)&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> giga=U.giga <font color="darkgreen">&quot;giga (G)&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> mega=U.mega <font color="darkgreen">&quot;mega (M)&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> kilo=U.kilo <font color="darkgreen">&quot;kilo (k)&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> hecto=U.hecto <font color="darkgreen">&quot;hecto (h)&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> deca=U.deca <font color="darkgreen">&quot;deca (da)&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> deci=U.deci <font color="darkgreen">&quot;deci (d)&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> centi=U.centi <font color="darkgreen">&quot;centi (c)&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> milli=U.milli <font color="darkgreen">&quot;milli (m)&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> micro=U.micro <font color="darkgreen">&quot;micro (u)&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> nano=U.nano <font color="darkgreen">&quot;nano (n)&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> pico=U.pico <font color="darkgreen">&quot;pico (p)&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> femto=U.femto <font color="darkgreen">&quot;femto (f)&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> atto=U.atto <font color="darkgreen">&quot;atto (a)&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> zepto=U.zepto <font color="darkgreen">&quot;zepto (z)&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> yocto=U.yocto <font color="darkgreen">&quot;yocto (y)&quot;</font>;
+
+  <font color="darkgreen">// -----------------------------------------------------------------------</font>
+  <font color="darkgreen">// SI base units [BIPM2006, Table 1] and intermediate units</font>
+
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> V=U.V <font color="darkgreen">&quot;volt&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> A=U.A <font color="darkgreen">&quot;ampere&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> C=U.C <font color="darkgreen">&quot;coulomb&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Energy">Q.Energy</a> J=U.J <font color="darkgreen">&quot;joule&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity2">Q.Velocity2</a> Sv=U.Sv <font color="darkgreen">&quot;sievert&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Mass">Q.Mass</a> kg=U.kg <font color="darkgreen">&quot;kilogram &quot;</font>;
+
+  <font color="darkgreen">// -----------------------------------------------------------------------</font>
+  <font color="darkgreen">// Coherent derived units in the SI with special names and symbols</font>
+  <font color="darkgreen">// [BIPM2006, Table 3]</font>
+
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Q.Angle</a> cyc=U.cyc <font color="darkgreen">&quot;cycle&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Frequency">Q.Frequency</a> Hz=U.Hz <font color="darkgreen">&quot;hertz&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle2">Q.Angle2</a> sr=U.sr <font color="darkgreen">&quot;steradian&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> N=U.N <font color="darkgreen">&quot;newton&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> Pa=U.Pa <font color="darkgreen">&quot;pascal&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> W=U.W <font color="darkgreen">&quot;watt&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Capacitance">Q.Capacitance</a> F=U.F <font color="darkgreen">&quot;farad&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistanceElectrical">Q.ResistanceElectrical</a> ohm=U.ohm <font color="darkgreen">&quot;ohm (Omega)&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Inductance">Q.Inductance</a> H=U.H <font color="darkgreen">&quot;henry&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.MagneticFluxAreic">Q.MagneticFluxAreic</a> T=U.T <font color="darkgreen">&quot;tesla&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> lm=U.lm <font color="darkgreen">&quot;lumen&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PowerAreic">Q.PowerAreic</a> lx=U.lx <font color="darkgreen">&quot;lux&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Frequency">Q.Frequency</a> Bq=U.Bq <font color="darkgreen">&quot;becquerel&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity2">Q.Velocity2</a> Gy=U.Gy <font color="darkgreen">&quot;gray&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> kat=U.kat <font color="darkgreen">&quot;katal&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Mass">Q.Mass</a> g=U.g <font color="darkgreen">&quot;gram&quot;</font>;
+
+  <font color="darkgreen">// -----------------------------------------------------------------------</font>
+  <font color="darkgreen">// Non-SI units accepted for use with SI units [BIPM2006, Table 6].</font>
+
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> min=U.min <font color="darkgreen">&quot;minute&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> hr=U.hr <font color="darkgreen">&quot;hour&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> day=U.day <font color="darkgreen">&quot;day&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Q.Angle</a> degree=U.degree <font color="darkgreen">&quot;degree&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> L=U.L <font color="darkgreen">&quot;liter (L or l)&quot;</font>;
+
+  <font color="darkgreen">// -----------------------------------------------------------------------</font>
+  <font color="darkgreen">// Physical constants</font>
+
+  <font color="darkgreen">// Electromagnetism</font>
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.ConductanceElectrical">Q.ConductanceElectrical</a> G_0=U.G_0 <font color="darkgreen">&quot;conductance quantum&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.MagneticFlux">Q.MagneticFlux</a> Phi_0=U.Phi_0 <font color="darkgreen">&quot;magnetic flux quantum&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> q=U.q <font color="darkgreen">&quot;elementary charge&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.MomentumAngular">Q.MomentumAngular</a> h=U.h <font color="darkgreen">&quot;Planck constant&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> alpha=U.alpha <font color="darkgreen">&quot;fine-structure constant&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistanceElectrical">Q.ResistanceElectrical</a> Z_0=U.Z_0 <font color="darkgreen">
+    &quot;characteristic impedance of vacuum&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Permeability">Q.Permeability</a> mu_0=U.mu_0 <font color="darkgreen">&quot;magnetic constant&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Permittivity">Q.Permittivity</a> epsilon_0=U.epsilon_0 <font color="darkgreen">&quot;electric constant&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Permeability">Q.Permeability</a> k_A=U.k_A <font color="darkgreen">&quot;magnetic force constant&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PermittivityReciprocal">Q.PermittivityReciprocal</a> k_e=U.k_e <font color="darkgreen">&quot;Coulomb constant&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Energy">Q.Energy</a> E_h=U.E_h <font color="darkgreen">&quot;Hartree energy&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Energy">Q.Energy</a> eV=U.eV <font color="darkgreen">&quot;electron volt&quot;</font>;
+
+  <font color="darkgreen">// Electrochemistry</font>
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.AmountReciprocal">Q.AmountReciprocal</a> N_A=U.N_A <font color="darkgreen">&quot;Avogadro constant&quot;</font>;
+
+  <font color="darkgreen">// Thermal physics</font>
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> k_B=U.k_B <font color="darkgreen">&quot;Boltzmann constant&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PowerArea">Q.PowerArea</a> c_1=U.c_1 <font color="darkgreen">&quot;first radiation constant&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialPerWavenumber">Q.PotentialPerWavenumber</a> c_2=U.c_2 <font color="darkgreen">&quot;second radiation constant&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialPerWavenumber">Q.PotentialPerWavenumber</a> c_3_f=U.c_3_f <font color="darkgreen">
+    &quot;Wien frequency displacement law constant&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.MagneticFluxReciprocal">Q.MagneticFluxReciprocal</a> c_3_lambda=U.c_3_lambda <font color="darkgreen">
+    &quot;Wien wavelength displacement law constant&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PowerAreicPerPotential4">Q.PowerAreicPerPotential4</a> sigma=U.sigma <font color="darkgreen">
+    &quot;Stefan-Boltzmann constant&quot;</font>;
+
+  <font color="darkgreen">// -----------------------------------------------------------------------</font>
+  <font color="darkgreen">// Selected other non-SI units from [BIPM2006, Table 8]</font>
+
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> bar=U.bar <font color="darkgreen">&quot;bar&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> Aring=U.Aring <font color="darkgreen">&quot;angstrom&quot;</font>;
+
+  <font color="darkgreen">// -----------------------------------------------------------------------</font>
+  <font color="darkgreen">// Additional units that are useful for fuel cells</font>
+
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> atm=U.atm <font color="darkgreen">&quot;atmosphere&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> kPa=U.kPa <font color="darkgreen">&quot;kilopascal&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> cm=U.cm <font color="darkgreen">&quot;centimeter&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> mm=U.mm <font color="darkgreen">&quot;millimeter&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> &#39;%&#39;=U.'%' <font color="darkgreen">&quot;percent&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.AmountVolumic">Q.AmountVolumic</a> M=U.M <font color="darkgreen">&quot;molar&quot;</font>;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Evaluate;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Dec 10 17:54:27 2012.
+</div>
+</body>
+</html>

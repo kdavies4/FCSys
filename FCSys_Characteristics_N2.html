@@ -1,0 +1,137 @@
+<html>
+<head>
+<title>FCSys.Characteristics.N2</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta name="description" content="&lt;html&gt;N&lt;sub&gt;2&lt;/sub&gt;&lt;/html&gt;">
+<meta name="keywords" content="Modelica, fuel cell, PEMFC, model">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_BCs.html">BCs</a>**</li>
+    <li><a href="FCSys_Sensors.html">Sensors</a>**</li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
+    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
+    <li><a href="FCSys_Connectors.html">Connectors</a>**</li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE N2<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<h2><a name="FCSys.Characteristics.N2"></a><a href="FCSys_Characteristics.html#FCSys.Characteristics">FCSys.Characteristics</a>.N2</h2>
+<b>N<sub>2</sub></b>
+<p>
+<p><h3>Information</h3></p>
+Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_MaterialPropertiesPackage.html#Modelica.Icons.MaterialPropertiesPackage">Modelica.Icons.MaterialPropertiesPackage</a> (Icon for package containing property classes).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Characteristics.C.GraphiteS.png" alt="FCSys.Characteristics.N2.Gas" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_N2.html#FCSys.Characteristics.N2.Gas">Gas</a>
+</td><td>N2 gas</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.Characteristics.N2.GasI.png" alt="FCSys.Characteristics.N2.Gas" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Characteristics.N2.Gas"></a><a href="FCSys_Characteristics_N2.html#FCSys.Characteristics.N2">FCSys.Characteristics.N2</a>.Gas</h2>
+<b>N2 gas</b><p>
+<p><h3>Information</h3></p>
+
+                  <p>Notes:
+     <ul>
+  <li>According to [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Avogadro1.03</a>], the (center-to-center)
+   bond length of N-N is 145.2 pm.  The radius of N is from
+   <a href="http://en.wikipedia.org/wiki/Nitrogen">http://en.wikipedia.org/wiki/Nitrogen</a>.  See also
+   <a href="http://en.wikipedia.org/wiki/Van_der_Waals_radius">http://en.wikipedia.org/wiki/Van_der_Waals_radius</a>.</li>
+  <li>The virial coefficients are from Dymond et al. (<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">2002</a>, p. 69).  The
+  temperature range of the coefficients is [75, 745] K, but this is not enforced in the functions.  More precise virial coefficients are available from
+  <a href="http://www.tpub.com/content/nasa1996/NASA-96-cr4755/NASA-96-cr47550059.htm">http://www.tpub.com/content/nasa1996/NASA-96-cr4755/NASA-96-cr47550059.htm</a>.</li>
+     </ul>
+     </p>
+  <p>For more information, see the
+  <a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a> record.</p><p>
+Extends from <a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA">BaseClasses.CharacteristicNASA</a> (Thermodynamic record with transport properties based on NASA CEA).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>String</td><td>formula</td><td>Data.name</td><td>Chemical formula</td></tr>
+<tr><td>String</td><td>phase</td><td>&quot;gas&quot;</td><td>Phase (e.g., &quot;gas&quot;)</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.MassSpecific">MassSpecific</a></td><td>m</td><td>Data.MM*U.kg/U.mol</td><td>Specific mass [m/N]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.LengthSpecific">LengthSpecific</a></td><td>r</td><td>(155 + 145.2/2)*U.pico*U.m/U.q</td><td>Specific radius [l/N]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialChemical">PotentialChemical</a></td><td>Deltah0_f</td><td>Data.MM*Data.Hf*U.J/U.mol</td><td>Enthalpy of formation at 298.15 K, <i>p</i>&deg; (&Delta;<i>h</i>&deg;<sub>f</sub>)</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialChemical">PotentialChemical</a></td><td>Deltah0</td><td>Data.MM*Data.H0*U.J/U.mol</td><td><i>h</i>&deg;(298.15 K) - <i>h</i>&deg;(0 K) (&Delta;<i>h</i>&deg;)</td></tr>
+<tr><td>Real</td><td>b_c[size(T_lim_c, 1) - 1, :]</td><td>{Data.alow,Data.ahigh,{8.310...</td><td>Coefficients of specific heat capacity at <i>p</i>&deg; as a polynomial in <i>T</i> (<i>b</i><sub><i>c</i></sub>)</td></tr>
+<tr><td>Real</td><td>B_c[size(T_lim_c, 1) - 1, 2]</td><td>{Data.blow,Data.bhigh,{4.938...</td><td>Integration constants for specific enthalpy and entropy (<i>B</i><sub><i>c</i></sub>)</td></tr>
+<tr><td>Real</td><td>b_eta[size(T_lim_alpha, 1) - 1, 4]</td><td>{{0.62526577,-31.779652*U.K,...</td><td>Constants in the NASA CEA correlation for viscosity</td></tr>
+<tr><td>Real</td><td>b_lambda[size(T_lim_alpha, 1) - 1, 4]</td><td>{{0.85439436,105.73224*U.K,-...</td><td>Constants in the NASA CEA correlation for thermal conductivity</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">record</font> Gas <font color="darkgreen">&quot;N2 gas&quot;</font>
+  <font color="blue">import </font>Data = Modelica.Media.IdealGases.Common.SingleGasesData.N2;
+
+  <font color="blue">extends </font><a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA">BaseClasses.CharacteristicNASA</a>(
+    <font color="blue">final </font>formula=Data.name,
+    <font color="blue">final </font>phase=&quot;gas&quot;,
+    <font color="blue">final </font>m=Data.MM*U.kg/U.mol,
+    specVolPow={-1,-4},
+    b_v={{0,0,0,0,1},{2.7198e9*U.K^4,6.1253e7*U.K^3,-1.4164e6*U.K^2,-9337.8*U.K,
+        40.286}*U.cm^3/U.mol},
+    p_min=1e-323*p0,
+    Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
+    Deltah0=Data.MM*Data.H0*U.J/U.mol,
+    T_lim_c={200.000,Data.Tlimit,6000.000,20000.000}*U.K,
+    b_c={Data.alow,Data.ahigh,{8.310139160e8,-6.420733540e5,2.020264635e2,-3.065092046e-2,
+        2.486903333e-6,-9.705954110e-11,1.437538881e-15}} .* <font color="red">fill</font>({U.K^(3 - i) <font color="blue">
+        for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(Data.alow, 1)}, <font color="red">size</font>(T_lim_c, 1) - 1),
+    B_c={Data.blow,Data.bhigh,{4.938707040e6,-1.672099740e3}} .* <font color="red">fill</font>({U.K,1}, <font color="red">
+        size</font>(T_lim_c, 1) - 1) - b_c[:, 2:3]*<font color="red">ln</font>(U.K),
+    r=(155 + 145.2/2)*U.pico*U.m/U.q,
+    T_lim_alpha={200.0,1000.0,5000.0,15000.0}*U.K,
+    b_eta={{0.62526577,-31.779652*U.K,-0.16407983e4*U.K^2,1.7454992},{0.87395209,
+        561.52222*U.K,-0.17394809e6*U.K^2,-0.39335958},{0.88503551,909.02171*U.K,
+        -0.73129061e6*U.K^2,-0.53503838}},
+    b_lambda={{0.85439436,105.73224*U.K,-0.12347848e5*U.K^2,0.47793128},{0.88407146,
+        133.57293*U.K,-0.11429640e5*U.K^2,0.24417019},{2.4176185,0.80477749e4*U.K,
+        0.31055802e7*U.K^2,-14.517761}});
+  <font color="darkgreen">// Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)</font>
+  <font color="darkgreen">// doesn&#39;t.</font>
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Gas;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Dec 10 17:54:22 2012.
+</div>
+</body>
+</html>

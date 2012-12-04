@@ -70,11 +70,11 @@ rpls = [
     <li><a href="FCSys_Regions.html">Regions</a>**</li>
     <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
     <li><a href="FCSys_Connectors.html">Connectors</a>**</li>
-    <li><a href="FCSys_Characteristics.html">Characteristics</a>**</li>
-    <li><a href="FCSys_Units.html">Units</a>**</li>
-    <li><a href="FCSys_Quantities.html">Quantities</a>**</li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
     <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
-    <li>**Check back soon or contact kdavies4 at gmail.com.</li>
+    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
     </ul>"""),
     ]
 

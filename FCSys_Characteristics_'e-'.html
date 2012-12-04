@@ -1,0 +1,157 @@
+<html>
+<head>
+<title>FCSys.Characteristics.'e-'</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta name="description" content="&lt;html&gt;e&lt;sup&gt;-&lt;/sup&gt;&lt;/html&gt;">
+<meta name="keywords" content="Modelica, fuel cell, PEMFC, model">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_BCs.html">BCs</a>**</li>
+    <li><a href="FCSys_Sensors.html">Sensors</a>**</li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
+    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
+    <li><a href="FCSys_Connectors.html">Connectors</a>**</li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE 'e-'<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<h2><a name="FCSys.Characteristics.'e-'"></a><a href="FCSys_Characteristics.html#FCSys.Characteristics">FCSys.Characteristics</a>.'e-'</h2>
+<b>e<sup>-</sup></b>
+<p>
+<p><h3>Information</h3></p>
+Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_MaterialPropertiesPackage.html#Modelica.Icons.MaterialPropertiesPackage">Modelica.Icons.MaterialPropertiesPackage</a> (Icon for package containing property classes).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Characteristics.C.GraphiteS.png" alt="FCSys.Characteristics.'e-'.Gas" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_'e-'.html#FCSys.Characteristics.'e-'.Gas">Gas</a>
+</td><td>e- gas</td></tr>
+<tr><td><img src="images/FCSys.Characteristics.C.GraphiteS.png" alt="FCSys.Characteristics.'e-'.Graphite" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_'e-'.html#FCSys.Characteristics.'e-'.Graphite">Graphite</a>
+</td><td>e- in graphite</td></tr>
+</table>
+<hr>
+
+<h2><img src="FCSys.Characteristics.'e-'images/.GasI.png" alt="FCSys.Characteristics.'e-'.Gas" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Characteristics.'e-'.Gas"></a><a href="FCSys_Characteristics_'e-'.html#FCSys.Characteristics.'e-'">FCSys.Characteristics.'e-'</a>.Gas</h2>
+<b>e- gas</b><p>
+<p><h3>Information</h3></p>
+
+     <p>Notes:
+     <ul>
+     <li>The equation for the radius is the classical radius of an electron based on
+  <a href="http://en.wikipedia.org/wiki/Classical_electron_radius">http://en.wikipedia.org/wiki/Classical_electron_radius</a>.</li>
+  <li>McBride and Gordon [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride1996</a>] provide correlations for the transport
+  properties of e<sup>-</sup> gas.  However, they are not entered here, since they
+  contain only one temperature range (2000 to 5000 K) which is beyond the expected operating range of the model.</li>
+  <li>
+  The thermodynamic data [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride2002</a>] splits the correlations into three
+  temperature ranges, but the coefficients are the same for each.
+   Therefore, the temperature limits are set here such that the entire
+   range is handled without switching.  The lower temperature limit
+   in the source data is 298.150 K, but here it is expanded down to 200 K.
+   The constants are independent of temperature anyway.
+  </li>
+</ul>
+</p>
+<p>For more information, see the
+  <a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a> record.</p><p>
+Extends from <a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses.Characteristic">BaseClasses.Characteristic</a> (Record for thermodynamic and resistive properties).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>String</td><td>formula</td><td>&quot;e-&quot;</td><td>Chemical formula</td></tr>
+<tr><td>String</td><td>phase</td><td>&quot;gas&quot;</td><td>Phase (e.g., &quot;gas&quot;)</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.MassSpecific">MassSpecific</a></td><td>m</td><td>Data.MM*U.kg/U.mol</td><td>Specific mass [m/N]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.LengthSpecific">LengthSpecific</a></td><td>r</td><td>U.k_A/m</td><td>Specific radius [l/N]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialChemical">PotentialChemical</a></td><td>Deltah0_f</td><td>Data.MM*Data.Hf*U.J/U.mol</td><td>Enthalpy of formation at 298.15 K, <i>p</i>&deg; (&Delta;<i>h</i>&deg;<sub>f</sub>)</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialChemical">PotentialChemical</a></td><td>Deltah0</td><td>Data.MM*Data.H0*U.J/U.mol</td><td><i>h</i>&deg;(298.15 K) - <i>h</i>&deg;(0 K) (&Delta;<i>h</i>&deg;)</td></tr>
+<tr><td>Real</td><td>b_c[size(T_lim_c, 1) - 1, :]</td><td>{Data.alow} .* fill({U.K^(3 ...</td><td>Coefficients of specific heat capacity at <i>p</i>&deg; as a polynomial in <i>T</i> (<i>b</i><sub><i>c</i></sub>)</td></tr>
+<tr><td>Real</td><td>B_c[size(T_lim_c, 1) - 1, 2]</td><td>{Data.blow} .* fill({U.K,1},...</td><td>Integration constants for specific enthalpy and entropy (<i>B</i><sub><i>c</i></sub>)</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">record</font> Gas <font color="darkgreen">&quot;e- gas&quot;</font>
+  <font color="blue">import </font>Data = Modelica.Media.IdealGases.Common.SingleGasesData.eminus;
+
+  <font color="blue">extends </font><a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses.Characteristic">BaseClasses.Characteristic</a>(
+    <font color="blue">final </font>formula=&quot;e-&quot;,
+    phase=&quot;gas&quot;,
+    m=Data.MM*U.kg/U.mol,
+    b_v=[1],
+    specVolPow={-1,0},
+    Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
+    Deltah0=Data.MM*Data.H0*U.J/U.mol,
+    T_lim_c={200.000,20000.000}*U.K,
+    b_c={Data.alow} .* <font color="red">fill</font>({U.K^(3 - i) <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(Data.alow, 1)}, <font color="red">size</font>(
+        T_lim_c, 1) - 1),
+    B_c={Data.blow} .* <font color="red">fill</font>({U.K,1}, <font color="red">size</font>(T_lim_c, 1) - 1) - b_c[:, 2:3]*<font color="red">ln</font>(U.K),
+
+    r=U.k_A/m);
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Gas;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Characteristics.'e-'images/.GasI.png" alt="FCSys.Characteristics.'e-'.Graphite" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Characteristics.'e-'.Graphite"></a><a href="FCSys_Characteristics_'e-'.html#FCSys.Characteristics.'e-'">FCSys.Characteristics.'e-'</a>.Graphite</h2>
+<b>e- in graphite</b><p>
+<p><h3>Information</h3></p>
+
+     <p>Assumptions:
+     <ol>
+     <li>There is one free (conduction) electron per atom of carbon.</li>
+</ol>
+</p>
+<p>For more information, see the
+  <a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a> record.</p><p>
+Extends from <a href="FCSys_Characteristics_'e-'.html#FCSys.Characteristics.'e-'.Gas">Gas</a> (e- gas).
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">record</font> Graphite <font color="darkgreen">&quot;e- in graphite&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Characteristics_'e-'.html#FCSys.Characteristics.'e-'.Gas">Gas</a>(
+    <font color="blue">final </font>phase=&quot;graphite&quot;,
+    specVolPow=C.Graphite.specVolPow,
+    b_v=C.Graphite.b_v,
+    p_min=-Modelica.Constants.inf);
+  <font color="darkgreen">// TODO:  Add the proper values for b_v from [Ashcroft1976]</font>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Graphite;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Dec 10 17:54:18 2012.
+</div>
+</body>
+</html>

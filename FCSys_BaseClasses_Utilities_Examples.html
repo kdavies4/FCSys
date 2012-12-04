@@ -5,7 +5,7 @@
 <meta name="description" content="Examples and tests">
 <meta name="keywords" content="Modelica, fuel cell, PEMFC, model">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
-<link rel="shortcut icon" href="images/favicon.ico">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
 </head>
 <body>
@@ -25,11 +25,11 @@
     <li><a href="FCSys_Regions.html">Regions</a>**</li>
     <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
     <li><a href="FCSys_Connectors.html">Connectors</a>**</li>
-    <li><a href="FCSys_Characteristics.html">Characteristics</a>**</li>
-    <li><a href="FCSys_Units.html">Units</a>**</li>
-    <li><a href="FCSys_Quantities.html">Quantities</a>**</li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
     <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
-    <li>**Check back soon or contact kdavies4 at gmail.com.</li>
+    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
     </ul>
 
   <h3>Download</h3>
@@ -52,7 +52,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td><img src="images/FCSys.BaseClasses.Utilities.averageS.png" alt="FCSys.BaseClasses.Utilities.Examples.TestFunctions" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Examples.html#FCSys.BaseClasses.Utilities.Examples.TestFunctions">TestFunctions</a>
+<tr><td><img src="images/FCSys.BaseClasses.Utilities.mod1S.png" alt="FCSys.BaseClasses.Utilities.Examples.TestFunctions" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Examples.html#FCSys.BaseClasses.Utilities.Examples.TestFunctions">TestFunctions</a>
 </td><td>Test all the functions</td></tr>
 <tr><td><img src="images/FCSys.BaseClasses.Utilities.Examples.TranslatePolyS.png" alt="FCSys.BaseClasses.Utilities.Examples.TranslatePoly" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Examples.html#FCSys.BaseClasses.Utilities.Examples.TranslatePoly">TranslatePoly</a>
 </td><td>Evaluate the translated version of <a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.poly">poly()</a></td></tr>
@@ -160,6 +160,10 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
        + <font color="red">String</font>(i) + &quot;.&quot;);
   <font color="blue">end for</font>;
 
+  <font color="darkgreen">// inSign()</font>
+  <font color="red">assert</font>(<font color="red">inSign</font>(FCSys.BaseClasses.Side.n) == 1, &quot;The inSign function failed.&quot;);
+  <font color="red">assert</font>(<font color="red">inSign</font>(FCSys.BaseClasses.Side.p) == -1, &quot;The inSign function failed.&quot;);
+
   <font color="darkgreen">// mod1()</font>
   <font color="red">assert</font>(<font color="red">mod1</font>(4, 3) == 1, &quot;The mod1 function failed.&quot;);
   <font color="red">assert</font>(<font color="red">mod1</font>(3, 3) == 3, &quot;The mod1 function failed.&quot;);
@@ -215,13 +219,13 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
     {1,1,1,1},
     0);
   <font color="darkgreen">// Check the translated model to be sure that the polynomial is written in</font>
-  <font color="darkgreen">// nested form for efficiency.  In Dymola 7.4, turn on the option &quot;Generate</font>
+  <font color="darkgreen">// nested form for efficiency.  In Dymola 7.4 turn on the option &quot;Generate</font>
   <font color="darkgreen">// listing of translated Modelica code in dsmodel.mof&quot;.  dsmodel.mof should</font>
   <font color="darkgreen">// contain:</font>
   <font color="darkgreen">//     x1 := 1+time*(1+time*(1+time)).</font>
   x2 = <font color="red">poly</font>(time, 2*<font color="red">ones</font>(35));
   <font color="darkgreen">// The function is only unrolled to a a limited depth (currently 10th order</font>
-  <font color="darkgreen">// polynomial).  In Dymola 7.4, poly(time, ones(34)) results in a recursive</font>
+  <font color="darkgreen">// polynomial).  In Dymola 7.4 poly(time, ones(34)) results in a recursive</font>
   <font color="darkgreen">// call, but poly(time, ones(35)) doesn&#39;t.</font>
   x3 = <font color="red">poly</font>(
     time + 1,
@@ -234,7 +238,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies. Last updated Wed Nov 28 11:42:42 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Dec 10 17:54:36 2012.
 </div>
 </body>
 </html>
