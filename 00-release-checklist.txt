@@ -1,15 +1,14 @@
-KLD 8/3/2012:
-
 Steps to release the FCSys library:
-11/29/12
+
+11/29/12 KD
     1.  Update and run 00-find-quantities.sh to be sure that all quantities are
         used in the code.  Remove the unused ones from resources/quantities.xls
         and update Quantities.mo and resources/scripts/units.mos.
-11/29/12
+11/29/12 KD
     2.  Update and run 00-find-references.sh to be sure that all references are
         cited in the code.  Remove the unused ones from package.mo
         (FCSys.UsersGuide.References).
-11/11/12
+11/11/12 KD
     3.  Be sure that all of the embedded documentation is up-to-date.  Delete
         the FCSys/help directory and recreate it using Dymola
         (File->Export->HTML).  Run spellcheck on the HTML files using
@@ -19,7 +18,7 @@ Steps to release the FCSys library:
         replacements, and update the documentation for the website on the
         gh-pages branch.  Push the gh-pages branch to origin (git push origin
         gh-pages).
-12/2/12
+12/10/12 KD
     4.  Use http://www.xml-sitemaps.com/ to update the sitemap.  Put it in base
         folder of the the gh-pages branch and push to origin (git push origin
         gh-pages).  Update it in Google Webmaster tools
@@ -31,7 +30,7 @@ Steps to release the FCSys library:
         tests/tests.mos).  Run the checks and tests by uncommenting lines in
         configuration/load.mos and restarting Dymola through that script.
         Address any problems.
-11/9/12
+12/10/12 KD
     7.  Run 00-autoreplace.py on the code.
     8.  Add an entry to the list of revisions in package.mo.
     9.  Commit the revisions to git.

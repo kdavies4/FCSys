@@ -51,8 +51,6 @@ rpls = [
     # Remove extra line spacing.
     (r' *<br> +(<br>)* *', r'<br><br>'),
     (r'<br><br>(<br>)+', r'<br><br>'),
-    # Make the local links local again.
-    ('<a href="FCSys\.html#Fig([1-3])">', r'<a href="#Fig\1">'),
     # Add the sidebar.
     ('<body><p>', """<body>
 <div class="sidebar">
@@ -89,7 +87,7 @@ rpls = [
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies. Last updated %s.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated %s.
 </div>
 """ % r'\1'),
     # Remove horizontal lines.
@@ -101,31 +99,39 @@ rpls = [
     ("<!--\[if supportFields\]><span style='mso-element:field-begin'></span>\n<span style='mso-spacerun:yes'></span>XE [A-Za-z.]+<!\[endif\]-->\n<!--\[if supportFields\]><span style='mso-element:field-end'></span><!\[endif\]-->", ''),
     # Make the local links local again.
     ('<a href="FCSys\.html#Fig([1-3])">', r'<a href="#Fig\1">'),
+    # Use relative links again.
+    ('/media/Storage/Documents/Dymola/FCSys/', '../'),
+    # Use online links to the Modelica Standard Library.
+    ('"file:////opt/dymola/Modelica/Library/Modelica.*/help/(.*)"', r'"http://build.openmodelica.org/Documentation/\1"'),
+    ('"(http://build\.openmodelica\.org/Documentation/[^"]+)_([^"]+)_([^"]+)_([^"]+)_([^"]+)_([^"]+)_([^"]+)_([^"]+)"', r'"\1.\2.\3.\4.\5.\6.\7.\8"'),
+    ('"(http://build\.openmodelica\.org/Documentation/[^"]+)_([^"]+)_([^"]+)_([^"]+)"', r'"\1.\2.\3.\4"'),
+    ('"(http://build\.openmodelica\.org/Documentation/[^"]+)_([^"]+)"', r'"\1.\2"'),
+    ('"(http://build\.openmodelica\.org/Documentation/[^"]+)_([^"]+)"', r'"\1.\2"'),
     # Use the better versions of some images.
     ('/cell\.png"', '/cell.svg" width=450'),
     ('/FCSys\.Assemblies\.Cells\.CellD\.png"', '/FCSys.Assemblies.Cells.CellD.png" width=600'),
     # Remove some classes from the main page.
-    ('<tr><td><img src="FCSys.BlocksS.png" alt="FCSys.Blocks" width=20  height=20 align=top>&nbsp;<a href="FCSys_Blocks.html#FCSys.Blocks">Blocks</a>\n</td><td>[^<]+</td></tr>\n', ''),
-    ('<tr><td><img src="FCSys.BlocksS.png" alt="FCSys.Figures" width=20  height=20 align=top>&nbsp;<a href="FCSys_Figures.html#FCSys.Figures">Figures</a>\n</td><td>[^<]+</td></tr>\n', ''),
-    ('<tr><td><img src="FCSys.SystemsS.png" alt="FCSys.Systems" width=20  height=20 align=top>&nbsp;<a href="FCSys_Systems.html#FCSys.Systems">Systems</a>\n</td><td>[^<]+</td></tr>\n', ''),
-    ('<tr><td><img src="FCSys.SystemsS.png" alt="FCSys.WorkInProgress" width=20  height=20 align=top>&nbsp;<a href="FCSys_WorkInProgress.html#FCSys.WorkInProgress">WorkInProgress</a>\n</td><td>[^<]+</td></tr>\n', ''),
-    # Use relative links again.
-    ('/media/Storage/Documents/Dymola/FCSys/', '../'),
+    ('<tr><td><img src="FCSys\.BlocksS\.png" alt="FCSys\.Blocks" width=20  height=20 align=top>&nbsp;<a href="FCSys_Blocks\.html#FCSys\.Blocks">Blocks</a>\n</td><td>[^<]+</td></tr>\n', ''),
+    ('<tr><td><img src="FCSys\.BlocksS\.png" alt="FCSys\.Figures" width=20  height=20 align=top>&nbsp;<a href="FCSys_Figures\.html#FCSys\.Figures">Figures</a>\n</td><td>[^<]+</td></tr>\n', ''),
+    ('<tr><td><img src="FCSys\.SystemsS\.png" alt="FCSys\.Systems" width=20  height=20 align=top>&nbsp;<a href="FCSys_Systems\.html#FCSys\.Systems">Systems</a>\n</td><td>[^<]+</td></tr>\n', ''),
+    ('<tr><td><img src="FCSys\.SystemsS\.png" alt="FCSys\.WorkInProgress" width=20  height=20 align=top>&nbsp;<a href="FCSys_WorkInProgress\.html#FCSys\.WorkInProgress">WorkInProgress</a>\n</td><td>[^<]+</td></tr>\n', ''),
     # Remove nested quotes from meta description.
     ('(<meta name="description" content=")&quot;(.*)&quot;(">)', r'\1\2\3'),
+    # Don't escape the quotation marks.
+    (r'\\"', '"'),
     # Change the style.
     ('<style type="text/css"> *\n\*       \{ font-size: 10pt; font-family: Arial,sans-serif; \} *\npre     \{ font-size:  9pt; font-family: Courier,monospace;\} *\nh4      \{ font-size: 10pt; font-weight: bold; color: green; \} *\nh3      \{ font-size: 11pt; font-weight: bold; color: green; \} *\nh2      \{ font-size: 13pt; font-weight: bold; color: green; \} *\naddress \{                  font-weight: normal} *\ntd      \{ solid \#000; vertical-align:top; \} *\nth      \{ solid \#000; vertical-align:top; font-weight: bold; \} *\ntable   \{ solid \#000; border-collapse: collapse;\}\n</style>', '<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="%s">' % stylesheet + '\n<link rel="shortcut icon" href="%s">' % favicon),
     # Remove the custom style for the Modelica license.
-    #('<style type=\"text/css\">\n\*       \{ font-size: 10pt; font-family: Arial,sans-serif; \}\ncode    \{ font-size:  9pt; font-family: Courier,monospace;\}\nh6      \{ font-size: 10pt; font-weight: bold; color: green; \}\nh5      { font-size: 11pt; font-weight: bold; color: green; \}\nh4      \{ font-size: 13pt; font-weight: bold; color: green; \}\naddress \{                  font-weight: normal\}\ntd      \{ solid #000; vertical-align:top; \}\nth      \{ solid #000; vertical-align:top; font-weight: bold; \}\ntable   \{ solid #000; border-collapse: collapse;\}\n</style>', ''),
+    #('<style type="text/css">\n\*       \{ font-size: 10pt; font-family: Arial,sans-serif; \}\ncode    \{ font-size:  9pt; font-family: Courier,monospace;\}\nh6      \{ font-size: 10pt; font-weight: bold; color: green; \}\nh5      { font-size: 11pt; font-weight: bold; color: green; \}\nh4      \{ font-size: 13pt; font-weight: bold; color: green; \}\naddress \{                  font-weight: normal\}\ntd      \{ solid #000; vertical-align:top; \}\nth      \{ solid #000; vertical-align:top; font-weight: bold; \}\ntable   \{ solid #000; border-collapse: collapse;\}\n</style>', ''),
     # Try to replace the internal Modelica references with the proper HTML
     # page.
-    ('"modelica://([^.]+)"', r'"\1.html"'),
-    ('"modelica://([^.]+)\.([^.]+)"', r'"\1.html#\1.\2"'),
-    ('"modelica://([^.]+)\.([^.]+)\.([^.]+)"', r'"\1_\2.html#\1.\2.\3"'),
-    ('"modelica://([^.]+)\.([^.]+)\.([^.]+)\.([^.]+)"', r'"\1_\2_\3.html#\1.\2.\3.\4"'),
-    ('"modelica://([^.]+)\.([^.]+)\.([^.]+)\.([^.]+)\.([^.]+)"', r'"\1_\2_\3_\4.html#\1.\2.\3.\4.\5"'),
-    ('"modelica://(v)\.([^.]+)\.([^.]+)\.([^.]+)\.([^.]+)\.([^.]+)"', r'"\1_\2_\3_\4_\5.html#\1.\2.\3.\4.\5.\6"'),
-    ('"modelica://([^.]+)\.([^.]+)\.([^.]+)\.([^.]+)\.([^.]+)\.([^.]+)\.([^.]+)"', r'"\1_\2_\3_\4_\5_\6.html#\1.\2.\3.\4.\5.\6.\7"'),
+    (r'\\?"modelica://([^"\\]+)\.([^"\\]+)\.([^"\\]+)\.([^"\\]+)\.([^"\\]+)\.([^"\\]+)\.([^"\\]+)\\?"', r'"\1_\2_\3_\4_\5_\6.html#\1.\2.\3.\4.\5.\6.\7"'),
+    (r'\\?"modelica://([^"\\]+)\.([^"\\]+)\.([^"\\]+)\.([^"\\]+)\.([^"\\]+)\.([^"\\]+)\\?"', r'"\1_\2_\3_\4_\5.html#\1.\2.\3.\4.\5.\6"'),
+    (r'\\?"modelica://([^"\\]+)\.([^"\\]+)\.([^"\\]+)\.([^"\\]+)\.([^"\\]+)\\?"', r'"\1_\2_\3_\4.html#\1.\2.\3.\4.\5"'),
+    (r'\\?"modelica://([^"\\]+)\.([^"\\]+)\.([^"\\]+)\.([^"\\]+)\\?"', r'"\1_\2_\3.html#\1.\2.\3.\4"'),
+    (r'\\?"modelica://([^"\\]+)\.([^"\\]+)\.([^"\\]+)\\?"', r'"\1_\2.html#\1.\2.\3"'),
+    (r'\\?"modelica://([^"\\]+)\.([^"\\]+)\\?"', r'"\1.html#\1.\2"'),
+    (r'\\?"modelica://([^"\\]+)\\?"', r'"\1.html\2"'),
     ]
 
 # Directory specification

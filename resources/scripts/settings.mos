@@ -4,7 +4,7 @@ cd("../");
 // Establish the system of units.
 RunScript("FCSys/resources/scripts/units.mos");
 
-// Misc settings
+// Misc settings (for Dymola 7.4)
 // Note:  Dymola's list() function lists all possible settings.
 Advanced.AutoFormatting = true "Automatic indentation of code. Can be changed without new translation of model";
 Advanced.CancelFactors = true "Try to eliminate possible divisions by zero when solving equations";

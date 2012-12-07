@@ -86,6 +86,8 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.Volume Volume=1*U.m^3 "Volume";
       parameter Q.VolumeRate VolumeRate=1*U.m^3/U.s "Rate of volume";
       parameter Q.VolumeSpecific VolumeSpecific=1*U.m^3/U.C "Specific volume";
+      parameter Q.VolumeSpecificAbsolute VolumeSpecificAbsolute=1*U.m^3/U.C
+        "Absolute specific volume";
       parameter Q.Wavenumber Wavenumber=1*U.rad/U.m "Wavenumber";
 
     end ExampleModel;
@@ -171,6 +173,8 @@ package Quantities "Quantities to represent physical properties"
     "Rate of volume";
   type VolumeSpecific = Modelica.Icons.TypeReal (final unit="l3/N", min=0)
     "Specific volume";
+  type VolumeSpecificAbsolute = Modelica.Icons.TypeReal (final unit="l3/N", min
+        =0) "Absolute specific volume";
   type Wavenumber = Modelica.Icons.TypeReal (final unit="A/l");
 
   // Aliases that imply special display units

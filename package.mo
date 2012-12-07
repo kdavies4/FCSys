@@ -1,5 +1,6 @@
 within ;
 package FCSys "Modelica library of fuel cell models"
+
 // Line of 80 characters (including leading spaces and //):
 //----------------------------------------------------------------------------
 // Maximum line width before a new word is wrapped in Dymola 7.4 (81
@@ -144,6 +145,10 @@ package UsersGuide "User's Guide"
 
     <p>These references are cited throughout the library:</p>
     <table border=0 cellspacing=0 cellpadding=2 class=\"noBorder\">
+    <tr>
+      <td valign=top class=\"noBorder\">[Ashcroft1976]</td>
+      <td valign=top class=\"noBorder\">N. W. Ashcroft and N. D. Mermin, <i>Solid State Physics</i>, New York:  Holt, Rinehard and Winston, 1976.</td>
+    </tr>
     <tr>
       <td valign=top class=\"noBorder\">[Avogadro1.03]</td>
       <td valign=top class=\"noBorder\">Avogadro: An Open-Source Molecular Builder and Visualization Tool, ver. 1.03. <a href=\"http://avogadro.openmolecules.net\">http://avogadro.openmolecules.net</a>.</td>
@@ -294,9 +299,9 @@ package UsersGuide "User's Guide"
       preferedView="info",
       DocumentationClass=true,
       Documentation(info="<html>
-    <p>Updates to this package may be available at the
+    <p>Updates to this package may be available online at the
     <a href=\"http://kdavies4.github.com/FCSys/\">main project site</a>.
-    Development is being carried out at
+    The development page is
     <a href=\"https://github.com/kdavies4/FCSys\">https://github.com/kdavies4/FCSys</a>.</p>
 
     <p><b>Author:</b></p>
@@ -895,6 +900,19 @@ printing and shipping costs may be recovered.</p>
   end UsersGuide;
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 annotation (
   uses(Modelica(version="3.2"), Modelica_LinearSystems2(version="2.1")),
   preferedView="info",
@@ -966,7 +984,7 @@ annotation (
     Fluid enters and exits the cell through channels in the flow plates (FPs).  It spreads through
     the gas diffusion diffusion layers (GDLs) and reacts in the catalyst layers (CLs).  The
     proton exchange membrane (PEM) prevents electronic transport; therefore, electrons must
-    travel an external circuit to sustain the net reaction.    As
+    pass through an external load to sustain the net reaction.    As
     shown in <A HREF=\"#Fig2\">Figure 2</a>, a PEMFC model may be constructed in
     <a href=\"modelica://FCSys\">FCSys</a> from models of the same layers.
     The model is modular; the gas diffusion and catalyst layers could be combined,

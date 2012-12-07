@@ -962,7 +962,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.CaFP.mos"));
     end CaFP;
-
   end Examples;
 
   package AnFPs "Anode flow plates"
@@ -987,22 +986,22 @@ package Regions "3D arrays of discrete, interconnected subregions"
               p_IC=(1 - defaults.x_H2O)*defaults.p,
               xNegative(thermoOpt=ThermoOpt.ClosedAdiabatic),
               xPositive(thermoOpt=ThermoOpt.OpenDiabatic),
-              yNegative(thermoOpt=ThermoOpt.OpenDiabatic, viscousX=false),
-              yPositive(thermoOpt=ThermoOpt.OpenDiabatic, viscousX=false)),
+              yNegative(thermoOpt=ThermoOpt.OpenDiabatic, slipX=false),
+              yPositive(thermoOpt=ThermoOpt.OpenDiabatic, slipX=false)),
             H2O(
               p_IC=defaults.x_H2O*defaults.p,
               xNegative(thermoOpt=ThermoOpt.ClosedAdiabatic),
               xPositive(thermoOpt=ThermoOpt.OpenDiabatic),
-              yNegative(thermoOpt=ThermoOpt.OpenDiabatic, viscousX=false),
-              yPositive(thermoOpt=ThermoOpt.OpenDiabatic, viscousX=false))),
+              yNegative(thermoOpt=ThermoOpt.OpenDiabatic, slipX=false),
+              yPositive(thermoOpt=ThermoOpt.OpenDiabatic, slipX=false))),
           each graphite(
             inclC=true,
             'incle-'=true,
             C(V_IC=V - xV,Lstar=1e7*U.m),
             'e-'(
               setVelY=true,
-              yNegative(viscousX=false),
-              yPositive(viscousX=false)))));
+              yNegative(slipX=false),
+              yPositive(slipX=false)))));
 
       parameter Q.NumberAbsolute x(nominal=1) = 0.1 "Volumetric porosity";
 
@@ -1193,8 +1192,8 @@ used as the inlet. The z axis extends across the width of the channel.</p></html
 
     model GM "General Motors cathodic test flow plate and current collector"
       extends AnFP(
-        subregions(each graphite(C(alpha_Sdot=U.m*U.K/(95*U.W), alpha_Sdot=U.m*U.K/(95
-                  *U.W)))),
+        subregions(each graphite(C(alpha_Sdot=U.m*U.K/(95*U.W), alpha_Sdot=U.m*
+                  U.K/(95*U.W)))),
         L_x=fill(35.22*U.mm/1, 1),
         L_y=fill(1.543*U.m, 1),
         L_z=fill((5/1.543)*U.mm, 1),
@@ -1250,18 +1249,18 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
             H2(
               Lstar=1e9*U.m,
               p_IC=(1 - defaults.x_H2O)*defaults.p,
-              yNegative(viscousX=false),
-              yPositive(viscousX=false)),
+              yNegative(slipX=false),
+              yPositive(slipX=false)),
             H2O(
               Lstar=1e9*U.m,
               p_IC=defaults.x_H2O*defaults.p,
-              yNegative(viscousX=false),
-              yPositive(viscousX=false))),
+              yNegative(slipX=false),
+              yPositive(slipX=false))),
           each graphite(
             inclC=true,
             'incle-'=true,
             C(V_IC=V - xV),
-            'e-'(yNegative(viscousX=false), yPositive(viscousX=false)))));
+            'e-'(yNegative(slipX=false), yPositive(slipX=false)))));
 
       parameter Q.NumberAbsolute x(nominal=1) = 0.76 "Volumetric porosity";
       // The default porosity is for Sigracet 24 BC.
@@ -1564,29 +1563,29 @@ the z axis extends across the width of the channel.</p></html>"),
             inclH2O=true,
             H2(
               p_IC=(1 - defaults.x_H2O)*defaults.p,
-              yNegative(viscousX=false),
-              yPositive(viscousX=false)),
+              yNegative(slipX=false),
+              yPositive(slipX=false)),
             H2O(
               Lstar=1e7*U.m,
               p_IC=defaults.x_H2O*defaults.p,
-              yNegative(viscousX=false),
-              yPositive(viscousX=false))),
+              yNegative(slipX=false),
+              yPositive(slipX=false))),
           each graphite(
             inclC=true,
             'incle-'=true,
             C(V_IC=(V - xV)/2,Lstar=1e7*U.m),
             'e-'(
               Lstar=1e7*U.m,
-              yNegative(viscousX=false),
-              yPositive(viscousX=false))),
+              yNegative(slipX=false),
+              yPositive(slipX=false))),
           each ionomer(
             inclC19HF37O5S=true,
             'inclH+'=true,
             C19HF37O5S(Lstar=1e7*U.m,V_IC=(V - xV)/2),
             'H+'(
               Lstar=1e7*U.m,
-              yNegative(viscousX=false),
-              yPositive(viscousX=false)))));
+              yNegative(slipX=false),
+              yPositive(slipX=false)))));
       //'e-'( xPositive(thermoOpt=ThermoOpt.ClosedAdiabatic),
       //'H+'xNegative(thermoOpt=ThermoOpt.ClosedAdiabatic),
 
@@ -1777,7 +1776,6 @@ the z axis extends across the width of the channel.</p>
                   textString="%name",
                   visible=not inclYFaces,
                   lineColor={0,0,0})}));
-
     end AnCL;
 
     model AnCGDL "Integrated anode catalyst/gas diffusion layer"
@@ -1813,16 +1811,16 @@ the z axis extends across the width of the channel.</p>
           each gas(inclH2O=true, H2O(
               Lstar=1e7*U.m,
               p_IC=defaults.x_H2O*defaults.p,
-              yNegative(viscousX=false),
-              yPositive(viscousX=false))),
+              yNegative(slipX=false),
+              yPositive(slipX=false))),
           each ionomer(
             inclC19HF37O5S=true,
             'inclH+'=true,
             C19HF37O5S(Lstar=1e7*U.m,V_IC=0.95*V),
             'H+'(
               Lstar=1e7*U.m,
-              yNegative(viscousX=false),
-              yPositive(viscousX=false)))));
+              yNegative(slipX=false),
+              yPositive(slipX=false)))));
 
       parameter Q.NumberAbsolute lambda_IC=14
         "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>)</html>"
@@ -2062,17 +2060,17 @@ the z axis extends across the width of the channel.</p>
             inclO2=true,
             H2O(
               p_IC=defaults.x_H2O*defaults.p,
-              yNegative(viscousX=false),
-              yPositive(viscousX=false)),
+              yNegative(slipX=false),
+              yPositive(slipX=false)),
             N2(
               Lstar=1e8*U.m,
               p_IC=(1 - defaults.x_H2O)*(1 - defaults.x_O2_dry)*defaults.p,
-              yNegative(viscousX=false),
-              yPositive(viscousX=false)),
+              yNegative(slipX=false),
+              yPositive(slipX=false)),
             O2(
               p_IC=(1 - defaults.x_H2O)*defaults.x_O2_dry*defaults.p,
-              yNegative(viscousX=false),
-              yPositive(viscousX=false))),
+              yNegative(slipX=false),
+              yPositive(slipX=false))),
           each graphite(
             inclC=true,
             'incle-'=true,
@@ -2080,16 +2078,16 @@ the z axis extends across the width of the channel.</p>
             'e-'(
               Lstar=1e8*U.m,
               mu_IC=-0.2*U.V,
-              yNegative(viscousX=false),
-              yPositive(viscousX=false))),
+              yNegative(slipX=false),
+              yPositive(slipX=false))),
           each ionomer(
             inclC19HF37O5S=true,
             'inclH+'=true,
             C19HF37O5S(Lstar=1e7*U.m,V_IC=(V - xV)/2),
             'H+'(
               Lstar=1e7*U.m,
-              yNegative(viscousX=false),
-              yPositive(viscousX=false)))));
+              yNegative(slipX=false),
+              yPositive(slipX=false)))));
 
       //'e-'(xNegative(thermoOpt=ThermoOpt.ClosedAdiabatic),
       //'H+'(xPositive(thermoOpt=ThermoOpt.ClosedAdiabatic),
@@ -2237,7 +2235,6 @@ the z axis extends across the width of the channel.</p>
                   textString="%name",
                   visible=not inclYFaces,
                   lineColor={0,0,0})}));
-
     end CaCL;
 
     model CaCGDL "Integrated cathode catalyst/gas diffusion layer"
@@ -2279,26 +2276,26 @@ the z axis extends across the width of the channel.</p>
             H2O(
               Lstar=1e9*U.m,
               p_IC=defaults.x_H2O*defaults.p,
-              yNegative(viscousX=false),
-              yPositive(viscousX=false)),
+              yNegative(slipX=false),
+              yPositive(slipX=false)),
             N2(
               Lstar=1e9*U.m,
               p_IC=(1 - defaults.x_H2O)*(1 - defaults.x_O2_dry)*defaults.p,
-              yNegative(viscousX=false),
-              yPositive(viscousX=false)),
+              yNegative(slipX=false),
+              yPositive(slipX=false)),
             O2(
               Lstar=1e9*U.m,
               p_IC=(1 - defaults.x_H2O)*defaults.x_O2_dry*defaults.p,
-              yNegative(viscousX=false),
-              yPositive(viscousX=false))),
+              yNegative(slipX=false),
+              yPositive(slipX=false))),
           each graphite(
             inclC=true,
             'incle-'=true,
             C(V_IC=V - xV),
             'e-'(
               mu_IC=-0.2*U.V,
-              yNegative(viscousX=false),
-              yPositive(viscousX=false)))));
+              yNegative(slipX=false),
+              yPositive(slipX=false)))));
 
       parameter Q.NumberAbsolute x(nominal=1) = 0.76 "Volumetric porosity";
       // The default porosity is for Sigracet 24 BC.
@@ -2600,20 +2597,20 @@ the z axis extends across the width of the channel.</p>
               Lstar=1e9*U.m,
               p_IC=defaults.x_H2O*defaults.p,
               xPositive(thermoOpt=ThermoOpt.ClosedAdiabatic),
-              yNegative(thermoOpt=ThermoOpt.OpenDiabatic, viscousX=false),
-              yPositive(thermoOpt=ThermoOpt.OpenDiabatic, viscousX=false)),
+              yNegative(thermoOpt=ThermoOpt.OpenDiabatic, slipX=false),
+              yPositive(thermoOpt=ThermoOpt.OpenDiabatic, slipX=false)),
             N2(
               Lstar=1e9*U.m,
               p_IC=(1 - defaults.x_H2O)*(1 - defaults.x_O2_dry)*defaults.p,
               xPositive(thermoOpt=ThermoOpt.ClosedAdiabatic),
-              yNegative(thermoOpt=ThermoOpt.OpenDiabatic, viscousX=false),
-              yPositive(thermoOpt=ThermoOpt.OpenDiabatic, viscousX=false)),
+              yNegative(thermoOpt=ThermoOpt.OpenDiabatic, slipX=false),
+              yPositive(thermoOpt=ThermoOpt.OpenDiabatic, slipX=false)),
             O2(
               Lstar=1e9*U.m,
               p_IC=(1 - defaults.x_H2O)*defaults.x_O2_dry*defaults.p,
               xPositive(thermoOpt=ThermoOpt.ClosedAdiabatic),
-              yNegative(thermoOpt=ThermoOpt.OpenDiabatic, viscousX=false),
-              yPositive(thermoOpt=ThermoOpt.OpenDiabatic, viscousX=false))),
+              yNegative(thermoOpt=ThermoOpt.OpenDiabatic, slipX=false),
+              yPositive(thermoOpt=ThermoOpt.OpenDiabatic, slipX=false))),
           each graphite(
             inclC=true,
             'incle-'=true,
@@ -2621,8 +2618,8 @@ the z axis extends across the width of the channel.</p>
             'e-'(
               mu_IC=-0.2*U.V,
               setVelY=true,
-              yNegative(viscousX=false),
-              yPositive(viscousX=false)))));
+              yNegative(slipX=false),
+              yPositive(slipX=false)))));
 
       parameter Q.NumberAbsolute x(nominal=1) = 0.1 "Volumetric porosity";
 
@@ -2751,8 +2748,8 @@ used as the inlet. The z axis extends across the width of the channel.</p>
 
     model GM "General Motors cathodic test flow plate and current collector"
       extends CaFP(
-        subregions(each graphite(C(alpha_Sdot=U.m*U.K/(95*U.W), alpha_Sdot=U.m*U.K/(95
-                  *U.W)))),
+        subregions(each graphite(C(alpha_Sdot=U.m*U.K/(95*U.W), alpha_Sdot=U.m*
+                  U.K/(95*U.W)))),
         L_x=fill(35.22*U.mm/1, 1),
         L_y=fill(1.028*U.m, 1),
         L_z=fill((5/1.028)*U.mm, 1),

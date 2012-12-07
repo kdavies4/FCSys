@@ -32,25 +32,21 @@ package BaseClasses "Base classes (not for direct use)"
 
       partial class Single "Icon for a single-connector boundary condition"
         //extends Names.Middle;
-        annotation (Icon(graphics={
-              Rectangle(
-                extent={{-100,40},{100,-40}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Line(
-                points={{-100,-40},{-100,40},{100,40},{100,-40}},
-                pattern=LinePattern.None,
-                smooth=Smooth.None),
-              Line(
-                points={{-100,-40},{100,-40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash),
-              Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+        annotation (Icon(graphics={Rectangle(
+                      extent={{-100,40},{100,-40}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Line(
+                      points={{-100,-40},{-100,40},{100,40},{100,-40}},
+                      pattern=LinePattern.None,
+                      smooth=Smooth.None),Line(
+                      points={{-100,-40},{100,-40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end Single;
     end BCs;
     extends Modelica.Icons.Package;
@@ -255,13 +251,13 @@ from Blocks.Discrete.
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                      extent={{-100,40},{100,80}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Text(
-                      extent={{-100,40},{100,80}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,40},{100,80}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None), Text(
+                extent={{-100,40},{100,80}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end Top2;
 
       partial class Top1
@@ -572,15 +568,13 @@ This icon is designed for a <b>signal bus</b> connector.
     partial class Record "Icon for a record"
       extends FCSys.BaseClasses.Icons.Names.Top3;
 
-      annotation (Icon(graphics={
-            Rectangle(
-              extent={{-100,50},{100,-100}},
-              fillColor={255,255,127},
-              fillPattern=FillPattern.Solid,
-              lineColor={0,0,255}),
-            Line(points={{-100,-50},{100,-50}}, color={0,0,0}),
-            Line(points={{-100,0},{100,0}}, color={0,0,0}),
-            Line(points={{0,50},{0,-100}}, color={0,0,0})}));
+      annotation (Icon(graphics={Rectangle(
+                  extent={{-100,50},{100,-100}},
+                  fillColor={255,255,127},
+                  fillPattern=FillPattern.Solid,
+                  lineColor={0,0,255}),Line(points={{-100,-50},{100,-50}},
+              color={0,0,0}),Line(points={{-100,0},{100,0}}, color={0,0,0}),
+              Line(points={{0,50},{0,-100}}, color={0,0,0})}));
     end Record;
 
     partial class PackageUnderConstruction
@@ -642,6 +636,11 @@ This icon is designed for a <b>signal bus</b> connector.
         Integer integers[6];
 
       algorithm
+        // anyTrue()
+        assert(anyTrue({true,false,true}) == true,
+          "The anyTrue function failed.");
+        assert(anyTrue({false,false}) == false, "The anyTrue function failed.");
+
         // Chemistry.charge()
         for i in 1:2 loop
           assert((Chemistry.charge({"H2O","e-","Hg2+2",""}))[i] == {0,-1,2,0}[i],
@@ -1036,14 +1035,35 @@ An unrelated species may be included.");
       end stoich;
     end Chemistry;
 
+    function anyTrue
+      "<html>Return <code>true</code> if all of the entries in a <code>Boolean</code> vector are <code>true</code></html>"
+      extends Modelica.Icons.Function;
+
+      input Boolean u[:] "<html><code>Boolean</code> vector</html>";
+      output Boolean y "<html>Result of short-circuit <code>and<code></html>";
+
+    algorithm
+      for i in 1:size(u, 1) loop
+        if u[i] then
+          y := true;
+          return;
+        end if;
+      end for;
+      y := false;
+
+      annotation (Inline=true, Documentation(info="<html><p><b>Examples:</b><br>
+    <code>anyTrue({true,false,true})</code> returns <code>true</code> and 
+    <code>anyTrue({false,false})</code> returns <code>false</code>.</p></html>"));
+    end anyTrue;
+
     function average "Return the arithmetic mean of numbers"
       extends Modelica.Icons.Function;
 
-      input Real x[:] "Vector of numbers";
+      input Real u[:] "Vector of numbers";
       output Real average "Arithmetic mean";
 
     algorithm
-      average := sum(x)/size(x, 1) annotation (Inline=true,Documentation(info="<html><p><b>Example:</b><br>
+      average := sum(u)/size(u, 1) annotation (Inline=true,Documentation(info="<html><p><b>Example:</b><br>
     <code>average({1,2,3})</code> returns 2.</p></html>"));
     end average;
 
@@ -1056,11 +1076,11 @@ An unrelated species may be included.");
       "<html>Return the number of <code>true</code> entries in a <code>Boolean</code> vector</html>"
       extends Modelica.Icons.Function;
 
-      input Boolean x[:] "<html><code>Boolean</code> vector</html>";
+      input Boolean u[:] "<html><code>Boolean</code> vector</html>";
       output Integer n "Number of true entries";
 
     algorithm
-      n := sum(if x[i] then 1 else 0 for i in 1:size(x, 1))
+      n := sum(if u[i] then 1 else 0 for i in 1:size(u, 1))
         annotation (Inline=true);
 
       annotation (Documentation(info="<html><p><b>Example:</b><br>
@@ -1068,14 +1088,14 @@ An unrelated species may be included.");
     end countTrue;
 
     function Delta
-      "<html>Return the first entry of a vector minus the second (&Delta;<i><b>x</b></i>)</html>"
+      "<html>Return the first entry of a vector minus the second (&Delta;<i><b>u</b></i>)</html>"
       extends Modelica.Icons.Function;
 
-      input Real x[2] "Vector of size 2";
-      output Real Delta=x[1] - x[2] "First entry minus the second entry";
+      input Real u[2] "Vector of size 2";
+      output Real Delta=u[1] - u[2] "First entry minus the second entry";
 
     algorithm
-      Delta := x[1] - x[2] annotation (Inline=true, Documentation(info="<html><p>The translator should automatically
+      Delta := u[1] - u[2] annotation (Inline=true, Documentation(info="<html><p>The translator should automatically
   vectorize (or \"matricize\") this function.  For example, <code>Delta([1,2;3,4])</code> returns <code>{-1,-1}</code>.</p></html>"));
     end Delta;
 
@@ -1083,8 +1103,8 @@ An unrelated species may be included.");
       "<html>Enumerate the <code>true</code> entries in a <code>Boolean</code> vector (0 for <code>false</code> entries)</html>"
       extends Modelica.Icons.Function;
 
-      input Boolean x[:] "<html><code>Boolean</code> array</html>";
-      output Integer enumerated[size(x, 1)]
+      input Boolean u[:] "<html><code>Boolean</code> array</html>";
+      output Integer enumerated[size(u, 1)]
         "Indices of the true entries (increasing order; 0 for false entries)";
 
     protected
@@ -1092,8 +1112,8 @@ An unrelated species may be included.");
 
     algorithm
       count := 1;
-      for i in 1:size(x, 1) loop
-        if x[i] then
+      for i in 1:size(u, 1) loop
+        if u[i] then
           enumerated[i] := count;
           count := count + 1;
         else
@@ -1108,16 +1128,16 @@ An unrelated species may be included.");
       "<html>Return the indices of the <code>true</code> entries of a <code>Boolean</code> vector</html>"
       extends Modelica.Icons.Function;
 
-      input Boolean x[:] "<html><code>Boolean</code> array</html>";
-      output Integer indices[countTrue(x)] "Indices of the true entries";
+      input Boolean u[:] "<html><code>Boolean</code> array</html>";
+      output Integer indices[countTrue(u)] "Indices of the true entries";
 
     protected
       Integer count "Counter variable";
 
     algorithm
       count := 1;
-      for i in 1:size(x, 1) loop
-        if x[i] then
+      for i in 1:size(u, 1) loop
+        if u[i] then
           indices[count] := i;
           count := count + 1;
         end if;
@@ -1154,27 +1174,27 @@ An unrelated species may be included.");
     end mod1;
 
     function poly
-      "<html>Polynomial expressed in form: <i>y</i> = ((&hellip; + <i>a</i><sub><i>n</i>-2</sub>)/<i>x</i> + <i>a</i><sub><i>n</i>-1</sub>)/<i>x</i> + <i>a</i><sub><i>n</i></sub> + <i>x</i>&middot;(<i>a</i><sub><i>n</i>+1</sub> + <i>x</i>&middot;(<i>a</i><sub><i>n</i>+2</sub> + &hellip;))</html>"
+      "<html>Polynomial expressed in form: <i>y</i> = ((&hellip; + <i>a</i><sub><i>n</i>-2</sub>)/<i>u</i> + <i>a</i><sub><i>n</i>-1</sub>)/<i>u</i> + <i>a</i><sub><i>n</i></sub> + <i>u</i>&middot;(<i>a</i><sub><i>n</i>+1</sub> + <i>u</i>&middot;(<i>a</i><sub><i>n</i>+2</sub> + &hellip;))</html>"
       extends Modelica.Icons.Function;
 
-      input Real x "Argument";
+      input Real u "Argument";
       input Real a[:] "Coefficients";
       input Integer n=0 "Power of the first coefficient";
       output Real y "Result";
 
     protected
       function positivePoly
-        "<html>polynomial expressed in form: y = x*(a<sub>1</sub> + x*(a<sub>2</sub> + &hellip;))</html>"
-        input Real x "Argument";
+        "<html>polynomial expressed in form: y = u*(a<sub>1</sub> + u*(a<sub>2</sub> + &hellip;))</html>"
+        input Real u "Argument";
         input Real a[:] "Coefficients";
         output Real y "Result";
       algorithm
-        y := if size(a, 1) > 0 then x*(a[1] + (if size(a, 1) > 1 then x*(a[2]
-           + (if size(a, 1) > 2 then x*(a[3] + (if size(a, 1) > 3 then x*(a[4]
-           + (if size(a, 1) > 4 then x*(a[5] + (if size(a, 1) > 5 then x*(a[6]
-           + (if size(a, 1) > 6 then x*(a[7] + (if size(a, 1) > 7 then x*(a[8]
-           + (if size(a, 1) > 8 then x*(a[9] + (if size(a, 1) > 9 then x*(a[10]
-           + (if size(a, 1) > 10 then positivePoly(x, a[11:end]) else 0)) else
+        y := if size(a, 1) > 0 then u*(a[1] + (if size(a, 1) > 1 then u*(a[2]
+           + (if size(a, 1) > 2 then u*(a[3] + (if size(a, 1) > 3 then u*(a[4]
+           + (if size(a, 1) > 4 then u*(a[5] + (if size(a, 1) > 5 then u*(a[6]
+           + (if size(a, 1) > 6 then u*(a[7] + (if size(a, 1) > 7 then u*(a[8]
+           + (if size(a, 1) > 8 then u*(a[9] + (if size(a, 1) > 9 then u*(a[10]
+           + (if size(a, 1) > 10 then positivePoly(u, a[11:end]) else 0)) else
           0)) else 0)) else 0)) else 0)) else 0)) else 0)) else 0)) else 0))
            else 0)) else 0 annotation (Inline=true);
         // Note:  Dymola 7.4 does seem to not inline the recursive calls beyond
@@ -1187,10 +1207,10 @@ An unrelated species may be included.");
       end positivePoly;
 
     algorithm
-      y := (if n < 0 then (if n + size(a, 1) < 0 then x^(n + size(a, 1)) else 1)
-        *positivePoly(1/x, a[min(size(a, 1), -n):-1:1]) else 0) + (if n <= 0
+      y := (if n < 0 then (if n + size(a, 1) < 0 then u^(n + size(a, 1)) else 1)
+        *positivePoly(1/u, a[min(size(a, 1), -n):-1:1]) else 0) + (if n <= 0
          and n > -size(a, 1) then a[1 - n] else 0) + (if n + size(a, 1) > 1
-         then (if n > 1 then x^(n - 1) else 1)*positivePoly(x, a[1 + max(0, 1
+         then (if n > 1 then u^(n - 1) else 1)*positivePoly(u, a[1 + max(0, 1
          - n):size(a, 1)]) else 0) annotation (Inline=true);
       // Here, Dymola 7.4 won't allow indexing via a[1 + max(0, 1 - n):end], so
       // a[1 + max(0, 1 - n):size(a, 1)] is necessary.
@@ -1200,24 +1220,24 @@ An unrelated species may be included.");
       "<html>Round a <code>Real</code> variable to the nearest integer</html>"
       extends Modelica.Icons.Function;
 
-      input Real x "<html><code>Real</code> variable</html>";
+      input Real u "<html><code>Real</code> variable</html>";
       output Integer y "Nearest integer";
 
     algorithm
-      y := integer(x + 0.5) annotation (Inline=true);
+      y := integer(u + 0.5) annotation (Inline=true);
       annotation (Documentation(info="<html><p><b>Example:</b><br>
   <code>round(1.6)</code> returns 2 as an <code>Integer</code>.</p></html>"));
     end round;
 
     function Sigma
-      "<html>Return the sum of the first and second entries of a vector (&Sigma;<i><b>x</b></i>)</html>"
+      "<html>Return the sum of the first and second entries of a vector (&Sigma;<i><b>u</b></i>)</html>"
       extends Modelica.Icons.Function;
 
-      input Real x[2] "Vector of size 2";
+      input Real u[2] "Vector of size 2";
       output Real Sigma "Sum of the first and second entries";
 
     algorithm
-      Sigma := x[1] + x[2] annotation (Inline=true,Documentation(info="<html><p>The translator should automatically
+      Sigma := u[1] + u[2] annotation (Inline=true,Documentation(info="<html><p>The translator should automatically
   vectorize (or \"matricize\") this function.  For example, <code>Sigma([1,2;3,4])</code> returns <code>{3,7}</code>.
   In contrast, <code>sum([1,2;3,4])</code> returns 10.</p></html>"));
     end Sigma;
