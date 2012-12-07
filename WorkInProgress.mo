@@ -390,23 +390,19 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
     <p>**
     </p>
     </html>"),
-      Icon(graphics={
-          Line(
-            points={{-60,0},{-10,0}},
-            color={208,104,0},
-            smooth=Smooth.None),
-          Line(
-            points={{10,0},{60,0}},
-            color={208,104,0},
-            smooth=Smooth.None),
-          Line(
-            points={{-10,36},{-10,-36}},
-            color={208,104,0},
-            smooth=Smooth.None),
-          Line(
-            points={{10,36},{10,-36}},
-            color={208,104,0},
-            smooth=Smooth.None)}),
+      Icon(graphics={Line(
+              points={{-60,0},{-10,0}},
+              color={208,104,0},
+              smooth=Smooth.None),Line(
+              points={{10,0},{60,0}},
+              color={208,104,0},
+              smooth=Smooth.None),Line(
+              points={{-10,36},{-10,-36}},
+              color={208,104,0},
+              smooth=Smooth.None),Line(
+              points={{10,36},{10,-36}},
+              color={208,104,0},
+              smooth=Smooth.None)}),
       Diagram(graphics));
   end Capacitor;
 
@@ -680,25 +676,21 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
 
     // Conservation of material
     der(N)/U.s = chemical.Ndot;
-    annotation (defaultComponentName="species", Icon(graphics={
-          Rectangle(
-            extent={{-100,40},{100,-40}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Line(
-            points={{-100,-40},{100,-40}},
-            color={0,0,0},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{-100,-40},{-100,40},{100,40},{100,-40}},
-            pattern=LinePattern.None,
-            smooth=Smooth.None),
-          Text(
-            extent={{-100,-20},{100,20}},
-            textString="%name",
-            lineColor={0,0,0})}));
+    annotation (defaultComponentName="species", Icon(graphics={Rectangle(
+              extent={{-100,40},{100,-40}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Line(
+              points={{-100,-40},{100,-40}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{-100,-40},{-100,40},{100,40},{100,-40}},
+              pattern=LinePattern.None,
+              smooth=Smooth.None),Text(
+              extent={{-100,-20},{100,20}},
+              textString="%name",
+              lineColor={0,0,0})}));
   end SimpleSpecies;
   annotation (Commands(file="resources/scripts/units-values.mos"
         "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate)."));

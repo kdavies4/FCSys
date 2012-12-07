@@ -5194,60 +5194,51 @@ package Subregions
 <p>Notes:<ul>
   <li>The x-axis component of linear momentum is included by default.  At least one component must be included.</li></ul></html>"),
 
-          Icon(graphics={
-              Ellipse(
-                extent={{-40,100},{40,20}},
-                lineColor={127,127,127},
-                startAngle=30,
-                endAngle=149,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{20,-4},{100,-84}},
-                lineColor={127,127,127},
-                startAngle=270,
-                endAngle=390,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{-100,-4},{-20,-84}},
-                lineColor={127,127,127},
-                startAngle=149,
-                endAngle=270,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Polygon(
-                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
-                    94.5,-24},{60,-84}},
-                pattern=LinePattern.None,
-                fillPattern=FillPattern.Sphere,
-                smooth=Smooth.None,
-                fillColor={225,225,225},
-                lineColor={0,0,0}),
-              Line(
-                points={{-60,-84},{60,-84}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{34.5,80},{94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{-34.5,80},{-94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}),
+          Icon(graphics={Ellipse(
+                      extent={{-40,100},{40,20}},
+                      lineColor={127,127,127},
+                      startAngle=30,
+                      endAngle=149,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{20,-4},{100,-84}},
+                      lineColor={127,127,127},
+                      startAngle=270,
+                      endAngle=390,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{-100,-4},{-20,-84}},
+                      lineColor={127,127,127},
+                      startAngle=149,
+                      endAngle=270,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Polygon(
+                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
+                  80},{94.5,-24},{60,-84}},
+                      pattern=LinePattern.None,
+                      fillPattern=FillPattern.Sphere,
+                      smooth=Smooth.None,
+                      fillColor={225,225,225},
+                      lineColor={0,0,0}),Line(
+                      points={{-60,-84},{60,-84}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{34.5,80},{94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{-34.5,80},{-94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}),
           Diagram(graphics));
-
       end NullPhase;
     end BaseClasses;
   end Phases;
@@ -5261,8 +5252,8 @@ package Subregions
         extends Modelica.Icons.Package;
         model Calibrated "Ideal correlations, with adjustment factors"
           extends SpeciesInertStagnant(redeclare
-              FCSys.Characteristics.C.Graphite Data, redeclare
-              Q.ResistivityThermal alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
+              FCSys.Characteristics.C.Graphite Data, alpha_Sdot=k_alpha_Sdot*
+                Data.alpha(T));
 
           parameter Q.NumberAbsolute k_alpha_tau(final nominal=1) = 1
             "<html>Adjustment factor for fluidity (<i>k</i><sub>&alpha; &tau;</sub>)</html>"
@@ -5281,16 +5272,15 @@ package Subregions
                     {100,100}}), graphics),
             Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics={Text(
-                  extent={{-150,90},{-118,52}},
-                  lineColor={0,0,255},
-                  textString="%t.test")}));
+                          extent={{-150,90},{-118,52}},
+                          lineColor={0,0,255},
+                          textString="%t.test")}));
 
         end Calibrated;
 
         model Correlated "Ideal correlations from kinetic theory"
           extends SpeciesInertStagnant(redeclare
-              FCSys.Characteristics.C.Graphite Data, redeclare
-              Q.ResistivityThermal alpha_Sdot=Data.alpha(T));
+              FCSys.Characteristics.C.Graphite Data, alpha_Sdot=Data.alpha(T));
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -5380,8 +5370,8 @@ package Subregions
         extends Modelica.Icons.Package;
         model Calibrated "Ideal correlations, with adjustment factors"
           extends SpeciesInertStagnant(redeclare
-              FCSys.Characteristics.C19HF37O5S.Solid Data, redeclare
-              Q.ResistivityThermal alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
+              FCSys.Characteristics.C19HF37O5S.Solid Data, alpha_Sdot=
+                k_alpha_Sdot*Data.alpha(T));
 
           parameter Q.NumberAbsolute k_alpha_tau(final nominal=1) = 1
             "<html>Adjustment factor for fluidity (<i>k</i><sub>&alpha; &tau;</sub>)</html>"
@@ -5402,8 +5392,8 @@ package Subregions
 
         model Correlated "Ideal correlations from kinetic theory"
           extends SpeciesInertStagnant(redeclare
-              FCSys.Characteristics.C19HF37O5S.Solid Data, redeclare
-              Q.ResistivityThermal alpha_Sdot=Data.alpha(T));
+              FCSys.Characteristics.C19HF37O5S.Solid Data, alpha_Sdot=
+                Data.alpha(T));
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -5443,9 +5433,9 @@ package Subregions
           extends Species0Amount(
             redeclare FCSys.Characteristics.'e-'.Graphite Data,
             initMethPartNum=InitMethScalar.Amount,
-            redeclare Q.Resistivity alpha_Ndot=k_alpha_Ndot*Data.alpha(T),
-            redeclare Q.Resistivity alpha_tau=k_alpha_tau*Data.alpha(T),
-            redeclare Q.ResistivityThermal alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
+            alpha_Ndot=k_alpha_Ndot*Data.alpha(T),
+            alpha_tau=k_alpha_tau*Data.alpha(T),
+            alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
 
           // Note:  initMethPartNum may not be Pressure (which is default) since the
           // EOS doesn't involve pressure.
@@ -5471,9 +5461,9 @@ package Subregions
           extends Species0Amount(
             redeclare FCSys.Characteristics.'e-'.Graphite Data,
             initMethPartNum=InitMethScalar.Amount,
-            redeclare Q.Resistivity alpha_Ndot=Data.alpha(T),
-            redeclare Q.Resistivity alpha_tau=Data.alpha(T),
-            redeclare Q.ResistivityThermal alpha_Sdot=Data.alpha(T));
+            alpha_Ndot=Data.alpha(T),
+            alpha_tau=Data.alpha(T),
+            alpha_Sdot=Data.alpha(T));
           // Note:  initMethPartNum may not be Pressure (which is default) since the
           // EOS doesn't involve pressure.
 
@@ -5517,9 +5507,9 @@ package Subregions
           extends Species(
             redeclare FCSys.Characteristics.H2.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity alpha_Ndot=k_alpha_Ndot*Data.alpha(T),
-            redeclare Q.Resistivity alpha_tau=k_alpha_tau*Data.alpha(T),
-            redeclare Q.ResistivityThermal alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
+            alpha_Ndot=k_alpha_Ndot*Data.alpha(T),
+            alpha_tau=k_alpha_tau*Data.alpha(T),
+            alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
 
           parameter Q.NumberAbsolute k_alpha_Ndot(final nominal=1) = 1
             "<html>Adjustment factor for material transport resistivity (<i>k</i><sub>&alpha; <i>N&#775;</i></sub>)</html>"
@@ -5562,9 +5552,9 @@ package Subregions
           extends Species(
             redeclare FCSys.Characteristics.H2.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity alpha_Ndot=Data.alpha(T),
-            redeclare Q.Resistivity alpha_tau=Data.alpha(T),
-            redeclare Q.ResistivityThermal alpha_Sdot=Data.alpha(T));
+            alpha_Ndot=Data.alpha(T),
+            alpha_tau=Data.alpha(T),
+            alpha_Sdot=Data.alpha(T));
 
           parameter Boolean empiricalMechanical=true
             "Use empirical correlation for fluidity (otherwise, theoretical)"
@@ -5677,9 +5667,9 @@ and <code>alpha_Sdot=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</
           extends Species(
             redeclare FCSys.Characteristics.H2O.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity alpha_Ndot=k_alpha_Ndot*Data.alpha(T),
-            redeclare Q.Resistivity alpha_tau=k_alpha_tau*Data.alpha(T),
-            redeclare Q.ResistivityThermal alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
+            alpha_Ndot=k_alpha_Ndot*Data.alpha(T),
+            alpha_tau=k_alpha_tau*Data.alpha(T),
+            alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
 
           parameter Q.NumberAbsolute k_alpha_Ndot(final nominal=1) = 1
             "<html>Adjustment factor for material transport resistivity (<i>k</i><sub>&alpha; <i>N&#775;</i></sub>)</html>"
@@ -5722,9 +5712,9 @@ and <code>alpha_Sdot=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</
           extends Species(
             redeclare FCSys.Characteristics.H2O.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity alpha_Ndot=Data.alpha(T),
-            redeclare Q.Resistivity alpha_tau=Data.alpha(T),
-            redeclare Q.ResistivityThermal alpha_Sdot=Data.alpha(T));
+            alpha_Ndot=Data.alpha(T),
+            alpha_tau=Data.alpha(T),
+            alpha_Sdot=Data.alpha(T));
 
           parameter Boolean empiricalMechanical=true
             "Use empirical correlation for fluidity (otherwise, theoretical)"
@@ -5896,9 +5886,9 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
           extends Species0Amount(
             redeclare FCSys.Characteristics.'H+'.Solid Data,
             initMethPartNum=InitMethScalar.Amount,
-            redeclare Q.Resistivity alpha_Ndot=k_alpha_Ndot*Data.alpha(T),
-            redeclare Q.Resistivity alpha_tau=k_alpha_tau*Data.alpha(T),
-            redeclare Q.ResistivityThermal alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
+            alpha_Ndot=k_alpha_Ndot*Data.alpha(T),
+            alpha_tau=k_alpha_tau*Data.alpha(T),
+            alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
 
           // Note:  initMethPartNum may not be Pressure (which is default) since the
           // EOS doesn't involve pressure.
@@ -5924,9 +5914,9 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
           extends Species0Amount(
             redeclare FCSys.Characteristics.'H+'.Solid Data,
             initMethPartNum=InitMethScalar.Amount,
-            redeclare Q.Resistivity alpha_Ndot=Data.alpha(T),
-            redeclare Q.Resistivity alpha_tau=Data.alpha(T),
-            redeclare Q.ResistivityThermal alpha_Sdot=Data.alpha(T));
+            alpha_Ndot=Data.alpha(T),
+            alpha_tau=Data.alpha(T),
+            alpha_Sdot=Data.alpha(T));
           // Note:  initMethPartNum may not be Pressure (which is default) since the
           // EOS doesn't involve pressure.
 
@@ -6035,9 +6025,9 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
           extends Species(
             redeclare FCSys.Characteristics.N2.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity alpha_Ndot=k_alpha_Ndot*Data.alpha(T),
-            redeclare Q.Resistivity alpha_tau=k_alpha_tau*Data.alpha(T),
-            redeclare Q.ResistivityThermal alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
+            alpha_Ndot=k_alpha_Ndot*Data.alpha(T),
+            alpha_tau=k_alpha_tau*Data.alpha(T),
+            alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
 
           parameter Q.NumberAbsolute k_alpha_Ndot(final nominal=1) = 1
             "<html>Adjustment factor for material transport resistivity (<i>k</i><sub>&alpha; <i>N&#775;</i></sub>)</html>"
@@ -6080,9 +6070,9 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
           extends Species(
             redeclare FCSys.Characteristics.N2.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity alpha_Ndot=Data.alpha(T),
-            redeclare Q.Resistivity alpha_tau=Data.alpha(T),
-            redeclare Q.ResistivityThermal alpha_Sdot=Data.alpha(T));
+            alpha_Ndot=Data.alpha(T),
+            alpha_tau=Data.alpha(T),
+            alpha_Sdot=Data.alpha(T));
 
           parameter Boolean empiricalMechanical=true
             "Use empirical correlation for fluidity (otherwise, theoretical)"
@@ -6187,9 +6177,9 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
           extends Species(
             redeclare FCSys.Characteristics.O2.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity alpha_Ndot=k_alpha_Ndot*Data.alpha(T),
-            redeclare Q.Resistivity alpha_tau=k_alpha_tau*Data.alpha(T),
-            redeclare Q.ResistivityThermal alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
+            alpha_Ndot=k_alpha_Ndot*Data.alpha(T),
+            alpha_tau=k_alpha_tau*Data.alpha(T),
+            alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
 
           parameter Q.NumberAbsolute k_alpha_Ndot(final nominal=1) = 1
             "<html>Adjustment factor for material transport resistivity (<i>k</i><sub>&alpha; <i>N&#775;</i></sub>)</html>"
@@ -6231,9 +6221,9 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
           extends Species(
             redeclare FCSys.Characteristics.O2.Gas Data(b_v=[1], specVolPow={-1,
                   0}),
-            redeclare Q.Resistivity alpha_Ndot=Data.alpha(T),
-            redeclare Q.Resistivity alpha_tau=Data.alpha(T),
-            redeclare Q.ResistivityThermal alpha_Sdot=Data.alpha(T));
+            alpha_Ndot=Data.alpha(T),
+            alpha_tau=Data.alpha(T),
+            alpha_Sdot=Data.alpha(T));
 
           parameter Boolean empiricalMechanical=true
             "Use empirical correlation for fluidity (otherwise, theoretical)"
@@ -6351,9 +6341,8 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
 
     model SpeciesInertStagnant "Inert and stagnant species"
       extends Species(
-        redeclare final parameter Q.Resistivity alpha_Ndot=Modelica.Constants.inf,
-
-        redeclare final parameter Q.Resistivity alpha_tau=0,
+        final alpha_Ndot=Modelica.Constants.inf,
+        final alpha_tau=0,
         final upstreamX,
         final upstreamY,
         final upstreamZ,
@@ -6682,14 +6671,15 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
       // Aliases (for common terms)
       Q.Mass M(nominal=1*U.g, start=Data.m*N_IC) "Mass";
       Q.Volume V(
-        min=0,
+        nominal=1*U.cm^3,
         final start=V_IC,
         final fixed=false) "Volume";
       Q.PressureAbsolute p(
+        nominal=1*U.atm,
         final start=p_IC,
         final fixed=false,
         stateSelect=StateSelect.never) "Pressure";
-      // Note:  In Dymola 7.4, StateSelect.never is necessary to avoid dynamic
+      // Note:  In Dymola 7.4 StateSelect.never is necessary to avoid dynamic
       // state selection.
       Q.Potential h(
         nominal=1*U.V,
@@ -6709,18 +6699,15 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
         each final fixed=false) "Current";
 
       // Material properties
-      input Q.Resistivity alpha_Ndot(nominal=10*U.cm/U.A, start=Data.alpha(T_IC))
+      Q.Resistivity alpha_Ndot(nominal=10*U.cm/U.A) = Data.alpha(T_IC)
         "<html>Material transport resistivity (&alpha;<sub><i>N&#775;</i></sub>)</html>"
         annotation (Dialog(group="Material properties"));
-      input Q.Resistivity alpha_tau(nominal=10*U.cm/U.A, start=Data.alpha(T_IC))
+      Q.Resistivity alpha_tau(nominal=10*U.cm/U.A) = Data.alpha(T_IC)
         "<html>Fluidity (&alpha;<sub>&tau;</sub>)</html>"
         annotation (Dialog(group="Material properties"));
-      input Q.ResistivityThermal alpha_Sdot(nominal=10*U.cm/U.A, start=
-            Data.alpha(T_IC))
+      Q.ResistivityThermal alpha_Sdot(nominal=10*U.cm/U.A) = Data.alpha(T_IC)
         "<html>Thermal resistivity (&alpha;<sub><i>S&#775;</i></sub>)</html>"
         annotation (Dialog(group="Material properties"));
-      // Note:  The properties are defined as inputs so that they can be
-      // redeclared as parameters or acausal time-varying variables.
 
       // Auxiliary variables (for analysis)
       // ----------------------------------
@@ -7031,7 +7018,7 @@ For simulation, specify global default settings by dragging FCSys.BCs.Defaults i
 The default global default settings will be used for the current simulation.",
           Placement(transformation(extent={{40,40},{60,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
-      // Note:  In Dymola 7.4, it is necessary to add the missing inner message
+      // Note:  In Dymola 7.4 it is necessary to add the missing inner message
       // here to give a warning message, even though it is included in the
       // Defaults model too.
 
@@ -7670,6 +7657,7 @@ The default global default settings will be used for the current simulation.",
           CurrentRate "Initialize the rate of ditto.")
         "Methods of initializing linear momentum";
     end BaseClasses;
+
   end Species;
 
   model PhaseBoundary

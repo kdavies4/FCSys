@@ -1231,7 +1231,7 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
       //extends FCSys.BaseClasses.Icons.Names.Top4;
       // Note:  Extensions of AnGDL should be placed directly in the AnGDLs
       // package rather than nested packages (e.g., by manufacturer) so that
-      // __Dymola_choicesFromPackage can be used.  In Dymola 7.4, the
+      // __Dymola_choicesFromPackage can be used.  In Dymola 7.4 the
       // parameter dialogs launch too slowly when __Dymola_choicesAllMatching
       // is used.
       extends FCSys.Regions.Region(
@@ -1796,7 +1796,7 @@ the z axis extends across the width of the channel.</p>
       //extends FCSys.BaseClasses.Icons.Names.Top4;
       // Note:  Extensions of PEM should be placed directly in the PEMs
       // package rather than nested packages (e.g., by manufacturer) so that
-      // __Dymola_choicesFromPackage can be used.  In Dymola 7.4, the
+      // __Dymola_choicesFromPackage can be used.  In Dymola 7.4 the
       // parameter dialogs launch too slowly when __Dymola_choicesAllMatching
       // is used.
 
@@ -1830,7 +1830,7 @@ the z axis extends across the width of the channel.</p>
 
       // TODO:  Clean up (move to Species models if possible):
 
-      // Note:  In Dymola 7.4, the following can't be used:
+      // Note:  In Dymola 7.4 the following can't be used:
       //     each final N_IC=lambda_IC*subregions[1, 1, 1].ionomer.C19HF37O5S.N_IC)
       // due to the following error:
       //     "The left hand side of the following equation is a scalar and the
@@ -2252,7 +2252,7 @@ the z axis extends across the width of the channel.</p>
     extends Modelica.Icons.Package;
     // Note:  Extensions of CaGDL should be placed directly in the CaGDLs
     // package rather than nested packages (e.g., by manufacturer) so that
-    // __Dymola_choicesFromPackage can be used.  In Dymola 7.4, the
+    // __Dymola_choicesFromPackage can be used.  In Dymola 7.4 the
     // parameter dialogs launch too slowly when __Dymola_choicesAllMatching
     // is used.
 
@@ -2260,7 +2260,7 @@ the z axis extends across the width of the channel.</p>
       //extends FCSys.BaseClasses.Icons.Names.Top4;
       // Note:  Extensions of CaGDL should be placed directly in the CaGDLs
       // package rather than nested packages so that __Dymola_choicesFromPackage
-      // can be used.  In Dymola 7.4, the parameter dialogs launch too slowly
+      // can be used.  In Dymola 7.4 the parameter dialogs launch too slowly
       // when __Dymola_choicesAllMatching is used.
       extends FCSys.Regions.Region(
         L_x=fill(0.3*U.mm/1, 1),

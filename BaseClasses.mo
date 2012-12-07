@@ -788,13 +788,13 @@ This icon is designed for a <b>signal bus</b> connector.
                 {1,1,1,1},
                 0);
         // Check the translated model to be sure that the polynomial is written in
-        // nested form for efficiency.  In Dymola 7.4, turn on the option "Generate
+        // nested form for efficiency.  In Dymola 7.4 turn on the option "Generate
         // listing of translated Modelica code in dsmodel.mof".  dsmodel.mof should
         // contain:
         //     x1 := 1+time*(1+time*(1+time)).
         x2 = poly(time, 2*ones(35));
         // The function is only unrolled to a a limited depth (currently 10th order
-        // polynomial).  In Dymola 7.4, poly(time, ones(34)) results in a recursive
+        // polynomial).  In Dymola 7.4 poly(time, ones(34)) results in a recursive
         // call, but poly(time, ones(35)) doesn't.
         x3 = poly(
                 time + 1,

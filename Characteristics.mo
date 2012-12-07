@@ -387,7 +387,7 @@ package Characteristics "Data and functions to correlate physical properties"
             1.0582450,248.75372*U.K,0.11736907e5*U.K^2,0.82758695},{-0.22364420,
             -0.69650442e4*U.K,-0.77771313e5*U.K^2,13.189369}});
 
-      // Note:  In Dymola 7.4, ln(1e-323) returns a valid result, but ln(1e-324)
+      // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
       // doesn't.
 
       annotation (Documentation(info="<html>
@@ -435,7 +435,7 @@ package Characteristics "Data and functions to correlate physical properties"
         b_lambda={{1.0966389,-555.13429*U.K,0.10623408e6*U.K^2,-0.24664550},{
             0.39367933,-0.22524226e4*U.K,0.61217458e6*U.K^2,5.8011317},{-0.41858737,
             -0.14096649e5*U.K,0.19179190e8*U.K^2,14.345613}});
-      // Note:  In Dymola 7.4, ln(1e-323) returns a valid result, but ln(1e-324)
+      // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
       // doesn't.
 
       annotation (Documentation(info="<html>
@@ -600,7 +600,7 @@ package Characteristics "Data and functions to correlate physical properties"
         b_lambda={{0.85439436,105.73224*U.K,-0.12347848e5*U.K^2,0.47793128},{
             0.88407146,133.57293*U.K,-0.11429640e5*U.K^2,0.24417019},{2.4176185,
             0.80477749e4*U.K,0.31055802e7*U.K^2,-14.517761}});
-      // Note:  In Dymola 7.4, ln(1e-323) returns a valid result, but ln(1e-324)
+      // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
       // doesn't.
 
       annotation (Documentation(info="<html>
@@ -650,7 +650,7 @@ package Characteristics "Data and functions to correlate physical properties"
         b_lambda={{0.77229167,6.8463210*U.K,-0.58933377e4*U.K^2,1.2210365},{
             0.90917351,291.24182*U.K,-0.79650171e5*U.K^2,0.064851631},{-1.1218262,
             -0.19286378e5*U.K,0.23295011e8*U.K^2,20.342043}});
-      // Note:  In Dymola 7.4, ln(1e-323) returns a valid result, but ln(1e-324)
+      // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
       // doesn't.
 
       annotation (Documentation(info="<html><p>Notes:<ul>
@@ -709,7 +709,7 @@ package Characteristics "Data and functions to correlate physical properties"
     /U.K) + "] K).");
   */
         // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4, T_lim_alpha[end] can't be used instead of
+        // Note:  In Dymola 7.4 T_lim_alpha[end] can't be used instead of
         // T_lim_alpha[size(T_lim_alpha, 1)] due to:
         //     "Error, not all "end" could be expanded."
 
@@ -756,7 +756,7 @@ package Characteristics "Data and functions to correlate physical properties"
     /U.K) + "] K).");
   */
         // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4, T_lim_alpha[end] can't be used instead of
+        // Note:  In Dymola 7.4 T_lim_alpha[end] can't be used instead of
         // T_lim_alpha[size(T_lim_alpha, 1)] due to:
         //     "Error, not all "end" could be expanded."
 
@@ -869,7 +869,7 @@ package Characteristics "Data and functions to correlate physical properties"
     /U.K) + ", " + String(T_lim_c0[size(T_lim_c0, 1)]/U.K) + "] K).");
   */
         // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4, T_lim_c0[end] can't be used instead of
+        // Note:  In Dymola 7.4 T_lim_c0[end] can't be used instead of
         // T_lim_c0[size(T_lim_c0, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
@@ -946,7 +946,7 @@ package Characteristics "Data and functions to correlate physical properties"
     /U.K) + ", " + String(T_lim_c0[size(T_lim_c0, 1)]/U.K) + "] K).");
     */
         // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4, T_lim_c0[end] can't be used instead of
+        // Note:  In Dymola 7.4 T_lim_c0[end] can't be used instead of
         // T_lim_c0[size(T_lim_c0, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
@@ -1003,7 +1003,7 @@ package Characteristics "Data and functions to correlate physical properties"
     /U.K) + ", " + String(T_lim_c0[size(T_lim_c0, 1)]/U.K) + "] K).");
     */
         // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4, T_lim_c0[end] can't be used instead of
+        // Note:  In Dymola 7.4 T_lim_c0[end] can't be used instead of
         // T_lim_c0[size(T_lim_c0, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
@@ -1031,7 +1031,7 @@ package Characteristics "Data and functions to correlate physical properties"
         // assert(isCompressible,
         //  "The pressure is undefined since the material is incompressible.",
         //  AssertionLevel.warning);
-        // Note:  In Dymola 7.4, the assertion level can't be set, although it has
+        // Note:  In Dymola 7.4 the assertion level can't be set, although it has
         // been defined as an argument to assert() since Modelica 3.0.
 
         p := if isCompressible then poly(
@@ -1080,7 +1080,7 @@ package Characteristics "Data and functions to correlate physical properties"
     /U.K) + ", " + String(T_lim_c0[size(T_lim_c0, 1)]/U.K) + "] K).");
   */
         // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4, T_lim_c0[end] can't be used instead of
+        // Note:  In Dymola 7.4 T_lim_c0[end] can't be used instead of
         // T_lim_c0[size(T_lim_c0, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
