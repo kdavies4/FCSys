@@ -5,7 +5,7 @@
 <meta name="description" content="&lt;html&gt;H&lt;sup&gt;+&lt;/sup&gt;&lt;/html&gt;">
 <meta name="keywords" content="Modelica, fuel cell, PEMFC, model">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
-<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<link rel="shortcut icon" href="images/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
 </head>
 <body>
@@ -50,125 +50,21 @@
 <b>H<sup>+</sup></b>
 <p>
 <p><h3>Information</h3></p>
-Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_MaterialPropertiesPackage.html#Modelica.Icons.MaterialPropertiesPackage">Modelica.Icons.MaterialPropertiesPackage</a> (Icon for package containing property classes).
+Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td><img src="images/FCSys.Characteristics.C.GraphiteS.png" alt="FCSys.Characteristics.'H+'.Gas" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_'H+'.html#FCSys.Characteristics.'H+'.Gas">Gas</a>
+<tr><td><img src="images/FCSys.Characteristics.C.GraphiteS.png" alt="FCSys.Characteristics.'H+'.Gas" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_'H+'_Gas.html#FCSys.Characteristics.'H+'.Gas">Gas</a>
 </td><td>H+ gas</td></tr>
-<tr><td><img src="images/FCSys.Characteristics.C.GraphiteS.png" alt="FCSys.Characteristics.'H+'.Solid" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_'H+'.html#FCSys.Characteristics.'H+'.Solid">Solid</a>
+<tr><td><img src="images/FCSys.Characteristics.C.GraphiteS.png" alt="FCSys.Characteristics.'H+'.Solid" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_'H+'_Solid.html#FCSys.Characteristics.'H+'.Solid">Solid</a>
 </td><td>H+ in solid</td></tr>
 </table>
-<hr>
-
-<h2><img src="FCSys.Characteristics.'H+'images/.GasI.png" alt="FCSys.Characteristics.'H+'.Gas" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Characteristics.'H+'.Gas"></a><a href="FCSys_Characteristics_'H+'.html#FCSys.Characteristics.'H+'">FCSys.Characteristics.'H+'</a>.Gas</h2>
-<b>H+ gas</b><p>
-<p><h3>Information</h3></p>
-
-         <p>Assumptions:
-     <ol>
-  <li>The radius (for the purpose of the rigid-sphere assumption of
-  kinetic theory) is that of H
-  (<a href="http://en.wikipedia.org/wiki/Hydrogen">http://en.wikipedia.org/wiki/Hydrogen</a>).</li>
-     </ol>
-     </p>
-
-     <p>Additional notes:
-     <ul>
-     <li>The source data [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride2002</a>] breaks the data into three
-   temperature ranges, but the constants are the same for each.
-   Therefore, the temperature limits are set here such that the entire
-   range is handled without switching.
-   The lower temperature limit in the source data
-   is 298.150 K, but here it is expanded down to 200 K.  The constants are
-   independent of temperature anyway.</li>
-   <li>The enthalpy to produce H<sup>+</sup> from H<sub>2</sub>O (H<sub>2</sub>O &#8640; OH<sup>-</sup> + H<sup>+</sup>) is
-   -96569.804 J/mol.  The enthalpy to produce H<sup>+</sup> from H<sub>3</sub>O<sup>+</sup>
-   (H<sub>3</sub>O<sup>+</sup> &#8640; H<sub>2</sub>O + H<sup>+</sup>) is 839826.0 J/mol.  Based on
-   Tissandier et al., the
-   enthalpy of formation of aqueous H<sup>+</sup> is 1150.1e3 J/mol [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Tissandier1998</a>].</li>
-     </ul>
-     </p>
-  <p>For more information, see the
-  <a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a> record.</p><p>
-Extends from <a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses.Characteristic">BaseClasses.Characteristic</a> (Record for thermodynamic and resistive properties).
-<p><h3>Parameters</h3><p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>String</td><td>formula</td><td>&quot;H+&quot;</td><td>Chemical formula</td></tr>
-<tr><td>String</td><td>phase</td><td>&quot;gas&quot;</td><td>Phase (e.g., &quot;gas&quot;)</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.MassSpecific">MassSpecific</a></td><td>m</td><td>Data.MM*U.kg/U.mol</td><td>Specific mass [m/N]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.LengthSpecific">LengthSpecific</a></td><td>r</td><td>120*U.pico*U.m/U.q</td><td>Specific radius [l/N]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialChemical">PotentialChemical</a></td><td>Deltah0_f</td><td>Data.MM*Data.Hf*U.J/U.mol</td><td>Enthalpy of formation at 298.15 K, <i>p</i>&deg; (&Delta;<i>h</i>&deg;<sub>f</sub>)</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialChemical">PotentialChemical</a></td><td>Deltah0</td><td>Data.MM*Data.H0*U.J/U.mol</td><td><i>h</i>&deg;(298.15 K) - <i>h</i>&deg;(0 K) (&Delta;<i>h</i>&deg;)</td></tr>
-<tr><td>Real</td><td>b_c[size(T_lim_c, 1) - 1, :]</td><td>{Data.alow} .* fill({U.K^(3 ...</td><td>Coefficients of specific heat capacity at <i>p</i>&deg; as a polynomial in <i>T</i> (<i>b</i><sub><i>c</i></sub>)</td></tr>
-<tr><td>Real</td><td>B_c[size(T_lim_c, 1) - 1, 2]</td><td>{Data.blow} .* fill({U.K,1},...</td><td>Integration constants for specific enthalpy and entropy (<i>B</i><sub><i>c</i></sub>)</td></tr>
-</table>
-<p><h3>Modelica definition</h3>
-<pre>
-<font color="blue">record</font> Gas <font color="darkgreen">&quot;H+ gas&quot;</font>
-  <font color="blue">import </font>Data = Modelica.Media.IdealGases.Common.SingleGasesData.Hplus;
-
-  <font color="blue">extends </font><a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses.Characteristic">BaseClasses.Characteristic</a>(
-    <font color="blue">final </font>formula=&quot;H+&quot;,
-    phase=&quot;gas&quot;,
-    <font color="blue">final </font>m=Data.MM*U.kg/U.mol,
-    b_v=[1],
-    specVolPow={-1,0},
-    Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
-    Deltah0=Data.MM*Data.H0*U.J/U.mol,
-    specHeatCapPow=-2,
-    T_lim_c={200.000,20000.000}*U.K,
-    b_c={Data.alow} .* <font color="red">fill</font>({U.K^(3 - i) <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(Data.alow, 1)}, <font color="red">size</font>(
-        T_lim_c, 1) - 1),
-    B_c={Data.blow} .* <font color="red">fill</font>({U.K,1}, <font color="red">size</font>(T_lim_c, 1) - 1) - b_c[:, 2:3]*<font color="red">ln</font>(U.K),
-
-    r=120*U.pico*U.m/U.q);
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Gas;
-</pre>
-<hr>
-
-<h2><img src="FCSys.Characteristics.'H+'images/.GasI.png" alt="FCSys.Characteristics.'H+'.Solid" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Characteristics.'H+'.Solid"></a><a href="FCSys_Characteristics_'H+'.html#FCSys.Characteristics.'H+'">FCSys.Characteristics.'H+'</a>.Solid</h2>
-<b>H+ in solid</b><p>
-<p><h3>Information</h3></p>
-<p>The enthalpy of formation (<code>Deltah0_f</code>) and the additional enthalpy
-  offset (<code>h_offset</code>) are specified such that the enthalpy in the
-  <a href="FCSys_Subregiosn_BaseClasses.html#FCSys.Subregiosn.BaseClasses.PartialSpecies">PartialSpecies</a> model is referenced to zero at 0 &deg;C.
-  Otherwise, there is a very large bias that causes problems with the reaction.  The proper
-  values are not known from the NASA CEA thermodynamic data
-    [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride2002</a>] (it only provides data for H<sup>+</sup> gas).
-  Since the same H<sup>+</sup> model is used in the anode and cathode, there is no net effect.</p>
-
-  <p>The specific volume of protons corresponds to the concentration measured
-  by Spry and Fayer (0.95 M) in Nafion<sup>&reg;</sup> at
-  &lambda; = 12, where &lambda; is the number of
-  H<sub>2</sub>O molecules to SO<sub>3</sub>H
-  endgroups.  At &lambda; = 22, the concentration was measured at 0.54 M
-  [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Spry2009</a>].</p>
-<p>
-Extends from <a href="FCSys_Characteristics_'H+'.html#FCSys.Characteristics.'H+'.Gas">Gas</a> (H+ gas).
-<p><h3>Modelica definition</h3>
-<pre>
-<font color="blue">record</font> Solid <font color="darkgreen">&quot;H+ in solid&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Characteristics_'H+'.html#FCSys.Characteristics.'H+'.Gas">Gas</a>(
-    <font color="blue">final </font>phase=&quot;solid&quot;,
-    specVolPow={0,0},
-    b_v=[1/(0.95*U.M)],
-    p_min=-Modelica.Constants.inf,
-    Deltah0_f=H2O.Gas.Deltah0_f/4,
-    h_offset=-'H+'.Gas.Deltah0_f + H2O.Gas.Deltah0_f/4);
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Solid;
-</pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Dec 10 17:54:21 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Dec 10 21:33:13 2012.
 </div>
 </body>
 </html>

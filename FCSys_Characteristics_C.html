@@ -5,7 +5,7 @@
 <meta name="description" content="C">
 <meta name="keywords" content="Modelica, fuel cell, PEMFC, model">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
-<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<link rel="shortcut icon" href="images/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
 </head>
 <body>
@@ -48,89 +48,19 @@
 <b>C</b>
 <p>
 <p><h3>Information</h3></p>
-Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_MaterialPropertiesPackage.html#Modelica.Icons.MaterialPropertiesPackage">Modelica.Icons.MaterialPropertiesPackage</a> (Icon for package containing property classes).
+Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td><img src="images/FCSys.Characteristics.C.GraphiteS.png" alt="FCSys.Characteristics.C.Graphite" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_C.html#FCSys.Characteristics.C.Graphite">Graphite</a>
+<tr><td><img src="images/FCSys.Characteristics.C.GraphiteS.png" alt="FCSys.Characteristics.C.Graphite" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_C_Graphite.html#FCSys.Characteristics.C.Graphite">Graphite</a>
 </td><td>C graphite</td></tr>
 </table>
-<hr>
-
-<h2><img src="images/FCSys.Characteristics.C.GraphiteI.png" alt="FCSys.Characteristics.C.Graphite" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Characteristics.C.Graphite"></a><a href="FCSys_Characteristics_C.html#FCSys.Characteristics.C">FCSys.Characteristics.C</a>.Graphite</h2>
-<b>C graphite</b><p>
-<p><h3>Information</h3></p>
-
-
-     <p>Assumptions:
-     <ol>
-     <li>Constant specific volume (i.e., incompressible and without
-          thermal expansion)</li>
-     </ol>
-     </p>
-
-     <p>Additional notes:
-     <ul>
-     <li>The radius is from <a href="http://en.wikipedia.org/wiki/Carbon">http://en.wikipedia.org/wiki/Carbon</a>.  See also
-   <a href="http://en.wikipedia.org/wiki/Van_der_Waals_radius">http://en.wikipedia.org/wiki/Van_der_Waals_radius</a>.</li>
-     <li>The default specific volume (<code>v=U.cm^3*m/(2.210*U.g)</code>) is of pyrolytic graphite
-  at 300 K according to Incropera and DeWitt [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Incropera2002</a>, p. 909].  Other forms
-  are (also at 300 K and based on the same reference) are:
-  <ul>
-       <li>Amorphous carbon:  <code>v=U.cm^3*m/(1.950*U.g)</code></li>
-       <li>Diamond (type IIa):  <code>v=U.cm^3*m/(3.500*U.g)</code></li>
-       </li>
-     </ul>
-     </p>
-<p>For more information, see the
-  <a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a> record.</p><p>
-Extends from <a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses.Characteristic">BaseClasses.Characteristic</a> (Record for thermodynamic and resistive properties).
-<p><h3>Parameters</h3><p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>String</td><td>formula</td><td>&quot;C&quot;</td><td>Chemical formula</td></tr>
-<tr><td>String</td><td>phase</td><td>&quot;graphite&quot;</td><td>Phase (e.g., &quot;gas&quot;)</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.MassSpecific">MassSpecific</a></td><td>m</td><td>12.0107*U.g/U.mol</td><td>Specific mass [m/N]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.LengthSpecific">LengthSpecific</a></td><td>r</td><td>170*U.pico*U.m/U.q</td><td>Specific radius [l/N]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialChemical">PotentialChemical</a></td><td>Deltah0_f</td><td>0*U.J/U.mol</td><td>Enthalpy of formation at 298.15 K, <i>p</i>&deg; (&Delta;<i>h</i>&deg;<sub>f</sub>)</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialChemical">PotentialChemical</a></td><td>Deltah0</td><td>1053.500*U.J/U.mol</td><td><i>h</i>&deg;(298.15 K) - <i>h</i>&deg;(0 K) (&Delta;<i>h</i>&deg;)</td></tr>
-<tr><td>Real</td><td>b_c[size(T_lim_c, 1) - 1, :]</td><td>[1.132856760e5, -1.980421677...</td><td>Coefficients of specific heat capacity at <i>p</i>&deg; as a polynomial in <i>T</i> (<i>b</i><sub><i>c</i></sub>)</td></tr>
-<tr><td>Real</td><td>B_c[size(T_lim_c, 1) - 1, 2]</td><td>[8.943859760e3*U.K, -7.29582...</td><td>Integration constants for specific enthalpy and entropy (<i>B</i><sub><i>c</i></sub>)</td></tr>
-</table>
-<p><h3>Modelica definition</h3>
-<pre>
-<font color="blue">record</font> Graphite <font color="darkgreen">&quot;C graphite&quot;</font>
-
-  <font color="blue">extends </font><a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses.Characteristic">BaseClasses.Characteristic</a>(
-    <font color="blue">final </font>formula=&quot;C&quot;,
-    <font color="blue">final </font>phase=&quot;graphite&quot;,
-    p0=U.atm,
-    specVolPow={0,0},
-    b_v=[U.cm^3*m/(2.2210*U.g)],
-    p_min=-Modelica.Constants.inf,
-    m=12.0107*U.g/U.mol,
-    Deltah0_f=0*U.J/U.mol,
-    Deltah0=1053.500*U.J/U.mol,
-    T_lim_c={200.000,600.000,2000.000,6000.000}*U.K,
-    b_c=[1.132856760e5, -1.980421677e3, 1.365384188e1, -4.636096440e-2, 1.021333011e-4,
-        -1.082893179e-7, 4.472258860e-11; 3.356004410e5, -2.596528368e3, 6.948841910,
-        -3.484836090e-3, 1.844192445e-6, -5.055205960e-10, 5.750639010e-14; 2.023105106e5,
-        -1.138235908e3, 3.700279500, -1.833807727e-4, 6.343683250e-8, -7.068589480e-12,
-        3.335435980e-16] .* <font color="red">fill</font>({U.K^(3 - i) <font color="blue">for </font>i<font color="blue"> in </font>1:7}, <font color="red">size</font>(T_lim_c, 1) -
-        1),
-    B_c=[8.943859760e3*U.K, -7.295824740e1; 1.398412456e4*U.K, -4.477183040e1; 5.848134850e3,
-        -2.350925275e1] - b_c[:, 2:3]*<font color="red">ln</font>(U.K),
-    r=170*U.pico*U.m/U.q);
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Graphite;
-</pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Dec 10 17:54:16 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Dec 10 21:33:12 2012.
 </div>
 </body>
 </html>
