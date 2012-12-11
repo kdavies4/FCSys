@@ -146,147 +146,143 @@ package UsersGuide "User's Guide"
     <p>These references are cited throughout the library:</p>
     <table border=0 cellspacing=0 cellpadding=2 class=\"noBorder\">
     <tr>
-      <td valign=top class=\"noBorder\">[Ashcroft1976]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"Ashcroft1976\" class=bookmark>Ashcroft1976</a>]</td>
       <td valign=top class=\"noBorder\">N. W. Ashcroft and N. D. Mermin, <i>Solid State Physics</i>, New York:  Holt, Rinehard and Winston, 1976.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[Avogadro1.03]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"Avogadro1.03\" class=bookmark>Avogadro1.03</a>]</td>
       <td valign=top class=\"noBorder\">Avogadro: An Open-Source Molecular Builder and Visualization Tool, ver. 1.03. <a href=\"http://avogadro.openmolecules.net\">http://avogadro.openmolecules.net</a>.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[Bejan2006]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"Bejan2006\" class=bookmark>Bejan2006</a>]</td>
       <td valign=top class=\"noBorder\">A. Bejan, <i>Advanced Engineering Thermodynamics</i>, John Wiley & Sons, 3rd ed., 2006.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[Bernardi1992]</td>
-      <td valign=top class=\"noBorder\">D. M. Bernardi and M. W. Verbrugge, \"<a href=\"http://dx.doi.org/10.1149/1.2221251\">A Mathematical Model of the Solid-polymer-Electrolyte Fuel Cell</a>,\" <i>J. Electrochem. Soc.</i>, vol. 139, no. 9, pp. 2477&ndash;2491, Sep. 1992.</td>
-    </tr>
-    <tr>
-      <td valign=top class=\"noBorder\">[Cellier1991]</td>
-      <td valign=top class=\"noBorder\">F. E. Cellier, \"<i><a href=\"http://www.inf.ethz.ch/personal/fcellier/Pubs/BG/springer.html\">Continuous System Modeling</a></i>,\" Springer-Verlag, 1991.</td>
-    </tr>
-    <tr>
-      <td valign=top class=\"noBorder\">[DuPont2004N]</td>
-      <td valign=top class=\"noBorder\">DuPont, \"Nafion&reg; PFSA Membranes N-112, NE-1135, N-115, N-117, NE-1110</a>,\" <a href = http://www.fuelcells.dupont.com>http://www.fuelcells.dupont.com</a>, Feb. 2004.</td>
-    </tr>
-    <tr>
-      <td valign=top class=\"noBorder\">[DuPont2004NRE]</td>
-      <td valign=top class=\"noBorder\">DuPont, \"Nafion&reg; PFSA Membranes NRE-211 and NRE-212</a>,\" <a href = http://www.fuelcells.dupont.com>http://www.fuelcells.dupont.com</a>, Feb. 2004.</td>
-    </tr>
-    <tr>
-      <td valign=top class=\"noBorder\">[DuPont2005]</td>
-      <td valign=top class=\"noBorder\">DuPont, \"Nafion&reg; PFSA Membranes NE-1135, N-115, N-117, NE-1110</a>,\" <a href = http://www.fuelcells.dupont.com>http://www.fuelcells.dupont.com</a>, Feb. 2005.</td>
-    </tr>
-    <tr>
-      <td valign=top class=\"noBorder\">[Dymond2002]</td>
-      <td valign=top class=\"noBorder\">J. H. Dymond, K. N. Marsh, R. C. Wilhoit, and K. C. Wong, <i>Virial Coefficients of Pure Gases</i>, Springer-Verlag, 2002.</td>
-    </tr>
-    <tr>
-      <td valign=top class=\"noBorder\">[Dymola7.4]</td>
-      <td valign=top class=\"noBorder\">Dassault Syst&eacute;mes, <i>Dymola: Dynamic Modeling Laboratory</i>, Lund, Sweden, Ver. 7.4, Jan. 2010.</td>
-    </tr>
-    <tr>
-      <td valign=top class=\"noBorder\">[Entegris2012]</td>
-      <td valign=top class=\"noBorder\">Entegris, \"Industrial Graphite,\" <a href=\"http://www.entegris.com/Resources/assets/6204-7085-0312.pdf\">http://www.entegris.com/Resources/assets/6204-7085-0312.pdf</a>, Apr. 2012.</td>
-    </tr>
-    <tr>
-      <td valign=top class=\"noBorder\">[Gurau1998]</td>
-      <td valign=top class=\"noBorder\">V. Gurau, H. Liu, and S. Kaka, \"<a href=\"http://dx.doi.org/10.1002/aic.690441109\">Two-Dimensional Model for Proton Exchange Membrane Fuel Cells</a>,\" <i>AIChE J.</i>, vol. 44, no. 11, pp. 2410&ndash;2422, Nov. 1998.</td>
-    </tr>
-    <tr>
-      <td valign=top class=\"noBorder\">[Hogan2006]</td>
-      <td valign=top class=\"noBorder\">N. Hogan, \"<a href=\"http://ocw.mit.edu/courses/mechanical-engineering/2-141-modeling-and-simulation-of-dynamic-systems-fall-2006/lecture-notes/heat_transfer.pdf\">Heat Transfer and The Second Law</a>,\" lecture notes for <i>Modeling and Simulation of Dynamic Systems</i>, Massachusetts of Technology, Fall 2006.</td>
-    </tr>
-    <tr>
-      <td valign=top class=\"noBorder\">[Incropera2002]</td>
-      <td valign=top class=\"noBorder\">F. P. Incropera and D. P. DeWitt, <i>Fundamentals of Heat and Mass Transport</i>, 5th ed., John Wiley & Sons, 2002.</td>
-    </tr>
-    <tr>
-      <td valign=top class=\"noBorder\">[BIPM2006]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"BIPM2006\" class=bookmark>BIPM2006</a>]</td>
       <td valign=top class=\"noBorder\">International Bureau of Weights and Measures (BIPM), \"<a href=\"http://www.bipm.org/utils/common/pdf/si_brochure_8_en.pdf\">The International System of Units (SI)</a>,\" 8th ed., 2006.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[Kandlikar2009]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"Bernardi1992\" class=bookmark>Bernardi1992</a>]</td>
+      <td valign=top class=\"noBorder\">D. M. Bernardi and M. W. Verbrugge, \"<a href=\"http://dx.doi.org/10.1149/1.2221251\">A Mathematical Model of the Solid-polymer-Electrolyte Fuel Cell</a>,\" <i>J. Electrochem. Soc.</i>, vol. 139, no. 9, pp. 2477&ndash;2491, Sep. 1992.</td>
+    </tr>
+    <tr>
+      <td valign=top class=\"noBorder\">[<a name=\"Cellier1991\" class=bookmark>Cellier1991</a>]</td>
+      <td valign=top class=\"noBorder\">F. E. Cellier, <i><a href=\"http://www.inf.ethz.ch/personal/fcellier/Pubs/BG/springer.html\">Continuous System Modeling</a></i>, Springer-Verlag, 1991.</td>
+    </tr>
+    <tr>
+      <td valign=top class=\"noBorder\">[<a name=\"DuPont2004N\" class=bookmark>DuPont2004N</a>]</td>
+      <td valign=top class=\"noBorder\">DuPont, \"Nafion&reg; PFSA Membranes N-112, NE-1135, N-115, N-117, NE-1110</a>,\" <a href = http://www.fuelcells.dupont.com>http://www.fuelcells.dupont.com</a>, Feb. 2004.</td>
+    </tr>
+    <tr>
+      <td valign=top class=\"noBorder\">[<a name=\"DuPont2004NRE\" class=bookmark>DuPont2004NRE</a>]</td>
+      <td valign=top class=\"noBorder\">DuPont, \"Nafion&reg; PFSA Membranes NRE-211 and NRE-212</a>,\" <a href = http://www.fuelcells.dupont.com>http://www.fuelcells.dupont.com</a>, Feb. 2004.</td>
+    </tr>
+    <tr>
+      <td valign=top class=\"noBorder\">[<a name=\"DuPont2005\" class=bookmark>DuPont2005</a>]</td>
+      <td valign=top class=\"noBorder\">DuPont, \"Nafion&reg; PFSA Membranes NE-1135, N-115, N-117, NE-1110</a>,\" <a href = http://www.fuelcells.dupont.com>http://www.fuelcells.dupont.com</a>, Feb. 2005.</td>
+    </tr>
+    <tr>
+      <td valign=top class=\"noBorder\">[<a name=\"Dymond2002\" class=bookmark>Dymond2002</a>]</td>
+      <td valign=top class=\"noBorder\">J. H. Dymond, K. N. Marsh, R. C. Wilhoit, and K. C. Wong, <i>Virial Coefficients of Pure Gases</i>, Springer-Verlag, 2002.</td>
+    </tr>
+    <tr>
+      <td valign=top class=\"noBorder\">[<a name=\"Entegris2012\" class=bookmark>Entegris2012</a>]</td>
+      <td valign=top class=\"noBorder\">Entegris, \"Industrial Graphite,\" <a href=\"http://www.entegris.com/Resources/assets/6204-7085-0312.pdf\">http://www.entegris.com/Resources/assets/6204-7085-0312.pdf</a>, Apr. 2012.</td>
+    </tr>
+    <tr>
+      <td valign=top class=\"noBorder\">[<a name=\"Gurau1998\" class=bookmark>Gurau1998</a>]</td>
+      <td valign=top class=\"noBorder\">V. Gurau, H. Liu, and S. Kaka, \"<a href=\"http://dx.doi.org/10.1002/aic.690441109\">Two-Dimensional Model for Proton Exchange Membrane Fuel Cells</a>,\" <i>AIChE J.</i>, vol. 44, no. 11, pp. 2410&ndash;2422, Nov. 1998.</td>
+    </tr>
+    <tr>
+      <td valign=top class=\"noBorder\">[<a name=\"Hogan2006\" class=bookmark>Hogan2006</a>]</td>
+      <td valign=top class=\"noBorder\">N. Hogan, \"<a href=\"http://ocw.mit.edu/courses/mechanical-engineering/2-141-modeling-and-simulation-of-dynamic-systems-fall-2006/lecture-notes/heat_transfer.pdf\">Heat Transfer and The Second Law</a>,\" Course notes for <i>Modeling and Simulation of Dynamic Systems</i>, Massachusetts of Technology, Fall 2006.</td>
+    </tr>
+    <tr>
+      <td valign=top class=\"noBorder\">[<a name=\"Incropera2002\" class=bookmark>Incropera2002</a>]</td>
+      <td valign=top class=\"noBorder\">F. P. Incropera and D. P. DeWitt, <i>Fundamentals of Heat and Mass Transport</i>, 5th ed., John Wiley & Sons, 2002.</td>
+    </tr>
+    <tr>
+      <td valign=top class=\"noBorder\">[<a name=\"Kandlikar2009\" class=bookmark>Kandlikar2009</a>]</td>
       <td valign=top class=\"noBorder\">S. G. Kandlikar and Z. Lu, \"<a href=\"http://dx.doi.org/10.1016/j.applthermaleng.2008.05.009\">Thermal Management Issues in a PEMFC Stack&mdash;A Brief Review of Current Status</a>,\" <i>Appl. Therm. Eng.</i>, vol. 29, no. 7, pp. 1276&ndash;1280, 2009.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[Lin2006]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"Lin2006\" class=bookmark>Lin2006</a>]</td>
       <td valign=top class=\"noBorder\">J. Lin, J. K. Lee, M. Kellner, R. Wycisk, and P. N. Pintauroa, \"<a href=\"http://dx.doi.org/10.1149/1.2196687\">Nafion-Flourinated Ethylene-Propylene Resin Membrane Blends for Direct Methanol Fuel Cells</a>,\" <i>J. Electrochem. Soc.</i>, vol. 153, no. 7, pp. A1325&ndash;A1331, 2006.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[Mark1999]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"Mark1999\" class=bookmark>Mark1999</a>]</td>
       <td valign=top class=\"noBorder\">J. E. Mark, <i>Polymer Data Handbook</i>, Oxford University Press, 1999.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[McBride1996]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"McBride1996\" class=bookmark>McBride1996</a>]</td>
       <td valign=top class=\"noBorder\">B. J. McBride and S. Gordon, \"<a href=\"http://www.grc.nasa.gov/WWW/CEAWeb/RP-1311P2.htm\">Computer Program for Calculating Complex Chemical Equilibrium Compositions and Applications II. Users Manual and Program Description</a>,\" NASA Reference Publication 1311, Jun. 1996.  Recent data available at <a href=\"http://www.grc.nasa.gov/WWW/CEAWeb/ceaHome.htm\">http://www.grc.nasa.gov/WWW/CEAWeb/ceaHome.htm</a>.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[McBride2002]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"McBride2002\" class=bookmark>McBride2002</a>]</td>
       <td valign=top class=\"noBorder\">B. J. McBride, M. J. Zehe, and S. Gordon, \"<a href=\"http://gltrs.grc.nasa.gov/cgi-bin/GLTRS/browse.pl?2002/TP-2002-211556.html\">NASA Glenn Coefficients for Calculating Thermodynamic Properties of Individual Species</a>,\" NASA report TP-2002-211556, Sep. 2002.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[NIST2010]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"NIST2010\" class=bookmark>NIST2010</a>]</td>
       <td valign=top class=\"noBorder\">National Institute of Standards and Technology (NIST), \"Fundamental Physical Constants: Complete Listing,\" <a href=\"http://physics.nist.gov/cuu/Constants/Table/allascii.txt\">http://physics.nist.gov/cuu/Constants/Table/allascii.txt</a>, 2010.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[Nitta2008]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"Nitta2008\" class=bookmark>Nitta2008</a>]</td>
       <td valign=top class=\"noBorder\">I. Nitta, O. Himanen, and M. Mikkola, \"<a href=\"http://dx.doi.org/10.1002/fuce.200700054\">Thermal Conductivity and Contact Resistance of Compressed Gas Diffusion Layer of PEM Fuel Cell</a>,\" <i>Fuel Cells</i>, vol. 8, pp. 111&ndash;119, 2008.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[Present1958]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"Present1958\" class=bookmark>Present1958</a>]</td>
       <td valign=top class=\"noBorder\">R. D. Present, <i>Kinetic Theory of Gases</i>, McGraw Hill, 1958.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[Reichert2010]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"Reichert2010\" class=bookmark>Reichert2010</a>]</td>
       <td valign=top class=\"noBorder\">P. Reichert and N. Schuwirth, \"<a href=\"http://dx.doi.org/10.1016/j.envsoft.2010.03.002\">A Generic Framework for Deriving Process Stoichiometry in Environmental Models</a>,\" <i>Environmental Modelling & Software</i>, vol. 25, pp. 1241&ndash;1251, 2010.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[Salzman2004]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"Salzman2004\" class=bookmark>Salzman2004</a>]</td>
       <td valign=top class=\"noBorder\">W. R. Salzman, \"The Virial Expansion,\" <a href=\"http://www.chem.arizona.edu/~salzmanr/480a/480ants/VIRIAL/virial.html\">http://www.chem.arizona.edu/~salzmanr/480a/480ants/VIRIAL/virial.html</a>, Course notes for Physical Chemistry (Chemistry 480A), University of Arizona, Jul. 2004.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[Schetz1996]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"Schetz1996\" class=bookmark>Schetz1996]</td>
       <td valign=top class=\"noBorder\">J. A. Schetz and A. E. Fuhs (ed.), <i>Handbook of Fluid Dynamics and Fluid Machinery</i>, John Wiley & Sons, vol. 1: Fundamentals of Fluid Dynamics, 1996.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[SGL2004]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"SGL2004\" class=bookmark>SGL2004</a>]</td>
       <td valign=top class=\"noBorder\">SGL Carbon Group, \"Sigracet&reg; 24 & 25 Series Gas Diffusion Layer,\" <a href=\"http://www.sglcarbon.com\">http://www.sglcarbon.com</a>, Sep. 2004.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[SGL2007]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"SGL2007\" class=bookmark>SGL2007</a>]</td>
       <td valign=top class=\"noBorder\">SGL Carbon Group, \"Sigracet&reg; 10 Series Gas Diffusion Layer,\" <a href=\"http://www.sglcarbon.com\">http://www.sglcarbon.com</a>, Apr. 2007.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[Springer1991]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"Springer1991\" class=bookmark>Springer1991</a>]</td>
       <td valign=top class=\"noBorder\">T. E. Springer, T. A. Zawodzinski, and S. Gottesfeld, \"<a href=\"http://dx.doi.org/10.1149/1.2085971\">Polymer Electrolyte Fuel Cell Model</a>,\" <i>J. Electrochem. Soc.</i>, vol. 138, pp. 2334&ndash;2342, Aug. 1991.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[Spry2009]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"Spry2009\" class=bookmark>Spry2009</a>]</td>
       <td valign=top class=\"noBorder\">D. B. Spry and M. D. Fayer, \"<a href=\"http://www.stanford.edu/group/fayer/articles/384-392/385.pdf\">Proton Transfer and Proton Concentrations in Protonated Nafion Fuel Cell Membranes</a>,\" <i>J. Phys. Chem. B</i>, vol. 113, no. 30, pp. 10210&ndash;10221, 2009.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[Svehla1995]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"\" class=bookmark>Svehla1995</a>]</td>
       <td valign=top class=\"noBorder\">R. A. Svehla, \"<a href=\"http://www.grc.nasa.gov/WWW/CEAWeb/TM-4647.htm\">Transport Coefficients for the NASA Lewis Chemical Equilibrium Program</a>,\" NASA Technical Memorandum 4647, Apr. 1995.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[Takenaka1990]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"Takenaka1990\" class=bookmark>Takenaka1990</a>]</td>
       <td valign=top class=\"noBorder\">M. Takenaka and R. Masui, \"<a href=\"http://iopscience.iop.org/0026-1394/27/4/001\">Measurement of the Thermal Expansion of Pure Water in the Temperature Range 0 &deg;C&ndash;85&deg;C</a>,\" <i>Metrologia</i>, vol. 27, pp. 165&ndash;171, 1990.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[Tissandier1998]</td>
-      <td valign=top class=\"noBorder\">M. D. Tissandier, K. A. Cowen, W. Y. Feng, E. Gundlach, M. H. Cohen, A. D. Earhart, J. V. Coe, and T. R. Tuttle, Jr., \"<a href=\"www.uh.edu/~chembi/single_ion_hydration.PDF\">The Proton's Absolute Aqueous Enthalpy and Gibbs Free Energy of Solvation from Cluster-Ion Solvation Data</a>,\" <i>J. Phys. Chem. A</i>, vol. 102, pp. 7787&ndash;7794, 1998.</td>
+      <td valign=top class=\"noBorder\">[<a name=\"Tissandier1998\" class=bookmark>Tissandier1998</a>]</td>
+      <td valign=top class=\"noBorder\">M. D. Tissandier, K. A. Cowen, W. Y. Feng, E. Gundlach, M. H. Cohen, A. D. Earhart, J. V. Coe, and T. R. Tuttle, Jr., \"<a href=\"http://www.uh.edu/~chembi/single_ion_hydration.PDF\">The Proton's Absolute Aqueous Enthalpy and Gibbs Free Energy of Solvation from Cluster-Ion Solvation Data</a>,\" <i>J. Phys. Chem. A</i>, vol. 102, pp. 7787&ndash;7794, 1998.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[Toray2010]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"Toray2010\" class=bookmark>Toray2010</a>]</td>
       <td valign=top class=\"noBorder\">Toray Industries, Inc., \"Carbon Paper,\" <a href = http://www.torayca.com/index2.html>http://www.torayca.com/index2.html</a>, accessed 2010.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[Weber2004]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"Weber2004\" class=bookmark>Weber2004</a>]</td>
       <td valign=top class=\"noBorder\">A. Z. Weber and J. Newman, \"<a href=\"http://dx.doi.org/10.1021/cr020729l\">Modeling Transport in Polymer-Electrolyte Fuel Cells</a>,\" <i>Chem. Rev.</i>, vol. 104, pp. 4679&ndash;4726, 2004.</td>
     </tr>
     <tr>
-      <td valign=top class=\"noBorder\">[Woo1995]</td>
+      <td valign=top class=\"noBorder\">[<a name=\"Woo1995\" class=bookmark>Woo1995</a>]</td>
       <td valign=top class=\"noBorder\">K. W. Woo and S. I. Yeo, Dalton's Law vs. Amagat's Law for the Mixture of Real Gases, <i>SNU J. Educ. Res.</i>, vol. 5, pp. 127&ndash;134, 1995.</td>
     </tr>
     </table>
@@ -898,19 +894,6 @@ printing and shipping costs may be recovered.</p>
     end ModelicaLicense2;
   annotation (preferedView="info", DocumentationClass=true);
   end UsersGuide;
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 annotation (

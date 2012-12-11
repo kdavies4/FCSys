@@ -6,7 +6,7 @@ package Sensors "Models to measure conditions"
   // TODO:  Recheck this package, fix errors and warnings.
 
   package Chemical
-    "<html>Sensors for the <a href=\"modelica://FCSys.Connectors.BaseClasses.Chemical\">Chemical</a> and <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> connectors</html>"
+    "<html>Sensors for the <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialChemical\">Chemical</a> and <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> connectors</html>"
     extends Modelica.Icons.Package;
 
     package Phases
@@ -838,7 +838,7 @@ package Sensors "Models to measure conditions"
     end Phases;
 
     model Species
-      "<html>Sensors for the <a href=\"modelica://FCSys.Connectors.BaseClasses.Chemical\">Chemical</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
+      "<html>Sensors for the <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialChemical\">Chemical</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
 
       extends FCSys.BaseClasses.Icons.Sensor;
 
@@ -907,7 +907,7 @@ package Sensors "Models to measure conditions"
 <a href=\"modelica://FCSys\">FCSys</a> are hierarchical
 (see the <a href=\"modelica://FCSys.Connectors\">Connectors</a> package),
 the models for the sensors must be as well.  A
-<a href=\"modelica://FCSys.Connectors.BaseClasses.Chemical\">Chemical</a>
+<a href=\"modelica://FCSys.Connectors.BaseClasses.PartialChemical\">Chemical</a>
 connector
 is used in <a href=\"modelica://FCSys.Subregions.Species\">Species</a> models,
 and there is a corresponding <a href=\"modelica://FCSys.Sensors.Chemical.Species.Species\">Species

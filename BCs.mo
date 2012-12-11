@@ -1473,7 +1473,7 @@ package BCs "Models for boundary conditions"
   end TestStands;
 
   package Chemical
-    "<html>BCs for the <a href=\"modelica://FCSys.Connectors.BaseClasses.Chemical\">Chemical</a> and <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> connectors</html>"
+    "<html>BCs for the <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialChemical\">Chemical</a> and <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> connectors</html>"
     extends Modelica.Icons.Package;
 
     package Phases
@@ -2017,11 +2017,11 @@ package BCs "Models for boundary conditions"
     end Phases;
 
     package Species
-      "<html>BCs for the <a href=\"modelica://FCSys.Connectors.BaseClasses.Chemical\">Chemical</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
+      "<html>BCs for the <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialChemical\">Chemical</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
       extends Modelica.Icons.Package;
 
       model Species
-        "<html>BCs for the <a href=\"modelica://FCSys.Connectors.BaseClasses.Chemical\">Chemical</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
+        "<html>BCs for the <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialChemical\">Chemical</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
 
         import FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial;
         import FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMomentum;
@@ -2410,7 +2410,7 @@ package BCs "Models for boundary conditions"
 <a href=\"modelica://FCSys\">FCSys</a> are hierarchical
 (see the <a href=\"modelica://FCSys.Connectors\">Connectors</a> package),
 the models for the boundary conditions must be as well.  A
-<a href=\"modelica://FCSys.Connectors.BaseClasses.Chemical\">Chemical</a>
+<a href=\"modelica://FCSys.Connectors.BaseClasses.PartialChemical\">Chemical</a>
 connector
 is used in <a href=\"modelica://FCSys.Subregions.Species\">Species</a> models,
 and there is a corresponding <a href=\"modelica://FCSys.BCs.Chemical.Species.Species\">Species
