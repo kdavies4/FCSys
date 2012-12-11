@@ -155,7 +155,7 @@ package Systems
             extent={{10,10},{-10,-10}},
             rotation=90)));
 
-      // TODO:  Use inner/outer expandable connectors for control buses.
+      // TODO: Use inner/outer expandable connectors for control buses.
       FCSys.Systems.Humidifier.Humidifier anHumidifier annotation (Placement(
             transformation(extent={{-50,-14},{-30,6}}, rotation=0)));
       FCSys.Assemblies.ClosedTank tankH2 annotation (Placement(transformation(
@@ -525,7 +525,7 @@ package Systems
     extends Modelica.Icons.Package;
 
     model Humidifier
-      // TODO:  Complete this.
+      // TODO: Complete this.
 
       extends FCSys.BaseClasses.Icons.Name.Top4;
 
@@ -724,7 +724,7 @@ package Systems
 
     model DCDC
 
-      // TODO:  Complete this.
+      // TODO: Complete this.
 
       extends FCSys.WorkInProgress.BaseClassesIconsTransformer;
       import DomainQ = FCSys.Domains.MagneticElectroMechanical.Quantities;
@@ -1205,7 +1205,7 @@ package Systems
   package Pump
     extends Modelica.Icons.Package;
     model Pump
-      // TODO:  Complete this.
+      // TODO: Complete this.
 
       extends FCSys.WorkInProgress.BaseClassesIconsPump;
       // extends FCSys.Processes.BaseClasses.PartialTransport.Middle;
@@ -1382,7 +1382,7 @@ package Systems
   package Valve
     extends Modelica.Icons.Package;
     model Valve "Valve for water/steam flows with linear pressure drop"
-      // TODO:  Complete this.
+      // TODO: Complete this.
 
       //  extends FCSys.Processes.BaseClasses.PartialTransport.Top1;
       extends FCSys.BaseClasses.Icons.Name.Top3;
@@ -1437,7 +1437,7 @@ a simple model of a variable pressure loss is needed.</p>
     end Valve;
 
     package Interfaces
-      // TODO:  Complete this.
+      // TODO: Complete this.
 
       extends Modelica.Icons.InterfacesPackage;
       expandable connector ActBusIn
@@ -1580,7 +1580,7 @@ a simple model of a variable pressure loss is needed.</p>
   package FluidHeater
     extends Modelica.Icons.Package;
     model FluidHeater
-      // TODO:  Complete this.
+      // TODO: Complete this.
 
       extends FCSys.BaseClasses.Icons.Name.Top4;
 

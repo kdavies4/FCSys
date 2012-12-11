@@ -225,7 +225,7 @@ package Characteristics
   package C19HF37O5S "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S</html>"
     extends Modelica.Icons.Package;
     package Solid "C9HF17O5S solid"
-      // Note:  HTML formatting isn't used in the description because
+      // Note: HTML formatting isn't used in the description because
       // Dymola 7.4 doesn't support it in the GUI for replaceable lists.
       // The same applies to other species.
 
@@ -328,18 +328,152 @@ package Characteristics
     package Graphite "e- in graphite"
       extends Gas(
         final phase="graphite",
-        specVolPow=C.Graphite.specVolPow,
-        b_v=C.Graphite.b_v,
+        specVolPow={-0.6,-0.6},
+        b_v=[(3*U.R_K/(2*U.pi*U.k_J^2))^(2/3)/(5*m)],
         p_min=-Modelica.Constants.inf);
-      // TODO:  Add the proper values for b_v from [Ashcroft1976]
+
+    protected
+      function poly "Polynomial function which accepts non-integer powers"
+        extends Modelica.Icons.Function;
+
+        input Real u "Argument";
+        input Real a[:] "Coefficients";
+        input Real n=0 "Power of the first coefficient";
+        output Real y "Result";
+
+      algorithm
+        y := sum(a[i]*u^(n + i - 1) for i in 1:size(a, 1))
+          annotation (Inline=true);
+      end poly;
+      // Note:  This overrides FCSys.BaseClasses.Utilities.poly() which is imported
+      // as poly() at the top level of FCSys.
+
+      // The functions below are redeclared copies of the same functions in
+      // FCSys.Characteristics.BaseClasses.Characteristic.  Since poly() is
+      // overridden, the functions below will use the new version (and
+      // allow specVolPow to have non-integer values).
+
+    public
+      redeclare function dp
+        "<html>Derivative of pressure as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_vT\">p_vT</a>()</html>"
+        extends Modelica.Icons.Function;
+
+        input Q.VolumeSpecificAbsolute v=U.atm/(298.15*U.K) "Specific volume";
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.VolumeSpecific dv=0 "Derivative of specific volume";
+        input Q.Temperature dT=0 "Derivative of temperature";
+        output Q.Pressure dp "Derivative of pressure";
+
+      algorithm
+        dp := if isCompressible then poly(
+                v,
+                {(pressPow[1] + i - 1)*poly(
+                  T,
+                  b_p[i, :],
+                  pressPow[2]) for i in 1:size(b_p, 1)},
+                pressPow[1] - 1)*dv + poly(
+                T,
+                {(pressPow[2] + i - 1)*poly(
+                  v,
+                  b_p[:, i],
+                  pressPow[1]) for i in 1:size(b_p, 2)},
+                pressPow[2] - 1)*dT else 0
+          annotation (Inline=true, smoothOrder=999);
+      end dp;
+
+      redeclare function dv
+        "<html>Derivative of specific volume as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_pT\">v_pT</a>()</html>"
+        extends Modelica.Icons.Function;
+
+        input Q.PressureAbsolute p=1*U.atm "Pressure";
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.Pressure dp=0 "Derivative of pressure";
+        input Q.Temperature dT=0 "Derivative of temperature";
+        output Q.VolumeSpecific dv "Derivative of specific volume";
+
+      algorithm
+        dv := poly(
+                p,
+                {(specVolPow[1] + i - 1)*poly(
+                  T,
+                  b_v[i, :],
+                  specVolPow[2]) for i in 1:size(b_v, 1)},
+                specVolPow[1] - 1)*dp + poly(
+                T,
+                {(specVolPow[2] + i - 1)*poly(
+                  p,
+                  b_v[:, i],
+                  specVolPow[1]) for i in 1:size(b_v, 2)},
+                specVolPow[2] - 1)*dT annotation (Inline=true, smoothOrder=999);
+      end dv;
+
+      redeclare function p_vT
+        "Pressure as a function of specific volume and temperature"
+        extends Modelica.Icons.Function;
+
+        input Q.VolumeSpecificAbsolute v=U.atm/(298.15*U.K) "Specific volume";
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        output Q.PressureAbsolute p "Pressure";
+
+      algorithm
+        // assert(isCompressible,
+        //  "The pressure is undefined since the material is incompressible.",
+        //  AssertionLevel.warning);
+        // Note: In Dymola 7.4 the assertion level can't be set, although it has
+        // been defined as an argument to assert() since Modelica 3.0.
+
+        p := if isCompressible then (if size(b_p, 1) == 1 and size(b_p, 2) == 1
+           then 1 else poly(
+                v,
+                {poly(
+                  T,
+                  b_p[i, :],
+                  pressPow[2]) for i in 1:size(b_p, 1)},
+                pressPow[1])) else 0 annotation (
+          Inline=true,
+          smoothOrder=999,
+          inverse(v=v_pT(p, T)),
+          derivative=dp);
+        annotation (Documentation(info="<html><p>If the species is incompressible, then <i>p</i>(<i>v</i>, <i>T</i> ) is undefined,
+  and the function will return a value of zero.</p>
+  <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a>().</p></html>"));
+      end p_vT;
+
+      redeclare function v_pT
+        "Specific volume as a function of pressure and temperature"
+        extends Modelica.Icons.Function;
+
+        input Q.PressureAbsolute p=1*U.atm "Pressure";
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        output Q.VolumeSpecificAbsolute v "Specific volume";
+
+      algorithm
+        v := poly(
+                p/T,
+                {poly(
+                  T,
+                  b_v[i, :],
+                  specVolPow[2]) for i in 1:size(b_v, 1)},
+                specVolPow[1]) annotation (
+          Inline=true,
+          smoothOrder=999,
+          inverse(p=p_vT(v, T)),
+          derivative=dv);
+        annotation (Documentation(info="<html>
+  <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv\">dv</a>().</p></html>"));
+
+      end v_pT;
+
       annotation (Documentation(info="<html>
      <p>Assumptions:
      <ol>
      <li>There is one free (conduction) electron per atom of carbon.</li>
-</ol>
-</p>
-<p>For more information, see the
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+     <li>The pressure-volume relationship is based on the Drude and Summerfeld theories of metals 
+     [<a href=\"modelica://FCSys.UsersGuide.References\">Ashcroft1976</a>, pp. 4&ndash;39].</li>
+     </ol>
+     </p>
+     <p>For more information, see the
+     <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
     end Graphite;
   end 'e-';
 
@@ -373,7 +507,7 @@ package Characteristics
             1.0582450,248.75372*U.K,0.11736907e5*U.K^2,0.82758695},{-0.22364420,
             -0.69650442e4*U.K,-0.77771313e5*U.K^2,13.189369}});
 
-      // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
+      // Note: In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
       // doesn't.
 
       annotation (Documentation(info="<html>
@@ -421,7 +555,7 @@ package Characteristics
         b_lambda={{1.0966389,-555.13429*U.K,0.10623408e6*U.K^2,-0.24664550},{
             0.39367933,-0.22524226e4*U.K,0.61217458e6*U.K^2,5.8011317},{-0.41858737,
             -0.14096649e5*U.K,0.19179190e8*U.K^2,14.345613}});
-      // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
+      // Note: In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
       // doesn't.
 
       annotation (Documentation(info="<html>
@@ -585,7 +719,7 @@ package Characteristics
         b_lambda={{0.85439436,105.73224*U.K,-0.12347848e5*U.K^2,0.47793128},{
             0.88407146,133.57293*U.K,-0.11429640e5*U.K^2,0.24417019},{2.4176185,
             0.80477749e4*U.K,0.31055802e7*U.K^2,-14.517761}});
-      // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
+      // Note: In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
       // doesn't.
 
       annotation (Documentation(info="<html>
@@ -634,7 +768,7 @@ package Characteristics
         b_lambda={{0.77229167,6.8463210*U.K,-0.58933377e4*U.K^2,1.2210365},{
             0.90917351,291.24182*U.K,-0.79650171e5*U.K^2,0.064851631},{-1.1218262,
             -0.19286378e5*U.K,0.23295011e8*U.K^2,20.342043}});
-      // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
+      // Note: In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
       // doesn't.
 
       annotation (Documentation(info="<html><p>Notes:<ul>
@@ -692,8 +826,8 @@ package Characteristics
     String(T_lim_alpha[1]/U.K) + ", " + String(T_lim_alpha[size(T_lim_alpha, 1)]
     /U.K) + "] K).");
   */
-        // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4 T_lim_alpha[end] can't be used instead of
+        // Note: This is commented out so that the function can be inlined.
+        // Note: In Dymola 7.4 T_lim_alpha[end] can't be used instead of
         // T_lim_alpha[size(T_lim_alpha, 1)] due to:
         //     "Error, not all "end" could be expanded."
 
@@ -702,7 +836,7 @@ package Characteristics
           b_eta_adj())[i, 1]*ln(T) + ((b_eta_adj())[i, 2] + (b_eta_adj())[i, 3]
           /T)/T + (b_eta_adj())[i, 4] else 0 for i in 1:size(T_lim_alpha, 1) -
           1))) annotation (Inline=true, smoothOrder=2);
-        // Note:  The annotation is set assuming that the values of the constants
+        // Note: The annotation is set assuming that the values of the constants
         // result in a function that is first-order continuous.
 
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
@@ -720,7 +854,7 @@ package Characteristics
       protected
         function b_lambda_adj
           "Return unit-adjusted NASA CEA constants for thermal conductivity"
-          // Note:  If b_lambda were defined as a local constant instead of a
+          // Note: If b_lambda were defined as a local constant instead of a
           // function, it would prevent the alpha_tau function from
           // being inlined.  If it were defined as a global final constant, it
           // would need to be updated manually when b_eta is changed.
@@ -739,8 +873,8 @@ package Characteristics
     String(T_lim_alpha[1]/U.K) + ", " + String(T_lim_alpha[size(T_lim_alpha, 1)]
     /U.K) + "] K).");
   */
-        // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4 T_lim_alpha[end] can't be used instead of
+        // Note: This is commented out so that the function can be inlined.
+        // Note: In Dymola 7.4 T_lim_alpha[end] can't be used instead of
         // T_lim_alpha[size(T_lim_alpha, 1)] due to:
         //     "Error, not all "end" could be expanded."
 
@@ -749,7 +883,7 @@ package Characteristics
           (b_lambda_adj())[i, 1]*ln(T) + ((b_lambda_adj())[i, 2] + (
           b_lambda_adj())[i, 3]/T)/T + (b_lambda_adj())[i, 4] else 0 for i in 1
           :size(T_lim_alpha, 1) - 1))) annotation (Inline=true, smoothOrder=2);
-        // Note:  The annotation is set assuming that the values of the constants
+        // Note: The annotation is set assuming that the values of the constants
         // result in a function that is first-order continuous.
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p></html>"));
@@ -767,7 +901,7 @@ package Characteristics
       constant String formula "Chemical formula";
       constant String phase "Material phase";
       constant Q.MassSpecific m(min=Modelica.Constants.small) "Specific mass";
-      // Note:  The positive minimum value prevents a structural singularity
+      // Note: The positive minimum value prevents a structural singularity
       // when checking FCSys.Subregions.Species.SpeciesInertStagnant in Dymola
       // 7.4.
       constant Q.LengthSpecific r "Specific radius" annotation (Dialog);
@@ -780,13 +914,6 @@ package Characteristics
         "<html>Coefficients of specific volume as a polynomial in p/T and T (<i>b</i><sub><i>v</i></sub>)</html>";
       constant Real specVolPow[2]={-1,0}
         "<html>Powers of p/T and T for 1<sup>st</sup> row and column of b_v, respectively</html>";
-      final constant Boolean isCompressible=anyTrue({anyTrue({b_v[i, j] <> 0
-           and specVolPow[1] + i - 1 <> 0 for i in 1:size(b_v, 1)}) for j in 1:
-          size(b_v, 2)}) "true, if specific volume depends on pressure";
-      final constant Boolean hasThermalExpansion=anyTrue({anyTrue({b_v[i, j]
-           <> 0 and specVolPow[2] + j - specVolPow[1] - i <> 0 for i in 1:size(
-          b_v, 1)}) for j in 1:size(b_v, 2)})
-        "true, if specific volume depends on temperature";
       constant Q.PotentialChemical Deltah0_f
         "<html>Enthalpy of formation at 298.15 K, <i>p</i>&deg; (&Delta;<i>h</i>&deg;<sub>f</sub>)</html>";
       constant Q.PotentialChemical Deltah0
@@ -802,6 +929,14 @@ package Characteristics
       constant Real B_c[size(T_lim_c, 1) - 1, 2]
         "<html>Integration constants for specific enthalpy and entropy (<i>B</i><sub><i>c</i></sub>)</html>";
 
+      final constant Boolean isCompressible=anyTrue({anyTrue({b_v[i, j] <> 0
+           and specVolPow[1] + i - 1 <> 0 for i in 1:size(b_v, 1)}) for j in 1:
+          size(b_v, 2)}) "true, if specific volume depends on pressure";
+      final constant Boolean hasThermalExpansion=anyTrue({anyTrue({b_v[i, j]
+           <> 0 and specVolPow[2] + j - specVolPow[1] - i <> 0 for i in 1:size(
+          b_v, 1)}) for j in 1:size(b_v, 2)})
+        "true, if specific volume depends on temperature";
+
     protected
       final constant Real pressPow[2]={specVolPow[1] - size(b_v, 1) + 1,
           specVolPow[2] + 1}
@@ -813,7 +948,7 @@ package Characteristics
            + b_v[i - 2, :] .* (b_v[i - 2, :] .^ 2 + 3*b_v[i - 1, :]) else zeros(
           size(b_v, 2))))) for i in size(b_v, 1):-1:1}
         "Coefficients of p as a polynomial in v and T";
-      // Note:  pressPow and b_p are only used in h_pT(); however, in Dymola 7.4
+      // Note: pressPow and b_p are only used in h_pT(); however, in Dymola 7.4
       // they must be defined here (global to h_pT()) so that they are updated
       // properly when the size of b_v is changed from its default.
 
@@ -852,8 +987,8 @@ package Characteristics
       String(T/U.K) + " K is out of range for " + name + " ([" + String(T_lim_c[1]
       /U.K) + ", " + String(T_lim_c[size(T_lim_c, 1)]/U.K) + "] K).");
     */
-        // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4 T_lim_c[end] can't be used instead of
+        // Note: This is commented out so that the function can be inlined.
+        // Note: In Dymola 7.4 T_lim_c[end] can't be used instead of
         // T_lim_c[size(T_lim_c, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
@@ -893,12 +1028,12 @@ package Characteristics
         // This reduces to c_V = c0 - 1 for an ideal gas.  The gas constant
         // (U.R) is normalized to 1 in FCSys.
 
-        annotation (Documentation(info="<html><p>**Verify:  For an ideal gas, pressure (<i>p</i>) 
-  does not matter; the function reduces to <i>c</i><sub><i>V</i></sub>(<i>T</i> ) = <i>c</i>&deg;(<i>T</i> ) - 1 (in 
+        annotation (Documentation(info="<html><p>**Verify:  For an ideal gas, pressure (<i>p</i>)
+  does not matter; the function reduces to <i>c</i><sub><i>V</i></sub>(<i>T</i> ) = <i>c</i>&deg;(<i>T</i> ) - 1 (in
   <a href=\"modelica://FCSys\">FCSys</a>, <i>R</i> = 1).</p></html>"));
       end c_V;
 
-      function dp
+      replaceable function dp
         "<html>Derivative of pressure as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_vT\">p_vT</a>()</html>"
         extends Modelica.Icons.Function;
 
@@ -925,7 +1060,7 @@ package Characteristics
           annotation (Inline=true, smoothOrder=999);
       end dp;
 
-      function dv
+      replaceable function dv
         "<html>Derivative of specific volume as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_pT\">v_pT</a>()</html>"
         extends Modelica.Icons.Function;
 
@@ -949,7 +1084,6 @@ package Characteristics
                   b_v[:, i],
                   specVolPow[1]) for i in 1:size(b_v, 2)},
                 specVolPow[2] - 1)*dT annotation (Inline=true, smoothOrder=999);
-
       end dv;
 
       function g "Gibbs potential as a function of pressure and temperature"
@@ -985,8 +1119,8 @@ package Characteristics
     String(T/U.K) + " K is out of range for " + name + " ([" + String(T_lim_c[1]
     /U.K) + ", " + String(T_lim_c[size(T_lim_c, 1)]/U.K) + "] K).");
     */
-        // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4 T_lim_c[end] can't be used instead of
+        // Note: This is commented out so that the function can be inlined.
+        // Note: In Dymola 7.4 T_lim_c[end] can't be used instead of
         // T_lim_c[size(T_lim_c, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
@@ -1042,8 +1176,8 @@ package Characteristics
     String(T/U.K) + " K is out of range for " + name + " ([" + String(T_lim_c[1]
     /U.K) + ", " + String(T_lim_c[size(T_lim_c, 1)]/U.K) + "] K).");
     */
-        // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4 T_lim_c[end] can't be used instead of
+        // Note: This is commented out so that the function can be inlined.
+        // Note: In Dymola 7.4 T_lim_c[end] can't be used instead of
         // T_lim_c[size(T_lim_c, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
@@ -1060,7 +1194,8 @@ package Characteristics
         // reference enthalpy at the lower bound [McBride2002, p. 2].
       end h0;
 
-      function p_vT "Pressure as a function of specific volume and temperature"
+      replaceable function p_vT
+        "Pressure as a function of specific volume and temperature"
         extends Modelica.Icons.Function;
 
         input Q.VolumeSpecificAbsolute v=U.atm/(298.15*U.K) "Specific volume";
@@ -1071,16 +1206,17 @@ package Characteristics
         // assert(isCompressible,
         //  "The pressure is undefined since the material is incompressible.",
         //  AssertionLevel.warning);
-        // Note:  In Dymola 7.4 the assertion level can't be set, although it has
+        // Note: In Dymola 7.4 the assertion level can't be set, although it has
         // been defined as an argument to assert() since Modelica 3.0.
 
-        p := if isCompressible then poly(
+        p := if isCompressible then (if size(b_p, 1) == 1 and size(b_p, 2) == 1
+           then 1 else poly(
                 v,
                 {poly(
                   T,
                   b_p[i, :],
                   pressPow[2]) for i in 1:size(b_p, 1)},
-                pressPow[1]) else 0 annotation (
+                pressPow[1])) else 0 annotation (
           Inline=true,
           smoothOrder=999,
           inverse(v=v_pT(p, T)),
@@ -1118,8 +1254,8 @@ package Characteristics
     String(T/U.K) + " K is out of range for " + name + " ([" + String(T_lim_c[1]
     /U.K) + ", " + String(T_lim_c[size(T_lim_c, 1)]/U.K) + "] K).");
   */
-        // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4 T_lim_c[end] can't be used instead of
+        // Note: This is commented out so that the function can be inlined.
+        // Note: In Dymola 7.4 T_lim_c[end] can't be used instead of
         // T_lim_c[size(T_lim_c, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
@@ -1140,7 +1276,8 @@ package Characteristics
         // polynomial is the integral of v*dp from p0 to p (at T).
       end s;
 
-      function v_pT "Specific volume as a function of pressure and temperature"
+      replaceable function v_pT
+        "Specific volume as a function of pressure and temperature"
         extends Modelica.Icons.Function;
 
         input Q.PressureAbsolute p=1*U.atm "Pressure";
@@ -1161,6 +1298,7 @@ package Characteristics
           derivative=dv);
         annotation (Documentation(info="<html>
   <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv\">dv</a>().</p></html>"));
+
       end v_pT;
 
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
@@ -1182,6 +1320,9 @@ package Characteristics
     of <code>b_v</code> correspond to 1, <i>T</i><i>B</i><sup>*</sup>(<i>T</i> ), <i>T</i><sup> 2</sup><i>C</i><sup>*</sup>(<i>T</i> ), <i>T</i><sup> 3</sup><i>D</i><sup>*</sup>(<i>T</i> ), &hellip;
     in [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>].</li>
     <li>The defaults for <code>b_v</code> and <code>specVolPow</code> represent ideal gas.</li>
+    <li><code>specVolPow</code> is defined as a <code>Real</code> vector.  However, 
+    special modifications are necessary if non-integer values are specified
+    (see <a href=\"modelica://FCSys.Characteristics.'e-'.Graphite\">'e-'.Graphite</a>).  
     <li><code>b_c</code>: The rows give the coefficients for different temperature ranges&mdash;bounded
     by the values in <code>T_lim_c</code>.
     The powers of <i>T</i> increase

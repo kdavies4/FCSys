@@ -2,14 +2,14 @@ within FCSys;
 package BCs "Models for boundary conditions"
   extends Modelica.Icons.SourcesPackage;
 
-  // TODO:  Recheck this package, fix errors and warnings.
+  // TODO: Recheck this package, fix errors and warnings.
 
   package Examples "Examples and tests"
     extends Modelica.Icons.ExamplesPackage;
     model Environment "<html>Test the <code>Environment</code> model</html>"
       extends Modelica.Icons.Example;
 
-      // TODO:  Make this into a meaningful example.
+      // TODO: Make this into a meaningful example.
       FCSys.BCs.Defaults default
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
     end Environment;
@@ -115,7 +115,7 @@ package BCs "Models for boundary conditions"
     model Router "<html>Test the <code>Router<code> model</html>"
       extends Modelica.Icons.Example;
 
-      // TODO:  Make this into a meaningful example.
+      // TODO: Make this into a meaningful example.
       FCSys.BCs.Router router
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
     end Router;
@@ -279,14 +279,14 @@ package BCs "Models for boundary conditions"
     equation
 
       connect(xNegative.H2.material, volume.face.material) annotation (Line(
-          points={{5.55112e-16,5.55112e-16},{-6,5.55112e-16},{-6,0},{-10,0},{-10,
-              6.10623e-16},{-20,6.10623e-16}},
+          points={{5.55112e-16,5.55112e-16},{-6,5.55112e-16},{-6,0},{-10,0},{
+              -10,6.10623e-16},{-20,6.10623e-16}},
           color={127,127,127},
           smooth=Smooth.None,
           thickness=0.5));
       connect(xNegative.H2.thermal, volume.face.thermal) annotation (Line(
-          points={{5.55112e-16,5.55112e-16},{-6,5.55112e-16},{-6,0},{-10,0},{-10,
-              6.10623e-16},{-20,6.10623e-16}},
+          points={{5.55112e-16,5.55112e-16},{-6,5.55112e-16},{-6,0},{-10,0},{
+              -10,6.10623e-16},{-20,6.10623e-16}},
           color={127,127,127},
           smooth=Smooth.None,
           thickness=0.5));
@@ -413,7 +413,7 @@ package BCs "Models for boundary conditions"
       "<html>Fluid adapter between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
       extends FCSys.BaseClasses.Icons.Names.Top3;
 
-      // TODO:  Fix this; there may be issues with the energy/entropy rate balance.
+      // TODO: Fix this; there may be issues with the energy/entropy rate balance.
 
       parameter Q.Area A=1*U.cm^2 "Area of the connection surface";
       replaceable package Medium = Modelica.Media.Interfaces.PartialMedium (
@@ -458,18 +458,21 @@ package BCs "Models for boundary conditions"
         Documentation(info="<html><p>Note that transverse momentum is not included.</p>
   </html>"),
         Diagram(graphics),
-        Icon(graphics={Line(
-                  points={{0,40},{0,-40}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash,
-                  thickness=0.5),Line(
-                  points={{0,0},{-100,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None),Line(
-                  points={{0,0},{100,0}},
-                  color={0,127,255},
-                  smooth=Smooth.None)}));
+        Icon(graphics={
+            Line(
+              points={{0,40},{0,-40}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),
+            Line(
+              points={{0,0},{-100,0}},
+              color={127,127,127},
+              smooth=Smooth.None),
+            Line(
+              points={{0,0},{100,0}},
+              color={0,127,255},
+              smooth=Smooth.None)}));
     end AdaptFluid;
 
     model 'AdaptSubregione-'
@@ -508,22 +511,26 @@ package BCs "Models for boundary conditions"
           color={191,0,0},
           smooth=Smooth.None));
 
-      annotation (Diagram(graphics), Icon(graphics={Line(
-                  points={{0,40},{0,-40}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash,
-                  thickness=0.5),Line(
-                  points={{0,0},{-100,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,40},{100,40}},
-                  color={0,0,255},
-                  smooth=Smooth.None),Line(
-                  points={{0,-40},{100,-40}},
-                  color={191,0,0},
-                  smooth=Smooth.None)}));
+      annotation (Diagram(graphics), Icon(graphics={
+            Line(
+              points={{0,40},{0,-40}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),
+            Line(
+              points={{0,0},{-100,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,40},{100,40}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-40},{100,-40}},
+              color={191,0,0},
+              smooth=Smooth.None)}));
     end 'AdaptSubregione-';
 
     model 'AdaptBuse-'
@@ -568,22 +575,26 @@ package BCs "Models for boundary conditions"
           color={191,0,0},
           smooth=Smooth.None));
 
-      annotation (Diagram(graphics), Icon(graphics={Line(
-                  points={{0,40},{0,-40}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash,
-                  thickness=0.5),Line(
-                  points={{0,0},{-100,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,40},{100,40}},
-                  color={0,0,255},
-                  smooth=Smooth.None),Line(
-                  points={{0,-40},{100,-40}},
-                  color={191,0,0},
-                  smooth=Smooth.None)}));
+      annotation (Diagram(graphics), Icon(graphics={
+            Line(
+              points={{0,40},{0,-40}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),
+            Line(
+              points={{0,0},{-100,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,40},{100,40}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-40},{100,-40}},
+              color={191,0,0},
+              smooth=Smooth.None)}));
     end 'AdaptBuse-';
 
     model 'Adapte-'
@@ -619,21 +630,25 @@ package BCs "Models for boundary conditions"
       // There is no electrical work since electrons are not stored and there
       // is no potential difference.
 
-      annotation (Diagram(graphics), Icon(graphics={Line(
-                  points={{0,40},{0,-40}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash,
-                  thickness=0.5),Line(
-                  points={{0,0},{-100,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None),Line(
-                  points={{0,40},{100,40}},
-                  color={0,0,255},
-                  smooth=Smooth.None),Line(
-                  points={{0,-40},{100,-40}},
-                  color={191,0,0},
-                  smooth=Smooth.None)}));
+      annotation (Diagram(graphics), Icon(graphics={
+            Line(
+              points={{0,40},{0,-40}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),
+            Line(
+              points={{0,0},{-100,0}},
+              color={127,127,127},
+              smooth=Smooth.None),
+            Line(
+              points={{0,40},{100,40}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-40},{100,-40}},
+              color={191,0,0},
+              smooth=Smooth.None)}));
     end 'Adapte-';
 
     package BaseClasses "Base classes (not for direct use)"
@@ -667,18 +682,21 @@ package BCs "Models for boundary conditions"
             color={0,127,255},
             smooth=Smooth.None));
 
-        annotation (Diagram(graphics), Icon(graphics={Line(
-                      points={{0,40},{0,-40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash,
-                      thickness=0.5),Line(
-                      points={{0,0},{-100,0}},
-                      color={127,127,127},
-                      smooth=Smooth.None),Line(
-                      points={{0,0},{100,0}},
-                      color={0,127,255},
-                      smooth=Smooth.None)}));
+        annotation (Diagram(graphics), Icon(graphics={
+              Line(
+                points={{0,40},{0,-40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash,
+                thickness=0.5),
+              Line(
+                points={{0,0},{-100,0}},
+                color={127,127,127},
+                smooth=Smooth.None),
+              Line(
+                points={{0,0},{100,0}},
+                color={0,127,255},
+                smooth=Smooth.None)}));
       end PartialAdaptBus;
     end BaseClasses;
   end Adapters;
@@ -1391,11 +1409,11 @@ package BCs "Models for boundary conditions"
                   {160,160}}), graphics),
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
                   160,160}}), graphics={Rectangle(
-                      extent={{-160,160},{160,-160}},
-                      lineColor={191,191,191},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Backward),Rectangle(extent={{-160,
-                160},{160,-160}}, lineColor={0,0,0})}));
+                extent={{-160,160},{160,-160}},
+                lineColor={191,191,191},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Backward), Rectangle(extent={{-160,160},
+                    {160,-160}}, lineColor={0,0,0})}));
       end PartialTestStand;
 
       partial model PartialTestStandNoIO "Partial test stand"
@@ -1606,7 +1624,7 @@ package BCs "Models for boundary conditions"
             enable=inclO2), Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
-        // Note:  It would be helpful if Modelica allowed elements of expandable
+        // Note: It would be helpful if Modelica allowed elements of expandable
         // connectors to be named by the contents of a string variable and the
         // name of an instance of a model was accessible through a string (like
         // %name is expanded to be the name of the instance of the model).  Then,
@@ -1618,8 +1636,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.C, C.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1630,8 +1648,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.C19HF37O5S, C19HF37O5S.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1642,8 +1660,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.'e-', 'e-'.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1654,8 +1672,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.H2, H2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1666,8 +1684,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.H2O, H2O.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1678,8 +1696,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.'H+', 'H+'.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1690,8 +1708,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.N2, N2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1702,8 +1720,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.O2, O2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1784,8 +1802,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.H2, H2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1796,8 +1814,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.H2O, H2O.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1808,8 +1826,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.N2, N2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1820,8 +1838,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.O2, O2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1865,7 +1883,7 @@ package BCs "Models for boundary conditions"
             enable='incle-'), Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
-        // Note:  It would be helpful if Modelica allowed elements of expandable
+        // Note: It would be helpful if Modelica allowed elements of expandable
         // connectors to be named by the contents of a string variable and the
         // name of an instance of a model was accessible through a string (like
         // %name is expanded to be the name of the instance of the model).  Then,
@@ -1877,8 +1895,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.C, C.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1889,8 +1907,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.'e-', 'e-'.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1956,8 +1974,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.C19HF37O5S, C19HF37O5S.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1968,8 +1986,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.H2O, H2O.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1980,8 +1998,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.'H+', 'H+'.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -2386,9 +2404,9 @@ package BCs "Models for boundary conditions"
                   {120,100}}), graphics),
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-120,-100},{
                   120,100}}), graphics={Text(
-                      extent={{0,-76},{100,-46}},
-                      lineColor={127,127,127},
-                      textString="%Data.formula")}));
+                extent={{0,-76},{100,-46}},
+                lineColor={127,127,127},
+                textString="%Data.formula")}));
       end Species;
 
       package BaseClasses "Base classes (not for direct use)"
@@ -2801,7 +2819,7 @@ boundary condition</a> models.
           extends FCSys.BCs.InertAmagat.BaseClasses.PartialBC;
 
           constant BCType bCType "Type of BC";
-          // Note:  This is included so that the type of BC is recorded with the
+          // Note: This is included so that the type of BC is recorded with the
           // results.
         equation
           inert.mPhidot = zeros(n_vel) "No force";
@@ -2847,7 +2865,7 @@ boundary condition</a> models.
             annotation (HideResult=true);
           constant FCSys.BCs.InertAmagat.Momentum.BaseClasses.BCType bCType
             "Type of BC";
-          // Note:  This is included so that the type of BC is recorded with the
+          // Note: This is included so that the type of BC is recorded with the
           // results.
         equation
           inert.V = 0 "No volume";
@@ -2905,7 +2923,7 @@ boundary condition</a> models.
         partial model PartialBC "Partial model for a BC for entropy"
           extends FCSys.BCs.InertAmagat.BaseClasses.PartialBC;
           constant BCType bCType "Type of BC";
-          // Note:  This is included so that the type of BC is recorded with the
+          // Note: This is included so that the type of BC is recorded with the
           // results.
 
         equation
@@ -3332,7 +3350,7 @@ boundary condition</a> models.
           extends FCSys.BCs.InertDalton.BaseClasses.PartialBC;
 
           constant BCType bCType "Type of BC";
-          // Note:  This is included so that the type of BC is recorded with the
+          // Note: This is included so that the type of BC is recorded with the
           // results.
         equation
           inert.mPhidot = zeros(n_vel) "No force";
@@ -3378,7 +3396,7 @@ boundary condition</a> models.
             annotation (HideResult=true);
           constant FCSys.BCs.InertDalton.Momentum.BaseClasses.BCType bCType
             "Type of BC";
-          // Note:  This is included so that the type of BC is recorded with the
+          // Note: This is included so that the type of BC is recorded with the
           // results.
         equation
           inert.p = 0 "No pressure";
@@ -3435,7 +3453,7 @@ boundary condition</a> models.
         partial model PartialBC "Partial model for a BC for entropy"
           extends FCSys.BCs.InertDalton.BaseClasses.PartialBC;
           constant BCType bCType "Type of BC";
-          // Note:  This is included so that the type of BC is recorded with the
+          // Note: This is included so that the type of BC is recorded with the
           // results.
         equation
           inert.p = 0 "No pressure";
@@ -3885,7 +3903,7 @@ boundary condition</a> models.
             enable=inclO2), Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
-        // Note:  It would be helpful if Modelica allowed elements of expandable
+        // Note: It would be helpful if Modelica allowed elements of expandable
         // connectors to be named by the contents of a string variable and the
         // name of an instance of a model was accessible through a string (like
         // %name is expanded to be the name of the instance of the model).  Then,
@@ -4913,7 +4931,7 @@ boundary condition</a> models.
 
         // Material
         final parameter Boolean open=thermoOpt == ThermoOpt.OpenDiabatic "Open";
-        // Note:  Dymola 7.4 doesn't recognize enumerations in the dialog enable
+        // Note: Dymola 7.4 doesn't recognize enumerations in the dialog enable
         // option, e.g.,
         //     enable=thermoOpt=ThermoOpt.OpenDiabatic.
         // Therefore, the values of the enumerations are specified numerically for
@@ -5264,7 +5282,7 @@ boundary condition</a> models.
           partial model PartialBC "Partial model for a material BC"
             extends FCSys.BaseClasses.Icons.BCs.Single;
             constant BCType bCType "Type of BC";
-            // Note:  This is included so that the type of BC is recorded with the
+            // Note: This is included so that the type of BC is recorded with the
             // results.
             Connectors.RealInput u "Value of BC" annotation (Placement(
                   transformation(
@@ -5313,7 +5331,7 @@ boundary condition</a> models.
             extends FCSys.BaseClasses.Icons.BCs.Single;
             constant FCSys.BCs.Face.Species.Momentum.BaseClasses.BCType bCType
               "Type of BC";
-            // Note:  This is included so that the type of BC is recorded with the
+            // Note: This is included so that the type of BC is recorded with the
             // results.
             Connectors.RealInput u "Value of BC" annotation (Placement(
                   transformation(
@@ -5376,7 +5394,7 @@ boundary condition</a> models.
           partial model PartialBC "Partial model for a BC for entropy"
             extends FCSys.BaseClasses.Icons.BCs.Single;
             constant BCType bCType "Type of BC";
-            // Note:  This is included so that the type of BC is recorded with the
+            // Note: This is included so that the type of BC is recorded with the
             // results.
             Connectors.RealInput u "Value of BC" annotation (Placement(
                   transformation(
@@ -5410,7 +5428,7 @@ boundary condition</a> models.
 
         // Material
         final parameter Boolean open=thermoOpt == ThermoOpt.OpenDiabatic "Open";
-        // Note:  Dymola 7.4 doesn't recognize enumerations in the dialog enable
+        // Note: Dymola 7.4 doesn't recognize enumerations in the dialog enable
         // option, e.g.,
         //     enable=thermoOpt=ThermoOpt.OpenDiabatic.
         // Therefore, the values of the enumerations are specified numerically for
@@ -6133,7 +6151,7 @@ boundary condition</a> model.
             __Dymola_descriptionLabel=true,
             enable=inclO2), Placement(transformation(extent={{-10,-10},{10,10}})));
       equation
-        // Note:  It would be helpful if Modelica allowed elements of expandable
+        // Note: It would be helpful if Modelica allowed elements of expandable
         // connectors to be named by the contents of a string variable and the
         // name of an instance of a model was accessible through a string (like
         // %name is expanded to be the name of the instance of the model).  Then,
@@ -8482,7 +8500,7 @@ boundary condition</a> model.
           partial model PartialBC "Partial model for a material BC"
             extends FCSys.BaseClasses.Icons.BCs.Double;
             constant BCType bCType "Type of BC";
-            // Note:  This is included so that the type of BC is recorded with the
+            // Note: This is included so that the type of BC is recorded with the
             // results.
             Connectors.RealInput u "Value of BC" annotation (Placement(
                   transformation(
@@ -8542,7 +8560,7 @@ boundary condition</a> model.
             constant
               FCSys.BCs.FaceDifferential.Species.Momentum.BaseClasses.BCType
               bCType "Type of BC";
-            // Note:  This is included so that the type of BC is recorded with the
+            // Note: This is included so that the type of BC is recorded with the
             // results.
             Connectors.RealInput u "Value of BC" annotation (Placement(
                   transformation(
@@ -8619,7 +8637,7 @@ boundary condition</a> model.
           partial model PartialBC "Partial model for a BC for entropy"
             extends FCSys.BaseClasses.Icons.BCs.Double;
             constant BCType bCType "Type of BC";
-            // Note:  This is included so that the type of BC is recorded with the
+            // Note: This is included so that the type of BC is recorded with the
             // results.
             Connectors.RealInput u "Value of BC" annotation (Placement(
                   transformation(
@@ -8726,27 +8744,31 @@ those generated by the model's <code>connect</code> statements.</p>
       </tr>
     </table>
 </html>"),
-      Icon(graphics={Line(
-              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier),Line(
-              points={{-80,40},{80,40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-80,-40},{80,-40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier)}),
+      Icon(graphics={
+          Line(
+            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier),
+          Line(
+            points={{-80,40},{80,40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{80,-40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier)}),
       Diagram(graphics));
   end Router;
 
@@ -8773,7 +8795,7 @@ those generated by the model's <code>connect</code> statements.</p>
       final max=1,
       displayUnit="%") = 0.2
       "<html>Gas H<sub>2</sub>O fraction (<i>y</i><sub>H2O</sub>)</html>";
-    // TODO:  Cast this in terms of relative humidity.
+    // TODO: Cast this in terms of relative humidity.
 
     annotation (
       defaultComponentPrefixes="inner",
@@ -8843,13 +8865,13 @@ The default global default settings will be used for the current simulation.",
       defaultComponentName="volume",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,0},
-              fillPattern=FillPattern.Sphere,
-              fillColor={170,213,255}),Text(
-              extent={{-150,12},{150,-18}},
-              lineColor={0,0,0},
-              textString="V=%V")}),
+            extent={{-100,100},{100,-100}},
+            lineColor={0,0,0},
+            fillPattern=FillPattern.Sphere,
+            fillColor={170,213,255}), Text(
+            extent={{-150,12},{150,-18}},
+            lineColor={0,0,0},
+            textString="V=%V")}),
       Documentation(info="<html>
 <p>
 Ideally mixed volume of constant size with two fluid ports and one medium model.
@@ -8944,7 +8966,7 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
         "velocities of fluid flow at device boundary";
       SI.EnergyFlowRate[nPorts] ports_E_flow
         "flow of kinetic and potential energy at device boundary";
-      // Note:  should use fluidLevel_start - portsData.height
+      // Note: should use fluidLevel_start - portsData.height
       Real[nPorts] s(each start=fluidLevel_max)
         "curve parameters for port flows vs. port pressures; for further details see, Modelica Tutorial: Ideal switching devices";
       Real[nPorts] ports_penetration
@@ -8972,7 +8994,7 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
       // Treatment of use_portsData=false to neglect portsData and to not require its specification either in this case.
       // Remove portsData conditionally if use_portsData=false. Simplify their use in model equations by always
       // providing portsData_diameter and portsData_height, independent of the use_portsData setting.
-      // Note:  this moreover serves as work-around if a tool doesn't support a zero sized portsData record.
+      // Note: this moreover serves as work-around if a tool doesn't support a zero sized portsData record.
       Modelica.Blocks.Interfaces.RealInput[nPorts] portsData_diameter_internal=
           portsData.diameter if use_portsData and nPorts > 0;
       Modelica.Blocks.Interfaces.RealInput[nPorts] portsData_height_internal=
@@ -9029,14 +9051,14 @@ of the modeler. Increase nPorts to add an additional port.
       for i in 1:nPorts loop
         if use_portsData then
           // dp = 0.5*zeta*d*v*|v|
-          // Note:  assume vessel_ps_static for portDensities to avoid algebraic loops for ports.p
+          // Note: assume vessel_ps_static for portDensities to avoid algebraic loops for ports.p
           portDensities[i] = noEvent(Medium.density(Medium.setState_phX(
                 vessel_ps_static[i],
                 actualStream(ports[i].h_outflow),
                 actualStream(ports[i].Xi_outflow))));
           portVelocities[i] = smooth(0, ports[i].m_flow/portAreas[i]/
             portDensities[i]);
-          // Note:  the penetration should not go too close to zero as this would prevent a vessel from running empty
+          // Note: the penetration should not go too close to zero as this would prevent a vessel from running empty
           ports_penetration[i] = Modelica.Fluid.Utilities.regStep(
                 fluidLevel - portsData_height[i] - 0.1*portsData_diameter[i],
                 1,
@@ -9051,7 +9073,7 @@ of the modeler. Increase nPorts to add an additional port.
         // fluid flow through ports
         if fluidLevel >= portsData_height[i] then
           // regular operation: fluidLevel is above ports[i]
-          // Note:  >= covers default values of zero as well
+          // Note: >= covers default values of zero as well
           if use_portsData then
             /* Without regularization
         ports[i].p = vessel_ps_static[i] + 0.5*ports[i].m_flow^2/portAreas[i]^2
@@ -9170,9 +9192,9 @@ should be used if these values are needed.
                 100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                 100,100}}), graphics={Text(
-                  extent={{-150,110},{150,150}},
-                  textString="%name",
-                  lineColor={0,0,255})}));
+              extent={{-150,110},{150,150}},
+              textString="%name",
+              lineColor={0,0,255})}));
     end PartialLumpedVessel;
 
     block RealFunction
@@ -9195,13 +9217,13 @@ should be used if these values are needed.
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             grid={2,2}),graphics={Rectangle(
-                  extent={{-100,40},{100,-40}},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  lineColor={0,0,0}),Text(
-                  extent={{-100,-10},{100,10}},
-                  lineColor={127,127,127},
-                  textString="%y")}),
+              extent={{-100,40},{100,-40}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={0,0,0}), Text(
+              extent={{-100,-10},{100,10}},
+              lineColor={127,127,127},
+              textString="%y")}),
         Diagram(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},

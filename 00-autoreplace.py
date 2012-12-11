@@ -25,9 +25,9 @@ rpls = [# Remove extra spacing.
         (r'import FCSys;\n', ''),
         # No empty line before "end x;".
         (r'\n(\n +end )([^; ]+);', r'\1\2;'),
-        # Two spaces after "Note:" and "TODO:".
-        (r'Note: ([^ ])', r'Note:  \1'),
-        (r'TODO: ([^ ])', r'TODO:  \1'),
+        # One space after "Note:" and "TODO:".
+        (r'Note:  +([^ ])', r'Note: \1'),
+        (r'TODO:  +([^ ])', r'TODO: \1'),
         # Use lowercase "e" for engineering notation.
         (r'([0-9]+)E(-?)([0-9]+)', r'\1e\2\3'),
         # Don't use a "+" for positive powers of 10 in engineering notation.
@@ -76,7 +76,6 @@ for fname in glob.glob(os.path.join(directory, '*.mo')):
     nonASCII = "".join(i for i in text if ord(i)>=128)
     if len(nonASCII) > 0:
         print("Warning:  It contains these non-ASCII characters: " + nonASCII)
-
 
     # Re-write the file.
     src = open(fname, 'w')

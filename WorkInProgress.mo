@@ -11,7 +11,7 @@ package WorkInProgress "Incomplete classes under development"
       HideResult=true,
       Dialog(tab="Assumptions"),
       choices(__Dymola_checkBox=true));
-    // Note:  This is listed above the extends clause so that it is
+    // Note: This is listed above the extends clause so that it is
     // listed first in the parameter dialog.
     extends Subregions.BaseClasses.PartialSubregion;
 
@@ -54,7 +54,7 @@ package WorkInProgress "Incomplete classes under development"
           rotation=90,
           origin={-40,20})));
 
-    /* **Note:  Multiple reactions cannot be included at once due to the following error:
+    /* **Note: Multiple reactions cannot be included at once due to the following error:
 Error: Failed to expand the variable HOR.chemical[1].mphi
 Error: Failed to expand the variable HOR.chemical[2].mphi
 Error: Failed to expand the variable ORR.chemical[1].mphi
@@ -576,7 +576,7 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
           extent={{-10,-10},{10,10}},
           rotation=180,
           origin={64,-24})));
-    // Note:  The OCV of H2/O2 cell is 1.20646 V at 300 K, assuming the product is
+    // Note: The OCV of H2/O2 cell is 1.20646 V at 300 K, assuming the product is
     // gaseous.
   equation
     connect('e-_an'.chemical, HOR.chemical[1]) annotation (Line(

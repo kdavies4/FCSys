@@ -1012,7 +1012,7 @@ package Subregions
       HideResult=true,
       Dialog(tab="Assumptions"),
       choices(__Dymola_checkBox=true));
-    // Note:  This is listed above the extends clause so that it is listed
+    // Note: This is listed above the extends clause so that it is listed
     // first in the parameter dialog.
     extends BaseClasses.PartialSubregion;
 
@@ -1302,7 +1302,7 @@ package Subregions
       HideResult=true,
       choices(__Dymola_checkBox=true),
       Dialog(tab="Assumptions"));
-    // Note:  This is listed above the extension clause so that it is listed
+    // Note: This is listed above the extension clause so that it is listed
     // first in the parameter dialog.
     extends BaseClasses.PartialSubregion;
 
@@ -1429,7 +1429,7 @@ package Subregions
       HideResult=true,
       choices(__Dymola_checkBox=true),
       Dialog(tab="Assumptions"));
-    // Note:  This is listed above the extends clause so that it is listed
+    // Note: This is listed above the extends clause so that it is listed
     // first in the parameter dialog.
     extends BaseClasses.PartialSubregion;
 
@@ -1999,7 +1999,7 @@ package Subregions
           points={{-7,-7},{-20,-20}},
           color={127,127,127},
           smooth=Smooth.None));
-      // Note:  It is necessary to connect the subconnectors individually
+      // Note: It is necessary to connect the subconnectors individually
       // since they are conditional.  Currently (Dymola 7.4 and Modelica 3.2),
       // it is necessary to use conditional subconnectors.  It isn't possible
       // to refer to components of expandable connectors using connect
@@ -4953,7 +4953,7 @@ package Subregions
           enable=inclH2O),
         Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      // TODO:  Add and use a model for H2O liquid.
+      // TODO: Add and use a model for H2O liquid.
     equation
       // H2O
       // ---
@@ -5398,7 +5398,7 @@ package Subregions
                 B_c=[-300*U.K*935*U.J*Data.m/(U.kg*U.K) + Data.Deltah0_f, 0]),
               redeclare parameter Q.ResistivityThermal alpha_Sdot=Data.alpha());
           // See the documentation for a table of values.
-          // Note:  Parameter expressions (e.g., involving defaults.T) are not used
+          // Note: Parameter expressions (e.g., involving defaults.T) are not used
           // here since they would render the parameters unadjustable in Dymola 7.4.
           // A similar note applies to the other species.
 
@@ -5531,7 +5531,7 @@ package Subregions
             alpha_tau=k_alpha_tau*Data.alpha(T),
             alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
 
-          // Note:  initMethPartNum may not be Pressure (which is default) since the
+          // Note: initMethPartNum may not be Pressure (which is default) since the
           // EOS doesn't involve pressure.
 
           parameter Q.NumberAbsolute k_alpha_Ndot(final nominal=1) = 1
@@ -5559,7 +5559,7 @@ package Subregions
             alpha_Ndot=Data.alpha(T),
             alpha_tau=Data.alpha(T),
             alpha_Sdot=Data.alpha(T));
-          // Note:  initMethPartNum may not be Pressure (which is default) since the
+          // Note: initMethPartNum may not be Pressure (which is default) since the
           // EOS doesn't involve pressure.
 
           annotation (
@@ -5578,7 +5578,7 @@ package Subregions
             redeclare parameter Q.Resistivity alpha_tau=Data.alpha(),
             redeclare parameter Q.ResistivityThermal alpha_Sdot=Data.alpha());
 
-          // Note:  initMethPartNum may not be Pressure (which is default) since the
+          // Note: initMethPartNum may not be Pressure (which is default) since the
           // EOS doesn't involve pressure.
 
           annotation (
@@ -5987,7 +5987,7 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
             alpha_tau=k_alpha_tau*Data.alpha(T),
             alpha_Sdot=k_alpha_Sdot*Data.alpha(T));
 
-          // Note:  initMethPartNum may not be Pressure (which is default) since the
+          // Note: initMethPartNum may not be Pressure (which is default) since the
           // EOS doesn't involve pressure.
 
           parameter Q.NumberAbsolute k_alpha_Ndot(final nominal=1) = 1
@@ -6015,7 +6015,7 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
             alpha_Ndot=Data.alpha(T),
             alpha_tau=Data.alpha(T),
             alpha_Sdot=Data.alpha(T));
-          // Note:  initMethPartNum may not be Pressure (which is default) since the
+          // Note: initMethPartNum may not be Pressure (which is default) since the
           // EOS doesn't involve pressure.
 
           annotation (
@@ -6035,7 +6035,7 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
             redeclare parameter Q.ResistivityThermal alpha_Sdot=U.m*U.K/(0.1661
                 *U.W));
 
-          // Note:  initMethPartNum may not be Pressure (which is default) since
+          // Note: initMethPartNum may not be Pressure (which is default) since
           // overrideEOS is true.
 
           // See the documentation for a table of values.
@@ -6428,7 +6428,7 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
         N(stateSelect=StateSelect.never),
         phi(each stateSelect=StateSelect.never),
         T(stateSelect=StateSelect.never));
-      // Note:  StateSelect.never is necessary to avoid dynamic state selection
+      // Note: StateSelect.never is necessary to avoid dynamic state selection
       // in Dymola 7.4.
       annotation (Documentation(info="<html>**e.g., purely electrical species without inductance
     <p>Assumptions:<ol>
@@ -6483,7 +6483,7 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
           final slipX=false,
           final slipY=false));
 
-      // Note:  alpha_Ndot and alpha_tau don't matter since material and linear
+      // Note: alpha_Ndot and alpha_tau don't matter since material and linear
       // momentum aren't transported.  upstreamX, upstreamY, and upstreamZ don't
       // matter since bulk current is zero.
 
@@ -6625,7 +6625,7 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
       parameter Q.Amount N_IC(start=V_IC*rho_IC)
         "<html>Initial particle number (<i>N</i><sub>IC</sub>)</html>"
         annotation (Dialog(tab="Initialization",group="Scalar properties"));
-      // Note:  This parameter is left enabled even if it isn't used to
+      // Note: This parameter is left enabled even if it isn't used to
       // explicitly initialize any states, since it is used as a guess value.
       // Similar notes apply to some other initial conditions below.
       parameter Q.Current derN_IC=0
@@ -6634,7 +6634,7 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
           tab="Initialization",
           group="Scalar properties",
           enable=initMethPartNum == 3 or initMethTemp == 3));
-      // Note:  Dymola 7.4 doesn't recognize enumerations in the dialog enable
+      // Note: Dymola 7.4 doesn't recognize enumerations in the dialog enable
       // option, e.g.,
       //     enable=initMethPartNum == InitMethScalar.AmountRate.
       // Therefore, the values of the enumerations are specified numerically for
@@ -6727,7 +6727,7 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
           tab="Initialization",
           group="Velocity",
           enable=inclVel[3]));
-      // Note:  Dymola 7.4 doesn't provide pull-down lists for arrays of
+      // Note: Dymola 7.4 doesn't provide pull-down lists for arrays of
       // enumerations; therefore, a parameter is used for each axis.
       parameter Q.Velocity phi_IC[Axis]={0,0,0}
         "<html>Initial velocity (<b>&phi;</b><sub>IC</sub>)</html>"
@@ -6754,7 +6754,7 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
         final start=N_IC,
         final fixed=false,
         stateSelect=StateSelect.prefer) "Particle number";
-      // Note:  The start value for this variable (and others below) isn't fixed
+      // Note: The start value for this variable (and others below) isn't fixed
       // because the related initial condition is applied in the initial
       // equation section.
       Q.Velocity phi[n_vel](
@@ -6779,7 +6779,7 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
         final start=p_IC,
         final fixed=false,
         stateSelect=StateSelect.never) "Pressure";
-      // Note:  In Dymola 7.4 StateSelect.never is necessary to avoid dynamic
+      // Note: In Dymola 7.4 StateSelect.never is necessary to avoid dynamic
       // state selection.
       Q.Potential h(
         nominal=1*U.V,
@@ -6814,7 +6814,7 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
       // Misc. properties and conditions
       output Q.AmountVolumic rho(stateSelect=StateSelect.never) = N/V if
         defaults.analysis "Molar density";
-      // Note:  The reciprocal, specific volume (v), isn't provided because
+      // Note: The reciprocal, specific volume (v), isn't provided because
       // particle number (N) can be zero.
       output Q.PressureAbsolute q[n_vel](each stateSelect=StateSelect.never) =
         Data.m*phi .* I ./ (2*A[cartAxes]) if defaults.analysis
@@ -6827,7 +6827,7 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
             T=T,
             dv=1,
             dT=0) else 0 if defaults.analysis "Chemical capacitance";
-      // Note:  This is delN/delg at constant T and V.
+      // Note: This is delN/delg at constant T and V.
       output Q.CapacityThermalSpecific c0(stateSelect=StateSelect.never) =
         Data.c0(T) if defaults.analysis "Specific heat capacity";
       output Q.CapacityThermal C_p(stateSelect=StateSelect.never) = N*c0 if
@@ -6933,7 +6933,7 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
       output Q.Power Qdot_trans(stateSelect=StateSelect.never) = sum(T_face .*
         Sdot_face) if defaults.analysis
         "Rate of thermal conduction from other subregions";
-      // Note:  These auxiliary variables should not be used as states; the
+      // Note: These auxiliary variables should not be used as states; the
       // structure of the problem should not change if they are included.
       FCSys.Connectors.ChemicalOutput chemical(
         final n_vel=n_vel,
@@ -7124,7 +7124,7 @@ For simulation, specify global default settings by dragging FCSys.BCs.Defaults i
 The default global default settings will be used for the current simulation.",
           Placement(transformation(extent={{40,40},{60,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
-      // Note:  In Dymola 7.4 it is necessary to add the missing inner message
+      // Note: In Dymola 7.4 it is necessary to add the missing inner message
       // here to give a warning message, even though it is included in the
       // Defaults model too.
 
@@ -7177,7 +7177,7 @@ The default global default settings will be used for the current simulation.",
     Modelica.Utilities.Streams.print("Warning: The thermal resistance to transport is zero.
     This may directly couple the temperature within neighboring subregions.\nConsider setting the value of alpha_Sdot as final (if not already) so that index reduction may be performed.");
   end if;
-  // Note:  According to the Modelica 3.0 specification (and later), these
+  // Note: According to the Modelica 3.0 specification (and later), these
   // checks should be possible using the assert() command with
   // level=AssertionLevel.warning.  However, this isn't supported in
   // Dymola 7.4.
@@ -7440,7 +7440,7 @@ The default global default settings will be used for the current simulation.",
         else
           //if initMethPartNum == InitMethScalar.ReactionRate then
           chemical.Ndot = Ndot_IC;
-          // Note:  initMethPartNum == InitMethScalar.None can't occur due to an
+          // Note: initMethPartNum == InitMethScalar.None can't occur due to an
           // assertion.
         end if;
       else
@@ -7461,7 +7461,7 @@ The default global default settings will be used for the current simulation.",
             I[axis] = I_IC[cartAxes[axis]];
           elseif initMethLin[cartAxes[axis]] == InitMethLinMom.CurrentRate then
             der(I[axis])/U.s = derI_IC[cartAxes[axis]];
-            // Note:  initMethLin[cartAxes[axis]] == InitMethLinMom.None can't
+            // Note: initMethLin[cartAxes[axis]] == InitMethLinMom.None can't
             // occur due to an assertion.
           end if;
         else
@@ -7515,7 +7515,7 @@ The default global default settings will be used for the current simulation.",
         else
           //if initMethTemp == InitMethScalar.ReactionRate then
           chemical.Ndot = Ndot_IC;
-          // Note:  initMethTemp == InitMethScalar.None can't occur due to an
+          // Note: initMethTemp == InitMethScalar.None can't occur due to an
           // assertion.
         end if;
       else
@@ -7532,7 +7532,7 @@ The default global default settings will be used for the current simulation.",
           side] else 0 for side in Side) for axis in Axis) + sum(tau_face .*
           APdot_face) + sum(T_face .* Sdot_face)
           "Conservation of energy **update";
-        // Note:  Although it is mathematically equivalent,
+        // Note: Although it is mathematically equivalent,
         // der(Data.p_vT(V/N, T)) is used instead of der(inert.p) or der(p)
         // so that the term can be expanded to avoid dynamic state selection
         // in Dymola 7.4.
@@ -7804,62 +7804,53 @@ The default global default settings will be used for the current simulation.",
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-180,-180},{180,
-              180}}), graphics={
-          Rectangle(
-            extent={{-170,120},{170,160}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Ellipse(
-            extent={{-60,188},{60,68}},
-            lineColor={127,127,127},
-            startAngle=30,
-            endAngle=149,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255}),
-          Ellipse(
-            extent={{-170,-2},{-50,-122}},
-            lineColor={127,127,127},
-            startAngle=149,
-            endAngle=270,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255}),
-          Ellipse(
-            extent={{50,-2},{170,-122}},
-            lineColor={127,127,127},
-            startAngle=270,
-            endAngle=390,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255}),
-          Polygon(
-            points={{51.5,159},{162,-32},{110,-122},{-110,-122},{-162,-32},{-51.5,
-                159},{51.5,159}},
-            smooth=Smooth.None,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Line(
-            points={{51.5,159},{162,-32}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{110,-122},{-110,-122}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{-162,-32},{-51.5,159}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Text(
-            extent={{-170,120},{170,160}},
-            textString="%name",
-            lineColor={0,0,0})}));
+              180}}), graphics={Rectangle(
+              extent={{-170,120},{170,160}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Ellipse(
+              extent={{-60,188},{60,68}},
+              lineColor={127,127,127},
+              startAngle=30,
+              endAngle=149,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}),Ellipse(
+              extent={{-170,-2},{-50,-122}},
+              lineColor={127,127,127},
+              startAngle=149,
+              endAngle=270,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}),Ellipse(
+              extent={{50,-2},{170,-122}},
+              lineColor={127,127,127},
+              startAngle=270,
+              endAngle=390,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}),Polygon(
+              points={{51.5,159},{162,-32},{110,-122},{-110,-122},{-162,-32},{-51.5,
+              159},{51.5,159}},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Line(
+              points={{51.5,159},{162,-32}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{110,-122},{-110,-122}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{-162,-32},{-51.5,159}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Text(
+              extent={{-170,120},{170,160}},
+              textString="%name",
+              lineColor={0,0,0})}));
   end PhaseBoundary;
 
   model Reaction "Model for a chemical/electrochemical reaction"
@@ -7916,10 +7907,10 @@ The default global default settings will be used for the current simulation.",
           chemical[i].hbar,
           hbar) "Energy";
     end for;
-    // TODO:  Consider using stream connectors once they are better supported
+    // TODO: Consider using stream connectors once they are better supported
     // (some errors occurred in Dymola 7.4).
 
-    // Note:  This model is marked as structurally incomplete.  It must have
+    // Note: This model is marked as structurally incomplete.  It must have
     // zero species by default (for automatic connector sizing), but at least
     // one species is mathematically required (two for a meaningful reaction).
     annotation (
@@ -7934,6 +7925,21 @@ The default global default settings will be used for the current simulation.",
     If you suspect a bug in the library, please report it using the
     <a href=\"modelica://FCSys.UsersGuide.Contact\">contact information</a>.</p>
 
+  <p>Linear momentum and energy are advected using the <code>semiLinear</code> operator.
+  The rate of advection of linear momentum is the
+  product of the velocity of the source and the rate of mass
+  (<i>m</i> &phi; <i>N&#775;</i>).  The rate of thermal advection is the
+  product of the massic enthalpy of the source and the rate of mass
+  (<i>m</i> <i>h&#772;</i> <i>N&#775;</i>).  If there multiple sources, then 
+  their contributions are additive.  If there are multiple sinks, then 
+  the flow is split on a mass basis.</p>
+  
+  <p>At uniform temperature, the stoichiometrically weighted sum of the chemical 
+  potentials zero.  The <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model
+  specifies that the chemical potential is the Gibbs potential (<i>g</i> = <i>h</i> - <i>sT</i>).  
+  Therefore, assuming uniform temperature, the rate of advection of enthalpy (<i>H&#775;</i>) from reactants
+  to products (or vice versa) is also temperature times the rate of advection of entropy (<i>TS&#775;</i>).</p>
+  
     <p>**Update this: For material, this model is essentially the opposite of a standard single-species connection.
     The stoichiometric sum of the efforts (&Sigma; &nu;<sub><i>i</i></sub> &mu;<sub><i>i</i></sub>)
     is zero, which is analogous to Kirchhoff's Current Law.  The flow rates divided by the
@@ -7950,26 +7956,22 @@ The default global default settings will be used for the current simulation.",
     <li>No storage of material, linear momentum, or energy</li></ul>
     </p>
     </html>"),
-      Icon(graphics={
-          Rectangle(
-            extent={{-140,40},{140,80}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Text(
-            extent={{-140,40},{140,80}},
-            textString="%name",
-            lineColor={0,0,0}),
-          Ellipse(
-            extent={{-80,40},{80,-40}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            lineColor={127,127,127},
-            pattern=LinePattern.Dash),
-          Text(
-            extent={{-100,-16},{100,-40}},
-            lineColor={127,127,127},
-            textString="%n_spec")}),
+      Icon(graphics={Rectangle(
+              extent={{-140,40},{140,80}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Text(
+              extent={{-140,40},{140,80}},
+              textString="%name",
+              lineColor={0,0,0}),Ellipse(
+              extent={{-80,40},{80,-40}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash),Text(
+              extent={{-100,-16},{100,-40}},
+              lineColor={127,127,127},
+              textString="%n_spec")}),
       Diagram(graphics));
   end Reaction;
 
@@ -8022,24 +8024,21 @@ value (<code>p</code>).</p>
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{160,
-              160}}), graphics={
-          Rectangle(
-            extent={{-160,112},{160,152}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Polygon(
-            points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,-160},
-                {-160,60}},
-            lineColor={127,127,127},
-            smooth=Smooth.None,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.Dash),
-          Text(
-            extent={{-160,112},{160,152}},
-            textString="%name",
-            lineColor={0,0,0})}),
+              160}}), graphics={Rectangle(
+              extent={{-160,112},{160,152}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Polygon(
+              points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,-160},
+              {-160,60}},
+              lineColor={127,127,127},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.Dash),Text(
+              extent={{-160,112},{160,152}},
+              textString="%name",
+              lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(graphics));
@@ -8165,91 +8164,76 @@ value (<code>p</code>).</p>
   value (<code>p</code>).</li>
   </ul></p></html>"),
         Diagram(graphics),
-        Icon(graphics={
-            Line(
-              points={{-100,0},{-40,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclXFaces,
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{0,-100}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclYFaces,
-              smooth=Smooth.None),
-            Line(
-              points={{40,40},{50,50}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclZFaces,
-              smooth=Smooth.None),
-            Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                  16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-40,-40},{-16,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{-16,40},{-16,-16},{40,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{-40,0},{28,0}},
-              color={210,210,210},
-              visible=inclXFaces,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,28},{0,-40}},
-              color={210,210,210},
-              visible=inclYFaces,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{28,0},{100,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclXFaces,
-              smooth=Smooth.None),
-            Line(
-              points={{0,100},{0,28}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclYFaces,
-              smooth=Smooth.None),
-            Line(
-              points={{-12,-12},{40,40}},
-              color={210,210,210},
-              visible=inclZFaces,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-40,16},{16,16},{16,-40}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{-50,-50},{-12,-12}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclZFaces,
-              smooth=Smooth.None),
-            Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                  16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{40,40},{16,16}},
-              color={127,127,127},
-              smooth=Smooth.None)}));
+        Icon(graphics={Line(
+                  points={{-100,0},{-40,0}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclXFaces,
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{0,-100}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclYFaces,
+                  smooth=Smooth.None),Line(
+                  points={{40,40},{50,50}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclZFaces,
+                  smooth=Smooth.None),Polygon(
+                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
+                {-40,16}},
+                  lineColor={127,127,127},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Line(
+                  points={{-40,-40},{-16,-16}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),Line(
+                  points={{-16,40},{-16,-16},{40,-16}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),Line(
+                  points={{-40,0},{28,0}},
+                  color={210,210,210},
+                  visible=inclXFaces,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,28},{0,-40}},
+                  color={210,210,210},
+                  visible=inclYFaces,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{28,0},{100,0}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclXFaces,
+                  smooth=Smooth.None),Line(
+                  points={{0,100},{0,28}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclYFaces,
+                  smooth=Smooth.None),Line(
+                  points={{-12,-12},{40,40}},
+                  color={210,210,210},
+                  visible=inclZFaces,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-40,16},{16,16},{16,-40}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{-50,-50},{-12,-12}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclZFaces,
+                  smooth=Smooth.None),Polygon(
+                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
+                {-40,16}},
+                  lineColor={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{40,40},{16,16}},
+                  color={127,127,127},
+                  smooth=Smooth.None)}));
     end PartialSubregion;
   end BaseClasses;
 

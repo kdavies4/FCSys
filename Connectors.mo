@@ -64,7 +64,7 @@ package Connectors "Declarative and imperative connectors"
 
     input Q.MassSpecific m "Specific mass";
     input String formula(start="") "Chemical formula";
-    // Note:  The start value prevents a warning when checked in Dymola 7.4.
+    // Note: The start value prevents a warning when checked in Dymola 7.4.
     annotation (
       defaultComponentName="chemical",
       Documentation(info="<html><p>For more information, see the documentation in the
@@ -314,11 +314,11 @@ package Connectors "Declarative and imperative connectors"
   <p>To impose a no-slip condition (i.e., zero transverse velocity at boundary), set the
   corresponding <code>slip1</code> or <code>slip2</code> parameter to <code>false</code>.</p>
 
-  <p>As defined by the <a href=\"modelica://FCSys.BaseClasses.Orientation\">Orientation</a> 
+  <p>As defined by the <a href=\"modelica://FCSys.BaseClasses.Orientation\">Orientation</a>
   enumeration, the first transverse axis is the axis following the normal axis in the
-  Cartesian coordinate system.  The second transverse axis is the axis preceding the normal 
+  Cartesian coordinate system.  The second transverse axis is the axis preceding the normal
   axis (or following it twice).</p>
-  
+
   <p>For more information, see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package and the
     <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialFace\">PartialFace</a> connector.</p></html>"),
@@ -330,6 +330,56 @@ package Connectors "Declarative and imperative connectors"
               lineColor={127,127,127})}));
 
   end FaceGeneric;
+
+  connector Inert
+    "Connector to exchange linear momentum and entropy by diffusion"
+
+    parameter Integer n_vel(
+      final min=0,
+      final max=3) = 0
+      "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>"
+      annotation (HideResult=true);
+
+    // Linear momentum
+    Q.Velocity phi[n_vel](each nominal=1*U.cm/U.s) "Velocity";
+    flow Q.Force mPhidot[n_vel](each nominal=1*U.N) "Force";
+
+    // Entropy
+    Q.TemperatureAbsolute T(nominal=298.15*U.K, displayUnit="K") "Temperature";
+    flow Q.Current Sdot(nominal=1*U.W/(298.15*U.K)) "Entropy flow rate";
+
+    annotation (
+      Documentation(info="<html>
+  <p>Note that the geometric orientation is globally referenced.  For example, force is positive
+  in the positive-x direction&mdash;not from the interface into component as is pressure.  Thus,
+  force is the rate of globally-referenced linear momentum into the component.
+  </p>
+    <p>For more information, see the documentation in the
+    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
+
+      Diagram(graphics={Text(
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0}),Ellipse(
+              extent={{-30,30},{30,-30}},
+              lineColor={72,90,180},
+              fillPattern=FillPattern.Solid,
+              fillColor={102,128,255}),Ellipse(
+              extent={{-18,18},{18,-18}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={72,90,180})}),
+      Icon(graphics={Ellipse(
+            extent={{-100,100},{100,-100}},
+            lineColor={72,90,180},
+            fillPattern=FillPattern.Solid,
+            fillColor={102,128,255}), Ellipse(
+            extent={{-60,60},{60,-60}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            lineColor={72,90,180})}));
+
+  end Inert;
 
   connector InertAmagat
     "<html><a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> connector with additivity of volume</html>"
@@ -442,56 +492,6 @@ package Connectors "Declarative and imperative connectors"
 
   end InertDalton;
 
-  connector Inert
-    "Connector to exchange linear momentum and entropy by diffusion"
-
-    parameter Integer n_vel(
-      final min=0,
-      final max=3) = 0
-      "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>"
-      annotation (HideResult=true);
-
-    // Linear momentum
-    Q.Velocity phi[n_vel](each nominal=1*U.cm/U.s) "Velocity";
-    flow Q.Force mPhidot[n_vel](each nominal=1*U.N) "Force";
-
-    // Entropy
-    Q.TemperatureAbsolute T(nominal=298.15*U.K, displayUnit="K") "Temperature";
-    flow Q.Current Sdot(nominal=1*U.W/(298.15*U.K)) "Entropy flow rate";
-
-    annotation (
-      Documentation(info="<html>
-  <p>Note that the geometric orientation is globally referenced.  For example, force is positive 
-  in the positive-x direction&mdash;not from the interface into component as is pressure.  Thus, 
-  force is the rate of globally-referenced linear momentum into the component.
-  </p>
-    <p>For more information, see the documentation in the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
-
-      Diagram(graphics={Text(
-              extent={{-100,36},{100,76}},
-              textString="%name",
-              lineColor={0,0,0}),Ellipse(
-              extent={{-30,30},{30,-30}},
-              lineColor={72,90,180},
-              fillPattern=FillPattern.Solid,
-              fillColor={102,128,255}),Ellipse(
-              extent={{-18,18},{18,-18}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineColor={72,90,180})}),
-      Icon(graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={72,90,180},
-            fillPattern=FillPattern.Solid,
-            fillColor={102,128,255}), Ellipse(
-            extent={{-60,60},{60,-60}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            lineColor={72,90,180})}));
-
-  end Inert;
-
   connector InertInternal
     "Internal connector to exchange linear momentum and entropy by diffusion"
 
@@ -549,20 +549,17 @@ package Connectors "Declarative and imperative connectors"
       Documentation(info="<html><p>For more information, see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Diagram(graphics={
-          Text(
-            extent={{-100,36},{100,76}},
-            textString="%name",
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-30,30},{30,-30}},
-            lineColor={0,0,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Line(
-            points={{-30,0},{30,0}},
-            color={0,0,0},
-            smooth=Smooth.None)}),
+      Diagram(graphics={Text(
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0}),Rectangle(
+              extent={{-30,30},{30,-30}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Line(
+              points={{-30,0},{30,0}},
+              color={0,0,0},
+              smooth=Smooth.None)}),
       Icon(graphics={Rectangle(
             extent={{-100,100},{100,-100}},
             lineColor={0,0,0},
@@ -580,33 +577,31 @@ package Connectors "Declarative and imperative connectors"
     flow Q.VolumeRate APdot(nominal=1*U.cm^3/U.s)
       "Shear velocity times surface area";
 
+    extends Modelica.Icons.UnderConstruction;
     annotation (
       Documentation(info="<html>
 
   <p>Note that the geometric orientations of shear stress and velocity
-  are referenced locally.  As defined by 
+  are referenced locally.  As defined by
   <a href=\"modelica://FCSys.BaseClasses.Utilities.inSign\">inSign</a>(),
-  force and velocity in the positive direction on the negative side or face 
+  force and velocity in the positive direction on the negative side or face
   of a region or subregion is in the globally-referenced positive direction.  The
-  positive direction on the positive side is globally negative.  
+  positive direction on the positive side is globally negative.
   </p>
     <p>For more information, see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Diagram(graphics={
-          Text(
-            extent={{-100,36},{100,76}},
-            textString="%name",
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-30,30},{30,-30}},
-            lineColor={0,0,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Line(
-            points={{0,30},{0,-30}},
-            color={0,0,0},
-            smooth=Smooth.None)}),
+      Diagram(graphics={Text(
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0}),Rectangle(
+              extent={{-30,30},{30,-30}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Line(
+              points={{0,30},{0,-30}},
+              color={0,0,0},
+              smooth=Smooth.None)}),
       Icon(graphics={Rectangle(
             extent={{-100,100},{100,-100}},
             lineColor={0,0,0},
@@ -616,7 +611,6 @@ package Connectors "Declarative and imperative connectors"
             color={0,0,0},
             smooth=Smooth.None)}));
 
-    extends Modelica.Icons.UnderConstruction;
   end Mechanical;
 
   connector Thermal "Connector to transport entropy"
@@ -628,24 +622,20 @@ package Connectors "Declarative and imperative connectors"
       Documentation(info="<html>For information, see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Diagram(graphics={
-          Text(
-            extent={{-100,36},{100,76}},
-            textString="%name",
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-30,30},{30,-30}},
-            lineColor={0,0,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Line(
-            points={{-30,30},{30,-30}},
-            color={0,0,0},
-            smooth=Smooth.None),
-          Line(
-            points={{30,30},{-30,-30}},
-            color={0,0,0},
-            smooth=Smooth.None)}),
+      Diagram(graphics={Text(
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0}),Rectangle(
+              extent={{-30,30},{30,-30}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Line(
+              points={{-30,30},{30,-30}},
+              color={0,0,0},
+              smooth=Smooth.None),Line(
+              points={{30,30},{-30,-30}},
+              color={0,0,0},
+              smooth=Smooth.None)}),
       Icon(graphics={
           Rectangle(
             extent={{-100,100},{100,-100}},
@@ -974,11 +964,11 @@ Protected connector with one output signal of type <code>Real</code>.</p>
         Documentation(info="<html><p>The <code>thermOpt</code> parameter sets the thermodynamic
     properties of the face.  The face may be closed and adiabatic, closed and diabatic
     (i.e., with heat transfer), or open and diabatic.  However, the open and adiabatic
-    combination is not an option.  Given the formulation of the 
-    <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model, it would 
-    prevent the energy balance from being computed properly (see the 
+    combination is not an option.  Given the formulation of the
+    <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model, it would
+    prevent the energy balance from being computed properly (see the
     <a href=\"modelica://FCSys.Connectors.BaseClasses.ThermoOpt\">ThermoOpt</a> enumeration).</p>
-    
+
   <p>For more information, see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package and the
     <a href=\"modelica://FCSys.Connectors.Material\">Material</a> and
@@ -1011,99 +1001,50 @@ Protected connector with one output signal of type <code>Real</code>.</p>
   because the open and adiabatic combination is invalid.  The effort for material
   transport is pressure, yet the contribution of material to the energy balance
   is specific enthalpy.  Specific enthalpy is characterized as a function of temperature,
-  so the temperature of the boundary must be known.  This requires the 
+  so the temperature of the boundary must be known.  This requires the
   <a href=\"modelica://FCSys.Connectors.Thermal\">Thermal</a> connector.
   </p>
   </html>"));
   end BaseClasses;
 
-  annotation (Documentation(info="<html>**Update all this!
-  <p>The connectors of <a href=\"modelica://FCSys\">FCSys</a> are nested according to the hierarchy shown in Figure 1.
-  The icons on the bottom row represent the fundamental connectors, which each have only one
-  effort/flow pair.
-  The fundamental connectors are base classes for
-  the <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialInert\">Inert</a>,
-  <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialFace\">Face</a>, and
-  <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialChemical\">Chemical</a>
-  connectors. The <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialInert\">Inert</a>
-  connector describes diffusive exchange among <a href=\"modelica://FCSys.Subregions.Species\">Species</a>
-  instances within a
-  <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a>.  The
-  <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialFace\">Face</a> connector
-  describes advective and diffusive transport between instances of a single
-  <a href=\"modelica://FCSys.Subregions.Species\">Species</a> in
-  neighboring subregions.  The <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialChemical\">Chemical</a>
-  connector represents the advective exchange among <a href=\"modelica://FCSys.Subregions.Species\">Species</a> that react chemically
-  within a
-  <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a>.  <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a>
-  and <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> are expandable connectors
-  that group
-  the <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialChemical\">Chemical</a> and
-  <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialFace\">Face</a> connectors
-  of multiple species.  The
-  <a href=\"modelica://FCSys.Connectors.ChemicalBusInternal\">ChemicalBusInternal</a> and
-  <a href=\"modelica://FCSys.Connectors.FaceBusInternal\">FaceBusInternal</a> connectors (not shown)
-  are versions of the
-  <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> and
-  <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>
-  connectors that merely have a default <code>protected</code> prefix and smaller icons to
-  indicate that the connectors are internal to a model.</p>
-
-    <p align=center><img src=\"modelica://FCSys/resources/documentation/Connectors/hierarchy.png\">
-<br><b>Figure 1:</b> Instantiation hierarchy of the connectors.</p>
-
-  <p>The contents of the fundamental connectors are summarized in Table 1.
-  The dimensions are noted in terms of mass (M), length (L), time (T), and amount or particle number (N).
-  Each effort variable is chosen such that the product of effort and the rate of the quantity is an energy
-  rate<a href=\"#footnote-1\"><sup>1</sup></a>.  In most connectors, the flow variable is the
-  rate of the quantity, but the additivity of volume and
-  pressure connectors use the quantity itself as the flow variable.
-  </p>
-
-  <p>**Update this: In addition to the material effort and flow pair, the <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialChemical\">Chemical</a>
-  connector has <code>stream</code> variables&mdash;specific mass times velocity (m&phi;)
-  and specific entropy times temperature (<i>sT</i> ).  These variables describe the purely advective
-  (non-diffusive) flow associated with the chemical exchange.  The rate of advection of linear momentum is the
-  product of specific mass of the source, the velocity of the source, and the current
-  (<i>m</i> &phi;<i>N&#775;</i>).  The rate of thermal advection is the
-  product of specific entropy of the source, the temperature of the source, and the current
-  (<i>sT</i><i>N&#775;</i>). Since the chemical potential is given by the Gibbs potential
-  (<i>g</i> = <i>h</i> - <i>sT</i> )
-  and its stoichiometrically weighted sum is zero, the rate of thermal advection from reactants
-  to products (or vice versa) is also the rate of advection of enthalpy.</p>
-
-  <p>There are two types of chemical
-  connectors.  The <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> connector
-  has inputs for the chemical formula (<code>formula</code> string) of the associated species.
-  The <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> connector
-  has outputs for the same variables.  This information is used to determine the appropriate reaction
-  stoichiometry and conservation equations in the
-  <a href=\"modelica://FCSys.Subregions.Reaction\">Reaction</a>
-  model.</p>
-
-  <p>There are also two types of inert
-  connectors.  The <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector
-  (with an \"A\" in the icon)
-  uses additivity of volume and the
-  <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector (with a \"D\" in the icon)
-  uses
-  additivity of pressure.  The two cannot be directly connected; a failure will occur during translation
-  because the effort/flow designations
-  are opposite.  An adapter must be used (e.g., <a href=\"modelica://FCSys.Subregions.PhaseBoundary\">FCSys.Subregions.PhaseBoundary</a>).</p>
-
-  <p>There are multiple <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialFace\">Face</a>
-  connectors&mdash;<a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a>,
+  annotation (Documentation(info="<html>
+  <p>Three types of physical connectors are used in <a href=\"modelica://FCSys\">FCSys</a>.
+  The chemical connectors (<a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a>,
+  <a href=\"modelica://FCSys.Connectors.ChemicalBusInternal\">ChemicalBusInternal</a>,
+  <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a>, and
+  <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a>) 
+  represent advective exchange among species that react chemically
+  within a subregion.  
+  The inert connectors
+  (<a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a>,
+  <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a>,
+  <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a>, and
+  <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a>)
+  describe diffusive exchange among species within a subregion.  
+  The face connectors (<a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>,
+  <a href=\"modelica://FCSys.Connectors.FaceBusInternal\">FaceBusInternal</a>,
+  <a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a>,
   <a href=\"modelica://FCSys.Connectors.FaceY\">FaceY</a>,
   <a href=\"modelica://FCSys.Connectors.FaceZ\">FaceZ</a>, and
-  <a href=\"modelica://FCSys.Connectors.FaceGeneric\">FaceGeneric</a>.
-  They differ only in the way that linear momentum is labeled.  The linear momentum is oriented
-  transverse to the face.
-  For example, in the <a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a> connector it is labeled
-  <code>momentumY</code> and <code>momentumZ</code>.
-  </p>
-
+  <a href=\"modelica://FCSys.Connectors.FaceGeneric\">FaceGeneric</a>)
+  describe advective and diffusive transport between instances of a single
+  species in
+  neighboring regions or subregions.</p>
+  
+  <p>The effort/flow pairs of the connectors are listed in <a href=\"#Tab1\">Table 1</a>.
+  The pairs are generally named by the quantity that is exchanged or
+  transported (i.e., the integral of the flow variable).
+  The dimensions of the efforts and flows are noted in terms of mass (M), 
+  amount or particle number (N),
+  length (L), and time (T).  The pairs are used to describe the
+  transfer of material, linear momentum, and energy associated with material,
+  mechanical, and thermal interactions.  Both advection (e.g., dynamic force and
+  thermal convection) and diffusion (e.g., friction and thermal conduction)
+  are resolved (see the
+  <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model).</p>
+  
     <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-    <caption align=\"bottom\"><b>Table 1:</b> Summary of the fundamental connectors.</caption>
+    <caption align=\"bottom\" id=\"Tab1\"><b>Table 1:</b> Summary of the effort/flow pairs.</caption>
       <tr>
         <th>Within icon(s)</th>
         <th>Name or quantity</th>
@@ -1112,53 +1053,169 @@ Protected connector with one output signal of type <code>Real</code>.</p>
       </tr>
       <tr>
         <td>
-          <a href=\"modelica://FCSys.Connectors.Material\"><img src=\"modelica://FCSys/help/FCSys.Connectors.MaterialI.png\"></a>
-          <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialFace\"><img src=\"modelica://FCSys/help/FCSys.Connectors.BaseClasses.PartialFaceI.png\"></a>
-          <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialChemical\"><img src=\"modelica://FCSys/help/FCSys.Connectors.BaseClasses.PartialChemicalI.png\"></a></td>
-        <td valign=middle>Material</td>
-        <td valign=middle>Electrochemical potential<br>&mu; [L<sup>2</sup> M N<sup>-1</sup> T<sup>-2</sup>]</td>
+          <a href=\"modelica://FCSys.Connectors.ChemicalInput\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ChemicalInputI.png\"></a>
+          <a href=\"modelica://FCSys.Connectors.ChemicalOutput\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ChemicalOutputI.png\"></a>
+          <a href=\"modelica://FCSys.Connectors.ChemicalBus\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ChemicalBusI.png\"></a></td>
+          <!--<a href=\"modelica://FCSys.Connectors.ChemicalBusInternal\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ChemicalBusInternalI.png\"></a></td>-->
+        <td valign=middle>Material exchange</td>
+        <td valign=middle>Electrochemical potential divided by temperature<br>&mu;/<i>T</i> [1]</td>
         <td valign=middle>Current<br><i>N&#775;</i> [N T<sup>-1</sup>]</td>
       </tr>
       <tr>
         <td>
-          <a href=\"modelica://FCSys.Connectors.MomentumLineic\"><img src=\"modelica://FCSys/help/FCSys.Connectors.MomentumLineicI.png\"></a>
-          <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialFace\"><img src=\"modelica://FCSys/help/FCSys.Connectors.BaseClasses.PartialFaceI.png\"></a>
+          <a href=\"modelica://FCSys.Connectors.ChemicalInput\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ChemicalInputI.png\"></a>
+          <a href=\"modelica://FCSys.Connectors.ChemicalOutput\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ChemicalOutputI.png\"></a>
+          <a href=\"modelica://FCSys.Connectors.ChemicalBus\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ChemicalBusI.png\"></a>
+          <!--<a href=\"modelica://FCSys.Connectors.ChemicalBusInternal\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ChemicalBusInternalI.png\"></a>-->
+<br>
+          <a href=\"modelica://FCSys.Connectors.Inert\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertI.png\"></a>
           <a href=\"modelica://FCSys.Connectors.InertAmagat\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertAmagatI.png\"></a>
-          <a href=\"modelica://FCSys.Connectors.InertDalton\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertDaltonI.png\"></a>
+          <a href=\"modelica://FCSys.Connectors.InertDalton\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertDaltonI.png\"></a></td>
         <td valign=middle>Linear momentum</td>
         <td valign=middle>Velocity<br>&phi; [L T<sup>-1</sup>]</td>
         <td valign=middle>Force<br><i>m</i>&Phi;dot [L M T<sup>-2</sup>]</td>
       </tr>
       <tr>
         <td>
-          <a href=\"modelica://FCSys.Connectors.Entropy\"><img src=\"modelica://FCSys/help/FCSys.Connectors.EntropyI.png\"></a>
-          <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialFace\"><img src=\"modelica://FCSys/help/FCSys.Connectors.BaseClasses.PartialFaceI.png\"></a>
-        <a href=\"modelica://FCSys.Connectors.InertAmagat\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertAmagatI.png\"></a>
-        <a href=\"modelica://FCSys.Connectors.InertDalton\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertDaltonI.png\"></a></td>
-        <td valign=middle>Entropy</td>
-        <td valign=middle>Temperature<br><i>T</i> [L<sup>2</sup> M N<sup>-1</sup> T<sup>-2</sup>]</td>
-        <td valign=middle>Entropy flow rate<br><i>S&#775;</i> [N T<sup>-1</sup>]</td>
+          <a href=\"modelica://FCSys.Connectors.ChemicalInput\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ChemicalInputI.png\"></a>
+          <a href=\"modelica://FCSys.Connectors.ChemicalOutput\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ChemicalOutputI.png\"></a>
+          <a href=\"modelica://FCSys.Connectors.ChemicalBus\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ChemicalBusI.png\"></a></td>
+          <!--<a href=\"modelica://FCSys.Connectors.ChemicalBusInternal\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ChemicalBusInternalI.png\"></a></td>-->
+        <td valign=middle>Enthalpy</td>
+        <td valign=middle>Massic enthalpy<br><i>h&#772;</i> [L<sup>2</sup> M N<sup>-1</sup> T<sup>-2</sup>]</td>
+        <td valign=middle>Enthalpy flow rate<br><i>H&#775;</i> [L<sup>2</sup>  M T<sup>-3</sup>]</td>
       </tr>
       <tr>
-        <td><a href=\"modelica://FCSys.Connectors.BaseClasses.PartialInert\"><img src=\"modelica://FCSys/resources/documentation/Connectors/VolumeOrPressureI.png\"></a>
+        <td>
+          <a href=\"modelica://FCSys.Connectors.Material\"><img src=\"modelica://FCSys/help/FCSys.Connectors.MaterialI.png\"></a>
+          <!--<a href=\"modelica://FCSys.Connectors.FaceGeneric\"><img src=\"modelica://FCSys/help/FCSys.Connectors.FaceGenericI.png\"></a>-->
+          <a href=\"modelica://FCSys.Connectors.FaceGeneric\"><img src=\"modelica://FCSys/help/FCSys.Connectors.FaceXI.png\"></a>
+          <a href=\"modelica://FCSys.Connectors.FaceBus\"><img src=\"modelica://FCSys/help/FCSys.Connectors.FaceBusI.png\"></a></td>
+        <td valign=middle>Material transport</td>
+        <td valign=middle>Pressure<br><i>p</i> [M L<sup>-1</sup> T<sup>-2</sup>]</td>
+        <td valign=middle>Current<br><i>N&#775;</i> [N T<sup>-1</sup>]</td>
+      </tr>
+      <tr>
+        <td>
+          <a href=\"modelica://FCSys.Connectors.Mechanical\"><img src=\"modelica://FCSys/help/FCSys.Connectors.MechanicalI.png\"></a>
+          <!--<a href=\"modelica://FCSys.Connectors.FaceGeneric\"><img src=\"modelica://FCSys/help/FCSys.Connectors.FaceGenericI.png\"></a>-->
+          <a href=\"modelica://FCSys.Connectors.FaceGeneric\"><img src=\"modelica://FCSys/help/FCSys.Connectors.FaceXI.png\"></a>
+          <a href=\"modelica://FCSys.Connectors.FaceBus\"><img src=\"modelica://FCSys/help/FCSys.Connectors.FaceBusI.png\"></a></td>
+        <td valign=middle>Transverse displacement</td>
+        <td valign=middle>Shear stress<br>&tau; [M L<sup>-1</sup> T<sup>-2</sup>]</td>
+        <td valign=middle>Surface area times shear velocity<br><i>AP&#775;</i> [L<sup>3</sup> T<sup>-1</sup>]</td>
+      </tr>
+      <tr>
+        <td>
+          <a href=\"modelica://FCSys.Connectors.Thermal\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ThermalI.png\"></a>
+          <!--<a href=\"modelica://FCSys.Connectors.FaceGeneric\"><img src=\"modelica://FCSys/help/FCSys.Connectors.FaceGenericI.png\"></a>-->
+          <a href=\"modelica://FCSys.Connectors.FaceGeneric\"><img src=\"modelica://FCSys/help/FCSys.Connectors.FaceXI.png\"></a>
+          <a href=\"modelica://FCSys.Connectors.FaceBus\"><img src=\"modelica://FCSys/help/FCSys.Connectors.FaceBusI.png\"></a>
+<br>
+          <a href=\"modelica://FCSys.Connectors.Inert\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertI.png\"></a>
+          <a href=\"modelica://FCSys.Connectors.InertAmagat\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertAmagatI.png\"></a>
+          <a href=\"modelica://FCSys.Connectors.InertDalton\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertDaltonI.png\"></a></td>
+        <td valign=middle>Entropy</td>
+        <td valign=middle>Temperature<br><i>T</i> [L<sup>2</sup> M N<sup>-1</sup> T<sup>-2</sup>]</td>
+        <td valign=middle>Entropy flow rate<sup><a name=\"ref1\"></a><a href=\"#footnote1\">1</a></sup><br><i>S&#775;</i> [N T<sup>-1</sup>]</td>
+      </tr>
+      <tr>
+        <td>
           <a href=\"modelica://FCSys.Connectors.InertAmagat\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertAmagatI.png\"></a></td>
         <td valign=middle>Additivity of volume<br>(Amagat's law)</td>
         <td valign=middle>Pressure<br><i>p</i> [M L<sup>-1</sup> T<sup>-2</sup>]</td>
         <td valign=middle>Volume<br><i>V</i> [L<sup>3</sup>]</td>
       </tr>
       <tr>
-        <td><a href=\"modelica://FCSys.Connectors.BaseClasses.PartialInert\"><img src=\"modelica://FCSys/resources/documentation/Connectors/VolumeOrPressureI.png\"></a>
+        <td>
         <a href=\"modelica://FCSys.Connectors.InertDalton\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertDaltonI.png\"></a></td>
         <td valign=middle>Additivity of pressure<br>(Dalton's law)</td>
         <td valign=middle>Volume<br><i>V</i> [L<sup>3</sup>]</td>
         <td valign=middle>Pressure<br><i>p</i> [M L<sup>-1</sup> T<sup>-2</sup>]</td>
       </tr>
     </table>
+  
+  <p>The product of the efforts and flows of the linear momentum, transverse displacement,
+  and entropy pairs is the rate of energy associated with the interaction.
+  However, many of the pairs are different.
+  The effort of the material exchange pair is electrochemical potential divided by
+  temperature because it is used in the chemical equilibrium
+  (see the
+  <a href=\"modelica://FCSys.Subregions.Reaction\">Reaction</a> model).  The
+  enthalpy pair's effort is massic enthalpy (enthalpy divided by mass) since
+  it is used for advection only.  The effort of the material transport pair
+  is pressure rather than electrochemical potential so that the dynamic normal
+  force can be resolved without nonlinear systems of equations (see the
+  <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model).
+  The additivity of volume and
+  pressure pairs describe static balances; therefore, their flows are the quantities
+  rather than the rates of the quantities.
+  </p>
 
-<p><b>Relation to thermodynamics and justification of the Amagat and Dalton connectors:</b><p>
+  <p>In addition to the material exchange pair, the chemical
+  connectors have linear momentum and enthalpy pairs that are used to describe the purely advective
+  (non-diffusive) flow associated with the material exchange (see the
+  <a href=\"modelica://FCSys.Subregions.Reaction\">Reaction</a> model for details).  Although
+  the physical variables are acausal, the  
+  <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> and
+  <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connectors have inputs and 
+  outputs to pass characteristic data of the species&mdash;the chemical formula and specific mass.
+  This information is used to determine the appropriate
+  stoichiometry and advection equations in the
+  <a href=\"modelica://FCSys.Subregions.Reaction\">Reaction</a>
+  model.</p>
 
-     <p>In order to describe the dynamic behavior of a physical system, a model must include conservation laws or rate balances.  These
-     equations involve the storage and flow of extensive quantities within (among species) and into the system.  In chemical/thermal systems, the extensive
+  <p>There are two specialized types of inert
+  connectors.  The <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector
+  (with an \"A\" in the icon)
+  imposes additivity of volume and is used to combine material phases within a subregion.
+  The
+  <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector (with a \"D\" in the icon)
+  applies additivity of pressure to mix species within a material phase (e.g., N<sub>2</sub> and O<sub>2</sub>
+  within a gas).
+  The two cannot be directly connected because the effort/flow designations
+  are opposite.  An adapter must be used 
+  (e.g., <a href=\"modelica://FCSys.Subregions.PhaseBoundary\">FCSys.Subregions.PhaseBoundary</a>).</p>
+
+  <p>The face connectors contain <a href=\"modelica://FCSys.Connectors.Material\">Material</a>,
+  <a href=\"modelica://FCSys.Connectors.Material\">Mechanical</a>, and 
+  <a href=\"modelica://FCSys.Connectors.Material\">Thermal</a> subconnectors.  
+  <a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a>,
+  <a href=\"modelica://FCSys.Connectors.FaceY\">FaceY</a>,
+  <a href=\"modelica://FCSys.Connectors.FaceZ\">FaceZ</a>, and
+  <a href=\"modelica://FCSys.Connectors.FaceGeneric\">FaceGeneric</a>
+  differ only in the name of the mechanical subconnectors, which describe transverse displacement.  
+  For example, <a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a> has 
+  <a href=\"modelica://FCSys.Connectors.Material\">Mechanical</a> subconnectors named
+  <code>mechanicalY</code> and <code>mechanicalZ</code>.</p>
+  
+  <p><a href=\"#Fig1\">Figure 1</a> shows the instantiation hierarchy of the connectors.  
+  <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a>
+  is an expandable connector that groups
+  <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> and
+  <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalOutput</a> connectors
+  of multiple species.  Likewise, 
+  <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> groups
+  <a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a>, <a href=\"modelica://FCSys.Connectors.FaceY\">FaceY</a>,
+  <a href=\"modelica://FCSys.Connectors.FaceZ\">FaceZ</a>, or <a href=\"modelica://FCSys.Connectors.FaceGeneric\">FaceGeneric</a>
+  connectors of multiple species.  
+  The
+  <a href=\"modelica://FCSys.Connectors.ChemicalBusInternal\">ChemicalBusInternal</a> and
+  <a href=\"modelica://FCSys.Connectors.FaceBusInternal\">FaceBusInternal</a> connectors (not shown)
+  are versions of
+  <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> and
+  <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>
+  that merely have a default <code>protected</code> prefix and smaller icons to
+  indicate that the connectors are internal to a model.  The inert connectors are 
+  flat; they do not have subconnectors.</p>
+
+  <p align=center id=\"Fig1\"><img src=\"modelica://FCSys/resources/documentation/Connectors/hierarchy.png\">
+  <br><b>Figure 1:</b> Instantiation hierarchy of the connectors.</p>
+
+    <p><b>Relation to thermodynamics and justification of the Amagat and Dalton connectors:</b><p>
+
+    <p>In order to describe the dynamic behavior of a physical system, a model must include conservation laws or rate balances.  These
+    equations involve the storage and flow of extensive quantities within (among species) and into the system.  In chemical/thermal systems, the extensive
     quantities of interest are particle number (or mass) and entropy or energy.
     For the sake of simplicity, momentum will be excluded from the present discussion; assume that the fluid is macroscopically stagnant.
     Also assume that there is only one inlet or outlet to the system.
@@ -1179,8 +1236,8 @@ Protected connector with one output signal of type <code>Real</code>.</p>
     (4 equations in all) and six variables (2 quantities, 2 flows, and 2 efforts or intensive properties).
     </p>
 
-    <p>One extensive
-    quantity can be divided by the other to yield an intensive property.  For example, internal energy can be divided by particle number
+    <p>One extensive quantity can be divided by the other to yield an intensive property.  
+    For example, internal energy can be divided by particle number
     to give internal potential (the relationship is not as direct for electrochemical potential, but the concept still holds).
     The other equation involves the spatial extent of the system, for example, the extensive
     volume of the system divided by particle number to give specific volume.
@@ -1223,26 +1280,25 @@ Protected connector with one output signal of type <code>Real</code>.</p>
     instead of <a href=\"modelica://FCSys.Connectors.InertDelton\">InertAmagat</a>).
     </p>
 
-<p id=\"footnote-1\"><sup>1</sup> The <a href=\"modelica://Modelica.Thermal.HeatTransfer\">Modelica.Thermal.HeatTransfer</a>
-package uses heat rate as the flow variable rather than entropy rate.  The reason is that it is awkward to
-apply Fourier's Law (thermal conduction) in terms of entropy flow rate to a component that does not store heat,
-since entropy is generated [<a href=\"modelica://FCSys.UsersGuide.References\">Hogan2006</a>],
-[<a href=\"modelica://FCSys.UsersGuide.References\">Cellier1991</a>, p. 304].  However, the
-<a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSpecies\">Species</a> model is transient and does not directly
-impose that the heat transfer rates sum to zero.  Therefore, it is just as convenient to write Fourier's law in terms of
-entropy flow rate.  This approach is chosen in <a href=\"modelica://FCSys\">FCSys</a> so that all transient effort/flow variables
-are conjugates of an energy rate.</p>
+  <p id=\"footnote1\"><sup>1. The <a href=\"modelica://Modelica.Thermal.HeatTransfer\">Modelica.Thermal.HeatTransfer</a>
+  package uses heat rate as the flow variable rather than entropy rate.  The reason is that it is awkward to
+  apply Fourier's Law (thermal conduction) in terms of entropy flow rate to a component that does not store heat,
+  since entropy is generated [<a href=\"modelica://FCSys.UsersGuide.References\">Hogan2006</a>],
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Cellier1991</a>, p. 304].  However, the
+  <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSpecies\">Species</a> model is transient and does not directly
+  impose that the heat transfer rates sum to zero.  Therefore, it is just as convenient to write Fourier's law in terms of
+  entropy flow rate.  This approach is chosen in <a href=\"modelica://FCSys\">FCSys</a> for consistency and symmetry.<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></sup></p>
 
-<p>
-<b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-Copyright 2007&ndash;2012, Georgia Tech Research Corporation.
-</p>
-<p>
-<i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
-it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
-disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.ModelicaLicense2\">
-FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
-http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
-</p>
-</html>"));
+  <p>
+  <b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+  Copyright 2007&ndash;2012, Georgia Tech Research Corporation.
+  </p>
+  <p>
+  <i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+  it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
+  disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.ModelicaLicense2\">
+  FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
+  http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
+  </p>
+  </html>"));
 end Connectors;

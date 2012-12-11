@@ -44,11 +44,13 @@ mv -f FCSys.html index.html
 # Be sure that all of the files are added to git.
 #git add images
 #git add *.html
+git add *Connectors* # **temp
 git add *Characteristics* # **temp
 git add *Quantities* # **temp
 git add *Units* # **temp
 git add *UsersGuide* # **temp
 git add FCSys_BaseClasses* # **temp
+git add images/*Connectors* # **temp
 git add images/*Characteristics* # **temp
 git add images/*Quantities* # **temp
 git add images/*Units* # **temp

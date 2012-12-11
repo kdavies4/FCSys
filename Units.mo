@@ -162,7 +162,7 @@ package Units "Constants and units of physical measure"
         final k_J=483597.870e9*sqrt(S*s/1e4)/m,
         final k_F=1,
         final R=1);
-      // Note:  k_J = 483597.870e9*sqrt(S*s/x)/m sets kg = x.
+      // Note: k_J = 483597.870e9*sqrt(S*s/x)/m sets kg = x.
 
       annotation (Documentation(info="<html><p>The values of this record result in the following values for the base SI units
   (besides cd = 1, which is the default):
@@ -467,7 +467,7 @@ package Units "Constants and units of physical measure"
 
   replaceable constant Bases.ScaledFC base constrainedby Bases.Base
     "Scalable base constants and units";
-  // Note:  The base constants and units may be replaced to suit the scale
+  // Note: The base constants and units may be replaced to suit the scale
   // of the physical system.
 
   final constant Q.Angle rad=base.rad "radian";
@@ -486,7 +486,7 @@ package Units "Constants and units of physical measure"
 
   // -----------------------------------------------------------------------
   // Empirical units
-  // Note:  The values are currently based on the those from [NIST2010].
+  // Note: The values are currently based on the those from [NIST2010].
   // The measured values are used rather than conventional values (where
   // they exist).
 
@@ -533,7 +533,7 @@ package Units "Constants and units of physical measure"
 
   // -----------------------------------------------------------------------
   // SI base units [BIPM2006, Table 1] and intermediate units
-  // Note:  Only A and kg  are remaining (s, m, S, K, mol, and cd
+  // Note: Only A and kg  are remaining (s, m, S, K, mol, and cd
   // already defined).
 
   final constant Q.Potential V=Wb*rad/s "volt";
@@ -579,7 +579,7 @@ package Units "Constants and units of physical measure"
   // -----------------------------------------------------------------------
   // Coherent derived units in the SI with special names and symbols
   // [BIPM2006, Table 3]
-  // Note:  rad, S, C, Wb, V, J, and Sv have already been defined.  Degree
+  // Note: rad, S, C, Wb, V, J, and Sv have already been defined.  Degree
   // Celsius is defined in FCSys/resources/scripts/units.mos since it includes
   // an offset.
 
@@ -587,7 +587,7 @@ package Units "Constants and units of physical measure"
   // This is defined for convenience (not listed by [BIPM2006]).
   final constant Q.Frequency Hz=cyc/s "hertz";
   // SI unit of frequency
-  // Note:  Numerically, this doesn't evaluate to Hz = 1/s as stated by
+  // Note: Numerically, this doesn't evaluate to Hz = 1/s as stated by
   // BIPM (that relation isn't dimensionally correct when considering
   // angle as a dimension), but allows the conversion of frequency into as
   // cycles per second (Hz) or radians per second (rad/s).  Since BIPM
@@ -609,13 +609,13 @@ package Units "Constants and units of physical measure"
   // SI unit of electrical resistance
   final constant Q.Inductance H=V*s/A "henry";
   // SI unit of inductance or permeance
-  // Note:  By this definition, H = Wb*rad/A, which is currently equivalent
+  // Note: By this definition, H = Wb*rad/A, which is currently equivalent
   // to the definition in Table 3 since BIPM currently defines rad = 1
   // [BIPM2006].
   final constant Q.MagneticFluxAreic T=Wb/m^2 "tesla";
   // SI unit of magnetic flux density
   final constant Q.Power lm='cd'*sr "lumen";
-  // Note:  Table 3 gives lm = cd, but this is only so because SI
+  // Note: Table 3 gives lm = cd, but this is only so because SI
   // implicitly assigns sr = 1.
   final constant Q.PowerAreic lx=lm/m^2 "lux";
   final constant Q.Frequency Bq=Hz "becquerel";
@@ -640,7 +640,7 @@ package Units "Constants and units of physical measure"
 
   // -----------------------------------------------------------------------
   // Derived physical constants
-  // Note:  These are established by definition, but may include
+  // Note: These are established by definition, but may include
   // transcendental mathematical constants.
 
   // Electromagnetism
@@ -739,7 +739,7 @@ package Units "Constants and units of physical measure"
 
   // -----------------------------------------------------------------------
   // Selected other non-SI units from [BIPM2006, Table 8]
-  // Note:  Logarithmic ratios have been excluded because they can't be
+  // Note: Logarithmic ratios have been excluded because they can't be
   // represented in Dymola's unit conversion GUI.
 
   final constant Q.Pressure bar=1e5*Pa "bar";
