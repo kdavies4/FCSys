@@ -3,7 +3,7 @@
 <title>FCSys.Characteristics.Examples</title>
 <meta name="HTML-Generator" content="Dymola">
 <meta name="description" content="Examples and tests">
-<meta name="keywords" content="Modelica, fuel cell, PEMFC, model">
+<meta name="keywords" content="Modelica, fuel cell, PEMFC, electrochemistry, model">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
@@ -24,7 +24,7 @@
     <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
     <li><a href="FCSys_Regions.html">Regions</a>**</li>
     <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
-    <li><a href="FCSys_Connectors.html">Connectors</a>**</li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
@@ -48,7 +48,7 @@
 <b>Examples and tests</b>
 <p>
 <p><h3>Information</h3></p>
-Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_ExamplesPackage.html#Modelica.Icons.ExamplesPackage">Modelica.Icons.ExamplesPackage</a> (Icon for packages containing runnable examples).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.ExamplesPackage.html#Modelica.Icons.ExamplesPackage">Modelica.Icons.ExamplesPackage</a> (Icon for packages containing runnable examples).
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
@@ -61,7 +61,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 <a name="FCSys.Characteristics.Examples.TestCorrelations"></a><a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples">FCSys.Characteristics.Examples</a>.TestCorrelations</h2>
 <b>Test the property correlations</b><p>
 <p><h3>Information</h3></p>
-Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -70,28 +70,28 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">model</font> TestCorrelations <font color="darkgreen">&quot;Test the property correlations&quot;</font>
-  <font color="blue">extends </font><a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
 
   <font color="blue">import </font><a href="FCSys_Characteristics.html#FCSys.Characteristics">FCSys.Characteristics</a>;
 
   <font color="darkgreen">// Data</font>
-  <a href="FCSys_Characteristics_C_Graphite.html#FCSys.Characteristics.C.Graphite">FCSys.Characteristics.C.Graphite</a> DataC;
-  <a href="FCSys_Characteristics_C19HF37O5S_Solid.html#FCSys.Characteristics.C19HF37O5S.Solid">FCSys.Characteristics.C19HF37O5S.Solid</a> DataC19HF37O5S;
-  <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a> &#39;Datae-&#39;;
-  <a href="FCSys_Characteristics_H2_Gas.html#FCSys.Characteristics.H2.Gas">FCSys.Characteristics.H2.Gas</a> DataH2;
-  <a href="FCSys_Characteristics_H2_Gas.html#FCSys.Characteristics.H2.Gas">FCSys.Characteristics.H2.Gas</a> DataH2IG(b_v=[1], specVolPow={-1,0}) <font color="darkgreen">
+  <font color="blue">import </font>DataC = <a href="FCSys_Characteristics_C_Graphite.html#FCSys.Characteristics.C.Graphite">FCSys.Characteristics.C.Graphite</a>;
+  <font color="blue">import </font>DataC19HF37O5S = <a href="FCSys_Characteristics_C19HF37O5S_Solid.html#FCSys.Characteristics.C19HF37O5S.Solid">FCSys.Characteristics.C19HF37O5S.Solid</a>;
+  <font color="blue">import </font>&#39;Datae-&#39; = <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>;
+  <font color="blue">import </font>DataH2 = <a href="FCSys_Characteristics_H2_Gas.html#FCSys.Characteristics.H2.Gas">FCSys.Characteristics.H2.Gas</a>;
+  <font color="blue">package</font> DataH2IG = <a href="FCSys_Characteristics_H2_Gas.html#FCSys.Characteristics.H2.Gas">FCSys.Characteristics.H2.Gas</a> (b_v=[1], specVolPow={-1,0}) <font color="darkgreen">
     &quot;H2 as ideal gas&quot;</font>;
-  <a href="FCSys_Characteristics_H2O_Gas.html#FCSys.Characteristics.H2O.Gas">FCSys.Characteristics.H2O.Gas</a> DataH2O;
-  <a href="FCSys_Characteristics_H2O_Liquid.html#FCSys.Characteristics.H2O.Liquid">FCSys.Characteristics.H2O.Liquid</a> DataH2OLiquid;
-  <a href="FCSys_Characteristics_'H+'_Solid.html#FCSys.Characteristics.'H+'.Solid">FCSys.Characteristics.'H+'.Solid</a> &#39;DataH+&#39;;
-  <a href="FCSys_Characteristics_N2_Gas.html#FCSys.Characteristics.N2.Gas">FCSys.Characteristics.N2.Gas</a> DataN2;
-  <a href="FCSys_Characteristics_O2_Gas.html#FCSys.Characteristics.O2.Gas">FCSys.Characteristics.O2.Gas</a> DataO2;
+  <font color="blue">import </font>DataH2O = <a href="FCSys_Characteristics_H2O_Gas.html#FCSys.Characteristics.H2O.Gas">FCSys.Characteristics.H2O.Gas</a>;
+  <font color="blue">import </font>DataH2OLiquid = <a href="FCSys_Characteristics_H2O_Liquid.html#FCSys.Characteristics.H2O.Liquid">FCSys.Characteristics.H2O.Liquid</a>;
+  <font color="blue">import </font>&#39;DataH+&#39; = <a href="FCSys_Characteristics_'H+'_Solid.html#FCSys.Characteristics.'H+'.Solid">FCSys.Characteristics.'H+'.Solid</a>;
+  <font color="blue">import </font>DataN2 = <a href="FCSys_Characteristics_N2_Gas.html#FCSys.Characteristics.N2.Gas">FCSys.Characteristics.N2.Gas</a>;
+  <font color="blue">import </font>DataO2 = <a href="FCSys_Characteristics_O2_Gas.html#FCSys.Characteristics.O2.Gas">FCSys.Characteristics.O2.Gas</a>;
 
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialAbsolute">Q.PotentialAbsolute</a> epsilon_tol=1e-10*U.V <font color="darkgreen">&quot;Tolerance in potential&quot;</font>;
 
   <font color="darkgreen">// Conditions</font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p=1*U.atm + time*10*U.bar/10;
-  <a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=273.15*U.K + 0*200*time*U.K/10;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p=1*U.atm + 0*time*10*U.bar/10;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=273.15*U.K + 200*time*U.K/10;
 
   <font color="darkgreen">// Results</font>
   <font color="darkgreen">// Resistivity</font>
@@ -105,22 +105,23 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> alpha_SdotO2_Phi=<font color="red">DataO2.alpha_tau</font>(T);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> alpha_SdotO2_U=<font color="red">DataO2.alpha_Sdot</font>(T);
   <font color="darkgreen">//</font>
-  <font color="darkgreen">// Specific heat capacity at constant pressure</font>
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_p_C=<font color="red">DataC.c_p</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_p_C19HF37O5S=<font color="red">DataC19HF37O5S.c_p</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_p_e-&#39;=<font color="red">&#39;Datae-&#39;.c_p</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_p_H2=<font color="red">DataH2.c_p</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_p_H2O=<font color="red">DataH2O.c_p</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_p_H2O_liquid=<font color="red">DataH2OLiquid.c_p</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_p_H+&#39;=<font color="red">&#39;DataH+&#39;.c_p</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_p_N2=<font color="red">DataN2.c_p</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_p_O2=<font color="red">DataO2.c_p</font>(T);
+  <font color="darkgreen">// Specific heat capacity at reference pressure</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c0_C=<font color="red">DataC.c0</font>(T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c0_C19HF37O5S=<font color="red">DataC19HF37O5S.c0</font>(T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c0_e-&#39;=<font color="red">&#39;Datae-&#39;.c0</font>(T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c0_H2=<font color="red">DataH2.c0</font>(T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c0_H2O=<font color="red">DataH2O.c0</font>(T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c0_H2O_liquid=<font color="red">DataH2OLiquid.c0</font>(T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c0_H+&#39;=<font color="red">&#39;DataH+&#39;.c0</font>(T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c0_N2=<font color="red">DataN2.c0</font>(T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c0_O2=<font color="red">DataO2.c0</font>(T);
   <font color="darkgreen">//</font>
   <font color="darkgreen">// Specific heat capacity at constant volume</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_C=<font color="red">DataC.c_V</font>(T);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_C19HF37O5S=<font color="red">DataC19HF37O5S.c_V</font>(T);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_V_e-&#39;=<font color="red">&#39;Datae-&#39;.c_V</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_H2=<font color="red">DataH2.c_V</font>(T);
+  <font color="darkgreen">// **output Q.CapacityThermalSpecific c_V_H2=DataH2.c_V(T);</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_H2=<font color="red">DataH2IG.c_V</font>(T);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_H2O=<font color="red">DataH2O.c_V</font>(T);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_H2O_liquid=<font color="red">DataH2OLiquid.c_V</font>(T);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_V_H+&#39;=<font color="red">&#39;DataH+&#39;.c_V</font>(T);
@@ -128,15 +129,15 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_O2=<font color="red">DataO2.c_V</font>(T);
   <font color="darkgreen">//</font>
   <font color="darkgreen">// Gibbs potential</font>
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_C=<font color="red">DataC.g_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_C19HF37O5S=<font color="red">DataC19HF37O5S.g_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> &#39;g_e-&#39;=<font color="red">&#39;Datae-&#39;.g_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_H2=<font color="red">DataH2.g_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_H2O=<font color="red">DataH2O.g_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_H2O_liquid=<font color="red">DataH2OLiquid.g_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> &#39;g_H+&#39;=<font color="red">&#39;DataH+&#39;.g_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_N2=<font color="red">DataN2.g_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_O2=<font color="red">DataO2.g_pT</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_C=<font color="red">DataC.g</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_C19HF37O5S=<font color="red">DataC19HF37O5S.g</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> &#39;g_e-&#39;=<font color="red">&#39;Datae-&#39;.g</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_H2=<font color="red">DataH2.g</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_H2O=<font color="red">DataH2O.g</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_H2O_liquid=<font color="red">DataH2OLiquid.g</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> &#39;g_H+&#39;=<font color="red">&#39;DataH+&#39;.g</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_N2=<font color="red">DataN2.g</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_O2=<font color="red">DataO2.g</font>(p, T);
   <font color="darkgreen">//</font>
   <font color="darkgreen">// Gibbs potential (indirectly calculated)</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_C_indirect=h_C - T*s_C;
@@ -176,39 +177,39 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_O2=<font color="red">DataO2.p_vT</font>(v_O2, T) <font color="blue">if </font>DataO2.isCompressible;
   <font color="darkgreen">//</font>
   <font color="darkgreen">// Specific entropy</font>
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> s_C=<font color="red">DataC.s_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> s_C19HF37O5S=<font color="red">DataC19HF37O5S.s_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> &#39;s_e-&#39;=<font color="red">&#39;Datae-&#39;.s_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> s_H2=<font color="red">DataH2.s_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> s_H2O=<font color="red">DataH2O.s_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> s_H2O_liquid=<font color="red">DataH2OLiquid.s_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> &#39;s_H+&#39;=<font color="red">&#39;DataH+&#39;.s_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> s_N2=<font color="red">DataN2.s_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> s_O2=<font color="red">DataO2.s_pT</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> s_C=<font color="red">DataC.s</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> s_C19HF37O5S=<font color="red">DataC19HF37O5S.s</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> &#39;s_e-&#39;=<font color="red">&#39;Datae-&#39;.s</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> s_H2=<font color="red">DataH2.s</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> s_H2O=<font color="red">DataH2O.s</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> s_H2O_liquid=<font color="red">DataH2OLiquid.s</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> &#39;s_H+&#39;=<font color="red">&#39;DataH+&#39;.s</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> s_N2=<font color="red">DataN2.s</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> s_O2=<font color="red">DataO2.s</font>(p, T);
   <font color="darkgreen">//</font>
   <font color="darkgreen">// Volumic amount</font>
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v_C=<font color="red">DataC.v_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v_C19HF37O5S=<font color="red">DataC19HF37O5S.v_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> &#39;v_e-&#39;=<font color="red">&#39;Datae-&#39;.v_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v_H2=<font color="red">DataH2.v_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v_IG=<font color="red">DataH2IG.v_pT</font>(p, T) <font color="darkgreen">
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> v_C=<font color="red">DataC.v_pT</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> v_C19HF37O5S=<font color="red">DataC19HF37O5S.v_pT</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> &#39;v_e-&#39;=<font color="red">&#39;Datae-&#39;.v_pT</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> v_H2=<font color="red">DataH2.v_pT</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> v_IG=<font color="red">DataH2IG.v_pT</font>(p, T) <font color="darkgreen">
     &quot;Volumic amount of ideal gas&quot;</font>;
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v_H2O=<font color="red">DataH2O.v_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v_H2O_liquid=<font color="red">DataH2OLiquid.v_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> &#39;v_H+&#39;=<font color="red">&#39;DataH+&#39;.v_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v_N2=<font color="red">DataN2.v_pT</font>(p, T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v_O2=<font color="red">DataO2.v_pT</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> v_H2O=<font color="red">DataH2O.v_pT</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> v_H2O_liquid=<font color="red">DataH2OLiquid.v_pT</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> &#39;v_H+&#39;=<font color="red">&#39;DataH+&#39;.v_pT</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> v_N2=<font color="red">DataN2.v_pT</font>(p, T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> v_O2=<font color="red">DataO2.v_pT</font>(p, T);
 
 <font color="blue">equation </font>
-  <font color="red">assert</font>(<font color="red">abs</font>(g_C - g_C_indirect) &lt; epsilon_tol, &quot;The Gibbs potential for C is not consistent with its specific enthalpy and specific entropy.&quot;);
-  <font color="red">assert</font>(<font color="red">abs</font>(g_C19HF37O5S - g_C19HF37O5S_indirect) &lt; epsilon_tol, &quot;The Gibbs potential for C19HF37O5S is not consistent with its specific enthalpy and specific entropy.&quot;);
-  <font color="red">assert</font>(<font color="red">abs</font>('g_e-' - 'g_e-_indirect') &lt; epsilon_tol, &quot;The Gibbs potential for &#39;e-&#39; is not consistent with its specific enthalpy and specific entropy.&quot;);
-  <font color="red">assert</font>(<font color="red">abs</font>(g_H2 - g_H2_indirect) &lt; epsilon_tol, &quot;The Gibbs potential for H2 is not consistent with its specific enthalpy and specific entropy.&quot;);
-  <font color="red">assert</font>(<font color="red">abs</font>(g_H2O - g_H2O_indirect) &lt; epsilon_tol, &quot;The Gibbs potential for H2O is not consistent with its specific enthalpy and specific entropy.&quot;);
-  <font color="red">assert</font>(<font color="red">abs</font>(g_H2O_liquid - g_H2O_liquid_indirect) &lt; epsilon_tol, &quot;The Gibbs potential for H2O liquid is not consistent with its specific enthalpy and specific entropy.&quot;);
-  <font color="red">assert</font>(<font color="red">abs</font>('g_H+' - 'g_H+_indirect') &lt; epsilon_tol, &quot;The Gibbs potential for &#39;H+&#39; is not consistent with its specific enthalpy and specific entropy.&quot;);
-  <font color="red">assert</font>(<font color="red">abs</font>(g_N2 - g_N2_indirect) &lt; epsilon_tol, &quot;The Gibbs potential for N2 is not consistent with its specific enthalpy and specific entropy.&quot;);
-  <font color="red">assert</font>(<font color="red">abs</font>(g_O2 - g_O2_indirect) &lt; epsilon_tol, &quot;The Gibbs potential for O2 is not consistent with its specific enthalpy and specific entropy.&quot;);
+  <font color="red">assert</font>(<font color="red">abs</font>(g_C - g_C_indirect) &lt; epsilon_tol, &quot;The Gibbs potential of C is not consistent with the specific enthalpy and entropy.&quot;);
+  <font color="red">assert</font>(<font color="red">abs</font>(g_C19HF37O5S - g_C19HF37O5S_indirect) &lt; epsilon_tol, &quot;The Gibbs potential of C19HF37O5S is not consistent with the specific enthalpy and entropy.&quot;);
+  <font color="red">assert</font>(<font color="red">abs</font>('g_e-' - 'g_e-_indirect') &lt; epsilon_tol, &quot;The Gibbs potential of &#39;e-&#39; is not consistent with the specific enthalpy and entropy.&quot;);
+  <font color="red">assert</font>(<font color="red">abs</font>(g_H2 - g_H2_indirect) &lt; epsilon_tol, &quot;The Gibbs potential of H2 is not consistent with the specific enthalpy and entropy.&quot;);
+  <font color="red">assert</font>(<font color="red">abs</font>(g_H2O - g_H2O_indirect) &lt; epsilon_tol, &quot;The Gibbs potential of H2O is not consistent with the specific enthalpy and entropy.&quot;);
+  <font color="red">assert</font>(<font color="red">abs</font>(g_H2O_liquid - g_H2O_liquid_indirect) &lt; epsilon_tol, &quot;The Gibbs potential of H2O liquid is not consistent with the specific enthalpy and entropy.&quot;);
+  <font color="red">assert</font>(<font color="red">abs</font>('g_H+' - 'g_H+_indirect') &lt; epsilon_tol, &quot;The Gibbs potential of &#39;H+&#39; is not consistent with the specific enthalpy and entropy.&quot;);
+  <font color="red">assert</font>(<font color="red">abs</font>(g_N2 - g_N2_indirect) &lt; epsilon_tol, &quot;The Gibbs potential of N2 is not consistent with the specific enthalpy and entropy.&quot;);
+  <font color="red">assert</font>(<font color="red">abs</font>(g_O2 - g_O2_indirect) &lt; epsilon_tol, &quot;The Gibbs potential of O2 is not consistent with the specific enthalpy and entropy.&quot;);
 
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>TestCorrelations;
 </pre>
@@ -217,7 +218,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Dec 10 21:33:12 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Dec 11 15:26:36 2012.
 </div>
 </body>
 </html>

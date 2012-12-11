@@ -3,7 +3,7 @@
 <title>FCSys.BaseClasses.Utilities.Chemistry</title>
 <meta name="HTML-Generator" content="Dymola">
 <meta name="description" content="Functions to support chemistry">
-<meta name="keywords" content="Modelica, fuel cell, PEMFC, model">
+<meta name="keywords" content="Modelica, fuel cell, PEMFC, electrochemistry, model">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
@@ -24,7 +24,7 @@
     <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
     <li><a href="FCSys_Regions.html">Regions</a>**</li>
     <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
-    <li><a href="FCSys_Connectors.html">Connectors</a>**</li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
@@ -48,7 +48,7 @@
 <b>Functions to support chemistry</b>
 <p>
 <p><h3>Information</h3></p>
-Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
@@ -117,7 +117,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   <p>See the
   <a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.ReadFormula">ReadFormula</a> function
   for details about the format of the chemical formula.</p><p>
-Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p><h3>Inputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -132,7 +132,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 <pre>
 <font color="blue">function</font> countElements <font color="darkgreen">
   &quot;Return the number of elements in a chemical formula&quot;</font>
-  <font color="blue">extends </font><a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
   <font color="blue">input </font>String formula <font color="darkgreen">&quot;Chemical formula&quot;</font>;
   <font color="blue">output </font>Integer n <font color="darkgreen">&quot;Number of elements&quot;</font>;
@@ -159,7 +159,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   <p><b>Example:</b><br>
   <code>(symbols, coeffs) = elements("C19HF37O5S-")</code> returns
   <code>symbols={"C", "H", "F", "O", "S", "e-"}</code> and <code>coeffs={19, 1, 37, 5, 1, 1}</code>.</p><p>
-Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p><h3>Inputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -175,7 +175,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 <pre>
 <font color="blue">function</font> elements <font color="darkgreen">
   &quot;Return the symbols and coefficients of the elements in a chemical formula&quot;</font>
-  <font color="blue">extends </font><a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
   <font color="blue">input </font>String formula <font color="darkgreen">&quot;Chemical formula&quot;</font>;
   <font color="blue">output </font>String symbols[<font color="red">countElements</font>(formula)] <font color="darkgreen">&quot;Symbols of the elements&quot;</font>;
@@ -290,7 +290,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   <code>stoich({"e-","H+","O2","H2O"})</code> returns <code>{-4,-4,-1,2}</code>,
   which indicates the reaction 4e<sup>-</sup> + 4H<sup>+</sup> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O.</p>
   <p>
-Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p><h3>Inputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -305,7 +305,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 <pre>
 <font color="blue">function</font> stoich <font color="darkgreen">
   &quot;Return stoichiometric coefficients of a reaction based on chemical formulas of reacting species&quot;</font>
-  <font color="blue">extends </font><a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
   <font color="blue">input </font>String formulas[:] <font color="darkgreen">&quot;Chemical formulas of the species&quot;</font>;
   <font color="blue">output </font>Integer nu[<font color="red">size</font>(formulas, 1)] <font color="darkgreen">&quot;stoichiometric coefficients&quot;</font>;
@@ -390,7 +390,7 @@ An unrelated species may be included.&quot;);
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Dec 10 17:54:37 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Dec 11 15:26:54 2012.
 </div>
 </body>
 </html>

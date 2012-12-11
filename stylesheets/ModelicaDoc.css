@@ -134,6 +134,11 @@ a:hover {
     color: #2491CF;
 }
 
+a.bookmark, div.body a.bookmark {
+    color: black;
+    text-decoration: none;
+}
+
 div.headerStyle {
     background-color: white;
     text-align: left;

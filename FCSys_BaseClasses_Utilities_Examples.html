@@ -3,7 +3,7 @@
 <title>FCSys.BaseClasses.Utilities.Examples</title>
 <meta name="HTML-Generator" content="Dymola">
 <meta name="description" content="Examples and tests">
-<meta name="keywords" content="Modelica, fuel cell, PEMFC, model">
+<meta name="keywords" content="Modelica, fuel cell, PEMFC, electrochemistry, model">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
@@ -24,7 +24,7 @@
     <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
     <li><a href="FCSys_Regions.html">Regions</a>**</li>
     <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
-    <li><a href="FCSys_Connectors.html">Connectors</a>**</li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
@@ -48,7 +48,7 @@
 <b>Examples and tests</b>
 <p>
 <p><h3>Information</h3></p>
-Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_ExamplesPackage.html#Modelica.Icons.ExamplesPackage">Modelica.Icons.ExamplesPackage</a> (Icon for packages containing runnable examples).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.ExamplesPackage.html#Modelica.Icons.ExamplesPackage">Modelica.Icons.ExamplesPackage</a> (Icon for packages containing runnable examples).
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
@@ -67,7 +67,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   This function call will fail if any of the functions return an
   incorrect result.  It will return true if all of the functions pass.
   There are no inputs or outputs.</p><p>
-Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p><h3>Outputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -76,7 +76,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">function</font> TestFunctions <font color="darkgreen">&quot;Test all the functions&quot;</font>
-  <font color="blue">extends </font><a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
   <font color="blue">output </font>Boolean ok <font color="darkgreen">&quot;true, if all tests passed&quot;</font>;
 
@@ -85,6 +85,10 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   Integer integers[6];
 
 <font color="blue">algorithm </font>
+  <font color="darkgreen">// anyTrue()</font>
+  <font color="red">assert</font>(<font color="red">anyTrue</font>({true,false,true}) == true, &quot;The anyTrue function failed.&quot;);
+  <font color="red">assert</font>(<font color="red">anyTrue</font>({false,false}) == false, &quot;The anyTrue function failed.&quot;);
+
   <font color="darkgreen">// Chemistry.charge()</font>
   <font color="blue">for </font>i<font color="blue"> in </font>1:2<font color="blue"> loop</font>
     <font color="red">assert</font>((<font color="red">Chemistry.charge</font>({&quot;H2O&quot;,&quot;e-&quot;,&quot;Hg2+2&quot;,&quot;&quot;}))[i] == {0,-1,2,0}[i], &quot;The Chemistry.charge function failed on entry &quot;
@@ -204,12 +208,12 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 <a name="FCSys.BaseClasses.Utilities.Examples.TranslatePoly"></a><a href="FCSys_BaseClasses_Utilities_Examples.html#FCSys.BaseClasses.Utilities.Examples">FCSys.BaseClasses.Utilities.Examples</a>.TranslatePoly</h2>
 <b>Evaluate the translated version of <a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.poly">poly()</a></b><p>
 <p><h3>Information</h3></p>
-Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">model</font> TranslatePoly <font color="darkgreen">
-  &quot;Evaluate the translated version of <a href=\"FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.poly\">poly()</a>&quot;</font>
-  <font color="blue">extends </font><a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
+  &quot;Evaluate the translated version of <a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.poly">poly()</a>&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
   Real x1;
   Real x2;
   Real x3;
@@ -238,7 +242,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Dec 10 17:54:36 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Dec 11 15:26:54 2012.
 </div>
 </body>
 </html>

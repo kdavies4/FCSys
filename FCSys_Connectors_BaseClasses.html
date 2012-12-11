@@ -1,0 +1,174 @@
+<html>
+<head>
+<title>FCSys.Connectors.BaseClasses</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta name="description" content="Base classes (not for direct use)">
+<meta name="keywords" content="Modelica, fuel cell, PEMFC, electrochemistry, model">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="images/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_BCs.html">BCs</a>**</li>
+    <li><a href="FCSys_Sensors.html">Sensors</a>**</li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
+    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Connectors.BaseClasses"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.BaseClasses</h2>
+<b>Base classes (not for direct use)</b>
+<p>
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.BasesPackage.html#Modelica.Icons.BasesPackage">Modelica.Icons.BasesPackage</a> (Icon for packages containing base classes).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Connectors.BaseClasses.PartialChemicalS.png" alt="FCSys.Connectors.BaseClasses.PartialChemical" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.PartialChemical">PartialChemical</a>
+</td><td>Partial connector to exchange material while advecting linear momentum and enthalpy</td></tr>
+<tr><td><img src="images/FCSys.Connectors.BaseClasses.PartialFaceS.png" alt="FCSys.Connectors.BaseClasses.PartialFace" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.PartialFace">PartialFace</a>
+</td><td>Partial connector to transport material, transverse displacement, and entropy of a single species</td></tr>
+<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a>
+</td><td>Thermodynamic options for a face</td></tr>
+</table>
+<p><h3>Types and constants</h3>
+<a name="FCSys.Connectors.BaseClasses.ThermoOpt"></a><pre><font color="blue">type</font> ThermoOpt = <font color="blue">enumeration</font>(
+    ClosedAdiabatic <font color="darkgreen">&quot;Closed and adiabatic&quot;</font>,
+    ClosedDiabatic <font color="darkgreen">&quot;Closed and diabatic&quot;</font>,
+    OpenDiabatic <font color="darkgreen">&quot;Open and diabatic&quot;</font>) <font color="darkgreen">&quot;Thermodynamic options for a face&quot;</font>;</pre><p>
+<hr>
+
+<h2><img src="images/FCSys.Connectors.BaseClasses.PartialChemicalI.png" alt="FCSys.Connectors.BaseClasses.PartialChemical" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Connectors.BaseClasses.PartialChemical"></a><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses">FCSys.Connectors.BaseClasses</a>.PartialChemical</h2>
+<b>Partial connector to exchange material while advecting linear momentum and enthalpy</b><p>
+<img src="images/FCSys.Connectors.BaseClasses.PartialChemicalD.png" alt="FCSys.Connectors.BaseClasses.PartialChemical">
+<p><h3>Information</h3></p>
+<p>For more information, see the documentation in the
+    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
+
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Integer</td><td>n_vel</td><td>1</td><td>Number of components of velocity (<i>n</i><sub>vel</sub>)</td></tr>
+</table>
+<p><h3>Contents</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Integer</td><td>n_vel</td><td>Number of components of velocity (<i>n</i><sub>vel</sub>)</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Number</a></td><td>muPerT</td><td>Quotient of electrochemical potential and temperature [1]</td></tr>
+<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>Ndot</td><td>Current [N/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi[n_vel]</td><td>Velocity [l/T]</td></tr>
+<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[n_vel]</td><td>Force due to advection [l.m/T2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity2">Velocity2</a></td><td>hbar</td><td>Massic enthalpy [l2/T2]</td></tr>
+<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Hdot</td><td>Enthalpy flow rate [l2.m/T3]</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">partial </font><font color="blue">connector</font> PartialChemical <font color="darkgreen">
+  &quot;Partial connector to exchange material while advecting linear momentum and enthalpy&quot;</font>
+
+  <font color="blue">parameter </font>Integer n_vel(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>max=3) = 1 <font color="darkgreen">
+    &quot;Number of components of velocity (<i>n</i><sub>vel</sub>)&quot;</font>;
+
+  <font color="darkgreen">// Material</font>
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> muPerT(nominal=1*U.V) <font color="darkgreen">
+    &quot;Quotient of electrochemical potential and temperature&quot;</font>;
+  <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot(nominal=1*U.A) <font color="darkgreen">&quot;Current&quot;</font>;
+
+  <font color="darkgreen">// For linear momentum</font>
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi[n_vel](<font color="blue">each </font>nominal=1*U.cm/U.s) <font color="darkgreen">&quot;Velocity&quot;</font>;
+  <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> mPhidot[n_vel](<font color="blue">each </font>nominal=1*U.N) <font color="darkgreen">&quot;Force due to advection&quot;</font>;
+
+  <font color="darkgreen">// For energy</font>
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity2">Q.Velocity2</a> hbar(nominal=1*U.V) <font color="darkgreen">&quot;Massic enthalpy&quot;</font>;
+  <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Hdot(nominal=10*U.W) <font color="darkgreen">&quot;Enthalpy flow rate&quot;</font>;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>PartialChemical;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Connectors.BaseClasses.PartialFaceI.png" alt="FCSys.Connectors.BaseClasses.PartialFace" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Connectors.BaseClasses.PartialFace"></a><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses">FCSys.Connectors.BaseClasses</a>.PartialFace</h2>
+<b>Partial connector to transport material, transverse displacement, and entropy of a single species</b><p>
+<img src="images/FCSys.Connectors.BaseClasses.PartialFaceD.png" alt="FCSys.Connectors.BaseClasses.PartialFace">
+<p><h3>Information</h3></p>
+<p>The <code>thermOpt</code> parameter sets the thermodynamic
+    properties of the face.  The face may be closed and adiabatic, closed and diabatic
+    (i.e., with heat transfer), or open and diabatic.  However, the open and adiabatic
+    combination is not an option.  Given the formulation of the 
+    <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model, it would 
+    prevent the energy balance from being computed properly (see the 
+    <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a> enumeration).</p>
+    
+  <p>For more information, see the documentation in the
+    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package and the
+    <a href="FCSys_Connectors.html#FCSys.Connectors.Material">Material</a> and
+    <a href="FCSys_Connectors.html#FCSys.Connectors.Thermal">Thermal</a> connectors.</p><p>
+
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a></td><td>thermoOpt</td><td>ThermoOpt.ClosedAdiabatic</td><td>Options for material and thermal transport</td></tr>
+</table>
+<p><h3>Contents</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a></td><td>thermoOpt</td><td>Options for material and thermal transport</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Material">Material</a></td><td>material</td><td>Subconnector for material transport</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Thermal">Thermal</a></td><td>thermal</td><td>Subconnector for thermal transport</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">connector</font> PartialFace <font color="darkgreen">
+  &quot;Partial connector to transport material, transverse displacement, and entropy of a single species&quot;</font>
+
+  <font color="blue">parameter </font><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a> thermoOpt=ThermoOpt.ClosedAdiabatic <font color="darkgreen">
+    &quot;Options for material and thermal transport&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Material">FCSys.Connectors.Material</a> material <font color="blue">if </font>thermoOpt == ThermoOpt.OpenDiabatic <font color="darkgreen">
+    &quot;Subconnector for material transport&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Thermal">FCSys.Connectors.Thermal</a> thermal <font color="blue">if </font>thermoOpt == ThermoOpt.ClosedDiabatic<font color="blue"> or </font>
+    thermoOpt == ThermoOpt.OpenDiabatic <font color="darkgreen">&quot;Subconnector for thermal transport&quot;</font>;
+
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>PartialFace;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Dec 11 21:43:48 2012.
+</div>
+</body>
+</html>

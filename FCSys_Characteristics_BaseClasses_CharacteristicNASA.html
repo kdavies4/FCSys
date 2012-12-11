@@ -3,7 +3,7 @@
 <title>FCSys.Characteristics.BaseClasses.CharacteristicNASA</title>
 <meta name="HTML-Generator" content="Dymola">
 <meta name="description" content="Thermodynamic record with transport properties based on NASA CEA">
-<meta name="keywords" content="Modelica, fuel cell, PEMFC, model">
+<meta name="keywords" content="Modelica, fuel cell, PEMFC, electrochemistry, model">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
@@ -24,7 +24,7 @@
     <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
     <li><a href="FCSys_Regions.html">Regions</a>**</li>
     <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
-    <li><a href="FCSys_Connectors.html">Connectors</a>**</li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
@@ -56,7 +56,7 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td>T_lim_alpha={0,Modelica.Constants.inf}</td><td>Temperature limits for the rows of b_eta and b_lambda (<i>T</i><sub>lim <i>alpha</i></sub>)</td></tr>
+<tr><td>T_lim_alpha={0,Modelica.Constants.inf}</td><td>Temperature limits for the rows of b_eta and b_lambda (<i>T</i><sub>lim &alpha;</sub>)</td></tr>
 <tr><td>b_eta</td><td>Constants in NASA correlation for viscosity (<i>b<sub>&eta;</sub>)</td></tr>
 <tr><td>b_lambda</td><td>Constants in NASA correlation for thermal conductivity (<i>b<sub>&lambda;</sub>)</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tau" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tau">alpha_tau</a>
@@ -71,41 +71,43 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
 <tr><td>z=Chemistry.charge(formula)</td><td>Charge number</td></tr>
 <tr><td>p0=U.bar</td><td>Reference pressure (<i>p</i>&deg;)</td></tr>
 <tr><td>p_min=-Modelica.Constants.inf</td><td>Minimum pressure for numerical protection (<i>p</i><sub>min</sub>)</td></tr>
-<tr><td>b_v=[1]</td><td>Coefficients of specific volume as a polynomial in p/T and T</td></tr>
-<tr><td>specVolPow={-1,0}</td><td>Powers of p/T and T for 1st row and column of b_v, respectively</td></tr>
-<tr><td>isCompressible=sum(countTrue({b_v[i, j] &lt;&gt; 0 and specVolPow[1] + i - 1 &lt;&gt; 0 for i in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)) &gt; 0</td><td>true, if specific volume is a function of pressure</td></tr>
-<tr><td>hasThermalExpansion=sum(countTrue({b_v[i, j] &lt;&gt; 0 and specVolPow[2] + j - specVolPow[1] - i &lt;&gt; 0 for i in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)) &gt; 0</td><td>true, if specific volume is a function of temperature</td></tr>
+<tr><td>b_v=[1]</td><td>Coefficients of specific volume as a polynomial in p/T and T (<i>b</i><sub><i>v</i></sub>)</td></tr>
+<tr><td>specVolPow={-1,0}</td><td>Powers of p/T and T for 1<sup>st</sup> row and column of b_v, respectively</td></tr>
+<tr><td>isCompressible=anyTrue({anyTrue({b_v[i, j] &lt;&gt; 0 and specVolPow[1] + i - 1 &lt;&gt; 0 for i in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})</td><td>true, if specific volume depends on pressure</td></tr>
+<tr><td>hasThermalExpansion=anyTrue({anyTrue({b_v[i, j] &lt;&gt; 0 and specVolPow[2] + j - specVolPow[1] - i &lt;&gt; 0 for i in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})</td><td>true, if specific volume depends on temperature</td></tr>
 <tr><td>Deltah0_f</td><td>Enthalpy of formation at 298.15 K, <i>p</i>&deg; (&Delta;<i>h</i>&deg;<sub>f</sub>)</td></tr>
 <tr><td>Deltah0</td><td><i>h</i>&deg;(298.15 K) - <i>h</i>&deg;(0 K) (&Delta;<i>h</i>&deg;)</td></tr>
 <tr><td>h_offset=0</td><td>Additional enthalpy offset (<i>h</i><sub>offset</sub>)</td></tr>
-<tr><td>specHeatCapPow=-2</td><td>Power of T for 1st column of b_c</td></tr>
+<tr><td>specHeatCapPow=-2</td><td>Power of T for 1<sup>st</sup> column of b_c</td></tr>
 <tr><td>T_lim_c={0,Modelica.Constants.inf}</td><td>Temperature limits for the rows of b_c and B_c (<i>T</i><sub>lim <i>c</i></sub>)</td></tr>
 <tr><td>b_c</td><td>Coefficients of specific heat capacity at <i>p</i>&deg; as a polynomial in <i>T</i> (<i>b</i><sub><i>c</i></sub>)</td></tr>
 <tr><td>B_c</td><td>Integration constants for specific enthalpy and entropy (<i>B</i><sub><i>c</i></sub>)</td></tr>
 <tr><td>pressPow={specVolPow[1] - size(b_v, 1) + 1,specVolPow[2] + 1}</td><td>Powers of v and T for 1st row and column of b_p, respectively</td></tr>
 <tr><td>b_p={(if specVolPow[1] + i == 0 or specVolPow[1] + i == 1 then b_v[i, :] else (if specVolPow[1] + i == 2 and specVolPow[1] &lt;= 0 then b_v[i, :] + b_v[i - 1, :] .^ 2 else (if specVolPow[1] + i == 3 and specVolPow[1] &lt;= 0 then b_v[i, :] + b_v[i - 2, :] .* (b_v[i - 2, :] .^ 2 + 3*b_v[i - 1, :]) else zeros(size(b_v, 2))))) for i in size(b_v, 1):-1:1}</td><td>Coefficients of p as a polynomial in v and T</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.alpha" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.alpha">alpha</a>
-</td><td>Ideal transport resistivity as a function of temperature (&alpha;)</td></tr>
-<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.c_p" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.c_p">c_p</a>
-</td><td>Specific heat capacity at constant pressure as a function of temperature (<i>c</i><sub><i>p</i></sub>)</td></tr>
+</td><td>Ideal resistivity as a function of temperature (&alpha;)</td></tr>
+<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.c0" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.c0">c0</a>
+</td><td>Specific heat capacity at reference pressure as a function of temperature (<i>c</i>&deg;)</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.c_V" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.c_V">c_V</a>
-</td><td>Specific heat capacity at constant volume as a function of temperature (<i>c</i><sub><i>V</i></sub>)</td></tr>
+</td><td>Specific heat capacity at constant volume as a function of pressure and temperature (<i>c</i><sub><i>V</i></sub>)</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.dp" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.dp">dp</a>
 </td><td>Derivative of pressure as defined by <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.p_vT">p_vT</a>()</td></tr>
-<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.g_pT" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.g_pT">g_pT</a>
+<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.dv" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.dv">dv</a>
+</td><td>Derivative of specific volume as defined by <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.v_pT">v_pT</a>()</td></tr>
+<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.g" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.g">g</a>
 </td><td>Gibbs potential as a function of pressure and temperature</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.h0" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.h0">h0</a>
-</td><td>Specific enthalpy as a function temperature at reference pressure (<i>h</i>&deg;)</td></tr>
+</td><td>Specific enthalpy as a function of temperature at reference pressure (<i>h</i>&deg;)</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.p_vT" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.p_vT">p_vT</a>
 </td><td>Pressure as a function of specific volume and temperature</td></tr>
-<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.s_pT" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.s_pT">s_pT</a>
+<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.s" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.s">s</a>
 </td><td>Specific entropy as a function of pressure and temperature</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.v_pT" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.v_pT">v_pT</a>
 </td><td>Specific volume as a function of pressure and temperature</td></tr>
 </table>
 <p><h3>Types and constants</h3>
 <pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_lim_alpha[:]={0,Modelica.Constants.inf} <font color="darkgreen">
-  &quot;Temperature limits for the rows of b_eta and b_lambda (<i>T</i><sub>lim <i>alpha</i></sub>)&quot;</font>;</pre><p>
+  &quot;Temperature limits for the rows of b_eta and b_lambda (<i>T</i><sub>lim &alpha;</sub>)&quot;</font>;</pre><p>
 <pre><font color="blue">constant </font>Real b_eta[<font color="red">size</font>(T_lim_alpha, 1) - 1, 4] <font color="darkgreen">
   &quot;Constants in NASA correlation for viscosity (<i>b<sub>&eta;</sub>)&quot;</font>;</pre><p>
 <pre><font color="blue">constant </font>Real b_lambda[<font color="red">size</font>(T_lim_alpha, 1) - 1, 4] <font color="darkgreen">
@@ -120,7 +122,7 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
 <p><h3>Information</h3></p>
 <p>This function is based on based on NASA CEA
   [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride1996</a>, <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Svehla1995</a>]</p><p>
-Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p><h3>Inputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -136,7 +138,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 <font color="blue">function</font> alpha_tau <font color="darkgreen">
   &quot;Fluidity as a function of temperature (&alpha;<sub>&tau;</sub>)&quot;</font>
 
-  <font color="blue">extends </font><a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Temperature&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> alpha_tau <font color="darkgreen">&quot;Transverse resistivity&quot;</font>;
@@ -184,7 +186,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 <p><h3>Information</h3></p>
 <p>This function is based on based on NASA CEA
   [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride1996</a>, <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Svehla1995</a>]</p><p>
-Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p><h3>Inputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -200,7 +202,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 <font color="blue">function</font> alpha_Sdot <font color="darkgreen">
   &quot;Thermal resistivity as a function of temperature (&alpha;<sub><i>S&#775;</i></sub>)&quot;</font>
 
-  <font color="blue">extends </font><a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Temperature&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> alpha_Sdot <font color="darkgreen">&quot;Thermal transport resistivity&quot;</font>;
@@ -245,7 +247,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Dec 10 21:33:14 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Dec 11 15:26:38 2012.
 </div>
 </body>
 </html>

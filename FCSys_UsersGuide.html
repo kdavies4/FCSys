@@ -3,7 +3,7 @@
 <title>FCSys.UsersGuide</title>
 <meta name="HTML-Generator" content="Dymola">
 <meta name="description" content="User&#39;s Guide">
-<meta name="keywords" content="Modelica, fuel cell, PEMFC, model">
+<meta name="keywords" content="Modelica, fuel cell, PEMFC, electrochemistry, model">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
@@ -24,7 +24,7 @@
     <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
     <li><a href="FCSys_Regions.html">Regions</a>**</li>
     <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
-    <li><a href="FCSys_Connectors.html">Connectors</a>**</li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
@@ -45,8 +45,8 @@
       <div class="body">
 
 <h2><img src="images/FCSys.UsersGuideI.png" alt="FCSys.UsersGuide" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.UsersGuide"></a><a href="FCSys.html#FCSys">FCSys</a>.UsersGuide</h2>
-Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Information">Modelica.Icons.Information</a> (Icon for general information packages).
+<a name="FCSys.UsersGuide"></a><a href="index.html#FCSys">FCSys</a>.UsersGuide</h2>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Information">Modelica.Icons.Information</a> (Icon for general information packages).
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
@@ -73,7 +73,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
       </tr>
       <tr bgcolor=#f7f7f7>
         <td>
-        <a href="FCSys.html#FCSys">FCSys</a> should be compatible with any
+        <a href="index.html#FCSys">FCSys</a> should be compatible with any
         modeling environment that supports Modelica 3.1.  The following tools have been tested:
         <ul>
           <li>Dymola: Supported by versions 7.4 and 2012 FD01.
@@ -88,13 +88,13 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
       </tr>
     </table>
 
-    <p>In order to begin using <a href="FCSys.html#FCSys">FCSys</a>, one is recommended to follow these steps (roughly in order):
+    <p>In order to begin using <a href="index.html#FCSys">FCSys</a>, one is recommended to follow these steps (roughly in order):
     <ol>
-        <li>Read the overview in the top-level documentation of <a href="FCSys.html#FCSys">FCSys</a>.</li>
-        <li>Browse the subpackages of <a href="FCSys.html#FCSys">FCSys</a>.  In general, the packages are
+        <li>Read the overview in the top-level documentation of <a href="index.html#FCSys">FCSys</a>.</li>
+        <li>Browse the subpackages of <a href="index.html#FCSys">FCSys</a>.  In general, the packages are
         ordered by level of model and physical hierarchy (high-level at the top).
         <li>Run the "FCSys/resources/scripts/units.mos" script to establish the display units (see below).  This is
-        automatic if <a href="FCSys.html#FCSys">FCSys</a> is loaded via the "FCSys/load.mos" script.
+        automatic if <a href="index.html#FCSys">FCSys</a> is loaded via the "FCSys/load.mos" script.
         <li>Simulate the <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile">FCSys.Assemblies.Cells.Examples.CellProfile</a>
         model.
         There are scripts in "FCSys/resources/scripts/Dymola/" to create plots of that model and others.
@@ -107,7 +107,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
         <ul>
             <li><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a> package:
             Information about the system of units, which is different
-            than <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_SIunits.html#Modelica.SIunits">Modelica.SIunits</a></li>
+            than <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.html#Modelica.SIunits">Modelica.SIunits</a></li>
             <li><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a> package:
             Overview of the connectors and an explanation of the effort and flow variables in terms of thermodynamics</li>
             <li><a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">FCSys.Connectors.InertAmagat</a> connector:
@@ -139,14 +139,14 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
         Use the <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.Contact">contact information</a>.</li>
     </ol></p>
     <p>
-Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Information">Modelica.Icons.Information</a> (Icon for general information packages).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Information">Modelica.Icons.Information</a> (Icon for general information packages).
 <hr>
 
 <h2><img src="images/FCSys.UsersGuide.ReferencesI.png" alt="FCSys.UsersGuide.References" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.UsersGuide.References"></a><a href="FCSys_UsersGuide.html#FCSys.UsersGuide">FCSys.UsersGuide</a>.References</h2>
 <img src="images/FCSys.UsersGuideD.png" alt="FCSys.UsersGuide.References">
 
-    <p>These papers describe work leading to the current <a href="FCSys.html#FCSys">FCSys</a> package:
+    <p>These papers describe work leading to the current <a href="index.html#FCSys">FCSys</a> package:
     <ol>
     <li>K. L. Davies, C. L. Haynes, and C. J. Paredis, "<a href="http://www.ep.liu.se/ecp_article/index.en.aspx?issue=076;article=010">Library for First-Principle Models of Proton Exchange Membrane Fuel Cells in Modelica</a>," in <i>Modelica Conference</i>, (Munich, Germany), Modelica Assoc., Sep. 2012.</li>
     <li>K. L. Davies, "<a href="http://www.ep.liu.se/ecp_article/index.en.aspx?issue=076;article=082">Natural Unit Representation in Modelica</a>," in <i>Modelica Conference</i>, (Munich, Germany), Modelica Assoc., Sep. 2012 (<a href="images/UsersGuide/References/Natural Unit Representation in Modelica (poster).pdf">poster</a>).</li>
@@ -159,159 +159,157 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
     <p>These references are cited throughout the library:</p>
     <table border=0 cellspacing=0 cellpadding=2 class="noBorder">
     <tr>
-      <td valign=top class="noBorder">[Ashcroft1976]</td>
+      <td valign=top class="noBorder">[<a name="Ashcroft1976" class=bookmark>Ashcroft1976</a>]</td>
       <td valign=top class="noBorder">N. W. Ashcroft and N. D. Mermin, <i>Solid State Physics</i>, New York:  Holt, Rinehard and Winston, 1976.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[Avogadro1.03]</td>
+      <td valign=top class="noBorder">[<a name="Avogadro1.03" class=bookmark>Avogadro1.03</a>]</td>
       <td valign=top class="noBorder">Avogadro: An Open-Source Molecular Builder and Visualization Tool, ver. 1.03. <a href="http://avogadro.openmolecules.net">http://avogadro.openmolecules.net</a>.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[Bejan2006]</td>
+      <td valign=top class="noBorder">[<a name="Bejan2006" class=bookmark>Bejan2006</a>]</td>
       <td valign=top class="noBorder">A. Bejan, <i>Advanced Engineering Thermodynamics</i>, John Wiley & Sons, 3rd ed., 2006.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[Bernardi1992]</td>
-      <td valign=top class="noBorder">D. M. Bernardi and M. W. Verbrugge, "<a href="http://dx.doi.org/10.1149/1.2221251">A Mathematical Model of the Solid-polymer-Electrolyte Fuel Cell</a>," <i>J. Electrochem. Soc.</i>, vol. 139, no. 9, pp. 2477&ndash;2491, Sep. 1992.</td>
-    </tr>
-    <tr>
-      <td valign=top class="noBorder">[Cellier1991]</td>
-      <td valign=top class="noBorder">F. E. Cellier, "<i><a href="http://www.inf.ethz.ch/personal/fcellier/Pubs/BG/springer.html">Continuous System Modeling</a></i>," Springer-Verlag, 1991.</td>
-    </tr>
-    <tr>
-      <td valign=top class="noBorder">[DuPont2004N]</td>
-      <td valign=top class="noBorder">DuPont, "Nafion&reg; PFSA Membranes N-112, NE-1135, N-115, N-117, NE-1110</a>," <a href = http://www.fuelcells.dupont.com>http://www.fuelcells.dupont.com</a>, Feb. 2004.</td>
-    </tr>
-    <tr>
-      <td valign=top class="noBorder">[DuPont2004NRE]</td>
-      <td valign=top class="noBorder">DuPont, "Nafion&reg; PFSA Membranes NRE-211 and NRE-212</a>," <a href = http://www.fuelcells.dupont.com>http://www.fuelcells.dupont.com</a>, Feb. 2004.</td>
-    </tr>
-    <tr>
-      <td valign=top class="noBorder">[DuPont2005]</td>
-      <td valign=top class="noBorder">DuPont, "Nafion&reg; PFSA Membranes NE-1135, N-115, N-117, NE-1110</a>," <a href = http://www.fuelcells.dupont.com>http://www.fuelcells.dupont.com</a>, Feb. 2005.</td>
-    </tr>
-    <tr>
-      <td valign=top class="noBorder">[Dymond2002]</td>
-      <td valign=top class="noBorder">J. H. Dymond, K. N. Marsh, R. C. Wilhoit, and K. C. Wong, <i>Virial Coefficients of Pure Gases</i>, Springer-Verlag, 2002.</td>
-    </tr>
-    <tr>
-      <td valign=top class="noBorder">[Dymola7.4]</td>
-      <td valign=top class="noBorder">Dassault Syst&eacute;mes, <i>Dymola: Dynamic Modeling Laboratory</i>, Lund, Sweden, Ver. 7.4, Jan. 2010.</td>
-    </tr>
-    <tr>
-      <td valign=top class="noBorder">[Entegris2012]</td>
-      <td valign=top class="noBorder">Entegris, "Industrial Graphite," <a href="http://www.entegris.com/Resources/assets/6204-7085-0312.pdf">http://www.entegris.com/Resources/assets/6204-7085-0312.pdf</a>, Apr. 2012.</td>
-    </tr>
-    <tr>
-      <td valign=top class="noBorder">[Gurau1998]</td>
-      <td valign=top class="noBorder">V. Gurau, H. Liu, and S. Kaka, "<a href="http://dx.doi.org/10.1002/aic.690441109">Two-Dimensional Model for Proton Exchange Membrane Fuel Cells</a>," <i>AIChE J.</i>, vol. 44, no. 11, pp. 2410&ndash;2422, Nov. 1998.</td>
-    </tr>
-    <tr>
-      <td valign=top class="noBorder">[Hogan2006]</td>
-      <td valign=top class="noBorder">N. Hogan, "<a href="http://ocw.mit.edu/courses/mechanical-engineering/2-141-modeling-and-simulation-of-dynamic-systems-fall-2006/lecture-notes/heat_transfer.pdf">Heat Transfer and The Second Law</a>," lecture notes for <i>Modeling and Simulation of Dynamic Systems</i>, Massachusetts of Technology, Fall 2006.</td>
-    </tr>
-    <tr>
-      <td valign=top class="noBorder">[Incropera2002]</td>
-      <td valign=top class="noBorder">F. P. Incropera and D. P. DeWitt, <i>Fundamentals of Heat and Mass Transport</i>, 5th ed., John Wiley & Sons, 2002.</td>
-    </tr>
-    <tr>
-      <td valign=top class="noBorder">[BIPM2006]</td>
+      <td valign=top class="noBorder">[<a name="BIPM2006" class=bookmark>BIPM2006</a>]</td>
       <td valign=top class="noBorder">International Bureau of Weights and Measures (BIPM), "<a href="http://www.bipm.org/utils/common/pdf/si_brochure_8_en.pdf">The International System of Units (SI)</a>," 8th ed., 2006.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[Kandlikar2009]</td>
+      <td valign=top class="noBorder">[<a name="Bernardi1992" class=bookmark>Bernardi1992</a>]</td>
+      <td valign=top class="noBorder">D. M. Bernardi and M. W. Verbrugge, "<a href="http://dx.doi.org/10.1149/1.2221251">A Mathematical Model of the Solid-polymer-Electrolyte Fuel Cell</a>," <i>J. Electrochem. Soc.</i>, vol. 139, no. 9, pp. 2477&ndash;2491, Sep. 1992.</td>
+    </tr>
+    <tr>
+      <td valign=top class="noBorder">[<a name="Cellier1991" class=bookmark>Cellier1991</a>]</td>
+      <td valign=top class="noBorder">F. E. Cellier, <i><a href="http://www.inf.ethz.ch/personal/fcellier/Pubs/BG/springer.html">Continuous System Modeling</a></i>, Springer-Verlag, 1991.</td>
+    </tr>
+    <tr>
+      <td valign=top class="noBorder">[<a name="DuPont2004N" class=bookmark>DuPont2004N</a>]</td>
+      <td valign=top class="noBorder">DuPont, "Nafion&reg; PFSA Membranes N-112, NE-1135, N-115, N-117, NE-1110</a>," <a href = http://www.fuelcells.dupont.com>http://www.fuelcells.dupont.com</a>, Feb. 2004.</td>
+    </tr>
+    <tr>
+      <td valign=top class="noBorder">[<a name="DuPont2004NRE" class=bookmark>DuPont2004NRE</a>]</td>
+      <td valign=top class="noBorder">DuPont, "Nafion&reg; PFSA Membranes NRE-211 and NRE-212</a>," <a href = http://www.fuelcells.dupont.com>http://www.fuelcells.dupont.com</a>, Feb. 2004.</td>
+    </tr>
+    <tr>
+      <td valign=top class="noBorder">[<a name="DuPont2005" class=bookmark>DuPont2005</a>]</td>
+      <td valign=top class="noBorder">DuPont, "Nafion&reg; PFSA Membranes NE-1135, N-115, N-117, NE-1110</a>," <a href = http://www.fuelcells.dupont.com>http://www.fuelcells.dupont.com</a>, Feb. 2005.</td>
+    </tr>
+    <tr>
+      <td valign=top class="noBorder">[<a name="Dymond2002" class=bookmark>Dymond2002</a>]</td>
+      <td valign=top class="noBorder">J. H. Dymond, K. N. Marsh, R. C. Wilhoit, and K. C. Wong, <i>Virial Coefficients of Pure Gases</i>, Springer-Verlag, 2002.</td>
+    </tr>
+    <tr>
+      <td valign=top class="noBorder">[<a name="Entegris2012" class=bookmark>Entegris2012</a>]</td>
+      <td valign=top class="noBorder">Entegris, "Industrial Graphite," <a href="http://www.entegris.com/Resources/assets/6204-7085-0312.pdf">http://www.entegris.com/Resources/assets/6204-7085-0312.pdf</a>, Apr. 2012.</td>
+    </tr>
+    <tr>
+      <td valign=top class="noBorder">[<a name="Gurau1998" class=bookmark>Gurau1998</a>]</td>
+      <td valign=top class="noBorder">V. Gurau, H. Liu, and S. Kaka, "<a href="http://dx.doi.org/10.1002/aic.690441109">Two-Dimensional Model for Proton Exchange Membrane Fuel Cells</a>," <i>AIChE J.</i>, vol. 44, no. 11, pp. 2410&ndash;2422, Nov. 1998.</td>
+    </tr>
+    <tr>
+      <td valign=top class="noBorder">[<a name="Hogan2006" class=bookmark>Hogan2006</a>]</td>
+      <td valign=top class="noBorder">N. Hogan, "<a href="http://ocw.mit.edu/courses/mechanical-engineering/2-141-modeling-and-simulation-of-dynamic-systems-fall-2006/lecture-notes/heat_transfer.pdf">Heat Transfer and The Second Law</a>," Course notes for <i>Modeling and Simulation of Dynamic Systems</i>, Massachusetts of Technology, Fall 2006.</td>
+    </tr>
+    <tr>
+      <td valign=top class="noBorder">[<a name="Incropera2002" class=bookmark>Incropera2002</a>]</td>
+      <td valign=top class="noBorder">F. P. Incropera and D. P. DeWitt, <i>Fundamentals of Heat and Mass Transport</i>, 5th ed., John Wiley & Sons, 2002.</td>
+    </tr>
+    <tr>
+      <td valign=top class="noBorder">[<a name="Kandlikar2009" class=bookmark>Kandlikar2009</a>]</td>
       <td valign=top class="noBorder">S. G. Kandlikar and Z. Lu, "<a href="http://dx.doi.org/10.1016/j.applthermaleng.2008.05.009">Thermal Management Issues in a PEMFC Stack&mdash;A Brief Review of Current Status</a>," <i>Appl. Therm. Eng.</i>, vol. 29, no. 7, pp. 1276&ndash;1280, 2009.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[Lin2006]</td>
+      <td valign=top class="noBorder">[<a name="Lin2006" class=bookmark>Lin2006</a>]</td>
       <td valign=top class="noBorder">J. Lin, J. K. Lee, M. Kellner, R. Wycisk, and P. N. Pintauroa, "<a href="http://dx.doi.org/10.1149/1.2196687">Nafion-Flourinated Ethylene-Propylene Resin Membrane Blends for Direct Methanol Fuel Cells</a>," <i>J. Electrochem. Soc.</i>, vol. 153, no. 7, pp. A1325&ndash;A1331, 2006.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[Mark1999]</td>
+      <td valign=top class="noBorder">[<a name="Mark1999" class=bookmark>Mark1999</a>]</td>
       <td valign=top class="noBorder">J. E. Mark, <i>Polymer Data Handbook</i>, Oxford University Press, 1999.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[McBride1996]</td>
+      <td valign=top class="noBorder">[<a name="McBride1996" class=bookmark>McBride1996</a>]</td>
       <td valign=top class="noBorder">B. J. McBride and S. Gordon, "<a href="http://www.grc.nasa.gov/WWW/CEAWeb/RP-1311P2.htm">Computer Program for Calculating Complex Chemical Equilibrium Compositions and Applications II. Users Manual and Program Description</a>," NASA Reference Publication 1311, Jun. 1996.  Recent data available at <a href="http://www.grc.nasa.gov/WWW/CEAWeb/ceaHome.htm">http://www.grc.nasa.gov/WWW/CEAWeb/ceaHome.htm</a>.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[McBride2002]</td>
+      <td valign=top class="noBorder">[<a name="McBride2002" class=bookmark>McBride2002</a>]</td>
       <td valign=top class="noBorder">B. J. McBride, M. J. Zehe, and S. Gordon, "<a href="http://gltrs.grc.nasa.gov/cgi-bin/GLTRS/browse.pl?2002/TP-2002-211556.html">NASA Glenn Coefficients for Calculating Thermodynamic Properties of Individual Species</a>," NASA report TP-2002-211556, Sep. 2002.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[NIST2010]</td>
+      <td valign=top class="noBorder">[<a name="NIST2010" class=bookmark>NIST2010</a>]</td>
       <td valign=top class="noBorder">National Institute of Standards and Technology (NIST), "Fundamental Physical Constants: Complete Listing," <a href="http://physics.nist.gov/cuu/Constants/Table/allascii.txt">http://physics.nist.gov/cuu/Constants/Table/allascii.txt</a>, 2010.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[Nitta2008]</td>
+      <td valign=top class="noBorder">[<a name="Nitta2008" class=bookmark>Nitta2008</a>]</td>
       <td valign=top class="noBorder">I. Nitta, O. Himanen, and M. Mikkola, "<a href="http://dx.doi.org/10.1002/fuce.200700054">Thermal Conductivity and Contact Resistance of Compressed Gas Diffusion Layer of PEM Fuel Cell</a>," <i>Fuel Cells</i>, vol. 8, pp. 111&ndash;119, 2008.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[Present1958]</td>
+      <td valign=top class="noBorder">[<a name="Present1958" class=bookmark>Present1958</a>]</td>
       <td valign=top class="noBorder">R. D. Present, <i>Kinetic Theory of Gases</i>, McGraw Hill, 1958.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[Reichert2010]</td>
+      <td valign=top class="noBorder">[<a name="Reichert2010" class=bookmark>Reichert2010</a>]</td>
       <td valign=top class="noBorder">P. Reichert and N. Schuwirth, "<a href="http://dx.doi.org/10.1016/j.envsoft.2010.03.002">A Generic Framework for Deriving Process Stoichiometry in Environmental Models</a>," <i>Environmental Modelling & Software</i>, vol. 25, pp. 1241&ndash;1251, 2010.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[Salzman2004]</td>
+      <td valign=top class="noBorder">[<a name="Salzman2004" class=bookmark>Salzman2004</a>]</td>
       <td valign=top class="noBorder">W. R. Salzman, "The Virial Expansion," <a href="http://www.chem.arizona.edu/~salzmanr/480a/480ants/VIRIAL/virial.html">http://www.chem.arizona.edu/~salzmanr/480a/480ants/VIRIAL/virial.html</a>, Course notes for Physical Chemistry (Chemistry 480A), University of Arizona, Jul. 2004.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[Schetz1996]</td>
+      <td valign=top class="noBorder">[<a name="Schetz1996" class=bookmark>Schetz1996]</td>
       <td valign=top class="noBorder">J. A. Schetz and A. E. Fuhs (ed.), <i>Handbook of Fluid Dynamics and Fluid Machinery</i>, John Wiley & Sons, vol. 1: Fundamentals of Fluid Dynamics, 1996.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[SGL2004]</td>
+      <td valign=top class="noBorder">[<a name="SGL2004" class=bookmark>SGL2004</a>]</td>
       <td valign=top class="noBorder">SGL Carbon Group, "Sigracet&reg; 24 & 25 Series Gas Diffusion Layer," <a href="http://www.sglcarbon.com">http://www.sglcarbon.com</a>, Sep. 2004.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[SGL2007]</td>
+      <td valign=top class="noBorder">[<a name="SGL2007" class=bookmark>SGL2007</a>]</td>
       <td valign=top class="noBorder">SGL Carbon Group, "Sigracet&reg; 10 Series Gas Diffusion Layer," <a href="http://www.sglcarbon.com">http://www.sglcarbon.com</a>, Apr. 2007.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[Springer1991]</td>
+      <td valign=top class="noBorder">[<a name="Springer1991" class=bookmark>Springer1991</a>]</td>
       <td valign=top class="noBorder">T. E. Springer, T. A. Zawodzinski, and S. Gottesfeld, "<a href="http://dx.doi.org/10.1149/1.2085971">Polymer Electrolyte Fuel Cell Model</a>," <i>J. Electrochem. Soc.</i>, vol. 138, pp. 2334&ndash;2342, Aug. 1991.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[Spry2009]</td>
+      <td valign=top class="noBorder">[<a name="Spry2009" class=bookmark>Spry2009</a>]</td>
       <td valign=top class="noBorder">D. B. Spry and M. D. Fayer, "<a href="http://www.stanford.edu/group/fayer/articles/384-392/385.pdf">Proton Transfer and Proton Concentrations in Protonated Nafion Fuel Cell Membranes</a>," <i>J. Phys. Chem. B</i>, vol. 113, no. 30, pp. 10210&ndash;10221, 2009.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[Svehla1995]</td>
+      <td valign=top class="noBorder">[<a name="" class=bookmark>Svehla1995</a>]</td>
       <td valign=top class="noBorder">R. A. Svehla, "<a href="http://www.grc.nasa.gov/WWW/CEAWeb/TM-4647.htm">Transport Coefficients for the NASA Lewis Chemical Equilibrium Program</a>," NASA Technical Memorandum 4647, Apr. 1995.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[Takenaka1990]</td>
+      <td valign=top class="noBorder">[<a name="Takenaka1990" class=bookmark>Takenaka1990</a>]</td>
       <td valign=top class="noBorder">M. Takenaka and R. Masui, "<a href="http://iopscience.iop.org/0026-1394/27/4/001">Measurement of the Thermal Expansion of Pure Water in the Temperature Range 0 &deg;C&ndash;85&deg;C</a>," <i>Metrologia</i>, vol. 27, pp. 165&ndash;171, 1990.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[Tissandier1998]</td>
-      <td valign=top class="noBorder">M. D. Tissandier, K. A. Cowen, W. Y. Feng, E. Gundlach, M. H. Cohen, A. D. Earhart, J. V. Coe, and T. R. Tuttle, Jr., "<a href="www.uh.edu/~chembi/single_ion_hydration.PDF">The Proton's Absolute Aqueous Enthalpy and Gibbs Free Energy of Solvation from Cluster-Ion Solvation Data</a>," <i>J. Phys. Chem. A</i>, vol. 102, pp. 7787&ndash;7794, 1998.</td>
+      <td valign=top class="noBorder">[<a name="Tissandier1998" class=bookmark>Tissandier1998</a>]</td>
+      <td valign=top class="noBorder">M. D. Tissandier, K. A. Cowen, W. Y. Feng, E. Gundlach, M. H. Cohen, A. D. Earhart, J. V. Coe, and T. R. Tuttle, Jr., "<a href="http://www.uh.edu/~chembi/single_ion_hydration.PDF">The Proton's Absolute Aqueous Enthalpy and Gibbs Free Energy of Solvation from Cluster-Ion Solvation Data</a>," <i>J. Phys. Chem. A</i>, vol. 102, pp. 7787&ndash;7794, 1998.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[Toray2010]</td>
+      <td valign=top class="noBorder">[<a name="Toray2010" class=bookmark>Toray2010</a>]</td>
       <td valign=top class="noBorder">Toray Industries, Inc., "Carbon Paper," <a href = http://www.torayca.com/index2.html>http://www.torayca.com/index2.html</a>, accessed 2010.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[Weber2004]</td>
+      <td valign=top class="noBorder">[<a name="Weber2004" class=bookmark>Weber2004</a>]</td>
       <td valign=top class="noBorder">A. Z. Weber and J. Newman, "<a href="http://dx.doi.org/10.1021/cr020729l">Modeling Transport in Polymer-Electrolyte Fuel Cells</a>," <i>Chem. Rev.</i>, vol. 104, pp. 4679&ndash;4726, 2004.</td>
     </tr>
     <tr>
-      <td valign=top class="noBorder">[Woo1995]</td>
+      <td valign=top class="noBorder">[<a name="Woo1995" class=bookmark>Woo1995</a>]</td>
       <td valign=top class="noBorder">K. W. Woo and S. I. Yeo, Dalton's Law vs. Amagat's Law for the Mixture of Real Gases, <i>SNU J. Educ. Res.</i>, vol. 5, pp. 127&ndash;134, 1995.</td>
     </tr>
     </table>
     <p>
-Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.References">Modelica.Icons.References</a> (Icon for external references).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.References">Modelica.Icons.References</a> (Icon for external references).
 <hr>
 
 <h2><img src="images/FCSys.UsersGuide.ContactI.png" alt="FCSys.UsersGuide.Contact" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.UsersGuide.Contact"></a><a href="FCSys_UsersGuide.html#FCSys.UsersGuide">FCSys.UsersGuide</a>.Contact</h2>
 <img src="images/FCSys.UsersGuideD.png" alt="FCSys.UsersGuide.Contact">
 
-    <p>The development site is
+    <p>Updates to this package may be available online at the
+    <a href="http://kdavies4.github.com/FCSys/">main project site</a>.
+    The development page is
     <a href="https://github.com/kdavies4/FCSys">https://github.com/kdavies4/FCSys</a>.</p>
 
     <p><b>Author:</b></p>
@@ -341,7 +339,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
     </ul></p>
 
 <p>
-Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Contact">Modelica.Icons.Contact</a> (Icon for contact information).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Contact">Modelica.Icons.Contact</a> (Icon for contact information).
 <hr>
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE ModelicaLicense2<![endif]-->
@@ -905,13 +903,13 @@ a selling fee for a (in this case physical) copy. However, mere
 printing and shipping costs may be recovered.</p>
 </body>
 <p>
-Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Information">Modelica.Icons.Information</a> (Icon for general information packages).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Information">Modelica.Icons.Information</a> (Icon for general information packages).
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Dec 10 17:46:50 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Dec 11 15:18:47 2012.
 </div>
 </body>
 </html>

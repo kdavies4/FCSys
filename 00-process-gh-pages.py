@@ -21,12 +21,12 @@ rpls = [
     ('\.\./resources/documentation/(favicon\.ico)', r'images/\1'),
     ('\.\./resources/documentation/(.+\.pdf)', r'images/\1'),
     # FCSys.html will be index.html.
-    ('"FCSys\.html"', '"index.html"'),
+    ('FCSys\.html', 'index.html'),
     # Change the title of the main page.
     ('<title>FCSys</title>', '<title>FCSys &mdash; Modelica library of fuel cell models</title>'),
     # Add keywords.
     ('(<meta name="description" content=".*">)', r"""\1
-<meta name="keywords" content="Modelica, fuel cell, PEMFC, model">"""),
+<meta name="keywords" content="Modelica, fuel cell, PEMFC, electrochemistry, model">"""),
     # Add the download link.
     ('(BaseClasses</a></li>\n *</ul>\n)( *</div>)', r"""\1
   <h3>Download</h3>
@@ -64,7 +64,7 @@ rpls = [
     <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
     <li><a href="FCSys_Regions.html">Regions</a>**</li>
     <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
-    <li><a href="FCSys_Connectors.html">Connectors</a>**</li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>

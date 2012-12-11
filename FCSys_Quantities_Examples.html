@@ -3,7 +3,7 @@
 <title>FCSys.Quantities.Examples</title>
 <meta name="HTML-Generator" content="Dymola">
 <meta name="description" content="Examples and tests">
-<meta name="keywords" content="Modelica, fuel cell, PEMFC, model">
+<meta name="keywords" content="Modelica, fuel cell, PEMFC, electrochemistry, model">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
@@ -24,7 +24,7 @@
     <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
     <li><a href="FCSys_Regions.html">Regions</a>**</li>
     <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
-    <li><a href="FCSys_Connectors.html">Connectors</a>**</li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
@@ -48,7 +48,7 @@
 <b>Examples and tests</b>
 <p>
 <p><h3>Information</h3></p>
-Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_ExamplesPackage.html#Modelica.Icons.ExamplesPackage">Modelica.Icons.ExamplesPackage</a> (Icon for packages containing runnable examples).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.ExamplesPackage.html#Modelica.Icons.ExamplesPackage">Modelica.Icons.ExamplesPackage</a> (Icon for packages containing runnable examples).
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
@@ -64,11 +64,11 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 <b>Test the display units for selected quantities</b><p>
 <img src="images/FCSys.Quantities.Examples.TestQuantitiesD.png" alt="FCSys.Quantities.Examples.TestQuantities">
 <p><h3>Information</h3></p>
-Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">model</font> TestQuantities <font color="darkgreen">&quot;Test the display units for selected quantities&quot;</font>
-  <font color="blue">extends </font><a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Quantities_Examples.html#FCSys.Quantities.Examples.ExampleModel">Q.Examples.ExampleModel</a> doubleClickMe;
 <font color="blue">end </font>TestQuantities;
@@ -136,6 +136,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Volume</a></td><td>Volume</td><td>1*U.m^3</td><td>Volume [l3]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeRate">VolumeRate</a></td><td>VolumeRate</td><td>1*U.m^3/U.s</td><td>Rate of volume [l3/T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>VolumeSpecific</td><td>1*U.m^3/U.C</td><td>Specific volume [l3/N]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">VolumeSpecificAbsolute</a></td><td>VolumeSpecificAbsolute</td><td>1*U.m^3/U.C</td><td>Absolute specific volume [l3/N]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Wavenumber">Wavenumber</a></td><td>Wavenumber</td><td>1*U.rad/U.m</td><td>Wavenumber [A/l]</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
@@ -206,6 +207,8 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> Volume=1*U.m^3 <font color="darkgreen">&quot;Volume&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeRate">Q.VolumeRate</a> VolumeRate=1*U.m^3/U.s <font color="darkgreen">&quot;Rate of volume&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> VolumeSpecific=1*U.m^3/U.C <font color="darkgreen">&quot;Specific volume&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> VolumeSpecificAbsolute=1*U.m^3/U.C <font color="darkgreen">
+    &quot;Absolute specific volume&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Wavenumber">Q.Wavenumber</a> Wavenumber=1*U.rad/U.m <font color="darkgreen">&quot;Wavenumber&quot;</font>;
 
 <font color="blue">end </font>ExampleModel;
@@ -215,7 +218,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Dec 10 17:54:34 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Dec 11 15:26:52 2012.
 </div>
 </body>
 </html>

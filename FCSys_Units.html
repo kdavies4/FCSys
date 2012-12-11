@@ -3,7 +3,7 @@
 <title>FCSys.Units</title>
 <meta name="HTML-Generator" content="Dymola">
 <meta name="description" content="Constants and units of physical measure">
-<meta name="keywords" content="Modelica, fuel cell, PEMFC, model">
+<meta name="keywords" content="Modelica, fuel cell, PEMFC, electrochemistry, model">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
@@ -24,7 +24,7 @@
     <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
     <li><a href="FCSys_Regions.html">Regions</a>**</li>
     <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
-    <li><a href="FCSys_Connectors.html">Connectors</a>**</li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
@@ -44,12 +44,12 @@
     <div class="bodywrapper">
       <div class="body">
 
-<h2><a name="FCSys.Units"></a><a href="FCSys.html#FCSys">FCSys</a>.Units</h2>
+<h2><a name="FCSys.Units"></a><a href="index.html#FCSys">FCSys</a>.Units</h2>
 <b>Constants and units of physical measure</b>
 <p>
 <p><h3>Information</h3></p>
 <p>When a physical variable is assigned a quantity, it is the product of a number
-    and a unit [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">BIPM2006</a>].  In <a href="FCSys.html#FCSys">FCSys</a>, units are also assigned numeric values in a consistent
+    and a unit [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">BIPM2006</a>].  In <a href="index.html#FCSys">FCSys</a>, units are also assigned numeric values in a consistent
     manner.  A unit
     may be the product of any of the units defined in <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a> raised to any power.
     When a quantity is converted to a number for display, it is divided by its unit.
@@ -83,7 +83,7 @@
     <p>There are five independent constants or units in <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>,
     but the International System of Units (SI) has seven independent base units (<code>U.kg</code>,
     <code>U.m</code>, <code>U.s</code>, <code>U.A</code>, <code>U.mol</code>, <code>U.K</code>, and
-    <code>U.'cd'</code>).  In <a href="FCSys.html#FCSys">FCSys</a>, two additional constraints are imposed in order
+    <code>U.'cd'</code>).  In <a href="index.html#FCSys">FCSys</a>, two additional constraints are imposed in order
     to simplify the model equations and allow electrons and chemical species to be to represented by the
     same base <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSpecies">Species</a> model.
     First, the Faraday constant (<code>U.k_F</code> or <code>96485.3399*U.C/U.mol</code>)
@@ -100,7 +100,7 @@
     A script
     ("FCSys/resources/scripts/units.mos") runs a model (<a href="U.html#U.Evaluate">U.Evaluate</a>)
     to determine the values of the units and defines the conversions to display values as numbers
-    in units.  This script is set to run when <a href="FCSys.html#FCSys">FCSys</a> is loaded via
+    in units.  This script is set to run when <a href="index.html#FCSys">FCSys</a> is loaded via
     "FCSys/load.mos" or from a link in the "Commands" menu of <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a> (when viewed within
     Dymola).  Unless the values of the base constants and units are changed, it should be sufficient
     to simply allow the script to run when the package is loaded.
@@ -116,7 +116,7 @@
   case for any of these systems of units
   (<a href="http://en.wikipedia.org/wiki/Natural_units">http://en.wikipedia.org/wiki/Natural_units</a>).
   The structure of <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a> allows the constraints on the Faraday and gas constants
-  to be relaxed, but the models in <a href="FCSys.html#FCSys">FCSys</a> generally do not.</p>
+  to be relaxed, but the models in <a href="index.html#FCSys">FCSys</a> generally do not.</p>
 
   <p>For more information, see the paper on natural units [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Davies and Paredis, 2012</a>].</p>
   <p>
@@ -130,7 +130,7 @@
   FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href="http://www.modelica.org/licenses/ModelicaLicense2">
   http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
   </p><p>
-Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
@@ -354,11 +354,11 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   establish the values of the units in order to convert values to numbers for display.</p>
   <p>For more information, see the documentation in the
   <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a> package.</p><p>
-Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">model</font> Evaluate <font color="darkgreen">&quot;Evaluate the values assigned to constants and units&quot;</font>
-  <font color="blue">extends </font><a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
 
   <font color="darkgreen">// -----------------------------------------------------------------------</font>
   <font color="darkgreen">// Mathematical constants</font>
@@ -506,7 +506,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Dec 10 17:54:27 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Dec 11 15:26:43 2012.
 </div>
 </body>
 </html>

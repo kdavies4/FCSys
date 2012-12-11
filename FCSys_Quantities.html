@@ -3,7 +3,7 @@
 <title>FCSys.Quantities</title>
 <meta name="HTML-Generator" content="Dymola">
 <meta name="description" content="Quantities to represent physical properties">
-<meta name="keywords" content="Modelica, fuel cell, PEMFC, model">
+<meta name="keywords" content="Modelica, fuel cell, PEMFC, electrochemistry, model">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="images/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
@@ -24,7 +24,7 @@
     <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
     <li><a href="FCSys_Regions.html">Regions</a>**</li>
     <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
-    <li><a href="FCSys_Connectors.html">Connectors</a>**</li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
@@ -44,7 +44,7 @@
     <div class="bodywrapper">
       <div class="body">
 
-<h2><a name="FCSys.Quantities"></a><a href="FCSys.html#FCSys">FCSys</a>.Quantities</h2>
+<h2><a name="FCSys.Quantities"></a><a href="index.html#FCSys">FCSys</a>.Quantities</h2>
 <b>Quantities to represent physical properties</b>
 <p>
 <p><h3>Information</h3></p>
@@ -52,9 +52,9 @@
   dimension.  The dimensions are noted in terms
   of angle (A), length (l), mass (m), amount or particle number (N) and time (T).
   Capital "L" and "M" are not used to abbreviate length and mass because they are not recognized in Dymola 7.4.
-  In <a href="FCSys.html#FCSys.FCSys">FCSys</a>, temperature and charge are considered
+  In <a href="index.html#FCSys.FCSys">FCSys</a>, temperature and charge are considered
   to be derived dimensions (see the <a href="FCSys_Units.html#FCSys.Units">Units</a> package).</p><p>
-Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
@@ -166,6 +166,8 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 </td><td>Rate of volume</td></tr>
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.VolumeSpecific" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a>
 </td><td>Specific volume</td></tr>
+<tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.VolumeSpecificAbsolute" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">VolumeSpecificAbsolute</a>
+</td><td>Absolute specific volume</td></tr>
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.Wavenumber" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.Wavenumber">Wavenumber</a>
 </td><td>&nbsp;</td></tr>
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.CapacityThermal" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermal">CapacityThermal</a>
@@ -184,86 +186,88 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
 </td><td>Thermal transport resistivity</td></tr>
 </table>
 <p><h3>Types and constants</h3>
-<a name="FCSys.Quantities.Acceleration"></a><pre><font color="blue">type</font> Acceleration = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l/T2&quot;);</pre><p>
-<a name="FCSys.Quantities.Amount"></a><pre><font color="blue">type</font> Amount = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N&quot;, min=0);</pre><p>
-<a name="FCSys.Quantities.AmountReciprocal"></a><pre><font color="blue">type</font> AmountReciprocal = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;1/N&quot;, min=0) <font color="darkgreen">
+<a name="FCSys.Quantities.Acceleration"></a><pre><font color="blue">type</font> Acceleration = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l/T2&quot;);</pre><p>
+<a name="FCSys.Quantities.Amount"></a><pre><font color="blue">type</font> Amount = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N&quot;, min=0);</pre><p>
+<a name="FCSys.Quantities.AmountReciprocal"></a><pre><font color="blue">type</font> AmountReciprocal = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;1/N&quot;, min=0) <font color="darkgreen">
   &quot;Reciprocal amount&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.AmountVolumic"></a><pre><font color="blue">type</font> AmountVolumic = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N/l3&quot;, min=0) <font color="darkgreen">
+<a name="FCSys.Quantities.AmountVolumic"></a><pre><font color="blue">type</font> AmountVolumic = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N/l3&quot;, min=0) <font color="darkgreen">
   &quot;Volumic amount&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.AmountVolumicRate"></a><pre><font color="blue">type</font> AmountVolumicRate = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N/(l3.T)&quot;) <font color="darkgreen">
+<a name="FCSys.Quantities.AmountVolumicRate"></a><pre><font color="blue">type</font> AmountVolumicRate = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N/(l3.T)&quot;) <font color="darkgreen">
   &quot;Rate of volumic amount&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.Angle"></a><pre><font color="blue">type</font> Angle = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;A&quot;);</pre><p>
-<a name="FCSys.Quantities.Angle2"></a><pre><font color="blue">type</font> Angle2 = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;A2&quot;) <font color="darkgreen">&quot;Solid angle&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.Area"></a><pre><font color="blue">type</font> Area = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2&quot;, min=0);</pre><p>
-<a name="FCSys.Quantities.Capacitance"></a><pre><font color="blue">type</font> Capacitance = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N2.T2/(l2.m)&quot;, min=0);</pre><p>
-<a name="FCSys.Quantities.ConductanceElectrical"></a><pre><font color="blue">type</font> ConductanceElectrical = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N2.T/(l2.m)&quot;,
+<a name="FCSys.Quantities.Angle"></a><pre><font color="blue">type</font> Angle = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;A&quot;);</pre><p>
+<a name="FCSys.Quantities.Angle2"></a><pre><font color="blue">type</font> Angle2 = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;A2&quot;) <font color="darkgreen">&quot;Solid angle&quot;</font>;</pre><p>
+<a name="FCSys.Quantities.Area"></a><pre><font color="blue">type</font> Area = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2&quot;, min=0);</pre><p>
+<a name="FCSys.Quantities.Capacitance"></a><pre><font color="blue">type</font> Capacitance = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N2.T2/(l2.m)&quot;, min=0);</pre><p>
+<a name="FCSys.Quantities.ConductanceElectrical"></a><pre><font color="blue">type</font> ConductanceElectrical = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N2.T/(l2.m)&quot;,
       min=0) <font color="darkgreen">&quot;Electrical conductance&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.Current"></a><pre><font color="blue">type</font> Current = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N/T&quot;);</pre><p>
-<a name="FCSys.Quantities.CurrentAreic"></a><pre><font color="blue">type</font> CurrentAreic = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N/(l2.T)&quot;) <font color="darkgreen">
+<a name="FCSys.Quantities.Current"></a><pre><font color="blue">type</font> Current = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N/T&quot;);</pre><p>
+<a name="FCSys.Quantities.CurrentAreic"></a><pre><font color="blue">type</font> CurrentAreic = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N/(l2.T)&quot;) <font color="darkgreen">
   &quot;Areic current&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.CurrentRate"></a><pre><font color="blue">type</font> CurrentRate = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N/T2&quot;) <font color="darkgreen">
+<a name="FCSys.Quantities.CurrentRate"></a><pre><font color="blue">type</font> CurrentRate = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N/T2&quot;) <font color="darkgreen">
   &quot;Rate of current&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.Energy"></a><pre><font color="blue">type</font> Energy = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/T2&quot;);</pre><p>
-<a name="FCSys.Quantities.Force"></a><pre><font color="blue">type</font> Force = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l.m/T2&quot;);</pre><p>
-<a name="FCSys.Quantities.Frequency"></a><pre><font color="blue">type</font> Frequency = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;A/T&quot;);</pre><p>
-<a name="FCSys.Quantities.Inductance"></a><pre><font color="blue">type</font> Inductance = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/N2&quot;, min=0);</pre><p>
-<a name="FCSys.Quantities.Length"></a><pre><font color="blue">type</font> Length = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l&quot;, min=0);</pre><p>
-<a name="FCSys.Quantities.LengthSpecific"></a><pre><font color="blue">type</font> LengthSpecific = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l/N&quot;, min=0) <font color="darkgreen">
+<a name="FCSys.Quantities.Energy"></a><pre><font color="blue">type</font> Energy = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/T2&quot;);</pre><p>
+<a name="FCSys.Quantities.Force"></a><pre><font color="blue">type</font> Force = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l.m/T2&quot;);</pre><p>
+<a name="FCSys.Quantities.Frequency"></a><pre><font color="blue">type</font> Frequency = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;A/T&quot;);</pre><p>
+<a name="FCSys.Quantities.Inductance"></a><pre><font color="blue">type</font> Inductance = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/N2&quot;, min=0);</pre><p>
+<a name="FCSys.Quantities.Length"></a><pre><font color="blue">type</font> Length = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l&quot;, min=0);</pre><p>
+<a name="FCSys.Quantities.LengthSpecific"></a><pre><font color="blue">type</font> LengthSpecific = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l/N&quot;, min=0) <font color="darkgreen">
   &quot;Specific length&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.MagneticFlux"></a><pre><font color="blue">type</font> MagneticFlux = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/(A.N.T)&quot;) <font color="darkgreen">
+<a name="FCSys.Quantities.MagneticFlux"></a><pre><font color="blue">type</font> MagneticFlux = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/(A.N.T)&quot;) <font color="darkgreen">
   &quot;Magnetic flux&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.MagneticFluxAreic"></a><pre><font color="blue">type</font> MagneticFluxAreic = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;m/(A.N.T)&quot;) <font color="darkgreen">
+<a name="FCSys.Quantities.MagneticFluxAreic"></a><pre><font color="blue">type</font> MagneticFluxAreic = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;m/(A.N.T)&quot;) <font color="darkgreen">
   &quot;Areic magnetic flux&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.MagneticFluxReciprocal"></a><pre><font color="blue">type</font> MagneticFluxReciprocal = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;A.N.T/(l2.m)&quot;)
+<a name="FCSys.Quantities.MagneticFluxReciprocal"></a><pre><font color="blue">type</font> MagneticFluxReciprocal = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;A.N.T/(l2.m)&quot;)
   <font color="darkgreen">&quot;Reciprocal magnetic flux&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.Mass"></a><pre><font color="blue">type</font> Mass = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;m&quot;, min=0);</pre><p>
-<a name="FCSys.Quantities.MassSpecific"></a><pre><font color="blue">type</font> MassSpecific = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;m/N&quot;, min=0) <font color="darkgreen">
+<a name="FCSys.Quantities.Mass"></a><pre><font color="blue">type</font> Mass = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;m&quot;, min=0);</pre><p>
+<a name="FCSys.Quantities.MassSpecific"></a><pre><font color="blue">type</font> MassSpecific = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;m/N&quot;, min=0) <font color="darkgreen">
   &quot;Specific mass&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.MomentumAngular"></a><pre><font color="blue">type</font> MomentumAngular = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/(A.T)&quot;) <font color="darkgreen">
+<a name="FCSys.Quantities.MomentumAngular"></a><pre><font color="blue">type</font> MomentumAngular = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/(A.T)&quot;) <font color="darkgreen">
   &quot;Angular momentum&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.Number"></a><pre><font color="blue">type</font> Number = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;1&quot;);</pre><p>
-<a name="FCSys.Quantities.NumberAbsolute"></a><pre><font color="blue">type</font> NumberAbsolute = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;1&quot;, min=0) <font color="darkgreen">
+<a name="FCSys.Quantities.Number"></a><pre><font color="blue">type</font> Number = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;1&quot;);</pre><p>
+<a name="FCSys.Quantities.NumberAbsolute"></a><pre><font color="blue">type</font> NumberAbsolute = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;1&quot;, min=0) <font color="darkgreen">
   &quot;Absolute number&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.NumberRate"></a><pre><font color="blue">type</font> NumberRate = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;1/T&quot;);</pre><p>
-<a name="FCSys.Quantities.Permeability"></a><pre><font color="blue">type</font> Permeability = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l.m/N2&quot;, min=0);</pre><p>
-<a name="FCSys.Quantities.Permittivity"></a><pre><font color="blue">type</font> Permittivity = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N2.T2/(l3.m)&quot;, min=0);</pre><p>
-<a name="FCSys.Quantities.PermittivityReciprocal"></a><pre><font color="blue">type</font> PermittivityReciprocal = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l3.m/(N2.T2)&quot;,
+<a name="FCSys.Quantities.NumberRate"></a><pre><font color="blue">type</font> NumberRate = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;1/T&quot;);</pre><p>
+<a name="FCSys.Quantities.Permeability"></a><pre><font color="blue">type</font> Permeability = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l.m/N2&quot;, min=0);</pre><p>
+<a name="FCSys.Quantities.Permittivity"></a><pre><font color="blue">type</font> Permittivity = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N2.T2/(l3.m)&quot;, min=0);</pre><p>
+<a name="FCSys.Quantities.PermittivityReciprocal"></a><pre><font color="blue">type</font> PermittivityReciprocal = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l3.m/(N2.T2)&quot;,
       min=0) <font color="darkgreen">&quot;Reciprocal permittivity&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.Potential"></a><pre><font color="blue">type</font> Potential = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;);</pre><p>
-<a name="FCSys.Quantities.PotentialAbsolute"></a><pre><font color="blue">type</font> PotentialAbsolute = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;, min
+<a name="FCSys.Quantities.Potential"></a><pre><font color="blue">type</font> Potential = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;);</pre><p>
+<a name="FCSys.Quantities.PotentialAbsolute"></a><pre><font color="blue">type</font> PotentialAbsolute = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;, min
       =0) <font color="darkgreen">&quot;Absolute potential&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.PotentialPerWavenumber"></a><pre><font color="blue">type</font> PotentialPerWavenumber = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l3.m/(A.N.T2)&quot;)
+<a name="FCSys.Quantities.PotentialPerWavenumber"></a><pre><font color="blue">type</font> PotentialPerWavenumber = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l3.m/(A.N.T2)&quot;)
   <font color="darkgreen">&quot;Potential per wavenumber&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.PotentialRate"></a><pre><font color="blue">type</font> PotentialRate = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/(N.T3)&quot;) <font color="darkgreen">
+<a name="FCSys.Quantities.PotentialRate"></a><pre><font color="blue">type</font> PotentialRate = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/(N.T3)&quot;) <font color="darkgreen">
   &quot;Rate of potential&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.PotentialReciprocal"></a><pre><font color="blue">type</font> PotentialReciprocal = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N.T2/(l2.m)&quot;) <font color="darkgreen">
+<a name="FCSys.Quantities.PotentialReciprocal"></a><pre><font color="blue">type</font> PotentialReciprocal = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N.T2/(l2.m)&quot;) <font color="darkgreen">
   &quot;Reciprocal potential&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.Power"></a><pre><font color="blue">type</font> Power = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/T3&quot;);</pre><p>
-<a name="FCSys.Quantities.PowerArea"></a><pre><font color="blue">type</font> PowerArea = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l4.m/T3&quot;) <font color="darkgreen">
+<a name="FCSys.Quantities.Power"></a><pre><font color="blue">type</font> Power = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/T3&quot;);</pre><p>
+<a name="FCSys.Quantities.PowerArea"></a><pre><font color="blue">type</font> PowerArea = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l4.m/T3&quot;) <font color="darkgreen">
   &quot;Power times area&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.PowerAreic"></a><pre><font color="blue">type</font> PowerAreic = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;m/T3&quot;) <font color="darkgreen">&quot;Areic power&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.PowerAreicPerPotential4"></a><pre><font color="blue">type</font> PowerAreicPerPotential4 = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;m.T5/l8&quot;) <font color="darkgreen">
+<a name="FCSys.Quantities.PowerAreic"></a><pre><font color="blue">type</font> PowerAreic = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;m/T3&quot;) <font color="darkgreen">&quot;Areic power&quot;</font>;</pre><p>
+<a name="FCSys.Quantities.PowerAreicPerPotential4"></a><pre><font color="blue">type</font> PowerAreicPerPotential4 = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;m.T5/l8&quot;) <font color="darkgreen">
   &quot;Areic power per 4th power of potential&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.PowerRadiant"></a><pre><font color="blue">type</font> PowerRadiant = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/(A2.T3)&quot;) <font color="darkgreen">
+<a name="FCSys.Quantities.PowerRadiant"></a><pre><font color="blue">type</font> PowerRadiant = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/(A2.T3)&quot;) <font color="darkgreen">
   &quot;Radiant power&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.Pressure"></a><pre><font color="blue">type</font> Pressure = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;);</pre><p>
-<a name="FCSys.Quantities.PressureAbsolute"></a><pre><font color="blue">type</font> PressureAbsolute = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;, min=0) <font color="darkgreen">
+<a name="FCSys.Quantities.Pressure"></a><pre><font color="blue">type</font> Pressure = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;);</pre><p>
+<a name="FCSys.Quantities.PressureAbsolute"></a><pre><font color="blue">type</font> PressureAbsolute = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;, min=0) <font color="darkgreen">
   &quot;Absolute pressure&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.PressureRate"></a><pre><font color="blue">type</font> PressureRate = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;m/(l.T3)&quot;) <font color="darkgreen">
+<a name="FCSys.Quantities.PressureRate"></a><pre><font color="blue">type</font> PressureRate = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;m/(l.T3)&quot;) <font color="darkgreen">
   &quot;Rate of pressure&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.Resistance"></a><pre><font color="blue">type</font> Resistance = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;T/N&quot;, min=0);</pre><p>
-<a name="FCSys.Quantities.ResistanceElectrical"></a><pre><font color="blue">type</font> ResistanceElectrical = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/(N2.T)&quot;,
+<a name="FCSys.Quantities.Resistance"></a><pre><font color="blue">type</font> Resistance = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;T/N&quot;, min=0);</pre><p>
+<a name="FCSys.Quantities.ResistanceElectrical"></a><pre><font color="blue">type</font> ResistanceElectrical = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/(N2.T)&quot;,
       min=0) <font color="darkgreen">&quot;Electrical resistance&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.Resistivity"></a><pre><font color="blue">type</font> Resistivity = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l.T/N&quot;, min=0);</pre><p>
-<a name="FCSys.Quantities.Time"></a><pre><font color="blue">type</font> Time = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;T&quot;);</pre><p>
-<a name="FCSys.Quantities.Velocity"></a><pre><font color="blue">type</font> Velocity = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l/T&quot;);</pre><p>
-<a name="FCSys.Quantities.Velocity2"></a><pre><font color="blue">type</font> Velocity2 = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2/T2&quot;) <font color="darkgreen">
+<a name="FCSys.Quantities.Resistivity"></a><pre><font color="blue">type</font> Resistivity = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l.T/N&quot;, min=0);</pre><p>
+<a name="FCSys.Quantities.Time"></a><pre><font color="blue">type</font> Time = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;T&quot;);</pre><p>
+<a name="FCSys.Quantities.Velocity"></a><pre><font color="blue">type</font> Velocity = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l/T&quot;);</pre><p>
+<a name="FCSys.Quantities.Velocity2"></a><pre><font color="blue">type</font> Velocity2 = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2/T2&quot;) <font color="darkgreen">
   &quot;Squared velocity&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.Volume"></a><pre><font color="blue">type</font> Volume = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l3&quot;, min=0);</pre><p>
-<a name="FCSys.Quantities.VolumeRate"></a><pre><font color="blue">type</font> VolumeRate = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l3/T&quot;) <font color="darkgreen">&quot;Rate of volume&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.VolumeSpecific"></a><pre><font color="blue">type</font> VolumeSpecific = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l3/N&quot;, min=0) <font color="darkgreen">
+<a name="FCSys.Quantities.Volume"></a><pre><font color="blue">type</font> Volume = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l3&quot;, min=0);</pre><p>
+<a name="FCSys.Quantities.VolumeRate"></a><pre><font color="blue">type</font> VolumeRate = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l3/T&quot;) <font color="darkgreen">&quot;Rate of volume&quot;</font>;</pre><p>
+<a name="FCSys.Quantities.VolumeSpecific"></a><pre><font color="blue">type</font> VolumeSpecific = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l3/N&quot;, min=0) <font color="darkgreen">
   &quot;Specific volume&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.Wavenumber"></a><pre><font color="blue">type</font> Wavenumber = <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;A/l&quot;);</pre><p>
+<a name="FCSys.Quantities.VolumeSpecificAbsolute"></a><pre><font color="blue">type</font> VolumeSpecificAbsolute = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l3/N&quot;, min=0)
+  <font color="darkgreen">&quot;Absolute specific volume&quot;</font>;</pre><p>
+<a name="FCSys.Quantities.Wavenumber"></a><pre><font color="blue">type</font> Wavenumber = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;A/l&quot;);</pre><p>
 <a name="FCSys.Quantities.CapacityThermal"></a><pre><font color="blue">type</font> CapacityThermal = <a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Amount</a> (displayUnit=&quot;J/K&quot;) <font color="darkgreen">&quot;Thermal capacity&quot;</font>;</pre><p>
 <a name="FCSys.Quantities.CapacityThermalSpecific"></a><pre><font color="blue">type</font> CapacityThermalSpecific = <a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a> (displayUnit=&quot;J/(mol.K)&quot;) <font color="darkgreen">
   &quot;Specific thermal capacity&quot;</font>;</pre><p>
@@ -278,7 +282,7 @@ Extends from <a href="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Mod
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Dec 10 17:54:30 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Dec 11 15:26:47 2012.
 </div>
 </body>
 </html>
