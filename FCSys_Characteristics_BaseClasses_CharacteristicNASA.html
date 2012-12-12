@@ -5,7 +5,7 @@
 <meta name="description" content="Thermodynamic record with transport properties based on NASA CEA">
 <meta name="keywords" content="Modelica, fuel cell, PEMFC, electrochemistry, model">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
-<link rel="shortcut icon" href="images/favicon.ico">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
 </head>
 <body>
@@ -73,8 +73,6 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
 <tr><td>p_min=-Modelica.Constants.inf</td><td>Minimum pressure for numerical protection (<i>p</i><sub>min</sub>)</td></tr>
 <tr><td>b_v=[1]</td><td>Coefficients of specific volume as a polynomial in p/T and T (<i>b</i><sub><i>v</i></sub>)</td></tr>
 <tr><td>specVolPow={-1,0}</td><td>Powers of p/T and T for 1<sup>st</sup> row and column of b_v, respectively</td></tr>
-<tr><td>isCompressible=anyTrue({anyTrue({b_v[i, j] &lt;&gt; 0 and specVolPow[1] + i - 1 &lt;&gt; 0 for i in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})</td><td>true, if specific volume depends on pressure</td></tr>
-<tr><td>hasThermalExpansion=anyTrue({anyTrue({b_v[i, j] &lt;&gt; 0 and specVolPow[2] + j - specVolPow[1] - i &lt;&gt; 0 for i in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})</td><td>true, if specific volume depends on temperature</td></tr>
 <tr><td>Deltah0_f</td><td>Enthalpy of formation at 298.15 K, <i>p</i>&deg; (&Delta;<i>h</i>&deg;<sub>f</sub>)</td></tr>
 <tr><td>Deltah0</td><td><i>h</i>&deg;(298.15 K) - <i>h</i>&deg;(0 K) (&Delta;<i>h</i>&deg;)</td></tr>
 <tr><td>h_offset=0</td><td>Additional enthalpy offset (<i>h</i><sub>offset</sub>)</td></tr>
@@ -82,25 +80,27 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
 <tr><td>T_lim_c={0,Modelica.Constants.inf}</td><td>Temperature limits for the rows of b_c and B_c (<i>T</i><sub>lim <i>c</i></sub>)</td></tr>
 <tr><td>b_c</td><td>Coefficients of specific heat capacity at <i>p</i>&deg; as a polynomial in <i>T</i> (<i>b</i><sub><i>c</i></sub>)</td></tr>
 <tr><td>B_c</td><td>Integration constants for specific enthalpy and entropy (<i>B</i><sub><i>c</i></sub>)</td></tr>
+<tr><td>isCompressible=anyTrue({anyTrue({b_v[i, j] &lt;&gt; 0 and specVolPow[1] + i - 1 &lt;&gt; 0 for i in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})</td><td>true, if specific volume depends on pressure</td></tr>
+<tr><td>hasThermalExpansion=anyTrue({anyTrue({b_v[i, j] &lt;&gt; 0 and specVolPow[2] + j - specVolPow[1] - i &lt;&gt; 0 for i in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})</td><td>true, if specific volume depends on temperature</td></tr>
 <tr><td>pressPow={specVolPow[1] - size(b_v, 1) + 1,specVolPow[2] + 1}</td><td>Powers of v and T for 1st row and column of b_p, respectively</td></tr>
 <tr><td>b_p={(if specVolPow[1] + i == 0 or specVolPow[1] + i == 1 then b_v[i, :] else (if specVolPow[1] + i == 2 and specVolPow[1] &lt;= 0 then b_v[i, :] + b_v[i - 1, :] .^ 2 else (if specVolPow[1] + i == 3 and specVolPow[1] &lt;= 0 then b_v[i, :] + b_v[i - 2, :] .* (b_v[i - 2, :] .^ 2 + 3*b_v[i - 1, :]) else zeros(size(b_v, 2))))) for i in size(b_v, 1):-1:1}</td><td>Coefficients of p as a polynomial in v and T</td></tr>
-<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.alpha" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.alpha">alpha</a>
+<tr><td><img src="images/FCSys.Characteristics.'e-'.Graphite.polyS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.alpha" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.alpha">alpha</a>
 </td><td>Ideal resistivity as a function of temperature (&alpha;)</td></tr>
-<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.c0" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.c0">c0</a>
+<tr><td><img src="images/FCSys.Characteristics.'e-'.Graphite.polyS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.c0" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.c0">c0</a>
 </td><td>Specific heat capacity at reference pressure as a function of temperature (<i>c</i>&deg;)</td></tr>
-<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.c_V" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.c_V">c_V</a>
+<tr><td><img src="images/FCSys.Characteristics.'e-'.Graphite.polyS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.c_V" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.c_V">c_V</a>
 </td><td>Specific heat capacity at constant volume as a function of pressure and temperature (<i>c</i><sub><i>V</i></sub>)</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.dp" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.dp">dp</a>
 </td><td>Derivative of pressure as defined by <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.p_vT">p_vT</a>()</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.dv" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.dv">dv</a>
 </td><td>Derivative of specific volume as defined by <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.v_pT">v_pT</a>()</td></tr>
-<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.g" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.g">g</a>
+<tr><td><img src="images/FCSys.Characteristics.'e-'.Graphite.polyS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.g" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.g">g</a>
 </td><td>Gibbs potential as a function of pressure and temperature</td></tr>
-<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.h0" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.h0">h0</a>
+<tr><td><img src="images/FCSys.Characteristics.'e-'.Graphite.polyS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.h0" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.h0">h0</a>
 </td><td>Specific enthalpy as a function of temperature at reference pressure (<i>h</i>&deg;)</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.p_vT" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.p_vT">p_vT</a>
 </td><td>Pressure as a function of specific volume and temperature</td></tr>
-<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.s" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.s">s</a>
+<tr><td><img src="images/FCSys.Characteristics.'e-'.Graphite.polyS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.s" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.s">s</a>
 </td><td>Specific entropy as a function of pressure and temperature</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.v_pT" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.v_pT">v_pT</a>
 </td><td>Specific volume as a function of pressure and temperature</td></tr>
@@ -162,8 +162,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     String(T_lim_alpha[1]/U.K) + &quot;, &quot; + String(T_lim_alpha[size(T_lim_alpha, 1)]
     /U.K) + &quot;] K).&quot;);
   */</font>
-  <font color="darkgreen">// Note:  This is commented out so that the function can be inlined.</font>
-  <font color="darkgreen">// Note:  In Dymola 7.4 T_lim_alpha[end] can&#39;t be used instead of</font>
+  <font color="darkgreen">// Note: This is commented out so that the function can be inlined.</font>
+  <font color="darkgreen">// Note: In Dymola 7.4 T_lim_alpha[end] can&#39;t be used instead of</font>
   <font color="darkgreen">// T_lim_alpha[size(T_lim_alpha, 1)] due to:</font>
   <font color="darkgreen">//     &quot;Error, not all &quot;end&quot; could be expanded.&quot;</font>
 
@@ -171,7 +171,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     T_lim_alpha[i + 1]<font color="blue"> or </font>i == <font color="red">size</font>(T_lim_alpha, 1) - 1)<font color="blue"> then </font>(<font color="red">b_eta_adj</font>())[i, 1]
     *<font color="red">ln</font>(T) + ((<font color="red">b_eta_adj</font>())[i, 2] + (<font color="red">b_eta_adj</font>())[i, 3]/T)/T + (<font color="red">b_eta_adj</font>())[i,
     4]<font color="blue"> else </font>0 <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(T_lim_alpha, 1) - 1)));
-  <font color="darkgreen">// Note:  The annotation is set assuming that the values of the constants</font>
+  <font color="darkgreen">// Note: The annotation is set assuming that the values of the constants</font>
   <font color="darkgreen">// result in a function that is first-order continuous.</font>
 
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>alpha_tau;
@@ -210,7 +210,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <font color="blue">protected </font>
   <textblock type="model" expanded="false" path="FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_Sdot.b_lambda_adj"><font color="blue">function</font> b_lambda_adj <font color="darkgreen">
     &quot;Return unit-adjusted NASA CEA constants for thermal conductivity&quot;</font>
-    <font color="darkgreen">// Note:  If b_lambda were defined as a local constant instead of a</font>
+    <font color="darkgreen">// Note: If b_lambda were defined as a local constant instead of a</font>
     <font color="darkgreen">// function, it would prevent the alpha_tau function from</font>
     <font color="darkgreen">// being inlined.  If it were defined as a global final constant, it</font>
     <font color="darkgreen">// would need to be updated manually when b_eta is changed.</font>
@@ -229,8 +229,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     String(T_lim_alpha[1]/U.K) + &quot;, &quot; + String(T_lim_alpha[size(T_lim_alpha, 1)]
     /U.K) + &quot;] K).&quot;);
   */</font>
-  <font color="darkgreen">// Note:  This is commented out so that the function can be inlined.</font>
-  <font color="darkgreen">// Note:  In Dymola 7.4 T_lim_alpha[end] can&#39;t be used instead of</font>
+  <font color="darkgreen">// Note: This is commented out so that the function can be inlined.</font>
+  <font color="darkgreen">// Note: In Dymola 7.4 T_lim_alpha[end] can&#39;t be used instead of</font>
   <font color="darkgreen">// T_lim_alpha[size(T_lim_alpha, 1)] due to:</font>
   <font color="darkgreen">//     &quot;Error, not all &quot;end&quot; could be expanded.&quot;</font>
 
@@ -238,7 +238,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     T_lim_alpha[i + 1]<font color="blue"> or </font>i == <font color="red">size</font>(T_lim_alpha, 1) - 1)<font color="blue"> then </font>(<font color="red">b_lambda_adj</font>())[
     i, 1]*<font color="red">ln</font>(T) + ((<font color="red">b_lambda_adj</font>())[i, 2] + (<font color="red">b_lambda_adj</font>())[i, 3]/T)/T + (<font color="red">
     b_lambda_adj</font>())[i, 4]<font color="blue"> else </font>0 <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(T_lim_alpha, 1) - 1)));
-  <font color="darkgreen">// Note:  The annotation is set assuming that the values of the constants</font>
+  <font color="darkgreen">// Note: The annotation is set assuming that the values of the constants</font>
   <font color="darkgreen">// result in a function that is first-order continuous.</font>
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>alpha_Sdot;
 </pre>
@@ -247,7 +247,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Dec 11 15:26:38 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Dec 13 10:09:54 2012.
 </div>
 </body>
 </html>

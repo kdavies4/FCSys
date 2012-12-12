@@ -10,5 +10,5 @@
 for f in $(find -name '*.png' -or -name '*.PNG'); do
     echo Processing $f...
     mogrify -fuzz 2% -trim $f
-    mogrify -bordercolor '#FFFFFF' -border '2x2' $f
+    mogrify -bordercolor '#FFFFFF' -border '10x10' $f
 done

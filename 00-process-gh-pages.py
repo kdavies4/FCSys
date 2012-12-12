@@ -12,14 +12,25 @@ import re, glob, sys, os
 # Replacement pairs
 rpls = [
     # Update the image links.
-    ('<img src="[A-Za-z0-9._]+/[A-Za-z0-9._]+/[A-Za-z0-9._]+/[A-Za-z0-9._]+/[A-Za-z0-9._]+/', '<img src="'),
-    ('<img src="[A-Za-z0-9._]+/[A-Za-z0-9._]+/', '<img src="'), # Repeated for subdirectories
-    ('<img src="[A-Za-z0-9._]+/', '<img src="'),
-    ('([A-Za-z0-9._]+)\.png', r'images/\1.png'),
-    ('([A-Za-z0-9._]+)\.svg', r'images/\1.svg'),
-    ('([A-Za-z0-9._]+)\.gif', r'images/\1.gif'),
-    ('\.\./resources/documentation/(favicon\.ico)', r'images/\1'),
-    ('\.\./resources/documentation/(.+\.pdf)', r'images/\1'),
+    ('img src=".*?([^/]+\.png)', r'img src="images/\1'),
+    ('img src=".*?([^/]+\.svg)', r'img src="images/\1'),
+    ('img src=".*?([^/]+\.gif)', r'img src="images/\1'),
+    ('img src=".*?([^/]+\.pdf)', r'img src="images/\1'),
+    ('img src=".*?([^/]+\.ico)', r'img src="images/\1'),
+    #('<img src="[A-Za-z0-9._]+/[A-Za-z0-9._]+/[A-Za-z0-9._]+/[A-Za-z0-9._]+/[A-Za-z0-9._]+/', '<img src="'),
+    #('<img src="[A-Za-z0-9._]+/[A-Za-z0-9._]+/', '<img src="'), # Repeated for subdirectories
+    #('<img src="[A-Za-z0-9._]+/', '<img src="'),
+    #('([A-Za-z0-9._]+)\.png', r'images/\1.png'),
+    #('([A-Za-z0-9._]+)\.svg', r'images/\1.svg'),
+    #('([A-Za-z0-9._]+)\.gif', r'images/\1.gif'),
+
+
+#src="../resources/documentation/Connectors/hierarchy.png">
+#src="Connectors/images/hierarchy.png">
+
+
+#    ('\.\./resources/documentation/(favicon\.ico)', r'images/\1'),
+#    ('\.\./resources/documentation/(.+\.pdf)', r'images/\1'),
     # FCSys.html will be index.html.
     ('FCSys\.html', 'index.html'),
     # Change the title of the main page.

@@ -5,7 +5,7 @@
 <meta name="description" content="Examples and tests">
 <meta name="keywords" content="Modelica, fuel cell, PEMFC, electrochemistry, model">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
-<link rel="shortcut icon" href="images/favicon.ico">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
 </head>
 <body>
@@ -95,15 +95,15 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
   <font color="darkgreen">// Results</font>
   <font color="darkgreen">// Resistivity</font>
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> beta=<font color="red">DataC.alpha</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> alpha_SdotH2_Phi=<font color="red">DataH2.alpha_tau</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> alpha_SdotH2_U=<font color="red">DataH2.alpha_Sdot</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> alpha_SdotH2O_Phi=<font color="red">DataH2O.alpha_tau</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> alpha_SdotH2O_U=<font color="red">DataH2O.alpha_Sdot</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> alpha_Ndot2_Phi=<font color="red">DataN2.alpha_tau</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> alpha_Ndot2_U=<font color="red">DataN2.alpha_Sdot</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> alpha_SdotO2_Phi=<font color="red">DataO2.alpha_tau</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> alpha_SdotO2_U=<font color="red">DataO2.alpha_Sdot</font>(T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> alpha=<font color="red">DataC.alpha</font>(T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> alpha_tau_H2=<font color="red">DataH2.alpha_tau</font>(T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> alpha_Sdot_H2=<font color="red">DataH2.alpha_Sdot</font>(T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> alpha_tau_H2O=<font color="red">DataH2O.alpha_tau</font>(T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> alpha_Sdot_H2O=<font color="red">DataH2O.alpha_Sdot</font>(T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> alpha_tau_N2=<font color="red">DataN2.alpha_tau</font>(T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> alpha_Sdot_N2=<font color="red">DataN2.alpha_Sdot</font>(T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> alpha_tau_O2=<font color="red">DataO2.alpha_tau</font>(T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> alpha_Sdot_O2=<font color="red">DataO2.alpha_Sdot</font>(T);
   <font color="darkgreen">//</font>
   <font color="darkgreen">// Specific heat capacity at reference pressure</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c0_C=<font color="red">DataC.c0</font>(T);
@@ -117,16 +117,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c0_O2=<font color="red">DataO2.c0</font>(T);
   <font color="darkgreen">//</font>
   <font color="darkgreen">// Specific heat capacity at constant volume</font>
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_C=<font color="red">DataC.c_V</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_C19HF37O5S=<font color="red">DataC19HF37O5S.c_V</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_V_e-&#39;=<font color="red">&#39;Datae-&#39;.c_V</font>(T);
-  <font color="darkgreen">// **output Q.CapacityThermalSpecific c_V_H2=DataH2.c_V(T);</font>
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_H2=<font color="red">DataH2IG.c_V</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_H2O=<font color="red">DataH2O.c_V</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_H2O_liquid=<font color="red">DataH2OLiquid.c_V</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_V_H+&#39;=<font color="red">&#39;DataH+&#39;.c_V</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_N2=<font color="red">DataN2.c_V</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_O2=<font color="red">DataO2.c_V</font>(T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_C=<font color="red">DataC.c_V</font>(p=p, T=T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_C19HF37O5S=<font color="red">DataC19HF37O5S.c_V</font>(p=p, T=T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_V_e-&#39;=<font color="red">&#39;Datae-&#39;.c_V</font>(p=p, T=T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_H2=<font color="red">DataH2.c_V</font>(p=p, T=T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_H2_IG=<font color="red">DataH2IG.c_V</font>(p=p_IG, T=T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_H2O=<font color="red">DataH2O.c_V</font>(p=p, T=T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_H2O_liquid=<font color="red">DataH2OLiquid.c_V</font>(p=p, T=T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_V_H+&#39;=<font color="red">&#39;DataH+&#39;.c_V</font>(p=p, T=T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_N2=<font color="red">DataN2.c_V</font>(p=p, T=T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_O2=<font color="red">DataO2.c_V</font>(p=p, T=T);
   <font color="darkgreen">//</font>
   <font color="darkgreen">// Gibbs potential</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_C=<font color="red">DataC.g</font>(p, T);
@@ -218,7 +218,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Dec 11 15:26:36 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Dec 13 10:09:50 2012.
 </div>
 </body>
 </html>
