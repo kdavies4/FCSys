@@ -360,7 +360,7 @@ package Characteristics
         "<html>Derivative of pressure as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_vT\">p_vT</a>()</html>"
         extends Modelica.Icons.Function;
 
-        input Q.VolumeSpecificAbsolute v=U.atm/(298.15*U.K) "Specific volume";
+        input Q.VolumeSpecificAbsolute v=98.15*U.K/U.atm "Specific volume";
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecific dv=0 "Derivative of specific volume";
         input Q.Temperature dT=0 "Derivative of temperature";
@@ -413,7 +413,7 @@ package Characteristics
         "Pressure as a function of specific volume and temperature"
         extends Modelica.Icons.Function;
 
-        input Q.VolumeSpecificAbsolute v=U.atm/(298.15*U.K) "Specific volume";
+        input Q.VolumeSpecificAbsolute v=298.15*U.K/U.atm "Specific volume";
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         output Q.PressureAbsolute p "Pressure";
 
@@ -1034,7 +1034,7 @@ package Characteristics
         "<html>Derivative of pressure as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_vT\">p_vT</a>()</html>"
         extends Modelica.Icons.Function;
 
-        input Q.VolumeSpecificAbsolute v=U.atm/(298.15*U.K) "Specific volume";
+        input Q.VolumeSpecificAbsolute v=298.15*U.K/U.atm "Specific volume";
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecific dv=0 "Derivative of specific volume";
         input Q.Temperature dT=0 "Derivative of temperature";
@@ -1187,7 +1187,7 @@ package Characteristics
         "Pressure as a function of specific volume and temperature"
         extends Modelica.Icons.Function;
 
-        input Q.VolumeSpecificAbsolute v=U.atm/(298.15*U.K) "Specific volume";
+        input Q.VolumeSpecificAbsolute v=298.15*U.K/U.atm "Specific volume";
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         output Q.PressureAbsolute p "Pressure";
 
@@ -1198,18 +1198,18 @@ package Characteristics
         // Note: In Dymola 7.4 the assertion level can't be set, although it has
         // been defined as an argument to assert() since Modelica 3.0.
 
-        p := if isCompressible then (if size(b_p, 1) == 1 and size(b_p, 2) == 1
-           then 1 else poly(
+        p := if isCompressible then poly(
                 v,
                 {poly(
                   T,
                   b_p[i, :],
                   pressPow[2]) for i in 1:size(b_p, 1)},
-                pressPow[1])) else 0 annotation (
+                pressPow[1]) else 0 annotation (
           Inline=true,
           smoothOrder=999,
           inverse(v=v_pT(p, T)),
           derivative=dp);
+        // **Temp mod
         annotation (Documentation(info="<html><p>If the species is incompressible, then <i>p</i>(<i>v</i>, <i>T</i>) is undefined,
   and the function will return a value of zero.</p>
   <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a>().</p></html>"));

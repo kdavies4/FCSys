@@ -6624,9 +6624,10 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
         choices(__Dymola_checkBox=true));
 
       // Initialization parameters for scalar properties
-      parameter BaseClasses.InitMethScalar initMethPartNum=InitMethScalar.Pressure
+      parameter BaseClasses.InitMethScalar initMethPartNum=InitMethScalar.Amount
         "Method of initializing the particle number" annotation (Evaluate=true,
           Dialog(tab="Initialization", group="Scalar properties"));
+      // **initMethPartNum=InitMethScalar.Pressure
       parameter BaseClasses.InitMethScalar initMethTemp=InitMethScalar.Temperature
         "Method of initializing the temperature" annotation (Evaluate=true,
           Dialog(tab="Initialization", group="Scalar properties"));
@@ -6669,6 +6670,7 @@ and <code>alpha_Sdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
       parameter Q.PressureAbsolute p_IC(start=defaults.p)
         "<html>Initial pressure (<i>p</i><sub>IC</sub>)</html>"
         annotation (Dialog(tab="Initialization",group="Scalar properties"));
+      // **temp 2
       parameter Q.PressureRate derp_IC=0
         "<html>Initial rate of pressure ((&part;<i>p</i>/&part;<i>t</i>)<sub>IC</sub>)</html>"
         annotation (Dialog(
@@ -7326,7 +7328,8 @@ The default global default settings will be used for the current simulation.",
       if overrideEOS then
         N = rho_IC*V;
       elseif Data.isCompressible then
-        p = Data.p_vT(V/N, T);
+        p = Data.p_vT(0.25*U.cm^3/U.C, 300*U.K);
+        //**Data.p_vT(V/N, T);
       else
         V = N*Data.v_pT(p, T);
       end if;
@@ -7474,8 +7477,9 @@ The default global default settings will be used for the current simulation.",
             // occur due to an assertion.
           end if;
         else
-          der(M*phi[axis])/U.s = chemical.mPhidot[axis] + common.mPhidot[axis]
-             + inert.mPhidot[axis] + Delta(p_face[cartAxes[axis], :])*A[
+          // **der(M*phi[axis])/U.s
+          Data.m*der(N*phi[axis])/U.s = chemical.mPhidot[axis] + common.mPhidot[
+            axis] + inert.mPhidot[axis] + Delta(p_face[cartAxes[axis], :])*A[
             cartAxes[axis]] + sum(Data.m*Delta(APdot_face[cartWrap(cartAxes[
             axis] - orientation), :, orientation] .* Ndot_face[cartWrap(
             cartAxes[axis] - orientation), :])/A[cartWrap(cartAxes[axis] -
