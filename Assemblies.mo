@@ -215,7 +215,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
         "Number of subregions along the channel";
       final parameter Integer n_z=size(L_z, 1)
         "Number of subregions across the channel";
-      // TODO: For GM cell, use dissimilar L_y and L_z for anode, cathode, and PEM.
+      // TODO:  For GM cell, use dissimilar L_y and L_z for anode, cathode, and PEM.
 
       // Essential analysis variables (x-axis electrical voltage, power, and current)
       output Q.Potential v=average(average(anFP.subregions[1, :, :].graphite.

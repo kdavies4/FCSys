@@ -10,7 +10,6 @@ package FCSys "Modelica library of fuel cell models"
 // the LaTeX document:
 //------------------------------------------------------------------------
 
-
 extends Modelica.Icons.Package;
 // extends FCSys.Icons.Cell;
 
@@ -22,7 +21,7 @@ import SI = Modelica.SIunits;
 // Functions
 import Modelica.Math;
 import arcsin = Modelica.Math.asin;
-// Note: The command line of Dymola 7.4 recognizes arcsin() rather than
+// Note:  The command line of Dymola 7.4 recognizes arcsin() rather than
 // asin().  In this package, arcsin() is used.  A similar note applies
 // to functions below.
 import arccos = Modelica.Math.acos;
@@ -37,9 +36,8 @@ import FCSys.BaseClasses.Side;
 import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
 import FCSys.Connectors.BaseClasses.ThermoOpt;
 import FCSys.Subregions.Reactions.BaseClasses.InitMethCharge;
-import FCSys.Subregions.Species.BaseClasses.InitMethLinMom;
+import FCSys.Subregions.Species.BaseClasses.InitMethVelocity;
 import FCSys.Subregions.Species.BaseClasses.InitMethScalar;
-
 
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
@@ -99,7 +97,7 @@ package UsersGuide "User's Guide"
             Introduction to the \"additivity of volume\" concept</li>
             <li><a href=\"modelica://FCSys.Connectors.InertDalton\">FCSys.Connectors.InertDalton</a> connector:
             Introduction to the \"additivity of pressure\" concept</li>
-            <li><a href=\"modelica://FCSys.Subregions.Species.BaseClasses.PartialSpecies\">FCSys.Subregions.Species.BaseClasses.PartialSpecies</a> model:
+            <li><a href=\"modelica://FCSys.Subregions.Species.Species\">FCSys.Subregions.Species.Species</a> model:
             Details about the exchange, transport, and storage of material, volume, linear momentum, and
             entropy</li>
             <li><a href=\"modelica://FCSys.Subregions.Reaction\">FCSys.Subregions.Reaction</a> model:
@@ -331,7 +329,7 @@ package UsersGuide "User's Guide"
     </ul></p>
 
 </html>"));
-    // TODO: Create the Modelica page and include it in the first paragraph too.
+    // TODO:  Create the Modelica page and include it in the first paragraph too.
     end Contact;
 
   class ModelicaLicense2 "Modelica License 2"
@@ -898,7 +896,6 @@ printing and shipping costs may be recovered.</p>
     end ModelicaLicense2;
   annotation (preferedView="info", DocumentationClass=true);
   end UsersGuide;
-
 
 annotation (
   uses(Modelica(version="3.2"), Modelica_LinearSystems2(version="2.1")),

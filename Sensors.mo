@@ -3,7 +3,7 @@ package Sensors "Models to measure conditions"
 
   extends Modelica.Icons.SensorsPackage;
 
-  // TODO: Recheck this package, fix errors and warnings.
+  // TODO:  Recheck this package, fix errors and warnings.
 
   package Chemical
     "<html>Sensors for the <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialChemical\">Chemical</a> and <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> connectors</html>"
@@ -1493,7 +1493,7 @@ sensor</a> models.
             enable=inclO2), Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
-        // Note: It would be helpful if Modelica allowed elements of expandable
+        // Note:  It would be helpful if Modelica allowed elements of expandable
         // connectors to be named by the contents of a string variable and the
         // name of an instance of a model was accessible through a string (like
         // %name is expanded to be the name of the instance of the model).  Then,
@@ -3049,7 +3049,7 @@ sensor</a> model.
             enable=inclO2), Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
-        // Note: It would be helpful if Modelica allowed elements of expandable
+        // Note:  It would be helpful if Modelica allowed elements of expandable
         // connectors to be named by the contents of a string variable and the
         // name of an instance of a model was accessible through a string (like
         // %name is expanded to be the name of the instance of the model).  Then,
@@ -5147,7 +5147,7 @@ sensor</a> model.
         equation
           y = negative.mu - positive.mu "Measurement";
           0 = negative.Ndot "Condition of no current";
-          // Note: In conjunction with the momentum rate balance, this means
+          // Note:  In conjunction with the momentum rate balance, this means
           // that there's no current into either face.
           annotation (Icon(graphics={Text(
                   extent={{-100,-20},{100,-50}},
@@ -5219,7 +5219,7 @@ sensor</a> model.
         equation
           y = negative.phi - positive.phi "Measurement";
           0 = negative.mPhidot "Condition of no compressive force";
-          // Note: In conjunction with the momentum rate balance, this means
+          // Note:  In conjunction with the momentum rate balance, this means
           // that there's no force on either face.
           annotation (
             Documentation(info="<html><p>If <code>ax=1</code>, then the difference in normal velocity
@@ -5301,7 +5301,7 @@ sensor</a> model.
         equation
           y = negative.T - positive.T "Measurement";
           0 = negative.Sdot "Adiabatic condition";
-          // Note: In conjunction with the energy rate balance, this means
+          // Note:  In conjunction with the energy rate balance, this means
           // that both faces are adiabatic.
           annotation (Icon(graphics={Text(
                   extent={{-100,-20},{100,-50}},

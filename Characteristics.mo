@@ -227,7 +227,7 @@ package Characteristics
   package C19HF37O5S "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S</html>"
     extends Modelica.Icons.Package;
     package Solid "C9HF17O5S solid"
-      // Note: HTML formatting isn't used in the description because
+      // Note:  HTML formatting isn't used in the description because
       // Dymola 7.4 doesn't support it in the GUI for replaceable lists.
       // The same applies to other species.
 
@@ -421,7 +421,7 @@ package Characteristics
         // assert(isCompressible,
         //  "The pressure is undefined since the material is incompressible.",
         //  AssertionLevel.warning);
-        // Note: In Dymola 7.4 the assertion level can't be set, although it has
+        // Note:  In Dymola 7.4 the assertion level can't be set, although it has
         // been defined as an argument to assert() since Modelica 3.0.
 
         p := if isCompressible then (if size(b_p, 1) == 1 and size(b_p, 2) == 1
@@ -469,7 +469,7 @@ package Characteristics
      <p>Assumptions:
      <ol>
      <li>There is one free (conduction) electron per atom of carbon.</li>
-     <li>The pressure-volume relationship is based on the Drude and Summerfeld theories of metals 
+     <li>The pressure-volume relationship is based on the Drude and Summerfeld theories of metals
      [<a href=\"modelica://FCSys.UsersGuide.References\">Ashcroft1976</a>, pp. 4&ndash;39].</li>
      </ol>
      </p>
@@ -508,7 +508,7 @@ package Characteristics
             1.0582450,248.75372*U.K,0.11736907e5*U.K^2,0.82758695},{-0.22364420,
             -0.69650442e4*U.K,-0.77771313e5*U.K^2,13.189369}});
 
-      // Note: In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
+      // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
       // doesn't.
 
       annotation (Documentation(info="<html>
@@ -557,7 +557,7 @@ package Characteristics
             0.39367933,-0.22524226e4*U.K,0.61217458e6*U.K^2,5.8011317},{-0.41858737,
             -0.14096649e5*U.K,0.19179190e8*U.K^2,14.345613}});
 
-      // Note: In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
+      // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
       // doesn't.
 
       annotation (Documentation(info="<html>
@@ -676,7 +676,7 @@ package Characteristics
 
       annotation (Documentation(info="<html><p>The enthalpy of formation (<code>Deltah0_f</code>) and the additional enthalpy
   offset (<code>h_offset</code>) are specified such that the enthalpy in the
-  <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSpecies\">PartialSpecies</a> model is referenced to zero at 0 &deg;C.
+  <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model is referenced to zero at 0 &deg;C.
   Otherwise, there is a very large bias that causes problems with the reaction.  The proper
   values are not known from the NASA CEA thermodynamic data
     [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>] (it only provides data for H<sup>+</sup> gas).
@@ -721,7 +721,7 @@ package Characteristics
         b_lambda={{0.85439436,105.73224*U.K,-0.12347848e5*U.K^2,0.47793128},{
             0.88407146,133.57293*U.K,-0.11429640e5*U.K^2,0.24417019},{2.4176185,
             0.80477749e4*U.K,0.31055802e7*U.K^2,-14.517761}});
-      // Note: In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
+      // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
       // doesn't.
 
       annotation (Documentation(info="<html>
@@ -770,7 +770,7 @@ package Characteristics
         b_lambda={{0.77229167,6.8463210*U.K,-0.58933377e4*U.K^2,1.2210365},{
             0.90917351,291.24182*U.K,-0.79650171e5*U.K^2,0.064851631},{-1.1218262,
             -0.19286378e5*U.K,0.23295011e8*U.K^2,20.342043}});
-      // Note: In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
+      // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
       // doesn't.
 
       annotation (Documentation(info="<html><p>Notes:<ul>
@@ -828,8 +828,8 @@ package Characteristics
     String(T_lim_alpha[1]/U.K) + ", " + String(T_lim_alpha[size(T_lim_alpha, 1)]
     /U.K) + "] K).");
   */
-        // Note: This is commented out so that the function can be inlined.
-        // Note: In Dymola 7.4 T_lim_alpha[end] can't be used instead of
+        // Note:  This is commented out so that the function can be inlined.
+        // Note:  In Dymola 7.4 T_lim_alpha[end] can't be used instead of
         // T_lim_alpha[size(T_lim_alpha, 1)] due to:
         //     "Error, not all "end" could be expanded."
 
@@ -838,7 +838,7 @@ package Characteristics
           b_eta_adj())[i, 1]*ln(T) + ((b_eta_adj())[i, 2] + (b_eta_adj())[i, 3]
           /T)/T + (b_eta_adj())[i, 4] else 0 for i in 1:size(T_lim_alpha, 1) -
           1))) annotation (Inline=true, smoothOrder=2);
-        // Note: The annotation is set assuming that the values of the constants
+        // Note:  The annotation is set assuming that the values of the constants
         // result in a function that is first-order continuous.
 
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
@@ -856,7 +856,7 @@ package Characteristics
       protected
         function b_lambda_adj
           "Return unit-adjusted NASA CEA constants for thermal conductivity"
-          // Note: If b_lambda were defined as a local constant instead of a
+          // Note:  If b_lambda were defined as a local constant instead of a
           // function, it would prevent the alpha_tau function from
           // being inlined.  If it were defined as a global final constant, it
           // would need to be updated manually when b_eta is changed.
@@ -875,8 +875,8 @@ package Characteristics
     String(T_lim_alpha[1]/U.K) + ", " + String(T_lim_alpha[size(T_lim_alpha, 1)]
     /U.K) + "] K).");
   */
-        // Note: This is commented out so that the function can be inlined.
-        // Note: In Dymola 7.4 T_lim_alpha[end] can't be used instead of
+        // Note:  This is commented out so that the function can be inlined.
+        // Note:  In Dymola 7.4 T_lim_alpha[end] can't be used instead of
         // T_lim_alpha[size(T_lim_alpha, 1)] due to:
         //     "Error, not all "end" could be expanded."
 
@@ -885,7 +885,7 @@ package Characteristics
           (b_lambda_adj())[i, 1]*ln(T) + ((b_lambda_adj())[i, 2] + (
           b_lambda_adj())[i, 3]/T)/T + (b_lambda_adj())[i, 4] else 0 for i in 1
           :size(T_lim_alpha, 1) - 1))) annotation (Inline=true, smoothOrder=2);
-        // Note: The annotation is set assuming that the values of the constants
+        // Note:  The annotation is set assuming that the values of the constants
         // result in a function that is first-order continuous.
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p></html>"));
@@ -903,7 +903,7 @@ package Characteristics
       constant String formula "Chemical formula";
       constant String phase "Material phase";
       constant Q.MassSpecific m(min=Modelica.Constants.small) "Specific mass";
-      // Note: The positive minimum value prevents a structural singularity
+      // Note:  The positive minimum value prevents a structural singularity
       // when checking FCSys.Subregions.Species.SpeciesInertStagnant in Dymola
       // 7.4.
       constant Q.LengthSpecific r "Specific radius" annotation (Dialog);
@@ -940,7 +940,7 @@ package Characteristics
         "true, if specific volume depends on temperature";
 
     protected
-      final constant Real pressPow[2]={specVolPow[1] - size(b_v, 1) + 1,
+      final constant Real pressPow[2]={-specVolPow[1] - size(b_v, 1) - 1,
           specVolPow[2] + 1}
         "Powers of v and T for 1st row and column of b_p, respectively";
       final constant Real b_p[size(b_v, 1), size(b_v, 2)]={(if specVolPow[1] +
@@ -989,8 +989,8 @@ package Characteristics
       String(T/U.K) + " K is out of range for " + name + " ([" + String(T_lim_c[1]
       /U.K) + ", " + String(T_lim_c[size(T_lim_c, 1)]/U.K) + "] K).");
     */
-        // Note: This is commented out so that the function can be inlined.
-        // Note: In Dymola 7.4 T_lim_c[end] can't be used instead of
+        // Note:  This is commented out so that the function can be inlined.
+        // Note:  In Dymola 7.4 T_lim_c[end] can't be used instead of
         // T_lim_c[size(T_lim_c, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
@@ -1073,7 +1073,6 @@ package Characteristics
            - i - specVolPow[1] - 1)*((i + specVolPow[1] - 1)*T*dp + (j +
           specVolPow[2] - i - specVolPow[1])*p*dT) for i in 1:size(b_v, 1))
           for j in 1:size(b_v, 2)) annotation (Inline=true, smoothOrder=999);
-
       end dv;
 
       function g "Gibbs potential as a function of pressure and temperature"
@@ -1109,8 +1108,8 @@ package Characteristics
     String(T/U.K) + " K is out of range for " + name + " ([" + String(T_lim_c[1]
     /U.K) + ", " + String(T_lim_c[size(T_lim_c, 1)]/U.K) + "] K).");
     */
-        // Note: This is commented out so that the function can be inlined.
-        // Note: In Dymola 7.4 T_lim_c[end] can't be used instead of
+        // Note:  This is commented out so that the function can be inlined.
+        // Note:  In Dymola 7.4 T_lim_c[end] can't be used instead of
         // T_lim_c[size(T_lim_c, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
@@ -1166,8 +1165,8 @@ package Characteristics
     String(T/U.K) + " K is out of range for " + name + " ([" + String(T_lim_c[1]
     /U.K) + ", " + String(T_lim_c[size(T_lim_c, 1)]/U.K) + "] K).");
     */
-        // Note: This is commented out so that the function can be inlined.
-        // Note: In Dymola 7.4 T_lim_c[end] can't be used instead of
+        // Note:  This is commented out so that the function can be inlined.
+        // Note:  In Dymola 7.4 T_lim_c[end] can't be used instead of
         // T_lim_c[size(T_lim_c, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
@@ -1196,7 +1195,7 @@ package Characteristics
         // assert(isCompressible,
         //  "The pressure is undefined since the material is incompressible.",
         //  AssertionLevel.warning);
-        // Note: In Dymola 7.4 the assertion level can't be set, although it has
+        // Note:  In Dymola 7.4 the assertion level can't be set, although it has
         // been defined as an argument to assert() since Modelica 3.0.
 
         p := if isCompressible then poly(
@@ -1243,8 +1242,8 @@ package Characteristics
     String(T/U.K) + " K is out of range for " + name + " ([" + String(T_lim_c[1]
     /U.K) + ", " + String(T_lim_c[size(T_lim_c, 1)]/U.K) + "] K).");
   */
-        // Note: This is commented out so that the function can be inlined.
-        // Note: In Dymola 7.4 T_lim_c[end] can't be used instead of
+        // Note:  This is commented out so that the function can be inlined.
+        // Note:  In Dymola 7.4 T_lim_c[end] can't be used instead of
         // T_lim_c[size(T_lim_c, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
@@ -1310,9 +1309,9 @@ package Characteristics
     virial equations are supported up to the fourth coefficient.  If additional terms are
     required, review the definition of <code>b_p</code> and modify it.</li>
     <li>The defaults for <code>b_v</code> and <code>specVolPow</code> represent ideal gas.</li>
-    <li><code>specVolPow</code> is defined as a <code>Real</code> vector.  However, 
+    <li><code>specVolPow</code> is defined as a <code>Real</code> vector.  However,
     special modifications are necessary if non-integer values are specified
-    (see <a href=\"modelica://FCSys.Characteristics.'e-'.Graphite\">'e-'.Graphite</a>).  
+    (see <a href=\"modelica://FCSys.Characteristics.'e-'.Graphite\">'e-'.Graphite</a>).
     <li><code>b_c</code>: The rows give the coefficients for different temperature ranges&mdash;bounded
     by the values in <code>T_lim_c</code>.
     The powers of <i>T</i> increase

@@ -2131,7 +2131,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
         "Extension of the Pendulum model with an additional input so that the model has the same number of inputs and outputs"
         extends Pendulum(final n_in=2);
         /*
-  Note: The setup by Rossiter currently fails for FCSys.Blocks.Continuous.Plants.Pendulum
+  Note:  The setup by Rossiter currently fails for FCSys.Blocks.Continuous.Plants.Pendulum
   because it has a different number of inputs and outputs.  The setup requires a system with
   the same number of inputs and outputs (see Rossiter (2003, p. 21)).  Here, a dummy input is
   added so that the Rossiter algorithm will complete without an error.  However, there is
@@ -3461,7 +3461,7 @@ This is discussed in the description of package
                 "#include \"FCSys/resources/source/C/qpOASES_C.h\"", Library=
                 "qpOASES");
           /*
-   Note: As of Dymola 7.4, may need to use this in Windows:
+   Note:  As of Dymola 7.4, may need to use this in Windows:
     Library="FCSys/bin/qpOASES"
    and this in Linux:
     Library="qpOASES"
@@ -3502,7 +3502,7 @@ This is discussed in the description of package
                 "#include \"FCSys/resources/source/C/qpOASES_C.h\"", Library=
                 "qpOASES");
           /*
-   Note: As of Dymola 7.4, may need to use this in Windows:
+   Note:  As of Dymola 7.4, may need to use this in Windows:
     Library="FCSys/bin/qpOASES"
    and this in Linux:
     Library="qpOASES"
@@ -3551,7 +3551,7 @@ This is discussed in the description of package
                 "#include \"FCSys/resources/source/C/qpOASES_C.h\"", Library=
                 "qpOASES");
           /*
-   Note: As of Dymola 7.4, may need to use this in Windows:
+   Note:  As of Dymola 7.4, may need to use this in Windows:
     Library="FCSys/bin/qpOASES"
    and this in Linux:
     Library="qpOASES"
@@ -3584,7 +3584,7 @@ This is discussed in the description of package
                   "#include \"FCSys/resources/source/C/qpOASES_C.h\"", Library=
                   "qpOASES");
             /*
-   Note: As of Dymola 7.4, may need to use this in Windows:
+   Note:  As of Dymola 7.4, may need to use this in Windows:
     Library="FCSys/bin/qpOASES"
    and this in Linux:
     Library="qpOASES"
@@ -3600,7 +3600,7 @@ This is discussed in the description of package
                   "#include \"FCSys/resources/source/C/qpOASES_C.h\"", Library=
                   "qpOASES");
             /*
-   Note: As of Dymola 7.4, may need to use this in Windows:
+   Note:  As of Dymola 7.4, may need to use this in Windows:
     Library="FCSys/bin/qpOASES"
    and this in Linux:
     Library="qpOASES"
@@ -4682,7 +4682,7 @@ Example:
 
     block AddSkipInclIncl "Add or subtract two inputs"
       // extends FCSys.Blocks.BaseClasses.MO(final n_out=n);
-      // TODO: Fix the icon.
+      // TODO:  Fix the icon.
       parameter Boolean isPos1=true
         "true: 1st input is positive; false: negative"
         annotation (Dialog(enable=Include1));
@@ -4764,7 +4764,7 @@ Example:
 
     block AddInclInclIncl "Add or subtract three inputs"
       // extends FCSys.Blocks.BaseClasses.MO(final n_out=n);
-      // TODO: Fix the icon.
+      // TODO:  Fix the icon.
       parameter Boolean isPos1=true
         "true: 1st input is positive; false: negative";
       parameter Boolean isPos2=true
@@ -4871,7 +4871,7 @@ Example:
 
     block AddInclInclSkip "Add or subtract two inputs"
       // extends FCSys.Blocks.BaseClasses.MO(final n_out=n);
-      // TODO: Fix the icon.
+      // TODO:  Fix the icon.
       parameter Boolean isPos1=true
         "true: 1st input is positive; false: negative"
         annotation (Dialog(enable=Include1));
@@ -4955,7 +4955,7 @@ Example:
 
     block AddInclSkipIncl "Add or subtract two inputs"
       // extends FCSys.Blocks.BaseClasses.MO(final n_out=n);
-      // TODO: Fix the icon.
+      // TODO:  Fix the icon.
       parameter Boolean isPos1=true
         "true: 1st input is positive; false: negative"
         annotation (Dialog(enable=Include1));

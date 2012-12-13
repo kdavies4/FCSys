@@ -1670,7 +1670,7 @@ package Figures "Layouts for documentation"
       parameter Real k[2]=1*U.A*{(U.cm^3/U.C)^sum(max(nu[i], 0) for i in 1:size(
           nu, 1)),(U.cm^3/U.C)^sum(-min(nu[i], 0) for i in 1:size(nu, 1))}
         "Forward and reverse reaction coefficients";
-      // Note: The units are not consistent, but the form is correct.
+      // Note:  The units are not consistent, but the form is correct.
 
       parameter Q.Volume V=1*U.cm^3 "Volume";
       parameter Q.Amount N_IC[n_spec]=fill(4*U.C, n_spec)
@@ -1746,7 +1746,7 @@ package Figures "Layouts for documentation"
       // extends FCSys.BaseClasses.Icons.Names.Top2;
 
       parameter Real R=1*U.s/U.cm^3 "Material resistance";
-      // Note: The dimensions are not consistent, but the form is correct.
+      // Note:  The dimensions are not consistent, but the form is correct.
       parameter Q.Volume V=1*U.cm^3 "Volume";
       parameter Q.Amount N_IC=4*U.C
         "<html>Initial amount (<i>N</i><sub>IC</sub></html>";

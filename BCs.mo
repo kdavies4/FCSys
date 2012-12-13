@@ -2,14 +2,14 @@ within FCSys;
 package BCs "Models for boundary conditions"
   extends Modelica.Icons.SourcesPackage;
 
-  // TODO: Recheck this package, fix errors and warnings.
+  // TODO:  Recheck this package, fix errors and warnings.
 
   package Examples "Examples and tests"
     extends Modelica.Icons.ExamplesPackage;
     model Environment "<html>Test the <code>Environment</code> model</html>"
       extends Modelica.Icons.Example;
 
-      // TODO: Make this into a meaningful example.
+      // TODO:  Make this into a meaningful example.
       FCSys.BCs.Defaults default
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
     end Environment;
@@ -115,7 +115,7 @@ package BCs "Models for boundary conditions"
     model Router "<html>Test the <code>Router<code> model</html>"
       extends Modelica.Icons.Example;
 
-      // TODO: Make this into a meaningful example.
+      // TODO:  Make this into a meaningful example.
       FCSys.BCs.Router router
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
     end Router;
@@ -413,7 +413,7 @@ package BCs "Models for boundary conditions"
       "<html>Fluid adapter between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
       extends FCSys.BaseClasses.Icons.Names.Top3;
 
-      // TODO: Fix this; there may be issues with the energy/entropy rate balance.
+      // TODO:  Fix this; there may be issues with the energy/entropy rate balance.
 
       parameter Q.Area A=1*U.cm^2 "Area of the connection surface";
       replaceable package Medium = Modelica.Media.Interfaces.PartialMedium (
@@ -1624,7 +1624,7 @@ package BCs "Models for boundary conditions"
             enable=inclO2), Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
-        // Note: It would be helpful if Modelica allowed elements of expandable
+        // Note:  It would be helpful if Modelica allowed elements of expandable
         // connectors to be named by the contents of a string variable and the
         // name of an instance of a model was accessible through a string (like
         // %name is expanded to be the name of the instance of the model).  Then,
@@ -1883,7 +1883,7 @@ package BCs "Models for boundary conditions"
             enable='incle-'), Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
-        // Note: It would be helpful if Modelica allowed elements of expandable
+        // Note:  It would be helpful if Modelica allowed elements of expandable
         // connectors to be named by the contents of a string variable and the
         // name of an instance of a model was accessible through a string (like
         // %name is expanded to be the name of the instance of the model).  Then,
@@ -2819,7 +2819,7 @@ boundary condition</a> models.
           extends FCSys.BCs.InertAmagat.BaseClasses.PartialBC;
 
           constant BCType bCType "Type of BC";
-          // Note: This is included so that the type of BC is recorded with the
+          // Note:  This is included so that the type of BC is recorded with the
           // results.
         equation
           inert.mPhidot = zeros(n_vel) "No force";
@@ -2865,7 +2865,7 @@ boundary condition</a> models.
             annotation (HideResult=true);
           constant FCSys.BCs.InertAmagat.Momentum.BaseClasses.BCType bCType
             "Type of BC";
-          // Note: This is included so that the type of BC is recorded with the
+          // Note:  This is included so that the type of BC is recorded with the
           // results.
         equation
           inert.V = 0 "No volume";
@@ -2923,7 +2923,7 @@ boundary condition</a> models.
         partial model PartialBC "Partial model for a BC for entropy"
           extends FCSys.BCs.InertAmagat.BaseClasses.PartialBC;
           constant BCType bCType "Type of BC";
-          // Note: This is included so that the type of BC is recorded with the
+          // Note:  This is included so that the type of BC is recorded with the
           // results.
 
         equation
@@ -3350,7 +3350,7 @@ boundary condition</a> models.
           extends FCSys.BCs.InertDalton.BaseClasses.PartialBC;
 
           constant BCType bCType "Type of BC";
-          // Note: This is included so that the type of BC is recorded with the
+          // Note:  This is included so that the type of BC is recorded with the
           // results.
         equation
           inert.mPhidot = zeros(n_vel) "No force";
@@ -3396,7 +3396,7 @@ boundary condition</a> models.
             annotation (HideResult=true);
           constant FCSys.BCs.InertDalton.Momentum.BaseClasses.BCType bCType
             "Type of BC";
-          // Note: This is included so that the type of BC is recorded with the
+          // Note:  This is included so that the type of BC is recorded with the
           // results.
         equation
           inert.p = 0 "No pressure";
@@ -3453,7 +3453,7 @@ boundary condition</a> models.
         partial model PartialBC "Partial model for a BC for entropy"
           extends FCSys.BCs.InertDalton.BaseClasses.PartialBC;
           constant BCType bCType "Type of BC";
-          // Note: This is included so that the type of BC is recorded with the
+          // Note:  This is included so that the type of BC is recorded with the
           // results.
         equation
           inert.p = 0 "No pressure";
@@ -3903,7 +3903,7 @@ boundary condition</a> models.
             enable=inclO2), Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
-        // Note: It would be helpful if Modelica allowed elements of expandable
+        // Note:  It would be helpful if Modelica allowed elements of expandable
         // connectors to be named by the contents of a string variable and the
         // name of an instance of a model was accessible through a string (like
         // %name is expanded to be the name of the instance of the model).  Then,
@@ -4931,7 +4931,7 @@ boundary condition</a> models.
 
         // Material
         final parameter Boolean open=thermoOpt == ThermoOpt.OpenDiabatic "Open";
-        // Note: Dymola 7.4 doesn't recognize enumerations in the dialog enable
+        // Note:  Dymola 7.4 doesn't recognize enumerations in the dialog enable
         // option, e.g.,
         //     enable=thermoOpt=ThermoOpt.OpenDiabatic.
         // Therefore, the values of the enumerations are specified numerically for
@@ -5282,7 +5282,7 @@ boundary condition</a> models.
           partial model PartialBC "Partial model for a material BC"
             extends FCSys.BaseClasses.Icons.BCs.Single;
             constant BCType bCType "Type of BC";
-            // Note: This is included so that the type of BC is recorded with the
+            // Note:  This is included so that the type of BC is recorded with the
             // results.
             Connectors.RealInput u "Value of BC" annotation (Placement(
                   transformation(
@@ -5331,7 +5331,7 @@ boundary condition</a> models.
             extends FCSys.BaseClasses.Icons.BCs.Single;
             constant FCSys.BCs.Face.Species.Momentum.BaseClasses.BCType bCType
               "Type of BC";
-            // Note: This is included so that the type of BC is recorded with the
+            // Note:  This is included so that the type of BC is recorded with the
             // results.
             Connectors.RealInput u "Value of BC" annotation (Placement(
                   transformation(
@@ -5394,7 +5394,7 @@ boundary condition</a> models.
           partial model PartialBC "Partial model for a BC for entropy"
             extends FCSys.BaseClasses.Icons.BCs.Single;
             constant BCType bCType "Type of BC";
-            // Note: This is included so that the type of BC is recorded with the
+            // Note:  This is included so that the type of BC is recorded with the
             // results.
             Connectors.RealInput u "Value of BC" annotation (Placement(
                   transformation(
@@ -5428,7 +5428,7 @@ boundary condition</a> models.
 
         // Material
         final parameter Boolean open=thermoOpt == ThermoOpt.OpenDiabatic "Open";
-        // Note: Dymola 7.4 doesn't recognize enumerations in the dialog enable
+        // Note:  Dymola 7.4 doesn't recognize enumerations in the dialog enable
         // option, e.g.,
         //     enable=thermoOpt=ThermoOpt.OpenDiabatic.
         // Therefore, the values of the enumerations are specified numerically for
@@ -6151,7 +6151,7 @@ boundary condition</a> model.
             __Dymola_descriptionLabel=true,
             enable=inclO2), Placement(transformation(extent={{-10,-10},{10,10}})));
       equation
-        // Note: It would be helpful if Modelica allowed elements of expandable
+        // Note:  It would be helpful if Modelica allowed elements of expandable
         // connectors to be named by the contents of a string variable and the
         // name of an instance of a model was accessible through a string (like
         // %name is expanded to be the name of the instance of the model).  Then,
@@ -8500,7 +8500,7 @@ boundary condition</a> model.
           partial model PartialBC "Partial model for a material BC"
             extends FCSys.BaseClasses.Icons.BCs.Double;
             constant BCType bCType "Type of BC";
-            // Note: This is included so that the type of BC is recorded with the
+            // Note:  This is included so that the type of BC is recorded with the
             // results.
             Connectors.RealInput u "Value of BC" annotation (Placement(
                   transformation(
@@ -8560,7 +8560,7 @@ boundary condition</a> model.
             constant
               FCSys.BCs.FaceDifferential.Species.Momentum.BaseClasses.BCType
               bCType "Type of BC";
-            // Note: This is included so that the type of BC is recorded with the
+            // Note:  This is included so that the type of BC is recorded with the
             // results.
             Connectors.RealInput u "Value of BC" annotation (Placement(
                   transformation(
@@ -8637,7 +8637,7 @@ boundary condition</a> model.
           partial model PartialBC "Partial model for a BC for entropy"
             extends FCSys.BaseClasses.Icons.BCs.Double;
             constant BCType bCType "Type of BC";
-            // Note: This is included so that the type of BC is recorded with the
+            // Note:  This is included so that the type of BC is recorded with the
             // results.
             Connectors.RealInput u "Value of BC" annotation (Placement(
                   transformation(
@@ -8795,7 +8795,7 @@ those generated by the model's <code>connect</code> statements.</p>
       final max=1,
       displayUnit="%") = 0.2
       "<html>Gas H<sub>2</sub>O fraction (<i>y</i><sub>H2O</sub>)</html>";
-    // TODO: Cast this in terms of relative humidity.
+    // TODO:  Cast this in terms of relative humidity.
 
     annotation (
       defaultComponentPrefixes="inner",
@@ -8966,7 +8966,7 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
         "velocities of fluid flow at device boundary";
       SI.EnergyFlowRate[nPorts] ports_E_flow
         "flow of kinetic and potential energy at device boundary";
-      // Note: should use fluidLevel_start - portsData.height
+      // Note:  should use fluidLevel_start - portsData.height
       Real[nPorts] s(each start=fluidLevel_max)
         "curve parameters for port flows vs. port pressures; for further details see, Modelica Tutorial: Ideal switching devices";
       Real[nPorts] ports_penetration
@@ -8994,7 +8994,7 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
       // Treatment of use_portsData=false to neglect portsData and to not require its specification either in this case.
       // Remove portsData conditionally if use_portsData=false. Simplify their use in model equations by always
       // providing portsData_diameter and portsData_height, independent of the use_portsData setting.
-      // Note: this moreover serves as work-around if a tool doesn't support a zero sized portsData record.
+      // Note:  this moreover serves as work-around if a tool doesn't support a zero sized portsData record.
       Modelica.Blocks.Interfaces.RealInput[nPorts] portsData_diameter_internal=
           portsData.diameter if use_portsData and nPorts > 0;
       Modelica.Blocks.Interfaces.RealInput[nPorts] portsData_height_internal=
@@ -9051,14 +9051,14 @@ of the modeler. Increase nPorts to add an additional port.
       for i in 1:nPorts loop
         if use_portsData then
           // dp = 0.5*zeta*d*v*|v|
-          // Note: assume vessel_ps_static for portDensities to avoid algebraic loops for ports.p
+          // Note:  assume vessel_ps_static for portDensities to avoid algebraic loops for ports.p
           portDensities[i] = noEvent(Medium.density(Medium.setState_phX(
                 vessel_ps_static[i],
                 actualStream(ports[i].h_outflow),
                 actualStream(ports[i].Xi_outflow))));
           portVelocities[i] = smooth(0, ports[i].m_flow/portAreas[i]/
             portDensities[i]);
-          // Note: the penetration should not go too close to zero as this would prevent a vessel from running empty
+          // Note:  the penetration should not go too close to zero as this would prevent a vessel from running empty
           ports_penetration[i] = Modelica.Fluid.Utilities.regStep(
                 fluidLevel - portsData_height[i] - 0.1*portsData_diameter[i],
                 1,
@@ -9073,7 +9073,7 @@ of the modeler. Increase nPorts to add an additional port.
         // fluid flow through ports
         if fluidLevel >= portsData_height[i] then
           // regular operation: fluidLevel is above ports[i]
-          // Note: >= covers default values of zero as well
+          // Note:  >= covers default values of zero as well
           if use_portsData then
             /* Without regularization
         ports[i].p = vessel_ps_static[i] + 0.5*ports[i].m_flow^2/portAreas[i]^2

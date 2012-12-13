@@ -1206,7 +1206,6 @@ used as the inlet. The z axis extends across the width of the channel.</p></html
               visible=not inclYFaces,
               lineColor={0,0,0})}),
         Diagram(graphics));
-
     end AnFP;
 
     model GM "General Motors cathodic test flow plate and current collector"
@@ -1247,7 +1246,7 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
     extends Modelica.Icons.Package;
     model AnGDL "Anode gas diffusion layer"
       //extends FCSys.BaseClasses.Icons.Names.Top4;
-      // Note: Extensions of AnGDL should be placed directly in the AnGDLs
+      // Note:  Extensions of AnGDL should be placed directly in the AnGDLs
       // package rather than nested packages (e.g., by manufacturer) so that
       // __Dymola_choicesFromPackage can be used.  In Dymola 7.4 the
       // parameter dialogs launch too slowly when __Dymola_choicesAllMatching
@@ -1283,14 +1282,14 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
 
       parameter Q.NumberAbsolute x(nominal=1) = 0.76 "Volumetric porosity";
       // The default porosity is for Sigracet 24 BC.
-      // Note: The diffusion coefficients for species that are transported
+      // Note:  The diffusion coefficients for species that are transported
       // through the pores (e.g., gases) are adjusted by a factor of
       // x^(2/3), where the power of 2/3 converts the volumetric porosity to
       // areic porosity.  The diffusion coefficient for the species that is
       // transported through the solid (electrons) is adjusted by a factor of
       // (1 - x)^(2/3).  This is contrary to Weber and Newman [Weber2004, p. 4696,
       // Eq. 38], who use a factor of (1 - x)^(3/2).
-      // Note: Porosity may be lower once assembled (and compressed).  Bernardi
+      // Note:  Porosity may be lower once assembled (and compressed).  Bernardi
       // and Verbrugge give x = 0.4 [Bernardi1992, p. 2483, Table 3].
 
       // Auxiliary variables (for analysis)
@@ -1632,11 +1631,11 @@ the z axis extends across the width of the channel.</p></html>"),
     protected
       final parameter Q.Volume xV=x*V "Gas volume";
 
-      // TODO: Add H2O to the ionomer according to lambda_IC.
-      // TODO: Include reaction to absorb H2O into ionomer.
+      // TODO:  Add H2O to the ionomer according to lambda_IC.
+      // TODO:  Include reaction to absorb H2O into ionomer.
       // Assume zero volume of H2O in the ionomer?
 
-      // TODO: Clean up (move to Species models if possible):
+      // TODO:  Clean up (move to Species models if possible):
 
       // Volumic density of free protons from [Spry2009, p. 10214]:
       //   @ lambda = 12: 0.95 M
@@ -1685,7 +1684,7 @@ the z axis extends across the width of the channel.</p></html>"),
       //     SGL Sigracet 24 BC GDL: (11 mohm.cm2)*(1 - 0.76)^1.5/(0.235 mm) = 0.5504 mohm.m, based on electrical resistivity (through plane), porosity, and thickness from [SGL2004]
       //     SGL Sigracet 25 BA GDL: (10 mohm.cm2)*(1 - 0.88)^1.5/(0.190 mm) = 0.2188 mohm.m, based on electrical resistivity (through plane), porosity, and thickness from [SGL2004]
       //     SGL Sigracet 25 BC GDL: (12 mohm.cm2)*(1 - 0.80)^1.5/(0.235 mm) = 0.4567 mohm.m, based on electrical resistivity (through plane), porosity, and thickness from [SGL2004]
-      // Note: Based on [Weber2004, p. 4696, Eq. 38], the resistivity of GDL is adjusted by a factor of (1 - epsilon)^-1.5,
+      // Note:  Based on [Weber2004, p. 4696, Eq. 38], the resistivity of GDL is adjusted by a factor of (1 - epsilon)^-1.5,
       // assuming all of the solid volume is electrically conducting.
       // (1 - epsilon) is the volume fraction of the conducting solid, and the power of (1 - epsilon)^(3/2) is the area fraction of the conducting solid.
 
@@ -1811,7 +1810,7 @@ the z axis extends across the width of the channel.</p>
     extends Modelica.Icons.Package;
     model PEM "Proton exchange membrane"
       //extends FCSys.BaseClasses.Icons.Names.Top4;
-      // Note: Extensions of PEM should be placed directly in the PEMs
+      // Note:  Extensions of PEM should be placed directly in the PEMs
       // package rather than nested packages (e.g., by manufacturer) so that
       // __Dymola_choicesFromPackage can be used.  In Dymola 7.4 the
       // parameter dialogs launch too slowly when __Dymola_choicesAllMatching
@@ -1845,9 +1844,9 @@ the z axis extends across the width of the channel.</p>
         "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>)</html>"
         annotation (Dialog(group="Initialization"));
 
-      // TODO: Clean up (move to Species models if possible):
+      // TODO:  Clean up (move to Species models if possible):
 
-      // Note: In Dymola 7.4 the following can't be used:
+      // Note:  In Dymola 7.4 the following can't be used:
       //     each final N_IC=lambda_IC*subregions[1, 1, 1].ionomer.C19HF37O5S.N_IC)
       // due to the following error:
       //     "The left hand side of the following equation is a scalar and the
@@ -1875,7 +1874,7 @@ the z axis extends across the width of the channel.</p>
       //     @ lambda = 22: 0.54 M
       // where lambda is the ratio of water molecules to sulfonic acid units.
 
-      // TODO: Add proper value of alpha_Ndot and alpha_tau for the resistance to H+ transport.
+      // TODO:  Add proper value of alpha_Ndot and alpha_tau for the resistance to H+ transport.
 
     protected
       outer BCs.Defaults defaults "Default settings" annotation (Placement(
@@ -2125,8 +2124,8 @@ the z axis extends across the width of the channel.</p>
       parameter Q.NumberAbsolute lambda_IC=14
         "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>)</html>"
         annotation (Dialog(group="Initialization"));
-      // TODO: Add H2O to the ionomer according to lambda_IC.
-      // TODO: Include reaction to absorb H2O into ionomer.
+      // TODO:  Add H2O to the ionomer according to lambda_IC.
+      // TODO:  Include reaction to absorb H2O into ionomer.
       // Assume zero volume of H2O in the ionomer?
 
       // Auxiliary variables (for analysis)
@@ -2266,7 +2265,7 @@ the z axis extends across the width of the channel.</p>
 
   package CaGDLs "Cathode gas diffusion layers"
     extends Modelica.Icons.Package;
-    // Note: Extensions of CaGDL should be placed directly in the CaGDLs
+    // Note:  Extensions of CaGDL should be placed directly in the CaGDLs
     // package rather than nested packages (e.g., by manufacturer) so that
     // __Dymola_choicesFromPackage can be used.  In Dymola 7.4 the
     // parameter dialogs launch too slowly when __Dymola_choicesAllMatching
@@ -2274,7 +2273,7 @@ the z axis extends across the width of the channel.</p>
 
     model CaGDL "Cathode gas diffusion layer"
       //extends FCSys.BaseClasses.Icons.Names.Top4;
-      // Note: Extensions of CaGDL should be placed directly in the CaGDLs
+      // Note:  Extensions of CaGDL should be placed directly in the CaGDLs
       // package rather than nested packages so that __Dymola_choicesFromPackage
       // can be used.  In Dymola 7.4 the parameter dialogs launch too slowly
       // when __Dymola_choicesAllMatching is used.
@@ -2956,7 +2955,7 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
       connect(zNegative, zPositive)
         "Direct pass-through (not shown the diagram)";
     end if;
-    // TODO: Once primitivesVisible is supported, complete the icon for this
+    // TODO:  Once primitivesVisible is supported, complete the icon for this
     // model and use primitivesVisible=false in the icons of the fuel cell
     // layer models.
     annotation (

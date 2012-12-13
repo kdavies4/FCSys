@@ -54,7 +54,6 @@ package Connectors "Declarative and imperative connectors"
               extent={{-100,20},{100,60}},
               textString="%name",
               lineColor={0,0,0})}));
-
   end ChemicalBusInternal;
 
   connector ChemicalInput
@@ -64,7 +63,7 @@ package Connectors "Declarative and imperative connectors"
 
     input Q.MassSpecific m "Specific mass";
     input String formula(start="") "Chemical formula";
-    // Note: The start value prevents a warning when checked in Dymola 7.4.
+    // Note:  The start value prevents a warning when checked in Dymola 7.4.
     annotation (
       defaultComponentName="chemical",
       Documentation(info="<html><p>For more information, see the documentation in the
@@ -81,7 +80,6 @@ package Connectors "Declarative and imperative connectors"
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
               lineColor={208,104,0})}));
-
   end ChemicalInput;
 
   connector ChemicalOutput
@@ -100,7 +98,6 @@ package Connectors "Declarative and imperative connectors"
       Icon(graphics={Ellipse(extent={{-100,100},{100,-100}}, lineColor={208,104,
                 0})}),
       Diagram(graphics));
-
   end ChemicalOutput;
 
   expandable connector FaceBus
@@ -178,7 +175,6 @@ package Connectors "Declarative and imperative connectors"
               extent={{-100,20},{100,60}},
               textString="%name",
               lineColor={0,0,0})}));
-
   end FaceBusInternal;
 
   connector FaceX
@@ -213,7 +209,6 @@ package Connectors "Declarative and imperative connectors"
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(extent={{-100,100},{100,-100}},
               lineColor={127,127,127})}));
-
   end FaceX;
 
   connector FaceY
@@ -248,7 +243,6 @@ package Connectors "Declarative and imperative connectors"
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(extent={{-100,100},{100,-100}},
               lineColor={127,127,127})}));
-
   end FaceY;
 
   connector FaceZ
@@ -283,7 +277,6 @@ package Connectors "Declarative and imperative connectors"
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(extent={{-100,100},{100,-100}},
               lineColor={127,127,127})}));
-
   end FaceZ;
 
   connector FaceGeneric
@@ -328,7 +321,6 @@ package Connectors "Declarative and imperative connectors"
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(extent={{-100,100},{100,-100}},
               lineColor={127,127,127})}));
-
   end FaceGeneric;
 
   connector Inert
@@ -378,7 +370,6 @@ package Connectors "Declarative and imperative connectors"
             fillColor={255,255,255},
             fillPattern=FillPattern.Solid,
             lineColor={72,90,180})}));
-
   end Inert;
 
   connector InertAmagat
@@ -438,7 +429,6 @@ package Connectors "Declarative and imperative connectors"
             extent={{-100,80},{100,-90}},
             lineColor={0,0,0},
             textString="A")}));
-
   end InertAmagat;
 
   connector InertDalton
@@ -489,7 +479,6 @@ package Connectors "Declarative and imperative connectors"
             extent={{-100,80},{100,-90}},
             lineColor={0,0,0},
             textString="D")}));
-
   end InertDalton;
 
   connector InertInternal
@@ -537,7 +526,6 @@ package Connectors "Declarative and imperative connectors"
             fillColor={255,255,255},
             fillPattern=FillPattern.Solid,
             lineColor={72,90,180})}));
-
   end InertInternal;
 
   connector Material "Connector for material transport"
@@ -568,7 +556,6 @@ package Connectors "Declarative and imperative connectors"
             points={{-100,0},{100,0}},
             color={0,0,0},
             smooth=Smooth.None)}));
-
   end Material;
 
   connector Mechanical "Connector for transverse displacement"
@@ -610,7 +597,6 @@ package Connectors "Declarative and imperative connectors"
             points={{0,100},{0,-100}},
             color={0,0,0},
             smooth=Smooth.None)}));
-
   end Mechanical;
 
   connector Thermal "Connector to transport entropy"
@@ -650,7 +636,6 @@ package Connectors "Declarative and imperative connectors"
             points={{-100,-100},{100,100}},
             color={0,0,0},
             smooth=Smooth.None)}));
-
   end Thermal;
 
   connector RealInput = input Real
@@ -743,7 +728,6 @@ Protected connector with one input signal of type <code>Real</code>.</p>
               extent={{-200,50},{200,90}},
               textString="%name",
               lineColor={0,0,0})}));
-
   end RealInputBus;
 
   expandable connector RealInputBusInternal
@@ -779,7 +763,6 @@ Protected connector with one input signal of type <code>Real</code>.</p>
               fillColor={0,0,127},
               fillPattern=FillPattern.Solid,
               lineThickness=0.5)}));
-
   end RealInputBusInternal;
 
   connector RealOutput = output Real
@@ -866,7 +849,6 @@ Protected connector with one output signal of type <code>Real</code>.</p>
               extent={{-200,50},{200,90}},
               textString="%name",
               lineColor={0,0,0})}));
-
   end RealOutputBus;
 
   expandable connector RealOutputBusInternal
@@ -900,7 +882,6 @@ Protected connector with one output signal of type <code>Real</code>.</p>
               extent={{-200,24},{200,64}},
               textString="%name",
               lineColor={0,0,0})}));
-
   end RealOutputBusInternal;
 
   package BaseClasses "Base classes (not for direct use)"
@@ -944,7 +925,6 @@ Protected connector with one output signal of type <code>Real</code>.</p>
               lineColor={208,104,0},
               fillPattern=FillPattern.Solid,
               fillColor={255,128,0})}));
-
     end PartialChemical;
 
     connector PartialFace
@@ -989,7 +969,6 @@ Protected connector with one output signal of type <code>Real</code>.</p>
               lineColor={127,127,127},
               fillColor={191,191,191},
               fillPattern=FillPattern.Solid)}));
-
     end PartialFace;
 
     type ThermoOpt = enumeration(
@@ -1012,15 +991,15 @@ Protected connector with one output signal of type <code>Real</code>.</p>
   The chemical connectors (<a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a>,
   <a href=\"modelica://FCSys.Connectors.ChemicalBusInternal\">ChemicalBusInternal</a>,
   <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a>, and
-  <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a>) 
+  <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a>)
   represent advective exchange among species that react chemically
-  within a subregion.  
+  within a subregion.
   The inert connectors
   (<a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a>,
   <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a>,
   <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a>, and
   <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a>)
-  describe diffusive exchange among species within a subregion.  
+  describe diffusive exchange among species within a subregion.
   The face connectors (<a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>,
   <a href=\"modelica://FCSys.Connectors.FaceBusInternal\">FaceBusInternal</a>,
   <a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a>,
@@ -1030,11 +1009,11 @@ Protected connector with one output signal of type <code>Real</code>.</p>
   describe advective and diffusive transport between instances of a single
   species in
   neighboring regions or subregions.</p>
-  
+
   <p>The effort/flow pairs of the connectors are listed in <a href=\"#Tab1\">Table 1</a>.
   The pairs are generally named by the quantity that is exchanged or
   transported (i.e., the integral of the flow variable).
-  The dimensions of the efforts and flows are noted in terms of mass (M), 
+  The dimensions of the efforts and flows are noted in terms of mass (M),
   amount or particle number (N),
   length (L), and time (T).  The pairs are used to describe the
   transfer of material, linear momentum, and energy associated with material,
@@ -1042,7 +1021,7 @@ Protected connector with one output signal of type <code>Real</code>.</p>
   thermal convection) and diffusion (e.g., friction and thermal conduction)
   are resolved (see the
   <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model).</p>
-  
+
     <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
     <caption align=\"bottom\" id=\"Tab1\"><b>Table 1:</b> Summary of the effort/flow pairs.</caption>
       <tr>
@@ -1134,7 +1113,7 @@ Protected connector with one output signal of type <code>Real</code>.</p>
         <td valign=middle>Pressure<br><i>p</i> [M L<sup>-1</sup> T<sup>-2</sup>]</td>
       </tr>
     </table>
-  
+
   <p>The product of the efforts and flows of the linear momentum, transverse displacement,
   and entropy pairs is the rate of energy associated with the interaction.
   However, many of the pairs are different.
@@ -1156,9 +1135,9 @@ Protected connector with one output signal of type <code>Real</code>.</p>
   connectors have linear momentum and enthalpy pairs that are used to describe the purely advective
   (non-diffusive) flow associated with the material exchange (see the
   <a href=\"modelica://FCSys.Subregions.Reaction\">Reaction</a> model for details).  Although
-  the physical variables are acausal, the  
+  the physical variables are acausal, the
   <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> and
-  <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connectors have inputs and 
+  <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connectors have inputs and
   outputs to pass characteristic data of the species&mdash;the chemical formula and specific mass.
   This information is used to determine the appropriate
   stoichiometry and advection equations in the
@@ -1174,31 +1153,31 @@ Protected connector with one output signal of type <code>Real</code>.</p>
   applies additivity of pressure to mix species within a material phase (e.g., N<sub>2</sub> and O<sub>2</sub>
   within a gas).
   The two cannot be directly connected because the effort/flow designations
-  are opposite.  An adapter must be used 
+  are opposite.  An adapter must be used
   (e.g., <a href=\"modelica://FCSys.Subregions.PhaseBoundary\">FCSys.Subregions.PhaseBoundary</a>).</p>
 
   <p>The face connectors contain <a href=\"modelica://FCSys.Connectors.Material\">Material</a>,
-  <a href=\"modelica://FCSys.Connectors.Material\">Mechanical</a>, and 
-  <a href=\"modelica://FCSys.Connectors.Material\">Thermal</a> subconnectors.  
+  <a href=\"modelica://FCSys.Connectors.Material\">Mechanical</a>, and
+  <a href=\"modelica://FCSys.Connectors.Material\">Thermal</a> subconnectors.
   <a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a>,
   <a href=\"modelica://FCSys.Connectors.FaceY\">FaceY</a>,
   <a href=\"modelica://FCSys.Connectors.FaceZ\">FaceZ</a>, and
   <a href=\"modelica://FCSys.Connectors.FaceGeneric\">FaceGeneric</a>
-  differ only in the name of the mechanical subconnectors, which describe transverse displacement.  
-  For example, <a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a> has 
+  differ only in the name of the mechanical subconnectors, which describe transverse displacement.
+  For example, <a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a> has
   <a href=\"modelica://FCSys.Connectors.Material\">Mechanical</a> subconnectors named
   <code>mechanicalY</code> and <code>mechanicalZ</code>.</p>
-  
-  <p><a href=\"#Fig1\">Figure 1</a> shows the instantiation hierarchy of the connectors.  
+
+  <p><a href=\"#Fig1\">Figure 1</a> shows the instantiation hierarchy of the connectors.
   <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a>
   is an expandable connector that groups
   <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> and
   <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalOutput</a> connectors
-  of multiple species.  Likewise, 
+  of multiple species.  Likewise,
   <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> groups
   <a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a>, <a href=\"modelica://FCSys.Connectors.FaceY\">FaceY</a>,
   <a href=\"modelica://FCSys.Connectors.FaceZ\">FaceZ</a>, or <a href=\"modelica://FCSys.Connectors.FaceGeneric\">FaceGeneric</a>
-  connectors of multiple species.  
+  connectors of multiple species.
   The
   <a href=\"modelica://FCSys.Connectors.ChemicalBusInternal\">ChemicalBusInternal</a> and
   <a href=\"modelica://FCSys.Connectors.FaceBusInternal\">FaceBusInternal</a> connectors (not shown)
@@ -1206,11 +1185,11 @@ Protected connector with one output signal of type <code>Real</code>.</p>
   <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> and
   <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>
   that merely have a default <code>protected</code> prefix and smaller icons to
-  indicate that the connectors are internal to a model.  The inert connectors are 
+  indicate that the connectors are internal to a model.  The inert connectors are
   flat; they do not have subconnectors.</p>
 
   <p align=center id=\"Fig1\"><img src=\"modelica://FCSys/resources/documentation/Connectors/hierarchy.png\">
-  <br><b>Figure 1:</b> Instantiation hierarchy of the connectors.</p>
+<br><b>Figure 1:</b> Instantiation hierarchy of the connectors.</p>
 
     <p><b>Relation to thermodynamics and justification of the Amagat and Dalton connectors:</b><p>
 
@@ -1236,7 +1215,7 @@ Protected connector with one output signal of type <code>Real</code>.</p>
     (4 equations in all) and six variables (2 quantities, 2 flows, and 2 efforts or intensive properties).
     </p>
 
-    <p>One extensive quantity can be divided by the other to yield an intensive property.  
+    <p>One extensive quantity can be divided by the other to yield an intensive property.
     For example, internal energy can be divided by particle number
     to give internal potential (the relationship is not as direct for electrochemical potential, but the concept still holds).
     The other equation involves the spatial extent of the system, for example, the extensive
@@ -1285,7 +1264,7 @@ Protected connector with one output signal of type <code>Real</code>.</p>
   apply Fourier's Law (thermal conduction) in terms of entropy flow rate to a component that does not store heat,
   since entropy is generated [<a href=\"modelica://FCSys.UsersGuide.References\">Hogan2006</a>],
   [<a href=\"modelica://FCSys.UsersGuide.References\">Cellier1991</a>, p. 304].  However, the
-  <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSpecies\">Species</a> model is transient and does not directly
+  <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model is transient and does not directly
   impose that the heat transfer rates sum to zero.  Therefore, it is just as convenient to write Fourier's law in terms of
   entropy flow rate.  This approach is chosen in <a href=\"modelica://FCSys\">FCSys</a> for consistency and symmetry.<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></sup></p>
 
