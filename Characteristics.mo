@@ -538,7 +538,7 @@ package Characteristics
         final phase="gas",
         final m=Data.MM*U.kg/U.mol,
         specVolPow={-1,-3},
-        b_v={{0,0,0,1},{-5.6932e10*U.K^3,1.818e8*U.K^2,-3.0107e5*U.K,158.83}*U.cm
+        b_v={{0,0,0,1},{-5.6932e10*U.K^3,1.8189e8*U.K^2,-3.0107e5*U.K,158.83}*U.cm
             ^3/U.mol},
         p_min=1e-323*p0,
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
@@ -556,6 +556,7 @@ package Characteristics
         b_lambda={{1.0966389,-555.13429*U.K,0.10623408e6*U.K^2,-0.24664550},{
             0.39367933,-0.22524226e4*U.K,0.61217458e6*U.K^2,5.8011317},{-0.41858737,
             -0.14096649e5*U.K,0.19179190e8*U.K^2,14.345613}});
+
       // Note: In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
       // doesn't.
 
@@ -701,7 +702,7 @@ package Characteristics
         final phase="gas",
         final m=Data.MM*U.kg/U.mol,
         specVolPow={-1,-4},
-        b_v={{0,0,0,0,1},{2.7198e9*U.K^4,6.1253e7*U.K^3,-1.4164e6*U.K^2,-9337.8
+        b_v={{0,0,0,0,1},{-2.7198e9*U.K^4,6.1253e7*U.K^3,-1.4164e6*U.K^2,-9.3378e3
             *U.K,40.286}*U.cm^3/U.mol},
         p_min=1e-323*p0,
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
@@ -1209,7 +1210,6 @@ package Characteristics
           smoothOrder=999,
           inverse(v=v_pT(p, T)),
           derivative=dp);
-        // **Temp mod
         annotation (Documentation(info="<html><p>If the species is incompressible, then <i>p</i>(<i>v</i>, <i>T</i>) is undefined,
   and the function will return a value of zero.</p>
   <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a>().</p></html>"));
