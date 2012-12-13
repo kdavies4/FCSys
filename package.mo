@@ -155,7 +155,7 @@ package UsersGuide "User's Guide"
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Bejan2006\" class=bookmark>Bejan2006</a>]</td>
-      <td valign=top class=noBorder>A. Bejan, <i>Advanced Engineering Thermodynamics</i>, John Wiley & Sons, 3rd ed., 2006.</td>
+      <td valign=top class=noBorder>A. Bejan, <i>Advanced Engineering Thermodynamics</i>, John Wiley &amp; Sons, 3rd ed., 2006.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"BIPM2006\" class=bookmark>BIPM2006</a>]</td>
@@ -199,7 +199,7 @@ package UsersGuide "User's Guide"
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Incropera2002\" class=bookmark>Incropera2002</a>]</td>
-      <td valign=top class=noBorder>F. P. Incropera and D. P. DeWitt, <i>Fundamentals of Heat and Mass Transport</i>, 5th ed., John Wiley & Sons, 2002.</td>
+      <td valign=top class=noBorder>F. P. Incropera and D. P. DeWitt, <i>Fundamentals of Heat and Mass Transport</i>, 5th ed., John Wiley &amp; Sons, 2002.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Kandlikar2009\" class=bookmark>Kandlikar2009</a>]</td>
@@ -222,6 +222,10 @@ package UsersGuide "User's Guide"
       <td valign=top class=noBorder>B. J. McBride, M. J. Zehe, and S. Gordon, \"<a href=\"http://gltrs.grc.nasa.gov/cgi-bin/GLTRS/browse.pl?2002/TP-2002-211556.html\">NASA Glenn Coefficients for Calculating Thermodynamic Properties of Individual Species</a>,\" NASA report TP-2002-211556, Sep. 2002.</td>
     </tr>
     <tr>
+      <td valign=top class=noBorder>[<a name=\"Moran2004\" class=bookmark>Moran2004</a>]</td>
+      <td valign=top class=noBorder>M. J. Moran and H. N. Shapiro, <i>Fundamentals of Engineering Thermodynamics</i>, 5th ed., John Wiley &amp; Sons, 2004.</td>
+    </tr>
+    <tr>
       <td valign=top class=noBorder>[<a name=\"NIST2010\" class=bookmark>NIST2010</a>]</td>
       <td valign=top class=noBorder>National Institute of Standards and Technology (NIST), \"Fundamental Physical Constants: Complete Listing,\" <a href=\"http://physics.nist.gov/cuu/Constants/Table/allascii.txt\">http://physics.nist.gov/cuu/Constants/Table/allascii.txt</a>, 2010.</td>
     </tr>
@@ -235,7 +239,7 @@ package UsersGuide "User's Guide"
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Reichert2010\" class=bookmark>Reichert2010</a>]</td>
-      <td valign=top class=noBorder>P. Reichert and N. Schuwirth, \"<a href=\"http://dx.doi.org/10.1016/j.envsoft.2010.03.002\">A Generic Framework for Deriving Process Stoichiometry in Environmental Models</a>,\" <i>Environmental Modelling & Software</i>, vol. 25, pp. 1241&ndash;1251, 2010.</td>
+      <td valign=top class=noBorder>P. Reichert and N. Schuwirth, \"<a href=\"http://dx.doi.org/10.1016/j.envsoft.2010.03.002\">A Generic Framework for Deriving Process Stoichiometry in Environmental Models</a>,\" <i>Environmental Modelling &amp; Software</i>, vol. 25, pp. 1241&ndash;1251, 2010.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Salzman2004\" class=bookmark>Salzman2004</a>]</td>
@@ -243,11 +247,11 @@ package UsersGuide "User's Guide"
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Schetz1996\" class=bookmark>Schetz1996]</td>
-      <td valign=top class=noBorder>J. A. Schetz and A. E. Fuhs (ed.), <i>Handbook of Fluid Dynamics and Fluid Machinery</i>, John Wiley & Sons, vol. 1: Fundamentals of Fluid Dynamics, 1996.</td>
+      <td valign=top class=noBorder>J. A. Schetz and A. E. Fuhs (ed.), <i>Handbook of Fluid Dynamics and Fluid Machinery</i>, John Wiley &amp; Sons, vol. 1: Fundamentals of Fluid Dynamics, 1996.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"SGL2004\" class=bookmark>SGL2004</a>]</td>
-      <td valign=top class=noBorder>SGL Carbon Group, \"Sigracet&reg; 24 & 25 Series Gas Diffusion Layer,\" <a href=\"http://www.sglcarbon.com\">http://www.sglcarbon.com</a>, Sep. 2004.</td>
+      <td valign=top class=noBorder>SGL Carbon Group, \"Sigracet&reg; 24 &amp; 25 Series Gas Diffusion Layer,\" <a href=\"http://www.sglcarbon.com\">http://www.sglcarbon.com</a>, Sep. 2004.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"SGL2007\" class=bookmark>SGL2007</a>]</td>

@@ -826,6 +826,10 @@ package Units "Constants and units of physical measure"
   The structure of <a href=\"modelica://FCSys.Units\">FCSys.Units</a> allows the constraints on the Faraday and gas constants
   to be relaxed, but the models in <a href=\"modelica://FCSys\">FCSys</a> generally do not.</p>
 
+  <p>Although it is not necessary in <a href=\"http://www.modelica.org\">Modelica</a>, the unit declarations
+  are presorted so that they can be easily ported to imperative/causal languages (e.g., 
+  <a href=\"http://www.python.org\">Python</a>, C).</p>
+  
   <p>For more information, see the paper on natural units [<a href=\"modelica://FCSys.UsersGuide.References\">Davies and Paredis, 2012</a>].</p>
   <p>
   <b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>

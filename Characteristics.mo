@@ -37,15 +37,15 @@ package Characteristics
 
       // Results
       // Resistivity
-      output Q.Resistivity beta=DataC.alpha(T);
-      output Q.Resistivity alpha_SdotH2_Phi=DataH2.alpha_tau(T);
-      output Q.Resistivity alpha_SdotH2_U=DataH2.alpha_Sdot(T);
-      output Q.Resistivity alpha_SdotH2O_Phi=DataH2O.alpha_tau(T);
-      output Q.Resistivity alpha_SdotH2O_U=DataH2O.alpha_Sdot(T);
-      output Q.Resistivity alpha_Ndot2_Phi=DataN2.alpha_tau(T);
-      output Q.Resistivity alpha_Ndot2_U=DataN2.alpha_Sdot(T);
-      output Q.Resistivity alpha_SdotO2_Phi=DataO2.alpha_tau(T);
-      output Q.Resistivity alpha_SdotO2_U=DataO2.alpha_Sdot(T);
+      output Q.Resistivity alpha=DataC.alpha(T);
+      output Q.Resistivity alpha_tau_H2=DataH2.alpha_tau(T);
+      output Q.ResistivityThermal alpha_Sdot_H2=DataH2.alpha_Sdot(T);
+      output Q.Resistivity alpha_tau_H2O=DataH2O.alpha_tau(T);
+      output Q.ResistivityThermal alpha_Sdot_H2O=DataH2O.alpha_Sdot(T);
+      output Q.Resistivity alpha_tau_N2=DataN2.alpha_tau(T);
+      output Q.ResistivityThermal alpha_Sdot_N2=DataN2.alpha_Sdot(T);
+      output Q.Resistivity alpha_tau_O2=DataO2.alpha_tau(T);
+      output Q.ResistivityThermal alpha_Sdot_O2=DataO2.alpha_Sdot(T);
       //
       // Specific heat capacity at reference pressure
       output Q.CapacityThermalSpecific c0_C=DataC.c0(T);
@@ -59,16 +59,18 @@ package Characteristics
       output Q.CapacityThermalSpecific c0_O2=DataO2.c0(T);
       //
       // Specific heat capacity at constant volume
-      output Q.CapacityThermalSpecific c_V_C=DataC.c_V(T);
-      output Q.CapacityThermalSpecific c_V_C19HF37O5S=DataC19HF37O5S.c_V(T);
-      output Q.CapacityThermalSpecific 'c_V_e-'='Datae-'.c_V(T);
-      // **output Q.CapacityThermalSpecific c_V_H2=DataH2.c_V(T);
-      output Q.CapacityThermalSpecific c_V_H2=DataH2IG.c_V(T);
-      output Q.CapacityThermalSpecific c_V_H2O=DataH2O.c_V(T);
-      output Q.CapacityThermalSpecific c_V_H2O_liquid=DataH2OLiquid.c_V(T);
-      output Q.CapacityThermalSpecific 'c_V_H+'='DataH+'.c_V(T);
-      output Q.CapacityThermalSpecific c_V_N2=DataN2.c_V(T);
-      output Q.CapacityThermalSpecific c_V_O2=DataO2.c_V(T);
+      output Q.CapacityThermalSpecific c_V_C=DataC.c_V(p=p, T=T);
+      output Q.CapacityThermalSpecific c_V_C19HF37O5S=DataC19HF37O5S.c_V(p=p, T
+          =T);
+      output Q.CapacityThermalSpecific 'c_V_e-'='Datae-'.c_V(p=p, T=T);
+      output Q.CapacityThermalSpecific c_V_H2=DataH2.c_V(p=p, T=T);
+      output Q.CapacityThermalSpecific c_V_H2_IG=DataH2IG.c_V(p=p_IG, T=T);
+      output Q.CapacityThermalSpecific c_V_H2O=DataH2O.c_V(p=p, T=T);
+      output Q.CapacityThermalSpecific c_V_H2O_liquid=DataH2OLiquid.c_V(p=p, T=
+          T);
+      output Q.CapacityThermalSpecific 'c_V_H+'='DataH+'.c_V(p=p, T=T);
+      output Q.CapacityThermalSpecific c_V_N2=DataN2.c_V(p=p, T=T);
+      output Q.CapacityThermalSpecific c_V_O2=DataO2.c_V(p=p, T=T);
       //
       // Gibbs potential
       output Q.Potential g_C=DataC.g(p, T);
@@ -434,7 +436,7 @@ package Characteristics
           smoothOrder=999,
           inverse(v=v_pT(p, T)),
           derivative=dp);
-        annotation (Documentation(info="<html><p>If the species is incompressible, then <i>p</i>(<i>v</i>, <i>T</i> ) is undefined,
+        annotation (Documentation(info="<html><p>If the species is incompressible, then <i>p</i>(<i>v</i>, <i>T</i>) is undefined,
   and the function will return a value of zero.</p>
   <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a>().</p></html>"));
       end p_vT;
@@ -461,7 +463,6 @@ package Characteristics
           derivative=dv);
         annotation (Documentation(info="<html>
   <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv\">dv</a>().</p></html>"));
-
       end v_pT;
 
       annotation (Documentation(info="<html>
@@ -674,7 +675,7 @@ package Characteristics
 
       annotation (Documentation(info="<html><p>The enthalpy of formation (<code>Deltah0_f</code>) and the additional enthalpy
   offset (<code>h_offset</code>) are specified such that the enthalpy in the
-  <a href=\"modelica://FCSys.Subregiosn.BaseClasses.PartialSpecies\">PartialSpecies</a> model is referenced to zero at 0 &deg;C.
+  <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSpecies\">PartialSpecies</a> model is referenced to zero at 0 &deg;C.
   Otherwise, there is a very large bias that causes problems with the reaction.  The proper
   values are not known from the NASA CEA thermodynamic data
     [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>] (it only provides data for H<sup>+</sup> gas).
@@ -948,9 +949,9 @@ package Characteristics
            + b_v[i - 2, :] .* (b_v[i - 2, :] .^ 2 + 3*b_v[i - 1, :]) else zeros(
           size(b_v, 2))))) for i in size(b_v, 1):-1:1}
         "Coefficients of p as a polynomial in v and T";
-      // Note: pressPow and b_p are only used in h_pT(); however, in Dymola 7.4
-      // they must be defined here (global to h_pT()) so that they are updated
-      // properly when the size of b_v is changed from its default.
+      // Note:  This is from [Dymond2002, p. 2].  It includes up to the fourth
+      // virial coefficient.  If necessary, additional terms can be computed and
+      // introduced using FCSys/resources/virial-relations.cdf.
 
     public
       partial function alpha
@@ -1021,15 +1022,11 @@ package Characteristics
                 p,
                 T,
                 dp=0,
-                dT=1) annotation (Inline=true, smoothOrder=999);
+                dT=1) "[Moran2004, p. 546]"
+          annotation (Inline=true, smoothOrder=999);
 
-        // **Check this!--Is Wikipedia right?  Is there a problem with the code?
-        // See http://en.wikipedia.org/wiki/Relations_between_heat_capacities.
-        // This reduces to c_V = c0 - 1 for an ideal gas.  The gas constant
-        // (U.R) is normalized to 1 in FCSys.
-
-        annotation (Documentation(info="<html><p>**Verify:  For an ideal gas, pressure (<i>p</i>)
-  does not matter; the function reduces to <i>c</i><sub><i>V</i></sub>(<i>T</i> ) = <i>c</i>&deg;(<i>T</i> ) - 1 (in
+        annotation (Documentation(info="<html><p>For an ideal gas, pressure (<i>p</i>)
+  does not matter; the function reduces to <i>c</i><sub><i>V</i></sub>(<i>T</i>) = <i>c</i>&deg;(<i>T</i>) - 1 (in
   <a href=\"modelica://FCSys\">FCSys</a>, <i>R</i> = 1).</p></html>"));
       end c_V;
 
@@ -1071,19 +1068,11 @@ package Characteristics
         output Q.VolumeSpecific dv "Derivative of specific volume";
 
       algorithm
-        dv := poly(
-                p,
-                {(specVolPow[1] + i - 1)*poly(
-                  T,
-                  b_v[i, :],
-                  specVolPow[2]) for i in 1:size(b_v, 1)},
-                specVolPow[1] - 1)*dp + poly(
-                T,
-                {(specVolPow[2] + i - 1)*poly(
-                  p,
-                  b_v[:, i],
-                  specVolPow[1]) for i in 1:size(b_v, 2)},
-                specVolPow[2] - 1)*dT annotation (Inline=true, smoothOrder=999);
+        dv := sum(sum(b_v[i, j]*p^(specVolPow[1] + i - 2)*T^(j + specVolPow[2]
+           - i - specVolPow[1] - 1)*((i + specVolPow[1] - 1)*T*dp + (j +
+          specVolPow[2] - i - specVolPow[1])*p*dT) for i in 1:size(b_v, 1))
+          for j in 1:size(b_v, 2)) annotation (Inline=true, smoothOrder=999);
+
       end dv;
 
       function g "Gibbs potential as a function of pressure and temperature"
@@ -1221,7 +1210,7 @@ package Characteristics
           smoothOrder=999,
           inverse(v=v_pT(p, T)),
           derivative=dp);
-        annotation (Documentation(info="<html><p>If the species is incompressible, then <i>p</i>(<i>v</i>, <i>T</i> ) is undefined,
+        annotation (Documentation(info="<html><p>If the species is incompressible, then <i>p</i>(<i>v</i>, <i>T</i>) is undefined,
   and the function will return a value of zero.</p>
   <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a>().</p></html>"));
       end p_vT;
@@ -1298,7 +1287,6 @@ package Characteristics
           derivative=dv);
         annotation (Documentation(info="<html>
   <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv\">dv</a>().</p></html>"));
-
       end v_pT;
 
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
@@ -1317,8 +1305,10 @@ package Characteristics
     rigid-sphere (\"billiard-ball\") approximation of the kinetic theory of gases.</li>
     <li><code>b_v</code>: The powers of <i>p</i>/<i>T</i> increase by row.  The powers of
     <i>T</i> increase by column.  If <code>specVolPow[1] = -1</code>, then the rows
-    of <code>b_v</code> correspond to 1, <i>T</i><i>B</i><sup>*</sup>(<i>T</i> ), <i>T</i><sup> 2</sup><i>C</i><sup>*</sup>(<i>T</i> ), <i>T</i><sup> 3</sup><i>D</i><sup>*</sup>(<i>T</i> ), &hellip;
-    in [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>].</li>
+    of <code>b_v</code> correspond to 1, <i>T</i><i>B</i><sup>*</sup>(<i>T</i>), <i>T</i><sup> 2</sup><i>C</i><sup>*</sup>(<i>T</i>), <i>T</i><sup> 3</sup><i>D</i><sup>*</sup>(<i>T</i>), &hellip;
+    in [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>].  Currently,
+    virial equations are supported up to the fourth coefficient.  If additional terms are
+    required, review the definition of <code>b_p</code> and modify it.</li>
     <li>The defaults for <code>b_v</code> and <code>specVolPow</code> represent ideal gas.</li>
     <li><code>specVolPow</code> is defined as a <code>Real</code> vector.  However, 
     special modifications are necessary if non-integer values are specified
