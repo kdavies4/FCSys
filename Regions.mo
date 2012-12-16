@@ -1031,11 +1031,11 @@ package Regions "3D arrays of discrete, interconnected subregions"
       //                                   ------------------------------------------------------------------------------------
       //             Aluminum (pure)       AISI 302              AISI 304              AISI 316              AISI 347
       //             ------------------    ------------------    ------------------    ------------------    ------------------
-      //             c0*U.kg    alpha_Qdot    c0*U.kg    alpha_Qdot    c0*U.kg    alpha_Qdot    c0*U.kg    alpha_Qdot    c0*U.kg    alpha_Qdot
+      //             c_p*U.kg   alpha_Qdot    c_p*U.kg    alpha_Qdot    c_p*U.kg    alpha_Qdot    c_p*U.kg    alpha_Qdot    c_p*U.kg    alpha_Qdot
       //             *U.K       *U.W       *U.K       *U.W       *U.K       *U.W       *U.K       *U.W       *U.K       *U.W
       //             /(U.J      /(U.m      /(U.J      /(U.m      /(U.J      /(U.m      /(U.J      /(U.m      /(U.J      /(U.m
       //     T/K     *m)        *U.K)      *m)        *U.K)      *m)        *U.K)      *m)        *U.K)      *m)        *U.K)
-      //     ----    -------    -------    -------    -------    -------    -------    -------    -------    -------    -------
+      //     ----    --------   -------    -------    -------    -------    -------    -------    -------    -------    -------
       //     100     482        1/302                            272        1/9.2
       //     200     798        1/237                            402        1/12.6
       //     300     903        1/237      480        1/15.1     477        1/14.9     468        1/13.4     480        1/14.2

@@ -157,6 +157,12 @@ package Characteristics
         Commands(file=
               "resources/scripts/Dymola/Characteristics.Examples.TestCorrelations.mos"));
     end TestCorrelations;
+
+    model TestDerivative "Test a simple derivative"
+      extends Modelica.Icons.Example;
+
+      // This approach is from Dymola 7.4 User's Manual Volume 2, p. 300-301.
+    end TestDerivative;
   end Examples;
 
   package C "C"
@@ -967,7 +973,7 @@ package Characteristics
       end alpha;
 
     public
-      function c_p
+      function c_p_
         "<html>Specific heat capacity at constant pressure as a function of pressure and temperature (<i>c</i><sub><i>p</i></sub>)</html>"
         extends Modelica.Icons.Function;
 
@@ -997,8 +1003,11 @@ package Characteristics
           Inline=true,
           smoothOrder=0);
         // **Adjust for pressure.
+        /*
+  - ()
+  */
 
-      end c_p;
+      end c_p_;
 
       function c_V
         "<html>Specific heat capacity at constant volume as a function of pressure and temperature (<i>c</i><sub><i>V</i></sub>)</html>"
@@ -1010,7 +1019,7 @@ package Characteristics
           "Specific heat capacity at constant volume";
 
       algorithm
-        c_V := c_p(T) - T*dp(
+        c_V := c_p(p, T) - T*dp(
                 v_pT(p, T),
                 T,
                 dv=0,
@@ -1073,22 +1082,22 @@ package Characteristics
       end dv;
 
       replaceable function f_0
-        "<html>Bulk fluidity as a function of pressure and temperature (f<sub>0</sub>)</html>"
+        "<html>Bulk fluidity as a function of pressure and temperature (<i>f</i><sub>0</sub>)</html>"
 
         extends Modelica.Icons.Function;
 
         input Q.PressureAbsolute p=1*U.atm "Pressure";
         // Note:  Pressure is provided for generality (not used here).
         input Q.TemperatureAbsolute T "Temperature";
-        output Q.Fluidity f_12 "Bulk fluidity";
+        output Q.Fluidity f_0 "Bulk fluidity";
 
       algorithm
-        f_12 := alpha(T)/m;
+        f_0 := alpha(T)/m;
 
       end f_0;
 
       replaceable function f_12
-        "<html>Fluidity as a function of pressure and temperature (f<sub>12</sub>)</html>"
+        "<html>Fluidity as a function of pressure and temperature (<i>f</i><sub>12</sub>)</html>"
 
         extends Modelica.Icons.Function;
 
@@ -1112,56 +1121,18 @@ package Characteristics
           "Choice of enthalpy reference";
         output Q.Potential g "Gibbs potential";
 
-      protected
-        function g0_i
-          "Return g0 as a function of T using one of the temperature ranges, with enthalpy of formation at 25 degC"
-          input Q.TemperatureAbsolute T "Temperature";
-          input Integer i "index of the temperature range";
-          output Q.Potential g0_i "g0";
-
-        algorithm
-          g0_i := poly(
-                    T,
-                    {b_c[i, j]*((if specHeatCapPow + j == 0 then ln(T) else 1/(
-              specHeatCapPow + j)) - (if specHeatCapPow + j == 1 then ln(T)
-               else 1/(specHeatCapPow + j - 1))) - (if specHeatCapPow + j == 1
-               then B_c[i, 2] else 0) for j in 1:size(b_c, 2)},
-                    specHeatCapPow + 1) + B_c[i, 1] annotation (Inline=true);
-        end g0_i;
-
       algorithm
-        /*
-    assert(T_lim_c[1] <= T and T <= T_lim_c[size(T_lim_c, 1)], "Temperature " +
-    String(T/U.K) + " K is out of range for " + name + " ([" + String(T_lim_c[1]
-    /U.K) + ", " + String(T_lim_c[size(T_lim_c, 1)]/U.K) + "] K).");
-    */
-        // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4 T_lim_c[end] can't be used instead of
-        // T_lim_c[size(T_lim_c, 1)] due to:
-        //    "Error, not all 'end' could be expanded."
-
-        g := smooth(1, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i +
-          1] or i == size(T_lim_c, 1) - 1) then g0_i(T, i) else 0 for i in 1:
-          size(T_lim_c, 1) - 1) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K
-           then Deltah0 else 0) - (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt25degC
-           then Deltah0_f else 0) + h_offset + sum((if specVolPow[1] + i == 0
-           then ln((if p_min > 0 then max(p, p_min) else p)/p0) else (p^(
-          specVolPow[1] + i) - p0^(specVolPow[1] + i))/(specVolPow[1] + i))*
-          poly( T,
-                b_v[i, :],
-                specVolPow[2] - specVolPow[1] - i + 1) for i in 1:size(b_v, 1)))
+        g := h( p,
+                T,
+                referenceEnthalpy) - T*s(p, T)
           annotation (
           InlineNoEvent=true,
           Inline=true,
           smoothOrder=1);
-        // The first term is the integral of c0*dT up to T with the reference
-        // enthalpy at the lower bound [McBride2002, p. 2] plus T times the
-        // integral of (c0/T)*dT up to T with absolute entropy at the lower bound.
-        // Both of these integrals are taken at p0.  The second polynomial is the
-        // integral of v*dp from p0 to p (at T).
+
       end g;
 
-      function h "Specific enthalpy as a function of pressure and temperature"
+      function h_ "Specific enthalpy as a function of pressure and temperature"
 
         extends Modelica.Icons.Function;
 
@@ -1197,25 +1168,28 @@ package Characteristics
         // T_lim_c[size(T_lim_c, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
-        // **use presssure
         h := smooth(1, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i +
           1] or i == size(T_lim_c, 1) - 1) then h0_i(T, i) else 0 for i in 1:
           size(T_lim_c, 1) - 1) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K
            then Deltah0 else 0) - (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt25degC
-           then Deltah0_f else 0) + h_offset)
+           then Deltah0_f else 0) + h_offset) + T*poly(v_pT(p, T))
           annotation (
           InlineNoEvent=true,
           Inline=true,
           smoothOrder=1);
-        // The first term is the integral of c0*dT up to T at p0 with the
-        // reference enthalpy at the lower bound [McBride2002, p. 2].
+        // The first term is the integral of c_p*dT up to T at p0 with the
+        // reference enthalpy at the lower bound [McBride2002, p. 2].  The
+        // second term is the correction for non-ideal gas [Dymond2002, pp.
+        // 16-17].
+
+        // **Adjust for presssure (but only for gas?).
 
         annotation (Documentation(info="<html>
   <p>For an ideal gas, pressure (<i>p</i>)
   does not matter; the **function reduces to <i>c</i><sub><i>V</i></sub>(<i>T</i>) = <i>c</i>&deg;(<i>T</i>) - 1 (in
   <a href=\"modelica://FCSys\">FCSys</a>, <i>R</i> = 1).</p>
     </html>"));
-      end h;
+      end h_;
 
       replaceable function p_vT
         "Pressure as a function of specific volume and temperature"
@@ -1262,7 +1236,7 @@ package Characteristics
 
       end r_th;
 
-      function s "Specific entropy as a function of pressure and temperature"
+      function s_ "Specific entropy as a function of pressure and temperature"
         extends Modelica.Icons.Function;
 
         input Q.PressureAbsolute p=1*U.atm "Pressure";
@@ -1295,6 +1269,7 @@ package Characteristics
         // T_lim_c[size(T_lim_c, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
+        // **Adjust for pressure.
         s := smooth(1, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i +
           1] or i == size(T_lim_c, 1) - 1) then s0_i(T, i) else 0 for i in 1:
           size(T_lim_c, 1) - 1) - sum((if specVolPow[1] + i == 0 then ln((if
@@ -1307,10 +1282,10 @@ package Characteristics
           InlineNoEvent=true,
           Inline=true,
           smoothOrder=1);
-        // The first term is the integral of c0/T*dT up to T at p0 with the
+        // The first term is the integral of c_p/T*dT up to T at p0 with the
         // absolute entropy at the lower bound [McBride2002, p. 2].  The second
         // polynomial is the integral of v*dp from p0 to p (at T).
-      end s;
+      end s_;
 
       replaceable function v_pT
         "Specific volume as a function of pressure and temperature"
@@ -1333,7 +1308,8 @@ package Characteristics
           inverse(p=p_vT(v, T)),
           derivative=dv);
         annotation (Documentation(info="<html>
-  <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv\">dv</a>().</p></html>"));
+  <p>The derivative of this function is 
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv\">dv</a>().</p></html>"));
       end v_pT;
 
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
@@ -1394,10 +1370,11 @@ package Characteristics
     end Characteristic;
 
     type ReferenceEnthalpy = enumeration(
-        ZeroAt0K "Enthalpy at 0 K is 0 (if no additional offset)",
-        ZeroAt25degC "Enthalpy at 25 degC is 0 (if no additional offset)",
+        ZeroAt0K "Enthalpy at 0 K and p0 is 0 (if no additional offset)",
+        ZeroAt25degC
+          "Enthalpy at 25 degC and p0 is 0 (if no additional offset)",
         EnthalpyOfFormationAt25degC
-          "Enthalpy at 25 degC is the enthalpy of formation at 25 degC (if no additional offset)")
+          "Enthalpy at 25 degC and p0 is enthalpy of formation at 25 degC and p0 (if no additional offset)")
       "Enumeration for the reference enthalpy of a species";
   end BaseClasses;
   annotation (Documentation(info="<html>

@@ -185,22 +185,24 @@ package Connectors "Declarative and imperative connectors"
     "X-axis connector to transport material, displacement, and heat of a single species"
     extends BaseClasses.PartialFace;
 
-    parameter Boolean slipY=false "Include displacement along the y axis"
-      annotation (
+    parameter Boolean inviscidY=false "Inviscid along the y axis" annotation (
       HideResult=true,
       choices(__Dymola_checkBox=true),
-      Dialog(compact=true));
-    parameter Boolean slipZ=false "Include displacement along the z axis"
-      annotation (
+      Dialog(compact=true,group=
+            "Boundary conditions (will remove subconnectors)"));
+    parameter Boolean inviscidZ=false "Inviscid along the z axis" annotation (
       HideResult=true,
       choices(__Dymola_checkBox=true),
-      Dialog(compact=true));
+      Dialog(compact=true, group=
+            "Boundary conditions (will remove subconnectors)"));
 
-    Mechanical mechanicalY if slipY "Subconnector for Y-axis displacement";
-    Mechanical mechanicalZ if slipZ "Subconnector for Z-axis displacement";
+    Mechanical mechanicalY if not inviscidY
+      "Subconnector for Y-axis displacement";
+    Mechanical mechanicalZ if not inviscidZ
+      "Subconnector for Z-axis displacement";
 
     annotation (
-      Documentation(info="<html>
+      Documentation(info="<html>**
   <p>To impose a no-slip condition (i.e., zero transverse velocity at boundary), set the
   corresponding <code>slipY</code> or <code>slipZ</code> parameter to <code>false</code>.</p>
 
@@ -220,22 +222,24 @@ package Connectors "Declarative and imperative connectors"
     "Y-axis connector to transport material, displacement, and heat of a single species"
     extends BaseClasses.PartialFace;
 
-    parameter Boolean slipZ=false "Include displacement along the z axis"
-      annotation (
+    parameter Boolean inviscidZ=false "Inviscid along the z axis" annotation (
       HideResult=true,
       choices(__Dymola_checkBox=true),
-      Dialog(compact=true));
-    parameter Boolean slipX=false "Include displacement along the x axis"
-      annotation (
+      Dialog(compact=true,group=
+            "Boundary conditions (will remove subconnectors)"));
+    parameter Boolean inviscidX=false "Inviscid along the x axis" annotation (
       HideResult=true,
       choices(__Dymola_checkBox=true),
-      Dialog(compact=true));
+      Dialog(compact=true, group=
+            "Boundary conditions (will remove subconnectors)"));
 
-    Mechanical mechanicalZ if slipZ "Subconnector for Z-axis displacement";
-    Mechanical mechanicalX if slipX "Subconnector for X-axis displacement";
+    Mechanical mechanicalZ if not inviscidZ
+      "Subconnector for Z-axis displacement";
+    Mechanical mechanicalX if not inviscidX
+      "Subconnector for X-axis displacement";
 
     annotation (
-      Documentation(info="<html>
+      Documentation(info="<html>**
   <p>To impose a no-slip condition (i.e., zero transverse velocity at boundary), set the
   corresponding <code>slipZ</code> or <code>slipX</code> parameter to <code>false</code>.</p>
 
@@ -255,22 +259,24 @@ package Connectors "Declarative and imperative connectors"
     "Z-axis connector to transport material, displacement, and heat of a single species"
     extends BaseClasses.PartialFace;
 
-    parameter Boolean slipX=false "Include displacement along the x axis"
-      annotation (
+    parameter Boolean inviscidX=false "Inviscid along the x axis" annotation (
       HideResult=true,
       choices(__Dymola_checkBox=true),
-      Dialog(compact=true));
-    parameter Boolean slipY=false "Include displacement along the y axis"
-      annotation (
+      Dialog(compact=true,group=
+            "Boundary conditions (will remove subconnectors)"));
+    parameter Boolean inviscidY=false "Inviscid along the y axis" annotation (
       HideResult=true,
       choices(__Dymola_checkBox=true),
-      Dialog(compact=true));
+      Dialog(compact=true, group=
+            "Boundary conditions (will remove subconnectors)"));
 
-    Mechanical mechanicalX if slipX "Subconnector for X-axis displacement";
-    Mechanical mechanicalY if slipY "Subconnector for Y-axis displacement";
+    Mechanical mechanicalX if not inviscidX
+      "Subconnector for X-axis displacement";
+    Mechanical mechanicalY if not inviscidY
+      "Subconnector for Y-axis displacement";
 
     annotation (
-      Documentation(info="<html>
+      Documentation(info="<html>**
   <p>To impose a no-slip condition (i.e., zero transverse velocity at boundary), set the
   corresponding <code>slipX</code> or <code>slipY</code> parameter to <code>false</code>.</p>
 
@@ -290,27 +296,29 @@ package Connectors "Declarative and imperative connectors"
     "Connector to transport material, displacement, and heat of a single species along a generic axis"
     extends BaseClasses.PartialFace;
 
-    parameter Boolean slip1=false
-      "<html>Include displacement along the 1<sup>st</sup> transverse axis</html>"
+    parameter Boolean inviscid1=false
+      "<html>Inviscid along the 1<sup>st</sup> transverse axis</html>"
       annotation (
       HideResult=true,
       choices(__Dymola_checkBox=true),
-      Dialog(compact=true));
-    parameter Boolean slip2=false
-      "<html>Include displacement along the 2<sup>nd</sup> transverse axis</html>"
+      Dialog(compact=true,group=
+            "Boundary conditions (will remove subconnectors)"));
+    parameter Boolean inviscid2=false
+      "<html>Inviscid along the 2<sup>nd</sup> transverse axis</html>"
       annotation (
       HideResult=true,
       choices(__Dymola_checkBox=true),
-      Dialog(compact=true));
+      Dialog(compact=true,group=
+            "Boundary conditions (will remove subconnectors)"));
 
-    Mechanical mechanical1 if slip1
+    Mechanical mechanical1 if not inviscid1
       "Subconnector for 1st transverse displacement";
-    Mechanical mechanical2 if slip2
+    Mechanical mechanical2 if not inviscid2
       "Subconnector for 2nd transverse displacement";
 
     annotation (
       defaultComponentName="face",
-      Documentation(info="<html>
+      Documentation(info="<html>**
   <p>To impose a no-slip condition (i.e., zero transverse velocity at boundary), set the
   corresponding <code>slip1</code> or <code>slip2</code> parameter to <code>false</code>.</p>
 
@@ -735,14 +743,14 @@ Protected connector with one input signal of type <code>Real</code>.</p>
           initialScale=0.1,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-              points={{0,50},{100,0},{0,-50},{0,50}},
-              lineColor={0,0,127},
-              fillColor={0,0,127},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{-200,50},{200,90}},
-              textString="%name",
-              lineColor={0,0,0})}));
+            points={{0,50},{100,0},{0,-50},{0,50}},
+            lineColor={0,0,127},
+            fillColor={0,0,127},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5), Text(
+            extent={{-200,50},{200,90}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end RealInputBus;
 
@@ -950,25 +958,24 @@ Protected connector with one output signal of type <code>Real</code>.</p>
     connector PartialFace
       "Partial connector to transport material, transverse displacement, and entropy of a single species"
 
-      parameter ThermoOpt thermoOpt=ThermoOpt.ClosedAdiabatic
-        "Options for material and thermal transport"
-        annotation (HideResult=true,Dialog(compact=true));
+      parameter Boolean isobaric=false "Isobaric" annotation (
+        HideResult=true,
+        choices(__Dymola_checkBox=true),
+        Dialog(compact=true,group=
+              "Boundary conditions (will remove subconnectors)"));
+      parameter Boolean adiabatic=false "Adiabatic" annotation (
+        HideResult=true,
+        choices(__Dymola_checkBox=true),
+        Dialog(compact=true,group=
+              "Boundary conditions (will remove subconnectors)"));
 
-      FCSys.Connectors.Material material if thermoOpt == ThermoOpt.OpenDiabatic
+      FCSys.Connectors.Material material if not isobaric
         "Subconnector for material transport";
-      FCSys.Connectors.Thermal thermal if thermoOpt == ThermoOpt.ClosedDiabatic
-         or thermoOpt == ThermoOpt.OpenDiabatic
+      FCSys.Connectors.Thermal thermal if not adiabatic
         "Subconnector for thermal transport";
 
       annotation (
-        Documentation(info="<html><p>The <code>thermOpt</code> parameter sets the thermodynamic
-    properties of the face.  The face may be closed and adiabatic, closed and diabatic
-    (i.e., with heat transfer), or open and diabatic.  However, the open and adiabatic
-    combination is not an option.  Given the formulation of the
-    <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model, it would
-    prevent the energy balance from being computed properly (see the
-    <a href=\"modelica://FCSys.Connectors.BaseClasses.ThermoOpt\">ThermoOpt</a> enumeration).</p>
-
+        Documentation(info="<html>
   <p>For more information, see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package and the
     <a href=\"modelica://FCSys.Connectors.Material\">Material</a> and
@@ -992,19 +999,6 @@ Protected connector with one output signal of type <code>Real</code>.</p>
 
     end PartialFace;
 
-    type ThermoOpt = enumeration(
-        ClosedAdiabatic "Closed and adiabatic",
-        ClosedDiabatic "Closed and diabatic",
-        OpenDiabatic "Open and diabatic") "Thermodynamic options for a face"
-      annotation (Documentation(info="<html>
-  <p>This enumeration is used instead of independent options for open/closed and diabatic/adiabatic
-  because the open and adiabatic combination is invalid.  The effort for material
-  transport is pressure, yet the contribution of material to the energy balance
-  is specific enthalpy.  Specific enthalpy is characterized as a function of temperature,
-  so the temperature of the boundary must be known.  This requires the
-  <a href=\"modelica://FCSys.Connectors.Thermal\">Thermal</a> connector.
-  </p>
-  </html>"));
   end BaseClasses;
 
   annotation (Documentation(info="<html>

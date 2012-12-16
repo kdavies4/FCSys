@@ -5366,9 +5366,9 @@ package Subregions
                     {100,100}}), graphics),
             Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics={Text(
-                          extent={{-150,90},{-118,52}},
-                          lineColor={0,0,255},
-                          textString="%t.test")}));
+                  extent={{-150,90},{-118,52}},
+                  lineColor={0,0,255},
+                  textString="%t.test")}));
 
         end Calibrated;
 
@@ -5397,8 +5397,7 @@ package Subregions
                 T_lim_c={0,Modelica.Constants.inf},
                 b_c=[935*U.J*Data.m/(U.kg*U.K)],
                 B_c=[-300*U.K*935*U.J*Data.m/(U.kg*U.K) + Data.Deltah0_f, 0]),
-              redeclare parameter Q.Resistivity alpha_Qdot=
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha());
+              redeclare parameter Q.Resistivity r_th=U.m*U.K/(5.70*U.W));
           // See the documentation for a table of values.
           // Note:  Parameter expressions (e.g., involving defaults.T) are not used
           // here since they would render the parameters unadjustable in Dymola 7.4.
@@ -5427,12 +5426,12 @@ package Subregions
       <th rowspan=1 colspan=3 width=1>Graphite fiber epoxy (25% vol)<br>composite</th>
     </tr>
     <tr>
-      <th rowspan=2 valign=\"middle\"><code>c0*U.kg<br>*U.K<br>/(U.J<br>*Data.m)</code></th>
+      <th rowspan=2 valign=\"middle\"><code>c_p*U.kg<br>*U.K<br>/(U.J<br>*Data.m)</code></th>
       <th rowspan=2 valign=\"middle\"><code>alpha_Qdot<br>*U.K<br>/(U.m<br>*U.K)</code></th>
       <th rowspan=2 valign=\"middle\"><code>alpha_Qdot<br>*U.W<br>/(U.m<br>*U.K)</code></th>
-      <th rowspan=2 valign=\"middle\"><code>c0*U.kg<br>*U.W<br>/(U.J<br>*Data.m)</code></th>
+      <th rowspan=2 valign=\"middle\"><code>c_p*U.kg<br>*U.W<br>/(U.J<br>*Data.m)</code></th>
       <th rowspan=1 colspan=2><code>alpha_Qdot*U.W/(U.m*U.K)</code></th>
-      <th rowspan=2 valign=\"middle\"><code>c0*U.kg<br>*U.K<br>/(U.J<br>*Data.m)</code></th>
+      <th rowspan=2 valign=\"middle\"><code>c_p*U.kg<br>*U.K<br>/(U.J<br>*Data.m)</code></th>
       <th rowspan=1 colspan=2><code>alpha_Qdot*U.W/(U.m*U.K)</code></th>
     </tr>
     <tr>
@@ -6465,12 +6464,6 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
         final overrideEOS=true,
         final rho_IC=0,
         final derrho_IC=0,
-        xNegative(slipY=false, slipZ=false),
-        xPositive(slipY=false, slipZ=false),
-        yNegative(slipZ=false, slipX=false),
-        yPositive(slipZ=false, slipX=false),
-        zNegative(slipX=false, slipY=false),
-        zPositive(slipX=false, slipY=false),
         N(stateSelect=StateSelect.never),
         phi(each stateSelect=StateSelect.never),
         T(stateSelect=StateSelect.never));
@@ -6486,8 +6479,8 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
 
     model SpeciesInertStagnant "Inert and stagnant species"
       extends Species(
-        final alpha_Ndot=Modelica.Constants.inf,
-        alpha_tau=0,
+        final f_0=0,
+        final f_12=0,
         final upstreamX,
         final upstreamY,
         final upstreamZ,
@@ -6505,30 +6498,30 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
         final I_IC,
         final derI_IC,
         xNegative(
-          thermoOpt=ThermoOpt.ClosedDiabatic,
-          final slipY=false,
-          final slipZ=false),
+          final isobaric=true,
+          final inviscidY=true,
+          final inviscidZ=true),
         xPositive(
-          thermoOpt=ThermoOpt.ClosedDiabatic,
-          final slipY=false,
-          final slipZ=false),
+          final isobaric=true,
+          final inviscidY=true,
+          final inviscidZ=true),
         yNegative(
-          thermoOpt=ThermoOpt.ClosedDiabatic,
-          final slipZ=false,
-          final slipX=false),
+          final isobaric=true,
+          final inviscidZ=true,
+          final inviscidX=true),
         yPositive(
-          thermoOpt=ThermoOpt.ClosedDiabatic,
-          final slipZ=false,
-          final slipX=false),
+          final isobaric=true,
+          final inviscidZ=true,
+          final inviscidX=true),
         zNegative(
-          thermoOpt=ThermoOpt.ClosedDiabatic,
-          final slipX=false,
-          final slipY=false),
+          final isobaric=true,
+          final inviscidX=true,
+          final inviscidY=true),
         zPositive(
-          thermoOpt=ThermoOpt.ClosedDiabatic,
-          final slipX=false,
-          final slipY=false));
-      // Note:  alpha_Ndot doesn't matter since material isn't transported.
+          final isobaric=true,
+          final inviscidX=true,
+          final inviscidY=true));
+      // Note:  **alpha_Ndot doesn't matter since material isn't transported.
       // upstreamX, upstreamY, and upstreamZ don't matter since bulk
       // current is zero.
 
@@ -6668,7 +6661,6 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
       parameter BaseClasses.InitMethScalar initMethPartNum=InitMethScalar.Pressure
         "Method of initializing the particle number" annotation (Evaluate=true,
           Dialog(tab="Initialization", group="Scalar properties"));
-      // **initMethPartNum=InitMethScalar.Pressure
       parameter BaseClasses.InitMethScalar initMethTemp=InitMethScalar.Temperature
         "Method of initializing the temperature" annotation (Evaluate=true,
           Dialog(tab="Initialization", group="Scalar properties"));
@@ -6745,7 +6737,7 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
           tab="Initialization",
           group="Scalar properties",
           enable=initMethPartNum == 15 or initMethTemp == 15));
-      parameter Q.Potential mu_IC(start=Data.g(p=p_IC, T=T_IC))
+      parameter Q.Potential mu_IC(start=Data.g(p_IC, T_IC))
         "<html>Initial electrochemical potential (&mu;<sub>IC</sub>)</html>"
         annotation (Dialog(tab="Initialization", group="Scalar properties"));
       parameter Q.PotentialRate dermu_IC=0
@@ -6799,14 +6791,10 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
           enable=initMethX == 5 or initMethY == 5 or initMethZ == 5));
 
       // Material properties
-      Q.Fluidity f_0(
-        unit="L.T/M",
-        nominal=10*U.cm*U.s/U.g) = Data.f_0(p, T)
+      Q.Fluidity f_0(nominal=10*U.cm*U.s/U.g) = Data.f_0(p, T)
         "<html>Bulk fluidity (<i>f</i><sub>0</sub>)</html>"
         annotation (Dialog(group="Material properties"));
-      Q.Fluidity f_12(
-        unit="L.T/M",
-        nominal=10*U.cm*U.s/U.g) = Data.f_12(p, T)
+      Q.Fluidity f_12(nominal=10*U.cm*U.s/U.g) = Data.f_12(p, T)
         "<html>Fluidity (<i>f</i><sub>12</sub>)</html>"
         annotation (Dialog(group="Material properties"));
       Q.ResistivityThermal r_th(nominal=10*U.cm/U.A) = Data.r_th(p, T)
@@ -6888,31 +6876,32 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
         defaults.analysis "Heat capacity at constant volume";
       //
       // Time constants
-      output Q.Time t_exch_Phi(stateSelect=StateSelect.never) = alpha_tau*N/
+      output Q.Time t_exch_Phi(stateSelect=StateSelect.never) = alpha_12*N/
         Lstar if defaults.analysis
         "Time constant for exchange of linear momentum";
-      output Q.Time t_exch_S(stateSelect=StateSelect.never) = alpha_Qdot*C_p/
-        Lstar if defaults.analysis "Time constant for thermal exchange";
-      output Q.Time tau_trans_N[Axis](each stateSelect=StateSelect.never) =
-        fill(T*alpha_Ndot*C, 3) ./ Lstar_trans if defaults.analysis
+      output Q.Time t_exch_S(stateSelect=StateSelect.never) = alpha_th*N/Lstar
+        if defaults.analysis "Time constant for thermal exchange";
+      output Q.Time tau_trans_0[Axis](each stateSelect=StateSelect.never) =
+        fill(alpha_0*N, 3) ./ Lstar_trans if defaults.analysis
         "Time constants for material transport";
-      output Q.Time t_trans_Phi[Axis](each stateSelect=StateSelect.never) =
-        fill(alpha_tau*N, 3) ./ Lstar_trans if defaults.analysis
+      // **check
+      output Q.Time t_trans_12[Axis](each stateSelect=StateSelect.never) = fill(
+        alpha_12*N, 3) ./ Lstar_trans if defaults.analysis
         "Time constants for transverse displacement";
-      output Q.Time t_trans_S[Axis](each stateSelect=StateSelect.never) = fill(
-        alpha_Qdot*N*c0, 3) ./ Lstar_trans if defaults.analysis
+      output Q.Time t_trans_th[Axis](each stateSelect=StateSelect.never) = fill(
+        alpha_th*N, 3) ./ Lstar_trans if defaults.analysis
         "Time constants for thermal transport";
       //
       // Peclet numbers (only for the axes with velocity included; others are
       // zero)
       output Q.Number Pe_N[n_vel](each stateSelect=StateSelect.never) = I*
-        alpha_Ndot ./ Lstar_trans[cartAxes] if defaults.analysis
+        alpha_0 ./ Lstar_trans[cartAxes] if defaults.analysis
         "Material Peclet numbers";
       output Q.Number Pe_Phi[n_vel](each stateSelect=StateSelect.never) = I*
-        alpha_tau ./ Lstar_trans[cartAxes] if defaults.analysis
+        alpha_12 ./ Lstar_trans[cartAxes] if defaults.analysis
         "Peclet numbers for transverse displacement";
       output Q.Number Pe_S[n_vel](each stateSelect=StateSelect.never) = I*
-        alpha_Qdot ./ Lstar_trans[cartAxes] if defaults.analysis
+        alpha_th ./ Lstar_trans[cartAxes] if defaults.analysis
         "Thermal Peclet numbers";
       //
       // Bulk flow rates
@@ -6935,10 +6924,9 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
     common.mPhidot + inert.mPhidot if defaults.analysis
     "Friction from other species (diffusive exchange)";
   output Q.Force f_trans_adv[n_vel](each stateSelect=StateSelect.never) = Data.m
-    *({sum(if {{xNegative.thermoOpt == ThermoOpt.OpenDiabatic,xPositive.thermoOpt
-     == ThermoOpt.OpenDiabatic},{yNegative.thermoOpt == ThermoOpt.OpenDiabatic,
-    yPositive.thermoOpt == ThermoOpt.OpenDiabatic},{zNegative.thermoOpt ==
-    ThermoOpt.OpenDiabatic,zPositive.thermoOpt == ThermoOpt.OpenDiabatic}}[
+    *({sum(if {{xNegative.isobaric,xPositive.isobaric
+     },{yNegative.isobaric ,
+    yPositive.isobaric },{zNegative.isobaric,zPositive.isobaric }}[
     cartAxes[axis], side] then inSign(side)*
     Data.v_pT(p_face[cartAxes[axis],
     side], T_face[cartAxes[axis], side])*Ndot_face[cartAxes[axis], side]^2/A[
@@ -6948,10 +6936,8 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
     sum(Ndot_face)) if defaults.analysis and not overrideEOS
     "Acceleration force due to material transport (dynamic pressure) **fix";
   output Q.Force f_trans_diff[n_vel](each stateSelect=StateSelect.never) = {sum
-    (if {{xNegative.thermoOpt == ThermoOpt.OpenDiabatic,xPositive.thermoOpt ==
-    ThermoOpt.OpenDiabatic},{yNegative.thermoOpt == ThermoOpt.OpenDiabatic,
-    yPositive.thermoOpt == ThermoOpt.OpenDiabatic},{zNegative.thermoOpt ==
-    ThermoOpt.OpenDiabatic,zPositive.thermoOpt == ThermoOpt.OpenDiabatic}}[
+    (if {{xNegative.isobaric ,xPositive.isobaric },{yNegative.thermoOpt ,
+    yPositive.isobaric },{zNegative.isobaric,zPositive.isobaric }}[
     cartAxes[axis], side] then inSign(side)*(p_face[cartAxes[axis], side] - p)*
     A[cartAxes[axis]] else 0 for side in Side) for axis in 1:n_vel} + {sum(
     Sigma(mPhidot_face[cartWrap(cartAxes[axis] - orientation), :, orientation])
@@ -7023,9 +7009,8 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
         annotation (Placement(transformation(extent={{10,-30},{30,-10}}),
             iconTransformation(extent={{60,-80},{80,-60}})));
       FCSys.Connectors.FaceX xNegative(
-        thermoOpt=ThermoOpt.OpenDiabatic,
-        slipY=xNegative.thermoOpt == ThermoOpt.OpenDiabatic,
-        slipZ=xNegative.thermoOpt == ThermoOpt.OpenDiabatic,
+        inviscidY=not inclVel[Axis.y],
+        inviscidZ=not inclVel[Axis.z],
         material(final p(start=p_IC) = p_face[Axis.x, Side.n], final Ndot(start
               =I_IC[Axis.x]) = Ndot_face[Axis.x, Side.n]),
         mechanicalY(final tau=tau_face[Axis.x, Side.n, Orientation.following],
@@ -7044,9 +7029,8 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
                 -10},{-30,10}}), iconTransformation(extent={{-110,-10},{-90,10}})));
 
       FCSys.Connectors.FaceX xPositive(
-        thermoOpt=xNegative.thermoOpt,
-        slipY=xPositive.thermoOpt == ThermoOpt.OpenDiabatic,
-        slipZ=xPositive.thermoOpt == ThermoOpt.OpenDiabatic,
+        inviscidY=not inclVel[Axis.y],
+        inviscidZ=not inclVel[Axis.z],
         material(final p(start=p_IC) = p_face[Axis.x, Side.p], final Ndot(start
               =-I_IC[Axis.x]) = Ndot_face[Axis.x, Side.p]),
         mechanicalY(final tau=tau_face[Axis.x, Side.p, Orientation.following],
@@ -7065,8 +7049,8 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
                 -10},{50,10}}), iconTransformation(extent={{90,-10},{110,10}})));
 
       FCSys.Connectors.FaceY yNegative(
-        slipZ=yNegative.thermoOpt == ThermoOpt.OpenDiabatic,
-        slipX=yNegative.thermoOpt == ThermoOpt.OpenDiabatic,
+        inviscidZ=not inclVel[Axis.z],
+        inviscidX=not inclVel[Axis.x],
         material(final p(start=p_IC) = p_face[Axis.y, Side.n], final Ndot(start
               =I_IC[Axis.y]) = Ndot_face[Axis.y, Side.n]),
         mechanicalZ(final tau=tau_face[Axis.y, Side.n, Side.n], final APdot(
@@ -7085,9 +7069,8 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
                 -50},{10,-30}}), iconTransformation(extent={{-10,-110},{10,-90}})));
 
       FCSys.Connectors.FaceY yPositive(
-        thermoOpt=yNegative.thermoOpt,
-        slipZ=yPositive.thermoOpt == ThermoOpt.OpenDiabatic,
-        slipX=yPositive.thermoOpt == ThermoOpt.OpenDiabatic,
+        inviscidZ=not inclVel[Axis.z],
+        inviscidX=not inclVel[Axis.x],
         material(final p(start=p_IC) = p_face[Axis.y, Side.p], final Ndot(start
               =-I_IC[Axis.y]) = Ndot_face[Axis.y, Side.p]),
         mechanicalZ(final tau=tau_face[Axis.y, Side.p, Orientation.following],
@@ -7106,8 +7089,8 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
                 30},{10,50}}), iconTransformation(extent={{-10,90},{10,110}})));
 
       FCSys.Connectors.FaceZ zNegative(
-        slipX=zNegative.thermoOpt == ThermoOpt.OpenDiabatic,
-        slipY=zNegative.thermoOpt == ThermoOpt.OpenDiabatic,
+        inviscidX=not inclVel[Axis.x],
+        inviscidY=not inclVel[Axis.y],
         material(final p(start=p_IC) = p_face[Axis.z, Side.n], final Ndot(start
               =I_IC[Axis.z]) = Ndot_face[Axis.z, Side.n]),
         mechanicalX(final tau=tau_face[Axis.z, Side.n, Orientation.following],
@@ -7126,9 +7109,8 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
                 10},{30,30}}), iconTransformation(extent={{60,60},{80,80}})));
 
       FCSys.Connectors.FaceZ zPositive(
-        thermoOpt=zNegative.thermoOpt,
-        slipX=zPositive.thermoOpt == ThermoOpt.OpenDiabatic,
-        slipY=zPositive.thermoOpt == ThermoOpt.OpenDiabatic,
+        inviscidX=not inclVel[Axis.x],
+        inviscidY=not inclVel[Axis.y],
         material(final p(start=p_IC) = p_face[Axis.z, Side.p], final Ndot(start
               =-I_IC[Axis.z]) = Ndot_face[Axis.z, Side.p]),
         mechanicalX(final tau=tau_face[Axis.z, Side.p, Orientation.following],
@@ -7162,6 +7144,14 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
         "true, if each component of velocity is prescribed";
       final parameter BaseClasses.InitMethVelocity initMethVel[Axis]={initMethX,
           initMethY,initMethZ} "Initialization methods for velocity";
+
+      // Base resistivity factors
+      Q.Resistivity alpha_0(nominal=10*U.cm/U.A) = f_0*Data.m
+        "Base resistivity factor for bulk fluidity";
+      Q.Resistivity alpha_12(nominal=10*U.cm/U.A) = f_12*Data.m
+        "Base resistivity factor for fluidity";
+      Q.Resistivity alpha_th(nominal=10*U.cm/U.A) = r_th*c_V
+        "Base resistivity factor for thermal resistivity";
 
       // Efforts and flows of the conditional faces
       Q.PressureAbsolute p_face[Axis, Side](each start=p_IC)
@@ -7217,27 +7207,17 @@ The default global default settings will be used for the current simulation.",
 
       /* This is commented out because it may be annoying.
   // Warn when index reduction may be necessary.
-  if abs(alpha_tau) > Modelica.Constants.small then
-    Modelica.Utilities.Streams.print("Warning: The resistivity to exchange of linear momentum is zero.
-    This may directly couple the velocities of species within a subregion.
-    Consider setting the value of alpha_tau as final (if not already) so that index reduction may be performed.");
+  if abs(f_0) < Modelica.Constants.small then
+    Modelica.Utilities.Streams.print("Warning: The bulk fluidity is zero.
+    This may directly couple the currents within neighboring subregions.\nConsider setting the value of f_0 as final (if not already) so that index reduction may be performed.");
   end if;
-  if abs(alpha_Qdot) > Modelica.Constants.small then
-    Modelica.Utilities.Streams.print("Warning: The thermal resistance to exchange is zero.
-    This may directly couple the temperatures of species within a subregion.
-    Consider setting the value of alpha_Qdot as final (if not already) so that index reduction may be performed.");
+  if abs(f_12) > Modelica.Constants.small then
+    Modelica.Utilities.Streams.print("Warning: The fluidity is zero.
+    This may directly couple the velocity of this species with others within the subregion or with the same species within neighboring subregions.\nConsider setting the value of f_12 as final (if not already) so that index reduction may be performed.");
   end if;
-  if abs(alpha_Ndot) < Modelica.Constants.small then
-    Modelica.Utilities.Streams.print("Warning: The material resistance to transport is zero.
-    This may directly couple the density within neighboring subregions.\nConsider setting the value of alpha_Ndot as final (if not already) so that index reduction may be performed.");
-  end if;
-  if abs(alpha_tau) > Modelica.Constants.small then
-    Modelica.Utilities.Streams.print("Warning: The resistance to transport of linear momentum is zero.
-    This may directly couple the velocity within neighboring subregions.\nConsider setting the value of alpha_tau as final (if not already) so that index reduction may be performed.");
-  end if;
-  if abs(alpha_Qdot) > Modelica.Constants.small then
-    Modelica.Utilities.Streams.print("Warning: The thermal resistance to transport is zero.
-    This may directly couple the temperature within neighboring subregions.\nConsider setting the value of alpha_Qdot as final (if not already) so that index reduction may be performed.");
+  if abs(r_th) > Modelica.Constants.small then
+    Modelica.Utilities.Streams.print("Warning: The thermal resistance is zero.
+    This may directly couple the temperature of this species with others within the subregion or with the same species within neighboring subregions.\nConsider setting the value of r_th as final (if not already) so that index reduction may be performed.");
   end if;
   // Note:  According to the Modelica >=3.0 specification, these
   // checks should be possible using the assert() command with
@@ -7393,64 +7373,54 @@ The default global default settings will be used for the current simulation.",
             Data.m*chemical.Ndot,
             chemical.phi,
             phi) "Advection";
-      alpha_tau*inert.mPhidot = Data.m*2*Lstar*(inert.phi - phi) "Diffusion";
+      f_12*inert.mPhidot = 2*Lstar*(inert.phi - phi) "Diffusion";
       //
       // Energy
       chemical.Hdot = semiLinear(
             chemical.Ndot,
             chemical.hbar*Data.m,
             h) "Advection";
-      alpha_Qdot*inert.Qdot = 2*Lstar*(inert.T - T) "Diffusion";
+      r_th*inert.Qdot = 2*Lstar*(inert.T - T) "Diffusion";
 
       // Transport
       for axis in Axis loop
         for side in Side loop
           // Material
-          p*alpha_Ndot*(Ndot_face[axis, side] - inSign(side)*(if inclVel[axis]
-             then I[velAxes[axis]] else 0)) = Lstar_trans[axis]*(p_face[axis,
-            side] - p)*(if upstream[axis] and inclVel[axis] then (exp(inSign(
-            side)*I[velAxes[axis]]*alpha_Ndot/(2*Lstar_trans[axis])) + 1) else
-            2);
-          if not [xNegative.thermoOpt == ThermoOpt.OpenDiabatic, xPositive.thermoOpt
-               == ThermoOpt.OpenDiabatic; yNegative.thermoOpt == ThermoOpt.OpenDiabatic,
-              yPositive.thermoOpt == ThermoOpt.OpenDiabatic; zNegative.thermoOpt
-               == ThermoOpt.OpenDiabatic, zPositive.thermoOpt == ThermoOpt.OpenDiabatic]
-              [axis, side] then
-            Ndot_face[axis, side] = 0 "Connector has been removed--no current.";
+          N*f_0*(p_face[axis, side] - p) = k[axis]*(Ndot_face[axis, side] -
+            inSign(side)*(if inclVel[axis] then I[velAxes[axis]] else 0))*(if
+            upstream[axis] and inclVel[axis] then (exp(inSign(side)*I[velAxes[
+            axis]]*alpha_0/(2*Lstar_trans[axis])) + 1) else 2);
+          if [xNegative.isobaric, xPositive.isobaric; yNegative.isobaric,
+              yPositive.isobaric; zNegative.isobaric, zPositive.isobaric][axis,
+              side] then
+            p_face[axis, side] = p "Isobaric BC";
           end if;
 
           // Mechanical
           for orientation in Orientation loop
-            V*alpha_tau*tau_face[axis, side, orientation] = 4*Data.m*k[axis]*(
-              APdot_face[axis, side, orientation] - (if inclVel[cartWrap(axis
-               + orientation)] then inSign(side)*A[axis]*phi[velAxes[cartWrap(
-              axis + orientation)]] else 0))*(if upstream[axis] and inclVel[
-              axis] then (exp(inSign(side)*I[velAxes[axis]]*alpha_tau/(2*
-              Lstar_trans[axis])) + 1) else 2);
-            if not {{{xNegative.slipY,xNegative.slipZ},{xPositive.slipY,
-                xPositive.slipZ}},{{yNegative.slipZ,yNegative.slipX},{yPositive.slipZ,
-                yPositive.slipX}},{{zNegative.slipX,zNegative.slipY},{zPositive.slipX,
-                zPositive.slipY}}}[axis, side, orientation] then
-              APdot_face[axis, side, orientation] = 0
-                "Connector has been removed--no slip.";
+            V*f_12*tau_face[axis, side, orientation] = 4*k[axis]*(APdot_face[
+              axis, side, orientation] - (if inclVel[cartWrap(axis +
+              orientation)] then inSign(side)*A[axis]*phi[velAxes[cartWrap(axis
+               + orientation)]] else 0))*(if upstream[axis] and inclVel[axis]
+               then (exp(inSign(side)*I[velAxes[axis]]*alpha_12/(2*Lstar_trans[
+              axis])) + 1) else 2);
+            if {{{xNegative.inviscidY,xNegative.inviscidZ},{xPositive.inviscidY,
+                xPositive.inviscidZ}},{{yNegative.inviscidZ,yNegative.inviscidX},
+                {yPositive.inviscidZ,yPositive.inviscidX}},{{zNegative.inviscidX,
+                zNegative.inviscidY},{zPositive.inviscidX,zPositive.inviscidY}}}
+                [axis, side, orientation] then
+              tau_face[axis, side, orientation] = 0 "Inviscid BC";
             end if;
           end for;
 
           // Thermal
-          alpha_Qdot*Qdot_face[axis, side] = 2*Lstar_trans[axis]*Data.c_V(p, T)
-            *(T_face[axis, side] - T)*(if upstream[axis] and inclVel[axis]
-             then (exp(inSign(side)*I[velAxes[axis]]*alpha_Qdot/(2*Lstar_trans[
-            axis])) + 1) else 2);
-          if not [xNegative.thermoOpt == ThermoOpt.OpenDiabatic or xNegative.thermoOpt
-               == ThermoOpt.ClosedDiabatic, xPositive.thermoOpt == ThermoOpt.OpenDiabatic
-               or xPositive.thermoOpt == ThermoOpt.ClosedDiabatic; yNegative.thermoOpt
-               == ThermoOpt.OpenDiabatic or yNegative.thermoOpt == ThermoOpt.ClosedDiabatic,
-              yPositive.thermoOpt == ThermoOpt.OpenDiabatic or yPositive.thermoOpt
-               == ThermoOpt.ClosedDiabatic; zNegative.thermoOpt == ThermoOpt.OpenDiabatic
-               or zNegative.thermoOpt == ThermoOpt.ClosedDiabatic, zPositive.thermoOpt
-               == ThermoOpt.OpenDiabatic or zPositive.thermoOpt == ThermoOpt.ClosedDiabatic]
-              [axis, side] then
-            Qdot_face[axis, side] = 0 "Connector has been removed--adiabatic.";
+          r_th*Qdot_face[axis, side] = Lstar_trans[axis]*(T_face[axis, side] -
+            T)*(if upstream[axis] and inclVel[axis] then (exp(inSign(side)*I[
+            velAxes[axis]]*alpha_th/(2*Lstar_trans[axis])) + 1) else 2);
+          if [xNegative.adiabatic, xPositive.adiabatic; yNegative.adiabatic,
+              yPositive.adiabatic; zNegative.adiabatic, zPositive.adiabatic][
+              axis, side] then
+            Qdot_face[axis, side] = 0 "Adiabatic/isentropic BC";
           end if;
         end for;
       end for;

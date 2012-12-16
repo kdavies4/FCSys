@@ -390,19 +390,23 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
     <p>**
     </p>
     </html>"),
-      Icon(graphics={Line(
-              points={{-60,0},{-10,0}},
-              color={208,104,0},
-              smooth=Smooth.None),Line(
-              points={{10,0},{60,0}},
-              color={208,104,0},
-              smooth=Smooth.None),Line(
-              points={{-10,36},{-10,-36}},
-              color={208,104,0},
-              smooth=Smooth.None),Line(
-              points={{10,36},{10,-36}},
-              color={208,104,0},
-              smooth=Smooth.None)}),
+      Icon(graphics={
+          Line(
+            points={{-60,0},{-10,0}},
+            color={208,104,0},
+            smooth=Smooth.None),
+          Line(
+            points={{10,0},{60,0}},
+            color={208,104,0},
+            smooth=Smooth.None),
+          Line(
+            points={{-10,36},{-10,-36}},
+            color={208,104,0},
+            smooth=Smooth.None),
+          Line(
+            points={{10,36},{10,-36}},
+            color={208,104,0},
+            smooth=Smooth.None)}),
       Diagram(graphics));
   end Capacitor;
 
@@ -676,22 +680,103 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
 
     // Conservation of material
     der(N)/U.s = chemical.Ndot;
-    annotation (defaultComponentName="species", Icon(graphics={Rectangle(
-              extent={{-100,40},{100,-40}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Line(
-              points={{-100,-40},{100,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{-100,-40},{-100,40},{100,40},{100,-40}},
-              pattern=LinePattern.None,
-              smooth=Smooth.None),Text(
-              extent={{-100,-20},{100,20}},
-              textString="%name",
-              lineColor={0,0,0})}));
+    annotation (defaultComponentName="species", Icon(graphics={
+          Rectangle(
+            extent={{-100,40},{100,-40}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Line(
+            points={{-100,-40},{100,-40}},
+            color={0,0,0},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{-100,-40},{-100,40},{100,40},{100,-40}},
+            pattern=LinePattern.None,
+            smooth=Smooth.None),
+          Text(
+            extent={{-100,-20},{100,20}},
+            textString="%name",
+            lineColor={0,0,0})}));
   end SimpleSpecies;
   annotation (Commands(file="resources/scripts/units-values.mos"
         "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate)."));
+  function g_ "Gibbs potential as a function of pressure and temperature"
+
+    extends Modelica.Icons.Function;
+
+    input Q.PressureAbsolute p=1*U.atm "Pressure";
+    input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+    input ReferenceEnthalpy referenceEnthalpy=ReferenceEnthalpy.EnthalpyOfFormationAt25degC
+      "Choice of enthalpy reference";
+    output Q.Potential g "Gibbs potential";
+
+  protected
+    function g0_i
+      "Return g0 as a function of T using one of the temperature ranges, with enthalpy of formation at 25 degC"
+      input Q.TemperatureAbsolute T "Temperature";
+      input Integer i "index of the temperature range";
+      output Q.Potential g0_i "g0";
+
+    algorithm
+      g0_i := poly(
+            T,
+            {Characteristics.BaseClasses.Characteristic.b_c[i, j]*((if
+          Characteristics.BaseClasses.Characteristic.specHeatCapPow + j == 0
+           then ln(T) else 1/(Characteristics.BaseClasses.Characteristic.specHeatCapPow
+           + j)) - (if Characteristics.BaseClasses.Characteristic.specHeatCapPow
+           + j == 1 then ln(T) else 1/(Characteristics.BaseClasses.Characteristic.specHeatCapPow
+           + j - 1))) - (if Characteristics.BaseClasses.Characteristic.specHeatCapPow
+           + j == 1 then Characteristics.BaseClasses.Characteristic.B_c[i, 2]
+           else 0) for j in 1:size(Characteristics.BaseClasses.Characteristic.b_c,
+          2)},
+            Characteristics.BaseClasses.Characteristic.specHeatCapPow + 1) +
+        Characteristics.BaseClasses.Characteristic.B_c[i, 1]
+        annotation (Inline=true);
+    end g0_i;
+
+  algorithm
+    /*
+    assert(T_lim_c[1] <= T and T <= T_lim_c[size(T_lim_c, 1)], "Temperature " +
+    String(T/U.K) + " K is out of range for " + name + " ([" + String(T_lim_c[1]
+    /U.K) + ", " + String(T_lim_c[size(T_lim_c, 1)]/U.K) + "] K).");
+    */
+    // Note:  This is commented out so that the function can be inlined.
+    // Note:  In Dymola 7.4 T_lim_c[end] can't be used instead of
+    // T_lim_c[size(T_lim_c, 1)] due to:
+    //    "Error, not all 'end' could be expanded."
+
+    g := smooth(1, sum(if (Characteristics.BaseClasses.Characteristic.T_lim_c[i]
+       <= T or i == 1) and (T < Characteristics.BaseClasses.Characteristic.T_lim_c[
+      i + 1] or i == size(Characteristics.BaseClasses.Characteristic.T_lim_c, 1)
+       - 1) then g0_i(T, i) else 0 for i in 1:size(Characteristics.BaseClasses.Characteristic.T_lim_c,
+      1) - 1) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K then
+      Characteristics.BaseClasses.Characteristic.Deltah0 else 0) - (if
+      referenceEnthalpy == ReferenceEnthalpy.ZeroAt25degC then Characteristics.BaseClasses.Characteristic.Deltah0_f
+       else 0) + Characteristics.BaseClasses.Characteristic.h_offset + sum((if
+      Characteristics.BaseClasses.Characteristic.specVolPow[1] + i == 0 then ln(
+      (if Characteristics.BaseClasses.Characteristic.p_min > 0 then max(p,
+      Characteristics.BaseClasses.Characteristic.p_min) else p)/Characteristics.BaseClasses.Characteristic.p0)
+       else (p^(Characteristics.BaseClasses.Characteristic.specVolPow[1] + i)
+       - Characteristics.BaseClasses.Characteristic.p0^(Characteristics.BaseClasses.Characteristic.specVolPow[
+      1] + i))/(Characteristics.BaseClasses.Characteristic.specVolPow[1] + i))*
+      poly(
+        T,
+        Characteristics.BaseClasses.Characteristic.b_v[i, :],
+        Characteristics.BaseClasses.Characteristic.specVolPow[2] -
+        Characteristics.BaseClasses.Characteristic.specVolPow[1] - i + 1) for i
+       in 1:size(Characteristics.BaseClasses.Characteristic.b_v, 1)))
+      annotation (
+      InlineNoEvent=true,
+      Inline=true,
+      smoothOrder=1);
+    // **Take first integral at actual pressure?
+
+    // The first term is the integral of c_p*dT up to T with the reference
+    // enthalpy at the lower bound [McBride2002, p. 2] plus T times the
+    // integral of (c_p/T)*dT up to T with absolute entropy at the lower bound.
+    // Both of these integrals are taken at p0.  The second polynomial is the
+    // integral of v*dp from p0 to p (at T).
+  end g_;
 end WorkInProgress;

@@ -32,21 +32,25 @@ package BaseClasses "Base classes (not for direct use)"
 
       partial class Single "Icon for a single-connector boundary condition"
         //extends Names.Middle;
-        annotation (Icon(graphics={Rectangle(
-                      extent={{-100,40},{100,-40}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Line(
-                      points={{-100,-40},{-100,40},{100,40},{100,-40}},
-                      pattern=LinePattern.None,
-                      smooth=Smooth.None),Line(
-                      points={{-100,-40},{100,-40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+        annotation (Icon(graphics={
+              Rectangle(
+                extent={{-100,40},{100,-40}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None),
+              Line(
+                points={{-100,-40},{-100,40},{100,40},{100,-40}},
+                pattern=LinePattern.None,
+                smooth=Smooth.None),
+              Line(
+                points={{-100,-40},{100,-40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end Single;
     end BCs;
     extends Modelica.Icons.Package;
@@ -251,13 +255,13 @@ from Blocks.Discrete.
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                      extent={{-100,40},{100,80}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Text(
-                      extent={{-100,40},{100,80}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,40},{100,80}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None), Text(
+                extent={{-100,40},{100,80}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end Top2;
 
       partial class Top1
@@ -1087,6 +1091,21 @@ An unrelated species may be included.");
   vectorize (or \"matricize\") this function.  For example, <code>Delta([1,2;3,4])</code> returns <code>{-1,-1}</code>.</p></html>"));
     end Delta;
 
+    function dpoly
+      "<html>Derivative of <a href=\"modelica://FCSys.BaseClasses.Utilities.poly\">poly</a>()</html>"
+      extends Modelica.Icons.Function;
+
+      input Real u "Argument";
+      input Real du "Derivative of argument";
+      input Real a[:] "Coefficients";
+      input Integer n=0 "Power of the first coefficient";
+      output Real y "Result";
+
+    algorithm
+      y := 0 annotation (Inline=true);
+      // **update
+    end dpoly;
+
     function enumerate
       "<html>Enumerate the <code>true</code> entries in a <code>Boolean</code> vector (0 for <code>false</code> entries)</html>"
       extends Modelica.Icons.Function;
@@ -1199,9 +1218,12 @@ An unrelated species may be included.");
         *positivePoly(1/u, a[min(size(a, 1), -n):-1:1]) else 0) + (if n <= 0
          and n > -size(a, 1) then a[1 - n] else 0) + (if n + size(a, 1) > 1
          then (if n > 1 then u^(n - 1) else 1)*positivePoly(u, a[1 + max(0, 1
-         - n):size(a, 1)]) else 0) annotation (Inline=true);
+         - n):size(a, 1)]) else 0) annotation (Inline=true, derivative=dpoly);
       // Here, Dymola 7.4 won't allow indexing via a[1 + max(0, 1 - n):end], so
       // a[1 + max(0, 1 - n):size(a, 1)] is necessary.
+      annotation (Documentation(info="<html>
+  <p>The derivative of this function is 
+  <a href=\"modelica://FCSys.BaseClasses.Utilities.dpoly\">dpoly</a>().</p></html>"));
     end poly;
 
     function round
