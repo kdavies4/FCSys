@@ -32,25 +32,21 @@ package BaseClasses "Base classes (not for direct use)"
 
       partial class Single "Icon for a single-connector boundary condition"
         //extends Names.Middle;
-        annotation (Icon(graphics={
-              Rectangle(
-                extent={{-100,40},{100,-40}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Line(
-                points={{-100,-40},{-100,40},{100,40},{100,-40}},
-                pattern=LinePattern.None,
-                smooth=Smooth.None),
-              Line(
-                points={{-100,-40},{100,-40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash),
-              Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+        annotation (Icon(graphics={Rectangle(
+                      extent={{-100,40},{100,-40}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Line(
+                      points={{-100,-40},{-100,40},{100,40},{100,-40}},
+                      pattern=LinePattern.None,
+                      smooth=Smooth.None),Line(
+                      points={{-100,-40},{100,-40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end Single;
     end BCs;
     extends Modelica.Icons.Package;
@@ -242,26 +238,26 @@ from Blocks.Discrete.
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,60},{100,100}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,60},{100,100}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,60},{100,100}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,60},{100,100}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end Top3;
 
       partial class Top2
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,40},{100,80}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,40},{100,80}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,40},{100,80}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,40},{100,80}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end Top2;
 
       partial class Top1
@@ -736,12 +732,15 @@ This icon is designed for a <b>signal bus</b> connector.
         assert(mod(3, 3) == 0, "The mod function failed.");
 
         // poly()
-        assert(poly(
+        assert(FCSys.BaseClasses.Utilities.Poly.poly(
                 2,
                 {1,2,1},
-                0) == 1 + 2*2 + 1*2^2 and poly(2, zeros(0)) == 0 and poly(2, {1})
-           == 1 and poly(2, {0,0,1}) == 4 and poly(2, ones(8)) == 2^8 - 1 and
-          poly( 2,
+                0) == 1 + 2*2 + 1*2^2 and FCSys.BaseClasses.Utilities.Poly.poly(
+          2, zeros(0)) == 0 and FCSys.BaseClasses.Utilities.Poly.poly(2, {1})
+           == 1 and FCSys.BaseClasses.Utilities.Poly.poly(2, {0,0,1}) == 4 and
+          FCSys.BaseClasses.Utilities.Poly.poly(2, ones(8)) == 2^8 - 1 and
+          FCSys.BaseClasses.Utilities.Poly.poly(
+                2,
                 {1,0,0},
                 -3) == 1/8, "The poly function failed.");
 
@@ -774,7 +773,7 @@ This icon is designed for a <b>signal bus</b> connector.
         Real x2;
         Real x3;
       equation
-        x1 = poly(
+        x1 = FCSys.BaseClasses.Utilities.Poly.poly(
                 time,
                 {1,1,1,1},
                 0);
@@ -783,11 +782,11 @@ This icon is designed for a <b>signal bus</b> connector.
         // listing of translated Modelica code in dsmodel.mof".  dsmodel.mof should
         // contain:
         //     x1 := 1+time*(1+time*(1+time)).
-        x2 = poly(time, 2*ones(35));
+        x2 = FCSys.BaseClasses.Utilities.Poly.poly(time, 2*ones(35));
         // The function is only unrolled to a a limited depth (currently 10th order
         // polynomial).  In Dymola 7.4 poly(time, ones(34)) results in a recursive
         // call, but poly(time, ones(35)) doesn't.
-        x3 = poly(
+        x3 = FCSys.BaseClasses.Utilities.Poly.poly(
                 time + 1,
                 {1,1,1,1},
                 -3);
@@ -1027,6 +1026,182 @@ An unrelated species may be included.");
       end stoich;
     end Chemistry;
 
+    package Polynomial "Polynomial functions"
+      extends Modelica.Icons.Package;
+      // **Fix all this.
+
+      function Y
+        "<html>&int;<a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.y\">y</a>(<i>u</i>, &hellip;)&middot;d<i>u</i> evaluated at <i>u</i> with zero integration constant</html>"
+        extends Modelica.Icons.Function;
+
+        input Real u "Argument";
+        input Real a[:] "Coefficients";
+        input Integer n=0 "Power associated with the first term";
+
+        output Real Y "Result of integral";
+
+      protected
+        function positivePoly
+          "<html>polynomial expressed in form: y = u*(a<sub>1</sub> + u*(a<sub>2</sub> + &hellip;))</html>"
+
+          input Real u "Argument";
+          input Real a[:] "Coefficients";
+          output Real y "Result";
+
+        algorithm
+          y := if size(a, 1) > 0 then u*(a[1] + (if size(a, 1) > 1 then u*(a[2]
+             + (if size(a, 1) > 2 then u*(a[3] + (if size(a, 1) > 3 then u*(a[4]
+             + (if size(a, 1) > 4 then u*(a[5] + (if size(a, 1) > 5 then u*(a[6]
+             + (if size(a, 1) > 6 then u*(a[7] + (if size(a, 1) > 7 then u*(a[8]
+             + (if size(a, 1) > 8 then u*(a[9] + (if size(a, 1) > 9 then u*(a[
+            10] + (if size(a, 1) > 10 then positivePoly(u, a[11:end]) else 0))
+             else 0)) else 0)) else 0)) else 0)) else 0)) else 0)) else 0))
+             else 0)) else 0)) else 0 annotation (Inline=true);
+          // Note:  Dymola 7.4 does seem to not inline the recursive calls beyond
+          // depth 1; therefore, the function is "unrolled" up to the 10th order.
+          // Also, in Dymola 7.4, if this function is called from a stack of (nested)
+          // functions, it seems to reduce the depth allowed for the nested
+          // parentheses.  The implementation here ("unrolled" only up to the 10th
+          // order) allows poly() to be called from within one other function within a
+          // model.
+        end positivePoly;
+
+      algorithm
+        y := (if n < 0 then (if n + size(a, 1) < 0 then u^(n + size(a, 1))
+           else 1)*positivePoly(1/u, a[min(size(a, 1), -n):-1:1]) else 0) + (
+          if n <= 0 and n > -size(a, 1) then a[1 - n] else 0) + (if n + size(a,
+          1) > 1 then (if n > 1 then u^(n - 1) else 1)*positivePoly(u, a[1 +
+          max(0, 1 - n):size(a, 1)]) else 0)
+          annotation (Inline=true, derivative=dY);
+        // Here, Dymola 7.4 won't allow indexing via a[1 + max(0, 1 - n):end], so
+        // a[1 + max(0, 1 - n):size(a, 1)] is necessary.
+        annotation (Documentation(info="<html>
+  <p>The derivative of this function is 
+  <a href=\"modelica://FCSys.BaseClasses.Utilities.dpoly\">dY</a>().</p></html>"));
+      end Y;
+
+      function dY
+        "<html>Derivative of <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.Y\">Y</a>()</html>"
+        extends Modelica.Icons.Function;
+
+        input Real u "Argument";
+        input Real a[:] "Coefficients";
+        input Integer n=0
+          "Power associated with the first term (before derivative)";
+        input Real du "Derivative of argument";
+        input Real da[size(a, 1)] "Derivatives of coefficients";
+        // **use da.
+
+        output Real dY "Result of derivative";
+
+      algorithm
+        dY := y(u)*du annotation (Inline=true, derivative(order=2) = d2Y);
+        annotation (Documentation(info="<html>
+  <p>The derivative of this function is 
+  <a href=\"modelica://FCSys.BaseClasses.Utilities.dpoly\">d2Y</a>().</p></html>"));
+      end dY;
+
+      function d2Y
+        "<html>Derivative of <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.dY\">dY</a>()</html>"
+        extends Modelica.Icons.Function;
+
+        input Real u "Argument";
+        input Real a[:] "Coefficients";
+        input Integer n=0
+          "Power associated with the first term (before derivatives)";
+        input Real du "Derivative of argument";
+        input Real da[size(a, 1)] "Derivatives of coefficients";
+        input Real d2u "Second derivative of argument";
+        input Real d2a[size(a, 1)] "Second derivatives of coefficients";
+        // **use da, d2a
+
+        output Real d2Y "Result of second derivative";
+
+      algorithm
+        d2Y := dy(u, du)*du + y(u)*d2u annotation (Inline=true);
+
+      end d2Y;
+
+      function y
+        "<html>Polynomial expressed in form: <i>y</i> = ((&hellip; + <i>a</i><sub>-1-<i>n</i></sub>)/<i>u</i> + <i>a</i><sub>-<i>n</i></sub>)/<i>u</i> + <i>a</i><sub>1-<i>n</i></sub> + <i>u</i>&middot;(<i>a</i><sub>2-<i>n</i></sub> + <i>u</i>&middot;(<i>a</i><sub>3-<i>n</i></sub> + &hellip;))</html>"
+        extends Modelica.Icons.Function;
+
+        input Real u "Argument";
+        input Real a[:] "Coefficients";
+        input Integer n=0 "Power of the first term";
+
+        output Real y "Result";
+
+      protected
+        function positivePoly
+          "<html>polynomial expressed in form: y = u*(a<sub>1</sub> + u*(a<sub>2</sub> + &hellip;))</html>"
+
+          input Real u "Argument";
+          input Real a[:] "Coefficients";
+          output Real y "Result";
+
+        algorithm
+          y := if size(a, 1) > 0 then u*(a[1] + (if size(a, 1) > 1 then u*(a[2]
+             + (if size(a, 1) > 2 then u*(a[3] + (if size(a, 1) > 3 then u*(a[4]
+             + (if size(a, 1) > 4 then u*(a[5] + (if size(a, 1) > 5 then u*(a[6]
+             + (if size(a, 1) > 6 then u*(a[7] + (if size(a, 1) > 7 then u*(a[8]
+             + (if size(a, 1) > 8 then u*(a[9] + (if size(a, 1) > 9 then u*(a[
+            10] + (if size(a, 1) > 10 then positivePoly(u, a[11:end]) else 0))
+             else 0)) else 0)) else 0)) else 0)) else 0)) else 0)) else 0))
+             else 0)) else 0)) else 0 annotation (Inline=true);
+          // Note:  Dymola 7.4 does seem to not inline the recursive calls beyond
+          // depth 1; therefore, the function is "unrolled" up to the 10th order.
+          // Also, in Dymola 7.4, if this function is called from a stack of (nested)
+          // functions, it seems to reduce the depth allowed for the nested
+          // parentheses.  The implementation here ("unrolled" only up to the 10th
+          // order) allows poly() to be called from within one other function within a
+          // model.
+        end positivePoly;
+
+      algorithm
+        y := (if n < 0 then (if n + size(a, 1) < 0 then u^(n + size(a, 1))
+           else 1)*positivePoly(1/u, a[min(size(a, 1), -n):-1:1]) else 0) + (
+          if n <= 0 and n > -size(a, 1) then a[1 - n] else 0) + (if n + size(a,
+          1) > 1 then (if n > 1 then u^(n - 1) else 1)*positivePoly(u, a[1 +
+          max(0, 1 - n):size(a, 1)]) else 0)
+          annotation (Inline=true, derivative=dy);
+        // Here, Dymola 7.4 won't allow indexing via a[1 + max(0, 1 - n):end], so
+        // a[1 + max(0, 1 - n):size(a, 1)] is necessary.
+        annotation (Documentation(info="<html><p>For high-order polynomials, this
+  is more computationally efficient than the form 
+  &Sigma;<i>a</i><sub><i>i</i></sub><i>u</i><sup><i>n</i> + <i>i</i> - 1</sup>.</p>
+  
+  <p>Note that the order of the polynomial is 
+  <code>n + size(a, 1) - 1</code> (not <code>n</code>).</p>
+  
+  <p>The derivative of this function is 
+  <a href=\"modelica://FCSys.BaseClasses.Utilities.dpoly\">dy</a>().</p></html>"));
+      end y;
+
+      function dy
+        "<html>Derivative of <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.y\">y</a>()</html>"
+        extends Modelica.Icons.Function;
+
+        input Real u "Argument";
+        input Real a[:] "Coefficients";
+        input Integer n=0
+          "Power associated with the first term (before derivative)";
+        input Real du "Derivative of argument";
+        input Real da[size(a, 1)] "Derivatives of coefficients";
+
+        output Real dy "Result of derivative";
+
+      algorithm
+        dy := y(u,
+                a={(n + i - 1)*a[i] for i in 1:size(a, 1)},
+                n=n - 1)*du + y(
+                u,
+                da,
+                n) annotation (Inline=true);
+
+      end dy;
+    end Polynomial;
+
     function anyTrue
       "<html>Return <code>true</code> if all of the entries in a <code>Boolean</code> vector are <code>true</code></html>"
       extends Modelica.Icons.Function;
@@ -1042,6 +1217,10 @@ An unrelated species may be included.");
         end if;
       end for;
       y := false;
+      // Note:  This is slightly more efficient than
+      // Modelica.Math.BooleanVectors.anyTrue because it leverages
+      // short-circuiting.
+      // TODO:  Update the MSL.
 
       annotation (Inline=true, Documentation(info="<html><p><b>Examples:</b><br>
     <code>anyTrue({true,false,true})</code> returns <code>true</code> and
@@ -1091,21 +1270,6 @@ An unrelated species may be included.");
   vectorize (or \"matricize\") this function.  For example, <code>Delta([1,2;3,4])</code> returns <code>{-1,-1}</code>.</p></html>"));
     end Delta;
 
-    function dpoly
-      "<html>Derivative of <a href=\"modelica://FCSys.BaseClasses.Utilities.poly\">poly</a>()</html>"
-      extends Modelica.Icons.Function;
-
-      input Real u "Argument";
-      input Real du "Derivative of argument";
-      input Real a[:] "Coefficients";
-      input Integer n=0 "Power of the first coefficient";
-      output Real y "Result";
-
-    algorithm
-      y := 0 annotation (Inline=true);
-      // **update
-    end dpoly;
-
     function enumerate
       "<html>Enumerate the <code>true</code> entries in a <code>Boolean</code> vector (0 for <code>false</code> entries)</html>"
       extends Modelica.Icons.Function;
@@ -1153,7 +1317,7 @@ An unrelated species may be included.");
   <code>index({true,false,true})</code> returns <code>{1,3}</code>.</html>"));
     end index;
 
-    function inSign "Sign for direction into a side or face"
+    function inSign "Sign for the direction into a side or face"
       input FCSys.BaseClasses.Side side "Side";
       output Integer sign "Sign indicating direction along the axis";
     algorithm
@@ -1179,52 +1343,6 @@ An unrelated species may be included.");
   1.  <code>mod1(3,3)</code> returns 3, but <code>mod(3,3)</code> returns 0 where
   <code>mod()</code> is the built-in modulo operator.</html>"));
     end mod1;
-
-    function poly
-      "<html>Polynomial expressed in form: <i>y</i> = ((&hellip; + <i>a</i><sub><i>n</i>-2</sub>)/<i>u</i> + <i>a</i><sub><i>n</i>-1</sub>)/<i>u</i> + <i>a</i><sub><i>n</i></sub> + <i>u</i>&middot;(<i>a</i><sub><i>n</i>+1</sub> + <i>u</i>&middot;(<i>a</i><sub><i>n</i>+2</sub> + &hellip;))</html>"
-      extends Modelica.Icons.Function;
-
-      input Real u "Argument";
-      input Real a[:] "Coefficients";
-      input Integer n=0 "Power of the first coefficient";
-      output Real y "Result";
-
-    protected
-      function positivePoly
-        "<html>polynomial expressed in form: y = u*(a<sub>1</sub> + u*(a<sub>2</sub> + &hellip;))</html>"
-        input Real u "Argument";
-        input Real a[:] "Coefficients";
-        output Real y "Result";
-      algorithm
-        y := if size(a, 1) > 0 then u*(a[1] + (if size(a, 1) > 1 then u*(a[2]
-           + (if size(a, 1) > 2 then u*(a[3] + (if size(a, 1) > 3 then u*(a[4]
-           + (if size(a, 1) > 4 then u*(a[5] + (if size(a, 1) > 5 then u*(a[6]
-           + (if size(a, 1) > 6 then u*(a[7] + (if size(a, 1) > 7 then u*(a[8]
-           + (if size(a, 1) > 8 then u*(a[9] + (if size(a, 1) > 9 then u*(a[10]
-           + (if size(a, 1) > 10 then positivePoly(u, a[11:end]) else 0)) else
-          0)) else 0)) else 0)) else 0)) else 0)) else 0)) else 0)) else 0))
-           else 0)) else 0 annotation (Inline=true);
-        // Note:  Dymola 7.4 does seem to not inline the recursive calls beyond
-        // depth 1; therefore, the function is "unrolled" up to the 10th order.
-        // Also, in Dymola 7.4, if this function is called from a stack of (nested)
-        // functions, it seems to reduce the depth allowed for the nested
-        // parentheses.  The implementation here ("unrolled" only up to the 10th
-        // order) allows poly() to be called from within one other function within a
-        // model.
-      end positivePoly;
-
-    algorithm
-      y := (if n < 0 then (if n + size(a, 1) < 0 then u^(n + size(a, 1)) else 1)
-        *positivePoly(1/u, a[min(size(a, 1), -n):-1:1]) else 0) + (if n <= 0
-         and n > -size(a, 1) then a[1 - n] else 0) + (if n + size(a, 1) > 1
-         then (if n > 1 then u^(n - 1) else 1)*positivePoly(u, a[1 + max(0, 1
-         - n):size(a, 1)]) else 0) annotation (Inline=true, derivative=dpoly);
-      // Here, Dymola 7.4 won't allow indexing via a[1 + max(0, 1 - n):end], so
-      // a[1 + max(0, 1 - n):size(a, 1)] is necessary.
-      annotation (Documentation(info="<html>
-  <p>The derivative of this function is 
-  <a href=\"modelica://FCSys.BaseClasses.Utilities.dpoly\">dpoly</a>().</p></html>"));
-    end poly;
 
     function round
       "<html>Round a <code>Real</code> variable to the nearest integer</html>"

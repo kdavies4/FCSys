@@ -158,11 +158,69 @@ package Characteristics
               "resources/scripts/Dymola/Characteristics.Examples.TestCorrelations.mos"));
     end TestCorrelations;
 
-    model TestDerivative "Test a simple derivative"
+    model VerifyDerivativep
+      "<html>Verify that <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a> is the correct derivative of <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_vT\">p_vT</a></html>"
+      // This approach is based on [Dassault2010, vol. 2, pp. 300-301].
+
+      import FCSys.Characteristics.BaseClasses.Characteristic;
+
       extends Modelica.Icons.Example;
 
-      // This approach is from Dymola 7.4 User's Manual Volume 2, p. 300-301.
-    end TestDerivative;
+      Real u[2]={1 + time,1 + time^2}
+        "Real arguments to function (must have sufficient richness)";
+      Real y1 "Direct result of function";
+      Real y2 "Integral of derivative of y1";
+
+    initial equation
+      y2 = y1;
+
+    equation
+      y1 = Characteristic.p_vT(u[1], u[2]);
+      Characteristic.dp(
+            u[1],
+            u[2],
+            der(u[1]),
+            der(u[2])) = der(y2);
+      // Note:  This is equivalent to der(y1) = der(y2), but it must be
+      // explicit to ensure that the translator uses the defined derivative
+      // instead of the automatically derived one.
+
+      assert(abs(y1 - y2) < 1e-7, "The derivative is incorrect.");
+      // The simulation tolerance is set to 1e-8.
+      annotation (experiment(Tolerance=1e-8), experimentSetupOutput);
+    end VerifyDerivativep;
+
+    model VerifyDerivativev
+      "<html>Verify that <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv\">dv</a> is the correct derivative of <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_pT\">v_pT</a></html>"
+      // This approach is based on [Dassault2010, vol. 2, pp. 300-301].
+
+      import FCSys.Characteristics.BaseClasses.Characteristic;
+
+      extends Modelica.Icons.Example;
+
+      Real u[2]={1 + time,1 + time^2}
+        "Real arguments to function (must have sufficient richness)";
+      Real y1 "Direct result of function";
+      Real y2 "Integral of derivative of y1";
+
+    initial equation
+      y2 = y1;
+
+    equation
+      y1 = Characteristic.v_pT(u[1], u[2]);
+      Characteristic.dv(
+            u[1],
+            u[2],
+            der(u[1]),
+            der(u[2])) = der(y2);
+      // Note:  This is equivalent to der(y1) = der(y2), but it must be
+      // explicit to ensure that the translator uses the defined derivative
+      // instead of the automatically derived one.
+
+      assert(abs(y1 - y2) < 1e-7, "The derivative is incorrect.");
+      // The simulation tolerance is set to 1e-8.
+      annotation (experiment(Tolerance=1e-8), experimentSetupOutput);
+    end VerifyDerivativev;
   end Examples;
 
   package C "C"
@@ -912,6 +970,9 @@ package Characteristics
         "<html>Minimum pressure for numerical protection (<i>p</i><sub>min</sub>)</html>";
       constant Real b_v[:, :]=[1]
         "<html>Coefficients of specific volume as a polynomial in p/T and T (<i>b</i><sub><i>v</i></sub>)</html>";
+      // Note:  p/T is the argument instead of p so that b_p will have the
+      // same size as b_v for the typical definitions of the second virial
+      // coefficients in [Dymond2002].
       constant Real specVolPow[2]={-1,0}
         "<html>Powers of p/T and T for 1<sup>st</sup> row and column of b_v, respectively</html>";
       constant Q.PotentialChemical Deltah0_f
@@ -994,7 +1055,8 @@ package Characteristics
         //    "Error, not all 'end' could be expanded."
 
         c_p := smooth(0, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i
-           + 1] or i == size(T_lim_c, 1) - 1) then poly(
+           + 1] or i == size(T_lim_c, 1) - 1) then
+          FCSys.BaseClasses.Utilities.Polynomial.y(
                 T,
                 b_c[i, :],
                 specHeatCapPow) else 0 for i in 1:size(T_lim_c, 1) - 1))
@@ -1003,6 +1065,7 @@ package Characteristics
           Inline=true,
           smoothOrder=0);
         // **Adjust for pressure.
+        // **Different adjustments for gas and incompressible?
         /*
   - ()
   */
@@ -1039,6 +1102,7 @@ package Characteristics
 
       replaceable function dp
         "<html>Derivative of pressure as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_vT\">p_vT</a>()</html>"
+
         extends Modelica.Icons.Function;
 
         input Q.VolumeSpecificAbsolute v=298.15*U.K/U.atm "Specific volume";
@@ -1048,20 +1112,22 @@ package Characteristics
         output Q.Pressure dp "Derivative of pressure";
 
       algorithm
-        dp := if isCompressible then poly(
+        dp := if isCompressible then FCSys.BaseClasses.Utilities.Polynomial.y(
                 v,
-                {(pressPow[1] + i - 1)*poly(
+                {(pressPow[1] + i - 1)*FCSys.BaseClasses.Utilities.Polynomial.y(
                   T,
                   b_p[i, :],
                   pressPow[2]) for i in 1:size(b_p, 1)},
-                pressPow[1] - 1)*dv + poly(
+                pressPow[1] - 1)*dv + FCSys.BaseClasses.Utilities.Polynomial.y(
                 T,
-                {(pressPow[2] + i - 1)*poly(
+                {(pressPow[2] + i - 1)*FCSys.BaseClasses.Utilities.Polynomial.y(
                   v,
                   b_p[:, i],
                   pressPow[1]) for i in 1:size(b_p, 2)},
                 pressPow[2] - 1)*dT else 0
           annotation (Inline=true, smoothOrder=999);
+
+        annotation (Inline=true, smoothOrder=999);
       end dp;
 
       replaceable function dv
@@ -1150,7 +1216,7 @@ package Characteristics
           output Q.Potential h0_i "h0";
 
         algorithm
-          h0_i := poly(
+          h0_i := FCSys.BaseClasses.Utilities.Polynomial.y(
                     T,
                     b_c[i, :] .* {if specHeatCapPow + j == 0 then ln(T) else 1/
               (specHeatCapPow + j) for j in 1:size(b_c, 2)},
@@ -1172,7 +1238,8 @@ package Characteristics
           1] or i == size(T_lim_c, 1) - 1) then h0_i(T, i) else 0 for i in 1:
           size(T_lim_c, 1) - 1) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K
            then Deltah0 else 0) - (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt25degC
-           then Deltah0_f else 0) + h_offset) + T*poly(v_pT(p, T))
+           then Deltah0_f else 0) + h_offset) + T*
+          FCSys.BaseClasses.Utilities.Polynomial.y(v_pT(p, T))
           annotation (
           InlineNoEvent=true,
           Inline=true,
@@ -1206,9 +1273,9 @@ package Characteristics
         // Note:  In Dymola 7.4 the assertion level can't be set, although it has
         // been defined as an argument to assert() since Modelica 3.0.
 
-        p := if isCompressible then poly(
+        p := if isCompressible then FCSys.BaseClasses.Utilities.Polynomial.y(
                 v,
-                {poly(
+                {FCSys.BaseClasses.Utilities.Polynomial.y(
                   T,
                   b_p[i, :],
                   pressPow[2]) for i in 1:size(b_p, 1)},
@@ -1251,7 +1318,7 @@ package Characteristics
           output Q.NumberAbsolute s0_i "s0";
 
         algorithm
-          s0_i := poly(
+          s0_i := FCSys.BaseClasses.Utilities.Polynomial.y(
                     T,
                     b_c[i, :] .* {if specHeatCapPow + j == 1 then ln(T) else 1/
               (specHeatCapPow + j - 1) for j in 1:size(b_c, 2)},
@@ -1274,7 +1341,8 @@ package Characteristics
           1] or i == size(T_lim_c, 1) - 1) then s0_i(T, i) else 0 for i in 1:
           size(T_lim_c, 1) - 1) - sum((if specVolPow[1] + i == 0 then ln((if
           p_min > 0 then max(p, p_min) else p)/p0) else (p^(specVolPow[1] + i)
-           - p0^(specVolPow[1] + i))/(specVolPow[1] + i))*poly(
+           - p0^(specVolPow[1] + i))/(specVolPow[1] + i))*
+          FCSys.BaseClasses.Utilities.Polynomial.y(
                 T,
                 b_v[i, :],
                 specVolPow[2] - specVolPow[1] - i) for i in 1:size(b_v, 1)))
@@ -1296,9 +1364,9 @@ package Characteristics
         output Q.VolumeSpecificAbsolute v "Specific volume";
 
       algorithm
-        v := poly(
+        v := FCSys.BaseClasses.Utilities.Polynomial.y(
                 p/T,
-                {poly(
+                {FCSys.BaseClasses.Utilities.Polynomial.y(
                   T,
                   b_v[i, :],
                   specVolPow[2]) for i in 1:size(b_v, 1)},

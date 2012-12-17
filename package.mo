@@ -170,6 +170,10 @@ package UsersGuide "User's Guide"
       <td valign=top class=noBorder>F. E. Cellier, <i><a href=\"http://www.inf.ethz.ch/personal/fcellier/Pubs/BG/springer.html\">Continuous System Modeling</a></i>, Springer-Verlag, 1991.</td>
     </tr>
     <tr>
+      <td valign=top class=\"noBorder\">[Dassault2010]</td>
+      <td valign=top class=\"noBorder\">Dassault Syst&eacute;mes, <i>Dymola (Dynamic Modeling Laboratory) User Manual</i>, Lund, Sweden, Jan. 2010.  Distributed with Dymola version 7.4.</td>
+    </tr>
+    <tr>
       <td valign=top class=noBorder>[<a name=\"DuPont2004N\" class=bookmark>DuPont2004N</a>]</td>
       <td valign=top class=noBorder>DuPont, \"Nafion&reg; PFSA Membranes N-112, NE-1135, N-115, N-117, NE-1110</a>,\" <a href = http://www.fuelcells.dupont.com>http://www.fuelcells.dupont.com</a>, Feb. 2004.</td>
     </tr>

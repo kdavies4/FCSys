@@ -1478,7 +1478,7 @@ package Figures "Layouts for documentation"
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
   end VolumeIcon;
 
-  model ConnectorHieararchy "Instantiation heirarchy of the connectors"
+  model ConnectorHieararchy "Instantiation hierarchy of the connectors"
 
     Connectors.BaseClasses.PartialChemical Chemical annotation (Placement(
           transformation(extent={{-42,-6},{-22,14}}), iconTransformation(extent
