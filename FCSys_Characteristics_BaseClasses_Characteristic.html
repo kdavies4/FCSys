@@ -69,9 +69,9 @@
     virial equations are supported up to the fourth coefficient.  If additional terms are
     required, review the definition of <code>b_p</code> and modify it.</li>
     <li>The defaults for <code>b_v</code> and <code>specVolPow</code> represent ideal gas.</li>
-    <li><code>specVolPow</code> is defined as a <code>Real</code> vector.  However, 
+    <li><code>specVolPow</code> is defined as a <code>Real</code> vector.  However,
     special modifications are necessary if non-integer values are specified
-    (see <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">'e-'.Graphite</a>).  
+    (see <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">'e-'.Graphite</a>).
     <li><code>b_c</code>: The rows give the coefficients for different temperature ranges&mdash;bounded
     by the values in <code>T_lim_c</code>.
     The powers of <i>T</i> increase
@@ -125,25 +125,25 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td>B_c</td><td>Integration constants for specific enthalpy and entropy (<i>B</i><sub><i>c</i></sub>)</td></tr>
 <tr><td>isCompressible=anyTrue({anyTrue({b_v[i, j] &lt;&gt; 0 and specVolPow[1] + i - 1 &lt;&gt; 0 for i in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})</td><td>true, if specific volume depends on pressure</td></tr>
 <tr><td>hasThermalExpansion=anyTrue({anyTrue({b_v[i, j] &lt;&gt; 0 and specVolPow[2] + j - specVolPow[1] - i &lt;&gt; 0 for i in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})</td><td>true, if specific volume depends on temperature</td></tr>
-<tr><td>pressPow={specVolPow[1] - size(b_v, 1) + 1,specVolPow[2] + 1}</td><td>Powers of v and T for 1st row and column of b_p, respectively</td></tr>
+<tr><td>pressPow={-specVolPow[1] - size(b_v, 1) - 1,specVolPow[2] + 1}</td><td>Powers of v and T for 1st row and column of b_p, respectively</td></tr>
 <tr><td>b_p={(if specVolPow[1] + i == 0 or specVolPow[1] + i == 1 then b_v[i, :] else (if specVolPow[1] + i == 2 and specVolPow[1] &lt;= 0 then b_v[i, :] + b_v[i - 1, :] .^ 2 else (if specVolPow[1] + i == 3 and specVolPow[1] &lt;= 0 then b_v[i, :] + b_v[i - 2, :] .* (b_v[i - 2, :] .^ 2 + 3*b_v[i - 1, :]) else zeros(size(b_v, 2))))) for i in size(b_v, 1):-1:1}</td><td>Coefficients of p as a polynomial in v and T</td></tr>
-<tr><td><img src="images/FCSys.Characteristics.'e-'.Graphite.polyS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.alpha" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.alpha">alpha</a>
+<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.alpha" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.alpha">alpha</a>
 </td><td>Ideal resistivity as a function of temperature (&alpha;)</td></tr>
-<tr><td><img src="images/FCSys.Characteristics.'e-'.Graphite.polyS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.c0" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.c0">c0</a>
+<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.c0" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.c0">c0</a>
 </td><td>Specific heat capacity at reference pressure as a function of temperature (<i>c</i>&deg;)</td></tr>
-<tr><td><img src="images/FCSys.Characteristics.'e-'.Graphite.polyS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.c_V" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.c_V">c_V</a>
+<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.c_V" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.c_V">c_V</a>
 </td><td>Specific heat capacity at constant volume as a function of pressure and temperature (<i>c</i><sub><i>V</i></sub>)</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.dp" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.dp">dp</a>
 </td><td>Derivative of pressure as defined by <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.p_vT">p_vT</a>()</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.dv" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.dv">dv</a>
 </td><td>Derivative of specific volume as defined by <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.v_pT">v_pT</a>()</td></tr>
-<tr><td><img src="images/FCSys.Characteristics.'e-'.Graphite.polyS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.g" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.g">g</a>
+<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.g" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.g">g</a>
 </td><td>Gibbs potential as a function of pressure and temperature</td></tr>
-<tr><td><img src="images/FCSys.Characteristics.'e-'.Graphite.polyS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.h0" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.h0">h0</a>
+<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.h0" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.h0">h0</a>
 </td><td>Specific enthalpy as a function of temperature at reference pressure (<i>h</i>&deg;)</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.p_vT" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.p_vT">p_vT</a>
 </td><td>Pressure as a function of specific volume and temperature</td></tr>
-<tr><td><img src="images/FCSys.Characteristics.'e-'.Graphite.polyS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.s" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.s">s</a>
+<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.s" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.s">s</a>
 </td><td>Specific entropy as a function of pressure and temperature</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.alpha_tauS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.v_pT" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.v_pT">v_pT</a>
 </td><td>Specific volume as a function of pressure and temperature</td></tr>
@@ -182,8 +182,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <pre><font color="blue">final </font><font color="blue">constant </font>Boolean hasThermalExpansion=<font color="red">anyTrue</font>({<font color="red">anyTrue</font>({b_v[i, j] &lt;&gt; 0<font color="blue">
      and </font>specVolPow[2] + j - specVolPow[1] - i &lt;&gt; 0 <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(b_v, 1)}) <font color="blue">
     for </font>j<font color="blue"> in </font>1:<font color="red">size</font>(b_v, 2)}) <font color="darkgreen">&quot;true, if specific volume depends on temperature&quot;</font>;</pre><p>
-<pre><font color="blue">final </font><font color="blue">constant </font>Real pressPow[2]={specVolPow[1] - <font color="red">size</font>(b_v, 1) + 1,specVolPow[2] +
-    1} <font color="darkgreen">&quot;Powers of v and T for 1st row and column of b_p, respectively&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font>Real pressPow[2]={-specVolPow[1] - <font color="red">size</font>(b_v, 1) - 1,specVolPow[2]
+     + 1} <font color="darkgreen">&quot;Powers of v and T for 1st row and column of b_p, respectively&quot;</font>;</pre><p>
 <pre><font color="blue">final </font><font color="blue">constant </font>Real b_p[<font color="red">size</font>(b_v, 1), <font color="red">size</font>(b_v, 2)]={(<font color="blue">if </font>specVolPow[1] + i == 0<font color="blue">
      or </font>specVolPow[1] + i == 1<font color="blue"> then </font>b_v[i, :]<font color="blue"> else </font>(<font color="blue">if </font>specVolPow[1] + i == 2<font color="blue">
      and </font>specVolPow[1] &lt;= 0<font color="blue"> then </font>b_v[i, :] + b_v[i - 1, :] .^ 2<font color="blue"> else </font>(<font color="blue">if </font>
@@ -235,6 +235,20 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Characteristics.BaseClasses.Characteristic.c0"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.c0</h2>
 <b>Specific heat capacity at reference pressure as a function of temperature (<i>c</i>&deg;)</b><p>
 <p><h3>Information</h3></p>
+
+  <table border=1 cellspacing=0 cellpadding=4 #bordercolor=#940000 style="border: 1px solid #940000;">
+      <tr bgcolor=#cf0000 style="border-bottom-color: #940000;">
+        <td>
+        <b><font color=#ffffff>Warning</font></b>
+        </td>
+      </tr>
+      <tr bgcolor=#f7f7f7>
+        <td>
+        The call signature of this function is different than 
+        <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.c_V">c_V</a>().
+        </td>
+      </tr>
+    </table><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p><h3>Inputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -262,8 +276,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
       String(T/U.K) + &quot; K is out of range for &quot; + name + &quot; ([&quot; + String(T_lim_c[1]
       /U.K) + &quot;, &quot; + String(T_lim_c[size(T_lim_c, 1)]/U.K) + &quot;] K).&quot;);
     */</font>
-  <font color="darkgreen">// Note: This is commented out so that the function can be inlined.</font>
-  <font color="darkgreen">// Note: In Dymola 7.4 T_lim_c[end] can&#39;t be used instead of</font>
+  <font color="darkgreen">// Note:  This is commented out so that the function can be inlined.</font>
+  <font color="darkgreen">// Note:  In Dymola 7.4 T_lim_c[end] can&#39;t be used instead of</font>
   <font color="darkgreen">// T_lim_c[size(T_lim_c, 1)] due to:</font>
   <font color="darkgreen">//    &quot;Error, not all &#39;end&#39; could be expanded.&quot;</font>
 
@@ -272,6 +286,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     T,
     b_c[i, :],
     specHeatCapPow)<font color="blue"> else </font>0 <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(T_lim_c, 1) - 1));
+
+<textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>c0;
 </pre>
 <hr>
@@ -282,9 +298,25 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Characteristics.BaseClasses.Characteristic.c_V"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.c_V</h2>
 <b>Specific heat capacity at constant volume as a function of pressure and temperature (<i>c</i><sub><i>V</i></sub>)</b><p>
 <p><h3>Information</h3></p>
-<p>For an ideal gas, pressure (<i>p</i>)
+
+  <table border=1 cellspacing=0 cellpadding=4 #bordercolor=#940000 style="border: 1px solid #940000;">
+      <tr bgcolor=#cf0000 style="border-bottom-color: #940000;">
+        <td>
+        <b><font color=#ffffff>Warning</font></b>
+        </td>
+      </tr>
+      <tr bgcolor=#f7f7f7>
+        <td>
+        The call signature of this function is different than 
+        <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.c0">c0</a>().
+        </td>
+      </tr>
+    </table>
+    
+  <p>For an ideal gas, pressure (<i>p</i>)
   does not matter; the function reduces to <i>c</i><sub><i>V</i></sub>(<i>T</i>) = <i>c</i>&deg;(<i>T</i>) - 1 (in
-  <a href="index.html#FCSys">FCSys</a>, <i>R</i> = 1).</p><p>
+  <a href="index.html#FCSys">FCSys</a>, <i>R</i> = 1).</p>
+    <p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p><h3>Inputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -331,7 +363,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Inputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">VolumeSpecificAbsolute</a></td><td>v</td><td>U.atm/(298.15*U.K)</td><td>Specific volume [l3/N]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">VolumeSpecificAbsolute</a></td><td>v</td><td>298.15*U.K/U.atm</td><td>Specific volume [l3/N]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>dv</td><td>0</td><td>Derivative of specific volume [l3/N]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Temperature</a></td><td>dT</td><td>0</td><td>Derivative of temperature</td></tr>
@@ -347,7 +379,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   &quot;Derivative of pressure as defined by <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.p_vT">p_vT</a>()&quot;</font>
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
-  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> v=U.atm/(298.15*U.K) <font color="darkgreen">&quot;Specific volume&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> v=298.15*U.K/U.atm <font color="darkgreen">&quot;Specific volume&quot;</font>;
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> dv=0 <font color="darkgreen">&quot;Derivative of specific volume&quot;</font>;
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Q.Temperature</a> dT=0 <font color="darkgreen">&quot;Derivative of temperature&quot;</font>;
@@ -405,7 +437,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   dv := <font color="red">sum</font>(<font color="red">sum</font>(b_v[i, j]*p^(specVolPow[1] + i - 2)*T^(j + specVolPow[2] - i -
     specVolPow[1] - 1)*((i + specVolPow[1] - 1)*T*dp + (j + specVolPow[2] - i -
     specVolPow[1])*p*dT) <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(b_v, 1)) <font color="blue">for </font>j<font color="blue"> in </font>1:<font color="red">size</font>(b_v, 2));
-
 <font color="blue">end </font>dv;
 </pre>
 <hr>
@@ -463,8 +494,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     String(T/U.K) + &quot; K is out of range for &quot; + name + &quot; ([&quot; + String(T_lim_c[1]
     /U.K) + &quot;, &quot; + String(T_lim_c[size(T_lim_c, 1)]/U.K) + &quot;] K).&quot;);
     */</font>
-  <font color="darkgreen">// Note: This is commented out so that the function can be inlined.</font>
-  <font color="darkgreen">// Note: In Dymola 7.4 T_lim_c[end] can&#39;t be used instead of</font>
+  <font color="darkgreen">// Note:  This is commented out so that the function can be inlined.</font>
+  <font color="darkgreen">// Note:  In Dymola 7.4 T_lim_c[end] can&#39;t be used instead of</font>
   <font color="darkgreen">// T_lim_c[size(T_lim_c, 1)] due to:</font>
   <font color="darkgreen">//    &quot;Error, not all &#39;end&#39; could be expanded.&quot;</font>
 
@@ -538,8 +569,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     String(T/U.K) + &quot; K is out of range for &quot; + name + &quot; ([&quot; + String(T_lim_c[1]
     /U.K) + &quot;, &quot; + String(T_lim_c[size(T_lim_c, 1)]/U.K) + &quot;] K).&quot;);
     */</font>
-  <font color="darkgreen">// Note: This is commented out so that the function can be inlined.</font>
-  <font color="darkgreen">// Note: In Dymola 7.4 T_lim_c[end] can&#39;t be used instead of</font>
+  <font color="darkgreen">// Note:  This is commented out so that the function can be inlined.</font>
+  <font color="darkgreen">// Note:  In Dymola 7.4 T_lim_c[end] can&#39;t be used instead of</font>
   <font color="darkgreen">// T_lim_c[size(T_lim_c, 1)] due to:</font>
   <font color="darkgreen">//    &quot;Error, not all &#39;end&#39; could be expanded.&quot;</font>
 
@@ -567,7 +598,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Inputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">VolumeSpecificAbsolute</a></td><td>v</td><td>U.atm/(298.15*U.K)</td><td>Specific volume [l3/N]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">VolumeSpecificAbsolute</a></td><td>v</td><td>298.15*U.K/U.atm</td><td>Specific volume [l3/N]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature</td></tr>
 </table>
 <p><h3>Outputs</h3><p>
@@ -582,7 +613,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   annotation(derivative=<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.dp">dp</a>);
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
-  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> v=U.atm/(298.15*U.K) <font color="darkgreen">&quot;Specific volume&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> v=298.15*U.K/U.atm <font color="darkgreen">&quot;Specific volume&quot;</font>;
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p <font color="darkgreen">&quot;Pressure&quot;</font>;
 
@@ -590,17 +621,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="darkgreen">// assert(isCompressible,</font>
   <font color="darkgreen">//  &quot;The pressure is undefined since the material is incompressible.&quot;,</font>
   <font color="darkgreen">//  AssertionLevel.warning);</font>
-  <font color="darkgreen">// Note: In Dymola 7.4 the assertion level can&#39;t be set, although it has</font>
+  <font color="darkgreen">// Note:  In Dymola 7.4 the assertion level can&#39;t be set, although it has</font>
   <font color="darkgreen">// been defined as an argument to assert() since Modelica 3.0.</font>
 
-  p := <font color="blue">if </font>isCompressible<font color="blue"> then </font>(<font color="blue">if </font><font color="red">size</font>(b_p, 1) == 1<font color="blue"> and </font><font color="red">size</font>(b_p, 2) == 1<font color="blue"> then </font>1<font color="blue">
-     else </font><font color="red">poly</font>(
+  p := <font color="blue">if </font>isCompressible<font color="blue"> then </font><font color="red">poly</font>(
     v,
     {<font color="red">poly</font>(
       T,
       b_p[i, :],
       pressPow[2]) <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(b_p, 1)},
-    pressPow[1]))<font color="blue"> else </font>0;
+    pressPow[1])<font color="blue"> else </font>0;
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>p_vT;
 </pre>
 <hr>
@@ -652,8 +682,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     String(T/U.K) + &quot; K is out of range for &quot; + name + &quot; ([&quot; + String(T_lim_c[1]
     /U.K) + &quot;, &quot; + String(T_lim_c[size(T_lim_c, 1)]/U.K) + &quot;] K).&quot;);
   */</font>
-  <font color="darkgreen">// Note: This is commented out so that the function can be inlined.</font>
-  <font color="darkgreen">// Note: In Dymola 7.4 T_lim_c[end] can&#39;t be used instead of</font>
+  <font color="darkgreen">// Note:  This is commented out so that the function can be inlined.</font>
+  <font color="darkgreen">// Note:  In Dymola 7.4 T_lim_c[end] can&#39;t be used instead of</font>
   <font color="darkgreen">// T_lim_c[size(T_lim_c, 1)] due to:</font>
   <font color="darkgreen">//    &quot;Error, not all &#39;end&#39; could be expanded.&quot;</font>
 
@@ -718,7 +748,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Dec 13 10:16:48 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Fri Dec 14 14:30:39 2012.
 </div>
 </body>
 </html>

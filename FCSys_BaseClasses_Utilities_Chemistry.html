@@ -371,7 +371,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="darkgreen">// Perform singular value decomposition (SVD).</font>
   <font color="red">assert</font>(n_species == n_tot + 1, &quot;The reaction is ill-posed.\n&quot; + (<font color="blue">if </font>n_species &gt;
     n_tot + 1<font color="blue"> then </font>&quot;A species may be included more than once.&quot;<font color="blue"> else </font>&quot;A species may be missing or the wrong one has been entered.&quot;));
-  (d,u,v) := <font color="red">Modelica_LinearSystems2.Math.Matrices.LAPACK.dgesdd</font>(<font color="red">cat</font>(
+  (d,u,v) := <font color="red">Modelica.Math.Matrices.singularValues</font>(<font color="red">cat</font>(
     2,
     elementCoeffs[:, 1:n_tot],
     <font color="red">zeros</font>(n_species, 1)));
@@ -390,7 +390,7 @@ An unrelated species may be included.&quot;);
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Dec 11 15:26:54 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Dec 18 17:22:58 2012.
 </div>
 </body>
 </html>
