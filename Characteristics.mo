@@ -47,7 +47,7 @@ package Characteristics
       output Q.CapacityThermalSpecific c_p_N2=DataN2.c_p(p, T);
       output Q.CapacityThermalSpecific c_p_O2=DataO2.c_p(p, T);
       //
-      // Specific heat capacity at constant volume
+      // Isochroic specific heat capacity
       output Q.CapacityThermalSpecific c_V_C=DataC.c_V(p, T);
       output Q.CapacityThermalSpecific c_V_C19HF37O5S=DataC19HF37O5S.c_V(p, T);
       output Q.CapacityThermalSpecific 'c_V_e-'='Datae-'.c_V(p, T);
@@ -954,6 +954,8 @@ package Characteristics
     end CharacteristicNASA;
 
     package Characteristic "Record for thermodynamic and resistive properties"
+      import Modelica.Math.BooleanVectors.anyTrue;
+
       extends Modelica.Icons.MaterialPropertiesPackage;
 
       constant String formula "Chemical formula";
@@ -1009,9 +1011,8 @@ package Characteristics
            + b_v[i - 2, :] .* (b_v[i - 2, :] .^ 2 + 3*b_v[i - 1, :]) else zeros(
           size(b_v, 2))))) for i in size(b_v, 1):-1:1}
         "Coefficients of p as a polynomial in v and T";
-      // Note:  This is from [Dymond2002, p. 2].  It includes up to the fourth
-      // virial coefficient.  If necessary, additional terms can be computed and
-      // introduced using FCSys/resources/virial-relations.cdf.
+      // Note:  This is from [Dymond2002, p. 2].  If necessary, additional terms
+      // can be computed using FCSys/resources/virial-relations.cdf.
 
       partial function alpha
         "<html>Ideal base resistivity factor as a function of temperature (&alpha;)</html>"
@@ -1021,10 +1022,9 @@ package Characteristics
         output Q.Resistivity alpha "Resistivity";
 
       algorithm
-        alpha := 6*U.pi*r^2*U.q*sqrt(U.pi*m/T) annotation (
-          Inline=true,
-          smoothOrder=999,
-          Documentation(info="<html>
+        alpha := 6*U.pi*r^2*U.q*sqrt(U.pi*m/T)
+          annotation (Inline=true, smoothOrder=999);
+        annotation (Documentation(info="<html>
   <p>This function is based on the kinetic theory of gases with the rigid-sphere (\"billiard-ball\")
   assumption [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].  When used for
   fluidity, the independence of this function on density or pressure matches experiments with
@@ -1034,55 +1034,61 @@ package Characteristics
       end alpha;
 
     public
-      function c_p_
-        "<html>Specific heat capacity at constant pressure as a function of pressure and temperature (<i>c</i><sub><i>p</i></sub>)</html>"
+      function c_V
+        "<html>Isochoric specific heat capacity as a function of pressure and temperature (<i>c</i><sub><i>V</i></sub>)</html>"
         extends Modelica.Icons.Function;
 
         input Q.PressureAbsolute p=1*U.atm "Pressure";
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        output Q.CapacityThermalSpecific c_p
-          "Specific heat capacity at constant pressure";
+        output Q.CapacityThermalSpecific c_V "Isochoric specific heat capacity";
 
-      algorithm
-        /*
+      protected
+        function c0_p
+          "Isobaric specific heat capacity of ideal gas at reference pressure as a function of temperature"
+
+          input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+          output Q.CapacityThermalSpecific c0_p
+            "Isobaric specific heat capacity of ideal gas at reference pressure";
+
+        algorithm
+          /*
     assert(T_lim_c[1] <= T and T <= T_lim_c[size(T_lim_c, 1)], "Temperature " +
-      String(T/U.K) + " K is out of range for " + name + " ([" + String(T_lim_c[1]
+      String(T/U.K) + " K is out of bounds for " + name + " ([" + String(T_lim_c[1]
       /U.K) + ", " + String(T_lim_c[size(T_lim_c, 1)]/U.K) + "] K).");
     */
-        // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4 T_lim_c[end] can't be used instead of
-        // T_lim_c[size(T_lim_c, 1)] due to:
-        //    "Error, not all 'end' could be expanded."
-
-        c_p := smooth(0, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i
-           + 1] or i == size(T_lim_c, 1) - 1) then
-          FCSys.BaseClasses.Utilities.Polynomial.y(
-                T,
-                b_c[i, :],
-                specHeatCapPow) else 0 for i in 1:size(T_lim_c, 1) - 1))
-          annotation (
-          InlineNoEvent=true,
-          Inline=true,
-          smoothOrder=0);
-        // **Adjust for pressure.
-        // **Different adjustments for gas and incompressible?
-        /*
-  - ()
-  */
-
-      end c_p_;
-
-      function c_V
-        "<html>Specific heat capacity at constant volume as a function of pressure and temperature (<i>c</i><sub><i>V</i></sub>)</html>"
-        extends Modelica.Icons.Function;
-
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        output Q.CapacityThermalSpecific c_V
-          "Specific heat capacity at constant volume";
+          // Note:  This is commented out so that the function can be inlined.
+          // Note:  In Dymola 7.4 T_lim_c[end] can't be used instead of
+          // T_lim_c[size(T_lim_c, 1)] due to:
+          //    "Error, not all 'end' could be expanded."
+          c0_p := smooth(0, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[
+            i + 1] or i == size(T_lim_c, 1) - 1) then Polynomial.f(
+                    T,
+                    b_c[i, :],
+                    specHeatCapPow) else 0 for i in 1:size(T_lim_c, 1) - 1))
+            annotation (
+            InlineNoEvent=true,
+            Inline=true,
+            smoothOrder=0);
+        end c0_p;
 
       algorithm
-        c_V := c_p(p, T) - T*dp(
+        c_V := c0_p(T) - (if phase == "gas" then 1 - Polynomial.f(
+                v_pT(p, T),
+                {T*(2*Polynomial.df(
+                  T,
+                  b_p[i, :],
+                  pressPow[2],
+                  1,
+                  zeros(size(b_p, 2))) + T*Polynomial.d2f(
+                  T,
+                  b_p[i, :],
+                  pressPow[2],
+                  1,
+                  zeros(size(b_p, 2)),
+                  0,
+                  zeros(size(b_p, 2))))/(pressPow[1] + i) for i in 1:min(-1 -
+            pressPow[1], size(b_p, 1))},
+                pressPow[1] + 1) else T*dp(
                 v_pT(p, T),
                 T,
                 dv=0,
@@ -1090,8 +1096,16 @@ package Characteristics
                 p,
                 T,
                 dp=0,
-                dT=1) "[Moran2004, p. 546]"
-          annotation (Inline=true, smoothOrder=999);
+                dT=1)) annotation (Inline=true, smoothOrder=999);
+        // For gas, the conditional term is the departure of isochoric specific
+        // heat capacity (c_V) of real gas from the isobaric specific heat capacity
+        // of the corresponding ideal gas (c0_p) at the same temperature (T) and
+        // reference pressure (p0) [Dymond2002, p. 17].  c0_p - 1 is the isochoric
+        // specific heat capacity of the ideal gas at reference pressure.  For
+        // other phases, the conditional term is simply the difference between the
+        // isochoric and isobaric specific heat capacities [Moran2004, p. 546].
+        // Note that it reduces to -1 for an ideal gas---the -1 in the gas
+        // branch of the condition.
 
         annotation (Documentation(info="<html>
   <p>For an ideal gas, pressure (<i>p</i>)
@@ -1112,15 +1126,15 @@ package Characteristics
         output Q.Pressure dp "Derivative of pressure";
 
       algorithm
-        dp := if isCompressible then FCSys.BaseClasses.Utilities.Polynomial.y(
+        dp := if isCompressible then Polynomial.f(
                 v,
-                {(pressPow[1] + i - 1)*FCSys.BaseClasses.Utilities.Polynomial.y(
+                {(pressPow[1] + i - 1)*Polynomial.f(
                   T,
                   b_p[i, :],
                   pressPow[2]) for i in 1:size(b_p, 1)},
-                pressPow[1] - 1)*dv + FCSys.BaseClasses.Utilities.Polynomial.y(
+                pressPow[1] - 1)*dv + Polynomial.f(
                 T,
-                {(pressPow[2] + i - 1)*FCSys.BaseClasses.Utilities.Polynomial.y(
+                {(pressPow[2] + i - 1)*Polynomial.f(
                   v,
                   b_p[:, i],
                   pressPow[1]) for i in 1:size(b_p, 2)},
@@ -1210,23 +1224,23 @@ package Characteristics
 
       protected
         function h0_i
-          "Return h0 as a function of T using one of the temperature ranges, with enthalpy of formation at 25 degC"
+          "Return h0 as a function of T using one of the temperature intervals"
           input Q.TemperatureAbsolute T "Temperature";
-          input Integer i "index of the temperature range";
-          output Q.Potential h0_i "h0";
+          input Integer i "Index of the temperature interval";
+          output Q.Potential h0
+            "Specific enthalpy at given temperature relative to enthalpy of formation at 25 degC, both at reference pressure";
 
         algorithm
-          h0_i := FCSys.BaseClasses.Utilities.Polynomial.y(
+          h0 := Polynomial.F(
                     T,
-                    b_c[i, :] .* {if specHeatCapPow + j == 0 then ln(T) else 1/
-              (specHeatCapPow + j) for j in 1:size(b_c, 2)},
-                    specHeatCapPow + 1) + B_c[i, 1] annotation (Inline=true);
+                    b_c[i, :],
+                    specHeatCapPow) + B_c[i, 1] annotation (Inline=true);
         end h0_i;
 
       algorithm
         /*
     assert(T_lim_c[1] <= T and T <= T_lim_c[size(T_lim_c, 1)], "Temperature " +
-    String(T/U.K) + " K is out of range for " + name + " ([" + String(T_lim_c[1]
+    String(T/U.K) + " K is out of bounds for " + name + " ([" + String(T_lim_c[1]
     /U.K) + ", " + String(T_lim_c[size(T_lim_c, 1)]/U.K) + "] K).");
     */
         // Note:  This is commented out so that the function can be inlined.
@@ -1234,12 +1248,22 @@ package Characteristics
         // T_lim_c[size(T_lim_c, 1)] due to:
         //    "Error, not all 'end' could be expanded."
 
-        h := smooth(1, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i +
-          1] or i == size(T_lim_c, 1) - 1) then h0_i(T, i) else 0 for i in 1:
-          size(T_lim_c, 1) - 1) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K
-           then Deltah0 else 0) - (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt25degC
-           then Deltah0_f else 0) + h_offset) + T*
-          FCSys.BaseClasses.Utilities.Polynomial.y(v_pT(p, T))
+        h := smooth(1, h0_i(T, interval(T, T_lim_c)) + (if referenceEnthalpy
+           == ReferenceEnthalpy.ZeroAt0K then Deltah0 else 0) - (if
+          referenceEnthalpy == ReferenceEnthalpy.ZeroAt25degC then Deltah0_f
+           else 0) + h_offset) + (if phase == "gas" then T*Polynomial.f(
+                p,
+                {(Polynomial.df(
+                  T,
+                  b_v[i, :],
+                  pressPow[2],
+                  1,
+                  zeros(size(b_v, 2)))/T^(i) - Polynomial.f(
+                  T,
+                  b_v[i, :],
+                  pressPow[2] - pressPow[1] - i))/(pressPow[1] + i) for i in
+            max(1 - pressPow[1], 1):size(b_v, 1)},
+                1) else 0)
           annotation (
           InlineNoEvent=true,
           Inline=true,
@@ -1247,9 +1271,11 @@ package Characteristics
         // The first term is the integral of c_p*dT up to T at p0 with the
         // reference enthalpy at the lower bound [McBride2002, p. 2].  The
         // second term is the correction for non-ideal gas [Dymond2002, pp.
-        // 16-17].
+        // 16-17].  The final term is the adjustment
 
-        // **Adjust for presssure (but only for gas?).
+        // **Add term for non-gas.
+        // **Is the pressure adjustment correct for incompressible species?
+        // **Add and cite Rao1997
 
         annotation (Documentation(info="<html>
   <p>For an ideal gas, pressure (<i>p</i>)
@@ -1273,9 +1299,9 @@ package Characteristics
         // Note:  In Dymola 7.4 the assertion level can't be set, although it has
         // been defined as an argument to assert() since Modelica 3.0.
 
-        p := if isCompressible then FCSys.BaseClasses.Utilities.Polynomial.y(
+        p := if isCompressible then Polynomial.f(
                 v,
-                {FCSys.BaseClasses.Utilities.Polynomial.y(
+                {Polynomial.f(
                   T,
                   b_p[i, :],
                   pressPow[2]) for i in 1:size(b_p, 1)},
@@ -1312,23 +1338,23 @@ package Characteristics
 
       protected
         function s0_i
-          "Return s0 as a function of T using one of the temperature ranges"
+          "Return s0 as a function of T using one of the temperature intervals"
           input Q.TemperatureAbsolute T "Temperature";
-          input Integer i "index of the temperature range";
-          output Q.NumberAbsolute s0_i "s0";
+          input Integer i "Index of the temperature interval";
+          output Q.NumberAbsolute s0
+            "Specific entropy at reference pressure and given temperature";
 
         algorithm
-          s0_i := FCSys.BaseClasses.Utilities.Polynomial.y(
+          s0 := Polynomial.F(
                     T,
-                    b_c[i, :] .* {if specHeatCapPow + j == 1 then ln(T) else 1/
-              (specHeatCapPow + j - 1) for j in 1:size(b_c, 2)},
-                    specHeatCapPow) + B_c[i, 2] annotation (Inline=true);
+                    b_c[i, :],
+                    specHeatCapPow - 1) + B_c[i, 2] annotation (Inline=true);
         end s0_i;
 
       algorithm
         /*
   assert(T_lim_c[1] <= T and T <= T_lim_c[size(T_lim_c, 1)], "Temperature " +
-    String(T/U.K) + " K is out of range for " + name + " ([" + String(T_lim_c[1]
+    String(T/U.K) + " K is out of bounds for " + name + " ([" + String(T_lim_c[1]
     /U.K) + ", " + String(T_lim_c[size(T_lim_c, 1)]/U.K) + "] K).");
   */
         // Note:  This is commented out so that the function can be inlined.
@@ -1337,12 +1363,10 @@ package Characteristics
         //    "Error, not all 'end' could be expanded."
 
         // **Adjust for pressure.
-        s := smooth(1, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i +
-          1] or i == size(T_lim_c, 1) - 1) then s0_i(T, i) else 0 for i in 1:
-          size(T_lim_c, 1) - 1) - sum((if specVolPow[1] + i == 0 then ln((if
-          p_min > 0 then max(p, p_min) else p)/p0) else (p^(specVolPow[1] + i)
-           - p0^(specVolPow[1] + i))/(specVolPow[1] + i))*
-          FCSys.BaseClasses.Utilities.Polynomial.y(
+        s := smooth(1, s0_i(T, interval(T, T_lim_c)) - sum((if specVolPow[1] +
+          i == 0 then ln((if p_min > 0 then max(p, p_min) else p)/p0) else (p^(
+          specVolPow[1] + i) - p0^(specVolPow[1] + i))/(specVolPow[1] + i))*
+          Polynomial.f(
                 T,
                 b_v[i, :],
                 specVolPow[2] - specVolPow[1] - i) for i in 1:size(b_v, 1)))
@@ -1364,9 +1388,9 @@ package Characteristics
         output Q.VolumeSpecificAbsolute v "Specific volume";
 
       algorithm
-        v := FCSys.BaseClasses.Utilities.Polynomial.y(
+        v := Polynomial.f(
                 p/T,
-                {FCSys.BaseClasses.Utilities.Polynomial.y(
+                {Polynomial.f(
                   T,
                   b_v[i, :],
                   specVolPow[2]) for i in 1:size(b_v, 1)},
@@ -1383,8 +1407,9 @@ package Characteristics
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
     <p>This package is compatible with NASA CEA thermodynamic data
     [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>] and the generalized virial equation of state
-    [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>].  It is compatible with&mdash;but not limited to&mdash;the
-    assumptions of ideal gas and constant specific volume.</p>
+    [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>].  It may be used with
+    the assumptions of ideal gas and constant specific volume, although it is more general than 
+    that.</p>
 
     <p>Assumptions:
     <ol><li>Specific mass is constant.</li></ol>
@@ -1395,40 +1420,45 @@ package Characteristics
     <li><code>r</code> is the Van der Waals radius or the radius for the
     rigid-sphere (\"billiard-ball\") approximation of the kinetic theory of gases.</li>
     <li><code>b_v</code>: The powers of <i>p</i>/<i>T</i> increase by row.  The powers of
-    <i>T</i> increase by column.  If <code>specVolPow[1] = -1</code>, then the rows
+    <i>T</i> increase by column.  If <code>specVolPow[1] == -1</code>, then the rows
     of <code>b_v</code> correspond to 1, <i>T</i><i>B</i><sup>*</sup>(<i>T</i>), <i>T</i><sup> 2</sup><i>C</i><sup>*</sup>(<i>T</i>), <i>T</i><sup> 3</sup><i>D</i><sup>*</sup>(<i>T</i>), &hellip;
     in [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>].  Currently,
     virial equations are supported up to the fourth coefficient.  If additional terms are
     required, review the definition of <code>b_p</code> and modify it.</li>
     <li>The defaults for <code>b_v</code> and <code>specVolPow</code> represent ideal gas.</li>
     <li><code>specVolPow</code> is defined as a <code>Real</code> vector.  However,
-    special modifications are necessary if non-integer values are specified
+    special modifications are necessary if non-integer values are used
     (see <a href=\"modelica://FCSys.Characteristics.'e-'.Graphite\">'e-'.Graphite</a>).
-    <li><code>b_c</code>: The rows give the coefficients for different temperature ranges&mdash;bounded
+    <li><code>b_c</code>: The rows give the coefficients for different temperature intervals&mdash;bounded
     by the values in <code>T_lim_c</code>.
     The powers of <i>T</i> increase
     by column.
     By default,
     the powers of <i>T</i> for the first column are each -2, which corresponds to [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].
     In that case, the dimensionalities of the coefficients are {M2.L4/(N2.T4), M.L2/(N.T2), 1, &hellip;}
-    for each row, where L is length, M is mass, N is number, and T is time. (In <a href=\"modelica://FCSys\">FCSys</a>,
+    for each row, where L is length, M is mass, N is particle number, and T is time. (In <a href=\"modelica://FCSys\">FCSys</a>,
     temperature is a potential with dimension M.L2/(N.T2); see
     the <a href=\"modelica://FCSys.Units\">Units</a> package.)</li>
     <li><code>B_c</code>: As in <code>b_c</code>, the rows correspond to different
-    temperature ranges.  The first column is for specific enthalpy and has dimensionality
+    temperature intervals.  The first column is for specific enthalpy and has dimensionality
     M.L2/(N.T2).  The second column is for specific entropy and is dimensionless.
     The integration constants for enthalpy are defined such that the enthalpy at
-    25 &deg;C is the specific enthalpy of formation at that temperature [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>, p. 2].
+    25 &deg;C is the specific enthalpy of formation at that temperature and reference pressure 
+    [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>, p. 2].
     The integration constants for specific entropy are defined such that specific entropy is absolute.</li>
     <li><code>T_lim_c</code>: The first and last entries are the minimum and
     maximum valid temperatures.  The intermediate entries are the thresholds
-    between rows of <code>b_c</code> (and <code>B_c</code>).  Therefore, if there are <i>n</i> temperature ranges
+    between rows of <code>b_c</code> (and <code>B_c</code>).  Therefore, if there are <i>n</i> temperature intervals
     (and rows in <code>b_c</code> and <code>B_c</code>), then <code>T_lim_c</code> must
     have <i>n</i> + 1 entries.</li>
     <li><code>p0</code> is the reference pressure.   In the
-    NASA CEA data [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>], it is 1 bar for gases or 1 atm for condensed
-    species.</li>
-    <li>If the <i>p</i>-<i>v</i>-<i>T</i> equation of state includes an ideal gas term, then the
+    NASA CEA data [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>], it is 1 bar for gases and 1 atm for condensed
+    species.  For gases, the reference state is the ideal gas (at <code>p0</code>) as
+    in [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].
+    For example, the enthalpy of a non-ideal (real) gas at 25 &deg;C and <code>p0</code> with
+    <code>ReferenceEnthalpy.ZeroAt25degC</code> selected is not exactly zero.
+    </li>
+    <li>If the <i>p</i>-<i>v</i>-<i>T</i> equation of state includes an ideal gas term (nonzero first virial coefficient), then the
     correlation for specific entropy (<i>s</i>) will involve the natural logarithm of partial pressure.
     The <code>p_min</code> parameter is used to guard against the logarithm of a non-positive pressure.
     To disable this protection (and simplify the translated code), set <code>p_min</code> to zero or a

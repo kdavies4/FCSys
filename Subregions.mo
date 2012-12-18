@@ -5411,7 +5411,7 @@ package Subregions
     <li>Transport and exchange properties (&alpha;<sub><i>Q&#775;</i></sub>, &alpha;<sub><i>Q&#775;</i></sub>, etc.) are fixed (e.g., independent of temperature)</li>
     </ol></p>
 
-    <p>The default specific heat capacity at constant pressure (<code>b_c=[0, 935*U.J*Data.m/(U.kg*U.K)]</code>) and thermal
+    <p>The default isobaric specific heat capacity (<code>b_c=[0, 935*U.J*Data.m/(U.kg*U.K)]</code>) and thermal
    resistivity (<code>alpha_Qdot=U.m*U.K/(11.1*U.W)</code>) is based on data of graphite fiber epoxy (25% vol)<br>composite at 300 K from
    Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 909].
    Related data is listed in Table 1.</p>
@@ -6267,7 +6267,7 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
 
 <p>The default specific heat capacity (<code>b_c=[1.041e3*U.J*Data.m/(U.kg*U.K)]</code>) and transport resistivities (<code>alpha_tau=Data.m/(178.2e-7*U.Pa*U.s)</code> and <code>alpha_Qdot=U.m*U.K/(25.9e-3*U.W))</code>) are based on data of gas at 1 atm and
   300 K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 920].
-  Table 1 lists the properties at  other temperatures. Note that the value for specific heat capacity at constant pressure at
+  Table 1 lists the properties at  other temperatures. Note that the value for isobaric specific heat capacity at
   800 K (<code>c_p=1.22e3*U.J*Data.m/(U.kg*U.K)</code>) seems unusual, but it matches the
   reference.</p>
 
@@ -6870,10 +6870,9 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
             dT=0) else 0 if defaults.analysis "Chemical capacitance";
       // Note:  This is delN/delg at constant T and V.
       output Q.CapacityThermalSpecific c_V(stateSelect=StateSelect.never) =
-        Data.c_V(p, T) if defaults.analysis
-        "Specific heat capacity at constant volume";
+        Data.c_V(p, T) if defaults.analysis "Isochoric specific heat capacity";
       output Q.CapacityThermal C_V(stateSelect=StateSelect.never) = N*c_V if
-        defaults.analysis "Heat capacity at constant volume";
+        defaults.analysis "Isochoric heat capacity";
       //
       // Time constants
       output Q.Time t_exch_Phi(stateSelect=StateSelect.never) = alpha_12*N/

@@ -770,6 +770,65 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
     // Both of these integrals are taken at p0.  The second polynomial is the
     // integral of v*dp from p0 to p (at T).
   end g_;
+
+  function d2F
+    "<html>Derivative of <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.dF\">dF</a>()</html>"
+    extends Modelica.Icons.Function;
+
+    input Real x "Argument";
+    input Real a[:] "Coefficients";
+    input Integer n=0
+      "Power associated with the first term (before derivatives)";
+    input Real dx "Derivative of argument";
+    input Real da[size(a, 1)] "Derivatives of coefficients";
+    input Real d2x "Second derivative of argument";
+    input Real d2a[size(a, 1)] "Second derivatives of coefficients";
+
+    output Real d2F "Second derivative";
+
+  algorithm
+    d2F := BaseClasses.Utilities.Polynomial.df(
+        x,
+        a,
+        n,
+        dx,
+        da)*dx + BaseClasses.Utilities.Polynomial.f(
+        x,
+        a,
+        n)*d2x + BaseClasses.Utilities.Polynomial.f(
+        x,
+        da,
+        n) + BaseClasses.Utilities.Polynomial.F(x, d2a)
+      annotation (Inline=true);
+
+  end d2F;
+
+  function dF
+    "<html>Derivative of <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.F\">Y</a>()</html>"
+    extends Modelica.Icons.Function;
+
+    input Real x "Argument";
+    input Real a[:] "Coefficients";
+    input Integer n=0
+      "Power associated with the first term (before derivative)";
+    input Real dx "Derivative of argument";
+    input Real da[size(a, 1)] "Derivatives of coefficients";
+
+    output Real dF "Derivative";
+
+  algorithm
+    dF := BaseClasses.Utilities.Polynomial.f(
+        x,
+        a,
+        n)*dx + BaseClasses.Utilities.Polynomial.F(
+        x,
+        da,
+        n) annotation (Inline=true, derivative(order=2) = d2F);
+
+    annotation (Documentation(info="<html>
+  <p>The derivative of this function is 
+  <a href=\"modelica://FCSys.BaseClasses.Utilities.dpoly\">d2F</a>().</p></html>"));
+  end dF;
   annotation (Commands(file="resources/scripts/units-values.mos"
         "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate)."));
 end WorkInProgress;
