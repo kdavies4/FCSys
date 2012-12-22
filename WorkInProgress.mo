@@ -637,7 +637,7 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
     parameter Q.TemperatureAbsolute T_IC(nominal=298.15*U.K, start=defaults.T)
       "<html>Initial temperature (<i>T</i><sub>IC</sub>)</html>";
     parameter Q.AmountVolumic rho_IC(min=if overrideEOS then 0 else Modelica.Constants.small,
-        start=1/Data.v_pT(p_IC, T_IC))
+        start=1/Data.v_Tp(T_IC, p_IC))
       "<html>Initial volumic amount (&rho;<sub>IC</sub>)</html>";
 
     Q.Amount N(nominal=1*U.C, start=1*U.C) "Amount";
@@ -664,13 +664,13 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
     if overrideEOS then
       N = rho_IC*V;
     elseif Data.isCompressible then
-      p = Data.p_vT(v=V/N, T);
+      p = Data.p_Tv(T, V/N);
     else
-      V = N*Data.v_pT(p, T);
+      V = N*Data.v_Tp(T, p);
     end if;
     h = Data.h0(T);
     mu = chemical.muPerT*T;
-    h = mu + T*Data.s(p, T);
+    h = mu + T*Data.s(T, p);
     chemical.hbar = h/Data.m;
     chemical.phi = zeros(n_vel);
 

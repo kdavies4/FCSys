@@ -238,13 +238,13 @@ from Blocks.Discrete.
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                      extent={{-100,60},{100,100}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Text(
-                      extent={{-100,60},{100,100}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,60},{100,100}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None), Text(
+                extent={{-100,60},{100,100}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end Top3;
 
       partial class Top2
@@ -720,13 +720,6 @@ This icon is designed for a <b>signal bus</b> connector.
         assert(inSign(FCSys.BaseClasses.Side.p) == -1,
           "The inSign function failed.");
 
-        // interval()
-        assert(interval(8.5, 1:10) == 8, "The indexInterval function failed.");
-        assert(interval(8, 1:10) == 8, "The indexInterval function failed.");
-        assert(interval(0, {1,3}) == 1, "The indexInterval function failed.");
-        assert(interval(2, {1,3}) == 1, "The indexInterval function failed.");
-        assert(interval(4, {1,3}) == 1, "The indexInterval function failed.");
-
         // mod1()
         assert(mod1(4, 3) == 1, "The mod1 function failed.");
         assert(mod1(3, 3) == 3, "The mod1 function failed.");
@@ -738,6 +731,7 @@ This icon is designed for a <b>signal bus</b> connector.
                 2,
                 {1,2,1},
                 0) == 2 + 4 + 8/3, "The Polynomial.F function failed.");
+        // **Remove this test if it's possible to test via method in Dymola User's Manual.
 
         // Polynomial.f()
         assert(Polynomial.f(
@@ -755,6 +749,7 @@ This icon is designed for a <b>signal bus</b> connector.
                 2,
                 {1,0,0},
                 -3) == 1/8, "The Polynomial.f function failed.");
+        // Note:  Polynomial.df() and Polynomial.d2f() can be tested using **Add models to test derivatives according to Dymola User's Manual.
 
         // Polynomial.df()
         assert(Polynomial.df(
@@ -782,7 +777,7 @@ This icon is designed for a <b>signal bus</b> connector.
                 1,
                 {0,0,0}) == 4, "The Polynomial.df function failed.");
 
-        // Polynomial.d2f()
+        //
         assert(Polynomial.d2f(
                 2,
                 {1,2,1},
@@ -942,7 +937,7 @@ This icon is designed for a <b>signal bus</b> connector.
         input String formula "Chemical formula";
         input Integer startindex(min=1) = 1 "Start index";
         output String symbol "Name of element";
-        output Integer coeff "stoichiometric coefficient";
+        output Integer coeff "Stoichiometric coefficient";
         output Integer z "Charge number";
         output Integer nextindex "index after the found element (0 if error)";
 
@@ -982,7 +977,7 @@ This icon is designed for a <b>signal bus</b> connector.
         extends Modelica.Icons.Function;
 
         input String formulas[:] "Chemical formulas of the species";
-        output Integer nu[size(formulas, 1)] "stoichiometric coefficients";
+        output Integer nu[size(formulas, 1)] "Stoichiometric coefficients";
 
       protected
         Integer n_species=size(formulas, 1) "Number of species";
@@ -994,7 +989,6 @@ This icon is designed for a <b>signal bus</b> connector.
           "Symbols of the elements of each species";
         Integer coeffs[n_species, max(n_elements)]
           "Coefficients of the elements of each species";
-        // max(n_elements)]
         Integer i "index";
         Integer j=1 "index";
         Real d[n_species] "Diagonal entries of SVD";
@@ -1083,7 +1077,8 @@ An unrelated species may be included.");
 
         input Real x "Argument";
         input Real a[:] "Coefficients";
-        input Integer n=0 "Power associated with the first term";
+        input Integer n=0
+          "Power associated with the first term (before integral)";
 
         output Real F "Integral";
 
@@ -1242,7 +1237,7 @@ An unrelated species may be included.");
       "<html>Return the first entry of a vector minus the second (&Delta;<i><b>u</b></i>)</html>"
       extends Modelica.Icons.Function;
 
-      input Real u[2] "Vector of size 2";
+      input Real u[2] "Vector of size two";
       output Real Delta=u[1] - u[2] "First entry minus the second entry";
 
     algorithm
@@ -1254,7 +1249,7 @@ An unrelated species may be included.");
       "<html>Enumerate the <code>true</code> entries in a <code>Boolean</code> vector (0 for <code>false</code> entries)</html>"
       extends Modelica.Icons.Function;
 
-      input Boolean u[:] "<html><code>Boolean</code> array</html>";
+      input Boolean u[:] "<html><code>Boolean</code> vector</html>";
       output Integer enumerated[size(u, 1)]
         "Indices of the true entries (increasing order; 0 for false entries)";
 
@@ -1300,8 +1295,11 @@ An unrelated species may be included.");
     end index;
 
     function inSign "Sign for the direction into a side or face"
+      extends Modelica.Icons.Function;
+
       input FCSys.BaseClasses.Side side "Side";
       output Integer sign "Sign indicating direction along the axis";
+
     algorithm
       sign := 3 - 2*side annotation (Inline=true);
       annotation (Inline=true,Documentation(info="<html><p><b>Examples:</b><br>
@@ -1309,45 +1307,6 @@ An unrelated species may be included.");
   <code>inSign(FCSys.BaseClasses.Side.p)</code> returns -1.
   </html>"));
     end inSign;
-
-    function interval "Return the index to the interval selected by a value"
-      extends Modelica.Icons.Function;
-
-      input Real x "Value";
-      input Real bounds[:] "Bounds of the intervals";
-      output Integer i "Index";
-
-    algorithm
-      i := sum(if (bounds[i] <= x or i == 1) and (x < bounds[i + 1] or i ==
-        size(bounds, 1) - 1) then i else 0 for i in 1:size(bounds, 1) - 1)
-        annotation (Inline=true);
-      // Note:  A single-line implementation is used so that the function
-      // can be inlined easily.
-      annotation (Documentation(info="<html>
-<p>The entries in <code>bounds</code> must increase monotonically or else
-the result may be invalid.  No checking is performed.</p>
-
-<p>The number of defined intervals
-is one fewer than the number of entries in <code>bounds</code>.
-If the value (<code>x</code>) is outside the defined intervals, then the index to the
-nearest interval is returned.  The bounds are inclusive on the lower limits.
-
-<p>The indices are 1-based (Modelica-compatible).<p>
-
-</p>
-
-<p><b>Examples:</b><br>
-<code>indexInterval(8.5, 1:10)</code> and 
-<code>indexInterval(8, 1:10)</code> 
-both return 8, since the function is inclusive on the lower limits. 
-
-<code>indexInterval(0, {1,3})</code>, 
-<code>indexInterval(2, {1,3})</code>, and 
-<code>indexInterval(4, {1,3})</code> all return 1, since only one interval is defined.
-</p>
-</html>"));
-
-    end interval;
 
     function mod1
       "Modulo operator for 1-based indexing (compatible with Modelica)"
@@ -1382,7 +1341,7 @@ both return 8, since the function is inclusive on the lower limits.
       "<html>Return the sum of the first and second entries of a vector (&Sigma;<i><b>u</b></i>)</html>"
       extends Modelica.Icons.Function;
 
-      input Real u[2] "Vector of size 2";
+      input Real u[2] "Vector of size two";
       output Real Sigma "Sum of the first and second entries";
 
     algorithm

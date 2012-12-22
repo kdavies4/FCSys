@@ -242,6 +242,10 @@ package UsersGuide "User's Guide"
       <td valign=top class=noBorder>R. D. Present, <i>Kinetic Theory of Gases</i>, McGraw Hill, 1958.</td>
     </tr>
     <tr>
+      <td valign=top class=noBorder>[<a name=\"Rao1997\" class=bookmark>Rao1997</a>]</td>
+      <td valign=top class=noBorder>Y. V. C. Rao, <i>Chemica Engineering Thermodynamics</i>, Hyderabad, India:  Universities Press, 1997.</td>
+    </tr>
+    <tr>
       <td valign=top class=noBorder>[<a name=\"Reichert2010\" class=bookmark>Reichert2010</a>]</td>
       <td valign=top class=noBorder>P. Reichert and N. Schuwirth, \"<a href=\"http://dx.doi.org/10.1016/j.envsoft.2010.03.002\">A Generic Framework for Deriving Process Stoichiometry in Environmental Models</a>,\" <i>Environmental Modelling &amp; Software</i>, vol. 25, pp. 1241&ndash;1251, 2010.</td>
     </tr>
@@ -260,6 +264,10 @@ package UsersGuide "User's Guide"
     <tr>
       <td valign=top class=noBorder>[<a name=\"SGL2007\" class=bookmark>SGL2007</a>]</td>
       <td valign=top class=noBorder>SGL Carbon Group, \"Sigracet&reg; 10 Series Gas Diffusion Layer,\" <a href=\"http://www.sglcarbon.com\">http://www.sglcarbon.com</a>, Apr. 2007.</td>
+    </tr>
+    <tr>
+      <td valign=top class=noBorder>[<a name=\"Shah2009\" class=bookmark>Shah2009</a>]</td>
+      <td valign=top class=noBorder>A. A. Shah, T. R. Ralph, and F. C. Walsh, \"Modeling and Simulation of the Degradation of Perfluorinated Ion-Exchange Membranes in PEM Fuel Cells,\" <i>J. Electrochem. Soc.</i>, vol. 156, no. 4, pp. B465&ndash;B484, 2009.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Springer1991\" class=bookmark>Springer1991</a>]</td>

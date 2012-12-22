@@ -20,6 +20,7 @@ package Characteristics
       import DataC19HF37O5S = FCSys.Characteristics.C19HF37O5S.Solid;
       import 'Datae-' = FCSys.Characteristics.'e-'.Graphite;
       import DataH2 = FCSys.Characteristics.H2.Gas;
+    protected
       package DataH2IG = FCSys.Characteristics.H2.Gas (b_v=[1], specVolPow={-1,
               0}) "H2 as ideal gas";
       import DataH2O = FCSys.Characteristics.H2O.Gas;
@@ -28,6 +29,7 @@ package Characteristics
       import DataN2 = FCSys.Characteristics.N2.Gas;
       import DataO2 = FCSys.Characteristics.O2.Gas;
 
+    public
       parameter Q.PotentialAbsolute epsilon_tol=1e-10*U.V
         "Tolerance in potential";
 
@@ -36,55 +38,34 @@ package Characteristics
       Q.TemperatureAbsolute T=273.15*U.K + 200*time*U.K/10;
 
       // Results
-      // Specific heat capacity at reference pressure
-      output Q.CapacityThermalSpecific c_p_C=DataC.c_p(p, T);
-      output Q.CapacityThermalSpecific c_p_C19HF37O5S=DataC19HF37O5S.c_p(p, T);
-      output Q.CapacityThermalSpecific 'c_p_e-'='Datae-'.c_p(p, T);
-      output Q.CapacityThermalSpecific c_p_H2=DataH2.c_p(p, T);
-      output Q.CapacityThermalSpecific c_p_H2O=DataH2O.c_p(p, T);
-      output Q.CapacityThermalSpecific c_p_H2O_liquid=DataH2OLiquid.c_p(p, T);
-      output Q.CapacityThermalSpecific 'c_p_H+'='DataH+'.c_p(p, T);
-      output Q.CapacityThermalSpecific c_p_N2=DataN2.c_p(p, T);
-      output Q.CapacityThermalSpecific c_p_O2=DataO2.c_p(p, T);
-      //
-      // Isochroic specific heat capacity
-      output Q.CapacityThermalSpecific c_V_C=DataC.c_V(p, T);
-      output Q.CapacityThermalSpecific c_V_C19HF37O5S=DataC19HF37O5S.c_V(p, T);
-      output Q.CapacityThermalSpecific 'c_V_e-'='Datae-'.c_V(p, T);
-      output Q.CapacityThermalSpecific c_V_H2=DataH2.c_V(p, T);
-      output Q.CapacityThermalSpecific c_V_H2_IG=DataH2IG.c_V(p_IG, T);
-      output Q.CapacityThermalSpecific c_V_H2O=DataH2O.c_V(p, T);
-      output Q.CapacityThermalSpecific c_V_H2O_liquid=DataH2OLiquid.c_V(p, T);
-      output Q.CapacityThermalSpecific 'c_V_H+'='DataH+'.c_V(p, T);
-      output Q.CapacityThermalSpecific c_V_N2=DataN2.c_V(p, T);
-      output Q.CapacityThermalSpecific c_V_O2=DataO2.c_V(p, T);
+      // -------
+      // Isochoric specific heat capacity
+      output Q.CapacityThermalSpecific c_V_C=DataC.c_V(T, p);
+      output Q.CapacityThermalSpecific c_V_C19HF37O5S=DataC19HF37O5S.c_V(T, p);
+      output Q.CapacityThermalSpecific 'c_V_e-'='Datae-'.c_V(T, p);
+      output Q.CapacityThermalSpecific c_V_H2=DataH2.c_V(T, p);
+      output Q.CapacityThermalSpecific c_V_H2_IG=DataH2IG.c_V(T, p_IG);
+      output Q.CapacityThermalSpecific c_V_H2O=DataH2O.c_V(T, p);
+      output Q.CapacityThermalSpecific c_V_H2O_liquid=DataH2OLiquid.c_V(T, p);
+      output Q.CapacityThermalSpecific 'c_V_H+'='DataH+'.c_V(T, p);
+      output Q.CapacityThermalSpecific c_V_N2=DataN2.c_V(T, p);
+      output Q.CapacityThermalSpecific c_V_O2=DataO2.c_V(T, p);
       //
       // Gibbs potential
-      output Q.Potential g_C=DataC.g(p, T);
-      output Q.Potential g_C19HF37O5S=DataC19HF37O5S.g(p, T);
-      output Q.Potential 'g_e-'='Datae-'.g(p, T);
-      output Q.Potential g_H2=DataH2.g(p, T);
-      output Q.Potential g_H2O=DataH2O.g(p, T);
-      output Q.Potential g_H2O_liquid=DataH2OLiquid.g(p, T);
-      output Q.Potential 'g_H+'='DataH+'.g(p, T);
-      output Q.Potential g_N2=DataN2.g(p, T);
-      output Q.Potential g_O2=DataO2.g(p, T);
-      //
-      // Gibbs potential (indirectly calculated)
-      output Q.Potential g_C_indirect=h_C - T*s_C;
-      output Q.Potential g_C19HF37O5S_indirect=h_C19HF37O5S - T*s_C19HF37O5S;
-      output Q.Potential 'g_e-_indirect'='h_e-' - T*'s_e-';
-      output Q.Potential g_H2_indirect=h_H2 - T*s_H2;
-      output Q.Potential g_H2O_indirect=h_H2O - T*s_H2O;
-      output Q.Potential g_H2O_liquid_indirect=h_H2O_liquid - T*s_H2O_liquid;
-      output Q.Potential 'g_H+_indirect'='h_H+' - T*'s_H+';
-      output Q.Potential g_N2_indirect=h_N2 - T*s_N2;
-      output Q.Potential g_O2_indirect=h_O2 - T*s_O2;
+      output Q.Potential g_C=DataC.g(T, p);
+      output Q.Potential g_C19HF37O5S=DataC19HF37O5S.g(T, p);
+      //**output Q.Potential 'g_e-'='Datae-'.g(T, p);
+      output Q.Potential g_H2=DataH2.g(T, p);
+      output Q.Potential g_H2O=DataH2O.g(T, p);
+      output Q.Potential g_H2O_liquid=DataH2OLiquid.g(T, p);
+      output Q.Potential 'g_H+'='DataH+'.g(T, p);
+      output Q.Potential g_N2=DataN2.g(T, p);
+      output Q.Potential g_O2=DataO2.g(T, p);
       //
       // Specific enthalpy
       output Q.Potential h_C=DataC.h(T);
       output Q.Potential h_C19HF37O5S=DataC19HF37O5S.h(T);
-      output Q.Potential 'h_e-'='Datae-'.h(T);
+      //**output Q.Potential 'h_e-'='Datae-'.h(T);
       output Q.Potential h_H2=DataH2.h(T);
       output Q.Potential h_H2O=DataH2O.h(T);
       output Q.Potential h_H2O_liquid=DataH2OLiquid.h(T);
@@ -93,64 +74,43 @@ package Characteristics
       output Q.Potential h_O2=DataO2.h(T);
       //
       // Pressure
-      output Q.PressureAbsolute p_C=DataC.p_vT(v_C, T) if DataC.isCompressible;
-      output Q.PressureAbsolute p_C19HF37O5S=DataC19HF37O5S.p_vT(v_C19HF37O5S,
-          T) if DataC19HF37O5S.isCompressible;
-      output Q.PressureAbsolute 'p_e-'='Datae-'.p_vT('v_e-', T) if 'Datae-'.isCompressible;
-      output Q.PressureAbsolute p_H2=DataH2.p_vT(v_H2, T) if DataH2.isCompressible;
-      output Q.PressureAbsolute p_IG=DataH2IG.p_vT(v_IG, T) if DataH2IG.isCompressible
+      output Q.PressureAbsolute p_C=DataC.p_Tv(T, v_C) if DataC.isCompressible;
+      output Q.PressureAbsolute p_C19HF37O5S=DataC19HF37O5S.p_Tv(T,
+          v_C19HF37O5S) if DataC19HF37O5S.isCompressible;
+      output Q.PressureAbsolute 'p_e-'='Datae-'.p_Tv(T, 'v_e-') if 'Datae-'.isCompressible;
+      output Q.PressureAbsolute p_H2=DataH2.p_Tv(T, v_H2) if DataH2.isCompressible;
+      output Q.PressureAbsolute p_IG=DataH2IG.p_Tv(T, v_IG) if DataH2IG.isCompressible
         "Pressure of ideal gas";
-      output Q.PressureAbsolute p_H2O=DataH2O.p_vT(v_H2O, T) if DataH2O.isCompressible;
-      output Q.PressureAbsolute p_H2O_liquid=DataH2OLiquid.p_vT(v_H2O_liquid, T)
+      output Q.PressureAbsolute p_H2O=DataH2O.p_Tv(T, v_H2O) if DataH2O.isCompressible;
+      output Q.PressureAbsolute p_H2O_liquid=DataH2OLiquid.p_Tv(T, v_H2O_liquid)
         if DataH2OLiquid.isCompressible;
-      output Q.PressureAbsolute 'p_H+'='DataH+'.p_vT('v_H+', T) if 'DataH+'.isCompressible;
-      output Q.PressureAbsolute p_N2=DataN2.p_vT(v_N2, T) if DataN2.isCompressible;
-      output Q.PressureAbsolute p_O2=DataO2.p_vT(v_O2, T) if DataO2.isCompressible;
+      output Q.PressureAbsolute 'p_H+'='DataH+'.p_Tv(T, 'v_H+') if 'DataH+'.isCompressible;
+      output Q.PressureAbsolute p_N2=DataN2.p_Tv(T, v_N2) if DataN2.isCompressible;
+      output Q.PressureAbsolute p_O2=DataO2.p_Tv(T, v_O2) if DataO2.isCompressible;
       //
       // Specific entropy
-      output Q.Number s_C=DataC.s(p, T);
-      output Q.Number s_C19HF37O5S=DataC19HF37O5S.s(p, T);
-      output Q.Number 's_e-'='Datae-'.s(p, T);
-      output Q.Number s_H2=DataH2.s(p, T);
-      output Q.Number s_H2O=DataH2O.s(p, T);
-      output Q.Number s_H2O_liquid=DataH2OLiquid.s(p, T);
-      output Q.Number 's_H+'='DataH+'.s(p, T);
-      output Q.Number s_N2=DataN2.s(p, T);
-      output Q.Number s_O2=DataO2.s(p, T);
+      output Q.Number s_C=DataC.s(T, p);
+      output Q.Number s_C19HF37O5S=DataC19HF37O5S.s(T, p);
+      //**output Q.Number 's_e-'='Datae-'.s(T, p);
+      output Q.Number s_H2=DataH2.s(T, p);
+      output Q.Number s_H2O=DataH2O.s(T, p);
+      output Q.Number s_H2O_liquid=DataH2OLiquid.s(T, p);
+      output Q.Number 's_H+'='DataH+'.s(T, p);
+      output Q.Number s_N2=DataN2.s(T, p);
+      output Q.Number s_O2=DataO2.s(T, p);
       //
-      // Volumic amount
-      output Q.VolumeSpecificAbsolute v_C=DataC.v_pT(p, T);
-      output Q.VolumeSpecificAbsolute v_C19HF37O5S=DataC19HF37O5S.v_pT(p, T);
-      output Q.VolumeSpecificAbsolute 'v_e-'='Datae-'.v_pT(p, T);
-      output Q.VolumeSpecificAbsolute v_H2=DataH2.v_pT(p, T);
-      output Q.VolumeSpecificAbsolute v_IG=DataH2IG.v_pT(p, T)
-        "Volumic amount of ideal gas";
-      output Q.VolumeSpecificAbsolute v_H2O=DataH2O.v_pT(p, T);
-      output Q.VolumeSpecificAbsolute v_H2O_liquid=DataH2OLiquid.v_pT(p, T);
-      output Q.VolumeSpecificAbsolute 'v_H+'='DataH+'.v_pT(p, T);
-      output Q.VolumeSpecificAbsolute v_N2=DataN2.v_pT(p, T);
-      output Q.VolumeSpecificAbsolute v_O2=DataO2.v_pT(p, T);
-
-    equation
-      assert(abs(g_C - g_C_indirect) < epsilon_tol,
-        "The Gibbs potential of C is not consistent with the specific enthalpy and entropy.");
-      assert(abs(g_C19HF37O5S - g_C19HF37O5S_indirect) < epsilon_tol,
-        "The Gibbs potential of C19HF37O5S is not consistent with the specific enthalpy and entropy.");
-      assert(abs('g_e-' - 'g_e-_indirect') < epsilon_tol,
-        "The Gibbs potential of 'e-' is not consistent with the specific enthalpy and entropy.");
-      assert(abs(g_H2 - g_H2_indirect) < epsilon_tol,
-        "The Gibbs potential of H2 is not consistent with the specific enthalpy and entropy.");
-      assert(abs(g_H2O - g_H2O_indirect) < epsilon_tol,
-        "The Gibbs potential of H2O is not consistent with the specific enthalpy and entropy.");
-      assert(abs(g_H2O_liquid - g_H2O_liquid_indirect) < epsilon_tol,
-        "The Gibbs potential of H2O liquid is not consistent with the specific enthalpy and entropy.");
-      assert(abs('g_H+' - 'g_H+_indirect') < epsilon_tol,
-        "The Gibbs potential of 'H+' is not consistent with the specific enthalpy and entropy.");
-      assert(abs(g_N2 - g_N2_indirect) < epsilon_tol,
-        "The Gibbs potential of N2 is not consistent with the specific enthalpy and entropy.");
-      assert(abs(g_O2 - g_O2_indirect) < epsilon_tol,
-        "The Gibbs potential of O2 is not consistent with the specific enthalpy and entropy.");
-
+      // Specific volume
+      output Q.VolumeSpecificAbsolute v_C=DataC.v_Tp(T, p);
+      output Q.VolumeSpecificAbsolute v_C19HF37O5S=DataC19HF37O5S.v_Tp(T, p);
+      output Q.VolumeSpecificAbsolute 'v_e-'='Datae-'.v_Tp(T, p);
+      output Q.VolumeSpecificAbsolute v_H2=DataH2.v_Tp(T, p);
+      output Q.VolumeSpecificAbsolute v_IG=DataH2IG.v_Tp(T, p)
+        "Specific volume of ideal gas";
+      output Q.VolumeSpecificAbsolute v_H2O=DataH2O.v_Tp(T, p);
+      output Q.VolumeSpecificAbsolute v_H2O_liquid=DataH2OLiquid.v_Tp(T, p);
+      output Q.VolumeSpecificAbsolute 'v_H+'='DataH+'.v_Tp(T, p);
+      output Q.VolumeSpecificAbsolute v_N2=DataN2.v_Tp(T, p);
+      output Q.VolumeSpecificAbsolute v_O2=DataO2.v_Tp(T, p);
       annotation (
         experiment(StopTime=10),
         experimentSetupOutput,
@@ -159,7 +119,7 @@ package Characteristics
     end TestCorrelations;
 
     model VerifyDerivativep
-      "<html>Verify that <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a> is the correct derivative of <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_vT\">p_vT</a></html>"
+      "<html>Verify that <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a> is the correct derivative of <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_Tv\">p_Tv</a></html>"
       // This approach is based on [Dassault2010, vol. 2, pp. 300-301].
 
       import FCSys.Characteristics.BaseClasses.Characteristic;
@@ -175,7 +135,7 @@ package Characteristics
       y2 = y1;
 
     equation
-      y1 = Characteristic.p_vT(u[1], u[2]);
+      y1 = Characteristic.p_Tv(u[1], u[2]);
       Characteristic.dp(
             u[1],
             u[2],
@@ -185,13 +145,13 @@ package Characteristics
       // explicit to ensure that the translator uses the defined derivative
       // instead of the automatically derived one.
 
-      assert(abs(y1 - y2) < 1e-7, "The derivative is incorrect.");
+      assert(abs(y1 - y2) < 1e-6, "The derivative is incorrect.");
       // The simulation tolerance is set to 1e-8.
       annotation (experiment(Tolerance=1e-8), experimentSetupOutput);
     end VerifyDerivativep;
 
     model VerifyDerivativev
-      "<html>Verify that <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv\">dv</a> is the correct derivative of <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_pT\">v_pT</a></html>"
+      "<html>Verify that <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv\">dv</a> is the correct derivative of <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_Tp\">v_Tp</a></html>"
       // This approach is based on [Dassault2010, vol. 2, pp. 300-301].
 
       import FCSys.Characteristics.BaseClasses.Characteristic;
@@ -207,7 +167,7 @@ package Characteristics
       y2 = y1;
 
     equation
-      y1 = Characteristic.v_pT(u[1], u[2]);
+      y1 = Characteristic.v_Tp(u[1], u[2]);
       Characteristic.dv(
             u[1],
             u[2],
@@ -217,7 +177,7 @@ package Characteristics
       // explicit to ensure that the translator uses the defined derivative
       // instead of the automatically derived one.
 
-      assert(abs(y1 - y2) < 1e-7, "The derivative is incorrect.");
+      assert(abs(y1 - y2) < 1e-6, "The derivative is incorrect.");
       // The simulation tolerance is set to 1e-8.
       annotation (experiment(Tolerance=1e-8), experimentSetupOutput);
     end VerifyDerivativev;
@@ -262,7 +222,7 @@ package Characteristics
      <li>The radius is from <a href=\"http://en.wikipedia.org/wiki/Carbon\">http://en.wikipedia.org/wiki/Carbon</a>.  See also
    <a href=\"http://en.wikipedia.org/wiki/Van_der_Waals_radius\">http://en.wikipedia.org/wiki/Van_der_Waals_radius</a>.</li>
      <li>The default specific volume (<code>v=U.cm^3*m/(2.210*U.g)</code>) is of pyrolytic graphite
-  at 300 K according to Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 909].  Other forms
+  at 300 K according to [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 909].  Other forms
   are (also at 300 K and based on the same reference) are:
   <ul>
        <li>Amorphous carbon:  <code>v=U.cm^3*m/(1.950*U.g)</code></li>
@@ -294,7 +254,7 @@ package Characteristics
         Deltah0=0,
         specHeatCapPow=0,
         T_lim_c={0,Modelica.Constants.inf},
-        b_c=[2890*U.J*m/(U.kg*U.K)],
+        b_c=[4188*U.J*m/(U.kg*U.K)],
         B_c=[-298.15*U.K*b_c[1, 1] + Deltah0_f, 0],
         r=(147 + 2259.8/2)*U.pico*U.m/U.q);
 
@@ -312,9 +272,9 @@ package Characteristics
      C<sub>7</sub>HF<sub>13</sub>O<sub>5</sub>S.(C<sub>2</sub>F<sub>4</sub>)<sub>6</sub>, which is a typical
    configuration of Nafion sulfonate resin after hydrolysis
    [<a href=\"modelica://FCSys.UsersGuide.References\">Mark1999</a>, p. 234].</li>
-     <li>Thermodynamic data for this material is not available from McBride et
-   al. [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].  The default specific heat capacity (<code>b_c=[2890*U.J*m/(U.kg*U.K)]</code>) is
-   based on data of paraffin from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 916].</li>
+     <li>Thermodynamic data for this material is not available from 
+     [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].  The default specific heat capacity 
+     (<code>b_c=[4188*U.J*m/(U.kg*U.K)]</code>) based on [<a href=\"modelica://FCSys.UsersGuide.References\">Shah2009</a>, p. B472].</li>
      <li>According to [<a href=\"modelica://FCSys.UsersGuide.References\">Avogadro1.03</a>], the furthest distance
    between two atoms of C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S is 2259.8 pm and is between fluorines.
    The radius of F is 147 pm (<a href=\"http://en.wikipedia.org/wiki/Fluorine\">http://en.wikipedia.org/wiki/Fluorine</a>).</li>
@@ -386,86 +346,68 @@ package Characteristics
         p_min=-Modelica.Constants.inf);
 
     protected
-      function poly "Polynomial function which accepts non-integer powers"
-        extends Modelica.Icons.Function;
+      package Polynomial "Polynomial functions"
+        extends Modelica.Icons.Package;
 
-        input Real u "Argument";
-        input Real a[:] "Coefficients";
-        input Real n=0 "Power of the first coefficient";
-        output Real y "Result";
+        function f "Polynomial function which accepts non-integer powers"
+          extends Modelica.Icons.Function;
 
-      algorithm
-        y := sum(a[i]*u^(n + i - 1) for i in 1:size(a, 1))
-          annotation (Inline=true);
-      end poly;
-      // Note:  This overrides FCSys.BaseClasses.Utilities.poly() which is imported
-      // as poly() at the top level of FCSys.
+          input Real u "Argument";
+          input Real a[:] "Coefficients";
+          input Real n=0 "Power of the first coefficient";
+          output Real y "Result";
+
+        algorithm
+          y := sum(a[i]*u^(n + i - 1) for i in 1:size(a, 1))
+            annotation (Inline=true);
+        end f;
+
+      end Polynomial;
+      // Note:  This overrides FCSys.BaseClasses.Utilities.Polynomial which is
+      // imported as Polynomial at the top level of FCSys.
 
       // The functions below are redeclared copies of the same functions in
-      // FCSys.Characteristics.BaseClasses.Characteristic.  Since poly() is
-      // overridden, the functions below will use the new version (and
+      // FCSys.Characteristics.BaseClasses.Characteristic.  Since Polynomial
+      // is overridden, the functions below will use the new version (and
       // allow specVolPow to have non-integer values).
 
     public
       redeclare function dp
-        "<html>Derivative of pressure as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_vT\">p_vT</a>()</html>"
+        "<html>Derivative of pressure as defined by <a href=\"modelica://FCSys.Characteristics.'e-'.Graphite..p_Tv\">p_Tv</a>()</html>"
+
         extends Modelica.Icons.Function;
 
-        input Q.VolumeSpecificAbsolute v=98.15*U.K/U.atm "Specific volume";
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecific dv=0 "Derivative of specific volume";
+        input Q.VolumeSpecificAbsolute v=298.15*U.K/U.atm "Specific volume";
         input Q.Temperature dT=0 "Derivative of temperature";
+        input Q.VolumeSpecific dv=0 "Derivative of specific volume";
         output Q.Pressure dp "Derivative of pressure";
 
       algorithm
-        dp := if isCompressible then poly(
+        dp := if isCompressible then Polynomial.f(
                 v,
-                {(pressPow[1] + i - 1)*poly(
+                {(pressPow[1] + i - 1)*Polynomial.f(
                   T,
                   b_p[i, :],
                   pressPow[2]) for i in 1:size(b_p, 1)},
-                pressPow[1] - 1)*dv + poly(
+                pressPow[1] - 1)*dv + Polynomial.f(
                 T,
-                {(pressPow[2] + i - 1)*poly(
+                {(pressPow[2] + i - 1)*Polynomial.f(
                   v,
                   b_p[:, i],
                   pressPow[1]) for i in 1:size(b_p, 2)},
                 pressPow[2] - 1)*dT else 0
           annotation (Inline=true, smoothOrder=999);
+
+        annotation (Inline=true, smoothOrder=999);
       end dp;
 
-      redeclare function dv
-        "<html>Derivative of specific volume as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_pT\">v_pT</a>()</html>"
+      redeclare function p_Tv
+        "Pressure as a function of temperature and specific volume"
         extends Modelica.Icons.Function;
 
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.Pressure dp=0 "Derivative of pressure";
-        input Q.Temperature dT=0 "Derivative of temperature";
-        output Q.VolumeSpecific dv "Derivative of specific volume";
-
-      algorithm
-        dv := poly(
-                p,
-                {(specVolPow[1] + i - 1)*poly(
-                  T,
-                  b_v[i, :],
-                  specVolPow[2]) for i in 1:size(b_v, 1)},
-                specVolPow[1] - 1)*dp + poly(
-                T,
-                {(specVolPow[2] + i - 1)*poly(
-                  p,
-                  b_v[:, i],
-                  specVolPow[1]) for i in 1:size(b_v, 2)},
-                specVolPow[2] - 1)*dT annotation (Inline=true, smoothOrder=999);
-      end dv;
-
-      redeclare function p_vT
-        "Pressure as a function of specific volume and temperature"
-        extends Modelica.Icons.Function;
-
         input Q.VolumeSpecificAbsolute v=298.15*U.K/U.atm "Specific volume";
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         output Q.PressureAbsolute p "Pressure";
 
       algorithm
@@ -475,46 +417,46 @@ package Characteristics
         // Note:  In Dymola 7.4 the assertion level can't be set, although it has
         // been defined as an argument to assert() since Modelica 3.0.
 
-        p := if isCompressible then (if size(b_p, 1) == 1 and size(b_p, 2) == 1
-           then 1 else poly(
+        p := if isCompressible then Polynomial.f(
                 v,
-                {poly(
+                {Polynomial.f(
                   T,
                   b_p[i, :],
                   pressPow[2]) for i in 1:size(b_p, 1)},
-                pressPow[1])) else 0 annotation (
+                pressPow[1]) else 0 annotation (
           Inline=true,
           smoothOrder=999,
-          inverse(v=v_pT(p, T)),
+          inverse(v=v_Tp(T, p)),
           derivative=dp);
-        annotation (Documentation(info="<html><p>If the species is incompressible, then <i>p</i>(<i>v</i>, <i>T</i>) is undefined,
+        annotation (Documentation(info="<html><p>If the species is incompressible, then <i>p</i>(<i>T</i>, <i>v</i>) is undefined,
   and the function will return a value of zero.</p>
   <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a>().</p></html>"));
-      end p_vT;
+      end p_Tv;
 
-      redeclare function v_pT
-        "Specific volume as a function of pressure and temperature"
+      redeclare function v_Tp
+        "Specific volume as a function of temperature and pressure"
         extends Modelica.Icons.Function;
 
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.PressureAbsolute p=1*U.atm "Pressure";
         output Q.VolumeSpecificAbsolute v "Specific volume";
 
       algorithm
-        v := poly(
+        v := Polynomial.f(
                 p/T,
-                {poly(
+                {Polynomial.f(
                   T,
                   b_v[i, :],
                   specVolPow[2]) for i in 1:size(b_v, 1)},
                 specVolPow[1]) annotation (
           Inline=true,
           smoothOrder=999,
-          inverse(p=p_vT(v, T)),
+          inverse(p=p_Tv(T, v)),
           derivative=dv);
         annotation (Documentation(info="<html>
-  <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv\">dv</a>().</p></html>"));
-      end v_pT;
+  <p>The derivative of this function is 
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv\">dv</a>().</p></html>"));
+      end v_Tp;
 
       annotation (Documentation(info="<html>
      <p>Assumptions:
@@ -526,6 +468,7 @@ package Characteristics
      </p>
      <p>For more information, see the
      <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+
     end Graphite;
   end 'e-';
 
@@ -708,8 +651,8 @@ package Characteristics
    <li>The enthalpy to produce H<sup>+</sup> from H<sub>2</sub>O (H<sub>2</sub>O &#8640; OH<sup>-</sup> + H<sup>+</sup>) is
    -96569.804 J/mol.  The enthalpy to produce H<sup>+</sup> from H<sub>3</sub>O<sup>+</sup>
    (H<sub>3</sub>O<sup>+</sup> &#8640; H<sub>2</sub>O + H<sup>+</sup>) is 839826.0 J/mol.  Based on
-   Tissandier et al., the
-   enthalpy of formation of aqueous H<sup>+</sup> is 1150.1e3 J/mol [<a href=\"modelica://FCSys.UsersGuide.References\">Tissandier1998</a>].</li>
+   [<a href=\"modelica://FCSys.UsersGuide.References\">Tissandier1998</a>], the
+   enthalpy of formation of aqueous H<sup>+</sup> is 1150.1e3 J/mol.</li>
      </ul>
      </p>
   <p>For more information, see the
@@ -782,7 +725,7 @@ package Characteristics
    bond length of N-N is 145.2 pm.  The radius of N is from
    <a href=\"http://en.wikipedia.org/wiki/Nitrogen\">http://en.wikipedia.org/wiki/Nitrogen</a>.  See also
    <a href=\"http://en.wikipedia.org/wiki/Van_der_Waals_radius\">http://en.wikipedia.org/wiki/Van_der_Waals_radius</a>.</li>
-  <li>The virial coefficients are from Dymond et al. (<a href=\"modelica://FCSys.UsersGuide.References\">2002</a>, p. 69).  The
+  <li>The virial coefficients are from [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>, p. 69].  The
   temperature range of the coefficients is [75, 745] K, but this is not enforced in the functions.  More precise virial coefficients are available from
   <a href=\"http://www.tpub.com/content/nasa1996/NASA-96-cr4755/NASA-96-cr47550059.htm\">http://www.tpub.com/content/nasa1996/NASA-96-cr4755/NASA-96-cr47550059.htm</a>.</li>
      </ul>
@@ -829,7 +772,7 @@ package Characteristics
    bond length of O-O is 128.2 pm.  The radius of O is from
    <a href=\"http://en.wikipedia.org/wiki/Oxygen\">http://en.wikipedia.org/wiki/Oxygen</a>.  See also
    <a href=\"http://en.wikipedia.org/wiki/Van_der_Waals_radius\">http://en.wikipedia.org/wiki/Van_der_Waals_radius</a>.</li>
-  <li>The virial coefficients are from Dymond et al. (<a href=\"modelica://FCSys.UsersGuide.References\">2002</a>, p. 69).  The
+  <li>The virial coefficients are from [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>, p. 69].  The
   temperature range of the coefficients is [70, 495] K, but this is not enforced in the functions.</li>
      </ul>
      </p>
@@ -853,13 +796,13 @@ package Characteristics
         "<html>Constants in NASA correlation for thermal conductivity (<i>b<sub>&lambda;</sub>)</html>";
 
       redeclare function f_12
-        "<html>Fluidity as a function of pressure and temperature (<i>f</i><sub>12</sub>)</html>"
+        "<html>Fluidity as a function of temperature and pressure (<i>f</i><sub>12</sub>)</html>"
 
         extends Modelica.Icons.Function;
 
-        final input Q.PressureAbsolute p=1*U.atm "Pressure";
-        // Note:  Pressure is provided for generality, but isn't used here.
         input Q.TemperatureAbsolute T "Temperature";
+        final input Q.PressureAbsolute p=1*U.atm "Pressure";
+        // Note:  Pressure is provided for generality but isn't used here.
         output Q.Fluidity f_12 "Fluidity";
 
       protected
@@ -900,13 +843,13 @@ package Characteristics
       end f_12;
 
       redeclare function r_th
-        "<html>Thermal resistivity as a function of pressure and temperature (<i>r</i><sub>th</sub>)</html>"
+        "<html>Thermal resistivity as a function of temperature and pressure (<i>r</i><sub>th</sub>)</html>"
 
         extends Modelica.Icons.Function;
 
+        input Q.TemperatureAbsolute T "Temperature";
         input Q.PressureAbsolute p=1*U.atm "Pressure";
         // Note:  Pressure is provided for generality but isn't used here.
-        input Q.TemperatureAbsolute T "Temperature";
         output Q.ResistivityThermal r_th "Thermal resistivity";
 
       protected
@@ -936,7 +879,7 @@ package Characteristics
         // T_lim_alpha[size(T_lim_alpha, 1)] due to:
         //     "Error, not all "end" could be expanded."
 
-        r_th := c_V(p, T)*smooth(0, exp(-sum(if (T_lim_alpha[i] <= T or i == 1)
+        r_th := c_V(T, p)*smooth(0, exp(-sum(if (T_lim_alpha[i] <= T or i == 1)
            and (T <= T_lim_alpha[i + 1] or i == size(T_lim_alpha, 1) - 1) then
           (b_lambda_adj())[i, 1]*ln(T) + ((b_lambda_adj())[i, 2] + (
           b_lambda_adj())[i, 3]/T)/T + (b_lambda_adj())[i, 4] else 0 for i in 1
@@ -971,12 +914,12 @@ package Characteristics
       constant Q.Pressure p_min=-Modelica.Constants.inf
         "<html>Minimum pressure for numerical protection (<i>p</i><sub>min</sub>)</html>";
       constant Real b_v[:, :]=[1]
-        "<html>Coefficients of specific volume as a polynomial in p/T and T (<i>b</i><sub><i>v</i></sub>)</html>";
+        "<html>Coefficients of specific volume as a polynomial in <i>p</i>/<i>T</i> and <i>T</i> (<i>b</i><sub><i>v</i></sub>)</html>";
       // Note:  p/T is the argument instead of p so that b_p will have the
       // same size as b_v for the typical definitions of the second virial
       // coefficients in [Dymond2002].
       constant Real specVolPow[2]={-1,0}
-        "<html>Powers of p/T and T for 1<sup>st</sup> row and column of b_v, respectively</html>";
+        "<html>Powers of <i>p</i>/<i>T</i> and <i>T</i> for 1<sup>st</sup> row and column of <i>b</i><sub><i>v</i></sub>, respectively</html>";
       constant Q.PotentialChemical Deltah0_f
         "<html>Enthalpy of formation at 298.15 K, <i>p</i>&deg; (&Delta;<i>h</i>&deg;<sub>f</sub>)</html>";
       constant Q.PotentialChemical Deltah0
@@ -984,11 +927,11 @@ package Characteristics
       constant Q.PotentialChemical h_offset=0
         "<html>Additional enthalpy offset (<i>h</i><sub>offset</sub>)</html>";
       constant Integer specHeatCapPow=-2
-        "<html>Power of T for 1<sup>st</sup> column of b_c</html>";
+        "<html>Power of <i>T</i> for 1<sup>st</sup> column of <i>b</i><sub><i>c</i></sub></html>";
       constant Q.TemperatureAbsolute T_lim_c[:]={0,Modelica.Constants.inf}
-        "<html>Temperature limits for the rows of b_c and B_c (<i>T</i><sub>lim <i>c</i></sub>)</html>";
+        "<html>Temperature limits for the rows of <i>b</i><sub><i>c</i></sub> and <i>B</i><sub><i>c</i></sub> (<i>T</i><sub>lim <i>c</i></sub>)</html>";
       constant Real b_c[size(T_lim_c, 1) - 1, :]
-        "<html>Coefficients of specific heat capacity at <i>p</i>&deg; as a polynomial in <i>T</i> (<i>b</i><sub><i>c</i></sub>)</html>";
+        "<html>Coefficients of isobaric specific heat capacity at <i>p</i>&deg; as a polynomial in <i>T</i> (<i>b</i><sub><i>c</i></sub>)</html>";
       constant Real B_c[size(T_lim_c, 1) - 1, 2]
         "<html>Integration constants for specific enthalpy and entropy (<i>B</i><sub><i>c</i></sub>)</html>";
 
@@ -1026,29 +969,29 @@ package Characteristics
           annotation (Inline=true, smoothOrder=999);
         annotation (Documentation(info="<html>
   <p>This function is based on the kinetic theory of gases with the rigid-sphere (\"billiard-ball\")
-  assumption [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].  When used for
-  fluidity, the independence of this function on density or pressure matches experiments with
-  gases very accurately.  However, the fluidity varies by species and
+  assumption [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].  It is
+  independent of pressure or specific volume.  This independence very accurately matches the measured
+  fluidity of gases.  However, the fluidity varies by species and
   generally falls more rapidly with temperature than shown by this function
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 41].</p></html>"));
       end alpha;
 
     public
       function c_V
-        "<html>Isochoric specific heat capacity as a function of pressure and temperature (<i>c</i><sub><i>V</i></sub>)</html>"
+        "<html>Isochoric specific heat capacity as a function of temperature and pressure (<i>c</i><sub><i>V</i></sub>)</html>"
         extends Modelica.Icons.Function;
 
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.PressureAbsolute p=1*U.atm "Pressure";
         output Q.CapacityThermalSpecific c_V "Isochoric specific heat capacity";
 
       protected
         function c0_p
-          "Isobaric specific heat capacity of ideal gas at reference pressure as a function of temperature"
+          "Isobaric specific heat capacity at reference pressure as a function of temperature"
 
-          input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+          input Q.TemperatureAbsolute T "Temperature";
           output Q.CapacityThermalSpecific c0_p
-            "Isobaric specific heat capacity of ideal gas at reference pressure";
+            "Isobaric specific heat capacity at reference pressure";
 
         algorithm
           /*
@@ -1057,9 +1000,8 @@ package Characteristics
       /U.K) + ", " + String(T_lim_c[size(T_lim_c, 1)]/U.K) + "] K).");
     */
           // Note:  This is commented out so that the function can be inlined.
-          // Note:  In Dymola 7.4 T_lim_c[end] can't be used instead of
-          // T_lim_c[size(T_lim_c, 1)] due to:
-          //    "Error, not all 'end' could be expanded."
+          // Note:  In Dymola 7.4 T_lim_c[size(T_lim_c, 1)] must be used
+          // instead of T_lim_c[end] due to:
           c0_p := smooth(0, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[
             i + 1] or i == size(T_lim_c, 1) - 1) then Polynomial.f(
                     T,
@@ -1072,8 +1014,8 @@ package Characteristics
         end c0_p;
 
       algorithm
-        c_V := c0_p(T) - (if phase == "gas" then 1 - Polynomial.f(
-                v_pT(p, T),
+        c_V := c0_p(T) - (if phase == "gas" then 1 - Polynomial.F(
+                v_Tp(T, p),
                 {T*(2*Polynomial.df(
                   T,
                   b_p[i, :],
@@ -1086,10 +1028,10 @@ package Characteristics
                   1,
                   zeros(size(b_p, 2)),
                   0,
-                  zeros(size(b_p, 2))))/(pressPow[1] + i) for i in 1:min(-1 -
-            pressPow[1], size(b_p, 1))},
-                pressPow[1] + 1) else T*dp(
-                v_pT(p, T),
+                  zeros(size(b_p, 2)))) for i in 1:min(-1 - pressPow[1], size(
+            b_p, 1))},
+                pressPow[1]) else T*dp(
+                v_Tp(T, p),
                 T,
                 dv=0,
                 dT=1)*dv(
@@ -1097,32 +1039,42 @@ package Characteristics
                 T,
                 dp=0,
                 dT=1)) annotation (Inline=true, smoothOrder=999);
-        // For gas, the conditional term is the departure of isochoric specific
-        // heat capacity (c_V) of real gas from the isobaric specific heat capacity
-        // of the corresponding ideal gas (c0_p) at the same temperature (T) and
+        // For gas, the conditional term is the departure of the isochoric specific
+        // heat capacity (c_V) from the isobaric specific heat capacity of the
+        // corresponding ideal gas (c0_p) at the same temperature (T) and
         // reference pressure (p0) [Dymond2002, p. 17].  c0_p - 1 is the isochoric
         // specific heat capacity of the ideal gas at reference pressure.  For
-        // other phases, the conditional term is simply the difference between the
-        // isochoric and isobaric specific heat capacities [Moran2004, p. 546].
+        // condensed phases, the conditional term is simply the difference between
+        // the isochoric and isobaric specific heat capacities [Moran2004, p. 546].
         // Note that it reduces to -1 for an ideal gas---the -1 in the gas
         // branch of the condition.
 
+        // **Fix this.  The pressure correction results in negative c_V for some gases.
+
+        // **Check derivation in [Moran2004].  Can this be simplified?
+
+        // TODO:  Verify that [Dymond2002] is correct.  Is the reference truly
+        // c_V of ideal gas at reference pressure (and not actual pressure)?
+
+        // TODO:  If necessary for condensed species, add isobaric specific
+        // heat capacity at actual pressure relative to the same at reference
+        // pressure.  (What is the proper relationship?)
+
         annotation (Documentation(info="<html>
-  <p>For an ideal gas, pressure (<i>p</i>)
-  does not matter; the function reduces to <i>c</i><sub><i>V</i></sub>(<i>T</i>) = <i>c</i>&deg;(<i>T</i>) - 1 (in
-  <a href=\"modelica://FCSys\">FCSys</a>, <i>R</i> = 1).</p>
+  <p>For an ideal gas, this function is independent of pressure 
+  (although pressure remains as a valid input).</p>
     </html>"));
       end c_V;
 
       replaceable function dp
-        "<html>Derivative of pressure as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_vT\">p_vT</a>()</html>"
+        "<html>Derivative of pressure as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_Tv\">p_Tv</a>()</html>"
 
         extends Modelica.Icons.Function;
 
-        input Q.VolumeSpecificAbsolute v=298.15*U.K/U.atm "Specific volume";
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecific dv=0 "Derivative of specific volume";
+        input Q.VolumeSpecificAbsolute v=298.15*U.K/U.atm "Specific volume";
         input Q.Temperature dT=0 "Derivative of temperature";
+        input Q.VolumeSpecific dv=0 "Derivative of specific volume";
         output Q.Pressure dp "Derivative of pressure";
 
       algorithm
@@ -1145,30 +1097,30 @@ package Characteristics
       end dp;
 
       replaceable function dv
-        "<html>Derivative of specific volume as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_pT\">v_pT</a>()</html>"
+        "<html>Derivative of specific volume as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_Tp\">v_Tp</a>()</html>"
         extends Modelica.Icons.Function;
 
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.Pressure dp=0 "Derivative of pressure";
+        input Q.PressureAbsolute p=1*U.atm "Pressure";
         input Q.Temperature dT=0 "Derivative of temperature";
+        input Q.Pressure dp=0 "Derivative of pressure";
         output Q.VolumeSpecific dv "Derivative of specific volume";
 
       algorithm
-        dv := sum(sum(b_v[i, j]*p^(specVolPow[1] + i - 2)*T^(j + specVolPow[2]
-           - i - specVolPow[1] - 1)*((i + specVolPow[1] - 1)*T*dp + (j +
-          specVolPow[2] - i - specVolPow[1])*p*dT) for i in 1:size(b_v, 1))
-          for j in 1:size(b_v, 2)) annotation (Inline=true, smoothOrder=999);
+        dv := sum(sum(b_v[i, j]*p^(specVolPow[1] + i - 2)*T^(specVolPow[2] + j
+           - specVolPow[1] - i - 1)*((specVolPow[1] + i - 1)*T*dp + (specVolPow[
+          2] + j - specVolPow[1] - i)*p*dT) for i in 1:size(b_v, 1)) for j in 1
+          :size(b_v, 2)) annotation (Inline=true, smoothOrder=999);
       end dv;
 
       replaceable function f_0
-        "<html>Bulk fluidity as a function of pressure and temperature (<i>f</i><sub>0</sub>)</html>"
+        "<html>Bulk fluidity as a function of temperature and pressure (<i>f</i><sub>0</sub>)</html>"
 
         extends Modelica.Icons.Function;
 
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.PressureAbsolute p=1*U.atm "Pressure";
         // Note:  Pressure is provided for generality (not used here).
-        input Q.TemperatureAbsolute T "Temperature";
         output Q.Fluidity f_0 "Bulk fluidity";
 
       algorithm
@@ -1177,13 +1129,13 @@ package Characteristics
       end f_0;
 
       replaceable function f_12
-        "<html>Fluidity as a function of pressure and temperature (<i>f</i><sub>12</sub>)</html>"
+        "<html>Fluidity as a function of temperature and pressure (<i>f</i><sub>12</sub>)</html>"
 
         extends Modelica.Icons.Function;
 
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.PressureAbsolute p=1*U.atm "Pressure";
         // Note:  Pressure is provided for generality (not used here).
-        input Q.TemperatureAbsolute T "Temperature";
         output Q.Fluidity f_12 "Fluidity";
 
       algorithm
@@ -1191,12 +1143,12 @@ package Characteristics
 
       end f_12;
 
-      function g "Gibbs potential as a function of pressure and temperature"
+      function g "Gibbs potential as a function of temperature and pressure"
 
         extends Modelica.Icons.Function;
 
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.PressureAbsolute p=1*U.atm "Pressure";
         input ReferenceEnthalpy referenceEnthalpy=ReferenceEnthalpy.EnthalpyOfFormationAt25degC
           "Choice of enthalpy reference";
         output Q.Potential g "Gibbs potential";
@@ -1204,7 +1156,7 @@ package Characteristics
       algorithm
         g := h( p,
                 T,
-                referenceEnthalpy) - T*s(p, T)
+                referenceEnthalpy) - T*s(T, p)
           annotation (
           InlineNoEvent=true,
           Inline=true,
@@ -1212,12 +1164,12 @@ package Characteristics
 
       end g;
 
-      function h_ "Specific enthalpy as a function of pressure and temperature"
+      function h "Specific enthalpy as a function of temperature and pressure"
 
         extends Modelica.Icons.Function;
 
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.PressureAbsolute p=1*U.atm "Pressure";
         input ReferenceEnthalpy referenceEnthalpy=ReferenceEnthalpy.EnthalpyOfFormationAt25degC
           "Choice of enthalpy reference";
         output Q.Potential h "Specific enthalpy";
@@ -1235,61 +1187,75 @@ package Characteristics
                     T,
                     b_c[i, :],
                     specHeatCapPow) + B_c[i, 1] annotation (Inline=true);
+          // This is the integral of c0_p*dT up to T at p0.  The lower bound is the
+          // enthalpy of formation (of ideal gas, if the material is gaseous) at
+          // 25 degC [McBride2002, p. 2].
         end h0_i;
+
+        function h_resid "Residual specific enthalpy for pressure adjustment"
+          input Q.TemperatureAbsolute T "Temperature";
+          input Q.PressureAbsolute p "Pressure";
+          output Q.Potential h_resid
+            "Integral of (delh/delp)_T*dp up to p with zero integration constant";
+
+        algorithm
+          h_resid := Polynomial.F(
+                    p/T,
+                    {(specVolPow[1] + i)*Polynomial.f(
+                      T,
+                      b_v[i, :],
+                      specVolPow[2] - 1) - Polynomial.df(
+                      T,
+                      b_v[i, :],
+                      specVolPow[2],
+                      1,
+                      zeros(size(b_v, 2))) for i in 1:size(b_v, 1)},
+                    specVolPow[1]) annotation (Inline=true);
+          // Note that the partial derivative (delh/delp)_T is equal to
+          // v + T*(dels/delp)_T by definition of enthalpy change (dh = T*ds + v*dp)
+          // and v - T*(delv/delT)_p by applying the appropriate Maxwell relation
+          // ((dels/delp)_T = -(delv/delT)_p).
+        end h_resid;
 
       algorithm
         /*
     assert(T_lim_c[1] <= T and T <= T_lim_c[size(T_lim_c, 1)], "Temperature " +
     String(T/U.K) + " K is out of bounds for " + name + " ([" + String(T_lim_c[1]
     /U.K) + ", " + String(T_lim_c[size(T_lim_c, 1)]/U.K) + "] K).");
-    */
+  */
         // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4 T_lim_c[end] can't be used instead of
-        // T_lim_c[size(T_lim_c, 1)] due to:
+        // Note:  In Dymola 7.4 T_lim_c[size(T_lim_c, 1)] must be used
+        // instead of T_lim_c[end] due to:
         //    "Error, not all 'end' could be expanded."
 
-        h := smooth(1, h0_i(T, interval(T, T_lim_c)) + (if referenceEnthalpy
-           == ReferenceEnthalpy.ZeroAt0K then Deltah0 else 0) - (if
-          referenceEnthalpy == ReferenceEnthalpy.ZeroAt25degC then Deltah0_f
-           else 0) + h_offset) + (if phase == "gas" then T*Polynomial.f(
-                p,
-                {(Polynomial.df(
-                  T,
-                  b_v[i, :],
-                  pressPow[2],
-                  1,
-                  zeros(size(b_v, 2)))/T^(i) - Polynomial.f(
-                  T,
-                  b_v[i, :],
-                  pressPow[2] - pressPow[1] - i))/(pressPow[1] + i) for i in
-            max(1 - pressPow[1], 1):size(b_v, 1)},
-                1) else 0)
+        h := smooth(1, sum((if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i
+           + 1] or i == size(T_lim_c, 1) - 1) then h0_i(T, i) else 0) for i in
+          1:size(T_lim_c, 1) - 1)) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K
+           then Deltah0 else 0) - (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt25degC
+           then Deltah0_f else 0) + h_offset + h_resid(T, p) - h_resid(T, if
+          phase == "gas" then 0 else p0)
           annotation (
           InlineNoEvent=true,
           Inline=true,
           smoothOrder=1);
-        // The first term is the integral of c_p*dT up to T at p0 with the
-        // reference enthalpy at the lower bound [McBride2002, p. 2].  The
-        // second term is the correction for non-ideal gas [Dymond2002, pp.
-        // 16-17].  The final term is the adjustment
 
-        // **Add term for non-gas.
-        // **Is the pressure adjustment correct for incompressible species?
-        // **Add and cite Rao1997
-
+        // The last two terms adjust for the actual pressure relative to the
+        // reference.  If the material is gaseous, then the reference is the ideal
+        // gas.  In that case, the lower limit of the integral (delh/delp)_T*dp is
+        // p=0, where a real gas behaves as an ideal gas.  Otherwise, the lower limit
+        // is simply the reference pressure (p0).  See [Rao 1997, p. 271].
         annotation (Documentation(info="<html>
-  <p>For an ideal gas, pressure (<i>p</i>)
-  does not matter; the **function reduces to <i>c</i><sub><i>V</i></sub>(<i>T</i>) = <i>c</i>&deg;(<i>T</i>) - 1 (in
-  <a href=\"modelica://FCSys\">FCSys</a>, <i>R</i> = 1).</p>
+  <p>For an ideal gas, this function is independent of pressure 
+  (although pressure remains as a valid input).</p>
     </html>"));
-      end h_;
+      end h;
 
-      replaceable function p_vT
-        "Pressure as a function of specific volume and temperature"
+      replaceable function p_Tv
+        "Pressure as a function of temperature and specific volume"
         extends Modelica.Icons.Function;
 
-        input Q.VolumeSpecificAbsolute v=298.15*U.K/U.atm "Specific volume";
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.VolumeSpecificAbsolute v=298.15*U.K/U.atm "Specific volume";
         output Q.PressureAbsolute p "Pressure";
 
       algorithm
@@ -1308,32 +1274,32 @@ package Characteristics
                 pressPow[1]) else 0 annotation (
           Inline=true,
           smoothOrder=999,
-          inverse(v=v_pT(p, T)),
+          inverse(v=v_Tp(T, p)),
           derivative=dp);
-        annotation (Documentation(info="<html><p>If the species is incompressible, then <i>p</i>(<i>v</i>, <i>T</i>) is undefined,
+        annotation (Documentation(info="<html><p>If the species is incompressible, then <i>p</i>(<i>T</i>, <i>v</i>) is undefined,
   and the function will return a value of zero.</p>
   <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a>().</p></html>"));
-      end p_vT;
+      end p_Tv;
 
       replaceable function r_th
-        "<html>Thermal resistivity as a function of pressure and temperature (<i>r</i><sub>th</sub>)</html>"
+        "<html>Thermal resistivity as a function of temperature and pressure (<i>r</i><sub>th</sub>)</html>"
 
         extends Modelica.Icons.Function;
 
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.PressureAbsolute p=1*U.atm "Pressure";
-        input Q.TemperatureAbsolute T "Temperature";
         output Q.ResistivityThermal r_th "Thermal resistivity";
 
       algorithm
-        r_th := alpha(T)/c_V(p, T);
+        r_th := alpha(T)/c_V(T, p);
 
       end r_th;
 
-      function s_ "Specific entropy as a function of pressure and temperature"
+      function s "Specific entropy as a function of temperature and pressure"
         extends Modelica.Icons.Function;
 
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.PressureAbsolute p=1*U.atm "Pressure";
         output Q.NumberAbsolute s "Specific entropy";
 
       protected
@@ -1342,14 +1308,49 @@ package Characteristics
           input Q.TemperatureAbsolute T "Temperature";
           input Integer i "Index of the temperature interval";
           output Q.NumberAbsolute s0
-            "Specific entropy at reference pressure and given temperature";
+            "Specific entropy at given temperature and reference pressure";
 
         algorithm
           s0 := Polynomial.F(
                     T,
                     b_c[i, :],
                     specHeatCapPow - 1) + B_c[i, 2] annotation (Inline=true);
+          // This is the integral of c0_p/T*dT up to T at p0 with the
+          // absolute entropy at the lower bound [McBride2002, p. 2].
         end s0_i;
+
+        function s_resid "Residual specific entropy for pressure adjustment"
+          input Q.TemperatureAbsolute T "Temperature";
+          input Q.PressureAbsolute p "Pressure";
+          output Q.NumberAbsolute s_resid
+            "Integral of (dels/delp)_T*dp up to p with zero integration constant, excluding the first virial term";
+
+        algorithm
+          s_resid := Polynomial.F(
+                    p/T,
+                    {coeff(T, i) for i in max(-specVolPow[1], 0) + 1:size(b_v,
+              1)},  0) annotation (Inline=true);
+          // Note that according to the Maxwell relations the partial derivative
+          // (dels/delp)_T is equal to -(delv/delT)_p.
+        end s_resid;
+
+        function coeff
+          "Return the coefficient for a term in the integral of (dels/delp)_T*dp"
+          input Q.TemperatureAbsolute T "Temperature";
+          input Integer i "Row index to b_v";
+          output Real coeff "Coefficient";
+
+        algorithm
+          coeff := (specVolPow[1] + i - 1)*Polynomial.f(
+                    T,
+                    b_v[i, :],
+                    specVolPow[2] - 1) - Polynomial.df(
+                    T,
+                    b_v[i, :],
+                    specVolPow[2],
+                    1,
+                    zeros(size(b_v, 2))) annotation (Inline=true);
+        end coeff;
 
       algorithm
         /*
@@ -1358,33 +1359,36 @@ package Characteristics
     /U.K) + ", " + String(T_lim_c[size(T_lim_c, 1)]/U.K) + "] K).");
   */
         // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4 T_lim_c[end] can't be used instead of
-        // T_lim_c[size(T_lim_c, 1)] due to:
-        //    "Error, not all 'end' could be expanded."
+        // Note:  In Dymola 7.4 T_lim_c[size(T_lim_c, 1)] must be used
+        // instead of T_lim_c[end] due to:
+        //    "Error, not all 'end' could be expanded.";
 
-        // **Adjust for pressure.
-        s := smooth(1, s0_i(T, interval(T, T_lim_c)) - sum((if specVolPow[1] +
-          i == 0 then ln((if p_min > 0 then max(p, p_min) else p)/p0) else (p^(
-          specVolPow[1] + i) - p0^(specVolPow[1] + i))/(specVolPow[1] + i))*
-          Polynomial.f(
-                T,
-                b_v[i, :],
-                specVolPow[2] - specVolPow[1] - i) for i in 1:size(b_v, 1)))
+        s := smooth(1, sum((if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i
+           + 1] or i == size(T_lim_c, 1) - 1) then s0_i(T, i) else 0) for i in
+          1:size(T_lim_c, 1) - 1)) + (if -size(b_v, 1) <= specVolPow[1] and
+          specVolPow[1] < 0 then coeff(T, -specVolPow[1])*ln(p/p0) else 0) +
+          s_resid(T, p) - s_resid(T, if phase == "gas" then 0 else p0)
           annotation (
           InlineNoEvent=true,
           Inline=true,
           smoothOrder=1);
-        // The first term is the integral of c_p/T*dT up to T at p0 with the
-        // absolute entropy at the lower bound [McBride2002, p. 2].  The second
-        // polynomial is the integral of v*dp from p0 to p (at T).
-      end s_;
+        // The first term gives the specific entropy at the given temperature and
+        // reference pressure (p0).  The following terms adjust for the actual
+        // pressure (p) by integrating (dels/delp)_T*dp.  In general, the
+        // integration is from p0 to p.  However, for gases the reference state
+        // is the ideal gas at the reference pressure.  Therefore, the lower
+        // integration limit for the second and higher virial terms is p=0---the
+        // pressure limit at which a real gas behaves as an ideal gas.  See
+        // [Rao1997, p. 272].
 
-      replaceable function v_pT
-        "Specific volume as a function of pressure and temperature"
+      end s;
+
+      replaceable function v_Tp
+        "Specific volume as a function of temperature and pressure"
         extends Modelica.Icons.Function;
 
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.PressureAbsolute p=1*U.atm "Pressure";
         output Q.VolumeSpecificAbsolute v "Specific volume";
 
       algorithm
@@ -1397,18 +1401,18 @@ package Characteristics
                 specVolPow[1]) annotation (
           Inline=true,
           smoothOrder=999,
-          inverse(p=p_vT(v, T)),
+          inverse(p=p_Tv(T, v)),
           derivative=dv);
         annotation (Documentation(info="<html>
   <p>The derivative of this function is 
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv\">dv</a>().</p></html>"));
-      end v_pT;
+      end v_Tp;
 
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
     <p>This package is compatible with NASA CEA thermodynamic data
-    [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>] and the generalized virial equation of state
+    [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>] and the virial equation of state
     [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>].  It may be used with
-    the assumptions of ideal gas and constant specific volume, although it is more general than 
+    the assumption of ideal gas or of constant specific volume, although it is more general than 
     that.</p>
 
     <p>Assumptions:
@@ -1418,30 +1422,37 @@ package Characteristics
     <ul>
     <li>Currently, <code>formula</code> may not contain parentheses or brackets.</li>
     <li><code>r</code> is the Van der Waals radius or the radius for the
-    rigid-sphere (\"billiard-ball\") approximation of the kinetic theory of gases.</li>
+    rigid-sphere (\"billiard-ball\") approximation of the kinetic theory of gases 
+    [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].</li>
     <li><code>b_v</code>: The powers of <i>p</i>/<i>T</i> increase by row.  The powers of
     <i>T</i> increase by column.  If <code>specVolPow[1] == -1</code>, then the rows
-    of <code>b_v</code> correspond to 1, <i>T</i><i>B</i><sup>*</sup>(<i>T</i>), <i>T</i><sup> 2</sup><i>C</i><sup>*</sup>(<i>T</i>), <i>T</i><sup> 3</sup><i>D</i><sup>*</sup>(<i>T</i>), &hellip;
-    in [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>].  Currently,
-    virial equations are supported up to the fourth coefficient.  If additional terms are
-    required, review the definition of <code>b_p</code> and modify it.</li>
-    <li>The defaults for <code>b_v</code> and <code>specVolPow</code> represent ideal gas.</li>
+    of <code>b_v</code> correspond to 1, <i>B</i><sup>*</sup><i>T</i>, 
+    <i>C</i><sup>*</sup><i>T</i><sup>2</sup>, <i>D</i><sup>*</sup><i>T</i><sup>3</sup>, &hellip;,
+    where
+    1, <i>B</i><sup>*</sup>, <i>C</i><sup>*</sup>, and <i>D</i><sup>*</sup> are 
+    the first, second, third, and fourth coefficients in the volume-explicit
+    virial equation of state
+    ([<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>, pp. 1&ndash;2]).
+    Currently,
+    virial equations of state are supported up to the fourth coefficient (<i>D</i><sup>*</sup>).  
+    If additional terms are required, review and modify the definition of <code>b_p</code>.</li>
     <li><code>specVolPow</code> is defined as a <code>Real</code> vector.  However,
     special modifications are necessary if non-integer values are used
     (see <a href=\"modelica://FCSys.Characteristics.'e-'.Graphite\">'e-'.Graphite</a>).
-    <li><code>b_c</code>: The rows give the coefficients for different temperature intervals&mdash;bounded
+    <li>The defaults for <code>b_v</code> and <code>specVolPow</code> represent ideal gas.</li>
+    <li><code>b_c</code>: The rows give the coefficients for the temperature intervals bounded
     by the values in <code>T_lim_c</code>.
     The powers of <i>T</i> increase
     by column.
     By default,
     the powers of <i>T</i> for the first column are each -2, which corresponds to [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].
-    In that case, the dimensionalities of the coefficients are {M2.L4/(N2.T4), M.L2/(N.T2), 1, &hellip;}
+    In that case, the dimensionalities of the coefficients are {L4.M2/(N2.T4), L2.M/(N.T2), 1, &hellip;}
     for each row, where L is length, M is mass, N is particle number, and T is time. (In <a href=\"modelica://FCSys\">FCSys</a>,
-    temperature is a potential with dimension M.L2/(N.T2); see
+    temperature is a potential with dimension L2.M/(N.T2); see
     the <a href=\"modelica://FCSys.Units\">Units</a> package.)</li>
     <li><code>B_c</code>: As in <code>b_c</code>, the rows correspond to different
     temperature intervals.  The first column is for specific enthalpy and has dimensionality
-    M.L2/(N.T2).  The second column is for specific entropy and is dimensionless.
+    L2.M/(N.T2).  The second is for specific entropy and is dimensionless.
     The integration constants for enthalpy are defined such that the enthalpy at
     25 &deg;C is the specific enthalpy of formation at that temperature and reference pressure 
     [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>, p. 2].
@@ -1451,18 +1462,22 @@ package Characteristics
     between rows of <code>b_c</code> (and <code>B_c</code>).  Therefore, if there are <i>n</i> temperature intervals
     (and rows in <code>b_c</code> and <code>B_c</code>), then <code>T_lim_c</code> must
     have <i>n</i> + 1 entries.</li>
-    <li><code>p0</code> is the reference pressure.   In the
+    <li>The reference pressure is <code>p0</code>.   In the
     NASA CEA data [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>], it is 1 bar for gases and 1 atm for condensed
-    species.  For gases, the reference state is the ideal gas (at <code>p0</code>) as
-    in [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].
+    species.  For gases, the reference state is the ideal gas at <code>p0</code>.
     For example, the enthalpy of a non-ideal (real) gas at 25 &deg;C and <code>p0</code> with
     <code>ReferenceEnthalpy.ZeroAt25degC</code> selected is not exactly zero.
     </li>
     <li>If the <i>p</i>-<i>v</i>-<i>T</i> equation of state includes an ideal gas term (nonzero first virial coefficient), then the
-    correlation for specific entropy (<i>s</i>) will involve the natural logarithm of partial pressure.
-    The <code>p_min</code> parameter is used to guard against the logarithm of a non-positive pressure.
+    correlation for specific entropy (<a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.s\">s</a>) will involve the logarithm of pressure.
+    The <code>p_min</code> parameter is used to guard against the logarithm of non-positive pressures.
     To disable this protection (and simplify the translated code), set <code>p_min</code> to zero or a
     negative pressure.</li>
+    <li>If the material is gaseous (<code>phase == \"gas\"</code>), then the first virial coefficient 
+    must be independent of temperature.  Otherwise, the function for specific enthalpy 
+    (<a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.h\">h</a>) will be ill-posed.
+    Typically the first virial coefficient is one (or equivalently <code>U.R</code>), which satisfies
+    this requirement.</li>
     </ul>
     </p></html>"));
     end Characteristic;
@@ -1474,6 +1489,7 @@ package Characteristics
         EnthalpyOfFormationAt25degC
           "Enthalpy at 25 degC and p0 is enthalpy of formation at 25 degC and p0 (if no additional offset)")
       "Enumeration for the reference enthalpy of a species";
+
   end BaseClasses;
   annotation (Documentation(info="<html>
   <p>Additional materials may be included as needed.  The thermodynamic data for

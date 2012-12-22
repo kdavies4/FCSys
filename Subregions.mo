@@ -6682,7 +6682,7 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
       // Therefore, the values of the enumerations are specified numerically for
       // this initial condition and some others below.
       parameter Q.AmountVolumic rho_IC(min=if overrideEOS then 0 else Modelica.Constants.small,
-          start=1/Data.v_pT(p_IC, T_IC))
+          start=1/Data.v_Tp(T_IC, p_IC))
         "<html>Initial volumic amount (&rho;<sub>IC</sub>)</html>"
         annotation (Dialog(tab="Initialization",group="Scalar properties"));
       parameter Q.AmountVolumicRate derrho_IC=0
@@ -6791,13 +6791,13 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
           enable=initMethX == 5 or initMethY == 5 or initMethZ == 5));
 
       // Material properties
-      Q.Fluidity f_0(nominal=10*U.cm*U.s/U.g) = Data.f_0(p, T)
+      Q.Fluidity f_0(nominal=10*U.cm*U.s/U.g) = Data.f_0(T, p)
         "<html>Bulk fluidity (<i>f</i><sub>0</sub>)</html>"
         annotation (Dialog(group="Material properties"));
-      Q.Fluidity f_12(nominal=10*U.cm*U.s/U.g) = Data.f_12(p, T)
+      Q.Fluidity f_12(nominal=10*U.cm*U.s/U.g) = Data.f_12(T, p)
         "<html>Fluidity (<i>f</i><sub>12</sub>)</html>"
         annotation (Dialog(group="Material properties"));
-      Q.ResistivityThermal r_th(nominal=10*U.cm/U.A) = Data.r_th(p, T)
+      Q.ResistivityThermal r_th(nominal=10*U.cm/U.A) = Data.r_th(T, p)
         "<html>Thermal resistivity (<i>r</i><sub>th</sub>)</html>"
         annotation (Dialog(group="Material properties"));
 
@@ -6870,7 +6870,7 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
             dT=0) else 0 if defaults.analysis "Chemical capacitance";
       // Note:  This is delN/delg at constant T and V.
       output Q.CapacityThermalSpecific c_V(stateSelect=StateSelect.never) =
-        Data.c_V(p, T) if defaults.analysis "Isochoric specific heat capacity";
+        Data.c_V(T, p) if defaults.analysis "Isochoric specific heat capacity";
       output Q.CapacityThermal C_V(stateSelect=StateSelect.never) = N*c_V if
         defaults.analysis "Isochoric heat capacity";
       //
@@ -6927,8 +6927,8 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
      },{yNegative.isobaric ,
     yPositive.isobaric },{zNegative.isobaric,zPositive.isobaric }}[
     cartAxes[axis], side] then inSign(side)*
-    Data.v_pT(p_face[cartAxes[axis],
-    side], T_face[cartAxes[axis], side])*Ndot_face[cartAxes[axis], side]^2/A[
+    Data.v_Tp(T_face[cartAxes[axis], side],p_face[cartAxes[axis],
+    side])*Ndot_face[cartAxes[axis], side]^2/A[
     cartAxes[axis]] else 0 for side in Side) + sum(phi_face[cartWrap(cartAxes[
     axis] - orientation), :, orientation]*Ndot_face[cartWrap(cartAxes[axis] -
     orientation), :] for orientation in Orientation) for axis in 1:n_vel} - phi*
@@ -6946,7 +6946,7 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
   // Energy balance
   output Q.Power derE(stateSelect=StateSelect.never) = (C_V*der(T) - (
     if overrideEOS then 0 else V*der(
-    Data.p_vT(V/N, T))) + Data.m*
+    Data.p_Tv(T,V/N))) + Data.m*
     der(phi*phi)/2)/U.s if defaults.analysis
     "Rate of energy storage (internal and kinetic) at constant mass";
   output Q.Power Wdot_exch(stateSelect=StateSelect.never) = -chemical.phi*
@@ -6961,8 +6961,8 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
     "Rate of thermal conduction from other species";
   output Q.Power Wdot_trans(stateSelect=StateSelect.never) = -sum(sum((Data.h0(
     T_face[axis, side]) + Data.m*(
-    Data.v_pT(p_face[axis, side],
-    T_face[axis, side])*Ndot_face[axis, side]/A[axis])^2 + phi_face[axis, side,
+    Data.v_Tp(T_face[axis, side],p_face[axis, side]
+    )*Ndot_face[axis, side]/A[axis])^2 + phi_face[axis, side,
     :]*phi_face[axis, side, :] - phi*phi - h)*Ndot_face[axis, side] for side
      in Side) for axis in Axis) if defaults.analysis
     "Rate of work (internal, flow, and kinetic) done by material transport (advection)";
@@ -7358,12 +7358,12 @@ The default global default settings will be used for the current simulation.",
       if overrideEOS then
         N = rho_IC*V;
       elseif Data.isCompressible then
-        p = Data.p_vT(V/N, T);
+        p = Data.p_Tv(T, V/N);
       else
-        V = N*Data.v_pT(p, T);
+        V = N*Data.v_Tp(T, p);
       end if;
-      h = Data.h(p, T);
-      s = Data.s(p, T);
+      h = Data.h(T, p);
+      s = Data.s(T, p);
 
       // Exchange
       // --------
@@ -7491,8 +7491,8 @@ The default global default settings will be used for the current simulation.",
         else
           der(M*phi[axis])/U.s = chemical.mPhidot[axis] + common.mPhidot[axis]
              + inert.mPhidot[axis] + Delta(p_face[cartAxes[axis], :])*A[
-            cartAxes[axis]] + Data.m*Delta(Data.v_pT(p_face[cartAxes[axis], :],
-            T_face[cartAxes[axis], :]) .* Ndot_face[cartAxes[axis], :] .^ 2)/A[
+            cartAxes[axis]] + Data.m*Delta(Data.v_Tp(T_face[cartAxes[axis], :],
+            p_face[cartAxes[axis], :]) .* Ndot_face[cartAxes[axis], :] .^ 2)/A[
             cartAxes[axis]] + sum(Data.m*Delta(APdot_face[cartWrap(cartAxes[
             axis] - orientation), :, orientation] .* Ndot_face[cartWrap(
             cartAxes[axis] - orientation), :])/A[cartWrap(cartAxes[axis] -
@@ -7548,8 +7548,8 @@ The default global default settings will be used for the current simulation.",
         (T*der(N*s) + der(M*phi*phi)/2)/U.s = chemical.phi*chemical.mPhidot/2
            + Data.m*chemical.hbar*chemical.Ndot + common.phi*common.mPhidot +
           common.Qdot + inert.phi*inert.mPhidot + inert.Qdot + sum(sum((Data.h(
-          p_face[axis, side], T_face[axis, side]) + Data.m*((A[axis]*Data.v_pT(
-          p_face[axis, side], T_face[axis, side])*Ndot_face[axis, side])^2 +
+          p_face[axis, side], T_face[axis, side]) + Data.m*((A[axis]*Data.v_Tp(
+          T_face[axis, side], p_face[axis, side])*Ndot_face[axis, side])^2 +
           APdot_face[axis, side, :]*APdot_face[axis, side, :]/A[axis]^2)/2)*
           Ndot_face[axis, side] for side in Side) for axis in Axis) + sum(
           tau_face .* APdot_face) + sum(Qdot_face) "Conservation of energy";
@@ -7821,53 +7821,62 @@ The default global default settings will be used for the current simulation.",
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-180,-180},{180,
-              180}}), graphics={Rectangle(
-              extent={{-170,120},{170,160}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Ellipse(
-              extent={{-60,188},{60,68}},
-              lineColor={127,127,127},
-              startAngle=30,
-              endAngle=149,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255}),Ellipse(
-              extent={{-170,-2},{-50,-122}},
-              lineColor={127,127,127},
-              startAngle=149,
-              endAngle=270,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255}),Ellipse(
-              extent={{50,-2},{170,-122}},
-              lineColor={127,127,127},
-              startAngle=270,
-              endAngle=390,
-              pattern=LinePattern.Dash,
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255}),Polygon(
-              points={{51.5,159},{162,-32},{110,-122},{-110,-122},{-162,-32},{-51.5,
-              159},{51.5,159}},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Line(
-              points={{51.5,159},{162,-32}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{110,-122},{-110,-122}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{-162,-32},{-51.5,159}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Text(
-              extent={{-170,120},{170,160}},
-              textString="%name",
-              lineColor={0,0,0})}));
+              180}}), graphics={
+          Rectangle(
+            extent={{-170,120},{170,160}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Ellipse(
+            extent={{-60,188},{60,68}},
+            lineColor={127,127,127},
+            startAngle=30,
+            endAngle=149,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255}),
+          Ellipse(
+            extent={{-170,-2},{-50,-122}},
+            lineColor={127,127,127},
+            startAngle=149,
+            endAngle=270,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255}),
+          Ellipse(
+            extent={{50,-2},{170,-122}},
+            lineColor={127,127,127},
+            startAngle=270,
+            endAngle=390,
+            pattern=LinePattern.Dash,
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255}),
+          Polygon(
+            points={{51.5,159},{162,-32},{110,-122},{-110,-122},{-162,-32},{-51.5,
+                159},{51.5,159}},
+            smooth=Smooth.None,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Line(
+            points={{51.5,159},{162,-32}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{110,-122},{-110,-122}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{-162,-32},{-51.5,159}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Text(
+            extent={{-170,120},{170,160}},
+            textString="%name",
+            lineColor={0,0,0})}));
   end PhaseBoundary;
 
   model Reaction "Model for a chemical/electrochemical reaction"
@@ -7973,22 +7982,26 @@ The default global default settings will be used for the current simulation.",
     <li>No storage of material, linear momentum, or energy</li></ul>
     </p>
     </html>"),
-      Icon(graphics={Rectangle(
-              extent={{-140,40},{140,80}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Text(
-              extent={{-140,40},{140,80}},
-              textString="%name",
-              lineColor={0,0,0}),Ellipse(
-              extent={{-80,40},{80,-40}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineColor={127,127,127},
-              pattern=LinePattern.Dash),Text(
-              extent={{-100,-16},{100,-40}},
-              lineColor={127,127,127},
-              textString="%n_spec")}),
+      Icon(graphics={
+          Rectangle(
+            extent={{-140,40},{140,80}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Text(
+            extent={{-140,40},{140,80}},
+            textString="%name",
+            lineColor={0,0,0}),
+          Ellipse(
+            extent={{-80,40},{80,-40}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            lineColor={127,127,127},
+            pattern=LinePattern.Dash),
+          Text(
+            extent={{-100,-16},{100,-40}},
+            lineColor={127,127,127},
+            textString="%n_spec")}),
       Diagram(graphics));
   end Reaction;
 
@@ -8041,21 +8054,24 @@ value (<code>p</code>).</p>
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{160,
-              160}}), graphics={Rectangle(
-              extent={{-160,112},{160,152}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Polygon(
-              points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,-160},
-              {-160,60}},
-              lineColor={127,127,127},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.Dash),Text(
-              extent={{-160,112},{160,152}},
-              textString="%name",
-              lineColor={0,0,0})}),
+              160}}), graphics={
+          Rectangle(
+            extent={{-160,112},{160,152}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Polygon(
+            points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,-160},
+                {-160,60}},
+            lineColor={127,127,127},
+            smooth=Smooth.None,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.Dash),
+          Text(
+            extent={{-160,112},{160,152}},
+            textString="%name",
+            lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(graphics));
@@ -8181,76 +8197,91 @@ value (<code>p</code>).</p>
   value (<code>p</code>).</li>
   </ul></p></html>"),
         Diagram(graphics),
-        Icon(graphics={Line(
-                  points={{-100,0},{-40,0}},
-                  color={127,127,127},
-                  thickness=0.5,
-                  visible=inclXFaces,
-                  smooth=Smooth.None),Line(
-                  points={{0,-40},{0,-100}},
-                  color={127,127,127},
-                  thickness=0.5,
-                  visible=inclYFaces,
-                  smooth=Smooth.None),Line(
-                  points={{40,40},{50,50}},
-                  color={127,127,127},
-                  thickness=0.5,
-                  visible=inclZFaces,
-                  smooth=Smooth.None),Polygon(
-                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
-                {-40,16}},
-                  lineColor={127,127,127},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid),Line(
-                  points={{-40,-40},{-16,-16}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash),Line(
-                  points={{-16,40},{-16,-16},{40,-16}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash),Line(
-                  points={{-40,0},{28,0}},
-                  color={210,210,210},
-                  visible=inclXFaces,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,28},{0,-40}},
-                  color={210,210,210},
-                  visible=inclYFaces,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{28,0},{100,0}},
-                  color={127,127,127},
-                  thickness=0.5,
-                  visible=inclXFaces,
-                  smooth=Smooth.None),Line(
-                  points={{0,100},{0,28}},
-                  color={127,127,127},
-                  thickness=0.5,
-                  visible=inclYFaces,
-                  smooth=Smooth.None),Line(
-                  points={{-12,-12},{40,40}},
-                  color={210,210,210},
-                  visible=inclZFaces,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-40,16},{16,16},{16,-40}},
-                  color={127,127,127},
-                  smooth=Smooth.None),Line(
-                  points={{-50,-50},{-12,-12}},
-                  color={127,127,127},
-                  thickness=0.5,
-                  visible=inclZFaces,
-                  smooth=Smooth.None),Polygon(
-                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
-                {-40,16}},
-                  lineColor={127,127,127},
-                  smooth=Smooth.None),Line(
-                  points={{40,40},{16,16}},
-                  color={127,127,127},
-                  smooth=Smooth.None)}));
+        Icon(graphics={
+            Line(
+              points={{-100,0},{-40,0}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclXFaces,
+              smooth=Smooth.None),
+            Line(
+              points={{0,-40},{0,-100}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclYFaces,
+              smooth=Smooth.None),
+            Line(
+              points={{40,40},{50,50}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclZFaces,
+              smooth=Smooth.None),
+            Polygon(
+              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
+                  16}},
+              lineColor={127,127,127},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-40,-40},{-16,-16}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),
+            Line(
+              points={{-16,40},{-16,-16},{40,-16}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),
+            Line(
+              points={{-40,0},{28,0}},
+              color={210,210,210},
+              visible=inclXFaces,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,28},{0,-40}},
+              color={210,210,210},
+              visible=inclYFaces,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{28,0},{100,0}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclXFaces,
+              smooth=Smooth.None),
+            Line(
+              points={{0,100},{0,28}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclYFaces,
+              smooth=Smooth.None),
+            Line(
+              points={{-12,-12},{40,40}},
+              color={210,210,210},
+              visible=inclZFaces,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-40,16},{16,16},{16,-40}},
+              color={127,127,127},
+              smooth=Smooth.None),
+            Line(
+              points={{-50,-50},{-12,-12}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclZFaces,
+              smooth=Smooth.None),
+            Polygon(
+              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
+                  16}},
+              lineColor={127,127,127},
+              smooth=Smooth.None),
+            Line(
+              points={{40,40},{16,16}},
+              color={127,127,127},
+              smooth=Smooth.None)}));
     end PartialSubregion;
   end BaseClasses;
 
