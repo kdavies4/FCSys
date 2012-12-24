@@ -119,7 +119,7 @@ package Characteristics
     end TestCorrelations;
 
     model VerifyDerivativep
-      "<html>Verify that <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a> is the correct derivative of <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_Tv\">p_Tv</a></html>"
+      "<html>Verify that <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a>() is the correct derivative of <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_Tv\">p_Tv</a>()</html>"
       // This approach is based on [Dassault2010, vol. 2, pp. 300-301].
 
       import FCSys.Characteristics.BaseClasses.Characteristic;
@@ -151,7 +151,7 @@ package Characteristics
     end VerifyDerivativep;
 
     model VerifyDerivativev
-      "<html>Verify that <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv\">dv</a> is the correct derivative of <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_Tp\">v_Tp</a></html>"
+      "<html>Verify that <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv\">dv</a>() is the correct derivative of <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_Tp\">v_Tp</a>()</html>"
       // This approach is based on [Dassault2010, vol. 2, pp. 300-301].
 
       import FCSys.Characteristics.BaseClasses.Characteristic;
@@ -1014,7 +1014,7 @@ package Characteristics
         end c0_p;
 
       algorithm
-        c_V := c0_p(T) - (if phase == "gas" then 1 - Polynomial.F(
+        c_V := 0*c0_p(T) - (if phase == "gas" then 0*1 - Polynomial.F(
                 v_Tp(T, p),
                 {T*(2*Polynomial.df(
                   T,
@@ -1030,7 +1030,7 @@ package Characteristics
                   0,
                   zeros(size(b_p, 2)))) for i in 1:min(-1 - pressPow[1], size(
             b_p, 1))},
-                pressPow[1]) else T*dp(
+                pressPow[1]) else 0*T*dp(
                 v_Tp(T, p),
                 T,
                 dv=0,
@@ -1039,6 +1039,7 @@ package Characteristics
                 T,
                 dp=0,
                 dT=1)) annotation (Inline=true, smoothOrder=999);
+        //**temp 0s
         // For gas, the conditional term is the departure of the isochoric specific
         // heat capacity (c_V) from the isobaric specific heat capacity of the
         // corresponding ideal gas (c0_p) at the same temperature (T) and

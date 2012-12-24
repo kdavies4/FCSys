@@ -624,65 +624,10 @@ This icon is designed for a <b>signal bus</b> connector.
         Integer integers[6];
 
       algorithm
-        // Chemistry.charge()
-        for i in 1:2 loop
-          assert((Chemistry.charge({"H2O","e-","Hg2+2",""}))[i] == {0,-1,2,0}[i],
-            "The Chemistry.charge function failed on entry " + String(i) + ".");
-        end for;
-        // Note:  As of Modelica 3.2 and Dymola 7.4, assert() doesn't accept
-        // vectorized equations.
-
-        // Chemistry.countElements()
-        for i in 1:2 loop
-          assert((Chemistry.countElements({"H2O","e-","C19HF37O5S",""}))[i] ==
-            {2,1,5,0}[i],
-            "The Chemistry.countElements function failed on entry " + String(i)
-             + ".");
-        end for;
-
-        // Chemistry.elements()
-        (strings[1:6],integers[1:6]) := Chemistry.elements("C19HF37O5S-");
-        for i in 1:6 loop
-          assert(strings[i] == {"C","H","F","O","S","e-"}[i],
-            "The Chemistry.elements function failed on entry " + String(i) +
-            ".");
-          assert(integers[i] == {19,1,37,5,1,1}[i],
-            "The Chemistry.elements function failed on entry " + String(i) +
-            ".");
-        end for;
-
-        // Chemistry.readElement()
-        (strings[1],integers[1],integers[2],integers[3]) :=
-          Chemistry.readElement("H2");
-        assert(strings[1] == "H",
-          "The Chemistry.readElement function failed on the element output.");
-        assert(integers[1] == 2,
-          "The Chemistry.readElement function failed on the coeff output.");
-        assert(integers[2] == 0,
-          "The Chemistry.readElement function failed on the z output.");
-        assert(integers[3] == 3,
-          "The Chemistry.readElement function failed on the nextindex output.");
-        (strings[1],integers[1],integers[2],integers[3]) :=
-          Chemistry.readElement("Hg2+2");
-        assert(strings[1] == "Hg",
-          "The Chemistry.readElement function failed on the element output.");
-        assert(integers[1] == 2,
-          "The Chemistry.readElement function failed on the coeff output.");
-        assert(integers[2] == 2,
-          "The Chemistry.readElement function failed on the z output.");
-        assert(integers[3] == 6,
-          "The Chemistry.readElement function failed on the nextindex output.");
-
-        // Chemistry.stoich()
-        for i in 1:3 loop
-          assert((Chemistry.stoich({"e-","H+","H2"}))[i] == {-2,-2,1}[i],
-            "The Chemistry.stoich function failed on entry " + String(i) + ".");
-        end for;
-        for i in 1:4 loop
-          assert((Chemistry.stoich({"e-","H+","O2","H2O"}))[i] == {-4,-4,-1,2}[
-            i], "The Chemistry.stoich function failed on entry " + String(i) +
-            ".");
-        end for;
+        // Test the subpackages.
+        assert(Chemistry.Examples.TestFunctions(),
+          "The Chemistry subpackage failed.");
+        assert(Polynomial.Examples.Testf(), "The Polynomial subpackage failed.");
 
         // average()
         assert(average({1,2,3}) == 2, "The average function failed.");
@@ -726,67 +671,6 @@ This icon is designed for a <b>signal bus</b> connector.
         // Compare mod1() to mod():
         assert(mod(3, 3) == 0, "The mod function failed.");
 
-        // Polynomial.F()
-        assert(Polynomial.F(
-                2,
-                {1,2,1},
-                0) == 2 + 4 + 8/3, "The Polynomial.F function failed.");
-        // **Remove this test if it's possible to test via method in Dymola User's Manual.
-
-        // Polynomial.f()
-        assert(Polynomial.f(
-                2,
-                {1,2,1},
-                0) == 1 + 2*2 + 1*2^2, "The Polynomial.f function failed.");
-        assert(Polynomial.f(2, zeros(0)) == 0,
-          "The Polynomial.f function failed.");
-        assert(Polynomial.f(2, {1}) == 1, "The Polynomial.f function failed.");
-        assert(Polynomial.f(2, {0,0,1}) == 4,
-          "The Polynomial.f function failed.");
-        assert(Polynomial.f(2, ones(8)) == 2^8 - 1,
-          "The Polynomial.f function failed.");
-        assert(Polynomial.f(
-                2,
-                {1,0,0},
-                -3) == 1/8, "The Polynomial.f function failed.");
-        // Note:  Polynomial.df() and Polynomial.d2f() can be tested using **Add models to test derivatives according to Dymola User's Manual.
-
-        // Polynomial.df()
-        assert(Polynomial.df(
-                2,
-                {1,2,1},
-                0,
-                1,
-                {0,0,0}) == 2 + 2*2, "The Polynomial.df function failed.");
-        assert(Polynomial.df(
-                2,
-                zeros(0),
-                0,
-                0,
-                zeros(0)) == 0, "The Polynomial.df function failed.");
-        assert(Polynomial.df(
-                2,
-                {1},
-                0,
-                1,
-                {0}) == 0, "The Polynomial.df function failed.");
-        assert(Polynomial.df(
-                2,
-                {0,0,1},
-                0,
-                1,
-                {0,0,0}) == 4, "The Polynomial.df function failed.");
-
-        //
-        assert(Polynomial.d2f(
-                2,
-                {1,2,1},
-                0,
-                1,
-                {0,0,0},
-                0,
-                {0,0,0}) == 2, "The Polynomial.d2f function failed.");
-
         // round()
         for i in 1:5 loop
           assert((round({-1.6,-0.4,1.4,1.6,5}))[i] == {-2,0,1,2,5}[i],
@@ -806,37 +690,88 @@ This icon is designed for a <b>signal bus</b> connector.
         annotation (Documentation(info="<html><p>
   This function call will fail if any of the functions return an
   incorrect result.  It will return true if all of the functions pass.
-  There are no inputs or outputs.</p></html>"));
+  There are no inputs.</p></html>"));
       end TestFunctions;
 
-      model TranslatePoly
-        "<html>Evaluate the translated version of <a href=\"modelica://FCSys.BaseClasses.Utilities.poly\">poly()</a></html>"
-        extends Modelica.Icons.Example;
-        Real x1;
-        Real x2;
-        Real x3;
-      equation
-        x1 = Polynomial.f(
-                time,
-                {1,1,1,1},
-                0);
-        // Check the translated model to be sure that the polynomial is written in
-        // nested form for efficiency.  In Dymola 7.4 turn on the option "Generate
-        // listing of translated Modelica code in dsmodel.mof".  dsmodel.mof should
-        // contain:
-        //     x1 := 1+time*(1+time*(1+time)).
-        x2 = Polynomial.f(time, 2*ones(35));
-        // The function is only unrolled to a a limited depth (currently 10th order
-        // polynomial).  In Dymola 7.4 poly(time, ones(34)) results in a recursive
-        // call, but poly(time, ones(35)) doesn't.
-        x3 = Polynomial.f(
-                time + 1,
-                {1,1,1,1},
-                -3);
-      end TranslatePoly;
     end Examples;
 
     package Chemistry "Functions to support chemistry"
+      package Examples "Examples and tests"
+        extends Modelica.Icons.ExamplesPackage;
+
+        function TestFunctions "Test all the functions"
+          extends Modelica.Icons.Function;
+
+          output Boolean ok "true, if all tests passed";
+
+        protected
+          String strings[6];
+          Integer integers[6];
+
+        algorithm
+          // charge()
+          for i in 1:2 loop
+            assert((charge({"H2O","e-","Hg2+2",""}))[i] == {0,-1,2,0}[i],
+              "The charge function failed on entry " + String(i) + ".");
+          end for;
+          // Note:  As of Modelica 3.2 and Dymola 7.4, assert() doesn't accept
+          // vectorized equations.
+
+          // countElements()
+          for i in 1:2 loop
+            assert((countElements({"H2O","e-","C19HF37O5S",""}))[i] == {2,1,5,0}
+              [i], "The countElements function failed on entry " + String(i) +
+              ".");
+          end for;
+
+          // elements()
+          (strings[1:6],integers[1:6]) := elements("C19HF37O5S-");
+          for i in 1:6 loop
+            assert(strings[i] == {"C","H","F","O","S","e-"}[i],
+              "The elements function failed on entry " + String(i) + ".");
+            assert(integers[i] == {19,1,37,5,1,1}[i],
+              "The elements function failed on entry " + String(i) + ".");
+          end for;
+
+          // readElement()
+          (strings[1],integers[1],integers[2],integers[3]) := readElement("H2");
+          assert(strings[1] == "H",
+            "The readElement function failed on the element output.");
+          assert(integers[1] == 2,
+            "The readElement function failed on the coeff output.");
+          assert(integers[2] == 0,
+            "The readElement function failed on the z output.");
+          assert(integers[3] == 3,
+            "The readElement function failed on the nextindex output.");
+          (strings[1],integers[1],integers[2],integers[3]) := readElement(
+            "Hg2+2");
+          assert(strings[1] == "Hg",
+            "The readElement function failed on the element output.");
+          assert(integers[1] == 2,
+            "The readElement function failed on the coeff output.");
+          assert(integers[2] == 2,
+            "The readElement function failed on the z output.");
+          assert(integers[3] == 6,
+            "The readElement function failed on the nextindex output.");
+
+          // stoich()
+          for i in 1:3 loop
+            assert((stoich({"e-","H+","H2"}))[i] == {-2,-2,1}[i],
+              "The stoich function failed on entry " + String(i) + ".");
+          end for;
+          for i in 1:4 loop
+            assert((stoich({"e-","H+","O2","H2O"}))[i] == {-4,-4,-1,2}[i],
+              "The stoich function failed on entry " + String(i) + ".");
+          end for;
+
+          ok := true;
+          annotation (Documentation(info="<html><p>
+  This function call will fail if any of the functions return an
+  incorrect result.  It will return true if all of the functions pass.
+  There are no inputs.</p></html>"));
+        end TestFunctions;
+
+      end Examples;
       extends Modelica.Icons.Package;
       function charge
         "Return the charge of a species based on its chemical formula"
@@ -1069,6 +1004,177 @@ An unrelated species may be included.");
     end Chemistry;
 
     package Polynomial "Polynomial functions"
+      package Examples "Examples and tests"
+        extends Modelica.Icons.ExamplesPackage;
+
+        function Testf
+          "<html>Test <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.f\">f</a>()</html>"
+          extends Modelica.Icons.Function;
+
+          output Boolean ok "true, if all tests passed";
+
+        algorithm
+          // f()
+          assert(f( 2,
+                    {1,2,1},
+                    0) == 1 + 2*2 + 1*2^2, "The f function failed.");
+          assert(f(2, zeros(0)) == 0, "The f function failed.");
+          assert(f(2, {1}) == 1, "The f function failed.");
+          assert(f(2, {0,0,1}) == 4, "The f function failed.");
+          assert(f(2, ones(8)) == 2^8 - 1, "The f function failed.");
+          assert(f( 2,
+                    {1,0,0},
+                    -3) == 1/8, "The f function failed.");
+          // Note:  F(), df(), and d2f() are not tested here.  They can be tested by
+          // simulating TestF, Testdf, and Testd2f.
+
+          ok := true;
+          annotation (Documentation(info="<html><p>
+  This function call will fail if any of the functions return an
+  incorrect result.  It will return true if all of the functions pass.
+  There are no inputs.</p></html>"));
+        end Testf;
+
+        model TestF
+          "<html>Verify that <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.F\">F</a>() is correctly related to <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.f\">f</a>()</html>"
+          // This approach is based on [Dassault2010, vol. 2, pp. 300-301].
+
+          extends Modelica.Icons.Example;
+
+          parameter Integer n=-1 "Power of the first polynomial term";
+
+          Real u1=1 + time
+            "Real arguments to function (must have sufficient richness)";
+          parameter Real u2[:]=1:3
+            "Real arguments to function (must have sufficient richness)";
+          // u2 must not be time-varying.  Otherwise, there is no requirement
+          // that y1 == y2.
+          Real y1 "Direct result of function";
+          Real y2 "Integral of derivative of y1";
+
+        initial equation
+          y2 = y1;
+
+        equation
+          y1 = F(   u1,
+                    u2,
+                    n);
+          f(        u1,
+                    u2,
+                    n) = der(y2);
+
+          assert(abs(y1 - y2) < 1e-6, "The derivative is incorrect.");
+          // The simulation tolerance is set to 1e-8.
+          annotation (experiment(Tolerance=1e-8), experimentSetupOutput);
+        end TestF;
+
+        model Testdf
+          "<html>Verify that <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.df\">df</a>() is the correct derivative of <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.f\">f</a>()</html>"
+          // This approach is based on [Dassault2010, vol. 2, pp. 300-301].
+
+          extends Modelica.Icons.Example;
+
+          parameter Integer n=-1 "Power of the first polynomial term";
+
+          Real u1=1 + time
+            "Real arguments to function (must have sufficient richness)";
+          Real u2[:]=(1 + time^2)*(1:3)
+            "Real arguments to function (must have sufficient richness)";
+          Real y1 "Direct result of function";
+          Real y2 "Integral of derivative of y1";
+
+        initial equation
+          y2 = y1;
+
+        equation
+          y1 = f(   u1,
+                    u2,
+                    n);
+          df(       u1,
+                    u2,
+                    n,
+                    der(u1),
+                    der(u2)) = der(y2);
+          // Note:  This is equivalent to der(y1) = der(y2), but it must be
+          // explicit to ensure that the translator uses the defined derivative
+          // instead of the automatically derived one.
+
+          assert(abs(y1 - y2) < 1e-6, "The derivative is incorrect.");
+          // The simulation tolerance is set to 1e-8.
+          annotation (experiment(Tolerance=1e-8), experimentSetupOutput);
+        end Testdf;
+
+        model Testd2f
+          "<html>Verify that <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.d2f\">d2f</a>() is the correct derivative of <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.df\">df</a>()</html>"
+          // This approach is based on [Dassault2010, vol. 2, pp. 300-301].
+
+          extends Modelica.Icons.Example;
+
+          parameter Integer n=-1 "Power of the first polynomial term";
+
+          Real u1=1 + time
+            "Real arguments to function (must have sufficient richness)";
+          Real u2[:]=(1 + time^2)*(1:3)
+            "Real arguments to function (must have sufficient richness)";
+          Real y1 "Direct result of function";
+          Real y2 "Integral of derivative of y1";
+
+        protected
+          final Real du1=der(u1) "Derivative of u1";
+          final Real du2[:]=der(u2) "Derivative of u2";
+          // In Dymola 7.4, it's necessary to explicitly define these intermediate
+          // variables (since there are second-order derivatives).
+
+        initial equation
+          y2 = y1;
+
+        equation
+          y1 = df(  u1,
+                    u2,
+                    n,
+                    du1,
+                    du2);
+          d2f(      u1,
+                    u2,
+                    n,
+                    du1,
+                    du2,
+                    der(du1),
+                    der(du2)) = der(y2);
+          // Note:  This is equivalent to der(y1) = der(y2), but it must be
+          // explicit to ensure that the translator uses the defined derivative
+          // instead of the automatically derived one.
+
+          assert(abs(y1 - y2) < 1e-6, "The derivative is incorrect.");
+          // The simulation tolerance is set to 1e-8.
+          annotation (experiment(Tolerance=1e-8), experimentSetupOutput);
+        end Testd2f;
+
+        model Translatef
+          "<html>Evaluate the translated version of <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.f\">f</a>()</html>"
+          extends Modelica.Icons.Example;
+
+          output Real x1=f(
+                      time,
+                      {1,1,1,1},
+                      0);
+          // Manually check the translated model to be sure that the polynomial is
+          // written in nested form (for efficiency).  In Dymola 7.4 turn on the
+          // option "Generate listing of translated Modelica code in dsmodel.mof".
+          // dsmodel.mof should contain:
+          //     x1 := 1 + time*(1 + time*(1 + time)).
+          output Real x2=f(time, ones(31));
+          output Real x3=f(time, ones(32));
+          // The function is only unrolled to a limited depth (currently 10th order
+          // polynomial).  In Dymola 7.4 f(time, ones(31)) is implemented fully
+          // recursively, but f(time, ones(32)) isn't.
+          output Real x4=f(
+                      time,
+                      {1,1,1,1},
+                      -3);
+
+        end Translatef;
+      end Examples;
       extends Modelica.Icons.Package;
 
       function F
