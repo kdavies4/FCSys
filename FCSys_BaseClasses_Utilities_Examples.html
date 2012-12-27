@@ -52,10 +52,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td><img src="images/FCSys.BaseClasses.Utilities.mod1S.png" alt="FCSys.BaseClasses.Utilities.Examples.TestFunctions" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Examples.html#FCSys.BaseClasses.Utilities.Examples.TestFunctions">TestFunctions</a>
+<tr><td><img src="images/FCSys.BaseClasses.Utilities.averageS.png" alt="FCSys.BaseClasses.Utilities.Examples.TestFunctions" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Examples.html#FCSys.BaseClasses.Utilities.Examples.TestFunctions">TestFunctions</a>
 </td><td>Test all the functions</td></tr>
-<tr><td><img src="images/FCSys.BaseClasses.Utilities.Examples.TranslatePolyS.png" alt="FCSys.BaseClasses.Utilities.Examples.TranslatePoly" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Examples.html#FCSys.BaseClasses.Utilities.Examples.TranslatePoly">TranslatePoly</a>
-</td><td>Evaluate the translated version of <a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.poly">poly()</a></td></tr>
 </table>
 <hr>
 
@@ -66,7 +64,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p>
   This function call will fail if any of the functions return an
   incorrect result.  It will return true if all of the functions pass.
-  There are no inputs or outputs.</p><p>
+  There are no inputs.</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p><h3>Outputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -85,51 +83,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   Integer integers[6];
 
 <font color="blue">algorithm </font>
-  <font color="darkgreen">// Chemistry.charge()</font>
-  <font color="blue">for </font>i<font color="blue"> in </font>1:2<font color="blue"> loop</font>
-    <font color="red">assert</font>((<font color="red">Chemistry.charge</font>({&quot;H2O&quot;,&quot;e-&quot;,&quot;Hg2+2&quot;,&quot;&quot;}))[i] == {0,-1,2,0}[i], &quot;The Chemistry.charge function failed on entry &quot;
-       + <font color="red">String</font>(i) + &quot;.&quot;);
-  <font color="blue">end for</font>;
-  <font color="darkgreen">// Note:  As of Modelica 3.2 and Dymola 7.4, assert() doesn&#39;t accept</font>
-  <font color="darkgreen">// vectorized equations.</font>
-
-  <font color="darkgreen">// Chemistry.countElements()</font>
-  <font color="blue">for </font>i<font color="blue"> in </font>1:2<font color="blue"> loop</font>
-    <font color="red">assert</font>((<font color="red">Chemistry.countElements</font>({&quot;H2O&quot;,&quot;e-&quot;,&quot;C19HF37O5S&quot;,&quot;&quot;}))[i] == {2,1,5,
-      0}[i], &quot;The Chemistry.countElements function failed on entry &quot; + <font color="red">String</font>(i)
-       + &quot;.&quot;);
-  <font color="blue">end for</font>;
-
-  <font color="darkgreen">// Chemistry.elements()</font>
-  (strings[1:6],integers[1:6]) := <font color="red">Chemistry.elements</font>(&quot;C19HF37O5S-&quot;);
-  <font color="blue">for </font>i<font color="blue"> in </font>1:6<font color="blue"> loop</font>
-    <font color="red">assert</font>(strings[i] == {&quot;C&quot;,&quot;H&quot;,&quot;F&quot;,&quot;O&quot;,&quot;S&quot;,&quot;e-&quot;}[i], &quot;The Chemistry.elements function failed on entry &quot;
-       + <font color="red">String</font>(i) + &quot;.&quot;);
-    <font color="red">assert</font>(integers[i] == {19,1,37,5,1,1}[i], &quot;The Chemistry.elements function failed on entry &quot;
-       + <font color="red">String</font>(i) + &quot;.&quot;);
-  <font color="blue">end for</font>;
-
-  <font color="darkgreen">// Chemistry.readElement()</font>
-  (strings[1],integers[1],integers[2],integers[3]) := <font color="red">Chemistry.readElement</font>(&quot;H2&quot;);
-  <font color="red">assert</font>(strings[1] == &quot;H&quot;, &quot;The Chemistry.readElement function failed on the element output.&quot;);
-  <font color="red">assert</font>(integers[1] == 2, &quot;The Chemistry.readElement function failed on the coeff output.&quot;);
-  <font color="red">assert</font>(integers[2] == 0, &quot;The Chemistry.readElement function failed on the z output.&quot;);
-  <font color="red">assert</font>(integers[3] == 3, &quot;The Chemistry.readElement function failed on the nextindex output.&quot;);
-  (strings[1],integers[1],integers[2],integers[3]) := <font color="red">Chemistry.readElement</font>(&quot;Hg2+2&quot;);
-  <font color="red">assert</font>(strings[1] == &quot;Hg&quot;, &quot;The Chemistry.readElement function failed on the element output.&quot;);
-  <font color="red">assert</font>(integers[1] == 2, &quot;The Chemistry.readElement function failed on the coeff output.&quot;);
-  <font color="red">assert</font>(integers[2] == 2, &quot;The Chemistry.readElement function failed on the z output.&quot;);
-  <font color="red">assert</font>(integers[3] == 6, &quot;The Chemistry.readElement function failed on the nextindex output.&quot;);
-
-  <font color="darkgreen">// Chemistry.stoich()</font>
-  <font color="blue">for </font>i<font color="blue"> in </font>1:3<font color="blue"> loop</font>
-    <font color="red">assert</font>((<font color="red">Chemistry.stoich</font>({&quot;e-&quot;,&quot;H+&quot;,&quot;H2&quot;}))[i] == {-2,-2,1}[i], &quot;The Chemistry.stoich function failed on entry &quot;
-       + <font color="red">String</font>(i) + &quot;.&quot;);
-  <font color="blue">end for</font>;
-  <font color="blue">for </font>i<font color="blue"> in </font>1:4<font color="blue"> loop</font>
-    <font color="red">assert</font>((<font color="red">Chemistry.stoich</font>({&quot;e-&quot;,&quot;H+&quot;,&quot;O2&quot;,&quot;H2O&quot;}))[i] == {-4,-4,-1,2}[i], &quot;The Chemistry.stoich function failed on entry &quot;
-       + <font color="red">String</font>(i) + &quot;.&quot;);
-  <font color="blue">end for</font>;
+  <font color="darkgreen">// Test the subpackages.</font>
+  <font color="red">assert</font>(<font color="red">Chemistry.Examples.TestFunctions</font>(), &quot;The Chemistry subpackage failed.&quot;);
+  <font color="red">assert</font>(<font color="red">Polynomial.Examples.Testf</font>(), &quot;The Polynomial subpackage failed.&quot;);
 
   <font color="darkgreen">// average()</font>
   <font color="red">assert</font>(<font color="red">average</font>({1,2,3}) == 2, &quot;The average function failed.&quot;);
@@ -170,70 +126,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="darkgreen">// Compare mod1() to mod():</font>
   <font color="red">assert</font>(<font color="red">mod</font>(3, 3) == 0, &quot;The mod function failed.&quot;);
 
-  <font color="darkgreen">// Polynomial.Y()</font>
-  <font color="red">assert</font>(<font color="red">Polynomial.Y</font>(
-    2,
-    {1,2,1},
-    0) == 2 + 4 + 8/3, &quot;The Polynomial.Y function failed.&quot;);
-
-  <font color="darkgreen">// Polynomial.dY()</font>
-  <font color="red">assert</font>(<font color="red">Polynomial.dY</font>(
-    2,
-    {1,2,1},
-    0,
-    1,
-    {0,0,0}) == 1 + 2*2 + 1*2^2, &quot;The Polynomial.dY function failed.&quot;);
-
-  <font color="darkgreen">// Polynomial.d2Y()</font>
-  <font color="red">assert</font>(<font color="red">Polynomial.d2Y</font>(
-    2,
-    {1,2,1},
-    0,
-    1,
-    {0,0,0},
-    0,
-    {0,0,0}) == 2 + 2*2, &quot;The Polynomial.d2Y function failed.&quot;);
-
-  <font color="darkgreen">// Polynomial.y()</font>
-  <font color="red">assert</font>(<font color="red">Polynomial.y</font>(
-    2,
-    {1,2,1},
-    0) == 1 + 2*2 + 1*2^2, &quot;The Polynomial.y function failed.&quot;);
-  <font color="red">assert</font>(<font color="red">Polynomial.y</font>(2, <font color="red">zeros</font>(0)) == 0, &quot;The Polynomial.y function failed.&quot;);
-  <font color="red">assert</font>(<font color="red">Polynomial.y</font>(2, {1}) == 1, &quot;The Polynomial.y function failed.&quot;);
-  <font color="red">assert</font>(<font color="red">Polynomial.y</font>(2, {0,0,1}) == 4, &quot;The Polynomial.y function failed.&quot;);
-  <font color="red">assert</font>(<font color="red">Polynomial.y</font>(2, <font color="red">ones</font>(8)) == 2^8 - 1, &quot;The Polynomial.y function failed.&quot;);
-  <font color="red">assert</font>(<font color="red">Polynomial.y</font>(
-    2,
-    {1,0,0},
-    -3) == 1/8, &quot;The Polynomial.y function failed.&quot;);
-
-  <font color="darkgreen">// Polynomial.dy()</font>
-  <font color="red">assert</font>(<font color="red">Polynomial.dy</font>(
-    2,
-    {1,2,1},
-    0,
-    1,
-    {0,0,0}) == 2 + 2*2, &quot;The Polynomial.dy function failed.&quot;);
-  <font color="red">assert</font>(<font color="red">Polynomial.dy</font>(
-    2,
-    <font color="red">zeros</font>(0),
-    0,
-    0,
-    <font color="red">zeros</font>(0)) == 0, &quot;The Polynomial.dy function failed.&quot;);
-  <font color="red">assert</font>(<font color="red">Polynomial.dy</font>(
-    2,
-    {1},
-    0,
-    1,
-    {0}) == 0, &quot;The Polynomial.dy function failed.&quot;);
-  <font color="red">assert</font>(<font color="red">Polynomial.dy</font>(
-    2,
-    {0,0,1},
-    0,
-    1,
-    {0,0,0}) == 4, &quot;The Polynomial.dy function failed.&quot;);
-
   <font color="darkgreen">// round()</font>
   <font color="blue">for </font>i<font color="blue"> in </font>1:5<font color="blue"> loop</font>
     <font color="red">assert</font>((<font color="red">round</font>({-1.6,-0.4,1.4,1.6,5}))[i] == {-2,0,1,2,5}[i], &quot;The round function failed on entry &quot;
@@ -252,47 +144,12 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   ok := true;
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>TestFunctions;
 </pre>
-<hr>
-
-<h2><img src="images/FCSys.BaseClasses.Utilities.Examples.TranslatePolyI.png" alt="FCSys.BaseClasses.Utilities.Examples.TranslatePoly" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.BaseClasses.Utilities.Examples.TranslatePoly"></a><a href="FCSys_BaseClasses_Utilities_Examples.html#FCSys.BaseClasses.Utilities.Examples">FCSys.BaseClasses.Utilities.Examples</a>.TranslatePoly</h2>
-<b>Evaluate the translated version of <a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.poly">poly()</a></b><p>
-<p><h3>Information</h3></p>
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
-<p><h3>Modelica definition</h3>
-<pre>
-<font color="blue">model</font> TranslatePoly <font color="darkgreen">
-  &quot;Evaluate the translated version of <a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.poly">poly()</a>&quot;</font>
-  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
-  Real x1;
-  Real x2;
-  Real x3;
-<font color="blue">equation </font>
-  x1 = <font color="red">Polynomial.y</font>(
-    time,
-    {1,1,1,1},
-    0);
-  <font color="darkgreen">// Check the translated model to be sure that the polynomial is written in</font>
-  <font color="darkgreen">// nested form for efficiency.  In Dymola 7.4 turn on the option &quot;Generate</font>
-  <font color="darkgreen">// listing of translated Modelica code in dsmodel.mof&quot;.  dsmodel.mof should</font>
-  <font color="darkgreen">// contain:</font>
-  <font color="darkgreen">//     x1 := 1+time*(1+time*(1+time)).</font>
-  x2 = <font color="red">Polynomial.y</font>(time, 2*<font color="red">ones</font>(35));
-  <font color="darkgreen">// The function is only unrolled to a a limited depth (currently 10th order</font>
-  <font color="darkgreen">// polynomial).  In Dymola 7.4 poly(time, ones(34)) results in a recursive</font>
-  <font color="darkgreen">// call, but poly(time, ones(35)) doesn&#39;t.</font>
-  x3 = <font color="red">Polynomial.y</font>(
-    time + 1,
-    {1,1,1,1},
-    -3);
-<font color="blue">end </font>TranslatePoly;
-</pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Dec 18 17:22:57 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Dec 27 15:38:17 2012.
 </div>
 </body>
 </html>

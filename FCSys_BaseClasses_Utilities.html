@@ -70,13 +70,13 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>Enumerate the <code>true</code> entries in a <code>Boolean</code> vector (0 for <code>false</code> entries)</td></tr>
 <tr><td><img src="images/FCSys.BaseClasses.Utilities.averageS.png" alt="FCSys.BaseClasses.Utilities.index" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.index">index</a>
 </td><td>Return the indices of the <code>true</code> entries of a <code>Boolean</code> vector</td></tr>
-<tr><td><img src="images/FCSys.BaseClasses.Utilities.inSignS.png" alt="FCSys.BaseClasses.Utilities.inSign" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.inSign">inSign</a>
+<tr><td><img src="images/FCSys.BaseClasses.Utilities.averageS.png" alt="FCSys.BaseClasses.Utilities.inSign" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.inSign">inSign</a>
 </td><td>Sign for the direction into a side or face</td></tr>
-<tr><td><img src="images/FCSys.BaseClasses.Utilities.mod1S.png" alt="FCSys.BaseClasses.Utilities.mod1" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.mod1">mod1</a>
+<tr><td><img src="images/FCSys.BaseClasses.Utilities.averageS.png" alt="FCSys.BaseClasses.Utilities.mod1" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.mod1">mod1</a>
 </td><td>Modulo operator for 1-based indexing (compatible with Modelica)</td></tr>
-<tr><td><img src="images/FCSys.BaseClasses.Utilities.mod1S.png" alt="FCSys.BaseClasses.Utilities.round" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.round">round</a>
+<tr><td><img src="images/FCSys.BaseClasses.Utilities.averageS.png" alt="FCSys.BaseClasses.Utilities.round" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.round">round</a>
 </td><td>Round a <code>Real</code> variable to the nearest integer</td></tr>
-<tr><td><img src="images/FCSys.BaseClasses.Utilities.mod1S.png" alt="FCSys.BaseClasses.Utilities.Sigma" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.Sigma">Sigma</a>
+<tr><td><img src="images/FCSys.BaseClasses.Utilities.averageS.png" alt="FCSys.BaseClasses.Utilities.Sigma" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.Sigma">Sigma</a>
 </td><td>Return the sum of the first and second entries of a vector (&Sigma;<i><b>u</b></i>)</td></tr>
 </table>
 <hr>
@@ -180,7 +180,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Inputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>Real</td><td>u[2]</td><td>&nbsp;</td><td>Vector of size 2</td></tr>
+<tr><td>Real</td><td>u[2]</td><td>&nbsp;</td><td>Vector of size two</td></tr>
 </table>
 <p><h3>Outputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -193,7 +193,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   &quot;Return the first entry of a vector minus the second (&Delta;<i><b>u</b></i>)&quot;</font>
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
-  <font color="blue">input </font>Real u[2] <font color="darkgreen">&quot;Vector of size 2&quot;</font>;
+  <font color="blue">input </font>Real u[2] <font color="darkgreen">&quot;Vector of size two&quot;</font>;
   <font color="blue">output </font>Real Delta=u[1] - u[2] <font color="darkgreen">&quot;First entry minus the second entry&quot;</font>;
 
 <font color="blue">algorithm </font>
@@ -212,7 +212,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Inputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>Boolean</td><td>u[:]</td><td>&nbsp;</td><td><code>Boolean</code> array</td></tr>
+<tr><td>Boolean</td><td>u[:]</td><td>&nbsp;</td><td><code>Boolean</code> vector</td></tr>
 </table>
 <p><h3>Outputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -225,7 +225,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   &quot;Enumerate the <code>true</code> entries in a <code>Boolean</code> vector (0 for <code>false</code> entries)&quot;</font>
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
-  <font color="blue">input </font>Boolean u[:] <font color="darkgreen">&quot;<code>Boolean</code> array&quot;</font>;
+  <font color="blue">input </font>Boolean u[:] <font color="darkgreen">&quot;<code>Boolean</code> vector&quot;</font>;
   <font color="blue">output </font>Integer enumerated[<font color="red">size</font>(u, 1)] <font color="darkgreen">
     &quot;Indices of the true entries (increasing order; 0 for false entries)&quot;</font>;
 
@@ -250,7 +250,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.BaseClasses.Utilities.index"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.index</h2>
 <b>Return the indices of the <code>true</code> entries of a <code>Boolean</code> vector</b><p>
 <p><h3>Information</h3></p>
-<p><b>Example:</b><br>
+
+  <p>The indices are 1-based (Modelica-compatible).</p>
+  <p><b>Example:</b><br>
   <code>index({true,false,true})</code> returns <code>{1,3}</code>.<p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p><h3>Inputs</h3><p>
@@ -287,14 +289,15 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </pre>
 <hr>
 
-<h2><a name="FCSys.BaseClasses.Utilities.inSign"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.inSign</h2>
+<h2><img src="images/FCSys.BaseClasses.Utilities.averageI.png" alt="FCSys.BaseClasses.Utilities.inSign" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.BaseClasses.Utilities.inSign"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.inSign</h2>
 <b>Sign for the direction into a side or face</b><p>
 <p><h3>Information</h3></p>
 <p><b>Examples:</b><br>
   <code>inSign(FCSys.BaseClasses.Side.n)</code> returns 1 and
   <code>inSign(FCSys.BaseClasses.Side.p)</code> returns -1.
   <p>
-
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p><h3>Inputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -308,8 +311,11 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">function</font> inSign <font color="darkgreen">&quot;Sign for the direction into a side or face&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+
   <font color="blue">input </font><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Side">FCSys.BaseClasses.Side</a> side <font color="darkgreen">&quot;Side&quot;</font>;
   <font color="blue">output </font>Integer sign <font color="darkgreen">&quot;Sign indicating direction along the axis&quot;</font>;
+
 <font color="blue">algorithm </font>
   sign := 3 - 2*side;
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>inSign;
@@ -318,7 +324,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <!--[if supportFields]><span style='mso-element:field-begin'></span>
 <span style='mso-spacerun:yes'></span>XE mod1<![endif]-->
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
-<h2><img src="images/FCSys.BaseClasses.Utilities.mod1I.png" alt="FCSys.BaseClasses.Utilities.mod1" align=RIGHT border=1 width=80  height=80 >
+<h2><img src="images/FCSys.BaseClasses.Utilities.averageI.png" alt="FCSys.BaseClasses.Utilities.mod1" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.mod1"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.mod1</h2>
 <b>Modulo operator for 1-based indexing (compatible with Modelica)</b><p>
 <p><h3>Information</h3></p>
@@ -354,7 +360,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.BaseClasses.Utilities.mod1I.png" alt="FCSys.BaseClasses.Utilities.round" align=RIGHT border=1 width=80  height=80 >
+<h2><img src="images/FCSys.BaseClasses.Utilities.averageI.png" alt="FCSys.BaseClasses.Utilities.round" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.round"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.round</h2>
 <b>Round a <code>Real</code> variable to the nearest integer</b><p>
 <p><h3>Information</h3></p>
@@ -386,7 +392,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.BaseClasses.Utilities.mod1I.png" alt="FCSys.BaseClasses.Utilities.Sigma" align=RIGHT border=1 width=80  height=80 >
+<h2><img src="images/FCSys.BaseClasses.Utilities.averageI.png" alt="FCSys.BaseClasses.Utilities.Sigma" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.Sigma"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.Sigma</h2>
 <b>Return the sum of the first and second entries of a vector (&Sigma;<i><b>u</b></i>)</b><p>
 <p><h3>Information</h3></p>
@@ -397,7 +403,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Inputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>Real</td><td>u[2]</td><td>&nbsp;</td><td>Vector of size 2</td></tr>
+<tr><td>Real</td><td>u[2]</td><td>&nbsp;</td><td>Vector of size two</td></tr>
 </table>
 <p><h3>Outputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -410,7 +416,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   &quot;Return the sum of the first and second entries of a vector (&Sigma;<i><b>u</b></i>)&quot;</font>
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
-  <font color="blue">input </font>Real u[2] <font color="darkgreen">&quot;Vector of size 2&quot;</font>;
+  <font color="blue">input </font>Real u[2] <font color="darkgreen">&quot;Vector of size two&quot;</font>;
   <font color="blue">output </font>Real Sigma <font color="darkgreen">&quot;Sum of the first and second entries&quot;</font>;
 
 <font color="blue">algorithm </font>
@@ -422,7 +428,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Dec 18 17:22:57 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Dec 27 15:38:17 2012.
 </div>
 </body>
 </html>

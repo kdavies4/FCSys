@@ -85,7 +85,7 @@
     <code>U.m</code>, <code>U.s</code>, <code>U.A</code>, <code>U.mol</code>, <code>U.K</code>, and
     <code>U.'cd'</code>).  In <a href="index.html#FCSys">FCSys</a>, two additional constraints are imposed in order
     to simplify the model equations and allow electrons and chemical species to be to represented by the
-    same base <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSpecies">Species</a> model.
+    same base <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.
     First, the Faraday constant (<code>U.k_F</code> or <code>96485.3399*U.C/U.mol</code>)
     is normalized to one.
     This implies that the mole (<code>U.mol</code>) is proportional to the coulomb (<code>U.C</code> or <code>U.Wb*U.S</code>),
@@ -117,6 +117,10 @@
   (<a href="http://en.wikipedia.org/wiki/Natural_units">http://en.wikipedia.org/wiki/Natural_units</a>).
   The structure of <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a> allows the constraints on the Faraday and gas constants
   to be relaxed, but the models in <a href="index.html#FCSys">FCSys</a> generally do not.</p>
+
+  <p>Although it is not necessary in <a href="http://www.modelica.org">Modelica</a>, the unit declarations
+  are presorted so that they can be easily ported to imperative/causal languages (e.g.,
+  <a href="http://www.python.org">Python</a>, C).</p>
 
   <p>For more information, see the paper on natural units [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Davies and Paredis, 2012</a>].</p>
   <p>
@@ -506,7 +510,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Dec 11 15:26:43 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Dec 27 15:37:59 2012.
 </div>
 </body>
 </html>

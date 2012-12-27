@@ -52,6 +52,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.BaseClasses.Utilities.Chemistry.ExamplesS.png" alt="FCSys.BaseClasses.Utilities.Chemistry.Examples" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Chemistry_Examples.html#FCSys.BaseClasses.Utilities.Chemistry.Examples">Examples</a>
+</td><td>Examples and tests</td></tr>
 <tr><td><img src="images/FCSys.BaseClasses.Utilities.Chemistry.chargeS.png" alt="FCSys.BaseClasses.Utilities.Chemistry.charge" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry.charge">charge</a>
 </td><td>Return the charge of a species based on its chemical formula</td></tr>
 <tr><td><img src="images/FCSys.BaseClasses.Utilities.Chemistry.countElementsS.png" alt="FCSys.BaseClasses.Utilities.Chemistry.countElements" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry.countElements">countElements</a>
@@ -247,7 +249,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>String</td><td>symbol</td><td>Name of element</td></tr>
-<tr><td>Integer</td><td>coeff</td><td>stoichiometric coefficient</td></tr>
+<tr><td>Integer</td><td>coeff</td><td>Stoichiometric coefficient</td></tr>
 <tr><td>Integer</td><td>z</td><td>Charge number</td></tr>
 <tr><td>Integer</td><td>nextindex</td><td>index after the found element (0 if error)</td></tr>
 </table>
@@ -259,7 +261,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">input </font>String formula <font color="darkgreen">&quot;Chemical formula&quot;</font>;
   <font color="blue">input </font>Integer startindex(min=1) = 1 <font color="darkgreen">&quot;Start index&quot;</font>;
   <font color="blue">output </font>String symbol <font color="darkgreen">&quot;Name of element&quot;</font>;
-  <font color="blue">output </font>Integer coeff <font color="darkgreen">&quot;stoichiometric coefficient&quot;</font>;
+  <font color="blue">output </font>Integer coeff <font color="darkgreen">&quot;Stoichiometric coefficient&quot;</font>;
   <font color="blue">output </font>Integer z <font color="darkgreen">&quot;Charge number&quot;</font>;
   <font color="blue">output </font>Integer nextindex <font color="darkgreen">&quot;index after the found element (0 if error)&quot;</font>;
 
@@ -299,7 +301,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Outputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td>Integer</td><td>nu[size(formulas, 1)]</td><td>stoichiometric coefficients</td></tr>
+<tr><td>Integer</td><td>nu[size(formulas, 1)]</td><td>Stoichiometric coefficients</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -308,7 +310,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
   <font color="blue">input </font>String formulas[:] <font color="darkgreen">&quot;Chemical formulas of the species&quot;</font>;
-  <font color="blue">output </font>Integer nu[<font color="red">size</font>(formulas, 1)] <font color="darkgreen">&quot;stoichiometric coefficients&quot;</font>;
+  <font color="blue">output </font>Integer nu[<font color="red">size</font>(formulas, 1)] <font color="darkgreen">&quot;Stoichiometric coefficients&quot;</font>;
 
 <font color="blue">protected </font>
   Integer n_species=<font color="red">size</font>(formulas, 1) <font color="darkgreen">&quot;Number of species&quot;</font>;
@@ -320,7 +322,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     &quot;Symbols of the elements of each species&quot;</font>;
   Integer coeffs[n_species, <font color="red">max</font>(n_elements)] <font color="darkgreen">
     &quot;Coefficients of the elements of each species&quot;</font>;
-  <font color="darkgreen">// max(n_elements)]</font>
   Integer i <font color="darkgreen">&quot;index&quot;</font>;
   Integer j=1 <font color="darkgreen">&quot;index&quot;</font>;
   Real d[n_species] <font color="darkgreen">&quot;Diagonal entries of SVD&quot;</font>;
@@ -390,7 +391,7 @@ An unrelated species may be included.&quot;);
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Dec 18 17:22:58 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Dec 27 15:38:18 2012.
 </div>
 </body>
 </html>

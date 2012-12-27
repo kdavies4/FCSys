@@ -56,14 +56,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>Partial connector to exchange material while advecting linear momentum and enthalpy</td></tr>
 <tr><td><img src="images/FCSys.Connectors.BaseClasses.PartialFaceS.png" alt="FCSys.Connectors.BaseClasses.PartialFace" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.PartialFace">PartialFace</a>
 </td><td>Partial connector to transport material, transverse displacement, and entropy of a single species</td></tr>
-<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a>
-</td><td>Thermodynamic options for a face</td></tr>
 </table>
-<p><h3>Types and constants</h3>
-<a name="FCSys.Connectors.BaseClasses.ThermoOpt"></a><pre><font color="blue">type</font> ThermoOpt = <font color="blue">enumeration</font>(
-    ClosedAdiabatic <font color="darkgreen">&quot;Closed and adiabatic&quot;</font>,
-    ClosedDiabatic <font color="darkgreen">&quot;Closed and diabatic&quot;</font>,
-    OpenDiabatic <font color="darkgreen">&quot;Open and diabatic&quot;</font>) <font color="darkgreen">&quot;Thermodynamic options for a face&quot;</font>;</pre><p>
 <hr>
 
 <h2><img src="images/FCSys.Connectors.BaseClasses.PartialChemicalI.png" alt="FCSys.Connectors.BaseClasses.PartialChemical" align=RIGHT border=1 width=80  height=80 >
@@ -122,13 +115,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <b>Partial connector to transport material, transverse displacement, and entropy of a single species</b><p>
 <img src="images/FCSys.Connectors.BaseClasses.PartialFaceD.png" alt="FCSys.Connectors.BaseClasses.PartialFace">
 <p><h3>Information</h3></p>
-<p>The <code>thermOpt</code> parameter sets the thermodynamic
-    properties of the face.  The face may be closed and adiabatic, closed and diabatic
-    (i.e., with heat transfer), or open and diabatic.  However, the open and adiabatic
-    combination is not an option.  Given the formulation of the
-    <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model, it would
-    prevent the energy balance from being computed properly (see the
-    <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a> enumeration).</p>
 
   <p>For more information, see the documentation in the
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package and the
@@ -138,27 +124,31 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a></td><td>thermoOpt</td><td>ThermoOpt.ClosedAdiabatic</td><td>Options for material and thermal transport</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Boundary conditions (will remove subconnectors)</td></tr>
+<tr><td>Boolean</td><td>isobaric</td><td>false</td><td>Isobaric</td></tr>
+<tr><td>Boolean</td><td>adiabatic</td><td>false</td><td>Adiabatic</td></tr>
 </table>
 <p><h3>Contents</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a></td><td>thermoOpt</td><td>Options for material and thermal transport</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Material">Material</a></td><td>material</td><td>Subconnector for material transport</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Thermal">Thermal</a></td><td>thermal</td><td>Subconnector for thermal transport</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Heat">Heat</a></td><td>heat</td><td>Subconnector for thermal transport</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=3>Boundary conditions (will remove subconnectors)</td></tr>
+<tr><td>Boolean</td><td>isobaric</td><td>Isobaric</td></tr>
+<tr><td>Boolean</td><td>adiabatic</td><td>Adiabatic</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">connector</font> PartialFace <font color="darkgreen">
   &quot;Partial connector to transport material, transverse displacement, and entropy of a single species&quot;</font>
 
-  <font color="blue">parameter </font><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a> thermoOpt=ThermoOpt.ClosedAdiabatic <font color="darkgreen">
-    &quot;Options for material and thermal transport&quot;</font>;
+  <font color="blue">parameter </font>Boolean isobaric=false <font color="darkgreen">&quot;Isobaric&quot;</font>;
+  <font color="blue">parameter </font>Boolean adiabatic=false <font color="darkgreen">&quot;Adiabatic&quot;</font>;
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Material">FCSys.Connectors.Material</a> material <font color="blue">if </font>thermoOpt == ThermoOpt.OpenDiabatic <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Material">FCSys.Connectors.Material</a> material <font color="blue">if </font><font color="blue">not </font>isobaric <font color="darkgreen">
     &quot;Subconnector for material transport&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Thermal">FCSys.Connectors.Thermal</a> thermal <font color="blue">if </font>thermoOpt == ThermoOpt.ClosedDiabatic<font color="blue"> or </font>
-    thermoOpt == ThermoOpt.OpenDiabatic <font color="darkgreen">&quot;Subconnector for thermal transport&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Heat">FCSys.Connectors.Heat</a> heat <font color="blue">if </font><font color="blue">not </font>adiabatic <font color="darkgreen">
+    &quot;Subconnector for thermal transport&quot;</font>;
 
 <textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>PartialFace;
@@ -168,7 +158,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Dec 13 10:10:08 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Dec 27 16:34:01 2012.
 </div>
 </body>
 </html>
