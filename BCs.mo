@@ -284,7 +284,7 @@ package BCs "Models for boundary conditions"
           color={127,127,127},
           smooth=Smooth.None,
           thickness=0.5));
-      connect(xNegative.H2.thermal, volume.face.thermal) annotation (Line(
+      connect(xNegative.H2.heat, volume.face.heat) annotation (Line(
           points={{5.55112e-16,5.55112e-16},{-6,5.55112e-16},{-6,0},{-10,0},{-10,
               6.10623e-16},{-20,6.10623e-16}},
           color={127,127,127},
@@ -323,7 +323,7 @@ package BCs "Models for boundary conditions"
           index=1,
           extent={{-10,3},{-10,3}}));
 
-      connect(fluidAdapt.face.thermal, face.H2.thermal) annotation (Line(
+      connect(fluidAdapt.face.heat, face.H2.heat) annotation (Line(
           points={{-10,6.10623e-16},{-54,6.10623e-16},{-54,5.55112e-16},{-100,
               5.55112e-16}},
           color={0,0,0},
@@ -350,7 +350,7 @@ package BCs "Models for boundary conditions"
           index=1,
           extent={{-10,3},{-10,3}}));
 
-      connect(fluidAdapt.face.thermal, face.H2O.thermal) annotation (Line(
+      connect(fluidAdapt.face.heat, face.H2O.heat) annotation (Line(
           points={{-10,6.10623e-16},{-54,6.10623e-16},{-54,5.55112e-16},{-100,
               5.55112e-16}},
           color={0,0,0},
@@ -375,7 +375,7 @@ package BCs "Models for boundary conditions"
           index=1,
           extent={{-10,3},{-10,3}}));
 
-      connect(fluidAdapt.face.thermal, face.N2.thermal) annotation (Line(
+      connect(fluidAdapt.face.heat, face.N2.heat) annotation (Line(
           points={{-10,6.10623e-16},{-54,6.10623e-16},{-54,5.55112e-16},{-100,
               5.55112e-16}},
           color={0,0,0},
@@ -401,7 +401,7 @@ package BCs "Models for boundary conditions"
           index=1,
           extent={{-10,3},{-10,3}}));
 
-      connect(fluidAdapt.face.thermal, face.O2.thermal) annotation (Line(
+      connect(fluidAdapt.face.heat, face.O2.heat) annotation (Line(
           points={{-10,6.10623e-16},{-54,6.10623e-16},{-54,5.55112e-16},{-100,
               5.55112e-16}},
           color={0,0,0},
@@ -440,20 +440,20 @@ package BCs "Models for boundary conditions"
     equation
       // Thermodynamic state and properties
       medium.p = fluidPort.p;
-      medium.T = face.thermal.T/U.K;
+      medium.T = face.heat.T/U.K;
       medium.Xi = ones(Medium.nXi)/Medium.nXi;
       s = Medium.specificEntropy(medium.state)*medium.MM*U.J/(U.mol*U.K);
 
       // Efforts and streams
-      //  face.material.mu = actualStream(fluidPort.h_outflow)*medium.MM*U.J/U.mol -  face.thermal.T*s;
-      //  face.material.mu = inStream(fluidPort.h_outflow)*medium.MM*U.J/U.mol - face.thermal.T*s;
-      face.material.mu = medium.h*medium.MM*U.J/U.mol - face.thermal.T*s;
+      //  face.material.mu = actualStream(fluidPort.h_outflow)*medium.MM*U.J/U.mol -  face.heat.T*s;
+      //  face.material.mu = inStream(fluidPort.h_outflow)*medium.MM*U.J/U.mol - face.heat.T*s;
+      face.material.mu = medium.h*medium.MM*U.J/U.mol - face.heat.T*s;
       fluidPort.h_outflow = medium.h;
 
       // Rate balances (no storage)
       0 = (medium.MM*U.kg/U.mol)*face.material.Ndot + fluidPort.m_flow*U.kg/U.s
         "Mass";
-      face.thermal.Qdot = s*face.material.Ndot
+      face.heat.Qdot = s*face.material.Ndot
         "No thermal conduction--advection only";
       // The rest of the energy balance cancels.
 
@@ -556,7 +556,7 @@ package BCs "Models for boundary conditions"
           color={0,0,0},
           smooth=Smooth.None));
 
-      connect(electAdapt.face.thermal, face.'e-'.thermal) annotation (Line(
+      connect(electAdapt.face.heat, face.'e-'.heat) annotation (Line(
           points={{-10,6.10623e-16},{-54,6.10623e-16},{-54,5.55112e-16},{-100,
               5.55112e-16}},
           color={127,127,127},
@@ -612,13 +612,13 @@ package BCs "Models for boundary conditions"
     equation
       // Equal efforts
       face.material.mu = pin.v*U.V "Electrochemical potential";
-      face.thermal.T = port.T*U.K "Temperature";
+      face.heat.T = port.T*U.K "Temperature";
 
       // Conservation (no storage)
       0 = face.material.Ndot - pin.i*U.A "Material";
       // In FCSys, current is material (e.g., electron) flow, not charge flow;
       // therefore, the flow rate is negated.
-      0 = face.thermal.Qdot + port.Q_flow*U.W "Energy";
+      0 = face.heat.Qdot + port.Q_flow*U.W "Energy";
       // There is no electrical work since electrons are not stored and there
       // is no potential difference.
 
@@ -3900,7 +3900,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.face.thermal, face.C.thermal) annotation (Line(
+        connect(C.face.heat, face.C.heat) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3949,7 +3949,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.face.thermal, face.C19HF37O5S.thermal) annotation (
+        connect(C19HF37O5S.face.heat, face.C19HF37O5S.heat) annotation (
             Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
@@ -4004,7 +4004,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.face.thermal, face.'e-'.thermal) annotation (Line(
+        connect('e-'.face.heat, face.'e-'.heat) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4052,7 +4052,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.face.thermal, face.H2.thermal) annotation (Line(
+        connect(H2.face.heat, face.H2.heat) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4100,7 +4100,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.face.thermal, face.H2O.thermal) annotation (Line(
+        connect(H2O.face.heat, face.H2O.heat) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4148,7 +4148,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.face.thermal, face.'H+'.thermal) annotation (Line(
+        connect('H+'.face.heat, face.'H+'.heat) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4196,7 +4196,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.face.thermal, face.N2.thermal) annotation (Line(
+        connect(N2.face.heat, face.N2.heat) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4244,7 +4244,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.face.thermal, face.O2.thermal) annotation (Line(
+        connect(O2.face.heat, face.O2.heat) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4359,7 +4359,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.face.thermal, face.H2.thermal) annotation (Line(
+        connect(H2.face.heat, face.H2.heat) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4407,7 +4407,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.face.thermal, face.H2O.thermal) annotation (Line(
+        connect(H2O.face.heat, face.H2O.heat) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4455,7 +4455,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.face.thermal, face.N2.thermal) annotation (Line(
+        connect(N2.face.heat, face.N2.heat) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4503,7 +4503,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.face.thermal, face.O2.thermal) annotation (Line(
+        connect(O2.face.heat, face.O2.heat) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4590,7 +4590,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.face.thermal, face.C.thermal) annotation (Line(
+        connect(C.face.heat, face.C.heat) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4638,7 +4638,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.face.thermal, face.'e-'.thermal) annotation (Line(
+        connect('e-'.face.heat, face.'e-'.heat) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4744,7 +4744,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.face.thermal, face.C19HF37O5S.thermal) annotation (
+        connect(C19HF37O5S.face.heat, face.C19HF37O5S.heat) annotation (
             Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
@@ -4799,7 +4799,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.face.thermal, face.'H+'.thermal) annotation (Line(
+        connect('H+'.face.heat, face.'H+'.heat) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -5205,7 +5205,7 @@ boundary condition</a> models.
             extent={{-6,3},{-6,3}}));
 
         // Entropy
-        connect(entropyBC.thermal, face.thermal) annotation (Line(
+        connect(entropyBC.heat, face.heat) annotation (Line(
             points={{60,-20},{60,-30},{5.55112e-16,-30},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -5345,7 +5345,7 @@ boundary condition</a> models.
               bCType=BaseClasses.BCType.Temperature, redeclare
               Connectors.RealInput u(final unit="l2.m/(N.T2)", displayUnit="K"));
         equation
-          thermal.T = u;
+          heat.T = u;
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="entropyBC");
         end Temperature;
@@ -5356,7 +5356,7 @@ boundary condition</a> models.
               Connectors.RealInput u(final unit="N/T"));
 
         equation
-          thermal.Qdot = u;
+          heat.Qdot = u;
           annotation (defaultComponentPrefixes="replaceable",
               defaultComponentName="entropyBC");
         end EntropyFlowRate;
@@ -5367,7 +5367,7 @@ boundary condition</a> models.
               Connectors.RealInput u(final unit="l2.m/T3"));
 
         equation
-          thermal.Qdot = u;
+          heat.Qdot = u;
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="entropyBC",
@@ -5387,7 +5387,7 @@ boundary condition</a> models.
                   rotation=270,
                   origin={0,40})));
 
-            FCSys.Connectors.Thermal thermal "Thermal connector for the face"
+            FCSys.Connectors.Heat thermal "Thermal connector for the face"
               annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
           equation
 
@@ -5690,7 +5690,7 @@ boundary condition</a> models.
             extent={{-6,3},{-6,3}}));
 
         // Entropy
-        connect(entropyBC.thermal, face.thermal) annotation (Line(
+        connect(entropyBC.heat, face.heat) annotation (Line(
             points={{60,-20},{60,-30},{5.55112e-16,-30},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6148,7 +6148,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.thermal, negative.C.thermal) annotation (Line(
+        connect(C.negative.heat, negative.C.heat) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6188,7 +6188,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.thermal, positive.C.thermal) annotation (Line(
+        connect(C.positive.heat, positive.C.heat) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6237,7 +6237,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.thermal, negative.C19HF37O5S.thermal)
+        connect(C19HF37O5S.negative.heat, negative.C19HF37O5S.heat)
           annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
@@ -6285,7 +6285,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.thermal, positive.C19HF37O5S.thermal)
+        connect(C19HF37O5S.positive.heat, positive.C19HF37O5S.heat)
           annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
@@ -6341,7 +6341,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.thermal, negative.'e-'.thermal) annotation (Line(
+        connect('e-'.negative.heat, negative.'e-'.heat) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6388,7 +6388,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.thermal, positive.'e-'.thermal) annotation (Line(
+        connect('e-'.positive.heat, positive.'e-'.heat) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6442,7 +6442,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.thermal, negative.H2.thermal) annotation (Line(
+        connect(H2.negative.heat, negative.H2.heat) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6488,7 +6488,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.thermal, positive.H2.thermal) annotation (Line(
+        connect(H2.positive.heat, positive.H2.heat) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6542,7 +6542,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.thermal, negative.H2O.thermal) annotation (Line(
+        connect(H2O.negative.heat, negative.H2O.heat) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6588,7 +6588,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.thermal, positive.H2O.thermal) annotation (Line(
+        connect(H2O.positive.heat, positive.H2O.heat) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6643,7 +6643,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.thermal, negative.'H+'.thermal) annotation (Line(
+        connect('H+'.negative.heat, negative.'H+'.heat) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6690,7 +6690,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.thermal, positive.'H+'.thermal) annotation (Line(
+        connect('H+'.positive.heat, positive.'H+'.heat) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6744,7 +6744,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.thermal, negative.N2.thermal) annotation (Line(
+        connect(N2.negative.heat, negative.N2.heat) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6790,7 +6790,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.thermal, positive.N2.thermal) annotation (Line(
+        connect(N2.positive.heat, positive.N2.heat) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6844,7 +6844,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.thermal, negative.O2.thermal) annotation (Line(
+        connect(O2.negative.heat, negative.O2.heat) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6890,7 +6890,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.thermal, positive.O2.thermal) annotation (Line(
+        connect(O2.positive.heat, positive.O2.heat) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7014,7 +7014,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.thermal, negative.H2.thermal) annotation (Line(
+        connect(H2.negative.heat, negative.H2.heat) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7060,7 +7060,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.thermal, positive.H2.thermal) annotation (Line(
+        connect(H2.positive.heat, positive.H2.heat) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7114,7 +7114,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.thermal, negative.H2O.thermal) annotation (Line(
+        connect(H2O.negative.heat, negative.H2O.heat) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7160,7 +7160,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.thermal, positive.H2O.thermal) annotation (Line(
+        connect(H2O.positive.heat, positive.H2O.heat) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7214,7 +7214,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.thermal, negative.N2.thermal) annotation (Line(
+        connect(N2.negative.heat, negative.N2.heat) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7260,7 +7260,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.thermal, positive.N2.thermal) annotation (Line(
+        connect(N2.positive.heat, positive.N2.heat) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7314,7 +7314,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.thermal, negative.O2.thermal) annotation (Line(
+        connect(O2.negative.heat, negative.O2.heat) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7360,7 +7360,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.thermal, positive.O2.thermal) annotation (Line(
+        connect(O2.positive.heat, positive.O2.heat) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7453,7 +7453,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.thermal, negative.C.thermal) annotation (Line(
+        connect(C.negative.heat, negative.C.heat) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7493,7 +7493,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.thermal, positive.C.thermal) annotation (Line(
+        connect(C.positive.heat, positive.C.heat) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7542,7 +7542,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.thermal, negative.'e-'.thermal) annotation (Line(
+        connect('e-'.negative.heat, negative.'e-'.heat) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7589,7 +7589,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.thermal, positive.'e-'.thermal) annotation (Line(
+        connect('e-'.positive.heat, positive.'e-'.heat) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7702,7 +7702,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.thermal, negative.C19HF37O5S.thermal)
+        connect(C19HF37O5S.negative.heat, negative.C19HF37O5S.heat)
           annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
@@ -7750,7 +7750,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.thermal, positive.C19HF37O5S.thermal)
+        connect(C19HF37O5S.positive.heat, positive.C19HF37O5S.heat)
           annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
@@ -7805,7 +7805,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.thermal, negative.H2O.thermal) annotation (Line(
+        connect(H2O.negative.heat, negative.H2O.heat) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7851,7 +7851,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.thermal, positive.H2O.thermal) annotation (Line(
+        connect(H2O.positive.heat, positive.H2O.heat) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7906,7 +7906,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.thermal, negative.'H+'.thermal) annotation (Line(
+        connect('H+'.negative.heat, negative.'H+'.heat) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7953,7 +7953,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.thermal, positive.'H+'.thermal) annotation (Line(
+        connect('H+'.positive.heat, positive.'H+'.heat) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -8414,12 +8414,12 @@ boundary condition</a> model.
             extent={{-6,3},{-6,3}}));
 
         // Entropy
-        connect(entropyBC.negative, negative.thermal) annotation (Line(
+        connect(entropyBC.negative, negative.heat) annotation (Line(
             points={{50,-50},{-100,-50}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(entropyBC.positive, positive.thermal) annotation (Line(
+        connect(entropyBC.positive, positive.heat) annotation (Line(
             points={{70,-50},{100,-50}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -8627,10 +8627,10 @@ boundary condition</a> model.
                   rotation=270,
                   origin={0,40})));
 
-            FCSys.Connectors.Thermal negative
+            FCSys.Connectors.Heat negative
               "Entropy connector for the negative face" annotation (Placement(
                   transformation(extent={{-110,-10},{-90,10}})));
-            FCSys.Connectors.Thermal positive
+            FCSys.Connectors.Heat positive
               "Entropy connector for the positive face" annotation (Placement(
                   transformation(extent={{90,-10},{110,10}})));
           equation
@@ -8781,45 +8781,37 @@ those generated by the model's <code>connect</code> statements.</p>
 For simulation, specify global default settings by dragging FCSys.BCs.Defaults into your model.
 The default global default settings will be used for the current simulation.",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-              100}}), graphics={
-          Rectangle(
-            extent={{-21.2132,21.2132},{21.2131,-21.2131}},
-            lineColor={127,127,127},
-            fillPattern=FillPattern.HorizontalCylinder,
-            fillColor={225,225,225},
-            origin={30,30},
-            rotation=135),
-          Polygon(
-            points={{-60,60},{-60,-100},{60,-100},{60,30},{30,30},{30,60},{-60,
-                60}},
-            lineColor={127,127,127},
-            smooth=Smooth.None,
-            fillColor={245,245,245},
-            fillPattern=FillPattern.Solid),
-          Polygon(
-            points={{-60,60},{-60,-100},{60,-100},{60,30},{30,60},{-60,60}},
-            lineColor={127,127,127},
-            smooth=Smooth.None),
-          Line(
-            points={{-40,4},{40,4}},
-            color={127,127,127},
-            smooth=Smooth.None),
-          Line(
-            points={{-40,-20},{40,-20}},
-            color={127,127,127},
-            smooth=Smooth.None),
-          Line(
-            points={{-40,-44},{40,-44}},
-            color={127,127,127},
-            smooth=Smooth.None),
-          Line(
-            points={{-40,-68},{40,-68}},
-            color={127,127,127},
-            smooth=Smooth.None),
-          Line(
-            points={{-40,28},{26,28}},
-            color={127,127,127},
-            smooth=Smooth.None)}),
+              100}}), graphics={Rectangle(
+              extent={{-21.2132,21.2132},{21.2131,-21.2131}},
+              lineColor={127,127,127},
+              fillPattern=FillPattern.HorizontalCylinder,
+              fillColor={225,225,225},
+              origin={30,30},
+              rotation=135),Polygon(
+              points={{-60,60},{-60,-100},{60,-100},{60,30},{30,30},{30,60},{-60,
+              60}},
+              lineColor={127,127,127},
+              smooth=Smooth.None,
+              fillColor={245,245,245},
+              fillPattern=FillPattern.Solid),Polygon(
+              points={{-60,60},{-60,-100},{60,-100},{60,30},{30,60},{-60,60}},
+              lineColor={127,127,127},
+              smooth=Smooth.None),Line(
+              points={{-40,4},{40,4}},
+              color={127,127,127},
+              smooth=Smooth.None),Line(
+              points={{-40,-20},{40,-20}},
+              color={127,127,127},
+              smooth=Smooth.None),Line(
+              points={{-40,-44},{40,-44}},
+              color={127,127,127},
+              smooth=Smooth.None),Line(
+              points={{-40,-68},{40,-68}},
+              color={127,127,127},
+              smooth=Smooth.None),Line(
+              points={{-40,28},{26,28}},
+              color={127,127,127},
+              smooth=Smooth.None)}),
       Diagram(graphics));
 
   end Defaults;
@@ -8990,7 +8982,7 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
       // Added for FCSys:
       face.material.mu = Medium.specificGibbsEnergy(medium.state)*medium.MM*
         Units.J/Units.mol;
-      face.thermal.T = medium.T*Units.K;
+      face.heat.T = medium.T*Units.K;
 
       mb_flow = sum(ports.m_flow) + medium.MM*face.material.Ndot/Units.kat
         "Changed for FCSys";

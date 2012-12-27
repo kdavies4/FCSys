@@ -109,13 +109,13 @@ package Systems
         annotation (Line(points={{10,-90},{-20,-90}}, color={0,0,255}));
       connect(H2tank.port, fCPlant.fluidPort_an1)
         annotation (Line(points={{-60,-10},{0,-10}}, color={0,127,255}));
-      connect(thermalConductor2.port_b, H2tank.thermalPort)
+      connect(thermalConductor2.port_b, H2tank.heatPort)
         annotation (Line(points={{-60,20},{-60,0}}, color={191,0,0}));
       connect(thermalConductor2.port_a, fixedTemperature.port) annotation (Line(
             points={{-60,40},{-60,70},{-80,70}}, color={191,0,0}));
       connect(thermalConductor1.port_a, fixedTemperature.port) annotation (Line(
             points={{-30,60},{-30,70},{-80,70}}, color={191,0,0}));
-      connect(thermalConductor1.port_b, O2tank.thermalPort) annotation (Line(
+      connect(thermalConductor1.port_b, O2tank.heatPort) annotation (Line(
             points={{-30,40},{-30,30},{-30,30},{-30,20}}, color={191,0,0}));
       connect(O2tank.port, fCPlant.fluidPort_ca1)
         annotation (Line(points={{-30,10},{0,10}}, color={0,127,255}));

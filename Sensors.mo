@@ -2773,7 +2773,7 @@ sensor</a> models.
       model Temperature "Sensor for temperature"
         extends FCSys.Sensors.BaseClasses.PartialSensor(redeclare
             Connectors.RealOutput y(final unit="l2.m/(N.T2)", displayUnit="K"));
-        FCSys.Connectors.Thermal entropy "Entropy connector for the face"
+        FCSys.Connectors.Heat entropy "Entropy connector for the face"
           annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       equation
         y = entropy.T "Measurement";
@@ -5356,11 +5356,11 @@ sensor</a> model.
 
             extends FCSys.Sensors.BaseClasses.PartialSensor;
 
-            FCSys.Connectors.Thermal negative(T(min=Modelica.Constants.small))
+            FCSys.Connectors.Heat negative(T(min=Modelica.Constants.small))
               "Entropy connector for the negative face" annotation (Placement(
                   transformation(extent={{-110,-10},{-90,10}}),
                   iconTransformation(extent={{-110,-10},{-90,10}})));
-            FCSys.Connectors.Thermal positive(T(min=Modelica.Constants.small))
+            FCSys.Connectors.Heat positive(T(min=Modelica.Constants.small))
               "Entropy connector for the positive face" annotation (Placement(
                   transformation(extent={{90,-10},{110,10}}),
                   iconTransformation(extent={{90,-10},{110,10}})));

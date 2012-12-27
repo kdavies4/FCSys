@@ -1968,34 +1968,34 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Thermal transport
-      connect(C.xNegative.thermal, xNegative.C.thermal) annotation (Line(
+      connect(C.xNegative.heat, xNegative.C.heat) annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(C.xPositive.thermal, xPositive.C.thermal) annotation (Line(
+      connect(C.xPositive.heat, xPositive.C.heat) annotation (Line(
           points={{10,6.10623e-16},{20,-4.87687e-22},{20,5.55112e-16},{40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(C.yNegative.thermal, yNegative.C.thermal) annotation (Line(
+      connect(C.yNegative.heat, yNegative.C.heat) annotation (Line(
           points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(C.yPositive.thermal, yPositive.C.thermal) annotation (Line(
+      connect(C.yPositive.heat, yPositive.C.heat) annotation (Line(
           points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
               5.55112e-16,40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(C.zNegative.thermal, zNegative.C.thermal) annotation (Line(
+      connect(C.zNegative.heat, zNegative.C.heat) annotation (Line(
           points={{7,7},{20,20}},
           color={127,127,127},
           smooth=Smooth.None));
-      connect(C.zPositive.thermal, zPositive.C.thermal) annotation (Line(
+      connect(C.zPositive.heat, zPositive.C.heat) annotation (Line(
           points={{-7,-7},{-20,-20}},
           color={127,127,127},
           smooth=Smooth.None));
@@ -2137,39 +2137,39 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Thermal transport
-      connect(C19HF37O5S.xNegative.thermal, xNegative.C19HF37O5S.thermal)
+      connect(C19HF37O5S.xNegative.heat, xNegative.C19HF37O5S.heat)
         annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(C19HF37O5S.xPositive.thermal, xPositive.C19HF37O5S.thermal)
+      connect(C19HF37O5S.xPositive.heat, xPositive.C19HF37O5S.heat)
         annotation (Line(
           points={{10,6.10623e-16},{20,-4.87687e-22},{20,5.55112e-16},{40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(C19HF37O5S.yNegative.thermal, yNegative.C19HF37O5S.thermal)
+      connect(C19HF37O5S.yNegative.heat, yNegative.C19HF37O5S.heat)
         annotation (Line(
           points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(C19HF37O5S.yPositive.thermal, yPositive.C19HF37O5S.thermal)
+      connect(C19HF37O5S.yPositive.heat, yPositive.C19HF37O5S.heat)
         annotation (Line(
           points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
               5.55112e-16,40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(C19HF37O5S.zNegative.thermal, zNegative.C19HF37O5S.thermal)
+      connect(C19HF37O5S.zNegative.heat, zNegative.C19HF37O5S.heat)
         annotation (Line(
           points={{7,7},{20,20}},
           color={127,127,127},
           smooth=Smooth.None));
-      connect(C19HF37O5S.zPositive.thermal, zPositive.C19HF37O5S.thermal)
+      connect(C19HF37O5S.zPositive.heat, zPositive.C19HF37O5S.heat)
         annotation (Line(
           points={{-7,-7},{-20,-20}},
           color={127,127,127},
@@ -2305,34 +2305,34 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Thermal transport
-      connect('e-'.xNegative.thermal, xNegative.'e-'.thermal) annotation (Line(
+      connect('e-'.xNegative.heat, xNegative.'e-'.heat) annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect('e-'.xPositive.thermal, xPositive.'e-'.thermal) annotation (Line(
+      connect('e-'.xPositive.heat, xPositive.'e-'.heat) annotation (Line(
           points={{10,6.10623e-16},{20,-4.87687e-22},{20,5.55112e-16},{40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect('e-'.yNegative.thermal, yNegative.'e-'.thermal) annotation (Line(
+      connect('e-'.yNegative.heat, yNegative.'e-'.heat) annotation (Line(
           points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect('e-'.yPositive.thermal, yPositive.'e-'.thermal) annotation (Line(
+      connect('e-'.yPositive.heat, yPositive.'e-'.heat) annotation (Line(
           points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
               5.55112e-16,40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect('e-'.zNegative.thermal, zNegative.'e-'.thermal) annotation (Line(
+      connect('e-'.zNegative.heat, zNegative.'e-'.heat) annotation (Line(
           points={{7,7},{20,20}},
           color={127,127,127},
           smooth=Smooth.None));
-      connect('e-'.zPositive.thermal, zPositive.'e-'.thermal) annotation (Line(
+      connect('e-'.zPositive.heat, zPositive.'e-'.heat) annotation (Line(
           points={{-7,-7},{-20,-20}},
           color={127,127,127},
           smooth=Smooth.None));
@@ -2461,34 +2461,34 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Thermal transport
-      connect(H2.xNegative.thermal, xNegative.H2.thermal) annotation (Line(
+      connect(H2.xNegative.heat, xNegative.H2.heat) annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2.xPositive.thermal, xPositive.H2.thermal) annotation (Line(
+      connect(H2.xPositive.heat, xPositive.H2.heat) annotation (Line(
           points={{10,6.10623e-16},{20,-4.87687e-22},{20,5.55112e-16},{40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2.yNegative.thermal, yNegative.H2.thermal) annotation (Line(
+      connect(H2.yNegative.heat, yNegative.H2.heat) annotation (Line(
           points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2.yPositive.thermal, yPositive.H2.thermal) annotation (Line(
+      connect(H2.yPositive.heat, yPositive.H2.heat) annotation (Line(
           points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
               5.55112e-16,40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2.zNegative.thermal, zNegative.H2.thermal) annotation (Line(
+      connect(H2.zNegative.heat, zNegative.H2.heat) annotation (Line(
           points={{7,7},{20,20}},
           color={127,127,127},
           smooth=Smooth.None));
-      connect(H2.zPositive.thermal, zPositive.H2.thermal) annotation (Line(
+      connect(H2.zPositive.heat, zPositive.H2.heat) annotation (Line(
           points={{-7,-7},{-20,-20}},
           color={127,127,127},
           smooth=Smooth.None));
@@ -2617,34 +2617,34 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Thermal transport
-      connect(H2O.xNegative.thermal, xNegative.H2O.thermal) annotation (Line(
+      connect(H2O.xNegative.heat, xNegative.H2O.heat) annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2O.xPositive.thermal, xPositive.H2O.thermal) annotation (Line(
+      connect(H2O.xPositive.heat, xPositive.H2O.heat) annotation (Line(
           points={{10,6.10623e-16},{20,-4.87687e-22},{20,5.55112e-16},{40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2O.yNegative.thermal, yNegative.H2O.thermal) annotation (Line(
+      connect(H2O.yNegative.heat, yNegative.H2O.heat) annotation (Line(
           points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2O.yPositive.thermal, yPositive.H2O.thermal) annotation (Line(
+      connect(H2O.yPositive.heat, yPositive.H2O.heat) annotation (Line(
           points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
               5.55112e-16,40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2O.zNegative.thermal, zNegative.H2O.thermal) annotation (Line(
+      connect(H2O.zNegative.heat, zNegative.H2O.heat) annotation (Line(
           points={{7,7},{20,20}},
           color={127,127,127},
           smooth=Smooth.None));
-      connect(H2O.zPositive.thermal, zPositive.H2O.thermal) annotation (Line(
+      connect(H2O.zPositive.heat, zPositive.H2O.heat) annotation (Line(
           points={{-7,-7},{-20,-20}},
           color={127,127,127},
           smooth=Smooth.None));
@@ -2779,34 +2779,34 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Thermal transport
-      connect('H+'.xNegative.thermal, xNegative.'H+'.thermal) annotation (Line(
+      connect('H+'.xNegative.heat, xNegative.'H+'.heat) annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect('H+'.xPositive.thermal, xPositive.'H+'.thermal) annotation (Line(
+      connect('H+'.xPositive.heat, xPositive.'H+'.heat) annotation (Line(
           points={{10,6.10623e-16},{20,-4.87687e-22},{20,5.55112e-16},{40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect('H+'.yNegative.thermal, yNegative.'H+'.thermal) annotation (Line(
+      connect('H+'.yNegative.heat, yNegative.'H+'.heat) annotation (Line(
           points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect('H+'.yPositive.thermal, yPositive.'H+'.thermal) annotation (Line(
+      connect('H+'.yPositive.heat, yPositive.'H+'.heat) annotation (Line(
           points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
               5.55112e-16,40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect('H+'.zNegative.thermal, zNegative.'H+'.thermal) annotation (Line(
+      connect('H+'.zNegative.heat, zNegative.'H+'.heat) annotation (Line(
           points={{7,7},{20,20}},
           color={127,127,127},
           smooth=Smooth.None));
-      connect('H+'.zPositive.thermal, zPositive.'H+'.thermal) annotation (Line(
+      connect('H+'.zPositive.heat, zPositive.'H+'.heat) annotation (Line(
           points={{-7,-7},{-20,-20}},
           color={127,127,127},
           smooth=Smooth.None));
@@ -2935,34 +2935,34 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Thermal transport
-      connect(N2.xNegative.thermal, xNegative.N2.thermal) annotation (Line(
+      connect(N2.xNegative.heat, xNegative.N2.heat) annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(N2.xPositive.thermal, xPositive.N2.thermal) annotation (Line(
+      connect(N2.xPositive.heat, xPositive.N2.heat) annotation (Line(
           points={{10,6.10623e-16},{20,-4.87687e-22},{20,5.55112e-16},{40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(N2.yNegative.thermal, yNegative.N2.thermal) annotation (Line(
+      connect(N2.yNegative.heat, yNegative.N2.heat) annotation (Line(
           points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(N2.yPositive.thermal, yPositive.N2.thermal) annotation (Line(
+      connect(N2.yPositive.heat, yPositive.N2.heat) annotation (Line(
           points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
               5.55112e-16,40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(N2.zNegative.thermal, zNegative.N2.thermal) annotation (Line(
+      connect(N2.zNegative.heat, zNegative.N2.heat) annotation (Line(
           points={{7,7},{20,20}},
           color={127,127,127},
           smooth=Smooth.None));
-      connect(N2.zPositive.thermal, zPositive.N2.thermal) annotation (Line(
+      connect(N2.zPositive.heat, zPositive.N2.heat) annotation (Line(
           points={{-7,-7},{-20,-20}},
           color={127,127,127},
           smooth=Smooth.None));
@@ -3091,34 +3091,34 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Thermal transport
-      connect(O2.xNegative.thermal, xNegative.O2.thermal) annotation (Line(
+      connect(O2.xNegative.heat, xNegative.O2.heat) annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(O2.xPositive.thermal, xPositive.O2.thermal) annotation (Line(
+      connect(O2.xPositive.heat, xPositive.O2.heat) annotation (Line(
           points={{10,6.10623e-16},{20,-4.87687e-22},{20,5.55112e-16},{40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(O2.yNegative.thermal, yNegative.O2.thermal) annotation (Line(
+      connect(O2.yNegative.heat, yNegative.O2.heat) annotation (Line(
           points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(O2.yPositive.thermal, yPositive.O2.thermal) annotation (Line(
+      connect(O2.yPositive.heat, yPositive.O2.heat) annotation (Line(
           points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
               5.55112e-16,40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(O2.zNegative.thermal, zNegative.O2.thermal) annotation (Line(
+      connect(O2.zNegative.heat, zNegative.O2.heat) annotation (Line(
           points={{7,7},{20,20}},
           color={127,127,127},
           smooth=Smooth.None));
-      connect(O2.zPositive.thermal, zPositive.O2.thermal) annotation (Line(
+      connect(O2.zPositive.heat, zPositive.O2.heat) annotation (Line(
           points={{-7,-7},{-20,-20}},
           color={127,127,127},
           smooth=Smooth.None));
@@ -3430,34 +3430,34 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Thermal transport
-      connect(H2.xNegative.thermal, xNegative.H2.thermal) annotation (Line(
+      connect(H2.xNegative.heat, xNegative.H2.heat) annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2.xPositive.thermal, xPositive.H2.thermal) annotation (Line(
+      connect(H2.xPositive.heat, xPositive.H2.heat) annotation (Line(
           points={{10,6.10623e-16},{20,-4.87687e-22},{20,5.55112e-16},{40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2.yNegative.thermal, yNegative.H2.thermal) annotation (Line(
+      connect(H2.yNegative.heat, yNegative.H2.heat) annotation (Line(
           points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2.yPositive.thermal, yPositive.H2.thermal) annotation (Line(
+      connect(H2.yPositive.heat, yPositive.H2.heat) annotation (Line(
           points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
               5.55112e-16,40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2.zNegative.thermal, zNegative.H2.thermal) annotation (Line(
+      connect(H2.zNegative.heat, zNegative.H2.heat) annotation (Line(
           points={{7,7},{20,20}},
           color={127,127,127},
           smooth=Smooth.None));
-      connect(H2.zPositive.thermal, zPositive.H2.thermal) annotation (Line(
+      connect(H2.zPositive.heat, zPositive.H2.heat) annotation (Line(
           points={{-7,-7},{-20,-20}},
           color={127,127,127},
           smooth=Smooth.None));
@@ -3586,34 +3586,34 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Thermal transport
-      connect(H2O.xNegative.thermal, xNegative.H2O.thermal) annotation (Line(
+      connect(H2O.xNegative.heat, xNegative.H2O.heat) annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2O.xPositive.thermal, xPositive.H2O.thermal) annotation (Line(
+      connect(H2O.xPositive.heat, xPositive.H2O.heat) annotation (Line(
           points={{10,6.10623e-16},{20,-4.87687e-22},{20,5.55112e-16},{40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2O.yNegative.thermal, yNegative.H2O.thermal) annotation (Line(
+      connect(H2O.yNegative.heat, yNegative.H2O.heat) annotation (Line(
           points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2O.yPositive.thermal, yPositive.H2O.thermal) annotation (Line(
+      connect(H2O.yPositive.heat, yPositive.H2O.heat) annotation (Line(
           points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
               5.55112e-16,40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2O.zNegative.thermal, zNegative.H2O.thermal) annotation (Line(
+      connect(H2O.zNegative.heat, zNegative.H2O.heat) annotation (Line(
           points={{7,7},{20,20}},
           color={127,127,127},
           smooth=Smooth.None));
-      connect(H2O.zPositive.thermal, zPositive.H2O.thermal) annotation (Line(
+      connect(H2O.zPositive.heat, zPositive.H2O.heat) annotation (Line(
           points={{-7,-7},{-20,-20}},
           color={127,127,127},
           smooth=Smooth.None));
@@ -3742,34 +3742,34 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Thermal transport
-      connect(N2.xNegative.thermal, xNegative.N2.thermal) annotation (Line(
+      connect(N2.xNegative.heat, xNegative.N2.heat) annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(N2.xPositive.thermal, xPositive.N2.thermal) annotation (Line(
+      connect(N2.xPositive.heat, xPositive.N2.heat) annotation (Line(
           points={{10,6.10623e-16},{20,-4.87687e-22},{20,5.55112e-16},{40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(N2.yNegative.thermal, yNegative.N2.thermal) annotation (Line(
+      connect(N2.yNegative.heat, yNegative.N2.heat) annotation (Line(
           points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(N2.yPositive.thermal, yPositive.N2.thermal) annotation (Line(
+      connect(N2.yPositive.heat, yPositive.N2.heat) annotation (Line(
           points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
               5.55112e-16,40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(N2.zNegative.thermal, zNegative.N2.thermal) annotation (Line(
+      connect(N2.zNegative.heat, zNegative.N2.heat) annotation (Line(
           points={{7,7},{20,20}},
           color={127,127,127},
           smooth=Smooth.None));
-      connect(N2.zPositive.thermal, zPositive.N2.thermal) annotation (Line(
+      connect(N2.zPositive.heat, zPositive.N2.heat) annotation (Line(
           points={{-7,-7},{-20,-20}},
           color={127,127,127},
           smooth=Smooth.None));
@@ -3898,34 +3898,34 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Thermal transport
-      connect(O2.xNegative.thermal, xNegative.O2.thermal) annotation (Line(
+      connect(O2.xNegative.heat, xNegative.O2.heat) annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(O2.xPositive.thermal, xPositive.O2.thermal) annotation (Line(
+      connect(O2.xPositive.heat, xPositive.O2.heat) annotation (Line(
           points={{10,6.10623e-16},{20,-4.87687e-22},{20,5.55112e-16},{40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(O2.yNegative.thermal, yNegative.O2.thermal) annotation (Line(
+      connect(O2.yNegative.heat, yNegative.O2.heat) annotation (Line(
           points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(O2.yPositive.thermal, yPositive.O2.thermal) annotation (Line(
+      connect(O2.yPositive.heat, yPositive.O2.heat) annotation (Line(
           points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
               5.55112e-16,40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(O2.zNegative.thermal, zNegative.O2.thermal) annotation (Line(
+      connect(O2.zNegative.heat, zNegative.O2.heat) annotation (Line(
           points={{7,7},{20,20}},
           color={127,127,127},
           smooth=Smooth.None));
-      connect(O2.zPositive.thermal, zPositive.O2.thermal) annotation (Line(
+      connect(O2.zPositive.heat, zPositive.O2.heat) annotation (Line(
           points={{-7,-7},{-20,-20}},
           color={127,127,127},
           smooth=Smooth.None));
@@ -4124,32 +4124,32 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Thermal transport
-      connect(C.xNegative.thermal, xNegative.C.thermal) annotation (Line(
+      connect(C.xNegative.heat, xNegative.C.heat) annotation (Line(
           points={{-10,6.10623e-16},{-40,5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(C.xPositive.thermal, xPositive.C.thermal) annotation (Line(
+      connect(C.xPositive.heat, xPositive.C.heat) annotation (Line(
           points={{10,6.10623e-16},{40,5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(C.yNegative.thermal, yNegative.C.thermal) annotation (Line(
+      connect(C.yNegative.heat, yNegative.C.heat) annotation (Line(
           points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(C.yPositive.thermal, yPositive.C.thermal) annotation (Line(
+      connect(C.yPositive.heat, yPositive.C.heat) annotation (Line(
           points={{6.10623e-16,10},{-4.87687e-22,26},{5.55112e-16,26},{
               5.55112e-16,40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(C.zNegative.thermal, zNegative.C.thermal) annotation (Line(
+      connect(C.zNegative.heat, zNegative.C.heat) annotation (Line(
           points={{7,7},{20,20}},
           color={127,127,127},
           smooth=Smooth.None));
-      connect(C.zPositive.thermal, zPositive.C.thermal) annotation (Line(
+      connect(C.zPositive.heat, zPositive.C.heat) annotation (Line(
           points={{-7,-7},{-20,-20}},
           color={127,127,127},
           smooth=Smooth.None));
@@ -4278,32 +4278,32 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Thermal transport
-      connect('e-'.xNegative.thermal, xNegative.'e-'.thermal) annotation (Line(
+      connect('e-'.xNegative.heat, xNegative.'e-'.heat) annotation (Line(
           points={{-10,6.10623e-16},{-40,5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect('e-'.xPositive.thermal, xPositive.'e-'.thermal) annotation (Line(
+      connect('e-'.xPositive.heat, xPositive.'e-'.heat) annotation (Line(
           points={{10,6.10623e-16},{40,5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect('e-'.yNegative.thermal, yNegative.'e-'.thermal) annotation (Line(
+      connect('e-'.yNegative.heat, yNegative.'e-'.heat) annotation (Line(
           points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect('e-'.yPositive.thermal, yPositive.'e-'.thermal) annotation (Line(
+      connect('e-'.yPositive.heat, yPositive.'e-'.heat) annotation (Line(
           points={{6.10623e-16,10},{-4.87687e-22,26},{5.55112e-16,26},{
               5.55112e-16,40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect('e-'.zNegative.thermal, zNegative.'e-'.thermal) annotation (Line(
+      connect('e-'.zNegative.heat, zNegative.'e-'.heat) annotation (Line(
           points={{7,7},{20,20}},
           color={127,127,127},
           smooth=Smooth.None));
-      connect('e-'.zPositive.thermal, zPositive.'e-'.thermal) annotation (Line(
+      connect('e-'.zPositive.heat, zPositive.'e-'.heat) annotation (Line(
           points={{-7,-7},{-20,-20}},
           color={127,127,127},
           smooth=Smooth.None));
@@ -4548,39 +4548,39 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Thermal transport
-      connect(C19HF37O5S.xNegative.thermal, xNegative.C19HF37O5S.thermal)
+      connect(C19HF37O5S.xNegative.heat, xNegative.C19HF37O5S.heat)
         annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(C19HF37O5S.xPositive.thermal, xPositive.C19HF37O5S.thermal)
+      connect(C19HF37O5S.xPositive.heat, xPositive.C19HF37O5S.heat)
         annotation (Line(
           points={{10,6.10623e-16},{20,-4.87687e-22},{20,5.55112e-16},{40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(C19HF37O5S.yNegative.thermal, yNegative.C19HF37O5S.thermal)
+      connect(C19HF37O5S.yNegative.heat, yNegative.C19HF37O5S.heat)
         annotation (Line(
           points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(C19HF37O5S.yPositive.thermal, yPositive.C19HF37O5S.thermal)
+      connect(C19HF37O5S.yPositive.heat, yPositive.C19HF37O5S.heat)
         annotation (Line(
           points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
               5.55112e-16,40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(C19HF37O5S.zNegative.thermal, zNegative.C19HF37O5S.thermal)
+      connect(C19HF37O5S.zNegative.heat, zNegative.C19HF37O5S.heat)
         annotation (Line(
           points={{7,7},{20,20}},
           color={127,127,127},
           smooth=Smooth.None));
-      connect(C19HF37O5S.zPositive.thermal, zPositive.C19HF37O5S.thermal)
+      connect(C19HF37O5S.zPositive.heat, zPositive.C19HF37O5S.heat)
         annotation (Line(
           points={{-7,-7},{-20,-20}},
           color={127,127,127},
@@ -4716,34 +4716,34 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Thermal transport
-      connect('H+'.xNegative.thermal, xNegative.'H+'.thermal) annotation (Line(
+      connect('H+'.xNegative.heat, xNegative.'H+'.heat) annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect('H+'.xPositive.thermal, xPositive.'H+'.thermal) annotation (Line(
+      connect('H+'.xPositive.heat, xPositive.'H+'.heat) annotation (Line(
           points={{10,6.10623e-16},{20,-4.87687e-22},{20,5.55112e-16},{40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect('H+'.yNegative.thermal, yNegative.'H+'.thermal) annotation (Line(
+      connect('H+'.yNegative.heat, yNegative.'H+'.heat) annotation (Line(
           points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect('H+'.yPositive.thermal, yPositive.'H+'.thermal) annotation (Line(
+      connect('H+'.yPositive.heat, yPositive.'H+'.heat) annotation (Line(
           points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
               5.55112e-16,40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect('H+'.zNegative.thermal, zNegative.'H+'.thermal) annotation (Line(
+      connect('H+'.zNegative.heat, zNegative.'H+'.heat) annotation (Line(
           points={{7,7},{20,20}},
           color={127,127,127},
           smooth=Smooth.None));
-      connect('H+'.zPositive.thermal, zPositive.'H+'.thermal) annotation (Line(
+      connect('H+'.zPositive.heat, zPositive.'H+'.heat) annotation (Line(
           points={{-7,-7},{-20,-20}},
           color={127,127,127},
           smooth=Smooth.None));
@@ -4873,34 +4873,34 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Thermal transport
-      connect(H2O.xNegative.thermal, xNegative.H2O.thermal) annotation (Line(
+      connect(H2O.xNegative.heat, xNegative.H2O.heat) annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2O.xPositive.thermal, xPositive.H2O.thermal) annotation (Line(
+      connect(H2O.xPositive.heat, xPositive.H2O.heat) annotation (Line(
           points={{10,6.10623e-16},{20,-4.87687e-22},{20,5.55112e-16},{40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2O.yNegative.thermal, yNegative.H2O.thermal) annotation (Line(
+      connect(H2O.yNegative.heat, yNegative.H2O.heat) annotation (Line(
           points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2O.yPositive.thermal, yPositive.H2O.thermal) annotation (Line(
+      connect(H2O.yPositive.heat, yPositive.H2O.heat) annotation (Line(
           points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
               5.55112e-16,40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2O.zNegative.thermal, zNegative.H2O.thermal) annotation (Line(
+      connect(H2O.zNegative.heat, zNegative.H2O.heat) annotation (Line(
           points={{7,7},{20,20}},
           color={127,127,127},
           smooth=Smooth.None));
-      connect(H2O.zPositive.thermal, zPositive.H2O.thermal) annotation (Line(
+      connect(H2O.zPositive.heat, zPositive.H2O.heat) annotation (Line(
           points={{-7,-7},{-20,-20}},
           color={127,127,127},
           smooth=Smooth.None));
@@ -5079,34 +5079,34 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Thermal transport
-      connect(H2O.xNegative.thermal, xNegative.H2O.thermal) annotation (Line(
+      connect(H2O.xNegative.heat, xNegative.H2O.heat) annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2O.xPositive.thermal, xPositive.H2O.thermal) annotation (Line(
+      connect(H2O.xPositive.heat, xPositive.H2O.heat) annotation (Line(
           points={{10,6.10623e-16},{20,-4.87687e-22},{20,5.55112e-16},{40,
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2O.yNegative.thermal, yNegative.H2O.thermal) annotation (Line(
+      connect(H2O.yNegative.heat, yNegative.H2O.heat) annotation (Line(
           points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2O.yPositive.thermal, yPositive.H2O.thermal) annotation (Line(
+      connect(H2O.yPositive.heat, yPositive.H2O.heat) annotation (Line(
           points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
               5.55112e-16,40}},
           color={127,127,127},
           smooth=Smooth.None));
 
-      connect(H2O.zNegative.thermal, zNegative.H2O.thermal) annotation (Line(
+      connect(H2O.zNegative.heat, zNegative.H2O.heat) annotation (Line(
           points={{7,7},{20,20}},
           color={127,127,127},
           smooth=Smooth.None));
-      connect(H2O.zPositive.thermal, zPositive.H2O.thermal) annotation (Line(
+      connect(H2O.zPositive.heat, zPositive.H2O.heat) annotation (Line(
           points={{-7,-7},{-20,-20}},
           color={127,127,127},
           smooth=Smooth.None));
@@ -7018,7 +7018,7 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
         mechanicalZ(final tau=tau_face[Axis.x, Side.n, Orientation.preceding],
             final APdot(start=A[Axis.x]*phi_IC[Axis.z]) = APdot_face[Axis.x,
             Side.n, Orientation.preceding]),
-        thermal(final T(start=T_IC) = T_face[Axis.x, Side.n],final Qdot(start=0)
+        heat(final T(start=T_IC) = T_face[Axis.x, Side.n],final Qdot(start=0)
              = Qdot_face[Axis.x, Side.n])) "Negative face along the x axis"
         annotation (Dialog(
           tab="Assumptions",
@@ -7038,7 +7038,7 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
         mechanicalZ(final tau=tau_face[Axis.x, Side.p, Orientation.preceding],
             final APdot(start=A[Axis.x]*phi_IC[Axis.z]) = APdot_face[Axis.x,
             Side.p, Orientation.preceding]),
-        thermal(final T(start=T_IC) = T_face[Axis.x, Side.p],final Qdot(start=0)
+        heat(final T(start=T_IC) = T_face[Axis.x, Side.p],final Qdot(start=0)
              = Qdot_face[Axis.x, Side.p])) "Positive face along the x axis"
         annotation (Dialog(
           tab="Assumptions",
@@ -7058,7 +7058,7 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
         mechanicalX(final tau=tau_face[Axis.y, Side.n, Side.p], final APdot(
               start=A[Axis.y]*phi_IC[Axis.x]) = APdot_face[Axis.y, Side.n,
             Orientation.preceding]),
-        thermal(final T(start=T_IC) = T_face[Axis.y, Side.n],final Qdot(start=0)
+        heat(final T(start=T_IC) = T_face[Axis.y, Side.n],final Qdot(start=0)
              = Qdot_face[Axis.y, Side.n])) "Negative face along the y axis"
         annotation (Dialog(
           tab="Assumptions",
@@ -7078,7 +7078,7 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
         mechanicalX(final tau=tau_face[Axis.y, Side.p, Orientation.preceding],
             final APdot(start=A[Axis.y]*phi_IC[Axis.x]) = APdot_face[Axis.y,
             Side.p, Orientation.preceding]),
-        thermal(final T(start=T_IC) = T_face[Axis.y, Side.p],final Qdot(start=0)
+        heat(final T(start=T_IC) = T_face[Axis.y, Side.p],final Qdot(start=0)
              = Qdot_face[Axis.y, Side.p])) "Positive face along the y axis"
         annotation (Dialog(
           tab="Assumptions",
@@ -7098,7 +7098,7 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
         mechanicalY(final tau=tau_face[Axis.z, Side.n, Orientation.preceding],
             final APdot(start=A[Axis.z]*phi_IC[Axis.y]) = APdot_face[Axis.z,
             Side.n, Orientation.preceding]),
-        thermal(final T(start=T_IC) = T_face[Axis.z, Side.n],final Qdot(start=0)
+        heat(final T(start=T_IC) = T_face[Axis.z, Side.n],final Qdot(start=0)
              = Qdot_face[Axis.z, Side.n])) "Negative face along the z axis"
         annotation (Dialog(
           tab="Assumptions",
@@ -7118,7 +7118,7 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
         mechanicalY(final tau=tau_face[Axis.z, Side.p, Orientation.preceding],
             final APdot(start=A[Axis.z]*phi_IC[Axis.y]) = APdot_face[Axis.z,
             Side.p, Orientation.preceding]),
-        thermal(final T(start=T_IC) = T_face[Axis.z, Side.p],final Qdot(start=0)
+        heat(final T(start=T_IC) = T_face[Axis.z, Side.p],final Qdot(start=0)
              = Qdot_face[Axis.z, Side.p])) "Positive face along the z axis"
         annotation (Dialog(
           tab="Assumptions",
