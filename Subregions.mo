@@ -568,6 +568,7 @@ package Subregions
 
         experiment(StopTime=298.15, Algorithm="Dassl"),
         experimentSetupOutput);
+
     end ThermalConduction;
 
     model ThermalConductionConvection
@@ -599,6 +600,7 @@ package Subregions
 
         experiment(StopTime=200, Algorithm="Dassl"),
         experimentSetupOutput);
+
     end ThermalConductionConvection;
 
     model ReactionRamp
@@ -5367,6 +5369,7 @@ package Subregions
                           extent={{-150,90},{-118,52}},
                           lineColor={0,0,255},
                           textString="%t.test")}));
+
         end Calibrated;
 
         model Correlated "Ideal correlations from kinetic theory"
@@ -5382,6 +5385,7 @@ package Subregions
 
             Diagram(graphics),
             Icon(graphics));
+
         end Correlated;
 
         model Fixed "Fixed properties"
@@ -5478,6 +5482,7 @@ package Subregions
 
             Icon(graphics),
             Diagram(graphics));
+
         end Calibrated;
 
         model Correlated "Ideal correlations from kinetic theory"
@@ -5596,6 +5601,7 @@ package Subregions
     <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
 
             Diagram(graphics));
+
         end Fixed;
       end Graphite;
     end 'e-';
@@ -5761,6 +5767,7 @@ and <code>alpha_Qdot=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</
 <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"),
 
             Diagram(graphics));
+
         end Fixed;
       end Gas;
     end H2;
@@ -7538,59 +7545,65 @@ The default global default settings will be used for the current simulation.",
       end if;
       annotation (
         defaultComponentPrefixes="replaceable",
-        Documentation(info="<html>**Review and update all this:<br>
-    <p>This model is based on the following fixed assumptions.  Other assumptions are optional via the parameters.
+        Documentation(info="<html>
+    <p>This model is based on the following fixed assumptions.  Other assumptions are 
+    optional via the parameters.
     <ol>
        <li>All faces are rectangular.
        <li>The material is orthorhombic.  This implies that a
           gradient which induces diffusion along an axis does not induce
-          diffusion along axes orthogonal to it [<a href=\"modelica://FCSys.UsersGuide.References\">Bejan2006</a>,
+          diffusion along axes orthogonal to it 
+          [<a href=\"modelica://FCSys.UsersGuide.References\">Bejan2006</a>,
           pp. 691&ndash;692].</li>
        <li>The coordinate system (x, y, z) is aligned with the principle
           axes of transport.  For example, if the species is stratified, the
           layers must be parallel to one of the planes in the rectilinear
           grid.</li>
        <li>The factors that may cause anisotropic behavior (<b><i>k</i></b>)
-          are common to the transport of material, linear momentum, and
-          entropy.</li>
+          are common to material, mechanical, and thermal transport.</li>
        <li>There are no body or inertial forces (e.g., gravity).</li>
     </ol>
     </p>
 
     <p>Figure 1 shows the manner in which instances of
-    <a href=\"modelica://FCSys.Subregions.Species\">Species</a> models (derived from this model) are
-    connected within a <a href=\"modelica://FCSys.Subregions\">Subregion</a>.  The
-    exchange resistances
-    are internal to each instance.  In the diagram,
-    <i>Q</i> is a generic quantity (particle number <i>N</i>, linear momentum <i>m</i> &Phi;, or entropy <i>S</i>), <i>Q&#775;</i> is the flow rate of that quantity,
-    and <i>q</i> is the associated effort (&mu;, &phi;, or <i>T</i>).
-    The connection of the <a href=\"modelica://FCSys.Connectors.Material\">material connectors</a> is through a
-    <a href=\"modelica://FCSys.Subregions.Reaction\">Reaction</a> model.  The
-    <a href=\"modelica://FCSys.Subregions.Reaction\">Reaction</a> model advects linear momentum
-    and entropy between the reactant and product species; diffusion is handled separately.
-    </p>
+    <a href=\"modelica://FCSys.Subregions.Species\">Species</a> models (derived from this 
+    model) are
+    connected within a <a href=\"modelica://FCSys.Subregions\">Subregion</a>.  The 
+    generalized resistances (<i>R</i>) affect the flow rates of linear momentum and
+    heat associated with differences in velocity and temperature (respectively) between
+    each species and a common node.  This exchange is diffusive.
+    
+    <p>Linear momentum and enthalpy are advected as material is exchanged in a chemical
+    reaction.  This occurs at the velocity and massic enthalpy of the reactants (source 
+    species).  Resistance is not involved directly.  When the species are connected through 
+    a <a href=\"modelica://FCSys.Subregions.Reaction\">Reaction</a> model, the material 
+    states are directly coupled according to the chemical equilibrium of the reaction.  
+    This reduces the DAE index by one.  The reaction rate is determined solely by 
+    the dynamics of the transport equations.</p>
 
     <p align=center><img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/exchange.png\">
-<br><b>Figure 1:</b>  Exchange of a quantity (particle number, linear momentum, or entropy) among species (A, B, and C) within a subregion.</p>
+    <br><b>Figure 1:</b>  Exchange of a quantity (linear momentum or heat) among species 
+    (A, B, and C) within a subregion.</p>
 
-    <p>Figure 2 shows the manner in which <a href=\"modelica://FCSys.Subregions.Species\">Species</a>
-    instances
-    of the same type are connected between neighboring <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> instances.
-    Transport is similar to exchange
-    except that advection and diffusion are directly coupled; both effects
-    are included in the same connections.
-    Upstream discretization is applied if it is enabled (via the <code>upstreamX</code>, etc. parameters).
+    <p>Figure 2 shows how <a href=\"modelica://FCSys.Subregions.Species\">Species</a>
+    instances of the same type are connected between neighboring 
+    <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> instances.  Material,
+    transverse displacement, and heat are transported by both advection and diffusion.
+    Upstream discretization is applied if it is enabled (via the <code>upstreamX</code>, 
+    etc. parameters).</p>
 
     <p align=center><img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/transport.png\">
-<br><b>Figure 2:</b>  Transport of a quantity associated with the same chemical species between subregions (1 and 2).</p>
+    <br><b>Figure 2:</b>  Transport of a quantity associated with the same species 
+    between subregions (1 and 2).</p>
 
-    <p>Within a phase, <a href=\"modelica://FCSys.Subregions.Species\">Species</a> instances are combined
-    by Dalton's law (see the <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector), as shown in
-    Figure 3a.  The pressures are additive, and each species is
-    assumed to exist at the volume of the phase.
-    Within a subregion, phases are combined by Amagat's law (see the <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector), as shown in
-    Figure 3b.  The volumes are additive, and each species is
-    assumed to exist at the pressure of the subregion.</p>
+    <p>Within a phase, <a href=\"modelica://FCSys.Subregions.Species\">Species</a> instances 
+    are combined by Dalton's law (see the 
+    <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector), as shown
+    in Figure 3a.  The pressures are additive, and each species is assumed to exist at the 
+    volume of the phase.  Within a subregion, phases are combined by Amagat's law (see the 
+    <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector), as shown 
+    in Figure 3b.  The volumes are additive, and each species is assumed to exist at the 
+    pressure of the subregion.</p>
 
     <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\" align=center>
       <tr align=center>
@@ -7608,46 +7621,40 @@ The default global default settings will be used for the current simulation.",
       </tr>
     </table>
 
-    <p>**Update: The following variables reflect the actual properties of the
-    species: <code>chemical.mphi</code> (specific mass times velocity), <code>chemical.Ts</code> (specific entropy times temperature),
-     <code>V</code> or <code>inert.V</code> (volume), and <code>p</code> or <code>inert.p</code> (pressure).  However, due to exchange losses
-    <code>chemical.mu</code> (electrochemical potential), <code>inert.phi</code> (velocity), <code>inert.T</code> (temperature)
-    are generally not the bulk properties of the species.</p>
-
     <p> The following notes apply to the parameters:
     <ul>
     <li>The \"specific\" adjective is taken to mean a quantity divided by particle
     number.  (\"Massic\" would indicate a quantity divided by mass.)</li>
-    <li>The term \"resistivity\" indicates a generalized resistivity.  Its dimension is L.T/N (where \"L\" is length, \"T\" is time,
-    and \"N\" is particle number), regardless of the quantity
-    being transported or exchanged.</li>
-    <li>In general, if a resistivity is zero, then it should be set as <code>final</code>
-    so that index reduction may be performed.  If two <a href=\"modelica://FCSys.Subregions.Species\">Species</a> instances
+    <li>In general, if fluidity, bulk fluidity, or thermal resistivity is zero, then 
+    it should be set as <code>final</code> so that index reduction may be performed.  
+    If two <a href=\"modelica://FCSys.Subregions.Species\">Species</a> instances
     are connected through their exchange connectors
     (<code>chemical</code> or <code>inert</code>) or faces (<code>xNegative</code>, <code>xPositive</code>, etc.) and both have zero resistivities for a
     quantity, then index reduction is necessary.</li>
     <li>Even if an initialization parameter is not selected for explicit use,
     it may be used a guess value.</li>
-    <li>The <b><i>k</i></b> factor can be used to account for the effects of porosity and tortousity.
-    It increases directly with effective area and inversely with effective length.
-    The factor may reflect anisotropic properties; it is a vector with independent components for each axis.
-    It affects all of the diffusive transport rates (material, transverse displacement,
-    and entropy) by the same factor.  By default, its components are unity.</li>
+    <li>The <b><i>k</i></b> factor can be used to account for the effects of porosity and tortousity
+    on transport.
+    It should be changed directly with effective area and inversely with effective length.
+    The factor may reflect anisotropic properties; it is a vector with independent components 
+    for each axis. It affects all of the diffusive transport rates (material, mechanical, and
+    thermal) by the same factor.  By default, its components are unity.</li>
     <li>By default, only the x-axis component of velocity is included.  Also by default,
     only material and thermal transport are included through the x-axis faces and only
-    x-axis displacement is included through the y- and z-axis faces.</li>
+    x-axis displacement/shear stress is included through the y- and z-axis faces.</li>
     <li>If a state is prescribed, then the
     associated initial condition (IC) will be applied for all time.  The
     corresponding conservation equation will not be imposed.
     If <code>setPartNum</code>, <code>setVelX</code>, <code>setVelY</code>, or <code>setVelZ</code> is
-    <code>true</code>, then there will generally be a secondary effect on the energy conservation equation
+    <code>true</code>, then there may be a secondary effect on the energy conservation equation
     and thus temperature.
     In that case, it may be helpful to set <code>setTemp</code> to <code>true</code> so that
     the energy conservation equation is not imposed.</li>
     <li>If a subregion does not contain any compressible species, then pressure must be prescribed.
     Set <code>setPartNum</code> to <code>true</code> and <code>initMethPartNum</code>
     to <code>InitMethScalar.Pressure</code> for the species.  In general, only one incompressible
-    species can be included if there are no incompressible species.</li>
+    species can be included if there are no incompressible species. **Remove the pressure option
+    from the Volume model if not necessary.</li>
     <li>The <code>start</code> values of the initial conditions for pressure and temperature
     (<i>p</i><sub>IC</sub> and <i>T</i><sub>IC</sub>) are the global default pressure and
     temperature (via the <code>outer</code> instance of the <a href=\"modelica://FCSys.BCs.Defaults\">Defaults</a> model).
@@ -7660,49 +7667,31 @@ The default global default settings will be used for the current simulation.",
     is related to it via the characteristics (in <code>Data</code>) and the initial pressure and temperature.
     In order to apply other values for any of these initial conditions,
     it may be necessary to do so before translating the model.</li>
-    <li>**Update If the species has charged (i.e., is ionic) and permittivity (<code>epsilon</code>) is
-    zero, then it should be set as <code>final</code> to eliminate
-    the associated state.  Otherwise, errors may occur.</li>
     <li>With the <code>overrideEOS</code> parameter, it is possible to specify that
-    the volumic amount (i.e., molar concentration) and thus the amount is zero.
+    the volumic amount (i.e., molar concentration) and thus the amount or particle number is 
+    zero.
     Set <code>overrideEOS = true</code> and <code>rho_IC = 0</code>; then,
-    the states for material, linear momentum, and energy will be eliminated (leaving
-    only the electrochemical double-layer state, &Delta;&mu;, if applicable).  If a species
+    the states for material, linear momentum, and energy will be eliminated.  If a species
     is included with this setting, then there must be an external reference
     for electrochemical potential (i.e., ground).  There must be at least one other
-    species in the subregion or the velocity must be set (e.g., <code>setVelX = true</code>).</li>
+    species in the subregion or the velocity must be set (e.g., 
+    <code>setVelX = true</code>).</li>
     </p>
 
-    <p>In order to reduce numerical error during simulation, enthalpy of formation
-    (<code>Data.Deltah0_f</code>) is excluded
-    from the face connectors (e.g., <code>xNegative.material.mu</code>).  There is
-    no mathematical effect since the linear momentum and energy balances are adjusted accordingly.
-    **Update: However, enthalpy of formation is included in the chemical connector
-    (<code>chemical.mu</code>); it is necessary for the proper chemical equilibrium.</p>
-
-    <p>In evaluating the dynamics of a phase, it is usually assumed
-    that all of the species exist at the same temperature.
-    The time constants that govern the temperatures/heat capacities of the species and entropy flow rates among them
-    are usually
+    <p>In evaluating the dynamics of a phase, it is usually assumed that all of the species 
+    exist at the same temperature and bulk velocity.  The time constants that govern the 
+    temperatures/heat capacities of the species and heat flow rates among them are usually
     much shorter than the time span of interest.
-    This assumption can be applied in the model by setting the thermal exchange resistivities
-    (&alpha;<sub><i>Q&#775;</i></sub>) of the species as <code>final</code> parameters equal to zero.
-    Then, the translator can perform index reduction and retain only one
-    state associated with temperature.  However, this will likely lead to nonlinear systems of equations
-    and may reduce the performance of the simulation. Likewise, if the reaction rates are very fast with respect to the
-    observed time span,
-    then the reaction resistivities (&alpha;<sub><i>N</i></sub>) of the species may be redeclared as
-    <code>final</code> parameters and set to zero.  A similar situation applies to
-    momentum exchange (&alpha;<sub>&tau;</sub>), material transport (&alpha;<sub><i>N&#775;</i></sub>),
-    compressive momentum transport
-    (&alpha;<sub>&#8214;</sub>), transverse momentum transport (&alpha;<sub>&tau;</sub>),
-    and thermal transport (&alpha;<sub><i>Q&#775;</i></sub>).</p>
+    This assumption can be applied in the model by connecting the <code>common</code> 
+    connectors of the species.  It will cause index reduction during translation.
+    **Independently enable/disable linear momentum and heat through common connector, explain
+    here.</p> 
 
     <p>In the variables that relate to transport,
     the first index is the axis and the second index is the side.  The sides
     are ordered from negative to positive, according to the
     <a href=\"modelica://FCSys.BaseClasses.Side\">Side</a> enumeration.
-    Linear momentum is additionally indexed by
+    Transverse displacement and shear stress are additionally indexed by
     the orientation of the momentum with respect to the face.
     The orientations are ordered in Cartesian space starting with the axis after the
     normal face, according to the
