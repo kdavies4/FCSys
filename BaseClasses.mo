@@ -32,21 +32,25 @@ package BaseClasses "Base classes (not for direct use)"
 
       partial class Single "Icon for a single-connector boundary condition"
         //extends Names.Middle;
-        annotation (Icon(graphics={Rectangle(
-                      extent={{-100,40},{100,-40}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Line(
-                      points={{-100,-40},{-100,40},{100,40},{100,-40}},
-                      pattern=LinePattern.None,
-                      smooth=Smooth.None),Line(
-                      points={{-100,-40},{100,-40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+        annotation (Icon(graphics={
+              Rectangle(
+                extent={{-100,40},{100,-40}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None),
+              Line(
+                points={{-100,-40},{-100,40},{100,40},{100,-40}},
+                pattern=LinePattern.None,
+                smooth=Smooth.None),
+              Line(
+                points={{-100,-40},{100,-40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end Single;
     end BCs;
     extends Modelica.Icons.Package;
@@ -251,13 +255,13 @@ from Blocks.Discrete.
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                      extent={{-100,40},{100,80}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Text(
-                      extent={{-100,40},{100,80}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,40},{100,80}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None), Text(
+                extent={{-100,40},{100,80}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end Top2;
 
       partial class Top1
@@ -421,145 +425,176 @@ This icon is designed for a <b>signal bus</b> connector.
       annotation (Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={Rectangle(
-                  extent={{-100,60},{100,100}},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Polygon(
-                  points={{-4,52},{-14,42},{6,42},{16,52},{-4,52}},
-                  lineColor={0,0,0},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid),Polygon(
-                  points={{-10,52},{-20,42},{-14,42},{-4,52},{-10,52}},
-                  lineColor={0,0,0},
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  fillColor={0,0,0}),Rectangle(
-                  extent={{6,42},{12,-52}},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={0,0,0},
-                  pattern=LinePattern.None),Polygon(
-                  points={{16,52},{6,42},{12,42},{22,52},{16,52}},
-                  lineColor={0,0,0},
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  fillColor={0,0,0}),Line(
-                  points={{-40,42},{-40,-52}},
-                  pattern=LinePattern.None,
-                  smooth=Smooth.None),Polygon(
-                  points={{-46,64},{-66,44},{-46,44},{-26,64},{-46,64}},
-                  lineColor={0,0,0},
-                  fillColor={135,135,135},
-                  fillPattern=FillPattern.Solid),Rectangle(
-                  extent={{-39.6277,31.7996},{-67.912,17.6573}},
-                  lineColor={0,0,0},
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  rotation=45,
-                  fillColor={255,255,255},
-                  origin={56.5067,67.5353}),Rectangle(
-                  extent={{-14,42},{6,-52}},
-                  lineColor={0,0,0},
-                  fillPattern=FillPattern.VerticalCylinder,
-                  fillColor={255,255,255}),Line(points={{-30,52},{32,52}},
-              color={0,0,0}),Rectangle(
-                  extent={{-5.21738,-5.21961},{-33.5017,-33.5041}},
-                  lineColor={0,0,170},
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  rotation=45,
-                  fillColor={0,0,240},
-                  origin={31.9983,69.3803}),Rectangle(
-                  extent={{12,42},{52,-52}},
-                  lineColor={0,0,170},
-                  fillPattern=FillPattern.VerticalCylinder,
-                  fillColor={0,0,240}),Polygon(
-                  points={{-26,64},{-46,44},{-46,-64},{-26,-44},{-26,64}},
-                  lineColor={0,0,0},
-                  fillColor={95,95,95},
-                  fillPattern=FillPattern.Solid),Rectangle(
-                  extent={{-5.21774,-5.2196},{-33.502,-33.5042}},
-                  lineColor={170,0,0},
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  rotation=45,
-                  fillColor={240,0,0},
-                  origin={-30.001,79.3803}),Rectangle(
-                  extent={{-60,42},{-20,-52}},
-                  lineColor={170,0,0},
-                  fillPattern=FillPattern.VerticalCylinder,
-                  fillColor={240,0,0}),Rectangle(
-                  extent={{-76.648,66.211},{-119.073,52.0689}},
-                  lineColor={95,95,95},
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  rotation=45,
-                  fillColor={135,135,135},
-                  origin={65.0166,81.3801}),Rectangle(
-                  extent={{-76.648,66.211},{-119.073,52.0689}},
-                  lineColor={95,95,95},
-                  fillPattern=FillPattern.HorizontalCylinder,
-                  rotation=45,
-                  fillColor={135,135,135},
-                  origin={157,81}),Rectangle(
-                  extent={{26,44},{46,-64}},
-                  lineColor={95,95,95},
-                  fillPattern=FillPattern.VerticalCylinder,
-                  fillColor={135,135,135}),Polygon(
-                  points={{-26,64},{-26,52},{-30,52},{-30,60},{-26,64}},
-                  smooth=Smooth.None,
-                  fillColor={95,95,95},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None,
-                  lineColor={0,0,0}),Ellipse(
-                  extent={{-44,62},{-36,58}},
-                  lineColor={135,135,135},
-                  fillColor={240,0,0},
-                  fillPattern=FillPattern.Sphere),Ellipse(
-                  extent={{36,50},{44,46}},
-                  lineColor={135,135,135},
-                  fillColor={0,0,240},
-                  fillPattern=FillPattern.Sphere),Polygon(
-                  points={{-26,64},{-26,52},{-30,52},{-40,42},{-40,-52},{-34,-52},
-                {-46,-64},{-46,44},{-26,64}},
-                  smooth=Smooth.None,
-                  fillColor={95,95,95},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None,
-                  lineColor={0,0,0}),Polygon(
-                  points={{66,64},{46,44},{46,-64},{66,-44},{66,64}},
-                  lineColor={0,0,0},
-                  fillColor={95,95,95},
-                  fillPattern=FillPattern.Solid),Rectangle(
-                  extent={{-20,42},{-14,-52}},
-                  fillPattern=FillPattern.Solid,
-                  fillColor={0,0,0},
-                  pattern=LinePattern.None),Rectangle(extent={{26,44},{46,-64}},
-              lineColor={0,0,0}),Rectangle(
-                  extent={{-66,44},{-46,-64}},
-                  lineColor={95,95,95},
-                  fillPattern=FillPattern.VerticalCylinder,
-                  fillColor={135,135,135}),Rectangle(extent={{-66,44},{-46,-64}},
-              lineColor={0,0,0}),Line(
-                  points={{-34,-52},{-46,-64}},
-                  color={0,0,0},
-                  smooth=Smooth.None),Polygon(
-                  points={{66,74},{66,64},{46,64},{34,52},{-26,52},{-26,64},{-46,
-                64},{-46,74},{66,74}},
-                  smooth=Smooth.None,
-                  fillPattern=FillPattern.Solid,
-                  fillColor={255,255,255},
-                  pattern=LinePattern.None),Polygon(
-                  points={{46,64},{66,64},{46,44},{26,44},{46,64}},
-                  lineColor={0,0,0},
-                  smooth=Smooth.None),Polygon(
-                  points={{-46,64},{-26,64},{-46,44},{-66,44},{-46,64}},
-                  lineColor={0,0,0},
-                  smooth=Smooth.None),Line(points={{26,42},{-40,42},{-30,52},{
-              34,52}}, color={0,0,0}),Line(
-                  points={{-26,64},{-26,52}},
-                  color={0,0,0},
-                  smooth=Smooth.None),Line(
-                  points={{-40,42},{-40,-52},{26,-52}},
-                  color={0,0,0},
-                  smooth=Smooth.None),Text(
-                  extent={{-150,60},{150,100}},
-                  textString="%name",
-                  lineColor={0,0,0})}), Diagram(coordinateSystem(
+            initialScale=0.1), graphics={
+            Rectangle(
+              extent={{-100,60},{100,100}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Polygon(
+              points={{-4,52},{-14,42},{6,42},{16,52},{-4,52}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{-10,52},{-20,42},{-14,42},{-4,52},{-10,52}},
+              lineColor={0,0,0},
+              fillPattern=FillPattern.HorizontalCylinder,
+              fillColor={0,0,0}),
+            Rectangle(
+              extent={{6,42},{12,-52}},
+              fillPattern=FillPattern.Solid,
+              fillColor={0,0,0},
+              pattern=LinePattern.None),
+            Polygon(
+              points={{16,52},{6,42},{12,42},{22,52},{16,52}},
+              lineColor={0,0,0},
+              fillPattern=FillPattern.HorizontalCylinder,
+              fillColor={0,0,0}),
+            Line(
+              points={{-40,42},{-40,-52}},
+              pattern=LinePattern.None,
+              smooth=Smooth.None),
+            Polygon(
+              points={{-46,64},{-66,44},{-46,44},{-26,64},{-46,64}},
+              lineColor={0,0,0},
+              fillColor={135,135,135},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{-39.6277,31.7996},{-67.912,17.6573}},
+              lineColor={0,0,0},
+              fillPattern=FillPattern.HorizontalCylinder,
+              rotation=45,
+              fillColor={255,255,255},
+              origin={56.5067,67.5353}),
+            Rectangle(
+              extent={{-14,42},{6,-52}},
+              lineColor={0,0,0},
+              fillPattern=FillPattern.VerticalCylinder,
+              fillColor={255,255,255}),
+            Line(points={{-30,52},{32,52}}, color={0,0,0}),
+            Rectangle(
+              extent={{-5.21738,-5.21961},{-33.5017,-33.5041}},
+              lineColor={0,0,170},
+              fillPattern=FillPattern.HorizontalCylinder,
+              rotation=45,
+              fillColor={0,0,240},
+              origin={31.9983,69.3803}),
+            Rectangle(
+              extent={{12,42},{52,-52}},
+              lineColor={0,0,170},
+              fillPattern=FillPattern.VerticalCylinder,
+              fillColor={0,0,240}),
+            Polygon(
+              points={{-26,64},{-46,44},{-46,-64},{-26,-44},{-26,64}},
+              lineColor={0,0,0},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{-5.21774,-5.2196},{-33.502,-33.5042}},
+              lineColor={170,0,0},
+              fillPattern=FillPattern.HorizontalCylinder,
+              rotation=45,
+              fillColor={240,0,0},
+              origin={-30.001,79.3803}),
+            Rectangle(
+              extent={{-60,42},{-20,-52}},
+              lineColor={170,0,0},
+              fillPattern=FillPattern.VerticalCylinder,
+              fillColor={240,0,0}),
+            Rectangle(
+              extent={{-76.648,66.211},{-119.073,52.0689}},
+              lineColor={95,95,95},
+              fillPattern=FillPattern.HorizontalCylinder,
+              rotation=45,
+              fillColor={135,135,135},
+              origin={65.0166,81.3801}),
+            Rectangle(
+              extent={{-76.648,66.211},{-119.073,52.0689}},
+              lineColor={95,95,95},
+              fillPattern=FillPattern.HorizontalCylinder,
+              rotation=45,
+              fillColor={135,135,135},
+              origin={157,81}),
+            Rectangle(
+              extent={{26,44},{46,-64}},
+              lineColor={95,95,95},
+              fillPattern=FillPattern.VerticalCylinder,
+              fillColor={135,135,135}),
+            Polygon(
+              points={{-26,64},{-26,52},{-30,52},{-30,60},{-26,64}},
+              smooth=Smooth.None,
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),
+            Ellipse(
+              extent={{-44,62},{-36,58}},
+              lineColor={135,135,135},
+              fillColor={240,0,0},
+              fillPattern=FillPattern.Sphere),
+            Ellipse(
+              extent={{36,50},{44,46}},
+              lineColor={135,135,135},
+              fillColor={0,0,240},
+              fillPattern=FillPattern.Sphere),
+            Polygon(
+              points={{-26,64},{-26,52},{-30,52},{-40,42},{-40,-52},{-34,-52},{
+                  -46,-64},{-46,44},{-26,64}},
+              smooth=Smooth.None,
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),
+            Polygon(
+              points={{66,64},{46,44},{46,-64},{66,-44},{66,64}},
+              lineColor={0,0,0},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{-20,42},{-14,-52}},
+              fillPattern=FillPattern.Solid,
+              fillColor={0,0,0},
+              pattern=LinePattern.None),
+            Rectangle(extent={{26,44},{46,-64}}, lineColor={0,0,0}),
+            Rectangle(
+              extent={{-66,44},{-46,-64}},
+              lineColor={95,95,95},
+              fillPattern=FillPattern.VerticalCylinder,
+              fillColor={135,135,135}),
+            Rectangle(extent={{-66,44},{-46,-64}}, lineColor={0,0,0}),
+            Line(
+              points={{-34,-52},{-46,-64}},
+              color={0,0,0},
+              smooth=Smooth.None),
+            Polygon(
+              points={{66,74},{66,64},{46,64},{34,52},{-26,52},{-26,64},{-46,64},
+                  {-46,74},{66,74}},
+              smooth=Smooth.None,
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None),
+            Polygon(
+              points={{46,64},{66,64},{46,44},{26,44},{46,64}},
+              lineColor={0,0,0},
+              smooth=Smooth.None),
+            Polygon(
+              points={{-46,64},{-26,64},{-46,44},{-66,44},{-46,64}},
+              lineColor={0,0,0},
+              smooth=Smooth.None),
+            Line(points={{26,42},{-40,42},{-30,52},{34,52}}, color={0,0,0}),
+            Line(
+              points={{-26,64},{-26,52}},
+              color={0,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{-40,42},{-40,-52},{26,-52}},
+              color={0,0,0},
+              smooth=Smooth.None),
+            Text(
+              extent={{-150,60},{150,100}},
+              textString="%name",
+              lineColor={0,0,0})}), Diagram(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             initialScale=0.1)));
@@ -692,7 +727,6 @@ This icon is designed for a <b>signal bus</b> connector.
   incorrect result.  It will return true if all of the functions pass.
   There are no inputs.</p></html>"));
       end TestFunctions;
-
     end Examples;
 
     package Chemistry "Functions to support chemistry"
@@ -770,7 +804,6 @@ This icon is designed for a <b>signal bus</b> connector.
   incorrect result.  It will return true if all of the functions pass.
   There are no inputs.</p></html>"));
         end TestFunctions;
-
       end Examples;
       extends Modelica.Icons.Package;
       function charge
@@ -1047,7 +1080,7 @@ An unrelated species may be included.");
             "Real arguments to function (must have sufficient richness)";
           parameter Real u2[:]=1:3
             "Real arguments to function (must have sufficient richness)";
-          // u2 must not be time-varying.  Otherwise, there is no requirement
+          // u2 must not be time-varying.  Otherwise, there's no requirement
           // that y1 == y2.
           Real y1 "Direct result of function";
           Real y2 "Integral of derivative of y1";
@@ -1122,7 +1155,7 @@ An unrelated species may be included.");
         protected
           final Real du1=der(u1) "Derivative of u1";
           final Real du2[:]=der(u2) "Derivative of u2";
-          // In Dymola 7.4, it's necessary to explicitly define these intermediate
+          // In Dymola 7.4, it is necessary to explicitly define these intermediate
           // variables (since there are second-order derivatives).
 
         initial equation
@@ -1172,7 +1205,6 @@ An unrelated species may be included.");
                       time,
                       {1,1,1,1},
                       -3);
-
         end Translatef;
       end Examples;
       extends Modelica.Icons.Package;
@@ -1193,7 +1225,7 @@ An unrelated species may be included.");
                 a .* {if n + i == 0 then ln(x) else 1/(n + i) for i in 1:size(a,
             1)},
                 n + 1) annotation (Inline=true);
-        // Note:  The derivative annotation is not used since f() is not
+        // Note:  The derivative annotation is not used since f() isn't
         // the direct and complete derivative of this function.
 
         annotation (Documentation(info="<html>
@@ -1248,13 +1280,13 @@ An unrelated species may be included.");
         // Here, Dymola 7.4 won't allow indexing via a[1 + max(0, 1 - n):end], so
         // a[1 + max(0, 1 - n):size(a, 1)] is necessary.
         annotation (Documentation(info="<html><p>For high-order polynomials, this
-  is more computationally efficient than the form 
+  is more computationally efficient than the form
   &Sigma;<i>a</i><sub><i>i</i></sub> <i>x</i><sup><i>n</i> + <i>i</i> - 1</sup>.</p>
-  
-  <p>Note that the order of the polynomial is 
+
+  <p>Note that the order of the polynomial is
   <code>n + size(a, 1) - 1</code> (not <code>n</code>).</p>
-  
-  <p>The derivative of this function is 
+
+  <p>The derivative of this function is
   <a href=\"modelica://FCSys.BaseClasses.Utilities.df\">df</a>().</p></html>"));
       end f;
 
@@ -1279,7 +1311,7 @@ An unrelated species may be included.");
                 da,
                 n) annotation (Inline=true, derivative(order=2) = d2f);
         annotation (Documentation(info="<html>
-<p>The derivative of this function is 
+<p>The derivative of this function is
   <a href=\"modelica://FCSys.BaseClasses.Utilities.d2f\">d2f</a>().</p></html>"));
       end df;
 
@@ -1304,7 +1336,6 @@ An unrelated species may be included.");
                 {a[i]*(n + i - 1)*(n + i - 2)*dx^2,(n + i - 1)*(2*da[i]*dx + a[
             i]*d2x),d2a[i]},
                 n + i - 3) for i in 1:size(a, 1)) annotation (Inline=true);
-
       end d2f;
     end Polynomial;
 
@@ -1455,7 +1486,6 @@ An unrelated species may be included.");
   vectorize (or \"matricize\") this function.  For example, <code>Sigma([1,2;3,4])</code> returns <code>{3,7}</code>.
   In contrast, <code>sum([1,2;3,4])</code> returns 10.</p></html>"));
     end Sigma;
-
   end Utilities;
 
   type Axis = enumeration(

@@ -267,8 +267,8 @@ package Characteristics
      C<sub>7</sub>HF<sub>13</sub>O<sub>5</sub>S.(C<sub>2</sub>F<sub>4</sub>)<sub>6</sub>, which is a typical
    configuration of Nafion sulfonate resin after hydrolysis
    [<a href=\"modelica://FCSys.UsersGuide.References\">Mark1999</a>, p. 234].</li>
-     <li>Thermodynamic data for this material is not available from 
-     [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].  The default specific heat capacity 
+     <li>Thermodynamic data for this material is not available from
+     [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].  The default specific heat capacity
      (<code>b_c=[4188*U.J*m/(U.kg*U.K)]</code>) based on [<a href=\"modelica://FCSys.UsersGuide.References\">Shah2009</a>, p. B472].</li>
      <li>According to [<a href=\"modelica://FCSys.UsersGuide.References\">Avogadro1.03</a>], the furthest distance
    between two atoms of C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S is 2259.8 pm and is between fluorines.
@@ -359,7 +359,7 @@ package Characteristics
                     a .* {if n + i == 0 then ln(x) else 1/(n + i) for i in 1:
               size(a, 1)},
                     n + 1) annotation (Inline=true);
-          // Note:  The derivative annotation is not used since f() is not
+          // Note:  The derivative annotation is not used since f() isn't
           // the direct and complete derivative of this function.
 
           annotation (Documentation(info="<html>
@@ -402,7 +402,7 @@ package Characteristics
                     da,
                     n) annotation (Inline=true, derivative(order=2) = d2f);
           annotation (Documentation(info="<html>
-<p>The derivative of this function is 
+<p>The derivative of this function is
   <a href=\"modelica://FCSys.BaseClasses.Utilities.d2f\">d2f</a>().</p></html>"));
         end df;
 
@@ -427,9 +427,7 @@ package Characteristics
                     {a[i]*(n + i - 1)*(n + i - 2)*dx^2,(n + i - 1)*(2*da[i]*dx
                + a[i]*d2x),d2a[i]},
                     n + i - 3) for i in 1:size(a, 1)) annotation (Inline=true);
-
         end d2f;
-
       end Polynomial;
       // Note:  This overrides FCSys.BaseClasses.Utilities.Polynomial which is
       // imported as Polynomial at the top level of FCSys.
@@ -553,7 +551,7 @@ package Characteristics
         // is simply the reference pressure (p0).  See [Rao 1997, p. 271].
 
         annotation (Documentation(info="<html>
-  <p>For an ideal gas, this function is independent of pressure 
+  <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
     </html>"));
       end h;
@@ -677,7 +675,6 @@ package Characteristics
         // integration limit for the real gas terms (non-ideal; besides the
         // first virial term) is p=0---the pressure limit at which a real gas
         // behaves as an ideal gas.  See [Rao1997, p. 272].
-
       end s;
 
       redeclare function v_Tp
@@ -701,7 +698,7 @@ package Characteristics
           inverse(p=p_Tv(T, v)),
           derivative=dv);
         annotation (Documentation(info="<html>
-  <p>The derivative of this function is 
+  <p>The derivative of this function is
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv\">dv</a>().</p></html>"));
       end v_Tp;
 
@@ -715,7 +712,6 @@ package Characteristics
      </p>
      <p>For more information, see the
      <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
-
     end Graphite;
   end 'e-';
 
@@ -1310,7 +1306,7 @@ package Characteristics
         // pressure.  (What is the proper relationship?)
 
         annotation (Documentation(info="<html>
-  <p>For an ideal gas, this function is independent of pressure 
+  <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
     </html>"));
       end c_V;
@@ -1374,7 +1370,6 @@ package Characteristics
 
       algorithm
         f_0 := alpha(T)/m;
-
       end f_0;
 
       replaceable function f_12
@@ -1389,7 +1384,6 @@ package Characteristics
 
       algorithm
         f_12 := alpha(T)/m;
-
       end f_12;
 
       function g "Gibbs potential as a function of temperature and pressure"
@@ -1410,7 +1404,6 @@ package Characteristics
           InlineNoEvent=true,
           Inline=true,
           smoothOrder=1);
-
       end g;
 
       replaceable function h
@@ -1496,7 +1489,7 @@ package Characteristics
         // is simply the reference pressure (p0).  See [Rao 1997, p. 271].
 
         annotation (Documentation(info="<html>
-  <p>For an ideal gas, this function is independent of pressure 
+  <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
     </html>"));
       end h;
@@ -1543,7 +1536,6 @@ package Characteristics
 
       algorithm
         r_th := alpha(T)/c_V(T, p);
-
       end r_th;
 
       replaceable function s
@@ -1633,7 +1625,6 @@ package Characteristics
         // integration limit for the real gas terms (non-ideal; besides the
         // first virial term) is p=0---the pressure limit at which a real gas
         // behaves as an ideal gas.  See [Rao1997, p. 272].
-
       end s;
 
       replaceable function v_Tp
@@ -1657,7 +1648,7 @@ package Characteristics
           inverse(p=p_Tv(T, v)),
           derivative=dv);
         annotation (Documentation(info="<html>
-  <p>The derivative of this function is 
+  <p>The derivative of this function is
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv\">dv</a>().</p></html>"));
       end v_Tp;
 
@@ -1665,7 +1656,7 @@ package Characteristics
     <p>This package is compatible with NASA CEA thermodynamic data
     [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>] and the virial equation of state
     [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>].  It may be used with
-    the assumption of ideal gas or of constant specific volume, although it is more general than 
+    the assumption of ideal gas or of constant specific volume, although it is more general than
     that.</p>
 
     <p>Assumptions:
@@ -1675,19 +1666,19 @@ package Characteristics
     <ul>
     <li>Currently, <code>formula</code> may not contain parentheses or brackets.</li>
     <li><code>r</code> is the Van der Waals radius or the radius for the
-    rigid-sphere (\"billiard-ball\") approximation of the kinetic theory of gases 
+    rigid-sphere (\"billiard-ball\") approximation of the kinetic theory of gases
     [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].</li>
     <li><code>b_v</code>: The powers of <i>p</i>/<i>T</i> increase by row.  The powers of
     <i>T</i> increase by column.  If <code>specVolPow[1] == -1</code>, then the rows
-    of <code>b_v</code> correspond to 1, <i>B</i><sup>*</sup><i>T</i>, 
+    of <code>b_v</code> correspond to 1, <i>B</i><sup>*</sup><i>T</i>,
     <i>C</i><sup>*</sup><i>T</i><sup>2</sup>, <i>D</i><sup>*</sup><i>T</i><sup>3</sup>, &hellip;,
     where
-    1, <i>B</i><sup>*</sup>, <i>C</i><sup>*</sup>, and <i>D</i><sup>*</sup> are 
+    1, <i>B</i><sup>*</sup>, <i>C</i><sup>*</sup>, and <i>D</i><sup>*</sup> are
     the first, second, third, and fourth coefficients in the volume-explicit
     virial equation of state
     ([<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>, pp. 1&ndash;2]).
     Currently,
-    virial equations of state are supported up to the fourth coefficient (<i>D</i><sup>*</sup>).  
+    virial equations of state are supported up to the fourth coefficient (<i>D</i><sup>*</sup>).
     If additional terms are required, review and modify the definition of <code>b_p</code>.</li>
     <li><code>specVolPow</code> is defined as a <code>Real</code> vector.  However,
     special modifications are necessary if non-integer values are used
@@ -1707,7 +1698,7 @@ package Characteristics
     temperature intervals.  The first column is for specific enthalpy and has dimensionality
     L2.M/(N.T2).  The second is for specific entropy and is dimensionless.
     The integration constants for enthalpy are defined such that the enthalpy at
-    25 &deg;C is the specific enthalpy of formation at that temperature and reference pressure 
+    25 &deg;C is the specific enthalpy of formation at that temperature and reference pressure
     [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>, p. 2].
     The integration constants for specific entropy are defined such that specific entropy is absolute.</li>
     <li><code>T_lim_c</code>: The first and last entries are the minimum and
@@ -1726,8 +1717,8 @@ package Characteristics
     The <code>p_min</code> parameter is used to guard against the logarithm of non-positive pressures.
     To disable this protection (and simplify the translated code), set <code>p_min</code> to zero or a
     negative pressure.</li>
-    <li>If the material is gaseous (<code>phase == \"gas\"</code>), then the first virial coefficient 
-    must be independent of temperature.  Otherwise, the function for specific enthalpy 
+    <li>If the material is gaseous (<code>phase == \"gas\"</code>), then the first virial coefficient
+    must be independent of temperature.  Otherwise, the function for specific enthalpy
     (<a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.h\">h</a>) will be ill-posed.
     Typically the first virial coefficient is one (or equivalently <code>U.R</code>), which satisfies
     this requirement.</li>
@@ -1742,7 +1733,6 @@ package Characteristics
         EnthalpyOfFormationAt25degC
           "Enthalpy at 25 degC and p0 is enthalpy of formation at 25 degC and p0 (if no additional offset)")
       "Enumeration for the reference enthalpy of a species";
-
   end BaseClasses;
   annotation (Documentation(info="<html>
   <p>Additional materials may be included as needed.  The thermodynamic data for

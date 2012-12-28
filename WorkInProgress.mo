@@ -356,11 +356,10 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
 
     Connectors.ChemicalInput ion1(each final n_vel=n_vel)
       "Connector for the 1st ion" annotation (Placement(transformation(extent={
-              {-70,-10},{-50,10}}), iconTransformation(extent={{-70,-10},{-50,
-              10}})));
+              {-70,-10},{-50,10}}),iconTransformation(extent={{-70,-10},{-50,10}})));
     Connectors.ChemicalInput ion2(each final n_vel=n_vel)
       "Connector for the 2nd ion" annotation (Placement(transformation(extent={
-              {50,-10},{70,10}}), iconTransformation(extent={{50,-10},{70,10}})));
+              {50,-10},{70,10}}),iconTransformation(extent={{50,-10},{70,10}})));
 
   equation
     // Aliases
@@ -800,7 +799,6 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
         da,
         n) + BaseClasses.Utilities.Polynomial.F(x, d2a)
       annotation (Inline=true);
-
   end d2F;
 
   function dF
@@ -826,7 +824,7 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
         n) annotation (Inline=true, derivative(order=2) = d2F);
 
     annotation (Documentation(info="<html>
-  <p>The derivative of this function is 
+  <p>The derivative of this function is
   <a href=\"modelica://FCSys.BaseClasses.Utilities.dpoly\">d2F</a>().</p></html>"));
   end dF;
   annotation (Commands(file="resources/scripts/units-values.mos"
