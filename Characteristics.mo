@@ -705,7 +705,6 @@ package Characteristics
       annotation (Documentation(info="<html>
      <p>Assumptions:
      <ol>
-     <li>There is one free (conduction) electron per atom of carbon.</li>
      <li>The pressure-volume relationship is based on the Drude and Summerfeld theories of metals
      [<a href=\"modelica://FCSys.UsersGuide.References\">Ashcroft1976</a>, pp. 4&ndash;39].</li>
      </ol>
@@ -1037,11 +1036,11 @@ package Characteristics
         "<html>Constants in NASA correlation for thermal conductivity (<i>b<sub>&lambda;</sub>)</html>";
 
       redeclare function f_12
-        "<html>Fluidity as a function of temperature and pressure (<i>f</i><sub>12</sub>)</html>"
+        "<html>Shear fluidity as a function of temperature and pressure (<i>f</i><sub>12</sub>)</html>"
 
         extends Modelica.Icons.Function;
 
-        input Q.TemperatureAbsolute T "Temperature";
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         final input Q.PressureAbsolute p=1*U.atm "Pressure";
         // Note:  Pressure is provided for generality but isn't used here.
         output Q.Fluidity f_12 "Fluidity";
@@ -1088,7 +1087,7 @@ package Characteristics
 
         extends Modelica.Icons.Function;
 
-        input Q.TemperatureAbsolute T "Temperature";
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.PressureAbsolute p=1*U.atm "Pressure";
         // Note:  Pressure is provided for generality but isn't used here.
         output Q.ResistivityThermal r_th "Thermal resistivity";
@@ -1217,7 +1216,7 @@ package Characteristics
   <p>This function is based on the kinetic theory of gases with the rigid-sphere (\"billiard-ball\")
   assumption [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].  It is
   independent of pressure or specific volume.  This independence very accurately matches the measured
-  fluidity of gases.  However, the fluidity varies by species and
+  shear fluidity of gases.  However, the shear fluidity varies by species and
   generally falls more rapidly with temperature than shown by this function
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 41].</p></html>"));
       end alpha;
@@ -1295,7 +1294,7 @@ package Characteristics
         // Note that it reduces to -1 for an ideal gas---the -1 in the gas
         // branch of the condition.
 
-        // **Check derivation in [Moran2004].  Can this be simplified?
+        // TODO:  Check derivation in [Moran2004].  Can this be simplified?
 
         // TODO:  Verify that [Dymond2002] is correct.  Is the reference truly
         // c_V of ideal gas at reference pressure (and not actual pressure)?
@@ -1373,7 +1372,7 @@ package Characteristics
       end f_0;
 
       replaceable function f_12
-        "<html>Fluidity as a function of temperature and pressure (<i>f</i><sub>12</sub>)</html>"
+        "<html>Shear fluidity as a function of temperature and pressure (<i>f</i><sub>12</sub>)</html>"
 
         extends Modelica.Icons.Function;
 

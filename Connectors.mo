@@ -170,14 +170,14 @@ package Connectors "Declarative and imperative connectors"
             lineThickness=0.5)}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics={Ellipse(
-            extent={{-10,10},{10,-10}},
-            lineColor={127,127,127},
-            fillColor={191,191,191},
-            fillPattern=FillPattern.Solid,
-            lineThickness=0.5), Text(
-            extent={{-100,20},{100,60}},
-            textString="%name",
-            lineColor={0,0,0})}));
+              extent={{-10,10},{10,-10}},
+              lineColor={127,127,127},
+              fillColor={191,191,191},
+              fillPattern=FillPattern.Solid,
+              lineThickness=0.5),Text(
+              extent={{-100,20},{100,60}},
+              textString="%name",
+              lineColor={0,0,0})}));
 
   end FaceBusInternal;
 
@@ -357,20 +357,14 @@ package Connectors "Declarative and imperative connectors"
       Dialog(compact=true,group=
             "Boundary conditions (will remove subconnectors)"));
 
-    // Linear momentum
     BaseClasses.MechanicalExchange mechanical(final n_vel=n_vel) if
       uniformVelocity;
-
-    // Heat
     BaseClasses.Heat heat if isothermal;
 
     annotation (
       Documentation(info="<html>
-  <p>Note that the geometric orientation is globally referenced.  For example, force is positive
-  in the positive-x direction&mdash;not from the interface into component as is pressure.  Thus,
-  force is the rate of globally-referenced linear momentum into the component.
-  </p>
-    <p>For more information, see the documentation in the
+    <p>For more information, see the <a href=\"modelica://FCSys.Connectors.BaseClasses.MechanicalExchange\">MechanicalExchange</a> 
+    subconnector or the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Diagram(graphics={
@@ -525,6 +519,51 @@ package Connectors "Declarative and imperative connectors"
 
   end InertDalton;
 
+  expandable connector InertInternal
+    "<html>Internal <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> connector</html>"
+
+    parameter Integer n_vel(
+      final min=0,
+      final max=3) = 0
+      "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>"
+      annotation (HideResult=true);
+
+    BaseClasses.MechanicalExchange mechanical(final n_vel=n_vel);
+    BaseClasses.Heat heat;
+
+    annotation (
+      defaultComponentPrefixes="protected",
+      defaultComponentName="inert",
+      Documentation(info="<html><p>
+    This is copy of the <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> connector, except that it
+    has a smaller icon, a default <code>protected</code> prefix, and the subconnectors are always included.
+    For more information, see that connector.</p></html>"),
+      Icon(graphics={Ellipse(
+            extent={{-100,100},{100,-100}},
+            lineColor={72,90,180},
+            fillPattern=FillPattern.Solid,
+            fillColor={102,128,255}), Ellipse(
+            extent={{-60,60},{60,-60}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            lineColor={72,90,180})}),
+      Diagram(graphics={
+          Ellipse(
+            extent={{-10,10},{10,-10}},
+            lineColor={72,90,180},
+            fillPattern=FillPattern.Solid,
+            fillColor={102,128,255}),
+          Text(
+            extent={{-100,20},{100,60}},
+            textString="%name",
+            lineColor={0,0,0}),
+          Ellipse(
+            extent={{-4,4},{4,-4}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            lineColor={72,90,180})}));
+
+  end InertInternal;
 
   connector MaterialTransport "Connector to transport material"
 
@@ -536,20 +575,17 @@ package Connectors "Declarative and imperative connectors"
       Documentation(info="<html><p>For more information, see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Diagram(graphics={
-          Text(
-            extent={{-100,36},{100,76}},
-            textString="%name",
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-30,30},{30,-30}},
-            lineColor={0,0,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Line(
-            points={{-30,0},{30,0}},
-            color={0,0,0},
-            smooth=Smooth.None)}),
+      Diagram(graphics={Text(
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0}),Rectangle(
+              extent={{-30,30},{30,-30}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Line(
+              points={{-30,0},{30,0}},
+              color={0,0,0},
+              smooth=Smooth.None)}),
       Icon(graphics={Rectangle(
             extent={{-100,100},{100,-100}},
             lineColor={0,0,0},
@@ -580,20 +616,17 @@ package Connectors "Declarative and imperative connectors"
     <p>For more information, see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Diagram(graphics={
-          Text(
-            extent={{-100,36},{100,76}},
-            textString="%name",
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-30,30},{30,-30}},
-            lineColor={0,0,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Line(
-            points={{0,30},{0,-30}},
-            color={0,0,0},
-            smooth=Smooth.None)}),
+      Diagram(graphics={Text(
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0}),Rectangle(
+              extent={{-30,30},{30,-30}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Line(
+              points={{0,30},{0,-30}},
+              color={0,0,0},
+              smooth=Smooth.None)}),
       Icon(graphics={Rectangle(
             extent={{-100,100},{100,-100}},
             lineColor={0,0,0},
@@ -613,24 +646,20 @@ package Connectors "Declarative and imperative connectors"
       Documentation(info="<html>For information, see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Diagram(graphics={
-          Text(
-            extent={{-100,36},{100,76}},
-            textString="%name",
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-30,30},{30,-30}},
-            lineColor={0,0,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Line(
-            points={{-30,30},{30,-30}},
-            color={0,0,0},
-            smooth=Smooth.None),
-          Line(
-            points={{30,30},{-30,-30}},
-            color={0,0,0},
-            smooth=Smooth.None)}),
+      Diagram(graphics={Text(
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0}),Rectangle(
+              extent={{-30,30},{30,-30}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Line(
+              points={{-30,30},{30,-30}},
+              color={0,0,0},
+              smooth=Smooth.None),Line(
+              points={{30,30},{-30,-30}},
+              color={0,0,0},
+              smooth=Smooth.None)}),
       Icon(graphics={
           Rectangle(
             extent={{-100,100},{100,-100}},
@@ -922,14 +951,10 @@ Protected connector with one output signal of type <code>Real</code>.</p>
       Q.Velocity phi[n_vel](each nominal=1*U.cm/U.s) "Velocity";
       flow Q.VolumeRate mPhidot[n_vel](each nominal=1*U.N) "Force";
       annotation (defaultComponentName="mechanical",Documentation(info="<html>
-**Update:
-  <p>Note that the geometric orientations of shear stress and velocity
-  are referenced locally.  As defined by
-  <a href=\"modelica://FCSys.BaseClasses.Utilities.inSign\">inSign</a>(),
-  force and velocity in the positive direction on the negative side or face
-  of a region or subregion is in the globally-referenced positive direction.  The
-  positive direction on the positive side is globally negative.
+  <p>Note that the geometric orientation is globally referenced.  Thus,
+  force is the rate of globally-referenced linear momentum into the component.
   </p>
+  
     <p>For more information, see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"));
 

@@ -1548,8 +1548,8 @@ package Subregions
     model Phase "Phase with all species conditionally included"
       extends BaseClasses.NullPhase(final n_spec=countTrue({inclC,
             inclC19HF37O5S,'incle-',inclH2,inclH2O,'inclH+',inclN2,inclO2}),
-          common(phi(fixed=if inclC or inclC19HF37O5S then fill(false, n_vel)
-                 else {initXVel,initYVel,initZVel}[cartAxes])));
+          joint(mechanical(phi(fixed=if inclC or inclC19HF37O5S then fill(false,
+                  n_vel) else {initXVel,initYVel,initZVel}[cartAxes]))));
 
       parameter Boolean inclReact=true "Include reaction(s), as appropriate"
         annotation (
@@ -1847,7 +1847,7 @@ package Subregions
           points={{-7,7},{-20,20}},
           color={208,104,0},
           smooth=Smooth.None));
-      connect(C.common, common) annotation (Line(
+      connect(C.joint, joint) annotation (Line(
           points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -2010,7 +2010,7 @@ package Subregions
           points={{-7,7},{-20,20}},
           color={208,104,0},
           smooth=Smooth.None));
-      connect(C19HF37O5S.common, common) annotation (Line(
+      connect(C19HF37O5S.joint, joint) annotation (Line(
           points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -2178,7 +2178,7 @@ package Subregions
           points={{-7,7},{-20,20}},
           color={208,104,0},
           smooth=Smooth.None));
-      connect('e-'.common, common) annotation (Line(
+      connect('e-'.joint, joint) annotation (Line(
           points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -2340,7 +2340,7 @@ package Subregions
           points={{-7,7},{-20,20}},
           color={208,104,0},
           smooth=Smooth.None));
-      connect(H2.common, common) annotation (Line(
+      connect(H2.joint, joint) annotation (Line(
           points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -2496,7 +2496,7 @@ package Subregions
           points={{-7,7},{-20,20}},
           color={208,104,0},
           smooth=Smooth.None));
-      connect(H2O.common, common) annotation (Line(
+      connect(H2O.joint, joint) annotation (Line(
           points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -2652,7 +2652,7 @@ package Subregions
           points={{-7,7},{-20,20}},
           color={208,104,0},
           smooth=Smooth.None));
-      connect('H+'.common, common) annotation (Line(
+      connect('H+'.joint, joint) annotation (Line(
           points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -2814,7 +2814,7 @@ package Subregions
           points={{-7,7},{-20,20}},
           color={208,104,0},
           smooth=Smooth.None));
-      connect(N2.common, common) annotation (Line(
+      connect(N2.joint, joint) annotation (Line(
           points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -2970,7 +2970,7 @@ package Subregions
           points={{-7,7},{-20,20}},
           color={208,104,0},
           smooth=Smooth.None));
-      connect(O2.common, common) annotation (Line(
+      connect(O2.joint, joint) annotation (Line(
           points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -3140,6 +3140,7 @@ package Subregions
 
         Diagram(graphics),
         Icon(graphics));
+
     end Phase;
 
     model Gas "Phase to represent gas"
@@ -3309,7 +3310,7 @@ package Subregions
           points={{-7,7},{-20,20}},
           color={208,104,0},
           smooth=Smooth.None));
-      connect(H2.common, common) annotation (Line(
+      connect(H2.joint, joint) annotation (Line(
           points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -3465,7 +3466,7 @@ package Subregions
           points={{-7,7},{-20,20}},
           color={208,104,0},
           smooth=Smooth.None));
-      connect(H2O.common, common) annotation (Line(
+      connect(H2O.joint, joint) annotation (Line(
           points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -3621,7 +3622,7 @@ package Subregions
           points={{-7,7},{-20,20}},
           color={208,104,0},
           smooth=Smooth.None));
-      connect(N2.common, common) annotation (Line(
+      connect(N2.joint, joint) annotation (Line(
           points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -3777,7 +3778,7 @@ package Subregions
           points={{-7,7},{-20,20}},
           color={208,104,0},
           smooth=Smooth.None));
-      connect(O2.common, common) annotation (Line(
+      connect(O2.joint, joint) annotation (Line(
           points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -3936,12 +3937,13 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
+
     end Gas;
 
     model Graphite "Phase to represent graphite"
       extends BaseClasses.NullPhase(final n_spec=countTrue({inclC,'incle-'}),
-          common(phi(fixed=if inclC then fill(false, n_vel) else {initXVel,
-                initYVel,initZVel}[cartAxes])));
+          joint(mechanical(phi(fixed=if inclC then fill(false, n_vel) else {
+                  initXVel,initYVel,initZVel}[cartAxes]))));
 
       // Conditionally include species.
       parameter Boolean inclC=false "Carbon (C)" annotation (
@@ -4009,7 +4011,7 @@ package Subregions
           points={{-7,7},{-20,20}},
           color={208,104,0},
           smooth=Smooth.None));
-      connect(C.common, common) annotation (Line(
+      connect(C.joint, joint) annotation (Line(
           points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -4157,7 +4159,7 @@ package Subregions
           points={{-7,7},{-20,20}},
           color={208,104,0},
           smooth=Smooth.None));
-      connect('e-'.common, common) annotation (Line(
+      connect('e-'.joint, joint) annotation (Line(
           points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -4313,12 +4315,14 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
+
     end Graphite;
 
     model Ionomer "Phase to represent ionomer"
       extends BaseClasses.NullPhase(final n_spec=countTrue({inclC19HF37O5S,
-            inclH2O,'inclH+'}), common(phi(fixed=if inclC19HF37O5S then fill(
-                false, n_vel) else {initXVel,initYVel,initZVel}[cartAxes])));
+            inclH2O,'inclH+'}), joint(mechanical(phi(fixed=if inclC19HF37O5S
+                   then fill(false, n_vel) else {initXVel,initYVel,initZVel}[
+                  cartAxes]))));
 
       // Conditionally include species.
       parameter Boolean inclC19HF37O5S=false
@@ -4421,7 +4425,7 @@ package Subregions
           points={{-7,7},{-20,20}},
           color={208,104,0},
           smooth=Smooth.None));
-      connect(C19HF37O5S.common, common) annotation (Line(
+      connect(C19HF37O5S.joint, joint) annotation (Line(
           points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -4589,7 +4593,7 @@ package Subregions
           points={{-7,7},{-20,20}},
           color={208,104,0},
           smooth=Smooth.None));
-      connect('H+'.common, common) annotation (Line(
+      connect('H+'.joint, joint) annotation (Line(
           points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -4751,7 +4755,7 @@ package Subregions
           points={{-7,7},{-20,20}},
           color={208,104,0},
           smooth=Smooth.None));
-      connect(H2O.common, common) annotation (Line(
+      connect(H2O.joint, joint) annotation (Line(
           points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -4910,6 +4914,7 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
+
     end Ionomer;
 
     model Liquid "Phase to represent liquid"
@@ -4958,7 +4963,7 @@ package Subregions
           points={{-7,7},{-20,20}},
           color={208,104,0},
           smooth=Smooth.None));
-      connect(H2O.common, common) annotation (Line(
+      connect(H2O.joint, joint) annotation (Line(
           points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -5114,6 +5119,7 @@ package Subregions
 
         Diagram(graphics),
         Icon(graphics));
+
     end Liquid;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -5241,16 +5247,16 @@ package Subregions
         final parameter Integer cartAxes[n_vel]=index(inclVel)
           "Cartesian-axis indices of the axes of linear momentum";
 
-        Connectors.InertInternal common(
+        Connectors.InertInternal joint(
           n_vel=n_vel,
-          phi(
-            each stateSelect=StateSelect.prefer,
-            final start=phi_IC[cartAxes],
-            fixed={initXVel,initYVel,initZVel}[cartAxes]),
-          T(
-            stateSelect=StateSelect.prefer,
-            final start=T_IC,
-            fixed=initTemp)) if reduceFinal
+          mechanical(phi(
+              each stateSelect=StateSelect.prefer,
+              final start=phi_IC[cartAxes],
+              fixed={initXVel,initYVel,initZVel}[cartAxes])),
+          heat(T(
+              stateSelect=StateSelect.prefer,
+              final start=T_IC,
+              fixed=initTemp))) if reduceFinal
           "Internal connector to directly couple velocity and temperature"
           annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
@@ -5337,6 +5343,7 @@ package Subregions
                 textString="%name",
                 lineColor={0,0,0})}),
           Diagram(graphics));
+
       end NullPhase;
     end BaseClasses;
   end Phases;
@@ -5348,16 +5355,12 @@ package Subregions
       extends Modelica.Icons.Package;
       package Graphite "C graphite"
         extends Modelica.Icons.Package;
-        model Calibrated "Ideal correlations, with adjustment factors"
+        model Calibrated "Correlations with adjustment factors"
           extends SpeciesInertStagnant(redeclare replaceable package Data =
-                FCSys.Characteristics.C.Graphite, alpha_Qdot=k_alpha_Qdot*
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(T));
+                FCSys.Characteristics.C.Graphite, r_th=k_r_th*Data.r_th(T));
 
-          parameter Q.NumberAbsolute k_alpha_tau(final nominal=1) = 1
-            "<html>Adjustment factor for fluidity (<i>k</i><sub>&alpha; &tau;</sub>)</html>"
-            annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_alpha_Qdot(final nominal=1) = 1
-            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_r_th(final nominal=1) = 1
+            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub><i>r</i> th</sub>)</html>"
             annotation (Dialog(group="Material properties"));
 
           annotation (
@@ -5370,16 +5373,15 @@ package Subregions
                     {100,100}}), graphics),
             Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics={Text(
-                          extent={{-150,90},{-118,52}},
-                          lineColor={0,0,255},
-                          textString="%t.test")}));
+                  extent={{-150,90},{-118,52}},
+                  lineColor={0,0,255},
+                  textString="%t.test")}));
 
         end Calibrated;
 
-        model Correlated "Ideal correlations from kinetic theory"
+        model Correlated "Correlated properties"
           extends SpeciesInertStagnant(redeclare replaceable package Data =
-                FCSys.Characteristics.C.Graphite, alpha_Qdot=
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(T));
+                FCSys.Characteristics.C.Graphite, r_th=Data.r_th(T));
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -5412,7 +5414,7 @@ package Subregions
             defaultComponentName="C",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Fixed specific heat capacity (independent of temperature)
-    <li>Transport and exchange properties (&alpha;<sub><i>Q&#775;</i></sub>, &alpha;<sub><i>Q&#775;</i></sub>, etc.) are fixed (e.g., independent of temperature)</li>
+    <li>Thermal resistivity <i>r</i><sub>th</sub> is fixed (e.g., independent of temperature)</li>
     </ol></p>
 
     <p>The default isobaric specific heat capacity (<code>b_c=[0, 935*U.J*Data.m/(U.kg*U.K)]</code>) and thermal
@@ -5431,12 +5433,12 @@ package Subregions
     </tr>
     <tr>
       <th rowspan=2 valign=\"middle\"><code>c_p*U.kg<br>*U.K<br>/(U.J<br>*Data.m)</code></th>
-      <th rowspan=2 valign=\"middle\"><code>alpha_Qdot<br>*U.K<br>/(U.m<br>*U.K)</code></th>
-      <th rowspan=2 valign=\"middle\"><code>alpha_Qdot<br>*U.W<br>/(U.m<br>*U.K)</code></th>
+      <th rowspan=2 valign=\"middle\"><code>r_th<br>*U.W<br>/(U.m<br>*U.K)</code></th>
+      <th rowspan=2 valign=\"middle\"><code>r_th<br>*U.W<br>/(U.m<br>*U.K)</code></th>
       <th rowspan=2 valign=\"middle\"><code>c_p*U.kg<br>*U.W<br>/(U.J<br>*Data.m)</code></th>
-      <th rowspan=1 colspan=2><code>alpha_Qdot*U.W/(U.m*U.K)</code></th>
+      <th rowspan=1 colspan=2><code>r_th*U.W/(U.m*U.K)</code></th>
       <th rowspan=2 valign=\"middle\"><code>c_p*U.kg<br>*U.K<br>/(U.J<br>*Data.m)</code></th>
-      <th rowspan=1 colspan=2><code>alpha_Qdot*U.W/(U.m*U.K)</code></th>
+      <th rowspan=1 colspan=2><code>r_th*U.W/(U.m*U.K)</code></th>
     </tr>
     <tr>
       <th valign=\"middle\">Parallel<br>to layers</th>
@@ -5467,16 +5469,12 @@ package Subregions
       package Solid
         "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S solid</html>"
         extends Modelica.Icons.Package;
-        model Calibrated "Ideal correlations, with adjustment factors"
+        model Calibrated "Correlations with adjustment factors"
           extends SpeciesInertStagnant(redeclare replaceable package Data =
-                FCSys.Characteristics.C19HF37O5S.Solid, alpha_Qdot=k_alpha_Qdot
-                *FCSys.Characteristics.BaseClasses.Characteristic.alpha(T));
+                FCSys.Characteristics.C19HF37O5S.Solid, r_th=k_r_th*Data.r_th(T));
 
-          parameter Q.NumberAbsolute k_alpha_tau(final nominal=1) = 1
-            "<html>Adjustment factor for fluidity (<i>k</i><sub>&alpha; &tau;</sub>)</html>"
-            annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_alpha_Qdot(final nominal=1) = 1
-            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_r_th(final nominal=1) = 1
+            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub><i>r</i> th</sub>)</html>"
             annotation (Dialog(group="Material properties"));
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -5489,10 +5487,9 @@ package Subregions
 
         end Calibrated;
 
-        model Correlated "Ideal correlations from kinetic theory"
+        model Correlated "Correlated properties"
           extends SpeciesInertStagnant(redeclare replaceable package Data =
-                FCSys.Characteristics.C19HF37O5S.Solid, alpha_Qdot=
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(T));
+                FCSys.Characteristics.C19HF37O5S.Solid, r_th=Data.r_th(T));
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -5504,19 +5501,18 @@ package Subregions
         model Fixed "Fixed properties"
           extends SpeciesInertStagnant(redeclare replaceable package Data =
                 FCSys.Characteristics.C19HF37O5S.Solid, redeclare parameter
-              Q.Resistivity alpha_Qdot=
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha());
+              Q.Resistivity r_th=Data.r_th());
 
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="C19HF37O5S",
             Documentation(info="<html><p>Assumptions:
     <ol>
-    <li>Transport and exchange properties (&alpha;<sub><i>Q&#775;</i></sub>, &alpha;<sub><i>Q&#775;</i></sub>, etc.) are fixed (e.g., independent of temperature)</li>
+    <li>Thermal resistivity <i>r</i><sub>th</sub> is fixed (e.g., independent of temperature)</li>
     </ol></p>
 
     <p>Notes:
-    <ul><li>The default thermal transport resistivity (<code>alpha_Qdot=U.m*U.K/(0.16*U.W)</code>) is of dry
+    <ul><li>The default thermal resistivity (<code>r_th=U.m*U.K/(0.16*U.W)</code>) is of dry
   Nafion 115 [<a href=\"modelica://FCSys.UsersGuide.References\">Kandlikar2009</a>, p. 1277.</li>
   </ul>
   </p><p>For more information, see the
@@ -5529,28 +5525,21 @@ package Subregions
       extends Modelica.Icons.Package;
       package Graphite "<html>e<sup>-</sup> in graphite</html>"
         extends Modelica.Icons.Package;
-        model Calibrated "Ideal correlations, with adjustment factors"
+        model Calibrated "Correlations with adjustment factors"
           extends Species0Amount(
             redeclare replaceable package Data =
                 FCSys.Characteristics.'e-'.Graphite,
-            initMethPartNum=InitMethScalar.Amount,
-            alpha_Ndot=k_alpha_Ndot*
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
-            alpha_tau=k_alpha_tau*
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
-            alpha_Qdot=k_alpha_Qdot*
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(T));
+            f_0=k_f_0*Data.f_0(T),
+            f_12=k_f_12*Data.f_12(T),
+            r_th=k_r_th*Data.r_th(T));
 
-          // Note:  initMethPartNum may not be Pressure (which is default) since the
-          // EOS doesn't involve pressure.
-
-          parameter Q.NumberAbsolute k_alpha_Ndot(final nominal=1) = 1
-            "<html>Adjustment factor for material transport resistivity (<i>k</i><sub>&alpha; <i>N&#775;</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_f_0(final nominal=1) = 1
+            "<html>Adjustment factor for bulk fluidity (<i>k</i><sub><i>f</i> 0</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_alpha_tau(final nominal=1) = 1
-            "<html>Adjustment factor for fluidity (<i>k</i><sub>&alpha; &tau;</sub>)</html>"
+          parameter Q.NumberAbsolute k_f_12(final nominal=1) = 1
+            "<html>Adjustment factor for shear fluidity (<i>k</i><sub><i>f</i> 12</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_alpha_Qdot(final nominal=1) = 1
+          parameter Q.NumberAbsolute k_r_th(final nominal=1) = 1
             "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S&#775;</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
 
@@ -5561,19 +5550,13 @@ package Subregions
                   "<html><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
         end Calibrated;
 
-        model Correlated "Ideal correlations from kinetic theory"
+        model Correlated "Correlated properties"
           extends Species0Amount(
             redeclare replaceable package Data =
                 FCSys.Characteristics.'e-'.Graphite,
-            initMethPartNum=InitMethScalar.Amount,
-            alpha_Ndot=FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
-
-            alpha_tau=FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
-
-            alpha_Qdot=FCSys.Characteristics.BaseClasses.Characteristic.alpha(T));
-
-          // Note:  initMethPartNum may not be Pressure (which is default) since the
-          // EOS doesn't involve pressure.
+            f_0=Data.f_0(T),
+            f_12=Data.f_12(T),
+            r_th=Data.r_th(T));
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -5586,16 +5569,9 @@ package Subregions
           extends Species0Amount(
             redeclare replaceable package Data =
                 FCSys.Characteristics.'e-'.Graphite,
-            initMethPartNum=InitMethScalar.Amount,
-            redeclare parameter Q.Resistivity alpha_Ndot=
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(),
-            redeclare parameter Q.Resistivity alpha_tau=
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(),
-            redeclare parameter Q.Resistivity alpha_Qdot=
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha());
-
-          // Note:  initMethPartNum may not be Pressure (which is default) since the
-          // EOS doesn't involve pressure.
+            redeclare parameter Q.Resistivity f_0=Data.f_0(),
+            redeclare parameter Q.Resistivity f_12=Data.f_12(),
+            redeclare parameter Q.Resistivity r_th=Data.r_th());
 
           annotation (
             group="Material properties",
@@ -5614,45 +5590,23 @@ package Subregions
       extends Modelica.Icons.Package;
       package Gas "<html>H<sub>2</sub> gas</html>"
         extends Modelica.Icons.Package;
-        model Calibrated
-          "Ideal or empirical correlations, w/ adjustment factors"
+        model Calibrated "Correlations with adjustment factors"
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.H2.Gas (
                   b_v=[1], specVolPow={-1,0}),
-            alpha_Ndot=k_alpha_Ndot*
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
-            alpha_tau=k_alpha_tau*
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
-            alpha_Qdot=k_alpha_Qdot*
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(T));
+            f_0=k_f_0*Data.f_0(T),
+            f_12=k_f_12*Data.f_12(T),
+            r_th=k_r_th*Data.r_th(T));
 
-          parameter Q.NumberAbsolute k_alpha_Ndot(final nominal=1) = 1
-            "<html>Adjustment factor for material transport resistivity (<i>k</i><sub>&alpha; <i>N&#775;</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_f_0(final nominal=1) = 1
+            "<html>Adjustment factor for bulk fluidity (<i>k</i><sub><i>f</i> 0</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_alpha_tau(final nominal=1) = 1
-            "<html>Adjustment factor for fluidity (<i>k</i><sub>&alpha; &tau;</sub>)</html>"
+          parameter Q.NumberAbsolute k_f_12(final nominal=1) = 1
+            "<html>Adjustment factor for shear fluidity (<i>k</i><sub><i>f</i> 12</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_alpha_Qdot(final nominal=1) = 1
-            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_r_th(final nominal=1) = 1
+            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub><i>r</i> th</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Boolean empiricalMechanical=true
-            "Use empirical correlation for fluidity (otherwise, theoretical)"
-            annotation (
-            Evaluate=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(
-              tab="Assumptions",
-              group="Correlations",
-              compact=true));
-          parameter Boolean empiricalThermal=true
-            "Use empirical correlation for thermal resistivity (otherwise, theoretical)"
-            annotation (
-            Evaluate=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(
-              tab="Assumptions",
-              group="Correlations",
-              compact=true));
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -5663,34 +5617,14 @@ package Subregions
           </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
         end Calibrated;
 
-        model Correlated "Ideal (kinetic) or empirical correlations"
+        model Correlated "Correlated properties"
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.H2.Gas (
                   b_v=[1], specVolPow={-1,0}),
-            alpha_Ndot=FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
+            f_0=Data.f_0(T),
+            f_12=Data.f_12(T),
+            r_th=Data.r_th(T));
 
-            alpha_tau=FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
-
-            alpha_Qdot=FCSys.Characteristics.BaseClasses.Characteristic.alpha(T));
-
-          parameter Boolean empiricalMechanical=true
-            "Use empirical correlation for fluidity (otherwise, theoretical)"
-            annotation (
-            Evaluate=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(
-              tab="Assumptions",
-              group="Correlations",
-              compact=true));
-          parameter Boolean empiricalThermal=true
-            "Use empirical correlation for thermal resistivity (otherwise, theoretical)"
-            annotation (
-            Evaluate=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(
-              tab="Assumptions",
-              group="Correlations",
-              compact=true));
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2",
@@ -5704,11 +5638,9 @@ package Subregions
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.H2.Gas (
                   b_v=[1], specVolPow={-1,0}),
-            redeclare parameter Q.Resistivity alpha_Ndot=
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(),
-            redeclare parameter Q.Resistivity alpha_tau=
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(),
-            redeclare parameter Q.Resistivity alpha_Qdot=U.m*U.K/(183e-3*U.W));
+            redeclare parameter Q.Resistivity f_0=Data.f_0(),
+            redeclare parameter Q.Resistivity f_12=Data.f_12(),
+            redeclare parameter Q.Resistivity r_th=U.m*U.K/(183e-3*U.W));
 
           // See the documentation for a table of values.
           // **Update the tables for this and other species.
@@ -5718,8 +5650,8 @@ package Subregions
             defaultComponentName="H2",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
-    <li>Transport and exchange properties (&alpha;<sub>&tau;</sub>, &alpha;<sub>&tau;</sub>, etc.) are fixed (e.g., independent of temperature)</li>
-</ol></p>
+    <li>Transport and exchange properties (<i>f</i><sub>0</sub>, <i>r</i><sub>th</sub>, etc.) are fixed (e.g., independent of temperature)</li>
+    </ol></p>
 
 <p>Additional notes:<ul>
 <li>
@@ -5727,8 +5659,8 @@ package Subregions
   affect the chemical potential and result in an incorrect cell
   potential.</li></ul></p>
 
-<p>The default transport resistivities (<code>alpha_tau=Data.m/(89.6e-7*U.Pa*U.s)</code>
-and <code>alpha_Qdot=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas at 1 atm and
+<p>The default transport resistivities (<code>f_12=Data.m/(89.6e-7*U.Pa*U.s)</code>
+and <code>r_th=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas at 1 atm and
   300 K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 919&ndash;920].
   Table 1 lists the properties at  other temperatures. </p>
 
@@ -5737,8 +5669,8 @@ and <code>alpha_Qdot=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</
   <tr>
       <th rowspan=2 valign=\"middle\"><code>T/U.K</code></th>
       <th rowspan=2 width=1><code>c_p*U.kg*U.K<br>/(U.J*Data.m)</code></th>
-      <th rowspan=2 width=1 ><code>alpha_tau<br>*U.Pa*U.s/Data.m</code></th>
-      <th rowspan=2 width=1 ><code>alpha_Qdot*U.W<br>/(U.m*U.K)</code></th>
+      <th rowspan=2 width=1 ><code>f_12<br>*U.Pa*U.s/Data.m</code></th>
+      <th rowspan=2 width=1 ><code>r_th*U.W<br>/(U.m*U.K)</code></th>
     </tr>
     <tr>
 <tr><td>100</td><td>11.23e3</td><td>1/42.1e-7</td><td>1/67.0e-3</td></tr>
@@ -5780,45 +5712,23 @@ and <code>alpha_Qdot=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</
       extends Modelica.Icons.Package;
       package Gas "<html>H<sub>2</sub>O gas</html>"
         extends Modelica.Icons.Package;
-        model Calibrated
-          "Ideal or empirical correlations, w/ adjustment factors"
+        model Calibrated "Correlations with adjustment factors"
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas
                 (b_v=[1], specVolPow={-1,0}),
-            alpha_Ndot=k_alpha_Ndot*
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
-            alpha_tau=k_alpha_tau*
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
-            alpha_Qdot=k_alpha_Qdot*
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(T));
+            f_0=k_f_0*Data.f_0(T),
+            f_12=k_f_12*Data.f_12(T),
+            r_th=k_r_th*Data.r_th(T));
 
-          parameter Q.NumberAbsolute k_alpha_Ndot(final nominal=1) = 1
-            "<html>Adjustment factor for material transport resistivity (<i>k</i><sub>&alpha; <i>N&#775;</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_f_0(final nominal=1) = 1
+            "<html>Adjustment factor for bulk fluidity (<i>k</i><sub><i>f</i> 0</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_alpha_tau(final nominal=1) = 1
-            "<html>Adjustment factor for fluidity (<i>k</i><sub>&alpha; &tau;</sub>)</html>"
+          parameter Q.NumberAbsolute k_f_12(final nominal=1) = 1
+            "<html>Adjustment factor for shear fluidity (<i>k</i><sub><i>f</i> 12</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_alpha_Qdot(final nominal=1) = 1
-            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_r_th(final nominal=1) = 1
+            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub><i>r</i> th</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Boolean empiricalMechanical=true
-            "Use empirical correlation for fluidity (otherwise, theoretical)"
-            annotation (
-            Evaluate=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(
-              tab="Assumptions",
-              group="Correlations",
-              compact=true));
-          parameter Boolean empiricalThermal=true
-            "Use empirical correlation for thermal resistivity (otherwise, theoretical)"
-            annotation (
-            Evaluate=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(
-              tab="Assumptions",
-              group="Correlations",
-              compact=true));
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -5829,34 +5739,13 @@ and <code>alpha_Qdot=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</
           </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
         end Calibrated;
 
-        model Correlated "Ideal (kinetic) or empirical correlations"
+        model Correlated "Correlated properties"
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas
                 (b_v=[1], specVolPow={-1,0}),
-            alpha_Ndot=FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
-
-            alpha_tau=FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
-
-            alpha_Qdot=FCSys.Characteristics.BaseClasses.Characteristic.alpha(T));
-
-          parameter Boolean empiricalMechanical=true
-            "Use empirical correlation for fluidity (otherwise, theoretical)"
-            annotation (
-            Evaluate=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(
-              tab="Assumptions",
-              group="Correlations",
-              compact=true));
-          parameter Boolean empiricalThermal=true
-            "Use empirical correlation for thermal resistivity (otherwise, theoretical)"
-            annotation (
-            Evaluate=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(
-              tab="Assumptions",
-              group="Correlations",
-              compact=true));
+            f_0=Data.f_0(T),
+            f_12=Data.f_12(T),
+            r_th=Data.r_th(T));
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -5871,11 +5760,9 @@ and <code>alpha_Qdot=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas
                 (b_v=[1], specVolPow={-1,0}),
-            redeclare parameter Q.Resistivity alpha_Ndot=
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(),
-            redeclare parameter Q.Resistivity alpha_tau=
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(),
-            redeclare parameter Q.Resistivity alpha_Qdot=U.m*U.K/(19.6e-3*U.W));
+            redeclare parameter Q.Resistivity f_0=Data.f_0(),
+            redeclare parameter Q.Resistivity f_12=Data.f_12(),
+            redeclare parameter Q.Resistivity r_th=U.m*U.K/(19.6e-3*U.W));
 
           // See the documentation for tables of values.
 
@@ -5884,8 +5771,8 @@ and <code>alpha_Qdot=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</
             defaultComponentName="H2O",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
-    <li>Transport and exchange properties (&alpha;<sub>&tau;</sub>, &alpha;<sub>&tau;</sub>, etc.) are fixed (e.g., independent of temperature)</li>
-  </ol></p>
+    <li>Transport and exchange properties (<i>f</i><sub>0</sub>, <i>r</i><sub>th</sub>, etc.) are fixed (e.g., independent of temperature)</li>
+    </ol></p>
 
           <p>Notes:<ul>
 <ul><li>
@@ -5893,12 +5780,12 @@ and <code>alpha_Qdot=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</
   affect the chemical potential and result in an incorrect cell
   potential.</li></ul></p>
 
-<p>The default transport resistivities (<code>alpha_tau=Data.m/(9.09e-6*U.Pa*U.s)</code>
-and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturation pressure and
+<p>The default transport resistivities (<code>f_12=Data.m/(9.09e-6*U.Pa*U.s)</code>
+and <code>r_th=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturation pressure and
   300 K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 921].  Table 1 lists the properties at
   saturation pressure and other temperatures.  Table 2 lists the properties of H<sub>2</sub>O gas at 1 atm.
   Table 3 lists resistivity to transport of linear momentum (inverse of bulk viscosity) based on its ratio to
-  transverse resistivity (inverse of shear viscosity). See also
+  shear fluidity (inverse of shear viscosity). See also
   <a href=\"http://www.engineeringtoolbox.com/water-dynamic-kinematic-viscosity-d_596.html\">http://www.engineeringtoolbox.com/water-dynamic-kinematic-viscosity-d_596.html</a>.</p>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
@@ -5906,8 +5793,8 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
   <tr>
       <th rowspan=2 valign=\"middle\"><code>T/U.K</code></th>
       <th rowspan=1 colspan=2 width=1><code>c_p*U.kg*U.K<br>/(U.J*Data.m)</code></th>
-      <th rowspan=1 colspan=2 width=1><code>alpha_tau<br>*U.Pa*U.s/Data.m</code></th>
-      <th rowspan=1 colspan=2 width=1><code>alpha_Qdot*U.W<br>/(U.m*U.K)</code></th>
+      <th rowspan=1 colspan=2 width=1><code>f_12<br>*U.Pa*U.s/Data.m</code></th>
+      <th rowspan=1 colspan=2 width=1><code>r_th*U.W<br>/(U.m*U.K)</code></th>
     </tr>
     <tr>
       <th>Gas</th>
@@ -5980,8 +5867,8 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
   <tr>
       <th valign=\"middle\"><code>T/U.K</code></th>
       <th width=1><code>c_p*U.kg*U.K<br>/(U.J*Data.m)</code></th>
-      <th width=1 ><code>alpha_tau<br>*U.Pa*U.s/Data.m</code></th>
-      <th width=1 ><code>alpha_Qdot*U.W<br>/(U.m*U.K)</code></th>
+      <th width=1 ><code>f_12<br>*U.Pa*U.s/Data.m</code></th>
+      <th width=1 ><code>r_th*U.W<br>/(U.m*U.K)</code></th>
     </tr>
 <tr><td>380</td><td>2.060e3</td><td>1/127.1e-7</td><td>1/24.6e-3</td></tr>
 <tr><td>400</td><td>2.014e3</td><td>1/134.4e-7</td><td>1/26.1e-3</td></tr>
@@ -6006,28 +5893,25 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
       extends Modelica.Icons.Package;
       package Solid "<html>H<sup>+</sup> in solid</html>"
         extends Modelica.Icons.Package;
-        model Calibrated "Ideal correlations, with adjustment factors"
+        model Calibrated "Correlations with adjustment factors"
           extends Species0Amount(
             redeclare replaceable package Data =
                 FCSys.Characteristics.'H+'.Solid,
             initMethPartNum=InitMethScalar.Amount,
-            alpha_Ndot=k_alpha_Ndot*
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
-            alpha_tau=k_alpha_tau*
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
-            alpha_Qdot=k_alpha_Qdot*
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(T));
+            f_0=k_f_0*Data.f_0(T),
+            f_12=k_f_12*Data.f_12(T),
+            r_th=k_r_th*Data.r_th(T));
 
           // Note:  initMethPartNum may not be Pressure (which is default) since the
           // EOS doesn't involve pressure.
 
-          parameter Q.NumberAbsolute k_alpha_Ndot(final nominal=1) = 1
-            "<html>Adjustment factor for material transport resistivity (<i>k</i><sub>&alpha; <i>N&#775;</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_f_0(final nominal=1) = 1
+            "<html>Adjustment factor for bulk fluidity (<i>k</i><sub><i>f</i> 0</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_alpha_tau(final nominal=1) = 1
-            "<html>Adjustment factor for fluidity (<i>k</i><sub>&alpha; &tau;</sub>)</html>"
+          parameter Q.NumberAbsolute k_f_12(final nominal=1) = 1
+            "<html>Adjustment factor for shear fluidity (<i>k</i><sub><i>f</i> 12</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_alpha_Qdot(final nominal=1) = 1
+          parameter Q.NumberAbsolute k_r_th(final nominal=1) = 1
             "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S&#775;</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
 
@@ -6038,16 +5922,14 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
                   "<html><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
         end Calibrated;
 
-        model Correlated "Ideal correlations from kinetic theory"
+        model Correlated "Correlated properties"
           extends Species0Amount(
             redeclare replaceable package Data =
                 FCSys.Characteristics.'H+'.Solid,
             initMethPartNum=InitMethScalar.Amount,
-            alpha_Ndot=FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
-
-            alpha_tau=FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
-
-            alpha_Qdot=FCSys.Characteristics.BaseClasses.Characteristic.alpha(T));
+            f_0=Data.f_0(T),
+            f_12=Data.f_12(T),
+            r_th=Data.r_th(T));
 
           // Note:  initMethPartNum may not be Pressure (which is default) since the
           // EOS doesn't involve pressure.
@@ -6064,11 +5946,9 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
             redeclare replaceable package Data =
                 FCSys.Characteristics.'H+'.Solid,
             initMethPartNum=InitMethScalar.Amount,
-            redeclare parameter Q.Resistivity alpha_Ndot=
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(),
-            redeclare parameter Q.Resistivity alpha_tau=
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(),
-            redeclare parameter Q.Resistivity alpha_Qdot=U.m*U.K/(0.1661*U.W));
+            redeclare parameter Q.Resistivity f_0=Data.f_0(),
+            redeclare parameter Q.Resistivity f_12=Data.f_12(),
+            redeclare parameter Q.Resistivity r_th=U.m*U.K/(0.1661*U.W));
 
           // Note:  initMethPartNum may not be Pressure (which is default) since
           // overrideEOS is true.
@@ -6079,11 +5959,10 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'H+'",
             Documentation(info="<html><p>Assumptions:<ol>
-    <li>Transport and exchange properties (&alpha;<sub>&tau;</sub>, &alpha;<sub>&tau;</sub>, etc.) are fixed
-    (e.g., independent of temperature)</li>
+    <li>Transport and exchange properties (<i>f</i><sub>0</sub>, <i>r</i><sub>th</sub>, etc.) are fixed (e.g., independent of temperature)</li>
     </ol></p>
 
-  <p>The default transport resistivities (<code>alpha_tau=Data.m/(5.3e-6*U.Pa*U.s)</code> and <code>alpha_Qdot=U.m*U.K/(0.1661*U.W)</code>) are of H gas
+  <p>The default transport resistivities (<code>f_12=Data.m/(5.3e-6*U.Pa*U.s)</code> and <code>r_th=U.m*U.K/(0.1661*U.W)</code>) are of H gas
   (rather than H<sup>+</sup>) at 300 K from [<a href=\"modelica://FCSys.UsersGuide.References\">Schetz1996</a>, p. 139].
   Table 1 lists the properties at other temperatures.</p>
 
@@ -6091,8 +5970,8 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
   <caption align=\"bottom\"><b>Table 1:</b> Properties of H gas (not H<sup>+</sup>) (<a href=\"modelica://FCSys.UsersGuide.References\">Schetz and Fuhs, 1996</a>, p. 139)</caption>
 <tr>
       <th valign=\"middle\"><code>T/U.K</code></th>
-      <th width=1><code>alpha_tau<br>*U.Pa*U.s/Data.m</code></th>
-      <th width=1><code>alpha_Qdot*U.W<br>/(U.m*U.K)</code></th>
+      <th width=1><code>f_12<br>*U.Pa*U.s/Data.m</code></th>
+      <th width=1><code>r_th*U.W<br>/(U.m*U.K)</code></th>
     </tr>
 <tr><td>200</td><td>1/3.8e-6</td><td>1/0.1197</td></tr>
 <tr><td>300</td><td>1/5.3e-6</td><td>1/0.1661</td></tr>
@@ -6154,45 +6033,23 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
       extends Modelica.Icons.Package;
       package Gas "<html>N<sub>2</sub> gas</html>"
         extends Modelica.Icons.Package;
-        model Calibrated
-          "Ideal or empirical correlations, w/ adjustment factors"
+        model Calibrated "Correlations with adjustment factors"
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.N2.Gas (
                   b_v=[1], specVolPow={-1,0}),
-            alpha_Ndot=k_alpha_Ndot*
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
-            alpha_tau=k_alpha_tau*
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
-            alpha_Qdot=k_alpha_Qdot*
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(T));
+            f_0=k_f_0*Data.f_0(T),
+            f_12=k_f_12*Data.f_12(T),
+            r_th=k_r_th*Data.r_th(T));
 
-          parameter Q.NumberAbsolute k_alpha_Ndot(final nominal=1) = 1
-            "<html>Adjustment factor for material transport resistivity (<i>k</i><sub>&alpha; <i>N&#775;</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_f_0(final nominal=1) = 1
+            "<html>Adjustment factor for bulk fluidity (<i>k</i><sub><i>f</i> 0</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_alpha_tau(final nominal=1) = 1
-            "<html>Adjustment factor for fluidity (<i>k</i><sub>&alpha; &tau;</sub>)</html>"
+          parameter Q.NumberAbsolute k_f_12(final nominal=1) = 1
+            "<html>Adjustment factor for shear fluidity (<i>k</i><sub><i>f</i> 12</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_alpha_Qdot(final nominal=1) = 1
-            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_r_th(final nominal=1) = 1
+            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub><i>r</i> th</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Boolean empiricalMechanical=true
-            "Use empirical correlation for fluidity (otherwise, theoretical)"
-            annotation (
-            Evaluate=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(
-              tab="Assumptions",
-              group="Correlations",
-              compact=true));
-          parameter Boolean empiricalThermal=true
-            "Use empirical correlation for thermal resistivity (otherwise, theoretical)"
-            annotation (
-            Evaluate=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(
-              tab="Assumptions",
-              group="Correlations",
-              compact=true));
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -6203,34 +6060,13 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
           </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
         end Calibrated;
 
-        model Correlated "Ideal (kinetic) or empirical correlations"
+        model Correlated "Correlated properties"
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.N2.Gas (
                   b_v=[1], specVolPow={-1,0}),
-            alpha_Ndot=FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
-
-            alpha_tau=FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
-
-            alpha_Qdot=FCSys.Characteristics.BaseClasses.Characteristic.alpha(T));
-
-          parameter Boolean empiricalMechanical=true
-            "Use empirical correlation for fluidity (otherwise, theoretical)"
-            annotation (
-            Evaluate=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(
-              tab="Assumptions",
-              group="Correlations",
-              compact=true));
-          parameter Boolean empiricalThermal=true
-            "Use empirical correlation for thermal resistivity (otherwise, theoretical)"
-            annotation (
-            Evaluate=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(
-              tab="Assumptions",
-              group="Correlations",
-              compact=true));
+            f_0=Data.f_0(T),
+            f_12=Data.f_12(T),
+            r_th=Data.r_th(T));
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -6251,11 +6087,9 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
                 b_c=[1.041e3*U.J*Data.m/(U.kg*U.K)],
                 B_c=[-300*U.K*1.041e3*U.J*Data.m/(U.kg*U.K) + Data.Deltah0_f, 0]),
 
-            redeclare parameter Q.Resistivity alpha_Ndot=
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(),
-            redeclare parameter Q.Resistivity alpha_tau=
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(),
-            redeclare parameter Q.Resistivity alpha_Qdot=U.m*U.K/(25.9e-3*U.W));
+            redeclare parameter Q.Resistivity f_0=Data.f_0(),
+            redeclare parameter Q.Resistivity f_12=Data.f_12(),
+            redeclare parameter Q.Resistivity r_th=U.m*U.K/(25.9e-3*U.W));
 
           // **Enter proper value for B[1,2].
 
@@ -6267,9 +6101,10 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
     <li>Fixed specific heat capacity (independent of temperature)</ol>
-    <li>Transport and exchange properties (&alpha;<sub>&tau;</sub>, &alpha;<sub>&tau;</sub>, etc.) are fixed (e.g., independent of temperature)</li></p>
-
-<p>The default specific heat capacity (<code>b_c=[1.041e3*U.J*Data.m/(U.kg*U.K)]</code>) and transport resistivities (<code>alpha_tau=Data.m/(178.2e-7*U.Pa*U.s)</code> and <code>alpha_Qdot=U.m*U.K/(25.9e-3*U.W))</code>) are based on data of gas at 1 atm and
+    <li>Transport and exchange properties (<i>f</i><sub>0</sub>, <i>r</i><sub>th</sub>, etc.) are fixed (e.g., independent of temperature)</li>
+    </ol></p>
+    
+<p>The default specific heat capacity (<code>b_c=[1.041e3*U.J*Data.m/(U.kg*U.K)]</code>) and transport resistivities (<code>f_12=Data.m/(178.2e-7*U.Pa*U.s)</code> and <code>r_th=U.m*U.K/(25.9e-3*U.W))</code>) are based on data of gas at 1 atm and
   300 K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 920].
   Table 1 lists the properties at  other temperatures. Note that the value for isobaric specific heat capacity at
   800 K (<code>c_p=1.22e3*U.J*Data.m/(U.kg*U.K)</code>) seems unusual, but it matches the
@@ -6280,8 +6115,8 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
   <tr>
       <th valign=\"middle\"><code>T/U.K</code></th>
       <th width=1><code>c_p*U.kg*U.K<br>/(U.J*Data.m)</code></th>
-      <th width=1><code>alpha_tau<br>*U.Pa*U.s/Data.m</code></th>
-      <th width=1><code>alpha_Qdot*U.W<br>/(U.m*U.K)</code></th>
+      <th width=1><code>f_12<br>*U.Pa*U.s/Data.m</code></th>
+      <th width=1><code>r_th*U.W<br>/(U.m*U.K)</code></th>
     </tr>
 <tr><td>100</td><td>1.070e3</td><td>1/68.8e-7</td><td>1/9.58e-3</td></tr>
 <tr><td>150</td><td>1.050e3</td><td>1/100.6e-7</td><td>1/13.9e-3</td></tr>
@@ -6303,8 +6138,8 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
 <tr><td>1300</td><td>1.219e3</td><td>1/466.2e-7</td><td>1/81.0e-3</td></tr>
   </table>
 
-  <p>The transverse resistivity of air at 15.0 &deg;C and 1 atm is given by
-       <code>alpha_tau=Data.m*U.s/(178e-7*U.Pa)</code>
+  <p>The shear fluidity of air at 15.0 &deg;C and 1 atm is given by
+       <code>f_12=Data.m*U.s/(178e-7*U.Pa)</code>
    (<a href=\"http://en.wikipedia.org/wiki/Viscosity\">http://en.wikipedia.org/wiki/Viscosity</a>).</p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
         end Fixed;
       end Gas;
@@ -6314,45 +6149,23 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
       extends Modelica.Icons.Package;
       package Gas "<html>O<sub>2</sub> gas</html>"
         extends Modelica.Icons.Package;
-        model Calibrated
-          "Ideal or empirical correlations, w/ adjustment factors"
+        model Calibrated "Correlations with adjustment factors"
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
                   b_v=[1], specVolPow={-1,0}),
-            alpha_Ndot=k_alpha_Ndot*
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
-            alpha_tau=k_alpha_tau*
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
-            alpha_Qdot=k_alpha_Qdot*
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(T));
+            f_0=k_f_0*Data.f_0(T),
+            f_12=k_f_12*Data.f_12(T),
+            r_th=k_r_th*Data.r_th(T));
 
-          parameter Q.NumberAbsolute k_alpha_Ndot(final nominal=1) = 1
-            "<html>Adjustment factor for material transport resistivity (<i>k</i><sub>&alpha; <i>N&#775;</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_f_0(final nominal=1) = 1
+            "<html>Adjustment factor for bulk fluidity (<i>k</i><sub><i>f</i> 0</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_alpha_tau(final nominal=1) = 1
-            "<html>Adjustment factor for fluidity (<i>k</i><sub>&alpha; &tau;</sub>)</html>"
+          parameter Q.NumberAbsolute k_f_12(final nominal=1) = 1
+            "<html>Adjustment factor for shear fluidity (<i>k</i><sub><i>f</i> 12</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Q.NumberAbsolute k_alpha_Qdot(final nominal=1) = 1
-            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S</i></sub>)</html>"
+          parameter Q.NumberAbsolute k_r_th(final nominal=1) = 1
+            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub><i>r</i> th</sub>)</html>"
             annotation (Dialog(group="Material properties"));
-          parameter Boolean empiricalMechanical=true
-            "Use empirical correlation for fluidity (otherwise, theoretical)"
-            annotation (
-            Evaluate=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(
-              tab="Assumptions",
-              group="Correlations",
-              compact=true));
-          parameter Boolean empiricalThermal=true
-            "Use empirical correlation for thermal resistivity (otherwise, theoretical)"
-            annotation (
-            Evaluate=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(
-              tab="Assumptions",
-              group="Correlations",
-              compact=true));
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="O2",
@@ -6362,34 +6175,13 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
           </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
         end Calibrated;
 
-        model Correlated "Ideal (kinetic) or empirical correlations"
+        model Correlated "Correlated properties"
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
                   b_v=[1], specVolPow={-1,0}),
-            alpha_Ndot=FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
-
-            alpha_tau=FCSys.Characteristics.BaseClasses.Characteristic.alpha(T),
-
-            alpha_Qdot=FCSys.Characteristics.BaseClasses.Characteristic.alpha(T));
-
-          parameter Boolean empiricalMechanical=true
-            "Use empirical correlation for fluidity (otherwise, theoretical)"
-            annotation (
-            Evaluate=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(
-              tab="Assumptions",
-              group="Correlations",
-              compact=true));
-          parameter Boolean empiricalThermal=true
-            "Use empirical correlation for thermal resistivity (otherwise, theoretical)"
-            annotation (
-            Evaluate=true,
-            choices(__Dymola_checkBox=true),
-            Dialog(
-              tab="Assumptions",
-              group="Correlations",
-              compact=true));
+            f_0=Data.f_0(T),
+            f_12=Data.f_12(T),
+            r_th=Data.r_th(T));
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -6404,11 +6196,9 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
                   b_v=[1], specVolPow={-1,0}),
-            redeclare parameter Q.Resistivity alpha_Ndot=
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(),
-            redeclare parameter Q.Resistivity alpha_tau=
-                FCSys.Characteristics.BaseClasses.Characteristic.alpha(),
-            redeclare parameter Q.Resistivity alpha_Qdot=U.m*U.K/(26.8e-3*U.W));
+            redeclare parameter Q.Resistivity f_0=Data.f_0(),
+            redeclare parameter Q.Resistivity f_12=Data.f_12(),
+            redeclare parameter Q.Resistivity r_th=U.m*U.K/(26.8e-3*U.W));
 
           // See the documentation for a table of values.
 
@@ -6417,7 +6207,7 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
             defaultComponentName="O2",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
-    <li>Transport and exchange properties (&alpha;<sub>&tau;</sub>, &alpha;<sub>&tau;</sub>, etc.) are fixed (e.g., independent of temperature)</li>
+    <li>Transport and exchange properties (<i>f</i><sub>0</sub>, <i>r</i><sub>th</sub>, etc.) are fixed (e.g., independent of temperature)</li>
     </ol></p>
 
 <p>Additional notes:
@@ -6427,7 +6217,7 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
   affect the chemical potential and result in an incorrect cell
   potential.</li></ul></p>
 
-  <p>The default transport resistivities (<code>alpha_tau=Data.m/(207.2e-7*U.Pa*U.s)</code> and <code>alpha_Qdot=U.m*U.K/(26.8e-3*U.W)</code>) are based on data of gas at 1 atm and
+  <p>The default transport resistivities (<code>f_12=Data.m/(207.2e-7*U.Pa*U.s)</code> and <code>r_th=U.m*U.K/(26.8e-3*U.W)</code>) are based on data of gas at 1 atm and
   300 K from Incropera and DeWitt  [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 920&ndash;921].
   Table 1 lists the properties at other temperatures.</p>
 
@@ -6436,8 +6226,8 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
   <tr>
       <th valign=\"middle\"><code>T/U.K</code></th>
       <th width=1><code>c_p*U.kg*U.K<br>/(U.J*Data.m)</code></th>
-      <th width=1><code>alpha_tau<br>*U.Pa*U.s/Data.m</code></th>
-      <th width=1><code>alpha_Qdot*U.W<br>/(U.m*U.K)</code></th>
+      <th width=1><code>f_12<br>*U.Pa*U.s/Data.m</code></th>
+      <th width=1><code>r_th*U.W<br>/(U.m*U.K)</code></th>
     </tr>
 <tr><td>100</td><td>0.962e3</td><td>1/76.4e-7</td><td>1/9.25e-3</td></tr>
 <tr><td>150</td><td>0.921e3</td><td>1/114.8e-7</td><td>1/13.8e-3</td></tr>
@@ -6525,7 +6315,7 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
           final isobaric=true,
           final inviscidX=true,
           final inviscidY=true));
-      // Note:  **alpha_Ndot doesn't matter since material isn't transported.
+      // Note:  **f_0 doesn't matter since material isn't transported.
       // upstreamX, upstreamY, and upstreamZ don't matter since bulk
       // current is zero.
 
@@ -6534,9 +6324,9 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
   <li>No material exchange or transport</li</ol>
   </p>
 
-  <p><code>alpha_tau</code> only affects exchange&mdash;not transport.  Since a no-slip
+  <p><code>f_12</code> only affects exchange&mdash;not transport.  Since a no-slip
   boundary condition is applied and the bulk velocity is set to zero, there are
-  never any shear forces, regardless of the value of <code>alpha_tau</code>.</p>
+  never any shear forces, regardless of the value of <code>f_12</code>.</p>
 
   <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
     end SpeciesInertStagnant;
@@ -6574,7 +6364,9 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
         Placement(transformation(extent={{-60,40},{-40,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
 
-      // General assumptions
+      // Assumptions
+      // -----------
+      // General
       parameter Boolean overrideEOS=false
         "<html>Override the equation of state with the value of &rho;<sub>IC</sub></html>"
         annotation (
@@ -6591,8 +6383,24 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
       // Even though this parameter is set as final within the constrainedby
       // clauses of the Phase models, Dymola 7.4 still shows it in the
       // parameter dialog (hence the "Do not adjust").
-
-      // Assumptions about upstream discretization
+      //
+      // Coupling with other species in phase
+      parameter Boolean uniformVelocity=false "Uniform velocity" annotation (
+        HideResult=true,
+        choices(__Dymola_checkBox=true),
+        Dialog(
+          compact=true,
+          tab="Assumptions",
+          group="Coupling with other species in phase"));
+      parameter Boolean isothermal=false "Isothermal" annotation (
+        HideResult=true,
+        choices(__Dymola_checkBox=true),
+        Dialog(
+          compact=true,
+          tab="Assumptions",
+          group="Coupling with other species in phase"));
+      //
+      // Upstream discretization
       parameter Boolean upstreamX=true "X" annotation (
         Evaluate=true,
         HideResult=true,
@@ -6617,8 +6425,8 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
           group="Axes with upstream discretization",
           compact=true),
         choices(__Dymola_checkBox=true));
-
-      // Assumptions about dynamics
+      //
+      // Dynamics
       parameter Boolean setPartNum=false "Particle number" annotation (
         Evaluate=true,
         Dialog(
@@ -6799,7 +6607,7 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
         "<html>Bulk fluidity (<i>f</i><sub>0</sub>)</html>"
         annotation (Dialog(group="Material properties"));
       Q.Fluidity f_12(nominal=10*U.cm*U.s/U.g) = Data.f_12(T, p)
-        "<html>Fluidity (<i>f</i><sub>12</sub>)</html>"
+        "<html>Shear fluidity (<i>f</i><sub>12</sub>)</html>"
         annotation (Dialog(group="Material properties"));
       Q.ResistivityThermal r_th(nominal=10*U.cm/U.A) = Data.r_th(T, p)
         "<html>Thermal resistivity (<i>r</i><sub>th</sub>)</html>"
@@ -6979,17 +6787,17 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
         "Connector to exchange material while advecting linear momentum and energy"
         annotation (Placement(transformation(extent={{-30,10},{-10,30}}),
             iconTransformation(extent={{-80,60},{-60,80}})));
-      Q.Force mPhidot_joint[n_vel] "**";
-      Q.Power Qdot_joint "**";
-
       FCSys.Connectors.Inert joint(
         final n_vel=n_vel,
+        final uniformVelocity=uniformVelocity,
+        final isothermal=isothermal,
         mechanical(final phi(start=phi_IC[cartAxes]) = phi, final mPhidot=
               mPhidot_joint),
         heat(final T(start=T_IC) = T, final Qdot(start=0) = Qdot_joint))
         "Connector for direct mechanical and thermal coupling of multiple species"
         annotation (Placement(transformation(extent={{-10,-10},{10,10}}),
             iconTransformation(extent={{-10,-10},{10,10}})));
+
       FCSys.Connectors.InertDalton inert(
         final n_vel=n_vel,
         V(
@@ -7144,11 +6952,13 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
       Q.Resistivity alpha_0(nominal=10*U.cm/U.A) = f_0*Data.m
         "Base resistivity factor for bulk fluidity";
       Q.Resistivity alpha_12(nominal=10*U.cm/U.A) = f_12*Data.m
-        "Base resistivity factor for fluidity";
+        "Base resistivity factor for shear fluidity";
       Q.Resistivity alpha_th(nominal=10*U.cm/U.A) = r_th*c_V
         "Base resistivity factor for thermal resistivity";
 
-      // Efforts and flows of the conditional faces
+      // Efforts and flows of the conditional connectors
+      Q.Force mPhidot_joint[n_vel] "Force through the joint connector";
+      Q.Power Qdot_joint "Heat flow rate into the joint connector";
       Q.PressureAbsolute p_face[Axis, Side](each start=p_IC)
         "Pressures at the faces";
       Q.Current Ndot_face[Axis, Side](start=outerProduct(I_IC, {1,-1}))
@@ -7916,8 +7726,8 @@ The default global default settings will be used for the current simulation.",
           chemical[i].hbar,
           hbar) "Energy";
     end for;
-    // TODO:  Consider using stream connectors once they are better supported
-    // (some errors occurred in Dymola 7.4).
+    // TODO:  Use stream connectors once they are better supported (some
+    // errors occurred in Dymola 7.4).
 
     // Note:  This model is marked as structurally incomplete.  It must have
     // zero species by default (for automatic connector sizing), but at least
