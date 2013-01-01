@@ -528,10 +528,7 @@ package Subregions
         inclC=true,
         inclH2=false,
         'incle-'=true,
-        defaults(analysis=false),
-        subregion1(setVolume=false),
-        subregions(each setVolume=false),
-        subregion2(setVolume=false));
+        defaults(analysis=false));
 
       annotation (
         experiment(Tolerance=1e-06),
@@ -853,8 +850,7 @@ package Subregions
         each inclVelY=false,
         each inclVelZ=false,
         each inclYFaces=false,
-        each inclZFaces=false,
-        each setVolume=false) if n_x > 0
+        each inclZFaces=false) if n_x > 0
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
       FCSys.Subregions.Subregion subregion2(
@@ -7653,8 +7649,7 @@ The default global default settings will be used for the current simulation.",
     <li>If a subregion does not contain any compressible species, then pressure must be prescribed.
     Set <code>setPartNum</code> to <code>true</code> and <code>initMethPartNum</code>
     to <code>InitMethScalar.Pressure</code> for the species.  In general, only one incompressible
-    species can be included if there are no incompressible species. **Remove the pressure option
-    from the Volume model if not necessary.</li>
+    species can be included if there are no incompressible species.</li>
     <li>The <code>start</code> values of the initial conditions for pressure and temperature
     (<i>p</i><sub>IC</sub> and <i>T</i><sub>IC</sub>) are the global default pressure and
     temperature (via the <code>outer</code> instance of the <a href=\"modelica://FCSys.BCs.Defaults\">Defaults</a> model).
@@ -7982,12 +7977,7 @@ The default global default settings will be used for the current simulation.",
     //extends FCSys.BaseClasses.Icons.Names.Top7;
 
     // Geometric parameters
-    parameter Boolean setVolume=true "Specify volume (otherwise, pressure)"
-      annotation (Dialog(group="Geometry"), choices(__Dymola_checkBox=true));
-    parameter Q.Volume V(start=1*U.cm^3) "Volume"
-      annotation (Dialog(enable=setVolume));
-    parameter Q.Pressure p(start=defaults.p) "Pressure"
-      annotation (Dialog(enable=not setVolume));
+    parameter Q.Volume V(start=1*U.cm^3) "Volume";
     parameter Integer n_vel(
       final min=0,
       final max=3) = 1
@@ -8003,12 +7993,8 @@ The default global default settings will be used for the current simulation.",
               {-10,90},{10,110}})));
 
   equation
-    // Specified volume or pressure
-    if setVolume then
-      V = inert.V;
-    else
-      p = inert.p;
-    end if;
+    // Specified volume
+    V = inert.V;
 
     // Rate balances (without storage or generation)
     zeros(n_vel) = inert.mPhidot "Linear momentum";
@@ -8017,11 +8003,6 @@ The default global default settings will be used for the current simulation.",
       Documentation(info="<html><p>This model uses a <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector that imposes
     additivity of volume.  In order to convert to additivity of pressure, use
     the <a href=\"modelica://FCSys.Subregions.PhaseBoundary\">PhaseBoundary</a> model.</p>
-
-<p>By default, <code>setVolume</code> is <code>true</code>, which sets the volume to a prescribed
-value (<code>V</code>).  If there are no compressible species within a subregion, it is
-necessary to set <code>setVolume</code> to <code>false</code>.  Then, pressure will be set to a prescribed
-value (<code>p</code>).</p>
 
     <p>See also the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
@@ -8048,6 +8029,7 @@ value (<code>p</code>).</p>
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(graphics));
+
   end Volume;
 
   package BaseClasses "Base classes (not for direct use)"
@@ -8064,8 +8046,6 @@ value (<code>p</code>).</p>
       final inner parameter Q.Area A[Axis]={L[cartWrap(axis + 1)]*L[cartWrap(
           axis + 2)] for axis in Axis} "Cross-sectional area";
       final parameter Q.Volume V=product(L) "Volume";
-      parameter Boolean setVolume=true "Specify volume (otherwise, pressure)"
-        annotation (Dialog(group="Geometry"), choices(__Dymola_checkBox=true));
 
       // Assumptions about components of velocity
       parameter Boolean inclVelX=true "X" annotation (
@@ -8144,10 +8124,8 @@ value (<code>p</code>).</p>
               extent={{-30,-30},{-10,-10}}), iconTransformation(extent={{-60,-60},
                 {-40,-40}})));
 
-      FCSys.Subregions.Volume volume(
-        final n_vel=n_vel,
-        final V=V,
-        final setVolume=setVolume) "Model to establish space for species"
+      FCSys.Subregions.Volume volume(final n_vel=n_vel, final V=V)
+        "Model to establish space for species"
         annotation (Placement(transformation(extent={{-16,-16},{16,16}})));
     protected
       final parameter Integer n_vel=countTrue({inclVelX,inclVelY,inclVelZ})
@@ -8164,10 +8142,6 @@ value (<code>p</code>).</p>
   <code>thermoOpt==ThermoOpt.ClosedDiabatic</code>), then the interface will be closed.
   note applies to the viscous/inviscous and diabatic/adiabatic properties.</li>
   <li>The x-axis component of linear momentum is included by default.  At least one component must be included.</li>
-  <li>By default, <code>setVolume</code> is <code>true</code>, which sets the volume to a prescribed
-  value (<code>V</code>).  If there are no compressible species within a subregion, it is
-  necessary to set <code>setVolume</code> to <code>false</code>.  Then, pressure will be set to a prescribed
-  value (<code>p</code>).</li>
   </ul></p></html>"),
         Diagram(graphics),
         Icon(graphics={
@@ -8255,6 +8229,7 @@ value (<code>p</code>).</p>
               points={{40,40},{16,16}},
               color={127,127,127},
               smooth=Smooth.None)}));
+
     end PartialSubregion;
   end BaseClasses;
 

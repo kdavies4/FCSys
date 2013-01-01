@@ -5129,6 +5129,9 @@ boundary condition</a> models.
               rotation=270,
               origin={60,40})));
 
+      public
+        Connectors.RealInput u1 "**test" annotation (Dialog, Placement(
+              transformation(extent={{-88,78},{-68,98}})));
       equation
         // Material
         connect(materialBC.material, face.material) annotation (Line(
