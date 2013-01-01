@@ -2744,7 +2744,7 @@ sensor</a> models.
         extends FCSys.Sensors.BaseClasses.PartialSensor(redeclare
             Connectors.RealOutput y(final unit="l2.m/(N.T2)"));
 
-        FCSys.Connectors.Material material
+        FCSys.Connectors.MaterialTransport material
           annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       equation
         y = material.mu;
@@ -2758,7 +2758,7 @@ sensor</a> models.
       model Velocity "Sensor for velocity"
         extends FCSys.Sensors.BaseClasses.PartialSensor(redeclare
             Connectors.RealOutput y(final unit="l/T"));
-        FCSys.Connectors.Mechanical momentum
+        FCSys.Connectors.MechanicalTransport momentum
           annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
@@ -5184,11 +5184,11 @@ sensor</a> model.
 
             extends FCSys.Sensors.BaseClasses.PartialSensor;
 
-            FCSys.Connectors.Material negative
+            FCSys.Connectors.MaterialTransport negative
               "Material connector for the negative face" annotation (Placement(
                   transformation(extent={{-110,-10},{-90,10}}),
                   iconTransformation(extent={{-110,-10},{-90,10}})));
-            FCSys.Connectors.Material positive
+            FCSys.Connectors.MaterialTransport positive
               "Material connector for the positive face" annotation (Placement(
                   transformation(extent={{90,-10},{110,10}}),
                   iconTransformation(extent={{90,-10},{110,10}})));
@@ -5267,11 +5267,11 @@ sensor</a> model.
 
             extends FCSys.Sensors.BaseClasses.PartialSensor;
 
-            FCSys.Connectors.Mechanical negative
+            FCSys.Connectors.MechanicalTransport negative
               "Linear momentum connector for the negative face" annotation (
                 Placement(transformation(extent={{-110,-10},{-90,10}}),
                   iconTransformation(extent={{-110,-10},{-90,10}})));
-            FCSys.Connectors.Mechanical positive
+            FCSys.Connectors.MechanicalTransport positive
               "Linear momentum connector for the positive face" annotation (
                 Placement(transformation(extent={{90,-10},{110,10}}),
                   iconTransformation(extent={{90,-10},{110,10}})));

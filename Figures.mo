@@ -1282,11 +1282,11 @@ package Figures "Layouts for documentation"
     extends FCSys.BaseClasses.Icons.Cell;
 
     annotation (Icon(graphics={Rectangle(
-            extent={{-100,100},{100,65}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0})}));
+              extent={{-100,100},{100,65}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0})}));
   end Logo;
 
   model AnFPIcon "Anode flow plate"
@@ -1487,14 +1487,14 @@ package Figures "Layouts for documentation"
           transformation(extent={{2,-6},{22,14}}), iconTransformation(extent={{
               -10,-20},{10,0}})));
 
-    FCSys.Connectors.Material Material annotation (Placement(transformation(
-            extent={{-22,-30},{-2,-10}}), iconTransformation(extent={{10,-40},{
-              30,-20}})));
+    FCSys.Connectors.MaterialTransport Material annotation (Placement(
+          transformation(extent={{-22,-30},{-2,-10}}), iconTransformation(
+            extent={{10,-40},{30,-20}})));
     FCSys.Connectors.Heat Heat annotation (Placement(transformation(extent={{26,
               -30},{46,-10}}), iconTransformation(extent={{-10,-40},{10,-20}})));
-    FCSys.Connectors.Mechanical Mechanical annotation (Placement(transformation(
-            extent={{2,-30},{22,-10}}), iconTransformation(extent={{-30,-40},{-10,
-              -20}})));
+    FCSys.Connectors.MechanicalTransport Mechanical annotation (Placement(
+          transformation(extent={{2,-30},{22,-10}}), iconTransformation(extent=
+              {{-30,-40},{-10,-20}})));
     annotation (Diagram(graphics={Line(
               points={{12,28},{12,4}},
               color={127,127,127},

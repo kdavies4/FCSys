@@ -5284,50 +5284,58 @@ package Subregions
 <p>Notes:<ul>
   <li>The x-axis component of linear momentum is included by default.  At least one component must be included.</li></ul></html>"),
 
-          Icon(graphics={Ellipse(
-                      extent={{-40,100},{40,20}},
-                      lineColor={127,127,127},
-                      startAngle=30,
-                      endAngle=149,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{20,-4},{100,-84}},
-                      lineColor={127,127,127},
-                      startAngle=270,
-                      endAngle=390,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{-100,-4},{-20,-84}},
-                      lineColor={127,127,127},
-                      startAngle=149,
-                      endAngle=270,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Polygon(
-                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
-                  80},{94.5,-24},{60,-84}},
-                      pattern=LinePattern.None,
-                      fillPattern=FillPattern.Sphere,
-                      smooth=Smooth.None,
-                      fillColor={225,225,225},
-                      lineColor={0,0,0}),Line(
-                      points={{-60,-84},{60,-84}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{34.5,80},{94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{-34.5,80},{-94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}),
+          Icon(graphics={
+              Ellipse(
+                extent={{-40,100},{40,20}},
+                lineColor={127,127,127},
+                startAngle=30,
+                endAngle=149,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{20,-4},{100,-84}},
+                lineColor={127,127,127},
+                startAngle=270,
+                endAngle=390,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{-100,-4},{-20,-84}},
+                lineColor={127,127,127},
+                startAngle=149,
+                endAngle=270,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Polygon(
+                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
+                    94.5,-24},{60,-84}},
+                pattern=LinePattern.None,
+                fillPattern=FillPattern.Sphere,
+                smooth=Smooth.None,
+                fillColor={225,225,225},
+                lineColor={0,0,0}),
+              Line(
+                points={{-60,-84},{60,-84}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{34.5,80},{94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{-34.5,80},{-94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}),
           Diagram(graphics));
       end NullPhase;
     end BaseClasses;
@@ -6914,7 +6922,7 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
         chemical.mPhidot - Data.m*phi*chemical.Ndot if defaults.analysis
         "Acceleration force due to material (advective) exchange";
       output Q.Force f_exch_diff[n_vel](each stateSelect=StateSelect.never) =
-        common.mPhidot + inert.mPhidot if defaults.analysis
+        mPhidot_joint + inert.mPhidot if defaults.analysis
         "Friction from other species (diffusive exchange)";
       output Q.Force f_trans_adv[n_vel](each stateSelect=StateSelect.never) = {
         Data.m*Delta(Data.v_Tp(T_face[cartAxes[axis], :], p_face[cartAxes[axis],
@@ -6939,10 +6947,10 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
         chemical.hbar - phi*phi/2) - h)*chemical.Ndot + chemical.phi*chemical.mPhidot
         /2) if defaults.analysis
         "Relative rate of work (internal, flow, and kinetic) done by chemical exchange (advection)";
-      output Q.Power Qdot_gen_exch(stateSelect=StateSelect.never) = common.phi*
-        common.mPhidot + inert.phi*inert.mPhidot if defaults.analysis
+      output Q.Power Qdot_gen_exch(stateSelect=StateSelect.never) = phi*
+        mPhidot_joint + inert.phi*inert.mPhidot if defaults.analysis
         "Rate of heat generation due to friction with other species";
-      output Q.Power Qdot_exch(stateSelect=StateSelect.never) = common.Qdot +
+      output Q.Power Qdot_exch(stateSelect=StateSelect.never) = Qdot_joint +
         inert.Qdot if defaults.analysis
         "Rate of thermal conduction from other species";
       output Q.Power Wdot_trans(stateSelect=StateSelect.never) = -sum(sum((
@@ -6971,11 +6979,14 @@ and <code>alpha_Qdot=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at 
         "Connector to exchange material while advecting linear momentum and energy"
         annotation (Placement(transformation(extent={{-30,10},{-10,30}}),
             iconTransformation(extent={{-80,60},{-60,80}})));
-      FCSys.Connectors.Inert common(
+      Q.Force mPhidot_joint[n_vel] "**";
+      Q.Power Qdot_joint "**";
+
+      FCSys.Connectors.Inert joint(
         final n_vel=n_vel,
-        phi(start=phi_IC[cartAxes]),
-        T(start=T_IC),
-        Qdot(start=0))
+        mechanical(final phi(start=phi_IC[cartAxes]) = phi, final mPhidot=
+              mPhidot_joint),
+        heat(final T(start=T_IC) = T, final Qdot(start=0) = Qdot_joint))
         "Connector for direct mechanical and thermal coupling of multiple species"
         annotation (Placement(transformation(extent={{-10,-10},{10,10}}),
             iconTransformation(extent={{-10,-10},{10,10}})));
@@ -7330,8 +7341,6 @@ The default global default settings will be used for the current simulation.",
 
     equation
       // Aliases (only for clarity)
-      phi = common.phi;
-      T = common.T;
       p = inert.p;
       V = inert.V;
       mu = T*chemical.muPerT;
@@ -7358,6 +7367,9 @@ The default global default settings will be used for the current simulation.",
             chemical.phi,
             phi) "Advection";
       f_12*inert.mPhidot = 2*Lstar*(inert.phi - phi) "Diffusion";
+      if not joint.uniformVelocity then
+        mPhidot_joint = zeros(n_vel);
+      end if;
       //
       // Energy
       chemical.Hdot = semiLinear(
@@ -7365,6 +7377,9 @@ The default global default settings will be used for the current simulation.",
             chemical.hbar*Data.m,
             h) "Advection";
       r_th*inert.Qdot = 2*Lstar*(inert.T - T) "Diffusion";
+      if not joint.isothermal then
+        Qdot_joint = 0;
+      end if;
 
       // Transport
       for axis in Axis loop
@@ -7474,7 +7489,7 @@ The default global default settings will be used for the current simulation.",
             // occur due to an assertion.
           end if;
         else
-          der(M*phi[axis])/U.s = chemical.mPhidot[axis] + common.mPhidot[axis]
+          der(M*phi[axis])/U.s = chemical.mPhidot[axis] + mPhidot_joint[axis]
              + inert.mPhidot[axis] + Delta(p_face[cartAxes[axis], :])*A[
             cartAxes[axis]] + Data.m*Delta(Data.v_Tp(T_face[cartAxes[axis], :],
             p_face[cartAxes[axis], :]) .* Ndot_face[cartAxes[axis], :] .^ 2)/A[
@@ -7531,13 +7546,13 @@ The default global default settings will be used for the current simulation.",
         end if;
       else
         (der(N*h) + der(M*phi*phi)/2 - V*der(p))/U.s = chemical.phi*chemical.mPhidot
-          /2 + Data.m*chemical.hbar*chemical.Ndot + common.phi*common.mPhidot
-           + common.Qdot + inert.phi*inert.mPhidot + inert.Qdot + sum(sum((
-          Data.h(p_face[axis, side], T_face[axis, side]) + Data.m*((A[axis]*
-          Data.v_Tp(T_face[axis, side], p_face[axis, side])*Ndot_face[axis,
-          side])^2 + APdot_face[axis, side, :]*APdot_face[axis, side, :]/A[axis]
-          ^2)/2)*Ndot_face[axis, side] for side in Side) for axis in Axis) +
-          sum(tau_face .* APdot_face) + sum(Qdot_face) "Conservation of energy";
+          /2 + Data.m*chemical.hbar*chemical.Ndot + phi*mPhidot_joint +
+          Qdot_joint + inert.phi*inert.mPhidot + inert.Qdot + sum(sum((Data.h(
+          p_face[axis, side], T_face[axis, side]) + Data.m*((A[axis]*Data.v_Tp(
+          T_face[axis, side], p_face[axis, side])*Ndot_face[axis, side])^2 +
+          APdot_face[axis, side, :]*APdot_face[axis, side, :]/A[axis]^2)/2)*
+          Ndot_face[axis, side] for side in Side) for axis in Axis) + sum(
+          tau_face .* APdot_face) + sum(Qdot_face) "Conservation of energy";
       end if;
       annotation (
         defaultComponentPrefixes="replaceable",
@@ -7677,9 +7692,9 @@ The default global default settings will be used for the current simulation.",
     exist at the same temperature and bulk velocity.  The time constants that govern the 
     temperatures/heat capacities of the species and heat flow rates among them are usually
     much shorter than the time span of interest.
-    This assumption can be applied in the model by connecting the <code>common</code> 
+    This assumption can be applied in the model by connecting the <code>joint</code> 
     connectors of the species.  It will cause index reduction during translation.
-    **Independently enable/disable linear momentum and heat through common connector, explain
+    **Independently enable/disable linear momentum and heat through joint connector, explain
     here.</p> 
 
     <p>In the variables that relate to transport,
@@ -8029,7 +8044,6 @@ The default global default settings will be used for the current simulation.",
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(graphics));
-
   end Volume;
 
   package BaseClasses "Base classes (not for direct use)"
