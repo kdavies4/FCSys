@@ -46,14 +46,14 @@ package Connectors "Declarative and imperative connectors"
             fillColor={255,128,0},
             lineThickness=0.5)}),
       Diagram(graphics={Ellipse(
-            extent={{-10,10},{10,-10}},
-            lineColor={208,104,0},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,128,0},
-            lineThickness=0.5), Text(
-            extent={{-100,20},{100,60}},
-            textString="%name",
-            lineColor={0,0,0})}));
+              extent={{-10,10},{10,-10}},
+              lineColor={208,104,0},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,128,0},
+              lineThickness=0.5),Text(
+              extent={{-100,20},{100,60}},
+              textString="%name",
+              lineColor={0,0,0})}));
 
   end ChemicalBusInternal;
 
@@ -346,20 +346,9 @@ package Connectors "Declarative and imperative connectors"
       final max=3) = 0
       "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>"
       annotation (HideResult=true);
-    parameter Boolean uniformVelocity=false "Uniform velocity" annotation (
-      HideResult=true,
-      choices(__Dymola_checkBox=true),
-      Dialog(compact=true,group=
-            "Boundary conditions (will remove subconnectors)"));
-    parameter Boolean isothermal=false "Isothermal" annotation (
-      HideResult=true,
-      choices(__Dymola_checkBox=true),
-      Dialog(compact=true,group=
-            "Boundary conditions (will remove subconnectors)"));
 
-    BaseClasses.MechanicalExchange mechanical(final n_vel=n_vel) if
-      uniformVelocity;
-    BaseClasses.Heat heat if isothermal;
+    BaseClasses.MechanicalExchange mechanical(final n_vel=n_vel);
+    BaseClasses.Heat heat;
 
     annotation (
       Documentation(info="<html>
@@ -519,7 +508,7 @@ package Connectors "Declarative and imperative connectors"
 
   end InertDalton;
 
-  expandable connector InertInternal
+  connector InertInternal
     "<html>Internal <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> connector</html>"
 
     parameter Integer n_vel(
@@ -527,22 +516,35 @@ package Connectors "Declarative and imperative connectors"
       final max=3) = 0
       "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>"
       annotation (HideResult=true);
+    parameter Boolean uniformVelocity=false "Uniform velocity" annotation (
+      HideResult=true,
+      choices(__Dymola_checkBox=true),
+      Dialog(compact=true,group=
+            "Boundary conditions (will remove subconnectors)"));
+    parameter Boolean isothermal=false "Isothermal" annotation (
+      HideResult=true,
+      choices(__Dymola_checkBox=true),
+      Dialog(compact=true,group=
+            "Boundary conditions (will remove subconnectors)"));
 
-    BaseClasses.MechanicalExchange mechanical(final n_vel=n_vel);
-    BaseClasses.Heat heat;
+    BaseClasses.MechanicalExchange mechanical(final n_vel=n_vel) if
+      uniformVelocity;
+    BaseClasses.Heat heat if isothermal;
 
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="inert",
       Documentation(info="<html><p>
-    This is copy of the <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> connector, except that it
+    **In is expandable, has no minimal set of subconnectors.
+    
+    **This is copy of the <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> connector, except that it
     has a smaller icon, a default <code>protected</code> prefix, and the subconnectors are always included.
     For more information, see that connector.</p></html>"),
       Icon(graphics={Ellipse(
             extent={{-100,100},{100,-100}},
             lineColor={72,90,180},
             fillPattern=FillPattern.Solid,
-            fillColor={102,128,255}), Ellipse(
+            fillColor={102,128,255}),Ellipse(
             extent={{-60,60},{60,-60}},
             fillColor={255,255,255},
             fillPattern=FillPattern.Solid,
