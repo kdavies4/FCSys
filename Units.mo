@@ -833,7 +833,7 @@ package Units "Constants and units of physical measure"
   <p>For more information, see the paper on natural units [<a href=\"modelica://FCSys.UsersGuide.References\">Davies and Paredis, 2012</a>].</p>
   <p>
   <b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-  Copyright 2007&ndash;2012, Georgia Tech Research Corporation.
+  Copyright 2007&ndash;2013, Georgia Tech Research Corporation.
   </p>
   <p>
   <i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;

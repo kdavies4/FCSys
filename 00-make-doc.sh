@@ -49,6 +49,7 @@ git add *Characteristics* # **temp
 git add *Quantities* # **temp
 git add *Units* # **temp
 git add *UsersGuide* # **temp
+git add *Subregions* # **temp
 git add FCSys_BaseClasses* # **temp
 git add images/*Connectors* # **temp
 git add images/*Characteristics* # **temp
@@ -56,6 +57,8 @@ git add images/*Quantities* # **temp
 git add images/*Units* # **temp
 git add images/*UsersGuide* # **temp
 git add images/FCSys.BaseClasses* # **temp
+git add images/*Subregions* # **temp
+git add images/*S.png # **temp
 
 # Update the Github web pages and return to the original branch.
 git commit -am "Auto-update github pages"

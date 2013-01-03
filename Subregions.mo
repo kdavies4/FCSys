@@ -4517,13 +4517,15 @@ and <code>r_th=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at satu
                 specHeatCapPow=0,
                 T_lim_c={0,Modelica.Constants.inf},
                 b_c=[1.041e3*U.J*Data.m/(U.kg*U.K)],
-                B_c=[-300*U.K*1.041e3*U.J*Data.m/(U.kg*U.K) + Data.Deltah0_f, 0]),
-
+                B_c=[-300*U.K*1.041e3*U.J*Data.m/(U.kg*U.K) + Data.Deltah0_f,
+                    Polynomial.F(
+                            300*U.K,
+                            FCSys.Characteristics.N2.Gas.b_c[1, :],
+                            -3) + FCSys.Characteristics.N2.Gas.B_c[1, 2] - Data.b_c[
+                    1, 1]*ln(300*U.K)]),
             redeclare parameter Q.Resistivity f_0=Data.f_0(),
             redeclare parameter Q.Resistivity f_12=1/(178.2e-7*U.Pa*U.s),
             redeclare parameter Q.Resistivity r_th=U.m*U.K/(25.9e-3*U.W));
-
-          // **Enter proper value for B[1,2].
 
           // See the documentation for a table of values.
 
@@ -6459,7 +6461,7 @@ The default global default settings will be used for the current simulation.",
   annotation (Documentation(info="<html>
 <p>
 <b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-Copyright 2007&ndash;2012, Georgia Tech Research Corporation.
+Copyright 2007&ndash;2013, Georgia Tech Research Corporation.
 </p>
 <p>
 <i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;

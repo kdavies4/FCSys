@@ -46,14 +46,14 @@ package Connectors "Declarative and imperative connectors"
             fillColor={255,128,0},
             lineThickness=0.5)}),
       Diagram(graphics={Ellipse(
-              extent={{-10,10},{10,-10}},
-              lineColor={208,104,0},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,128,0},
-              lineThickness=0.5),Text(
-              extent={{-100,20},{100,60}},
-              textString="%name",
-              lineColor={0,0,0})}));
+            extent={{-10,10},{10,-10}},
+            lineColor={208,104,0},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,128,0},
+            lineThickness=0.5), Text(
+            extent={{-100,20},{100,60}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end ChemicalBusInternal;
 
@@ -535,10 +535,8 @@ package Connectors "Declarative and imperative connectors"
       defaultComponentPrefixes="protected",
       defaultComponentName="inert",
       Documentation(info="<html><p>
-    **In is expandable, has no minimal set of subconnectors.
-    
-    **This is copy of the <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> connector, except that it
-    has a smaller icon, a default <code>protected</code> prefix, and the subconnectors are always included.
+    This is copy of the <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> connector, except that it
+    has a smaller icon, a default <code>protected</code> prefix, and the subconnectors are conditional.
     For more information, see that connector.</p></html>"),
       Icon(graphics={Ellipse(
             extent={{-100,100},{100,-100}},
@@ -1315,7 +1313,7 @@ Protected connector with one output signal of type <code>Real</code>.</p>
 
   <p>
   <b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-  Copyright 2007&ndash;2012, Georgia Tech Research Corporation.
+  Copyright 2007&ndash;2013, Georgia Tech Research Corporation.
   </p>
   <p>
   <i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;

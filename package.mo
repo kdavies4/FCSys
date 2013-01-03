@@ -10,6 +10,7 @@ package FCSys "Modelica library of fuel cell models"
 // the LaTeX document:
 //------------------------------------------------------------------------
 
+
 extends Modelica.Icons.Package;
 // extends FCSys.Icons.Cell;
 
@@ -38,6 +39,7 @@ import FCSys.Connectors.BaseClasses.ThermoOpt;
 import FCSys.Subregions.Reactions.BaseClasses.InitMethCharge;
 import FCSys.Subregions.Species.BaseClasses.InitMethVelocity;
 import FCSys.Subregions.Species.BaseClasses.InitMethScalar;
+
 
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
@@ -909,6 +911,20 @@ printing and shipping costs may be recovered.</p>
   annotation (preferedView="info", DocumentationClass=true);
   end UsersGuide;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 annotation (
   uses(Modelica(version="3.2"), Modelica_LinearSystems2(version="2.1")),
   preferedView="info",
@@ -926,7 +942,8 @@ annotation (
     except that the reactants (fuel and oxidant) are externally stored or drawn
     from the environment.  The electrochemical reactions of a PEMFC are:
 
-    <table border=0 cellspacing=0 cellpadding=2 align=center class=noBorder>
+    <table border=0 cellspacing=0 cellpadding=2 align=center style=\"margin-left: auto;
+margin-right: auto;\" class=noBorder>
       <tr>
         <td align=right style=\"white-space:nowrap; text-align:right;\" class=noBorder>
           2(H<sub>2</sub>
@@ -1021,7 +1038,7 @@ annotation (
 <br>Figure 3: Diagram of a test model (<a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\">FCSys.Assemblies.Cells.Examples.CellProfile</a>).</p>
 
     <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b>
-<br>Copyright 2007&ndash;2012, Georgia Tech Research Corporation.</p>
+<br>Copyright 2007&ndash;2013, Georgia Tech Research Corporation.</p>
 
     <p><i>This Modelica package is <u>free</u> software and the use is completely
     at <u>your own risk</u>; it can be redistributed and/or modified under the
