@@ -1282,11 +1282,11 @@ package Figures "Layouts for documentation"
     extends FCSys.BaseClasses.Icons.Cell;
 
     annotation (Icon(graphics={Rectangle(
-              extent={{-100,100},{100,65}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0})}));
+            extent={{-100,100},{100,65}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0})}));
   end Logo;
 
   model AnFPIcon "Anode flow plate"
@@ -1490,69 +1490,86 @@ package Figures "Layouts for documentation"
     FCSys.Connectors.MaterialTransport Material annotation (Placement(
           transformation(extent={{-22,-30},{-2,-10}}), iconTransformation(
             extent={{10,-40},{30,-20}})));
-    FCSys.Connectors.Heat Heat annotation (Placement(transformation(extent={{26,
-              -30},{46,-10}}), iconTransformation(extent={{-10,-40},{10,-20}})));
+    FCSys.Connectors.Thermal Thermal annotation (Placement(transformation(
+            extent={{26,-30},{46,-10}}), iconTransformation(extent={{-10,-40},{
+              10,-20}})));
     FCSys.Connectors.MechanicalTransport Mechanical annotation (Placement(
           transformation(extent={{2,-30},{22,-10}}), iconTransformation(extent=
               {{-30,-40},{-10,-20}})));
-    annotation (Diagram(graphics={Line(
-              points={{12,28},{12,4}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{-32,28},{-32,4}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{12,4},{12,-20}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{12,4},{-12,-20}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{12,4},{36,-20}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{60,24},{60,-16}},
-              color={0,0,0},
-              smooth=Smooth.None),Line(
-              points={{58,20},{60,24},{62,20}},
-              color={0,0,0},
-              smooth=Smooth.None),Text(
-              extent={{48,30},{72,26}},
-              lineColor={0,0,0},
-              textString="Composite"),Text(
-              extent={{46,-18},{74,-22}},
-              lineColor={0,0,0},
-              textString="Basic"),Text(
-              extent={{-40,40},{-24,36}},
-              lineColor={0,0,0},
-              textString="Chemical"),Text(
-              extent={{-40,36},{-24,32}},
-              lineColor={0,0,0},
-              textString="bus"),Ellipse(
-              extent={{-35,31},{-29,25}},
-              lineColor={208,104,0},
-              fillColor={255,128,0},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{4,40},{20,36}},
-              lineColor={0,0,0},
-              textString="Face"),Text(
-              extent={{4,36},{20,32}},
-              lineColor={0,0,0},
-              textString="bus"),Ellipse(
-              extent={{9,31},{15,25}},
-              lineColor={127,127,127},
-              fillColor={191,191,191},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{16,-18},{22,-22}},
-              lineColor={0,0,0},
-              textString="x 2")}), Icon(graphics));
+    annotation (Diagram(graphics={
+          Line(
+            points={{12,28},{12,4}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{-32,28},{-32,4}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{12,4},{12,-20}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{12,4},{-12,-20}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{12,4},{36,-20}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{60,24},{60,-16}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{58,20},{60,24},{62,20}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Text(
+            extent={{48,30},{72,26}},
+            lineColor={0,0,0},
+            textString="Composite"),
+          Text(
+            extent={{46,-18},{74,-22}},
+            lineColor={0,0,0},
+            textString="Basic"),
+          Text(
+            extent={{-40,40},{-24,36}},
+            lineColor={0,0,0},
+            textString="Chemical"),
+          Text(
+            extent={{-40,36},{-24,32}},
+            lineColor={0,0,0},
+            textString="bus"),
+          Ellipse(
+            extent={{-35,31},{-29,25}},
+            lineColor={208,104,0},
+            fillColor={255,128,0},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5),
+          Text(
+            extent={{4,40},{20,36}},
+            lineColor={0,0,0},
+            textString="Face"),
+          Text(
+            extent={{4,36},{20,32}},
+            lineColor={0,0,0},
+            textString="bus"),
+          Ellipse(
+            extent={{9,31},{15,25}},
+            lineColor={127,127,127},
+            fillColor={191,191,191},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5),
+          Text(
+            extent={{16,-18},{22,-22}},
+            lineColor={0,0,0},
+            textString="x 2")}), Icon(graphics));
   end ConnectorHieararchy;
 
   package ReactionComparison

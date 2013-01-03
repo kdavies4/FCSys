@@ -284,7 +284,7 @@ package BCs "Models for boundary conditions"
           color={127,127,127},
           smooth=Smooth.None,
           thickness=0.5));
-      connect(xNegative.H2.heat, volume.face.heat) annotation (Line(
+      connect(xNegative.H2.thermal, volume.face.thermal) annotation (Line(
           points={{5.55112e-16,5.55112e-16},{-6,5.55112e-16},{-6,0},{-10,0},{-10,
               6.10623e-16},{-20,6.10623e-16}},
           color={127,127,127},
@@ -323,7 +323,7 @@ package BCs "Models for boundary conditions"
           index=1,
           extent={{-10,3},{-10,3}}));
 
-      connect(fluidAdapt.face.heat, face.H2.heat) annotation (Line(
+      connect(fluidAdapt.face.thermal, face.H2.thermal) annotation (Line(
           points={{-10,6.10623e-16},{-54,6.10623e-16},{-54,5.55112e-16},{-100,
               5.55112e-16}},
           color={0,0,0},
@@ -350,7 +350,7 @@ package BCs "Models for boundary conditions"
           index=1,
           extent={{-10,3},{-10,3}}));
 
-      connect(fluidAdapt.face.heat, face.H2O.heat) annotation (Line(
+      connect(fluidAdapt.face.thermal, face.H2O.thermal) annotation (Line(
           points={{-10,6.10623e-16},{-54,6.10623e-16},{-54,5.55112e-16},{-100,
               5.55112e-16}},
           color={0,0,0},
@@ -374,7 +374,7 @@ package BCs "Models for boundary conditions"
           index=1,
           extent={{-10,3},{-10,3}}));
 
-      connect(fluidAdapt.face.heat, face.N2.heat) annotation (Line(
+      connect(fluidAdapt.face.thermal, face.N2.thermal) annotation (Line(
           points={{-10,6.10623e-16},{-54,6.10623e-16},{-54,5.55112e-16},{-100,
               5.55112e-16}},
           color={0,0,0},
@@ -399,7 +399,7 @@ package BCs "Models for boundary conditions"
           index=1,
           extent={{-10,3},{-10,3}}));
 
-      connect(fluidAdapt.face.heat, face.O2.heat) annotation (Line(
+      connect(fluidAdapt.face.thermal, face.O2.thermal) annotation (Line(
           points={{-10,6.10623e-16},{-54,6.10623e-16},{-54,5.55112e-16},{-100,
               5.55112e-16}},
           color={0,0,0},
@@ -437,20 +437,20 @@ package BCs "Models for boundary conditions"
     equation
       // Thermodynamic state and properties
       medium.p = fluidPort.p;
-      medium.T = face.heat.T/U.K;
+      medium.T = face.thermal.T/U.K;
       medium.Xi = ones(Medium.nXi)/Medium.nXi;
       s = Medium.specificEntropy(medium.state)*medium.MM*U.J/(U.mol*U.K);
 
       // Efforts and streams
-      //  face.material.mu = actualStream(fluidPort.h_outflow)*medium.MM*U.J/U.mol -  face.heat.T*s;
-      //  face.material.mu = inStream(fluidPort.h_outflow)*medium.MM*U.J/U.mol - face.heat.T*s;
-      face.material.mu = medium.h*medium.MM*U.J/U.mol - face.heat.T*s;
+      //  face.material.mu = actualStream(fluidPort.h_outflow)*medium.MM*U.J/U.mol -  face.thermal.T*s;
+      //  face.material.mu = inStream(fluidPort.h_outflow)*medium.MM*U.J/U.mol - face.thermal.T*s;
+      face.material.mu = medium.h*medium.MM*U.J/U.mol - face.thermal.T*s;
       fluidPort.h_outflow = medium.h;
 
       // Rate balances (no storage)
       0 = (medium.MM*U.kg/U.mol)*face.material.Ndot + fluidPort.m_flow*U.kg/U.s
         "Mass";
-      face.heat.Qdot = s*face.material.Ndot
+      face.thermal.Qdot = s*face.material.Ndot
         "No thermal conduction--advection only";
       // The rest of the energy balance cancels.
 
@@ -458,21 +458,18 @@ package BCs "Models for boundary conditions"
         Documentation(info="<html><p>Note that transverse momentum is not included.</p>
   </html>"),
         Diagram(graphics),
-        Icon(graphics={
-            Line(
-              points={{0,40},{0,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{0,0},{100,0}},
-              color={0,127,255},
-              smooth=Smooth.None)}));
+        Icon(graphics={Line(
+                  points={{0,40},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{0,0},{100,0}},
+                  color={0,127,255},
+                  smooth=Smooth.None)}));
     end AdaptFluid;
 
     model 'AdaptSubregione-'
@@ -511,26 +508,22 @@ package BCs "Models for boundary conditions"
           color={191,0,0},
           smooth=Smooth.None));
 
-      annotation (Diagram(graphics), Icon(graphics={
-            Line(
-              points={{0,40},{0,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,40},{100,40}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{100,-40}},
-              color={191,0,0},
-              smooth=Smooth.None)}));
+      annotation (Diagram(graphics), Icon(graphics={Line(
+                  points={{0,40},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,40},{100,40}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{100,-40}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}));
     end 'AdaptSubregione-';
 
     model 'AdaptBuse-'
@@ -560,7 +553,7 @@ package BCs "Models for boundary conditions"
           color={0,0,0},
           smooth=Smooth.None));
 
-      connect(electAdapt.face.heat, face.'e-'.heat) annotation (Line(
+      connect(electAdapt.face.thermal, face.'e-'.thermal) annotation (Line(
           points={{-10,6.10623e-16},{-54,6.10623e-16},{-54,5.55112e-16},{-100,
               5.55112e-16}},
           color={127,127,127},
@@ -575,26 +568,22 @@ package BCs "Models for boundary conditions"
           color={191,0,0},
           smooth=Smooth.None));
 
-      annotation (Diagram(graphics), Icon(graphics={
-            Line(
-              points={{0,40},{0,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,40},{100,40}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{100,-40}},
-              color={191,0,0},
-              smooth=Smooth.None)}));
+      annotation (Diagram(graphics), Icon(graphics={Line(
+                  points={{0,40},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,40},{100,40}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{100,-40}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}));
     end 'AdaptBuse-';
 
     model 'Adapte-'
@@ -620,35 +609,31 @@ package BCs "Models for boundary conditions"
     equation
       // Equal efforts
       face.material.mu = pin.v*U.V "Electrochemical potential";
-      face.heat.T = port.T*U.K "Temperature";
+      face.thermal.T = port.T*U.K "Temperature";
 
       // Conservation (no storage)
       0 = face.material.Ndot - pin.i*U.A "Material";
       // In FCSys, current is material (e.g., electron) flow, not charge flow;
       // therefore, the flow rate is negated.
-      0 = face.heat.Qdot + port.Q_flow*U.W "Energy";
+      0 = face.thermal.Qdot + port.Q_flow*U.W "Energy";
       // There is no electrical work since electrons are not stored and there
       // is no potential difference.
 
-      annotation (Diagram(graphics), Icon(graphics={
-            Line(
-              points={{0,40},{0,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{0,40},{100,40}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{100,-40}},
-              color={191,0,0},
-              smooth=Smooth.None)}));
+      annotation (Diagram(graphics), Icon(graphics={Line(
+                  points={{0,40},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{0,40},{100,40}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{100,-40}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}));
     end 'Adapte-';
 
     package BaseClasses "Base classes (not for direct use)"
@@ -682,21 +667,18 @@ package BCs "Models for boundary conditions"
             color={0,127,255},
             smooth=Smooth.None));
 
-        annotation (Diagram(graphics), Icon(graphics={
-              Line(
-                points={{0,40},{0,-40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash,
-                thickness=0.5),
-              Line(
-                points={{0,0},{-100,0}},
-                color={127,127,127},
-                smooth=Smooth.None),
-              Line(
-                points={{0,0},{100,0}},
-                color={0,127,255},
-                smooth=Smooth.None)}));
+        annotation (Diagram(graphics), Icon(graphics={Line(
+                      points={{0,40},{0,-40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash,
+                      thickness=0.5),Line(
+                      points={{0,0},{-100,0}},
+                      color={127,127,127},
+                      smooth=Smooth.None),Line(
+                      points={{0,0},{100,0}},
+                      color={0,127,255},
+                      smooth=Smooth.None)}));
       end PartialAdaptBus;
     end BaseClasses;
   end Adapters;
@@ -1644,8 +1626,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.C, C.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1656,8 +1638,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.C19HF37O5S, C19HF37O5S.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1668,8 +1650,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.'e-', 'e-'.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1680,8 +1662,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.H2, H2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1692,8 +1674,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.H2O, H2O.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1704,8 +1686,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.'H+', 'H+'.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1716,8 +1698,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.N2, N2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1728,8 +1710,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.O2, O2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -2092,8 +2074,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.C19HF37O5S, C19HF37O5S.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -2104,8 +2086,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.H2O, H2O.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -2116,8 +2098,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.'H+', 'H+'.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
-                -5.08852e-16,4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+                4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -2405,7 +2387,7 @@ package BCs "Models for boundary conditions"
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,40})));
-        Connectors.RealInputInternal u_H_int "Internal signal for entropy"
+        Connectors.RealInputInternal u_H_int "Internal signal for enthalpy"
           annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
@@ -3630,7 +3612,7 @@ boundary condition</a> models.
           Placement(transformation(extent={{-10,-10},{10,10}})));
 
       FCSys.Connectors.FaceBus face
-        "Connector for material, linear momentum, and entropy of multiple species"
+        "Connector for material, linear momentum, and heat of multiple species"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
       Connectors.RealInputBus u "Bus of inputs to specify conditions"
@@ -3697,56 +3679,56 @@ boundary condition</a> models.
             redeclare replaceable Species.Material.Current materialBC,
             redeclare replaceable Species.Momentum.Force lin1BC,
             redeclare replaceable Species.Momentum.Force lin2BC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k=0)),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k=0)),
           H2O(
             redeclare replaceable Species.Material.Current materialBC,
             redeclare replaceable Species.Momentum.Force lin1BC,
             redeclare replaceable Species.Momentum.Force lin2BC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k=0)),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k=0)),
           N2(
             redeclare replaceable Species.Material.Current materialBC,
             redeclare replaceable Species.Momentum.Force lin1BC,
             redeclare replaceable Species.Momentum.Force lin2BC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k=0)),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k=0)),
           O2(
             redeclare replaceable Species.Material.Current materialBC,
             redeclare replaceable Species.Momentum.Force lin1BC,
             redeclare replaceable Species.Momentum.Force lin2BC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k=0))),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k=0))),
         graphite(C(
             redeclare replaceable Species.Material.Current materialBC,
             redeclare replaceable Species.Momentum.Force lin1BC,
             redeclare replaceable Species.Momentum.Force lin2BC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k=0)), 'e-'(
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k=0)), 'e-'(
             redeclare replaceable Species.Material.Current materialBC,
             redeclare replaceable Species.Momentum.Force lin1BC,
             redeclare replaceable Species.Momentum.Force lin2BC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k=0))),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k=0))),
         ionomer(
           C19HF37O5S(
             redeclare replaceable Species.Material.Current materialBC,
             redeclare replaceable Species.Momentum.Force lin1BC,
             redeclare replaceable Species.Momentum.Force lin2BC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k=0)),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k=0)),
           H2O(
             redeclare replaceable Species.Material.Current materialBC,
             redeclare replaceable Species.Momentum.Force lin1BC,
             redeclare replaceable Species.Momentum.Force lin2BC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k=0)),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k=0)),
           'H+'(
             redeclare replaceable Species.Material.Current materialBC,
             redeclare replaceable Species.Momentum.Force lin1BC,
             redeclare replaceable Species.Momentum.Force lin2BC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k=0))));
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k=0))));
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
@@ -3823,40 +3805,40 @@ boundary condition</a> models.
         gas(
           H2(
             redeclare replaceable Species.Material.Current materialBC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k(start=0))),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k(start=0))),
           H2O(
             redeclare replaceable Species.Material.Current materialBC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k(start=0))),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k(start=0))),
           N2(
             redeclare replaceable Species.Material.Current materialBC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k(start=0))),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k(start=0))),
           O2(
             redeclare replaceable Species.Material.Current materialBC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k(start=0)))),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k(start=0)))),
         graphite(C(
             redeclare replaceable Species.Material.Current materialBC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k(start=0))), 'e-'(
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k(start=0))), 'e-'(
             redeclare replaceable Species.Material.Current materialBC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k(start=0)))),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k(start=0)))),
         ionomer(
           C19HF37O5S(
             redeclare replaceable Species.Material.Current materialBC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k(start=0))),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k(start=0))),
           H2O(
             redeclare replaceable Species.Material.Current materialBC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k(start=0))),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k(start=0))),
           'H+'(
             redeclare replaceable Species.Material.Current materialBC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k(start=0)))));
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k(start=0)))));
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
@@ -3866,25 +3848,24 @@ boundary condition</a> models.
       "<html>BC for a face of a <a href=\"modelica://FCSys.Subregions.Subregion\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with efforts except zero power by default</html>"
       extends FCSys.BCs.Face.Subregion(
         gas(
-          H2(redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-              entropySpec(k(start=0))),
-          H2O(redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-              entropySpec(k(start=0))),
-          N2(redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-              entropySpec(k(start=0))),
-          O2(redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-              entropySpec(k(start=0)))),
-        graphite(C(redeclare replaceable Species.Entropy.EntropyFlowRate
-              entropyBC, entropySpec(k(start=0))), 'e-'(redeclare replaceable
-              Species.Entropy.EntropyFlowRate entropyBC, entropySpec(k(start=0)))),
-
+          H2(redeclare replaceable Species.Heat.HeatFlowRate heatBC, heatSpec(k(
+                  start=0))),
+          H2O(redeclare replaceable Species.Heat.HeatFlowRate heatBC, heatSpec(
+                k(start=0))),
+          N2(redeclare replaceable Species.Heat.HeatFlowRate heatBC, heatSpec(k(
+                  start=0))),
+          O2(redeclare replaceable Species.Heat.HeatFlowRate heatBC, heatSpec(k(
+                  start=0)))),
+        graphite(C(redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+              heatSpec(k(start=0))), 'e-'(redeclare replaceable
+              Species.Heat.HeatFlowRate heatBC, heatSpec(k(start=0)))),
         ionomer(
-          C19HF37O5S(redeclare replaceable Species.Entropy.EntropyFlowRate
-              entropyBC, entropySpec(k(start=0))),
-          H2O(redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-              entropySpec(k(start=0))),
-          'H+'(redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-              entropySpec(k(start=0)))));
+          C19HF37O5S(redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+              heatSpec(k(start=0))),
+          H2O(redeclare replaceable Species.Heat.HeatFlowRate heatBC, heatSpec(
+                k(start=0))),
+          'H+'(redeclare replaceable Species.Heat.HeatFlowRate heatBC, heatSpec(
+                k(start=0)))));
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
@@ -4022,7 +4003,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.face.heat, face.C.heat) annotation (Line(
+        connect(C.face.thermal, face.C.thermal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4071,7 +4052,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.face.heat, face.C19HF37O5S.heat) annotation (Line(
+        connect(C19HF37O5S.face.thermal, face.C19HF37O5S.thermal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4125,7 +4106,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.face.heat, face.'e-'.heat) annotation (Line(
+        connect('e-'.face.thermal, face.'e-'.thermal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4173,7 +4154,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.face.heat, face.H2.heat) annotation (Line(
+        connect(H2.face.thermal, face.H2.thermal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4221,7 +4202,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.face.heat, face.H2O.heat) annotation (Line(
+        connect(H2O.face.thermal, face.H2O.thermal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4269,7 +4250,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.face.heat, face.'H+'.heat) annotation (Line(
+        connect('H+'.face.thermal, face.'H+'.thermal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4317,7 +4298,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.face.heat, face.N2.heat) annotation (Line(
+        connect(N2.face.thermal, face.N2.thermal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4365,7 +4346,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.face.heat, face.O2.heat) annotation (Line(
+        connect(O2.face.thermal, face.O2.thermal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4480,7 +4461,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.face.heat, face.H2.heat) annotation (Line(
+        connect(H2.face.thermal, face.H2.thermal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4528,7 +4509,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.face.heat, face.H2O.heat) annotation (Line(
+        connect(H2O.face.thermal, face.H2O.thermal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4576,7 +4557,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.face.heat, face.N2.heat) annotation (Line(
+        connect(N2.face.thermal, face.N2.thermal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4624,7 +4605,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.face.heat, face.O2.heat) annotation (Line(
+        connect(O2.face.thermal, face.O2.thermal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4711,7 +4692,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.face.heat, face.C.heat) annotation (Line(
+        connect(C.face.thermal, face.C.thermal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4759,7 +4740,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.face.heat, face.'e-'.heat) annotation (Line(
+        connect('e-'.face.thermal, face.'e-'.thermal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4865,7 +4846,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.face.heat, face.C19HF37O5S.heat) annotation (Line(
+        connect(C19HF37O5S.face.thermal, face.C19HF37O5S.thermal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4919,7 +4900,7 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.face.heat, face.'H+'.heat) annotation (Line(
+        connect('H+'.face.thermal, face.'H+'.thermal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4977,7 +4958,7 @@ boundary condition</a> models.
             "Axis normal to the face";
 
           FCSys.Connectors.FaceBus face
-            "Multi-species connector for material, linear momentum, and entropy"
+            "Multi-species connector for material, linear momentum, and heat"
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
           Connectors.RealInputBus u "Bus of inputs to specify conditions"
             annotation (Placement(transformation(
@@ -5040,7 +5021,7 @@ boundary condition</a> models.
         // option, e.g.,
         //     enable=thermoOpt=ThermoOpt.OpenDiabatic.
         // Therefore, the values of the enumerations are specified numerically for
-        // this initial condition and others below for material and entropy.
+        // this initial condition and others below for material and heat.
         replaceable FCSys.BCs.Face.Species.Material.Pressure materialBC if open
           constrainedby FCSys.BCs.Face.Species.Material.BaseClasses.PartialBC
           "Type of condition" annotation (
@@ -5161,40 +5142,39 @@ boundary condition</a> models.
               rotation=270,
               origin={10,20})));
 
-        // Entropy
+        // Heat
         final parameter Boolean diabatic=thermoOpt == ThermoOpt.ClosedDiabatic
-             or thermoOpt == ThermoOpt.OpenDiabatic
-          "Diabatic (entropy included)";
-        replaceable Entropy.Temperature entropyBC if diabatic constrainedby
-          FCSys.BCs.Face.Species.Entropy.BaseClasses.PartialBC
-          "Type of condition" annotation (
+             or thermoOpt == ThermoOpt.OpenDiabatic "Diabatic (heat included)";
+        replaceable Heat.Temperature heatBC if diabatic constrainedby
+          FCSys.BCs.Face.Species.Heat.BaseClasses.PartialBC "Type of condition"
+          annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
-            group="Entropy",
+            group="Heat",
             enable=thermoOpt == 2 or thermoOpt == 3,
             __Dymola_descriptionLabel=true),
           Placement(transformation(extent={{50,-26},{70,-6}})));
 
-        parameter Boolean internalEntropy=true "Use internal specification"
+        parameter Boolean internalHeat=true "Use internal specification"
           annotation (
           Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
-            group="Entropy",
+            group="Heat",
             enable=thermoOpt == 2 or thermoOpt == 3,
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
 
-        replaceable Modelica.Blocks.Sources.Constant entropySpec(k(start=298.15
-                *U.K)) if internalEntropy and diabatic constrainedby
+        replaceable Modelica.Blocks.Sources.Constant heatSpec(k(start=298.15*U.K))
+          if internalHeat and diabatic constrainedby
           Modelica.Blocks.Interfaces.SO "Internal specification" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
-            group="Entropy",
+            group="Heat",
             __Dymola_descriptionLabel=true,
-            enable=(thermoOpt == 2 or thermoOpt == 3) and internalEntropy,
-            enable=internalEntropy and diabatic),
+            enable=(thermoOpt == 2 or thermoOpt == 3) and internalHeat,
+            enable=internalHeat and diabatic),
           Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
@@ -5204,12 +5184,12 @@ boundary condition</a> models.
           final thermoOpt=thermoOpt,
           final slip1=slip1,
           final slip2=slip2)
-          "Single-species connector for material, linear momentum, and entropy"
+          "Single-species connector for material, linear momentum, and heat"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
               iconTransformation(extent={{-10,-50},{10,-30}})));
         FCSys.Connectors.RealInputBus u "Input bus for external signal sources"
           annotation (HideResult=not (internalMaterial or internalLin1 or
-              internalLin1 or internalLin2 or internalEntropy), Placement(
+              internalLin1 or internalLin2 or internalHeat), Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
@@ -5245,8 +5225,8 @@ boundary condition</a> models.
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-20,40})));
-        Connectors.RealInputInternal u_S if not internalEntropy and diabatic
-          "External signal for entropy" annotation (Placement(transformation(
+        Connectors.RealInputInternal u_Q if not internalHeat and diabatic
+          "External signal for heat" annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={70,40}),iconTransformation(
@@ -5327,21 +5307,21 @@ boundary condition</a> models.
             index=-1,
             extent={{-6,3},{-6,3}}));
 
-        // Entropy
-        connect(entropyBC.heat, face.heat) annotation (Line(
+        // Heat
+        connect(heatBC.thermal, face.thermal) annotation (Line(
             points={{60,-20},{60,-30},{5.55112e-16,-30},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(entropySpec.y, entropyBC.u) annotation (Line(
+        connect(heatSpec.y, heatBC.u) annotation (Line(
             points={{50,9},{50,0},{60,0},{60,-12}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(u_S, entropyBC.u) annotation (Line(
+        connect(u_Q, heatBC.u) annotation (Line(
             points={{70,40},{70,0},{60,0},{60,-12}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(u.S, u_S) annotation (Line(
+        connect(u.Q, u_Q) annotation (Line(
             points={{5.55112e-16,70},{5.55112e-16,50},{70,50},{70,40}},
             color={0,0,127},
             thickness=0.5,
@@ -5369,7 +5349,7 @@ boundary condition</a> models.
             defaultComponentPrefixes="replaceable",
             defaultComponentName="materialBC",
             Documentation(info="<html><p>Pressure can be
-  calculated from other properties (e.g., temperature, specific volume, specific enthalpy, specific entropy, or Gibbs potential)
+  calculated from other properties (e.g., temperature, specific volume, specific enthalpy, specific heat, or Gibbs potential)
   using functions in the
   <a href=\"modelica://FCSys.Connectors.Characteristic\">Characteristics</a> package.
   </p></html>"));
@@ -5460,32 +5440,21 @@ boundary condition</a> models.
         end BaseClasses;
       end Momentum;
 
-      package Entropy "BCs for entropy"
+      package Heat "BCs for heat"
         extends Modelica.Icons.Package;
 
         model Temperature "Prescribed temperature"
-          extends FCSys.BCs.Face.Species.Entropy.BaseClasses.PartialBC(final
+          extends FCSys.BCs.Face.Species.Heat.BaseClasses.PartialBC(final
               bCType=BaseClasses.BCType.Temperature, redeclare
               Connectors.RealInput u(final unit="l2.m/(N.T2)", displayUnit="K"));
         equation
           heat.T = u;
           annotation (defaultComponentPrefixes="replaceable",
-              defaultComponentName="entropyBC");
+              defaultComponentName="heatBC");
         end Temperature;
 
-        model EntropyFlowRate "Prescribed entropy flow rate"
-          extends FCSys.BCs.Face.Species.Entropy.BaseClasses.PartialBC(final
-              bCType=BaseClasses.BCType.EntropyFlowRate, redeclare
-              Connectors.RealInput u(final unit="N/T"));
-
-        equation
-          heat.Qdot = u;
-          annotation (defaultComponentPrefixes="replaceable",
-              defaultComponentName="entropyBC");
-        end EntropyFlowRate;
-
         model HeatFlowRate "Prescribed heat flow rate"
-          extends FCSys.BCs.Face.Species.Entropy.BaseClasses.PartialBC(final
+          extends FCSys.BCs.Face.Species.Heat.BaseClasses.PartialBC(final
               bCType=BaseClasses.BCType.HeatFlowRate, redeclare
               Connectors.RealInput u(final unit="l2.m/T3"));
 
@@ -5493,13 +5462,13 @@ boundary condition</a> models.
           heat.Qdot = u;
           annotation (
             defaultComponentPrefixes="replaceable",
-            defaultComponentName="entropyBC",
+            defaultComponentName="heatBC",
             Diagram(graphics));
         end HeatFlowRate;
 
         package BaseClasses "Base classes (not for direct use)"
           extends Modelica.Icons.BasesPackage;
-          partial model PartialBC "Partial model for a BC for entropy"
+          partial model PartialBC "Partial model for a BC for heat"
             extends FCSys.BaseClasses.Icons.BCs.Single;
             constant BCType bCType "Type of BC";
             // Note:  This is included so that the type of BC is recorded with the
@@ -5510,22 +5479,21 @@ boundary condition</a> models.
                   rotation=270,
                   origin={0,40})));
 
-            FCSys.Connectors.Heat thermal "Thermal connector for the face"
+            FCSys.Connectors.Thermal thermal "Thermal connector for the face"
               annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
           equation
 
             annotation (
               defaultComponentPrefixes="replaceable",
-              defaultComponentName="entropyBC",
+              defaultComponentName="heatBC",
               Diagram(graphics));
           end PartialBC;
 
           type BCType = enumeration(
               Temperature "Temperature",
-              EntropyFlowRate "Entropy flow rate",
               HeatFlowRate "Heat flow rate") "Types of BCs";
         end BaseClasses;
-      end Entropy;
+      end Heat;
 
       model SpeciesX
         "<html>BC for a face of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
@@ -5662,37 +5630,36 @@ boundary condition</a> models.
         // Heat
         final parameter Boolean diabatic=thermoOpt == ThermoOpt.ClosedDiabatic
              or thermoOpt == ThermoOpt.OpenDiabatic "Diabatic (heat included)";
-        replaceable FCSys.BCs.Face.Species.Entropy.Temperature heatBC if
-          diabatic constrainedby
-          FCSys.BCs.Face.Species.Entropy.BaseClasses.PartialBC
+        replaceable FCSys.BCs.Face.Species.Heat.Temperature heatBC if diabatic
+          constrainedby FCSys.BCs.Face.Species.Heat.BaseClasses.PartialBC
           "Type of condition" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
-            group="Entropy",
+            group="Heat",
             enable=thermoOpt == 2 or thermoOpt == 3,
             __Dymola_descriptionLabel=true),
           Placement(transformation(extent={{50,-26},{70,-6}})));
 
-        parameter Boolean internalEntropy=true "Use internal specification"
+        parameter Boolean internalHeat=true "Use internal specification"
           annotation (
           Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
-            group="Entropy",
+            group="Heat",
             enable=thermoOpt == 2 or thermoOpt == 3,
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
 
         replaceable Modelica.Blocks.Sources.Constant heatSpec(k(start=298.15*U.K))
-          if internalEntropy and diabatic constrainedby
+          if internalHeat and diabatic constrainedby
           Modelica.Blocks.Interfaces.SO "Internal specification" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
-            group="Entropy",
+            group="Heat",
             __Dymola_descriptionLabel=true,
-            enable=(thermoOpt == 2 or thermoOpt == 3) and internalEntropy,
-            enable=internalEntropy and diabatic),
+            enable=(thermoOpt == 2 or thermoOpt == 3) and internalHeat,
+            enable=internalHeat and diabatic),
           Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
@@ -5704,7 +5671,7 @@ boundary condition</a> models.
               iconTransformation(extent={{-10,-50},{10,-30}})));
         FCSys.Connectors.RealInputBus u "Input bus for external signal sources"
           annotation (HideResult=not (internalMaterial or internalLin1 or
-              internalLin1 or internalLin2 or internalEntropy), Placement(
+              internalLin1 or internalLin2 or internalHeat), Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
@@ -5740,7 +5707,7 @@ boundary condition</a> models.
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-20,40})));
-        Connectors.RealInputInternal u_S if not internalEntropy and diabatic
+        Connectors.RealInputInternal u_Q if not internalHeat and diabatic
           "External signal for heat" annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
@@ -5809,8 +5776,8 @@ boundary condition</a> models.
             index=-1,
             extent={{-6,3},{-6,3}}));
 
-        // Entropy
-        connect(heatBC.heat, face.heat) annotation (Line(
+        // Heat
+        connect(heatBC.thermal, face.thermal) annotation (Line(
             points={{60,-20},{60,-30},{5.55112e-16,-30},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -5819,11 +5786,11 @@ boundary condition</a> models.
             points={{50,9},{50,0},{60,0},{60,-12}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(u_S, heatBC.u) annotation (Line(
+        connect(u_Q, heatBC.u) annotation (Line(
             points={{70,40},{70,0},{60,0},{60,-12}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(u.S, u_S) annotation (Line(
+        connect(u.Q, u_Q) annotation (Line(
             points={{5.55112e-16,70},{5.55112e-16,50},{70,50},{70,40}},
             color={0,0,127},
             thickness=0.5,
@@ -5985,56 +5952,56 @@ boundary condition</a> model.
             redeclare replaceable Species.Material.Current materialBC,
             redeclare replaceable Species.Momentum.Force lin1BC,
             redeclare replaceable Species.Momentum.Force lin2BC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k=0)),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k=0)),
           H2O(
             redeclare replaceable Species.Material.Current materialBC,
             redeclare replaceable Species.Momentum.Force lin1BC,
             redeclare replaceable Species.Momentum.Force lin2BC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k=0)),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k=0)),
           N2(
             redeclare replaceable Species.Material.Current materialBC,
             redeclare replaceable Species.Momentum.Force lin1BC,
             redeclare replaceable Species.Momentum.Force lin2BC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k=0)),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k=0)),
           O2(
             redeclare replaceable Species.Material.Current materialBC,
             redeclare replaceable Species.Momentum.Force lin1BC,
             redeclare replaceable Species.Momentum.Force lin2BC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k=0))),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k=0))),
         graphite(C(
             redeclare replaceable Species.Material.Current materialBC,
             redeclare replaceable Species.Momentum.Force lin1BC,
             redeclare replaceable Species.Momentum.Force lin2BC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k=0)), 'e-'(
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k=0)), 'e-'(
             redeclare replaceable Species.Material.Current materialBC,
             redeclare replaceable Species.Momentum.Force lin1BC,
             redeclare replaceable Species.Momentum.Force lin2BC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k=0))),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k=0))),
         ionomer(
           C19HF37O5S(
             redeclare replaceable Species.Material.Current materialBC,
             redeclare replaceable Species.Momentum.Force lin1BC,
             redeclare replaceable Species.Momentum.Force lin2BC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k=0)),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k=0)),
           H2O(
             redeclare replaceable Species.Material.Current materialBC,
             redeclare replaceable Species.Momentum.Force lin1BC,
             redeclare replaceable Species.Momentum.Force lin2BC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k=0)),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k=0)),
           'H+'(
             redeclare replaceable Species.Material.Current materialBC,
             redeclare replaceable Species.Momentum.Force lin1BC,
             redeclare replaceable Species.Momentum.Force lin2BC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k=0))));
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k=0))));
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
@@ -6066,40 +6033,40 @@ boundary condition</a> model.
         gas(
           H2(
             redeclare replaceable Species.Material.Current materialBC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k(start=0))),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k(start=0))),
           H2O(
             redeclare replaceable Species.Material.Current materialBC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k(start=0))),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k(start=0))),
           N2(
             redeclare replaceable Species.Material.Current materialBC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k(start=0))),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k(start=0))),
           O2(
             redeclare replaceable Species.Material.Current materialBC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k(start=0)))),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k(start=0)))),
         graphite(C(
             redeclare replaceable Species.Material.Current materialBC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k(start=0))), 'e-'(
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k(start=0))), 'e-'(
             redeclare replaceable Species.Material.Current materialBC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k(start=0)))),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k(start=0)))),
         ionomer(
           C19HF37O5S(
             redeclare replaceable Species.Material.Current materialBC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k(start=0))),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k(start=0))),
           H2O(
             redeclare replaceable Species.Material.Current materialBC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k(start=0))),
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k(start=0))),
           'H+'(
             redeclare replaceable Species.Material.Current materialBC,
-            redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-            entropySpec(k(start=0)))));
+            redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+            heatSpec(k(start=0)))));
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
@@ -6109,25 +6076,24 @@ boundary condition</a> model.
       "<html>BC for a face of a <a href=\"modelica://FCSys.Subregions.Subregion\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with efforts except zero power by default</html>"
       extends FCSys.BCs.FaceDifferential.Subregion(
         gas(
-          H2(redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-              entropySpec(k(start=0))),
-          H2O(redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-              entropySpec(k(start=0))),
-          N2(redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-              entropySpec(k(start=0))),
-          O2(redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-              entropySpec(k(start=0)))),
-        graphite(C(redeclare replaceable Species.Entropy.EntropyFlowRate
-              entropyBC, entropySpec(k(start=0))), 'e-'(redeclare replaceable
-              Species.Entropy.EntropyFlowRate entropyBC, entropySpec(k(start=0)))),
-
+          H2(redeclare replaceable Species.Heat.HeatFlowRate heatBC, heatSpec(k(
+                  start=0))),
+          H2O(redeclare replaceable Species.Heat.HeatFlowRate heatBC, heatSpec(
+                k(start=0))),
+          N2(redeclare replaceable Species.Heat.HeatFlowRate heatBC, heatSpec(k(
+                  start=0))),
+          O2(redeclare replaceable Species.Heat.HeatFlowRate heatBC, heatSpec(k(
+                  start=0)))),
+        graphite(C(redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+              heatSpec(k(start=0))), 'e-'(redeclare replaceable
+              Species.Heat.HeatFlowRate heatBC, heatSpec(k(start=0)))),
         ionomer(
-          C19HF37O5S(redeclare replaceable Species.Entropy.EntropyFlowRate
-              entropyBC, entropySpec(k(start=0))),
-          H2O(redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-              entropySpec(k(start=0))),
-          'H+'(redeclare replaceable Species.Entropy.EntropyFlowRate entropyBC,
-              entropySpec(k(start=0)))));
+          C19HF37O5S(redeclare replaceable Species.Heat.HeatFlowRate heatBC,
+              heatSpec(k(start=0))),
+          H2O(redeclare replaceable Species.Heat.HeatFlowRate heatBC, heatSpec(
+                k(start=0))),
+          'H+'(redeclare replaceable Species.Heat.HeatFlowRate heatBC, heatSpec(
+                k(start=0)))));
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
@@ -6268,7 +6234,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.heat, negative.C.heat) annotation (Line(
+        connect(C.negative.thermal, negative.C.thermal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6308,7 +6274,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.heat, positive.C.heat) annotation (Line(
+        connect(C.positive.thermal, positive.C.thermal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6357,7 +6323,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.heat, negative.C19HF37O5S.heat) annotation
+        connect(C19HF37O5S.negative.thermal, negative.C19HF37O5S.thermal) annotation
           (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
@@ -6405,7 +6371,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.heat, positive.C19HF37O5S.heat) annotation
+        connect(C19HF37O5S.positive.thermal, positive.C19HF37O5S.thermal) annotation
           (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
@@ -6461,7 +6427,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.heat, negative.'e-'.heat) annotation (Line(
+        connect('e-'.negative.thermal, negative.'e-'.thermal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6508,7 +6474,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.heat, positive.'e-'.heat) annotation (Line(
+        connect('e-'.positive.thermal, positive.'e-'.thermal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6562,7 +6528,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.heat, negative.H2.heat) annotation (Line(
+        connect(H2.negative.thermal, negative.H2.thermal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6608,7 +6574,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.heat, positive.H2.heat) annotation (Line(
+        connect(H2.positive.thermal, positive.H2.thermal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6662,7 +6628,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.heat, negative.H2O.heat) annotation (Line(
+        connect(H2O.negative.thermal, negative.H2O.thermal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6708,7 +6674,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.heat, positive.H2O.heat) annotation (Line(
+        connect(H2O.positive.thermal, positive.H2O.thermal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6763,7 +6729,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.heat, negative.'H+'.heat) annotation (Line(
+        connect('H+'.negative.thermal, negative.'H+'.thermal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6810,7 +6776,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.heat, positive.'H+'.heat) annotation (Line(
+        connect('H+'.positive.thermal, positive.'H+'.thermal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6864,7 +6830,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.heat, negative.N2.heat) annotation (Line(
+        connect(N2.negative.thermal, negative.N2.thermal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6910,7 +6876,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.heat, positive.N2.heat) annotation (Line(
+        connect(N2.positive.thermal, positive.N2.thermal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6964,7 +6930,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.heat, negative.O2.heat) annotation (Line(
+        connect(O2.negative.thermal, negative.O2.thermal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7010,7 +6976,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.heat, positive.O2.heat) annotation (Line(
+        connect(O2.positive.thermal, positive.O2.thermal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7134,7 +7100,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.negative.heat, negative.H2.heat) annotation (Line(
+        connect(H2.negative.thermal, negative.H2.thermal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7180,7 +7146,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.heat, positive.H2.heat) annotation (Line(
+        connect(H2.positive.thermal, positive.H2.thermal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7234,7 +7200,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.heat, negative.H2O.heat) annotation (Line(
+        connect(H2O.negative.thermal, negative.H2O.thermal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7280,7 +7246,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.heat, positive.H2O.heat) annotation (Line(
+        connect(H2O.positive.thermal, positive.H2O.thermal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7334,7 +7300,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.negative.heat, negative.N2.heat) annotation (Line(
+        connect(N2.negative.thermal, negative.N2.thermal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7380,7 +7346,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.heat, positive.N2.heat) annotation (Line(
+        connect(N2.positive.thermal, positive.N2.thermal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7434,7 +7400,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.negative.heat, negative.O2.heat) annotation (Line(
+        connect(O2.negative.thermal, negative.O2.thermal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7480,7 +7446,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.heat, positive.O2.heat) annotation (Line(
+        connect(O2.positive.thermal, positive.O2.thermal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7573,7 +7539,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.negative.heat, negative.C.heat) annotation (Line(
+        connect(C.negative.thermal, negative.C.thermal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7613,7 +7579,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.heat, positive.C.heat) annotation (Line(
+        connect(C.positive.thermal, positive.C.thermal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7662,7 +7628,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.negative.heat, negative.'e-'.heat) annotation (Line(
+        connect('e-'.negative.thermal, negative.'e-'.thermal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7709,7 +7675,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.heat, positive.'e-'.heat) annotation (Line(
+        connect('e-'.positive.thermal, positive.'e-'.thermal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7822,7 +7788,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.heat, negative.C19HF37O5S.heat) annotation
+        connect(C19HF37O5S.negative.thermal, negative.C19HF37O5S.thermal) annotation
           (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
@@ -7870,7 +7836,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.heat, positive.C19HF37O5S.heat) annotation
+        connect(C19HF37O5S.positive.thermal, positive.C19HF37O5S.thermal) annotation
           (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
@@ -7925,7 +7891,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.negative.heat, negative.H2O.heat) annotation (Line(
+        connect(H2O.negative.thermal, negative.H2O.thermal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7971,7 +7937,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.heat, positive.H2O.heat) annotation (Line(
+        connect(H2O.positive.thermal, positive.H2O.thermal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -8026,7 +7992,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.negative.heat, negative.'H+'.heat) annotation (Line(
+        connect('H+'.negative.thermal, negative.'H+'.thermal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -8073,7 +8039,7 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.heat, positive.'H+'.heat) annotation (Line(
+        connect('H+'.positive.thermal, positive.'H+'.thermal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -8137,10 +8103,10 @@ boundary condition</a> model.
             "Axis normal to the face";
 
           FCSys.Connectors.FaceBus negative
-            "Multi-species connector for material, linear momentum, and entropy"
+            "Multi-species connector for material, linear momentum, and heat"
             annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
           FCSys.Connectors.FaceBus positive
-            "Multi-species connectors for of material, linear momentum, and entropy"
+            "Multi-species connectors for of material, linear momentum, and heat"
             annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 
           Connectors.RealInputBus u "Bus of inputs to specify conditions"
@@ -8350,36 +8316,35 @@ boundary condition</a> model.
               rotation=270,
               origin={10,20})));
 
-        // Entropy
+        // Heat
         final parameter Boolean diabatic=thermoOpt == ThermoOpt.ClosedDiabatic
-             or thermoOpt == ThermoOpt.OpenDiabatic
-          "Diabatic (entropy included)";
-        replaceable FCSys.BCs.FaceDifferential.Species.Entropy.Temperature
-          entropyBC if diabatic constrainedby
-          FCSys.BCs.FaceDifferential.Species.Entropy.BaseClasses.PartialBC
+             or thermoOpt == ThermoOpt.OpenDiabatic "Diabatic (heat included)";
+        replaceable FCSys.BCs.FaceDifferential.Species.Heat.Temperature heatBC
+          if diabatic constrainedby
+          FCSys.BCs.FaceDifferential.Species.Heat.BaseClasses.PartialBC
           "Type of condition" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
-            group="Entropy",
+            group="Heat",
             enable=thermoOpt == 2 or thermoOpt == 3,
             __Dymola_descriptionLabel=true),
           Placement(transformation(extent={{50,-60},{70,-40}})));
-        parameter Boolean internalEntropy=true "Use internal specification"
+        parameter Boolean internalHeat=true "Use internal specification"
           annotation (
           Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
-            group="Entropy",
+            group="Heat",
             enable=thermoOpt == 2 or thermoOpt == 3,
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        replaceable Modelica.Blocks.Sources.Constant entropySpec(k(start=298.15
-                *U.K)) if internalEntropy and diabatic constrainedby
+        replaceable Modelica.Blocks.Sources.Constant heatSpec(k(start=298.15*U.K))
+          if internalHeat and diabatic constrainedby
           Modelica.Blocks.Interfaces.SO "Internal specification" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
-            group="Entropy",
+            group="Heat",
             __Dymola_descriptionLabel=true,
             enable=(thermoOpt == 2 or thermoOpt == 3) and diabatic),
           Placement(transformation(
@@ -8391,19 +8356,19 @@ boundary condition</a> model.
           final thermoOpt=thermoOpt,
           final slip1=slip1,
           final slip2=slip2)
-          "Single-species connector for material, linear momentum, and entropy"
+          "Single-species connector for material, linear momentum, and heat"
           annotation (Placement(transformation(extent={{-110,-60},{-90,-40}}),
               iconTransformation(extent={{-110,-10},{-90,10}})));
         FCSys.Connectors.FaceGeneric positive(
           final thermoOpt=thermoOpt,
           final slip1=slip1,
           final slip2=slip2)
-          "Single-species connector for material, linear momentum, and entropy"
+          "Single-species connector for material, linear momentum, and heat"
           annotation (Placement(transformation(extent={{90,-60},{110,-40}}),
               iconTransformation(extent={{90,-10},{110,10}})));
         FCSys.Connectors.RealInputBus u "Input bus for external signal sources"
           annotation (HideResult=not (internalMaterial or internalLin1 or
-              internalLin1 or internalLin2 or internalEntropy), Placement(
+              internalLin1 or internalLin2 or internalHeat), Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
@@ -8439,8 +8404,8 @@ boundary condition</a> model.
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-20,40})));
-        Connectors.RealInputInternal u_S if not internalEntropy and diabatic
-          "External signal for entropy" annotation (Placement(transformation(
+        Connectors.RealInputInternal u_Q if not internalHeat and diabatic
+          "External signal for heat" annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={70,40}),iconTransformation(
@@ -8533,26 +8498,26 @@ boundary condition</a> model.
             index=-1,
             extent={{-6,3},{-6,3}}));
 
-        // Entropy
-        connect(entropyBC.negative, negative.heat) annotation (Line(
+        // Heat
+        connect(heatBC.negative, negative.thermal) annotation (Line(
             points={{50,-50},{-100,-50}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(entropyBC.positive, positive.heat) annotation (Line(
+        connect(heatBC.positive, positive.thermal) annotation (Line(
             points={{70,-50},{100,-50}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(entropySpec.y, entropyBC.u) annotation (Line(
+        connect(heatSpec.y, heatBC.u) annotation (Line(
             points={{50,9},{50,0},{60,0},{60,-46}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(u_S, entropyBC.u) annotation (Line(
+        connect(u_Q, heatBC.u) annotation (Line(
             points={{70,40},{70,0},{60,0},{60,-46}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(u.S, u_S) annotation (Line(
+        connect(u.Q, u_Q) annotation (Line(
             points={{5.55112e-16,70},{5.55112e-16,50},{70,50},{70,40}},
             color={0,0,127},
             thickness=0.5,
@@ -8582,7 +8547,7 @@ boundary condition</a> model.
             defaultComponentPrefixes="replaceable",
             defaultComponentName="materialBC",
             Documentation(info="<html><p>Pressure can be
-  calculated from other properties (e.g., temperature, specific volume, specific enthalpy, specific entropy, or Gibbs potential)
+  calculated from other properties (e.g., temperature, specific volume, specific enthalpy, specific heat, or Gibbs potential)
   using functions in the
   <a href=\"modelica://FCSys.Connectors.Characteristic\">Characteristics</a> package.
   </p></html>"));
@@ -8689,38 +8654,22 @@ boundary condition</a> model.
         end BaseClasses;
       end Momentum;
 
-      package Entropy "BCs for entropy"
+      package Heat "BCs for heat"
         extends Modelica.Icons.Package;
 
         model Temperature "Prescribed temperature difference"
-          extends
-            FCSys.BCs.FaceDifferential.Species.Entropy.BaseClasses.PartialBC(
+          extends FCSys.BCs.FaceDifferential.Species.Heat.BaseClasses.PartialBC(
               final bCType=BaseClasses.BCType.TemperatureDifference, redeclare
               Connectors.RealInput u(final unit="l2.m/(N.T2)", displayUnit="K"));
         equation
           negative.T - positive.T = u "Condition";
           0 = negative.Qdot + positive.Qdot "Energy rate balance (no storage)";
           annotation (defaultComponentPrefixes="replaceable",
-              defaultComponentName="entropyBC");
+              defaultComponentName="heatBC");
         end Temperature;
 
-        model EntropyFlowRate "Prescribed average entropy flow rate"
-          extends
-            FCSys.BCs.FaceDifferential.Species.Entropy.BaseClasses.PartialBC(
-              final bCType=BaseClasses.BCType.EntropyFlowRate, redeclare
-              Connectors.RealInput u(final unit="N/T"));
-
-        equation
-          (negative.Qdot - positive.Qdot)/2 = u "Condition";
-          0 = negative.Qdot + positive.Qdot "Energy rate balance (no storage)";
-
-          annotation (defaultComponentPrefixes="replaceable",
-              defaultComponentName="entropyBC");
-        end EntropyFlowRate;
-
         model HeatFlowRate "Prescribed heat flow rate"
-          extends
-            FCSys.BCs.FaceDifferential.Species.Entropy.BaseClasses.PartialBC(
+          extends FCSys.BCs.FaceDifferential.Species.Heat.BaseClasses.PartialBC(
               final bCType=BaseClasses.BCType.HeatFlowRate, redeclare
               Connectors.RealInput u(final unit="l2.m/T3"));
 
@@ -8730,13 +8679,13 @@ boundary condition</a> model.
 
           annotation (
             defaultComponentPrefixes="replaceable",
-            defaultComponentName="entropyBC",
+            defaultComponentName="heatBC",
             Diagram(graphics));
         end HeatFlowRate;
 
         package BaseClasses "Base classes (not for direct use)"
           extends Modelica.Icons.BasesPackage;
-          partial model PartialBC "Partial model for a BC for entropy"
+          partial model PartialBC "Partial model for a BC for heat"
             extends FCSys.BaseClasses.Icons.BCs.Double;
             constant BCType bCType "Type of BC";
             // Note:  This is included so that the type of BC is recorded with the
@@ -8747,26 +8696,25 @@ boundary condition</a> model.
                   rotation=270,
                   origin={0,40})));
 
-            FCSys.Connectors.Heat negative
-              "Entropy connector for the negative face" annotation (Placement(
+            FCSys.Connectors.Thermal negative
+              "Heat connector for the negative face" annotation (Placement(
                   transformation(extent={{-110,-10},{-90,10}})));
-            FCSys.Connectors.Heat positive
-              "Entropy connector for the positive face" annotation (Placement(
+            FCSys.Connectors.Thermal positive
+              "Heat connector for the positive face" annotation (Placement(
                   transformation(extent={{90,-10},{110,10}})));
           equation
 
             annotation (
               defaultComponentPrefixes="replaceable",
-              defaultComponentName="entropyBC",
+              defaultComponentName="heatBC",
               Diagram(graphics));
           end PartialBC;
 
           type BCType = enumeration(
               TemperatureDifference "Temperature difference",
-              EntropyFlowRate "Entropy flow rate",
               HeatFlowRate "Heat flow rate") "Types of BCs";
         end BaseClasses;
-      end Entropy;
+      end Heat;
     end Species;
     annotation (Documentation(info="<html><p>The hierarchy of these
  boundary condition models is similar to that of the models in the
@@ -9113,7 +9061,7 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
       // Added for FCSys:
       face.material.mu = Medium.specificGibbsEnergy(medium.state)*medium.MM*
         Units.J/Units.mol;
-      face.heat.T = medium.T*Units.K;
+      face.thermal.T = medium.T*Units.K;
 
       mb_flow = sum(ports.m_flow) + medium.MM*face.material.Ndot/Units.kat
         "Changed for FCSys";
@@ -9319,13 +9267,13 @@ should be used if these values are needed.
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             grid={2,2}),graphics={Rectangle(
-              extent={{-100,40},{100,-40}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineColor={0,0,0}), Text(
-              extent={{-100,-10},{100,10}},
-              lineColor={127,127,127},
-              textString="%y")}),
+                  extent={{-100,40},{100,-40}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  lineColor={0,0,0}),Text(
+                  extent={{-100,-10},{100,10}},
+                  lineColor={127,127,127},
+                  textString="%y")}),
         Diagram(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
