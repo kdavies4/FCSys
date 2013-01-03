@@ -1225,7 +1225,7 @@ An unrelated species may be included.");
                 a .* {if n + i == 0 then ln(x) else 1/(n + i) for i in 1:size(a,
             1)},
                 n + 1) annotation (Inline=true);
-        // Note:  The derivative annotation is not used since f() isn't
+        // Note:  The derivative annotation isn't used since f() isn't
         // the direct and complete derivative of this function.
 
         annotation (Documentation(info="<html>

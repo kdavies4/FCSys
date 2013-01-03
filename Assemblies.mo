@@ -23,7 +23,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
                 "resources/scripts/Dymola/Assemblies.Cells.Examples.Cell.mos"),
 
           Icon(graphics));
-
       end Cell;
       extends Modelica.Icons.ExamplesPackage;
       model CellProfile
@@ -1200,7 +1199,7 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
 <html>
   <p>
 <b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-Copyright 2007&ndash;2013, Georgia Tech Research Corporation.
+Copyright 2007&ndash;2012, Georgia Tech Research Corporation.
 </p>
 <p>
 <i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;

@@ -1525,7 +1525,6 @@ ALT=\"model Examples.Elementary.Pendulum\">
             NumberOfIntervals=5000,
             Algorithm="Dassl"),
           experimentSetupOutput);
-
       end RandomTest;
 
       model Pendulum
@@ -2720,7 +2719,6 @@ This is discussed in the description of package
             NumberOfIntervals=50000,
             Algorithm="Dassl"),
           experimentSetupOutput);
-
       end RandomTest;
 
       model Sampler
@@ -2778,7 +2776,6 @@ This is discussed in the description of package
               experimentSetupOutput,
               Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                       -100},{100,100}}), graphics)));
-
         end QPSolverMathworksExample;
 
         model QPSolverFerreauExample
@@ -5300,7 +5297,7 @@ Block has one continuous Real output signal vector.
   end BaseClasses;
   annotation (Documentation(info="<html><p>
 <b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-Copyright 2007&ndash;2013, Georgia Tech Research Corporation.
+Copyright 2007&ndash;2012, Georgia Tech Research Corporation.
 </p>
 <p>
 <i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;

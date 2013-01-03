@@ -60,7 +60,11 @@ Conditions = namedtuple('Conditions',
 # These units are used to display a variable's quantity if its displayUnit
 # attribute is empty ('').  Each key is a dimension string and each entry is a
 # unit string.  Both are formatted in Modelica unit notation.
-# Generated from FCSys/resources/quantities.xls, 2012-11-29
+# Default units
+# These units are used to display a variable's quantity if its displayUnit
+# attribute is empty ('').  Each key is a dimension string and each entry is a
+# unit string.  Both are formatted in Modelica unit notation.
+# Generated from FCSys/resources/quantities.xls, 2013-1-3
 default_units = {'1/N': '1/mol',
                  '1/T': '1/s',
                  'A': 'rad',
@@ -103,7 +107,6 @@ default_units = {'1/N': '1/mol',
                  'm/N': 'g/mol',
                  'm/T3': 'W/m2',
                  'N': 'C',
-                 'N.T2/(l2.m)': '1/V',
                  'N/(l2.T)': 'A/cm2',
                  'N/(T.s)': 'A/s',
                  'N/s': 'A',

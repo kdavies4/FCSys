@@ -565,7 +565,6 @@ package Subregions
 
         experiment(StopTime=298.15, Algorithm="Dassl"),
         experimentSetupOutput);
-
     end ThermalConduction;
 
     model ThermalConductionConvection
@@ -597,7 +596,6 @@ package Subregions
 
         experiment(StopTime=200, Algorithm="Dassl"),
         experimentSetupOutput);
-
     end ThermalConductionConvection;
 
     model ReactionRamp
@@ -2356,7 +2354,6 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
-
     end Gas;
 
     model Graphite "Graphite phase"
@@ -2751,7 +2748,7 @@ package Subregions
 
       annotation (
         defaultComponentPrefixes="replaceable",
-        Documentation(info="<html><p>If C is included (<code>inclC</code>=<code>true</code>), 
+        Documentation(info="<html><p>If C is included (<code>inclC</code>=<code>true</code>),
     then <code>initVelX</code>, <code>initVelY</code>, and <code>initVelZ</code> are
     ignored.  Velocity is not initialized because it is set by C.</p>
 
@@ -2759,7 +2756,6 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
-
     end Graphite;
 
     model Ionomer "Ionomer phase"
@@ -3196,7 +3192,7 @@ package Subregions
 
       annotation (
         defaultComponentPrefixes="replaceable",
-        Documentation(info="<html><p>If C19HF37O5S is included (<code>inclC19HF37O5S</code>=<code>true</code>), 
+        Documentation(info="<html><p>If C19HF37O5S is included (<code>inclC19HF37O5S</code>=<code>true</code>),
     then <code>initVelX</code>, <code>initVelY</code>, and <code>initVelZ</code> are
     ignored.  Velocity is not initialized because it is set by C19HF37O5S.</p>
 
@@ -3204,7 +3200,6 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
-
     end Ionomer;
 
     model Liquid "Liquid phase"
@@ -3412,7 +3407,6 @@ package Subregions
 
         Diagram(graphics),
         Icon(graphics));
-
     end Liquid;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -3577,11 +3571,11 @@ package Subregions
             smooth=Smooth.None));
 
         annotation (
-          Documentation(info="<html><p>If one of the species has <code>setTemp = true</code>, then 
-    <code>initTemp</code> should be set to <code>false</code>. 
-    Likewise, if one of the species has <code>setVelX = true</code>, 
-    <code>setVelY = true</code>, or <code>setVelZ = true</code>, then 
-    <code>initVelX</code>, <code>initVelY</code>, or <code>initVelZ</code> should 
+          Documentation(info="<html><p>If one of the species has <code>setTemp = true</code>, then
+    <code>initTemp</code> should be set to <code>false</code>.
+    Likewise, if one of the species has <code>setVelX = true</code>,
+    <code>setVelY = true</code>, or <code>setVelZ = true</code>, then
+    <code>initVelX</code>, <code>initVelY</code>, or <code>initVelZ</code> should
     be set to <code>false</code> (respectively).</p>
 
     <p>Assumptions:
@@ -3593,60 +3587,51 @@ package Subregions
 <p>Notes:<ul>
   <li>The x-axis component of velocity is included by default.  At least one component must be included.</li></ul></html>"),
 
-          Icon(graphics={
-              Ellipse(
-                extent={{-40,100},{40,20}},
-                lineColor={127,127,127},
-                startAngle=30,
-                endAngle=149,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{20,-4},{100,-84}},
-                lineColor={127,127,127},
-                startAngle=270,
-                endAngle=390,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{-100,-4},{-20,-84}},
-                lineColor={127,127,127},
-                startAngle=149,
-                endAngle=270,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Polygon(
-                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
-                    94.5,-24},{60,-84}},
-                pattern=LinePattern.None,
-                fillPattern=FillPattern.Sphere,
-                smooth=Smooth.None,
-                fillColor={225,225,225},
-                lineColor={0,0,0}),
-              Line(
-                points={{-60,-84},{60,-84}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{34.5,80},{94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{-34.5,80},{-94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}),
+          Icon(graphics={Ellipse(
+                      extent={{-40,100},{40,20}},
+                      lineColor={127,127,127},
+                      startAngle=30,
+                      endAngle=149,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{20,-4},{100,-84}},
+                      lineColor={127,127,127},
+                      startAngle=270,
+                      endAngle=390,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{-100,-4},{-20,-84}},
+                      lineColor={127,127,127},
+                      startAngle=149,
+                      endAngle=270,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Polygon(
+                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
+                  80},{94.5,-24},{60,-84}},
+                      pattern=LinePattern.None,
+                      fillPattern=FillPattern.Sphere,
+                      smooth=Smooth.None,
+                      fillColor={225,225,225},
+                      lineColor={0,0,0}),Line(
+                      points={{-60,-84},{60,-84}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{34.5,80},{94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{-34.5,80},{-94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}),
           Diagram(graphics));
-
       end NullPhase;
     end BaseClasses;
   end Phases;
@@ -3676,10 +3661,9 @@ package Subregions
                     {100,100}}), graphics),
             Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics={Text(
-                  extent={{-150,90},{-118,52}},
-                  lineColor={0,0,255},
-                  textString="%t.test")}));
-
+                          extent={{-150,90},{-118,52}},
+                          lineColor={0,0,255},
+                          textString="%t.test")}));
         end Calibrated;
 
         model Correlated "Correlated properties"
@@ -3694,7 +3678,6 @@ package Subregions
 
             Diagram(graphics),
             Icon(graphics));
-
         end Correlated;
 
         model Fixed "Fixed properties"
@@ -3787,7 +3770,6 @@ package Subregions
 
             Icon(graphics),
             Diagram(graphics));
-
         end Calibrated;
 
         model Correlated "Correlated properties"
@@ -3884,7 +3866,6 @@ package Subregions
     <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
 
             Diagram(graphics));
-
         end Fixed;
       end Graphite;
     end 'e-';
@@ -4005,7 +3986,6 @@ and <code>r_th=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> g
 <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"),
 
             Diagram(graphics));
-
         end Fixed;
       end Gas;
     end H2;
@@ -4537,7 +4517,7 @@ and <code>r_th=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at satu
     <li>Fixed specific heat capacity (independent of temperature)</ol>
     <li>Resistivities (<i>f</i><sub>0</sub>, <i>r</i><sub>th</sub>, etc.) are fixed (e.g., independent of temperature)</li>
     </ol></p>
-    
+
 <p>The default specific heat capacity (<code>b_c=[1.041e3*U.J*Data.m/(U.kg*U.K)]</code>) and resistivities (<code>f_12=1/(178.2e-7*U.Pa*U.s)</code> and <code>r_th=U.m*U.K/(25.9e-3*U.W))</code>) are based on data of gas at 1 atm and
   300 K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 920].
   Table 1 lists the properties at  other temperatures. Note that the value for isobaric specific heat capacity at
@@ -5771,13 +5751,13 @@ The default global default settings will be used for the current simulation.",
       annotation (
         defaultComponentPrefixes="replaceable",
         Documentation(info="<html>
-    <p>This model is based on the following fixed assumptions.  Other assumptions are 
+    <p>This model is based on the following fixed assumptions.  Other assumptions are
     optional via the parameters.
     <ol>
        <li>All faces are rectangular.
        <li>The material is orthorhombic.  This implies that a
           gradient which induces diffusion along an axis does not induce
-          diffusion along axes orthogonal to it 
+          diffusion along axes orthogonal to it
           [<a href=\"modelica://FCSys.UsersGuide.References\">Bejan2006</a>,
           pp. 691&ndash;692].</li>
        <li>The coordinate system (x, y, z) is aligned with the principle
@@ -5791,43 +5771,43 @@ The default global default settings will be used for the current simulation.",
     </p>
 
     <p>Figure 1 shows the manner in which instances of
-    <a href=\"modelica://FCSys.Subregions.Species\">Species</a> models (derived from this 
+    <a href=\"modelica://FCSys.Subregions.Species\">Species</a> models (derived from this
     model) are
-    connected within a <a href=\"modelica://FCSys.Subregions\">Subregion</a>.  The 
+    connected within a <a href=\"modelica://FCSys.Subregions\">Subregion</a>.  The
     generalized resistances (<i>R</i>) affect the flow rates of linear momentum and
     heat associated with differences in velocity and temperature (respectively) between
     each species and a common node.  This exchange is diffusive.
-    
+
     <p>Linear momentum and enthalpy are advected as material is exchanged in a chemical
-    reaction.  This occurs at the velocity and massic enthalpy of the reactants (source 
-    species).  Resistance is not involved directly.  When the species are connected through 
-    a <a href=\"modelica://FCSys.Subregions.Reaction\">Reaction</a> model, the material 
-    states are directly coupled according to the chemical equilibrium of the reaction.  
-    This reduces the DAE index by one.  The reaction rate is determined solely by 
+    reaction.  This occurs at the velocity and massic enthalpy of the reactants (source
+    species).  Resistance is not involved directly.  When the species are connected through
+    a <a href=\"modelica://FCSys.Subregions.Reaction\">Reaction</a> model, the material
+    states are directly coupled according to the chemical equilibrium of the reaction.
+    This reduces the DAE index by one.  The reaction rate is determined solely by
     the dynamics of the transport equations.</p>
 
     <p align=center><img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/exchange.png\">
-    <br><b>Figure 1:</b>  Exchange of a quantity (linear momentum or heat) among species 
+<br><b>Figure 1:</b>  Exchange of a quantity (linear momentum or heat) among species
     (A, B, and C) within a subregion.</p>
 
     <p>Figure 2 shows how <a href=\"modelica://FCSys.Subregions.Species\">Species</a>
-    instances of the same type are connected between neighboring 
+    instances of the same type are connected between neighboring
     <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> instances.  Material,
     transverse displacement, and heat are transported by both advection and diffusion.
-    Upstream discretization is applied if it is enabled (via the <code>upstreamX</code>, 
+    Upstream discretization is applied if it is enabled (via the <code>upstreamX</code>,
     etc. parameters).</p>
 
     <p align=center><img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/transport.png\">
-    <br><b>Figure 2:</b>  Transport of a quantity associated with the same species 
+<br><b>Figure 2:</b>  Transport of a quantity associated with the same species
     between subregions (1 and 2).</p>
 
-    <p>Within a phase, <a href=\"modelica://FCSys.Subregions.Species\">Species</a> instances 
-    are combined by Dalton's law (see the 
+    <p>Within a phase, <a href=\"modelica://FCSys.Subregions.Species\">Species</a> instances
+    are combined by Dalton's law (see the
     <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector), as shown
-    in Figure 3a.  The pressures are additive, and each species is assumed to exist at the 
-    volume of the phase.  Within a subregion, phases are combined by Amagat's law (see the 
-    <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector), as shown 
-    in Figure 3b.  The volumes are additive, and each species is assumed to exist at the 
+    in Figure 3a.  The pressures are additive, and each species is assumed to exist at the
+    volume of the phase.  Within a subregion, phases are combined by Amagat's law (see the
+    <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector), as shown
+    in Figure 3b.  The volumes are additive, and each species is assumed to exist at the
     pressure of the subregion.</p>
 
     <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\" align=center>
@@ -5850,8 +5830,8 @@ The default global default settings will be used for the current simulation.",
     <ul>
     <li>The \"specific\" adjective is taken to mean a quantity divided by particle
     number.  (\"Massic\" would indicate a quantity divided by mass.)</li>
-    <li>In general, if fluidity, bulk fluidity, or thermal resistivity is zero, then 
-    it should be set as <code>final</code> so that index reduction may be performed.  
+    <li>In general, if fluidity, bulk fluidity, or thermal resistivity is zero, then
+    it should be set as <code>final</code> so that index reduction may be performed.
     If two <a href=\"modelica://FCSys.Subregions.Species\">Species</a> instances
     are connected through their exchange connectors
     (<code>chemical</code> or <code>inert</code>) or faces (<code>xNegative</code>, <code>xPositive</code>, etc.) and both have zero resistivities for a
@@ -5861,7 +5841,7 @@ The default global default settings will be used for the current simulation.",
     <li>The <b><i>k</i></b> factor can be used to account for the effects of porosity and tortousity
     on transport.
     It should be changed directly with effective area and inversely with effective length.
-    The factor may reflect anisotropic properties; it is a vector with independent components 
+    The factor may reflect anisotropic properties; it is a vector with independent components
     for each axis. It affects all of the diffusive transport rates (material, mechanical, and
     thermal) by the same factor.  By default, its components are unity.</li>
     <li>By default, only the x-axis component of velocity is included.  Also by default,
@@ -5892,22 +5872,22 @@ The default global default settings will be used for the current simulation.",
     In order to apply other values for any of these initial conditions,
     it may be necessary to do so before translating the model.</li>
     <li>With the <code>overrideEOS</code> parameter, it is possible to specify that
-    the volumic amount (i.e., molar concentration) and thus the amount or particle number is 
+    the volumic amount (i.e., molar concentration) and thus the amount or particle number is
     zero.
     Set <code>overrideEOS = true</code> and <code>rho_IC = 0</code>; then,
     the states for material, linear momentum, and energy will be eliminated.  If a species
     is included with this setting, then there must be an external reference
     for electrochemical potential (i.e., ground).  There must be at least one other
-    species in the subregion or the velocity must be set (e.g., 
+    species in the subregion or the velocity must be set (e.g.,
     <code>setVelX = true</code>).</li>
     </p>
 
-    <p>In evaluating the dynamics of a phase, it is usually assumed that all of the species 
-    exist at the same temperature and bulk velocity.  The time constants that govern the 
+    <p>In evaluating the dynamics of a phase, it is usually assumed that all of the species
+    exist at the same temperature and bulk velocity.  The time constants that govern the
     temperatures/heat capacities of the species and heat flow rates among them are usually
     much shorter than the time span of interest.
-    This assumption can be applied in the model by connecting the <code>joint</code> 
-    connectors of the species.  It will cause index reduction during translation.</p> 
+    This assumption can be applied in the model by connecting the <code>joint</code>
+    connectors of the species.  It will cause index reduction during translation.</p>
 
     <p>In the variables that relate to transport,
     the first index is the axis and the second index is the side.  The sides
@@ -5924,14 +5904,14 @@ The default global default settings will be used for the current simulation.",
             extent={{-100,-100},{100,100}},
             initialScale=0.1), graphics),
         Icon(graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={127,127,127},
-              pattern=LinePattern.Dash,
-              fillColor={225,225,225},
-              fillPattern=FillPattern.Solid), Text(
-              extent={{-100,20},{100,60}},
-              textString="%name",
-              lineColor={0,0,0})}));
+                  extent={{-100,100},{100,-100}},
+                  lineColor={127,127,127},
+                  pattern=LinePattern.Dash,
+                  fillColor={225,225,225},
+                  fillPattern=FillPattern.Solid),Text(
+                  extent={{-100,20},{100,60}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
     end Species;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -6016,62 +5996,53 @@ The default global default settings will be used for the current simulation.",
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-180,-180},{180,
-              180}}), graphics={
-          Rectangle(
-            extent={{-170,120},{170,160}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Ellipse(
-            extent={{-60,188},{60,68}},
-            lineColor={127,127,127},
-            startAngle=30,
-            endAngle=149,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255}),
-          Ellipse(
-            extent={{-170,-2},{-50,-122}},
-            lineColor={127,127,127},
-            startAngle=149,
-            endAngle=270,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255}),
-          Ellipse(
-            extent={{50,-2},{170,-122}},
-            lineColor={127,127,127},
-            startAngle=270,
-            endAngle=390,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255}),
-          Polygon(
-            points={{51.5,159},{162,-32},{110,-122},{-110,-122},{-162,-32},{-51.5,
-                159},{51.5,159}},
-            smooth=Smooth.None,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Line(
-            points={{51.5,159},{162,-32}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{110,-122},{-110,-122}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{-162,-32},{-51.5,159}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Text(
-            extent={{-170,120},{170,160}},
-            textString="%name",
-            lineColor={0,0,0})}));
+              180}}), graphics={Rectangle(
+              extent={{-170,120},{170,160}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Ellipse(
+              extent={{-60,188},{60,68}},
+              lineColor={127,127,127},
+              startAngle=30,
+              endAngle=149,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}),Ellipse(
+              extent={{-170,-2},{-50,-122}},
+              lineColor={127,127,127},
+              startAngle=149,
+              endAngle=270,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}),Ellipse(
+              extent={{50,-2},{170,-122}},
+              lineColor={127,127,127},
+              startAngle=270,
+              endAngle=390,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}),Polygon(
+              points={{51.5,159},{162,-32},{110,-122},{-110,-122},{-162,-32},{-51.5,
+              159},{51.5,159}},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Line(
+              points={{51.5,159},{162,-32}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{110,-122},{-110,-122}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{-162,-32},{-51.5,159}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Text(
+              extent={{-170,120},{170,160}},
+              textString="%name",
+              lineColor={0,0,0})}));
   end PhaseBoundary;
 
   model Reaction "Model for a chemical/electrochemical reaction"
@@ -6175,26 +6146,22 @@ The default global default settings will be used for the current simulation.",
     <li>No storage of material, linear momentum, or energy</li></ul>
     </p>
     </html>"),
-      Icon(graphics={
-          Rectangle(
-            extent={{-140,40},{140,80}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Text(
-            extent={{-140,40},{140,80}},
-            textString="%name",
-            lineColor={0,0,0}),
-          Ellipse(
-            extent={{-80,40},{80,-40}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            lineColor={127,127,127},
-            pattern=LinePattern.Dash),
-          Text(
-            extent={{-100,-16},{100,-40}},
-            lineColor={127,127,127},
-            textString="%n_spec")}),
+      Icon(graphics={Rectangle(
+              extent={{-140,40},{140,80}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Text(
+              extent={{-140,40},{140,80}},
+              textString="%name",
+              lineColor={0,0,0}),Ellipse(
+              extent={{-80,40},{80,-40}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash),Text(
+              extent={{-100,-16},{100,-40}},
+              lineColor={127,127,127},
+              textString="%n_spec")}),
       Diagram(graphics));
   end Reaction;
 
@@ -6233,24 +6200,21 @@ The default global default settings will be used for the current simulation.",
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{160,
-              160}}), graphics={
-          Rectangle(
-            extent={{-160,112},{160,152}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Polygon(
-            points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,-160},
-                {-160,60}},
-            lineColor={127,127,127},
-            smooth=Smooth.None,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.Dash),
-          Text(
-            extent={{-160,112},{160,152}},
-            textString="%name",
-            lineColor={0,0,0})}),
+              160}}), graphics={Rectangle(
+              extent={{-160,112},{160,152}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Polygon(
+              points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,-160},
+              {-160,60}},
+              lineColor={127,127,127},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.Dash),Text(
+              extent={{-160,112},{160,152}},
+              textString="%name",
+              lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(graphics));
@@ -6369,99 +6333,83 @@ The default global default settings will be used for the current simulation.",
   <li>The x-axis component of velocity is included by default.  At least one component must be included.</li>
   </ul></p></html>"),
         Diagram(graphics),
-        Icon(graphics={
-            Line(
-              points={{-100,0},{-40,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclXFaces,
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{0,-100}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclYFaces,
-              smooth=Smooth.None),
-            Line(
-              points={{40,40},{50,50}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclZFaces,
-              smooth=Smooth.None),
-            Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                  16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-40,-40},{-16,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{-16,40},{-16,-16},{40,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{-40,0},{28,0}},
-              color={210,210,210},
-              visible=inclXFaces,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,28},{0,-40}},
-              color={210,210,210},
-              visible=inclYFaces,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{28,0},{100,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclXFaces,
-              smooth=Smooth.None),
-            Line(
-              points={{0,100},{0,28}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclYFaces,
-              smooth=Smooth.None),
-            Line(
-              points={{-12,-12},{40,40}},
-              color={210,210,210},
-              visible=inclZFaces,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-40,16},{16,16},{16,-40}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{-50,-50},{-12,-12}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclZFaces,
-              smooth=Smooth.None),
-            Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                  16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{40,40},{16,16}},
-              color={127,127,127},
-              smooth=Smooth.None)}));
-
+        Icon(graphics={Line(
+                  points={{-100,0},{-40,0}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclXFaces,
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{0,-100}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclYFaces,
+                  smooth=Smooth.None),Line(
+                  points={{40,40},{50,50}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclZFaces,
+                  smooth=Smooth.None),Polygon(
+                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
+                {-40,16}},
+                  lineColor={127,127,127},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Line(
+                  points={{-40,-40},{-16,-16}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),Line(
+                  points={{-16,40},{-16,-16},{40,-16}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),Line(
+                  points={{-40,0},{28,0}},
+                  color={210,210,210},
+                  visible=inclXFaces,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,28},{0,-40}},
+                  color={210,210,210},
+                  visible=inclYFaces,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{28,0},{100,0}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclXFaces,
+                  smooth=Smooth.None),Line(
+                  points={{0,100},{0,28}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclYFaces,
+                  smooth=Smooth.None),Line(
+                  points={{-12,-12},{40,40}},
+                  color={210,210,210},
+                  visible=inclZFaces,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-40,16},{16,16},{16,-40}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{-50,-50},{-12,-12}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclZFaces,
+                  smooth=Smooth.None),Polygon(
+                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
+                {-40,16}},
+                  lineColor={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{40,40},{16,16}},
+                  color={127,127,127},
+                  smooth=Smooth.None)}));
     end PartialSubregion;
   end BaseClasses;
 
   annotation (Documentation(info="<html>
 <p>
 <b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-Copyright 2007&ndash;2013, Georgia Tech Research Corporation.
+Copyright 2007&ndash;2012, Georgia Tech Research Corporation.
 </p>
 <p>
 <i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;

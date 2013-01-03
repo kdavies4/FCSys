@@ -1558,7 +1558,7 @@ package BCs "Models for boundary conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Chemical.Species.Species H2O(final n_vel=n_ve, redeclare
+        FCSys.BCs.Chemical.Species.Species H2O(final n_vel=n_vel, redeclare
             package Data = FCSys.Characteristics.H2O.Gas) if inclH2O "Model"
           annotation (Dialog(
             group="Species",
@@ -1750,7 +1750,7 @@ package BCs "Models for boundary conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Chemical.Species.Species H2O(final n_vel=n_ve, redeclare
+        FCSys.BCs.Chemical.Species.Species H2O(final n_vel=n_vel, redeclare
             package Data = FCSys.Characteristics.H2O.Gas) if inclH2O "Model"
           annotation (Dialog(
             group="Species",
@@ -1944,7 +1944,7 @@ package BCs "Models for boundary conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Chemical.Species.Species H2O(final n_vel=n_ve, redeclare
+        FCSys.BCs.Chemical.Species.Species H2O(final n_vel=n_vel, redeclare
             package Data = FCSys.Characteristics.H2O.Gas) if inclH2O "Model"
           annotation (Dialog(
             group="Species",
@@ -2260,7 +2260,7 @@ package BCs "Models for boundary conditions"
               rotation=270,
               origin={0,40})));
         Connectors.RealInputInternal u_H(final unit="m.l2/(N.T2)") if not
-          internalEnth "Signal for enthlapy" annotation (Placement(
+          internalEnth "Signal for enthalpy" annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,

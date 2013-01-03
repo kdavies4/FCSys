@@ -20,7 +20,7 @@ package Quantities "Quantities to represent physical properties"
     model ExampleModel "Model that uses all of the quantities"
       extends FCSys.BaseClasses.Icons.Blocks.Continuous;
 
-      // Generated from FCSys/resources/quantities.xls, 2012-12-16
+      // Generated from FCSys/resources/quantities.xls, 2013-1-3
       parameter Q.Acceleration Acceleration=1*U.m/U.s^2 "Acceleration";
       parameter Q.Amount Amount=1*U.C "Amount";
       parameter Q.AmountReciprocal AmountReciprocal=1/U.C "Reciprocal amount";
@@ -66,8 +66,6 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.PotentialPerWavenumber PotentialPerWavenumber=1*U.V*U.m/U.rad
         "Potential per wavenumber";
       parameter Q.PotentialRate PotentialRate=1*U.V/U.s "Rate of potential";
-      parameter Q.PotentialReciprocal PotentialReciprocal=1/U.V
-        "Reciprocal potential";
       parameter Q.Power Power=1*U.W "Power";
       parameter Q.PowerArea PowerArea=1*U.W*U.m^2 "Power times area";
       parameter Q.PowerAreic PowerAreic=1*U.W/U.m^2 "Areic power";
@@ -90,9 +88,11 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.VolumeSpecificAbsolute VolumeSpecificAbsolute=1*U.m^3/U.C
         "Absolute specific volume";
       parameter Q.Wavenumber Wavenumber=1*U.rad/U.m "Wavenumber";
+
     end ExampleModel;
   end Examples;
-  // Generated from FCSys/resources/quantities.xls, 2012-11-29
+
+  // Generated from FCSys/resources/quantities.xls, 2013-1-3
   type Acceleration = Modelica.Icons.TypeReal (final unit="l/T2");
   type Amount = Modelica.Icons.TypeReal (final unit="N", min=0);
   type AmountReciprocal = Modelica.Icons.TypeReal (final unit="1/N", min=0)
@@ -146,8 +146,6 @@ package Quantities "Quantities to represent physical properties"
           "l3.m/(A.N.T2)") "Potential per wavenumber";
   type PotentialRate = Modelica.Icons.TypeReal (final unit="l2.m/(N.T3)")
     "Rate of potential";
-  type PotentialReciprocal = Modelica.Icons.TypeReal (final unit="N.T2/(l2.m)")
-    "Reciprocal potential";
   type Power = Modelica.Icons.TypeReal (final unit="l2.m/T3");
   type PowerArea = Modelica.Icons.TypeReal (final unit="l4.m/T3")
     "Power times area";
@@ -172,11 +170,12 @@ package Quantities "Quantities to represent physical properties"
   type Volume = Modelica.Icons.TypeReal (final unit="l3", min=0);
   type VolumeRate = Modelica.Icons.TypeReal (final unit="l3/T")
     "Rate of volume";
-  type VolumeSpecific = Modelica.Icons.TypeReal (final unit="l3/N", min=0)
+  type VolumeSpecific = Modelica.Icons.TypeReal (final unit="l3/N")
     "Specific volume";
   type VolumeSpecificAbsolute = Modelica.Icons.TypeReal (final unit="l3/N", min
         =0) "Absolute specific volume";
   type Wavenumber = Modelica.Icons.TypeReal (final unit="A/l");
+  // -------- end from FCSys/resources/quantities.xls
 
   // Aliases that imply special display units
   type CapacityThermal = Amount (displayUnit="J/K") "Thermal capacity";

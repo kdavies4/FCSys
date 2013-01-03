@@ -10,7 +10,6 @@ package FCSys "Modelica library of fuel cell models"
 // the LaTeX document:
 //------------------------------------------------------------------------
 
-
 extends Modelica.Icons.Package;
 // extends FCSys.Icons.Cell;
 
@@ -39,7 +38,6 @@ import FCSys.Connectors.BaseClasses.ThermoOpt;
 import FCSys.Subregions.Reactions.BaseClasses.InitMethCharge;
 import FCSys.Subregions.Species.BaseClasses.InitMethVelocity;
 import FCSys.Subregions.Species.BaseClasses.InitMethScalar;
-
 
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
@@ -166,10 +164,6 @@ package UsersGuide "User's Guide"
       <td valign=top class=noBorder>D. M. Bernardi and M. W. Verbrugge, \"<a href=\"http://dx.doi.org/10.1149/1.2221251\">A Mathematical Model of the Solid-Polymer-Electrolyte Fuel Cell</a>,\" <i>J. Electrochem. Soc.</i>, vol. 139, no. 9, pp. 2477&ndash;2491, Sep. 1992.</td>
     </tr>
     <tr>
-      <td valign=top class=noBorder>[<a name=\"Cellier1991\" class=bookmark>Cellier1991</a>]</td>
-      <td valign=top class=noBorder>F. E. Cellier, <i><a href=\"http://www.inf.ethz.ch/personal/fcellier/Pubs/BG/springer.html\">Continuous System Modeling</a></i>, Springer-Verlag, 1991.</td>
-    </tr>
-    <tr>
       <td valign=top class=\"noBorder\">[Dassault2010]</td>
       <td valign=top class=\"noBorder\">Dassault Syst&eacute;mes, <i>Dymola (Dynamic Modeling Laboratory) User Manual</i>, Lund, Sweden, Jan. 2010.  Distributed with Dymola version 7.4.</td>
     </tr>
@@ -196,10 +190,6 @@ package UsersGuide "User's Guide"
     <tr>
       <td valign=top class=noBorder>[<a name=\"Gurau1998\" class=bookmark>Gurau1998</a>]</td>
       <td valign=top class=noBorder>V. Gurau, H. Liu, and S. Kaka, \"<a href=\"http://dx.doi.org/10.1002/aic.690441109\">Two-Dimensional Model for Proton Exchange Membrane Fuel Cells</a>,\" <i>AIChE J.</i>, vol. 44, no. 11, pp. 2410&ndash;2422, Nov. 1998.</td>
-    </tr>
-    <tr>
-      <td valign=top class=noBorder>[<a name=\"Hogan2006\" class=bookmark>Hogan2006</a>]</td>
-      <td valign=top class=noBorder>N. Hogan, \"<a href=\"http://ocw.mit.edu/courses/mechanical-engineering/2-141-modeling-and-simulation-of-dynamic-systems-fall-2006/lecture-notes/heat_transfer.pdf\">Heat Transfer and The Second Law</a>,\" Course notes for <i>Modeling and Simulation of Dynamic Systems</i>, Massachusetts of Technology, Fall 2006.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Incropera2002\" class=bookmark>Incropera2002</a>]</td>
@@ -243,7 +233,7 @@ package UsersGuide "User's Guide"
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Rao1997\" class=bookmark>Rao1997</a>]</td>
-      <td valign=top class=noBorder>Y. V. C. Rao, <i>Chemica Engineering Thermodynamics</i>, Hyderabad, India:  Universities Press, 1997.</td>
+      <td valign=top class=noBorder>Y. V. C. Rao, <i>Chemical Engineering Thermodynamics</i>, Hyderabad, India:  Universities Press, 1997.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Reichert2010\" class=bookmark>Reichert2010</a>]</td>
@@ -910,20 +900,6 @@ printing and shipping costs may be recovered.</p>
     end ModelicaLicense2;
   annotation (preferedView="info", DocumentationClass=true);
   end UsersGuide;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 annotation (
   uses(Modelica(version="3.2"), Modelica_LinearSystems2(version="2.1")),
