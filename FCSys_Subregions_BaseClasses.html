@@ -1,0 +1,155 @@
+<html>
+<head>
+<title>FCSys.Subregions.BaseClasses</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta name="description" content="Base classes (not for direct use)">
+<meta name="keywords" content="Modelica, fuel cell, PEMFC, electrochemistry, model">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_BCs.html">BCs</a>**</li>
+    <li><a href="FCSys_Sensors.html">Sensors</a>**</li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
+    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Subregions.BaseClasses"></a><a href="FCSys_Subregions.html#FCSys.Subregions">FCSys.Subregions</a>.BaseClasses</h2>
+<b>Base classes (not for direct use)</b>
+<p>
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.BasesPackage.html#Modelica.Icons.BasesPackage">Modelica.Icons.BasesPackage</a> (Icon for packages containing base classes).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Subregions.BaseClasses.PartialSubregionS.png" alt="FCSys.Subregions.BaseClasses.PartialSubregion" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSubregion">PartialSubregion</a>
+</td><td>Partial subregion model for multi-dimensional and multi-species storage, transport, and exchange</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.Subregions.BaseClasses.PartialSubregionI.png" alt="FCSys.Subregions.BaseClasses.PartialSubregion" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Subregions.BaseClasses.PartialSubregion"></a><a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses">FCSys.Subregions.BaseClasses</a>.PartialSubregion</h2>
+<b>Partial subregion model for multi-dimensional and multi-species storage, transport, and exchange</b><p>
+<img src="images/FCSys.Subregions.BaseClasses.PartialSubregionD.png" alt="FCSys.Subregions.BaseClasses.PartialSubregion">
+<p><h3>Information</h3></p>
+<p>Notes:
+  <ul><li>This model must be be extended so that models can be added for
+  relevant species, phases, and reactions.</li>
+  <li>Material will be transported between two subregions only if both of the connected faces are marked
+  as open (<code>thermoOpt==ThermoOpt.OpenDiabatic</code>)
+  within the instances of the matched <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species">Species</a> models.
+  If either or both of the faces are closed (<code>thermoOpt==ThermoOpt.ClosedAdiabatic</code> or
+  <code>thermoOpt==ThermoOpt.ClosedDiabatic</code>), then the interface will be closed.
+  note applies to the viscous/inviscous and diabatic/adiabatic properties.</li>
+  <li>The x-axis component of velocity is included by default.  At least one component must be included.</li>
+  </ul></p><p>
+Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top3">FCSys.BaseClasses.Icons.Names.Top3</a>.
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>&nbsp;</td><td>Length (<b>L</b>) [l]</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with velocity included</td></tr>
+<tr><td>Boolean</td><td>inclVelX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclVelY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclVelZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
+<tr><td>Boolean</td><td>inclXFaces</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclYFaces</td><td>true</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclZFaces</td><td>true</td><td>Z</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative</td><td>Negative face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xPositive</td><td>Positive face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">partial </font><font color="blue">model</font> PartialSubregion <font color="darkgreen">
+  &quot;Partial subregion model for multi-dimensional and multi-species storage, transport, and exchange&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top3">FCSys.BaseClasses.Icons.Names.Top3</a>;
+
+  <font color="darkgreen">// Geometric parameters</font>
+  <font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis](<font color="blue">each </font>min=Modelica.Constants.small,start=<font color="red">ones</font>
+        (3)*U.cm) <font color="darkgreen">&quot;Length (<b>L</b>)&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A[Axis]={L[<font color="red">cartWrap</font>(axis + 1)]*L[<font color="red">cartWrap</font>(axis +
+      2)] <font color="blue">for </font>axis<font color="blue"> in </font>Axis} <font color="darkgreen">&quot;Cross-sectional area&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V=<font color="red">product</font>(L) <font color="darkgreen">&quot;Volume&quot;</font>;
+
+  <font color="darkgreen">// Assumptions about components of velocity</font>
+  <font color="blue">parameter </font>Boolean inclVelX=true <font color="darkgreen">&quot;X&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclVelY=false <font color="darkgreen">&quot;Y&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclVelZ=false <font color="darkgreen">&quot;Z&quot;</font>;
+
+  <font color="darkgreen">// Assumptions about faces</font>
+  <font color="blue">parameter </font>Boolean inclXFaces=true <font color="darkgreen">&quot;X&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclYFaces=true <font color="darkgreen">&quot;Y&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclZFaces=true <font color="darkgreen">&quot;Z&quot;</font>;
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> xNegative <font color="blue">if </font>inclXFaces <font color="darkgreen">
+    &quot;Negative face along the x axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> xPositive <font color="blue">if </font>inclXFaces <font color="darkgreen">
+    &quot;Positive face along the x axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> yNegative <font color="blue">if </font>inclYFaces <font color="darkgreen">
+    &quot;Negative face along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> yPositive <font color="blue">if </font>inclYFaces <font color="darkgreen">
+    &quot;Positive face along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> zNegative <font color="blue">if </font>inclZFaces <font color="darkgreen">
+    &quot;Negative face along the z axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> zPositive <font color="blue">if </font>inclZFaces <font color="darkgreen">
+    &quot;Positive face along the z axis&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.Volume">FCSys.Subregions.Volume</a> volume(<font color="blue">final </font>n_vel=n_vel, <font color="blue">final </font>V=V) <font color="darkgreen">
+    &quot;Model to establish space for species&quot;</font>;</textblock>
+<font color="blue">protected </font>
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_vel=<font color="red">countTrue</font>({inclVelX,inclVelY,inclVelZ}) <font color="darkgreen">
+    &quot;Number of components of velocity&quot;</font>;
+
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>PartialSubregion;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  2 21:15:25 2013.
+</div>
+</body>
+</html>

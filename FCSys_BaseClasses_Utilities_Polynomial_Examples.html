@@ -23,7 +23,7 @@
     <li><a href="FCSys_Sensors.html">Sensors</a>**</li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
     <li><a href="FCSys_Regions.html">Regions</a>**</li>
-    <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
@@ -133,7 +133,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   Real u1=1 + time <font color="darkgreen">&quot;Real arguments to function (must have sufficient richness)&quot;</font>;
   <font color="blue">parameter </font>Real u2[:]=1:3 <font color="darkgreen">
     &quot;Real arguments to function (must have sufficient richness)&quot;</font>;
-  <font color="darkgreen">// u2 must not be time-varying.  Otherwise, there is no requirement</font>
+  <font color="darkgreen">// u2 must not be time-varying.  Otherwise, there&#39;s no requirement</font>
   <font color="darkgreen">// that y1 == y2.</font>
   Real y1 <font color="darkgreen">&quot;Direct result of function&quot;</font>;
   Real y2 <font color="darkgreen">&quot;Integral of derivative of y1&quot;</font>;
@@ -237,7 +237,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <font color="blue">protected </font>
   <font color="blue">final </font>Real du1=<font color="red">der</font>(u1) <font color="darkgreen">&quot;Derivative of u1&quot;</font>;
   <font color="blue">final </font>Real du2[:]=<font color="red">der</font>(u2) <font color="darkgreen">&quot;Derivative of u2&quot;</font>;
-  <font color="darkgreen">// In Dymola 7.4, it&#39;s necessary to explicitly define these intermediate</font>
+  <font color="darkgreen">// In Dymola 7.4, it is necessary to explicitly define these intermediate</font>
   <font color="darkgreen">// variables (since there are second-order derivatives).</font>
 
 <font color="blue">initial </font><font color="blue">equation </font>
@@ -297,7 +297,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
       time,
       {1,1,1,1},
       -3);
-
 <font color="blue">end </font>Translatef;
 </pre>
       </div>
@@ -305,7 +304,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Dec 27 15:38:19 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  2 21:15:53 2013.
 </div>
 </body>
 </html>

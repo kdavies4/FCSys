@@ -23,7 +23,7 @@
     <li><a href="FCSys_Sensors.html">Sensors</a>**</li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
     <li><a href="FCSys_Regions.html">Regions</a>**</li>
-    <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
@@ -51,7 +51,6 @@
 
      <p>Assumptions:
      <ol>
-     <li>There is one free (conduction) electron per atom of carbon.</li>
      <li>The pressure-volume relationship is based on the Drude and Summerfeld theories of metals
      [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Ashcroft1976</a>, pp. 4&ndash;39].</li>
      </ol>
@@ -104,7 +103,7 @@ Extends from <a href="FCSys_Characteristics_'e-'_Gas.html#FCSys.Characteristics.
 <tr><td><img src="images/FCSys.Characteristics.'e-'.Graphite.dpS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.f_0" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.f_0">f_0</a>
 </td><td>Bulk fluidity as a function of temperature and pressure (<i>f</i><sub>0</sub>)</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.'e-'.Graphite.dpS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.f_12" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.f_12">f_12</a>
-</td><td>Fluidity as a function of temperature and pressure (<i>f</i><sub>12</sub>)</td></tr>
+</td><td>Shear fluidity as a function of temperature and pressure (<i>f</i><sub>12</sub>)</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.'e-'.Graphite.dpS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.g" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.g">g</a>
 </td><td>Gibbs potential as a function of temperature and pressure</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.'e-'.Graphite.dpS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.r_th" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.r_th">r_th</a>
@@ -167,7 +166,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <b>Specific enthalpy as a function of temperature and pressure</b><p>
 <p><h3>Information</h3></p>
 
-  <p>For an ideal gas, this function is independent of pressure 
+  <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
     <p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
@@ -420,7 +419,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="darkgreen">// integration limit for the real gas terms (non-ideal; besides the</font>
   <font color="darkgreen">// first virial term) is p=0---the pressure limit at which a real gas</font>
   <font color="darkgreen">// behaves as an ideal gas.  See [Rao1997, p. 272].</font>
-
 <font color="blue">end </font>s;
 </pre>
 <hr>
@@ -432,7 +430,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <b>Specific volume as a function of temperature and pressure</b><p>
 <p><h3>Information</h3></p>
 
-  <p>The derivative of this function is 
+  <p>The derivative of this function is
   <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.dv">dv</a>().</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p><h3>Inputs</h3><p>
@@ -472,7 +470,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Dec 27 15:37:48 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  2 21:15:33 2013.
 </div>
 </body>
 </html>

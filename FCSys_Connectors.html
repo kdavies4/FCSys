@@ -23,7 +23,7 @@
     <li><a href="FCSys_Sensors.html">Sensors</a>**</li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
     <li><a href="FCSys_Regions.html">Regions</a>**</li>
-    <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
@@ -208,7 +208,7 @@
   <a href="FCSys_Connectors.html#FCSys.Connectors.Material">Mechanical</a> subconnectors named
   <code>mechanicalY</code> and <code>mechanicalZ</code>.</p>
 
-  <p>The effort-flow products of the mechanical exchange and transport 
+  <p>The effort-flow products of the mechanical exchange and transport
   pairs are the rates of energy associated with the interactions.
   However, many of the pairs are different.
   The effort of the material exchange pair is electrochemical potential divided by
@@ -220,10 +220,10 @@
   is pressure rather than electrochemical potential so that the dynamic normal
   force can be resolved without nonlinear systems of equations (see the
   <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model).
-  The flow variable of the heat pair is heat flow rate instead of entropy flow 
+  The flow variable of the heat pair is heat flow rate instead of entropy flow
   rate so that the transport equations are linear and follow the traditional
-  form (e.g., Fourier's law; see 
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.html#Modelica.Thermal.HeatTransfer">Modelica.Thermal.HeatTransfer</a>). 
+  form (e.g., Fourier's law; see
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.html#Modelica.Thermal.HeatTransfer">Modelica.Thermal.HeatTransfer</a>).
   The additivity of volume and
   pressure pairs describe static balances; therefore, their flows are the quantities
   rather than the rates of the quantities.
@@ -363,10 +363,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Connectors.InertDaltonS.png" alt="FCSys.Connectors.InertDalton" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a>
 </td><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> connector with additivity of pressure</td></tr>
 <tr><td><img src="images/FCSys.Connectors.InertInternalS.png" alt="FCSys.Connectors.InertInternal" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a>
-</td><td>Internal connector to exchange linear momentum and heat by diffusion</td></tr>
-<tr><td><img src="images/FCSys.Connectors.MaterialS.png" alt="FCSys.Connectors.Material" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.Material">Material</a>
-</td><td>Connector for material transport</td></tr>
-<tr><td><img src="images/FCSys.Connectors.MechanicalS.png" alt="FCSys.Connectors.Mechanical" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">Mechanical</a>
+</td><td>Internal <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> connector</td></tr>
+<tr><td><img src="images/FCSys.Connectors.MaterialTransportS.png" alt="FCSys.Connectors.MaterialTransport" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.MaterialTransport">MaterialTransport</a>
+</td><td>Connector to transport material</td></tr>
+<tr><td><img src="images/FCSys.Connectors.MechanicalTransportS.png" alt="FCSys.Connectors.MechanicalTransport" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a>
 </td><td>Connector for transverse displacement</td></tr>
 <tr><td><img src="images/FCSys.Connectors.HeatS.png" alt="FCSys.Connectors.Heat" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.Heat">Heat</a>
 </td><td>Connector to transport heat</td></tr>
@@ -446,11 +446,11 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
 <p><h3>Contents</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td>Integer</td><td>n_vel</td><td>Number of components of velocity (<i>n</i><sub>vel</sub>)</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Number</a></td><td>muPerT</td><td>Quotient of electrochemical potential and temperature [1]</td></tr>
 <tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>Ndot</td><td>Current [N/T]</td></tr>
+<tr><td>Integer</td><td>n_vel</td><td>Number of components of velocity (<i>n</i><sub>vel</sub>)</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi[n_vel]</td><td>Velocity [l/T]</td></tr>
-<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[n_vel]</td><td>Force due to advection [l.m/T2]</td></tr>
+<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.VolumeRate">VolumeRate</a></td><td>mPhidot[n_vel]</td><td>Force [l3/T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity2">Velocity2</a></td><td>hbar</td><td>Massic enthalpy [l2/T2]</td></tr>
 <tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Hdot</td><td>Enthalpy flow rate [l2.m/T3]</td></tr>
 <tr><td>input <a href="FCSys_Quantities.html#FCSys.Quantities.MassSpecific">MassSpecific</a></td><td>m</td><td>Specific mass [m/N]</td></tr>
@@ -487,11 +487,11 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
 <p><h3>Contents</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td>Integer</td><td>n_vel</td><td>Number of components of velocity (<i>n</i><sub>vel</sub>)</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Number</a></td><td>muPerT</td><td>Quotient of electrochemical potential and temperature [1]</td></tr>
 <tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>Ndot</td><td>Current [N/T]</td></tr>
+<tr><td>Integer</td><td>n_vel</td><td>Number of components of velocity (<i>n</i><sub>vel</sub>)</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi[n_vel]</td><td>Velocity [l/T]</td></tr>
-<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[n_vel]</td><td>Force due to advection [l.m/T2]</td></tr>
+<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.VolumeRate">VolumeRate</a></td><td>mPhidot[n_vel]</td><td>Force [l3/T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity2">Velocity2</a></td><td>hbar</td><td>Massic enthalpy [l2/T2]</td></tr>
 <tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Hdot</td><td>Enthalpy flow rate [l2.m/T3]</td></tr>
 <tr><td>output <a href="FCSys_Quantities.html#FCSys.Quantities.MassSpecific">MassSpecific</a></td><td>m</td><td>Specific mass [m/N]</td></tr>
@@ -600,10 +600,10 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
 <p><h3>Contents</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Material">Material</a></td><td>material</td><td>Subconnector for material transport</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MaterialTransport">MaterialTransport</a></td><td>material</td><td>Subconnector for material transport</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Heat">Heat</a></td><td>heat</td><td>Subconnector for thermal transport</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">Mechanical</a></td><td>mechanical1</td><td>Subconnector for 1st transverse displacement</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">Mechanical</a></td><td>mechanical2</td><td>Subconnector for 2nd transverse displacement</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a></td><td>mechanical1</td><td>Subconnector for 1st transverse displacement</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a></td><td>mechanical2</td><td>Subconnector for 2nd transverse displacement</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=3>Boundary conditions (will remove subconnectors)</td></tr>
 <tr><td>Boolean</td><td>isobaric</td><td>Isobaric</td></tr>
 <tr><td>Boolean</td><td>adiabatic</td><td>Adiabatic</td></tr>
@@ -621,9 +621,9 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
   <font color="blue">parameter </font>Boolean inviscid2=false <font color="darkgreen">
     &quot;Inviscid along the 2<sup>nd</sup> transverse axis&quot;</font>;
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">Mechanical</a> mechanical1 <font color="blue">if </font><font color="blue">not </font>inviscid1 <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a> mechanical1 <font color="blue">if </font><font color="blue">not </font>inviscid1 <font color="darkgreen">
     &quot;Subconnector for 1st transverse displacement&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">Mechanical</a> mechanical2 <font color="blue">if </font><font color="blue">not </font>inviscid2 <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a> mechanical2 <font color="blue">if </font><font color="blue">not </font>inviscid2 <font color="darkgreen">
     &quot;Subconnector for 2nd transverse displacement&quot;</font>;
 
 <textblock type="annotcomp" expanded="false">
@@ -656,10 +656,10 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
 <p><h3>Contents</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Material">Material</a></td><td>material</td><td>Subconnector for material transport</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MaterialTransport">MaterialTransport</a></td><td>material</td><td>Subconnector for material transport</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Heat">Heat</a></td><td>heat</td><td>Subconnector for thermal transport</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">Mechanical</a></td><td>mechanicalY</td><td>Subconnector for Y-axis displacement</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">Mechanical</a></td><td>mechanicalZ</td><td>Subconnector for Z-axis displacement</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a></td><td>mechanicalY</td><td>Subconnector for Y-axis displacement</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a></td><td>mechanicalZ</td><td>Subconnector for Z-axis displacement</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=3>Boundary conditions (will remove subconnectors)</td></tr>
 <tr><td>Boolean</td><td>isobaric</td><td>Isobaric</td></tr>
 <tr><td>Boolean</td><td>adiabatic</td><td>Adiabatic</td></tr>
@@ -675,9 +675,9 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
   <font color="blue">parameter </font>Boolean inviscidY=false <font color="darkgreen">&quot;Inviscid along the y axis&quot;</font>;
   <font color="blue">parameter </font>Boolean inviscidZ=false <font color="darkgreen">&quot;Inviscid along the z axis&quot;</font>;
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">Mechanical</a> mechanicalY <font color="blue">if </font><font color="blue">not </font>inviscidY <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a> mechanicalY <font color="blue">if </font><font color="blue">not </font>inviscidY <font color="darkgreen">
     &quot;Subconnector for Y-axis displacement&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">Mechanical</a> mechanicalZ <font color="blue">if </font><font color="blue">not </font>inviscidZ <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a> mechanicalZ <font color="blue">if </font><font color="blue">not </font>inviscidZ <font color="darkgreen">
     &quot;Subconnector for Z-axis displacement&quot;</font>;
 
 <textblock type="annotcomp" expanded="false">
@@ -710,10 +710,10 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
 <p><h3>Contents</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Material">Material</a></td><td>material</td><td>Subconnector for material transport</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MaterialTransport">MaterialTransport</a></td><td>material</td><td>Subconnector for material transport</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Heat">Heat</a></td><td>heat</td><td>Subconnector for thermal transport</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">Mechanical</a></td><td>mechanicalZ</td><td>Subconnector for Z-axis displacement</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">Mechanical</a></td><td>mechanicalX</td><td>Subconnector for X-axis displacement</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a></td><td>mechanicalZ</td><td>Subconnector for Z-axis displacement</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a></td><td>mechanicalX</td><td>Subconnector for X-axis displacement</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=3>Boundary conditions (will remove subconnectors)</td></tr>
 <tr><td>Boolean</td><td>isobaric</td><td>Isobaric</td></tr>
 <tr><td>Boolean</td><td>adiabatic</td><td>Adiabatic</td></tr>
@@ -729,9 +729,9 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
   <font color="blue">parameter </font>Boolean inviscidZ=false <font color="darkgreen">&quot;Inviscid along the z axis&quot;</font>;
   <font color="blue">parameter </font>Boolean inviscidX=false <font color="darkgreen">&quot;Inviscid along the x axis&quot;</font>;
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">Mechanical</a> mechanicalZ <font color="blue">if </font><font color="blue">not </font>inviscidZ <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a> mechanicalZ <font color="blue">if </font><font color="blue">not </font>inviscidZ <font color="darkgreen">
     &quot;Subconnector for Z-axis displacement&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">Mechanical</a> mechanicalX <font color="blue">if </font><font color="blue">not </font>inviscidX <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a> mechanicalX <font color="blue">if </font><font color="blue">not </font>inviscidX <font color="darkgreen">
     &quot;Subconnector for X-axis displacement&quot;</font>;
 
 <textblock type="annotcomp" expanded="false">
@@ -764,10 +764,10 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
 <p><h3>Contents</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Material">Material</a></td><td>material</td><td>Subconnector for material transport</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MaterialTransport">MaterialTransport</a></td><td>material</td><td>Subconnector for material transport</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Heat">Heat</a></td><td>heat</td><td>Subconnector for thermal transport</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">Mechanical</a></td><td>mechanicalX</td><td>Subconnector for X-axis displacement</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">Mechanical</a></td><td>mechanicalY</td><td>Subconnector for Y-axis displacement</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a></td><td>mechanicalX</td><td>Subconnector for X-axis displacement</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a></td><td>mechanicalY</td><td>Subconnector for Y-axis displacement</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=3>Boundary conditions (will remove subconnectors)</td></tr>
 <tr><td>Boolean</td><td>isobaric</td><td>Isobaric</td></tr>
 <tr><td>Boolean</td><td>adiabatic</td><td>Adiabatic</td></tr>
@@ -783,9 +783,9 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
   <font color="blue">parameter </font>Boolean inviscidX=false <font color="darkgreen">&quot;Inviscid along the x axis&quot;</font>;
   <font color="blue">parameter </font>Boolean inviscidY=false <font color="darkgreen">&quot;Inviscid along the y axis&quot;</font>;
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">Mechanical</a> mechanicalX <font color="blue">if </font><font color="blue">not </font>inviscidX <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a> mechanicalX <font color="blue">if </font><font color="blue">not </font>inviscidX <font color="darkgreen">
     &quot;Subconnector for X-axis displacement&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">Mechanical</a> mechanicalY <font color="blue">if </font><font color="blue">not </font>inviscidY <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a> mechanicalY <font color="blue">if </font><font color="blue">not </font>inviscidY <font color="darkgreen">
     &quot;Subconnector for Y-axis displacement&quot;</font>;
 
 <textblock type="annotcomp" expanded="false">
@@ -799,11 +799,8 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
 <img src="images/FCSys.Connectors.InertD.png" alt="FCSys.Connectors.Inert">
 <p><h3>Information</h3></p>
 
-  <p>Note that the geometric orientation is globally referenced.  For example, force is positive
-  in the positive-x direction&mdash;not from the interface into component as is pressure.  Thus,
-  force is the rate of globally-referenced linear momentum into the component.
-  </p>
-    <p>For more information, see the documentation in the
+    <p>For more information, see the <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.MechanicalExchange">MechanicalExchange</a> 
+    subconnector or the documentation in the
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
 
 <p><h3>Parameters</h3><p>
@@ -815,10 +812,8 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_vel</td><td>Number of components of velocity (<i>n</i><sub>vel</sub>)</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi[n_vel]</td><td>Velocity [l/T]</td></tr>
-<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[n_vel]</td><td>Force [l.m/T2]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>Temperature</td></tr>
-<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>Heat flow rate [l2.m/T3]</td></tr>
+<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.MechanicalExchange">MechanicalExchange</a></td><td>mechanical</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Heat">Heat</a></td><td>heat</td><td>&nbsp;</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -830,13 +825,8 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
     <font color="blue">final </font>max=3) = 0 <font color="darkgreen">
     &quot;Number of components of velocity (<i>n</i><sub>vel</sub>)&quot;</font>;
 
-  <font color="darkgreen">// Linear momentum</font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi[n_vel](<font color="blue">each </font>nominal=1*U.cm/U.s) <font color="darkgreen">&quot;Velocity&quot;</font>;
-  <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> mPhidot[n_vel](<font color="blue">each </font>nominal=1*U.N) <font color="darkgreen">&quot;Force&quot;</font>;
-
-  <font color="darkgreen">// Heat</font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T(nominal=298.15*U.K) <font color="darkgreen">&quot;Temperature&quot;</font>;
-  <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot(nominal=1*U.W) <font color="darkgreen">&quot;Heat flow rate&quot;</font>;
+  <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.MechanicalExchange">BaseClasses.MechanicalExchange</a> mechanical(<font color="blue">final </font>n_vel=n_vel);
+  <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Heat">BaseClasses.Heat</a> heat;
 
 <textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>Inert;
@@ -874,18 +864,18 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
     <a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a> connectors and
     the documentation in the
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
-Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">FCSys.Connectors.Inert</a> (Connector to exchange linear momentum and heat by diffusion).
+Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.MechanicalExchange">BaseClasses.MechanicalExchange</a> (Connector for linear momentum), <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Heat">BaseClasses.Heat</a> (Connector to transport heat).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>Integer</td><td>n_vel</td><td>0</td><td>Number of components of velocity (<i>n</i><sub>vel</sub>)</td></tr>
+<tr><td>Integer</td><td>n_vel</td><td>1</td><td>Number of components of velocity (<i>n</i><sub>vel</sub>)</td></tr>
 </table>
 <p><h3>Contents</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_vel</td><td>Number of components of velocity (<i>n</i><sub>vel</sub>)</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi[n_vel]</td><td>Velocity [l/T]</td></tr>
-<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[n_vel]</td><td>Force [l.m/T2]</td></tr>
+<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.VolumeRate">VolumeRate</a></td><td>mPhidot[n_vel]</td><td>Force [l3/T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>Temperature</td></tr>
 <tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>Heat flow rate [l2.m/T3]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>Pressure [m/(l.T2)]</td></tr>
@@ -896,7 +886,8 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">FCSys.Connec
 <font color="blue">connector</font> InertAmagat <font color="darkgreen">
   &quot;<a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> connector with additivity of volume&quot;</font>
 
-  <font color="blue">extends </font><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">FCSys.Connectors.Inert</a>;
+  <font color="blue">extends </font><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.MechanicalExchange">BaseClasses.MechanicalExchange</a>;
+  <font color="blue">extends </font><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Heat">BaseClasses.Heat</a>;
 
   <font color="darkgreen">// Additivity of volume</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p(nominal=1*U.atm) <font color="darkgreen">&quot;Pressure&quot;</font>;
@@ -929,18 +920,18 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">FCSys.Connec
     <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> connectors and
     the documentation in the
   <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
-Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">FCSys.Connectors.Inert</a> (Connector to exchange linear momentum and heat by diffusion).
+Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.MechanicalExchange">BaseClasses.MechanicalExchange</a> (Connector for linear momentum), <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Heat">BaseClasses.Heat</a> (Connector to transport heat).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>Integer</td><td>n_vel</td><td>0</td><td>Number of components of velocity (<i>n</i><sub>vel</sub>)</td></tr>
+<tr><td>Integer</td><td>n_vel</td><td>1</td><td>Number of components of velocity (<i>n</i><sub>vel</sub>)</td></tr>
 </table>
 <p><h3>Contents</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_vel</td><td>Number of components of velocity (<i>n</i><sub>vel</sub>)</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi[n_vel]</td><td>Velocity [l/T]</td></tr>
-<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[n_vel]</td><td>Force [l.m/T2]</td></tr>
+<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.VolumeRate">VolumeRate</a></td><td>mPhidot[n_vel]</td><td>Force [l3/T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>Temperature</td></tr>
 <tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>Heat flow rate [l2.m/T3]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Volume</a></td><td>V</td><td>Volume [l3]</td></tr>
@@ -951,7 +942,8 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">FCSys.Connec
 <font color="blue">connector</font> InertDalton <font color="darkgreen">
   &quot;<a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> connector with additivity of pressure&quot;</font>
 
-  <font color="blue">extends </font><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">FCSys.Connectors.Inert</a>;
+  <font color="blue">extends </font><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.MechanicalExchange">BaseClasses.MechanicalExchange</a>;
+  <font color="blue">extends </font><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Heat">BaseClasses.Heat</a>;
 
   <font color="darkgreen">// Additivity of pressure</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V(nominal=1*U.cm^3) <font color="darkgreen">&quot;Volume&quot;</font>;
@@ -964,54 +956,57 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">FCSys.Connec
 
 <h2><img src="images/FCSys.Connectors.InertInternalI.png" alt="FCSys.Connectors.InertInternal" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Connectors.InertInternal"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.InertInternal</h2>
-<b>Internal connector to exchange linear momentum and heat by diffusion</b><p>
+<b>Internal <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> connector</b><p>
 <img src="images/FCSys.Connectors.InertInternalD.png" alt="FCSys.Connectors.InertInternal">
 <p><h3>Information</h3></p>
 <p>
     This is copy of the <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> connector, except that it
-    has a smaller icon and a default <code>protected</code> prefix.  For more information, see that connector.</p><p>
+    has a smaller icon, a default <code>protected</code> prefix, and the subconnectors are conditional.
+    For more information, see that connector.</p><p>
 
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_vel</td><td>0</td><td>Number of components of velocity (<i>n</i><sub>vel</sub>)</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Boundary conditions (will remove subconnectors)</td></tr>
+<tr><td>Boolean</td><td>uniformVelocity</td><td>false</td><td>Uniform velocity</td></tr>
+<tr><td>Boolean</td><td>isothermal</td><td>false</td><td>Isothermal</td></tr>
 </table>
 <p><h3>Contents</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_vel</td><td>Number of components of velocity (<i>n</i><sub>vel</sub>)</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi[n_vel]</td><td>Velocity [l/T]</td></tr>
-<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[n_vel]</td><td>Force [l.m/T2]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>Temperature</td></tr>
-<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>Heat flow rate [l2.m/T3]</td></tr>
+<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.MechanicalExchange">MechanicalExchange</a></td><td>mechanical</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Heat">Heat</a></td><td>heat</td><td>&nbsp;</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=3>Boundary conditions (will remove subconnectors)</td></tr>
+<tr><td>Boolean</td><td>uniformVelocity</td><td>Uniform velocity</td></tr>
+<tr><td>Boolean</td><td>isothermal</td><td>Isothermal</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">connector</font> InertInternal <font color="darkgreen">
-  &quot;Internal connector to exchange linear momentum and heat by diffusion&quot;</font>
+  &quot;Internal <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> connector&quot;</font>
 
   <font color="blue">parameter </font>Integer n_vel(
     <font color="blue">final </font>min=0,
     <font color="blue">final </font>max=3) = 0 <font color="darkgreen">
     &quot;Number of components of velocity (<i>n</i><sub>vel</sub>)&quot;</font>;
+  <font color="blue">parameter </font>Boolean uniformVelocity=false <font color="darkgreen">&quot;Uniform velocity&quot;</font>;
+  <font color="blue">parameter </font>Boolean isothermal=false <font color="darkgreen">&quot;Isothermal&quot;</font>;
 
-  <font color="darkgreen">// Linear momentum</font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi[n_vel](<font color="blue">each </font>nominal=1*U.cm/U.s) <font color="darkgreen">&quot;Velocity&quot;</font>;
-  <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> mPhidot[n_vel](<font color="blue">each </font>nominal=1*U.N) <font color="darkgreen">&quot;Force&quot;</font>;
-
-  <font color="darkgreen">// Heat</font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T(nominal=298.15*U.K) <font color="darkgreen">&quot;Temperature&quot;</font>;
-  <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot(nominal=1*U.W) <font color="darkgreen">&quot;Heat flow rate&quot;</font>;
+  <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.MechanicalExchange">BaseClasses.MechanicalExchange</a> mechanical(<font color="blue">final </font>n_vel=n_vel) <font color="blue">if </font>
+    uniformVelocity;
+  <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Heat">BaseClasses.Heat</a> heat <font color="blue">if </font>isothermal;
 
 <textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>InertInternal;
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Connectors.MaterialI.png" alt="FCSys.Connectors.Material" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Connectors.Material"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.Material</h2>
-<b>Connector for material transport</b><p>
-<img src="images/FCSys.Connectors.MaterialD.png" alt="FCSys.Connectors.Material">
+<h2><img src="images/FCSys.Connectors.MaterialTransportI.png" alt="FCSys.Connectors.MaterialTransport" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Connectors.MaterialTransport"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.MaterialTransport</h2>
+<b>Connector to transport material</b><p>
+<img src="images/FCSys.Connectors.MaterialTransportD.png" alt="FCSys.Connectors.MaterialTransport">
 <p><h3>Information</h3></p>
 <p>For more information, see the documentation in the
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
@@ -1024,20 +1019,20 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">FCSys.Connec
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
-<font color="blue">connector</font> Material <font color="darkgreen">&quot;Connector for material transport&quot;</font>
+<font color="blue">connector</font> MaterialTransport <font color="darkgreen">&quot;Connector to transport material&quot;</font>
 
   <a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p(nominal=1*U.Pa) <font color="darkgreen">&quot;Pressure&quot;</font>;
   <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot(nominal=1*U.A) <font color="darkgreen">&quot;Current&quot;</font>;
 
 <textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>Material;
+<font color="blue">end </font>MaterialTransport;
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Connectors.MechanicalI.png" alt="FCSys.Connectors.Mechanical" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Connectors.Mechanical"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.Mechanical</h2>
+<h2><img src="images/FCSys.Connectors.MechanicalTransportI.png" alt="FCSys.Connectors.MechanicalTransport" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Connectors.MechanicalTransport"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.MechanicalTransport</h2>
 <b>Connector for transverse displacement</b><p>
-<img src="images/FCSys.Connectors.MechanicalD.png" alt="FCSys.Connectors.Mechanical">
+<img src="images/FCSys.Connectors.MechanicalTransportD.png" alt="FCSys.Connectors.MechanicalTransport">
 <p><h3>Information</h3></p>
 
 
@@ -1059,13 +1054,13 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">FCSys.Connec
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
-<font color="blue">connector</font> Mechanical <font color="darkgreen">&quot;Connector for transverse displacement&quot;</font>
+<font color="blue">connector</font> MechanicalTransport <font color="darkgreen">&quot;Connector for transverse displacement&quot;</font>
 
   <a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> tau(nominal=1*U.Pa) <font color="darkgreen">&quot;Shear stress&quot;</font>;
   <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeRate">Q.VolumeRate</a> APdot(nominal=1*U.cm^3/U.s) <font color="darkgreen">
     &quot;Shear velocity times surface area&quot;</font>;
 <textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>Mechanical;
+<font color="blue">end </font>MechanicalTransport;
 </pre>
 <hr>
 
@@ -1076,7 +1071,7 @@ Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">FCSys.Connec
 <p><h3>Information</h3></p>
 For information, see the documentation in the
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
-
+Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Heat">BaseClasses.Heat</a> (Connector to transport heat).
 <p><h3>Contents</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -1087,8 +1082,7 @@ For information, see the documentation in the
 <pre>
 <font color="blue">connector</font> Heat <font color="darkgreen">&quot;Connector to transport heat&quot;</font>
 
-  <a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T(nominal=298.15*U.K) <font color="darkgreen">&quot;Temperature&quot;</font>;
-  <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot(nominal=1*U.W) <font color="darkgreen">&quot;Heat flow rate&quot;</font>;
+  <font color="blue">extends </font><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Heat">BaseClasses.Heat</a>;
 
 <textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>Heat;
@@ -1242,7 +1236,7 @@ Extends from Real.
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Dec 27 16:34:01 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  2 21:15:29 2013.
 </div>
 </body>
 </html>

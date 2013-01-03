@@ -23,7 +23,7 @@
     <li><a href="FCSys_Sensors.html">Sensors</a>**</li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
     <li><a href="FCSys_Regions.html">Regions</a>**</li>
-    <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
@@ -103,7 +103,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     x,
     a .* {<font color="blue">if </font>n + i == 0<font color="blue"> then </font><font color="red">ln</font>(x)<font color="blue"> else </font>1/(n + i) <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(a, 1)},
     n + 1);
-  <font color="darkgreen">// Note:  The derivative annotation is not used since f() is not</font>
+  <font color="darkgreen">// Note:  The derivative annotation is not used since f() isn&#39;t</font>
   <font color="darkgreen">// the direct and complete derivative of this function.</font>
 
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>F;
@@ -115,13 +115,13 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <b>Polynomial expressed in form: <i>f</i> = ((&hellip; + <i>a</i><sub>-1-<i>n</i></sub>)/<i>x</i> + <i>a</i><sub>-<i>n</i></sub>)/<i>x</i> + <i>a</i><sub>1-<i>n</i></sub> + <i>x</i>&middot;(<i>a</i><sub>2-<i>n</i></sub> + <i>x</i>&middot;(<i>a</i><sub>3-<i>n</i></sub> + &hellip;))</b><p>
 <p><h3>Information</h3></p>
 <p>For high-order polynomials, this
-  is more computationally efficient than the form 
+  is more computationally efficient than the form
   &Sigma;<i>a</i><sub><i>i</i></sub> <i>x</i><sup><i>n</i> + <i>i</i> - 1</sup>.</p>
-  
-  <p>Note that the order of the polynomial is 
+
+  <p>Note that the order of the polynomial is
   <code>n + size(a, 1) - 1</code> (not <code>n</code>).</p>
-  
-  <p>The derivative of this function is 
+
+  <p>The derivative of this function is
   <a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.df">df</a>().</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p><h3>Inputs</h3><p>
@@ -191,7 +191,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <b>Derivative of <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.f">f</a>()</b><p>
 <p><h3>Information</h3></p>
 
-<p>The derivative of this function is 
+<p>The derivative of this function is
   <a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.d2f">d2f</a>().</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p><h3>Inputs</h3><p>
@@ -280,7 +280,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     {a[i]*(n + i - 1)*(n + i - 2)*dx^2,(n + i - 1)*(2*da[i]*dx + a[i]*d2x),d2a[
       i]},
     n + i - 3) <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(a, 1));
-
 <font color="blue">end </font>d2f;
 </pre>
       </div>
@@ -288,7 +287,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Dec 27 15:38:19 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  2 21:15:53 2013.
 </div>
 </body>
 </html>

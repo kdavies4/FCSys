@@ -23,7 +23,7 @@
     <li><a href="FCSys_Sensors.html">Sensors</a>**</li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
     <li><a href="FCSys_Regions.html">Regions</a>**</li>
-    <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
@@ -60,7 +60,7 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
 <tr><td>b_eta</td><td>Constants in NASA correlation for viscosity (<i>b<sub>&eta;</sub>)</td></tr>
 <tr><td>b_lambda</td><td>Constants in NASA correlation for thermal conductivity (<i>b<sub>&lambda;</sub>)</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.f_12S.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.f_12" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA.f_12">f_12</a>
-</td><td>Fluidity as a function of temperature and pressure (<i>f</i><sub>12</sub>)</td></tr>
+</td><td>Shear fluidity as a function of temperature and pressure (<i>f</i><sub>12</sub>)</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.f_12S.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.r_th" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA.r_th">r_th</a>
 </td><td>Thermal resistivity as a function of temperature and pressure (<i>r</i><sub>th</sub>)</td></tr>
 <tr><TH COLSPAN="2">Inherited</th></tr>
@@ -118,7 +118,7 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
 <h2><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.f_12I.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.f_12" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.CharacteristicNASA.f_12"></a><a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA">FCSys.Characteristics.BaseClasses.CharacteristicNASA</a>.f_12</h2>
-<b>Fluidity as a function of temperature and pressure (<i>f</i><sub>12</sub>)</b><p>
+<b>Shear fluidity as a function of temperature and pressure (<i>f</i><sub>12</sub>)</b><p>
 <p><h3>Information</h3></p>
 <p>This function is based on based on NASA CEA
   [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride1996</a>, <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Svehla1995</a>]</p><p>
@@ -126,7 +126,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Inputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>&nbsp;</td><td>Temperature</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>1*U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
 </table>
 <p><h3>Outputs</h3><p>
@@ -137,11 +137,11 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">redeclare </font><font color="blue">function</font> f_12 <font color="darkgreen">
-  &quot;Fluidity as a function of temperature and pressure (<i>f</i><sub>12</sub>)&quot;</font>
+  &quot;Shear fluidity as a function of temperature and pressure (<i>f</i><sub>12</sub>)&quot;</font>
 
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
-  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
   <font color="blue">final </font><font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p=1*U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
   <font color="darkgreen">// Note:  Pressure is provided for generality but isn&#39;t used here.</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Q.Fluidity</a> f_12 <font color="darkgreen">&quot;Fluidity&quot;</font>;
@@ -194,7 +194,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Inputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>&nbsp;</td><td>Temperature</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>1*U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
 </table>
 <p><h3>Outputs</h3><p>
@@ -209,7 +209,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
-  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p=1*U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
   <font color="darkgreen">// Note:  Pressure is provided for generality but isn&#39;t used here.</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> r_th <font color="darkgreen">&quot;Thermal resistivity&quot;</font>;
@@ -254,7 +254,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Dec 27 15:37:51 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  2 21:15:35 2013.
 </div>
 </body>
 </html>

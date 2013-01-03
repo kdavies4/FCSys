@@ -23,7 +23,7 @@
     <li><a href="FCSys_Sensors.html">Sensors</a>**</li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
     <li><a href="FCSys_Regions.html">Regions</a>**</li>
-    <li><a href="FCSys_Subregions.html">Subregions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
@@ -52,7 +52,7 @@
     <p>This package is compatible with NASA CEA thermodynamic data
     [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride2002</a>] and the virial equation of state
     [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Dymond2002</a>].  It may be used with
-    the assumption of ideal gas or of constant specific volume, although it is more general than 
+    the assumption of ideal gas or of constant specific volume, although it is more general than
     that.</p>
 
     <p>Assumptions:
@@ -62,19 +62,19 @@
     <ul>
     <li>Currently, <code>formula</code> may not contain parentheses or brackets.</li>
     <li><code>r</code> is the Van der Waals radius or the radius for the
-    rigid-sphere ("billiard-ball") approximation of the kinetic theory of gases 
+    rigid-sphere ("billiard-ball") approximation of the kinetic theory of gases
     [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Present1958</a>].</li>
     <li><code>b_v</code>: The powers of <i>p</i>/<i>T</i> increase by row.  The powers of
     <i>T</i> increase by column.  If <code>specVolPow[1] == -1</code>, then the rows
-    of <code>b_v</code> correspond to 1, <i>B</i><sup>*</sup><i>T</i>, 
+    of <code>b_v</code> correspond to 1, <i>B</i><sup>*</sup><i>T</i>,
     <i>C</i><sup>*</sup><i>T</i><sup>2</sup>, <i>D</i><sup>*</sup><i>T</i><sup>3</sup>, &hellip;,
     where
-    1, <i>B</i><sup>*</sup>, <i>C</i><sup>*</sup>, and <i>D</i><sup>*</sup> are 
+    1, <i>B</i><sup>*</sup>, <i>C</i><sup>*</sup>, and <i>D</i><sup>*</sup> are
     the first, second, third, and fourth coefficients in the volume-explicit
     virial equation of state
     ([<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Dymond2002</a>, pp. 1&ndash;2]).
     Currently,
-    virial equations of state are supported up to the fourth coefficient (<i>D</i><sup>*</sup>).  
+    virial equations of state are supported up to the fourth coefficient (<i>D</i><sup>*</sup>).
     If additional terms are required, review and modify the definition of <code>b_p</code>.</li>
     <li><code>specVolPow</code> is defined as a <code>Real</code> vector.  However,
     special modifications are necessary if non-integer values are used
@@ -94,7 +94,7 @@
     temperature intervals.  The first column is for specific enthalpy and has dimensionality
     L2.M/(N.T2).  The second is for specific entropy and is dimensionless.
     The integration constants for enthalpy are defined such that the enthalpy at
-    25 &deg;C is the specific enthalpy of formation at that temperature and reference pressure 
+    25 &deg;C is the specific enthalpy of formation at that temperature and reference pressure
     [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride2002</a>, p. 2].
     The integration constants for specific entropy are defined such that specific entropy is absolute.</li>
     <li><code>T_lim_c</code>: The first and last entries are the minimum and
@@ -113,8 +113,8 @@
     The <code>p_min</code> parameter is used to guard against the logarithm of non-positive pressures.
     To disable this protection (and simplify the translated code), set <code>p_min</code> to zero or a
     negative pressure.</li>
-    <li>If the material is gaseous (<code>phase == "gas"</code>), then the first virial coefficient 
-    must be independent of temperature.  Otherwise, the function for specific enthalpy 
+    <li>If the material is gaseous (<code>phase == "gas"</code>), then the first virial coefficient
+    must be independent of temperature.  Otherwise, the function for specific enthalpy
     (<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.h">h</a>) will be ill-posed.
     Typically the first virial coefficient is one (or equivalently <code>U.R</code>), which satisfies
     this requirement.</li>
@@ -155,7 +155,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Characteristics.'e-'.Graphite.dpS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.f_0" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.f_0">f_0</a>
 </td><td>Bulk fluidity as a function of temperature and pressure (<i>f</i><sub>0</sub>)</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.'e-'.Graphite.dpS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.f_12" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.f_12">f_12</a>
-</td><td>Fluidity as a function of temperature and pressure (<i>f</i><sub>12</sub>)</td></tr>
+</td><td>Shear fluidity as a function of temperature and pressure (<i>f</i><sub>12</sub>)</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.'e-'.Graphite.dpS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.g" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.g">g</a>
 </td><td>Gibbs potential as a function of temperature and pressure</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.f_12S.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.h" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.h">h</a>
@@ -225,7 +225,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <p>This function is based on the kinetic theory of gases with the rigid-sphere ("billiard-ball")
   assumption [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Present1958</a>].  It is
   independent of pressure or specific volume.  This independence very accurately matches the measured
-  fluidity of gases.  However, the fluidity varies by species and
+  shear fluidity of gases.  However, the shear fluidity varies by species and
   generally falls more rapidly with temperature than shown by this function
   [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Present1958</a>, p. 41].</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
@@ -261,7 +261,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <b>Isochoric specific heat capacity as a function of temperature and pressure (<i>c</i><sub><i>V</i></sub>)</b><p>
 <p><h3>Information</h3></p>
 
-  <p>For an ideal gas, this function is independent of pressure 
+  <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
     <p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
@@ -345,7 +345,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="darkgreen">// Note that it reduces to -1 for an ideal gas---the -1 in the gas</font>
   <font color="darkgreen">// branch of the condition.</font>
 
-  <font color="darkgreen">// **Check derivation in [Moran2004].  Can this be simplified?</font>
+  <font color="darkgreen">// TODO:  Check derivation in [Moran2004].  Can this be simplified?</font>
 
   <font color="darkgreen">// TODO:  Verify that [Dymond2002] is correct.  Is the reference truly</font>
   <font color="darkgreen">// c_V of ideal gas at reference pressure (and not actual pressure)?</font>
@@ -479,7 +479,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <font color="blue">algorithm </font>
   f_0 := <font color="red">alpha</font>(T)/m;
-
 <font color="blue">end </font>f_0;
 </pre>
 <hr>
@@ -488,7 +487,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
 <h2><img src="images/FCSys.Characteristics.BaseClasses.Characteristic.alphaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.f_12" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.Characteristic.f_12"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.f_12</h2>
-<b>Fluidity as a function of temperature and pressure (<i>f</i><sub>12</sub>)</b><p>
+<b>Shear fluidity as a function of temperature and pressure (<i>f</i><sub>12</sub>)</b><p>
 <p><h3>Information</h3></p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p><h3>Inputs</h3><p>
@@ -505,7 +504,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">replaceable </font><font color="blue">function</font> f_12 <font color="darkgreen">
-  &quot;Fluidity as a function of temperature and pressure (<i>f</i><sub>12</sub>)&quot;</font>
+  &quot;Shear fluidity as a function of temperature and pressure (<i>f</i><sub>12</sub>)&quot;</font>
 
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
@@ -516,7 +515,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <font color="blue">algorithm </font>
   f_12 := <font color="red">alpha</font>(T)/m;
-
 <font color="blue">end </font>f_12;
 </pre>
 <hr>
@@ -556,7 +554,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     p,
     T,
     referenceEnthalpy) - T*<font color="red">s</font>(T, p);
-
 <font color="blue">end </font>g;
 </pre>
 <hr>
@@ -566,7 +563,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <b>Specific enthalpy as a function of temperature and pressure</b><p>
 <p><h3>Information</h3></p>
 
-  <p>For an ideal gas, this function is independent of pressure 
+  <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
     <p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
@@ -748,7 +745,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <font color="blue">algorithm </font>
   r_th := <font color="red">alpha</font>(T)/<font color="red">c_V</font>(T, p);
-
 <font color="blue">end </font>r_th;
 </pre>
 <hr>
@@ -854,7 +850,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="darkgreen">// integration limit for the real gas terms (non-ideal; besides the</font>
   <font color="darkgreen">// first virial term) is p=0---the pressure limit at which a real gas</font>
   <font color="darkgreen">// behaves as an ideal gas.  See [Rao1997, p. 272].</font>
-
 <font color="blue">end </font>s;
 </pre>
 <hr>
@@ -866,7 +861,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <b>Specific volume as a function of temperature and pressure</b><p>
 <p><h3>Information</h3></p>
 
-  <p>The derivative of this function is 
+  <p>The derivative of this function is
   <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.dv">dv</a>().</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p><h3>Inputs</h3><p>
@@ -906,7 +901,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Dec 27 15:37:55 2012.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  2 21:15:39 2013.
 </div>
 </body>
 </html>

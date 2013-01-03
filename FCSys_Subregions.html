@@ -1,0 +1,663 @@
+<html>
+<head>
+<title>FCSys.Subregions</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta name="description" content="Control volumes with multi-species transport, exchange, and storage">
+<meta name="keywords" content="Modelica, fuel cell, PEMFC, electrochemistry, model">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_BCs.html">BCs</a>**</li>
+    <li><a href="FCSys_Sensors.html">Sensors</a>**</li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
+    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Subregions"></a><a href="index.html#FCSys">FCSys</a>.Subregions</h2>
+<b>Control volumes with multi-species transport, exchange, and storage</b>
+<p>
+<p><h3>Information</h3></p>
+
+<p>
+<b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2012, Georgia Tech Research Corporation.
+</p>
+<p>
+<i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
+disclaimer of warranty) see <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.ModelicaLicense2">
+FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href="http://www.modelica.org/licenses/ModelicaLicense2">
+http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
+</p>
+<p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Subregions.ExamplesS.png" alt="FCSys.Subregions.Examples" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples">Examples</a>
+</td><td>Examples and tests</td></tr>
+<tr><td><img src="images/FCSys.Subregions.SubregionS.png" alt="FCSys.Subregions.Subregion" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a>
+</td><td>Subregion with all phases included</td></tr>
+<tr><td><img src="images/FCSys.Subregions.SubregionS.png" alt="FCSys.Subregions.SubregionNoGraphite" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions.SubregionNoGraphite">SubregionNoGraphite</a>
+</td><td>Subregion with all phases except graphite</td></tr>
+<tr><td><img src="images/FCSys.Subregions.SubregionS.png" alt="FCSys.Subregions.SubregionNoIonomer" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions.SubregionNoIonomer">SubregionNoIonomer</a>
+</td><td>Subregion with all phases except ionomer</td></tr>
+<tr><td><img src="images/FCSys.Subregions.PhasesS.png" alt="FCSys.Subregions.Phases" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases">Phases</a>
+</td><td>Phases or mixtures of species</td></tr>
+<tr><td><img src="images/FCSys.Subregions.PhasesS.png" alt="FCSys.Subregions.Species" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species">Species</a>
+</td><td>Models for single-species storage, transport, and exchange of material, linear momentum, and energy</td></tr>
+<tr><td><img src="images/FCSys.Subregions.PhaseBoundaryS.png" alt="FCSys.Subregions.PhaseBoundary" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions.PhaseBoundary">PhaseBoundary</a>
+</td><td>Phase boundary (adapter between Amagat and Dalton mixtures)</td></tr>
+<tr><td><img src="images/FCSys.Subregions.ReactionS.png" alt="FCSys.Subregions.Reaction" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">Reaction</a>
+</td><td>Model for a chemical/electrochemical reaction</td></tr>
+<tr><td><img src="images/FCSys.Subregions.VolumeS.png" alt="FCSys.Subregions.Volume" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions.Volume">Volume</a>
+</td><td>Model to establish a fixed volume for phases</td></tr>
+<tr><td><img src="images/FCSys.Subregions.BaseClassesS.png" alt="FCSys.Subregions.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses">BaseClasses</a>
+</td><td>Base classes (not for direct use)</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.Subregions.SubregionI.png" alt="FCSys.Subregions.Subregion" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Subregions.Subregion"></a><a href="FCSys_Subregions.html#FCSys.Subregions">FCSys.Subregions</a>.Subregion</h2>
+<b>Subregion with all phases included</b><p>
+<img src="images/FCSys.Subregions.SubregionD.png" alt="FCSys.Subregions.Subregion">
+<p><h3>Information</h3></p>
+<p>Notes:<ul>
+    <li>The <code>inclReact</code> parameter may be set to
+    <code>false</code>
+    to eliminate unnecessary equations.</li>
+  <li>H<sub>2</sub>O is included by default, since at least one species
+  must be included.</li></ul>
+</p><p>For more information, see the
+   <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSubregion">PartialSubregion</a> model.</p><p>
+Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSubregion">BaseClasses.PartialSubregion</a> (Partial subregion model for multi-dimensional and multi-species storage, transport, and exchange).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>&nbsp;</td><td>Length (<b>L</b>) [l]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Phases</td></tr>
+<tr><td><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Gas">Gas</a></td><td>gas</td><td>&nbsp;</td><td>Gas</td></tr>
+<tr><td><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Graphite">Graphite</a></td><td>graphite</td><td>&nbsp;</td><td>Graphite</td></tr>
+<tr><td><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Ionomer">Ionomer</a></td><td>ionomer</td><td>&nbsp;</td><td>Ionomer</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
+<tr><td>Boolean</td><td>inclReact</td><td>true</td><td>Include reaction(s), as appropriate</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with velocity included</td></tr>
+<tr><td>Boolean</td><td>inclVelX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclVelY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclVelZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
+<tr><td>Boolean</td><td>inclXFaces</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclYFaces</td><td>true</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclZFaces</td><td>true</td><td>Z</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative</td><td>Negative face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xPositive</td><td>Positive face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Subregion <font color="darkgreen">&quot;Subregion with all phases included&quot;</font>
+
+  <font color="blue">parameter </font>Boolean inclReact=true <font color="darkgreen">&quot;Include reaction(s), as appropriate&quot;</font>;
+  <font color="darkgreen">// Note:  This is listed above the extends clause so that it is listed</font>
+  <font color="darkgreen">// first in the parameter dialog.</font>
+  <font color="blue">extends </font><a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSubregion">BaseClasses.PartialSubregion</a>;
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Gas">Phases.Gas</a> gas(inclH2O=true, <font color="blue">final </font>inclVel={inclVelX,inclVelY,inclVelZ}) <font color="darkgreen">
+    &quot;Gas&quot;</font>;
+  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Graphite">Phases.Graphite</a> graphite(<font color="blue">final </font>inclVel={inclVelX,inclVelY,inclVelZ}) <font color="darkgreen">
+    &quot;Graphite&quot;</font>;
+  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Ionomer">Phases.Ionomer</a> ionomer(<font color="blue">final </font>inclVel={inclVelX,inclVelY,inclVelZ}) <font color="darkgreen">&quot;Ionomer&quot;</font>;</textblock>
+  <font color="darkgreen">/*
+  Phases.Liquid liquid(final inclVel={inclVelX,
+        inclVelY,inclVelZ})  &quot;Liquid&quot; annotation (
+
+    Dialog(group=&quot;Phases&quot;),
+    Placement(transformation(extent={{-10,-10},{10,10}})));
+  */</font>
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">FCSys.Subregions.Reaction</a> HOR(<font color="blue">final </font>n_vel=n_vel, n_spec=3) <font color="blue">if </font>inclReact<font color="blue"> and </font>(
+    graphite.'incle-'<font color="blue"> and </font>ionomer.'inclH+'<font color="blue"> and </font>gas.inclH2<font color="blue"> and </font><font color="blue">not </font>(gas.inclO2<font color="blue">
+     and </font>gas.inclH2O)) <font color="darkgreen">&quot;Hydrogen oxidation reaction&quot;</font>;
+  <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">FCSys.Subregions.Reaction</a> ORR(<font color="blue">final </font>n_vel=n_vel, n_spec=4) <font color="blue">if </font>inclReact<font color="blue"> and </font>(
+    graphite.'incle-'<font color="blue"> and </font>ionomer.'inclH+'<font color="blue"> and </font>gas.inclO2<font color="blue"> and </font>gas.inclH2O<font color="blue"> and </font><font color="blue">
+    not </font>gas.inclH2) <font color="darkgreen">&quot;Oxygen reduction reaction&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false"><font color="blue">protected </font>
+  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBusInternal">Connectors.ChemicalBusInternal</a> chemical <font color="darkgreen">
+    &quot;Internal connector to route electrochemical interactions&quot;</font>;</textblock>
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Chemical interactions</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(HOR.chemical[1], chemical.'H+');
+  <font color="red">connect</font>(HOR.chemical[2], chemical.'e-');
+  <font color="red">connect</font>(HOR.chemical[3], chemical.H2);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(ORR.chemical[1], chemical.'e-');
+  <font color="red">connect</font>(ORR.chemical[2], chemical.'H+');
+  <font color="red">connect</font>(ORR.chemical[3], chemical.O2);
+  <font color="red">connect</font>(ORR.chemical[4], chemical.H2O);</textblock>
+
+  <font color="darkgreen">// Gas</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(gas.chemical, chemical);
+  <font color="red">connect</font>(gas.inert, volume.inert);
+  <font color="red">connect</font>(gas.xNegative, xNegative.gas);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(gas.xPositive, xPositive.gas);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(gas.yNegative, yNegative.gas);
+  <font color="red">connect</font>(gas.yPositive, yPositive.gas);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(gas.zNegative, zNegative.gas);
+  <font color="red">connect</font>(gas.zPositive, zPositive.gas);</textblock>
+
+  <font color="darkgreen">// Graphite</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(graphite.chemical, chemical);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(graphite.inert, volume.inert);
+  <font color="red">connect</font>(graphite.xNegative, xNegative.graphite);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(graphite.xPositive, xPositive.graphite);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(graphite.yNegative, yNegative.graphite);
+  <font color="red">connect</font>(graphite.yPositive, yPositive.graphite);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(graphite.zNegative, zNegative.graphite);
+  <font color="red">connect</font>(graphite.zPositive, zPositive.graphite);</textblock>
+
+  <font color="darkgreen">// Ionomer</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(ionomer.chemical, chemical);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(ionomer.inert, volume.inert);
+  <font color="red">connect</font>(ionomer.xNegative, xNegative.ionomer);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(ionomer.xPositive, xPositive.ionomer);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(ionomer.yNegative, yNegative.ionomer);
+  <font color="red">connect</font>(ionomer.yPositive, yPositive.ionomer);
+  <font color="red">connect</font>(ionomer.zNegative, zNegative.ionomer);
+  <font color="red">connect</font>(ionomer.zPositive, zPositive.ionomer);</textblock>
+
+  <font color="darkgreen">/*
+  // Liquid
+  connect(liquid.inert, volume.interaction) annotation (Line(
+      points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
+      color={0,180,0},
+      smooth=Smooth.None,
+      thickness=0.5));
+  connect(liquid.xNegative, xNegative.liquid) annotation (Line(
+      points={{-10,6.10623e-16},{-10,1.16573e-15},{-25,1.16573e-15},{-25,5.55112e-16},
+          {-40,5.55112e-16}},
+      color={127,127,127},
+      pattern=LinePattern.None,
+      thickness=0.5,
+      smooth=Smooth.None));
+  connect(liquid.xPositive, xPositive.liquid) annotation (Line(
+      points={{10,6.10623e-16},{10,5.55112e-16},{40,5.55112e-16}},
+      color={127,127,127},
+      pattern=LinePattern.None,
+      thickness=0.5,
+      smooth=Smooth.None));
+  connect(liquid.yNegative, yNegative.liquid) annotation (Line(
+      points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
+      color={127,127,127},
+      pattern=LinePattern.None,
+      thickness=0.5,
+      smooth=Smooth.None));
+  connect(liquid.yPositive, yPositive.liquid) annotation (Line(
+      points={{6.10623e-16,10},{-4.87687e-22,10},{-4.87687e-22,40},{5.55112e-16,
+          40}},
+      color={127,127,127},
+      pattern=LinePattern.None,
+      thickness=0.5,
+      smooth=Smooth.None));
+  connect(liquid.zNegative, zNegative.liquid) annotation (Line(
+      points={{5,5},{20,20}},
+      color={127,127,127},
+      pattern=LinePattern.None,
+      thickness=0.5,
+      smooth=Smooth.None));
+  connect(liquid.zPositive, zPositive.liquid) annotation (Line(
+      points={{-5,-5},{-20,-20}},
+      color={127,127,127},
+      pattern=LinePattern.None,
+      thickness=0.5,
+      smooth=Smooth.None));
+  */</font>
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Subregion;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Subregions.SubregionI.png" alt="FCSys.Subregions.SubregionNoGraphite" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Subregions.SubregionNoGraphite"></a><a href="FCSys_Subregions.html#FCSys.Subregions">FCSys.Subregions</a>.SubregionNoGraphite</h2>
+<b>Subregion with all phases except graphite</b><p>
+<img src="images/FCSys.Subregions.SubregionNoGraphiteD.png" alt="FCSys.Subregions.SubregionNoGraphite">
+<p><h3>Information</h3></p>
+<p>Notes:<ul>
+    <li>The <code>inclReact</code> parameter may be set to
+    <code>false</code>
+    to eliminate unnecessary equations.</li>
+  <li>H<sub>2</sub>O is included by default, since at least one species
+  must be included.</li></ul>
+</p><p>For more information, see the
+   <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSubregion">PartialSubregion</a> model.</p><p>
+Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSubregion">BaseClasses.PartialSubregion</a> (Partial subregion model for multi-dimensional and multi-species storage, transport, and exchange).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>&nbsp;</td><td>Length (<b>L</b>) [l]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Phases</td></tr>
+<tr><td><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Gas">Gas</a></td><td>gas</td><td>&nbsp;</td><td>Gas</td></tr>
+<tr><td><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Ionomer">Ionomer</a></td><td>ionomer</td><td>&nbsp;</td><td>Ionomer</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
+<tr><td>Boolean</td><td>inclReact</td><td>false</td><td>Include reaction(s), as appropriate</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with velocity included</td></tr>
+<tr><td>Boolean</td><td>inclVelX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclVelY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclVelZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
+<tr><td>Boolean</td><td>inclXFaces</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclYFaces</td><td>true</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclZFaces</td><td>true</td><td>Z</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative</td><td>Negative face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xPositive</td><td>Positive face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> SubregionNoGraphite <font color="darkgreen">&quot;Subregion with all phases except graphite&quot;</font>
+  <font color="blue">parameter </font>Boolean inclReact=false <font color="darkgreen">&quot;Include reaction(s), as appropriate&quot;</font>;
+  <font color="darkgreen">// Note:  This is listed above the extension clause so that it is listed</font>
+  <font color="darkgreen">// first in the parameter dialog.</font>
+  <font color="blue">extends </font><a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSubregion">BaseClasses.PartialSubregion</a>;
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Gas">Phases.Gas</a> gas(
+    inclH2O=true,
+    inclReact=inclReact,
+    <font color="blue">final </font>inclVel={inclVelX,inclVelY,inclVelZ}) <font color="darkgreen">&quot;Gas&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Ionomer">Phases.Ionomer</a> ionomer(<font color="blue">final </font>inclVel={inclVelX,inclVelY,inclVelZ}) <font color="darkgreen">&quot;Ionomer&quot;</font>;</textblock>
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Gas</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(gas.inert, volume.inert);
+  <font color="red">connect</font>(gas.xNegative, xNegative.gas);
+  <font color="red">connect</font>(gas.xPositive, xPositive.gas);
+  <font color="red">connect</font>(gas.yNegative, yNegative.gas);
+  <font color="red">connect</font>(gas.yPositive, yPositive.gas);
+  <font color="red">connect</font>(gas.zNegative, zNegative.gas);
+  <font color="red">connect</font>(gas.zPositive, zPositive.gas);</textblock>
+
+  <font color="darkgreen">// Ionomer</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(ionomer.inert, volume.inert);
+  <font color="red">connect</font>(ionomer.xNegative, xNegative.ionomer);
+  <font color="red">connect</font>(ionomer.xPositive, xPositive.ionomer);
+  <font color="red">connect</font>(ionomer.yNegative, yNegative.ionomer);
+  <font color="red">connect</font>(ionomer.yPositive, yPositive.ionomer);
+  <font color="red">connect</font>(ionomer.zNegative, zNegative.ionomer);
+  <font color="red">connect</font>(ionomer.zPositive, zPositive.ionomer);</textblock>
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>SubregionNoGraphite;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Subregions.SubregionI.png" alt="FCSys.Subregions.SubregionNoIonomer" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Subregions.SubregionNoIonomer"></a><a href="FCSys_Subregions.html#FCSys.Subregions">FCSys.Subregions</a>.SubregionNoIonomer</h2>
+<b>Subregion with all phases except ionomer</b><p>
+<img src="images/FCSys.Subregions.SubregionNoIonomerD.png" alt="FCSys.Subregions.SubregionNoIonomer">
+<p><h3>Information</h3></p>
+<p>Notes:<ul>
+    <li>The <code>inclReact</code> parameter may be set to
+    <code>false</code>
+    to eliminate unnecessary equations.</li>
+  <li>H<sub>2</sub>O is included by default, since at least one species
+  must be included.</li></ul>
+</p><p>For more information, see the
+   <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSubregion">PartialSubregion</a> model.</p><p>
+Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSubregion">BaseClasses.PartialSubregion</a> (Partial subregion model for multi-dimensional and multi-species storage, transport, and exchange).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>&nbsp;</td><td>Length (<b>L</b>) [l]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Phases</td></tr>
+<tr><td><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Gas">Gas</a></td><td>gas</td><td>&nbsp;</td><td>Gas</td></tr>
+<tr><td><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Graphite">Graphite</a></td><td>graphite</td><td>&nbsp;</td><td>Graphite</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
+<tr><td>Boolean</td><td>inclReact</td><td>false</td><td>Include reaction(s), as appropriate</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with velocity included</td></tr>
+<tr><td>Boolean</td><td>inclVelX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclVelY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclVelZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
+<tr><td>Boolean</td><td>inclXFaces</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclYFaces</td><td>true</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclZFaces</td><td>true</td><td>Z</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative</td><td>Negative face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xPositive</td><td>Positive face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> SubregionNoIonomer <font color="darkgreen">&quot;Subregion with all phases except ionomer&quot;</font>
+  <font color="blue">parameter </font>Boolean inclReact=false <font color="darkgreen">&quot;Include reaction(s), as appropriate&quot;</font>;
+  <font color="darkgreen">// Note:  This is listed above the extends clause so that it is listed</font>
+  <font color="darkgreen">// first in the parameter dialog.</font>
+  <font color="blue">extends </font><a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSubregion">BaseClasses.PartialSubregion</a>;
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Gas">Phases.Gas</a> gas(
+    inclH2O=true,
+    inclReact=inclReact,
+    <font color="blue">final </font>inclVel={inclVelX,inclVelY,inclVelZ}) <font color="darkgreen">&quot;Gas&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Graphite">Phases.Graphite</a> graphite(<font color="blue">final </font>inclVel={inclVelX,inclVelY,inclVelZ}) <font color="darkgreen">
+    &quot;Graphite&quot;</font>;</textblock>
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Gas</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(gas.inert, volume.inert);
+  <font color="red">connect</font>(gas.xNegative, xNegative.gas);
+  <font color="red">connect</font>(gas.xPositive, xPositive.gas);
+  <font color="red">connect</font>(gas.yNegative, yNegative.gas);
+  <font color="red">connect</font>(gas.yPositive, yPositive.gas);
+  <font color="red">connect</font>(gas.zNegative, zNegative.gas);
+  <font color="red">connect</font>(gas.zPositive, zPositive.gas);</textblock>
+
+  <font color="darkgreen">// Graphite</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(graphite.inert, volume.inert);
+  <font color="red">connect</font>(graphite.xNegative, xNegative.graphite);
+  <font color="red">connect</font>(graphite.xPositive, xPositive.graphite);
+  <font color="red">connect</font>(graphite.yNegative, yNegative.graphite);
+  <font color="red">connect</font>(graphite.yPositive, yPositive.graphite);
+  <font color="red">connect</font>(graphite.zNegative, zNegative.graphite);
+  <font color="red">connect</font>(graphite.zPositive, zPositive.graphite);</textblock>
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>SubregionNoIonomer;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Subregions.PhaseBoundaryI.png" alt="FCSys.Subregions.PhaseBoundary" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Subregions.PhaseBoundary"></a><a href="FCSys_Subregions.html#FCSys.Subregions">FCSys.Subregions</a>.PhaseBoundary</h2>
+<b>Phase boundary (adapter between Amagat and Dalton mixtures)</b><p>
+<img src="images/FCSys.Subregions.PhaseBoundaryD.png" alt="FCSys.Subregions.PhaseBoundary">
+<p><h3>Information</h3></p>
+<p>This model is essentially an
+    adapter between the <a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a> and
+    <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a> connectors.  Inside a phase,
+    Dalton's law is applied.  Outside, Amagat's law is used.</p>
+
+    <p>See also the documentation in the
+    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
+
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td>Integer</td><td>n_vel</td><td>1</td><td>Number of components of velocity (<i>n</i><sub>vel</sub>)</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a></td><td>inertA</td><td>Connector for volume, linear momentum, and entropy&amp;mdash;with Amagat&#39;s law</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inertD</td><td>Connector for volume, linear momentum, and entropy&amp;mdash;with Dalton&#39;s law</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> PhaseBoundary <font color="darkgreen">
+  &quot;Phase boundary (adapter between Amagat and Dalton mixtures)&quot;</font>
+
+  <font color="darkgreen">//extends FCSys.BaseClasses.Icons.Names.Top6;</font>
+
+  <font color="blue">parameter </font>Integer n_vel(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>max=3) = 1 <font color="darkgreen">
+    &quot;Number of components of velocity (<i>n</i><sub>vel</sub>)&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">FCSys.Connectors.InertAmagat</a> inertA(<font color="blue">final </font>n_vel=n_vel) <font color="darkgreen">
+    &quot;Connector for volume, linear momentum, and entropy&amp;mdash;with Amagat&#39;s law&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">Connectors.InertDalton</a> inertD(<font color="blue">final </font>n_vel=n_vel) <font color="darkgreen">
+    &quot;Connector for volume, linear momentum, and entropy&amp;mdash;with Dalton&#39;s law&quot;</font>;</textblock>
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Equal intensive properties</font>
+  inertA.phi = inertD.phi;
+  inertA.T = inertD.T;
+
+  <font color="darkgreen">// Static balances</font>
+  0 = inertA.p + inertD.p <font color="darkgreen">&quot;Pressure&quot;</font>;
+  0 = inertA.V + inertD.V <font color="darkgreen">&quot;Volume&quot;</font>;
+
+  <font color="darkgreen">// Rate balances (without storage or generation)</font>
+  <font color="red">zeros</font>(n_vel) = inertA.mPhidot + inertD.mPhidot <font color="darkgreen">&quot;Linear momentum&quot;</font>;
+  0 = inertA.Qdot + inertD.Qdot <font color="darkgreen">&quot;Energy&quot;</font>;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>PhaseBoundary;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Subregions.ReactionI.png" alt="FCSys.Subregions.Reaction" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Subregions.Reaction"></a><a href="FCSys_Subregions.html#FCSys.Subregions">FCSys.Subregions</a>.Reaction</h2>
+<b>Model for a chemical/electrochemical reaction</b><p>
+<img src="images/FCSys.Subregions.ReactionD.png" alt="FCSys.Subregions.Reaction">
+<p><h3>Information</h3></p>
+
+    <p>The size of the chemical connector is automatically increased each time a connection is made.
+    At least two species must be connected.
+    The stoichiometry is determined automatically from the chemical formulas
+    of the connected species.  No intermediate species are considered. Each reaction must be
+    completely and uniquely defined by the connected species.  Otherwise an error message is given.
+    If you suspect a bug in the library, please report it using the
+    <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.Contact">contact information</a>.</p>
+
+  <p>Linear momentum and energy are advected using the <code>semiLinear</code> operator.
+  The rate of advection of linear momentum is the
+  product of the velocity of the source and the rate of mass
+  (<i>m</i> &phi; <i>N&#775;</i>).  The rate of thermal advection is the
+  product of the massic enthalpy of the source and the rate of mass
+  (<i>m</i> <i>h&#772;</i> <i>N&#775;</i>).  If there multiple sources, then
+  their contributions are additive.  If there are multiple sinks, then
+  the flow is split on a mass basis.</p>
+
+  <p>At uniform temperature, the stoichiometrically weighted sum of the chemical
+  potentials zero.  The <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model
+  specifies that the chemical potential is the Gibbs potential (<i>g</i> = <i>h</i> - <i>sT</i>).
+  Therefore, assuming uniform temperature, the rate of advection of enthalpy (<i>H&#775;</i>) from reactants
+  to products (or vice versa) is also temperature times the rate of advection of entropy (<i>TS&#775;</i>).</p>
+
+    <p>For material, this model is essentially the opposite of a standard single-species connection.
+    The stoichiometric sum of the efforts (&Sigma; &nu;<sub><i>i</i></sub> &mu;<sub><i>i</i></sub>)
+    is zero, which is analogous to Kirchhoff's Current Law.  The flow rates divided by the
+    stoichiometric coefficients (<i>N&#775;</i><sub><i>i</i></sub> /&nu;<sub><i>i</i></sub>)
+    are equal&mdash;analogous to Kirchhoff's Voltage Law.</p>
+
+    <p>Linear momentum and enthalpy are advected using the <code>semiLinear()</code> operator.  There is no diffusion;
+    it is included in the inert connections among species
+    (see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model).<p>
+
+    <p>Assumptions:<ul>
+    <li>No storage of material, linear momentum, or energy</li></ul>
+    </p>
+    <p>
+
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Integer</td><td>n_vel</td><td>1</td><td>Number of components of velocity (<i>n</i><sub>vel</sub>)</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a></td><td>chemical[n_spec]</td><td>Connector for chemical species</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Reaction <font color="darkgreen">&quot;Model for a chemical/electrochemical reaction&quot;</font>
+  <font color="darkgreen">//extends FCSys.BaseClasses.Icons.Names.Top2;</font>
+
+  <font color="blue">parameter </font>Integer n_spec(min=2) = 0 <font color="darkgreen">&quot;Number of chemical species&quot;</font>;
+  <font color="darkgreen">// Note  The minimum is 2 for a meaningful reaction, but the default</font>
+  <font color="darkgreen">// must be 0 to use connectorSizing.</font>
+  <font color="blue">parameter </font>Integer n_vel=1 <font color="darkgreen">
+    &quot;Number of components of velocity (<i>n</i><sub>vel</sub>)&quot;</font>;
+
+  Real nu[n_spec]=<font color="red">Chemistry.stoich</font>(chemical.formula) <font color="darkgreen">
+    &quot;Stoichiometric coefficients&quot;</font>;
+  <font color="darkgreen">// Note 1:  As of Modelica 3.2 and Dymola 7.4, nu can&#39;t be a parameter or</font>
+  <font color="darkgreen">// constant even though it isn&#39;t time-varying.  The strings that represent</font>
+  <font color="darkgreen">// the chemical formulas can&#39;t be passed through the connectors as</font>
+  <font color="darkgreen">// parameters or constants.  However, the translator should recognize that</font>
+  <font color="darkgreen">// these equations are static.</font>
+  <font color="darkgreen">// Note 2:  This is a Real variable (rather than Integer) to avoid the</font>
+  <font color="darkgreen">// following warning in Dymola 7.4:</font>
+  <font color="darkgreen">//     &quot;Cannot differentiate discrete or record variable:</font>
+  <font color="darkgreen">//         [...].nu[...]</font>
+  <font color="darkgreen">//     with respect to time.&quot;</font>
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Xidot(nominal=1*U.A) <font color="darkgreen">&quot;Reaction rate&quot;</font>;
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">Connectors.ChemicalInput</a> chemical[n_spec](<font color="blue">each </font><font color="blue">final </font>n_vel=n_vel) <font color="darkgreen">
+    &quot;Connector for chemical species&quot;</font>;</textblock>
+
+<font color="blue">protected </font>
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi[n_vel](<font color="blue">each </font>nominal=1*U.cm/U.s,<font color="blue">each </font>start=0) <font color="darkgreen">&quot;Velocity&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity2">Q.Velocity2</a> hbar(nominal=1*U.V*U.mol/U.g, start=0) <font color="darkgreen">&quot;Massic enthalpy&quot;</font>;
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Chemical equilibrium</font>
+  0 = nu*chemical.muPerT;
+
+  <font color="darkgreen">// Conservation (without storage)</font>
+  nu[1:n_spec]*Xidot = chemical.Ndot <font color="darkgreen">&quot;Material&quot;</font>;
+  <font color="red">zeros</font>(n_vel) = <font color="red">sum</font>(chemical[i].mPhidot <font color="blue">for </font>i<font color="blue"> in </font>1:n_spec) <font color="darkgreen">&quot;Linear momentum&quot;</font>;
+  0 = <font color="red">sum</font>(chemical.Hdot) <font color="darkgreen">&quot;Energy&quot;</font>;
+
+  <font color="darkgreen">// Ideal mixing/upstream discretization</font>
+  <font color="darkgreen">// Chemical species</font>
+  <font color="blue">for </font>i<font color="blue"> in </font>1:n_spec<font color="blue"> loop</font>
+    chemical[i].mPhidot = <font color="red">semiLinear</font>(
+      chemical[i].m*chemical[i].Ndot,
+      chemical[i].phi,
+      phi) <font color="darkgreen">&quot;Linear momentum&quot;</font>;
+    chemical[i].Hdot = <font color="red">semiLinear</font>(
+      chemical[i].m*chemical[i].Ndot,
+      chemical[i].hbar,
+      hbar) <font color="darkgreen">&quot;Energy&quot;</font>;
+  <font color="blue">end for</font>;
+  <font color="darkgreen">// TODO:  Use stream connectors once they are better supported (some</font>
+  <font color="darkgreen">// errors occurred in Dymola 7.4).</font>
+
+  <font color="darkgreen">// Note:  This model is marked as structurally incomplete.  It must have</font>
+  <font color="darkgreen">// zero species by default (for automatic connector sizing), but at least</font>
+  <font color="darkgreen">// one species is mathematically required (two for a meaningful reaction).</font>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Reaction;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Subregions.VolumeI.png" alt="FCSys.Subregions.Volume" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Subregions.Volume"></a><a href="FCSys_Subregions.html#FCSys.Subregions">FCSys.Subregions</a>.Volume</h2>
+<b>Model to establish a fixed volume for phases</b><p>
+<img src="images/FCSys.Subregions.VolumeD.png" alt="FCSys.Subregions.Volume">
+<p><h3>Information</h3></p>
+<p>This model uses a <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a> connector that imposes
+    additivity of volume.  In order to convert to additivity of pressure, use
+    the <a href="FCSys_Subregions.html#FCSys.Subregions.PhaseBoundary">PhaseBoundary</a> model.</p>
+
+    <p>See also the documentation in the
+    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
+
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Volume</a></td><td>V</td><td>&nbsp;</td><td>Volume [l3]</td></tr>
+<tr><td>Integer</td><td>n_vel</td><td>1</td><td>Number of components of velocity (<i>n</i><sub>vel</sub>)</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a></td><td>inert</td><td>Connector for linear momentum and entropy, with shared volume</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Volume <font color="darkgreen">&quot;Model to establish a fixed volume for phases&quot;</font>
+  <font color="darkgreen">//extends FCSys.BaseClasses.Icons.Names.Top7;</font>
+
+  <font color="darkgreen">// Geometric parameters</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V(start=1*U.cm^3) <font color="darkgreen">&quot;Volume&quot;</font>;
+  <font color="blue">parameter </font>Integer n_vel(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>max=3) = 1 <font color="darkgreen">
+    &quot;Number of components of velocity (<i>n</i><sub>vel</sub>)&quot;</font>;
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">FCSys.Connectors.InertAmagat</a> inert(<font color="blue">final </font>n_vel=n_vel) <font color="darkgreen">
+    &quot;Connector for linear momentum and entropy, with shared volume&quot;</font>;
+  <font color="blue">outer </font><a href="FCSys_BCs.html#FCSys.BCs.Defaults">FCSys.BCs.Defaults</a> defaults <font color="darkgreen">&quot;Default settings&quot;</font>;</textblock>
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Specified volume</font>
+  V = inert.V;
+
+  <font color="darkgreen">// Rate balances (without storage or generation)</font>
+  <font color="red">zeros</font>(n_vel) = inert.mPhidot <font color="darkgreen">&quot;Linear momentum&quot;</font>;
+  0 = inert.Qdot <font color="darkgreen">&quot;Energy&quot;</font>;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Volume;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  2 21:13:38 2013.
+</div>
+</body>
+</html>

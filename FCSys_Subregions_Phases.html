@@ -1,0 +1,965 @@
+<html>
+<head>
+<title>FCSys.Subregions.Phases</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta name="description" content="Phases or mixtures of species">
+<meta name="keywords" content="Modelica, fuel cell, PEMFC, electrochemistry, model">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_BCs.html">BCs</a>**</li>
+    <li><a href="FCSys_Sensors.html">Sensors</a>**</li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
+    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Subregions.Phases"></a><a href="FCSys_Subregions.html#FCSys.Subregions">FCSys.Subregions</a>.Phases</h2>
+<b>Phases or mixtures of species</b>
+<p>
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Subregions.Phases.GasS.png" alt="FCSys.Subregions.Phases.Gas" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Gas">Gas</a>
+</td><td>Gas phase</td></tr>
+<tr><td><img src="images/FCSys.Subregions.Phases.GasS.png" alt="FCSys.Subregions.Phases.Graphite" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Graphite">Graphite</a>
+</td><td>Graphite phase</td></tr>
+<tr><td><img src="images/FCSys.Subregions.Phases.GasS.png" alt="FCSys.Subregions.Phases.Ionomer" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Ionomer">Ionomer</a>
+</td><td>Ionomer phase</td></tr>
+<tr><td><img src="images/FCSys.Subregions.Phases.GasS.png" alt="FCSys.Subregions.Phases.Liquid" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Liquid">Liquid</a>
+</td><td>Liquid phase</td></tr>
+<tr><td><img src="images/FCSys.Subregions.Phases.BaseClassesS.png" alt="FCSys.Subregions.Phases.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses">BaseClasses</a>
+</td><td>Base classes (not for direct use)</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.Subregions.Phases.GasI.png" alt="FCSys.Subregions.Phases.Gas" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Subregions.Phases.Gas"></a><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases">FCSys.Subregions.Phases</a>.Gas</h2>
+<b>Gas phase</b><p>
+<img src="images/FCSys.Subregions.Phases.GasD.png" alt="FCSys.Subregions.Phases.Gas">
+<p><h3>Information</h3></p>
+<p>Notes:<ul><li>The <code>inclReact</code> parameter may be set to
+    <code>false</code>
+    to eliminate unnecessary equations.</li></ul>
+</p>
+<p>For more information, see the
+ <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.NullPhase">NullPhase</a> model.</p><p>
+Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.NullPhase">BaseClasses.NullPhase</a> (Model for a phase with no species or reactions).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k[3]</td><td>{1,1,1}</td><td>Area fill factor for transport (<b>k</b>) [1]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
+<tr><td>Boolean</td><td>inclH2</td><td>false</td><td>Hydrogen (H<sub>2</sub>)</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_H2_Gas.html#FCSys.Subregions.Species.H2.Gas.Fixed">Fixed</a></td><td>H2</td><td>redeclare Species.H2.Gas.Fix...</td><td>H<sub>2</sub> model</td></tr>
+<tr><td>Boolean</td><td>inclH2O</td><td>false</td><td>Water (H<sub>2</sub>O)</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_H2O_Gas.html#FCSys.Subregions.Species.H2O.Gas.Fixed">Fixed</a></td><td>H2O</td><td>redeclare Species.H2O.Gas.Fi...</td><td>H<sub>2</sub>O model</td></tr>
+<tr><td>Boolean</td><td>inclN2</td><td>false</td><td>Nitrogen (N<sub>2</sub>)</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_N2_Gas.html#FCSys.Subregions.Species.N2.Gas.Fixed">Fixed</a></td><td>N2</td><td>redeclare Species.N2.Gas.Fix...</td><td>N<sub>2</sub> model</td></tr>
+<tr><td>Boolean</td><td>inclO2</td><td>false</td><td>Oxygen (O<sub>2</sub>)</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_O2_Gas.html#FCSys.Subregions.Species.O2.Gas.Fixed">Fixed</a></td><td>O2</td><td>redeclare Species.O2.Gas.Fix...</td><td>O<sub>2</sub> model</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
+<tr><td>Boolean</td><td>reduceVel</td><td>true</td><td>Same velocity for all species</td></tr>
+<tr><td>Boolean</td><td>reduceTemp</td><td>true</td><td>Same temperature for all species</td></tr>
+<tr><td>Boolean</td><td>inclVel[3]</td><td>{true,false,false}</td><td>true, if each component of velocity is included</td></tr>
+<tr><td>Boolean</td><td>inclReact</td><td>true</td><td>Include reaction(s), as appropriate</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Velocity</td></tr>
+<tr><td>Boolean</td><td>initVelX</td><td>true</td><td>Initialize the x component</td></tr>
+<tr><td>Boolean</td><td>initVelY</td><td>true</td><td>Initialize the y component</td></tr>
+<tr><td>Boolean</td><td>initVelZ</td><td>true</td><td>Initialize the z component</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi_IC[Axis]</td><td>{0,0,0}</td><td>Initial velocity (<b>&phi;</b><sub>IC</sub>) [l/T]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Temperature</td></tr>
+<tr><td>Boolean</td><td>initTemp</td><td>true</td><td>Initialize</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_IC</td><td>&nbsp;</td><td>Initial temperature (<i>T</i><sub>IC</sub>)</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a></td><td>inert</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative</td><td>Negative face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xPositive</td><td>Positive face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">ChemicalBus</a></td><td>chemical</td><td>Connector for chemical exchange among species</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Gas <font color="darkgreen">&quot;Gas phase&quot;</font>
+
+  <font color="blue">extends </font><a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.NullPhase">BaseClasses.NullPhase</a>(<font color="blue">final </font>n_spec=<font color="red">countTrue</font>({inclH2,inclH2O,inclN2,
+        inclO2}));
+
+  <font color="blue">parameter </font>Boolean inclReact=true <font color="darkgreen">&quot;Include reaction(s), as appropriate&quot;</font>;
+
+  <font color="darkgreen">// Conditionally include species.</font>
+  <font color="blue">parameter </font>Boolean inclH2=false <font color="darkgreen">&quot;Hydrogen (H<sub>2</sub>)&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_H2_Gas.html#FCSys.Subregions.Species.H2.Gas.Fixed">Species.H2.Gas.Fixed</a> H2 <font color="blue">if </font>inclH2 <font color="blue">constrainedby </font>Species.Species(
+    <font color="blue">final </font>k=k,
+    <font color="blue">final </font>inclVel=inclVel,
+    initMethX=<font color="blue">if </font>initVelX<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
+        InitMethVelocity.Velocity,
+    initMethY=<font color="blue">if </font>initVelY<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
+        InitMethVelocity.Velocity,
+    initMethZ=<font color="blue">if </font>initVelZ<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
+        InitMethVelocity.Velocity,
+    initMethTemp=<font color="blue">if </font>initTemp<font color="blue"> and </font>reduceTemp<font color="blue"> then </font>InitMethScalar.None<font color="blue"> else </font>
+        InitMethScalar.Temperature,
+    phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceVel<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer),
+
+    T(stateSelect=<font color="blue">if </font>reduceTemp<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
+    <font color="darkgreen">&quot;H<sub>2</sub> model&quot;</font>;</textblock>
+
+  <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Water (H<sub>2</sub>O)&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_H2O_Gas.html#FCSys.Subregions.Species.H2O.Gas.Fixed">Species.H2O.Gas.Fixed</a> H2O <font color="blue">if </font>inclH2O <font color="blue">constrainedby </font>
+    Species.Species(
+    <font color="blue">final </font>k=k,
+    <font color="blue">final </font>inclVel=inclVel,
+    initMethX=<font color="blue">if </font>initVelX<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
+        InitMethVelocity.Velocity,
+    initMethY=<font color="blue">if </font>initVelY<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
+        InitMethVelocity.Velocity,
+    initMethZ=<font color="blue">if </font>initVelZ<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
+        InitMethVelocity.Velocity,
+    initMethTemp=<font color="blue">if </font>initTemp<font color="blue"> and </font>reduceTemp<font color="blue"> then </font>InitMethScalar.None<font color="blue"> else </font>
+        InitMethScalar.Temperature,
+    phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceVel<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer),
+
+    T(stateSelect=<font color="blue">if </font>reduceTemp<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
+    <font color="darkgreen">&quot;H<sub>2</sub>O model&quot;</font>;</textblock>
+
+  <font color="blue">parameter </font>Boolean inclN2=false <font color="darkgreen">&quot;Nitrogen (N<sub>2</sub>)&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_N2_Gas.html#FCSys.Subregions.Species.N2.Gas.Fixed">Species.N2.Gas.Fixed</a> N2 <font color="blue">if </font>inclN2 <font color="blue">constrainedby </font>Species.Species(
+    <font color="blue">final </font>k=k,
+    <font color="blue">final </font>inclVel=inclVel,
+    initMethX=<font color="blue">if </font>initVelX<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
+        InitMethVelocity.Velocity,
+    initMethY=<font color="blue">if </font>initVelY<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
+        InitMethVelocity.Velocity,
+    initMethZ=<font color="blue">if </font>initVelZ<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
+        InitMethVelocity.Velocity,
+    initMethTemp=<font color="blue">if </font>initTemp<font color="blue"> and </font>reduceTemp<font color="blue"> then </font>InitMethScalar.None<font color="blue"> else </font>
+        InitMethScalar.Temperature,
+    phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceVel<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer),
+
+    T(stateSelect=<font color="blue">if </font>reduceTemp<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
+    <font color="darkgreen">&quot;N<sub>2</sub> model&quot;</font>;</textblock>
+
+  <font color="blue">parameter </font>Boolean inclO2=false <font color="darkgreen">&quot;Oxygen (O<sub>2</sub>)&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_O2_Gas.html#FCSys.Subregions.Species.O2.Gas.Fixed">Species.O2.Gas.Fixed</a> O2 <font color="blue">if </font>inclO2 <font color="blue">constrainedby </font>Species.Species(
+    <font color="blue">final </font>k=k,
+    <font color="blue">final </font>inclVel=inclVel,
+    initMethX=<font color="blue">if </font>initVelX<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
+        InitMethVelocity.Velocity,
+    initMethY=<font color="blue">if </font>initVelY<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
+        InitMethVelocity.Velocity,
+    initMethZ=<font color="blue">if </font>initVelZ<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
+        InitMethVelocity.Velocity,
+    initMethTemp=<font color="blue">if </font>initTemp<font color="blue"> and </font>reduceTemp<font color="blue"> then </font>InitMethScalar.None<font color="blue"> else </font>
+        InitMethScalar.Temperature,
+    phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceVel<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer),
+
+    T(stateSelect=<font color="blue">if </font>reduceTemp<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
+    <font color="darkgreen">&quot;O<sub>2</sub> model&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">Reaction</a> &#39;2H2+O2=2H2O&#39;(<font color="blue">final </font>n_vel=n_vel, n_spec=3) <font color="blue">if </font>inclReact<font color="blue"> and </font>(inclH2<font color="blue">
+     and </font>inclH2O<font color="blue"> and </font>inclO2);</textblock>
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Chemical interactions</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('2H2+O2=2H2O'.chemical[1], H2.chemical);
+  <font color="red">connect</font>('2H2+O2=2H2O'.chemical[2], O2.chemical);
+  <font color="red">connect</font>('2H2+O2=2H2O'.chemical[3], H2O.chemical);</textblock>
+
+  <font color="darkgreen">// H2</font>
+  <font color="darkgreen">// --</font>
+  <font color="darkgreen">// Exchange</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.chemical, chemical.H2);
+  <font color="red">connect</font>(H2.joint.mechanical, joint.mechanical);
+  <font color="red">connect</font>(H2.joint.heat, joint.heat);
+  <font color="red">connect</font>(H2.inert, phaseBoundary.inertD);</textblock>
+  <font color="darkgreen">// Material transport</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.xNegative.material, xNegative.H2.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.xPositive.material, xPositive.H2.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.yNegative.material, yNegative.H2.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.yPositive.material, yPositive.H2.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.zNegative.material, zNegative.H2.material);
+  <font color="red">connect</font>(H2.zPositive.material, zPositive.H2.material);</textblock>
+  <font color="darkgreen">// 1st transverse transport of linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.xNegative.mechanicalY, xNegative.H2.mechanicalY);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.xPositive.mechanicalY, xPositive.H2.mechanicalY);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.yNegative.mechanicalZ, yNegative.H2.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.yPositive.mechanicalZ, yPositive.H2.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.zNegative.mechanicalX, zNegative.H2.mechanicalX);
+  <font color="red">connect</font>(H2.zPositive.mechanicalX, zPositive.H2.mechanicalX);</textblock>
+  <font color="darkgreen">// 2nd transverse transport of linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.xNegative.mechanicalZ, xNegative.H2.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.xPositive.mechanicalZ, xPositive.H2.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.yNegative.mechanicalX, yNegative.H2.mechanicalX);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.yPositive.mechanicalX, yPositive.H2.mechanicalX);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.zNegative.mechanicalY, zNegative.H2.mechanicalY);
+  <font color="red">connect</font>(H2.zPositive.mechanicalY, zPositive.H2.mechanicalY);</textblock>
+  <font color="darkgreen">// Thermal transport</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.xNegative.heat, xNegative.H2.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.xPositive.heat, xPositive.H2.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.yNegative.heat, yNegative.H2.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.yPositive.heat, yPositive.H2.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.zNegative.heat, zNegative.H2.heat);
+  <font color="red">connect</font>(H2.zPositive.heat, zPositive.H2.heat);</textblock>
+
+  <font color="darkgreen">// H2O</font>
+  <font color="darkgreen">// ---</font>
+  <font color="darkgreen">// Exchange</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.chemical, chemical.H2O);
+  <font color="red">connect</font>(H2O.joint.mechanical, joint.mechanical);
+  <font color="red">connect</font>(H2O.joint.heat, joint.heat);
+  <font color="red">connect</font>(H2O.inert, phaseBoundary.inertD);</textblock>
+  <font color="darkgreen">// Material transport</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.material, xNegative.H2O.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.material, xPositive.H2O.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.material, yNegative.H2O.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.material, yPositive.H2O.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.material, zNegative.H2O.material);
+  <font color="red">connect</font>(H2O.zPositive.material, zPositive.H2O.material);</textblock>
+  <font color="darkgreen">// 1st transverse transport of linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.mechanicalY, xNegative.H2O.mechanicalY);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.mechanicalY, xPositive.H2O.mechanicalY);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.mechanicalZ, yNegative.H2O.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.mechanicalZ, yPositive.H2O.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.mechanicalX, zNegative.H2O.mechanicalX);
+  <font color="red">connect</font>(H2O.zPositive.mechanicalX, zPositive.H2O.mechanicalX);</textblock>
+  <font color="darkgreen">// 2nd transverse transport of linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.mechanicalZ, xNegative.H2O.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.mechanicalZ, xPositive.H2O.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.mechanicalX, yNegative.H2O.mechanicalX);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.mechanicalX, yPositive.H2O.mechanicalX);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.mechanicalY, zNegative.H2O.mechanicalY);
+  <font color="red">connect</font>(H2O.zPositive.mechanicalY, zPositive.H2O.mechanicalY);</textblock>
+  <font color="darkgreen">// Thermal transport</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.heat, xNegative.H2O.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.heat, xPositive.H2O.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.heat, yNegative.H2O.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.heat, yPositive.H2O.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.heat, zNegative.H2O.heat);
+  <font color="red">connect</font>(H2O.zPositive.heat, zPositive.H2O.heat);</textblock>
+
+  <font color="darkgreen">// N2</font>
+  <font color="darkgreen">// --</font>
+  <font color="darkgreen">// Exchange</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.chemical, chemical.N2);
+  <font color="red">connect</font>(N2.joint.mechanical, joint.mechanical);
+  <font color="red">connect</font>(N2.joint.heat, joint.heat);
+  <font color="red">connect</font>(N2.inert, phaseBoundary.inertD);</textblock>
+  <font color="darkgreen">// Material transport</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.xNegative.material, xNegative.N2.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.xPositive.material, xPositive.N2.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.yNegative.material, yNegative.N2.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.yPositive.material, yPositive.N2.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.zNegative.material, zNegative.N2.material);
+  <font color="red">connect</font>(N2.zPositive.material, zPositive.N2.material);</textblock>
+  <font color="darkgreen">// 1st transverse transport of linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.xNegative.mechanicalY, xNegative.N2.mechanicalY);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.xPositive.mechanicalY, xPositive.N2.mechanicalY);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.yNegative.mechanicalZ, yNegative.N2.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.yPositive.mechanicalZ, yPositive.N2.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.zNegative.mechanicalX, zNegative.N2.mechanicalX);
+  <font color="red">connect</font>(N2.zPositive.mechanicalX, zPositive.N2.mechanicalX);</textblock>
+  <font color="darkgreen">// 2nd transverse transport of linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.xNegative.mechanicalZ, xNegative.N2.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.xPositive.mechanicalZ, xPositive.N2.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.yNegative.mechanicalX, yNegative.N2.mechanicalX);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.yPositive.mechanicalX, yPositive.N2.mechanicalX);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.zNegative.mechanicalY, zNegative.N2.mechanicalY);
+  <font color="red">connect</font>(N2.zPositive.mechanicalY, zPositive.N2.mechanicalY);</textblock>
+  <font color="darkgreen">// Thermal transport</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.xNegative.heat, xNegative.N2.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.xPositive.heat, xPositive.N2.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.yNegative.heat, yNegative.N2.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.yPositive.heat, yPositive.N2.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.zNegative.heat, zNegative.N2.heat);
+  <font color="red">connect</font>(N2.zPositive.heat, zPositive.N2.heat);</textblock>
+
+  <font color="darkgreen">// O2</font>
+  <font color="darkgreen">// --</font>
+  <font color="darkgreen">// Exchange</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.chemical, chemical.O2);
+  <font color="red">connect</font>(O2.joint.mechanical, joint.mechanical);
+  <font color="red">connect</font>(O2.joint.heat, joint.heat);
+  <font color="red">connect</font>(O2.inert, phaseBoundary.inertD);</textblock>
+  <font color="darkgreen">// Material transport</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.xNegative.material, xNegative.O2.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.xPositive.material, xPositive.O2.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.yNegative.material, yNegative.O2.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.yPositive.material, yPositive.O2.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.zNegative.material, zNegative.O2.material);
+  <font color="red">connect</font>(O2.zPositive.material, zPositive.O2.material);</textblock>
+  <font color="darkgreen">// 1st transverse transport of linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.xNegative.mechanicalY, xNegative.O2.mechanicalY);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.xPositive.mechanicalY, xPositive.O2.mechanicalY);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.yNegative.mechanicalZ, yNegative.O2.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.yPositive.mechanicalZ, yPositive.O2.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.zNegative.mechanicalX, zNegative.O2.mechanicalX);
+  <font color="red">connect</font>(O2.zPositive.mechanicalX, zPositive.O2.mechanicalX);</textblock>
+  <font color="darkgreen">// 2nd transverse transport of linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.xNegative.mechanicalZ, xNegative.O2.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.xPositive.mechanicalZ, xPositive.O2.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.yNegative.mechanicalX, yNegative.O2.mechanicalX);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.yPositive.mechanicalX, yPositive.O2.mechanicalX);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.zNegative.mechanicalY, zNegative.O2.mechanicalY);
+  <font color="red">connect</font>(O2.zPositive.mechanicalY, zPositive.O2.mechanicalY);</textblock>
+  <font color="darkgreen">// Thermal transport</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.xNegative.heat, xNegative.O2.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.xPositive.heat, xPositive.O2.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.yNegative.heat, yNegative.O2.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.yPositive.heat, yPositive.O2.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.zNegative.heat, zNegative.O2.heat);
+  <font color="red">connect</font>(O2.zPositive.heat, zPositive.O2.heat);</textblock>
+
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>Gas;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Subregions.Phases.GasI.png" alt="FCSys.Subregions.Phases.Graphite" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Subregions.Phases.Graphite"></a><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases">FCSys.Subregions.Phases</a>.Graphite</h2>
+<b>Graphite phase</b><p>
+<img src="images/FCSys.Subregions.Phases.GraphiteD.png" alt="FCSys.Subregions.Phases.Graphite">
+<p><h3>Information</h3></p>
+<p>If C is included (<code>inclC</code>=<code>true</code>), 
+    then <code>initVelX</code>, <code>initVelY</code>, and <code>initVelZ</code> are
+    ignored.  Velocity is not initialized because it is set by C.</p>
+
+    <p>For more information, see the
+ <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.NullPhase">NullPhase</a> model.</p><p>
+Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.NullPhase">BaseClasses.NullPhase</a> (Model for a phase with no species or reactions).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k[3]</td><td>{1,1,1}</td><td>Area fill factor for transport (<b>k</b>) [1]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
+<tr><td>Boolean</td><td>inclC</td><td>false</td><td>Carbon (C)</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_C_Graphite.html#FCSys.Subregions.Species.C.Graphite.Fixed">Fixed</a></td><td>C</td><td>redeclare Species.C.Graphite...</td><td>C model</td></tr>
+<tr><td>Boolean</td><td>&#39;incle-&#39;</td><td>false</td><td>Electrons (e<sup>-</sup>)</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_'e-'_Graphite.html#FCSys.Subregions.Species.'e-'.Graphite.Fixed">Fixed</a></td><td>&#39;e-&#39;</td><td>redeclare Species.&#39;e-&#39;.Graph...</td><td>'e-' model</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
+<tr><td>Boolean</td><td>reduceVel</td><td>true</td><td>Same velocity for all species</td></tr>
+<tr><td>Boolean</td><td>reduceTemp</td><td>true</td><td>Same temperature for all species</td></tr>
+<tr><td>Boolean</td><td>inclVel[3]</td><td>{true,false,false}</td><td>true, if each component of velocity is included</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Velocity</td></tr>
+<tr><td>Boolean</td><td>initVelX</td><td>true</td><td>Initialize the x component</td></tr>
+<tr><td>Boolean</td><td>initVelY</td><td>true</td><td>Initialize the y component</td></tr>
+<tr><td>Boolean</td><td>initVelZ</td><td>true</td><td>Initialize the z component</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi_IC[Axis]</td><td>{0,0,0}</td><td>Initial velocity (<b>&phi;</b><sub>IC</sub>) [l/T]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Temperature</td></tr>
+<tr><td>Boolean</td><td>initTemp</td><td>true</td><td>Initialize</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_IC</td><td>&nbsp;</td><td>Initial temperature (<i>T</i><sub>IC</sub>)</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a></td><td>inert</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative</td><td>Negative face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xPositive</td><td>Positive face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">ChemicalBus</a></td><td>chemical</td><td>Connector for chemical exchange among species</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Graphite <font color="darkgreen">&quot;Graphite phase&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.NullPhase">BaseClasses.NullPhase</a>(<font color="blue">final </font>n_spec=<font color="red">countTrue</font>({inclC,'incle-'}), joint(
+        mechanical(phi(fixed=<font color="blue">if </font>inclC<font color="blue"> then </font><font color="red">fill</font>(false, n_vel)<font color="blue"> else </font>{initVelX,
+              initVelY,initVelZ}[cartAxes]))));
+
+  <font color="darkgreen">// Conditionally include species.</font>
+  <font color="blue">parameter </font>Boolean inclC=false <font color="darkgreen">&quot;Carbon (C)&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_C_Graphite.html#FCSys.Subregions.Species.C.Graphite.Fixed">Species.C.Graphite.Fixed</a> C <font color="blue">if </font>inclC <font color="blue">constrainedby </font>Species.Species(
+    <font color="blue">final </font>k=k,
+    <font color="blue">final </font>inclVel=inclVel,
+    initMethTemp=<font color="blue">if </font>initTemp<font color="blue"> and </font>reduceTemp<font color="blue"> then </font>InitMethScalar.None<font color="blue"> else </font>
+        InitMethScalar.Temperature,
+    phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceVel<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer),
+
+    T(stateSelect=<font color="blue">if </font>reduceTemp<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
+    <font color="darkgreen">&quot;C model&quot;</font>;</textblock>
+
+  <font color="blue">parameter </font>Boolean &#39;incle-&#39;=false <font color="darkgreen">&quot;Electrons (e<sup>-</sup>)&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_'e-'_Graphite.html#FCSys.Subregions.Species.'e-'.Graphite.Fixed">Species.'e-'.Graphite.Fixed</a> &#39;e-&#39; <font color="blue">if </font>'incle-' <font color="blue">constrainedby </font>
+    Species.Species(
+    <font color="blue">final </font>k=k,
+    <font color="blue">final </font>inclVel=inclVel,
+    initMethX=<font color="blue">if </font>(initVelX<font color="blue"> or </font>inclC)<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue">
+         else </font>InitMethVelocity.Velocity,
+    initMethY=<font color="blue">if </font>(initVelY<font color="blue"> or </font>inclC)<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue">
+         else </font>InitMethVelocity.Velocity,
+    initMethZ=<font color="blue">if </font>(initVelZ<font color="blue"> or </font>inclC)<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue">
+         else </font>InitMethVelocity.Velocity,
+    initMethTemp=<font color="blue">if </font>initTemp<font color="blue"> and </font>reduceTemp<font color="blue"> then </font>InitMethScalar.None<font color="blue"> else </font>
+        InitMethScalar.Temperature,
+    phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceVel<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer),
+
+    T(stateSelect=<font color="blue">if </font>reduceTemp<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
+    <font color="darkgreen">&quot;'e-' model&quot;</font>;</textblock>
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// C</font>
+  <font color="darkgreen">// -</font>
+  <font color="darkgreen">// Exchange</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.chemical, chemical.C);
+  <font color="red">connect</font>(C.joint.mechanical, joint.mechanical);
+  <font color="red">connect</font>(C.joint.heat, joint.heat);
+  <font color="red">connect</font>(C.inert, phaseBoundary.inertD);</textblock>
+  <font color="darkgreen">// Material transport</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.xNegative.material, xNegative.C.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.xPositive.material, xPositive.C.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.yNegative.material, yNegative.C.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.yPositive.material, yPositive.C.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.zNegative.material, zNegative.C.material);
+  <font color="red">connect</font>(C.zPositive.material, zPositive.C.material);</textblock>
+  <font color="darkgreen">// 1st transverse transport of linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.xNegative.mechanicalY, xNegative.C.mechanicalY);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.xPositive.mechanicalY, xPositive.C.mechanicalY);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.yNegative.mechanicalZ, yNegative.C.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.yPositive.mechanicalZ, yPositive.C.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.zNegative.mechanicalX, zNegative.C.mechanicalX);
+  <font color="red">connect</font>(C.zPositive.mechanicalX, zPositive.C.mechanicalX);</textblock>
+  <font color="darkgreen">// 2nd transverse transport of linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.xNegative.mechanicalZ, xNegative.C.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.xPositive.mechanicalZ, xPositive.C.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.yNegative.mechanicalX, yNegative.C.mechanicalX);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.yPositive.mechanicalX, yPositive.C.mechanicalX);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.zNegative.mechanicalY, zNegative.C.mechanicalY);
+  <font color="red">connect</font>(C.zPositive.mechanicalY, zPositive.C.mechanicalY);</textblock>
+  <font color="darkgreen">// Thermal transport</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.xNegative.heat, xNegative.C.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.xPositive.heat, xPositive.C.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.yNegative.heat, yNegative.C.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.yPositive.heat, yPositive.C.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.zNegative.heat, zNegative.C.heat);
+  <font color="red">connect</font>(C.zPositive.heat, zPositive.C.heat);</textblock>
+
+  <font color="darkgreen">// e-</font>
+  <font color="darkgreen">// --</font>
+  <font color="darkgreen">// Exchange</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.chemical, chemical.'e-');
+  <font color="red">connect</font>('e-'.joint.mechanical, joint.mechanical);
+  <font color="red">connect</font>('e-'.joint.heat, joint.heat);
+  <font color="red">connect</font>('e-'.inert, phaseBoundary.inertD);</textblock>
+  <font color="darkgreen">// Material transport</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.xNegative.material, xNegative.'e-'.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.xPositive.material, xPositive.'e-'.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.yNegative.material, yNegative.'e-'.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.yPositive.material, yPositive.'e-'.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.zNegative.material, zNegative.'e-'.material);
+  <font color="red">connect</font>('e-'.zPositive.material, zPositive.'e-'.material);</textblock>
+  <font color="darkgreen">// 1st transverse transport of linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.xNegative.mechanicalY, xNegative.'e-'.mechanicalY);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.xPositive.mechanicalY, xPositive.'e-'.mechanicalY);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.yNegative.mechanicalZ, yNegative.'e-'.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.yPositive.mechanicalZ, yPositive.'e-'.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.zNegative.mechanicalX, zNegative.'e-'.mechanicalX);
+  <font color="red">connect</font>('e-'.zPositive.mechanicalX, zPositive.'e-'.mechanicalX);</textblock>
+  <font color="darkgreen">// 2nd transverse transport of linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.xNegative.mechanicalZ, xNegative.'e-'.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.xPositive.mechanicalZ, xPositive.'e-'.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.yNegative.mechanicalX, yNegative.'e-'.mechanicalX);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.yPositive.mechanicalX, yPositive.'e-'.mechanicalX);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.zNegative.mechanicalY, zNegative.'e-'.mechanicalY);
+  <font color="red">connect</font>('e-'.zPositive.mechanicalY, zPositive.'e-'.mechanicalY);</textblock>
+  <font color="darkgreen">// Thermal transport</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.xNegative.heat, xNegative.'e-'.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.xPositive.heat, xPositive.'e-'.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.yNegative.heat, yNegative.'e-'.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.yPositive.heat, yPositive.'e-'.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.zNegative.heat, zNegative.'e-'.heat);
+  <font color="red">connect</font>('e-'.zPositive.heat, zPositive.'e-'.heat);</textblock>
+
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>Graphite;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Subregions.Phases.GasI.png" alt="FCSys.Subregions.Phases.Ionomer" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Subregions.Phases.Ionomer"></a><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases">FCSys.Subregions.Phases</a>.Ionomer</h2>
+<b>Ionomer phase</b><p>
+<img src="images/FCSys.Subregions.Phases.IonomerD.png" alt="FCSys.Subregions.Phases.Ionomer">
+<p><h3>Information</h3></p>
+<p>If C19HF37O5S is included (<code>inclC19HF37O5S</code>=<code>true</code>), 
+    then <code>initVelX</code>, <code>initVelY</code>, and <code>initVelZ</code> are
+    ignored.  Velocity is not initialized because it is set by C19HF37O5S.</p>
+
+    <p>For more information, see the
+ <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.NullPhase">NullPhase</a> model.</p><p>
+Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.NullPhase">BaseClasses.NullPhase</a> (Model for a phase with no species or reactions).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k[3]</td><td>{1,1,1}</td><td>Area fill factor for transport (<b>k</b>) [1]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
+<tr><td>Boolean</td><td>inclC19HF37O5S</td><td>false</td><td>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_C19HF37O5S_Solid.html#FCSys.Subregions.Species.C19HF37O5S.Solid.Fixed">Fixed</a></td><td>C19HF37O5S</td><td>redeclare Species.C19HF37O5S...</td><td>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S model</td></tr>
+<tr><td>Boolean</td><td>inclH2O</td><td>false</td><td>Water (H<sub>2</sub>O)</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_H2O_Gas.html#FCSys.Subregions.Species.H2O.Gas.Fixed">Fixed</a></td><td>H2O</td><td>redeclare Species.H2O.Gas.Fi...</td><td>H<sub>2</sub>O model</td></tr>
+<tr><td>Boolean</td><td>&#39;inclH+&#39;</td><td>false</td><td>Protons (H<sup>+</sup>)</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_'H+'_Solid.html#FCSys.Subregions.Species.'H+'.Solid.Fixed">Fixed</a></td><td>&#39;H+&#39;</td><td>redeclare Species.&#39;H+&#39;.Solid...</td><td>H<sup>+</sup> model</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
+<tr><td>Boolean</td><td>reduceVel</td><td>true</td><td>Same velocity for all species</td></tr>
+<tr><td>Boolean</td><td>reduceTemp</td><td>true</td><td>Same temperature for all species</td></tr>
+<tr><td>Boolean</td><td>inclVel[3]</td><td>{true,false,false}</td><td>true, if each component of velocity is included</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Velocity</td></tr>
+<tr><td>Boolean</td><td>initVelX</td><td>true</td><td>Initialize the x component</td></tr>
+<tr><td>Boolean</td><td>initVelY</td><td>true</td><td>Initialize the y component</td></tr>
+<tr><td>Boolean</td><td>initVelZ</td><td>true</td><td>Initialize the z component</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi_IC[Axis]</td><td>{0,0,0}</td><td>Initial velocity (<b>&phi;</b><sub>IC</sub>) [l/T]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Temperature</td></tr>
+<tr><td>Boolean</td><td>initTemp</td><td>true</td><td>Initialize</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_IC</td><td>&nbsp;</td><td>Initial temperature (<i>T</i><sub>IC</sub>)</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a></td><td>inert</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative</td><td>Negative face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xPositive</td><td>Positive face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">ChemicalBus</a></td><td>chemical</td><td>Connector for chemical exchange among species</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Ionomer <font color="darkgreen">&quot;Ionomer phase&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.NullPhase">BaseClasses.NullPhase</a>(<font color="blue">final </font>n_spec=<font color="red">countTrue</font>({inclC19HF37O5S,inclH2O,
+        'inclH+'}), joint(mechanical(phi(fixed=<font color="blue">if </font>inclC19HF37O5S<font color="blue"> then </font><font color="red">fill</font>(false,
+              n_vel)<font color="blue"> else </font>{initVelX,initVelY,initVelZ}[cartAxes]))));
+
+  <font color="darkgreen">// Conditionally include species.</font>
+  <font color="blue">parameter </font>Boolean inclC19HF37O5S=false <font color="darkgreen">
+    &quot;Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_C19HF37O5S_Solid.html#FCSys.Subregions.Species.C19HF37O5S.Solid.Fixed">Species.C19HF37O5S.Solid.Fixed</a> C19HF37O5S <font color="blue">if </font>inclC19HF37O5S <font color="blue">
+    constrainedby </font>Species.Species(
+    <font color="blue">final </font>k=k,
+    <font color="blue">final </font>inclVel=inclVel,
+    initMethTemp=<font color="blue">if </font>initTemp<font color="blue"> and </font>reduceTemp<font color="blue"> then </font>InitMethScalar.None<font color="blue"> else </font>
+        InitMethScalar.Temperature,
+    phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceVel<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer),
+
+    T(stateSelect=<font color="blue">if </font>reduceTemp<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
+    <font color="darkgreen">&quot;C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S model&quot;</font>;</textblock>
+
+  <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Water (H<sub>2</sub>O)&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_H2O_Gas.html#FCSys.Subregions.Species.H2O.Gas.Fixed">Species.H2O.Gas.Fixed</a> H2O <font color="blue">if </font>inclH2O <font color="blue">constrainedby </font>
+    Species.Species(
+    <font color="blue">final </font>k=k,
+    <font color="blue">final </font>inclVel=inclVel,
+    initMethX=<font color="blue">if </font>(initVelX19HF37O5S)<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue">
+         else </font>InitMethVelocity.Velocity,
+    initMethY=<font color="blue">if </font>(initVelY<font color="blue"> or </font>inclC19HF37O5S)<font color="blue"> and </font>reduceVel<font color="blue"> then </font>
+        InitMethVelocity.None<font color="blue"> else </font>InitMethVelocity.Velocity,
+    initMethZ=<font color="blue">if </font>(initVelZ<font color="blue"> or </font>inclC19HF37O5S)<font color="blue"> and </font>reduceVel<font color="blue"> then </font>
+        InitMethVelocity.None<font color="blue"> else </font>InitMethVelocity.Velocity,
+    initMethTemp=<font color="blue">if </font>initTemp<font color="blue"> and </font>reduceTemp<font color="blue"> then </font>InitMethScalar.None<font color="blue"> else </font>
+        InitMethScalar.Temperature,
+    phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceVel<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer),
+
+    T(stateSelect=<font color="blue">if </font>reduceTemp<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
+    <font color="darkgreen">&quot;H<sub>2</sub>O model&quot;</font>;</textblock>
+
+  <font color="blue">parameter </font>Boolean &#39;inclH+&#39;=false <font color="darkgreen">&quot;Protons (H<sup>+</sup>)&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_'H+'_Solid.html#FCSys.Subregions.Species.'H+'.Solid.Fixed">Species.'H+'.Solid.Fixed</a> &#39;H+&#39; <font color="blue">if </font>'inclH+' <font color="blue">constrainedby </font>
+    Species.Species(
+    <font color="blue">final </font>k=k,
+    <font color="blue">final </font>inclVel=inclVel,
+    initMethX=<font color="blue">if </font>initVelX<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
+        InitMethVelocity.Velocity,
+    initMethY=<font color="blue">if </font>initVelY<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
+        InitMethVelocity.Velocity,
+    initMethZ=<font color="blue">if </font>initVelZ<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
+        InitMethVelocity.Velocity,
+    initMethTemp=<font color="blue">if </font>initTemp<font color="blue"> and </font>reduceTemp<font color="blue"> then </font>InitMethScalar.None<font color="blue"> else </font>
+        InitMethScalar.Temperature,
+    phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceVel<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer),
+
+    T(stateSelect=<font color="blue">if </font>reduceTemp<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
+    <font color="darkgreen">&quot;H<sup>+</sup> model&quot;</font>;</textblock>
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// C19HF37O5S</font>
+  <font color="darkgreen">// ----------</font>
+  <font color="darkgreen">// Exchange</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.chemical, chemical.C19HF37O5S);
+  <font color="red">connect</font>(C19HF37O5S.joint.mechanical, joint.mechanical);
+  <font color="red">connect</font>(C19HF37O5S.joint.heat, joint.heat);
+  <font color="red">connect</font>(C19HF37O5S.inert, phaseBoundary.inertD);</textblock>
+  <font color="darkgreen">// Material transport</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.xNegative.material, xNegative.C19HF37O5S.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.xPositive.material, xPositive.C19HF37O5S.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.yNegative.material, yNegative.C19HF37O5S.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.yPositive.material, yPositive.C19HF37O5S.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.zNegative.material, zNegative.C19HF37O5S.material);
+  <font color="red">connect</font>(C19HF37O5S.zPositive.material, zPositive.C19HF37O5S.material);</textblock>
+  <font color="darkgreen">// 1st transverse transport of linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.xNegative.mechanicalY, xNegative.C19HF37O5S.mechanicalY);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.xPositive.mechanicalY, xPositive.C19HF37O5S.mechanicalY);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.yNegative.mechanicalZ, yNegative.C19HF37O5S.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.yPositive.mechanicalZ, yPositive.C19HF37O5S.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.zNegative.mechanicalX, zNegative.C19HF37O5S.mechanicalX);
+  <font color="red">connect</font>(C19HF37O5S.zPositive.mechanicalX, zPositive.C19HF37O5S.mechanicalX);</textblock>
+  <font color="darkgreen">// 2nd transverse transport of linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.xNegative.mechanicalZ, xNegative.C19HF37O5S.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.xPositive.mechanicalZ, xPositive.C19HF37O5S.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.yNegative.mechanicalX, yNegative.C19HF37O5S.mechanicalX);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.yPositive.mechanicalX, yPositive.C19HF37O5S.mechanicalX);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.zNegative.mechanicalY, zNegative.C19HF37O5S.mechanicalY);
+  <font color="red">connect</font>(C19HF37O5S.zPositive.mechanicalY, zPositive.C19HF37O5S.mechanicalY);</textblock>
+  <font color="darkgreen">// Thermal transport</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.xNegative.heat, xNegative.C19HF37O5S.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.xPositive.heat, xPositive.C19HF37O5S.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.yNegative.heat, yNegative.C19HF37O5S.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.yPositive.heat, yPositive.C19HF37O5S.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.zNegative.heat, zNegative.C19HF37O5S.heat);
+  <font color="red">connect</font>(C19HF37O5S.zPositive.heat, zPositive.C19HF37O5S.heat);</textblock>
+
+  <font color="darkgreen">// H2O</font>
+  <font color="darkgreen">// ---</font>
+  <font color="darkgreen">// Exchange</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.chemical, chemical.H2O);
+  <font color="red">connect</font>(H2O.joint.mechanical, joint.mechanical);
+  <font color="red">connect</font>(H2O.joint.heat, joint.heat);
+  <font color="red">connect</font>(H2O.inert, phaseBoundary.inertD);</textblock>
+  <font color="darkgreen">// Material transport</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.material, xNegative.H2O.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.material, xPositive.H2O.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.material, yNegative.H2O.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.material, yPositive.H2O.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.material, zNegative.H2O.material);
+  <font color="red">connect</font>(H2O.zPositive.material, zPositive.H2O.material);</textblock>
+  <font color="darkgreen">// 1st transverse transport of linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.mechanicalY, xNegative.H2O.mechanicalY);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.mechanicalY, xPositive.H2O.mechanicalY);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.mechanicalZ, yNegative.H2O.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.mechanicalZ, yPositive.H2O.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.mechanicalX, zNegative.H2O.mechanicalX);
+  <font color="red">connect</font>(H2O.zPositive.mechanicalX, zPositive.H2O.mechanicalX);</textblock>
+  <font color="darkgreen">// 2nd transverse transport of linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.mechanicalZ, xNegative.H2O.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.mechanicalZ, xPositive.H2O.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.mechanicalX, yNegative.H2O.mechanicalX);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.mechanicalX, yPositive.H2O.mechanicalX);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.mechanicalY, zNegative.H2O.mechanicalY);
+  <font color="red">connect</font>(H2O.zPositive.mechanicalY, zPositive.H2O.mechanicalY);</textblock>
+  <font color="darkgreen">// Thermal transport</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.heat, xNegative.H2O.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.heat, xPositive.H2O.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.heat, yNegative.H2O.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.heat, yPositive.H2O.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.heat, zNegative.H2O.heat);
+  <font color="red">connect</font>(H2O.zPositive.heat, zPositive.H2O.heat);</textblock>
+
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>Ionomer;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Subregions.Phases.GasI.png" alt="FCSys.Subregions.Phases.Liquid" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Subregions.Phases.Liquid"></a><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases">FCSys.Subregions.Phases</a>.Liquid</h2>
+<b>Liquid phase</b><p>
+<img src="images/FCSys.Subregions.Phases.LiquidD.png" alt="FCSys.Subregions.Phases.Liquid">
+<p><h3>Information</h3></p>
+<p>For more information, see the
+ <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.NullPhase">NullPhase</a> model.</p><p>
+Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.NullPhase">BaseClasses.NullPhase</a> (Model for a phase with no species or reactions).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k[3]</td><td>{1,1,1}</td><td>Area fill factor for transport (<b>k</b>) [1]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
+<tr><td>Boolean</td><td>inclH2O</td><td>false</td><td>Water (H<sub>2</sub>O)</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_H2O_Liquid.html#FCSys.Subregions.Species.H2O.Liquid.Fixed">Fixed</a></td><td>H2O</td><td>redeclare Species.H2O.Liquid...</td><td>H<sub>2</sub>O model</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
+<tr><td>Boolean</td><td>reduceVel</td><td>true</td><td>Same velocity for all species</td></tr>
+<tr><td>Boolean</td><td>reduceTemp</td><td>true</td><td>Same temperature for all species</td></tr>
+<tr><td>Boolean</td><td>inclVel[3]</td><td>{true,false,false}</td><td>true, if each component of velocity is included</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Velocity</td></tr>
+<tr><td>Boolean</td><td>initVelX</td><td>true</td><td>Initialize the x component</td></tr>
+<tr><td>Boolean</td><td>initVelY</td><td>true</td><td>Initialize the y component</td></tr>
+<tr><td>Boolean</td><td>initVelZ</td><td>true</td><td>Initialize the z component</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi_IC[Axis]</td><td>{0,0,0}</td><td>Initial velocity (<b>&phi;</b><sub>IC</sub>) [l/T]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Temperature</td></tr>
+<tr><td>Boolean</td><td>initTemp</td><td>true</td><td>Initialize</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_IC</td><td>&nbsp;</td><td>Initial temperature (<i>T</i><sub>IC</sub>)</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a></td><td>inert</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative</td><td>Negative face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xPositive</td><td>Positive face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">ChemicalBus</a></td><td>chemical</td><td>Connector for chemical exchange among species</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Liquid <font color="darkgreen">&quot;Liquid phase&quot;</font>
+
+  <font color="blue">extends </font><a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.NullPhase">BaseClasses.NullPhase</a>(<font color="blue">final </font>n_spec=<font color="blue">if </font>inclH2O<font color="blue"> then </font>1<font color="blue"> else </font>0);
+
+  <font color="darkgreen">// Conditionally include species.</font>
+  <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Water (H<sub>2</sub>O)&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_H2O_Liquid.html#FCSys.Subregions.Species.H2O.Liquid.Fixed">Species.H2O.Liquid.Fixed</a> H2O <font color="blue">if </font>inclH2O <font color="blue">constrainedby </font>
+    Species.Species(
+    <font color="blue">final </font>k=k,
+    <font color="blue">final </font>inclVel=inclVel,
+    initMethX=<font color="blue">if </font>initVelX<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
+        InitMethVelocity.Velocity,
+    initMethY=<font color="blue">if </font>initVelY<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
+        InitMethVelocity.Velocity,
+    initMethZ=<font color="blue">if </font>initVelZ<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
+        InitMethVelocity.Velocity,
+    initMethTemp=<font color="blue">if </font>initTemp<font color="blue"> and </font>reduceTemp<font color="blue"> then </font>InitMethScalar.None<font color="blue"> else </font>
+        InitMethScalar.Temperature,
+    phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceVel<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer),
+
+    T(stateSelect=<font color="blue">if </font>reduceTemp<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
+    <font color="darkgreen">&quot;H<sub>2</sub>O model&quot;</font>;</textblock>
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// H2O</font>
+  <font color="darkgreen">// ---</font>
+  <font color="darkgreen">// Exchange</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.chemical, chemical.H2O);
+  <font color="red">connect</font>(H2O.joint.mechanical, joint.mechanical);
+  <font color="red">connect</font>(H2O.joint.heat, joint.heat);
+  <font color="red">connect</font>(H2O.inert, phaseBoundary.inertD);</textblock>
+  <font color="darkgreen">// Material transport</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.material, xNegative.H2O.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.material, xPositive.H2O.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.material, yNegative.H2O.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.material, yPositive.H2O.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.material, zNegative.H2O.material);
+  <font color="red">connect</font>(H2O.zPositive.material, zPositive.H2O.material);</textblock>
+  <font color="darkgreen">// 1st transverse transport of linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.mechanicalY, xNegative.H2O.mechanicalY);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.mechanicalY, xPositive.H2O.mechanicalY);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.mechanicalZ, yNegative.H2O.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.mechanicalZ, yPositive.H2O.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.mechanicalX, zNegative.H2O.mechanicalX);
+  <font color="red">connect</font>(H2O.zPositive.mechanicalX, zPositive.H2O.mechanicalX);</textblock>
+  <font color="darkgreen">// 2nd transverse transport of linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.mechanicalZ, xNegative.H2O.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.mechanicalZ, xPositive.H2O.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.mechanicalX, yNegative.H2O.mechanicalX);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.mechanicalX, yPositive.H2O.mechanicalX);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.mechanicalY, zNegative.H2O.mechanicalY);
+  <font color="red">connect</font>(H2O.zPositive.mechanicalY, zPositive.H2O.mechanicalY);</textblock>
+  <font color="darkgreen">// Thermal transport</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.heat, xNegative.H2O.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.heat, xPositive.H2O.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.heat, yNegative.H2O.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.heat, yPositive.H2O.heat);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.heat, zNegative.H2O.heat);
+  <font color="red">connect</font>(H2O.zPositive.heat, zPositive.H2O.heat);</textblock>
+
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>Liquid;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  2 21:14:06 2013.
+</div>
+</body>
+</html>
