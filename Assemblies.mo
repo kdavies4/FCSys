@@ -1,6 +1,7 @@
 within FCSys;
 package Assemblies "Combinations of regions (e.g., cells)"
   extends Modelica.Icons.Package;
+  extends FCSys.BaseClasses.Icons.PackageUnderConstruction;
   package Cells "Single-cell PEMFC models"
     extends Modelica.Icons.Package;
     package Examples "Examples and tests"
@@ -16,7 +17,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
             __Dymola_choicesFromPackage=true, Placement(transformation(extent={
                   {-10,-10},{10,10}})));
         annotation (
-          Diagram(graphics),
           experiment(StopTime=1e-24, Tolerance=1e-06),
           experimentSetupOutput,
           Commands(file=
@@ -76,14 +76,11 @@ package Assemblies "Combinations of regions (e.g., cells)"
             thickness=0.5,
             smooth=Smooth.None));
         annotation (
-          Diagram(graphics),
           experiment(StopTime=100, Tolerance=1e-06),
           experimentSetupOutput,
           Commands(file=
                 "resources/scripts/Dymola/Assemblies.Cells.Examples.CellProfile.mos"),
 
-          Icon(graphics),
-          Diagram(graphics),
           experiment(StopTime=600, Tolerance=1e-08),
           experimentSetupOutput,
           Icon(graphics));
@@ -101,7 +98,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
               inclIO=true));
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
 
-        Connectors.RealInputBus u "Input bus" annotation (Placement(
+        FCSys.Connectors.RealInputBus u "Input bus" annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=315,
@@ -109,7 +106,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-2,100})));
-        Connectors.RealOutputBus y "Output bus" annotation (Placement(
+        FCSys.Connectors.RealOutputBus y "Output bus" annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=315,
@@ -131,7 +128,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
             thickness=0.5,
             smooth=Smooth.None));
         annotation (
-          Diagram(graphics),
           experiment(StopTime=600, Tolerance=1e-08),
           experimentSetupOutput,
           Commands(file=
@@ -193,10 +189,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
             points={{-10,50},{-60,50},{-60,4},{-40,4}},
             color={0,0,255},
             smooth=Smooth.None));
-        annotation (
-          Diagram(graphics),
-          experiment(StopTime=1000),
-          experimentSetupOutput);
+        annotation (experiment(StopTime=1000), experimentSetupOutput);
       end CellModelica;
     end Examples;
 

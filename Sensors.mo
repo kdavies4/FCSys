@@ -2,8 +2,7 @@ within FCSys;
 package Sensors "Models to measure conditions"
 
   extends Modelica.Icons.SensorsPackage;
-
-  // TODO:  Recheck this package, fix errors and warnings.
+  extends FCSys.BaseClasses.Icons.PackageUnderConstruction;
 
   package Chemical
     "<html>Sensors for the <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialChemical\">Chemical</a> and <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> connectors</html>"
@@ -293,7 +292,6 @@ package Sensors "Models to measure conditions"
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="phaseChemicalSensor",
-          Diagram(graphics),
           Icon(graphics));
       end Phase;
 
@@ -821,8 +819,8 @@ package Sensors "Models to measure conditions"
               transformation(extent={{-10,-10},{10,10}}), iconTransformation(
                 extent={{-10,-10},{10,10}})));
 
-        Connectors.RealOutputBus y "Bus of measurements" annotation (Placement(
-              transformation(
+        FCSys.Connectors.RealOutputBus y "Bus of measurements" annotation (
+            Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,-100}), iconTransformation(
@@ -832,7 +830,6 @@ package Sensors "Models to measure conditions"
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="phaseChemicalSensor",
-          Diagram(graphics),
           Icon(graphics));
       end NullPhase;
     end Phases;
@@ -848,12 +845,12 @@ package Sensors "Models to measure conditions"
         "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
         annotation (HideResult=true);
 
-      Connectors.ChemicalInput chemical(final n_lin=n_lin)
+      FCSys.Connectors.ChemicalInput chemical(final n_lin=n_lin)
         "Single-species connector for material" annotation (Placement(
             transformation(extent={{-10,-10},{10,10}}), iconTransformation(
               extent={{-10,-10},{10,10}})));
 
-      Connectors.RealOutput mu(final unit="m.l2/(N.T2)")
+      FCSys.Connectors.RealOutput mu(final unit="m.l2/(N.T2)")
         "Internal signal for electrochemical potential" annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -862,7 +859,7 @@ package Sensors "Models to measure conditions"
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-40,-100})));
-      Connectors.RealOutput mphi[n_lin](each final unit="l.m/(N.T)")
+      FCSys.Connectors.RealOutput mphi[n_lin](each final unit="l.m/(N.T)")
         "Internal signal for specific mass times velocity" annotation (
           Placement(transformation(
             extent={{-10,-10},{10,10}},
@@ -871,7 +868,7 @@ package Sensors "Models to measure conditions"
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={0,-100})));
-      Connectors.RealOutput sT(final unit="l2.m/(N.T)")
+      FCSys.Connectors.RealOutput sT(final unit="l2.m/(N.T)")
         "Internal signal for specific entropy times temperature" annotation (
           Placement(transformation(
             extent={{-10,-10},{10,10}},
@@ -940,11 +937,11 @@ sensor</a> models.
 
       Temperature temperature(final n_lin=n_lin) "Sensor for temperature"
         annotation (Placement(transformation(extent={{30,-60},{50,-40}})));
-      Connectors.InertAmagat inert(final n_lin=n_lin)
-        "Single-species connector for linear momentum and entropy, with additivity of volume"
+      FCSys.Connectors.InertAmagat inert(final n_lin=n_lin)
+        "Single-species connector for linear momentum and heat,  with additivity of volume"
         annotation (Placement(transformation(extent={{-10,-10},{10,10}}),
             iconTransformation(extent={{-10,-10},{10,10}})));
-      Connectors.RealOutputBus y "Input bus for external signal sources"
+      FCSys.Connectors.RealOutputBus y "Input bus for external signal sources"
         annotation (HideResult=not (internalPress or internalLin1 or
             internalLin2 or internalLin3 or internalEntropy), Placement(
             transformation(
@@ -995,21 +992,17 @@ sensor</a> models.
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
-      annotation (
-        defaultComponentName="phaseInertSensor",
-        Diagram(graphics),
-        Icon(graphics));
+      annotation (defaultComponentName="phaseInertSensor", Icon(graphics));
     end Phase;
 
     model Pressure "Prescribed pressure"
-      extends BaseClasses.PartialSensor(redeclare Connectors.RealOutput y(
+      extends BaseClasses.PartialSensor(redeclare FCSys.Connectors.RealOutput y(
             final unit="m/(l.T2)"));
     equation
       y = inert.p "Measurement";
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="volSensor",
-        Diagram(graphics),
         Icon(graphics={Text(
                   extent={{-100,-20},{100,-50}},
                   lineColor={127,127,127},
@@ -1025,8 +1018,8 @@ sensor</a> models.
         "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
         annotation (HideResult=true);
 
-      Connectors.InertDalton inert(final n_lin=n_lin)
-        "Connector for linear momentum and entropy, with additivity of pressure"
+      FCSys.Connectors.InertDalton inert(final n_lin=n_lin)
+        "Connector for linear momentum and heat,  with additivity of pressure"
         annotation (HideResult=true, Placement(transformation(extent={{-10,-10},
                 {10,10}}), iconTransformation(extent={{-10,-10},{10,10}})));
       FCSys.Connectors.RealOutput y[n_lin](final unit="l/T") "Measurement"
@@ -1054,7 +1047,7 @@ sensor</a> models.
     end Velocity;
 
     model Temperature "Measured temperature"
-      extends BaseClasses.PartialSensor(redeclare Connectors.RealOutput y(
+      extends BaseClasses.PartialSensor(redeclare FCSys.Connectors.RealOutput y(
             final unit="l2.m/(N.T2)", displayUnit="K"));
     equation
       y = inert.T "Measurement";
@@ -1079,10 +1072,10 @@ sensor</a> models.
           annotation (HideResult=true);
 
         FCSys.Connectors.InertAmagat inert(final n_lin=n_lin)
-          "Connector for linear momentum and entropy, with additivity of volume"
+          "Connector for linear momentum and heat,  with additivity of volume"
           annotation (HideResult=true, Placement(transformation(extent={{-10,-10},
                   {10,10}}), iconTransformation(extent={{-10,-10},{10,10}})));
-        Connectors.RealOutput y "Measurement" annotation (Placement(
+        FCSys.Connectors.RealOutput y "Measurement" annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
@@ -1095,11 +1088,7 @@ sensor</a> models.
         0 = inert.V "No (additional) volume";
         zeros(n_lin) = inert.mPhidot "No force";
         0 = inert.Qdot "Adiabatic";
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="phaseInertSensor",
-          Diagram(graphics),
-          Icon(graphics));
+        annotation (defaultComponentName="phaseInertSensor", Icon(graphics));
       end PartialSensor;
     end BaseClasses;
   end InertAmagat;
@@ -1127,11 +1116,11 @@ sensor</a> models.
       Temperature temperature(final n_lin=n_lin) "Sensor for temperature"
         annotation (Placement(transformation(extent={{30,-60},{50,-40}})));
 
-      Connectors.InertDalton inert(final n_lin=n_lin)
-        "Single-species connector for linear momentum and entropy, with additivity of pressure"
+      FCSys.Connectors.InertDalton inert(final n_lin=n_lin)
+        "Single-species connector for linear momentum and heat,  with additivity of pressure"
         annotation (Placement(transformation(extent={{-10,-10},{10,10}}),
             iconTransformation(extent={{-10,-10},{10,10}})));
-      Connectors.RealOutputBus y "Input bus for external signal sources"
+      FCSys.Connectors.RealOutputBus y "Input bus for external signal sources"
         annotation (HideResult=not (internalPress or internalLin1 or
             internalLin2 or internalLin3 or internalEntropy), Placement(
             transformation(
@@ -1182,14 +1171,11 @@ sensor</a> models.
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
-      annotation (
-        defaultComponentName="speciesInertSensor",
-        Diagram(graphics),
-        Icon(graphics));
+      annotation (defaultComponentName="speciesInertSensor", Icon(graphics));
     end Species;
 
     model Volume "Measured volume"
-      extends BaseClasses.PartialSensor(redeclare Connectors.RealOutput y(
+      extends BaseClasses.PartialSensor(redeclare FCSys.Connectors.RealOutput y(
             final unit="l3"));
 
     equation
@@ -1210,8 +1196,8 @@ sensor</a> models.
         "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
         annotation (HideResult=true);
 
-      Connectors.InertDalton inert(final n_lin=n_lin)
-        "Connector for linear momentum and entropy, with additivity of pressure"
+      FCSys.Connectors.InertDalton inert(final n_lin=n_lin)
+        "Connector for linear momentum and heat,  with additivity of pressure"
         annotation (HideResult=true, Placement(transformation(extent={{-10,-10},
                 {10,10}}), iconTransformation(extent={{-10,-10},{10,10}})));
       FCSys.Connectors.RealOutput y[n_lin](final unit="l/T") "Measurement"
@@ -1238,7 +1224,8 @@ sensor</a> models.
     model Temperature "Measured temperature"
 
       extends FCSys.Sensors.InertDalton.BaseClasses.PartialSensor(redeclare
-          Connectors.RealOutput y(final unit="l2.m/(N.T2)", displayUnit="K"));
+          FCSys.Connectors.RealOutput y(final unit="l2.m/(N.T2)", displayUnit=
+              "K"));
 
     equation
       y = inert.T "Measurement";
@@ -1260,8 +1247,8 @@ sensor</a> models.
           "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
           annotation (HideResult=true);
 
-        Connectors.InertDalton inert(final n_lin=n_lin)
-          "Connector for linear momentum and entropy, with additivity of pressure"
+        FCSys.Connectors.InertDalton inert(final n_lin=n_lin)
+          "Connector for linear momentum and heat,  with additivity of pressure"
           annotation (HideResult=true, Placement(transformation(extent={{-10,-10},
                   {10,10}}), iconTransformation(extent={{-10,-10},{10,10}})));
 
@@ -1271,11 +1258,7 @@ sensor</a> models.
         zeros(n_lin) = inert.mPhidot "No force";
         0 = inert.Qdot "Adiabatic";
 
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="speciesInertSensor",
-          Diagram(graphics),
-          Icon(graphics));
+        annotation (defaultComponentName="speciesInertSensor", Icon(graphics));
       end PartialSensor;
     end BaseClasses;
   end InertDalton;
@@ -1287,10 +1270,10 @@ sensor</a> models.
 
     model Subregion
       "<html>Sensor for a face of a <a href=\"modelica://FCSys.Subregions.Subregion\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model</html>"
-      import FCSys.BaseClasses.Axis;
+
       extends FCSys.BaseClasses.Icons.Sensor;
 
-      parameter FCSys.BaseClasses.Axis axis=Axis.x "Axis normal to the face";
+      parameter Axis axis=Axis.x "Axis normal to the face";
 
       replaceable FCSys.Sensors.Face.Phases.Gas gas(final axis=axis) "Gas"
         annotation (Dialog(group="Phases", __Dymola_descriptionLabel=true),
@@ -1305,11 +1288,11 @@ sensor</a> models.
               true), Placement(transformation(extent={{-10,-50},{10,-30}})));
 
       FCSys.Connectors.FaceBus face
-        "Connector for material, linear momentum, and entropy of multiple species"
+        "Connector for material, linear momentum, and heat of multiple species"
         annotation (Placement(transformation(extent={{-10,-10},{10,10}}),
             iconTransformation(extent={{-10,-10},{10,10}})));
-      Connectors.RealOutputBus y "Bus of measurements" annotation (Placement(
-            transformation(
+      FCSys.Connectors.RealOutputBus y "Bus of measurements" annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={0,-100})));
@@ -2485,17 +2468,15 @@ sensor</a> models.
       package BaseClasses "Base classes (not for direct use)"
         extends Modelica.Icons.BasesPackage;
         model NullPhase "Empty sensor for a phase (no species)"
-          import FCSys.BaseClasses.Axis;
           extends FCSys.BaseClasses.Icons.Sensor;
 
-          parameter FCSys.BaseClasses.Axis axis=Axis.x
-            "Axis normal to the face";
+          parameter Axis axis=Axis.x "Axis normal to the face";
 
           FCSys.Connectors.FaceBus face
-            "Multi-species connector for material, linear momentum, and entropy"
+            "Multi-species connector for material, linear momentum, and heat"
             annotation (Placement(transformation(extent={{-10,-10},{10,10}}),
                 iconTransformation(extent={{-10,-10},{10,10}})));
-          Connectors.RealOutputBus y "Bus of measurements" annotation (
+          FCSys.Connectors.RealOutputBus y "Bus of measurements" annotation (
               Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
@@ -2505,13 +2486,13 @@ sensor</a> models.
                 origin={0,-100})));
 
         protected
-          Connectors.FaceBusInternal xInt if axis == Axis.x
+          FCSys.Connectors.FaceBusInternal xInt if axis == Axis.x
             "Internal connector enabled if x axis" annotation (Placement(
                 transformation(extent={{-30,-40},{-10,-20}})));
-          Connectors.FaceBusInternal yInt if axis == Axis.y
+          FCSys.Connectors.FaceBusInternal yInt if axis == Axis.y
             "Internal connector enabled if y axis"
             annotation (Placement(transformation(extent={{-10,-40},{10,-20}})));
-          Connectors.FaceBusInternal zInt if axis == Axis.z
+          FCSys.Connectors.FaceBusInternal zInt if axis == Axis.z
             "Internal connector enabled if z axis"
             annotation (Placement(transformation(extent={{10,-40},{30,-20}})));
         equation
@@ -2541,7 +2522,6 @@ sensor</a> models.
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="phaseFaceSensor",
-            Diagram(graphics),
             Icon(graphics));
         end NullPhase;
       end BaseClasses;
@@ -2553,14 +2533,13 @@ sensor</a> models.
 
       model Species
         "<html>Sensor for a face of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
-        import FCSys.BaseClasses.Axis;
 
         extends FCSys.BaseClasses.Icons.Sensor;
 
-        parameter FCSys.BaseClasses.Axis axis=Axis.x "Axis normal to the face";
+        parameter Axis axis=Axis.x "Axis normal to the face";
 
         parameter ThermoOpt thermoOpt=ThermoOpt.ClosedAdiabatic
-          "Options for material and entropy subconnectors"
+          "Options for material and heat subconnectors"
           annotation (Dialog(compact=true));
 
         // Material
@@ -2600,16 +2579,17 @@ sensor</a> models.
           "Type of condition"
           annotation (Placement(transformation(extent={{50,-6},{70,14}})));
 
-        FCSys.Connectors.FaceGeneric face(
+        FCSys.Connectors.Face face(
           final thermoOpt=thermoOpt,
           final slip1=slip1,
           final slip2=slip2)
-          "Single-species connector for material, linear momentum, and entropy"
+          "Single-species connector for material, linear momentum, and heat"
           annotation (Placement(transformation(extent={{-10,10},{10,30}}),
               iconTransformation(extent={{-10,-10},{10,10}})));
-        Connectors.RealOutputBus y "Output bus for measurements" annotation (
-            HideResult=not (internalMaterial or internalLin1 or internalLin1
-               or internalLin2 or internalEntropy), Placement(transformation(
+        FCSys.Connectors.RealOutputBus y "Output bus for measurements"
+          annotation (HideResult=not (internalMaterial or internalLin1 or
+              internalLin1 or internalLin2 or internalEntropy), Placement(
+              transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,-100}), iconTransformation(
@@ -2618,7 +2598,7 @@ sensor</a> models.
               origin={0,-98})));
 
       protected
-        Connectors.RealOutputBusInternal xInt if axis == Axis.x
+        FCSys.Connectors.RealOutputBusInternal xInt if axis == Axis.x
           "Internal bus for measurements if face is normal to x axis"
           annotation (HideResult=not (internalMaterial or internalLin1 or
               internalLin1 or internalLin2 or internalEntropy), Placement(
@@ -2629,7 +2609,7 @@ sensor</a> models.
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,-98})));
-        Connectors.RealOutputBusInternal yInt if axis == Axis.y
+        FCSys.Connectors.RealOutputBusInternal yInt if axis == Axis.y
           "Internal bus for measurements if face is normal to y axis"
           annotation (HideResult=not (internalMaterial or internalLin1 or
               internalLin1 or internalLin2 or internalEntropy), Placement(
@@ -2640,7 +2620,7 @@ sensor</a> models.
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,-98})));
-        Connectors.RealOutputBusInternal zInt if axis == Axis.z
+        FCSys.Connectors.RealOutputBusInternal zInt if axis == Axis.z
           "Internal bus for measurements if face is normal to z axis"
           annotation (HideResult=not (internalMaterial or internalLin1 or
               internalLin1 or internalLin2 or internalEntropy), Placement(
@@ -2733,16 +2713,13 @@ sensor</a> models.
             color={0,0,127},
             smooth=Smooth.None));
 
-        annotation (
-          defaultComponentName="speciesFaceSensor",
-          Diagram(graphics),
-          Icon(graphics));
+        annotation (defaultComponentName="speciesFaceSensor", Icon(graphics));
       end Species;
 
       model PotentialElectrochemical "Sensor for electrochemical potential"
 
         extends FCSys.Sensors.BaseClasses.PartialSensor(redeclare
-            Connectors.RealOutput y(final unit="l2.m/(N.T2)"));
+            FCSys.Connectors.RealOutput y(final unit="l2.m/(N.T2)"));
 
         FCSys.Connectors.MaterialTransport material
           annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -2757,7 +2734,7 @@ sensor</a> models.
 
       model Velocity "Sensor for velocity"
         extends FCSys.Sensors.BaseClasses.PartialSensor(redeclare
-            Connectors.RealOutput y(final unit="l/T"));
+            FCSys.Connectors.RealOutput y(final unit="l/T"));
         FCSys.Connectors.MechanicalTransport momentum
           annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
@@ -2772,13 +2749,14 @@ sensor</a> models.
 
       model Temperature "Sensor for temperature"
         extends FCSys.Sensors.BaseClasses.PartialSensor(redeclare
-            Connectors.RealOutput y(final unit="l2.m/(N.T2)", displayUnit="K"));
+            FCSys.Connectors.RealOutput y(final unit="l2.m/(N.T2)", displayUnit
+              ="K"));
         FCSys.Connectors.Thermal entropy "Entropy connector for the face"
           annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       equation
         y = entropy.T "Measurement";
         0 = entropy.Qdot "Entropy rate balance (no storage)";
-        annotation (Diagram(graphics), Icon(graphics={Text(
+        annotation (Icon(graphics={Text(
                       extent={{-100,-20},{100,-50}},
                       lineColor={127,127,127},
                       textString="T")}));
@@ -2814,13 +2792,12 @@ sensor</a> model.
 
     model Subregion
       "<html>Sensor for a face of a <a href=\"modelica://FCSys.Subregions.Subregion\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model</html>"
-      import FCSys.BaseClasses.Axis;
       extends FCSys.BaseClasses.Icons.Sensor;
 
       parameter Boolean effort=true "true, if effort sensor (otherwise, flow)"
         annotation (choices(__Dymola_checkBox=true), Dialog(compact=true));
 
-      parameter FCSys.BaseClasses.Axis axis=Axis.x "Axis normal to the face";
+      parameter Axis axis=Axis.x "Axis normal to the face";
 
       replaceable Phases.Gas gas(final effort=effort,final axis=axis) "Gas"
         annotation (Dialog(group="Phases", __Dymola_descriptionLabel=true),
@@ -2834,17 +2811,17 @@ sensor</a> model.
         "Ionomer" annotation (Dialog(group="Phases", __Dymola_descriptionLabel=
               true), Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      Connectors.RealOutputBus y "Bus of measurements" annotation (Placement(
-            transformation(
+      FCSys.Connectors.RealOutputBus y "Bus of measurements" annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={0,-100})));
-      Connectors.FaceBus negative
-        "Negative-side connector for material, linear momentum, and entropy"
+      FCSys.Connectors.FaceBus negative
+        "Negative-side connector for material, linear momentum, and heat"
         annotation (Placement(transformation(extent={{-110,-10},{-90,10}}),
             iconTransformation(extent={{-110,-10},{-90,10}})));
-      Connectors.FaceBus positive
-        "Positive-side connector for material, linear momentum, and entropy"
+      FCSys.Connectors.FaceBus positive
+        "Positive-side connector for material, linear momentum, and heat"
         annotation (Placement(transformation(extent={{90,-10},{110,10}}),
             iconTransformation(extent={{90,-10},{110,10}})));
     equation
@@ -4716,25 +4693,23 @@ sensor</a> model.
         extends Modelica.Icons.BasesPackage;
 
         model NullPhase "Empty sensor for a phase (no species)"
-          import FCSys.BaseClasses.Axis;
           extends FCSys.BaseClasses.Icons.Sensor;
 
           parameter Boolean effort=true
             "true, if effort sensor (otherwise, flow)"
             annotation (choices(__Dymola_checkBox=true), Dialog(compact=true));
 
-          parameter FCSys.BaseClasses.Axis axis=Axis.x
-            "Axis normal to the face";
+          parameter Axis axis=Axis.x "Axis normal to the face";
 
           FCSys.Connectors.FaceBus negative
-            "Negative-side connector for material, linear momentum, and entropy"
+            "Negative-side connector for material, linear momentum, and heat"
             annotation (Placement(transformation(extent={{-110,-10},{-90,10}}),
                 iconTransformation(extent={{-110,-10},{-90,10}})));
           FCSys.Connectors.FaceBus positive
-            "Positive-side connector for material, linear momentum, and entropy"
+            "Positive-side connector for material, linear momentum, and heat"
             annotation (Placement(transformation(extent={{90,-10},{110,10}}),
                 iconTransformation(extent={{90,-10},{110,10}})));
-          Connectors.RealOutputBus y "Bus of measurements" annotation (
+          FCSys.Connectors.RealOutputBus y "Bus of measurements" annotation (
               Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
@@ -4744,27 +4719,27 @@ sensor</a> model.
                 origin={0,-100})));
 
         protected
-          Connectors.FaceBusInternal xNegative if axis == Axis.x
+          FCSys.Connectors.FaceBusInternal xNegative if axis == Axis.x
             "Internal negative-side connector enabled if x axis" annotation (
               Placement(transformation(extent={{-70,10},{-50,30}}),
                 iconTransformation(extent={{-30,-40},{-10,-20}})));
-          Connectors.FaceBusInternal yNegative if axis == Axis.y
+          FCSys.Connectors.FaceBusInternal yNegative if axis == Axis.y
             "Internal negative-side connector enabled if y axis" annotation (
               Placement(transformation(extent={{-70,-10},{-50,10}}),
                 iconTransformation(extent={{-10,-40},{10,-20}})));
-          Connectors.FaceBusInternal zNegative if axis == Axis.z
+          FCSys.Connectors.FaceBusInternal zNegative if axis == Axis.z
             "Internal negative-side connector enabled if z axis" annotation (
               Placement(transformation(extent={{-70,-30},{-50,-10}}),
                 iconTransformation(extent={{10,-40},{30,-20}})));
-          Connectors.FaceBusInternal xPositive if axis == Axis.x
+          FCSys.Connectors.FaceBusInternal xPositive if axis == Axis.x
             "Internal positive-side connector enabled if x axis" annotation (
               Placement(transformation(extent={{50,10},{70,30}}),
                 iconTransformation(extent={{-30,-40},{-10,-20}})));
-          Connectors.FaceBusInternal yPositive if axis == Axis.y
+          FCSys.Connectors.FaceBusInternal yPositive if axis == Axis.y
             "Internal positive-side connector enabled if y axis" annotation (
               Placement(transformation(extent={{50,-10},{70,10}}),
                 iconTransformation(extent={{-10,-40},{10,-20}})));
-          Connectors.FaceBusInternal zPositive if axis == Axis.z
+          FCSys.Connectors.FaceBusInternal zPositive if axis == Axis.z
             "Internal positive-side connector enabled if z axis" annotation (
               Placement(transformation(extent={{50,-30},{70,-10}}),
                 iconTransformation(extent={{10,-40},{30,-20}})));
@@ -4811,7 +4786,6 @@ sensor</a> model.
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="phaseFaceSensor",
-            Diagram(graphics),
             Icon(graphics={Line(
                           points={{-70,0},{-100,0}},
                           color={127,127,127},
@@ -4829,7 +4803,6 @@ sensor</a> model.
 
       model Species
         "<html>Sensor for faces of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
-        import FCSys.BaseClasses.Axis;
 
         extends FCSys.BaseClasses.Icons.Sensor;
 
@@ -4837,10 +4810,10 @@ sensor</a> model.
           "true, if effort sensor (otherwise, flow)"
           annotation (choices(__Dymola_checkBox=true), Dialog(compact=true));
 
-        parameter FCSys.BaseClasses.Axis axis=Axis.x "Axis normal to the face";
+        parameter Axis axis=Axis.x "Axis normal to the face";
 
         parameter ThermoOpt thermoOpt=ThermoOpt.ClosedAdiabatic
-          "Options for material and entropy subconnectors"
+          "Options for material and heat subconnectors"
           annotation (Dialog(compact=true));
 
         // Material
@@ -4886,16 +4859,17 @@ sensor</a> model.
         Entropy.EntropyRate entropyRate if diabatic and not effort
           annotation (Placement(transformation(extent={{50,-38},{70,-18}})));
 
-        FCSys.Connectors.FaceGeneric negative(
+        FCSys.Connectors.Face negative(
           final thermoOpt=thermoOpt,
           final slip1=slip1,
           final slip2=slip2)
-          "Negative-side connector for material, linear momentum, and entropy"
+          "Negative-side connector for material, linear momentum, and heat"
           annotation (Placement(transformation(extent={{-110,-10},{-90,10}}),
               iconTransformation(extent={{-110,-10},{-90,10}})));
-        Connectors.RealOutputBus y "Output bus for measurements" annotation (
-            HideResult=not (internalMaterial or internalLin1 or internalLin1
-               or internalLin2 or internalEntropy), Placement(transformation(
+        FCSys.Connectors.RealOutputBus y "Output bus for measurements"
+          annotation (HideResult=not (internalMaterial or internalLin1 or
+              internalLin1 or internalLin2 or internalEntropy), Placement(
+              transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,-100}), iconTransformation(
@@ -4903,15 +4877,15 @@ sensor</a> model.
               rotation=270,
               origin={0,-98})));
 
-        FCSys.Connectors.FaceGeneric positive(
+        FCSys.Connectors.Face positive(
           final thermoOpt=thermoOpt,
           final slip1=slip1,
           final slip2=slip2)
-          "Positive-side connector for material, linear momentum, and entropy"
+          "Positive-side connector for material, linear momentum, and heat"
           annotation (Placement(transformation(extent={{90,-2},{110,18}}),
               iconTransformation(extent={{90,-10},{110,10}})));
       protected
-        Connectors.RealOutputBusInternal xInt if axis == Axis.x
+        FCSys.Connectors.RealOutputBusInternal xInt if axis == Axis.x
           "Internal bus for measurements if face is normal to x axis"
           annotation (HideResult=not (internalMaterial or internalLin1 or
               internalLin1 or internalLin2 or internalEntropy), Placement(
@@ -4922,7 +4896,7 @@ sensor</a> model.
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,-98})));
-        Connectors.RealOutputBusInternal yInt if axis == Axis.y
+        FCSys.Connectors.RealOutputBusInternal yInt if axis == Axis.y
           "Internal bus for measurements if face is normal to y axis"
           annotation (HideResult=not (internalMaterial or internalLin1 or
               internalLin1 or internalLin2 or internalEntropy), Placement(
@@ -4933,7 +4907,7 @@ sensor</a> model.
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,-98})));
-        Connectors.RealOutputBusInternal zInt if axis == Axis.z
+        FCSys.Connectors.RealOutputBusInternal zInt if axis == Axis.z
           "Internal bus for measurements if face is normal to z axis"
           annotation (HideResult=not (internalMaterial or internalLin1 or
               internalLin1 or internalLin2 or internalEntropy), Placement(
@@ -5123,11 +5097,8 @@ sensor</a> model.
             color={0,0,127},
             smooth=Smooth.None));
 
-        annotation (
-          defaultComponentName="speciesFaceSensor",
-          Diagram(graphics),
-          Icon(graphics={Line(
-                      points={{-70,0},{-100,0}},
+        annotation (defaultComponentName="speciesFaceSensor", Icon(graphics={
+                Line( points={{-70,0},{-100,0}},
                       color={0,0,0},
                       smooth=Smooth.None),Line(
                       points={{100,0},{70,0}},
@@ -5140,8 +5111,8 @@ sensor</a> model.
         model PotentialElectrochemical
           "Sensor for difference in electrochemical potential"
 
-          extends BaseClasses.PartialSensor(redeclare Connectors.RealOutput y(
-                final unit="l2.m/(N.T2)"));
+          extends BaseClasses.PartialSensor(redeclare
+              FCSys.Connectors.RealOutput y(final unit="l2.m/(N.T2)"));
 
         equation
           y = negative.mu - positive.mu "Measurement";
@@ -5155,12 +5126,12 @@ sensor</a> model.
                           points={{-26,-26},{-18,-44},{-34,-44},{-26,-26}},
                           lineColor={127,127,127},
                           smooth=Smooth.None,
-                          lineThickness=0.5)}), Diagram(graphics));
+                          lineThickness=0.5)}));
         end PotentialElectrochemical;
 
         model Current "Sensor for current"
-          extends BaseClasses.PartialSensor(redeclare Connectors.RealOutput y(
-                final unit="N/T"));
+          extends BaseClasses.PartialSensor(redeclare
+              FCSys.Connectors.RealOutput y(final unit="N/T"));
 
         equation
           y = negative.Ndot "Measurement";
@@ -5203,7 +5174,7 @@ sensor</a> model.
                               smooth=Smooth.None),Line(
                               points={{100,0},{70,0}},
                               color={0,0,0},
-                              smooth=Smooth.None)}), Diagram(graphics));
+                              smooth=Smooth.None)}));
           end PartialSensor;
         end BaseClasses;
       end Material;
@@ -5212,8 +5183,8 @@ sensor</a> model.
         extends Modelica.Icons.Package;
         model Velocity "Sensor for relative velocity"
 
-          extends BaseClasses.PartialSensor(redeclare Connectors.RealOutput y(
-                final unit="l/T"));
+          extends BaseClasses.PartialSensor(redeclare
+              FCSys.Connectors.RealOutput y(final unit="l/T"));
 
         equation
           y = negative.phi - positive.phi "Measurement";
@@ -5239,8 +5210,8 @@ sensor</a> model.
         end Velocity;
 
         model Force "Sensor for compressive force"
-          extends BaseClasses.PartialSensor(redeclare Connectors.RealOutput y(
-                final unit="l2.m/T2"));
+          extends BaseClasses.PartialSensor(redeclare
+              FCSys.Connectors.RealOutput y(final unit="l2.m/T2"));
 
         equation
           y = negative.mPhidot "Measurement";
@@ -5285,7 +5256,7 @@ sensor</a> model.
                               smooth=Smooth.None),Line(
                               points={{100,0},{70,0}},
                               color={0,0,0},
-                              smooth=Smooth.None)}), Diagram(graphics));
+                              smooth=Smooth.None)}));
           end PartialSensor;
         end BaseClasses;
       end Momentum;
@@ -5294,8 +5265,9 @@ sensor</a> model.
         extends Modelica.Icons.Package;
         model Temperature "Sensor for temperature difference"
 
-          extends BaseClasses.PartialSensor(redeclare Connectors.RealOutput y(
-                final unit="l2.m/(N.T2)", displayUnit="K"));
+          extends BaseClasses.PartialSensor(redeclare
+              FCSys.Connectors.RealOutput y(final unit="l2.m/(N.T2)",
+                displayUnit="K"));
 
         equation
           y = negative.T - positive.T "Measurement";
@@ -5309,12 +5281,12 @@ sensor</a> model.
                           points={{-10,-26},{-2,-44},{-18,-44},{-10,-26}},
                           lineColor={127,127,127},
                           smooth=Smooth.None,
-                          lineThickness=0.5)}), Diagram(graphics));
+                          lineThickness=0.5)}));
         end Temperature;
 
         model HeatRate "Sensor for heat flow rate"
-          extends BaseClasses.PartialSensor(redeclare Connectors.RealOutput y(
-                final unit="l2.m/T3"));
+          extends BaseClasses.PartialSensor(redeclare
+              FCSys.Connectors.RealOutput y(final unit="l2.m/T3"));
 
         equation
           y = negative.Qdot "Measurement";
@@ -5329,8 +5301,8 @@ sensor</a> model.
         end HeatRate;
 
         model EntropyRate "Sensor for entropy flow rate"
-          extends BaseClasses.PartialSensor(redeclare Connectors.RealOutput y(
-                final unit="N/T"));
+          extends BaseClasses.PartialSensor(redeclare
+              FCSys.Connectors.RealOutput y(final unit="N/T"));
 
         equation
           y = (negative.Qdot - positive.Qdot)/2 "Measurement";
@@ -5376,7 +5348,7 @@ sensor</a> model.
                               smooth=Smooth.None),Line(
                               points={{100,0},{70,0}},
                               color={0,0,0},
-                              smooth=Smooth.None)}), Diagram(graphics));
+                              smooth=Smooth.None)}));
           end PartialSensor;
         end BaseClasses;
       end Entropy;

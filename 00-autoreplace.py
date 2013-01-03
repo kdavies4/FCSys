@@ -13,14 +13,29 @@ import os
 ## Settings
 
 # Replacement pairs
-rpls = [# Remove extra spacing.
+rpls = [# Remove empty layers.
+        (r'\n? *Diagram\(graphics\), *', ' '),
+        (r', *Diagram\(graphics\)', ''),
+        (r'\n? *Icon\(graphics\), *', ' '),
+        (r', *Icon\(graphics\)', ''),
+        # Remove spaces on the outside of bold and underline tags.
+        (r'<b> ', ' <b>'),
+        (r' </b>', '</b> '),
+        (r'<u> ', ' <u>'),
+        (r' </u>', '</u> '),
+        # Remove unless open/close tags.
+        (r'</b>( *)<u><b>', r'\1<u>'),
+        (r'</b></u>( *)<b>', r'</u>\1'),
+        # Remove extra spacing.
         (r' +\n', r'\n'),
         (r'\n\n\n+', r'\n\n'),
         (r' +<br>', r'<br>'),
         (r'<br><br>(<br>)+', r'<br><br>'),
         # Use shortcuts for Units and Quantities.
-        (r'FCSys\.Quantities\.', r'Q.'),
-        (r'FCSys\.Units\.', r'U.'),
+        (r' FCSys\.Quantities\.', r' Q.'),
+        (r' FCSys\.Units\.', r' U.'),
+        # Use absolute referencing for Connectors.
+        (r' Connectors\.', r' FCSys.Connectors.'),
         # Sometimes Dymola adds a useless import.
         (r'import FCSys;\n', ''),
         # No empty line before "end x;".
@@ -39,7 +54,7 @@ rpls = [# Remove extra spacing.
         (r'(// .*)will not', r"\1won't"),
         (r'(// .*)cannot', r"\1can't"),
         (r'(// .*)there is', r"\1there's"),
-        (r"(// .*)it is", r"\1it's"),
+        (r"(// .*)it is ", r"\1it's "), # Trailing space prevents mixup with "isn't"
        ]
 
 # Directory specification

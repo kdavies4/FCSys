@@ -2,6 +2,7 @@ within FCSys;
 package Regions "3D arrays of discrete, interconnected subregions"
   extends Modelica.Icons.Package;
   import Modelica.Media.IdealGases.Common.SingleGasesData;
+  extends FCSys.BaseClasses.Icons.PackageUnderConstruction;
   package Examples "Examples and tests"
     extends Modelica.Icons.ExamplesPackage;
     model FPToFP "Test one flow plate to the other"
@@ -41,7 +42,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaFPs.CaFP caFP(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{50,-10},{70,10}})));
 
-      FCSys.BCs.Face.Subregion0Current bC1[n_y, n_z](each graphite(
+      FCSys.BCs.FaceBus.SubregionClosed bC1[n_y, n_z](each graphite(
           inclC=true,
           'incle-'=true,
           C(entropySpec(k=defaults.T)),
@@ -51,19 +52,19 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=90,
             origin={-84,0})));
 
-      FCSys.BCs.Face.Subregion0Current bC2[n_y, n_z](each graphite(
+      FCSys.BCs.FaceBus.SubregionClosed bC2[n_y, n_z](each graphite(
           inclC=true,
           'incle-'=true,
           C(entropySpec(k=defaults.T)),
           'e-'(
             entropySpec(k=defaults.T),
-            redeclare FCSys.BCs.Face.Species.Material.Pressure materialBC,
+            redeclare FCSys.BCs.Face.Material.Pressure materialBC,
             materialSpec(k(start=1*U.atm))))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={84,0})));
-      FCSys.BCs.Face.Subregion0Current bC3[anFP.n_x, n_z](each gas(
+      FCSys.BCs.FaceBus.SubregionClosed bC3[anFP.n_x, n_z](each gas(
           inclH2=true,
           inclH2O=true,
           H2(entropySpec(k=defaults.T)),
@@ -72,7 +73,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=180,
             origin={-60,-24})));
 
-      FCSys.BCs.Face.Subregion0Current bC4[anFP.n_x, n_z](each gas(
+      FCSys.BCs.FaceBus.SubregionClosed bC4[anFP.n_x, n_z](each gas(
           inclH2=true,
           inclH2O=true,
           H2(entropySpec(k=defaults.T)),
@@ -81,7 +82,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=0,
             origin={-60,24})));
 
-      FCSys.BCs.Face.Subregion0Current bC5[caFP.n_x, n_z](each gas(
+      FCSys.BCs.FaceBus.SubregionClosed bC5[caFP.n_x, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -91,7 +92,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={60,-24})));
-      FCSys.BCs.Face.Subregion0Current bC6[caFP.n_x, n_z](each gas(
+      FCSys.BCs.FaceBus.SubregionClosed bC6[caFP.n_x, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -172,7 +173,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           thickness=0.5,
           smooth=Smooth.None));
       annotation (
-        Diagram(graphics),
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.FPToFP.mos"),
         experiment(
@@ -210,7 +210,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaGDLs.CaGDL caGDL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{30,-10},{50,10}})));
 
-      FCSys.BCs.Face.Subregion0Current bC1[n_y, n_z](each gas(
+      FCSys.BCs.FaceBus.SubregionClosed bC1[n_y, n_z](each gas(
           inclH2O=true,
           inclH2=true,
           H2(entropySpec(k=defaults.T)),
@@ -224,7 +224,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=90,
             origin={-64,0})));
 
-      FCSys.BCs.Face.Subregion0Current bC2[n_y, n_z](each gas(
+      FCSys.BCs.FaceBus.SubregionClosed bC2[n_y, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -236,7 +236,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           C(entropySpec(k=defaults.T)),
           'e-'(
             entropySpec(k=defaults.T),
-            redeclare FCSys.BCs.Face.Species.Material.Pressure materialBC,
+            redeclare FCSys.BCs.Face.Material.Pressure materialBC,
             materialSpec(k(start=1*U.atm))))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -283,7 +283,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           smooth=Smooth.None));
 
       annotation (
-        Diagram(graphics),
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.GDLToGDL.mos"),
         experiment(
@@ -317,7 +316,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaCLs.CaCL caCL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{10,-10},{30,10}})));
 
-      FCSys.BCs.Face.SubregionFlow bC1[n_y, n_z](
+      FCSys.BCs.FaceBus.SubregionFlow bC1[n_y, n_z](
         each gas(inclH2=true, inclH2O=true),
         each graphite(inclC=true, 'incle-'=true),
         each ionomer(inclC19HF37O5S=true, 'inclH+'=true)) annotation (Placement(
@@ -326,27 +325,27 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=90,
             origin={-44,-8.88178e-16})));
 
-      FCSys.BCs.Face.SubregionFlow bC2[n_y, n_z](
+      FCSys.BCs.FaceBus.SubregionFlow bC2[n_y, n_z](
         each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
-          O2(redeclare FCSys.BCs.Face.Species.Material.Pressure materialBC,
+          O2(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
               materialSpec(k(start=1*U.atm))),
-          H2O(redeclare FCSys.BCs.Face.Species.Material.Pressure materialBC,
+          H2O(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
               materialSpec(k(start=1*U.atm)))),
         each graphite(
           inclC=true,
           'incle-'=true,
-          C(redeclare FCSys.BCs.Face.Species.Entropy.Temperature entropyBC,
-              entropySpec(k(start=300*U.K))),
-          'e-'(redeclare FCSys.BCs.Face.Species.Material.Current materialBC,
-              redeclare Modelica.Blocks.Sources.Ramp materialSpec(duration=1000,
-                height=-2*U.A))),
+          C(redeclare FCSys.BCs.Face.Entropy.Temperature thermalBC, thermalSpec(
+                k(start=298.15*U.K))),
+          'e-'(redeclare FCSys.BCs.Face.Material.Current materialBC, redeclare
+              Modelica.Blocks.Sources.Ramp materialSpec(duration=1000, height=-2
+                  *U.A))),
         each ionomer(
           inclC19HF37O5S=true,
           'inclH+'=true,
-          'H+'(redeclare FCSys.BCs.Face.Species.Material.Pressure materialBC,
+          'H+'(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
               materialSpec(k(start=1*U.atm))))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -383,7 +382,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           smooth=Smooth.None));
 
       annotation (
-        Diagram(graphics),
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.CLToCL.mos"),
         experiment(
@@ -415,7 +413,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnFPs.AnFP anFP(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
 
-      FCSys.BCs.Face.Subregion0Current bC1[n_y, n_z](each graphite(
+      FCSys.BCs.FaceBus.SubregionClosed bC1[n_y, n_z](each graphite(
           inclC=true,
           'incle-'=true,
           C(entropySpec(k=defaults.T)),
@@ -424,7 +422,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-84,0})));
-      FCSys.BCs.Face.Subregion0Current bC2[n_y, n_z](each gas(
+      FCSys.BCs.FaceBus.SubregionClosed bC2[n_y, n_z](each gas(
           inclH2=true,
           inclH2O=true,
           H2(entropySpec(k=defaults.T)),
@@ -433,13 +431,13 @@ package Regions "3D arrays of discrete, interconnected subregions"
           'incle-'=true,
           C(entropySpec(k=defaults.T)),
           'e-'(entropySpec(k=defaults.T),redeclare
-              FCSys.BCs.Face.Species.Material.Pressure materialBC)))
-        annotation (Placement(transformation(
+              FCSys.BCs.Face.Material.Pressure materialBC))) annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-36,0})));
 
-      FCSys.BCs.Face.Subregion0Current bC3[anFP.n_x, n_z](each gas(
+      FCSys.BCs.FaceBus.SubregionClosed bC3[anFP.n_x, n_z](each gas(
           inclH2=true,
           inclH2O=true,
           H2(entropySpec(k=defaults.T)),
@@ -447,7 +445,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={-60,-24})));
-      FCSys.BCs.Face.Subregion0Current bC4[anFP.n_x, n_z](each gas(
+      FCSys.BCs.FaceBus.SubregionClosed bC4[anFP.n_x, n_z](each gas(
           inclH2=true,
           inclH2O=true,
           H2(entropySpec(k=defaults.T)),
@@ -481,7 +479,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           thickness=0.5,
           smooth=Smooth.None));
       annotation (
-        Diagram(graphics),
         experiment(Tolerance=1e-06,StopTime=10),
         experimentSetupOutput,
         Commands(file(ensureSimulated=true) =
@@ -509,7 +506,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnGDLs.AnGDL anGDL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
 
-      FCSys.BCs.Face.Subregion0Current bC1[n_y, n_z](each gas(
+      FCSys.BCs.FaceBus.SubregionClosed bC1[n_y, n_z](each gas(
           inclH2=true,
           inclH2O=true,
           H2(entropySpec(k=defaults.T)),
@@ -522,7 +519,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-64,0})));
-      FCSys.BCs.Face.Subregion0Current bC2[n_y, n_z](each gas(
+      FCSys.BCs.FaceBus.SubregionClosed bC2[n_y, n_z](each gas(
           inclH2=true,
           inclH2O=true,
           H2(entropySpec(k=defaults.T)),
@@ -531,8 +528,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           'incle-'=true,
           C(entropySpec(k=defaults.T)),
           'e-'(entropySpec(k=defaults.T),redeclare
-              FCSys.BCs.Face.Species.Material.Pressure materialBC)))
-        annotation (Placement(transformation(
+              FCSys.BCs.Face.Material.Pressure materialBC))) annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-16,0})));
@@ -550,10 +547,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           thickness=0.5,
           smooth=Smooth.None));
 
-      annotation (
-        Diagram(graphics),
-        experiment(Tolerance=1e-06,StopTime=10),
-        Commands(file(ensureSimulated=true) =
+      annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file(
+              ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.AnGDL.mos"));
     end AnGDL;
 
@@ -579,7 +574,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnCLs.AnCL anCL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 
-      FCSys.BCs.Face.SubregionFlow bC1[n_y, n_z](
+      FCSys.BCs.FaceBus.SubregionFlow bC1[n_y, n_z](
         each gas(inclH2=true, inclH2O=true),
         each graphite(inclC=true, 'incle-'=true),
         each ionomer(inclC19HF37O5S=true, 'inclH+'=true)) annotation (Placement(
@@ -588,24 +583,24 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=90,
             origin={-44,-8.88178e-16})));
 
-      FCSys.BCs.Face.SubregionFlow bC2[n_y, n_z](
+      FCSys.BCs.FaceBus.SubregionFlow bC2[n_y, n_z](
         each gas(
           inclH2=true,
           inclH2O=true,
-          H2(redeclare FCSys.BCs.Face.Species.Material.Pressure materialBC,
+          H2(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
               materialSpec(k=1*U.atm)),
-          H2O(redeclare FCSys.BCs.Face.Species.Material.Pressure materialBC,
+          H2O(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
               materialSpec(k=1*U.atm))),
         each graphite(
           inclC=true,
           'incle-'=true,
-          'e-'(redeclare FCSys.BCs.Face.Species.Material.Current materialBC,
-              redeclare Modelica.Blocks.Sources.Ramp materialSpec(duration=1000,
-                height=2*U.A))),
+          'e-'(redeclare FCSys.BCs.Face.Material.Current materialBC, redeclare
+              Modelica.Blocks.Sources.Ramp materialSpec(duration=1000, height=2
+                  *U.A))),
         each ionomer(
           inclC19HF37O5S=true,
           'inclH+'=true,
-          'H+'(redeclare FCSys.BCs.Face.Species.Material.Pressure materialBC,
+          'H+'(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
               materialSpec(k(start=1*U.atm))))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -661,8 +656,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
       PEMs.PEM pEM(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      FCSys.BCs.Face.Subregion0Current bC1[n_y, n_z](each gas(inclH2O=true, H2O(
-              entropySpec(k=defaults.T))), each ionomer(
+      FCSys.BCs.FaceBus.SubregionClosed bC1[n_y, n_z](each gas(inclH2O=true,
+            H2O(entropySpec(k=defaults.T))), each ionomer(
           inclC19HF37O5S=true,
           'inclH+'=true,
           C19HF37O5S(entropySpec(k=defaults.T)),
@@ -671,14 +666,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-24,-8.88178e-16})));
-      FCSys.BCs.Face.Subregion0Current bC2[n_y, n_z](each gas(inclH2O=true, H2O(
-              entropySpec(k=defaults.T))), each ionomer(
+      FCSys.BCs.FaceBus.SubregionClosed bC2[n_y, n_z](each gas(inclH2O=true,
+            H2O(entropySpec(k=defaults.T))), each ionomer(
           inclC19HF37O5S=true,
           'inclH+'=true,
           C19HF37O5S(entropySpec(k=defaults.T)),
           'H+'(entropySpec(k=defaults.T),redeclare
-              FCSys.BCs.Face.Species.Material.Pressure materialBC)))
-        annotation (Placement(transformation(
+              FCSys.BCs.Face.Material.Pressure materialBC))) annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={24,0})));
@@ -696,7 +691,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           smooth=Smooth.None));
 
       annotation (
-        Diagram(graphics),
         experiment(Tolerance=1e-06,StopTime=10),
         experimentSetupOutput,
         Commands(file(ensureSimulated=true) =
@@ -726,7 +720,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaCLs.CaCL caCL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{10,-10},{30,10}})));
 
-      FCSys.BCs.Face.SubregionFlow bC1[n_y, n_z](
+      FCSys.BCs.FaceBus.SubregionFlow bC1[n_y, n_z](
         each gas(
           inclH2O=true,
           inclN2=true,
@@ -737,27 +731,27 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-4,-8.88178e-16})));
-      FCSys.BCs.Face.SubregionFlow bC2[n_y, n_z](
+      FCSys.BCs.FaceBus.SubregionFlow bC2[n_y, n_z](
         each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
-          O2(redeclare FCSys.BCs.Face.Species.Material.Pressure materialBC,
+          O2(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
               materialSpec(k(start=1*U.atm))),
-          H2O(redeclare FCSys.BCs.Face.Species.Material.Pressure materialBC,
+          H2O(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
               materialSpec(k(start=1*U.atm)))),
         each graphite(
           inclC=true,
           'incle-'=true,
-          C(redeclare FCSys.BCs.Face.Species.Entropy.Temperature entropyBC,
-              entropySpec(k(start=300*U.K))),
-          'e-'(redeclare FCSys.BCs.Face.Species.Material.Current materialBC,
-              redeclare Modelica.Blocks.Sources.Ramp materialSpec(duration=1000,
-                height=-2*U.A))),
+          C(redeclare FCSys.BCs.Face.Entropy.Temperature thermalBC, thermalSpec(
+                k(start=298.15*U.K))),
+          'e-'(redeclare FCSys.BCs.Face.Material.Current materialBC, redeclare
+              Modelica.Blocks.Sources.Ramp materialSpec(duration=1000, height=-2
+                  *U.A))),
         each ionomer(
           inclC19HF37O5S=true,
           'inclH+'=true,
-          'H+'(redeclare FCSys.BCs.Face.Species.Material.Pressure materialBC,
+          'H+'(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
               materialSpec(k(start=1*U.atm))))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -811,7 +805,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaGDLs.CaGDL caGDL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{30,-10},{50,10}})));
 
-      FCSys.BCs.Face.Subregion0Current bC1[n_y, n_z](each gas(
+      FCSys.BCs.FaceBus.SubregionClosed bC1[n_y, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -826,7 +820,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={16,-8.88178e-16})));
-      FCSys.BCs.Face.Subregion0Current bC2[n_y, n_z](each gas(
+      FCSys.BCs.FaceBus.SubregionClosed bC2[n_y, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -837,8 +831,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           'incle-'=true,
           C(entropySpec(k=defaults.T)),
           'e-'(entropySpec(k=defaults.T),redeclare
-              FCSys.BCs.Face.Species.Material.Pressure materialBC)))
-        annotation (Placement(transformation(
+              FCSys.BCs.Face.Material.Pressure materialBC))) annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={64,0})));
@@ -856,10 +850,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           thickness=0.5,
           smooth=Smooth.None));
 
-      annotation (
-        experiment(StopTime=10, Tolerance=1e-06),
-        Diagram(graphics),
-        Commands(file(ensureSimulated=true) =
+      annotation (experiment(StopTime=10, Tolerance=1e-06), Commands(file(
+              ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.CaGDL.mos"));
     end CaGDL;
 
@@ -885,7 +877,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaFPs.CaFP caFP(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{50,-10},{70,10}})));
 
-      FCSys.BCs.Face.Subregion0Current bC1[n_y, n_z](each gas(
+      FCSys.BCs.FaceBus.SubregionClosed bC1[n_y, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -900,17 +892,17 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={36,0})));
-      FCSys.BCs.Face.Subregion0Current bC2[n_y, n_z](each graphite(
+      FCSys.BCs.FaceBus.SubregionClosed bC2[n_y, n_z](each graphite(
           inclC=true,
           'incle-'=true,
           C(entropySpec(k=defaults.T)),
           'e-'(entropySpec(k=defaults.T),redeclare
-              FCSys.BCs.Face.Species.Material.Pressure materialBC)))
-        annotation (Placement(transformation(
+              FCSys.BCs.Face.Material.Pressure materialBC))) annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={84,0})));
-      FCSys.BCs.Face.Subregion0Current bC3[caFP.n_x, n_z](each gas(
+      FCSys.BCs.FaceBus.SubregionClosed bC3[caFP.n_x, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -920,7 +912,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={60,-24})));
-      FCSys.BCs.Face.Subregion0Current bC4[caFP.n_x, n_z](each gas(
+      FCSys.BCs.FaceBus.SubregionClosed bC4[caFP.n_x, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -956,7 +948,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           thickness=0.5,
           smooth=Smooth.None));
       annotation (
-        Diagram(graphics),
         experiment(StopTime=10, Tolerance=1e-06),
         experimentSetupOutput,
         Commands(file(ensureSimulated=true) =
@@ -1187,6 +1178,7 @@ used as the inlet. The z axis extends across the width of the channel.</p></html
                   visible=not inclYFaces,
                   lineColor={0,0,0})}),
         Diagram(graphics));
+
     end AnFP;
 
     model GM "General Motors cathodic test flow plate and current collector"
@@ -2952,29 +2944,25 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-              100}}), graphics={
-          Rectangle(
-            extent={{-100,120},{100,160}},
-            fillColor={255,255,255},
-            visible=inclYFaces,
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Text(
-            extent={{-100,120},{100,160}},
-            textString="%name",
-            visible=inclYFaces,
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-100,56},{100,96}},
-            fillColor={255,255,255},
-            visible=not inclYFaces,
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Text(
-            extent={{-100,56},{100,96}},
-            textString="%name",
-            visible=not inclYFaces,
-            lineColor={0,0,0})}));
+              100}}), graphics={Rectangle(
+              extent={{-100,120},{100,160}},
+              fillColor={255,255,255},
+              visible=inclYFaces,
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Text(
+              extent={{-100,120},{100,160}},
+              textString="%name",
+              visible=inclYFaces,
+              lineColor={0,0,0}),Rectangle(
+              extent={{-100,56},{100,96}},
+              fillColor={255,255,255},
+              visible=not inclYFaces,
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Text(
+              extent={{-100,56},{100,96}},
+              textString="%name",
+              visible=not inclYFaces,
+              lineColor={0,0,0})}));
   end Region;
 
   annotation (Documentation(info="<html>

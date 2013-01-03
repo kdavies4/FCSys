@@ -5237,7 +5237,7 @@ The signal sizes of the input and output vector may be different.
 <p>
 Block has one continuous Real output signal.
 </p>
-</html>", Icon(graphics)));
+</html>"));
     end SO;
 
     partial block MO "Multiple Output block"
@@ -5308,5 +5308,5 @@ it can be redistributed and/or modified under the terms of the Modelica License 
 disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.ModelicaLicense2\">
 FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
-</p></html>"), Icon(graphics));
+</p></html>"));
 end Blocks;

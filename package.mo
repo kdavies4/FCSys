@@ -574,7 +574,7 @@ Source Code, the Attribution Notices shall be appropriately
 displayed, e.g., in the documentation of the Derivative Work.</p>
 
 <p><b>9. Disclaimer
-of Warranty.<br></b><u><b>The Original Work is provided under this
+of Warranty.<br><u>The Original Work is provided under this
 License on an &quot;as is&quot; basis and without warranty, either
 express or implied, including, without limitation, the warranties of
 non-infringement, merchantability or fitness for a particular
@@ -748,8 +748,8 @@ license.
 
 <p><b>Can
 I copy a class out of a Modelica package (under Modelica License 2)
-and include it </b><u><b>unmodified</b></u><b> in a Modelica package
-under a </b><u><b>commercial/proprietary license</b></u><b>?</b></p>
+and include it <u>unmodified</u> in a Modelica package
+under a <u>commercial/proprietary license</u>?</b></p>
 <p>No,
 according to article 2c). However, you can include model, block,
 function, package, record and connector classes in your Modelica
@@ -761,10 +761,10 @@ can be copied and included unmodified under a commercial/proprietary
 license (for details, see the next question).</p>
 
 <p><b>Can
-I copy a type class or </b><u><b>part</b></u><b> of a model, block,
+I copy a type class or <u>part</u> of a model, block,
 function, record, connector class, out of a Modelica package (under
 Modelica License 2) and include it modified or unmodified in a
-Modelica package under a </b><u><b>commercial/proprietary</b></u><b>
+Modelica package under a <u>commercial/proprietary</u>
 license</b></p>
 <p>Yes,
 according to article 2d), since this will in the end usually qualify
@@ -782,8 +782,8 @@ code would have to stay under Modelica License 2.</p>
 
 <p><b>Can
 I copy a class out of a Modelica package (under Modelica License 2)
-and include it in </b><u><b>modified </b></u><b>form in a
-</b><u><b>commercial/proprietary</b></u><b> Modelica package?</b></p>
+and include it in <u>modified</u> form in a
+<u>commercial/proprietary</u> Modelica package?</b></p>
 <p>Yes.
 If the modification can be seen as a &ldquo;Derivative Work&rdquo;,
 you can place it under your commercial/proprietary license. If the
@@ -870,7 +870,7 @@ to charge a fee for Derivative Work under alternative 2d).</p>
 
 <p><b>Can
 I copy a text passage out of a Modelica document (under Modelica
-License 2) and use it </b><u><b>unmodified</b></u><b> in my document
+License 2) and use it <u>unmodified</u> in my document
 (e.g. the Modelica syntax description in the Modelica Specification)?</b></p>
 <p>Yes.
 In case you distribute your document, the copied parts are still
@@ -880,7 +880,7 @@ your document.</p>
 
 <p><b>Can
 I copy a text passage out of a Modelica document (under Modelica
-License 2) and use it in </b><u><b>modified</b></u><b> form in my
+License 2) and use it in <u>modified</u> form in my
 document?</b></p>
 <p>Yes,
 the creation of Derivative Works is allowed. In case the content is

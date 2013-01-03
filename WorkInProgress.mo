@@ -62,7 +62,7 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
   */
 
   protected
-    Connectors.ChemicalBusInternal chemical
+    FCSys.Connectors.ChemicalBusInternal chemical
       "Internal connector to route electrochemical interactions"
       annotation (Placement(transformation(extent={{-30,10},{-10,30}})));
 
@@ -330,7 +330,6 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
 </p><p>For more information, see the
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
-      Icon(graphics),
       Diagram(graphics));
   end Subregion;
 
@@ -342,7 +341,7 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
       annotation (Evaluate=true,HideResult=true);
     parameter Q.Amount DeltaQ_IC(min=-Modelica.Constants.inf) = 0
       "Initial charge difference" annotation (Dialog(group="Initialization"));
-    input Q.Amount CT(nominal=300*U.micro*U.F*U.K) = 300*U.K*U.micro*U.F
+    input Q.Amount CT(nominal=300*U.micro*U.F*U.K) = 298.15*U.K*U.micro*U.F
       "Capacitance times temperature" annotation (Dialog);
 
     Integer z[2]=Chemistry.charge({ion1.formula,ion2.formula}) "Charge numbers";
@@ -354,12 +353,13 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
       fixed=true) "Charge difference";
     //**stateSelect=StateSelect.prefer,
 
-    Connectors.ChemicalInput ion1(each final n_lin=n_lin)
+    FCSys.Connectors.ChemicalInput ion1(each final n_lin=n_lin)
       "Connector for the 1st ion" annotation (Placement(transformation(extent={
-              {-70,-10},{-50,10}}),iconTransformation(extent={{-70,-10},{-50,10}})));
-    Connectors.ChemicalInput ion2(each final n_lin=n_lin)
+              {-70,-10},{-50,10}}), iconTransformation(extent={{-70,-10},{-50,
+              10}})));
+    FCSys.Connectors.ChemicalInput ion2(each final n_lin=n_lin)
       "Connector for the 2nd ion" annotation (Placement(transformation(extent={
-              {50,-10},{70,10}}),iconTransformation(extent={{50,-10},{70,10}})));
+              {50,-10},{70,10}}), iconTransformation(extent={{50,-10},{70,10}})));
 
   equation
     // Aliases
@@ -466,7 +466,6 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
         smooth=Smooth.None));
 
     annotation (
-      Diagram(graphics),
       experiment(
         StopTime=0.01,
         NumberOfIntervals=5000,
@@ -523,7 +522,6 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
   Since it is assumed to be incompressible, its pressure cannot be determined by the specific volume and temperature.
   In that case, the <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p\">p</a> function
   returns zero.</html>"),
-      Diagram(graphics),
       experiment(
         StopTime=2,
         NumberOfIntervals=5000,
@@ -544,12 +542,12 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
     FCSys.Subregions.Reaction HOR(n_spec=3) "Hydrogen oxidation reaction"
       annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
 
-    FCSys.BCs.Chemical.Species.Species 'e-_an'(materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature)
+    FCSys.BCs.Chemical.Species 'e-_an'(materialBC=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature)
       annotation (Placement(transformation(
           extent={{-10,-10},{10,10}},
           rotation=180,
           origin={-52,-24})));
-    FCSys.BCs.Chemical.Species.Species H2(materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature)
+    FCSys.BCs.Chemical.Species H2(materialBC=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature)
       annotation (Placement(transformation(
           extent={{-10,-10},{10,10}},
           rotation=180,
@@ -558,18 +556,18 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
       annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
     FCSys.Subregions.Reaction ORR(n_spec=4) "Oxygen reduction reaction"
       annotation (Placement(transformation(extent={{30,-10},{50,10}})));
-    FCSys.BCs.Chemical.Species.Species 'e-_ca'(materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.Current,
+    FCSys.BCs.Chemical.Species 'e-_ca'(materialBC=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.Current,
         redeclare Modelica.Blocks.Sources.Ramp materialSpec(duration=3600e2,
           height=100*U.A)) annotation (Placement(transformation(
           extent={{-10,-10},{10,10}},
           rotation=180,
           origin={14,-24})));
-    FCSys.BCs.Chemical.Species.Species O2(materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature)
+    FCSys.BCs.Chemical.Species O2(materialBC=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature)
       annotation (Placement(transformation(
           extent={{-10,-10},{10,10}},
           rotation=180,
           origin={40,-24})));
-    FCSys.BCs.Chemical.Species.Species H2O(materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature,
+    FCSys.BCs.Chemical.Species H2O(materialBC=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature,
         redeclare Modelica.Blocks.Sources.Constant materialSpec(k=-2*1.20646*U.V
             /(298.15*U.K))) annotation (Placement(transformation(
           extent={{-10,-10},{10,10}},
@@ -604,7 +602,6 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
         smooth=Smooth.None));
 
     annotation (
-      Diagram(graphics),
       experiment(StopTime=360000),
       experimentSetupOutput,
       Commands(file="resources/scripts/Dymola/Subregions.Examples.Cell.mos"));
