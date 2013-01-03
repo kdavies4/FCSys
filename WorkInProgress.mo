@@ -15,36 +15,36 @@ package WorkInProgress "Incomplete classes under development"
     // listed first in the parameter dialog.
     extends Subregions.BaseClasses.PartialSubregion;
 
-    replaceable FCSys.Subregions.Phases.Gas gas(inclH2O=true, final inclVel={
-          inclVelX,inclVelY,inclVelZ}) "Gas" annotation (Dialog(group="Phases"),
+    replaceable FCSys.Subregions.Phases.Gas gas(inclH2O=true, final inclLin={
+          inclLinX,inclLinY,inclLinZ}) "Gas" annotation (Dialog(group="Phases"),
         Placement(transformation(extent={{-10,-10},{10,10}})));
 
     // **Currently, both reactions must be included at this level.
 
-    replaceable FCSys.Subregions.Phases.Graphite graphite(final inclVel={
-          inclVelX,inclVelY,inclVelZ}) "Graphite" annotation (Dialog(group=
+    replaceable FCSys.Subregions.Phases.Graphite graphite(final inclLin={
+          inclLinX,inclLinY,inclLinZ}) "Graphite" annotation (Dialog(group=
             "Phases"), Placement(transformation(extent={{-10,-10},{10,10}})));
 
-    replaceable FCSys.Subregions.Phases.Ionomer ionomer(final inclVel={inclVelX,
-          inclVelY,inclVelZ},C19HF37O5S(initMethTemp=if graphite.inclC then
+    replaceable FCSys.Subregions.Phases.Ionomer ionomer(final inclLin={inclLinX,
+          inclLinY,inclLinZ},C19HF37O5S(initMethTemp=if graphite.inclC then
             InitMethScalar.None else InitMethScalar.Temperature,T(stateSelect=
               if graphite.inclC then StateSelect.never else StateSelect.prefer)))
       "Ionomer" annotation (Dialog(group="Phases"), Placement(transformation(
             extent={{-10,-10},{10,10}})));
     // **temp stateSelect, initMeth
     /*
-  replaceable FCSys.Subregions.Phases.Liquid liquid(final inclVel={inclVelX,
-        inclVelY,inclVelZ})  "Liquid" annotation (
+  replaceable FCSys.Subregions.Phases.Liquid liquid(final inclLin={inclLinX,
+        inclLinY,inclLinZ})  "Liquid" annotation (
 
     Dialog(group="Phases"),
     Placement(transformation(extent={{-10,-10},{10,10}})));
   */
 
-    FCSys.Subregions.Reactions.Electrochemical HOR(final n_vel=n_vel, n_spec=3)
+    FCSys.Subregions.Reactions.Electrochemical HOR(final n_lin=n_lin, n_spec=3)
       if inclReact and (graphite.'incle-' and ionomer.'inclH+' and gas.inclH2
        and not (gas.inclO2 and gas.inclH2O)) "Hydrogen oxidation reaction"
       annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
-    FCSys.Subregions.Reactions.Electrochemical ORR(final n_vel=n_vel, n_spec=4)
+    FCSys.Subregions.Reactions.Electrochemical ORR(final n_lin=n_lin, n_spec=4)
       if inclReact and (graphite.'incle-' and ionomer.'inclH+' and gas.inclO2
        and gas.inclH2O and not gas.inclH2) "Oxygen reduction reaction"
       annotation (Placement(transformation(extent={{-30,30},{-10,50}})));
@@ -337,8 +337,8 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
   model Capacitor "Model for an electrical capacitor"
     extends FCSys.BaseClasses.Icons.Names.Top2;
 
-    parameter Integer n_vel=1
-      "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>"
+    parameter Integer n_lin=1
+      "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
       annotation (Evaluate=true,HideResult=true);
     parameter Q.Amount DeltaQ_IC(min=-Modelica.Constants.inf) = 0
       "Initial charge difference" annotation (Dialog(group="Initialization"));
@@ -354,10 +354,10 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
       fixed=true) "Charge difference";
     //**stateSelect=StateSelect.prefer,
 
-    Connectors.ChemicalInput ion1(each final n_vel=n_vel)
+    Connectors.ChemicalInput ion1(each final n_lin=n_lin)
       "Connector for the 1st ion" annotation (Placement(transformation(extent={
               {-70,-10},{-50,10}}),iconTransformation(extent={{-70,-10},{-50,10}})));
-    Connectors.ChemicalInput ion2(each final n_vel=n_vel)
+    Connectors.ChemicalInput ion2(each final n_lin=n_lin)
       "Connector for the 2nd ion" annotation (Placement(transformation(extent={
               {50,-10},{70,10}}),iconTransformation(extent={{50,-10},{70,10}})));
 
@@ -377,7 +377,7 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
 
     // Conservation (no storage)
     0 = Sigma(Qdot) "Charge (net)";
-    zeros(n_vel) = ion1.mPhidot + ion2.mPhidot "Linear momentum";
+    zeros(n_lin) = ion1.mPhidot + ion2.mPhidot "Linear momentum";
     0 = ion1.Hdot + ion2.Hdot "Energy (excluding electrostatic)";
 
     // This model is marked as structurally incomplete because
@@ -621,10 +621,10 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
     parameter Q.PressureAbsolute p_IC=1*U.atm
       "<html>Initial pressure (<i>p</i><sub>IC</sub>)</html>"
       annotation (Dialog(tab="Initialization", group="Scalar properties"));
-    parameter Integer n_vel(
+    parameter Integer n_lin(
       final min=1,
       final max=3) = 1
-      "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>"
+      "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
       annotation (HideResult=true);
     parameter Boolean overrideEOS=false
       "<html>Override the equation of state with the value of &rho;<sub>IC</sub></html>"
@@ -648,7 +648,7 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
     Q.Potential mu(nominal=1*U.V) "Electrochemical potential";
 
     FCSys.Connectors.ChemicalOutput chemical(
-      final n_vel=n_vel,
+      final n_lin=n_lin,
       final formula=Data.formula,
       final m=Data.m) annotation (Placement(transformation(extent={{-10,-50},{
               10,-30}}), iconTransformation(extent={{-10,-50},{10,-30}})));
@@ -671,7 +671,7 @@ Error: Failed to expand the variable ORR.chemical[2].mphi
     mu = chemical.muPerT*T;
     h = mu + T*Data.s(T, p);
     chemical.hbar = h/Data.m;
-    chemical.phi = zeros(n_vel);
+    chemical.phi = zeros(n_lin);
 
     // Conservation of material
     der(N)/U.s = chemical.Ndot;

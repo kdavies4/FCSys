@@ -26,8 +26,8 @@ package BCs "Models for boundary conditions"
         inclXFaces=false,
         inclYFaces=true,
         inclZFaces=false,
-        inclVelX=false,
-        inclVelY=true,
+        inclLinX=false,
+        inclLinY=true,
         graphite(inclC=true, C(V_IC=0.5*U.cm^3,alpha_tau=1e-3*U.cm/U.A)),
         gas(
           inclH2O=true,
@@ -258,7 +258,7 @@ package BCs "Models for boundary conditions"
         inclYFaces=false,
         inclZFaces=false,
         inclXFaces=true,
-        inclVelX=true,
+        inclLinX=true,
         H2(
           xNegative(
             slipY=false,
@@ -1479,246 +1479,6 @@ package BCs "Models for boundary conditions"
     package Phases
       "<html>BCs for the <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Phase\">Phase</a> model (multi-species)</html>"
       extends Modelica.Icons.Package;
-      model Phase "BC for a phase with all species conditionally included"
-
-        extends BaseClasses.NullPhase;
-
-        // Conditionally include species.
-        parameter Boolean inclC=false "Carbon (C)" annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.BCs.Chemical.Species.Species C(final n_vel=n_vel, redeclare
-            package Data = FCSys.Characteristics.C.Graphite) if inclC "Model"
-          annotation (Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            enable=inclC), Placement(transformation(extent={{-10,-10},{10,10}})));
-
-        parameter Boolean inclC19HF37O5S=false
-          "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.BCs.Chemical.Species.Species C19HF37O5S(final n_vel=n_vel,
-            redeclare package Data = FCSys.Characteristics.C19HF37O5S.Solid)
-          if inclC19HF37O5S "Model" annotation (Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            enable=inclC19HF37O5S), Placement(transformation(extent={{-10,-10},
-                  {10,10}})));
-
-        parameter Boolean 'incle-'=false
-          "<html>Electrons (e<sup>-</sup>)</html>" annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.BCs.Chemical.Species.Species 'e-'(final n_vel=n_vel, redeclare
-            package Data = FCSys.Characteristics.'e-'.Graphite) if 'incle-'
-          "Model" annotation (Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            enable='incle-'), Placement(transformation(extent={{-10,-10},{10,10}})));
-
-        parameter Boolean inclH2=false "<html>Hydrogen (H<sub>2</sub>)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.BCs.Chemical.Species.Species H2(final n_vel=n_vel, redeclare
-            package Data = FCSys.Characteristics.H2.Gas) if inclH2 "Model"
-          annotation (Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            enable=inclH2), Placement(transformation(extent={{-10,-10},{10,10}})));
-
-        parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.BCs.Chemical.Species.Species H2O(final n_vel=n_vel, redeclare
-            package Data = FCSys.Characteristics.H2O.Gas) if inclH2O "Model"
-          annotation (Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,10}})));
-
-        parameter Boolean 'inclH+'=false "<html>Protons (H<sup>+</sup>)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.BCs.Chemical.Species.Species 'H+'(final n_vel=n_vel, redeclare
-            package Data = FCSys.Characteristics.'H+'.Solid) if 'inclH+'
-          "Model" annotation (Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            enable='inclH+'), Placement(transformation(extent={{-10,-10},{10,10}})));
-
-        parameter Boolean inclN2=false "<html>Nitrogen (N<sub>2</sub>)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.BCs.Chemical.Species.Species N2(final n_vel=n_vel, redeclare
-            package Data = FCSys.Characteristics.N2.Gas) if inclN2 "Model"
-          annotation (Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            enable=inclN2), Placement(transformation(extent={{-10,-10},{10,10}})));
-
-        parameter Boolean inclO2=false "<html>Oxygen (O<sub>2</sub>)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.BCs.Chemical.Species.Species O2(final n_vel=n_vel, redeclare
-            package Data = FCSys.Characteristics.O2.Gas) if inclO2 "Model"
-          annotation (Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            enable=inclO2), Placement(transformation(extent={{-10,-10},{10,10}})));
-
-      equation
-        // Note:  It would be helpful if Modelica allowed elements of expandable
-        // connectors to be named by the contents of a string variable and the
-        // name of an instance of a model was accessible through a string (like
-        // %name is expanded to be the name of the instance of the model).  Then,
-        // the connection equations that follow could be generic.
-
-        // C
-        connect(C.chemical, chemical.C) annotation (Line(
-            points={{-5.08852e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={208,104,0},
-            smooth=Smooth.None));
-        connect(u.C, C.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-
-        // C19HF37O5S
-        connect(C19HF37O5S.chemical, chemical.C19HF37O5S) annotation (Line(
-            points={{-5.08852e-16,-4},{5.55112e-16,-40}},
-            color={208,104,0},
-            smooth=Smooth.None));
-        connect(u.C19HF37O5S, C19HF37O5S.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-
-        // e-
-        connect('e-'.chemical, chemical.'e-') annotation (Line(
-            points={{-5.08852e-16,-4},{5.55112e-16,-40}},
-            color={208,104,0},
-            smooth=Smooth.None));
-        connect(u.'e-', 'e-'.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-
-        // H2
-        connect(H2.chemical, chemical.H2) annotation (Line(
-            points={{-5.08852e-16,-4},{5.55112e-16,-40}},
-            color={208,104,0},
-            smooth=Smooth.None));
-        connect(u.H2, H2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-
-        // H2O
-        connect(H2O.chemical, chemical.H2O) annotation (Line(
-            points={{-5.08852e-16,-4},{5.55112e-16,-40}},
-            color={208,104,0},
-            smooth=Smooth.None));
-        connect(u.H2O, H2O.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-
-        // H+
-        connect('H+'.chemical, chemical.'H+') annotation (Line(
-            points={{-5.08852e-16,-4},{5.55112e-16,-40}},
-            color={208,104,0},
-            smooth=Smooth.None));
-        connect(u.'H+', 'H+'.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-
-        // N2
-        connect(N2.chemical, chemical.N2) annotation (Line(
-            points={{-5.08852e-16,-4},{5.55112e-16,-40}},
-            color={208,104,0},
-            smooth=Smooth.None));
-        connect(u.N2, N2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-
-        // O2
-        connect(O2.chemical, chemical.O2) annotation (Line(
-            points={{-5.08852e-16,-4},{5.55112e-16,-40}},
-            color={208,104,0},
-            smooth=Smooth.None));
-        connect(u.O2, O2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="phaseChemicalBC");
-      end Phase;
 
       model Gas "BC for gas"
 
@@ -1734,9 +1494,12 @@ package BCs "Models for boundary conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Chemical.Species.Species H2(final n_vel=n_vel, redeclare
-            package Data = FCSys.Characteristics.H2.Gas) if inclH2 "Model"
-          annotation (Dialog(
+        FCSys.BCs.Chemical.Species.Species H2(
+          final inclLinX=inclLinX,
+          final inclLinY=inclLinY,
+          final inclLinZ=inclLinZ,
+          redeclare package Data = FCSys.Characteristics.H2.Gas) if inclH2
+          "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclH2), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -1750,9 +1513,12 @@ package BCs "Models for boundary conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Chemical.Species.Species H2O(final n_vel=n_vel, redeclare
-            package Data = FCSys.Characteristics.H2O.Gas) if inclH2O "Model"
-          annotation (Dialog(
+        FCSys.BCs.Chemical.Species.Species H2O(
+          final inclLinX=inclLinX,
+          final inclLinY=inclLinY,
+          final inclLinZ=inclLinZ,
+          redeclare package Data = FCSys.Characteristics.H2O.Gas) if inclH2O
+          "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -1766,9 +1532,12 @@ package BCs "Models for boundary conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Chemical.Species.Species N2(final n_vel=n_vel, redeclare
-            package Data = FCSys.Characteristics.N2.Gas) if inclN2 "Model"
-          annotation (Dialog(
+        FCSys.BCs.Chemical.Species.Species N2(
+          final inclLinX=inclLinX,
+          final inclLinY=inclLinY,
+          final inclLinZ=inclLinZ,
+          redeclare package Data = FCSys.Characteristics.N2.Gas) if inclN2
+          "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclN2), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -1782,22 +1551,31 @@ package BCs "Models for boundary conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Chemical.Species.Species O2(final n_vel=n_vel, redeclare
-            package Data = FCSys.Characteristics.O2.Gas) if inclO2 "Model"
-          annotation (Dialog(
+        FCSys.BCs.Chemical.Species.Species O2(
+          final inclLinX=inclLinX,
+          final inclLinY=inclLinY,
+          final inclLinZ=inclLinZ,
+          redeclare package Data = FCSys.Characteristics.O2.Gas) if inclO2
+          "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclO2), Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
+        // Note:  It would be helpful if Modelica allowed elements of expandable
+        // connectors to be named by the contents of a string variable and the
+        // name of an instance of a model was accessible through a string (like
+        // %name is expanded to be the name of the instance of the model).  Then,
+        // the connection equations that follow could be generic.
+
         // H2
         connect(H2.chemical, chemical.H2) annotation (Line(
             points={{-5.08852e-16,-4},{5.55112e-16,-40}},
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.H2, H2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1808,8 +1586,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.H2O, H2O.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1820,8 +1598,8 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.N2, N2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1832,14 +1610,16 @@ package BCs "Models for boundary conditions"
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.O2, O2.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
+            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+                -5.08852e-16,4}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
 
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="phaseChemicalBC");
+        annotation (
+          defaultComponentPrefixes="replaceable",
+          defaultComponentName="phaseChemicalBC",
+          Diagram(graphics));
       end Gas;
 
       model Graphite "BC for graphite"
@@ -1855,9 +1635,12 @@ package BCs "Models for boundary conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Chemical.Species.Species C(final n_vel=n_vel, redeclare
-            package Data = FCSys.Characteristics.C.Graphite) if inclC "Model"
-          annotation (Dialog(
+        FCSys.BCs.Chemical.Species.Species C(
+          final inclLinX=inclLinX,
+          final inclLinY=inclLinY,
+          final inclLinZ=inclLinZ,
+          redeclare package Data = FCSys.Characteristics.C.Graphite) if inclC
+          "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclC), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -1871,20 +1654,17 @@ package BCs "Models for boundary conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Chemical.Species.Species 'e-'(final n_vel=n_vel, redeclare
-            package Data = FCSys.Characteristics.'e-'.Graphite) if 'incle-'
-          "Model" annotation (Dialog(
+        FCSys.BCs.Chemical.Species.Species 'e-'(
+          final inclLinX=inclLinX,
+          final inclLinY=inclLinY,
+          final inclLinZ=inclLinZ,
+          redeclare package Data = FCSys.Characteristics.'e-'.Graphite) if
+          'incle-' "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable='incle-'), Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
-        // Note:  It would be helpful if Modelica allowed elements of expandable
-        // connectors to be named by the contents of a string variable and the
-        // name of an instance of a model was accessible through a string (like
-        // %name is expanded to be the name of the instance of the model).  Then,
-        // the connection equations that follow could be generic.
-
         // C
         connect(C.chemical, chemical.C) annotation (Line(
             points={{-5.08852e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
@@ -1928,9 +1708,12 @@ package BCs "Models for boundary conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Chemical.Species.Species C19HF37O5S(final n_vel=n_vel,
-            redeclare package Data = FCSys.Characteristics.C19HF37O5S.Solid)
-          if inclC19HF37O5S "Model" annotation (Dialog(
+        FCSys.BCs.Chemical.Species.Species C19HF37O5S(
+          final inclLinX=inclLinX,
+          final inclLinY=inclLinY,
+          final inclLinZ=inclLinZ,
+          redeclare package Data = FCSys.Characteristics.C19HF37O5S.Solid) if
+          inclC19HF37O5S "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclC19HF37O5S), Placement(transformation(extent={{-10,-10},
@@ -1944,9 +1727,12 @@ package BCs "Models for boundary conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Chemical.Species.Species H2O(final n_vel=n_vel, redeclare
-            package Data = FCSys.Characteristics.H2O.Gas) if inclH2O "Model"
-          annotation (Dialog(
+        FCSys.BCs.Chemical.Species.Species H2O(
+          final inclLinX=inclLinX,
+          final inclLinY=inclLinY,
+          final inclLinZ=inclLinZ,
+          redeclare package Data = FCSys.Characteristics.H2O.Gas) if inclH2O
+          "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -1959,9 +1745,12 @@ package BCs "Models for boundary conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Chemical.Species.Species 'H+'(final n_vel=n_vel, redeclare
-            package Data = FCSys.Characteristics.'H+'.Solid) if 'inclH+'
-          "Model" annotation (Dialog(
+        FCSys.BCs.Chemical.Species.Species 'H+'(
+          final inclLinX=inclLinX,
+          final inclLinY=inclLinY,
+          final inclLinZ=inclLinZ,
+          redeclare package Data = FCSys.Characteristics.'H+'.Solid) if
+          'inclH+' "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable='inclH+'), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -2019,23 +1808,6 @@ package BCs "Models for boundary conditions"
         extends BaseClasses.NullPhase;
 
         // Conditionally include species.
-        parameter Boolean inclC19HF37O5S=false
-          "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.BCs.Chemical.Species.Species C19HF37O5S(final n_vel=n_vel,
-            redeclare package Data = FCSys.Characteristics.C19HF37O5S.Solid)
-          if inclC19HF37O5S "Model" annotation (Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            enable=inclC19HF37O5S), Placement(transformation(extent={{-10,-10},
-                  {10,10}})));
         parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
           annotation (
           Evaluate=true,
@@ -2045,59 +1817,23 @@ package BCs "Models for boundary conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Chemical.Species.Species H2O(final n_vel=n_vel, redeclare
-            package Data = FCSys.Characteristics.H2O.Gas) if inclH2O "Model"
-          annotation (Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,10}})));
-        parameter Boolean 'inclH+'=false "<html>Protons (H<sup>+</sup>)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.BCs.Chemical.Species.Species 'H+'(final n_vel=n_vel, redeclare
-            package Data = FCSys.Characteristics.'H+'.Solid) if 'inclH+'
+        FCSys.BCs.Chemical.Species.Species H2O(
+          final inclLinX=inclLinX,
+          final inclLinY=inclLinY,
+          final inclLinZ=inclLinZ,
+          redeclare package Data = FCSys.Characteristics.H2O.Liquid) if inclH2O
           "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
-            enable='inclH+'), Placement(transformation(extent={{-10,-10},{10,10}})));
+            enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
-        // C19HF37O5S
-        connect(C19HF37O5S.chemical, chemical.C19HF37O5S) annotation (Line(
-            points={{-5.08852e-16,-4},{5.55112e-16,-40}},
-            color={208,104,0},
-            smooth=Smooth.None));
-        connect(u.C19HF37O5S, C19HF37O5S.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-
         // H2O
         connect(H2O.chemical, chemical.H2O) annotation (Line(
             points={{-5.08852e-16,-4},{5.55112e-16,-40}},
             color={208,104,0},
             smooth=Smooth.None));
         connect(u.H2O, H2O.u) annotation (Line(
-            points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-                4}},
-            color={0,0,127},
-            thickness=0.5,
-            smooth=Smooth.None));
-
-        // H+
-        connect('H+'.chemical, chemical.'H+') annotation (Line(
-            points={{-5.08852e-16,-4},{5.55112e-16,-40}},
-            color={208,104,0},
-            smooth=Smooth.None));
-        connect(u.'H+', 'H+'.u) annotation (Line(
             points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
                 4}},
             color={0,0,127},
@@ -2120,11 +1856,22 @@ package BCs "Models for boundary conditions"
 
         model NullPhase "Empty BC for a phase (no species)"
           extends FCSys.BaseClasses.Icons.BCs.Single;
-          parameter Integer n_vel(
-            final min=1,
-            final max=3) = 1
-            "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>"
-            annotation (HideResult=true);
+
+          parameter Boolean inclLinX=true "X" annotation (
+            Evaluate=true,
+            HideResult=true,
+            choices(__Dymola_checkBox=true),
+            Dialog(group="Axes with linear momentum included", compact=true));
+          parameter Boolean inclLinY=false "Y" annotation (
+            Evaluate=true,
+            HideResult=true,
+            choices(__Dymola_checkBox=true),
+            Dialog(group="Axes with linear momentum included", compact=true));
+          parameter Boolean inclLinZ=false "Z" annotation (
+            Evaluate=true,
+            HideResult=true,
+            choices(__Dymola_checkBox=true),
+            Dialog(group="Axes with linear momentum included", compact=true));
 
           FCSys.Connectors.ChemicalBus chemical
             "Multi-species connector for material"
@@ -2148,27 +1895,22 @@ package BCs "Models for boundary conditions"
       extends Modelica.Icons.Package;
 
       model Species
-        "<html>BCs for the <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialChemical\">Chemical</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
+        "<html>BCs for the <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connector</html>"
 
         import FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial;
-        import FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMomentum;
-        import FCSys.BCs.Chemical.Species.BaseClasses.BCTypeEnthalpy;
+        import FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMechanical;
+        import FCSys.BCs.Chemical.Species.BaseClasses.BCTypeFluid;
         extends FCSys.BaseClasses.Icons.BCs.Single;
 
-        parameter Integer n_vel(
-          final min=1,
-          final max=3) = 1
-          "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>"
-          annotation (HideResult=true);
         replaceable package Data =
             FCSys.Characteristics.BaseClasses.Characteristic constrainedby
           FCSys.Characteristics.BaseClasses.Characteristic
           "Characteristic data of the species" annotation (
-          Dialog(group="Material properties"),
-          __Dymola_choicesAllMatching=true,
-          Placement(transformation(extent={{-60,40},{-40,60}}),
-              iconTransformation(extent={{-10,90},{10,110}})));
+            __Dymola_choicesAllMatching=true, Placement(transformation(extent={
+                  {-60,40},{-40,60}}), iconTransformation(extent={{-10,90},{10,
+                  110}})));
 
+        // Material
         parameter BCTypeMaterial materialBC=BCTypeMaterial.PotentialElectrochemicalPerTemperature
           "Type of BC"
           annotation (Dialog(group="Material", __Dymola_descriptionLabel=true));
@@ -2194,99 +1936,124 @@ package BCs "Models for boundary conditions"
               rotation=270,
               origin={-90,10})));
 
-        // 1st component of velocity
-        parameter BCTypeMomentum vel1BC=BCTypeMomentum.Velocity "Type of BC"
-          annotation (Dialog(
-            group="1st component of velocity",
-            enable=n_vel > 0,
+        // X component of linear momentum
+        parameter Boolean inclLinX=true "Include" annotation (
+          Evaluate=true,
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            group="X component of linear momentum",
+            __Dymola_descriptionLabel=true,
+            compact=true));
+        parameter BCTypeMechanical linXBC=BCTypeMechanical.Velocity
+          "Type of BC" annotation (Dialog(
+            group="X component of linear momentum",
+            enable=inclLinX,
             __Dymola_descriptionLabel=true));
-        parameter Boolean internalVel1=true "Use internal specification"
+        parameter Boolean internalLinX=true "Use internal specification"
           annotation (
           Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
-            group="1st component of velocity",
+            group="X component of linear momentum",
+            enable=inclLinX,
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        replaceable Modelica.Blocks.Sources.Constant vel1Spec(k(start=0)) if
-          internalVel1 constrainedby Modelica.Blocks.Interfaces.SO
+        replaceable Modelica.Blocks.Sources.Constant linXSpec(k(start=0)) if
+          inclLinX and internalLinX constrainedby Modelica.Blocks.Interfaces.SO
           "Internal specification" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
-            group="1st component of velocity",
+            group="X component of linear momentum",
             __Dymola_descriptionLabel=true,
-            enable=internalVel1),
+            enable=inclLinX and internalLinX),
           Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-50,10})));
 
-        // 2nd component of velocity
-        parameter BCTypeMomentum vel2BC=BCTypeMomentum.Velocity "Type of BC"
-          annotation (Dialog(
-            group="2nd component of velocity",
-            enable=n_vel > 1,
+        // Y component of linear momentum
+        parameter Boolean inclLinY=false "Include" annotation (
+          Evaluate=true,
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            group="Y component of linear momentum",
+            __Dymola_descriptionLabel=true,
+            compact=true));
+        parameter BCTypeMechanical linYBC=BCTypeMechanical.Velocity
+          "Type of BC" annotation (Dialog(
+            group="Y component of linear momentum",
+            enable=inclLinY,
             __Dymola_descriptionLabel=true));
-        parameter Boolean internalVel2=true "Use internal specification"
+        parameter Boolean internalLinY=true "Use internal specification"
           annotation (
           Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
-            group="2nd component of velocity",
-            enable=n_vel > 1,
+            group="Y component of linear momentum",
+            enable=inclLinY,
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        replaceable Modelica.Blocks.Sources.Constant vel2Spec(k(start=0)) if
-          internalVel2 and n_vel > 1 constrainedby
-          Modelica.Blocks.Interfaces.SO "Internal specification" annotation (
+        replaceable Modelica.Blocks.Sources.Constant linYSpec(k(start=0)) if
+          inclLinY and internalLinY constrainedby Modelica.Blocks.Interfaces.SO
+          "Internal specification" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
-            group="2nd component of velocity",
-            enable=n_vel > 1,
+            group="Y component of linear momentum",
+            enable=inclLinY and internalLinY,
             __Dymola_descriptionLabel=true,
-            enable=internalVel2),
+            enable=internalLinY),
           Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={30,10})));
 
-        // 3rd component of velocity
-        parameter BCTypeMomentum vel3BC=BCTypeMomentum.Velocity "Type of BC"
-          annotation (Dialog(
-            group="3rd component of velocity",
-            enable=n_vel > 2,
+        // Z component of linear momentum
+        parameter Boolean inclLinZ=false "Include" annotation (
+          Evaluate=true,
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
+            group="Z component of linear momentum",
+            __Dymola_descriptionLabel=true,
+            compact=true));
+        parameter BCTypeMechanical linZBC=BCTypeMechanical.Velocity
+          "Type of BC" annotation (Dialog(
+            group="Z component of linear momentum",
+            enable=inclLinZ,
             __Dymola_descriptionLabel=true));
-        parameter Boolean internalVel3=true "Use internal specification"
+        parameter Boolean internalLinZ=true "Use internal specification"
           annotation (
           Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
-            group="3rd component of velocity",
-            enable=n_vel > 2,
+            group="Z component of linear momentum",
+            enable=inclLinZ,
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        replaceable Modelica.Blocks.Sources.Constant vel3Spec(k(start=0)) if
-          internalVel3 and n_vel > 2 constrainedby
-          Modelica.Blocks.Interfaces.SO "Internal specification" annotation (
+        replaceable Modelica.Blocks.Sources.Constant linZSpec(k(start=0)) if
+          inclLinZ and internalLinZ constrainedby Modelica.Blocks.Interfaces.SO
+          "Internal specification" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
-            group="3rd component of velocity",
-            enable=n_vel > 2,
+            group="Z component of linear momentum",
+            enable=inclLinZ and internalLinZ,
             __Dymola_descriptionLabel=true,
-            enable=internalVel3),
+            enable=internalLinZ),
           Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-10,10})));
 
         // Enthalpy
-        parameter BCTypeMomentum enthalpyBC=BCTypeEnthalpy.EnthalpyMassic
+        parameter BCTypeMechanical fluidBC=BCTypeFluid.EnthalpyMassic
           "Type of BC"
           annotation (Dialog(group="Enthalpy", __Dymola_descriptionLabel=true));
-        parameter Boolean internalEnth=true "Use internal specification"
+        parameter Boolean internalFluid=true "Use internal specification"
           annotation (
           Evaluate=true,
           HideResult=true,
@@ -2295,21 +2062,21 @@ package BCs "Models for boundary conditions"
             group="Enthalpy",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        replaceable Modelica.Blocks.Sources.Constant enthSpec(k(start=Data.h()))
-          if internalEnth constrainedby Modelica.Blocks.Interfaces.SO
-          "Internal specification" annotation (
+        replaceable Modelica.Blocks.Sources.Constant fluidSpec(k(start=Data.h()
+                /Data.m)) if internalFluid constrainedby
+          Modelica.Blocks.Interfaces.SO "Internal specification" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             group="Enthalpy",
             __Dymola_descriptionLabel=true,
-            enable=internalEnth),
+            enable=internalFluid),
           Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={70,10})));
 
         Connectors.ChemicalOutput chemical(
-          final n_vel=n_vel,
+          final n_lin=n_lin,
           final formula=Data.formula,
           final m=Data.m)
           "Single-species connector for material, with advection of linear momentum and enthalpy"
@@ -2324,7 +2091,10 @@ package BCs "Models for boundary conditions"
               origin={0,40})));
 
       protected
-        Connectors.RealInputInternal u_N(final unit=if materialBC ==
+        final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
+          "Number of components of linear momentum" annotation (Evaluate=true);
+
+        Connectors.RealInputInternal u_material(final unit=if materialBC ==
               BCTypeMaterial.PotentialElectrochemicalPerTemperature then "1"
                else "N/T") if not internalMaterial "Material signal"
           annotation (Placement(transformation(
@@ -2334,43 +2104,45 @@ package BCs "Models for boundary conditions"
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,40})));
-        Connectors.RealInputInternal u_Phi_1(final unit="l/T") if not
-          internalVel1 and n_vel > 0 "Signal for the 1st component of velocity"
-          annotation (Placement(transformation(
+        Connectors.RealInputInternal u_lin_x(final unit="l/T") if not
+          internalLinX and inclLinX
+          "Signal for the x component of linear momentum" annotation (Placement(
+              transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-30,30}),iconTransformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,40})));
-        Connectors.RealInputInternal u_Phi_2(final unit="l/T") if not
-          internalVel2 and n_vel > 1 "Signal for the 2nd component of velocity"
-          annotation (Placement(transformation(
+        Connectors.RealInputInternal u_lin_y(final unit="l/T") if not
+          internalLinY and inclLinY
+          "Signal for the y component of linear momentum" annotation (Placement(
+              transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={10,30}), iconTransformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,40})));
-        Connectors.RealInputInternal u_Phi3(final unit="l/T") if not
-          internalVel3 and n_vel > 2 "Signal for the 3rd component of velocity"
-          annotation (Placement(transformation(
+        Connectors.RealInputInternal u_lin_z(final unit="l/T") if not
+          internalLinZ and inclLinZ
+          "Signal for the z component of linear momentum" annotation (Placement(
+              transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={50,30}), iconTransformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,40})));
-        Connectors.RealInputInternal u_H(final unit="m.l2/(N.T2)") if not
-          internalEnth "Signal for enthalpy" annotation (Placement(
-              transformation(
+        Connectors.RealInputInternal u_fluid(final unit="l2/T2") if not
+          internalFluid "Fluid signal" annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={90,30}), iconTransformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,40})));
-        Connectors.RealInputInternal u_N_int "Internal material signal"
+        Connectors.RealInputInternal u_material_int "Internal material signal"
           annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
@@ -2378,16 +2150,15 @@ package BCs "Models for boundary conditions"
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,40})));
-        Connectors.RealInputInternal u_Phi_int[n_vel]
-          "Internal signal for linear momentum" annotation (Placement(
-              transformation(
+        Connectors.RealInputInternal u_lin_int[n_lin]
+          "Internal mechanical signal" annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={10,-20}),iconTransformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,40})));
-        Connectors.RealInputInternal u_H_int "Internal signal for enthalpy"
+        Connectors.RealInputInternal u_fluid_int "Internal fluid signal"
           annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
@@ -2400,38 +2171,38 @@ package BCs "Models for boundary conditions"
         // Material
         if materialBC == BCTypeMaterial.PotentialElectrochemicalPerTemperature
              then
-          chemical.muPerT = u_N_int;
+          chemical.muPerT = u_material_int;
         else
-          chemical.Ndot = u_N_int;
+          chemical.Ndot = u_material_int;
         end if;
 
-        // 1st component of velocity
-        if n_vel > 0 then
-          //  if bCTypeMomentum1 == BCTypeMomentum.Velocity then
-          chemical.phi[1] = u_Phi_int[1];
+        // X component of linear momentum
+        if inclLinX then
+          //  if linXBC == BCTypeMechanical.Velocity then
+          chemical.phi[1] = u_lin_int[1];
           //  end if;
         end if;
 
-        // 2nd component of velocity
-        if n_vel > 1 then
-          //  if bCTypeMomentum2 == BCTypeMomentum.Velocity then
-          chemical.phi[2] = u_Phi_int[2];
+        // Y component of linear momentum
+        if inclLinY then
+          //  if linYBC == BCTypeMechanical.Velocity then
+          chemical.phi[2] = u_lin_int[2];
           //  end if;
         end if;
 
-        // 3rd component of velocity
-        if n_vel > 2 then
-          //  if bCTypeMomentum3 == BCTypeMomentum.Velocity then
-          chemical.phi[3] = u_Phi_int[3];
+        // Z component of linear momentum
+        if inclLinZ then
+          //  if linZBC == BCTypeMechanical.Velocity then
+          chemical.phi[3] = u_lin_int[3];
           //  end if;
         end if;
 
         // Enthalpy
-        //  if enthalpyBC== BCTypeEnthalpy.EnthalpyMassic then
-        chemical.hbar = u_H_int;
+        //  if fluidBC== BCTypeFluid.EnthalpyMassic then
+        chemical.hbar = u_fluid_int;
         //  end if;
 
-        connect(u.N, u_N) annotation (Line(
+        connect(u.material, u_material) annotation (Line(
             points={{5.55112e-16,60},{5.55112e-16,40},{-70,40},{-70,30}},
             color={0,0,127},
             thickness=0.5,
@@ -2439,7 +2210,7 @@ package BCs "Models for boundary conditions"
             string="%first",
             index=-1,
             extent={{-6,3},{-6,3}}));
-        connect(u.Phi_1, u_Phi_1) annotation (Line(
+        connect(u.linX, u_lin_x) annotation (Line(
             points={{5.55112e-16,60},{5.55112e-16,40},{-30,40},{-30,30}},
             color={0,0,127},
             thickness=0.5,
@@ -2447,7 +2218,7 @@ package BCs "Models for boundary conditions"
             string="%first",
             index=-1,
             extent={{-6,3},{-6,3}}));
-        connect(u.Phi_2, u_Phi_2) annotation (Line(
+        connect(u.linY, u_lin_y) annotation (Line(
             points={{5.55112e-16,60},{5.55112e-16,40},{10,40},{10,30}},
             color={0,0,127},
             thickness=0.5,
@@ -2455,7 +2226,7 @@ package BCs "Models for boundary conditions"
             string="%first",
             index=-1,
             extent={{-6,3},{-6,3}}));
-        connect(u.Phi3, u_Phi3) annotation (Line(
+        connect(u.linZ, u_lin_z) annotation (Line(
             points={{5.55112e-16,60},{5.55112e-16,40},{50,40},{50,30}},
             color={0,0,127},
             thickness=0.5,
@@ -2463,7 +2234,7 @@ package BCs "Models for boundary conditions"
             string="%first",
             index=-1,
             extent={{-6,3},{-6,3}}));
-        connect(u.H, u_H) annotation (Line(
+        connect(u.fluid, u_fluid) annotation (Line(
             points={{5.55112e-16,60},{5.55112e-16,40},{90,40},{90,30}},
             color={0,0,127},
             thickness=0.5,
@@ -2471,43 +2242,43 @@ package BCs "Models for boundary conditions"
             string="%first",
             index=-1,
             extent={{-6,3},{-6,3}}));
-        connect(u_N_int, u_N) annotation (Line(
+        connect(u_material_int, u_material) annotation (Line(
             points={{-70,-20},{-70,30}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(u_Phi_1, u_Phi_int[1]) annotation (Line(
+        connect(u_lin_x, u_lin_int[1]) annotation (Line(
             points={{-30,30},{-30,-8},{10,-8},{10,-20}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(u_Phi_2, u_Phi_int[2]) annotation (Line(
+        connect(u_lin_y, u_lin_int[2]) annotation (Line(
             points={{10,30},{10,-20}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(u_Phi3, u_Phi_int[3]) annotation (Line(
+        connect(u_lin_z, u_lin_int[3]) annotation (Line(
             points={{50,30},{50,-8},{10,-8},{10,-20}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(u_H, u_H_int) annotation (Line(
+        connect(u_fluid, u_fluid_int) annotation (Line(
             points={{90,30},{90,-20}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(materialSpec.y, u_N_int) annotation (Line(
+        connect(materialSpec.y, u_material_int) annotation (Line(
             points={{-90,-1},{-90,-8},{-70,-8},{-70,-20}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(vel1Spec.y, u_Phi_int[1]) annotation (Line(
+        connect(linXSpec.y, u_lin_int[1]) annotation (Line(
             points={{-50,-1},{-50,-8},{10,-8},{10,-20}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(vel2Spec.y, u_Phi_int[2]) annotation (Line(
+        connect(linYSpec.y, u_lin_int[2]) annotation (Line(
             points={{30,-1},{30,-8},{10,-8},{10,-20}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(vel3Spec.y, u_Phi_int[3]) annotation (Line(
+        connect(linZSpec.y, u_lin_int[3]) annotation (Line(
             points={{-10,-1},{-10,-8},{10,-8},{10,-20}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(enthSpec.y, u_H_int) annotation (Line(
+        connect(fluidSpec.y, u_fluid_int) annotation (Line(
             points={{70,-1},{70,-8},{90,-8},{90,-20}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -2525,13 +2296,12 @@ package BCs "Models for boundary conditions"
             PotentialElectrochemicalPerTemperature
               "Prescribed quotient of electrochemical potential and temperature",
 
-            Current "Prescribed current") "Types of BCs for material";
+            Current "Prescribed current") "Types of material BCs";
 
-        type BCTypeMomentum = enumeration(
-            Velocity "Prescribed velocity") "Types of BCs for linear momentum";
-        type BCTypeEnthalpy = enumeration(
-            EnthalpyMassic "Prescribed massic enthalpy")
-          "Types of BCs for enthalpy";
+        type BCTypeMechanical = enumeration(
+            Velocity "Prescribed velocity") "Types of mechanical BCs";
+        type BCTypeFluid = enumeration(
+            EnthalpyMassic "Prescribed massic enthalpy") "Types of fluid BCs";
       end BaseClasses;
     end Species;
     annotation (Documentation(info="<html><p>Since the connectors in
@@ -2558,19 +2328,16 @@ boundary condition</a> models.
       "<html>BC for the <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Phases\">Phase</a> model</html>"
       extends FCSys.BaseClasses.Icons.BCs.Single;
 
-      parameter Integer n_vel(
-        final min=0,
-        final max=3) = 1
-        "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>";
-
-      // Additivity of pressure
-      replaceable FCSys.BCs.InertAmagat.Volume.Volume volBC(final n_vel=n_vel)
-        constrainedby FCSys.BCs.InertAmagat.Volume.BaseClasses.PartialBC
+      // Volume
+      replaceable Volume.Volume volumeBC(
+        final inclLinX=inclLinX,
+        final inclLinY=inclLinY,
+        final inclLinZ=inclLinZ) constrainedby Volume.BaseClasses.PartialBC
         "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Volume", __Dymola_descriptionLabel=true),
         Placement(transformation(extent={{-90,-26},{-70,-6}})));
-      parameter Boolean internalVol=true "Use internal specification"
+      parameter Boolean internalVolume=true "Use internal specification"
         annotation (
         Evaluate=true,
         HideResult=true,
@@ -2579,132 +2346,161 @@ boundary condition</a> models.
           group="Volume",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      replaceable Modelica.Blocks.Sources.Constant volSpec(k(start=1*U.cm^3))
-        if internalVol constrainedby Modelica.Blocks.Interfaces.SO
+      replaceable Modelica.Blocks.Sources.Constant volumeSpec(k(start=1*U.cm^3))
+        if internalVolume constrainedby Modelica.Blocks.Interfaces.SO
         "Internal specification" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
           group="Volume",
           __Dymola_descriptionLabel=true,
-          enable=internalVol),
+          enable=internalVolume),
         Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-90,20})));
 
-      // 1st component of velocity
-      replaceable FCSys.BCs.InertAmagat.Momentum.Force lin1BC(final n_vel=n_vel)
-        constrainedby FCSys.BCs.InertAmagat.Momentum.BaseClasses.PartialBC
+      // X component of linear momentum
+      parameter Boolean inclLinX=true "Include" annotation (
+        Evaluate=true,
+        HideResult=true,
+        choices(__Dymola_checkBox=true),
+        Dialog(
+          group="X component of linear momentum",
+          __Dymola_descriptionLabel=true,
+          compact=true));
+      replaceable Mechanical.Force linXBC(
+        final inclLinX=inclLinX,
+        final inclLinY=inclLinY,
+        final inclLinZ=inclLinZ) constrainedby Mechanical.BaseClasses.PartialBC
         "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
-          group="1st axis",
-          enable=n_vel > 0,
+          group="X component of linear momentum",
+          enable=inclLinX,
           __Dymola_descriptionLabel=true),
         Placement(transformation(extent={{-50,-26},{-30,-6}})));
-      parameter Boolean internalLin1=true "Use internal specification"
+      parameter Boolean internalLinX=true "Use internal specification"
         annotation (
         Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(
-          group="1st axis",
-          enable=n_vel > 0,
+          group="X component of linear momentum",
+          enable=inclLinX,
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      replaceable Modelica.Blocks.Sources.Constant lin1Spec(k(start=0)) if
-        internalLin1 constrainedby Modelica.Blocks.Interfaces.SO
+      replaceable Modelica.Blocks.Sources.Constant linXSpec(k(start=0)) if
+        inclLinX and internalLinX constrainedby Modelica.Blocks.Interfaces.SO
         "Internal signal specification" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
-          group="1st axis",
-          enable=n_vel > 0,
+          group="X component of linear momentum",
+          enable=inclLinX and internalLinX,
           __Dymola_descriptionLabel=true,
-          enable=internalLin1),
+          enable=internalLinX),
         Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-50,20})));
 
-      // 2nd component of velocity
-      replaceable FCSys.BCs.InertAmagat.Momentum.Force lin2BC(final n_vel=n_vel)
-        if n_vel > 1 constrainedby
-        FCSys.BCs.InertAmagat.Momentum.BaseClasses.PartialBC
-        "Type of condition" annotation (
+      // Y component of linear momentum
+      parameter Boolean inclLinY=true "Include" annotation (
+        Evaluate=true,
+        HideResult=true,
+        choices(__Dymola_checkBox=true),
+        Dialog(
+          group="Y component of linear momentum",
+          __Dymola_descriptionLabel=true,
+          compact=true));
+      replaceable Mechanical.Force linYBC(
+        final inclLinX=inclLinX,
+        final inclLinY=inclLinY,
+        final inclLinZ=inclLinZ) if inclLinY constrainedby
+        Mechanical.BaseClasses.PartialBC "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
-          group="2nd component of velocity",
-          enable=n_vel > 1,
+          group="Y component of linear momentum",
+          enable=inclLinY,
           __Dymola_descriptionLabel=true),
         Placement(transformation(extent={{-10,-26},{10,-6}})));
-      parameter Boolean internalLin2=true "Use internal specification"
+      parameter Boolean internalLinY=true "Use internal specification"
         annotation (
         Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(
-          group="2nd component of velocity",
-          enable=n_vel > 1,
+          group="Y component of linear momentum",
+          enable=inclLinY,
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      replaceable Modelica.Blocks.Sources.Constant lin2Spec(k(start=0)) if
-        internalLin2 and n_vel > 1 constrainedby Modelica.Blocks.Interfaces.SO
+      replaceable Modelica.Blocks.Sources.Constant linYSpec(k(start=0)) if
+        inclLinY and internalLinY constrainedby Modelica.Blocks.Interfaces.SO
         "Internal specification" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
-          group="2nd component of velocity",
-          enable=n_vel > 1 and internalLin2,
+          group="Y component of linear momentum",
+          enable=inclLinY and internalLinY,
           __Dymola_descriptionLabel=true,
-          enable=internalLin2),
+          enable=internalLinY),
         Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-10,20})));
 
-      // 3rd component of velocity
-      replaceable FCSys.BCs.InertAmagat.Momentum.Force lin3BC(final n_vel=n_vel)
-        if n_vel > 2 constrainedby
-        FCSys.BCs.InertAmagat.Momentum.BaseClasses.PartialBC
-        "Type of condition" annotation (
+      // Z component of linear momentum
+      parameter Boolean inclLinZ=true "Include" annotation (
+        Evaluate=true,
+        HideResult=true,
+        choices(__Dymola_checkBox=true),
+        Dialog(
+          group="Z component of linear momentum",
+          __Dymola_descriptionLabel=true,
+          compact=true));
+      replaceable Mechanical.Force linZBC(
+        final inclLinX=inclLinX,
+        final inclLinY=inclLinY,
+        final inclLinZ=inclLinZ) if inclLinZ constrainedby
+        Mechanical.BaseClasses.PartialBC "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
-          group="3rd component of velocity",
-          enable=n_vel > 2,
+          group="Z component of linear momentum",
+          enable=inclLinZ,
           __Dymola_descriptionLabel=true),
         Placement(transformation(extent={{30,-26},{50,-6}})));
-      parameter Boolean internalLin3=true "Use internal specification"
+      parameter Boolean internalLinZ=true "Use internal specification"
         annotation (
         Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(
-          group="3rd component of velocity",
-          enable=n_vel > 2,
+          group="Z component of linear momentum",
+          enable=inclLinZ,
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      replaceable Modelica.Blocks.Sources.Constant lin3Spec(k(start=0)) if
-        internalLin3 and n_vel > 2 constrainedby Modelica.Blocks.Interfaces.SO
+      replaceable Modelica.Blocks.Sources.Constant linZSpec(k(start=0)) if
+        inclLinZ and internalLinZ constrainedby Modelica.Blocks.Interfaces.SO
         "Internal specification" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
-          group="3rd component of velocity",
-          enable=n_vel > 2 and internalLin3,
+          group="Z component of linear momentum",
+          enable=inclLinZ and internalLinZ,
           __Dymola_descriptionLabel=true,
-          enable=internalLin3),
+          enable=internalLinZ),
         Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={30,20})));
 
       // Heat
-      replaceable FCSys.BCs.InertAmagat.Heat.HeatFlowRate heatBC(final n_vel=
-            n_vel) constrainedby
-        FCSys.BCs.InertAmagat.Heat.BaseClasses.PartialBC "Type of condition"
-        annotation (
+      replaceable Thermal.HeatFlowRate thermalBC(
+        final inclLinX=inclLinX,
+        final inclLinY=inclLinY,
+        final inclLinZ=inclLinZ) constrainedby Thermal.BaseClasses.PartialBC
+        "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Heat", __Dymola_descriptionLabel=true),
         Placement(transformation(extent={{70,-26},{90,-6}})));
-      parameter Boolean internalHeat=true "Use internal specification"
+      parameter Boolean internalThermal=true "Use internal specification"
         annotation (
         Evaluate=true,
         HideResult=true,
@@ -2713,22 +2509,23 @@ boundary condition</a> models.
           group="Heat",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      replaceable Modelica.Blocks.Sources.Constant heatSpec(k(start=0)) if
-        internalHeat constrainedby Modelica.Blocks.Interfaces.SO
+      replaceable Modelica.Blocks.Sources.Constant thermalSpec(k(start=0)) if
+        internalThermal constrainedby Modelica.Blocks.Interfaces.SO
         "Internal specification" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
           group="Heat",
           __Dymola_descriptionLabel=true,
-          enable=internalHeat),
+          enable=internalThermal),
         Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={70,20})));
 
       Connectors.RealInputBus u "Input bus for external signal sources"
-        annotation (HideResult=not (internalVol or internalLin1 or internalLin2
-             or internalLin3 or internalHeat), Placement(transformation(
+        annotation (HideResult=not (internalVolume or internalLinX or
+            internalLinY or internalLinZ or internalThermal), Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={0,70}), iconTransformation(
@@ -2736,48 +2533,50 @@ boundary condition</a> models.
             rotation=270,
             origin={0,40})));
 
-      Connectors.InertAmagat inert(final n_vel=n_vel)
+      Connectors.InertAmagat inert(final n_lin=countTrue({inclLinX,inclLinY,
+            inclLinZ}))
         "Single-species connector for linear momentum and heat, with additivity of pressure"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
+
     protected
-      Connectors.RealInputInternal u_N if not internalVol
-        "External material signal" annotation (Placement(transformation(
+      Connectors.RealInputInternal u_volume if not internalVolume
+        "External signal for volume" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-70,40}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-60,40})));
-      Connectors.RealInputInternal u_Phi_1 if not internalLin1
-        "External signal for 1st axis of linear momentum" annotation (Placement(
-            transformation(
+      Connectors.RealInputInternal u_lin_x if not internalLinX
+        "External signal for X component of linear momentum" annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-30,40}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-20,40})));
-      Connectors.RealInputInternal u_Phi_2 if not internalLin2 and n_vel > 1
-        "External signal for 2nd axis of linear momentum" annotation (Placement(
-            transformation(
+      Connectors.RealInputInternal u_lin_y if not internalLinY and inclLinY
+        "External signal for Y component of linear momentum" annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={10,40}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-20,40})));
-      Connectors.RealInputInternal u_Phi3 if not internalLin3 and n_vel > 2
-        "External signal for 3rd axis of linear momentum" annotation (Placement(
-            transformation(
+      Connectors.RealInputInternal u_lin_z if not internalLinZ and inclLinZ
+        "External signal for Z component of linear momentum" annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={50,40}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-20,40})));
-      Connectors.RealInputInternal u_Q if not internalHeat
-        "External signal for heat" annotation (Placement(transformation(
+      Connectors.RealInputInternal u_thermal if not internalThermal
+        "External thermal signal" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={90,40}),iconTransformation(
@@ -2786,20 +2585,20 @@ boundary condition</a> models.
             origin={60,40})));
 
     equation
-      // Material
-      connect(volBC.inert, inert) annotation (Line(
+      // Volume
+      connect(volumeBC.inert, inert) annotation (Line(
           points={{-80,-20},{-80,-30},{5.55112e-16,-30},{5.55112e-16,-40}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect(volSpec.y, volBC.u) annotation (Line(
+      connect(volumeSpec.y, volumeBC.u) annotation (Line(
           points={{-90,9},{-90,0},{-80,0},{-80,-12}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(u_N, volBC.u) annotation (Line(
+      connect(u_volume, volumeBC.u) annotation (Line(
           points={{-70,40},{-70,0},{-80,0},{-80,-12}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(u.N, u_N) annotation (Line(
+      connect(u.volume, u_volume) annotation (Line(
           points={{5.55112e-16,70},{0,70},{0,50},{-70,50},{-70,40}},
           color={0,0,127},
           thickness=0.5,
@@ -2808,20 +2607,20 @@ boundary condition</a> models.
           index=-1,
           extent={{-6,3},{-6,3}}));
 
-      // 1st component of velocity
-      connect(lin1BC.inert, inert) annotation (Line(
+      // X component of linear momentum
+      connect(linXBC.inert, inert) annotation (Line(
           points={{-40,-20},{-40,-30},{5.55112e-16,-30},{5.55112e-16,-40}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect(lin1Spec.y, lin1BC.u) annotation (Line(
+      connect(linXSpec.y, linXBC.u) annotation (Line(
           points={{-50,9},{-50,0},{-40,0},{-40,-12}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(u_Phi_1, lin1BC.u) annotation (Line(
+      connect(u_lin_x, linXBC.u) annotation (Line(
           points={{-30,40},{-30,0},{-40,0},{-40,-12}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(u.Phi_1, u_Phi_1) annotation (Line(
+      connect(u.linX, u_lin_x) annotation (Line(
           points={{5.55112e-16,70},{0,70},{0,50},{-30,50},{-30,40}},
           color={0,0,127},
           thickness=0.5,
@@ -2830,21 +2629,21 @@ boundary condition</a> models.
           index=-1,
           extent={{-6,3},{-6,3}}));
 
-      // 2nd component of velocity
-      connect(lin2BC.inert, inert) annotation (Line(
+      // Y component of linear momentum
+      connect(linYBC.inert, inert) annotation (Line(
           points={{6.10623e-16,-20},{6.10623e-16,-30},{5.55112e-16,-30},{
               5.55112e-16,-40}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect(lin2Spec.y, lin2BC.u) annotation (Line(
+      connect(linYSpec.y, linYBC.u) annotation (Line(
           points={{-10,9},{-10,0},{0,0},{0,-12},{6.10623e-16,-12}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(u_Phi_2, lin2BC.u) annotation (Line(
+      connect(u_lin_y, linYBC.u) annotation (Line(
           points={{10,40},{10,0},{6.10623e-16,0},{6.10623e-16,-12}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(u.Phi_2, u_Phi_2) annotation (Line(
+      connect(u.linY, u_lin_y) annotation (Line(
           points={{5.55112e-16,70},{0,70},{0,50},{10,50},{10,40}},
           color={0,0,127},
           thickness=0.5,
@@ -2853,20 +2652,20 @@ boundary condition</a> models.
           index=-1,
           extent={{-6,3},{-6,3}}));
 
-      // 3rd component of velocity
-      connect(lin3BC.inert, inert) annotation (Line(
+      // Z component of linear momentum
+      connect(linZBC.inert, inert) annotation (Line(
           points={{40,-20},{40,-30},{5.55112e-16,-30},{5.55112e-16,-40}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect(lin3Spec.y, lin3BC.u) annotation (Line(
+      connect(linZSpec.y, linZBC.u) annotation (Line(
           points={{30,9},{30,0},{40,0},{40,-12}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(u_Phi3, lin3BC.u) annotation (Line(
+      connect(u_lin_z, linZBC.u) annotation (Line(
           points={{50,40},{50,0},{40,0},{40,-12}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(u.Phi3, u_Phi3) annotation (Line(
+      connect(u.linZ, u_lin_z) annotation (Line(
           points={{5.55112e-16,70},{0,70},{0,50},{50,50},{50,40}},
           color={0,0,127},
           thickness=0.5,
@@ -2876,19 +2675,19 @@ boundary condition</a> models.
           extent={{-6,3},{-6,3}}));
 
       // Heat
-      connect(heatBC.inert, inert) annotation (Line(
+      connect(thermalBC.inert, inert) annotation (Line(
           points={{80,-20},{80,-30},{5.55112e-16,-30},{5.55112e-16,-40}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect(heatSpec.y, heatBC.u) annotation (Line(
+      connect(thermalSpec.y, thermalBC.u) annotation (Line(
           points={{70,9},{70,0},{80,0},{80,-12}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(u_Q, heatBC.u) annotation (Line(
+      connect(u_thermal, thermalBC.u) annotation (Line(
           points={{90,40},{90,0},{80,0},{80,-12}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(u.Q, u_Q) annotation (Line(
+      connect(u.thermal, u_thermal) annotation (Line(
           points={{5.55112e-16,70},{0,70},{0,50},{90,50},{90,40}},
           color={0,0,127},
           thickness=0.5,
@@ -2905,37 +2704,39 @@ boundary condition</a> models.
     package Volume "BCs for additivity of volume"
       extends Modelica.Icons.Package;
 
+      model Pressure "Prescribed pressure"
+        extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.Pressure,
+            redeclare Connectors.RealInput u(final unit="m/(l.T2)"));
+
+      equation
+        inert.p = u;
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="volumeBC");
+      end Pressure;
+
       model Volume "Prescribed volume"
         extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.Volume,
             redeclare Connectors.RealInput u(final unit="l3"));
       equation
         inert.V = u;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
-            ="volBC");
+            ="volumeBC");
       end Volume;
-
-      model Pressure "Prescribed pressure"
-        extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.Pressure,
-            redeclare Connectors.RealInput u(final unit="m/(l.T2)"));
-      equation
-        inert.p = u;
-        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
-            ="volBC");
-      end Pressure;
 
       package BaseClasses "Base classes (not for direct use)"
         extends Modelica.Icons.BasesPackage;
-        partial model PartialBC "Partial model for a material BC"
+        partial model PartialBC "Partial model for a BC for volume"
           extends FCSys.BCs.InertAmagat.BaseClasses.PartialBC;
 
           constant BCType bCType "Type of BC";
           // Note:  This is included so that the type of BC is recorded with the
           // results.
+
         equation
-          inert.mPhidot = zeros(n_vel) "No force";
+          inert.mPhidot = zeros(n_lin) "No force";
           inert.Qdot = 0 "Adiabatic";
           annotation (defaultComponentPrefixes="replaceable",
-              defaultComponentName="volBC");
+              defaultComponentName="volumeBC");
         end PartialBC;
 
         type BCType = enumeration(
@@ -2944,94 +2745,93 @@ boundary condition</a> models.
       end BaseClasses;
     end Volume;
 
-    package Momentum "BCs for linear momentum"
+    package Mechanical "Mechanical BCs"
       extends Modelica.Icons.Package;
       model Velocity "Prescribed velocity"
         extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.Velocity,
             redeclare Connectors.RealInput u(final unit="l/T"));
       equation
-        inert.phi[ax] = u;
+        inert.phi[linAxes[axis]] = u;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
-            ="momBC");
+            ="mechanicalBC");
       end Velocity;
 
       model Force "Prescribed force"
         extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.Force,
             redeclare Connectors.RealInput u(final unit="l.m/T2"));
       equation
-        inert.mPhidot[ax] = u;
+        inert.mPhidot[linAxes[axis]] = u;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
-            ="momBC");
+            ="mechanicalBC");
       end Force;
 
       package BaseClasses "Base classes (not for direct use)"
         extends Modelica.Icons.BasesPackage;
-        partial model PartialBC "Partial model for a BC for linear momentum"
+        partial model PartialBC "Partial model for a mechanical BC"
           extends FCSys.BCs.InertAmagat.BaseClasses.PartialBC;
-          parameter Integer ax(
-            final min=1,
-            final max=n_vel) = 1
-            "<html>Axis (between 1 and <i>n</i><sub>vel</sub>)</html>"
-            annotation (HideResult=true);
-          constant FCSys.BCs.InertAmagat.Momentum.BaseClasses.BCType bCType
-            "Type of BC";
-          // Note:  This is included so that the type of BC is recorded with the
-          // results.
-        equation
-          inert.V = 0 "No volume";
-          for i in 1:n_vel loop
-            if i <> ax then
-              inert.mPhidot[i] = 0 "No force along the other axes";
-            end if;
-          end for;
-          inert.Qdot = 0 "Adiabatic";
-          annotation (defaultComponentPrefixes="replaceable",
-              defaultComponentName="momBC");
-        end PartialBC;
 
-        type BCType = enumeration(
-            Velocity "Velocity",
-            Force "Force") "Types of BCs";
-      end BaseClasses;
-    end Momentum;
+          parameter Axis axis=Axis.x "Axis" annotation (HideResult=true);
 
-    package Heat "BCs for heat"
-      extends Modelica.Icons.Package;
-
-      model Temperature "Prescribed temperature"
-        extends FCSys.BCs.InertAmagat.Heat.BaseClasses.PartialBC(final bCType=
-              BaseClasses.BCType.Temperature, redeclare Connectors.RealInput u(
-              final unit="l2.m/(N.T2)", displayUnit="K"));
-      equation
-        inert.T = u;
-        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
-            ="heatBC");
-      end Temperature;
-
-      model HeatFlowRate "Prescribed heat flow rate"
-        extends FCSys.BCs.InertAmagat.Heat.BaseClasses.PartialBC(final bCType=
-              BaseClasses.BCType.HeatFlowRate, redeclare Connectors.RealInput u(
-              final unit="l2.m/T3"));
-      equation
-        inert.Qdot = u;
-        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
-            ="heatBC");
-      end HeatFlowRate;
-
-      package BaseClasses "Base classes (not for direct use)"
-        extends Modelica.Icons.BasesPackage;
-        partial model PartialBC "Partial model for a BC for heat"
-          extends FCSys.BCs.InertAmagat.BaseClasses.PartialBC;
           constant BCType bCType "Type of BC";
           // Note:  This is included so that the type of BC is recorded with the
           // results.
 
         equation
           inert.V = 0 "No volume";
-          inert.mPhidot = zeros(n_vel) "No force";
+          for i in 1:n_lin loop
+            if cartAxes[i] <> axis then
+              inert.mPhidot[i] = 0 "No force along the other axes";
+            end if;
+          end for;
+          inert.Qdot = 0 "Adiabatic";
+
+          annotation (defaultComponentPrefixes="replaceable",
+              defaultComponentName="mechanicalBC");
+        end PartialBC;
+
+        type BCType = enumeration(
+            Velocity "Velocity",
+            Force "Force") "Types of BCs";
+      end BaseClasses;
+    end Mechanical;
+
+    package Thermal "Thermal BCs"
+      extends Modelica.Icons.Package;
+
+      model Temperature "Prescribed temperature"
+        extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.Temperature,
+            redeclare Connectors.RealInput u(final unit="l2.m/(N.T2)",
+              displayUnit="K"));
+      equation
+        inert.T = u;
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="thermalBC");
+      end Temperature;
+
+      model HeatFlowRate "Prescribed heat flow rate"
+        extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.HeatFlowRate,
+            redeclare Connectors.RealInput u(final unit="l2.m/T3"));
+      equation
+        inert.Qdot = u;
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="thermalBC");
+      end HeatFlowRate;
+
+      package BaseClasses "Base classes (not for direct use)"
+        extends Modelica.Icons.BasesPackage;
+        partial model PartialBC "Partial model for a thermal BC"
+          extends FCSys.BCs.InertAmagat.BaseClasses.PartialBC;
+
+          constant BCType bCType "Type of BC";
+          // Note:  This is included so that the type of BC is recorded with the
+          // results.
+
+        equation
+          inert.V = 0 "No volume";
+          inert.mPhidot = zeros(n_lin) "No force";
           annotation (
             defaultComponentPrefixes="replaceable",
-            defaultComponentName="heatBC",
+            defaultComponentName="thermalBC",
             Icon(graphics));
         end PartialBC;
 
@@ -3039,20 +2839,30 @@ boundary condition</a> models.
             Temperature "Temperature",
             HeatFlowRate "Heat flow rate") "Types of BCs";
       end BaseClasses;
-    end Heat;
+    end Thermal;
 
     package BaseClasses "Base classes (not for direct use)"
       extends Modelica.Icons.BasesPackage;
       partial model PartialBC "Partial model for a BC"
         extends FCSys.BaseClasses.Icons.BCs.Single;
 
-        parameter Integer n_vel(
-          final min=1,
-          final max=3) = 1
-          "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>"
-          annotation (HideResult=true);
+        parameter Boolean inclLinX=true "X" annotation (
+          Evaluate=true,
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(group="Axes with linear momentum included", compact=true));
+        parameter Boolean inclLinY=false "Y" annotation (
+          Evaluate=true,
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(group="Axes with linear momentum included", compact=true));
+        parameter Boolean inclLinZ=false "Z" annotation (
+          Evaluate=true,
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(group="Axes with linear momentum included", compact=true));
 
-        FCSys.Connectors.InertAmagat inert(final n_vel=n_vel)
+        FCSys.Connectors.InertAmagat inert(final n_lin=n_lin)
           "Connector for linear momentum and heat, with additivity of volume"
           annotation (HideResult=true, Placement(transformation(extent={{-10,-50},
                   {10,-30}})));
@@ -3061,6 +2871,16 @@ boundary condition</a> models.
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,40})));
+
+      protected
+        final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
+          "Number of components of linear momentum" annotation (Evaluate=true);
+        final parameter Integer cartAxes[n_lin]=index({inclLinX,inclLinY,
+            inclLinZ}) "Cartesian-axis indices of the axes of linear momentum";
+        final parameter Integer linAxes[Axis]=enumerate({inclLinX,inclLinY,
+            inclLinZ})
+          "Linear momentum component indices of the Cartesian axes";
+
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="phaseInertBC");
       end PartialBC;
@@ -3076,20 +2896,16 @@ boundary condition</a> models.
 
       extends FCSys.BaseClasses.Icons.BCs.Single;
 
-      parameter Integer n_vel(
-        final min=0,
-        final max=3) = 1
-        "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>";
-
-      // Additivity of pressure
-      replaceable FCSys.BCs.InertDalton.Pressure.Volume pressBC(final n_vel=
-            n_vel) constrainedby
-        FCSys.BCs.InertDalton.Pressure.BaseClasses.PartialBC
+      // Pressure
+      replaceable Pressure.Volume pressureBC(
+        final inclLinX=inclLinX,
+        final inclLinY=inclLinY,
+        final inclLinZ=inclLinZ) constrainedby Pressure.BaseClasses.PartialBC
         "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Pressure", __Dymola_descriptionLabel=true),
         Placement(transformation(extent={{-90,-26},{-70,-6}})));
-      parameter Boolean internalPress=true "Use internal specification"
+      parameter Boolean internalPressure=true "Use internal specification"
         annotation (
         Evaluate=true,
         HideResult=true,
@@ -3098,132 +2914,161 @@ boundary condition</a> models.
           group="Pressure",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      replaceable Modelica.Blocks.Sources.Constant pressSpec(k(start=1*U.cm^3))
-        if internalPress constrainedby Modelica.Blocks.Interfaces.SO
-        "Internal specification" annotation (
+      replaceable Modelica.Blocks.Sources.Constant pressureSpec(k(start=1*U.cm^
+              3)) if internalPressure constrainedby
+        Modelica.Blocks.Interfaces.SO "Internal specification" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
           group="Pressure",
           __Dymola_descriptionLabel=true,
-          enable=internalPress),
+          enable=internalPressure),
         Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-90,20})));
 
-      // 1st component of velocity
-      replaceable FCSys.BCs.InertDalton.Momentum.Velocity lin1BC(final n_vel=
-            n_vel) if n_vel > 0 constrainedby
-        FCSys.BCs.InertDalton.Momentum.BaseClasses.PartialBC
+      // X component of linear momentum
+      parameter Boolean inclLinX=true "Include" annotation (
+        Evaluate=true,
+        HideResult=true,
+        choices(__Dymola_checkBox=true),
+        Dialog(
+          group="X component of linear momentum",
+          __Dymola_descriptionLabel=true,
+          compact=true));
+      replaceable Mechanical.Force linXBC(
+        final inclLinX=inclLinX,
+        final inclLinY=inclLinY,
+        final inclLinZ=inclLinZ) constrainedby Mechanical.BaseClasses.PartialBC
         "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
-          group="1st component of velocity",
-          enable=n_vel > 0,
+          group="X component of linear momentum",
+          enable=inclLinX,
           __Dymola_descriptionLabel=true),
         Placement(transformation(extent={{-50,-26},{-30,-6}})));
-      parameter Boolean internalLin1=true "Use internal specification"
+      parameter Boolean internalLinX=true "Use internal specification"
         annotation (
         Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(
-          group="1st component of velocity",
+          group="X component of linear momentum",
+          enable=inclLinX,
           __Dymola_descriptionLabel=true,
-          enable=n_vel > 0,
           __Dymola_joinNext=true));
-      replaceable Modelica.Blocks.Sources.Constant lin1Spec(k(start=0)) if
-        internalLin1 and n_vel > 0 constrainedby Modelica.Blocks.Interfaces.SO
+      replaceable Modelica.Blocks.Sources.Constant linXSpec(k(start=0)) if
+        inclLinX and internalLinX constrainedby Modelica.Blocks.Interfaces.SO
         "Internal signal specification" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
-          group="1st component of velocity",
+          group="X component of linear momentum",
+          enable=inclLinX and internalLinX,
           __Dymola_descriptionLabel=true,
-          enable=n_vel > 0 and internalLin1),
+          enable=internalLinX),
         Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-50,20})));
 
-      // 2nd component of velocity
-      replaceable FCSys.BCs.InertDalton.Momentum.Velocity lin2BC(final n_vel=
-            n_vel) if n_vel > 1 constrainedby
-        FCSys.BCs.InertDalton.Momentum.BaseClasses.PartialBC
-        "Type of condition" annotation (
+      // Y component of linear momentum
+      parameter Boolean inclLinY=true "Include" annotation (
+        Evaluate=true,
+        HideResult=true,
+        choices(__Dymola_checkBox=true),
+        Dialog(
+          group="Y component of linear momentum",
+          __Dymola_descriptionLabel=true,
+          compact=true));
+      replaceable Mechanical.Force linYBC(
+        final inclLinX=inclLinX,
+        final inclLinY=inclLinY,
+        final inclLinZ=inclLinZ) if inclLinY constrainedby
+        Mechanical.BaseClasses.PartialBC "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
-          group="2nd component of velocity",
-          enable=n_vel > 1,
+          group="Y component of linear momentum",
+          enable=inclLinY,
           __Dymola_descriptionLabel=true),
         Placement(transformation(extent={{-10,-26},{10,-6}})));
-      parameter Boolean internalLin2=true "Use internal specification"
+      parameter Boolean internalLinY=true "Use internal specification"
         annotation (
         Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(
-          group="2nd component of velocity",
-          enable=n_vel > 1,
+          group="Y component of linear momentum",
+          enable=inclLinY,
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      replaceable Modelica.Blocks.Sources.Constant lin2Spec(k(start=0)) if
-        internalLin2 and n_vel > 1 constrainedby Modelica.Blocks.Interfaces.SO
+      replaceable Modelica.Blocks.Sources.Constant linYSpec(k(start=0)) if
+        inclLinY and internalLinY constrainedby Modelica.Blocks.Interfaces.SO
         "Internal specification" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
-          group="2nd component of velocity",
-          enable=n_vel > 1 and internalLin2,
+          group="Y component of linear momentum",
+          enable=inclLinY and internalLinY,
           __Dymola_descriptionLabel=true,
-          enable=internalLin2),
+          enable=internalLinY),
         Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-10,20})));
 
-      // 3rd component of velocity
-      replaceable FCSys.BCs.InertDalton.Momentum.Velocity lin3BC(final n_vel=
-            n_vel) if n_vel > 2 constrainedby
-        FCSys.BCs.InertDalton.Momentum.BaseClasses.PartialBC
-        "Type of condition" annotation (
+      // Z component of linear momentum
+      parameter Boolean inclLinZ=true "Include" annotation (
+        Evaluate=true,
+        HideResult=true,
+        choices(__Dymola_checkBox=true),
+        Dialog(
+          group="Z component of linear momentum",
+          __Dymola_descriptionLabel=true,
+          compact=true));
+      replaceable Mechanical.Force linZBC(
+        final inclLinX=inclLinX,
+        final inclLinY=inclLinY,
+        final inclLinZ=inclLinZ) if inclLinZ constrainedby
+        Mechanical.BaseClasses.PartialBC "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
-          group="3rd component of velocity",
-          enable=n_vel > 2,
+          group="Z component of linear momentum",
+          enable=inclLinZ,
           __Dymola_descriptionLabel=true),
         Placement(transformation(extent={{30,-26},{50,-6}})));
-      parameter Boolean internalLin3=true "Use internal specification"
+      parameter Boolean internalLinZ=true "Use internal specification"
         annotation (
         Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(
-          group="3rd component of velocity",
-          enable=n_vel > 2,
+          group="Z component of linear momentum",
+          enable=inclLinZ,
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      replaceable Modelica.Blocks.Sources.Constant lin3Spec(k(start=0)) if
-        internalLin3 and n_vel > 2 constrainedby Modelica.Blocks.Interfaces.SO
+      replaceable Modelica.Blocks.Sources.Constant linZSpec(k(start=0)) if
+        inclLinZ and internalLinZ constrainedby Modelica.Blocks.Interfaces.SO
         "Internal specification" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
-          group="3rd component of velocity",
-          enable=n_vel > 2 and internalLin3,
+          group="Z component of linear momentum",
+          enable=inclLinZ and internalLinZ,
           __Dymola_descriptionLabel=true,
-          enable=internalLin3),
+          enable=internalLinZ),
         Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={30,20})));
 
       // Heat
-      replaceable FCSys.BCs.InertDalton.Heat.Temperature heatBC(final n_vel=
-            n_vel) constrainedby
-        FCSys.BCs.InertDalton.Heat.BaseClasses.PartialBC "Type of condition"
-        annotation (
+      replaceable Thermal.HeatFlowRate thermalBC(
+        final inclLinX=inclLinX,
+        final inclLinY=inclLinY,
+        final inclLinZ=inclLinZ) constrainedby Thermal.BaseClasses.PartialBC
+        "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Heat", __Dymola_descriptionLabel=true),
         Placement(transformation(extent={{70,-26},{90,-6}})));
-      parameter Boolean internalHeat=true "Use internal specification"
+      parameter Boolean internalThermal=true "Use internal specification"
         annotation (
         Evaluate=true,
         HideResult=true,
@@ -3232,27 +3077,22 @@ boundary condition</a> models.
           group="Heat",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      replaceable Modelica.Blocks.Sources.Constant heatSpec(k(start=298.15*U.K))
-        if internalHeat constrainedby Modelica.Blocks.Interfaces.SO
+      replaceable Modelica.Blocks.Sources.Constant thermalSpec(k(start=0)) if
+        internalThermal constrainedby Modelica.Blocks.Interfaces.SO
         "Internal specification" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
           group="Heat",
           __Dymola_descriptionLabel=true,
-          enable=internalHeat),
+          enable=internalThermal),
         Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={70,20})));
 
-      Connectors.InertDalton inert(final n_vel=n_vel)
-        "Single-species connector for linear momentum and heat, with additivity of pressure"
-        annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
-            iconTransformation(extent={{-10,-50},{10,-30}})));
       Connectors.RealInputBus u "Input bus for external signal sources"
-        annotation (HideResult=not (internalPress or internalLin1 or
-            internalLin2 or internalLin3 or internalHeat), Placement(
-            transformation(
+        annotation (HideResult=not (internalVol or internalLinX or internalLinY
+             or internalLinZ or internalThermal), Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={0,70}), iconTransformation(
@@ -3260,44 +3100,50 @@ boundary condition</a> models.
             rotation=270,
             origin={0,40})));
 
+      Connectors.InertDalton inert(final n_lin=countTrue({inclLinX,inclLinY,
+            inclLinZ}))
+        "Single-species connector for linear momentum and heat, with additivity of pressure"
+        annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
+            iconTransformation(extent={{-10,-50},{10,-30}})));
+
     protected
-      Connectors.RealInputInternal u_N if not internalPress
-        "External material signal" annotation (Placement(transformation(
+      Connectors.RealInputInternal u_pressure if not internalPressure
+        "External signal for presure" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-70,40}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-60,40})));
-      Connectors.RealInputInternal u_Phi_1 if not internalLin1
-        "External signal for 1st axis of linear momentum" annotation (Placement(
-            transformation(
+      Connectors.RealInputInternal u_lin_x if not internalLinX
+        "External signal for X component of linear momentum" annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-30,40}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-20,40})));
-      Connectors.RealInputInternal u_Phi_2 if not internalLin2 and n_vel > 1
-        "External signal for 2nd axis of linear momentum" annotation (Placement(
-            transformation(
+      Connectors.RealInputInternal u_lin_y if not internalLinY and inclLinY
+        "External signal for Y component of linear momentum" annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={10,40}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-20,40})));
-      Connectors.RealInputInternal u_Phi3 if not internalLin3 and n_vel > 2
-        "External signal for 3rd axis of linear momentum" annotation (Placement(
-            transformation(
+      Connectors.RealInputInternal u_lin_z if not internalLinZ and inclLinZ
+        "External signal for Z component of linear momentum" annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={50,40}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-20,40})));
-      Connectors.RealInputInternal u_Q if not internalHeat
-        "External signal for heat" annotation (Placement(transformation(
+      Connectors.RealInputInternal u_thermal if not internalThermal
+        "External thermal signal" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={90,40}),iconTransformation(
@@ -3306,20 +3152,20 @@ boundary condition</a> models.
             origin={60,40})));
 
     equation
-      // Material
-      connect(pressBC.inert, inert) annotation (Line(
+      // Pressure
+      connect(pressureBC.inert, inert) annotation (Line(
           points={{-80,-20},{-80,-30},{5.55112e-16,-30},{5.55112e-16,-40}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect(pressSpec.y, pressBC.u) annotation (Line(
+      connect(pressureSpec.y, pressureBC.u) annotation (Line(
           points={{-90,9},{-90,0},{-80,0},{-80,-12}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(u_N, pressBC.u) annotation (Line(
+      connect(u_pressure, pressureBC.u) annotation (Line(
           points={{-70,40},{-70,0},{-80,0},{-80,-12}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(u.N, u_N) annotation (Line(
+      connect(u.pressure, u_pressure) annotation (Line(
           points={{5.55112e-16,70},{0,70},{0,50},{-70,50},{-70,40}},
           color={0,0,127},
           thickness=0.5,
@@ -3328,20 +3174,20 @@ boundary condition</a> models.
           index=-1,
           extent={{-6,3},{-6,3}}));
 
-      // 1st axis
-      connect(lin1BC.inert, inert) annotation (Line(
+      // X component of linear momentum
+      connect(linXBC.inert, inert) annotation (Line(
           points={{-40,-20},{-40,-30},{5.55112e-16,-30},{5.55112e-16,-40}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect(lin1Spec.y, lin1BC.u) annotation (Line(
+      connect(linXSpec.y, linXBC.u) annotation (Line(
           points={{-50,9},{-50,0},{-40,0},{-40,-12}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(u_Phi_1, lin1BC.u) annotation (Line(
+      connect(u_lin_x, linXBC.u) annotation (Line(
           points={{-30,40},{-30,0},{-40,0},{-40,-12}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(u.Phi_1, u_Phi_1) annotation (Line(
+      connect(u.linX, u_lin_x) annotation (Line(
           points={{5.55112e-16,70},{0,70},{0,50},{-30,50},{-30,40}},
           color={0,0,127},
           thickness=0.5,
@@ -3350,21 +3196,21 @@ boundary condition</a> models.
           index=-1,
           extent={{-6,3},{-6,3}}));
 
-      // 2nd axis
-      connect(lin2BC.inert, inert) annotation (Line(
+      // Y component of linear momentum
+      connect(linYBC.inert, inert) annotation (Line(
           points={{6.10623e-16,-20},{6.10623e-16,-30},{5.55112e-16,-30},{
               5.55112e-16,-40}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect(lin2Spec.y, lin2BC.u) annotation (Line(
+      connect(linYSpec.y, linYBC.u) annotation (Line(
           points={{-10,9},{-10,0},{0,0},{0,-12},{6.10623e-16,-12}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(u_Phi_2, lin2BC.u) annotation (Line(
+      connect(u_lin_y, linYBC.u) annotation (Line(
           points={{10,40},{10,0},{6.10623e-16,0},{6.10623e-16,-12}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(u.Phi_2, u_Phi_2) annotation (Line(
+      connect(u.linY, u_lin_y) annotation (Line(
           points={{5.55112e-16,70},{0,70},{0,50},{10,50},{10,40}},
           color={0,0,127},
           thickness=0.5,
@@ -3373,20 +3219,20 @@ boundary condition</a> models.
           index=-1,
           extent={{-6,3},{-6,3}}));
 
-      // 3rd axis
-      connect(lin3BC.inert, inert) annotation (Line(
+      // Z component of linear momentum
+      connect(linZBC.inert, inert) annotation (Line(
           points={{40,-20},{40,-30},{5.55112e-16,-30},{5.55112e-16,-40}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect(lin3Spec.y, lin3BC.u) annotation (Line(
+      connect(linZSpec.y, linZBC.u) annotation (Line(
           points={{30,9},{30,0},{40,0},{40,-12}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(u_Phi3, lin3BC.u) annotation (Line(
+      connect(u_lin_z, linZBC.u) annotation (Line(
           points={{50,40},{50,0},{40,0},{40,-12}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(u.Phi3, u_Phi3) annotation (Line(
+      connect(u.linZ, u_lin_z) annotation (Line(
           points={{5.55112e-16,70},{0,70},{0,50},{50,50},{50,40}},
           color={0,0,127},
           thickness=0.5,
@@ -3396,19 +3242,19 @@ boundary condition</a> models.
           extent={{-6,3},{-6,3}}));
 
       // Heat
-      connect(heatBC.inert, inert) annotation (Line(
+      connect(thermalBC.inert, inert) annotation (Line(
           points={{80,-20},{80,-30},{5.55112e-16,-30},{5.55112e-16,-40}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect(heatSpec.y, heatBC.u) annotation (Line(
+      connect(thermalSpec.y, thermalBC.u) annotation (Line(
           points={{70,9},{70,0},{80,0},{80,-12}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(u_Q, heatBC.u) annotation (Line(
+      connect(u_thermal, thermalBC.u) annotation (Line(
           points={{90,40},{90,0},{80,0},{80,-12}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(u.Q, u_Q) annotation (Line(
+      connect(u.thermal, u_thermal) annotation (Line(
           points={{5.55112e-16,70},{0,70},{0,50},{90,50},{90,40}},
           color={0,0,127},
           thickness=0.5,
@@ -3431,7 +3277,7 @@ boundary condition</a> models.
       equation
         inert.V = u;
         annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="pressBC");
+            defaultComponentName="pressureBC");
       end Volume;
 
       model Pressure "Prescribed pressure"
@@ -3440,22 +3286,22 @@ boundary condition</a> models.
       equation
         inert.p = u;
         annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="pressBC");
+            defaultComponentName="pressureBC");
       end Pressure;
 
       package BaseClasses "Base classes (not for direct use)"
         extends Modelica.Icons.BasesPackage;
-        partial model PartialBC "Partial model for a material BC"
+        partial model PartialBC "Partial model for a BC for pressure"
           extends FCSys.BCs.InertDalton.BaseClasses.PartialBC;
 
           constant BCType bCType "Type of BC";
           // Note:  This is included so that the type of BC is recorded with the
           // results.
         equation
-          inert.mPhidot = zeros(n_vel) "No force";
+          inert.mPhidot = zeros(n_lin) "No force";
           inert.Qdot = 0 "No heat flow";
           annotation (defaultComponentPrefixes="replaceable",
-              defaultComponentName="pressBC");
+              defaultComponentName="pressureBC");
         end PartialBC;
 
         type BCType = enumeration(
@@ -3464,92 +3310,95 @@ boundary condition</a> models.
       end BaseClasses;
     end Pressure;
 
-    package Momentum "BCs for linear momentum"
+    package Mechanical "Mechanical BCs"
       extends Modelica.Icons.Package;
       model Velocity "Prescribed velocity"
         extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.Velocity,
             redeclare Connectors.RealInput u(final unit="l/T"));
       equation
-        inert.phi[ax] = u;
+        inert.phi[linAxes[axis]] = u;
         annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="momBC");
+            defaultComponentName="mechanicalBC");
       end Velocity;
 
       model Force "Prescribed force"
         extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.Force,
             redeclare Connectors.RealInput u(final unit="l.m/T2"));
       equation
-        inert.mPhidot[ax] = u;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="momBC");
+        inert.mPhidot[linAxes[axis]] = u;
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="mechanicalBC");
       end Force;
 
       package BaseClasses "Base classes (not for direct use)"
         extends Modelica.Icons.BasesPackage;
-        partial model PartialBC "Partial model for a BC for linear momentum"
+        partial model PartialBC "Partial model for a mechanical BC"
           extends FCSys.BCs.InertDalton.BaseClasses.PartialBC;
-          parameter Integer ax(
-            final min=1,
-            final max=n_vel) = 1
-            "<html>Axis (between 1 and <i>n</i><sub>vel</sub>)</html>"
-            annotation (HideResult=true);
-          constant FCSys.BCs.InertDalton.Momentum.BaseClasses.BCType bCType
-            "Type of BC";
+
+          parameter Axis axis=Axis.x "Axis" annotation (HideResult=true);
+
+          constant BCType bCType "Type of BC";
           // Note:  This is included so that the type of BC is recorded with the
           // results.
+
         equation
           inert.p = 0 "No pressure";
-          for i in 1:n_vel loop
-            if i <> ax then
+          for i in 1:n_lin loop
+            if cartAxes[i] <> axis then
               inert.mPhidot[i] = 0 "No force along the other axes";
             end if;
           end for;
           inert.Qdot = 0 "Adiabatic";
+
           annotation (defaultComponentPrefixes="replaceable",
-              defaultComponentName="momBC");
+              defaultComponentName="mechanicalBC");
         end PartialBC;
 
         type BCType = enumeration(
             Velocity "Velocity",
             Force "Force") "Types of BCs";
       end BaseClasses;
-    end Momentum;
+    end Mechanical;
 
-    package Heat "BCs for heat"
+    package Thermal "BCs for heat"
       extends Modelica.Icons.Package;
 
       model Temperature "Prescribed temperature"
-        extends FCSys.BCs.InertDalton.Heat.BaseClasses.PartialBC(final bCType=
-              BaseClasses.BCType.Temperature, redeclare Connectors.RealInput u(
-              final unit="l2.m/(N.T2)", displayUnit="K"));
+        extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.Temperature,
+            redeclare Connectors.RealInput u(final unit="l2.m/(N.T2)",
+              displayUnit="K"));
+
       equation
         inert.T = u;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
-            ="heatBC");
+            ="thermalBC");
       end Temperature;
 
       model HeatFlowRate "Prescribed heat flow rate"
         extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.HeatFlowRate,
             redeclare Connectors.RealInput u(final unit="l2.m/T3"));
+
       equation
         inert.Qdot = u;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
-            ="heatBC");
+            ="thermalBC");
       end HeatFlowRate;
 
       package BaseClasses "Base classes (not for direct use)"
         extends Modelica.Icons.BasesPackage;
-        partial model PartialBC "Partial model for a BC for heat"
+        partial model PartialBC "Partial model for a thermal BC"
           extends FCSys.BCs.InertDalton.BaseClasses.PartialBC;
+
           constant BCType bCType "Type of BC";
           // Note:  This is included so that the type of BC is recorded with the
           // results.
+
         equation
           inert.p = 0 "No pressure";
-          inert.mPhidot = zeros(n_vel) "No force";
+          inert.mPhidot = zeros(n_lin) "No force";
           annotation (
             defaultComponentPrefixes="replaceable",
-            defaultComponentName="heatBC",
+            defaultComponentName="thermalBC",
             Icon(graphics));
         end PartialBC;
 
@@ -3557,20 +3406,30 @@ boundary condition</a> models.
             Temperature "Temperature",
             HeatFlowRate "Heat flow rate") "Types of BCs";
       end BaseClasses;
-    end Heat;
+    end Thermal;
 
     package BaseClasses "Base classes (not for direct use)"
       extends Modelica.Icons.BasesPackage;
       partial model PartialBC "Partial model for a BC"
         extends FCSys.BaseClasses.Icons.BCs.Single;
 
-        parameter Integer n_vel(
-          final min=0,
-          final max=3) = 1
-          "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>"
-          annotation (HideResult=true);
+        parameter Boolean inclLinX=true "X" annotation (
+          Evaluate=true,
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(group="Axes with linear momentum included", compact=true));
+        parameter Boolean inclLinY=false "Y" annotation (
+          Evaluate=true,
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(group="Axes with linear momentum included", compact=true));
+        parameter Boolean inclLinZ=false "Z" annotation (
+          Evaluate=true,
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(group="Axes with linear momentum included", compact=true));
 
-        Connectors.InertDalton inert(final n_vel=n_vel)
+        Connectors.InertDalton inert(final n_lin=n_lin)
           "Connector for linear momentum and heat, with additivity of pressure"
           annotation (HideResult=true, Placement(transformation(extent={{-10,-50},
                   {10,-30}})));
@@ -3579,6 +3438,16 @@ boundary condition</a> models.
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,40})));
+
+      protected
+        final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
+          "Number of components of linear momentum" annotation (Evaluate=true);
+        final parameter Integer cartAxes[n_lin]=index({inclLinX,inclLinY,
+            inclLinZ}) "Cartesian-axis indices of the axes of linear momentum";
+        final parameter Integer linAxes[Axis]=enumerate({inclLinX,inclLinY,
+            inclLinZ})
+          "Linear momentum component indices of the Cartesian axes";
+
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="speciesInertBC",
@@ -3591,6 +3460,24 @@ boundary condition</a> models.
     "<html>BCs for <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialFace\">Face</a> and <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connectors</html>"
     extends Modelica.Icons.Package;
     // **Update this package.
+
+    model Region
+
+      Connectors.FaceBus face[1, 1]
+        annotation (Placement(transformation(extent={{-32,-8},{-12,12}})));
+      replaceable Subregion subregionFaceBC[1, 1](each graphite('incle-'=true,
+            'e-'(redeclare FCSys.BCs.Face.Species.Material.Pressure materialBC,
+              redeclare Modelica.Blocks.Sources.Ramp materialSpec(duration=50,
+                height=1*U.V))))
+        annotation (Placement(transformation(extent={{32,-4},{52,16}})));
+    equation
+      connect(subregionFaceBC.face, face) annotation (Line(
+          points={{42,2},{26,2},{26,2},{10,2},{10,2},{-22,2}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      annotation (Diagram(graphics));
+    end Region;
 
     model Subregion
       "<html>BC for a face of a <a href=\"modelica://FCSys.Subregions.Subregion\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with efforts by default</html>"
@@ -4052,7 +3939,8 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.face.thermal, face.C19HF37O5S.thermal) annotation (Line(
+        connect(C19HF37O5S.face.thermal, face.C19HF37O5S.thermal) annotation (
+            Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4846,7 +4734,8 @@ boundary condition</a> models.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.face.thermal, face.C19HF37O5S.thermal) annotation (Line(
+        connect(C19HF37O5S.face.thermal, face.C19HF37O5S.thermal) annotation (
+            Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -5805,23 +5694,6 @@ boundary condition</a> models.
       end SpeciesX;
     end Species;
 
-    model Region
-
-      Connectors.FaceBus face[1, 1]
-        annotation (Placement(transformation(extent={{-32,-8},{-12,12}})));
-      replaceable Subregion subregionFaceBC[1, 1](each graphite('incle-'=true,
-            'e-'(redeclare FCSys.BCs.Face.Species.Material.Pressure materialBC,
-              redeclare Modelica.Blocks.Sources.Ramp materialSpec(duration=50,
-                height=1*U.V))))
-        annotation (Placement(transformation(extent={{32,-4},{52,16}})));
-    equation
-      connect(subregionFaceBC.face, face) annotation (Line(
-          points={{42,2},{26,2},{26,2},{10,2},{10,2},{-22,2}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-      annotation (Diagram(graphics));
-    end Region;
     annotation (Documentation(info="<html><p>Since the connectors in
 <a href=\"modelica://FCSys\">FCSys</a> are hierarchical
 (see the <a href=\"modelica://FCSys.Connectors\">Connectors</a> package),
@@ -6323,8 +6195,8 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.thermal, negative.C19HF37O5S.thermal) annotation
-          (Line(
+        connect(C19HF37O5S.negative.thermal, negative.C19HF37O5S.thermal)
+          annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -6371,8 +6243,8 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.thermal, positive.C19HF37O5S.thermal) annotation
-          (Line(
+        connect(C19HF37O5S.positive.thermal, positive.C19HF37O5S.thermal)
+          annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7788,8 +7660,8 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.negative.thermal, negative.C19HF37O5S.thermal) annotation
-          (Line(
+        connect(C19HF37O5S.negative.thermal, negative.C19HF37O5S.thermal)
+          annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -7836,8 +7708,8 @@ boundary condition</a> model.
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.thermal, positive.C19HF37O5S.thermal) annotation
-          (Line(
+        connect(C19HF37O5S.positive.thermal, positive.C19HF37O5S.thermal)
+          annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,

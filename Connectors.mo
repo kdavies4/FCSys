@@ -341,13 +341,13 @@ package Connectors "Declarative and imperative connectors"
 
   connector Inert "Connector to exchange linear momentum and heat by diffusion"
 
-    parameter Integer n_vel(
+    parameter Integer n_lin(
       final min=0,
       final max=3) = 0
-      "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>"
+      "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
       annotation (HideResult=true);
 
-    BaseClasses.MechanicalExchange mechanical(final n_vel=n_vel);
+    BaseClasses.MechanicalExchange mechanical(final n_lin=n_lin);
     FCSys.Connectors.BaseClasses.Thermal thermal;
 
     annotation (
@@ -474,20 +474,17 @@ package Connectors "Declarative and imperative connectors"
     the documentation in the
   <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Diagram(graphics={
-          Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={72,90,180},
-            fillPattern=FillPattern.Solid,
-            fillColor={102,128,255}),
-          Text(
-            extent={{-30,20},{30,-20}},
-            lineColor={0,0,0},
-            textString="D"),
-          Text(
-            extent={{-100,36},{100,76}},
-            textString="%name",
-            lineColor={0,0,0})}),
+      Diagram(graphics={Ellipse(
+              extent={{-30,30},{30,-30}},
+              lineColor={72,90,180},
+              fillPattern=FillPattern.Solid,
+              fillColor={102,128,255}),Text(
+              extent={{-30,20},{30,-20}},
+              lineColor={0,0,0},
+              textString="D"),Text(
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0})}),
       Icon(graphics={
           Ellipse(
             extent={{-100,100},{100,-100}},
@@ -505,10 +502,10 @@ package Connectors "Declarative and imperative connectors"
   connector InertInternal
     "<html>Internal <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> connector</html>"
 
-    parameter Integer n_vel(
+    parameter Integer n_lin(
       final min=0,
       final max=3) = 0
-      "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>"
+      "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
       annotation (HideResult=true);
     parameter Boolean uniformVelocity=false "Uniform velocity" annotation (
       HideResult=true,
@@ -521,7 +518,7 @@ package Connectors "Declarative and imperative connectors"
       Dialog(compact=true,group=
             "Boundary conditions (will remove subconnectors)"));
 
-    BaseClasses.MechanicalExchange mechanical(final n_vel=n_vel) if
+    BaseClasses.MechanicalExchange mechanical(final n_lin=n_lin) if
       uniformVelocity;
     FCSys.Connectors.BaseClasses.Thermal thermal if isothermal;
 
@@ -565,20 +562,17 @@ package Connectors "Declarative and imperative connectors"
       Documentation(info="<html><p>For more information, see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Diagram(graphics={
-          Text(
-            extent={{-100,36},{100,76}},
-            textString="%name",
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-30,30},{30,-30}},
-            lineColor={0,0,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Line(
-            points={{-30,0},{30,0}},
-            color={0,0,0},
-            smooth=Smooth.None)}),
+      Diagram(graphics={Text(
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0}),Rectangle(
+              extent={{-30,30},{30,-30}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Line(
+              points={{-30,0},{30,0}},
+              color={0,0,0},
+              smooth=Smooth.None)}),
       Icon(graphics={Rectangle(
             extent={{-100,100},{100,-100}},
             lineColor={0,0,0},
@@ -609,20 +603,17 @@ package Connectors "Declarative and imperative connectors"
     <p>For more information, see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Diagram(graphics={
-          Text(
-            extent={{-100,36},{100,76}},
-            textString="%name",
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-30,30},{30,-30}},
-            lineColor={0,0,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Line(
-            points={{0,30},{0,-30}},
-            color={0,0,0},
-            smooth=Smooth.None)}),
+      Diagram(graphics={Text(
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0}),Rectangle(
+              extent={{-30,30},{30,-30}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Line(
+              points={{0,30},{0,-30}},
+              color={0,0,0},
+              smooth=Smooth.None)}),
       Icon(graphics={Rectangle(
             extent={{-100,100},{100,-100}},
             lineColor={0,0,0},
@@ -642,24 +633,20 @@ package Connectors "Declarative and imperative connectors"
       Documentation(info="<html>For information, see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Diagram(graphics={
-          Text(
-            extent={{-100,36},{100,76}},
-            textString="%name",
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-30,30},{30,-30}},
-            lineColor={0,0,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Line(
-            points={{-30,30},{30,-30}},
-            color={0,0,0},
-            smooth=Smooth.None),
-          Line(
-            points={{30,30},{-30,-30}},
-            color={0,0,0},
-            smooth=Smooth.None)}),
+      Diagram(graphics={Text(
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0}),Rectangle(
+              extent={{-30,30},{30,-30}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Line(
+              points={{-30,30},{30,-30}},
+              color={0,0,0},
+              smooth=Smooth.None),Line(
+              points={{30,30},{-30,-30}},
+              color={0,0,0},
+              smooth=Smooth.None)}),
       Icon(graphics={
           Rectangle(
             extent={{-100,100},{100,-100}},
@@ -759,14 +746,14 @@ Protected connector with one input signal of type <code>Real</code>.</p>
           initialScale=0.1,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-            points={{0,50},{100,0},{0,-50},{0,50}},
-            lineColor={0,0,127},
-            fillColor={0,0,127},
-            fillPattern=FillPattern.Solid,
-            lineThickness=0.5), Text(
-            extent={{-200,50},{200,90}},
-            textString="%name",
-            lineColor={0,0,0})}));
+              points={{0,50},{100,0},{0,-50},{0,50}},
+              lineColor={0,0,127},
+              fillColor={0,0,127},
+              fillPattern=FillPattern.Solid,
+              lineThickness=0.5),Text(
+              extent={{-200,50},{200,90}},
+              textString="%name",
+              lineColor={0,0,0})}));
 
   end RealInputBus;
 
@@ -941,14 +928,14 @@ Protected connector with one output signal of type <code>Real</code>.</p>
 
     connector MechanicalExchange "Connector for linear momentum"
 
-      parameter Integer n_vel(
+      parameter Integer n_lin(
         final min=0,
         final max=3) = 1
-        "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>"
+        "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
         annotation (HideResult=true);
 
-      Q.Velocity phi[n_vel](each nominal=1*U.cm/U.s) "Velocity";
-      flow Q.VolumeRate mPhidot[n_vel](each nominal=1*U.N) "Force";
+      Q.Velocity phi[n_lin](each nominal=1*U.cm/U.s) "Velocity";
+      flow Q.VolumeRate mPhidot[n_lin](each nominal=1*U.N) "Force";
       annotation (defaultComponentName="mechanical",Documentation(info="<html>
   <p>Note that the geometric orientation is globally referenced.  Thus,
   force is the rate of globally-referenced linear momentum into the component.
@@ -982,13 +969,13 @@ Protected connector with one output signal of type <code>Real</code>.</p>
               fillPattern=FillPattern.Solid,
               fillColor={255,128,0})}),
         Diagram(graphics={Text(
-              extent={{-100,36},{100,76}},
-              textString="%name",
-              lineColor={0,0,0}), Ellipse(
-              extent={{-30,30},{30,-30}},
-              lineColor={208,104,0},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,128,0})}));
+                  extent={{-100,36},{100,76}},
+                  textString="%name",
+                  lineColor={0,0,0}),Ellipse(
+                  extent={{-30,30},{30,-30}},
+                  lineColor={208,104,0},
+                  fillPattern=FillPattern.Solid,
+                  fillColor={255,128,0})}));
 
     end PartialChemical;
 
@@ -1109,7 +1096,7 @@ Protected connector with one output signal of type <code>Real</code>.</p>
           <a href=\"modelica://FCSys.Connectors.ChemicalOutput\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ChemicalOutputI.png\"></a>
           <a href=\"modelica://FCSys.Connectors.ChemicalBus\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ChemicalBusI.png\"></a></td>
           <!--<a href=\"modelica://FCSys.Connectors.ChemicalBusInternal\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ChemicalBusInternalI.png\"></a></td>-->
-        <td valign=middle>Enthalpy</td>
+        <td valign=middle>Fluid</td>
         <td valign=middle>Massic enthalpy<br><i>h&#772;</i> [L<sup>2</sup> M N<sup>-1</sup> T<sup>-2</sup>]</td>
         <td valign=middle>Enthalpy flow rate<br><i>H&#775;</i> [L<sup>2</sup>  M T<sup>-3</sup>]</td>
       </tr>
@@ -1161,7 +1148,7 @@ Protected connector with one output signal of type <code>Real</code>.</p>
     </table>
 
   <p>In addition to the material exchange pair, the chemical
-  connectors have mechanical exchange and enthalpy pairs that are used to describe the purely advective
+  connectors have mechanical exchange and fluid pairs that are used to describe the purely advective
   (non-diffusive) flow associated with the material exchange (see the
   <a href=\"modelica://FCSys.Subregions.Reaction\">Reaction</a> model for details).  Although
   the physical variables are acausal, the
@@ -1204,7 +1191,7 @@ Protected connector with one output signal of type <code>Real</code>.</p>
   temperature because it is used in the chemical equilibrium
   (see the
   <a href=\"modelica://FCSys.Subregions.Reaction\">Reaction</a> model).  The
-  enthalpy pair's effort is massic enthalpy (enthalpy divided by mass) since
+  fluid pair's effort is massic enthalpy (enthalpy divided by mass) since
   it is used for advection only.  The effort of the material transport pair
   is pressure rather than electrochemical potential so that the dynamic normal
   force can be resolved without nonlinear systems of equations (see the

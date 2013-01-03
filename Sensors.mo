@@ -25,7 +25,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        replaceable FCSys.Sensors.Chemical.Species C(final n_vel=n_vel) if
+        replaceable FCSys.Sensors.Chemical.Species C(final n_lin=n_lin) if
           inclC "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -39,7 +39,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species C19HF37O5S(final n_vel=n_vel) if
+        FCSys.Sensors.Chemical.Species C19HF37O5S(final n_lin=n_lin) if
           inclC19HF37O5S "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -52,7 +52,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species 'e-'(final n_vel=n_vel) if 'incle-'
+        FCSys.Sensors.Chemical.Species 'e-'(final n_lin=n_lin) if 'incle-'
           "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -65,7 +65,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species H2(final n_vel=n_vel) if inclH2 "Model"
+        FCSys.Sensors.Chemical.Species H2(final n_lin=n_lin) if inclH2 "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
         parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
@@ -77,7 +77,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species H2O(final n_vel=n_vel) if inclH2O
+        FCSys.Sensors.Chemical.Species H2O(final n_lin=n_lin) if inclH2O
           "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -90,7 +90,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species 'H+'(final n_vel=n_vel) if 'inclH+'
+        FCSys.Sensors.Chemical.Species 'H+'(final n_lin=n_lin) if 'inclH+'
           "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -103,7 +103,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species N2(final n_vel=n_vel) if inclN2 "Model"
+        FCSys.Sensors.Chemical.Species N2(final n_lin=n_lin) if inclN2 "Model"
           annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -118,7 +118,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species O2(final n_vel=n_vel) if inclO2 "Model"
+        FCSys.Sensors.Chemical.Species O2(final n_lin=n_lin) if inclO2 "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
       equation
@@ -310,7 +310,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        replaceable FCSys.Sensors.Chemical.Species C(final n_vel=n_vel) if
+        replaceable FCSys.Sensors.Chemical.Species C(final n_lin=n_lin) if
           inclC "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -324,7 +324,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species C19HF37O5S(final n_vel=n_vel) if
+        FCSys.Sensors.Chemical.Species C19HF37O5S(final n_lin=n_lin) if
           inclC19HF37O5S "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -337,7 +337,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species 'e-'(final n_vel=n_vel) if 'incle-'
+        FCSys.Sensors.Chemical.Species 'e-'(final n_lin=n_lin) if 'incle-'
           "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -350,7 +350,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species H2(final n_vel=n_vel) if inclH2 "Model"
+        FCSys.Sensors.Chemical.Species H2(final n_lin=n_lin) if inclH2 "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
         parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
@@ -362,7 +362,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species H2O(final n_vel=n_vel) if inclH2O
+        FCSys.Sensors.Chemical.Species H2O(final n_lin=n_lin) if inclH2O
           "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -375,7 +375,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species 'H+'(final n_vel=n_vel) if 'inclH+'
+        FCSys.Sensors.Chemical.Species 'H+'(final n_lin=n_lin) if 'inclH+'
           "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -388,7 +388,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species N2(final n_vel=n_vel) if inclN2 "Model"
+        FCSys.Sensors.Chemical.Species N2(final n_lin=n_lin) if inclN2 "Model"
           annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -403,7 +403,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species O2(final n_vel=n_vel) if inclO2 "Model"
+        FCSys.Sensors.Chemical.Species O2(final n_lin=n_lin) if inclO2 "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
       equation
@@ -510,7 +510,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        replaceable FCSys.Sensors.Chemical.Species C(final n_vel=n_vel) if
+        replaceable FCSys.Sensors.Chemical.Species C(final n_lin=n_lin) if
           inclC "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -524,7 +524,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species C19HF37O5S(final n_vel=n_vel) if
+        FCSys.Sensors.Chemical.Species C19HF37O5S(final n_lin=n_lin) if
           inclC19HF37O5S "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -537,7 +537,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species 'e-'(final n_vel=n_vel) if 'incle-'
+        FCSys.Sensors.Chemical.Species 'e-'(final n_lin=n_lin) if 'incle-'
           "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -550,7 +550,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species H2(final n_vel=n_vel) if inclH2 "Model"
+        FCSys.Sensors.Chemical.Species H2(final n_lin=n_lin) if inclH2 "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
         parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
@@ -562,7 +562,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species H2O(final n_vel=n_vel) if inclH2O
+        FCSys.Sensors.Chemical.Species H2O(final n_lin=n_lin) if inclH2O
           "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -575,7 +575,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species 'H+'(final n_vel=n_vel) if 'inclH+'
+        FCSys.Sensors.Chemical.Species 'H+'(final n_lin=n_lin) if 'inclH+'
           "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -588,7 +588,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species N2(final n_vel=n_vel) if inclN2 "Model"
+        FCSys.Sensors.Chemical.Species N2(final n_lin=n_lin) if inclN2 "Model"
           annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -603,7 +603,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species O2(final n_vel=n_vel) if inclO2 "Model"
+        FCSys.Sensors.Chemical.Species O2(final n_lin=n_lin) if inclO2 "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
       equation
@@ -663,7 +663,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        replaceable FCSys.Sensors.Chemical.Species C(final n_vel=n_vel) if
+        replaceable FCSys.Sensors.Chemical.Species C(final n_lin=n_lin) if
           inclC "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -677,7 +677,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species C19HF37O5S(final n_vel=n_vel) if
+        FCSys.Sensors.Chemical.Species C19HF37O5S(final n_lin=n_lin) if
           inclC19HF37O5S "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -690,7 +690,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species 'e-'(final n_vel=n_vel) if 'incle-'
+        FCSys.Sensors.Chemical.Species 'e-'(final n_lin=n_lin) if 'incle-'
           "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -703,7 +703,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species H2(final n_vel=n_vel) if inclH2 "Model"
+        FCSys.Sensors.Chemical.Species H2(final n_lin=n_lin) if inclH2 "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
         parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
@@ -715,7 +715,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species H2O(final n_vel=n_vel) if inclH2O
+        FCSys.Sensors.Chemical.Species H2O(final n_lin=n_lin) if inclH2O
           "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -728,7 +728,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species 'H+'(final n_vel=n_vel) if 'inclH+'
+        FCSys.Sensors.Chemical.Species 'H+'(final n_lin=n_lin) if 'inclH+'
           "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -741,7 +741,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species N2(final n_vel=n_vel) if inclN2 "Model"
+        FCSys.Sensors.Chemical.Species N2(final n_lin=n_lin) if inclN2 "Model"
           annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -756,7 +756,7 @@ package Sensors "Models to measure conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species O2(final n_vel=n_vel) if inclO2 "Model"
+        FCSys.Sensors.Chemical.Species O2(final n_lin=n_lin) if inclO2 "Model"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
       equation
@@ -810,10 +810,10 @@ package Sensors "Models to measure conditions"
 
       model NullPhase "Empty sensor for a phase (no species)"
         extends FCSys.BaseClasses.Icons.Sensor;
-        parameter Integer n_vel(
+        parameter Integer n_lin(
           final min=1,
           final max=3) = 1
-          "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>"
+          "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
           annotation (HideResult=true);
 
         FCSys.Connectors.ChemicalBus chemical
@@ -842,13 +842,13 @@ package Sensors "Models to measure conditions"
 
       extends FCSys.BaseClasses.Icons.Sensor;
 
-      parameter Integer n_vel(
+      parameter Integer n_lin(
         final min=1,
         final max=3) = 1
-        "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>"
+        "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
         annotation (HideResult=true);
 
-      Connectors.ChemicalInput chemical(final n_vel=n_vel)
+      Connectors.ChemicalInput chemical(final n_lin=n_lin)
         "Single-species connector for material" annotation (Placement(
             transformation(extent={{-10,-10},{10,10}}), iconTransformation(
               extent={{-10,-10},{10,10}})));
@@ -862,7 +862,7 @@ package Sensors "Models to measure conditions"
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-40,-100})));
-      Connectors.RealOutput mphi[n_vel](each final unit="l.m/(N.T)")
+      Connectors.RealOutput mphi[n_lin](each final unit="l.m/(N.T)")
         "Internal signal for specific mass times velocity" annotation (
           Placement(transformation(
             extent={{-10,-10},{10,10}},
@@ -889,7 +889,7 @@ package Sensors "Models to measure conditions"
 
       // Conditions
       0 = chemical.Ndot "No current";
-      zeros(n_vel) = chemical.mphi "Zero outflow specific mass times velocity";
+      zeros(n_lin) = chemical.mphi "Zero outflow specific mass times velocity";
       0 = chemical.sT "Zero outflow specific entropy times temperature";
       annotation (
         defaultComponentName="speciesChemicalSensor",
@@ -927,20 +927,20 @@ sensor</a> models.
       "<html>Sensor for the <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Phases\">Phase</a> model</html>"
       extends FCSys.BaseClasses.Icons.Sensor;
 
-      parameter Integer n_vel(
+      parameter Integer n_lin(
         final min=0,
         final max=3) = 1
-        "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>";
+        "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>";
 
-      Pressure pressure(final n_vel=n_vel) "Sensor for pressure"
+      Pressure pressure(final n_lin=n_lin) "Sensor for pressure"
         annotation (Placement(transformation(extent={{-50,-60},{-30,-40}})));
 
-      Velocity velocity(final n_vel=n_vel) if n_vel > 1 "Sensor for velocity"
+      Velocity velocity(final n_lin=n_lin) if n_lin > 1 "Sensor for velocity"
         annotation (Placement(transformation(extent={{-10,-60},{10,-40}})));
 
-      Temperature temperature(final n_vel=n_vel) "Sensor for temperature"
+      Temperature temperature(final n_lin=n_lin) "Sensor for temperature"
         annotation (Placement(transformation(extent={{30,-60},{50,-40}})));
-      Connectors.InertAmagat inert(final n_vel=n_vel)
+      Connectors.InertAmagat inert(final n_lin=n_lin)
         "Single-species connector for linear momentum and entropy, with additivity of volume"
         annotation (Placement(transformation(extent={{-10,-10},{10,10}}),
             iconTransformation(extent={{-10,-10},{10,10}})));
@@ -1019,17 +1019,17 @@ sensor</a> models.
     model Velocity "Measured velocity"
       extends FCSys.BaseClasses.Icons.Sensor;
 
-      parameter Integer n_vel(
+      parameter Integer n_lin(
         final min=0,
         final max=3) = 1
-        "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>"
+        "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
         annotation (HideResult=true);
 
-      Connectors.InertDalton inert(final n_vel=n_vel)
+      Connectors.InertDalton inert(final n_lin=n_lin)
         "Connector for linear momentum and entropy, with additivity of pressure"
         annotation (HideResult=true, Placement(transformation(extent={{-10,-10},
                 {10,10}}), iconTransformation(extent={{-10,-10},{10,10}})));
-      FCSys.Connectors.RealOutput y[n_vel](final unit="l/T") "Measurement"
+      FCSys.Connectors.RealOutput y[n_lin](final unit="l/T") "Measurement"
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -1041,7 +1041,7 @@ sensor</a> models.
 
       // Conditions
       0 = inert.V "No (additional) volume";
-      zeros(n_vel) = inert.mPhidot "No force";
+      zeros(n_lin) = inert.mPhidot "No force";
       0 = inert.Qdot "Adiabatic";
 
       annotation (
@@ -1072,13 +1072,13 @@ sensor</a> models.
       partial model PartialSensor "Partial model for a sensor"
         extends FCSys.BaseClasses.Icons.Sensor;
 
-        parameter Integer n_vel(
+        parameter Integer n_lin(
           final min=1,
           final max=3) = 1
-          "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>"
+          "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
           annotation (HideResult=true);
 
-        FCSys.Connectors.InertAmagat inert(final n_vel=n_vel)
+        FCSys.Connectors.InertAmagat inert(final n_lin=n_lin)
           "Connector for linear momentum and entropy, with additivity of volume"
           annotation (HideResult=true, Placement(transformation(extent={{-10,-10},
                   {10,10}}), iconTransformation(extent={{-10,-10},{10,10}})));
@@ -1093,7 +1093,7 @@ sensor</a> models.
       equation
         // Conditions
         0 = inert.V "No (additional) volume";
-        zeros(n_vel) = inert.mPhidot "No force";
+        zeros(n_lin) = inert.mPhidot "No force";
         0 = inert.Qdot "Adiabatic";
         annotation (
           defaultComponentPrefixes="replaceable",
@@ -1113,21 +1113,21 @@ sensor</a> models.
 
       extends FCSys.BaseClasses.Icons.Sensor;
 
-      parameter Integer n_vel(
+      parameter Integer n_lin(
         final min=0,
         final max=3) = 1
-        "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>";
+        "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>";
 
-      Volume volume(final n_vel=n_vel) "Sensor for volume"
+      Volume volume(final n_lin=n_lin) "Sensor for volume"
         annotation (Placement(transformation(extent={{-50,-60},{-30,-40}})));
 
-      Velocity velocity(final n_vel=n_vel) if n_vel > 1 "Sensor for velocity"
+      Velocity velocity(final n_lin=n_lin) if n_lin > 1 "Sensor for velocity"
         annotation (Placement(transformation(extent={{-10,-60},{10,-40}})));
 
-      Temperature temperature(final n_vel=n_vel) "Sensor for temperature"
+      Temperature temperature(final n_lin=n_lin) "Sensor for temperature"
         annotation (Placement(transformation(extent={{30,-60},{50,-40}})));
 
-      Connectors.InertDalton inert(final n_vel=n_vel)
+      Connectors.InertDalton inert(final n_lin=n_lin)
         "Single-species connector for linear momentum and entropy, with additivity of pressure"
         annotation (Placement(transformation(extent={{-10,-10},{10,10}}),
             iconTransformation(extent={{-10,-10},{10,10}})));
@@ -1204,17 +1204,17 @@ sensor</a> models.
     model Velocity "Measured velocity"
       extends FCSys.BaseClasses.Icons.Sensor;
 
-      parameter Integer n_vel(
+      parameter Integer n_lin(
         final min=0,
         final max=3) = 1
-        "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>"
+        "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
         annotation (HideResult=true);
 
-      Connectors.InertDalton inert(final n_vel=n_vel)
+      Connectors.InertDalton inert(final n_lin=n_lin)
         "Connector for linear momentum and entropy, with additivity of pressure"
         annotation (HideResult=true, Placement(transformation(extent={{-10,-10},
                 {10,10}}), iconTransformation(extent={{-10,-10},{10,10}})));
-      FCSys.Connectors.RealOutput y[n_vel](final unit="l/T") "Measurement"
+      FCSys.Connectors.RealOutput y[n_lin](final unit="l/T") "Measurement"
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -1226,7 +1226,7 @@ sensor</a> models.
 
       // Conditions
       inert.p = 0 "No (additional) pressure";
-      inert.mPhidot = zeros(n_vel) "No force";
+      inert.mPhidot = zeros(n_lin) "No force";
       0 = inert.Qdot "Adiabatic";
 
       annotation (Icon(graphics={Text(
@@ -1254,13 +1254,13 @@ sensor</a> models.
       partial model PartialSensor "Partial model for a sensor"
         extends FCSys.Sensors.BaseClasses.PartialSensor;
 
-        parameter Integer n_vel(
+        parameter Integer n_lin(
           final min=0,
           final max=3) = 1
-          "<html>Number of components of velocity (<i>n</i><sub>vel</sub>)</html>"
+          "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
           annotation (HideResult=true);
 
-        Connectors.InertDalton inert(final n_vel=n_vel)
+        Connectors.InertDalton inert(final n_lin=n_lin)
           "Connector for linear momentum and entropy, with additivity of pressure"
           annotation (HideResult=true, Placement(transformation(extent={{-10,-10},
                   {10,10}}), iconTransformation(extent={{-10,-10},{10,10}})));
@@ -1268,7 +1268,7 @@ sensor</a> models.
       equation
         // Conditions
         0 = inert.p "No (additional) pressure";
-        zeros(n_vel) = inert.mPhidot "No force";
+        zeros(n_lin) = inert.mPhidot "No force";
         0 = inert.Qdot "Adiabatic";
 
         annotation (
@@ -5223,7 +5223,7 @@ sensor</a> model.
           annotation (
             Documentation(info="<html><p>If <code>ax=1</code>, then the difference in normal velocity
   is measured.  The relative first
-  and second transverse components of velocity may be measured by
+  and second transverse components of linear momentum may be measured by
   <code>ax=2</code> and <code>ax=3</code>, but only if <code>inclTrans</code>
    is <code>true</code>.
   </p></html>"),
