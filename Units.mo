@@ -493,7 +493,7 @@ package Units "Constants and units of physical measure"
   constant Q.Length m=10973731.568539*rad/R_inf "meter";
   // SI unit of length
   // This is the "Rydberg constant" relation [NIST2010].  The unit radian
-  // is included to be explicit, although it is currently one by definition
+  // is included to be explicit, although it's currently one by definition
   // [BIPM2006].  The Rydberg constant may be determined by measuring the
   // spectra of hydrogen, deuterium, and antiprotonic helium
   // (http://en.wikipedia.org/wiki/Rydberg_constant).
@@ -511,7 +511,7 @@ package Units "Constants and units of physical measure"
   // SI unit of electrical conductance
   // This is the "von Klitzing constant" relation [NIST2010].  The unit
   // radian is included on the denominator for dimensional consistency, but
-  // it is one by the current definition [BIPM2006].  The von Klitzing
+  // it's one by the current definition [BIPM2006].  The von Klitzing
   // constant may be determined by measuring the quantum hall effect
   // (http://en.wikipedia.org/wiki/Quantum_Hall_effect).
   constant Q.Amount mol=96485.3365*Wb*S/k_F "mole";
@@ -652,7 +652,7 @@ package Units "Constants and units of physical measure"
   final constant Q.MomentumAngular h=2*q*Phi_0 "Planck constant";
   // The Planck constant over 2*pi (hbar) isn't included as a unique
   // variable.  The unit of angle (rad or cyc) should be factored into the
-  // variable that represents frequency as a quantity.  Then, it is
+  // variable that represents frequency as a quantity.  Then, it's
   // unnecessary to use hbar, e.g.:
   //     hbar = h ~= 1.0545e-34*J/Hz ~= 6.6260e-34*J*s/cyc,
   // where Hz = rad/s.  Currently, rad = 1 (see U.Bases.Base).

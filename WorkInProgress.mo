@@ -11,7 +11,7 @@ package WorkInProgress "Incomplete classes under development"
       HideResult=true,
       Dialog(tab="Assumptions"),
       choices(__Dymola_checkBox=true));
-    // Note:  This is listed above the extends clause so that it is
+    // Note:  This is listed above the extends clause so that it's
     // listed first in the parameter dialog.
     extends Subregions.BaseClasses.PartialSubregion;
 

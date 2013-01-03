@@ -88,7 +88,6 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.VolumeSpecificAbsolute VolumeSpecificAbsolute=1*U.m^3/U.C
         "Absolute specific volume";
       parameter Q.Wavenumber Wavenumber=1*U.rad/U.m "Wavenumber";
-
     end ExampleModel;
   end Examples;
 

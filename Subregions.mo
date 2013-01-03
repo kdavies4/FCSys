@@ -565,7 +565,6 @@ package Subregions
 
         experiment(StopTime=298.15, Algorithm="Dassl"),
         experimentSetupOutput);
-
     end ThermalConduction;
 
     model ThermalConductionConvection
@@ -597,7 +596,6 @@ package Subregions
 
         experiment(StopTime=200, Algorithm="Dassl"),
         experimentSetupOutput);
-
     end ThermalConductionConvection;
 
     model ReactionRamp
@@ -1008,7 +1006,7 @@ package Subregions
       HideResult=true,
       Dialog(tab="Assumptions"),
       choices(__Dymola_checkBox=true));
-    // Note:  This is listed above the extends clause so that it is listed
+    // Note:  This is listed above the extends clause so that it's listed
     // first in the parameter dialog.
     extends BaseClasses.PartialSubregion;
 
@@ -1021,13 +1019,9 @@ package Subregions
     Phases.Ionomer ionomer(final inclVel={inclVelX,inclVelY,inclVelZ})
       "Ionomer" annotation (Dialog(group="Phases"), Placement(transformation(
             extent={{-10,-10},{10,10}})));
-    /*
-  Phases.Liquid liquid(final inclVel={inclVelX,
-        inclVelY,inclVelZ})  "Liquid" annotation (
-
-    Dialog(group="Phases"),
-    Placement(transformation(extent={{-10,-10},{10,10}})));
-  */
+    Phases.Liquid liquid(final inclVel={inclVelX,inclVelY,inclVelZ}) "Liquid"
+      annotation (Dialog(group="Phases"), Placement(transformation(extent={{-10,
+              -10},{10,10}})));
 
     FCSys.Subregions.Reaction HOR(final n_vel=n_vel, n_spec=3) if inclReact
        and (graphite.'incle-' and ionomer.'inclH+' and gas.inclH2 and not (gas.inclO2
@@ -1229,52 +1223,54 @@ package Subregions
         thickness=0.5,
         smooth=Smooth.None));
 
-    /*
-  // Liquid
-  connect(liquid.inert, volume.interaction) annotation (Line(
-      points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
-      color={0,180,0},
-      smooth=Smooth.None,
-      thickness=0.5));
-  connect(liquid.xNegative, xNegative.liquid) annotation (Line(
-      points={{-10,6.10623e-16},{-10,1.16573e-15},{-25,1.16573e-15},{-25,5.55112e-16},
-          {-40,5.55112e-16}},
-      color={127,127,127},
-      pattern=LinePattern.None,
-      thickness=0.5,
-      smooth=Smooth.None));
-  connect(liquid.xPositive, xPositive.liquid) annotation (Line(
-      points={{10,6.10623e-16},{10,5.55112e-16},{40,5.55112e-16}},
-      color={127,127,127},
-      pattern=LinePattern.None,
-      thickness=0.5,
-      smooth=Smooth.None));
-  connect(liquid.yNegative, yNegative.liquid) annotation (Line(
-      points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
-      color={127,127,127},
-      pattern=LinePattern.None,
-      thickness=0.5,
-      smooth=Smooth.None));
-  connect(liquid.yPositive, yPositive.liquid) annotation (Line(
-      points={{6.10623e-16,10},{-4.87687e-22,10},{-4.87687e-22,40},{5.55112e-16,
-          40}},
-      color={127,127,127},
-      pattern=LinePattern.None,
-      thickness=0.5,
-      smooth=Smooth.None));
-  connect(liquid.zNegative, zNegative.liquid) annotation (Line(
-      points={{5,5},{20,20}},
-      color={127,127,127},
-      pattern=LinePattern.None,
-      thickness=0.5,
-      smooth=Smooth.None));
-  connect(liquid.zPositive, zPositive.liquid) annotation (Line(
-      points={{-5,-5},{-20,-20}},
-      color={127,127,127},
-      pattern=LinePattern.None,
-      thickness=0.5,
-      smooth=Smooth.None));
-  */
+    // Liquid
+    connect(liquid.chemical, chemical) annotation (Line(
+        points={{-5,5},{-20,20}},
+        color={208,104,0},
+        smooth=Smooth.None));
+    connect(liquid.inert, volume.inert) annotation (Line(
+        points={{8,-8},{11,-11}},
+        color={0,180,0},
+        smooth=Smooth.None,
+        thickness=0.5));
+    connect(liquid.xNegative, xNegative.liquid) annotation (Line(
+        points={{-8,6.10623e-16},{-8,1.16573e-15},{-25,1.16573e-15},{-25,
+            5.55112e-16},{-40,5.55112e-16}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(liquid.xPositive, xPositive.liquid) annotation (Line(
+        points={{8,6.10623e-16},{8,5.55112e-16},{40,5.55112e-16}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(liquid.yNegative, yNegative.liquid) annotation (Line(
+        points={{6.10623e-16,-8.4},{6.10623e-16,-40},{5.55112e-16,-40}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(liquid.yPositive, yPositive.liquid) annotation (Line(
+        points={{6.10623e-16,10},{-4.87687e-22,10},{-4.87687e-22,40},{
+            5.55112e-16,40}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(liquid.zNegative, zNegative.liquid) annotation (Line(
+        points={{5,5},{20,20}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(liquid.zPositive, zPositive.liquid) annotation (Line(
+        points={{-8,-8},{-20,-20}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
 
     annotation (
       defaultComponentPrefixes="replaceable",
@@ -1298,7 +1294,7 @@ package Subregions
       HideResult=true,
       choices(__Dymola_checkBox=true),
       Dialog(tab="Assumptions"));
-    // Note:  This is listed above the extension clause so that it is listed
+    // Note:  This is listed above the extension clause so that it's listed
     // first in the parameter dialog.
     extends BaseClasses.PartialSubregion;
 
@@ -1313,6 +1309,9 @@ package Subregions
     Phases.Ionomer ionomer(final inclVel={inclVelX,inclVelY,inclVelZ})
       "Ionomer" annotation (Dialog(group="Phases"), Placement(transformation(
             extent={{-10,-10},{10,10}})));
+    Phases.Liquid liquid(final inclVel={inclVelX,inclVelY,inclVelZ}) "Liquid"
+      annotation (Dialog(group="Phases"), Placement(transformation(extent={{-10,
+              -10},{10,10}})));
 
   equation
     // Gas
@@ -1403,6 +1402,51 @@ package Subregions
         thickness=0.5,
         smooth=Smooth.None));
 
+    // Liquid
+    connect(liquid.inert, volume.inert) annotation (Line(
+        points={{8,-8},{11,-11}},
+        color={0,180,0},
+        smooth=Smooth.None,
+        thickness=0.5));
+    connect(liquid.xNegative, xNegative.liquid) annotation (Line(
+        points={{-8,6.10623e-16},{-8,1.16573e-15},{-25,1.16573e-15},{-25,
+            5.55112e-16},{-40,5.55112e-16}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(liquid.xPositive, xPositive.liquid) annotation (Line(
+        points={{8,6.10623e-16},{8,5.55112e-16},{40,5.55112e-16}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(liquid.yNegative, yNegative.liquid) annotation (Line(
+        points={{6.10623e-16,-8.4},{6.10623e-16,-40},{5.55112e-16,-40}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(liquid.yPositive, yPositive.liquid) annotation (Line(
+        points={{6.10623e-16,10},{-4.87687e-22,10},{-4.87687e-22,40},{
+            5.55112e-16,40}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(liquid.zNegative, zNegative.liquid) annotation (Line(
+        points={{5,5},{20,20}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(liquid.zPositive, zPositive.liquid) annotation (Line(
+        points={{-8,-8},{-20,-20}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+
     annotation (
       defaultComponentPrefixes="replaceable",
       Documentation(info="<html><p>Notes:<ul>
@@ -1425,7 +1469,7 @@ package Subregions
       HideResult=true,
       choices(__Dymola_checkBox=true),
       Dialog(tab="Assumptions"));
-    // Note:  This is listed above the extends clause so that it is listed
+    // Note:  This is listed above the extends clause so that it's listed
     // first in the parameter dialog.
     extends BaseClasses.PartialSubregion;
 
@@ -1438,6 +1482,9 @@ package Subregions
     Phases.Graphite graphite(final inclVel={inclVelX,inclVelY,inclVelZ})
       "Graphite" annotation (Dialog(group="Phases"), Placement(transformation(
             extent={{-10,-10},{10,10}})));
+    Phases.Liquid liquid(final inclVel={inclVelX,inclVelY,inclVelZ}) "Liquid"
+      annotation (Dialog(group="Phases"), Placement(transformation(extent={{-10,
+              -10},{10,10}})));
 
   equation
     // Gas
@@ -1522,6 +1569,51 @@ package Subregions
         thickness=0.5,
         smooth=Smooth.None));
     connect(graphite.zPositive, zPositive.graphite) annotation (Line(
+        points={{-8,-8},{-20,-20}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+
+    // Liquid
+    connect(liquid.inert, volume.inert) annotation (Line(
+        points={{8,-8},{11,-11}},
+        color={0,180,0},
+        smooth=Smooth.None,
+        thickness=0.5));
+    connect(liquid.xNegative, xNegative.liquid) annotation (Line(
+        points={{-8,6.10623e-16},{-8,1.16573e-15},{-25,1.16573e-15},{-25,
+            5.55112e-16},{-40,5.55112e-16}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(liquid.xPositive, xPositive.liquid) annotation (Line(
+        points={{8,6.10623e-16},{8,5.55112e-16},{40,5.55112e-16}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(liquid.yNegative, yNegative.liquid) annotation (Line(
+        points={{6.10623e-16,-8.4},{6.10623e-16,-40},{5.55112e-16,-40}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(liquid.yPositive, yPositive.liquid) annotation (Line(
+        points={{6.10623e-16,10},{-4.87687e-22,10},{-4.87687e-22,40},{
+            5.55112e-16,40}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(liquid.zNegative, zNegative.liquid) annotation (Line(
+        points={{5,5},{20,20}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(liquid.zPositive, zPositive.liquid) annotation (Line(
         points={{-8,-8},{-20,-20}},
         color={127,127,127},
         pattern=LinePattern.None,
@@ -3472,7 +3564,7 @@ package Subregions
         parameter Q.Velocity phi_IC[Axis]={0,0,0}
           "<html>Initial velocity (<b>&phi;</b><sub>IC</sub>)</html>"
           annotation (Dialog(tab="Initialization",group="Velocity"));
-        // This is always enabled in the dialog since it is used as a guess value.
+        // This is always enabled in the dialog since it's used as a guess value.
         parameter Boolean initTemp=true "Initialize" annotation (
           compact=true,
           Dialog(
@@ -3484,7 +3576,7 @@ package Subregions
         parameter Q.TemperatureAbsolute T_IC(nominal=298.15*U.K,start=defaults.T)
           "<html>Initial temperature (<i>T</i><sub>IC</sub>)</html>"
           annotation (Dialog(tab="Initialization",group="Temperature"));
-        // This is always enabled in the dialog since it is used as a guess value.
+        // This is always enabled in the dialog since it's used as a guess value.
 
         parameter Boolean inclVel[3]={true,false,false}
           "true, if each component of velocity is included"
@@ -3589,50 +3681,58 @@ package Subregions
 <p>Notes:<ul>
   <li>The x-axis component of velocity is included by default.  At least one component must be included.</li></ul></html>"),
 
-          Icon(graphics={Ellipse(
-                      extent={{-40,100},{40,20}},
-                      lineColor={127,127,127},
-                      startAngle=30,
-                      endAngle=149,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{20,-4},{100,-84}},
-                      lineColor={127,127,127},
-                      startAngle=270,
-                      endAngle=390,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{-100,-4},{-20,-84}},
-                      lineColor={127,127,127},
-                      startAngle=149,
-                      endAngle=270,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Polygon(
-                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
-                  80},{94.5,-24},{60,-84}},
-                      pattern=LinePattern.None,
-                      fillPattern=FillPattern.Sphere,
-                      smooth=Smooth.None,
-                      fillColor={225,225,225},
-                      lineColor={0,0,0}),Line(
-                      points={{-60,-84},{60,-84}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{34.5,80},{94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{-34.5,80},{-94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}),
+          Icon(graphics={
+              Ellipse(
+                extent={{-40,100},{40,20}},
+                lineColor={127,127,127},
+                startAngle=30,
+                endAngle=149,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{20,-4},{100,-84}},
+                lineColor={127,127,127},
+                startAngle=270,
+                endAngle=390,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{-100,-4},{-20,-84}},
+                lineColor={127,127,127},
+                startAngle=149,
+                endAngle=270,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Polygon(
+                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
+                    94.5,-24},{60,-84}},
+                pattern=LinePattern.None,
+                fillPattern=FillPattern.Sphere,
+                smooth=Smooth.None,
+                fillColor={225,225,225},
+                lineColor={0,0,0}),
+              Line(
+                points={{-60,-84},{60,-84}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{34.5,80},{94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{-34.5,80},{-94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}),
           Diagram(graphics));
       end NullPhase;
     end BaseClasses;
@@ -3666,7 +3766,6 @@ package Subregions
                           extent={{-150,90},{-118,52}},
                           lineColor={0,0,255},
                           textString="%t.test")}));
-
         end Calibrated;
 
         model Correlated "Correlated properties"
@@ -3681,7 +3780,6 @@ package Subregions
 
             Diagram(graphics),
             Icon(graphics));
-
         end Correlated;
 
         model Fixed "Fixed properties"
@@ -3774,7 +3872,6 @@ package Subregions
 
             Icon(graphics),
             Diagram(graphics));
-
         end Calibrated;
 
         model Correlated "Correlated properties"
@@ -3871,7 +3968,6 @@ package Subregions
     <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
 
             Diagram(graphics));
-
         end Fixed;
       end Graphite;
     end 'e-';
@@ -3992,7 +4088,6 @@ and <code>r_th=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> g
 <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"),
 
             Diagram(graphics));
-
         end Fixed;
       end Gas;
     end H2;
@@ -4879,8 +4974,8 @@ and <code>r_th=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at satu
       parameter Q.Amount N_IC(start=V_IC*rho_IC)
         "<html>Initial particle number (<i>N</i><sub>IC</sub>)</html>"
         annotation (Dialog(tab="Initialization",group="Scalar properties"));
-      // Note:  This parameter is left enabled even if it isn't used to
-      // explicitly initialize any states, since it is used as a guess value.
+      // Note:  This parameter is left enabled even if it'sn't used to
+      // explicitly initialize any states, since it's used as a guess value.
       // Similar notes apply to some other initial conditions below.
       parameter Q.Current derN_IC=0
         "<html>Initial rate of particle number ((&part;<i>N</i>/&part;<i>t</i>)<sub>IC</sub>)</html>"
@@ -5376,8 +5471,8 @@ For simulation, specify global default settings by dragging FCSys.BCs.Defaults i
 The default global default settings will be used for the current simulation.",
           Placement(transformation(extent={{40,40},{60,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
-      // Note:  In Dymola 7.4 it is necessary to add the missing inner message
-      // here to give a warning message, even though it is included in the
+      // Note:  In Dymola 7.4 it's necessary to add the missing inner message
+      // here to give a warning message, even though it's included in the
       // Defaults model too.
 
     initial equation
@@ -5911,14 +6006,14 @@ The default global default settings will be used for the current simulation.",
             extent={{-100,-100},{100,100}},
             initialScale=0.1), graphics),
         Icon(graphics={Ellipse(
-                  extent={{-100,100},{100,-100}},
-                  lineColor={127,127,127},
-                  pattern=LinePattern.Dash,
-                  fillColor={225,225,225},
-                  fillPattern=FillPattern.Solid),Text(
-                  extent={{-100,20},{100,60}},
-                  textString="%name",
-                  lineColor={0,0,0})}));
+              extent={{-100,100},{100,-100}},
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash,
+              fillColor={225,225,225},
+              fillPattern=FillPattern.Solid), Text(
+              extent={{-100,20},{100,60}},
+              textString="%name",
+              lineColor={0,0,0})}));
     end Species;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -6075,7 +6170,7 @@ The default global default settings will be used for the current simulation.",
     Real nu[n_spec]=Chemistry.stoich(chemical.formula)
       "Stoichiometric coefficients";
     // Note 1:  As of Modelica 3.2 and Dymola 7.4, nu can't be a parameter or
-    // constant even though it isn't time-varying.  The strings that represent
+    // constant even though it'sn't time-varying.  The strings that represent
     // the chemical formulas can't be passed through the connectors as
     // parameters or constants.  However, the translator should recognize that
     // these equations are static.

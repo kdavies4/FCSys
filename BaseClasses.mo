@@ -1155,7 +1155,7 @@ An unrelated species may be included.");
         protected
           final Real du1=der(u1) "Derivative of u1";
           final Real du2[:]=der(u2) "Derivative of u2";
-          // In Dymola 7.4, it is necessary to explicitly define these intermediate
+          // In Dymola 7.4, it's necessary to explicitly define these intermediate
           // variables (since there are second-order derivatives).
 
         initial equation
