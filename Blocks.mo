@@ -1525,6 +1525,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
             NumberOfIntervals=5000,
             Algorithm="Dassl"),
           experimentSetupOutput);
+
       end RandomTest;
 
       model Pendulum
@@ -2719,6 +2720,7 @@ This is discussed in the description of package
             NumberOfIntervals=50000,
             Algorithm="Dassl"),
           experimentSetupOutput);
+
       end RandomTest;
 
       model Sampler
@@ -2776,6 +2778,7 @@ This is discussed in the description of package
               experimentSetupOutput,
               Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                       -100},{100,100}}), graphics)));
+
         end QPSolverMathworksExample;
 
         model QPSolverFerreauExample
