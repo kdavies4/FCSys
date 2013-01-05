@@ -1482,7 +1482,7 @@ sensor</a> models.
         // the connection equations that follow could be generic.
 
         // C
-        connect(C.face.material, face.C.material) annotation (Line(
+        connect(C.face.normal, face.C.normal) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -1533,7 +1533,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // C19HF37O5S
-        connect(C19HF37O5S.face.material, face.C19HF37O5S.material) annotation
+        connect(C19HF37O5S.face.normal, face.C19HF37O5S.normal) annotation
           (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
@@ -1592,7 +1592,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // e-
-        connect('e-'.face.material, face.'e-'.material) annotation (Line(
+        connect('e-'.face.normal, face.'e-'.normal) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -1643,7 +1643,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // H2
-        connect(H2.face.material, face.H2.material) annotation (Line(
+        connect(H2.face.normal, face.H2.normal) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -1694,7 +1694,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // H2O
-        connect(H2O.face.material, face.H2O.material) annotation (Line(
+        connect(H2O.face.normal, face.H2O.normal) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -1745,7 +1745,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // H+
-        connect('H+'.face.material, face.'H+'.material) annotation (Line(
+        connect('H+'.face.normal, face.'H+'.normal) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -1796,7 +1796,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // N2
-        connect(N2.face.material, face.N2.material) annotation (Line(
+        connect(N2.face.normal, face.N2.normal) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -1847,7 +1847,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // O2
-        connect(O2.face.material, face.O2.material) annotation (Line(
+        connect(O2.face.normal, face.O2.normal) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -1966,7 +1966,7 @@ sensor</a> models.
             enable=inclO2), Placement(transformation(extent={{-10,-10},{10,10}})));
       equation
         // H2
-        connect(H2.face.material, face.H2.material) annotation (Line(
+        connect(H2.face.normal, face.H2.normal) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -2017,7 +2017,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // H2O
-        connect(H2O.face.material, face.H2O.material) annotation (Line(
+        connect(H2O.face.normal, face.H2O.normal) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -2068,7 +2068,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // N2
-        connect(N2.face.material, face.N2.material) annotation (Line(
+        connect(N2.face.normal, face.N2.normal) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -2119,7 +2119,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // O2
-        connect(O2.face.material, face.O2.material) annotation (Line(
+        connect(O2.face.normal, face.O2.normal) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -2207,7 +2207,7 @@ sensor</a> models.
 
       equation
         // C
-        connect(C.face.material, face.C.material) annotation (Line(
+        connect(C.face.normal, face.C.normal) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -2258,7 +2258,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // e-
-        connect('e-'.face.material, face.'e-'.material) annotation (Line(
+        connect('e-'.face.normal, face.'e-'.normal) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -2350,7 +2350,7 @@ sensor</a> models.
 
       equation
         // C19HF37O5S
-        connect(C19HF37O5S.face.material, face.C19HF37O5S.material) annotation
+        connect(C19HF37O5S.face.normal, face.C19HF37O5S.normal) annotation
           (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
@@ -2409,7 +2409,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // H+
-        connect('H+'.face.material, face.'H+'.material) annotation (Line(
+        connect('H+'.face.normal, face.'H+'.normal) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -2634,7 +2634,7 @@ sensor</a> models.
 
       equation
         // Electrochemical potential
-        connect(echemPot.material, face.material) annotation (Line(
+        connect(echemPot.normal, face.normal) annotation (Line(
             points={{-60,4},{-48,4},{-48,20},{5.55112e-16,20}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -2721,7 +2721,7 @@ sensor</a> models.
         extends FCSys.Sensors.BaseClasses.PartialSensor(redeclare
             FCSys.Connectors.RealOutput y(final unit="l2.m/(N.T2)"));
 
-        FCSys.Connectors.MaterialTransport material
+        FCSys.Connectors.Normal material
           annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       equation
         y = material.mu;
@@ -2735,7 +2735,7 @@ sensor</a> models.
       model Velocity "Sensor for velocity"
         extends FCSys.Sensors.BaseClasses.PartialSensor(redeclare
             FCSys.Connectors.RealOutput y(final unit="l/T"));
-        FCSys.Connectors.MechanicalTransport momentum
+        FCSys.Connectors.Transverse momentum
           annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
@@ -3032,12 +3032,12 @@ sensor</a> model.
         // the connection equations that follow could be generic.
 
         // C
-        connect(C.negative.material, negative.C.material) annotation (Line(
+        connect(C.negative.normal, negative.C.normal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.material, positive.C.material) annotation (Line(
+        connect(C.positive.normal, positive.C.normal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3119,13 +3119,13 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // C19HF37O5S
-        connect(C19HF37O5S.negative.material, negative.C19HF37O5S.material)
+        connect(C19HF37O5S.negative.normal, negative.C19HF37O5S.normal)
           annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.material, positive.C19HF37O5S.material)
+        connect(C19HF37O5S.positive.normal, positive.C19HF37O5S.normal)
           annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
@@ -3222,13 +3222,13 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // e-
-        connect('e-'.negative.material, negative.'e-'.material) annotation (
+        connect('e-'.negative.normal, negative.'e-'.normal) annotation (
             Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.material, positive.'e-'.material) annotation (
+        connect('e-'.positive.normal, positive.'e-'.normal) annotation (
             Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
@@ -3323,12 +3323,12 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // H2
-        connect(H2.negative.material, negative.H2.material) annotation (Line(
+        connect(H2.negative.normal, negative.H2.normal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.material, positive.H2.material) annotation (Line(
+        connect(H2.positive.normal, positive.H2.normal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3410,12 +3410,12 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // H2O
-        connect(H2O.negative.material, negative.H2O.material) annotation (Line(
+        connect(H2O.negative.normal, negative.H2O.normal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.material, positive.H2O.material) annotation (Line(
+        connect(H2O.positive.normal, positive.H2O.normal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3509,13 +3509,13 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // H+
-        connect('H+'.negative.material, negative.'H+'.material) annotation (
+        connect('H+'.negative.normal, negative.'H+'.normal) annotation (
             Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.material, positive.'H+'.material) annotation (
+        connect('H+'.positive.normal, positive.'H+'.normal) annotation (
             Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
@@ -3610,12 +3610,12 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // N2
-        connect(N2.negative.material, negative.N2.material) annotation (Line(
+        connect(N2.negative.normal, negative.N2.normal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.material, positive.N2.material) annotation (Line(
+        connect(N2.positive.normal, positive.N2.normal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3697,12 +3697,12 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // O2
-        connect(O2.negative.material, negative.O2.material) annotation (Line(
+        connect(O2.negative.normal, negative.O2.normal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.material, positive.O2.material) annotation (Line(
+        connect(O2.positive.normal, positive.O2.normal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3853,12 +3853,12 @@ sensor</a> model.
 
       equation
         // H2
-        connect(H2.negative.material, negative.H2.material) annotation (Line(
+        connect(H2.negative.normal, negative.H2.normal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.material, positive.H2.material) annotation (Line(
+        connect(H2.positive.normal, positive.H2.normal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3940,12 +3940,12 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // H2O
-        connect(H2O.negative.material, negative.H2O.material) annotation (Line(
+        connect(H2O.negative.normal, negative.H2O.normal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.material, positive.H2O.material) annotation (Line(
+        connect(H2O.positive.normal, positive.H2O.normal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4039,12 +4039,12 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // N2
-        connect(N2.negative.material, negative.N2.material) annotation (Line(
+        connect(N2.negative.normal, negative.N2.normal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.material, positive.N2.material) annotation (Line(
+        connect(N2.positive.normal, positive.N2.normal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4126,12 +4126,12 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // O2
-        connect(O2.negative.material, negative.O2.material) annotation (Line(
+        connect(O2.negative.normal, negative.O2.normal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.material, positive.O2.material) annotation (Line(
+        connect(O2.positive.normal, positive.O2.normal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4250,12 +4250,12 @@ sensor</a> model.
 
       equation
         // C
-        connect(C.negative.material, negative.C.material) annotation (Line(
+        connect(C.negative.normal, negative.C.normal) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.material, positive.C.material) annotation (Line(
+        connect(C.positive.normal, positive.C.normal) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4337,13 +4337,13 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // e-
-        connect('e-'.negative.material, negative.'e-'.material) annotation (
+        connect('e-'.negative.normal, negative.'e-'.normal) annotation (
             Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.material, positive.'e-'.material) annotation (
+        connect('e-'.positive.normal, positive.'e-'.normal) annotation (
             Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
@@ -4480,13 +4480,13 @@ sensor</a> model.
 
       equation
         // C19HF37O5S
-        connect(C19HF37O5S.negative.material, negative.C19HF37O5S.material)
+        connect(C19HF37O5S.negative.normal, negative.C19HF37O5S.normal)
           annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.material, positive.C19HF37O5S.material)
+        connect(C19HF37O5S.positive.normal, positive.C19HF37O5S.normal)
           annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
@@ -4583,13 +4583,13 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // H+
-        connect('H+'.negative.material, negative.'H+'.material) annotation (
+        connect('H+'.negative.normal, negative.'H+'.normal) annotation (
             Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.material, positive.'H+'.material) annotation (
+        connect('H+'.positive.normal, positive.'H+'.normal) annotation (
             Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
@@ -4920,11 +4920,11 @@ sensor</a> model.
               origin={0,-98})));
       equation
         // Electrochemical potential
-        connect(echemPot.negative, negative.material) annotation (Line(
+        connect(echemPot.negative, negative.normal) annotation (Line(
             points={{-90,74},{-90,5.55112e-16},{-100,5.55112e-16}},
             color={127,127,127},
             smooth=Smooth.None));
-        connect(echemPot.positive, positive.material) annotation (Line(
+        connect(echemPot.positive, positive.normal) annotation (Line(
             points={{-70,74},{90,74},{90,8},{100,8}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4933,11 +4933,11 @@ sensor</a> model.
             points={{-80,64},{-80,-70},{5.55112e-16,-70},{5.55112e-16,-100}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(current.negative, negative.material) annotation (Line(
+        connect(current.negative, negative.normal) annotation (Line(
             points={{-70,58},{-90,58},{-90,5.55112e-16},{-100,5.55112e-16}},
             color={127,127,127},
             smooth=Smooth.None));
-        connect(current.positive, positive.material) annotation (Line(
+        connect(current.positive, positive.normal) annotation (Line(
             points={{-50,58},{90,58},{90,8},{100,8}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -5155,11 +5155,11 @@ sensor</a> model.
 
             extends FCSys.Sensors.BaseClasses.PartialSensor;
 
-            FCSys.Connectors.MaterialTransport negative
+            FCSys.Connectors.Normal negative
               "Material connector for the negative face" annotation (Placement(
                   transformation(extent={{-110,-10},{-90,10}}),
                   iconTransformation(extent={{-110,-10},{-90,10}})));
-            FCSys.Connectors.MaterialTransport positive
+            FCSys.Connectors.Normal positive
               "Material connector for the positive face" annotation (Placement(
                   transformation(extent={{90,-10},{110,10}}),
                   iconTransformation(extent={{90,-10},{110,10}})));
@@ -5238,11 +5238,11 @@ sensor</a> model.
 
             extends FCSys.Sensors.BaseClasses.PartialSensor;
 
-            FCSys.Connectors.MechanicalTransport negative
+            FCSys.Connectors.Transverse negative
               "Linear momentum connector for the negative face" annotation (
                 Placement(transformation(extent={{-110,-10},{-90,10}}),
                   iconTransformation(extent={{-110,-10},{-90,10}})));
-            FCSys.Connectors.MechanicalTransport positive
+            FCSys.Connectors.Transverse positive
               "Linear momentum connector for the positive face" annotation (
                 Placement(transformation(extent={{90,-10},{110,10}}),
                   iconTransformation(extent={{90,-10},{110,10}})));

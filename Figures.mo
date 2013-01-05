@@ -173,9 +173,9 @@ package Figures "Layouts for documentation"
         "Declarative-based circuit with voltage in, current out"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput v annotation (Placement(transformation(extent={{-60,
-                  -30},{-40,-10}}), iconTransformation(extent={{-120,-10},{-100,
-                  10}})));
+        FCSys.Connectors.RealInput v annotation (Placement(transformation(
+                extent={{-60,-30},{-40,-10}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
         FCSys.Connectors.RealOutput i annotation (Placement(transformation(
               extent={{10,-10},{-10,10}},
               rotation=180,
@@ -272,9 +272,9 @@ package Figures "Layouts for documentation"
         "Declarative-based circuit with current in, voltage out"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput i annotation (Placement(transformation(extent={{-80,
-                  -30},{-60,-10}}), iconTransformation(extent={{-120,-10},{-100,
-                  10}})));
+        FCSys.Connectors.RealInput i annotation (Placement(transformation(
+                extent={{-80,-30},{-60,-10}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
         FCSys.Connectors.RealOutput v annotation (Placement(transformation(
               extent={{10,-10},{-10,10}},
               rotation=180,
@@ -369,12 +369,12 @@ package Figures "Layouts for documentation"
       model Imperative_vi "Imperative circuit with voltage in, current out"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput v annotation (Placement(transformation(extent={{-100,
-                  20},{-80,40}}), iconTransformation(extent={{-120,-10},{-100,
-                  10}})));
-        FCSys.Connectors.RealOutput i annotation (Placement(transformation(extent={{
-                  80,20},{100,40}}), iconTransformation(extent={{100,-10},{120,
-                  10}})));
+        FCSys.Connectors.RealInput v annotation (Placement(transformation(
+                extent={{-100,20},{-80,40}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput i annotation (Placement(transformation(
+                extent={{80,20},{100,40}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
         Modelica.Blocks.Continuous.Integrator ind(k=1/L)
           annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
         Modelica.Blocks.Math.Gain res1(k=1/R1)
@@ -462,12 +462,12 @@ package Figures "Layouts for documentation"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
       public
-        FCSys.Connectors.RealInput i annotation (Placement(transformation(extent={{-100,
-                  20},{-80,40}}), iconTransformation(extent={{-120,-10},{-100,
-                  10}})));
-        FCSys.Connectors.RealOutput v annotation (Placement(transformation(extent={{
-                  80,20},{100,40}}), iconTransformation(extent={{100,-10},{120,
-                  10}})));
+        FCSys.Connectors.RealInput i annotation (Placement(transformation(
+                extent={{-100,20},{-80,40}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput v annotation (Placement(transformation(
+                extent={{80,20},{100,40}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
         Modelica.Blocks.Math.Gain res1(k=R1)
           annotation (Placement(transformation(extent={{-10,0},{10,20}})));
         Modelica.Blocks.Math.Add sum
@@ -551,12 +551,12 @@ package Figures "Layouts for documentation"
         "Equivalent transfer function for voltage in, current out"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput v annotation (Placement(transformation(extent={{-100,
-                  20},{-80,40}}), iconTransformation(extent={{-120,-10},{-100,
-                  10}})));
-        FCSys.Connectors.RealOutput i annotation (Placement(transformation(extent={{
-                  80,20},{100,40}}), iconTransformation(extent={{100,-10},{120,
-                  10}})));
+        FCSys.Connectors.RealInput v annotation (Placement(transformation(
+                extent={{-100,20},{-80,40}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput i annotation (Placement(transformation(
+                extent={{80,20},{100,40}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
         Modelica.Blocks.Continuous.TransferFunction transferFunction(a={R1*L*C,
               R1*R2*C + L,R2}, b={-L*C,-(R1 + R2)*C,-1})
           annotation (Placement(transformation(extent={{-10,20},{10,40}})));
@@ -578,12 +578,12 @@ package Figures "Layouts for documentation"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
       public
-        FCSys.Connectors.RealInput i annotation (Placement(transformation(extent={{-100,
-                  20},{-80,40}}), iconTransformation(extent={{-120,-10},{-100,
-                  10}})));
-        FCSys.Connectors.RealOutput v annotation (Placement(transformation(extent={{
-                  80,20},{100,40}}), iconTransformation(extent={{100,-10},{120,
-                  10}})));
+        FCSys.Connectors.RealInput i annotation (Placement(transformation(
+                extent={{-100,20},{-80,40}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput v annotation (Placement(transformation(
+                extent={{80,20},{100,40}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
         Modelica.Blocks.Continuous.TransferFunction transferFunction(b={R1*L*C,
               R1*R2*C + L,R2}, a={-L*C,-(R1 + R2)*C,-1})
           annotation (Placement(transformation(extent={{-10,20},{10,40}})));
@@ -661,12 +661,12 @@ package Figures "Layouts for documentation"
       model DeclarativeA "First circuit in declarative formalism"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(extent={{
-                  -100,-10},{-80,10}}), iconTransformation(extent={{-120,-10},{
-                  -100,10}})));
-        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(extent=
-                  {{40,-10},{60,10}}), iconTransformation(extent={{100,-10},{
-                  120,10}})));
+        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
+                extent={{-100,-10},{-80,10}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
+                extent={{40,-10},{60,10}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
         Modelica.Electrical.Analog.Sources.SignalVoltage voltageSource
           annotation (Placement(transformation(
               extent={{-10,10},{10,-10}},
@@ -730,12 +730,12 @@ package Figures "Layouts for documentation"
       model DeclarativeB "First circuit in declarative formalism"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(extent={{
-                  -60,-10},{-40,10}}), iconTransformation(extent={{-120,-10},{-100,
-                  10}})));
-        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(extent=
-                  {{80,-10},{100,10}}), iconTransformation(extent={{100,-10},{
-                  120,10}})));
+        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
+                extent={{-60,-10},{-40,10}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
+                extent={{80,-10},{100,10}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
         Modelica.Electrical.Analog.Sources.SignalVoltage voltageSource
           annotation (Placement(transformation(
               extent={{-10,10},{10,-10}},
@@ -800,12 +800,12 @@ package Figures "Layouts for documentation"
         "Cascaded first and second circuits in declarative formalism"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(extent={{
-                  -100,-10},{-80,10}}), iconTransformation(extent={{-120,-10},{
-                  -100,10}})));
-        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(extent=
-                  {{80,-10},{100,10}}), iconTransformation(extent={{100,-10},{
-                  120,10}})));
+        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
+                extent={{-100,-10},{-80,10}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
+                extent={{80,-10},{100,10}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
         Modelica.Electrical.Analog.Sources.SignalVoltage voltageSource
           annotation (Placement(transformation(
               extent={{-10,10},{10,-10}},
@@ -892,12 +892,12 @@ package Figures "Layouts for documentation"
       model ImperativeA "First circuit in imperative formalism"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(extent={{
-                  -160,-10},{-140,10}}), iconTransformation(extent={{-120,-10},
-                  {-100,10}})));
-        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(extent=
-                  {{0,-10},{20,10}}), iconTransformation(extent={{100,-10},{120,
-                  10}})));
+        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
+                extent={{-160,-10},{-140,10}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
+                extent={{0,-10},{20,10}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
         Modelica.Blocks.Math.Gain res1(k=R1)
           annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
         Modelica.Blocks.Continuous.Derivative ind(k=C)
@@ -959,12 +959,12 @@ package Figures "Layouts for documentation"
       model ImperativeB "Second circuit in imperative formalism"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(extent={{
-                  -30,-10},{-10,10}}), iconTransformation(extent={{-120,-10},{-100,
-                  10}})));
-        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(extent=
-                  {{140,-10},{160,10}}), iconTransformation(extent={{100,-10},{
-                  120,10}})));
+        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
+                extent={{-30,-10},{-10,10}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
+                extent={{140,-10},{160,10}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
       public
         Modelica.Blocks.Math.Gain res2(k=1/R2)
           annotation (Placement(transformation(extent={{60,-10},{80,10}})));
@@ -1030,12 +1030,12 @@ package Figures "Layouts for documentation"
         "Cascaded first and second circuits in imperative formalism"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(extent={{
-                  -110,30},{-90,50}}), iconTransformation(extent={{-120,-10},{-100,
-                  10}})));
-        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(extent=
-                  {{80,30},{100,50}}), iconTransformation(extent={{100,-10},{
-                  120,10}})));
+        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
+                extent={{-110,30},{-90,50}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
+                extent={{80,30},{100,50}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
         Modelica.Blocks.Continuous.Integrator cap(k=1/C)
           annotation (Placement(transformation(extent={{-40,-10},{-60,10}})));
         Modelica.Blocks.Math.Gain res1(k=1/R1)
@@ -1124,12 +1124,12 @@ package Figures "Layouts for documentation"
         "Incorrectly cascaded first and second circuits in imperative formalism"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(extent={{
-                  -160,-10},{-140,10}}), iconTransformation(extent={{-120,-10},
-                  {-100,10}})));
-        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(extent=
-                  {{140,-10},{160,10}}), iconTransformation(extent={{100,-10},{
-                  120,10}})));
+        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
+                extent={{-160,-10},{-140,10}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
+                extent={{140,-10},{160,10}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
         Modelica.Blocks.Math.Gain res1(k=R1)
           annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
         Modelica.Blocks.Continuous.Derivative ind(k=C)
@@ -1218,12 +1218,12 @@ package Figures "Layouts for documentation"
         "Cascaded first and second circuits as a transfer function"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(extent={{
-                  -110,30},{-90,50}}), iconTransformation(extent={{-120,-10},{-100,
-                  10}})));
-        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(extent=
-                  {{80,30},{100,50}}), iconTransformation(extent={{100,-10},{
-                  120,10}})));
+        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
+                extent={{-110,30},{-90,50}}), iconTransformation(extent={{-120,
+                  -10},{-100,10}})));
+        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
+                extent={{80,30},{100,50}}), iconTransformation(extent={{100,-10},
+                  {120,10}})));
         Modelica.Blocks.Continuous.TransferFunction transferFunction(b={R3}, a=
               {C*R1*(R2 + R3),R1 + R2 + R3})
           annotation (Placement(transformation(extent={{-20,30},{0,50}})));
@@ -1282,11 +1282,11 @@ package Figures "Layouts for documentation"
     extends FCSys.BaseClasses.Icons.Cell;
 
     annotation (Icon(graphics={Rectangle(
-              extent={{-100,100},{100,65}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0})}));
+            extent={{-100,100},{100,65}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0})}));
   end Logo;
 
   model AnFPIcon "Anode flow plate"
@@ -1487,72 +1487,88 @@ package Figures "Layouts for documentation"
           transformation(extent={{2,-6},{22,14}}), iconTransformation(extent={{
               -10,-20},{10,0}})));
 
-    FCSys.Connectors.MaterialTransport Material annotation (Placement(transformation(
-            extent={{-22,-30},{-2,-10}}), iconTransformation(extent={{10,-40},{
-              30,-20}})));
-    FCSys.Connectors.Thermal Thermal annotation (Placement(transformation(extent={{26,
-              -30},{46,-10}}), iconTransformation(extent={{-10,-40},{10,-20}})));
-    FCSys.Connectors.MechanicalTransport Mechanical annotation (Placement(
-          transformation(extent={{2,-30},{22,-10}}), iconTransformation(extent=
-              {{-30,-40},{-10,-20}})));
-    annotation (Diagram(graphics={Line(
-              points={{12,28},{12,4}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{-32,28},{-32,4}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{12,4},{12,-20}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{12,4},{-12,-20}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{12,4},{36,-20}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{60,24},{60,-16}},
-              color={0,0,0},
-              smooth=Smooth.None),Line(
-              points={{58,20},{60,24},{62,20}},
-              color={0,0,0},
-              smooth=Smooth.None),Text(
-              extent={{48,30},{72,26}},
-              lineColor={0,0,0},
-              textString="Composite"),Text(
-              extent={{46,-18},{74,-22}},
-              lineColor={0,0,0},
-              textString="Basic"),Text(
-              extent={{-40,40},{-24,36}},
-              lineColor={0,0,0},
-              textString="Chemical"),Text(
-              extent={{-40,36},{-24,32}},
-              lineColor={0,0,0},
-              textString="bus"),Ellipse(
-              extent={{-35,31},{-29,25}},
-              lineColor={208,104,0},
-              fillColor={255,128,0},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{4,40},{20,36}},
-              lineColor={0,0,0},
-              textString="Face"),Text(
-              extent={{4,36},{20,32}},
-              lineColor={0,0,0},
-              textString="bus"),Ellipse(
-              extent={{9,31},{15,25}},
-              lineColor={127,127,127},
-              fillColor={191,191,191},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{16,-18},{22,-22}},
-              lineColor={0,0,0},
-              textString="x 2")}));
+    FCSys.Connectors.Normal Normal annotation (Placement(transformation(extent=
+              {{-22,-30},{-2,-10}}), iconTransformation(extent={{10,-40},{30,-20}})));
+    FCSys.Connectors.Thermal Thermal annotation (Placement(transformation(
+            extent={{26,-30},{46,-10}}), iconTransformation(extent={{-10,-40},{
+              10,-20}})));
+    FCSys.Connectors.Transverse Transverse annotation (Placement(transformation(
+            extent={{2,-30},{22,-10}}), iconTransformation(extent={{-30,-40},{-10,
+              -20}})));
+    annotation (Diagram(graphics={
+          Line(
+            points={{12,28},{12,4}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{-32,28},{-32,4}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{12,4},{12,-20}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{12,4},{-12,-20}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{12,4},{36,-20}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{60,24},{60,-16}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{58,20},{60,24},{62,20}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Text(
+            extent={{48,30},{72,26}},
+            lineColor={0,0,0},
+            textString="Composite"),
+          Text(
+            extent={{46,-18},{74,-22}},
+            lineColor={0,0,0},
+            textString="Basic"),
+          Text(
+            extent={{-40,40},{-24,36}},
+            lineColor={0,0,0},
+            textString="Chemical"),
+          Text(
+            extent={{-40,36},{-24,32}},
+            lineColor={0,0,0},
+            textString="bus"),
+          Ellipse(
+            extent={{-35,31},{-29,25}},
+            lineColor={208,104,0},
+            fillColor={255,128,0},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5),
+          Text(
+            extent={{4,40},{20,36}},
+            lineColor={0,0,0},
+            textString="Face"),
+          Text(
+            extent={{4,36},{20,32}},
+            lineColor={0,0,0},
+            textString="bus"),
+          Ellipse(
+            extent={{9,31},{15,25}},
+            lineColor={127,127,127},
+            fillColor={191,191,191},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5),
+          Text(
+            extent={{16,-18},{22,-22}},
+            lineColor={0,0,0},
+            textString="x 2")}));
   end ConnectorHieararchy;
 
   package ReactionComparison
@@ -1589,19 +1605,19 @@ package Figures "Layouts for documentation"
     equation
       der(err) = (reaction.Xidot - traditionalReaction.Xidot)^2;
 
-      connect(species1.material, reaction.material[1]) annotation (Line(
+      connect(species1.normal, reaction.normal[1]) annotation (Line(
           points={{-40,6.10623e-16},{-40,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
 
           color={0,0,0},
           smooth=Smooth.None));
 
-      connect(species2.material, reaction.material[2]) annotation (Line(
+      connect(species2.normal, reaction.normal[2]) annotation (Line(
           points={{6.10623e-16,6.10623e-16},{6.10623e-16,-20},{0,-40},{
               5.55112e-16,-40}},
           color={0,0,0},
           smooth=Smooth.None));
 
-      connect(species3.material, reaction.material[3]) annotation (Line(
+      connect(species3.normal, reaction.normal[3]) annotation (Line(
           points={{40,6.10623e-16},{40,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
 
           color={0,0,0},
@@ -1684,7 +1700,7 @@ package Figures "Layouts for documentation"
       nu*material.rho = 0 - 1 "Equilibrium";
       material.Ndot = nu*Xidot "stoichiometry";
 
-      annotation ( Icon(graphics={Rectangle(
+      annotation (Icon(graphics={Rectangle(
                   extent={{-100,100},{100,-100}},
                   lineColor={0,0,0},
                   fillColor={255,255,255},

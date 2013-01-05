@@ -10,6 +10,7 @@ package FCSys "Modelica library of fuel cell models"
 // the LaTeX document:
 //------------------------------------------------------------------------
 
+
 extends Modelica.Icons.Package;
 // extends FCSys.Icons.Cell;
 
@@ -38,6 +39,7 @@ import FCSys.Connectors.BaseClasses.ThermoOpt;
 import FCSys.Subregions.Reactions.BaseClasses.InitMethCharge;
 import FCSys.Subregions.Species.BaseClasses.InitMethVelocity;
 import FCSys.Subregions.Species.BaseClasses.InitMethScalar;
+
 
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
@@ -190,6 +192,10 @@ package UsersGuide "User's Guide"
     <tr>
       <td valign=top class=noBorder>[<a name=\"Gurau1998\" class=bookmark>Gurau1998</a>]</td>
       <td valign=top class=noBorder>V. Gurau, H. Liu, and S. Kaka, \"<a href=\"http://dx.doi.org/10.1002/aic.690441109\">Two-Dimensional Model for Proton Exchange Membrane Fuel Cells</a>,\" <i>AIChE J.</i>, vol. 44, no. 11, pp. 2410&ndash;2422, Nov. 1998.</td>
+    </tr>
+    <tr>
+      <td valign=top class=noBorder>[<a name=\"Hogan2006\" class=bookmark>Hogan2006</a>]</td>
+      <td valign=top class=noBorder>N. Hogan, \"Heat Transfer and the Second Law,\" <a href=\"http://ocw.mit.edu/courses/mechanical-engineering/2-141-modeling-and-simulation-of-dynamic-systems-fall-2006/lecture-notes/heat_transfer.pdf\">http://ocw.mit.edu/courses/mechanical-engineering/2-141-modeling-and-simulation-of-dynamic-systems-fall-2006/lecture-notes/heat_transfer.pdf</a>, Course notes for <i>Modeling and Simulation of Dynamic Systems</i> (2.141), Massachusetts of Technology, Oct. 2006.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Incropera2002\" class=bookmark>Incropera2002</a>]</td>
@@ -900,6 +906,7 @@ printing and shipping costs may be recovered.</p>
     end ModelicaLicense2;
   annotation (preferedView="info", DocumentationClass=true);
   end UsersGuide;
+
 
 annotation (
   uses(Modelica(version="3.2"), Modelica_LinearSystems2(version="2.1")),

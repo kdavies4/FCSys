@@ -58,7 +58,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           C(entropySpec(k=defaults.T)),
           'e-'(
             entropySpec(k=defaults.T),
-            redeclare FCSys.BCs.Face.Material.Pressure materialBC,
+            redeclare FCSys.BCs.Face.Normal.Pressure materialBC,
             materialSpec(k(start=1*U.atm))))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -236,7 +236,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           C(entropySpec(k=defaults.T)),
           'e-'(
             entropySpec(k=defaults.T),
-            redeclare FCSys.BCs.Face.Material.Pressure materialBC,
+            redeclare FCSys.BCs.Face.Normal.Pressure materialBC,
             materialSpec(k(start=1*U.atm))))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -330,22 +330,22 @@ package Regions "3D arrays of discrete, interconnected subregions"
           inclH2O=true,
           inclN2=true,
           inclO2=true,
-          O2(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
-              materialSpec(k(start=1*U.atm))),
-          H2O(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
-              materialSpec(k(start=1*U.atm)))),
+          O2(redeclare FCSys.BCs.Face.Normal.Pressure materialBC, materialSpec(
+                k(start=1*U.atm))),
+          H2O(redeclare FCSys.BCs.Face.Normal.Pressure materialBC, materialSpec(
+                k(start=1*U.atm)))),
         each graphite(
           inclC=true,
           'incle-'=true,
           C(redeclare FCSys.BCs.Face.Entropy.Temperature thermalBC, thermalSpec(
                 k(start=298.15*U.K))),
-          'e-'(redeclare FCSys.BCs.Face.Material.Current materialBC, redeclare
+          'e-'(redeclare FCSys.BCs.Face.Normal.Current materialBC, redeclare
               Modelica.Blocks.Sources.Ramp materialSpec(duration=1000, height=-2
                   *U.A))),
         each ionomer(
           inclC19HF37O5S=true,
           'inclH+'=true,
-          'H+'(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
+          'H+'(redeclare FCSys.BCs.Face.Normal.Pressure materialBC,
               materialSpec(k(start=1*U.atm))))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -431,7 +431,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           'incle-'=true,
           C(entropySpec(k=defaults.T)),
           'e-'(entropySpec(k=defaults.T),redeclare
-              FCSys.BCs.Face.Material.Pressure materialBC))) annotation (
+              FCSys.BCs.Face.Normal.Pressure materialBC))) annotation (
           Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -528,7 +528,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           'incle-'=true,
           C(entropySpec(k=defaults.T)),
           'e-'(entropySpec(k=defaults.T),redeclare
-              FCSys.BCs.Face.Material.Pressure materialBC))) annotation (
+              FCSys.BCs.Face.Normal.Pressure materialBC))) annotation (
           Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -587,20 +587,20 @@ package Regions "3D arrays of discrete, interconnected subregions"
         each gas(
           inclH2=true,
           inclH2O=true,
-          H2(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
-              materialSpec(k=1*U.atm)),
-          H2O(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
-              materialSpec(k=1*U.atm))),
+          H2(redeclare FCSys.BCs.Face.Normal.Pressure materialBC, materialSpec(
+                k=1*U.atm)),
+          H2O(redeclare FCSys.BCs.Face.Normal.Pressure materialBC, materialSpec(
+                k=1*U.atm))),
         each graphite(
           inclC=true,
           'incle-'=true,
-          'e-'(redeclare FCSys.BCs.Face.Material.Current materialBC, redeclare
+          'e-'(redeclare FCSys.BCs.Face.Normal.Current materialBC, redeclare
               Modelica.Blocks.Sources.Ramp materialSpec(duration=1000, height=2
                   *U.A))),
         each ionomer(
           inclC19HF37O5S=true,
           'inclH+'=true,
-          'H+'(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
+          'H+'(redeclare FCSys.BCs.Face.Normal.Pressure materialBC,
               materialSpec(k(start=1*U.atm))))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -672,7 +672,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           'inclH+'=true,
           C19HF37O5S(entropySpec(k=defaults.T)),
           'H+'(entropySpec(k=defaults.T),redeclare
-              FCSys.BCs.Face.Material.Pressure materialBC))) annotation (
+              FCSys.BCs.Face.Normal.Pressure materialBC))) annotation (
           Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -736,22 +736,22 @@ package Regions "3D arrays of discrete, interconnected subregions"
           inclH2O=true,
           inclN2=true,
           inclO2=true,
-          O2(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
-              materialSpec(k(start=1*U.atm))),
-          H2O(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
-              materialSpec(k(start=1*U.atm)))),
+          O2(redeclare FCSys.BCs.Face.Normal.Pressure materialBC, materialSpec(
+                k(start=1*U.atm))),
+          H2O(redeclare FCSys.BCs.Face.Normal.Pressure materialBC, materialSpec(
+                k(start=1*U.atm)))),
         each graphite(
           inclC=true,
           'incle-'=true,
           C(redeclare FCSys.BCs.Face.Entropy.Temperature thermalBC, thermalSpec(
                 k(start=298.15*U.K))),
-          'e-'(redeclare FCSys.BCs.Face.Material.Current materialBC, redeclare
+          'e-'(redeclare FCSys.BCs.Face.Normal.Current materialBC, redeclare
               Modelica.Blocks.Sources.Ramp materialSpec(duration=1000, height=-2
                   *U.A))),
         each ionomer(
           inclC19HF37O5S=true,
           'inclH+'=true,
-          'H+'(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
+          'H+'(redeclare FCSys.BCs.Face.Normal.Pressure materialBC,
               materialSpec(k(start=1*U.atm))))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -831,7 +831,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           'incle-'=true,
           C(entropySpec(k=defaults.T)),
           'e-'(entropySpec(k=defaults.T),redeclare
-              FCSys.BCs.Face.Material.Pressure materialBC))) annotation (
+              FCSys.BCs.Face.Normal.Pressure materialBC))) annotation (
           Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -897,7 +897,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           'incle-'=true,
           C(entropySpec(k=defaults.T)),
           'e-'(entropySpec(k=defaults.T),redeclare
-              FCSys.BCs.Face.Material.Pressure materialBC))) annotation (
+              FCSys.BCs.Face.Normal.Pressure materialBC))) annotation (
           Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
