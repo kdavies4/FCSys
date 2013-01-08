@@ -1396,13 +1396,14 @@ package Characteristics
         output Q.Potential g "Gibbs potential";
 
       algorithm
-        g := h( p,
-                T,
+        g := h( T,
+                p,
                 referenceEnthalpy) - T*s(T, p)
           annotation (
           InlineNoEvent=true,
           Inline=true,
           smoothOrder=1);
+
       end g;
 
       replaceable function h

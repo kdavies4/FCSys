@@ -106,15 +106,21 @@ package UsersGuide "User's Guide"
             Summary of the connections for a chemical reaction</li>
             <li>A region or layer model such as <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">FCSys.Regions.AnFPs.AnFP</a>:
             Information about the geometric orientation of the cell</li>
-        </ul>In general, overviews are given in the documentation of containing packages and
+        </ul>
+        In general, overviews are given in the documentation of containing packages and
         specific information is given at the appropriate level of inheritance.  If a model does not
         have sufficient documentation, please look at its base model(s) and the package(s) that
         contain it.  Assumptions are only listed at the lowest level of inheritance at which they apply.  Therefore, the
         list of assumptions in a model should be considered in conjunction with the assumptions in all
         the models it inherits from.
         </li>
-        <li>Create and simulate examples of other usage scenarios.  Many of the nested models (regions, subregions, species) are replaceable.
-        Their parameters are often not propagated to the cell level, but may be accessed through the parameter dialog by editing the replaceable model.</li>
+        <li>Create and simulate examples of other usage scenarios.  Many of the 
+        nested models (regions, subregions, species) are replaceable.
+        Their parameters are often not propagated to the cell level, but may 
+        be accessed through the parameter dialog by editing the replaceable model.  Note that 
+        many models have auxiliary output variables available for additional analysis and diagnostics.
+        These may be included by setting <code>analysis=true</code> in the outer defaults model (instance 
+        of <a href=\"modelica://FCSys.BCs.Defaults\">Defaults</a>).</li>
         <li>Develop your own classes.  It should be possible to model other electrochemical
         devices (solid oxide fuel cells, lithium ion batteries, flow batteries/regenerative fuel cells, etc.) by
         extending the existing classes and

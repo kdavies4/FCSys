@@ -424,25 +424,21 @@ package BCs "Models for boundary conditions"
       annotation (
         Documentation(info="<html><p>Note that transverse linear momentum is not included.</p>
   </html>"),
-        Icon(graphics={
-            Line(
-              points={{0,40},{0,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{0,40},{100,40}},
-              color={0,127,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{100,-40}},
-              color={191,0,0},
-              smooth=Smooth.None)}),
+        Icon(graphics={Line(
+                  points={{0,40},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{0,40},{100,40}},
+                  color={0,127,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{100,-40}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}),
         Diagram(graphics));
     end AdaptFluid;
 
@@ -479,26 +475,22 @@ package BCs "Models for boundary conditions"
           color={191,0,0},
           smooth=Smooth.None));
 
-      annotation (Icon(graphics={
-            Line(
-              points={{0,40},{0,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,40},{100,40}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{100,-40}},
-              color={191,0,0},
-              smooth=Smooth.None)}), Diagram(graphics));
+      annotation (Icon(graphics={Line(
+                  points={{0,40},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,40},{100,40}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{100,-40}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}), Diagram(graphics));
     end 'AdaptSubregione-';
 
     model 'AdaptBuse-'
@@ -540,26 +532,22 @@ package BCs "Models for boundary conditions"
           color={191,0,0},
           smooth=Smooth.None));
 
-      annotation (Icon(graphics={
-            Line(
-              points={{0,40},{0,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,40},{100,40}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{100,-40}},
-              color={191,0,0},
-              smooth=Smooth.None)}), Diagram(graphics));
+      annotation (Icon(graphics={Line(
+                  points={{0,40},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,40},{100,40}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{100,-40}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}), Diagram(graphics));
     end 'AdaptBuse-';
 
     model 'Adapte-'
@@ -598,25 +586,21 @@ package BCs "Models for boundary conditions"
       // is no potential difference.
 
       annotation (Documentation(info="<html><p>Note that transverse linear momentum is not included.</p>
-  </html>"), Icon(graphics={
-            Line(
-              points={{0,40},{0,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{0,40},{100,40}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{100,-40}},
-              color={191,0,0},
-              smooth=Smooth.None)}));
+  </html>"), Icon(graphics={Line(
+                  points={{0,40},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{0,40},{100,40}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{100,-40}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}));
     end 'Adapte-';
 
     package BaseClasses "Base classes (not for direct use)"
@@ -654,25 +638,21 @@ package BCs "Models for boundary conditions"
             points={{10,-4},{60,-4},{60,-40},{100,-40}},
             color={191,0,0},
             smooth=Smooth.None));
-        annotation (Icon(graphics={
-              Line(
-                points={{0,40},{0,-40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash,
-                thickness=0.5),
-              Line(
-                points={{0,0},{-100,0}},
-                color={127,127,127},
-                smooth=Smooth.None),
-              Line(
-                points={{0,40},{100,40}},
-                color={0,127,255},
-                smooth=Smooth.None),
-              Line(
-                points={{0,-40},{100,-40}},
-                color={191,0,0},
-                smooth=Smooth.None)}), Diagram(graphics));
+        annotation (Icon(graphics={Line(
+                      points={{0,40},{0,-40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash,
+                      thickness=0.5),Line(
+                      points={{0,0},{-100,0}},
+                      color={127,127,127},
+                      smooth=Smooth.None),Line(
+                      points={{0,40},{100,40}},
+                      color={0,127,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,-40},{100,-40}},
+                      color={191,0,0},
+                      smooth=Smooth.None)}), Diagram(graphics));
       end PartialAdaptBus;
     end BaseClasses;
   end Adapters;
@@ -1306,8 +1286,8 @@ package BCs "Models for boundary conditions"
             'e-'(thermoOpt=ThermoOpt.OpenDiabatic)))
           annotation (Placement(transformation(extent={{-140,20},{-120,40}})));
 
-        replaceable Sensors.FaceDifferential.Subregion voltage[n_y, n_z](each
-            final axis=FCSys.BaseClasses.Axis.x) if inclIO
+        replaceable FCSys.Sensors.FaceBusDifferential.Subregion voltage[n_y,
+          n_z](each final axis=FCSys.BaseClasses.Axis.x) if inclIO
           annotation (Placement(transformation(extent={{120,-40},{140,-20}})));
       equation
 
@@ -4361,7 +4341,6 @@ boundary condition</a> model.
         thermal.T = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="thermalBC");
-
       end Temperature;
 
       model HeatFlowRate "Prescribed heat flow rate"
@@ -5762,7 +5741,6 @@ boundary condition</a> model.
             defaultComponentName="normalBC");
       end Force;
 
-
       package BaseClasses "Base classes (not for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialBC "Partial model for a material BC"
@@ -6081,31 +6059,27 @@ those generated by the model's <code>connect</code> statements.</p>
       </tr>
     </table>
 </html>"),
-      Icon(graphics={
-          Line(
-            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=crossOver,
-            smooth=Smooth.Bezier),
-          Line(
-            points={{-80,40},{80,40}},
-            color={127,127,127},
-            visible=not crossOver,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{-80,-40},{80,-40}},
-            color={127,127,127},
-            visible=not crossOver,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=crossOver,
-            smooth=Smooth.Bezier)}),
+      Icon(graphics={Line(
+              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=crossOver,
+              smooth=Smooth.Bezier),Line(
+              points={{-80,40},{80,40}},
+              color={127,127,127},
+              visible=not crossOver,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{-80,-40},{80,-40}},
+              color={127,127,127},
+              visible=not crossOver,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=crossOver,
+              smooth=Smooth.Bezier)}),
       Diagram(graphics));
   end Router;
 
@@ -6204,13 +6178,13 @@ The default global default settings will be used for the current simulation.",
       defaultComponentName="volume",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={0,0,0},
-            fillPattern=FillPattern.Sphere,
-            fillColor={170,213,255}), Text(
-            extent={{-150,12},{150,-18}},
-            lineColor={0,0,0},
-            textString="V=%V")}),
+              extent={{-100,100},{100,-100}},
+              lineColor={0,0,0},
+              fillPattern=FillPattern.Sphere,
+              fillColor={170,213,255}),Text(
+              extent={{-150,12},{150,-18}},
+              lineColor={0,0,0},
+              textString="V=%V")}),
       Documentation(info="<html>
 <p>
 Ideally mixed volume of constant size with two fluid ports and one medium model.
@@ -6535,9 +6509,9 @@ should be used if these values are needed.
                 100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                 100,100}}), graphics={Text(
-              extent={{-150,110},{150,150}},
-              textString="%name",
-              lineColor={0,0,255})}));
+                  extent={{-150,110},{150,150}},
+                  textString="%name",
+                  lineColor={0,0,255})}));
     end PartialLumpedVessel;
 
     block RealFunction

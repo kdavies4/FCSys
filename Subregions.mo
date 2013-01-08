@@ -223,25 +223,25 @@ package Subregions
           final inclN2=inclN2,
           final inclO2=inclO2,
           H2O(
-            p_IC=1.01*defaults.p,
+            p_IC=defaults.p + 0*U.Pa,
             yNegative(inviscidZ=true, inviscidX=true),
             yPositive(inviscidZ=true, inviscidX=true),
             zNegative(inviscidX=true, inviscidY=true),
             zPositive(inviscidX=true, inviscidY=true)),
           N2(
-            p_IC=1.01*defaults.p,
+            p_IC=defaults.p + 0*U.Pa,
             yNegative(inviscidZ=true, inviscidX=true),
             yPositive(inviscidZ=true, inviscidX=true),
             zNegative(inviscidX=true, inviscidY=true),
             zPositive(inviscidX=true, inviscidY=true)),
           O2(
-            p_IC=1.01*defaults.p,
+            p_IC=defaults.p + 0*U.Pa,
             yNegative(inviscidZ=true, inviscidX=true),
             yPositive(inviscidZ=true, inviscidX=true),
             zNegative(inviscidX=true, inviscidY=true),
             zPositive(inviscidX=true, inviscidY=true)),
           H2(
-            p_IC=1.01*defaults.p,
+            p_IC=defaults.p + 0*U.Pa,
             yNegative(inviscidZ=true, inviscidX=true),
             yPositive(inviscidZ=true, inviscidX=true),
             zNegative(inviscidX=true, inviscidY=true),
@@ -324,7 +324,7 @@ package Subregions
         each inclYFaces=false,
         each inclZFaces=false) if n_x > 0
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-
+      // **temp 0 pressure offset
       FCSys.Subregions.Subregion subregion2(
         L={1,1,1}*U.cm,
         gas(
@@ -333,25 +333,25 @@ package Subregions
           final inclN2=inclN2,
           final inclO2=inclO2,
           H2(
-            p_IC=0.99*defaults.p,
+            p_IC=defaults.p - 0*U.Pa,
             yNegative(inviscidZ=true, inviscidX=true),
             yPositive(inviscidZ=true, inviscidX=true),
             zNegative(inviscidX=true, inviscidY=true),
             zPositive(inviscidX=true, inviscidY=true)),
           H2O(
-            p_IC=0.99*defaults.p,
+            p_IC=defaults.p - 0*U.Pa,
             yNegative(inviscidZ=true, inviscidX=true),
             yPositive(inviscidZ=true, inviscidX=true),
             zNegative(inviscidX=true, inviscidY=true),
             zPositive(inviscidX=true, inviscidY=true)),
           N2(
-            p_IC=0.99*defaults.p,
+            p_IC=defaults.p - 0*U.Pa,
             yNegative(inviscidZ=true, inviscidX=true),
             yPositive(inviscidZ=true, inviscidX=true),
             zNegative(inviscidX=true, inviscidY=true),
             zPositive(inviscidX=true, inviscidY=true)),
           O2(
-            p_IC=0.99*defaults.p,
+            p_IC=defaults.p - 0*U.Pa,
             yNegative(inviscidZ=true, inviscidX=true),
             yPositive(inviscidZ=true, inviscidX=true),
             zNegative(inviscidX=true, inviscidY=true),
@@ -389,9 +389,15 @@ package Subregions
           final inclH2O=inclH2O,
           final inclN2=inclN2,
           final inclO2=inclO2),
-        graphite(final inclC=inclC, final 'incle-'='incle-'),
-        ionomer(final inclC19HF37O5S=inclC19HF37O5S, final 'inclH+'='inclH+'))
-        annotation (__Dymola_choicesFromPackage=true,Placement(transformation(
+        graphite(
+          final inclC=inclC,
+          final 'incle-'='incle-',
+          C(isobaric=true)),
+        ionomer(
+          final inclC19HF37O5S=inclC19HF37O5S,
+          final 'inclH+'='inclH+',
+          C19HF37O5S(isobaric=true))) annotation (__Dymola_choicesFromPackage=
+            true, Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-50,0})));
@@ -402,9 +408,15 @@ package Subregions
           final inclH2O=inclH2O,
           final inclN2=inclN2,
           final inclO2=inclO2),
-        graphite(final inclC=inclC, final 'incle-'='incle-'),
-        ionomer(final inclC19HF37O5S=inclC19HF37O5S, final 'inclH+'='inclH+'))
-        annotation (__Dymola_choicesFromPackage=true, Placement(transformation(
+        graphite(
+          final inclC=inclC,
+          final 'incle-'='incle-',
+          C(isobaric=true)),
+        ionomer(
+          final inclC19HF37O5S=inclC19HF37O5S,
+          final 'inclH+'='inclH+',
+          C19HF37O5S(isobaric=true))) annotation (__Dymola_choicesFromPackage=
+            true, Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={50,0})));
@@ -447,17 +459,17 @@ package Subregions
         Placement(transformation(extent={{70,70},{90,90}})),
         experiment(
           StopTime=4,
-          NumberOfIntervals=5000,
           Tolerance=1e-06,
           Algorithm="Dassl"),
         experimentSetupOutput,
         Commands(file(ensureSimulated=true) =
-            "resources/scripts/Dymola/Subregions.Examples.SubregionsH2.mos"));
+            "resources/scripts/Dymola/Subregions.Examples.SubregionsH2.mos"),
+        Diagram(graphics));
     end SubregionsH2;
 
     model SubregionsCAndH2
       "<html>Test a one-dimensional array of subregions with C and H<sub>2</sub></html>"
-      extends SubregionsH2(inclC=true);
+      extends SubregionsH2(inclC=true, defaults(analysis=true));
       annotation (
         experiment(StopTime=3, NumberOfIntervals=5000),
         experimentSetupOutput,
@@ -3876,58 +3888,50 @@ package Subregions
 <p>Notes:<ul>
   <li>The x-axis component of linear momentum is included by default.  At least one component must be included.</li></ul></html>"),
 
-          Icon(graphics={
-              Ellipse(
-                extent={{-40,100},{40,20}},
-                lineColor={127,127,127},
-                startAngle=30,
-                endAngle=149,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{20,-4},{100,-84}},
-                lineColor={127,127,127},
-                startAngle=270,
-                endAngle=390,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{-100,-4},{-20,-84}},
-                lineColor={127,127,127},
-                startAngle=149,
-                endAngle=270,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Polygon(
-                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
-                    94.5,-24},{60,-84}},
-                pattern=LinePattern.None,
-                fillPattern=FillPattern.Sphere,
-                smooth=Smooth.None,
-                fillColor={225,225,225},
-                lineColor={0,0,0}),
-              Line(
-                points={{-60,-84},{60,-84}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{34.5,80},{94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{-34.5,80},{-94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}),
+          Icon(graphics={Ellipse(
+                      extent={{-40,100},{40,20}},
+                      lineColor={127,127,127},
+                      startAngle=30,
+                      endAngle=149,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{20,-4},{100,-84}},
+                      lineColor={127,127,127},
+                      startAngle=270,
+                      endAngle=390,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{-100,-4},{-20,-84}},
+                      lineColor={127,127,127},
+                      startAngle=149,
+                      endAngle=270,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Polygon(
+                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
+                  80},{94.5,-24},{60,-84}},
+                      pattern=LinePattern.None,
+                      fillPattern=FillPattern.Sphere,
+                      smooth=Smooth.None,
+                      fillColor={225,225,225},
+                      lineColor={0,0,0}),Line(
+                      points={{-60,-84},{60,-84}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{34.5,80},{94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{-34.5,80},{-94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}),
           Diagram(graphics));
       end NullPhase;
     end BaseClasses;
@@ -5008,28 +5012,28 @@ and <code>r_th=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at satu
         final derI_IC,
         xNegative(
           final isobaric=true,
-          final inviscidY=false,
-          final inviscidZ=false),
+          final inviscidY=true,
+          final inviscidZ=true),
         xPositive(
           final isobaric=true,
-          final inviscidY=false,
-          final inviscidZ=false),
+          final inviscidY=true,
+          final inviscidZ=true),
         yNegative(
           final isobaric=true,
-          final inviscidZ=false,
-          final inviscidX=false),
+          final inviscidZ=true,
+          final inviscidX=true),
         yPositive(
           final isobaric=true,
-          final inviscidZ=false,
-          final inviscidX=false),
+          final inviscidZ=true,
+          final inviscidX=true),
         zNegative(
           final isobaric=true,
-          final inviscidX=false,
-          final inviscidY=false),
+          final inviscidX=true,
+          final inviscidY=true),
         zPositive(
           final isobaric=true,
-          final inviscidX=false,
-          final inviscidY=false));
+          final inviscidX=true,
+          final inviscidY=true));
 
       // Note:  upstreamX, upstreamY, and upstreamZ don't matter since bulk
       // current is zero.
@@ -5317,7 +5321,7 @@ and <code>r_th=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at satu
         nominal=1*U.mol,
         final start=N_IC,
         final fixed=false,
-        stateSelect=StateSelect.prefer) "Particle number";
+        stateSelect=StateSelect.default) "Particle number";
       // Note:  The start value for this variable (and others below) isn't fixed
       // because the related initial condition is applied in the initial
       // equation section.
@@ -5375,28 +5379,29 @@ and <code>r_th=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at satu
       //
       // Capacitances
       output Q.Capacitance C(stateSelect=StateSelect.never) = if Data.isCompressible
-         and not overrideEOS then -N*rho^2/Data.dp(
+         and not overrideEOS then -N*rho^2*(U.m^3/U.C)/Data.dp(
             v=1/rho,
             T=T,
-            dv=1,
+            dv=U.m^3/U.C,
             dT=0) else 0 if defaults.analysis "Chemical capacitance";
       // Note:  This is delN/delg at constant T and V.
       output Q.CapacityThermal C_V(stateSelect=StateSelect.never) = N*c_V if
         defaults.analysis "Isochoric heat capacity";
       //
       // Time constants
-      output Q.Time t_exch_mechanical(stateSelect=StateSelect.never) = alpha_12
-        *N/Lstar if defaults.analysis "Time constant for mechanical exchange";
-      output Q.Time t_exch_thermal(stateSelect=StateSelect.never) = alpha_th*N/
-        Lstar if defaults.analysis "Time constant for thermal exchange";
+      output Q.Time tau_exch_mechanical(stateSelect=StateSelect.never) =
+        alpha_12*N/Lstar if defaults.analysis
+        "Time constant for mechanical exchange";
+      output Q.Time tau_exch_thermal(stateSelect=StateSelect.never) = alpha_th*
+        N/Lstar if defaults.analysis "Time constant for thermal exchange";
       output Q.Time tau_trans_0[Axis](each stateSelect=StateSelect.never) =
         fill(alpha_0*N, 3) ./ Lstar_trans if defaults.analysis
         "Time constants for normal transport of linear momentum";
-      output Q.Time t_trans_12[Axis](each stateSelect=StateSelect.never) = fill(
-        alpha_12*N, 3) ./ Lstar_trans if defaults.analysis
+      output Q.Time tau_trans_12[Axis](each stateSelect=StateSelect.never) =
+        fill(alpha_12*N, 3) ./ Lstar_trans if defaults.analysis
         "Time constants for transverse transport of linear momentum";
-      output Q.Time t_trans_th[Axis](each stateSelect=StateSelect.never) = fill(
-        alpha_th*N, 3) ./ Lstar_trans if defaults.analysis
+      output Q.Time tau_trans_th[Axis](each stateSelect=StateSelect.never) =
+        fill(alpha_th*N, 3) ./ Lstar_trans if defaults.analysis
         "Time constants for thermal transport";
       //
       // Peclet numbers (only for the axes with linear momentum included; others are
@@ -5434,12 +5439,12 @@ and <code>r_th=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at satu
         :]) .* I_face[cartAxes[axis], :] .^ 2)/A[cartAxes[axis]] + sum(Data.m*
         Delta(phi_face[cartWrap(cartAxes[axis] - orientation), :, orientation]
          .* I_face[cartWrap(cartAxes[axis] - orientation), :]) for orientation
-         in Orientation) for axis in 1:n_lin}
+         in Orientation) for axis in 1:n_lin} if defaults.analysis
         "Acceleration force due to material (advective) transport";
       output Q.Force f_trans_diff[n_lin](each stateSelect=StateSelect.never) =
         {Sigma(mPhidot_face_0[cartAxes[axis], :]) + sum(Sigma(mPhidot_face[
         cartWrap(cartAxes[axis] - orientation), :, orientation]) for
-        orientation in Orientation) for axis in 1:n_lin}
+        orientation in Orientation) for axis in 1:n_lin} if defaults.analysis
         "Friction from other subregions (diffusive transport; includes volume viscosity)";
       //
       // Energy balance
@@ -5622,7 +5627,6 @@ and <code>r_th=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at satu
           __Dymola_label="zPositive",
           __Dymola_descriptionLabel=true),Placement(transformation(extent={{-30,
                 -30},{-10,-10}}), iconTransformation(extent={{-80,-80},{-60,-60}})));
-      // **note that by default faces are isobaric if linear momenum disabled.
 
       // Geometric parameters
     protected
@@ -5763,7 +5767,7 @@ The default global default settings will be used for the current simulation.",
           mu = mu_IC;
         elseif initMethPartNum == InitMethScalar.PotentialElectrochemicalRate
              then
-          der(mu) = dermu_IC;
+          der(mu)/U.s = dermu_IC;
         elseif initMethPartNum == InitMethScalar.ReactionRate then
           chemical.Ndot = Ndot_IC;
           // Else, initMethPartNum == InitMethScalar.None; then, there are no
@@ -5835,7 +5839,7 @@ The default global default settings will be used for the current simulation.",
         elseif initMethTemp == InitMethScalar.PotentialElectrochemical then
           mu = mu_IC;
         elseif initMethTemp == InitMethScalar.PotentialElectrochemicalRate then
-          der(mu) = dermu_IC;
+          der(mu)/U.s = dermu_IC;
         elseif initMethTemp == InitMethScalar.ReactionRate then
           chemical.Ndot = Ndot_IC;
           // Else, initMethTemp == InitMethScalar.None; then, there are no
@@ -5899,12 +5903,12 @@ The default global default settings will be used for the current simulation.",
 
           // Transverse
           for orientation in Orientation loop
-            f_12*inSign(side)*mPhidot_face[axis, side, orientation] = 4*
-              Lstar_trans[axis]*(phi_face[axis, side, orientation] - (if
-              inclLin[cartWrap(axis + orientation)] then phi[linAxes[cartWrap(
-              axis + orientation)]] else 0))*(if upstream[axis] and inclLin[
-              axis] then (exp(inSign(side)*I[linAxes[axis]]*alpha_12/(2*
-              Lstar_trans[axis])) + 1) else 2);
+            f_12*mPhidot_face[axis, side, orientation] = 4*Lstar_trans[axis]*(
+              phi_face[axis, side, orientation] - (if inclLin[cartWrap(axis +
+              orientation)] then phi[linAxes[cartWrap(axis + orientation)]]
+               else 0))*(if upstream[axis] and inclLin[axis] then (exp(inSign(
+              side)*I[linAxes[axis]]*alpha_12/(2*Lstar_trans[axis])) + 1) else
+              2);
             if {{{xNegative.inviscidY,xNegative.inviscidZ},{xPositive.inviscidY,
                 xPositive.inviscidZ}},{{yNegative.inviscidZ,yNegative.inviscidX},
                 {yPositive.inviscidZ,yPositive.inviscidX}},{{zNegative.inviscidX,
@@ -5960,7 +5964,7 @@ The default global default settings will be used for the current simulation.",
           mu = mu_IC;
         elseif initMethPartNum == InitMethScalar.PotentialElectrochemicalRate
              then
-          der(mu) = dermu_IC;
+          der(mu)/U.s = dermu_IC;
         else
           //if initMethPartNum == InitMethScalar.ReactionRate then
           chemical.Ndot = Ndot_IC;
@@ -6036,7 +6040,7 @@ The default global default settings will be used for the current simulation.",
         elseif initMethTemp == InitMethScalar.PotentialElectrochemical then
           mu = mu_IC;
         elseif initMethTemp == InitMethScalar.PotentialElectrochemicalRate then
-          der(mu) = dermu_IC;
+          der(mu)/U.s = dermu_IC;
         else
           //if initMethTemp == InitMethScalar.ReactionRate then
           chemical.Ndot = Ndot_IC;
@@ -6048,8 +6052,8 @@ The default global default settings will be used for the current simulation.",
           /2 + Data.m*chemical.hbar*chemical.Ndot + phi*common.mechanical.mPhidot
            + common.thermal.Qdot + inert.phi*inert.mPhidot + inert.Qdot + sum(
           sum(inSign(side)*(Data.h(T_face[axis, side], p_face[axis, side]) +
-          Data.m*((A[axis]*Data.v_Tp(T_face[axis, side], p_face[axis, side])*
-          I_face[axis, side])^2 + phi_face[axis, side, :]*phi_face[axis, side,
+          Data.m*((Data.v_Tp(T_face[axis, side], p_face[axis, side])*I_face[
+          axis, side]/A[axis])^2 + phi_face[axis, side, :]*phi_face[axis, side,
           :])/2)*I_face[axis, side] for side in Side) for axis in Axis) + sum(
           phi_face .* mPhidot_face) + sum(Qdot_face) "Energy conservation";
       end if;
@@ -6152,6 +6156,8 @@ The default global default settings will be used for the current simulation.",
     <li>By default, only the x-axis component of linear momentum is included.  Also by default,
     only material and thermal transport are included through the x-axis faces and only
     x-axis displacement/shear stress is included through the y- and z-axis faces.</li>
+    <li>By default, faces are assumed to be isobaric and invisicid if the corresponding 
+    component of linear momenum is disabled.</li>
     <li>If a state is prescribed, then the
     associated initial condition (IC) will be applied for all time.  The
     corresponding conservation equation will not be imposed.
