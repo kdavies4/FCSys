@@ -223,25 +223,25 @@ package Subregions
           final inclN2=inclN2,
           final inclO2=inclO2,
           H2O(
-            p_IC=defaults.p + 0*U.Pa,
+            p_IC=defaults.p + 100*U.Pa,
             yNegative(inviscidZ=true, inviscidX=true),
             yPositive(inviscidZ=true, inviscidX=true),
             zNegative(inviscidX=true, inviscidY=true),
             zPositive(inviscidX=true, inviscidY=true)),
           N2(
-            p_IC=defaults.p + 0*U.Pa,
+            p_IC=defaults.p + 100*U.Pa,
             yNegative(inviscidZ=true, inviscidX=true),
             yPositive(inviscidZ=true, inviscidX=true),
             zNegative(inviscidX=true, inviscidY=true),
             zPositive(inviscidX=true, inviscidY=true)),
           O2(
-            p_IC=defaults.p + 0*U.Pa,
+            p_IC=defaults.p + 100*U.Pa,
             yNegative(inviscidZ=true, inviscidX=true),
             yPositive(inviscidZ=true, inviscidX=true),
             zNegative(inviscidX=true, inviscidY=true),
             zPositive(inviscidX=true, inviscidY=true)),
           H2(
-            p_IC=defaults.p + 0*U.Pa,
+            p_IC=defaults.p + 100*U.Pa,
             yNegative(inviscidZ=true, inviscidX=true),
             yPositive(inviscidZ=true, inviscidX=true),
             zNegative(inviscidX=true, inviscidY=true),
@@ -324,7 +324,6 @@ package Subregions
         each inclYFaces=false,
         each inclZFaces=false) if n_x > 0
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-      // **temp 0 pressure offset
       FCSys.Subregions.Subregion subregion2(
         L={1,1,1}*U.cm,
         gas(
@@ -333,25 +332,25 @@ package Subregions
           final inclN2=inclN2,
           final inclO2=inclO2,
           H2(
-            p_IC=defaults.p - 0*U.Pa,
+            p_IC=defaults.p - 100*U.Pa,
             yNegative(inviscidZ=true, inviscidX=true),
             yPositive(inviscidZ=true, inviscidX=true),
             zNegative(inviscidX=true, inviscidY=true),
             zPositive(inviscidX=true, inviscidY=true)),
           H2O(
-            p_IC=defaults.p - 0*U.Pa,
+            p_IC=defaults.p - 100*U.Pa,
             yNegative(inviscidZ=true, inviscidX=true),
             yPositive(inviscidZ=true, inviscidX=true),
             zNegative(inviscidX=true, inviscidY=true),
             zPositive(inviscidX=true, inviscidY=true)),
           N2(
-            p_IC=defaults.p - 0*U.Pa,
+            p_IC=defaults.p - 100*U.Pa,
             yNegative(inviscidZ=true, inviscidX=true),
             yPositive(inviscidZ=true, inviscidX=true),
             zNegative(inviscidX=true, inviscidY=true),
             zPositive(inviscidX=true, inviscidY=true)),
           O2(
-            p_IC=defaults.p - 0*U.Pa,
+            p_IC=defaults.p - 100*U.Pa,
             yNegative(inviscidZ=true, inviscidX=true),
             yPositive(inviscidZ=true, inviscidX=true),
             zNegative(inviscidX=true, inviscidY=true),
@@ -465,6 +464,7 @@ package Subregions
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionsH2.mos"),
         Diagram(graphics));
+
     end SubregionsH2;
 
     model SubregionsCAndH2
@@ -3888,50 +3888,58 @@ package Subregions
 <p>Notes:<ul>
   <li>The x-axis component of linear momentum is included by default.  At least one component must be included.</li></ul></html>"),
 
-          Icon(graphics={Ellipse(
-                      extent={{-40,100},{40,20}},
-                      lineColor={127,127,127},
-                      startAngle=30,
-                      endAngle=149,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{20,-4},{100,-84}},
-                      lineColor={127,127,127},
-                      startAngle=270,
-                      endAngle=390,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{-100,-4},{-20,-84}},
-                      lineColor={127,127,127},
-                      startAngle=149,
-                      endAngle=270,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Polygon(
-                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
-                  80},{94.5,-24},{60,-84}},
-                      pattern=LinePattern.None,
-                      fillPattern=FillPattern.Sphere,
-                      smooth=Smooth.None,
-                      fillColor={225,225,225},
-                      lineColor={0,0,0}),Line(
-                      points={{-60,-84},{60,-84}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{34.5,80},{94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{-34.5,80},{-94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}),
+          Icon(graphics={
+              Ellipse(
+                extent={{-40,100},{40,20}},
+                lineColor={127,127,127},
+                startAngle=30,
+                endAngle=149,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{20,-4},{100,-84}},
+                lineColor={127,127,127},
+                startAngle=270,
+                endAngle=390,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{-100,-4},{-20,-84}},
+                lineColor={127,127,127},
+                startAngle=149,
+                endAngle=270,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Polygon(
+                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
+                    94.5,-24},{60,-84}},
+                pattern=LinePattern.None,
+                fillPattern=FillPattern.Sphere,
+                smooth=Smooth.None,
+                fillColor={225,225,225},
+                lineColor={0,0,0}),
+              Line(
+                points={{-60,-84},{60,-84}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{34.5,80},{94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{-34.5,80},{-94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}),
           Diagram(graphics));
       end NullPhase;
     end BaseClasses;
@@ -4093,7 +4101,7 @@ package Subregions
         model Fixed "Fixed properties"
           extends SpeciesInertStagnant(redeclare replaceable package Data =
                 FCSys.Characteristics.C19HF37O5S.Solid, redeclare parameter
-              Q.Resistivity r_th=Data.r_th());
+              Q.ResistivityThermal r_th=Data.r_th());
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -4161,9 +4169,9 @@ package Subregions
           extends Species0Amount(
             redeclare replaceable package Data =
                 FCSys.Characteristics.'e-'.Graphite,
-            redeclare parameter Q.Resistivity f_0=Data.f_0(),
-            redeclare parameter Q.Resistivity f_12=Data.f_12(),
-            redeclare parameter Q.Resistivity r_th=Data.r_th());
+            redeclare parameter Q.Fluidity f_0=Data.f_0(),
+            redeclare parameter Q.Fluidity f_12=Data.f_12(),
+            redeclare parameter Q.ResistivityThermal r_th=Data.r_th());
 
           annotation (
             group="Material properties",
@@ -4235,9 +4243,9 @@ package Subregions
             redeclare replaceable package Data =
                 FCSys.Characteristics.'H+'.Solid,
             initMethPartNum=InitMethScalar.Amount,
-            redeclare parameter Q.Resistivity f_0=Data.f_0(),
-            redeclare parameter Q.Resistivity f_12=Data.f_12(),
-            redeclare parameter Q.Resistivity r_th=U.m*U.K/(0.1661*U.W));
+            redeclare parameter Q.Fluidity f_0=Data.f_0(),
+            redeclare parameter Q.Fluidity f_12=Data.f_12(),
+            redeclare parameter Q.ResistivityThermal r_th=U.m*U.K/(0.1661*U.W));
 
           // Note:  initMethPartNum may not be Pressure (which is default) since
           // overrideEOS is true.
@@ -4370,9 +4378,9 @@ package Subregions
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.H2.Gas (
                   b_v=[1], specVolPow={-1,0}),
-            redeclare parameter Q.Resistivity f_0=Data.f_0(),
-            redeclare parameter Q.Resistivity f_12=1/(89.6e-7*U.Pa*U.s),
-            redeclare parameter Q.Resistivity r_th=U.m*U.K/(183e-3*U.W));
+            redeclare parameter Q.Fluidity f_0=Data.f_0(),
+            redeclare parameter Q.Fluidity f_12=1/(89.6e-7*U.Pa*U.s),
+            redeclare parameter Q.ResistivityThermal r_th=U.m*U.K/(183e-3*U.W));
 
           // See the documentation for a table of values.
 
@@ -4491,9 +4499,9 @@ and <code>r_th=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> g
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas
                 (b_v=[1], specVolPow={-1,0}),
-            redeclare parameter Q.Resistivity f_0=Data.f_0(),
-            redeclare parameter Q.Resistivity f_12=1/(9.09e-6*U.Pa*U.s),
-            redeclare parameter Q.Resistivity r_th=U.m*U.K/(19.6e-3*U.W));
+            redeclare parameter Q.Fluidity f_0=Data.f_0(),
+            redeclare parameter Q.Fluidity f_12=1/(9.09e-6*U.Pa*U.s),
+            redeclare parameter Q.ResistivityThermal r_th=U.m*U.K/(19.6e-3*U.W));
 
           // See the documentation for tables of values.
 
@@ -4655,9 +4663,9 @@ and <code>r_th=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satura
           extends Species(
             redeclare replaceable package Data =
                 FCSys.Characteristics.H2O.Liquid,
-            redeclare parameter Q.Resistivity f_0=Data.f_0(),
-            redeclare parameter Q.Resistivity f_12=1/(855e-6*U.Pa*U.s),
-            redeclare parameter Q.Resistivity r_th=U.m*U.K/(613e-3*U.W));
+            redeclare parameter Q.Fluidity f_0=Data.f_0(),
+            redeclare parameter Q.Fluidity f_12=1/(855e-6*U.Pa*U.s),
+            redeclare parameter Q.ResistivityThermal r_th=U.m*U.K/(613e-3*U.W));
 
           // See the documentation for tables of values.
 
@@ -4812,9 +4820,9 @@ and <code>r_th=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at satu
                             FCSys.Characteristics.N2.Gas.b_c[1, :],
                             -3) + FCSys.Characteristics.N2.Gas.B_c[1, 2] - Data.b_c[
                     1, 1]*ln(298.15*U.K)]),
-            redeclare parameter Q.Resistivity f_0=Data.f_0(),
-            redeclare parameter Q.Resistivity f_12=1/(178.2e-7*U.Pa*U.s),
-            redeclare parameter Q.Resistivity r_th=U.m*U.K/(25.9e-3*U.W));
+            redeclare parameter Q.Fluidity f_0=Data.f_0(),
+            redeclare parameter Q.Fluidity f_12=1/(178.2e-7*U.Pa*U.s),
+            redeclare parameter Q.ResistivityThermal r_th=U.m*U.K/(25.9e-3*U.W));
 
           // See the documentation for a table of values.
 
@@ -4919,9 +4927,9 @@ and <code>r_th=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at satu
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
                   b_v=[1], specVolPow={-1,0}),
-            redeclare parameter Q.Resistivity f_0=Data.f_0(),
-            redeclare parameter Q.Resistivity f_12=1/(207.2e-7*U.Pa*U.s),
-            redeclare parameter Q.Resistivity r_th=U.m*U.K/(26.8e-3*U.W));
+            redeclare parameter Q.Fluidity f_0=Data.f_0(),
+            redeclare parameter Q.Fluidity f_12=1/(207.2e-7*U.Pa*U.s),
+            redeclare parameter Q.ResistivityThermal r_th=U.m*U.K/(26.8e-3*U.W));
 
           // See the documentation for a table of values.
 
@@ -5137,7 +5145,7 @@ and <code>r_th=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at satu
           group="Prescribed states (via initialization parameters)",
           compact=true),
         choices(__Dymola_checkBox=true));
-      parameter Boolean setVelX=false "X-axis component of linear momentum"
+      parameter Boolean setVelX=false "X-axis component of velocity"
         annotation (
         Evaluate=true,
         Dialog(
@@ -5146,7 +5154,7 @@ and <code>r_th=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at satu
           enable=inclLin[1],
           compact=true),
         choices(__Dymola_checkBox=true));
-      parameter Boolean setVelY=false "Y-axis component of linear momentum"
+      parameter Boolean setVelY=false "Y-axis component of velocity"
         annotation (
         Evaluate=true,
         Dialog(
@@ -5155,7 +5163,7 @@ and <code>r_th=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at satu
           enable=inclLin[2],
           compact=true),
         choices(__Dymola_checkBox=true));
-      parameter Boolean setVelZ=false "Z-axis component of linear momentum"
+      parameter Boolean setVelZ=false "Z-axis component of velocity"
         annotation (
         Evaluate=true,
         Dialog(
@@ -6568,7 +6576,7 @@ Check the chemical formulas and the specific masses of the species.");
       final parameter Q.Volume V=product(L) "Volume";
 
       // Assumptions about components of linear momentum
-      parameter Boolean inclLinX=true "X" annotation (
+      parameter Boolean inclLinX=false "X" annotation (
         Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
@@ -6576,6 +6584,7 @@ Check the chemical formulas and the specific masses of the species.");
           tab="Assumptions",
           group="Axes with linear momentum included",
           compact=true));
+      // **temp false
       parameter Boolean inclLinY=false "Y" annotation (
         Evaluate=true,
         HideResult=true,
@@ -6746,6 +6755,7 @@ Check the chemical formulas and the specific masses of the species.");
               points={{40,40},{16,16}},
               color={127,127,127},
               smooth=Smooth.None)}));
+
     end PartialSubregion;
   end BaseClasses;
 
