@@ -5230,7 +5230,7 @@ and <code>r_th=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at satu
           group="Scalar properties",
           enable=initMethPartNum == 11 or initMethTemp == 11));
       parameter Q.NumberAbsolute s_IC(min=Modelica.Constants.small, start=
-            Data.s(p=p_IC, T=T_IC))
+            Data.s(T=T_IC, p=p_IC))
         "<html>Initial specific entropy (<i>s</i><sub>IC</sub>)</html>"
         annotation (Dialog(tab="Initialization", group="Scalar properties"));
       parameter Q.NumberRate ders_IC=0
@@ -5239,7 +5239,7 @@ and <code>r_th=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at satu
           tab="Initialization",
           group="Scalar properties",
           enable=initMethPartNum == 13 or initMethTemp == 13));
-      parameter Q.Potential h_IC(start=Data.h(p_IC, T_IC))
+      parameter Q.Potential h_IC(start=Data.h(T_IC, p_IC))
         "<html>Initial specific enthalpy (<i>h</i><sub>IC</sub>)</html>"
         annotation (Dialog(tab="Initialization", group="Scalar properties"));
       parameter Q.PotentialRate derh_IC=0
@@ -5248,7 +5248,7 @@ and <code>r_th=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at satu
           tab="Initialization",
           group="Scalar properties",
           enable=initMethPartNum == 15 or initMethTemp == 15));
-      parameter Q.Potential mu_IC(start=Data.g(p_IC, T_IC))
+      parameter Q.Potential mu_IC(start=Data.g(T_IC, p_IC))
         "<html>Initial electrochemical potential (&mu;<sub>IC</sub>)</html>"
         annotation (Dialog(tab="Initialization", group="Scalar properties"));
       parameter Q.PotentialRate dermu_IC=0
@@ -5457,7 +5457,7 @@ and <code>r_th=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at satu
          + inert.Qdot if defaults.analysis
         "Rate of thermal conduction from other species";
       output Q.Power Wdot_trans(stateSelect=StateSelect.never) = -sum(sum(
-        inSign(side)*(Data.h(p_face[axis, side], T_face[axis, side]) + Data.m*(
+        inSign(side)*(Data.h(T_face[axis, side], p_face[axis, side]) + Data.m*(
         (Data.v_Tp(T_face[axis, side], p_face[axis, side])*I_face[axis, side]/A[
         axis])^2 + phi_face[axis, side, :]*phi_face[axis, side, :])/2 - h -
         Data.m*phi*phi/2)*I_face[axis, side] for side in Side) for axis in Axis)
@@ -5478,7 +5478,7 @@ and <code>r_th=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at satu
         muPerT(final start=mu_IC/T_IC),
         phi(final start=phi_IC[cartAxes]),
         Ndot(final start=Ndot_IC,final fixed=false),
-        hbar(final start=Data.h(p_IC, T_IC)/Data.m,final fixed=false))
+        hbar(final start=Data.h(T_IC, p_IC)/Data.m, final fixed=false))
         "Connector to exchange material while advecting linear momentum and energy"
         annotation (Placement(transformation(extent={{-30,10},{-10,30}}),
             iconTransformation(extent={{-80,60},{-60,80}})));
@@ -6047,7 +6047,7 @@ The default global default settings will be used for the current simulation.",
         (der(N*h) + der(M*phi*phi)/2 - V*der(p))/U.s = chemical.phi*chemical.mPhidot
           /2 + Data.m*chemical.hbar*chemical.Ndot + phi*common.mechanical.mPhidot
            + common.thermal.Qdot + inert.phi*inert.mPhidot + inert.Qdot + sum(
-          sum(inSign(side)*(Data.h(p_face[axis, side], T_face[axis, side]) +
+          sum(inSign(side)*(Data.h(T_face[axis, side], p_face[axis, side]) +
           Data.m*((A[axis]*Data.v_Tp(T_face[axis, side], p_face[axis, side])*
           I_face[axis, side])^2 + phi_face[axis, side, :]*phi_face[axis, side,
           :])/2)*I_face[axis, side] for side in Side) for axis in Axis) + sum(
