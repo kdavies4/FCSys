@@ -40,6 +40,7 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.Fluidity Fluidity=1/(U.Pa*U.s) "Fluidity";
       parameter Q.Force Force=1*U.N "Force";
       parameter Q.Frequency Frequency=1*U.rad/U.s "Frequency";
+      parameter Q.Fusivity Fusivity=1*U.s/U.m^2 "Fusivity";
       parameter Q.Inductance Inductance=1*U.H "Inductance";
       parameter Q.Length Length=1*U.m "Length";
       parameter Q.LengthSpecific LengthSpecific=1*U.m/U.C "Specific length";
@@ -114,6 +115,7 @@ package Quantities "Quantities to represent physical properties"
   type Energy = Modelica.Icons.TypeReal (final unit="l2.m/T2");
   type Fluidity = Modelica.Icons.TypeReal (final unit="l.T/m", min=0);
   type Force = Modelica.Icons.TypeReal (final unit="l.m/T2");
+  type Fusivity = Modelica.Icons.TypeReal (final unit="T/l2", min=0);
   type Frequency = Modelica.Icons.TypeReal (final unit="A/T");
   type Inductance = Modelica.Icons.TypeReal (final unit="l2.m/N2", min=0);
   type Length = Modelica.Icons.TypeReal (final unit="l", min=0);

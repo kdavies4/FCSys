@@ -1344,11 +1344,11 @@ sensor</a> models.
         defaultComponentPrefixes="replaceable",
         defaultComponentName="subregionFaceSensor",
         Icon(graphics={Text(
-              extent={{-100,-20},{100,-60}},
-              lineColor={127,127,127},
-              fillColor={0,0,127},
-              fillPattern=FillPattern.Solid,
-              textString="mu phi T")}),
+                  extent={{-100,-20},{100,-60}},
+                  lineColor={127,127,127},
+                  fillColor={0,0,127},
+                  fillPattern=FillPattern.Solid,
+                  textString="mu phi T")}),
         Diagram(graphics));
     end Subregion;
 
@@ -1484,7 +1484,7 @@ sensor</a> models.
         // the connection equations that follow could be generic.
 
         // C
-        connect(C.face.normal, face.C.normal) annotation (Line(
+        connect(C.face.material, face.C.material) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -1535,7 +1535,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // C19HF37O5S
-        connect(C19HF37O5S.face.normal, face.C19HF37O5S.normal) annotation (
+        connect(C19HF37O5S.face.material, face.C19HF37O5S.material) annotation (
             Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
@@ -1594,7 +1594,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // e-
-        connect('e-'.face.normal, face.'e-'.normal) annotation (Line(
+        connect('e-'.face.material, face.'e-'.material) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -1645,7 +1645,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // H2
-        connect(H2.face.normal, face.H2.normal) annotation (Line(
+        connect(H2.face.material, face.H2.material) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -1696,7 +1696,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // H2O
-        connect(H2O.face.normal, face.H2O.normal) annotation (Line(
+        connect(H2O.face.material, face.H2O.material) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -1747,7 +1747,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // H+
-        connect('H+'.face.normal, face.'H+'.normal) annotation (Line(
+        connect('H+'.face.material, face.'H+'.material) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -1798,7 +1798,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // N2
-        connect(N2.face.normal, face.N2.normal) annotation (Line(
+        connect(N2.face.material, face.N2.material) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -1849,7 +1849,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // O2
-        connect(O2.face.normal, face.O2.normal) annotation (Line(
+        connect(O2.face.material, face.O2.material) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -1968,7 +1968,7 @@ sensor</a> models.
             enable=inclO2), Placement(transformation(extent={{-10,-10},{10,10}})));
       equation
         // H2
-        connect(H2.face.normal, face.H2.normal) annotation (Line(
+        connect(H2.face.material, face.H2.material) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -2019,7 +2019,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // H2O
-        connect(H2O.face.normal, face.H2O.normal) annotation (Line(
+        connect(H2O.face.material, face.H2O.material) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -2070,7 +2070,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // N2
-        connect(N2.face.normal, face.N2.normal) annotation (Line(
+        connect(N2.face.material, face.N2.material) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -2121,7 +2121,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // O2
-        connect(O2.face.normal, face.O2.normal) annotation (Line(
+        connect(O2.face.material, face.O2.material) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -2210,7 +2210,7 @@ sensor</a> models.
 
       equation
         // C
-        connect(C.face.normal, face.C.normal) annotation (Line(
+        connect(C.face.material, face.C.material) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -2261,7 +2261,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // e-
-        connect('e-'.face.normal, face.'e-'.normal) annotation (Line(
+        connect('e-'.face.material, face.'e-'.material) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -2353,7 +2353,7 @@ sensor</a> models.
 
       equation
         // C19HF37O5S
-        connect(C19HF37O5S.face.normal, face.C19HF37O5S.normal) annotation (
+        connect(C19HF37O5S.face.material, face.C19HF37O5S.material) annotation (
             Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
@@ -2412,7 +2412,7 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // H+
-        connect('H+'.face.normal, face.'H+'.normal) annotation (Line(
+        connect('H+'.face.material, face.'H+'.material) annotation (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -2657,12 +2657,12 @@ sensor</a> model.
         defaultComponentPrefixes="replaceable",
         defaultComponentName="subregionFaceSensor",
         Icon(graphics={Line(
-              points={{-70,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None), Line(
-              points={{100,0},{70,0}},
-              color={127,127,127},
-              smooth=Smooth.None)}),
+                  points={{-70,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{100,0},{70,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None)}),
         Diagram(graphics));
     end Subregion;
 
@@ -2799,12 +2799,12 @@ sensor</a> model.
         // the connection equations that follow could be generic.
 
         // C
-        connect(C.negative.normal, negative.C.normal) annotation (Line(
+        connect(C.negative.material, negative.C.material) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.normal, positive.C.normal) annotation (Line(
+        connect(C.positive.material, positive.C.material) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -2886,13 +2886,13 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // C19HF37O5S
-        connect(C19HF37O5S.negative.normal, negative.C19HF37O5S.normal)
+        connect(C19HF37O5S.negative.material, negative.C19HF37O5S.material)
           annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.normal, positive.C19HF37O5S.normal)
+        connect(C19HF37O5S.positive.material, positive.C19HF37O5S.material)
           annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
@@ -2989,12 +2989,12 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // e-
-        connect('e-'.negative.normal, negative.'e-'.normal) annotation (Line(
+        connect('e-'.negative.material, negative.'e-'.material) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.normal, positive.'e-'.normal) annotation (Line(
+        connect('e-'.positive.material, positive.'e-'.material) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3088,12 +3088,12 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // H2
-        connect(H2.negative.normal, negative.H2.normal) annotation (Line(
+        connect(H2.negative.material, negative.H2.material) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.normal, positive.H2.normal) annotation (Line(
+        connect(H2.positive.material, positive.H2.material) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3175,12 +3175,12 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // H2O
-        connect(H2O.negative.normal, negative.H2O.normal) annotation (Line(
+        connect(H2O.negative.material, negative.H2O.material) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.normal, positive.H2O.normal) annotation (Line(
+        connect(H2O.positive.material, positive.H2O.material) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3274,12 +3274,12 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // H+
-        connect('H+'.negative.normal, negative.'H+'.normal) annotation (Line(
+        connect('H+'.negative.material, negative.'H+'.material) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.normal, positive.'H+'.normal) annotation (Line(
+        connect('H+'.positive.material, positive.'H+'.material) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3373,12 +3373,12 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // N2
-        connect(N2.negative.normal, negative.N2.normal) annotation (Line(
+        connect(N2.negative.material, negative.N2.material) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.normal, positive.N2.normal) annotation (Line(
+        connect(N2.positive.material, positive.N2.material) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3460,12 +3460,12 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // O2
-        connect(O2.negative.normal, negative.O2.normal) annotation (Line(
+        connect(O2.negative.material, negative.O2.material) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.normal, positive.O2.normal) annotation (Line(
+        connect(O2.positive.material, positive.O2.material) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3616,12 +3616,12 @@ sensor</a> model.
 
       equation
         // H2
-        connect(H2.negative.normal, negative.H2.normal) annotation (Line(
+        connect(H2.negative.material, negative.H2.material) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.positive.normal, positive.H2.normal) annotation (Line(
+        connect(H2.positive.material, positive.H2.material) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3703,12 +3703,12 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // H2O
-        connect(H2O.negative.normal, negative.H2O.normal) annotation (Line(
+        connect(H2O.negative.material, negative.H2O.material) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.positive.normal, positive.H2O.normal) annotation (Line(
+        connect(H2O.positive.material, positive.H2O.material) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3802,12 +3802,12 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // N2
-        connect(N2.negative.normal, negative.N2.normal) annotation (Line(
+        connect(N2.negative.material, negative.N2.material) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.positive.normal, positive.N2.normal) annotation (Line(
+        connect(N2.positive.material, positive.N2.material) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3889,12 +3889,12 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // O2
-        connect(O2.negative.normal, negative.O2.normal) annotation (Line(
+        connect(O2.negative.material, negative.O2.material) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.positive.normal, positive.O2.normal) annotation (Line(
+        connect(O2.positive.material, positive.O2.material) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4013,12 +4013,12 @@ sensor</a> model.
 
       equation
         // C
-        connect(C.negative.normal, negative.C.normal) annotation (Line(
+        connect(C.negative.material, negative.C.material) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive.normal, positive.C.normal) annotation (Line(
+        connect(C.positive.material, positive.C.material) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4100,12 +4100,12 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // e-
-        connect('e-'.negative.normal, negative.'e-'.normal) annotation (Line(
+        connect('e-'.negative.material, negative.'e-'.material) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.normal, positive.'e-'.normal) annotation (Line(
+        connect('e-'.positive.material, positive.'e-'.material) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4240,13 +4240,13 @@ sensor</a> model.
 
       equation
         // C19HF37O5S
-        connect(C19HF37O5S.negative.normal, negative.C19HF37O5S.normal)
+        connect(C19HF37O5S.negative.material, negative.C19HF37O5S.material)
           annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive.normal, positive.C19HF37O5S.normal)
+        connect(C19HF37O5S.positive.material, positive.C19HF37O5S.material)
           annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
@@ -4343,12 +4343,12 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // H+
-        connect('H+'.negative.normal, negative.'H+'.normal) annotation (Line(
+        connect('H+'.negative.material, negative.'H+'.material) annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.normal, positive.'H+'.normal) annotation (Line(
+        connect('H+'.positive.material, positive.'H+'.material) annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4545,16 +4545,15 @@ sensor</a> model.
             defaultComponentPrefixes="replaceable",
             defaultComponentName="phaseFaceSensor",
             Icon(graphics={Line(
-                  points={{-70,0},{-100,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None), Line(
-                  points={{100,0},{70,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None)}));
+                          points={{-70,0},{-100,0}},
+                          color={127,127,127},
+                          smooth=Smooth.None),Line(
+                          points={{100,0},{70,0}},
+                          color={127,127,127},
+                          smooth=Smooth.None)}));
         end NullPhase;
       end BaseClasses;
     end Phases;
-
 
     annotation (Documentation(info="<html><p>Since the connectors in
 <a href=\"modelica://FCSys\">FCSys</a> are hierarchical
@@ -4640,8 +4639,8 @@ sensor</a> model.
           smooth=Smooth.None));
 
       connect(y, saturation.y) annotation (Line(
-          points={{5.55112e-16,-100},{5.55112e-16,-75},{-1.40998e-15,-75},{
-              -1.40998e-15,-51}},
+          points={{5.55112e-16,-100},{5.55112e-16,-75},{-1.40998e-15,-75},{-1.40998e-15,
+              -51}},
           color={0,0,127},
           smooth=Smooth.None));
       annotation (Icon(coordinateSystem(
@@ -4663,18 +4662,7 @@ sensor</a> model.
             origin={0,-100})));
     end PartialSensor;
   end BaseClasses;
-  annotation (Documentation(info="<html>
-  <p>
-<b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-Copyright 2007&ndash;2013, Georgia Tech Research Corporation.
-</p>
-<p>
-<i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
-it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
-disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.ModelicaLicense2\">
-FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
-http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
-</p></html>"));
+
   package Face
     "<html>Sensors for a single <a href=\"modelica://FCSys.Connectors.BaseClasses.BaseClasses.PartialFace\">Face</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
     extends Modelica.Icons.Package;
@@ -4776,7 +4764,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
 
     equation
       // Electrochemical potential
-      connect(echemPot.normal, face.normal) annotation (Line(
+      connect(echemPot.material, face.material) annotation (Line(
           points={{-60,4},{-48,4},{-48,20},{5.55112e-16,20}},
           color={127,127,127},
           pattern=LinePattern.None,
@@ -4863,7 +4851,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
       extends FCSys.Sensors.BaseClasses.PartialSensor(redeclare
           FCSys.Connectors.RealOutput y(final unit="l2.m/(N.T2)"));
 
-      FCSys.Connectors.Normal material
+      FCSys.Connectors.Material material
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
     equation
       y = material.mu;
@@ -4877,7 +4865,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
     model Velocity "Sensor for velocity"
       extends FCSys.Sensors.BaseClasses.PartialSensor(redeclare
           FCSys.Connectors.RealOutput y(final unit="l/T"));
-      FCSys.Connectors.Transverse momentum
+      FCSys.Connectors.MechanicalTransport momentum
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
     equation
@@ -4931,10 +4919,10 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
           __Dymola_label="Included",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      FCSys.Sensors.FaceDifferential.Normal.PotentialElectrochemical echemPot
+      FCSys.Sensors.FaceDifferential.Material.PotentialElectrochemical echemPot
         if open and effort
         annotation (Placement(transformation(extent={{-90,64},{-70,84}})));
-      FCSys.Sensors.FaceDifferential.Normal.Current current if open and not
+      FCSys.Sensors.FaceDifferential.Material.Current current if open and not
         effort
         annotation (Placement(transformation(extent={{-70,48},{-50,68}})));
 
@@ -4942,10 +4930,10 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
       parameter Boolean slip1=false
         "<html>Viscous (1<sup>st</sup> transverse momentum included)</html>"
         annotation (choices(__Dymola_checkBox=true), Dialog(compact=true));
-      FCSys.Sensors.FaceDifferential.Transverse.Velocity velocity1 if slip1
+      FCSys.Sensors.FaceDifferential.Mechanical.Velocity velocity1 if slip1
          and effort
         annotation (Placement(transformation(extent={{-50,34},{-30,54}})));
-      FCSys.Sensors.FaceDifferential.Transverse.Force force1 if slip1 and not
+      FCSys.Sensors.FaceDifferential.Mechanical.Force force1 if slip1 and not
         effort
         annotation (Placement(transformation(extent={{-30,18},{-10,38}})));
 
@@ -4953,10 +4941,10 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
       parameter Boolean slip2=false
         "<html>Viscous (2<sup>nd</sup> transverse momentum included)</html>"
         annotation (choices(__Dymola_checkBox=true), Dialog(compact=true));
-      FCSys.Sensors.FaceDifferential.Transverse.Velocity velocity2 if slip2
+      FCSys.Sensors.FaceDifferential.Mechanical.Velocity velocity2 if slip2
          and effort
         annotation (Placement(transformation(extent={{-10,4},{10,24}})));
-      FCSys.Sensors.FaceDifferential.Transverse.Force force2 if slip2 and not
+      FCSys.Sensors.FaceDifferential.Mechanical.Force force2 if slip2 and not
         effort annotation (Placement(transformation(extent={{10,-10},{30,10}})));
 
       // Entropy
@@ -5031,11 +5019,11 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
             origin={0,-98})));
     equation
       // Electrochemical potential
-      connect(echemPot.negative, negative.normal) annotation (Line(
+      connect(echemPot.negative, negative.material) annotation (Line(
           points={{-90,74},{-90,5.55112e-16},{-100,5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
-      connect(echemPot.positive, positive.normal) annotation (Line(
+      connect(echemPot.positive, positive.material) annotation (Line(
           points={{-70,74},{90,74},{90,8},{100,8}},
           color={127,127,127},
           pattern=LinePattern.None,
@@ -5044,11 +5032,11 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
           points={{-80,64},{-80,-70},{5.55112e-16,-70},{5.55112e-16,-100}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(current.negative, negative.normal) annotation (Line(
+      connect(current.negative, negative.material) annotation (Line(
           points={{-70,58},{-90,58},{-90,5.55112e-16},{-100,5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
-      connect(current.positive, positive.normal) annotation (Line(
+      connect(current.positive, positive.material) annotation (Line(
           points={{-50,58},{90,58},{90,8},{100,8}},
           color={127,127,127},
           pattern=LinePattern.None,
@@ -5209,15 +5197,15 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
           smooth=Smooth.None));
 
       annotation (defaultComponentName="speciesFaceSensor", Icon(graphics={Line(
-              points={{-70,0},{-100,0}},
-              color={0,0,0},
-              smooth=Smooth.None), Line(
-              points={{100,0},{70,0}},
-              color={0,0,0},
-              smooth=Smooth.None)}));
+                  points={{-70,0},{-100,0}},
+                  color={0,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{100,0},{70,0}},
+                  color={0,0,0},
+                  smooth=Smooth.None)}));
     end Species;
 
-    package Normal "Relative sensors for normal linear momentum"
+    package Material "Relative sensors for normal linear momentum"
       extends Modelica.Icons.Package;
       model PotentialElectrochemical
         "Sensor for difference in electrochemical potential"
@@ -5231,13 +5219,13 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
         // Note:  In conjunction with the momentum rate balance, this means
         // that there's no current into either face.
         annotation (Icon(graphics={Text(
-                extent={{-100,-20},{100,-50}},
-                lineColor={127,127,127},
-                textString="  mu"), Polygon(
-                points={{-26,-26},{-18,-44},{-34,-44},{-26,-26}},
-                lineColor={127,127,127},
-                smooth=Smooth.None,
-                lineThickness=0.5)}));
+                      extent={{-100,-20},{100,-50}},
+                      lineColor={127,127,127},
+                      textString="  mu"),Polygon(
+                      points={{-26,-26},{-18,-44},{-34,-44},{-26,-26}},
+                      lineColor={127,127,127},
+                      smooth=Smooth.None,
+                      lineThickness=0.5)}));
       end PotentialElectrochemical;
 
       model Current "Sensor for current"
@@ -5250,12 +5238,12 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
           "Condition of equal electrochemical potentials";
 
         annotation (Icon(graphics={Text(
-                extent={{-100,-20},{100,-50}},
-                lineColor={127,127,127},
-                textString="N"), Text(
-                extent={{-100,8},{100,-22}},
-                lineColor={127,127,127},
-                textString=".")}));
+                      extent={{-100,-20},{100,-50}},
+                      lineColor={127,127,127},
+                      textString="N"),Text(
+                      extent={{-100,8},{100,-22}},
+                      lineColor={127,127,127},
+                      textString=".")}));
       end Current;
 
       package BaseClasses "Base classes (not for direct use)"
@@ -5266,11 +5254,11 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
 
           extends FCSys.Sensors.BaseClasses.PartialSensor;
 
-          FCSys.Connectors.Normal negative
+          FCSys.Connectors.Material negative
             "Material connector for the negative face" annotation (Placement(
                 transformation(extent={{-110,-10},{-90,10}}),
                 iconTransformation(extent={{-110,-10},{-90,10}})));
-          FCSys.Connectors.Normal positive
+          FCSys.Connectors.Material positive
             "Material connector for the positive face" annotation (Placement(
                 transformation(extent={{90,-10},{110,10}}), iconTransformation(
                   extent={{90,-10},{110,10}})));
@@ -5280,17 +5268,17 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
             "Material rate balance (no storage)";
 
           annotation (Icon(graphics={Line(
-                  points={{-70,0},{-100,0}},
-                  color={0,0,0},
-                  smooth=Smooth.None), Line(
-                  points={{100,0},{70,0}},
-                  color={0,0,0},
-                  smooth=Smooth.None)}));
+                          points={{-70,0},{-100,0}},
+                          color={0,0,0},
+                          smooth=Smooth.None),Line(
+                          points={{100,0},{70,0}},
+                          color={0,0,0},
+                          smooth=Smooth.None)}));
         end PartialSensor;
       end BaseClasses;
-    end Normal;
+    end Material;
 
-    package Transverse "Relative sensors for transverse linear momentum"
+    package Mechanical "Relative sensors for transverse linear momentum"
       extends Modelica.Icons.Package;
       model Velocity "Sensor for relative velocity"
 
@@ -5310,13 +5298,13 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
    is <code>true</code>.
   </p></html>"),
           Icon(graphics={Text(
-                extent={{-100,-20},{100,-50}},
-                lineColor={127,127,127},
-                textString="  phi"), Polygon(
-                points={{-20,-26},{-12,-44},{-28,-44},{-20,-26}},
-                lineColor={127,127,127},
-                smooth=Smooth.None,
-                lineThickness=0.5)}),
+                      extent={{-100,-20},{100,-50}},
+                      lineColor={127,127,127},
+                      textString="  phi"),Polygon(
+                      points={{-20,-26},{-12,-44},{-28,-44},{-20,-26}},
+                      lineColor={127,127,127},
+                      smooth=Smooth.None,
+                      lineThickness=0.5)}),
           Diagram(graphics));
       end Velocity;
 
@@ -5333,12 +5321,12 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
   <code>ax=2</code> and <code>ax=3</code>, but only if <code>inclTrans</code>
    is <code>true</code>.
   </p></html>"), Icon(graphics={Text(
-                extent={{-100,-20},{100,-50}},
-                lineColor={127,127,127},
-                textString="mPhi"), Text(
-                extent={{-100,8},{100,-22}},
-                lineColor={127,127,127},
-                textString=".")}));
+                      extent={{-100,-20},{100,-50}},
+                      lineColor={127,127,127},
+                      textString="mPhi"),Text(
+                      extent={{-100,8},{100,-22}},
+                      lineColor={127,127,127},
+                      textString=".")}));
       end Force;
 
       package BaseClasses "Base classes (not for direct use)"
@@ -5349,11 +5337,11 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
 
           extends FCSys.Sensors.BaseClasses.PartialSensor;
 
-          FCSys.Connectors.Transverse negative
+          FCSys.Connectors.MechanicalTransport negative
             "Linear momentum connector for the negative face" annotation (
               Placement(transformation(extent={{-110,-10},{-90,10}}),
                 iconTransformation(extent={{-110,-10},{-90,10}})));
-          FCSys.Connectors.Transverse positive
+          FCSys.Connectors.MechanicalTransport positive
             "Linear momentum connector for the positive face" annotation (
               Placement(transformation(extent={{90,-10},{110,10}}),
                 iconTransformation(extent={{90,-10},{110,10}})));
@@ -5362,15 +5350,15 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
             "Linear momentum rate balance (no storage)";
 
           annotation (Icon(graphics={Line(
-                  points={{-70,0},{-100,0}},
-                  color={0,0,0},
-                  smooth=Smooth.None), Line(
-                  points={{100,0},{70,0}},
-                  color={0,0,0},
-                  smooth=Smooth.None)}));
+                          points={{-70,0},{-100,0}},
+                          color={0,0,0},
+                          smooth=Smooth.None),Line(
+                          points={{100,0},{70,0}},
+                          color={0,0,0},
+                          smooth=Smooth.None)}));
         end PartialSensor;
       end BaseClasses;
-    end Transverse;
+    end Mechanical;
 
     package Thermal "Relative thermal sensors"
       extends Modelica.Icons.Package;
@@ -5385,13 +5373,13 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
         // Note:  In conjunction with the energy rate balance, this means
         // that both faces are adiabatic.
         annotation (Icon(graphics={Text(
-                extent={{-100,-20},{100,-50}},
-                lineColor={127,127,127},
-                textString="  T"), Polygon(
-                points={{-10,-26},{-2,-44},{-18,-44},{-10,-26}},
-                lineColor={127,127,127},
-                smooth=Smooth.None,
-                lineThickness=0.5)}));
+                      extent={{-100,-20},{100,-50}},
+                      lineColor={127,127,127},
+                      textString="  T"),Polygon(
+                      points={{-10,-26},{-2,-44},{-18,-44},{-10,-26}},
+                      lineColor={127,127,127},
+                      smooth=Smooth.None,
+                      lineThickness=0.5)}));
       end Temperature;
 
       model HeatRate "Sensor for heat flow rate"
@@ -5402,12 +5390,12 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
         y = negative.Qdot "Measurement";
         negative.T = positive.T "Isothermal condition";
         annotation (Icon(graphics={Text(
-                extent={{-100,-20},{100,-50}},
-                lineColor={127,127,127},
-                textString="Q"), Text(
-                extent={{-100,8},{100,-22}},
-                lineColor={127,127,127},
-                textString=".")}));
+                      extent={{-100,-20},{100,-50}},
+                      lineColor={127,127,127},
+                      textString="Q"),Text(
+                      extent={{-100,8},{100,-22}},
+                      lineColor={127,127,127},
+                      textString=".")}));
       end HeatRate;
 
       model EntropyRate "Sensor for entropy flow rate"
@@ -5417,20 +5405,17 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
       equation
         y = (negative.Qdot - positive.Qdot)/2 "Measurement";
         negative.T = positive.T "Isothermal condition";
-        annotation (Icon(graphics={
-              Text(
-                extent={{-100,-20},{100,-50}},
-                lineColor={127,127,127},
-                textString="S/2"),
-              Text(
-                extent={{-100,8},{100,-22}},
-                lineColor={127,127,127},
-                textString=".  "),
-              Polygon(
-                points={{-32,-26},{-24,-44},{-40,-44},{-32,-26}},
-                lineColor={127,127,127},
-                smooth=Smooth.None,
-                lineThickness=0.5)}));
+        annotation (Icon(graphics={Text(
+                      extent={{-100,-20},{100,-50}},
+                      lineColor={127,127,127},
+                      textString="S/2"),Text(
+                      extent={{-100,8},{100,-22}},
+                      lineColor={127,127,127},
+                      textString=".  "),Polygon(
+                      points={{-32,-26},{-24,-44},{-40,-44},{-32,-26}},
+                      lineColor={127,127,127},
+                      smooth=Smooth.None,
+                      lineThickness=0.5)}));
       end EntropyRate;
 
       package BaseClasses "Base classes (not for direct use)"
@@ -5455,14 +5440,26 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
           0 = negative.Qdot + positive.Qdot "Energy rate balance (no storage)";
 
           annotation (Icon(graphics={Line(
-                  points={{-70,0},{-100,0}},
-                  color={0,0,0},
-                  smooth=Smooth.None), Line(
-                  points={{100,0},{70,0}},
-                  color={0,0,0},
-                  smooth=Smooth.None)}));
+                          points={{-70,0},{-100,0}},
+                          color={0,0,0},
+                          smooth=Smooth.None),Line(
+                          points={{100,0},{70,0}},
+                          color={0,0,0},
+                          smooth=Smooth.None)}));
         end PartialSensor;
       end BaseClasses;
     end Thermal;
   end FaceDifferential;
+  annotation (Documentation(info="<html>
+  <p>
+<b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2013, Georgia Tech Research Corporation.
+</p>
+<p>
+<i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
+disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.ModelicaLicense2\">
+FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
+http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
+</p></html>"));
 end Sensors;

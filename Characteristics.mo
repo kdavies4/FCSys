@@ -1035,15 +1035,15 @@ package Characteristics
       constant Real b_lambda[size(T_lim_alpha, 1) - 1, 4]
         "<html>Constants in NASA correlation for thermal conductivity (<i>b<sub>&lambda;</sub>)</html>";
 
-      redeclare function f_12
-        "<html>Shear fluidity as a function of temperature and pressure (<i>f</i><sub>12</sub>)</html>"
+      redeclare function F
+        "Fluidity as a function of temperature and specific volume"
 
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        final input Q.PressureAbsolute p=1*U.atm "Pressure";
-        // Note:  Pressure is provided for generality but isn't used here.
-        output Q.Fluidity f_12 "Fluidity";
+        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
+        // Note:  Specific volume is provided for generality but isn't used here.
+        output Q.Fluidity F "Fluidity";
 
       protected
         function b_eta_adj
@@ -1070,27 +1070,26 @@ package Characteristics
         // T_lim_alpha[size(T_lim_alpha, 1)] due to:
         //     "Error, not all "end" could be expanded."
 
-        f_12 := smooth(0, exp(-sum(if (T_lim_alpha[i] <= T or i == 1) and (T
-           <= T_lim_alpha[i + 1] or i == size(T_lim_alpha, 1) - 1) then (
-          b_eta_adj())[i, 1]*ln(T) + ((b_eta_adj())[i, 2] + (b_eta_adj())[i, 3]
-          /T)/T + (b_eta_adj())[i, 4] else 0 for i in 1:size(T_lim_alpha, 1) -
-          1))) annotation (Inline=true, smoothOrder=2);
+        F := smooth(0, exp(-sum(if (T_lim_alpha[i] <= T or i == 1) and (T <=
+          T_lim_alpha[i + 1] or i == size(T_lim_alpha, 1) - 1) then (b_eta_adj())
+          [i, 1]*ln(T) + ((b_eta_adj())[i, 2] + (b_eta_adj())[i, 3]/T)/T + (
+          b_eta_adj())[i, 4] else 0 for i in 1:size(T_lim_alpha, 1) - 1)))
+          annotation (Inline=true, smoothOrder=2);
         // Note:  The annotation is set assuming that the values of the constants
         // result in a function that is first-order continuous.
 
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p></html>"));
-      end f_12;
+      end F;
 
-      redeclare function r_th
-        "<html>Thermal resistivity as a function of temperature and pressure (<i>r</i><sub>th</sub>)</html>"
+      redeclare function R
+        "Thermal resistivity as a function of temperature and specific volume"
 
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
-        // Note:  Pressure is provided for generality but isn't used here.
-        output Q.ResistivityThermal r_th "Thermal resistivity";
+        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
+        output Q.ResistivityThermal R "Thermal resistivity";
 
       protected
         function b_lambda_adj
@@ -1119,7 +1118,7 @@ package Characteristics
         // T_lim_alpha[size(T_lim_alpha, 1)] due to:
         //     "Error, not all "end" could be expanded."
 
-        r_th := c_V(T, p)*smooth(0, exp(-sum(if (T_lim_alpha[i] <= T or i == 1)
+        R := c_V(T, v)*smooth(0, exp(-sum(if (T_lim_alpha[i] <= T or i == 1)
            and (T <= T_lim_alpha[i + 1] or i == size(T_lim_alpha, 1) - 1) then
           (b_lambda_adj())[i, 1]*ln(T) + ((b_lambda_adj())[i, 2] + (
           b_lambda_adj())[i, 3]/T)/T + (b_lambda_adj())[i, 4] else 0 for i in 1
@@ -1128,7 +1127,7 @@ package Characteristics
         // result in a function that is first-order continuous.
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p></html>"));
-      end r_th;
+      end R;
 
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html><p>The correlations for transport properties are available in
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>,
@@ -1216,18 +1215,18 @@ package Characteristics
   <p>This function is based on the kinetic theory of gases with the rigid-sphere (\"billiard-ball\")
   assumption [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].  It is
   independent of pressure or specific volume.  This independence very accurately matches the measured
-  shear fluidity of gases.  However, the shear fluidity varies by species and
+  fluidity of gases.  However, the fluidity varies by species and
   generally falls more rapidly with temperature than shown by this function
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 41].</p></html>"));
       end alpha;
 
     public
       function c_V
-        "<html>Isochoric specific heat capacity as a function of temperature and pressure (<i>c</i><sub><i>V</i></sub>)</html>"
+        "<html>Isochoric specific heat capacity as a function of temperature and specific volume (<i>c</i><sub><i>V</i></sub>)</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
+        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
         output Q.CapacityThermalSpecific c_V "Isochoric specific heat capacity";
 
       protected
@@ -1260,7 +1259,7 @@ package Characteristics
 
       algorithm
         c_V := c0_p(T) - (if phase == "gas" then 1 - 0*Polynomial.F(
-                v_Tp(T, p),
+                v,
                 {T*(2*Polynomial.df(
                   T,
                   b_p[i, :],
@@ -1276,11 +1275,11 @@ package Characteristics
                   zeros(size(b_p, 2)))) for i in 1:min(-1 - pressPow[1], size(
             b_p, 1))},
                 pressPow[1]) else T*dp(
-                v_Tp(T, p),
+                v,
                 T,
                 dv=0,
                 dT=1)*dv(
-                p,
+                p_Tv(T, v),
                 T,
                 dp=0,
                 dT=1)) annotation (Inline=true, smoothOrder=999);
@@ -1305,8 +1304,8 @@ package Characteristics
         // pressure.  (What is the proper relationship?)
 
         annotation (Documentation(info="<html>
-  <p>For an ideal gas, this function is independent of pressure
-  (although pressure remains as a valid input).</p>
+  <p>For an ideal gas, this function is independent of specific volume
+  (although specific volume remains as a valid input).</p>
     </html>"));
       end c_V;
 
@@ -1357,33 +1356,19 @@ package Characteristics
           :size(b_v, 2)) annotation (Inline=true, smoothOrder=999);
       end dv;
 
-      replaceable function f_0
-        "<html>Bulk fluidity as a function of temperature and pressure (<i>f</i><sub>0</sub>)</html>"
+      replaceable function F
+        "Fluidity as a function of temperature and specific volume"
 
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
-        // Note:  Pressure is provided for generality (not used here).
-        output Q.Fluidity f_0 "Bulk fluidity";
+        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
+        // Note:  Specific volume is provided for generality but isn't used here.
+        output Q.Fluidity F "Fluidity";
 
       algorithm
-        f_0 := alpha(T)/m;
-      end f_0;
-
-      replaceable function f_12
-        "<html>Shear fluidity as a function of temperature and pressure (<i>f</i><sub>12</sub>)</html>"
-
-        extends Modelica.Icons.Function;
-
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
-        // Note:  Pressure is provided for generality (not used here).
-        output Q.Fluidity f_12 "Fluidity";
-
-      algorithm
-        f_12 := alpha(T)/m;
-      end f_12;
+        F := alpha(T)/m;
+      end F;
 
       function g "Gibbs potential as a function of temperature and pressure"
 
@@ -1525,18 +1510,18 @@ package Characteristics
   <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a>().</p></html>"));
       end p_Tv;
 
-      replaceable function r_th
-        "<html>Thermal resistivity as a function of temperature and pressure (<i>r</i><sub>th</sub>)</html>"
+      replaceable function R
+        "<html>Thermal resistivity as a function of temperature and specific volume (<i>r</i><sub>th</sub>)</html>"
 
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
-        output Q.ResistivityThermal r_th "Thermal resistivity";
+        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
+        output Q.ResistivityThermal R "Thermal resistivity";
 
       algorithm
-        r_th := alpha(T)/c_V(T, p);
-      end r_th;
+        R := alpha(T)/c_V(T, v);
+      end R;
 
       replaceable function s
         "Specific entropy as a function of temperature and pressure"
@@ -1652,6 +1637,21 @@ package Characteristics
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv\">dv</a>().</p></html>"));
       end v_Tp;
 
+      replaceable function Xi
+        "Fusivity as a function of temperature and specific volume"
+        extends Modelica.Icons.Function;
+
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
+        output Q.Fusivity Xi "Fusivity";
+
+      algorithm
+        Xi := alpha(T)/v;
+        annotation (Documentation(info="<html>
+<p>\"Fusivity\" is defined here as the reciprocal of the self diffusion coefficient or diffusivity.
+</p>
+</html>"));
+      end Xi;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
     <p>This package is compatible with NASA CEA thermodynamic data
     [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>] and the virial equation of state

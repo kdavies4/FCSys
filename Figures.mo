@@ -1487,14 +1487,15 @@ package Figures "Layouts for documentation"
           transformation(extent={{2,-6},{22,14}}), iconTransformation(extent={{
               -10,-20},{10,0}})));
 
-    FCSys.Connectors.Normal Normal annotation (Placement(transformation(extent=
-              {{-22,-30},{-2,-10}}), iconTransformation(extent={{10,-40},{30,-20}})));
+    FCSys.Connectors.Material Material annotation (Placement(transformation(
+            extent={{-22,-30},{-2,-10}}), iconTransformation(extent={{10,-40},{
+              30,-20}})));
     FCSys.Connectors.Thermal Thermal annotation (Placement(transformation(
             extent={{26,-30},{46,-10}}), iconTransformation(extent={{-10,-40},{
               10,-20}})));
-    FCSys.Connectors.Transverse Transverse annotation (Placement(transformation(
-            extent={{2,-30},{22,-10}}), iconTransformation(extent={{-30,-40},{-10,
-              -20}})));
+    FCSys.Connectors.MechanicalTransport Mechanical annotation (Placement(
+          transformation(extent={{2,-30},{22,-10}}), iconTransformation(extent=
+              {{-30,-40},{-10,-20}})));
     annotation (Diagram(graphics={
           Line(
             points={{12,28},{12,4}},
@@ -1605,19 +1606,19 @@ package Figures "Layouts for documentation"
     equation
       der(err) = (reaction.Xidot - traditionalReaction.Xidot)^2;
 
-      connect(species1.normal, reaction.normal[1]) annotation (Line(
+      connect(species1.material, reaction.material[1]) annotation (Line(
           points={{-40,6.10623e-16},{-40,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
 
           color={0,0,0},
           smooth=Smooth.None));
 
-      connect(species2.normal, reaction.normal[2]) annotation (Line(
+      connect(species2.material, reaction.material[2]) annotation (Line(
           points={{6.10623e-16,6.10623e-16},{6.10623e-16,-20},{0,-40},{
               5.55112e-16,-40}},
           color={0,0,0},
           smooth=Smooth.None));
 
-      connect(species3.normal, reaction.normal[3]) annotation (Line(
+      connect(species3.material, reaction.material[3]) annotation (Line(
           points={{40,6.10623e-16},{40,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
 
           color={0,0,0},

@@ -163,14 +163,14 @@ package Assemblies "Combinations of regions (e.g., cells)"
           "This is the arctangent of conductance."
           annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
       equation
-        connect(anModelicaAdapt.normal, cell.anFPX[1, 1]) annotation (Line(
+        connect(anModelicaAdapt.material, cell.anFPX[1, 1]) annotation (Line(
             points={{-20,6.10623e-16},{-16,6.10623e-16},{-16,5.55112e-16},{-10,
                 5.55112e-16}},
             color={0,0,0},
             thickness=0.5,
             smooth=Smooth.None));
 
-        connect(caModelicaAdapt.normal, cell.caFPX[1, 1]) annotation (Line(
+        connect(caModelicaAdapt.material, cell.caFPX[1, 1]) annotation (Line(
             points={{20,6.10623e-16},{16,6.10623e-16},{16,5.55112e-16},{10,
                 5.55112e-16}},
             color={0,0,0},

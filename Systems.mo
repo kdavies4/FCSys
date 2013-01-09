@@ -301,7 +301,7 @@ package Systems
           points={{-110,-18},{-120,-18},{-120,-54},{-110,-54}},
           color={0,200,0},
           smooth=Smooth.None));
-      connect(tankH2.normal, anInletValve.pipeN) annotation (Line(
+      connect(tankH2.material, anInletValve.pipeN) annotation (Line(
           points={{-190,-10},{-180,-10}},
           color={255,128,0},
           smooth=Smooth.None));
