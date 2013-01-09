@@ -92,6 +92,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>&nbsp;</td></tr>
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.Force" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a>
 </td><td>&nbsp;</td></tr>
+<tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.Fusivity" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.Fusivity">Fusivity</a>
+</td><td>&nbsp;</td></tr>
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.Frequency" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.Frequency">Frequency</a>
 </td><td>&nbsp;</td></tr>
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.Inductance" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.Inductance">Inductance</a>
@@ -132,8 +134,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>Potential per wavenumber</td></tr>
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.PotentialRate" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.PotentialRate">PotentialRate</a>
 </td><td>Rate of potential</td></tr>
-<tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.PotentialReciprocal" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.PotentialReciprocal">PotentialReciprocal</a>
-</td><td>Reciprocal potential</td></tr>
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.Power" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a>
 </td><td>&nbsp;</td></tr>
 <tr><td><img src="images/FCSys.Quantities.AccelerationS.png" alt="FCSys.Quantities.PowerArea" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities.html#FCSys.Quantities.PowerArea">PowerArea</a>
@@ -210,6 +210,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Quantities.Energy"></a><pre><font color="blue">type</font> Energy = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/T2&quot;);</pre><p>
 <a name="FCSys.Quantities.Fluidity"></a><pre><font color="blue">type</font> Fluidity = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l.T/m&quot;, min=0);</pre><p>
 <a name="FCSys.Quantities.Force"></a><pre><font color="blue">type</font> Force = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l.m/T2&quot;);</pre><p>
+<a name="FCSys.Quantities.Fusivity"></a><pre><font color="blue">type</font> Fusivity = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;T/l2&quot;, min=0);</pre><p>
 <a name="FCSys.Quantities.Frequency"></a><pre><font color="blue">type</font> Frequency = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;A/T&quot;);</pre><p>
 <a name="FCSys.Quantities.Inductance"></a><pre><font color="blue">type</font> Inductance = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/N2&quot;, min=0);</pre><p>
 <a name="FCSys.Quantities.Length"></a><pre><font color="blue">type</font> Length = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l&quot;, min=0);</pre><p>
@@ -241,8 +242,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="darkgreen">&quot;Potential per wavenumber&quot;</font>;</pre><p>
 <a name="FCSys.Quantities.PotentialRate"></a><pre><font color="blue">type</font> PotentialRate = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/(N.T3)&quot;) <font color="darkgreen">
   &quot;Rate of potential&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.PotentialReciprocal"></a><pre><font color="blue">type</font> PotentialReciprocal = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;N.T2/(l2.m)&quot;) <font color="darkgreen">
-  &quot;Reciprocal potential&quot;</font>;</pre><p>
 <a name="FCSys.Quantities.Power"></a><pre><font color="blue">type</font> Power = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l2.m/T3&quot;);</pre><p>
 <a name="FCSys.Quantities.PowerArea"></a><pre><font color="blue">type</font> PowerArea = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l4.m/T3&quot;) <font color="darkgreen">
   &quot;Power times area&quot;</font>;</pre><p>
@@ -266,7 +265,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   &quot;Squared velocity&quot;</font>;</pre><p>
 <a name="FCSys.Quantities.Volume"></a><pre><font color="blue">type</font> Volume = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l3&quot;, min=0);</pre><p>
 <a name="FCSys.Quantities.VolumeRate"></a><pre><font color="blue">type</font> VolumeRate = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l3/T&quot;) <font color="darkgreen">&quot;Rate of volume&quot;</font>;</pre><p>
-<a name="FCSys.Quantities.VolumeSpecific"></a><pre><font color="blue">type</font> VolumeSpecific = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l3/N&quot;, min=0) <font color="darkgreen">
+<a name="FCSys.Quantities.VolumeSpecific"></a><pre><font color="blue">type</font> VolumeSpecific = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l3/N&quot;) <font color="darkgreen">
   &quot;Specific volume&quot;</font>;</pre><p>
 <a name="FCSys.Quantities.VolumeSpecificAbsolute"></a><pre><font color="blue">type</font> VolumeSpecificAbsolute = <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.TypeReal">Modelica.Icons.TypeReal</a> (<font color="blue">final </font>unit=&quot;l3/N&quot;, min=0)
   <font color="darkgreen">&quot;Absolute specific volume&quot;</font>;</pre><p>
@@ -285,7 +284,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  2 21:15:46 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  9 07:49:07 2013.
 </div>
 </body>
 </html>

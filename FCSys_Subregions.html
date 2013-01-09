@@ -111,12 +111,13 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <tr><td><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Gas">Gas</a></td><td>gas</td><td>&nbsp;</td><td>Gas</td></tr>
 <tr><td><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Graphite">Graphite</a></td><td>graphite</td><td>&nbsp;</td><td>Graphite</td></tr>
 <tr><td><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Ionomer">Ionomer</a></td><td>ionomer</td><td>&nbsp;</td><td>Ionomer</td></tr>
+<tr><td><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Liquid">Liquid</a></td><td>liquid</td><td>&nbsp;</td><td>Liquid</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <tr><td>Boolean</td><td>inclReact</td><td>true</td><td>Include reaction(s), as appropriate</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with velocity included</td></tr>
-<tr><td>Boolean</td><td>inclVelX</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclVelY</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclVelZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
+<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
 <tr><td>Boolean</td><td>inclXFaces</td><td>true</td><td>X</td></tr>
 <tr><td>Boolean</td><td>inclYFaces</td><td>true</td><td>Y</td></tr>
@@ -137,32 +138,26 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <font color="blue">model</font> Subregion <font color="darkgreen">&quot;Subregion with all phases included&quot;</font>
 
   <font color="blue">parameter </font>Boolean inclReact=true <font color="darkgreen">&quot;Include reaction(s), as appropriate&quot;</font>;
-  <font color="darkgreen">// Note:  This is listed above the extends clause so that it is listed</font>
+  <font color="darkgreen">// Note:  This is listed above the extends clause so that it&#39;s listed</font>
   <font color="darkgreen">// first in the parameter dialog.</font>
   <font color="blue">extends </font><a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSubregion">BaseClasses.PartialSubregion</a>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Gas">Phases.Gas</a> gas(inclH2O=true, <font color="blue">final </font>inclVel={inclVelX,inclVelY,inclVelZ}) <font color="darkgreen">
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Gas">Phases.Gas</a> gas(inclH2O=true, <font color="blue">final </font>inclLin={inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">
     &quot;Gas&quot;</font>;
-  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Graphite">Phases.Graphite</a> graphite(<font color="blue">final </font>inclVel={inclVelX,inclVelY,inclVelZ}) <font color="darkgreen">
+  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Graphite">Phases.Graphite</a> graphite(<font color="blue">final </font>inclLin={inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">
     &quot;Graphite&quot;</font>;
-  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Ionomer">Phases.Ionomer</a> ionomer(<font color="blue">final </font>inclVel={inclVelX,inclVelY,inclVelZ}) <font color="darkgreen">&quot;Ionomer&quot;</font>;</textblock>
-  <font color="darkgreen">/*
-  Phases.Liquid liquid(final inclVel={inclVelX,
-        inclVelY,inclVelZ})  &quot;Liquid&quot; annotation (
+  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Ionomer">Phases.Ionomer</a> ionomer(<font color="blue">final </font>inclLin={inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">&quot;Ionomer&quot;</font>;
+  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Liquid">Phases.Liquid</a> liquid(<font color="blue">final </font>inclLin={inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">&quot;Liquid&quot;</font>;</textblock>
 
-    Dialog(group=&quot;Phases&quot;),
-    Placement(transformation(extent={{-10,-10},{10,10}})));
-  */</font>
-
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">FCSys.Subregions.Reaction</a> HOR(<font color="blue">final </font>n_vel=n_vel, n_spec=3) <font color="blue">if </font>inclReact<font color="blue"> and </font>(
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">FCSys.Subregions.Reaction</a> HOR(<font color="blue">final </font>n_lin=n_lin, n_spec=3) <font color="blue">if </font>inclReact<font color="blue"> and </font>(
     graphite.'incle-'<font color="blue"> and </font>ionomer.'inclH+'<font color="blue"> and </font>gas.inclH2<font color="blue"> and </font><font color="blue">not </font>(gas.inclO2<font color="blue">
      and </font>gas.inclH2O)) <font color="darkgreen">&quot;Hydrogen oxidation reaction&quot;</font>;
-  <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">FCSys.Subregions.Reaction</a> ORR(<font color="blue">final </font>n_vel=n_vel, n_spec=4) <font color="blue">if </font>inclReact<font color="blue"> and </font>(
+  <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">FCSys.Subregions.Reaction</a> ORR(<font color="blue">final </font>n_lin=n_lin, n_spec=4) <font color="blue">if </font>inclReact<font color="blue"> and </font>(
     graphite.'incle-'<font color="blue"> and </font>ionomer.'inclH+'<font color="blue"> and </font>gas.inclO2<font color="blue"> and </font>gas.inclH2O<font color="blue"> and </font><font color="blue">
     not </font>gas.inclH2) <font color="darkgreen">&quot;Oxygen reduction reaction&quot;</font>;</textblock>
 
 <textblock type="annotcomp" expanded="false"><font color="blue">protected </font>
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBusInternal">Connectors.ChemicalBusInternal</a> chemical <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBusInternal">FCSys.Connectors.ChemicalBusInternal</a> chemical <font color="darkgreen">
     &quot;Internal connector to route electrochemical interactions&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
@@ -216,52 +211,15 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   <font color="red">connect</font>(ionomer.zNegative, zNegative.ionomer);
   <font color="red">connect</font>(ionomer.zPositive, zPositive.ionomer);</textblock>
 
-  <font color="darkgreen">/*
-  // Liquid
-  connect(liquid.inert, volume.interaction) annotation (Line(
-      points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
-      color={0,180,0},
-      smooth=Smooth.None,
-      thickness=0.5));
-  connect(liquid.xNegative, xNegative.liquid) annotation (Line(
-      points={{-10,6.10623e-16},{-10,1.16573e-15},{-25,1.16573e-15},{-25,5.55112e-16},
-          {-40,5.55112e-16}},
-      color={127,127,127},
-      pattern=LinePattern.None,
-      thickness=0.5,
-      smooth=Smooth.None));
-  connect(liquid.xPositive, xPositive.liquid) annotation (Line(
-      points={{10,6.10623e-16},{10,5.55112e-16},{40,5.55112e-16}},
-      color={127,127,127},
-      pattern=LinePattern.None,
-      thickness=0.5,
-      smooth=Smooth.None));
-  connect(liquid.yNegative, yNegative.liquid) annotation (Line(
-      points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
-      color={127,127,127},
-      pattern=LinePattern.None,
-      thickness=0.5,
-      smooth=Smooth.None));
-  connect(liquid.yPositive, yPositive.liquid) annotation (Line(
-      points={{6.10623e-16,10},{-4.87687e-22,10},{-4.87687e-22,40},{5.55112e-16,
-          40}},
-      color={127,127,127},
-      pattern=LinePattern.None,
-      thickness=0.5,
-      smooth=Smooth.None));
-  connect(liquid.zNegative, zNegative.liquid) annotation (Line(
-      points={{5,5},{20,20}},
-      color={127,127,127},
-      pattern=LinePattern.None,
-      thickness=0.5,
-      smooth=Smooth.None));
-  connect(liquid.zPositive, zPositive.liquid) annotation (Line(
-      points={{-5,-5},{-20,-20}},
-      color={127,127,127},
-      pattern=LinePattern.None,
-      thickness=0.5,
-      smooth=Smooth.None));
-  */</font>
+  <font color="darkgreen">// Liquid</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(liquid.chemical, chemical);
+  <font color="red">connect</font>(liquid.inert, volume.inert);
+  <font color="red">connect</font>(liquid.xNegative, xNegative.liquid);
+  <font color="red">connect</font>(liquid.xPositive, xPositive.liquid);
+  <font color="red">connect</font>(liquid.yNegative, yNegative.liquid);
+  <font color="red">connect</font>(liquid.yPositive, yPositive.liquid);
+  <font color="red">connect</font>(liquid.zNegative, zNegative.liquid);
+  <font color="red">connect</font>(liquid.zPositive, zPositive.liquid);</textblock>
 
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>Subregion;
 </pre>
@@ -289,12 +247,13 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <TR bgcolor="#e0e0e0"><TD colspan=4>Phases</td></tr>
 <tr><td><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Gas">Gas</a></td><td>gas</td><td>&nbsp;</td><td>Gas</td></tr>
 <tr><td><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Ionomer">Ionomer</a></td><td>ionomer</td><td>&nbsp;</td><td>Ionomer</td></tr>
+<tr><td><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Liquid">Liquid</a></td><td>liquid</td><td>&nbsp;</td><td>Liquid</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <tr><td>Boolean</td><td>inclReact</td><td>false</td><td>Include reaction(s), as appropriate</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with velocity included</td></tr>
-<tr><td>Boolean</td><td>inclVelX</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclVelY</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclVelZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
+<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
 <tr><td>Boolean</td><td>inclXFaces</td><td>true</td><td>X</td></tr>
 <tr><td>Boolean</td><td>inclYFaces</td><td>true</td><td>Y</td></tr>
@@ -314,16 +273,17 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <pre>
 <font color="blue">model</font> SubregionNoGraphite <font color="darkgreen">&quot;Subregion with all phases except graphite&quot;</font>
   <font color="blue">parameter </font>Boolean inclReact=false <font color="darkgreen">&quot;Include reaction(s), as appropriate&quot;</font>;
-  <font color="darkgreen">// Note:  This is listed above the extension clause so that it is listed</font>
+  <font color="darkgreen">// Note:  This is listed above the extension clause so that it&#39;s listed</font>
   <font color="darkgreen">// first in the parameter dialog.</font>
   <font color="blue">extends </font><a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSubregion">BaseClasses.PartialSubregion</a>;
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Gas">Phases.Gas</a> gas(
     inclH2O=true,
     inclReact=inclReact,
-    <font color="blue">final </font>inclVel={inclVelX,inclVelY,inclVelZ}) <font color="darkgreen">&quot;Gas&quot;</font>;</textblock>
+    <font color="blue">final </font>inclLin={inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">&quot;Gas&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Ionomer">Phases.Ionomer</a> ionomer(<font color="blue">final </font>inclVel={inclVelX,inclVelY,inclVelZ}) <font color="darkgreen">&quot;Ionomer&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Ionomer">Phases.Ionomer</a> ionomer(<font color="blue">final </font>inclLin={inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">&quot;Ionomer&quot;</font>;
+  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Liquid">Phases.Liquid</a> liquid(<font color="blue">final </font>inclLin={inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">&quot;Liquid&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Gas</font>
@@ -344,6 +304,15 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   <font color="red">connect</font>(ionomer.zNegative, zNegative.ionomer);
   <font color="red">connect</font>(ionomer.zPositive, zPositive.ionomer);</textblock>
 
+  <font color="darkgreen">// Liquid</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(liquid.inert, volume.inert);
+  <font color="red">connect</font>(liquid.xNegative, xNegative.liquid);
+  <font color="red">connect</font>(liquid.xPositive, xPositive.liquid);
+  <font color="red">connect</font>(liquid.yNegative, yNegative.liquid);
+  <font color="red">connect</font>(liquid.yPositive, yPositive.liquid);
+  <font color="red">connect</font>(liquid.zNegative, zNegative.liquid);
+  <font color="red">connect</font>(liquid.zPositive, zPositive.liquid);</textblock>
+
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>SubregionNoGraphite;
 </pre>
 <hr>
@@ -351,7 +320,7 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <h2><img src="images/FCSys.Subregions.SubregionI.png" alt="FCSys.Subregions.SubregionNoIonomer" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Subregions.SubregionNoIonomer"></a><a href="FCSys_Subregions.html#FCSys.Subregions">FCSys.Subregions</a>.SubregionNoIonomer</h2>
 <b>Subregion with all phases except ionomer</b><p>
-<img src="images/FCSys.Subregions.SubregionNoIonomerD.png" alt="FCSys.Subregions.SubregionNoIonomer">
+<img src="images/FCSys.Subregions.SubregionNoGraphiteD.png" alt="FCSys.Subregions.SubregionNoIonomer">
 <p><h3>Information</h3></p>
 <p>Notes:<ul>
     <li>The <code>inclReact</code> parameter may be set to
@@ -370,12 +339,13 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <TR bgcolor="#e0e0e0"><TD colspan=4>Phases</td></tr>
 <tr><td><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Gas">Gas</a></td><td>gas</td><td>&nbsp;</td><td>Gas</td></tr>
 <tr><td><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Graphite">Graphite</a></td><td>graphite</td><td>&nbsp;</td><td>Graphite</td></tr>
+<tr><td><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Liquid">Liquid</a></td><td>liquid</td><td>&nbsp;</td><td>Liquid</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <tr><td>Boolean</td><td>inclReact</td><td>false</td><td>Include reaction(s), as appropriate</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with velocity included</td></tr>
-<tr><td>Boolean</td><td>inclVelX</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclVelY</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclVelZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
+<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
 <tr><td>Boolean</td><td>inclXFaces</td><td>true</td><td>X</td></tr>
 <tr><td>Boolean</td><td>inclYFaces</td><td>true</td><td>Y</td></tr>
@@ -395,17 +365,18 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <pre>
 <font color="blue">model</font> SubregionNoIonomer <font color="darkgreen">&quot;Subregion with all phases except ionomer&quot;</font>
   <font color="blue">parameter </font>Boolean inclReact=false <font color="darkgreen">&quot;Include reaction(s), as appropriate&quot;</font>;
-  <font color="darkgreen">// Note:  This is listed above the extends clause so that it is listed</font>
+  <font color="darkgreen">// Note:  This is listed above the extends clause so that it&#39;s listed</font>
   <font color="darkgreen">// first in the parameter dialog.</font>
   <font color="blue">extends </font><a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSubregion">BaseClasses.PartialSubregion</a>;
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Gas">Phases.Gas</a> gas(
     inclH2O=true,
     inclReact=inclReact,
-    <font color="blue">final </font>inclVel={inclVelX,inclVelY,inclVelZ}) <font color="darkgreen">&quot;Gas&quot;</font>;</textblock>
+    <font color="blue">final </font>inclLin={inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">&quot;Gas&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Graphite">Phases.Graphite</a> graphite(<font color="blue">final </font>inclVel={inclVelX,inclVelY,inclVelZ}) <font color="darkgreen">
-    &quot;Graphite&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Graphite">Phases.Graphite</a> graphite(<font color="blue">final </font>inclLin={inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">
+    &quot;Graphite&quot;</font>;
+  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Liquid">Phases.Liquid</a> liquid(<font color="blue">final </font>inclLin={inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">&quot;Liquid&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Gas</font>
@@ -425,6 +396,15 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   <font color="red">connect</font>(graphite.yPositive, yPositive.graphite);
   <font color="red">connect</font>(graphite.zNegative, zNegative.graphite);
   <font color="red">connect</font>(graphite.zPositive, zPositive.graphite);</textblock>
+
+  <font color="darkgreen">// Liquid</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(liquid.inert, volume.inert);
+  <font color="red">connect</font>(liquid.xNegative, xNegative.liquid);
+  <font color="red">connect</font>(liquid.xPositive, xPositive.liquid);
+  <font color="red">connect</font>(liquid.yNegative, yNegative.liquid);
+  <font color="red">connect</font>(liquid.yPositive, yPositive.liquid);
+  <font color="red">connect</font>(liquid.zNegative, zNegative.liquid);
+  <font color="red">connect</font>(liquid.zPositive, zPositive.liquid);</textblock>
 
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>SubregionNoIonomer;
 </pre>
@@ -447,13 +427,13 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td>Integer</td><td>n_vel</td><td>1</td><td>Number of components of velocity (<i>n</i><sub>vel</sub>)</td></tr>
+<tr><td>Integer</td><td>n_lin</td><td>1</td><td>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a></td><td>inertA</td><td>Connector for volume, linear momentum, and entropy&amp;mdash;with Amagat&#39;s law</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inertD</td><td>Connector for volume, linear momentum, and entropy&amp;mdash;with Dalton&#39;s law</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a></td><td>inertA</td><td>Connector for volume, linear momentum, and heat&amp;mdash;with Amagat&#39;s law</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inertD</td><td>Connector for volume, linear momentum, and heat&amp;mdash;with Dalton&#39;s law</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -462,14 +442,14 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 
   <font color="darkgreen">//extends FCSys.BaseClasses.Icons.Names.Top6;</font>
 
-  <font color="blue">parameter </font>Integer n_vel(
+  <font color="blue">parameter </font>Integer n_lin(
     <font color="blue">final </font>min=0,
     <font color="blue">final </font>max=3) = 1 <font color="darkgreen">
-    &quot;Number of components of velocity (<i>n</i><sub>vel</sub>)&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">FCSys.Connectors.InertAmagat</a> inertA(<font color="blue">final </font>n_vel=n_vel) <font color="darkgreen">
-    &quot;Connector for volume, linear momentum, and entropy&amp;mdash;with Amagat&#39;s law&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">Connectors.InertDalton</a> inertD(<font color="blue">final </font>n_vel=n_vel) <font color="darkgreen">
-    &quot;Connector for volume, linear momentum, and entropy&amp;mdash;with Dalton&#39;s law&quot;</font>;</textblock>
+    &quot;Number of components of linear momentum (<i>n</i><sub>lin</sub>)&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">FCSys.Connectors.InertAmagat</a> inertA(<font color="blue">final </font>n_lin=n_lin) <font color="darkgreen">
+    &quot;Connector for volume, linear momentum, and heat&amp;mdash;with Amagat&#39;s law&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">FCSys.Connectors.InertDalton</a> inertD(<font color="blue">final </font>n_lin=n_lin) <font color="darkgreen">
+    &quot;Connector for volume, linear momentum, and heat&amp;mdash;with Dalton&#39;s law&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Equal intensive properties</font>
@@ -481,7 +461,7 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   0 = inertA.V + inertD.V <font color="darkgreen">&quot;Volume&quot;</font>;
 
   <font color="darkgreen">// Rate balances (without storage or generation)</font>
-  <font color="red">zeros</font>(n_vel) = inertA.mPhidot + inertD.mPhidot <font color="darkgreen">&quot;Linear momentum&quot;</font>;
+  <font color="red">zeros</font>(n_lin) = inertA.mPhidot + inertD.mPhidot <font color="darkgreen">&quot;Linear momentum&quot;</font>;
   0 = inertA.Qdot + inertD.Qdot <font color="darkgreen">&quot;Energy&quot;</font>;
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>PhaseBoundary;
 </pre>
@@ -534,7 +514,7 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>Integer</td><td>n_vel</td><td>1</td><td>Number of components of velocity (<i>n</i><sub>vel</sub>)</td></tr>
+<tr><td>Integer</td><td>n_lin</td><td>1</td><td>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -549,8 +529,8 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   <font color="blue">parameter </font>Integer n_spec(min=2) = 0 <font color="darkgreen">&quot;Number of chemical species&quot;</font>;
   <font color="darkgreen">// Note  The minimum is 2 for a meaningful reaction, but the default</font>
   <font color="darkgreen">// must be 0 to use connectorSizing.</font>
-  <font color="blue">parameter </font>Integer n_vel=1 <font color="darkgreen">
-    &quot;Number of components of velocity (<i>n</i><sub>vel</sub>)&quot;</font>;
+  <font color="blue">parameter </font>Integer n_lin=1 <font color="darkgreen">
+    &quot;Number of components of linear momentum (<i>n</i><sub>lin</sub>)&quot;</font>;
 
   Real nu[n_spec]=<font color="red">Chemistry.stoich</font>(chemical.formula) <font color="darkgreen">
     &quot;Stoichiometric coefficients&quot;</font>;
@@ -564,22 +544,26 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   <font color="darkgreen">//     &quot;Cannot differentiate discrete or record variable:</font>
   <font color="darkgreen">//         [...].nu[...]</font>
   <font color="darkgreen">//     with respect to time.&quot;</font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Xidot(nominal=1*U.A) <font color="darkgreen">&quot;Reaction rate&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot(nominal=1*U.A) <font color="darkgreen">&quot;Reaction rate&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">Connectors.ChemicalInput</a> chemical[n_spec](<font color="blue">each </font><font color="blue">final </font>n_vel=n_vel) <font color="darkgreen">
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">FCSys.Connectors.ChemicalInput</a> chemical[n_spec](<font color="blue">each </font><font color="blue">final </font>n_lin=n_lin) <font color="darkgreen">
     &quot;Connector for chemical species&quot;</font>;</textblock>
 
 <font color="blue">protected </font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi[n_vel](<font color="blue">each </font>nominal=1*U.cm/U.s,<font color="blue">each </font>start=0) <font color="darkgreen">&quot;Velocity&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi[n_lin](<font color="blue">each </font>nominal=1*U.cm/U.s,<font color="blue">each </font>start=0) <font color="darkgreen">&quot;Velocity&quot;</font>;
   <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity2">Q.Velocity2</a> hbar(nominal=1*U.V*U.mol/U.g, start=0) <font color="darkgreen">&quot;Massic enthalpy&quot;</font>;
+
+<font color="blue">initial </font><font color="blue">equation </font>
+  <font color="red">assert</font>(<font color="red">abs</font>(nu*chemical.m) &lt; 1e-4*U.g/U.mol, &quot;The mass balance is incorrect.
+Check the chemical formulas and the specific masses of the species.&quot;);
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Chemical equilibrium</font>
   0 = nu*chemical.muPerT;
 
   <font color="darkgreen">// Conservation (without storage)</font>
-  nu[1:n_spec]*Xidot = chemical.Ndot <font color="darkgreen">&quot;Material&quot;</font>;
-  <font color="red">zeros</font>(n_vel) = <font color="red">sum</font>(chemical[i].mPhidot <font color="blue">for </font>i<font color="blue"> in </font>1:n_spec) <font color="darkgreen">&quot;Linear momentum&quot;</font>;
+  nu[1:n_spec]*Ndot = chemical.Ndot <font color="darkgreen">&quot;Material&quot;</font>;
+  <font color="red">zeros</font>(n_lin) = <font color="red">sum</font>(chemical[i].mPhidot <font color="blue">for </font>i<font color="blue"> in </font>1:n_spec) <font color="darkgreen">&quot;Linear momentum&quot;</font>;
   0 = <font color="red">sum</font>(chemical.Hdot) <font color="darkgreen">&quot;Energy&quot;</font>;
 
   <font color="darkgreen">// Ideal mixing/upstream discretization</font>
@@ -620,12 +604,12 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Volume</a></td><td>V</td><td>&nbsp;</td><td>Volume [l3]</td></tr>
-<tr><td>Integer</td><td>n_vel</td><td>1</td><td>Number of components of velocity (<i>n</i><sub>vel</sub>)</td></tr>
+<tr><td>Integer</td><td>n_lin</td><td>1</td><td>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a></td><td>inert</td><td>Connector for linear momentum and entropy, with shared volume</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a></td><td>inert</td><td>Connector for linear momentum and heat,  with shared volume</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -634,13 +618,13 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 
   <font color="darkgreen">// Geometric parameters</font>
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V(start=1*U.cm^3) <font color="darkgreen">&quot;Volume&quot;</font>;
-  <font color="blue">parameter </font>Integer n_vel(
+  <font color="blue">parameter </font>Integer n_lin(
     <font color="blue">final </font>min=0,
     <font color="blue">final </font>max=3) = 1 <font color="darkgreen">
-    &quot;Number of components of velocity (<i>n</i><sub>vel</sub>)&quot;</font>;
+    &quot;Number of components of linear momentum (<i>n</i><sub>lin</sub>)&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">FCSys.Connectors.InertAmagat</a> inert(<font color="blue">final </font>n_vel=n_vel) <font color="darkgreen">
-    &quot;Connector for linear momentum and entropy, with shared volume&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">FCSys.Connectors.InertAmagat</a> inert(<font color="blue">final </font>n_lin=n_lin) <font color="darkgreen">
+    &quot;Connector for linear momentum and heat,  with shared volume&quot;</font>;
   <font color="blue">outer </font><a href="FCSys_BCs.html#FCSys.BCs.Defaults">FCSys.BCs.Defaults</a> defaults <font color="darkgreen">&quot;Default settings&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
@@ -648,7 +632,7 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   V = inert.V;
 
   <font color="darkgreen">// Rate balances (without storage or generation)</font>
-  <font color="red">zeros</font>(n_vel) = inert.mPhidot <font color="darkgreen">&quot;Linear momentum&quot;</font>;
+  <font color="red">zeros</font>(n_lin) = inert.mPhidot <font color="darkgreen">&quot;Linear momentum&quot;</font>;
   0 = inert.Qdot <font color="darkgreen">&quot;Energy&quot;</font>;
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>Volume;
 </pre>
@@ -657,7 +641,7 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  2 21:13:38 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  9 07:47:06 2013.
 </div>
 </body>
 </html>

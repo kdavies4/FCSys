@@ -62,11 +62,11 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <b>Model for a phase with no species or reactions</b><p>
 <img src="images/FCSys.Subregions.Phases.BaseClasses.NullPhaseD.png" alt="FCSys.Subregions.Phases.BaseClasses.NullPhase">
 <p><h3>Information</h3></p>
-<p>If one of the species has <code>setTemp = true</code>, then 
-    <code>initTemp</code> should be set to <code>false</code>. 
-    Likewise, if one of the species has <code>setVelX = true</code>, 
-    <code>setVelY = true</code>, or <code>setVelZ = true</code>, then 
-    <code>initVelX</code>, <code>initVelY</code>, or <code>initVelZ</code> should 
+<p>If one of the species has <code>setTemp = true</code>, then
+    <code>initTemp</code> should be set to <code>false</code>.
+    Likewise, if one of the species has <code>setVelX = true</code>,
+    <code>setVelY = true</code>, or <code>setVelZ = true</code>, then
+    <code>initVelX</code>, <code>initVelY</code>, or <code>initVelZ</code> should
     be set to <code>false</code> (respectively).</p>
 
     <p>Assumptions:
@@ -76,7 +76,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </ol></p>
 
 <p>Notes:<ul>
-  <li>The x-axis component of velocity is included by default.  At least one component must be included.</li></ul><p>
+  <li>The x-axis component of linear momentum is included by default.  At least one component must be included.</li></ul><p>
 
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -86,7 +86,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <tr><td>Boolean</td><td>reduceVel</td><td>true</td><td>Same velocity for all species</td></tr>
 <tr><td>Boolean</td><td>reduceTemp</td><td>true</td><td>Same temperature for all species</td></tr>
-<tr><td>Boolean</td><td>inclVel[3]</td><td>{true,false,false}</td><td>true, if each component of velocity is included</td></tr>
+<tr><td>Boolean</td><td>inclLin[3]</td><td>{true,false,false}</td><td>true, if each component of linear momentum is included</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Velocity</td></tr>
 <tr><td>Boolean</td><td>initVelX</td><td>true</td><td>Initialize the x component</td></tr>
@@ -133,17 +133,17 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">parameter </font>Boolean initVelZ=true <font color="darkgreen">&quot;Initialize the z component&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi_IC[Axis]={0,0,0} <font color="darkgreen">
     &quot;Initial velocity (<b>&phi;</b><sub>IC</sub>)&quot;</font>;
-  <font color="darkgreen">// This is always enabled in the dialog since it is used as a guess value.</font>
+  <font color="darkgreen">// This is always enabled in the dialog since it&#39;s used as a guess value.</font>
   <font color="blue">parameter </font>Boolean initTemp=true <font color="darkgreen">&quot;Initialize&quot;</font>;
 
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_IC(nominal=298.15*U.K,start=defaults.T) <font color="darkgreen">
     &quot;Initial temperature (<i>T</i><sub>IC</sub>)&quot;</font>;
-  <font color="darkgreen">// This is always enabled in the dialog since it is used as a guess value.</font>
+  <font color="darkgreen">// This is always enabled in the dialog since it&#39;s used as a guess value.</font>
 
-  <font color="blue">parameter </font>Boolean inclVel[3]={true,false,false} <font color="darkgreen">
-    &quot;true, if each component of velocity is included&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclLin[3]={true,false,false} <font color="darkgreen">
+    &quot;true, if each component of linear momentum is included&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">FCSys.Connectors.InertAmagat</a> inert(<font color="blue">final </font>n_vel=n_vel) <font color="blue">if </font>n_spec &gt; 0;
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">FCSys.Connectors.InertAmagat</a> inert(<font color="blue">final </font>n_lin=n_lin) <font color="blue">if </font>n_spec &gt; 0;
   <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> xNegative <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
     &quot;Negative face along the x axis&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> xPositive <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
@@ -157,7 +157,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> zPositive <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
     &quot;Positive face along the z axis&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.PhaseBoundary">PhaseBoundary</a> phaseBoundary(<font color="blue">final </font>n_vel=n_vel) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Phase boundary&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.PhaseBoundary">PhaseBoundary</a> phaseBoundary(<font color="blue">final </font>n_lin=n_lin) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Phase boundary&quot;</font>;</textblock>
   <font color="darkgreen">// This component is conditional because if two or more empty phases</font>
   <font color="darkgreen">// (without any species included) were connected within a subregion, there</font>
   <font color="darkgreen">// would be a mathematical singularity.</font>
@@ -167,20 +167,20 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <font color="blue">protected </font>
   <font color="blue">parameter </font>Integer n_spec <font color="darkgreen">&quot;Number of species&quot;</font>;
-  <font color="blue">final </font><font color="blue">parameter </font>Integer n_vel=<font color="red">countTrue</font>(inclVel) <font color="darkgreen">
-    &quot;Number of components of velocity&quot;</font>;
-  <font color="blue">final </font><font color="blue">parameter </font>Integer cartAxes[n_vel]=<font color="red">index</font>(inclVel) <font color="darkgreen">
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_lin=<font color="red">countTrue</font>(inclLin) <font color="darkgreen">
+    &quot;Number of components of linear momentum&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer cartAxes[n_lin]=<font color="red">index</font>(inclLin) <font color="darkgreen">
     &quot;Cartesian-axis indices of the axes of linear momentum&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">Connectors.InertInternal</a> joint(
-    n_vel=n_vel,
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">FCSys.Connectors.InertInternal</a> common(
+    n_lin=n_lin,
     <font color="blue">final </font>uniformVelocity=reduceVel,
     <font color="blue">final </font>isothermal=reduceTemp,
     mechanical(phi(
         <font color="blue">each </font>stateSelect=StateSelect.prefer,
         <font color="blue">final </font>start=phi_IC[cartAxes],
         fixed={initVelX,initVelY,initVelZ}[cartAxes])),
-    heat(T(
+    thermal(T(
         stateSelect=StateSelect.prefer,
         <font color="blue">final </font>start=T_IC,
         <font color="blue">final </font>fixed=initTemp))) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
@@ -192,15 +192,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="darkgreen">// Inert interactions</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(phaseBoundary.inertA, inert);</textblock>
 
-<textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>NullPhase;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>NullPhase;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  2 21:14:07 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  9 07:47:35 2013.
 </div>
 </body>
 </html>

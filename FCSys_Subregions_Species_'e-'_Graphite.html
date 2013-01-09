@@ -76,14 +76,14 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k[Axis]</td><td>{1,1,1}</td><td>Area fill factor for transport (<b>k</b>) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a></td><td>Characteristic data of the species</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>f_0</td><td>k_f_0*Data.f_0(T)</td><td>Bulk fluidity (<i>f</i><sub>0</sub>) [l.T/m]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>f_12</td><td>k_f_12*Data.f_12(T)</td><td>Shear fluidity (<i>f</i><sub>12</sub>) [l.T/m]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>r_th</td><td>k_r_th*Data.r_th(T)</td><td>Thermal resistivity (<i>r</i><sub>th</sub>)</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_f_0</td><td>1</td><td>Adjustment factor for bulk fluidity (<i>k</i><sub><i>f</i> 0</sub>) [1]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_f_12</td><td>1</td><td>Adjustment factor for shear fluidity (<i>k</i><sub><i>f</i> 12</sub>) [1]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_r_th</td><td>1</td><td>Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S&#775;</i></sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fusivity">Fusivity</a></td><td>Xi</td><td>k_Xi*Data.Xi(T)</td><td>Fusivity (&Xi;) [T/l2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>F</td><td>k_F*Data.F(T)</td><td>Fluidity [l.T/m]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>R</td><td>k_R*Data.R(T)</td><td>Thermal resistivity</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_Xi</td><td>1</td><td>Adjustment factor for self diffusivity (<i>k</i><sub>&Xi;</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_F</td><td>1</td><td>Adjustment factor for fluidity (<i>k</i><sub><i>F</i></sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_R</td><td>1</td><td>Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S&#775;</i></sub>) [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<tr><td>Boolean</td><td>inclVel[Axis]</td><td>{true,false,false}</td><td>true, if each component of velocity is included (<i>Do not adjust here.</i>)</td></tr>
+<tr><td>Boolean</td><td>inclLin[Axis]</td><td>{true,false,false}</td><td>true, if each component of linear momentum is included (<i>Do not adjust here.</i>)</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with upstream discretization</td></tr>
 <tr><td>Boolean</td><td>upstreamX</td><td>true</td><td>X</td></tr>
 <tr><td>Boolean</td><td>upstreamY</td><td>true</td><td>Y</td></tr>
@@ -133,8 +133,8 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a></td><td>chemical</td><td>Connector to exchange material while advecting linear momentum and energy</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>joint</td><td>Connector for direct mechanical and thermal coupling of multiple species</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Connector to add pressure and exchange linear momentum and entropy by diffusion</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>common</td><td>Connector for direct mechanical and thermal coupling of multiple species</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Connector to add pressure and exchange linear momentum and heat by diffusion</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=3>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristic data of the species</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=3><b>Assumptions</b></td></tr>
@@ -151,15 +151,15 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <font color="blue">model</font> Calibrated <font color="darkgreen">&quot;Correlations with adjustment factors&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species0Amount">Species0Amount</a>(
     <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>,
-    f_0=k_f_0*<font color="red">Data.f_0</font>(T),
-    f_12=k_f_12*<font color="red">Data.f_12</font>(T),
-    r_th=k_r_th*<font color="red">Data.r_th</font>(T));
+    Xi=k_Xi*<font color="red">Data.Xi</font>(T),
+    F=k_F*<font color="red">Data.F</font>(T),
+    R=k_R*<font color="red">Data.R</font>(T));
 
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_f_0(<font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
-    &quot;Adjustment factor for bulk fluidity (<i>k</i><sub><i>f</i> 0</sub>)&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_f_12(<font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
-    &quot;Adjustment factor for shear fluidity (<i>k</i><sub><i>f</i> 12</sub>)&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_r_th(<font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_Xi(<font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;Adjustment factor for self diffusivity (<i>k</i><sub>&Xi;</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_F(<font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;Adjustment factor for fluidity (<i>k</i><sub><i>F</i></sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_R(<font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
     &quot;Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S&#775;</i></sub>)&quot;</font>;
 
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>Calibrated;
@@ -181,11 +181,11 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k[Axis]</td><td>{1,1,1}</td><td>Area fill factor for transport (<b>k</b>) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a></td><td>Characteristic data of the species</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>f_0</td><td>Data.f_0(T)</td><td>Bulk fluidity (<i>f</i><sub>0</sub>) [l.T/m]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>f_12</td><td>Data.f_12(T)</td><td>Shear fluidity (<i>f</i><sub>12</sub>) [l.T/m]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>r_th</td><td>Data.r_th(T)</td><td>Thermal resistivity (<i>r</i><sub>th</sub>)</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fusivity">Fusivity</a></td><td>Xi</td><td>Data.Xi(T)</td><td>Fusivity (&Xi;) [T/l2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>F</td><td>Data.F(T)</td><td>Fluidity [l.T/m]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>R</td><td>Data.R(T)</td><td>Thermal resistivity</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<tr><td>Boolean</td><td>inclVel[Axis]</td><td>{true,false,false}</td><td>true, if each component of velocity is included (<i>Do not adjust here.</i>)</td></tr>
+<tr><td>Boolean</td><td>inclLin[Axis]</td><td>{true,false,false}</td><td>true, if each component of linear momentum is included (<i>Do not adjust here.</i>)</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with upstream discretization</td></tr>
 <tr><td>Boolean</td><td>upstreamX</td><td>true</td><td>X</td></tr>
 <tr><td>Boolean</td><td>upstreamY</td><td>true</td><td>Y</td></tr>
@@ -235,8 +235,8 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a></td><td>chemical</td><td>Connector to exchange material while advecting linear momentum and energy</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>joint</td><td>Connector for direct mechanical and thermal coupling of multiple species</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Connector to add pressure and exchange linear momentum and entropy by diffusion</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>common</td><td>Connector for direct mechanical and thermal coupling of multiple species</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Connector to add pressure and exchange linear momentum and heat by diffusion</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=3>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristic data of the species</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=3><b>Assumptions</b></td></tr>
@@ -253,9 +253,9 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <font color="blue">model</font> Correlated <font color="darkgreen">&quot;Correlated properties&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species0Amount">Species0Amount</a>(
     <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>,
-    f_0=<font color="red">Data.f_0</font>(T),
-    f_12=<font color="red">Data.f_12</font>(T),
-    r_th=<font color="red">Data.r_th</font>(T));
+    Xi=<font color="red">Data.Xi</font>(T),
+    F=<font color="red">Data.F</font>(T),
+    R=<font color="red">Data.R</font>(T));
 
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>Correlated;
 </pre>
@@ -278,7 +278,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a></td><td>Characteristic data of the species</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<tr><td>Boolean</td><td>inclVel[Axis]</td><td>{true,false,false}</td><td>true, if each component of velocity is included (<i>Do not adjust here.</i>)</td></tr>
+<tr><td>Boolean</td><td>inclLin[Axis]</td><td>{true,false,false}</td><td>true, if each component of linear momentum is included (<i>Do not adjust here.</i>)</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with upstream discretization</td></tr>
 <tr><td>Boolean</td><td>upstreamX</td><td>true</td><td>X</td></tr>
 <tr><td>Boolean</td><td>upstreamY</td><td>true</td><td>Y</td></tr>
@@ -328,8 +328,8 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a></td><td>chemical</td><td>Connector to exchange material while advecting linear momentum and energy</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>joint</td><td>Connector for direct mechanical and thermal coupling of multiple species</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Connector to add pressure and exchange linear momentum and entropy by diffusion</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>common</td><td>Connector for direct mechanical and thermal coupling of multiple species</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Connector to add pressure and exchange linear momentum and heat by diffusion</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=3>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristic data of the species</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=3><b>Assumptions</b></td></tr>
@@ -346,9 +346,9 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <font color="blue">model</font> Fixed <font color="darkgreen">&quot;Fixed properties&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species0Amount">Species0Amount</a>(
     <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>,
-    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> f_0=<font color="red">Data.f_0</font>(),
-    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> f_12=<font color="red">Data.f_12</font>(),
-    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> r_th=<font color="red">Data.r_th</font>());
+    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Fusivity">Q.Fusivity</a> Xi=<font color="red">Data.Xi</font>(),
+    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Q.Fluidity</a> F=<font color="red">Data.F</font>(),
+    <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> R=<font color="red">Data.R</font>());
 
 <textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>Fixed;
@@ -358,7 +358,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  2 21:14:37 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  9 08:04:26 2013.
 </div>
 </body>
 </html>

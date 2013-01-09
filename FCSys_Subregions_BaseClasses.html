@@ -71,7 +71,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   If either or both of the faces are closed (<code>thermoOpt==ThermoOpt.ClosedAdiabatic</code> or
   <code>thermoOpt==ThermoOpt.ClosedDiabatic</code>), then the interface will be closed.
   note applies to the viscous/inviscous and diabatic/adiabatic properties.</li>
-  <li>The x-axis component of velocity is included by default.  At least one component must be included.</li>
+  <li>The x-axis component of linear momentum is included by default.  At least one component must be included.</li>
   </ul></p><p>
 Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top3">FCSys.BaseClasses.Icons.Names.Top3</a>.
 <p><h3>Parameters</h3><p>
@@ -80,10 +80,10 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>&nbsp;</td><td>Length (<b>L</b>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with velocity included</td></tr>
-<tr><td>Boolean</td><td>inclVelX</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclVelY</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclVelZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
+<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
 <tr><td>Boolean</td><td>inclXFaces</td><td>true</td><td>X</td></tr>
 <tr><td>Boolean</td><td>inclYFaces</td><td>true</td><td>Y</td></tr>
@@ -112,10 +112,10 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
       2)] <font color="blue">for </font>axis<font color="blue"> in </font>Axis} <font color="darkgreen">&quot;Cross-sectional area&quot;</font>;
   <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V=<font color="red">product</font>(L) <font color="darkgreen">&quot;Volume&quot;</font>;
 
-  <font color="darkgreen">// Assumptions about components of velocity</font>
-  <font color="blue">parameter </font>Boolean inclVelX=true <font color="darkgreen">&quot;X&quot;</font>;
-  <font color="blue">parameter </font>Boolean inclVelY=false <font color="darkgreen">&quot;Y&quot;</font>;
-  <font color="blue">parameter </font>Boolean inclVelZ=false <font color="darkgreen">&quot;Z&quot;</font>;
+  <font color="darkgreen">// Assumptions about components of linear momentum</font>
+  <font color="blue">parameter </font>Boolean inclLinX=true <font color="darkgreen">&quot;X&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclLinY=false <font color="darkgreen">&quot;Y&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclLinZ=false <font color="darkgreen">&quot;Z&quot;</font>;
 
   <font color="darkgreen">// Assumptions about faces</font>
   <font color="blue">parameter </font>Boolean inclXFaces=true <font color="darkgreen">&quot;X&quot;</font>;
@@ -135,11 +135,11 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> zPositive <font color="blue">if </font>inclZFaces <font color="darkgreen">
     &quot;Positive face along the z axis&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.Volume">FCSys.Subregions.Volume</a> volume(<font color="blue">final </font>n_vel=n_vel, <font color="blue">final </font>V=V) <font color="darkgreen">
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.Volume">FCSys.Subregions.Volume</a> volume(<font color="blue">final </font>n_lin=n_lin, <font color="blue">final </font>V=V) <font color="darkgreen">
     &quot;Model to establish space for species&quot;</font>;</textblock>
 <font color="blue">protected </font>
-  <font color="blue">final </font><font color="blue">parameter </font>Integer n_vel=<font color="red">countTrue</font>({inclVelX,inclVelY,inclVelZ}) <font color="darkgreen">
-    &quot;Number of components of velocity&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_lin=<font color="red">countTrue</font>({inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">
+    &quot;Number of components of linear momentum&quot;</font>;
 
 <textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>PartialSubregion;
@@ -149,7 +149,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  2 21:15:25 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  9 07:48:48 2013.
 </div>
 </body>
 </html>

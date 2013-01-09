@@ -121,15 +121,21 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
             Summary of the connections for a chemical reaction</li>
             <li>A region or layer model such as <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">FCSys.Regions.AnFPs.AnFP</a>:
             Information about the geometric orientation of the cell</li>
-        </ul>In general, overviews are given in the documentation of containing packages and
+        </ul>
+        In general, overviews are given in the documentation of containing packages and
         specific information is given at the appropriate level of inheritance.  If a model does not
         have sufficient documentation, please look at its base model(s) and the package(s) that
         contain it.  Assumptions are only listed at the lowest level of inheritance at which they apply.  Therefore, the
         list of assumptions in a model should be considered in conjunction with the assumptions in all
         the models it inherits from.
         </li>
-        <li>Create and simulate examples of other usage scenarios.  Many of the nested models (regions, subregions, species) are replaceable.
-        Their parameters are often not propagated to the cell level, but may be accessed through the parameter dialog by editing the replaceable model.</li>
+        <li>Create and simulate examples of other usage scenarios.  Many of the 
+        nested models (regions, subregions, species) are replaceable.
+        Their parameters are often not propagated to the cell level, but may 
+        be accessed through the parameter dialog by editing the replaceable model.  Note that 
+        many models have auxiliary output variables available for additional analysis and diagnostics.
+        These may be included by setting <code>analysis=true</code> in the outer defaults model (instance 
+        of <a href="FCSys_BCs.html#FCSys.BCs.Defaults">Defaults</a>).</li>
         <li>Develop your own classes.  It should be possible to model other electrochemical
         devices (solid oxide fuel cells, lithium ion batteries, flow batteries/regenerative fuel cells, etc.) by
         extending the existing classes and
@@ -179,10 +185,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
       <td valign=top class=noBorder>D. M. Bernardi and M. W. Verbrugge, "<a href="http://dx.doi.org/10.1149/1.2221251">A Mathematical Model of the Solid-Polymer-Electrolyte Fuel Cell</a>," <i>J. Electrochem. Soc.</i>, vol. 139, no. 9, pp. 2477&ndash;2491, Sep. 1992.</td>
     </tr>
     <tr>
-      <td valign=top class=noBorder>[<a name="Cellier1991" class=bookmark>Cellier1991</a>]</td>
-      <td valign=top class=noBorder>F. E. Cellier, <i><a href="http://www.inf.ethz.ch/personal/fcellier/Pubs/BG/springer.html">Continuous System Modeling</a></i>, Springer-Verlag, 1991.</td>
-    </tr>
-    <tr>
       <td valign=top class="noBorder">[Dassault2010]</td>
       <td valign=top class="noBorder">Dassault Syst&eacute;mes, <i>Dymola (Dynamic Modeling Laboratory) User Manual</i>, Lund, Sweden, Jan. 2010.  Distributed with Dymola version 7.4.</td>
     </tr>
@@ -212,7 +214,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name="Hogan2006" class=bookmark>Hogan2006</a>]</td>
-      <td valign=top class=noBorder>N. Hogan, "<a href="http://ocw.mit.edu/courses/mechanical-engineering/2-141-modeling-and-simulation-of-dynamic-systems-fall-2006/lecture-notes/heat_transfer.pdf">Heat Transfer and The Second Law</a>," Course notes for <i>Modeling and Simulation of Dynamic Systems</i>, Massachusetts of Technology, Fall 2006.</td>
+      <td valign=top class=noBorder>N. Hogan, "Heat Transfer and the Second Law," <a href="http://ocw.mit.edu/courses/mechanical-engineering/2-141-modeling-and-simulation-of-dynamic-systems-fall-2006/lecture-notes/heat_transfer.pdf">http://ocw.mit.edu/courses/mechanical-engineering/2-141-modeling-and-simulation-of-dynamic-systems-fall-2006/lecture-notes/heat_transfer.pdf</a>, Course notes for <i>Modeling and Simulation of Dynamic Systems</i> (2.141), Massachusetts of Technology, Oct. 2006.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name="Incropera2002" class=bookmark>Incropera2002</a>]</td>
@@ -256,7 +258,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name="Rao1997" class=bookmark>Rao1997</a>]</td>
-      <td valign=top class=noBorder>Y. V. C. Rao, <i>Chemica Engineering Thermodynamics</i>, Hyderabad, India:  Universities Press, 1997.</td>
+      <td valign=top class=noBorder>Y. V. C. Rao, <i>Chemical Engineering Thermodynamics</i>, Hyderabad, India:  Universities Press, 1997.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name="Reichert2010" class=bookmark>Reichert2010</a>]</td>
@@ -596,7 +598,7 @@ Source Code, the Attribution Notices shall be appropriately
 displayed, e.g., in the documentation of the Derivative Work.</p>
 
 <p><b>9. Disclaimer
-of Warranty.<br></b><u><b>The Original Work is provided under this
+of Warranty.<br><u>The Original Work is provided under this
 License on an &quot;as is&quot; basis and without warranty, either
 express or implied, including, without limitation, the warranties of
 non-infringement, merchantability or fitness for a particular
@@ -770,8 +772,8 @@ license.
 
 <p><b>Can
 I copy a class out of a Modelica package (under Modelica License 2)
-and include it </b><u><b>unmodified</b></u><b> in a Modelica package
-under a </b><u><b>commercial/proprietary license</b></u><b>?</b></p>
+and include it <u>unmodified</u> in a Modelica package
+under a <u>commercial/proprietary license</u>?</b></p>
 <p>No,
 according to article 2c). However, you can include model, block,
 function, package, record and connector classes in your Modelica
@@ -783,10 +785,10 @@ can be copied and included unmodified under a commercial/proprietary
 license (for details, see the next question).</p>
 
 <p><b>Can
-I copy a type class or </b><u><b>part</b></u><b> of a model, block,
+I copy a type class or <u>part</u> of a model, block,
 function, record, connector class, out of a Modelica package (under
 Modelica License 2) and include it modified or unmodified in a
-Modelica package under a </b><u><b>commercial/proprietary</b></u><b>
+Modelica package under a <u>commercial/proprietary</u>
 license</b></p>
 <p>Yes,
 according to article 2d), since this will in the end usually qualify
@@ -804,8 +806,8 @@ code would have to stay under Modelica License 2.</p>
 
 <p><b>Can
 I copy a class out of a Modelica package (under Modelica License 2)
-and include it in </b><u><b>modified </b></u><b>form in a
-</b><u><b>commercial/proprietary</b></u><b> Modelica package?</b></p>
+and include it in <u>modified</u> form in a
+<u>commercial/proprietary</u> Modelica package?</b></p>
 <p>Yes.
 If the modification can be seen as a &ldquo;Derivative Work&rdquo;,
 you can place it under your commercial/proprietary license. If the
@@ -892,7 +894,7 @@ to charge a fee for Derivative Work under alternative 2d).</p>
 
 <p><b>Can
 I copy a text passage out of a Modelica document (under Modelica
-License 2) and use it </b><u><b>unmodified</b></u><b> in my document
+License 2) and use it <u>unmodified</u> in my document
 (e.g. the Modelica syntax description in the Modelica Specification)?</b></p>
 <p>Yes.
 In case you distribute your document, the copied parts are still
@@ -902,7 +904,7 @@ your document.</p>
 
 <p><b>Can
 I copy a text passage out of a Modelica document (under Modelica
-License 2) and use it in </b><u><b>modified</b></u><b> form in my
+License 2) and use it in <u>modified</u> form in my
 document?</b></p>
 <p>Yes,
 the creation of Derivative Works is allowed. In case the content is
@@ -925,7 +927,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  2 21:24:59 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  9 07:40:59 2013.
 </div>
 </body>
 </html>

@@ -100,6 +100,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>Fluidity</td><td>1/(U.Pa*U.s)</td><td>Fluidity [l.T/m]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>Force</td><td>1*U.N</td><td>Force [l.m/T2]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Frequency">Frequency</a></td><td>Frequency</td><td>1*U.rad/U.s</td><td>Frequency [A/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fusivity">Fusivity</a></td><td>Fusivity</td><td>1*U.s/U.m^2</td><td>Fusivity [T/l2]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Inductance">Inductance</a></td><td>Inductance</td><td>1*U.H</td><td>Inductance [l2.m/N2]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>Length</td><td>1*U.m</td><td>Length [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.LengthSpecific">LengthSpecific</a></td><td>LengthSpecific</td><td>1*U.m/U.C</td><td>Specific length [l/N]</td></tr>
@@ -119,7 +120,6 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialAbsolute">PotentialAbsolute</a></td><td>PotentialAbsolute</td><td>1*U.K</td><td>Absolute potential [l2.m/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialPerWavenumber">PotentialPerWavenumber</a></td><td>PotentialPerWavenumber</td><td>1*U.V*U.m/U.rad</td><td>Potential per wavenumber [l3.m/(A.N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialRate">PotentialRate</a></td><td>PotentialRate</td><td>1*U.V/U.s</td><td>Rate of potential [l2.m/(N.T3)]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialReciprocal">PotentialReciprocal</a></td><td>PotentialReciprocal</td><td>1/U.V</td><td>Reciprocal potential [N.T2/(l2.m)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Power</td><td>1*U.W</td><td>Power [l2.m/T3]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PowerArea">PowerArea</a></td><td>PowerArea</td><td>1*U.W*U.m^2</td><td>Power times area [l4.m/T3]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PowerAreic">PowerAreic</a></td><td>PowerAreic</td><td>1*U.W/U.m^2</td><td>Areic power [m/T3]</td></tr>
@@ -145,7 +145,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
 <font color="blue">model</font> ExampleModel <font color="darkgreen">&quot;Model that uses all of the quantities&quot;</font>
   <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous">FCSys.BaseClasses.Icons.Blocks.Continuous</a>;
 
-  <font color="darkgreen">// Generated from FCSys/resources/quantities.xls, 2012-12-16</font>
+  <font color="darkgreen">// Generated from FCSys/resources/quantities.xls, 2013-1-3</font>
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Acceleration">Q.Acceleration</a> Acceleration=1*U.m/U.s^2 <font color="darkgreen">&quot;Acceleration&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> Amount=1*U.C <font color="darkgreen">&quot;Amount&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.AmountReciprocal">Q.AmountReciprocal</a> AmountReciprocal=1/U.C <font color="darkgreen">&quot;Reciprocal amount&quot;</font>;
@@ -165,6 +165,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Q.Fluidity</a> Fluidity=1/(U.Pa*U.s) <font color="darkgreen">&quot;Fluidity&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> Force=1*U.N <font color="darkgreen">&quot;Force&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Frequency">Q.Frequency</a> Frequency=1*U.rad/U.s <font color="darkgreen">&quot;Frequency&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Fusivity">Q.Fusivity</a> Fusivity=1*U.s/U.m^2 <font color="darkgreen">&quot;Fusivity&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Inductance">Q.Inductance</a> Inductance=1*U.H <font color="darkgreen">&quot;Inductance&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> Length=1*U.m <font color="darkgreen">&quot;Length&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.LengthSpecific">Q.LengthSpecific</a> LengthSpecific=1*U.m/U.C <font color="darkgreen">&quot;Specific length&quot;</font>;
@@ -188,8 +189,6 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialPerWavenumber">Q.PotentialPerWavenumber</a> PotentialPerWavenumber=1*U.V*U.m/U.rad <font color="darkgreen">
     &quot;Potential per wavenumber&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialRate">Q.PotentialRate</a> PotentialRate=1*U.V/U.s <font color="darkgreen">&quot;Rate of potential&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialReciprocal">Q.PotentialReciprocal</a> PotentialReciprocal=1/U.V <font color="darkgreen">
-    &quot;Reciprocal potential&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Power=1*U.W <font color="darkgreen">&quot;Power&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PowerArea">Q.PowerArea</a> PowerArea=1*U.W*U.m^2 <font color="darkgreen">&quot;Power times area&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PowerAreic">Q.PowerAreic</a> PowerAreic=1*U.W/U.m^2 <font color="darkgreen">&quot;Areic power&quot;</font>;
@@ -219,7 +218,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  2 21:15:50 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  9 07:49:11 2013.
 </div>
 </body>
 </html>

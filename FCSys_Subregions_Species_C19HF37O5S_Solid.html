@@ -76,20 +76,20 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k[Axis]</td><td>{1,1,1}</td><td>Area fill factor for transport (<b>k</b>) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a></td><td>Characteristic data of the species</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>r_th</td><td>k_r_th*Data.r_th(T)</td><td>Thermal resistivity (<i>r</i><sub>th</sub>)</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_r_th</td><td>1</td><td>Adjustment factor for thermal resistivity (<i>k</i><sub><i>r</i> th</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>R</td><td>k_R*Data.R(T)</td><td>Thermal resistivity</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_R</td><td>1</td><td>Adjustment factor for thermal resistivity (<i>k</i><sub><i>R</i></sub>) [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <tr><td>Boolean</td><td>overrideEOS</td><td>false</td><td>Override the equation of state with the value of &rho;<sub>IC</sub></td></tr>
-<tr><td>Boolean</td><td>inclVel[Axis]</td><td>{true,false,false}</td><td>true, if each component of velocity is included (<i>Do not adjust here.</i>)</td></tr>
+<tr><td>Boolean</td><td>inclLin[Axis]</td><td>{true,false,false}</td><td>true, if each component of linear momentum is included (<i>Do not adjust here.</i>)</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Prescribed states (via initialization parameters)</td></tr>
 <tr><td>Boolean</td><td>setTemp</td><td>false</td><td>Temperature</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Characteristics of the faces (click to edit)</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FaceX</a></td><td>xNegative</td><td>xNegative(final isobaric=tru...</td><td>Negative face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FaceX</a></td><td>xPositive</td><td>xPositive(final isobaric=tru...</td><td>Positive face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FaceY</a></td><td>yNegative</td><td>yNegative(final isobaric=tru...</td><td>Negative face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FaceY</a></td><td>yPositive</td><td>yPositive(final isobaric=tru...</td><td>Positive face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FaceZ</a></td><td>zNegative</td><td>zNegative(final isobaric=tru...</td><td>Negative face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FaceZ</a></td><td>zPositive</td><td>zPositive(final isobaric=tru...</td><td>Positive face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FaceX</a></td><td>xNegative</td><td>xNegative(final isochoric=tr...</td><td>Negative face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FaceX</a></td><td>xPositive</td><td>xPositive(final isochoric=tr...</td><td>Positive face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FaceY</a></td><td>yNegative</td><td>yNegative(final isochoric=tr...</td><td>Negative face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FaceY</a></td><td>yPositive</td><td>yPositive(final isochoric=tr...</td><td>Positive face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FaceZ</a></td><td>zNegative</td><td>zNegative(final isochoric=tr...</td><td>Negative face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FaceZ</a></td><td>zPositive</td><td>zPositive(final isochoric=tr...</td><td>Positive face along the z axis</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Scalar properties</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitMethScalar">InitMethScalar</a></td><td>initMethPartNum</td><td>InitMethScalar.Volume</td><td>Method of initializing the particle number</td></tr>
@@ -115,8 +115,8 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a></td><td>chemical</td><td>Connector to exchange material while advecting linear momentum and energy</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>joint</td><td>Connector for direct mechanical and thermal coupling of multiple species</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Connector to add pressure and exchange linear momentum and entropy by diffusion</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>common</td><td>Connector for direct mechanical and thermal coupling of multiple species</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Connector to add pressure and exchange linear momentum and heat by diffusion</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=3>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristic data of the species</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=3><b>Assumptions</b></td></tr>
@@ -132,10 +132,10 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <pre>
 <font color="blue">model</font> Calibrated <font color="darkgreen">&quot;Correlations with adjustment factors&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesInertStagnant">SpeciesInertStagnant</a>(<font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_C19HF37O5S_Solid.html#FCSys.Characteristics.C19HF37O5S.Solid">FCSys.Characteristics.C19HF37O5S.Solid</a>,
-      r_th=k_r_th*<font color="red">Data.r_th</font>(T));
+      R=k_R*<font color="red">Data.R</font>(T));
 
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_r_th(<font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
-    &quot;Adjustment factor for thermal resistivity (<i>k</i><sub><i>r</i> th</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_R(<font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;Adjustment factor for thermal resistivity (<i>k</i><sub><i>R</i></sub>)&quot;</font>;
 <textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>Calibrated;
 </pre>
@@ -156,19 +156,19 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k[Axis]</td><td>{1,1,1}</td><td>Area fill factor for transport (<b>k</b>) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a></td><td>Characteristic data of the species</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>r_th</td><td>Data.r_th(T)</td><td>Thermal resistivity (<i>r</i><sub>th</sub>)</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>R</td><td>Data.R(T)</td><td>Thermal resistivity</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <tr><td>Boolean</td><td>overrideEOS</td><td>false</td><td>Override the equation of state with the value of &rho;<sub>IC</sub></td></tr>
-<tr><td>Boolean</td><td>inclVel[Axis]</td><td>{true,false,false}</td><td>true, if each component of velocity is included (<i>Do not adjust here.</i>)</td></tr>
+<tr><td>Boolean</td><td>inclLin[Axis]</td><td>{true,false,false}</td><td>true, if each component of linear momentum is included (<i>Do not adjust here.</i>)</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Prescribed states (via initialization parameters)</td></tr>
 <tr><td>Boolean</td><td>setTemp</td><td>false</td><td>Temperature</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Characteristics of the faces (click to edit)</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FaceX</a></td><td>xNegative</td><td>xNegative(final isobaric=tru...</td><td>Negative face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FaceX</a></td><td>xPositive</td><td>xPositive(final isobaric=tru...</td><td>Positive face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FaceY</a></td><td>yNegative</td><td>yNegative(final isobaric=tru...</td><td>Negative face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FaceY</a></td><td>yPositive</td><td>yPositive(final isobaric=tru...</td><td>Positive face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FaceZ</a></td><td>zNegative</td><td>zNegative(final isobaric=tru...</td><td>Negative face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FaceZ</a></td><td>zPositive</td><td>zPositive(final isobaric=tru...</td><td>Positive face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FaceX</a></td><td>xNegative</td><td>xNegative(final isochoric=tr...</td><td>Negative face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FaceX</a></td><td>xPositive</td><td>xPositive(final isochoric=tr...</td><td>Positive face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FaceY</a></td><td>yNegative</td><td>yNegative(final isochoric=tr...</td><td>Negative face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FaceY</a></td><td>yPositive</td><td>yPositive(final isochoric=tr...</td><td>Positive face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FaceZ</a></td><td>zNegative</td><td>zNegative(final isochoric=tr...</td><td>Negative face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FaceZ</a></td><td>zPositive</td><td>zPositive(final isochoric=tr...</td><td>Positive face along the z axis</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Scalar properties</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitMethScalar">InitMethScalar</a></td><td>initMethPartNum</td><td>InitMethScalar.Volume</td><td>Method of initializing the particle number</td></tr>
@@ -194,8 +194,8 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a></td><td>chemical</td><td>Connector to exchange material while advecting linear momentum and energy</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>joint</td><td>Connector for direct mechanical and thermal coupling of multiple species</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Connector to add pressure and exchange linear momentum and entropy by diffusion</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>common</td><td>Connector for direct mechanical and thermal coupling of multiple species</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Connector to add pressure and exchange linear momentum and heat by diffusion</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=3>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristic data of the species</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=3><b>Assumptions</b></td></tr>
@@ -211,7 +211,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <pre>
 <font color="blue">model</font> Correlated <font color="darkgreen">&quot;Correlated properties&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesInertStagnant">SpeciesInertStagnant</a>(<font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_C19HF37O5S_Solid.html#FCSys.Characteristics.C19HF37O5S.Solid">FCSys.Characteristics.C19HF37O5S.Solid</a>,
-      r_th=<font color="red">Data.r_th</font>(T));
+      R=<font color="red">Data.R</font>(T));
 
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>Correlated;
 </pre>
@@ -228,7 +228,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     </ol></p>
 
     <p>Notes:
-    <ul><li>The default thermal resistivity (<code>r_th=U.m*U.K/(0.16*U.W)</code>) is of dry
+    <ul><li>The default thermal resistivity (<code>R=U.m*U.K/(0.16*U.W)</code>) is of dry
   Nafion 115 [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Kandlikar2009</a>, p. 1277].</li>
   </ul>
   </p><p>For more information, see the
@@ -244,16 +244,16 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><TD colspan="2">replaceable package Data</td><td><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a></td><td>Characteristic data of the species</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <tr><td>Boolean</td><td>overrideEOS</td><td>false</td><td>Override the equation of state with the value of &rho;<sub>IC</sub></td></tr>
-<tr><td>Boolean</td><td>inclVel[Axis]</td><td>{true,false,false}</td><td>true, if each component of velocity is included (<i>Do not adjust here.</i>)</td></tr>
+<tr><td>Boolean</td><td>inclLin[Axis]</td><td>{true,false,false}</td><td>true, if each component of linear momentum is included (<i>Do not adjust here.</i>)</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Prescribed states (via initialization parameters)</td></tr>
 <tr><td>Boolean</td><td>setTemp</td><td>false</td><td>Temperature</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Characteristics of the faces (click to edit)</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FaceX</a></td><td>xNegative</td><td>xNegative(final isobaric=tru...</td><td>Negative face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FaceX</a></td><td>xPositive</td><td>xPositive(final isobaric=tru...</td><td>Positive face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FaceY</a></td><td>yNegative</td><td>yNegative(final isobaric=tru...</td><td>Negative face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FaceY</a></td><td>yPositive</td><td>yPositive(final isobaric=tru...</td><td>Positive face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FaceZ</a></td><td>zNegative</td><td>zNegative(final isobaric=tru...</td><td>Negative face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FaceZ</a></td><td>zPositive</td><td>zPositive(final isobaric=tru...</td><td>Positive face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FaceX</a></td><td>xNegative</td><td>xNegative(final isochoric=tr...</td><td>Negative face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FaceX</a></td><td>xPositive</td><td>xPositive(final isochoric=tr...</td><td>Positive face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FaceY</a></td><td>yNegative</td><td>yNegative(final isochoric=tr...</td><td>Negative face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FaceY</a></td><td>yPositive</td><td>yPositive(final isochoric=tr...</td><td>Positive face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FaceZ</a></td><td>zNegative</td><td>zNegative(final isochoric=tr...</td><td>Negative face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FaceZ</a></td><td>zPositive</td><td>zPositive(final isochoric=tr...</td><td>Positive face along the z axis</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Scalar properties</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitMethScalar">InitMethScalar</a></td><td>initMethPartNum</td><td>InitMethScalar.Volume</td><td>Method of initializing the particle number</td></tr>
@@ -279,8 +279,8 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a></td><td>chemical</td><td>Connector to exchange material while advecting linear momentum and energy</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>joint</td><td>Connector for direct mechanical and thermal coupling of multiple species</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Connector to add pressure and exchange linear momentum and entropy by diffusion</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>common</td><td>Connector for direct mechanical and thermal coupling of multiple species</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Connector to add pressure and exchange linear momentum and heat by diffusion</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=3>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package Data</td><td>Characteristic data of the species</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=3><b>Assumptions</b></td></tr>
@@ -296,7 +296,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <pre>
 <font color="blue">model</font> Fixed <font color="darkgreen">&quot;Fixed properties&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesInertStagnant">SpeciesInertStagnant</a>(<font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_C19HF37O5S_Solid.html#FCSys.Characteristics.C19HF37O5S.Solid">FCSys.Characteristics.C19HF37O5S.Solid</a>,
-      <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> r_th=<font color="red">Data.r_th</font>());
+      <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> R=<font color="red">Data.R</font>());
 
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>Fixed;
 </pre>
@@ -305,7 +305,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  2 21:14:29 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  9 08:04:19 2013.
 </div>
 </body>
 </html>

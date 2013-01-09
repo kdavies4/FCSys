@@ -48,7 +48,7 @@
 <b>Examples and tests</b>
 <p>
 <p><h3>Information</h3></p>
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.ExamplesPackage.html#Modelica.Icons.ExamplesPackage">Modelica.Icons.ExamplesPackage</a> (Icon for packages containing runnable examples).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.ExamplesPackage.html#Modelica.Icons.ExamplesPackage">Modelica.Icons.ExamplesPackage</a> (Icon for packages containing runnable examples), <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.PackageUnderConstruction">FCSys.BaseClasses.Icons.PackageUnderConstruction</a> (Overlay that indicates a package is under construction).
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
@@ -100,8 +100,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.SubregionFlow">SubregionFlow</a></td><td>bC1</td><td>redeclare FCSys.BCs.Face.Sub...</td><td>&nbsp;</td></tr>
-<tr><td><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.SubregionFlow">SubregionFlow</a></td><td>bC2</td><td>redeclare FCSys.BCs.Face.Sub...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">SubregionClosed</a></td><td>bC1</td><td>redeclare FCSys.BCs.FaceBus....</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">SubregionClosed</a></td><td>bC2</td><td>redeclare FCSys.BCs.FaceBus....</td><td>&nbsp;</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>inclC</td><td>false</td><td>Carbon (C)</td></tr>
 <tr><td>Boolean</td><td>inclC19HF37O5S</td><td>false</td><td>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</td></tr>
@@ -136,8 +136,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
       <font color="blue">final </font>inclC19HF37O5S=inclC19HF37O5S,
       <font color="blue">final </font>&#39;inclH+&#39;='inclH+',
       C19HF37O5S(V_IC=subregion.V/4)),
-    inclVelY=false,
-    inclVelZ=false,
+    inclLinY=false,
+    inclLinZ=false,
     inclYFaces=false,
     inclZFaces=false,
     gas(
@@ -146,7 +146,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
       <font color="blue">final </font>inclN2=inclN2,
       <font color="blue">final </font>inclO2=inclO2));
   <font color="blue">inner </font><a href="FCSys_BCs.html#FCSys.BCs.Defaults">FCSys.BCs.Defaults</a> defaults(analysis=true);
-  <font color="blue">replaceable </font><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.SubregionFlow">FCSys.BCs.Face.SubregionFlow</a> bC1(
+  <font color="blue">replaceable </font><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC1(
     gas(
       <font color="blue">final </font>inclH2=inclH2,
       <font color="blue">final </font>inclH2O=inclH2O,
@@ -154,23 +154,17 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
       <font color="blue">final </font>inclO2=inclO2),
     graphite(<font color="blue">final </font>inclC=inclC, <font color="blue">final </font>&#39;incle-&#39;='incle-'),
     ionomer(<font color="blue">final </font>inclC19HF37O5S=inclC19HF37O5S, <font color="blue">final </font>&#39;inclH+&#39;='inclH+')) <font color="blue">
-    constrainedby </font>FCSys.BCs.Face.Subregion;</textblock>
+    constrainedby </font>FCSys.BCs.FaceBus.Subregion;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.SubregionFlow">FCSys.BCs.Face.SubregionFlow</a> bC2(
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC2(
     gas(
       <font color="blue">final </font>inclH2=inclH2,
       <font color="blue">final </font>inclH2O=inclH2O,
       <font color="blue">final </font>inclN2=inclN2,
       <font color="blue">final </font>inclO2=inclO2),
-    graphite(
-      <font color="blue">final </font>inclC=inclC,
-      <font color="blue">final </font>&#39;incle-&#39;='incle-',
-      &#39;e-&#39;(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Species_Material.html#FCSys.BCs.Face.Species.Material.Pressure">FCSys.BCs.Face.Species.Material.Pressure</a> materialBC)),
-    ionomer(
-      <font color="blue">final </font>inclC19HF37O5S=inclC19HF37O5S,
-      <font color="blue">final </font>&#39;inclH+&#39;='inclH+',
-      &#39;H+&#39;(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Species_Material.html#FCSys.BCs.Face.Species.Material.Pressure">FCSys.BCs.Face.Species.Material.Pressure</a> materialBC))) <font color="blue">
-    constrainedby </font>FCSys.BCs.Face.Subregion;</textblock>
+    graphite(<font color="blue">final </font>inclC=inclC, <font color="blue">final </font>&#39;incle-&#39;='incle-'),
+    ionomer(<font color="blue">final </font>inclC19HF37O5S=inclC19HF37O5S, <font color="blue">final </font>&#39;inclH+&#39;='inclH+')) <font color="blue">
+    constrainedby </font>FCSys.BCs.FaceBus.Subregion;</textblock>
 
 <font color="blue">equation </font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(bC2.face, subregion.xPositive);</textblock>
@@ -190,7 +184,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.SubregionFlow">SubregionFlow</a></td><td>bC1</td><td>redeclare FCSys.BCs.Face.Sub...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">SubregionClosed</a></td><td>bC1</td><td>redeclare FCSys.BCs.FaceBus....</td><td>&nbsp;</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>inclC</td><td>true</td><td>Carbon (C)</td></tr>
 <tr><td>Boolean</td><td>inclC19HF37O5S</td><td>true</td><td>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</td></tr>
@@ -213,14 +207,14 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
     inclH2=true,
     &#39;inclH+&#39;=true,
     bC2(
-      gas(H2(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Species_Material.html#FCSys.BCs.Face.Species.Material.Pressure">FCSys.BCs.Face.Species.Material.Pressure</a> materialBC,
+      gas(H2(<font color="blue">redeclare </font>FCSys.BCs.Face.Material.Pressure materialBC,
             materialSpec(k=1*U.atm))),
-      graphite(C(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Species_Entropy.html#FCSys.BCs.Face.Species.Entropy.Temperature">FCSys.BCs.Face.Species.Entropy.Temperature</a> entropyBC,
-            entropySpec(k=defaults.T)), &#39;e-&#39;(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Species_Material.html#FCSys.BCs.Face.Species.Material.Current">FCSys.BCs.Face.Species.Material.Current</a>
+      graphite(C(<font color="blue">redeclare </font>FCSys.BCs.Face.Entropy.Temperature entropyBC,
+            entropySpec(k=defaults.T)), &#39;e-&#39;(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Current">FCSys.BCs.Face.Material.Current</a>
             materialBC, <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a> materialSpec(
               duration=1000, height=2*U.A))),
-      ionomer(&#39;H+&#39;(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Species_Material.html#FCSys.BCs.Face.Species.Material.Pressure">FCSys.BCs.Face.Species.Material.Pressure</a>
-            materialBC, materialSpec(k(start=1*U.atm))))));
+      ionomer(&#39;H+&#39;(<font color="blue">redeclare </font>FCSys.BCs.Face.Material.Pressure materialBC,
+            materialSpec(k(start=1*U.atm))))));
 
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>SubregionHOR;
 </pre>
@@ -235,7 +229,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.SubregionFlow">SubregionFlow</a></td><td>bC1</td><td>redeclare FCSys.BCs.Face.Sub...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">SubregionClosed</a></td><td>bC1</td><td>redeclare FCSys.BCs.FaceBus....</td><td>&nbsp;</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>inclC</td><td>true</td><td>Carbon (C)</td></tr>
 <tr><td>Boolean</td><td>inclC19HF37O5S</td><td>true</td><td>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</td></tr>
@@ -259,15 +253,15 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
     &#39;inclH+&#39;=true,
     inclO2=true,
     bC2(
-      gas(H2O(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Species_Material.html#FCSys.BCs.Face.Species.Material.Pressure">FCSys.BCs.Face.Species.Material.Pressure</a> materialBC,
-            materialSpec(k=1*U.atm)), O2(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Species_Material.html#FCSys.BCs.Face.Species.Material.Pressure">FCSys.BCs.Face.Species.Material.Pressure</a>
+      gas(H2O(<font color="blue">redeclare </font>FCSys.BCs.Face.Material.Pressure materialBC,
+            materialSpec(k=1*U.atm)), O2(<font color="blue">redeclare </font>FCSys.BCs.Face.Material.Pressure
             materialBC, materialSpec(k=1*U.atm))),
-      graphite(C(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Species_Entropy.html#FCSys.BCs.Face.Species.Entropy.Temperature">FCSys.BCs.Face.Species.Entropy.Temperature</a> entropyBC,
-            entropySpec(k=defaults.T)), &#39;e-&#39;(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Species_Material.html#FCSys.BCs.Face.Species.Material.Current">FCSys.BCs.Face.Species.Material.Current</a>
+      graphite(C(<font color="blue">redeclare </font>FCSys.BCs.Face.Entropy.Temperature entropyBC,
+            entropySpec(k=defaults.T)), &#39;e-&#39;(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Current">FCSys.BCs.Face.Material.Current</a>
             materialBC, <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a> materialSpec(
               duration=1000, height=-2*U.A))),
-      ionomer(&#39;H+&#39;(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Species_Material.html#FCSys.BCs.Face.Species.Material.Pressure">FCSys.BCs.Face.Species.Material.Pressure</a>
-            materialBC, materialSpec(k(start=1*U.atm))))),
+      ionomer(&#39;H+&#39;(<font color="blue">redeclare </font>FCSys.BCs.Face.Material.Pressure materialBC,
+            materialSpec(k(start=1*U.atm))))),
     defaults(analysis=false));
 
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>SubregionORR;
@@ -286,8 +280,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_x</td><td>0</td><td>Number of discrete subregions along the x axis, besides the 2 side subregions</td></tr>
-<tr><td><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.Subregion0Current">Subregion0Current</a></td><td>bC1</td><td>redeclare FCSys.BCs.Face.Sub...</td><td>&nbsp;</td></tr>
-<tr><td><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.Subregion0Current">Subregion0Current</a></td><td>bC2</td><td>redeclare FCSys.BCs.Face.Sub...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">SubregionClosed</a></td><td>bC1</td><td>redeclare FCSys.BCs.FaceBus....</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">SubregionClosed</a></td><td>bC2</td><td>redeclare FCSys.BCs.FaceBus....</td><td>&nbsp;</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>inclC</td><td>false</td><td>Carbon (C)</td></tr>
 <tr><td>Boolean</td><td>inclC19HF37O5S</td><td>false</td><td>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</td></tr>
@@ -323,49 +317,49 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
       <font color="blue">final </font>inclN2=inclN2,
       <font color="blue">final </font>inclO2=inclO2,
       H2O(
-        p_IC=1.1*defaults.p,
-        yNegative(slipZ=false, slipX=false),
-        yPositive(slipZ=false, slipX=false),
-        zNegative(slipX=false, slipY=false),
-        zPositive(slipX=false, slipY=false)),
+        p_IC=defaults.p + 1*U.kPa,
+        yNegative(inviscidZ=true, inviscidX=true),
+        yPositive(inviscidZ=true, inviscidX=true),
+        zNegative(inviscidX=true, inviscidY=true),
+        zPositive(inviscidX=true, inviscidY=true)),
       N2(
-        p_IC=1.1*defaults.p,
-        yNegative(slipZ=false, slipX=false),
-        yPositive(slipZ=false, slipX=false),
-        zNegative(slipX=false, slipY=false),
-        zPositive(slipX=false, slipY=false)),
+        p_IC=defaults.p + 1*U.kPa,
+        yNegative(inviscidZ=true, inviscidX=true),
+        yPositive(inviscidZ=true, inviscidX=true),
+        zNegative(inviscidX=true, inviscidY=true),
+        zPositive(inviscidX=true, inviscidY=true)),
       O2(
-        p_IC=1.1*defaults.p,
-        yNegative(slipZ=false, slipX=false),
-        yPositive(slipZ=false, slipX=false),
-        zNegative(slipX=false, slipY=false),
-        zPositive(slipX=false, slipY=false)),
+        p_IC=defaults.p + 1*U.kPa,
+        yNegative(inviscidZ=true, inviscidX=true),
+        yPositive(inviscidZ=true, inviscidX=true),
+        zNegative(inviscidX=true, inviscidY=true),
+        zPositive(inviscidX=true, inviscidY=true)),
       H2(
-        p_IC=1.1*defaults.p,
-        yNegative(slipZ=false, slipX=false),
-        yPositive(slipZ=false, slipX=false),
-        zNegative(slipX=false, slipY=false),
-        zPositive(slipX=false, slipY=false))),
+        p_IC=defaults.p + 1*U.kPa,
+        yNegative(inviscidZ=true, inviscidX=true),
+        yPositive(inviscidZ=true, inviscidX=true),
+        zNegative(inviscidX=true, inviscidY=true),
+        zPositive(inviscidX=true, inviscidY=true))),
     graphite(
       <font color="blue">final </font>inclC=inclC,
       <font color="blue">final </font>&#39;incle-&#39;='incle-',
       C(V_IC=subregion1.V/4),
       &#39;e-&#39;(
-        yNegative(slipZ=false, slipX=false),
-        yPositive(slipZ=false, slipX=false),
-        zNegative(slipX=false, slipY=false),
-        zPositive(slipX=false, slipY=false))),
+        yNegative(inviscidZ=true, inviscidX=true),
+        yPositive(inviscidZ=true, inviscidX=true),
+        zNegative(inviscidX=true, inviscidY=true),
+        zPositive(inviscidX=true, inviscidY=true))),
     ionomer(
       <font color="blue">final </font>inclC19HF37O5S=inclC19HF37O5S,
       <font color="blue">final </font>&#39;inclH+&#39;='inclH+',
       C19HF37O5S(V_IC=subregion1.V/4),
       &#39;H+&#39;(
-        yNegative(slipZ=false, slipX=false),
-        yPositive(slipZ=false, slipX=false),
-        zNegative(slipX=false, slipY=false),
-        zPositive(slipX=false, slipY=false))),
-    inclVelY=false,
-    inclVelZ=false,
+        yNegative(inviscidZ=true, inviscidX=true),
+        yPositive(inviscidZ=true, inviscidX=true),
+        zNegative(inviscidX=true, inviscidY=true),
+        zPositive(inviscidX=true, inviscidY=true))),
+    inclLinY=false,
+    inclLinZ=false,
     inclYFaces=false,
     inclZFaces=false);</textblock>
 
@@ -378,52 +372,51 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
       <font color="blue">each </font><font color="blue">final </font>inclO2=inclO2,
       H2(
         <font color="blue">each </font>p_IC=defaults.p,
-        <font color="blue">each </font>yNegative(slipZ=false,slipX=false),
-        <font color="blue">each </font>yPositive(slipZ=false,slipX=false),
-        <font color="blue">each </font>zNegative(slipX=false,slipY=false),
-        <font color="blue">each </font>zPositive(slipX=false,slipY=false)),
+        <font color="blue">each </font>yNegative(inviscidZ=true,inviscidX=true),
+        <font color="blue">each </font>yPositive(inviscidZ=true,inviscidX=true),
+        <font color="blue">each </font>zNegative(inviscidX=true,inviscidY=true),
+        <font color="blue">each </font>zPositive(inviscidX=true,inviscidY=true)),
       H2O(
         <font color="blue">each </font>p_IC=defaults.p,
-        <font color="blue">each </font>yNegative(slipZ=false,slipX=false),
-        <font color="blue">each </font>yPositive(slipZ=false,slipX=false),
-        <font color="blue">each </font>zNegative(slipX=false,slipY=false),
-        <font color="blue">each </font>zPositive(slipX=false,slipY=false)),
+        <font color="blue">each </font>yNegative(inviscidZ=true,inviscidX=true),
+        <font color="blue">each </font>yPositive(inviscidZ=true,inviscidX=true),
+        <font color="blue">each </font>zNegative(inviscidX=true,inviscidY=true),
+        <font color="blue">each </font>zPositive(inviscidX=true,inviscidY=true)),
       N2(
         <font color="blue">each </font>p_IC=defaults.p,
-        <font color="blue">each </font>yNegative(slipZ=false, slipX=false),
-        <font color="blue">each </font>yPositive(slipZ=false,slipX=false),
-        <font color="blue">each </font>zNegative(slipX=false,slipY=false),
-        <font color="blue">each </font>zPositive(slipX=false,slipY=false)),
+        <font color="blue">each </font>yNegative(inviscidZ=true, inviscidX=true),
+        <font color="blue">each </font>yPositive(inviscidZ=true,inviscidX=true),
+        <font color="blue">each </font>zNegative(inviscidX=true,inviscidY=true),
+        <font color="blue">each </font>zPositive(inviscidX=true,inviscidY=true)),
       O2(
         <font color="blue">each </font>p_IC=defaults.p,
-        <font color="blue">each </font>yNegative(slipZ=false,slipX=false),
-        <font color="blue">each </font>yPositive(slipZ=false,slipX=false),
-        <font color="blue">each </font>zNegative(slipX=false,slipY=false),
-        <font color="blue">each </font>zPositive(slipX=false,slipY=false))),
+        <font color="blue">each </font>yNegative(inviscidZ=true,inviscidX=true),
+        <font color="blue">each </font>yPositive(inviscidZ=true,inviscidX=true),
+        <font color="blue">each </font>zNegative(inviscidX=true,inviscidY=true),
+        <font color="blue">each </font>zPositive(inviscidX=true,inviscidY=true))),
     graphite(
       <font color="blue">each </font><font color="blue">final </font>inclC=inclC,
       <font color="blue">each </font><font color="blue">final </font>&#39;incle-&#39;='incle-',
       C(<font color="blue">each </font>V_IC=subregions[1].V/4),
       &#39;e-&#39;(
-        <font color="blue">each </font>yNegative(slipZ=false,slipX=false),
-        <font color="blue">each </font>yPositive(slipZ=false,slipX=false),
-        <font color="blue">each </font>zNegative(slipX=false,slipY=false),
-        <font color="blue">each </font>zPositive(slipX=false,slipY=false))),
+        <font color="blue">each </font>yNegative(inviscidZ=true,inviscidX=true),
+        <font color="blue">each </font>yPositive(inviscidZ=true,inviscidX=true),
+        <font color="blue">each </font>zNegative(inviscidX=true,inviscidY=true),
+        <font color="blue">each </font>zPositive(inviscidX=true,inviscidY=true))),
     ionomer(
       <font color="blue">each </font><font color="blue">final </font>inclC19HF37O5S=inclC19HF37O5S,
       <font color="blue">each </font><font color="blue">final </font>&#39;inclH+&#39;='inclH+',
       C19HF37O5S(<font color="blue">each </font>V_IC=subregions[1].V/4),
       &#39;H+&#39;(
-        <font color="blue">each </font>yNegative(slipZ=false,slipX=false),
-        <font color="blue">each </font>yPositive(slipZ=false,slipX=false),
-        <font color="blue">each </font>zNegative(slipX=false,slipY=false),
-        <font color="blue">each </font>zPositive(slipX=false,slipY=false))),
-    <font color="blue">each </font>inclVelY=false,
-    <font color="blue">each </font>inclVelZ=false,
+        <font color="blue">each </font>yNegative(inviscidZ=true,inviscidX=true),
+        <font color="blue">each </font>yPositive(inviscidZ=true,inviscidX=true),
+        <font color="blue">each </font>zNegative(inviscidX=true,inviscidY=true),
+        <font color="blue">each </font>zPositive(inviscidX=true,inviscidY=true))),
+    <font color="blue">each </font>inclLinY=false,
+    <font color="blue">each </font>inclLinZ=false,
     <font color="blue">each </font>inclYFaces=false,
-    <font color="blue">each </font>inclZFaces=false) <font color="blue">if </font>n_x &gt; 0;</textblock>
-
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">FCSys.Subregions.Subregion</a> subregion2(
+    <font color="blue">each </font>inclZFaces=false) <font color="blue">if </font>n_x &gt; 0;
+  <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">FCSys.Subregions.Subregion</a> subregion2(
     L={1,1,1}*U.cm,
     gas(
       <font color="blue">final </font>inclH2=inclH2,
@@ -431,64 +424,55 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
       <font color="blue">final </font>inclN2=inclN2,
       <font color="blue">final </font>inclO2=inclO2,
       H2(
-        p_IC=0.9*defaults.p,
-        yNegative(slipZ=false, slipX=false),
-        yPositive(slipZ=false, slipX=false),
-        zNegative(slipX=false, slipY=false),
-        zPositive(slipX=false, slipY=false)),
+        p_IC=defaults.p - 1*U.kPa,
+        yNegative(inviscidZ=true, inviscidX=true),
+        yPositive(inviscidZ=true, inviscidX=true),
+        zNegative(inviscidX=true, inviscidY=true),
+        zPositive(inviscidX=true, inviscidY=true)),
       H2O(
-        p_IC=0.9*defaults.p,
-        yNegative(slipZ=false, slipX=false),
-        yPositive(slipZ=false, slipX=false),
-        zNegative(slipX=false, slipY=false),
-        zPositive(slipX=false, slipY=false)),
+        p_IC=defaults.p - 1*U.kPa,
+        yNegative(inviscidZ=true, inviscidX=true),
+        yPositive(inviscidZ=true, inviscidX=true),
+        zNegative(inviscidX=true, inviscidY=true),
+        zPositive(inviscidX=true, inviscidY=true)),
       N2(
-        p_IC=0.9*defaults.p,
-        yNegative(slipZ=false, slipX=false),
-        yPositive(slipZ=false, slipX=false),
-        zNegative(slipX=false, slipY=false),
-        zPositive(slipX=false, slipY=false)),
+        p_IC=defaults.p - 1*U.kPa,
+        yNegative(inviscidZ=true, inviscidX=true),
+        yPositive(inviscidZ=true, inviscidX=true),
+        zNegative(inviscidX=true, inviscidY=true),
+        zPositive(inviscidX=true, inviscidY=true)),
       O2(
-        p_IC=0.9*defaults.p,
-        yNegative(slipZ=false, slipX=false),
-        yPositive(slipZ=false, slipX=false),
-        zNegative(slipX=false, slipY=false),
-        zPositive(slipX=false, slipY=false))),
+        p_IC=defaults.p - 1*U.kPa,
+        yNegative(inviscidZ=true, inviscidX=true),
+        yPositive(inviscidZ=true, inviscidX=true),
+        zNegative(inviscidX=true, inviscidY=true),
+        zPositive(inviscidX=true, inviscidY=true))),
     graphite(
       <font color="blue">final </font>inclC=inclC,
       <font color="blue">final </font>&#39;incle-&#39;='incle-',
       C(V_IC=subregion2.V/4),
       &#39;e-&#39;(
-        yNegative(slipZ=false, slipX=false),
-        yPositive(slipZ=false, slipX=false),
-        zNegative(slipX=false, slipY=false),
-        zPositive(slipX=false, slipY=false))),
+        yNegative(inviscidZ=true, inviscidX=true),
+        yPositive(inviscidZ=true, inviscidX=true),
+        zNegative(inviscidX=true, inviscidY=true),
+        zPositive(inviscidX=true, inviscidY=true))),
     ionomer(
       <font color="blue">final </font>inclC19HF37O5S=inclC19HF37O5S,
       <font color="blue">final </font>&#39;inclH+&#39;='inclH+',
       C19HF37O5S(V_IC=subregion2.V/4),
       &#39;H+&#39;(
-        yNegative(slipZ=false, slipX=false),
-        yPositive(slipZ=false, slipX=false),
-        zNegative(slipX=false, slipY=false),
-        zPositive(slipX=false, slipY=false))),
-    inclVelY=false,
-    inclVelZ=false,
+        yNegative(inviscidZ=true, inviscidX=true),
+        yPositive(inviscidZ=true, inviscidX=true),
+        zNegative(inviscidX=true, inviscidY=true),
+        zPositive(inviscidX=true, inviscidY=true))),
+    inclLinY=false,
+    inclLinZ=false,
     inclYFaces=false,
     inclZFaces=false);</textblock>
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_BCs.html#FCSys.BCs.Defaults">FCSys.BCs.Defaults</a> defaults;
-  <font color="blue">replaceable </font><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.Subregion0Current">FCSys.BCs.Face.Subregion0Current</a> bC1 <font color="blue">constrainedby </font>
-    FCSys.BCs.Face.Subregion(
-    gas(
-      <font color="blue">final </font>inclH2=inclH2,
-      <font color="blue">final </font>inclH2O=inclH2O,
-      <font color="blue">final </font>inclN2=inclN2,
-      <font color="blue">final </font>inclO2=inclO2),
-    graphite(<font color="blue">final </font>inclC=inclC, <font color="blue">final </font>&#39;incle-&#39;='incle-'),
-    ionomer(<font color="blue">final </font>inclC19HF37O5S=inclC19HF37O5S, <font color="blue">final </font>&#39;inclH+&#39;='inclH+'));
-  <font color="blue">replaceable </font><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.Subregion0Current">FCSys.BCs.Face.Subregion0Current</a> bC2 <font color="blue">constrainedby </font>
-    FCSys.BCs.Face.Subregion(
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_BCs.html#FCSys.BCs.Defaults">FCSys.BCs.Defaults</a> defaults(analysis=true);
+  <font color="blue">replaceable </font><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC1 <font color="blue">constrainedby </font>
+    FCSys.BCs.FaceBus.Subregion(
     gas(
       <font color="blue">final </font>inclH2=inclH2,
       <font color="blue">final </font>inclH2O=inclH2O,
@@ -497,11 +481,26 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     graphite(
       <font color="blue">final </font>inclC=inclC,
       <font color="blue">final </font>&#39;incle-&#39;='incle-',
-      &#39;e-&#39;(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Species_Material.html#FCSys.BCs.Face.Species.Material.Pressure">FCSys.BCs.Face.Species.Material.Pressure</a> materialBC)),
+      C(isochoric=true)),
     ionomer(
       <font color="blue">final </font>inclC19HF37O5S=inclC19HF37O5S,
       <font color="blue">final </font>&#39;inclH+&#39;='inclH+',
-      &#39;H+&#39;(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Species_Material.html#FCSys.BCs.Face.Species.Material.Pressure">FCSys.BCs.Face.Species.Material.Pressure</a> materialBC)));</textblock>
+      C19HF37O5S(isochoric=true)));
+  <font color="blue">replaceable </font><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC2 <font color="blue">constrainedby </font>
+    FCSys.BCs.FaceBus.Subregion(
+    gas(
+      <font color="blue">final </font>inclH2=inclH2,
+      <font color="blue">final </font>inclH2O=inclH2O,
+      <font color="blue">final </font>inclN2=inclN2,
+      <font color="blue">final </font>inclO2=inclO2),
+    graphite(
+      <font color="blue">final </font>inclC=inclC,
+      <font color="blue">final </font>&#39;incle-&#39;='incle-',
+      C(isochoric=true)),
+    ionomer(
+      <font color="blue">final </font>inclC19HF37O5S=inclC19HF37O5S,
+      <font color="blue">final </font>&#39;inclH+&#39;='inclH+',
+      C19HF37O5S(isochoric=true)));</textblock>
 
 <font color="blue">equation </font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(bC1.face, subregion1.xNegative);
@@ -534,8 +533,8 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_x</td><td>0</td><td>Number of discrete subregions along the x axis, besides the 2 side subregions</td></tr>
-<tr><td><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.Subregion0Current">Subregion0Current</a></td><td>bC1</td><td>redeclare FCSys.BCs.Face.Sub...</td><td>&nbsp;</td></tr>
-<tr><td><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.Subregion0Current">Subregion0Current</a></td><td>bC2</td><td>redeclare FCSys.BCs.Face.Sub...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">SubregionClosed</a></td><td>bC1</td><td>redeclare FCSys.BCs.FaceBus....</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">SubregionClosed</a></td><td>bC2</td><td>redeclare FCSys.BCs.FaceBus....</td><td>&nbsp;</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>inclC</td><td>true</td><td>Carbon (C)</td></tr>
 <tr><td>Boolean</td><td>inclC19HF37O5S</td><td>false</td><td>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</td></tr>
@@ -550,7 +549,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 <pre>
 <font color="blue">model</font> SubregionsCAndH2 <font color="darkgreen">
   &quot;Test a one-dimensional array of subregions with C and H<sub>2</sub>&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.SubregionsH2">SubregionsH2</a>(inclC=true);
+  <font color="blue">extends </font><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.SubregionsH2">SubregionsH2</a>(inclC=true, defaults(analysis=true));
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>SubregionsCAndH2;
 </pre>
 <hr>
@@ -567,8 +566,8 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_x</td><td>0</td><td>Number of discrete subregions along the x axis, besides the 2 side subregions</td></tr>
-<tr><td><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.Subregion0Current">Subregion0Current</a></td><td>bC1</td><td>redeclare FCSys.BCs.Face.Sub...</td><td>&nbsp;</td></tr>
-<tr><td><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.Subregion0Current">Subregion0Current</a></td><td>bC2</td><td>redeclare FCSys.BCs.Face.Sub...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">SubregionClosed</a></td><td>bC1</td><td>redeclare FCSys.BCs.FaceBus....</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">SubregionClosed</a></td><td>bC2</td><td>redeclare FCSys.BCs.FaceBus....</td><td>&nbsp;</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>inclC</td><td>true</td><td>Carbon (C)</td></tr>
 <tr><td>Boolean</td><td>inclC19HF37O5S</td><td>false</td><td>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</td></tr>
@@ -604,8 +603,8 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_x</td><td>0</td><td>Number of discrete subregions along the x axis, besides the 2 side subregions</td></tr>
-<tr><td><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.Subregion0Current">Subregion0Current</a></td><td>bC1</td><td>redeclare FCSys.BCs.Face.Sub...</td><td>&nbsp;</td></tr>
-<tr><td><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.Subregion0Current">Subregion0Current</a></td><td>bC2</td><td>redeclare FCSys.BCs.Face.Sub...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">SubregionClosed</a></td><td>bC1</td><td>redeclare FCSys.BCs.FaceBus....</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">SubregionClosed</a></td><td>bC2</td><td>redeclare FCSys.BCs.FaceBus....</td><td>&nbsp;</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>inclC</td><td>true</td><td>Carbon (C)</td></tr>
 <tr><td>Boolean</td><td>inclC19HF37O5S</td><td>false</td><td>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</td></tr>
@@ -641,8 +640,8 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_x</td><td>0</td><td>Number of discrete subregions along the x axis, besides the 2 side subregions</td></tr>
-<tr><td><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.Subregion0Current">Subregion0Current</a></td><td>bC1</td><td>redeclare FCSys.BCs.Face.Sub...</td><td>&nbsp;</td></tr>
-<tr><td><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.Subregion0Current">Subregion0Current</a></td><td>bC2</td><td>redeclare FCSys.BCs.Face.Sub...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">SubregionClosed</a></td><td>bC1</td><td>redeclare FCSys.BCs.FaceBus....</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">SubregionClosed</a></td><td>bC2</td><td>redeclare FCSys.BCs.FaceBus....</td><td>&nbsp;</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>inclC</td><td>true</td><td>Carbon (C)</td></tr>
 <tr><td>Boolean</td><td>inclC19HF37O5S</td><td>false</td><td>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</td></tr>
@@ -678,8 +677,8 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_x</td><td>0</td><td>Number of discrete subregions along the x axis, besides the 2 side subregions</td></tr>
-<tr><td><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.Subregion0Current">Subregion0Current</a></td><td>bC1</td><td>redeclare FCSys.BCs.Face.Sub...</td><td>&nbsp;</td></tr>
-<tr><td><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.Subregion0Current">Subregion0Current</a></td><td>bC2</td><td>redeclare FCSys.BCs.Face.Sub...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">SubregionClosed</a></td><td>bC1</td><td>redeclare FCSys.BCs.FaceBus....</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">SubregionClosed</a></td><td>bC2</td><td>redeclare FCSys.BCs.FaceBus....</td><td>&nbsp;</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>inclC</td><td>false</td><td>Carbon (C)</td></tr>
 <tr><td>Boolean</td><td>inclC19HF37O5S</td><td>true</td><td>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</td></tr>
@@ -713,8 +712,8 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_x</td><td>0</td><td>Number of discrete subregions along the x axis, besides the 2 side subregions</td></tr>
-<tr><td><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.Subregion0Current">Subregion0Current</a></td><td>bC1</td><td>redeclare FCSys.BCs.Face.Sub...</td><td>&nbsp;</td></tr>
-<tr><td><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.Subregion0Current">Subregion0Current</a></td><td>bC2</td><td>redeclare FCSys.BCs.Face.Sub...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">SubregionClosed</a></td><td>bC1</td><td>redeclare FCSys.BCs.FaceBus....</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">SubregionClosed</a></td><td>bC2</td><td>redeclare FCSys.BCs.FaceBus....</td><td>&nbsp;</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>inclC</td><td>true</td><td>Carbon (C)</td></tr>
 <tr><td>Boolean</td><td>inclC19HF37O5S</td><td>false</td><td>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</td></tr>
@@ -780,8 +779,8 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
           initMethPartNum=InitMethScalar.Pressure,
           V_IC=0.99*subregion2.V,
           T(displayUnit=&quot;degC&quot;)))),
-    <font color="blue">redeclare </font><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.Subregion0Current0Power">FCSys.BCs.Face.Subregion0Current0Power</a> bC1,
-    <font color="blue">redeclare </font><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.Subregion0Current0Power">FCSys.BCs.Face.Subregion0Current0Power</a> bC2);
+    <font color="blue">redeclare </font><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosedAdiabatic">FCSys.BCs.FaceBus.SubregionClosedAdiabatic</a> bC1,
+    <font color="blue">redeclare </font><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosedAdiabatic">FCSys.BCs.FaceBus.SubregionClosedAdiabatic</a> bC2);
 
 <textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>ThermalConduction;
@@ -830,8 +829,8 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 
     subregion2(gas(N2(p_IC=defaults.p, phi(displayUnit=&quot;mm/s&quot;))), graphite(C(
             V_IC=0.5*subregion2.V, T(displayUnit=&quot;degC&quot;)))),
-    <font color="blue">redeclare </font><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.Subregion0Current0Power">FCSys.BCs.Face.Subregion0Current0Power</a> bC1,
-    <font color="blue">redeclare </font><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.Subregion0Current0Power">FCSys.BCs.Face.Subregion0Current0Power</a> bC2);
+    <font color="blue">redeclare </font><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosedAdiabatic">FCSys.BCs.FaceBus.SubregionClosedAdiabatic</a> bC1,
+    <font color="blue">redeclare </font><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosedAdiabatic">FCSys.BCs.FaceBus.SubregionClosedAdiabatic</a> bC2);
 
 <textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>ThermalConductionConvection;
@@ -852,17 +851,17 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">FCSys.Subregions.Reaction</a> reaction(n_spec=3);
-  <a href="FCSys_BCs_Chemical_Species.html#FCSys.BCs.Chemical.Species.Species">FCSys.BCs.Chemical.Species.Species</a> species1(<font color="blue">redeclare </font><a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>
-      Data, materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature);
+  <a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical.Species">FCSys.BCs.Chemical.Species</a> species1(<font color="blue">redeclare </font><a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>
+      Data, materialBC=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature);
     </textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_Chemical_Species.html#FCSys.BCs.Chemical.Species.Species">FCSys.BCs.Chemical.Species.Species</a> species2(<font color="blue">redeclare </font><a href="FCSys_Characteristics_'H+'_Gas.html#FCSys.Characteristics.'H+'.Gas">FCSys.Characteristics.'H+'.Gas</a>
-      Data, materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature);
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical.Species">FCSys.BCs.Chemical.Species</a> species2(<font color="blue">redeclare </font><a href="FCSys_Characteristics_'H+'_Gas.html#FCSys.Characteristics.'H+'.Gas">FCSys.Characteristics.'H+'.Gas</a>
+      Data, materialBC=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature);
     </textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_Chemical_Species.html#FCSys.BCs.Chemical.Species.Species">FCSys.BCs.Chemical.Species.Species</a> species3(
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical.Species">FCSys.BCs.Chemical.Species</a> species3(
     <font color="blue">redeclare </font><a href="FCSys_Characteristics_H2_Gas.html#FCSys.Characteristics.H2.Gas">FCSys.Characteristics.H2.Gas</a> Data,
-    materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.Current,
+    materialBC=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.Current,
     <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a> materialSpec(height=100*U.A,
         duration=3600e2));</textblock>
 
@@ -887,7 +886,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>Integer</td><td>n_vel</td><td>1</td><td>Number of components of velocity (<i>n</i><sub>vel</sub>)</td></tr>
+<tr><td>Integer</td><td>n_lin</td><td>1</td><td>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -895,28 +894,28 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
 
-  <font color="blue">parameter </font>Integer n_vel(
+  <font color="blue">parameter </font>Integer n_lin(
     <font color="blue">final </font>min=1,
     <font color="blue">final </font>max=3) = 1 <font color="darkgreen">
-    &quot;Number of components of velocity (<i>n</i><sub>vel</sub>)&quot;</font>;
+    &quot;Number of components of linear momentum (<i>n</i><sub>lin</sub>)&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">FCSys.Subregions.Reaction</a> reaction(<font color="blue">final </font>n_vel=n_vel, n_spec=3);
-  <a href="FCSys_BCs_Chemical_Species.html#FCSys.BCs.Chemical.Species.Species">FCSys.BCs.Chemical.Species.Species</a> &#39;e-&#39;(
-    materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature,
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">FCSys.Subregions.Reaction</a> reaction(<font color="blue">final </font>n_lin=n_lin, n_spec=3);
+  <a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical.Species">FCSys.BCs.Chemical.Species</a> &#39;e-&#39;(
+    materialBC=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature,
 
     <font color="blue">redeclare </font><a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a> Data,
-    <font color="blue">final </font>n_vel=n_vel);</textblock>
+    <font color="blue">final </font>n_lin=n_lin);</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_Chemical_Species.html#FCSys.BCs.Chemical.Species.Species">FCSys.BCs.Chemical.Species.Species</a> &#39;H+&#39;(
-    materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature,
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical.Species">FCSys.BCs.Chemical.Species</a> &#39;H+&#39;(
+    materialBC=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature,
 
     <font color="blue">redeclare </font><a href="FCSys_Characteristics_'H+'_Solid.html#FCSys.Characteristics.'H+'.Solid">FCSys.Characteristics.'H+'.Solid</a> Data,
-    <font color="blue">final </font>n_vel=n_vel);</textblock>
+    <font color="blue">final </font>n_lin=n_lin);</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_Chemical_Species.html#FCSys.BCs.Chemical.Species.Species">FCSys.BCs.Chemical.Species.Species</a> H2(
-    materialBC=FCSys.BCs.Chemical.Species.BaseClasses.BCTypeMaterial.Current,
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical.Species">FCSys.BCs.Chemical.Species</a> H2(
+    materialBC=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.Current,
     <font color="blue">redeclare </font><a href="FCSys_Characteristics_H2_Gas.html#FCSys.Characteristics.H2.Gas">FCSys.Characteristics.H2.Gas</a> Data,
-    <font color="blue">final </font>n_vel=n_vel,
+    <font color="blue">final </font>n_lin=n_lin,
     <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a> materialSpec(height=100*U.A,
         duration=100));</textblock>
 
@@ -987,7 +986,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
   <font color="blue">extends </font><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.SpeciesH2">SpeciesH2</a>(<font color="blue">redeclare </font><a href="FCSys_Subregions_Species_'e-'_Graphite.html#FCSys.Subregions.Species.'e-'.Graphite.Fixed">FCSys.Subregions.Species.'e-'.Graphite.Fixed</a>
       species);
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_Face_Species.html#FCSys.BCs.Face.Species.SpeciesX">FCSys.BCs.Face.Species.SpeciesX</a> faceBC(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Species_Material.html#FCSys.BCs.Face.Species.Material.Pressure">FCSys.BCs.Face.Species.Material.Pressure</a>
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_Face_BaseClasses.html#FCSys.BCs.Face.BaseClasses.PartialSpecies">FCSys.BCs.Face.BaseClasses.PartialSpecies</a> faceBC(<font color="blue">redeclare </font>FCSys.BCs.Face.Material.Pressure
       materialBC);</textblock>
 <font color="blue">equation </font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(faceBC.face, species.xNegative);</textblock>
@@ -1006,9 +1005,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_x</td><td>1</td><td>Number of discrete regions through the PEM along the x axis</td></tr>
-<tr><td><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.SubregionFlow">SubregionFlow</a></td><td>bC1</td><td>redeclare FCSys.BCs.Face.Sub...</td><td>&nbsp;</td></tr>
-<tr><td><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.SubregionFlow">SubregionFlow</a></td><td>bC2</td><td>redeclare FCSys.BCs.Face.Sub...</td><td>&nbsp;</td></tr>
-<tr><td><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.SubregionFlow">SubregionFlow</a></td><td>ground</td><td>redeclare FCSys.BCs.Face.Sub...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionFlow">SubregionFlow</a></td><td>bC1</td><td>redeclare FCSys.BCs.FaceBus....</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionFlow">SubregionFlow</a></td><td>bC2</td><td>redeclare FCSys.BCs.FaceBus....</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionFlow">SubregionFlow</a></td><td>ground</td><td>redeclare FCSys.BCs.FaceBus....</td><td>&nbsp;</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -1054,8 +1053,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
         yPositive(slipZ=false, slipX=false),
         zNegative(slipX=false, slipY=false),
         zPositive(slipX=false, slipY=false))),
-    inclVelY=false,
-    inclVelZ=false,
+    inclLinY=false,
+    inclLinZ=false,
     inclYFaces=false,
     inclZFaces=false);</textblock>
 
@@ -1071,8 +1070,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
         <font color="blue">each </font>yPositive(slipZ=false,slipX=false),
         <font color="blue">each </font>zNegative(slipX=false,slipY=false),
         <font color="blue">each </font>zPositive(slipX=false,slipY=false))),
-    <font color="blue">each </font>inclVelY=false,
-    <font color="blue">each </font>inclVelZ=false,
+    <font color="blue">each </font>inclLinY=false,
+    <font color="blue">each </font>inclLinZ=false,
     <font color="blue">each </font>inclYFaces=false,
     <font color="blue">each </font>inclZFaces=false) <font color="blue">if </font>n_x &gt; 0;</textblock>
 
@@ -1119,42 +1118,42 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
         yPositive(slipZ=false, slipX=false),
         zNegative(slipX=false, slipY=false),
         zPositive(slipX=false, slipY=false))),
-    inclVelY=false,
-    inclVelZ=false,
+    inclLinY=false,
+    inclLinZ=false,
     inclYFaces=false,
     inclZFaces=false);</textblock>
 
 <textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_BCs.html#FCSys.BCs.Defaults">FCSys.BCs.Defaults</a> defaults(analysis=true);
-  <font color="blue">replaceable </font><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.SubregionFlow">FCSys.BCs.Face.SubregionFlow</a> bC1 <font color="blue">constrainedby </font>
-    FCSys.BCs.Face.Subregion(gas(
+  <font color="blue">replaceable </font><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionFlow">FCSys.BCs.FaceBus.SubregionFlow</a> bC1 <font color="blue">constrainedby </font>
+    FCSys.BCs.FaceBus.Subregion(gas(
       inclH2=true,
       inclH2O=false,
       inclN2=false,
       inclO2=false), graphite(
       inclC=true,
       &#39;incle-&#39;=true,
-      C(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Species_Entropy.html#FCSys.BCs.Face.Species.Entropy.Temperature">FCSys.BCs.Face.Species.Entropy.Temperature</a> entropyBC,
+      C(<font color="blue">redeclare </font>FCSys.BCs.Face.Species.Entropy.Temperature entropyBC,
           entropySpec(k=defaults.T)),
-      &#39;e-&#39;(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Species_Material.html#FCSys.BCs.Face.Species.Material.Current">FCSys.BCs.Face.Species.Material.Current</a> materialBC, <font color="blue">
+      &#39;e-&#39;(<font color="blue">redeclare </font>FCSys.BCs.Face.Species.Material.Current materialBC, <font color="blue">
           redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a> materialSpec(duration=1000,
             height=-2*U.A))));
-  <font color="blue">replaceable </font><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.SubregionFlow">FCSys.BCs.Face.SubregionFlow</a> bC2 <font color="blue">constrainedby </font>
-    FCSys.BCs.Face.Subregion(gas(
+  <font color="blue">replaceable </font><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionFlow">FCSys.BCs.FaceBus.SubregionFlow</a> bC2 <font color="blue">constrainedby </font>
+    FCSys.BCs.FaceBus.Subregion(gas(
       inclH2=false,
       inclH2O=true,
       inclN2=false,
       inclO2=true), graphite(
       inclC=true,
       &#39;incle-&#39;=true,
-      C(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Species_Entropy.html#FCSys.BCs.Face.Species.Entropy.Temperature">FCSys.BCs.Face.Species.Entropy.Temperature</a> entropyBC,
+      C(<font color="blue">redeclare </font>FCSys.BCs.Face.Species.Entropy.Temperature entropyBC,
           entropySpec(k=defaults.T)),
-      &#39;e-&#39;(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Species_Material.html#FCSys.BCs.Face.Species.Material.Current">FCSys.BCs.Face.Species.Material.Current</a> materialBC, <font color="blue">
+      &#39;e-&#39;(<font color="blue">redeclare </font>FCSys.BCs.Face.Species.Material.Current materialBC, <font color="blue">
           redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a> materialSpec(duration=1000,
             height=2*U.A))));</textblock>
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_BCs_Face.html#FCSys.BCs.Face.SubregionFlow">FCSys.BCs.Face.SubregionFlow</a> ground(graphite(&#39;incle-&#39;=true, &#39;e-&#39;(<font color="blue">
-          redeclare </font><a href="FCSys_BCs_Face_Species_Material.html#FCSys.BCs.Face.Species.Material.Pressure">FCSys.BCs.Face.Species.Material.Pressure</a> materialBC,
-          materialSpec(k=0)))) <font color="blue">constrainedby </font>FCSys.BCs.Face.Subregion;</textblock>
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionFlow">FCSys.BCs.FaceBus.SubregionFlow</a> ground(graphite(&#39;incle-&#39;=true,
+        &#39;e-&#39;(<font color="blue">redeclare </font>FCSys.BCs.Face.Material.Pressure materialBC,
+          materialSpec(k=0)))) <font color="blue">constrainedby </font>FCSys.BCs.FaceBus.Subregion;</textblock>
 
 <font color="blue">equation </font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(bC1.face, subregion1.xNegative);
@@ -1179,7 +1178,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  2 21:13:57 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  9 07:47:25 2013.
 </div>
 </body>
 </html>

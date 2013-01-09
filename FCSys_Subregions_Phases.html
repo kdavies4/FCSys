@@ -94,7 +94,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <tr><td>Boolean</td><td>reduceVel</td><td>true</td><td>Same velocity for all species</td></tr>
 <tr><td>Boolean</td><td>reduceTemp</td><td>true</td><td>Same temperature for all species</td></tr>
-<tr><td>Boolean</td><td>inclVel[3]</td><td>{true,false,false}</td><td>true, if each component of velocity is included</td></tr>
+<tr><td>Boolean</td><td>inclLin[3]</td><td>{true,false,false}</td><td>true, if each component of linear momentum is included</td></tr>
 <tr><td>Boolean</td><td>inclReact</td><td>true</td><td>Include reaction(s), as appropriate</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Velocity</td></tr>
@@ -131,7 +131,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="blue">parameter </font>Boolean inclH2=false <font color="darkgreen">&quot;Hydrogen (H<sub>2</sub>)&quot;</font>;
 <textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_H2_Gas.html#FCSys.Subregions.Species.H2.Gas.Fixed">Species.H2.Gas.Fixed</a> H2 <font color="blue">if </font>inclH2 <font color="blue">constrainedby </font>Species.Species(
     <font color="blue">final </font>k=k,
-    <font color="blue">final </font>inclVel=inclVel,
+    <font color="blue">final </font>inclLin=inclLin,
     initMethX=<font color="blue">if </font>initVelX<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
         InitMethVelocity.Velocity,
     initMethY=<font color="blue">if </font>initVelY<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
@@ -149,7 +149,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_H2O_Gas.html#FCSys.Subregions.Species.H2O.Gas.Fixed">Species.H2O.Gas.Fixed</a> H2O <font color="blue">if </font>inclH2O <font color="blue">constrainedby </font>
     Species.Species(
     <font color="blue">final </font>k=k,
-    <font color="blue">final </font>inclVel=inclVel,
+    <font color="blue">final </font>inclLin=inclLin,
     initMethX=<font color="blue">if </font>initVelX<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
         InitMethVelocity.Velocity,
     initMethY=<font color="blue">if </font>initVelY<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
@@ -166,7 +166,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="blue">parameter </font>Boolean inclN2=false <font color="darkgreen">&quot;Nitrogen (N<sub>2</sub>)&quot;</font>;
 <textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_N2_Gas.html#FCSys.Subregions.Species.N2.Gas.Fixed">Species.N2.Gas.Fixed</a> N2 <font color="blue">if </font>inclN2 <font color="blue">constrainedby </font>Species.Species(
     <font color="blue">final </font>k=k,
-    <font color="blue">final </font>inclVel=inclVel,
+    <font color="blue">final </font>inclLin=inclLin,
     initMethX=<font color="blue">if </font>initVelX<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
         InitMethVelocity.Velocity,
     initMethY=<font color="blue">if </font>initVelY<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
@@ -183,7 +183,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="blue">parameter </font>Boolean inclO2=false <font color="darkgreen">&quot;Oxygen (O<sub>2</sub>)&quot;</font>;
 <textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_O2_Gas.html#FCSys.Subregions.Species.O2.Gas.Fixed">Species.O2.Gas.Fixed</a> O2 <font color="blue">if </font>inclO2 <font color="blue">constrainedby </font>Species.Species(
     <font color="blue">final </font>k=k,
-    <font color="blue">final </font>inclVel=inclVel,
+    <font color="blue">final </font>inclLin=inclLin,
     initMethX=<font color="blue">if </font>initVelX<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
         InitMethVelocity.Velocity,
     initMethY=<font color="blue">if </font>initVelY<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
@@ -197,7 +197,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
     T(stateSelect=<font color="blue">if </font>reduceTemp<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
     <font color="darkgreen">&quot;O<sub>2</sub> model&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">Reaction</a> &#39;2H2+O2=2H2O&#39;(<font color="blue">final </font>n_vel=n_vel, n_spec=3) <font color="blue">if </font>inclReact<font color="blue"> and </font>(inclH2<font color="blue">
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">Reaction</a> &#39;2H2+O2=2H2O&#39;(<font color="blue">final </font>n_lin=n_lin, n_spec=3) <font color="blue">if </font>inclReact<font color="blue"> and </font>(inclH2<font color="blue">
      and </font>inclH2O<font color="blue"> and </font>inclO2);</textblock>
 
 <font color="blue">equation </font>
@@ -210,212 +210,207 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="darkgreen">// --</font>
   <font color="darkgreen">// Exchange</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.chemical, chemical.H2);
-  <font color="red">connect</font>(H2.joint.mechanical, joint.mechanical);
-  <font color="red">connect</font>(H2.joint.heat, joint.heat);
+  <font color="red">connect</font>(H2.common.mechanical, common.mechanical);
+  <font color="red">connect</font>(H2.common.thermal, common.thermal);
   <font color="red">connect</font>(H2.inert, phaseBoundary.inertD);</textblock>
-  <font color="darkgreen">// Material transport</font>
+  <font color="darkgreen">// Transport of x-axis linear momentum</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.xNegative.material, xNegative.H2.material);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.xPositive.material, xPositive.H2.material);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.yNegative.material, yNegative.H2.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.yNegative.mechanicalX, yNegative.H2.mechanicalX);
+  <font color="red">connect</font>(H2.yPositive.mechanicalX, yPositive.H2.mechanicalX);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.yPositive.material, yPositive.H2.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.zNegative.mechanicalX, zNegative.H2.mechanicalX);
+  <font color="red">connect</font>(H2.zPositive.mechanicalX, zPositive.H2.mechanicalX);</textblock>
+  <font color="darkgreen">// Transport of y-axis linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.yNegative.material, yNegative.H2.material);
+  <font color="red">connect</font>(H2.yPositive.material, yPositive.H2.material);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.zNegative.material, zNegative.H2.material);
-  <font color="red">connect</font>(H2.zPositive.material, zPositive.H2.material);</textblock>
-  <font color="darkgreen">// 1st transverse transport of linear momentum</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.xNegative.mechanicalY, xNegative.H2.mechanicalY);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.zNegative.mechanicalY, zNegative.H2.mechanicalY);
+  <font color="red">connect</font>(H2.zPositive.mechanicalY, zPositive.H2.mechanicalY);
+  <font color="red">connect</font>(H2.xNegative.mechanicalY, xNegative.H2.mechanicalY);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.xPositive.mechanicalY, xPositive.H2.mechanicalY);</textblock>
+
+  <font color="darkgreen">// Transport of z-axis linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.zNegative.material, zNegative.H2.material);
+  <font color="red">connect</font>(H2.zPositive.material, zPositive.H2.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.xNegative.mechanicalZ, xNegative.H2.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.xPositive.mechanicalZ, xPositive.H2.mechanicalZ);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.yNegative.mechanicalZ, yNegative.H2.mechanicalZ);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.yPositive.mechanicalZ, yPositive.H2.mechanicalZ);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.zNegative.mechanicalX, zNegative.H2.mechanicalX);
-  <font color="red">connect</font>(H2.zPositive.mechanicalX, zPositive.H2.mechanicalX);</textblock>
-  <font color="darkgreen">// 2nd transverse transport of linear momentum</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.xNegative.mechanicalZ, xNegative.H2.mechanicalZ);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.xPositive.mechanicalZ, xPositive.H2.mechanicalZ);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.yNegative.mechanicalX, yNegative.H2.mechanicalX);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.yPositive.mechanicalX, yPositive.H2.mechanicalX);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.zNegative.mechanicalY, zNegative.H2.mechanicalY);
-  <font color="red">connect</font>(H2.zPositive.mechanicalY, zPositive.H2.mechanicalY);</textblock>
   <font color="darkgreen">// Thermal transport</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.xNegative.heat, xNegative.H2.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.xNegative.thermal, xNegative.H2.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.xPositive.heat, xPositive.H2.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.xPositive.thermal, xPositive.H2.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.yNegative.heat, yNegative.H2.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.yNegative.thermal, yNegative.H2.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.yPositive.heat, yPositive.H2.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.yPositive.thermal, yPositive.H2.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.zNegative.heat, zNegative.H2.heat);
-  <font color="red">connect</font>(H2.zPositive.heat, zPositive.H2.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.zNegative.thermal, zNegative.H2.thermal);
+  <font color="red">connect</font>(H2.zPositive.thermal, zPositive.H2.thermal);</textblock>
 
   <font color="darkgreen">// H2O</font>
   <font color="darkgreen">// ---</font>
   <font color="darkgreen">// Exchange</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.chemical, chemical.H2O);
-  <font color="red">connect</font>(H2O.joint.mechanical, joint.mechanical);
-  <font color="red">connect</font>(H2O.joint.heat, joint.heat);
+  <font color="red">connect</font>(H2O.common.mechanical, common.mechanical);
+  <font color="red">connect</font>(H2O.common.thermal, common.thermal);
   <font color="red">connect</font>(H2O.inert, phaseBoundary.inertD);</textblock>
-  <font color="darkgreen">// Material transport</font>
+  <font color="darkgreen">// Transport of x-axis linear momentum</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.material, xNegative.H2O.material);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.material, xPositive.H2O.material);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.material, yNegative.H2O.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.mechanicalX, yNegative.H2O.mechanicalX);
+  <font color="red">connect</font>(H2O.yPositive.mechanicalX, yPositive.H2O.mechanicalX);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.material, yPositive.H2O.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.mechanicalX, zNegative.H2O.mechanicalX);
+  <font color="red">connect</font>(H2O.zPositive.mechanicalX, zPositive.H2O.mechanicalX);</textblock>
+  <font color="darkgreen">// Transport of y-axis linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.material, yNegative.H2O.material);
+  <font color="red">connect</font>(H2O.yPositive.material, yPositive.H2O.material);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.material, zNegative.H2O.material);
-  <font color="red">connect</font>(H2O.zPositive.material, zPositive.H2O.material);</textblock>
-  <font color="darkgreen">// 1st transverse transport of linear momentum</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.mechanicalY, xNegative.H2O.mechanicalY);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.mechanicalY, zNegative.H2O.mechanicalY);
+  <font color="red">connect</font>(H2O.zPositive.mechanicalY, zPositive.H2O.mechanicalY);
+  <font color="red">connect</font>(H2O.xNegative.mechanicalY, xNegative.H2O.mechanicalY);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.mechanicalY, xPositive.H2O.mechanicalY);</textblock>
+
+  <font color="darkgreen">// Transport of z-axis linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.material, zNegative.H2O.material);
+  <font color="red">connect</font>(H2O.zPositive.material, zPositive.H2O.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.mechanicalZ, xNegative.H2O.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.mechanicalZ, xPositive.H2O.mechanicalZ);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.mechanicalZ, yNegative.H2O.mechanicalZ);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.mechanicalZ, yPositive.H2O.mechanicalZ);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.mechanicalX, zNegative.H2O.mechanicalX);
-  <font color="red">connect</font>(H2O.zPositive.mechanicalX, zPositive.H2O.mechanicalX);</textblock>
-  <font color="darkgreen">// 2nd transverse transport of linear momentum</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.mechanicalZ, xNegative.H2O.mechanicalZ);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.mechanicalZ, xPositive.H2O.mechanicalZ);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.mechanicalX, yNegative.H2O.mechanicalX);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.mechanicalX, yPositive.H2O.mechanicalX);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.mechanicalY, zNegative.H2O.mechanicalY);
-  <font color="red">connect</font>(H2O.zPositive.mechanicalY, zPositive.H2O.mechanicalY);</textblock>
   <font color="darkgreen">// Thermal transport</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.heat, xNegative.H2O.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.thermal, xNegative.H2O.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.heat, xPositive.H2O.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.thermal, xPositive.H2O.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.heat, yNegative.H2O.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.thermal, yNegative.H2O.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.heat, yPositive.H2O.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.thermal, yPositive.H2O.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.heat, zNegative.H2O.heat);
-  <font color="red">connect</font>(H2O.zPositive.heat, zPositive.H2O.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.thermal, zNegative.H2O.thermal);
+  <font color="red">connect</font>(H2O.zPositive.thermal, zPositive.H2O.thermal);</textblock>
 
   <font color="darkgreen">// N2</font>
   <font color="darkgreen">// --</font>
   <font color="darkgreen">// Exchange</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.chemical, chemical.N2);
-  <font color="red">connect</font>(N2.joint.mechanical, joint.mechanical);
-  <font color="red">connect</font>(N2.joint.heat, joint.heat);
+  <font color="red">connect</font>(N2.common.mechanical, common.mechanical);
+  <font color="red">connect</font>(N2.common.thermal, common.thermal);
   <font color="red">connect</font>(N2.inert, phaseBoundary.inertD);</textblock>
-  <font color="darkgreen">// Material transport</font>
+  <font color="darkgreen">// Transport of x-axis linear momentum</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.xNegative.material, xNegative.N2.material);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.xPositive.material, xPositive.N2.material);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.yNegative.material, yNegative.N2.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.yNegative.mechanicalX, yNegative.N2.mechanicalX);
+  <font color="red">connect</font>(N2.yPositive.mechanicalX, yPositive.N2.mechanicalX);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.yPositive.material, yPositive.N2.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.zNegative.mechanicalX, zNegative.N2.mechanicalX);
+  <font color="red">connect</font>(N2.zPositive.mechanicalX, zPositive.N2.mechanicalX);</textblock>
+  <font color="darkgreen">// Transport of y-axis linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.yNegative.material, yNegative.N2.material);
+  <font color="red">connect</font>(N2.yPositive.material, yPositive.N2.material);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.zNegative.material, zNegative.N2.material);
-  <font color="red">connect</font>(N2.zPositive.material, zPositive.N2.material);</textblock>
-  <font color="darkgreen">// 1st transverse transport of linear momentum</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.xNegative.mechanicalY, xNegative.N2.mechanicalY);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.zNegative.mechanicalY, zNegative.N2.mechanicalY);
+  <font color="red">connect</font>(N2.zPositive.mechanicalY, zPositive.N2.mechanicalY);
+  <font color="red">connect</font>(N2.xNegative.mechanicalY, xNegative.N2.mechanicalY);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.xPositive.mechanicalY, xPositive.N2.mechanicalY);</textblock>
+
+  <font color="darkgreen">// Transport of z-axis linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.zNegative.material, zNegative.N2.material);
+  <font color="red">connect</font>(N2.zPositive.material, zPositive.N2.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.xNegative.mechanicalZ, xNegative.N2.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.xPositive.mechanicalZ, xPositive.N2.mechanicalZ);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.yNegative.mechanicalZ, yNegative.N2.mechanicalZ);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.yPositive.mechanicalZ, yPositive.N2.mechanicalZ);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.zNegative.mechanicalX, zNegative.N2.mechanicalX);
-  <font color="red">connect</font>(N2.zPositive.mechanicalX, zPositive.N2.mechanicalX);</textblock>
-  <font color="darkgreen">// 2nd transverse transport of linear momentum</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.xNegative.mechanicalZ, xNegative.N2.mechanicalZ);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.xPositive.mechanicalZ, xPositive.N2.mechanicalZ);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.yNegative.mechanicalX, yNegative.N2.mechanicalX);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.yPositive.mechanicalX, yPositive.N2.mechanicalX);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.zNegative.mechanicalY, zNegative.N2.mechanicalY);
-  <font color="red">connect</font>(N2.zPositive.mechanicalY, zPositive.N2.mechanicalY);</textblock>
   <font color="darkgreen">// Thermal transport</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.xNegative.heat, xNegative.N2.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.xNegative.thermal, xNegative.N2.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.xPositive.heat, xPositive.N2.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.xPositive.thermal, xPositive.N2.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.yNegative.heat, yNegative.N2.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.yNegative.thermal, yNegative.N2.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.yPositive.heat, yPositive.N2.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.yPositive.thermal, yPositive.N2.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.zNegative.heat, zNegative.N2.heat);
-  <font color="red">connect</font>(N2.zPositive.heat, zPositive.N2.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.zNegative.thermal, zNegative.N2.thermal);
+  <font color="red">connect</font>(N2.zPositive.thermal, zPositive.N2.thermal);</textblock>
 
   <font color="darkgreen">// O2</font>
   <font color="darkgreen">// --</font>
   <font color="darkgreen">// Exchange</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.chemical, chemical.O2);
-  <font color="red">connect</font>(O2.joint.mechanical, joint.mechanical);
-  <font color="red">connect</font>(O2.joint.heat, joint.heat);
+  <font color="red">connect</font>(O2.common.mechanical, common.mechanical);
+  <font color="red">connect</font>(O2.common.thermal, common.thermal);
   <font color="red">connect</font>(O2.inert, phaseBoundary.inertD);</textblock>
-  <font color="darkgreen">// Material transport</font>
+  <font color="darkgreen">// Transport of x-axis linear momentum</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.xNegative.material, xNegative.O2.material);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.xPositive.material, xPositive.O2.material);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.yNegative.material, yNegative.O2.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.yNegative.mechanicalX, yNegative.O2.mechanicalX);
+  <font color="red">connect</font>(O2.yPositive.mechanicalX, yPositive.O2.mechanicalX);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.yPositive.material, yPositive.O2.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.zNegative.mechanicalX, zNegative.O2.mechanicalX);
+  <font color="red">connect</font>(O2.zPositive.mechanicalX, zPositive.O2.mechanicalX);</textblock>
+  <font color="darkgreen">// Transport of y-axis linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.yNegative.material, yNegative.O2.material);
+  <font color="red">connect</font>(O2.yPositive.material, yPositive.O2.material);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.zNegative.material, zNegative.O2.material);
-  <font color="red">connect</font>(O2.zPositive.material, zPositive.O2.material);</textblock>
-  <font color="darkgreen">// 1st transverse transport of linear momentum</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.xNegative.mechanicalY, xNegative.O2.mechanicalY);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.zNegative.mechanicalY, zNegative.O2.mechanicalY);
+  <font color="red">connect</font>(O2.zPositive.mechanicalY, zPositive.O2.mechanicalY);
+  <font color="red">connect</font>(O2.xNegative.mechanicalY, xNegative.O2.mechanicalY);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.xPositive.mechanicalY, xPositive.O2.mechanicalY);</textblock>
+
+  <font color="darkgreen">// Transport of z-axis linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.zNegative.material, zNegative.O2.material);
+  <font color="red">connect</font>(O2.zPositive.material, zPositive.O2.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.xNegative.mechanicalZ, xNegative.O2.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.xPositive.mechanicalZ, xPositive.O2.mechanicalZ);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.yNegative.mechanicalZ, yNegative.O2.mechanicalZ);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.yPositive.mechanicalZ, yPositive.O2.mechanicalZ);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.zNegative.mechanicalX, zNegative.O2.mechanicalX);
-  <font color="red">connect</font>(O2.zPositive.mechanicalX, zPositive.O2.mechanicalX);</textblock>
-  <font color="darkgreen">// 2nd transverse transport of linear momentum</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.xNegative.mechanicalZ, xNegative.O2.mechanicalZ);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.xPositive.mechanicalZ, xPositive.O2.mechanicalZ);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.yNegative.mechanicalX, yNegative.O2.mechanicalX);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.yPositive.mechanicalX, yPositive.O2.mechanicalX);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.zNegative.mechanicalY, zNegative.O2.mechanicalY);
-  <font color="red">connect</font>(O2.zPositive.mechanicalY, zPositive.O2.mechanicalY);</textblock>
   <font color="darkgreen">// Thermal transport</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.xNegative.heat, xNegative.O2.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.xNegative.thermal, xNegative.O2.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.xPositive.heat, xPositive.O2.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.xPositive.thermal, xPositive.O2.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.yNegative.heat, yNegative.O2.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.yNegative.thermal, yNegative.O2.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.yPositive.heat, yPositive.O2.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.yPositive.thermal, yPositive.O2.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.zNegative.heat, zNegative.O2.heat);
-  <font color="red">connect</font>(O2.zPositive.heat, zPositive.O2.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.zNegative.thermal, zNegative.O2.thermal);
+  <font color="red">connect</font>(O2.zPositive.thermal, zPositive.O2.thermal);</textblock>
 
-<textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>Gas;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Gas;
 </pre>
 <hr>
 
@@ -424,7 +419,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <b>Graphite phase</b><p>
 <img src="images/FCSys.Subregions.Phases.GraphiteD.png" alt="FCSys.Subregions.Phases.Graphite">
 <p><h3>Information</h3></p>
-<p>If C is included (<code>inclC</code>=<code>true</code>), 
+<p>If C is included (<code>inclC</code>=<code>true</code>),
     then <code>initVelX</code>, <code>initVelY</code>, and <code>initVelZ</code> are
     ignored.  Velocity is not initialized because it is set by C.</p>
 
@@ -444,7 +439,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <tr><td>Boolean</td><td>reduceVel</td><td>true</td><td>Same velocity for all species</td></tr>
 <tr><td>Boolean</td><td>reduceTemp</td><td>true</td><td>Same temperature for all species</td></tr>
-<tr><td>Boolean</td><td>inclVel[3]</td><td>{true,false,false}</td><td>true, if each component of velocity is included</td></tr>
+<tr><td>Boolean</td><td>inclLin[3]</td><td>{true,false,false}</td><td>true, if each component of linear momentum is included</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Velocity</td></tr>
 <tr><td>Boolean</td><td>initVelX</td><td>true</td><td>Initialize the x component</td></tr>
@@ -470,15 +465,15 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">model</font> Graphite <font color="darkgreen">&quot;Graphite phase&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.NullPhase">BaseClasses.NullPhase</a>(<font color="blue">final </font>n_spec=<font color="red">countTrue</font>({inclC,'incle-'}), joint(
-        mechanical(phi(fixed=<font color="blue">if </font>inclC<font color="blue"> then </font><font color="red">fill</font>(false, n_vel)<font color="blue"> else </font>{initVelX,
-              initVelY,initVelZ}[cartAxes]))));
+  <font color="blue">extends </font><a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.NullPhase">BaseClasses.NullPhase</a>(<font color="blue">final </font>n_spec=<font color="red">countTrue</font>({inclC,'incle-'}),
+      common(mechanical(phi(fixed=<font color="blue">if </font>inclC<font color="blue"> then </font><font color="red">fill</font>(false, n_lin)<font color="blue"> else </font>{
+              initVelX,initVelY,initVelZ}[cartAxes]))));
 
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean inclC=false <font color="darkgreen">&quot;Carbon (C)&quot;</font>;
 <textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_C_Graphite.html#FCSys.Subregions.Species.C.Graphite.Fixed">Species.C.Graphite.Fixed</a> C <font color="blue">if </font>inclC <font color="blue">constrainedby </font>Species.Species(
     <font color="blue">final </font>k=k,
-    <font color="blue">final </font>inclVel=inclVel,
+    <font color="blue">final </font>inclLin=inclLin,
     initMethTemp=<font color="blue">if </font>initTemp<font color="blue"> and </font>reduceTemp<font color="blue"> then </font>InitMethScalar.None<font color="blue"> else </font>
         InitMethScalar.Temperature,
     phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceVel<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer),
@@ -490,7 +485,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_'e-'_Graphite.html#FCSys.Subregions.Species.'e-'.Graphite.Fixed">Species.'e-'.Graphite.Fixed</a> &#39;e-&#39; <font color="blue">if </font>'incle-' <font color="blue">constrainedby </font>
     Species.Species(
     <font color="blue">final </font>k=k,
-    <font color="blue">final </font>inclVel=inclVel,
+    <font color="blue">final </font>inclLin=inclLin,
     initMethX=<font color="blue">if </font>(initVelX<font color="blue"> or </font>inclC)<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue">
          else </font>InitMethVelocity.Velocity,
     initMethY=<font color="blue">if </font>(initVelY<font color="blue"> or </font>inclC)<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue">
@@ -509,108 +504,105 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="darkgreen">// -</font>
   <font color="darkgreen">// Exchange</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.chemical, chemical.C);
-  <font color="red">connect</font>(C.joint.mechanical, joint.mechanical);
-  <font color="red">connect</font>(C.joint.heat, joint.heat);
+  <font color="red">connect</font>(C.common.mechanical, common.mechanical);
+  <font color="red">connect</font>(C.common.thermal, common.thermal);
   <font color="red">connect</font>(C.inert, phaseBoundary.inertD);</textblock>
-  <font color="darkgreen">// Material transport</font>
+  <font color="darkgreen">// Transport of x-axis linear momentum</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.xNegative.material, xNegative.C.material);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.xPositive.material, xPositive.C.material);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.yNegative.material, yNegative.C.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.yNegative.mechanicalX, yNegative.C.mechanicalX);
+  <font color="red">connect</font>(C.yPositive.mechanicalX, yPositive.C.mechanicalX);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.yPositive.material, yPositive.C.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.zNegative.mechanicalX, zNegative.C.mechanicalX);
+  <font color="red">connect</font>(C.zPositive.mechanicalX, zPositive.C.mechanicalX);</textblock>
+  <font color="darkgreen">// Transport of y-axis linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.yNegative.material, yNegative.C.material);
+  <font color="red">connect</font>(C.yPositive.material, yPositive.C.material);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.zNegative.material, zNegative.C.material);
-  <font color="red">connect</font>(C.zPositive.material, zPositive.C.material);</textblock>
-  <font color="darkgreen">// 1st transverse transport of linear momentum</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.xNegative.mechanicalY, xNegative.C.mechanicalY);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.zNegative.mechanicalY, zNegative.C.mechanicalY);
+  <font color="red">connect</font>(C.zPositive.mechanicalY, zPositive.C.mechanicalY);
+  <font color="red">connect</font>(C.xNegative.mechanicalY, xNegative.C.mechanicalY);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.xPositive.mechanicalY, xPositive.C.mechanicalY);</textblock>
+
+  <font color="darkgreen">// Transport of z-axis linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.zNegative.material, zNegative.C.material);
+  <font color="red">connect</font>(C.zPositive.material, zPositive.C.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.xNegative.mechanicalZ, xNegative.C.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.xPositive.mechanicalZ, xPositive.C.mechanicalZ);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.yNegative.mechanicalZ, yNegative.C.mechanicalZ);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.yPositive.mechanicalZ, yPositive.C.mechanicalZ);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.zNegative.mechanicalX, zNegative.C.mechanicalX);
-  <font color="red">connect</font>(C.zPositive.mechanicalX, zPositive.C.mechanicalX);</textblock>
-  <font color="darkgreen">// 2nd transverse transport of linear momentum</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.xNegative.mechanicalZ, xNegative.C.mechanicalZ);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.xPositive.mechanicalZ, xPositive.C.mechanicalZ);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.yNegative.mechanicalX, yNegative.C.mechanicalX);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.yPositive.mechanicalX, yPositive.C.mechanicalX);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.zNegative.mechanicalY, zNegative.C.mechanicalY);
-  <font color="red">connect</font>(C.zPositive.mechanicalY, zPositive.C.mechanicalY);</textblock>
   <font color="darkgreen">// Thermal transport</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.xNegative.heat, xNegative.C.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.xNegative.thermal, xNegative.C.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.xPositive.heat, xPositive.C.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.xPositive.thermal, xPositive.C.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.yNegative.heat, yNegative.C.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.yNegative.thermal, yNegative.C.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.yPositive.heat, yPositive.C.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.yPositive.thermal, yPositive.C.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.zNegative.heat, zNegative.C.heat);
-  <font color="red">connect</font>(C.zPositive.heat, zPositive.C.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.zNegative.thermal, zNegative.C.thermal);
+  <font color="red">connect</font>(C.zPositive.thermal, zPositive.C.thermal);</textblock>
 
   <font color="darkgreen">// e-</font>
   <font color="darkgreen">// --</font>
   <font color="darkgreen">// Exchange</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.chemical, chemical.'e-');
-  <font color="red">connect</font>('e-'.joint.mechanical, joint.mechanical);
-  <font color="red">connect</font>('e-'.joint.heat, joint.heat);
+  <font color="red">connect</font>('e-'.common.mechanical, common.mechanical);
+  <font color="red">connect</font>('e-'.common.thermal, common.thermal);
   <font color="red">connect</font>('e-'.inert, phaseBoundary.inertD);</textblock>
-  <font color="darkgreen">// Material transport</font>
+  <font color="darkgreen">// Transport of x-axis linear momentum</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.xNegative.material, xNegative.'e-'.material);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.xPositive.material, xPositive.'e-'.material);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.yNegative.material, yNegative.'e-'.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.yNegative.mechanicalX, yNegative.'e-'.mechanicalX);
+  <font color="red">connect</font>('e-'.yPositive.mechanicalX, yPositive.'e-'.mechanicalX);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.yPositive.material, yPositive.'e-'.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.zNegative.mechanicalX, zNegative.'e-'.mechanicalX);
+  <font color="red">connect</font>('e-'.zPositive.mechanicalX, zPositive.'e-'.mechanicalX);</textblock>
+  <font color="darkgreen">// Transport of y-axis linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.yNegative.material, yNegative.'e-'.material);
+  <font color="red">connect</font>('e-'.yPositive.material, yPositive.'e-'.material);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.zNegative.material, zNegative.'e-'.material);
-  <font color="red">connect</font>('e-'.zPositive.material, zPositive.'e-'.material);</textblock>
-  <font color="darkgreen">// 1st transverse transport of linear momentum</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.xNegative.mechanicalY, xNegative.'e-'.mechanicalY);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.zNegative.mechanicalY, zNegative.'e-'.mechanicalY);
+  <font color="red">connect</font>('e-'.zPositive.mechanicalY, zPositive.'e-'.mechanicalY);
+  <font color="red">connect</font>('e-'.xNegative.mechanicalY, xNegative.'e-'.mechanicalY);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.xPositive.mechanicalY, xPositive.'e-'.mechanicalY);</textblock>
+
+  <font color="darkgreen">// Transport of z-axis linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.zNegative.material, zNegative.'e-'.material);
+  <font color="red">connect</font>('e-'.zPositive.material, zPositive.'e-'.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.xNegative.mechanicalZ, xNegative.'e-'.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.xPositive.mechanicalZ, xPositive.'e-'.mechanicalZ);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.yNegative.mechanicalZ, yNegative.'e-'.mechanicalZ);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.yPositive.mechanicalZ, yPositive.'e-'.mechanicalZ);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.zNegative.mechanicalX, zNegative.'e-'.mechanicalX);
-  <font color="red">connect</font>('e-'.zPositive.mechanicalX, zPositive.'e-'.mechanicalX);</textblock>
-  <font color="darkgreen">// 2nd transverse transport of linear momentum</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.xNegative.mechanicalZ, xNegative.'e-'.mechanicalZ);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.xPositive.mechanicalZ, xPositive.'e-'.mechanicalZ);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.yNegative.mechanicalX, yNegative.'e-'.mechanicalX);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.yPositive.mechanicalX, yPositive.'e-'.mechanicalX);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.zNegative.mechanicalY, zNegative.'e-'.mechanicalY);
-  <font color="red">connect</font>('e-'.zPositive.mechanicalY, zPositive.'e-'.mechanicalY);</textblock>
   <font color="darkgreen">// Thermal transport</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.xNegative.heat, xNegative.'e-'.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.xNegative.thermal, xNegative.'e-'.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.xPositive.heat, xPositive.'e-'.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.xPositive.thermal, xPositive.'e-'.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.yNegative.heat, yNegative.'e-'.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.yNegative.thermal, yNegative.'e-'.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.yPositive.heat, yPositive.'e-'.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.yPositive.thermal, yPositive.'e-'.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.zNegative.heat, zNegative.'e-'.heat);
-  <font color="red">connect</font>('e-'.zPositive.heat, zPositive.'e-'.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.zNegative.thermal, zNegative.'e-'.thermal);
+  <font color="red">connect</font>('e-'.zPositive.thermal, zPositive.'e-'.thermal);</textblock>
 
-<textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>Graphite;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Graphite;
 </pre>
 <hr>
 
@@ -619,7 +611,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <b>Ionomer phase</b><p>
 <img src="images/FCSys.Subregions.Phases.IonomerD.png" alt="FCSys.Subregions.Phases.Ionomer">
 <p><h3>Information</h3></p>
-<p>If C19HF37O5S is included (<code>inclC19HF37O5S</code>=<code>true</code>), 
+<p>If C19HF37O5S is included (<code>inclC19HF37O5S</code>=<code>true</code>),
     then <code>initVelX</code>, <code>initVelY</code>, and <code>initVelZ</code> are
     ignored.  Velocity is not initialized because it is set by C19HF37O5S.</p>
 
@@ -641,7 +633,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <tr><td>Boolean</td><td>reduceVel</td><td>true</td><td>Same velocity for all species</td></tr>
 <tr><td>Boolean</td><td>reduceTemp</td><td>true</td><td>Same temperature for all species</td></tr>
-<tr><td>Boolean</td><td>inclVel[3]</td><td>{true,false,false}</td><td>true, if each component of velocity is included</td></tr>
+<tr><td>Boolean</td><td>inclLin[3]</td><td>{true,false,false}</td><td>true, if each component of linear momentum is included</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Velocity</td></tr>
 <tr><td>Boolean</td><td>initVelX</td><td>true</td><td>Initialize the x component</td></tr>
@@ -668,8 +660,8 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <pre>
 <font color="blue">model</font> Ionomer <font color="darkgreen">&quot;Ionomer phase&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.NullPhase">BaseClasses.NullPhase</a>(<font color="blue">final </font>n_spec=<font color="red">countTrue</font>({inclC19HF37O5S,inclH2O,
-        'inclH+'}), joint(mechanical(phi(fixed=<font color="blue">if </font>inclC19HF37O5S<font color="blue"> then </font><font color="red">fill</font>(false,
-              n_vel)<font color="blue"> else </font>{initVelX,initVelY,initVelZ}[cartAxes]))));
+        'inclH+'}), common(mechanical(phi(fixed=<font color="blue">if </font>inclC19HF37O5S<font color="blue"> then </font><font color="red">fill</font>(false,
+              n_lin)<font color="blue"> else </font>{initVelX,initVelY,initVelZ}[cartAxes]))));
 
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean inclC19HF37O5S=false <font color="darkgreen">
@@ -677,7 +669,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_C19HF37O5S_Solid.html#FCSys.Subregions.Species.C19HF37O5S.Solid.Fixed">Species.C19HF37O5S.Solid.Fixed</a> C19HF37O5S <font color="blue">if </font>inclC19HF37O5S <font color="blue">
     constrainedby </font>Species.Species(
     <font color="blue">final </font>k=k,
-    <font color="blue">final </font>inclVel=inclVel,
+    <font color="blue">final </font>inclLin=inclLin,
     initMethTemp=<font color="blue">if </font>initTemp<font color="blue"> and </font>reduceTemp<font color="blue"> then </font>InitMethScalar.None<font color="blue"> else </font>
         InitMethScalar.Temperature,
     phi(<font color="blue">each </font>stateSelect=<font color="blue">if </font>reduceVel<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer),
@@ -689,7 +681,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_H2O_Gas.html#FCSys.Subregions.Species.H2O.Gas.Fixed">Species.H2O.Gas.Fixed</a> H2O <font color="blue">if </font>inclH2O <font color="blue">constrainedby </font>
     Species.Species(
     <font color="blue">final </font>k=k,
-    <font color="blue">final </font>inclVel=inclVel,
+    <font color="blue">final </font>inclLin=inclLin,
     initMethX=<font color="blue">if </font>(initVelX19HF37O5S)<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue">
          else </font>InitMethVelocity.Velocity,
     initMethY=<font color="blue">if </font>(initVelY<font color="blue"> or </font>inclC19HF37O5S)<font color="blue"> and </font>reduceVel<font color="blue"> then </font>
@@ -707,7 +699,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_'H+'_Solid.html#FCSys.Subregions.Species.'H+'.Solid.Fixed">Species.'H+'.Solid.Fixed</a> &#39;H+&#39; <font color="blue">if </font>'inclH+' <font color="blue">constrainedby </font>
     Species.Species(
     <font color="blue">final </font>k=k,
-    <font color="blue">final </font>inclVel=inclVel,
+    <font color="blue">final </font>inclLin=inclLin,
     initMethX=<font color="blue">if </font>initVelX<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
         InitMethVelocity.Velocity,
     initMethY=<font color="blue">if </font>initVelY<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
@@ -726,108 +718,156 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="darkgreen">// ----------</font>
   <font color="darkgreen">// Exchange</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.chemical, chemical.C19HF37O5S);
-  <font color="red">connect</font>(C19HF37O5S.joint.mechanical, joint.mechanical);
-  <font color="red">connect</font>(C19HF37O5S.joint.heat, joint.heat);
+  <font color="red">connect</font>(C19HF37O5S.common.mechanical, common.mechanical);
+  <font color="red">connect</font>(C19HF37O5S.common.thermal, common.thermal);
   <font color="red">connect</font>(C19HF37O5S.inert, phaseBoundary.inertD);</textblock>
-  <font color="darkgreen">// Material transport</font>
+  <font color="darkgreen">// Transport of x-axis linear momentum</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.xNegative.material, xNegative.C19HF37O5S.material);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.xPositive.material, xPositive.C19HF37O5S.material);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.yNegative.material, yNegative.C19HF37O5S.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.yNegative.mechanicalX, yNegative.C19HF37O5S.mechanicalX);
+  <font color="red">connect</font>(C19HF37O5S.yPositive.mechanicalX, yPositive.C19HF37O5S.mechanicalX);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.yPositive.material, yPositive.C19HF37O5S.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.zNegative.mechanicalX, zNegative.C19HF37O5S.mechanicalX);
+  <font color="red">connect</font>(C19HF37O5S.zPositive.mechanicalX, zPositive.C19HF37O5S.mechanicalX);</textblock>
+  <font color="darkgreen">// Transport of y-axis linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.yNegative.material, yNegative.C19HF37O5S.material);
+  <font color="red">connect</font>(C19HF37O5S.yPositive.material, yPositive.C19HF37O5S.material);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.zNegative.material, zNegative.C19HF37O5S.material);
-  <font color="red">connect</font>(C19HF37O5S.zPositive.material, zPositive.C19HF37O5S.material);</textblock>
-  <font color="darkgreen">// 1st transverse transport of linear momentum</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.xNegative.mechanicalY, xNegative.C19HF37O5S.mechanicalY);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.zNegative.mechanicalY, zNegative.C19HF37O5S.mechanicalY);
+  <font color="red">connect</font>(C19HF37O5S.zPositive.mechanicalY, zPositive.C19HF37O5S.mechanicalY);
+  <font color="red">connect</font>(C19HF37O5S.xNegative.mechanicalY, xNegative.C19HF37O5S.mechanicalY);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.xPositive.mechanicalY, xPositive.C19HF37O5S.mechanicalY);</textblock>
+
+  <font color="darkgreen">// Transport of z-axis linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.zNegative.material, zNegative.C19HF37O5S.material);
+  <font color="red">connect</font>(C19HF37O5S.zPositive.material, zPositive.C19HF37O5S.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.xNegative.mechanicalZ, xNegative.C19HF37O5S.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.xPositive.mechanicalZ, xPositive.C19HF37O5S.mechanicalZ);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.yNegative.mechanicalZ, yNegative.C19HF37O5S.mechanicalZ);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.yPositive.mechanicalZ, yPositive.C19HF37O5S.mechanicalZ);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.zNegative.mechanicalX, zNegative.C19HF37O5S.mechanicalX);
-  <font color="red">connect</font>(C19HF37O5S.zPositive.mechanicalX, zPositive.C19HF37O5S.mechanicalX);</textblock>
-  <font color="darkgreen">// 2nd transverse transport of linear momentum</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.xNegative.mechanicalZ, xNegative.C19HF37O5S.mechanicalZ);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.xPositive.mechanicalZ, xPositive.C19HF37O5S.mechanicalZ);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.yNegative.mechanicalX, yNegative.C19HF37O5S.mechanicalX);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.yPositive.mechanicalX, yPositive.C19HF37O5S.mechanicalX);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.zNegative.mechanicalY, zNegative.C19HF37O5S.mechanicalY);
-  <font color="red">connect</font>(C19HF37O5S.zPositive.mechanicalY, zPositive.C19HF37O5S.mechanicalY);</textblock>
   <font color="darkgreen">// Thermal transport</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.xNegative.heat, xNegative.C19HF37O5S.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.xNegative.thermal, xNegative.C19HF37O5S.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.xPositive.heat, xPositive.C19HF37O5S.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.xPositive.thermal, xPositive.C19HF37O5S.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.yNegative.heat, yNegative.C19HF37O5S.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.yNegative.thermal, yNegative.C19HF37O5S.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.yPositive.heat, yPositive.C19HF37O5S.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.yPositive.thermal, yPositive.C19HF37O5S.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.zNegative.heat, zNegative.C19HF37O5S.heat);
-  <font color="red">connect</font>(C19HF37O5S.zPositive.heat, zPositive.C19HF37O5S.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.zNegative.thermal, zNegative.C19HF37O5S.thermal);
+  <font color="red">connect</font>(C19HF37O5S.zPositive.thermal, zPositive.C19HF37O5S.thermal);</textblock>
+
+  <font color="darkgreen">// &#39;H+&#39;</font>
+  <font color="darkgreen">// ----</font>
+  <font color="darkgreen">// Exchange</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.chemical, chemical.'H+');
+  <font color="red">connect</font>('H+'.common.mechanical, common.mechanical);
+  <font color="red">connect</font>('H+'.common.thermal, common.thermal);
+  <font color="red">connect</font>('H+'.inert, phaseBoundary.inertD);</textblock>
+  <font color="darkgreen">// Transport of x-axis linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.xNegative.material, xNegative.'H+'.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.xPositive.material, xPositive.'H+'.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.yNegative.mechanicalX, yNegative.'H+'.mechanicalX);
+  <font color="red">connect</font>('H+'.yPositive.mechanicalX, yPositive.'H+'.mechanicalX);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.zNegative.mechanicalX, zNegative.'H+'.mechanicalX);
+  <font color="red">connect</font>('H+'.zPositive.mechanicalX, zPositive.'H+'.mechanicalX);</textblock>
+  <font color="darkgreen">// Transport of y-axis linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.yNegative.material, yNegative.'H+'.material);
+  <font color="red">connect</font>('H+'.yPositive.material, yPositive.'H+'.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.zNegative.mechanicalY, zNegative.'H+'.mechanicalY);
+  <font color="red">connect</font>('H+'.zPositive.mechanicalY, zPositive.'H+'.mechanicalY);
+  <font color="red">connect</font>('H+'.xNegative.mechanicalY, xNegative.'H+'.mechanicalY);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.xPositive.mechanicalY, xPositive.'H+'.mechanicalY);</textblock>
+
+  <font color="darkgreen">// Transport of z-axis linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.zNegative.material, zNegative.'H+'.material);
+  <font color="red">connect</font>('H+'.zPositive.material, zPositive.'H+'.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.xNegative.mechanicalZ, xNegative.'H+'.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.xPositive.mechanicalZ, xPositive.'H+'.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.yNegative.mechanicalZ, yNegative.'H+'.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.yPositive.mechanicalZ, yPositive.'H+'.mechanicalZ);</textblock>
+
+  <font color="darkgreen">// Thermal transport</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.xNegative.thermal, xNegative.'H+'.thermal);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.xPositive.thermal, xPositive.'H+'.thermal);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.yNegative.thermal, yNegative.'H+'.thermal);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.yPositive.thermal, yPositive.'H+'.thermal);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.zNegative.thermal, zNegative.'H+'.thermal);
+  <font color="red">connect</font>('H+'.zPositive.thermal, zPositive.'H+'.thermal);</textblock>
 
   <font color="darkgreen">// H2O</font>
   <font color="darkgreen">// ---</font>
   <font color="darkgreen">// Exchange</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.chemical, chemical.H2O);
-  <font color="red">connect</font>(H2O.joint.mechanical, joint.mechanical);
-  <font color="red">connect</font>(H2O.joint.heat, joint.heat);
+  <font color="red">connect</font>(H2O.common.mechanical, common.mechanical);
+  <font color="red">connect</font>(H2O.common.thermal, common.thermal);
   <font color="red">connect</font>(H2O.inert, phaseBoundary.inertD);</textblock>
-  <font color="darkgreen">// Material transport</font>
+  <font color="darkgreen">// Transport of x-axis linear momentum</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.material, xNegative.H2O.material);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.material, xPositive.H2O.material);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.material, yNegative.H2O.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.mechanicalX, yNegative.H2O.mechanicalX);
+  <font color="red">connect</font>(H2O.yPositive.mechanicalX, yPositive.H2O.mechanicalX);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.material, yPositive.H2O.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.mechanicalX, zNegative.H2O.mechanicalX);
+  <font color="red">connect</font>(H2O.zPositive.mechanicalX, zPositive.H2O.mechanicalX);</textblock>
+  <font color="darkgreen">// Transport of y-axis linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.material, yNegative.H2O.material);
+  <font color="red">connect</font>(H2O.yPositive.material, yPositive.H2O.material);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.material, zNegative.H2O.material);
-  <font color="red">connect</font>(H2O.zPositive.material, zPositive.H2O.material);</textblock>
-  <font color="darkgreen">// 1st transverse transport of linear momentum</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.mechanicalY, xNegative.H2O.mechanicalY);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.mechanicalY, zNegative.H2O.mechanicalY);
+  <font color="red">connect</font>(H2O.zPositive.mechanicalY, zPositive.H2O.mechanicalY);
+  <font color="red">connect</font>(H2O.xNegative.mechanicalY, xNegative.H2O.mechanicalY);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.mechanicalY, xPositive.H2O.mechanicalY);</textblock>
+
+  <font color="darkgreen">// Transport of z-axis linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.material, zNegative.H2O.material);
+  <font color="red">connect</font>(H2O.zPositive.material, zPositive.H2O.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.mechanicalZ, xNegative.H2O.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.mechanicalZ, xPositive.H2O.mechanicalZ);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.mechanicalZ, yNegative.H2O.mechanicalZ);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.mechanicalZ, yPositive.H2O.mechanicalZ);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.mechanicalX, zNegative.H2O.mechanicalX);
-  <font color="red">connect</font>(H2O.zPositive.mechanicalX, zPositive.H2O.mechanicalX);</textblock>
-  <font color="darkgreen">// 2nd transverse transport of linear momentum</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.mechanicalZ, xNegative.H2O.mechanicalZ);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.mechanicalZ, xPositive.H2O.mechanicalZ);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.mechanicalX, yNegative.H2O.mechanicalX);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.mechanicalX, yPositive.H2O.mechanicalX);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.mechanicalY, zNegative.H2O.mechanicalY);
-  <font color="red">connect</font>(H2O.zPositive.mechanicalY, zPositive.H2O.mechanicalY);</textblock>
   <font color="darkgreen">// Thermal transport</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.heat, xNegative.H2O.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.thermal, xNegative.H2O.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.heat, xPositive.H2O.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.thermal, xPositive.H2O.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.heat, yNegative.H2O.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.thermal, yNegative.H2O.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.heat, yPositive.H2O.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.thermal, yPositive.H2O.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.heat, zNegative.H2O.heat);
-  <font color="red">connect</font>(H2O.zPositive.heat, zPositive.H2O.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.thermal, zNegative.H2O.thermal);
+  <font color="red">connect</font>(H2O.zPositive.thermal, zPositive.H2O.thermal);</textblock>
 
-<textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>Ionomer;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Ionomer;
 </pre>
 <hr>
 
@@ -850,7 +890,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <tr><td>Boolean</td><td>reduceVel</td><td>true</td><td>Same velocity for all species</td></tr>
 <tr><td>Boolean</td><td>reduceTemp</td><td>true</td><td>Same temperature for all species</td></tr>
-<tr><td>Boolean</td><td>inclVel[3]</td><td>{true,false,false}</td><td>true, if each component of velocity is included</td></tr>
+<tr><td>Boolean</td><td>inclLin[3]</td><td>{true,false,false}</td><td>true, if each component of linear momentum is included</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Velocity</td></tr>
 <tr><td>Boolean</td><td>initVelX</td><td>true</td><td>Initialize the x component</td></tr>
@@ -884,7 +924,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_H2O_Liquid.html#FCSys.Subregions.Species.H2O.Liquid.Fixed">Species.H2O.Liquid.Fixed</a> H2O <font color="blue">if </font>inclH2O <font color="blue">constrainedby </font>
     Species.Species(
     <font color="blue">final </font>k=k,
-    <font color="blue">final </font>inclVel=inclVel,
+    <font color="blue">final </font>inclLin=inclLin,
     initMethX=<font color="blue">if </font>initVelX<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
         InitMethVelocity.Velocity,
     initMethY=<font color="blue">if </font>initVelY<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
@@ -903,63 +943,61 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="darkgreen">// ---</font>
   <font color="darkgreen">// Exchange</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.chemical, chemical.H2O);
-  <font color="red">connect</font>(H2O.joint.mechanical, joint.mechanical);
-  <font color="red">connect</font>(H2O.joint.heat, joint.heat);
+  <font color="red">connect</font>(H2O.common.mechanical, common.mechanical);
+  <font color="red">connect</font>(H2O.common.thermal, common.thermal);
   <font color="red">connect</font>(H2O.inert, phaseBoundary.inertD);</textblock>
-  <font color="darkgreen">// Material transport</font>
+  <font color="darkgreen">// Transport of x-axis linear momentum</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.material, xNegative.H2O.material);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.material, xPositive.H2O.material);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.material, yNegative.H2O.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.mechanicalX, yNegative.H2O.mechanicalX);
+  <font color="red">connect</font>(H2O.yPositive.mechanicalX, yPositive.H2O.mechanicalX);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.material, yPositive.H2O.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.mechanicalX, zNegative.H2O.mechanicalX);
+  <font color="red">connect</font>(H2O.zPositive.mechanicalX, zPositive.H2O.mechanicalX);</textblock>
+  <font color="darkgreen">// Transport of y-axis linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.material, yNegative.H2O.material);
+  <font color="red">connect</font>(H2O.yPositive.material, yPositive.H2O.material);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.material, zNegative.H2O.material);
-  <font color="red">connect</font>(H2O.zPositive.material, zPositive.H2O.material);</textblock>
-  <font color="darkgreen">// 1st transverse transport of linear momentum</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.mechanicalY, xNegative.H2O.mechanicalY);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.mechanicalY, zNegative.H2O.mechanicalY);
+  <font color="red">connect</font>(H2O.zPositive.mechanicalY, zPositive.H2O.mechanicalY);
+  <font color="red">connect</font>(H2O.xNegative.mechanicalY, xNegative.H2O.mechanicalY);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.mechanicalY, xPositive.H2O.mechanicalY);</textblock>
+
+  <font color="darkgreen">// Transport of z-axis linear momentum</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.material, zNegative.H2O.material);
+  <font color="red">connect</font>(H2O.zPositive.material, zPositive.H2O.material);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.mechanicalZ, xNegative.H2O.mechanicalZ);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.mechanicalZ, xPositive.H2O.mechanicalZ);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.mechanicalZ, yNegative.H2O.mechanicalZ);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.mechanicalZ, yPositive.H2O.mechanicalZ);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.mechanicalX, zNegative.H2O.mechanicalX);
-  <font color="red">connect</font>(H2O.zPositive.mechanicalX, zPositive.H2O.mechanicalX);</textblock>
-  <font color="darkgreen">// 2nd transverse transport of linear momentum</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.mechanicalZ, xNegative.H2O.mechanicalZ);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.mechanicalZ, xPositive.H2O.mechanicalZ);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.mechanicalX, yNegative.H2O.mechanicalX);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.mechanicalX, yPositive.H2O.mechanicalX);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.mechanicalY, zNegative.H2O.mechanicalY);
-  <font color="red">connect</font>(H2O.zPositive.mechanicalY, zPositive.H2O.mechanicalY);</textblock>
   <font color="darkgreen">// Thermal transport</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.heat, xNegative.H2O.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xNegative.thermal, xNegative.H2O.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.heat, xPositive.H2O.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.xPositive.thermal, xPositive.H2O.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.heat, yNegative.H2O.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yNegative.thermal, yNegative.H2O.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.heat, yPositive.H2O.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.yPositive.thermal, yPositive.H2O.thermal);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.heat, zNegative.H2O.heat);
-  <font color="red">connect</font>(H2O.zPositive.heat, zPositive.H2O.heat);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative.thermal, zNegative.H2O.thermal);
+  <font color="red">connect</font>(H2O.zPositive.thermal, zPositive.H2O.thermal);</textblock>
 
-<textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>Liquid;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Liquid;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  2 21:14:06 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  9 07:47:34 2013.
 </div>
 </body>
 </html>
