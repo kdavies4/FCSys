@@ -1,6 +1,6 @@
 Steps to release the FCSys library:
 
-1/3/13 KD
+1/9/13 KD
     1.  Update and run 00-find-quantities.sh to be sure that all quantities are
         used in the code.  Remove the unused ones from resources/quantities.xls
         and update Quantities.mo and resources/scripts/units.mos.
@@ -32,7 +32,7 @@ Steps to release the FCSys library:
 1/3/13 KD
     8.  Run 00-autoreplace.py on the code.
     9.  Add an entry to the list of revisions in package.mo.
-    10.  Commit the revisions to git.
+    10. Commit the revisions to git.
     11. Create a git tag for the release.
     12. Run 00-release.sh.  Browse the result to be sure that the proper files
         are included and that no undesired files are included.  If necessary,

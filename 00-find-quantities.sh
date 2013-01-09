@@ -3,7 +3,7 @@
 #
 # Kevin Davies, 7/18/12
 
-for s in Acceleration Amount AmountReciprocal AmountVolumic AmountVolumicRate Angle Angle2 Area Capacitance ConductanceElectrical Current CurrentAreic CurrentRate Energy Fluidity Force Frequency Inductance Length LengthSpecific MagneticFlux MagneticFluxAreic MagneticFluxReciprocal Mass MassSpecific MomentumAngular Number NumberAbsolute NumberRate Permeability Permittivity PermittivityReciprocal Potential PotentialAbsolute PotentialPerWavenumber PotentialRate PotentialReciprocal Power PowerArea PowerAreic PowerAreicPerPotential4 PowerRadiant Pressure PressureAbsolute PressureRate Resistance ResistanceElectrical Resistivity Time Velocity Velocity2 Volume VolumeRate VolumeSpecific VolumeSpecificAbsolute Wavenumber
+for s in Number NumberAbsolute AmountReciprocal NumberRate Angle MagneticFluxReciprocal Wavenumber Frequency Angle2 Length Permeability Force Fluidity Resistivity Acceleration LengthSpecific Velocity Acceleration Area MagneticFlux MomentumAngular PowerRadiant PotentialRate Potential PotentialAbsolute PotentialRate ResistanceElectrical Inductance Energy Power Velocity2 Volume PotentialPerWavenumber PermittivityReciprocal VolumeSpecific VolumeSpecificAbsolute VolumeSpecific VolumeRate PowerArea Mass PowerAreicPerPotential4 MagneticFluxAreic PressureRate Pressure PressureAbsolute PressureRate MassSpecific PowerAreic Amount CurrentAreic AmountVolumicRate CurrentRate AmountVolumic Current CurrentRate ConductanceElectrical Capacitance Permittivity NumberRate Time Resistance Fusivity
 do
     grep --color "Q.$s " --exclude WorkInProgress.mo --exclude Quantities.mo *.mo
     read dummy

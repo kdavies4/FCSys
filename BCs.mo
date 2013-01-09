@@ -16,9 +16,9 @@ package BCs "Models for boundary conditions"
 
     model FaceBC "<html>Test the BCs for the face of a subregion</html>"
       extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
 
-      FCSys.BCs.FaceBus.Subregion subregionFaceBC(gas(inclH2O=true))
+      FCSys.BCs.FaceBus.Subregion subregionFaceBC(gas(inclH2O=true, H2O(
+              redeclare FCSys.BCs.Face.Material.Current materialBC)))
         annotation (Placement(transformation(extent={{-10,14},{10,34}})));
       Subregions.Subregion subregion(
         L={1,1,1}*U.cm,
@@ -29,9 +29,7 @@ package BCs "Models for boundary conditions"
         inclLinX=false,
         inclLinY=true,
         graphite(inclC=true, C(V_IC=0.5*U.cm^3)),
-        gas(
-          inclH2O=true,
-          H2O(
+        gas(inclH2O=true, H2O(
             xNegative(
               thermoOpt=ThermoOpt.ClosedAdiabatic,
               inviscidY=true,
@@ -40,13 +38,9 @@ package BCs "Models for boundary conditions"
               thermoOpt=ThermoOpt.ClosedAdiabatic,
               inviscidY=true,
               inviscidZ=true),
-            zNegative(inviscidX=false, inviscidY=false),
-            zPositive(inviscidX=false, inviscidY=false),
-            yPositive(thermoOpt=ThermoOpt.OpenDiabatic),
-            initMethPartNum=InitMethScalar.PotentialElectrochemical,
-            mu_IC=-298685),
-          inclH2=false,
-          inclO2=false))
+            zNegative(inviscidX=true, inviscidY=true),
+            zPositive(inviscidX=true, inviscidY=true),
+            yPositive(thermoOpt=ThermoOpt.OpenDiabatic))))
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
       inner BCs.Defaults defaults
@@ -70,29 +64,29 @@ package BCs "Models for boundary conditions"
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
 
-      FCSys.BCs.FaceBus.Phases.Phase phaseFaceBC(inclH2O=true, H2O(thermoOpt=
+      FCSys.BCs.FaceBus.Phases.Gas phaseFaceBC(inclH2O=true, H2O(thermoOpt=
               ThermoOpt.OpenDiabatic, redeclare FCSys.BCs.Face.Material.Current
             materialBC))
         annotation (Placement(transformation(extent={{-10,14},{10,34}})));
-      FCSys.Subregions.Phases.Phase subregion(
+      FCSys.Subregions.Phases.Gas subregion(
         inclReact=false,
         inclH2=false,
         inclH2O=true,
         H2O(
           xNegative(
             thermoOpt=ThermoOpt.ClosedAdiabatic,
-            slipY=false,
-            slipZ=false),
+            inviscidY=true,
+            inviscidZ=true),
           xPositive(
             thermoOpt=ThermoOpt.ClosedAdiabatic,
-            slipY=false,
-            slipZ=false),
+            inviscidY=true,
+            inviscidZ=true),
           yPositive(thermoOpt=ThermoOpt.OpenDiabatic),
-          zNegative(slipX=false, slipY=false),
-          zPositive(slipX=false, slipY=false)))
+          zNegative(inviscidX=true, inviscidY=true),
+          zPositive(inviscidX=true, inviscidY=true)))
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      inner Defaults defaults
+      inner BCs.Defaults defaults
         annotation (Placement(transformation(extent={{30,30},{50,50}})));
     equation
       connect(subregion.yPositive, phaseFaceBC.face) annotation (Line(
@@ -133,27 +127,27 @@ package BCs "Models for boundary conditions"
         gas(inclH2O=false),
         graphite('incle-'=true,'e-'(
             xNegative(
-              slipY=false,
-              slipZ=false,
+              inviscidY=true,
+              inviscidZ=true,
               thermoOpt=ThermoOpt.ClosedAdiabatic),
             xPositive(
-              slipY=false,
-              slipZ=false,
+              inviscidY=true,
+              inviscidZ=true,
               thermoOpt=ThermoOpt.OpenDiabatic),
-            yNegative(slipZ=false, slipX=false),
-            yPositive(slipZ=false, slipX=false),
-            zNegative(slipX=false, slipY=false),
-            zPositive(slipX=false, slipY=false))))
+            yNegative(inviscidZ=true, inviscidX=true),
+            yPositive(inviscidZ=true, inviscidX=true),
+            zNegative(inviscidX=true, inviscidY=true),
+            zPositive(inviscidX=true, inviscidY=true))))
         annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
 
-      inner Defaults defaults(T=350*U.K)
+      inner BCs.Defaults defaults(T=350*U.K)
         annotation (Placement(transformation(extent={{60,40},{80,60}})));
     equation
       connect(ground.p, 'Adapte-'.pin) annotation (Line(
           points={{40,20},{20,20},{20,4},{10,4}},
           color={0,0,255},
           smooth=Smooth.None));
-      connect(fixedTemperature.port, 'Adapte-'.heatPort) annotation (Line(
+      connect(fixedTemperature.port, 'Adapte-'.port) annotation (Line(
           points={{30,-20},{20,-20},{20,-4},{10,-4}},
           color={191,0,0},
           smooth=Smooth.None));
@@ -190,24 +184,25 @@ package BCs "Models for boundary conditions"
         annotation (Placement(transformation(extent={{40,70},{60,90}})));
       FCSys.Subregions.Subregion subregion(
         L={1,1,1}*U.cm,
-        inclH2=true,
-        inclH2O=false,
         inclReact=false,
         inclYFaces=false,
         inclZFaces=false,
-        H2(
-          xPositive(
-            thermoOpt=ThermoOpt.OpenDiabatic,
-            slipY=false,
-            slipZ=false),
-          initMethPartNum=FCSys.Subregions.BaseClasses.InitMethScalar.None,
-          xNegative(
-            final thermoOpt=ThermoOpt.ClosedAdiabatic,
-            slipY=false,
-            slipZ=false)))
+        gas(
+          inclH2=true,
+          inclH2O=false,
+          H2(
+            xPositive(
+              thermoOpt=ThermoOpt.OpenDiabatic,
+              inviscidY=true,
+              inviscidZ=true),
+            initMethPartNum=InitMethScalar.None,
+            xNegative(
+              final thermoOpt=ThermoOpt.ClosedAdiabatic,
+              inviscidY=true,
+              inviscidZ=true))))
         annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
 
-      inner Defaults defaults(analysis=true, T=293.15*U.K)
+      inner BCs.Defaults defaults(analysis=true, T=293.15*U.K)
         annotation (Placement(transformation(extent={{70,70},{90,90}})));
 
     equation
@@ -242,25 +237,26 @@ package BCs "Models for boundary conditions"
         annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
       FCSys.Subregions.Subregion subregion(
         L={1,1,1}*U.cm,
-        inclH2=true,
-        inclH2O=false,
         inclReact=false,
+        inclXFaces=true,
         inclYFaces=false,
         inclZFaces=false,
-        inclXFaces=true,
         inclLinX=true,
-        H2(
-          xNegative(
-            slipY=false,
-            slipZ=false,
-            thermoOpt=ThermoOpt.OpenDiabatic),
-          xPositive(
-            slipY=false,
-            slipZ=false,
-            final thermoOpt=ThermoOpt.ClosedAdiabatic),
-          setVelX=true))
+        gas(
+          inclH2=true,
+          inclH2O=false,
+          H2(
+            xNegative(
+              inviscidY=true,
+              inviscidZ=true,
+              thermoOpt=ThermoOpt.OpenDiabatic),
+            xPositive(
+              inviscidY=true,
+              inviscidZ=true,
+              final thermoOpt=ThermoOpt.ClosedAdiabatic),
+            setVelX=true)))
         annotation (Placement(transformation(extent={{20,-10},{40,10}})));
-      inner Defaults defaults(analysis=true, T=293.15*U.K)
+      inner BCs.Defaults defaults(analysis=true, T=293.15*U.K)
         annotation (Placement(transformation(extent={{-60,70},{-40,90}})));
 
     protected
@@ -270,14 +266,14 @@ package BCs "Models for boundary conditions"
     equation
 
       connect(xNegative.H2.material, volume.face.material) annotation (Line(
-          points={{5.55112e-16,5.55112e-16},{-6,5.55112e-16},{-6,0},{-10,0},{
-              -10,6.10623e-16},{-20,6.10623e-16}},
+          points={{5.55112e-16,5.55112e-16},{-6,5.55112e-16},{-6,0},{-10,0},{-10,
+              6.10623e-16},{-20,6.10623e-16}},
           color={127,127,127},
           smooth=Smooth.None,
           thickness=0.5));
       connect(xNegative.H2.thermal, volume.face.thermal) annotation (Line(
-          points={{5.55112e-16,5.55112e-16},{-6,5.55112e-16},{-6,0},{-10,0},{
-              -10,6.10623e-16},{-20,6.10623e-16}},
+          points={{5.55112e-16,5.55112e-16},{-6,5.55112e-16},{-6,0},{-10,0},{-10,
+              6.10623e-16},{-20,6.10623e-16}},
           color={127,127,127},
           smooth=Smooth.None,
           thickness=0.5));
@@ -426,25 +422,21 @@ package BCs "Models for boundary conditions"
       annotation (
         Documentation(info="<html><p>Note that transverse linear momentum is not included.</p>
   </html>"),
-        Icon(graphics={
-            Line(
-              points={{0,40},{0,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{0,40},{100,40}},
-              color={0,127,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{100,-40}},
-              color={191,0,0},
-              smooth=Smooth.None)}),
+        Icon(graphics={Line(
+                  points={{0,40},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{0,40},{100,40}},
+                  color={0,127,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{100,-40}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}),
         Diagram(graphics));
     end AdaptFluid;
 
@@ -481,26 +473,22 @@ package BCs "Models for boundary conditions"
           color={191,0,0},
           smooth=Smooth.None));
 
-      annotation (Icon(graphics={
-            Line(
-              points={{0,40},{0,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,40},{100,40}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{100,-40}},
-              color={191,0,0},
-              smooth=Smooth.None)}), Diagram(graphics));
+      annotation (Icon(graphics={Line(
+                  points={{0,40},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,40},{100,40}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{100,-40}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}), Diagram(graphics));
     end 'AdaptSubregione-';
 
     model 'AdaptBuse-'
@@ -542,26 +530,22 @@ package BCs "Models for boundary conditions"
           color={191,0,0},
           smooth=Smooth.None));
 
-      annotation (Icon(graphics={
-            Line(
-              points={{0,40},{0,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,40},{100,40}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{100,-40}},
-              color={191,0,0},
-              smooth=Smooth.None)}), Diagram(graphics));
+      annotation (Icon(graphics={Line(
+                  points={{0,40},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,40},{100,40}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{100,-40}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}), Diagram(graphics));
     end 'AdaptBuse-';
 
     model 'Adapte-'
@@ -603,25 +587,21 @@ package BCs "Models for boundary conditions"
       annotation (
         Documentation(info="<html><p>Note that transverse linear momentum is not included.</p>
   </html>"),
-        Icon(graphics={
-            Line(
-              points={{0,40},{0,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{0,40},{100,40}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{100,-40}},
-              color={191,0,0},
-              smooth=Smooth.None)}),
+        Icon(graphics={Line(
+                  points={{0,40},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{0,40},{100,40}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{100,-40}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}),
         Diagram(graphics));
     end 'Adapte-';
 
@@ -660,25 +640,21 @@ package BCs "Models for boundary conditions"
             points={{10,-4},{60,-4},{60,-40},{100,-40}},
             color={191,0,0},
             smooth=Smooth.None));
-        annotation (Icon(graphics={
-              Line(
-                points={{0,40},{0,-40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash,
-                thickness=0.5),
-              Line(
-                points={{0,0},{-100,0}},
-                color={127,127,127},
-                smooth=Smooth.None),
-              Line(
-                points={{0,40},{100,40}},
-                color={0,127,255},
-                smooth=Smooth.None),
-              Line(
-                points={{0,-40},{100,-40}},
-                color={191,0,0},
-                smooth=Smooth.None)}), Diagram(graphics));
+        annotation (Icon(graphics={Line(
+                      points={{0,40},{0,-40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash,
+                      thickness=0.5),Line(
+                      points={{0,0},{-100,0}},
+                      color={127,127,127},
+                      smooth=Smooth.None),Line(
+                      points={{0,40},{100,40}},
+                      color={0,127,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,-40},{100,-40}},
+                      color={191,0,0},
+                      smooth=Smooth.None)}), Diagram(graphics));
       end PartialAdaptBus;
     end BaseClasses;
   end Adapters;
@@ -3849,9 +3825,9 @@ boundary condition</a> model.
       // option, e.g.,
       //     enable=axis <> Axis.x.
       // Therefore, the values of the enumerations are specified numerically.
-      replaceable Mechanical.Velocity mechanicalXBC if axis <> Axis.x and not
-        inviscidX constrainedby Mechanical.BaseClasses.PartialBC "Condition"
-        annotation (
+      replaceable Mechanical.Velocity mechanicalX if axis <> Axis.x and not
+        inviscidX constrainedby Mechanical.BaseClasses.PartialBC
+        "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
           group="X-axis linear momentum",
@@ -3868,9 +3844,9 @@ boundary condition</a> model.
           group="Y-axis linear momentum",
           enable=axis <> 2,
           __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalYBC if axis <> Axis.y and not
-        inviscidY constrainedby Mechanical.BaseClasses.PartialBC "Condition"
-        annotation (
+      replaceable Mechanical.Velocity mechanicalY if axis <> Axis.y and not
+        inviscidY constrainedby Mechanical.BaseClasses.PartialBC
+        "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
           group="Y-axis linear momentum",
@@ -3887,9 +3863,9 @@ boundary condition</a> model.
           group="Z-axis linear momentum",
           enable=axis <> 3,
           __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalZBC if axis <> Axis.z and not
-        inviscidZ constrainedby Mechanical.BaseClasses.PartialBC "Condition"
-        annotation (
+      replaceable Mechanical.Velocity mechanicalZ if axis <> Axis.z and not
+        inviscidZ constrainedby Mechanical.BaseClasses.PartialBC
+        "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
           group="Z-axis linear momentum",
@@ -3902,25 +3878,25 @@ boundary condition</a> model.
         final inviscidX=inviscidX,
         final inviscidY=inviscidY,
         final inviscidZ=inviscidZ)
-        "Single-species connector for linear momentum and heat" annotation (
-          Placement(transformation(extent={{-10,-50},{10,-30}}),
+        "Single-species connector for material, linear momentum, and heat"
+        annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
 
     equation
       // Material
-      connect(materialBC.material, face.material) annotation (Line(
+      connect(material.material, face.material) annotation (Line(
           points={{-60,-8},{-60,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
 
       // X-axis linear momentum
-      connect(mechanicalXBC.mechanical, face.mechanicalX) annotation (Line(
+      connect(mechanicalX.mechanical, face.mechanicalX) annotation (Line(
           points={{-30,-8},{-30,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(u.mechanicalX, mechanicalXBC.u) annotation (Line(
+      connect(u.mechanicalX, mechanicalX.u) annotation (Line(
           points={{5.55112e-16,40},{5.55112e-16,20},{-30,20},{-30,6.66134e-16}},
 
           color={0,0,127},
@@ -3930,14 +3906,14 @@ boundary condition</a> model.
           extent={{-6,3},{-6,3}}));
 
       // Y-axis linear momentum
-      connect(mechanicalYBC.mechanical, face.mechanicalY) annotation (Line(
+      connect(mechanicalY.mechanical, face.mechanicalY) annotation (Line(
           points={{6.10623e-16,-8},{6.10623e-16,-20},{0,-20},{0,-40},{
               5.55112e-16,-40}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
 
-      connect(u.mechanicalY, mechanicalYBC.u) annotation (Line(
+      connect(u.mechanicalY, mechanicalY.u) annotation (Line(
           points={{5.55112e-16,40},{5.55112e-16,20},{6.10623e-16,20},{
               6.10623e-16,6.66134e-16}},
           color={0,0,127},
@@ -3947,12 +3923,12 @@ boundary condition</a> model.
           extent={{-6,3},{-6,3}}));
 
       // Z-axis linear momentum
-      connect(mechanicalZBC.mechanical, face.mechanicalZ) annotation (Line(
+      connect(mechanicalZ.mechanical, face.mechanicalZ) annotation (Line(
           points={{30,-8},{30,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(u.mechanicalZ, mechanicalZBC.u) annotation (Line(
+      connect(u.mechanicalZ, mechanicalZ.u) annotation (Line(
           points={{5.55112e-16,40},{5.55112e-16,20},{30,20},{30,6.66134e-16}},
           color={0,0,127},
           smooth=Smooth.None), Text(
@@ -3961,7 +3937,7 @@ boundary condition</a> model.
           extent={{-6,3},{-6,3}}));
 
       // Heat
-      connect(thermalBC.thermal, face.thermal) annotation (Line(
+      connect(thermal.thermal, face.thermal) annotation (Line(
           points={{60,-8},{60,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
           color={127,127,127},
           pattern=LinePattern.None,
@@ -3983,8 +3959,9 @@ boundary condition</a> model.
           compact=true,
           group="Y-axis linear momentum",
           __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalYBC if not inviscidY
-        constrainedby Mechanical.BaseClasses.PartialBC "Condition" annotation (
+      replaceable Mechanical.Velocity mechanicalY if not inviscidY
+        constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
+        annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
           group="Y-axis linear momentum",
@@ -4000,8 +3977,9 @@ boundary condition</a> model.
           compact=true,
           group="Z-axis linear momentum",
           __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalZBC if not inviscidZ
-        constrainedby Mechanical.BaseClasses.PartialBC "Condition" annotation (
+      replaceable Mechanical.Velocity mechanicalZ if not inviscidZ
+        constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
+        annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
           group="Z-axis linear momentum",
@@ -4013,27 +3991,27 @@ boundary condition</a> model.
         final thermoOpt=thermoOpt,
         final inviscidY=inviscidY,
         final inviscidZ=inviscidZ)
-        "Single-species connector for linear momentum and heat" annotation (
-          Placement(transformation(extent={{-10,-50},{10,-30}}),
+        "Single-species connector for material, linear momentum, and heat"
+        annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
 
     equation
       // Material
-      connect(materialBC.material, face.material) annotation (Line(
+      connect(material.material, face.material) annotation (Line(
           points={{-60,-8},{-60,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
 
       // Y-axis linear momentum
-      connect(mechanicalYBC.mechanical, face.mechanicalY) annotation (Line(
+      connect(mechanicalY.mechanical, face.mechanicalY) annotation (Line(
           points={{6.10623e-16,-8},{6.10623e-16,-20},{0,-20},{0,-40},{
               5.55112e-16,-40}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
 
-      connect(u.mechanicalY, mechanicalYBC.u) annotation (Line(
+      connect(u.mechanicalY, mechanicalY.u) annotation (Line(
           points={{5.55112e-16,40},{5.55112e-16,20},{6.10623e-16,20},{
               6.10623e-16,6.66134e-16}},
           color={0,0,127},
@@ -4043,12 +4021,12 @@ boundary condition</a> model.
           extent={{-6,3},{-6,3}}));
 
       // Z-axis linear momentum
-      connect(mechanicalZBC.mechanical, face.mechanicalZ) annotation (Line(
+      connect(mechanicalZ.mechanical, face.mechanicalZ) annotation (Line(
           points={{30,-8},{30,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(u.mechanicalZ, mechanicalZBC.u) annotation (Line(
+      connect(u.mechanicalZ, mechanicalZ.u) annotation (Line(
           points={{5.55112e-16,40},{5.55112e-16,20},{30,20},{30,6.66134e-16}},
           color={0,0,127},
           smooth=Smooth.None), Text(
@@ -4057,7 +4035,7 @@ boundary condition</a> model.
           extent={{-6,3},{-6,3}}));
 
       // Heat
-      connect(thermalBC.thermal, face.thermal) annotation (Line(
+      connect(thermal.thermal, face.thermal) annotation (Line(
           points={{60,-8},{60,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
           color={127,127,127},
           pattern=LinePattern.None,
@@ -4078,8 +4056,9 @@ boundary condition</a> model.
           compact=true,
           group="Z-axis linear momentum",
           __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalZBC if not inviscidZ
-        constrainedby Mechanical.BaseClasses.PartialBC "Condition" annotation (
+      replaceable Mechanical.Velocity mechanicalZ if not inviscidZ
+        constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
+        annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
           group="Z-axis linear momentum",
@@ -4096,8 +4075,9 @@ boundary condition</a> model.
           group="X-axis linear momentum",
           __Dymola_descriptionLabel=true));
 
-      replaceable Mechanical.Velocity mechanicalXBC if not inviscidX
-        constrainedby Mechanical.BaseClasses.PartialBC "Condition" annotation (
+      replaceable Mechanical.Velocity mechanicalX if not inviscidX
+        constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
+        annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
           group="X-axis linear momentum",
@@ -4109,25 +4089,25 @@ boundary condition</a> model.
         final thermoOpt=thermoOpt,
         final inviscidX=inviscidX,
         final inviscidZ=inviscidZ)
-        "Single-species connector for linear momentum and heat" annotation (
-          Placement(transformation(extent={{-10,-50},{10,-30}}),
+        "Single-species connector for material, linear momentum, and heat"
+        annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
 
     equation
       // Material
-      connect(materialBC.material, face.material) annotation (Line(
+      connect(material.material, face.material) annotation (Line(
           points={{-60,-8},{-60,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
 
       // Z-axis linear momentum
-      connect(mechanicalZBC.mechanical, face.mechanicalZ) annotation (Line(
+      connect(mechanicalZ.mechanical, face.mechanicalZ) annotation (Line(
           points={{30,-8},{30,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(u.mechanicalZ, mechanicalZBC.u) annotation (Line(
+      connect(u.mechanicalZ, mechanicalZ.u) annotation (Line(
           points={{5.55112e-16,40},{5.55112e-16,20},{30,20},{30,6.66134e-16}},
           color={0,0,127},
           smooth=Smooth.None), Text(
@@ -4136,12 +4116,12 @@ boundary condition</a> model.
           extent={{-6,3},{-6,3}}));
 
       // X-axis linear momentum
-      connect(mechanicalXBC.mechanical, face.mechanicalX) annotation (Line(
+      connect(mechanicalX.mechanical, face.mechanicalX) annotation (Line(
           points={{-30,-8},{-30,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(u.mechanicalX, mechanicalXBC.u) annotation (Line(
+      connect(u.mechanicalX, mechanicalX.u) annotation (Line(
           points={{5.55112e-16,40},{5.55112e-16,20},{-30,20},{-30,6.66134e-16}},
 
           color={0,0,127},
@@ -4151,7 +4131,7 @@ boundary condition</a> model.
           extent={{-6,3},{-6,3}}));
 
       // Heat
-      connect(thermalBC.thermal, face.thermal) annotation (Line(
+      connect(thermal.thermal, face.thermal) annotation (Line(
           points={{60,-8},{60,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
           color={127,127,127},
           pattern=LinePattern.None,
@@ -4171,8 +4151,9 @@ boundary condition</a> model.
           compact=true,
           group="X-axis linear momentum",
           __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalXBC if not inviscidX
-        constrainedby Mechanical.BaseClasses.PartialBC "Condition" annotation (
+      replaceable Mechanical.Velocity mechanicalX if not inviscidX
+        constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
+        annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
           group="X-axis linear momentum",
@@ -4188,8 +4169,9 @@ boundary condition</a> model.
           compact=true,
           group="Y-axis linear momentum",
           __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalYBC if not inviscidY
-        constrainedby Mechanical.BaseClasses.PartialBC "Condition" annotation (
+      replaceable Mechanical.Velocity mechanicalY if not inviscidY
+        constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
+        annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
           group="Y-axis linear momentum",
@@ -4201,25 +4183,25 @@ boundary condition</a> model.
         final thermoOpt=thermoOpt,
         final inviscidX=inviscidX,
         final inviscidY=inviscidY)
-        "Single-species connector for linear momentum and heat" annotation (
-          Placement(transformation(extent={{-10,-50},{10,-30}}),
+        "Single-species connector for material, linear momentum, and heat"
+        annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
 
     equation
       // Material
-      connect(materialBC.material, face.material) annotation (Line(
+      connect(material.material, face.material) annotation (Line(
           points={{-60,-8},{-60,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
 
       // X-axis linear momentum
-      connect(mechanicalXBC.mechanical, face.mechanicalX) annotation (Line(
+      connect(mechanicalX.mechanical, face.mechanicalX) annotation (Line(
           points={{-30,-8},{-30,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(u.mechanicalX, mechanicalXBC.u) annotation (Line(
+      connect(u.mechanicalX, mechanicalX.u) annotation (Line(
           points={{5.55112e-16,40},{5.55112e-16,20},{-30,20},{-30,6.66134e-16}},
 
           color={0,0,127},
@@ -4229,14 +4211,14 @@ boundary condition</a> model.
           extent={{-6,3},{-6,3}}));
 
       // Y-axis linear momentum
-      connect(mechanicalYBC.mechanical, face.mechanicalY) annotation (Line(
+      connect(mechanicalY.mechanical, face.mechanicalY) annotation (Line(
           points={{6.10623e-16,-8},{6.10623e-16,-20},{0,-20},{0,-40},{
               5.55112e-16,-40}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
 
-      connect(u.mechanicalY, mechanicalYBC.u) annotation (Line(
+      connect(u.mechanicalY, mechanicalY.u) annotation (Line(
           points={{5.55112e-16,40},{5.55112e-16,20},{6.10623e-16,20},{
               6.10623e-16,6.66134e-16}},
           color={0,0,127},
@@ -4246,7 +4228,7 @@ boundary condition</a> model.
           extent={{-6,3},{-6,3}}));
 
       // Heat
-      connect(thermalBC.thermal, face.thermal) annotation (Line(
+      connect(thermal.thermal, face.thermal) annotation (Line(
           points={{60,-8},{60,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
           color={127,127,127},
           pattern=LinePattern.None,
@@ -4409,14 +4391,15 @@ boundary condition</a> model.
         extends FCSys.BaseClasses.Icons.BCs.Single;
 
         parameter ThermoOpt thermoOpt=ThermoOpt.OpenDiabatic
-          "Thermodynamic options" annotation (
+          "Options for material and thermal subconnectors" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Assumptions",compact=true));
 
         // Material
         replaceable Material.Density materialBC if thermoOpt == ThermoOpt.OpenDiabatic
-          constrainedby Material.BaseClasses.PartialBC "Condition" annotation (
+          constrainedby Material.BaseClasses.PartialBC "Type of condition"
+          annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             group="Material",
@@ -4426,7 +4409,8 @@ boundary condition</a> model.
 
         // Heat
         replaceable Thermal.Temperature thermalBC if thermoOpt <> ThermoOpt.ClosedAdiabatic
-          constrainedby Thermal.BaseClasses.PartialBC "Condition" annotation (
+          constrainedby Thermal.BaseClasses.PartialBC "Type of condition"
+          annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             group="Heat",
@@ -4523,7 +4507,7 @@ boundary condition</a> model.
     extends Modelica.Icons.Package;
 
     model Subregion
-      "<html>BC for a face of a <a href=\"modelica://FCSys.Regions.Region\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with efforts by default</html>"
+      "<html>BC for faces of a <a href=\"modelica://FCSys.Regions.Region\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with efforts by default</html>"
       extends FCSys.BaseClasses.Icons.BCs.Double;
 
       parameter Axis axis=Axis.x "Axis normal to the face";
@@ -4619,7 +4603,7 @@ boundary condition</a> model.
     end Subregion;
 
     model SubregionFlow
-      "<html>BC for a face of a <a href=\"modelica://FCSys.Regions.Region\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with flows by default</html>"
+      "<html>BC for faces of a <a href=\"modelica://FCSys.Regions.Region\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with flows by default</html>"
       extends FCSys.BCs.FaceBusDifferential.Subregion(
         gas(
           H2(
@@ -4727,7 +4711,7 @@ boundary condition</a> model.
     end SubregionFlow;
 
     model SubregionClosed
-      "<html>BC for a face of a <a href=\"modelica://FCSys.Regions.Region\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with efforts except closed by default</html>"
+      "<html>BC for faces of a <a href=\"modelica://FCSys.Regions.Region\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with efforts except closed by default</html>"
       extends FCSys.BCs.FaceBusDifferential.Subregion(
         gas(
           H2(redeclare replaceable FaceDifferential.Material.Current materialBC),
@@ -4754,7 +4738,7 @@ boundary condition</a> model.
     end SubregionClosed;
 
     model SubregionClosedAdiabatic
-      "<html>BC for a face of a <a href=\"modelica://FCSys.Regions.Region\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with flows except zero shear velocities by default</html>"
+      "<html>BC for faces of a <a href=\"modelica://FCSys.Regions.Region\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with flows except zero shear velocities by default</html>"
       extends FCSys.BCs.FaceBusDifferential.Subregion(
         gas(
           H2(redeclare replaceable FaceDifferential.Material.Current materialBC,
@@ -4791,7 +4775,7 @@ boundary condition</a> model.
     end SubregionClosedAdiabatic;
 
     model SubregionAdiabatic
-      "<html>BC for a face of a <a href=\"modelica://FCSys.Regions.Region\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with efforts except adiabatic by default</html>"
+      "<html>BC for faces of a <a href=\"modelica://FCSys.Regions.Region\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with efforts except adiabatic by default</html>"
       extends FCSys.BCs.FaceBusDifferential.Subregion(
         gas(
           H2(redeclare replaceable FaceDifferential.Thermal.HeatFlowRate
@@ -5238,7 +5222,7 @@ boundary condition</a> model.
       // option, e.g.,
       //     enable=axis <> Axis.x.
       // Therefore, the values of the enumerations are specified numerically.
-      replaceable Mechanical.Velocity mechanicalXBC if axis <> Axis.x and not
+      replaceable Mechanical.Velocity mechanicalX if axis <> Axis.x and not
         inviscidX constrainedby Mechanical.BaseClasses.PartialBC
         "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
@@ -5257,7 +5241,7 @@ boundary condition</a> model.
           group="Y-axis linear momentum",
           enable=axis <> 2,
           __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalYBC if axis <> Axis.y and not
+      replaceable Mechanical.Velocity mechanicalY if axis <> Axis.y and not
         inviscidY constrainedby Mechanical.BaseClasses.PartialBC
         "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
@@ -5277,7 +5261,7 @@ boundary condition</a> model.
           enable=axis <> 3,
           __Dymola_descriptionLabel=true));
 
-      replaceable Mechanical.Velocity mechanicalZBC if axis <> Axis.z and not
+      replaceable Mechanical.Velocity mechanicalZ if axis <> Axis.z and not
         inviscidZ constrainedby Mechanical.BaseClasses.PartialBC
         "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
@@ -5305,29 +5289,29 @@ boundary condition</a> model.
 
     equation
       // Material
-      connect(materialBC.negative, negative.material) annotation (Line(
+      connect(material.negative, negative.material) annotation (Line(
           points={{-70,10},{-80,10},{-80,-30},{-100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(materialBC.positive, positive.material) annotation (Line(
+      connect(material.positive, positive.material) annotation (Line(
           points={{-50,10},{90,10},{90,-30},{100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
 
       // X-axis linear momentum
-      connect(mechanicalXBC.negative, negative.mechanicalX) annotation (Line(
+      connect(mechanicalX.negative, negative.mechanicalX) annotation (Line(
           points={{-40,6.10623e-16},{-80,6.10623e-16},{-80,-30},{-100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(mechanicalXBC.positive, positive.mechanicalX) annotation (Line(
+      connect(mechanicalX.positive, positive.mechanicalX) annotation (Line(
           points={{-20,6.10623e-16},{90,6.10623e-16},{90,-30},{100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(u.mechanicalX, mechanicalXBC.u) annotation (Line(
+      connect(u.mechanicalX, mechanicalX.u) annotation (Line(
           points={{5.55112e-16,40},{0,40},{0,20},{-30,20},{-30,4}},
           color={0,0,127},
           smooth=Smooth.None), Text(
@@ -5336,17 +5320,17 @@ boundary condition</a> model.
           extent={{-6,3},{-6,3}}));
 
       // Y-axis linear momentum
-      connect(mechanicalYBC.negative, negative.mechanicalY) annotation (Line(
+      connect(mechanicalY.negative, negative.mechanicalY) annotation (Line(
           points={{-10,-10},{-80,-10},{-80,-30},{-100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(mechanicalYBC.positive, positive.mechanicalY) annotation (Line(
+      connect(mechanicalY.positive, positive.mechanicalY) annotation (Line(
           points={{10,-10},{90,-10},{90,-30},{100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(u.mechanicalY, mechanicalYBC.u) annotation (Line(
+      connect(u.mechanicalY, mechanicalY.u) annotation (Line(
           points={{5.55112e-16,40},{5.55112e-16,10},{6.10623e-16,10},{
               6.10623e-16,-6}},
           color={0,0,127},
@@ -5356,17 +5340,17 @@ boundary condition</a> model.
           extent={{-6,3},{-6,3}}));
 
       // Z-axis linear momentum
-      connect(mechanicalZBC.negative, negative.mechanicalZ) annotation (Line(
+      connect(mechanicalZ.negative, negative.mechanicalZ) annotation (Line(
           points={{20,-20},{-80,-20},{-80,-30},{-100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(mechanicalZBC.positive, positive.mechanicalZ) annotation (Line(
+      connect(mechanicalZ.positive, positive.mechanicalZ) annotation (Line(
           points={{40,-20},{90,-20},{90,-30},{100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(u.mechanicalZ, mechanicalZBC.u) annotation (Line(
+      connect(u.mechanicalZ, mechanicalZ.u) annotation (Line(
           points={{5.55112e-16,40},{0,40},{0,20},{30,20},{30,-16}},
           color={0,0,127},
           smooth=Smooth.None), Text(
@@ -5375,12 +5359,12 @@ boundary condition</a> model.
           extent={{-6,3},{-6,3}}));
 
       // Heat
-      connect(thermalBC.negative, negative.thermal) annotation (Line(
+      connect(thermal.negative, negative.thermal) annotation (Line(
           points={{50,-30},{-26,-30},{-26,-30},{-100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(thermalBC.positive, positive.thermal) annotation (Line(
+      connect(thermal.positive, positive.thermal) annotation (Line(
           points={{70,-30},{86,-30},{86,-30},{100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
@@ -5401,7 +5385,7 @@ boundary condition</a> model.
           compact=true,
           group="Y-axis linear momentum",
           __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalYBC if not inviscidY
+      replaceable Mechanical.Velocity mechanicalY if not inviscidY
         constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
         annotation (
         __Dymola_choicesFromPackage=true,
@@ -5419,7 +5403,7 @@ boundary condition</a> model.
           compact=true,
           group="Z-axis linear momentum",
           __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalZBC if not inviscidZ
+      replaceable Mechanical.Velocity mechanicalZ if not inviscidZ
         constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
         annotation (
         __Dymola_choicesFromPackage=true,
@@ -5445,29 +5429,29 @@ boundary condition</a> model.
 
     equation
       // Material
-      connect(materialBC.negative, negative.material) annotation (Line(
+      connect(material.negative, negative.material) annotation (Line(
           points={{-70,10},{-80,10},{-80,-30},{-100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(materialBC.positive, positive.material) annotation (Line(
+      connect(material.positive, positive.material) annotation (Line(
           points={{-50,10},{90,10},{90,-30},{100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
 
       // Y-axis linear momentum
-      connect(mechanicalYBC.negative, negative.mechanicalY) annotation (Line(
+      connect(mechanicalY.negative, negative.mechanicalY) annotation (Line(
           points={{-30,6.10623e-16},{-56,0},{-80,0},{-80,-30},{-100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(mechanicalYBC.positive, positive.mechanicalY) annotation (Line(
+      connect(mechanicalY.positive, positive.mechanicalY) annotation (Line(
           points={{-10,6.10623e-16},{90,6.10623e-16},{90,-30},{100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(u.mechanicalY, mechanicalYBC.u) annotation (Line(
+      connect(u.mechanicalY, mechanicalY.u) annotation (Line(
           points={{5.55112e-16,40},{5.55112e-16,20},{-20,20},{-20,4}},
           color={0,0,127},
           smooth=Smooth.None), Text(
@@ -5476,17 +5460,17 @@ boundary condition</a> model.
           extent={{-6,3},{-6,3}}));
 
       // Z-axis linear momentum
-      connect(mechanicalZBC.negative, negative.mechanicalZ) annotation (Line(
+      connect(mechanicalZ.negative, negative.mechanicalZ) annotation (Line(
           points={{10,-10},{-80,-10},{-80,-30},{-100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(mechanicalZBC.positive, positive.mechanicalZ) annotation (Line(
+      connect(mechanicalZ.positive, positive.mechanicalZ) annotation (Line(
           points={{30,-10},{90,-10},{90,-30},{100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(u.mechanicalZ, mechanicalZBC.u) annotation (Line(
+      connect(u.mechanicalZ, mechanicalZ.u) annotation (Line(
           points={{5.55112e-16,40},{0,40},{0,20},{20,20},{20,-6}},
           color={0,0,127},
           smooth=Smooth.None), Text(
@@ -5495,12 +5479,12 @@ boundary condition</a> model.
           extent={{-6,3},{-6,3}}));
 
       // Heat
-      connect(thermalBC.negative, negative.thermal) annotation (Line(
+      connect(thermal.negative, negative.thermal) annotation (Line(
           points={{50,-30},{-100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(thermalBC.positive, positive.thermal) annotation (Line(
+      connect(thermal.positive, positive.thermal) annotation (Line(
           points={{70,-30},{100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
@@ -5521,7 +5505,7 @@ boundary condition</a> model.
           compact=true,
           group="Z-axis linear momentum",
           __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalZBC if not inviscidZ
+      replaceable Mechanical.Velocity mechanicalZ if not inviscidZ
         constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
         annotation (
         __Dymola_choicesFromPackage=true,
@@ -5539,7 +5523,7 @@ boundary condition</a> model.
           compact=true,
           group="X-axis linear momentum",
           __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalXBC if not inviscidX
+      replaceable Mechanical.Velocity mechanicalX if not inviscidX
         constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
         annotation (
         __Dymola_choicesFromPackage=true,
@@ -5565,29 +5549,29 @@ boundary condition</a> model.
 
     equation
       // Material
-      connect(materialBC.negative, negative.material) annotation (Line(
+      connect(material.negative, negative.material) annotation (Line(
           points={{-70,10},{-80,10},{-80,-30},{-100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(materialBC.positive, positive.material) annotation (Line(
+      connect(material.positive, positive.material) annotation (Line(
           points={{-50,10},{90,10},{90,-30},{100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
 
       // Z-axis linear momentum
-      connect(mechanicalZBC.negative, negative.mechanicalZ) annotation (Line(
+      connect(mechanicalZ.negative, negative.mechanicalZ) annotation (Line(
           points={{-30,6.10623e-16},{-56,0},{-80,0},{-80,-30},{-100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(mechanicalZBC.positive, positive.mechanicalZ) annotation (Line(
+      connect(mechanicalZ.positive, positive.mechanicalZ) annotation (Line(
           points={{-10,6.10623e-16},{90,6.10623e-16},{90,-30},{100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(u.mechanicalZ, mechanicalZBC.u) annotation (Line(
+      connect(u.mechanicalZ, mechanicalZ.u) annotation (Line(
           points={{5.55112e-16,40},{5.55112e-16,20},{-20,20},{-20,4}},
           color={0,0,127},
           smooth=Smooth.None), Text(
@@ -5596,17 +5580,17 @@ boundary condition</a> model.
           extent={{-6,3},{-6,3}}));
 
       // X-axis linear momentum
-      connect(mechanicalXBC.negative, negative.mechanicalX) annotation (Line(
+      connect(mechanicalX.negative, negative.mechanicalX) annotation (Line(
           points={{10,-10},{-80,-10},{-80,-30},{-100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(mechanicalXBC.positive, positive.mechanicalX) annotation (Line(
+      connect(mechanicalX.positive, positive.mechanicalX) annotation (Line(
           points={{30,-10},{90,-10},{90,-30},{100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(u.mechanicalX, mechanicalXBC.u) annotation (Line(
+      connect(u.mechanicalX, mechanicalX.u) annotation (Line(
           points={{5.55112e-16,40},{0,40},{0,20},{20,20},{20,-6}},
           color={0,0,127},
           smooth=Smooth.None), Text(
@@ -5615,12 +5599,12 @@ boundary condition</a> model.
           extent={{-6,3},{-6,3}}));
 
       // Heat
-      connect(thermalBC.negative, negative.thermal) annotation (Line(
+      connect(thermal.negative, negative.thermal) annotation (Line(
           points={{50,-30},{-100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(thermalBC.positive, positive.thermal) annotation (Line(
+      connect(thermal.positive, positive.thermal) annotation (Line(
           points={{70,-30},{100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
@@ -5641,7 +5625,7 @@ boundary condition</a> model.
           compact=true,
           group="X-axis linear momentum",
           __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalXBC if not inviscidX
+      replaceable Mechanical.Velocity mechanicalX if not inviscidX
         constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
         annotation (
         __Dymola_choicesFromPackage=true,
@@ -5659,7 +5643,7 @@ boundary condition</a> model.
           compact=true,
           group="Y-axis linear momentum",
           __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalYBC if not inviscidY
+      replaceable Mechanical.Velocity mechanicalY if not inviscidY
         constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
         annotation (
         __Dymola_choicesFromPackage=true,
@@ -5685,29 +5669,29 @@ boundary condition</a> model.
 
     equation
       // Material
-      connect(materialBC.negative, negative.material) annotation (Line(
+      connect(material.negative, negative.material) annotation (Line(
           points={{-70,10},{-80,10},{-80,-30},{-100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(materialBC.positive, positive.material) annotation (Line(
+      connect(material.positive, positive.material) annotation (Line(
           points={{-50,10},{90,10},{90,-30},{100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
 
       // X-axis linear momentum
-      connect(mechanicalXBC.negative, negative.mechanicalX) annotation (Line(
+      connect(mechanicalX.negative, negative.mechanicalX) annotation (Line(
           points={{-30,6.10623e-16},{-56,0},{-80,0},{-80,-30},{-100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(mechanicalXBC.positive, positive.mechanicalX) annotation (Line(
+      connect(mechanicalX.positive, positive.mechanicalX) annotation (Line(
           points={{-10,6.10623e-16},{90,6.10623e-16},{90,-30},{100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(u.mechanicalX, mechanicalXBC.u) annotation (Line(
+      connect(u.mechanicalX, mechanicalX.u) annotation (Line(
           points={{5.55112e-16,40},{5.55112e-16,20},{-20,20},{-20,4}},
           color={0,0,127},
           smooth=Smooth.None), Text(
@@ -5716,17 +5700,17 @@ boundary condition</a> model.
           extent={{-6,3},{-6,3}}));
 
       // Y-axis linear momentum
-      connect(mechanicalYBC.negative, negative.mechanicalY) annotation (Line(
+      connect(mechanicalY.negative, negative.mechanicalY) annotation (Line(
           points={{10,-10},{-80,-10},{-80,-30},{-100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(mechanicalYBC.positive, positive.mechanicalY) annotation (Line(
+      connect(mechanicalY.positive, positive.mechanicalY) annotation (Line(
           points={{30,-10},{90,-10},{90,-30},{100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(u.mechanicalY, mechanicalYBC.u) annotation (Line(
+      connect(u.mechanicalY, mechanicalY.u) annotation (Line(
           points={{5.55112e-16,40},{0,40},{0,20},{20,20},{20,-6}},
           color={0,0,127},
           smooth=Smooth.None), Text(
@@ -5735,12 +5719,12 @@ boundary condition</a> model.
           extent={{-6,3},{-6,3}}));
 
       // Heat
-      connect(thermalBC.negative, negative.thermal) annotation (Line(
+      connect(thermal.negative, negative.thermal) annotation (Line(
           points={{50,-30},{-100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(thermalBC.positive, positive.thermal) annotation (Line(
+      connect(thermal.positive, positive.thermal) annotation (Line(
           points={{70,-30},{100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
@@ -5795,7 +5779,7 @@ boundary condition</a> model.
         end PartialBC;
 
         type BCType = enumeration(
-            Density "Density",
+            Density "Density difference",
             Current "Current") "Types of BCs";
       end BaseClasses;
     end Material;
@@ -5862,21 +5846,24 @@ boundary condition</a> model.
         extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.Temperature,
             redeclare FCSys.Connectors.RealInput u(final unit="l2.m/(N.T2)",
               displayUnit="K"));
+
       equation
         negative.T - positive.T = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="thermalBC");
+
       end Temperature;
 
-      model HeatFlowRate "Prescribed heat flow rate, with energy conservation"
-        extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.HeatFlowRate,
+      model HeatRate "Prescribed heat flow rate, with energy conservation"
+        extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.HeatRate,
             redeclare FCSys.Connectors.RealInput u(final unit="l2.m/T3"));
 
       equation
         negative.Qdot = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="thermalBC");
-      end HeatFlowRate;
+
+      end HeatRate;
 
       package BaseClasses "Base classes (not for direct use)"
         extends Modelica.Icons.BasesPackage;
@@ -5901,7 +5888,7 @@ boundary condition</a> model.
 
         type BCType = enumeration(
             Temperature "Temperature difference",
-            HeatFlowRate "Heat flow rate") "Types of BCs";
+            HeatRate "Heat flow rate") "Types of BCs";
       end BaseClasses;
     end Thermal;
 
@@ -5913,14 +5900,15 @@ boundary condition</a> model.
         extends FCSys.BaseClasses.Icons.BCs.Double;
 
         parameter ThermoOpt thermoOpt=ThermoOpt.OpenDiabatic
-          "Thermodynamic options" annotation (
+          "Options for material and thermal subconnectors" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Assumptions",compact=true));
 
         // Material
         replaceable Material.Density materialBC if thermoOpt == ThermoOpt.OpenDiabatic
-          constrainedby Material.BaseClasses.PartialBC "Condition" annotation (
+          constrainedby Material.BaseClasses.PartialBC "Type of condition"
+          annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             group="Material",
@@ -5930,7 +5918,8 @@ boundary condition</a> model.
 
         // Heat
         replaceable Thermal.Temperature thermalBC if thermoOpt <> ThermoOpt.ClosedAdiabatic
-          constrainedby Thermal.BaseClasses.PartialBC "Condition" annotation (
+          constrainedby Thermal.BaseClasses.PartialBC "Type of condition"
+          annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             group="Heat",
@@ -6335,9 +6324,9 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
       FCSys.Connectors.Face face(
         final axis=axis,
         final thermoOpt=ThermoOpt.OpenDiabatic,
-        final slipX=false,
-        final slipY=false,
-        final slipZ=false)
+        final inviscidX=true,
+        final inviscidY=true,
+        final inviscidZ=true)
         "Connection to a face of a FCSys.Subregions.Species model"
         annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 
@@ -6366,7 +6355,7 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
       Modelica.Blocks.Interfaces.RealInput[nPorts] portsData_zeta_out;
     equation
       // Added for FCSys:
-      face.material.p = medium.p*Units.Pa;
+      face.material.rho = (medium.d/medium.MM)*Units.mol/Units.m^3;
       face.thermal.T = medium.T*Units.K;
 
       mb_flow = sum(ports.m_flow) + medium.MM*face.material.Ndot/Units.kat

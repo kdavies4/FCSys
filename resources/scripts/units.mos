@@ -22,7 +22,7 @@ checkUnits = false "true, if the constants and units should be checked";
 // quantities in FCSys.Quantities should be used by default, then specify
 // them here.  Be sure that the desired unit is included in a
 // defineUnitConversion command below.
-// Generated from FCSys/resources/quantities.xls, 2013-1-3
+// Generated from FCSys/resources/quantities.xls, 2013-1-9
 defineDefaultDisplayUnit("1/N", "1/mol") "Reciprocal amount";
 defineDefaultDisplayUnit("1/T", "1/s") "NumberRate";
 defineDefaultDisplayUnit("A", "rad") "Angle";
@@ -111,7 +111,7 @@ defineUnitConversion("m/(l.T2)", "kPag", 1/kPa, -101.325) "Pressure";
 // See BIPM (2006, p. 129 Sec. 4.2).
 
 // Conversions without offsets (generated from FCSys/resources/quantities.xls,
-// 2013-1-3)
+// 2013-1-9)
 defineUnitConversion("1", "%", 1/'%') "Number";
 defineUnitConversion("1", "J/(mol.K)", mol*K/J) "Absolute number";
 defineUnitConversion("1/N", "1/C", C) "Reciprocal amount";
@@ -231,4 +231,6 @@ defineUnitConversion("T", "us", 1/(micro*s)) "Time";
 defineUnitConversion("T", "ms", 1/(milli*s)) "Time";
 defineUnitConversion("T", "min", 1/min) "Time";
 defineUnitConversion("T", "s", 1/s) "Time";
+defineUnitConversion("T/l2", "s/m2", m^2/s) "Fusivity";
+defineUnitConversion("T/l2", "s/mm2", mm^2/s) "Fusivity";
 defineUnitConversion("T/N", "1/A", A) "Resistance";

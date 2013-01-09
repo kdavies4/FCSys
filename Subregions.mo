@@ -4,7 +4,7 @@ package Subregions
   extends Modelica.Icons.Package;
   package Examples "Examples and tests"
     extends Modelica.Icons.ExamplesPackage;
-    extends FCSys.BaseClasses.Icons.PackageUnderConstruction;
+
     model SubregionH2 "Test a subregion"
       extends Modelica.Icons.Example;
       parameter Boolean inclC=false "Carbon (C)" annotation (choices(
@@ -128,6 +128,8 @@ package Subregions
           ionomer('H+'(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
                 materialSpec(k(start=1*U.atm))))));
 
+      extends Modelica.Icons.UnderConstruction;
+
       annotation (
         experiment(StopTime=1000, Tolerance=1e-06),
         experimentSetupOutput,
@@ -137,6 +139,7 @@ package Subregions
 
     model SubregionORR
       "<html>Test a subregion with the oxygen reduction reaction and the essential species for it (C, C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S, e<sup>-</sup>, H<sub>2</sub>O, H<sup>+</sup>, and O<sub>2</sub>)</html>"
+
       extends SubregionH2(
         inclC=true,
         inclC19HF37O5S=true,
@@ -158,6 +161,8 @@ package Subregions
           ionomer('H+'(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
                 materialSpec(k(start=1*U.atm))))),
         defaults(analysis=false));
+
+      extends Modelica.Icons.UnderConstruction;
 
       annotation (
         experiment(StopTime=1000, Tolerance=1e-06),
@@ -446,12 +451,12 @@ package Subregions
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionsH2.mos"),
         Diagram(graphics));
-
     end SubregionsH2;
 
     model SubregionsCAndH2
       "<html>Test a one-dimensional array of subregions with C and H<sub>2</sub></html>"
       extends SubregionsH2(inclC=true, defaults(analysis=true));
+
       annotation (
         experiment(StopTime=3, NumberOfIntervals=5000),
         experimentSetupOutput,
@@ -479,6 +484,7 @@ package Subregions
         inclH2=false,
         inclC=true,
         inclN2=true);
+      extends Modelica.Icons.UnderConstruction;
 
       annotation (
         experiment(StopTime=40, Tolerance=1e-06),
@@ -512,6 +518,7 @@ package Subregions
         inclH2O=true,
         'inclH+'=true,
         inclC19HF37O5S=true);
+      extends Modelica.Icons.UnderConstruction;
       annotation (
         experiment(StopTime=150, Tolerance=1e-06),
         experimentSetupOutput,
@@ -526,6 +533,7 @@ package Subregions
         inclH2=false,
         'incle-'=true,
         defaults(analysis=false));
+      extends Modelica.Icons.UnderConstruction;
 
       annotation (
         experiment(Tolerance=1e-06),
@@ -555,7 +563,7 @@ package Subregions
               T(displayUnit="degC")))),
         redeclare FCSys.BCs.FaceBus.SubregionClosedAdiabatic bC1,
         redeclare FCSys.BCs.FaceBus.SubregionClosedAdiabatic bC2);
-
+      extends Modelica.Icons.UnderConstruction;
       annotation (
         Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ThermalConduction.mos"),
@@ -588,6 +596,7 @@ package Subregions
         redeclare FCSys.BCs.FaceBus.SubregionClosedAdiabatic bC1,
         redeclare FCSys.BCs.FaceBus.SubregionClosedAdiabatic bC2);
 
+      extends Modelica.Icons.UnderConstruction;
       annotation (
         Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ThermalConductionConvection.mos"),
@@ -601,6 +610,7 @@ package Subregions
       "Test chemical reaction with reaction rate ramped over time"
 
       extends Modelica.Icons.Example;
+      extends Modelica.Icons.UnderConstruction;
 
       FCSys.Subregions.Reaction reaction(n_spec=3)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -657,6 +667,7 @@ package Subregions
     model Reaction "Test an electrochemical reaction"
 
       extends Modelica.Icons.Example;
+      extends Modelica.Icons.UnderConstruction;
 
       parameter Integer n_lin(
         final min=1,
@@ -723,6 +734,7 @@ package Subregions
 
     model SpeciesH2 "Test a species"
       extends Modelica.Icons.Example;
+      extends Modelica.Icons.UnderConstruction;
 
       // Geometric parameters
       inner parameter Q.Length L[Axis](each min=Modelica.Constants.small) =
@@ -755,6 +767,8 @@ package Subregions
 
     model Specieseminus "Test a species"
       extends Modelica.Icons.Example;
+      extends Modelica.Icons.UnderConstruction;
+
       extends SpeciesH2(redeclare FCSys.Subregions.Species.'e-'.Graphite.Fixed
           species);
       FCSys.BCs.Face.BaseClasses.PartialSpecies faceBC(redeclare
@@ -780,6 +794,7 @@ package Subregions
 
     model SubregionsCell "Test a one-dimensional array of subregions"
       extends Modelica.Icons.Example;
+      extends Modelica.Icons.UnderConstruction;
 
       parameter Integer n_x=1
         "Number of discrete regions through the PEM along the x axis";
@@ -792,34 +807,34 @@ package Subregions
           inclN2=false,
           inclO2=false,
           H2O(
-            yNegative(slipZ=false, slipX=false),
-            yPositive(slipZ=false, slipX=false),
-            zNegative(slipX=false, slipY=false),
-            zPositive(slipX=false, slipY=false)),
+            yNegative(inviscidZ=true, inviscidX=true),
+            yPositive(inviscidZ=true, inviscidX=true),
+            zNegative(inviscidX=true, inviscidY=true),
+            zPositive(inviscidX=true, inviscidY=true)),
           H2(
             p_IC=1.05*defaults.p,
-            yNegative(slipZ=false, slipX=false),
-            yPositive(slipZ=false, slipX=false),
-            zNegative(slipX=false, slipY=false),
-            zPositive(slipX=false, slipY=false))),
+            yNegative(inviscidZ=true, inviscidX=true),
+            yPositive(inviscidZ=true, inviscidX=true),
+            zNegative(inviscidX=true, inviscidY=true),
+            zPositive(inviscidX=true, inviscidY=true))),
         graphite(
           inclC=true,
           'incle-'=true,
           C(V_IC=subregion1.V/4),
           'e-'(
-            yNegative(slipZ=false, slipX=false),
-            yPositive(slipZ=false, slipX=false),
-            zNegative(slipX=false, slipY=false),
-            zPositive(slipX=false, slipY=false))),
+            yNegative(inviscidZ=true, inviscidX=true),
+            yPositive(inviscidZ=true, inviscidX=true),
+            zNegative(inviscidX=true, inviscidY=true),
+            zPositive(inviscidX=true, inviscidY=true))),
         ionomer(
           inclC19HF37O5S=true,
           'inclH+'=true,
           C19HF37O5S(V_IC=subregion1.V/4),
           'H+'(
-            yNegative(slipZ=false, slipX=false),
-            yPositive(slipZ=false, slipX=false),
-            zNegative(slipX=false, slipY=false),
-            zPositive(slipX=false, slipY=false))),
+            yNegative(inviscidZ=true, inviscidX=true),
+            yPositive(inviscidZ=true, inviscidX=true),
+            zNegative(inviscidX=true, inviscidY=true),
+            zPositive(inviscidX=true, inviscidY=true))),
         inclLinY=false,
         inclLinZ=false,
         inclYFaces=false,
@@ -834,10 +849,10 @@ package Subregions
           each 'inclH+'=true,
           C19HF37O5S(each V_IC=subregions[1].V/4),
           'H+'(
-            each yNegative(slipZ=false,slipX=false),
-            each yPositive(slipZ=false,slipX=false),
-            each zNegative(slipX=false,slipY=false),
-            each zPositive(slipX=false,slipY=false))),
+            each yNegative(inviscidZ=true,inviscidX=true),
+            each yPositive(inviscidZ=true,inviscidX=true),
+            each zNegative(inviscidX=true,inviscidY=true),
+            each zPositive(inviscidX=true,inviscidY=true))),
         each inclLinY=false,
         each inclLinZ=false,
         each inclYFaces=false,
@@ -853,40 +868,40 @@ package Subregions
           inclO2=true,
           H2O(
             p_IC=0.95*defaults.p,
-            yNegative(slipZ=false, slipX=false),
-            yPositive(slipZ=false, slipX=false),
-            zNegative(slipX=false, slipY=false),
-            zPositive(slipX=false, slipY=false)),
+            yNegative(inviscidZ=true, inviscidX=true),
+            yPositive(inviscidZ=true, inviscidX=true),
+            zNegative(inviscidX=true, inviscidY=true),
+            zPositive(inviscidX=true, inviscidY=true)),
           N2(
             p_IC=0.95*defaults.p,
-            yNegative(slipZ=false, slipX=false),
-            yPositive(slipZ=false, slipX=false),
-            zNegative(slipX=false, slipY=false),
-            zPositive(slipX=false, slipY=false)),
+            yNegative(inviscidZ=true, inviscidX=true),
+            yPositive(inviscidZ=true, inviscidX=true),
+            zNegative(inviscidX=true, inviscidY=true),
+            zPositive(inviscidX=true, inviscidY=true)),
           O2(
             p_IC=0.95*defaults.p,
-            yNegative(slipZ=false, slipX=false),
-            yPositive(slipZ=false, slipX=false),
-            zNegative(slipX=false, slipY=false),
-            zPositive(slipX=false, slipY=false))),
+            yNegative(inviscidZ=true, inviscidX=true),
+            yPositive(inviscidZ=true, inviscidX=true),
+            zNegative(inviscidX=true, inviscidY=true),
+            zPositive(inviscidX=true, inviscidY=true))),
         graphite(
           inclC=true,
           'incle-'=true,
           C(V_IC=subregion2.V/4),
           'e-'(
-            yNegative(slipZ=false, slipX=false),
-            yPositive(slipZ=false, slipX=false),
-            zNegative(slipX=false, slipY=false),
-            zPositive(slipX=false, slipY=false))),
+            yNegative(inviscidZ=true, inviscidX=true),
+            yPositive(inviscidZ=true, inviscidX=true),
+            zNegative(inviscidX=true, inviscidY=true),
+            zPositive(inviscidX=true, inviscidY=true))),
         ionomer(
           inclC19HF37O5S=true,
           'inclH+'=true,
           C19HF37O5S(V_IC=subregion2.V/4),
           'H+'(
-            yNegative(slipZ=false, slipX=false),
-            yPositive(slipZ=false, slipX=false),
-            zNegative(slipX=false, slipY=false),
-            zPositive(slipX=false, slipY=false))),
+            yNegative(inviscidZ=true, inviscidX=true),
+            yPositive(inviscidZ=true, inviscidX=true),
+            zNegative(inviscidX=true, inviscidY=true),
+            zPositive(inviscidX=true, inviscidY=true))),
         inclLinY=false,
         inclLinZ=false,
         inclYFaces=false,
@@ -5437,7 +5452,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         p(final start=p_IC, final fixed=false),
         phi(start=phi_IC[cartAxes]),
         T(start=T_IC))
-        "Connector to add pressure and exchange linear momentum and heat by diffusion"
+        "Connector to exchange linear momentum and heat by diffusion, with additivity of pressure"
         annotation (Placement(transformation(extent={{10,-30},{30,-10}}),
             iconTransformation(extent={{60,-80},{80,-60}})));
       FCSys.Connectors.FaceX xNegative(
@@ -6104,8 +6119,8 @@ The default global default settings will be used for the current simulation.",
     <li>By default, only the x-axis component of linear momentum is included.  Also by default,
     only material and thermal transport are included through the x-axis faces and only
     x-axis displacement/shear stress is included through the y- and z-axis faces.</li>
-    <li>By default, faces are assumed to be isobaric and invisicid if the corresponding 
-    component of linear momenum is disabled.</li>
+    <li>By default, faces are assumed to be isobaric and inviscid if the corresponding 
+    component of linear momentum is disabled.</li>
     <li>If a state is prescribed, then the
     associated initial condition (IC) will be applied for all time.  The
     corresponding conservation equation will not be imposed.
@@ -6453,9 +6468,9 @@ Check the chemical formulas and the specific masses of the species.");
       annotation (Evaluate=true, HideResult=true);
 
     FCSys.Connectors.InertAmagat inert(final n_lin=n_lin)
-      "Connector for linear momentum and heat,  with shared volume" annotation
-      (Placement(transformation(extent={{60,-80},{80,-60}}), iconTransformation(
-            extent={{100,-120},{120,-100}})));
+      "Connector for linear momentum and heat, with additivity of volume"
+      annotation (Placement(transformation(extent={{60,-80},{80,-60}}),
+          iconTransformation(extent={{100,-120},{120,-100}})));
     outer FCSys.BCs.Defaults defaults "Default settings" annotation (Placement(
           transformation(extent={{40,40},{60,60}}), iconTransformation(extent={
               {-10,90},{10,110}})));
@@ -6497,6 +6512,7 @@ Check the chemical formulas and the specific masses of the species.");
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(graphics));
+
   end Volume;
 
   package BaseClasses "Base classes (not for direct use)"

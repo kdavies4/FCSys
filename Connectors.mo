@@ -182,7 +182,7 @@ package Connectors "Declarative and imperative connectors"
   end FaceBusInternal;
 
   connector Face
-    "Connector to transport linear momentum and heat of a single species"
+    "Connector to transport material, linear momentum, and heat of a single species"
     extends BaseClasses.PartialFace;
 
     parameter Axis axis=Axis.x "Axis normal to the face";
@@ -575,17 +575,20 @@ package Connectors "Declarative and imperative connectors"
     <p>For more information, see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Diagram(graphics={Text(
-              extent={{-100,36},{100,76}},
-              textString="%name",
-              lineColor={0,0,0}),Rectangle(
-              extent={{-30,30},{30,-30}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Line(
-              points={{-30,0},{30,0}},
-              color={0,0,0},
-              smooth=Smooth.None)}),
+      Diagram(graphics={
+          Text(
+            extent={{-100,36},{100,76}},
+            textString="%name",
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-30,30},{30,-30}},
+            lineColor={0,0,0},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Line(
+            points={{-30,0},{30,0}},
+            color={0,0,0},
+            smooth=Smooth.None)}),
       Icon(graphics={Rectangle(
             extent={{-100,100},{100,-100}},
             lineColor={0,0,0},
@@ -611,17 +614,20 @@ package Connectors "Declarative and imperative connectors"
     <p>For more information, see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Diagram(graphics={Text(
-              extent={{-100,36},{100,76}},
-              textString="%name",
-              lineColor={0,0,0}),Rectangle(
-              extent={{-30,30},{30,-30}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Line(
-              points={{0,30},{0,-30}},
-              color={0,0,0},
-              smooth=Smooth.None)}),
+      Diagram(graphics={
+          Text(
+            extent={{-100,36},{100,76}},
+            textString="%name",
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-30,30},{30,-30}},
+            lineColor={0,0,0},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Line(
+            points={{0,30},{0,-30}},
+            color={0,0,0},
+            smooth=Smooth.None)}),
       Icon(graphics={Rectangle(
             extent={{-100,100},{100,-100}},
             lineColor={0,0,0},
@@ -641,20 +647,24 @@ package Connectors "Declarative and imperative connectors"
       Documentation(info="<html>For information, see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Diagram(graphics={Text(
-              extent={{-100,36},{100,76}},
-              textString="%name",
-              lineColor={0,0,0}),Rectangle(
-              extent={{-30,30},{30,-30}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Line(
-              points={{-30,30},{30,-30}},
-              color={0,0,0},
-              smooth=Smooth.None),Line(
-              points={{30,30},{-30,-30}},
-              color={0,0,0},
-              smooth=Smooth.None)}),
+      Diagram(graphics={
+          Text(
+            extent={{-100,36},{100,76}},
+            textString="%name",
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-30,30},{30,-30}},
+            lineColor={0,0,0},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Line(
+            points={{-30,30},{30,-30}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{30,30},{-30,-30}},
+            color={0,0,0},
+            smooth=Smooth.None)}),
       Icon(graphics={
           Rectangle(
             extent={{-100,100},{100,-100}},
@@ -689,13 +699,13 @@ package Connectors "Declarative and imperative connectors"
         initialScale=0.1,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Polygon(
-            points={{0,50},{100,0},{0,-50},{0,50}},
-            lineColor={0,0,127},
-            fillColor={0,0,127},
-            fillPattern=FillPattern.Solid),Text(
-            extent={{-200,50},{200,90}},
-            textString="%name",
-            lineColor={0,0,0})}),
+          points={{0,50},{100,0},{0,-50},{0,50}},
+          lineColor={0,0,127},
+          fillColor={0,0,127},
+          fillPattern=FillPattern.Solid), Text(
+          extent={{-200,50},{200,90}},
+          textString="%name",
+          lineColor={0,0,0})}),
     Documentation(info="<html>
 <p>
 Connector with one input signal of type <code>Real</code>.</p>
@@ -816,13 +826,13 @@ Protected connector with one input signal of type <code>Real</code>.</p>
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Polygon(
-            points={{-100,50},{0,0},{-100,-50},{-100,50}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),Text(
-            extent={{-200,50},{200,90}},
-            textString="%name",
-            lineColor={0,0,0})}),
+          points={{-100,50},{0,0},{-100,-50},{-100,50}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid), Text(
+          extent={{-200,50},{200,90}},
+          textString="%name",
+          lineColor={0,0,0})}),
     Documentation(info="<html>
 <p>
 Connector with one output signal of type <code>Real</code>.</p>
@@ -877,14 +887,14 @@ Protected connector with one output signal of type <code>Real</code>.</p>
           preserveAspectRatio=true,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-              points={{-100,50},{0,0},{-100,-50},{-100,50}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{-200,50},{200,90}},
-              textString="%name",
-              lineColor={0,0,0})}));
+            points={{-100,50},{0,0},{-100,-50},{-100,50}},
+            lineColor={0,0,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5), Text(
+            extent={{-200,50},{200,90}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end RealOutputBus;
 
@@ -911,14 +921,14 @@ Protected connector with one output signal of type <code>Real</code>.</p>
           preserveAspectRatio=true,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-              points={{-40,20},{0,0},{-40,-20},{-40,20}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{-200,24},{200,64}},
-              textString="%name",
-              lineColor={0,0,0})}));
+            points={{-40,20},{0,0},{-40,-20},{-40,20}},
+            lineColor={0,0,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5), Text(
+            extent={{-200,24},{200,64}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end RealOutputBusInternal;
 
@@ -990,7 +1000,7 @@ Protected connector with one output signal of type <code>Real</code>.</p>
     end PartialChemical;
 
     connector PartialFace
-      "Partial connector to transport linear momentum and heat of a single species"
+      "Partial connector to transport material, linear momentum, and heat of a single species"
 
       parameter ThermoOpt thermoOpt=ThermoOpt.OpenDiabatic
         "Thermodynamic options" annotation (

@@ -1,9 +1,10 @@
 within FCSys;
 package Assemblies "Combinations of regions (e.g., cells)"
   extends Modelica.Icons.Package;
-  extends FCSys.BaseClasses.Icons.PackageUnderConstruction;
+
   package Cells "Single-cell PEMFC models"
     extends Modelica.Icons.Package;
+    extends FCSys.BaseClasses.Icons.PackageUnderConstruction;
     package Examples "Examples and tests"
 
       model Cell "<html>Isolated <code>Cell</code> model</html>"
