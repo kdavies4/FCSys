@@ -1,811 +1,364 @@
 within FCSys;
 package Sensors "Models to measure conditions"
-
-  extends Modelica.Icons.SensorsPackage;
-  extends FCSys.BaseClasses.Icons.PackageUnderConstruction;
-
-  package Chemical
-    "<html>Sensors for the <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialChemical\">Chemical</a> and <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> connectors</html>"
+  package ChemicalBus
+    "<html>Sensors for the <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> connector</html>"
     extends Modelica.Icons.Package;
 
-    package Phases
-      "<html>Sensors for the <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Phase\">Phase</a> model (multi-species)</html>"
-      extends Modelica.Icons.Package;
-      model Phase "Sensor for a phase with all species conditionally included"
+    model Gas "Sensor for gas"
 
-        extends FCSys.Sensors.Chemical.Phases.NullPhase;
+      extends BaseClasses.NullPhase;
 
-        // Conditionally include species.
-        parameter Boolean inclC=false "Carbon (C)" annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        replaceable FCSys.Sensors.Chemical.Species C(final n_lin=n_lin) if
-          inclC "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean inclC19HF37O5S=false
-          "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species C19HF37O5S(final n_lin=n_lin) if
-          inclC19HF37O5S "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean 'incle-'=false
-          "<html>Electrons (e<sup>-</sup>)</html>" annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species 'e-'(final n_lin=n_lin) if 'incle-'
-          "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean inclH2=false "<html>Hydrogen (H<sub>2</sub>)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species H2(final n_lin=n_lin) if inclH2 "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species H2O(final n_lin=n_lin) if inclH2O
-          "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean 'inclH+'=false "<html>Protons (H<sup>+</sup>)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species 'H+'(final n_lin=n_lin) if 'inclH+'
-          "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean inclN2=false "<html>Nitrogen (N<sub>2</sub>)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species N2(final n_lin=n_lin) if inclN2 "Model"
-          annotation (Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            enable=inclN2), Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean inclO2=false "<html>Oxygen (O<sub>2</sub>)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species O2(final n_lin=n_lin) if inclO2 "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-      equation
-        // C
-        connect(C.chemical, chemical.C) annotation (Line(
-            points={{6.10623e-16,-40},{5.55112e-16,5.55112e-16}},
-            color={208,104,0},
-            smooth=Smooth.None));
-        connect(C.mu, y.C.mu) annotation (Line(
-            points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(C.phi, y.C.phi) annotation (Line(
-            points={{6.10623e-16,-50},{5.55112e-16,-50},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(C.s, y.C.s) annotation (Line(
-            points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        // C19HF37O5S
-        connect(C19HF37O5S.chemical, chemical.C19HF37O5S) annotation (Line(
-            points={{6.10623e-16,-40},{5.55112e-16,-40},{5.55112e-16,
-                5.55112e-16}},
-            color={208,104,0},
-            smooth=Smooth.None));
-
-        connect(C19HF37O5S.mu, y.C19HF37O5S.mu) annotation (Line(
-            points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(C19HF37O5S.phi, y.C19HF37O5S.phi) annotation (Line(
-            points={{6.10623e-16,-50},{5.55112e-16,-50},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(C19HF37O5S.s, y.C19HF37O5S.s) annotation (Line(
-            points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        // e-
-        connect('e-'.chemical, chemical.'e-') annotation (Line(
-            points={{6.10623e-16,-40},{5.55112e-16,-40},{5.55112e-16,
-                5.55112e-16}},
-            color={208,104,0},
-            smooth=Smooth.None));
-
-        connect('e-'.mu, y.'e-'.mu) annotation (Line(
-            points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect('e-'.phi, y.'e-'.phi) annotation (Line(
-            points={{6.10623e-16,-50},{5.55112e-16,-50},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect('e-'.s, y.'e-'.s) annotation (Line(
-            points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        // H2
-        connect(H2.chemical, chemical.H2) annotation (Line(
-            points={{6.10623e-16,-40},{5.55112e-16,-40},{5.55112e-16,
-                5.55112e-16}},
-            color={208,104,0},
-            smooth=Smooth.None));
-
-        connect(H2.mu, y.H2.mu) annotation (Line(
-            points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(H2.phi, y.H2.phi) annotation (Line(
-            points={{6.10623e-16,-50},{5.55112e-16,-50},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(H2.s, y.H2.s) annotation (Line(
-            points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        // H2O
-        connect(H2O.chemical, chemical.H2O) annotation (Line(
-            points={{6.10623e-16,-40},{5.55112e-16,-40},{5.55112e-16,
-                5.55112e-16}},
-            color={208,104,0},
-            smooth=Smooth.None));
-
-        connect(H2O.mu, y.H2O.mu) annotation (Line(
-            points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(H2O.phi, y.H2O.phi) annotation (Line(
-            points={{6.10623e-16,-50},{5.55112e-16,-50},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(H2O.s, y.H2O.s) annotation (Line(
-            points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        // H+
-        connect('H+'.chemical, chemical.'H+') annotation (Line(
-            points={{6.10623e-16,-40},{5.55112e-16,-40},{5.55112e-16,
-                5.55112e-16}},
-            color={208,104,0},
-            smooth=Smooth.None));
-
-        connect('H+'.mu, y.'H+'.mu) annotation (Line(
-            points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect('H+'.phi, y.'H+'.phi) annotation (Line(
-            points={{6.10623e-16,-50},{5.55112e-16,-50},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect('H+'.s, y.'H+'.s) annotation (Line(
-            points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        // N2
-        connect(N2.chemical, chemical.N2) annotation (Line(
-            points={{6.10623e-16,-40},{5.55112e-16,-40},{5.55112e-16,
-                5.55112e-16}},
-            color={208,104,0},
-            smooth=Smooth.None));
-
-        connect(N2.mu, y.N2.mu) annotation (Line(
-            points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(N2.phi, y.N2.phi) annotation (Line(
-            points={{6.10623e-16,-50},{-4.87687e-22,-50},{-4.87687e-22,-100},{
-                5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(N2.s, y.N2.s) annotation (Line(
-            points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        // O2
-        connect(O2.chemical, chemical.O2) annotation (Line(
-            points={{6.10623e-16,-40},{5.55112e-16,-40},{5.55112e-16,
-                5.55112e-16}},
-            color={208,104,0},
-            smooth=Smooth.None));
-
-        connect(O2.mu, y.O2.mu) annotation (Line(
-            points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(O2.phi, y.O2.phi) annotation (Line(
-            points={{6.10623e-16,-50},{-4.87687e-22,-50},{-4.87687e-22,-100},{
-                5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(O2.s, y.O2.s) annotation (Line(
-            points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
+      // Conditionally include species.
+      parameter Boolean inclH2=false "<html>Hydrogen (H<sub>2</sub>)</html>"
         annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="phaseChemicalSensor",
-          Icon(graphics));
-      end Phase;
+        Evaluate=true,
+        HideResult=true,
+        choices(__Dymola_checkBox=true),
+        Dialog(
+          group="Species",
+          __Dymola_descriptionLabel=true,
+          __Dymola_joinNext=true));
+      Chemical.Species H2(final n_lin=n_lin) if inclH2 "Model"
+        annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
-      model Gas "Sensor for gas"
-
-        extends FCSys.Sensors.Chemical.Phases.NullPhase;
-
-        // Conditionally include species.
-        parameter Boolean inclC=false "Carbon (C)" annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        replaceable FCSys.Sensors.Chemical.Species C(final n_lin=n_lin) if
-          inclC "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean inclC19HF37O5S=false
-          "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species C19HF37O5S(final n_lin=n_lin) if
-          inclC19HF37O5S "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean 'incle-'=false
-          "<html>Electrons (e<sup>-</sup>)</html>" annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species 'e-'(final n_lin=n_lin) if 'incle-'
-          "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean inclH2=false "<html>Hydrogen (H<sub>2</sub>)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species H2(final n_lin=n_lin) if inclH2 "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species H2O(final n_lin=n_lin) if inclH2O
-          "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean 'inclH+'=false "<html>Protons (H<sup>+</sup>)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species 'H+'(final n_lin=n_lin) if 'inclH+'
-          "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean inclN2=false "<html>Nitrogen (N<sub>2</sub>)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species N2(final n_lin=n_lin) if inclN2 "Model"
-          annotation (Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            enable=inclN2), Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean inclO2=false "<html>Oxygen (O<sub>2</sub>)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species O2(final n_lin=n_lin) if inclO2 "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-      equation
-        // H2
-        connect(H2.chemical, chemical.H2) annotation (Line(
-            points={{6.10623e-16,-40},{5.55112e-16,-40},{5.55112e-16,
-                5.55112e-16}},
-            color={208,104,0},
-            smooth=Smooth.None));
-
-        connect(H2.mu, y.H2.mu) annotation (Line(
-            points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(H2.phi, y.H2.phi) annotation (Line(
-            points={{6.10623e-16,-50},{5.55112e-16,-50},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(H2.s, y.H2.s) annotation (Line(
-            points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        // H2O
-        connect(H2O.chemical, chemical.H2O) annotation (Line(
-            points={{6.10623e-16,-40},{5.55112e-16,-40},{5.55112e-16,
-                5.55112e-16}},
-            color={208,104,0},
-            smooth=Smooth.None));
-
-        connect(H2O.mu, y.H2O.mu) annotation (Line(
-            points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(H2O.phi, y.H2O.phi) annotation (Line(
-            points={{6.10623e-16,-50},{5.55112e-16,-50},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(H2O.s, y.H2O.s) annotation (Line(
-            points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        // N2
-        connect(N2.chemical, chemical.N2) annotation (Line(
-            points={{6.10623e-16,-40},{5.55112e-16,-40},{5.55112e-16,
-                5.55112e-16}},
-            color={208,104,0},
-            smooth=Smooth.None));
-
-        connect(N2.mu, y.N2.mu) annotation (Line(
-            points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(N2.phi, y.N2.phi) annotation (Line(
-            points={{6.10623e-16,-50},{-4.87687e-22,-50},{-4.87687e-22,-100},{
-                5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(N2.s, y.N2.s) annotation (Line(
-            points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        // O2
-        connect(O2.chemical, chemical.O2) annotation (Line(
-            points={{6.10623e-16,-40},{5.55112e-16,-40},{5.55112e-16,
-                5.55112e-16}},
-            color={208,104,0},
-            smooth=Smooth.None));
-
-        connect(O2.mu, y.O2.mu) annotation (Line(
-            points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(O2.phi, y.O2.phi) annotation (Line(
-            points={{6.10623e-16,-50},{-4.87687e-22,-50},{-4.87687e-22,-100},{
-                5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(O2.s, y.O2.s) annotation (Line(
-            points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="phaseChemicalSensor");
-      end Gas;
-
-      model Graphite "Sensor for graphite"
-
-        extends FCSys.Sensors.Chemical.Phases.NullPhase;
-
-        // Conditionally include species.
-        parameter Boolean inclC=false "Carbon (C)" annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        replaceable FCSys.Sensors.Chemical.Species C(final n_lin=n_lin) if
-          inclC "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean inclC19HF37O5S=false
-          "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species C19HF37O5S(final n_lin=n_lin) if
-          inclC19HF37O5S "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean 'incle-'=false
-          "<html>Electrons (e<sup>-</sup>)</html>" annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species 'e-'(final n_lin=n_lin) if 'incle-'
-          "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean inclH2=false "<html>Hydrogen (H<sub>2</sub>)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species H2(final n_lin=n_lin) if inclH2 "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species H2O(final n_lin=n_lin) if inclH2O
-          "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean 'inclH+'=false "<html>Protons (H<sup>+</sup>)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species 'H+'(final n_lin=n_lin) if 'inclH+'
-          "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean inclN2=false "<html>Nitrogen (N<sub>2</sub>)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species N2(final n_lin=n_lin) if inclN2 "Model"
-          annotation (Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            enable=inclN2), Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean inclO2=false "<html>Oxygen (O<sub>2</sub>)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species O2(final n_lin=n_lin) if inclO2 "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-      equation
-        // C
-        connect(C.chemical, chemical.C) annotation (Line(
-            points={{6.10623e-16,-40},{5.55112e-16,5.55112e-16}},
-            color={208,104,0},
-            smooth=Smooth.None));
-        connect(C.mu, y.C.mu) annotation (Line(
-            points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(C.phi, y.C.phi) annotation (Line(
-            points={{6.10623e-16,-50},{5.55112e-16,-50},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(C.s, y.C.s) annotation (Line(
-            points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        // e-
-        connect('e-'.chemical, chemical.'e-') annotation (Line(
-            points={{6.10623e-16,-40},{5.55112e-16,-40},{5.55112e-16,
-                5.55112e-16}},
-            color={208,104,0},
-            smooth=Smooth.None));
-
-        connect('e-'.mu, y.'e-'.mu) annotation (Line(
-            points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect('e-'.phi, y.'e-'.phi) annotation (Line(
-            points={{6.10623e-16,-50},{5.55112e-16,-50},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect('e-'.s, y.'e-'.s) annotation (Line(
-            points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="phaseChemicalSensor");
-      end Graphite;
-
-      model Ionomer "Sensor for ionomer"
-        extends FCSys.Sensors.Chemical.Phases.NullPhase;
-
-        // Conditionally include species.
-        parameter Boolean inclC=false "Carbon (C)" annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        replaceable FCSys.Sensors.Chemical.Species C(final n_lin=n_lin) if
-          inclC "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean inclC19HF37O5S=false
-          "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species C19HF37O5S(final n_lin=n_lin) if
-          inclC19HF37O5S "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean 'incle-'=false
-          "<html>Electrons (e<sup>-</sup>)</html>" annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species 'e-'(final n_lin=n_lin) if 'incle-'
-          "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean inclH2=false "<html>Hydrogen (H<sub>2</sub>)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species H2(final n_lin=n_lin) if inclH2 "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species H2O(final n_lin=n_lin) if inclH2O
-          "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean 'inclH+'=false "<html>Protons (H<sup>+</sup>)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species 'H+'(final n_lin=n_lin) if 'inclH+'
-          "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean inclN2=false "<html>Nitrogen (N<sub>2</sub>)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species N2(final n_lin=n_lin) if inclN2 "Model"
-          annotation (Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            enable=inclN2), Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-        parameter Boolean inclO2=false "<html>Oxygen (O<sub>2</sub>)</html>"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        FCSys.Sensors.Chemical.Species O2(final n_lin=n_lin) if inclO2 "Model"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-      equation
-        // C19HF37O5S
-        connect(C19HF37O5S.chemical, chemical.C19HF37O5S) annotation (Line(
-            points={{6.10623e-16,-40},{5.55112e-16,-40},{5.55112e-16,
-                5.55112e-16}},
-            color={208,104,0},
-            smooth=Smooth.None));
-
-        connect(C19HF37O5S.mu, y.C19HF37O5S.mu) annotation (Line(
-            points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(C19HF37O5S.phi, y.C19HF37O5S.phi) annotation (Line(
-            points={{6.10623e-16,-50},{5.55112e-16,-50},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect(C19HF37O5S.s, y.C19HF37O5S.s) annotation (Line(
-            points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        // H+
-        connect('H+'.chemical, chemical.'H+') annotation (Line(
-            points={{6.10623e-16,-40},{5.55112e-16,-40},{5.55112e-16,
-                5.55112e-16}},
-            color={208,104,0},
-            smooth=Smooth.None));
-
-        connect('H+'.mu, y.'H+'.mu) annotation (Line(
-            points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect('H+'.phi, y.'H+'.phi) annotation (Line(
-            points={{6.10623e-16,-50},{5.55112e-16,-50},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-        connect('H+'.s, y.'H+'.s) annotation (Line(
-            points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
+      parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
         annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="phaseChemicalSensor",
-          Diagram(graphics));
-      end Ionomer;
+        Evaluate=true,
+        HideResult=true,
+        choices(__Dymola_checkBox=true),
+        Dialog(
+          group="Species",
+          __Dymola_descriptionLabel=true,
+          __Dymola_joinNext=true));
+      Chemical.Species H2O(final n_lin=n_lin) if inclH2O "Model"
+        annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
+      parameter Boolean inclN2=false "<html>Nitrogen (N<sub>2</sub>)</html>"
+        annotation (
+        Evaluate=true,
+        HideResult=true,
+        choices(__Dymola_checkBox=true),
+        Dialog(
+          group="Species",
+          __Dymola_descriptionLabel=true,
+          __Dymola_joinNext=true));
+      Chemical.Species N2(final n_lin=n_lin) if inclN2 "Model" annotation (
+          Dialog(
+          group="Species",
+          __Dymola_descriptionLabel=true,
+          enable=inclN2), Placement(transformation(extent={{-10,-50},{10,-30}})));
+
+      parameter Boolean inclO2=false "<html>Oxygen (O<sub>2</sub>)</html>"
+        annotation (
+        Evaluate=true,
+        HideResult=true,
+        choices(__Dymola_checkBox=true),
+        Dialog(
+          group="Species",
+          __Dymola_descriptionLabel=true,
+          __Dymola_joinNext=true));
+      Chemical.Species O2(final n_lin=n_lin) if inclO2 "Model"
+        annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+
+    equation
+      // H2
+      connect(H2.chemical, chemical.H2) annotation (Line(
+          points={{6.10623e-16,-40},{5.55112e-16,-40},{5.55112e-16,5.55112e-16}},
+
+          color={208,104,0},
+          smooth=Smooth.None));
+
+      connect(H2.mu, y.H2.mu) annotation (Line(
+          points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(H2.phi, y.H2.phi) annotation (Line(
+          points={{6.10623e-16,-50},{5.55112e-16,-50},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(H2.s, y.H2.s) annotation (Line(
+          points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      // H2O
+      connect(H2O.chemical, chemical.H2O) annotation (Line(
+          points={{6.10623e-16,-40},{5.55112e-16,-40},{5.55112e-16,5.55112e-16}},
+
+          color={208,104,0},
+          smooth=Smooth.None));
+
+      connect(H2O.mu, y.H2O.mu) annotation (Line(
+          points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(H2O.phi, y.H2O.phi) annotation (Line(
+          points={{6.10623e-16,-50},{5.55112e-16,-50},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(H2O.s, y.H2O.s) annotation (Line(
+          points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      // N2
+      connect(N2.chemical, chemical.N2) annotation (Line(
+          points={{6.10623e-16,-40},{5.55112e-16,-40},{5.55112e-16,5.55112e-16}},
+
+          color={208,104,0},
+          smooth=Smooth.None));
+
+      connect(N2.mu, y.N2.mu) annotation (Line(
+          points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(N2.phi, y.N2.phi) annotation (Line(
+          points={{6.10623e-16,-50},{-4.87687e-22,-50},{-4.87687e-22,-100},{
+              5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(N2.s, y.N2.s) annotation (Line(
+          points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      // O2
+      connect(O2.chemical, chemical.O2) annotation (Line(
+          points={{6.10623e-16,-40},{5.55112e-16,-40},{5.55112e-16,5.55112e-16}},
+
+          color={208,104,0},
+          smooth=Smooth.None));
+
+      connect(O2.mu, y.O2.mu) annotation (Line(
+          points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(O2.phi, y.O2.phi) annotation (Line(
+          points={{6.10623e-16,-50},{-4.87687e-22,-50},{-4.87687e-22,-100},{
+              5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(O2.s, y.O2.s) annotation (Line(
+          points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      annotation (defaultComponentPrefixes="replaceable", defaultComponentName=
+            "phaseChemicalSensor");
+    end Gas;
+
+    model Graphite "Sensor for graphite"
+
+      extends BaseClasses.NullPhase;
+
+      // Conditionally include species.
+      parameter Boolean inclC=false "Carbon (C)" annotation (
+        Evaluate=true,
+        HideResult=true,
+        choices(__Dymola_checkBox=true),
+        Dialog(
+          group="Species",
+          __Dymola_descriptionLabel=true,
+          __Dymola_joinNext=true));
+      replaceable Chemical.Species C(final n_lin=n_lin) if inclC "Model"
+        annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+
+      parameter Boolean 'incle-'=false "<html>Electrons (e<sup>-</sup>)</html>"
+        annotation (
+        Evaluate=true,
+        HideResult=true,
+        choices(__Dymola_checkBox=true),
+        Dialog(
+          group="Species",
+          __Dymola_descriptionLabel=true,
+          __Dymola_joinNext=true));
+      Chemical.Species 'e-'(final n_lin=n_lin) if 'incle-' "Model"
+        annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+
+    equation
+      // C
+      connect(C.chemical, chemical.C) annotation (Line(
+          points={{6.10623e-16,-40},{5.55112e-16,5.55112e-16}},
+          color={208,104,0},
+          smooth=Smooth.None));
+      connect(C.mu, y.C.mu) annotation (Line(
+          points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(C.phi, y.C.phi) annotation (Line(
+          points={{6.10623e-16,-50},{5.55112e-16,-50},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(C.s, y.C.s) annotation (Line(
+          points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      // e-
+      connect('e-'.chemical, chemical.'e-') annotation (Line(
+          points={{6.10623e-16,-40},{5.55112e-16,-40},{5.55112e-16,5.55112e-16}},
+
+          color={208,104,0},
+          smooth=Smooth.None));
+
+      connect('e-'.mu, y.'e-'.mu) annotation (Line(
+          points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect('e-'.phi, y.'e-'.phi) annotation (Line(
+          points={{6.10623e-16,-50},{5.55112e-16,-50},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect('e-'.s, y.'e-'.s) annotation (Line(
+          points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      annotation (defaultComponentPrefixes="replaceable", defaultComponentName=
+            "phaseChemicalSensor");
+    end Graphite;
+
+    model Ionomer "Sensor for ionomer"
+      extends BaseClasses.NullPhase;
+
+      // Conditionally include species.
+      parameter Boolean inclC19HF37O5S=false
+        "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</html>"
+        annotation (
+        Evaluate=true,
+        HideResult=true,
+        choices(__Dymola_checkBox=true),
+        Dialog(
+          group="Species",
+          __Dymola_descriptionLabel=true,
+          __Dymola_joinNext=true));
+      Chemical.Species C19HF37O5S(final n_lin=n_lin) if inclC19HF37O5S "Model"
+        annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+
+      parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
+        annotation (
+        Evaluate=true,
+        HideResult=true,
+        choices(__Dymola_checkBox=true),
+        Dialog(
+          group="Species",
+          __Dymola_descriptionLabel=true,
+          __Dymola_joinNext=true));
+      Chemical.Species H2O(final n_lin=n_lin) if inclH2O "Model"
+        annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+
+      parameter Boolean 'inclH+'=false "<html>Protons (H<sup>+</sup>)</html>"
+        annotation (
+        Evaluate=true,
+        HideResult=true,
+        choices(__Dymola_checkBox=true),
+        Dialog(
+          group="Species",
+          __Dymola_descriptionLabel=true,
+          __Dymola_joinNext=true));
+      Chemical.Species 'H+'(final n_lin=n_lin) if 'inclH+' "Model"
+        annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+
+    equation
+      // C19HF37O5S
+      connect(C19HF37O5S.chemical, chemical.C19HF37O5S) annotation (Line(
+          points={{6.10623e-16,-40},{5.55112e-16,-40},{5.55112e-16,5.55112e-16}},
+
+          color={208,104,0},
+          smooth=Smooth.None));
+
+      connect(C19HF37O5S.mu, y.C19HF37O5S.mu) annotation (Line(
+          points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(C19HF37O5S.phi, y.C19HF37O5S.phi) annotation (Line(
+          points={{6.10623e-16,-50},{5.55112e-16,-50},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(C19HF37O5S.s, y.C19HF37O5S.s) annotation (Line(
+          points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      // H+
+      connect('H+'.chemical, chemical.'H+') annotation (Line(
+          points={{6.10623e-16,-40},{5.55112e-16,-40},{5.55112e-16,5.55112e-16}},
+
+          color={208,104,0},
+          smooth=Smooth.None));
+
+      connect('H+'.mu, y.'H+'.mu) annotation (Line(
+          points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect('H+'.phi, y.'H+'.phi) annotation (Line(
+          points={{6.10623e-16,-50},{5.55112e-16,-50},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect('H+'.s, y.'H+'.s) annotation (Line(
+          points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      annotation (
+        defaultComponentPrefixes="replaceable",
+        defaultComponentName="phaseChemicalSensor",
+        Diagram(graphics));
+    end Ionomer;
+
+    model Liquid "Sensor for liquid"
+
+      extends BaseClasses.NullPhase;
+
+      // Conditionally include species.
+      parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
+        annotation (
+        Evaluate=true,
+        HideResult=true,
+        choices(__Dymola_checkBox=true),
+        Dialog(
+          group="Species",
+          __Dymola_descriptionLabel=true,
+          __Dymola_joinNext=true));
+      Chemical.Species H2O(final n_lin=n_lin) if inclH2O "Model"
+        annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+
+    equation
+      // H2O
+      connect(H2O.chemical, chemical.H2O) annotation (Line(
+          points={{6.10623e-16,-40},{5.55112e-16,-40},{5.55112e-16,5.55112e-16}},
+
+          color={208,104,0},
+          smooth=Smooth.None));
+
+      connect(H2O.mu, y.H2O.mu) annotation (Line(
+          points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(H2O.phi, y.H2O.phi) annotation (Line(
+          points={{6.10623e-16,-50},{5.55112e-16,-50},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(H2O.s, y.H2O.s) annotation (Line(
+          points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      annotation (defaultComponentPrefixes="replaceable", defaultComponentName=
+            "phaseChemicalSensor");
+    end Liquid;
+
+    package BaseClasses "Base classes (not for direct use)"
+      extends Modelica.Icons.BasesPackage;
       model NullPhase "Empty sensor for a phase (no species)"
         extends FCSys.BaseClasses.Icons.Sensor;
         parameter Integer n_lin(
@@ -832,10 +385,29 @@ package Sensors "Models to measure conditions"
           defaultComponentName="phaseChemicalSensor",
           Icon(graphics));
       end NullPhase;
-    end Phases;
+    end BaseClasses;
+    annotation (Documentation(info="<html><p>Since the connectors in
+<a href=\"modelica://FCSys\">FCSys</a> are hierarchical
+(see the <a href=\"modelica://FCSys.Connectors\">Connectors</a> package),
+the models for the sensors must be as well.  A
+<a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a>
+connector
+is used in <a href=\"modelica://FCSys.Subregions.Species\">Species</a> models,
+and there is a corresponding <a href=\"modelica://FCSys.Sensors.Chemical.Species\">Species
+sensor</a> model in this package. The
+<a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a>
+connector is used in <a href=\"modelica://FCSys.Subregions.Phases\">Phase</a> models,
+and there are corresponding <a href=\"modelica://FCSys.Sensors.ChemicalBus\">ChemicalBus
+sensor</a> models.
+</p></html>"));
+  end ChemicalBus;
 
+  package Chemical
+    "<html>Sensors for the <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalOutput</a> connector</html>"
+
+    extends Modelica.Icons.Package;
     model Species
-      "<html>Sensors for the <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialChemical\">Chemical</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
+      "<html>Sensors for the <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> connector</html>"
 
       extends FCSys.BaseClasses.Icons.Sensor;
 
@@ -850,26 +422,26 @@ package Sensors "Models to measure conditions"
             transformation(extent={{-10,-10},{10,10}}), iconTransformation(
               extent={{-10,-10},{10,10}})));
 
-      FCSys.Connectors.RealOutput mu(final unit="m.l2/(N.T2)")
-        "Internal signal for electrochemical potential" annotation (Placement(
-            transformation(
+      FCSys.Connectors.RealOutput muPerT(final unit="1")
+        "Internal signal for quotient of electrochemical potential and temperature"
+        annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-30,-100}),iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-40,-100})));
-      FCSys.Connectors.RealOutput mphi[n_lin](each final unit="l.m/(N.T)")
-        "Internal signal for specific mass times velocity" annotation (
-          Placement(transformation(
+      FCSys.Connectors.RealOutput phi[n_lin](each final unit="l/T")
+        "Internal signal for velocity of the source" annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={0,-100}),iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={0,-100})));
-      FCSys.Connectors.RealOutput sT(final unit="l2.m/(N.T)")
-        "Internal signal for specific entropy times temperature" annotation (
+      FCSys.Connectors.RealOutput hbar(final unit="l2/T2")
+        "Internal signal for massic enthalpy of the source" annotation (
           Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -880,41 +452,32 @@ package Sensors "Models to measure conditions"
 
     equation
       // Measurements
-      mu = chemical.mu;
-      mphi = chemical.mphi;
-      sT = chemical.sT;
+      muPerT = chemical.muPerT;
+      phi = chemical.phi;
+      hbar = chemical.hbar;
 
-      // Conditions
-      0 = chemical.Ndot "No current";
-      zeros(n_lin) = chemical.mphi "Zero outflow specific mass times velocity";
-      0 = chemical.sT "Zero outflow specific entropy times temperature";
+      // Conservation (no storage)
+      0 = chemical.Ndot "Material";
+      zeros(n_lin) = chemical.mPhidot "Linear momentum";
+      0 = chemical.Hdot "Energy";
       annotation (
         defaultComponentName="speciesChemicalSensor",
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}),graphics),
+                {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
-                100,100}}), graphics={Line(points={{-40,-100},{-40,-58}}, color
-              ={0,0,127}),Line(points={{40,-100},{40,-58}}, color={0,0,127}),
-              Text(
-                  extent={{-100,-20},{100,-50}},
-                  lineColor={127,127,127},
-                  textString="mu mphi sT ")}));
+                100,100}}), graphics={
+            Line(points={{-40,-100},{-40,-58}}, color={0,0,127}),
+            Line(points={{40,-100},{40,-58}}, color={0,0,127}),
+            Text(
+              extent={{-100,-20},{100,-50}},
+              lineColor={127,127,127},
+              textString="mu mphi sT ")}));
     end Species;
-    annotation (Documentation(info="<html><p>Since the connectors in
-<a href=\"modelica://FCSys\">FCSys</a> are hierarchical
-(see the <a href=\"modelica://FCSys.Connectors\">Connectors</a> package),
-the models for the sensors must be as well.  A
-<a href=\"modelica://FCSys.Connectors.BaseClasses.PartialChemical\">Chemical</a>
-connector
-is used in <a href=\"modelica://FCSys.Subregions.Species\">Species</a> models,
-and there is a corresponding <a href=\"modelica://FCSys.Sensors.Chemical.Species.Species\">Species
-sensor</a> model in this package. The
-<a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a>
-connector is used in <a href=\"modelica://FCSys.Subregions.Phases\">Phase</a> models,
-and there are corresponding <a href=\"modelica://FCSys.Sensors.Chemical.Phases\">Phase
-sensor</a> models.
-</p></html>"));
   end Chemical;
+
+  extends Modelica.Icons.SensorsPackage;
+  extends FCSys.BaseClasses.Icons.PackageUnderConstruction;
+
 
   package InertAmagat
     "<html>Sensors for the <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector</html>"
@@ -1535,8 +1098,8 @@ sensor</a> models.
             smooth=Smooth.None));
 
         // C19HF37O5S
-        connect(C19HF37O5S.face.material, face.C19HF37O5S.material) annotation (
-            Line(
+        connect(C19HF37O5S.face.material, face.C19HF37O5S.material) annotation
+          (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -2353,8 +1916,8 @@ sensor</a> models.
 
       equation
         // C19HF37O5S
-        connect(C19HF37O5S.face.material, face.C19HF37O5S.material) annotation (
-            Line(
+        connect(C19HF37O5S.face.material, face.C19HF37O5S.material) annotation
+          (Line(
             points={{6.10623e-16,6.10623e-16},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -2989,12 +2552,14 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // e-
-        connect('e-'.negative.material, negative.'e-'.material) annotation (Line(
+        connect('e-'.negative.material, negative.'e-'.material) annotation (
+            Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.material, positive.'e-'.material) annotation (Line(
+        connect('e-'.positive.material, positive.'e-'.material) annotation (
+            Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3274,12 +2839,14 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // H+
-        connect('H+'.negative.material, negative.'H+'.material) annotation (Line(
+        connect('H+'.negative.material, negative.'H+'.material) annotation (
+            Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.material, positive.'H+'.material) annotation (Line(
+        connect('H+'.positive.material, positive.'H+'.material) annotation (
+            Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4100,12 +3667,14 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // e-
-        connect('e-'.negative.material, negative.'e-'.material) annotation (Line(
+        connect('e-'.negative.material, negative.'e-'.material) annotation (
+            Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.positive.material, positive.'e-'.material) annotation (Line(
+        connect('e-'.positive.material, positive.'e-'.material) annotation (
+            Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4343,12 +3912,14 @@ sensor</a> model.
             smooth=Smooth.None));
 
         // H+
-        connect('H+'.negative.material, negative.'H+'.material) annotation (Line(
+        connect('H+'.negative.material, negative.'H+'.material) annotation (
+            Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.positive.material, positive.'H+'.material) annotation (Line(
+        connect('H+'.positive.material, positive.'H+'.material) annotation (
+            Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4578,90 +4149,6 @@ sensor</a> model.
 </p></html>"));
   end FaceBusDifferential;
 
-  package BaseClasses "Base classes (not for direct use)"
-    extends Modelica.Icons.BasesPackage;
-
-    partial model PartialSensorNonideal
-      "Partial sensor with dynamics, saturation, and noise"
-
-      extends PartialSensor;
-
-      replaceable FCSys.Sensors.BaseClasses.PartialSensor sensor constrainedby
-        FCSys.Sensors.BaseClasses.PartialSensor "Sensor" annotation (
-          choicesAllMatching=true, Placement(transformation(extent={{-10,44},{
-                10,64}})));
-
-      parameter Real y_min=-y_max
-        "<html>Lower limit of measurement (<i>y</i><sub>min</sub>)</html>";
-      parameter Real y_max=Modelica.Constants.inf
-        "<html>Upper limit of measurement (<i>y</i><sub>max</sub>)</html>";
-      parameter Real k_noise=0
-        "<html>Amplitude of noise signal (<i>k</i><sub>noise</sub>)</html>";
-
-      replaceable Modelica.Blocks.Continuous.FirstOrder dynamics(each initType=
-            Modelica.Blocks.Types.Init.SteadyState, each T=Modelica.Constants.eps)
-        constrainedby Modelica.Blocks.Interfaces.SISO "Dynamics" annotation (
-          choicesAllMatching=true, Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={0,16})));
-      Modelica.Blocks.Nonlinear.Limiter saturation(uMax=y_max, uMin=y_min)
-        "Saturation" annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={0,-40})));
-      FCSys.Blocks.Math.AddSkipInclIncl add "Addition" annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={0,-10})));
-      replaceable FCSys.Blocks.Continuous.Sources.RandomNormal noise "Noise"
-        annotation (Placement(transformation(extent={{-40,-20},{-20,0}})));
-
-    equation
-      connect(dynamics.y, add.u_1[1]) annotation (Line(
-          points={{-1.40998e-15,5},{2.16493e-15,-1}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(add.y[1], saturation.u) annotation (Line(
-          points={{-1.05471e-15,-19},{-1.05471e-15,-27.5},{2.87043e-15,-27.5},{
-              2.87043e-15,-28}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(noise.y, add.u_2) annotation (Line(
-          points={{-19,-10},{-14,-10},{-14,-10},{-9,-10}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(dynamics.u, sensor.y) annotation (Line(
-          points={{2.87043e-15,28},{2.87043e-15,36},{6.10623e-16,36},{
-              6.10623e-16,44}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      connect(y, saturation.y) annotation (Line(
-          points={{5.55112e-16,-100},{5.55112e-16,-75},{-1.40998e-15,-75},{-1.40998e-15,
-              -51}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      annotation (Icon(coordinateSystem(
-            preserveAspectRatio=true,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics), Diagram(coordinateSystem(
-            preserveAspectRatio=true,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics));
-    end PartialSensorNonideal;
-
-    partial model PartialSensor "Partial model for a sensor"
-
-      extends FCSys.BaseClasses.Icons.Sensor;
-      FCSys.Connectors.RealOutput y "Measurement" annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={0,-100})));
-    end PartialSensor;
-  end BaseClasses;
 
   package Face
     "<html>Sensors for a single <a href=\"modelica://FCSys.Connectors.BaseClasses.BaseClasses.PartialFace\">Face</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
@@ -5462,4 +4949,88 @@ disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.ModelicaLicens
 FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
 </p></html>"));
+  package BaseClasses "Base classes (not for direct use)"
+    extends Modelica.Icons.BasesPackage;
+
+    partial model PartialSensorNonideal
+      "Partial sensor with dynamics, saturation, and noise"
+
+      extends PartialSensor;
+
+      replaceable FCSys.Sensors.BaseClasses.PartialSensor sensor constrainedby
+        FCSys.Sensors.BaseClasses.PartialSensor "Sensor" annotation (
+          choicesAllMatching=true, Placement(transformation(extent={{-10,44},{
+                10,64}})));
+
+      parameter Real y_min=-y_max
+        "<html>Lower limit of measurement (<i>y</i><sub>min</sub>)</html>";
+      parameter Real y_max=Modelica.Constants.inf
+        "<html>Upper limit of measurement (<i>y</i><sub>max</sub>)</html>";
+      parameter Real k_noise=0
+        "<html>Amplitude of noise signal (<i>k</i><sub>noise</sub>)</html>";
+
+      replaceable Modelica.Blocks.Continuous.FirstOrder dynamics(each initType=
+            Modelica.Blocks.Types.Init.SteadyState, each T=Modelica.Constants.eps)
+        constrainedby Modelica.Blocks.Interfaces.SISO "Dynamics" annotation (
+          choicesAllMatching=true, Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={0,16})));
+      Modelica.Blocks.Nonlinear.Limiter saturation(uMax=y_max, uMin=y_min)
+        "Saturation" annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={0,-40})));
+      FCSys.Blocks.Math.AddSkipInclIncl add "Addition" annotation (Placement(
+            transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={0,-10})));
+      replaceable FCSys.Blocks.Continuous.Sources.RandomNormal noise "Noise"
+        annotation (Placement(transformation(extent={{-40,-20},{-20,0}})));
+
+    equation
+      connect(dynamics.y, add.u_1[1]) annotation (Line(
+          points={{-1.40998e-15,5},{2.16493e-15,-1}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(add.y[1], saturation.u) annotation (Line(
+          points={{-1.05471e-15,-19},{-1.05471e-15,-27.5},{2.87043e-15,-27.5},{
+              2.87043e-15,-28}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(noise.y, add.u_2) annotation (Line(
+          points={{-19,-10},{-14,-10},{-14,-10},{-9,-10}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(dynamics.u, sensor.y) annotation (Line(
+          points={{2.87043e-15,28},{2.87043e-15,36},{6.10623e-16,36},{
+              6.10623e-16,44}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(y, saturation.y) annotation (Line(
+          points={{5.55112e-16,-100},{5.55112e-16,-75},{-1.40998e-15,-75},{
+              -1.40998e-15,-51}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      annotation (Icon(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={2,2}), graphics), Diagram(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={2,2}), graphics));
+    end PartialSensorNonideal;
+
+    partial model PartialSensor "Partial model for a sensor"
+
+      extends FCSys.BaseClasses.Icons.Sensor;
+      FCSys.Connectors.RealOutput y "Measurement" annotation (Placement(
+            transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={0,-100})));
+    end PartialSensor;
+  end BaseClasses;
 end Sensors;

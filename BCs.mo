@@ -6,20 +6,19 @@ package BCs "Models for boundary conditions"
 
   package Examples "Examples and tests"
     extends Modelica.Icons.ExamplesPackage;
-    model Environment "<html>Test the <code>Environment</code> model</html>"
+    model Defaults "<html>Test the <code>Defaults</code> model</html>"
       extends Modelica.Icons.Example;
 
       // TODO:  Make this into a meaningful example.
-      FCSys.BCs.Defaults default
+      FCSys.BCs.Defaults defaults
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-    end Environment;
+    end Defaults;
 
     model FaceBC "<html>Test the BCs for the face of a subregion</html>"
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
 
-      FCSys.BCs.FaceBus.Subregion subregionFaceBC(gas(inclH2O=true, H2O(
-              thermoOpt=ThermoOpt.OpenDiabatic, materialSpec(k=-0.4805*U.V))))
+      FCSys.BCs.FaceBus.Subregion subregionFaceBC(gas(inclH2O=true))
         annotation (Placement(transformation(extent={{-10,14},{10,34}})));
       Subregions.Subregion subregion(
         L={1,1,1}*U.cm,
@@ -35,14 +34,14 @@ package BCs "Models for boundary conditions"
           H2O(
             xNegative(
               thermoOpt=ThermoOpt.ClosedAdiabatic,
-              slipY=false,
-              slipZ=false),
+              inviscidY=true,
+              inviscidZ=true),
             xPositive(
               thermoOpt=ThermoOpt.ClosedAdiabatic,
-              slipY=false,
-              slipZ=false),
-            zNegative(slipX=false, slipY=false),
-            zPositive(slipX=false, slipY=false),
+              inviscidY=true,
+              inviscidZ=true),
+            zNegative(inviscidX=false, inviscidY=false),
+            zPositive(inviscidX=false, inviscidY=false),
             yPositive(thermoOpt=ThermoOpt.OpenDiabatic),
             initMethPartNum=InitMethScalar.PotentialElectrochemical,
             mu_IC=-298685),
@@ -50,7 +49,7 @@ package BCs "Models for boundary conditions"
           inclO2=false))
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      inner Defaults defaults
+      inner BCs.Defaults defaults
         annotation (Placement(transformation(extent={{30,30},{50,50}})));
     equation
       connect(subregion.yPositive, subregionFaceBC.face) annotation (Line(
@@ -271,14 +270,14 @@ package BCs "Models for boundary conditions"
     equation
 
       connect(xNegative.H2.material, volume.face.material) annotation (Line(
-          points={{5.55112e-16,5.55112e-16},{-6,5.55112e-16},{-6,0},{-10,0},{-10,
-              6.10623e-16},{-20,6.10623e-16}},
+          points={{5.55112e-16,5.55112e-16},{-6,5.55112e-16},{-6,0},{-10,0},{
+              -10,6.10623e-16},{-20,6.10623e-16}},
           color={127,127,127},
           smooth=Smooth.None,
           thickness=0.5));
       connect(xNegative.H2.thermal, volume.face.thermal) annotation (Line(
-          points={{5.55112e-16,5.55112e-16},{-6,5.55112e-16},{-6,0},{-10,0},{-10,
-              6.10623e-16},{-20,6.10623e-16}},
+          points={{5.55112e-16,5.55112e-16},{-6,5.55112e-16},{-6,0},{-10,0},{
+              -10,6.10623e-16},{-20,6.10623e-16}},
           color={127,127,127},
           smooth=Smooth.None,
           thickness=0.5));
@@ -297,7 +296,7 @@ package BCs "Models for boundary conditions"
 
   package Adapters "Adapters to Package Modelica"
     extends Modelica.Icons.Package;
-    extends FCSys.BaseClasses.Icons.PackageUnderConstruction;
+
     model AdaptBusH2
       "<html>Adapter for H<sub>2</sub> between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
       extends BaseClasses.PartialAdaptBus(redeclare replaceable package Medium
@@ -389,12 +388,14 @@ package BCs "Models for boundary conditions"
       Medium.BaseProperties medium "Base properties of the fluid";
 
       FCSys.Connectors.Face face(
+        axis=Axis.x,
         final thermoOpt=ThermoOpt.OpenDiabatic,
-        final slipX=false,
-        final slipY=false,
-        final slipZ=false) "FCSys face connector" annotation (Placement(
+        final inviscidX=true,
+        final inviscidY=true,
+        final inviscidZ=true) "FCSys face connector" annotation (Placement(
             transformation(extent={{-110,-10},{-90,10}}), iconTransformation(
               extent={{-110,-10},{-90,10}})));
+
       // Note:  The axis doesn't matter since transverse linear momentum
       // isn't included.
       Modelica.Fluid.Interfaces.FluidPort_b fluidPort(redeclare final package
@@ -410,8 +411,8 @@ package BCs "Models for boundary conditions"
       medium.T = heatPort.T;
       medium.Xi = ones(Medium.nXi)/Medium.nXi;
 
-      // Efforts and streams
-      face.material.p = fluidPort.p*U.Pa;
+      // Effort variables
+      face.material.rho = (medium.d/medium.MM)*U.mol/U.m^3;
       face.thermal.T = heatPort.T*U.K;
       medium.h = fluidPort.h_outflow;
 
@@ -425,21 +426,25 @@ package BCs "Models for boundary conditions"
       annotation (
         Documentation(info="<html><p>Note that transverse linear momentum is not included.</p>
   </html>"),
-        Icon(graphics={Line(
-                  points={{0,40},{0,-40}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash,
-                  thickness=0.5),Line(
-                  points={{0,0},{-100,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None),Line(
-                  points={{0,40},{100,40}},
-                  color={0,127,255},
-                  smooth=Smooth.None),Line(
-                  points={{0,-40},{100,-40}},
-                  color={191,0,0},
-                  smooth=Smooth.None)}),
+        Icon(graphics={
+            Line(
+              points={{0,40},{0,-40}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),
+            Line(
+              points={{0,0},{-100,0}},
+              color={127,127,127},
+              smooth=Smooth.None),
+            Line(
+              points={{0,40},{100,40}},
+              color={0,127,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-40},{100,-40}},
+              color={191,0,0},
+              smooth=Smooth.None)}),
         Diagram(graphics));
     end AdaptFluid;
 
@@ -454,9 +459,9 @@ package BCs "Models for boundary conditions"
       Modelica.Electrical.Analog.Interfaces.NegativePin pin
         "Modelica electrical pin" annotation (Placement(transformation(extent={
                 {90,30},{110,50}}), iconTransformation(extent={{90,30},{110,50}})));
-      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
+      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port
         "Modelica heat port" annotation (Placement(transformation(extent={{90,-50},
-                {110,-30}}),iconTransformation(extent={{90,-50},{110,-30}})));
+                {110,-30}}), iconTransformation(extent={{90,-50},{110,-30}})));
       FCSys.BCs.Adapters.'AdaptBuse-' 'adaptBuse-'
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
@@ -471,27 +476,31 @@ package BCs "Models for boundary conditions"
           points={{10,4},{80,4},{80,40},{100,40}},
           color={0,0,255},
           smooth=Smooth.None));
-      connect('adaptBuse-'.heatPort, heatPort) annotation (Line(
+      connect('adaptBuse-'.port, port) annotation (Line(
           points={{10,-4},{80,-4},{80,-40},{100,-40}},
           color={191,0,0},
           smooth=Smooth.None));
 
-      annotation (Icon(graphics={Line(
-                  points={{0,40},{0,-40}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash,
-                  thickness=0.5),Line(
-                  points={{0,0},{-100,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,40},{100,40}},
-                  color={0,0,255},
-                  smooth=Smooth.None),Line(
-                  points={{0,-40},{100,-40}},
-                  color={191,0,0},
-                  smooth=Smooth.None)}), Diagram(graphics));
+      annotation (Icon(graphics={
+            Line(
+              points={{0,40},{0,-40}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),
+            Line(
+              points={{0,0},{-100,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,40},{100,40}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-40},{100,-40}},
+              color={191,0,0},
+              smooth=Smooth.None)}), Diagram(graphics));
     end 'AdaptSubregione-';
 
     model 'AdaptBuse-'
@@ -505,9 +514,9 @@ package BCs "Models for boundary conditions"
       Modelica.Electrical.Analog.Interfaces.NegativePin pin
         "Modelica electrical pin" annotation (Placement(transformation(extent={
                 {90,30},{110,50}}), iconTransformation(extent={{90,30},{110,50}})));
-      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
+      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port
         "Modelica heat port" annotation (Placement(transformation(extent={{90,-50},
-                {110,-30}}), iconTransformation(extent={{90,-50},{110,-30}})));
+                {110,-30}}),iconTransformation(extent={{90,-50},{110,-30}})));
       FCSys.BCs.Adapters.'Adapte-' 'adapte-'
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
@@ -528,27 +537,31 @@ package BCs "Models for boundary conditions"
           points={{10,4},{80,4},{80,40},{100,40}},
           color={0,0,255},
           smooth=Smooth.None));
-      connect('adapte-'.heatPort, heatPort) annotation (Line(
+      connect('adapte-'.port, port) annotation (Line(
           points={{10,-4},{80,-4},{80,-40},{100,-40}},
           color={191,0,0},
           smooth=Smooth.None));
 
-      annotation (Icon(graphics={Line(
-                  points={{0,40},{0,-40}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash,
-                  thickness=0.5),Line(
-                  points={{0,0},{-100,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,40},{100,40}},
-                  color={0,0,255},
-                  smooth=Smooth.None),Line(
-                  points={{0,-40},{100,-40}},
-                  color={191,0,0},
-                  smooth=Smooth.None)}), Diagram(graphics));
+      annotation (Icon(graphics={
+            Line(
+              points={{0,40},{0,-40}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),
+            Line(
+              points={{0,0},{-100,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,40},{100,40}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-40},{100,-40}},
+              color={191,0,0},
+              smooth=Smooth.None)}), Diagram(graphics));
     end 'AdaptBuse-';
 
     model 'Adapte-'
@@ -558,10 +571,11 @@ package BCs "Models for boundary conditions"
       extends FCSys.BaseClasses.Icons.Names.Top3;
 
       FCSys.Connectors.Face face(
+        axis=Axis.x,
         final thermoOpt=ThermoOpt.OpenDiabatic,
-        final slipX=false,
-        final slipY=false,
-        final slipZ=false)
+        final inviscidX=true,
+        final inviscidY=true,
+        final inviscidZ=true)
         "Connector for material, linear momentum, and heat of a single species"
         annotation (Placement(transformation(extent={{-110,-10},{-90,10}}),
             iconTransformation(extent={{-110,-10},{-90,10}})));
@@ -570,38 +584,45 @@ package BCs "Models for boundary conditions"
       Modelica.Electrical.Analog.Interfaces.NegativePin pin
         "Modelica electrical pin" annotation (Placement(transformation(extent={
                 {90,30},{110,50}}), iconTransformation(extent={{90,30},{110,50}})));
-      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
+      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port
         "Modelica heat port" annotation (Placement(transformation(extent={{90,-50},
                 {110,-30}}), iconTransformation(extent={{90,-50},{110,-30}})));
 
     equation
-      // Equal efforts
-      Data.g(face.thermal.T, face.material.p) = Data.z*pin.v*U.V
-        "Electrochemical potential";
-      face.thermal.T = heatPort.T*U.K "Temperature";
+      // Effort variables
+      Data.g(face.thermal.T, Data.p_Tv(face.thermal.T, 1/face.material.rho)) =
+        Data.z*pin.v*U.V "Electrochemical potential";
+      face.thermal.T = port.T*U.K "Temperature";
 
       // Conservation (no storage)
       0 = face.material.Ndot + pin.i*U.A/Data.z "Material";
-      0 = face.thermal.Qdot + heatPort.Q_flow*U.W "Energy";
+      0 = face.thermal.Qdot + port.Q_flow*U.W "Energy";
       // There is no electrical work since electrons are not stored and there
       // is no potential difference.
 
-      annotation (Documentation(info="<html><p>Note that transverse linear momentum is not included.</p>
-  </html>"), Icon(graphics={Line(
-                  points={{0,40},{0,-40}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash,
-                  thickness=0.5),Line(
-                  points={{0,0},{-100,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None),Line(
-                  points={{0,40},{100,40}},
-                  color={0,0,255},
-                  smooth=Smooth.None),Line(
-                  points={{0,-40},{100,-40}},
-                  color={191,0,0},
-                  smooth=Smooth.None)}));
+      annotation (
+        Documentation(info="<html><p>Note that transverse linear momentum is not included.</p>
+  </html>"),
+        Icon(graphics={
+            Line(
+              points={{0,40},{0,-40}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),
+            Line(
+              points={{0,0},{-100,0}},
+              color={127,127,127},
+              smooth=Smooth.None),
+            Line(
+              points={{0,40},{100,40}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-40},{100,-40}},
+              color={191,0,0},
+              smooth=Smooth.None)}),
+        Diagram(graphics));
     end 'Adapte-';
 
     package BaseClasses "Base classes (not for direct use)"
@@ -639,21 +660,25 @@ package BCs "Models for boundary conditions"
             points={{10,-4},{60,-4},{60,-40},{100,-40}},
             color={191,0,0},
             smooth=Smooth.None));
-        annotation (Icon(graphics={Line(
-                      points={{0,40},{0,-40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash,
-                      thickness=0.5),Line(
-                      points={{0,0},{-100,0}},
-                      color={127,127,127},
-                      smooth=Smooth.None),Line(
-                      points={{0,40},{100,40}},
-                      color={0,127,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,-40},{100,-40}},
-                      color={191,0,0},
-                      smooth=Smooth.None)}), Diagram(graphics));
+        annotation (Icon(graphics={
+              Line(
+                points={{0,40},{0,-40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash,
+                thickness=0.5),
+              Line(
+                points={{0,0},{-100,0}},
+                color={127,127,127},
+                smooth=Smooth.None),
+              Line(
+                points={{0,40},{100,40}},
+                color={0,127,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,-40},{100,-40}},
+                color={191,0,0},
+                smooth=Smooth.None)}), Diagram(graphics));
       end PartialAdaptBus;
     end BaseClasses;
   end Adapters;
@@ -3069,7 +3094,7 @@ package BCs "Models for boundary conditions"
             transformation(extent={{-10,-10},{10,10}})));
 
       FCSys.Connectors.FaceBus face
-        "Connector for material, displacement, and heat of multiple species"
+        "Connector for material, linear momentum, and heat of multiple species"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
       FCSys.Connectors.RealInputBus u "Bus of inputs to specify conditions"
@@ -3489,8 +3514,8 @@ package BCs "Models for boundary conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Face.Species C(final axis=axis,isochoric=true) if inclC
-          "Model" annotation (Dialog(
+        FCSys.BCs.Face.Species C(final axis=axis,thermoOpt=ThermoOpt.ClosedDiabatic)
+          if inclC "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclC), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -3594,8 +3619,8 @@ package BCs "Models for boundary conditions"
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Face.Species C19HF37O5S(final axis=axis,isochoric=true) if
-          inclC19HF37O5S "Model" annotation (Dialog(
+        FCSys.BCs.Face.Species C19HF37O5S(final axis=axis,thermoOpt=ThermoOpt.ClosedDiabatic)
+          if inclC19HF37O5S "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclC19HF37O5S), Placement(transformation(extent={{-10,-10},
@@ -3769,7 +3794,7 @@ package BCs "Models for boundary conditions"
           parameter Axis axis "Axis material to the face";
 
           FCSys.Connectors.FaceBus face
-            "Multi-species connector for material, displacement, and heat"
+            "Multi-species connector for material, linear momentum, and heat"
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
           FCSys.Connectors.RealInputBus u "Bus of inputs to specify conditions"
             annotation (Placement(transformation(
@@ -3873,11 +3898,10 @@ boundary condition</a> model.
         Placement(transformation(extent={{20,-14},{40,6}})));
 
       FCSys.Connectors.Face face(
-        final isochoric=isochoric,
+        final thermoOpt=thermoOpt,
         final inviscidX=inviscidX,
         final inviscidY=inviscidY,
-        final inviscidZ=inviscidZ,
-        final adiabatic=adiabatic)
+        final inviscidZ=inviscidZ)
         "Single-species connector for linear momentum and heat" annotation (
           Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
@@ -3986,10 +4010,9 @@ boundary condition</a> model.
         Placement(transformation(extent={{20,-14},{40,6}})));
 
       FCSys.Connectors.Face face(
-        final isochoric=isochoric,
+        final thermoOpt=thermoOpt,
         final inviscidY=inviscidY,
-        final inviscidZ=inviscidZ,
-        final adiabatic=adiabatic)
+        final inviscidZ=inviscidZ)
         "Single-species connector for linear momentum and heat" annotation (
           Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
@@ -4083,10 +4106,9 @@ boundary condition</a> model.
         Placement(transformation(extent={{-40,-14},{-20,6}})));
 
       FCSys.Connectors.FaceY face(
-        final isochoric=isochoric,
+        final thermoOpt=thermoOpt,
         final inviscidX=inviscidX,
-        final inviscidZ=inviscidZ,
-        final adiabatic=adiabatic)
+        final inviscidZ=inviscidZ)
         "Single-species connector for linear momentum and heat" annotation (
           Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
@@ -4176,10 +4198,9 @@ boundary condition</a> model.
         Placement(transformation(extent={{-10,-14},{10,6}})));
 
       FCSys.Connectors.FaceZ face(
-        final isochoric=isochoric,
+        final thermoOpt=thermoOpt,
         final inviscidX=inviscidX,
-        final inviscidY=inviscidY,
-        final adiabatic=adiabatic)
+        final inviscidY=inviscidY)
         "Single-species connector for linear momentum and heat" annotation (
           Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
@@ -4387,34 +4408,35 @@ boundary condition</a> model.
         "<html>Partial BC for a face of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
         extends FCSys.BaseClasses.Icons.BCs.Single;
 
-        parameter Boolean isochoric=false "Isochoric" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(group="Assumptions",compact=true));
-        parameter Boolean adiabatic=false "Adiabatic" annotation (
+        parameter ThermoOpt thermoOpt=ThermoOpt.OpenDiabatic
+          "Thermodynamic options" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Assumptions",compact=true));
 
         // Material
-        replaceable Material.Density materialBC if not isochoric constrainedby
-          Material.BaseClasses.PartialBC "Condition" annotation (
+        replaceable Material.Density materialBC if thermoOpt == ThermoOpt.OpenDiabatic
+          constrainedby Material.BaseClasses.PartialBC "Condition" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             group="Material",
-            enable=not isochoric,
+            enable=thermoOpt == 3,
             __Dymola_descriptionLabel=true),
           Placement(transformation(extent={{-70,-14},{-50,6}})));
 
         // Heat
-        replaceable Thermal.Temperature thermalBC if not adiabatic
+        replaceable Thermal.Temperature thermalBC if thermoOpt <> ThermoOpt.ClosedAdiabatic
           constrainedby Thermal.BaseClasses.PartialBC "Condition" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             group="Heat",
-            enable=not adiabatic,
+            enable=thermoOpt <> 1,
             __Dymola_descriptionLabel=true),
           Placement(transformation(extent={{50,-14},{70,6}})));
+        // Note:  Dymola 7.4 doesn't recognize enumerations in the dialog enable
+        // option, e.g.,
+        //     enable=thermoOpt <> ThermoOpt.ClosedAdiabatic.
+        // Therefore, the values of the enumerations are specified numerically.
 
         FCSys.Connectors.RealInputBus u "Input bus for external signal sources"
           annotation (Placement(transformation(
@@ -4952,8 +4974,8 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.FaceDifferential.Species C(isochoric=true) if inclC "Model"
-          annotation (Dialog(
+        FCSys.BCs.FaceDifferential.Species C(thermoOpt=ThermoOpt.ClosedDiabatic)
+          if inclC "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclC), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -5027,8 +5049,8 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.FaceDifferential.Species C19HF37O5S(isochoric=true) if
-          inclC19HF37O5S "Model" annotation (Dialog(
+        FCSys.BCs.FaceDifferential.Species C19HF37O5S(thermoOpt=ThermoOpt.ClosedDiabatic)
+          if inclC19HF37O5S "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclC19HF37O5S), Placement(transformation(extent={{-10,-10},
@@ -5170,10 +5192,10 @@ boundary condition</a> model.
           parameter Axis axis=Axis.x "Axis normal to the face";
 
           FCSys.Connectors.FaceBus negative
-            "Multi-species connector for material, displacement, and heat"
+            "Multi-species connector for material, linear momentum, and heat"
             annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
           FCSys.Connectors.FaceBus positive
-            "Multi-species connector for material, displacement, and heat"
+            "Multi-species connector for material, linear momentum, and heat"
             annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 
           FCSys.Connectors.RealInputBus u "Bus of inputs to specify conditions"
@@ -5267,19 +5289,17 @@ boundary condition</a> model.
 
       FCSys.Connectors.Face negative(
         final axis=axis,
-        final isochoric=isochoric,
+        final thermoOpt=thermoOpt,
         final inviscidX=inviscidX,
         final inviscidY=inviscidY,
-        final inviscidZ=inviscidZ,
-        final adiabatic=adiabatic) "Negative face" annotation (Placement(
+        final inviscidZ=inviscidZ) "Negative face" annotation (Placement(
             transformation(extent={{-110,-40},{-90,-20}}), iconTransformation(
               extent={{-110,-10},{-90,10}})));
       FCSys.Connectors.Face positive(
         final axis=axis,
         final inviscidX=inviscidX,
         final inviscidY=inviscidY,
-        final inviscidZ=inviscidZ,
-        final adiabatic=adiabatic) "Positive face" annotation (Placement(
+        final inviscidZ=inviscidZ) "Positive face" annotation (Placement(
             transformation(extent={{90,-40},{110,-20}}), iconTransformation(
               extent={{90,-10},{110,10}})));
 
@@ -5410,18 +5430,16 @@ boundary condition</a> model.
         Placement(transformation(extent={{10,-20},{30,0}})));
 
       FCSys.Connectors.FaceX negative(
-        final isochoric=isochoric,
+        final thermoOpt=thermoOpt,
         final inviscidY=inviscidY,
-        final inviscidZ=inviscidZ,
-        final adiabatic=adiabatic) "Negative face" annotation (Placement(
+        final inviscidZ=inviscidZ) "Negative face" annotation (Placement(
             transformation(extent={{-110,-40},{-90,-20}}), iconTransformation(
               extent={{-110,-10},{-90,10}})));
 
       FCSys.Connectors.FaceX positive(
-        final isochoric=isochoric,
+        final thermoOpt=thermoOpt,
         final inviscidY=inviscidY,
-        final inviscidZ=inviscidZ,
-        final adiabatic=adiabatic) "Positive face" annotation (Placement(
+        final inviscidZ=inviscidZ) "Positive face" annotation (Placement(
             transformation(extent={{90,-40},{110,-20}}), iconTransformation(
               extent={{90,-10},{110,10}})));
 
@@ -5532,18 +5550,16 @@ boundary condition</a> model.
         Placement(transformation(extent={{10,-20},{30,0}})));
 
       FCSys.Connectors.FaceY negative(
-        final isochoric=isochoric,
+        final thermoOpt=thermoOpt,
         final inviscidZ=inviscidZ,
-        final inviscidX=inviscidX,
-        final adiabatic=adiabatic) "Negative face" annotation (Placement(
+        final inviscidX=inviscidX) "Negative face" annotation (Placement(
             transformation(extent={{-110,-40},{-90,-20}}), iconTransformation(
               extent={{-110,-10},{-90,10}})));
 
       FCSys.Connectors.FaceY positive(
-        final isochoric=isochoric,
+        final thermoOpt=thermoOpt,
         final inviscidZ=inviscidZ,
-        final inviscidX=inviscidX,
-        final adiabatic=adiabatic) "Positive face" annotation (Placement(
+        final inviscidX=inviscidX) "Positive face" annotation (Placement(
             transformation(extent={{90,-40},{110,-20}}), iconTransformation(
               extent={{90,-10},{110,10}})));
 
@@ -5654,18 +5670,16 @@ boundary condition</a> model.
         Placement(transformation(extent={{10,-20},{30,0}})));
 
       FCSys.Connectors.FaceZ negative(
-        final isochoric=isochoric,
+        final thermoOpt=thermoOpt,
         final inviscidX=inviscidX,
-        final inviscidY=inviscidY,
-        final adiabatic=adiabatic) "Negative face" annotation (Placement(
+        final inviscidY=inviscidY) "Negative face" annotation (Placement(
             transformation(extent={{-110,-40},{-90,-20}}), iconTransformation(
               extent={{-110,-10},{-90,10}})));
 
       FCSys.Connectors.FaceZ positive(
-        final isochoric=isochoric,
+        final thermoOpt=thermoOpt,
         final inviscidX=inviscidX,
-        final inviscidY=inviscidY,
-        final adiabatic=adiabatic) "Positive face" annotation (Placement(
+        final inviscidY=inviscidY) "Positive face" annotation (Placement(
             transformation(extent={{90,-40},{110,-20}}), iconTransformation(
               extent={{90,-10},{110,10}})));
 
@@ -5758,7 +5772,6 @@ boundary condition</a> model.
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="materialBC");
       end Current;
-
 
       package BaseClasses "Base classes (not for direct use)"
         extends Modelica.Icons.BasesPackage;
@@ -5899,34 +5912,35 @@ boundary condition</a> model.
         "<html>Partial BC for a pair of faces of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
         extends FCSys.BaseClasses.Icons.BCs.Double;
 
-        parameter Boolean isochoric=false "Isochoric" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(group="Assumptions",compact=true));
-        parameter Boolean adiabatic=false "Adiabatic" annotation (
+        parameter ThermoOpt thermoOpt=ThermoOpt.OpenDiabatic
+          "Thermodynamic options" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Assumptions",compact=true));
 
         // Material
-        replaceable Material.Density materialBC if not isochoric constrainedby
-          Material.BaseClasses.PartialBC "Condition" annotation (
+        replaceable Material.Density materialBC if thermoOpt == ThermoOpt.OpenDiabatic
+          constrainedby Material.BaseClasses.PartialBC "Condition" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             group="Material",
-            enable=not isochoric,
+            enable=thermoOpt == 3,
             __Dymola_descriptionLabel=true),
           Placement(transformation(extent={{-70,0},{-50,20}})));
 
         // Heat
-        replaceable Thermal.Temperature thermalBC if not adiabatic
+        replaceable Thermal.Temperature thermalBC if thermoOpt <> ThermoOpt.ClosedAdiabatic
           constrainedby Thermal.BaseClasses.PartialBC "Condition" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             group="Heat",
-            enable=not adiabatic,
+            enable=thermoOpt <> 1,
             __Dymola_descriptionLabel=true),
           Placement(transformation(extent={{50,-40},{70,-20}})));
+        // Note:  Dymola 7.4 doesn't recognize enumerations in the dialog enable
+        // option, e.g.,
+        //     enable=thermoOpt <> ThermoOpt.ClosedAdiabatic.
+        // Therefore, the values of the enumerations are specified numerically.
 
         Connectors.RealInputBus u "Input bus for external signal sources"
           annotation (Placement(transformation(
@@ -6125,6 +6139,8 @@ those generated by the model's <code>connect</code> statements.</p>
       displayUnit="%") = 0.208
       "<html>Dry gas O<sub>2</sub> fraction (<i>y</i><sub>O2 dry</sub>)</html>";
     // Value from http://en.wikipedia.org/wiki/Oxygen
+    parameter Q.Acceleration a[Axis]=zeros(3)
+      "Acceleration of the reference frame";
 
     final parameter Q.NumberAbsolute x_H2O(
       final max=1,

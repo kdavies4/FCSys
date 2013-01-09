@@ -373,12 +373,12 @@ package Subregions
         graphite(
           final inclC=inclC,
           final 'incle-'='incle-',
-          C(isochoric=true)),
+          C(thermoOpt=ThermoOpt.ClosedDiabatic)),
         ionomer(
           final inclC19HF37O5S=inclC19HF37O5S,
           final 'inclH+'='inclH+',
-          C19HF37O5S(isochoric=true))) annotation (__Dymola_choicesFromPackage=
-            true, Placement(transformation(
+          C19HF37O5S(thermoOpt=ThermoOpt.ClosedDiabatic))) annotation (
+          __Dymola_choicesFromPackage=true, Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-50,0})));
@@ -392,12 +392,12 @@ package Subregions
         graphite(
           final inclC=inclC,
           final 'incle-'='incle-',
-          C(isochoric=true)),
+          C(thermoOpt=ThermoOpt.ClosedDiabatic)),
         ionomer(
           final inclC19HF37O5S=inclC19HF37O5S,
           final 'inclH+'='inclH+',
-          C19HF37O5S(isochoric=true))) annotation (__Dymola_choicesFromPackage=
-            true, Placement(transformation(
+          C19HF37O5S(thermoOpt=ThermoOpt.ClosedDiabatic))) annotation (
+          __Dymola_choicesFromPackage=true, Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={50,0})));
@@ -4946,27 +4946,27 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         final I_IC,
         final derI_IC,
         xNegative(
-          final isochoric=true,
+          thermoOpt=ThermoOpt.ClosedDiabatic,
           final inviscidY=true,
           final inviscidZ=true),
         xPositive(
-          final isochoric=true,
+          thermoOpt=ThermoOpt.ClosedDiabatic,
           final inviscidY=true,
           final inviscidZ=true),
         yNegative(
-          final isochoric=true,
+          thermoOpt=ThermoOpt.ClosedDiabatic,
           final inviscidZ=true,
           final inviscidX=true),
         yPositive(
-          final isochoric=true,
+          thermoOpt=ThermoOpt.ClosedDiabatic,
           final inviscidZ=true,
           final inviscidX=true),
         zNegative(
-          final isochoric=true,
+          thermoOpt=ThermoOpt.ClosedDiabatic,
           final inviscidX=true,
           final inviscidY=true),
         zPositive(
-          final isochoric=true,
+          thermoOpt=ThermoOpt.ClosedDiabatic,
           final inviscidX=true,
           final inviscidY=true));
 
@@ -5359,8 +5359,9 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         defaults.analysis "Bulk rate of thermal advection";
       //
       // Linear momentum balance
-      output Q.Force Ma[n_lin](each stateSelect=StateSelect.never) = M*der(phi)
-        /U.s if defaults.analysis "Acceleration force (constant mass)";
+      output Q.Force Ma[n_lin](each stateSelect=StateSelect.never) = M*(der(phi)
+        /U.s - defaults.a[cartAxes]) if defaults.analysis
+        "Acceleration force relative to the frame of reference (constant mass)";
       output Q.Force f_exch_adv[n_lin](each stateSelect=StateSelect.never) =
         chemical.mPhidot - Data.m*phi*chemical.Ndot if defaults.analysis
         "Acceleration force due to material (advective) exchange";
@@ -5440,7 +5441,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         annotation (Placement(transformation(extent={{10,-30},{30,-10}}),
             iconTransformation(extent={{60,-80},{80,-60}})));
       FCSys.Connectors.FaceX xNegative(
-        isochoric=not inclLin[Axis.x],
+        thermoOpt=if inclLin[Axis.x] then ThermoOpt.OpenDiabatic else ThermoOpt.ClosedDiabatic,
+
         inviscidY=not inclLin[Axis.y],
         inviscidZ=not inclLin[Axis.z],
         material(final rho(start=rho_IC) = rho_face[Axis.x, Side.n], final Ndot(
@@ -5459,8 +5461,10 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
           __Dymola_label="xNegative",
           __Dymola_descriptionLabel=true),Placement(transformation(extent={{-50,
                 -10},{-30,10}}), iconTransformation(extent={{-110,-10},{-90,10}})));
+
       FCSys.Connectors.FaceX xPositive(
-        isochoric=not inclLin[Axis.x],
+        thermoOpt=if inclLin[Axis.x] then ThermoOpt.OpenDiabatic else ThermoOpt.ClosedDiabatic,
+
         inviscidY=not inclLin[Axis.y],
         inviscidZ=not inclLin[Axis.z],
         material(final rho(start=rho_IC) = rho_face[Axis.x, Side.p], final Ndot(
@@ -5479,8 +5483,10 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
           __Dymola_label="xPositive",
           __Dymola_descriptionLabel=true),Placement(transformation(extent={{30,
                 -10},{50,10}}), iconTransformation(extent={{90,-10},{110,10}})));
+
       FCSys.Connectors.FaceY yNegative(
-        isochoric=not inclLin[Axis.y],
+        thermoOpt=if inclLin[Axis.y] then ThermoOpt.OpenDiabatic else ThermoOpt.ClosedDiabatic,
+
         inviscidZ=not inclLin[Axis.z],
         inviscidX=not inclLin[Axis.x],
         material(final rho(start=rho_IC) = rho_face[Axis.y, Side.n], final Ndot(
@@ -5501,7 +5507,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
                 -50},{10,-30}}), iconTransformation(extent={{-10,-110},{10,-90}})));
 
       FCSys.Connectors.FaceY yPositive(
-        isochoric=not inclLin[Axis.y],
+        thermoOpt=if inclLin[Axis.y] then ThermoOpt.OpenDiabatic else ThermoOpt.ClosedDiabatic,
+
         inviscidZ=not inclLin[Axis.z],
         inviscidX=not inclLin[Axis.x],
         material(final rho(start=rho_IC) = rho_face[Axis.y, Side.p],final Ndot(
@@ -5520,8 +5527,10 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
           __Dymola_label="yPositive",
           __Dymola_descriptionLabel=true),Placement(transformation(extent={{-10,
                 30},{10,50}}), iconTransformation(extent={{-10,90},{10,110}})));
+
       FCSys.Connectors.FaceZ zNegative(
-        isochoric=not inclLin[Axis.z],
+        thermoOpt=if inclLin[Axis.z] then ThermoOpt.OpenDiabatic else ThermoOpt.ClosedDiabatic,
+
         inviscidX=not inclLin[Axis.x],
         inviscidY=not inclLin[Axis.y],
         material(final rho(start=rho_IC) = rho_face[Axis.z, Side.n], final Ndot(
@@ -5540,8 +5549,10 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
           __Dymola_label="zNegative",
           __Dymola_descriptionLabel=true),Placement(transformation(extent={{10,
                 10},{30,30}}), iconTransformation(extent={{60,60},{80,80}})));
+
       FCSys.Connectors.FaceZ zPositive(
-        isochoric=not inclLin[Axis.z],
+        thermoOpt=if inclLin[Axis.z] then ThermoOpt.OpenDiabatic else ThermoOpt.ClosedDiabatic,
+
         inviscidX=not inclLin[Axis.x],
         inviscidY=not inclLin[Axis.y],
         material(final rho(start=rho_IC) = rho_face[Axis.z, Side.p], final Ndot(
@@ -5831,10 +5842,10 @@ The default global default settings will be used for the current simulation.",
             linAxes[axis]] else 0)) = Lstar_trans[axis]*(rho_face[axis, side]
              - rho)*(if upstream[axis] and inclLin[axis] then (exp(inSign(side)
             *I[linAxes[axis]]*alpha_Xi/(2*Lstar_trans[axis])) + 1) else 2);
-          if [xNegative.isochoric, xPositive.isochoric; yNegative.isochoric,
-              yPositive.isochoric; zNegative.isochoric, zPositive.isochoric][
-              axis, side] then
-            rho_face[axis, side] = rho "Isochoric BC";
+          if [xNegative.thermoOpt, xPositive.thermoOpt; yNegative.thermoOpt,
+              yPositive.thermoOpt; zNegative.thermoOpt, zPositive.thermoOpt][
+              axis, side] <> ThermoOpt.OpenDiabatic then
+            Ndot_face[axis, side] = 0 "Closed BC";
           end if;
 
           // Mechanical
@@ -5857,9 +5868,9 @@ The default global default settings will be used for the current simulation.",
           R*Qdot_face[axis, side] = Lstar_trans[axis]*(T_face[axis, side] - T)*
             (if upstream[axis] and inclLin[axis] then (exp(inSign(side)*I[
             linAxes[axis]]*alpha_R/(2*Lstar_trans[axis])) + 1) else 2);
-          if [xNegative.adiabatic, xPositive.adiabatic; yNegative.adiabatic,
-              yPositive.adiabatic; zNegative.adiabatic, zPositive.adiabatic][
-              axis, side] then
+          if [xNegative.thermoOpt, xPositive.thermoOpt; yNegative.thermoOpt,
+              yPositive.thermoOpt; zNegative.thermoOpt, zPositive.thermoOpt][
+              axis, side] == ThermoOpt.ClosedAdiabatic then
             Qdot_face[axis, side] = 0 "Adiabatic BC";
           end if;
         end for;
@@ -5938,7 +5949,8 @@ The default global default settings will be used for the current simulation.",
             axis] - orientation), :, orientation] .* Ndot_face[cartWrap(
             cartAxes[axis] - orientation), :]) + Sigma(mPhidot_face[cartWrap(
             cartAxes[axis] - orientation), :, orientation]) for orientation in
-            Orientation) "Conservation of linear momentum";
+            Orientation) + M*defaults.a[cartAxes[axis]]
+            "Conservation of linear momentum";
         end if;
       end for;
 
@@ -6055,19 +6067,19 @@ The default global default settings will be used for the current simulation.",
     in Figure 3b.  The volumes are additive, and each species is assumed to exist at the
     pressure of the subregion.</p>
 
-    <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\" align=center>
-      <tr align=center>
-        <td align=center>
+    <table border=0 cellspacing=0 cellpadding=2 align=center class=noBorder style=\"margin-left: auto; margin-right: auto;\">
+      <tr align=center class=noBorder>
+        <td align=center class=noBorder style=\"margin-left: auto; margin-right: auto;\">
           <img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/share_pressure.png\">
 <br><b>a:</b>  Pressures of species (A, B, and C) are additive within a phase.
         </td>
-        <td align=center>
+        <td align=center class=noBorder style=\"margin-left: auto; margin-right: auto;\">
           <img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/share_volume.png\">
 <br><b>b:</b>  Volumes of phases (I, II, and III) are additive within a subregion.
         </td>
       </tr>
-      <tr align=center>
-        <td colspan=2 align=center><b>Figure 3:</b> Methods of sharing pressure and volume.</td>
+      <tr align=center class=noBorder style=\"margin-left: auto; margin-right: auto;\">
+        <td colspan=2 align=center class=noBorder ><b>Figure 3:</b> Methods of sharing pressure and volume.</td>
       </tr>
     </table>
 

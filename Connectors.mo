@@ -19,14 +19,14 @@ package Connectors "Declarative and imperative connectors"
             fillColor={255,128,0},
             lineThickness=0.5)}),
       Diagram(graphics={Text(
-            extent={{-100,36},{100,76}},
-            textString="%name",
-            lineColor={0,0,0}), Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={208,104,0},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,128,0},
-            lineThickness=0.5)}));
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0}),Ellipse(
+              extent={{-30,30},{30,-30}},
+              lineColor={208,104,0},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,128,0},
+              lineThickness=0.5)}));
   end ChemicalBus;
 
   expandable connector ChemicalBusInternal
@@ -547,21 +547,18 @@ package Connectors "Declarative and imperative connectors"
             fillColor={255,255,255},
             fillPattern=FillPattern.Solid,
             lineColor={72,90,180})}),
-      Diagram(graphics={
-          Ellipse(
-            extent={{-10,10},{10,-10}},
-            lineColor={72,90,180},
-            fillPattern=FillPattern.Solid,
-            fillColor={102,128,255}),
-          Text(
-            extent={{-100,20},{100,60}},
-            textString="%name",
-            lineColor={0,0,0}),
-          Ellipse(
-            extent={{-4,4},{4,-4}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            lineColor={72,90,180})}));
+      Diagram(graphics={Ellipse(
+              extent={{-10,10},{10,-10}},
+              lineColor={72,90,180},
+              fillPattern=FillPattern.Solid,
+              fillColor={102,128,255}),Text(
+              extent={{-100,20},{100,60}},
+              textString="%name",
+              lineColor={0,0,0}),Ellipse(
+              extent={{-4,4},{4,-4}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={72,90,180})}));
   end InertInternal;
 
   connector Material "Connector to transport material"
@@ -757,14 +754,14 @@ Protected connector with one input signal of type <code>Real</code>.</p>
           initialScale=0.1,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-              points={{0,50},{100,0},{0,-50},{0,50}},
-              lineColor={0,0,127},
-              fillColor={0,0,127},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{-200,50},{200,90}},
-              textString="%name",
-              lineColor={0,0,0})}));
+            points={{0,50},{100,0},{0,-50},{0,50}},
+            lineColor={0,0,127},
+            fillColor={0,0,127},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5), Text(
+            extent={{-200,50},{200,90}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end RealInputBus;
 
@@ -995,18 +992,15 @@ Protected connector with one output signal of type <code>Real</code>.</p>
     connector PartialFace
       "Partial connector to transport linear momentum and heat of a single species"
 
-      parameter Boolean isochoric=false "Isochoric" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(group="Assumptions",compact=true));
-      parameter Boolean adiabatic=false "Adiabatic" annotation (
+      parameter ThermoOpt thermoOpt=ThermoOpt.OpenDiabatic
+        "Thermodynamic options" annotation (
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(group="Assumptions",compact=true));
 
-      FCSys.Connectors.Material material if not isochoric
+      FCSys.Connectors.Material material if thermoOpt == ThermoOpt.OpenDiabatic
         "Subconnector for material transport";
-      FCSys.Connectors.Thermal thermal if not adiabatic
+      FCSys.Connectors.Thermal thermal if thermoOpt <> ThermoOpt.ClosedAdiabatic
         "Subconnector for thermal transport";
 
       annotation (
@@ -1033,6 +1027,15 @@ Protected connector with one output signal of type <code>Real</code>.</p>
               fillPattern=FillPattern.Solid)}));
 
     end PartialFace;
+
+    type ThermoOpt = enumeration(
+        ClosedAdiabatic "Closed and adiabatic",
+        ClosedDiabatic "Closed and diabatic",
+        OpenDiabatic "Open and diabatic")
+      "Enumeration of thermodynamic options for a face" annotation (
+        Documentation(info="
+    <html><p>The open and adiabatic combination is invalid because it 
+    prevents the rate of energy transfer from being calculated properly.</p></html>"));
 
   end BaseClasses;
 
@@ -1097,7 +1100,7 @@ Protected connector with one output signal of type <code>Real</code>.</p>
           <br>
           <a href=\"modelica://FCSys.Connectors.Inert\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertI.png\"></a>
           <a href=\"modelica://FCSys.Connectors.InertAmagat\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertAmagatI.png\"></a>
-          <a href=\"modelica://FCSys.Connectors.InertDalton\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertDaltonI.png\"></a></td>
+          <a href=\"modelica://FCSys.Connectors.InertDalton\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertDaltonI.png\"></a>
           <br>
           <a href=\"modelica://FCSys.Connectors.MechanicalTransport\"><img src=\"modelica://FCSys/help/FCSys.Connectors.MechanicalTransportI.png\"></a>
           <a href=\"modelica://FCSys.Connectors.Face\"><img src=\"modelica://FCSys/help/FCSys.Connectors.FaceI.png\"></a>

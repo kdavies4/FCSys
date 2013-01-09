@@ -59,6 +59,9 @@ git add images/*UsersGuide* # **temp
 git add images/FCSys.BaseClasses* # **temp
 git add images/*Subregions* # **temp
 git add images/*S.png # **temp
+git add images/exchange.png # **temp
+git add images/transport.png # **temp
+git add images/share*.png # **temp
 
 # Update the Github web pages and return to the original branch.
 git commit -am "Auto-update github pages"
