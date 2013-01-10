@@ -76,7 +76,6 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.Pressure Pressure=1*U.Pa "Pressure";
       parameter Q.PressureAbsolute PressureAbsolute=1*U.Pa "Absolute pressure";
       parameter Q.PressureRate PressureRate=1*U.Pa/U.s "Rate of pressure";
-      parameter Q.Resistance Resistance=1/U.A "Resistance";
       parameter Q.ResistanceElectrical ResistanceElectrical=1*U.ohm
         "Electrical resistance";
       parameter Q.Resistivity Resistivity=1*U.m/U.A "Resistivity";
@@ -160,7 +159,6 @@ package Quantities "Quantities to represent physical properties"
     "Absolute pressure";
   type PressureRate = Modelica.Icons.TypeReal (final unit="m/(l.T3)")
     "Rate of pressure";
-  type Resistance = Modelica.Icons.TypeReal (final unit="T/N", min=0);
   type ResistanceElectrical = Modelica.Icons.TypeReal (final unit="l2.m/(N2.T)",
         min=0) "Electrical resistance";
   type Resistivity = Modelica.Icons.TypeReal (final unit="l.T/N", min=0);

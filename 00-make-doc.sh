@@ -5,7 +5,6 @@
 # Remove some of the help files.
 rm help/FCSys.Blocks*.png
 rm help/FCSys_Blocks*.html
-cp -f help/FCSys.Figures.VolumeOrPressureI.png resources/documentation/Connectors/VolumeOrPressureI.png
 rm help/FCSys.Figures*.png
 rm help/FCSys_Figures*.html
 rm help/FCSys.Systems*.png
@@ -28,7 +27,7 @@ mv -f resources/documentation/ModelicaDoc.css stylesheets
 # Update the images.
 rm images/*
 IFS=$'\n' # Allow spaces in file names.
-for f in `find ./resources/documentation -name "*.png" -o -name "*.svg" -o -name "*.ico" -o -name "*.gif" -o -name "*.pdf"`
+for f in `find ./resources/documentation -iname "*.png" -o -iname "*.svg" -o -iname "*.ico" -o -iname "*.gif" -o -iname "*.pdf"`
 do
     cp $f images/
 done

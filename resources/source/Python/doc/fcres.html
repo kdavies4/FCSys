@@ -1,1 +1,870 @@
-/media/Storage/Documents/Dymola/FCSys/resources/source/Python/doc/build/html/fcres.html
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>fcres &mdash; fcres v0.1 Documentation</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/copybutton.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within fcres v0.1 Documentation"
+          href="_static/opensearch.xml"/>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="top" title="fcres v0.1 Documentation" href="index.html" />
+    <link rel="prev" title="FCSys Utilities User’s Guide" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="FCSys Utilities User’s Guide"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">fcres v0.1 Documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.gif" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-fcres">
+<span id="fcres"></span><h1><a class="reference internal" href="#module-fcres" title="fcres"><tt class="xref py py-mod docutils literal"><span class="pre">fcres</span></tt></a><a class="headerlink" href="#module-fcres" title="Permalink to this headline">¶</a></h1>
+<p>Load and analyze results from <a class="reference external" href="http://www.modelica.org/libraries">FCSys</a>.</p>
+<p>The &#8220;fcres.py&#8221; file can be executed at the command line.  It will accept as an
+argument the name of a results file or a directory with multiple files.  If no
+arguments are provided, then it gives a dialog to choose the file or folder.
+Finally, it provides a working session of <a class="reference external" href="http://www.python.org/">Python</a>
+with those results preloaded.</p>
+<p><strong>Example:</strong></p>
+<blockquote>
+<div><div class="highlight-sh"><div class="highlight"><pre><span class="nv">$ </span>./fcres.py demos/Polarization.mat
+Cell simulation results have been loaded from <span class="s2">&quot;demos/Polarization.mat&quot;</span>.
+The CellSimRes instance is sim.
+In <span class="o">[</span>1<span class="o">]</span>:
+</pre></div>
+</div>
+</div></blockquote>
+<dl class="class">
+<dt id="fcres.CellLinRes">
+<em class="property">class </em><tt class="descclassname">fcres.</tt><tt class="descname">CellLinRes</tt><big>(</big><em>fname='dslin.mat'</em><big>)</big><a class="headerlink" href="#fcres.CellLinRes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">modelicares.LinRes</span></tt></p>
+<p>Fuel cell linearization results from <a class="reference external" href="http://www.modelica.org/libraries">FCSys</a> and methods to analyze those
+results</p>
+<p>On initialization, load and preprocess the Dymola linearization file
+<em>fname</em> (MATLAB format).</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="fcres.CellSimRes">
+<em class="property">class </em><tt class="descclassname">fcres.</tt><tt class="descname">CellSimRes</tt><big>(</big><em>fname='Cell.mat'</em>, <em>cell='cell'</em><big>)</big><a class="headerlink" href="#fcres.CellSimRes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fcres.SimRes" title="fcres.SimRes"><tt class="xref py py-class docutils literal"><span class="pre">fcres.SimRes</span></tt></a></p>
+<p>Fuel cell simulation results from <a class="reference external" href="http://www.modelica.org/libraries">FCSys</a> and methods to analyze those
+results</p>
+<p>On initialization, load and preprocess the data.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p class="first"><em>fname</em>: Name of the Dymosim results trajectory file (*.mat)</p>
+</li>
+<li><p class="first"><em>cell</em>: Name of the cell model in the trajectory file.</p>
+<blockquote>
+<div><p>This should be relative to the top level of the simulated model and
+expressed in <a class="reference external" href="http://www.modelica.org/">Modelica</a> dot notation.  If the cell <strong>is</strong> the
+simulated model, then this should be an empty string.</p>
+</div></blockquote>
+</li>
+</ul>
+<dl class="method">
+<dt id="fcres.CellSimRes.animate_quiverfig_current">
+<tt class="descname">animate_quiverfig_current</tt><big>(</big><em>times</em>, <em>fname='current_eminus_xy'</em><big>)</big><a class="headerlink" href="#fcres.CellSimRes.animate_quiverfig_current" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an animation of the x-direction current in the x-y plane.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p class="first"><em>times</em>: Times at which the frames should be generated</p>
+</li>
+<li><p class="first"><em>fname</em>: Filename for the movie</p>
+<blockquote>
+<div><p>&#8221;.mpg&#8221; will be appended if necessary.</p>
+</div></blockquote>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="fcres.CellSimRes.colorfig">
+<tt class="descname">colorfig</tt><big>(</big><em>suffix, times=[0], n_rows=1, title='', subtitles=[], label='color', slice_axis='z', slice_index=0, xlabel='', xticklabels=[], xticks=[], ylabel='', yticklabels=[], yticks=[], clabel='', cbar_orientation='vertical', margin_left=0.125, margin_right=0.09999999999999998, margin_bottom=0.15, margin_top=0.050000000000000044, margin_cbar=0.2, wspace=0.1, hspace=0.25, cbar_space=0.1, cbar_width=0.05, **kwargs</em><big>)</big><a class="headerlink" href="#fcres.CellSimRes.colorfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a figure with 2D scalar data at given time(s) on a color axis
+in 2D Cartesian coordinates.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p class="first"><em>suffix</em>: Name of the variable to be plotted (relative to the names
+of the subregions)</p>
+</li>
+<li><p class="first"><em>times</em>: List of times at which the data should be sampled</p>
+<blockquote>
+<div><p>If multiple times are given, then subfigures will be generated.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>n_rows</em>: Number of rows of (sub)plots</p>
+</li>
+<li><p class="first"><em>title</em>: Title for the figure</p>
+</li>
+<li><p class="first"><em>subtitles</em>: List of subtitles (i.e., titles for each subplot)</p>
+<blockquote>
+<div><p>If not provided, &#8220;t = xx s&#8221; will be used, where xx is the time of
+each entry.  &#8220;(initial)&#8221; or &#8220;(final)&#8221; are appended if appropriate.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>label</em>: Label for the figure</p>
+<blockquote>
+<div><p>This will be used as a base filename if the figure is saved.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>slice_axis</em>: Axis normal to the screen or page (&#8216;x&#8217;, &#8216;y&#8217;, or &#8216;z&#8217;)</p>
+</li>
+<li><p class="first"><em>slice_index</em>: Position along slice_axis</p>
+</li>
+<li><p class="first"><em>xlabel</em>: Label for the x-axes (only shown for the subplots on the
+bottom row)</p>
+</li>
+<li><p class="first"><em>xticklabels</em>: Labels for the x-axis ticks (only shown for the
+subplots on the bottom row)</p>
+</li>
+<li><p class="first"><em>xticks</em>: Positions of the x-axis ticks</p>
+</li>
+<li><p class="first"><em>ylabel</em>: Label for the y axis (only shown for the subplots on the
+left column)</p>
+</li>
+<li><p class="first"><em>yticklabels</em>: Labels for the y-axis ticks (only shown for the
+subplots on the left column)</p>
+</li>
+<li><p class="first"><em>yticks</em>: Positions of the y-axis ticks</p>
+</li>
+<li><p class="first"><em>clabel</em>: Label for the color- or c-bar axis</p>
+</li>
+<li><p class="first"><em>cbar_orientation</em>: Orientation of the colorbar (&#8220;vertical&#8221; or
+&#8220;horizontal&#8221;)</p>
+</li>
+<li><p class="first"><em>margin_left</em>: Left margin</p>
+</li>
+<li><p class="first"><em>margin_right</em>: Right margin (ignored if <tt class="docutils literal"><span class="pre">cbar_orientation</span> <span class="pre">==</span>
+<span class="pre">'vertical'</span></tt>)</p>
+</li>
+<li><p class="first"><em>margin_bottom</em>: Bottom margin (ignored if <tt class="docutils literal"><span class="pre">cbar_orientation</span> <span class="pre">==</span>
+<span class="pre">'horizontal'</span></tt>)</p>
+</li>
+<li><p class="first"><em>margin_top</em>: Top margin</p>
+</li>
+<li><p class="first"><em>margin_cbar</em>: Margin reserved for the colorbar (right margin if
+<tt class="docutils literal"><span class="pre">cbar_orientation</span> <span class="pre">==</span> <span class="pre">'vertical'</span></tt> and bottom margin if
+<tt class="docutils literal"><span class="pre">cbar_orientation</span> <span class="pre">==</span> <span class="pre">'horizontal'</span></tt>)</p>
+</li>
+<li><p class="first"><em>wspace</em>: The amount of width reserved for blank space between
+subplots</p>
+</li>
+<li><p class="first"><em>hspace</em>: The amount of height reserved for white space between
+subplots</p>
+</li>
+<li><p class="first"><em>cbar_space</em>: Space between the subplot rectangles and the colorbar</p>
+</li>
+<li><p class="first"><em>cbar_width</em>: Width of the colorbar if vertical (or height if
+horizontal)</p>
+</li>
+<li><p class="first"><em>**kwargs</em>: Propagated to <tt class="xref py py-meth docutils literal"><span class="pre">res.color()</span></tt></p>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="fcres.CellSimRes.colorfig_pressure">
+<tt class="descname">colorfig_pressure</tt><big>(</big><em>title='Pressure Profile'</em>, <em>label='pressureprofile'</em>, <em>times=None</em><big>)</big><a class="headerlink" href="#fcres.CellSimRes.colorfig_pressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the pressure profiles of the subregions.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p class="first"><em>title</em>: Title for the figure</p>
+</li>
+<li><p class="first"><em>label</em>: Label for the figure</p>
+<blockquote>
+<div><p>This will be used as a base filename if the figure is saved.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>times</em>: List of times at which the data should be sampled</p>
+<blockquote>
+<div><p>If multiple times are given, then subfigures will be generated.</p>
+</div></blockquote>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="fcres.CellSimRes.currdenfig">
+<tt class="descname">currdenfig</tt><big>(</big><em>title=None, times=[0], z_index=0, leg_kwargs={}, **kwargs</em><big>)</big><a class="headerlink" href="#fcres.CellSimRes.currdenfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot current densities of the cell segments at times.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p class="first"><em>title</em>: Title for the figure</p>
+</li>
+<li><p class="first"><em>times</em>: List of times at which the data should be sampled</p>
+<blockquote>
+<div><p>If multiple times are given, then subfigures will be generated.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>z_index</em>: z-index at which the current densities are taken</p>
+</li>
+<li><p class="first"><em>leg_kwargs</em>: Dictionary of keyword arguments for
+<tt class="xref py py-meth docutils literal"><span class="pre">matplotlib.pyplot.legend()</span></tt></p>
+<blockquote>
+<div><p>If <em>leg_kwargs</em> is <em>None</em>, then no legend will be shown.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>**kwargs</em>: Propagated to <tt class="xref py py-meth docutils literal"><span class="pre">barfig()</span></tt></p>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="fcres.CellSimRes.gen_subtitles_time">
+<tt class="descname">gen_subtitles_time</tt><big>(</big><em>times</em><big>)</big><a class="headerlink" href="#fcres.CellSimRes.gen_subtitles_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate titles for subplots at a list of times.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fcres.CellSimRes.get_vector_comps2D">
+<tt class="descname">get_vector_comps2D</tt><big>(</big><em>axis</em>, <em>index</em>, <em>vect</em>, <em>times</em><big>)</big><a class="headerlink" href="#fcres.CellSimRes.get_vector_comps2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve 2-dimensional vector components at specified times.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p class="first"><em>axis</em>: Slice axis (&#8216;x&#8217;, &#8216;y&#8217;, or &#8216;z&#8217;)</p>
+</li>
+<li><p class="first"><em>index</em>: Position along <em>axis</em></p>
+</li>
+<li><p class="first"><em>vect</em>: Name of the vector to be extracted (relative to the
+subregions)</p>
+<blockquote>
+<div><p><em>vect</em> should contain &#8216;%i&#8217; where the vector indices should be
+inserted; the vector will be indexed according to the choice of
+<em>slice_axis</em> (see below).  <em>vect</em> will be appended to the names of
+the subregions (separated by &#8216;.&#8217;) in order to determine the
+full names of the vectors.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>times</em>: Times at which to sample the vectors</p>
+</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ol class="arabic">
+<li><p class="first">Tuple of the x-axis vector component (u) and the y-axis vector
+component (v)</p>
+<blockquote>
+<div><p>Here, the x axis is in screen coordinates (left/right)&#8212;not model
+coordinates. The y axis is in also screen coordinates
+(bottom/top).</p>
+</div></blockquote>
+</li>
+<li><p class="first">Tuple of the number of subregions along the x- and y- axes</p>
+<blockquote>
+<div><p>This will not be the same as (<em>self.n_x</em>, <em>self.n_y</em>) if a
+chemical component is not modeled within one or more of the
+subregions.</p>
+</div></blockquote>
+</li>
+<li><p class="first">Unit of the vector components</p>
+</li>
+<li><p class="first">2D Boolean list indicating if a subregion actually contains the
+species)</p>
+</li>
+</ol>
+</dd></dl>
+
+<dl class="method">
+<dt id="fcres.CellSimRes.label_layers">
+<tt class="descname">label_layers</tt><big>(</big><em>axs</em>, <em>y=-0.11</em>, <em>ygap=0.03</em>, <em>shrink=0.2</em><big>)</big><a class="headerlink" href="#fcres.CellSimRes.label_layers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label the layers along the x axis of plot(s).</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p class="first"><em>axs</em>: List of axes which should be labeled</p>
+</li>
+<li><p class="first"><em>y</em>: Vertical position of the horizontal grouping bar</p>
+</li>
+<li><p class="first"><em>ygap</em>: Vertical gap between the grouping bar and the top of the labels</p>
+</li>
+<li><p class="first"><em>shrink</em>: Fraction that each grouping bar should shrink away from
+touching its neighbor</p>
+<blockquote>
+<div><p>A value of 0.5 causes the bar to disappear.</p>
+</div></blockquote>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="fcres.CellSimRes.layer">
+<tt class="descname">layer</tt><big>(</big><em>i</em><big>)</big><a class="headerlink" href="#fcres.CellSimRes.layer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (abbreviated) name of the layer at a given x index (within
+the entire cell) and the x index within that layer.</p>
+<p><strong>Arguments:</strong></p>
+<ul class="simple">
+<li><em>i</em>: Index of the x axis (zero-based) within the entire cell&#8212;anode
+to cathode</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="fcres.CellSimRes.plotfig_subregions">
+<tt class="descname">plotfig_subregions</tt><big>(</big><em>prop</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#fcres.CellSimRes.plotfig_subregions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot a property within all subregions (by default, vs. time).</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p class="first"><em>prop</em>: Name of the property</p>
+<blockquote>
+<div><p>This will be appended to the names of the subregions (separated by
+&#8216;.&#8217;) in order to determine the names of the variables to plot on
+the primary y axis.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>**kwargs</em>: Propagated to <tt class="xref py py-meth docutils literal"><span class="pre">modelicares.plotfig()</span></tt> (and thus to
+<tt class="xref py py-meth docutils literal"><span class="pre">res.plot()</span></tt> and finally to <tt class="xref py py-meth docutils literal"><span class="pre">matplotlib.pyplot.plot()</span></tt>)</p>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="fcres.CellSimRes.quiverfig_subregions">
+<tt class="descname">quiverfig_subregions</tt><big>(</big><em>vect, times=[0], n_rows=1, title='', subtitles=None, label='quiver', slice_axis='z', slice_index=0, xlabel=None, xticklabels=None, ylabel=None, yticklabels=None, margin_left=0.125, margin_right=0.09999999999999998, margin_bottom=0.15, margin_top=0.050000000000000044, wspace=0.1, hspace=0.25, **kwargs</em><big>)</big><a class="headerlink" href="#fcres.CellSimRes.quiverfig_subregions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a figure with 2D vector data at given time(s) as arrows in 2D
+Cartesian coordinates.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p class="first"><em>vect</em>: Name of the vector to be plotted</p>
+<blockquote>
+<div><p><em>vect</em> should contain &#8220;%i&#8221; where the vector indices should be
+inserted; the vector will be indexed according to the choice of
+<em>slice_axis</em> (see below).  <em>vect</em> will be appended to the names of
+the subregions (separated by &#8216;.&#8217;) in order to determine the full
+names of the vectors.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>times</em>: List of times at which the data should be sampled</p>
+<blockquote>
+<div><p>If multiple times are given, then subfigures will be generated.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>n_rows</em>: Number of rows of (sub)plots</p>
+</li>
+<li><p class="first"><em>title</em>: Title for the figure</p>
+</li>
+<li><p class="first"><em>subtitles</em>: List of subtitles (i.e., titles for each subplot)</p>
+<blockquote>
+<div><p>If not provided, &#8220;t = <em>xx</em> s&#8221; will be used, where <em>xx</em> is  the time
+of each entry.  &#8220;(initial)&#8221; or &#8220;(final)&#8221; is appended if
+appropriate.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>label</em>: Label for the figure</p>
+<blockquote>
+<div><p>This will be used as a base filename if the figure is saved.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>slice_axis</em>: Axis normal to the screen or page (&#8216;x&#8217;, &#8216;y&#8217;, or &#8216;z&#8217;)</p>
+</li>
+<li><p class="first"><em>slice_index</em>: Position along <em>slice_axis</em></p>
+</li>
+<li><p class="first"><em>xlabel</em>: Label for the x-axes (only shown for the subplots on the
+bottom row)</p>
+<blockquote>
+<div><p>If <em>xlabel</em> is <em>None</em>, then the axis is labeled with &#8220;X Axis&#8221;,
+&#8220;Y Axis&#8221;, or &#8220;Z Axis&#8221; (as appropriate).</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>xticklabels</em>: Labels for the x-axis ticks</p>
+<blockquote>
+<div><p>X-axis ticks are only shown for the subplots on the bottom row.
+If <em>xticklabels</em> is <em>None</em>, then the tick labels are &#8220;1&#8221;, &#8220;2&#8221;, ...</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>ylabel</em>: Label for the y axis (only shown for the subplots on the
+left column)</p>
+<blockquote>
+<div><p>If <em>ylabel</em> is <em>None</em>, then the axis is labeled with &#8220;X Axis&#8221;,
+&#8220;Y Axis&#8221;, or &#8220;Z Axis&#8221; (as appropriate).</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>yticklabels</em>: Labels for the y-axis ticks</p>
+<blockquote>
+<div><p>Y-axis ticks are only shown for the subplots on the left column.
+If <em>None</em>, then the tick labels are &#8220;1&#8221;, &#8220;2&#8221;, ...</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>margin_left</em>: Left margin</p>
+</li>
+<li><p class="first"><em>margin_right</em>: Right margin</p>
+</li>
+<li><p class="first"><em>margin_bottom</em>: Bottom margin</p>
+</li>
+<li><p class="first"><em>margin_top</em>: Top margin</p>
+</li>
+<li><p class="first"><em>wspace</em>: The amount of width reserved for blank space between
+subplots</p>
+</li>
+<li><p class="first"><em>hspace</em>: The amount of height reserved for white space between
+subplots</p>
+</li>
+<li><p class="first"><em>**kwargs</em>: Propagated to <tt class="xref py py-meth docutils literal"><span class="pre">res.quiver()</span></tt> (and thus to
+<tt class="xref py py-meth docutils literal"><span class="pre">matplotlib.pyplot.quiver()</span></tt>)</p>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="fcres.CellSimRes.sankeyfig_energy">
+<tt class="descname">sankeyfig_energy</tt><big>(</big><big>)</big><a class="headerlink" href="#fcres.CellSimRes.sankeyfig_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fcres.CellSimRes.subregions_slice2D">
+<tt class="descname">subregions_slice2D</tt><big>(</big><em>axis</em>, <em>index</em><big>)</big><a class="headerlink" href="#fcres.CellSimRes.subregions_slice2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a 2-dimensional slice of the names of the subregions.</p>
+<p><strong>Arguments:</strong></p>
+<ul class="simple">
+<li><em>axis</em>: The slice axis (&#8216;x&#8217;, &#8216;y&#8217;, or &#8216;z&#8217;)</li>
+<li><em>index</em>: The index of the slice axis</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="fcres.CellSimRes.subregions_w_prop">
+<tt class="descname">subregions_w_prop</tt><big>(</big><em>prop</em><big>)</big><a class="headerlink" href="#fcres.CellSimRes.subregions_w_prop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of the names of the subregions appended with the name
+of a property.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p class="first"><em>prop</em>: Name of the property to be appended</p>
+<blockquote>
+<div><p>The &#8216;.&#8217; separator is automatically inserted (between the names of
+the subregion and property).</p>
+</div></blockquote>
+</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fcres.Conditions">
+<em class="property">class </em><tt class="descclassname">fcres.</tt><tt class="descname">Conditions</tt><a class="headerlink" href="#fcres.Conditions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">tuple</span></tt></p>
+<p>Conditions(cell_temp, composition, pressure, humidity, inlet_temp, flow)</p>
+<dl class="attribute">
+<dt id="fcres.Conditions.cell_temp">
+<tt class="descname">cell_temp</tt><a class="headerlink" href="#fcres.Conditions.cell_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fcres.Conditions.composition">
+<tt class="descname">composition</tt><a class="headerlink" href="#fcres.Conditions.composition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fcres.Conditions.flow">
+<tt class="descname">flow</tt><a class="headerlink" href="#fcres.Conditions.flow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 5</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fcres.Conditions.humidity">
+<tt class="descname">humidity</tt><a class="headerlink" href="#fcres.Conditions.humidity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fcres.Conditions.inlet_temp">
+<tt class="descname">inlet_temp</tt><a class="headerlink" href="#fcres.Conditions.inlet_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 4</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fcres.Conditions.pressure">
+<tt class="descname">pressure</tt><a class="headerlink" href="#fcres.Conditions.pressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fcres.SimRes">
+<em class="property">class </em><tt class="descclassname">fcres.</tt><tt class="descname">SimRes</tt><big>(</big><em>fname='Cell.mat'</em>, <em>cell='cell'</em><big>)</big><a class="headerlink" href="#fcres.SimRes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">modelicares.SimRes</span></tt></p>
+<p>On initialization, load and preprocess the data.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p class="first"><em>fname</em>: Name of the Dymosim results trajectory file (*.mat)</p>
+</li>
+<li><p class="first"><em>cell</em>: Name of the cell model in the trajectory file.</p>
+<blockquote>
+<div><p>This should be relative to the top level of the simulated model and
+expressed in <a class="reference external" href="http://www.modelica.org/">Modelica</a> dot notation.  If the cell <strong>is</strong> the
+simulated model, then this should be an empty string.</p>
+</div></blockquote>
+</li>
+</ul>
+<dl class="method">
+<dt id="fcres.SimRes.get_dimension">
+<tt class="descname">get_dimension</tt><big>(</big><em>names</em><big>)</big><a class="headerlink" href="#fcres.SimRes.get_dimension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the dimension(s) of trajectory variable(s).</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p class="first"><em>names</em>: Name(s) of the variable(s) from which to get the dimension(s)</p>
+<blockquote>
+<div><p>This may be a single string or (possibly nested) list of strings
+representing the names of the variables.</p>
+</div></blockquote>
+</li>
+</ul>
+<p>If <em>names</em> is a string, then the output will be a single unit.  If
+<em>names</em> is a (optionally nested) list of strings, then the output will
+be a (nested) list of units.</p>
+<p><strong>Example:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fcres</span> <span class="kn">import</span> <span class="n">CellSimRes</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sim</span> <span class="o">=</span> <span class="n">CellSimRes</span><span class="p">(</span><span class="s">&#39;demos/Polarization.mat&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sim</span><span class="o">.</span><span class="n">get_dimension</span><span class="p">(</span><span class="s">&#39;defaults.p&#39;</span><span class="p">)</span>
+<span class="go">&#39;m/(l.T2)&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sim</span><span class="o">.</span><span class="n">get_dimension</span><span class="p">([[[</span><span class="s">&#39;defaults.p&#39;</span><span class="p">,</span> <span class="s">&#39;defaults.T&#39;</span><span class="p">]]])</span>
+<span class="go">[[[&#39;m/(l.T2)&#39;, &#39;l2.m/(N.T2)&#39;]]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="fcres.SimRes.get_unit">
+<tt class="descname">get_unit</tt><big>(</big><em>names</em><big>)</big><a class="headerlink" href="#fcres.SimRes.get_unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the unit(s) for trajectory variable(s).</p>
+<p>The unit is the variable&#8217;s <em>displayUnit</em> attribute unless it is empty
+(&#8216;&#8217;).  In that case, the unit is taken from the global <em>default_unit</em>
+dictionary based on the variable&#8217;s dimension.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p class="first"><em>names</em>: Name(s) of the variable(s) from which to get the unit(s)</p>
+<blockquote>
+<div><p>This may be a single string or (possibly nested) list of strings
+representing the names of the variables.</p>
+</div></blockquote>
+</li>
+</ul>
+<p>If <em>names</em> is a string, then the output will be a single display unit.
+If <em>names</em> is a (optionally nested) list of strings, then the output
+will be a (nested) list of units.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method (<tt class="xref py py-meth docutils literal"><span class="pre">fcres.CellSimRes.get_unit()</span></tt>) is different
+than <tt class="xref py py-meth docutils literal"><span class="pre">modelicares.SimRes.get_unit()</span></tt>.  In <a class="reference external" href="http://www.modelica.org/libraries">FCSys</a>, the <em>unit</em>
+attribute is used to indicate the <strong>dimension</strong> of a quantity.  The
+<strong>unit</strong> is given by the variable&#8217;s <em>displayUnit</em> attribute or the
+default unit based on the variable&#8217;s dimension, as described above.</p>
+</div>
+<p><strong>Example:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fcres</span> <span class="kn">import</span> <span class="n">CellSimRes</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sim</span> <span class="o">=</span> <span class="n">CellSimRes</span><span class="p">(</span><span class="s">&#39;demos/Polarization.mat&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sim</span><span class="o">.</span><span class="n">get_unit</span><span class="p">(</span><span class="s">&#39;defaults.p&#39;</span><span class="p">)</span>
+<span class="go">&#39;kPa&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sim</span><span class="o">.</span><span class="n">get_unit</span><span class="p">([[[</span><span class="s">&#39;defaults.p&#39;</span><span class="p">,</span> <span class="s">&#39;defaults.T&#39;</span><span class="p">]]])</span>
+<span class="go">[[[&#39;kPa&#39;, &#39;K&#39;]]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="fcres.SimRes.plotfig">
+<tt class="descname">plotfig</tt><big>(</big><em>title=''</em>, <em>label='xy'</em>, <em>xname='Time'</em>, <em>xlabel=None</em>, <em>xunit=None</em>, <em>ax1=None</em>, <em>ynames1=</em><span class="optional">[</span><span class="optional">]</span>, <em>ylabel1=None</em>, <em>legends1=</em><span class="optional">[</span><span class="optional">]</span>, <em>yunit1=None</em>, <em>leg1_kwargs={'loc': 'best'}</em>, <em>ax2=None</em>, <em>ynames2=</em><span class="optional">[</span><span class="optional">]</span>, <em>ylabel2=None</em>, <em>legends2=</em><span class="optional">[</span><span class="optional">]</span>, <em>yunit2=None</em>, <em>leg2_kwargs={'loc': 'best'}</em>, <em>prefix=False</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#fcres.SimRes.plotfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a figure (or subfigure) of 1D data as points and/or curves in
+2D Cartesian coordinates.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p class="first"><em>title</em>: Title of the figure</p>
+</li>
+<li><p class="first"><em>label</em>: Label for the figure (ignored if ax is provided)</p>
+<blockquote>
+<div><p>This will be used as a base filename if the figure is saved.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>xname</em>: Name of the x-axis data</p>
+</li>
+<li><p class="first"><em>xlabel</em>: Label for the x-axis</p>
+<blockquote>
+<div><p>If not provided, the variable&#8217;s <a class="reference external" href="http://www.modelica.org/">Modelica</a> description string will
+be used.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>xunit</em>: String indicating the unit for the x axis</p>
+<blockquote>
+<div><p>If <em>xunit</em> is <em>None</em>, the <a class="reference external" href="http://www.modelica.org/">Modelica</a> variable&#8217;s <em>displayUnit</em> or
+the default unit based on the variable&#8217;s dimension will be used
+(in decreasing priority).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Dimension checking is not currently performed, so it is
+important to ensure that a proper unit is chosen.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first"><em>ax1</em>: Primary y axes</p>
+<blockquote>
+<div><p>If <em>ax1</em> is not provided, then axes will be created in a new
+figure.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>ynames1</em>: Names of variables for the primary y axis</p>
+<blockquote>
+<div><p>If any names are invalid, then they will be skipped.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>ylabel1</em>: Label for the primary y axis</p>
+<blockquote>
+<div><p>If <em>ylabel1</em> is <em>None</em> (default) and all of the variables have the
+same <a class="reference external" href="http://www.modelica.org/">Modelica</a> description string, then the common description will
+be used.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>yunit1</em>: String indicating the unit for the primary y-axis (see note
+for <em>xunit</em>)</p>
+<blockquote>
+<div><p>If <em>yunit1</em> is <em>None</em>, the <a class="reference external" href="http://www.modelica.org/">Modelica</a> <em>displayUnit</em> of the first
+entry of <em>ynames1</em> or the default unit based on that variable&#8217;s
+dimension will be used (in decreasing priority).</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>legends1</em>: List of legend entries for variables assigned to the
+primary y axis</p>
+<blockquote>
+<div><p>If <em>legends1</em> is an empty list ([]), ynames1 will be used.  If
+<em>legends1</em> is <em>None</em>, then no legend will be shown.</p>
+</div></blockquote>
+</li>
+<li><p class="first"><em>leg1_kwargs</em>: Dictionary of keyword arguments for the primary legend</p>
+</li>
+<li><p class="first"><em>ax2</em>, <em>ynames2</em>, <em>ylabel2</em>, <em>legends2</em>, <em>leg2_kwargs</em>: Similar to
+<em>ax1</em>, <em>ynames1</em>, <em>ylabel1</em>, <em>legends1</em>, and <em>leg1_kwargs</em>, but for
+the secondary y axis</p>
+</li>
+<li><p class="first"><em>prefix</em>: If <em>True</em>, prefix the legend strings with the base filename
+of the class.</p>
+</li>
+<li><p class="first"><em>**kwargs</em>: Propagated to <tt class="xref py py-meth docutils literal"><span class="pre">res.plot()</span></tt> (and thus to
+<tt class="xref py py-meth docutils literal"><span class="pre">matplotlib.pyplot.plot()</span></tt>)</p>
+<blockquote>
+<div><p>If both y axes are used (primary and secondary), then the <em>dashes</em>
+argument is ignored.  The curves on the primary axis will be solid
+and the curves on the secondary axis will be dotted.</p>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ol class="arabic simple">
+<li><em>ax1</em>: Primary y axes</li>
+<li><em>ax2</em>: Secondary y axes</li>
+</ol>
+<p><strong>Example:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">res</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fcres</span> <span class="kn">import</span> <span class="n">CellSimRes</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sim</span> <span class="o">=</span> <span class="n">CellSimRes</span><span class="p">(</span><span class="s">&#39;demos/Polarization.mat&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sim</span><span class="o">.</span><span class="n">plotfig</span><span class="p">(</span><span class="n">xname</span><span class="o">=</span><span class="s">&#39;cell.I&#39;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="n">ynames1</span><span class="o">=</span><span class="s">&#39;cell.v&#39;</span><span class="p">,</span> <span class="n">ylabel1</span><span class="o">=</span><span class="s">&quot;Potential&quot;</span><span class="p">,</span> <span class="n">legends1</span><span class="o">=</span><span class="s">&quot;Average voltage&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="n">ynames2</span><span class="o">=</span><span class="s">&#39;cell.Wdot&#39;</span><span class="p">,</span> <span class="n">ylabel2</span><span class="o">=</span><span class="s">&quot;Power&quot;</span><span class="p">,</span> <span class="n">legends2</span><span class="o">=</span><span class="s">&quot;Power output&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="n">title</span><span class="o">=</span><span class="s">&quot;Cell Polarization&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;demos/Polarization&#39;</span><span class="p">)</span> 
+<span class="go">(&lt;matplotlib.axes.AxesSubplot object at 0x...&gt;, &lt;matplotlib.axes.Axes object at 0x...&gt;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="o">.</span><span class="n">save_figs</span><span class="p">()</span>
+<span class="go">Saved demos/Polarization.pdf</span>
+<span class="go">Saved demos/Polarization.png</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/Polarization.png"><img alt="plot of cell profile" src="_images/Polarization.png" style="width: 485.0px; height: 300.0px;" /></a>
+</dd></dl>
+
+<dl class="method">
+<dt id="fcres.SimRes.unitmap">
+<tt class="descname">unitmap</tt><big>(</big><em>unitstr</em><big>)</big><a class="headerlink" href="#fcres.SimRes.unitmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a function to map a quantity to a number in terms of a unit.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p class="first"><em>unitstr</em>: Unit string in <a class="reference external" href="http://www.modelica.org/">Modelica</a> notation</p>
+<blockquote>
+<div><div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p>Modelica Specification, version 3.3, p. 235&#8211;236
+(<a class="reference external" href="https://www.modelica.org/documents">https://www.modelica.org/documents</a>)</p>
+<p class="last">In summary, &#8216;.&#8217; indicates multiplication.  The denominator is
+enclosed in parentheses and begins with &#8216;/&#8217;.  Exponents directly
+follow the significand (e.g., no carat (&#8216;^&#8217;)).</p>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fcres</span> <span class="kn">import</span> <span class="n">CellSimRes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sim</span> <span class="o">=</span> <span class="n">CellSimRes</span><span class="p">(</span><span class="s">&#39;demos/Polarization.mat&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kPa</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">unitmap</span><span class="p">(</span><span class="s">&#39;kPa&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Method 1:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">get_IV</span><span class="p">(</span><span class="s">&#39;defaults.p&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;The pressure is </span><span class="si">%.1f</span><span class="s"> kPa.&quot;</span><span class="o">%</span><span class="n">kPa</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+<span class="go">The pressure is 149.6 kPa.</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Method 2:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p_kPa</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">get_IV</span><span class="p">(</span><span class="s">&#39;defaults.p&#39;</span><span class="p">,</span> <span class="n">kPa</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;The pressure is </span><span class="si">%.1f</span><span class="s"> kPa.&quot;</span><span class="o">%</span><span class="n">p_kPa</span><span class="p">)</span>
+<span class="go">The pressure is 149.6 kPa.</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># In other units:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;The pressure is </span><span class="si">%.1f</span><span class="s"> kPag.&quot;</span><span class="o">%</span><span class="n">sim</span><span class="o">.</span><span class="n">unitmap</span><span class="p">(</span><span class="s">&#39;kPag&#39;</span><span class="p">)(</span><span class="n">p</span><span class="p">))</span>
+<span class="go">The pressure is 48.3 kPag.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;The pressure is </span><span class="si">%.0f</span><span class="s"> Pa.&quot;</span><span class="o">%</span><span class="n">sim</span><span class="o">.</span><span class="n">unitmap</span><span class="p">(</span><span class="s">&#39;Pa&#39;</span><span class="p">)(</span><span class="n">p</span><span class="p">))</span>
+<span class="go">The pressure is 149600 Pa.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;The pressure is </span><span class="si">%.3f</span><span class="s"> atm.&quot;</span><span class="o">%</span><span class="n">sim</span><span class="o">.</span><span class="n">unitmap</span><span class="p">(</span><span class="s">&#39;atm&#39;</span><span class="p">)(</span><span class="n">p</span><span class="p">))</span>
+<span class="go">The pressure is 1.476 atm.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;The pressure is </span><span class="si">%.3f</span><span class="s"> bar.&quot;</span><span class="o">%</span><span class="n">sim</span><span class="o">.</span><span class="n">unitmap</span><span class="p">(</span><span class="s">&#39;bar&#39;</span><span class="p">)(</span><span class="n">p</span><span class="p">))</span>
+<span class="go">The pressure is 1.496 bar.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="fcres.gen_subtitle_conditions">
+<tt class="descclassname">fcres.</tt><tt class="descname">gen_subtitle_conditions</tt><big>(</big><em>params</em>, <em>details</em><big>)</big><a class="headerlink" href="#fcres.gen_subtitle_conditions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a description of the operating conditions (to be used as a
+subtitle).</p>
+<p>params: TODO
+details: TODO</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fcres.multi_load">
+<tt class="descclassname">fcres.</tt><tt class="descname">multi_load</tt><big>(</big><em>location</em><big>)</big><a class="headerlink" href="#fcres.multi_load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load multiple <a class="reference external" href="http://www.modelica.org/libraries">FCSys</a> cell simulation and/or linearization results.</p>
+<p><strong>Arguments:</strong></p>
+<ul class="simple">
+<li><em>location</em>: Input directory, filename, or list of filenames</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ol class="arabic simple">
+<li>List of cell simulations (<a class="reference internal" href="#fcres.CellSimRes" title="fcres.CellSimRes"><tt class="xref py py-class docutils literal"><span class="pre">CellSimRes</span></tt></a> instances)</li>
+<li>List of cell linearizations (<a class="reference internal" href="#fcres.CellSimRes" title="fcres.CellSimRes"><tt class="xref py py-class docutils literal"><span class="pre">CellSimRes</span></tt></a> instances)</li>
+</ol>
+<p>Either list may be empty.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fcres.multi_plotfig">
+<tt class="descclassname">fcres.</tt><tt class="descname">multi_plotfig</tt><big>(</big><em>sims</em><big>)</big><a class="headerlink" href="#fcres.multi_plotfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot a property across a list of simulations.</p>
+<p><strong>Arguments:</strong></p>
+<ul class="simple">
+<li><em>sims</em>: List of simulations</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="fcres.presuffix">
+<tt class="descclassname">fcres.</tt><tt class="descname">presuffix</tt><big>(</big><em>items</em>, <em>prefix=''</em>, <em>suffix=''</em><big>)</big><a class="headerlink" href="#fcres.presuffix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a prefix and/or suffix to every entry in a list.</p>
+<p>The list may be multi-dimensional.  This is useful to join names of
+subregions with the name of a property.</p>
+<p><strong>Arguments:</strong></p>
+<ul class="simple">
+<li><em>items</em>: The list of items</li>
+<li><em>prefix</em>: The prefix to add</li>
+<li><em>suffix</em>: The suffix to add</li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">presuffix</span><span class="p">([</span><span class="s">&#39;fix&#39;</span><span class="p">,</span> <span class="s">&#39;historic&#39;</span><span class="p">,</span> <span class="s">&#39;date&#39;</span><span class="p">,</span> <span class="s">&#39;view&#39;</span><span class="p">],</span> <span class="s">&#39;pre&#39;</span><span class="p">)</span>
+<span class="go">[&#39;prefix&#39;, &#39;prehistoric&#39;, &#39;predate&#39;, &#39;preview&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="FCSys Utilities User’s Guide"
+             >previous</a> |</li>
+        <li><a href="index.html">fcres v0.1 Documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Kevin Davies.
+      Last updated on Oct 15, 2012.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -4,6 +4,7 @@
 *.asv
 *.bak
 .~lock*
+.fuse_hidden*
 
 # Simulation files
 dsin.txt
