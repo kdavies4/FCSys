@@ -18,7 +18,9 @@ package BCs "Models for boundary conditions"
       extends Modelica.Icons.Example;
 
       FCSys.BCs.FaceBus.Subregion subregionFaceBC(gas(inclH2O=true, H2O(
-              redeclare FCSys.BCs.Face.Material.Current material)))
+            redeclare FCSys.BCs.Face.Material.Current material,
+            inviscidX=false,
+            inviscidZ=false)))
         annotation (Placement(transformation(extent={{-10,14},{10,34}})));
       Subregions.Subregion subregion(
         L={1,1,1}*U.cm,
@@ -34,7 +36,10 @@ package BCs "Models for boundary conditions"
             xPositive(thermoOpt=ThermoOpt.ClosedAdiabatic, inviscidY=true),
             zNegative(inviscidY=true),
             zPositive(inviscidY=true),
-            yPositive(thermoOpt=ThermoOpt.OpenDiabatic))))
+            yPositive(
+              thermoOpt=ThermoOpt.OpenDiabatic,
+              inviscidX=false,
+              inviscidZ=false))))
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
       inner BCs.Defaults defaults
@@ -215,17 +220,16 @@ package BCs "Models for boundary conditions"
           thickness=0.5,
           smooth=Smooth.None));
 
+      connect(volume.heatPort, adaptH2.heatPort) annotation (Line(
+          points={{22,20},{16,20},{16,-4},{10,-4}},
+          color={191,0,0},
+          smooth=Smooth.None));
       annotation (
         experiment,
         experimentSetupOutput,
         Commands(file="resources/scripts/Dymola/BCs.Examples.FluidAdapt.mos"),
         Diagram(graphics));
-      connect(volume.heatPort, adaptH2.heatPort) annotation (Line(
-          points={{22,20},{16,20},{16,-4},{10,-4}},
-          color={191,0,0},
-          smooth=Smooth.None));
     end AdaptFluid;
-
 
   end Examples;
 
@@ -363,24 +367,20 @@ package BCs "Models for boundary conditions"
       annotation (
         Documentation(info="<html><p>Note that transverse linear momentum is not included.</p>
   </html>"),
-        Icon(graphics={
-            Line(
-              points={{0,40},{0,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{0,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{0,40},{100,40}},
-              color={0,127,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{100,-40}},
-              color={191,0,0},
-              smooth=Smooth.None)}),
+        Icon(graphics={Line(
+                  points={{0,40},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),Line(
+                  points={{0,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{0,40},{100,40}},
+                  color={0,127,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{100,-40}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}),
         Diagram(graphics));
     end AdaptFluid;
 
@@ -417,26 +417,22 @@ package BCs "Models for boundary conditions"
           color={191,0,0},
           smooth=Smooth.None));
 
-      annotation (Icon(graphics={
-            Line(
-              points={{0,40},{0,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,40},{100,40}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{100,-40}},
-              color={191,0,0},
-              smooth=Smooth.None)}), Diagram(graphics));
+      annotation (Icon(graphics={Line(
+                  points={{0,40},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,40},{100,40}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{100,-40}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}), Diagram(graphics));
     end 'AdaptSubregione-';
 
     model 'AdaptBuse-'
@@ -478,26 +474,22 @@ package BCs "Models for boundary conditions"
           color={191,0,0},
           smooth=Smooth.None));
 
-      annotation (Icon(graphics={
-            Line(
-              points={{0,40},{0,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,40},{100,40}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{100,-40}},
-              color={191,0,0},
-              smooth=Smooth.None)}), Diagram(graphics));
+      annotation (Icon(graphics={Line(
+                  points={{0,40},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,40},{100,40}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{100,-40}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}), Diagram(graphics));
     end 'AdaptBuse-';
 
     model 'Adapte-'
@@ -539,24 +531,20 @@ package BCs "Models for boundary conditions"
       annotation (
         Documentation(info="<html><p>Note that transverse linear momentum is not included.</p>
   </html>"),
-        Icon(graphics={
-            Line(
-              points={{0,40},{0,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{0,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{0,40},{100,40}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{100,-40}},
-              color={191,0,0},
-              smooth=Smooth.None)}),
+        Icon(graphics={Line(
+                  points={{0,40},{0,-40}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),Line(
+                  points={{0,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{0,40},{100,40}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{100,-40}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}),
         Diagram(graphics));
     end 'Adapte-';
 
@@ -595,25 +583,21 @@ package BCs "Models for boundary conditions"
             points={{10,-4},{60,-4},{60,-40},{100,-40}},
             color={191,0,0},
             smooth=Smooth.None));
-        annotation (Icon(graphics={
-              Line(
-                points={{0,40},{0,-40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash,
-                thickness=0.5),
-              Line(
-                points={{0,0},{-100,0}},
-                color={127,127,127},
-                smooth=Smooth.None),
-              Line(
-                points={{0,40},{100,40}},
-                color={0,127,255},
-                smooth=Smooth.None),
-              Line(
-                points={{0,-40},{100,-40}},
-                color={191,0,0},
-                smooth=Smooth.None)}), Diagram(graphics));
+        annotation (Icon(graphics={Line(
+                      points={{0,40},{0,-40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash,
+                      thickness=0.5),Line(
+                      points={{0,0},{-100,0}},
+                      color={127,127,127},
+                      smooth=Smooth.None),Line(
+                      points={{0,40},{100,40}},
+                      color={0,127,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,-40},{100,-40}},
+                      color={191,0,0},
+                      smooth=Smooth.None)}), Diagram(graphics));
       end PartialAdaptBus;
     end BaseClasses;
   end Adapters;
@@ -3006,7 +2990,7 @@ package BCs "Models for boundary conditions"
     extends Modelica.Icons.Package;
 
     model Subregion
-      "<html>BC for a face of a <a href=\"modelica://FCSys.Subregions.Subregion\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with efforts by default</html>"
+      "<html>BC for a face of a <a href=\"modelica://FCSys.Regions.Region\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with efforts by default</html>"
       extends FCSys.BaseClasses.Icons.BCs.Single;
 
       parameter Axis axis=Axis.x "Axis normal to the face";
@@ -3904,294 +3888,8 @@ boundary condition</a> model.
     end Species;
     extends Modelica.Icons.Package;
 
-    model SpeciesX
-      "<html>BC for an x-axis face of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
-      extends BaseClasses.PartialSpecies;
 
-      // Y-axis linear momentum
-      parameter Boolean inviscidY=true "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="Y-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalY if not inviscidY
-        constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
-        annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(
-          group="Y-axis linear momentum",
-          enable=not inviscidY,
-          __Dymola_descriptionLabel=true),
-        Placement(transformation(extent={{-10,-14},{10,6}})));
 
-      // Z-axis linear momentum
-      parameter Boolean inviscidZ=true "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="Z-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalZ if not inviscidZ
-        constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
-        annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(
-          group="Z-axis linear momentum",
-          enable=not inviscidZ,
-          __Dymola_descriptionLabel=true),
-        Placement(transformation(extent={{20,-14},{40,6}})));
-
-      FCSys.Connectors.Face face(
-        final thermoOpt=thermoOpt,
-        final inviscidY=inviscidY,
-        final inviscidZ=inviscidZ)
-        "Single-species connector for material, linear momentum, and heat"
-        annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
-            iconTransformation(extent={{-10,-50},{10,-30}})));
-
-    equation
-      // Material
-      connect(material.material, face.material) annotation (Line(
-          points={{-60,-8},{-60,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-
-      // Y-axis linear momentum
-      connect(mechanicalY.mechanical, face.mechanicalY) annotation (Line(
-          points={{6.10623e-16,-8},{6.10623e-16,-20},{0,-20},{0,-40},{
-              5.55112e-16,-40}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-
-      connect(u.mechanicalY, mechanicalY.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,20},{6.10623e-16,20},{
-              6.10623e-16,6.66134e-16}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%first",
-          index=-1,
-          extent={{-6,3},{-6,3}}));
-
-      // Z-axis linear momentum
-      connect(mechanicalZ.mechanical, face.mechanicalZ) annotation (Line(
-          points={{30,-8},{30,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(u.mechanicalZ, mechanicalZ.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,20},{30,20},{30,6.66134e-16}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%first",
-          index=-1,
-          extent={{-6,3},{-6,3}}));
-
-      // Heat
-      connect(thermal.thermal, face.thermal) annotation (Line(
-          points={{60,-8},{60,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-
-      annotation (Diagram(graphics));
-    end SpeciesX;
-
-    model SpeciesY
-      "<html>BC for a y-axis face of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
-      extends BaseClasses.PartialSpecies;
-
-      // Z-axis linear momentum
-      parameter Boolean inviscidZ=true "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="Z-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalZ if not inviscidZ
-        constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
-        annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(
-          group="Z-axis linear momentum",
-          enable=not inviscidZ,
-          __Dymola_descriptionLabel=true),
-        Placement(transformation(extent={{20,-14},{40,6}})));
-
-      // X-axis linear momentum
-      parameter Boolean inviscidX=true "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="X-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-
-      replaceable Mechanical.Velocity mechanicalX if not inviscidX
-        constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
-        annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(
-          group="X-axis linear momentum",
-          enable=not inviscidX,
-          __Dymola_descriptionLabel=true),
-        Placement(transformation(extent={{-40,-14},{-20,6}})));
-
-      FCSys.Connectors.FaceY face(
-        final thermoOpt=thermoOpt,
-        final inviscidX=inviscidX,
-        final inviscidZ=inviscidZ)
-        "Single-species connector for material, linear momentum, and heat"
-        annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
-            iconTransformation(extent={{-10,-50},{10,-30}})));
-
-    equation
-      // Material
-      connect(material.material, face.material) annotation (Line(
-          points={{-60,-8},{-60,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-
-      // Z-axis linear momentum
-      connect(mechanicalZ.mechanical, face.mechanicalZ) annotation (Line(
-          points={{30,-8},{30,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(u.mechanicalZ, mechanicalZ.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,20},{30,20},{30,6.66134e-16}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%first",
-          index=-1,
-          extent={{-6,3},{-6,3}}));
-
-      // X-axis linear momentum
-      connect(mechanicalX.mechanical, face.mechanicalX) annotation (Line(
-          points={{-30,-8},{-30,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(u.mechanicalX, mechanicalX.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,20},{-30,20},{-30,6.66134e-16}},
-
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%first",
-          index=-1,
-          extent={{-6,3},{-6,3}}));
-
-      // Heat
-      connect(thermal.thermal, face.thermal) annotation (Line(
-          points={{60,-8},{60,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-
-    end SpeciesY;
-
-    model SpeciesZ
-      "<html>BC for a z-axis face of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
-      extends BaseClasses.PartialSpecies;
-
-      // X-axis linear momentum
-      parameter Boolean inviscidX=true "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="X-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalX if not inviscidX
-        constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
-        annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(
-          group="X-axis linear momentum",
-          enable=not inviscidX,
-          __Dymola_descriptionLabel=true),
-        Placement(transformation(extent={{-40,-14},{-20,6}})));
-
-      // Y-axis linear momentum
-      parameter Boolean inviscidY=true "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="Y-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalY if not inviscidY
-        constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
-        annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(
-          group="Y-axis linear momentum",
-          enable=not inviscidY,
-          __Dymola_descriptionLabel=true),
-        Placement(transformation(extent={{-10,-14},{10,6}})));
-
-      FCSys.Connectors.FaceZ face(
-        final thermoOpt=thermoOpt,
-        final inviscidX=inviscidX,
-        final inviscidY=inviscidY)
-        "Single-species connector for material, linear momentum, and heat"
-        annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
-            iconTransformation(extent={{-10,-50},{10,-30}})));
-
-    equation
-      // Material
-      connect(material.material, face.material) annotation (Line(
-          points={{-60,-8},{-60,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-
-      // X-axis linear momentum
-      connect(mechanicalX.mechanical, face.mechanicalX) annotation (Line(
-          points={{-30,-8},{-30,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(u.mechanicalX, mechanicalX.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,20},{-30,20},{-30,6.66134e-16}},
-
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%first",
-          index=-1,
-          extent={{-6,3},{-6,3}}));
-
-      // Y-axis linear momentum
-      connect(mechanicalY.mechanical, face.mechanicalY) annotation (Line(
-          points={{6.10623e-16,-8},{6.10623e-16,-20},{0,-20},{0,-40},{
-              5.55112e-16,-40}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-
-      connect(u.mechanicalY, mechanicalY.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,20},{6.10623e-16,20},{
-              6.10623e-16,6.66134e-16}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%first",
-          index=-1,
-          extent={{-6,3},{-6,3}}));
-
-      // Heat
-      connect(thermal.thermal, face.thermal) annotation (Line(
-          points={{60,-8},{60,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-
-    end SpeciesZ;
 
     package Material "Material BCs"
       extends Modelica.Icons.Package;
@@ -5319,365 +5017,8 @@ boundary condition</a> model.
       annotation (Diagram(graphics), Icon(graphics));
     end Species;
 
-    model SpeciesX
-      "<html>BC for a pair of x-axis faces of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
-      extends BaseClasses.PartialSpecies;
 
-      // Y-axis linear momentum
-      parameter Boolean inviscidY=false "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="Y-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalY if not inviscidY
-        constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
-        annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(
-          group="Y-axis linear momentum",
-          enable=not inviscidY,
-          __Dymola_descriptionLabel=true),
-        Placement(transformation(extent={{-30,-10},{-10,10}})));
 
-      // Z-axis linear momentum
-      parameter Boolean inviscidZ=false "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="Z-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalZ if not inviscidZ
-        constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
-        annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(
-          group="Z-axis linear momentum",
-          enable=not inviscidZ,
-          __Dymola_descriptionLabel=true),
-        Placement(transformation(extent={{10,-20},{30,0}})));
-
-      FCSys.Connectors.FaceX negative(
-        final thermoOpt=thermoOpt,
-        final inviscidY=inviscidY,
-        final inviscidZ=inviscidZ) "Negative face" annotation (Placement(
-            transformation(extent={{-110,-40},{-90,-20}}), iconTransformation(
-              extent={{-110,-10},{-90,10}})));
-
-      FCSys.Connectors.FaceX positive(
-        final thermoOpt=thermoOpt,
-        final inviscidY=inviscidY,
-        final inviscidZ=inviscidZ) "Positive face" annotation (Placement(
-            transformation(extent={{90,-40},{110,-20}}), iconTransformation(
-              extent={{90,-10},{110,10}})));
-
-    equation
-      // Material
-      connect(material.negative, negative.material) annotation (Line(
-          points={{-70,10},{-80,10},{-80,-30},{-100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(material.positive, positive.material) annotation (Line(
-          points={{-50,10},{90,10},{90,-30},{100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-
-      // Y-axis linear momentum
-      connect(mechanicalY.negative, negative.mechanicalY) annotation (Line(
-          points={{-30,6.10623e-16},{-56,0},{-80,0},{-80,-30},{-100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(mechanicalY.positive, positive.mechanicalY) annotation (Line(
-          points={{-10,6.10623e-16},{90,6.10623e-16},{90,-30},{100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(u.mechanicalY, mechanicalY.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,20},{-20,20},{-20,4}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%first",
-          index=-1,
-          extent={{-6,3},{-6,3}}));
-
-      // Z-axis linear momentum
-      connect(mechanicalZ.negative, negative.mechanicalZ) annotation (Line(
-          points={{10,-10},{-80,-10},{-80,-30},{-100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(mechanicalZ.positive, positive.mechanicalZ) annotation (Line(
-          points={{30,-10},{90,-10},{90,-30},{100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(u.mechanicalZ, mechanicalZ.u) annotation (Line(
-          points={{5.55112e-16,40},{0,40},{0,20},{20,20},{20,-6}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%first",
-          index=-1,
-          extent={{-6,3},{-6,3}}));
-
-      // Heat
-      connect(thermal.negative, negative.thermal) annotation (Line(
-          points={{50,-30},{-100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(thermal.positive, positive.thermal) annotation (Line(
-          points={{70,-30},{100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-
-      annotation (Diagram(graphics), Icon(graphics));
-    end SpeciesX;
-
-    model SpeciesY
-      "<html>BC for a pair of y-axis faces of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
-      extends BaseClasses.PartialSpecies;
-
-      // Z-axis linear momentum
-      parameter Boolean inviscidZ=false "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="Z-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalZ if not inviscidZ
-        constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
-        annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(
-          group="Z-axis linear momentum",
-          enable=not inviscidZ,
-          __Dymola_descriptionLabel=true),
-        Placement(transformation(extent={{-30,-10},{-10,10}})));
-
-      // X-axis linear momentum
-      parameter Boolean inviscidX=false "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="X-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalX if not inviscidX
-        constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
-        annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(
-          group="X-axis linear momentum",
-          enable=not inviscidX,
-          __Dymola_descriptionLabel=true),
-        Placement(transformation(extent={{10,-20},{30,0}})));
-
-      FCSys.Connectors.FaceY negative(
-        final thermoOpt=thermoOpt,
-        final inviscidZ=inviscidZ,
-        final inviscidX=inviscidX) "Negative face" annotation (Placement(
-            transformation(extent={{-110,-40},{-90,-20}}), iconTransformation(
-              extent={{-110,-10},{-90,10}})));
-
-      FCSys.Connectors.FaceY positive(
-        final thermoOpt=thermoOpt,
-        final inviscidZ=inviscidZ,
-        final inviscidX=inviscidX) "Positive face" annotation (Placement(
-            transformation(extent={{90,-40},{110,-20}}), iconTransformation(
-              extent={{90,-10},{110,10}})));
-
-    equation
-      // Material
-      connect(material.negative, negative.material) annotation (Line(
-          points={{-70,10},{-80,10},{-80,-30},{-100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(material.positive, positive.material) annotation (Line(
-          points={{-50,10},{90,10},{90,-30},{100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-
-      // Z-axis linear momentum
-      connect(mechanicalZ.negative, negative.mechanicalZ) annotation (Line(
-          points={{-30,6.10623e-16},{-56,0},{-80,0},{-80,-30},{-100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(mechanicalZ.positive, positive.mechanicalZ) annotation (Line(
-          points={{-10,6.10623e-16},{90,6.10623e-16},{90,-30},{100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(u.mechanicalZ, mechanicalZ.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,20},{-20,20},{-20,4}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%first",
-          index=-1,
-          extent={{-6,3},{-6,3}}));
-
-      // X-axis linear momentum
-      connect(mechanicalX.negative, negative.mechanicalX) annotation (Line(
-          points={{10,-10},{-80,-10},{-80,-30},{-100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(mechanicalX.positive, positive.mechanicalX) annotation (Line(
-          points={{30,-10},{90,-10},{90,-30},{100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(u.mechanicalX, mechanicalX.u) annotation (Line(
-          points={{5.55112e-16,40},{0,40},{0,20},{20,20},{20,-6}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%first",
-          index=-1,
-          extent={{-6,3},{-6,3}}));
-
-      // Heat
-      connect(thermal.negative, negative.thermal) annotation (Line(
-          points={{50,-30},{-100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(thermal.positive, positive.thermal) annotation (Line(
-          points={{70,-30},{100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-
-      annotation (Diagram(graphics), Icon(graphics));
-    end SpeciesY;
-
-    model SpeciesZ
-      "<html>BC for a pair of Y-axis faces of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
-      extends BaseClasses.PartialSpecies;
-
-      // X-axis linear momentum
-      parameter Boolean inviscidX=false "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="X-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalX if not inviscidX
-        constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
-        annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(
-          group="X-axis linear momentum",
-          enable=not inviscidX,
-          __Dymola_descriptionLabel=true),
-        Placement(transformation(extent={{-30,-10},{-10,10}})));
-
-      // Y-axis linear momentum
-      parameter Boolean inviscidY=false "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="Y-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalY if not inviscidY
-        constrainedby Mechanical.BaseClasses.PartialBC "Type of condition"
-        annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(
-          group="Y-axis linear momentum",
-          enable=not inviscidY,
-          __Dymola_descriptionLabel=true),
-        Placement(transformation(extent={{10,-20},{30,0}})));
-
-      FCSys.Connectors.FaceZ negative(
-        final thermoOpt=thermoOpt,
-        final inviscidX=inviscidX,
-        final inviscidY=inviscidY) "Negative face" annotation (Placement(
-            transformation(extent={{-110,-40},{-90,-20}}), iconTransformation(
-              extent={{-110,-10},{-90,10}})));
-
-      FCSys.Connectors.FaceZ positive(
-        final thermoOpt=thermoOpt,
-        final inviscidX=inviscidX,
-        final inviscidY=inviscidY) "Positive face" annotation (Placement(
-            transformation(extent={{90,-40},{110,-20}}), iconTransformation(
-              extent={{90,-10},{110,10}})));
-
-    equation
-      // Material
-      connect(material.negative, negative.material) annotation (Line(
-          points={{-70,10},{-80,10},{-80,-30},{-100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(material.positive, positive.material) annotation (Line(
-          points={{-50,10},{90,10},{90,-30},{100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-
-      // X-axis linear momentum
-      connect(mechanicalX.negative, negative.mechanicalX) annotation (Line(
-          points={{-30,6.10623e-16},{-56,0},{-80,0},{-80,-30},{-100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(mechanicalX.positive, positive.mechanicalX) annotation (Line(
-          points={{-10,6.10623e-16},{90,6.10623e-16},{90,-30},{100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(u.mechanicalX, mechanicalX.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,20},{-20,20},{-20,4}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%first",
-          index=-1,
-          extent={{-6,3},{-6,3}}));
-
-      // Y-axis linear momentum
-      connect(mechanicalY.negative, negative.mechanicalY) annotation (Line(
-          points={{10,-10},{-80,-10},{-80,-30},{-100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(mechanicalY.positive, positive.mechanicalY) annotation (Line(
-          points={{30,-10},{90,-10},{90,-30},{100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(u.mechanicalY, mechanicalY.u) annotation (Line(
-          points={{5.55112e-16,40},{0,40},{0,20},{20,20},{20,-6}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%first",
-          index=-1,
-          extent={{-6,3},{-6,3}}));
-
-      // Heat
-      connect(thermal.negative, negative.thermal) annotation (Line(
-          points={{50,-30},{-100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(thermal.positive, positive.thermal) annotation (Line(
-          points={{70,-30},{100,-30}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-
-      annotation (Diagram(graphics), Icon(graphics));
-    end SpeciesZ;
 
     package Material "Material BCs"
       extends Modelica.Icons.Package;
@@ -6130,10 +5471,8 @@ The default global default settings will be used for the current simulation.",
 
   end Defaults;
 
-
   package BaseClasses "Base classes (not for direct use)"
     extends Modelica.Icons.BasesPackage;
-
 
     block RealFunction
       "<html>Set an output signal according to a <code>Real</code> function of an input</html>"
@@ -6155,13 +5494,13 @@ The default global default settings will be used for the current simulation.",
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             grid={2,2}),graphics={Rectangle(
-              extent={{-100,40},{100,-40}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineColor={0,0,0}), Text(
-              extent={{-100,-10},{100,10}},
-              lineColor={127,127,127},
-              textString="%y")}),
+                  extent={{-100,40},{100,-40}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  lineColor={0,0,0}),Text(
+                  extent={{-100,-10},{100,10}},
+                  lineColor={127,127,127},
+                  textString="%y")}),
         Diagram(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
@@ -6234,4 +5573,31 @@ Variable <i>u</i> is too, and it may be used in the expression for <i>y</i>.
               textString="p.v=0",
               lineColor={0,0,255})}));
   end Temp;
+
+  package Test
+    model Group
+
+      Connectors.FaceBus face
+        annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+    end Group;
+
+    model Gas
+      extends Group;
+
+      replaceable Group subgroup constrainedby Group
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+    equation
+      connect(subgroup.face, face.gas) annotation (Line(
+          points={{-10,6.10623e-16},{-54,6.10623e-16},{-54,5.55112e-16},{-100,
+              5.55112e-16}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None), Text(
+          string="%second",
+          index=1,
+          extent={{6,3},{6,3}}));
+
+      annotation (Diagram(graphics));
+    end Gas;
+  end Test;
 end BCs;
