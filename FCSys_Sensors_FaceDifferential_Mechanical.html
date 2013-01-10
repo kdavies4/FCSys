@@ -1,0 +1,145 @@
+<html>
+<head>
+<title>FCSys.Sensors.FaceDifferential.Mechanical</title>
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
+<meta name="date" content="2013-1-10">
+<meta name="description" content="Relative sensors for transverse linear momentum">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_BCs.html">BCs</a>**</li>
+    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
+    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Sensors.FaceDifferential.Mechanical"></a><a href="FCSys_Sensors_FaceDifferential.html#FCSys.Sensors.FaceDifferential">FCSys.Sensors.FaceDifferential</a>.Mechanical</h2>
+<b>Relative sensors for transverse linear momentum</b>
+<p>
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Sensors.FaceDifferential.Mechanical.VelocityS.png" alt="FCSys.Sensors.FaceDifferential.Mechanical.Velocity" width=20  height=20 align=top>&nbsp;<a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Velocity</a>
+</td><td>Sensor for relative velocity (inviscid condition)</td></tr>
+<tr><td><img src="images/FCSys.Sensors.FaceDifferential.Mechanical.ForceS.png" alt="FCSys.Sensors.FaceDifferential.Mechanical.Force" width=20  height=20 align=top>&nbsp;<a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Force">Force</a>
+</td><td>Sensor for shear force (condition of uniform velocity)</td></tr>
+<tr><td><img src="images/FCSys.Sensors.FaceDifferential.Mechanical.BaseClassesS.png" alt="FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Sensors_FaceDifferential_Mechanical_BaseClasses.html#FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses">BaseClasses</a>
+</td><td>Base classes (not for direct use)</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.Sensors.FaceDifferential.Mechanical.VelocityI.png" alt="FCSys.Sensors.FaceDifferential.Mechanical.Velocity" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Sensors.FaceDifferential.Mechanical.Velocity"></a><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical">FCSys.Sensors.FaceDifferential.Mechanical</a>.Velocity</h2>
+<b>Sensor for relative velocity (inviscid condition)</b><p>
+<img src="images/FCSys.Sensors.FaceDifferential.Mechanical.VelocityD.png" alt="FCSys.Sensors.FaceDifferential.Mechanical.Velocity">
+<p><h3>Information</h3></p>
+<p>If <code>ax=1</code>, then the difference in normal velocity
+  is measured.  The relative first
+  and second transverse components of linear momentum may be measured by
+  <code>ax=2</code> and <code>ax=3</code>, but only if <code>inclTrans</code>
+   is <code>true</code>.
+  </p><p>
+Extends from <a href="FCSys_Sensors_FaceDifferential_Mechanical_BaseClasses.html#FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses.PartialSensor">BaseClasses.PartialSensor</a> (Partial sensor for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a> connectors).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Sensors_FaceDifferential_Mechanical_BaseClasses.html#FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses.SensorType">SensorType</a></td><td>sensorType</td><td>BaseClasses.SensorType.Veloc...</td><td>Type of sensor</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a></td><td>negative</td><td>Mechanical connector for the negative face</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a></td><td>positive</td><td>Mechanical connector for the positive face</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Velocity <font color="darkgreen">&quot;Sensor for relative velocity (inviscid condition)&quot;</font>
+
+  <font color="blue">extends </font><a href="FCSys_Sensors_FaceDifferential_Mechanical_BaseClasses.html#FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses.PartialSensor">BaseClasses.PartialSensor</a>(<font color="blue">final </font>sensorType=BaseClasses.SensorType.Velocity,<font color="blue">
+      redeclare </font><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">FCSys.Connectors.RealOutput</a> y(<font color="blue">final </font>unit=&quot;l/T&quot;));
+
+<font color="blue">equation </font>
+  y = negative.phi - positive.phi <font color="darkgreen">&quot;Measurement&quot;</font>;
+  0 = negative.mPhidot <font color="darkgreen">&quot;Condition of no shear force&quot;</font>;
+  <font color="darkgreen">// Note:  In conjunction with the conservation of linear momentum, this </font>
+  <font color="darkgreen">// means that there&#39;s no force on either face.</font>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Velocity;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Sensors.FaceDifferential.Mechanical.ForceI.png" alt="FCSys.Sensors.FaceDifferential.Mechanical.Force" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Sensors.FaceDifferential.Mechanical.Force"></a><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical">FCSys.Sensors.FaceDifferential.Mechanical</a>.Force</h2>
+<b>Sensor for shear force (condition of uniform velocity)</b><p>
+<img src="images/FCSys.Sensors.FaceDifferential.Mechanical.VelocityD.png" alt="FCSys.Sensors.FaceDifferential.Mechanical.Force">
+<p><h3>Information</h3></p>
+<p>If <code>ax=1</code>, then normal force
+  is measured.  The first
+  and second transverse components of force may be measured by
+  <code>ax=2</code> and <code>ax=3</code>, but only if <code>inclTrans</code>
+   is <code>true</code>.
+  </p><p>
+Extends from <a href="FCSys_Sensors_FaceDifferential_Mechanical_BaseClasses.html#FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses.PartialSensor">BaseClasses.PartialSensor</a> (Partial sensor for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a> connectors).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Sensors_FaceDifferential_Mechanical_BaseClasses.html#FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses.SensorType">SensorType</a></td><td>sensorType</td><td>BaseClasses.SensorType.Force</td><td>Type of sensor</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a></td><td>negative</td><td>Mechanical connector for the negative face</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a></td><td>positive</td><td>Mechanical connector for the positive face</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Force <font color="darkgreen">&quot;Sensor for shear force (condition of uniform velocity)&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Sensors_FaceDifferential_Mechanical_BaseClasses.html#FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses.PartialSensor">BaseClasses.PartialSensor</a>(<font color="blue">final </font>sensorType=BaseClasses.SensorType.Force,<font color="blue">
+      redeclare </font><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">FCSys.Connectors.RealOutput</a> y(<font color="blue">final </font>unit=&quot;l.m/T2&quot;));
+
+<font color="blue">equation </font>
+  y = negative.mPhidot <font color="darkgreen">&quot;Measurement&quot;</font>;
+  negative.phi = positive.phi <font color="darkgreen">&quot;Condition of uniform velocities&quot;</font>;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Force;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 10 10:06:06 2013.
+</div>
+</body>
+</html>

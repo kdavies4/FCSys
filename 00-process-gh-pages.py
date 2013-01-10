@@ -5,11 +5,12 @@
 #
 # Created by Kevin Davies, 5/30/2012
 
-import re, glob, sys, os
+import re, glob, sys, os, datetime
 
 ## Settings
 
 # Replacement pairs
+now = datetime.datetime.now()
 rpls = [
     # Update the image links.
     ('img src=".*?([^/]+\.png)', r'img src="images/\1'),
@@ -17,27 +18,13 @@ rpls = [
     ('img src=".*?([^/]+\.gif)', r'img src="images/\1'),
     ('img src=".*?([^/]+\.pdf)', r'img src="images/\1'),
     ('img src=".*?([^/]+\.ico)', r'img src="images/\1'),
-    #('<img src="[A-Za-z0-9._]+/[A-Za-z0-9._]+/[A-Za-z0-9._]+/[A-Za-z0-9._]+/[A-Za-z0-9._]+/', '<img src="'),
-    #('<img src="[A-Za-z0-9._]+/[A-Za-z0-9._]+/', '<img src="'), # Repeated for subdirectories
-    #('<img src="[A-Za-z0-9._]+/', '<img src="'),
-    #('([A-Za-z0-9._]+)\.png', r'images/\1.png'),
-    #('([A-Za-z0-9._]+)\.svg', r'images/\1.svg'),
-    #('([A-Za-z0-9._]+)\.gif', r'images/\1.gif'),
-
-
-#src="../resources/documentation/Connectors/hierarchy.png">
-#src="Connectors/images/hierarchy.png">
-
-
-#    ('\.\./resources/documentation/(favicon\.ico)', r'images/\1'),
-#    ('\.\./resources/documentation/(.+\.pdf)', r'images/\1'),
     # FCSys.html will be index.html.
     ('FCSys\.html', 'index.html'),
     # Change the title of the main page.
     ('<title>FCSys</title>', '<title>FCSys &mdash; Modelica library of fuel cell models</title>'),
     # Add keywords.
-    ('(<meta name="description" content=".*">)', r"""\1
-<meta name="keywords" content="Modelica, fuel cell, PEMFC, electrochemistry, model">"""),
+    ('<meta name="HTML-Generator" content="Dymola">', r"""<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
+<meta name="date" content="%d-%d-%d">""" % (now.year, now.month, now.day)),
     # Add the download link.
     ('(BaseClasses</a></li>\n *</ul>\n)( *</div>)', r"""\1
   <h3>Download</h3>
@@ -71,7 +58,7 @@ rpls = [
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_BCs.html">BCs</a>**</li>
-    <li><a href="FCSys_Sensors.html">Sensors</a>**</li>
+    <li><a href="FCSys_Sensors.html">Sensors</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
     <li><a href="FCSys_Regions.html">Regions</a>**</li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>

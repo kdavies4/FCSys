@@ -1,0 +1,121 @@
+<html>
+<head>
+<title>FCSys.Sensors.Chemical</title>
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
+<meta name="date" content="2013-1-10">
+<meta name="description" content="&lt;html&gt;Sensors for the &lt;a href=\&quot;modelica://FCSys.Connectors.ChemicalInput\&quot;&gt;ChemicalOutput&lt;/a&gt; connector&lt;/html&gt;">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_BCs.html">BCs</a>**</li>
+    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
+    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Sensors.Chemical"></a><a href="FCSys_Sensors.html#FCSys.Sensors">FCSys.Sensors</a>.Chemical</h2>
+<b>Sensors for the <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalOutput</a> connector</b>
+<p>
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Sensors.Chemical.SpeciesS.png" alt="FCSys.Sensors.Chemical.Species" width=20  height=20 align=top>&nbsp;<a href="FCSys_Sensors_Chemical.html#FCSys.Sensors.Chemical.Species">Species</a>
+</td><td>Sensors for the <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a> connector</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.Sensors.Chemical.SpeciesI.png" alt="FCSys.Sensors.Chemical.Species" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Sensors.Chemical.Species"></a><a href="FCSys_Sensors_Chemical.html#FCSys.Sensors.Chemical">FCSys.Sensors.Chemical</a>.Species</h2>
+<b>Sensors for the <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a> connector</b><p>
+<img src="images/FCSys.Sensors.Chemical.SpeciesD.png" alt="FCSys.Sensors.Chemical.Species">
+<p><h3>Information</h3></p>
+Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Sensor">FCSys.BaseClasses.Icons.Sensor</a> (Icon for a sensor).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Integer</td><td>n_lin</td><td>1</td><td>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a></td><td>chemical</td><td>Single-species connector for material</td></tr>
+<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>muPerT</td><td>Internal signal for quotient of electrochemical potential and temperature [1]</td></tr>
+<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>phi[n_lin]</td><td>Internal signal for velocity of the source [l/T]</td></tr>
+<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>hbar</td><td>Internal signal for massic enthalpy of the source [l2/T2]</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Species <font color="darkgreen">
+  &quot;Sensors for the <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a> connector&quot;</font>
+
+  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Sensor">FCSys.BaseClasses.Icons.Sensor</a>;
+
+  <font color="blue">parameter </font>Integer n_lin(
+    <font color="blue">final </font>min=1,
+    <font color="blue">final </font>max=3) = 1 <font color="darkgreen">
+    &quot;Number of components of linear momentum (<i>n</i><sub>lin</sub>)&quot;</font>;
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">FCSys.Connectors.ChemicalInput</a> chemical(<font color="blue">final </font>n_lin=n_lin) <font color="darkgreen">
+    &quot;Single-species connector for material&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">FCSys.Connectors.RealOutput</a> muPerT(<font color="blue">final </font>unit=&quot;1&quot;) <font color="darkgreen">
+    &quot;Internal signal for quotient of electrochemical potential and temperature&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">FCSys.Connectors.RealOutput</a> phi[n_lin](<font color="blue">each </font><font color="blue">final </font>unit=&quot;l/T&quot;) <font color="darkgreen">
+    &quot;Internal signal for velocity of the source&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">FCSys.Connectors.RealOutput</a> hbar(<font color="blue">final </font>unit=&quot;l2/T2&quot;) <font color="darkgreen">
+    &quot;Internal signal for massic enthalpy of the source&quot;</font>;</textblock>
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Measurements</font>
+  muPerT = chemical.muPerT;
+  phi = chemical.phi;
+  hbar = chemical.hbar;
+
+  <font color="darkgreen">// Conservation (no storage)</font>
+  0 = chemical.Ndot <font color="darkgreen">&quot;Material&quot;</font>;
+  <font color="red">zeros</font>(n_lin) = chemical.mPhidot <font color="darkgreen">&quot;Linear momentum&quot;</font>;
+  0 = chemical.Hdot <font color="darkgreen">&quot;Energy&quot;</font>;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Species;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 10 10:05:10 2013.
+</div>
+</body>
+</html>

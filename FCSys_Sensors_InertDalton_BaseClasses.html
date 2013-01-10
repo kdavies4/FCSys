@@ -1,0 +1,106 @@
+<html>
+<head>
+<title>FCSys.Sensors.InertDalton.BaseClasses</title>
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
+<meta name="date" content="2013-1-10">
+<meta name="description" content="Base classes (not for direct use)">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_BCs.html">BCs</a>**</li>
+    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
+    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Sensors.InertDalton.BaseClasses"></a><a href="FCSys_Sensors_InertDalton.html#FCSys.Sensors.InertDalton">FCSys.Sensors.InertDalton</a>.BaseClasses</h2>
+<b>Base classes (not for direct use)</b>
+<p>
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.BasesPackage.html#Modelica.Icons.BasesPackage">Modelica.Icons.BasesPackage</a> (Icon for packages containing base classes).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Sensors.InertDalton.BaseClasses.PartialSensorS.png" alt="FCSys.Sensors.InertDalton.BaseClasses.PartialSensor" width=20  height=20 align=top>&nbsp;<a href="FCSys_Sensors_InertDalton_BaseClasses.html#FCSys.Sensors.InertDalton.BaseClasses.PartialSensor">PartialSensor</a>
+</td><td>Partial model for a sensor</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.Sensors.InertDalton.BaseClasses.PartialSensorI.png" alt="FCSys.Sensors.InertDalton.BaseClasses.PartialSensor" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Sensors.InertDalton.BaseClasses.PartialSensor"></a><a href="FCSys_Sensors_InertDalton_BaseClasses.html#FCSys.Sensors.InertDalton.BaseClasses">FCSys.Sensors.InertDalton.BaseClasses</a>.PartialSensor</h2>
+<b>Partial model for a sensor</b><p>
+<img src="images/FCSys.Sensors.InertDalton.VolumeD.png" alt="FCSys.Sensors.InertDalton.BaseClasses.PartialSensor">
+<p><h3>Information</h3></p>
+Extends from <a href="FCSys_Sensors_BaseClasses.html#FCSys.Sensors.BaseClasses.PartialSensor">FCSys.Sensors.BaseClasses.PartialSensor</a> (Partial model for a sensor).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Integer</td><td>n_lin</td><td>1</td><td>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Measurement</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Connector for linear momentum and heat, with additivity of pressure</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">partial </font><font color="blue">model</font> PartialSensor <font color="darkgreen">&quot;Partial model for a sensor&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Sensors_BaseClasses.html#FCSys.Sensors.BaseClasses.PartialSensor">FCSys.Sensors.BaseClasses.PartialSensor</a>;
+
+  <font color="blue">parameter </font>Integer n_lin(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>max=3) = 1 <font color="darkgreen">
+    &quot;Number of components of linear momentum (<i>n</i><sub>lin</sub>)&quot;</font>;
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">FCSys.Connectors.InertDalton</a> inert(<font color="blue">final </font>n_lin=n_lin) <font color="darkgreen">
+    &quot;Connector for linear momentum and heat, with additivity of pressure&quot;</font>;</textblock>
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Conservation (no storage)</font>
+  0 = inert.p <font color="darkgreen">&quot;No (additional) pressure&quot;</font>;
+  <font color="red">zeros</font>(n_lin) = inert.mPhidot <font color="darkgreen">&quot;No force&quot;</font>;
+  0 = inert.Qdot <font color="darkgreen">&quot;Adiabatic&quot;</font>;
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>PartialSensor;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 10 10:05:15 2013.
+</div>
+</body>
+</html>

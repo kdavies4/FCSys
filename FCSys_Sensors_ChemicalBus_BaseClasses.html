@@ -1,0 +1,99 @@
+<html>
+<head>
+<title>FCSys.Sensors.ChemicalBus.BaseClasses</title>
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
+<meta name="date" content="2013-1-10">
+<meta name="description" content="Base classes (not for direct use)">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_BCs.html">BCs</a>**</li>
+    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
+    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Sensors.ChemicalBus.BaseClasses"></a><a href="FCSys_Sensors_ChemicalBus.html#FCSys.Sensors.ChemicalBus">FCSys.Sensors.ChemicalBus</a>.BaseClasses</h2>
+<b>Base classes (not for direct use)</b>
+<p>
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.BasesPackage.html#Modelica.Icons.BasesPackage">Modelica.Icons.BasesPackage</a> (Icon for packages containing base classes).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Sensors.ChemicalBus.BaseClasses.NullPhaseS.png" alt="FCSys.Sensors.ChemicalBus.BaseClasses.NullPhase" width=20  height=20 align=top>&nbsp;<a href="FCSys_Sensors_ChemicalBus_BaseClasses.html#FCSys.Sensors.ChemicalBus.BaseClasses.NullPhase">NullPhase</a>
+</td><td>Empty sensor for a phase (no species)</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.Sensors.ChemicalBus.BaseClasses.NullPhaseI.png" alt="FCSys.Sensors.ChemicalBus.BaseClasses.NullPhase" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Sensors.ChemicalBus.BaseClasses.NullPhase"></a><a href="FCSys_Sensors_ChemicalBus_BaseClasses.html#FCSys.Sensors.ChemicalBus.BaseClasses">FCSys.Sensors.ChemicalBus.BaseClasses</a>.NullPhase</h2>
+<b>Empty sensor for a phase (no species)</b><p>
+<img src="images/FCSys.Sensors.ChemicalBus.BaseClasses.NullPhaseD.png" alt="FCSys.Sensors.ChemicalBus.BaseClasses.NullPhase">
+<p><h3>Information</h3></p>
+Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Sensor">FCSys.BaseClasses.Icons.Sensor</a> (Icon for a sensor).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Integer</td><td>n_lin</td><td>1</td><td>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">ChemicalBus</a></td><td>chemical</td><td>Multi-species connector for material</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Bus of measurements</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> NullPhase <font color="darkgreen">&quot;Empty sensor for a phase (no species)&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Sensor">FCSys.BaseClasses.Icons.Sensor</a>;
+  <font color="blue">parameter </font>Integer n_lin(
+    <font color="blue">final </font>min=1,
+    <font color="blue">final </font>max=3) = 1 <font color="darkgreen">
+    &quot;Number of components of linear momentum (<i>n</i><sub>lin</sub>)&quot;</font>;
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">FCSys.Connectors.ChemicalBus</a> chemical <font color="darkgreen">&quot;Multi-species connector for material&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">FCSys.Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Bus of measurements&quot;</font>;
+<font color="blue">end </font>NullPhase;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 10 10:05:09 2013.
+</div>
+</body>
+</html>
