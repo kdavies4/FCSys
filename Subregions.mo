@@ -118,14 +118,14 @@ package Subregions
         inclH2=true,
         'inclH+'=true,
         bC2(
-          gas(H2(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
+          gas(H2(redeclare FCSys.BCs.Face.Material.Pressure material,
                 materialSpec(k=1*U.atm))),
           graphite(C(redeclare FCSys.BCs.Face.Entropy.Temperature entropyBC,
                 entropySpec(k=defaults.T)), 'e-'(redeclare
-                FCSys.BCs.Face.Material.Current materialBC, redeclare
+                FCSys.BCs.Face.Material.Current material, redeclare
                 Modelica.Blocks.Sources.Ramp materialSpec(duration=1000, height
                   =2*U.A))),
-          ionomer('H+'(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
+          ionomer('H+'(redeclare FCSys.BCs.Face.Material.Pressure material,
                 materialSpec(k(start=1*U.atm))))));
 
       extends Modelica.Icons.UnderConstruction;
@@ -149,16 +149,16 @@ package Subregions
         'inclH+'=true,
         inclO2=true,
         bC2(
-          gas(H2O(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
+          gas(H2O(redeclare FCSys.BCs.Face.Material.Pressure material,
                 materialSpec(k=1*U.atm)), O2(redeclare
-                FCSys.BCs.Face.Material.Pressure materialBC, materialSpec(k=1*U.atm))),
+                FCSys.BCs.Face.Material.Pressure material, materialSpec(k=1*U.atm))),
 
           graphite(C(redeclare FCSys.BCs.Face.Entropy.Temperature entropyBC,
                 entropySpec(k=defaults.T)), 'e-'(redeclare
-                FCSys.BCs.Face.Material.Current materialBC, redeclare
+                FCSys.BCs.Face.Material.Current material, redeclare
                 Modelica.Blocks.Sources.Ramp materialSpec(duration=1000, height
                   =-2*U.A))),
-          ionomer('H+'(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
+          ionomer('H+'(redeclare FCSys.BCs.Face.Material.Pressure material,
                 materialSpec(k(start=1*U.atm))))),
         defaults(analysis=false));
 
@@ -211,46 +211,46 @@ package Subregions
           final inclO2=inclO2,
           H2O(
             p_IC=defaults.p + 1*U.kPa,
-            yNegative(inviscidZ=true, inviscidX=true),
-            yPositive(inviscidZ=true, inviscidX=true),
-            zNegative(inviscidX=true, inviscidY=true),
-            zPositive(inviscidX=true, inviscidY=true)),
+            yNegative(inviscidX=true),
+            yPositive(inviscidX=true),
+            zNegative(inviscidX=true),
+            zPositive(inviscidX=true)),
           N2(
             p_IC=defaults.p + 1*U.kPa,
-            yNegative(inviscidZ=true, inviscidX=true),
-            yPositive(inviscidZ=true, inviscidX=true),
-            zNegative(inviscidX=true, inviscidY=true),
-            zPositive(inviscidX=true, inviscidY=true)),
+            yNegative(inviscidX=true),
+            yPositive(inviscidX=true),
+            zNegative(inviscidX=true),
+            zPositive(inviscidX=true)),
           O2(
             p_IC=defaults.p + 1*U.kPa,
-            yNegative(inviscidZ=true, inviscidX=true),
-            yPositive(inviscidZ=true, inviscidX=true),
-            zNegative(inviscidX=true, inviscidY=true),
-            zPositive(inviscidX=true, inviscidY=true)),
+            yNegative(inviscidX=true),
+            yPositive(inviscidX=true),
+            zNegative(inviscidX=true),
+            zPositive(inviscidX=true)),
           H2(
             p_IC=defaults.p + 1*U.kPa,
-            yNegative(inviscidZ=true, inviscidX=true),
-            yPositive(inviscidZ=true, inviscidX=true),
-            zNegative(inviscidX=true, inviscidY=true),
-            zPositive(inviscidX=true, inviscidY=true))),
+            yNegative(inviscidX=true),
+            yPositive(inviscidX=true),
+            zNegative(inviscidX=true),
+            zPositive(inviscidX=true))),
         graphite(
           final inclC=inclC,
           final 'incle-'='incle-',
           C(V_IC=subregion1.V/4),
           'e-'(
-            yNegative(inviscidZ=true, inviscidX=true),
-            yPositive(inviscidZ=true, inviscidX=true),
-            zNegative(inviscidX=true, inviscidY=true),
-            zPositive(inviscidX=true, inviscidY=true))),
+            yNegative(inviscidX=true),
+            yPositive(inviscidX=true),
+            zNegative(inviscidX=true),
+            zPositive(inviscidX=true))),
         ionomer(
           final inclC19HF37O5S=inclC19HF37O5S,
           final 'inclH+'='inclH+',
           C19HF37O5S(V_IC=subregion1.V/4),
           'H+'(
-            yNegative(inviscidZ=true, inviscidX=true),
-            yPositive(inviscidZ=true, inviscidX=true),
-            zNegative(inviscidX=true, inviscidY=true),
-            zPositive(inviscidX=true, inviscidY=true))),
+            yNegative(inviscidX=true),
+            yPositive(inviscidX=true),
+            zNegative(inviscidX=true),
+            zPositive(inviscidX=true))),
         inclLinY=false,
         inclLinZ=false,
         inclYFaces=false,
@@ -266,46 +266,46 @@ package Subregions
           each final inclO2=inclO2,
           H2(
             each p_IC=defaults.p,
-            each yNegative(inviscidZ=true,inviscidX=true),
-            each yPositive(inviscidZ=true,inviscidX=true),
-            each zNegative(inviscidX=true,inviscidY=true),
-            each zPositive(inviscidX=true,inviscidY=true)),
+            each yNegative(inviscidX=true),
+            each yPositive(inviscidX=true),
+            each zNegative(inviscidX=true),
+            each zPositive(inviscidX=true)),
           H2O(
             each p_IC=defaults.p,
-            each yNegative(inviscidZ=true,inviscidX=true),
-            each yPositive(inviscidZ=true,inviscidX=true),
-            each zNegative(inviscidX=true,inviscidY=true),
-            each zPositive(inviscidX=true,inviscidY=true)),
+            each yNegative(inviscidX=true),
+            each yPositive(inviscidX=true),
+            each zNegative(inviscidX=true),
+            each zPositive(inviscidX=true)),
           N2(
             each p_IC=defaults.p,
-            each yNegative(inviscidZ=true, inviscidX=true),
-            each yPositive(inviscidZ=true,inviscidX=true),
-            each zNegative(inviscidX=true,inviscidY=true),
-            each zPositive(inviscidX=true,inviscidY=true)),
+            each yNegative(inviscidX=true),
+            each yPositive(inviscidX=true),
+            each zNegative(inviscidX=true),
+            each zPositive(inviscidX=true)),
           O2(
             each p_IC=defaults.p,
-            each yNegative(inviscidZ=true,inviscidX=true),
-            each yPositive(inviscidZ=true,inviscidX=true),
-            each zNegative(inviscidX=true,inviscidY=true),
-            each zPositive(inviscidX=true,inviscidY=true))),
+            each yNegative(inviscidX=true),
+            each yPositive(inviscidX=true),
+            each zNegative(inviscidX=true),
+            each zPositive(inviscidX=true))),
         graphite(
           each final inclC=inclC,
           each final 'incle-'='incle-',
           C(each V_IC=subregions[1].V/4),
           'e-'(
-            each yNegative(inviscidZ=true,inviscidX=true),
-            each yPositive(inviscidZ=true,inviscidX=true),
-            each zNegative(inviscidX=true,inviscidY=true),
-            each zPositive(inviscidX=true,inviscidY=true))),
+            each yNegative(inviscidX=true),
+            each yPositive(inviscidX=true),
+            each zNegative(inviscidX=true),
+            each zPositive(inviscidX=true))),
         ionomer(
           each final inclC19HF37O5S=inclC19HF37O5S,
           each final 'inclH+'='inclH+',
           C19HF37O5S(each V_IC=subregions[1].V/4),
           'H+'(
-            each yNegative(inviscidZ=true,inviscidX=true),
-            each yPositive(inviscidZ=true,inviscidX=true),
-            each zNegative(inviscidX=true,inviscidY=true),
-            each zPositive(inviscidX=true,inviscidY=true))),
+            each yNegative(inviscidX=true),
+            each yPositive(inviscidX=true),
+            each zNegative(inviscidX=true),
+            each zPositive(inviscidX=true))),
         each inclLinY=false,
         each inclLinZ=false,
         each inclYFaces=false,
@@ -320,46 +320,46 @@ package Subregions
           final inclO2=inclO2,
           H2(
             p_IC=defaults.p - 1*U.kPa,
-            yNegative(inviscidZ=true, inviscidX=true),
-            yPositive(inviscidZ=true, inviscidX=true),
-            zNegative(inviscidX=true, inviscidY=true),
-            zPositive(inviscidX=true, inviscidY=true)),
+            yNegative(inviscidX=true),
+            yPositive(inviscidX=true),
+            zNegative(inviscidX=true),
+            zPositive(inviscidX=true)),
           H2O(
             p_IC=defaults.p - 1*U.kPa,
-            yNegative(inviscidZ=true, inviscidX=true),
-            yPositive(inviscidZ=true, inviscidX=true),
-            zNegative(inviscidX=true, inviscidY=true),
-            zPositive(inviscidX=true, inviscidY=true)),
+            yNegative(inviscidX=true),
+            yPositive(inviscidX=true),
+            zNegative(inviscidX=true),
+            zPositive(inviscidX=true)),
           N2(
             p_IC=defaults.p - 1*U.kPa,
-            yNegative(inviscidZ=true, inviscidX=true),
-            yPositive(inviscidZ=true, inviscidX=true),
-            zNegative(inviscidX=true, inviscidY=true),
-            zPositive(inviscidX=true, inviscidY=true)),
+            yNegative(inviscidX=true),
+            yPositive(inviscidX=true),
+            zNegative(inviscidX=true),
+            zPositive(inviscidX=true)),
           O2(
             p_IC=defaults.p - 1*U.kPa,
-            yNegative(inviscidZ=true, inviscidX=true),
-            yPositive(inviscidZ=true, inviscidX=true),
-            zNegative(inviscidX=true, inviscidY=true),
-            zPositive(inviscidX=true, inviscidY=true))),
+            yNegative(inviscidX=true),
+            yPositive(inviscidX=true),
+            zNegative(inviscidX=true),
+            zPositive(inviscidX=true))),
         graphite(
           final inclC=inclC,
           final 'incle-'='incle-',
           C(V_IC=subregion2.V/4),
           'e-'(
-            yNegative(inviscidZ=true, inviscidX=true),
-            yPositive(inviscidZ=true, inviscidX=true),
-            zNegative(inviscidX=true, inviscidY=true),
-            zPositive(inviscidX=true, inviscidY=true))),
+            yNegative(inviscidX=true),
+            yPositive(inviscidX=true),
+            zNegative(inviscidX=true),
+            zPositive(inviscidX=true))),
         ionomer(
           final inclC19HF37O5S=inclC19HF37O5S,
           final 'inclH+'='inclH+',
           C19HF37O5S(V_IC=subregion2.V/4),
           'H+'(
-            yNegative(inviscidZ=true, inviscidX=true),
-            yPositive(inviscidZ=true, inviscidX=true),
-            zNegative(inviscidX=true, inviscidY=true),
-            zPositive(inviscidX=true, inviscidY=true))),
+            yNegative(inviscidX=true),
+            yPositive(inviscidX=true),
+            zNegative(inviscidX=true),
+            zPositive(inviscidX=true))),
         inclLinY=false,
         inclLinZ=false,
         inclYFaces=false,
@@ -615,14 +615,14 @@ package Subregions
       FCSys.Subregions.Reaction reaction(n_spec=3)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       FCSys.BCs.Chemical.Species species1(redeclare
-          FCSys.Characteristics.'e-'.Graphite Data, materialBC=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature)
+          FCSys.Characteristics.'e-'.Graphite Data, material=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature)
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={-30,-24})));
 
       FCSys.BCs.Chemical.Species species2(redeclare
-          FCSys.Characteristics.'H+'.Gas Data, materialBC=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature)
+          FCSys.Characteristics.'H+'.Gas Data, material=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature)
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
@@ -630,7 +630,7 @@ package Subregions
 
       FCSys.BCs.Chemical.Species species3(
         redeclare FCSys.Characteristics.H2.Gas Data,
-        materialBC=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.Current,
+        material=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.Current,
         redeclare Modelica.Blocks.Sources.Ramp materialSpec(height=100*U.A,
             duration=3600e2)) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
@@ -678,7 +678,7 @@ package Subregions
       FCSys.Subregions.Reaction reaction(final n_lin=n_lin, n_spec=3)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       FCSys.BCs.Chemical.Species 'e-'(
-        materialBC=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature,
+        material=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature,
 
         redeclare FCSys.Characteristics.'e-'.Graphite Data,
         final n_lin=n_lin) annotation (Placement(transformation(
@@ -687,7 +687,7 @@ package Subregions
             origin={-30,-24})));
 
       FCSys.BCs.Chemical.Species 'H+'(
-        materialBC=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature,
+        material=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature,
 
         redeclare FCSys.Characteristics.'H+'.Solid Data,
         final n_lin=n_lin) annotation (Placement(transformation(
@@ -696,7 +696,7 @@ package Subregions
             origin={0,-24})));
 
       FCSys.BCs.Chemical.Species H2(
-        materialBC=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.Current,
+        material=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.Current,
         redeclare FCSys.Characteristics.H2.Gas Data,
         final n_lin=n_lin,
         redeclare Modelica.Blocks.Sources.Ramp materialSpec(height=100*U.A,
@@ -772,7 +772,7 @@ package Subregions
       extends SpeciesH2(redeclare FCSys.Subregions.Species.'e-'.Graphite.Fixed
           species);
       FCSys.BCs.Face.BaseClasses.PartialSpecies faceBC(redeclare
-          FCSys.BCs.Face.Material.Pressure materialBC) annotation (Placement(
+          FCSys.BCs.Face.Material.Pressure material) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
@@ -807,34 +807,34 @@ package Subregions
           inclN2=false,
           inclO2=false,
           H2O(
-            yNegative(inviscidZ=true, inviscidX=true),
-            yPositive(inviscidZ=true, inviscidX=true),
-            zNegative(inviscidX=true, inviscidY=true),
-            zPositive(inviscidX=true, inviscidY=true)),
+            yNegative(inviscidX=true),
+            yPositive(inviscidX=true),
+            zNegative(inviscidX=true),
+            zPositive(inviscidX=true)),
           H2(
             p_IC=1.05*defaults.p,
-            yNegative(inviscidZ=true, inviscidX=true),
-            yPositive(inviscidZ=true, inviscidX=true),
-            zNegative(inviscidX=true, inviscidY=true),
-            zPositive(inviscidX=true, inviscidY=true))),
+            yNegative(inviscidX=true),
+            yPositive(inviscidX=true),
+            zNegative(inviscidX=true),
+            zPositive(inviscidX=true))),
         graphite(
           inclC=true,
           'incle-'=true,
           C(V_IC=subregion1.V/4),
           'e-'(
-            yNegative(inviscidZ=true, inviscidX=true),
-            yPositive(inviscidZ=true, inviscidX=true),
-            zNegative(inviscidX=true, inviscidY=true),
-            zPositive(inviscidX=true, inviscidY=true))),
+            yNegative(inviscidX=true),
+            yPositive(inviscidX=true),
+            zNegative(inviscidX=true),
+            zPositive(inviscidX=true))),
         ionomer(
           inclC19HF37O5S=true,
           'inclH+'=true,
           C19HF37O5S(V_IC=subregion1.V/4),
           'H+'(
-            yNegative(inviscidZ=true, inviscidX=true),
-            yPositive(inviscidZ=true, inviscidX=true),
-            zNegative(inviscidX=true, inviscidY=true),
-            zPositive(inviscidX=true, inviscidY=true))),
+            yNegative(inviscidX=true),
+            yPositive(inviscidX=true),
+            zNegative(inviscidX=true),
+            zPositive(inviscidX=true))),
         inclLinY=false,
         inclLinZ=false,
         inclYFaces=false,
@@ -849,10 +849,10 @@ package Subregions
           each 'inclH+'=true,
           C19HF37O5S(each V_IC=subregions[1].V/4),
           'H+'(
-            each yNegative(inviscidZ=true,inviscidX=true),
-            each yPositive(inviscidZ=true,inviscidX=true),
-            each zNegative(inviscidX=true,inviscidY=true),
-            each zPositive(inviscidX=true,inviscidY=true))),
+            each yNegative(inviscidX=true),
+            each yPositive(inviscidX=true),
+            each zNegative(inviscidX=true),
+            each zPositive(inviscidX=true))),
         each inclLinY=false,
         each inclLinZ=false,
         each inclYFaces=false,
@@ -868,40 +868,40 @@ package Subregions
           inclO2=true,
           H2O(
             p_IC=0.95*defaults.p,
-            yNegative(inviscidZ=true, inviscidX=true),
-            yPositive(inviscidZ=true, inviscidX=true),
-            zNegative(inviscidX=true, inviscidY=true),
-            zPositive(inviscidX=true, inviscidY=true)),
+            yNegative(inviscidX=true),
+            yPositive(inviscidX=true),
+            zNegative(inviscidX=true),
+            zPositive(inviscidX=true)),
           N2(
             p_IC=0.95*defaults.p,
-            yNegative(inviscidZ=true, inviscidX=true),
-            yPositive(inviscidZ=true, inviscidX=true),
-            zNegative(inviscidX=true, inviscidY=true),
-            zPositive(inviscidX=true, inviscidY=true)),
+            yNegative(inviscidX=true),
+            yPositive(inviscidX=true),
+            zNegative(inviscidX=true),
+            zPositive(inviscidX=true)),
           O2(
             p_IC=0.95*defaults.p,
-            yNegative(inviscidZ=true, inviscidX=true),
-            yPositive(inviscidZ=true, inviscidX=true),
-            zNegative(inviscidX=true, inviscidY=true),
-            zPositive(inviscidX=true, inviscidY=true))),
+            yNegative(inviscidX=true),
+            yPositive(inviscidX=true),
+            zNegative(inviscidX=true),
+            zPositive(inviscidX=true))),
         graphite(
           inclC=true,
           'incle-'=true,
           C(V_IC=subregion2.V/4),
           'e-'(
-            yNegative(inviscidZ=true, inviscidX=true),
-            yPositive(inviscidZ=true, inviscidX=true),
-            zNegative(inviscidX=true, inviscidY=true),
-            zPositive(inviscidX=true, inviscidY=true))),
+            yNegative(inviscidX=true),
+            yPositive(inviscidX=true),
+            zNegative(inviscidX=true),
+            zPositive(inviscidX=true))),
         ionomer(
           inclC19HF37O5S=true,
           'inclH+'=true,
           C19HF37O5S(V_IC=subregion2.V/4),
           'H+'(
-            yNegative(inviscidZ=true, inviscidX=true),
-            yPositive(inviscidZ=true, inviscidX=true),
-            zNegative(inviscidX=true, inviscidY=true),
-            zPositive(inviscidX=true, inviscidY=true))),
+            yNegative(inviscidX=true),
+            yPositive(inviscidX=true),
+            zNegative(inviscidX=true),
+            zPositive(inviscidX=true))),
         inclLinY=false,
         inclLinZ=false,
         inclYFaces=false,
@@ -920,7 +920,7 @@ package Subregions
           'incle-'=true,
           C(redeclare FCSys.BCs.Face.Species.Entropy.Temperature entropyBC,
               entropySpec(k=defaults.T)),
-          'e-'(redeclare FCSys.BCs.Face.Species.Material.Current materialBC,
+          'e-'(redeclare FCSys.BCs.Face.Species.Material.Current material,
               redeclare Modelica.Blocks.Sources.Ramp materialSpec(duration=1000,
                 height=-2*U.A)))) annotation (__Dymola_choicesFromPackage=true,
           Placement(transformation(
@@ -937,7 +937,7 @@ package Subregions
           'incle-'=true,
           C(redeclare FCSys.BCs.Face.Species.Entropy.Temperature entropyBC,
               entropySpec(k=defaults.T)),
-          'e-'(redeclare FCSys.BCs.Face.Species.Material.Current materialBC,
+          'e-'(redeclare FCSys.BCs.Face.Species.Material.Current material,
               redeclare Modelica.Blocks.Sources.Ramp materialSpec(duration=1000,
                 height=2*U.A)))) annotation (__Dymola_choicesFromPackage=true,
           Placement(transformation(
@@ -946,7 +946,7 @@ package Subregions
             origin={50,0})));
 
       replaceable FCSys.BCs.FaceBus.SubregionFlow ground(graphite('incle-'=true,
-            'e-'(redeclare FCSys.BCs.Face.Material.Pressure materialBC,
+            'e-'(redeclare FCSys.BCs.Face.Material.Pressure material,
               materialSpec(k=0)))) constrainedby FCSys.BCs.FaceBus.Subregion
         annotation (__Dymola_choicesFromPackage=true, Placement(transformation(
             extent={{-10,-10},{10,10}},
@@ -4068,7 +4068,7 @@ package Subregions
       package Graphite "<html>e<sup>-</sup> in graphite</html>"
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
-          extends Species0Amount(
+          extends Species(
             redeclare replaceable package Data =
                 FCSys.Characteristics.'e-'.Graphite,
             Xi=k_Xi*Data.Xi(T),
@@ -4076,7 +4076,7 @@ package Subregions
             R=k_R*Data.R(T));
 
           parameter Q.NumberAbsolute k_Xi(final nominal=1) = 1
-            "<html>Adjustment factor for self diffusivity (<i>k</i><sub>&Xi;</sub>)</html>"
+            "<html>Adjustment factor for fusivity (<i>k</i><sub>&Xi;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_F(final nominal=1) = 1
             "<html>Adjustment factor for fluidity (<i>k</i><sub><i>F</i></sub>)</html>"
@@ -4093,7 +4093,7 @@ package Subregions
         end Calibrated;
 
         model Correlated "Correlated properties"
-          extends Species0Amount(
+          extends Species(
             redeclare replaceable package Data =
                 FCSys.Characteristics.'e-'.Graphite,
             Xi=Data.Xi(T),
@@ -4108,7 +4108,7 @@ package Subregions
         end Correlated;
 
         model Fixed "Fixed properties"
-          extends Species0Amount(
+          extends Species(
             redeclare replaceable package Data =
                 FCSys.Characteristics.'e-'.Graphite,
             redeclare parameter Q.Fusivity Xi=Data.Xi(),
@@ -4133,19 +4133,15 @@ package Subregions
       package Solid "<html>H<sup>+</sup> in solid</html>"
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
-          extends Species0Amount(
+          extends Species(
             redeclare replaceable package Data =
                 FCSys.Characteristics.'H+'.Solid,
-            initMethPartNum=InitMethScalar.Amount,
             Xi=k_Xi*Data.Xi(T),
             F=k_F*Data.F(T),
             R=k_R*Data.R(T));
 
-          // Note:  initMethPartNum may not be Pressure (which is default) since the
-          // EOS doesn't involve pressure.
-
           parameter Q.NumberAbsolute k_Xi(final nominal=1) = 1
-            "<html>Adjustment factor for self diffusivity (<i>k</i><sub>&Xi;</sub>)</html>"
+            "<html>Adjustment factor for fusivity (<i>k</i><sub>&Xi;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_F(final nominal=1) = 1
             "<html>Adjustment factor for fluidity (<i>k</i><sub><i>F</i></sub>)</html>"
@@ -4162,16 +4158,12 @@ package Subregions
         end Calibrated;
 
         model Correlated "Correlated properties"
-          extends Species0Amount(
+          extends Species(
             redeclare replaceable package Data =
                 FCSys.Characteristics.'H+'.Solid,
-            initMethPartNum=InitMethScalar.Amount,
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
-
-          // Note:  initMethPartNum may not be Pressure (which is default) since the
-          // EOS doesn't involve pressure.
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -4181,16 +4173,12 @@ package Subregions
         end Correlated;
 
         model Fixed "Fixed properties"
-          extends Species0Amount(
+          extends Species(
             redeclare replaceable package Data =
                 FCSys.Characteristics.'H+'.Solid,
-            initMethPartNum=InitMethScalar.Amount,
             redeclare parameter Q.Fusivity Xi=Data.Xi(),
             redeclare parameter Q.Fluidity F=Data.F(),
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(0.1661*U.W));
-
-          // Note:  initMethPartNum may not be Pressure (which is default) since
-          // overrideEOS is true.
 
           // See the documentation for a table of values.
 
@@ -4281,7 +4269,7 @@ package Subregions
             R=k_R*Data.R(T));
 
           parameter Q.NumberAbsolute k_Xi(final nominal=1) = 1
-            "<html>Adjustment factor for self diffusivity (<i>k</i><sub>&Xi;</sub>)</html>"
+            "<html>Adjustment factor for fusivity (<i>k</i><sub>&Xi;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_F(final nominal=1) = 1
             "<html>Adjustment factor for fluidity (<i>k</i><sub><i>F</i></sub>)</html>"
@@ -4402,7 +4390,7 @@ and <code>R=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas 
             R=k_R*Data.R(T));
 
           parameter Q.NumberAbsolute k_Xi(final nominal=1) = 1
-            "<html>Adjustment factor for self diffusivity (<i>k</i><sub>&Xi;</sub>)</html>"
+            "<html>Adjustment factor for fusivity (<i>k</i><sub>&Xi;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_F(final nominal=1) = 1
             "<html>Adjustment factor for fluidity (<i>k</i><sub><i>F</i></sub>)</html>"
@@ -4570,7 +4558,7 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
             R=k_R*Data.R(T));
 
           parameter Q.NumberAbsolute k_Xi(final nominal=1) = 1
-            "<html>Adjustment factor for self diffusivity (<i>k</i><sub>&Xi;</sub>)</html>"
+            "<html>Adjustment factor for fusivity (<i>k</i><sub>&Xi;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_F(final nominal=1) = 1
             "<html>Adjustment factor for fluidity (<i>k</i><sub><i>F</i></sub>)</html>"
@@ -4713,7 +4701,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
             R=k_R*Data.R(T));
 
           parameter Q.NumberAbsolute k_Xi(final nominal=1) = 1
-            "<html>Adjustment factor for self diffusivity (<i>k</i><sub>&Xi;</sub>)</html>"
+            "<html>Adjustment factor for fusivity (<i>k</i><sub>&Xi;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_F(final nominal=1) = 1
             "<html>Adjustment factor for fluidity (<i>k</i><sub><i>F</i></sub>)</html>"
@@ -4831,7 +4819,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
             R=k_R*Data.R(T));
 
           parameter Q.NumberAbsolute k_Xi(final nominal=1) = 1
-            "<html>Adjustment factor for self diffusivity (<i>k</i><sub>&Xi;</sub>)</html>"
+            "<html>Adjustment factor for fusivity (<i>k</i><sub>&Xi;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_F(final nominal=1) = 1
             "<html>Adjustment factor for fluidity (<i>k</i><sub><i>F</i></sub>)</html>"
@@ -5671,9 +5659,9 @@ The default global default settings will be used for the current simulation.",
 
       /* This is commented out because it may be annoying.
   // Warn when index reduction may be necessary.
-  if abs(D) < Modelica.Constants.small then
-    Modelica.Utilities.Streams.print("Warning: The self diffusivity is zero.
-    This may directly couple the currents within neighboring subregions.\nConsider setting the value of D as final (if not already) so that index reduction may be performed.");
+  if abs(Xi) < Modelica.Constants.small then
+    Modelica.Utilities.Streams.print("Warning: The fusivity is zero.
+    This may directly couple the densities within neighboring subregions.\nConsider setting the value of Xi as final (if not already) so that index reduction may be performed.");
   end if;
   if abs(F) > Modelica.Constants.small then
     Modelica.Utilities.Streams.print("Warning: The fluidity is zero.
@@ -6102,7 +6090,7 @@ The default global default settings will be used for the current simulation.",
     <ul>
     <li>The \"specific\" adjective is taken to mean a quantity divided by particle
     number.  (\"Massic\" would indicate a quantity divided by mass.)</li>
-    <li>In general, if fluidity, self diffusivity, or thermal resistivity is zero, then
+    <li>In general, if fusivity, fluidity, or thermal resistivity is zero, then
     it should be set as <code>final</code> so that index reduction may be performed.
     If two <a href=\"modelica://FCSys.Subregions.Species\">Species</a> instances
     are connected through their exchange connectors
@@ -6178,14 +6166,14 @@ The default global default settings will be used for the current simulation.",
             extent={{-100,-100},{100,100}},
             initialScale=0.1), graphics),
         Icon(graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={127,127,127},
-              pattern=LinePattern.Dash,
-              fillColor={225,225,225},
-              fillPattern=FillPattern.Solid), Text(
-              extent={{-100,20},{100,60}},
-              textString="%name",
-              lineColor={0,0,0})}));
+                  extent={{-100,100},{100,-100}},
+                  lineColor={127,127,127},
+                  pattern=LinePattern.Dash,
+                  fillColor={225,225,225},
+                  fillPattern=FillPattern.Solid),Text(
+                  extent={{-100,20},{100,60}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
     end Species;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -6270,62 +6258,53 @@ The default global default settings will be used for the current simulation.",
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-180,-180},{180,
-              180}}), graphics={
-          Rectangle(
-            extent={{-170,120},{170,160}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Ellipse(
-            extent={{-60,188},{60,68}},
-            lineColor={127,127,127},
-            startAngle=30,
-            endAngle=149,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255}),
-          Ellipse(
-            extent={{-170,-2},{-50,-122}},
-            lineColor={127,127,127},
-            startAngle=149,
-            endAngle=270,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255}),
-          Ellipse(
-            extent={{50,-2},{170,-122}},
-            lineColor={127,127,127},
-            startAngle=270,
-            endAngle=390,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255}),
-          Polygon(
-            points={{51.5,159},{162,-32},{110,-122},{-110,-122},{-162,-32},{-51.5,
-                159},{51.5,159}},
-            smooth=Smooth.None,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Line(
-            points={{51.5,159},{162,-32}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{110,-122},{-110,-122}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{-162,-32},{-51.5,159}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Text(
-            extent={{-170,120},{170,160}},
-            textString="%name",
-            lineColor={0,0,0})}));
+              180}}), graphics={Rectangle(
+              extent={{-170,120},{170,160}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Ellipse(
+              extent={{-60,188},{60,68}},
+              lineColor={127,127,127},
+              startAngle=30,
+              endAngle=149,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}),Ellipse(
+              extent={{-170,-2},{-50,-122}},
+              lineColor={127,127,127},
+              startAngle=149,
+              endAngle=270,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}),Ellipse(
+              extent={{50,-2},{170,-122}},
+              lineColor={127,127,127},
+              startAngle=270,
+              endAngle=390,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}),Polygon(
+              points={{51.5,159},{162,-32},{110,-122},{-110,-122},{-162,-32},{-51.5,
+              159},{51.5,159}},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Line(
+              points={{51.5,159},{162,-32}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{110,-122},{-110,-122}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{-162,-32},{-51.5,159}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Text(
+              extent={{-170,120},{170,160}},
+              textString="%name",
+              lineColor={0,0,0})}));
   end PhaseBoundary;
 
   model Reaction "Model for a chemical/electrochemical reaction"
@@ -6433,26 +6412,22 @@ Check the chemical formulas and the specific masses of the species.");
     <li>No storage of material, linear momentum, or energy</li></ul>
     </p>
     </html>"),
-      Icon(graphics={
-          Rectangle(
-            extent={{-140,40},{140,80}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Text(
-            extent={{-140,40},{140,80}},
-            textString="%name",
-            lineColor={0,0,0}),
-          Ellipse(
-            extent={{-80,40},{80,-40}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            lineColor={127,127,127},
-            pattern=LinePattern.Dash),
-          Text(
-            extent={{-100,-16},{100,-40}},
-            lineColor={127,127,127},
-            textString="%n_spec")}),
+      Icon(graphics={Rectangle(
+              extent={{-140,40},{140,80}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Text(
+              extent={{-140,40},{140,80}},
+              textString="%name",
+              lineColor={0,0,0}),Ellipse(
+              extent={{-80,40},{80,-40}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash),Text(
+              extent={{-100,-16},{100,-40}},
+              lineColor={127,127,127},
+              textString="%n_spec")}),
       Diagram(graphics));
   end Reaction;
 
@@ -6491,28 +6466,24 @@ Check the chemical formulas and the specific masses of the species.");
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{160,
-              160}}), graphics={
-          Rectangle(
-            extent={{-160,112},{160,152}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Polygon(
-            points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,-160},
-                {-160,60}},
-            lineColor={127,127,127},
-            smooth=Smooth.None,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.Dash),
-          Text(
-            extent={{-160,112},{160,152}},
-            textString="%name",
-            lineColor={0,0,0})}),
+              160}}), graphics={Rectangle(
+              extent={{-160,112},{160,152}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Polygon(
+              points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,-160},
+              {-160,60}},
+              lineColor={127,127,127},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.Dash),Text(
+              extent={{-160,112},{160,152}},
+              textString="%name",
+              lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(graphics));
-
   end Volume;
 
   package BaseClasses "Base classes (not for direct use)"

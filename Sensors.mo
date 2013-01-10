@@ -489,12 +489,13 @@ sensor</a> models.
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
-                100,100}}), graphics={Line(points={{-40,-100},{-40,-58}}, color
-              ={0,0,127}),Line(points={{40,-100},{40,-58}}, color={0,0,127}),
-              Text(
-                  extent={{-100,-20},{100,-50}},
-                  lineColor={127,127,127},
-                  textString="mu/T   phi   T     ")}));
+                100,100}}), graphics={
+            Line(points={{-40,-100},{-40,-58}}, color={0,0,127}),
+            Line(points={{40,-100},{40,-58}}, color={0,0,127}),
+            Text(
+              extent={{-100,-20},{100,-50}},
+              lineColor={127,127,127},
+              textString="mu/T   phi   T     ")}));
     end Species;
   end Chemical;
 
@@ -845,7 +846,7 @@ sensor</a> models.
   end InertDalton;
 
   package FaceBus
-    "<html>Sensors for <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialFace\">Face</a> and <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connectors</html>"
+    "<html>Sensors for a single <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector</html>"
 
     extends Modelica.Icons.Package;
     model Subregion
@@ -1992,7 +1993,7 @@ sensor</a> model.
   end Face;
 
   package FaceBusDifferential
-    "<html>Sensors for pairs of <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialFace\">Face</a> or <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connectors</html>"
+    "<html>Sensors for a pair of <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connectors</html>"
 
     extends Modelica.Icons.Package;
 
@@ -2527,7 +2528,7 @@ sensor</a> model.
   end FaceBusDifferential;
 
   package FaceDifferential
-    "<html>Sensors for a single <a href=\"modelica://FCSys.Connectors.BaseClasses.BaseClasses.PartialFace\">Face</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
+    "<html>Sensors for a pair of <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors, e.g., of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
     extends Modelica.Icons.Package;
 
     model Species
@@ -3432,8 +3433,8 @@ sensor</a> model.
           smooth=Smooth.None));
 
       connect(y, saturation.y) annotation (Line(
-          points={{5.55112e-16,-100},{5.55112e-16,-75},{-1.40998e-15,-75},{-1.40998e-15,
-              -51}},
+          points={{5.55112e-16,-100},{5.55112e-16,-75},{-1.40998e-15,-75},{
+              -1.40998e-15,-51}},
           color={0,0,127},
           smooth=Smooth.None));
       annotation (Icon(coordinateSystem(

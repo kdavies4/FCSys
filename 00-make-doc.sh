@@ -49,9 +49,11 @@ git add *Characteristics* # **temp
 git add *Quantities* # **temp
 git add *Units* # **temp
 git add *UsersGuide* # **temp
+git add *Sensors* # **temp
 git add *Subregions* # **temp
 git add FCSys_BaseClasses* # **temp
 git add images/*Connectors* # **temp
+git add images/*Sensors* # **temp
 git add images/*Characteristics* # **temp
 git add images/*Quantities* # **temp
 git add images/*Units* # **temp
