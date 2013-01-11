@@ -15,7 +15,7 @@ package Characteristics
 
       // Data
       import DataC = FCSys.Characteristics.C.Graphite;
-      import DataC19HF37O5S = FCSys.Characteristics.C19HF37O5S.Solid;
+      import DataC19HF37O5S = FCSys.Characteristics.C19HF37O5S.Ionomer;
       import 'Datae-' = FCSys.Characteristics.'e-'.Graphite;
       import DataH2 = FCSys.Characteristics.H2.Gas;
     protected
@@ -23,7 +23,7 @@ package Characteristics
               0}) "H2 as ideal gas";
       import DataH2O = FCSys.Characteristics.H2O.Gas;
       import DataH2OLiquid = FCSys.Characteristics.H2O.Liquid;
-      import 'DataH+' = FCSys.Characteristics.'H+'.Solid;
+      import 'DataH+' = FCSys.Characteristics.'H+'.Ionomer;
       import DataN2 = FCSys.Characteristics.N2.Gas;
       import DataO2 = FCSys.Characteristics.O2.Gas;
 
@@ -36,42 +36,47 @@ package Characteristics
       // -------
       // Isochoric specific heat capacity
       output Q.CapacityThermalSpecific c_V_C=DataC.c_V(T, p);
-      output Q.CapacityThermalSpecific c_V_C19HF37O5S=DataC19HF37O5S.c_V(T, p);
+      output Q.CapacityThermalSpecific c_V_C19HF37O5S=
+          FCSys.Characteristics.C19HF37O5S.Ionomer.c_V(T, p);
       output Q.CapacityThermalSpecific 'c_V_e-'='Datae-'.c_V(T, p);
       output Q.CapacityThermalSpecific c_V_H2=DataH2.c_V(T, p);
       output Q.CapacityThermalSpecific c_V_H2_IG=DataH2IG.c_V(T, p_IG);
       output Q.CapacityThermalSpecific c_V_H2O=DataH2O.c_V(T, p);
       output Q.CapacityThermalSpecific c_V_H2O_liquid=DataH2OLiquid.c_V(T, p);
-      output Q.CapacityThermalSpecific 'c_V_H+'='DataH+'.c_V(T, p);
+      output Q.CapacityThermalSpecific 'c_V_H+'=
+          FCSys.Characteristics.'H+'.Ionomer.c_V(T, p);
       output Q.CapacityThermalSpecific c_V_N2=DataN2.c_V(T, p);
       output Q.CapacityThermalSpecific c_V_O2=DataO2.c_V(T, p);
       //
       // Gibbs potential
       output Q.Potential g_C=DataC.g(T, p);
-      output Q.Potential g_C19HF37O5S=DataC19HF37O5S.g(T, p);
+      output Q.Potential g_C19HF37O5S=
+          FCSys.Characteristics.C19HF37O5S.Ionomer.g(T, p);
       output Q.Potential 'g_e-'='Datae-'.g(T, p);
       output Q.Potential g_H2=DataH2.g(T, p);
       output Q.Potential g_H2O=DataH2O.g(T, p);
       output Q.Potential g_H2O_liquid=DataH2OLiquid.g(T, p);
-      output Q.Potential 'g_H+'='DataH+'.g(T, p);
+      output Q.Potential 'g_H+'=FCSys.Characteristics.'H+'.Ionomer.g(T, p);
       output Q.Potential g_N2=DataN2.g(T, p);
       output Q.Potential g_O2=DataO2.g(T, p);
       //
       // Specific enthalpy
       output Q.Potential h_C=DataC.h(T);
-      output Q.Potential h_C19HF37O5S=DataC19HF37O5S.h(T);
+      output Q.Potential h_C19HF37O5S=
+          FCSys.Characteristics.C19HF37O5S.Ionomer.h(T);
       output Q.Potential 'h_e-'='Datae-'.h(T);
       output Q.Potential h_H2=DataH2.h(T);
       output Q.Potential h_H2O=DataH2O.h(T);
       output Q.Potential h_H2O_liquid=DataH2OLiquid.h(T);
-      output Q.Potential 'h_H+'='DataH+'.h(T);
+      output Q.Potential 'h_H+'=FCSys.Characteristics.'H+'.Ionomer.h(T);
       output Q.Potential h_N2=DataN2.h(T);
       output Q.Potential h_O2=DataO2.h(T);
       //
       // Pressure
       output Q.PressureAbsolute p_C=DataC.p_Tv(T, v_C) if DataC.isCompressible;
-      output Q.PressureAbsolute p_C19HF37O5S=DataC19HF37O5S.p_Tv(T,
-          v_C19HF37O5S) if DataC19HF37O5S.isCompressible;
+      output Q.PressureAbsolute p_C19HF37O5S=
+          FCSys.Characteristics.C19HF37O5S.Ionomer.p_Tv(T, v_C19HF37O5S) if
+        DataC19HF37O5S.isCompressible;
       output Q.PressureAbsolute 'p_e-'='Datae-'.p_Tv(T, 'v_e-') if 'Datae-'.isCompressible;
       output Q.PressureAbsolute p_H2=DataH2.p_Tv(T, v_H2) if DataH2.isCompressible;
       output Q.PressureAbsolute p_IG=DataH2IG.p_Tv(T, v_IG) if DataH2IG.isCompressible
@@ -79,31 +84,35 @@ package Characteristics
       output Q.PressureAbsolute p_H2O=DataH2O.p_Tv(T, v_H2O) if DataH2O.isCompressible;
       output Q.PressureAbsolute p_H2O_liquid=DataH2OLiquid.p_Tv(T, v_H2O_liquid)
         if DataH2OLiquid.isCompressible;
-      output Q.PressureAbsolute 'p_H+'='DataH+'.p_Tv(T, 'v_H+') if 'DataH+'.isCompressible;
+      output Q.PressureAbsolute 'p_H+'=FCSys.Characteristics.'H+'.Ionomer.p_Tv(
+          T, 'v_H+') if 'DataH+'.isCompressible;
       output Q.PressureAbsolute p_N2=DataN2.p_Tv(T, v_N2) if DataN2.isCompressible;
       output Q.PressureAbsolute p_O2=DataO2.p_Tv(T, v_O2) if DataO2.isCompressible;
       //
       // Specific entropy
       output Q.Number s_C=DataC.s(T, p);
-      output Q.Number s_C19HF37O5S=DataC19HF37O5S.s(T, p);
+      output Q.Number s_C19HF37O5S=FCSys.Characteristics.C19HF37O5S.Ionomer.s(T,
+          p);
       output Q.Number 's_e-'='Datae-'.s(T, p);
       output Q.Number s_H2=DataH2.s(T, p);
       output Q.Number s_H2O=DataH2O.s(T, p);
       output Q.Number s_H2O_liquid=DataH2OLiquid.s(T, p);
-      output Q.Number 's_H+'='DataH+'.s(T, p);
+      output Q.Number 's_H+'=FCSys.Characteristics.'H+'.Ionomer.s(T, p);
       output Q.Number s_N2=DataN2.s(T, p);
       output Q.Number s_O2=DataO2.s(T, p);
       //
       // Specific volume
       output Q.VolumeSpecificAbsolute v_C=DataC.v_Tp(T, p);
-      output Q.VolumeSpecificAbsolute v_C19HF37O5S=DataC19HF37O5S.v_Tp(T, p);
+      output Q.VolumeSpecificAbsolute v_C19HF37O5S=
+          FCSys.Characteristics.C19HF37O5S.Ionomer.v_Tp(T, p);
       output Q.VolumeSpecificAbsolute 'v_e-'='Datae-'.v_Tp(T, p);
       output Q.VolumeSpecificAbsolute v_H2=DataH2.v_Tp(T, p);
       output Q.VolumeSpecificAbsolute v_IG=DataH2IG.v_Tp(T, p)
         "Specific volume of ideal gas";
       output Q.VolumeSpecificAbsolute v_H2O=DataH2O.v_Tp(T, p);
       output Q.VolumeSpecificAbsolute v_H2O_liquid=DataH2OLiquid.v_Tp(T, p);
-      output Q.VolumeSpecificAbsolute 'v_H+'='DataH+'.v_Tp(T, p);
+      output Q.VolumeSpecificAbsolute 'v_H+'=
+          FCSys.Characteristics.'H+'.Ionomer.v_Tp(T, p);
       output Q.VolumeSpecificAbsolute v_N2=DataN2.v_Tp(T, p);
       output Q.VolumeSpecificAbsolute v_O2=DataO2.v_Tp(T, p);
       annotation (
@@ -232,7 +241,7 @@ package Characteristics
 
   package C19HF37O5S "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S</html>"
     extends Modelica.Icons.Package;
-    package Solid "C9HF17O5S solid"
+    package Ionomer "C9HF17O5S ionomer"
       // Note:  HTML formatting isn't used in the description because
       // Dymola 7.4 doesn't support it in the GUI for replaceable lists.
       // The same applies to other species.
@@ -288,7 +297,7 @@ package Characteristics
 <p>For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"),
           Icon(graphics));
-    end Solid;
+    end Ionomer;
   end C19HF37O5S;
 
   package 'e-' "<html>e<sup>-</sup></html>"
@@ -813,6 +822,19 @@ package Characteristics
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
     end Gas;
 
+    package Ionomer "H2O in ionomer"
+      extends Gas;
+      annotation (Documentation(info="<html>
+        <p>Assumptions:
+     <ol>
+  <li>The properties are currently assumed to be the same as H<sub>2</sub>O gas.</li>
+     </ol>
+     </p>
+
+  <p>For more information, see the
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+    end Ionomer;
+
     package Liquid "H2O liquid"
 
       extends BaseClasses.Characteristic(
@@ -901,7 +923,7 @@ package Characteristics
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
     end Gas;
 
-    package Solid "H+ in solid"
+    package Ionomer "H+ in ionomer"
       extends Gas(
         final phase="solid",
         specVolPow={0,0},
@@ -924,7 +946,7 @@ package Characteristics
   endgroups.  At &lambda; = 22, the concentration was measured at 0.54 M
   [<a href=\"modelica://FCSys.UsersGuide.References\">Spry2009</a>].</p>
 </html>"));
-    end Solid;
+    end Ionomer;
   end 'H+';
 
   package N2 "<html>N<sub>2</sub></html>"
@@ -1735,6 +1757,9 @@ package Characteristics
       "Enumeration for the reference enthalpy of a species";
   end BaseClasses;
   annotation (Documentation(info="<html>
+  <p>Each species has a subpackage for each material phase in which the species 
+  may exist.  The thermodynamic properties are generally different for each phase.
+  </p>
   <p>Additional materials may be included as needed.  The thermodynamic data for
   materials that are condensed at standard conditions is available in
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].

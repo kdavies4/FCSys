@@ -23,14 +23,14 @@ package Systems
       FCSys.Systems.FC.FCNoRecirc fCPlant annotation (Placement(transformation(
               extent={{0,-20},{40,20}}, rotation=0)));
       Modelica.Fluid.Sources.FixedBoundary_pTX ambientCa(
-        redeclare replaceable package Medium = Medium_ca,
+        redeclare replaceable Medium_ca Medium,
         T=ambient.default_T_ambient,
         flowDirection=Modelica.Fluid.Types.SourceFlowDirection.InToPort,
         p=ambient.p_default_ambient,
         X=Medium_ca.X_default) annotation (Placement(transformation(extent={{
                 100,20},{80,40}}, rotation=0)));
       Modelica.Fluid.Sources.FixedBoundary_pTX ambientAn(
-        redeclare replaceable package Medium = Medium_an,
+        redeclare replaceable Medium_an Medium,
         T=ambient.default_T_ambient,
         flowDirection=Modelica.Fluid.Types.SourceFlowDirection.InToPort,
         p=ambient.p_default_ambient,
@@ -57,8 +57,7 @@ package Systems
       Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
             transformation(extent={{0,-110},{20,-90}}, rotation=0)));
       Modelica.Fluid.Pipes.BaseClasses.PortVolume H2tank(
-        redeclare package Medium =
-            FCSys.WorkInProgress.MolarBasis.H2O_H2_CO_Molar,
+        redeclare FCSys.WorkInProgress.MolarBasis.H2O_H2_CO_Molar Medium,
         V=1e3,
         p_start=10e5,
         use_T_start=true,
@@ -78,8 +77,7 @@ package Systems
         use_T_start=true,
         T_start=ambient.default_T_ambient,
         X_start={0,1,0},
-        redeclare package Medium =
-            FCSys.WorkInProgress.MolarBasis.H2OAndO2_N2_Molar,
+        redeclare FCSys.WorkInProgress.MolarBasis.H2OAndO2_N2_Molar Medium,
         initType=Modelica.Fluid.Types.Init.NoInit) annotation (Placement(
             transformation(extent={{-40,0},{-20,20}}, rotation=0)));
 
@@ -102,7 +100,7 @@ package Systems
       connect(fixedTemperature.port, fCPlant.port_a)
         annotation (Line(points={{-80,70},{20,70},{20,20}}, color={191,0,0}));
       connect(resistor.n, fCPlant.n) annotation (Line(points={{-20,-90},{48,-90},
-              {48,0},{40,0}},color={0,0,255}));
+              {48,0},{40,0}}, color={0,0,255}));
       connect(resistor.p, fCPlant.p)
         annotation (Line(points={{-20,-70},{-20,0},{0,0}}, color={0,0,255}));
       connect(ground.p, resistor.n)
@@ -148,8 +146,8 @@ package Systems
       FCSys.WorkInProgress.AssembliesStacksStack stack(
         T_start=ambient.default_T_ambient,
         p_start=ambient.p_default_ambient,
-        redeclare replaceable package Medium_an = Medium_an,
-        redeclare replaceable package Medium_ca = Medium_ca) "Fuel cell model"
+        redeclare replaceable Medium_an Medium_an,
+        redeclare replaceable Medium_ca Medium_ca) "Fuel cell model"
         annotation (Placement(transformation(
             origin={20,-30},
             extent={{10,10},{-10,-10}},
@@ -176,9 +174,9 @@ package Systems
               extent={{-110,-60},{-90,-40}}, rotation=0)));
       FCSys.Systems.Pump.Pump condensatePump annotation (Placement(
             transformation(extent={{-110,22},{-90,42}}, rotation=0)));
-      FCSys.Connectors.FaceBus ambientN annotation (Placement(transformation(extent={
-                {-210,70},{-190,90}}), iconTransformation(extent={{-110,50},{-90,
-                70}})));
+      FCSys.Connectors.FaceBus ambientN annotation (Placement(transformation(
+              extent={{-210,70},{-190,90}}), iconTransformation(extent={{-110,
+                50},{-90,70}})));
       outer FCSys.Systems.FC.Interfaces.ActBusIn actBusIn annotation (Placement(
             transformation(extent={{-210,-90},{-190,-70}}), iconTransformation(
               extent={{-92,-10},{-72,10}})));
@@ -199,9 +197,9 @@ package Systems
         annotation (Placement(transformation(extent={{-50,-54},{-30,-34}})));
       FCSys.WorkInProgress.AssembliesHeatExchanger radiator
         annotation (Placement(transformation(extent={{-60,66},{-40,86}})));
-      FCSys.Connectors.FaceBus ambientP annotation (Placement(transformation(extent={
-                {190,70},{210,90}}), iconTransformation(extent={{-110,50},{-90,
-                70}})));
+      FCSys.Connectors.FaceBus ambientP annotation (Placement(transformation(
+              extent={{190,70},{210,90}}), iconTransformation(extent={{-110,50},
+                {-90,70}})));
     equation
       v = pinP.v - pinP.v;
 
@@ -439,9 +437,9 @@ package Systems
               extent={{-80,-20},{-40,20}},
               rotation=0,
               origin={100,0})));
-        FCSys.Connectors.RealInput actIN[1] annotation (Placement(transformation(
-                extent={{-110,-10},{-90,10}}), iconTransformation(extent={{-60,
-                  -20},{-20,20}})));
+        FCSys.Connectors.RealInput actIN[1] annotation (Placement(
+              transformation(extent={{-110,-10},{-90,10}}), iconTransformation(
+                extent={{-60,-20},{-20,20}})));
       equation
 
         connect(actIN[1], actBusOut.current_ref) annotation (Line(
@@ -472,9 +470,9 @@ package Systems
 
         SenBusIn senBusIn annotation (Placement(transformation(extent={{-110,-10},
                   {-90,10}}), iconTransformation(extent={{-60,-20},{-20,20}})));
-        FCSys.Connectors.RealOutput senOut[3] annotation (Placement(transformation(
-                extent={{90,-10},{110,10}}), iconTransformation(extent={{20,-20},
-                  {60,20}})));
+        FCSys.Connectors.RealOutput senOut[3] annotation (Placement(
+              transformation(extent={{90,-10},{110,10}}), iconTransformation(
+                extent={{20,-20},{60,20}})));
       equation
 
         connect(senBusIn.angle, senOut[3]) annotation (Line(
@@ -529,9 +527,9 @@ package Systems
 
       extends FCSys.BaseClasses.Icons.Name.Top4;
 
-      FCSys.Connectors.FaceBus mixturePipeN annotation (Placement(transformation(
-              extent={{90,-70},{110,-50}}), iconTransformation(extent={{90,-70},
-                {110,-50}})));
+      FCSys.Connectors.FaceBus mixturePipeN annotation (Placement(
+            transformation(extent={{90,-70},{110,-50}}), iconTransformation(
+              extent={{90,-70},{110,-50}})));
       FCSys.Systems.Humidifier.Interfaces.ActBusIn actBusIn annotation (
           Placement(transformation(extent={{-32,60},{-12,80}}),
             iconTransformation(extent={{-32,10},{-12,30}})));
@@ -542,11 +540,12 @@ package Systems
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={0,50})));
-      FCSys.Connectors.FaceBus H2OPipe annotation (Placement(transformation(extent={{
-                -10,50},{10,70}}), iconTransformation(extent={{-10,50},{10,70}})));
-      FCSys.Connectors.FaceBus mixturePipeP annotation (Placement(transformation(
-              extent={{90,-10},{110,10}}), iconTransformation(extent={{-110,-70},
-                {-90,-50}})));
+      FCSys.Connectors.FaceBus H2OPipe annotation (Placement(transformation(
+              extent={{-10,50},{10,70}}), iconTransformation(extent={{-10,50},{
+                10,70}})));
+      FCSys.Connectors.FaceBus mixturePipeP annotation (Placement(
+            transformation(extent={{90,-10},{110,10}}), iconTransformation(
+              extent={{-110,-70},{-90,-50}})));
       annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{100,100}}), graphics={Line(
                   points={{10,-30},{0,-50}},
@@ -636,9 +635,9 @@ package Systems
               extent={{-80,-20},{-40,20}},
               rotation=0,
               origin={100,0})));
-        FCSys.Connectors.RealInput actIN[1] annotation (Placement(transformation(
-                extent={{-110,-10},{-90,10}}), iconTransformation(extent={{-60,
-                  -20},{-20,20}})));
+        FCSys.Connectors.RealInput actIN[1] annotation (Placement(
+              transformation(extent={{-110,-10},{-90,10}}), iconTransformation(
+                extent={{-60,-20},{-20,20}})));
       equation
 
         connect(actIN[1], actBusOut.current_ref) annotation (Line(
@@ -669,9 +668,9 @@ package Systems
 
         SenBusIn senBusIn annotation (Placement(transformation(extent={{-110,-10},
                   {-90,10}}), iconTransformation(extent={{-60,-20},{-20,20}})));
-        FCSys.Connectors.RealOutput senOut[3] annotation (Placement(transformation(
-                extent={{90,-10},{110,10}}), iconTransformation(extent={{20,-20},
-                  {60,20}})));
+        FCSys.Connectors.RealOutput senOut[3] annotation (Placement(
+              transformation(extent={{90,-10},{110,10}}), iconTransformation(
+                extent={{20,-20},{60,20}})));
       equation
 
         connect(senBusIn.angle, senOut[3]) annotation (Line(
@@ -776,14 +775,18 @@ package Systems
       FCSys.Systems.DCDC.Interfaces.SenBusOut senBusOut annotation (Placement(
             transformation(extent={{42,-10},{62,10}}), iconTransformation(
               extent={{32,-10},{52,10}})));
-      FCSys.Connectors.FaceBus wireN2 annotation (Placement(transformation(extent={{-106,
-                54},{-94,66}}), iconTransformation(extent={{-110,50},{-90,70}})));
-      FCSys.Connectors.FaceBus wireP2 annotation (Placement(transformation(extent={{
-                94,54},{106,66}}), iconTransformation(extent={{90,50},{110,70}})));
-      FCSys.Connectors.FaceBus wireN1 annotation (Placement(transformation(extent={{-106,
-                -66},{-94,-54}}), iconTransformation(extent={{-110,-70},{-90,-50}})));
-      FCSys.Connectors.FaceBus wireP1 annotation (Placement(transformation(extent={{
-                94,-66},{106,-54}}), iconTransformation(extent={{90,-70},{110,-50}})));
+      FCSys.Connectors.FaceBus wireN2 annotation (Placement(transformation(
+              extent={{-106,54},{-94,66}}), iconTransformation(extent={{-110,50},
+                {-90,70}})));
+      FCSys.Connectors.FaceBus wireP2 annotation (Placement(transformation(
+              extent={{94,54},{106,66}}), iconTransformation(extent={{90,50},{
+                110,70}})));
+      FCSys.Connectors.FaceBus wireN1 annotation (Placement(transformation(
+              extent={{-106,-66},{-94,-54}}), iconTransformation(extent={{-110,
+                -70},{-90,-50}})));
+      FCSys.Connectors.FaceBus wireP1 annotation (Placement(transformation(
+              extent={{94,-66},{106,-54}}), iconTransformation(extent={{90,-70},
+                {110,-50}})));
     equation
       Delta_v1 = chargeP1.v - chargeN1.v;
       Delta_qdot1 = chargeP1.qdot - chargeN1.qdot;
@@ -894,7 +897,7 @@ package Systems
         final k_Delta_v1=1,
         final k_Delta_qdot1=1);
 
-      annotation ( Icon(graphics));
+      annotation (Icon(graphics));
     end IdealDCDC;
 
     model ElecElec
@@ -943,12 +946,13 @@ package Systems
       FCSys.WorkInProgress.Magnetic2.QuantumRate Sigma_qdot2
         "Net current stored or destroyed (positive into each interface)";
 
-      FCSys.Connectors.RealInput k_set(final unit=if (LHS == RHS) then "1" else if (
-            LHS == 1 and RHS == 2) then "1/Q2" else if (LHS == 2 and RHS == 1)
-             then "Q2" else if (LHS == 1 and RHS == 3) then "1/(Q.T)" else
-            "Q/T", displayUnit=if (LHS == RHS) then "1" else if (LHS == 1 and
-            RHS == 2) then "ohm" else if (LHS == 2 and RHS == 1) then "S" else
-            if (LHS == 1 and RHS == 3) then "V" else "A") if (not specAsParam)
+      FCSys.Connectors.RealInput k_set(final unit=if (LHS == RHS) then "1"
+             else if (LHS == 1 and RHS == 2) then "1/Q2" else if (LHS == 2 and
+            RHS == 1) then "Q2" else if (LHS == 1 and RHS == 3) then "1/(Q.T)"
+             else "Q/T", displayUnit=if (LHS == RHS) then "1" else if (LHS == 1
+             and RHS == 2) then "ohm" else if (LHS == 2 and RHS == 1) then "S"
+             else if (LHS == 1 and RHS == 3) then "V" else "A") if (not
+        specAsParam)
         "Coefficient for the RHS of the governing equation as an input"
         annotation (Placement(transformation(
             origin={0,-120},
@@ -959,9 +963,9 @@ package Systems
             origin={0,-80})));
 
     protected
-      FCSys.Connectors.RealInput k_internal(final unit=if (LHS == RHS) then "1" else
-            if (LHS == 1 and RHS == 2) then "1/Q2" else if (LHS == 2 and RHS
-             == 1) then "Q2" else if (LHS == 1 and RHS == 3) then "1/(Q.T)"
+      FCSys.Connectors.RealInput k_internal(final unit=if (LHS == RHS) then "1"
+             else if (LHS == 1 and RHS == 2) then "1/Q2" else if (LHS == 2 and
+            RHS == 1) then "Q2" else if (LHS == 1 and RHS == 3) then "1/(Q.T)"
              else "Q/T", displayUnit=if (LHS == RHS) then "1" else if (LHS == 1
              and RHS == 2) then "ohm" else if (LHS == 2 and RHS == 1) then "S"
              else if (LHS == 1 and RHS == 3) then "V" else "A")
@@ -1114,9 +1118,9 @@ package Systems
               extent={{-80,-20},{-40,20}},
               rotation=0,
               origin={100,0})));
-        FCSys.Connectors.RealInput actIN[1] annotation (Placement(transformation(
-                extent={{-110,-10},{-90,10}}), iconTransformation(extent={{-60,
-                  -20},{-20,20}})));
+        FCSys.Connectors.RealInput actIN[1] annotation (Placement(
+              transformation(extent={{-110,-10},{-90,10}}), iconTransformation(
+                extent={{-60,-20},{-20,20}})));
       equation
 
         connect(actIN[1], actBusOut.current_ref) annotation (Line(
@@ -1147,9 +1151,9 @@ package Systems
 
         SenBusIn senBusIn annotation (Placement(transformation(extent={{-110,-10},
                   {-90,10}}), iconTransformation(extent={{-60,-20},{-20,20}})));
-        FCSys.Connectors.RealOutput senOut[3] annotation (Placement(transformation(
-                extent={{90,-10},{110,10}}), iconTransformation(extent={{20,-20},
-                  {60,20}})));
+        FCSys.Connectors.RealOutput senOut[3] annotation (Placement(
+              transformation(extent={{90,-10},{110,10}}), iconTransformation(
+                extent={{20,-20},{60,20}})));
       equation
 
         connect(senBusIn.angle, senOut[3]) annotation (Line(
@@ -1205,20 +1209,24 @@ package Systems
       // extends FCSys.Processes.BaseClasses.PartialTransport.Middle;
       // extends FCSys.Processes.BaseClasses.PartialTransport.Bottom2;
 
-      FCSys.Connectors.FaceBus wireN annotation (Placement(transformation(extent={{-30,
-                -10},{-10,10}}), iconTransformation(extent={{-110,-50},{-90,-30}})));
-      FCSys.Connectors.FaceBus wireP annotation (Placement(transformation(extent={{10,
-                -10},{30,10}}), iconTransformation(extent={{90,-50},{110,-30}})));
+      FCSys.Connectors.FaceBus wireN annotation (Placement(transformation(
+              extent={{-30,-10},{-10,10}}), iconTransformation(extent={{-110,-50},
+                {-90,-30}})));
+      FCSys.Connectors.FaceBus wireP annotation (Placement(transformation(
+              extent={{10,-10},{30,10}}), iconTransformation(extent={{90,-50},{
+                110,-30}})));
       FCSys.Systems.Pump.Interfaces.ActBusIn actBusIn annotation (Placement(
             transformation(extent={{-42,-70},{-22,-50}}), iconTransformation(
               extent={{-32,-90},{-12,-70}})));
       FCSys.Systems.Pump.Interfaces.SenBusOut senBusOut annotation (Placement(
             transformation(extent={{2,-70},{22,-50}}), iconTransformation(
               extent={{10,-90},{30,-70}})));
-      FCSys.Connectors.FaceBus pipeP annotation (Placement(transformation(extent={{94,
-                -6},{106,6}}), iconTransformation(extent={{90,-10},{110,10}})));
-      FCSys.Connectors.FaceBus pipeN annotation (Placement(transformation(extent={{-106,
-                -6},{-94,6}}), iconTransformation(extent={{-110,-10},{-90,10}})));
+      FCSys.Connectors.FaceBus pipeP annotation (Placement(transformation(
+              extent={{94,-6},{106,6}}), iconTransformation(extent={{90,-10},{
+                110,10}})));
+      FCSys.Connectors.FaceBus pipeN annotation (Placement(transformation(
+              extent={{-106,-6},{-94,6}}), iconTransformation(extent={{-110,-10},
+                {-90,10}})));
     equation
 
       annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
@@ -1287,9 +1295,9 @@ package Systems
               extent={{-80,-20},{-40,20}},
               rotation=0,
               origin={100,0})));
-        FCSys.Connectors.RealInput actIN[1] annotation (Placement(transformation(
-                extent={{-110,-10},{-90,10}}), iconTransformation(extent={{-60,
-                  -20},{-20,20}})));
+        FCSys.Connectors.RealInput actIN[1] annotation (Placement(
+              transformation(extent={{-110,-10},{-90,10}}), iconTransformation(
+                extent={{-60,-20},{-20,20}})));
       equation
 
         connect(actIN[1], actBusOut.current_ref) annotation (Line(
@@ -1320,9 +1328,9 @@ package Systems
 
         SenBusIn senBusIn annotation (Placement(transformation(extent={{-110,-10},
                   {-90,10}}), iconTransformation(extent={{-60,-20},{-20,20}})));
-        FCSys.Connectors.RealOutput senOut[3] annotation (Placement(transformation(
-                extent={{90,-10},{110,10}}), iconTransformation(extent={{20,-20},
-                  {60,20}})));
+        FCSys.Connectors.RealOutput senOut[3] annotation (Placement(
+              transformation(extent={{90,-10},{110,10}}), iconTransformation(
+                extent={{20,-20},{60,20}})));
       equation
 
         connect(senBusIn.angle, senOut[3]) annotation (Line(
@@ -1383,10 +1391,12 @@ package Systems
       FCSys.Systems.Valve.Interfaces.SenBusOut senBusOut annotation (Placement(
             transformation(extent={{30,-70},{50,-50}}), iconTransformation(
               extent={{12,-30},{32,-10}})));
-      FCSys.Connectors.FaceBus pipeN annotation (Placement(transformation(extent={{-106,
-                14},{-94,26}}), iconTransformation(extent={{-110,10},{-90,30}})));
-      FCSys.Connectors.FaceBus pipeP annotation (Placement(transformation(extent={{94,
-                14},{106,26}}), iconTransformation(extent={{90,10},{110,30}})));
+      FCSys.Connectors.FaceBus pipeN annotation (Placement(transformation(
+              extent={{-106,14},{-94,26}}), iconTransformation(extent={{-110,10},
+                {-90,30}})));
+      FCSys.Connectors.FaceBus pipeP annotation (Placement(transformation(
+              extent={{94,14},{106,26}}), iconTransformation(extent={{90,10},{
+                110,30}})));
       annotation (
         Icon(coordinateSystem(
             preserveAspectRatio=true,
@@ -1483,9 +1493,9 @@ a simple model of a variable pressure loss is needed.</p>
               extent={{-80,-20},{-40,20}},
               rotation=0,
               origin={100,0})));
-        FCSys.Connectors.RealInput actIN[1] annotation (Placement(transformation(
-                extent={{-110,-10},{-90,10}}), iconTransformation(extent={{-60,
-                  -20},{-20,20}})));
+        FCSys.Connectors.RealInput actIN[1] annotation (Placement(
+              transformation(extent={{-110,-10},{-90,10}}), iconTransformation(
+                extent={{-60,-20},{-20,20}})));
       equation
 
         connect(actIN[1], actBusOut.current_ref) annotation (Line(
@@ -1516,9 +1526,9 @@ a simple model of a variable pressure loss is needed.</p>
 
         SenBusIn senBusIn annotation (Placement(transformation(extent={{-110,-10},
                   {-90,10}}), iconTransformation(extent={{-60,-20},{-20,20}})));
-        FCSys.Connectors.RealOutput senOut[3] annotation (Placement(transformation(
-                extent={{90,-10},{110,10}}), iconTransformation(extent={{20,-20},
-                  {60,20}})));
+        FCSys.Connectors.RealOutput senOut[3] annotation (Placement(
+              transformation(extent={{90,-10},{110,10}}), iconTransformation(
+                extent={{20,-20},{60,20}})));
       equation
 
         connect(senBusIn.angle, senOut[3]) annotation (Line(
@@ -1574,14 +1584,18 @@ a simple model of a variable pressure loss is needed.</p>
 
       FCSys.Subregions.HeatExchanger fCConvection annotation (Placement(
             transformation(extent={{90,116},{110,136}}, rotation=0)));
-      FCSys.Connectors.FaceBus wireN annotation (Placement(transformation(extent={{-110,
-                -50},{-90,-30}}), iconTransformation(extent={{-110,-50},{-90,-30}})));
-      FCSys.Connectors.FaceBus wireP annotation (Placement(transformation(extent={{90,
-                -50},{110,-30}}), iconTransformation(extent={{90,-50},{110,-30}})));
-      FCSys.Connectors.FaceBus pipeP annotation (Placement(transformation(extent={{90,
-                30},{110,50}}), iconTransformation(extent={{90,30},{110,50}})));
-      FCSys.Connectors.FaceBus pipeN annotation (Placement(transformation(extent={{-110,
-                30},{-90,50}}), iconTransformation(extent={{-110,30},{-90,50}})));
+      FCSys.Connectors.FaceBus wireN annotation (Placement(transformation(
+              extent={{-110,-50},{-90,-30}}), iconTransformation(extent={{-110,
+                -50},{-90,-30}})));
+      FCSys.Connectors.FaceBus wireP annotation (Placement(transformation(
+              extent={{90,-50},{110,-30}}), iconTransformation(extent={{90,-50},
+                {110,-30}})));
+      FCSys.Connectors.FaceBus pipeP annotation (Placement(transformation(
+              extent={{90,30},{110,50}}), iconTransformation(extent={{90,30},{
+                110,50}})));
+      FCSys.Connectors.FaceBus pipeN annotation (Placement(transformation(
+              extent={{-110,30},{-90,50}}), iconTransformation(extent={{-110,30},
+                {-90,50}})));
       FCSys.Systems.Valve.Interfaces.ActBusIn actBusIn annotation (Placement(
             transformation(extent={{-50,-70},{-30,-50}}), iconTransformation(
               extent={{-34,-90},{-14,-70}})));

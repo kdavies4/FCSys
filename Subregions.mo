@@ -689,7 +689,7 @@ package Subregions
       FCSys.BCs.Chemical.Species 'H+'(
         material=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.PotentialElectrochemicalPerTemperature,
 
-        redeclare FCSys.Characteristics.'H+'.Solid Data,
+        redeclare FCSys.Characteristics.'H+'.Ionomer Data,
         final n_lin=n_lin) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
@@ -2865,8 +2865,8 @@ package Subregions
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      replaceable Species.C19HF37O5S.Solid.Fixed C19HF37O5S if inclC19HF37O5S
-        constrainedby Species.Species(
+      replaceable FCSys.Subregions.Species.C19HF37O5S.Ionomer.Fixed C19HF37O5S
+        if inclC19HF37O5S constrainedby Species.Species(
         final k=k,
         final inclLin=inclLin,
         initMethTemp=if initTemp and reduceTemp then InitMethScalar.None else
@@ -2892,7 +2892,7 @@ package Subregions
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      replaceable Species.H2O.Gas.Fixed H2O if inclH2O constrainedby
+      replaceable Species.H2O.Ionomer.Fixed H2O if inclH2O constrainedby
         Species.Species(
         final k=k,
         final inclLin=inclLin,
@@ -2924,8 +2924,8 @@ package Subregions
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      replaceable Species.'H+'.Solid.Fixed 'H+' if 'inclH+' constrainedby
-        Species.Species(
+      replaceable FCSys.Subregions.Species.'H+'.Ionomer.Fixed 'H+' if 'inclH+'
+        constrainedby Species.Species(
         final k=k,
         final inclLin=inclLin,
         initMethX=if initVelX and reduceVel then InitMethVelocity.None else
@@ -3895,8 +3895,8 @@ package Subregions
       package Graphite "C graphite"
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
-          extends SpeciesInertStagnant(redeclare replaceable package Data =
-                FCSys.Characteristics.C.Graphite, R=k_R*Data.R(T));
+          extends SpeciesSolid(redeclare replaceable
+              FCSys.Characteristics.C.Graphite Data, R=k_R*Data.R(T));
 
           parameter Q.NumberAbsolute k_R(final nominal=1) = 1
             "<html>Adjustment factor for thermal resistivity (<i>k</i><sub><i>R</i></sub>)</html>"
@@ -3919,8 +3919,8 @@ package Subregions
         end Calibrated;
 
         model Correlated "Correlated properties"
-          extends SpeciesInertStagnant(redeclare replaceable package Data =
-                FCSys.Characteristics.C.Graphite, R=Data.R(T));
+          extends SpeciesSolid(redeclare replaceable
+              FCSys.Characteristics.C.Graphite Data, R=Data.R(T));
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -3933,19 +3933,19 @@ package Subregions
         end Correlated;
 
         model Fixed "Fixed properties"
-          extends SpeciesInertStagnant(redeclare replaceable package Data =
-                FCSys.Characteristics.C.Graphite (
-                Deltah0_f=0,
-                Deltah0=0,
-                specHeatCapPow=0,
-                T_lim_c={0,Modelica.Constants.inf},
-                b_c=[935*U.J*Data.m/(U.kg*U.K)],
-                B_c=[-298.15*U.K*935*U.J*Data.m/(U.kg*U.K) + Data.Deltah0_f,
-                    Polynomial.F(
-                            298.15*U.K,
-                            FCSys.Characteristics.C.Graphite.b_c[1, :],
-                            -3) + FCSys.Characteristics.C.Graphite.B_c[1, 2] -
-                    Data.b_c[1, 1]*ln(298.15*U.K)]), redeclare parameter
+          extends SpeciesSolid(redeclare replaceable
+              FCSys.Characteristics.C.Graphite Data(
+              Deltah0_f=0,
+              Deltah0=0,
+              specHeatCapPow=0,
+              T_lim_c={0,Modelica.Constants.inf},
+              b_c=[935*U.J*Data.m/(U.kg*U.K)],
+              B_c=[-298.15*U.K*935*U.J*Data.m/(U.kg*U.K) + Data.Deltah0_f,
+                  Polynomial.F(
+                          298.15*U.K,
+                          FCSys.Characteristics.C.Graphite.b_c[1, :],
+                          -3) + FCSys.Characteristics.C.Graphite.B_c[1, 2] -
+                  Data.b_c[1, 1]*ln(298.15*U.K)]), redeclare parameter
               Q.Resistivity R=U.m*U.K/(5.70*U.W));
           // See the documentation for a table of values.
           // Note:  Parameter expressions (e.g., involving defaults.T) are not used
@@ -3957,7 +3957,7 @@ package Subregions
             defaultComponentName="C",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Fixed specific heat capacity (independent of temperature)
-    <li>Thermal resistivity <i>r</i><sub>th</sub> is fixed (e.g., independent of temperature)</li>
+    <li>Thermal resistivity <i>R</i> is fixed (e.g., independent of temperature)</li>
     </ol></p>
 
     <p>The default isobaric specific heat capacity (<code>b_c=[0, 935*U.J*Data.m/(U.kg*U.K)]</code>) and thermal
@@ -4009,12 +4009,12 @@ package Subregions
     package C19HF37O5S
       "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S</html>"
       extends Modelica.Icons.Package;
-      package Solid
-        "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S solid</html>"
+      package Ionomer
+        "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S ionomer</html>"
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
-          extends SpeciesInertStagnant(redeclare replaceable package Data =
-                FCSys.Characteristics.C19HF37O5S.Solid, R=k_R*Data.R(T));
+          extends SpeciesSolid(redeclare replaceable
+              FCSys.Characteristics.C19HF37O5S.Ionomer Data, R=k_R*Data.R(T));
 
           parameter Q.NumberAbsolute k_R(final nominal=1) = 1
             "<html>Adjustment factor for thermal resistivity (<i>k</i><sub><i>R</i></sub>)</html>"
@@ -4030,8 +4030,8 @@ package Subregions
         end Calibrated;
 
         model Correlated "Correlated properties"
-          extends SpeciesInertStagnant(redeclare replaceable package Data =
-                FCSys.Characteristics.C19HF37O5S.Solid, R=Data.R(T));
+          extends SpeciesSolid(redeclare replaceable
+              FCSys.Characteristics.C19HF37O5S.Ionomer Data, R=Data.R(T));
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -4041,16 +4041,16 @@ package Subregions
         end Correlated;
 
         model Fixed "Fixed properties"
-          extends SpeciesInertStagnant(redeclare replaceable package Data =
-                FCSys.Characteristics.C19HF37O5S.Solid, redeclare parameter
-              Q.ResistivityThermal R=Data.R());
+          extends SpeciesSolid(redeclare replaceable
+              FCSys.Characteristics.C19HF37O5S.Ionomer Data, redeclare
+              parameter Q.ResistivityThermal R=Data.R());
 
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="C19HF37O5S",
             Documentation(info="<html><p>Assumptions:
     <ol>
-    <li>Thermal resistivity <i>r</i><sub>th</sub> is fixed (e.g., independent of temperature)</li>
+    <li>Thermal resistivity <i>R</i> is fixed (e.g., independent of temperature)</li>
     </ol></p>
 
     <p>Notes:
@@ -4060,7 +4060,7 @@ package Subregions
   </p><p>For more information, see the
     <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
         end Fixed;
-      end Solid;
+      end Ionomer;
     end C19HF37O5S;
 
     package 'e-' "<html>e<sup>-</sup></html>"
@@ -4069,8 +4069,7 @@ package Subregions
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
           extends Species(
-            redeclare replaceable package Data =
-                FCSys.Characteristics.'e-'.Graphite,
+            redeclare replaceable FCSys.Characteristics.'e-'.Graphite Data,
             Xi=k_Xi*Data.Xi(T),
             F=k_F*Data.F(T),
             R=k_R*Data.R(T));
@@ -4094,8 +4093,7 @@ package Subregions
 
         model Correlated "Correlated properties"
           extends Species(
-            redeclare replaceable package Data =
-                FCSys.Characteristics.'e-'.Graphite,
+            redeclare replaceable FCSys.Characteristics.'e-'.Graphite Data,
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
@@ -4109,8 +4107,7 @@ package Subregions
 
         model Fixed "Fixed properties"
           extends Species(
-            redeclare replaceable package Data =
-                FCSys.Characteristics.'e-'.Graphite,
+            redeclare replaceable FCSys.Characteristics.'e-'.Graphite Data,
             redeclare parameter Q.Fusivity Xi=Data.Xi(),
             redeclare parameter Q.Fluidity F=Data.F(),
             redeclare parameter Q.ResistivityThermal R=Data.R());
@@ -4130,12 +4127,11 @@ package Subregions
 
     package 'H+' "<html>H<sup>+</sup></html>"
       extends Modelica.Icons.Package;
-      package Solid "<html>H<sup>+</sup> in solid</html>"
+      package Ionomer "<html>H<sup>+</sup> in ionomer</html>"
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
           extends Species(
-            redeclare replaceable package Data =
-                FCSys.Characteristics.'H+'.Solid,
+            redeclare replaceable FCSys.Characteristics.'H+'.Ionomer Data,
             Xi=k_Xi*Data.Xi(T),
             F=k_F*Data.F(T),
             R=k_R*Data.R(T));
@@ -4159,8 +4155,7 @@ package Subregions
 
         model Correlated "Correlated properties"
           extends Species(
-            redeclare replaceable package Data =
-                FCSys.Characteristics.'H+'.Solid,
+            redeclare replaceable FCSys.Characteristics.'H+'.Ionomer Data,
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
@@ -4174,8 +4169,7 @@ package Subregions
 
         model Fixed "Fixed properties"
           extends Species(
-            redeclare replaceable package Data =
-                FCSys.Characteristics.'H+'.Solid,
+            redeclare replaceable FCSys.Characteristics.'H+'.Ionomer Data,
             redeclare parameter Q.Fusivity Xi=Data.Xi(),
             redeclare parameter Q.Fluidity F=Data.F(),
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(0.1661*U.W));
@@ -4186,7 +4180,7 @@ package Subregions
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'H+'",
             Documentation(info="<html><p>Assumptions:<ol>
-    <li>Resistivities (<i>f</i><sub>0</sub>, <i>r</i><sub>th</sub>, etc.) are fixed (e.g., independent of temperature)</li>
+    <li>The generalized resistivities (&Xi;, <i>F</i>, <i>R</i>) are fixed (e.g., independent of temperature).</li>
     </ol></p>
 
   <p>The default resistivities (<code>F=1/(5.3e-6*U.Pa*U.s)</code> and <code>R=U.m*U.K/(0.1661*U.W)</code>) are of H gas
@@ -4253,7 +4247,7 @@ package Subregions
 
 </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
         end Fixed;
-      end Solid;
+      end Ionomer;
     end 'H+';
 
     package H2 "<html>H<sub>2</sub></html>"
@@ -4262,8 +4256,8 @@ package Subregions
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
           extends Species(
-            redeclare replaceable package Data = FCSys.Characteristics.H2.Gas (
-                  b_v=[1], specVolPow={-1,0}),
+            redeclare replaceable FCSys.Characteristics.H2.Gas Data(b_v=[1],
+                specVolPow={-1,0}),
             Xi=k_Xi*Data.Xi(T),
             F=k_F*Data.F(T),
             R=k_R*Data.R(T));
@@ -4289,8 +4283,8 @@ package Subregions
 
         model Correlated "Correlated properties"
           extends Species(
-            redeclare replaceable package Data = FCSys.Characteristics.H2.Gas (
-                  b_v=[1], specVolPow={-1,0}),
+            redeclare replaceable FCSys.Characteristics.H2.Gas Data(b_v=[1],
+                specVolPow={-1,0}),
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
@@ -4306,8 +4300,8 @@ package Subregions
 
         model Fixed "Fixed properties"
           extends Species(
-            redeclare replaceable package Data = FCSys.Characteristics.H2.Gas (
-                  b_v=[1], specVolPow={-1,0}),
+            redeclare replaceable FCSys.Characteristics.H2.Gas Data(b_v=[1],
+                specVolPow={-1,0}),
             redeclare parameter Q.Fusivity Xi=Data.Xi(),
             redeclare parameter Q.Fluidity F=1/(89.6e-7*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(183e-3*U.W));
@@ -4319,7 +4313,8 @@ package Subregions
             defaultComponentName="H2",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
-    <li>Resistivities (<i>f</i><sub>0</sub>, <i>r</i><sub>th</sub>, etc.) are fixed (e.g., independent of temperature)</li>
+        <li>The generalized resistivities (&Xi;, <i>F</i>, <i>R</i>) are fixed (e.g., independent of temperature).</li>
+
     </ol></p>
 
 <p>Additional notes:<ul>
@@ -4383,8 +4378,8 @@ and <code>R=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas 
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
           extends Species(
-            redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas
-                (b_v=[1], specVolPow={-1,0}),
+            redeclare replaceable FCSys.Characteristics.H2O.Gas Data(b_v=[1],
+                specVolPow={-1,0}),
             Xi=k_Xi*Data.Xi(T),
             F=k_F*Data.F(T),
             R=k_R*Data.R(T));
@@ -4410,8 +4405,8 @@ and <code>R=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas 
 
         model Correlated "Correlated properties"
           extends Species(
-            redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas
-                (b_v=[1], specVolPow={-1,0}),
+            redeclare replaceable FCSys.Characteristics.H2O.Gas Data(b_v=[1],
+                specVolPow={-1,0}),
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
@@ -4427,8 +4422,8 @@ and <code>R=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas 
 
         model Fixed "Fixed properties"
           extends Species(
-            redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas
-                (b_v=[1], specVolPow={-1,0}),
+            redeclare replaceable FCSys.Characteristics.H2O.Gas Data(b_v=[1],
+                specVolPow={-1,0}),
             redeclare parameter Q.Fusivity Xi=Data.Xi(),
             redeclare parameter Q.Fluidity F=1/(9.09e-6*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(19.6e-3*U.W));
@@ -4440,7 +4435,8 @@ and <code>R=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas 
             defaultComponentName="H2O",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
-    <li>Resistivities (<i>f</i><sub>0</sub>, <i>r</i><sub>th</sub>, etc.) are fixed (e.g., independent of temperature)</li>
+        <li>The generalized resistivities (&Xi;, <i>F</i>, <i>R</i>) are fixed (e.g., independent of temperature).</li>
+
     </ol></p>
 
           <p>Notes:<ul>
@@ -4547,12 +4543,78 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
         end Fixed;
       end Gas;
 
+      package Ionomer "<html>H<sub>2</sub>O in ionomer</html>"
+        extends Modelica.Icons.Package;
+        model Calibrated "Correlations with adjustment factors"
+          extends Species(
+            redeclare replaceable FCSys.Characteristics.H2O.Ionomer Data(b_v=[1],
+                specVolPow={-1,0}),
+            Xi=k_Xi*Data.Xi(T),
+            F=k_F*Data.F(T),
+            R=k_R*Data.R(T));
+
+          parameter Q.NumberAbsolute k_Xi(final nominal=1) = 1
+            "<html>Adjustment factor for fusivity (<i>k</i><sub>&Xi;</sub>)</html>"
+            annotation (Dialog(group="Material properties"));
+          parameter Q.NumberAbsolute k_F(final nominal=1) = 1
+            "<html>Adjustment factor for fluidity (<i>k</i><sub><i>F</i></sub>)</html>"
+            annotation (Dialog(group="Material properties"));
+          parameter Q.NumberAbsolute k_R(final nominal=1) = 1
+            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub><i>R</i></sub>)</html>"
+            annotation (Dialog(group="Material properties"));
+
+          annotation (
+            defaultComponentPrefixes="replaceable",
+            defaultComponentName="H2O",
+            Documentation(info="<html><p>Assumptions:<ol>
+    <li>Ideal gas</li>
+          </ol>
+          </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+        end Calibrated;
+
+        model Correlated "Correlated properties"
+          extends Species(
+            redeclare replaceable FCSys.Characteristics.H2O.Ionomer Data(b_v=[1],
+                specVolPow={-1,0}),
+            Xi=Data.Xi(T),
+            F=Data.F(T),
+            R=Data.R(T));
+
+          annotation (
+            defaultComponentPrefixes="replaceable",
+            defaultComponentName="H2O",
+            Documentation(info="<html><p>Assumptions:<ol>
+    <li>Ideal gas</li>
+          </ol>
+          </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+        end Correlated;
+
+        model Fixed "Fixed properties"
+          extends Species(
+            redeclare replaceable FCSys.Characteristics.H2O.Ionomer Data(b_v=[1],
+                specVolPow={-1,0}),
+            redeclare parameter Q.Fusivity Xi=Data.Xi(),
+            redeclare parameter Q.Fluidity F=Data.F(),
+            redeclare parameter Q.ResistivityThermal R=Data.R());
+
+          annotation (
+            defaultComponentPrefixes="replaceable",
+            defaultComponentName="H2O",
+            Documentation(info="<html><p>Assumptions:<ol>
+    <li>Ideal gas</li>
+        <li>The generalized resistivities (&Xi;, <i>F</i>, <i>R</i>) are fixed (e.g., independent of temperature).</li>
+
+    </ol></p>
+
+  </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+        end Fixed;
+      end Ionomer;
+
       package Liquid "<html>H<sub>2</sub>O liquid</html>"
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
           extends Species(
-            redeclare replaceable package Data =
-                FCSys.Characteristics.H2O.Liquid,
+            redeclare replaceable FCSys.Characteristics.H2O.Liquid Data,
             Xi=k_Xi*Data.Xi(T),
             F=k_F*Data.F(T),
             R=k_R*Data.R(T));
@@ -4576,8 +4638,7 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
 
         model Correlated "Correlated properties"
           extends Species(
-            redeclare replaceable package Data =
-                FCSys.Characteristics.H2O.Liquid,
+            redeclare replaceable FCSys.Characteristics.H2O.Liquid Data,
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
@@ -4591,8 +4652,7 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
 
         model Fixed "Fixed properties"
           extends Species(
-            redeclare replaceable package Data =
-                FCSys.Characteristics.H2O.Liquid,
+            redeclare replaceable FCSys.Characteristics.H2O.Liquid Data,
             redeclare parameter Q.Fusivity Xi=Data.Xi(),
             redeclare parameter Q.Fluidity F=1/(855e-6*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(613e-3*U.W));
@@ -4603,7 +4663,8 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2O",
             Documentation(info="<html><p>Assumptions:<ol>
-    <li>Resistivities (<i>f</i><sub>0</sub>, <i>r</i><sub>th</sub>, etc.) are fixed (e.g., independent of temperature)</li>
+        <li>The generalized resistivities (&Xi;, <i>F</i>, <i>R</i>) are fixed (e.g., independent of temperature).</li>
+
     </ol></p>
 
           <p>Notes:<ul>
@@ -4694,8 +4755,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
           extends Species(
-            redeclare replaceable package Data = FCSys.Characteristics.N2.Gas (
-                  b_v=[1], specVolPow={-1,0}),
+            redeclare replaceable FCSys.Characteristics.N2.Gas Data(b_v=[1],
+                specVolPow={-1,0}),
             Xi=k_Xi*Data.Xi(T),
             F=k_F*Data.F(T),
             R=k_R*Data.R(T));
@@ -4721,8 +4782,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
 
         model Correlated "Correlated properties"
           extends Species(
-            redeclare replaceable package Data = FCSys.Characteristics.N2.Gas (
-                  b_v=[1], specVolPow={-1,0}),
+            redeclare replaceable FCSys.Characteristics.N2.Gas Data(b_v=[1],
+                specVolPow={-1,0}),
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
@@ -4738,18 +4799,18 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
 
         model Fixed "Fixed properties"
           extends Species(
-            redeclare replaceable package Data = FCSys.Characteristics.N2.Gas (
-                b_v=[1],
-                specVolPow={-1,0},
-                specHeatCapPow=0,
-                T_lim_c={0,Modelica.Constants.inf},
-                b_c=[1.041e3*U.J*Data.m/(U.kg*U.K)],
-                B_c=[-298.15*U.K*1.041e3*U.J*Data.m/(U.kg*U.K) + Data.Deltah0_f,
-                    Polynomial.F(
-                            298.15*U.K,
-                            FCSys.Characteristics.N2.Gas.b_c[1, :],
-                            -3) + FCSys.Characteristics.N2.Gas.B_c[1, 2] - Data.b_c[
-                    1, 1]*ln(298.15*U.K)]),
+            redeclare replaceable FCSys.Characteristics.N2.Gas Data(
+              b_v=[1],
+              specVolPow={-1,0},
+              specHeatCapPow=0,
+              T_lim_c={0,Modelica.Constants.inf},
+              b_c=[1.041e3*U.J*Data.m/(U.kg*U.K)],
+              B_c=[-298.15*U.K*1.041e3*U.J*Data.m/(U.kg*U.K) + Data.Deltah0_f,
+                  Polynomial.F(
+                          298.15*U.K,
+                          FCSys.Characteristics.N2.Gas.b_c[1, :],
+                          -3) + FCSys.Characteristics.N2.Gas.B_c[1, 2] - Data.b_c[
+                  1, 1]*ln(298.15*U.K)]),
             redeclare parameter Q.Fusivity Xi=Data.Xi(),
             redeclare parameter Q.Fluidity F=1/(178.2e-7*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(25.9e-3*U.W));
@@ -4762,7 +4823,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
     <li>Fixed specific heat capacity (independent of temperature)</ol>
-    <li>Resistivities (<i>f</i><sub>0</sub>, <i>r</i><sub>th</sub>, etc.) are fixed (e.g., independent of temperature)</li>
+        <li>The generalized resistivities (&Xi;, <i>F</i>, <i>R</i>) are fixed (e.g., independent of temperature).</li>
+
     </ol></p>
 
 <p>The default specific heat capacity (<code>b_c=[1.041e3*U.J*Data.m/(U.kg*U.K)]</code>) and resistivities (<code>F=1/(178.2e-7*U.Pa*U.s)</code> and <code>R=U.m*U.K/(25.9e-3*U.W))</code>) are based on data of gas at 1 atm and
@@ -4812,8 +4874,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
           extends Species(
-            redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
-                  b_v=[1], specVolPow={-1,0}),
+            redeclare replaceable FCSys.Characteristics.O2.Gas Data(b_v=[1],
+                specVolPow={-1,0}),
             Xi=k_Xi*Data.Xi(T),
             F=k_F*Data.F(T),
             R=k_R*Data.R(T));
@@ -4838,8 +4900,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
 
         model Correlated "Correlated properties"
           extends Species(
-            redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
-                  b_v=[1], specVolPow={-1,0}),
+            redeclare replaceable FCSys.Characteristics.O2.Gas Data(b_v=[1],
+                specVolPow={-1,0}),
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
@@ -4855,8 +4917,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
 
         model Fixed "Fixed properties"
           extends Species(
-            redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
-                  b_v=[1], specVolPow={-1,0}),
+            redeclare replaceable FCSys.Characteristics.O2.Gas Data(b_v=[1],
+                specVolPow={-1,0}),
             redeclare parameter Q.Fusivity Xi=Data.Xi(),
             redeclare parameter Q.Fluidity F=1/(207.2e-7*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(26.8e-3*U.W));
@@ -4868,7 +4930,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
             defaultComponentName="O2",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
-    <li>Resistivities (<i>f</i><sub>0</sub>, <i>r</i><sub>th</sub>, etc.) are fixed (e.g., independent of temperature)</li>
+        <li>The generalized resistivities (&Xi;, <i>F</i>, <i>R</i>) are fixed (e.g., independent of temperature).</li>
+
     </ol></p>
 
 <p>Additional notes:
@@ -4914,21 +4977,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
       end Gas;
     end O2;
 
-    model Species0Amount "Species with zero particle number"
-      extends Species(
-        final overrideEOS=true,
-        final rho_IC=0,
-        final derrho_IC=0,
-        N(stateSelect=StateSelect.never),
-        phi(each stateSelect=StateSelect.never),
-        T(stateSelect=StateSelect.never));
-      // Note:  StateSelect.never is necessary to avoid dynamic state selection
-      // in Dymola 7.4.
-      annotation (Documentation(info="<html>
-  <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
-    end Species0Amount;
-
-    model SpeciesInertStagnant "Inert and stagnant species"
+    model SpeciesSolid "Solid species (inert and stagnant)"
       extends Species(
         final Xi=Modelica.Constants.inf,
         final F=0,
@@ -4986,7 +5035,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
   never any shear forces, regardless of the value of <code>F</code>.</p>
 
   <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
-    end SpeciesInertStagnant;
+    end SpeciesSolid;
 
     model Species
       "Model for single-species exchange, transport, and storage of material, linear momentum, and energy"
@@ -5014,8 +5063,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
       // Material properties
       replaceable package Data =
           FCSys.Characteristics.BaseClasses.Characteristic constrainedby
-        FCSys.Characteristics.BaseClasses.Characteristic
-        "Characteristic data of the species" annotation (
+        FCSys.Characteristics.BaseClasses.Characteristic "Characteristic data"
+        annotation (
         Dialog(group="Material properties"),
         __Dymola_choicesFromPackage=true,
         Placement(transformation(extent={{-60,40},{-40,60}}),
@@ -6596,91 +6645,76 @@ Check the chemical formulas and the specific masses of the species.");
   <code>thermoOpt==ThermoOpt.ClosedDiabatic</code>), then the interface will be closed.
   note applies to the viscous/inviscous and diabatic/adiabatic properties.</li>
   <li>The x-axis component of linear momentum is included by default.  At least one component must be included.</li>
-  </ul></p></html>"), Icon(graphics={
-            Line(
-              points={{-100,0},{-40,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclXFaces,
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{0,-100}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclYFaces,
-              smooth=Smooth.None),
-            Line(
-              points={{40,40},{50,50}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclZFaces,
-              smooth=Smooth.None),
-            Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                  16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-40,-40},{-16,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{-16,40},{-16,-16},{40,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{-40,0},{28,0}},
-              color={210,210,210},
-              visible=inclXFaces,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,28},{0,-40}},
-              color={210,210,210},
-              visible=inclYFaces,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{28,0},{100,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclXFaces,
-              smooth=Smooth.None),
-            Line(
-              points={{0,100},{0,28}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclYFaces,
-              smooth=Smooth.None),
-            Line(
-              points={{-12,-12},{40,40}},
-              color={210,210,210},
-              visible=inclZFaces,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-40,16},{16,16},{16,-40}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{-50,-50},{-12,-12}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclZFaces,
-              smooth=Smooth.None),
-            Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                  16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{40,40},{16,16}},
-              color={127,127,127},
-              smooth=Smooth.None)}));
+  </ul></p></html>"), Icon(graphics={Line(
+                  points={{-100,0},{-40,0}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclXFaces,
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{0,-100}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclYFaces,
+                  smooth=Smooth.None),Line(
+                  points={{40,40},{50,50}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclZFaces,
+                  smooth=Smooth.None),Polygon(
+                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
+                {-40,16}},
+                  lineColor={127,127,127},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Line(
+                  points={{-40,-40},{-16,-16}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),Line(
+                  points={{-16,40},{-16,-16},{40,-16}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),Line(
+                  points={{-40,0},{28,0}},
+                  color={210,210,210},
+                  visible=inclXFaces,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,28},{0,-40}},
+                  color={210,210,210},
+                  visible=inclYFaces,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{28,0},{100,0}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclXFaces,
+                  smooth=Smooth.None),Line(
+                  points={{0,100},{0,28}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclYFaces,
+                  smooth=Smooth.None),Line(
+                  points={{-12,-12},{40,40}},
+                  color={210,210,210},
+                  visible=inclZFaces,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-40,16},{16,16},{16,-40}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{-50,-50},{-12,-12}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclZFaces,
+                  smooth=Smooth.None),Polygon(
+                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
+                {-40,16}},
+                  lineColor={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{40,40},{16,16}},
+                  color={127,127,127},
+                  smooth=Smooth.None)}));
 
     end PartialSubregion;
   end BaseClasses;

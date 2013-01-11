@@ -10,7 +10,7 @@ package WorkInProgress "Incomplete classes under development"
 
     FCSys.WorkInProgress.ClosedVolume volume(
       use_portsData=false,
-      redeclare package Medium = Modelica.Media.IdealGases.SingleGases.H2,
+      redeclare Modelica.Media.IdealGases.SingleGases.H2 Medium,
       V=1e-6)
       annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
     inner Modelica.Fluid.System system
@@ -414,4 +414,18 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
       Diagram(coordinateSystem(preserveAspectRatio=true,extent={{-100,-100},{
               100,100}}), graphics));
   end ClosedVolume;
+
+  model SubRegionsSpeciesSpecies0Amount "Species with zero particle number"
+    extends Subregions.Species.Species(
+      final overrideEOS=true,
+      final rho_IC=0,
+      final derrho_IC=0,
+      N(stateSelect=StateSelect.never),
+      phi(each stateSelect=StateSelect.never),
+      T(stateSelect=StateSelect.never));
+    // Note:  StateSelect.never is necessary to avoid dynamic state selection
+    // in Dymola 7.4.
+    annotation (Documentation(info="<html>
+  <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+  end SubRegionsSpeciesSpecies0Amount;
 end WorkInProgress;
