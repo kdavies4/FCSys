@@ -1004,6 +1004,12 @@ package Subregions
             "resources/scripts/Dymola/Subregions.Examples.SubregionsH2.mos"));
     end SubregionsCell;
 
+    model SubregionH2PipeTest
+      extends SubregionH2(subregion(L={100,1,1}*U.cm), bC1(gas(H2(redeclare
+                FCSys.BCs.Face.Material.Density material(redeclare
+                  Modelica.Blocks.Sources.Ramp spec(height=1*U.C/U.cm^3, offset
+                    =298.15*U.K/U.atm))))));
+    end SubregionH2PipeTest;
   end Examples;
 
   model Subregion "Subregion with all phases included"
@@ -4300,13 +4306,16 @@ package Subregions
 
         model Fixed "Fixed properties"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.H2.Gas Data(b_v=[1],
-                specVolPow={-1,0}),
+            redeclare replaceable package Data = FCSys.Characteristics.H2.Gas (
+                  b_v=[1], specVolPow={-1,0}),
             redeclare parameter Q.Fusivity Xi=Data.Xi(),
             redeclare parameter Q.Fluidity F=1/(89.6e-7*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(183e-3*U.W));
 
           // See the documentation for a table of values.
+
+          // **note: not good in Dymola 7.4: redeclare replaceable FCSys.Characteristics.H2.Gas Data(
+          // **update the other Species models.
 
           annotation (
             defaultComponentPrefixes="replaceable",

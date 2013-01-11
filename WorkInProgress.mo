@@ -428,4 +428,121 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
     annotation (Documentation(info="<html>
   <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
   end SubRegionsSpeciesSpecies0Amount;
+
+  model BCsAdaptersSpeciesFluid
+    "<html>Adapter to connect a single fluid species between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
+
+    extends BCs.Adapters.Species.FluidNonionic;
+    extends Modelica.Icons.UnderConstruction;
+
+    Modelica.Electrical.Analog.Interfaces.NegativePin pin if Data.z <> 0
+      "Modelica electrical pin" annotation (Placement(transformation(extent={{
+              70,30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
+
+  equation
+    // **Add electrical equations.
+    annotation (
+      Documentation(info="<html><p>The electrical connector (<code>pin</code>) is only included
+    if the species is ionic.
+    </p>
+    <p>For additional information, see the 
+    <a href=\"modelica://FCSys.BCs.Adapters.Species.BaseClasses.PartialSpecies\">
+    PartialSpecies</a> model.</p>
+    </html>"),
+      Icon(graphics={Line(
+            points={{0,40},{80,40}},
+            color={0,0,255},
+            smooth=Smooth.None), Line(
+            points={{0,60},{0,20}},
+            color={0,0,0},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash)}),
+      Diagram(graphics));
+  end BCsAdaptersSpeciesFluid;
+
+  model BCsAdaptersPhasesIonomer
+    "<html>Adapter for ionomer between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
+    extends BCs.Adapters.Phases.BaseClasses.PartialPhase;
+    extends Modelica.Icons.UnderConstruction;
+
+    BCs.Adapters.Species.Solid C19HF37O5S(redeclare package Data =
+          FCSys.Characteristics.C19HF37O5S.Ionomer)
+      annotation (Placement(transformation(extent={{-10,10},{10,30}})));
+    FCSys.WorkInProgress.BCsAdaptersSpeciesFluid 'H+'(redeclare package Data =
+          FCSys.Characteristics.'H+'.Ionomer, redeclare package Medium =
+          Modelica.Media.IdealGases.SingleGases.H2)
+      annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
+    // **Use model for H instead.
+
+    BCs.Adapters.Species.FluidNonionic H2O(redeclare package Data =
+          FCSys.Characteristics.H2O.Ionomer, redeclare package Medium =
+          Modelica.Media.IdealGases.SingleGases.H2O)
+      annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+    BCs.Adapters.Junctions.Junction2 junction2
+      annotation (Placement(transformation(extent={{60,-50},{40,-30}})));
+    Modelica.Fluid.Interfaces.FluidPort_b fluidPort(redeclare final package
+        Medium = Medium) "Modelica fluid port" annotation (Placement(
+          transformation(extent={{70,-50},{90,-30}}), iconTransformation(extent
+            ={{70,-50},{90,-30}})));
+    Modelica.Electrical.Analog.Interfaces.NegativePin pin
+      "Modelica electrical pin" annotation (Placement(transformation(extent={{
+              70,30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
+  equation
+    connect(C19HF37O5S.face.thermal, face.C19HF37O5S.thermal) annotation (Line(
+        points={{-8,20},{-40,20},{-40,5.55112e-16},{-80,5.55112e-16}},
+        color={127,127,127},
+        smooth=Smooth.None));
+
+    connect('H+'.face.material, face.'H+'.material) annotation (Line(
+        points={{-8,-20},{-40,-20},{-40,5.55112e-16},{-80,5.55112e-16}},
+        color={127,127,127},
+        smooth=Smooth.None));
+
+    connect('H+'.face.thermal, face.'H+'.thermal) annotation (Line(
+        points={{-8,-20},{-40,-20},{-40,5.55112e-16},{-80,5.55112e-16}},
+        color={127,127,127},
+        smooth=Smooth.None));
+
+    connect('H+'.pin, pin) annotation (Line(
+        points={{8,-16},{60,-16},{60,40},{80,40}},
+        color={0,0,255},
+        smooth=Smooth.None));
+
+    connect('H+'.heatPort, heatPort) annotation (Line(
+        points={{8,-20},{40,-20},{40,5.55112e-16},{80,5.55112e-16}},
+        color={191,0,0},
+        smooth=Smooth.None));
+    connect(C19HF37O5S.heatPort, heatPort) annotation (Line(
+        points={{8,20},{40,20},{40,5.55112e-16},{80,5.55112e-16}},
+        color={191,0,0},
+        smooth=Smooth.None));
+    annotation (Icon(graphics={
+          Line(
+            points={{0,60},{0,-60}},
+            color={0,0,0},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash,
+            thickness=0.5),
+          Line(
+            points={{0,0},{-80,0}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{0,40},{80,40}},
+            color={0,0,255},
+            smooth=Smooth.None),
+          Line(
+            points={{0,0},{80,0}},
+            color={191,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{0,-40},{80,-40}},
+            color={0,127,255},
+            smooth=Smooth.None)}), Diagram(graphics));
+    connect(junction2.mixturePort, fluidPort) annotation (Line(
+        points={{58,-40},{80,-40}},
+        color={0,127,255},
+        smooth=Smooth.None));
+  end BCsAdaptersPhasesIonomer;
 end WorkInProgress;

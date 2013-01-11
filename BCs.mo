@@ -124,7 +124,7 @@ package BCs "Models for boundary conditions"
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
 
-      FCSys.BCs.Adapters.Subregion subregionAdapter
+      FCSys.BCs.Adapters.Anode subregionAdapter
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       Temp ground
         annotation (Placement(transformation(extent={{30,0},{50,20}})));
@@ -176,7 +176,7 @@ package BCs "Models for boundary conditions"
       // **check that heat is transferred.
       extends Modelica.Icons.Example;
 
-      FCSys.BCs.Adapters.Phases.Gas adaptH2(redeclare
+      FCSys.BCs.Adapters.Phases.AnodeGas adaptH2(redeclare
           Modelica.Media.IdealGases.SingleGases.H2 Medium)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       Modelica.Fluid.Vessels.ClosedVolume volume(
@@ -211,7 +211,7 @@ package BCs "Models for boundary conditions"
 
     equation
       connect(adaptH2.fluidPort, volume.ports[1]) annotation (Line(
-          points={{8,4},{32,4},{32,10}},
+          points={{8,-4},{32,-4},{32,10}},
           color={0,127,255},
           smooth=Smooth.None));
       connect(subregion.xPositive, adaptH2.face) annotation (Line(
@@ -222,7 +222,7 @@ package BCs "Models for boundary conditions"
           smooth=Smooth.None));
 
       connect(volume.heatPort, adaptH2.heatPort) annotation (Line(
-          points={{22,20},{16,20},{16,-4},{8,-4}},
+          points={{22,20},{16,20},{16,4},{8,4}},
           color={191,0,0},
           smooth=Smooth.None));
       annotation (
@@ -237,41 +237,44 @@ package BCs "Models for boundary conditions"
   package Adapters "Adapters to Package Modelica"
     extends Modelica.Icons.Package;
 
-    model Subregion
+    model Anode
       "<html>Adapter between <a href=\"modelica://Modelica\">Modelica</a> and the face connector of a <a href=\"modelica://FCSys.Assemblies.Cells.Cell\">Cell</a>, <a href=\"modelica://FCSys.Regions.Region\">Region</a>, or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a></html>"
       extends FCSys.BaseClasses.Icons.Names.Top4;
 
-      replaceable package GasMedium = FCSys.BCs.Adapters.Media constrainedby
+      replaceable package GasMedium = Media.AnodeGas constrainedby
         Modelica.Media.Interfaces.PartialMedium "Medium model for the gas"
-        annotation (choicesAllMatching=true);
-      replaceable package LiquidMedium = Modelica.Media.Water.WaterIF97_R1pT
-        constrainedby Modelica.Media.Interfaces.PartialMedium
-        "Medium model for the liquid" annotation (choicesAllMatching=true);
+        annotation (choicesAllMatching=true, Dialog(group="Material properties"));
+      replaceable package LiquidMedium =
+          Modelica.Media.Water.ConstantPropertyLiquidWater constrainedby
+        Modelica.Media.Interfaces.PartialMedium "Medium model for the liquid"
+        annotation (choicesAllMatching=true, Dialog(group="Material properties"));
 
       FCSys.Connectors.FaceBus face
         "Multi-species connector for material, linear momentum, and heat"
         annotation (Placement(transformation(extent={{-90,-10},{-70,10}}),
             iconTransformation(extent={{-90,-10},{-70,10}})));
-      Modelica.Fluid.Interfaces.FluidPort_b gasPort(redeclare final GasMedium
-          Medium) "Modelica fluid port for the gas" annotation (Placement(
-            transformation(extent={{70,50},{90,70}}), iconTransformation(extent
-              ={{70,50},{90,70}})));
+      Modelica.Fluid.Interfaces.FluidPort_b gasPort(redeclare final package
+          Medium = GasMedium) "Modelica fluid port for the gas" annotation (
+          Placement(transformation(extent={{70,50},{90,70}}),
+            iconTransformation(extent={{70,50},{90,70}})));
       Modelica.Electrical.Analog.Interfaces.NegativePin pin
         "Modelica electrical pin" annotation (Placement(transformation(extent={
                 {70,10},{90,30}}), iconTransformation(extent={{70,10},{90,30}})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
         "Modelica heat port" annotation (Placement(transformation(extent={{70,-30},
                 {90,-10}}),iconTransformation(extent={{70,-30},{90,-10}})));
-      Modelica.Fluid.Interfaces.FluidPort_b liquidPort(redeclare final
-          LiquidMedium Medium) "Modelica fluid port for the liquid" annotation
-        (Placement(transformation(extent={{70,-70},{90,-50}}),
+      Modelica.Fluid.Interfaces.FluidPort_b liquidPort(redeclare final package
+          Medium = LiquidMedium) "Modelica fluid port for the liquid"
+        annotation (Placement(transformation(extent={{70,-70},{90,-50}}),
             iconTransformation(extent={{70,-70},{90,-50}})));
+      FCSys.BCs.Adapters.Phases.AnodeGas gas(redeclare final package Medium =
+            GasMedium) "Gas subadapter"
+        annotation (Placement(transformation(extent={{-10,30},{10,50}})));
       Phases.Graphite graphite "Graphite subadapter"
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      Phases.Gas gas(final Medium=GasMedium) "Gas subadapter"
-        annotation (Placement(transformation(extent={{-10,30},{10,50}})));
-      Phases.Liquid liquid(final Medium=LiquidMedium) "Liquid subadapter"
+      Phases.Liquid liquid(redeclare final package Medium = LiquidMedium)
+        "Liquid subadapter"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
     equation
       connect(graphite.face, face.graphite) annotation (Line(
@@ -282,11 +285,11 @@ package BCs "Models for boundary conditions"
           thickness=0.5));
 
       connect(graphite.pin, pin) annotation (Line(
-          points={{8,-4},{50,-4},{50,20},{80,20}},
+          points={{8,4},{50,4},{50,20},{80,20}},
           color={0,0,255},
           smooth=Smooth.None));
-      connect(graphite.port, heatPort) annotation (Line(
-          points={{8,4},{30,4},{30,-20},{80,-20}},
+      connect(graphite.heatPort, heatPort) annotation (Line(
+          points={{8,6.10623e-16},{30,6.10623e-16},{30,-20},{80,-20}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(gasPort, gas.fluidPort) annotation (Line(
@@ -298,11 +301,11 @@ package BCs "Models for boundary conditions"
           color={0,127,255},
           smooth=Smooth.None));
       connect(liquid.heatPort, heatPort) annotation (Line(
-          points={{8,-36},{30,-36},{30,-20},{80,-20}},
+          points={{8,-40},{30,-40},{30,-20},{80,-20}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(gas.heatPort, heatPort) annotation (Line(
-          points={{8,44},{30,44},{30,-20},{80,-20}},
+          points={{8,40},{30,40},{30,-20},{80,-20}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(liquid.face, face.liquid) annotation (Line(
@@ -344,61 +347,196 @@ package BCs "Models for boundary conditions"
               points={{0,-60},{80,-60}},
               color={0,127,255},
               smooth=Smooth.None)}), Diagram(graphics));
-    end Subregion;
+    end Anode;
 
-    package Phases "Adapters for phases"
+    model Cathode
+      "<html>Adapter between <a href=\"modelica://Modelica\">Modelica</a> and the face connector of a <a href=\"modelica://FCSys.Assemblies.Cells.Cell\">Cell</a>, <a href=\"modelica://FCSys.Regions.Region\">Region</a>, or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a></html>"
+      extends FCSys.BaseClasses.Icons.Names.Top4;
+
+      replaceable package GasMedium = Adapters.Media.CathodeGas constrainedby
+        Modelica.Media.Interfaces.PartialMedium "Medium model for the gas"
+        annotation (choicesAllMatching=true, Dialog(group="Material properties"));
+      replaceable package LiquidMedium =
+          Modelica.Media.Water.ConstantPropertyLiquidWater constrainedby
+        Modelica.Media.Interfaces.PartialMedium "Medium model for the liquid"
+        annotation (choicesAllMatching=true, Dialog(group="Material properties"));
+
+      FCSys.Connectors.FaceBus face
+        "Multi-species connector for material, linear momentum, and heat"
+        annotation (Placement(transformation(extent={{-90,-10},{-70,10}}),
+            iconTransformation(extent={{-90,-10},{-70,10}})));
+      Modelica.Fluid.Interfaces.FluidPort_b gasPort(redeclare final package
+          Medium = GasMedium) "Modelica fluid port for the gas" annotation (
+          Placement(transformation(extent={{70,50},{90,70}}),
+            iconTransformation(extent={{70,50},{90,70}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin pin
+        "Modelica electrical pin" annotation (Placement(transformation(extent={
+                {70,10},{90,30}}), iconTransformation(extent={{70,10},{90,30}})));
+      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
+        "Modelica heat port" annotation (Placement(transformation(extent={{70,-30},
+                {90,-10}}),iconTransformation(extent={{70,-30},{90,-10}})));
+      Modelica.Fluid.Interfaces.FluidPort_b liquidPort(redeclare final package
+          Medium = LiquidMedium) "Modelica fluid port for the liquid"
+        annotation (Placement(transformation(extent={{70,-70},{90,-50}}),
+            iconTransformation(extent={{70,-70},{90,-50}})));
+
+      Phases.CathodeGas gas(redeclare final package Medium = GasMedium)
+        "Gas subadapter"
+        annotation (Placement(transformation(extent={{-10,30},{10,50}})));
+      Phases.Graphite graphite "Graphite subadapter"
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+      Phases.Liquid liquid(redeclare final package Medium = LiquidMedium)
+        "Liquid subadapter"
+        annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+    equation
+      connect(graphite.face, face.graphite) annotation (Line(
+          points={{-8,6.10623e-16},{-40,6.10623e-16},{-40,5.55112e-16},{-80,
+              5.55112e-16}},
+          color={127,127,127},
+          smooth=Smooth.None,
+          thickness=0.5));
+
+      connect(graphite.pin, pin) annotation (Line(
+          points={{8,4},{50,4},{50,20},{80,20}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(graphite.heatPort, heatPort) annotation (Line(
+          points={{8,6.10623e-16},{30,6.10623e-16},{30,-20},{80,-20}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(gasPort, gas.fluidPort) annotation (Line(
+          points={{80,60},{50,60},{50,36},{8,36}},
+          color={0,127,255},
+          smooth=Smooth.None));
+      connect(liquidPort, liquid.fluidPort) annotation (Line(
+          points={{80,-60},{50,-60},{50,-44},{8,-44}},
+          color={0,127,255},
+          smooth=Smooth.None));
+      connect(liquid.heatPort, heatPort) annotation (Line(
+          points={{8,-40},{30,-40},{30,-20},{80,-20}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(gas.heatPort, heatPort) annotation (Line(
+          points={{8,40},{30,40},{30,-20},{80,-20}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(liquid.face, face.liquid) annotation (Line(
+          points={{-8,-40},{-40,-40},{-40,5.55112e-16},{-80,5.55112e-16}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(gas.face, face.gas) annotation (Line(
+          points={{-8,40},{-40,40},{-40,5.55112e-16},{-80,5.55112e-16}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+
+      annotation (Icon(graphics={
+            Line(
+              points={{0,60},{0,-60}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),
+            Line(
+              points={{0,0},{-80,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,20},{80,20}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-20},{80,-20}},
+              color={191,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{0,60},{80,60}},
+              color={0,127,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-60},{80,-60}},
+              color={0,127,255},
+              smooth=Smooth.None)}), Diagram(graphics));
+    end Cathode;
+
+    package Phases "Adapters for material phases"
       extends Modelica.Icons.Package;
-      model Gas
-        "<html>Adapter for H<sub>2</sub> between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
-        extends FCSys.BaseClasses.Icons.Names.Top3;
-        FCSys.BCs.Adapters.Species.Fluid H2(redeclare final package Medium =
+
+      model AnodeGas
+        "<html>Adapter for PEMFC Anode gas between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
+        extends BaseClasses.PartialPhase;
+
+        replaceable package Medium = Media.AnodeGas constrainedby
+          Modelica.Media.Interfaces.PartialMedium "Medium model (Modelica)"
+          annotation (choicesAllMatching=true, Dialog(group=
+                "Material properties"));
+
+        Species.FluidNonionic H2(redeclare package Medium =
               Modelica.Media.IdealGases.SingleGases.H2 (referenceChoice=
                   Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
-                excludeEnthalpyOfFormation=false))
-          annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+                excludeEnthalpyOfFormation=false), redeclare package Data =
+              FCSys.Characteristics.H2.Gas)
+          annotation (Placement(transformation(extent={{-10,10},{10,30}})));
+        Species.FluidNonionic H2O(redeclare package Data =
+              FCSys.Characteristics.H2O.Gas (referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
+                excludeEnthalpyOfFormation=false), redeclare final package
+            Medium = Modelica.Media.IdealGases.SingleGases.H2O)
+          annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
+        Junctions.Junction2 junction
+          annotation (Placement(transformation(extent={{60,-50},{40,-30}})));
+
         Modelica.Fluid.Interfaces.FluidPort_b fluidPort(redeclare final package
             Medium = Medium) "Modelica fluid port" annotation (Placement(
               transformation(extent={{70,-50},{90,-30}}), iconTransformation(
                 extent={{70,-50},{90,-30}})));
-        Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
-          "Modelica heat port" annotation (Placement(transformation(extent={{70,
-                  30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
-        Connectors.FaceBus face "FCSys face connector" annotation (Placement(
-              transformation(extent={{-90,-10},{-70,10}}), iconTransformation(
-                extent={{-90,-10},{-70,10}})));
+
       equation
-        connect(H2.fluidPort, fluidPort) annotation (Line(
-            points={{8,-4},{40,-4},{40,-40},{80,-40}},
-            color={0,127,255},
-            smooth=Smooth.None));
-
-        connect(H2.heatPort, heatPort) annotation (Line(
-            points={{8,6.10623e-16},{40,6.10623e-16},{40,40},{80,40}},
-            color={191,0,0},
-            smooth=Smooth.None));
+        // H2
         connect(H2.face.material, face.H2.material) annotation (Line(
-            points={{-8,6.10623e-16},{-54,6.10623e-16},{-54,5.55112e-16},{-80,
-                5.55112e-16}},
+            points={{-8,20},{-40,20},{-40,5.55112e-16},{-80,5.55112e-16}},
             color={127,127,127},
             smooth=Smooth.None));
-
         connect(H2.face.thermal, face.H2.thermal) annotation (Line(
-            points={{-8,6.10623e-16},{-54,6.10623e-16},{-54,5.55112e-16},{-80,
-                5.55112e-16}},
+            points={{-8,20},{-40,20},{-40,5.55112e-16},{-80,5.55112e-16}},
             color={127,127,127},
             smooth=Smooth.None));
-
-        connect(H2.fluidPort, fluidPort) annotation (Line(
-            points={{8,-4},{40,-4},{40,-40},{80,-40}},
+        connect(H2.heatPort, heatPort) annotation (Line(
+            points={{8,20},{60,20},{60,5.55112e-16},{80,5.55112e-16}},
+            color={191,0,0},
+            smooth=Smooth.None));
+        connect(H2.fluidPort, junction.purePort1) annotation (Line(
+            points={{8,16},{34,16},{34,-36.2},{42,-36.2}},
             color={0,127,255},
             smooth=Smooth.None));
-        connect(heatPort, H2.heatPort) annotation (Line(
-            points={{80,40},{40,40},{40,6.10623e-16},{8,6.10623e-16}},
+
+        // H2O
+        connect(H2O.face.material, face.H2O.material) annotation (Line(
+            points={{-8,-20},{-40,-20},{-40,5.55112e-16},{-80,5.55112e-16}},
+            color={127,127,127},
+            smooth=Smooth.None));
+        connect(H2O.face.thermal, face.H2O.thermal) annotation (Line(
+            points={{-8,-20},{-40,-20},{-40,5.55112e-16},{-80,5.55112e-16}},
+            color={127,127,127},
+            smooth=Smooth.None));
+        connect(H2O.heatPort, heatPort) annotation (Line(
+            points={{8,-20},{60,-20},{60,5.55112e-16},{80,5.55112e-16}},
             color={191,0,0},
+            smooth=Smooth.None));
+        connect(H2O.fluidPort, junction.purePort2) annotation (Line(
+            points={{8,-24},{26,-24},{26,-44},{42,-44}},
+            color={0,127,255},
+            smooth=Smooth.None));
+
+        // Mixture
+        connect(junction.mixturePort, fluidPort) annotation (Line(
+            points={{58,-40},{80,-40}},
+            color={0,127,255},
             smooth=Smooth.None));
         annotation (Diagram(graphics), Icon(graphics={
               Line(
-                points={{0,40},{0,-40}},
+                points={{0,20},{0,-60}},
                 color={0,0,0},
                 smooth=Smooth.None,
                 pattern=LinePattern.Dash,
@@ -409,41 +547,175 @@ package BCs "Models for boundary conditions"
                 smooth=Smooth.None,
                 thickness=0.5),
               Line(
-                points={{0,40},{80,40}},
-                color={0,0,255},
+                points={{0,0},{80,0}},
+                color={191,0,0},
                 smooth=Smooth.None),
               Line(
                 points={{0,-40},{80,-40}},
-                color={191,0,0},
+                color={0,127,255},
                 smooth=Smooth.None)}));
-      end Gas;
+      end AnodeGas;
 
-      model Graphite
-        "<html>Electrical adapter between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a> with bus connector</html>"
-        extends FCSys.BaseClasses.Icons.Names.Top3;
+      model CathodeGas
+        "<html>Adapter for PEMFC cathode gas between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
+        extends BaseClasses.PartialPhase;
 
-        FCSys.Connectors.FaceBus face
-          "Connector for material, linear momentum, and heat" annotation (
-            Placement(transformation(extent={{-90,-10},{-70,10}}),
-              iconTransformation(extent={{-90,-10},{-70,10}})));
-        Modelica.Electrical.Analog.Interfaces.NegativePin pin
-          "Modelica electrical pin" annotation (Placement(transformation(extent
-                ={{70,-50},{90,-30}}), iconTransformation(extent={{70,-50},{90,
-                  -30}})));
-        FCSys.BCs.Adapters.Species.'e-' 'e-'
+        replaceable package Medium = Media.CathodeGas constrainedby
+          Modelica.Media.Interfaces.PartialMedium "Medium model (Modelica)"
+          annotation (choicesAllMatching=true, Dialog(group=
+                "Material properties"));
+
+        Junctions.Junction3 junction(
+          redeclare package Medium1 = Modelica.Media.IdealGases.SingleGases.H2O
+              (referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
+                excludeEnthalpyOfFormation=false),
+          redeclare package Medium2 = Modelica.Media.IdealGases.SingleGases.N2
+              (referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
+                excludeEnthalpyOfFormation=false),
+          redeclare package Medium3 = Modelica.Media.IdealGases.SingleGases.O2
+              (referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
+                excludeEnthalpyOfFormation=false),
+          redeclare package MixtureMedium = Medium)
+          annotation (Placement(transformation(extent={{60,-50},{40,-30}})));
+
+        Species.FluidNonionic H2O(redeclare package Data =
+              FCSys.Characteristics.H2O.Gas, redeclare final package Medium =
+              Modelica.Media.IdealGases.SingleGases.H2O (referenceChoice=
+                  Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
+                excludeEnthalpyOfFormation=false))
+          annotation (Placement(transformation(extent={{-10,10},{10,30}})));
+        Species.FluidNonionic N2(redeclare package Data =
+              FCSys.Characteristics.N2.Gas, redeclare final package Medium =
+              Modelica.Media.IdealGases.SingleGases.N2 (referenceChoice=
+                  Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
+                excludeEnthalpyOfFormation=false))
+          annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+        Species.FluidNonionic O2(redeclare package Data =
+              FCSys.Characteristics.O2.Gas, redeclare final package Medium =
+              Modelica.Media.IdealGases.SingleGases.O2 (referenceChoice=
+                  Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
+                excludeEnthalpyOfFormation=false))
           annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
 
-        Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port
-          "Modelica heat port" annotation (Placement(transformation(extent={{70,
-                  30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
-        FCSys.BCs.Adapters.Species.Solid C
-          annotation (Placement(transformation(extent={{-10,10},{10,30}})));
+        Modelica.Fluid.Interfaces.FluidPort_b fluidPort(redeclare final package
+            Medium = Medium) "Modelica fluid port" annotation (Placement(
+              transformation(extent={{70,-50},{90,-30}}), iconTransformation(
+                extent={{70,-50},{90,-30}})));
       equation
+
+        // H2O
+        connect(H2O.face.material, face.H2O.material) annotation (Line(
+            points={{-8,20},{-40,20},{-40,5.55112e-16},{-80,5.55112e-16}},
+            color={127,127,127},
+            smooth=Smooth.None));
+        connect(H2O.face.thermal, face.H2O.thermal) annotation (Line(
+            points={{-8,20},{-40,20},{-40,5.55112e-16},{-80,5.55112e-16}},
+            color={127,127,127},
+            smooth=Smooth.None));
+        connect(H2O.fluidPort, junction.purePort1) annotation (Line(
+            points={{8,16},{34,16},{34,-36.2},{42,-36.2}},
+            color={0,127,255},
+            smooth=Smooth.None));
+        connect(H2O.heatPort, heatPort) annotation (Line(
+            points={{8,20},{60,20},{60,5.55112e-16},{80,5.55112e-16}},
+            color={191,0,0},
+            smooth=Smooth.None));
+
+        // N2
+        connect(N2.face.material, face.N2.material) annotation (Line(
+            points={{-8,6.10623e-16},{-40,6.10623e-16},{-40,5.55112e-16},{-80,
+                5.55112e-16}},
+            color={127,127,127},
+            smooth=Smooth.None));
+
+        connect(N2.face.thermal, face.N2.thermal) annotation (Line(
+            points={{-8,6.10623e-16},{-40,6.10623e-16},{-40,5.55112e-16},{-80,
+                5.55112e-16}},
+            color={127,127,127},
+            smooth=Smooth.None));
+
+        connect(N2.fluidPort, junction.purePort2) annotation (Line(
+            points={{8,-4},{30,-4},{30,-40},{42,-40}},
+            color={0,127,255},
+            smooth=Smooth.None));
+
+        connect(N2.heatPort, heatPort) annotation (Line(
+            points={{8,6.10623e-16},{60,6.10623e-16},{60,5.55112e-16},{80,
+                5.55112e-16}},
+            color={191,0,0},
+            smooth=Smooth.None));
+
+        // O2
+        connect(O2.face.material, face.O2.material) annotation (Line(
+            points={{-8,-20},{-40,-20},{-40,5.55112e-16},{-80,5.55112e-16}},
+            color={127,127,127},
+            smooth=Smooth.None));
+        connect(O2.face.thermal, face.O2.thermal) annotation (Line(
+            points={{-8,-20},{-40,-20},{-40,5.55112e-16},{-80,5.55112e-16}},
+            color={127,127,127},
+            smooth=Smooth.None));
+        connect(O2.fluidPort, junction.purePort3) annotation (Line(
+            points={{8,-24},{26,-24},{26,-44},{42,-44}},
+            color={0,127,255},
+            smooth=Smooth.None));
+        connect(O2.heatPort, heatPort) annotation (Line(
+            points={{8,-20},{60,-20},{60,5.55112e-16},{80,5.55112e-16}},
+            color={191,0,0},
+            smooth=Smooth.None));
+
+        // Mixture
+        connect(junction.mixturePort, fluidPort) annotation (Line(
+            points={{58,-40},{80,-40}},
+            color={0,127,255},
+            smooth=Smooth.None));
+        annotation (Diagram(graphics), Icon(graphics={
+              Line(
+                points={{0,20},{0,-60}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash,
+                thickness=0.5),
+              Line(
+                points={{0,0},{-80,0}},
+                color={127,127,127},
+                smooth=Smooth.None,
+                thickness=0.5),
+              Line(
+                points={{0,0},{80,0}},
+                color={191,0,0},
+                smooth=Smooth.None),
+              Line(
+                points={{0,-40},{80,-40}},
+                color={0,127,255},
+                smooth=Smooth.None)}));
+      end CathodeGas;
+
+      model Graphite
+        "<html>Adapter for graphite between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
+        extends BaseClasses.PartialPhase;
+
+        Species.'e-' 'e-'(redeclare package Data =
+              FCSys.Characteristics.'e-'.Graphite)
+          annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
+
+        Species.Solid C(redeclare package Data =
+              FCSys.Characteristics.C.Graphite)
+          annotation (Placement(transformation(extent={{-10,10},{10,30}})));
+        Modelica.Electrical.Analog.Interfaces.NegativePin pin
+          "Modelica electrical pin" annotation (Placement(transformation(extent
+                ={{70,30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
+      equation
+        // C
         connect(C.face.thermal, face.C.thermal) annotation (Line(
             points={{-8,20},{-40,20},{-40,5.55112e-16},{-80,5.55112e-16}},
             color={127,127,127},
             smooth=Smooth.None));
+        connect(C.heatPort, heatPort) annotation (Line(
+            points={{8,20},{40,20},{40,5.55112e-16},{80,5.55112e-16}},
+            color={191,0,0},
+            smooth=Smooth.None));
 
+        // e-
         connect('e-'.face.material, face.'e-'.material) annotation (Line(
             points={{-8,-20},{-40,-20},{-40,5.55112e-16},{-80,5.55112e-16}},
             color={127,127,127},
@@ -453,23 +725,19 @@ package BCs "Models for boundary conditions"
             points={{-8,-20},{-40,-20},{-40,5.55112e-16},{-80,5.55112e-16}},
             color={127,127,127},
             smooth=Smooth.None));
+        connect('e-'.heatPort, heatPort) annotation (Line(
+            points={{8,-20},{40,-20},{40,5.55112e-16},{80,5.55112e-16}},
+            color={191,0,0},
+            smooth=Smooth.None));
 
         connect('e-'.pin, pin) annotation (Line(
-            points={{8,-24},{40,-24},{40,-40},{80,-40}},
+            points={{8,-16},{60,-16},{60,40},{80,40}},
             color={0,0,255},
             smooth=Smooth.None));
 
-        connect('e-'.port, port) annotation (Line(
-            points={{8,-16},{40,-16},{40,40},{80,40}},
-            color={191,0,0},
-            smooth=Smooth.None));
-        connect(C.port, port) annotation (Line(
-            points={{8,20},{40,20},{40,40},{80,40}},
-            color={191,0,0},
-            smooth=Smooth.None));
         annotation (Icon(graphics={
               Line(
-                points={{0,40},{0,-40}},
+                points={{0,60},{0,-20}},
                 color={0,0,0},
                 smooth=Smooth.None,
                 pattern=LinePattern.Dash,
@@ -484,133 +752,62 @@ package BCs "Models for boundary conditions"
                 color={0,0,255},
                 smooth=Smooth.None),
               Line(
-                points={{0,-40},{80,-40}},
+                points={{0,0},{80,0}},
                 color={191,0,0},
                 smooth=Smooth.None)}), Diagram(graphics));
       end Graphite;
 
-      model Ionomer
-        "<html>Electrical adapter between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a> with bus connector</html>"
-        extends FCSys.BaseClasses.Icons.Names.Top3;
-
-        FCSys.Connectors.FaceBus face
-          "Connector for material, linear momentum, and heat" annotation (
-            Placement(transformation(extent={{-90,-10},{-70,10}}),
-              iconTransformation(extent={{-90,-10},{-70,10}})));
-        Modelica.Electrical.Analog.Interfaces.NegativePin pin
-          "Modelica electrical pin" annotation (Placement(transformation(extent
-                ={{70,-30},{90,-10}}), iconTransformation(extent={{70,-30},{90,
-                  -10}})));
-        FCSys.BCs.Adapters.Species.'e-' 'e-'
-          annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
-
-        Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port
-          "Modelica heat port" annotation (Placement(transformation(extent={{70,
-                  30},{90,50}}), iconTransformation(extent={{68,30},{88,50}})));
-        FCSys.BCs.Adapters.Species.Solid C
-          annotation (Placement(transformation(extent={{-10,10},{10,30}})));
-      equation
-        connect(C.face.thermal, face.C.thermal) annotation (Line(
-            points={{-8,20},{-40,20},{-40,5.55112e-16},{-80,5.55112e-16}},
-            color={127,127,127},
-            smooth=Smooth.None));
-
-        connect('e-'.face.material, face.'e-'.material) annotation (Line(
-            points={{-8,-20},{-40,-20},{-40,5.55112e-16},{-80,5.55112e-16}},
-            color={127,127,127},
-            smooth=Smooth.None));
-
-        connect('e-'.face.thermal, face.'e-'.thermal) annotation (Line(
-            points={{-8,-20},{-40,-20},{-40,5.55112e-16},{-80,5.55112e-16}},
-            color={127,127,127},
-            smooth=Smooth.None));
-
-        connect('e-'.pin, pin) annotation (Line(
-            points={{8,-24},{60,-24},{60,-20},{80,-20}},
-            color={0,0,255},
-            smooth=Smooth.None));
-
-        connect('e-'.port, port) annotation (Line(
-            points={{8,-16},{40,-16},{40,40},{80,40}},
-            color={191,0,0},
-            smooth=Smooth.None));
-        connect(C.port, port) annotation (Line(
-            points={{8,20},{40,20},{40,40},{80,40}},
-            color={191,0,0},
-            smooth=Smooth.None));
-        annotation (Icon(graphics={
-              Line(
-                points={{0,40},{0,-40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash,
-                thickness=0.5),
-              Line(
-                points={{0,0},{-80,0}},
-                color={127,127,127},
-                smooth=Smooth.None,
-                thickness=0.5),
-              Line(
-                points={{0,40},{80,40}},
-                color={0,0,255},
-                smooth=Smooth.None),
-              Line(
-                points={{0,-40},{80,-40}},
-                color={191,0,0},
-                smooth=Smooth.None)}), Diagram(graphics));
-      end Ionomer;
 
       model Liquid
-        "<html>Adapter for H<sub>2</sub> between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
-        extends FCSys.BaseClasses.Icons.Names.Top3;
-        FCSys.BCs.Adapters.Species.Fluid H2(redeclare final package Medium =
-              Modelica.Media.IdealGases.SingleGases.H2 (referenceChoice=
-                  Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
-                excludeEnthalpyOfFormation=false))
+        "<html>Adapter for liquid between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
+        extends BaseClasses.PartialPhase;
+
+        replaceable package Medium =
+            Modelica.Media.Water.ConstantPropertyLiquidWater constrainedby
+          Modelica.Media.Interfaces.PartialPureSubstance
+          "Medium model (Modelica)" annotation (choicesAllMatching=true, Dialog(
+              group="Material properties"));
+
+        FCSys.WorkInProgress.BCsAdaptersSpeciesFluid H2O(redeclare package Data
+            = FCSys.Characteristics.H2O.Liquid, redeclare final package Medium
+            = Medium)
           annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
         Modelica.Fluid.Interfaces.FluidPort_b fluidPort(redeclare final package
             Medium = Medium) "Modelica fluid port" annotation (Placement(
               transformation(extent={{70,-50},{90,-30}}), iconTransformation(
                 extent={{70,-50},{90,-30}})));
-        Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
-          "Modelica heat port" annotation (Placement(transformation(extent={{70,
-                  30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
-        Connectors.FaceBus face "FCSys face connector" annotation (Placement(
-              transformation(extent={{-90,-10},{-70,10}}), iconTransformation(
-                extent={{-90,-10},{-70,10}})));
+        // Note:  In Dymola 7.4, "redeclare final package Medium = Medium"
+        // must be used instead of "redeclare final Medium Medium" in
+        // order for this model to pass its check.
       equation
-        connect(H2.fluidPort, fluidPort) annotation (Line(
-            points={{8,6.10623e-16},{40,6.10623e-16},{40,-40},{80,-40}},
-            color={0,127,255},
-            smooth=Smooth.None));
-
-        connect(H2.heatPort, heatPort) annotation (Line(
-            points={{8,4},{40,4},{40,40},{80,40}},
-            color={191,0,0},
-            smooth=Smooth.None));
-        connect(H2.face.material, face.H2.material) annotation (Line(
+        // H2O
+        connect(H2O.face.material, face.H2.material) annotation (Line(
             points={{-8,6.10623e-16},{-54,6.10623e-16},{-54,5.55112e-16},{-80,
                 5.55112e-16}},
             color={0,0,0},
             smooth=Smooth.None));
 
-        connect(H2.face.thermal, face.H2.thermal) annotation (Line(
+        connect(H2O.face.thermal, face.H2.thermal) annotation (Line(
             points={{-8,6.10623e-16},{-54,6.10623e-16},{-54,5.55112e-16},{-80,
                 5.55112e-16}},
             color={127,127,127},
             smooth=Smooth.None));
 
-        connect(H2.fluidPort, fluidPort) annotation (Line(
-            points={{8,6.10623e-16},{40,6.10623e-16},{40,-40},{80,-40}},
-            color={0,127,255},
-            smooth=Smooth.None));
-        connect(heatPort, H2.heatPort) annotation (Line(
-            points={{80,40},{40,40},{40,4},{8,4}},
+        connect(H2O.heatPort, heatPort) annotation (Line(
+            points={{8,6.10623e-16},{40,6.10623e-16},{40,5.55112e-16},{80,
+                5.55112e-16}},
             color={191,0,0},
             smooth=Smooth.None));
+
+        connect(H2O.fluidPort, fluidPort) annotation (Line(
+            points={{8,-4},{40,-4},{40,-40},{80,-40}},
+            color={0,127,255},
+            smooth=Smooth.None));
+
         annotation (Diagram(graphics), Icon(graphics={
               Line(
-                points={{0,40},{0,-40}},
+                points={{0,20},{0,-60}},
                 color={0,0,0},
                 smooth=Smooth.None,
                 pattern=LinePattern.Dash,
@@ -621,17 +818,39 @@ package BCs "Models for boundary conditions"
                 smooth=Smooth.None,
                 thickness=0.5),
               Line(
-                points={{0,40},{80,40}},
-                color={0,0,255},
-                smooth=Smooth.None),
-              Line(
                 points={{0,-40},{80,-40}},
-                color={191,0,0},
+                color={0,127,255},
                 smooth=Smooth.None)}));
       end Liquid;
+
+      package BaseClasses "Base classes (not for direct use)"
+        extends Modelica.Icons.BasesPackage;
+
+        partial model PartialPhase
+          "<html>**Adapter for H<sub>2</sub> between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
+          extends FCSys.BaseClasses.Icons.Names.Top3;
+
+          Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
+            "Modelica heat port" annotation (Placement(transformation(extent={{
+                    70,-10},{90,10}}), iconTransformation(extent={{70,-10},{90,
+                    10}})));
+          Connectors.FaceBus face "FCSys face connector" annotation (Placement(
+                transformation(extent={{-90,-10},{-70,10}}), iconTransformation(
+                  extent={{-90,-10},{-70,10}})));
+
+          annotation (Diagram(graphics), Icon(graphics={Line(
+                  points={{0,0},{-80,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5), Line(
+                  points={{0,0},{80,0}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}));
+        end PartialPhase;
+      end BaseClasses;
     end Phases;
 
-    package Species "Adapters for Species"
+    package Species "Adapters for single species"
       extends Modelica.Icons.Package;
 
       model 'e-'
@@ -661,29 +880,34 @@ package BCs "Models for boundary conditions"
           Icon(graphics={Line(
                 points={{0,40},{80,40}},
                 color={0,0,255},
-                smooth=Smooth.None)}),
+                smooth=Smooth.None), Line(
+                points={{0,60},{0,-20}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash)}),
           Diagram(graphics));
       end 'e-';
 
-      model Fluid
-        "<html>Adapter to connect a single fluid species between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
+
+      model FluidNonionic
+        "<html>Adapter to connect a single nonionic fluid species between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
 
         extends BaseClasses.PartialSpecies(face(final thermoOpt=ThermoOpt.OpenDiabatic));
 
-        replaceable package Medium =
-            Modelica.Media.Interfaces.PartialPureSubstance (final nXi=0)
+        replaceable package Medium = Modelica.Media.IdealGases.SingleGases.H2O
+          constrainedby Modelica.Media.Interfaces.PartialPureSubstance
           "Medium model (Modelica)" annotation (choicesAllMatching=true, Dialog(
               group="Material properties"));
 
         Medium.BaseProperties medium "Base properties of the fluid";
 
-        Modelica.Fluid.Interfaces.FluidPort_b fluidPort(redeclare final Medium
-            Medium) "Modelica fluid port" annotation (Placement(transformation(
-                extent={{70,-50},{90,-30}}), iconTransformation(extent={{70,-50},
-                  {90,-30}})));
-        Modelica.Electrical.Analog.Interfaces.NegativePin pin if Data.z <> 0
-          "Modelica electrical pin" annotation (Placement(transformation(extent
-                ={{70,30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
+        Modelica.Fluid.Interfaces.FluidPort_b fluidPort(redeclare final package
+            Medium = Medium) "Modelica fluid port" annotation (Placement(
+              transformation(extent={{70,-50},{90,-30}}), iconTransformation(
+                extent={{70,-50},{90,-30}})));
+        // Note:  In Dymola 7.4, "redeclare final package Medium = Medium"
+        // must be used instead of "redeclare final Medium Medium" in
+        // order for this model to pass its check.
 
       equation
         // Thermodynamic state and properties
@@ -693,17 +917,13 @@ package BCs "Models for boundary conditions"
 
         // Efforts
         face.material.rho = (medium.d/medium.MM)*U.mol/U.m^3;
-        face.thermal.T = heatPort.T*U.K;
         medium.h = fluidPort.h_outflow;
 
         // Conservation (no storage)
         0 = face.material.Ndot + (fluidPort.m_flow/medium.MM)*U.mol/U.s
           "Material";
-        0 = face.thermal.Qdot + heatPort.Q_flow*U.W "Energy";
-        // Note:  The enthalpy and kinetic energy terms cancel since there is no
-        // material storage and the thermodynamic state is continuous across the
-        // junction.
 
+        // See the partial model for additional equations.
         annotation (
           Documentation(info="<html><p>The electrical connector (<code>pin</code>) is only included
     if the species is ionic.
@@ -716,11 +936,12 @@ package BCs "Models for boundary conditions"
                 points={{0,-40},{80,-40}},
                 color={0,127,255},
                 smooth=Smooth.None), Line(
-                points={{0,40},{80,40}},
-                color={0,0,255},
-                smooth=Smooth.None)}),
+                points={{0,20},{0,-60}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash)}),
           Diagram(graphics));
-      end Fluid;
+      end FluidNonionic;
 
       model Solid
         "<html>Adapter to connect a single solid species between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a> (heat only)</html>"
@@ -730,7 +951,11 @@ package BCs "Models for boundary conditions"
         annotation (Documentation(info="<html><p>For additional information, see the 
     <a href=\"modelica://FCSys.BCs.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
-    </html>"));
+    </html>"), Icon(graphics={Line(
+                points={{0,20},{0,-20}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash)}));
       end Solid;
 
       package BaseClasses "Base classes (not for direct use)"
@@ -779,29 +1004,327 @@ package BCs "Models for boundary conditions"
             defaultComponentName="species",
             Documentation(info="<html><p>Note that shear force is not included.</p>
   </html>"),
-            Icon(graphics={
-                Line(
+            Icon(graphics={Line(
                   points={{0,0},{-80,0}},
                   color={127,127,127},
-                  smooth=Smooth.None),
-                Line(
+                  smooth=Smooth.None), Line(
                   points={{0,0},{80,0}},
                   color={191,0,0},
-                  smooth=Smooth.None),
-                Line(
-                  points={{0,40},{0,-40}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash)}));
+                  smooth=Smooth.None)}));
         end PartialSpecies;
       end BaseClasses;
     end Species;
+
+    package Junctions "Junctions between pure substances and their mixtures"
+      extends Modelica.Icons.Package;
+
+      model Junction2 "Junction between two pure substances and their mixture"
+        extends BaseClasses.PartialJunction;
+
+        replaceable package Medium1 = Modelica.Media.IdealGases.SingleGases.H2
+            (referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
+              excludeEnthalpyOfFormation=false) constrainedby
+          Modelica.Media.Interfaces.PartialPureSubstance
+          "<html>Medium model for the 1<sup>st</sup> pure substance</html>"
+          annotation (choicesAllMatching=true, Dialog(group=
+                "Material properties"));
+        replaceable package Medium2 = Modelica.Media.IdealGases.SingleGases.H2O
+            (referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
+              excludeEnthalpyOfFormation=false) constrainedby
+          Modelica.Media.Interfaces.PartialPureSubstance
+          "<html>Medium model for the 2<sup>nd</sup> pure substance</html>"
+          annotation (choicesAllMatching=true, Dialog(group=
+                "Material properties"));
+
+        Modelica.Fluid.Interfaces.FluidPort_b purePort1(redeclare final package
+            Medium = Medium1) "Fluid port for the 1st pure substance"
+          annotation (Placement(transformation(extent={{70,28},{90,48}}),
+              iconTransformation(extent={{70,28},{90,48}})));
+        Modelica.Fluid.Interfaces.FluidPort_b purePort2(redeclare final package
+            Medium = Medium2) "Fluid port for the 2nd pure substance"
+          annotation (Placement(transformation(extent={{70,-50},{90,-30}}),
+              iconTransformation(extent={{70,-50},{90,-30}})));
+
+      initial equation
+
+        // Check the number and names of substances
+        assert(MixtureMedium.nS == 2,
+          "The mixture medium must have exactly two substances.");
+        assert(MixtureMedium.substanceNames[1] == Medium1.substanceNames[1],
+          "The first substance of the mixture medium (MixtureMedium) is \"" +
+          MixtureMedium.substanceNames[1] +
+          "\", \nbut the first pure substance is \"" + Medium1.substanceNames[1]
+           + "\".");
+        assert(MixtureMedium.substanceNames[2] == Medium2.substanceNames[1],
+          "The second substance of the mixture medium (MixtureMedium) is \"" +
+          MixtureMedium.substanceNames[2] +
+          "\", \nbut the second pure substance is \"" + Medium2.substanceNames[
+          1] + "\".");
+
+        // Check the extra properties.
+        assert(MixtureMedium.nC == Medium1.nC and MixtureMedium.nC == Medium2.nC,
+          "The media must all have the same number of extra properties.");
+        for i in 1:MixtureMedium.nC loop
+          assert(MixtureMedium.extraPropertiesNames[i] == Medium1.extraPropertiesNames[
+            i], "Extra property #" + String(i) +
+            " of the mixture medium (MixtureMedium) is \"" + MixtureMedium.extraPropertiesNames[
+            i] + "\", \nbut that of the first pure substance (Medium1) is \""
+             + Medium1.extraPropertiesNames[i] + "\".");
+          assert(MixtureMedium.extraPropertiesNames[i] == Medium2.extraPropertiesNames[
+            i], "Extra property #" + String(i) +
+            " of the mixture medium (MixtureMedium) is \"" + MixtureMedium.extraPropertiesNames[
+            i] + "\", \nbut that of the second pure substance (Medium2) is \""
+             + Medium2.extraPropertiesNames[i] + "\".");
+        end for;
+
+      equation
+        // Dalton's law (additivity of pressure)
+        mixturePort.p = purePort1.p + purePort2.p;
+
+        // Streams
+        // -------
+        // Enthalpy
+        purePort1.h_outflow = inStream(mixturePort.h_outflow);
+        purePort2.h_outflow = inStream(mixturePort.h_outflow);
+        mixturePort.h_outflow = X*{inStream(purePort1.h_outflow),inStream(
+          purePort2.h_outflow)};
+        //
+        // Extra properties
+        purePort1.C_outflow = inStream(mixturePort.C_outflow);
+        purePort2.C_outflow = inStream(mixturePort.C_outflow);
+        mixturePort.C_outflow = X*{inStream(purePort1.C_outflow),inStream(
+          purePort2.C_outflow)};
+
+        // Mass conservation (no storage)
+        0 = X[1]*mixturePort.m_flow + purePort1.m_flow "Substance 1";
+        0 = X[2]*mixturePort.m_flow + purePort2.m_flow "Substance 2";
+
+        annotation (
+          defaultComponentName="junction",
+          Documentation(info="<html><p>
+  Assumptions:
+  <ol>
+  <li>The mixing is ideal.  If the pure substances are being combined, 
+  then the massic enthalpy of the mixture is the mass-weighted sum of the pure substances.  
+  If the mixture is being split, then each of the pure substances receives fluid
+  at the same massic enthalpy.
+  </li>
+  <li>The mixture observes Dalton's law.  The pressure of the mixture is the sum 
+  of the pressures of the pure substances.
+  </li>
+  </ol>
+  </p></html>"),
+          Diagram(graphics),
+          Icon(graphics={Line(
+                points={{0,-40},{80,-40}},
+                color={0,127,255},
+                smooth=Smooth.None), Line(
+                points={{0,40},{80,40}},
+                color={0,127,255},
+                smooth=Smooth.None)}));
+      end Junction2;
+
+      model Junction3
+        "Junction between three pure substances and their mixture"
+        extends BaseClasses.PartialJunction(redeclare replaceable package
+            MixtureMedium = Media.CathodeGas);
+        // Note:  In Dymola 7.4, "redeclare package MixtureMedium = Media.CathodeGas"
+        // must be used instead of "redeclare Media.CathodeGas MixtureMedium" in
+        // order for this model to pass its check.  A similar note applies below.
+
+        replaceable package Medium1 = Modelica.Media.IdealGases.SingleGases.H2O
+            (referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
+              excludeEnthalpyOfFormation=false) constrainedby
+          Modelica.Media.Interfaces.PartialPureSubstance
+          "<html>Medium model for the 1<sup>st</sup> pure substance</html>"
+          annotation (choicesAllMatching=true, Dialog(group=
+                "Material properties"));
+        replaceable package Medium2 = Modelica.Media.IdealGases.SingleGases.N2
+            (referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
+              excludeEnthalpyOfFormation=false) constrainedby
+          Modelica.Media.Interfaces.PartialPureSubstance
+          "<html>Medium model for the 2<sup>nd</sup> pure substance</html>"
+          annotation (choicesAllMatching=true, Dialog(group=
+                "Material properties"));
+        replaceable package Medium3 = Modelica.Media.IdealGases.SingleGases.O2
+            (referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
+              excludeEnthalpyOfFormation=false) constrainedby
+          Modelica.Media.Interfaces.PartialPureSubstance
+          "<html>Medium model for the 3<sup>rd</sup> pure substance</html>"
+          annotation (choicesAllMatching=true, Dialog(group=
+                "Material properties"));
+
+        Modelica.Fluid.Interfaces.FluidPort_b purePort1(redeclare final package
+            Medium = Medium1) "Fluid port for the 1st pure substance"
+          annotation (Placement(transformation(extent={{70,28},{90,48}}),
+              iconTransformation(extent={{70,28},{90,48}})));
+        Modelica.Fluid.Interfaces.FluidPort_b purePort2(redeclare final package
+            Medium = Medium2) "Fluid port for the 2nd pure substance"
+          annotation (Placement(transformation(extent={{70,-10},{90,10}}),
+              iconTransformation(extent={{70,-10},{90,10}})));
+        Modelica.Fluid.Interfaces.FluidPort_b purePort3(redeclare final package
+            Medium = Medium3) "Fluid port for the 3rd pure substance"
+          annotation (Placement(transformation(extent={{70,-50},{90,-30}}),
+              iconTransformation(extent={{70,-50},{90,-30}})));
+
+      initial equation
+
+        // Check the number and names of substances
+        assert(MixtureMedium.nS == 3,
+          "The mixture medium must have exactly three substances.");
+        assert(MixtureMedium.substanceNames[1] == Medium1.substanceNames[1],
+          "The first substance of the mixture medium (MixtureMedium) is \"" +
+          MixtureMedium.substanceNames[1] +
+          "\", \nbut the first pure substance is \"" + Medium1.substanceNames[1]
+           + "\".");
+        assert(MixtureMedium.substanceNames[2] == Medium2.substanceNames[1],
+          "The second substance of the mixture medium (MixtureMedium) is \"" +
+          MixtureMedium.substanceNames[2] +
+          "\", \nbut the second pure substance is \"" + Medium2.substanceNames[
+          1] + "\".");
+        assert(MixtureMedium.substanceNames[3] == Medium3.substanceNames[1],
+          "The second substance of the mixture medium (MixtureMedium) is \"" +
+          MixtureMedium.substanceNames[3] +
+          "\", \nbut the third pure substance is \"" + Medium2.substanceNames[1]
+           + "\".");
+
+        // Check the extra properties.
+        assert(MixtureMedium.nC == Medium1.nC and MixtureMedium.nC == Medium2.nC
+           and MixtureMedium.nC == Medium3.nC,
+          "The media must all have the same number of extra properties.");
+        for i in 1:MixtureMedium.nC loop
+          assert(MixtureMedium.extraPropertiesNames[i] == Medium1.extraPropertiesNames[
+            i], "Extra property #" + String(i) +
+            " of the mixture medium (MixtureMedium) is \"" + MixtureMedium.extraPropertiesNames[
+            i] + "\", \nbut that of the first pure substance (Medium1) is \""
+             + Medium1.extraPropertiesNames[i] + "\".");
+          assert(MixtureMedium.extraPropertiesNames[i] == Medium2.extraPropertiesNames[
+            i], "Extra property #" + String(i) +
+            " of the mixture medium (MixtureMedium) is \"" + MixtureMedium.extraPropertiesNames[
+            i] + "\", \nbut that of the second pure substance (Medium2) is \""
+             + Medium2.extraPropertiesNames[i] + "\".");
+          assert(MixtureMedium.extraPropertiesNames[i] == Medium3.extraPropertiesNames[
+            i], "Extra property #" + String(i) +
+            " of the mixture medium (MixtureMedium) is \"" + MixtureMedium.extraPropertiesNames[
+            i] + "\", \nbut that of the third pure substance (Medium3) is \""
+             + Medium3.extraPropertiesNames[i] + "\".");
+        end for;
+
+      equation
+        // Dalton's law (additivity of pressure)
+        mixturePort.p = purePort1.p + purePort2.p + purePort3.p;
+
+        // Streams
+        // -------
+        // Enthalpy
+        purePort1.h_outflow = inStream(mixturePort.h_outflow);
+        purePort2.h_outflow = inStream(mixturePort.h_outflow);
+        purePort3.h_outflow = inStream(mixturePort.h_outflow);
+        mixturePort.h_outflow = X*{inStream(purePort1.h_outflow),inStream(
+          purePort2.h_outflow),inStream(purePort3.h_outflow)};
+        //
+        // Extra properties
+        purePort1.C_outflow = inStream(mixturePort.C_outflow);
+        purePort2.C_outflow = inStream(mixturePort.C_outflow);
+        purePort3.C_outflow = inStream(mixturePort.C_outflow);
+        mixturePort.C_outflow = X*{inStream(purePort1.C_outflow),inStream(
+          purePort2.C_outflow),inStream(purePort3.C_outflow)};
+
+        // Mass conservation (no storage)
+        0 = X[1]*mixturePort.m_flow + purePort1.m_flow "Substance 1";
+        0 = X[2]*mixturePort.m_flow + purePort2.m_flow "Substance 2";
+        0 = X[3]*mixturePort.m_flow + purePort3.m_flow "Substance 3";
+
+        annotation (
+          defaultComponentName="junction",
+          Documentation(info="<html><p>
+  Assumptions:
+  <ol>
+  <li>The mixing is ideal.  If the pure substances are being combined, 
+  then the massic enthalpy of the mixture is the mass-weighted sum of the pure substances.  
+  If the mixture is being split, then each of the pure substances receives fluid
+  at the same massic enthalpy.
+  </li>
+  <li>The mixture observes Dalton's law.  The pressure of the mixture is the sum 
+  of the pressures of the pure substances.
+  </li>
+  </ol>
+  </p></html>"),
+          Diagram(graphics),
+          Icon(graphics={
+              Line(
+                points={{0,-40},{80,-40}},
+                color={0,127,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,40},{80,40}},
+                color={0,127,255},
+                smooth=Smooth.None),
+              Line(
+                points={{6,0},{80,0}},
+                color={0,127,255},
+                smooth=Smooth.None)}));
+      end Junction3;
+
+      package BaseClasses "Base classes (not for direct use)"
+        extends Modelica.Icons.BasesPackage;
+        partial model PartialJunction
+          "Partial model for a junction between pure substances and their mixture"
+          extends FCSys.BaseClasses.Icons.Names.Top3;
+
+          replaceable package MixtureMedium = Media.AnodeGas constrainedby
+            Modelica.Media.Interfaces.PartialMedium
+            "Medium model for the mixture" annotation (choicesAllMatching=true,
+              Dialog(group="Material properties"));
+
+          Modelica.Fluid.Interfaces.FluidPort_a mixturePort(redeclare final
+              package Medium = MixtureMedium) "Fluid port for the mixture"
+            annotation (Placement(transformation(extent={{-90,-10},{-70,10}}),
+                iconTransformation(extent={{-90,-10},{-70,10}})));
+          // Note:  In Dymola 7.4, "redeclare final package Medium = MixtureMedium"
+          // must be used instead of "redeclare final MixtureMedium Medium" in
+          // order for this model to pass its check.
+          SI.MassFraction X[MixtureMedium.nX]
+            "Mass fractions within the mixture";
+
+        equation
+          // Mass fractions
+          X = if MixtureMedium.fixedX then MixtureMedium.reference_X else if
+            MixtureMedium.reducedX then cat(
+                    1,
+                    inStream(mixturePort.Xi_outflow),
+                    1 - sum(X[1:MixtureMedium.nXi])) else inStream(mixturePort.Xi_outflow);
+          X = if MixtureMedium.reducedX then cat(
+                    1,
+                    mixturePort.Xi_outflow,
+                    1 - sum(X[1:MixtureMedium.nXi])) else mixturePort.Xi_outflow;
+
+          annotation (
+            defaultComponentName="junction",
+            Diagram(graphics),
+            Icon(graphics={
+                Line(
+                  points={{-80,0},{0,0}},
+                  color={0,127,255},
+                  smooth=Smooth.None),
+                Line(
+                  points={{0,-40},{0,40}},
+                  color={0,127,255},
+                  smooth=Smooth.None),
+                Ellipse(
+                  extent={{-6,6},{6,-6}},
+                  lineColor={0,127,255},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid)}));
+        end PartialJunction;
+      end BaseClasses;
+    end Junctions;
 
     package Media
       "<html><a href=\"modelica://Modelica.Media\">Modelica media</a> models to interface with the <a href=\"modelica://FCSys.Assemblies.Cells.Cell\">fuel cell</a></html>"
       extends Modelica.Icons.MaterialPropertiesPackage;
 
-      package AnodeGas "Gas mixture for a PEMFC's anode (H2 and H2O)"
+      package AnodeGas "Gas mixture for PEMFC anode (H2 and H2O)"
         extends Modelica.Media.IdealGases.Common.MixtureGasNasa(
           mediumName="AnodeGas",
           data={Modelica.Media.IdealGases.Common.SingleGasesData.H2,Modelica.Media.IdealGases.Common.SingleGasesData.H2O},
@@ -809,14 +1332,17 @@ package BCs "Models for boundary conditions"
           fluidConstants={Modelica.Media.IdealGases.Common.FluidData.H2,
               Modelica.Media.IdealGases.Common.FluidData.H2O},
           substanceNames={"Hydrogen","Water"},
-          reference_X=fill(1/nX, nX));
+          reference_X=fill(1/nX, nX),
+          referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
+
+          excludeEnthalpyOfFormation=false);
 
         annotation (Documentation(info="<html>
 
 </html>"));
       end AnodeGas;
 
-      package CathodeGas "Gas mixture for a PEMFC's cathode (H2O, N2, and O2)"
+      package CathodeGas "Gas mixture for PEMFC cathode (H2O, N2, and O2)"
         extends Modelica.Media.IdealGases.Common.MixtureGasNasa(
           mediumName="CathodeGas",
           data={Modelica.Media.IdealGases.Common.SingleGasesData.H2O,Modelica.Media.IdealGases.Common.SingleGasesData.N2,
@@ -825,145 +1351,16 @@ package BCs "Models for boundary conditions"
               Modelica.Media.IdealGases.Common.FluidData.N2,Modelica.Media.IdealGases.Common.FluidData.O2},
 
           substanceNames={"Water","Nitrogen","Oxygen,"},
-          reference_X=fill(1/nX, nX));
+          reference_X=fill(1/nX, nX),
+          referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
+
+          excludeEnthalpyOfFormation=false);
 
         annotation (Documentation(info="<html>
 
 </html>"));
       end CathodeGas;
     end Media;
-
-    model Junction2 "Junction between two pure substances and their mixture"
-      extends PartialJunction;
-
-      replaceable package Medium1 =
-          Modelica.Media.Interfaces.PartialPureSubstance (final nXi=0)
-        "<html>Medium model for the 1<sup>st</sup> pure substance" annotation (
-          choicesAllMatching=true, Dialog(group="Material properties"));
-      replaceable package Medium2 =
-          Modelica.Media.Interfaces.PartialPureSubstance (final nXi=0)
-        "<html>Medium model for the 2<sup>nd</sup> pure substance" annotation (
-          choicesAllMatching=true, Dialog(group="Material properties"));
-
-      Modelica.Fluid.Interfaces.FluidPort_b purePort1(redeclare final Medium1
-          Medium) "Fluid port for the 1st pure substance" annotation (Placement(
-            transformation(extent={{70,28},{90,48}}), iconTransformation(extent
-              ={{70,28},{90,48}})));
-      Modelica.Fluid.Interfaces.FluidPort_b purePort2(redeclare final Medium2
-          Medium) "Fluid port for the 2nd pure substance" annotation (Placement(
-            transformation(extent={{70,-50},{90,-30}}), iconTransformation(
-              extent={{70,-50},{90,-30}})));
-      annotation (Diagram(graphics), Icon(graphics={
-            Line(
-              points={{0,40},{0,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{0,-40},{80,-40}},
-              color={0,127,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,40},{80,40}},
-              color={0,127,255},
-              smooth=Smooth.None),
-            Line(
-              points={{-80,0},{0,0}},
-              color={0,127,255},
-              smooth=Smooth.None)}));
-
-    initial equation
-      assert(MixtureMedium.nS == 2,
-        "The mixture medium must have exactly 2 substances.");
-
-    equation
-      // Dalton's law (additivity of partial pressures; if mixture is incoming)
-      //purePort1.p = mixtureY_instream[1]*mixturePort.p;
-      //purePort2.p = mixtureY_instream[2]*mixturePort.p;
-
-      mixtureY_instream = mixtureX_instream "**relate properly";
-
-      (purePort1.m_flow + purePort2.m_flow)*mixtureX_instream = {purePort1.m_flow,
-        purePort2.m_flow};
-
-      // Mass fractions of mixture from mass flow rates of pure substances (if
-      // pure substances are incoming)
-      (purePort1.m_flow + purePort2.m_flow)*mixtureX_outflow = {purePort1.m_flow,
-        purePort2.m_flow};
-
-      // Streams
-      // -------
-      // Enthalpy
-      purePort1.h_outflow = mixtureX_instream[1]*inStream(mixturePort.h_outflow);
-      purePort2.h_outflow = mixtureX_instream[2]*inStream(mixturePort.h_outflow);
-      mixturePort.h_outflow = mixtureX_outflow*{inStream(purePort1.h_outflow),
-        inStream(purePort2.h_outflow)};
-      // Extra properties
-      // **C_outflow[Medium.nC]
-      //mixtureX_instream
-
-      // Mass conservation (no storage)
-      0 = mixturePort.p + purePort1.m_flow + purePort2.m_flow;
-
-    end Junction2;
-
-    partial model PartialJunction
-      "Partial model for a junction between pure substances and their mixture"
-      extends FCSys.BaseClasses.Icons.Names.Top3;
-
-      replaceable package MixtureMedium = FCSys.BCs.Adapters.Media.AnodeGas
-        constrainedby Modelica.Media.Interfaces.PartialMedium
-        "Medium model for the mixture" annotation (choicesAllMatching=true,
-          Dialog(group="Material properties"));
-
-      Modelica.Fluid.Interfaces.FluidPort_a mixturePort(redeclare final package
-          Medium = MixtureMedium) "Fluid port for the mixture" annotation (
-          Placement(transformation(extent={{90,-10},{110,10}}),
-            iconTransformation(extent={{-90,-10},{-70,10}})));
-      // Note:  In Dymola 7.3, "redeclare final package Medium = MixtureMedium"
-      // must be used instead of "redeclare final MixtureMedium Medium" in
-      // order for this model to pass its check.
-      SI.MoleFraction mixtureY_instream[MixtureMedium.nX]
-        "Mole fractions of the mixture if incoming";
-      SI.MassFraction mixtureX_instream[MixtureMedium.nX]
-        "Mass fractions of the mixture if incoming";
-      SI.MassFraction mixtureX_outflow[MixtureMedium.nX]
-        "Mass fractions of the mixture if outgoing";
-
-    equation
-      // Mass fractions
-      mixtureX_instream = if MixtureMedium.fixedX then MixtureMedium.reference_X
-         else if MixtureMedium.reducedX then cat(
-            1,
-            inStream(mixturePort.Xi_outflow),
-            1 - sum(mixtureX_instream[1:MixtureMedium.nXi])) else inStream(
-        mixturePort.Xi_outflow);
-      mixtureX_outflow = if MixtureMedium.fixedX then MixtureMedium.reference_X
-         else if MixtureMedium.reducedX then cat(
-            1,
-            mixturePort.Xi_outflow,
-            1 - sum(mixtureX_outflow[1:MixtureMedium.nXi])) else mixturePort.Xi_outflow;
-
-      annotation (Diagram(graphics), Icon(graphics={
-            Line(
-              points={{0,40},{0,-40}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{0,-40},{80,-40}},
-              color={0,127,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,40},{80,40}},
-              color={0,127,255},
-              smooth=Smooth.None),
-            Line(
-              points={{-80,0},{0,0}},
-              color={0,127,255},
-              smooth=Smooth.None)}));
-
-    end PartialJunction;
   end Adapters;
 
   package TestStands "Test stands"
