@@ -24,5 +24,4 @@ for f in *.mo
     do
         aspell --extra-dicts=./.modelica.pws --personal=./$wordfile -c $f
     done
-echo Done.  Press enter to exit.
-read answer
+read -p "Done.  Press [Enter] to exit."

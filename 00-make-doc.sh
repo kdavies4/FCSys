@@ -41,28 +41,17 @@ mv -f FCSys.html index.html
 ./00-process-gh-pages.py
 
 # Be sure that all of the files are added to git.
-#git add images
+git add images
 #git add *.html
-git add *Connectors* # **temp
-git add *Characteristics* # **temp
-git add *Quantities* # **temp
-git add *Units* # **temp
-git add *UsersGuide* # **temp
-git add *Sensors* # **temp
-git add *Subregions* # **temp
+git add FCSys_Connectors* # **temp
+git add FCSys_Characteristics* # **temp
+git add FCSys_Quantities* # **temp
+git add FCSys_Units* # **temp
+git add FCSys_UsersGuide* # **temp
+git add FCSys_Sensors* # **temp
+git add FCSys_Subregions* # **temp
+git add FCSys_BCs* # **temp
 git add FCSys_BaseClasses* # **temp
-git add images/*Connectors* # **temp
-git add images/*Sensors* # **temp
-git add images/*Characteristics* # **temp
-git add images/*Quantities* # **temp
-git add images/*Units* # **temp
-git add images/*UsersGuide* # **temp
-git add images/FCSys.BaseClasses* # **temp
-git add images/*Subregions* # **temp
-git add images/*S.png # **temp
-git add images/exchange.png # **temp
-git add images/transport.png # **temp
-git add images/share*.png # **temp
 
 # Update the Github web pages and return to the original branch.
 git commit -am "Auto-update github pages"

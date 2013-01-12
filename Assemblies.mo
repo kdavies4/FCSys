@@ -9,7 +9,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
       model Cell "<html>Isolated <code>Cell</code> model</html>"
         extends Modelica.Icons.Example;
-        inner FCSys.BCs.Defaults defaults(
+        inner FCSys.BCs.Environment environment(
           analysis=false,
           p=149.6*U.kPa,
           T=333.15*U.K)
@@ -150,7 +150,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
               each gas(inclH2=true, inclH2O=true))))
           annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
-        inner FCSys.BCs.Defaults defaults(analysis=false)
+        inner FCSys.BCs.Environment environment(analysis=false)
           annotation (Placement(transformation(extent={{40,60},{60,80}})));
         FCSys.BCs.Adapters.Phases.Graphite caModelicaAdapt(A=cell.L_y[1]*cell.L_z[
               1])
@@ -228,44 +228,46 @@ package Assemblies "Combinations of regions (e.g., cells)"
       final parameter Q.Length L[Axis](each stateSelect=StateSelect.never) = {
         sum(anFP.L_x) + sum(anGDL.L_x) + sum(anCL.L_x) + sum(pEM.L_x) + sum(
         caCL.L_x) + sum(caGDL.L_x) + sum(caFP.L_x),sum(L_y),sum(L_z)} if
-        defaults.analysis "Total lengths along the x, y, and z axes";
+        environment.analysis "Total lengths along the x, y, and z axes";
       final parameter Q.Area A[Axis](each stateSelect=StateSelect.never) = {L[
-        cartWrap(ax + 2)]*L[cartWrap(ax + 2)] for ax in 1:3} if defaults.analysis
+        cartWrap(ax + 2)]*L[cartWrap(ax + 2)] for ax in 1:3} if environment.analysis
         "Cross-sectional areas";
-      final parameter Q.Volume V=product(L) if defaults.analysis "Volume";
+      final parameter Q.Volume V=product(L) if environment.analysis "Volume";
       output Q.Potential Deltav_x_seg[n_y, n_z](each stateSelect=StateSelect.never)
          = caFP.subregions[caFP.n_x, :, :].graphite.'e-'.mu_face[1, 2] - anFP.subregions[
-        1, :, :].graphite.'e-'.mu_face[1, 1] if defaults.analysis
+        1, :, :].graphite.'e-'.mu_face[1, 1] if environment.analysis
         "Electrical potential differences of the segments (x axis)";
       output Q.Power 'Wdot_e-_x'[n_y, n_z](each stateSelect=StateSelect.never)
          = -(anFP.subregions[1, :, :].graphite.'e-'.mu_face[1, 1] .* anFP.subregions[
         1, :, :].graphite.'e-'.Ndot_face[1, 1] + caFP.subregions[caFP.n_x, :, :].graphite.
         'e-'.mu_face[1, 2] .* caFP.subregions[caFP.n_x, :, :].graphite.'e-'.Ndot_face[
-        1, 2]) if defaults.analysis "Electrical power of the segments (x axis)";
+        1, 2]) if environment.analysis
+        "Electrical power of the segments (x axis)";
       output Q.Current I_x_seg[n_y, n_z](each stateSelect=StateSelect.never) =
         (caFP.subregions[caFP.n_x, :, :].graphite.'e-'.Ndot_face[1, 2] - anFP.subregions[
-        1, :, :].graphite.'e-'.Ndot_face[1, 1])/2 if defaults.analysis
+        1, :, :].graphite.'e-'.Ndot_face[1, 1])/2 if environment.analysis
         "Electrical currents of the segments (x axis)";
       output Q.CurrentAreic Iprimeprime_x[n_y, n_z](each stateSelect=
             StateSelect.never) = {I_x_seg[i_y, i_z]/(L_y[i_y]*L_z[i_z]) for i_z
-         in 1:n_z, i_y in 1:n_y} if defaults.analysis
+         in 1:n_z, i_y in 1:n_y} if environment.analysis
         "Areic electrical current of the segments (x axis)";
       output Q.CurrentAreic Iprimeprime_x_avg(stateSelect=StateSelect.never) =
-        I/A[1] if defaults.analysis "Average areic electrical current (x axis)";
+        I/A[1] if environment.analysis
+        "Average areic electrical current (x axis)";
       output Q.Current Ndot_H2(stateSelect=StateSelect.never) = sum(anFP.subregions[
         1, :, :].gas.H2.Ndot_face[1, 1]) + sum(anFP.subregions[:, 1, :].gas.H2.Ndot_face[
-        2, 1] + anFP.subregions[:, n_y, :].gas.H2.Ndot_face[2, 2]) if defaults.analysis
-        "Rate of hydrogen intake";
+        2, 1] + anFP.subregions[:, n_y, :].gas.H2.Ndot_face[2, 2]) if
+        environment.analysis "Rate of hydrogen intake";
       output Q.Current Ndot_H2O(stateSelect=StateSelect.never) = sum(anFP.subregions[
         1, :, :].gas.H2O.Ndot_face[1, 1] + caFP.subregions[caFP.n_x, :, :].gas.H2O.Ndot_face[
         1, 2]) + sum(anFP.subregions[:, 1, :].gas.H2O.Ndot_face[1, 1] + anFP.subregions[
         :, n_y, :].gas.H2O.Ndot_face[1, 2]) + sum(caFP.subregions[:, 1, :].gas.H2O.Ndot_face[
-        1, 1] - caFP.subregions[:, n_y, :].gas.H2O.Ndot_face[1, 2]) if defaults.analysis
-        "Rate of water intake";
+        1, 1] - caFP.subregions[:, n_y, :].gas.H2O.Ndot_face[1, 2]) if
+        environment.analysis "Rate of water intake";
       output Q.Current Ndot_O2(stateSelect=StateSelect.never) = sum(caFP.subregions[
         caFP.n_x, :, :].gas.O2.Ndot_face[1, 2]) + sum(caFP.subregions[:, 1, :].gas.O2.Ndot_face[
-        1, 1] - caFP.subregions[:, n_y, :].gas.O2.Ndot_face[1, 2]) if defaults.analysis
-        "Rate of oxygen intake";
+        1, 1] - caFP.subregions[:, n_y, :].gas.O2.Ndot_face[1, 2]) if
+        environment.analysis "Rate of oxygen intake";
 
       FCSys.Connectors.FaceBus anFPX[n_y, n_z] "Anode plate face" annotation (
           Placement(transformation(extent={{-90,-10},{-70,10}},rotation=0),
@@ -339,7 +341,8 @@ package Assemblies "Combinations of regions (e.g., cells)"
             transformation(extent={{50,-10},{70,10}})));
 
     protected
-      outer FCSys.BCs.Defaults defaults "Environmental properties and settings";
+      outer FCSys.BCs.Environment environment
+        "Environmental properties and settings";
 
     equation
       // Internal connections (between layers)
@@ -931,47 +934,47 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
       // Auxiliary variables (for analysis)
       final parameter Q.Length L[Axis]={sum(anFP.L_x) + sum(anCGDL.L_x) + sum(
           pEM.L_x) + sum(caCGDL.L_x) + sum(caFP.L_x),sum(L_y),sum(L_z)} if
-        defaults.analysis "Total lengths along the x, y, and z axes";
+        environment.analysis "Total lengths along the x, y, and z axes";
       final parameter Q.Area A[Axis]={L[cartWrap(ax + 2)]*L[cartWrap(ax + 2)]
-          for ax in 1:3} if defaults.analysis "Cross-sectional areas";
-      final parameter Q.Volume V=product(L) if defaults.analysis "Volume";
+          for ax in 1:3} if environment.analysis "Cross-sectional areas";
+      final parameter Q.Volume V=product(L) if environment.analysis "Volume";
       output Q.Potential Deltav_x[n_y, n_z](each stateSelect=StateSelect.never)
          = caFP.subregions[caFP.n_x, :, :].graphite.'e-'.mu_face[1, 2] - anFP.subregions[
-        1, :, :].graphite.'e-'.mu_face[1, 1] if defaults.analysis
+        1, :, :].graphite.'e-'.mu_face[1, 1] if environment.analysis
         "Electrical potential differences of the segments (x axis)";
       output Q.Power 'Wdot_e-_x'[n_y, n_z](each stateSelect=StateSelect.never)
          = anFP.subregions[1, :, :].graphite.'e-'.Ndot_face[1, 1] .* anFP.subregions[
         1, :, :].graphite.'e-'.mu_face[1, 1] + caFP.subregions[caFP.n_x, :, :].graphite.
         'e-'.Ndot_face[1, 2] .* caFP.subregions[caFP.n_x, :, :].graphite.'e-'.mu_face[
-        1, 2] if defaults.analysis
+        1, 2] if environment.analysis
         "Rates of intake of electrical energy of the segments (x axis)";
       output Q.Current I_x[n_y, n_z](each stateSelect=StateSelect.never) = (
         caFP.subregions[caFP.n_x, :, :].graphite.'e-'.Ndot_face[1, 2] - anFP.subregions[
-        1, :, :].graphite.'e-'.Ndot_face[1, 1])/2 if defaults.analysis
+        1, :, :].graphite.'e-'.Ndot_face[1, 1])/2 if environment.analysis
         "Electrical currents of the segments (x axis)";
       output Q.Current I_x_tot(stateSelect=StateSelect.never) = sum(I_x) if
-        defaults.analysis "Total electrical current (x axis)";
+        environment.analysis "Total electrical current (x axis)";
       output Q.CurrentAreic Iprimeprime_x[n_y, n_z](each stateSelect=
             StateSelect.never) = {I_x[i_y, i_z]/(L_y[i_y]*L_z[i_z]) for i_z in
-        1:n_z, i_y in 1:n_y} if defaults.analysis
+        1:n_z, i_y in 1:n_y} if environment.analysis
         "Areic electrical current of the segments (x axis)";
       output Q.CurrentAreic Iprimeprime_x_avg(stateSelect=StateSelect.never) =
-        I_x_tot/A[1] if defaults.analysis
+        I_x_tot/A[1] if environment.analysis
         "Average areic electrical current (x axis)";
       output Q.Current Ndot_H2(stateSelect=StateSelect.never) = sum(anFP.subregions[
         1, :, :].gas.H2.Ndot_face[1, 1]) + sum(anFP.subregions[:, 1, :].gas.H2.Ndot_face[
-        2, 1] + anFP.subregions[:, n_y, :].gas.H2.Ndot_face[2, 2]) if defaults.analysis
-        "Rate of hydrogen intake";
+        2, 1] + anFP.subregions[:, n_y, :].gas.H2.Ndot_face[2, 2]) if
+        environment.analysis "Rate of hydrogen intake";
       output Q.Current Ndot_H2O(stateSelect=StateSelect.never) = sum(anFP.subregions[
         1, :, :].gas.H2O.Ndot_face[1, 1] + caFP.subregions[caFP.n_x, :, :].gas.H2O.Ndot_face[
         1, 2]) + sum(anFP.subregions[:, 1, :].gas.H2O.Ndot_face[1, 1] + anFP.subregions[
         :, n_y, :].gas.H2O.Ndot_face[1, 2]) + sum(caFP.subregions[:, 1, :].gas.H2O.Ndot_face[
-        1, 1] - caFP.subregions[:, n_y, :].gas.H2O.Ndot_face[1, 2]) if defaults.analysis
-        "Rate of water intake";
+        1, 1] - caFP.subregions[:, n_y, :].gas.H2O.Ndot_face[1, 2]) if
+        environment.analysis "Rate of water intake";
       output Q.Current Ndot_O2(stateSelect=StateSelect.never) = sum(caFP.subregions[
         caFP.n_x, :, :].gas.O2.Ndot_face[1, 2]) + sum(caFP.subregions[:, 1, :].gas.O2.Ndot_face[
-        1, 1] - caFP.subregions[:, n_y, :].gas.O2.Ndot_face[1, 2]) if defaults.analysis
-        "Rate of oxygen intake";
+        1, 1] - caFP.subregions[:, n_y, :].gas.O2.Ndot_face[1, 2]) if
+        environment.analysis "Rate of oxygen intake";
       output Q.Power 'Wdot_e-'(stateSelect=StateSelect.never) = sum('Wdot_e-_x')
          + sum(anFP.subregions[:, 1, :].graphite.'e-'.Ndot_face[2, 1] .* anFP.subregions[
         :, 1, :].graphite.'e-'.mu_face[2, 1] + anFP.subregions[:, n_y, :].graphite.
@@ -979,7 +982,7 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         2, 2]) + sum(caFP.subregions[:, 1, :].graphite.'e-'.Ndot_face[2, 1] .*
         caFP.subregions[:, 1, :].graphite.'e-'.mu_face[2, 1] + caFP.subregions[
         :, n_y, :].graphite.'e-'.Ndot_face[2, 2] .* caFP.subregions[:, n_y, :].graphite.
-        'e-'.mu_face[2, 2]) if defaults.analysis
+        'e-'.mu_face[2, 2]) if environment.analysis
         "Rate of electrical work (negative for work done)";
 
       FCSys.Connectors.FaceBus anFPX[n_y, n_z] "Anode plate face" annotation (
@@ -1055,7 +1058,8 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         Placement(transformation(extent={{30,-10},{50,10}})));
 
     protected
-      outer FCSys.BCs.Defaults defaults "Environmental properties and settings";
+      outer FCSys.BCs.Environment environment
+        "Environmental properties and settings";
 
     equation
       // Internal connections (between layers)

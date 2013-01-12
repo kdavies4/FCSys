@@ -53,7 +53,7 @@ package Subregions
           final inclN2=inclN2,
           final inclO2=inclO2))
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-      inner FCSys.BCs.Defaults defaults(analysis=true)
+      inner FCSys.BCs.Environment environment(analysis=true)
         annotation (Placement(transformation(extent={{30,20},{50,40}})));
       replaceable FCSys.BCs.FaceBus.SubregionClosed bC1(
         gas(
@@ -121,7 +121,7 @@ package Subregions
           gas(H2(redeclare FCSys.BCs.Face.Material.Pressure material,
                 materialSpec(k=1*U.atm))),
           graphite(C(redeclare FCSys.BCs.Face.Entropy.Temperature entropyBC,
-                entropySpec(k=defaults.T)), 'e-'(redeclare
+                entropySpec(k=environment.T)), 'e-'(redeclare
                 FCSys.BCs.Face.Material.Current material, redeclare
                 Modelica.Blocks.Sources.Ramp materialSpec(duration=1000, height
                   =2*U.A))),
@@ -154,13 +154,13 @@ package Subregions
                 FCSys.BCs.Face.Material.Pressure material, materialSpec(k=1*U.atm))),
 
           graphite(C(redeclare FCSys.BCs.Face.Entropy.Temperature entropyBC,
-                entropySpec(k=defaults.T)), 'e-'(redeclare
+                entropySpec(k=environment.T)), 'e-'(redeclare
                 FCSys.BCs.Face.Material.Current material, redeclare
                 Modelica.Blocks.Sources.Ramp materialSpec(duration=1000, height
                   =-2*U.A))),
           ionomer('H+'(redeclare FCSys.BCs.Face.Material.Pressure material,
                 materialSpec(k(start=1*U.atm))))),
-        defaults(analysis=false));
+        environment(analysis=false));
 
       extends Modelica.Icons.UnderConstruction;
 
@@ -210,25 +210,25 @@ package Subregions
           final inclN2=inclN2,
           final inclO2=inclO2,
           H2O(
-            p_IC=defaults.p + 1*U.kPa,
+            p_IC=environment.p + 1*U.kPa,
             yNegative(inviscidX=true),
             yPositive(inviscidX=true),
             zNegative(inviscidX=true),
             zPositive(inviscidX=true)),
           N2(
-            p_IC=defaults.p + 1*U.kPa,
+            p_IC=environment.p + 1*U.kPa,
             yNegative(inviscidX=true),
             yPositive(inviscidX=true),
             zNegative(inviscidX=true),
             zPositive(inviscidX=true)),
           O2(
-            p_IC=defaults.p + 1*U.kPa,
+            p_IC=environment.p + 1*U.kPa,
             yNegative(inviscidX=true),
             yPositive(inviscidX=true),
             zNegative(inviscidX=true),
             zPositive(inviscidX=true)),
           H2(
-            p_IC=defaults.p + 1*U.kPa,
+            p_IC=environment.p + 1*U.kPa,
             yNegative(inviscidX=true),
             yPositive(inviscidX=true),
             zNegative(inviscidX=true),
@@ -265,25 +265,25 @@ package Subregions
           each final inclN2=inclN2,
           each final inclO2=inclO2,
           H2(
-            each p_IC=defaults.p,
+            each p_IC=environment.p,
             each yNegative(inviscidX=true),
             each yPositive(inviscidX=true),
             each zNegative(inviscidX=true),
             each zPositive(inviscidX=true)),
           H2O(
-            each p_IC=defaults.p,
+            each p_IC=environment.p,
             each yNegative(inviscidX=true),
             each yPositive(inviscidX=true),
             each zNegative(inviscidX=true),
             each zPositive(inviscidX=true)),
           N2(
-            each p_IC=defaults.p,
+            each p_IC=environment.p,
             each yNegative(inviscidX=true),
             each yPositive(inviscidX=true),
             each zNegative(inviscidX=true),
             each zPositive(inviscidX=true)),
           O2(
-            each p_IC=defaults.p,
+            each p_IC=environment.p,
             each yNegative(inviscidX=true),
             each yPositive(inviscidX=true),
             each zNegative(inviscidX=true),
@@ -319,25 +319,25 @@ package Subregions
           final inclN2=inclN2,
           final inclO2=inclO2,
           H2(
-            p_IC=defaults.p - 1*U.kPa,
+            p_IC=environment.p - 1*U.kPa,
             yNegative(inviscidX=true),
             yPositive(inviscidX=true),
             zNegative(inviscidX=true),
             zPositive(inviscidX=true)),
           H2O(
-            p_IC=defaults.p - 1*U.kPa,
+            p_IC=environment.p - 1*U.kPa,
             yNegative(inviscidX=true),
             yPositive(inviscidX=true),
             zNegative(inviscidX=true),
             zPositive(inviscidX=true)),
           N2(
-            p_IC=defaults.p - 1*U.kPa,
+            p_IC=environment.p - 1*U.kPa,
             yNegative(inviscidX=true),
             yPositive(inviscidX=true),
             zNegative(inviscidX=true),
             zPositive(inviscidX=true)),
           O2(
-            p_IC=defaults.p - 1*U.kPa,
+            p_IC=environment.p - 1*U.kPa,
             yNegative(inviscidX=true),
             yPositive(inviscidX=true),
             zNegative(inviscidX=true),
@@ -366,7 +366,7 @@ package Subregions
         inclZFaces=false)
         annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
-      inner FCSys.BCs.Defaults defaults(analysis=true)
+      inner FCSys.BCs.Environment environment(analysis=true)
         annotation (Placement(transformation(extent={{60,20},{80,40}})));
       replaceable FCSys.BCs.FaceBus.SubregionClosed bC1 constrainedby
         FCSys.BCs.FaceBus.Subregion(
@@ -455,7 +455,7 @@ package Subregions
 
     model SubregionsCAndH2
       "<html>Test a one-dimensional array of subregions with C and H<sub>2</sub></html>"
-      extends SubregionsH2(inclC=true, defaults(analysis=true));
+      extends SubregionsH2(inclC=true, environment(analysis=true));
 
       annotation (
         experiment(StopTime=3, NumberOfIntervals=5000),
@@ -532,7 +532,7 @@ package Subregions
         inclC=true,
         inclH2=false,
         'incle-'=true,
-        defaults(analysis=false));
+        environment(analysis=false));
       extends Modelica.Icons.UnderConstruction;
 
       annotation (
@@ -550,7 +550,7 @@ package Subregions
         subregion1(graphite(C(
               initMethPartNum=InitMethScalar.Pressure,
               V_IC=0.99*subregion1.V,
-              T_IC=1.1*defaults.T,
+              T_IC=1.1*environment.T,
               T(displayUnit="degC"),
               alpha_Qdot=Modelica.Constants.inf))),
         subregions(graphite(C(
@@ -581,18 +581,18 @@ package Subregions
         inclH2=false,
         inclN2=true,
         subregion1(gas(N2(
-              T_IC=1.1*defaults.T,
-              p_IC=defaults.p,
+              T_IC=1.1*environment.T,
+              p_IC=environment.p,
               phi(displayUnit="mm/s"))), graphite(C(
               V_IC=0.5*subregion1.V,
-              T_IC=1.1*defaults.T,
+              T_IC=1.1*environment.T,
               T(displayUnit="degC"),
               alpha_Qdot=Modelica.Constants.inf))),
-        subregions(gas(N2(each p_IC=defaults.p, phi(each displayUnit="mm/s"))),
+        subregions(gas(N2(each p_IC=environment.p, phi(each displayUnit="mm/s"))),
             graphite(C(each V_IC=0.5*subregions[1].V, each T(displayUnit="degC")))),
 
-        subregion2(gas(N2(p_IC=defaults.p, phi(displayUnit="mm/s"))), graphite(
-              C(V_IC=0.5*subregion2.V, T(displayUnit="degC")))),
+        subregion2(gas(N2(p_IC=environment.p, phi(displayUnit="mm/s"))),
+            graphite(C(V_IC=0.5*subregion2.V, T(displayUnit="degC")))),
         redeclare FCSys.BCs.FaceBus.SubregionClosedAdiabatic bC1,
         redeclare FCSys.BCs.FaceBus.SubregionClosedAdiabatic bC2);
 
@@ -637,7 +637,7 @@ package Subregions
             rotation=180,
             origin={30,-24})));
 
-      inner FCSys.BCs.Defaults defaults(analysis=true)
+      inner FCSys.BCs.Environment environment(analysis=true)
         annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
     equation
       connect(species1.chemical, reaction.chemical[1]) annotation (Line(
@@ -705,7 +705,7 @@ package Subregions
             rotation=180,
             origin={30,-24})));
 
-      inner FCSys.BCs.Defaults defaults(analysis=true)
+      inner FCSys.BCs.Environment environment(analysis=true)
         annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
     equation
       connect('e-'.chemical, reaction.chemical[1]) annotation (Line(
@@ -744,7 +744,7 @@ package Subregions
            + 2)] for ax in 1:3} "Cross-sectional area";
       final parameter Q.Volume V=product(L) "Volume";
 
-      inner FCSys.BCs.Defaults defaults(analysis=false)
+      inner FCSys.BCs.Environment environment(analysis=false)
         annotation (Placement(transformation(extent={{20,20},{40,40}})));
       replaceable Species.H2.Gas.Fixed species constrainedby
         FCSys.Subregions.Species.Species
@@ -812,7 +812,7 @@ package Subregions
             zNegative(inviscidX=true),
             zPositive(inviscidX=true)),
           H2(
-            p_IC=1.05*defaults.p,
+            p_IC=1.05*environment.p,
             yNegative(inviscidX=true),
             yPositive(inviscidX=true),
             zNegative(inviscidX=true),
@@ -867,19 +867,19 @@ package Subregions
           inclN2=false,
           inclO2=true,
           H2O(
-            p_IC=0.95*defaults.p,
+            p_IC=0.95*environment.p,
             yNegative(inviscidX=true),
             yPositive(inviscidX=true),
             zNegative(inviscidX=true),
             zPositive(inviscidX=true)),
           N2(
-            p_IC=0.95*defaults.p,
+            p_IC=0.95*environment.p,
             yNegative(inviscidX=true),
             yPositive(inviscidX=true),
             zNegative(inviscidX=true),
             zPositive(inviscidX=true)),
           O2(
-            p_IC=0.95*defaults.p,
+            p_IC=0.95*environment.p,
             yNegative(inviscidX=true),
             yPositive(inviscidX=true),
             zNegative(inviscidX=true),
@@ -908,7 +908,7 @@ package Subregions
         inclZFaces=false)
         annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
-      inner FCSys.BCs.Defaults defaults(analysis=true)
+      inner FCSys.BCs.Environment environment(analysis=true)
         annotation (Placement(transformation(extent={{60,20},{80,40}})));
       replaceable FCSys.BCs.FaceBus.SubregionFlow bC1 constrainedby
         FCSys.BCs.FaceBus.Subregion(gas(
@@ -919,7 +919,7 @@ package Subregions
           inclC=true,
           'incle-'=true,
           C(redeclare FCSys.BCs.Face.Species.Entropy.Temperature entropyBC,
-              entropySpec(k=defaults.T)),
+              entropySpec(k=environment.T)),
           'e-'(redeclare FCSys.BCs.Face.Species.Material.Current material,
               redeclare Modelica.Blocks.Sources.Ramp materialSpec(duration=1000,
                 height=-2*U.A)))) annotation (__Dymola_choicesFromPackage=true,
@@ -936,7 +936,7 @@ package Subregions
           inclC=true,
           'incle-'=true,
           C(redeclare FCSys.BCs.Face.Species.Entropy.Temperature entropyBC,
-              entropySpec(k=defaults.T)),
+              entropySpec(k=environment.T)),
           'e-'(redeclare FCSys.BCs.Face.Species.Material.Current material,
               redeclare Modelica.Blocks.Sources.Ramp materialSpec(duration=1000,
                 height=2*U.A)))) annotation (__Dymola_choicesFromPackage=true,
@@ -3736,7 +3736,8 @@ package Subregions
             enable=reduceTemp),
           choices(__Dymola_checkBox=true));
 
-        parameter Q.TemperatureAbsolute T_IC(nominal=298.15*U.K,start=defaults.T)
+        parameter Q.TemperatureAbsolute T_IC(nominal=298.15*U.K,start=
+              environment.T)
           "<html>Initial temperature (<i>T</i><sub>IC</sub>)</html>"
           annotation (Dialog(tab="Initialization",group="Temperature"));
         // This is always enabled in the dialog since it's used as a guess value.
@@ -3816,9 +3817,9 @@ package Subregions
               rotation=180,
               origin={0,0})));
 
-        outer BCs.Defaults defaults "Default settings" annotation (Placement(
-              transformation(extent={{40,40},{60,60}}),iconTransformation(
-                extent={{-10,90},{10,110}})));
+        outer BCs.Environment environment "Environmental settings" annotation (
+            Placement(transformation(extent={{40,40},{60,60}}),
+              iconTransformation(extent={{-10,90},{10,110}})));
 
       equation
         // Inert interactions
@@ -3844,50 +3845,58 @@ package Subregions
 <p>Notes:<ul>
   <li>The x-axis component of linear momentum is included by default.  At least one component must be included.</li></ul></html>"),
 
-          Icon(graphics={Ellipse(
-                      extent={{-40,100},{40,20}},
-                      lineColor={127,127,127},
-                      startAngle=30,
-                      endAngle=149,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{20,-4},{100,-84}},
-                      lineColor={127,127,127},
-                      startAngle=270,
-                      endAngle=390,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{-100,-4},{-20,-84}},
-                      lineColor={127,127,127},
-                      startAngle=149,
-                      endAngle=270,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Polygon(
-                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
-                  80},{94.5,-24},{60,-84}},
-                      pattern=LinePattern.None,
-                      fillPattern=FillPattern.Sphere,
-                      smooth=Smooth.None,
-                      fillColor={225,225,225},
-                      lineColor={0,0,0}),Line(
-                      points={{-60,-84},{60,-84}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{34.5,80},{94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{-34.5,80},{-94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}),
+          Icon(graphics={
+              Ellipse(
+                extent={{-40,100},{40,20}},
+                lineColor={127,127,127},
+                startAngle=30,
+                endAngle=149,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{20,-4},{100,-84}},
+                lineColor={127,127,127},
+                startAngle=270,
+                endAngle=390,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{-100,-4},{-20,-84}},
+                lineColor={127,127,127},
+                startAngle=149,
+                endAngle=270,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Polygon(
+                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
+                    94.5,-24},{60,-84}},
+                pattern=LinePattern.None,
+                fillPattern=FillPattern.Sphere,
+                smooth=Smooth.None,
+                fillColor={225,225,225},
+                lineColor={0,0,0}),
+              Line(
+                points={{-60,-84},{60,-84}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{34.5,80},{94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{-34.5,80},{-94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}),
           Diagram(graphics));
       end NullPhase;
     end BaseClasses;
@@ -3901,8 +3910,14 @@ package Subregions
       package Graphite "C graphite"
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
-          extends SpeciesSolid(redeclare replaceable
-              FCSys.Characteristics.C.Graphite Data, R=k_R*Data.R(T));
+          extends SpeciesSolid(redeclare replaceable package Data =
+                FCSys.Characteristics.C.Graphite, R=k_R*Data.R(T));
+          // Note:  In Dymola 7.4,
+          // "redeclare replaceable package Data = FCSys.Characteristics.C.Graphite"
+          // must be used instead of
+          // "redeclare replaceable FCSys.Characteristics.C.Graphite Data" in
+          // order for this model to pass its check.  This applies to the other
+          // species models too.
 
           parameter Q.NumberAbsolute k_R(final nominal=1) = 1
             "<html>Adjustment factor for thermal resistivity (<i>k</i><sub><i>R</i></sub>)</html>"
@@ -3925,8 +3940,8 @@ package Subregions
         end Calibrated;
 
         model Correlated "Correlated properties"
-          extends SpeciesSolid(redeclare replaceable
-              FCSys.Characteristics.C.Graphite Data, R=Data.R(T));
+          extends SpeciesSolid(redeclare replaceable package Data =
+                FCSys.Characteristics.C.Graphite, R=Data.R(T));
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -3939,22 +3954,22 @@ package Subregions
         end Correlated;
 
         model Fixed "Fixed properties"
-          extends SpeciesSolid(redeclare replaceable
-              FCSys.Characteristics.C.Graphite Data(
-              Deltah0_f=0,
-              Deltah0=0,
-              specHeatCapPow=0,
-              T_lim_c={0,Modelica.Constants.inf},
-              b_c=[935*U.J*Data.m/(U.kg*U.K)],
-              B_c=[-298.15*U.K*935*U.J*Data.m/(U.kg*U.K) + Data.Deltah0_f,
-                  Polynomial.F(
-                          298.15*U.K,
-                          FCSys.Characteristics.C.Graphite.b_c[1, :],
-                          -3) + FCSys.Characteristics.C.Graphite.B_c[1, 2] -
-                  Data.b_c[1, 1]*ln(298.15*U.K)]), redeclare parameter
+          extends SpeciesSolid(redeclare replaceable package Data =
+                FCSys.Characteristics.C.Graphite (
+                Deltah0_f=0,
+                Deltah0=0,
+                specHeatCapPow=0,
+                T_lim_c={0,Modelica.Constants.inf},
+                b_c=[935*U.J*Data.m/(U.kg*U.K)],
+                B_c=[-298.15*U.K*935*U.J*Data.m/(U.kg*U.K) + Data.Deltah0_f,
+                    Polynomial.F(
+                            298.15*U.K,
+                            FCSys.Characteristics.C.Graphite.b_c[1, :],
+                            -3) + FCSys.Characteristics.C.Graphite.B_c[1, 2] -
+                    Data.b_c[1, 1]*ln(298.15*U.K)]), redeclare parameter
               Q.Resistivity R=U.m*U.K/(5.70*U.W));
           // See the documentation for a table of values.
-          // Note:  Parameter expressions (e.g., involving defaults.T) are not used
+          // Note:  Parameter expressions (e.g., involving environment.T) are not used
           // here since they would render the parameters unadjustable in Dymola 7.4.
           // A similar note applies to the other species.
 
@@ -4019,8 +4034,8 @@ package Subregions
         "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S ionomer</html>"
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
-          extends SpeciesSolid(redeclare replaceable
-              FCSys.Characteristics.C19HF37O5S.Ionomer Data, R=k_R*Data.R(T));
+          extends SpeciesSolid(redeclare replaceable package Data =
+                FCSys.Characteristics.C19HF37O5S.Ionomer, R=k_R*Data.R(T));
 
           parameter Q.NumberAbsolute k_R(final nominal=1) = 1
             "<html>Adjustment factor for thermal resistivity (<i>k</i><sub><i>R</i></sub>)</html>"
@@ -4036,8 +4051,8 @@ package Subregions
         end Calibrated;
 
         model Correlated "Correlated properties"
-          extends SpeciesSolid(redeclare replaceable
-              FCSys.Characteristics.C19HF37O5S.Ionomer Data, R=Data.R(T));
+          extends SpeciesSolid(redeclare replaceable package Data =
+                FCSys.Characteristics.C19HF37O5S.Ionomer,R=Data.R(T));
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -4047,9 +4062,9 @@ package Subregions
         end Correlated;
 
         model Fixed "Fixed properties"
-          extends SpeciesSolid(redeclare replaceable
-              FCSys.Characteristics.C19HF37O5S.Ionomer Data, redeclare
-              parameter Q.ResistivityThermal R=Data.R());
+          extends SpeciesSolid(redeclare replaceable package Data =
+                FCSys.Characteristics.C19HF37O5S.Ionomer,redeclare parameter
+              Q.ResistivityThermal R=Data.R());
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -4075,7 +4090,8 @@ package Subregions
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.'e-'.Graphite Data,
+            redeclare replaceable package Data =
+                FCSys.Characteristics.'e-'.Graphite,
             Xi=k_Xi*Data.Xi(T),
             F=k_F*Data.F(T),
             R=k_R*Data.R(T));
@@ -4099,7 +4115,8 @@ package Subregions
 
         model Correlated "Correlated properties"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.'e-'.Graphite Data,
+            redeclare replaceable package Data =
+                FCSys.Characteristics.'e-'.Graphite,
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
@@ -4113,7 +4130,8 @@ package Subregions
 
         model Fixed "Fixed properties"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.'e-'.Graphite Data,
+            redeclare replaceable package Data =
+                FCSys.Characteristics.'e-'.Graphite,
             redeclare parameter Q.Fusivity Xi=Data.Xi(),
             redeclare parameter Q.Fluidity F=Data.F(),
             redeclare parameter Q.ResistivityThermal R=Data.R());
@@ -4137,7 +4155,8 @@ package Subregions
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.'H+'.Ionomer Data,
+            redeclare replaceable package Data =
+                FCSys.Characteristics.'H+'.Ionomer,
             Xi=k_Xi*Data.Xi(T),
             F=k_F*Data.F(T),
             R=k_R*Data.R(T));
@@ -4161,7 +4180,8 @@ package Subregions
 
         model Correlated "Correlated properties"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.'H+'.Ionomer Data,
+            redeclare replaceable package Data =
+                FCSys.Characteristics.'H+'.Ionomer,
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
@@ -4175,7 +4195,8 @@ package Subregions
 
         model Fixed "Fixed properties"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.'H+'.Ionomer Data,
+            redeclare replaceable package Data =
+                FCSys.Characteristics.'H+'.Ionomer,
             redeclare parameter Q.Fusivity Xi=Data.Xi(),
             redeclare parameter Q.Fluidity F=Data.F(),
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(0.1661*U.W));
@@ -4262,8 +4283,8 @@ package Subregions
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.H2.Gas Data(b_v=[1],
-                specVolPow={-1,0}),
+            redeclare replaceable package Data = FCSys.Characteristics.H2.Gas (
+                  b_v=[1], specVolPow={-1,0}),
             Xi=k_Xi*Data.Xi(T),
             F=k_F*Data.F(T),
             R=k_R*Data.R(T));
@@ -4289,8 +4310,8 @@ package Subregions
 
         model Correlated "Correlated properties"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.H2.Gas Data(b_v=[1],
-                specVolPow={-1,0}),
+            redeclare replaceable package Data = FCSys.Characteristics.H2.Gas (
+                  b_v=[1], specVolPow={-1,0}),
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
@@ -4313,9 +4334,6 @@ package Subregions
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(183e-3*U.W));
 
           // See the documentation for a table of values.
-
-          // **note: not good in Dymola 7.4: redeclare replaceable FCSys.Characteristics.H2.Gas Data(
-          // **update the other Species models.
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -4387,8 +4405,8 @@ and <code>R=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas 
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.H2O.Gas Data(b_v=[1],
-                specVolPow={-1,0}),
+            redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas
+                (b_v=[1], specVolPow={-1,0}),
             Xi=k_Xi*Data.Xi(T),
             F=k_F*Data.F(T),
             R=k_R*Data.R(T));
@@ -4414,8 +4432,8 @@ and <code>R=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas 
 
         model Correlated "Correlated properties"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.H2O.Gas Data(b_v=[1],
-                specVolPow={-1,0}),
+            redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas
+                (b_v=[1], specVolPow={-1,0}),
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
@@ -4431,8 +4449,8 @@ and <code>R=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas 
 
         model Fixed "Fixed properties"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.H2O.Gas Data(b_v=[1],
-                specVolPow={-1,0}),
+            redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas
+                (b_v=[1], specVolPow={-1,0}),
             redeclare parameter Q.Fusivity Xi=Data.Xi(),
             redeclare parameter Q.Fluidity F=1/(9.09e-6*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(19.6e-3*U.W));
@@ -4556,8 +4574,9 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.H2O.Ionomer Data(b_v=[1],
-                specVolPow={-1,0}),
+            redeclare replaceable package Data =
+                FCSys.Characteristics.H2O.Ionomer (b_v=[1], specVolPow={-1,0}),
+
             Xi=k_Xi*Data.Xi(T),
             F=k_F*Data.F(T),
             R=k_R*Data.R(T));
@@ -4583,8 +4602,9 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
 
         model Correlated "Correlated properties"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.H2O.Ionomer Data(b_v=[1],
-                specVolPow={-1,0}),
+            redeclare replaceable package Data =
+                FCSys.Characteristics.H2O.Ionomer (b_v=[1], specVolPow={-1,0}),
+
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
@@ -4600,8 +4620,9 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
 
         model Fixed "Fixed properties"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.H2O.Ionomer Data(b_v=[1],
-                specVolPow={-1,0}),
+            redeclare replaceable package Data =
+                FCSys.Characteristics.H2O.Ionomer (b_v=[1], specVolPow={-1,0}),
+
             redeclare parameter Q.Fusivity Xi=Data.Xi(),
             redeclare parameter Q.Fluidity F=Data.F(),
             redeclare parameter Q.ResistivityThermal R=Data.R());
@@ -4623,7 +4644,8 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.H2O.Liquid Data,
+            redeclare replaceable package Data =
+                FCSys.Characteristics.H2O.Liquid,
             Xi=k_Xi*Data.Xi(T),
             F=k_F*Data.F(T),
             R=k_R*Data.R(T));
@@ -4647,7 +4669,8 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
 
         model Correlated "Correlated properties"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.H2O.Liquid Data,
+            redeclare replaceable package Data =
+                FCSys.Characteristics.H2O.Liquid,
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
@@ -4661,7 +4684,8 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
 
         model Fixed "Fixed properties"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.H2O.Liquid Data,
+            redeclare replaceable package Data =
+                FCSys.Characteristics.H2O.Liquid,
             redeclare parameter Q.Fusivity Xi=Data.Xi(),
             redeclare parameter Q.Fluidity F=1/(855e-6*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(613e-3*U.W));
@@ -4764,8 +4788,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.N2.Gas Data(b_v=[1],
-                specVolPow={-1,0}),
+            redeclare replaceable package Data = FCSys.Characteristics.N2.Gas (
+                  b_v=[1], specVolPow={-1,0}),
             Xi=k_Xi*Data.Xi(T),
             F=k_F*Data.F(T),
             R=k_R*Data.R(T));
@@ -4791,8 +4815,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
 
         model Correlated "Correlated properties"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.N2.Gas Data(b_v=[1],
-                specVolPow={-1,0}),
+            redeclare replaceable package Data = FCSys.Characteristics.N2.Gas (
+                  b_v=[1], specVolPow={-1,0}),
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
@@ -4808,18 +4832,18 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
 
         model Fixed "Fixed properties"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.N2.Gas Data(
-              b_v=[1],
-              specVolPow={-1,0},
-              specHeatCapPow=0,
-              T_lim_c={0,Modelica.Constants.inf},
-              b_c=[1.041e3*U.J*Data.m/(U.kg*U.K)],
-              B_c=[-298.15*U.K*1.041e3*U.J*Data.m/(U.kg*U.K) + Data.Deltah0_f,
-                  Polynomial.F(
-                          298.15*U.K,
-                          FCSys.Characteristics.N2.Gas.b_c[1, :],
-                          -3) + FCSys.Characteristics.N2.Gas.B_c[1, 2] - Data.b_c[
-                  1, 1]*ln(298.15*U.K)]),
+            redeclare replaceable package Data = FCSys.Characteristics.N2.Gas (
+                b_v=[1],
+                specVolPow={-1,0},
+                specHeatCapPow=0,
+                T_lim_c={0,Modelica.Constants.inf},
+                b_c=[1.041e3*U.J*Data.m/(U.kg*U.K)],
+                B_c=[-298.15*U.K*1.041e3*U.J*Data.m/(U.kg*U.K) + Data.Deltah0_f,
+                    Polynomial.F(
+                            298.15*U.K,
+                            FCSys.Characteristics.N2.Gas.b_c[1, :],
+                            -3) + FCSys.Characteristics.N2.Gas.B_c[1, 2] - Data.b_c[
+                    1, 1]*ln(298.15*U.K)]),
             redeclare parameter Q.Fusivity Xi=Data.Xi(),
             redeclare parameter Q.Fluidity F=1/(178.2e-7*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(25.9e-3*U.W));
@@ -4883,8 +4907,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.O2.Gas Data(b_v=[1],
-                specVolPow={-1,0}),
+            redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
+                  b_v=[1], specVolPow={-1,0}),
             Xi=k_Xi*Data.Xi(T),
             F=k_F*Data.F(T),
             R=k_R*Data.R(T));
@@ -4909,8 +4933,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
 
         model Correlated "Correlated properties"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.O2.Gas Data(b_v=[1],
-                specVolPow={-1,0}),
+            redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
+                  b_v=[1], specVolPow={-1,0}),
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
@@ -4926,8 +4950,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
 
         model Fixed "Fixed properties"
           extends Species(
-            redeclare replaceable FCSys.Characteristics.O2.Gas Data(b_v=[1],
-                specVolPow={-1,0}),
+            redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
+                  b_v=[1], specVolPow={-1,0}),
             redeclare parameter Q.Fusivity Xi=Data.Xi(),
             redeclare parameter Q.Fluidity F=1/(207.2e-7*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(26.8e-3*U.W));
@@ -5211,7 +5235,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
           tab="Initialization",
           group="Scalar properties",
           enable=initMethPartNum == 7 or initMethTemp == 7));
-      parameter Q.PressureAbsolute p_IC(start=defaults.p)
+      parameter Q.PressureAbsolute p_IC(start=environment.p)
         "<html>Initial pressure (<i>p</i><sub>IC</sub>)</html>"
         annotation (Dialog(tab="Initialization",group="Scalar properties"));
       parameter Q.PressureRate derp_IC=0
@@ -5220,7 +5244,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
           tab="Initialization",
           group="Scalar properties",
           enable=initMethPartNum == 9 or initMethTemp == 9));
-      parameter Q.TemperatureAbsolute T_IC(nominal=298.15*U.K, start=defaults.T)
+      parameter Q.TemperatureAbsolute T_IC(nominal=298.15*U.K, start=
+            environment.T)
         "<html>Initial temperature (<i>T</i><sub>IC</sub>)</html>"
         annotation (Dialog(tab="Initialization",group="Scalar properties"));
       parameter Q.TemperatureRate derT_IC=0
@@ -5364,11 +5389,11 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
       // ----------------------------------
       // Misc. properties and conditions
       output Q.AmountVolumic rho(stateSelect=StateSelect.never) = N/V if
-        defaults.analysis "Molar density";
+        environment.analysis "Molar density";
       // Note:  The reciprocal, specific volume (v), isn't included because
       // particle number (N) can be zero.
       output Q.PressureAbsolute q[n_lin](each stateSelect=StateSelect.never) =
-        Data.m*phi .* I ./ (2*A[cartAxes]) if defaults.analysis
+        Data.m*phi .* I ./ (2*A[cartAxes]) if environment.analysis
         "Dynamic pressure";
       //
       // Capacitances
@@ -5377,97 +5402,98 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
             v=1/rho,
             T=T,
             dv=U.m^3/U.C,
-            dT=0) else 0 if defaults.analysis "Chemical capacitance";
+            dT=0) else 0 if environment.analysis "Chemical capacitance";
       // Note:  This is delN/delg at constant T and V.
       output Q.CapacityThermal C_V(stateSelect=StateSelect.never) = N*c_V if
-        defaults.analysis "Isochoric heat capacity";
+        environment.analysis "Isochoric heat capacity";
       //
       // Time constants
       output Q.Time tau_exch_mechanical(stateSelect=StateSelect.never) =
-        alpha_F*N/Lstar if defaults.analysis
+        alpha_F*N/Lstar if environment.analysis
         "Time constant for mechanical exchange";
       output Q.Time tau_exch_thermal(stateSelect=StateSelect.never) = alpha_R*N
-        /Lstar if defaults.analysis "Time constant for thermal exchange";
+        /Lstar if environment.analysis "Time constant for thermal exchange";
       output Q.Time tau_trans_mat[Axis](each stateSelect=StateSelect.never) =
-        fill(alpha_Xi*N, 3) ./ Lstar_trans if defaults.analysis
+        fill(alpha_Xi*N, 3) ./ Lstar_trans if environment.analysis
         "Time constants for material transport";
       output Q.Time tau_trans_mech[Axis](each stateSelect=StateSelect.never) =
-        fill(alpha_F*N, 3) ./ Lstar_trans if defaults.analysis
+        fill(alpha_F*N, 3) ./ Lstar_trans if environment.analysis
         "Time constants for mechanical transport";
       output Q.Time tau_trans_therm[Axis](each stateSelect=StateSelect.never)
-         = fill(alpha_R*N, 3) ./ Lstar_trans if defaults.analysis
+         = fill(alpha_R*N, 3) ./ Lstar_trans if environment.analysis
         "Time constants for thermal transport";
       //
       // Peclet numbers (only for the axes with linear momentum included; others are
       // zero)
       output Q.Number Pe_mat[n_lin](each stateSelect=StateSelect.never) = I*
-        alpha_Xi ./ Lstar_trans[cartAxes] if defaults.analysis
+        alpha_Xi ./ Lstar_trans[cartAxes] if environment.analysis
         "Material Peclet numbers";
       output Q.Number Pe_mech[n_lin](each stateSelect=StateSelect.never) = I*
-        alpha_F ./ Lstar_trans[cartAxes] if defaults.analysis
+        alpha_F ./ Lstar_trans[cartAxes] if environment.analysis
         "Mechanical Peclet numbers";
       output Q.Number Pe_therm[n_lin](each stateSelect=StateSelect.never) = I*
-        alpha_R ./ Lstar_trans[cartAxes] if defaults.analysis
+        alpha_R ./ Lstar_trans[cartAxes] if environment.analysis
         "Thermal Peclet numbers";
       //
       // Bulk flow rates
       output Q.Force mphiI[n_lin, Orientation](each stateSelect=StateSelect.never)
          = {(if inclLin[cartWrap(cartAxes[axis] + orientation)] then Data.m*phi[
         linAxes[cartWrap(cartAxes[axis] + orientation)]]*I[axis] else 0) for
-        orientation in Orientation, axis in 1:n_lin} if n_lin > 0 and defaults.analysis
-        "Bulk rate of mechanical advection";
+        orientation in Orientation, axis in 1:n_lin} if n_lin > 0 and
+        environment.analysis "Bulk rate of mechanical advection";
       output Q.Power TsI[n_lin](each stateSelect=StateSelect.never) = T*s*I if
-        defaults.analysis "Bulk rate of thermal advection";
+        environment.analysis "Bulk rate of thermal advection";
       //
       // Linear momentum balance
       output Q.Force Ma[n_lin](each stateSelect=StateSelect.never) = M*(der(phi)
-        /U.s - defaults.a[cartAxes]) if defaults.analysis
+        /U.s - environment.a[cartAxes]) if environment.analysis
         "Acceleration force relative to the frame of reference (constant mass)";
       output Q.Force f_exch_adv[n_lin](each stateSelect=StateSelect.never) =
-        chemical.mPhidot - Data.m*phi*chemical.Ndot if defaults.analysis
+        chemical.mPhidot - Data.m*phi*chemical.Ndot if environment.analysis
         "Acceleration force due to material (advective) exchange";
       output Q.Force f_exch_diff[n_lin](each stateSelect=StateSelect.never) =
-        common.mechanical.mPhidot + inert.mPhidot if defaults.analysis
+        common.mechanical.mPhidot + inert.mPhidot if environment.analysis
         "Friction from other species (diffusive exchange)";
       output Q.Force f_trans_adv[n_lin](each stateSelect=StateSelect.never) = {
         Data.m*Delta(Data.v_Tp(T_face[cartAxes[axis], :], p_face[cartAxes[axis],
         :]) .* Ndot_face[cartAxes[axis], :] .^ 2)/A[cartAxes[axis]] + sum(Data.m
         *Sigma(phi_face[cartWrap(cartAxes[axis] - orientation), :, orientation]
          .* Ndot_face[cartWrap(cartAxes[axis] - orientation), :]) for
-        orientation in Orientation) for axis in 1:n_lin} if defaults.analysis
+        orientation in Orientation) for axis in 1:n_lin} if environment.analysis
         "Acceleration force due to material (advective) transport";
       output Q.Force f_trans_diff[n_lin](each stateSelect=StateSelect.never) =
         {A[cartAxes[axis]]*Delta(p_face[cartAxes[axis], :]) + sum(Sigma(
         mPhidot_face[cartWrap(cartAxes[axis] - orientation), :, orientation])
-        for orientation in Orientation) for axis in 1:n_lin} if defaults.analysis
+        for orientation in Orientation) for axis in 1:n_lin} if environment.analysis
         "Friction from other subregions (diffusive transport; includes volume viscosity)";
       //
       // Energy balance
       output Q.Power Ndere(stateSelect=StateSelect.never) = (N*(der(h) + Data.m
-        *der(phi*phi)/2) - V*der(p))/U.s if defaults.analysis
+        *der(phi*phi)/2) - V*der(p))/U.s if environment.analysis
         "Rate of energy storage (internal and kinetic) at constant mass";
       output Q.Power Wdot_exch(stateSelect=StateSelect.never) = -((Data.m*(
         chemical.hbar - phi*phi/2) - h)*chemical.Ndot + chemical.phi*chemical.mPhidot
-        /2) if defaults.analysis
+        /2) if environment.analysis
         "Relative rate of work (internal, flow, and kinetic) done by chemical exchange (advection)";
       output Q.Power Qdot_gen_exch(stateSelect=StateSelect.never) = phi*common.mechanical.mPhidot
-         + inert.phi*inert.mPhidot if defaults.analysis
+         + inert.phi*inert.mPhidot if environment.analysis
         "Rate of heat generation due to friction with other species";
       output Q.Power Qdot_exch(stateSelect=StateSelect.never) = common.thermal.Qdot
-         + inert.Qdot if defaults.analysis
+         + inert.Qdot if environment.analysis
         "Rate of thermal conduction from other species";
       output Q.Power Wdot_trans(stateSelect=StateSelect.never) = -sum(sum((
         Data.h(T_face[axis, side], p_face[axis, side]) + Data.m*((Data.v_Tp(
         T_face[axis, side], p_face[axis, side])*Ndot_face[axis, side]/A[axis])^
         2 + phi_face[axis, side, :]*phi_face[axis, side, :])/2 - h - Data.m*phi
         *phi/2)*Ndot_face[axis, side] for side in Side) for axis in Axis) if
-        defaults.analysis
+        environment.analysis
         "Relative rate of work (internal, flow, and kinetic) done by material transport (advection)";
       output Q.Power Qdot_gen_trans(stateSelect=StateSelect.never) = sum(
-        phi_face .* mPhidot_face) if defaults.analysis
+        phi_face .* mPhidot_face) if environment.analysis
         "Rate of heat generation due to friction with other subregions";
       output Q.Power Qdot_trans(stateSelect=StateSelect.never) = sum(Qdot_face)
-        if defaults.analysis "Rate of thermal conduction from other subregions";
+        if environment.analysis
+        "Rate of thermal conduction from other subregions";
       // Note:  These auxiliary variables should not be used as states; the
       // structure of the problem should not change if they are included.
 
@@ -5680,15 +5706,15 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         "Temperatures at the faces";
       Q.Power Qdot_face[Axis, Side] "Heat flow rates into the faces";
 
-      outer FCSys.BCs.Defaults defaults "Default settings" annotation (
-          missingInnerMessage="Your model is using an outer \"defaults\" record, but an inner \"defaults\" record is not defined.
-For simulation, specify global default settings by dragging FCSys.BCs.Defaults into your model.
+      outer FCSys.BCs.Environment environment "Environmental settings"
+        annotation (missingInnerMessage="Your model is using an outer \"environment\" record, but an inner \"environment\" record is not defined.
+For simulation, specify global default settings by dragging FCSys.BCs.Environment into your model.
 The default global default settings will be used for the current simulation.",
           Placement(transformation(extent={{40,40},{60,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
       // Note:  In Dymola 7.4 it's necessary to add the missing inner message
       // here to give a warning message, even though it's included in the
-      // Defaults model too.
+      // Environment model too.
 
     initial equation
       // Check that the initialization methods are valid.
@@ -6010,7 +6036,7 @@ The default global default settings will be used for the current simulation.",
             axis] - orientation), :, orientation] .* Ndot_face[cartWrap(
             cartAxes[axis] - orientation), :]) + Sigma(mPhidot_face[cartWrap(
             cartAxes[axis] - orientation), :, orientation]) for orientation in
-            Orientation) + M*defaults.a[cartAxes[axis]]
+            Orientation) + M*environment.a[cartAxes[axis]]
             "Conservation of linear momentum";
         end if;
       end for;
@@ -6181,7 +6207,7 @@ The default global default settings will be used for the current simulation.",
     species can be included if there are no incompressible species.</li>
     <li>The <code>start</code> values of the initial conditions for pressure and temperature
     (<i>p</i><sub>IC</sub> and <i>T</i><sub>IC</sub>) are the global default pressure and
-    temperature (via the <code>outer</code> instance of the <a href=\"modelica://FCSys.BCs.Defaults\">Defaults</a> model).
+    temperature (via the <code>outer</code> instance of the <a href=\"modelica://FCSys.BCs.Environment\">Environment</a> model).
     The <code>start</code> values of the initial conditions for
     other intensive properties (&rho;<sub>IC</sub>, <i>s</i><sub>IC</sub>, <i>h</i><sub>IC</sub>, and
     &mu;<sub>IC</sub>) are related to the initial pressure and temperature
@@ -6504,9 +6530,9 @@ Check the chemical formulas and the specific masses of the species.");
       "Connector for linear momentum and heat, with additivity of volume"
       annotation (Placement(transformation(extent={{60,-80},{80,-60}}),
           iconTransformation(extent={{100,-120},{120,-100}})));
-    outer FCSys.BCs.Defaults defaults "Default settings" annotation (Placement(
-          transformation(extent={{40,40},{60,60}}), iconTransformation(extent={
-              {-10,90},{10,110}})));
+    outer FCSys.BCs.Environment environment "Environmental settings"
+      annotation (Placement(transformation(extent={{40,40},{60,60}}),
+          iconTransformation(extent={{-10,90},{10,110}})));
 
   equation
     // Specified volume
@@ -6524,21 +6550,24 @@ Check the chemical formulas and the specific masses of the species.");
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{160,
-              160}}), graphics={Rectangle(
-              extent={{-160,112},{160,152}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Polygon(
-              points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,-160},
-              {-160,60}},
-              lineColor={127,127,127},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.Dash),Text(
-              extent={{-160,112},{160,152}},
-              textString="%name",
-              lineColor={0,0,0})}),
+              160}}), graphics={
+          Rectangle(
+            extent={{-160,112},{160,152}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Polygon(
+            points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,-160},
+                {-160,60}},
+            lineColor={127,127,127},
+            smooth=Smooth.None,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.Dash),
+          Text(
+            extent={{-160,112},{160,152}},
+            textString="%name",
+            lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(graphics));
@@ -6654,76 +6683,91 @@ Check the chemical formulas and the specific masses of the species.");
   <code>thermoOpt==ThermoOpt.ClosedDiabatic</code>), then the interface will be closed.
   note applies to the viscous/inviscous and diabatic/adiabatic properties.</li>
   <li>The x-axis component of linear momentum is included by default.  At least one component must be included.</li>
-  </ul></p></html>"), Icon(graphics={Line(
-                  points={{-100,0},{-40,0}},
-                  color={127,127,127},
-                  thickness=0.5,
-                  visible=inclXFaces,
-                  smooth=Smooth.None),Line(
-                  points={{0,-40},{0,-100}},
-                  color={127,127,127},
-                  thickness=0.5,
-                  visible=inclYFaces,
-                  smooth=Smooth.None),Line(
-                  points={{40,40},{50,50}},
-                  color={127,127,127},
-                  thickness=0.5,
-                  visible=inclZFaces,
-                  smooth=Smooth.None),Polygon(
-                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
-                {-40,16}},
-                  lineColor={127,127,127},
-                  smooth=Smooth.None,
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid),Line(
-                  points={{-40,-40},{-16,-16}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash),Line(
-                  points={{-16,40},{-16,-16},{40,-16}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash),Line(
-                  points={{-40,0},{28,0}},
-                  color={210,210,210},
-                  visible=inclXFaces,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,28},{0,-40}},
-                  color={210,210,210},
-                  visible=inclYFaces,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{28,0},{100,0}},
-                  color={127,127,127},
-                  thickness=0.5,
-                  visible=inclXFaces,
-                  smooth=Smooth.None),Line(
-                  points={{0,100},{0,28}},
-                  color={127,127,127},
-                  thickness=0.5,
-                  visible=inclYFaces,
-                  smooth=Smooth.None),Line(
-                  points={{-12,-12},{40,40}},
-                  color={210,210,210},
-                  visible=inclZFaces,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-40,16},{16,16},{16,-40}},
-                  color={127,127,127},
-                  smooth=Smooth.None),Line(
-                  points={{-50,-50},{-12,-12}},
-                  color={127,127,127},
-                  thickness=0.5,
-                  visible=inclZFaces,
-                  smooth=Smooth.None),Polygon(
-                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
-                {-40,16}},
-                  lineColor={127,127,127},
-                  smooth=Smooth.None),Line(
-                  points={{40,40},{16,16}},
-                  color={127,127,127},
-                  smooth=Smooth.None)}));
+  </ul></p></html>"), Icon(graphics={
+            Line(
+              points={{-100,0},{-40,0}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclXFaces,
+              smooth=Smooth.None),
+            Line(
+              points={{0,-40},{0,-100}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclYFaces,
+              smooth=Smooth.None),
+            Line(
+              points={{40,40},{50,50}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclZFaces,
+              smooth=Smooth.None),
+            Polygon(
+              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
+                  16}},
+              lineColor={127,127,127},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-40,-40},{-16,-16}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),
+            Line(
+              points={{-16,40},{-16,-16},{40,-16}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),
+            Line(
+              points={{-40,0},{28,0}},
+              color={210,210,210},
+              visible=inclXFaces,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,28},{0,-40}},
+              color={210,210,210},
+              visible=inclYFaces,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{28,0},{100,0}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclXFaces,
+              smooth=Smooth.None),
+            Line(
+              points={{0,100},{0,28}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclYFaces,
+              smooth=Smooth.None),
+            Line(
+              points={{-12,-12},{40,40}},
+              color={210,210,210},
+              visible=inclZFaces,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-40,16},{16,16},{16,-40}},
+              color={127,127,127},
+              smooth=Smooth.None),
+            Line(
+              points={{-50,-50},{-12,-12}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=inclZFaces,
+              smooth=Smooth.None),
+            Polygon(
+              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
+                  16}},
+              lineColor={127,127,127},
+              smooth=Smooth.None),
+            Line(
+              points={{40,40},{16,16}},
+              color={127,127,127},
+              smooth=Smooth.None)}));
 
     end PartialSubregion;
   end BaseClasses;

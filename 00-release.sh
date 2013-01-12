@@ -41,5 +41,5 @@ todos $foldername/resources/source/Python/matplotlibrc
 # Make a zipped copy.
 zip -rq $foldername.zip $foldername
 
-echo -n "Done.  Press enter to exit."
-read answer
+echo
+read -p "Done.  Press [Enter] to exit."

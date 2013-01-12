@@ -29,7 +29,7 @@ package WorkInProgress "Incomplete classes under development"
           setVelX=true)))
       annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
-    inner BCs.Defaults defaults(analysis=true, T=293.15*U.K)
+    inner BCs.Environment environment(analysis=true, T=293.15*U.K)
       annotation (Placement(transformation(extent={{70,70},{90,90}})));
 
   protected
@@ -364,9 +364,9 @@ should be used if these values are needed.
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Text(
-            extent={{-150,110},{150,150}},
-            textString="%name",
-            lineColor={0,0,255})}));
+              extent={{-150,110},{150,150}},
+              textString="%name",
+              lineColor={0,0,255})}));
   end BCsBaseClassesPartialLumpedVessel;
 
   model ClosedVolume
@@ -390,13 +390,13 @@ should be used if these values are needed.
       defaultComponentName="volume",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={0,0,0},
-            fillPattern=FillPattern.Sphere,
-            fillColor={170,213,255}), Text(
-            extent={{-150,12},{150,-18}},
-            lineColor={0,0,0},
-            textString="V=%V")}),
+              extent={{-100,100},{100,-100}},
+              lineColor={0,0,0},
+              fillPattern=FillPattern.Sphere,
+              fillColor={170,213,255}),Text(
+              extent={{-150,12},{150,-18}},
+              lineColor={0,0,0},
+              textString="V=%V")}),
       Documentation(info="<html>
 <p>
 Ideally mixed volume of constant size with two fluid ports and one medium model.
@@ -450,13 +450,13 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
     PartialSpecies</a> model.</p>
     </html>"),
       Icon(graphics={Line(
-            points={{0,40},{80,40}},
-            color={0,0,255},
-            smooth=Smooth.None), Line(
-            points={{0,60},{0,20}},
-            color={0,0,0},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash)}),
+              points={{0,40},{80,40}},
+              color={0,0,255},
+              smooth=Smooth.None),Line(
+              points={{0,60},{0,20}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash)}),
       Diagram(graphics));
   end BCsAdaptersSpeciesFluid;
 
@@ -516,33 +516,28 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
         points={{8,20},{40,20},{40,5.55112e-16},{80,5.55112e-16}},
         color={191,0,0},
         smooth=Smooth.None));
-    annotation (Icon(graphics={
-          Line(
-            points={{0,60},{0,-60}},
-            color={0,0,0},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash,
-            thickness=0.5),
-          Line(
-            points={{0,0},{-80,0}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{0,40},{80,40}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{0,0},{80,0}},
-            color={191,0,0},
-            smooth=Smooth.None),
-          Line(
-            points={{0,-40},{80,-40}},
-            color={0,127,255},
-            smooth=Smooth.None)}), Diagram(graphics));
     connect(junction2.mixturePort, fluidPort) annotation (Line(
         points={{58,-40},{80,-40}},
         color={0,127,255},
         smooth=Smooth.None));
+    annotation (Icon(graphics={Line(
+              points={{0,60},{0,-60}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),Line(
+              points={{0,0},{-80,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{0,40},{80,40}},
+              color={0,0,255},
+              smooth=Smooth.None),Line(
+              points={{0,0},{80,0}},
+              color={191,0,0},
+              smooth=Smooth.None),Line(
+              points={{0,-40},{80,-40}},
+              color={0,127,255},
+              smooth=Smooth.None)}), Diagram(graphics));
   end BCsAdaptersPhasesIonomer;
 end WorkInProgress;

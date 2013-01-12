@@ -1253,12 +1253,12 @@ package Figures "Layouts for documentation"
     end Cascade;
   end DeclarativeVsImperative;
 
-  model DefaultsIcon
+  model EnvironmentIcon
 
-    FCSys.BCs.Defaults Defaults
+    FCSys.BCs.Environment Environment
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
     annotation (Diagram(graphics));
-  end DefaultsIcon;
+  end EnvironmentIcon;
 
   model RouterCrossOver
 

@@ -1705,7 +1705,7 @@ package Characteristics
     <li><code>specVolPow</code> is defined as a <code>Real</code> vector.  However,
     special modifications are necessary if non-integer values are used
     (see <a href=\"modelica://FCSys.Characteristics.'e-'.Graphite\">'e-'.Graphite</a>).
-    <li>The defaults for <code>b_v</code> and <code>specVolPow</code> represent ideal gas.</li>
+    <li>The environment for <code>b_v</code> and <code>specVolPow</code> represent ideal gas.</li>
     <li><code>b_c</code>: The rows give the coefficients for the temperature intervals bounded
     by the values in <code>T_lim_c</code>.
     The powers of <i>T</i> increase

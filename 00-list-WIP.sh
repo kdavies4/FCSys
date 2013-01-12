@@ -25,5 +25,5 @@ echo UnderConstruction items:
 echo ------------------------
 find_item UnderConstruction
 
-echo -n "Press enter to exit."
-read answer
+echo
+read -p "Press [Enter] to exit."

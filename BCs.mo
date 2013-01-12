@@ -2,16 +2,14 @@ within FCSys;
 package BCs "Models for boundary conditions"
   extends Modelica.Icons.SourcesPackage;
 
-  // TODO:  Recheck this package, fix errors and warnings.
-
   package Examples "Examples and tests"
     extends Modelica.Icons.ExamplesPackage;
 
     model FaceBC "<html>Test the BCs for the face of a subregion</html>"
       extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
+
       FCSys.BCs.FaceBus.Subregion subregionFaceBC(gas(inclH2O=true, H2O(
-            redeclare FCSys.BCs.Face.Material.Current material,
+            redeclare FCSys.BCs.Face.Material.Current material(spec(k=0)),
             inviscidX=false,
             inviscidZ=false)))
         annotation (Placement(transformation(extent={{-10,14},{10,34}})));
@@ -35,7 +33,7 @@ package BCs "Models for boundary conditions"
               inviscidZ=false))))
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      inner BCs.Defaults defaults
+      inner BCs.Environment environment
         annotation (Placement(transformation(extent={{30,30},{50,50}})));
     equation
       connect(subregion.yPositive, subregionFaceBC.face) annotation (Line(
@@ -46,7 +44,7 @@ package BCs "Models for boundary conditions"
           smooth=Smooth.None));
 
       annotation (
-        experiment(StopTime=0.0015, NumberOfIntervals=5000),
+        experiment(NumberOfIntervals=5000),
         experimentSetupOutput,
         Commands(file="resources/scripts/Dymola/BCs.Examples.FaceBC.mos"));
     end FaceBC;
@@ -54,7 +52,7 @@ package BCs "Models for boundary conditions"
     model FaceBCPhases
       "<html>Test the BCs for the face of a subregion with phases</html>"
       extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
+
       // Geometric parameters
       inner parameter Q.Length L[Axis](each min=Modelica.Constants.small,start=
             ones(3)*U.cm) "<html>Length (<b>L</b>)</html>"
@@ -65,15 +63,14 @@ package BCs "Models for boundary conditions"
       FCSys.BCs.FaceBus.Phases.Gas phaseFaceBC(
         inclH2O=true,
         H2O(thermoOpt=ThermoOpt.OpenDiabatic, redeclare
-            FCSys.BCs.Face.Material.Current material),
+            FCSys.BCs.Face.Material.Current material(spec(k=0))),
         axis=FCSys.BaseClasses.Axis.y)
         annotation (Placement(transformation(extent={{-10,14},{10,34}})));
       Subregions.Volume volume
         annotation (Placement(transformation(extent={{-16,-16},{16,16}})));
       FCSys.Subregions.Phases.Gas gas(
         inclReact=false,
-        inclLinX=false,
-        inclLinY=true,
+        inclLin={false,true,false},
         inclH2=false,
         inclH2O=true,
         H2O(
@@ -84,7 +81,7 @@ package BCs "Models for boundary conditions"
           zPositive(inviscidY=true)))
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      inner BCs.Defaults defaults
+      inner BCs.Environment environment
         annotation (Placement(transformation(extent={{30,30},{50,50}})));
     equation
       connect(gas.yPositive, phaseFaceBC.face) annotation (Line(
@@ -99,7 +96,7 @@ package BCs "Models for boundary conditions"
           color={72,90,180},
           smooth=Smooth.None));
       annotation (
-        experiment(StopTime=0.003),
+        experiment,
         experimentSetupOutput,
         Diagram(graphics));
     end FaceBCPhases;
@@ -112,119 +109,87 @@ package BCs "Models for boundary conditions"
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
     end Router;
 
-    model Adapteminus "<html>Test the <code>'Adapte-'</code> model</html>"
+    model AnodeAdapter "<html>Test the <code>'Adapte-'</code> model</html>"
 
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
-
-      FCSys.BCs.Adapters.Anode subregionAdapter
-        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-      Temp ground
-        annotation (Placement(transformation(extent={{30,0},{50,20}})));
-      Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T
-          =298.15)
-        annotation (Placement(transformation(extent={{50,-30},{30,-10}})));
+      // fails check
+      inner Modelica.Fluid.System system(T_ambient=293.15 + 5)
+        annotation (Placement(transformation(extent={{40,70},{60,90}})));
+      inner BCs.Environment environment(T=350*U.K)
+        annotation (Placement(transformation(extent={{70,72},{90,92}})));
       Subregions.Subregion subregion(
         L={1,1,1}*U.cm,
         inclReact=false,
         inclYFaces=false,
         inclZFaces=false,
-        gas(inclH2O=false),
-        graphite('incle-'=true,'e-'(
-            xNegative(thermoOpt=ThermoOpt.ClosedAdiabatic),
-            xPositive(thermoOpt=ThermoOpt.OpenDiabatic),
-            yNegative(inviscidX=true),
-            yPositive(inviscidX=true),
-            zNegative(inviscidX=true),
-            zPositive(inviscidX=true))))
+        gas(inclH2=true, inclH2O=true),
+        graphite(inclC=true, 'incle-'=true),
+        liquid(inclH2O=true))
         annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
+      Adapters.Anode anodeAdapter
+        annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
+      Modelica.Electrical.Analog.Basic.Ground ground
+        annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
 
-      inner BCs.Defaults defaults(T=350*U.K)
-        annotation (Placement(transformation(extent={{60,40},{80,60}})));
-    equation
-      connect(ground.p, subregionAdapter.pin) annotation (Line(
-          points={{40,20},{20,20},{20,2},{8,2}},
-          color={0,0,255},
-          smooth=Smooth.None));
-      connect(fixedTemperature.port, subregionAdapter.port) annotation (Line(
-          points={{30,-20},{20,-20},{20,-4},{10,-4}},
-          color={191,0,0},
-          smooth=Smooth.None));
-
-      connect(subregion.xPositive, subregionAdapter.face) annotation (Line(
-          points={{-30,6.10623e-16},{-20,-3.36456e-22},{-20,6.10623e-16},{-8,
-              6.10623e-16}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      annotation (
-        experiment(StopTime=2e-10),
-        experimentSetupOutput,
-        Commands(file="resources/scripts/Dymola/BCs.Examples.Adapteminus.mos"));
-    end Adapteminus;
-
-    model AdaptFluid "<html>Test the <code>FluidAdapt</code> model</html>"
-      // **Need to nest the AdaptBusH2 to subregion level (currently only phase level).
-      // **check that heat is transferred.
-      extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
-
-      FCSys.BCs.Adapters.Phases.AnodeGas adaptH2(redeclare
-          Modelica.Media.IdealGases.SingleGases.H2 Medium)
-        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-      Modelica.Fluid.Vessels.ClosedVolume volume(
+      Modelica.Fluid.Vessels.ClosedVolume gasVolume(
         use_portsData=false,
         nPorts=1,
-        redeclare Modelica.Media.IdealGases.SingleGases.H2 Medium(
-            referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
-            excludeEnthalpyOfFormation=false),
         V=1e-6,
         use_HeatTransfer=true,
         redeclare
           Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer
           HeatTransfer,
-        medium(p(fixed=true), T(fixed=true)))
-        annotation (Placement(transformation(extent={{22,10},{42,30}})));
-      inner Modelica.Fluid.System system(T_ambient=293.15 + 5)
-        annotation (Placement(transformation(extent={{40,70},{60,90}})));
-      FCSys.Subregions.Subregion subregion(
-        L={1,1,1}*U.cm,
-        inclReact=false,
-        inclYFaces=false,
-        inclZFaces=false,
-        gas(
-          inclH2=true,
-          inclH2O=false,
-          H2(xPositive(thermoOpt=ThermoOpt.OpenDiabatic), xNegative(final
-                thermoOpt=ThermoOpt.ClosedAdiabatic))))
-        annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
-
-      inner BCs.Defaults defaults(analysis=true, T=293.15*U.K)
-        annotation (Placement(transformation(extent={{70,70},{90,90}})));
+        redeclare package Medium = FCSys.BCs.Adapters.Media.AnodeGas)
+        annotation (Placement(transformation(extent={{30,20},{50,40}})));
+      Modelica.Fluid.Vessels.ClosedVolume liquidVolume(
+        nPorts=1,
+        use_HeatTransfer=true,
+        redeclare
+          Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer
+          HeatTransfer,
+        redeclare package Medium =
+            Modelica.Media.Water.ConstantPropertyLiquidWater,
+        V=0.5e-6,
+        use_portsData=false)
+        annotation (Placement(transformation(extent={{70,20},{90,40}})));
 
     equation
-      connect(adaptH2.fluidPort, volume.ports[1]) annotation (Line(
-          points={{8,-4},{32,-4},{32,10}},
-          color={0,127,255},
+      connect(ground.p, anodeAdapter.pin) annotation (Line(
+          points={{10,-20},{10,2},{-2,2}},
+          color={0,0,255},
           smooth=Smooth.None));
-      connect(subregion.xPositive, adaptH2.face) annotation (Line(
-          points={{-20,6.10623e-16},{-16,-3.36456e-22},{-16,6.10623e-16},{-8,
+
+      connect(subregion.xPositive, anodeAdapter.face) annotation (Line(
+          points={{-30,6.10623e-16},{-24,-3.36456e-22},{-24,6.10623e-16},{-18,
               6.10623e-16}},
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
 
-      connect(volume.heatPort, adaptH2.heatPort) annotation (Line(
-          points={{22,20},{16,20},{16,6.10623e-16},{8,6.10623e-16}},
+      connect(gasVolume.heatPort, anodeAdapter.heatPort) annotation (Line(
+          points={{30,30},{20,30},{20,-2},{-2,-2}},
           color={191,0,0},
           smooth=Smooth.None));
+      connect(gasVolume.ports[1], anodeAdapter.gasPort) annotation (Line(
+          points={{40,20},{40,6},{-2,6}},
+          color={0,127,255},
+          smooth=Smooth.None));
+      connect(liquidVolume.heatPort, anodeAdapter.heatPort) annotation (Line(
+          points={{70,30},{60,30},{60,-2},{-2,-2}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(anodeAdapter.liquidPort, liquidVolume.ports[1]) annotation (Line(
+          points={{-2,-6},{80,-6},{80,20}},
+          color={0,127,255},
+          smooth=Smooth.None));
       annotation (
-        experiment,
+        experiment(StopTime=2e-10),
         experimentSetupOutput,
-        Commands(file="resources/scripts/Dymola/BCs.Examples.FluidAdapt.mos"),
+        Commands(file="resources/scripts/Dymola/BCs.Examples.Adapteminus.mos"),
+
         Diagram(graphics));
-    end AdaptFluid;
+    end AnodeAdapter;
 
   end Examples;
 
@@ -751,7 +716,6 @@ package BCs "Models for boundary conditions"
                 smooth=Smooth.None)}), Diagram(graphics));
       end Graphite;
 
-
       model Liquid
         "<html>Adapter for liquid between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
         extends BaseClasses.PartialPhase;
@@ -762,8 +726,8 @@ package BCs "Models for boundary conditions"
           "Medium model (Modelica)" annotation (choicesAllMatching=true, Dialog(
               group="Material properties"));
 
-        FCSys.WorkInProgress.BCsAdaptersSpeciesFluid H2O(redeclare package Data
-            = FCSys.Characteristics.H2O.Liquid, redeclare final package Medium
+        Species.FluidNonionic H2O(redeclare package Data =
+              FCSys.Characteristics.H2O.Liquid, redeclare final package Medium
             = Medium)
           annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
@@ -821,7 +785,7 @@ package BCs "Models for boundary conditions"
         extends Modelica.Icons.BasesPackage;
 
         partial model PartialPhase
-          "<html>**Adapter for H<sub>2</sub> between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
+          "<html>Partial adapter for a phase between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
           extends FCSys.BaseClasses.Icons.Names.Top3;
 
           Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
@@ -881,7 +845,6 @@ package BCs "Models for boundary conditions"
                 pattern=LinePattern.Dash)}),
           Diagram(graphics));
       end 'e-';
-
 
       model FluidNonionic
         "<html>Adapter to connect a single nonionic fluid species between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
@@ -1838,7 +1801,6 @@ package BCs "Models for boundary conditions"
                 {180,100}}), graphics),
         experiment(StopTime=15481, Algorithm="Euler"),
         experimentSetupOutput);
-
     end Replay;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -2056,7 +2018,7 @@ package BCs "Models for boundary conditions"
                 extent={{-160,160},{160,-160}},
                 lineColor={191,191,191},
                 fillColor={255,255,255},
-                fillPattern=FillPattern.Backward),Rectangle(extent={{-160,160},
+                fillPattern=FillPattern.Backward), Rectangle(extent={{-160,160},
                     {160,-160}}, lineColor={0,0,0})}));
       end PartialTestStand;
 
@@ -2122,7 +2084,7 @@ package BCs "Models for boundary conditions"
               rotation=0,
               origin={20,30})));
 
-        inner Defaults defaults
+        inner Environment environment
           annotation (Placement(transformation(extent={{50,20},{70,40}})));
       equation
 
@@ -2234,8 +2196,8 @@ package BCs "Models for boundary conditions"
           color={208,104,0},
           smooth=Smooth.None));
       connect(u.H2, H2.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-              4}},
+          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+              -5.08852e-16,4}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -2246,8 +2208,8 @@ package BCs "Models for boundary conditions"
           color={208,104,0},
           smooth=Smooth.None));
       connect(u.H2O, H2O.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-              4}},
+          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+              -5.08852e-16,4}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -2258,8 +2220,8 @@ package BCs "Models for boundary conditions"
           color={208,104,0},
           smooth=Smooth.None));
       connect(u.N2, N2.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-              4}},
+          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+              -5.08852e-16,4}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -2270,8 +2232,8 @@ package BCs "Models for boundary conditions"
           color={208,104,0},
           smooth=Smooth.None));
       connect(u.O2, O2.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-              4}},
+          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+              -5.08852e-16,4}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -2327,8 +2289,8 @@ package BCs "Models for boundary conditions"
           color={208,104,0},
           smooth=Smooth.None));
       connect(u.C, C.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-              4}},
+          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+              -5.08852e-16,4}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -2339,8 +2301,8 @@ package BCs "Models for boundary conditions"
           color={208,104,0},
           smooth=Smooth.None));
       connect(u.'e-', 'e-'.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-              4}},
+          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+              -5.08852e-16,4}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -2416,8 +2378,8 @@ package BCs "Models for boundary conditions"
           color={208,104,0},
           smooth=Smooth.None));
       connect(u.C19HF37O5S, C19HF37O5S.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-              4}},
+          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+              -5.08852e-16,4}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -2428,8 +2390,8 @@ package BCs "Models for boundary conditions"
           color={208,104,0},
           smooth=Smooth.None));
       connect(u.H2O, H2O.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-              4}},
+          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+              -5.08852e-16,4}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -2440,8 +2402,8 @@ package BCs "Models for boundary conditions"
           color={208,104,0},
           smooth=Smooth.None));
       connect(u.'H+', 'H+'.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-              4}},
+          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+              -5.08852e-16,4}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -2479,8 +2441,8 @@ package BCs "Models for boundary conditions"
           color={208,104,0},
           smooth=Smooth.None));
       connect(u.H2O, H2O.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-              4}},
+          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{
+              -5.08852e-16,4}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -6122,7 +6084,7 @@ those generated by the model's <code>connect</code> statements.</p>
       Diagram(graphics));
   end Router;
 
-  record Defaults "Global defaults for a model"
+  record Environment "Environmental properties for a model"
     extends FCSys.BaseClasses.Icons.Names.Top3;
 
     // Store the values of the base constants and units.
@@ -6140,7 +6102,7 @@ those generated by the model's <code>connect</code> statements.</p>
       displayUnit="%") = 0.208
       "<html>Dry gas O<sub>2</sub> fraction (<i>y</i><sub>O2 dry</sub>)</html>";
     // Value from http://en.wikipedia.org/wiki/Oxygen
-    parameter Q.Acceleration a[Axis]=zeros(3)
+    parameter Q.Acceleration a[FCSys.BaseClasses.Axis]=zeros(3)
       "Acceleration of the reference frame";
 
     final parameter Q.NumberAbsolute x_H2O(
@@ -6151,52 +6113,54 @@ those generated by the model's <code>connect</code> statements.</p>
 
     annotation (
       defaultComponentPrefixes="inner",
-      missingInnerMessage="Your model is using an outer \"defaults\" record, but an inner \"defaults\" record is not defined.
-For simulation, specify global default settings by dragging FCSys.BCs.Defaults into your model.
+      missingInnerMessage="Your model is using an outer \"environment\" record, but an inner \"environment\" record is not defined.
+For simulation, specify global default settings by dragging FCSys.BCs.Environment into your model.
 The default global default settings will be used for the current simulation.",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={
           Rectangle(
-            extent={{-21.2132,21.2132},{21.2131,-21.2131}},
-            lineColor={127,127,127},
-            fillPattern=FillPattern.HorizontalCylinder,
-            fillColor={225,225,225},
-            origin={30,30},
-            rotation=135),
-          Polygon(
-            points={{-60,60},{-60,-100},{60,-100},{60,30},{30,30},{30,60},{-60,
-                60}},
-            lineColor={127,127,127},
-            smooth=Smooth.None,
-            fillColor={245,245,245},
+            extent={{-80,60},{80,-100}},
+            lineColor={0,0,0},
+            fillColor={255,255,255},
             fillPattern=FillPattern.Solid),
-          Polygon(
-            points={{-60,60},{-60,-100},{60,-100},{60,30},{30,60},{-60,60}},
-            lineColor={127,127,127},
-            smooth=Smooth.None),
-          Line(
-            points={{-40,4},{40,4}},
-            color={127,127,127},
-            smooth=Smooth.None),
-          Line(
-            points={{-40,-20},{40,-20}},
-            color={127,127,127},
-            smooth=Smooth.None),
-          Line(
-            points={{-40,-44},{40,-44}},
-            color={127,127,127},
-            smooth=Smooth.None),
-          Line(
-            points={{-40,-68},{40,-68}},
-            color={127,127,127},
-            smooth=Smooth.None),
-          Line(
-            points={{-40,28},{26,28}},
-            color={127,127,127},
-            smooth=Smooth.None)}),
+          Rectangle(
+            extent={{-70,50},{70,-98}},
+            lineColor={255,255,255},
+            fillPattern=FillPattern.HorizontalCylinder,
+            fillColor={170,170,255}),
+          Rectangle(
+            extent={{-72,-60},{72,-98}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0}),
+          Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
+          Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),
+          Ellipse(
+            extent={{30,10},{50,-10}},
+            pattern=LinePattern.None,
+            lineColor={255,255,255},
+            fillColor={240,0,0},
+            fillPattern=FillPattern.Sphere),
+          Line(points={{-66,-90},{-36,-60}}, color={0,0,0}),
+          Line(points={{2,-90},{32,-60}}, color={0,0,0}),
+          Line(points={{36,-90},{66,-60}}, color={0,0,0}),
+          Line(points={{-32,-90},{-2,-60}},color={0,0,0}),
+          Rectangle(
+            extent={{70,50},{76,-60}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-76,50},{-70,-60}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0})}),
       Diagram(graphics));
 
-  end Defaults;
+  end Environment;
 
   package BaseClasses "Base classes (not for direct use)"
     extends Modelica.Icons.BasesPackage;

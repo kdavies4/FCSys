@@ -119,8 +119,8 @@ package UsersGuide "User's Guide"
         Their parameters are often not propagated to the cell level, but may 
         be accessed through the parameter dialog by editing the replaceable model.  Note that 
         many models have auxiliary output variables available for additional analysis and diagnostics.
-        These may be included by setting <code>analysis=true</code> in the outer defaults model (instance 
-        of <a href=\"modelica://FCSys.BCs.Defaults\">Defaults</a>).</li>
+        These may be included by setting <code>analysis=true</code> in the outer environment model (instance 
+        of <a href=\"modelica://FCSys.BCs.Environment\">Environment</a>).</li>
         <li>Develop your own classes.  It should be possible to model other electrochemical
         devices (solid oxide fuel cells, lithium ion batteries, flow batteries/regenerative fuel cells, etc.) by
         extending the existing classes and

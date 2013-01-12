@@ -10,5 +10,4 @@ do
         echo \"$s\" was not found.
     fi
 done
-echo Done.  Press enter to exit.
-read answer
+read -p "Done.  Press [Enter] to exit."
