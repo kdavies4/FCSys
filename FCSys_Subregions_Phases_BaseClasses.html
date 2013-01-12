@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.Phases.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-10">
+<meta name="date" content="2013-1-12">
 <meta name="description" content="Base classes (not for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,7 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-    <li><a href="FCSys_BCs.html">BCs</a>**</li>
+    <li><a href="FCSys_BCs.html">BCs</a></li>
     <li><a href="FCSys_Sensors.html">Sensors</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
     <li><a href="FCSys_Regions.html">Regions</a>**</li>
@@ -136,7 +136,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="darkgreen">// This is always enabled in the dialog since it&#39;s used as a guess value.</font>
   <font color="blue">parameter </font>Boolean initTemp=true <font color="darkgreen">&quot;Initialize&quot;</font>;
 
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_IC(nominal=298.15*U.K,start=defaults.T) <font color="darkgreen">
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_IC(nominal=298.15*U.K,start=environment.T) <font color="darkgreen">
     &quot;Initial temperature (<i>T</i><sub>IC</sub>)&quot;</font>;
   <font color="darkgreen">// This is always enabled in the dialog since it&#39;s used as a guess value.</font>
 
@@ -186,7 +186,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
         <font color="blue">final </font>fixed=initTemp))) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
     &quot;Internal connector to directly couple velocities and/or temperatures&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">outer </font><a href="FCSys_BCs.html#FCSys.BCs.Defaults">BCs.Defaults</a> defaults <font color="darkgreen">&quot;Default settings&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <font color="blue">outer </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">BCs.Environment</a> environment <font color="darkgreen">&quot;Environmental settings&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Inert interactions</font>
@@ -199,7 +199,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  9 07:47:35 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jan 12 10:39:26 2013.
 </div>
 </body>
 </html>

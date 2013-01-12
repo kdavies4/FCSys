@@ -1,0 +1,212 @@
+<html>
+<head>
+<title>FCSys.BCs</title>
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
+<meta name="date" content="2013-1-12">
+<meta name="description" content="Models for boundary conditions">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_BCs.html">BCs</a></li>
+    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
+    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.BCs"></a><a href="index.html#FCSys">FCSys</a>.BCs</h2>
+<b>Models for boundary conditions</b>
+<p>
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.SourcesPackage.html#Modelica.Icons.SourcesPackage">Modelica.Icons.SourcesPackage</a> (Icon for packages containing sources).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.BCs.ExamplesS.png" alt="FCSys.BCs.Examples" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_Examples.html#FCSys.BCs.Examples">Examples</a>
+</td><td>Examples and tests</td></tr>
+<tr><td><img src="images/FCSys.BCs.AdaptersS.png" alt="FCSys.BCs.Adapters" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_Adapters.html#FCSys.BCs.Adapters">Adapters</a>
+</td><td>Adapters to Package Modelica</td></tr>
+<tr><td><img src="images/FCSys.BCs.AdaptersS.png" alt="FCSys.BCs.TestStands" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_TestStands.html#FCSys.BCs.TestStands">TestStands</a>
+</td><td>Test stands</td></tr>
+<tr><td><img src="images/FCSys.BCs.AdaptersS.png" alt="FCSys.BCs.ChemicalBus" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_ChemicalBus.html#FCSys.BCs.ChemicalBus">ChemicalBus</a>
+</td><td>BCs for the <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">ChemicalBus</a> connector</td></tr>
+<tr><td><img src="images/FCSys.BCs.AdaptersS.png" alt="FCSys.BCs.Chemical" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical">Chemical</a>
+</td><td>BCs for the <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a> connector</td></tr>
+<tr><td><img src="images/FCSys.BCs.AdaptersS.png" alt="FCSys.BCs.InertAmagat" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_InertAmagat.html#FCSys.BCs.InertAmagat">InertAmagat</a>
+</td><td>BCs for the <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a> connector</td></tr>
+<tr><td><img src="images/FCSys.BCs.AdaptersS.png" alt="FCSys.BCs.InertDalton" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_InertDalton.html#FCSys.BCs.InertDalton">InertDalton</a>
+</td><td>BCs for the <a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a> connector</td></tr>
+<tr><td><img src="images/FCSys.BCs.AdaptersS.png" alt="FCSys.BCs.FaceBus" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus">FaceBus</a>
+</td><td>BCs for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector</td></tr>
+<tr><td><img src="images/FCSys.BCs.AdaptersS.png" alt="FCSys.BCs.Face" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_Face.html#FCSys.BCs.Face">Face</a>
+</td><td>BCs for a <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> connector, e.g., of a <a href="FCSys_Subregions.html#FCSys.Subregions.Species">Species</a> model (single-species)</td></tr>
+<tr><td><img src="images/FCSys.BCs.AdaptersS.png" alt="FCSys.BCs.FaceBusDifferential" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_FaceBusDifferential.html#FCSys.BCs.FaceBusDifferential">FaceBusDifferential</a>
+</td><td>BCs for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connectors</td></tr>
+<tr><td><img src="images/FCSys.BCs.AdaptersS.png" alt="FCSys.BCs.FaceDifferential" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential">FaceDifferential</a>
+</td><td>BCs for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> connectors</td></tr>
+<tr><td><img src="images/FCSys.BCs.RouterS.png" alt="FCSys.BCs.Router" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs.html#FCSys.BCs.Router">Router</a>
+</td><td>Connect two pairs of faces to pass through or cross over</td></tr>
+<tr><td><img src="images/FCSys.BCs.EnvironmentS.png" alt="FCSys.BCs.Environment" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs.html#FCSys.BCs.Environment">Environment</a>
+</td><td>Environmental properties for a model</td></tr>
+<tr><td><img src="images/FCSys.BCs.BaseClassesS.png" alt="FCSys.BCs.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_BaseClasses.html#FCSys.BCs.BaseClasses">BaseClasses</a>
+</td><td>Base classes (not for direct use)</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.BCs.RouterI.png" alt="FCSys.BCs.Router" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.BCs.Router"></a><a href="FCSys_BCs.html#FCSys.BCs">FCSys.BCs</a>.Router</h2>
+<b>Connect two pairs of faces to pass through or cross over</b><p>
+<img src="images/FCSys.BCs.RouterD.png" alt="FCSys.BCs.Router">
+<p><h3>Information</h3></p>
+
+<p>This model acts as a connection switch.
+It has a single parameter, <code>crossOver</code>.  If <code>crossOver</code> is
+set to <code>false</code>, then
+the router is in the pass-through mode.
+In pass-through mode, shown by Figure 1a,
+<code>negative1</code> is connected to <code>positive1</code> and <code>negative2</code>
+is connected to <code>positive2</code>.
+If <code>crossOver</code> is set to true, then the router is in cross-over mode.
+In cross-over mode, shown by Figure 1b, <code>negative1</code> is connected to <code>positive2</code>
+and <code>negative2</code> is
+connected to <code>positive1</code>. The only equations are
+those generated by the model's <code>connect</code> statements.</p>
+
+    <table border="0" cellspacing="0" cellpadding="2" align=center>
+      <tr align=center>
+        <td align=center width=120>
+          <img src="images/PassThrough.png">
+<br><b>a:</b>  Pass-through
+        </td>
+        <td align=center>
+          <img src="images/CrossOver.png">
+<br><b>b:</b>  Cross-over
+        </td>
+      </tr>
+      <tr align=center>
+        <td colspan=2 align=center><b>Figure 1:</b> Modes of connection.</td>
+      </tr>
+    </table>
+<p>
+Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top3">FCSys.BaseClasses.Icons.Names.Top3</a>.
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Boolean</td><td>crossOver</td><td>false</td><td>Cross over (otherwise, pass through)</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative1</td><td>Negative face 1</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive1</td><td>Positive face 1</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative2</td><td>Negative face 2</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive2</td><td>Positive face 2</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Router <font color="darkgreen">
+  &quot;Connect two pairs of faces to pass through or cross over&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top3">FCSys.BaseClasses.Icons.Names.Top3</a>;
+  <font color="blue">parameter </font>Boolean crossOver=false <font color="darkgreen">&quot;Cross over (otherwise, pass through)&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> negative1 <font color="darkgreen">&quot;Negative face 1&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> positive1 <font color="darkgreen">&quot;Positive face 1&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> negative2 <font color="darkgreen">&quot;Negative face 2&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> positive2 <font color="darkgreen">&quot;Positive face 2&quot;</font>;</textblock>
+<font color="blue">equation </font>
+  <font color="blue">if </font>crossOver<font color="blue"> then</font>
+<textblock type="annotconnect" expanded="false">    <font color="red">connect</font>(negative1, positive2);
+    <font color="red">connect</font>(negative2, positive1);</textblock>
+  <font color="blue">else</font>
+    <font color="darkgreen">// Pass-through</font>
+<textblock type="annotconnect" expanded="false">    <font color="red">connect</font>(negative1, positive1);
+    <font color="red">connect</font>(negative2, positive2);</textblock>
+  <font color="blue">end if</font>;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Router;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.BCs.EnvironmentI.png" alt="FCSys.BCs.Environment" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.BCs.Environment"></a><a href="FCSys_BCs.html#FCSys.BCs">FCSys.BCs</a>.Environment</h2>
+<b>Environmental properties for a model</b><p>
+<p><h3>Information</h3></p>
+Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top3">FCSys.BaseClasses.Icons.Names.Top3</a>.
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Boolean</td><td>analysis</td><td>true</td><td>Include optional variables for analysis</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>1*U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>RH</td><td>1</td><td>Relative humidity [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x_O2_dry</td><td>0.208</td><td>Dry gas O<sub>2</sub> fraction (<i>y</i><sub>O2 dry</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Acceleration">Acceleration</a></td><td>a[FCSys.BaseClasses.Axis]</td><td>zeros(3)</td><td>Acceleration of the reference frame [l/T2]</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">record</font> Environment <font color="darkgreen">&quot;Environmental properties for a model&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top3">FCSys.BaseClasses.Icons.Names.Top3</a>;
+
+  <font color="darkgreen">// Store the values of the base constants and units.</font>
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">U.Bases.Base</a> base=U.base <font color="darkgreen">&quot;Base constants and units&quot;</font>;
+
+  <font color="blue">parameter </font>Boolean analysis=true <font color="darkgreen">&quot;Include optional variables for analysis&quot;</font>;
+
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p(nominal=1*U.atm) = 1*U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T(nominal=298.15*U.K) = 298.15*U.K <font color="darkgreen">
+    &quot;Temperature&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> RH(displayUnit=&quot;%&quot;) = 1 <font color="darkgreen">&quot;Relative humidity&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> x_O2_dry(
+    <font color="blue">final </font>max=1,
+    displayUnit=&quot;%&quot;) = 0.208 <font color="darkgreen">
+    &quot;Dry gas O<sub>2</sub> fraction (<i>y</i><sub>O2 dry</sub>)&quot;</font>;
+  <font color="darkgreen">// Value from http://en.wikipedia.org/wiki/Oxygen</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Acceleration">Q.Acceleration</a> a[FCSys.BaseClasses.Axis]=<font color="red">zeros</font>(3) <font color="darkgreen">
+    &quot;Acceleration of the reference frame&quot;</font>;
+
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> x_H2O(
+    <font color="blue">final </font>max=1,
+    displayUnit=&quot;%&quot;) = 0.2 <font color="darkgreen">
+    &quot;Gas H<sub>2</sub>O fraction (<i>y</i><sub>H2O</sub>)&quot;</font>;
+  <font color="darkgreen">// TODO:  Cast this in terms of relative humidity.</font>
+
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>Environment;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jan 12 10:33:21 2013.
+</div>
+</body>
+</html>

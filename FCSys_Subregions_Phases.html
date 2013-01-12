@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.Phases</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-10">
+<meta name="date" content="2013-1-12">
 <meta name="description" content="Phases or mixtures of species">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,7 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-    <li><a href="FCSys_BCs.html">BCs</a>**</li>
+    <li><a href="FCSys_BCs.html">BCs</a></li>
     <li><a href="FCSys_Sensors.html">Sensors</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
     <li><a href="FCSys_Regions.html">Regions</a>**</li>
@@ -625,11 +625,11 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k[3]</td><td>{1,1,1}</td><td>Area fill factor for transport (<b>k</b>) [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>inclC19HF37O5S</td><td>false</td><td>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_C19HF37O5S_Solid.html#FCSys.Subregions.Species.C19HF37O5S.Solid.Fixed">Fixed</a></td><td>C19HF37O5S</td><td>redeclare Species.C19HF37O5S...</td><td>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S model</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_C19HF37O5S_Ionomer.html#FCSys.Subregions.Species.C19HF37O5S.Ionomer.Fixed">Fixed</a></td><td>C19HF37O5S</td><td>redeclare FCSys.Subregions.S...</td><td>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S model</td></tr>
 <tr><td>Boolean</td><td>inclH2O</td><td>false</td><td>Water (H<sub>2</sub>O)</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_H2O_Gas.html#FCSys.Subregions.Species.H2O.Gas.Fixed">Fixed</a></td><td>H2O</td><td>redeclare Species.H2O.Gas.Fi...</td><td>H<sub>2</sub>O model</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_H2O_Ionomer.html#FCSys.Subregions.Species.H2O.Ionomer.Fixed">Fixed</a></td><td>H2O</td><td>redeclare Species.H2O.Ionome...</td><td>H<sub>2</sub>O model</td></tr>
 <tr><td>Boolean</td><td>&#39;inclH+&#39;</td><td>false</td><td>Protons (H<sup>+</sup>)</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_'H+'_Solid.html#FCSys.Subregions.Species.'H+'.Solid.Fixed">Fixed</a></td><td>&#39;H+&#39;</td><td>redeclare Species.&#39;H+&#39;.Solid...</td><td>H<sup>+</sup> model</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_'H+'_Ionomer.html#FCSys.Subregions.Species.'H+'.Ionomer.Fixed">Fixed</a></td><td>&#39;H+&#39;</td><td>redeclare FCSys.Subregions.S...</td><td>H<sup>+</sup> model</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <tr><td>Boolean</td><td>reduceVel</td><td>true</td><td>Same velocity for all species</td></tr>
 <tr><td>Boolean</td><td>reduceTemp</td><td>true</td><td>Same temperature for all species</td></tr>
@@ -666,8 +666,8 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean inclC19HF37O5S=false <font color="darkgreen">
     &quot;Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_C19HF37O5S_Solid.html#FCSys.Subregions.Species.C19HF37O5S.Solid.Fixed">Species.C19HF37O5S.Solid.Fixed</a> C19HF37O5S <font color="blue">if </font>inclC19HF37O5S <font color="blue">
-    constrainedby </font>Species.Species(
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_C19HF37O5S_Ionomer.html#FCSys.Subregions.Species.C19HF37O5S.Ionomer.Fixed">FCSys.Subregions.Species.C19HF37O5S.Ionomer.Fixed</a> C19HF37O5S <font color="blue">if </font>
+    inclC19HF37O5S <font color="blue">constrainedby </font>Species.Species(
     <font color="blue">final </font>k=k,
     <font color="blue">final </font>inclLin=inclLin,
     initMethTemp=<font color="blue">if </font>initTemp<font color="blue"> and </font>reduceTemp<font color="blue"> then </font>InitMethScalar.None<font color="blue"> else </font>
@@ -678,7 +678,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
     <font color="darkgreen">&quot;C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S model&quot;</font>;</textblock>
 
   <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Water (H<sub>2</sub>O)&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_H2O_Gas.html#FCSys.Subregions.Species.H2O.Gas.Fixed">Species.H2O.Gas.Fixed</a> H2O <font color="blue">if </font>inclH2O <font color="blue">constrainedby </font>
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_H2O_Ionomer.html#FCSys.Subregions.Species.H2O.Ionomer.Fixed">Species.H2O.Ionomer.Fixed</a> H2O <font color="blue">if </font>inclH2O <font color="blue">constrainedby </font>
     Species.Species(
     <font color="blue">final </font>k=k,
     <font color="blue">final </font>inclLin=inclLin,
@@ -696,8 +696,8 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
     <font color="darkgreen">&quot;H<sub>2</sub>O model&quot;</font>;</textblock>
 
   <font color="blue">parameter </font>Boolean &#39;inclH+&#39;=false <font color="darkgreen">&quot;Protons (H<sup>+</sup>)&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_'H+'_Solid.html#FCSys.Subregions.Species.'H+'.Solid.Fixed">Species.'H+'.Solid.Fixed</a> &#39;H+&#39; <font color="blue">if </font>'inclH+' <font color="blue">constrainedby </font>
-    Species.Species(
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions_Species_'H+'_Ionomer.html#FCSys.Subregions.Species.'H+'.Ionomer.Fixed">FCSys.Subregions.Species.'H+'.Ionomer.Fixed</a> &#39;H+&#39; <font color="blue">if </font>'inclH+' <font color="blue">
+    constrainedby </font>Species.Species(
     <font color="blue">final </font>k=k,
     <font color="blue">final </font>inclLin=inclLin,
     initMethX=<font color="blue">if </font>initVelX<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue"> else </font>
@@ -997,7 +997,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  9 07:47:34 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jan 12 10:39:25 2013.
 </div>
 </body>
 </html>

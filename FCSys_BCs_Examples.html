@@ -1,0 +1,239 @@
+<html>
+<head>
+<title>FCSys.BCs.Examples</title>
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
+<meta name="date" content="2013-1-12">
+<meta name="description" content="Examples and tests">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_BCs.html">BCs</a></li>
+    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
+    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.BCs.Examples"></a><a href="FCSys_BCs.html#FCSys.BCs">FCSys.BCs</a>.Examples</h2>
+<b>Examples and tests</b>
+<p>
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.ExamplesPackage.html#Modelica.Icons.ExamplesPackage">Modelica.Icons.ExamplesPackage</a> (Icon for packages containing runnable examples).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.BCs.Examples.FaceBCS.png" alt="FCSys.BCs.Examples.FaceBC" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_Examples.html#FCSys.BCs.Examples.FaceBC">FaceBC</a>
+</td><td>Test the BCs for the face of a subregion</td></tr>
+<tr><td><img src="images/FCSys.BCs.Examples.FaceBCS.png" alt="FCSys.BCs.Examples.FaceBCPhases" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_Examples.html#FCSys.BCs.Examples.FaceBCPhases">FaceBCPhases</a>
+</td><td>Test the BCs for the face of a subregion with phases</td></tr>
+<tr><td><img src="images/FCSys.BCs.Examples.FaceBCS.png" alt="FCSys.BCs.Examples.Router" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_Examples.html#FCSys.BCs.Examples.Router">Router</a>
+</td><td>Test the <code>Router<code> model</td></tr>
+<tr><td><img src="images/FCSys.BCs.Examples.AnodeAdapterS.png" alt="FCSys.BCs.Examples.AnodeAdapter" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_Examples.html#FCSys.BCs.Examples.AnodeAdapter">AnodeAdapter</a>
+</td><td>Test the <code>'Adapte-'</code> model</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.BCs.Examples.FaceBCI.png" alt="FCSys.BCs.Examples.FaceBC" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.BCs.Examples.FaceBC"></a><a href="FCSys_BCs_Examples.html#FCSys.BCs.Examples">FCSys.BCs.Examples</a>.FaceBC</h2>
+<b>Test the BCs for the face of a subregion</b><p>
+<img src="images/FCSys.BCs.Examples.FaceBCD.png" alt="FCSys.BCs.Examples.FaceBC">
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> FaceBC <font color="darkgreen">&quot;Test the BCs for the face of a subregion&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.Subregion">FCSys.BCs.FaceBus.Subregion</a> subregionFaceBC(gas(inclH2O=true, H2O(
+        <font color="blue">redeclare </font><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Current">FCSys.BCs.Face.Material.Current</a> material(spec(k=0)),
+        inviscidX=false,
+        inviscidZ=false)));
+  <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregions.Subregion</a> subregion(
+    L={1,1,1}*U.cm,
+    inclReact=false,
+    inclXFaces=false,
+    inclYFaces=true,
+    inclZFaces=false,
+    inclLinX=false,
+    inclLinY=true,
+    graphite(inclC=true, C(V_IC=0.5*U.cm^3)),
+    gas(inclH2O=true, H2O(
+        xNegative(thermoOpt=ThermoOpt.ClosedAdiabatic, inviscidY=true),
+        xPositive(thermoOpt=ThermoOpt.ClosedAdiabatic, inviscidY=true),
+        zNegative(inviscidY=true),
+        zPositive(inviscidY=true),
+        yPositive(
+          thermoOpt=ThermoOpt.OpenDiabatic,
+          inviscidX=false,
+          inviscidZ=false))));</textblock>
+
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">BCs.Environment</a> environment;</textblock>
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(subregion.yPositive, subregionFaceBC.face);</textblock>
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>FaceBC;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.BCs.Examples.FaceBCI.png" alt="FCSys.BCs.Examples.FaceBCPhases" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.BCs.Examples.FaceBCPhases"></a><a href="FCSys_BCs_Examples.html#FCSys.BCs.Examples">FCSys.BCs.Examples</a>.FaceBCPhases</h2>
+<b>Test the BCs for the face of a subregion with phases</b><p>
+<img src="images/FCSys.BCs.Examples.FaceBCPhasesD.png" alt="FCSys.BCs.Examples.FaceBCPhases">
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>&nbsp;</td><td>Length (<b>L</b>) [l]</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> FaceBCPhases <font color="darkgreen">
+  &quot;Test the BCs for the face of a subregion with phases&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
+
+  <font color="darkgreen">// Geometric parameters</font>
+  <font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis](<font color="blue">each </font>min=Modelica.Constants.small,start=<font color="red">ones</font>
+        (3)*U.cm) <font color="darkgreen">&quot;Length (<b>L</b>)&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A[Axis]={L[<font color="red">cartWrap</font>(axis + 1)]*L[<font color="red">cartWrap</font>(axis +
+      2)] <font color="blue">for </font>axis<font color="blue"> in </font>Axis} <font color="darkgreen">&quot;Cross-sectional area&quot;</font>;
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceBus_Phases.html#FCSys.BCs.FaceBus.Phases.Gas">FCSys.BCs.FaceBus.Phases.Gas</a> phaseFaceBC(
+    inclH2O=true,
+    H2O(thermoOpt=ThermoOpt.OpenDiabatic, <font color="blue">redeclare </font><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Current">FCSys.BCs.Face.Material.Current</a>
+        material(spec(k=0))),
+    axis=FCSys.BaseClasses.Axis.y);
+  <a href="FCSys_Subregions.html#FCSys.Subregions.Volume">Subregions.Volume</a> volume;
+  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Gas">FCSys.Subregions.Phases.Gas</a> gas(
+    inclReact=false,
+    inclLin={false,true,false},
+    inclH2=false,
+    inclH2O=true,
+    H2O(
+      xNegative(thermoOpt=ThermoOpt.ClosedAdiabatic, inviscidY=true),
+      xPositive(thermoOpt=ThermoOpt.ClosedAdiabatic, inviscidY=true),
+      yPositive(thermoOpt=ThermoOpt.OpenDiabatic),
+      zNegative(inviscidY=true),
+      zPositive(inviscidY=true)));</textblock>
+
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">BCs.Environment</a> environment;</textblock>
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(gas.yPositive, phaseFaceBC.face);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(gas.inert, volume.inert);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>FaceBCPhases;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.BCs.Examples.FaceBCI.png" alt="FCSys.BCs.Examples.Router" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.BCs.Examples.Router"></a><a href="FCSys_BCs_Examples.html#FCSys.BCs.Examples">FCSys.BCs.Examples</a>.Router</h2>
+<b>Test the <code>Router<code> model</b><p>
+<img src="images/FCSys.BCs.Examples.RouterD.png" alt="FCSys.BCs.Examples.Router">
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Router <font color="darkgreen">&quot;Test the <code>Router<code> model&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
+
+  <font color="darkgreen">// TODO:  Make this into a meaningful example.</font>
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs.html#FCSys.BCs.Router">FCSys.BCs.Router</a> router;</textblock>
+<font color="blue">end </font>Router;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.BCs.Examples.AnodeAdapterI.png" alt="FCSys.BCs.Examples.AnodeAdapter" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.BCs.Examples.AnodeAdapter"></a><a href="FCSys_BCs_Examples.html#FCSys.BCs.Examples">FCSys.BCs.Examples</a>.AnodeAdapter</h2>
+<b>Test the <code>'Adapte-'</code> model</b><p>
+<img src="images/FCSys.BCs.Examples.AnodeAdapterD.png" alt="FCSys.BCs.Examples.AnodeAdapter">
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>.
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> AnodeAdapter <font color="darkgreen">&quot;Test the <code>'Adapte-'</code> model&quot;</font>
+
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>;
+  <font color="darkgreen">// fails check</font>
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.html#Modelica.Fluid.System">Modelica.Fluid.System</a> system(T_ambient=293.15 + 5);
+  <font color="blue">inner </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">BCs.Environment</a> environment(T=350*U.K);
+  <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregions.Subregion</a> subregion(
+    L={1,1,1}*U.cm,
+    inclReact=false,
+    inclYFaces=false,
+    inclZFaces=false,
+    gas(inclH2=true, inclH2O=true),
+    graphite(inclC=true, &#39;incle-&#39;=true),
+    liquid(inclH2O=true));
+  <a href="FCSys_BCs_Adapters.html#FCSys.BCs.Adapters.Anode">Adapters.Anode</a> anodeAdapter;
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Electrical.Analog.Basic.html#Modelica.Electrical.Analog.Basic.Ground">Modelica.Electrical.Analog.Basic.Ground</a> ground;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Vessels.html#Modelica.Fluid.Vessels.ClosedVolume">Modelica.Fluid.Vessels.ClosedVolume</a> gasVolume(
+    use_portsData=false,
+    nPorts=1,
+    V=1e-6,
+    use_HeatTransfer=true,
+    <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.html#Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer">Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer</a>
+      HeatTransfer,
+    <font color="blue">redeclare </font><font color="blue">package</font> Medium = <a href="FCSys_BCs_Adapters_Media_AnodeGas.html#FCSys.BCs.Adapters.Media.AnodeGas">FCSys.BCs.Adapters.Media.AnodeGas</a>);
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Vessels.html#Modelica.Fluid.Vessels.ClosedVolume">Modelica.Fluid.Vessels.ClosedVolume</a> liquidVolume(
+    nPorts=1,
+    use_HeatTransfer=true,
+    <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.html#Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer">Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer</a>
+      HeatTransfer,
+    <font color="blue">redeclare </font><font color="blue">package</font> Medium = <a href="http://build.openmodelica.org/Documentation/Modelica.Media.Water.ConstantPropertyLiquidWater.html#Modelica.Media.Water.ConstantPropertyLiquidWater">Modelica.Media.Water.ConstantPropertyLiquidWater</a>,
+
+    V=0.5e-6,
+    use_portsData=false);</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(ground.p, anodeAdapter.pin);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(subregion.xPositive, anodeAdapter.face);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(gasVolume.heatPort, anodeAdapter.heatPort);
+  <font color="red">connect</font>(gasVolume.ports[1], anodeAdapter.gasPort);
+  <font color="red">connect</font>(liquidVolume.heatPort, anodeAdapter.heatPort);
+  <font color="red">connect</font>(anodeAdapter.liquidPort, liquidVolume.ports[1]);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>AnodeAdapter;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jan 12 10:33:25 2013.
+</div>
+</body>
+</html>

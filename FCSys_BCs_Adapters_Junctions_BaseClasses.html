@@ -1,0 +1,109 @@
+<html>
+<head>
+<title>FCSys.BCs.Adapters.Junctions.BaseClasses</title>
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
+<meta name="date" content="2013-1-12">
+<meta name="description" content="Base classes (not for direct use)">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_BCs.html">BCs</a></li>
+    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
+    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.BCs.Adapters.Junctions.BaseClasses"></a><a href="FCSys_BCs_Adapters_Junctions.html#FCSys.BCs.Adapters.Junctions">FCSys.BCs.Adapters.Junctions</a>.BaseClasses</h2>
+<b>Base classes (not for direct use)</b>
+<p>
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.BasesPackage.html#Modelica.Icons.BasesPackage">Modelica.Icons.BasesPackage</a> (Icon for packages containing base classes).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.BCs.Adapters.Junctions.BaseClasses.PartialJunctionS.png" alt="FCSys.BCs.Adapters.Junctions.BaseClasses.PartialJunction" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_Adapters_Junctions_BaseClasses.html#FCSys.BCs.Adapters.Junctions.BaseClasses.PartialJunction">PartialJunction</a>
+</td><td>Partial model for a junction between pure substances and their mixture</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.BCs.Adapters.Junctions.BaseClasses.PartialJunctionI.png" alt="FCSys.BCs.Adapters.Junctions.BaseClasses.PartialJunction" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.BCs.Adapters.Junctions.BaseClasses.PartialJunction"></a><a href="FCSys_BCs_Adapters_Junctions_BaseClasses.html#FCSys.BCs.Adapters.Junctions.BaseClasses">FCSys.BCs.Adapters.Junctions.BaseClasses</a>.PartialJunction</h2>
+<b>Partial model for a junction between pure substances and their mixture</b><p>
+<img src="images/FCSys.BCs.Adapters.Junctions.BaseClasses.PartialJunctionD.png" alt="FCSys.BCs.Adapters.Junctions.BaseClasses.PartialJunction">
+<p><h3>Information</h3></p>
+Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top3">FCSys.BaseClasses.Icons.Names.Top3</a>.
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.a">FluidPort_a</a></td><td>mixturePort</td><td>Fluid port for the mixture</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">partial </font><font color="blue">model</font> PartialJunction <font color="darkgreen">
+  &quot;Partial model for a junction between pure substances and their mixture&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top3">FCSys.BaseClasses.Icons.Names.Top3</a>;
+
+  <font color="blue">replaceable </font><font color="blue">package</font> MixtureMedium = <a href="FCSys_BCs_Adapters_Media_AnodeGas.html#FCSys.BCs.Adapters.Media.AnodeGas">Media.AnodeGas</a> <font color="blue">constrainedby </font>
+    Modelica.Media.Interfaces.PartialMedium <font color="darkgreen">&quot;Medium model for the mixture&quot;</font>;
+
+<textblock type="annotcomp" expanded="false">  <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.a">Modelica.Fluid.Interfaces.FluidPort_a</a> mixturePort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
+      Medium = <a href="FCSys_BCs_Adapters_Junctions_BaseClasses_MixtureMedium.html#FCSys.BCs.Adapters.Junctions.BaseClasses.PartialJunction.MixtureMedium">MixtureMedium</a>) <font color="darkgreen">&quot;Fluid port for the mixture&quot;</font>;</textblock>
+  <font color="darkgreen">// Note:  In Dymola 7.4, &quot;redeclare final package Medium = MixtureMedium&quot;</font>
+  <font color="darkgreen">// must be used instead of &quot;redeclare final MixtureMedium Medium&quot; in</font>
+  <font color="darkgreen">// order for this model to pass its check.</font>
+  <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.html#Modelica.SIunits.MassFraction">SI.MassFraction</a> X[MixtureMedium.nX] <font color="darkgreen">&quot;Mass fractions within the mixture&quot;</font>;
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Mass fractions</font>
+  X = <font color="blue">if </font>MixtureMedium.fixedX<font color="blue"> then </font>MixtureMedium.reference_X<font color="blue"> else </font><font color="blue">if </font>
+    MixtureMedium.reducedX<font color="blue"> then </font><font color="red">cat</font>(
+    1,
+    <font color="red">inStream</font>(mixturePort.Xi_outflow),
+    1 - <font color="red">sum</font>(X[1:MixtureMedium.nXi]))<font color="blue"> else </font><font color="red">inStream</font>(mixturePort.Xi_outflow);
+  X = <font color="blue">if </font>MixtureMedium.reducedX<font color="blue"> then </font><font color="red">cat</font>(
+    1,
+    mixturePort.Xi_outflow,
+    1 - <font color="red">sum</font>(X[1:MixtureMedium.nXi]))<font color="blue"> else </font>mixturePort.Xi_outflow;
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>PartialJunction;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jan 12 10:33:39 2013.
+</div>
+</body>
+</html>

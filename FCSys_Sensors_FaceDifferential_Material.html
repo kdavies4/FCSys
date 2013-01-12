@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Sensors.FaceDifferential.Material</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-10">
+<meta name="date" content="2013-1-12">
 <meta name="description" content="Relative sensors for normal linear momentum">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,7 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-    <li><a href="FCSys_BCs.html">BCs</a>**</li>
+    <li><a href="FCSys_BCs.html">BCs</a></li>
     <li><a href="FCSys_Sensors.html">Sensors</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
     <li><a href="FCSys_Regions.html">Regions</a>**</li>
@@ -82,13 +82,13 @@ Extends from <a href="FCSys_Sensors_FaceDifferential_Material_BaseClasses.html#F
 <pre>
 <font color="blue">model</font> Density <font color="darkgreen">&quot;Sensor for density difference (closed condition)&quot;</font>
 
-  <font color="blue">extends </font><a href="FCSys_Sensors_FaceDifferential_Material_BaseClasses.html#FCSys.Sensors.FaceDifferential.Material.BaseClasses.PartialSensor">BaseClasses.PartialSensor</a>(<font color="blue">final </font>sensorType=BaseClasses.SensorType.Density,<font color="blue">
-      redeclare </font><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">FCSys.Connectors.RealOutput</a> y(<font color="blue">final </font>unit=&quot;N/l3&quot;));
+  <font color="blue">extends </font><a href="FCSys_Sensors_FaceDifferential_Material_BaseClasses.html#FCSys.Sensors.FaceDifferential.Material.BaseClasses.PartialSensor">BaseClasses.PartialSensor</a>(<font color="blue">final </font>sensorType=BaseClasses.SensorType.Density,
+      <font color="blue">redeclare </font><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">FCSys.Connectors.RealOutput</a> y(<font color="blue">final </font>unit=&quot;N/l3&quot;));
 
 <font color="blue">equation </font>
   y = negative.rho - positive.rho <font color="darkgreen">&quot;Measurement&quot;</font>;
   0 = negative.Ndot <font color="darkgreen">&quot;Condition of no current&quot;</font>;
-  <font color="darkgreen">// Note:  In conjunction with the material conservation equation, this </font>
+  <font color="darkgreen">// Note:  In conjunction with the material conservation equation, this</font>
   <font color="darkgreen">// means that there&#39;s no current into either face.</font>
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>Density;
 </pre>
@@ -114,8 +114,8 @@ Extends from <a href="FCSys_Sensors_FaceDifferential_Material_BaseClasses.html#F
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">model</font> Current <font color="darkgreen">&quot;Sensor for current (isochoric condition)&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Sensors_FaceDifferential_Material_BaseClasses.html#FCSys.Sensors.FaceDifferential.Material.BaseClasses.PartialSensor">BaseClasses.PartialSensor</a>(<font color="blue">final </font>sensorType=BaseClasses.SensorType.Current,<font color="blue">
-      redeclare </font><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">FCSys.Connectors.RealOutput</a> y(<font color="blue">final </font>unit=&quot;N/T&quot;));
+  <font color="blue">extends </font><a href="FCSys_Sensors_FaceDifferential_Material_BaseClasses.html#FCSys.Sensors.FaceDifferential.Material.BaseClasses.PartialSensor">BaseClasses.PartialSensor</a>(<font color="blue">final </font>sensorType=BaseClasses.SensorType.Current,
+      <font color="blue">redeclare </font><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">FCSys.Connectors.RealOutput</a> y(<font color="blue">final </font>unit=&quot;N/T&quot;));
 
 <font color="blue">equation </font>
   y = negative.Ndot <font color="darkgreen">&quot;Measurement&quot;</font>;
@@ -128,7 +128,7 @@ Extends from <a href="FCSys_Sensors_FaceDifferential_Material_BaseClasses.html#F
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 10 10:06:05 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jan 12 10:36:12 2013.
 </div>
 </body>
 </html>

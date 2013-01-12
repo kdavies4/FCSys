@@ -1,0 +1,134 @@
+<html>
+<head>
+<title>FCSys.BCs.FaceDifferential.Material</title>
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
+<meta name="date" content="2013-1-12">
+<meta name="description" content="Material BCs">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_BCs.html">BCs</a></li>
+    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
+    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.BCs.FaceDifferential.Material"></a><a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential">FCSys.BCs.FaceDifferential</a>.Material</h2>
+<b>Material BCs</b>
+<p>
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.BCs.FaceDifferential.Material.DensityS.png" alt="FCSys.BCs.FaceDifferential.Material.Density" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Density">Density</a>
+</td><td>Prescribed density difference, with material conservation</td></tr>
+<tr><td><img src="images/FCSys.BCs.FaceDifferential.Material.DensityS.png" alt="FCSys.BCs.FaceDifferential.Material.Current" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">Current</a>
+</td><td>Prescribed current, with material conservation</td></tr>
+<tr><td><img src="images/FCSys.BCs.FaceDifferential.Material.BaseClassesS.png" alt="FCSys.BCs.FaceDifferential.Material.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_FaceDifferential_Material_BaseClasses.html#FCSys.BCs.FaceDifferential.Material.BaseClasses">BaseClasses</a>
+</td><td>Base classes (not for direct use)</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.BCs.FaceDifferential.Material.DensityI.png" alt="FCSys.BCs.FaceDifferential.Material.Density" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.BCs.FaceDifferential.Material.Density"></a><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material">FCSys.BCs.FaceDifferential.Material</a>.Density</h2>
+<b>Prescribed density difference, with material conservation</b><p>
+<img src="images/FCSys.BCs.FaceDifferential.Material.DensityD.png" alt="FCSys.BCs.FaceDifferential.Material.Density">
+<p><h3>Information</h3></p>
+Extends from <a href="FCSys_BCs_FaceDifferential_Material_BaseClasses.html#FCSys.BCs.FaceDifferential.Material.BaseClasses.PartialBC">BaseClasses.PartialBC</a> (Partial model for a material BC).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>spec</td><td>redeclare Modelica.Blocks.So...</td><td>Internal specification</td></tr>
+<tr><td><a href="FCSys_BCs_FaceDifferential_Material_BaseClasses.html#FCSys.BCs.FaceDifferential.Material.BaseClasses.BCType">BCType</a></td><td>bCType</td><td>BaseClasses.BCType.Density</td><td>Type of BC</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Material">Material</a></td><td>negative</td><td>Material connector for the negative face</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Material">Material</a></td><td>positive</td><td>Material connector for the positive face</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Density <font color="darkgreen">
+  &quot;Prescribed density difference, with material conservation&quot;</font>
+
+  <font color="blue">extends </font><a href="FCSys_BCs_FaceDifferential_Material_BaseClasses.html#FCSys.BCs.FaceDifferential.Material.BaseClasses.PartialBC">BaseClasses.PartialBC</a>(<font color="blue">final </font>bCType=BaseClasses.BCType.Density, u(<font color="blue">
+        final </font>unit=&quot;N/L3&quot;));
+
+<font color="blue">equation </font>
+  negative.rho - positive.rho = u_final;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Density;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.BCs.FaceDifferential.Material.DensityI.png" alt="FCSys.BCs.FaceDifferential.Material.Current" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.BCs.FaceDifferential.Material.Current"></a><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material">FCSys.BCs.FaceDifferential.Material</a>.Current</h2>
+<b>Prescribed current, with material conservation</b><p>
+<img src="images/FCSys.BCs.FaceDifferential.Material.DensityD.png" alt="FCSys.BCs.FaceDifferential.Material.Current">
+<p><h3>Information</h3></p>
+Extends from <a href="FCSys_BCs_FaceDifferential_Material_BaseClasses.html#FCSys.BCs.FaceDifferential.Material.BaseClasses.PartialBC">BaseClasses.PartialBC</a> (Partial model for a material BC).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>spec</td><td>redeclare Modelica.Blocks.So...</td><td>Internal specification</td></tr>
+<tr><td><a href="FCSys_BCs_FaceDifferential_Material_BaseClasses.html#FCSys.BCs.FaceDifferential.Material.BaseClasses.BCType">BCType</a></td><td>bCType</td><td>BaseClasses.BCType.Current</td><td>Type of BC</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Material">Material</a></td><td>negative</td><td>Material connector for the negative face</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Material">Material</a></td><td>positive</td><td>Material connector for the positive face</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Current <font color="darkgreen">&quot;Prescribed current, with material conservation&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_BCs_FaceDifferential_Material_BaseClasses.html#FCSys.BCs.FaceDifferential.Material.BaseClasses.PartialBC">BaseClasses.PartialBC</a>(<font color="blue">final </font>bCType=BaseClasses.BCType.Current, u(<font color="blue">
+        final </font>unit=&quot;N/T&quot;));
+
+<font color="blue">equation </font>
+  negative.Ndot = u_final;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Current;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jan 12 10:35:03 2013.
+</div>
+</body>
+</html>

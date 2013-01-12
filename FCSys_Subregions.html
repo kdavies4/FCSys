@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-10">
+<meta name="date" content="2013-1-12">
 <meta name="description" content="Control volumes with multi-species transport, exchange, and storage">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,7 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-    <li><a href="FCSys_BCs.html">BCs</a>**</li>
+    <li><a href="FCSys_BCs.html">BCs</a></li>
     <li><a href="FCSys_Sensors.html">Sensors</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
     <li><a href="FCSys_Regions.html">Regions</a>**</li>
@@ -609,7 +609,7 @@ Check the chemical formulas and the specific masses of the species.&quot;);
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a></td><td>inert</td><td>Connector for linear momentum and heat,  with shared volume</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a></td><td>inert</td><td>Connector for linear momentum and heat, with additivity of volume</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -624,8 +624,8 @@ Check the chemical formulas and the specific masses of the species.&quot;);
     &quot;Number of components of linear momentum (<i>n</i><sub>lin</sub>)&quot;</font>;
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">FCSys.Connectors.InertAmagat</a> inert(<font color="blue">final </font>n_lin=n_lin) <font color="darkgreen">
-    &quot;Connector for linear momentum and heat,  with shared volume&quot;</font>;
-  <font color="blue">outer </font><a href="FCSys_BCs.html#FCSys.BCs.Defaults">FCSys.BCs.Defaults</a> defaults <font color="darkgreen">&quot;Default settings&quot;</font>;</textblock>
+    &quot;Connector for linear momentum and heat, with additivity of volume&quot;</font>;
+  <font color="blue">outer </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">FCSys.BCs.Environment</a> environment <font color="darkgreen">&quot;Environmental settings&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Specified volume</font>
@@ -641,7 +641,7 @@ Check the chemical formulas and the specific masses of the species.&quot;);
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  9 07:47:06 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jan 12 10:38:57 2013.
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Characteristics</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-10">
+<meta name="date" content="2013-1-12">
 <meta name="description" content="Packages with data and functions to correlate physical properties">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,7 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-    <li><a href="FCSys_BCs.html">BCs</a>**</li>
+    <li><a href="FCSys_BCs.html">BCs</a></li>
     <li><a href="FCSys_Sensors.html">Sensors</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
     <li><a href="FCSys_Regions.html">Regions</a>**</li>
@@ -49,6 +49,9 @@
 <p>
 <p><h3>Information</h3></p>
 
+  <p>Each species has a subpackage for each material phase in which the species 
+  may exist.  The thermodynamic properties are generally different for each phase.
+  </p>
   <p>Additional materials may be included as needed.  The thermodynamic data for
   materials that are condensed at standard conditions is available in
   [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride2002</a>].
@@ -101,7 +104,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan  9 07:48:52 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jan 12 10:40:49 2013.
 </div>
 </body>
 </html>

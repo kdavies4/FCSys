@@ -1,0 +1,137 @@
+<html>
+<head>
+<title>FCSys.BCs.InertAmagat.Thermal</title>
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
+<meta name="date" content="2013-1-12">
+<meta name="description" content="Thermal BCs">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_BCs.html">BCs</a></li>
+    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
+    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.BCs.InertAmagat.Thermal"></a><a href="FCSys_BCs_InertAmagat.html#FCSys.BCs.InertAmagat">FCSys.BCs.InertAmagat</a>.Thermal</h2>
+<b>Thermal BCs</b>
+<p>
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.BCs.InertAmagat.Thermal.TemperatureS.png" alt="FCSys.BCs.InertAmagat.Thermal.Temperature" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_InertAmagat_Thermal.html#FCSys.BCs.InertAmagat.Thermal.Temperature">Temperature</a>
+</td><td>Prescribed temperature</td></tr>
+<tr><td><img src="images/FCSys.BCs.InertAmagat.Thermal.TemperatureS.png" alt="FCSys.BCs.InertAmagat.Thermal.HeatFlowRate" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_InertAmagat_Thermal.html#FCSys.BCs.InertAmagat.Thermal.HeatFlowRate">HeatFlowRate</a>
+</td><td>Prescribed heat flow rate</td></tr>
+<tr><td><img src="images/FCSys.BCs.InertAmagat.Thermal.BaseClassesS.png" alt="FCSys.BCs.InertAmagat.Thermal.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_InertAmagat_Thermal_BaseClasses.html#FCSys.BCs.InertAmagat.Thermal.BaseClasses">BaseClasses</a>
+</td><td>Base classes (not for direct use)</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.BCs.InertAmagat.Thermal.TemperatureI.png" alt="FCSys.BCs.InertAmagat.Thermal.Temperature" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.BCs.InertAmagat.Thermal.Temperature"></a><a href="FCSys_BCs_InertAmagat_Thermal.html#FCSys.BCs.InertAmagat.Thermal">FCSys.BCs.InertAmagat.Thermal</a>.Temperature</h2>
+<b>Prescribed temperature</b><p>
+<img src="images/FCSys.BCs.InertAmagat.Volume.PressureD.png" alt="FCSys.BCs.InertAmagat.Thermal.Temperature">
+<p><h3>Information</h3></p>
+Extends from <a href="FCSys_BCs_InertAmagat_Thermal_BaseClasses.html#FCSys.BCs.InertAmagat.Thermal.BaseClasses.PartialBC">BaseClasses.PartialBC</a> (Partial model for a thermal BC).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
+<tr><td><a href="FCSys_BCs_InertAmagat_Thermal_BaseClasses.html#FCSys.BCs.InertAmagat.Thermal.BaseClasses.BCType">BCType</a></td><td>bCType</td><td>BaseClasses.BCType.Temperature</td><td>Type of BC</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
+<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a></td><td>inert</td><td>Connector for linear momentum and heat, with additivity of volume</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Temperature <font color="darkgreen">&quot;Prescribed temperature&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_BCs_InertAmagat_Thermal_BaseClasses.html#FCSys.BCs.InertAmagat.Thermal.BaseClasses.PartialBC">BaseClasses.PartialBC</a>(
+    <font color="blue">final </font>bCType=BaseClasses.BCType.Temperature,
+    u(<font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;, displayUnit=&quot;K&quot;),
+    spec(k(start=298.15*U.K)));
+<font color="blue">equation </font>
+  inert.T = u_final;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Temperature;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.BCs.InertAmagat.Thermal.TemperatureI.png" alt="FCSys.BCs.InertAmagat.Thermal.HeatFlowRate" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.BCs.InertAmagat.Thermal.HeatFlowRate"></a><a href="FCSys_BCs_InertAmagat_Thermal.html#FCSys.BCs.InertAmagat.Thermal">FCSys.BCs.InertAmagat.Thermal</a>.HeatFlowRate</h2>
+<b>Prescribed heat flow rate</b><p>
+<img src="images/FCSys.BCs.InertAmagat.Volume.PressureD.png" alt="FCSys.BCs.InertAmagat.Thermal.HeatFlowRate">
+<p><h3>Information</h3></p>
+Extends from <a href="FCSys_BCs_InertAmagat_Thermal_BaseClasses.html#FCSys.BCs.InertAmagat.Thermal.BaseClasses.PartialBC">BaseClasses.PartialBC</a> (Partial model for a thermal BC).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>spec</td><td>redeclare Modelica.Blocks.So...</td><td>Internal specification</td></tr>
+<tr><td><a href="FCSys_BCs_InertAmagat_Thermal_BaseClasses.html#FCSys.BCs.InertAmagat.Thermal.BaseClasses.BCType">BCType</a></td><td>bCType</td><td>BaseClasses.BCType.HeatFlowR...</td><td>Type of BC</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
+<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a></td><td>inert</td><td>Connector for linear momentum and heat, with additivity of volume</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> HeatFlowRate <font color="darkgreen">&quot;Prescribed heat flow rate&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_BCs_InertAmagat_Thermal_BaseClasses.html#FCSys.BCs.InertAmagat.Thermal.BaseClasses.PartialBC">BaseClasses.PartialBC</a>(<font color="blue">final </font>bCType=BaseClasses.BCType.HeatFlowRate, u(<font color="blue">
+        final </font>unit=&quot;l2.m/T3&quot;));
+<font color="blue">equation </font>
+  inert.Qdot = u_final;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>HeatFlowRate;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jan 12 10:34:06 2013.
+</div>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<html>
+<head>
+<title>FCSys.BCs.Chemical</title>
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
+<meta name="date" content="2013-1-12">
+<meta name="description" content="&lt;html&gt;BCs for the &lt;a href=\&quot;modelica://FCSys.Connectors.ChemicalOutput\&quot;&gt;ChemicalOutput&lt;/a&gt; connector&lt;/html&gt;">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_BCs.html">BCs</a></li>
+    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
+    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.BCs.Chemical"></a><a href="FCSys_BCs.html#FCSys.BCs">FCSys.BCs</a>.Chemical</h2>
+<b>BCs for the <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a> connector</b>
+<p>
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.BCs.Chemical.SpeciesS.png" alt="FCSys.BCs.Chemical.Species" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical.Species">Species</a>
+</td><td>BCs for the <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a> connector</td></tr>
+<tr><td><img src="images/FCSys.BCs.Chemical.BaseClassesS.png" alt="FCSys.BCs.Chemical.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_Chemical_BaseClasses.html#FCSys.BCs.Chemical.BaseClasses">BaseClasses</a>
+</td><td>Base classes (not for direct use)</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.BCs.Chemical.SpeciesI.png" alt="FCSys.BCs.Chemical.Species" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.BCs.Chemical.Species"></a><a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical">FCSys.BCs.Chemical</a>.Species</h2>
+<b>BCs for the <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a> connector</b><p>
+<img src="images/FCSys.BCs.Chemical.SpeciesD.png" alt="FCSys.BCs.Chemical.Species">
+<p><h3>Information</h3></p>
+Extends from <a href="FCSys_BaseClasses_Icons_BCs.html#FCSys.BaseClasses.Icons.BCs.Single">FCSys.BaseClasses.Icons.BCs.Single</a> (Icon for a single-connector boundary condition).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Material</td></tr>
+<tr><td><a href="FCSys_BCs_Chemical_BaseClasses.html#FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial">BCTypeMaterial</a></td><td>material</td><td>BCTypeMaterial.PotentialElec...</td><td>Type of BC</td></tr>
+<tr><td>Boolean</td><td>internalMaterial</td><td>true</td><td>Use internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>materialSpec</td><td>redeclare Modelica.Blocks.So...</td><td>Internal specification</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>X component of linear momentum</td></tr>
+<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>Include</td></tr>
+<tr><td><a href="FCSys_BCs_Chemical_BaseClasses.html#FCSys.BCs.Chemical.BaseClasses.BCTypeMechanical">BCTypeMechanical</a></td><td>linXBC</td><td>BCTypeMechanical.Velocity</td><td>Type of BC</td></tr>
+<tr><td>Boolean</td><td>internalLinX</td><td>true</td><td>Use internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>linXSpec</td><td>redeclare Modelica.Blocks.So...</td><td>Internal specification</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Y component of linear momentum</td></tr>
+<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Include</td></tr>
+<tr><td><a href="FCSys_BCs_Chemical_BaseClasses.html#FCSys.BCs.Chemical.BaseClasses.BCTypeMechanical">BCTypeMechanical</a></td><td>linYBC</td><td>BCTypeMechanical.Velocity</td><td>Type of BC</td></tr>
+<tr><td>Boolean</td><td>internalLinY</td><td>true</td><td>Use internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>linYSpec</td><td>redeclare Modelica.Blocks.So...</td><td>Internal specification</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Z component of linear momentum</td></tr>
+<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Include</td></tr>
+<tr><td><a href="FCSys_BCs_Chemical_BaseClasses.html#FCSys.BCs.Chemical.BaseClasses.BCTypeMechanical">BCTypeMechanical</a></td><td>linZBC</td><td>BCTypeMechanical.Velocity</td><td>Type of BC</td></tr>
+<tr><td>Boolean</td><td>internalLinZ</td><td>true</td><td>Use internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>linZSpec</td><td>redeclare Modelica.Blocks.So...</td><td>Internal specification</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Enthalpy</td></tr>
+<tr><td><a href="FCSys_BCs_Chemical_BaseClasses.html#FCSys.BCs.Chemical.BaseClasses.BCTypeMechanical">BCTypeMechanical</a></td><td>fluidBC</td><td>BCTypeFluid.EnthalpyMassic</td><td>Type of BC</td></tr>
+<tr><td>Boolean</td><td>internalFluid</td><td>true</td><td>Use internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>fluidSpec</td><td>redeclare Modelica.Blocks.So...</td><td>Internal specification</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a></td><td>chemical</td><td>Single-species connector for material, with advection of linear momentum and enthalpy</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Bus of inputs to specify conditions</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Species <font color="darkgreen">
+  &quot;BCs for the <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a> connector&quot;</font>
+
+  <font color="blue">import </font><a href="FCSys_BCs_Chemical_BaseClasses.html#FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial">FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial</a>;
+  <font color="blue">import </font><a href="FCSys_BCs_Chemical_BaseClasses.html#FCSys.BCs.Chemical.BaseClasses.BCTypeMechanical">FCSys.BCs.Chemical.BaseClasses.BCTypeMechanical</a>;
+  <font color="blue">import </font><a href="FCSys_BCs_Chemical_BaseClasses.html#FCSys.BCs.Chemical.BaseClasses.BCTypeFluid">FCSys.BCs.Chemical.BaseClasses.BCTypeFluid</a>;
+  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_BCs.html#FCSys.BaseClasses.Icons.BCs.Single">FCSys.BaseClasses.Icons.BCs.Single</a>;
+
+  <font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a> <font color="blue">
+    constrainedby </font>FCSys.Characteristics.BaseClasses.Characteristic <font color="darkgreen">
+    &quot;Characteristic data&quot;</font>;
+
+  <font color="darkgreen">// Material</font>
+  <font color="blue">parameter </font><a href="FCSys_BCs_Chemical_BaseClasses.html#FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial">BCTypeMaterial</a> material=BCTypeMaterial.PotentialElectrochemicalPerTemperature
+    <font color="darkgreen">&quot;Type of BC&quot;</font>;
+  <font color="blue">parameter </font>Boolean internalMaterial=true <font color="darkgreen">&quot;Use internal specification&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Modelica.Blocks.Sources.Constant</a> materialSpec(k(start=<font color="red">Data.g</font>(298.15
+          *U.K)/(298.15*U.K))) <font color="blue">if </font>internalMaterial <font color="blue">constrainedby </font>
+    Modelica.Blocks.Interfaces.SO <font color="darkgreen">&quot;Internal specification&quot;</font>;</textblock>
+
+  <font color="darkgreen">// X component of linear momentum</font>
+  <font color="blue">parameter </font>Boolean inclLinX=true <font color="darkgreen">&quot;Include&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_BCs_Chemical_BaseClasses.html#FCSys.BCs.Chemical.BaseClasses.BCTypeMechanical">BCTypeMechanical</a> linXBC=BCTypeMechanical.Velocity <font color="darkgreen">&quot;Type of BC&quot;</font>;
+  <font color="blue">parameter </font>Boolean internalLinX=true <font color="darkgreen">&quot;Use internal specification&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Modelica.Blocks.Sources.Constant</a> linXSpec(k(start=0)) <font color="blue">if </font>inclLinX<font color="blue">
+     and </font>internalLinX <font color="blue">constrainedby </font>Modelica.Blocks.Interfaces.SO <font color="darkgreen">
+    &quot;Internal specification&quot;</font>;</textblock>
+
+  <font color="darkgreen">// Y component of linear momentum</font>
+  <font color="blue">parameter </font>Boolean inclLinY=false <font color="darkgreen">&quot;Include&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_BCs_Chemical_BaseClasses.html#FCSys.BCs.Chemical.BaseClasses.BCTypeMechanical">BCTypeMechanical</a> linYBC=BCTypeMechanical.Velocity <font color="darkgreen">&quot;Type of BC&quot;</font>;
+  <font color="blue">parameter </font>Boolean internalLinY=true <font color="darkgreen">&quot;Use internal specification&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Modelica.Blocks.Sources.Constant</a> linYSpec(k(start=0)) <font color="blue">if </font>inclLinY<font color="blue">
+     and </font>internalLinY <font color="blue">constrainedby </font>Modelica.Blocks.Interfaces.SO <font color="darkgreen">
+    &quot;Internal specification&quot;</font>;</textblock>
+
+  <font color="darkgreen">// Z component of linear momentum</font>
+  <font color="blue">parameter </font>Boolean inclLinZ=false <font color="darkgreen">&quot;Include&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_BCs_Chemical_BaseClasses.html#FCSys.BCs.Chemical.BaseClasses.BCTypeMechanical">BCTypeMechanical</a> linZBC=BCTypeMechanical.Velocity <font color="darkgreen">&quot;Type of BC&quot;</font>;
+  <font color="blue">parameter </font>Boolean internalLinZ=true <font color="darkgreen">&quot;Use internal specification&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Modelica.Blocks.Sources.Constant</a> linZSpec(k(start=0)) <font color="blue">if </font>inclLinZ<font color="blue">
+     and </font>internalLinZ <font color="blue">constrainedby </font>Modelica.Blocks.Interfaces.SO <font color="darkgreen">
+    &quot;Internal specification&quot;</font>;</textblock>
+
+  <font color="darkgreen">// Enthalpy</font>
+  <font color="blue">parameter </font><a href="FCSys_BCs_Chemical_BaseClasses.html#FCSys.BCs.Chemical.BaseClasses.BCTypeMechanical">BCTypeMechanical</a> fluidBC=BCTypeFluid.EnthalpyMassic <font color="darkgreen">&quot;Type of BC&quot;</font>;
+  <font color="blue">parameter </font>Boolean internalFluid=true <font color="darkgreen">&quot;Use internal specification&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Modelica.Blocks.Sources.Constant</a> fluidSpec(k(start=<font color="red">Data.h</font>()/Data.m))
+    <font color="blue">if </font>internalFluid <font color="blue">constrainedby </font>Modelica.Blocks.Interfaces.SO <font color="darkgreen">
+    &quot;Internal specification&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">FCSys.Connectors.ChemicalOutput</a> chemical(
+    <font color="blue">final </font>n_lin=n_lin,
+    <font color="blue">final </font>formula=Data.formula,
+    <font color="blue">final </font>m=Data.m) <font color="darkgreen">
+    &quot;Single-species connector for material, with advection of linear momentum and enthalpy&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">FCSys.Connectors.RealInputBus</a> u <font color="darkgreen">&quot;Bus of inputs to specify conditions&quot;</font>;</textblock>
+
+<font color="blue">protected </font>
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_lin=<font color="red">countTrue</font>({inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">
+    &quot;Number of components of linear momentum&quot;</font>;
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputInternal">FCSys.Connectors.RealInputInternal</a> u_material(<font color="blue">final </font>unit=<font color="blue">if </font>material ==
+        BCTypeMaterial.PotentialElectrochemicalPerTemperature<font color="blue"> then </font>&quot;1&quot;<font color="blue"> else </font>&quot;N/T&quot;)
+    <font color="blue">if </font><font color="blue">not </font>internalMaterial <font color="darkgreen">&quot;Material signal&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputInternal">FCSys.Connectors.RealInputInternal</a> u_lin_x(<font color="blue">final </font>unit=&quot;l/T&quot;) <font color="blue">if </font><font color="blue">not </font>
+    internalLinX<font color="blue"> and </font>inclLinX <font color="darkgreen">&quot;Signal for the x component of linear momentum&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputInternal">FCSys.Connectors.RealInputInternal</a> u_lin_y(<font color="blue">final </font>unit=&quot;l/T&quot;) <font color="blue">if </font><font color="blue">not </font>
+    internalLinY<font color="blue"> and </font>inclLinY <font color="darkgreen">&quot;Signal for the y component of linear momentum&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputInternal">FCSys.Connectors.RealInputInternal</a> u_lin_z(<font color="blue">final </font>unit=&quot;l/T&quot;) <font color="blue">if </font><font color="blue">not </font>
+    internalLinZ<font color="blue"> and </font>inclLinZ <font color="darkgreen">&quot;Signal for the z component of linear momentum&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputInternal">FCSys.Connectors.RealInputInternal</a> u_fluid(<font color="blue">final </font>unit=&quot;l2/T2&quot;) <font color="blue">if </font><font color="blue">not </font>
+    internalFluid <font color="darkgreen">&quot;Fluid signal&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputInternal">FCSys.Connectors.RealInputInternal</a> u_material_int <font color="darkgreen">&quot;Internal material signal&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputInternal">FCSys.Connectors.RealInputInternal</a> u_lin_int[n_lin] <font color="darkgreen">
+    &quot;Internal mechanical signal&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputInternal">FCSys.Connectors.RealInputInternal</a> u_fluid_int <font color="darkgreen">&quot;Internal fluid signal&quot;</font>;</textblock>
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Material</font>
+  <font color="blue">if </font>material == BCTypeMaterial.PotentialElectrochemicalPerTemperature<font color="blue"> then</font>
+    chemical.muPerT = u_material_int;
+  <font color="blue">else</font>
+    chemical.Ndot = u_material_int;
+  <font color="blue">end if</font>;
+
+  <font color="darkgreen">// X component of linear momentum</font>
+  <font color="blue">if </font>inclLinX<font color="blue"> then</font>
+    <font color="darkgreen">//  if linXBC == BCTypeMechanical.Velocity then</font>
+    chemical.phi[1] = u_lin_int[1];
+    <font color="darkgreen">//  end if;</font>
+  <font color="blue">end if</font>;
+
+  <font color="darkgreen">// Y component of linear momentum</font>
+  <font color="blue">if </font>inclLinY<font color="blue"> then</font>
+    <font color="darkgreen">//  if linYBC == BCTypeMechanical.Velocity then</font>
+    chemical.phi[2] = u_lin_int[2];
+    <font color="darkgreen">//  end if;</font>
+  <font color="blue">end if</font>;
+
+  <font color="darkgreen">// Z component of linear momentum</font>
+  <font color="blue">if </font>inclLinZ<font color="blue"> then</font>
+    <font color="darkgreen">//  if linZBC == BCTypeMechanical.Velocity then</font>
+    chemical.phi[3] = u_lin_int[3];
+    <font color="darkgreen">//  end if;</font>
+  <font color="blue">end if</font>;
+
+  <font color="darkgreen">// Enthalpy</font>
+  <font color="darkgreen">//  if fluidBC== BCTypeFluid.EnthalpyMassic then</font>
+  chemical.hbar = u_fluid_int;
+  <font color="darkgreen">//  end if;</font>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u.material, u_material);
+  <font color="red">connect</font>(u.linX, u_lin_x);
+  <font color="red">connect</font>(u.linY, u_lin_y);
+  <font color="red">connect</font>(u.linZ, u_lin_z);
+  <font color="red">connect</font>(u.fluid, u_fluid);
+  <font color="red">connect</font>(u_material_int, u_material);
+  <font color="red">connect</font>(u_lin_x, u_lin_int[1]);
+  <font color="red">connect</font>(u_lin_y, u_lin_int[2]);
+  <font color="red">connect</font>(u_lin_z, u_lin_int[3]);
+  <font color="red">connect</font>(u_fluid, u_fluid_int);
+  <font color="red">connect</font>(materialSpec.y, u_material_int);
+  <font color="red">connect</font>(linXSpec.y, u_lin_int[1]);
+  <font color="red">connect</font>(linYSpec.y, u_lin_int[2]);
+  <font color="red">connect</font>(linZSpec.y, u_lin_int[3]);
+  <font color="red">connect</font>(fluidSpec.y, u_fluid_int);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Species;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jan 12 10:33:56 2013.
+</div>
+</body>
+</html>
