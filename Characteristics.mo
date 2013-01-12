@@ -47,6 +47,7 @@ package Characteristics
           FCSys.Characteristics.'H+'.Ionomer.c_V(T, p);
       output Q.CapacityThermalSpecific c_V_N2=DataN2.c_V(T, p);
       output Q.CapacityThermalSpecific c_V_O2=DataO2.c_V(T, p);
+
       //
       // Gibbs potential
       output Q.Potential g_C=DataC.g(T, p);
