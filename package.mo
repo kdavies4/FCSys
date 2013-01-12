@@ -126,8 +126,10 @@ package UsersGuide "User's Guide"
         extending the existing classes and
         following the existing framework.  It will be necessary to add species (Li<sup>+</sup>, O<sup>2-</sup>, etc.) and reactions with the
         proper stoichiometries.</li>
-        <li>Please offer code and/or suggestions so that the library can be improved.
-        Use the <a href=\"modelica://FCSys.UsersGuide.Contact\">contact information</a>.</li>
+        <li>Please share your additions and/or modifications to the source code so that the library
+        can be improved and others may benefit.  The best way is to create a fork from the
+        development page at <a href=\"https://github.com/kdavies4/FCSys\">https://github.com/kdavies4/FCSys</a>.
+        Please also feel free to use the <a href=\"modelica://FCSys.UsersGuide.Contact\">contact information</a>.</li>
     </ol></p>
     </html>"));
     end GettingStarted;
@@ -316,7 +318,10 @@ package UsersGuide "User's Guide"
     <p>Updates to this package may be available online at the
     <a href=\"http://kdavies4.github.com/FCSys/\">main project site</a>.
     The development page is
-    <a href=\"https://github.com/kdavies4/FCSys\">https://github.com/kdavies4/FCSys</a>.</p>
+    <a href=\"https://github.com/kdavies4/FCSys\">https://github.com/kdavies4/FCSys</a>.
+    Please report any problems using the <a href=\"https://github.com/kdavies4/FCSys/issues\">issues</a> 
+    link on that page.
+    </p>
 
     <p><b>Author:</b></p>
     <dd>Kevin Davies</dd>
