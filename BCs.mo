@@ -6,17 +6,10 @@ package BCs "Models for boundary conditions"
 
   package Examples "Examples and tests"
     extends Modelica.Icons.ExamplesPackage;
-    model Defaults "<html>Test the <code>Defaults</code> model</html>"
-      extends Modelica.Icons.Example;
-
-      // TODO:  Make this into a meaningful example.
-      FCSys.BCs.Defaults defaults
-        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-    end Defaults;
 
     model FaceBC "<html>Test the BCs for the face of a subregion</html>"
       extends Modelica.Icons.Example;
-
+      extends Modelica.Icons.UnderConstruction;
       FCSys.BCs.FaceBus.Subregion subregionFaceBC(gas(inclH2O=true, H2O(
             redeclare FCSys.BCs.Face.Material.Current material,
             inviscidX=false,
@@ -61,7 +54,7 @@ package BCs "Models for boundary conditions"
     model FaceBCPhases
       "<html>Test the BCs for the face of a subregion with phases</html>"
       extends Modelica.Icons.Example;
-
+      extends Modelica.Icons.UnderConstruction;
       // Geometric parameters
       inner parameter Q.Length L[Axis](each min=Modelica.Constants.small,start=
             ones(3)*U.cm) "<html>Length (<b>L</b>)</html>"
@@ -175,6 +168,7 @@ package BCs "Models for boundary conditions"
       // **Need to nest the AdaptBusH2 to subregion level (currently only phase level).
       // **check that heat is transferred.
       extends Modelica.Icons.Example;
+      extends Modelica.Icons.UnderConstruction;
 
       FCSys.BCs.Adapters.Phases.AnodeGas adaptH2(redeclare
           Modelica.Media.IdealGases.SingleGases.H2 Medium)
@@ -222,7 +216,7 @@ package BCs "Models for boundary conditions"
           smooth=Smooth.None));
 
       connect(volume.heatPort, adaptH2.heatPort) annotation (Line(
-          points={{22,20},{16,20},{16,4},{8,4}},
+          points={{22,20},{16,20},{16,6.10623e-16},{8,6.10623e-16}},
           color={191,0,0},
           smooth=Smooth.None));
       annotation (
@@ -1365,27 +1359,14 @@ package BCs "Models for boundary conditions"
 
   package TestStands "Test stands"
     extends Modelica.Icons.Package;
-    extends FCSys.BaseClasses.Icons.PackageUnderConstruction;
-    model TestProfile "Test profile"
+
+    model TestProfile "Cell test profile"
       extends Modelica.Icons.Example;
       extends FCSys.BCs.TestStands.BaseClasses.PartialTestStandNoIO;
-      /*(
-    anEndBC(each graphite(inclC=true, 'incle-'=true)),
-    anSourceBC(each gas(inclH2=true, inclH2O=true)),
-    anSinkBC(each gas(inclH2=true, inclH2O=true)),
-    caEndBC(each graphite('incle-'=true)),
-    caSourceBC(each gas(
-        inclH2O=true,
-        inclN2=true,
-        inclO2=true)),
-    caSinkBC(each graphite(inclC=true, 'incle-'=true)));
-*/
 
-      annotation (
-        defaultComponentName="testStand",
-        defaultComponentPrefixes="replaceable",
-        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}),graphics));
+      annotation (structurallyIncomplete=true, Diagram(coordinateSystem(
+              preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
+            graphics));
     end TestProfile;
 
     model Replay
@@ -1401,7 +1382,7 @@ package BCs "Models for boundary conditions"
         tableOnFile=true,
         extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
         tableName="data" + String(n),
-        fileName="FCSys/tests/LOOCV/data.mat",
+        fileName="FCSys/test/LOOCV/data.mat",
         columns=2:19,
         smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments)
         "Block to load and replay data" annotation (Placement(transformation(
@@ -1853,17 +1834,16 @@ package BCs "Models for boundary conditions"
           smooth=Smooth.None));
 
       annotation (
-        Commands(file="tests/LOOCV/LOOCV.mos"
-            "Perform leave-one-out cross validation on the cell model"),
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-180,-100},
-                {180,100}}),graphics),
+                {180,100}}), graphics),
         experiment(StopTime=15481, Algorithm="Euler"),
         experimentSetupOutput);
+
     end Replay;
 
     package BaseClasses "Base classes (not for direct use)"
       extends Modelica.Icons.BasesPackage;
-      partial model PartialTestStand "Partial test stand"
+      partial model PartialTestStand "Partial cell test stand"
         extends FCSys.BaseClasses.Icons.Names.Top9;
         final parameter Integer n_x_an=1
           "<html>Number of subregions along the through-cell axis in anode FP (<i>n</i><sub>x an</sub>)</html>";
@@ -1884,7 +1864,7 @@ package BCs "Models for boundary conditions"
             Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
-              origin={-160,0}), iconTransformation(
+              origin={-160,0}),iconTransformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-160,0})));
@@ -1892,7 +1872,7 @@ package BCs "Models for boundary conditions"
           annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
-              origin={160,0}),iconTransformation(
+              origin={160,0}), iconTransformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={162,0})));
@@ -1900,7 +1880,7 @@ package BCs "Models for boundary conditions"
           annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
-              origin={-40,-160}),iconTransformation(
+              origin={-40,-160}), iconTransformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-40,-160})));
@@ -1908,7 +1888,7 @@ package BCs "Models for boundary conditions"
             Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
-              origin={-40,160}),iconTransformation(
+              origin={-40,160}), iconTransformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-40,160})));
@@ -1916,7 +1896,7 @@ package BCs "Models for boundary conditions"
           annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
-              origin={40,-160}), iconTransformation(
+              origin={40,-160}),iconTransformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={40,160})));
@@ -1924,7 +1904,7 @@ package BCs "Models for boundary conditions"
           (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
-              origin={40,160}),iconTransformation(
+              origin={40,160}), iconTransformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={40,-160})));
@@ -2069,19 +2049,21 @@ package BCs "Models for boundary conditions"
             smooth=Smooth.None));
         annotation (
           defaultComponentName="testStand",
-          Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},
+          Diagram(coordinateSystem(preserveAspectRatio=true,extent={{-160,-160},
                   {160,160}}), graphics),
-          Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
+          Icon(coordinateSystem(preserveAspectRatio=true,extent={{-160,-160},{
                   160,160}}), graphics={Rectangle(
-                      extent={{-160,160},{160,-160}},
-                      lineColor={191,191,191},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Backward),Rectangle(extent={{-160,
-                160},{160,-160}}, lineColor={0,0,0})}));
+                extent={{-160,160},{160,-160}},
+                lineColor={191,191,191},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Backward),Rectangle(extent={{-160,160},
+                    {160,-160}}, lineColor={0,0,0})}));
       end PartialTestStand;
 
-      partial model PartialTestStandNoIO "Partial test stand"
+      partial model PartialTestStandNoIO
+        "Partial cell test stand without inputs/outputs"
         extends FCSys.BaseClasses.Icons.Names.Top9;
+
         final parameter Integer n_x_an=1
           "<html>Number of subregions along the through-cell axis in anode FP (<i>n</i><sub>x an</sub>)</html>";
         final parameter Integer n_x_ca=1
@@ -2095,9 +2077,9 @@ package BCs "Models for boundary conditions"
             each graphite(
             inclC=true,
             'incle-'=true,
-            'e-'(redeclare FCSys.BCs.Face.Material.Current material, redeclare
-                Modelica.Blocks.Sources.Ramp materialSpec(height=1*U.A,
-                  duration=50)))) annotation (Placement(transformation(
+            'e-'(redeclare FCSys.BCs.Face.Material.Current material(redeclare
+                  Modelica.Blocks.Sources.Ramp spec(height=1*U.A,duration=50)))))
+          annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=90,
               origin={-30,0})));
@@ -2105,9 +2087,9 @@ package BCs "Models for boundary conditions"
             each graphite(
             inclC=true,
             'incle-'=true,
-            'e-'(redeclare FCSys.BCs.Face.Material.Current material, redeclare
-                Modelica.Blocks.Sources.Ramp materialSpec(height=-1*U.A,
-                  duration=50)))) annotation (Placement(transformation(
+            'e-'(redeclare FCSys.BCs.Face.Material.Current material(redeclare
+                  Modelica.Blocks.Sources.Ramp spec(height=1*U.A,duration=50)))))
+          annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={30,0})));
@@ -2118,7 +2100,7 @@ package BCs "Models for boundary conditions"
               rotation=180,
               origin={-20,-30})));
         FCSys.BCs.FaceBus.SubregionClosed anSink[n_x_an, n_z](each final axis=
-              FCSys.BaseClasses.Axis.y,each gas(inclH2=true, inclH2O=true))
+              FCSys.BaseClasses.Axis.y, each gas(inclH2=true, inclH2O=true))
           annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
@@ -2132,7 +2114,7 @@ package BCs "Models for boundary conditions"
               rotation=180,
               origin={20,-30})));
         FCSys.BCs.FaceBus.SubregionClosed caSink[n_x_ca, n_z](each final axis=
-              FCSys.BaseClasses.Axis.y,each gas(
+              FCSys.BaseClasses.Axis.y, each gas(
             inclH2O=true,
             inclN2=true,
             inclO2=true)) annotation (Placement(transformation(
@@ -2146,9 +2128,9 @@ package BCs "Models for boundary conditions"
 
         annotation (
           defaultComponentName="testStand",
-          Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
+          Diagram(coordinateSystem(preserveAspectRatio=true,extent={{-100,-100},
                   {100,100}}), graphics),
-          Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{
+          Icon(coordinateSystem(preserveAspectRatio=true,extent={{-160,-160},{
                   160,160}}), graphics));
       end PartialTestStandNoIO;
     end BaseClasses;
@@ -4529,8 +4511,8 @@ boundary condition</a> model.
       // option, e.g.,
       //     enable=axis <> Axis.x.
       // Therefore, the values of the enumerations are specified numerically.
-      replaceable Mechanical.Velocity mechanicalX if axis <> Axis.x and not
-        inviscidX constrainedby Mechanical.BaseClasses.PartialBC
+      replaceable Mechanical.Velocity mechanicalX(spec(k=0)) if axis <> Axis.x
+         and not inviscidX constrainedby Mechanical.BaseClasses.PartialBC
         "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
@@ -4548,8 +4530,8 @@ boundary condition</a> model.
           group="Y-axis linear momentum",
           enable=axis <> 2,
           __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalY if axis <> Axis.y and not
-        inviscidY constrainedby Mechanical.BaseClasses.PartialBC
+      replaceable Mechanical.Velocity mechanicalY(spec(k=0)) if axis <> Axis.y
+         and not inviscidY constrainedby Mechanical.BaseClasses.PartialBC
         "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
@@ -4567,8 +4549,8 @@ boundary condition</a> model.
           group="Z-axis linear momentum",
           enable=axis <> 3,
           __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalZ if axis <> Axis.z and not
-        inviscidZ constrainedby Mechanical.BaseClasses.PartialBC
+      replaceable Mechanical.Velocity mechanicalZ(spec(k=0)) if axis <> Axis.z
+         and not inviscidZ constrainedby Mechanical.BaseClasses.PartialBC
         "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
@@ -4656,10 +4638,8 @@ boundary condition</a> model.
 
       model Density "Prescribed density"
 
-        extends BaseClasses.PartialBC(
-          final bCType=BaseClasses.BCType.Density,
-          u(final unit="N/l3"),
-          spec(k=4*U.C/U.cm^3));
+        extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.Density,
+            u(final unit="N/l3"));
 
       equation
         material.rho = u_final;
@@ -4668,10 +4648,8 @@ boundary condition</a> model.
       end Density;
 
       model Current "Prescribed current"
-        extends BaseClasses.PartialBC(
-          final bCType=BaseClasses.BCType.Current,
-          u(final unit="N/T"),
-          spec(k=0));
+        extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.Current,
+            u(final unit="N/T"));
 
       equation
         material.Ndot = u_final;
@@ -4704,10 +4682,8 @@ boundary condition</a> model.
       extends Modelica.Icons.Package;
 
       model Velocity "Prescribed velocity"
-        extends BaseClasses.PartialBC(
-          final bCType=BaseClasses.BCType.Velocity,
-          u(final unit="l/T"),
-          spec(k=0));
+        extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.Velocity,
+            u(final unit="l/T"));
 
       equation
         mechanical.phi = u_final;
@@ -4716,10 +4692,8 @@ boundary condition</a> model.
       end Velocity;
 
       model Force "Prescribed shear force"
-        extends BaseClasses.PartialBC(
-          final bCType=BaseClasses.BCType.Force,
-          u(final unit="l.m/T2"),
-          spec(k=0));
+        extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.Force, u(
+              final unit="l.m/T2"));
 
       equation
         mechanical.mPhidot = u_final;
@@ -4752,10 +4726,8 @@ boundary condition</a> model.
       extends Modelica.Icons.Package;
 
       model Temperature "Prescribed temperature"
-        extends Thermal.BaseClasses.PartialBC(
-          final bCType=BaseClasses.BCType.Temperature,
-          u(final unit="l2.m/(N.T2)", displayUnit="K"),
-          spec(k=298.15*U.K));
+        extends Thermal.BaseClasses.PartialBC(final bCType=BaseClasses.BCType.Temperature,
+            u(final unit="l2.m/(N.T2)", displayUnit="K"));
 
       equation
         thermal.T = u_final;
@@ -4764,10 +4736,8 @@ boundary condition</a> model.
       end Temperature;
 
       model HeatFlowRate "Prescribed heat flow rate"
-        extends Thermal.BaseClasses.PartialBC(
-          final bCType=BaseClasses.BCType.HeatFlowRate,
-          u(final unit="l2.m/T3"),
-          spec(k=0));
+        extends Thermal.BaseClasses.PartialBC(final bCType=BaseClasses.BCType.HeatFlowRate,
+            u(final unit="l2.m/T3"));
 
       equation
         thermal.Qdot = u_final;
@@ -4812,9 +4782,9 @@ boundary condition</a> model.
           Dialog(group="Assumptions",compact=true));
 
         // Material
-        replaceable Material.Density material if thermoOpt == ThermoOpt.OpenDiabatic
-          constrainedby Material.BaseClasses.PartialBC "Type of condition"
-          annotation (
+        replaceable Material.Density material(spec(k=4*U.C/U.cm^3)) if
+          thermoOpt == ThermoOpt.OpenDiabatic constrainedby
+          Material.BaseClasses.PartialBC "Type of condition" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             group="Material",
@@ -4823,9 +4793,9 @@ boundary condition</a> model.
           Placement(transformation(extent={{-70,-14},{-50,6}})));
 
         // Heat
-        replaceable Thermal.Temperature thermal if thermoOpt <> ThermoOpt.ClosedAdiabatic
-          constrainedby Thermal.BaseClasses.PartialBC "Type of condition"
-          annotation (
+        replaceable Thermal.Temperature thermal(spec(k=298.15*U.K)) if
+          thermoOpt <> ThermoOpt.ClosedAdiabatic constrainedby
+          Thermal.BaseClasses.PartialBC "Type of condition" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             group="Heat",
@@ -5626,8 +5596,8 @@ boundary condition</a> model.
       // option, e.g.,
       //     enable=axis <> Axis.x.
       // Therefore, the values of the enumerations are specified numerically.
-      replaceable Mechanical.Velocity mechanicalX if axis <> Axis.x and not
-        inviscidX constrainedby Mechanical.BaseClasses.PartialBC
+      replaceable Mechanical.Velocity mechanicalX(spec(k=0)) if axis <> Axis.x
+         and not inviscidX constrainedby Mechanical.BaseClasses.PartialBC
         "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
@@ -5645,8 +5615,8 @@ boundary condition</a> model.
           group="Y-axis linear momentum",
           enable=axis <> 2,
           __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalY if axis <> Axis.y and not
-        inviscidY constrainedby Mechanical.BaseClasses.PartialBC
+      replaceable Mechanical.Velocity mechanicalY(spec(k=0)) if axis <> Axis.y
+         and not inviscidY constrainedby Mechanical.BaseClasses.PartialBC
         "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
@@ -5665,8 +5635,8 @@ boundary condition</a> model.
           enable=axis <> 3,
           __Dymola_descriptionLabel=true));
 
-      replaceable Mechanical.Velocity mechanicalZ if axis <> Axis.z and not
-        inviscidZ constrainedby Mechanical.BaseClasses.PartialBC
+      replaceable Mechanical.Velocity mechanicalZ(spec(k=0)) if axis <> Axis.z
+         and not inviscidZ constrainedby Mechanical.BaseClasses.PartialBC
         "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
@@ -5948,9 +5918,9 @@ boundary condition</a> model.
           Dialog(group="Assumptions",compact=true));
 
         // Material
-        replaceable Material.Density material if thermoOpt == ThermoOpt.OpenDiabatic
-          constrainedby Material.BaseClasses.PartialBC "Type of condition"
-          annotation (
+        replaceable Material.Density material(spec(k=4*U.C/U.cm^3)) if
+          thermoOpt == ThermoOpt.OpenDiabatic constrainedby
+          Material.BaseClasses.PartialBC "Type of condition" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             group="Material",
@@ -5959,9 +5929,9 @@ boundary condition</a> model.
           Placement(transformation(extent={{-70,0},{-50,20}})));
 
         // Heat
-        replaceable Thermal.Temperature thermal if thermoOpt <> ThermoOpt.ClosedAdiabatic
-          constrainedby Thermal.BaseClasses.PartialBC "Type of condition"
-          annotation (
+        replaceable Thermal.Temperature thermal(spec(k=298.15*U.K)) if
+          thermoOpt <> ThermoOpt.ClosedAdiabatic constrainedby
+          Thermal.BaseClasses.PartialBC "Type of condition" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
             group="Heat",
@@ -6251,13 +6221,13 @@ The default global default settings will be used for the current simulation.",
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             grid={2,2}),graphics={Rectangle(
-                  extent={{-100,40},{100,-40}},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  lineColor={0,0,0}),Text(
-                  extent={{-100,-10},{100,10}},
-                  lineColor={127,127,127},
-                  textString="%y")}),
+              extent={{-100,40},{100,-40}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={0,0,0}), Text(
+              extent={{-100,-10},{100,10}},
+              lineColor={127,127,127},
+              textString="%y")}),
         Diagram(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
