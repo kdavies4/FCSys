@@ -1411,7 +1411,6 @@ package Characteristics
           InlineNoEvent=true,
           Inline=true,
           smoothOrder=1);
-
       end g;
 
       replaceable function h
@@ -1778,7 +1777,7 @@ package Characteristics
       "Enumeration for the reference enthalpy of a species";
   end BaseClasses;
   annotation (Documentation(info="<html>
-  <p>Each species has a subpackage for each material phase in which the species 
+  <p>Each species has a subpackage for each material phase in which the species
   may exist.  The thermodynamic properties are generally different for each phase.
   </p>
   <p>Additional materials may be included as needed.  The thermodynamic data for

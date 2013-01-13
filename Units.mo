@@ -806,7 +806,7 @@ package Units "Constants and units of physical measure"
 
     <p>The user should be aware of several aspects of the implementation.
     A script
-    (\"FCSys/resources/scripts/units.mos\") runs a model (<a href=\"modelica://U.Evaluate\">U.Evaluate</a>)
+    (\"FCSys/resources/scripts/units.mos\") runs a model (<a href=\"modelica://Units.Evaluate\">Units.Evaluate</a>)
     to determine the values of the units and defines the conversions to display values as numbers
     in units.  This script is set to run when <a href=\"modelica://FCSys\">FCSys</a> is loaded via
     \"FCSys/load.mos\" or from a link in the \"Commands\" menu of <a href=\"modelica://FCSys.Units\">FCSys.Units</a> (when viewed within

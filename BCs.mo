@@ -197,7 +197,6 @@ package BCs "Models for boundary conditions"
 
         Diagram(graphics));
     end AnodeAdapter;
-
   end Examples;
 
   package Adapters "Adapters to Package Modelica"
@@ -285,34 +284,28 @@ package BCs "Models for boundary conditions"
           thickness=0.5,
           smooth=Smooth.None));
 
-      annotation (Icon(graphics={
-            Line(
-              points={{0,60},{0,-60}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-80,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,20},{80,20}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-20},{80,-20}},
-              color={191,0,0},
-              smooth=Smooth.None),
-            Line(
-              points={{0,60},{80,60}},
-              color={0,127,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-60},{80,-60}},
-              color={0,127,255},
-              smooth=Smooth.None)}), Diagram(graphics));
+      annotation (Icon(graphics={Line(
+                  points={{0,60},{0,-60}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-80,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,20},{80,20}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-20},{80,-20}},
+                  color={191,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{0,60},{80,60}},
+                  color={0,127,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-60},{80,-60}},
+                  color={0,127,255},
+                  smooth=Smooth.None)}));
     end Anode;
 
     model Cathode
@@ -397,34 +390,28 @@ package BCs "Models for boundary conditions"
           thickness=0.5,
           smooth=Smooth.None));
 
-      annotation (Icon(graphics={
-            Line(
-              points={{0,60},{0,-60}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-80,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,20},{80,20}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-20},{80,-20}},
-              color={191,0,0},
-              smooth=Smooth.None),
-            Line(
-              points={{0,60},{80,60}},
-              color={0,127,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-60},{80,-60}},
-              color={0,127,255},
-              smooth=Smooth.None)}), Diagram(graphics));
+      annotation (Icon(graphics={Line(
+                  points={{0,60},{0,-60}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-80,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,20},{80,20}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-20},{80,-20}},
+                  color={191,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{0,60},{80,60}},
+                  color={0,127,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-60},{80,-60}},
+                  color={0,127,255},
+                  smooth=Smooth.None)}));
     end Cathode;
 
     package Phases "Adapters for material phases"
@@ -500,7 +487,7 @@ package BCs "Models for boundary conditions"
             points={{58,-40},{80,-40}},
             color={0,127,255},
             smooth=Smooth.None));
-        annotation (Diagram(graphics), Icon(graphics={Line(
+        annotation ( Icon(graphics={Line(
                       points={{0,20},{0,-60}},
                       color={0,0,0},
                       smooth=Smooth.None,
@@ -630,7 +617,7 @@ package BCs "Models for boundary conditions"
             points={{58,-40},{80,-40}},
             color={0,127,255},
             smooth=Smooth.None));
-        annotation (Diagram(graphics), Icon(graphics={Line(
+        annotation ( Icon(graphics={Line(
                       points={{0,20},{0,-60}},
                       color={0,0,0},
                       smooth=Smooth.None,
@@ -708,7 +695,7 @@ package BCs "Models for boundary conditions"
                       smooth=Smooth.None),Line(
                       points={{0,0},{80,0}},
                       color={191,0,0},
-                      smooth=Smooth.None)}), Diagram(graphics));
+                      smooth=Smooth.None)}));
       end Graphite;
 
       model Liquid
@@ -758,7 +745,7 @@ package BCs "Models for boundary conditions"
             color={0,127,255},
             smooth=Smooth.None));
 
-        annotation (Diagram(graphics), Icon(graphics={Line(
+        annotation ( Icon(graphics={Line(
                       points={{0,20},{0,-60}},
                       color={0,0,0},
                       smooth=Smooth.None,
@@ -784,11 +771,11 @@ package BCs "Models for boundary conditions"
             "Modelica heat port" annotation (Placement(transformation(extent={{
                     70,-10},{90,10}}), iconTransformation(extent={{70,-10},{90,
                     10}})));
-          Connectors.FaceBus face "FCSys face connector" annotation (Placement(
+          FCSys.Connectors.FaceBus face "FCSys face connector" annotation (Placement(
                 transformation(extent={{-90,-10},{-70,10}}), iconTransformation(
                   extent={{-90,-10},{-70,10}})));
 
-          annotation (Diagram(graphics), Icon(graphics={Line(
+          annotation ( Icon(graphics={Line(
                           points={{0,0},{-80,0}},
                           color={127,127,127},
                           smooth=Smooth.None,
@@ -823,7 +810,7 @@ package BCs "Models for boundary conditions"
         0 = face.material.Ndot + pin.i*U.A/Data.z "Material";
 
         annotation (
-          Documentation(info="<html><p>For additional information, see the 
+          Documentation(info="<html><p>For additional information, see the
     <a href=\"modelica://FCSys.BCs.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"),
@@ -877,7 +864,7 @@ package BCs "Models for boundary conditions"
           Documentation(info="<html><p>The electrical connector (<code>pin</code>) is only included
     if the species is ionic.
     </p>
-    <p>For additional information, see the 
+    <p>For additional information, see the
     <a href=\"modelica://FCSys.BCs.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"),
@@ -897,7 +884,7 @@ package BCs "Models for boundary conditions"
 
         extends BaseClasses.PartialSpecies(face(final thermoOpt));
 
-        annotation (Documentation(info="<html><p>For additional information, see the 
+        annotation (Documentation(info="<html><p>For additional information, see the
     <a href=\"modelica://FCSys.BCs.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"), Icon(graphics={Line(
@@ -946,7 +933,7 @@ package BCs "Models for boundary conditions"
           // Conservation (no storage)
           0 = face.thermal.Qdot + heatPort.Q_flow*U.W "Energy";
           // Note:  The enthalpy, kinetic energy, and electric work terms each
-          // cancel since there is no material storage and the thermodynamic state
+          // cancel since there's no material storage and the thermodynamic state
           // and electrical potential is continuous across the junction.
 
           annotation (
@@ -1001,11 +988,11 @@ package BCs "Models for boundary conditions"
           "The mixture medium must have exactly two substances.");
         assert(MixtureMedium.substanceNames[1] == Medium1.substanceNames[1],
           "The first substance of the mixture medium (MixtureMedium) is \"" +
-          MixtureMedium.substanceNames[1] + "\", 
+          MixtureMedium.substanceNames[1] + "\",
 but the first pure substance is \"" + Medium1.substanceNames[1] + "\".");
         assert(MixtureMedium.substanceNames[2] == Medium2.substanceNames[1],
           "The second substance of the mixture medium (MixtureMedium) is \"" +
-          MixtureMedium.substanceNames[2] + "\", 
+          MixtureMedium.substanceNames[2] + "\",
 but the second pure substance is \"" + Medium2.substanceNames[1] + "\".");
 
         // Check the extra properties.
@@ -1015,13 +1002,13 @@ but the second pure substance is \"" + Medium2.substanceNames[1] + "\".");
           assert(MixtureMedium.extraPropertiesNames[i] == Medium1.extraPropertiesNames[
             i], "Extra property #" + String(i) +
             " of the mixture medium (MixtureMedium) is \"" + MixtureMedium.extraPropertiesNames[
-            i] + "\", 
+            i] + "\",
 but that of the first pure substance (Medium1) is \"" + Medium1.extraPropertiesNames[
             i] + "\".");
           assert(MixtureMedium.extraPropertiesNames[i] == Medium2.extraPropertiesNames[
             i], "Extra property #" + String(i) +
             " of the mixture medium (MixtureMedium) is \"" + MixtureMedium.extraPropertiesNames[
-            i] + "\", 
+            i] + "\",
 but that of the second pure substance (Medium2) is \"" + Medium2.extraPropertiesNames[
             i] + "\".");
         end for;
@@ -1053,24 +1040,23 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
           Documentation(info="<html><p>
   Assumptions:
   <ol>
-  <li>The mixing is ideal.  If the pure substances are being combined, 
-  then the massic enthalpy of the mixture is the mass-weighted sum of the pure substances.  
+  <li>The mixing is ideal.  If the pure substances are being combined,
+  then the massic enthalpy of the mixture is the mass-weighted sum of the pure substances.
   If the mixture is being split, then each of the pure substances receives fluid
   at the same massic enthalpy.
   </li>
-  <li>The mixture observes Dalton's law.  The pressure of the mixture is the sum 
+  <li>The mixture observes Dalton's law.  The pressure of the mixture is the sum
   of the pressures of the pure substances.
   </li>
   </ol>
   </p></html>"),
-          Diagram(graphics),
           Icon(graphics={Line(
-                points={{0,-40},{80,-40}},
-                color={0,127,255},
-                smooth=Smooth.None), Line(
-                points={{0,40},{80,40}},
-                color={0,127,255},
-                smooth=Smooth.None)}));
+                      points={{0,-40},{80,-40}},
+                      color={0,127,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,40},{80,40}},
+                      color={0,127,255},
+                      smooth=Smooth.None)}));
       end Junction2;
 
       model Junction3
@@ -1189,30 +1175,26 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
           Documentation(info="<html><p>
   Assumptions:
   <ol>
-  <li>The mixing is ideal.  If the pure substances are being combined, 
-  then the massic enthalpy of the mixture is the mass-weighted sum of the pure substances.  
+  <li>The mixing is ideal.  If the pure substances are being combined,
+  then the massic enthalpy of the mixture is the mass-weighted sum of the pure substances.
   If the mixture is being split, then each of the pure substances receives fluid
   at the same massic enthalpy.
   </li>
-  <li>The mixture observes Dalton's law.  The pressure of the mixture is the sum 
+  <li>The mixture observes Dalton's law.  The pressure of the mixture is the sum
   of the pressures of the pure substances.
   </li>
   </ol>
   </p></html>"),
-          Diagram(graphics),
-          Icon(graphics={
-              Line(
-                points={{0,-40},{80,-40}},
-                color={0,127,255},
-                smooth=Smooth.None),
-              Line(
-                points={{0,40},{80,40}},
-                color={0,127,255},
-                smooth=Smooth.None),
-              Line(
-                points={{6,0},{80,0}},
-                color={0,127,255},
-                smooth=Smooth.None)}));
+          Icon(graphics={Line(
+                      points={{0,-40},{80,-40}},
+                      color={0,127,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,40},{80,40}},
+                      color={0,127,255},
+                      smooth=Smooth.None),Line(
+                      points={{6,0},{80,0}},
+                      color={0,127,255},
+                      smooth=Smooth.None)}));
       end Junction3;
 
       package BaseClasses "Base classes (not for direct use)"
@@ -1250,21 +1232,17 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
 
           annotation (
             defaultComponentName="junction",
-            Diagram(graphics),
-            Icon(graphics={
-                Line(
-                  points={{-80,0},{0,0}},
-                  color={0,127,255},
-                  smooth=Smooth.None),
-                Line(
-                  points={{0,-40},{0,40}},
-                  color={0,127,255},
-                  smooth=Smooth.None),
-                Ellipse(
-                  extent={{-6,6},{6,-6}},
-                  lineColor={0,127,255},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid)}));
+            Icon(graphics={Line(
+                          points={{-80,0},{0,0}},
+                          color={0,127,255},
+                          smooth=Smooth.None),Line(
+                          points={{0,-40},{0,40}},
+                          color={0,127,255},
+                          smooth=Smooth.None),Ellipse(
+                          extent={{-6,6},{6,-6}},
+                          lineColor={0,127,255},
+                          fillColor={255,255,255},
+                          fillPattern=FillPattern.Solid)}));
         end PartialJunction;
       end BaseClasses;
     end Junctions;
@@ -2229,7 +2207,6 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
-
     end Gas;
 
     model Graphite "BC for graphite"
@@ -2298,7 +2275,6 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
-
     end Graphite;
 
     model Ionomer "BC for ionomer"
@@ -2399,7 +2375,6 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
-
     end Ionomer;
 
     model Liquid "BC for liquid"
@@ -2438,7 +2413,6 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
-
     end Liquid;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -2472,7 +2446,6 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,40})));
-
       end NullPhase;
     end BaseClasses;
   end ChemicalBus;
@@ -2499,7 +2472,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             iconTransformation(extent={{-10,90},{10,110}})));
 
       // Material
-      parameter BCTypeMaterial material=BCTypeMaterial.PotentialElectrochemicalPerTemperature
+      parameter BCTypeMaterial material=BCTypeMaterial.PotentialPerTemperature
         "Type of BC"
         annotation (Dialog(group="Material", __Dymola_descriptionLabel=true));
       parameter Boolean internalMaterial=true "Use internal specification"
@@ -2683,9 +2656,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
         "Number of components of linear momentum" annotation (Evaluate=true);
 
       FCSys.Connectors.RealInputInternal u_material(final unit=if material ==
-            BCTypeMaterial.PotentialElectrochemicalPerTemperature then "1"
-             else "N/T") if not internalMaterial "Material signal" annotation (
-          Placement(transformation(
+            BCTypeMaterial.PotentialPerTemperature then "1" else "N/T") if not
+        internalMaterial "Material signal" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-70,30}),iconTransformation(
@@ -2757,7 +2729,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
 
     equation
       // Material
-      if material == BCTypeMaterial.PotentialElectrochemicalPerTemperature then
+      if material == BCTypeMaterial.PotentialPerTemperature then
         chemical.muPerT = u_material_int;
       else
         chemical.Ndot = u_material_int;
@@ -2878,7 +2850,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
     package BaseClasses "Base classes (not for direct use)"
       extends Modelica.Icons.BasesPackage;
       type BCTypeMaterial = enumeration(
-          PotentialElectrochemicalPerTemperature
+          PotentialPerTemperature
             "Prescribed quotient of electrochemical potential and temperature",
 
           Current "Prescribed current") "Types of material BCs";
@@ -3067,7 +3039,6 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
           string="%first",
           index=-1,
           extent={{-6,3},{-6,3}}));
-
     end Phase;
 
     package Volume "BCs for additivity of volume"
@@ -3286,7 +3257,6 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             points={{-30,19},{-30,10},{5.55112e-16,10},{5.55112e-16,-10}},
             color={0,0,127},
             smooth=Smooth.None));
-
       end PartialBC;
     end BaseClasses;
   end InertAmagat;
@@ -3466,7 +3436,6 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
           string="%first",
           index=-1,
           extent={{-6,3},{-6,3}}));
-
     end Species;
 
     package Pressure "BCs for additivity of pressure"
@@ -3679,7 +3648,6 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             points={{-30,19},{-30,10},{5.55112e-16,10},{5.55112e-16,-10}},
             color={0,0,127},
             smooth=Smooth.None));
-
       end PartialBC;
     end BaseClasses;
   end InertDalton;
@@ -4217,7 +4185,6 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
-
       end Graphite;
 
       model Ionomer "BC for ionomer"
@@ -4343,7 +4310,6 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
-
       end Ionomer;
 
       model Liquid "BC for liquid"
@@ -4399,7 +4365,6 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
-
       end Liquid;
 
       package BaseClasses "Base classes (not for direct use)"
@@ -4417,7 +4382,6 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={0,40})));
-
         end NullPhase;
       end BaseClasses;
     end Phases;
@@ -4426,7 +4390,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
 <a href=\"modelica://FCSys\">FCSys</a> are hierarchical
 (see the <a href=\"modelica://FCSys.Connectors\">Connectors</a> package),
 the models for the boundary conditions must be as well.  A
-<a href=\"modelica://FCSys.Connectors.BaseClasses.PartialFace\">Face</a>
+<a href=\"modelica://FCSys.Connectors.Face\">Face</a>
 connector (<a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a>,
 <a href=\"modelica://FCSys.Connectors.FaceY\">FaceY</a>, or
 <a href=\"modelica://FCSys.Connectors.FaceZ\">FaceZ</a>)
@@ -4790,7 +4754,6 @@ boundary condition</a> model.
             string="%first",
             index=-1,
             extent={{-6,3},{-6,3}}));
-
       end PartialSpecies;
 
       partial model PartialBC "Partial model for a BC"
@@ -4836,7 +4799,6 @@ boundary condition</a> model.
             points={{-30,19},{-30,10},{5.55112e-16,10},{5.55112e-16,-10}},
             color={0,0,127},
             smooth=Smooth.None));
-
       end PartialBC;
     end BaseClasses;
   end Face;
@@ -5270,7 +5232,6 @@ boundary condition</a> model.
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
-
       end Gas;
 
       model Graphite "BC for graphite"
@@ -5343,7 +5304,6 @@ boundary condition</a> model.
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
-
       end Graphite;
 
       model Ionomer "BC for ionomer"
@@ -5452,7 +5412,6 @@ boundary condition</a> model.
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
-
       end Ionomer;
 
       model Liquid "BC for liquid"
@@ -5493,7 +5452,6 @@ boundary condition</a> model.
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
-
       end Liquid;
 
       package BaseClasses "Base classes (not for direct use)"
@@ -5515,7 +5473,6 @@ boundary condition</a> model.
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={0,40})));
-
         end NullPhase;
       end BaseClasses;
     end Phases;
@@ -5698,7 +5655,7 @@ boundary condition</a> model.
           pattern=LinePattern.None,
           smooth=Smooth.None));
 
-      annotation (Diagram(graphics), Icon(graphics));
+      annotation ( Icon(graphics));
     end Species;
 
     package Material "Material BCs"
@@ -5897,7 +5854,7 @@ boundary condition</a> model.
         //     enable=thermoOpt <> ThermoOpt.ClosedAdiabatic.
         // Therefore, the values of the enumerations are specified numerically.
 
-        Connectors.RealInputBus u "Input bus for external signal sources"
+        FCSys.Connectors.RealInputBus u "Input bus for external signal sources"
           annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
@@ -5971,7 +5928,6 @@ boundary condition</a> model.
             points={{-30,19},{-30,10},{5.55112e-16,10},{5.55112e-16,-10}},
             color={0,0,127},
             smooth=Smooth.None));
-
       end PartialBC;
     end BaseClasses;
   end FaceDifferential;
@@ -6152,7 +6108,6 @@ The default global default settings will be used for the current simulation.",
             pattern=LinePattern.None,
             lineColor={0,0,0})}),
       Diagram(graphics));
-
   end Environment;
 
   package BaseClasses "Base classes (not for direct use)"

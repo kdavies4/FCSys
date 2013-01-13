@@ -1188,7 +1188,6 @@ used as the inlet. The z axis extends across the width of the channel.</p></html
                   visible=not inclYFaces,
                   lineColor={0,0,0})}),
         Diagram(graphics));
-
     end AnFP;
 
     model GM "General Motors cathodic test flow plate and current collector"
@@ -1785,7 +1784,6 @@ the z axis extends across the width of the channel.</p>
                   textString="%name",
                   visible=not inclYFaces,
                   lineColor={0,0,0})}));
-
     end AnCL;
 
     model AnCGDL "Integrated anode catalyst/gas diffusion layer"
@@ -2254,7 +2252,6 @@ the z axis extends across the width of the channel.</p>
                   textString="%name",
                   visible=not inclYFaces,
                   lineColor={0,0,0})}));
-
     end CaCL;
 
     model CaCGDL "Integrated cathode catalyst/gas diffusion layer"

@@ -54,7 +54,6 @@ package Connectors "Declarative and imperative connectors"
               extent={{-100,20},{100,60}},
               textString="%name",
               lineColor={0,0,0})}));
-
   end ChemicalBusInternal;
 
   connector ChemicalInput
@@ -81,7 +80,6 @@ package Connectors "Declarative and imperative connectors"
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
               lineColor={208,104,0})}));
-
   end ChemicalInput;
 
   connector ChemicalOutput
@@ -100,7 +98,6 @@ package Connectors "Declarative and imperative connectors"
       Icon(graphics={Ellipse(extent={{-100,100},{100,-100}}, lineColor={208,104,
                 0})}),
       Diagram(graphics));
-
   end ChemicalOutput;
 
   expandable connector FaceBus
@@ -109,12 +106,11 @@ package Connectors "Declarative and imperative connectors"
     annotation (
       defaultComponentName="face",
       Documentation(info="<html><p>There is no minimal set of variables.  Species are included by connecting instances
-    of a <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialFace\">Face</a> connector
-    (<a href=\"modelica://FCSys.Connectors.Face\">Face</a>,
+    of a <a href=\"modelica://FCSys.Connectors.Face\">Face</a>,
     <a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a>,
     <a href=\"modelica://FCSys.Connectors.FaceY\">FaceY</a>, or
-    <a href=\"modelica://FCSys.Connectors.FaceZ\">FaceZ</a>).  In order to allow
-    the subconnectors of the <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialFace\">Face</a> connectors
+    <a href=\"modelica://FCSys.Connectors.FaceZ\">FaceZ</a> connector.  In order to allow
+    the subconnectors of the <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors
     (instances of <a href=\"modelica://FCSys.Connectors.Material\">Material</a>,
     <a href=\"modelica://FCSys.Connectors.Mechanical\">Mechanical</a>,
     and <a href=\"modelica://FCSys.Connectors.Thermal\">Thermal</a>) to be included independently, those
@@ -178,7 +174,6 @@ package Connectors "Declarative and imperative connectors"
               extent={{-100,20},{100,60}},
               textString="%name",
               lineColor={0,0,0})}));
-
   end FaceBusInternal;
 
   connector Face
@@ -233,7 +228,6 @@ package Connectors "Declarative and imperative connectors"
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(extent={{-100,100},{100,-100}},
               lineColor={127,127,127})}));
-
   end Face;
 
   connector FaceX
@@ -267,7 +261,6 @@ package Connectors "Declarative and imperative connectors"
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(extent={{-100,100},{100,-100}},
               lineColor={127,127,127})}));
-
   end FaceX;
 
   connector FaceY
@@ -301,7 +294,6 @@ package Connectors "Declarative and imperative connectors"
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(extent={{-100,100},{100,-100}},
               lineColor={127,127,127})}));
-
   end FaceY;
 
   connector FaceZ
@@ -335,7 +327,6 @@ package Connectors "Declarative and imperative connectors"
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(extent={{-100,100},{100,-100}},
               lineColor={127,127,127})}));
-
   end FaceZ;
 
   connector Inert "Connector to exchange linear momentum and heat by diffusion"
@@ -377,7 +368,6 @@ package Connectors "Declarative and imperative connectors"
             fillColor={255,255,255},
             fillPattern=FillPattern.Solid,
             lineColor={72,90,180})}));
-
   end Inert;
 
   connector InertAmagat
@@ -441,7 +431,6 @@ package Connectors "Declarative and imperative connectors"
             extent={{-100,80},{100,-90}},
             lineColor={0,0,0},
             textString="A")}));
-
   end InertAmagat;
 
   connector InertDalton
@@ -496,7 +485,6 @@ package Connectors "Declarative and imperative connectors"
             extent={{-100,80},{100,-90}},
             lineColor={0,0,0},
             textString="D")}));
-
   end InertDalton;
 
   connector InertInternal
@@ -559,7 +547,7 @@ package Connectors "Declarative and imperative connectors"
 
     annotation (
       Documentation(info="<html>
-    <p>Note that the geometric orientation is global.  
+    <p>Note that the geometric orientation is global.
     Current and force are positive in the globally positive direction (not inward).
     </p>
 
@@ -588,7 +576,6 @@ package Connectors "Declarative and imperative connectors"
             points={{-100,0},{100,0}},
             color={0,0,0},
             smooth=Smooth.None)}));
-
   end Material;
 
   connector MechanicalTransport "Connector to transport linear momentum"
@@ -601,7 +588,7 @@ package Connectors "Declarative and imperative connectors"
   <p>Note that the geometric orientation is global (not inward).  Thus,
   force is the rate of globally-referenced linear momentum into the component.
   </p>
-  
+
     <p>For more information, see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
@@ -627,7 +614,6 @@ package Connectors "Declarative and imperative connectors"
             points={{0,100},{0,-100}},
             color={0,0,0},
             smooth=Smooth.None)}));
-
   end MechanicalTransport;
 
   connector Thermal "Connector to transport heat"
@@ -670,7 +656,6 @@ package Connectors "Declarative and imperative connectors"
             points={{-100,-100},{100,100}},
             color={0,0,0},
             smooth=Smooth.None)}));
-
   end Thermal;
 
   connector RealInput = input Real
@@ -720,13 +705,13 @@ Connector with one input signal of type <code>Real</code>.</p>
         initialScale=0.1,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Polygon(
-            points={{0,20},{40,0},{0,-20},{0,20}},
-            lineColor={0,0,127},
-            fillColor={0,0,127},
-            fillPattern=FillPattern.Solid),Text(
-            extent={{-200,24},{200,64}},
-            textString="%name",
-            lineColor={0,0,0})}),
+          points={{0,20},{40,0},{0,-20},{0,20}},
+          lineColor={0,0,127},
+          fillColor={0,0,127},
+          fillPattern=FillPattern.Solid), Text(
+          extent={{-200,24},{200,64}},
+          textString="%name",
+          lineColor={0,0,0})}),
     Documentation(info="<html>
 <p>
 Protected connector with one input signal of type <code>Real</code>.</p>
@@ -755,15 +740,14 @@ Protected connector with one input signal of type <code>Real</code>.</p>
           initialScale=0.1,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-              points={{0,50},{100,0},{0,-50},{0,50}},
-              lineColor={0,0,127},
-              fillColor={0,0,127},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{-200,50},{200,90}},
-              textString="%name",
-              lineColor={0,0,0})}));
-
+            points={{0,50},{100,0},{0,-50},{0,50}},
+            lineColor={0,0,127},
+            fillColor={0,0,127},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5), Text(
+            extent={{-200,50},{200,90}},
+            textString="%name",
+            lineColor={0,0,0})}));
   end RealInputBus;
 
   expandable connector RealInputBusInternal
@@ -799,7 +783,6 @@ Protected connector with one input signal of type <code>Real</code>.</p>
               fillColor={0,0,127},
               fillPattern=FillPattern.Solid,
               lineThickness=0.5)}));
-
   end RealInputBusInternal;
 
   connector RealOutput = output Real
@@ -817,13 +800,13 @@ Protected connector with one input signal of type <code>Real</code>.</p>
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Polygon(
-            points={{-100,50},{0,0},{-100,-50},{-100,50}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),Text(
-            extent={{-200,50},{200,90}},
-            textString="%name",
-            lineColor={0,0,0})}),
+          points={{-100,50},{0,0},{-100,-50},{-100,50}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid), Text(
+          extent={{-200,50},{200,90}},
+          textString="%name",
+          lineColor={0,0,0})}),
     Documentation(info="<html>
 <p>
 Connector with one output signal of type <code>Real</code>.</p>
@@ -878,15 +861,14 @@ Protected connector with one output signal of type <code>Real</code>.</p>
           preserveAspectRatio=true,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-              points={{-100,50},{0,0},{-100,-50},{-100,50}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{-200,50},{200,90}},
-              textString="%name",
-              lineColor={0,0,0})}));
-
+            points={{-100,50},{0,0},{-100,-50},{-100,50}},
+            lineColor={0,0,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5), Text(
+            extent={{-200,50},{200,90}},
+            textString="%name",
+            lineColor={0,0,0})}));
   end RealOutputBus;
 
   expandable connector RealOutputBusInternal
@@ -920,7 +902,6 @@ Protected connector with one output signal of type <code>Real</code>.</p>
               extent={{-200,24},{200,64}},
               textString="%name",
               lineColor={0,0,0})}));
-
   end RealOutputBusInternal;
 
   package BaseClasses "Base classes (not for direct use)"
@@ -987,7 +968,6 @@ Protected connector with one output signal of type <code>Real</code>.</p>
               lineColor={208,104,0},
               fillPattern=FillPattern.Solid,
               fillColor={255,128,0})}));
-
     end PartialChemical;
 
     connector PartialFace
@@ -1026,7 +1006,6 @@ Protected connector with one output signal of type <code>Real</code>.</p>
               lineColor={127,127,127},
               fillColor={191,191,191},
               fillPattern=FillPattern.Solid)}));
-
     end PartialFace;
 
     type ThermoOpt = enumeration(
@@ -1035,9 +1014,8 @@ Protected connector with one output signal of type <code>Real</code>.</p>
         OpenDiabatic "Open and diabatic")
       "Enumeration of thermodynamic options for a face" annotation (
         Documentation(info="
-    <html><p>The open and adiabatic combination is invalid because it 
+    <html><p>The open and adiabatic combination is invalid because it
     prevents the rate of energy transfer from being calculated properly.</p></html>"));
-
   end BaseClasses;
 
   annotation (Documentation(info="<html>
@@ -1098,14 +1076,14 @@ Protected connector with one output signal of type <code>Real</code>.</p>
           <a href=\"modelica://FCSys.Connectors.ChemicalOutput\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ChemicalOutputI.png\"></a>
           <a href=\"modelica://FCSys.Connectors.ChemicalBus\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ChemicalBusI.png\"></a>
           <!--<a href=\"modelica://FCSys.Connectors.ChemicalBusInternal\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ChemicalBusInternalI.png\"></a>-->
-          <br>
+<br>
           <a href=\"modelica://FCSys.Connectors.Inert\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertI.png\"></a>
           <a href=\"modelica://FCSys.Connectors.InertAmagat\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertAmagatI.png\"></a>
           <a href=\"modelica://FCSys.Connectors.InertDalton\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertDaltonI.png\"></a>
-          <br>
+<br>
           <a href=\"modelica://FCSys.Connectors.MechanicalTransport\"><img src=\"modelica://FCSys/help/FCSys.Connectors.MechanicalTransportI.png\"></a>
           <a href=\"modelica://FCSys.Connectors.Face\"><img src=\"modelica://FCSys/help/FCSys.Connectors.FaceI.png\"></a>
-          <a href=\"modelica://FCSys.Connectors.FaceBus\"><img src=\"modelica://FCSys/help/FCSys.Connectors.FaceBusI.png\"></a></td>  
+          <a href=\"modelica://FCSys.Connectors.FaceBus\"><img src=\"modelica://FCSys/help/FCSys.Connectors.FaceBusI.png\"></a></td>
         <td valign=middle>Mechanical</td>
         <td valign=middle>Velocity<br>&phi; [L T<sup>-1</sup>]</td>
         <td valign=middle>Force<br><i>m</i>&Phi;dot [L M T<sup>-2</sup>]</td>
@@ -1209,7 +1187,7 @@ Protected connector with one output signal of type <code>Real</code>.</p>
   (see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model).
   The flow variable of the thermal pair is heat flow rate instead of entropy flow
   rate so that the transport equations are linear and follow the traditional
-  form (e.g., Fourier's law; see [<a href=\"modelica://FCSys.UsersGuide.References\">Hogan2006</a>], 
+  form (e.g., Fourier's law; see [<a href=\"modelica://FCSys.UsersGuide.References\">Hogan2006</a>],
   [<a href=\"modelica://FCSys.UsersGuide.References\">Cellier1991</a>], and
   <a href=\"modelica://Modelica.Thermal.HeatTransfer\">Modelica.Thermal.HeatTransfer</a>).
   The additivity of volume and

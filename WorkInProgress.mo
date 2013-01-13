@@ -445,7 +445,7 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
       Documentation(info="<html><p>The electrical connector (<code>pin</code>) is only included
     if the species is ionic.
     </p>
-    <p>For additional information, see the 
+    <p>For additional information, see the
     <a href=\"modelica://FCSys.BCs.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"),
@@ -538,6 +538,6 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
               smooth=Smooth.None),Line(
               points={{0,-40},{80,-40}},
               color={0,127,255},
-              smooth=Smooth.None)}), Diagram(graphics));
+              smooth=Smooth.None)}));
   end BCsAdaptersPhasesIonomer;
 end WorkInProgress;

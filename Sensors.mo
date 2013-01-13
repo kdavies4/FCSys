@@ -489,13 +489,12 @@ sensor</a> models.
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
-                100,100}}), graphics={
-            Line(points={{-40,-100},{-40,-58}}, color={0,0,127}),
-            Line(points={{40,-100},{40,-58}}, color={0,0,127}),
-            Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="mu/T   phi   T     ")}));
+                100,100}}), graphics={Line(points={{-40,-100},{-40,-58}}, color
+              ={0,0,127}),Line(points={{40,-100},{40,-58}}, color={0,0,127}),
+              Text(
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="mu/T   phi   T     ")}));
     end Species;
   end Chemical;
 
@@ -575,7 +574,7 @@ sensor</a> models.
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
-      annotation (defaultComponentName="phaseInertSensor", Icon(graphics));
+      annotation (defaultComponentName="phaseInertSensor");
     end Phase;
 
     model Pressure "Prescribed pressure"
@@ -587,9 +586,9 @@ sensor</a> models.
         defaultComponentPrefixes="replaceable",
         defaultComponentName="volSensor",
         Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="p")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="p")}));
     end Pressure;
 
     model Velocity "Measured velocity"
@@ -624,9 +623,9 @@ sensor</a> models.
         defaultComponentPrefixes="replaceable",
         defaultComponentName="momSensor",
         Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="phi")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="phi")}));
     end Velocity;
 
     model Temperature "Measured temperature"
@@ -638,9 +637,9 @@ sensor</a> models.
         defaultComponentPrefixes="replaceable",
         defaultComponentName="entropySensor",
         Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="T")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="T")}));
     end Temperature;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -671,7 +670,7 @@ sensor</a> models.
         0 = inert.V "No (additional) volume";
         zeros(n_lin) = inert.mPhidot "No force";
         0 = inert.Qdot "Adiabatic";
-        annotation (defaultComponentName="phaseInertSensor", Icon(graphics));
+        annotation (defaultComponentName="phaseInertSensor");
       end PartialSensor;
     end BaseClasses;
   end InertAmagat;
@@ -754,7 +753,7 @@ sensor</a> models.
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
-      annotation (defaultComponentName="speciesInertSensor", Icon(graphics));
+      annotation (defaultComponentName="speciesInertSensor");
     end Species;
 
     model Volume "Measured volume"
@@ -765,9 +764,9 @@ sensor</a> models.
       y = inert.V;
 
       annotation (Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="V")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="V")}));
     end Volume;
 
     model Velocity "Measured velocity"
@@ -798,9 +797,9 @@ sensor</a> models.
       zeros(n_lin) = inert.mPhidot "No force";
       0 = inert.Qdot "Adiabatic";
       annotation (Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="phi")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="phi")}));
     end Velocity;
 
     model Temperature "Measured temperature"
@@ -813,9 +812,9 @@ sensor</a> models.
       y = inert.T;
 
       annotation (Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="T")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="T")}));
     end Temperature;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -840,7 +839,7 @@ sensor</a> models.
         zeros(n_lin) = inert.mPhidot "No force";
         0 = inert.Qdot "Adiabatic";
 
-        annotation (defaultComponentName="speciesInertSensor", Icon(graphics));
+        annotation (defaultComponentName="speciesInertSensor");
       end PartialSensor;
     end BaseClasses;
   end InertDalton;
@@ -927,7 +926,6 @@ sensor</a> models.
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="subregionFaceSensor",
-        Icon(graphics),
         Diagram(graphics));
     end Subregion;
 
@@ -1136,7 +1134,6 @@ sensor</a> models.
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
-
       end Gas;
 
       model Graphite "Sensor for graphite"
@@ -1242,7 +1239,6 @@ sensor</a> models.
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
-
       end Graphite;
 
       model Ionomer "Sensor for ionomer"
@@ -1405,7 +1401,6 @@ sensor</a> models.
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
-
       end Ionomer;
 
       model Liquid "Sensor for liquid"
@@ -1463,7 +1458,6 @@ sensor</a> models.
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
-
       end Liquid;
 
       package BaseClasses "Base classes (not for direct use)"
@@ -1486,7 +1480,7 @@ sensor</a> models.
                 rotation=270,
                 origin={0,-100})));
 
-          annotation (defaultComponentName="phaseFaceSensor", Icon(graphics));
+          annotation (defaultComponentName="phaseFaceSensor");
         end NullPhase;
       end BaseClasses;
     end Phases;
@@ -1495,14 +1489,13 @@ sensor</a> models.
 <a href=\"modelica://FCSys\">FCSys</a> are hierarchical
 (see the <a href=\"modelica://FCSys.Connectors\">Connectors</a> package),
 the models for the sensors must be as well.  A
-<a href=\"modelica://FCSys.Connectors.BaseClasses.PartialFace\">Face</a>
-connector (<a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a>,
-<a href=\"modelica://FCSys.Connectors.FaceY\">FaceY</a>,
-<a href=\"modelica://FCSys.Connectors.FaceZ\">FaceZ</a>,
-or <a href=\"modelica://FCSys.Connectors.FaceGeneric\">FaceGeneric</a>)
+<a href=\"modelica://FCSys.Connectors.Face\">Face</a>,
+<a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a>,
+<a href=\"modelica://FCSys.Connectors.FaceY\">FaceY</a>, or
+<a href=\"modelica://FCSys.Connectors.FaceZ\">FaceZ</a> connector
 is used in <a href=\"modelica://FCSys.Subregions.Species\">Species</a> models,
-and there is a corresponding <a href=\"modelica://FCSys.Sensors.Face.Species.Species\">Species
-sensor</a> model in this package. The
+and there is a corresponding <a href=\"modelica://FCSys.Sensors.Face.Species\">Species
+sensor</a> model. The
 <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>
 connector is used in <a href=\"modelica://FCSys.Subregions.Phases\">Phase</a> models,
 and there are corresponding <a href=\"modelica://FCSys.Sensors.Face.Phases\">Phase
@@ -1515,7 +1508,7 @@ sensor</a> model.
   end FaceBus;
 
   package Face
-    "<html>Sensors for a single <a href=\"modelica://FCSys.Connectors.BaseClasses.BaseClasses.PartialFace\">Face</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
+    "<html>Sensors for a single <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
     extends Modelica.Icons.Package;
 
     model Species
@@ -1633,7 +1626,6 @@ sensor</a> model.
 
       annotation (
         defaultComponentName="speciesFaceSensor",
-        Icon(graphics),
         Diagram(graphics));
     end Species;
 
@@ -1717,7 +1709,6 @@ sensor</a> model.
 
       annotation (
         defaultComponentName="speciesFaceSensor",
-        Icon(graphics),
         Diagram(graphics));
     end SpeciesX;
 
@@ -1801,7 +1792,6 @@ sensor</a> model.
 
       annotation (
         defaultComponentName="speciesFaceSensor",
-        Icon(graphics),
         Diagram(graphics));
     end SpeciesY;
 
@@ -1885,7 +1875,6 @@ sensor</a> model.
 
       annotation (
         defaultComponentName="speciesFaceSensor",
-        Icon(graphics),
         Diagram(graphics));
     end SpeciesZ;
 
@@ -1986,7 +1975,6 @@ sensor</a> model.
 
         annotation (
           defaultComponentName="speciesFaceSensor",
-          Icon(graphics),
           Diagram(graphics));
       end PartialSpecies;
     end BaseClasses;
@@ -2493,13 +2481,12 @@ sensor</a> model.
                 origin={0,-100})));
 
           annotation (defaultComponentName="phaseFaceSensor", Icon(graphics={
-                  Line(
-                  points={{-70,0},{-100,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None), Line(
-                  points={{100,0},{70,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None)}));
+                  Line(   points={{-70,0},{-100,0}},
+                          color={127,127,127},
+                          smooth=Smooth.None),Line(
+                          points={{100,0},{70,0}},
+                          color={127,127,127},
+                          smooth=Smooth.None)}));
         end NullPhase;
       end BaseClasses;
     end Phases;
@@ -2507,15 +2494,15 @@ sensor</a> model.
     annotation (Documentation(info="<html><p>Since the connectors in
 <a href=\"modelica://FCSys\">FCSys</a> are hierarchical
 (see the <a href=\"modelica://FCSys.Connectors\">Connectors</a> package),
-the models for the sensors must be as well.  A
-<a href=\"modelica://FCSys.Connectors.BaseClasses.PartialFace\">Face</a>
-connector (<a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a>,
-<a href=\"modelica://FCSys.Connectors.FaceY\">FaceY</a>,
-<a href=\"modelica://FCSys.Connectors.FaceZ\">FaceZ</a>,
-or <a href=\"modelica://FCSys.Connectors.FaceGeneric\">FaceGeneric</a>)
+the models for the sensors must be as well.   A
+<a href=\"modelica://FCSys.Connectors.Face\">Face</a>,
+<a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a>,
+<a href=\"modelica://FCSys.Connectors.FaceY\">FaceY</a>, or
+<a href=\"modelica://FCSys.Connectors.FaceZ\">FaceZ</a>
+connector
 is used in <a href=\"modelica://FCSys.Subregions.Species\">Species</a> models,
-and there is a corresponding <a href=\"modelica://FCSys.Sensors.Face.Species.Species\">Species
-sensor</a> model in this package. The
+and there is a corresponding <a href=\"modelica://FCSys.Sensors.FaceDifferential.Species\">Species
+sensor</a> model. The
 <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>
 connector is used in <a href=\"modelica://FCSys.Subregions.Phases\">Phase</a> models,
 and there are corresponding <a href=\"modelica://FCSys.Sensors.Face.Phases\">Phase
@@ -2691,12 +2678,12 @@ sensor</a> model.
           smooth=Smooth.None));
 
       annotation (defaultComponentName="speciesFaceSensor", Icon(graphics={Line(
-              points={{-70,0},{-100,0}},
-              color={0,0,0},
-              smooth=Smooth.None), Line(
-              points={{100,0},{70,0}},
-              color={0,0,0},
-              smooth=Smooth.None)}));
+                  points={{-70,0},{-100,0}},
+                  color={0,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{100,0},{70,0}},
+                  color={0,0,0},
+                  smooth=Smooth.None)}));
     end Species;
 
     model SpeciesX
@@ -2814,12 +2801,12 @@ sensor</a> model.
           smooth=Smooth.None));
 
       annotation (defaultComponentName="speciesFaceSensor", Icon(graphics={Line(
-              points={{-70,0},{-100,0}},
-              color={0,0,0},
-              smooth=Smooth.None), Line(
-              points={{100,0},{70,0}},
-              color={0,0,0},
-              smooth=Smooth.None)}));
+                  points={{-70,0},{-100,0}},
+                  color={0,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{100,0},{70,0}},
+                  color={0,0,0},
+                  smooth=Smooth.None)}));
     end SpeciesX;
 
     model SpeciesY
@@ -2936,12 +2923,12 @@ sensor</a> model.
           smooth=Smooth.None));
 
       annotation (defaultComponentName="speciesFaceSensor", Icon(graphics={Line(
-              points={{-70,0},{-100,0}},
-              color={0,0,0},
-              smooth=Smooth.None), Line(
-              points={{100,0},{70,0}},
-              color={0,0,0},
-              smooth=Smooth.None)}));
+                  points={{-70,0},{-100,0}},
+                  color={0,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{100,0},{70,0}},
+                  color={0,0,0},
+                  smooth=Smooth.None)}));
     end SpeciesY;
 
     model SpeciesZ
@@ -3059,12 +3046,12 @@ sensor</a> model.
           smooth=Smooth.None));
 
       annotation (defaultComponentName="speciesFaceSensor", Icon(graphics={Line(
-              points={{-70,0},{-100,0}},
-              color={0,0,0},
-              smooth=Smooth.None), Line(
-              points={{100,0},{70,0}},
-              color={0,0,0},
-              smooth=Smooth.None)}));
+                  points={{-70,0},{-100,0}},
+                  color={0,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{100,0},{70,0}},
+                  color={0,0,0},
+                  smooth=Smooth.None)}));
     end SpeciesZ;
 
     package Material "Relative sensors for normal linear momentum"
@@ -3080,13 +3067,13 @@ sensor</a> model.
         // Note:  In conjunction with the material conservation equation, this
         // means that there's no current into either face.
         annotation (Icon(graphics={Text(
-                extent={{-100,-20},{100,-50}},
-                lineColor={127,127,127},
-                textString="  rho"), Polygon(
-                points={{-26,-26},{-18,-44},{-34,-44},{-26,-26}},
-                lineColor={127,127,127},
-                smooth=Smooth.None,
-                lineThickness=0.5)}));
+                      extent={{-100,-20},{100,-50}},
+                      lineColor={127,127,127},
+                      textString="  rho"),Polygon(
+                      points={{-26,-26},{-18,-44},{-34,-44},{-26,-26}},
+                      lineColor={127,127,127},
+                      smooth=Smooth.None,
+                      lineThickness=0.5)}));
       end Density;
 
       model Current "Sensor for current (isochoric condition)"
@@ -3099,9 +3086,9 @@ sensor</a> model.
           "Condition of equal electrochemical potentials";
 
         annotation (Icon(graphics={Text(
-                extent={{-100,-20},{100,-50}},
-                lineColor={127,127,127},
-                textString="I")}));
+                      extent={{-100,-20},{100,-50}},
+                      lineColor={127,127,127},
+                      textString="I")}));
       end Current;
 
       package BaseClasses "Base classes (not for direct use)"
@@ -3130,12 +3117,12 @@ sensor</a> model.
             "Material rate balance (no storage)";
 
           annotation (Icon(graphics={Line(
-                  points={{-70,0},{-100,0}},
-                  color={0,0,0},
-                  smooth=Smooth.None), Line(
-                  points={{100,0},{70,0}},
-                  color={0,0,0},
-                  smooth=Smooth.None)}));
+                          points={{-70,0},{-100,0}},
+                          color={0,0,0},
+                          smooth=Smooth.None),Line(
+                          points={{100,0},{70,0}},
+                          color={0,0,0},
+                          smooth=Smooth.None)}));
         end PartialSensor;
 
         type SensorType = enumeration(
@@ -3164,13 +3151,13 @@ sensor</a> model.
    is <code>true</code>.
   </p></html>"),
           Icon(graphics={Text(
-                extent={{-100,-20},{100,-50}},
-                lineColor={127,127,127},
-                textString="  phi"), Polygon(
-                points={{-20,-26},{-12,-44},{-28,-44},{-20,-26}},
-                lineColor={127,127,127},
-                smooth=Smooth.None,
-                lineThickness=0.5)}),
+                      extent={{-100,-20},{100,-50}},
+                      lineColor={127,127,127},
+                      textString="  phi"),Polygon(
+                      points={{-20,-26},{-12,-44},{-28,-44},{-20,-26}},
+                      lineColor={127,127,127},
+                      smooth=Smooth.None,
+                      lineThickness=0.5)}),
           Diagram(graphics));
       end Velocity;
 
@@ -3187,12 +3174,12 @@ sensor</a> model.
   <code>ax=2</code> and <code>ax=3</code>, but only if <code>inclTrans</code>
    is <code>true</code>.
   </p></html>"), Icon(graphics={Text(
-                extent={{-100,-20},{100,-50}},
-                lineColor={127,127,127},
-                textString="mPhi"), Text(
-                extent={{-100,8},{100,-22}},
-                lineColor={127,127,127},
-                textString=".")}));
+                      extent={{-100,-20},{100,-50}},
+                      lineColor={127,127,127},
+                      textString="mPhi"),Text(
+                      extent={{-100,8},{100,-22}},
+                      lineColor={127,127,127},
+                      textString=".")}));
       end Force;
 
       package BaseClasses "Base classes (not for direct use)"
@@ -3220,12 +3207,12 @@ sensor</a> model.
             "Conservation of linear momentum (no storage)";
 
           annotation (Icon(graphics={Line(
-                  points={{-70,0},{-100,0}},
-                  color={0,0,0},
-                  smooth=Smooth.None), Line(
-                  points={{100,0},{70,0}},
-                  color={0,0,0},
-                  smooth=Smooth.None)}));
+                          points={{-70,0},{-100,0}},
+                          color={0,0,0},
+                          smooth=Smooth.None),Line(
+                          points={{100,0},{70,0}},
+                          color={0,0,0},
+                          smooth=Smooth.None)}));
         end PartialSensor;
 
         type SensorType = enumeration(
@@ -3249,13 +3236,13 @@ sensor</a> model.
         // Note:  In conjunction with the energy rate balance, this means
         // that both faces are adiabatic.
         annotation (Icon(graphics={Text(
-                extent={{-100,-20},{100,-50}},
-                lineColor={127,127,127},
-                textString="  T"), Polygon(
-                points={{-10,-26},{-2,-44},{-18,-44},{-10,-26}},
-                lineColor={127,127,127},
-                smooth=Smooth.None,
-                lineThickness=0.5)}));
+                      extent={{-100,-20},{100,-50}},
+                      lineColor={127,127,127},
+                      textString="  T"),Polygon(
+                      points={{-10,-26},{-2,-44},{-18,-44},{-10,-26}},
+                      lineColor={127,127,127},
+                      smooth=Smooth.None,
+                      lineThickness=0.5)}));
       end Temperature;
 
       model HeatRate "Sensor for heat flow rate (isothermal condition)"
@@ -3266,14 +3253,13 @@ sensor</a> model.
         y = negative.Qdot "Measurement";
         negative.T = positive.T "Isothermal condition";
         annotation (Icon(graphics={Text(
-                extent={{-100,-20},{100,-50}},
-                lineColor={127,127,127},
-                textString="Q"), Text(
-                extent={{-100,8},{100,-22}},
-                lineColor={127,127,127},
-                textString=".")}));
+                      extent={{-100,-20},{100,-50}},
+                      lineColor={127,127,127},
+                      textString="Q"),Text(
+                      extent={{-100,8},{100,-22}},
+                      lineColor={127,127,127},
+                      textString=".")}));
       end HeatRate;
-
 
       package BaseClasses "Base classes (not for direct use)"
         extends Modelica.Icons.BasesPackage;
@@ -3300,12 +3286,12 @@ sensor</a> model.
             "Conservation of energy (no storage)";
 
           annotation (Icon(graphics={Line(
-                  points={{-70,0},{-100,0}},
-                  color={0,0,0},
-                  smooth=Smooth.None), Line(
-                  points={{100,0},{70,0}},
-                  color={0,0,0},
-                  smooth=Smooth.None)}));
+                          points={{-70,0},{-100,0}},
+                          color={0,0,0},
+                          smooth=Smooth.None),Line(
+                          points={{100,0},{70,0}},
+                          color={0,0,0},
+                          smooth=Smooth.None)}));
         end PartialSensor;
 
         type SensorType = enumeration(
@@ -3361,13 +3347,12 @@ sensor</a> model.
             smooth=Smooth.None));
 
         annotation (defaultComponentName="speciesFaceSensor", Icon(graphics={
-                Line(
-                points={{-70,0},{-100,0}},
-                color={0,0,0},
-                smooth=Smooth.None), Line(
-                points={{100,0},{70,0}},
-                color={0,0,0},
-                smooth=Smooth.None)}));
+                Line( points={{-70,0},{-100,0}},
+                      color={0,0,0},
+                      smooth=Smooth.None),Line(
+                      points={{100,0},{70,0}},
+                      color={0,0,0},
+                      smooth=Smooth.None)}));
       end PartialSpecies;
     end BaseClasses;
   end FaceDifferential;
@@ -3433,8 +3418,8 @@ sensor</a> model.
           smooth=Smooth.None));
 
       connect(y, saturation.y) annotation (Line(
-          points={{5.55112e-16,-100},{5.55112e-16,-75},{-1.40998e-15,-75},{
-              -1.40998e-15,-51}},
+          points={{5.55112e-16,-100},{5.55112e-16,-75},{-1.40998e-15,-75},{-1.40998e-15,
+              -51}},
           color={0,0,127},
           smooth=Smooth.None));
       annotation (Icon(coordinateSystem(

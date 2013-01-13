@@ -10,7 +10,6 @@ package FCSys "Modelica library of fuel cell models"
 // the LaTeX document:
 //------------------------------------------------------------------------
 
-
 extends Modelica.Icons.Package;
 // extends FCSys.Icons.Cell;
 
@@ -39,7 +38,6 @@ import FCSys.Connectors.BaseClasses.ThermoOpt;
 import FCSys.Subregions.Reactions.BaseClasses.InitMethCharge;
 import FCSys.Subregions.Species.BaseClasses.InitMethVelocity;
 import FCSys.Subregions.Species.BaseClasses.InitMethScalar;
-
 
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
@@ -114,12 +112,12 @@ package UsersGuide "User's Guide"
         list of assumptions in a model should be considered in conjunction with the assumptions in all
         the models it inherits from.
         </li>
-        <li>Create and simulate examples of other usage scenarios.  Many of the 
+        <li>Create and simulate examples of other usage scenarios.  Many of the
         nested models (regions, subregions, species) are replaceable.
-        Their parameters are often not propagated to the cell level, but may 
-        be accessed through the parameter dialog by editing the replaceable model.  Note that 
+        Their parameters are often not propagated to the cell level, but may
+        be accessed through the parameter dialog by editing the replaceable model.  Note that
         many models have auxiliary output variables available for additional analysis and diagnostics.
-        These may be included by setting <code>analysis=true</code> in the outer environment model (instance 
+        These may be included by setting <code>analysis=true</code> in the outer environment model (instance
         of <a href=\"modelica://FCSys.BCs.Environment\">Environment</a>).</li>
         <li>Develop your own classes.  It should be possible to model other electrochemical
         devices (solid oxide fuel cells, lithium ion batteries, flow batteries/regenerative fuel cells, etc.) by
@@ -319,7 +317,7 @@ package UsersGuide "User's Guide"
     <a href=\"http://kdavies4.github.com/FCSys/\">main project site</a>.
     The development page is
     <a href=\"https://github.com/kdavies4/FCSys\">https://github.com/kdavies4/FCSys</a>.
-    Please report any problems using the <a href=\"https://github.com/kdavies4/FCSys/issues\">issues</a> 
+    Please report any problems using the <a href=\"https://github.com/kdavies4/FCSys/issues\">issues</a>
     link on that page.
     </p>
 
@@ -917,7 +915,6 @@ printing and shipping costs may be recovered.</p>
     end ModelicaLicense2;
   annotation (preferedView="info", DocumentationClass=true);
   end UsersGuide;
-
 
 annotation (
   uses(Modelica(version="3.2"), Modelica_LinearSystems2(version="2.1")),
