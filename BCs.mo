@@ -113,12 +113,16 @@ package BCs "Models for boundary conditions"
 
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
-      // fails check
+      /* **fails simulation:
+  "Model error - power: (1/subregion.graphite.'e-'.rho_face[1, 2]) ** (-1.66666666666667) = (-0.000669271) ** (-1.66667)
+
+  Non-linear solver will attempt to handle this problem."
+  */
       inner Modelica.Fluid.System system(T_ambient=293.15 + 5)
         annotation (Placement(transformation(extent={{40,70},{60,90}})));
       inner BCs.Environment environment(T=350*U.K)
         annotation (Placement(transformation(extent={{70,72},{90,92}})));
-      Subregions.Subregion subregion(
+      Subregions.SubregionNoIonomer subregion(
         L={1,1,1}*U.cm,
         inclReact=false,
         inclYFaces=false,
@@ -127,7 +131,8 @@ package BCs "Models for boundary conditions"
         graphite(inclC=true, 'incle-'=true),
         liquid(inclH2O=true))
         annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
-      Adapters.Anode anodeAdapter
+      Adapters.Anode anodeAdapter(redeclare package LiquidMedium =
+            Modelica.Media.CompressibleLiquids.LinearColdWater)
         annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
       Modelica.Electrical.Analog.Basic.Ground ground
         annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
@@ -140,7 +145,8 @@ package BCs "Models for boundary conditions"
         redeclare
           Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer
           HeatTransfer,
-        redeclare package Medium = FCSys.BCs.Adapters.Media.AnodeGas)
+        redeclare package Medium = FCSys.BCs.Adapters.Media.AnodeGas,
+        medium(p(fixed=true),X(each fixed=true)))
         annotation (Placement(transformation(extent={{30,20},{50,40}})));
       Modelica.Fluid.Vessels.ClosedVolume liquidVolume(
         nPorts=1,
@@ -148,10 +154,11 @@ package BCs "Models for boundary conditions"
         redeclare
           Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer
           HeatTransfer,
-        redeclare package Medium =
-            Modelica.Media.Water.ConstantPropertyLiquidWater,
         V=0.5e-6,
-        use_portsData=false)
+        use_portsData=false,
+        redeclare package Medium =
+            Modelica.Media.CompressibleLiquids.LinearColdWater,
+        medium(p(fixed=true),T(fixed=true)))
         annotation (Placement(transformation(extent={{70,20},{90,40}})));
 
     equation
@@ -278,28 +285,34 @@ package BCs "Models for boundary conditions"
           thickness=0.5,
           smooth=Smooth.None));
 
-      annotation (Icon(graphics={Line(
-                  points={{0,60},{0,-60}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash,
-                  thickness=0.5),Line(
-                  points={{0,0},{-80,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,20},{80,20}},
-                  color={0,0,255},
-                  smooth=Smooth.None),Line(
-                  points={{0,-20},{80,-20}},
-                  color={191,0,0},
-                  smooth=Smooth.None),Line(
-                  points={{0,60},{80,60}},
-                  color={0,127,255},
-                  smooth=Smooth.None),Line(
-                  points={{0,-60},{80,-60}},
-                  color={0,127,255},
-                  smooth=Smooth.None)}), Diagram(graphics));
+      annotation (Icon(graphics={
+            Line(
+              points={{0,60},{0,-60}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),
+            Line(
+              points={{0,0},{-80,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,20},{80,20}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-20},{80,-20}},
+              color={191,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{0,60},{80,60}},
+              color={0,127,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-60},{80,-60}},
+              color={0,127,255},
+              smooth=Smooth.None)}), Diagram(graphics));
     end Anode;
 
     model Cathode
@@ -384,28 +397,34 @@ package BCs "Models for boundary conditions"
           thickness=0.5,
           smooth=Smooth.None));
 
-      annotation (Icon(graphics={Line(
-                  points={{0,60},{0,-60}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash,
-                  thickness=0.5),Line(
-                  points={{0,0},{-80,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,20},{80,20}},
-                  color={0,0,255},
-                  smooth=Smooth.None),Line(
-                  points={{0,-20},{80,-20}},
-                  color={191,0,0},
-                  smooth=Smooth.None),Line(
-                  points={{0,60},{80,60}},
-                  color={0,127,255},
-                  smooth=Smooth.None),Line(
-                  points={{0,-60},{80,-60}},
-                  color={0,127,255},
-                  smooth=Smooth.None)}), Diagram(graphics));
+      annotation (Icon(graphics={
+            Line(
+              points={{0,60},{0,-60}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),
+            Line(
+              points={{0,0},{-80,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,20},{80,20}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-20},{80,-20}},
+              color={191,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{0,60},{80,60}},
+              color={0,127,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-60},{80,-60}},
+              color={0,127,255},
+              smooth=Smooth.None)}), Diagram(graphics));
     end Cathode;
 
     package Phases "Adapters for material phases"
@@ -982,14 +1001,12 @@ package BCs "Models for boundary conditions"
           "The mixture medium must have exactly two substances.");
         assert(MixtureMedium.substanceNames[1] == Medium1.substanceNames[1],
           "The first substance of the mixture medium (MixtureMedium) is \"" +
-          MixtureMedium.substanceNames[1] +
-          "\", \nbut the first pure substance is \"" + Medium1.substanceNames[1]
-           + "\".");
+          MixtureMedium.substanceNames[1] + "\", 
+but the first pure substance is \"" + Medium1.substanceNames[1] + "\".");
         assert(MixtureMedium.substanceNames[2] == Medium2.substanceNames[1],
           "The second substance of the mixture medium (MixtureMedium) is \"" +
-          MixtureMedium.substanceNames[2] +
-          "\", \nbut the second pure substance is \"" + Medium2.substanceNames[
-          1] + "\".");
+          MixtureMedium.substanceNames[2] + "\", 
+but the second pure substance is \"" + Medium2.substanceNames[1] + "\".");
 
         // Check the extra properties.
         assert(MixtureMedium.nC == Medium1.nC and MixtureMedium.nC == Medium2.nC,
@@ -998,13 +1015,15 @@ package BCs "Models for boundary conditions"
           assert(MixtureMedium.extraPropertiesNames[i] == Medium1.extraPropertiesNames[
             i], "Extra property #" + String(i) +
             " of the mixture medium (MixtureMedium) is \"" + MixtureMedium.extraPropertiesNames[
-            i] + "\", \nbut that of the first pure substance (Medium1) is \""
-             + Medium1.extraPropertiesNames[i] + "\".");
+            i] + "\", 
+but that of the first pure substance (Medium1) is \"" + Medium1.extraPropertiesNames[
+            i] + "\".");
           assert(MixtureMedium.extraPropertiesNames[i] == Medium2.extraPropertiesNames[
             i], "Extra property #" + String(i) +
             " of the mixture medium (MixtureMedium) is \"" + MixtureMedium.extraPropertiesNames[
-            i] + "\", \nbut that of the second pure substance (Medium2) is \""
-             + Medium2.extraPropertiesNames[i] + "\".");
+            i] + "\", 
+but that of the second pure substance (Medium2) is \"" + Medium2.extraPropertiesNames[
+            i] + "\".");
         end for;
 
       equation
@@ -1046,12 +1065,12 @@ package BCs "Models for boundary conditions"
   </p></html>"),
           Diagram(graphics),
           Icon(graphics={Line(
-                      points={{0,-40},{80,-40}},
-                      color={0,127,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,40},{80,40}},
-                      color={0,127,255},
-                      smooth=Smooth.None)}));
+                points={{0,-40},{80,-40}},
+                color={0,127,255},
+                smooth=Smooth.None), Line(
+                points={{0,40},{80,40}},
+                color={0,127,255},
+                smooth=Smooth.None)}));
       end Junction2;
 
       model Junction3
@@ -1181,16 +1200,19 @@ package BCs "Models for boundary conditions"
   </ol>
   </p></html>"),
           Diagram(graphics),
-          Icon(graphics={Line(
-                      points={{0,-40},{80,-40}},
-                      color={0,127,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,40},{80,40}},
-                      color={0,127,255},
-                      smooth=Smooth.None),Line(
-                      points={{6,0},{80,0}},
-                      color={0,127,255},
-                      smooth=Smooth.None)}));
+          Icon(graphics={
+              Line(
+                points={{0,-40},{80,-40}},
+                color={0,127,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,40},{80,40}},
+                color={0,127,255},
+                smooth=Smooth.None),
+              Line(
+                points={{6,0},{80,0}},
+                color={0,127,255},
+                smooth=Smooth.None)}));
       end Junction3;
 
       package BaseClasses "Base classes (not for direct use)"
@@ -1229,17 +1251,20 @@ package BCs "Models for boundary conditions"
           annotation (
             defaultComponentName="junction",
             Diagram(graphics),
-            Icon(graphics={Line(
-                          points={{-80,0},{0,0}},
-                          color={0,127,255},
-                          smooth=Smooth.None),Line(
-                          points={{0,-40},{0,40}},
-                          color={0,127,255},
-                          smooth=Smooth.None),Ellipse(
-                          extent={{-6,6},{6,-6}},
-                          lineColor={0,127,255},
-                          fillColor={255,255,255},
-                          fillPattern=FillPattern.Solid)}));
+            Icon(graphics={
+                Line(
+                  points={{-80,0},{0,0}},
+                  color={0,127,255},
+                  smooth=Smooth.None),
+                Line(
+                  points={{0,-40},{0,40}},
+                  color={0,127,255},
+                  smooth=Smooth.None),
+                Ellipse(
+                  extent={{-6,6},{6,-6}},
+                  lineColor={0,127,255},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid)}));
         end PartialJunction;
       end BaseClasses;
     end Junctions;
@@ -1255,7 +1280,7 @@ package BCs "Models for boundary conditions"
 
           fluidConstants={Modelica.Media.IdealGases.Common.FluidData.H2,
               Modelica.Media.IdealGases.Common.FluidData.H2O},
-          substanceNames={"Hydrogen","Water"},
+          substanceNames={"H2","H2O"},
           reference_X=fill(1/nX, nX),
           referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
 
@@ -1274,7 +1299,7 @@ package BCs "Models for boundary conditions"
           fluidConstants={Modelica.Media.IdealGases.Common.FluidData.H2O,
               Modelica.Media.IdealGases.Common.FluidData.N2,Modelica.Media.IdealGases.Common.FluidData.O2},
 
-          substanceNames={"Water","Nitrogen","Oxygen,"},
+          substanceNames={"H2O","N2","O2"},
           reference_X=fill(1/nX, nX),
           referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
 

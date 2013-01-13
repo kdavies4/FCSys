@@ -32,21 +32,25 @@ package BaseClasses "Base classes (not for direct use)"
 
       partial class Single "Icon for a single-connector boundary condition"
         //extends Names.Middle;
-        annotation (Icon(graphics={Rectangle(
-                      extent={{-100,40},{100,-40}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Line(
-                      points={{-100,-40},{-100,40},{100,40},{100,-40}},
-                      pattern=LinePattern.None,
-                      smooth=Smooth.None),Line(
-                      points={{-100,-40},{100,-40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+        annotation (Icon(graphics={
+              Rectangle(
+                extent={{-100,40},{100,-40}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None),
+              Line(
+                points={{-100,-40},{-100,40},{100,40},{100,-40}},
+                pattern=LinePattern.None,
+                smooth=Smooth.None),
+              Line(
+                points={{-100,-40},{100,-40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end Single;
     end BCs;
     extends Modelica.Icons.Package;
@@ -1013,7 +1017,6 @@ An unrelated species may be included.");
           output Boolean ok "true, if all tests passed";
 
         algorithm
-          // f()
           assert(f( 2,
                     {1,2,1},
                     0) == 1 + 2*2 + 1*2^2, "The f function failed.");
@@ -1024,8 +1027,8 @@ An unrelated species may be included.");
           assert(f( 2,
                     {1,0,0},
                     -3) == 1/8, "The f function failed.");
-          // Note:  F(), df(), and d2f() are not tested here.  They can be tested by
-          // simulating TestF, Testdf, and Testd2f.
+          // Note:  F(), dF(), df(), and d2f() are not tested here.  They can be
+          // tested by simulating TestF, TestdF, Testdf, and Testd2f.
 
           ok := true;
           annotation (Documentation(info="<html><p>
@@ -1066,6 +1069,42 @@ An unrelated species may be included.");
           // The simulation tolerance is set to 1e-8.
           annotation (experiment(Tolerance=1e-8), experimentSetupOutput);
         end TestF;
+
+        model TestdF
+          "<html>Verify that <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.dF\">dF</a>() is the correct derivative of <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.F\">F</a>()</html>"
+          // This approach is based on [Dassault2010, vol. 2, pp. 300-301].
+
+          extends Modelica.Icons.Example;
+
+          parameter Integer n=-1 "Power of the first polynomial term";
+
+          Real u1=1 + time
+            "Real arguments to function (must have sufficient richness)";
+          Real u2[:]=(1 + time^2)*(1:3)
+            "Real arguments to function (must have sufficient richness)";
+          Real y1 "Direct result of function";
+          Real y2 "Integral of derivative of y1";
+
+        initial equation
+          y2 = y1;
+
+        equation
+          y1 = F(   u1,
+                    u2,
+                    n);
+          dF(       u1,
+                    u2,
+                    n,
+                    der(u1),
+                    der(u2)) = der(y2);
+          // Note:  This is equivalent to der(y1) = der(y2), but it must be
+          // explicit to ensure that the translator uses the defined derivative
+          // instead of the automatically derived one.
+
+          assert(abs(y1 - y2) < 1e-6, "The derivative is incorrect.");
+          // The simulation tolerance is set to 1e-8.
+          annotation (experiment(Tolerance=1e-8), experimentSetupOutput);
+        end TestdF;
 
         model Testdf
           "<html>Verify that <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.df\">df</a>() is the correct derivative of <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.f\">f</a>()</html>"
@@ -1190,15 +1229,37 @@ An unrelated species may be included.");
         F := f( x,
                 a .* {if n + i == 0 then ln(x) else 1/(n + i) for i in 1:size(a,
             1)},
-                n + 1) annotation (Inline=true);
-        // Note:  The derivative annotation isn't used since f() isn't
-        // the direct and complete derivative of this function.
+                n + 1) annotation (Inline=true, derivative=dF);
 
         annotation (Documentation(info="<html>
   <p>By definition, the partial derivative of this function with respect to <code>x</code>
   (with <code>a</code> constant)
-  is <a href=\"modelica://FCSys.BaseClasses.Utilities.f\">f</a>().</p></html>"));
+  is <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.f\">f</a>().  The complete derivative,
+  however, is <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.dF\">dF</a>().</p></html>"));
       end F;
+
+      function dF
+        "<html>Derivative of <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.F\">F</a>()</html>"
+        extends Modelica.Icons.Function;
+
+        input Real x "Argument";
+        input Real a[:] "Coefficients";
+        input Integer n=0
+          "Power associated with the first term (before integral)";
+        input Real dx "Derivative of argument";
+        input Real da[size(a, 1)] "Derivatives of coefficients";
+
+        output Real dF "Derivative";
+
+      algorithm
+        dF := f(x,
+                a,
+                n)*dx + f(
+                x,
+                da .* {if n + i == 0 then ln(x) else 1/(n + i) for i in 1:size(
+            a, 1)},
+                n + 1) annotation (Inline=true);
+      end dF;
 
       function f
         "<html>Polynomial expressed in form: <i>f</i> = ((&hellip; + <i>a</i><sub>-1-<i>n</i></sub>)/<i>x</i> + <i>a</i><sub>-<i>n</i></sub>)/<i>x</i> + <i>a</i><sub>1-<i>n</i></sub> + <i>x</i>&middot;(<i>a</i><sub>2-<i>n</i></sub> + <i>x</i>&middot;(<i>a</i><sub>3-<i>n</i></sub> + &hellip;))</html>"

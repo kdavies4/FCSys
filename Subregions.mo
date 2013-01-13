@@ -108,7 +108,6 @@ package Subregions
             "resources/scripts/Dymola/Subregions.Examples.SubregionH2.mos"));
     end SubregionH2;
 
-
     model SubregionHOR
       "<html>Test a subregion with the hydrogen oxidation reaction and the essential species for it (C, C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S, e<sup>-</sup>, H<sub>2</sub>, and H<sup>+</sup>)</html>"
 
@@ -174,7 +173,8 @@ package Subregions
 
     model SubregionsH2 "Test a one-dimensional array of subregions"
       extends Modelica.Icons.Example;
-
+      extends Modelica.Icons.UnderConstruction;
+      // **fails sim
       parameter Integer n_x=0
         "Number of discrete subregions along the x axis, besides the 2 side subregions";
       parameter Boolean inclC=false "Carbon (C)" annotation (choices(
@@ -452,6 +452,7 @@ package Subregions
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionsH2.mos"),
         Diagram(graphics));
+
     end SubregionsH2;
 
     model SubregionsCAndH2
@@ -1013,7 +1014,7 @@ package Subregions
     end SubregionH2PipeTest;
   end Examples;
 
-  model Subregion "Subregion with all phases included"
+  model Subregion "Subregion with all phases"
 
     parameter Boolean inclReact=true "Include reaction(s), as appropriate"
       annotation (
@@ -1343,7 +1344,6 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
-
   end SubregionIonomerOnly;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
@@ -2319,7 +2319,6 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
-
     end Gas;
 
     model Graphite "Graphite phase"
@@ -2712,7 +2711,6 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
-
     end Graphite;
 
     model Ionomer "Ionomer phase"
@@ -3308,7 +3306,6 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
-
     end Ionomer;
 
     model Liquid "Liquid phase"
@@ -3511,7 +3508,6 @@ package Subregions
 
         Icon(graphics),
         Diagram(graphics));
-
     end Liquid;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -4483,7 +4479,7 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
       package Liquid "<html>H<sub>2</sub>O liquid</html>"
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
-          extends Species(
+          extends SpeciesIncompressible(
             redeclare replaceable package Data =
                 FCSys.Characteristics.H2O.Liquid,
             Xi=k_Xi*Data.Xi(T),
@@ -4508,7 +4504,7 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
         end Calibrated;
 
         model Correlated "Correlated properties"
-          extends Species(
+          extends SpeciesIncompressible(
             redeclare replaceable package Data =
                 FCSys.Characteristics.H2O.Liquid,
             Xi=Data.Xi(T),
@@ -4523,7 +4519,7 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
         end Correlated;
 
         model Fixed "Fixed properties"
-          extends Species(
+          extends SpeciesIncompressible(
             redeclare replaceable package Data =
                 FCSys.Characteristics.H2O.Liquid,
             redeclare parameter Q.Fusivity Xi=Data.Xi(),
@@ -4851,7 +4847,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
     end O2;
 
     model SpeciesSolid "Solid species (inert and stagnant)"
-      extends Species(
+      extends SpeciesIncompressible(
         final Xi=Modelica.Constants.inf,
         final F=0,
         final upstreamX,
@@ -4861,7 +4857,6 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         final setVelX=true,
         final setVelY=true,
         final setVelZ=true,
-        initMethPartNum=InitMethScalar.Volume,
         final initMethX=InitMethVelocity.Velocity,
         final initMethY=InitMethVelocity.Velocity,
         final initMethZ=InitMethVelocity.Velocity,
@@ -4903,12 +4898,15 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
   <li>No material exchange or transport</li</ol>
   </p>
 
-  <p><code>F</code> only affects exchange&mdash;not transport.  Since a no-slip
-  boundary condition is applied and the bulk velocity is set to zero, there are
-  never any shear forces, regardless of the value of <code>F</code>.</p>
-
   <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
     end SpeciesSolid;
+
+    model SpeciesIncompressible "Incompressible species"
+      extends Species(initMethPartNum=InitMethScalar.Volume);
+
+      annotation (Documentation(info="<html>
+  <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+    end SpeciesIncompressible;
 
     model Species
       "Model for single-species exchange, transport, and storage of material, linear momentum, and energy"
@@ -5204,8 +5202,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
       Q.PressureAbsolute p(
         nominal=1*U.atm,
         final start=p_IC,
-        final fixed=false,
-        stateSelect=StateSelect.never) "Pressure";
+        final fixed=false) "Pressure";
+      // **stateSelect=StateSelect.never
       // Note:  In Dymola 7.4 StateSelect.never is necessary to avoid dynamic
       // state selection.  **Is it still?
       Q.AmountVolumic rho(

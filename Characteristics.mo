@@ -1437,11 +1437,31 @@ package Characteristics
           h0 := Polynomial.F(
                     T,
                     b_c[i, :],
-                    specHeatCapPow) + B_c[i, 1] annotation (Inline=true);
+                    specHeatCapPow) + B_c[i, 1]
+            annotation (Inline=true, derivative=dh0_i);
           // This is the integral of c0_p*dT up to T at p0.  The lower bound is the
           // enthalpy of formation (of ideal gas, if the material is gaseous) at
           // 25 degC [McBride2002, p. 2].
         end h0_i;
+
+        function dh0_i "Derivative of h0_i"
+
+          // Note:  This function is necessary to allow Dymola 7.4 to choose T
+          // as a state in FCSys.Subregions.Species and thus avoid nonlinear
+          // systems of equations.
+
+          input Q.TemperatureAbsolute T "Temperature";
+          input Integer i "Index of the temperature interval";
+          input Q.Temperature dT "Derivative of temperature";
+          output Q.Potential dh0
+            "Derivative of specific enthalpy at reference pressure";
+
+        algorithm
+          dh0 := Polynomial.f(
+                    T,
+                    b_c[i, :],
+                    specHeatCapPow)*dT annotation (Inline=true);
+        end dh0_i;
 
         function h_resid "Residual specific enthalpy for pressure adjustment"
           input Q.TemperatureAbsolute T "Temperature";
