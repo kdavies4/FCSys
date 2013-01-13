@@ -6,7 +6,7 @@
 .~lock*
 .fuse_hidden*
 
-# Simulation files
+# Simulation files (just in case they're generated here)
 dsin.txt
 dsfinal.txt
 dsu.txt
@@ -18,9 +18,6 @@ buildlog.txt
 /test/LOOCV/Case
 request
 status
-
-# Compiled files
-*.pyc
 *.exe
 
 # Internal link to demos
@@ -56,19 +53,14 @@ build/
 /test/LOOCV
 /resources/documentation/Regions/*.pdf
 
+# Python generated and compiled files
+MANIFEST
+*.pyc
+
 # Georgia Tech files
 # TODO:  Ask Chris Paredis if they can be shared, and include them.
 /test/Morris
 
-# Internal links
-/resources/source/Python/.modelica.pws
-/resources/source/Python/.fcsys.pws
-
-# Links to modelicares (which is a git repository itself)
 # Eclipse project files
 /resources/source/Python/fcres/.project
 /resources/source/Python/fcres/.pydevproject
-
-# Files for Github web pages
-/images/
-/javascripts

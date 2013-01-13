@@ -980,30 +980,45 @@ package Regions "3D arrays of discrete, interconnected subregions"
         inclZFaces=false,
         redeclare FCSys.Subregions.SubregionNoIonomer subregions[n_x, n_y, n_z]
           (
-          each inclReact=false,
+          each inclLinX=false,
+          each inclLinY=true,
           each gas(
             inclH2=true,
             inclH2O=true,
             H2(
               p_IC=(1 - environment.x_H2O)*environment.p,
-              xNegative(thermoOpt=ThermoOpt.ClosedAdiabatic),
+              xNegative(
+                thermoOpt=ThermoOpt.ClosedAdiabatic,
+                inviscidY=true,
+                inviscidZ=true),
               xPositive(thermoOpt=ThermoOpt.OpenDiabatic),
-              yNegative(thermoOpt=ThermoOpt.OpenDiabatic, slipX=false),
-              yPositive(thermoOpt=ThermoOpt.OpenDiabatic, slipX=false)),
+              yNegative(thermoOpt=ThermoOpt.OpenDiabatic),
+              yPositive(thermoOpt=ThermoOpt.OpenDiabatic)),
             H2O(
               p_IC=environment.x_H2O*environment.p,
-              xNegative(thermoOpt=ThermoOpt.ClosedAdiabatic),
+              xNegative(
+                thermoOpt=ThermoOpt.ClosedAdiabatic,
+                inviscidY=true,
+                inviscidZ=true),
               xPositive(thermoOpt=ThermoOpt.OpenDiabatic),
-              yNegative(thermoOpt=ThermoOpt.OpenDiabatic, slipX=false),
-              yPositive(thermoOpt=ThermoOpt.OpenDiabatic, slipX=false))),
+              yNegative(thermoOpt=ThermoOpt.OpenDiabatic),
+              yPositive(thermoOpt=ThermoOpt.OpenDiabatic))),
           each graphite(
             inclC=true,
             'incle-'=true,
-            C(V_IC=V - xV,Lstar=1e7*U.m),
+            C(V_IC=V - xV),
             'e-'(
               setVelY=true,
-              yNegative(slipX=false),
-              yPositive(slipX=false)))));
+              xNegative(thermoOpt=ThermoOpt.OpenDiabatic),
+              xPositive(thermoOpt=ThermoOpt.OpenDiabatic),
+              yNegative(
+                thermoOpt=ThermoOpt.ClosedAdiabatic,
+                inviscidZ=true,
+                inviscidX=true),
+              yPositive(
+                thermoOpt=ThermoOpt.ClosedAdiabatic,
+                inviscidZ=true,
+                inviscidX=true)))));
 
       parameter Q.NumberAbsolute x(nominal=1) = 0.1 "Volumetric porosity";
 
@@ -1266,6 +1281,7 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
         inclZFaces=false,
         redeclare FCSys.Subregions.SubregionNoIonomer subregions[n_x, n_y, n_z]
           (
+          inclLinX=false,
           each inclReact=false,
           each gas(
             inclH2=true,
@@ -1598,6 +1614,7 @@ the z axis extends across the width of the channel.</p></html>"),
         inclYFaces=false,
         inclZFaces=false,
         redeclare FCSys.Subregions.Subregion subregions[n_x, n_y, n_z](
+          inclLinX=false,
           each gas(
             inclH2=true,
             inclH2O=true,
@@ -1875,6 +1892,7 @@ the z axis extends across the width of the channel.</p>
         inclZFaces=false,
         redeclare FCSys.Subregions.SubregionIonomerOnly subregions[n_x, n_y,
           n_z](
+          inclLinX=false,
           each inclReact=false,
           each gas(inclH2O=true, H2O(
               Lstar=1e7*U.m,
@@ -2137,6 +2155,7 @@ the z axis extends across the width of the channel.</p>
         inclYFaces=false,
         inclZFaces=false,
         redeclare FCSys.Subregions.Subregion subregions[n_x, n_y, n_z](
+          inclLinX=false,
           each gas(
             inclH2O=true,
             inclN2=true,
@@ -2381,6 +2400,7 @@ the z axis extends across the width of the channel.</p>
         inclZFaces=false,
         redeclare FCSys.Subregions.SubregionNoIonomer subregions[n_x, n_y, n_z]
           (
+          inclLinX=false,
           each inclReact=false,
           each gas(
             inclH2O=true,
@@ -2718,6 +2738,8 @@ the z axis extends across the width of the channel.</p>
         inclZFaces=false,
         redeclare FCSys.Subregions.SubregionNoIonomer subregions[n_x, n_y, n_z]
           (
+          inclLinX=false,
+          inclLinY=true,
           each inclReact=false,
           each gas(
             inclH2O=true,

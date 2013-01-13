@@ -1,1 +1,1 @@
-/media/Storage/Documents/Dymola/FCSys/resources/source/Python/doc/build/html/searchindex.js
+build/html/searchindex.js

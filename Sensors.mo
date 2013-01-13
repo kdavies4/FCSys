@@ -1624,9 +1624,7 @@ sensor</a> model.
           pattern=LinePattern.None,
           smooth=Smooth.None));
 
-      annotation (
-        defaultComponentName="speciesFaceSensor",
-        Diagram(graphics));
+      annotation (defaultComponentName="speciesFaceSensor", Diagram(graphics));
     end Species;
 
     model SpeciesX
@@ -1707,9 +1705,7 @@ sensor</a> model.
           pattern=LinePattern.None,
           smooth=Smooth.None));
 
-      annotation (
-        defaultComponentName="speciesFaceSensor",
-        Diagram(graphics));
+      annotation (defaultComponentName="speciesFaceSensor", Diagram(graphics));
     end SpeciesX;
 
     model SpeciesY
@@ -1790,9 +1786,7 @@ sensor</a> model.
           pattern=LinePattern.None,
           smooth=Smooth.None));
 
-      annotation (
-        defaultComponentName="speciesFaceSensor",
-        Diagram(graphics));
+      annotation (defaultComponentName="speciesFaceSensor", Diagram(graphics));
     end SpeciesY;
 
     model SpeciesZ
@@ -1873,9 +1867,7 @@ sensor</a> model.
           pattern=LinePattern.None,
           smooth=Smooth.None));
 
-      annotation (
-        defaultComponentName="speciesFaceSensor",
-        Diagram(graphics));
+      annotation (defaultComponentName="speciesFaceSensor", Diagram(graphics));
     end SpeciesZ;
 
     model Density "Sensor for density"
@@ -1889,9 +1881,9 @@ sensor</a> model.
       y = material.rho;
       0 = material.Ndot "Conservation of material (no storage)";
       annotation (Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="rho")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="rho")}));
     end Density;
 
     model Velocity "Sensor for velocity"
@@ -1904,9 +1896,9 @@ sensor</a> model.
       y = mechanical.phi "Measurement";
       0 = mechanical.mPhidot "Conservation of linear momentum (no storage)";
       annotation (Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="phi")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="phi")}));
     end Velocity;
 
     model Temperature "Sensor for temperature"
@@ -1919,9 +1911,9 @@ sensor</a> model.
       y = thermal.T "Measurement";
       0 = thermal.Qdot "Conservation of energy (no storage)";
       annotation (Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="T")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="T")}));
     end Temperature;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -1973,9 +1965,7 @@ sensor</a> model.
             index=1,
             extent={{-8,-3},{-8,-3}}));
 
-        annotation (
-          defaultComponentName="speciesFaceSensor",
-          Diagram(graphics));
+        annotation (defaultComponentName="speciesFaceSensor", Diagram(graphics));
       end PartialSpecies;
     end BaseClasses;
   end Face;
@@ -2085,12 +2075,12 @@ sensor</a> model.
         defaultComponentPrefixes="replaceable",
         defaultComponentName="subregionFaceSensor",
         Icon(graphics={Line(
-              points={{-70,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None), Line(
-              points={{100,0},{70,0}},
-              color={127,127,127},
-              smooth=Smooth.None)}),
+                  points={{-70,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{100,0},{70,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None)}),
         Diagram(graphics));
     end Subregion;
 
