@@ -16,24 +16,15 @@ with those results preloaded.
       The CellSimRes instance is sim.
       In [1]:
 
-.. _FCSys: http://www.modelica.org/libraries
+.. _FCSys: http://kdavies4.github.com/FCSys/
 .. _Modelica: http://www.modelica.org/
 """
-# This file is part of FCSys (a Modelica package).
-#
-# Licensed by the Georgia Tech Research Corporation under the Modelica License 2
-# Copyright 2012--2012, Georgia Tech Research Corporation.
-#
-# This Modelica package is free software and the use is completely at your own
-# risk; it can be redistributed and/or modified under the terms of the Modelica
-# License 2.  For license conditions (including the disclaimer of warranty) see
-# Modelica.UsersGuide.ModelicaLicense2 or visit
-# http://www.modelica.org/licenses/ModelicaLicense2.
 __author__ = "Kevin Davies"
-__credits__ = "Kevin Bandy"
-__version__ = "0.1"
 __email__ = "kdavies4@gmail.com"
-__status__ = "Development"
+__copyright__ = "Copyright 2012, Georgia Tech Research Corporation"
+__license__ = "BSD-compatible (see LICENSE.txt)"
+__version__ = "0.2"
+
 
 import os
 import numpy as np
@@ -136,6 +127,8 @@ class SimRes(modelicares.SimRes):
         super(SimRes, self).__init__(fname)
         try:
             self._set_constants()
+        except:
+            pass #**
 
         # **Base constants and units
         rad = self.get_IV('defaults.base.rad')

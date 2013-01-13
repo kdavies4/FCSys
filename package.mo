@@ -10,6 +10,7 @@ package FCSys "Modelica library of fuel cell models"
 // the LaTeX document:
 //------------------------------------------------------------------------
 
+
 extends Modelica.Icons.Package;
 // extends FCSys.Icons.Cell;
 
@@ -38,6 +39,7 @@ import FCSys.Connectors.BaseClasses.ThermoOpt;
 import FCSys.Subregions.Reactions.BaseClasses.InitMethCharge;
 import FCSys.Subregions.Species.BaseClasses.InitMethVelocity;
 import FCSys.Subregions.Species.BaseClasses.InitMethScalar;
+
 
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
@@ -331,10 +333,11 @@ package UsersGuide "User's Guide"
     <dd><a href=\"mailto:kdavies4@gmail.com\">kdavies4@gmail.com</a></dd>
 
     <p><b>Acknowledgments:</b><ul>
-    <li>Technical guidance from Robert Moore, Chris Paredis, and Comas Haynes
-    <li>Technical support and feedback from Mohammad Ali, Mike Angelo, Kevin Bandy,
+    <li>Source code bug fixes from Joerg Weiss-Ungeth&uuml;m</li>
+    <li>Technical guidance from Robert Moore, Comas Haynes, and Chris Paredis
+    <li>Technical feedback from Mohammad Ali, Mike Angelo, Kevin Bandy,
     Guido Bender, Severine Busquet, Chris Ford, George Nelson,
-    Francois Steinmetz, Mike Tiller, Hubertus Tummescheit, Mebs Virji, and Joerg Weiss-Ungeth&uuml;m</li>
+    Francois Steinmetz, Mike Tiller, Hubertus Tummescheit, and Mebs Virji</li>
     <li>Financial support from:
     <ul>
     <li>Presidential Fellowship from the <a href=\"http://www.me.gatech.edu\">George W. Woodruff
@@ -915,6 +918,7 @@ printing and shipping costs may be recovered.</p>
     end ModelicaLicense2;
   annotation (preferedView="info", DocumentationClass=true);
   end UsersGuide;
+
 
 annotation (
   uses(Modelica(version="3.2"), Modelica_LinearSystems2(version="2.1")),

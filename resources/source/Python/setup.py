@@ -1,35 +1,37 @@
 #!/usr/bin/python
 """Set up the FCRes module.
 
-Instructions for installation on Linux:
-
-1. Build the modules.
-   $ ./setup.py build
-
-2. Install the modules.
-   $ sudo ./setup.py install
+See README.txt for instructions.
 """
 from distutils.core import setup
+from glob import glob
 
-# Install the core Python modules.
+import fcres # Only to read the version number
+
 setup(name='FCRes',
-      version='1.0',
+      version=fcres.__version__,
       author='Kevin Davies',
       author_email='kdavies4@gmail.com',
+      #credits=['Kevin Bandy'],
       packages=['fcres'],
-      scripts=['bin/loadres.py'],
+      scripts=glob('bin/*'),
       url='http://kdavies4.github.com/FCSys/',
       license = "Modelica License Version 2",
       description='Python utilities for the FCSys package',
-      requires=['modelicares'],
-      keywords = "modelica plot dymola mat fuel cell FC PEMFC FCSys",
-      classifiers = ["Development Status :: 4 - Beta",
-                     "Environment :: Console",
-                     "License :: OSI Approved :: BSD License",
-                     "Programming Language :: Python :: 2.7",
-                     "Intended Audience :: Science/Research",
-                     "Topic :: Scientific/Engineering",
-                     "Topic :: Utilities",
+      long_description=open('README.txt').read(),
+      provides=['fcres'],
+      requires=['modelicares  (>=0.4)'],
+      keywords=['Modelica', 'Dymola', 'plot', 'matplotlib', 'simulation',
+                'experiment', 'results', 'proton exchange membrane',
+                'polymer exchange membran', 'fuel cell', 'PEMFC', 'FCSys'],
+      classifiers=['Development Status :: 3 - Alpha',
+                   'Operating System :: POSIX :: Linux',
+                   'Operating System :: Microsoft :: Windows',
+                   'Environment :: Console',
+                   'License :: OSI Approved :: BSD License',
+                   'Programming Language :: Python :: 2.7',
+                   'Intended Audience :: Science/Research',
+                   'Topic :: Scientific/Engineering',
+                   'Topic :: Utilities',
                      ],
      )
-# Note: modelicares is available at http://kdavies4.github.com/ModelicaRes/.

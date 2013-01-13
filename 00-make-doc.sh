@@ -3,13 +3,13 @@
 # (http://kdavies4.github.com/FCSys/).
 
 # Remove some of the help files.
-rm help/FCSys.Blocks*.png
-rm help/FCSys_Blocks*.html
-rm help/FCSys.Figures*.png
-rm help/FCSys_Figures*.html
-rm help/FCSys.Systems*.png
-rm help/FCSys_Systems*.html
-rm help/*WorkInProgress*
+rm -f help/FCSys.Blocks*.png
+rm -f help/FCSys_Blocks*.html
+rm -f help/FCSys.Figures*.png
+rm -f help/FCSys_Figures*.html
+rm -f help/FCSys.Systems*.png
+rm -f help/FCSys_Systems*.html
+rm -f help/*WorkInProgress*
 
 # Clean up the help files (for local browsing as well as web).
 ./00-process-help.py
@@ -42,16 +42,7 @@ mv -f FCSys.html index.html
 
 # Be sure that all of the files are added to git.
 git add images
-#git add *.html
-git add FCSys_Connectors* # **temp
-git add FCSys_Characteristics* # **temp
-git add FCSys_Quantities* # **temp
-git add FCSys_Units* # **temp
-git add FCSys_UsersGuide* # **temp
-git add FCSys_Sensors* # **temp
-git add FCSys_Subregions* # **temp
-git add FCSys_BCs* # **temp
-git add FCSys_BaseClasses* # **temp
+git add *.html
 
 # Update the Github web pages and return to the original branch.
 git commit -am "Auto-update github pages"
@@ -60,6 +51,3 @@ git checkout $branch
 if [ "$stash_msg" != "No local changes to save" ]; then
    git stash pop
 fi
-
-# Clean up.
-rm *.html

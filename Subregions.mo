@@ -571,6 +571,7 @@ package Subregions
 
         experiment(StopTime=298.15, Algorithm="Dassl"),
         experimentSetupOutput);
+
     end ThermalConduction;
 
     model ThermalConductionConvection
@@ -603,6 +604,7 @@ package Subregions
 
         experiment(StopTime=200, Algorithm="Dassl"),
         experimentSetupOutput);
+
     end ThermalConductionConvection;
 
     model ReactionRamp
@@ -3755,6 +3757,7 @@ package Subregions
                           extent={{-150,90},{-118,52}},
                           lineColor={0,0,255},
                           textString="%t.test")}));
+
         end Calibrated;
 
         model Correlated "Correlated properties"
@@ -3768,6 +3771,7 @@ package Subregions
                   "<html><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
 
             Icon(graphics));
+
         end Correlated;
 
         model Fixed "Fixed properties"
@@ -3864,6 +3868,7 @@ package Subregions
                   "<html><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
 
             Diagram(graphics));
+
         end Calibrated;
 
         model Correlated "Correlated properties"
@@ -3960,6 +3965,7 @@ package Subregions
     <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
 
             Diagram(graphics));
+
         end Fixed;
       end Graphite;
     end 'e-';
@@ -4209,6 +4215,7 @@ and <code>R=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas 
 <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"),
 
             Diagram(graphics));
+
         end Fixed;
       end Gas;
     end H2;

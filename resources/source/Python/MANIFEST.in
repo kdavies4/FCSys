@@ -1,0 +1,22 @@
+include matplotlibrc
+include *.txt
+#include MANIFEST.in
+exclude 00-*
+
+# Examples
+include examples/*.mat
+include examples/*.py
+include examples/*.txt
+
+# Documentation
+include doc/_images/*
+include doc/_images/math/*
+include doc/_static/*
+include doc/_sources/*
+include doc/*.html
+include doc/*.inv
+include doc/*.js
+include doc/*.pdf
+
+# Development scripts
+exclude fcres/00-*.py

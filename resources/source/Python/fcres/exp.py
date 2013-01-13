@@ -1,20 +1,6 @@
 #!/usr/bin/env python
 """Set up and run Modelica simulations in Dymola.
 """
-__author__ = "Kevin Davies"
-__version__ = "0.1"
-__email__ = "kdavies4@gmail.com"
-__status__ = "Development"
-# This file is part of FCSys (a Modelica package).
-#
-# Licensed by the Georgia Tech Research Corporation under the Modelica License 2
-# Copyright 2012--2012, Georgia Tech Research Corporation.
-#
-# This Modelica package is free software and the use is completely at your own
-# risk; it can be redistributed and/or modified under the terms of the Modelica
-# License 2.  For license conditions (including the disclaimer of warranty) see
-# Modelica.UsersGuide.ModelicaLicense2 or visit
-# http://www.modelica.org/licenses/ModelicaLicense2.
 
 # TODO: Need to finish converting this from MATLAB.
 

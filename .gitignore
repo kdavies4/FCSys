@@ -63,11 +63,8 @@ build/
 # Internal links
 /resources/source/Python/.modelica.pws
 /resources/source/Python/.fcsys.pws
-/resources/source/Python/00-spellcheck.sh
 
 # Links to modelicares (which is a git repository itself)
-/resources/source/Python/create-matplotlib-icon.py
-/resources/source/Python/00-autoformat.sh
 # Eclipse project files
 /resources/source/Python/fcres/.project
 /resources/source/Python/fcres/.pydevproject
