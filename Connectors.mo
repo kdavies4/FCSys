@@ -13,11 +13,11 @@ package Connectors "Declarative and imperative connectors"
     <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a>).
     </p></html>"),
       Icon(graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={208,104,0},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,128,0},
-              lineThickness=0.5)}),
+            extent={{-100,100},{100,-100}},
+            lineColor={208,104,0},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,128,0},
+            lineThickness=0.5)}),
       Diagram(graphics={Text(
               extent={{-100,36},{100,76}},
               textString="%name",
@@ -40,11 +40,11 @@ package Connectors "Declarative and imperative connectors"
     has a smaller icon and a default <code>protected</code> prefix.  For more information, see that connector.</p></html>"),
 
       Icon(graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={208,104,0},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,128,0},
-              lineThickness=0.5)}),
+            extent={{-100,100},{100,-100}},
+            lineColor={208,104,0},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,128,0},
+            lineThickness=0.5)}),
       Diagram(graphics={Ellipse(
               extent={{-10,10},{10,-10}},
               lineColor={208,104,0},
@@ -162,11 +162,11 @@ package Connectors "Declarative and imperative connectors"
 
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              fillColor={191,191,191},
-              fillPattern=FillPattern.Solid,
-              lineColor={127,127,127},
-              lineThickness=0.5)}),
+            extent={{-100,100},{100,-100}},
+            fillColor={191,191,191},
+            fillPattern=FillPattern.Solid,
+            lineColor={127,127,127},
+            lineThickness=0.5)}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics={Ellipse(
               extent={{-10,10},{10,-10}},
@@ -231,7 +231,7 @@ package Connectors "Declarative and imperative connectors"
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(extent={{-100,100},{100,-100}},
-            lineColor={127,127,127})}));
+              lineColor={127,127,127})}));
 
   end Face;
 
@@ -515,20 +515,20 @@ package Connectors "Declarative and imperative connectors"
       final max=3) = 0
       "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
       annotation (HideResult=true);
-    parameter Boolean uniformVelocity=false "Uniform velocity" annotation (
+    parameter Boolean inclMechanical=true "Include the mechanical subconnector"
+      annotation (
       HideResult=true,
       choices(__Dymola_checkBox=true),
-      Dialog(compact=true,group=
-            "Boundary conditions (will remove subconnectors)"));
-    parameter Boolean isothermal=false "Isothermal" annotation (
+      Dialog(compact=true));
+    parameter Boolean inclThermal=true "Include the thermal subconnector"
+      annotation (
       HideResult=true,
       choices(__Dymola_checkBox=true),
-      Dialog(compact=true,group=
-            "Boundary conditions (will remove subconnectors)"));
+      Dialog(compact=true));
 
     BaseClasses.MechanicalExchange mechanical(final n_lin=n_lin) if
-      uniformVelocity "Subconnector for linear momentum";
-    BaseClasses.Thermal thermal if isothermal "Subconnector for heat";
+      inclMechanical "Subconnector for linear momentum";
+    BaseClasses.Thermal thermal if inclThermal "Subconnector for heat";
 
     annotation (
       defaultComponentPrefixes="protected",
@@ -538,26 +538,29 @@ package Connectors "Declarative and imperative connectors"
     has a smaller icon, a default <code>protected</code> prefix, and the subconnectors are conditional.
     For more information, see that connector.</p></html>"),
       Icon(graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={72,90,180},
-              fillPattern=FillPattern.Solid,
-              fillColor={102,128,255}),Ellipse(
-              extent={{-60,60},{60,-60}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineColor={72,90,180})}),
-      Diagram(graphics={Ellipse(
-              extent={{-10,10},{10,-10}},
-              lineColor={72,90,180},
-              fillPattern=FillPattern.Solid,
-              fillColor={102,128,255}),Text(
-              extent={{-100,20},{100,60}},
-              textString="%name",
-              lineColor={0,0,0}),Ellipse(
-              extent={{-4,4},{4,-4}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineColor={72,90,180})}));
+            extent={{-100,100},{100,-100}},
+            lineColor={72,90,180},
+            fillPattern=FillPattern.Solid,
+            fillColor={102,128,255}),Ellipse(
+            extent={{-60,60},{60,-60}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            lineColor={72,90,180})}),
+      Diagram(graphics={
+          Ellipse(
+            extent={{-10,10},{10,-10}},
+            lineColor={72,90,180},
+            fillPattern=FillPattern.Solid,
+            fillColor={102,128,255}),
+          Text(
+            extent={{-100,20},{100,60}},
+            textString="%name",
+            lineColor={0,0,0}),
+          Ellipse(
+            extent={{-4,4},{4,-4}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            lineColor={72,90,180})}));
   end InertInternal;
 
   connector Material "Connector to transport material"
@@ -586,13 +589,13 @@ package Connectors "Declarative and imperative connectors"
               color={0,0,0},
               smooth=Smooth.None)}),
       Icon(graphics={Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Line(
-              points={{-100,0},{100,0}},
-              color={0,0,0},
-              smooth=Smooth.None)}));
+            extent={{-100,100},{100,-100}},
+            lineColor={0,0,0},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid), Line(
+            points={{-100,0},{100,0}},
+            color={0,0,0},
+            smooth=Smooth.None)}));
 
   end Material;
 
@@ -622,13 +625,13 @@ package Connectors "Declarative and imperative connectors"
               color={0,0,0},
               smooth=Smooth.None)}),
       Icon(graphics={Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Line(
-              points={{0,100},{0,-100}},
-              color={0,0,0},
-              smooth=Smooth.None)}));
+            extent={{-100,100},{100,-100}},
+            lineColor={0,0,0},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid), Line(
+            points={{0,100},{0,-100}},
+            color={0,0,0},
+            smooth=Smooth.None)}));
 
   end MechanicalTransport;
 
@@ -654,17 +657,20 @@ package Connectors "Declarative and imperative connectors"
               points={{30,30},{-30,-30}},
               color={0,0,0},
               smooth=Smooth.None)}),
-      Icon(graphics={Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Line(
-              points={{-100,100},{100,-100}},
-              color={0,0,0},
-              smooth=Smooth.None),Line(
-              points={{-100,-100},{100,100}},
-              color={0,0,0},
-              smooth=Smooth.None)}));
+      Icon(graphics={
+          Rectangle(
+            extent={{-100,100},{100,-100}},
+            lineColor={0,0,0},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Line(
+            points={{-100,100},{100,-100}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{-100,-100},{100,100}},
+            color={0,0,0},
+            smooth=Smooth.None)}));
 
   end Thermal;
 
@@ -672,10 +678,10 @@ package Connectors "Declarative and imperative connectors"
     "<html>\"<code>input Real</code>\" as a connector</html>" annotation (
     defaultComponentName="u",
     Icon(graphics={Polygon(
-            points={{-100,100},{100,0},{-100,-100},{-100,100}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid)}, coordinateSystem(
+          points={{-100,100},{100,0},{-100,-100},{-100,100}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid)}, coordinateSystem(
         extent={{-100,-100},{100,100}},
         preserveAspectRatio=true,
         initialScale=0.1,
@@ -702,10 +708,10 @@ Connector with one input signal of type <code>Real</code>.</p>
     defaultComponentPrefixes="protected",
     defaultComponentName="u",
     Icon(graphics={Polygon(
-            points={{-100,100},{100,0},{-100,-100},{-100,100}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid)}, coordinateSystem(
+          points={{-100,100},{100,0},{-100,-100},{-100,100}},
+          lineColor={0,0,127},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid)}, coordinateSystem(
         extent={{-100,-100},{100,100}},
         preserveAspectRatio=true,
         initialScale=0.1,
@@ -736,11 +742,11 @@ Protected connector with one input signal of type <code>Real</code>.</p>
    of the <a href=\"modelica://FCSys.Connectors.RealInput\">RealInput</a> connector.<p></html>"),
 
       Icon(graphics={Polygon(
-              points={{-100,100},{100,0},{-100,-100},{-100,100}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5)}, coordinateSystem(
+            points={{-100,100},{100,0},{-100,-100},{-100,100}},
+            lineColor={0,0,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5)}, coordinateSystem(
           extent={{-100,-100},{100,100}},
           preserveAspectRatio=true,
           initialScale=0.1,
@@ -772,11 +778,11 @@ Protected connector with one input signal of type <code>Real</code>.</p>
    of the <a href=\"modelica://FCSys.Connectors.RealInput\">RealInput</a> connector.<p></html>"),
 
       Icon(graphics={Polygon(
-              points={{-100,100},{100,0},{-100,-100},{-100,100}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5)}, coordinateSystem(
+            points={{-100,100},{100,0},{-100,-100},{-100,100}},
+            lineColor={0,0,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5)}, coordinateSystem(
           extent={{-100,-100},{100,100}},
           preserveAspectRatio=true,
           initialScale=0.1,
@@ -804,10 +810,10 @@ Protected connector with one input signal of type <code>Real</code>.</p>
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Polygon(
-            points={{-100,100},{100,0},{-100,-100},{-100,100}},
-            lineColor={0,0,127},
-            fillColor={0,0,127},
-            fillPattern=FillPattern.Solid)}),
+          points={{-100,100},{100,0},{-100,-100},{-100,100}},
+          lineColor={0,0,127},
+          fillColor={0,0,127},
+          fillPattern=FillPattern.Solid)}),
     Diagram(coordinateSystem(
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
@@ -832,10 +838,10 @@ Connector with one output signal of type <code>Real</code>.</p>
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Polygon(
-            points={{-100,100},{100,0},{-100,-100},{-100,100}},
-            lineColor={0,0,127},
-            fillColor={0,0,127},
-            fillPattern=FillPattern.Solid)}),
+          points={{-100,100},{100,0},{-100,-100},{-100,100}},
+          lineColor={0,0,127},
+          fillColor={0,0,127},
+          fillPattern=FillPattern.Solid)}),
     Diagram(coordinateSystem(
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
@@ -864,11 +870,11 @@ Protected connector with one output signal of type <code>Real</code>.</p>
           preserveAspectRatio=true,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-              points={{-100,100},{100,0},{-100,-100},{-100,100}},
-              lineColor={0,0,127},
-              fillColor={0,0,127},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5)}),
+            points={{-100,100},{100,0},{-100,-100},{-100,100}},
+            lineColor={0,0,127},
+            fillColor={0,0,127},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5)}),
       Diagram(coordinateSystem(
           preserveAspectRatio=true,
           extent={{-100,-100},{100,100}},
@@ -898,11 +904,11 @@ Protected connector with one output signal of type <code>Real</code>.</p>
           preserveAspectRatio=true,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-              points={{-100,100},{100,0},{-100,-100},{-100,100}},
-              lineColor={0,0,127},
-              fillColor={0,0,127},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5)}),
+            points={{-100,100},{100,0},{-100,-100},{-100,100}},
+            lineColor={0,0,127},
+            fillColor={0,0,127},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5)}),
       Diagram(coordinateSystem(
           preserveAspectRatio=true,
           extent={{-100,-100},{100,100}},

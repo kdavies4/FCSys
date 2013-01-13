@@ -1699,7 +1699,7 @@ package Subregions
           points={{7,-7},{7,-7},{7,-7},{7,-7}},
           color={72,90,180},
           smooth=Smooth.None));
-      // Transport of x-axis linear momentum
+      // Material transport
       connect(H2.xNegative.material, xNegative.H2.material) annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
               5.55112e-16}},
@@ -1711,6 +1711,26 @@ package Subregions
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
+
+      connect(H2.yNegative.material, yNegative.H2.material) annotation (Line(
+          points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect(H2.yPositive.material, yPositive.H2.material) annotation (Line(
+          points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
+              5.55112e-16,40}},
+          color={127,127,127},
+          smooth=Smooth.None));
+
+      connect(H2.zNegative.material, zNegative.H2.material) annotation (Line(
+          points={{7,7},{20,20}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect(H2.zPositive.material, zPositive.H2.material) annotation (Line(
+          points={{-7,-7},{-20,-20}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      // Transport of x-axis linear momentum
 
       connect(H2.yNegative.mechanicalX, yNegative.H2.mechanicalX) annotation (
           Line(
@@ -1735,15 +1755,6 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Transport of y-axis linear momentum
-      connect(H2.yNegative.material, yNegative.H2.material) annotation (Line(
-          points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
-          color={127,127,127},
-          smooth=Smooth.None));
-      connect(H2.yPositive.material, yPositive.H2.material) annotation (Line(
-          points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
-              5.55112e-16,40}},
-          color={127,127,127},
-          smooth=Smooth.None));
 
       connect(H2.zNegative.mechanicalY, zNegative.H2.mechanicalY) annotation (
           Line(
@@ -1770,14 +1781,6 @@ package Subregions
           smooth=Smooth.None));
 
       // Transport of z-axis linear momentum
-      connect(H2.zNegative.material, zNegative.H2.material) annotation (Line(
-          points={{7,7},{20,20}},
-          color={127,127,127},
-          smooth=Smooth.None));
-      connect(H2.zPositive.material, zPositive.H2.material) annotation (Line(
-          points={{-7,-7},{-20,-20}},
-          color={127,127,127},
-          smooth=Smooth.None));
 
       connect(H2.xNegative.mechanicalZ, xNegative.H2.mechanicalZ) annotation (
           Line(
@@ -1854,7 +1857,7 @@ package Subregions
           points={{7,-7},{7,-7},{7,-7},{7,-7}},
           color={72,90,180},
           smooth=Smooth.None));
-      // Transport of x-axis linear momentum
+      // Material transport
       connect(H2O.xNegative.material, xNegative.H2O.material) annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
               5.55112e-16}},
@@ -1866,6 +1869,26 @@ package Subregions
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
+
+      connect(H2O.yNegative.material, yNegative.H2O.material) annotation (Line(
+          points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect(H2O.yPositive.material, yPositive.H2O.material) annotation (Line(
+          points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
+              5.55112e-16,40}},
+          color={127,127,127},
+          smooth=Smooth.None));
+
+      connect(H2O.zNegative.material, zNegative.H2O.material) annotation (Line(
+          points={{7,7},{20,20}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect(H2O.zPositive.material, zPositive.H2O.material) annotation (Line(
+          points={{-7,-7},{-20,-20}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      // Transport of x-axis linear momentum
 
       connect(H2O.yNegative.mechanicalX, yNegative.H2O.mechanicalX) annotation
         (Line(
@@ -1890,15 +1913,6 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Transport of y-axis linear momentum
-      connect(H2O.yNegative.material, yNegative.H2O.material) annotation (Line(
-          points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
-          color={127,127,127},
-          smooth=Smooth.None));
-      connect(H2O.yPositive.material, yPositive.H2O.material) annotation (Line(
-          points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
-              5.55112e-16,40}},
-          color={127,127,127},
-          smooth=Smooth.None));
 
       connect(H2O.zNegative.mechanicalY, zNegative.H2O.mechanicalY) annotation
         (Line(
@@ -1925,14 +1939,6 @@ package Subregions
           smooth=Smooth.None));
 
       // Transport of z-axis linear momentum
-      connect(H2O.zNegative.material, zNegative.H2O.material) annotation (Line(
-          points={{7,7},{20,20}},
-          color={127,127,127},
-          smooth=Smooth.None));
-      connect(H2O.zPositive.material, zPositive.H2O.material) annotation (Line(
-          points={{-7,-7},{-20,-20}},
-          color={127,127,127},
-          smooth=Smooth.None));
 
       connect(H2O.xNegative.mechanicalZ, xNegative.H2O.mechanicalZ) annotation
         (Line(
@@ -2009,7 +2015,7 @@ package Subregions
           points={{7,-7},{7,-7},{7,-7},{7,-7}},
           color={72,90,180},
           smooth=Smooth.None));
-      // Transport of x-axis linear momentum
+      // Material transport
       connect(N2.xNegative.material, xNegative.N2.material) annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
               5.55112e-16}},
@@ -2021,6 +2027,26 @@ package Subregions
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
+
+      connect(N2.yNegative.material, yNegative.N2.material) annotation (Line(
+          points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect(N2.yPositive.material, yPositive.N2.material) annotation (Line(
+          points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
+              5.55112e-16,40}},
+          color={127,127,127},
+          smooth=Smooth.None));
+
+      connect(N2.zNegative.material, zNegative.N2.material) annotation (Line(
+          points={{7,7},{20,20}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect(N2.zPositive.material, zPositive.N2.material) annotation (Line(
+          points={{-7,-7},{-20,-20}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      // Transport of x-axis linear momentum
 
       connect(N2.yNegative.mechanicalX, yNegative.N2.mechanicalX) annotation (
           Line(
@@ -2045,15 +2071,6 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Transport of y-axis linear momentum
-      connect(N2.yNegative.material, yNegative.N2.material) annotation (Line(
-          points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
-          color={127,127,127},
-          smooth=Smooth.None));
-      connect(N2.yPositive.material, yPositive.N2.material) annotation (Line(
-          points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
-              5.55112e-16,40}},
-          color={127,127,127},
-          smooth=Smooth.None));
 
       connect(N2.zNegative.mechanicalY, zNegative.N2.mechanicalY) annotation (
           Line(
@@ -2080,14 +2097,6 @@ package Subregions
           smooth=Smooth.None));
 
       // Transport of z-axis linear momentum
-      connect(N2.zNegative.material, zNegative.N2.material) annotation (Line(
-          points={{7,7},{20,20}},
-          color={127,127,127},
-          smooth=Smooth.None));
-      connect(N2.zPositive.material, zPositive.N2.material) annotation (Line(
-          points={{-7,-7},{-20,-20}},
-          color={127,127,127},
-          smooth=Smooth.None));
 
       connect(N2.xNegative.mechanicalZ, xNegative.N2.mechanicalZ) annotation (
           Line(
@@ -2164,7 +2173,7 @@ package Subregions
           points={{7,-7},{8,-8},{8,-7},{7,-7}},
           color={72,90,180},
           smooth=Smooth.None));
-      // Transport of x-axis linear momentum
+      // Material transport
       connect(O2.xNegative.material, xNegative.O2.material) annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
               5.55112e-16}},
@@ -2176,6 +2185,26 @@ package Subregions
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
+
+      connect(O2.yNegative.material, yNegative.O2.material) annotation (Line(
+          points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect(O2.yPositive.material, yPositive.O2.material) annotation (Line(
+          points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
+              5.55112e-16,40}},
+          color={127,127,127},
+          smooth=Smooth.None));
+
+      connect(O2.zNegative.material, zNegative.O2.material) annotation (Line(
+          points={{7,7},{20,20}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect(O2.zPositive.material, zPositive.O2.material) annotation (Line(
+          points={{-7,-7},{-20,-20}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      // Transport of x-axis linear momentum
 
       connect(O2.yNegative.mechanicalX, yNegative.O2.mechanicalX) annotation (
           Line(
@@ -2200,15 +2229,6 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Transport of y-axis linear momentum
-      connect(O2.yNegative.material, yNegative.O2.material) annotation (Line(
-          points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
-          color={127,127,127},
-          smooth=Smooth.None));
-      connect(O2.yPositive.material, yPositive.O2.material) annotation (Line(
-          points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
-              5.55112e-16,40}},
-          color={127,127,127},
-          smooth=Smooth.None));
 
       connect(O2.zNegative.mechanicalY, zNegative.O2.mechanicalY) annotation (
           Line(
@@ -2235,14 +2255,6 @@ package Subregions
           smooth=Smooth.None));
 
       // Transport of z-axis linear momentum
-      connect(O2.zNegative.material, zNegative.O2.material) annotation (Line(
-          points={{7,7},{20,20}},
-          color={127,127,127},
-          smooth=Smooth.None));
-      connect(O2.zPositive.material, zPositive.O2.material) annotation (Line(
-          points={{-7,-7},{-20,-20}},
-          color={127,127,127},
-          smooth=Smooth.None));
 
       connect(O2.xNegative.mechanicalZ, xNegative.O2.mechanicalZ) annotation (
           Line(
@@ -2314,6 +2326,7 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
+
     end Gas;
 
     model Graphite "Graphite phase"
@@ -2395,7 +2408,7 @@ package Subregions
           points={{7,-7},{7,-7},{7,-7},{7,-7}},
           color={72,90,180},
           smooth=Smooth.None));
-      // Transport of x-axis linear momentum
+      // Material transport
       connect(C.xNegative.material, xNegative.C.material) annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
               5.55112e-16}},
@@ -2408,6 +2421,26 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
 
+      connect(C.yNegative.material, yNegative.C.material) annotation (Line(
+          points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect(C.yPositive.material, yPositive.C.material) annotation (Line(
+          points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
+              5.55112e-16,40}},
+          color={127,127,127},
+          smooth=Smooth.None));
+
+      connect(C.zNegative.material, zNegative.C.material) annotation (Line(
+          points={{7,7},{20,20}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect(C.zPositive.material, zPositive.C.material) annotation (Line(
+          points={{-7,-7},{-20,-20}},
+          color={127,127,127},
+          smooth=Smooth.None));
+
+      // Transport of x-axis linear momentum
       connect(C.yNegative.mechanicalX, yNegative.C.mechanicalX) annotation (
           Line(
           points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
@@ -2431,15 +2464,6 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Transport of y-axis linear momentum
-      connect(C.yNegative.material, yNegative.C.material) annotation (Line(
-          points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
-          color={127,127,127},
-          smooth=Smooth.None));
-      connect(C.yPositive.material, yPositive.C.material) annotation (Line(
-          points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
-              5.55112e-16,40}},
-          color={127,127,127},
-          smooth=Smooth.None));
 
       connect(C.zNegative.mechanicalY, zNegative.C.mechanicalY) annotation (
           Line(
@@ -2466,14 +2490,6 @@ package Subregions
           smooth=Smooth.None));
 
       // Transport of z-axis linear momentum
-      connect(C.zNegative.material, zNegative.C.material) annotation (Line(
-          points={{7,7},{20,20}},
-          color={127,127,127},
-          smooth=Smooth.None));
-      connect(C.zPositive.material, zPositive.C.material) annotation (Line(
-          points={{-7,-7},{-20,-20}},
-          color={127,127,127},
-          smooth=Smooth.None));
 
       connect(C.xNegative.mechanicalZ, xNegative.C.mechanicalZ) annotation (
           Line(
@@ -2550,7 +2566,7 @@ package Subregions
           points={{7,-7},{7,-7},{7,-7},{7,-7}},
           color={72,90,180},
           smooth=Smooth.None));
-      // Transport of x-axis linear momentum
+      // Material transport
       connect('e-'.xNegative.material, xNegative.'e-'.material) annotation (
           Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
@@ -2564,6 +2580,31 @@ package Subregions
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
+
+      connect('e-'.yNegative.material, yNegative.'e-'.material) annotation (
+          Line(
+          points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect('e-'.yPositive.material, yPositive.'e-'.material) annotation (
+          Line(
+          points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
+              5.55112e-16,40}},
+          color={127,127,127},
+          smooth=Smooth.None));
+
+      connect('e-'.zNegative.material, zNegative.'e-'.material) annotation (
+          Line(
+          points={{7,7},{20,20}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect('e-'.zPositive.material, zPositive.'e-'.material) annotation (
+          Line(
+          points={{-7,-7},{-20,-20}},
+          color={127,127,127},
+          smooth=Smooth.None));
+
+      // Transport of x-axis linear momentum
 
       connect('e-'.yNegative.mechanicalX, yNegative.'e-'.mechanicalX)
         annotation (Line(
@@ -2588,17 +2629,6 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Transport of y-axis linear momentum
-      connect('e-'.yNegative.material, yNegative.'e-'.material) annotation (
-          Line(
-          points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
-          color={127,127,127},
-          smooth=Smooth.None));
-      connect('e-'.yPositive.material, yPositive.'e-'.material) annotation (
-          Line(
-          points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
-              5.55112e-16,40}},
-          color={127,127,127},
-          smooth=Smooth.None));
 
       connect('e-'.zNegative.mechanicalY, zNegative.'e-'.mechanicalY)
         annotation (Line(
@@ -2625,16 +2655,6 @@ package Subregions
           smooth=Smooth.None));
 
       // Transport of z-axis linear momentum
-      connect('e-'.zNegative.material, zNegative.'e-'.material) annotation (
-          Line(
-          points={{7,7},{20,20}},
-          color={127,127,127},
-          smooth=Smooth.None));
-      connect('e-'.zPositive.material, zPositive.'e-'.material) annotation (
-          Line(
-          points={{-7,-7},{-20,-20}},
-          color={127,127,127},
-          smooth=Smooth.None));
 
       connect('e-'.xNegative.mechanicalZ, xNegative.'e-'.mechanicalZ)
         annotation (Line(
@@ -2706,6 +2726,7 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
+
     end Graphite;
 
     model Ionomer "Ionomer phase"
@@ -2823,7 +2844,7 @@ package Subregions
           points={{7,-7},{7,-7},{7,-7},{7,-7}},
           color={72,90,180},
           smooth=Smooth.None));
-      // Transport of x-axis linear momentum
+      // Material transport
       connect(C19HF37O5S.xNegative.material, xNegative.C19HF37O5S.material)
         annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
@@ -2837,6 +2858,30 @@ package Subregions
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
+
+      connect(C19HF37O5S.yNegative.material, yNegative.C19HF37O5S.material)
+        annotation (Line(
+          points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect(C19HF37O5S.yPositive.material, yPositive.C19HF37O5S.material)
+        annotation (Line(
+          points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
+              5.55112e-16,40}},
+          color={127,127,127},
+          smooth=Smooth.None));
+
+      connect(C19HF37O5S.zNegative.material, zNegative.C19HF37O5S.material)
+        annotation (Line(
+          points={{7,7},{20,20}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect(C19HF37O5S.zPositive.material, zPositive.C19HF37O5S.material)
+        annotation (Line(
+          points={{-7,-7},{-20,-20}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      // Transport of x-axis linear momentum
 
       connect(C19HF37O5S.yNegative.mechanicalX, yNegative.C19HF37O5S.mechanicalX)
         annotation (Line(
@@ -2861,17 +2906,6 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Transport of y-axis linear momentum
-      connect(C19HF37O5S.yNegative.material, yNegative.C19HF37O5S.material)
-        annotation (Line(
-          points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
-          color={127,127,127},
-          smooth=Smooth.None));
-      connect(C19HF37O5S.yPositive.material, yPositive.C19HF37O5S.material)
-        annotation (Line(
-          points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
-              5.55112e-16,40}},
-          color={127,127,127},
-          smooth=Smooth.None));
 
       connect(C19HF37O5S.zNegative.mechanicalY, zNegative.C19HF37O5S.mechanicalY)
         annotation (Line(
@@ -2898,16 +2932,6 @@ package Subregions
           smooth=Smooth.None));
 
       // Transport of z-axis linear momentum
-      connect(C19HF37O5S.zNegative.material, zNegative.C19HF37O5S.material)
-        annotation (Line(
-          points={{7,7},{20,20}},
-          color={127,127,127},
-          smooth=Smooth.None));
-      connect(C19HF37O5S.zPositive.material, zPositive.C19HF37O5S.material)
-        annotation (Line(
-          points={{-7,-7},{-20,-20}},
-          color={127,127,127},
-          smooth=Smooth.None));
 
       connect(C19HF37O5S.xNegative.mechanicalZ, xNegative.C19HF37O5S.mechanicalZ)
         annotation (Line(
@@ -2990,7 +3014,7 @@ package Subregions
           points={{7,-7},{7,-7},{7,-7},{7,-7}},
           color={72,90,180},
           smooth=Smooth.None));
-      // Transport of x-axis linear momentum
+      // Material transport
       connect('H+'.xNegative.material, xNegative.'H+'.material) annotation (
           Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
@@ -3004,6 +3028,30 @@ package Subregions
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
+
+      connect('H+'.yNegative.material, yNegative.'H+'.material) annotation (
+          Line(
+          points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect('H+'.yPositive.material, yPositive.'H+'.material) annotation (
+          Line(
+          points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
+              5.55112e-16,40}},
+          color={127,127,127},
+          smooth=Smooth.None));
+
+      connect('H+'.zNegative.material, zNegative.'H+'.material) annotation (
+          Line(
+          points={{7,7},{20,20}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect('H+'.zPositive.material, zPositive.'H+'.material) annotation (
+          Line(
+          points={{-7,-7},{-20,-20}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      // Transport of x-axis linear momentum
 
       connect('H+'.yNegative.mechanicalX, yNegative.'H+'.mechanicalX)
         annotation (Line(
@@ -3028,17 +3076,6 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Transport of y-axis linear momentum
-      connect('H+'.yNegative.material, yNegative.'H+'.material) annotation (
-          Line(
-          points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
-          color={127,127,127},
-          smooth=Smooth.None));
-      connect('H+'.yPositive.material, yPositive.'H+'.material) annotation (
-          Line(
-          points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
-              5.55112e-16,40}},
-          color={127,127,127},
-          smooth=Smooth.None));
 
       connect('H+'.zNegative.mechanicalY, zNegative.'H+'.mechanicalY)
         annotation (Line(
@@ -3065,16 +3102,6 @@ package Subregions
           smooth=Smooth.None));
 
       // Transport of z-axis linear momentum
-      connect('H+'.zNegative.material, zNegative.'H+'.material) annotation (
-          Line(
-          points={{7,7},{20,20}},
-          color={127,127,127},
-          smooth=Smooth.None));
-      connect('H+'.zPositive.material, zPositive.'H+'.material) annotation (
-          Line(
-          points={{-7,-7},{-20,-20}},
-          color={127,127,127},
-          smooth=Smooth.None));
 
       connect('H+'.xNegative.mechanicalZ, xNegative.'H+'.mechanicalZ)
         annotation (Line(
@@ -3151,7 +3178,7 @@ package Subregions
           points={{7,-7},{7,-7},{7,-7},{7,-7}},
           color={72,90,180},
           smooth=Smooth.None));
-      // Transport of x-axis linear momentum
+      // Material transport
       connect(H2O.xNegative.material, xNegative.H2O.material) annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
               5.55112e-16}},
@@ -3163,6 +3190,26 @@ package Subregions
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
+
+      connect(H2O.yNegative.material, yNegative.H2O.material) annotation (Line(
+          points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect(H2O.yPositive.material, yPositive.H2O.material) annotation (Line(
+          points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
+              5.55112e-16,40}},
+          color={127,127,127},
+          smooth=Smooth.None));
+
+      connect(H2O.zNegative.material, zNegative.H2O.material) annotation (Line(
+          points={{7,7},{20,20}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect(H2O.zPositive.material, zPositive.H2O.material) annotation (Line(
+          points={{-7,-7},{-20,-20}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      // Transport of x-axis linear momentum
 
       connect(H2O.yNegative.mechanicalX, yNegative.H2O.mechanicalX) annotation
         (Line(
@@ -3187,15 +3234,6 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Transport of y-axis linear momentum
-      connect(H2O.yNegative.material, yNegative.H2O.material) annotation (Line(
-          points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
-          color={127,127,127},
-          smooth=Smooth.None));
-      connect(H2O.yPositive.material, yPositive.H2O.material) annotation (Line(
-          points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
-              5.55112e-16,40}},
-          color={127,127,127},
-          smooth=Smooth.None));
 
       connect(H2O.zNegative.mechanicalY, zNegative.H2O.mechanicalY) annotation
         (Line(
@@ -3222,14 +3260,6 @@ package Subregions
           smooth=Smooth.None));
 
       // Transport of z-axis linear momentum
-      connect(H2O.zNegative.material, zNegative.H2O.material) annotation (Line(
-          points={{7,7},{20,20}},
-          color={127,127,127},
-          smooth=Smooth.None));
-      connect(H2O.zPositive.material, zPositive.H2O.material) annotation (Line(
-          points={{-7,-7},{-20,-20}},
-          color={127,127,127},
-          smooth=Smooth.None));
 
       connect(H2O.xNegative.mechanicalZ, xNegative.H2O.mechanicalZ) annotation
         (Line(
@@ -3301,6 +3331,7 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
+
     end Ionomer;
 
     model Liquid "Liquid phase"
@@ -3356,7 +3387,7 @@ package Subregions
           points={{7,-7},{7,-7},{7,-7},{7,-7}},
           color={72,90,180},
           smooth=Smooth.None));
-      // Transport of x-axis linear momentum
+      // Material transport
       connect(H2O.xNegative.material, xNegative.H2O.material) annotation (Line(
           points={{-10,6.10623e-16},{-20,-4.87687e-22},{-20,5.55112e-16},{-40,
               5.55112e-16}},
@@ -3368,6 +3399,26 @@ package Subregions
               5.55112e-16}},
           color={127,127,127},
           smooth=Smooth.None));
+
+      connect(H2O.yNegative.material, yNegative.H2O.material) annotation (Line(
+          points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect(H2O.yPositive.material, yPositive.H2O.material) annotation (Line(
+          points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
+              5.55112e-16,40}},
+          color={127,127,127},
+          smooth=Smooth.None));
+
+      connect(H2O.zNegative.material, zNegative.H2O.material) annotation (Line(
+          points={{7,7},{20,20}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect(H2O.zPositive.material, zPositive.H2O.material) annotation (Line(
+          points={{-7,-7},{-20,-20}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      // Transport of x-axis linear momentum
 
       connect(H2O.yNegative.mechanicalX, yNegative.H2O.mechanicalX) annotation
         (Line(
@@ -3392,15 +3443,6 @@ package Subregions
           color={127,127,127},
           smooth=Smooth.None));
       // Transport of y-axis linear momentum
-      connect(H2O.yNegative.material, yNegative.H2O.material) annotation (Line(
-          points={{6.10623e-16,-10},{6.10623e-16,-40},{5.55112e-16,-40}},
-          color={127,127,127},
-          smooth=Smooth.None));
-      connect(H2O.yPositive.material, yPositive.H2O.material) annotation (Line(
-          points={{6.10623e-16,10},{-4.87687e-22,20},{5.55112e-16,20},{
-              5.55112e-16,40}},
-          color={127,127,127},
-          smooth=Smooth.None));
 
       connect(H2O.zNegative.mechanicalY, zNegative.H2O.mechanicalY) annotation
         (Line(
@@ -3427,14 +3469,6 @@ package Subregions
           smooth=Smooth.None));
 
       // Transport of z-axis linear momentum
-      connect(H2O.zNegative.material, zNegative.H2O.material) annotation (Line(
-          points={{7,7},{20,20}},
-          color={127,127,127},
-          smooth=Smooth.None));
-      connect(H2O.zPositive.material, zPositive.H2O.material) annotation (Line(
-          points={{-7,-7},{-20,-20}},
-          color={127,127,127},
-          smooth=Smooth.None));
 
       connect(H2O.xNegative.mechanicalZ, xNegative.H2O.mechanicalZ) annotation
         (Line(
@@ -3502,6 +3536,7 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
+
     end Liquid;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -3631,8 +3666,8 @@ package Subregions
 
         FCSys.Connectors.InertInternal common(
           n_lin=n_lin,
-          final uniformVelocity=reduceVel,
-          final isothermal=reduceTemp,
+          final inclMechanical=reduceVel,
+          final inclThermal=reduceTemp,
           mechanical(phi(
               each stateSelect=StateSelect.prefer,
               final start=phi_IC[cartAxes],
@@ -3727,6 +3762,7 @@ package Subregions
                 textString="%name",
                 lineColor={0,0,0})}),
           Diagram(graphics));
+
       end NullPhase;
     end BaseClasses;
   end Phases;

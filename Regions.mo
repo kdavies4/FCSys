@@ -969,7 +969,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
     model AnFP "Anode flow plate"
       //extends FCSys.BaseClasses.Icons.Names.Top4;
-      extends Modelica.Icons.UnderConstruction;
 
       extends FCSys.Regions.Region(
         L_x=fill(8*U.mm/1, 1),
@@ -1008,7 +1007,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
             'incle-'=true,
             C(V_IC=V - xV),
             'e-'(
-              setVelY=true,
               xNegative(thermoOpt=ThermoOpt.OpenDiabatic),
               xPositive(thermoOpt=ThermoOpt.OpenDiabatic),
               yNegative(
@@ -1018,7 +1016,17 @@ package Regions "3D arrays of discrete, interconnected subregions"
               yPositive(
                 thermoOpt=ThermoOpt.ClosedAdiabatic,
                 inviscidZ=true,
-                inviscidX=true)))));
+                inviscidX=true))),
+          each liquid(inclH2O=true, H2O(
+              V_IC=0,
+              xNegative(
+                thermoOpt=ThermoOpt.ClosedAdiabatic,
+                inviscidY=true,
+                inviscidZ=true),
+              xPositive(thermoOpt=ThermoOpt.OpenDiabatic),
+              yNegative(thermoOpt=ThermoOpt.OpenDiabatic),
+              yPositive(thermoOpt=ThermoOpt.OpenDiabatic)))));
+      // **for e-: setVelY=true,
 
       parameter Q.NumberAbsolute x(nominal=1) = 0.1 "Volumetric porosity";
 
@@ -1266,11 +1274,10 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
     model AnGDL "Anode gas diffusion layer"
       //extends FCSys.BaseClasses.Icons.Names.Top4;
       // Note:  Extensions of AnGDL should be placed directly in the AnGDLs
-      // package rather than nested packages (e.g., by manufacturer) so that
-      // __Dymola_choicesFromPackage can be used.  In Dymola 7.4 the
-      // parameter dialogs launch too slowly when __Dymola_choicesAllMatching
-      // is used.
-      extends Modelica.Icons.UnderConstruction;
+      // package rather than subpackages (e.g., by manufacturer) so that
+      // __Dymola_choicesFromPackage can be used.  Dymola 7.4 launches the
+      // parameter dialogs too slowly when __Dymola_choicesAllMatching is
+      // used.
 
       extends FCSys.Regions.Region(
         L_x=fill(0.3*U.mm/1, 1),
@@ -1281,26 +1288,28 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
         inclZFaces=false,
         redeclare FCSys.Subregions.SubregionNoIonomer subregions[n_x, n_y, n_z]
           (
-          inclLinX=false,
-          each inclReact=false,
+          each inclLinX=false,
           each gas(
             inclH2=true,
             inclH2O=true,
             H2(
-              Lstar=1e9*U.m,
               p_IC=(1 - environment.x_H2O)*environment.p,
-              yNegative(slipX=false),
-              yPositive(slipX=false)),
+              xNegative(thermoOpt=ThermoOpt.OpenDiabatic,inviscidY=false),
+              xPositive(thermoOpt=ThermoOpt.OpenDiabatic)),
             H2O(
-              Lstar=1e9*U.m,
               p_IC=environment.x_H2O*environment.p,
-              yNegative(slipX=false),
-              yPositive(slipX=false))),
+              xNegative(thermoOpt=ThermoOpt.ClosedAdiabatic, inviscidY=false),
+              xPositive(thermoOpt=ThermoOpt.OpenDiabatic))),
           each graphite(
             inclC=true,
             'incle-'=true,
             C(V_IC=V - xV),
-            'e-'(yNegative(slipX=false), yPositive(slipX=false)))));
+            'e-'(xNegative(thermoOpt=ThermoOpt.OpenDiabatic), xPositive(
+                  thermoOpt=ThermoOpt.OpenDiabatic))),
+          each liquid(inclH2O=true, H2O(
+              V_IC=0,
+              xNegative(thermoOpt=ThermoOpt.OpenDiabatic,inviscidY=false),
+              xPositive(thermoOpt=ThermoOpt.OpenDiabatic)))));
 
       parameter Q.NumberAbsolute x(nominal=1) = 0.76 "Volumetric porosity";
       // The default porosity is for Sigracet 24 BC.
@@ -1604,7 +1613,6 @@ the z axis extends across the width of the channel.</p></html>"),
 
     model AnCL "Anode catalyst layer"
       //extends FCSys.BaseClasses.Icons.Names.Top4;
-      extends Modelica.Icons.UnderConstruction;
 
       extends FCSys.Regions.Region(
         L_x=fill(28.7*U.micro*U.m/1, 1),
@@ -1614,35 +1622,32 @@ the z axis extends across the width of the channel.</p></html>"),
         inclYFaces=false,
         inclZFaces=false,
         redeclare FCSys.Subregions.Subregion subregions[n_x, n_y, n_z](
-          inclLinX=false,
+          each inclLinX=false,
           each gas(
             inclH2=true,
             inclH2O=true,
             H2(
               p_IC=(1 - environment.x_H2O)*environment.p,
-              yNegative(slipX=false),
-              yPositive(slipX=false)),
+              xNegative(thermoOpt=ThermoOpt.OpenDiabatic),
+              xPositive(thermoOpt=ThermoOpt.OpenDiabatic)),
             H2O(
-              Lstar=1e7*U.m,
               p_IC=environment.x_H2O*environment.p,
-              yNegative(slipX=false),
-              yPositive(slipX=false))),
-          each graphite(
-            inclC=true,
-            'incle-'=true,
-            C(V_IC=(V - xV)/2,Lstar=1e7*U.m),
-            'e-'(
-              Lstar=1e7*U.m,
-              yNegative(slipX=false),
-              yPositive(slipX=false))),
+              xNegative(thermoOpt=ThermoOpt.OpenDiabatic),
+              xPositive(thermoOpt=ThermoOpt.OpenDiabatic))),
           each ionomer(
             inclC19HF37O5S=true,
             'inclH+'=true,
-            C19HF37O5S(Lstar=1e7*U.m,V_IC=(V - xV)/2),
-            'H+'(
-              Lstar=1e7*U.m,
-              yNegative(slipX=false),
-              yPositive(slipX=false)))));
+            inclH2O=true,
+            C19HF37O5S(V_IC=V - xV),
+            'H+'(xNegative(thermoOpt=ThermoOpt.OpenDiabatic), xPositive(
+                  thermoOpt=ThermoOpt.OpenDiabatic)),
+            H2O(xNegative(thermoOpt=ThermoOpt.OpenDiabatic), xPositive(
+                  thermoOpt=ThermoOpt.OpenDiabatic))),
+          each liquid(inclH2O=true, H2O(
+              V_IC=0,
+              xNegative(thermoOpt=ThermoOpt.OpenDiabatic),
+              xPositive(thermoOpt=ThermoOpt.OpenDiabatic)))));
+
       //'e-'( xPositive(thermoOpt=ThermoOpt.ClosedAdiabatic),
       //'H+'xNegative(thermoOpt=ThermoOpt.ClosedAdiabatic),
 
@@ -1877,11 +1882,10 @@ the z axis extends across the width of the channel.</p>
     model PEM "Proton exchange membrane"
       //extends FCSys.BaseClasses.Icons.Names.Top4;
       // Note:  Extensions of PEM should be placed directly in the PEMs
-      // package rather than nested packages (e.g., by manufacturer) so that
-      // __Dymola_choicesFromPackage can be used.  In Dymola 7.4 the
-      // parameter dialogs launch too slowly when __Dymola_choicesAllMatching
-      // is used.
-      extends Modelica.Icons.UnderConstruction;
+      // package rather than subpackages (e.g., by manufacturer) so that
+      // __Dymola_choicesFromPackage can be used.  Dymola 7.4 launches the
+      // parameter dialogs too slowly when __Dymola_choicesAllMatching is
+      // used.
 
       extends FCSys.Regions.Region(
         L_x=fill(100*U.micro*U.m/1, 1),
@@ -1891,22 +1895,15 @@ the z axis extends across the width of the channel.</p>
         inclYFaces=false,
         inclZFaces=false,
         redeclare FCSys.Subregions.SubregionIonomerOnly subregions[n_x, n_y,
-          n_z](
-          inclLinX=false,
-          each inclReact=false,
-          each gas(inclH2O=true, H2O(
-              Lstar=1e7*U.m,
-              p_IC=environment.x_H2O*environment.p,
-              yNegative(slipX=false),
-              yPositive(slipX=false))),
-          each ionomer(
+          n_z](each inclLinX=false, each ionomer(
             inclC19HF37O5S=true,
             'inclH+'=true,
-            C19HF37O5S(Lstar=1e7*U.m,V_IC=0.95*V),
-            'H+'(
-              Lstar=1e7*U.m,
-              yNegative(slipX=false),
-              yPositive(slipX=false)))));
+            inclH2O=true,
+            C19HF37O5S(initMethPartNum=InitMethScalar.Pressure, p_IC=0),
+            'H+'(xNegative(thermoOpt=ThermoOpt.OpenDiabatic), xPositive(
+                  thermoOpt=ThermoOpt.OpenDiabatic)),
+            H2O(xNegative(thermoOpt=ThermoOpt.OpenDiabatic), xPositive(
+                  thermoOpt=ThermoOpt.OpenDiabatic)))));
 
       parameter Q.NumberAbsolute lambda_IC=14
         "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>)</html>"
@@ -2155,42 +2152,42 @@ the z axis extends across the width of the channel.</p>
         inclYFaces=false,
         inclZFaces=false,
         redeclare FCSys.Subregions.Subregion subregions[n_x, n_y, n_z](
-          inclLinX=false,
+          each inclLinX=false,
           each gas(
             inclH2O=true,
             inclN2=true,
             inclO2=true,
             H2O(
               p_IC=environment.x_H2O*environment.p,
-              yNegative(slipX=false),
-              yPositive(slipX=false)),
+              xNegative(thermoOpt=ThermoOpt.ClosedAdiabatic),
+              xPositive(thermoOpt=ThermoOpt.OpenDiabatic)),
             N2(
-              Lstar=1e8*U.m,
               p_IC=(1 - environment.x_H2O)*(1 - environment.x_O2_dry)*
                   environment.p,
-              yNegative(slipX=false),
-              yPositive(slipX=false)),
+              xNegative(thermoOpt=ThermoOpt.OpenDiabatic),
+              xPositive(thermoOpt=ThermoOpt.OpenDiabatic)),
             O2(
               p_IC=(1 - environment.x_H2O)*environment.x_O2_dry*environment.p,
-              yNegative(slipX=false),
-              yPositive(slipX=false))),
+              xNegative(thermoOpt=ThermoOpt.OpenDiabatic),
+              xPositive(thermoOpt=ThermoOpt.OpenDiabatic))),
           each graphite(
             inclC=true,
             'incle-'=true,
-            C(Lstar=1e8*U.m, V_IC=(V - xV)/2),
-            'e-'(
-              Lstar=1e8*U.m,
-              mu_IC=-0.2*U.V,
-              yNegative(slipX=false),
-              yPositive(slipX=false))),
+            C(V_IC=V - xV),
+            'e-'(xNegative(thermoOpt=ThermoOpt.OpenDiabatic), xPositive(
+                  thermoOpt=ThermoOpt.OpenDiabatic))),
           each ionomer(
             inclC19HF37O5S=true,
             'inclH+'=true,
-            C19HF37O5S(Lstar=1e7*U.m,V_IC=(V - xV)/2),
-            'H+'(
-              Lstar=1e7*U.m,
-              yNegative(slipX=false),
-              yPositive(slipX=false)))));
+            C19HF37O5S(V_IC=V - xV),
+            'H+'(xNegative(thermoOpt=ThermoOpt.OpenDiabatic), xPositive(
+                  thermoOpt=ThermoOpt.OpenDiabatic)),
+            H2O(xNegative(thermoOpt=ThermoOpt.OpenDiabatic), xPositive(
+                  thermoOpt=ThermoOpt.OpenDiabatic))),
+          each liquid(inclH2O=true, H2O(
+              V_IC=0,
+              xNegative(thermoOpt=ThermoOpt.OpenDiabatic),
+              xPositive(thermoOpt=ThermoOpt.OpenDiabatic)))));
 
       //'e-'(xNegative(thermoOpt=ThermoOpt.ClosedAdiabatic),
       //'H+'(xPositive(thermoOpt=ThermoOpt.ClosedAdiabatic),
@@ -2386,10 +2383,10 @@ the z axis extends across the width of the channel.</p>
     model CaGDL "Cathode gas diffusion layer"
       //extends FCSys.BaseClasses.Icons.Names.Top4;
       // Note:  Extensions of CaGDL should be placed directly in the CaGDLs
-      // package rather than nested packages so that __Dymola_choicesFromPackage
-      // can be used.  In Dymola 7.4 the parameter dialogs launch too slowly
-      // when __Dymola_choicesAllMatching is used.
-      extends Modelica.Icons.UnderConstruction;
+      // package rather than subpackages (e.g., by manufacturer) so that
+      // __Dymola_choicesFromPackage can be used.  Dymola 7.4 launches the
+      // parameter dialogs too slowly when __Dymola_choicesAllMatching is
+      // used.
 
       extends FCSys.Regions.Region(
         L_x=fill(0.3*U.mm/1, 1),
@@ -2400,36 +2397,34 @@ the z axis extends across the width of the channel.</p>
         inclZFaces=false,
         redeclare FCSys.Subregions.SubregionNoIonomer subregions[n_x, n_y, n_z]
           (
-          inclLinX=false,
-          each inclReact=false,
+          each inclLinX=false,
           each gas(
             inclH2O=true,
             inclN2=true,
             inclO2=true,
             H2O(
-              Lstar=1e9*U.m,
               p_IC=environment.x_H2O*environment.p,
-              yNegative(slipX=false),
-              yPositive(slipX=false)),
+              xNegative(thermoOpt=ThermoOpt.ClosedAdiabatic),
+              xPositive(thermoOpt=ThermoOpt.OpenDiabatic,inviscidY=false)),
             N2(
-              Lstar=1e9*U.m,
               p_IC=(1 - environment.x_H2O)*(1 - environment.x_O2_dry)*
                   environment.p,
-              yNegative(slipX=false),
-              yPositive(slipX=false)),
+              xNegative(thermoOpt=ThermoOpt.OpenDiabatic),
+              xPositive(thermoOpt=ThermoOpt.OpenDiabatic,inviscidY=false)),
             O2(
-              Lstar=1e9*U.m,
               p_IC=(1 - environment.x_H2O)*environment.x_O2_dry*environment.p,
-              yNegative(slipX=false),
-              yPositive(slipX=false))),
+              xNegative(thermoOpt=ThermoOpt.OpenDiabatic),
+              xPositive(thermoOpt=ThermoOpt.OpenDiabatic,inviscidY=false))),
           each graphite(
             inclC=true,
             'incle-'=true,
             C(V_IC=V - xV),
-            'e-'(
-              mu_IC=-0.2*U.V,
-              yNegative(slipX=false),
-              yPositive(slipX=false)))));
+            'e-'(xNegative(thermoOpt=ThermoOpt.OpenDiabatic), xPositive(
+                  thermoOpt=ThermoOpt.OpenDiabatic))),
+          each liquid(inclH2O=true, H2O(
+              V_IC=0,
+              xNegative(thermoOpt=ThermoOpt.OpenDiabatic),
+              xPositive(thermoOpt=ThermoOpt.OpenDiabatic,inviscidY=false)))));
 
       parameter Q.NumberAbsolute x(nominal=1) = 0.76 "Volumetric porosity";
       // The default porosity is for Sigracet 24 BC.
@@ -2727,7 +2722,6 @@ the z axis extends across the width of the channel.</p>
 
     model CaFP "Cathode flow plate"
       //extends FCSys.BaseClasses.Icons.Names.Top4;
-      extends Modelica.Icons.UnderConstruction;
 
       extends FCSys.Regions.Region(
         L_x=fill(8*U.mm/1, 1),
@@ -2738,41 +2732,66 @@ the z axis extends across the width of the channel.</p>
         inclZFaces=false,
         redeclare FCSys.Subregions.SubregionNoIonomer subregions[n_x, n_y, n_z]
           (
-          inclLinX=false,
-          inclLinY=true,
-          each inclReact=false,
+          each inclLinX=false,
+          each inclLinY=true,
           each gas(
             inclH2O=true,
             inclN2=true,
             inclO2=true,
             H2O(
-              Lstar=1e9*U.m,
               p_IC=environment.x_H2O*environment.p,
-              xPositive(thermoOpt=ThermoOpt.ClosedAdiabatic),
-              yNegative(thermoOpt=ThermoOpt.OpenDiabatic, slipX=false),
-              yPositive(thermoOpt=ThermoOpt.OpenDiabatic, slipX=false)),
+              xNegative(thermoOpt=ThermoOpt.OpenDiabatic),
+              xPositive(
+                thermoOpt=ThermoOpt.ClosedAdiabatic,
+                inviscidY=true,
+                inviscidZ=true),
+              yNegative(thermoOpt=ThermoOpt.OpenDiabatic),
+              yPositive(thermoOpt=ThermoOpt.OpenDiabatic)),
             N2(
-              Lstar=1e9*U.m,
               p_IC=(1 - environment.x_H2O)*(1 - environment.x_O2_dry)*
                   environment.p,
-              xPositive(thermoOpt=ThermoOpt.ClosedAdiabatic),
-              yNegative(thermoOpt=ThermoOpt.OpenDiabatic, slipX=false),
-              yPositive(thermoOpt=ThermoOpt.OpenDiabatic, slipX=false)),
+              xNegative(thermoOpt=ThermoOpt.OpenDiabatic),
+              xPositive(
+                thermoOpt=ThermoOpt.ClosedAdiabatic,
+                inviscidY=true,
+                inviscidZ=true),
+              yNegative(thermoOpt=ThermoOpt.OpenDiabatic),
+              yPositive(thermoOpt=ThermoOpt.OpenDiabatic)),
             O2(
-              Lstar=1e9*U.m,
               p_IC=(1 - environment.x_H2O)*environment.x_O2_dry*environment.p,
-              xPositive(thermoOpt=ThermoOpt.ClosedAdiabatic),
-              yNegative(thermoOpt=ThermoOpt.OpenDiabatic, slipX=false),
-              yPositive(thermoOpt=ThermoOpt.OpenDiabatic, slipX=false))),
+              xNegative(thermoOpt=ThermoOpt.OpenDiabatic),
+              xPositive(
+                thermoOpt=ThermoOpt.ClosedAdiabatic,
+                inviscidY=true,
+                inviscidZ=true),
+              yNegative(thermoOpt=ThermoOpt.OpenDiabatic),
+              yPositive(thermoOpt=ThermoOpt.OpenDiabatic))),
           each graphite(
             inclC=true,
             'incle-'=true,
-            C(V_IC=V - xV, Lstar=1e9*U.m),
+            C(V_IC=V - xV),
             'e-'(
-              mu_IC=-0.2*U.V,
-              setVelY=true,
-              yNegative(slipX=false),
-              yPositive(slipX=false)))));
+              xNegative(thermoOpt=ThermoOpt.OpenDiabatic),
+              xPositive(thermoOpt=ThermoOpt.OpenDiabatic),
+              yNegative(
+                thermoOpt=ThermoOpt.ClosedAdiabatic,
+                inviscidZ=true,
+                inviscidX=true),
+              yPositive(
+                thermoOpt=ThermoOpt.ClosedAdiabatic,
+                inviscidZ=true,
+                inviscidX=true))),
+          each liquid(inclH2O=true, H2O(
+              V_IC=0,
+              xNegative(thermoOpt=ThermoOpt.OpenDiabatic),
+              xPositive(
+                thermoOpt=ThermoOpt.ClosedAdiabatic,
+                inviscidY=true,
+                inviscidZ=true),
+              yNegative(thermoOpt=ThermoOpt.OpenDiabatic),
+              yPositive(thermoOpt=ThermoOpt.OpenDiabatic)))));
+
+      // **for e-: setVelY=true,
 
       parameter Q.NumberAbsolute x(nominal=1) = 0.1 "Volumetric porosity";
 
