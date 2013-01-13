@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-12">
+<meta name="date" content="2013-1-13">
 <meta name="description" content="Control volumes with multi-species transport, exchange, and storage">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -21,20 +21,19 @@
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_BCs.html">BCs</a></li>
     <li><a href="FCSys_Sensors.html">Sensors</a></li>
-    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
-    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
     <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
-    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
     </ul>
 
   <h3>Download</h3>
     <ul>
-      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
     </ul>
   </div>
 </div>
@@ -68,9 +67,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Subregions.ExamplesS.png" alt="FCSys.Subregions.Examples" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples">Examples</a>
 </td><td>Examples and tests</td></tr>
 <tr><td><img src="images/FCSys.Subregions.SubregionS.png" alt="FCSys.Subregions.Subregion" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a>
-</td><td>Subregion with all phases included</td></tr>
-<tr><td><img src="images/FCSys.Subregions.SubregionS.png" alt="FCSys.Subregions.SubregionNoGraphite" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions.SubregionNoGraphite">SubregionNoGraphite</a>
-</td><td>Subregion with all phases except graphite</td></tr>
+</td><td>Subregion with all phases</td></tr>
+<tr><td><img src="images/FCSys.Subregions.SubregionS.png" alt="FCSys.Subregions.SubregionIonomerOnly" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions.SubregionIonomerOnly">SubregionIonomerOnly</a>
+</td><td>Subregion with only the ionomer phase</td></tr>
 <tr><td><img src="images/FCSys.Subregions.SubregionS.png" alt="FCSys.Subregions.SubregionNoIonomer" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions.SubregionNoIonomer">SubregionNoIonomer</a>
 </td><td>Subregion with all phases except ionomer</td></tr>
 <tr><td><img src="images/FCSys.Subregions.PhasesS.png" alt="FCSys.Subregions.Phases" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases">Phases</a>
@@ -90,7 +89,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h2><img src="images/FCSys.Subregions.SubregionI.png" alt="FCSys.Subregions.Subregion" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Subregions.Subregion"></a><a href="FCSys_Subregions.html#FCSys.Subregions">FCSys.Subregions</a>.Subregion</h2>
-<b>Subregion with all phases included</b><p>
+<b>Subregion with all phases</b><p>
 <img src="images/FCSys.Subregions.SubregionD.png" alt="FCSys.Subregions.Subregion">
 <p><h3>Information</h3></p>
 <p>Notes:<ul>
@@ -135,7 +134,7 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
-<font color="blue">model</font> Subregion <font color="darkgreen">&quot;Subregion with all phases included&quot;</font>
+<font color="blue">model</font> Subregion <font color="darkgreen">&quot;Subregion with all phases&quot;</font>
 
   <font color="blue">parameter </font>Boolean inclReact=true <font color="darkgreen">&quot;Include reaction(s), as appropriate&quot;</font>;
   <font color="darkgreen">// Note:  This is listed above the extends clause so that it&#39;s listed</font>
@@ -143,8 +142,9 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   <font color="blue">extends </font><a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSubregion">BaseClasses.PartialSubregion</a>;
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Gas">Phases.Gas</a> gas(inclH2O=true, <font color="blue">final </font>inclLin={inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">
-    &quot;Gas&quot;</font>;
-  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Graphite">Phases.Graphite</a> graphite(<font color="blue">final </font>inclLin={inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">
+    &quot;Gas&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Graphite">Phases.Graphite</a> graphite(<font color="blue">final </font>inclLin={inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">
     &quot;Graphite&quot;</font>;
   <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Ionomer">Phases.Ionomer</a> ionomer(<font color="blue">final </font>inclLin={inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">&quot;Ionomer&quot;</font>;
   <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Liquid">Phases.Liquid</a> liquid(<font color="blue">final </font>inclLin={inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">&quot;Liquid&quot;</font>;</textblock>
@@ -154,26 +154,41 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
      and </font>gas.inclH2O)) <font color="darkgreen">&quot;Hydrogen oxidation reaction&quot;</font>;
   <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">FCSys.Subregions.Reaction</a> ORR(<font color="blue">final </font>n_lin=n_lin, n_spec=4) <font color="blue">if </font>inclReact<font color="blue"> and </font>(
     graphite.'incle-'<font color="blue"> and </font>ionomer.'inclH+'<font color="blue"> and </font>gas.inclO2<font color="blue"> and </font>gas.inclH2O<font color="blue"> and </font><font color="blue">
-    not </font>gas.inclH2) <font color="darkgreen">&quot;Oxygen reduction reaction&quot;</font>;</textblock>
-
-<textblock type="annotcomp" expanded="false"><font color="blue">protected </font>
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBusInternal">FCSys.Connectors.ChemicalBusInternal</a> chemical <font color="darkgreen">
-    &quot;Internal connector to route electrochemical interactions&quot;</font>;</textblock>
+    not </font>gas.inclH2) <font color="darkgreen">&quot;Oxygen reduction reaction&quot;</font>;
+  <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">FCSys.Subregions.Reaction</a> evaporation(<font color="blue">final </font>n_lin=n_lin, n_spec=2) <font color="blue">if </font>
+    inclReact<font color="blue"> and </font>(gas.inclH2O<font color="blue"> and </font>liquid.inclH2O) <font color="darkgreen">
+    &quot;Water evaporation/condensation&quot;</font>;
+  <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">FCSys.Subregions.Reaction</a> hydration1(<font color="blue">final </font>n_lin=n_lin, n_spec=2) <font color="blue">if </font>
+    inclReact<font color="blue"> and </font>(gas.inclH2O<font color="blue"> and </font>ionomer.inclH2O) <font color="darkgreen">
+    &quot;Water vapor absorption/desorption from ionomer&quot;</font>;
+  <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">FCSys.Subregions.Reaction</a> hydration2(<font color="blue">final </font>n_lin=n_lin, n_spec=2) <font color="blue">if </font>
+    inclReact<font color="blue"> and </font>(ionomer.inclH2O<font color="blue"> and </font>liquid.inclH2O<font color="blue"> and </font><font color="blue">not </font>gas.inclH2O) <font color="darkgreen">
+    &quot;Liquid water absorption/desorption from ionomer&quot;</font>;</textblock>
+  <font color="darkgreen">// Note:  The additional condition (not gas.inclH2O) prevents a singularity</font>
+  <font color="darkgreen">// if water is included as gas, liquid, and in ionomer.</font>
 
 <font color="blue">equation </font>
-  <font color="darkgreen">// Chemical interactions</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(HOR.chemical[1], chemical.'H+');
-  <font color="red">connect</font>(HOR.chemical[2], chemical.'e-');
-  <font color="red">connect</font>(HOR.chemical[3], chemical.H2);</textblock>
+  <font color="darkgreen">// Chemical interactions (not shown graphically)</font>
+  <font color="red">connect</font>(HOR.chemical[1], ionomer.'H+'.chemical);
+  <font color="red">connect</font>(HOR.chemical[2], graphite.'e-'.chemical);
+  <font color="red">connect</font>(HOR.chemical[3], gas.H2.chemical);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(ORR.chemical[1], chemical.'e-');
-  <font color="red">connect</font>(ORR.chemical[2], chemical.'H+');
-  <font color="red">connect</font>(ORR.chemical[3], chemical.O2);
-  <font color="red">connect</font>(ORR.chemical[4], chemical.H2O);</textblock>
+  <font color="red">connect</font>(ORR.chemical[1], graphite.'e-'.chemical);
+  <font color="red">connect</font>(ORR.chemical[2], ionomer.'H+'.chemical);
+  <font color="red">connect</font>(ORR.chemical[3], gas.O2.chemical);
+  <font color="red">connect</font>(ORR.chemical[4], gas.H2O.chemical);
+
+  <font color="red">connect</font>(evaporation.chemical[1], gas.H2O.chemical);
+  <font color="red">connect</font>(evaporation.chemical[2], liquid.H2O.chemical);
+
+  <font color="red">connect</font>(hydration1.chemical[1], gas.H2O.chemical);
+  <font color="red">connect</font>(hydration1.chemical[2], ionomer.H2O.chemical);
+
+  <font color="red">connect</font>(hydration2.chemical[1], ionomer.H2O.chemical);
+  <font color="red">connect</font>(hydration2.chemical[2], liquid.H2O.chemical);
 
   <font color="darkgreen">// Gas</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(gas.chemical, chemical);
-  <font color="red">connect</font>(gas.inert, volume.inert);
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(gas.inert, volume.inert);
   <font color="red">connect</font>(gas.xNegative, xNegative.gas);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(gas.xPositive, xPositive.gas);</textblock>
@@ -185,7 +200,6 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   <font color="red">connect</font>(gas.zPositive, zPositive.gas);</textblock>
 
   <font color="darkgreen">// Graphite</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(graphite.chemical, chemical);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(graphite.inert, volume.inert);
   <font color="red">connect</font>(graphite.xNegative, xNegative.graphite);</textblock>
@@ -199,7 +213,6 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   <font color="red">connect</font>(graphite.zPositive, zPositive.graphite);</textblock>
 
   <font color="darkgreen">// Ionomer</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(ionomer.chemical, chemical);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(ionomer.inert, volume.inert);
   <font color="red">connect</font>(ionomer.xNegative, xNegative.ionomer);</textblock>
@@ -212,8 +225,7 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   <font color="red">connect</font>(ionomer.zPositive, zPositive.ionomer);</textblock>
 
   <font color="darkgreen">// Liquid</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(liquid.chemical, chemical);
-  <font color="red">connect</font>(liquid.inert, volume.inert);
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(liquid.inert, volume.inert);
   <font color="red">connect</font>(liquid.xNegative, xNegative.liquid);
   <font color="red">connect</font>(liquid.xPositive, xPositive.liquid);
   <font color="red">connect</font>(liquid.yNegative, yNegative.liquid);
@@ -225,18 +237,16 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Subregions.SubregionI.png" alt="FCSys.Subregions.SubregionNoGraphite" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Subregions.SubregionNoGraphite"></a><a href="FCSys_Subregions.html#FCSys.Subregions">FCSys.Subregions</a>.SubregionNoGraphite</h2>
-<b>Subregion with all phases except graphite</b><p>
-<img src="images/FCSys.Subregions.SubregionNoGraphiteD.png" alt="FCSys.Subregions.SubregionNoGraphite">
+<h2><img src="images/FCSys.Subregions.SubregionI.png" alt="FCSys.Subregions.SubregionIonomerOnly" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Subregions.SubregionIonomerOnly"></a><a href="FCSys_Subregions.html#FCSys.Subregions">FCSys.Subregions</a>.SubregionIonomerOnly</h2>
+<b>Subregion with only the ionomer phase</b><p>
+<img src="images/FCSys.Subregions.SubregionIonomerOnlyD.png" alt="FCSys.Subregions.SubregionIonomerOnly">
 <p><h3>Information</h3></p>
 <p>Notes:<ul>
-    <li>The <code>inclReact</code> parameter may be set to
-    <code>false</code>
-    to eliminate unnecessary equations.</li>
   <li>H<sub>2</sub>O is included by default, since at least one species
   must be included.</li></ul>
-</p><p>For more information, see the
+</p>
+<p>For more information, see the
    <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSubregion">PartialSubregion</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSubregion">BaseClasses.PartialSubregion</a> (Partial subregion model for multi-dimensional and multi-species storage, transport, and exchange).
 <p><h3>Parameters</h3><p>
@@ -245,11 +255,8 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>&nbsp;</td><td>Length (<b>L</b>) [l]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Phases</td></tr>
-<tr><td><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Gas">Gas</a></td><td>gas</td><td>&nbsp;</td><td>Gas</td></tr>
 <tr><td><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Ionomer">Ionomer</a></td><td>ionomer</td><td>&nbsp;</td><td>Ionomer</td></tr>
-<tr><td><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Liquid">Liquid</a></td><td>liquid</td><td>&nbsp;</td><td>Liquid</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<tr><td>Boolean</td><td>inclReact</td><td>false</td><td>Include reaction(s), as appropriate</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
 <tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
 <tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
@@ -271,30 +278,13 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
-<font color="blue">model</font> SubregionNoGraphite <font color="darkgreen">&quot;Subregion with all phases except graphite&quot;</font>
-  <font color="blue">parameter </font>Boolean inclReact=false <font color="darkgreen">&quot;Include reaction(s), as appropriate&quot;</font>;
-  <font color="darkgreen">// Note:  This is listed above the extension clause so that it&#39;s listed</font>
-  <font color="darkgreen">// first in the parameter dialog.</font>
+<font color="blue">model</font> SubregionIonomerOnly <font color="darkgreen">&quot;Subregion with only the ionomer phase&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSubregion">BaseClasses.PartialSubregion</a>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Gas">Phases.Gas</a> gas(
-    inclH2O=true,
-    inclReact=inclReact,
-    <font color="blue">final </font>inclLin={inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">&quot;Gas&quot;</font>;</textblock>
-
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Ionomer">Phases.Ionomer</a> ionomer(<font color="blue">final </font>inclLin={inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">&quot;Ionomer&quot;</font>;
-  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Liquid">Phases.Liquid</a> liquid(<font color="blue">final </font>inclLin={inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">&quot;Liquid&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Ionomer">Phases.Ionomer</a> ionomer(inclH2O=true, <font color="blue">final </font>inclLin={inclLinX,inclLinY,
+        inclLinZ}) <font color="darkgreen">&quot;Ionomer&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
-  <font color="darkgreen">// Gas</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(gas.inert, volume.inert);
-  <font color="red">connect</font>(gas.xNegative, xNegative.gas);
-  <font color="red">connect</font>(gas.xPositive, xPositive.gas);
-  <font color="red">connect</font>(gas.yNegative, yNegative.gas);
-  <font color="red">connect</font>(gas.yPositive, yPositive.gas);
-  <font color="red">connect</font>(gas.zNegative, zNegative.gas);
-  <font color="red">connect</font>(gas.zPositive, zPositive.gas);</textblock>
-
   <font color="darkgreen">// Ionomer</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(ionomer.inert, volume.inert);
   <font color="red">connect</font>(ionomer.xNegative, xNegative.ionomer);
@@ -304,23 +294,14 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   <font color="red">connect</font>(ionomer.zNegative, zNegative.ionomer);
   <font color="red">connect</font>(ionomer.zPositive, zPositive.ionomer);</textblock>
 
-  <font color="darkgreen">// Liquid</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(liquid.inert, volume.inert);
-  <font color="red">connect</font>(liquid.xNegative, xNegative.liquid);
-  <font color="red">connect</font>(liquid.xPositive, xPositive.liquid);
-  <font color="red">connect</font>(liquid.yNegative, yNegative.liquid);
-  <font color="red">connect</font>(liquid.yPositive, yPositive.liquid);
-  <font color="red">connect</font>(liquid.zNegative, zNegative.liquid);
-  <font color="red">connect</font>(liquid.zPositive, zPositive.liquid);</textblock>
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>SubregionNoGraphite;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>SubregionIonomerOnly;
 </pre>
 <hr>
 
 <h2><img src="images/FCSys.Subregions.SubregionI.png" alt="FCSys.Subregions.SubregionNoIonomer" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Subregions.SubregionNoIonomer"></a><a href="FCSys_Subregions.html#FCSys.Subregions">FCSys.Subregions</a>.SubregionNoIonomer</h2>
 <b>Subregion with all phases except ionomer</b><p>
-<img src="images/FCSys.Subregions.SubregionNoGraphiteD.png" alt="FCSys.Subregions.SubregionNoIonomer">
+<img src="images/FCSys.Subregions.SubregionNoIonomerD.png" alt="FCSys.Subregions.SubregionNoIonomer">
 <p><h3>Information</h3></p>
 <p>Notes:<ul>
     <li>The <code>inclReact</code> parameter may be set to
@@ -378,7 +359,13 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
     &quot;Graphite&quot;</font>;
   <a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases.Liquid">Phases.Liquid</a> liquid(<font color="blue">final </font>inclLin={inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">&quot;Liquid&quot;</font>;</textblock>
 
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">Reaction</a> evaporation(<font color="blue">final </font>n_lin=n_lin, n_spec=2) <font color="blue">if </font>inclReact<font color="blue"> and </font>(gas.inclH2O<font color="blue">
+     and </font>liquid.inclH2O) <font color="darkgreen">&quot;Water evaporation/condensation&quot;</font>;</textblock>
 <font color="blue">equation </font>
+  <font color="darkgreen">// Chemical interactions (not shown graphically)</font>
+  <font color="red">connect</font>(evaporation.chemical[1], gas.H2O.chemical);
+  <font color="red">connect</font>(evaporation.chemical[1], liquid.H2O.chemical);
+
   <font color="darkgreen">// Gas</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(gas.inert, volume.inert);
   <font color="red">connect</font>(gas.xNegative, xNegative.gas);
@@ -641,7 +628,7 @@ Check the chemical formulas and the specific masses of the species.&quot;);
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jan 12 10:38:57 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:29:35 2013.
 </div>
 </body>
 </html>

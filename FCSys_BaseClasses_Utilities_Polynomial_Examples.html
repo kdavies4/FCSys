@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.BaseClasses.Utilities.Polynomial.Examples</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-12">
+<meta name="date" content="2013-1-13">
 <meta name="description" content="Examples and tests">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -21,20 +21,19 @@
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_BCs.html">BCs</a></li>
     <li><a href="FCSys_Sensors.html">Sensors</a></li>
-    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
-    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
     <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
-    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
     </ul>
 
   <h3>Download</h3>
     <ul>
-      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
     </ul>
   </div>
 </div>
@@ -56,6 +55,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>Test <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.f">f</a>()</td></tr>
 <tr><td><img src="images/FCSys.BaseClasses.Utilities.Polynomial.Examples.TestFS.png" alt="FCSys.BaseClasses.Utilities.Polynomial.Examples.TestF" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Polynomial_Examples.html#FCSys.BaseClasses.Utilities.Polynomial.Examples.TestF">TestF</a>
 </td><td>Verify that <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.F">F</a>() is correctly related to <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.f">f</a>()</td></tr>
+<tr><td><img src="images/FCSys.BaseClasses.Utilities.Polynomial.Examples.TestFS.png" alt="FCSys.BaseClasses.Utilities.Polynomial.Examples.TestdF" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Polynomial_Examples.html#FCSys.BaseClasses.Utilities.Polynomial.Examples.TestdF">TestdF</a>
+</td><td>Verify that <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.dF">dF</a>() is the correct derivative of <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.F">F</a>()</td></tr>
 <tr><td><img src="images/FCSys.BaseClasses.Utilities.Polynomial.Examples.TestFS.png" alt="FCSys.BaseClasses.Utilities.Polynomial.Examples.Testdf" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Polynomial_Examples.html#FCSys.BaseClasses.Utilities.Polynomial.Examples.Testdf">Testdf</a>
 </td><td>Verify that <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.df">df</a>() is the correct derivative of <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.f">f</a>()</td></tr>
 <tr><td><img src="images/FCSys.BaseClasses.Utilities.Polynomial.Examples.TestFS.png" alt="FCSys.BaseClasses.Utilities.Polynomial.Examples.Testd2f" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Polynomial_Examples.html#FCSys.BaseClasses.Utilities.Polynomial.Examples.Testd2f">Testd2f</a>
@@ -88,7 +89,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">output </font>Boolean ok <font color="darkgreen">&quot;true, if all tests passed&quot;</font>;
 
 <font color="blue">algorithm </font>
-  <font color="darkgreen">// f()</font>
   <font color="red">assert</font>(<font color="red">f</font>(
     2,
     {1,2,1},
@@ -101,8 +101,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     2,
     {1,0,0},
     -3) == 1/8, &quot;The f function failed.&quot;);
-  <font color="darkgreen">// Note:  F(), df(), and d2f() are not tested here.  They can be tested by</font>
-  <font color="darkgreen">// simulating TestF, Testdf, and Testd2f.</font>
+  <font color="darkgreen">// Note:  F(), dF(), df(), and d2f() are not tested here.  They can be</font>
+  <font color="darkgreen">// tested by simulating TestF, TestdF, Testdf, and Testd2f.</font>
 
   ok := true;
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>Testf;
@@ -153,6 +153,56 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="red">assert</font>(<font color="red">abs</font>(y1 - y2) &lt; 1e-6, &quot;The derivative is incorrect.&quot;);
   <font color="darkgreen">// The simulation tolerance is set to 1e-8.</font>
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>TestF;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.BaseClasses.Utilities.Polynomial.Examples.TestFI.png" alt="FCSys.BaseClasses.Utilities.Polynomial.Examples.TestdF" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.BaseClasses.Utilities.Polynomial.Examples.TestdF"></a><a href="FCSys_BaseClasses_Utilities_Polynomial_Examples.html#FCSys.BaseClasses.Utilities.Polynomial.Examples">FCSys.BaseClasses.Utilities.Polynomial.Examples</a>.TestdF</h2>
+<b>Verify that <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.dF">dF</a>() is the correct derivative of <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.F">F</a>()</b><p>
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Integer</td><td>n</td><td>-1</td><td>Power of the first polynomial term</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> TestdF <font color="darkgreen">
+  &quot;Verify that <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.dF">dF</a>() is the correct derivative of <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.F">F</a>()&quot;</font>
+  <font color="darkgreen">// This approach is based on [Dassault2010, vol. 2, pp. 300-301].</font>
+
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
+
+  <font color="blue">parameter </font>Integer n=-1 <font color="darkgreen">&quot;Power of the first polynomial term&quot;</font>;
+
+  Real u1=1 + time <font color="darkgreen">&quot;Real arguments to function (must have sufficient richness)&quot;</font>;
+  Real u2[:]=(1 + time^2)*(1:3) <font color="darkgreen">
+    &quot;Real arguments to function (must have sufficient richness)&quot;</font>;
+  Real y1 <font color="darkgreen">&quot;Direct result of function&quot;</font>;
+  Real y2 <font color="darkgreen">&quot;Integral of derivative of y1&quot;</font>;
+
+<font color="blue">initial </font><font color="blue">equation </font>
+  y2 = y1;
+
+<font color="blue">equation </font>
+  y1 = <font color="red">F</font>(
+    u1,
+    u2,
+    n);
+  <font color="red">dF</font>(
+    u1,
+    u2,
+    n,
+    <font color="red">der</font>(u1),
+    <font color="red">der</font>(u2)) = <font color="red">der</font>(y2);
+  <font color="darkgreen">// Note:  This is equivalent to der(y1) = der(y2), but it must be</font>
+  <font color="darkgreen">// explicit to ensure that the translator uses the defined derivative</font>
+  <font color="darkgreen">// instead of the automatically derived one.</font>
+
+  <font color="red">assert</font>(<font color="red">abs</font>(y1 - y2) &lt; 1e-6, &quot;The derivative is incorrect.&quot;);
+  <font color="darkgreen">// The simulation tolerance is set to 1e-8.</font>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>TestdF;
 </pre>
 <hr>
 
@@ -304,7 +354,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jan 12 10:41:12 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:31:59 2013.
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.BCs.Examples</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-12">
+<meta name="date" content="2013-1-13">
 <meta name="description" content="Examples and tests">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -21,20 +21,19 @@
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_BCs.html">BCs</a></li>
     <li><a href="FCSys_Sensors.html">Sensors</a></li>
-    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
-    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
     <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
-    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
     </ul>
 
   <h3>Download</h3>
     <ul>
-      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
     </ul>
   </div>
 </div>
@@ -185,10 +184,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>;
-  <font color="darkgreen">// fails check</font>
+  <font color="darkgreen">/* **fails simulation:
+  &quot;Model error - power: (1/subregion.graphite.&#39;e-&#39;.rho_face[1, 2]) ** (-1.66666666666667) = (-0.000669271) ** (-1.66667)
+
+  Non-linear solver will attempt to handle this problem.&quot;
+  */</font>
 <textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.html#Modelica.Fluid.System">Modelica.Fluid.System</a> system(T_ambient=293.15 + 5);
   <font color="blue">inner </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">BCs.Environment</a> environment(T=350*U.K);
-  <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregions.Subregion</a> subregion(
+  <a href="FCSys_Subregions.html#FCSys.Subregions.SubregionNoIonomer">Subregions.SubregionNoIonomer</a> subregion(
     L={1,1,1}*U.cm,
     inclReact=false,
     inclYFaces=false,
@@ -196,7 +199,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     gas(inclH2=true, inclH2O=true),
     graphite(inclC=true, &#39;incle-&#39;=true),
     liquid(inclH2O=true));
-  <a href="FCSys_BCs_Adapters.html#FCSys.BCs.Adapters.Anode">Adapters.Anode</a> anodeAdapter;
+  <a href="FCSys_BCs_Adapters.html#FCSys.BCs.Adapters.Anode">Adapters.Anode</a> anodeAdapter(<font color="blue">redeclare </font><font color="blue">package</font> LiquidMedium = <a href="http://build.openmodelica.org/Documentation/Modelica.Media.CompressibleLiquids.LinearColdWater.html#Modelica.Media.CompressibleLiquids.LinearColdWater">Modelica.Media.CompressibleLiquids.LinearColdWater</a>);
   <a href="http://build.openmodelica.org/Documentation/Modelica.Electrical.Analog.Basic.html#Modelica.Electrical.Analog.Basic.Ground">Modelica.Electrical.Analog.Basic.Ground</a> ground;</textblock>
 
 <textblock type="annotcomp" expanded="false">  <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Vessels.html#Modelica.Fluid.Vessels.ClosedVolume">Modelica.Fluid.Vessels.ClosedVolume</a> gasVolume(
@@ -206,16 +209,18 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     use_HeatTransfer=true,
     <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.html#Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer">Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer</a>
       HeatTransfer,
-    <font color="blue">redeclare </font><font color="blue">package</font> Medium = <a href="FCSys_BCs_Adapters_Media_AnodeGas.html#FCSys.BCs.Adapters.Media.AnodeGas">FCSys.BCs.Adapters.Media.AnodeGas</a>);
+    <font color="blue">redeclare </font><font color="blue">package</font> Medium = <a href="FCSys_BCs_Adapters_Media_AnodeGas.html#FCSys.BCs.Adapters.Media.AnodeGas">FCSys.BCs.Adapters.Media.AnodeGas</a>,
+    medium(p(fixed=true),X(<font color="blue">each </font>fixed=true)));
   <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Vessels.html#Modelica.Fluid.Vessels.ClosedVolume">Modelica.Fluid.Vessels.ClosedVolume</a> liquidVolume(
     nPorts=1,
     use_HeatTransfer=true,
     <font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.html#Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer">Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer</a>
       HeatTransfer,
-    <font color="blue">redeclare </font><font color="blue">package</font> Medium = <a href="http://build.openmodelica.org/Documentation/Modelica.Media.Water.ConstantPropertyLiquidWater.html#Modelica.Media.Water.ConstantPropertyLiquidWater">Modelica.Media.Water.ConstantPropertyLiquidWater</a>,
-
     V=0.5e-6,
-    use_portsData=false);</textblock>
+    use_portsData=false,
+    <font color="blue">redeclare </font><font color="blue">package</font> Medium = <a href="http://build.openmodelica.org/Documentation/Modelica.Media.CompressibleLiquids.LinearColdWater.html#Modelica.Media.CompressibleLiquids.LinearColdWater">Modelica.Media.CompressibleLiquids.LinearColdWater</a>,
+
+    medium(p(fixed=true),T(fixed=true)));</textblock>
 
 <font color="blue">equation </font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(ground.p, anodeAdapter.pin);</textblock>
@@ -233,7 +238,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jan 12 10:33:25 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:24:00 2013.
 </div>
 </body>
 </html>

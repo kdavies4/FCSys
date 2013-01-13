@@ -1,0 +1,290 @@
+<html>
+<head>
+<title>FCSys.Regions.AnCLs</title>
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
+<meta name="date" content="2013-1-13">
+<meta name="description" content="Anode catalyst layers">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_BCs.html">BCs</a></li>
+    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Regions.AnCLs"></a><a href="FCSys_Regions.html#FCSys.Regions">FCSys.Regions</a>.AnCLs</h2>
+<b>Anode catalyst layers</b>
+<p>
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages), <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.PackageUnderConstruction">FCSys.BaseClasses.Icons.PackageUnderConstruction</a> (Overlay that indicates a package is under construction).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Regions.AnCLs.AnCLS.png" alt="FCSys.Regions.AnCLs.AnCL" width=20  height=20 align=top>&nbsp;<a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a>
+</td><td>Anode catalyst layer</td></tr>
+<tr><td><img src="images/FCSys.Regions.AnCLs.AnCLS.png" alt="FCSys.Regions.AnCLs.AnCGDL" width=20  height=20 align=top>&nbsp;<a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCGDL">AnCGDL</a>
+</td><td>Integrated anode catalyst/gas diffusion layer</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.Regions.AnCLs.AnCLI.png" alt="FCSys.Regions.AnCLs.AnCL" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Regions.AnCLs.AnCL"></a><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs">FCSys.Regions.AnCLs</a>.AnCL</h2>
+<b>Anode catalyst layer</b><p>
+<img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.AnCLs.AnCL">
+<p><h3>Information</h3></p>
+
+<p>This model describes the storage, reaction, and transport of
+chemical/electrochemical species in and through the anode catalyst layer of a PEMFC.
+The x axis is intended to extend from the anode to the cathode.
+The y axis extends along the length of the channel and
+the z axis extends across the width of the channel.</p>
+
+<p>Assumptions:
+<ol>
+<li>Half of the solid is graphite and half is ionomer (by volume).
+</li>
+</ol>
+</p>
+<p>For more information, see the
+    <a href="FCSys_Regions_BaseClasses.html#FCSys.Regions.BaseClasses.PartialRegion">PartialRegion</a> model.</p>
+<p>
+Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">FCSys.Regions.Region</a> (Base model for a 3D array of subregions).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.25</td><td>Volumetric porosity [1]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(28.7*U.micro*U.m/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Initialization</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>) [1]</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
+<tr><td>Boolean</td><td>inclXFaces</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xPositive[n_y, n_z]</td><td>Positive face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative[n_x, n_z]</td><td>Negative face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive[n_x, n_z]</td><td>Positive face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> AnCL <font color="darkgreen">&quot;Anode catalyst layer&quot;</font>
+  <font color="darkgreen">//extends FCSys.BaseClasses.Icons.Names.Top4;</font>
+
+  <font color="blue">extends </font><a href="FCSys_Regions.html#FCSys.Regions.Region">FCSys.Regions.Region</a>(
+    L_x=<font color="red">fill</font>(28.7*U.micro*U.m/1, 1),
+    L_y=<font color="red">fill</font>(1*U.m/1, 1),
+    L_z=<font color="red">fill</font>(5*U.mm/1, 1),
+    <font color="blue">final </font>inclXFaces=true,
+    inclYFaces=false,
+    inclZFaces=false,
+    <font color="blue">redeclare </font><a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">FCSys.Subregions.Subregion</a> subregions[n_x, n_y, n_z](
+      <font color="blue">each </font>gas(
+        inclH2=true,
+        inclH2O=true,
+        H2(
+          p_IC=(1 - environment.x_H2O)*environment.p,
+          yNegative(slipX=false),
+          yPositive(slipX=false)),
+        H2O(
+          Lstar=1e7*U.m,
+          p_IC=environment.x_H2O*environment.p,
+          yNegative(slipX=false),
+          yPositive(slipX=false))),
+      <font color="blue">each </font>graphite(
+        inclC=true,
+        &#39;incle-&#39;=true,
+        C(V_IC=(V - xV)/2,Lstar=1e7*U.m),
+        &#39;e-&#39;(
+          Lstar=1e7*U.m,
+          yNegative(slipX=false),
+          yPositive(slipX=false))),
+      <font color="blue">each </font>ionomer(
+        inclC19HF37O5S=true,
+        &#39;inclH+&#39;=true,
+        C19HF37O5S(Lstar=1e7*U.m,V_IC=(V - xV)/2),
+        &#39;H+&#39;(
+          Lstar=1e7*U.m,
+          yNegative(slipX=false),
+          yPositive(slipX=false)))));
+  <font color="darkgreen">//&#39;e-&#39;( xPositive(thermoOpt=ThermoOpt.ClosedAdiabatic),</font>
+  <font color="darkgreen">//&#39;H+&#39;xNegative(thermoOpt=ThermoOpt.ClosedAdiabatic),</font>
+
+  <font color="darkgreen">//alpha_tau=1e-4*subregions[1,1,1].gas.H2.Data.alpha()),</font>
+
+  <font color="darkgreen">//each ionomer(C19HF37O5S(V_IC=0.15*V)))</font>
+
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> x(nominal=1) = 0.25 <font color="darkgreen">&quot;Volumetric porosity&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> lambda_IC=14 <font color="darkgreen">
+    &quot;Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>)&quot;</font>;
+
+  <font color="darkgreen">// Auxiliary variables (for analysis)</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> x_H2[n_x, n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) =
+    subregions.gas.H2.N ./ (subregions.gas.H2.N + subregions.gas.H2O.N) <font color="blue">if </font>
+    environment.analysis<font color="blue"> and </font>hasSubregions <font color="darkgreen">&quot;Molar concentration of H2&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> x_H2O[n_x, n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) = <font color="red">
+    ones</font>(
+    n_x,
+    n_y,
+    n_z) - x_H2 <font color="blue">if </font>environment.analysis<font color="blue"> and </font>hasSubregions <font color="darkgreen">
+    &quot;Molar concentration of H2O&quot;</font>;
+
+<font color="blue">protected </font>
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> xV=x*V <font color="darkgreen">&quot;Gas volume&quot;</font>;
+
+  <font color="darkgreen">// TODO:  Add H2O to the ionomer according to lambda_IC.</font>
+  <font color="darkgreen">// TODO:  Include reaction to absorb H2O into ionomer.</font>
+  <font color="darkgreen">// Assume zero volume of H2O in the ionomer?</font>
+
+  <font color="darkgreen">// TODO:  Clean up (move to Species models if possible):</font>
+
+  <font color="darkgreen">// Volumic density of free protons from [Spry2009, p. 10214]:</font>
+  <font color="darkgreen">//   @ lambda = 12: 0.95 M</font>
+  <font color="darkgreen">//   @ lambda = 22: 0.54 M</font>
+  <font color="darkgreen">// where lambda is the ratio of water molecules to sulfonic acid units.</font>
+
+  <font color="darkgreen">// The default total thickness (sum(L_x)), 28.7*U.micro*U.m, is from [Gurau1998].</font>
+  <font color="darkgreen">//     SGL Sigracet 10 BA GDL: L=0.400 mm, P=0.85 m/s (for air) [SGL2007] =&gt; D = P*L = 340e-6 m2/s</font>
+  <font color="darkgreen">//     SGL Sigracet 10 BB GDL: L=0.420 mm, P=0.03 m/s (for air) [SGL2007] =&gt; D = P*L = 12.6e-6 m2/s</font>
+  <font color="darkgreen">//     SGL Sigracet 10 BC GDL: L=0.420 mm, P=0.0145 m/s (for air) [SGL2007] =&gt; D = P*L = 6.09e-6 m2/s</font>
+  <font color="darkgreen">//     SGL Sigracet 24 BA GDL: L=0.190 mm, P=0.30 m/s (for air) [SGL2004] =&gt; D = P*L = 57e-6 m2/s</font>
+  <font color="darkgreen">//     SGL Sigracet 24 BC GDL: L=0.235 mm, P=0.0045 m/s (for air) [SGL2004] =&gt; D = P*L = 1.0575e-6 m2/s</font>
+  <font color="darkgreen">//     SGL Sigracet 25 BA GDL: L=0.190 mm, P=0.90 m/s (for air) [SGL2004] =&gt; D = P*L = 171e-6 m2/s</font>
+  <font color="darkgreen">//     SGL Sigracet 25 BC GDL: L=0.235 mm, P=0.008 m/s (for air) [SGL2004] =&gt; D = P*L = 1.88e-6 m2/s</font>
+  <font color="darkgreen">//     Toray TGP-H-030: L=0.110 mm, P/p=2500 ml.mm/(cm2.hr.mmAq) = 0.70814e-3 m/(s.kPa) [Toray2010] =&gt; D = P*L = 7.89e-6 m2/s, assuming p=101.325 kPa</font>
+  <font color="darkgreen">//     Toray TGP-H-060: L=0.190 mm, P/p=00 ml.mm/(cm2.hr.mmAq) = 0.53818e-3 m/(s.kPa) [Toray2010] =&gt; D = P*L = 10.36e-6 m2/s, assuming p=101.325 kPa</font>
+  <font color="darkgreen">//     Toray TGP-H-090: L=0.280 mm, P/p=00 ml.mm/(cm2.hr.mmAq) = 0.48153e-3 m/(s.kPa) [Toray2010] =&gt; D = P*L = 13.66e-6 m2/s, assuming p=101.325 kPa</font>
+  <font color="darkgreen">//     Toray TGP-H-120: L=0.370 mm, P/p=00 ml.mm/(cm2.hr.mmAq) = 0.42488e-3 m/(s.kPa) [Toray2010] =&gt; D = P*L = 15.93e-6 m2/s, assuming p=101.325 kPa&quot;);</font>
+
+  <font color="darkgreen">// GDL porosity (ratio of pore volume to total volume), &amp;epsilon;</font>
+  <font color="darkgreen">//     SGL Sigracet 10 BA GDL: 0.88 [SGL2007]</font>
+  <font color="darkgreen">//     SGL Sigracet 10 BB GDL: 0.84 [SGL2007]</font>
+  <font color="darkgreen">//     SGL Sigracet 10 BC GDL: 0.82 [SGL2007]</font>
+  <font color="darkgreen">//     SGL Sigracet 24 BA GDL: 0.84 [SGL2004]</font>
+  <font color="darkgreen">//     SGL Sigracet 24 BC GDL: 0.76 [SGL2004]</font>
+  <font color="darkgreen">//     SGL Sigracet 25 BA GDL: 0.88 [SGL2004]</font>
+  <font color="darkgreen">//     SGL Sigracet 25 BC GDL: 0.80 [SGL2004]</font>
+  <font color="darkgreen">//     0.4 [Bernardi1992, p. 2483, Table 3]</font>
+
+  <font color="darkgreen">// Density of the GDL material (excluding pore volume), &amp;rho;&lt;sub&gt;GDL&lt;/sub&gt;</font>
+  <font color="darkgreen">//     SGL Sigracet 10 BA GDL: (85 g/m2)/(0.400 mm)/0.88 = 241 kg/m3, based on areic weight, thickness, and porosity from [SGL2007]</font>
+  <font color="darkgreen">//     SGL Sigracet 10 BB GDL: (125 g/m2)/(0.420 mm)/0.84 = 354 kg/m3, based on areic weight, thickness, and porosity from [SGL2007]</font>
+  <font color="darkgreen">//     SGL Sigracet 10 BC GDL: (135 g/m2)/(0.420 mm)/0.82 = 392 kg/m3, based on areic weight, thickness, and porosity from [SGL2007]</font>
+  <font color="darkgreen">//     SGL Sigracet 24 BA GDL: (54 g/m2)/(0.190 mm)/0.84 = 711 kg/m3, based on areic weight, thickness, and porosity from [SGL2004]</font>
+  <font color="darkgreen">//     SGL Sigracet 24 BC GDL: (100 g/m2)/(0.235 mm)/0.76 = 560 kg/m3, based on areic weight, thickness, and porosity from [SGL2004]</font>
+  <font color="darkgreen">//     SGL Sigracet 25 BA GDL: (40 g/m2)/(0.190 mm)/0.88 = 239 kg/m3, based on areic weight, thickness, and porosity from [SGL2004]</font>
+  <font color="darkgreen">//     SGL Sigracet 25 BC GDL: (86 g/m2)/(0.235 mm)/0.80 = 457 kg/m3, based on areic weight, thickness, and porosity from [SGL2004]</font>
+  <font color="darkgreen">//     Graphite (pyrolytic): rho = 2210 kg/m3 [Incropera2002, p. 909]</font>
+  <font color="darkgreen">//     Amorphous carbon: rho = 1950 kg/m3 [Incropera2002, p. 909]</font>
+
+  <font color="darkgreen">// Electrical resistivity of the GDL material (excluding the effect of porosity)</font>
+  <font color="darkgreen">//     SGL Sigracet 10 BA GDL: (12 mohm.cm2)*(1 - 0.88)^1.5/(0.400 mm) = 0.1247 mohm.m, based on electrical resistivity (through plane), porosity, and thickness from [SGL2007]</font>
+  <font color="darkgreen">//     SGL Sigracet 10 BB GDL: (15 mohm.cm2)*(1 - 0.84)^1.5/(0.420 mm) = 0.2286 mohm.m, based on electrical resistivity (through plane), porosity, and thickness from [SGL2007]</font>
+  <font color="darkgreen">//     SGL Sigracet 10 BC GDL: (16 mohm.cm2)*(1 - 0.82)^1.5/(0.420 mm) = 0.2909 mohm.m, based on electrical resistivity (through plane), porosity, and thickness from [SGL2007]</font>
+  <font color="darkgreen">//     SGL Sigracet 24 BA GDL: (10 mohm.cm2)*(1 - 0.84)^1.5/(0.190 mm) = 0.3368 mohm.m, based on electrical resistivity (through plane), porosity, and thickness from [SGL2004]</font>
+  <font color="darkgreen">//     SGL Sigracet 24 BC GDL: (11 mohm.cm2)*(1 - 0.76)^1.5/(0.235 mm) = 0.5504 mohm.m, based on electrical resistivity (through plane), porosity, and thickness from [SGL2004]</font>
+  <font color="darkgreen">//     SGL Sigracet 25 BA GDL: (10 mohm.cm2)*(1 - 0.88)^1.5/(0.190 mm) = 0.2188 mohm.m, based on electrical resistivity (through plane), porosity, and thickness from [SGL2004]</font>
+  <font color="darkgreen">//     SGL Sigracet 25 BC GDL: (12 mohm.cm2)*(1 - 0.80)^1.5/(0.235 mm) = 0.4567 mohm.m, based on electrical resistivity (through plane), porosity, and thickness from [SGL2004]</font>
+  <font color="darkgreen">// Note:  Based on [Weber2004, p. 4696, Eq. 38], the resistivity of GDL is adjusted by a factor of (1 - epsilon)^-1.5,</font>
+  <font color="darkgreen">// assuming all of the solid volume is electrically conducting.</font>
+  <font color="darkgreen">// (1 - epsilon) is the volume fraction of the conducting solid, and the power of (1 - epsilon)^(3/2) is the area fraction of the conducting solid.</font>
+
+<textblock type="annotcomp" expanded="false"><font color="blue">protected </font>
+  <font color="blue">outer </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">BCs.Environment</a> environment <font color="darkgreen">&quot;Environmental settings&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>AnCL;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Regions.AnCLs.AnCLI.png" alt="FCSys.Regions.AnCLs.AnCGDL" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Regions.AnCLs.AnCGDL"></a><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs">FCSys.Regions.AnCLs</a>.AnCGDL</h2>
+<b>Integrated anode catalyst/gas diffusion layer</b><p>
+<img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.AnCLs.AnCGDL">
+<p><h3>Information</h3></p>
+<p>For more information, see the
+    <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a> and <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> models</p><p>
+Extends from <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a> (Anode catalyst layer).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.25</td><td>Volumetric porosity [1]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill((28.7*U.micro*U.m + 0.3...</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Initialization</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>) [1]</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
+<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xPositive[n_y, n_z]</td><td>Positive face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative[n_x, n_z]</td><td>Negative face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive[n_x, n_z]</td><td>Positive face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> AnCGDL <font color="darkgreen">&quot;Integrated anode catalyst/gas diffusion layer&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a>(L_x=<font color="red">fill</font>((28.7*U.micro*U.m + 0.3*U.mm)/1, 1));
+
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> lambda_IC=14 <font color="darkgreen">
+    &quot;Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>)&quot;</font>;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>AnCGDL;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:28:40 2013.
+</div>
+</body>
+</html>

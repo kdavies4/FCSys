@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Characteristics.BaseClasses.Characteristic</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-12">
+<meta name="date" content="2013-1-13">
 <meta name="description" content="Record for thermodynamic and resistive properties">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -21,20 +21,19 @@
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_BCs.html">BCs</a></li>
     <li><a href="FCSys_Sensors.html">Sensors</a></li>
-    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
-    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
     <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
-    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
     </ul>
 
   <h3>Download</h3>
     <ul>
-      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
     </ul>
   </div>
 </div>
@@ -558,6 +557,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <font color="blue">protected </font>
   <textblock type="model" expanded="false" path="FCSys.Characteristics.BaseClasses.Characteristic.h.h0_i"><font color="blue">function</font> h0_i <font color="darkgreen">
     &quot;Return h0 as a function of T using one of the temperature intervals&quot;</font>
+  annotation(derivative=<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.h.dh0_i">dh0_i</a>);
     <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Temperature&quot;</font>;
     <font color="blue">input </font>Integer i <font color="darkgreen">&quot;Index of the temperature interval&quot;</font>;
     <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> h0 <font color="darkgreen">
@@ -572,6 +572,25 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     <font color="darkgreen">// enthalpy of formation (of ideal gas, if the material is gaseous) at</font>
     <font color="darkgreen">// 25 degC [McBride2002, p. 2].</font>
   <font color="blue">end </font>h0_i</textblock>;
+
+  <textblock type="model" expanded="false" path="FCSys.Characteristics.BaseClasses.Characteristic.h.dh0_i"><font color="blue">function</font> dh0_i <font color="darkgreen">&quot;Derivative of h0_i&quot;</font>
+
+    <font color="darkgreen">// Note:  This function is necessary to allow Dymola 7.4 to choose T</font>
+    <font color="darkgreen">// as a state in FCSys.Subregions.Species and thus avoid nonlinear</font>
+    <font color="darkgreen">// systems of equations.</font>
+
+    <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Temperature&quot;</font>;
+    <font color="blue">input </font>Integer i <font color="darkgreen">&quot;Index of the temperature interval&quot;</font>;
+    <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Q.Temperature</a> dT <font color="darkgreen">&quot;Derivative of temperature&quot;</font>;
+    <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> dh0 <font color="darkgreen">
+      &quot;Derivative of specific enthalpy at reference pressure&quot;</font>;
+
+  <font color="blue">algorithm </font>
+    dh0 := <font color="red">Polynomial.f</font>(
+        T,
+        b_c[i, :],
+        specHeatCapPow)*dT;
+  <font color="blue">end </font>dh0_i</textblock>;
 
   <textblock type="model" expanded="false" path="FCSys.Characteristics.BaseClasses.Characteristic.h.h_resid"><font color="blue">function</font> h_resid <font color="darkgreen">
     &quot;Residual specific enthalpy for pressure adjustment&quot;</font>
@@ -893,12 +912,51 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   Xi := <font color="red">alpha</font>(T)/v;
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>Xi;
 </pre>
+<hr>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE dh0_i<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<h2><a name="FCSys.Characteristics.BaseClasses.Characteristic.h.dh0_i"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.h">FCSys.Characteristics.BaseClasses.Characteristic.h</a>.dh0_i</h2>
+<b>Derivative of h0_i</b><p>
+<p><h3>Inputs</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>&nbsp;</td><td>Temperature</td></tr>
+<tr><td>Integer</td><td>i</td><td>&nbsp;</td><td>Index of the temperature interval</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Temperature</a></td><td>dT</td><td>&nbsp;</td><td>Derivative of temperature</td></tr>
+</table>
+<p><h3>Outputs</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>dh0</td><td>Derivative of specific enthalpy at reference pressure [l2.m/(N.T2)]</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">function</font> dh0_i <font color="darkgreen">&quot;Derivative of h0_i&quot;</font>
+
+  <font color="darkgreen">// Note:  This function is necessary to allow Dymola 7.4 to choose T</font>
+  <font color="darkgreen">// as a state in FCSys.Subregions.Species and thus avoid nonlinear</font>
+  <font color="darkgreen">// systems of equations.</font>
+
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font>Integer i <font color="darkgreen">&quot;Index of the temperature interval&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Q.Temperature</a> dT <font color="darkgreen">&quot;Derivative of temperature&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> dh0 <font color="darkgreen">
+    &quot;Derivative of specific enthalpy at reference pressure&quot;</font>;
+
+<font color="blue">algorithm </font>
+  dh0 := <font color="red">Polynomial.f</font>(
+    T,
+    b_c[i, :],
+    specHeatCapPow)*dT;
+<font color="blue">end </font>dh0_i;
+</pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jan 12 10:40:58 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:31:45 2013.
 </div>
 </body>
 </html>

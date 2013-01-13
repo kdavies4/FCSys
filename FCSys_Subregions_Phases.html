@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.Phases</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-12">
+<meta name="date" content="2013-1-13">
 <meta name="description" content="Phases or mixtures of species">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -21,20 +21,19 @@
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_BCs.html">BCs</a></li>
     <li><a href="FCSys_Sensors.html">Sensors</a></li>
-    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
-    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
     <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
-    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
     </ul>
 
   <h3>Download</h3>
     <ul>
-      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
     </ul>
   </div>
 </div>
@@ -116,7 +115,6 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">ChemicalBus</a></td><td>chemical</td><td>Connector for chemical exchange among species</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -197,20 +195,19 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
     T(stateSelect=<font color="blue">if </font>reduceTemp<font color="blue"> then </font>StateSelect.default<font color="blue"> else </font>StateSelect.prefer))
     <font color="darkgreen">&quot;O<sub>2</sub> model&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">Reaction</a> &#39;2H2+O2=2H2O&#39;(<font color="blue">final </font>n_lin=n_lin, n_spec=3) <font color="blue">if </font>inclReact<font color="blue"> and </font>(inclH2<font color="blue">
-     and </font>inclH2O<font color="blue"> and </font>inclO2);</textblock>
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">Reaction</a> combustion(<font color="blue">final </font>n_lin=n_lin, n_spec=3) <font color="blue">if </font>inclReact<font color="blue"> and </font>(inclH2<font color="blue">
+     and </font>inclH2O<font color="blue"> and </font>inclO2) <font color="darkgreen">&quot;2H2 + O2 &lt;=&gt; 2H2O&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Chemical interactions</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('2H2+O2=2H2O'.chemical[1], H2.chemical);
-  <font color="red">connect</font>('2H2+O2=2H2O'.chemical[2], O2.chemical);
-  <font color="red">connect</font>('2H2+O2=2H2O'.chemical[3], H2O.chemical);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(combustion.chemical[1], H2.chemical);
+  <font color="red">connect</font>(combustion.chemical[2], O2.chemical);
+  <font color="red">connect</font>(combustion.chemical[3], H2O.chemical);</textblock>
 
   <font color="darkgreen">// H2</font>
   <font color="darkgreen">// --</font>
   <font color="darkgreen">// Exchange</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.chemical, chemical.H2);
-  <font color="red">connect</font>(H2.common.mechanical, common.mechanical);
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.common.mechanical, common.mechanical);
   <font color="red">connect</font>(H2.common.thermal, common.thermal);
   <font color="red">connect</font>(H2.inert, phaseBoundary.inertD);</textblock>
   <font color="darkgreen">// Transport of x-axis linear momentum</font>
@@ -260,8 +257,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="darkgreen">// H2O</font>
   <font color="darkgreen">// ---</font>
   <font color="darkgreen">// Exchange</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.chemical, chemical.H2O);
-  <font color="red">connect</font>(H2O.common.mechanical, common.mechanical);
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.common.mechanical, common.mechanical);
   <font color="red">connect</font>(H2O.common.thermal, common.thermal);
   <font color="red">connect</font>(H2O.inert, phaseBoundary.inertD);</textblock>
   <font color="darkgreen">// Transport of x-axis linear momentum</font>
@@ -311,8 +307,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="darkgreen">// N2</font>
   <font color="darkgreen">// --</font>
   <font color="darkgreen">// Exchange</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.chemical, chemical.N2);
-  <font color="red">connect</font>(N2.common.mechanical, common.mechanical);
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.common.mechanical, common.mechanical);
   <font color="red">connect</font>(N2.common.thermal, common.thermal);
   <font color="red">connect</font>(N2.inert, phaseBoundary.inertD);</textblock>
   <font color="darkgreen">// Transport of x-axis linear momentum</font>
@@ -362,8 +357,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="darkgreen">// O2</font>
   <font color="darkgreen">// --</font>
   <font color="darkgreen">// Exchange</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.chemical, chemical.O2);
-  <font color="red">connect</font>(O2.common.mechanical, common.mechanical);
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.common.mechanical, common.mechanical);
   <font color="red">connect</font>(O2.common.thermal, common.thermal);
   <font color="red">connect</font>(O2.inert, phaseBoundary.inertD);</textblock>
   <font color="darkgreen">// Transport of x-axis linear momentum</font>
@@ -460,7 +454,6 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">ChemicalBus</a></td><td>chemical</td><td>Connector for chemical exchange among species</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -503,8 +496,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="darkgreen">// C</font>
   <font color="darkgreen">// -</font>
   <font color="darkgreen">// Exchange</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.chemical, chemical.C);
-  <font color="red">connect</font>(C.common.mechanical, common.mechanical);
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.common.mechanical, common.mechanical);
   <font color="red">connect</font>(C.common.thermal, common.thermal);
   <font color="red">connect</font>(C.inert, phaseBoundary.inertD);</textblock>
   <font color="darkgreen">// Transport of x-axis linear momentum</font>
@@ -554,8 +546,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="darkgreen">// e-</font>
   <font color="darkgreen">// --</font>
   <font color="darkgreen">// Exchange</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.chemical, chemical.'e-');
-  <font color="red">connect</font>('e-'.common.mechanical, common.mechanical);
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.common.mechanical, common.mechanical);
   <font color="red">connect</font>('e-'.common.thermal, common.thermal);
   <font color="red">connect</font>('e-'.inert, phaseBoundary.inertD);</textblock>
   <font color="darkgreen">// Transport of x-axis linear momentum</font>
@@ -654,7 +645,6 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">ChemicalBus</a></td><td>chemical</td><td>Connector for chemical exchange among species</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -682,8 +672,8 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
     Species.Species(
     <font color="blue">final </font>k=k,
     <font color="blue">final </font>inclLin=inclLin,
-    initMethX=<font color="blue">if </font>(initVelX19HF37O5S)<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue">
-         else </font>InitMethVelocity.Velocity,
+    initMethX=<font color="blue">if </font>(initVelX<font color="blue"> or </font>inclC19HF37O5S)<font color="blue"> and </font>reduceVel<font color="blue"> then </font>
+        InitMethVelocity.None<font color="blue"> else </font>InitMethVelocity.Velocity,
     initMethY=<font color="blue">if </font>(initVelY<font color="blue"> or </font>inclC19HF37O5S)<font color="blue"> and </font>reduceVel<font color="blue"> then </font>
         InitMethVelocity.None<font color="blue"> else </font>InitMethVelocity.Velocity,
     initMethZ=<font color="blue">if </font>(initVelZ<font color="blue"> or </font>inclC19HF37O5S)<font color="blue"> and </font>reduceVel<font color="blue"> then </font>
@@ -717,8 +707,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="darkgreen">// C19HF37O5S</font>
   <font color="darkgreen">// ----------</font>
   <font color="darkgreen">// Exchange</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.chemical, chemical.C19HF37O5S);
-  <font color="red">connect</font>(C19HF37O5S.common.mechanical, common.mechanical);
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.common.mechanical, common.mechanical);
   <font color="red">connect</font>(C19HF37O5S.common.thermal, common.thermal);
   <font color="red">connect</font>(C19HF37O5S.inert, phaseBoundary.inertD);</textblock>
   <font color="darkgreen">// Transport of x-axis linear momentum</font>
@@ -768,8 +757,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="darkgreen">// &#39;H+&#39;</font>
   <font color="darkgreen">// ----</font>
   <font color="darkgreen">// Exchange</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.chemical, chemical.'H+');
-  <font color="red">connect</font>('H+'.common.mechanical, common.mechanical);
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.common.mechanical, common.mechanical);
   <font color="red">connect</font>('H+'.common.thermal, common.thermal);
   <font color="red">connect</font>('H+'.inert, phaseBoundary.inertD);</textblock>
   <font color="darkgreen">// Transport of x-axis linear momentum</font>
@@ -819,8 +807,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="darkgreen">// H2O</font>
   <font color="darkgreen">// ---</font>
   <font color="darkgreen">// Exchange</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.chemical, chemical.H2O);
-  <font color="red">connect</font>(H2O.common.mechanical, common.mechanical);
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.common.mechanical, common.mechanical);
   <font color="red">connect</font>(H2O.common.thermal, common.thermal);
   <font color="red">connect</font>(H2O.inert, phaseBoundary.inertD);</textblock>
   <font color="darkgreen">// Transport of x-axis linear momentum</font>
@@ -911,7 +898,6 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">ChemicalBus</a></td><td>chemical</td><td>Connector for chemical exchange among species</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -942,8 +928,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   <font color="darkgreen">// H2O</font>
   <font color="darkgreen">// ---</font>
   <font color="darkgreen">// Exchange</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.chemical, chemical.H2O);
-  <font color="red">connect</font>(H2O.common.mechanical, common.mechanical);
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.common.mechanical, common.mechanical);
   <font color="red">connect</font>(H2O.common.thermal, common.thermal);
   <font color="red">connect</font>(H2O.inert, phaseBoundary.inertD);</textblock>
   <font color="darkgreen">// Transport of x-axis linear momentum</font>
@@ -997,7 +982,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jan 12 10:39:25 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:30:06 2013.
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.Species</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-12">
+<meta name="date" content="2013-1-13">
 <meta name="description" content="Models for single-species storage, transport, and exchange of material, linear momentum, and energy">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -21,20 +21,19 @@
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_BCs.html">BCs</a></li>
     <li><a href="FCSys_Sensors.html">Sensors</a></li>
-    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
-    <li><a href="FCSys_Regions.html">Regions</a>**</li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
     <li><a href="FCSys_Connectors.html">Connectors</a></li>
     <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
     <li><a href="FCSys_Units.html">Units</a></li>
     <li><a href="FCSys_Quantities.html">Quantities</a></li>
     <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
-    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
     </ul>
 
   <h3>Download</h3>
     <ul>
-      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
     </ul>
   </div>
 </div>
@@ -70,6 +69,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>O<sub>2</sub></td></tr>
 <tr><td><img src="images/FCSys.Subregions.Species.SpeciesSolidS.png" alt="FCSys.Subregions.Species.SpeciesSolid" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesSolid">SpeciesSolid</a>
 </td><td>Solid species (inert and stagnant)</td></tr>
+<tr><td><img src="images/FCSys.Subregions.Species.SpeciesSolidS.png" alt="FCSys.Subregions.Species.SpeciesIncompressible" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesIncompressible">SpeciesIncompressible</a>
+</td><td>Incompressible species</td></tr>
 <tr><td><img src="images/FCSys.Subregions.Species.SpeciesSolidS.png" alt="FCSys.Subregions.Species.Species" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a>
 </td><td>Model for single-species exchange, transport, and storage of material, linear momentum, and energy</td></tr>
 <tr><td><img src="images/FCSys.Subregions.Species.BaseClassesS.png" alt="FCSys.Subregions.Species.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses">BaseClasses</a>
@@ -87,12 +88,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <li>No material exchange or transport</li</ol>
   </p>
 
-  <p><code>F</code> only affects exchange&mdash;not transport.  Since a no-slip
-  boundary condition is applied and the bulk velocity is set to zero, there are
-  never any shear forces, regardless of the value of <code>F</code>.</p>
-
   <p>For more information, see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
-Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> (Model for single-species exchange, transport, and storage of material, linear momentum, and energy).
+Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesIncompressible">SpeciesIncompressible</a> (Incompressible species).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -150,7 +147,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">model</font> SpeciesSolid <font color="darkgreen">&quot;Solid species (inert and stagnant)&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a>(
+  <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesIncompressible">SpeciesIncompressible</a>(
     <font color="blue">final </font>Xi=Modelica.Constants.inf,
     <font color="blue">final </font>F=0,
     <font color="blue">final </font>upstreamX,
@@ -160,7 +157,6 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     <font color="blue">final </font>setVelX=true,
     <font color="blue">final </font>setVelY=true,
     <font color="blue">final </font>setVelZ=true,
-    initMethPartNum=InitMethScalar.Volume,
     <font color="blue">final </font>initMethX=InitMethVelocity.Velocity,
     <font color="blue">final </font>initMethY=InitMethVelocity.Velocity,
     <font color="blue">final </font>initMethZ=InitMethVelocity.Velocity,
@@ -198,6 +194,99 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
   <font color="darkgreen">// current is zero.</font>
 
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>SpeciesSolid;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Subregions.Species.SpeciesSolidI.png" alt="FCSys.Subregions.Species.SpeciesIncompressible" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Subregions.Species.SpeciesIncompressible"></a><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species">FCSys.Subregions.Species</a>.SpeciesIncompressible</h2>
+<b>Incompressible species</b><p>
+<img src="images/FCSys.Subregions.Species.SpeciesSolidD.png" alt="FCSys.Subregions.Species.SpeciesIncompressible">
+<p><h3>Information</h3></p>
+
+  <p>For more information, see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
+Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> (Model for single-species exchange, transport, and storage of material, linear momentum, and energy).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>Lstar</td><td>&nbsp;</td><td>Characteristic length for exchange (<i>L</i><sup>&#9733;</sup>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k[Axis]</td><td>{1,1,1}</td><td>Area fill factor for transport (<b>k</b>) [1]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
+<tr><TD colspan="2">replaceable package Data</td><td><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a></td><td>Characteristic data</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fusivity">Fusivity</a></td><td>Xi</td><td>Data.Xi(T, 1/rho)</td><td>Fusivity (&Xi;) [T/l2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>F</td><td>Data.F(T, 1/rho)</td><td>Fluidity [l.T/m]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>R</td><td>Data.R(T, 1/rho)</td><td>Thermal resistivity</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
+<tr><td>Boolean</td><td>overrideEOS</td><td>false</td><td>Override the equation of state with the value of &rho;<sub>IC</sub></td></tr>
+<tr><td>Boolean</td><td>inclLin[Axis]</td><td>{true,false,false}</td><td>true, if each component of linear momentum is included (<i>Do not adjust here.</i>)</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with upstream discretization</td></tr>
+<tr><td>Boolean</td><td>upstreamX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>upstreamY</td><td>true</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>upstreamZ</td><td>true</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Prescribed states (via initialization parameters)</td></tr>
+<tr><td>Boolean</td><td>setPartNum</td><td>false</td><td>Particle number</td></tr>
+<tr><td>Boolean</td><td>setVelX</td><td>false</td><td>X-axis component of velocity</td></tr>
+<tr><td>Boolean</td><td>setVelY</td><td>false</td><td>Y-axis component of velocity</td></tr>
+<tr><td>Boolean</td><td>setVelZ</td><td>false</td><td>Z-axis component of velocity</td></tr>
+<tr><td>Boolean</td><td>setTemp</td><td>false</td><td>Temperature</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Characteristics of the faces (click to edit)</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FaceX</a></td><td>xNegative</td><td>&nbsp;</td><td>Negative face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FaceX</a></td><td>xPositive</td><td>&nbsp;</td><td>Positive face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FaceY</a></td><td>yNegative</td><td>&nbsp;</td><td>Negative face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FaceY</a></td><td>yPositive</td><td>&nbsp;</td><td>Positive face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FaceZ</a></td><td>zNegative</td><td>&nbsp;</td><td>Negative face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FaceZ</a></td><td>zPositive</td><td>&nbsp;</td><td>Positive face along the z axis</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Scalar properties</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitMethScalar">InitMethScalar</a></td><td>initMethPartNum</td><td>InitMethScalar.Volume</td><td>Method of initializing the particle number</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitMethScalar">InitMethScalar</a></td><td>initMethTemp</td><td>InitMethScalar.Temperature</td><td>Method of initializing the temperature</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Amount</a></td><td>N_IC</td><td>&nbsp;</td><td>Initial particle number (<i>N</i><sub>IC</sub>) [N]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>derN_IC</td><td>0</td><td>Initial rate of particle number ((&part;<i>N</i>/&part;<i>t</i>)<sub>IC</sub>) [N/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.AmountVolumic">AmountVolumic</a></td><td>rho_IC</td><td>&nbsp;</td><td>Initial volumic amount (&rho;<sub>IC</sub>) [N/l3]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.AmountVolumicRate">AmountVolumicRate</a></td><td>derrho_IC</td><td>0</td><td>Initial rate of volumic amount ((&part;&rho;/&part;<i>t</i>)<sub>IC</sub>) [N/(l3.T)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Volume</a></td><td>V_IC</td><td>&nbsp;</td><td>Initial volume (<i>V</i><sub>IC</sub>) [l3]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeRate">VolumeRate</a></td><td>derV_IC</td><td>0</td><td>Initial rate of volume ((&part;<i>V</i>/&part;<i>t</i>)<sub>IC</sub>) [l3/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p_IC</td><td>&nbsp;</td><td>Initial pressure (<i>p</i><sub>IC</sub>) [m/(l.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureRate">PressureRate</a></td><td>derp_IC</td><td>0</td><td>Initial rate of pressure ((&part;<i>p</i>/&part;<i>t</i>)<sub>IC</sub>) [m/(l.T3)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_IC</td><td>&nbsp;</td><td>Initial temperature (<i>T</i><sub>IC</sub>)</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureRate">TemperatureRate</a></td><td>derT_IC</td><td>0</td><td>Initial rate of temperature (&part;<i>T</i>/&part;<i>t</i>)<sub>IC</sub>)</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>s_IC</td><td>&nbsp;</td><td>Initial specific entropy (<i>s</i><sub>IC</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberRate">NumberRate</a></td><td>ders_IC</td><td>0</td><td>Initial rate of specific entropy ((&part;<i>s</i>/&part;<i>t</i>)<sub>IC</sub>) [1/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>h_IC</td><td>&nbsp;</td><td>Initial specific enthalpy (<i>h</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialRate">PotentialRate</a></td><td>derh_IC</td><td>0</td><td>Initial rate of specific enthalpy ((&part;<i>h</i>/&part;<i>t</i>)<sub>IC</sub>) [l2.m/(N.T3)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>mu_IC</td><td>&nbsp;</td><td>Initial electrochemical potential (&mu;<sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialRate">PotentialRate</a></td><td>dermu_IC</td><td>0</td><td>Initial rate of electrochemical potential ((&part;&mu;/&part;<i>t</i>)<sub>IC</sub>) [l2.m/(N.T3)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>Ndot_IC</td><td>0</td><td>Initial reaction rate (<i>N&#775;</i><sub>IC</sub>) [N/T]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Velocity</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitMethVelocity">InitMethVelocity</a></td><td>initMethX</td><td>InitMethVelocity.Velocity</td><td>Method of initializing the x-axis component</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitMethVelocity">InitMethVelocity</a></td><td>initMethY</td><td>InitMethVelocity.Velocity</td><td>Method of initializing the y-axis component</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitMethVelocity">InitMethVelocity</a></td><td>initMethZ</td><td>InitMethVelocity.Velocity</td><td>Method of initializing the z-axis component</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi_IC[Axis]</td><td>{0,0,0}</td><td>Initial velocity (<b>&phi;</b><sub>IC</sub>) [l/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Acceleration">Acceleration</a></td><td>derphi_IC[Axis]</td><td>{0,0,0}</td><td>Initial acceleration ((&part;<b>&phi;</b>/&part;<i>t</i>)<sub>IC</sub>) [l/T2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>I_IC[Axis]</td><td>{0,0,0}</td><td>Initial current (<i><b>I</b></i><sub>IC</sub>) [N/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentRate">CurrentRate</a></td><td>derI_IC[Axis]</td><td>{0,0,0}</td><td>Initial rate of current ((&part;<i><b>I</b></i>/&part;<i>t</i>)<sub>IC</sub>) [N/T2]</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a></td><td>chemical</td><td>Connector to exchange material while advecting linear momentum and energy</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>common</td><td>Connector for direct mechanical and thermal coupling of multiple species</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Connector to exchange linear momentum and heat by diffusion, with additivity of pressure</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=3><b>Assumptions</b></td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=3>Characteristics of the faces (click to edit)</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FaceX</a></td><td>xNegative</td><td>Negative face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FaceX</a></td><td>xPositive</td><td>Positive face along the x axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FaceY</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FaceY</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FaceZ</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FaceZ</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> SpeciesIncompressible <font color="darkgreen">&quot;Incompressible species&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a>(initMethPartNum=InitMethScalar.Volume);
+
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>SpeciesIncompressible;
 </pre>
 <hr>
 
@@ -585,8 +674,15 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     nominal=1*U.atm,
     <font color="blue">final </font>start=p_IC,
     <font color="blue">final </font>fixed=false) <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="darkgreen">// **stateSelect=StateSelect.never</font>
   <font color="darkgreen">// Note:  In Dymola 7.4 StateSelect.never is necessary to avoid dynamic</font>
-  <font color="darkgreen">// state selection.</font>
+  <font color="darkgreen">// state selection.  **Is it still?</font>
+  <a href="FCSys_Quantities.html#FCSys.Quantities.AmountVolumic">Q.AmountVolumic</a> rho(
+    nominal=4*U.C/U.cm^3,
+    <font color="blue">final </font>start=rho_IC,
+    <font color="blue">final </font>fixed=false) <font color="darkgreen">&quot;Molar density&quot;</font>;
+  <font color="darkgreen">// Note:  The reciprocal, specific volume (v), isn&#39;t included because</font>
+  <font color="darkgreen">// particle number (N) can be zero.</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> h(
     nominal=1*U.V,
     <font color="blue">final </font>start=h_IC,
@@ -608,10 +704,6 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
   <font color="darkgreen">// Auxiliary variables (for analysis)</font>
   <font color="darkgreen">// ----------------------------------</font>
   <font color="darkgreen">// Misc. properties and conditions</font>
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.AmountVolumic">Q.AmountVolumic</a> rho(stateSelect=StateSelect.never) = N/V <font color="blue">if </font>
-    environment.analysis <font color="darkgreen">&quot;Molar density&quot;</font>;
-  <font color="darkgreen">// Note:  The reciprocal, specific volume (v), isn&#39;t included because</font>
-  <font color="darkgreen">// particle number (N) can be zero.</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> q[n_lin](<font color="blue">each </font>stateSelect=StateSelect.never) = Data.m
     *phi .* I ./ (2*A[cartAxes]) <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Dynamic pressure&quot;</font>;
   <font color="darkgreen">//</font>
@@ -938,9 +1030,9 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     <font color="blue">elseif </font>initMethPartNum == InitMethScalar.AmountRate<font color="blue"> then</font>
       <font color="red">der</font>(N)/U.s = derN_IC;
     <font color="blue">elseif </font>initMethPartNum == InitMethScalar.AmountVolumic<font color="blue"> then</font>
-      N/V = rho_IC;
+      rho = rho_IC;
     <font color="blue">elseif </font>initMethPartNum == InitMethScalar.AmountVolumicRate<font color="blue"> then</font>
-      <font color="red">der</font>(N/V)/U.s = derrho_IC;
+      <font color="red">der</font>(rho)/U.s = derrho_IC;
     <font color="blue">elseif </font>initMethPartNum == InitMethScalar.Volume<font color="blue"> then</font>
       V = V_IC;
     <font color="blue">elseif </font>initMethPartNum == InitMethScalar.VolumeRate<font color="blue"> then</font>
@@ -1010,9 +1102,9 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     <font color="blue">elseif </font>initMethTemp == InitMethScalar.AmountRate<font color="blue"> then</font>
       <font color="red">der</font>(N)/U.s = derN_IC;
     <font color="blue">elseif </font>initMethPartNum == InitMethScalar.AmountVolumic<font color="blue"> then</font>
-      N/V = rho_IC;
+      rho = rho_IC;
     <font color="blue">elseif </font>initMethPartNum == InitMethScalar.AmountVolumicRate<font color="blue"> then</font>
-      <font color="red">der</font>(N/V)/U.s = derrho_IC;
+      <font color="red">der</font>(rho)/U.s = derrho_IC;
     <font color="blue">elseif </font>initMethTemp == InitMethScalar.Volume<font color="blue"> then</font>
       V = V_IC;
     <font color="blue">elseif </font>initMethTemp == InitMethScalar.VolumeRate<font color="blue"> then</font>
@@ -1048,6 +1140,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
   <font color="darkgreen">// Aliases (only for clarity)</font>
   p = inert.p;
   V = inert.V;
+  rho*V = N;
   T = common.thermal.T;
   phi = common.mechanical.phi;
   mu = T*chemical.muPerT;
@@ -1135,9 +1228,9 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     <font color="blue">elseif </font>initMethPartNum == InitMethScalar.AmountRate<font color="blue"> then</font>
       <font color="red">der</font>(N)/U.s = derN_IC;
     <font color="blue">elseif </font>initMethPartNum == InitMethScalar.AmountVolumic<font color="blue"> then</font>
-      N/V = rho_IC;
+      rho = rho_IC;
     <font color="blue">elseif </font>initMethPartNum == InitMethScalar.AmountVolumicRate<font color="blue"> then</font>
-      <font color="red">der</font>(N/V)/U.s = derrho_IC;
+      <font color="red">der</font>(rho)/U.s = derrho_IC;
     <font color="blue">elseif </font>initMethPartNum == InitMethScalar.Volume<font color="blue"> then</font>
       V = V_IC;
     <font color="blue">elseif </font>initMethPartNum == InitMethScalar.VolumeRate<font color="blue"> then</font>
@@ -1209,9 +1302,9 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     <font color="blue">elseif </font>initMethTemp == InitMethScalar.AmountRate<font color="blue"> then</font>
       <font color="red">der</font>(N)/U.s = derN_IC;
     <font color="blue">elseif </font>initMethPartNum == InitMethScalar.AmountVolumic<font color="blue"> then</font>
-      N/V = rho_IC;
+      rho = rho_IC;
     <font color="blue">elseif </font>initMethPartNum == InitMethScalar.AmountVolumicRate<font color="blue"> then</font>
-      <font color="red">der</font>(N/V)/U.s = derrho_IC;
+      <font color="red">der</font>(rho)/U.s = derrho_IC;
     <font color="blue">elseif </font>initMethTemp == InitMethScalar.Volume<font color="blue"> then</font>
       V = V_IC;
     <font color="blue">elseif </font>initMethTemp == InitMethScalar.VolumeRate<font color="blue"> then</font>
@@ -1259,7 +1352,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sat Jan 12 10:39:31 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:30:14 2013.
 </div>
 </body>
 </html>

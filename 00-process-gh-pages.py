@@ -29,7 +29,7 @@ rpls = [
     ('(BaseClasses</a></li>\n *</ul>\n)( *</div>)', r"""\1
   <h3>Download</h3>
     <ul>
-      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Check back soon.)</li>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
     </ul>
 \2"""),
     # Move the style sheet.
@@ -39,36 +39,6 @@ rpls = [
 \2"""),
     # Remove the self-reference.
     ('Updates to this package may be available at the *\n *<a href="http://kdavies4\.github\.com/FCSys/">main project site</a>\. *\n *Development is being carried out at', 'The development site is'),
-    # **Temporary:  Add note to the sidebar.
-    ("""<h3>Table of Contents</h3>
-    <ul>
-    <li><a href="FCSys_UsersGuide\.html">User's Guide</a></li>
-    <li><a href="FCSys_BCs\.html">BCs</a></li>
-    <li><a href="FCSys_Sensors\.html">Sensors</a></li>
-    <li><a href="FCSys_Assemblies\.html">Assemblies</a></li>
-    <li><a href="FCSys_Regions\.html">Regions</a></li>
-    <li><a href="FCSys_Subregions\.html">Subregions</a></li>
-    <li><a href="FCSys_Connectors\.html">Connectors</a></li>
-    <li><a href="FCSys_Characteristics\.html">Characteristics</a></li>
-    <li><a href="FCSys_Units\.html">Units</a></li>
-    <li><a href="FCSys_Quantities\.html">Quantities</a></li>
-    <li><a href="FCSys_BaseClasses\.html">BaseClasses</a></li>
-    </ul>""",
-    """<h3>Table of Contents</h3>
-    <ul>
-    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-    <li><a href="FCSys_BCs.html">BCs</a></li>
-    <li><a href="FCSys_Sensors.html">Sensors</a></li>
-    <li><a href="FCSys_Assemblies.html">Assemblies</a>**</li>
-    <li><a href="FCSys_Regions.html">Regions</a>**</li>
-    <li><a href="FCSys_Subregions.html">Subregions</a></li>
-    <li><a href="FCSys_Connectors.html">Connectors</a></li>
-    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
-    <li><a href="FCSys_Units.html">Units</a></li>
-    <li><a href="FCSys_Quantities.html">Quantities</a></li>
-    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
-    <li>**Please check back soon or contact kdavies4 at gmail.com.</li>
-    </ul>"""),
     ]
 
 # Directory specification
