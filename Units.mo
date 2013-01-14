@@ -144,6 +144,7 @@ package Units "Constants and units of physical measure"
     final constant Q.Length mm=U.mm "millimeter";
     final constant Q.Number '%'=U.'%' "percent";
     final constant Q.AmountVolumic M=U.M "molar";
+    final constant Q.Volume cc=U.cc "cubic centimeter";
     annotation (Documentation(info="<html><p>This model is used by the units script (\"FCSys/resources/scripts/units.mos\") to
   establish the values of the units in order to convert values to numbers for display.</p>
   <p>For more information, see the documentation in the
@@ -154,7 +155,7 @@ package Units "Constants and units of physical measure"
   package Bases "Sets of base constants and units"
     extends Modelica.Icons.Package;
     record ScaledFC
-      "Base constants and units that are well-scaled for FC simulation and analysis"
+      "Base constants and units that are well-scaled for fuel cell simulation and analysis"
       extends U.Bases.Base(
         final R_inf=1e-1*10973731.568539,
         final c=1e-1*299792458,
@@ -446,7 +447,7 @@ package Units "Constants and units of physical measure"
             "Re-initialize the units."));
     end Base;
     annotation (Documentation(info="<html><p>The International System of Units (SI)-like
-  sets in this package are named by listing (in alphabetical order) the units that are
+  sets in this package are named by listing (in alphabetical order) the two units that are
   <b>not</b> normalized for the sake of setting the Faraday and gas constants equal to one.
   There are eight possible sets of this type.</p>
   <p>For more information, see the documentation in the
@@ -755,13 +756,14 @@ package Units "Constants and units of physical measure"
   final constant Q.Length mm=milli*m "millimeter";
   final constant Q.Number '%'=centi "percent (%)";
   final constant Q.AmountVolumic M=U.mol/U.L "molar";
+  final constant Q.Volume cc=U.cm^3 "cubic centimeter";
 
   annotation (Documentation(info="<html><p>When a physical variable is assigned a quantity, it is the product of a number
     and a unit [<a href=\"modelica://FCSys.UsersGuide.References\">BIPM2006</a>].  In <a href=\"modelica://FCSys\">FCSys</a>, units are also assigned numeric values in a consistent
     manner.  A unit
     may be the product of any of the units defined in <a href=\"modelica://FCSys.Units\">FCSys.Units</a> raised to any power.
     When a quantity is converted to a number for display, it is divided by its unit.
-    This conveniently handles unit conversion&mdash;without preference to any particular set of units.
+    This conveniently handles unit conversion&mdash;without preference towards any particular set of units.
      It can also be used to scale
     the floating point values associated with quantities.  In order to provide
     well-scaled quantities, the value of the unit should be increased in inverse proportion
@@ -810,12 +812,12 @@ package Units "Constants and units of physical measure"
     to determine the values of the units and defines the conversions to display values as numbers
     in units.  This script is set to run when <a href=\"modelica://FCSys\">FCSys</a> is loaded via
     \"FCSys/load.mos\" or from a link in the \"Commands\" menu of <a href=\"modelica://FCSys.Units\">FCSys.Units</a> (when viewed within
-    Dymola).  Unless the values of the base constants and units are changed, it should be sufficient
+    Dymola).  Unless the values of the base constants and units are changed during an editing session, it should be sufficient
     to simply allow the script to run when the package is loaded.
     When the <code>der()</code> operator is utilized, it must be divided by
     the unit second (<code>U.s</code>), since this scaling is not automatic in Modelica's specification
-    and Dymola's implementation.  Currently, it is not possible to define a function that implements a
-    <code>der()</code> function with scaling.</p>
+    and Dymola's implementation.  Currently, it is not possible to define a function that implements
+    <code>der()</code> with built-in scaling.</p>
 
   <p>Note that the common \"natural\" units systems (Planck, Stoney, Hartree, Rydberg,
   or Natural) cannot be implemented given the constraints that the gas and
@@ -826,11 +828,11 @@ package Units "Constants and units of physical measure"
   The structure of <a href=\"modelica://FCSys.Units\">FCSys.Units</a> allows the constraints on the Faraday and gas constants
   to be relaxed, but the models in <a href=\"modelica://FCSys\">FCSys</a> generally do not.</p>
 
-  <p>Although it is not necessary in <a href=\"http://www.modelica.org\">Modelica</a>, the unit declarations
-  are presorted so that they can be easily ported to imperative/causal languages (e.g.,
+  <p>Although it is not necessary in <a href=\"http://www.modelica.org\">Modelica</a>, the declarations
+  in this package are presorted so that they can be easily ported to imperative or causal languages (e.g.,
   <a href=\"http://www.python.org\">Python</a>, C).</p>
 
-  <p>For more information, see the paper on natural units [<a href=\"modelica://FCSys.UsersGuide.References\">Davies and Paredis, 2012</a>].</p>
+  <p>For more information, see the related paper [<a href=\"modelica://FCSys.UsersGuide.References\">Davies and Paredis, 2012</a>].</p>
   <p>
   <b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
   Copyright 2007&ndash;2012, Georgia Tech Research Corporation.

@@ -46,16 +46,18 @@ Conditions = namedtuple('Conditions',
 # These units are used to display a variable's quantity if its displayUnit
 # attribute is empty ('').  Each key is a dimension string and each entry is a
 # unit string.  Both are formatted in Modelica unit notation.
-# Generated from FCSys/resources/quantities.xls, 2013-1-9
-default_units = {'1/N': '1/mol',
-                 '1/T': '1/s',
+# Generated from FCSys/resources/quantities.xls, 2013-1-15
+default_units = {
+                 '1/N': '1/mol',
                  'A': 'rad',
                  'A.N.T/(l2.m)': '1/Wb',
                  'A/l': 'rad/m',
+                 'A/T': 'rad/s',
                  'A2': 'sr',
                  'l': 'cm',
                  'l.m/N2': 'H/m',
                  'l.m/T2': 'N',
+                 'l.T/m': '1/(Pa.s)',
                  'l.T/N': 'cm/A',
                  'l/(T.s)': 'cm/s2',
                  'l/N': 'm/mol',
@@ -74,10 +76,10 @@ default_units = {'1/N': '1/mol',
                  'l2.m/T2': 'J',
                  'l2.m/T3': 'W',
                  'l2/T2': 'Sv',
-                 'l3': 'cm3',
+                 'l3': 'cc',
                  'l3.m/(A.N.T2)': 'V.m/rad',
                  'l3.m/(N2.T2)': 'm/H',
-                 'l3/N': 'cm3/C',
+                 'l3/N': 'cc/C',
                  'l3/T': 'L/min',
                  'l4.m/T3': 'W.m2',
                  'm': 'g',
@@ -89,17 +91,18 @@ default_units = {'1/N': '1/mol',
                  'm/N': 'g/mol',
                  'm/T3': 'W/m2',
                  'N': 'C',
+                 'N.T/(l2.m)': 'mol/(J.s)',
                  'N/(l2.T)': 'A/cm2',
+                 'N/(l3.T)': 'C/(cc.s)',
                  'N/(T.s)': 'A/s',
+                 'N/l3': 'C/cc',
                  'N/s': 'A',
                  'N/T': 'A',
                  'N/T2': 'A/s',
                  'N2.T/(l2.m)': 'S',
                  'N2.T2/(l2.m)': 'uF',
                  'N2.T2/(l3.m)': 'F/m',
-                 's-1': '1/s',
-                 'T': 's',
-                 'T/N': '1/A'}
+                 'T': 's'}
 
 class SimRes(modelicares.SimRes):
     """Base class for Modelica_-based simulation results and methods to analyze

@@ -17,8 +17,16 @@ import sys, os
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
+#sys.path.append(os.path.abspath('sphinxext'))
+
+#def skip(app, what, name, obj, skip, options):
+#    if (name == "__call__" or name == "__contains__" or name == "__getitem__"
+#        or name == "__len__" or name == "__repr__" or name == "__str__"):
+#        return False
+#    return skip
 
 def setup(app):
+#    app.connect("autodoc-skip-member", skip)
     app.add_javascript('copybutton.js')
 
 # -- General configuration -----------------------------------------------------
@@ -28,7 +36,16 @@ def setup(app):
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.pngmath']
+extensions = ['sphinx.ext.autodoc',
+              'sphinx.ext.doctest',
+              #'sphinx.ext.pngmath',
+              #'mathmpl',
+              #'only_directives',
+              #'plot_directive',
+              #'ipython_directive',
+              #'ipython_console_highlighting',
+              #'numpydoc'
+             ]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -41,10 +58,11 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'FCRes'
-copyright = '2012, Kevin Davies'
+copyright = '2012-2013, Kevin Davies, Georgia Tech Research Corporation'
 
-# The default replacements for |version| and |release|, also used in various
-# other places throughout the built documents.
+# The version info for the project you're documenting, acts as replacement for
+# |version| and |release|, also used in various other places throughout the
+# built documents.
 #
 # The short X.Y version.
 import fcres
@@ -164,7 +182,7 @@ math_output = 'MathML'
 # (source start file, target name, title, author, document class [howto/manual]).
 
 latex_documents = [
-  ('index', 'FCRes.tex', r"FCRes Documentation", 'Kevin Davies', 'manual'),
+  ('index', 'FCRes.tex', u"FCRes Documentation", u'Kevin Davies', 'manual'),
 ]
 
 latex_elements = { 'classoptions': ',openany,openside',
@@ -204,6 +222,6 @@ autoclass_content = 'both'
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'modelicares', u'modelicares Documentation',
+    ('index', 'fcres', u'FCRes Documentation',
      [u'Kevin Davies'], 1)
 ]

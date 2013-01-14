@@ -35,8 +35,6 @@ import FCSys.BaseClasses.Axis;
 import FCSys.BaseClasses.Orientation;
 import FCSys.BaseClasses.Side;
 import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
-import FCSys.Connectors.BaseClasses.ThermoOpt;
-import FCSys.Subregions.Reactions.BaseClasses.InitMethCharge;
 import FCSys.Subregions.Species.BaseClasses.InitMethVelocity;
 import FCSys.Subregions.Species.BaseClasses.InitMethScalar;
 
@@ -101,7 +99,7 @@ package UsersGuide "User's Guide"
             Introduction to the \"additivity of pressure\" concept</li>
             <li><a href=\"modelica://FCSys.Subregions.Species.Species\">FCSys.Subregions.Species.Species</a> model:
             Details about the exchange, transport, and storage of material, volume, linear momentum, and
-            entropy</li>
+            energy</li>
             <li><a href=\"modelica://FCSys.Subregions.Reaction\">FCSys.Subregions.Reaction</a> model:
             Summary of the connections for a chemical reaction</li>
             <li>A region or layer model such as <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">FCSys.Regions.AnFPs.AnFP</a>:
@@ -917,6 +915,19 @@ printing and shipping costs may be recovered.</p>
     end ModelicaLicense2;
   annotation (preferedView="info", DocumentationClass=true);
   end UsersGuide;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 annotation (

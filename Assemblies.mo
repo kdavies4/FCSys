@@ -14,9 +14,8 @@ package Assemblies "Combinations of regions (e.g., cells)"
           p=149.6*U.kPa,
           T=333.15*U.K)
           annotation (Placement(transformation(extent={{24,-8},{44,12}})));
-        replaceable FCSys.Assemblies.Cells.CellSSIC cell annotation (
-            __Dymola_choicesFromPackage=true, Placement(transformation(extent={
-                  {-10,-10},{10,10}})));
+        replaceable Cells.CellSSIC cell annotation (__Dymola_choicesFromPackage
+            =true, Placement(transformation(extent={{-10,-10},{10,10}})));
         annotation (
           experiment(StopTime=1e-24, Tolerance=1e-06),
           experimentSetupOutput,
@@ -36,9 +35,8 @@ package Assemblies "Combinations of regions (e.g., cells)"
               graphite('incle-'=true, 'e-'(redeclare
                   Modelica.Blocks.Sources.Ramp materialSpec(height=-10000*U.A,
                     duration=500)))));
-        replaceable FCSys.Assemblies.Cells.Cell cell annotation (
-            __Dymola_choicesFromPackage=true, Placement(transformation(extent={
-                  {-10,-10},{10,10}})));
+        replaceable Cell cell annotation (__Dymola_choicesFromPackage=true,
+            Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
         connect(cell.anFPX, anEnd.face) annotation (Line(
@@ -95,8 +93,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
       model CellProfileIO
         "Apply BCs to a cell according to a test profile, with inputs and outputs"
-        extends FCSys.Assemblies.Cells.Examples.CellProfile(testStand(final
-              inclIO=true));
+        extends CellProfile(testStand(final inclIO=true));
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
 
         FCSys.Connectors.RealInputBus u "Input bus" annotation (Placement(
@@ -141,8 +138,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
         "<html>Cell interfaced to components from the <a href=\"modelica://Modelica\">Modelica</a> package</html>"
         extends Modelica.Icons.Example;
         extends Modelica.Icons.UnderConstruction;
-        FCSys.Assemblies.Cells.Cell cell(anFP(redeclare
-              FCSys.Subregions.Subregion subregions(
+        Cell cell(anFP(redeclare FCSys.Subregions.Subregion subregions(
               each final inclX=true,
               each inclY=true,
               each graphite('incle-'=true, 'e-'(perfectMaterialDiff={{{{true,
@@ -164,14 +160,14 @@ package Assemblies "Combinations of regions (e.g., cells)"
           "This is the arctangent of conductance."
           annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
       equation
-        connect(anModelicaAdapt.material, cell.anFPX[1, 1]) annotation (Line(
+        connect(anModelicaAdapt.normal, cell.anFPX[1, 1]) annotation (Line(
             points={{-20,6.10623e-16},{-16,6.10623e-16},{-16,5.55112e-16},{-10,
                 5.55112e-16}},
             color={0,0,0},
             thickness=0.5,
             smooth=Smooth.None));
 
-        connect(caModelicaAdapt.material, cell.caFPX[1, 1]) annotation (Line(
+        connect(caModelicaAdapt.normal, cell.caFPX[1, 1]) annotation (Line(
             points={{20,6.10623e-16},{16,6.10623e-16},{16,5.55112e-16},{10,
                 5.55112e-16}},
             color={0,0,0},

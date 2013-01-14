@@ -29,7 +29,7 @@ package Characteristics
 
       // Conditions
     public
-      Q.PressureAbsolute p=1*U.atm + time*10*U.bar/10;
+      Q.PressureAbsolute p=U.atm + time*10*U.bar/10;
       Q.TemperatureAbsolute T=273.15*U.K + 0*200*time*U.K/10;
 
       // Results
@@ -197,7 +197,7 @@ package Characteristics
         final phase="graphite",
         p0=U.atm,
         specVolPow={0,0},
-        b_v=[U.cm^3*m/(2.2210*U.g)],
+        b_v=[U.cc*m/(2.2210*U.g)],
         p_min=-Modelica.Constants.inf,
         m=12.0107*U.g/U.mol,
         Deltah0_f=0*U.J/U.mol,
@@ -226,12 +226,12 @@ package Characteristics
      <ul>
      <li>The radius is from <a href=\"http://en.wikipedia.org/wiki/Carbon\">http://en.wikipedia.org/wiki/Carbon</a>.  See also
    <a href=\"http://en.wikipedia.org/wiki/Van_der_Waals_radius\">http://en.wikipedia.org/wiki/Van_der_Waals_radius</a>.</li>
-     <li>The default specific volume (<code>v=U.cm^3*m/(2.210*U.g)</code>) is of pyrolytic graphite
+     <li>The default specific volume (<code>v=U.cc*m/(2.210*U.g)</code>) is of pyrolytic graphite
   at 300 K according to [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 909].  Other forms
   are (also at 300 K and based on the same reference) are:
   <ul>
-       <li>Amorphous carbon:  <code>v=U.cm^3*m/(1.950*U.g)</code></li>
-       <li>Diamond (type IIa):  <code>v=U.cm^3*m/(3.500*U.g)</code></li>
+       <li>Amorphous carbon:  <code>v=U.cc*m/(1.950*U.g)</code></li>
+       <li>Diamond (type IIa):  <code>v=U.cc*m/(3.500*U.g)</code></li>
        </li>
      </ul>
      </p>
@@ -253,7 +253,7 @@ package Characteristics
         p0=U.atm,
         m=1044.214*U.g/U.mol,
         specVolPow={0,0},
-        b_v=[U.cm^3*m/(2.00*U.g)],
+        b_v=[U.cc*m/(2.00*U.g)],
         p_min=-Modelica.Constants.inf,
         Deltah0_f=0,
         Deltah0=0,
@@ -289,7 +289,7 @@ package Characteristics
    <a href=\"http://en.wikipedia.org/wiki/Nafion\">http://en.wikipedia.org/wiki/Nafion</a>,
        \"the molecular weight of Nafion is uncertain due to differences in
         processing and solution morphology.\"</li>
-     <li>The specific volume (<code>v = U.cm^3*m/(2.00*U.g)</code>) is based on
+     <li>The specific volume (<code>v = U.cc*m/(2.00*U.g)</code>) is based on
    [<a href=\"modelica://FCSys.UsersGuide.References\">Lin2006</a>, p. A1327].
        </li>
      </ul>
@@ -324,8 +324,8 @@ package Characteristics
       annotation (Documentation(info="<html>
      <p>Notes:
      <ul>
-     <li>The equation for the radius is the classical radius of an electron based on
-  <a href=\"http://en.wikipedia.org/wiki/Classical_electron_radius\">http://en.wikipedia.org/wiki/Classical_electron_radius</a>.</li>
+     <li>The equation for the radius is the classical radius of an electron (see 
+  <a href=\"http://en.wikipedia.org/wiki/Classical_electron_radius\">http://en.wikipedia.org/wiki/Classical_electron_radius</a>).</li>
   <li>McBride and Gordon [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>] provide correlations for the transport
   properties of e<sup>-</sup> gas.  However, they are not entered here, since they
   contain only one temperature range (2000 to 5000 K) which is beyond the expected operating range of the model.</li>
@@ -484,7 +484,7 @@ package Characteristics
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
+        input Q.PressureAbsolute p=U.atm "Pressure";
         input ReferenceEnthalpy referenceEnthalpy=ReferenceEnthalpy.EnthalpyOfFormationAt25degC
           "Choice of enthalpy reference";
         output Q.Potential h "Specific enthalpy";
@@ -603,7 +603,7 @@ package Characteristics
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
+        input Q.PressureAbsolute p=U.atm "Pressure";
         output Q.NumberAbsolute s "Specific entropy";
 
       protected
@@ -692,7 +692,7 @@ package Characteristics
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
+        input Q.PressureAbsolute p=U.atm "Pressure";
         output Q.VolumeSpecificAbsolute v "Specific volume";
 
       algorithm
@@ -828,7 +828,7 @@ package Characteristics
       annotation (Documentation(info="<html>
         <p>Assumptions:
      <ol>
-  <li>The properties are currently assumed to be the same as H<sub>2</sub>O gas.</li>
+  <li>The properties are the same as H<sub>2</sub>O gas.</li>
      </ol>
      </p>
 
@@ -844,7 +844,7 @@ package Characteristics
         final m=0.01801528*U.kg/U.mol,
         p0=U.atm,
         specVolPow={0,0},
-        b_v=[U.cm^3*m/(0.99656*U.g)],
+        b_v=[U.cc*m/(0.99656*U.g)],
         Deltah0_f=-285830.000*U.J/U.mol,
         Deltah0=13278.000*U.J/U.mol,
         T_lim_c={273.150,373.150,600.000}*U.K,
@@ -866,7 +866,7 @@ package Characteristics
             <p>Additional notes:
      <ul>
      <li>See note in <a href=\"modelica://FCSys.Characteristics.H2O.Gas\">Characteristics.H2O.Gas</a> regarding the radius.</li>
-     <li>The default specific volume (<code>b_v=[U.cm^3*m/(0.99656*U.g)]</code>) is at 300 K based on [<a href=\"modelica://FCSys.UsersGuide.References\">Takenaka1990</a>].</li>
+     <li>The default specific volume (<code>b_v=[U.cc*m/(0.99656*U.g)]</code>) is at 300 K based on [<a href=\"modelica://FCSys.UsersGuide.References\">Takenaka1990</a>].</li>
      </ul>
      </p>
   <p>For more information, see the
@@ -961,7 +961,7 @@ package Characteristics
         final m=Data.MM*U.kg/U.mol,
         specVolPow={-1,-4},
         b_v={{0,0,0,0,1},{-2.7198e9*U.K^4,6.1253e7*U.K^3,-1.4164e6*U.K^2,-9.3378e3
-            *U.K,40.286}*U.cm^3/U.mol},
+            *U.K,40.286}*U.cc/U.mol},
         p_min=1e-323*p0,
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
         Deltah0=Data.MM*Data.H0*U.J/U.mol,
@@ -1009,7 +1009,7 @@ package Characteristics
         final m=Data.MM*U.kg/U.mol,
         specVolPow={-1,-4},
         b_v={{0,0,0,0,1},{5.0855e9*U.K^4,-1.6393e8*U.K^3,5.2007e5*U.K^2,-1.7696e4
-            *U.K,42.859}*U.cm^3/U.mol},
+            *U.K,42.859}*U.cc/U.mol},
         p_min=1e-323*p0,
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
         Deltah0=Data.MM*Data.H0*U.J/U.mol,
@@ -1049,14 +1049,14 @@ package Characteristics
     package CharacteristicNASA
       "Thermodynamic record with transport properties based on NASA CEA"
 
-      extends FCSys.Characteristics.BaseClasses.Characteristic;
+      extends Characteristic;
 
       constant Q.TemperatureAbsolute T_lim_alpha[:]={0,Modelica.Constants.inf}
         "<html>Temperature limits for the rows of b_eta and b_lambda (<i>T</i><sub>lim &alpha;</sub>)</html>";
       constant Real b_eta[size(T_lim_alpha, 1) - 1, 4]
-        "<html>Constants in NASA correlation for viscosity (<i>b<sub>&eta;</sub>)</html>";
+        "<html>Constants in NASA correlation for viscosity (<i>b</i><sub>&eta;</sub>)</html>";
       constant Real b_lambda[size(T_lim_alpha, 1) - 1, 4]
-        "<html>Constants in NASA correlation for thermal conductivity (<i>b<sub>&lambda;</sub>)</html>";
+        "<html>Constants in NASA correlation for thermal conductivity (<i>b</i><sub>&lambda;</sub>)</html>";
 
       redeclare function F
         "Fluidity as a function of temperature and specific volume"
@@ -1066,7 +1066,7 @@ package Characteristics
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
         // Note:  Specific volume is provided for generality but isn't used here.
-        output Q.Fluidity F "Fluidity";
+        output Q.FluidityDynamic F "Dynamic fluidity";
 
       protected
         function b_eta_adj
@@ -1102,7 +1102,10 @@ package Characteristics
         // result in a function that is first-order continuous.
 
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
-  [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p></html>"));
+  [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p>
+  
+  <p>For more information, see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.F\">Characteristic.F</a>().</p>
+  </html>"));
       end F;
 
       redeclare function R
@@ -1367,7 +1370,7 @@ package Characteristics
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
+        input Q.PressureAbsolute p=U.atm "Pressure";
         input Q.Temperature dT=0 "Derivative of temperature";
         input Q.Pressure dp=0 "Derivative of pressure";
         output Q.VolumeSpecific dv "Derivative of specific volume";
@@ -1387,10 +1390,15 @@ package Characteristics
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
         // Note:  Specific volume is provided for generality but isn't used here.
-        output Q.Fluidity F "Fluidity";
+        output Q.FluidityDynamic F "Dynamic fluidity";
 
       algorithm
-        F := alpha(T)/m;
+        F := alpha(T)/m annotation (Inline=true);
+        annotation (Documentation(info="<html>
+<p>Note that fluidity is defined as the reciprocal of viscosity&mdash;typically dynamic viscosity
+(see <a href=\"http://en.wikipedia.org/wiki/Viscosity#Fluidity\">http://en.wikipedia.org/wiki/Viscosity#Fluidity</a>).  
+</p>
+</html>"));
       end F;
 
       function g "Gibbs potential as a function of temperature and pressure"
@@ -1398,7 +1406,7 @@ package Characteristics
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
+        input Q.PressureAbsolute p=U.atm "Pressure";
         input ReferenceEnthalpy referenceEnthalpy=ReferenceEnthalpy.EnthalpyOfFormationAt25degC
           "Choice of enthalpy reference";
         output Q.Potential g "Gibbs potential";
@@ -1419,7 +1427,7 @@ package Characteristics
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
+        input Q.PressureAbsolute p=U.atm "Pressure";
         input ReferenceEnthalpy referenceEnthalpy=ReferenceEnthalpy.EnthalpyOfFormationAt25degC
           "Choice of enthalpy reference";
         output Q.Potential h "Specific enthalpy";
@@ -1436,11 +1444,11 @@ package Characteristics
           h0 := Polynomial.F(
                     T,
                     b_c[i, :],
-                    specHeatCapPow) + B_c[i, 1]
-            annotation (Inline=true, derivative=dh0_i);
+                    specHeatCapPow) + B_c[i, 1];
           // This is the integral of c0_p*dT up to T at p0.  The lower bound is the
           // enthalpy of formation (of ideal gas, if the material is gaseous) at
           // 25 degC [McBride2002, p. 2].
+          annotation (Inline=true, derivative=dh0_i);
         end h0_i;
 
         function dh0_i "Derivative of h0_i"
@@ -1562,7 +1570,7 @@ package Characteristics
         output Q.ResistivityThermal R "Thermal resistivity";
 
       algorithm
-        R := alpha(T)/c_V(T, v);
+        R := alpha(T)/c_V(T, v) annotation (Inline=true);
       end R;
 
       replaceable function s
@@ -1570,7 +1578,7 @@ package Characteristics
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
+        input Q.PressureAbsolute p=U.atm "Pressure";
         output Q.NumberAbsolute s "Specific entropy";
 
       protected
@@ -1659,7 +1667,7 @@ package Characteristics
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=1*U.atm "Pressure";
+        input Q.PressureAbsolute p=U.atm "Pressure";
         output Q.VolumeSpecificAbsolute v "Specific volume";
 
       algorithm
@@ -1680,17 +1688,19 @@ package Characteristics
       end v_Tp;
 
       replaceable function Xi
-        "Fusivity as a function of temperature and specific volume"
+        "Dynamic compressibility as a function of temperature and specific volume"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
-        output Q.Fusivity Xi "Fusivity";
+        output Q.CompressibilityDynamic Xi "Dynamic compressibility";
 
       algorithm
-        Xi := alpha(T)/v;
+        Xi := alpha(T)/(m*v) annotation (Inline=true);
         annotation (Documentation(info="<html>
-<p>\"Fusivity\" is defined here as the reciprocal of the self diffusion coefficient or diffusivity.
+<p>\"Dynamic compressibility\" is defined here as the reciprocal of the specific volume and the volume, 
+second, or bulk dynamic viscosity (see 
+<a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).
 </p>
 </html>"));
       end Xi;
@@ -1778,7 +1788,7 @@ package Characteristics
   end BaseClasses;
   annotation (Documentation(info="<html>
   <p>Each species has a subpackage for each material phase in which the species
-  may exist.  The thermodynamic properties are generally different for each phase.
+  is represented.  The thermodynamic properties are generally different for each phase.
   </p>
   <p>Additional materials may be included as needed.  The thermodynamic data for
   materials that are condensed at standard conditions is available in

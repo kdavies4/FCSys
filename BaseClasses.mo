@@ -53,23 +53,19 @@ package BaseClasses "Base classes (not for direct use)"
     package Blocks "Icons for blocks (imperative or causal models)"
       extends Modelica.Icons.Package;
       partial class Continuous "Icon for a continuous-time block"
-        //extends FCSys.BaseClasses.Icons.Names.Middle;
+        //extends Names.Middle;
+
+        // This has been modified from Modelica.Blocks.Interfaces.BlockIcon.
+
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                      extent={{-100,-100},{100,100}},
-                      lineColor={0,0,127},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}), Documentation(info="<html>
-<p>
-Block that has only the basic icon for an imperative
-block (no declarations, no equations). Most blocks
-of package Modelica.Blocks inherit directly or indirectly
-from this block.
-</p>
-</html>"));
+                extent={{-100,-100},{100,100}},
+                lineColor={0,0,127},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid), Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end Continuous;
 
       partial class ContinuousShort "Short icon for a continuous block"
@@ -98,20 +94,17 @@ from this block.
       end ContinuousShortWide;
 
       partial class Discrete "Icon for a discrete-time block"
-        extends FCSys.BaseClasses.Icons.Names.Top5;
+        extends Names.Top5;
+
+        // This has been modified from Modelica.Blocks.Interfaces.DiscreteBlockIcon.
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                       extent={{-100,-100},{100,100}},
                       lineColor={0,0,127},
                       fillColor={223,223,159},
-                      fillPattern=FillPattern.Solid)}), Documentation(info="<html>
-<p>
-Block that has only the basic icon for an imperative and
-discrete block (no declarations, no equations), e.g.,
-from Blocks.Discrete.
-</p>
-</html>"));
+                      fillPattern=FillPattern.Solid)}));
       end Discrete;
+
     end Blocks;
 
     package Names
@@ -225,13 +218,13 @@ from Blocks.Discrete.
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,80},{100,120}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,80},{100,120}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,80},{100,120}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,80},{100,120}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end Top4;
 
       partial class Top3
@@ -366,7 +359,7 @@ This icon is designed for a <b>signal bus</b> connector.
       end Bidirectional;
 
       partial class In "Icon for a bus input"
-        extends FCSys.BaseClasses.Icons.SignalBuses.Bidirectional;
+        extends Bidirectional;
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Polygon(
                       points={{-160,40},{40,40},{-60,-160},{-160,40}},
@@ -391,7 +384,7 @@ This icon is designed for a <b>signal bus</b> connector.
       end In;
 
       partial class Out "Icon for a bus output"
-        extends FCSys.BaseClasses.Icons.SignalBuses.Bidirectional;
+        extends Bidirectional;
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                       extent={{-20,2},{20,-2}},
@@ -417,7 +410,7 @@ This icon is designed for a <b>signal bus</b> connector.
     end SignalBuses;
 
     partial class Cell "Icon for a cell"
-      //extends FCSys.BaseClasses.Icons.Names.Top3;
+      //extends Names.Top3;
       annotation (Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
@@ -566,7 +559,8 @@ This icon is designed for a <b>signal bus</b> connector.
     end Cell;
 
     partial class PackageUnderConstruction
-      "Overlay that indicates a package is under construction"
+      "Overlay to indicate that a package is in development"
+      // This has been modified from Modelica.Icons.UnderConstruction.
       annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}), graphics={Polygon(
               points={{-70,-70},{-10,50},{50,-70},{-70,-70}},
@@ -579,7 +573,7 @@ This icon is designed for a <b>signal bus</b> connector.
 
     partial class Sensor "Icon for a sensor"
 
-      //extends FCSys.BaseClasses.Icons.Names.Top4;
+      //extends Names.Top4;
       annotation (Icon(graphics={Rectangle(
                   extent={{-100,74},{100,114}},
                   fillColor={255,255,255},
@@ -624,6 +618,8 @@ This icon is designed for a <b>signal bus</b> connector.
         Integer integers[6];
 
       algorithm
+        ok := false;
+
         // Test the subpackages.
         assert(Chemistry.Examples.TestFunctions(),
           "The Chemistry subpackage failed.");
@@ -708,6 +704,8 @@ This icon is designed for a <b>signal bus</b> connector.
           Integer integers[6];
 
         algorithm
+          ok := false;
+
           // charge()
           for i in 1:2 loop
             assert((charge({"H2O","e-","Hg2+2",""}))[i] == {0,-1,2,0}[i],
@@ -718,7 +716,7 @@ This icon is designed for a <b>signal bus</b> connector.
 
           // countElements()
           for i in 1:2 loop
-            assert((countElements({"H2O","e-","C19HF37O5S",""}))[i] == {2,1,5,0}
+            assert((countElements({"H2O","H+","C19HF37O5S",""}))[i] == {2,1,5,0}
               [i], "The countElements function failed on entry " + String(i) +
               ".");
           end for;
@@ -772,7 +770,7 @@ This icon is designed for a <b>signal bus</b> connector.
       end Examples;
       extends Modelica.Icons.Package;
       function charge
-        "Return the charge of a species based on its chemical formula"
+        "Return the charge of a species given its chemical formula"
 
         input String formula "Chemical formula";
         output Integer z "Charge number";
@@ -801,12 +799,12 @@ This icon is designed for a <b>signal bus</b> connector.
       external"C";
         annotation (Include="#include <FCSys/resources/source/C/Chemistry.c>",
             Documentation(info="<html><p>This function returns the number of elements
-      in a chemical formula.  Electrons are counted as an element (or rather particle)
+      in a chemical formula.  Electrons are counted as a present element (or rather particle)
       if the net charge is nonzero.
       </p>
 
-      <p><b>Example:</b><br>
-    <code>countElements(\"C19HF37O5S\")</code> returns 5.</p>
+      <p><b>Examples:</b><br>
+    <code>countElements(\"C19HF37O5S\")</code> returns 5 and <code>countElements(\"H+\")</code> returns 2.</p>
 
   <p>See the
   <a href=\"modelica://FCSys.BaseClasses.Utilities.ReadFormula\">ReadFormula</a> function
@@ -857,7 +855,7 @@ This icon is designed for a <b>signal bus</b> connector.
   Currently, <code>formula</code> may not contain parentheses or brackets.</p>
 
   <p>The symbols correspond to chemical/physical elements or electrons (\"e-\").
-  Electrons will be listed if the charge is nonzero.</p>
+  Electrons are listed if the charge is nonzero.</p>
 
   <p><b>Example:</b><br>
   <code>(symbols, coeffs) = elements(\"C19HF37O5S-\")</code> returns
@@ -882,7 +880,7 @@ This icon is designed for a <b>signal bus</b> connector.
                 z,
                 nextindex);
         annotation (Include="#include <FCSys/resources/source/C/Chemistry.c>",
-            Documentation(info="<html><p>This function returns the <code>symbol</code>,
+            Documentation(info="<html><p>This function returns the symbol (<code>symbol</code>),
   stoichiometric coefficient (<code>coeff</code>), and
   electrical charge (<code>z</code>) associated with an element as it appears in a chemical
   formula (<code>formula</code>).  The <code>formula</code> string is read beginning
@@ -893,11 +891,11 @@ This icon is designed for a <b>signal bus</b> connector.
   The <code>nextindex</code> output gives the index in the <code>formula</code> string after the symbol
   and the associated information.</p>
 
-  <p>If the coefficient is not explicitly given, it is assumed to be one.  If the charge number is
+  <p>If the coefficient is not explicitly given, then it is assumed to be one.  If the charge number is
   not given, then it is assumed to be zero.  A \"+\" or \"-\" without following digits is interpreted as
   a charge of +1 or -1, respectively.  If there is an error,
   then <code>nextindex</code> will be zero.  Both <code>startindex</code> and <code>nextindex</code> are
-  one-based indices (Modelica format).</p>
+  one-based indices (Modelica compatible).</p>
 
   <p><b>Example:</b><br>
   <code>(symbol, coeff, z, nextindex) = ReadFormula(\"Hg2+2\")</code> returns
@@ -971,10 +969,9 @@ This icon is designed for a <b>signal bus</b> connector.
         end for;
 
         // Perform singular value decomposition (SVD).
-        assert(n_species == n_tot + 1, "The reaction is ill-posed.\n" + (if
-          n_species > n_tot + 1 then
-          "A species may be included more than once." else
-          "A species may be missing or the wrong one has been entered."));
+        assert(n_species == n_tot + 1, "The reaction is ill-posed.
+" + (if n_species > n_tot + 1 then "A species may be included more than once."
+           else "A species may be missing or the wrong one has been entered."));
         (d,u,v) := Modelica.Math.Matrices.singularValues(cat(
                 2,
                 elementCoeffs[:, 1:n_tot],
@@ -1013,6 +1010,8 @@ An unrelated species may be included.");
           output Boolean ok "true, if all tests passed";
 
         algorithm
+          ok := false;
+
           assert(f( 2,
                     {1,2,1},
                     0) == 1 + 2*2 + 1*2^2, "The f function failed.");
@@ -1374,7 +1373,7 @@ An unrelated species may be included.");
     end average;
 
     function cartWrap = mod1 (final den=Axis.z)
-      "<html>Return the index to a Cartesian axis (1 to 3, i.e., <a href=\"modelica://FCSys.BaseClasses.Axis\">Axis.x</a> to <a href=\"modelica://FCSys.BaseClasses.Axis\">Axis.z</a>) after wrapping</html>"
+      "<html>Return the index to a Cartesian axis (1 to 3 or <a href=\"modelica://FCSys.BaseClasses.Axis\">Axis.x</a> to <a href=\"modelica://FCSys.BaseClasses.Axis\">Axis.z</a>) after wrapping</html>"
       annotation (Inline=true, Documentation(info="<html><p><b>Examples:</b><br>
     <code>cartWrap(0)</code> returns 3 and <code>cartWrap(4)</code> returns 1.</p></html>"));
 
@@ -1394,7 +1393,7 @@ An unrelated species may be included.");
     end countTrue;
 
     function Delta
-      "<html>Return the first entry of a vector minus the second (&Delta;<i><b>u</b></i>)</html>"
+      "<html>Return the first entry of a vector minus the second (&Delta;)</html>"
       extends Modelica.Icons.Function;
 
       input Real u[2] "Vector of size two";
@@ -1454,7 +1453,8 @@ An unrelated species may be included.");
   <code>index({true,false,true})</code> returns <code>{1,3}</code>.</html>"));
     end index;
 
-    function inSign "Sign for the direction into a side or face"
+    function inSign
+      "Return the mathematical sign for the direction into a side or face"
       extends Modelica.Icons.Function;
 
       input FCSys.BaseClasses.Side side "Side";
@@ -1479,9 +1479,9 @@ An unrelated species may be included.");
     algorithm
       index := mod(num - 1, den) + 1 annotation (Inline=true,Documentation(info
             ="<html><p><b>Examples:</b><br>
-  <code>Mod(4,3)</code> returns
-  1.  <code>mod1(3,3)</code> returns 3, but <code>mod(3,3)</code> returns 0 where
-  <code>mod()</code> is the built-in modulo operator.</html>"));
+  <code>mod1(4,3)</code> returns
+  1.  <code>mod1(3,3)</code> returns 3, but <code>mod(3,3)</code> returns 0 (where
+  <code>mod</code> is the built-in modulo operator).</html>"));
     end mod1;
 
     function round
@@ -1498,7 +1498,7 @@ An unrelated species may be included.");
     end round;
 
     function Sigma
-      "<html>Return the sum of the first and second entries of a vector (&Sigma;<i><b>u</b></i>)</html>"
+      "<html>Return the sum of the first and second entries of a vector (&Sigma;)</html>"
       extends Modelica.Icons.Function;
 
       input Real u[2] "Vector of size two";

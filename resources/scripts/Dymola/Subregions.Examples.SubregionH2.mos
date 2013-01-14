@@ -2,9 +2,9 @@
 filename = "SubregionH2.mat";
 y1 = {"subregion.gas.H2.N"};
 y2 = {"subregion.gas.H2.phi[1]"};
-y3 = {"subregion.gas.H2.p"};
-y4 = {"subregion.gas.H2.T"};
-y5 = {"subregion.gas.H2.v"};
+y3 = {"subregion.gas.H2.p_face[1, 1]", "subregion.gas.H2.p", "subregion.gas.H2.p_face[1, 2]"};
+y4 = {"subregion.gas.H2.T_face[1, 1]", "subregion.gas.H2.T", "subregion.gas.H2.T_face[1, 2]"};
+y5 = {"subregion.gas.H2.rho_face[1, 1]", "subregion.gas.H2.rho", "subregion.gas.H2.rho_face[1, 2]"};
 y6 = {"subregion.gas.H2.mu"};
 
 // Make plots.

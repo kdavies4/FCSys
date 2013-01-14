@@ -2166,7 +2166,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
         parameter Real sigma[size(mu, 1)]=0.5*ones(n_out)
           "Standard deviation(s) of the random signal(s)"
           annotation (Evaluate=true);
-        // Note KLD 1/8/10: without annotation(Evaluate=true), Dymola doesn't seem to recognize internal_twister_uniform() when sigma=1*ones(n_out)
+        // Note KLD 1/8/10: without annotation(Evaluate=true), Dymola doesn't seem to recognize internal_twister_uniform() when sigma=ones(n_out)
         parameter SI.Time T_s=0.002 "Sample time (i.e., sample period)"
           annotation (Dialog(group="Advanced"));
         parameter SI.Time T_end=1 "End time (i.e., sequence period)"
@@ -4035,7 +4035,7 @@ results in the following equations:
         parameter Real sigma[size(mu, 1)]=0.5*ones(n_out)
           "Standard deviation(s) of the random signal(s)"
           annotation (Evaluate=true);
-        // Note KLD 1/8/10: without annotation(Evaluate=true), Dymola doesn't seem to recognize internal_twister_uniform() when sigma=1*ones(n_out)
+        // Note KLD 1/8/10: without annotation(Evaluate=true), Dymola doesn't seem to recognize internal_twister_uniform() when sigma=ones(n_out)
         parameter Integer n_s=500 "Number of samples"
           annotation (Dialog(group="Advanced"));
       protected
@@ -5060,12 +5060,10 @@ Example:
         y = u;
         for i in 1:n loop
           assert(u[i] >= u_min[i] - 0.01*abs(u_min[i]) and u[i] <= u_max[i] +
-            0.01*abs(u_max[i]),
-            "Limiter: During initialization the limits have been ignored.\n" +
-            "However, the result is that the input u is not within the required limits:\n"
-             + "  u(" + String(i) + ") = " + String(u[i]) + ", u_min(" + String(
-            i) + ") = " + String(u_min[i]) + ", u_max(" + String(i) + ") = " +
-            String(u_max[i]));
+            0.01*abs(u_max[i]), "Limiter: During initialization the limits have been ignored.
+However, the result is that the input u is not within the required limits:
+  u(" + String(i) + ") = " + String(u[i]) + ", u_min(" + String(i) + ") = " +
+            String(u_min[i]) + ", u_max(" + String(i) + ") = " + String(u_max[i]));
         end for;
       else
         for i in 1:n loop

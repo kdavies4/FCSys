@@ -299,7 +299,7 @@ package Systems
           points={{-110,-18},{-120,-18},{-120,-54},{-110,-54}},
           color={0,200,0},
           smooth=Smooth.None));
-      connect(tankH2.material, anInletValve.pipeN) annotation (Line(
+      connect(tankH2.normal, anInletValve.pipeN) annotation (Line(
           points={{-190,-10},{-180,-10}},
           color={255,128,0},
           smooth=Smooth.None));
@@ -738,16 +738,16 @@ package Systems
 
       parameter Q.Unity k_ratio=1 "Voltage or current ratio of side 1:side 2"
         annotation (Dialog(enable=((LHS == RHS) and specAsParam)));
-      parameter FCSys.WorkInProgress.Magnetic.Conductance k_R=1*U.ohm
+      parameter FCSys.WorkInProgress.Magnetic.Conductance k_R=U.ohm
         "Hall resistance across side 1 (Delta_v1/Delta_qdot2)"
         annotation (Dialog(enable=((LHS == 1) and (RHS == 2) and specAsParam)));
-      parameter FCSys.WorkInProgress.Magnetic2.Conductance k_sigma=1*U.S
+      parameter FCSys.WorkInProgress.Magnetic2.Conductance k_sigma=U.S
         "Hall conductance through side 1 (Delta_qdot1/Delta_v2)"
         annotation (Dialog(enable=((LHS == 2) and (RHS == 1) and specAsParam)));
-      parameter FCSys.WorkInProgress.Magnetic2.Effort k_Delta_v1=1*U.V
+      parameter FCSys.WorkInProgress.Magnetic2.Effort k_Delta_v1=U.V
         "Voltage across side 1"
         annotation (Dialog(enable=((LHS == 1) and (RHS == 3) and specAsParam)));
-      parameter FCSys.WorkInProgress.Magnetic2.Flow k_Delta_qdot1=1*U.A
+      parameter FCSys.WorkInProgress.Magnetic2.Flow k_Delta_qdot1=U.A
         "Total current through side 1"
         annotation (Dialog(enable=((LHS == 2) and (RHS == 3) and specAsParam)));
 
@@ -915,16 +915,16 @@ package Systems
 
       parameter Q.Unity k_ratio=1 "Voltage or current ratio of side 1:side 2"
         annotation (Dialog(enable=((LHS == RHS) and specAsParam)));
-      parameter FCSys.WorkInProgress.Magnetic.Conductance k_R=1*U.ohm
+      parameter FCSys.WorkInProgress.Magnetic.Conductance k_R=U.ohm
         "Hall resistance across side 1 (Delta_v1/Delta_qdot2)"
         annotation (Dialog(enable=((LHS == 1) and (RHS == 2) and specAsParam)));
-      parameter FCSys.WorkInProgress.Magnetic2.Conductance k_sigma=1*U.S
+      parameter FCSys.WorkInProgress.Magnetic2.Conductance k_sigma=U.S
         "Hall conductance through side 1 (Delta_qdot1/Delta_v2)"
         annotation (Dialog(enable=((LHS == 2) and (RHS == 1) and specAsParam)));
-      parameter FCSys.WorkInProgress.Magnetic2.Effort k_Delta_v1=1*U.V
+      parameter FCSys.WorkInProgress.Magnetic2.Effort k_Delta_v1=U.V
         "Voltage across side 1"
         annotation (Dialog(enable=((LHS == 1) and (RHS == 3) and specAsParam)));
-      parameter FCSys.WorkInProgress.Magnetic2.QuantumRate k_Delta_qdot1=1*U.A
+      parameter FCSys.WorkInProgress.Magnetic2.QuantumRate k_Delta_qdot1=U.A
         "Total current through side 1"
         annotation (Dialog(enable=((LHS == 2) and (RHS == 3) and specAsParam)));
 

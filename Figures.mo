@@ -1,5 +1,5 @@
 within FCSys;
-package Figures "Layouts for documentation"
+package Figures "Graphical layouts for documentation"
   extends Modelica.Icons.Package;
   package DeclarativeVsImperative
     extends Modelica.Icons.Package;
@@ -1448,7 +1448,7 @@ package Figures "Layouts for documentation"
 
   partial model PhaseIcon
 
-    FCSys.Subregions.Phases.Phase Phase
+    Subregions.Phases.BaseClasses.NullPhase Phase
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
     annotation (structurallyIncomplete=true);
   end PhaseIcon;
@@ -1468,7 +1468,7 @@ package Figures "Layouts for documentation"
 
   model ReactionIcon
 
-    FCSys.Subregions.Reactions.Electrochemical Reaction
+    Subregions.Reaction Reaction
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
   end ReactionIcon;
 
@@ -1487,15 +1487,15 @@ package Figures "Layouts for documentation"
           transformation(extent={{2,-6},{22,14}}), iconTransformation(extent={{
               -10,-20},{10,0}})));
 
-    FCSys.Connectors.Material Material annotation (Placement(transformation(
+    FCSys.Connectors.Normal Material annotation (Placement(transformation(
             extent={{-22,-30},{-2,-10}}), iconTransformation(extent={{10,-40},{
               30,-20}})));
     FCSys.Connectors.Thermal Thermal annotation (Placement(transformation(
             extent={{26,-30},{46,-10}}), iconTransformation(extent={{-10,-40},{
               10,-20}})));
-    FCSys.Connectors.MechanicalTransport Mechanical annotation (Placement(
-          transformation(extent={{2,-30},{22,-10}}), iconTransformation(extent=
-              {{-30,-40},{-10,-20}})));
+    FCSys.Connectors.Transverse Mechanical annotation (Placement(transformation(
+            extent={{2,-30},{22,-10}}), iconTransformation(extent={{-30,-40},{-10,
+              -20}})));
     annotation (Diagram(graphics={Line(
               points={{12,28},{12,4}},
               color={127,127,127},
@@ -1517,16 +1517,16 @@ package Figures "Layouts for documentation"
               color={127,127,127},
               smooth=Smooth.None,
               pattern=LinePattern.Dash),Line(
-              points={{60,24},{60,-16}},
+              points={{60,34},{60,-18}},
               color={0,0,0},
               smooth=Smooth.None),Line(
-              points={{58,20},{60,24},{62,20}},
+              points={{58,30},{60,34},{62,30}},
               color={0,0,0},
               smooth=Smooth.None),Text(
-              extent={{48,30},{72,26}},
+              extent={{48,40},{72,36}},
               lineColor={0,0,0},
               textString="Composite"),Text(
-              extent={{46,-18},{74,-22}},
+              extent={{46,-20},{74,-24}},
               lineColor={0,0,0},
               textString="Basic"),Text(
               extent={{-40,40},{-24,36}},
@@ -1569,8 +1569,8 @@ package Figures "Layouts for documentation"
         stateSelect=StateSelect.never) "Integrated squared error";
 
       FCSys.Figures.ReactionComparison.TraditionalReaction traditionalReaction(
-          k=0.125*U.A*{(U.cm^3/U.C)^sum(max(traditionalReaction.nu[i], 0) for i
-             in 1:size(traditionalReaction.nu, 1)),1.333*(U.cm^3/U.C)^sum(-min(
+          k=0.125*U.A*{(U.cc/U.C)^sum(max(traditionalReaction.nu[i], 0) for i
+             in 1:size(traditionalReaction.nu, 1)),1.333*(U.cc/U.C)^sum(-min(
             traditionalReaction.nu[i], 0) for i in 1:size(traditionalReaction.nu,
             1))})
         annotation (Placement(transformation(extent={{-10,30},{10,50}})));
@@ -1590,19 +1590,19 @@ package Figures "Layouts for documentation"
     equation
       der(err) = (reaction.Xidot - traditionalReaction.Xidot)^2;
 
-      connect(species1.material, reaction.material[1]) annotation (Line(
+      connect(species1.normal, reaction.normal[1]) annotation (Line(
           points={{-40,6.10623e-16},{-40,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
 
           color={0,0,0},
           smooth=Smooth.None));
 
-      connect(species2.material, reaction.material[2]) annotation (Line(
+      connect(species2.normal, reaction.normal[2]) annotation (Line(
           points={{6.10623e-16,6.10623e-16},{6.10623e-16,-20},{0,-40},{
               5.55112e-16,-40}},
           color={0,0,0},
           smooth=Smooth.None));
 
-      connect(species3.material, reaction.material[3]) annotation (Line(
+      connect(species3.normal, reaction.normal[3]) annotation (Line(
           points={{40,6.10623e-16},{40,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
 
           color={0,0,0},
@@ -1622,23 +1622,23 @@ package Figures "Layouts for documentation"
         "<html>stoichiometric coefficients (&nu;)</html>"
         annotation (Evaluate=true);
 
-      parameter Real k[2]=1*U.A*{(U.cm^3/U.C)^sum(max(nu[i], 0) for i in 1:size(
-          nu, 1)),(U.cm^3/U.C)^sum(-min(nu[i], 0) for i in 1:size(nu, 1))}
+      parameter Real k[2]=U.A*{(U.cc/U.C)^sum(max(nu[i], 0) for i in 1:size(nu,
+          1)),(U.cc/U.C)^sum(-min(nu[i], 0) for i in 1:size(nu, 1))}
         "Forward and reverse reaction coefficients";
       // Note:  The units are not consistent, but the form is correct.
 
-      parameter Q.Volume V=1*U.cm^3 "Volume";
+      parameter Q.Volume V=U.cc "Volume";
       parameter Q.Amount N_IC[n_spec]=fill(4*U.C, n_spec)
         "<html>Initial particle number (<i>N</i><sub>IC</sub></html>";
 
-      Q.Current Xidot(nominal=1*U.A) "Reaction rate";
+      Q.Current Xidot(nominal=U.A) "Reaction rate";
       Q.Amount N[n_spec](
-        each nominal=1*U.C,
+        each nominal=U.C,
         final start=N_IC,
         each fixed=true) "Particle number";
 
       // Alias variable
-      Q.AmountVolumic rho[n_spec](each nominal=1*U.C/U.cm^3)
+      Q.AmountVolumic rho[n_spec](each nominal=U.C/U.cc)
         "Volumic particle number";
 
     protected
@@ -1673,7 +1673,7 @@ package Figures "Layouts for documentation"
       parameter Integer nu[:]={1,1,-1}
         "<html>stoichiometric coefficients (&nu;)</html>";
 
-      Q.Current Xidot(nominal=1*U.A) "Reaction rate";
+      Q.Current Xidot(nominal=U.A) "Reaction rate";
 
       Material material[n_spec] "Connection for material exchange"
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -1700,19 +1700,19 @@ package Figures "Layouts for documentation"
 
       // extends FCSys.BaseClasses.Icons.Names.Top2;
 
-      parameter Real R=1*U.s/U.cm^3 "Material resistance";
+      parameter Real R=U.s/U.cc "Material resistance";
       // Note:  The dimensions are not consistent, but the form is correct.
-      parameter Q.Volume V=1*U.cm^3 "Volume";
+      parameter Q.Volume V=U.cc "Volume";
       parameter Q.Amount N_IC=4*U.C
         "<html>Initial amount (<i>N</i><sub>IC</sub></html>";
 
       Q.Amount N(
-        nominal=1*U.C,
+        nominal=U.C,
         start=N_IC,
         fixed=true) "Particle number";
 
       // Alias variable
-      Q.AmountVolumic rho(nominal=1*U.C/U.cm^3) "Volumic particle number";
+      Q.AmountVolumic rho(nominal=U.C/U.cc) "Volumic particle number";
 
       Material material "Connections for material exchange"
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -1737,8 +1737,8 @@ package Figures "Layouts for documentation"
     end Species;
 
     connector Material "Connector for density-driven reaction"
-      Q.AmountVolumic rho(nominal=1*U.C/U.cm^3) "Volumetric density";
-      flow Q.Current Ndot(nominal=1*U.A) "Current";
+      Q.AmountVolumic rho(nominal=U.C/U.cc) "Volumetric density";
+      flow Q.Current Ndot(nominal=U.A) "Current";
     end Material;
   end ReactionComparison;
 

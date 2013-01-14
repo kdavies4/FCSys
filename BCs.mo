@@ -8,8 +8,8 @@ package BCs "Models for boundary conditions"
     model FaceBC "<html>Test the BCs for the face of a subregion</html>"
       extends Modelica.Icons.Example;
 
-      FCSys.BCs.FaceBus.Subregion subregionFaceBC(gas(inclH2O=true, H2O(
-            redeclare FCSys.BCs.Face.Material.Current material(spec(k=0)),
+      FaceBus.Subregion subregionFaceBC(gas(inclH2O=true, H2O(
+            redeclare Face.Material.Current normal(spec(k=0)),
             inviscidX=false,
             inviscidZ=false)))
         annotation (Placement(transformation(extent={{-10,14},{10,34}})));
@@ -21,14 +21,14 @@ package BCs "Models for boundary conditions"
         inclZFaces=false,
         inclLinX=false,
         inclLinY=true,
-        graphite(inclC=true, C(V_IC=0.5*U.cm^3)),
+        graphite(inclC=true, C(V_IC=0.5*U.cc)),
         gas(inclH2O=true, H2O(
-            xNegative(thermoOpt=ThermoOpt.ClosedAdiabatic, inviscidY=true),
-            xPositive(thermoOpt=ThermoOpt.ClosedAdiabatic, inviscidY=true),
+            xNegative(isobaric=true, inviscidY=true),
+            xPositive(isobaric=true, inviscidY=true),
             zNegative(inviscidY=true),
             zPositive(inviscidY=true),
             yPositive(
-              thermoOpt=ThermoOpt.OpenDiabatic,
+              isobaric=false,
               inviscidX=false,
               inviscidZ=false))))
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -60,10 +60,10 @@ package BCs "Models for boundary conditions"
       final inner parameter Q.Area A[Axis]={L[cartWrap(axis + 1)]*L[cartWrap(
           axis + 2)] for axis in Axis} "Cross-sectional area";
 
-      FCSys.BCs.FaceBus.Phases.Gas phaseFaceBC(
+      FaceBus.Phases.Gas phaseFaceBC(
         inclH2O=true,
-        H2O(thermoOpt=ThermoOpt.OpenDiabatic, redeclare
-            FCSys.BCs.Face.Material.Current material(spec(k=0))),
+        H2O(isobaric=false, redeclare Face.Material.Current
+            normal(spec(k=0))),
         axis=FCSys.BaseClasses.Axis.y)
         annotation (Placement(transformation(extent={{-10,14},{10,34}})));
       Subregions.Volume volume
@@ -74,9 +74,9 @@ package BCs "Models for boundary conditions"
         inclH2=false,
         inclH2O=true,
         H2O(
-          xNegative(thermoOpt=ThermoOpt.ClosedAdiabatic, inviscidY=true),
-          xPositive(thermoOpt=ThermoOpt.ClosedAdiabatic, inviscidY=true),
-          yPositive(thermoOpt=ThermoOpt.OpenDiabatic),
+          xNegative(isobaric=true, inviscidY=true),
+          xPositive(isobaric=true, inviscidY=true),
+          yPositive(isobaric=false),
           zNegative(inviscidY=true),
           zPositive(inviscidY=true)))
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -105,7 +105,7 @@ package BCs "Models for boundary conditions"
       extends Modelica.Icons.Example;
 
       // TODO:  Make this into a meaningful example.
-      FCSys.BCs.Router router
+      Router router
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
     end Router;
 
@@ -145,7 +145,7 @@ package BCs "Models for boundary conditions"
         redeclare
           Modelica.Fluid.Vessels.BaseClasses.HeatTransfer.IdealHeatTransfer
           HeatTransfer,
-        redeclare package Medium = FCSys.BCs.Adapters.Media.AnodeGas,
+        redeclare package Medium = Adapters.Media.AnodeGas,
         medium(p(fixed=true),X(each fixed=true)))
         annotation (Placement(transformation(extent={{30,20},{50,40}})));
       Modelica.Fluid.Vessels.ClosedVolume liquidVolume(
@@ -199,7 +199,8 @@ package BCs "Models for boundary conditions"
     end AnodeAdapter;
   end Examples;
 
-  package Adapters "Adapters to Package Modelica"
+  package Adapters
+    "<html>Adapters to <a href=\"modelica://Modelica\">Package Modelica</a></html>"
     extends Modelica.Icons.Package;
 
     model Anode
@@ -215,8 +216,8 @@ package BCs "Models for boundary conditions"
         annotation (choicesAllMatching=true, Dialog(group="Material properties"));
 
       FCSys.Connectors.FaceBus face
-        "Multi-species connector for material, linear momentum, and heat"
-        annotation (Placement(transformation(extent={{-90,-10},{-70,10}}),
+        "Multi-species connector for linear momentum and heat" annotation (
+          Placement(transformation(extent={{-90,-10},{-70,10}}),
             iconTransformation(extent={{-90,-10},{-70,10}})));
       Modelica.Fluid.Interfaces.FluidPort_b gasPort(redeclare final package
           Medium = GasMedium) "Modelica fluid port for the gas" annotation (
@@ -232,8 +233,8 @@ package BCs "Models for boundary conditions"
           Medium = LiquidMedium) "Modelica fluid port for the liquid"
         annotation (Placement(transformation(extent={{70,-70},{90,-50}}),
             iconTransformation(extent={{70,-70},{90,-50}})));
-      FCSys.BCs.Adapters.Phases.AnodeGas gas(redeclare final package Medium =
-            GasMedium) "Gas subadapter"
+      Phases.AnodeGas gas(redeclare final package Medium = GasMedium)
+        "Gas subadapter"
         annotation (Placement(transformation(extent={{-10,30},{10,50}})));
       Phases.Graphite graphite "Graphite subadapter"
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -242,6 +243,20 @@ package BCs "Models for boundary conditions"
         "Liquid subadapter"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
     equation
+      connect(gas.face, face.gas) annotation (Line(
+          points={{-8,40},{-40,40},{-40,5.55112e-16},{-80,5.55112e-16}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(gasPort, gas.fluidPort) annotation (Line(
+          points={{80,60},{50,60},{50,36},{8,36}},
+          color={0,127,255},
+          smooth=Smooth.None));
+      connect(gas.heatPort, heatPort) annotation (Line(
+          points={{8,40},{30,40},{30,-20},{80,-20}},
+          color={191,0,0},
+          smooth=Smooth.None));
+
       connect(graphite.face, face.graphite) annotation (Line(
           points={{-8,6.10623e-16},{-40,6.10623e-16},{-40,5.55112e-16},{-80,
               5.55112e-16}},
@@ -257,9 +272,10 @@ package BCs "Models for boundary conditions"
           points={{8,6.10623e-16},{30,6.10623e-16},{30,-20},{80,-20}},
           color={191,0,0},
           smooth=Smooth.None));
-      connect(gasPort, gas.fluidPort) annotation (Line(
-          points={{80,60},{50,60},{50,36},{8,36}},
-          color={0,127,255},
+      connect(liquid.face, face.liquid) annotation (Line(
+          points={{-8,-40},{-40,-40},{-40,5.55112e-16},{-80,5.55112e-16}},
+          color={127,127,127},
+          thickness=0.5,
           smooth=Smooth.None));
       connect(liquidPort, liquid.fluidPort) annotation (Line(
           points={{80,-60},{50,-60},{50,-44},{8,-44}},
@@ -268,20 +284,6 @@ package BCs "Models for boundary conditions"
       connect(liquid.heatPort, heatPort) annotation (Line(
           points={{8,-40},{30,-40},{30,-20},{80,-20}},
           color={191,0,0},
-          smooth=Smooth.None));
-      connect(gas.heatPort, heatPort) annotation (Line(
-          points={{8,40},{30,40},{30,-20},{80,-20}},
-          color={191,0,0},
-          smooth=Smooth.None));
-      connect(liquid.face, face.liquid) annotation (Line(
-          points={{-8,-40},{-40,-40},{-40,5.55112e-16},{-80,5.55112e-16}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(gas.face, face.gas) annotation (Line(
-          points={{-8,40},{-40,40},{-40,5.55112e-16},{-80,5.55112e-16}},
-          color={127,127,127},
-          thickness=0.5,
           smooth=Smooth.None));
 
       annotation (Icon(graphics={
@@ -327,8 +329,8 @@ package BCs "Models for boundary conditions"
         annotation (choicesAllMatching=true, Dialog(group="Material properties"));
 
       FCSys.Connectors.FaceBus face
-        "Multi-species connector for material, linear momentum, and heat"
-        annotation (Placement(transformation(extent={{-90,-10},{-70,10}}),
+        "Multi-species connector for linear momentum and heat" annotation (
+          Placement(transformation(extent={{-90,-10},{-70,10}}),
             iconTransformation(extent={{-90,-10},{-70,10}})));
       Modelica.Fluid.Interfaces.FluidPort_b gasPort(redeclare final package
           Medium = GasMedium) "Modelica fluid port for the gas" annotation (
@@ -354,6 +356,19 @@ package BCs "Models for boundary conditions"
         "Liquid subadapter"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
     equation
+      connect(gas.face, face.gas) annotation (Line(
+          points={{-8,40},{-40,40},{-40,5.55112e-16},{-80,5.55112e-16}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(gasPort, gas.fluidPort) annotation (Line(
+          points={{80,60},{50,60},{50,36},{8,36}},
+          color={0,127,255},
+          smooth=Smooth.None));
+      connect(gas.heatPort, heatPort) annotation (Line(
+          points={{8,40},{30,40},{30,-20},{80,-20}},
+          color={191,0,0},
+          smooth=Smooth.None));
       connect(graphite.face, face.graphite) annotation (Line(
           points={{-8,6.10623e-16},{-40,6.10623e-16},{-40,5.55112e-16},{-80,
               5.55112e-16}},
@@ -369,9 +384,10 @@ package BCs "Models for boundary conditions"
           points={{8,6.10623e-16},{30,6.10623e-16},{30,-20},{80,-20}},
           color={191,0,0},
           smooth=Smooth.None));
-      connect(gasPort, gas.fluidPort) annotation (Line(
-          points={{80,60},{50,60},{50,36},{8,36}},
-          color={0,127,255},
+      connect(liquid.face, face.liquid) annotation (Line(
+          points={{-8,-40},{-40,-40},{-40,5.55112e-16},{-80,5.55112e-16}},
+          color={127,127,127},
+          thickness=0.5,
           smooth=Smooth.None));
       connect(liquidPort, liquid.fluidPort) annotation (Line(
           points={{80,-60},{50,-60},{50,-44},{8,-44}},
@@ -380,20 +396,6 @@ package BCs "Models for boundary conditions"
       connect(liquid.heatPort, heatPort) annotation (Line(
           points={{8,-40},{30,-40},{30,-20},{80,-20}},
           color={191,0,0},
-          smooth=Smooth.None));
-      connect(gas.heatPort, heatPort) annotation (Line(
-          points={{8,40},{30,40},{30,-20},{80,-20}},
-          color={191,0,0},
-          smooth=Smooth.None));
-      connect(liquid.face, face.liquid) annotation (Line(
-          points={{-8,-40},{-40,-40},{-40,5.55112e-16},{-80,5.55112e-16}},
-          color={127,127,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(gas.face, face.gas) annotation (Line(
-          points={{-8,40},{-40,40},{-40,5.55112e-16},{-80,5.55112e-16}},
-          color={127,127,127},
-          thickness=0.5,
           smooth=Smooth.None));
 
       annotation (Icon(graphics={
@@ -430,7 +432,7 @@ package BCs "Models for boundary conditions"
       extends Modelica.Icons.Package;
 
       model AnodeGas
-        "<html>Adapter for PEMFC Anode gas between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
+        "<html>Adapter for PEMFC anode gas between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
         extends BaseClasses.PartialPhase;
 
         replaceable package Medium = Media.AnodeGas constrainedby
@@ -459,7 +461,7 @@ package BCs "Models for boundary conditions"
 
       equation
         // H2
-        connect(H2.face.material, face.H2.material) annotation (Line(
+        connect(H2.face.normal, face.H2.normal) annotation (Line(
             points={{-8,20},{-40,20},{-40,5.55112e-16},{-80,5.55112e-16}},
             color={127,127,127},
             smooth=Smooth.None));
@@ -477,7 +479,7 @@ package BCs "Models for boundary conditions"
             smooth=Smooth.None));
 
         // H2O
-        connect(H2O.face.material, face.H2O.material) annotation (Line(
+        connect(H2O.face.normal, face.H2O.normal) annotation (Line(
             points={{-8,-20},{-40,-20},{-40,5.55112e-16},{-80,5.55112e-16}},
             color={127,127,127},
             smooth=Smooth.None));
@@ -565,7 +567,7 @@ package BCs "Models for boundary conditions"
       equation
 
         // H2O
-        connect(H2O.face.material, face.H2O.material) annotation (Line(
+        connect(H2O.face.normal, face.H2O.normal) annotation (Line(
             points={{-8,20},{-40,20},{-40,5.55112e-16},{-80,5.55112e-16}},
             color={127,127,127},
             smooth=Smooth.None));
@@ -583,7 +585,7 @@ package BCs "Models for boundary conditions"
             smooth=Smooth.None));
 
         // N2
-        connect(N2.face.material, face.N2.material) annotation (Line(
+        connect(N2.face.normal, face.N2.normal) annotation (Line(
             points={{-8,6.10623e-16},{-40,6.10623e-16},{-40,5.55112e-16},{-80,
                 5.55112e-16}},
             color={127,127,127},
@@ -607,7 +609,7 @@ package BCs "Models for boundary conditions"
             smooth=Smooth.None));
 
         // O2
-        connect(O2.face.material, face.O2.material) annotation (Line(
+        connect(O2.face.normal, face.O2.normal) annotation (Line(
             points={{-8,-20},{-40,-20},{-40,5.55112e-16},{-80,5.55112e-16}},
             color={127,127,127},
             smooth=Smooth.None));
@@ -673,7 +675,7 @@ package BCs "Models for boundary conditions"
             smooth=Smooth.None));
 
         // e-
-        connect('e-'.face.material, face.'e-'.material) annotation (Line(
+        connect('e-'.face.normal, face.'e-'.normal) annotation (Line(
             points={{-8,-20},{-40,-20},{-40,5.55112e-16},{-80,5.55112e-16}},
             color={127,127,127},
             smooth=Smooth.None));
@@ -729,12 +731,10 @@ package BCs "Models for boundary conditions"
             Medium = Medium) "Modelica fluid port" annotation (Placement(
               transformation(extent={{70,-50},{90,-30}}), iconTransformation(
                 extent={{70,-50},{90,-30}})));
-        // Note:  In Dymola 7.4, "redeclare final package Medium = Medium"
-        // must be used instead of "redeclare final Medium Medium" in
-        // order for this model to pass its check.
+
       equation
         // H2O
-        connect(H2O.face.material, face.H2.material) annotation (Line(
+        connect(H2O.face.normal, face.H2.normal) annotation (Line(
             points={{-8,6.10623e-16},{-54,6.10623e-16},{-54,5.55112e-16},{-80,
                 5.55112e-16}},
             color={0,0,0},
@@ -806,8 +806,7 @@ package BCs "Models for boundary conditions"
         "<html>Adapter to connect e<sup>-</sup> between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a> (electrical and heat only)</html>"
 
         extends BaseClasses.PartialSpecies(redeclare
-            FCSys.Characteristics.'e-'.Graphite Data, face(final thermoOpt=
-                ThermoOpt.OpenDiabatic));
+            FCSys.Characteristics.'e-'.Graphite Data, face(final iosbaric=false));
 
         Modelica.Electrical.Analog.Interfaces.NegativePin pin
           "Modelica electrical pin" annotation (Placement(transformation(extent
@@ -815,11 +814,11 @@ package BCs "Models for boundary conditions"
 
       equation
         // Efforts
-        Data.g(face.thermal.T, Data.p_Tv(face.thermal.T, 1/face.material.rho))
-          = Data.z*pin.v*U.V "Electrical potential";
+        Data.g(face.thermal.T, Data.p_Tv(face.thermal.T, 1/face.normal.rho)) =
+          Data.z*pin.v*U.V "Electrical potential";
 
         // Conservation (no storage)
-        0 = face.material.Ndot + pin.i*U.A/Data.z "Material";
+        0 = face.normal.Ndot + pin.i*U.A/Data.z "Material";
 
         annotation (
           Documentation(info="<html><p>For additional information, see the
@@ -827,20 +826,20 @@ package BCs "Models for boundary conditions"
     PartialSpecies</a> model.</p>
     </html>"),
           Icon(graphics={Line(
-                      points={{0,40},{80,40}},
-                      color={0,0,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,60},{0,-20}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash)}),
+                points={{0,40},{80,40}},
+                color={0,0,255},
+                smooth=Smooth.None), Line(
+                points={{0,60},{0,-20}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash)}),
           Diagram(graphics));
       end 'e-';
 
       model FluidNonionic
         "<html>Adapter to connect a single nonionic fluid species between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
 
-        extends BaseClasses.PartialSpecies(face(final thermoOpt=ThermoOpt.OpenDiabatic));
+        extends BaseClasses.PartialSpecies(face(final isobaric=false));
 
         replaceable package Medium = Modelica.Media.IdealGases.SingleGases.H2O
           constrainedby Modelica.Media.Interfaces.PartialPureSubstance
@@ -853,9 +852,6 @@ package BCs "Models for boundary conditions"
             Medium = Medium) "Modelica fluid port" annotation (Placement(
               transformation(extent={{70,-50},{90,-30}}), iconTransformation(
                 extent={{70,-50},{90,-30}})));
-        // Note:  In Dymola 7.4, "redeclare final package Medium = Medium"
-        // must be used instead of "redeclare final Medium Medium" in
-        // order for this model to pass its check.
 
       equation
         // Thermodynamic state and properties
@@ -864,11 +860,11 @@ package BCs "Models for boundary conditions"
         medium.Xi = ones(Medium.nXi)/Medium.nXi;
 
         // Efforts
-        face.material.rho = (medium.d/medium.MM)*U.mol/U.m^3;
+        face.normal.rho = (medium.d/medium.MM)*U.mol/U.m^3;
         medium.h = fluidPort.h_outflow;
 
         // Conservation (no storage)
-        0 = face.material.Ndot + (fluidPort.m_flow/medium.MM)*U.mol/U.s
+        0 = face.normal.Ndot + (fluidPort.m_flow/medium.MM)*U.mol/U.s
           "Material";
 
         // See the partial model for additional equations.
@@ -881,29 +877,29 @@ package BCs "Models for boundary conditions"
     PartialSpecies</a> model.</p>
     </html>"),
           Icon(graphics={Line(
-                      points={{0,-40},{80,-40}},
-                      color={0,127,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,20},{0,-60}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash)}),
+                points={{0,-40},{80,-40}},
+                color={0,127,255},
+                smooth=Smooth.None), Line(
+                points={{0,20},{0,-60}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash)}),
           Diagram(graphics));
       end FluidNonionic;
 
       model Solid
         "<html>Adapter to connect a single solid species between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a> (heat only)</html>"
 
-        extends BaseClasses.PartialSpecies(face(final thermoOpt));
+        extends BaseClasses.PartialSpecies(face(final isobaric=true));
 
         annotation (Documentation(info="<html><p>For additional information, see the
     <a href=\"modelica://FCSys.BCs.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"), Icon(graphics={Line(
-                      points={{0,20},{0,-20}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash)}));
+                points={{0,20},{0,-20}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash)}));
       end Solid;
 
       package BaseClasses "Base classes (not for direct use)"
@@ -923,13 +919,13 @@ package BCs "Models for boundary conditions"
 
           FCSys.Connectors.Face face(
             axis=Axis.x,
-            thermoOpt=ThermoOpt.ClosedDiabatic,
             final inviscidX=true,
             final inviscidY=true,
             final inviscidZ=true)
             "Connector for material and heat of a single species (linear momentum excluded)"
             annotation (Placement(transformation(extent={{-90,-10},{-70,10}}),
                 iconTransformation(extent={{-90,-10},{-70,10}})));
+
           // Note:  The axis doesn't matter since transverse linear momentum
           // isn't included.
 
@@ -953,17 +949,18 @@ package BCs "Models for boundary conditions"
             Documentation(info="<html><p>Note that shear force is not included.</p>
   </html>"),
             Icon(graphics={Line(
-                          points={{0,0},{-80,0}},
-                          color={127,127,127},
-                          smooth=Smooth.None),Line(
-                          points={{0,0},{80,0}},
-                          color={191,0,0},
-                          smooth=Smooth.None)}));
+                  points={{0,0},{-80,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None), Line(
+                  points={{0,0},{80,0}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}));
         end PartialSpecies;
       end BaseClasses;
     end Species;
 
-    package Junctions "Junctions between pure substances and their mixtures"
+    package Junctions
+      "<html><a href=\"modelica://Modelica\">Modelica</a> junctions between pure substances and their mixtures</html>"
       extends Modelica.Icons.Package;
 
       model Junction2 "Junction between two pure substances and their mixture"
@@ -1075,9 +1072,6 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
         "Junction between three pure substances and their mixture"
         extends BaseClasses.PartialJunction(redeclare replaceable package
             MixtureMedium = Media.CathodeGas);
-        // Note:  In Dymola 7.4, "redeclare package MixtureMedium = Media.CathodeGas"
-        // must be used instead of "redeclare Media.CathodeGas MixtureMedium" in
-        // order for this model to pass its check.  A similar note applies below.
 
         replaceable package Medium1 = Modelica.Media.IdealGases.SingleGases.H2O
             (referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
@@ -1121,19 +1115,16 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
           "The mixture medium must have exactly three substances.");
         assert(MixtureMedium.substanceNames[1] == Medium1.substanceNames[1],
           "The first substance of the mixture medium (MixtureMedium) is \"" +
-          MixtureMedium.substanceNames[1] +
-          "\", \nbut the first pure substance is \"" + Medium1.substanceNames[1]
-           + "\".");
+          MixtureMedium.substanceNames[1] + "\", 
+but the first pure substance is \"" + Medium1.substanceNames[1] + "\".");
         assert(MixtureMedium.substanceNames[2] == Medium2.substanceNames[1],
           "The second substance of the mixture medium (MixtureMedium) is \"" +
-          MixtureMedium.substanceNames[2] +
-          "\", \nbut the second pure substance is \"" + Medium2.substanceNames[
-          1] + "\".");
+          MixtureMedium.substanceNames[2] + "\", 
+but the second pure substance is \"" + Medium2.substanceNames[1] + "\".");
         assert(MixtureMedium.substanceNames[3] == Medium3.substanceNames[1],
           "The second substance of the mixture medium (MixtureMedium) is \"" +
-          MixtureMedium.substanceNames[3] +
-          "\", \nbut the third pure substance is \"" + Medium2.substanceNames[1]
-           + "\".");
+          MixtureMedium.substanceNames[3] + "\", 
+but the third pure substance is \"" + Medium2.substanceNames[1] + "\".");
 
         // Check the extra properties.
         assert(MixtureMedium.nC == Medium1.nC and MixtureMedium.nC == Medium2.nC
@@ -1143,18 +1134,21 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
           assert(MixtureMedium.extraPropertiesNames[i] == Medium1.extraPropertiesNames[
             i], "Extra property #" + String(i) +
             " of the mixture medium (MixtureMedium) is \"" + MixtureMedium.extraPropertiesNames[
-            i] + "\", \nbut that of the first pure substance (Medium1) is \""
-             + Medium1.extraPropertiesNames[i] + "\".");
+            i] + "\", 
+but that of the first pure substance (Medium1) is \"" + Medium1.extraPropertiesNames[
+            i] + "\".");
           assert(MixtureMedium.extraPropertiesNames[i] == Medium2.extraPropertiesNames[
             i], "Extra property #" + String(i) +
             " of the mixture medium (MixtureMedium) is \"" + MixtureMedium.extraPropertiesNames[
-            i] + "\", \nbut that of the second pure substance (Medium2) is \""
-             + Medium2.extraPropertiesNames[i] + "\".");
+            i] + "\", 
+but that of the second pure substance (Medium2) is \"" + Medium2.extraPropertiesNames[
+            i] + "\".");
           assert(MixtureMedium.extraPropertiesNames[i] == Medium3.extraPropertiesNames[
             i], "Extra property #" + String(i) +
             " of the mixture medium (MixtureMedium) is \"" + MixtureMedium.extraPropertiesNames[
-            i] + "\", \nbut that of the third pure substance (Medium3) is \""
-             + Medium3.extraPropertiesNames[i] + "\".");
+            i] + "\", 
+but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesNames[
+            i] + "\".");
         end for;
 
       equation
@@ -1224,9 +1218,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
               package Medium = MixtureMedium) "Fluid port for the mixture"
             annotation (Placement(transformation(extent={{-90,-10},{-70,10}}),
                 iconTransformation(extent={{-90,-10},{-70,10}})));
-          // Note:  In Dymola 7.4, "redeclare final package Medium = MixtureMedium"
-          // must be used instead of "redeclare final MixtureMedium Medium" in
-          // order for this model to pass its check.
+
           SI.MassFraction X[MixtureMedium.nX]
             "Mass fractions within the mixture";
 
@@ -1305,7 +1297,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
 
     model TestProfile "Cell test profile"
       extends Modelica.Icons.Example;
-      extends FCSys.BCs.TestStands.BaseClasses.PartialTestStandNoIO;
+      extends BaseClasses.PartialTestStandNoIO;
 
       annotation (structurallyIncomplete=true, Diagram(coordinateSystem(
               preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
@@ -1778,7 +1770,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
 
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-180,-100},
-                {180,100}}), graphics),
+                {180,100}}),graphics),
         experiment(StopTime=15481, Algorithm="Euler"),
         experimentSetupOutput);
     end Replay;
@@ -1851,40 +1843,40 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
               rotation=270,
               origin={40,-160})));
 
-        FCSys.BCs.FaceBus.SubregionClosed anEndBC[n_y, n_z](each final axis=
-              FCSys.BaseClasses.Axis.x, each graphite(inclC=true, 'incle-'=true))
-          annotation (Placement(transformation(
+        FaceBus.SubregionClosed anEndBC[n_y, n_z](each final axis=FCSys.BaseClasses.Axis.x,
+            each graphite(inclC=true, 'incle-'=true)) annotation (Placement(
+              transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-136,0})));
-        FCSys.BCs.FaceBus.SubregionClosed caEndBC[n_y, n_z](each final axis=
-              FCSys.BaseClasses.Axis.x, each graphite(inclC=true, 'incle-'=true))
-          annotation (Placement(transformation(
+        FaceBus.SubregionClosed caEndBC[n_y, n_z](each final axis=FCSys.BaseClasses.Axis.x,
+            each graphite(inclC=true, 'incle-'=true)) annotation (Placement(
+              transformation(
               extent={{-10,-10},{10,10}},
               rotation=90,
               origin={136,0})));
-        FCSys.BCs.FaceBus.SubregionClosed anSourceBC[n_x_an, n_z](each final
-            axis=FCSys.BaseClasses.Axis.y, each gas(inclH2=true, inclH2O=true))
-          annotation (Placement(transformation(
+        FaceBus.SubregionClosed anSourceBC[n_x_an, n_z](each final axis=FCSys.BaseClasses.Axis.y,
+            each gas(inclH2=true, inclH2O=true)) annotation (Placement(
+              transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-40,-136})));
-        FCSys.BCs.FaceBus.SubregionClosed anSinkBC[n_x_an, n_z](each final axis
-            =FCSys.BaseClasses.Axis.y, each gas(inclH2=true, inclH2O=true))
-          annotation (Placement(transformation(
+        FaceBus.SubregionClosed anSinkBC[n_x_an, n_z](each final axis=FCSys.BaseClasses.Axis.y,
+            each gas(inclH2=true, inclH2O=true)) annotation (Placement(
+              transformation(
               extent={{-10,-10},{10,10}},
               rotation=180,
               origin={-40,136})));
-        FCSys.BCs.FaceBus.SubregionClosed caSourceBC[n_x_ca, n_z](each final
-            axis=FCSys.BaseClasses.Axis.y, each gas(
+        FaceBus.SubregionClosed caSourceBC[n_x_ca, n_z](each final axis=FCSys.BaseClasses.Axis.y,
+            each gas(
             inclH2O=true,
             inclN2=true,
             inclO2=true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={40,-136})));
-        FCSys.BCs.FaceBus.SubregionClosed caSinkBC[n_x_ca, n_z](each final axis
-            =FCSys.BaseClasses.Axis.y, each gas(
+        FaceBus.SubregionClosed caSinkBC[n_x_ca, n_z](each final axis=FCSys.BaseClasses.Axis.y,
+            each gas(
             inclH2O=true,
             inclN2=true,
             inclO2=true)) annotation (Placement(transformation(
@@ -1901,17 +1893,17 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
               extent={{-10,-10},{10,10}},
               rotation=315,
               origin={160,-160})));
-        replaceable FCSys.BCs.FaceBusDifferential.Subregion current[n_y, n_z](
-            each final axis=FCSys.BaseClasses.Axis.x, graphite(
+        replaceable FaceBusDifferential.Subregion current[n_y, n_z](each final
+            axis=FCSys.BaseClasses.Axis.x, graphite(
             inclC=true,
-            C(thermoOpt=ThermoOpt.ClosedAdiabatic),
+            C(isobaric=true),
             'incle-'=true,
-            'e-'(thermoOpt=ThermoOpt.OpenDiabatic))) if inclIO constrainedby
-          FCSys.BCs.FaceBusDifferential.Subregion(graphite(
+            'e-'(isobaric=false))) if inclIO constrainedby
+          FaceBusDifferential.Subregion(graphite(
             inclC=true,
-            C(thermoOpt=ThermoOpt.ClosedAdiabatic),
+            C(isobaric=true),
             'incle-'=true,
-            'e-'(thermoOpt=ThermoOpt.OpenDiabatic)))
+            'e-'(isobaric=false)))
           annotation (Placement(transformation(extent={{-140,20},{-120,40}})));
 
         replaceable FCSys.Sensors.FaceBusDifferential.Subregion voltage[n_y,
@@ -2015,48 +2007,48 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
         final parameter Integer n_z=1
           "<html>Number of subregions across the channel (<i>n</i><sub>z</sub>)</html>";
 
-        FCSys.BCs.FaceBus.SubregionClosed anEnd[n_y, n_z](each final axis=FCSys.BaseClasses.Axis.x,
+        FaceBus.SubregionClosed anEnd[n_y, n_z](each final axis=FCSys.BaseClasses.Axis.x,
             each graphite(
             inclC=true,
             'incle-'=true,
-            'e-'(redeclare FCSys.BCs.Face.Material.Current material(redeclare
-                  Modelica.Blocks.Sources.Ramp spec(height=1*U.A,duration=50)))))
+            'e-'(redeclare Face.Material.Current normal(redeclare
+                  Modelica.Blocks.Sources.Ramp spec(height=U.A,duration=50)))))
           annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=90,
               origin={-30,0})));
-        FCSys.BCs.FaceBus.SubregionClosed caEnd[n_y, n_z](each final axis=FCSys.BaseClasses.Axis.x,
+        FaceBus.SubregionClosed caEnd[n_y, n_z](each final axis=FCSys.BaseClasses.Axis.x,
             each graphite(
             inclC=true,
             'incle-'=true,
-            'e-'(redeclare FCSys.BCs.Face.Material.Current material(redeclare
-                  Modelica.Blocks.Sources.Ramp spec(height=1*U.A,duration=50)))))
+            'e-'(redeclare Face.Material.Current normal(redeclare
+                  Modelica.Blocks.Sources.Ramp spec(height=U.A,duration=50)))))
           annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={30,0})));
-        FCSys.BCs.FaceBus.SubregionClosed anSource[n_x_an, n_z](each final axis
-            =FCSys.BaseClasses.Axis.y, each gas(inclH2=true, inclH2O=true))
-          annotation (Placement(transformation(
+        FaceBus.SubregionClosed anSource[n_x_an, n_z](each final axis=FCSys.BaseClasses.Axis.y,
+            each gas(inclH2=true, inclH2O=true)) annotation (Placement(
+              transformation(
               extent={{-10,-10},{10,10}},
               rotation=180,
               origin={-20,-30})));
-        FCSys.BCs.FaceBus.SubregionClosed anSink[n_x_an, n_z](each final axis=
-              FCSys.BaseClasses.Axis.y, each gas(inclH2=true, inclH2O=true))
-          annotation (Placement(transformation(
+        FaceBus.SubregionClosed anSink[n_x_an, n_z](each final axis=FCSys.BaseClasses.Axis.y,
+            each gas(inclH2=true, inclH2O=true)) annotation (Placement(
+              transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-20,30})));
-        FCSys.BCs.FaceBus.SubregionClosed caSource[n_x_ca, n_z](each final axis
-            =FCSys.BaseClasses.Axis.y, each gas(
+        FaceBus.SubregionClosed caSource[n_x_ca, n_z](each final axis=FCSys.BaseClasses.Axis.y,
+            each gas(
             inclH2O=true,
             inclN2=true,
             inclO2=true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=180,
               origin={20,-30})));
-        FCSys.BCs.FaceBus.SubregionClosed caSink[n_x_ca, n_z](each final axis=
-              FCSys.BaseClasses.Axis.y, each gas(
+        FaceBus.SubregionClosed caSink[n_x_ca, n_z](each final axis=FCSys.BaseClasses.Axis.y,
+            each gas(
             inclH2O=true,
             inclN2=true,
             inclO2=true)) annotation (Placement(transformation(
@@ -2665,7 +2657,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
       final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
         "Number of components of linear momentum" annotation (Evaluate=true);
 
-      FCSys.Connectors.RealInputInternal u_material(final unit=if material ==
+      FCSys.Connectors.RealInputInternal u_normal(final unit=if material ==
             BCTypeMaterial.PotentialPerTemperature then "1" else "N/T") if not
         internalMaterial "Material signal" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
@@ -2771,7 +2763,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
       chemical.hbar = u_fluid_int;
       //  end if;
 
-      connect(u.material, u_material) annotation (Line(
+      connect(u.normal, u_material) annotation (Line(
           points={{5.55112e-16,60},{5.55112e-16,40},{-70,40},{-70,30}},
           color={0,0,127},
           thickness=0.5,
@@ -3058,7 +3050,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
         extends BaseClasses.PartialBC(
           final bCType=BaseClasses.BCType.Pressure,
           u(final unit="m/(l.T2)"),
-          spec(k(start=1*U.atm)));
+          spec(k(start=U.atm)));
 
       equation
         inert.p = u_final;
@@ -3070,7 +3062,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
         extends BaseClasses.PartialBC(
           final bCType=BaseClasses.BCType.Volume,
           u(final unit="l3"),
-          spec(k(start=1*U.cm^3)));
+          spec(k(start=U.cc)));
       equation
         inert.V = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
@@ -3689,7 +3681,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             transformation(extent={{-10,-10},{10,10}})));
 
       FCSys.Connectors.FaceBus face
-        "Connector for material, linear momentum, and heat of multiple species"
+        "Connector for linear momentum and heat of multiple species"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
       FCSys.Connectors.RealInputBus u "Bus of inputs to specify conditions"
@@ -3766,59 +3758,67 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
       extends FaceBus.Subregion(
         gas(
           H2(
-            redeclare replaceable Face.Material.Current material,
-            redeclare replaceable Face.Mechanical.Force mechanicalX,
-            redeclare replaceable Face.Mechanical.Force mechanicalY,
-            redeclare replaceable Face.Mechanical.Force mechanicalZ,
-            redeclare replaceable Face.Thermal.HeatFlowRate thermal),
+            redeclare replaceable Face.Material.Current normal(spec(k=0)),
+            redeclare replaceable Face.Mechanical.Force transverseX,
+            redeclare replaceable Face.Mechanical.Force transverseY,
+            redeclare replaceable Face.Mechanical.Force transverseZ,
+            redeclare replaceable Face.Thermal.HeatFlowRate thermal(spec(k=0))),
+
           H2O(
-            redeclare replaceable Face.Material.Current material,
-            redeclare replaceable Face.Mechanical.Force mechanicalX,
-            redeclare replaceable Face.Mechanical.Force mechanicalY,
-            redeclare replaceable Face.Mechanical.Force mechanicalZ,
-            redeclare replaceable Face.Thermal.HeatFlowRate thermal),
+            redeclare replaceable Face.Material.Current normal(spec(k=0)),
+            redeclare replaceable Face.Mechanical.Force transverseX,
+            redeclare replaceable Face.Mechanical.Force transverseY,
+            redeclare replaceable Face.Mechanical.Force transverseZ,
+            redeclare replaceable Face.Thermal.HeatFlowRate thermal(spec(k=0))),
+
           N2(
-            redeclare replaceable Face.Material.Current material,
-            redeclare replaceable Face.Mechanical.Force mechanicalX,
-            redeclare replaceable Face.Mechanical.Force mechanicalY,
-            redeclare replaceable Face.Mechanical.Force mechanicalZ,
-            redeclare replaceable Face.Thermal.HeatFlowRate thermal),
+            redeclare replaceable Face.Material.Current normal(spec(k=0)),
+            redeclare replaceable Face.Mechanical.Force transverseX,
+            redeclare replaceable Face.Mechanical.Force transverseY,
+            redeclare replaceable Face.Mechanical.Force transverseZ,
+            redeclare replaceable Face.Thermal.HeatFlowRate thermal(spec(k=0))),
+
           O2(
-            redeclare replaceable Face.Material.Current material,
-            redeclare replaceable Face.Mechanical.Force mechanicalX,
-            redeclare replaceable Face.Mechanical.Force mechanicalY,
-            redeclare replaceable Face.Mechanical.Force mechanicalZ,
-            redeclare replaceable Face.Thermal.HeatFlowRate thermal)),
+            redeclare replaceable Face.Material.Current normal(spec(k=0)),
+            redeclare replaceable Face.Mechanical.Force transverseX,
+            redeclare replaceable Face.Mechanical.Force transverseY,
+            redeclare replaceable Face.Mechanical.Force transverseZ,
+            redeclare replaceable Face.Thermal.HeatFlowRate thermal(spec(k=0)))),
+
         graphite(C(
-            redeclare replaceable Face.Material.Current material,
-            redeclare replaceable Face.Mechanical.Force mechanicalX,
-            redeclare replaceable Face.Mechanical.Force mechanicalY,
-            redeclare replaceable Face.Mechanical.Force mechanicalZ,
-            redeclare replaceable Face.Thermal.HeatFlowRate thermal), 'e-'(
-            redeclare replaceable Face.Material.Current material,
-            redeclare replaceable Face.Mechanical.Force mechanicalX,
-            redeclare replaceable Face.Mechanical.Force mechanicalY,
-            redeclare replaceable Face.Mechanical.Force mechanicalZ,
-            redeclare replaceable Face.Thermal.HeatFlowRate thermal)),
+            redeclare replaceable Face.Material.Current normal(spec(k=0)),
+            redeclare replaceable Face.Mechanical.Force transverseX,
+            redeclare replaceable Face.Mechanical.Force transverseY,
+            redeclare replaceable Face.Mechanical.Force transverseZ,
+            redeclare replaceable Face.Thermal.HeatFlowRate thermal(spec(k=0))),
+            'e-'(
+            redeclare replaceable Face.Material.Current normal(spec(k=0)),
+            redeclare replaceable Face.Mechanical.Force transverseX,
+            redeclare replaceable Face.Mechanical.Force transverseY,
+            redeclare replaceable Face.Mechanical.Force transverseZ,
+            redeclare replaceable Face.Thermal.HeatFlowRate thermal(spec(k=0)))),
+
         ionomer(
           C19HF37O5S(
-            redeclare replaceable Face.Material.Current material,
-            redeclare replaceable Face.Mechanical.Force mechanicalX,
-            redeclare replaceable Face.Mechanical.Force mechanicalY,
-            redeclare replaceable Face.Mechanical.Force mechanicalZ,
-            redeclare replaceable Face.Thermal.HeatFlowRate thermal),
+            redeclare replaceable Face.Material.Current normal(spec(k=0)),
+            redeclare replaceable Face.Mechanical.Force transverseX,
+            redeclare replaceable Face.Mechanical.Force transverseY,
+            redeclare replaceable Face.Mechanical.Force transverseZ,
+            redeclare replaceable Face.Thermal.HeatFlowRate thermal(spec(k=0))),
+
           H2O(
-            redeclare replaceable Face.Material.Current material,
-            redeclare replaceable Face.Mechanical.Force mechanicalX,
-            redeclare replaceable Face.Mechanical.Force mechanicalY,
-            redeclare replaceable Face.Mechanical.Force mechanicalZ,
-            redeclare replaceable Face.Thermal.HeatFlowRate thermal),
+            redeclare replaceable Face.Material.Current normal(spec(k=0)),
+            redeclare replaceable Face.Mechanical.Force transverseX,
+            redeclare replaceable Face.Mechanical.Force transverseY,
+            redeclare replaceable Face.Mechanical.Force transverseZ,
+            redeclare replaceable Face.Thermal.HeatFlowRate thermal(spec(k=0))),
+
           'H+'(
-            redeclare replaceable Face.Material.Current material,
-            redeclare replaceable Face.Mechanical.Force mechanicalX,
-            redeclare replaceable Face.Mechanical.Force mechanicalY,
-            redeclare replaceable Face.Mechanical.Force mechanicalZ,
-            redeclare replaceable Face.Thermal.HeatFlowRate thermal)));
+            redeclare replaceable Face.Material.Current normal(spec(k=0)),
+            redeclare replaceable Face.Mechanical.Force transverseX,
+            redeclare replaceable Face.Mechanical.Force transverseY,
+            redeclare replaceable Face.Mechanical.Force transverseZ,
+            redeclare replaceable Face.Thermal.HeatFlowRate thermal(spec(k=0)))));
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
@@ -3828,16 +3828,16 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
       "<html>BC for a face of a <a href=\"modelica://FCSys.Subregions.Subregion\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with efforts except closed by default</html>"
       extends FaceBus.Subregion(
         gas(
-          H2(redeclare replaceable Face.Material.Current material),
-          H2O(redeclare replaceable Face.Material.Current material),
-          N2(redeclare replaceable Face.Material.Current material),
-          O2(redeclare replaceable Face.Material.Current material)),
-        graphite(C(redeclare replaceable Face.Material.Current material), 'e-'(
-              redeclare replaceable Face.Material.Current material)),
+          H2(isobaric=true),
+          H2O(isobaric=true),
+          N2(isobaric=true),
+          O2(isobaric=true)),
+        graphite(C(isobaric=true), 'e-'(thermoOpt=
+                ThermoOpt.ClosedDiabatic)),
         ionomer(
-          C19HF37O5S(redeclare replaceable Face.Material.Current material),
-          H2O(redeclare replaceable Face.Material.Current material),
-          'H+'(redeclare replaceable Face.Material.Current material)));
+          C19HF37O5S(isobaric=true),
+          H2O(isobaric=true),
+          'H+'(isobaric=true)));
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
@@ -3847,48 +3847,20 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
       "<html>BC for a face of a <a href=\"modelica://FCSys.Subregions.Subregion\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with flows except zero shear velocities by default</html>"
       extends FaceBus.Subregion(
         gas(
-          H2(redeclare replaceable Face.Material.Current material, redeclare
-              replaceable Face.Thermal.HeatFlowRate thermal),
-          H2O(redeclare replaceable Face.Material.Current material, redeclare
-              replaceable Face.Thermal.HeatFlowRate thermal),
-          N2(redeclare replaceable Face.Material.Current material, redeclare
-              replaceable Face.Thermal.HeatFlowRate thermal),
-          O2(redeclare replaceable Face.Material.Current material, redeclare
-              replaceable Face.Thermal.HeatFlowRate thermal)),
-        graphite(C(redeclare replaceable Face.Material.Current material,
-              redeclare replaceable Face.Thermal.HeatFlowRate thermal), 'e-'(
-              redeclare replaceable Face.Material.Current material, redeclare
-              replaceable Face.Thermal.HeatFlowRate thermal)),
+          H2(isobaric=true),
+          H2O(isobaric=true),
+          N2(isobaric=true),
+          O2(isobaric=true)),
+        graphite(C(isobaric=true), 'e-'(thermoOpt=
+                ThermoOpt.ClosedAdiabatic)),
         ionomer(
-          C19HF37O5S(redeclare replaceable Face.Material.Current material,
-              redeclare replaceable Face.Thermal.HeatFlowRate thermal),
-          H2O(redeclare replaceable Face.Material.Current material, redeclare
-              replaceable Face.Thermal.HeatFlowRate thermal),
-          'H+'(redeclare replaceable Face.Material.Current material, redeclare
-              replaceable Face.Thermal.HeatFlowRate thermal)));
+          C19HF37O5S(isobaric=true),
+          H2O(isobaric=true),
+          'H+'(isobaric=true)));
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
     end SubregionClosedAdiabatic;
-
-    model SubregionAdiabatic
-      "<html>BC for a face of a <a href=\"modelica://FCSys.Subregions.Subregion\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with efforts except adiabatic by default</html>"
-      extends FaceBus.Subregion(
-        gas(
-          H2(redeclare replaceable Face.Thermal.HeatFlowRate thermal),
-          H2O(redeclare replaceable Face.Thermal.HeatFlowRate thermal),
-          N2(redeclare replaceable Face.Thermal.HeatFlowRate thermal),
-          O2(redeclare replaceable Face.Thermal.HeatFlowRate thermal)),
-        graphite(C(redeclare replaceable Face.Thermal.HeatFlowRate thermal),
-            'e-'(redeclare replaceable Face.Thermal.HeatFlowRate thermal)),
-        ionomer(
-          C19HF37O5S(redeclare replaceable Face.Thermal.HeatFlowRate thermal),
-          H2O(redeclare replaceable Face.Thermal.HeatFlowRate thermal),
-          'H+'(redeclare replaceable Face.Thermal.HeatFlowRate thermal)));
-
-      annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
-            "subregionFaceBC");
-    end SubregionAdiabatic;
 
     package Phases
       "<html>BCs for the <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Phase\">Phase</a> model (multi-species)</html>"
@@ -3908,8 +3880,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Face.Species H2(final axis=axis) if inclH2 "Model"
-          annotation (Dialog(
+        Face.Species H2(final axis=axis) if inclH2 "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclH2), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -3923,8 +3894,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Face.Species H2O(final axis=axis) if inclH2O "Model"
-          annotation (Dialog(
+        Face.Species H2O(final axis=axis) if inclH2O "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -3938,8 +3908,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Face.Species N2(final axis=axis) if inclN2 "Model"
-          annotation (Dialog(
+        Face.Species N2(final axis=axis) if inclN2 "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclN2), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -3953,30 +3922,29 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Face.Species O2(final axis=axis) if inclO2 "Model"
-          annotation (Dialog(
+        Face.Species O2(final axis=axis) if inclO2 "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclO2), Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
         // H2
-        connect(H2.face.material, face.H2.material) annotation (Line(
+        connect(H2.face.normal, face.H2.normal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.face.mechanicalX, face.H2.mechanicalX) annotation (Line(
+        connect(H2.face.transverseX, face.H2.transverseX) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.face.mechanicalY, face.H2.mechanicalY) annotation (Line(
+        connect(H2.face.transverseY, face.H2.transverseY) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2.face.mechanicalZ, face.H2.mechanicalZ) annotation (Line(
+        connect(H2.face.transverseZ, face.H2.transverseZ) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3994,22 +3962,22 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             smooth=Smooth.None));
 
         // H2O
-        connect(H2O.face.material, face.H2O.material) annotation (Line(
+        connect(H2O.face.normal, face.H2O.normal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.face.mechanicalX, face.H2O.mechanicalX) annotation (Line(
+        connect(H2O.face.transverseX, face.H2O.transverseX) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.face.mechanicalY, face.H2O.mechanicalY) annotation (Line(
+        connect(H2O.face.transverseY, face.H2O.transverseY) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.face.mechanicalZ, face.H2O.mechanicalZ) annotation (Line(
+        connect(H2O.face.transverseZ, face.H2O.transverseZ) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4027,22 +3995,22 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             smooth=Smooth.None));
 
         // N2
-        connect(N2.face.material, face.N2.material) annotation (Line(
+        connect(N2.face.normal, face.N2.normal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.face.mechanicalX, face.N2.mechanicalX) annotation (Line(
+        connect(N2.face.transverseX, face.N2.transverseX) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.face.mechanicalY, face.N2.mechanicalY) annotation (Line(
+        connect(N2.face.transverseY, face.N2.transverseY) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(N2.face.mechanicalZ, face.N2.mechanicalZ) annotation (Line(
+        connect(N2.face.transverseZ, face.N2.transverseZ) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4060,22 +4028,22 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             smooth=Smooth.None));
 
         // O2
-        connect(O2.face.material, face.O2.material) annotation (Line(
+        connect(O2.face.normal, face.O2.normal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.face.mechanicalX, face.O2.mechanicalX) annotation (Line(
+        connect(O2.face.transverseX, face.O2.transverseX) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.face.mechanicalY, face.O2.mechanicalY) annotation (Line(
+        connect(O2.face.transverseY, face.O2.transverseY) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(O2.face.mechanicalZ, face.O2.mechanicalZ) annotation (Line(
+        connect(O2.face.transverseZ, face.O2.transverseZ) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4108,8 +4076,8 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Face.Species C(final axis=axis,thermoOpt=ThermoOpt.ClosedDiabatic)
-          if inclC "Model" annotation (Dialog(
+        Face.Species C(final axis=axis, isobaric=true) if
+          inclC "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclC), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -4123,30 +4091,30 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Face.Species 'e-'(final axis=axis) if 'incle-' "Model"
-          annotation (Dialog(
+        Face.Species 'e-'(final axis=axis) if 'incle-' "Model" annotation (
+            Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable='incle-'), Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
         // C
-        connect(C.face.material, face.C.material) annotation (Line(
+        connect(C.face.normal, face.C.normal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.face.mechanicalX, face.C.mechanicalX) annotation (Line(
+        connect(C.face.transverseX, face.C.transverseX) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.face.mechanicalY, face.C.mechanicalY) annotation (Line(
+        connect(C.face.transverseY, face.C.transverseY) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.face.mechanicalZ, face.C.mechanicalZ) annotation (Line(
+        connect(C.face.transverseZ, face.C.transverseZ) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4164,22 +4132,22 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             smooth=Smooth.None));
 
         // e-
-        connect('e-'.face.material, face.'e-'.material) annotation (Line(
+        connect('e-'.face.normal, face.'e-'.normal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.face.mechanicalX, face.'e-'.mechanicalX) annotation (Line(
+        connect('e-'.face.transverseX, face.'e-'.transverseX) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.face.mechanicalY, face.'e-'.mechanicalY) annotation (Line(
+        connect('e-'.face.transverseY, face.'e-'.transverseY) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('e-'.face.mechanicalZ, face.'e-'.mechanicalZ) annotation (Line(
+        connect('e-'.face.transverseZ, face.'e-'.transverseZ) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4212,7 +4180,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Face.Species C19HF37O5S(final axis=axis,thermoOpt=ThermoOpt.ClosedDiabatic)
+        Face.Species C19HF37O5S(final axis=axis,isobaric=true)
           if inclC19HF37O5S "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -4228,8 +4196,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Face.Species H2O(final axis=axis) if inclH2O "Model"
-          annotation (Dialog(
+        Face.Species H2O(final axis=axis) if inclH2O "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -4243,33 +4210,33 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Face.Species 'H+'(final axis=axis) if 'inclH+' "Model"
-          annotation (Dialog(
+        Face.Species 'H+'(final axis=axis) if 'inclH+' "Model" annotation (
+            Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable='inclH+'), Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
         // C19HF37O5S
-        connect(C19HF37O5S.face.material, face.C19HF37O5S.material) annotation
-          (Line(
+        connect(C19HF37O5S.face.normal, face.C19HF37O5S.normal) annotation (
+            Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.face.mechanicalX, face.C19HF37O5S.mechanicalX)
+        connect(C19HF37O5S.face.transverseX, face.C19HF37O5S.transverseX)
           annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.face.mechanicalY, face.C19HF37O5S.mechanicalY)
+        connect(C19HF37O5S.face.transverseY, face.C19HF37O5S.transverseY)
           annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.face.mechanicalZ, face.C19HF37O5S.mechanicalZ)
+        connect(C19HF37O5S.face.transverseZ, face.C19HF37O5S.transverseZ)
           annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
@@ -4289,22 +4256,22 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             smooth=Smooth.None));
 
         // H+
-        connect('H+'.face.material, face.'H+'.material) annotation (Line(
+        connect('H+'.face.normal, face.'H+'.normal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.face.mechanicalX, face.'H+'.mechanicalX) annotation (Line(
+        connect('H+'.face.transverseX, face.'H+'.transverseX) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.face.mechanicalY, face.'H+'.mechanicalY) annotation (Line(
+        connect('H+'.face.transverseY, face.'H+'.transverseY) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect('H+'.face.mechanicalZ, face.'H+'.mechanicalZ) annotation (Line(
+        connect('H+'.face.transverseZ, face.'H+'.transverseZ) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4336,30 +4303,29 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.Face.Species H2O(final axis=axis) if inclH2O "Model"
-          annotation (Dialog(
+        Face.Species H2O(final axis=axis) if inclH2O "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
         // H2O
-        connect(H2O.face.material, face.H2O.material) annotation (Line(
+        connect(H2O.face.normal, face.H2O.normal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.face.mechanicalX, face.H2O.mechanicalX) annotation (Line(
+        connect(H2O.face.transverseX, face.H2O.transverseX) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.face.mechanicalY, face.H2O.mechanicalY) annotation (Line(
+        connect(H2O.face.transverseY, face.H2O.transverseY) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(H2O.face.mechanicalZ, face.H2O.mechanicalZ) annotation (Line(
+        connect(H2O.face.transverseZ, face.H2O.transverseZ) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4385,7 +4351,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
           parameter Axis axis "Axis material to the face";
 
           FCSys.Connectors.FaceBus face
-            "Multi-species connector for material, linear momentum, and heat"
+            "Multi-species connector for linear momentum and heat"
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
           FCSys.Connectors.RealInputBus u "Bus of inputs to specify conditions"
             annotation (Placement(transformation(
@@ -4439,7 +4405,7 @@ boundary condition</a> model.
       // option, e.g.,
       //     enable=axis <> Axis.x.
       // Therefore, the values of the enumerations are specified numerically.
-      replaceable Mechanical.Velocity mechanicalX(spec(k=0)) if axis <> Axis.x
+      replaceable Mechanical.Velocity transverseX(spec(k=0)) if axis <> Axis.x
          and not inviscidX constrainedby Mechanical.BaseClasses.PartialBC
         "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
@@ -4458,7 +4424,7 @@ boundary condition</a> model.
           group="Y-axis linear momentum",
           enable=axis <> 2,
           __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalY(spec(k=0)) if axis <> Axis.y
+      replaceable Mechanical.Velocity transverseY(spec(k=0)) if axis <> Axis.y
          and not inviscidY constrainedby Mechanical.BaseClasses.PartialBC
         "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
@@ -4477,7 +4443,7 @@ boundary condition</a> model.
           group="Z-axis linear momentum",
           enable=axis <> 3,
           __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalZ(spec(k=0)) if axis <> Axis.z
+      replaceable Mechanical.Velocity transverseZ(spec(k=0)) if axis <> Axis.z
          and not inviscidZ constrainedby Mechanical.BaseClasses.PartialBC
         "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
@@ -4488,29 +4454,29 @@ boundary condition</a> model.
         Placement(transformation(extent={{20,-14},{40,6}})));
 
       FCSys.Connectors.Face face(
-        final thermoOpt=thermoOpt,
+        final isobaric=isobaric,
         final inviscidX=inviscidX,
         final inviscidY=inviscidY,
         final inviscidZ=inviscidZ)
-        "Single-species connector for material, linear momentum, and heat"
-        annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
+        "Single-species connector for  linear momentum and heat" annotation (
+          Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
 
     equation
       // Material
-      connect(material.material, face.material) annotation (Line(
+      connect(material.normal, face.normal) annotation (Line(
           points={{-60,-8},{-60,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
 
       // X-axis linear momentum
-      connect(mechanicalX.mechanical, face.mechanicalX) annotation (Line(
+      connect(transverseX.mechanical, face.transverseX) annotation (Line(
           points={{-30,-8},{-30,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(u.mechanicalX, mechanicalX.u) annotation (Line(
+      connect(u.transverseX, transverseX.u) annotation (Line(
           points={{5.55112e-16,40},{5.55112e-16,20},{-30,20},{-30,6.66134e-16}},
 
           color={0,0,127},
@@ -4520,14 +4486,14 @@ boundary condition</a> model.
           extent={{-6,3},{-6,3}}));
 
       // Y-axis linear momentum
-      connect(mechanicalY.mechanical, face.mechanicalY) annotation (Line(
+      connect(transverseY.mechanical, face.transverseY) annotation (Line(
           points={{6.10623e-16,-8},{6.10623e-16,-20},{0,-20},{0,-40},{
               5.55112e-16,-40}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
 
-      connect(u.mechanicalY, mechanicalY.u) annotation (Line(
+      connect(u.transverseY, transverseY.u) annotation (Line(
           points={{5.55112e-16,40},{5.55112e-16,20},{6.10623e-16,20},{
               6.10623e-16,6.66134e-16}},
           color={0,0,127},
@@ -4537,12 +4503,12 @@ boundary condition</a> model.
           extent={{-6,3},{-6,3}}));
 
       // Z-axis linear momentum
-      connect(mechanicalZ.mechanical, face.mechanicalZ) annotation (Line(
+      connect(transverseZ.mechanical, face.transverseZ) annotation (Line(
           points={{30,-8},{30,-20},{5.55112e-16,-20},{5.55112e-16,-40}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(u.mechanicalZ, mechanicalZ.u) annotation (Line(
+      connect(u.transverseZ, transverseZ.u) annotation (Line(
           points={{5.55112e-16,40},{5.55112e-16,20},{30,20},{30,6.66134e-16}},
           color={0,0,127},
           smooth=Smooth.None), Text(
@@ -4594,8 +4560,7 @@ boundary condition</a> model.
           // Note:  This is included so that the type of BC is recorded with the
           // results.
 
-          FCSys.Connectors.Material material
-            "Material subconnector for the face"
+          FCSys.Connectors.Normal material "Material subconnector for the face"
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
           annotation (defaultComponentName="material");
         end PartialBC;
@@ -4638,7 +4603,7 @@ boundary condition</a> model.
           // Note:  This is included so that the type of BC is recorded with the
           // results.
 
-          FCSys.Connectors.MechanicalTransport mechanical
+          FCSys.Connectors.Transverse mechanical
             "Mechanical subconnector for the face"
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
           annotation (defaultComponentName="mechanicalBC");
@@ -4703,15 +4668,15 @@ boundary condition</a> model.
         "<html>Partial BC for a face of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
         extends FCSys.BaseClasses.Icons.BCs.Single;
 
-        parameter ThermoOpt thermoOpt=ThermoOpt.OpenDiabatic
+        parameter ThermoOpt isobaric=false
           "Options for material and thermal subconnectors" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Assumptions",compact=true));
 
         // Material
-        replaceable Material.Density material(spec(k=4*U.C/U.cm^3)) if
-          thermoOpt == ThermoOpt.OpenDiabatic constrainedby
+        replaceable Material.Density normal(spec(k(start=U.atm/(298.15*U.K))))
+          if not isobaric constrainedby
           Material.BaseClasses.PartialBC "Type of condition" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
@@ -4719,9 +4684,17 @@ boundary condition</a> model.
             enable=thermoOpt == 3,
             __Dymola_descriptionLabel=true),
           Placement(transformation(extent={{-70,-14},{-50,6}})));
+        // Note:  Dymola 7.4 doesn't recognize enumerations in the dialog enable
+        // option, e.g.,
+        //     enable=thermoOpt <> ThermoOpt.ClosedAdiabatic.
+        // Therefore, the values of the enumerations are specified numerically.
+        // Note:  In Dymola 7.4, the value of k must be specified here instead
+        // of at the lower level (e.g., Material.Density) so that the spec
+        // subcomponent can be replaced by blocks that do not contain the
+        // parameter k.
 
         // Heat
-        replaceable Thermal.Temperature thermal(spec(k=298.15*U.K)) if
+        replaceable Thermal.Temperature thermal(spec(k(start=298.15*U.K))) if
           thermoOpt <> ThermoOpt.ClosedAdiabatic constrainedby
           Thermal.BaseClasses.PartialBC "Type of condition" annotation (
           __Dymola_choicesFromPackage=true,
@@ -4730,11 +4703,6 @@ boundary condition</a> model.
             enable=thermoOpt <> 1,
             __Dymola_descriptionLabel=true),
           Placement(transformation(extent={{50,-14},{70,6}})));
-        // Note:  Dymola 7.4 doesn't recognize enumerations in the dialog enable
-        // option, e.g.,
-        //     enable=thermoOpt <> ThermoOpt.ClosedAdiabatic.
-        // Therefore, the values of the enumerations are specified numerically.
-
         FCSys.Connectors.RealInputBus u "Input bus for external signal sources"
           annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
@@ -4746,7 +4714,7 @@ boundary condition</a> model.
 
       equation
         // Material
-        connect(u.material, material.u) annotation (Line(
+        connect(u.normal, material.u) annotation (Line(
             points={{5.55112e-16,40},{5.55112e-16,20},{-60,20},{-60,6.66134e-16}},
 
             color={0,0,127},
@@ -4824,19 +4792,17 @@ boundary condition</a> model.
 
       parameter Axis axis=Axis.x "Axis normal to the face";
 
-      replaceable FCSys.BCs.FaceBusDifferential.Phases.Gas gas(final axis=axis)
-        "Gas" annotation (Dialog(group="Phases", __Dymola_descriptionLabel=true),
+      replaceable Phases.Gas gas(final axis=axis) "Gas" annotation (Dialog(
+            group="Phases", __Dymola_descriptionLabel=true), Placement(
+            transformation(extent={{-10,-10},{10,10}})));
+
+      replaceable Phases.Graphite graphite(final axis=axis) "Graphite"
+        annotation (Dialog(group="Phases", __Dymola_descriptionLabel=true),
           Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      replaceable FCSys.BCs.FaceBusDifferential.Phases.Graphite graphite(final
-          axis=axis) "Graphite" annotation (Dialog(group="Phases",
-            __Dymola_descriptionLabel=true), Placement(transformation(extent={{
-                -10,-10},{10,10}})));
-
-      replaceable FCSys.BCs.FaceBusDifferential.Phases.Ionomer ionomer(final
-          axis=axis) "Ionomer" annotation (Dialog(group="Phases",
-            __Dymola_descriptionLabel=true), Placement(transformation(extent={{
-                -10,-10},{10,10}})));
+      replaceable Phases.Ionomer ionomer(final axis=axis) "Ionomer" annotation
+        (Dialog(group="Phases", __Dymola_descriptionLabel=true), Placement(
+            transformation(extent={{-10,-10},{10,10}})));
 
       FCSys.Connectors.FaceBus negative annotation (Placement(transformation(
               extent={{-110,-10},{-90,10}}), iconTransformation(extent={{-110,-10},
@@ -4916,95 +4882,95 @@ boundary condition</a> model.
 
     model SubregionFlow
       "<html>BC for faces of a <a href=\"modelica://FCSys.Regions.Region\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with flows by default</html>"
-      extends FCSys.BCs.FaceBusDifferential.Subregion(
+      extends Subregion(
         gas(
           H2(
             redeclare replaceable FaceDifferential.Material.Current material,
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalX,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseX,
 
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalY,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseY,
 
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalZ,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseZ,
 
             redeclare replaceable FaceDifferential.Thermal.HeatFlowRate thermal),
 
           H2O(
             redeclare replaceable FaceDifferential.Material.Current material,
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalX,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseX,
 
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalY,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseY,
 
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalZ,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseZ,
 
             redeclare replaceable FaceDifferential.Thermal.HeatFlowRate thermal),
 
           N2(
             redeclare replaceable FaceDifferential.Material.Current material,
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalX,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseX,
 
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalY,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseY,
 
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalZ,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseZ,
 
             redeclare replaceable FaceDifferential.Thermal.HeatFlowRate thermal),
 
           O2(
             redeclare replaceable FaceDifferential.Material.Current material,
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalX,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseX,
 
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalY,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseY,
 
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalZ,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseZ,
 
             redeclare replaceable FaceDifferential.Thermal.HeatFlowRate thermal)),
 
         graphite(C(
             redeclare replaceable FaceDifferential.Material.Current material,
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalX,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseX,
 
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalY,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseY,
 
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalZ,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseZ,
 
             redeclare replaceable FaceDifferential.Thermal.HeatFlowRate thermal),
             'e-'(
             redeclare replaceable FaceDifferential.Material.Current material,
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalX,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseX,
 
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalY,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseY,
 
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalZ,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseZ,
 
             redeclare replaceable FaceDifferential.Thermal.HeatFlowRate thermal)),
 
         ionomer(
           C19HF37O5S(
             redeclare replaceable FaceDifferential.Material.Current material,
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalX,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseX,
 
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalY,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseY,
 
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalZ,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseZ,
 
             redeclare replaceable FaceDifferential.Thermal.HeatFlowRate thermal),
 
           H2O(
             redeclare replaceable FaceDifferential.Material.Current material,
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalX,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseX,
 
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalY,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseY,
 
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalZ,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseZ,
 
             redeclare replaceable FaceDifferential.Thermal.HeatFlowRate thermal),
 
           'H+'(
             redeclare replaceable FaceDifferential.Material.Current material,
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalX,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseX,
 
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalY,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseY,
 
-            redeclare replaceable FaceDifferential.Mechanical.Force mechanicalZ,
+            redeclare replaceable FaceDifferential.Mechanical.Force transverseZ,
 
             redeclare replaceable FaceDifferential.Thermal.HeatFlowRate thermal)));
 
@@ -5014,25 +4980,18 @@ boundary condition</a> model.
 
     model SubregionClosed
       "<html>BC for faces of a <a href=\"modelica://FCSys.Regions.Region\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with efforts except closed by default</html>"
-      extends FCSys.BCs.FaceBusDifferential.Subregion(
+      extends Subregion(
         gas(
-          H2(redeclare replaceable FaceDifferential.Material.Current material),
-
-          H2O(redeclare replaceable FaceDifferential.Material.Current material),
-
-          N2(redeclare replaceable FaceDifferential.Material.Current material),
-
-          O2(redeclare replaceable FaceDifferential.Material.Current material)),
-
-        graphite(C(redeclare replaceable FaceDifferential.Material.Current
-              material), 'e-'(redeclare replaceable
-              FaceDifferential.Material.Current material)),
+          H2(isobaric=true),
+          H2O(isobaric=true),
+          N2(isobaric=true),
+          O2(isobaric=true)),
+        graphite(C(isobaric=true), 'e-'(thermoOpt=
+                ThermoOpt.ClosedDiabatic)),
         ionomer(
-          C19HF37O5S(redeclare replaceable FaceDifferential.Material.Current
-              material),
-          H2O(redeclare replaceable FaceDifferential.Material.Current material),
-
-          'H+'(redeclare replaceable FaceDifferential.Material.Current material)));
+          C19HF37O5S(isobaric=true),
+          H2O(isobaric=true),
+          'H+'(isobaric=true)));
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
@@ -5040,67 +4999,22 @@ boundary condition</a> model.
 
     model SubregionClosedAdiabatic
       "<html>BC for faces of a <a href=\"modelica://FCSys.Regions.Region\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with flows except zero shear velocities by default</html>"
-      extends FCSys.BCs.FaceBusDifferential.Subregion(
+      extends Subregion(
         gas(
-          H2(redeclare replaceable FaceDifferential.Material.Current material,
-              redeclare replaceable FaceDifferential.Thermal.HeatFlowRate
-              thermal),
-          H2O(redeclare replaceable FaceDifferential.Material.Current material,
-              redeclare replaceable FaceDifferential.Thermal.HeatFlowRate
-              thermal),
-          N2(redeclare replaceable FaceDifferential.Material.Current material,
-              redeclare replaceable FaceDifferential.Thermal.HeatFlowRate
-              thermal),
-          O2(redeclare replaceable FaceDifferential.Material.Current material,
-              redeclare replaceable FaceDifferential.Thermal.HeatFlowRate
-              thermal)),
-        graphite(C(redeclare replaceable FaceDifferential.Material.Current
-              material, redeclare replaceable
-              FaceDifferential.Thermal.HeatFlowRate thermal), 'e-'(redeclare
-              replaceable FaceDifferential.Material.Current material,
-              redeclare replaceable FaceDifferential.Thermal.HeatFlowRate
-              thermal)),
+          H2(isobaric=true),
+          H2O(isobaric=true),
+          N2(isobaric=true),
+          O2(isobaric=true)),
+        graphite(C(isobaric=true), 'e-'(thermoOpt=
+                ThermoOpt.ClosedAdiabatic)),
         ionomer(
-          C19HF37O5S(redeclare replaceable FaceDifferential.Material.Current
-              material, redeclare replaceable
-              FaceDifferential.Thermal.HeatFlowRate thermal),
-          H2O(redeclare replaceable FaceDifferential.Material.Current material,
-              redeclare replaceable FaceDifferential.Thermal.HeatFlowRate
-              thermal),
-          'H+'(redeclare replaceable FaceDifferential.Material.Current material,
-              redeclare replaceable FaceDifferential.Thermal.HeatFlowRate
-              thermal)));
+          C19HF37O5S(isobaric=true),
+          H2O(isobaric=true),
+          'H+'(isobaric=true)));
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
     end SubregionClosedAdiabatic;
-
-    model SubregionAdiabatic
-      "<html>BC for faces of a <a href=\"modelica://FCSys.Regions.Region\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with efforts except adiabatic by default</html>"
-      extends FCSys.BCs.FaceBusDifferential.Subregion(
-        gas(
-          H2(redeclare replaceable FaceDifferential.Thermal.HeatFlowRate
-              thermal),
-          H2O(redeclare replaceable FaceDifferential.Thermal.HeatFlowRate
-              thermal),
-          N2(redeclare replaceable FaceDifferential.Thermal.HeatFlowRate
-              thermal),
-          O2(redeclare replaceable FaceDifferential.Thermal.HeatFlowRate
-              thermal)),
-        graphite(C(redeclare replaceable FaceDifferential.Thermal.HeatFlowRate
-              thermal), 'e-'(redeclare replaceable
-              FaceDifferential.Thermal.HeatFlowRate thermal)),
-        ionomer(
-          C19HF37O5S(redeclare replaceable
-              FaceDifferential.Thermal.HeatFlowRate thermal),
-          H2O(redeclare replaceable FaceDifferential.Thermal.HeatFlowRate
-              thermal),
-          'H+'(redeclare replaceable FaceDifferential.Thermal.HeatFlowRate
-              thermal)));
-
-      annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
-            "subregionFaceBC");
-    end SubregionAdiabatic;
 
     package Phases
       "<html>BCs for the <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Phase\">Phase</a> model (multi-species)</html>"
@@ -5108,7 +5022,7 @@ boundary condition</a> model.
 
       model Gas "BC for gas"
 
-        extends FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase;
+        extends BaseClasses.NullPhase;
 
         // Conditionally include species.
         parameter Boolean inclH2=false "<html>Hydrogen (H<sub>2</sub>)</html>"
@@ -5135,8 +5049,7 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.FaceDifferential.Species H2O if inclH2O "Model" annotation (
-            Dialog(
+        FaceDifferential.Species H2O if inclH2O "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -5150,8 +5063,7 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.FaceDifferential.Species N2 if inclN2 "Model" annotation (
-            Dialog(
+        FaceDifferential.Species N2 if inclN2 "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclN2), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -5165,8 +5077,7 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.FaceDifferential.Species O2 if inclO2 "Model" annotation (
-            Dialog(
+        FaceDifferential.Species O2 if inclO2 "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclO2), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -5247,7 +5158,7 @@ boundary condition</a> model.
 
       model Graphite "BC for graphite"
 
-        extends FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase;
+        extends BaseClasses.NullPhase;
 
         // Conditionally include species.
         parameter Boolean inclC=false "Carbon (C)" annotation (
@@ -5258,8 +5169,8 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.FaceDifferential.Species C(thermoOpt=ThermoOpt.ClosedDiabatic)
-          if inclC "Model" annotation (Dialog(
+        FaceDifferential.Species C(isobaric=true) if inclC
+          "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclC), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -5273,8 +5184,7 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.FaceDifferential.Species 'e-' if 'incle-' "Model" annotation
-          (Dialog(
+        FaceDifferential.Species 'e-' if 'incle-' "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable='incle-'), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -5319,7 +5229,7 @@ boundary condition</a> model.
 
       model Ionomer "BC for ionomer"
 
-        extends FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase;
+        extends BaseClasses.NullPhase;
 
         // Conditionally include species.
         parameter Boolean inclC19HF37O5S=false
@@ -5332,7 +5242,7 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.FaceDifferential.Species C19HF37O5S(thermoOpt=ThermoOpt.ClosedDiabatic)
+        FaceDifferential.Species C19HF37O5S(isobaric=true)
           if inclC19HF37O5S "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -5348,8 +5258,7 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.FaceDifferential.Species H2O if inclH2O "Model" annotation (
-            Dialog(
+        FaceDifferential.Species H2O if inclH2O "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -5363,8 +5272,7 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.FaceDifferential.Species 'H+' if 'inclH+' "Model" annotation
-          (Dialog(
+        FaceDifferential.Species 'H+' if 'inclH+' "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable='inclH+'), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -5427,7 +5335,7 @@ boundary condition</a> model.
 
       model Liquid "BC for liquid"
 
-        extends FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase;
+        extends BaseClasses.NullPhase;
 
         // Conditionally include species.
         parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
@@ -5439,8 +5347,7 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.FaceDifferential.Species H2O if inclH2O "Model" annotation (
-            Dialog(
+        FaceDifferential.Species H2O if inclH2O "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -5473,10 +5380,10 @@ boundary condition</a> model.
           parameter Axis axis=Axis.x "Axis normal to the face";
 
           FCSys.Connectors.FaceBus negative
-            "Multi-species connector for material, linear momentum, and heat"
-            annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+            "Multi-species connector for linear momentum and heat" annotation (
+              Placement(transformation(extent={{-110,-10},{-90,10}})));
           FCSys.Connectors.FaceBus positive
-            "Multi-species connector for material, linear momentum, and heat"
+            "Multi-species connector for linear momentum and heat"
             annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 
           FCSys.Connectors.RealInputBus u "Bus of inputs to specify conditions"
@@ -5518,7 +5425,7 @@ boundary condition</a> model.
       // option, e.g.,
       //     enable=axis <> Axis.x.
       // Therefore, the values of the enumerations are specified numerically.
-      replaceable Mechanical.Velocity mechanicalX(spec(k=0)) if axis <> Axis.x
+      replaceable Mechanical.Velocity transverseX(spec(k=0)) if axis <> Axis.x
          and not inviscidX constrainedby Mechanical.BaseClasses.PartialBC
         "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
@@ -5537,7 +5444,7 @@ boundary condition</a> model.
           group="Y-axis linear momentum",
           enable=axis <> 2,
           __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity mechanicalY(spec(k=0)) if axis <> Axis.y
+      replaceable Mechanical.Velocity transverseY(spec(k=0)) if axis <> Axis.y
          and not inviscidY constrainedby Mechanical.BaseClasses.PartialBC
         "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
@@ -5557,7 +5464,7 @@ boundary condition</a> model.
           enable=axis <> 3,
           __Dymola_descriptionLabel=true));
 
-      replaceable Mechanical.Velocity mechanicalZ(spec(k=0)) if axis <> Axis.z
+      replaceable Mechanical.Velocity transverseZ(spec(k=0)) if axis <> Axis.z
          and not inviscidZ constrainedby Mechanical.BaseClasses.PartialBC
         "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
@@ -5569,7 +5476,7 @@ boundary condition</a> model.
 
       FCSys.Connectors.Face negative(
         final axis=axis,
-        final thermoOpt=thermoOpt,
+        final isobaric=isobaric,
         final inviscidX=inviscidX,
         final inviscidY=inviscidY,
         final inviscidZ=inviscidZ) "Negative face" annotation (Placement(
@@ -5585,29 +5492,29 @@ boundary condition</a> model.
 
     equation
       // Material
-      connect(material.negative, negative.material) annotation (Line(
+      connect(material.negative, negative.normal) annotation (Line(
           points={{-70,10},{-80,10},{-80,-30},{-100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(material.positive, positive.material) annotation (Line(
+      connect(material.positive, positive.normal) annotation (Line(
           points={{-50,10},{90,10},{90,-30},{100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
 
       // X-axis linear momentum
-      connect(mechanicalX.negative, negative.mechanicalX) annotation (Line(
+      connect(transverseX.negative, negative.transverseX) annotation (Line(
           points={{-40,6.10623e-16},{-80,6.10623e-16},{-80,-30},{-100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(mechanicalX.positive, positive.mechanicalX) annotation (Line(
+      connect(transverseX.positive, positive.transverseX) annotation (Line(
           points={{-20,6.10623e-16},{90,6.10623e-16},{90,-30},{100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(u.mechanicalX, mechanicalX.u) annotation (Line(
+      connect(u.transverseX, transverseX.u) annotation (Line(
           points={{5.55112e-16,40},{0,40},{0,20},{-30,20},{-30,4}},
           color={0,0,127},
           smooth=Smooth.None), Text(
@@ -5616,17 +5523,17 @@ boundary condition</a> model.
           extent={{-6,3},{-6,3}}));
 
       // Y-axis linear momentum
-      connect(mechanicalY.negative, negative.mechanicalY) annotation (Line(
+      connect(transverseY.negative, negative.transverseY) annotation (Line(
           points={{-10,-10},{-80,-10},{-80,-30},{-100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(mechanicalY.positive, positive.mechanicalY) annotation (Line(
+      connect(transverseY.positive, positive.transverseY) annotation (Line(
           points={{10,-10},{90,-10},{90,-30},{100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(u.mechanicalY, mechanicalY.u) annotation (Line(
+      connect(u.transverseY, transverseY.u) annotation (Line(
           points={{5.55112e-16,40},{5.55112e-16,10},{6.10623e-16,10},{
               6.10623e-16,-6}},
           color={0,0,127},
@@ -5636,17 +5543,17 @@ boundary condition</a> model.
           extent={{-6,3},{-6,3}}));
 
       // Z-axis linear momentum
-      connect(mechanicalZ.negative, negative.mechanicalZ) annotation (Line(
+      connect(transverseZ.negative, negative.transverseZ) annotation (Line(
           points={{20,-20},{-80,-20},{-80,-30},{-100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(mechanicalZ.positive, positive.mechanicalZ) annotation (Line(
+      connect(transverseZ.positive, positive.transverseZ) annotation (Line(
           points={{40,-20},{90,-20},{90,-30},{100,-30}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(u.mechanicalZ, mechanicalZ.u) annotation (Line(
+      connect(u.transverseZ, transverseZ.u) annotation (Line(
           points={{5.55112e-16,40},{0,40},{0,20},{30,20},{30,-16}},
           color={0,0,127},
           smooth=Smooth.None), Text(
@@ -5702,10 +5609,10 @@ boundary condition</a> model.
           // Note:  This is included so that the type of BC is recorded with the
           // results.
 
-          FCSys.Connectors.Material negative
+          FCSys.Connectors.Normal negative
             "Material connector for the negative face" annotation (Placement(
                 transformation(extent={{-110,-10},{-90,10}})));
-          FCSys.Connectors.Material positive
+          FCSys.Connectors.Normal positive
             "Material connector for the positive face"
             annotation (Placement(transformation(extent={{90,-10},{110,10}})));
         equation
@@ -5755,10 +5662,10 @@ boundary condition</a> model.
           // Note:  This is included so that the type of BC is recorded with the
           // results.
 
-          FCSys.Connectors.MechanicalTransport negative
+          FCSys.Connectors.Transverse negative
             "Linear momentum connector for the negative face" annotation (
               Placement(transformation(extent={{-110,-10},{-90,10}})));
-          FCSys.Connectors.MechanicalTransport positive
+          FCSys.Connectors.Transverse positive
             "Linear momentum connector for the positive face"
             annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 
@@ -5833,15 +5740,15 @@ boundary condition</a> model.
         "<html>Partial BC for a pair of faces of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
         extends FCSys.BaseClasses.Icons.BCs.Double;
 
-        parameter ThermoOpt thermoOpt=ThermoOpt.OpenDiabatic
+        parameter ThermoOpt isobaric=false
           "Options for material and thermal subconnectors" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Assumptions",compact=true));
 
         // Material
-        replaceable Material.Density material(spec(k=4*U.C/U.cm^3)) if
-          thermoOpt == ThermoOpt.OpenDiabatic constrainedby
+        replaceable Material.Density normal(spec(k(start=4*U.C/U.cc))) if
+          not isobaric constrainedby
           Material.BaseClasses.PartialBC "Type of condition" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
@@ -5849,9 +5756,17 @@ boundary condition</a> model.
             enable=thermoOpt == 3,
             __Dymola_descriptionLabel=true),
           Placement(transformation(extent={{-70,0},{-50,20}})));
+        // Note:  Dymola 7.4 doesn't recognize enumerations in the dialog enable
+        // option, e.g.,
+        //     enable=thermoOpt <> ThermoOpt.ClosedAdiabatic.
+        // Therefore, the values of the enumerations are specified numerically.
+        // Note:  In Dymola 7.4, the value of k must be specified here instead
+        // of at the lower level (e.g., Material.Density) so that the spec
+        // subcomponent can be replaced by blocks that do not contain the
+        // parameter k.
 
         // Heat
-        replaceable Thermal.Temperature thermal(spec(k=298.15*U.K)) if
+        replaceable Thermal.Temperature thermal(spec(k(start=298.15*U.K))) if
           thermoOpt <> ThermoOpt.ClosedAdiabatic constrainedby
           Thermal.BaseClasses.PartialBC "Type of condition" annotation (
           __Dymola_choicesFromPackage=true,
@@ -5860,10 +5775,6 @@ boundary condition</a> model.
             enable=thermoOpt <> 1,
             __Dymola_descriptionLabel=true),
           Placement(transformation(extent={{50,-40},{70,-20}})));
-        // Note:  Dymola 7.4 doesn't recognize enumerations in the dialog enable
-        // option, e.g.,
-        //     enable=thermoOpt <> ThermoOpt.ClosedAdiabatic.
-        // Therefore, the values of the enumerations are specified numerically.
 
         FCSys.Connectors.RealInputBus u "Input bus for external signal sources"
           annotation (Placement(transformation(
@@ -5876,7 +5787,7 @@ boundary condition</a> model.
 
       equation
         // Material
-        connect(u.material, material.u) annotation (Line(
+        connect(u.normal, material.u) annotation (Line(
             points={{5.55112e-16,40},{0,40},{0,20},{-60,20},{-60,14}},
             color={0,0,127},
             smooth=Smooth.None), Text(
@@ -6052,7 +5963,7 @@ those generated by the model's <code>connect</code> statements.</p>
     parameter Boolean analysis=false "Include optional variables for analysis"
       annotation (choices(__Dymola_checkBox=true));
 
-    parameter Q.PressureAbsolute p(nominal=1*U.atm) = 1*U.atm "Pressure";
+    parameter Q.PressureAbsolute p(nominal=U.atm) = 1*U.atm "Pressure";
     parameter Q.TemperatureAbsolute T(nominal=298.15*U.K) = 298.15*U.K
       "Temperature";
     parameter Q.NumberAbsolute RH(displayUnit="%") = 1 "Relative humidity";
@@ -6077,6 +5988,15 @@ For simulation, specify global default settings by dragging FCSys.BCs.Environmen
 The default global default settings will be used for the current simulation.",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={
+          Rectangle(
+            extent={{-120,60},{120,100}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Text(
+            extent={{-120,60},{120,100}},
+            textString="%name",
+            lineColor={0,0,0}),
           Rectangle(
             extent={{-80,60},{80,-100}},
             lineColor={0,0,0},

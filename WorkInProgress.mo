@@ -24,8 +24,8 @@ package WorkInProgress "Incomplete classes under development"
         inclH2=true,
         inclH2O=false,
         H2(
-          xNegative(thermoOpt=ThermoOpt.OpenDiabatic),
-          xPositive(final thermoOpt=ThermoOpt.ClosedAdiabatic),
+          xNegative(isobaric=false),
+          xPositive(final isobaric=true),
           setVelX=true)))
       annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
@@ -37,7 +37,7 @@ package WorkInProgress "Incomplete classes under development"
       annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   equation
 
-    connect(xNegative.H2.material, volume.face.material) annotation (Line(
+    connect(xNegative.H2.normal, volume.face.normal) annotation (Line(
         points={{5.55112e-16,5.55112e-16},{-6,5.55112e-16},{-6,0},{-10,0},{-10,
             6.10623e-16},{-20,6.10623e-16}},
         color={127,127,127},
@@ -151,7 +151,7 @@ package WorkInProgress "Incomplete classes under development"
     parameter Axis axis=Axis.x "Axis normal to the face";
     FCSys.Connectors.Face face(
       final axis=axis,
-      final thermoOpt=ThermoOpt.OpenDiabatic,
+      final isobaric=false,
       final inviscidX=true,
       final inviscidY=true,
       final inviscidZ=true)
@@ -182,14 +182,14 @@ package WorkInProgress "Incomplete classes under development"
     Modelica.Blocks.Interfaces.RealInput[nPorts] portsData_zeta_out;
   equation
     // Added for FCSys:
-    face.material.rho = (medium.d/medium.MM)*Units.mol/Units.m^3;
+    face.normal.rho = (medium.d/medium.MM)*Units.mol/Units.m^3;
     face.thermal.T = medium.T*Units.K;
 
-    mb_flow = sum(ports.m_flow) + medium.MM*face.material.Ndot/Units.kat
+    mb_flow = sum(ports.m_flow) + medium.MM*face.normal.Ndot/Units.kat
       "Added term for FCSys";
     mbXi_flow = sum_ports_mXi_flow;
     mbC_flow = sum_ports_mC_flow;
-    Hb_flow = sum(ports_H_flow) + sum(ports_E_flow) + medium.h*medium.MM*face.material.Ndot
+    Hb_flow = sum(ports_H_flow) + sum(ports_E_flow) + medium.h*medium.MM*face.normal.Ndot
       /Units.kat "Added term for FCSys";
     Qb_flow = heatTransfer.Q_flows[1] + face.thermal.Qdot/Units.W
       "Added term for FCSys";
@@ -493,7 +493,7 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
         color={127,127,127},
         smooth=Smooth.None));
 
-    connect('H+'.face.material, face.'H+'.material) annotation (Line(
+    connect('H+'.face.normal, face.'H+'.normal) annotation (Line(
         points={{-8,-20},{-40,-20},{-40,5.55112e-16},{-80,5.55112e-16}},
         color={127,127,127},
         smooth=Smooth.None));

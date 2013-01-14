@@ -20,7 +20,7 @@ package Quantities "Quantities to represent physical properties"
     model ExampleModel "Model that uses all of the quantities"
       extends FCSys.BaseClasses.Icons.Blocks.Continuous;
 
-      // Generated from FCSys/resources/quantities.xls, 2013-1-3
+      // Generated from FCSys/resources/quantities.xls, 2013-1-15
       parameter Q.Acceleration Acceleration=1*U.m/U.s^2 "Acceleration";
       parameter Q.Amount Amount=1*U.C "Amount";
       parameter Q.AmountReciprocal AmountReciprocal=1/U.C "Reciprocal amount";
@@ -31,16 +31,18 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.Angle2 Angle2=1*U.sr "Solid angle";
       parameter Q.Area Area=1*U.m^2 "Area";
       parameter Q.Capacitance Capacitance=1*U.F "Capacitance";
+      parameter Q.CompressibilityDynamic CompressibilityDynamic=1*U.mol/(U.J*U.s)
+        "Dynamic compressibility";
       parameter Q.ConductanceElectrical ConductanceElectrical=1*U.S
         "Electrical conductance";
       parameter Q.Current Current=1*U.A "Current";
       parameter Q.CurrentAreic CurrentAreic=1*U.A/U.m^2 "Areic current";
       parameter Q.CurrentRate CurrentRate=1*U.A/U.s "Rate of current";
       parameter Q.Energy Energy=1*U.J "Energy";
-      parameter Q.Fluidity Fluidity=1/(U.Pa*U.s) "Fluidity";
+      parameter Q.FluidityDynamic FluidityDynamic=1/(U.Pa*U.s)
+        "Dynamic fluidity";
       parameter Q.Force Force=1*U.N "Force";
       parameter Q.Frequency Frequency=1*U.rad/U.s "Frequency";
-      parameter Q.Fusivity Fusivity=1*U.s/U.m^2 "Fusivity";
       parameter Q.Inductance Inductance=1*U.H "Inductance";
       parameter Q.Length Length=1*U.m "Length";
       parameter Q.LengthSpecific LengthSpecific=1*U.m/U.C "Specific length";
@@ -56,7 +58,6 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.Number Number=1 "Number";
       parameter Q.NumberAbsolute NumberAbsolute=1*U.J/(U.mol*U.K)
         "Absolute number";
-      parameter Q.NumberRate NumberRate=1/U.s "NumberRate";
       parameter Q.Permeability Permeability=1*U.H/U.m "Permeability";
       parameter Q.Permittivity Permittivity=1*U.F/U.m "Permittivity";
       parameter Q.PermittivityReciprocal PermittivityReciprocal=1*U.m/U.H
@@ -88,10 +89,11 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.VolumeSpecificAbsolute VolumeSpecificAbsolute=1*U.m^3/U.C
         "Absolute specific volume";
       parameter Q.Wavenumber Wavenumber=1*U.rad/U.m "Wavenumber";
+
     end ExampleModel;
   end Examples;
 
-  // Generated from FCSys/resources/quantities.xls, 2013-1-3
+  // Generated from FCSys/resources/quantities.xls, 2013-1-15
   type Acceleration = Modelica.Icons.TypeReal (final unit="l/T2");
   type Amount = Modelica.Icons.TypeReal (final unit="N", min=0);
   type AmountReciprocal = Modelica.Icons.TypeReal (final unit="1/N", min=0)
@@ -104,6 +106,8 @@ package Quantities "Quantities to represent physical properties"
   type Angle2 = Modelica.Icons.TypeReal (final unit="A2") "Solid angle";
   type Area = Modelica.Icons.TypeReal (final unit="l2", min=0);
   type Capacitance = Modelica.Icons.TypeReal (final unit="N2.T2/(l2.m)", min=0);
+  type CompressibilityDynamic = Modelica.Icons.TypeReal (final unit=
+          "N.T/(l2.m)", min=0) "Dynamic compressibility";
   type ConductanceElectrical = Modelica.Icons.TypeReal (final unit=
           "N2.T/(l2.m)", min=0) "Electrical conductance";
   type Current = Modelica.Icons.TypeReal (final unit="N/T");
@@ -112,9 +116,9 @@ package Quantities "Quantities to represent physical properties"
   type CurrentRate = Modelica.Icons.TypeReal (final unit="N/T2")
     "Rate of current";
   type Energy = Modelica.Icons.TypeReal (final unit="l2.m/T2");
-  type Fluidity = Modelica.Icons.TypeReal (final unit="l.T/m", min=0);
+  type FluidityDynamic = Modelica.Icons.TypeReal (final unit="l.T/m", min=0)
+    "Dynamic fluidity";
   type Force = Modelica.Icons.TypeReal (final unit="l.m/T2");
-  type Fusivity = Modelica.Icons.TypeReal (final unit="T/l2", min=0);
   type Frequency = Modelica.Icons.TypeReal (final unit="A/T");
   type Inductance = Modelica.Icons.TypeReal (final unit="l2.m/N2", min=0);
   type Length = Modelica.Icons.TypeReal (final unit="l", min=0);
@@ -134,7 +138,6 @@ package Quantities "Quantities to represent physical properties"
   type Number = Modelica.Icons.TypeReal (final unit="1");
   type NumberAbsolute = Modelica.Icons.TypeReal (final unit="1", min=0)
     "Absolute number";
-  type NumberRate = Modelica.Icons.TypeReal (final unit="1/T");
   type Permeability = Modelica.Icons.TypeReal (final unit="l.m/N2", min=0);
   type Permittivity = Modelica.Icons.TypeReal (final unit="N2.T2/(l3.m)", min=0);
   type PermittivityReciprocal = Modelica.Icons.TypeReal (final unit=
