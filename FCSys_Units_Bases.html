@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Units.Bases</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-13">
+<meta name="date" content="2013-1-15">
 <meta name="description" content="Sets of base constants and units">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -48,7 +48,7 @@
 <p>
 <p><h3>Information</h3></p>
 <p>The International System of Units (SI)-like
-  sets in this package are named by listing (in alphabetical order) the units that are
+  sets in this package are named by listing (in alphabetical order) the two units that are
   <b>not</b> normalized for the sake of setting the Faraday and gas constants equal to one.
   There are eight possible sets of this type.</p>
   <p>For more information, see the documentation in the
@@ -58,7 +58,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Units.Bases.ScaledFCS.png" alt="FCSys.Units.Bases.ScaledFC" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases.ScaledFC">ScaledFC</a>
-</td><td>Base constants and units that are well-scaled for FC simulation and analysis</td></tr>
+</td><td>Base constants and units that are well-scaled for fuel cell simulation and analysis</td></tr>
 <tr><td><img src="images/FCSys.Units.Bases.ScaledFCS.png" alt="FCSys.Units.Bases.AK" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases.AK">AK</a>
 </td><td>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of A and K</td></tr>
 <tr><td><img src="images/FCSys.Units.Bases.ScaledFCS.png" alt="FCSys.Units.Bases.Am" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Am">Am</a>
@@ -85,7 +85,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <hr>
 
 <h2><a name="FCSys.Units.Bases.ScaledFC"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.ScaledFC</h2>
-<b>Base constants and units that are well-scaled for FC simulation and analysis</b><p>
+<b>Base constants and units that are well-scaled for fuel cell simulation and analysis</b><p>
 <p><h3>Information</h3></p>
 <p>The values of this record result in the following values for the base SI units
   (besides cd = 1, which is the default):
@@ -106,7 +106,7 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">U.Bases.Bas
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">record</font> ScaledFC <font color="darkgreen">
-  &quot;Base constants and units that are well-scaled for FC simulation and analysis&quot;</font>
+  &quot;Base constants and units that are well-scaled for fuel cell simulation and analysis&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">U.Bases.Base</a>(
     <font color="blue">final </font>R_inf=1e-1*10973731.568539,
     <font color="blue">final </font>c=1e-1*299792458,
@@ -456,7 +456,7 @@ For more information, see the notes in the Modelica code and the documentation i
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:31:50 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 15 13:49:10 2013.
 </div>
 </body>
 </html>

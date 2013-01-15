@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Characteristics.BaseClasses.Characteristic</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-13">
+<meta name="date" content="2013-1-15">
 <meta name="description" content="Record for thermodynamic and resistive properties">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -166,7 +166,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.FS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.v_Tp" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.v_Tp">v_Tp</a>
 </td><td>Specific volume as a function of temperature and pressure</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.'e-'.Graphite.dpS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.Xi" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.Xi">Xi</a>
-</td><td>Fusivity as a function of temperature and specific volume</td></tr>
+</td><td>Dynamic compressibility as a function of temperature and specific volume</td></tr>
 </table>
 <p><h3>Types and constants</h3>
 <pre><font color="blue">constant </font>String formula <font color="darkgreen">&quot;Chemical formula&quot;</font>;</pre><p>
@@ -417,7 +417,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>1*U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Temperature</a></td><td>dT</td><td>0</td><td>Derivative of temperature</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Pressure</a></td><td>dp</td><td>0</td><td>Derivative of pressure [m/(l.T2)]</td></tr>
 </table>
@@ -433,7 +433,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
-  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p=1*U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p=U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Q.Temperature</a> dT=0 <font color="darkgreen">&quot;Derivative of temperature&quot;</font>;
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> dp=0 <font color="darkgreen">&quot;Derivative of pressure&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> dv <font color="darkgreen">&quot;Derivative of specific volume&quot;</font>;
@@ -450,6 +450,11 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Characteristics.BaseClasses.Characteristic.F"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.F</h2>
 <b>Fluidity as a function of temperature and specific volume</b><p>
 <p><h3>Information</h3></p>
+
+<p>Note that fluidity is defined as the reciprocal of viscosity&mdash;typically dynamic viscosity
+(see <a href="http://en.wikipedia.org/wiki/Viscosity#Fluidity">http://en.wikipedia.org/wiki/Viscosity#Fluidity</a>).  
+</p>
+<p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p><h3>Inputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -460,7 +465,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Outputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>F</td><td>Fluidity [l.T/m]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.FluidityDynamic">FluidityDynamic</a></td><td>F</td><td>Dynamic fluidity [l.T/m]</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -472,11 +477,11 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v=298.15*U.K/U.atm <font color="darkgreen">&quot;Specific volume&quot;</font>;
   <font color="darkgreen">// Note:  Specific volume is provided for generality but isn&#39;t used here.</font>
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Q.Fluidity</a> F <font color="darkgreen">&quot;Fluidity&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.FluidityDynamic">Q.FluidityDynamic</a> F <font color="darkgreen">&quot;Dynamic fluidity&quot;</font>;
 
 <font color="blue">algorithm </font>
   F := <font color="red">alpha</font>(T)/m;
-<font color="blue">end </font>F;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>F;
 </pre>
 <hr>
 
@@ -489,7 +494,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>1*U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
 <tr><td><a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses.ReferenceEnthalpy">ReferenceEnthalpy</a></td><td>referenceEnthalpy</td><td>ReferenceEnthalpy.EnthalpyOf...</td><td>Choice of enthalpy reference</td></tr>
 </table>
 <p><h3>Outputs</h3><p>
@@ -505,7 +510,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
-  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p=1*U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p=U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
   <font color="blue">input </font><a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses.ReferenceEnthalpy">ReferenceEnthalpy</a> referenceEnthalpy=ReferenceEnthalpy.EnthalpyOfFormationAt25degC
     <font color="darkgreen">&quot;Choice of enthalpy reference&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g <font color="darkgreen">&quot;Gibbs potential&quot;</font>;
@@ -515,7 +520,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     T,
     p,
     referenceEnthalpy) - T*<font color="red">s</font>(T, p);
-
 <font color="blue">end </font>g;
 </pre>
 <hr>
@@ -533,7 +537,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>1*U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
 <tr><td><a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses.ReferenceEnthalpy">ReferenceEnthalpy</a></td><td>referenceEnthalpy</td><td>ReferenceEnthalpy.EnthalpyOf...</td><td>Choice of enthalpy reference</td></tr>
 </table>
 <p><h3>Outputs</h3><p>
@@ -549,7 +553,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
-  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p=1*U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p=U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
   <font color="blue">input </font><a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses.ReferenceEnthalpy">ReferenceEnthalpy</a> referenceEnthalpy=ReferenceEnthalpy.EnthalpyOfFormationAt25degC
     <font color="darkgreen">&quot;Choice of enthalpy reference&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> h <font color="darkgreen">&quot;Specific enthalpy&quot;</font>;
@@ -571,7 +575,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     <font color="darkgreen">// This is the integral of c0_p*dT up to T at p0.  The lower bound is the</font>
     <font color="darkgreen">// enthalpy of formation (of ideal gas, if the material is gaseous) at</font>
     <font color="darkgreen">// 25 degC [McBride2002, p. 2].</font>
-  <font color="blue">end </font>h0_i</textblock>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">end </font>h0_i</textblock>;
 
   <textblock type="model" expanded="false" path="FCSys.Characteristics.BaseClasses.Characteristic.h.dh0_i"><font color="blue">function</font> dh0_i <font color="darkgreen">&quot;Derivative of h0_i&quot;</font>
 
@@ -738,7 +742,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>1*U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
 </table>
 <p><h3>Outputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -752,7 +756,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
-  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p=1*U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p=U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> s <font color="darkgreen">&quot;Specific entropy&quot;</font>;
 
 <font color="blue">protected </font>
@@ -848,7 +852,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>1*U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
 </table>
 <p><h3>Outputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -863,7 +867,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
-  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p=1*U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p=U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> v <font color="darkgreen">&quot;Specific volume&quot;</font>;
 
 <font color="blue">algorithm </font>
@@ -880,10 +884,12 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h2><img src="images/FCSys.Characteristics.BaseClasses.Characteristic.alphaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.Xi" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.Characteristic.Xi"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.Xi</h2>
-<b>Fusivity as a function of temperature and specific volume</b><p>
+<b>Dynamic compressibility as a function of temperature and specific volume</b><p>
 <p><h3>Information</h3></p>
 
-<p>"Fusivity" is defined here as the reciprocal of the self diffusion coefficient or diffusivity.
+<p>"Dynamic compressibility" is defined here as the reciprocal of the specific volume and the volume, 
+second, or bulk dynamic viscosity (see 
+<a href="http://en.wikipedia.org/wiki/Volume_viscosity">http://en.wikipedia.org/wiki/Volume_viscosity</a>).
 </p>
 <p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
@@ -896,20 +902,20 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Outputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fusivity">Fusivity</a></td><td>Xi</td><td>Fusivity [T/l2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CompressibilityDynamic">CompressibilityDynamic</a></td><td>Xi</td><td>Dynamic compressibility [N.T/(l2.m)]</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">replaceable </font><font color="blue">function</font> Xi <font color="darkgreen">
-  &quot;Fusivity as a function of temperature and specific volume&quot;</font>
+  &quot;Dynamic compressibility as a function of temperature and specific volume&quot;</font>
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v=298.15*U.K/U.atm <font color="darkgreen">&quot;Specific volume&quot;</font>;
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Fusivity">Q.Fusivity</a> Xi <font color="darkgreen">&quot;Fusivity&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CompressibilityDynamic">Q.CompressibilityDynamic</a> Xi <font color="darkgreen">&quot;Dynamic compressibility&quot;</font>;
 
 <font color="blue">algorithm </font>
-  Xi := <font color="red">alpha</font>(T)/v;
+  Xi := <font color="red">alpha</font>(T)/(m*v);
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>Xi;
 </pre>
 <hr>
@@ -956,7 +962,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:31:45 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 15 13:48:26 2013.
 </div>
 </body>
 </html>

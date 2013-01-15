@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Characteristics.BaseClasses.CharacteristicNASA</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-13">
+<meta name="date" content="2013-1-15">
 <meta name="description" content="Thermodynamic record with transport properties based on NASA CEA">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -51,13 +51,13 @@
   [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride1996</a>,
   <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride2002</a>]. For more information, see the
   <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a> record.</p><p>
-Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a> (Record for thermodynamic and resistive properties).
+Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a> (Record for thermodynamic and resistive properties).
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td>T_lim_alpha={0,Modelica.Constants.inf}</td><td>Temperature limits for the rows of b_eta and b_lambda (<i>T</i><sub>lim &alpha;</sub>)</td></tr>
-<tr><td>b_eta</td><td>Constants in NASA correlation for viscosity (<i>b<sub>&eta;</sub>)</td></tr>
-<tr><td>b_lambda</td><td>Constants in NASA correlation for thermal conductivity (<i>b<sub>&lambda;</sub>)</td></tr>
+<tr><td>b_eta</td><td>Constants in NASA correlation for viscosity (<i>b</i><sub>&eta;</sub>)</td></tr>
+<tr><td>b_lambda</td><td>Constants in NASA correlation for thermal conductivity (<i>b</i><sub>&lambda;</sub>)</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.FS.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.F" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA.F">F</a>
 </td><td>Fluidity as a function of temperature and specific volume</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.FS.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.R" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA.R">R</a>
@@ -102,15 +102,15 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.FS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.v_Tp" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.v_Tp">v_Tp</a>
 </td><td>Specific volume as a function of temperature and pressure</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.'e-'.Graphite.dpS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.Xi" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.Xi">Xi</a>
-</td><td>Fusivity as a function of temperature and specific volume</td></tr>
+</td><td>Dynamic compressibility as a function of temperature and specific volume</td></tr>
 </table>
 <p><h3>Types and constants</h3>
 <pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_lim_alpha[:]={0,Modelica.Constants.inf} <font color="darkgreen">
   &quot;Temperature limits for the rows of b_eta and b_lambda (<i>T</i><sub>lim &alpha;</sub>)&quot;</font>;</pre><p>
 <pre><font color="blue">constant </font>Real b_eta[<font color="red">size</font>(T_lim_alpha, 1) - 1, 4] <font color="darkgreen">
-  &quot;Constants in NASA correlation for viscosity (<i>b<sub>&eta;</sub>)&quot;</font>;</pre><p>
+  &quot;Constants in NASA correlation for viscosity (<i>b</i><sub>&eta;</sub>)&quot;</font>;</pre><p>
 <pre><font color="blue">constant </font>Real b_lambda[<font color="red">size</font>(T_lim_alpha, 1) - 1, 4] <font color="darkgreen">
-  &quot;Constants in NASA correlation for thermal conductivity (<i>b<sub>&lambda;</sub>)&quot;</font>;</pre><p>
+  &quot;Constants in NASA correlation for thermal conductivity (<i>b</i><sub>&lambda;</sub>)&quot;</font>;</pre><p>
 <hr>
 
 <h2><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.FI.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.F" align=RIGHT border=1 width=80  height=80 >
@@ -118,7 +118,10 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
 <b>Fluidity as a function of temperature and specific volume</b><p>
 <p><h3>Information</h3></p>
 <p>This function is based on based on NASA CEA
-  [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride1996</a>, <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Svehla1995</a>]</p><p>
+  [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride1996</a>, <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Svehla1995</a>]</p>
+  
+  <p>For more information, see <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.F">Characteristic.F</a>().</p>
+  <p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p><h3>Inputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -129,7 +132,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Outputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>F</td><td>Fluidity [l.T/m]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.FluidityDynamic">FluidityDynamic</a></td><td>F</td><td>Dynamic fluidity [l.T/m]</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -141,7 +144,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v=298.15*U.K/U.atm <font color="darkgreen">&quot;Specific volume&quot;</font>;
   <font color="darkgreen">// Note:  Specific volume is provided for generality but isn&#39;t used here.</font>
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Q.Fluidity</a> F <font color="darkgreen">&quot;Fluidity&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.FluidityDynamic">Q.FluidityDynamic</a> F <font color="darkgreen">&quot;Dynamic fluidity&quot;</font>;
 
 <font color="blue">protected </font>
   <textblock type="model" expanded="false" path="FCSys.Characteristics.BaseClasses.CharacteristicNASA.F.b_eta_adj"><font color="blue">function</font> b_eta_adj <font color="darkgreen">
@@ -248,7 +251,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:31:41 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 15 13:48:23 2013.
 </div>
 </body>
 </html>

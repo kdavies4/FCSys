@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Units</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-13">
+<meta name="date" content="2013-1-15">
 <meta name="description" content="Constants and units of physical measure">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -52,7 +52,7 @@
     manner.  A unit
     may be the product of any of the units defined in <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a> raised to any power.
     When a quantity is converted to a number for display, it is divided by its unit.
-    This conveniently handles unit conversion&mdash;without preference to any particular set of units.
+    This conveniently handles unit conversion&mdash;without preference towards any particular set of units.
      It can also be used to scale
     the floating point values associated with quantities.  In order to provide
     well-scaled quantities, the value of the unit should be increased in inverse proportion
@@ -101,12 +101,12 @@
     to determine the values of the units and defines the conversions to display values as numbers
     in units.  This script is set to run when <a href="index.html#FCSys">FCSys</a> is loaded via
     "FCSys/load.mos" or from a link in the "Commands" menu of <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a> (when viewed within
-    Dymola).  Unless the values of the base constants and units are changed, it should be sufficient
+    Dymola).  Unless the values of the base constants and units are changed during an editing session, it should be sufficient
     to simply allow the script to run when the package is loaded.
     When the <code>der()</code> operator is utilized, it must be divided by
     the unit second (<code>U.s</code>), since this scaling is not automatic in Modelica's specification
-    and Dymola's implementation.  Currently, it is not possible to define a function that implements a
-    <code>der()</code> function with scaling.</p>
+    and Dymola's implementation.  Currently, it is not possible to define a function that implements
+    <code>der()</code> with built-in scaling.</p>
 
   <p>Note that the common "natural" units systems (Planck, Stoney, Hartree, Rydberg,
   or Natural) cannot be implemented given the constraints that the gas and
@@ -117,11 +117,11 @@
   The structure of <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a> allows the constraints on the Faraday and gas constants
   to be relaxed, but the models in <a href="index.html#FCSys">FCSys</a> generally do not.</p>
 
-  <p>Although it is not necessary in <a href="http://www.modelica.org">Modelica</a>, the unit declarations
-  are presorted so that they can be easily ported to imperative/causal languages (e.g.,
+  <p>Although it is not necessary in <a href="http://www.modelica.org">Modelica</a>, the declarations
+  in this package are presorted so that they can be easily ported to imperative or causal languages (e.g.,
   <a href="http://www.python.org">Python</a>, C).</p>
 
-  <p>For more information, see the paper on natural units [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Davies and Paredis, 2012</a>].</p>
+  <p>For more information, see the related paper [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Davies and Paredis, 2012</a>].</p>
   <p>
   <b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
   Copyright 2007&ndash;2012, Georgia Tech Research Corporation.
@@ -232,6 +232,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td>mm=milli*m</td><td>millimeter</td></tr>
 <tr><td>'%'=centi</td><td>percent (%)</td></tr>
 <tr><td>M=U.mol/U.L</td><td>molar</td></tr>
+<tr><td>cc=U.cm^3</td><td>cubic centimeter</td></tr>
 </table>
 <p><h3>Types and constants</h3>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> pi=2*<font color="red">arccos</font>(0) <font color="darkgreen">&quot;pi (<i>&pi;</i>)&quot;</font>;</pre><p>
@@ -347,6 +348,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> mm=milli*m <font color="darkgreen">&quot;millimeter&quot;</font>;</pre><p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> &#39;%&#39;=centi <font color="darkgreen">&quot;percent (%)&quot;</font>;</pre><p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.AmountVolumic">Q.AmountVolumic</a> M=U.mol/U.L <font color="darkgreen">&quot;molar&quot;</font>;</pre><p>
+<pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> cc=U.cm^3 <font color="darkgreen">&quot;cubic centimeter&quot;</font>;</pre><p>
 <hr>
 
 <h2><img src="images/FCSys.Units.EvaluateI.png" alt="FCSys.Units.Evaluate" align=RIGHT border=1 width=80  height=80 >
@@ -502,6 +504,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> mm=U.mm <font color="darkgreen">&quot;millimeter&quot;</font>;
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> &#39;%&#39;=U.'%' <font color="darkgreen">&quot;percent&quot;</font>;
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.AmountVolumic">Q.AmountVolumic</a> M=U.M <font color="darkgreen">&quot;molar&quot;</font>;
+  <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> cc=U.cc <font color="darkgreen">&quot;cubic centimeter&quot;</font>;
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>Evaluate;
 </pre>
       </div>
@@ -509,7 +512,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:31:47 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 15 13:49:07 2013.
 </div>
 </body>
 </html>
