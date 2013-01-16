@@ -973,9 +973,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
         L_x=fill(8*U.mm/1, 1),
         L_y=fill(1*U.m/1, 1),
         L_z=fill(5*U.mm/1, 1),
-        final inclXFaces=true,
-        final inclYFaces=true,
-        inclZFaces=false,
+        final inclFacesX=true,
+        final inclFacesY=true,
+        inclFacesZ=false,
         redeclare FCSys.Subregions.SubregionNoIonomer subregions[n_x, n_y, n_z]
           (
           each inclLinX=false,
@@ -1111,7 +1111,7 @@ used as the inlet. The z axis extends across the width of the channel.</p></html
             initialScale=0.1), graphics={Rectangle(
                   extent={{-100,60},{100,100}},
                   fillColor={255,255,255},
-                  visible=not inclYFaces,
+                  visible=not inclFacesY,
                   fillPattern=FillPattern.Solid,
                   pattern=LinePattern.None),Rectangle(
                   extent={{-76.648,66.211},{-119.073,52.0689}},
@@ -1175,43 +1175,42 @@ used as the inlet. The z axis extends across the width of the channel.</p></html
                   lineColor={0,0,0}),Line(
                   points={{10,0},{100,0}},
                   color={240,0,0},
-                  visible=inclXFaces,
+                  visible=inclFacesX,
                   thickness=0.5),Line(
                   points={{-20,0},{-100,0}},
                   color={127,127,127},
-                  visible=inclXFaces,
+                  visible=inclFacesX,
                   thickness=0.5),Line(
                   points={{0,-60},{0,-100}},
                   color={240,0,0},
-                  visible=inclYFaces,
+                  visible=inclFacesY,
                   smooth=Smooth.None,
                   thickness=0.5),Line(
                   points={{20,20},{50,50}},
                   color={240,0,0},
-                  visible=inclZFaces,
+                  visible=inclFacesZ,
                   smooth=Smooth.None,
                   thickness=0.5),Line(
                   points={{-50,-50},{-10,-10}},
                   color={240,0,0},
-                  visible=inclZFaces,
+                  visible=inclFacesZ,
                   smooth=Smooth.None,
                   thickness=0.5),Ellipse(
                   extent={{-4,52},{4,48}},
                   lineColor={135,135,135},
                   fillColor={240,0,0},
-                  visible=inclYFaces,
+                  visible=inclFacesY,
                   fillPattern=FillPattern.Sphere),Line(
                   points={{0,100},{0,50}},
                   color={240,0,0},
-                  visible=inclYFaces,
+                  visible=inclFacesY,
                   smooth=Smooth.None,
                   thickness=0.5),Text(
                   extent={{-100,60},{100,100}},
                   textString="%name",
-                  visible=not inclYFaces,
+                  visible=not inclFacesY,
                   lineColor={0,0,0})}),
         Diagram(graphics));
-
     end AnFP;
 
     model GM "General Motors cathodic test flow plate and current collector"
@@ -1263,9 +1262,9 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
         L_x=fill(0.3*U.mm/1, 1),
         L_y=fill(1*U.m/1, 1),
         L_z=fill(5*U.mm/1, 1),
-        final inclXFaces=true,
-        inclYFaces=false,
-        inclZFaces=false,
+        final inclFacesX=true,
+        inclFacesY=false,
+        inclFacesZ=false,
         redeclare FCSys.Subregions.SubregionNoIonomer subregions[n_x, n_y, n_z]
           (
           each inclLinX=false,
@@ -1341,7 +1340,7 @@ the z axis extends across the width of the channel.</p></html>"),
             initialScale=0.1), graphics={Rectangle(
                   extent={{-100,60},{100,100}},
                   fillColor={255,255,255},
-                  visible=not inclYFaces,
+                  visible=not inclFacesY,
                   fillPattern=FillPattern.Solid,
                   pattern=LinePattern.None),Rectangle(
                   extent={{-78.7855,18.6813},{-50.5004,-23.7455}},
@@ -1377,35 +1376,35 @@ the z axis extends across the width of the channel.</p></html>"),
                   smooth=Smooth.None),Line(
                   points={{-20,0},{-100,0}},
                   color={240,0,0},
-                  visible=inclXFaces,
+                  visible=inclFacesX,
                   thickness=0.5),Line(
                   points={{10,0},{100,0}},
                   color={240,0,0},
-                  visible=inclXFaces,
+                  visible=inclFacesX,
                   thickness=0.5),Line(
                   points={{0,-60},{0,-100}},
                   color={240,0,0},
-                  visible=inclYFaces,
+                  visible=inclFacesY,
                   smooth=Smooth.None,
                   thickness=0.5),Line(
                   points={{0,100},{0,50}},
                   color={240,0,0},
-                  visible=inclYFaces,
+                  visible=inclFacesY,
                   smooth=Smooth.None,
                   thickness=0.5),Line(
                   points={{-50,-50},{-10,-10}},
                   color={240,0,0},
-                  visible=inclZFaces,
+                  visible=inclFacesZ,
                   smooth=Smooth.None,
                   thickness=0.5),Line(
                   points={{20,20},{50,50}},
                   color={240,0,0},
-                  visible=inclZFaces,
+                  visible=inclFacesZ,
                   smooth=Smooth.None,
                   thickness=0.5),Text(
                   extent={{-100,60},{100,100}},
                   textString="%name",
-                  visible=not inclYFaces,
+                  visible=not inclFacesY,
                   lineColor={0,0,0})}),
         Diagram(graphics));
     end AnGDL;
@@ -1584,9 +1583,9 @@ the z axis extends across the width of the channel.</p></html>"),
         L_x=fill(28.7*U.micro*U.m/1, 1),
         L_y=fill(1*U.m/1, 1),
         L_z=fill(5*U.mm/1, 1),
-        final inclXFaces=true,
-        inclYFaces=false,
-        inclZFaces=false,
+        final inclFacesX=true,
+        inclFacesY=false,
+        inclFacesZ=false,
         redeclare FCSys.Subregions.Subregion subregions[n_x, n_y, n_z](
           each inclLinX=false,
           each gas(
@@ -1726,7 +1725,7 @@ the z axis extends across the width of the channel.</p>
             initialScale=0.1), graphics={Rectangle(
                   extent={{-100,60},{100,100}},
                   fillColor={255,255,255},
-                  visible=not inclYFaces,
+                  visible=not inclFacesY,
                   fillPattern=FillPattern.Solid,
                   pattern=LinePattern.None),Rectangle(
                   extent={{-22.6085,-62.7355},{-56.551,-79.7156}},
@@ -1780,37 +1779,36 @@ the z axis extends across the width of the channel.</p>
                   fillPattern=FillPattern.Solid),Line(
                   points={{-20,0},{-100,0}},
                   color={240,0,0},
-                  visible=inclXFaces,
+                  visible=inclFacesX,
                   thickness=0.5),Line(
                   points={{10,0},{100,0}},
                   color={240,0,0},
-                  visible=inclXFaces,
+                  visible=inclFacesX,
                   thickness=0.5),Line(
                   points={{0,-60},{0,-100}},
                   color={240,0,0},
-                  visible=inclYFaces,
+                  visible=inclFacesY,
                   smooth=Smooth.None,
                   thickness=0.5),Line(
                   points={{0,100},{0,50}},
                   color={240,0,0},
-                  visible=inclYFaces,
+                  visible=inclFacesY,
                   smooth=Smooth.None,
                   thickness=0.5),Line(
                   points={{-50,-50},{-10,-10}},
                   color={240,0,0},
-                  visible=inclZFaces,
+                  visible=inclFacesZ,
                   smooth=Smooth.None,
                   thickness=0.5),Line(
                   points={{20,20},{50,50}},
                   color={240,0,0},
-                  visible=inclZFaces,
+                  visible=inclFacesZ,
                   smooth=Smooth.None,
                   thickness=0.5),Text(
                   extent={{-100,60},{100,100}},
                   textString="%name",
-                  visible=not inclYFaces,
+                  visible=not inclFacesY,
                   lineColor={0,0,0})}));
-
     end AnCL;
 
     model AnCGDL "Integrated anode catalyst/gas diffusion layer"
@@ -1838,9 +1836,9 @@ the z axis extends across the width of the channel.</p>
         L_x=fill(100*U.micro*U.m/1, 1),
         L_y=fill(1*U.m/1, 1),
         L_z=fill(5*U.mm/1, 1),
-        final inclXFaces=true,
-        inclYFaces=false,
-        inclZFaces=false,
+        final inclFacesX=true,
+        inclFacesY=false,
+        inclFacesZ=false,
         redeclare FCSys.Subregions.SubregionIonomerOnly subregions[n_x, n_y,
           n_z](each inclLinX=false, each ionomer(
             inclC19HF37O5S=true,
@@ -1855,7 +1853,7 @@ the z axis extends across the width of the channel.</p>
       parameter Q.NumberAbsolute lambda_IC=14
         "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>)</html>"
         annotation (Dialog(group="Initialization"));
-      // TODO: use lambda_IC
+      // TODO:  use lambda_IC
       // TODO:  Clean up (move to Species models if possible):
 
       // Note:  In Dymola 7.4 the following can't be used:
@@ -1918,7 +1916,7 @@ the z axis extends across the width of the channel.</p>
             initialScale=0.1), graphics={Rectangle(
                   extent={{-100,60},{100,100}},
                   fillColor={255,255,255},
-                  visible=not inclYFaces,
+                  visible=not inclFacesY,
                   fillPattern=FillPattern.Solid,
                   pattern=LinePattern.None),Rectangle(
                   extent={{-99.092,-21.1179},{-84.9489,-63.5448}},
@@ -1954,35 +1952,35 @@ the z axis extends across the width of the channel.</p>
                   smooth=Smooth.None),Line(
                   points={{-20,0},{-100,0}},
                   color={240,0,0},
-                  visible=inclXFaces,
+                  visible=inclFacesX,
                   thickness=0.5),Line(
                   points={{10,0},{100,0}},
                   color={0,0,240},
-                  visible=inclXFaces,
+                  visible=inclFacesX,
                   thickness=0.5),Line(
                   points={{0,-60},{0,-100}},
                   color={127,127,127},
-                  visible=inclYFaces,
+                  visible=inclFacesY,
                   smooth=Smooth.None,
                   thickness=0.5),Line(
                   points={{0,100},{0,50}},
                   color={127,127,127},
-                  visible=inclYFaces,
+                  visible=inclFacesY,
                   smooth=Smooth.None,
                   thickness=0.5),Line(
                   points={{-50,-50},{-10,-10}},
                   color={127,127,127},
-                  visible=inclZFaces,
+                  visible=inclFacesZ,
                   smooth=Smooth.None,
                   thickness=0.5),Line(
                   points={{20,20},{50,50}},
                   color={127,127,127},
-                  visible=inclZFaces,
+                  visible=inclFacesZ,
                   smooth=Smooth.None,
                   thickness=0.5),Text(
                   extent={{-100,60},{100,100}},
                   textString="%name",
-                  visible=not inclYFaces,
+                  visible=not inclFacesY,
                   lineColor={0,0,0})}));
     end PEM;
 
@@ -2081,9 +2079,9 @@ the z axis extends across the width of the channel.</p>
         L_x=fill(28.7*U.micro*U.m/1, 1),
         L_y=fill(1*U.m/1, 1),
         L_z=fill(5*U.mm/1, 1),
-        final inclXFaces=true,
-        inclYFaces=false,
-        inclZFaces=false,
+        final inclFacesX=true,
+        inclFacesY=false,
+        inclFacesZ=false,
         redeclare FCSys.Subregions.Subregion subregions[n_x, n_y, n_z](
           each inclLinX=false,
           each gas(
@@ -2190,7 +2188,7 @@ the z axis extends across the width of the channel.</p>
             initialScale=0.1), graphics={Rectangle(
                   extent={{-100,60},{100,100}},
                   fillColor={255,255,255},
-                  visible=not inclYFaces,
+                  visible=not inclFacesY,
                   fillPattern=FillPattern.Solid,
                   pattern=LinePattern.None),Rectangle(
                   extent={{-21.6329,-68.4511},{-58.4038,-85.4311}},
@@ -2244,37 +2242,36 @@ the z axis extends across the width of the channel.</p>
                   fillPattern=FillPattern.Solid),Line(
                   points={{-20,0},{-100,0}},
                   color={0,0,240},
-                  visible=inclXFaces,
+                  visible=inclFacesX,
                   thickness=0.5),Line(
                   points={{10,0},{100,0}},
                   color={0,0,240},
-                  visible=inclXFaces,
+                  visible=inclFacesX,
                   thickness=0.5),Line(
                   points={{0,-60},{0,-98}},
                   color={0,0,240},
-                  visible=inclYFaces,
+                  visible=inclFacesY,
                   smooth=Smooth.None,
                   thickness=0.5),Line(
                   points={{0,100},{0,50}},
                   color={0,0,240},
-                  visible=inclYFaces,
+                  visible=inclFacesY,
                   smooth=Smooth.None,
                   thickness=0.5),Line(
                   points={{-50,-50},{-10,-10}},
                   color={0,0,240},
-                  visible=inclZFaces,
+                  visible=inclFacesZ,
                   smooth=Smooth.None,
                   thickness=0.5),Line(
                   points={{20,20},{50,50}},
                   color={0,0,240},
-                  visible=inclZFaces,
+                  visible=inclFacesZ,
                   smooth=Smooth.None,
                   thickness=0.5),Text(
                   extent={{-100,60},{100,100}},
                   textString="%name",
-                  visible=not inclYFaces,
+                  visible=not inclFacesY,
                   lineColor={0,0,0})}));
-
     end CaCL;
 
     model CaCGDL "Integrated cathode catalyst/gas diffusion layer"
@@ -2306,9 +2303,9 @@ the z axis extends across the width of the channel.</p>
         L_x=fill(0.3*U.mm/1, 1),
         L_y=fill(1*U.m/1, 1),
         L_z=fill(5*U.mm/1, 1),
-        final inclXFaces=true,
-        inclYFaces=false,
-        inclZFaces=false,
+        final inclFacesX=true,
+        inclFacesY=false,
+        inclFacesZ=false,
         redeclare FCSys.Subregions.SubregionNoIonomer subregions[n_x, n_y, n_z]
           (
           each inclLinX=false,
@@ -2385,7 +2382,7 @@ the z axis extends across the width of the channel.</p>
             initialScale=0.1), graphics={Rectangle(
                   extent={{-100,60},{100,100}},
                   fillColor={255,255,255},
-                  visible=not inclYFaces,
+                  visible=not inclFacesY,
                   fillPattern=FillPattern.Solid,
                   pattern=LinePattern.None),Rectangle(
                   extent={{-78.7855,18.6813},{-50.5004,-23.7455}},
@@ -2421,35 +2418,35 @@ the z axis extends across the width of the channel.</p>
                   smooth=Smooth.None),Line(
                   points={{-20,0},{-100,0}},
                   color={0,0,240},
-                  visible=inclXFaces,
+                  visible=inclFacesX,
                   thickness=0.5),Line(
                   points={{10,0},{100,0}},
                   color={0,0,240},
-                  visible=inclXFaces,
+                  visible=inclFacesX,
                   thickness=0.5),Line(
                   points={{0,-60},{0,-100}},
                   color={0,0,240},
-                  visible=inclYFaces,
+                  visible=inclFacesY,
                   smooth=Smooth.None,
                   thickness=0.5),Line(
                   points={{0,100},{0,50}},
                   color={0,0,240},
-                  visible=inclYFaces,
+                  visible=inclFacesY,
                   smooth=Smooth.None,
                   thickness=0.5),Line(
                   points={{-50,-50},{-10,-10}},
                   color={0,0,240},
-                  visible=inclZFaces,
+                  visible=inclFacesZ,
                   smooth=Smooth.None,
                   thickness=0.5),Line(
                   points={{20,20},{50,50}},
                   color={0,0,240},
-                  visible=inclZFaces,
+                  visible=inclFacesZ,
                   smooth=Smooth.None,
                   thickness=0.5),Text(
                   extent={{-100,60},{100,100}},
                   textString="%name",
-                  visible=not inclYFaces,
+                  visible=not inclFacesY,
                   lineColor={0,0,0})}));
     end CaGDL;
 
@@ -2627,9 +2624,9 @@ the z axis extends across the width of the channel.</p>
         L_x=fill(8*U.mm/1, 1),
         L_y=fill(1*U.m/1, 1),
         L_z=fill(5*U.mm/1, 1),
-        final inclXFaces=true,
-        final inclYFaces=true,
-        inclZFaces=false,
+        final inclFacesX=true,
+        final inclFacesY=true,
+        inclFacesZ=false,
         redeclare FCSys.Subregions.SubregionNoIonomer subregions[n_x, n_y, n_z]
           (
           each inclLinX=false,
@@ -2744,7 +2741,7 @@ used as the inlet. The z axis extends across the width of the channel.</p>
             initialScale=0.1), graphics={Rectangle(
                   extent={{-100,60},{100,100}},
                   fillColor={255,255,255},
-                  visible=not inclYFaces,
+                  visible=not inclFacesY,
                   fillPattern=FillPattern.Solid,
                   pattern=LinePattern.None),Rectangle(
                   extent={{-76.648,66.211},{-119.073,52.0689}},
@@ -2780,40 +2777,40 @@ used as the inlet. The z axis extends across the width of the channel.</p>
                   fillPattern=FillPattern.Solid),Line(
                   points={{-20,0},{-100,0}},
                   color={0,0,240},
-                  visible=inclXFaces,
+                  visible=inclFacesX,
                   thickness=0.5),Line(
                   points={{10,0},{100,0}},
                   color={127,127,127},
-                  visible=inclXFaces,
+                  visible=inclFacesX,
                   thickness=0.5),Ellipse(
                   extent={{-4,52},{4,48}},
                   lineColor={135,135,135},
                   fillColor={0,0,240},
-                  visible=inclYFaces,
+                  visible=inclFacesY,
                   fillPattern=FillPattern.Sphere),Line(
                   points={{0,-60},{0,-100}},
                   color={0,0,240},
-                  visible=inclYFaces,
+                  visible=inclFacesY,
                   smooth=Smooth.None,
                   thickness=0.5),Line(
                   points={{0,100},{0,50}},
                   color={0,0,240},
-                  visible=inclYFaces,
+                  visible=inclFacesY,
                   smooth=Smooth.None,
                   thickness=0.5),Line(
                   points={{-50,-50},{-10,-10}},
                   color={0,0,240},
-                  visible=inclZFaces,
+                  visible=inclFacesZ,
                   smooth=Smooth.None,
                   thickness=0.5),Line(
                   points={{20,20},{50,50}},
                   color={0,0,240},
-                  visible=inclZFaces,
+                  visible=inclFacesZ,
                   smooth=Smooth.None,
                   thickness=0.5),Text(
                   extent={{-100,60},{100,100}},
                   textString="%name",
-                  visible=not inclYFaces,
+                  visible=not inclFacesY,
                   lineColor={0,0,0})}),
         Diagram(graphics));
     end CaFP;
@@ -2880,7 +2877,7 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
     final parameter Q.Volume V=product(L) if hasSubregions "Volume";
 
     // Assumptions about included faces
-    parameter Boolean inclXFaces=true "X" annotation (
+    parameter Boolean inclFacesX=true "X" annotation (
       Evaluate=true,
       HideResult=true,
       choices(__Dymola_checkBox=true),
@@ -2888,7 +2885,7 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
         tab="Assumptions",
         group="Axes with faces included",
         compact=true));
-    parameter Boolean inclYFaces=true "Y" annotation (
+    parameter Boolean inclFacesY=true "Y" annotation (
       Evaluate=true,
       HideResult=true,
       choices(__Dymola_checkBox=true),
@@ -2896,7 +2893,7 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
         tab="Assumptions",
         group="Axes with faces included",
         compact=true));
-    parameter Boolean inclZFaces=true "Z" annotation (
+    parameter Boolean inclFacesZ=true "Z" annotation (
       Evaluate=true,
       HideResult=true,
       choices(__Dymola_checkBox=true),
@@ -2905,27 +2902,27 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
         group="Axes with faces included",
         compact=true));
 
-    FCSys.Connectors.FaceBus xNegative[n_y, n_z] if inclXFaces
+    FCSys.Connectors.FaceBus xNegative[n_y, n_z] if inclFacesX
       "Negative face along the x axis" annotation (Placement(transformation(
             extent={{-50,-10},{-30,10}}), iconTransformation(extent={{-110,-10},
               {-90,10}})));
-    FCSys.Connectors.FaceBus xPositive[n_y, n_z] if inclXFaces
+    FCSys.Connectors.FaceBus xPositive[n_y, n_z] if inclFacesX
       "Positive face along the x axis" annotation (Placement(transformation(
             extent={{30,-10},{50,10}}), iconTransformation(extent={{90,-10},{
               110,10}})));
-    FCSys.Connectors.FaceBus yNegative[n_x, n_z] if inclYFaces
+    FCSys.Connectors.FaceBus yNegative[n_x, n_z] if inclFacesY
       "Negative face along the y axis" annotation (Placement(transformation(
             extent={{-10,-50},{10,-30}}), iconTransformation(extent={{-10,-110},
               {10,-90}})));
-    FCSys.Connectors.FaceBus yPositive[n_x, n_z] if inclYFaces
+    FCSys.Connectors.FaceBus yPositive[n_x, n_z] if inclFacesY
       "Positive face along the y axis" annotation (Placement(transformation(
             extent={{-10,30},{10,50}}), iconTransformation(extent={{-10,90},{10,
               110}})));
-    FCSys.Connectors.FaceBus zNegative[n_x, n_y] if inclZFaces
+    FCSys.Connectors.FaceBus zNegative[n_x, n_y] if inclFacesZ
       "Negative face along the z axis" annotation (Placement(transformation(
             extent={{10,10},{30,30}}), iconTransformation(extent={{40,40},{60,
               60}})));
-    FCSys.Connectors.FaceBus zPositive[n_x, n_y] if inclZFaces
+    FCSys.Connectors.FaceBus zPositive[n_x, n_y] if inclFacesZ
       "Positive face along the z axis" annotation (Placement(transformation(
             extent={{-30,-30},{-10,-10}}), iconTransformation(extent={{-60,-60},
               {-40,-40}})));
@@ -2934,9 +2931,9 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
       hasSubregions constrainedby FCSys.Subregions.BaseClasses.PartialSubregion(
       final L={{L_x[i_x],L_y[i_y],L_z[i_z]} for i_z in 1:n_z, i_y in 1:n_y, i_x
            in 1:n_x},
-      each final inclXFaces=inclXFaces,
-      each final inclYFaces=inclYFaces,
-      each final inclZFaces=inclZFaces)
+      each final inclFacesX=inclFacesX,
+      each final inclFacesY=inclFacesY,
+      each final inclFacesZ=inclFacesZ)
       "Base subregion model and its modifications for each subregion"
       annotation (__Dymola_choicesAllMatching=true, Placement(transformation(
             extent={{-10,-10},{10,10}})));
@@ -3028,21 +3025,21 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
               100}}), graphics={Rectangle(
               extent={{-100,120},{100,160}},
               fillColor={255,255,255},
-              visible=inclYFaces,
+              visible=inclFacesY,
               fillPattern=FillPattern.Solid,
               pattern=LinePattern.None),Text(
               extent={{-100,120},{100,160}},
               textString="%name",
-              visible=inclYFaces,
+              visible=inclFacesY,
               lineColor={0,0,0}),Rectangle(
               extent={{-100,56},{100,96}},
               fillColor={255,255,255},
-              visible=not inclYFaces,
+              visible=not inclFacesY,
               fillPattern=FillPattern.Solid,
               pattern=LinePattern.None),Text(
               extent={{-100,56},{100,96}},
               textString="%name",
-              visible=not inclYFaces,
+              visible=not inclFacesY,
               lineColor={0,0,0})}));
   end Region;
 

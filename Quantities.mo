@@ -89,11 +89,10 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.VolumeSpecificAbsolute VolumeSpecificAbsolute=1*U.m^3/U.C
         "Absolute specific volume";
       parameter Q.Wavenumber Wavenumber=1*U.rad/U.m "Wavenumber";
-
     end ExampleModel;
   end Examples;
 
-  // Generated from FCSys/resources/quantities.xls, 2013-1-15
+  // Generated from FCSys/resources/quantities.xls, 2013-1-20
   type Acceleration = Modelica.Icons.TypeReal (final unit="l/T2");
   type Amount = Modelica.Icons.TypeReal (final unit="N", min=0);
   type AmountReciprocal = Modelica.Icons.TypeReal (final unit="1/N", min=0)
@@ -162,6 +161,8 @@ package Quantities "Quantities to represent physical properties"
     "Absolute pressure";
   type PressureRate = Modelica.Icons.TypeReal (final unit="m/(l.T3)")
     "Rate of pressure";
+  type PressureReciprocal = Modelica.Icons.TypeReal (final unit="l.T2/m", min=0)
+    "Reciprocal of pressure";
   type ResistanceElectrical = Modelica.Icons.TypeReal (final unit="l2.m/(N2.T)",
         min=0) "Electrical resistance";
   type Resistivity = Modelica.Icons.TypeReal (final unit="l.T/N", min=0);

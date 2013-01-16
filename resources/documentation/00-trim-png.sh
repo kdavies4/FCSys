@@ -7,8 +7,10 @@
 # It's best not to use this procedure on vector graphics images because
 # ImageMagick will render them.
 
-for f in $(find -iname '*.png'); do
+IFS=$'\n' # Allow spaces in filenames.
+for f in `find -iname '*.png'`; do
     echo Processing $f...
-    mogrify -fuzz 2% -trim $f
-    mogrify -bordercolor '#FFFFFF' -border '10x10' $f
+    mogrify -fuzz 2% -trim "$f"
+    #mogrify -bordercolor '#FFFFFF' -border '10x10' -gravity center "$f"
+    mogrify -bordercolor '#FFFFFF' -border '10x10' "$f"
 done

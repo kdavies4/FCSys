@@ -54,7 +54,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8284271"
-     inkscape:cx="119.85169"
+     inkscape:cx="76.364623"
      inkscape:cy="61.278904"
      inkscape:document-units="px"
      inkscape:current-layer="g7796"
@@ -86,7 +86,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -97,7 +97,7 @@
      transform="translate(141.70615,-418.61403)">
     <g
        id="g7340"
-       transform="matrix(0.47619047,0,0,0.51724139,148.99819,90.916216)">
+       transform="matrix(0.47619047,0,0,0.51724139,148.9982,90.916216)">
       <g
          id="g7422">
         <g
@@ -105,7 +105,7 @@
            transform="translate(290.00001,84.999994)"
            style="fill:#3aaff5;fill-opacity:1">
           <rect
-             style="fill:none;stroke:#000000;stroke-width:2.01494416;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:4.02988832,4.02988832;stroke-dashoffset:0"
+             style="fill:none;stroke:#000000;stroke-width:2.01494408;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:4.02988832, 4.02988832;stroke-dashoffset:0"
              id="rect7446"
              width="315"
              height="290"
@@ -140,7 +140,7 @@
          sodipodi:cy="200"
          sodipodi:rx="80"
          sodipodi:ry="80"
-         d="m 200,200 a 80,80 0 1 1 -160,0 80,80 0 1 1 160,0 z"
+         d="m 200,200 c 0,44.18278 -35.81722,80 -80,80 -44.18278,0 -80,-35.81722 -80,-80 0,-44.18278 35.81722,-80 80,-80 44.18278,0 80,35.81722 80,80 z"
          transform="matrix(0.81250005,0,0,0.81249985,48.452248,416.36218)" />
       <flowRoot
          xml:space="preserve"
@@ -237,7 +237,7 @@
          sodipodi:cy="200"
          sodipodi:rx="80"
          sodipodi:ry="80"
-         d="m 200,200 a 80,80 0 1 1 -160,0 80,80 0 1 1 160,0 z"
+         d="m 200,200 c 0,44.18278 -35.81722,80 -80,80 -44.18278,0 -80,-35.81722 -80,-80 0,-44.18278 35.81722,-80 80,-80 44.18278,0 80,35.81722 80,80 z"
          transform="matrix(0.81250005,0,0,0.81249985,-131.54775,416.36216)" />
       <flowRoot
          xml:space="preserve"
@@ -306,6 +306,16 @@
              height="47.142857"
              x="52.857143"
              y="31.428572" /></flowRegion><flowPara
-           id="flowPara5153-5-1-6">1</flowPara></flowRoot>    </g>
+           id="flowPara5153-5-1-6">1</flowPara></flowRoot>      <path
+         transform="matrix(0.5,0,0,0.5,23.452246,485.22223)"
+         d="m 70,187 a 5,5 0 1 1 -10,0 5,5 0 1 1 10,0 z"
+         sodipodi:ry="5"
+         sodipodi:rx="5"
+         sodipodi:cy="187"
+         sodipodi:cx="65"
+         id="path7586"
+         style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         sodipodi:type="arc" />
+    </g>
   </g>
 </svg>

@@ -19,21 +19,25 @@ rpls = [# Remove empty layers.
         (r'\n? *Icon\(graphics\), *', ' '),
         (r', *Icon\(graphics\)', ''),
         # Remove spaces on the outside of bold and underline tags.
-        (r'<b> ', ' <b>'),
-        (r' </b>', '</b> '),
-        (r'<u> ', ' <u>'),
-        (r' </u>', '</u> '),
+        ('<b> ', ' <b>'),
+        (' </b>', '</b> '),
+        ('<u> ', ' <u>'),
+        (' </u>', '</u> '),
         # Remove unless open/close tags.
-        (r'</b>( *)<u><b>', r'\1<u>'),
-        (r'</b></u>( *)<b>', r'</u>\1'),
+        ('</b>( *<u>)<b>', r'\1'),
+        ('</b>(</u> *)<b>', r'\1'),
         # Remove extra spacing.
         (r' +\n', r'\n'),
         (r'\n\n\n+', r'\n\n'),
-        (r' +<br>', r'<br>'),
-        (r'<br><br>(<br>)+', r'<br><br>'),
+        (' +<br>', '<br>'),
+        ('<br><br>(<br>)+', '<br><br>'),
+        # Remove empty lines above annotations.
+        (r'\n+(\n *annotation\()', r'\1'),
         # Use shortcuts for Units and Quantities.
-        (r' FCSys\.Quantities\.', r' Q.'),
-        (r' FCSys\.Units\.', r' U.'),
+        (r' FCSys\.Quantities\.', ' Q.'),
+        (r' FCSys\.Units\.', ' U.'),
+        # Don't use 1 when unnecessary.
+        (r'=1*U\.', '=U.'),
         # Use absolute referencing for Connectors.
         (r' Connectors\.', r' FCSys.Connectors.'),
         # Sometimes Dymola adds a useless import.
@@ -41,19 +45,19 @@ rpls = [# Remove empty layers.
         # No empty line before "end x;".
         (r'\n(\n +end )([^; ]+);', r'\1\2;'),
         # Two spaces after "Note:" and "TODO:".
-        (r'Note: +([^ ])', r'Note:  \1'),
-        (r'TODO: +([^ ])', r'TODO:  \1'),
+        ('Note: +([^ ])', r'Note:  \1'),
+        ('TODO: +([^ ])', r'TODO:  \1'),
         # Use lowercase "e" for engineering notation.
-        (r'([0-9]+)E(-?)([0-9]+)', r'\1e\2\3'),
+        ('([0-9]+)E(-?)([0-9]+)', r'\1e\2\3'),
         # Don't use a "+" for positive powers of 10 in engineering notation.
-        (r'([0-9]+)e+?([0-9]+)', r'\1e\2'),
+        ('([0-9]+)e+?([0-9]+)', r'\1e\2'),
         # Use some contractions in comments.
-        (r'(// .*)do not', r"\1don't"),
-        (r'(// .*)does not', r"\1doesn't"),
-        (r'(// .*)is not', r"\1isn't"),
-        (r'(// .*)will not', r"\1won't"),
-        (r'(// .*)cannot', r"\1can't"),
-        (r'(// .*)there is', r"\1there's"),
+        ('(// .*)do not', r"\1don't"),
+        ('(// .*)does not', r"\1doesn't"),
+        ('(// .*)is not', r"\1isn't"),
+        ('(// .*)will not', r"\1won't"),
+        ('(// .*)cannot', r"\1can't"),
+        ('(// .*)there is', r"\1there's"),
         (r"(// .*)it is ", r"\1it's "), # Trailing space prevents mixup with "isn't"
        ]
 

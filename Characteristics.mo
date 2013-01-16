@@ -32,6 +32,10 @@ package Characteristics
       Q.PressureAbsolute p=U.atm + time*10*U.bar/10;
       Q.TemperatureAbsolute T=273.15*U.K + 0*200*time*U.K/10;
 
+      //**temp:
+      output Q.Resistivity alpha=DataH2O.F()*DataH2O.m;
+      output Q.Time tau=2/DataH2O.F()/U.atm;
+
       // Results
       // -------
       // Isochoric specific heat capacity
@@ -324,7 +328,7 @@ package Characteristics
       annotation (Documentation(info="<html>
      <p>Notes:
      <ul>
-     <li>The equation for the radius is the classical radius of an electron (see 
+     <li>The equation for the radius is the classical radius of an electron (see
   <a href=\"http://en.wikipedia.org/wiki/Classical_electron_radius\">http://en.wikipedia.org/wiki/Classical_electron_radius</a>).</li>
   <li>McBride and Gordon [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>] provide correlations for the transport
   properties of e<sup>-</sup> gas.  However, they are not entered here, since they
@@ -1103,7 +1107,7 @@ package Characteristics
 
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p>
-  
+
   <p>For more information, see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.F\">Characteristic.F</a>().</p>
   </html>"));
       end F;
@@ -1241,12 +1245,40 @@ package Characteristics
   <p>This function is based on the kinetic theory of gases with the rigid-sphere (\"billiard-ball\")
   assumption [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].  It is
   independent of pressure or specific volume.  This independence very accurately matches the measured
-  fluidity of gases.  However, the fluidity varies by species and
+  dynamic fluidity of gases.  However, the dynamic fluidity varies by species and
   generally falls more rapidly with temperature than shown by this function
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 41].</p></html>"));
       end alpha;
 
     public
+      function beta_T
+        "<html>Isothermal compressiblity as a function of temperature and pressure (&beta;<sub><i>T</i></sub>)</html>"
+        extends Modelica.Icons.Function;
+
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.PressureAbsolute p=U.atm "Pressure";
+        output Q.PressureReciprocal beta_T "Isothermal compressibility";
+
+      algorithm
+        beta_T := -dv(
+                T=T,
+                p=p,
+                dT=0,
+                dp=U.Pa)/(v_Tp(T, p)*U.Pa)
+          annotation (Inline=true, smoothOrder=999);
+        // Note:  The U.Pa factor cancels but is necessary for unit checking.
+        annotation (Documentation(info="<html>
+  <p>Note that the compressibility given by this function is static&mdash;unique 
+  from the dynamic compressiblity given by 
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.Xi\">Xi</a>().</p>
+  
+  <p>For an ideal gas, this function is independent of temperature
+  (although temperature remains as a valid input).</p>
+  </html>"));
+
+      end beta_T;
+    public
+
       function c_V
         "<html>Isochoric specific heat capacity as a function of temperature and specific volume (<i>c</i><sub><i>V</i></sub>)</html>"
         extends Modelica.Icons.Function;
@@ -1395,8 +1427,8 @@ package Characteristics
       algorithm
         F := alpha(T)/m annotation (Inline=true);
         annotation (Documentation(info="<html>
-<p>Note that fluidity is defined as the reciprocal of viscosity&mdash;typically dynamic viscosity
-(see <a href=\"http://en.wikipedia.org/wiki/Viscosity#Fluidity\">http://en.wikipedia.org/wiki/Viscosity#Fluidity</a>).  
+<p>Note that dynamic fluidity is defined as the reciprocal of viscosity&mdash;typically dynamic viscosity
+(see <a href=\"http://en.wikipedia.org/wiki/Viscosity#Fluidity\">http://en.wikipedia.org/wiki/Viscosity#Fluidity</a>).
 </p>
 </html>"));
       end F;
@@ -1637,7 +1669,7 @@ package Characteristics
   assert(T_lim_c[1] <= T and T <= T_lim_c[size(T_lim_c, 1)], "Temperature " +
     String(T/U.K) + " K is out of bounds for " + name + " ([" + String(T_lim_c[1]
     /U.K) + ", " + String(T_lim_c[size(T_lim_c, 1)]/U.K) + "] K).");
-  */
+    */
         // Note:  This is commented out so that the function can be inlined.
         // Note:  In Dymola 7.4 T_lim_c[size(T_lim_c, 1)] must be used
         // instead of T_lim_c[end] due to:
@@ -1698,8 +1730,8 @@ package Characteristics
       algorithm
         Xi := alpha(T)/(m*v) annotation (Inline=true);
         annotation (Documentation(info="<html>
-<p>\"Dynamic compressibility\" is defined here as the reciprocal of the specific volume and the volume, 
-second, or bulk dynamic viscosity (see 
+<p>\"Dynamic compressibility\" is defined here as the reciprocal of the volume,
+second, or bulk dynamic viscosity and specific volume (see
 <a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).
 </p>
 </html>"));

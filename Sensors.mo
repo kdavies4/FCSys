@@ -754,7 +754,7 @@ sensor</a> models.
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
-      annotation (defaultComponentName="speciesInertSensor", Diagram(graphics));
+      annotation (defaultComponentName="speciesInertSensor");
     end Species;
 
     model Volume "Measured volume"
@@ -767,7 +767,7 @@ sensor</a> models.
       annotation (Icon(graphics={Text(
                   extent={{-100,-20},{100,-50}},
                   lineColor={127,127,127},
-                  textString="V")}), Diagram(graphics));
+                  textString="V")}));
     end Volume;
 
     model Velocity "Measured velocity"
@@ -800,7 +800,7 @@ sensor</a> models.
       annotation (Icon(graphics={Text(
                   extent={{-100,-20},{100,-50}},
                   lineColor={127,127,127},
-                  textString="phi")}), Diagram(graphics));
+                  textString="phi")}));
     end Velocity;
 
     model Temperature "Measured temperature"
@@ -814,7 +814,7 @@ sensor</a> models.
       annotation (Icon(graphics={Text(
                   extent={{-100,-20},{100,-50}},
                   lineColor={127,127,127},
-                  textString="T")}), Diagram(graphics));
+                  textString="T")}));
     end Temperature;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -1648,7 +1648,7 @@ sensor</a> model.
           pattern=LinePattern.None,
           smooth=Smooth.None));
 
-      annotation (defaultComponentName="speciesFaceSensor", Diagram(graphics));
+      annotation (defaultComponentName="speciesFaceSensor");
     end Species;
 
     model SpeciesX
@@ -1729,7 +1729,7 @@ sensor</a> model.
           pattern=LinePattern.None,
           smooth=Smooth.None));
 
-      annotation (defaultComponentName="speciesFaceSensor", Diagram(graphics));
+      annotation (defaultComponentName="speciesFaceSensor");
     end SpeciesX;
 
     model SpeciesY
@@ -1810,7 +1810,7 @@ sensor</a> model.
           pattern=LinePattern.None,
           smooth=Smooth.None));
 
-      annotation (defaultComponentName="speciesFaceSensor", Diagram(graphics));
+      annotation (defaultComponentName="speciesFaceSensor");
     end SpeciesY;
 
     model SpeciesZ
@@ -1891,7 +1891,7 @@ sensor</a> model.
           pattern=LinePattern.None,
           smooth=Smooth.None));
 
-      annotation (defaultComponentName="speciesFaceSensor", Diagram(graphics));
+      annotation (defaultComponentName="speciesFaceSensor");
     end SpeciesZ;
 
     model Density "Sensor for density"
@@ -1987,7 +1987,7 @@ sensor</a> model.
             index=1,
             extent={{-8,-3},{-8,-3}}));
 
-        annotation (defaultComponentName="speciesFaceSensor", Diagram(graphics));
+        annotation (defaultComponentName="speciesFaceSensor");
       end PartialSpecies;
     end BaseClasses;
   end Face;

@@ -1,6 +1,6 @@
 Steps to release the FCSys library:
 
-1/9/13 KD
+1/15/13 KD
     1.  Update and run 00-find-quantities.sh to be sure that all quantities are
         used in the code.  Remove the unused ones from resources/quantities.xls
         and update Quantities.mo and resources/scripts/units.mos.

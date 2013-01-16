@@ -18,8 +18,8 @@ package WorkInProgress "Incomplete classes under development"
     FCSys.Subregions.Subregion subregion(
       L={1,1,1}*U.cm,
       inclReact=false,
-      inclYFaces=false,
-      inclZFaces=false,
+      inclFacesY=false,
+      inclFacesZ=false,
       gas(
         inclH2=true,
         inclH2O=false,

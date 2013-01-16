@@ -104,7 +104,6 @@ package BaseClasses "Base classes (not for direct use)"
                       fillColor={223,223,159},
                       fillPattern=FillPattern.Solid)}));
       end Discrete;
-
     end Blocks;
 
     package Names

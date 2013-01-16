@@ -10,7 +10,6 @@ package FCSys "Modelica library of fuel cell models"
 // the LaTeX document:
 //------------------------------------------------------------------------
 
-
 extends Modelica.Icons.Package;
 // extends FCSys.Icons.Cell;
 
@@ -37,7 +36,6 @@ import FCSys.BaseClasses.Side;
 import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
 import FCSys.Subregions.Species.BaseClasses.InitMethVelocity;
 import FCSys.Subregions.Species.BaseClasses.InitMethScalar;
-
 
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
@@ -333,7 +331,7 @@ package UsersGuide "User's Guide"
     <p><b>Acknowledgments:</b><ul>
     <li>Source code contributions and bug fixes from Joerg Weiss-Ungeth&uuml;m</li>
     <li>Guidance from Robert Moore, Comas Haynes, and Chris Paredis
-    <li>Technical support from Mohammad Ali, Mike Angelo, Guido Bender, Severine Busquet, 
+    <li>Technical support from Mohammad Ali, Mike Angelo, Guido Bender, Severine Busquet,
     Chris Ford, George Nelson, Francois Steinmetz, Mike Tiller, Hubertus Tummescheit, and Mebs Virji</li>
     <li>Financial support from:
     <ul>
@@ -915,20 +913,6 @@ printing and shipping costs may be recovered.</p>
     end ModelicaLicense2;
   annotation (preferedView="info", DocumentationClass=true);
   end UsersGuide;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 annotation (
   uses(Modelica(version="3.2"), Modelica_LinearSystems2(version="2.1")),
