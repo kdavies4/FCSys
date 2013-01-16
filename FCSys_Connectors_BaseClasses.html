@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Connectors.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-15">
+<meta name="date" content="2013-1-16">
 <meta name="description" content="Base classes (not for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -52,34 +52,24 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Connectors.BaseClasses.MechanicalS.png" alt="FCSys.Connectors.BaseClasses.Mechanical" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Mechanical">Mechanical</a>
-</td><td>Connector to exchange linear momentum</td></tr>
+</td><td>Connector to exchange or transport linear momentum</td></tr>
 <tr><td><img src="images/FCSys.Connectors.BaseClasses.MechanicalS.png" alt="FCSys.Connectors.BaseClasses.Thermal" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Thermal">Thermal</a>
 </td><td>Connector to exchange or transport heat</td></tr>
 <tr><td><img src="images/FCSys.Connectors.BaseClasses.PartialChemicalS.png" alt="FCSys.Connectors.BaseClasses.PartialChemical" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.PartialChemical">PartialChemical</a>
 </td><td>Partial connector to exchange material while advecting linear momentum and enthalpy</td></tr>
-<tr><td><img src="images/FCSys.Connectors.BaseClasses.PartialFaceS.png" alt="FCSys.Connectors.BaseClasses.PartialFace" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.PartialFace">PartialFace</a>
-</td><td>Partial connector to transport linear momentum and heat of a single species</td></tr>
-<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a>
-</td><td>Enumeration of thermodynamic options for a face</td></tr>
 </table>
-<p><h3>Types and constants</h3>
-<a name="FCSys.Connectors.BaseClasses.ThermoOpt"></a><pre><font color="blue">type</font> ThermoOpt = <font color="blue">enumeration</font>(
-    ClosedAdiabatic <font color="darkgreen">&quot;Closed and adiabatic&quot;</font>,
-    ClosedDiabatic <font color="darkgreen">&quot;Closed and diabatic&quot;</font>,
-    OpenDiabatic <font color="darkgreen">&quot;Open and diabatic&quot;</font>) <font color="darkgreen">
-  &quot;Enumeration of thermodynamic options for a face&quot;</font>;</pre><p>
 <hr>
 
 <h2><a name="FCSys.Connectors.BaseClasses.Mechanical"></a><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses">FCSys.Connectors.BaseClasses</a>.Mechanical</h2>
-<b>Connector to exchange linear momentum</b><p>
+<b>Connector to exchange or transport linear momentum</b><p>
 <p><h3>Information</h3></p>
-
-  <p>Note that the geometric orientation is global (not inward).  Thus,
-  force is the rate of globally-referenced linear momentum into the component.
-  </p>
-
-    <p>For more information, see the documentation in the
-    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
+<p>This connector is used to transport the transverse 
+  orientation of linear momentum only.  The normal orientation is transported by the Normal
+  effort-flow pair (see the top-level documentation in the 
+  <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package).</p>
+  
+  <p>For more information, see the documentation in the
+  <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
 
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -95,7 +85,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
-<font color="blue">connector</font> Mechanical <font color="darkgreen">&quot;Connector to exchange linear momentum&quot;</font>
+<font color="blue">connector</font> Mechanical <font color="darkgreen">
+  &quot;Connector to exchange or transport linear momentum&quot;</font>
 
   <font color="blue">parameter </font>Integer n_lin(
     <font color="blue">final </font>min=0,
@@ -139,7 +130,7 @@ For information, see the documentation in the
 <p><h3>Information</h3></p>
 <p>For more information, see the documentation in the
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
-Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Mechanical">Mechanical</a> (Connector to exchange linear momentum).
+Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Mechanical">Mechanical</a> (Connector to exchange or transport linear momentum).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -176,58 +167,12 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
 <textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>PartialChemical;
 </pre>
-<hr>
-
-<h2><img src="images/FCSys.Connectors.BaseClasses.PartialFaceI.png" alt="FCSys.Connectors.BaseClasses.PartialFace" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Connectors.BaseClasses.PartialFace"></a><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses">FCSys.Connectors.BaseClasses</a>.PartialFace</h2>
-<b>Partial connector to transport linear momentum and heat of a single species</b><p>
-<img src="images/FCSys.Connectors.BaseClasses.PartialFaceD.png" alt="FCSys.Connectors.BaseClasses.PartialFace">
-<p><h3>Information</h3></p>
-
-    <p>The <code>normal</code> subconnector is removed if the isobaric assumption
-    is applied (<code>isobaric == true</code>).  The <code>thermal</code> subconnector
-    is always included because the temperature must be known to properly 
-    calculate the enthalpy flow rate (see the 
-    <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model).</p>
-    
-    <p>For more information, see the documentation in the
-    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package and the
-    <a href="FCSys_Connectors.html#FCSys.Connectors.Normal">Normal</a> and
-    <a href="FCSys_Connectors.html#FCSys.Connectors.Thermal">Thermal</a> connectors.</p><p>
-
-<p><h3>Parameters</h3><p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Assumptions</td></tr>
-<tr><td>Boolean</td><td>isobaric</td><td>false</td><td>Isobaric</td></tr>
-</table>
-<p><h3>Contents</h3><p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Normal">Normal</a></td><td>normal</td><td>Subconnector for normal force</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Thermal">Thermal</a></td><td>thermal</td><td>Subconnector for thermal transport</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=3>Assumptions</td></tr>
-<tr><td>Boolean</td><td>isobaric</td><td>Isobaric</td></tr>
-</table>
-<p><h3>Modelica definition</h3>
-<pre>
-<font color="blue">connector</font> PartialFace <font color="darkgreen">
-  &quot;Partial connector to transport linear momentum and heat of a single species&quot;</font>
-
-  <font color="blue">parameter </font>Boolean isobaric=false <font color="darkgreen">&quot;Isobaric&quot;</font>;
-
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Normal">Connectors.Normal</a> normal <font color="blue">if </font><font color="blue">not </font>isobaric <font color="darkgreen">&quot;Subconnector for normal force&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Thermal">Connectors.Thermal</a> thermal <font color="darkgreen">&quot;Subconnector for thermal transport&quot;</font>;
-
-<textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>PartialFace;
-</pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 15 13:48:03 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jan 16 07:47:18 2013.
 </div>
 </body>
 </html>
