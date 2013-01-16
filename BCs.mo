@@ -62,10 +62,11 @@ package BCs "Models for boundary conditions"
 
       FaceBus.Phases.Gas phaseFaceBC(
         inclH2O=true,
-        H2O(isobaric=false, redeclare Face.Material.Current
-            normal(spec(k=0))),
+        H2O(isobaric=false, redeclare Face.Material.Current normal(spec(k=0))),
+
         axis=FCSys.BaseClasses.Axis.y)
         annotation (Placement(transformation(extent={{-10,14},{10,34}})));
+
       Subregions.Volume volume
         annotation (Placement(transformation(extent={{-16,-16},{16,16}})));
       FCSys.Subregions.Phases.Gas gas(
@@ -286,34 +287,28 @@ package BCs "Models for boundary conditions"
           color={191,0,0},
           smooth=Smooth.None));
 
-      annotation (Icon(graphics={
-            Line(
-              points={{0,60},{0,-60}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-80,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,20},{80,20}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-20},{80,-20}},
-              color={191,0,0},
-              smooth=Smooth.None),
-            Line(
-              points={{0,60},{80,60}},
-              color={0,127,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-60},{80,-60}},
-              color={0,127,255},
-              smooth=Smooth.None)}));
+      annotation (Icon(graphics={Line(
+                  points={{0,60},{0,-60}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-80,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,20},{80,20}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-20},{80,-20}},
+                  color={191,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{0,60},{80,60}},
+                  color={0,127,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-60},{80,-60}},
+                  color={0,127,255},
+                  smooth=Smooth.None)}));
     end Anode;
 
     model Cathode
@@ -398,34 +393,28 @@ package BCs "Models for boundary conditions"
           color={191,0,0},
           smooth=Smooth.None));
 
-      annotation (Icon(graphics={
-            Line(
-              points={{0,60},{0,-60}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-80,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,20},{80,20}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-20},{80,-20}},
-              color={191,0,0},
-              smooth=Smooth.None),
-            Line(
-              points={{0,60},{80,60}},
-              color={0,127,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-60},{80,-60}},
-              color={0,127,255},
-              smooth=Smooth.None)}));
+      annotation (Icon(graphics={Line(
+                  points={{0,60},{0,-60}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-80,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,20},{80,20}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-20},{80,-20}},
+                  color={191,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{0,60},{80,60}},
+                  color={0,127,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-60},{80,-60}},
+                  color={0,127,255},
+                  smooth=Smooth.None)}));
     end Cathode;
 
     package Phases "Adapters for material phases"
@@ -826,13 +815,13 @@ package BCs "Models for boundary conditions"
     PartialSpecies</a> model.</p>
     </html>"),
           Icon(graphics={Line(
-                points={{0,40},{80,40}},
-                color={0,0,255},
-                smooth=Smooth.None), Line(
-                points={{0,60},{0,-20}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash)}),
+                      points={{0,40},{80,40}},
+                      color={0,0,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,60},{0,-20}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash)}),
           Diagram(graphics));
       end 'e-';
 
@@ -877,13 +866,13 @@ package BCs "Models for boundary conditions"
     PartialSpecies</a> model.</p>
     </html>"),
           Icon(graphics={Line(
-                points={{0,-40},{80,-40}},
-                color={0,127,255},
-                smooth=Smooth.None), Line(
-                points={{0,20},{0,-60}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash)}),
+                      points={{0,-40},{80,-40}},
+                      color={0,127,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,20},{0,-60}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash)}),
           Diagram(graphics));
       end FluidNonionic;
 
@@ -896,10 +885,10 @@ package BCs "Models for boundary conditions"
     <a href=\"modelica://FCSys.BCs.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"), Icon(graphics={Line(
-                points={{0,20},{0,-20}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash)}));
+                      points={{0,20},{0,-20}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash)}));
       end Solid;
 
       package BaseClasses "Base classes (not for direct use)"
@@ -949,12 +938,12 @@ package BCs "Models for boundary conditions"
             Documentation(info="<html><p>Note that shear force is not included.</p>
   </html>"),
             Icon(graphics={Line(
-                  points={{0,0},{-80,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None), Line(
-                  points={{0,0},{80,0}},
-                  color={191,0,0},
-                  smooth=Smooth.None)}));
+                          points={{0,0},{-80,0}},
+                          color={127,127,127},
+                          smooth=Smooth.None),Line(
+                          points={{0,0},{80,0}},
+                          color={191,0,0},
+                          smooth=Smooth.None)}));
         end PartialSpecies;
       end BaseClasses;
     end Species;
@@ -3832,8 +3821,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           H2O(isobaric=true),
           N2(isobaric=true),
           O2(isobaric=true)),
-        graphite(C(isobaric=true), 'e-'(thermoOpt=
-                ThermoOpt.ClosedDiabatic)),
+        graphite(C(isobaric=true), 'e-'(thermoOpt=ThermoOpt.ClosedDiabatic)),
         ionomer(
           C19HF37O5S(isobaric=true),
           H2O(isobaric=true),
@@ -3851,8 +3839,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           H2O(isobaric=true),
           N2(isobaric=true),
           O2(isobaric=true)),
-        graphite(C(isobaric=true), 'e-'(thermoOpt=
-                ThermoOpt.ClosedAdiabatic)),
+        graphite(C(isobaric=true), 'e-'(thermoOpt=ThermoOpt.ClosedAdiabatic)),
         ionomer(
           C19HF37O5S(isobaric=true),
           H2O(isobaric=true),
@@ -4076,8 +4063,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        Face.Species C(final axis=axis, isobaric=true) if
-          inclC "Model" annotation (Dialog(
+        Face.Species C(final axis=axis, isobaric=true) if inclC "Model"
+          annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclC), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -4180,8 +4167,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        Face.Species C19HF37O5S(final axis=axis,isobaric=true)
-          if inclC19HF37O5S "Model" annotation (Dialog(
+        Face.Species C19HF37O5S(final axis=axis,isobaric=true) if
+          inclC19HF37O5S "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclC19HF37O5S), Placement(transformation(extent={{-10,-10},
@@ -4367,9 +4354,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 (see the <a href=\"modelica://FCSys.Connectors\">Connectors</a> package),
 the models for the boundary conditions must be as well.  A
 <a href=\"modelica://FCSys.Connectors.Face\">Face</a>
-connector (<a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a>,
-<a href=\"modelica://FCSys.Connectors.FaceY\">FaceY</a>, or
-<a href=\"modelica://FCSys.Connectors.FaceZ\">FaceZ</a>)
+connector (<a href=\"modelica://FCSys.Connectors.Face\">Face</a>,
+<a href=\"modelica://FCSys.Connectors.Face\">Face</a>, or
+<a href=\"modelica://FCSys.Connectors.Face\">Face</a>)
 is used in <a href=\"modelica://FCSys.Subregions.Species\">Species</a> models,
 and there is a corresponding <a href=\"modelica://FCSys.BCs.Face.Species.Species\">Species
 boundary condition</a> model in this package. The
@@ -4398,7 +4385,7 @@ boundary condition</a> model.
         choices(__Dymola_checkBox=true),
         Dialog(
           compact=true,
-          group="X-axis linear momentum",
+          group="X-axis linear momentum (if not normal)",
           enable=axis <> 1,
           __Dymola_descriptionLabel=true));
       // Note:  Dymola 7.4 doesn't recognize enumerations in the dialog enable
@@ -4410,7 +4397,7 @@ boundary condition</a> model.
         "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
-          group="X-axis linear momentum",
+          group="X-axis linear momentum (if not normal)",
           enable=axis <> 1 and not inviscidX,
           __Dymola_descriptionLabel=true),
         Placement(transformation(extent={{-40,-14},{-20,6}})));
@@ -4421,7 +4408,7 @@ boundary condition</a> model.
         choices(__Dymola_checkBox=true),
         Dialog(
           compact=true,
-          group="Y-axis linear momentum",
+          group="Y-axis linear momentum (if not normal)",
           enable=axis <> 2,
           __Dymola_descriptionLabel=true));
       replaceable Mechanical.Velocity transverseY(spec(k=0)) if axis <> Axis.y
@@ -4429,7 +4416,7 @@ boundary condition</a> model.
         "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
-          group="Y-axis linear momentum",
+          group="Y-axis linear momentum (if not normal)",
           enable=axis <> 2 and not inviscidY,
           __Dymola_descriptionLabel=true),
         Placement(transformation(extent={{-10,-14},{10,6}})));
@@ -4440,7 +4427,7 @@ boundary condition</a> model.
         choices(__Dymola_checkBox=true),
         Dialog(
           compact=true,
-          group="Z-axis linear momentum",
+          group="Z-axis linear momentum (if not normal)",
           enable=axis <> 3,
           __Dymola_descriptionLabel=true));
       replaceable Mechanical.Velocity transverseZ(spec(k=0)) if axis <> Axis.z
@@ -4448,7 +4435,7 @@ boundary condition</a> model.
         "Type of condition" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(
-          group="Z-axis linear momentum",
+          group="Z-axis linear momentum (if not normal)",
           enable=axis <> 3 and not inviscidZ,
           __Dymola_descriptionLabel=true),
         Placement(transformation(extent={{20,-14},{40,6}})));
@@ -4560,7 +4547,8 @@ boundary condition</a> model.
           // Note:  This is included so that the type of BC is recorded with the
           // results.
 
-          FCSys.Connectors.Normal material "Material subconnector for the face"
+          FCSys.Connectors.BaseClasses.Normal material
+            "Material subconnector for the face"
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
           annotation (defaultComponentName="material");
         end PartialBC;
@@ -4603,7 +4591,7 @@ boundary condition</a> model.
           // Note:  This is included so that the type of BC is recorded with the
           // results.
 
-          FCSys.Connectors.Transverse mechanical
+          FCSys.Connectors.BaseClasses.Transverse mechanical
             "Mechanical subconnector for the face"
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
           annotation (defaultComponentName="mechanicalBC");
@@ -4668,41 +4656,33 @@ boundary condition</a> model.
         "<html>Partial BC for a face of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
         extends FCSys.BaseClasses.Icons.BCs.Single;
 
-        parameter ThermoOpt isobaric=false
-          "Options for material and thermal subconnectors" annotation (
+        // Material
+        parameter Boolean isobaric=false "Isobaric condition" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
-          Dialog(group="Assumptions",compact=true));
-
-        // Material
+          Dialog(group="Normal linear momentum",compact=true));
         replaceable Material.Density normal(spec(k(start=U.atm/(298.15*U.K))))
-          if not isobaric constrainedby
-          Material.BaseClasses.PartialBC "Type of condition" annotation (
+          if not isobaric constrainedby Material.BaseClasses.PartialBC
+          "Type of condition" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
-            group="Material",
-            enable=thermoOpt == 3,
+            group="Normal linear momentum",
+            enable=not isobaric,
             __Dymola_descriptionLabel=true),
           Placement(transformation(extent={{-70,-14},{-50,6}})));
-        // Note:  Dymola 7.4 doesn't recognize enumerations in the dialog enable
-        // option, e.g.,
-        //     enable=thermoOpt <> ThermoOpt.ClosedAdiabatic.
-        // Therefore, the values of the enumerations are specified numerically.
         // Note:  In Dymola 7.4, the value of k must be specified here instead
         // of at the lower level (e.g., Material.Density) so that the spec
         // subcomponent can be replaced by blocks that do not contain the
         // parameter k.
 
         // Heat
-        replaceable Thermal.Temperature thermal(spec(k(start=298.15*U.K))) if
-          thermoOpt <> ThermoOpt.ClosedAdiabatic constrainedby
-          Thermal.BaseClasses.PartialBC "Type of condition" annotation (
+        replaceable Thermal.Temperature thermal(spec(k(start=298.15*U.K)))
+          constrainedby Thermal.BaseClasses.PartialBC "Type of condition"
+          annotation (
           __Dymola_choicesFromPackage=true,
-          Dialog(
-            group="Heat",
-            enable=thermoOpt <> 1,
-            __Dymola_descriptionLabel=true),
+          Dialog(group="Heat", __Dymola_descriptionLabel=true),
           Placement(transformation(extent={{50,-14},{70,6}})));
+
         FCSys.Connectors.RealInputBus u "Input bus for external signal sources"
           annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
@@ -4986,8 +4966,7 @@ boundary condition</a> model.
           H2O(isobaric=true),
           N2(isobaric=true),
           O2(isobaric=true)),
-        graphite(C(isobaric=true), 'e-'(thermoOpt=
-                ThermoOpt.ClosedDiabatic)),
+        graphite(C(isobaric=true), 'e-'(thermoOpt=ThermoOpt.ClosedDiabatic)),
         ionomer(
           C19HF37O5S(isobaric=true),
           H2O(isobaric=true),
@@ -5005,8 +4984,7 @@ boundary condition</a> model.
           H2O(isobaric=true),
           N2(isobaric=true),
           O2(isobaric=true)),
-        graphite(C(isobaric=true), 'e-'(thermoOpt=
-                ThermoOpt.ClosedAdiabatic)),
+        graphite(C(isobaric=true), 'e-'(thermoOpt=ThermoOpt.ClosedAdiabatic)),
         ionomer(
           C19HF37O5S(isobaric=true),
           H2O(isobaric=true),
@@ -5169,8 +5147,8 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FaceDifferential.Species C(isobaric=true) if inclC
-          "Model" annotation (Dialog(
+        FaceDifferential.Species C(isobaric=true) if inclC "Model" annotation (
+            Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclC), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -5242,8 +5220,8 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FaceDifferential.Species C19HF37O5S(isobaric=true)
-          if inclC19HF37O5S "Model" annotation (Dialog(
+        FaceDifferential.Species C19HF37O5S(isobaric=true) if inclC19HF37O5S
+          "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclC19HF37O5S), Placement(transformation(extent={{-10,-10},
@@ -5609,10 +5587,10 @@ boundary condition</a> model.
           // Note:  This is included so that the type of BC is recorded with the
           // results.
 
-          FCSys.Connectors.Normal negative
+          FCSys.Connectors.BaseClasses.Normal negative
             "Material connector for the negative face" annotation (Placement(
                 transformation(extent={{-110,-10},{-90,10}})));
-          FCSys.Connectors.Normal positive
+          FCSys.Connectors.BaseClasses.Normal positive
             "Material connector for the positive face"
             annotation (Placement(transformation(extent={{90,-10},{110,10}})));
         equation
@@ -5662,10 +5640,10 @@ boundary condition</a> model.
           // Note:  This is included so that the type of BC is recorded with the
           // results.
 
-          FCSys.Connectors.Transverse negative
+          FCSys.Connectors.BaseClasses.Transverse negative
             "Linear momentum connector for the negative face" annotation (
               Placement(transformation(extent={{-110,-10},{-90,10}})));
-          FCSys.Connectors.Transverse positive
+          FCSys.Connectors.BaseClasses.Transverse positive
             "Linear momentum connector for the positive face"
             annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 
@@ -5740,40 +5718,31 @@ boundary condition</a> model.
         "<html>Partial BC for a pair of faces of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
         extends FCSys.BaseClasses.Icons.BCs.Double;
 
-        parameter ThermoOpt isobaric=false
-          "Options for material and thermal subconnectors" annotation (
+        // Material
+        parameter Boolean isobaric=false "Isobaric condition" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
-          Dialog(group="Assumptions",compact=true));
-
-        // Material
-        replaceable Material.Density normal(spec(k(start=4*U.C/U.cc))) if
-          not isobaric constrainedby
-          Material.BaseClasses.PartialBC "Type of condition" annotation (
+          Dialog(group="Normal linear momentum",compact=true));
+        replaceable Material.Density normal(spec(k(start=4*U.C/U.cc))) if not
+          isobaric constrainedby Material.BaseClasses.PartialBC
+          "Type of condition" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(
-            group="Material",
-            enable=thermoOpt == 3,
+            group="Normal linear momentum",
+            enable=not isobaric,
             __Dymola_descriptionLabel=true),
           Placement(transformation(extent={{-70,0},{-50,20}})));
-        // Note:  Dymola 7.4 doesn't recognize enumerations in the dialog enable
-        // option, e.g.,
-        //     enable=thermoOpt <> ThermoOpt.ClosedAdiabatic.
-        // Therefore, the values of the enumerations are specified numerically.
         // Note:  In Dymola 7.4, the value of k must be specified here instead
         // of at the lower level (e.g., Material.Density) so that the spec
         // subcomponent can be replaced by blocks that do not contain the
         // parameter k.
 
         // Heat
-        replaceable Thermal.Temperature thermal(spec(k(start=298.15*U.K))) if
-          thermoOpt <> ThermoOpt.ClosedAdiabatic constrainedby
-          Thermal.BaseClasses.PartialBC "Type of condition" annotation (
+        replaceable Thermal.Temperature thermal(spec(k(start=298.15*U.K)))
+          constrainedby Thermal.BaseClasses.PartialBC "Type of condition"
+          annotation (
           __Dymola_choicesFromPackage=true,
-          Dialog(
-            group="Heat",
-            enable=thermoOpt <> 1,
-            __Dymola_descriptionLabel=true),
+          Dialog(group="Heat", __Dymola_descriptionLabel=true),
           Placement(transformation(extent={{50,-40},{70,-20}})));
 
         FCSys.Connectors.RealInputBus u "Input bus for external signal sources"

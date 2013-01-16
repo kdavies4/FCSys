@@ -1282,11 +1282,11 @@ package Figures "Graphical layouts for documentation"
     extends FCSys.BaseClasses.Icons.Cell;
 
     annotation (Icon(graphics={Rectangle(
-              extent={{-100,100},{100,65}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0})}));
+            extent={{-100,100},{100,65}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0})}));
   end Logo;
 
   model AnFPIcon "Anode flow plate"
@@ -1478,83 +1478,6 @@ package Figures "Graphical layouts for documentation"
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
   end VolumeIcon;
 
-  model ConnectorHieararchy "Instantiation hierarchy of the connectors"
-
-    FCSys.Connectors.BaseClasses.PartialChemical Chemical annotation (Placement(
-          transformation(extent={{-42,-6},{-22,14}}), iconTransformation(extent
-            ={{10,-20},{30,0}})));
-    FCSys.Connectors.BaseClasses.PartialFace Face annotation (Placement(
-          transformation(extent={{2,-6},{22,14}}), iconTransformation(extent={{
-              -10,-20},{10,0}})));
-
-    FCSys.Connectors.Normal Material annotation (Placement(transformation(
-            extent={{-22,-30},{-2,-10}}), iconTransformation(extent={{10,-40},{
-              30,-20}})));
-    FCSys.Connectors.Thermal Thermal annotation (Placement(transformation(
-            extent={{26,-30},{46,-10}}), iconTransformation(extent={{-10,-40},{
-              10,-20}})));
-    FCSys.Connectors.Transverse Mechanical annotation (Placement(transformation(
-            extent={{2,-30},{22,-10}}), iconTransformation(extent={{-30,-40},{-10,
-              -20}})));
-    annotation (Diagram(graphics={Line(
-              points={{12,28},{12,4}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{-32,28},{-32,4}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{12,4},{12,-20}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{12,4},{-12,-20}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{12,4},{36,-20}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),Line(
-              points={{60,34},{60,-18}},
-              color={0,0,0},
-              smooth=Smooth.None),Line(
-              points={{58,30},{60,34},{62,30}},
-              color={0,0,0},
-              smooth=Smooth.None),Text(
-              extent={{48,40},{72,36}},
-              lineColor={0,0,0},
-              textString="Composite"),Text(
-              extent={{46,-20},{74,-24}},
-              lineColor={0,0,0},
-              textString="Basic"),Text(
-              extent={{-40,40},{-24,36}},
-              lineColor={0,0,0},
-              textString="Chemical"),Text(
-              extent={{-40,36},{-24,32}},
-              lineColor={0,0,0},
-              textString="bus"),Ellipse(
-              extent={{-35,31},{-29,25}},
-              lineColor={208,104,0},
-              fillColor={255,128,0},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{4,40},{20,36}},
-              lineColor={0,0,0},
-              textString="Face"),Text(
-              extent={{4,36},{20,32}},
-              lineColor={0,0,0},
-              textString="bus"),Ellipse(
-              extent={{9,31},{15,25}},
-              lineColor={127,127,127},
-              fillColor={191,191,191},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{16,-18},{22,-22}},
-              lineColor={0,0,0},
-              textString="x 2")}));
-  end ConnectorHieararchy;
 
   package ReactionComparison
     "Comparison of traditional reaction rate to linear alternative"
@@ -1657,13 +1580,13 @@ package Figures "Graphical layouts for documentation"
       der(N)/U.s = -nu*Xidot "stoichiometry";
 
       annotation (Icon(graphics={Rectangle(
-                  extent={{-100,100},{100,-100}},
-                  lineColor={0,0,0},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid),Text(
-                  extent={{-100,40},{100,80}},
-                  textString="%name",
-                  lineColor={0,0,0})}));
+              extent={{-100,100},{100,-100}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid), Text(
+              extent={{-100,40},{100,80}},
+              textString="%name",
+              lineColor={0,0,0})}));
     end TraditionalReaction;
 
     model Reaction
@@ -1686,13 +1609,13 @@ package Figures "Graphical layouts for documentation"
       material.Ndot = nu*Xidot "stoichiometry";
 
       annotation (Icon(graphics={Rectangle(
-                  extent={{-100,100},{100,-100}},
-                  lineColor={0,0,0},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid),Text(
-                  extent={{-100,40},{100,80}},
-                  textString="%name",
-                  lineColor={0,0,0})}));
+              extent={{-100,100},{100,-100}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid), Text(
+              extent={{-100,40},{100,80}},
+              textString="%name",
+              lineColor={0,0,0})}));
     end Reaction;
 
     model Species
@@ -1727,13 +1650,13 @@ package Figures "Graphical layouts for documentation"
       // Material conservation
       der(N)/U.s = material.Ndot;
       annotation (Icon(graphics={Rectangle(
-                  extent={{-100,100},{100,-100}},
-                  lineColor={0,0,0},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid),Text(
-                  extent={{-100,40},{100,80}},
-                  textString="%name",
-                  lineColor={0,0,0})}));
+              extent={{-100,100},{100,-100}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid), Text(
+              extent={{-100,40},{100,80}},
+              textString="%name",
+              lineColor={0,0,0})}));
     end Species;
 
     connector Material "Connector for density-driven reaction"
@@ -1742,4 +1665,344 @@ package Figures "Graphical layouts for documentation"
     end Material;
   end ReactionComparison;
 
+  model ConnectorHieararchy
+    "Extension and instantiation hierarchy of the connectors"
+
+    FCSys.Connectors.Face Face annotation (Placement(transformation(extent={{
+              -82,-10},{-62,10}}), iconTransformation(extent={{-10,-10},{10,10}})));
+
+
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{
+              -140,-60},{140,60}}), graphics={
+          Line(
+            points={{50,-2},{72,-24}},
+            color={191,191,191},
+            smooth=Smooth.None,
+            arrow={Arrow.Filled,Arrow.None}),
+          Line(
+            points={{24,0},{24,-24}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{2,-2},{24,-24}},
+            color={191,191,191},
+            smooth=Smooth.None,
+            arrow={Arrow.Filled,Arrow.None}),
+          Line(
+            points={{46,-2},{24,-24}},
+            color={191,191,191},
+            smooth=Smooth.None,
+            arrow={Arrow.Filled,Arrow.None}),
+          Line(
+            points={{-22,-2},{24,-24}},
+            color={191,191,191},
+            smooth=Smooth.None,
+            arrow={Arrow.Filled,Arrow.None}),
+          Line(
+            points={{70,0},{24,-24}},
+            color={191,191,191},
+            smooth=Smooth.None,
+            arrow={Arrow.Filled,Arrow.None}),
+          Line(
+            points={{-26,-2},{-48,-24}},
+            color={191,191,191},
+            smooth=Smooth.None,
+            arrow={Arrow.Filled,Arrow.None}),
+          Line(
+            points={{-2,-2},{-48,-24}},
+            color={191,191,191},
+            smooth=Smooth.None,
+            arrow={Arrow.Filled,Arrow.None}),
+          Line(
+            points={{24,0},{-48,-24}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{70,-2},{48,-24}},
+            color={191,191,191},
+            smooth=Smooth.None,
+            arrow={Arrow.Filled,Arrow.None}),
+          Line(
+            points={{72,-2},{72,-24}},
+            color={191,191,191},
+            smooth=Smooth.None,
+            arrow={Arrow.Filled,Arrow.None}),
+          Line(
+            points={{48,-2},{48,-24}},
+            color={191,191,191},
+            smooth=Smooth.None,
+            arrow={Arrow.Filled,Arrow.None}),
+          Line(
+            points={{0,-2},{0,-24}},
+            color={191,191,191},
+            smooth=Smooth.None,
+            arrow={Arrow.Filled,Arrow.None}),
+          Line(
+            points={{-24,-2},{-24,-24}},
+            color={191,191,191},
+            smooth=Smooth.None,
+            arrow={Arrow.Filled,Arrow.None}),
+          Rectangle(
+            extent={{86,46},{122,22}},
+            lineColor={0,0,0},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Line(
+            points={{60,24},{48,0}},
+            color={0,0,0},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{-72,24},{-72,0}},
+            color={0,0,0},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{60,24},{72,0}},
+            color={0,0,0},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{-72,-2},{-72,-24}},
+            color={191,191,191},
+            smooth=Smooth.None,
+            arrow={Arrow.Filled,Arrow.None}),
+          Line(
+            points={{-74,-2},{-96,-24}},
+            color={191,191,191},
+            smooth=Smooth.None,
+            arrow={Arrow.Filled,Arrow.None}),
+          Line(
+            points={{-70,-2},{-48,-24}},
+            color={191,191,191},
+            smooth=Smooth.None,
+            arrow={Arrow.Filled,Arrow.None}),
+          Line(
+            points={{-120,30},{-120,-22}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{-122,26},{-120,30},{-118,26}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Text(
+            extent={{-132,36},{-108,32}},
+            lineColor={0,0,0},
+            textString="Composite"),
+          Text(
+            extent={{-134,-24},{-106,-28}},
+            lineColor={0,0,0},
+            textString="Basic"),
+          Text(
+            extent={{52,36},{68,32}},
+            lineColor={0,0,0},
+            textString="Chemical"),
+          Text(
+            extent={{52,32},{68,28}},
+            lineColor={0,0,0},
+            textString="Bus"),
+          Ellipse(
+            extent={{57,27},{63,21}},
+            lineColor={208,104,0},
+            fillColor={255,128,0},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5),
+          Text(
+            extent={{-80,36},{-64,32}},
+            lineColor={0,0,0},
+            textString="Face"),
+          Text(
+            extent={{-80,32},{-64,28}},
+            lineColor={0,0,0},
+            textString="Bus"),
+          Ellipse(
+            extent={{-75,27},{-69,21}},
+            lineColor={127,127,127},
+            fillColor={191,191,191},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5),
+          Text(
+            extent={{92,30},{122,26}},
+            lineColor={0,0,0},
+            textString="    Instantiation"),
+          Text(
+            extent={{92,36},{122,32}},
+            lineColor={0,0,0},
+            textString=" Expansion"),
+          Text(
+            extent={{92,42},{122,38}},
+            lineColor={0,0,0},
+            textString="Extension"),
+          Text(
+            extent={{-84,-16},{-60,-20}},
+            lineColor={0,0,0},
+            textString="Transverse"),
+          Ellipse(
+            extent={{-99,-21},{-93,-27}},
+            lineColor={127,127,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Ellipse(
+            extent={{-75,-21},{-69,-27}},
+            lineColor={127,127,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Text(
+            extent={{-108,-16},{-84,-20}},
+            lineColor={0,0,0},
+            textString="Normal"),
+          Text(
+            extent={{-60,-16},{-36,-20}},
+            lineColor={0,0,0},
+            textString="Thermal"),
+          Ellipse(
+            extent={{-51,-21},{-45,-27}},
+            lineColor={127,127,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Text(
+            extent={{64,12},{80,8}},
+            lineColor={0,0,0},
+            textString="Chemical"),
+          Text(
+            extent={{64,8},{80,4}},
+            lineColor={0,0,0},
+            textString="Output"),
+          Ellipse(
+            extent={{69,3},{75,-3}},
+            lineColor={208,104,0},
+            fillColor={255,128,0},
+            fillPattern=FillPattern.Solid),
+          Text(
+            extent={{40,12},{56,8}},
+            lineColor={0,0,0},
+            textString="Chemical"),
+          Text(
+            extent={{40,8},{56,4}},
+            lineColor={0,0,0},
+            textString="Input"),
+          Ellipse(
+            extent={{45,3},{51,-3}},
+            lineColor={208,104,0},
+            fillColor={255,128,0},
+            fillPattern=FillPattern.Solid),
+          Ellipse(
+            extent={{46,2},{50,-2}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            lineColor={208,104,0}),
+          Ellipse(
+            extent={{45,-21},{51,-27}},
+            lineColor={127,127,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Text(
+            extent={{12,12},{36,8}},
+            lineColor={0,0,0},
+            textString="Inert and"),
+          Text(
+            extent={{12,8},{36,4}},
+            lineColor={0,0,0},
+            textString="Inert Internal"),
+          Ellipse(
+            extent={{21,3},{27,-3}},
+            lineColor={72,90,180},
+            fillColor={102,128,255},
+            fillPattern=FillPattern.Solid),
+          Ellipse(
+            extent={{22,2},{26,-2}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            lineColor={72,90,180}),
+          Text(
+            extent={{-32,12},{-16,8}},
+            lineColor={0,0,0},
+            textString="Inert"),
+          Text(
+            extent={{-32,8},{-16,4}},
+            lineColor={0,0,0},
+            textString="Amagat"),
+          Ellipse(
+            extent={{-27,3},{-21,-3}},
+            lineColor={72,90,180},
+            fillColor={102,128,255},
+            fillPattern=FillPattern.Solid),
+          Text(
+            extent={{-28,2},{-20,-2}},
+            lineColor={0,0,0},
+            textString="A"),
+          Text(
+            extent={{-8,12},{8,8}},
+            lineColor={0,0,0},
+            textString="Inert"),
+          Text(
+            extent={{-8,8},{8,4}},
+            lineColor={0,0,0},
+            textString="Dalton"),
+          Ellipse(
+            extent={{-3,3},{3,-3}},
+            lineColor={72,90,180},
+            fillColor={102,128,255},
+            fillPattern=FillPattern.Solid),
+          Text(
+            extent={{-4,2},{4,-2}},
+            lineColor={0,0,0},
+            textString="D"),
+          Ellipse(
+            extent={{21,-21},{27,-27}},
+            lineColor={127,127,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Text(
+            extent={{38,-16},{58,-20}},
+            lineColor={0,0,0},
+            textString="Material"),
+          Ellipse(
+            extent={{-3,-21},{3,-27}},
+            lineColor={127,127,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Text(
+            extent={{64,-16},{80,-20}},
+            lineColor={0,0,0},
+            textString="Fluid"),
+          Text(
+            extent={{12,-16},{36,-20}},
+            lineColor={0,0,0},
+            textString="Mechanical"),
+          Text(
+            extent={{-36,-16},{-12,-20}},
+            lineColor={0,0,0},
+            textString="Amagat"),
+          Text(
+            extent={{-12,-16},{12,-20}},
+            lineColor={0,0,0},
+            textString="Dalton"),
+          Ellipse(
+            extent={{69,-21},{75,-27}},
+            lineColor={127,127,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Ellipse(
+            extent={{-27,-21},{-21,-27}},
+            lineColor={127,127,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Line(
+            points={{90,34},{96,34}},
+            color={0,0,0},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{96,28},{90,28}},
+            color={0,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{3,0},{-3,0}},
+            color={191,191,191},
+            smooth=Smooth.None,
+            arrow={Arrow.Filled,Arrow.None},
+            origin={93,40},
+            rotation=360)}), Icon(graphics));
+  end ConnectorHieararchy;
 end Figures;

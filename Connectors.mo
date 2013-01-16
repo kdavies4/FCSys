@@ -77,10 +77,10 @@ package Connectors "Declarative and imperative connectors"
             lineColor={208,104,0}), Ellipse(extent={{-100,100},{100,-100}},
               lineColor={208,104,0})}),
       Diagram(graphics={Ellipse(
-            extent={{-18,18},{18,-18}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            lineColor={208,104,0})}));
+              extent={{-18,18},{18,-18}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={208,104,0})}));
 
   end ChemicalInput;
 
@@ -104,32 +104,12 @@ package Connectors "Declarative and imperative connectors"
   end ChemicalOutput;
 
   expandable connector FaceBus
-    "<html>Bus of <a href=\"modelica://FCSys.Connectors.Face\">Face</a>, <a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a>, <a href=\"modelica://FCSys.Connectors.FaceY\">FaceY</a>, or <a href=\"modelica://FCSys.Connectors.FaceZ\">FaceZ</a> connectors (for multiple species)</html>"
+    "<html>Bus of <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors (for multiple species)</html>"
 
     annotation (
       defaultComponentName="face",
       Documentation(info="<html><p>There is no minimal set of variables.  Species are included by connecting instances
-    of a <a href=\"modelica://FCSys.Connectors.Face\">Face</a>,
-    <a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a>,
-    <a href=\"modelica://FCSys.Connectors.FaceY\">FaceY</a>, or
-    <a href=\"modelica://FCSys.Connectors.FaceZ\">FaceZ</a> connector.  In order to allow
-    the subconnectors of the <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors
-    (instances of <a href=\"modelica://FCSys.Connectors.Normal\">Normal</a>,
-    <a href=\"modelica://FCSys.Connectors.Transverse\">Transverse</a>,
-    and <a href=\"modelica://FCSys.Connectors.Thermal\">Thermal</a>) to be included independently, those
-    subconnectors are connected explicitly.  For example,
-    <blockquote>
-        <code>
-        connect(species.xNegative.normal, xNegative.species.normal);<br>
-        connect(species.xNegative.transverseY, xNegative.species.transverseY);<br>
-        connect(species.xNegative.transverseZ, xNegative.species.transverseZ);<br>
-        connect(species.xNegative.thermal, xNegative.species.thermal);
-        </code>
-    </blockquote>
-    where <code>species</code> is an instance of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a>
-    model in which <code>xNegative</code> is a <a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a> connector.
-    Meanwhile, <code>xNegative</code> (not <code>species.xNegative</code>) is an instance of this
-    connector (<a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>).
+    of a <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connector.
     </p></html>"),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
@@ -140,18 +120,18 @@ package Connectors "Declarative and imperative connectors"
             lineThickness=0.5)}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics={Text(
-            extent={{-100,36},{100,76}},
-            textString="%name",
-            lineColor={0,0,0}), Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={127,127,127},
-            fillColor={191,191,191},
-            fillPattern=FillPattern.Solid,
-            lineThickness=0.5)}));
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0}),Ellipse(
+              extent={{-30,30},{30,-30}},
+              lineColor={127,127,127},
+              fillColor={191,191,191},
+              fillPattern=FillPattern.Solid,
+              lineThickness=0.5)}));
   end FaceBus;
 
   expandable connector FaceBusInternal
-    "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.Face\">Face</a>, <a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a>, <a href=\"modelica://FCSys.Connectors.FaceY\">FaceY</a>, or <a href=\"modelica://FCSys.Connectors.FaceZ\">FaceZ</a> connectors (for multiple species)</html>"
+    "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors (for multiple species)</html>"
 
     annotation (
       defaultComponentPrefixes="protected",
@@ -181,45 +161,43 @@ package Connectors "Declarative and imperative connectors"
   end FaceBusInternal;
 
   connector Face
-    "Connector to transport linear momentum and heat of a single species (any axis)"
-    extends BaseClasses.PartialFace;
+    "Connector to transport linear momentum and heat of a single species"
 
-    parameter Axis axis=Axis.x "Axis normal to the face";
-    parameter Boolean inviscidX=false if axis <> Axis.x
-      "Include shear force along the x axis" annotation (
-      HideResult=true,
-      choices(__Dymola_checkBox=true),
-      Dialog(
-        compact=true,
-        group="Boundary conditions (will remove subconnectors)",
-        enable=axis <> 1));
-    parameter Boolean inviscidY=false if axis <> Axis.y
-      "Include shear force along the y axis" annotation (
-      HideResult=true,
-      choices(__Dymola_checkBox=true),
-      Dialog(
-        compact=true,
-        group="Boundary conditions (will remove subconnectors)",
-        enable=axis <> 2));
-    parameter Boolean inviscidZ=false if axis <> Axis.z
-      "Include shear force along the z axis" annotation (
-      HideResult=true,
-      choices(__Dymola_checkBox=true),
-      Dialog(
-        compact=true,
-        group="Boundary conditions (will remove subconnectors)",
-        enable=axis <> 3));
-    // Note:  Dymola 7.4 doesn't recognize enumerations in the dialog enable
-    // option, e.g.,
-    //     enable=axis <> Axis.x.
-    // Therefore, the values of the enumerations are specified numerically.
+    // Normal
+    Q.CurrentAreic J(nominal=U.A/U.cm^2) "Areic current";
+    flow Q.Force mPhidot_0(nominal=U.atm*U.cm^2) "Force";
 
-    Transverse transverseX if axis <> Axis.x and not inviscidX
-      "Subconnector for x-axis linear momentum";
-    Transverse transverseY if axis <> Axis.y and not inviscidY
-      "Subconnector for y-axis linear momentum";
-    Transverse transverseZ if axis <> Axis.z and not inviscidZ
-      "Subconnector for z-axis linear momentum";
+    // Transverse
+    extends BaseClasses.Mechanical(final n_lin=2);
+
+    // Thermal
+    extends BaseClasses.Thermal;
+
+    annotation (
+      Documentation(info="<html>
+    <p>Note that the geometric orientation is global.
+    Areic current is positive in the globally positive direction (not inward).
+    Force is the rate of globally-referenced linear momentum into the component.
+    </p>
+  
+    <p>For more information, see the documentation in the
+    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.s.</p></html>"),
+
+      Diagram(coordinateSystem(preserveAspectRatio=true,extent={{-100,-100},{
+              100,100}}), graphics={Text(
+            extent={{-100,36},{100,76}},
+            textString="%name",
+            lineColor={0,0,0}), Ellipse(
+            extent={{-30,30},{30,-30}},
+            lineColor={127,127,127},
+            fillColor={191,191,191},
+            fillPattern=FillPattern.Solid)}),
+      Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
+              100}}), graphics={Ellipse(
+            extent={{-100,100},{100,-100}},
+            lineColor={127,127,127},
+            fillColor={191,191,191},
+            fillPattern=FillPattern.Solid)}));
 
     annotation (
       Documentation(info="<html>
@@ -231,111 +209,9 @@ package Connectors "Declarative and imperative connectors"
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(extent={{-100,100},{100,-100}},
-              lineColor={127,127,127})}));
+            lineColor={127,127,127})}));
 
   end Face;
-
-  connector FaceX
-    "<html>X-axis <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connector</html>"
-    extends BaseClasses.PartialFace;
-
-    parameter Boolean inviscidY=false "Inviscid along the y axis" annotation (
-      HideResult=true,
-      choices(__Dymola_checkBox=true),
-      Dialog(compact=true,group=
-            "Boundary conditions (will remove subconnectors)"));
-    parameter Boolean inviscidZ=false "Inviscid along the z axis" annotation (
-      HideResult=true,
-      choices(__Dymola_checkBox=true),
-      Dialog(compact=true, group=
-            "Boundary conditions (will remove subconnectors)"));
-
-    Transverse transverseY if not inviscidY
-      "Subconnector for y-axis linear momentum";
-    Transverse transverseZ if not inviscidZ
-      "Subconnector for z-axis linear momentum";
-
-    annotation (
-      Documentation(info="<html>
-  <p>For more information, see the documentation in the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package and the
-    <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialFace\">PartialFace</a> connector.</p></html>"),
-
-      Diagram(coordinateSystem(preserveAspectRatio=true,extent={{-100,-100},{
-              100,100}}), graphics),
-      Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-              100}}), graphics={Ellipse(extent={{-100,100},{100,-100}},
-              lineColor={127,127,127})}));
-
-  end FaceX;
-
-  connector FaceY
-    "<html>Y-axis <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connector</html>"
-    extends BaseClasses.PartialFace;
-
-    parameter Boolean inviscidZ=false "Inviscid along the z axis" annotation (
-      HideResult=true,
-      choices(__Dymola_checkBox=true),
-      Dialog(compact=true,group=
-            "Boundary conditions (will remove subconnectors)"));
-    parameter Boolean inviscidX=false "Inviscid along the x axis" annotation (
-      HideResult=true,
-      choices(__Dymola_checkBox=true),
-      Dialog(compact=true, group=
-            "Boundary conditions (will remove subconnectors)"));
-
-    Transverse transverseZ if not inviscidZ
-      "Subconnector for z-axis linear momentum";
-    Transverse transverseX if not inviscidX
-      "Subconnector for x-axis linear momentum";
-
-    annotation (
-      Documentation(info="<html>
-  <p>For more information, see the documentation in the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package and the
-    <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialFace\">PartialFace</a> connector.</p></html>"),
-
-      Diagram(coordinateSystem(preserveAspectRatio=true,extent={{-100,-100},{
-              100,100}}), graphics),
-      Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-              100}}), graphics={Ellipse(extent={{-100,100},{100,-100}},
-              lineColor={127,127,127})}));
-
-  end FaceY;
-
-  connector FaceZ
-    "<html>Z-axis <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connector</html>"
-    extends BaseClasses.PartialFace;
-
-    parameter Boolean inviscidX=false "Inviscid along the x axis" annotation (
-      HideResult=true,
-      choices(__Dymola_checkBox=true),
-      Dialog(compact=true,group=
-            "Boundary conditions (will remove subconnectors)"));
-    parameter Boolean inviscidY=false "Inviscid along the y axis" annotation (
-      HideResult=true,
-      choices(__Dymola_checkBox=true),
-      Dialog(compact=true, group=
-            "Boundary conditions (will remove subconnectors)"));
-
-    Transverse transverseX if not inviscidX
-      "Subconnector for x-axis linear momentum";
-    Transverse transverseY if not inviscidY
-      "Subconnector for y-axis linear momentum";
-
-    annotation (
-      Documentation(info="<html>
-  <p>For more information, see the documentation in the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package and the
-    <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialFace\">PartialFace</a> connector.</p></html>"),
-
-      Diagram(coordinateSystem(preserveAspectRatio=true,extent={{-100,-100},{
-              100,100}}), graphics),
-      Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-              100}}), graphics={Ellipse(extent={{-100,100},{100,-100}},
-              lineColor={127,127,127})}));
-
-  end FaceZ;
 
   connector Inert "Connector to exchange linear momentum and heat by diffusion"
 
@@ -355,21 +231,18 @@ package Connectors "Declarative and imperative connectors"
     subconnector or the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Diagram(graphics={
-          Text(
-            extent={{-100,36},{100,76}},
-            textString="%name",
-            lineColor={0,0,0}),
-          Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={72,90,180},
-            fillPattern=FillPattern.Solid,
-            fillColor={102,128,255}),
-          Ellipse(
-            extent={{-18,18},{18,-18}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            lineColor={72,90,180})}),
+      Diagram(graphics={Text(
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0}),Ellipse(
+              extent={{-30,30},{30,-30}},
+              lineColor={72,90,180},
+              fillPattern=FillPattern.Solid,
+              fillColor={102,128,255}),Ellipse(
+              extent={{-18,18},{18,-18}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={72,90,180})}),
       Icon(graphics={Ellipse(
             extent={{-100,100},{100,-100}},
             lineColor={72,90,180},
@@ -415,26 +288,29 @@ package Connectors "Declarative and imperative connectors"
     The effort variable is pressure such that the effort and flow variables are conjugates of
     energy (not power).
     </p>
+    
+    <p>Note that this connector extends the 
+    the <a href=\"modelica://FCSys.Connectors.BaseClasses.Mechanical\">Mechanical</a> and
+    <a href=\"modelica://FCSys.Connectors.BaseClasses.Thermal\">Thermal</a> connectors,
+    whereas the <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> connector includes
+    them as subconnectors.</p>
 
     <p>See also the <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> and
     <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connectors and
     the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Diagram(graphics={
-          Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={72,90,180},
-            fillPattern=FillPattern.Solid,
-            fillColor={102,128,255}),
-          Text(
-            extent={{-30,20},{30,-20}},
-            lineColor={0,0,0},
-            textString="A"),
-          Text(
-            extent={{-100,36},{100,76}},
-            textString="%name",
-            lineColor={0,0,0})}),
+      Diagram(graphics={Ellipse(
+              extent={{-30,30},{30,-30}},
+              lineColor={72,90,180},
+              fillPattern=FillPattern.Solid,
+              fillColor={102,128,255}),Text(
+              extent={{-30,20},{30,-20}},
+              lineColor={0,0,0},
+              textString="A"),Text(
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0})}),
       Icon(graphics={
           Ellipse(
             extent={{-100,100},{100,-100}},
@@ -473,26 +349,29 @@ package Connectors "Declarative and imperative connectors"
     The effort variable is volume such that the effort and flow variables are conjugates of
     energy (not power).
     </p>
+    
+    <p>Note that this connector extends the 
+    the <a href=\"modelica://FCSys.Connectors.BaseClasses.Mechanical\">Mechanical</a> and
+    <a href=\"modelica://FCSys.Connectors.BaseClasses.Thermal\">Thermal</a> connectors,
+    whereas the <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> connector includes
+    them as subconnectors.</p>
 
     <p>See also the <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> and
     <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> connectors and
     the documentation in the
   <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Diagram(graphics={
-          Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={72,90,180},
-            fillPattern=FillPattern.Solid,
-            fillColor={102,128,255}),
-          Text(
-            extent={{-30,20},{30,-20}},
-            lineColor={0,0,0},
-            textString="D"),
-          Text(
-            extent={{-100,36},{100,76}},
-            textString="%name",
-            lineColor={0,0,0})}),
+      Diagram(graphics={Ellipse(
+              extent={{-30,30},{30,-30}},
+              lineColor={72,90,180},
+              fillPattern=FillPattern.Solid,
+              fillColor={102,128,255}),Text(
+              extent={{-30,20},{30,-20}},
+              lineColor={0,0,0},
+              textString="D"),Text(
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0})}),
       Icon(graphics={
           Ellipse(
             extent={{-100,100},{100,-100}},
@@ -541,7 +420,7 @@ package Connectors "Declarative and imperative connectors"
             extent={{-100,100},{100,-100}},
             lineColor={72,90,180},
             fillPattern=FillPattern.Solid,
-            fillColor={102,128,255}),Ellipse(
+            fillColor={102,128,255}), Ellipse(
             extent={{-60,60},{60,-60}},
             fillColor={255,255,255},
             fillPattern=FillPattern.Solid,
@@ -559,117 +438,6 @@ package Connectors "Declarative and imperative connectors"
               fillPattern=FillPattern.Solid,
               lineColor={72,90,180})}));
   end InertInternal;
-
-  connector Normal "Connector for normal linear momentum"
-
-    Q.CurrentAreic J(nominal=U.A/U.cm^2) "Areic current";
-    flow Q.Force mPhidot(nominal=U.atm*U.cm^2) "Force";
-
-    annotation (
-      Documentation(info="<html>
-    <p>Note that the geometric orientation is global.
-    Areic current and force are positive in the globally positive direction (not inward).
-    </p>
-
-    <p>For more information, see the documentation in the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
-
-      Diagram(graphics={Text(
-              extent={{-100,36},{100,76}},
-              textString="%name",
-              lineColor={0,0,0}),Rectangle(
-              extent={{-30,30},{30,-30}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Line(
-              points={{-30,0},{30,0}},
-              color={0,0,0},
-              smooth=Smooth.None)}),
-      Icon(graphics={Rectangle(
-            extent={{-100,100},{100,-100}},
-            lineColor={0,0,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid), Line(
-            points={{-100,0},{100,0}},
-            color={0,0,0},
-            smooth=Smooth.None)}));
-
-  end Normal;
-
-  connector Transverse "Connector for transverse linear momentum"
-
-    Q.Velocity phi(nominal=U.cm/U.s) "Velocity";
-    flow Q.Force mPhidot(nominal=U.N) "Force";
-
-    annotation (
-      Documentation(info="<html>
-  <p>Note that the geometric orientation is global (not inward).  Thus,
-  force is the rate of globally-referenced linear momentum into the component.
-  </p>
-
-    <p>For more information, see the documentation in the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
-
-      Diagram(graphics={Text(
-              extent={{-100,36},{100,76}},
-              textString="%name",
-              lineColor={0,0,0}),Rectangle(
-              extent={{-30,30},{30,-30}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Line(
-              points={{0,30},{0,-30}},
-              color={0,0,0},
-              smooth=Smooth.None)}),
-      Icon(graphics={Rectangle(
-            extent={{-100,100},{100,-100}},
-            lineColor={0,0,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid), Line(
-            points={{0,100},{0,-100}},
-            color={0,0,0},
-            smooth=Smooth.None)}));
-
-  end Transverse;
-
-  connector Thermal "Connector to transport heat"
-
-    extends BaseClasses.Thermal;
-
-    annotation (
-      Documentation(info="<html>For information, see the documentation in the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
-
-      Diagram(graphics={Text(
-              extent={{-100,36},{100,76}},
-              textString="%name",
-              lineColor={0,0,0}),Rectangle(
-              extent={{-30,30},{30,-30}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),Line(
-              points={{-30,30},{30,-30}},
-              color={0,0,0},
-              smooth=Smooth.None),Line(
-              points={{30,30},{-30,-30}},
-              color={0,0,0},
-              smooth=Smooth.None)}),
-      Icon(graphics={
-          Rectangle(
-            extent={{-100,100},{100,-100}},
-            lineColor={0,0,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Line(
-            points={{-100,100},{100,-100}},
-            color={0,0,0},
-            smooth=Smooth.None),
-          Line(
-            points={{-100,-100},{100,100}},
-            color={0,0,0},
-            smooth=Smooth.None)}));
-
-  end Thermal;
 
   connector RealInput = input Real
     "<html>\"<code>input Real</code>\" as a connector</html>" annotation (
@@ -924,7 +692,8 @@ Protected connector with one output signal of type <code>Real</code>.</p>
   package BaseClasses "Base classes (not for direct use)"
     extends Modelica.Icons.BasesPackage;
 
-    connector Mechanical "Connector to exchange linear momentum"
+    connector Mechanical
+      "Connector to exchange linear momentum or transport it (transverse orientation)"
 
       parameter Integer n_lin(
         final min=0,
@@ -937,7 +706,8 @@ Protected connector with one output signal of type <code>Real</code>.</p>
 
       annotation (Documentation(info="<html>
     <p>For more information, see the documentation in the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"));
+    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
+          Diagram(graphics));
     end Mechanical;
 
     connector Thermal "Connector to exchange or transport heat"
@@ -984,70 +754,26 @@ Protected connector with one output signal of type <code>Real</code>.</p>
 
     end PartialChemical;
 
-    connector PartialFace
-      "Partial connector to transport linear momentum and heat of a single species"
-
-      parameter Boolean isobaric=false "Isobaric" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(group="Assumptions",compact=true));
-
-      Connectors.Normal normal if not isobaric "Subconnector for normal force";
-      Connectors.Thermal thermal "Subconnector for thermal transport";
-
-      annotation (
-        Documentation(info="<html>
-    <p>The <code>normal</code> subconnector is removed if the isobaric assumption
-    is applied (<code>isobaric == true</code>).  The <code>thermal</code> subconnector
-    is always included because the temperature must be known to properly 
-    calculate the enthalpy flow rate (see the 
-    <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model).</p>
-    
-    <p>For more information, see the documentation in the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package and the
-    <a href=\"modelica://FCSys.Connectors.Normal\">Normal</a> and
-    <a href=\"modelica://FCSys.Connectors.Thermal\">Thermal</a> connectors.</p></html>"),
-
-        Diagram(coordinateSystem(preserveAspectRatio=true,extent={{-100,-100},{
-                100,100}}), graphics={Text(
-              extent={{-100,36},{100,76}},
-              textString="%name",
-              lineColor={0,0,0}), Ellipse(
-              extent={{-30,30},{30,-30}},
-              lineColor={127,127,127},
-              fillColor={191,191,191},
-              fillPattern=FillPattern.Solid)}),
-        Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
-                100,100}}), graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={127,127,127},
-              fillColor={191,191,191},
-              fillPattern=FillPattern.Solid)}));
-
-    end PartialFace;
 
   end BaseClasses;
 
   annotation (Documentation(info="<html>
   <p>Three types of physical connectors are used in <a href=\"modelica://FCSys\">FCSys</a>.
-  The chemical connectors (<a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a>,
-  <a href=\"modelica://FCSys.Connectors.ChemicalBusInternal\">ChemicalBusInternal</a>,
-  <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a>, and
-  <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a>)
+  The chemical connectors (<a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a>, 
+  <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a>,
+  <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a>, and
+  <a href=\"modelica://FCSys.Connectors.ChemicalBusInternal\">ChemicalBusInternal</a>)
   represent advective exchange among species that react chemically
   within a subregion.
   The inert connectors
-  (<a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a>,
-  <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a>,
-  <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a>, and
+  (<a href=\"modelica://FCSys.Connectors.Inert\">Inert</a>, 
+  <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a>,
+  <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a>, and
   <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a>)
   describe diffusive exchange among species within a subregion.
-  The face connectors (<a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>,
-  <a href=\"modelica://FCSys.Connectors.FaceBusInternal\">FaceBusInternal</a>,
-  <a href=\"modelica://FCSys.Connectors.Face\">Face</a>,
-  <a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a>,
-  <a href=\"modelica://FCSys.Connectors.FaceY\">FaceY</a>, and
-  <a href=\"modelica://FCSys.Connectors.FaceZ\">FaceZ</a>)
+  The face connectors (<a href=\"modelica://FCSys.Connectors.Face\">Face</a>,
+  <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>, and
+  <a href=\"modelica://FCSys.Connectors.FaceBusInternal\">FaceBusInternal</a>)
   describe advective and diffusive transport between instances of a single
   species in
   neighboring regions or subregions.</p>
@@ -1061,6 +787,31 @@ Protected connector with one output signal of type <code>Real</code>.</p>
   thermal convection) and diffusion (e.g., friction and thermal conduction)
   are resolved (see the
   <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model).</p>
+
+  <p>The effort-flow product of the mechanical or transverse
+  pair is the rate of energy associated with the interaction.
+  However, the other pairs are different.
+  The effort of the material pair is electrochemical potential divided by
+  temperature because it is used in the chemical equilibrium
+  (see the
+  <a href=\"modelica://FCSys.Subregions.Reaction\">Reaction</a> model).  The
+  fluid pair's effort is massic enthalpy (enthalpy divided by mass) since
+  it is used for advection only.  The normal pair has areic current as the
+  effort rather than current as the flow because it is more straightforward
+  for the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.
+  The corresponding flow is force rather than electrochemical potential (as the effort) 
+  so that the other thermodynamic properties can be calculated without nonlinear systems 
+  of equations
+  (see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model).
+  The flow variable of the thermal pair is heat flow rate instead of entropy flow
+  rate so that the transport equations are linear and follow the traditional
+  form (e.g., Fourier's law; see [<a href=\"modelica://FCSys.UsersGuide.References\">Hogan2006</a>],
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Cellier1991</a>], and
+  <a href=\"modelica://Modelica.Thermal.HeatTransfer\">Modelica.Thermal.HeatTransfer</a>).
+  The additivity of volume and
+  pressure pairs describe static balances; therefore, their flows are the quantities
+  rather than the rates of the quantities.
+  </p>
 
     <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
     <caption align=\"bottom\" id=\"Tab1\"><b>Table 1:</b> Summary of the effort/flow pairs.</caption>
@@ -1082,7 +833,6 @@ Protected connector with one output signal of type <code>Real</code>.</p>
       </tr>
       <tr>
         <td>
-          <a href=\"modelica://FCSys.Connectors.Normal\"><img src=\"modelica://FCSys/help/FCSys.Connectors.NormalI.png\"></a>
           <a href=\"modelica://FCSys.Connectors.Face\"><img src=\"modelica://FCSys/help/FCSys.Connectors.FaceI.png\"></a>
           <a href=\"modelica://FCSys.Connectors.FaceBus\"><img src=\"modelica://FCSys/help/FCSys.Connectors.FaceBusI.png\"></a></td>
         <td valign=middle>Normal</td>
@@ -1096,14 +846,13 @@ Protected connector with one output signal of type <code>Real</code>.</p>
           <a href=\"modelica://FCSys.Connectors.ChemicalBus\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ChemicalBusI.png\"></a>
           <!--<a href=\"modelica://FCSys.Connectors.ChemicalBusInternal\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ChemicalBusInternalI.png\"></a>-->
 <br>
-          <a href=\"modelica://FCSys.Connectors.Transverse\"><img src=\"modelica://FCSys/help/FCSys.Connectors.TransverseI.png\"></a>
           <a href=\"modelica://FCSys.Connectors.Face\"><img src=\"modelica://FCSys/help/FCSys.Connectors.FaceI.png\"></a>
           <a href=\"modelica://FCSys.Connectors.FaceBus\"><img src=\"modelica://FCSys/help/FCSys.Connectors.FaceBusI.png\"></a>
 <br>
           <a href=\"modelica://FCSys.Connectors.Inert\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertI.png\"></a>
           <a href=\"modelica://FCSys.Connectors.InertAmagat\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertAmagatI.png\"></a>
           <a href=\"modelica://FCSys.Connectors.InertDalton\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertDaltonI.png\"></a></td>
-        <td valign=middle>Mechanical, Transverse</td>
+        <td valign=middle>Mechanical or Transverse</td>
         <td valign=middle>Velocity<br>&phi; [L T<sup>-1</sup>]</td>
         <td valign=middle>Force<br><i>m</i>&Phi;dot [L M T<sup>-2</sup>]</td>
       </tr>
@@ -1119,7 +868,6 @@ Protected connector with one output signal of type <code>Real</code>.</p>
       </tr>
       <tr>
         <td>
-          <a href=\"modelica://FCSys.Connectors.Thermal\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ThermalI.png\"></a>
           <a href=\"modelica://FCSys.Connectors.Face\"><img src=\"modelica://FCSys/help/FCSys.Connectors.FaceI.png\"></a>
           <a href=\"modelica://FCSys.Connectors.FaceBus\"><img src=\"modelica://FCSys/help/FCSys.Connectors.FaceBusI.png\"></a>
 <br>
@@ -1146,6 +894,27 @@ Protected connector with one output signal of type <code>Real</code>.</p>
       </tr>
     </table>
 
+  <p><a href=\"#Fig1\">Figure 1</a> depicts the hierarchy of the connectors.
+  The bottom row contains icons that represent the effort/flow pairs in 
+  <a href=\"#Tab1\">Table 1</a>.  Most of the connectors on the middle row are
+  flat; they build on the row below by extension.
+  The exceptions, which use instantiation, are the 
+  <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> and 
+  <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a> connectors.
+  The top row contains expandable connectors 
+  (<a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> and
+  <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a>) which group
+  the <a href=\"modelica://FCSys.Connectors.Face\">Face</a> and chemical (<a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> or
+  <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalOutput</a>) connectors of multiple species.
+  The
+  <a href=\"modelica://FCSys.Connectors.FaceBusInternal\">FaceBusInternal</a> and
+  <a href=\"modelica://FCSys.Connectors.ChemicalBusInternal\">ChemicalBusInternal</a>
+  connectors (not shown) are versions of
+  <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> and
+  <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>
+  that merely have a default <code>protected</code> prefix and smaller icons to
+  indicate that they are internal to a model.</p>
+
   <p>In addition to the material exchange pair, the chemical
   connectors have mechanical and fluid pairs that are used to describe the purely advective
   (non-diffusive) flow associated with the material exchange (see the
@@ -1165,73 +934,14 @@ Protected connector with one output signal of type <code>Real</code>.</p>
   imposes Amagat's law or additivity of volume and is used to combine material phases within a subregion.
   The
   <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector (with a \"D\" in the icon)
-  applies Dalton's law or additivity of pressure to mix species within a material phase (e.g., N<sub>2</sub> and O<sub>2</sub>
-  within a gas).
+  applies Dalton's law or additivity of pressure to mix species within a material phase (e.g., 
+  N<sub>2</sub> and O<sub>2</sub> within a gas).
   The two cannot be directly connected because the effort/flow designations
   are opposite.  An adapter must be used
-  (e.g., <a href=\"modelica://FCSys.Subregions.PhaseBoundary\">FCSys.Subregions.PhaseBoundary</a>).</p>
-
-  <p>The face connectors contain <a href=\"modelica://FCSys.Connectors.Normal\">Normal</a>,
-  <a href=\"modelica://FCSys.Connectors.Transverse\">Transverse</a>, and
-  <a href=\"modelica://FCSys.Connectors.Thermal\">Thermal</a> subconnectors.
-  <a href=\"modelica://FCSys.Connectors.Face\">Face</a>,
-  <a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a>,
-  <a href=\"modelica://FCSys.Connectors.FaceY\">FaceY</a>, and
-  <a href=\"modelica://FCSys.Connectors.FaceZ\">FaceZ</a>
-  differ only in the name of the transverse subconnectors.
-  For example, <a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a> has
-  <a href=\"modelica://FCSys.Connectors.Transverse\">Transverse</a> subconnectors named
-  <code>transverseY</code> and <code>transverseZ</code>.</p>
-
-  <p>The effort-flow product of the mechanical or transverse
-  pair is the rate of energy associated with the interaction.
-  However, many of the pairs are different.
-  The effort of the material pair is electrochemical potential divided by
-  temperature because it is used in the chemical equilibrium
-  (see the
-  <a href=\"modelica://FCSys.Subregions.Reaction\">Reaction</a> model).  The
-  fluid pair's effort is massic enthalpy (enthalpy divided by mass) since
-  it is used for advection only.  The normal pair has areic current as the
-  effort rather than current as the flow so that the transport equations are directly
-  analogous in the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.
-  The corresponding flow is force rather than electrochemical potential (as the effort) 
-  so that the other thermodynamic properties can be calculated without nonlinear systems 
-  of equations
-  (see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model).
-  The flow variable of the thermal pair is heat flow rate instead of entropy flow
-  rate so that the transport equations are linear and follow the traditional
-  form (e.g., Fourier's law; see [<a href=\"modelica://FCSys.UsersGuide.References\">Hogan2006</a>],
-  [<a href=\"modelica://FCSys.UsersGuide.References\">Cellier1991</a>], and
-  <a href=\"modelica://Modelica.Thermal.HeatTransfer\">Modelica.Thermal.HeatTransfer</a>).
-  The additivity of volume and
-  pressure pairs describe static balances; therefore, their flows are the quantities
-  rather than the rates of the quantities.
-  </p>
-
-  <p><a href=\"#Fig1\">Figure 1</a> shows the instantiation hierarchy of the connectors.
-  <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a>
-  is an expandable connector that groups
-  <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> and
-  <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalOutput</a> connectors
-  of multiple species.  Likewise,
-  <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> groups
-  <a href=\"modelica://FCSys.Connectors.Face\">Face</a>,
-  <a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a>,
-  <a href=\"modelica://FCSys.Connectors.FaceY\">FaceY</a>, or
-  <a href=\"modelica://FCSys.Connectors.FaceZ\">FaceZ</a>
-  connectors of multiple species.
-  The
-  <a href=\"modelica://FCSys.Connectors.ChemicalBusInternal\">ChemicalBusInternal</a> and
-  <a href=\"modelica://FCSys.Connectors.FaceBusInternal\">FaceBusInternal</a> connectors (not shown)
-  are versions of
-  <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> and
-  <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>
-  that merely have a default <code>protected</code> prefix and smaller icons to
-  indicate that the connectors are internal to a model.  The inert connectors are
-  flat; they do not have subconnectors.</p>
+  (e.g., <a href=\"modelica://FCSys.Subregions.PhaseBoundary\">PhaseBoundary</a>).</p>
 
   <p align=center id=\"Fig1\"><img src=\"modelica://FCSys/resources/documentation/Connectors/hierarchy.png\">
-<br><b>Figure 1:</b> Instantiation hierarchy of the connectors.</p>
+<br><b>Figure 1:</b> Hierarchy of the connectors.</p>
 
     <p><b>Relation to thermodynamics and justification of the Amagat and Dalton connectors:</b><p>
 

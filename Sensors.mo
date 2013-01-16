@@ -489,12 +489,13 @@ sensor</a> models.
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
-                100,100}}), graphics={Line(points={{-40,-100},{-40,-58}}, color
-              ={0,0,127}),Line(points={{40,-100},{40,-58}}, color={0,0,127}),
-              Text(
-                  extent={{-100,-20},{100,-50}},
-                  lineColor={127,127,127},
-                  textString="mu/T   phi   T     ")}));
+                100,100}}), graphics={
+            Line(points={{-40,-100},{-40,-58}}, color={0,0,127}),
+            Line(points={{40,-100},{40,-58}}, color={0,0,127}),
+            Text(
+              extent={{-100,-20},{100,-50}},
+              lineColor={127,127,127},
+              textString="mu/T   phi   T     ")}));
     end Species;
   end Chemical;
 
@@ -1513,9 +1514,9 @@ sensor</a> models.
 (see the <a href=\"modelica://FCSys.Connectors\">Connectors</a> package),
 the models for the sensors must be as well.  A
 <a href=\"modelica://FCSys.Connectors.Face\">Face</a>,
-<a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a>,
-<a href=\"modelica://FCSys.Connectors.FaceY\">FaceY</a>, or
-<a href=\"modelica://FCSys.Connectors.FaceZ\">FaceZ</a> connector
+<a href=\"modelica://FCSys.Connectors.Face\">Face</a>,
+<a href=\"modelica://FCSys.Connectors.Face\">Face</a>, or
+<a href=\"modelica://FCSys.Connectors.Face\">Face</a> connector
 is used in <a href=\"modelica://FCSys.Subregions.Species\">Species</a> models,
 and there is a corresponding <a href=\"modelica://FCSys.Sensors.Face.Species\">Species
 sensor</a> model. The
@@ -1677,7 +1678,7 @@ sensor</a> model.
       Velocity velocityZ if not inviscidZ "Type of sensor"
         annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
-      FCSys.Connectors.FaceX face(
+      FCSys.Connectors.Face face(
         final isobaric=isobaric,
         final inviscidY=inviscidY,
         final inviscidZ=inviscidZ)
@@ -1758,7 +1759,7 @@ sensor</a> model.
       Velocity velocityX if not inviscidX "Type of sensor"
         annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
 
-      FCSys.Connectors.FaceY face(
+      FCSys.Connectors.Face face(
         final isobaric=isobaric,
         final inviscidX=inviscidX,
         final inviscidZ=inviscidZ)
@@ -1839,7 +1840,7 @@ sensor</a> model.
       Velocity velocityY if not inviscidY "Type of sensor"
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      FCSys.Connectors.FaceZ face(
+      FCSys.Connectors.Face face(
         final isobaric=isobaric,
         final inviscidX=inviscidX,
         final inviscidY=inviscidY)
@@ -1898,30 +1899,31 @@ sensor</a> model.
       extends FCSys.Sensors.BaseClasses.PartialSensor(redeclare
           FCSys.Connectors.RealOutput y(final unit="N/l3"));
 
-      FCSys.Connectors.Normal material
+      FCSys.Connectors.BaseClasses.Normal material
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
     equation
       y = material.rho;
       0 = material.Ndot "Conservation of material (no storage)";
       annotation (Icon(graphics={Text(
-                  extent={{-100,-20},{100,-50}},
-                  lineColor={127,127,127},
-                  textString="rho")}));
+              extent={{-100,-20},{100,-50}},
+              lineColor={127,127,127},
+              textString="rho")}));
     end Density;
 
     model Velocity "Sensor for velocity"
       extends FCSys.Sensors.BaseClasses.PartialSensor(redeclare
           FCSys.Connectors.RealOutput y(final unit="l/T"));
-      FCSys.Connectors.Transverse mechanical "Mechanical subconnector"
+      FCSys.Connectors.BaseClasses.Transverse mechanical
+        "Mechanical subconnector"
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
     equation
       y = mechanical.phi "Measurement";
       0 = mechanical.mPhidot "Conservation of linear momentum (no storage)";
       annotation (Icon(graphics={Text(
-                  extent={{-100,-20},{100,-50}},
-                  lineColor={127,127,127},
-                  textString="phi")}));
+              extent={{-100,-20},{100,-50}},
+              lineColor={127,127,127},
+              textString="phi")}));
     end Velocity;
 
     model Temperature "Sensor for temperature"
@@ -1934,9 +1936,9 @@ sensor</a> model.
       y = thermal.T "Measurement";
       0 = thermal.Qdot "Conservation of energy (no storage)";
       annotation (Icon(graphics={Text(
-                  extent={{-100,-20},{100,-50}},
-                  lineColor={127,127,127},
-                  textString="T")}));
+              extent={{-100,-20},{100,-50}},
+              lineColor={127,127,127},
+              textString="T")}));
     end Temperature;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -1947,17 +1949,14 @@ sensor</a> model.
 
         extends FCSys.BaseClasses.Icons.Sensor;
 
-        parameter ThermoOpt isobaric=true
-          "Options for material and thermal subconnectors"
-          annotation (Dialog(compact=true));
-
         // Material
+        parameter Boolean isobaric=false "Isobaric condition"
+          annotation (Dialog(compact=true));
         Density density if not isobaric "Type of sensor"
           annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
 
         // Heat
-        Temperature temperature if thermoOpt <> ThermoOpt.ClosedAdiabatic
-          "Type of sensor"
+        Temperature temperature "Type of sensor"
           annotation (Placement(transformation(extent={{50,-10},{70,10}})));
 
         FCSys.Connectors.RealOutputBus y "Output bus for measurements"
@@ -2504,9 +2503,9 @@ sensor</a> model.
 (see the <a href=\"modelica://FCSys.Connectors\">Connectors</a> package),
 the models for the sensors must be as well.   A
 <a href=\"modelica://FCSys.Connectors.Face\">Face</a>,
-<a href=\"modelica://FCSys.Connectors.FaceX\">FaceX</a>,
-<a href=\"modelica://FCSys.Connectors.FaceY\">FaceY</a>, or
-<a href=\"modelica://FCSys.Connectors.FaceZ\">FaceZ</a>
+<a href=\"modelica://FCSys.Connectors.Face\">Face</a>,
+<a href=\"modelica://FCSys.Connectors.Face\">Face</a>, or
+<a href=\"modelica://FCSys.Connectors.Face\">Face</a>
 connector
 is used in <a href=\"modelica://FCSys.Subregions.Species\">Species</a> models,
 and there is a corresponding <a href=\"modelica://FCSys.Sensors.FaceDifferential.Species\">Species
@@ -2733,7 +2732,7 @@ sensor</a> model.
           __Dymola_descriptionLabel=true),
         Placement(transformation(extent={{20,-10},{40,10}})));
 
-      FCSys.Connectors.FaceX negative(
+      FCSys.Connectors.Face negative(
         final isobaric=isobaric,
         final inviscidY=inviscidY,
         final inviscidZ=inviscidZ)
@@ -2741,7 +2740,7 @@ sensor</a> model.
           Placement(transformation(extent={{-110,-10},{-90,10}}),
             iconTransformation(extent={{-110,-10},{-90,10}})));
 
-      FCSys.Connectors.FaceX positive(
+      FCSys.Connectors.Face positive(
         final isobaric=isobaric,
         final inviscidY=inviscidY,
         final inviscidZ=inviscidZ)
@@ -2856,7 +2855,7 @@ sensor</a> model.
           __Dymola_descriptionLabel=true),
         Placement(transformation(extent={{-40,-10},{-20,10}})));
 
-      FCSys.Connectors.FaceY negative(
+      FCSys.Connectors.Face negative(
         final isobaric=isobaric,
         final inviscidX=inviscidX,
         final inviscidZ=inviscidZ)
@@ -2864,7 +2863,7 @@ sensor</a> model.
           Placement(transformation(extent={{-110,-10},{-90,10}}),
             iconTransformation(extent={{-110,-10},{-90,10}})));
 
-      FCSys.Connectors.FaceY positive(
+      FCSys.Connectors.Face positive(
         final isobaric=isobaric,
         final inviscidX=inviscidX,
         final inviscidZ=inviscidZ)
@@ -2978,7 +2977,7 @@ sensor</a> model.
           __Dymola_descriptionLabel=true),
         Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      FCSys.Connectors.FaceZ negative(
+      FCSys.Connectors.Face negative(
         final isobaric=isobaric,
         final inviscidX=inviscidX,
         final inviscidY=inviscidY)
@@ -2986,7 +2985,7 @@ sensor</a> model.
           Placement(transformation(extent={{-110,-10},{-90,10}}),
             iconTransformation(extent={{-110,-10},{-90,10}})));
 
-      FCSys.Connectors.FaceZ positive(
+      FCSys.Connectors.Face positive(
         final isobaric=isobaric,
         final inviscidX=inviscidX,
         final inviscidY=inviscidY)
@@ -3111,11 +3110,11 @@ sensor</a> model.
           // Note:  This is included so that the type of BC is recorded with the
           // results.
 
-          FCSys.Connectors.Normal negative
+          FCSys.Connectors.BaseClasses.Normal negative
             "Material connector for the negative face" annotation (Placement(
                 transformation(extent={{-110,-10},{-90,10}}),
                 iconTransformation(extent={{-110,-10},{-90,10}})));
-          FCSys.Connectors.Normal positive
+          FCSys.Connectors.BaseClasses.Normal positive
             "Material connector for the positive face" annotation (Placement(
                 transformation(extent={{90,-10},{110,10}}), iconTransformation(
                   extent={{90,-10},{110,10}})));
@@ -3202,11 +3201,11 @@ sensor</a> model.
           // Note:  This is included so that the type of BC is recorded with the
           // results.
 
-          FCSys.Connectors.Transverse negative
+          FCSys.Connectors.BaseClasses.Transverse negative
             "Mechanical connector for the negative face" annotation (Placement(
                 transformation(extent={{-110,-10},{-90,10}}),
                 iconTransformation(extent={{-110,-10},{-90,10}})));
-          FCSys.Connectors.Transverse positive
+          FCSys.Connectors.BaseClasses.Transverse positive
             "Mechanical connector for the positive face" annotation (Placement(
                 transformation(extent={{90,-10},{110,10}}), iconTransformation(
                   extent={{90,-10},{110,10}})));
@@ -3316,18 +3315,14 @@ sensor</a> model.
 
         extends FCSys.BaseClasses.Icons.Sensor;
 
-        parameter ThermoOpt isobaric=true
-          "Options for material and thermal subconnectors"
-          annotation (Dialog(compact=true));
-
         // Material
-        replaceable Material.Density material if not isobaric
-          "Type of sensor"
+        parameter Boolean isobaric=false "Isobaric condition"
+          annotation (Dialog(compact=true));
+        replaceable Material.Density material if not isobaric "Type of sensor"
           annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
 
         // Thermal
-        replaceable Thermal.Temperature thermal if thermoOpt <> ThermoOpt.ClosedAdiabatic
-          "Type of condition"
+        replaceable Thermal.Temperature thermal "Type of condition"
           annotation (Placement(transformation(extent={{50,-10},{70,10}})));
 
         FCSys.Connectors.RealOutputBus y "Output bus for measurements"

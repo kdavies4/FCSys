@@ -367,8 +367,8 @@ package Subregions
         ionomer(
           final inclC19HF37O5S=inclC19HF37O5S,
           final 'inclH+'='inclH+',
-          C19HF37O5S(isobaric=true))) annotation (
-          __Dymola_choicesFromPackage=true, Placement(transformation(
+          C19HF37O5S(isobaric=true))) annotation (__Dymola_choicesFromPackage=
+            true, Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-50,0})));
@@ -386,8 +386,8 @@ package Subregions
         ionomer(
           final inclC19HF37O5S=inclC19HF37O5S,
           final 'inclH+'='inclH+',
-          C19HF37O5S(isobaric=true))) annotation (
-          __Dymola_choicesFromPackage=true, Placement(transformation(
+          C19HF37O5S(isobaric=true))) annotation (__Dymola_choicesFromPackage=
+            true, Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={50,0})));
@@ -1353,7 +1353,6 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
-
   end Subregion;
 
   model SubregionIonomerOnly "Subregion with only the ionomer phase"
@@ -1604,7 +1603,6 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
-
   end SubregionNoIonomer;
 
   package Phases "Phases or mixtures of species"
@@ -5500,132 +5498,96 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         "Connector to exchange linear momentum and heat by diffusion, with additivity of pressure"
         annotation (Placement(transformation(extent={{10,-30},{30,-10}}),
             iconTransformation(extent={{60,-80},{80,-60}})));
-      FCSys.Connectors.FaceX xNegative(
-        isobaric=not inclLin[Axis.x],
-        inviscidY=not inclLin[Axis.y],
-        inviscidZ=not inclLin[Axis.z],
-        normal(final J(start=I_IC[Axis.x]/A[Axis.x]) = J_face[Axis.x, Side.n],
-            final mPhidot(start=p_IC[Axis.x]*A[Axis.x]) = mPhidot_face_0[Axis.x,
-            Side.n]),
-        transverseY(final phi(start=phi_IC[Axis.y]) = phi_face[Axis.x, Side.n,
-            Orientation.following], final mPhidot=mPhidot_face[Axis.x, Side.n,
-              Orientation.following]),
-        transverseZ(final phi(start=phi_IC[Axis.z]) = phi_face[Axis.x, Side.n,
-            Orientation.preceding], final mPhidot=mPhidot_face[Axis.x, Side.n,
-              Orientation.preceding]),
-        thermal(final T(start=T_IC) = T_face[Axis.x, Side.n],final Qdot(start=0)
-             = Qdot_face[Axis.x, Side.n])) "Negative face along the x axis"
-        annotation (Dialog(
+      FCSys.Connectors.Face xNegative(
+        final J(start=I_IC[Axis.x]/A[Axis.x]) = J_face[Axis.x, Side.n],
+        final mPhidot_0(start=p_IC[Axis.x]*A[Axis.x]) = mPhidot_face_0[Axis.x,
+          Side.n],
+        final phi(start=phi_IC[{Axis.y,Axis.z}]) = phi_face[Axis.x, Side.n, :],
+
+        final mPhidot=mPhidot_face[Axis.x, Side.n, :],
+        final T(start=T_IC) = T_face[Axis.x, Side.n],
+        final Qdot(start=0) = Qdot_face[Axis.x, Side.n]) if inclXNeg
+        "Negative face along the x axis" annotation (Dialog(
           tab="Assumptions",
           group="Characteristics of the faces (click to edit)",
           __Dymola_label="xNegative",
           __Dymola_descriptionLabel=true),Placement(transformation(extent={{-50,
                 -10},{-30,10}}), iconTransformation(extent={{-110,-10},{-90,10}})));
 
-      FCSys.Connectors.FaceX xPositive(
-        isobaric=not inclLin[Axis.x],
-        inviscidY=not inclLin[Axis.y],
-        inviscidZ=not inclLin[Axis.z],
-        normal(final J(start=-I_IC[Axis.x]/A[Axis.x]) = J_face[Axis.x, Side.p],
-            final mPhidot(start=-p_IC[Axis.x]*A[Axis.x]) = mPhidot_face_0[Axis.x,
-            Side.p]),
-        transverseY(final phi(start=phi_IC[Axis.y]) = phi_face[Axis.x, Side.p,
-            Orientation.following], final mPhidot=mPhidot_face[Axis.x, Side.p,
-              Orientation.following]),
-        transverseZ(final phi(start=phi_IC[Axis.z]) = phi_face[Axis.x, Side.p,
-            Orientation.preceding], final mPhidot=mPhidot_face[Axis.x, Side.p,
-              Orientation.preceding]),
-        thermal(final T(start=T_IC) = T_face[Axis.x, Side.p],final Qdot(start=0)
-             = Qdot_face[Axis.x, Side.p])) "Positive face along the x axis"
-        annotation (Dialog(
+      FCSys.Connectors.Face xPositive(
+        final J(start=-I_IC[Axis.x]/A[Axis.x]) = J_face[Axis.x, Side.p],
+        final mPhidot_0(start=-p_IC[Axis.x]*A[Axis.x]) = mPhidot_face_0[Axis.x,
+          Side.p],
+        final phi(start=phi_IC[{Axis.y,Axis.z}]) = phi_face[Axis.x, Side.p, :],
+
+        final mPhidot=mPhidot_face[Axis.x, Side.p, :],
+        final T(start=T_IC) = T_face[Axis.x, Side.p],
+        final Qdot(start=0) = Qdot_face[Axis.x, Side.p]) if inclXPos
+        "Positive face along the x axis" annotation (Dialog(
           tab="Assumptions",
           group="Characteristics of the faces (click to edit)",
           __Dymola_label="xPositive",
           __Dymola_descriptionLabel=true),Placement(transformation(extent={{30,
                 -10},{50,10}}), iconTransformation(extent={{90,-10},{110,10}})));
 
-      FCSys.Connectors.FaceY yNegative(
-        isobaric=not inclLin[Axis.y],
-        inviscidZ=not inclLin[Axis.z],
-        inviscidX=not inclLin[Axis.x],
-        normal(final J(start=I_IC[Axis.y]/A[Axis.y]) = J_face[Axis.y, Side.n],
-            final mPhidot(start=p_IC[Axis.y]*A[Axis.y]) = mPhidot_face_0[Axis.y,
-            Side.n]),
-        transverseZ(final phi(start=phi_IC[Axis.z]) = phi_face[Axis.y, Side.n,
-            Side.n], final mPhidot=mPhidot_face[Axis.y, Side.n, Orientation.following]),
-
-        transverseX(final phi(start=phi_IC[Axis.x]) = phi_face[Axis.y, Side.n,
-            Side.p], final mPhidot=mPhidot_face[Axis.y, Side.n, Orientation.preceding]),
-
-        thermal(final T(start=T_IC) = T_face[Axis.y, Side.n],final Qdot(start=0)
-             = Qdot_face[Axis.y, Side.n])) "Negative face along the y axis"
-        annotation (Dialog(
+      FCSys.Connectors.Face yNegative(
+        final J(start=I_IC[Axis.y]/A[Axis.y]) = J_face[Axis.y, Side.n],
+        final mPhidot_0(start=p_IC[Axis.y]*A[Axis.y]) = mPhidot_face_0[Axis.y,
+          Side.n],
+        final phi(start=phi_IC[{Axis.z,Axis.x}]) = phi_face[Axis.y, Side.n,
+          Side.n],
+        final mPhidot=mPhidot_face[Axis.y, Side.n, :],
+        final T(start=T_IC) = T_face[Axis.y, Side.n],
+        final Qdot(start=0) = Qdot_face[Axis.y, Side.n]) if inclYNeg
+        "Negative face along the y axis" annotation (Dialog(
           tab="Assumptions",
           group="Characteristics of the faces (click to edit)",
           __Dymola_label="yNegative",
           __Dymola_descriptionLabel=true),Placement(transformation(extent={{-10,
                 -50},{10,-30}}), iconTransformation(extent={{-10,-110},{10,-90}})));
 
-      FCSys.Connectors.FaceY yPositive(
-        isobaric=not inclLin[Axis.y],
-        inviscidZ=not inclLin[Axis.z],
-        inviscidX=not inclLin[Axis.x],
-        normal(final J(start=-I_IC[Axis.y]/A[Axis.y]) = J_face[Axis.y, Side.p],
-            final mPhidot(start=-p_IC[Axis.y]*A[Axis.y]) = mPhidot_face_0[Axis.y,
-            Side.p]),
-        transverseZ(final phi(start=phi_IC[Axis.z]) = phi_face[Axis.y, Side.p,
-            Orientation.following], final mPhidot=mPhidot_face[Axis.y, Side.p,
-              Orientation.following]),
-        transverseX(final phi(start=phi_IC[Axis.x]) = phi_face[Axis.y, Side.p,
-            Orientation.preceding], final mPhidot=mPhidot_face[Axis.y, Side.p,
-              Orientation.preceding]),
-        thermal(final T(start=T_IC) = T_face[Axis.y, Side.p],final Qdot(start=0)
-             = Qdot_face[Axis.y, Side.p])) "Positive face along the y axis"
-        annotation (Dialog(
+      FCSys.Connectors.Face yPositive(
+        final J(start=-I_IC[Axis.y]/A[Axis.y]) = J_face[Axis.y, Side.p],
+        final mPhidot_0(start=-p_IC[Axis.y]*A[Axis.y]) = mPhidot_face_0[Axis.y,
+          Side.p],
+        final phi(start=phi_IC[{Axis.z,Axis.x}]) = phi_face[Axis.y, Side.p, :],
+
+        final mPhidot=mPhidot_face[Axis.y, Side.p, :],
+        final T(start=T_IC) = T_face[Axis.y, Side.p],
+        final Qdot(start=0) = Qdot_face[Axis.y, Side.p]) if inclYPos
+        "Positive face along the y axis" annotation (Dialog(
           tab="Assumptions",
           group="Characteristics of the faces (click to edit)",
           __Dymola_label="yPositive",
           __Dymola_descriptionLabel=true),Placement(transformation(extent={{-10,
                 30},{10,50}}), iconTransformation(extent={{-10,90},{10,110}})));
 
-      FCSys.Connectors.FaceZ zNegative(
-        isobaric=not inclLin[Axis.z],
-        inviscidX=not inclLin[Axis.x],
-        inviscidY=not inclLin[Axis.y],
-        normal(final J(start=I_IC[Axis.z]/A[Axis.z]) = J_face[Axis.z, Side.n],
-            final mPhidot(start=p_IC[Axis.z]*A[Axis.z]) = mPhidot_face_0[Axis.z,
-            Side.n]),
-        transverseX(final phi(start=phi_IC[Axis.x]) = phi_face[Axis.z, Side.n,
-            Orientation.following], final mPhidot=mPhidot_face[Axis.z, Side.n,
-              Orientation.following]),
-        transverseY(final phi(start=phi_IC[Axis.y]) = phi_face[Axis.z, Side.n,
-            Orientation.preceding], final mPhidot=mPhidot_face[Axis.z, Side.n,
-              Orientation.preceding]),
-        thermal(final T(start=T_IC) = T_face[Axis.z, Side.n],final Qdot(start=0)
-             = Qdot_face[Axis.z, Side.n])) "Negative face along the z axis"
-        annotation (Dialog(
+      FCSys.Connectors.Face zNegative(
+        final J(start=I_IC[Axis.z]/A[Axis.z]) = J_face[Axis.z, Side.n],
+        final mPhidot_0(start=p_IC[Axis.z]*A[Axis.z]) = mPhidot_face_0[Axis.z,
+          Side.n],
+        final phi(start=phi_IC[{Axis.x,Axis.y}]) = phi_face[Axis.z, Side.n, :],
+
+        final mPhidot=mPhidot_face[Axis.z, Side.n, :],
+        final T(start=T_IC) = T_face[Axis.z, Side.n],
+        final Qdot(start=0) = Qdot_face[Axis.z, Side.n]) if inclZNeg
+        "Negative face along the z axis" annotation (Dialog(
           tab="Assumptions",
           group="Characteristics of the faces (click to edit)",
           __Dymola_label="zNegative",
           __Dymola_descriptionLabel=true),Placement(transformation(extent={{10,
                 10},{30,30}}), iconTransformation(extent={{60,60},{80,80}})));
 
-      FCSys.Connectors.FaceZ zPositive(
-        isobaric=not inclLin[Axis.z],
-        inviscidX=not inclLin[Axis.x],
-        inviscidY=not inclLin[Axis.y],
-        normal(final J(start=-I_IC[Axis.z]/A[Axis.z]) = J_face[Axis.z, Side.p],
-            final mPhidot(start=-p_IC[Axis.z]*A[Axis.z]) = mPhidot_face_0[Axis.z,
-            Side.p]),
-        transverseX(final phi(start=phi_IC[Axis.x]) = phi_face[Axis.z, Side.p,
-            Orientation.following], final mPhidot=mPhidot_face[Axis.z, Side.p,
-              Orientation.following]),
-        transverseY(final phi(start=phi_IC[Axis.y]) = phi_face[Axis.z, Side.p,
-            Orientation.preceding], final mPhidot=mPhidot_face[Axis.z, Side.p,
-              Orientation.preceding]),
-        thermal(final T(start=T_IC) = T_face[Axis.z, Side.p],final Qdot(start=0)
-             = Qdot_face[Axis.z, Side.p])) "Positive face along the z axis"
-        annotation (Dialog(
+      FCSys.Connectors.Face zPositive(
+        final J(start=-I_IC[Axis.z]/A[Axis.z]) = J_face[Axis.z, Side.p],
+        final mPhidot_0(start=-p_IC[Axis.z]*A[Axis.z]) = mPhidot_face_0[Axis.z,
+          Side.p],
+        final phi(start=phi_IC[{Axis.x,Axis.y}]) = phi_face[Axis.z, Side.p, :],
+
+        final mPhidot=mPhidot_face[Axis.z, Side.p, :],
+        final T(start=T_IC) = T_face[Axis.z, Side.p],
+        final Qdot(start=0) = Qdot_face[Axis.z, Side.p]) if inclZPos
+        "Positive face along the z axis" annotation (Dialog(
           tab="Assumptions",
           group="Characteristics of the faces (click to edit)",
           __Dymola_label="zPositive",
@@ -5914,74 +5876,6 @@ Choose a condition besides None.");
               side] then
             p_face[axis, side] = p "Isobaric BC";
           end if;
-          // Xi = alpha/v [T/L2]
-          // D = 1/Xi [L2/T]
-
-          // phi = mu*Deltap*A/N
-          // (1/mu)*Ndot = Deltap*A/L
-
-          // mu = D/T [N.T/M] (velocity/(force per particle))
-          //    = v/(T*alpha)
-          // => (T*alpha/v)*Ndot = Deltap*A/L
-
-          // mu = D*rho/p
-          //    = 1/(p*alpha)
-          // => (p*alpha)*Ndot = Deltap*A/L
-
-          // alpha*Ndot = Deltac*A/L
-
-          // alpha/m
-          // m = delM/delN
-          // mPhidot*delN/delM
-          //  = dphi...
-          //
-          // alpha/c_V
-          // c_V = delQ/delT
-          // Qdot*delT/delQ
-          //  = dT...
-          //
-          // alpha/(1/p)
-          // 1/p = -delv/delu
-          // -Ndot*delu/delv
-          //  = -dp ?
-          // rho^2*Ndot*delu/drho
-          //
-          // dv = d(1/rho) = -drho/rho^2
-          //
-          // alpha/(v/T)
-          // v/T = (delh/delp)/(delh/dels) = (dels/delp)
-          // (dels/delp)_T = -(delv/delT)_p
-          // => v/T = -(delv/delT)
-          // -Ndot*delT/delv
-
-          // F*mPhidot = dphi*A/L
-          // (alpha*N/(V*m))*mPhidot = dJ*A/L
-          // T.N/L2.M
-
-          // v = delh/delp
-          // alpha/v = alpha*delp/delh
-          // mPhidot/v = mPhidot*delh/delp = dHdot
-          // incr. fluidity => less Hdot
-
-          // (alpha*N/(V*m))*mPhidot = dJ*A/L
-
-          // mu = D/T [N.T/M] (velocity/(force per particle))
-          // alpha = v/(T*mu)
-          // alpha = v/D
-
-          // (1/(D*m))*mPhidot = dJ*A/L
-          // mPhidot = A*dp = A*dh/v
-          // (1/(D*m))*mPhidot = dJ*A/L
-
-          // alpha -> 0 => fluidity -> 0 => uniform current
-
-          // closed -> isobaric
-          // deltaJ*exp(I)
-          // deltap/v o= deltaJ*exp(I)
-          // deltaJ o= deltap/v*exp(-I)
-          // deltaJ o= 1/v*exp(-I + ln(deltap))
-          // deltaJ o= 1/v*exp(-I + ln(deltap))
-          // deltaJ o= 1/v*exp(-I + deltamu)
 
           // Transverse
           for orientation in Orientation loop
@@ -6621,7 +6515,6 @@ Check the chemical formulas and the specific masses of the species.");
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(graphics));
-
   end Volume;
 
   package BaseClasses "Base classes (not for direct use)"
@@ -6729,7 +6622,7 @@ Check the chemical formulas and the specific masses of the species.");
       annotation (Documentation(info="<html><p>Notes:
   <ul><li>This model must be be extended so that models can be added for
   relevant species, phases, and reactions.</li>
-  <li>Material will be transported between two subregions only if both of the connected faces are marked
+  <li>Normal pressure gradients (and thus pressure) will be transported between two subregions only if both of the connected faces are marked
   as open (<code>thermoOpt==ThermoOpt.OpenDiabatic</code>)
   within the instances of the matched <a href=\"modelica://FCSys.Subregions.Species\">Species</a> models.
   If either or both of the faces are closed (<code>thermoOpt==ThermoOpt.ClosedAdiabatic</code> or
