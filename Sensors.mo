@@ -158,8 +158,8 @@ package Sensors "Models to measure conditions"
       extends BaseClasses.NullPhase;
 
       // Conditionally include species.
-      parameter Boolean ''inclC+'=false "<html>Carbon (C<sup>+</sup>)</html>"
-        annotation (
+      parameter Boolean 'inclC+'=false
+        "<html>Carbon plus (C<sup>+</sup>)</html>" annotation (
         Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
@@ -167,7 +167,7 @@ package Sensors "Models to measure conditions"
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      replaceable Chemical.Species 'C+'(final n_lin=n_lin) if ''inclC+' "Model"
+      replaceable Chemical.Species 'C+'(final n_lin=n_lin) if 'inclC+'
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
       parameter Boolean 'incle-'=false "<html>Electrons (e<sup>-</sup>)</html>"
@@ -246,18 +246,6 @@ package Sensors "Models to measure conditions"
         "Model"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
-      parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
-        annotation (
-        Evaluate=true,
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          group="Species",
-          __Dymola_descriptionLabel=true,
-          __Dymola_joinNext=true));
-      Chemical.Species H2O(final n_lin=n_lin) if inclH2O "Model"
-        annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
       parameter Boolean 'inclH+'=false "<html>Protons (H<sup>+</sup>)</html>"
         annotation (
         Evaluate=true,
@@ -268,6 +256,18 @@ package Sensors "Models to measure conditions"
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
       Chemical.Species 'H+'(final n_lin=n_lin) if 'inclH+' "Model"
+        annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+
+      parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
+        annotation (
+        Evaluate=true,
+        HideResult=true,
+        choices(__Dymola_checkBox=true),
+        Dialog(
+          group="Species",
+          __Dymola_descriptionLabel=true,
+          __Dymola_joinNext=true));
+      Chemical.Species H2O(final n_lin=n_lin) if inclH2O "Model"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
     equation
@@ -589,9 +589,9 @@ sensor</a> models.
         defaultComponentPrefixes="replaceable",
         defaultComponentName="volSensor",
         Icon(graphics={Text(
-                  extent={{-100,-20},{100,-50}},
-                  lineColor={127,127,127},
-                  textString="p")}));
+              extent={{-100,-20},{100,-50}},
+              lineColor={127,127,127},
+              textString="p")}));
     end Pressure;
 
     model Velocity "Measured velocity"
@@ -626,9 +626,9 @@ sensor</a> models.
         defaultComponentPrefixes="replaceable",
         defaultComponentName="momSensor",
         Icon(graphics={Text(
-                  extent={{-100,-20},{100,-50}},
-                  lineColor={127,127,127},
-                  textString="phi")}));
+              extent={{-100,-20},{100,-50}},
+              lineColor={127,127,127},
+              textString="phi")}));
     end Velocity;
 
     model Temperature "Measured temperature"
@@ -640,9 +640,9 @@ sensor</a> models.
         defaultComponentPrefixes="replaceable",
         defaultComponentName="entropySensor",
         Icon(graphics={Text(
-                  extent={{-100,-20},{100,-50}},
-                  lineColor={127,127,127},
-                  textString="T")}));
+              extent={{-100,-20},{100,-50}},
+              lineColor={127,127,127},
+              textString="T")}));
     end Temperature;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -1151,7 +1151,8 @@ sensor</a> models.
         extends BaseClasses.NullPhase;
 
         // Conditionally include species.
-        parameter Boolean 'inclC+'=false "<html>Carbon plus (C<sup>+</sup>)</html>" annotation (
+        parameter Boolean 'inclC+'=false
+          "<html>Carbon plus (C<sup>+</sup>)</html>" annotation (
           Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
@@ -1159,7 +1160,8 @@ sensor</a> models.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        Face.Species 'C+'(final axis=axis) if 'inclC+' "Model" annotation (Dialog(
+        Face.Species 'C+'(final axis=axis) if 'inclC+' "Model" annotation (
+            Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable='inclC+'), Placement(transformation(extent={{-10,-40},{10,-20}})));
@@ -1653,248 +1655,8 @@ sensor</a> model.
       annotation (defaultComponentName="speciesFaceSensor");
     end Species;
 
-    model SpeciesX
-      "<html>Sensor for an x-axis face of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
 
-      extends BaseClasses.PartialSpecies;
 
-      // Y-axis linear momentum
-      parameter Boolean inviscidY=true "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="Y-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-      Velocity velocityY if not inviscidY "Type of sensor"
-        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-
-      // Z-axis linear momentum
-      parameter Boolean inviscidZ=true "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="Z-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-      Velocity velocityZ if not inviscidZ "Type of sensor"
-        annotation (Placement(transformation(extent={{20,-10},{40,10}})));
-
-      FCSys.Connectors.Face face(
-        final isobaric=isobaric,
-        final inviscidY=inviscidY,
-        final inviscidZ=inviscidZ)
-        "Single-species connector for linear momentum and heat" annotation (
-          Placement(transformation(extent={{-10,10},{10,30}}),
-            iconTransformation(extent={{-10,-10},{10,10}})));
-
-    equation
-      // Density
-      connect(density.normal, face.normal) annotation (Line(
-          points={{-60,6.10623e-16},{-60,20},{5.55112e-16,20}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-
-      // Y-axis velocity
-      connect(velocityY.mechanical, face.transverseY) annotation (Line(
-          points={{6.10623e-16,6.10623e-16},{0,0},{0,20},{5.55112e-16,20}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(velocityY.y, y.phi_y) annotation (Line(
-          points={{6.10623e-16,-10},{5.55112e-16,-10},{5.55112e-16,-100}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%second",
-          index=1,
-          extent={{-8,-3},{-8,-3}}));
-
-      // Z-axis velocity
-      connect(velocityZ.mechanical, face.transverseZ) annotation (Line(
-          points={{30,6.10623e-16},{30,20},{5.55112e-16,20}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(velocityZ.y, y.phi_z) annotation (Line(
-          points={{30,-10},{30,-40},{5.55112e-16,-40},{5.55112e-16,-100}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%second",
-          index=1,
-          extent={{-8,-3},{-8,-3}}));
-
-      // Temperature
-      connect(temperature.thermal, face.thermal) annotation (Line(
-          points={{60,6.10623e-16},{60,20},{5.55112e-16,20}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-
-      annotation (defaultComponentName="speciesFaceSensor");
-    end SpeciesX;
-
-    model SpeciesY
-      "<html>Sensor for a y-axis face of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
-
-      extends BaseClasses.PartialSpecies;
-
-      // Z-axis linear momentum
-      parameter Boolean inviscidZ=true "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="Z-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-      Velocity velocityZ if not inviscidZ "Type of sensor"
-        annotation (Placement(transformation(extent={{20,-10},{40,10}})));
-
-      // X-axis linear momentum
-      parameter Boolean inviscidX=true "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="X-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-      Velocity velocityX if not inviscidX "Type of sensor"
-        annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
-
-      FCSys.Connectors.Face face(
-        final isobaric=isobaric,
-        final inviscidX=inviscidX,
-        final inviscidZ=inviscidZ)
-        "Single-species connector for linear momentum and heat" annotation (
-          Placement(transformation(extent={{-10,10},{10,30}}),
-            iconTransformation(extent={{-10,-10},{10,10}})));
-
-    equation
-      // Density
-      connect(density.normal, face.normal) annotation (Line(
-          points={{-60,6.10623e-16},{-60,20},{5.55112e-16,20}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-
-      // Z-axis velocity
-      connect(velocityZ.mechanical, face.transverseZ) annotation (Line(
-          points={{30,6.10623e-16},{30,20},{5.55112e-16,20}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(velocityZ.y, y.phi_z) annotation (Line(
-          points={{30,-10},{30,-40},{5.55112e-16,-40},{5.55112e-16,-100}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%second",
-          index=1,
-          extent={{-8,-3},{-8,-3}}));
-
-      // X-axis velocity
-      connect(velocityX.mechanical, face.transverseX) annotation (Line(
-          points={{-30,6.10623e-16},{-30,20},{5.55112e-16,20}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(velocityX.y, y.phi_x) annotation (Line(
-          points={{-30,-10},{-30,-40},{0,-40},{0,-100},{5.55112e-16,-100}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%second",
-          index=1,
-          extent={{-8,-3},{-8,-3}}));
-
-      // Temperature
-      connect(temperature.thermal, face.thermal) annotation (Line(
-          points={{60,6.10623e-16},{60,20},{5.55112e-16,20}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-
-      annotation (defaultComponentName="speciesFaceSensor");
-    end SpeciesY;
-
-    model SpeciesZ
-      "<html>Sensor for a z-axis face of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
-
-      extends BaseClasses.PartialSpecies;
-
-      // X-axis linear momentum
-      parameter Boolean inviscidX=true "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="X-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-      Velocity velocityX if not inviscidX "Type of sensor"
-        annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
-
-      // Y-axis linear momentum
-      parameter Boolean inviscidY=true "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="Y-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-      Velocity velocityY if not inviscidY "Type of sensor"
-        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-
-      FCSys.Connectors.Face face(
-        final isobaric=isobaric,
-        final inviscidX=inviscidX,
-        final inviscidY=inviscidY)
-        "Single-species connector for linear momentum and heat" annotation (
-          Placement(transformation(extent={{-10,10},{10,30}}),
-            iconTransformation(extent={{-10,-10},{10,10}})));
-
-    equation
-      // Density
-      connect(density.normal, face.normal) annotation (Line(
-          points={{-60,6.10623e-16},{-60,20},{5.55112e-16,20}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-
-      // X-axis velocity
-      connect(velocityX.mechanical, face.transverseX) annotation (Line(
-          points={{-30,6.10623e-16},{-30,20},{5.55112e-16,20}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(velocityX.y, y.phi_x) annotation (Line(
-          points={{-30,-10},{-30,-40},{0,-40},{0,-100},{5.55112e-16,-100}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%second",
-          index=1,
-          extent={{-8,-3},{-8,-3}}));
-
-      // Y-axis velocity
-      connect(velocityY.mechanical, face.transverseY) annotation (Line(
-          points={{6.10623e-16,6.10623e-16},{0,0},{0,20},{5.55112e-16,20}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(velocityY.y, y.phi_y) annotation (Line(
-          points={{6.10623e-16,-10},{5.55112e-16,-10},{5.55112e-16,-100}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%second",
-          index=1,
-          extent={{-8,-3},{-8,-3}}));
-
-      // Temperature
-      connect(temperature.thermal, face.thermal) annotation (Line(
-          points={{60,6.10623e-16},{60,20},{5.55112e-16,20}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-
-      annotation (defaultComponentName="speciesFaceSensor");
-    end SpeciesZ;
 
     model Density "Sensor for density"
 
@@ -1907,9 +1669,9 @@ sensor</a> model.
       y = material.rho;
       0 = material.Ndot "Conservation of material (no storage)";
       annotation (Icon(graphics={Text(
-                  extent={{-100,-20},{100,-50}},
-                  lineColor={127,127,127},
-                  textString="rho")}));
+              extent={{-100,-20},{100,-50}},
+              lineColor={127,127,127},
+              textString="rho")}));
     end Density;
 
     model Velocity "Sensor for velocity"
@@ -1923,9 +1685,9 @@ sensor</a> model.
       y = mechanical.phi "Measurement";
       0 = mechanical.mPhidot "Conservation of linear momentum (no storage)";
       annotation (Icon(graphics={Text(
-                  extent={{-100,-20},{100,-50}},
-                  lineColor={127,127,127},
-                  textString="phi")}));
+              extent={{-100,-20},{100,-50}},
+              lineColor={127,127,127},
+              textString="phi")}));
     end Velocity;
 
     model Temperature "Sensor for temperature"
@@ -1938,9 +1700,9 @@ sensor</a> model.
       y = thermal.T "Measurement";
       0 = thermal.Qdot "Conservation of energy (no storage)";
       annotation (Icon(graphics={Text(
-                  extent={{-100,-20},{100,-50}},
-                  lineColor={127,127,127},
-                  textString="T")}));
+              extent={{-100,-20},{100,-50}},
+              lineColor={127,127,127},
+              textString="T")}));
     end Temperature;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -2099,12 +1861,12 @@ sensor</a> model.
         defaultComponentPrefixes="replaceable",
         defaultComponentName="subregionFaceSensor",
         Icon(graphics={Line(
-              points={{-70,0},{-100,0}},
-              color={127,127,127},
-              smooth=Smooth.None), Line(
-              points={{100,0},{70,0}},
-              color={127,127,127},
-              smooth=Smooth.None)}),
+                  points={{-70,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{100,0},{70,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None)}),
         Diagram(graphics));
     end Subregion;
 
@@ -2247,20 +2009,17 @@ sensor</a> model.
         extends BaseClasses.NullPhase;
 
         // Conditionally include species.
-        parameter Boolean ''inclC+'=false
-          "<html>Carbon plus (C<sup>+</sup>)</html>" annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        Face.Species 'C+'(final axis=axis) if ''inclC+' "Model" annotation (
-            Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            enable='inclC+'), Placement(transformation(extent={{-10,-10},{10,10}})));
+        parameter Boolean HideResult=true;
+        parameter Boolean choices(__Dymola_checkBox=true);
+        parameter Boolean Dialog(
+          group="Species",
+          __Dymola_descriptionLabel=true,
+          __Dymola_joinNext=true);
+        Face.Species 'C+'(final axis=axis) if '' + Dialog(
+                group="Species",
+                __Dymola_descriptionLabel=true,
+                enable='inclC+');
+        Face.Species Placement(transformation(extent={{-10,-10},{10,10}}));
         parameter Boolean 'incle-'=false
           "<html>Electrons (e<sup>-</sup>)</html>" annotation (
           Evaluate=true,
@@ -2495,13 +2254,12 @@ sensor</a> model.
                 origin={0,-100})));
 
           annotation (defaultComponentName="phaseFaceSensor", Icon(graphics={
-                  Line(
-                  points={{-70,0},{-100,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None), Line(
-                  points={{100,0},{70,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None)}));
+                  Line(   points={{-70,0},{-100,0}},
+                          color={127,127,127},
+                          smooth=Smooth.None),Line(
+                          points={{100,0},{70,0}},
+                          color={127,127,127},
+                          smooth=Smooth.None)}));
         end NullPhase;
       end BaseClasses;
     end Phases;
@@ -2701,373 +2459,8 @@ sensor</a> model.
               smooth=Smooth.None)}));
     end Species;
 
-    model SpeciesX
-      "<html>Sensor for x-axis faces of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
 
-      extends BaseClasses.PartialSpecies;
 
-      // Y-axis mechanical
-      parameter Boolean inviscidY=true "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="Y-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity transverseY if not inviscidY "Condition"
-        annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(
-          group="Y-axis linear momentum",
-          enable=not inviscidY,
-          __Dymola_descriptionLabel=true),
-        Placement(transformation(extent={{-10,-10},{10,10}})));
-
-      // Z-axis mechanical
-      parameter Boolean inviscidZ=true "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="Z-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity transverseZ if not inviscidZ "Condition"
-        annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(
-          group="Z-axis linear momentum",
-          enable=not inviscidZ,
-          __Dymola_descriptionLabel=true),
-        Placement(transformation(extent={{20,-10},{40,10}})));
-
-      FCSys.Connectors.Face negative(
-        final isobaric=isobaric,
-        final inviscidY=inviscidY,
-        final inviscidZ=inviscidZ)
-        "Negative-side connector for linear momentum and heat" annotation (
-          Placement(transformation(extent={{-110,-10},{-90,10}}),
-            iconTransformation(extent={{-110,-10},{-90,10}})));
-
-      FCSys.Connectors.Face positive(
-        final isobaric=isobaric,
-        final inviscidY=inviscidY,
-        final inviscidZ=inviscidZ)
-        "Positive-side connector for linear momentum and heat" annotation (
-          Placement(transformation(extent={{90,-2},{110,18}}),
-            iconTransformation(extent={{90,-10},{110,10}})));
-
-    equation
-      // Material
-      connect(material.negative, negative.normal) annotation (Line(
-          points={{-70,6.10623e-16},{-70,5.55112e-16},{-100,5.55112e-16}},
-          color={127,127,127},
-          smooth=Smooth.None));
-      connect(material.positive, positive.normal) annotation (Line(
-          points={{-50,6.10623e-16},{90,6.10623e-16},{90,8},{100,8}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-
-      // Y-axis mechanical
-      connect(transverseY.negative, negative.transverseY) annotation (Line(
-          points={{-10,6.10623e-16},{-90,6.10623e-16},{-90,5.55112e-16},{-100,
-              5.55112e-16}},
-          color={127,127,127},
-          smooth=Smooth.None));
-
-      connect(transverseY.positive, positive.transverseY) annotation (Line(
-          points={{10,6.10623e-16},{90,6.10623e-16},{90,8},{100,8}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(transverseY.y, y.transverseY) annotation (Line(
-          points={{6.10623e-16,-10},{6.10623e-16,-20},{5.55112e-16,-20},{
-              5.55112e-16,-100}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      // Z-axis mechanical
-      connect(transverseZ.negative, negative.transverseZ) annotation (Line(
-          points={{20,6.10623e-16},{-90,6.10623e-16},{-90,5.55112e-16},{-100,
-              5.55112e-16}},
-          color={127,127,127},
-          smooth=Smooth.None));
-
-      connect(transverseZ.positive, positive.transverseZ) annotation (Line(
-          points={{40,6.10623e-16},{90,6.10623e-16},{90,8},{100,8}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(transverseZ.y, y.transverseZ) annotation (Line(
-          points={{30,-10},{30,-20},{5.55112e-16,-20},{5.55112e-16,-100}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      // Thermal
-      connect(thermal.negative, negative.thermal) annotation (Line(
-          points={{50,6.10623e-16},{-90,6.10623e-16},{-90,5.55112e-16},{-100,
-              5.55112e-16}},
-          color={127,127,127},
-          smooth=Smooth.None));
-
-      connect(thermal.positive, positive.thermal) annotation (Line(
-          points={{70,6.10623e-16},{90,6.10623e-16},{90,8},{100,8}},
-          color={127,127,127},
-          smooth=Smooth.None));
-
-      annotation (defaultComponentName="speciesFaceSensor", Icon(graphics={Line(
-                  points={{-70,0},{-100,0}},
-                  color={0,0,0},
-                  smooth=Smooth.None),Line(
-                  points={{100,0},{70,0}},
-                  color={0,0,0},
-                  smooth=Smooth.None)}));
-    end SpeciesX;
-
-    model SpeciesY
-      "<html>Sensor for y-axis faces of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
-
-      extends BaseClasses.PartialSpecies;
-
-      // Z-axis mechanical
-      parameter Boolean inviscidZ=true "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="Z-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity transverseZ if not inviscidZ "Condition"
-        annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(
-          group="Z-axis linear momentum",
-          enable=not inviscidZ,
-          __Dymola_descriptionLabel=true),
-        Placement(transformation(extent={{20,-10},{40,10}})));
-
-      // X-axis mechanical
-      parameter Boolean inviscidX=true "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="X-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity transverseX if not inviscidX "Condition"
-        annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(
-          group="X-axis linear momentum",
-          enable=not inviscidX,
-          __Dymola_descriptionLabel=true),
-        Placement(transformation(extent={{-40,-10},{-20,10}})));
-
-      FCSys.Connectors.Face negative(
-        final isobaric=isobaric,
-        final inviscidX=inviscidX,
-        final inviscidZ=inviscidZ)
-        "Negative-side connector for linear momentum and heat" annotation (
-          Placement(transformation(extent={{-110,-10},{-90,10}}),
-            iconTransformation(extent={{-110,-10},{-90,10}})));
-
-      FCSys.Connectors.Face positive(
-        final isobaric=isobaric,
-        final inviscidX=inviscidX,
-        final inviscidZ=inviscidZ)
-        "Positive-side connector for linear momentum and heat" annotation (
-          Placement(transformation(extent={{90,-2},{110,18}}),
-            iconTransformation(extent={{90,-10},{110,10}})));
-
-    equation
-      // Material
-      connect(material.negative, negative.normal) annotation (Line(
-          points={{-70,6.10623e-16},{-70,5.55112e-16},{-100,5.55112e-16}},
-          color={127,127,127},
-          smooth=Smooth.None));
-      connect(material.positive, positive.normal) annotation (Line(
-          points={{-50,6.10623e-16},{90,6.10623e-16},{90,8},{100,8}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-
-      // Z-axis mechanical
-      connect(transverseZ.negative, negative.transverseZ) annotation (Line(
-          points={{20,6.10623e-16},{-90,6.10623e-16},{-90,5.55112e-16},{-100,
-              5.55112e-16}},
-          color={127,127,127},
-          smooth=Smooth.None));
-
-      connect(transverseZ.positive, positive.transverseZ) annotation (Line(
-          points={{40,6.10623e-16},{90,6.10623e-16},{90,8},{100,8}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(transverseZ.y, y.transverseZ) annotation (Line(
-          points={{30,-10},{30,-20},{5.55112e-16,-20},{5.55112e-16,-100}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      // X-axis mechanical
-      connect(transverseX.negative, negative.transverseX) annotation (Line(
-          points={{-40,6.10623e-16},{-90,6.10623e-16},{-90,5.55112e-16},{-100,
-              5.55112e-16}},
-          color={127,127,127},
-          smooth=Smooth.None));
-
-      connect(transverseX.positive, positive.transverseX) annotation (Line(
-          points={{-20,6.10623e-16},{90,6.10623e-16},{90,8},{100,8}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(transverseX.y, y.transverseX) annotation (Line(
-          points={{-30,-10},{-30,-20},{5.55112e-16,-20},{5.55112e-16,-100}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      // Thermal
-      connect(thermal.negative, negative.thermal) annotation (Line(
-          points={{50,6.10623e-16},{-90,6.10623e-16},{-90,5.55112e-16},{-100,
-              5.55112e-16}},
-          color={127,127,127},
-          smooth=Smooth.None));
-
-      connect(thermal.positive, positive.thermal) annotation (Line(
-          points={{70,6.10623e-16},{90,6.10623e-16},{90,8},{100,8}},
-          color={127,127,127},
-          smooth=Smooth.None));
-
-      annotation (defaultComponentName="speciesFaceSensor", Icon(graphics={Line(
-                  points={{-70,0},{-100,0}},
-                  color={0,0,0},
-                  smooth=Smooth.None),Line(
-                  points={{100,0},{70,0}},
-                  color={0,0,0},
-                  smooth=Smooth.None)}));
-    end SpeciesY;
-
-    model SpeciesZ
-      "<html>Sensor for z-axis faces of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
-
-      extends BaseClasses.PartialSpecies;
-
-      // X-axis mechanical
-      parameter Boolean inviscidX=true "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="X-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity transverseX if not inviscidX "Condition"
-        annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(
-          group="X-axis linear momentum",
-          enable=not inviscidX,
-          __Dymola_descriptionLabel=true),
-        Placement(transformation(extent={{-40,-10},{-20,10}})));
-
-      // Y-axis mechanical
-      parameter Boolean inviscidY=true "Inviscid" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          compact=true,
-          group="Y-axis linear momentum",
-          __Dymola_descriptionLabel=true));
-      replaceable Mechanical.Velocity transverseY if not inviscidY "Condition"
-        annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(
-          group="Y-axis linear momentum",
-          enable=not inviscidY,
-          __Dymola_descriptionLabel=true),
-        Placement(transformation(extent={{-10,-10},{10,10}})));
-
-      FCSys.Connectors.Face negative(
-        final isobaric=isobaric,
-        final inviscidX=inviscidX,
-        final inviscidY=inviscidY)
-        "Negative-side connector for linear momentum and heat" annotation (
-          Placement(transformation(extent={{-110,-10},{-90,10}}),
-            iconTransformation(extent={{-110,-10},{-90,10}})));
-
-      FCSys.Connectors.Face positive(
-        final isobaric=isobaric,
-        final inviscidX=inviscidX,
-        final inviscidY=inviscidY)
-        "Positive-side connector for linear momentum and heat" annotation (
-          Placement(transformation(extent={{90,-2},{110,18}}),
-            iconTransformation(extent={{90,-10},{110,10}})));
-
-    equation
-      // Material
-      connect(material.negative, negative.normal) annotation (Line(
-          points={{-70,6.10623e-16},{-70,5.55112e-16},{-100,5.55112e-16}},
-          color={127,127,127},
-          smooth=Smooth.None));
-      connect(material.positive, positive.normal) annotation (Line(
-          points={{-50,6.10623e-16},{90,6.10623e-16},{90,8},{100,8}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-
-      // X-axis mechanical
-      connect(transverseX.negative, negative.transverseX) annotation (Line(
-          points={{-40,6.10623e-16},{-90,6.10623e-16},{-90,5.55112e-16},{-100,
-              5.55112e-16}},
-          color={127,127,127},
-          smooth=Smooth.None));
-
-      connect(transverseX.positive, positive.transverseX) annotation (Line(
-          points={{-20,6.10623e-16},{90,6.10623e-16},{90,8},{100,8}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(transverseX.y, y.transverseX) annotation (Line(
-          points={{-30,-10},{-30,-20},{5.55112e-16,-20},{5.55112e-16,-100}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      // Y-axis mechanical
-      connect(transverseY.negative, negative.transverseY) annotation (Line(
-          points={{-10,6.10623e-16},{-90,6.10623e-16},{-90,5.55112e-16},{-100,
-              5.55112e-16}},
-          color={127,127,127},
-          smooth=Smooth.None));
-
-      connect(transverseY.positive, positive.transverseY) annotation (Line(
-          points={{10,6.10623e-16},{90,6.10623e-16},{90,8},{100,8}},
-          color={127,127,127},
-          pattern=LinePattern.None,
-          smooth=Smooth.None));
-      connect(transverseY.y, y.transverseY) annotation (Line(
-          points={{6.10623e-16,-10},{6.10623e-16,-20},{5.55112e-16,-20},{
-              5.55112e-16,-100}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      // Thermal
-      connect(thermal.negative, negative.thermal) annotation (Line(
-          points={{50,6.10623e-16},{-90,6.10623e-16},{-90,5.55112e-16},{-100,
-              5.55112e-16}},
-          color={127,127,127},
-          smooth=Smooth.None));
-
-      connect(thermal.positive, positive.thermal) annotation (Line(
-          points={{70,6.10623e-16},{90,6.10623e-16},{90,8},{100,8}},
-          color={127,127,127},
-          smooth=Smooth.None));
-
-      annotation (defaultComponentName="speciesFaceSensor", Icon(graphics={Line(
-                  points={{-70,0},{-100,0}},
-                  color={0,0,0},
-                  smooth=Smooth.None),Line(
-                  points={{100,0},{70,0}},
-                  color={0,0,0},
-                  smooth=Smooth.None)}));
-    end SpeciesZ;
 
     package Material "Relative sensors for normal linear momentum"
       extends Modelica.Icons.Package;
