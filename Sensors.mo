@@ -336,8 +336,7 @@ package Sensors "Models to measure conditions"
 
       annotation (
         defaultComponentPrefixes="replaceable",
-        defaultComponentName="phaseChemicalSensor",
-        Diagram(graphics));
+        defaultComponentName="phaseChemicalSensor");
     end Ionomer;
 
     model Liquid "Sensor for liquid"
@@ -408,8 +407,7 @@ package Sensors "Models to measure conditions"
               origin={0,-100})));
         annotation (
           defaultComponentPrefixes="replaceable",
-          defaultComponentName="phaseChemicalSensor",
-          Icon(graphics));
+          defaultComponentName="phaseChemicalSensor");
       end NullPhase;
     end BaseClasses;
     annotation (Documentation(info="<html><p>Since the connectors in
@@ -491,13 +489,12 @@ sensor</a> models.
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
-                100,100}}), graphics={
-            Line(points={{-40,-100},{-40,-58}}, color={0,0,127}),
-            Line(points={{40,-100},{40,-58}}, color={0,0,127}),
-            Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="mu/T   phi   T     ")}));
+                100,100}}), graphics={Line(points={{-40,-100},{-40,-58}}, color
+              ={0,0,127}),Line(points={{40,-100},{40,-58}}, color={0,0,127}),
+              Text(
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="mu/T   phi   T     ")}));
     end Species;
   end Chemical;
 
@@ -589,9 +586,9 @@ sensor</a> models.
         defaultComponentPrefixes="replaceable",
         defaultComponentName="volSensor",
         Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="p")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="p")}));
     end Pressure;
 
     model Velocity "Measured velocity"
@@ -626,9 +623,9 @@ sensor</a> models.
         defaultComponentPrefixes="replaceable",
         defaultComponentName="momSensor",
         Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="phi")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="phi")}));
     end Velocity;
 
     model Temperature "Measured temperature"
@@ -640,9 +637,9 @@ sensor</a> models.
         defaultComponentPrefixes="replaceable",
         defaultComponentName="entropySensor",
         Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="T")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="T")}));
     end Temperature;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -927,8 +924,7 @@ sensor</a> models.
 
       annotation (
         defaultComponentPrefixes="replaceable",
-        defaultComponentName="subregionFaceSensor",
-        Diagram(graphics));
+        defaultComponentName="subregionFaceSensor");
     end Subregion;
 
     package Phases
@@ -1655,9 +1651,6 @@ sensor</a> model.
       annotation (defaultComponentName="speciesFaceSensor");
     end Species;
 
-
-
-
     model Density "Sensor for density"
 
       extends FCSys.Sensors.BaseClasses.PartialSensor(redeclare
@@ -1669,9 +1662,9 @@ sensor</a> model.
       y = material.rho;
       0 = material.Ndot "Conservation of material (no storage)";
       annotation (Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="rho")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="rho")}));
     end Density;
 
     model Velocity "Sensor for velocity"
@@ -1685,24 +1678,25 @@ sensor</a> model.
       y = mechanical.phi "Measurement";
       0 = mechanical.mPhidot "Conservation of linear momentum (no storage)";
       annotation (Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="phi")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="phi")}));
     end Velocity;
 
     model Temperature "Sensor for temperature"
       extends FCSys.Sensors.BaseClasses.PartialSensor(redeclare
           FCSys.Connectors.RealOutput y(final unit="l2.m/(N.T2)", displayUnit=
               "K"));
-      FCSys.Connectors.Thermal thermal "Thermal subconnector"
+      FCSys.Connectors.Face thermal
+        "Connector to measure current density, velocity, and temperature"
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
     equation
       y = thermal.T "Measurement";
       0 = thermal.Qdot "Conservation of energy (no storage)";
       annotation (Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="T")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="T")}));
     end Temperature;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -1713,13 +1707,11 @@ sensor</a> model.
 
         extends FCSys.BaseClasses.Icons.Sensor;
 
-        // Material
-        parameter Boolean isobaric=false "Isobaric condition"
-          annotation (Dialog(compact=true));
-        Density density if not isobaric "Type of sensor"
+        // Normal
+        Density density "Sensor for areic current"
           annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
 
-        // Heat
+        // Thermal
         Temperature temperature "Type of sensor"
           annotation (Placement(transformation(extent={{50,-10},{70,10}})));
 
@@ -1866,8 +1858,7 @@ sensor</a> model.
                   smooth=Smooth.None),Line(
                   points={{100,0},{70,0}},
                   color={127,127,127},
-                  smooth=Smooth.None)}),
-        Diagram(graphics));
+                  smooth=Smooth.None)}));
     end Subregion;
 
     package Phases
@@ -2180,8 +2171,7 @@ sensor</a> model.
 
         annotation (
           defaultComponentPrefixes="replaceable",
-          defaultComponentName="phaseFaceSensor",
-          Diagram(graphics));
+          defaultComponentName="phaseFaceSensor");
       end Ionomer;
 
       model Liquid "Sensor for liquid"
@@ -2224,8 +2214,7 @@ sensor</a> model.
 
         annotation (
           defaultComponentPrefixes="replaceable",
-          defaultComponentName="phaseFaceSensor",
-          Diagram(graphics));
+          defaultComponentName="phaseFaceSensor");
       end Liquid;
 
       package BaseClasses "Base classes (not for direct use)"
@@ -2451,16 +2440,13 @@ sensor</a> model.
           smooth=Smooth.None));
 
       annotation (defaultComponentName="speciesFaceSensor", Icon(graphics={Line(
-              points={{-70,0},{-100,0}},
-              color={0,0,0},
-              smooth=Smooth.None), Line(
-              points={{100,0},{70,0}},
-              color={0,0,0},
-              smooth=Smooth.None)}));
+                  points={{-70,0},{-100,0}},
+                  color={0,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{100,0},{70,0}},
+                  color={0,0,0},
+                  smooth=Smooth.None)}));
     end Species;
-
-
-
 
     package Material "Relative sensors for normal linear momentum"
       extends Modelica.Icons.Package;
@@ -2565,8 +2551,7 @@ sensor</a> model.
                       points={{-20,-26},{-12,-44},{-28,-44},{-20,-26}},
                       lineColor={127,127,127},
                       smooth=Smooth.None,
-                      lineThickness=0.5)}),
-          Diagram(graphics));
+                      lineThickness=0.5)}));
       end Velocity;
 
       model Force "Sensor for shear force (condition of uniform velocity)"
@@ -2751,13 +2736,12 @@ sensor</a> model.
             smooth=Smooth.None));
 
         annotation (defaultComponentName="speciesFaceSensor", Icon(graphics={
-                Line(
-                points={{-70,0},{-100,0}},
-                color={0,0,0},
-                smooth=Smooth.None), Line(
-                points={{100,0},{70,0}},
-                color={0,0,0},
-                smooth=Smooth.None)}));
+                Line( points={{-70,0},{-100,0}},
+                      color={0,0,0},
+                      smooth=Smooth.None),Line(
+                      points={{100,0},{70,0}},
+                      color={0,0,0},
+                      smooth=Smooth.None)}));
       end PartialSpecies;
     end BaseClasses;
   end FaceDifferential;

@@ -45,7 +45,7 @@ git add images
 git add *.html
 
 # Update the Github web pages and return to the original branch.
-git commit -am "Auto-update github pages"
+git commit -am "Auto-updated github pages"
 #git push origin gh-pages
 git checkout $branch
 if [ "$stash_msg" != "No local changes to save" ]; then

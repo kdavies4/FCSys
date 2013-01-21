@@ -1,0 +1,12 @@
+// Define signals.
+filename = "Correlations.mat";
+y1 = {"'v_C+'", "'v_C19HF37O5S-'", "'v_e-'", "'v_H+'", "v_H2", "v_H2O", "v_H2O_liquid", "v_N2", "v_O2", "v_IG"};
+y2 = {"p", "'p_C+'", "'p_C19HF37O5S-'", "'p_e-'", "'p_H+'", "p_H2", "p_H2O", "p_H2O_liquid", "p_N2", "p_O2", "p_IG"};
+y3 = {"T"};
+y4 = {"'c_V_C+'", "'c_V_C19HF37O5S-'", "'c_V_e-'", "'c_V_H+'", "c_V_H2", "c_V_H2O", "c_V_H2O_liquid", "c_V_N2", "c_V_O2", "c_V_IG"};
+y5 = {"'h_C+'", "'h_C19HF37O5S-'", "'h_e-'", "'h_H+'", "h_H2", "h_H2O", "h_H2O_liquid",  "h_N2", "h_O2"};
+y6 = {"'s_C+'", "'s_C19HF37O5S-'", "'s_e-'", "'s_H+'", "s_H2", "s_H2O", "s_H2O_liquid", "s_N2", "s_O2"};
+
+// Make plots.
+removePlots();
+RunScript("FCSys/resources/scripts/Dymola/plot6.mos");

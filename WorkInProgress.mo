@@ -57,7 +57,6 @@ package WorkInProgress "Incomplete classes under development"
         smooth=Smooth.None));
     annotation (
       experiment(StopTime=10),
-      experimentSetupOutput,
       Commands(file="resources/scripts/Dymola/BCs.Examples.FluidAdapt.mos"));
   end BCsExamplesClosedVolume;
 
@@ -456,8 +455,7 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
               points={{0,60},{0,20}},
               color={0,0,0},
               smooth=Smooth.None,
-              pattern=LinePattern.Dash)}),
-      Diagram(graphics));
+              pattern=LinePattern.Dash)}));
   end BCsAdaptersSpeciesFluid;
 
   model BCsAdaptersPhasesIonomer

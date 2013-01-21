@@ -4,7 +4,7 @@ package Systems
 
   extends Modelica.Icons.Package;
   extends FCSys.BaseClasses.Icons.PackageUnderConstruction;
-  package Examples "Examples and tests"
+  package Examples "Examples"
     extends Modelica.Icons.ExamplesPackage;
     model FCPlantNoRecirc
       extends Modelica.Icons.Example;
@@ -374,7 +374,6 @@ package Systems
           StopTime=2000,
           Tolerance=1e-005,
           Algorithm="Dassl"),
-        experimentSetupOutput,
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                 100,100}}), graphics));
     end FCNoRecirc;

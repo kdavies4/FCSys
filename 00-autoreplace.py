@@ -13,11 +13,14 @@ import os
 ## Settings
 
 # Replacement pairs
-rpls = [# Remove empty layers.
+rpls = [# Remove empty annotation tags.
         (r'\n? *Diagram\(graphics\), *', ' '),
-        (r', *Diagram\(graphics\)', ''),
+        (r',\n? *Diagram\(graphics\)', ''),
         (r'\n? *Icon\(graphics\), *', ' '),
-        (r', *Icon\(graphics\)', ''),
+        (r',\n? *Icon\(graphics\)', ''),
+        (r'\n? *Icon\(graphics\), *', ' '),
+        (r'\n? *experimentSetupOutput, *', ' '),
+        (r',\n? *experimentSetupOutput\)', ')'),
         # Remove spaces on the outside of bold and underline tags.
         ('<b> ', ' <b>'),
         (' </b>', '</b> '),

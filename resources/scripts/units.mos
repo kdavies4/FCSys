@@ -6,8 +6,6 @@
 // Settings
 // ***********************************************************************
 
-checkUnits = false "true, if the constants and units should be checked";
-
 // -----------------------------------------------------------------------
 // Default display units
 // If units other than those in the displayUnit attribute of the
@@ -92,14 +90,6 @@ defineDefaultDisplayUnit("T", "s") "Time";
 Advanced.OutputModelicaCode = true "Output dsmodel in Modelica style";
 translateModel("FCSys.Units.Evaluate");
 Modelica.Utilities.Files.copy("dsmodel.mof", "FCSys/resources/scripts/units-values.mos", true);
-
-// ***********************************************************************
-// Check the constants and units (conditional).
-// ***********************************************************************
-
-if checkUnits then
-    assert(RunScript(script="FCSys/resources/scripts/units-check.mos", silent=true), "The constants and units did not pass the check.\nThe unit conversions have not been updated.");
-end if;
 
 // ***********************************************************************
 // Establish conversions to display quantities in units.

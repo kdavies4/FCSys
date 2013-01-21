@@ -1,21 +1,17 @@
 within FCSys;
 package Quantities "Quantities to represent physical properties"
-
-  extends Modelica.Icons.Package;
-  import Modelica.Icons.TypeReal;
-
-  package Examples "Examples and tests"
+  package Examples "Examples"
     extends Modelica.Icons.ExamplesPackage;
-    model TestQuantities "Test the display units for selected quantities"
+
+    model Display "Demonstrate the display units for the quantities"
       extends Modelica.Icons.Example;
 
-      Q.Examples.ExampleModel doubleClickMe annotation (Placement(
-            transformation(
+      ExampleModel doubleClickMe annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={0,0})));
       annotation (Diagram(graphics));
-    end TestQuantities;
+    end Display;
 
     model ExampleModel "Model that uses all of the quantities"
       extends FCSys.BaseClasses.Icons.Blocks.Continuous;
@@ -91,9 +87,11 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.VolumeSpecificRate VolumeSpecificRate=1*U.m^3/(U.C*U.s)
         "Rate of specific volume";
       parameter Q.Wavenumber Wavenumber=1*U.rad/U.m "Wavenumber";
-
     end ExampleModel;
   end Examples;
+
+  extends Modelica.Icons.Package;
+  import Modelica.Icons.TypeReal;
 
   // Generated from FCSys/resources/quantities.xls, 2013-1-20
   type Acceleration = Modelica.Icons.TypeReal (final unit="l/T2");

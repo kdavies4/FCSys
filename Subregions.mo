@@ -2,7 +2,7 @@ within FCSys;
 package Subregions
   "Control volumes with multi-species transport, exchange, and storage"
   extends Modelica.Icons.Package;
-  package Examples "Examples and tests"
+  package Examples "Examples"
     extends Modelica.Icons.ExamplesPackage;
 
     model SubregionH2 "Test a subregion"
@@ -104,10 +104,8 @@ package Subregions
       annotation (
         Placement(transformation(extent={{70,70},{90,90}})),
         experiment(StopTime=10),
-        experimentSetupOutput,
         Commands(file(ensureSimulated=true) =
-            "resources/scripts/Dymola/Subregions.Examples.SubregionH2.mos"),
-        Diagram(graphics));
+            "resources/scripts/Dymola/Subregions.Examples.SubregionH2.mos"));
     end SubregionH2;
 
     model SubregionHOR
@@ -126,10 +124,8 @@ package Subregions
       extends Modelica.Icons.UnderConstruction;
       // **fails sim
 
-      annotation (
-        experiment(StopTime=1000, Tolerance=1e-06),
-        experimentSetupOutput,
-        Commands(file(ensureSimulated=true) =
+      annotation (experiment(StopTime=1000, Tolerance=1e-06), Commands(file(
+              ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionHOR.mos"));
     end SubregionHOR;
 
@@ -150,10 +146,8 @@ package Subregions
 
       extends Modelica.Icons.UnderConstruction;
       // **fails sim
-      annotation (
-        experiment(StopTime=1000, Tolerance=1e-06),
-        experimentSetupOutput,
-        Commands(file(ensureSimulated=true) =
+      annotation (experiment(StopTime=1000, Tolerance=1e-06), Commands(file(
+              ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionORR.mos"));
     end SubregionORR;
 
@@ -339,20 +333,16 @@ package Subregions
           StopTime=4,
           Tolerance=1e-06,
           Algorithm="Dassl"),
-        experimentSetupOutput,
         Commands(file(ensureSimulated=true) =
-            "resources/scripts/Dymola/Subregions.Examples.SubregionsH2.mos"),
-        Diagram(graphics));
+            "resources/scripts/Dymola/Subregions.Examples.SubregionsH2.mos"));
     end SubregionsH2;
 
     model SubregionsCAndH2
       "<html>Test a one-dimensional array of subregions with C and H<sub>2</sub></html>"
       extends SubregionsH2('inclC+'=true, environment(analysis=true));
 
-      annotation (
-        experiment(StopTime=3, NumberOfIntervals=5000),
-        experimentSetupOutput,
-        Commands(file(ensureSimulated=true) =
+      annotation (experiment(StopTime=3, NumberOfIntervals=5000), Commands(file(
+              ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionsCAndH2.mos"));
     end SubregionsCAndH2;
 
@@ -363,10 +353,8 @@ package Subregions
         inclH2=true,
         inclH2O=true);
 
-      annotation (
-        experiment(StopTime=8, Tolerance=1e-06),
-        experimentSetupOutput,
-        Commands(file(ensureSimulated=true) =
+      annotation (experiment(StopTime=8, Tolerance=1e-06), Commands(file(
+              ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionsCAndH2AndH2O.mos"));
     end SubregionsCAndH2AndH2O;
 
@@ -377,10 +365,8 @@ package Subregions
         'inclC+'=true,
         inclN2=true);
 
-      annotation (
-        experiment(StopTime=40, Tolerance=1e-06),
-        experimentSetupOutput,
-        Commands(file(ensureSimulated=true) =
+      annotation (experiment(StopTime=40, Tolerance=1e-06), Commands(file(
+              ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionsCAndN2.mos"));
     end SubregionsCAndN2;
 
@@ -391,14 +377,11 @@ package Subregions
         'inclC+'=true,
         inclO2=true);
 
-      annotation (
-        experiment(
+      annotation (experiment(
           StopTime=25,
           NumberOfIntervals=5000,
           Tolerance=1e-06,
-          Algorithm="Dassl"),
-        experimentSetupOutput,
-        Commands(file(ensureSimulated=true) =
+          Algorithm="Dassl"), Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionsCAndO2.mos"));
     end SubregionsCAndO2;
 
@@ -410,10 +393,8 @@ package Subregions
         'inclH+'=true,
         'inclC19HF37O5S-'=true);
       extends Modelica.Icons.UnderConstruction;
-      annotation (
-        experiment(StopTime=150, Tolerance=1e-06),
-        experimentSetupOutput,
-        Commands(file(ensureSimulated=true) =
+      annotation (experiment(StopTime=150, Tolerance=1e-06), Commands(file(
+              ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionsC19HF37O5SminusAndH2OAndHplus.mos"));
     end SubregionsC19HF37O5SminusAndH2OAndHplus;
 
@@ -426,10 +407,8 @@ package Subregions
         environment(analysis=false));
       extends Modelica.Icons.UnderConstruction;
 
-      annotation (
-        experiment(Tolerance=1e-06),
-        experimentSetupOutput,
-        Commands(file(ensureSimulated=true) =
+      annotation (experiment(Tolerance=1e-06), Commands(file(ensureSimulated=
+                true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionsCAndeminus.mos"));
     end SubregionsCAndeminus;
 
@@ -454,12 +433,9 @@ package Subregions
         redeclare FCSys.BCs.FaceBus.SubregionClosedAdiabatic bC1,
         redeclare FCSys.BCs.FaceBus.SubregionClosedAdiabatic bC2);
 
-      annotation (
-        Commands(file=
+      annotation (Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ThermalConduction.mos"),
-
-        experiment(StopTime=298.15, Algorithm="Dassl"),
-        experimentSetupOutput);
+          experiment(StopTime=298.15, Algorithm="Dassl"));
 
     end ThermalConduction;
 
@@ -485,12 +461,9 @@ package Subregions
         redeclare FCSys.BCs.FaceBus.SubregionClosedAdiabatic bC1,
         redeclare FCSys.BCs.FaceBus.SubregionClosedAdiabatic bC2);
 
-      annotation (
-        Commands(file=
+      annotation (Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ThermalConductionConvection.mos"),
-
-        experiment(StopTime=200, Algorithm="Dassl"),
-        experimentSetupOutput);
+          experiment(StopTime=200, Algorithm="Dassl"));
 
     end ThermalConductionConvection;
 
@@ -545,10 +518,7 @@ package Subregions
           color={208,104,0},
           smooth=Smooth.None));
 
-      annotation (
-        experiment(StopTime=36000),
-        experimentSetupOutput,
-        Commands(file=
+      annotation (experiment(StopTime=36000), Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ReactionRamp.mos"));
     end ReactionRamp;
 
@@ -613,10 +583,7 @@ package Subregions
           color={208,104,0},
           smooth=Smooth.None));
 
-      annotation (
-        experiment(StopTime=100),
-        experimentSetupOutput,
-        Commands(file=
+      annotation (experiment(StopTime=100), Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.Reaction.mos"));
     end Reaction;
 
@@ -646,10 +613,8 @@ package Subregions
           points={{17.1716,-17.1716},{7,-7}},
           color={72,90,180},
           smooth=Smooth.None));
-      annotation (
-        Placement(transformation(extent={{70,70},{90,90}})),
-        experiment(StopTime=10),
-        experimentSetupOutput);
+      annotation (Placement(transformation(extent={{70,70},{90,90}})),
+          experiment(StopTime=10));
     end SpeciesH2;
 
     model Specieseminus "Test a species"
@@ -673,7 +638,6 @@ package Subregions
       annotation (
         Placement(transformation(extent={{70,70},{90,90}})),
         experiment(StopTime=10),
-        experimentSetupOutput,
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionH2.mos"));
     end Specieseminus;
@@ -884,7 +848,6 @@ package Subregions
           NumberOfIntervals=5000,
           Tolerance=1e-06,
           Algorithm="Dassl"),
-        experimentSetupOutput,
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionsH2.mos"));
     end SubregionsCell;
@@ -950,7 +913,6 @@ package Subregions
       annotation (
         Placement(transformation(extent={{70,70},{90,90}})),
         experiment(StopTime=10),
-        experimentSetupOutput,
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionH2.mos"));
     end SubregionH22;
@@ -1010,10 +972,8 @@ package Subregions
       annotation (
         Placement(transformation(extent={{70,70},{90,90}})),
         experiment(StopTime=10),
-        experimentSetupOutput,
         Commands(file(ensureSimulated=true) =
-            "resources/scripts/Dymola/Subregions.Examples.SubregionH2.mos"),
-        Diagram(graphics));
+            "resources/scripts/Dymola/Subregions.Examples.SubregionH2.mos"));
     end SubregionH23;
   end Examples;
 
@@ -2124,7 +2084,14 @@ package Subregions
         defaultComponentPrefixes="replaceable",
         Documentation(info="<html><p>If C is included (<code>inclC</code>=<code>true</code>),
     then <code>initVelX</code>, <code>initVelY</code>, and <code>initVelZ</code> are
-    ignored.  Velocity is not initialized because it is set by C.</p>
+    ignored.  Velocity is not initialized because it is set by C. **update this</p>
+
+    <p>Assumptions:
+    <ol>
+    <li>The density of e<sup>-</sup> is equal to that of C<sup>+</sup>.</li>
+    <li>All of the C has been ionized to C<sup>+</sup>.</li>
+    </ol>
+    </p>
 
     <p>For more information, see the
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
@@ -2394,9 +2361,19 @@ package Subregions
 
       annotation (
         defaultComponentPrefixes="replaceable",
-        Documentation(info="<html><p>If C19HF37O5S is included (<code>inclC19HF37O5S</code>=<code>true</code>),
+        Documentation(info="<html><p>If C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> is included
+    (<code>'inclC19HF37O5S-'</code>=<code>true</code>),
     then <code>initVelX</code>, <code>initVelY</code>, and <code>initVelZ</code> are
-    ignored.  Velocity is not initialized because it is set by C19HF37O5S.</p>
+    ignored.  Velocity is not initialized because it is set by C19HF37O5S.**update this</p>
+
+    <p>Assumptions:
+    <ol>
+    <li>The density of H<sup>+</sup> is equal to that of C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>.</li>
+    <li>All of the C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S has been ionized to
+    C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>.  Note that this is not true in practice
+    (see <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">Characteristics.'H+'.Ionomer</a>).</li>
+    </ol>
+    </p>
 
     <p>For more information, see the
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
@@ -2656,8 +2633,7 @@ package Subregions
             color={72,90,180},
             smooth=Smooth.None));
 
-        annotation (
-          Documentation(info="<html><p>If one of the species has <code>setTemp = true</code>, then
+        annotation (Documentation(info="<html><p>If one of the species has <code>setTemp = true</code>, then
     <code>initTemp</code> should be set to <code>false</code>.
     Likewise, if one of the species has <code>setVelX = true</code>,
     <code>setVelY = true</code>, or <code>setVelZ = true</code>, then
@@ -2672,8 +2648,7 @@ package Subregions
 
 <p>Notes:<ul>
   <li>The x-axis component of linear momentum is included by default.  At least one component must be included.</li></ul></html>"),
-
-          Icon(graphics={Ellipse(
+            Icon(graphics={Ellipse(
                       extent={{-40,100},{40,20}},
                       lineColor={127,127,127},
                       startAngle=30,
@@ -2716,8 +2691,7 @@ package Subregions
                       smooth=Smooth.None),Text(
                       extent={{-100,-20},{100,20}},
                       textString="%name",
-                      lineColor={0,0,0})}),
-          Diagram(graphics));
+                      lineColor={0,0,0})}));
       end NullPhase;
     end BaseClasses;
   end Phases;
@@ -2976,7 +2950,9 @@ package Subregions
         model Calibrated "Correlations with adjustment factors"
           extends Species(
             redeclare replaceable package Data =
-                FCSys.Characteristics.'H+'.Ionomer,
+                FCSys.Characteristics.'H+'.Ionomer (specVolPow=FCSys.Characteristics.
+                    'C19HF37O5S-'.Ionomer.specVolPow, b_v=FCSys.Characteristics.
+                    'C19HF37O5S-'.Ionomer.b_v),
             Xi=k_Xi*Data.Xi(T),
             F=k_F*Data.F(T),
             R=k_R*Data.R(T));
@@ -2994,14 +2970,25 @@ package Subregions
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'H+'",
-            Documentation(info=
-                  "<html><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+            Documentation(info="<html><p>Assumptions:<ol>
+    <li>The density of H<sup>+</sup> is equal to that of
+  C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> or approximately 1.912 M.  Note that
+  this is greater than that measured by Spry and Fayer (see
+  <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">Characteristics.'H+'.Ionomer</a>), but it
+  simplifies the model by requiring only C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>
+  (not C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S) for charge neutrality.
+    </li>
+    </ol></p>
+
+  <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
         end Calibrated;
 
         model Correlated "Correlated properties"
           extends Species(
             redeclare replaceable package Data =
-                FCSys.Characteristics.'H+'.Ionomer,
+                FCSys.Characteristics.'H+'.Ionomer (specVolPow=FCSys.Characteristics.
+                    'C19HF37O5S-'.Ionomer.specVolPow, b_v=FCSys.Characteristics.
+                    'C19HF37O5S-'.Ionomer.b_v),
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
@@ -3009,14 +2996,25 @@ package Subregions
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'H+'",
-            Documentation(info=
-                  "<html><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+            Documentation(info="<html><p>Assumptions:<ol>
+    <li>The density of H<sup>+</sup> is equal to that of
+  C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> or approximately 1.912 M.  Note that
+  this is greater than that measured by Spry and Fayer (see
+  <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">Characteristics.'H+'.Ionomer</a>), but it
+  simplifies the model by requiring only C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>
+  (not C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S) for charge neutrality.
+    </li>
+    </ol></p>
+
+    <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
         end Correlated;
 
         model Fixed "Fixed properties"
           extends Species(
             redeclare replaceable package Data =
-                FCSys.Characteristics.'H+'.Ionomer,
+                FCSys.Characteristics.'H+'.Ionomer (specVolPow=FCSys.Characteristics.
+                    'C19HF37O5S-'.Ionomer.specVolPow, b_v=FCSys.Characteristics.
+                    'C19HF37O5S-'.Ionomer.b_v),
             initMethPartNum=InitMethScalar.None,
             redeclare parameter Q.CompressibilityDynamic Xi=Data.Xi(),
             redeclare parameter Q.FluidityDynamic F=Data.F(),
@@ -3029,6 +3027,13 @@ package Subregions
             defaultComponentName="'H+'",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>The generalized resistivities (&Xi;, <i>F</i>, <i>R</i>) are fixed (e.g., independent of temperature).</li>
+    <li>The density of H<sup>+</sup> is equal to that of
+  C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> or approximately 1.912 M.  Note that
+  this is greater than that measured by Spry and Fayer (see
+  <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">Characteristics.'H+'.Ionomer</a>), but it
+  simplifies the model by requiring only C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>
+  (not C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S) for charge neutrality.
+    </li>
     </ol></p>
 
   <p>The default resistivities (<code>F=1/(5.3e-6*U.Pa*U.s)</code> and <code>R=U.m*U.K/(0.1661*U.W)</code>) are of H gas
@@ -3852,9 +3857,9 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
   of a single type (instances of a model derived from this one), there should be exactly one equation to specify the velocity along each Cartesian axis.
   For example, the x-axis velocity may be given by setting <code>setVelX</code> to <code>true</code> in one of the instances
   (x-axis velocity will be <code>phi_IC[Axis.x]</code> for all time).  Alternatively, one of the faces on the outside of the
-  group could be removed by setting the appropriate <code>inclFaceNegX</code>, <code>inclFacePosX</code>, etc. parameter 
+  group could be removed by setting the appropriate <code>inclFaceNegX</code>, <code>inclFacePosX</code>, etc. parameter
   to <code>false</code>, which will set the current and transverse components of velocity to zero.</p>
-  
+
   <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
     end SpeciesSolid;
 
@@ -4165,12 +4170,12 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
           enable=initMethX == 5 or initMethY == 5 or initMethZ == 5));
 
       // Material properties
-      Q.CompressibilityDynamic Xi(nominal=1e8/(U.V*U.s)) = Data.Xi(T, v)
+      Q.CompressibilityDynamic Xi(nominal=1e8/(U.V*U.s)) = Data.Xi(T, v=v)
         "<html>Dynamic compressibility (&Xi;)</html>"
         annotation (Dialog(group="Material properties"));
-      Q.FluidityDynamic F(nominal=10*U.cm*U.s/U.g) = Data.F(T, v)
+      Q.FluidityDynamic F(nominal=10*U.cm*U.s/U.g) = Data.F(T)
         "Dynamic fluidity" annotation (Dialog(group="Material properties"));
-      Q.ResistivityThermal R(nominal=10*U.cm/U.A) = Data.R(T, v)
+      Q.ResistivityThermal R(nominal=10*U.cm/U.A) = Data.R(T, p=p)
         "Thermal resistivity" annotation (Dialog(group="Material properties"));
 
       // Preferred states
@@ -4230,7 +4235,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         Data.m*phi .* I ./ (2*A[cartAxes]) if environment.analysis
         "Dynamic pressure";
       output Q.CapacityThermalSpecific c_V(stateSelect=StateSelect.never) =
-        Data.c_V(T, v) if environment.analysis
+        Data.c_V(T, p) if environment.analysis
         "Isochoric specific heat capacity";
       output Q.PressureReciprocal beta_T(stateSelect=StateSelect.never) =
         Data.beta_T(T, p) if environment.analysis
@@ -4238,23 +4243,23 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
       //
       // Time constants
       output Q.Time tau_exch_mechanical(stateSelect=StateSelect.never) =
-        alpha_F*N/(2*Lstar) if environment.analysis
+        alpha_F*N/Lstar if environment.analysis
         "Time constant for mechanical exchange";
       output Q.Time tau_exch_thermal(stateSelect=StateSelect.never) = alpha_R*N
-        /(2*Lstar) if environment.analysis "Time constant for thermal exchange";
+        /Lstar if environment.analysis "Time constant for thermal exchange";
       output Q.Time tau_trans_material(stateSelect=StateSelect.never) = noEvent(
-        if alpha_Xi > Modelica.Constants.small then 2*Data.m*beta_T/alpha_Xi
+        if alpha_Xi > Modelica.Constants.small then Data.m*beta_T/alpha_Xi
          else 0) if environment.analysis "Time constant for material transport";
-      // Note that this is not dependent on length or area---only intensive
+      // Note that this isn't dependent on length or area---only intensive
       // properties.
       output Q.Time tau_trans_normal[Axis](each stateSelect=StateSelect.never)
-         = fill(alpha_Xi*N/2, 3) ./ Lstar_trans if environment.analysis
+         = fill(alpha_Xi*N, 3) ./ Lstar_trans if environment.analysis
         "Time constants for normal mechanical transport";
       output Q.Time tau_trans_transverse[Axis](each stateSelect=StateSelect.never)
-         = fill(alpha_F*N/2, 3) ./ Lstar_trans if environment.analysis
+         = fill(alpha_F*N, 3) ./ Lstar_trans if environment.analysis
         "Time constants for transverse mechanical transport";
       output Q.Time tau_trans_thermal[Axis](each stateSelect=StateSelect.never)
-         = fill(alpha_R*N/2, 3) ./ Lstar_trans if environment.analysis
+         = fill(alpha_R*N, 3) ./ Lstar_trans if environment.analysis
         "Time constants for thermal transport";
       output Q.NumberAbsolute eta=log10(max({tau_exch_mechanical,
           tau_exch_thermal,max([tau_trans_normal; tau_trans_transverse;
@@ -4265,12 +4270,12 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
       //
       // Peclet numbers (only for the axes with linear momentum included; others are
       // zero)
-      output Q.Number Pe_mat[n_lin](each stateSelect=StateSelect.never) = I*
+      output Q.Number Pe_0[n_lin](each stateSelect=StateSelect.never) = I*
         alpha_Xi ./ Lstar_trans[cartAxes] if environment.analysis
-        "Material Peclet numbers";
-      output Q.Number Pe_mech[n_lin](each stateSelect=StateSelect.never) = I*
+        "Normal Peclet numbers";
+      output Q.Number Pe_12[n_lin](each stateSelect=StateSelect.never) = I*
         alpha_F ./ Lstar_trans[cartAxes] if environment.analysis
-        "Mechanical Peclet numbers";
+        "Transverse Peclet numbers";
       output Q.Number Pe_therm[n_lin](each stateSelect=StateSelect.never) = I*
         alpha_R ./ Lstar_trans[cartAxes] if environment.analysis
         "Thermal Peclet numbers";
@@ -4290,7 +4295,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         "Acceleration force relative to the frame of reference (constant mass)";
       output Q.Force f_exch_adv[n_lin](each stateSelect=StateSelect.never) =
         chemical.mPhidot - Data.m*phi*chemical.Ndot if environment.analysis
-        "Acceleration force due to material (advective) exchange";
+        "Acceleration force due to advective exchange";
       output Q.Force f_exch_diff[n_lin](each stateSelect=StateSelect.never) =
         common.mechanical.mPhidot + inert.mPhidot if environment.analysis
         "Friction from other species (diffusive exchange)";
@@ -4300,7 +4305,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
          - orientation), :, orientation] .* J_face[cartWrap(cartAxes[axis] -
         orientation), :])*A[cartWrap(cartAxes[axis] - orientation)] for
         orientation in Orientation) for axis in 1:n_lin} if environment.analysis
-        "Acceleration force due to material (advective) transport";
+        "Acceleration force due to advective transport";
       output Q.Force f_trans_diff[n_lin](each stateSelect=StateSelect.never) =
         {Sigma(mPhidot_face_0[cartAxes[axis], :]) + sum(Sigma(mPhidot_face[
         cartWrap(cartAxes[axis] - orientation), :, orientation]) for
@@ -4326,7 +4331,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         side)*v_face[axis, side]*J_face[axis, side])^2 + phi_face[axis, side, :]
         *phi_face[axis, side, :])/2 - h - Data.m*phi*phi/2)*J_face[axis, side]
         for side in Side) for axis in Axis}*A if environment.analysis
-        "Relative rate of work (internal, flow, and kinetic) done by material transport (advection)";
+        "Relative rate of work (internal, flow, and kinetic) done by advective transport";
       output Q.Power Qdot_gen_trans(stateSelect=StateSelect.never) = sum(
         phi_face .* mPhidot_face) if environment.analysis
         "Rate of heat generation due to friction with other subregions";
@@ -4463,11 +4468,11 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
           initMethY,initMethZ} "Initialization methods for velocity";
 
       // Base resistivity factors
-      Q.Resistivity alpha_Xi(nominal=10*U.cm/U.A) = Xi*v
+      Q.Resistivity alpha_Xi(nominal=5*U.cm/U.A) = Xi*Data.m*v/2
         "Base resistivity factor for dynamic compressibility";
-      Q.Resistivity alpha_F(nominal=10*U.cm/U.A) = F*Data.m
+      Q.Resistivity alpha_F(nominal=5*U.cm/U.A) = F*Data.m/2
         "Base resistivity factor for dynamic fluidity";
-      Q.Resistivity alpha_R(nominal=10*U.cm/U.A) = R*Data.c_V(T, v)
+      Q.Resistivity alpha_R(nominal=5*U.cm/U.A) = R*Data.c_V(T, p)/2
         "Base resistivity factor for thermal resistivity";
 
       // Efforts and flows of the conditional connectors
@@ -4519,10 +4524,10 @@ The default global default settings will be used for the current simulation.",
         if not Data.hasThermalExpansion then
           assert(initMethPartNum <> InitMethScalar.VolumeSpecific and
             initMethPartNum <> InitMethScalar.VolumeSpecificRate or setPartNum,
-            "The material has constant specific volume,
+            "The material is isochoric,
       yet the initialization method for particle number involves specific volume.");
           assert(initMethTemp <> InitMethScalar.VolumeSpecific and initMethTemp
-             <> InitMethScalar.VolumeSpecificRate or setPartNum, "The material has constant specific volume,
+             <> InitMethScalar.VolumeSpecificRate or setPartNum, "The material is isochoric,
       yet the initialization method for temperature involves specific volume.");
         end if;
       end if;
@@ -4534,12 +4539,12 @@ The default global default settings will be used for the current simulation.",
     This may directly couple the densities within neighboring subregions.
 Consider setting the value of Xi as final (if not already) so that index reduction may be performed.");
   end if;
-  if abs(F) > Modelica.Constants.small then
+  if abs(F) < Modelica.Constants.small then
     Modelica.Utilities.Streams.print("Warning: The dynamic fluidity is zero.
     This may directly couple the velocity of this species with others within the subregion or with the same species within neighboring subregions.
 Consider setting the value of F as final (if not already) so that index reduction may be performed.");
   end if;
-  if abs(R) > Modelica.Constants.small then
+  if abs(R) < Modelica.Constants.small then
     Modelica.Utilities.Streams.print("Warning: The thermal resistivity is zero.
     This may directly couple the temperature of this species with others within the subregion or with the same species within neighboring subregions.
 Consider setting the value of R as final (if not already) so that index reduction may be performed.");
@@ -4709,22 +4714,22 @@ Choose a condition besides None.");
           Xi*(mPhidot_face_0[axis, side] - inSign(side)*p*A[axis]) =
             Lstar_trans[axis]*(J_face[axis, side] - (if inclLin[axis] then I[
             linAxes[axis]]/A[axis] else 0))*(if upstream[axis] and inclLin[axis]
-             then (exp(inSign(side)*I[linAxes[axis]]*alpha_Xi/(2*Lstar_trans[
-            axis])) + 1) else 2);
+             then exp(inSign(side)*I[linAxes[axis]]*alpha_Xi/Lstar_trans[axis])
+             + 1 else 2);
 
           // Transverse
           for orientation in Orientation loop
             F*mPhidot_face[axis, side, orientation] = Lstar_trans[axis]*(
               phi_face[axis, side, orientation] - (if inclLin[cartWrap(axis +
               orientation)] then phi[linAxes[cartWrap(axis + orientation)]]
-               else 0))*(if upstream[axis] and inclLin[axis] then (exp(inSign(
-              side)*I[linAxes[axis]]*alpha_F/(2*Lstar_trans[axis])) + 1) else 2);
+               else 0))*(if upstream[axis] and inclLin[axis] then exp(inSign(
+              side)*I[linAxes[axis]]*alpha_F/Lstar_trans[axis]) + 1 else 2);
           end for;
 
           // Thermal
           R*Qdot_face[axis, side] = Lstar_trans[axis]*(T_face[axis, side] - T)*
-            (if upstream[axis] and inclLin[axis] then (exp(inSign(side)*I[
-            linAxes[axis]]*alpha_R/(2*Lstar_trans[axis])) + 1) else 2);
+            (if upstream[axis] and inclLin[axis] then exp(inSign(side)*I[
+            linAxes[axis]]*alpha_R/Lstar_trans[axis]) + 1 else 2);
 
           // Apply BCs if the connectors are removed.
           if not [inclFaceNegX, inclFacePosX; inclFaceNegY, inclFacePosY;
@@ -4889,14 +4894,14 @@ Choose a condition besides None.");
 
     <p>Linear momentum and enthalpy are advected as material is exchanged in a chemical
     reaction.  This occurs at the velocity and massic enthalpy of the reactants (source
-    species), where the reactant/product designation depends on the current conditions.  
+    species), where the reactant/product designation depends on the current conditions.
     If species are connected through
     a <a href=\"modelica://FCSys.Subregions.Reaction\">Reaction</a> model, then the material
-    states (e.g., amounts of each material) are directly coupled to impose chemical 
+    states (e.g., amounts of each material) are directly coupled to impose chemical
     equilibrium.
-    This reduces the DAE index by one in accordance with Gibbs' phase rule 
+    This reduces the DAE index by one in accordance with Gibbs' phase rule
     [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>].
-    Resistance is not included directly in the reaction equations; 
+    Resistance is not included directly in the reaction equations;
     the reaction rate is determined solely by
     the transport equations.</p>
 
@@ -4906,7 +4911,7 @@ Choose a condition besides None.");
 
     <p>Figure 2 shows how <a href=\"modelica://FCSys.Subregions.Species\">Species</a>
     instances of the same type are connected between neighboring
-    <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> instances.  
+    <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> instances.
     Normal and transverse linear momentum and heat are transported by both advection and diffusion.
     Upstream discretization is applied if it is enabled via the <code>upstreamX</code>,
     etc. parameters.</p>
@@ -4919,7 +4924,7 @@ Choose a condition besides None.");
     within a <a href=\"modelica://FCSys.Subregions.Phases\">Phase</a> are joined by Dalton's law (see the
     <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector), as shown
     in Figure 3a.  The pressures are additive, and each species is assumed to exist at the
-    total extensive volume of the phase.  Within a <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a>, 
+    total extensive volume of the phase.  Within a <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a>,
     the <a href=\"modelica://FCSys.Subregions.Phases\">Phases</a> are combined by Amagat's law (see the
     <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector), as shown
     in Figure 3b.  The volumes are additive, and each species is assumed to exist at the
@@ -4943,13 +4948,13 @@ Choose a condition besides None.");
 
     <p> The following notes apply to the parameters:
     <ul>
-    <li>Here (and in the rest of <a href=\"modelica://FCSys\">FCSys</a>), the \"specific\" 
-    adjective means that the following extensive quantity is divided by particle number.  
+    <li>Here (and in the rest of <a href=\"modelica://FCSys\">FCSys</a>), the \"specific\"
+    adjective means that the following extensive quantity is divided by particle number.
     (\"Massic\" indicates a quantity divided by mass.)</li>
     <li>In general, if dynamic compressibility, dynamic fluidity, or thermal resistivity is zero, then
     it should be set as <code>final</code> so that index reduction may be performed.
     If two <a href=\"modelica://FCSys.Subregions.Species\">Species</a> instances
-    are connected through their <code>inert</code> connectors or faces (<code>xNegative</code>, 
+    are connected through their <code>inert</code> connectors or faces (<code>xNegative</code>,
     <code>xPositive</code>, etc.) and both have zero generalized resistivities for a
     quantity, then index reduction is necessary.</li>
     <li>Even if an initialization parameter is not selected to be used explicitly,
@@ -4984,18 +4989,18 @@ Choose a condition besides None.");
     is related to it via the material characteristics (<code>Data</code>) and the initial pressure and temperature.
     In order to apply other values for any of these initial conditions,
     it may be necessary to do so before translating the model.</li>
-    <li>A face connector may be removed by setting the corresponding <code>inclFaceNegX</code>, 
+    <li>A face connector may be removed by setting the corresponding <code>inclFaceNegX</code>,
     <code>inclFacePosX</code>, <code>inclFaceNegY</code>, etc. parameter to <code>false</code>.
     Then the boundary will be closed (zero current) and adiabatic with a no-slip condition
     (zero transverse velocity).</li>
     </p>
 
     <p>In evaluating the dynamics of a phase, it is typically assumed that all of the species
-    exist at the same velocity and temperature.  The mechanical and thermal time constants 
-    are usually much shorter than the time span of interest due to the very small coupling 
+    exist at the same velocity and temperature.  The mechanical and thermal time constants
+    are usually much shorter than the time span of interest due to the very small coupling
     resistances.  This assumption can be applied in the model by connecting the <code>common</code>
-    connectors of the species, which will 
-    
+    connectors of the species, which will
+
     It will cause index reduction during translation.</p>
 
     <p>In the variables that relate to transport,
@@ -5287,8 +5292,7 @@ Check the chemical formulas and the specific masses of the species.");
           Text(
             extent={{-100,-16},{100,-40}},
             lineColor={127,127,127},
-            textString="%n_spec")}),
-      Diagram(graphics));
+            textString="%n_spec")}));
   end Reaction;
 
   model Volume "Model to establish a fixed volume for phases"
@@ -5342,8 +5346,7 @@ Check the chemical formulas and the specific masses of the species.");
             textString="%name",
             lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
-              100,100}}), graphics),
-      Icon(graphics));
+              100,100}}), graphics));
   end Volume;
 
   package BaseClasses "Base classes (not for direct use)"
@@ -5545,7 +5548,6 @@ Check the chemical formulas and the specific masses of the species.");
               points={{40,40},{16,16}},
               color={127,127,127},
               smooth=Smooth.None)}));
-
     end PartialSubregion;
   end BaseClasses;
 

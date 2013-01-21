@@ -5,7 +5,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
   package Cells "Single-cell PEMFC models"
     extends Modelica.Icons.Package;
     extends FCSys.BaseClasses.Icons.PackageUnderConstruction;
-    package Examples "Examples and tests"
+    package Examples "Examples"
 
       model Cell "<html>Isolated <code>Cell</code> model</html>"
         extends Modelica.Icons.Example;
@@ -18,7 +18,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
             =true, Placement(transformation(extent={{-10,-10},{10,10}})));
         annotation (
           experiment(StopTime=1e-24, Tolerance=1e-06),
-          experimentSetupOutput,
           Commands(file=
                 "resources/scripts/Dymola/Assemblies.Cells.Examples.Cell.mos"),
 
@@ -76,13 +75,10 @@ package Assemblies "Combinations of regions (e.g., cells)"
             smooth=Smooth.None));
         annotation (
           experiment(StopTime=100, Tolerance=1e-06),
-          experimentSetupOutput,
           Commands(file=
                 "resources/scripts/Dymola/Assemblies.Cells.Examples.CellProfile.mos"),
 
-          experiment(StopTime=600, Tolerance=1e-08),
-          experimentSetupOutput,
-          Icon(graphics));
+          experiment(StopTime=600, Tolerance=1e-08));
       end CellProfile;
 
       model Polarization "Run a cell polarization"
@@ -127,7 +123,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
             smooth=Smooth.None));
         annotation (
           experiment(StopTime=600, Tolerance=1e-08),
-          experimentSetupOutput,
           Commands(file=
                 "resources/scripts/Dymola/Assemblies.Examples.CellPolarizationstoich.mos"),
 
@@ -186,7 +181,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
             points={{-10,50},{-60,50},{-60,4},{-40,4}},
             color={0,0,255},
             smooth=Smooth.None));
-        annotation (experiment(StopTime=1000), experimentSetupOutput);
+        annotation (experiment(StopTime=1000));
       end CellModelica;
     end Examples;
 
@@ -448,7 +443,6 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                   color={127,127,127},
                   visible=inclX,
                   thickness=0.5)}),
-        experimentSetupOutput,
         experiment(StopTime=120, Tolerance=1e-06));
     end Cell;
 
@@ -741,8 +735,7 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                   points={{-66,0},{-100,0}},
                   color={127,127,127},
                   visible=inclX,
-                  thickness=0.5)}),
-        experimentSetupOutput);
+                  thickness=0.5)}));
     end IntegratedCell;
 
     model CellSSIC

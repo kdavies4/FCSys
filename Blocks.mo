@@ -20,7 +20,7 @@ package Blocks "Imperative models (e.g., controllers and observers)"
       <td valign=\"top\">Modelica Assoc., \"<a href=\"http://www.modelica.org/documents/ModelicaTutorial14.pdf\">Modelica - A Unified Object-Oriented Language for Physical Systems Modeling: Tutorial</a>,\" ver. 1.4, Dec. 15, 2000.</td>
     </tr>
   */
-  package Examples "Examples and tests"
+  package Examples "Examples"
     extends Modelica.Icons.ExamplesPackage;
     model MagneticBall "Example from [Carnegie Mellon, 2009]"
       import MPC = FCSys.Blocks.Discrete.Controllers;
@@ -107,7 +107,6 @@ package Blocks "Imperative models (e.g., controllers and observers)"
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
         experiment(StopTime=2),
-        experimentSetupOutput,
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                 100,100}})));
     end MagneticBall;
@@ -1305,8 +1304,7 @@ package Blocks "Imperative models (e.g., controllers and observers)"
 
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
-        experiment(StopTime=50),
-        experimentSetupOutput);
+        experiment(StopTime=50));
     end RossiterExample2MPC;
 
     model RossiterExample2MPCNoRej "Example2_mimo.m in Rossiter (2003)"
@@ -1387,8 +1385,7 @@ package Blocks "Imperative models (e.g., controllers and observers)"
 
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
-        experiment(StopTime=139),
-        experimentSetupOutput);
+        experiment(StopTime=139));
     end RossiterExample2MPCNoRej;
 
     model PendulumMPC
@@ -1479,8 +1476,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
           annotation (Placement(transformation(extent={{-10,10},{10,30}})));
         FCSys.Blocks.Continuous.Sources.RandomNormal randomNormal(T_end=10)
           annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
-        annotation (
-          Documentation(info="<html><p>You can use the script below to analyze the results of this test in MATLAB:
+        annotation (Documentation(info="<html><p>You can use the script below to analyze the results of this test in MATLAB:
   <table border=\"0\" bgcolor=\"lightgray\"><tr><td><code>%% Read results
 <br>d = dymload('RandomTest.mat');
 <br>x_u = dymget(d,'randomUniform.y[1]');
@@ -1519,12 +1515,10 @@ ALT=\"model Examples.Elementary.Pendulum\">
 <br>display([' x_max = ',num2str(max(x_n))])
 <br>display([' mu = ',num2str(mean(x_n))])
 <br>display([' sigma = ',num2str(std(x_n))])</td></tr></code></table></html>"),
-
-          experiment(
+            experiment(
             StopTime=10,
             NumberOfIntervals=5000,
-            Algorithm="Dassl"),
-          experimentSetupOutput);
+            Algorithm="Dassl"));
 
       end RandomTest;
 
@@ -2123,8 +2117,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
                       lineColor={0,0,0},
                       fillColor={255,255,255},
                       fillPattern=FillPattern.Solid,
-                      lineThickness=0.5)}),
-          experimentSetupOutput);
+                      lineThickness=0.5)}));
       end Pendulum;
 
       model PendulumDummy
@@ -2674,8 +2667,7 @@ This is discussed in the description of package
           annotation (Placement(transformation(extent={{-10,10},{10,30}})));
         Discrete.Sources.RandomNormal randomNormal(n_s=50000)
           annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
-        annotation (
-          Documentation(info="<html><p>You can use the script below to analyze the results of this test in MATLAB:
+        annotation (Documentation(info="<html><p>You can use the script below to analyze the results of this test in MATLAB:
   <table border=\"0\" bgcolor=\"lightgray\"><tr><td><code>%% Read results
 <br>d = dymload('RandomTest.mat');
 <br>x_u = dymget(d,'randomUniform.y[1]');
@@ -2714,12 +2706,10 @@ This is discussed in the description of package
 <br>display([' x_max = ',num2str(max(x_n))])
 <br>display([' mu = ',num2str(mean(x_n))])
 <br>display([' sigma = ',num2str(std(x_n))])</td></tr></code></table></html>"),
-
-          experiment(
+            experiment(
             StopTime=100,
             NumberOfIntervals=50000,
-            Algorithm="Dassl"),
-          experimentSetupOutput);
+            Algorithm="Dassl"));
 
       end RandomTest;
 
@@ -2742,11 +2732,9 @@ This is discussed in the description of package
                 19.5,1.27676e-15},{19.5,6.10623e-16},{1,6.10623e-16}},
             color={0,0,127},
             smooth=Smooth.None));
-        annotation (
-          Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                  {100,100}}), graphics),
-          experiment(Algorithm="Dassl"),
-          experimentSetupOutput);
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
+                  {-100,-100},{100,100}}), graphics), experiment(Algorithm=
+                "Dassl"));
       end Sampler;
     end Examples;
     extends Modelica.Icons.Package;
@@ -2775,7 +2763,6 @@ This is discussed in the description of package
                   "<html><p>This should give a solution of <code>qPSolver.y = {0.6667, 1.3333}</code>.</p></html>",
 
               experiment,
-              experimentSetupOutput,
               Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                       -100},{100,100}}), graphics)));
 
@@ -2849,7 +2836,6 @@ This is discussed in the description of package
             Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics),
             experiment(StopTime=2),
-            experimentSetupOutput,
             Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics));
         end QPSolverFerreauExample;
@@ -3418,7 +3404,6 @@ This is discussed in the description of package
               Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                       -100},{100,100}}), graphics),
               experiment(StopTime=2),
-              experimentSetupOutput,
               Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                       {100,100}}), graphics={Text(
                             extent={{-100,40},{100,-40}},
@@ -4174,8 +4159,7 @@ results in the following equations:
         when sampleTrigger then
           y[:] = table[mod(integer(time/samplePeriod), n_s) + 1, :];
         end when;
-        annotation (
-          Documentation(info="<html><p>The values of the sequence are uniformly distributed over the range <code>[x_min, x_max)</code>. The random numbers are (re)generated at the start of every simulation.</p>
+        annotation (Documentation(info="<html><p>The values of the sequence are uniformly distributed over the range <code>[x_min, x_max)</code>. The random numbers are (re)generated at the start of every simulation.</p>
   <p>Be sure to set <code>n_s</code> to be greater than or equal to the number of sample periods during the simulation.  Otherwise, the sequence will be periodic over the simulation (i.e., it will repeat).</p>
   <p>The model generates uniform random numbers using <code>internal_twister_uniform()</code>.  This function uses the Mersenne twister pseudorandom number generator and its implementation is specific to Dymola (i.e., not general to Modelica).</p></html>",
               revisions="<html>
@@ -4183,8 +4167,7 @@ results in the following equations:
 <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/12/15:<br/>Original version; extended from Modelica.Blocks.Sources.CombiTimeTable</li>
 <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2010/1/6:<br/>Copied and modified portions of code from Modelica.Blocks.Sources.CombiTimeTable</li>
 </ul></p>
-</html>"),
-          Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
+</html>"),Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                   100,100}}), graphics={Polygon(
                       points={{-80,98},{-88,76},{-72,76},{-80,98}},
                       lineColor={192,192,192},
@@ -4249,8 +4232,7 @@ results in the following equations:
                 lineColor={0,0,127}),Ellipse(extent={{-4,86},{4,78}}, lineColor
                 ={0,0,127}),Ellipse(extent={{16,76},{24,68}}, lineColor={0,0,
                 127}),Ellipse(extent={{36,78},{44,70}}, lineColor={0,0,127}),
-                Ellipse(extent={{56,44},{64,36}}, lineColor={0,0,127})}),
-          Diagram(graphics));
+                Ellipse(extent={{56,44},{64,36}}, lineColor={0,0,127})}));
       end RandomUniform;
     end Sources;
 
@@ -5194,15 +5176,12 @@ This is discussed in the description of package
       FCSys.Connectors.RealInput u "Connector for Real input signal"
         annotation (Placement(transformation(extent={{-110,-10},{-90,10}},
               rotation=0), iconTransformation(extent={{-120,-10},{-100,10}})));
-      annotation (Documentation(
-          info="<html>
+      annotation (Documentation(info="<html>
 <p>
 Block has one continuous Real input and one continuous Real output signal.
 </p>
-</html>",
-          Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                  {100,100}}), graphics),
-          Icon(graphics)));
+</html>", Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
+                  {100,100}}), graphics)));
     end SI;
 
     partial block MI "Multiple Input block"
@@ -5210,17 +5189,14 @@ Block has one continuous Real input and one continuous Real output signal.
       FCSys.Connectors.RealInput u[n_in] "Connector of Real input signals"
         annotation (Placement(transformation(extent={{-110,-10},{-90,10}},
               rotation=0), iconTransformation(extent={{-120,-10},{-100,10}})));
-      annotation (Documentation(
-          info="<html>
+      annotation (Documentation(info="<html>
 <p>
 Block has a continuous Real input and a continuous Real output signal vector.
 The signal sizes of the input and output vector may be different.
 </p>
 </html>
-",
-          Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                  {100,100}}), graphics),
-          Icon(graphics)));
+", Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
+                  100}}), graphics)));
     end MI;
 
     partial block SO "Single Output block"
@@ -5243,15 +5219,12 @@ Block has one continuous Real output signal.
       FCSys.Connectors.RealOutput y[n_out] "Connector of Real output signals"
         annotation (Placement(transformation(extent={{90,-10},{110,10}},
               rotation=0), iconTransformation(extent={{100,-10},{120,10}})));
-      annotation (Documentation(
-          info="<html>
+      annotation (Documentation(info="<html>
 <p>
 Block has one continuous Real output signal vector.
 </p>
-</html>",
-          Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                  {100,100}}), graphics),
-          Icon(graphics)));
+</html>", Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
+                  {100,100}}), graphics)));
     end MO;
 
     function randu "Return a vector of uniform random numbers"
