@@ -2205,7 +2205,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       extends BaseClasses.NullPhase;
 
       // Conditionally include species.
-      parameter Boolean Error "<html>Carbon plus (C<sup>+</sup>)</html>"
+      parameter Boolean 'inclC+'=false "<html>Carbon plus (C<sup>+</sup>)</html>"
         annotation (
         Evaluate=true,
         HideResult=true,
@@ -2218,18 +2218,21 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
-        redeclare FCSys.Characteristics.'C+'.Graphite Data) if '' + ERROR
+        redeclare FCSys.Characteristics.'C+'.Graphite Data) if 'inclC+' "Model"
         annotation (Dialog(
           group="Species",
           __Dymola_descriptionLabel=true,
-          enable='' + ERROR annotation (
+          enable='inclC+'), Placement(transformation(extent={{-10,-10},{10,10}})));
+
+      parameter Boolean 'incle-'=false "<html>Electrons (e<sup>-</sup>)</html>"
+        annotation (
             Evaluate=true,
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(
               group="Species",
               __Dymola_descriptionLabel=true,
-              __Dymola_joinNext=true))));
+          __Dymola_joinNext=true));
       Chemical.Species 'e-'(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
@@ -3785,10 +3788,27 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             redeclare replaceable Face.Mechanical.Force transverseZ,
             redeclare replaceable Face.Thermal.HeatFlowRate thermal(spec(k=0)))),
 
-        ionomer);
+        ionomer(
+          'C19HF37O5S-'(
+            redeclare replaceable Face.Material.Current normal(spec(k=0)),
+            redeclare replaceable Face.Mechanical.Force transverseX,
+            redeclare replaceable Face.Mechanical.Force transverseY,
+            redeclare replaceable Face.Mechanical.Force transverseZ,
+            redeclare replaceable Face.Thermal.HeatFlowRate thermal(spec(k=0))),
 
-      redeclare replaceable Face.Mechanical.Force transverseX;
-      redeclare replaceable Face.Mechanical.Force Error;
+          H2O(
+            redeclare replaceable Face.Material.Current normal(spec(k=0)),
+            redeclare replaceable Face.Mechanical.Force transverseX,
+            redeclare replaceable Face.Mechanical.Force transverseY,
+            redeclare replaceable Face.Mechanical.Force transverseZ,
+            redeclare replaceable Face.Thermal.HeatFlowRate thermal(spec(k=0))),
+
+          'H+'(
+            redeclare replaceable Face.Material.Current normal(spec(k=0)),
+            redeclare replaceable Face.Mechanical.Force transverseX,
+            redeclare replaceable Face.Mechanical.Force transverseY,
+            redeclare replaceable Face.Mechanical.Force transverseZ,
+            redeclare replaceable Face.Thermal.HeatFlowRate thermal(spec(k=0)))));
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
@@ -3803,10 +3823,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           N2(isobaric=true),
           O2(isobaric=true)),
         graphite('C+'(isobaric=true), 'e-'(thermoOpt=ThermoOpt.ClosedDiabatic)),
-
-        ionomer(Error),
+        ionomer(
+          'C19HF37O5S-'(isobaric=true),
         H2O(isobaric=true),
-        'H+'(isobaric=true));
+        'H+'(isobaric=true)));
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
@@ -3821,10 +3841,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           N2(isobaric=true),
           O2(isobaric=true)),
         graphite('C+'(isobaric=true), 'e-'(thermoOpt=ThermoOpt.ClosedAdiabatic)),
-
-        ionomer(Error),
+        ionomer(
+          'C19HF37O5S-'(isobaric=true),
         H2O(isobaric=true),
-        'H+'(isobaric=true));
+        'H+'(isobaric=true)));
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
@@ -4036,24 +4056,29 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends BaseClasses.NullPhase;
 
         // Conditionally include species.
-        parameter Boolean HideResult=true;
-        parameter Boolean choices(__Dymola_checkBox=true);
-        parameter Boolean Dialog(
+        parameter Boolean 'inclC+'=false "<html>Carbon plus (C<sup>+</sup>)</html>" annotation (
+          Evaluate=true,
+          HideResult=true,
+          choices(__Dymola_checkBox=true),
+          Dialog(
           group="Species",
           __Dymola_descriptionLabel=true,
-          __Dymola_joinNext=true);
-        Face.Species 'C+'(final axis=axis, isobaric=true) if '' + ERROR
+          __Dymola_joinNext=true));
+        Face.Species 'C+'(final axis=axis, isobaric=true) if 'inclC+' "Model"
           annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
-            enable='' + ERROR annotation (
+            enable='inclC+'), Placement(transformation(extent={{-10,-10},{10,10}})));
+
+        parameter Boolean 'incle-'=false
+          "<html>Electrons (e<sup>-</sup>)</html>" annotation (
               Evaluate=true,
               HideResult=true,
               choices(__Dymola_checkBox=true),
               Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
-                __Dymola_joinNext=true))));
+            __Dymola_joinNext=true));
         Face.Species 'e-'(final axis=axis) if 'incle-' "Model" annotation (
             Dialog(
             group="Species",
@@ -4902,6 +4927,8 @@ boundary condition</a> model.
             redeclare replaceable FaceDifferential.Thermal.HeatFlowRate thermal)),
 
         ionomer(
+          'C19HF37O5S-'(
+            redeclare replaceable FaceDifferential.Material.Current material,
           redeclare replaceable FaceDifferential.Mechanical.Force transverseX,
           redeclare replaceable FaceDifferential.Mechanical.Force transverseY,
           redeclare replaceable FaceDifferential.Mechanical.Force transverseZ,
@@ -4919,7 +4946,7 @@ boundary condition</a> model.
           redeclare replaceable FaceDifferential.Mechanical.Force transverseX,
           redeclare replaceable FaceDifferential.Mechanical.Force transverseY,
           redeclare replaceable FaceDifferential.Mechanical.Force transverseZ,
-          redeclare replaceable FaceDifferential.Thermal.HeatFlowRate thermal));
+            redeclare replaceable FaceDifferential.Thermal.HeatFlowRate thermal)));
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
@@ -4934,10 +4961,10 @@ boundary condition</a> model.
           N2(isobaric=true),
           O2(isobaric=true)),
         graphite('C+'(isobaric=true), 'e-'(thermoOpt=ThermoOpt.ClosedDiabatic)),
-
-        ionomer(Error),
+        ionomer(
+          'C19HF37O5S-'(isobaric=true),
         H2O(isobaric=true),
-        'H+'(isobaric=true));
+          'H+'(isobaric=true)));
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
@@ -4952,10 +4979,10 @@ boundary condition</a> model.
           N2(isobaric=true),
           O2(isobaric=true)),
         graphite('C+'(isobaric=true), 'e-'(thermoOpt=ThermoOpt.ClosedAdiabatic)),
-
-        ionomer(Error),
+        ionomer(
+          'C19HF37O5S-'(isobaric=true),
         H2O(isobaric=true),
-        'H+'(isobaric=true));
+          'H+'(isobaric=true)));
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
@@ -5115,18 +5142,21 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FaceDifferential.Species 'C+'(isobaric=true) if '' + ERROR annotation (
+        FaceDifferential.Species 'C+'(isobaric=true) if 'inclC+' "Model" annotation (
             Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
-            enable='' + ERROR annotation (
+            enable='inclC+'), Placement(transformation(extent={{-10,-10},{10,10}})));
+
+        parameter Boolean 'incle-'=false
+          "<html>Electrons (e<sup>-</sup>)</html>" annotation (
               Evaluate=true,
               HideResult=true,
               choices(__Dymola_checkBox=true),
               Dialog(
                 group="Species",
                 __Dymola_descriptionLabel=true,
-                __Dymola_joinNext=true))));
+            __Dymola_joinNext=true));
         FaceDifferential.Species 'e-' if 'incle-' "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,

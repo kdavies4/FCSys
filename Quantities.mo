@@ -20,13 +20,11 @@ package Quantities "Quantities to represent physical properties"
     model ExampleModel "Model that uses all of the quantities"
       extends FCSys.BaseClasses.Icons.Blocks.Continuous;
 
-      // Generated from FCSys/resources/quantities.xls, 2013-1-15
+      // Generated from FCSys/resources/quantities.xls, 2013-1-20
       parameter Q.Acceleration Acceleration=1*U.m/U.s^2 "Acceleration";
       parameter Q.Amount Amount=1*U.C "Amount";
       parameter Q.AmountReciprocal AmountReciprocal=1/U.C "Reciprocal amount";
       parameter Q.AmountVolumic AmountVolumic=1*U.C/U.m^3 "Volumic amount";
-      parameter Q.AmountVolumicRate AmountVolumicRate=1*U.C/(U.m^3*U.s)
-        "Rate of volumic amount";
       parameter Q.Angle Angle=1*U.rad "Angle";
       parameter Q.Angle2 Angle2=1*U.sr "Solid angle";
       parameter Q.Area Area=1*U.m^2 "Area";
@@ -77,6 +75,8 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.Pressure Pressure=1*U.Pa "Pressure";
       parameter Q.PressureAbsolute PressureAbsolute=1*U.Pa "Absolute pressure";
       parameter Q.PressureRate PressureRate=1*U.Pa/U.s "Rate of pressure";
+      parameter Q.PressureReciprocal PressureReciprocal=1/U.Pa
+        "Reciprocal of pressure";
       parameter Q.ResistanceElectrical ResistanceElectrical=1*U.ohm
         "Electrical resistance";
       parameter Q.Resistivity Resistivity=1*U.m/U.A "Resistivity";
@@ -88,7 +88,10 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.VolumeSpecific VolumeSpecific=1*U.m^3/U.C "Specific volume";
       parameter Q.VolumeSpecificAbsolute VolumeSpecificAbsolute=1*U.m^3/U.C
         "Absolute specific volume";
+      parameter Q.VolumeSpecificRate VolumeSpecificRate=1*U.m^3/(U.C*U.s)
+        "Rate of specific volume";
       parameter Q.Wavenumber Wavenumber=1*U.rad/U.m "Wavenumber";
+
     end ExampleModel;
   end Examples;
 
@@ -99,8 +102,6 @@ package Quantities "Quantities to represent physical properties"
     "Reciprocal amount";
   type AmountVolumic = Modelica.Icons.TypeReal (final unit="N/l3", min=0)
     "Volumic amount";
-  type AmountVolumicRate = Modelica.Icons.TypeReal (final unit="N/(l3.T)")
-    "Rate of volumic amount";
   type Angle = Modelica.Icons.TypeReal (final unit="A");
   type Angle2 = Modelica.Icons.TypeReal (final unit="A2") "Solid angle";
   type Area = Modelica.Icons.TypeReal (final unit="l2", min=0);
@@ -177,6 +178,8 @@ package Quantities "Quantities to represent physical properties"
     "Specific volume";
   type VolumeSpecificAbsolute = Modelica.Icons.TypeReal (final unit="l3/N", min
         =0) "Absolute specific volume";
+  type VolumeSpecificRate = Modelica.Icons.TypeReal (final unit="l3/(N.T)")
+    "Rate of specific volume";
   type Wavenumber = Modelica.Icons.TypeReal (final unit="A/l");
   // -------- end from FCSys/resources/quantities.xls
 

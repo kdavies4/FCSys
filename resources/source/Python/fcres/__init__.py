@@ -42,6 +42,7 @@ from modelicares.helpers import (flatten, figure_w_label, setup_subplots,
 Conditions = namedtuple('Conditions',
     ['cell_temp', 'composition', 'pressure', 'humidity', 'inlet_temp', 'flow'])
 
+# **Update this from quantities.xls:
 # Default units
 # These units are used to display a variable's quantity if its displayUnit
 # attribute is empty ('').  Each key is a dimension string and each entry is a

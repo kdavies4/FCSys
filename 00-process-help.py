@@ -132,6 +132,7 @@ rpls = [
     (r'\\?"modelica://([^"\\]+)\.([^"\\]+)\.([^"\\]+)\\?"', r'"\1_\2.html#\1.\2.\3"'),
     (r'\\?"modelica://([^"\\]+)\.([^"\\]+)\\?"', r'"\1.html#\1.\2"'),
     (r'\\?"modelica://([^"\\]+)\\?"', r'"\1.html#\1"'),
+    ('href="Modelica', 'href="http://build.openmodelica.org/Documentation/Modelica'),
     ]
 
 # Directory specification
