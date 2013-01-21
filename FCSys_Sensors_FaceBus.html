@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Sensors.FaceBus</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="&lt;html&gt;Sensors for a single &lt;a href=\&quot;modelica://FCSys.Connectors.FaceBus\&quot;&gt;FaceBus&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -52,9 +52,9 @@
 (see the <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package),
 the models for the sensors must be as well.  A
 <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a>,
-<a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FaceX</a>,
-<a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FaceY</a>, or
-<a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FaceZ</a> connector
+<a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a>,
+<a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a>, or
+<a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> connector
 is used in <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species">Species</a> models,
 and there is a corresponding <a href="FCSys_Sensors_Face.html#FCSys.Sensors.Face.Species">Species
 sensor</a> model. The
@@ -97,7 +97,7 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Senso
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>face</td><td>Connector for material, linear momentum, and heat of multiple species</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>face</td><td>Connector for linear momentum and heat of multiple species</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Bus of measurements</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
@@ -109,16 +109,16 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Senso
 
   <font color="blue">parameter </font><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis</a> axis=Axis.x <font color="darkgreen">&quot;Axis normal to the face&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Sensors_FaceBus_Phases.html#FCSys.Sensors.FaceBus.Phases.Gas">FCSys.Sensors.FaceBus.Phases.Gas</a> gas(<font color="blue">final </font>axis=axis) <font color="darkgreen">&quot;Gas&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Sensors_FaceBus_Phases.html#FCSys.Sensors.FaceBus.Phases.Gas">Phases.Gas</a> gas(<font color="blue">final </font>axis=axis) <font color="darkgreen">&quot;Gas&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Sensors_FaceBus_Phases.html#FCSys.Sensors.FaceBus.Phases.Graphite">FCSys.Sensors.FaceBus.Phases.Graphite</a> graphite(<font color="blue">final </font>axis=axis) <font color="darkgreen">&quot;Graphite&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Sensors_FaceBus_Phases.html#FCSys.Sensors.FaceBus.Phases.Graphite">Phases.Graphite</a> graphite(<font color="blue">final </font>axis=axis) <font color="darkgreen">&quot;Graphite&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Sensors_FaceBus_Phases.html#FCSys.Sensors.FaceBus.Phases.Ionomer">FCSys.Sensors.FaceBus.Phases.Ionomer</a> ionomer(<font color="blue">final </font>axis=axis) <font color="darkgreen">&quot;Ionomer&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Sensors_FaceBus_Phases.html#FCSys.Sensors.FaceBus.Phases.Ionomer">Phases.Ionomer</a> ionomer(<font color="blue">final </font>axis=axis) <font color="darkgreen">&quot;Ionomer&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Sensors_FaceBus_Phases.html#FCSys.Sensors.FaceBus.Phases.Liquid">FCSys.Sensors.FaceBus.Phases.Liquid</a> liquid(<font color="blue">final </font>axis=axis) <font color="darkgreen">&quot;Liquid&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Sensors_FaceBus_Phases.html#FCSys.Sensors.FaceBus.Phases.Liquid">Phases.Liquid</a> liquid(<font color="blue">final </font>axis=axis) <font color="darkgreen">&quot;Liquid&quot;</font>;</textblock>
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> face <font color="darkgreen">
-    &quot;Connector for material, linear momentum, and heat of multiple species&quot;</font>;
+    &quot;Connector for linear momentum and heat of multiple species&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">FCSys.Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Bus of measurements&quot;</font>;</textblock>
 <font color="blue">equation </font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(gas.face, face.gas);</textblock>
@@ -140,7 +140,7 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Senso
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:26:01 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:27:32 2013.
 </div>
 </body>
 </html>

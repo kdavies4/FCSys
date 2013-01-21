@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.BCs.Chemical</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="&lt;html&gt;BCs for the &lt;a href=\&quot;modelica://FCSys.Connectors.ChemicalOutput\&quot;&gt;ChemicalOutput&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -161,7 +161,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_BCs.html#FCSys.BaseClasses.Icons.B
   <font color="blue">final </font><font color="blue">parameter </font>Integer n_lin=<font color="red">countTrue</font>({inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">
     &quot;Number of components of linear momentum&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputInternal">FCSys.Connectors.RealInputInternal</a> u_material(<font color="blue">final </font>unit=<font color="blue">if </font>material ==
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputInternal">FCSys.Connectors.RealInputInternal</a> u_normal(<font color="blue">final </font>unit=<font color="blue">if </font>material ==
         BCTypeMaterial.PotentialPerTemperature<font color="blue"> then </font>&quot;1&quot;<font color="blue"> else </font>&quot;N/T&quot;) <font color="blue">if </font><font color="blue">not </font>
     internalMaterial <font color="darkgreen">&quot;Material signal&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputInternal">FCSys.Connectors.RealInputInternal</a> u_lin_x(<font color="blue">final </font>unit=&quot;l/T&quot;) <font color="blue">if </font><font color="blue">not </font>
@@ -211,7 +211,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_BCs.html#FCSys.BaseClasses.Icons.B
   chemical.hbar = u_fluid_int;
   <font color="darkgreen">//  end if;</font>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u.material, u_material);
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u.normal, u_material);
   <font color="red">connect</font>(u.linX, u_lin_x);
   <font color="red">connect</font>(u.linY, u_lin_y);
   <font color="red">connect</font>(u.linZ, u_lin_z);
@@ -233,7 +233,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_BCs.html#FCSys.BaseClasses.Icons.B
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:24:32 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:26:10 2013.
 </div>
 </body>
 </html>

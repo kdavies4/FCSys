@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Sensors.Face.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="Base classes (not for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -65,7 +65,7 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Senso
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a></td><td>thermoOpt</td><td>ThermoOpt.ClosedAdiabatic</td><td>Options for material and thermal subconnectors</td></tr>
+<tr><td>Boolean</td><td>isobaric</td><td>false</td><td>Isobaric condition</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -79,15 +79,12 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Senso
 
   <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Sensor">FCSys.BaseClasses.Icons.Sensor</a>;
 
-  <font color="blue">parameter </font><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a> thermoOpt=ThermoOpt.ClosedAdiabatic <font color="darkgreen">
-    &quot;Options for material and thermal subconnectors&quot;</font>;
-
   <font color="darkgreen">// Material</font>
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Sensors_Face.html#FCSys.Sensors.Face.Density">Density</a> density <font color="blue">if </font>thermoOpt == ThermoOpt.OpenDiabatic <font color="darkgreen">&quot;Type of sensor&quot;</font>;</textblock>
+  <font color="blue">parameter </font>Boolean isobaric=false <font color="darkgreen">&quot;Isobaric condition&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Sensors_Face.html#FCSys.Sensors.Face.Density">Density</a> density <font color="blue">if </font><font color="blue">not </font>isobaric <font color="darkgreen">&quot;Type of sensor&quot;</font>;</textblock>
 
   <font color="darkgreen">// Heat</font>
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Sensors_Face.html#FCSys.Sensors.Face.Temperature">Temperature</a> temperature <font color="blue">if </font>thermoOpt &lt;&gt; ThermoOpt.ClosedAdiabatic <font color="darkgreen">
-    &quot;Type of sensor&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Sensors_Face.html#FCSys.Sensors.Face.Temperature">Temperature</a> temperature <font color="darkgreen">&quot;Type of sensor&quot;</font>;</textblock>
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">FCSys.Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Output bus for measurements&quot;</font>;</textblock>
 
@@ -105,7 +102,7 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Senso
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:26:20 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:27:49 2013.
 </div>
 </body>
 </html>

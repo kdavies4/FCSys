@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Assemblies.Cells.Examples</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="Examples and tests">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -60,7 +60,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Assemblies.Cells.Examples.CellProfileIOS.png" alt="FCSys.Assemblies.Cells.Examples.CellProfileIO" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfileIO">CellProfileIO</a>
 </td><td>Apply BCs to a cell according to a test profile, with inputs and outputs</td></tr>
 <tr><td><img src="images/FCSys.Assemblies.Cells.Examples.CellModelicaS.png" alt="FCSys.Assemblies.Cells.Examples.CellModelica" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellModelica">CellModelica</a>
-</td><td>Cell interfaced to components from the <a href="Modelica.html#Modelica">Modelica</a> package</td></tr>
+</td><td>Cell interfaced to components from the <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a> package</td></tr>
 </table>
 <hr>
 
@@ -73,7 +73,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.CellSSIC">CellSSIC</a></td><td>cell</td><td>redeclare FCSys.Assemblies.C...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.CellSSIC">CellSSIC</a></td><td>cell</td><td>redeclare Cells.CellSSIC cell</td><td>&nbsp;</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -83,7 +83,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     analysis=false,
     p=149.6*U.kPa,
     T=333.15*U.K);
-  <font color="blue">replaceable </font><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.CellSSIC">FCSys.Assemblies.Cells.CellSSIC</a> cell;
+  <font color="blue">replaceable </font><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.CellSSIC">Cells.CellSSIC</a> cell;
 
 <font color="blue">end </font>Cell;
 </pre>
@@ -98,7 +98,7 @@ Extends from <a href="FCSys_BCs_TestStands.html#FCSys.BCs.TestStands.TestProfile
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a></td><td>cell</td><td>redeclare FCSys.Assemblies.C...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.Cell">Cell</a></td><td>cell</td><td>redeclare Cell cell</td><td>&nbsp;</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -110,7 +110,7 @@ Extends from <a href="FCSys_BCs_TestStands.html#FCSys.BCs.TestStands.TestProfile
                 U.A, duration=500)))), caEnd(<font color="blue">each </font>graphite(&#39;incle-&#39;=true, &#39;e-&#39;(<font color="blue">
             redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a> materialSpec(height=-10000*U.A,
               duration=500)))));
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">FCSys.Assemblies.Cells.Cell</a> cell;</textblock>
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.Cell">Cell</a> cell;</textblock>
 
 <font color="blue">equation </font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(cell.anFPX, anEnd.face);</textblock>
@@ -135,7 +135,7 @@ Extends from <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cell
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a></td><td>cell</td><td>redeclare FCSys.Assemblies.C...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.Cell">Cell</a></td><td>cell</td><td>redeclare Cell cell</td><td>&nbsp;</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -150,11 +150,11 @@ Extends from <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cell
 <b>Apply BCs to a cell according to a test profile, with inputs and outputs</b><p>
 <img src="images/FCSys.Assemblies.Cells.Examples.CellProfileIOD.png" alt="FCSys.Assemblies.Cells.Examples.CellProfileIO">
 <p><h3>Information</h3></p>
-Extends from <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile">FCSys.Assemblies.Cells.Examples.CellProfile</a> (Apply boundary conditions to a cell according to a test profile), <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous">FCSys.BaseClasses.Icons.Blocks.Continuous</a> (Icon for a continuous-time block).
+Extends from <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile">CellProfile</a> (Apply boundary conditions to a cell according to a test profile), <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous">FCSys.BaseClasses.Icons.Blocks.Continuous</a> (Icon for a continuous-time block).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a></td><td>cell</td><td>redeclare FCSys.Assemblies.C...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.Cell">Cell</a></td><td>cell</td><td>redeclare Cell cell</td><td>&nbsp;</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -166,7 +166,7 @@ Extends from <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cell
 <pre>
 <font color="blue">model</font> CellProfileIO <font color="darkgreen">
   &quot;Apply BCs to a cell according to a test profile, with inputs and outputs&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile">FCSys.Assemblies.Cells.Examples.CellProfile</a>(testStand(<font color="blue">final </font>inclIO=true));
+  <font color="blue">extends </font><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile">CellProfile</a>(testStand(<font color="blue">final </font>inclIO=true));
   <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous">FCSys.BaseClasses.Icons.Blocks.Continuous</a>;
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">FCSys.Connectors.RealInputBus</a> u <font color="darkgreen">&quot;Input bus&quot;</font>;
@@ -182,18 +182,17 @@ Extends from <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cell
 
 <h2><img src="images/FCSys.Assemblies.Cells.Examples.CellModelicaI.png" alt="FCSys.Assemblies.Cells.Examples.CellModelica" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Assemblies.Cells.Examples.CellModelica"></a><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples">FCSys.Assemblies.Cells.Examples</a>.CellModelica</h2>
-<b>Cell interfaced to components from the <a href="Modelica.html#Modelica">Modelica</a> package</b><p>
+<b>Cell interfaced to components from the <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a> package</b><p>
 <img src="images/FCSys.Assemblies.Cells.Examples.CellModelicaD.png" alt="FCSys.Assemblies.Cells.Examples.CellModelica">
 <p><h3>Information</h3></p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>.
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">model</font> CellModelica <font color="darkgreen">
-  &quot;Cell interfaced to components from the <a href="Modelica.html#Modelica">Modelica</a> package&quot;</font>
+  &quot;Cell interfaced to components from the <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a> package&quot;</font>
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>;
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">FCSys.Assemblies.Cells.Cell</a> cell(anFP(<font color="blue">redeclare </font><a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">FCSys.Subregions.Subregion</a>
-        subregions(
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.Cell">Cell</a> cell(anFP(<font color="blue">redeclare </font><a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">FCSys.Subregions.Subregion</a> subregions(
         <font color="blue">each </font><font color="blue">final </font>inclX=true,
         <font color="blue">each </font>inclY=true,
         <font color="blue">each </font>graphite(&#39;incle-&#39;=true, &#39;e-&#39;(perfectMaterialDiff={{{{true,false}}}})),
@@ -207,9 +206,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a> loadSweep(duration=1000) <font color="darkgreen">
     &quot;This is the arctangent of conductance.&quot;</font>;</textblock>
 <font color="blue">equation </font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(anModelicaAdapt.material, cell.anFPX[1, 1]);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(anModelicaAdapt.normal, cell.anFPX[1, 1]);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(caModelicaAdapt.material, cell.caFPX[1, 1]);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(caModelicaAdapt.normal, cell.caFPX[1, 1]);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(loadSweep.y, tanConduct.atanGstar);
   <font color="red">connect</font>(tanConduct.p, caModelicaAdapt.pin);
@@ -221,7 +220,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:27:53 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:28:59 2013.
 </div>
 </body>
 </html>

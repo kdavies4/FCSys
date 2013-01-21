@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.BCs.FaceBusDifferential.Phases</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="&lt;html&gt;BCs for the &lt;a href=\&quot;modelica://FCSys.Connectors.FaceBus\&quot;&gt;FaceBus&lt;/a&gt; connector, e.g., of a &lt;a href=\&quot;modelica://FCSys.Subregions.Phase\&quot;&gt;Phase&lt;/a&gt; model (multi-species)&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -69,7 +69,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <b>BC for gas</b><p>
 <img src="images/FCSys.BCs.FaceBusDifferential.Phases.GasD.png" alt="FCSys.BCs.FaceBusDifferential.Phases.Gas">
 <p><h3>Information</h3></p>
-Extends from <a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase">FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase</a> (Empty BC for a phase (no species)).
+Extends from <a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase">BaseClasses.NullPhase</a> (Empty BC for a phase (no species)).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -87,28 +87,28 @@ Extends from <a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSy
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative</td><td>Multi-species connector for material, linear momentum, and heat</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive</td><td>Multi-species connector for material, linear momentum, and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative</td><td>Multi-species connector for linear momentum and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive</td><td>Multi-species connector for linear momentum and heat</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Bus of inputs to specify conditions</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">model</font> Gas <font color="darkgreen">&quot;BC for gas&quot;</font>
 
-  <font color="blue">extends </font><a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase">FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase</a>;
+  <font color="blue">extends </font><a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase">BaseClasses.NullPhase</a>;
 
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean inclH2=false <font color="darkgreen">&quot;Hydrogen (H<sub>2</sub>)&quot;</font>;
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">FCSys.BCs.FaceDifferential.Species</a> H2 <font color="blue">if </font>inclH2 <font color="darkgreen">&quot;Model&quot;</font>;</textblock>
 
   <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Water (H<sub>2</sub>O)&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">FCSys.BCs.FaceDifferential.Species</a> H2O <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Model&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">FaceDifferential.Species</a> H2O <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Model&quot;</font>;</textblock>
 
   <font color="blue">parameter </font>Boolean inclN2=false <font color="darkgreen">&quot;Nitrogen (N<sub>2</sub>)&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">FCSys.BCs.FaceDifferential.Species</a> N2 <font color="blue">if </font>inclN2 <font color="darkgreen">&quot;Model&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">FaceDifferential.Species</a> N2 <font color="blue">if </font>inclN2 <font color="darkgreen">&quot;Model&quot;</font>;</textblock>
 
   <font color="blue">parameter </font>Boolean inclO2=false <font color="darkgreen">&quot;Oxygen (O<sub>2</sub>)&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">FCSys.BCs.FaceDifferential.Species</a> O2 <font color="blue">if </font>inclO2 <font color="darkgreen">&quot;Model&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">FaceDifferential.Species</a> O2 <font color="blue">if </font>inclO2 <font color="darkgreen">&quot;Model&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
   <font color="darkgreen">// H2</font>
@@ -130,7 +130,6 @@ Extends from <a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSy
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.negative, negative.O2);
   <font color="red">connect</font>(O2.positive, positive.O2);
   <font color="red">connect</font>(u.O2, O2.u);</textblock>
-
 <font color="blue">end </font>Gas;
 </pre>
 <hr>
@@ -140,43 +139,39 @@ Extends from <a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSy
 <b>BC for graphite</b><p>
 <img src="images/FCSys.BCs.FaceBusDifferential.Phases.GraphiteD.png" alt="FCSys.BCs.FaceBusDifferential.Phases.Graphite">
 <p><h3>Information</h3></p>
-Extends from <a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase">FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase</a> (Empty BC for a phase (no species)).
+Extends from <a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase">BaseClasses.NullPhase</a> (Empty BC for a phase (no species)).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis</a></td><td>axis</td><td>Axis.x</td><td>Axis normal to the face</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
-<tr><td>Boolean</td><td>inclC</td><td>false</td><td>Carbon (C)</td></tr>
-<tr><td><a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">Species</a></td><td>C</td><td>&nbsp;</td><td>Model</td></tr>
-<tr><td>Boolean</td><td>&#39;incle-&#39;</td><td>false</td><td>Electrons (e<sup>-</sup>)</td></tr>
+<tr><td>Boolean</td><td>&#39;inclC+&#39;</td><td>false</td><td>Carbon plus (C<sup>+</sup>)</td></tr>
+<tr><td><a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">Species</a></td><td>&#39;C+&#39;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 <tr><td><a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">Species</a></td><td>&#39;e-&#39;</td><td>&nbsp;</td><td>Model</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative</td><td>Multi-species connector for material, linear momentum, and heat</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive</td><td>Multi-species connector for material, linear momentum, and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative</td><td>Multi-species connector for linear momentum and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive</td><td>Multi-species connector for linear momentum and heat</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Bus of inputs to specify conditions</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">model</font> Graphite <font color="darkgreen">&quot;BC for graphite&quot;</font>
 
-  <font color="blue">extends </font><a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase">FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase</a>;
+  <font color="blue">extends </font><a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase">BaseClasses.NullPhase</a>;
 
   <font color="darkgreen">// Conditionally include species.</font>
-  <font color="blue">parameter </font>Boolean inclC=false <font color="darkgreen">&quot;Carbon (C)&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">FCSys.BCs.FaceDifferential.Species</a> C(thermoOpt=ThermoOpt.ClosedDiabatic) <font color="blue">if </font>
-    inclC <font color="darkgreen">&quot;Model&quot;</font>;</textblock>
-
-  <font color="blue">parameter </font>Boolean &#39;incle-&#39;=false <font color="darkgreen">&quot;Electrons (e<sup>-</sup>)&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">FCSys.BCs.FaceDifferential.Species</a> &#39;e-&#39; <font color="blue">if </font>'incle-' <font color="darkgreen">&quot;Model&quot;</font>;</textblock>
+  <font color="blue">parameter </font>Boolean &#39;inclC+&#39;=false <font color="darkgreen">&quot;Carbon plus (C<sup>+</sup>)&quot;</font>;
+  <a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">FaceDifferential.Species</a> &#39;C+&#39;(isobaric=true) <font color="blue">if </font>'' + ERROR;
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">FaceDifferential.Species</a> &#39;e-&#39; <font color="blue">if </font>'incle-' <font color="darkgreen">&quot;Model&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
-  <font color="darkgreen">// C</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.negative, negative.C);
-  <font color="red">connect</font>(C.positive, positive.C);
-  <font color="red">connect</font>(u.C, C.u);</textblock>
+  <font color="darkgreen">// C+</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('C+'.negative, negative.'C+');
+  <font color="red">connect</font>('C+'.positive, positive.'C+');
+  <font color="red">connect</font>(u.'C+', 'C+'.u);</textblock>
 
   <font color="darkgreen">// e-</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.negative, negative.'e-');
@@ -192,14 +187,14 @@ Extends from <a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSy
 <b>BC for ionomer</b><p>
 <img src="images/FCSys.BCs.FaceBusDifferential.Phases.IonomerD.png" alt="FCSys.BCs.FaceBusDifferential.Phases.Ionomer">
 <p><h3>Information</h3></p>
-Extends from <a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase">FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase</a> (Empty BC for a phase (no species)).
+Extends from <a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase">BaseClasses.NullPhase</a> (Empty BC for a phase (no species)).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis</a></td><td>axis</td><td>Axis.x</td><td>Axis normal to the face</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
-<tr><td>Boolean</td><td>inclC19HF37O5S</td><td>false</td><td>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</td></tr>
-<tr><td><a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">Species</a></td><td>C19HF37O5S</td><td>&nbsp;</td><td>Model</td></tr>
+<tr><td>Boolean</td><td>&#39;inclC19HF37O5S-&#39;</td><td>false</td><td>Nafion sulfonate minus (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)</td></tr>
+<tr><td><a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">Species</a></td><td>&#39;C19HF37O5S-&#39;</td><td>&nbsp;</td><td>Model</td></tr>
 <tr><td>Boolean</td><td>inclH2O</td><td>false</td><td>Water (H<sub>2</sub>O)</td></tr>
 <tr><td><a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">Species</a></td><td>H2O</td><td>&nbsp;</td><td>Model</td></tr>
 <tr><td>Boolean</td><td>&#39;inclH+&#39;</td><td>false</td><td>Protons (H<sup>+</sup>)</td></tr>
@@ -208,33 +203,33 @@ Extends from <a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSy
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative</td><td>Multi-species connector for material, linear momentum, and heat</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive</td><td>Multi-species connector for material, linear momentum, and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative</td><td>Multi-species connector for linear momentum and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive</td><td>Multi-species connector for linear momentum and heat</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Bus of inputs to specify conditions</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">model</font> Ionomer <font color="darkgreen">&quot;BC for ionomer&quot;</font>
 
-  <font color="blue">extends </font><a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase">FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase</a>;
+  <font color="blue">extends </font><a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase">BaseClasses.NullPhase</a>;
 
   <font color="darkgreen">// Conditionally include species.</font>
-  <font color="blue">parameter </font>Boolean inclC19HF37O5S=false <font color="darkgreen">
-    &quot;Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">FCSys.BCs.FaceDifferential.Species</a> C19HF37O5S(thermoOpt=ThermoOpt.ClosedDiabatic)
-    <font color="blue">if </font>inclC19HF37O5S <font color="darkgreen">&quot;Model&quot;</font>;</textblock>
+  <font color="blue">parameter </font>Boolean &#39;inclC19HF37O5S-&#39;=false <font color="darkgreen">
+    &quot;Nafion sulfonate minus (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">FaceDifferential.Species</a> &#39;C19HF37O5S-&#39;(isobaric=true) <font color="blue">if </font>'inclC19HF37O5S-' <font color="darkgreen">
+    &quot;Model&quot;</font>;</textblock>
 
   <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Water (H<sub>2</sub>O)&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">FCSys.BCs.FaceDifferential.Species</a> H2O <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Model&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">FaceDifferential.Species</a> H2O <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Model&quot;</font>;</textblock>
 
   <font color="blue">parameter </font>Boolean &#39;inclH+&#39;=false <font color="darkgreen">&quot;Protons (H<sup>+</sup>)&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">FCSys.BCs.FaceDifferential.Species</a> &#39;H+&#39; <font color="blue">if </font>'inclH+' <font color="darkgreen">&quot;Model&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">FaceDifferential.Species</a> &#39;H+&#39; <font color="blue">if </font>'inclH+' <font color="darkgreen">&quot;Model&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
-  <font color="darkgreen">// C19HF37O5S</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.negative, negative.C19HF37O5S);
-  <font color="red">connect</font>(C19HF37O5S.positive, positive.C19HF37O5S);
-  <font color="red">connect</font>(u.C19HF37O5S, C19HF37O5S.u);</textblock>
+  <font color="darkgreen">// C19HF37O5S-</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('C19HF37O5S-'.negative, negative.'C19HF37O5S-');
+  <font color="red">connect</font>('C19HF37O5S-'.positive, positive.'C19HF37O5S-');
+  <font color="red">connect</font>(u.'C19HF37O5S-', 'C19HF37O5S-'.u);</textblock>
 
   <font color="darkgreen">// H2O</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.negative, negative.H2O);
@@ -255,7 +250,7 @@ Extends from <a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSy
 <b>BC for liquid</b><p>
 <img src="images/FCSys.BCs.FaceBusDifferential.Phases.LiquidD.png" alt="FCSys.BCs.FaceBusDifferential.Phases.Liquid">
 <p><h3>Information</h3></p>
-Extends from <a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase">FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase</a> (Empty BC for a phase (no species)).
+Extends from <a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase">BaseClasses.NullPhase</a> (Empty BC for a phase (no species)).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -267,26 +262,25 @@ Extends from <a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSy
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative</td><td>Multi-species connector for material, linear momentum, and heat</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive</td><td>Multi-species connector for material, linear momentum, and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative</td><td>Multi-species connector for linear momentum and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive</td><td>Multi-species connector for linear momentum and heat</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Bus of inputs to specify conditions</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">model</font> Liquid <font color="darkgreen">&quot;BC for liquid&quot;</font>
 
-  <font color="blue">extends </font><a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase">FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase</a>;
+  <font color="blue">extends </font><a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSys.BCs.FaceBusDifferential.Phases.BaseClasses.NullPhase">BaseClasses.NullPhase</a>;
 
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Water (H<sub>2</sub>O)&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">FCSys.BCs.FaceDifferential.Species</a> H2O <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Model&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceDifferential.html#FCSys.BCs.FaceDifferential.Species">FaceDifferential.Species</a> H2O <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Model&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
   <font color="darkgreen">// H2O</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.negative, negative.H2O);
   <font color="red">connect</font>(H2O.positive, positive.H2O);
   <font color="red">connect</font>(u.H2O, H2O.u);</textblock>
-
 <font color="blue">end </font>Liquid;
 </pre>
       </div>
@@ -294,7 +288,7 @@ Extends from <a href="FCSys_BCs_FaceBusDifferential_Phases_BaseClasses.html#FCSy
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:25:32 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:27:05 2013.
 </div>
 </body>
 </html>

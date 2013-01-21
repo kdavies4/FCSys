@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.BCs</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="Models for boundary conditions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -54,7 +54,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.BCs.ExamplesS.png" alt="FCSys.BCs.Examples" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_Examples.html#FCSys.BCs.Examples">Examples</a>
 </td><td>Examples and tests</td></tr>
 <tr><td><img src="images/FCSys.BCs.AdaptersS.png" alt="FCSys.BCs.Adapters" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_Adapters.html#FCSys.BCs.Adapters">Adapters</a>
-</td><td>Adapters to Package Modelica</td></tr>
+</td><td>Adapters to <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Package Modelica</a></td></tr>
 <tr><td><img src="images/FCSys.BCs.AdaptersS.png" alt="FCSys.BCs.TestStands" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_TestStands.html#FCSys.BCs.TestStands">TestStands</a>
 </td><td>Test stands</td></tr>
 <tr><td><img src="images/FCSys.BCs.AdaptersS.png" alt="FCSys.BCs.ChemicalBus" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_ChemicalBus.html#FCSys.BCs.ChemicalBus">ChemicalBus</a>
@@ -179,7 +179,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 
   <font color="blue">parameter </font>Boolean analysis=true <font color="darkgreen">&quot;Include optional variables for analysis&quot;</font>;
 
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p(nominal=1*U.atm) = 1*U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p(nominal=U.atm) = 1*U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T(nominal=298.15*U.K) = 298.15*U.K <font color="darkgreen">
     &quot;Temperature&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> RH(displayUnit=&quot;%&quot;) = 1 <font color="darkgreen">&quot;Relative humidity&quot;</font>;
@@ -197,15 +197,14 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
     &quot;Gas H<sub>2</sub>O fraction (<i>y</i><sub>H2O</sub>)&quot;</font>;
   <font color="darkgreen">// TODO:  Cast this in terms of relative humidity.</font>
 
-<textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>Environment;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Environment;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:23:56 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:25:30 2013.
 </div>
 </body>
 </html>

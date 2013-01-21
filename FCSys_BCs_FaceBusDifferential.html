@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.BCs.FaceBusDifferential</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="&lt;html&gt;BCs for a pair of &lt;a href=\&quot;modelica://FCSys.Connectors.FaceBus\&quot;&gt;FaceBus&lt;/a&gt; connectors&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -63,8 +63,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>BC for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with efforts except closed by default</td></tr>
 <tr><td><img src="images/FCSys.BCs.FaceBusDifferential.SubregionS.png" alt="FCSys.BCs.FaceBusDifferential.SubregionClosedAdiabatic" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_FaceBusDifferential.html#FCSys.BCs.FaceBusDifferential.SubregionClosedAdiabatic">SubregionClosedAdiabatic</a>
 </td><td>BC for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with flows except zero shear velocities by default</td></tr>
-<tr><td><img src="images/FCSys.BCs.FaceBusDifferential.SubregionS.png" alt="FCSys.BCs.FaceBusDifferential.SubregionAdiabatic" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_FaceBusDifferential.html#FCSys.BCs.FaceBusDifferential.SubregionAdiabatic">SubregionAdiabatic</a>
-</td><td>BC for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with efforts except adiabatic by default</td></tr>
 <tr><td><img src="images/FCSys.BCs.FaceBusDifferential.PhasesS.png" alt="FCSys.BCs.FaceBusDifferential.Phases" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs_FaceBusDifferential_Phases.html#FCSys.BCs.FaceBusDifferential.Phases">Phases</a>
 </td><td>BCs for the <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, e.g., of a <a href="FCSys_Subregions.html#FCSys.Subregions.Phase">Phase</a> model (multi-species)</td></tr>
 </table>
@@ -81,9 +79,9 @@ Extends from <a href="FCSys_BaseClasses_Icons_BCs.html#FCSys.BaseClasses.Icons.B
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis</a></td><td>axis</td><td>Axis.x</td><td>Axis normal to the face</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Phases</td></tr>
-<tr><td><a href="FCSys_BCs_FaceBusDifferential_Phases.html#FCSys.BCs.FaceBusDifferential.Phases.Gas">Gas</a></td><td>gas</td><td>redeclare FCSys.BCs.FaceBusD...</td><td>Gas</td></tr>
-<tr><td><a href="FCSys_BCs_FaceBusDifferential_Phases.html#FCSys.BCs.FaceBusDifferential.Phases.Graphite">Graphite</a></td><td>graphite</td><td>redeclare FCSys.BCs.FaceBusD...</td><td>Graphite</td></tr>
-<tr><td><a href="FCSys_BCs_FaceBusDifferential_Phases.html#FCSys.BCs.FaceBusDifferential.Phases.Ionomer">Ionomer</a></td><td>ionomer</td><td>redeclare FCSys.BCs.FaceBusD...</td><td>Ionomer</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBusDifferential_Phases.html#FCSys.BCs.FaceBusDifferential.Phases.Gas">Gas</a></td><td>gas</td><td>redeclare Phases.Gas gas(fin...</td><td>Gas</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBusDifferential_Phases.html#FCSys.BCs.FaceBusDifferential.Phases.Graphite">Graphite</a></td><td>graphite</td><td>redeclare Phases.Graphite gr...</td><td>Graphite</td></tr>
+<tr><td><a href="FCSys_BCs_FaceBusDifferential_Phases.html#FCSys.BCs.FaceBusDifferential.Phases.Ionomer">Ionomer</a></td><td>ionomer</td><td>redeclare Phases.Ionomer ion...</td><td>Ionomer</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -100,14 +98,11 @@ Extends from <a href="FCSys_BaseClasses_Icons_BCs.html#FCSys.BaseClasses.Icons.B
 
   <font color="blue">parameter </font><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis</a> axis=Axis.x <font color="darkgreen">&quot;Axis normal to the face&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_BCs_FaceBusDifferential_Phases.html#FCSys.BCs.FaceBusDifferential.Phases.Gas">FCSys.BCs.FaceBusDifferential.Phases.Gas</a> gas(<font color="blue">final </font>axis=axis) <font color="darkgreen">
-    &quot;Gas&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_BCs_FaceBusDifferential_Phases.html#FCSys.BCs.FaceBusDifferential.Phases.Gas">Phases.Gas</a> gas(<font color="blue">final </font>axis=axis) <font color="darkgreen">&quot;Gas&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_BCs_FaceBusDifferential_Phases.html#FCSys.BCs.FaceBusDifferential.Phases.Graphite">FCSys.BCs.FaceBusDifferential.Phases.Graphite</a> graphite(<font color="blue">final </font>axis
-      =axis) <font color="darkgreen">&quot;Graphite&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_BCs_FaceBusDifferential_Phases.html#FCSys.BCs.FaceBusDifferential.Phases.Graphite">Phases.Graphite</a> graphite(<font color="blue">final </font>axis=axis) <font color="darkgreen">&quot;Graphite&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_BCs_FaceBusDifferential_Phases.html#FCSys.BCs.FaceBusDifferential.Phases.Ionomer">FCSys.BCs.FaceBusDifferential.Phases.Ionomer</a> ionomer(<font color="blue">final </font>axis=
-        axis) <font color="darkgreen">&quot;Ionomer&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_BCs_FaceBusDifferential_Phases.html#FCSys.BCs.FaceBusDifferential.Phases.Ionomer">Phases.Ionomer</a> ionomer(<font color="blue">final </font>axis=axis) <font color="darkgreen">&quot;Ionomer&quot;</font>;</textblock>
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> negative;
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">FCSys.Connectors.RealInputBus</a> u;
@@ -138,7 +133,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_BCs.html#FCSys.BaseClasses.Icons.B
 <b>BC for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with flows by default</b><p>
 <img src="images/FCSys.BCs.FaceBusDifferential.SubregionD.png" alt="FCSys.BCs.FaceBusDifferential.SubregionFlow">
 <p><h3>Information</h3></p>
-Extends from <a href="FCSys_BCs_FaceBusDifferential.html#FCSys.BCs.FaceBusDifferential.Subregion">FCSys.BCs.FaceBusDifferential.Subregion</a> (BC for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with efforts by default).
+Extends from <a href="FCSys_BCs_FaceBusDifferential.html#FCSys.BCs.FaceBusDifferential.Subregion">Subregion</a> (BC for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with efforts by default).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -155,63 +150,61 @@ Extends from <a href="FCSys_BCs_FaceBusDifferential.html#FCSys.BCs.FaceBusDiffer
 <pre>
 <font color="blue">model</font> SubregionFlow <font color="darkgreen">
   &quot;BC for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with flows by default&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_BCs_FaceBusDifferential.html#FCSys.BCs.FaceBusDifferential.Subregion">FCSys.BCs.FaceBusDifferential.Subregion</a>(
+  <font color="blue">extends </font><a href="FCSys_BCs_FaceBusDifferential.html#FCSys.BCs.FaceBusDifferential.Subregion">Subregion</a>(
     gas(
       H2(
         <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalX,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalY,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalZ,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseX,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseY,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseZ,
         <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal),
       H2O(
         <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalX,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalY,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalZ,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseX,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseY,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseZ,
         <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal),
       N2(
         <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalX,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalY,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalZ,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseX,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseY,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseZ,
         <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal),
       O2(
         <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalX,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalY,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalZ,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseX,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseY,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseZ,
         <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal)),
-    graphite(C(
+    graphite(&#39;C+&#39;(
         <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalX,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalY,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalZ,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseX,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseY,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseZ,
         <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal),
         &#39;e-&#39;(
         <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalX,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalY,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalZ,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseX,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseY,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseZ,
         <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal)),
     ionomer(
-      C19HF37O5S(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalX,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalY,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalZ,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal),
-      H2O(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalX,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalY,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalZ,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal),
-      &#39;H+&#39;(
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalX,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalY,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> mechanicalZ,
-        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal)));
+      <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseX,
+      <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseY,
+      <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseZ,
+      <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal),
+    H2O(
+      <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material,
+      <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseX,
+      <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseY,
+      <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseZ,
+      <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal),
+    &#39;H+&#39;(
+      <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material,
+      <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseX,
+      <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseY,
+      <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Mechanical.html#FCSys.BCs.FaceDifferential.Mechanical.Force">FaceDifferential.Mechanical.Force</a> transverseZ,
+      <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal));
 
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>SubregionFlow;
 </pre>
@@ -222,7 +215,7 @@ Extends from <a href="FCSys_BCs_FaceBusDifferential.html#FCSys.BCs.FaceBusDiffer
 <b>BC for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with efforts except closed by default</b><p>
 <img src="images/FCSys.BCs.FaceBusDifferential.SubregionD.png" alt="FCSys.BCs.FaceBusDifferential.SubregionClosed">
 <p><h3>Information</h3></p>
-Extends from <a href="FCSys_BCs_FaceBusDifferential.html#FCSys.BCs.FaceBusDifferential.Subregion">FCSys.BCs.FaceBusDifferential.Subregion</a> (BC for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with efforts by default).
+Extends from <a href="FCSys_BCs_FaceBusDifferential.html#FCSys.BCs.FaceBusDifferential.Subregion">Subregion</a> (BC for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with efforts by default).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -239,20 +232,16 @@ Extends from <a href="FCSys_BCs_FaceBusDifferential.html#FCSys.BCs.FaceBusDiffer
 <pre>
 <font color="blue">model</font> SubregionClosed <font color="darkgreen">
   &quot;BC for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with efforts except closed by default&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_BCs_FaceBusDifferential.html#FCSys.BCs.FaceBusDifferential.Subregion">FCSys.BCs.FaceBusDifferential.Subregion</a>(
+  <font color="blue">extends </font><a href="FCSys_BCs_FaceBusDifferential.html#FCSys.BCs.FaceBusDifferential.Subregion">Subregion</a>(
     gas(
-      H2(<font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material),
-      H2O(<font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material),
-      N2(<font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material),
-      O2(<font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material)),
-    graphite(C(<font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material),
-        &#39;e-&#39;(<font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material)),
-
-    ionomer(
-      C19HF37O5S(<font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a>
-          material),
-      H2O(<font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material),
-      &#39;H+&#39;(<font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material)));
+      H2(isobaric=true),
+      H2O(isobaric=true),
+      N2(isobaric=true),
+      O2(isobaric=true)),
+    graphite(&#39;C+&#39;(isobaric=true), &#39;e-&#39;(thermoOpt=ThermoOpt.ClosedDiabatic)),
+    ionomer(Error),
+    H2O(isobaric=true),
+    &#39;H+&#39;(isobaric=true));
 
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>SubregionClosed;
 </pre>
@@ -263,7 +252,7 @@ Extends from <a href="FCSys_BCs_FaceBusDifferential.html#FCSys.BCs.FaceBusDiffer
 <b>BC for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with flows except zero shear velocities by default</b><p>
 <img src="images/FCSys.BCs.FaceBusDifferential.SubregionD.png" alt="FCSys.BCs.FaceBusDifferential.SubregionClosedAdiabatic">
 <p><h3>Information</h3></p>
-Extends from <a href="FCSys_BCs_FaceBusDifferential.html#FCSys.BCs.FaceBusDifferential.Subregion">FCSys.BCs.FaceBusDifferential.Subregion</a> (BC for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with efforts by default).
+Extends from <a href="FCSys_BCs_FaceBusDifferential.html#FCSys.BCs.FaceBusDifferential.Subregion">Subregion</a> (BC for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with efforts by default).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -280,87 +269,25 @@ Extends from <a href="FCSys_BCs_FaceBusDifferential.html#FCSys.BCs.FaceBusDiffer
 <pre>
 <font color="blue">model</font> SubregionClosedAdiabatic <font color="darkgreen">
   &quot;BC for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with flows except zero shear velocities by default&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_BCs_FaceBusDifferential.html#FCSys.BCs.FaceBusDifferential.Subregion">FCSys.BCs.FaceBusDifferential.Subregion</a>(
+  <font color="blue">extends </font><a href="FCSys_BCs_FaceBusDifferential.html#FCSys.BCs.FaceBusDifferential.Subregion">Subregion</a>(
     gas(
-      H2(<font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material, <font color="blue">
-          redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal),
-
-      H2O(<font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material, <font color="blue">
-          redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal),
-
-      N2(<font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material, <font color="blue">
-          redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal),
-
-      O2(<font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material, <font color="blue">
-          redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal)),
-
-    graphite(C(<font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material,
-          <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal),
-        &#39;e-&#39;(<font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material, <font color="blue">
-          redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal)),
-
-    ionomer(
-      C19HF37O5S(<font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a>
-          material, <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate
-          thermal),
-      H2O(<font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material, <font color="blue">
-          redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal),
-
-      &#39;H+&#39;(<font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_BCs_FaceDifferential_Material.html#FCSys.BCs.FaceDifferential.Material.Current">FaceDifferential.Material.Current</a> material, <font color="blue">
-          redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal)));
+      H2(isobaric=true),
+      H2O(isobaric=true),
+      N2(isobaric=true),
+      O2(isobaric=true)),
+    graphite(&#39;C+&#39;(isobaric=true), &#39;e-&#39;(thermoOpt=ThermoOpt.ClosedAdiabatic)),
+    ionomer(Error),
+    H2O(isobaric=true),
+    &#39;H+&#39;(isobaric=true));
 
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>SubregionClosedAdiabatic;
-</pre>
-<hr>
-
-<h2><img src="images/FCSys.BCs.FaceBusDifferential.SubregionI.png" alt="FCSys.BCs.FaceBusDifferential.SubregionAdiabatic" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.BCs.FaceBusDifferential.SubregionAdiabatic"></a><a href="FCSys_BCs_FaceBusDifferential.html#FCSys.BCs.FaceBusDifferential">FCSys.BCs.FaceBusDifferential</a>.SubregionAdiabatic</h2>
-<b>BC for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with efforts except adiabatic by default</b><p>
-<img src="images/FCSys.BCs.FaceBusDifferential.SubregionD.png" alt="FCSys.BCs.FaceBusDifferential.SubregionAdiabatic">
-<p><h3>Information</h3></p>
-Extends from <a href="FCSys_BCs_FaceBusDifferential.html#FCSys.BCs.FaceBusDifferential.Subregion">FCSys.BCs.FaceBusDifferential.Subregion</a> (BC for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with efforts by default).
-<p><h3>Parameters</h3><p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis</a></td><td>axis</td><td>Axis.x</td><td>Axis normal to the face</td></tr>
-</table>
-<p><h3>Connectors</h3><p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative</td><td>&nbsp;</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>&nbsp;</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive</td><td>&nbsp;</td></tr>
-</table>
-<p><h3>Modelica definition</h3>
-<pre>
-<font color="blue">model</font> SubregionAdiabatic <font color="darkgreen">
-  &quot;BC for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with efforts except adiabatic by default&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_BCs_FaceBusDifferential.html#FCSys.BCs.FaceBusDifferential.Subregion">FCSys.BCs.FaceBusDifferential.Subregion</a>(
-    gas(
-      H2(<font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal),
-      H2O(<font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal),
-
-      N2(<font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal),
-      O2(<font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal)),
-
-    graphite(C(<font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate
-          thermal), &#39;e-&#39;(<font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate
-          thermal)),
-    ionomer(
-      C19HF37O5S(<font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate
-          thermal),
-      H2O(<font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal),
-
-      &#39;H+&#39;(<font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatFlowRate thermal)));
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>SubregionAdiabatic;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:25:25 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:27:01 2013.
 </div>
 </body>
 </html>

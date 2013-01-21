@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.UsersGuide</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="User&#39;s Guide">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -115,7 +115,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
             Introduction to the "additivity of pressure" concept</li>
             <li><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">FCSys.Subregions.Species.Species</a> model:
             Details about the exchange, transport, and storage of material, volume, linear momentum, and
-            entropy</li>
+            energy</li>
             <li><a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">FCSys.Subregions.Reaction</a> model:
             Summary of the connections for a chemical reaction</li>
             <li>A region or layer model such as <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">FCSys.Regions.AnFPs.AnFP</a>:
@@ -128,12 +128,12 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
         list of assumptions in a model should be considered in conjunction with the assumptions in all
         the models it inherits from.
         </li>
-        <li>Create and simulate examples of other usage scenarios.  Many of the 
+        <li>Create and simulate examples of other usage scenarios.  Many of the
         nested models (regions, subregions, species) are replaceable.
-        Their parameters are often not propagated to the cell level, but may 
-        be accessed through the parameter dialog by editing the replaceable model.  Note that 
+        Their parameters are often not propagated to the cell level, but may
+        be accessed through the parameter dialog by editing the replaceable model.  Note that
         many models have auxiliary output variables available for additional analysis and diagnostics.
-        These may be included by setting <code>analysis=true</code> in the outer environment model (instance 
+        These may be included by setting <code>analysis=true</code> in the outer environment model (instance
         of <a href="FCSys_BCs.html#FCSys.BCs.Environment">Environment</a>).</li>
         <li>Develop your own classes.  It should be possible to model other electrochemical
         devices (solid oxide fuel cells, lithium ion batteries, flow batteries/regenerative fuel cells, etc.) by
@@ -330,7 +330,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     <a href="http://kdavies4.github.com/FCSys/">main project site</a>.
     The development page is
     <a href="https://github.com/kdavies4/FCSys">https://github.com/kdavies4/FCSys</a>.
-    Please report any problems using the <a href="https://github.com/kdavies4/FCSys/issues">issues</a> 
+    Please report any problems using the <a href="https://github.com/kdavies4/FCSys/issues">issues</a>
     link on that page.
     </p>
 
@@ -344,10 +344,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     <dd><a href="mailto:kdavies4@gmail.com">kdavies4@gmail.com</a></dd>
 
     <p><b>Acknowledgments:</b><ul>
-    <li>Technical guidance from Robert Moore, Chris Paredis, and Comas Haynes
-    <li>Technical support and feedback from Mohammad Ali, Mike Angelo, Kevin Bandy,
-    Guido Bender, Severine Busquet, Chris Ford, George Nelson,
-    Francois Steinmetz, Mike Tiller, Hubertus Tummescheit, Mebs Virji, and Joerg Weiss-Ungeth&uuml;m</li>
+    <li>Source code contributions and bug fixes from Joerg Weiss-Ungeth&uuml;m</li>
+    <li>Guidance from Robert Moore, Comas Haynes, and Chris Paredis
+    <li>Technical support from Mohammad Ali, Mike Angelo, Guido Bender, Severine Busquet,
+    Chris Ford, George Nelson, Francois Steinmetz, Mike Tiller, Hubertus Tummescheit, and Mebs Virji</li>
     <li>Financial support from:
     <ul>
     <li>Presidential Fellowship from the <a href="http://www.me.gatech.edu">George W. Woodruff
@@ -931,7 +931,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:23:55 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:25:29 2013.
 </div>
 </body>
 </html>

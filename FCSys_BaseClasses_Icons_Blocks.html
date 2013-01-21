@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.BaseClasses.Icons.Blocks</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="Icons for blocks (imperative or causal models)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -65,20 +65,13 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.BaseClasses.Icons.Blocks.ContinuousI.png" alt="FCSys.BaseClasses.Icons.Blocks.Continuous" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Icons.Blocks.Continuous"></a><a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks">FCSys.BaseClasses.Icons.Blocks</a>.Continuous</h2>
 <b>Icon for a continuous-time block</b><p>
-<p><h3>Information</h3></p>
-
-<p>
-Block that has only the basic icon for an imperative
-block (no declarations, no equations). Most blocks
-of package Modelica.Blocks inherit directly or indirectly
-from this block.
-</p>
-<p>
-
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">partial </font><font color="blue">class</font> Continuous <font color="darkgreen">&quot;Icon for a continuous-time block&quot;</font>
-  <font color="darkgreen">//extends FCSys.BaseClasses.Icons.Names.Middle;</font>
+  <font color="darkgreen">//extends Names.Middle;</font>
+
+  <font color="darkgreen">// This has been modified from Modelica.Blocks.Interfaces.BlockIcon.</font>
+
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>Continuous;
 </pre>
 <hr>
@@ -114,18 +107,13 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 <a name="FCSys.BaseClasses.Icons.Blocks.Discrete"></a><a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks">FCSys.BaseClasses.Icons.Blocks</a>.Discrete</h2>
 <b>Icon for a discrete-time block</b><p>
 <p><h3>Information</h3></p>
-
-<p>
-Block that has only the basic icon for an imperative and
-discrete block (no declarations, no equations), e.g.,
-from Blocks.Discrete.
-</p>
-<p>
-Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top5">FCSys.BaseClasses.Icons.Names.Top5</a>.
+Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top5">Names.Top5</a>.
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">partial </font><font color="blue">class</font> Discrete <font color="darkgreen">&quot;Icon for a discrete-time block&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top5">FCSys.BaseClasses.Icons.Names.Top5</a>;
+  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top5">Names.Top5</a>;
+
+  <font color="darkgreen">// This has been modified from Modelica.Blocks.Interfaces.DiscreteBlockIcon.</font>
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>Discrete;
 </pre>
       </div>
@@ -133,7 +121,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:31:55 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:32:48 2013.
 </div>
 </body>
 </html>

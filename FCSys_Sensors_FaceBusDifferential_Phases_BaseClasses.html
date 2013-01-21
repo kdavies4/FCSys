@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Sensors.FaceBusDifferential.Phases.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="Base classes (not for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -70,8 +70,8 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Senso
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative</td><td>Negative-side connector for material, linear momentum, and heat</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive</td><td>Positive-side connector for material, linear momentum, and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative</td><td>Negative-side connector for linear momentum and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive</td><td>Positive-side connector for linear momentum and heat</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Bus of measurements</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
@@ -82,9 +82,9 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Senso
   <font color="blue">parameter </font><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis</a> axis=Axis.x <font color="darkgreen">&quot;Axis normal to the face&quot;</font>;
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> negative <font color="darkgreen">
-    &quot;Negative-side connector for material, linear momentum, and heat&quot;</font>;
+    &quot;Negative-side connector for linear momentum and heat&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> positive <font color="darkgreen">
-    &quot;Positive-side connector for material, linear momentum, and heat&quot;</font>;
+    &quot;Positive-side connector for linear momentum and heat&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">FCSys.Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Bus of measurements&quot;</font>;</textblock>
 
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>NullPhase;
@@ -94,7 +94,7 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Senso
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:26:40 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:28:03 2013.
 </div>
 </body>
 </html>

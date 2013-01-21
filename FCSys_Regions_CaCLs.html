@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Regions.CaCLs</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="Cathode catalyst layers">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -47,7 +47,7 @@
 <b>Cathode catalyst layers</b>
 <p>
 <p><h3>Information</h3></p>
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages), <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.PackageUnderConstruction">FCSys.BaseClasses.Icons.PackageUnderConstruction</a> (Overlay that indicates a package is under construction).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
@@ -76,9 +76,9 @@ the z axis extends across the width of the channel.</p>
 </ol>
 </p>
 <p>For more information, see the
-    <a href="FCSys_Regions_BaseClasses.html#FCSys.Regions.BaseClasses.PartialRegion">PartialRegion</a> model.</p>
+    <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> model.</p>
 <p>
-Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">FCSys.Regions.Region</a> (Base model for a 3D array of subregions).
+Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base model for a 3D array of subregions).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -91,9 +91,9 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">FCSys.Regions.Reg
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>) [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclXFaces</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -110,55 +110,53 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">FCSys.Regions.Reg
 <font color="blue">model</font> CaCL <font color="darkgreen">&quot;Cathode catalyst layer&quot;</font>
   <font color="darkgreen">//extends FCSys.BaseClasses.Icons.Names.Top4;</font>
 
-  <font color="blue">extends </font><a href="FCSys_Regions.html#FCSys.Regions.Region">FCSys.Regions.Region</a>(
+  <font color="blue">extends </font><a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a>(
     L_x=<font color="red">fill</font>(28.7*U.micro*U.m/1, 1),
     L_y=<font color="red">fill</font>(1*U.m/1, 1),
     L_z=<font color="red">fill</font>(5*U.mm/1, 1),
-    <font color="blue">final </font>inclXFaces=true,
-    inclYFaces=false,
-    inclZFaces=false,
+    <font color="blue">final </font>inclFacesX=true,
+    inclFacesY=false,
+    inclFacesZ=false,
     <font color="blue">redeclare </font><a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">FCSys.Subregions.Subregion</a> subregions[n_x, n_y, n_z](
+      <font color="blue">each </font>inclLinX=false,
       <font color="blue">each </font>gas(
         inclH2O=true,
         inclN2=true,
         inclO2=true,
         H2O(
           p_IC=environment.x_H2O*environment.p,
-          yNegative(slipX=false),
-          yPositive(slipX=false)),
+          xNegative(isobaric=true),
+          xPositive(isobaric=false)),
         N2(
-          Lstar=1e8*U.m,
           p_IC=(1 - environment.x_H2O)*(1 - environment.x_O2_dry)*environment.p,
 
-          yNegative(slipX=false),
-          yPositive(slipX=false)),
+          xNegative(isobaric=false),
+          xPositive(isobaric=false)),
         O2(
           p_IC=(1 - environment.x_H2O)*environment.x_O2_dry*environment.p,
-          yNegative(slipX=false),
-          yPositive(slipX=false))),
+          xNegative(isobaric=false),
+          xPositive(isobaric=false))),
       <font color="blue">each </font>graphite(
-        inclC=true,
+        &#39;inclC+&#39;=true,
         &#39;incle-&#39;=true,
-        C(Lstar=1e8*U.m, V_IC=(V - xV)/2),
-        &#39;e-&#39;(
-          Lstar=1e8*U.m,
-          mu_IC=-0.2*U.V,
-          yNegative(slipX=false),
-          yPositive(slipX=false))),
+        &#39;C+&#39;(V_IC=V - xV),
+        &#39;e-&#39;(xNegative(isobaric=false), xPositive(isobaric=false))),
       <font color="blue">each </font>ionomer(
-        inclC19HF37O5S=true,
+        &#39;inclC19HF37O5S-&#39;=true,
         &#39;inclH+&#39;=true,
-        C19HF37O5S(Lstar=1e7*U.m,V_IC=(V - xV)/2),
-        &#39;H+&#39;(
-          Lstar=1e7*U.m,
-          yNegative(slipX=false),
-          yPositive(slipX=false)))));
+        Error),
+      &#39;H+&#39;(xNegative(isobaric=false), xPositive(isobaric=false)),
+      H2O(xNegative(isobaric=false), xPositive(isobaric=false))),
+    <font color="blue">each </font>liquid(inclH2O=true, H2O(
+        V_IC=0,
+        xNegative(isobaric=false),
+        xPositive(isobaric=false))));
 
-  <font color="darkgreen">//&#39;e-&#39;(xNegative(thermoOpt=ThermoOpt.ClosedAdiabatic),</font>
-  <font color="darkgreen">//&#39;H+&#39;(xPositive(thermoOpt=ThermoOpt.ClosedAdiabatic),</font>
+  <font color="darkgreen">//&#39;e-&#39;(xNegative(isobaric=true),</font>
+  <font color="darkgreen">//&#39;H+&#39;(xPositive(isobaric=true),</font>
 
   <font color="darkgreen">//O2(</font>
-  <font color="darkgreen">//  each ionomer(C19HF37O5S(V_IC=0.15*V))));</font>
+  <font color="darkgreen">//  each ionomer(&#39;C19HF37O5S-&#39;(V_IC=0.15*V))));</font>
 
   <font color="darkgreen">//</font>
   <font color="darkgreen">//</font>
@@ -194,7 +192,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">FCSys.Regions.Reg
   <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> xV=x*V <font color="darkgreen">&quot;Gas volume&quot;</font>;
 
 <textblock type="annotcomp" expanded="false"><font color="blue">protected </font>
-  <font color="blue">outer </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">BCs.Environment</a> environment <font color="darkgreen">&quot;Environmental settings&quot;</font>;</textblock>
+  <font color="blue">outer </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">BCs.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;</textblock>
 
 <textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>CaCL;
@@ -221,8 +219,8 @@ Extends from <a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCL</a
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>) [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -246,7 +244,7 @@ Extends from <a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCL</a
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:29:00 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:40:31 2013.
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Sensors.FaceDifferential.Mechanical</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="Relative sensors for transverse linear momentum">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -63,7 +63,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Sensors.FaceDifferential.Mechanical.VelocityI.png" alt="FCSys.Sensors.FaceDifferential.Mechanical.Velocity" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Sensors.FaceDifferential.Mechanical.Velocity"></a><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical">FCSys.Sensors.FaceDifferential.Mechanical</a>.Velocity</h2>
 <b>Sensor for relative velocity (inviscid condition)</b><p>
-<img src="images/FCSys.Sensors.FaceDifferential.Mechanical.VelocityD.png" alt="FCSys.Sensors.FaceDifferential.Mechanical.Velocity">
+<img src="images/FCSys.Sensors.FaceDifferential.Material.DensityD.png" alt="FCSys.Sensors.FaceDifferential.Mechanical.Velocity">
 <p><h3>Information</h3></p>
 <p>If <code>ax=1</code>, then the difference in normal velocity
   is measured.  The relative first
@@ -71,17 +71,11 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <code>ax=2</code> and <code>ax=3</code>, but only if <code>inclTrans</code>
    is <code>true</code>.
   </p><p>
-Extends from <a href="FCSys_Sensors_FaceDifferential_Mechanical_BaseClasses.html#FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses.PartialSensor">BaseClasses.PartialSensor</a> (Partial sensor for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a> connectors).
+Extends from <a href="FCSys_Sensors_FaceDifferential_Mechanical_BaseClasses.html#FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses.PartialSensor">BaseClasses.PartialSensor</a> (Partial sensor for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.Transverse">Transverse</a> connectors).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Sensors_FaceDifferential_Mechanical_BaseClasses.html#FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses.SensorType">SensorType</a></td><td>sensorType</td><td>BaseClasses.SensorType.Veloc...</td><td>Type of sensor</td></tr>
-</table>
-<p><h3>Connectors</h3><p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a></td><td>negative</td><td>Mechanical connector for the negative face</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a></td><td>positive</td><td>Mechanical connector for the positive face</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -102,7 +96,7 @@ Extends from <a href="FCSys_Sensors_FaceDifferential_Mechanical_BaseClasses.html
 <h2><img src="images/FCSys.Sensors.FaceDifferential.Mechanical.ForceI.png" alt="FCSys.Sensors.FaceDifferential.Mechanical.Force" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Sensors.FaceDifferential.Mechanical.Force"></a><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical">FCSys.Sensors.FaceDifferential.Mechanical</a>.Force</h2>
 <b>Sensor for shear force (condition of uniform velocity)</b><p>
-<img src="images/FCSys.Sensors.FaceDifferential.Mechanical.VelocityD.png" alt="FCSys.Sensors.FaceDifferential.Mechanical.Force">
+<img src="images/FCSys.Sensors.FaceDifferential.Material.DensityD.png" alt="FCSys.Sensors.FaceDifferential.Mechanical.Force">
 <p><h3>Information</h3></p>
 <p>If <code>ax=1</code>, then normal force
   is measured.  The first
@@ -110,17 +104,11 @@ Extends from <a href="FCSys_Sensors_FaceDifferential_Mechanical_BaseClasses.html
   <code>ax=2</code> and <code>ax=3</code>, but only if <code>inclTrans</code>
    is <code>true</code>.
   </p><p>
-Extends from <a href="FCSys_Sensors_FaceDifferential_Mechanical_BaseClasses.html#FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses.PartialSensor">BaseClasses.PartialSensor</a> (Partial sensor for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a> connectors).
+Extends from <a href="FCSys_Sensors_FaceDifferential_Mechanical_BaseClasses.html#FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses.PartialSensor">BaseClasses.PartialSensor</a> (Partial sensor for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.Transverse">Transverse</a> connectors).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Sensors_FaceDifferential_Mechanical_BaseClasses.html#FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses.SensorType">SensorType</a></td><td>sensorType</td><td>BaseClasses.SensorType.Force</td><td>Type of sensor</td></tr>
-</table>
-<p><h3>Connectors</h3><p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a></td><td>negative</td><td>Mechanical connector for the negative face</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a></td><td>positive</td><td>Mechanical connector for the positive face</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -138,7 +126,7 @@ Extends from <a href="FCSys_Sensors_FaceDifferential_Mechanical_BaseClasses.html
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:26:51 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:28:13 2013.
 </div>
 </body>
 </html>

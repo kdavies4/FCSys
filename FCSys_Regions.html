@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Regions</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="3D arrays of discrete, interconnected subregions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -109,9 +109,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclXFaces</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>true</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>true</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>true</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>true</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -149,30 +149,30 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V=<font color="red">product</font>(L) <font color="blue">if </font>hasSubregions <font color="darkgreen">&quot;Volume&quot;</font>;
 
   <font color="darkgreen">// Assumptions about included faces</font>
-  <font color="blue">parameter </font>Boolean inclXFaces=true <font color="darkgreen">&quot;X&quot;</font>;
-  <font color="blue">parameter </font>Boolean inclYFaces=true <font color="darkgreen">&quot;Y&quot;</font>;
-  <font color="blue">parameter </font>Boolean inclZFaces=true <font color="darkgreen">&quot;Z&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclFacesX=true <font color="darkgreen">&quot;X&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclFacesY=true <font color="darkgreen">&quot;Y&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclFacesZ=true <font color="darkgreen">&quot;Z&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> xNegative[n_y, n_z] <font color="blue">if </font>inclXFaces <font color="darkgreen">
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> xNegative[n_y, n_z] <font color="blue">if </font>inclFacesX <font color="darkgreen">
     &quot;Negative face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> xPositive[n_y, n_z] <font color="blue">if </font>inclXFaces <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> xPositive[n_y, n_z] <font color="blue">if </font>inclFacesX <font color="darkgreen">
     &quot;Positive face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> yNegative[n_x, n_z] <font color="blue">if </font>inclYFaces <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> yNegative[n_x, n_z] <font color="blue">if </font>inclFacesY <font color="darkgreen">
     &quot;Negative face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> yPositive[n_x, n_z] <font color="blue">if </font>inclYFaces <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> yPositive[n_x, n_z] <font color="blue">if </font>inclFacesY <font color="darkgreen">
     &quot;Positive face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> zNegative[n_x, n_y] <font color="blue">if </font>inclZFaces <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> zNegative[n_x, n_y] <font color="blue">if </font>inclFacesZ <font color="darkgreen">
     &quot;Negative face along the z axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> zPositive[n_x, n_y] <font color="blue">if </font>inclZFaces <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> zPositive[n_x, n_y] <font color="blue">if </font>inclFacesZ <font color="darkgreen">
     &quot;Positive face along the z axis&quot;</font>;</textblock>
 
 <textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">FCSys.Subregions.Subregion</a> subregions[n_x, n_y, n_z] <font color="blue">if </font>
     hasSubregions <font color="blue">constrainedby </font>FCSys.Subregions.BaseClasses.PartialSubregion(
     <font color="blue">final </font>L={{L_x[i_x],L_y[i_y],L_z[i_z]} <font color="blue">for </font>i_z<font color="blue"> in </font>1:n_z, i_y<font color="blue"> in </font>1:n_y, i_x<font color="blue">
          in </font>1:n_x},
-    <font color="blue">each </font><font color="blue">final </font>inclXFaces=inclXFaces,
-    <font color="blue">each </font><font color="blue">final </font>inclYFaces=inclYFaces,
-    <font color="blue">each </font><font color="blue">final </font>inclZFaces=inclZFaces) <font color="darkgreen">
+    <font color="blue">each </font><font color="blue">final </font>inclFacesX=inclFacesX,
+    <font color="blue">each </font><font color="blue">final </font>inclFacesY=inclFacesY,
+    <font color="blue">each </font><font color="blue">final </font>inclFacesZ=inclFacesZ) <font color="darkgreen">
     &quot;Base subregion model and its modifications for each subregion&quot;</font>;</textblock>
 
 <font color="blue">protected </font>
@@ -223,7 +223,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:27:55 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:39:25 2013.
 </div>
 </body>
 </html>

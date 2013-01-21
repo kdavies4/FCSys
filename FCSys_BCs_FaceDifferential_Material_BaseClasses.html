@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.BCs.FaceDifferential.Material.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="Base classes (not for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -79,8 +79,6 @@ Extends from <a href="FCSys_BCs_FaceDifferential_BaseClasses.html#FCSys.BCs.Face
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Value of BC</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Material">Material</a></td><td>negative</td><td>Material connector for the negative face</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Material">Material</a></td><td>positive</td><td>Material connector for the positive face</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -91,8 +89,10 @@ Extends from <a href="FCSys_BCs_FaceDifferential_BaseClasses.html#FCSys.BCs.Face
   <font color="darkgreen">// Note:  This is included so that the type of BC is recorded with the</font>
   <font color="darkgreen">// results.</font>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Material">FCSys.Connectors.Material</a> negative <font color="darkgreen">&quot;Material connector for the negative face&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Material">FCSys.Connectors.Material</a> positive <font color="darkgreen">&quot;Material connector for the positive face&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  FCSys.Connectors.BaseClasses.Normal negative <font color="darkgreen">
+    &quot;Material connector for the negative face&quot;</font>;
+  FCSys.Connectors.BaseClasses.Normal positive <font color="darkgreen">
+    &quot;Material connector for the positive face&quot;</font>;</textblock>
 <font color="blue">equation </font>
   0 = negative.Ndot + positive.Ndot <font color="darkgreen">&quot;Material conservation (no storage)&quot;</font>;
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>PartialBC;
@@ -102,7 +102,7 @@ Extends from <a href="FCSys_BCs_FaceDifferential_BaseClasses.html#FCSys.BCs.Face
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:25:41 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:27:14 2013.
 </div>
 </body>
 </html>

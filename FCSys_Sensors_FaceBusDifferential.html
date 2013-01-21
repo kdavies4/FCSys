@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Sensors.FaceBusDifferential</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="&lt;html&gt;Sensors for a pair of &lt;a href=\&quot;modelica://FCSys.Connectors.FaceBus\&quot;&gt;FaceBus&lt;/a&gt; connectors&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -52,9 +52,9 @@
 (see the <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package),
 the models for the sensors must be as well.   A
 <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a>,
-<a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FaceX</a>,
-<a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FaceY</a>, or
-<a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FaceZ</a>
+<a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a>,
+<a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a>, or
+<a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a>
 connector
 is used in <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species">Species</a> models,
 and there is a corresponding <a href="FCSys_Sensors_FaceDifferential.html#FCSys.Sensors.FaceDifferential.Species">Species
@@ -99,8 +99,8 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Senso
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Bus of measurements</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative</td><td>Negative-side connector for material, linear momentum, and heat</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive</td><td>Positive-side connector for material, linear momentum, and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative</td><td>Negative-side connector for linear momentum and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive</td><td>Positive-side connector for linear momentum and heat</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -120,9 +120,9 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Senso
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">FCSys.Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Bus of measurements&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> negative <font color="darkgreen">
-    &quot;Negative-side connector for material, linear momentum, and heat&quot;</font>;
+    &quot;Negative-side connector for linear momentum and heat&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> positive <font color="darkgreen">
-    &quot;Positive-side connector for material, linear momentum, and heat&quot;</font>;</textblock>
+    &quot;Positive-side connector for linear momentum and heat&quot;</font>;</textblock>
 <font color="blue">equation </font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(gas.negative, negative.gas);</textblock>
 
@@ -149,7 +149,7 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Senso
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:26:24 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:27:53 2013.
 </div>
 </body>
 </html>

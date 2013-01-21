@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Sensors.InertDalton</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="&lt;html&gt;Sensors for the &lt;a href=\&quot;modelica://FCSys.Connectors.InertDalton\&quot;&gt;InertDalton&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -193,7 +193,7 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Senso
 <b>Measured temperature</b><p>
 <img src="images/FCSys.Sensors.InertDalton.VolumeD.png" alt="FCSys.Sensors.InertDalton.Temperature">
 <p><h3>Information</h3></p>
-Extends from <a href="FCSys_Sensors_InertDalton_BaseClasses.html#FCSys.Sensors.InertDalton.BaseClasses.PartialSensor">FCSys.Sensors.InertDalton.BaseClasses.PartialSensor</a> (Partial model for a sensor).
+Extends from <a href="FCSys_Sensors_InertDalton_BaseClasses.html#FCSys.Sensors.InertDalton.BaseClasses.PartialSensor">BaseClasses.PartialSensor</a> (Partial model for a sensor).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -208,8 +208,8 @@ Extends from <a href="FCSys_Sensors_InertDalton_BaseClasses.html#FCSys.Sensors.I
 <pre>
 <font color="blue">model</font> Temperature <font color="darkgreen">&quot;Measured temperature&quot;</font>
 
-  <font color="blue">extends </font><a href="FCSys_Sensors_InertDalton_BaseClasses.html#FCSys.Sensors.InertDalton.BaseClasses.PartialSensor">FCSys.Sensors.InertDalton.BaseClasses.PartialSensor</a>(<font color="blue">redeclare </font><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">FCSys.Connectors.RealOutput</a>
-      y(<font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;, displayUnit=&quot;K&quot;));
+  <font color="blue">extends </font><a href="FCSys_Sensors_InertDalton_BaseClasses.html#FCSys.Sensors.InertDalton.BaseClasses.PartialSensor">BaseClasses.PartialSensor</a>(<font color="blue">redeclare </font><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">FCSys.Connectors.RealOutput</a> y(<font color="blue">
+        final </font>unit=&quot;l2.m/(N.T2)&quot;, displayUnit=&quot;K&quot;));
 
 <font color="blue">equation </font>
   y = inert.T;
@@ -221,7 +221,7 @@ Extends from <a href="FCSys_Sensors_InertDalton_BaseClasses.html#FCSys.Sensors.I
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:26:00 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:27:30 2013.
 </div>
 </body>
 </html>

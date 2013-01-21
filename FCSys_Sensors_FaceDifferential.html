@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Sensors.FaceDifferential</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="&lt;html&gt;Sensors for a pair of &lt;a href=\&quot;modelica://FCSys.Connectors.Face\&quot;&gt;Face&lt;/a&gt; connectors, e.g., of a &lt;a href=\&quot;modelica://FCSys.Subregions.Species\&quot;&gt;Species&lt;/a&gt; model (single-species)&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -79,26 +79,26 @@ Extends from <a href="FCSys_Sensors_FaceDifferential_BaseClasses.html#FCSys.Sens
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a></td><td>thermoOpt</td><td>ThermoOpt.ClosedAdiabatic</td><td>Options for material and thermal subconnectors</td></tr>
+<tr><td>Boolean</td><td>isobaric</td><td>false</td><td>Isobaric condition</td></tr>
 <tr><td><a href="FCSys_Sensors_FaceDifferential_Material.html#FCSys.Sensors.FaceDifferential.Material.Density">Density</a></td><td>material</td><td>redeclare Material.Density m...</td><td>Type of sensor</td></tr>
 <tr><td><a href="FCSys_Sensors_FaceDifferential_Thermal.html#FCSys.Sensors.FaceDifferential.Thermal.Temperature">Temperature</a></td><td>thermal</td><td>redeclare Thermal.Temperatur...</td><td>Type of condition</td></tr>
 <tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis</a></td><td>axis</td><td>Axis.x</td><td>Axis normal to the face</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>X-axis linear momentum</td></tr>
 <tr><td>Boolean</td><td>inviscidX</td><td>true</td><td>Inviscid</td></tr>
-<tr><td><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Velocity</a></td><td>mechanicalX</td><td>redeclare Mechanical.Velocit...</td><td>Condition</td></tr>
+<tr><td><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Velocity</a></td><td>transverseX</td><td>redeclare Mechanical.Velocit...</td><td>Condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Y-axis linear momentum</td></tr>
 <tr><td>Boolean</td><td>inviscidY</td><td>true</td><td>Inviscid</td></tr>
-<tr><td><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Velocity</a></td><td>mechanicalY</td><td>redeclare Mechanical.Velocit...</td><td>Condition</td></tr>
+<tr><td><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Velocity</a></td><td>transverseY</td><td>redeclare Mechanical.Velocit...</td><td>Condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Z-axis linear momentum</td></tr>
 <tr><td>Boolean</td><td>inviscidZ</td><td>true</td><td>Inviscid</td></tr>
-<tr><td><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Velocity</a></td><td>mechanicalZ</td><td>redeclare Mechanical.Velocit...</td><td>Condition</td></tr>
+<tr><td><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Velocity</a></td><td>transverseZ</td><td>redeclare Mechanical.Velocit...</td><td>Condition</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus for measurements</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>negative</td><td>Negative-side connector for material, linear momentum, and heat</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>positive</td><td>Positive-side connector for material, linear momentum, and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>negative</td><td>Negative-side connector for linear momentum and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>positive</td><td>Positive-side connector for linear momentum and heat</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -115,55 +115,55 @@ Extends from <a href="FCSys_Sensors_FaceDifferential_BaseClasses.html#FCSys.Sens
   <font color="darkgreen">// option, e.g.,</font>
   <font color="darkgreen">//     enable=axis &lt;&gt; Axis.x.</font>
   <font color="darkgreen">// Therefore, the values of the enumerations are specified numerically.</font>
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalX <font color="blue">if </font>axis &lt;&gt; Axis.x<font color="blue"> and </font><font color="blue">not </font>
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Mechanical.Velocity</a> transverseX <font color="blue">if </font>axis &lt;&gt; Axis.x<font color="blue"> and </font><font color="blue">not </font>
     inviscidX <font color="darkgreen">&quot;Condition&quot;</font>;</textblock>
 
   <font color="darkgreen">// Y-axis mechanical</font>
   <font color="blue">parameter </font>Boolean inviscidY=true <font color="darkgreen">&quot;Inviscid&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalY <font color="blue">if </font>axis &lt;&gt; Axis.y<font color="blue"> and </font><font color="blue">not </font>
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Mechanical.Velocity</a> transverseY <font color="blue">if </font>axis &lt;&gt; Axis.y<font color="blue"> and </font><font color="blue">not </font>
     inviscidY <font color="darkgreen">&quot;Condition&quot;</font>;</textblock>
 
   <font color="darkgreen">// Z-axis mechanical</font>
   <font color="blue">parameter </font>Boolean inviscidZ=true <font color="darkgreen">&quot;Inviscid&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalZ <font color="blue">if </font>axis &lt;&gt; Axis.z<font color="blue"> and </font><font color="blue">not </font>
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Mechanical.Velocity</a> transverseZ <font color="blue">if </font>axis &lt;&gt; Axis.z<font color="blue"> and </font><font color="blue">not </font>
     inviscidZ <font color="darkgreen">&quot;Condition&quot;</font>;</textblock>
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">FCSys.Connectors.Face</a> negative(
-    <font color="blue">final </font>thermoOpt=thermoOpt,
+    <font color="blue">final </font>isobaric=isobaric,
     <font color="blue">final </font>inviscidX=inviscidX,
     <font color="blue">final </font>inviscidY=inviscidY,
     <font color="blue">final </font>inviscidZ=inviscidZ) <font color="darkgreen">
-    &quot;Negative-side connector for material, linear momentum, and heat&quot;</font>;</textblock>
+    &quot;Negative-side connector for linear momentum and heat&quot;</font>;</textblock>
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">FCSys.Connectors.Face</a> positive(
-    <font color="blue">final </font>thermoOpt=thermoOpt,
+    <font color="blue">final </font>isobaric=isobaric,
     <font color="blue">final </font>inviscidX=inviscidX,
     <font color="blue">final </font>inviscidY=inviscidY,
     <font color="blue">final </font>inviscidZ=inviscidZ) <font color="darkgreen">
-    &quot;Positive-side connector for material, linear momentum, and heat&quot;</font>;</textblock>
+    &quot;Positive-side connector for linear momentum and heat&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Material</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(material.negative, negative.material);
-  <font color="red">connect</font>(material.positive, positive.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(material.negative, negative.normal);
+  <font color="red">connect</font>(material.positive, positive.normal);</textblock>
 
   <font color="darkgreen">// X-axis mechanical</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalX.negative, negative.mechanicalX);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverseX.negative, negative.transverseX);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalX.positive, positive.mechanicalX);
-  <font color="red">connect</font>(mechanicalX.y, y.mechanicalX);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverseX.positive, positive.transverseX);
+  <font color="red">connect</font>(transverseX.y, y.transverseX);</textblock>
 
   <font color="darkgreen">// Y-axis mechanical</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalY.negative, negative.mechanicalY);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverseY.negative, negative.transverseY);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalY.positive, positive.mechanicalY);
-  <font color="red">connect</font>(mechanicalY.y, y.mechanicalY);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverseY.positive, positive.transverseY);
+  <font color="red">connect</font>(transverseY.y, y.transverseY);</textblock>
 
   <font color="darkgreen">// Z-axis mechanical</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalZ.negative, negative.mechanicalZ);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverseZ.negative, negative.transverseZ);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalZ.positive, positive.mechanicalZ);
-  <font color="red">connect</font>(mechanicalZ.y, y.mechanicalZ);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverseZ.positive, positive.transverseZ);
+  <font color="red">connect</font>(transverseZ.y, y.transverseZ);</textblock>
 
   <font color="darkgreen">// Thermal</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(thermal.negative, negative.thermal);</textblock>
@@ -183,22 +183,22 @@ Extends from <a href="FCSys_Sensors_FaceDifferential_BaseClasses.html#FCSys.Sens
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a></td><td>thermoOpt</td><td>ThermoOpt.ClosedAdiabatic</td><td>Options for material and thermal subconnectors</td></tr>
+<tr><td>Boolean</td><td>isobaric</td><td>false</td><td>Isobaric condition</td></tr>
 <tr><td><a href="FCSys_Sensors_FaceDifferential_Material.html#FCSys.Sensors.FaceDifferential.Material.Density">Density</a></td><td>material</td><td>redeclare Material.Density m...</td><td>Type of sensor</td></tr>
 <tr><td><a href="FCSys_Sensors_FaceDifferential_Thermal.html#FCSys.Sensors.FaceDifferential.Thermal.Temperature">Temperature</a></td><td>thermal</td><td>redeclare Thermal.Temperatur...</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Y-axis linear momentum</td></tr>
 <tr><td>Boolean</td><td>inviscidY</td><td>true</td><td>Inviscid</td></tr>
-<tr><td><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Velocity</a></td><td>mechanicalY</td><td>redeclare Mechanical.Velocit...</td><td>Condition</td></tr>
+<tr><td><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Velocity</a></td><td>transverseY</td><td>redeclare Mechanical.Velocit...</td><td>Condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Z-axis linear momentum</td></tr>
 <tr><td>Boolean</td><td>inviscidZ</td><td>true</td><td>Inviscid</td></tr>
-<tr><td><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Velocity</a></td><td>mechanicalZ</td><td>redeclare Mechanical.Velocit...</td><td>Condition</td></tr>
+<tr><td><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Velocity</a></td><td>transverseZ</td><td>redeclare Mechanical.Velocit...</td><td>Condition</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus for measurements</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FaceX</a></td><td>negative</td><td>Negative-side connector for material, linear momentum, and heat</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FaceX</a></td><td>positive</td><td>Positive-side connector for material, linear momentum, and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>negative</td><td>Negative-side connector for linear momentum and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>positive</td><td>Positive-side connector for linear momentum and heat</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -209,40 +209,40 @@ Extends from <a href="FCSys_Sensors_FaceDifferential_BaseClasses.html#FCSys.Sens
 
   <font color="darkgreen">// Y-axis mechanical</font>
   <font color="blue">parameter </font>Boolean inviscidY=true <font color="darkgreen">&quot;Inviscid&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalY <font color="blue">if </font><font color="blue">not </font>inviscidY <font color="darkgreen">&quot;Condition&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Mechanical.Velocity</a> transverseY <font color="blue">if </font><font color="blue">not </font>inviscidY <font color="darkgreen">&quot;Condition&quot;</font>;</textblock>
 
   <font color="darkgreen">// Z-axis mechanical</font>
   <font color="blue">parameter </font>Boolean inviscidZ=true <font color="darkgreen">&quot;Inviscid&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalZ <font color="blue">if </font><font color="blue">not </font>inviscidZ <font color="darkgreen">&quot;Condition&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Mechanical.Velocity</a> transverseZ <font color="blue">if </font><font color="blue">not </font>inviscidZ <font color="darkgreen">&quot;Condition&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FCSys.Connectors.FaceX</a> negative(
-    <font color="blue">final </font>thermoOpt=thermoOpt,
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">FCSys.Connectors.Face</a> negative(
+    <font color="blue">final </font>isobaric=isobaric,
     <font color="blue">final </font>inviscidY=inviscidY,
     <font color="blue">final </font>inviscidZ=inviscidZ) <font color="darkgreen">
-    &quot;Negative-side connector for material, linear momentum, and heat&quot;</font>;</textblock>
+    &quot;Negative-side connector for linear momentum and heat&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FCSys.Connectors.FaceX</a> positive(
-    <font color="blue">final </font>thermoOpt=thermoOpt,
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">FCSys.Connectors.Face</a> positive(
+    <font color="blue">final </font>isobaric=isobaric,
     <font color="blue">final </font>inviscidY=inviscidY,
     <font color="blue">final </font>inviscidZ=inviscidZ) <font color="darkgreen">
-    &quot;Positive-side connector for material, linear momentum, and heat&quot;</font>;</textblock>
+    &quot;Positive-side connector for linear momentum and heat&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Material</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(material.negative, negative.material);
-  <font color="red">connect</font>(material.positive, positive.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(material.negative, negative.normal);
+  <font color="red">connect</font>(material.positive, positive.normal);</textblock>
 
   <font color="darkgreen">// Y-axis mechanical</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalY.negative, negative.mechanicalY);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverseY.negative, negative.transverseY);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalY.positive, positive.mechanicalY);
-  <font color="red">connect</font>(mechanicalY.y, y.mechanicalY);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverseY.positive, positive.transverseY);
+  <font color="red">connect</font>(transverseY.y, y.transverseY);</textblock>
 
   <font color="darkgreen">// Z-axis mechanical</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalZ.negative, negative.mechanicalZ);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverseZ.negative, negative.transverseZ);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalZ.positive, positive.mechanicalZ);
-  <font color="red">connect</font>(mechanicalZ.y, y.mechanicalZ);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverseZ.positive, positive.transverseZ);
+  <font color="red">connect</font>(transverseZ.y, y.transverseZ);</textblock>
 
   <font color="darkgreen">// Thermal</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(thermal.negative, negative.thermal);</textblock>
@@ -262,22 +262,22 @@ Extends from <a href="FCSys_Sensors_FaceDifferential_BaseClasses.html#FCSys.Sens
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a></td><td>thermoOpt</td><td>ThermoOpt.ClosedAdiabatic</td><td>Options for material and thermal subconnectors</td></tr>
+<tr><td>Boolean</td><td>isobaric</td><td>false</td><td>Isobaric condition</td></tr>
 <tr><td><a href="FCSys_Sensors_FaceDifferential_Material.html#FCSys.Sensors.FaceDifferential.Material.Density">Density</a></td><td>material</td><td>redeclare Material.Density m...</td><td>Type of sensor</td></tr>
 <tr><td><a href="FCSys_Sensors_FaceDifferential_Thermal.html#FCSys.Sensors.FaceDifferential.Thermal.Temperature">Temperature</a></td><td>thermal</td><td>redeclare Thermal.Temperatur...</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Z-axis linear momentum</td></tr>
 <tr><td>Boolean</td><td>inviscidZ</td><td>true</td><td>Inviscid</td></tr>
-<tr><td><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Velocity</a></td><td>mechanicalZ</td><td>redeclare Mechanical.Velocit...</td><td>Condition</td></tr>
+<tr><td><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Velocity</a></td><td>transverseZ</td><td>redeclare Mechanical.Velocit...</td><td>Condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>X-axis linear momentum</td></tr>
 <tr><td>Boolean</td><td>inviscidX</td><td>true</td><td>Inviscid</td></tr>
-<tr><td><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Velocity</a></td><td>mechanicalX</td><td>redeclare Mechanical.Velocit...</td><td>Condition</td></tr>
+<tr><td><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Velocity</a></td><td>transverseX</td><td>redeclare Mechanical.Velocit...</td><td>Condition</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus for measurements</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FaceY</a></td><td>negative</td><td>Negative-side connector for material, linear momentum, and heat</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FaceY</a></td><td>positive</td><td>Positive-side connector for material, linear momentum, and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>negative</td><td>Negative-side connector for linear momentum and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>positive</td><td>Positive-side connector for linear momentum and heat</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -288,40 +288,40 @@ Extends from <a href="FCSys_Sensors_FaceDifferential_BaseClasses.html#FCSys.Sens
 
   <font color="darkgreen">// Z-axis mechanical</font>
   <font color="blue">parameter </font>Boolean inviscidZ=true <font color="darkgreen">&quot;Inviscid&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalZ <font color="blue">if </font><font color="blue">not </font>inviscidZ <font color="darkgreen">&quot;Condition&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Mechanical.Velocity</a> transverseZ <font color="blue">if </font><font color="blue">not </font>inviscidZ <font color="darkgreen">&quot;Condition&quot;</font>;</textblock>
 
   <font color="darkgreen">// X-axis mechanical</font>
   <font color="blue">parameter </font>Boolean inviscidX=true <font color="darkgreen">&quot;Inviscid&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalX <font color="blue">if </font><font color="blue">not </font>inviscidX <font color="darkgreen">&quot;Condition&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Mechanical.Velocity</a> transverseX <font color="blue">if </font><font color="blue">not </font>inviscidX <font color="darkgreen">&quot;Condition&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FCSys.Connectors.FaceY</a> negative(
-    <font color="blue">final </font>thermoOpt=thermoOpt,
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">FCSys.Connectors.Face</a> negative(
+    <font color="blue">final </font>isobaric=isobaric,
     <font color="blue">final </font>inviscidX=inviscidX,
     <font color="blue">final </font>inviscidZ=inviscidZ) <font color="darkgreen">
-    &quot;Negative-side connector for material, linear momentum, and heat&quot;</font>;</textblock>
+    &quot;Negative-side connector for linear momentum and heat&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FCSys.Connectors.FaceY</a> positive(
-    <font color="blue">final </font>thermoOpt=thermoOpt,
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">FCSys.Connectors.Face</a> positive(
+    <font color="blue">final </font>isobaric=isobaric,
     <font color="blue">final </font>inviscidX=inviscidX,
     <font color="blue">final </font>inviscidZ=inviscidZ) <font color="darkgreen">
-    &quot;Positive-side connector for material, linear momentum, and heat&quot;</font>;</textblock>
+    &quot;Positive-side connector for linear momentum and heat&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Material</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(material.negative, negative.material);
-  <font color="red">connect</font>(material.positive, positive.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(material.negative, negative.normal);
+  <font color="red">connect</font>(material.positive, positive.normal);</textblock>
 
   <font color="darkgreen">// Z-axis mechanical</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalZ.negative, negative.mechanicalZ);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverseZ.negative, negative.transverseZ);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalZ.positive, positive.mechanicalZ);
-  <font color="red">connect</font>(mechanicalZ.y, y.mechanicalZ);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverseZ.positive, positive.transverseZ);
+  <font color="red">connect</font>(transverseZ.y, y.transverseZ);</textblock>
 
   <font color="darkgreen">// X-axis mechanical</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalX.negative, negative.mechanicalX);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverseX.negative, negative.transverseX);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalX.positive, positive.mechanicalX);
-  <font color="red">connect</font>(mechanicalX.y, y.mechanicalX);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverseX.positive, positive.transverseX);
+  <font color="red">connect</font>(transverseX.y, y.transverseX);</textblock>
 
   <font color="darkgreen">// Thermal</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(thermal.negative, negative.thermal);</textblock>
@@ -341,22 +341,22 @@ Extends from <a href="FCSys_Sensors_FaceDifferential_BaseClasses.html#FCSys.Sens
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a></td><td>thermoOpt</td><td>ThermoOpt.ClosedAdiabatic</td><td>Options for material and thermal subconnectors</td></tr>
+<tr><td>Boolean</td><td>isobaric</td><td>false</td><td>Isobaric condition</td></tr>
 <tr><td><a href="FCSys_Sensors_FaceDifferential_Material.html#FCSys.Sensors.FaceDifferential.Material.Density">Density</a></td><td>material</td><td>redeclare Material.Density m...</td><td>Type of sensor</td></tr>
 <tr><td><a href="FCSys_Sensors_FaceDifferential_Thermal.html#FCSys.Sensors.FaceDifferential.Thermal.Temperature">Temperature</a></td><td>thermal</td><td>redeclare Thermal.Temperatur...</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>X-axis linear momentum</td></tr>
 <tr><td>Boolean</td><td>inviscidX</td><td>true</td><td>Inviscid</td></tr>
-<tr><td><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Velocity</a></td><td>mechanicalX</td><td>redeclare Mechanical.Velocit...</td><td>Condition</td></tr>
+<tr><td><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Velocity</a></td><td>transverseX</td><td>redeclare Mechanical.Velocit...</td><td>Condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Y-axis linear momentum</td></tr>
 <tr><td>Boolean</td><td>inviscidY</td><td>true</td><td>Inviscid</td></tr>
-<tr><td><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Velocity</a></td><td>mechanicalY</td><td>redeclare Mechanical.Velocit...</td><td>Condition</td></tr>
+<tr><td><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Velocity</a></td><td>transverseY</td><td>redeclare Mechanical.Velocit...</td><td>Condition</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus for measurements</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FaceZ</a></td><td>negative</td><td>Negative-side connector for material, linear momentum, and heat</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FaceZ</a></td><td>positive</td><td>Positive-side connector for material, linear momentum, and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>negative</td><td>Negative-side connector for linear momentum and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>positive</td><td>Positive-side connector for linear momentum and heat</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -367,40 +367,40 @@ Extends from <a href="FCSys_Sensors_FaceDifferential_BaseClasses.html#FCSys.Sens
 
   <font color="darkgreen">// X-axis mechanical</font>
   <font color="blue">parameter </font>Boolean inviscidX=true <font color="darkgreen">&quot;Inviscid&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalX <font color="blue">if </font><font color="blue">not </font>inviscidX <font color="darkgreen">&quot;Condition&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Mechanical.Velocity</a> transverseX <font color="blue">if </font><font color="blue">not </font>inviscidX <font color="darkgreen">&quot;Condition&quot;</font>;</textblock>
 
   <font color="darkgreen">// Y-axis mechanical</font>
   <font color="blue">parameter </font>Boolean inviscidY=true <font color="darkgreen">&quot;Inviscid&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalY <font color="blue">if </font><font color="blue">not </font>inviscidY <font color="darkgreen">&quot;Condition&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Sensors_FaceDifferential_Mechanical.html#FCSys.Sensors.FaceDifferential.Mechanical.Velocity">Mechanical.Velocity</a> transverseY <font color="blue">if </font><font color="blue">not </font>inviscidY <font color="darkgreen">&quot;Condition&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FCSys.Connectors.FaceZ</a> negative(
-    <font color="blue">final </font>thermoOpt=thermoOpt,
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">FCSys.Connectors.Face</a> negative(
+    <font color="blue">final </font>isobaric=isobaric,
     <font color="blue">final </font>inviscidX=inviscidX,
     <font color="blue">final </font>inviscidY=inviscidY) <font color="darkgreen">
-    &quot;Negative-side connector for material, linear momentum, and heat&quot;</font>;</textblock>
+    &quot;Negative-side connector for linear momentum and heat&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FCSys.Connectors.FaceZ</a> positive(
-    <font color="blue">final </font>thermoOpt=thermoOpt,
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">FCSys.Connectors.Face</a> positive(
+    <font color="blue">final </font>isobaric=isobaric,
     <font color="blue">final </font>inviscidX=inviscidX,
     <font color="blue">final </font>inviscidY=inviscidY) <font color="darkgreen">
-    &quot;Positive-side connector for material, linear momentum, and heat&quot;</font>;</textblock>
+    &quot;Positive-side connector for linear momentum and heat&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Material</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(material.negative, negative.material);
-  <font color="red">connect</font>(material.positive, positive.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(material.negative, negative.normal);
+  <font color="red">connect</font>(material.positive, positive.normal);</textblock>
 
   <font color="darkgreen">// X-axis mechanical</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalX.negative, negative.mechanicalX);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverseX.negative, negative.transverseX);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalX.positive, positive.mechanicalX);
-  <font color="red">connect</font>(mechanicalX.y, y.mechanicalX);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverseX.positive, positive.transverseX);
+  <font color="red">connect</font>(transverseX.y, y.transverseX);</textblock>
 
   <font color="darkgreen">// Y-axis mechanical</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalY.negative, negative.mechanicalY);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverseY.negative, negative.transverseY);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalY.positive, positive.mechanicalY);
-  <font color="red">connect</font>(mechanicalY.y, y.mechanicalY);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverseY.positive, positive.transverseY);
+  <font color="red">connect</font>(transverseY.y, y.transverseY);</textblock>
 
   <font color="darkgreen">// Thermal</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(thermal.negative, negative.thermal);</textblock>
@@ -414,7 +414,7 @@ Extends from <a href="FCSys_Sensors_FaceDifferential_BaseClasses.html#FCSys.Sens
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:26:48 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:28:11 2013.
 </div>
 </body>
 </html>

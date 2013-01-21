@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.BCs.ChemicalBus</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="&lt;html&gt;BCs for the &lt;a href=\&quot;modelica://FCSys.Connectors.ChemicalBus\&quot;&gt;ChemicalBus&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -150,7 +150,6 @@ Extends from <a href="FCSys_BCs_ChemicalBus_BaseClasses.html#FCSys.BCs.ChemicalB
   <font color="darkgreen">// O2</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.chemical, chemical.O2);
   <font color="red">connect</font>(u.O2, O2.u);</textblock>
-
 <font color="blue">end </font>Gas;
 </pre>
 <hr>
@@ -169,9 +168,8 @@ Extends from <a href="FCSys_BCs_ChemicalBus_BaseClasses.html#FCSys.BCs.ChemicalB
 <tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
-<tr><td>Boolean</td><td>inclC</td><td>false</td><td>Carbon (C)</td></tr>
-<tr><td><a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical.Species">Species</a></td><td>C</td><td>&nbsp;</td><td>Model</td></tr>
-<tr><td>Boolean</td><td>&#39;incle-&#39;</td><td>false</td><td>Electrons (e<sup>-</sup>)</td></tr>
+<tr><td>Boolean</td><td>Error</td><td>&nbsp;</td><td>Carbon plus (C<sup>+</sup>)</td></tr>
+<tr><td><a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical.Species">Species</a></td><td>&#39;C+&#39;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 <tr><td><a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical.Species">Species</a></td><td>&#39;e-&#39;</td><td>&nbsp;</td><td>Model</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
@@ -187,14 +185,12 @@ Extends from <a href="FCSys_BCs_ChemicalBus_BaseClasses.html#FCSys.BCs.ChemicalB
   <font color="blue">extends </font><a href="FCSys_BCs_ChemicalBus_BaseClasses.html#FCSys.BCs.ChemicalBus.BaseClasses.NullPhase">BaseClasses.NullPhase</a>;
 
   <font color="darkgreen">// Conditionally include species.</font>
-  <font color="blue">parameter </font>Boolean inclC=false <font color="darkgreen">&quot;Carbon (C)&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical.Species">Chemical.Species</a> C(
+  <font color="blue">parameter </font>Boolean Error <font color="darkgreen">&quot;Carbon plus (C<sup>+</sup>)&quot;</font>;
+  <a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical.Species">Chemical.Species</a> &#39;C+&#39;(
     <font color="blue">final </font>inclLinX=inclLinX,
     <font color="blue">final </font>inclLinY=inclLinY,
     <font color="blue">final </font>inclLinZ=inclLinZ,
-    <font color="blue">redeclare </font><a href="FCSys_Characteristics_C_Graphite.html#FCSys.Characteristics.C.Graphite">FCSys.Characteristics.C.Graphite</a> Data) <font color="blue">if </font>inclC <font color="darkgreen">&quot;Model&quot;</font>;</textblock>
-
-  <font color="blue">parameter </font>Boolean &#39;incle-&#39;=false <font color="darkgreen">&quot;Electrons (e<sup>-</sup>)&quot;</font>;
+    <font color="blue">redeclare </font><a href="FCSys_Characteristics_'C+'_Graphite.html#FCSys.Characteristics.'C+'.Graphite">FCSys.Characteristics.'C+'.Graphite</a> Data) <font color="blue">if </font>'' + ERROR;
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical.Species">Chemical.Species</a> &#39;e-&#39;(
     <font color="blue">final </font>inclLinX=inclLinX,
     <font color="blue">final </font>inclLinY=inclLinY,
@@ -202,14 +198,13 @@ Extends from <a href="FCSys_BCs_ChemicalBus_BaseClasses.html#FCSys.BCs.ChemicalB
     <font color="blue">redeclare </font><a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a> Data) <font color="blue">if </font>'incle-' <font color="darkgreen">&quot;Model&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
-  <font color="darkgreen">// C</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C.chemical, chemical.C);
-  <font color="red">connect</font>(u.C, C.u);</textblock>
+  <font color="darkgreen">// C+</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('C+'.chemical, chemical.'C+');
+  <font color="red">connect</font>(u.'C+', 'C+'.u);</textblock>
 
   <font color="darkgreen">// e-</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.chemical, chemical.'e-');
   <font color="red">connect</font>(u.'e-', 'e-'.u);</textblock>
-
 <font color="blue">end </font>Graphite;
 </pre>
 <hr>
@@ -228,12 +223,12 @@ Extends from <a href="FCSys_BCs_ChemicalBus_BaseClasses.html#FCSys.BCs.ChemicalB
 <tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
-<tr><td>Boolean</td><td>inclC19HF37O5S</td><td>false</td><td>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</td></tr>
-<tr><td><a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical.Species">Species</a></td><td>C19HF37O5S</td><td>&nbsp;</td><td>Model</td></tr>
-<tr><td>Boolean</td><td>inclH2O</td><td>false</td><td>Water (H<sub>2</sub>O)</td></tr>
-<tr><td><a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical.Species">Species</a></td><td>H2O</td><td>&nbsp;</td><td>Model</td></tr>
+<tr><td>Boolean</td><td>&#39;inclC19HF37O5S-&#39;</td><td>false</td><td>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)</td></tr>
+<tr><td><a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical.Species">Species</a></td><td>&#39;C19HF37O5S-&#39;</td><td>&nbsp;</td><td>Model</td></tr>
 <tr><td>Boolean</td><td>&#39;inclH+&#39;</td><td>false</td><td>Protons (H<sup>+</sup>)</td></tr>
 <tr><td><a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical.Species">Species</a></td><td>&#39;H+&#39;</td><td>&nbsp;</td><td>Model</td></tr>
+<tr><td>Boolean</td><td>inclH2O</td><td>false</td><td>Water (H<sub>2</sub>O)</td></tr>
+<tr><td><a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical.Species">Species</a></td><td>H2O</td><td>&nbsp;</td><td>Model</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -248,40 +243,39 @@ Extends from <a href="FCSys_BCs_ChemicalBus_BaseClasses.html#FCSys.BCs.ChemicalB
   <font color="blue">extends </font><a href="FCSys_BCs_ChemicalBus_BaseClasses.html#FCSys.BCs.ChemicalBus.BaseClasses.NullPhase">BaseClasses.NullPhase</a>;
 
   <font color="darkgreen">// Conditionally include species.</font>
-  <font color="blue">parameter </font>Boolean inclC19HF37O5S=false <font color="darkgreen">
-    &quot;Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical.Species">Chemical.Species</a> C19HF37O5S(
+  <font color="blue">parameter </font>Boolean &#39;inclC19HF37O5S-&#39;=false <font color="darkgreen">
+    &quot;Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical.Species">Chemical.Species</a> &#39;C19HF37O5S-&#39;(
     <font color="blue">final </font>inclLinX=inclLinX,
     <font color="blue">final </font>inclLinY=inclLinY,
     <font color="blue">final </font>inclLinZ=inclLinZ,
-    <font color="blue">redeclare </font><a href="FCSys_Characteristics_C19HF37O5S_Ionomer.html#FCSys.Characteristics.C19HF37O5S.Ionomer">FCSys.Characteristics.C19HF37O5S.Ionomer</a> Data) <font color="blue">if </font>inclC19HF37O5S <font color="darkgreen">
-    &quot;Model&quot;</font>;</textblock>
-  <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Water (H<sub>2</sub>O)&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical.Species">Chemical.Species</a> H2O(
-    <font color="blue">final </font>inclLinX=inclLinX,
-    <font color="blue">final </font>inclLinY=inclLinY,
-    <font color="blue">final </font>inclLinZ=inclLinZ,
-    <font color="blue">redeclare </font><a href="FCSys_Characteristics_H2O_Gas.html#FCSys.Characteristics.H2O.Gas">FCSys.Characteristics.H2O.Gas</a> Data) <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Model&quot;</font>;</textblock>
+    <font color="blue">redeclare </font><a href="FCSys_Characteristics_'C19HF37O5S-'_Ionomer.html#FCSys.Characteristics.'C19HF37O5S-'.Ionomer">FCSys.Characteristics.'C19HF37O5S-'.Ionomer</a> Data) <font color="blue">if </font>
+    'inclC19HF37O5S-' <font color="darkgreen">&quot;Model&quot;</font>;</textblock>
   <font color="blue">parameter </font>Boolean &#39;inclH+&#39;=false <font color="darkgreen">&quot;Protons (H<sup>+</sup>)&quot;</font>;
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical.Species">Chemical.Species</a> &#39;H+&#39;(
     <font color="blue">final </font>inclLinX=inclLinX,
     <font color="blue">final </font>inclLinY=inclLinY,
     <font color="blue">final </font>inclLinZ=inclLinZ,
     <font color="blue">redeclare </font><a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a> Data) <font color="blue">if </font>'inclH+' <font color="darkgreen">&quot;Model&quot;</font>;</textblock>
+  <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Water (H<sub>2</sub>O)&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_Chemical.html#FCSys.BCs.Chemical.Species">Chemical.Species</a> H2O(
+    <font color="blue">final </font>inclLinX=inclLinX,
+    <font color="blue">final </font>inclLinY=inclLinY,
+    <font color="blue">final </font>inclLinZ=inclLinZ,
+    <font color="blue">redeclare </font><a href="FCSys_Characteristics_H2O_Gas.html#FCSys.Characteristics.H2O.Gas">FCSys.Characteristics.H2O.Gas</a> Data) <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Model&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
-  <font color="darkgreen">// C19HF37O5S</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(C19HF37O5S.chemical, chemical.C19HF37O5S);
-  <font color="red">connect</font>(u.C19HF37O5S, C19HF37O5S.u);</textblock>
-
-  <font color="darkgreen">// H2O</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.chemical, chemical.H2O);
-  <font color="red">connect</font>(u.H2O, H2O.u);</textblock>
+  <font color="darkgreen">// C19HF37O5S-</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('C19HF37O5S-'.chemical, chemical.'C19HF37O5S-');
+  <font color="red">connect</font>(u.'C19HF37O5S-', 'C19HF37O5S-'.u);</textblock>
 
   <font color="darkgreen">// H+</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.chemical, chemical.'H+');
   <font color="red">connect</font>(u.'H+', 'H+'.u);</textblock>
 
+  <font color="darkgreen">// H2O</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.chemical, chemical.H2O);
+  <font color="red">connect</font>(u.H2O, H2O.u);</textblock>
 <font color="blue">end </font>Ionomer;
 </pre>
 <hr>
@@ -289,7 +283,7 @@ Extends from <a href="FCSys_BCs_ChemicalBus_BaseClasses.html#FCSys.BCs.ChemicalB
 <h2><img src="images/FCSys.BCs.ChemicalBus.GasI.png" alt="FCSys.BCs.ChemicalBus.Liquid" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BCs.ChemicalBus.Liquid"></a><a href="FCSys_BCs_ChemicalBus.html#FCSys.BCs.ChemicalBus">FCSys.BCs.ChemicalBus</a>.Liquid</h2>
 <b>BC for liquid</b><p>
-<img src="images/FCSys.BCs.ChemicalBus.LiquidD.png" alt="FCSys.BCs.ChemicalBus.Liquid">
+<img src="images/FCSys.BCs.ChemicalBus.IonomerD.png" alt="FCSys.BCs.ChemicalBus.Liquid">
 <p><h3>Information</h3></p>
 Extends from <a href="FCSys_BCs_ChemicalBus_BaseClasses.html#FCSys.BCs.ChemicalBus.BaseClasses.NullPhase">BaseClasses.NullPhase</a> (Empty BC for a phase (no species)).
 <p><h3>Parameters</h3><p>
@@ -327,7 +321,6 @@ Extends from <a href="FCSys_BCs_ChemicalBus_BaseClasses.html#FCSys.BCs.ChemicalB
   <font color="darkgreen">// H2O</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.chemical, chemical.H2O);
   <font color="red">connect</font>(u.H2O, H2O.u);</textblock>
-
 <font color="blue">end </font>Liquid;
 </pre>
       </div>
@@ -335,7 +328,7 @@ Extends from <a href="FCSys_BCs_ChemicalBus_BaseClasses.html#FCSys.BCs.ChemicalB
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:24:28 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:26:06 2013.
 </div>
 </body>
 </html>

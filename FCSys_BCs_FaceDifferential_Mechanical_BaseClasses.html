@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.BCs.FaceDifferential.Mechanical.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="Base classes (not for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -65,7 +65,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.BCs.FaceDifferential.Mechanical.BaseClasses.PartialBCI.png" alt="FCSys.BCs.FaceDifferential.Mechanical.BaseClasses.PartialBC" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BCs.FaceDifferential.Mechanical.BaseClasses.PartialBC"></a><a href="FCSys_BCs_FaceDifferential_Mechanical_BaseClasses.html#FCSys.BCs.FaceDifferential.Mechanical.BaseClasses">FCSys.BCs.FaceDifferential.Mechanical.BaseClasses</a>.PartialBC</h2>
 <b>Partial model for a BC for linear momentum</b><p>
-<img src="images/FCSys.BCs.FaceDifferential.Mechanical.VelocityD.png" alt="FCSys.BCs.FaceDifferential.Mechanical.BaseClasses.PartialBC">
+<img src="images/FCSys.BCs.FaceDifferential.Material.DensityD.png" alt="FCSys.BCs.FaceDifferential.Mechanical.BaseClasses.PartialBC">
 <p><h3>Information</h3></p>
 Extends from <a href="FCSys_BCs_FaceDifferential_BaseClasses.html#FCSys.BCs.FaceDifferential.BaseClasses.PartialBC">FaceDifferential.BaseClasses.PartialBC</a> (Partial model for a BC).
 <p><h3>Parameters</h3><p>
@@ -79,8 +79,6 @@ Extends from <a href="FCSys_BCs_FaceDifferential_BaseClasses.html#FCSys.BCs.Face
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Value of BC</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a></td><td>negative</td><td>Linear momentum connector for the negative face</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a></td><td>positive</td><td>Linear momentum connector for the positive face</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -91,9 +89,9 @@ Extends from <a href="FCSys_BCs_FaceDifferential_BaseClasses.html#FCSys.BCs.Face
   <font color="darkgreen">// Note:  This is included so that the type of BC is recorded with the</font>
   <font color="darkgreen">// results.</font>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">FCSys.Connectors.MechanicalTransport</a> negative <font color="darkgreen">
+<textblock type="annotcomp" expanded="false">  FCSys.Connectors.BaseClasses.Transverse negative <font color="darkgreen">
     &quot;Linear momentum connector for the negative face&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">FCSys.Connectors.MechanicalTransport</a> positive <font color="darkgreen">
+  FCSys.Connectors.BaseClasses.Transverse positive <font color="darkgreen">
     &quot;Linear momentum connector for the positive face&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
@@ -106,7 +104,7 @@ Extends from <a href="FCSys_BCs_FaceDifferential_BaseClasses.html#FCSys.BCs.Face
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:25:46 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:27:16 2013.
 </div>
 </body>
 </html>

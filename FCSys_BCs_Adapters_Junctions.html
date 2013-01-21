@@ -2,8 +2,8 @@
 <head>
 <title>FCSys.BCs.Adapters.Junctions</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
-<meta name="description" content="Junctions between pure substances and their mixtures">
+<meta name="date" content="2013-1-21">
+<meta name="description" content="&lt;html&gt;&lt;a href=\&quot;modelica://Modelica\&quot;&gt;Modelica&lt;/a&gt; junctions between pure substances and their mixtures&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
@@ -44,7 +44,7 @@
       <div class="body">
 
 <h2><a name="FCSys.BCs.Adapters.Junctions"></a><a href="FCSys_BCs_Adapters.html#FCSys.BCs.Adapters">FCSys.BCs.Adapters</a>.Junctions</h2>
-<b>Junctions between pure substances and their mixtures</b>
+<b><a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a> junctions between pure substances and their mixtures</b>
 <p>
 <p><h3>Information</h3></p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
@@ -70,12 +70,12 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p>
   Assumptions:
   <ol>
-  <li>The mixing is ideal.  If the pure substances are being combined, 
-  then the massic enthalpy of the mixture is the mass-weighted sum of the pure substances.  
+  <li>The mixing is ideal.  If the pure substances are being combined,
+  then the massic enthalpy of the mixture is the mass-weighted sum of the pure substances.
   If the mixture is being split, then each of the pure substances receives fluid
   at the same massic enthalpy.
   </li>
-  <li>The mixture observes Dalton's law.  The pressure of the mixture is the sum 
+  <li>The mixture observes Dalton's law.  The pressure of the mixture is the sum
   of the pressures of the pure substances.
   </li>
   </ol>
@@ -121,10 +121,10 @@ Extends from <a href="FCSys_BCs_Adapters_Junctions_BaseClasses.html#FCSys.BCs.Ad
   <font color="darkgreen">// Check the number and names of substances</font>
   <font color="red">assert</font>(MixtureMedium.nS == 2, &quot;The mixture medium must have exactly two substances.&quot;);
   <font color="red">assert</font>(MixtureMedium.substanceNames[1] == Medium1.substanceNames[1], &quot;The first substance of the mixture medium (MixtureMedium) is \&quot;&quot;
-     + MixtureMedium.substanceNames[1] + &quot;\&quot;, 
+     + MixtureMedium.substanceNames[1] + &quot;\&quot;,
 but the first pure substance is \&quot;&quot; + Medium1.substanceNames[1] + &quot;\&quot;.&quot;);
   <font color="red">assert</font>(MixtureMedium.substanceNames[2] == Medium2.substanceNames[1], &quot;The second substance of the mixture medium (MixtureMedium) is \&quot;&quot;
-     + MixtureMedium.substanceNames[2] + &quot;\&quot;, 
+     + MixtureMedium.substanceNames[2] + &quot;\&quot;,
 but the second pure substance is \&quot;&quot; + Medium2.substanceNames[1] + &quot;\&quot;.&quot;);
 
   <font color="darkgreen">// Check the extra properties.</font>
@@ -132,12 +132,12 @@ but the second pure substance is \&quot;&quot; + Medium2.substanceNames[1] + &qu
   <font color="blue">for </font>i<font color="blue"> in </font>1:MixtureMedium.nC<font color="blue"> loop</font>
     <font color="red">assert</font>(MixtureMedium.extraPropertiesNames[i] == Medium1.extraPropertiesNames[
       i], &quot;Extra property #&quot; + <font color="red">String</font>(i) + &quot; of the mixture medium (MixtureMedium) is \&quot;&quot;
-       + MixtureMedium.extraPropertiesNames[i] + &quot;\&quot;, 
+       + MixtureMedium.extraPropertiesNames[i] + &quot;\&quot;,
 but that of the first pure substance (Medium1) is \&quot;&quot; + Medium1.extraPropertiesNames[
       i] + &quot;\&quot;.&quot;);
     <font color="red">assert</font>(MixtureMedium.extraPropertiesNames[i] == Medium2.extraPropertiesNames[
       i], &quot;Extra property #&quot; + <font color="red">String</font>(i) + &quot; of the mixture medium (MixtureMedium) is \&quot;&quot;
-       + MixtureMedium.extraPropertiesNames[i] + &quot;\&quot;, 
+       + MixtureMedium.extraPropertiesNames[i] + &quot;\&quot;,
 but that of the second pure substance (Medium2) is \&quot;&quot; + Medium2.extraPropertiesNames[
       i] + &quot;\&quot;.&quot;);
   <font color="blue">end for</font>;
@@ -176,12 +176,12 @@ but that of the second pure substance (Medium2) is \&quot;&quot; + Medium2.extra
 <p>
   Assumptions:
   <ol>
-  <li>The mixing is ideal.  If the pure substances are being combined, 
-  then the massic enthalpy of the mixture is the mass-weighted sum of the pure substances.  
+  <li>The mixing is ideal.  If the pure substances are being combined,
+  then the massic enthalpy of the mixture is the mass-weighted sum of the pure substances.
   If the mixture is being split, then each of the pure substances receives fluid
   at the same massic enthalpy.
   </li>
-  <li>The mixture observes Dalton's law.  The pressure of the mixture is the sum 
+  <li>The mixture observes Dalton's law.  The pressure of the mixture is the sum
   of the pressures of the pure substances.
   </li>
   </ol>
@@ -209,9 +209,6 @@ Extends from <a href="FCSys_BCs_Adapters_Junctions_BaseClasses.html#FCSys.BCs.Ad
   &quot;Junction between three pure substances and their mixture&quot;</font>
   <font color="blue">extends </font><a href="FCSys_BCs_Adapters_Junctions_BaseClasses.html#FCSys.BCs.Adapters.Junctions.BaseClasses.PartialJunction">BaseClasses.PartialJunction</a>(<font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font>
       MixtureMedium = <a href="FCSys_BCs_Adapters_Media_CathodeGas.html#FCSys.BCs.Adapters.Media.CathodeGas">Media.CathodeGas</a>);
-  <font color="darkgreen">// Note:  In Dymola 7.4, &quot;redeclare package MixtureMedium = Media.CathodeGas&quot;</font>
-  <font color="darkgreen">// must be used instead of &quot;redeclare Media.CathodeGas MixtureMedium&quot; in</font>
-  <font color="darkgreen">// order for this model to pass its check.  A similar note applies below.</font>
 
   <font color="blue">replaceable </font><font color="blue">package</font> Medium1 = <a href="http://build.openmodelica.org/Documentation/Modelica.Media.IdealGases.SingleGases.H2O.html#Modelica.Media.IdealGases.SingleGases.H2O">Modelica.Media.IdealGases.SingleGases.H2O</a> (
         referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
@@ -241,14 +238,14 @@ Extends from <a href="FCSys_BCs_Adapters_Junctions_BaseClasses.html#FCSys.BCs.Ad
   <font color="darkgreen">// Check the number and names of substances</font>
   <font color="red">assert</font>(MixtureMedium.nS == 3, &quot;The mixture medium must have exactly three substances.&quot;);
   <font color="red">assert</font>(MixtureMedium.substanceNames[1] == Medium1.substanceNames[1], &quot;The first substance of the mixture medium (MixtureMedium) is \&quot;&quot;
-     + MixtureMedium.substanceNames[1] + &quot;\&quot;, \nbut the first pure substance is \&quot;&quot;
-     + Medium1.substanceNames[1] + &quot;\&quot;.&quot;);
+     + MixtureMedium.substanceNames[1] + &quot;\&quot;,
+but the first pure substance is \&quot;&quot; + Medium1.substanceNames[1] + &quot;\&quot;.&quot;);
   <font color="red">assert</font>(MixtureMedium.substanceNames[2] == Medium2.substanceNames[1], &quot;The second substance of the mixture medium (MixtureMedium) is \&quot;&quot;
-     + MixtureMedium.substanceNames[2] + &quot;\&quot;, \nbut the second pure substance is \&quot;&quot;
-     + Medium2.substanceNames[1] + &quot;\&quot;.&quot;);
+     + MixtureMedium.substanceNames[2] + &quot;\&quot;,
+but the second pure substance is \&quot;&quot; + Medium2.substanceNames[1] + &quot;\&quot;.&quot;);
   <font color="red">assert</font>(MixtureMedium.substanceNames[3] == Medium3.substanceNames[1], &quot;The second substance of the mixture medium (MixtureMedium) is \&quot;&quot;
-     + MixtureMedium.substanceNames[3] + &quot;\&quot;, \nbut the third pure substance is \&quot;&quot;
-     + Medium2.substanceNames[1] + &quot;\&quot;.&quot;);
+     + MixtureMedium.substanceNames[3] + &quot;\&quot;,
+but the third pure substance is \&quot;&quot; + Medium2.substanceNames[1] + &quot;\&quot;.&quot;);
 
   <font color="darkgreen">// Check the extra properties.</font>
   <font color="red">assert</font>(MixtureMedium.nC == Medium1.nC<font color="blue"> and </font>MixtureMedium.nC == Medium2.nC<font color="blue"> and </font>
@@ -256,16 +253,19 @@ Extends from <a href="FCSys_BCs_Adapters_Junctions_BaseClasses.html#FCSys.BCs.Ad
   <font color="blue">for </font>i<font color="blue"> in </font>1:MixtureMedium.nC<font color="blue"> loop</font>
     <font color="red">assert</font>(MixtureMedium.extraPropertiesNames[i] == Medium1.extraPropertiesNames[
       i], &quot;Extra property #&quot; + <font color="red">String</font>(i) + &quot; of the mixture medium (MixtureMedium) is \&quot;&quot;
-       + MixtureMedium.extraPropertiesNames[i] + &quot;\&quot;, \nbut that of the first pure substance (Medium1) is \&quot;&quot;
-       + Medium1.extraPropertiesNames[i] + &quot;\&quot;.&quot;);
+       + MixtureMedium.extraPropertiesNames[i] + &quot;\&quot;,
+but that of the first pure substance (Medium1) is \&quot;&quot; + Medium1.extraPropertiesNames[
+      i] + &quot;\&quot;.&quot;);
     <font color="red">assert</font>(MixtureMedium.extraPropertiesNames[i] == Medium2.extraPropertiesNames[
       i], &quot;Extra property #&quot; + <font color="red">String</font>(i) + &quot; of the mixture medium (MixtureMedium) is \&quot;&quot;
-       + MixtureMedium.extraPropertiesNames[i] + &quot;\&quot;, \nbut that of the second pure substance (Medium2) is \&quot;&quot;
-       + Medium2.extraPropertiesNames[i] + &quot;\&quot;.&quot;);
+       + MixtureMedium.extraPropertiesNames[i] + &quot;\&quot;,
+but that of the second pure substance (Medium2) is \&quot;&quot; + Medium2.extraPropertiesNames[
+      i] + &quot;\&quot;.&quot;);
     <font color="red">assert</font>(MixtureMedium.extraPropertiesNames[i] == Medium3.extraPropertiesNames[
       i], &quot;Extra property #&quot; + <font color="red">String</font>(i) + &quot; of the mixture medium (MixtureMedium) is \&quot;&quot;
-       + MixtureMedium.extraPropertiesNames[i] + &quot;\&quot;, \nbut that of the third pure substance (Medium3) is \&quot;&quot;
-       + Medium3.extraPropertiesNames[i] + &quot;\&quot;.&quot;);
+       + MixtureMedium.extraPropertiesNames[i] + &quot;\&quot;,
+but that of the third pure substance (Medium3) is \&quot;&quot; + Medium3.extraPropertiesNames[
+      i] + &quot;\&quot;.&quot;);
   <font color="blue">end for</font>;
 
 <font color="blue">equation </font>
@@ -300,7 +300,7 @@ Extends from <a href="FCSys_BCs_Adapters_Junctions_BaseClasses.html#FCSys.BCs.Ad
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:24:14 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:25:53 2013.
 </div>
 </body>
 </html>

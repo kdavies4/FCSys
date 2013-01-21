@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="Base classes (not for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -64,7 +64,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p>Notes:
   <ul><li>This model must be be extended so that models can be added for
   relevant species, phases, and reactions.</li>
-  <li>Material will be transported between two subregions only if both of the connected faces are marked
+  <li>Normal pressure gradients (and thus pressure) will be transported between two subregions only if both of the connected faces are marked
   as open (<code>thermoOpt==ThermoOpt.OpenDiabatic</code>)
   within the instances of the matched <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species">Species</a> models.
   If either or both of the faces are closed (<code>thermoOpt==ThermoOpt.ClosedAdiabatic</code> or
@@ -84,9 +84,9 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 <tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclXFaces</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>true</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>true</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>true</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>true</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -111,36 +111,39 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
       2)] <font color="blue">for </font>axis<font color="blue"> in </font>Axis} <font color="darkgreen">&quot;Cross-sectional area&quot;</font>;
   <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V=<font color="red">product</font>(L) <font color="darkgreen">&quot;Volume&quot;</font>;
 
-  <font color="darkgreen">// Assumptions about components of linear momentum</font>
+  <font color="darkgreen">// Assumptions</font>
+  <font color="darkgreen">// -----------</font>
+  <font color="darkgreen">// Included components of linear momentum</font>
   <font color="blue">parameter </font>Boolean inclLinX=true <font color="darkgreen">&quot;X&quot;</font>;
   <font color="blue">parameter </font>Boolean inclLinY=false <font color="darkgreen">&quot;Y&quot;</font>;
   <font color="blue">parameter </font>Boolean inclLinZ=false <font color="darkgreen">&quot;Z&quot;</font>;
+  <font color="darkgreen">//</font>
+  <font color="darkgreen">// Included faces</font>
+  <font color="blue">parameter </font>Boolean inclFacesX=true <font color="darkgreen">&quot;X&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclFacesY=true <font color="darkgreen">&quot;Y&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclFacesZ=true <font color="darkgreen">&quot;Z&quot;</font>;
 
-  <font color="darkgreen">// Assumptions about faces</font>
-  <font color="blue">parameter </font>Boolean inclXFaces=true <font color="darkgreen">&quot;X&quot;</font>;
-  <font color="blue">parameter </font>Boolean inclYFaces=true <font color="darkgreen">&quot;Y&quot;</font>;
-  <font color="blue">parameter </font>Boolean inclZFaces=true <font color="darkgreen">&quot;Z&quot;</font>;
-
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> xNegative <font color="blue">if </font>inclXFaces <font color="darkgreen">
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> xNegative <font color="blue">if </font>inclFacesX <font color="darkgreen">
     &quot;Negative face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> xPositive <font color="blue">if </font>inclXFaces <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> xPositive <font color="blue">if </font>inclFacesX <font color="darkgreen">
     &quot;Positive face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> yNegative <font color="blue">if </font>inclYFaces <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> yNegative <font color="blue">if </font>inclFacesY <font color="darkgreen">
     &quot;Negative face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> yPositive <font color="blue">if </font>inclYFaces <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> yPositive <font color="blue">if </font>inclFacesY <font color="darkgreen">
     &quot;Positive face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> zNegative <font color="blue">if </font>inclZFaces <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> zNegative <font color="blue">if </font>inclFacesZ <font color="darkgreen">
     &quot;Negative face along the z axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> zPositive <font color="blue">if </font>inclZFaces <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> zPositive <font color="blue">if </font>inclFacesZ <font color="darkgreen">
     &quot;Positive face along the z axis&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.Volume">FCSys.Subregions.Volume</a> volume(<font color="blue">final </font>n_lin=n_lin, <font color="blue">final </font>V=V) <font color="darkgreen">
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.Volume">Volume</a> volume(<font color="blue">final </font>n_lin=n_lin, <font color="blue">final </font>V=V) <font color="darkgreen">
     &quot;Model to establish space for species&quot;</font>;</textblock>
 <font color="blue">protected </font>
   <font color="blue">final </font><font color="blue">parameter </font>Integer n_lin=<font color="red">countTrue</font>({inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">
     &quot;Number of components of linear momentum&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBusInternal">FCSys.Connectors.ChemicalBusInternal</a> chemical <font color="darkgreen">&quot;**&quot;</font>;
+
 <font color="blue">end </font>PartialSubregion;
 </pre>
       </div>
@@ -148,7 +151,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:31:32 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:32:26 2013.
 </div>
 </body>
 </html>

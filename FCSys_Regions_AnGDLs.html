@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Regions.AnGDLs</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="Anode gas diffusion layers">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -47,7 +47,7 @@
 <b>Anode gas diffusion layers</b>
 <p>
 <p><h3>Information</h3></p>
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages), <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.PackageUnderConstruction">FCSys.BaseClasses.Icons.PackageUnderConstruction</a> (Overlay that indicates a package is under construction).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
@@ -89,7 +89,7 @@ chemical/electrochemical species in and through the anode gas diffusion layer of
 The x axis is intended to extend from the anode to the cathode.
 The y axis extends along the length of the channel and
 the z axis extends across the width of the channel.</p><p>
-Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">FCSys.Regions.Region</a> (Base model for a 3D array of subregions).
+Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base model for a 3D array of subregions).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -100,9 +100,9 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">FCSys.Regions.Reg
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclXFaces</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -119,37 +119,40 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">FCSys.Regions.Reg
 <font color="blue">model</font> AnGDL <font color="darkgreen">&quot;Anode gas diffusion layer&quot;</font>
   <font color="darkgreen">//extends FCSys.BaseClasses.Icons.Names.Top4;</font>
   <font color="darkgreen">// Note:  Extensions of AnGDL should be placed directly in the AnGDLs</font>
-  <font color="darkgreen">// package rather than nested packages (e.g., by manufacturer) so that</font>
-  <font color="darkgreen">// __Dymola_choicesFromPackage can be used.  In Dymola 7.4 the</font>
-  <font color="darkgreen">// parameter dialogs launch too slowly when __Dymola_choicesAllMatching</font>
-  <font color="darkgreen">// is used.</font>
-  <font color="blue">extends </font><a href="FCSys_Regions.html#FCSys.Regions.Region">FCSys.Regions.Region</a>(
+  <font color="darkgreen">// package rather than subpackages (e.g., by manufacturer) so that</font>
+  <font color="darkgreen">// __Dymola_choicesFromPackage can be used.  Dymola 7.4 launches the</font>
+  <font color="darkgreen">// parameter dialogs too slowly when __Dymola_choicesAllMatching is</font>
+  <font color="darkgreen">// used.</font>
+
+  <font color="blue">extends </font><a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a>(
     L_x=<font color="red">fill</font>(0.3*U.mm/1, 1),
     L_y=<font color="red">fill</font>(1*U.m/1, 1),
     L_z=<font color="red">fill</font>(5*U.mm/1, 1),
-    <font color="blue">final </font>inclXFaces=true,
-    inclYFaces=false,
-    inclZFaces=false,
+    <font color="blue">final </font>inclFacesX=true,
+    inclFacesY=false,
+    inclFacesZ=false,
     <font color="blue">redeclare </font><a href="FCSys_Subregions.html#FCSys.Subregions.SubregionNoIonomer">FCSys.Subregions.SubregionNoIonomer</a> subregions[n_x, n_y, n_z](
-      <font color="blue">each </font>inclReact=false,
+      <font color="blue">each </font>inclLinX=false,
       <font color="blue">each </font>gas(
         inclH2=true,
         inclH2O=true,
         H2(
-          Lstar=1e9*U.m,
           p_IC=(1 - environment.x_H2O)*environment.p,
-          yNegative(slipX=false),
-          yPositive(slipX=false)),
+          xNegative(isobaric=false,inviscidY=false),
+          xPositive(isobaric=false)),
         H2O(
-          Lstar=1e9*U.m,
           p_IC=environment.x_H2O*environment.p,
-          yNegative(slipX=false),
-          yPositive(slipX=false))),
+          xNegative(isobaric=true, inviscidY=false),
+          xPositive(isobaric=false))),
       <font color="blue">each </font>graphite(
-        inclC=true,
+        &#39;inclC+&#39;=true,
         &#39;incle-&#39;=true,
-        C(V_IC=V - xV),
-        &#39;e-&#39;(yNegative(slipX=false), yPositive(slipX=false)))));
+        &#39;C+&#39;(V_IC=V - xV),
+        &#39;e-&#39;(xNegative(isobaric=false), xPositive(isobaric=false))),
+      <font color="blue">each </font>liquid(inclH2O=true, H2O(
+          V_IC=0,
+          xNegative(isobaric=false,inviscidY=false),
+          xPositive(isobaric=false)))));
 
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> x(nominal=1) = 0.76 <font color="darkgreen">&quot;Volumetric porosity&quot;</font>;
   <font color="darkgreen">// The default porosity is for Sigracet 24 BC.</font>
@@ -183,7 +186,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">FCSys.Regions.Reg
   <font color="darkgreen">// Teflon: 0.45 W/(m.K) at 400 K [Incropera2002, p. 916]</font>
 
 <textblock type="annotcomp" expanded="false"><font color="blue">protected </font>
-  <font color="blue">outer </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">BCs.Environment</a> environment <font color="darkgreen">&quot;Environmental settings&quot;</font>;</textblock>
+  <font color="blue">outer </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">BCs.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;</textblock>
 
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>AnGDL;
 </pre>
@@ -209,8 +212,8 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -254,8 +257,8 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -299,8 +302,8 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -344,8 +347,8 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -389,8 +392,8 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -434,8 +437,8 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -479,8 +482,8 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -524,8 +527,8 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -574,8 +577,8 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -624,8 +627,8 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -674,8 +677,8 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -707,7 +710,7 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:28:36 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:40:06 2013.
 </div>
 </body>
 </html>

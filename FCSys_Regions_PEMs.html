@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Regions.PEMs</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="Proton exchange membranes">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -47,7 +47,7 @@
 <b>Proton exchange membranes</b>
 <p>
 <p><h3>Information</h3></p>
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages), <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.PackageUnderConstruction">FCSys.BaseClasses.Icons.PackageUnderConstruction</a> (Overlay that indicates a package is under construction).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
@@ -87,9 +87,9 @@ the z axis extends across the width of the channel.</p>
 </ul></p>
 
 <p>For more information, see the
-    <a href="FCSys_Regions_BaseClasses.html#FCSys.Regions.BaseClasses.PartialRegion">PartialRegion</a> model.</p>
+    <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> model.</p>
 <p>
-Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">FCSys.Regions.Region</a> (Base model for a 3D array of subregions).
+Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base model for a 3D array of subregions).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -101,9 +101,9 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">FCSys.Regions.Reg
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>) [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclXFaces</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -120,49 +120,44 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">FCSys.Regions.Reg
 <font color="blue">model</font> PEM <font color="darkgreen">&quot;Proton exchange membrane&quot;</font>
   <font color="darkgreen">//extends FCSys.BaseClasses.Icons.Names.Top4;</font>
   <font color="darkgreen">// Note:  Extensions of PEM should be placed directly in the PEMs</font>
-  <font color="darkgreen">// package rather than nested packages (e.g., by manufacturer) so that</font>
-  <font color="darkgreen">// __Dymola_choicesFromPackage can be used.  In Dymola 7.4 the</font>
-  <font color="darkgreen">// parameter dialogs launch too slowly when __Dymola_choicesAllMatching</font>
-  <font color="darkgreen">// is used.</font>
+  <font color="darkgreen">// package rather than subpackages (e.g., by manufacturer) so that</font>
+  <font color="darkgreen">// __Dymola_choicesFromPackage can be used.  Dymola 7.4 launches the</font>
+  <font color="darkgreen">// parameter dialogs too slowly when __Dymola_choicesAllMatching is</font>
+  <font color="darkgreen">// used.</font>
 
-  <font color="blue">extends </font><a href="FCSys_Regions.html#FCSys.Regions.Region">FCSys.Regions.Region</a>(
+  <font color="blue">extends </font><a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a>(
     L_x=<font color="red">fill</font>(100*U.micro*U.m/1, 1),
     L_y=<font color="red">fill</font>(1*U.m/1, 1),
     L_z=<font color="red">fill</font>(5*U.mm/1, 1),
-    <font color="blue">final </font>inclXFaces=true,
-    inclYFaces=false,
-    inclZFaces=false,
+    <font color="blue">final </font>inclFacesX=true,
+    inclFacesY=false,
+    inclFacesZ=false,
     <font color="blue">redeclare </font><a href="FCSys_Subregions.html#FCSys.Subregions.SubregionIonomerOnly">FCSys.Subregions.SubregionIonomerOnly</a> subregions[n_x, n_y, n_z](
-      <font color="blue">each </font>inclReact=false,
-      <font color="blue">each </font>gas(inclH2O=true, H2O(
-          Lstar=1e7*U.m,
-          p_IC=environment.x_H2O*environment.p,
-          yNegative(slipX=false),
-          yPositive(slipX=false))),
+      <font color="blue">each </font>inclLinX=false,
       <font color="blue">each </font>ionomer(
-        inclC19HF37O5S=true,
+        &#39;inclC19HF37O5S-&#39;=true,
         &#39;inclH+&#39;=true,
-        C19HF37O5S(Lstar=1e7*U.m,V_IC=0.95*V),
-        &#39;H+&#39;(
-          Lstar=1e7*U.m,
-          yNegative(slipX=false),
-          yPositive(slipX=false)))));
+        inclH2O=true,
+        Error,
+        p_IC=0),
+      &#39;H+&#39;(xNegative(isobaric=false), xPositive(isobaric=false)),
+      H2O(xNegative(isobaric=false), xPositive(isobaric=false))));
 
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> lambda_IC=14 <font color="darkgreen">
     &quot;Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>)&quot;</font>;
-
+  <font color="darkgreen">// TODO:  use lambda_IC</font>
   <font color="darkgreen">// TODO:  Clean up (move to Species models if possible):</font>
 
   <font color="darkgreen">// Note:  In Dymola 7.4 the following can&#39;t be used:</font>
-  <font color="darkgreen">//     each final N_IC=lambda_IC*subregions[1, 1, 1].ionomer.C19HF37O5S.N_IC)</font>
+  <font color="darkgreen">//     each final N_IC=lambda_IC*subregions[1, 1, 1].ionomer.&#39;C19HF37O5S-&#39;.N_IC)</font>
   <font color="darkgreen">// due to the following error:</font>
   <font color="darkgreen">//     &quot;The left hand side of the following equation is a scalar and the</font>
   <font color="darkgreen">//     right hand side is a 3 dimensional array, i.e. it has non-compatible</font>
   <font color="darkgreen">//     parts&quot;</font>
   <font color="darkgreen">// even though subregions and thus H2O.N_IC is a 3D array.  Instead, the</font>
-  <font color="darkgreen">// lambda ratio is multiplied by the first subregion&#39;s C19HF37O5S.N_IC and</font>
+  <font color="darkgreen">// lambda ratio is multiplied by the first subregion&#39;s &#39;C19HF37O5S-&#39;.N_IC and</font>
   <font color="darkgreen">// applied to each H2O.N_IC.  A similar note applies to</font>
-  <font color="darkgreen">// C19HF37O5S.V_IC.</font>
+  <font color="darkgreen">// &#39;C19HF37O5S-&#39;.V_IC.</font>
 
   <font color="darkgreen">// Eq. 16 from [Springer1991] gives ratio of H2O molecules to SO3- units of</font>
   <font color="darkgreen">// Nafion EW 1100 series:</font>
@@ -184,10 +179,10 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">FCSys.Regions.Reg
   <font color="darkgreen">// TODO:  Add proper value of Xi for H+.</font>
 
 <textblock type="annotcomp" expanded="false"><font color="blue">protected </font>
-  <font color="blue">outer </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">BCs.Environment</a> environment <font color="darkgreen">&quot;Environmental settings&quot;</font>;</textblock>
+  <font color="blue">outer </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">BCs.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;</textblock>
 
 <font color="blue">initial </font><font color="blue">equation </font>
-  <font color="darkgreen">//subregions.gas.H2O.N = subregions.ionomer.C19HF37O5S.N*lambda_IC;</font>
+  <font color="darkgreen">//subregions.gas.H2O.N = subregions.ionomer.&#39;C19HF37O5S-&#39;.N*lambda_IC;</font>
 
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>PEM;
 </pre>
@@ -214,8 +209,8 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>) [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -259,8 +254,8 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>) [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -304,8 +299,8 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>) [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -349,8 +344,8 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>) [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -395,8 +390,8 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>) [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -441,8 +436,8 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>) [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -487,8 +482,8 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>lambda_IC</td><td>14</td><td>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>) [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
-<tr><td>Boolean</td><td>inclYFaces</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclZFaces</td><td>false</td><td>Z</td></tr>
+<tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -515,7 +510,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:28:55 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:40:26 2013.
 </div>
 </body>
 </html>

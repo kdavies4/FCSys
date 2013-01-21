@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="Base classes (not for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -52,7 +52,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses.PartialSensorS.png" alt="FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses.PartialSensor" width=20  height=20 align=top>&nbsp;<a href="FCSys_Sensors_FaceDifferential_Mechanical_BaseClasses.html#FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses.PartialSensor">PartialSensor</a>
-</td><td>Partial sensor for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a> connectors</td></tr>
+</td><td>Partial sensor for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.Transverse">Transverse</a> connectors</td></tr>
 <tr><td><a href="FCSys_Sensors_FaceDifferential_Mechanical_BaseClasses.html#FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses.SensorType">SensorType</a>
 </td><td>Types of sensors</td></tr>
 </table>
@@ -64,8 +64,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h2><img src="images/FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses.PartialSensorI.png" alt="FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses.PartialSensor" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses.PartialSensor"></a><a href="FCSys_Sensors_FaceDifferential_Mechanical_BaseClasses.html#FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses">FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses</a>.PartialSensor</h2>
-<b>Partial sensor for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a> connectors</b><p>
-<img src="images/FCSys.Sensors.FaceDifferential.Mechanical.VelocityD.png" alt="FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses.PartialSensor">
+<b>Partial sensor for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.Transverse">Transverse</a> connectors</b><p>
+<img src="images/FCSys.Sensors.FaceDifferential.Material.DensityD.png" alt="FCSys.Sensors.FaceDifferential.Mechanical.BaseClasses.PartialSensor">
 <p><h3>Information</h3></p>
 Extends from <a href="FCSys_Sensors_BaseClasses.html#FCSys.Sensors.BaseClasses.PartialSensor">FCSys.Sensors.BaseClasses.PartialSensor</a> (Partial model for a sensor).
 <p><h3>Parameters</h3><p>
@@ -77,13 +77,11 @@ Extends from <a href="FCSys_Sensors_BaseClasses.html#FCSys.Sensors.BaseClasses.P
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Measurement</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a></td><td>negative</td><td>Mechanical connector for the negative face</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a></td><td>positive</td><td>Mechanical connector for the positive face</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">partial </font><font color="blue">model</font> PartialSensor <font color="darkgreen">
-  &quot;Partial sensor for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a> connectors&quot;</font>
+  &quot;Partial sensor for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.Transverse">Transverse</a> connectors&quot;</font>
 
   <font color="blue">extends </font><a href="FCSys_Sensors_BaseClasses.html#FCSys.Sensors.BaseClasses.PartialSensor">FCSys.Sensors.BaseClasses.PartialSensor</a>;
 
@@ -91,9 +89,9 @@ Extends from <a href="FCSys_Sensors_BaseClasses.html#FCSys.Sensors.BaseClasses.P
   <font color="darkgreen">// Note:  This is included so that the type of BC is recorded with the</font>
   <font color="darkgreen">// results.</font>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">FCSys.Connectors.MechanicalTransport</a> negative <font color="darkgreen">
+<textblock type="annotcomp" expanded="false">  FCSys.Connectors.BaseClasses.Transverse negative <font color="darkgreen">
     &quot;Mechanical connector for the negative face&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">FCSys.Connectors.MechanicalTransport</a> positive <font color="darkgreen">
+  FCSys.Connectors.BaseClasses.Transverse positive <font color="darkgreen">
     &quot;Mechanical connector for the positive face&quot;</font>;</textblock>
 <font color="blue">equation </font>
   0 = negative.mPhidot + positive.mPhidot <font color="darkgreen">
@@ -106,7 +104,7 @@ Extends from <a href="FCSys_Sensors_BaseClasses.html#FCSys.Sensors.BaseClasses.P
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:26:52 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:28:13 2013.
 </div>
 </body>
 </html>

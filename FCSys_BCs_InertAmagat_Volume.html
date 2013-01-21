@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.BCs.InertAmagat.Volume</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="BCs for additivity of volume">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -87,7 +87,7 @@ Extends from <a href="FCSys_BCs_InertAmagat_Volume_BaseClasses.html#FCSys.BCs.In
   <font color="blue">extends </font><a href="FCSys_BCs_InertAmagat_Volume_BaseClasses.html#FCSys.BCs.InertAmagat.Volume.BaseClasses.PartialBC">BaseClasses.PartialBC</a>(
     <font color="blue">final </font>bCType=BaseClasses.BCType.Pressure,
     u(<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;),
-    spec(k(start=1*U.atm)));
+    spec(k(start=U.atm)));
 
 <font color="blue">equation </font>
   inert.p = u_final;
@@ -122,7 +122,7 @@ Extends from <a href="FCSys_BCs_InertAmagat_Volume_BaseClasses.html#FCSys.BCs.In
   <font color="blue">extends </font><a href="FCSys_BCs_InertAmagat_Volume_BaseClasses.html#FCSys.BCs.InertAmagat.Volume.BaseClasses.PartialBC">BaseClasses.PartialBC</a>(
     <font color="blue">final </font>bCType=BaseClasses.BCType.Volume,
     u(<font color="blue">final </font>unit=&quot;l3&quot;),
-    spec(k(start=1*U.cm^3)));
+    spec(k(start=U.cc)));
 <font color="blue">equation </font>
   inert.V = u_final;
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>Volume;
@@ -132,7 +132,7 @@ Extends from <a href="FCSys_BCs_InertAmagat_Volume_BaseClasses.html#FCSys.BCs.In
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:24:36 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:26:14 2013.
 </div>
 </body>
 </html>

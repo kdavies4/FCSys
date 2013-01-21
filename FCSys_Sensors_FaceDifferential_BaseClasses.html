@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Sensors.FaceDifferential.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="Base classes (not for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -65,7 +65,7 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Senso
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a></td><td>thermoOpt</td><td>ThermoOpt.ClosedAdiabatic</td><td>Options for material and thermal subconnectors</td></tr>
+<tr><td>Boolean</td><td>isobaric</td><td>false</td><td>Isobaric condition</td></tr>
 <tr><td><a href="FCSys_Sensors_FaceDifferential_Material.html#FCSys.Sensors.FaceDifferential.Material.Density">Density</a></td><td>material</td><td>redeclare Material.Density m...</td><td>Type of sensor</td></tr>
 <tr><td><a href="FCSys_Sensors_FaceDifferential_Thermal.html#FCSys.Sensors.FaceDifferential.Thermal.Temperature">Temperature</a></td><td>thermal</td><td>redeclare Thermal.Temperatur...</td><td>Type of condition</td></tr>
 </table>
@@ -81,22 +81,18 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Senso
 
   <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Sensor">FCSys.BaseClasses.Icons.Sensor</a>;
 
-  <font color="blue">parameter </font><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a> thermoOpt=ThermoOpt.ClosedAdiabatic <font color="darkgreen">
-    &quot;Options for material and thermal subconnectors&quot;</font>;
-
   <font color="darkgreen">// Material</font>
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Sensors_FaceDifferential_Material.html#FCSys.Sensors.FaceDifferential.Material.Density">Material.Density</a> material <font color="blue">if </font>thermoOpt == ThermoOpt.OpenDiabatic <font color="darkgreen">
-    &quot;Type of sensor&quot;</font>;</textblock>
+  <font color="blue">parameter </font>Boolean isobaric=false <font color="darkgreen">&quot;Isobaric condition&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Sensors_FaceDifferential_Material.html#FCSys.Sensors.FaceDifferential.Material.Density">Material.Density</a> material <font color="blue">if </font><font color="blue">not </font>isobaric <font color="darkgreen">&quot;Type of sensor&quot;</font>;</textblock>
 
   <font color="darkgreen">// Thermal</font>
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Sensors_FaceDifferential_Thermal.html#FCSys.Sensors.FaceDifferential.Thermal.Temperature">Thermal.Temperature</a> thermal <font color="blue">if </font>thermoOpt &lt;&gt; ThermoOpt.ClosedAdiabatic
-    <font color="darkgreen">&quot;Type of condition&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Sensors_FaceDifferential_Thermal.html#FCSys.Sensors.FaceDifferential.Thermal.Temperature">Thermal.Temperature</a> thermal <font color="darkgreen">&quot;Type of condition&quot;</font>;</textblock>
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">FCSys.Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Output bus for measurements&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Material</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(material.y, y.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(material.y, y.normal);</textblock>
 
   <font color="darkgreen">// Thermal</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(thermal.y, y.thermal);</textblock>
@@ -108,7 +104,7 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Senso
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:26:55 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:28:16 2013.
 </div>
 </body>
 </html>

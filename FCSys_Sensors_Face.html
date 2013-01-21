@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Sensors.Face</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="&lt;html&gt;Sensors for a single &lt;a href=\&quot;modelica://FCSys.Connectors.Face\&quot;&gt;Face&lt;/a&gt; connector, e.g., of a &lt;a href=\&quot;modelica://FCSys.Subregions.Species\&quot;&gt;Species&lt;/a&gt; model (single-species)&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -79,7 +79,7 @@ Extends from <a href="FCSys_Sensors_Face_BaseClasses.html#FCSys.Sensors.Face.Bas
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a></td><td>thermoOpt</td><td>ThermoOpt.ClosedAdiabatic</td><td>Options for material and thermal subconnectors</td></tr>
+<tr><td>Boolean</td><td>isobaric</td><td>false</td><td>Isobaric condition</td></tr>
 <tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis</a></td><td>axis</td><td>&nbsp;</td><td>Axis normal to the face</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>X-axis linear momentum</td></tr>
 <tr><td>Boolean</td><td>inviscidX</td><td>true</td><td>Inviscid</td></tr>
@@ -92,7 +92,7 @@ Extends from <a href="FCSys_Sensors_Face_BaseClasses.html#FCSys.Sensors.Face.Bas
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus for measurements</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Single-species connector for material, linear momentum, and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Single-species connector for linear momentum and heat</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -120,26 +120,26 @@ Extends from <a href="FCSys_Sensors_Face_BaseClasses.html#FCSys.Sensors.Face.Bas
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Sensors_Face.html#FCSys.Sensors.Face.Velocity">Velocity</a> velocityZ <font color="blue">if </font>axis &lt;&gt; Axis.z<font color="blue"> and </font><font color="blue">not </font>inviscidZ <font color="darkgreen">&quot;Type of sensor&quot;</font>;</textblock>
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">FCSys.Connectors.Face</a> face(
-    <font color="blue">final </font>thermoOpt=thermoOpt,
+    <font color="blue">final </font>isobaric=isobaric,
     <font color="blue">final </font>inviscidX=inviscidX,
     <font color="blue">final </font>inviscidY=inviscidY,
     <font color="blue">final </font>inviscidZ=inviscidZ) <font color="darkgreen">
-    &quot;Single-species connector for material, linear momentum, and heat&quot;</font>;</textblock>
+    &quot;Single-species connector for linear momentum and heat&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Density</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(density.material, face.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(density.normal, face.normal);</textblock>
 
   <font color="darkgreen">// X-axis velocity</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(velocityX.mechanical, face.mechanicalX);
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(velocityX.mechanical, face.transverseX);
   <font color="red">connect</font>(velocityX.y, y.phi_x);</textblock>
 
   <font color="darkgreen">// Y-axis velocity</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(velocityY.mechanical, face.mechanicalY);
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(velocityY.mechanical, face.transverseY);
   <font color="red">connect</font>(velocityY.y, y.phi_y);</textblock>
 
   <font color="darkgreen">// Z-axis velocity</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(velocityZ.mechanical, face.mechanicalZ);
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(velocityZ.mechanical, face.transverseZ);
   <font color="red">connect</font>(velocityZ.y, y.phi_z);</textblock>
 
   <font color="darkgreen">// Temperature</font>
@@ -158,7 +158,7 @@ Extends from <a href="FCSys_Sensors_Face_BaseClasses.html#FCSys.Sensors.Face.Bas
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a></td><td>thermoOpt</td><td>ThermoOpt.ClosedAdiabatic</td><td>Options for material and thermal subconnectors</td></tr>
+<tr><td>Boolean</td><td>isobaric</td><td>false</td><td>Isobaric condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Y-axis linear momentum</td></tr>
 <tr><td>Boolean</td><td>inviscidY</td><td>true</td><td>Inviscid</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Z-axis linear momentum</td></tr>
@@ -168,7 +168,7 @@ Extends from <a href="FCSys_Sensors_Face_BaseClasses.html#FCSys.Sensors.Face.Bas
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus for measurements</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FaceX</a></td><td>face</td><td>Single-species connector for material, linear momentum, and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Single-species connector for linear momentum and heat</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -185,22 +185,22 @@ Extends from <a href="FCSys_Sensors_Face_BaseClasses.html#FCSys.Sensors.Face.Bas
   <font color="blue">parameter </font>Boolean inviscidZ=true <font color="darkgreen">&quot;Inviscid&quot;</font>;
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Sensors_Face.html#FCSys.Sensors.Face.Velocity">Velocity</a> velocityZ <font color="blue">if </font><font color="blue">not </font>inviscidZ <font color="darkgreen">&quot;Type of sensor&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceX">FCSys.Connectors.FaceX</a> face(
-    <font color="blue">final </font>thermoOpt=thermoOpt,
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">FCSys.Connectors.Face</a> face(
+    <font color="blue">final </font>isobaric=isobaric,
     <font color="blue">final </font>inviscidY=inviscidY,
     <font color="blue">final </font>inviscidZ=inviscidZ) <font color="darkgreen">
-    &quot;Single-species connector for material, linear momentum, and heat&quot;</font>;</textblock>
+    &quot;Single-species connector for linear momentum and heat&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Density</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(density.material, face.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(density.normal, face.normal);</textblock>
 
   <font color="darkgreen">// Y-axis velocity</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(velocityY.mechanical, face.mechanicalY);
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(velocityY.mechanical, face.transverseY);
   <font color="red">connect</font>(velocityY.y, y.phi_y);</textblock>
 
   <font color="darkgreen">// Z-axis velocity</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(velocityZ.mechanical, face.mechanicalZ);
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(velocityZ.mechanical, face.transverseZ);
   <font color="red">connect</font>(velocityZ.y, y.phi_z);</textblock>
 
   <font color="darkgreen">// Temperature</font>
@@ -219,7 +219,7 @@ Extends from <a href="FCSys_Sensors_Face_BaseClasses.html#FCSys.Sensors.Face.Bas
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a></td><td>thermoOpt</td><td>ThermoOpt.ClosedAdiabatic</td><td>Options for material and thermal subconnectors</td></tr>
+<tr><td>Boolean</td><td>isobaric</td><td>false</td><td>Isobaric condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Z-axis linear momentum</td></tr>
 <tr><td>Boolean</td><td>inviscidZ</td><td>true</td><td>Inviscid</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>X-axis linear momentum</td></tr>
@@ -229,7 +229,7 @@ Extends from <a href="FCSys_Sensors_Face_BaseClasses.html#FCSys.Sensors.Face.Bas
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus for measurements</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FaceY</a></td><td>face</td><td>Single-species connector for material, linear momentum, and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Single-species connector for linear momentum and heat</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -246,22 +246,22 @@ Extends from <a href="FCSys_Sensors_Face_BaseClasses.html#FCSys.Sensors.Face.Bas
   <font color="blue">parameter </font>Boolean inviscidX=true <font color="darkgreen">&quot;Inviscid&quot;</font>;
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Sensors_Face.html#FCSys.Sensors.Face.Velocity">Velocity</a> velocityX <font color="blue">if </font><font color="blue">not </font>inviscidX <font color="darkgreen">&quot;Type of sensor&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceY">FCSys.Connectors.FaceY</a> face(
-    <font color="blue">final </font>thermoOpt=thermoOpt,
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">FCSys.Connectors.Face</a> face(
+    <font color="blue">final </font>isobaric=isobaric,
     <font color="blue">final </font>inviscidX=inviscidX,
     <font color="blue">final </font>inviscidZ=inviscidZ) <font color="darkgreen">
-    &quot;Single-species connector for material, linear momentum, and heat&quot;</font>;</textblock>
+    &quot;Single-species connector for linear momentum and heat&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Density</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(density.material, face.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(density.normal, face.normal);</textblock>
 
   <font color="darkgreen">// Z-axis velocity</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(velocityZ.mechanical, face.mechanicalZ);
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(velocityZ.mechanical, face.transverseZ);
   <font color="red">connect</font>(velocityZ.y, y.phi_z);</textblock>
 
   <font color="darkgreen">// X-axis velocity</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(velocityX.mechanical, face.mechanicalX);
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(velocityX.mechanical, face.transverseX);
   <font color="red">connect</font>(velocityX.y, y.phi_x);</textblock>
 
   <font color="darkgreen">// Temperature</font>
@@ -280,7 +280,7 @@ Extends from <a href="FCSys_Sensors_Face_BaseClasses.html#FCSys.Sensors.Face.Bas
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a></td><td>thermoOpt</td><td>ThermoOpt.ClosedAdiabatic</td><td>Options for material and thermal subconnectors</td></tr>
+<tr><td>Boolean</td><td>isobaric</td><td>false</td><td>Isobaric condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>X-axis linear momentum</td></tr>
 <tr><td>Boolean</td><td>inviscidX</td><td>true</td><td>Inviscid</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Y-axis linear momentum</td></tr>
@@ -290,7 +290,7 @@ Extends from <a href="FCSys_Sensors_Face_BaseClasses.html#FCSys.Sensors.Face.Bas
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus for measurements</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FaceZ</a></td><td>face</td><td>Single-species connector for material, linear momentum, and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Single-species connector for linear momentum and heat</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -307,22 +307,22 @@ Extends from <a href="FCSys_Sensors_Face_BaseClasses.html#FCSys.Sensors.Face.Bas
   <font color="blue">parameter </font>Boolean inviscidY=true <font color="darkgreen">&quot;Inviscid&quot;</font>;
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Sensors_Face.html#FCSys.Sensors.Face.Velocity">Velocity</a> velocityY <font color="blue">if </font><font color="blue">not </font>inviscidY <font color="darkgreen">&quot;Type of sensor&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceZ">FCSys.Connectors.FaceZ</a> face(
-    <font color="blue">final </font>thermoOpt=thermoOpt,
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">FCSys.Connectors.Face</a> face(
+    <font color="blue">final </font>isobaric=isobaric,
     <font color="blue">final </font>inviscidX=inviscidX,
     <font color="blue">final </font>inviscidY=inviscidY) <font color="darkgreen">
-    &quot;Single-species connector for material, linear momentum, and heat&quot;</font>;</textblock>
+    &quot;Single-species connector for linear momentum and heat&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Density</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(density.material, face.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(density.normal, face.normal);</textblock>
 
   <font color="darkgreen">// X-axis velocity</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(velocityX.mechanical, face.mechanicalX);
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(velocityX.mechanical, face.transverseX);
   <font color="red">connect</font>(velocityX.y, y.phi_x);</textblock>
 
   <font color="darkgreen">// Y-axis velocity</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(velocityY.mechanical, face.mechanicalY);
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(velocityY.mechanical, face.transverseY);
   <font color="red">connect</font>(velocityY.y, y.phi_y);</textblock>
 
   <font color="darkgreen">// Temperature</font>
@@ -338,11 +338,6 @@ Extends from <a href="FCSys_Sensors_Face_BaseClasses.html#FCSys.Sensors.Face.Bas
 <img src="images/FCSys.Sensors.Face.DensityD.png" alt="FCSys.Sensors.Face.Density">
 <p><h3>Information</h3></p>
 Extends from <a href="FCSys_Sensors_BaseClasses.html#FCSys.Sensors.BaseClasses.PartialSensor">FCSys.Sensors.BaseClasses.PartialSensor</a> (Partial model for a sensor).
-<p><h3>Connectors</h3><p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Material">Material</a></td><td>material</td><td>&nbsp;</td></tr>
-</table>
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">model</font> Density <font color="darkgreen">&quot;Sensor for density&quot;</font>
@@ -350,7 +345,7 @@ Extends from <a href="FCSys_Sensors_BaseClasses.html#FCSys.Sensors.BaseClasses.P
   <font color="blue">extends </font><a href="FCSys_Sensors_BaseClasses.html#FCSys.Sensors.BaseClasses.PartialSensor">FCSys.Sensors.BaseClasses.PartialSensor</a>(<font color="blue">redeclare </font><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">FCSys.Connectors.RealOutput</a>
       y(<font color="blue">final </font>unit=&quot;N/l3&quot;));
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Material">FCSys.Connectors.Material</a> material;</textblock>
+<textblock type="annotcomp" expanded="false">  FCSys.Connectors.BaseClasses.Normal material;</textblock>
 <font color="blue">equation </font>
   y = material.rho;
   0 = material.Ndot <font color="darkgreen">&quot;Conservation of material (no storage)&quot;</font>;
@@ -361,20 +356,15 @@ Extends from <a href="FCSys_Sensors_BaseClasses.html#FCSys.Sensors.BaseClasses.P
 <h2><img src="images/FCSys.Sensors.Face.VelocityI.png" alt="FCSys.Sensors.Face.Velocity" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Sensors.Face.Velocity"></a><a href="FCSys_Sensors_Face.html#FCSys.Sensors.Face">FCSys.Sensors.Face</a>.Velocity</h2>
 <b>Sensor for velocity</b><p>
-<img src="images/FCSys.Sensors.Face.VelocityD.png" alt="FCSys.Sensors.Face.Velocity">
+<img src="images/FCSys.Sensors.Face.DensityD.png" alt="FCSys.Sensors.Face.Velocity">
 <p><h3>Information</h3></p>
 Extends from <a href="FCSys_Sensors_BaseClasses.html#FCSys.Sensors.BaseClasses.PartialSensor">FCSys.Sensors.BaseClasses.PartialSensor</a> (Partial model for a sensor).
-<p><h3>Connectors</h3><p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">MechanicalTransport</a></td><td>mechanical</td><td>Mechanical subconnector</td></tr>
-</table>
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">model</font> Velocity <font color="darkgreen">&quot;Sensor for velocity&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Sensors_BaseClasses.html#FCSys.Sensors.BaseClasses.PartialSensor">FCSys.Sensors.BaseClasses.PartialSensor</a>(<font color="blue">redeclare </font><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">FCSys.Connectors.RealOutput</a>
       y(<font color="blue">final </font>unit=&quot;l/T&quot;));
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.MechanicalTransport">FCSys.Connectors.MechanicalTransport</a> mechanical <font color="darkgreen">&quot;Mechanical subconnector&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  FCSys.Connectors.BaseClasses.Transverse mechanical <font color="darkgreen">&quot;Mechanical subconnector&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
   y = mechanical.phi <font color="darkgreen">&quot;Measurement&quot;</font>;
@@ -386,20 +376,15 @@ Extends from <a href="FCSys_Sensors_BaseClasses.html#FCSys.Sensors.BaseClasses.P
 <h2><img src="images/FCSys.Sensors.Face.TemperatureI.png" alt="FCSys.Sensors.Face.Temperature" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Sensors.Face.Temperature"></a><a href="FCSys_Sensors_Face.html#FCSys.Sensors.Face">FCSys.Sensors.Face</a>.Temperature</h2>
 <b>Sensor for temperature</b><p>
-<img src="images/FCSys.Sensors.Face.TemperatureD.png" alt="FCSys.Sensors.Face.Temperature">
+<img src="images/FCSys.Sensors.Face.DensityD.png" alt="FCSys.Sensors.Face.Temperature">
 <p><h3>Information</h3></p>
 Extends from <a href="FCSys_Sensors_BaseClasses.html#FCSys.Sensors.BaseClasses.PartialSensor">FCSys.Sensors.BaseClasses.PartialSensor</a> (Partial model for a sensor).
-<p><h3>Connectors</h3><p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Thermal">Thermal</a></td><td>thermal</td><td>Thermal subconnector</td></tr>
-</table>
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">model</font> Temperature <font color="darkgreen">&quot;Sensor for temperature&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Sensors_BaseClasses.html#FCSys.Sensors.BaseClasses.PartialSensor">FCSys.Sensors.BaseClasses.PartialSensor</a>(<font color="blue">redeclare </font><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">FCSys.Connectors.RealOutput</a>
       y(<font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;, displayUnit=&quot;K&quot;));
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Thermal">FCSys.Connectors.Thermal</a> thermal <font color="darkgreen">&quot;Thermal subconnector&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  FCSys.Connectors.Thermal thermal <font color="darkgreen">&quot;Thermal subconnector&quot;</font>;</textblock>
 <font color="blue">equation </font>
   y = thermal.T <font color="darkgreen">&quot;Measurement&quot;</font>;
   0 = thermal.Qdot <font color="darkgreen">&quot;Conservation of energy (no storage)&quot;</font>;
@@ -410,7 +395,7 @@ Extends from <a href="FCSys_Sensors_BaseClasses.html#FCSys.Sensors.BaseClasses.P
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:26:17 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:27:47 2013.
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.BCs.Face</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="&lt;html&gt;BCs for a &lt;a href=\&quot;modelica://FCSys.Connectors.Face\&quot;&gt;Face&lt;/a&gt; connector, e.g., of a &lt;a href=\&quot;modelica://FCSys.Subregions.Species\&quot;&gt;Species&lt;/a&gt; model (single-species)&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -74,27 +74,26 @@ Extends from <a href="FCSys_BCs_Face_BaseClasses.html#FCSys.BCs.Face.BaseClasses
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis</a></td><td>axis</td><td>&nbsp;</td><td>Axis normal to the face</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Assumptions</td></tr>
-<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a></td><td>thermoOpt</td><td>ThermoOpt.OpenDiabatic</td><td>Options for material and thermal subconnectors</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Material</td></tr>
-<tr><td><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Density">Density</a></td><td>material</td><td>redeclare Material.Density m...</td><td>Type of condition</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Normal linear momentum</td></tr>
+<tr><td>Boolean</td><td>isobaric</td><td>false</td><td>Isobaric condition</td></tr>
+<tr><td><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Density">Density</a></td><td>normal</td><td>redeclare Material.Density n...</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Heat</td></tr>
 <tr><td><a href="FCSys_BCs_Face_Thermal.html#FCSys.BCs.Face.Thermal.Temperature">Temperature</a></td><td>thermal</td><td>redeclare Thermal.Temperatur...</td><td>Type of condition</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>X-axis linear momentum</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>X-axis linear momentum (if not normal)</td></tr>
 <tr><td>Boolean</td><td>inviscidX</td><td>true</td><td>Inviscid</td></tr>
-<tr><td><a href="FCSys_BCs_Face_Mechanical.html#FCSys.BCs.Face.Mechanical.Velocity">Velocity</a></td><td>mechanicalX</td><td>redeclare Mechanical.Velocit...</td><td>Type of condition</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Y-axis linear momentum</td></tr>
+<tr><td><a href="FCSys_BCs_Face_Mechanical.html#FCSys.BCs.Face.Mechanical.Velocity">Velocity</a></td><td>transverseX</td><td>redeclare Mechanical.Velocit...</td><td>Type of condition</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Y-axis linear momentum (if not normal)</td></tr>
 <tr><td>Boolean</td><td>inviscidY</td><td>true</td><td>Inviscid</td></tr>
-<tr><td><a href="FCSys_BCs_Face_Mechanical.html#FCSys.BCs.Face.Mechanical.Velocity">Velocity</a></td><td>mechanicalY</td><td>redeclare Mechanical.Velocit...</td><td>Type of condition</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Z-axis linear momentum</td></tr>
+<tr><td><a href="FCSys_BCs_Face_Mechanical.html#FCSys.BCs.Face.Mechanical.Velocity">Velocity</a></td><td>transverseY</td><td>redeclare Mechanical.Velocit...</td><td>Type of condition</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Z-axis linear momentum (if not normal)</td></tr>
 <tr><td>Boolean</td><td>inviscidZ</td><td>true</td><td>Inviscid</td></tr>
-<tr><td><a href="FCSys_BCs_Face_Mechanical.html#FCSys.BCs.Face.Mechanical.Velocity">Velocity</a></td><td>mechanicalZ</td><td>redeclare Mechanical.Velocit...</td><td>Type of condition</td></tr>
+<tr><td><a href="FCSys_BCs_Face_Mechanical.html#FCSys.BCs.Face.Mechanical.Velocity">Velocity</a></td><td>transverseZ</td><td>redeclare Mechanical.Velocit...</td><td>Type of condition</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Input bus for external signal sources</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Single-species connector for material, linear momentum, and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Single-species connector for  linear momentum and heat</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -110,45 +109,45 @@ Extends from <a href="FCSys_BCs_Face_BaseClasses.html#FCSys.BCs.Face.BaseClasses
   <font color="darkgreen">// option, e.g.,</font>
   <font color="darkgreen">//     enable=axis &lt;&gt; Axis.x.</font>
   <font color="darkgreen">// Therefore, the values of the enumerations are specified numerically.</font>
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_BCs_Face_Mechanical.html#FCSys.BCs.Face.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalX(spec(k=0)) <font color="blue">if </font>axis &lt;&gt; Axis.x<font color="blue"> and </font><font color="blue">
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_BCs_Face_Mechanical.html#FCSys.BCs.Face.Mechanical.Velocity">Mechanical.Velocity</a> transverseX(spec(k=0)) <font color="blue">if </font>axis &lt;&gt; Axis.x<font color="blue"> and </font><font color="blue">
     not </font>inviscidX <font color="blue">constrainedby </font>Mechanical.BaseClasses.PartialBC <font color="darkgreen">
     &quot;Type of condition&quot;</font>;</textblock>
 
   <font color="darkgreen">// Y-axis linear momentum</font>
   <font color="blue">parameter </font>Boolean inviscidY=true <font color="darkgreen">&quot;Inviscid&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_BCs_Face_Mechanical.html#FCSys.BCs.Face.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalY(spec(k=0)) <font color="blue">if </font>axis &lt;&gt; Axis.y<font color="blue"> and </font><font color="blue">
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_BCs_Face_Mechanical.html#FCSys.BCs.Face.Mechanical.Velocity">Mechanical.Velocity</a> transverseY(spec(k=0)) <font color="blue">if </font>axis &lt;&gt; Axis.y<font color="blue"> and </font><font color="blue">
     not </font>inviscidY <font color="blue">constrainedby </font>Mechanical.BaseClasses.PartialBC <font color="darkgreen">
     &quot;Type of condition&quot;</font>;</textblock>
 
   <font color="darkgreen">// Z-axis linear momentum</font>
   <font color="blue">parameter </font>Boolean inviscidZ=true <font color="darkgreen">&quot;Inviscid&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_BCs_Face_Mechanical.html#FCSys.BCs.Face.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalZ(spec(k=0)) <font color="blue">if </font>axis &lt;&gt; Axis.z<font color="blue"> and </font><font color="blue">
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_BCs_Face_Mechanical.html#FCSys.BCs.Face.Mechanical.Velocity">Mechanical.Velocity</a> transverseZ(spec(k=0)) <font color="blue">if </font>axis &lt;&gt; Axis.z<font color="blue"> and </font><font color="blue">
     not </font>inviscidZ <font color="blue">constrainedby </font>Mechanical.BaseClasses.PartialBC <font color="darkgreen">
     &quot;Type of condition&quot;</font>;</textblock>
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">FCSys.Connectors.Face</a> face(
-    <font color="blue">final </font>thermoOpt=thermoOpt,
+    <font color="blue">final </font>isobaric=isobaric,
     <font color="blue">final </font>inviscidX=inviscidX,
     <font color="blue">final </font>inviscidY=inviscidY,
     <font color="blue">final </font>inviscidZ=inviscidZ) <font color="darkgreen">
-    &quot;Single-species connector for material, linear momentum, and heat&quot;</font>;</textblock>
+    &quot;Single-species connector for  linear momentum and heat&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Material</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(material.material, face.material);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(material.normal, face.normal);</textblock>
 
   <font color="darkgreen">// X-axis linear momentum</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalX.mechanical, face.mechanicalX);
-  <font color="red">connect</font>(u.mechanicalX, mechanicalX.u);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverseX.mechanical, face.transverseX);
+  <font color="red">connect</font>(u.transverseX, transverseX.u);</textblock>
 
   <font color="darkgreen">// Y-axis linear momentum</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalY.mechanical, face.mechanicalY);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverseY.mechanical, face.transverseY);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u.mechanicalY, mechanicalY.u);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u.transverseY, transverseY.u);</textblock>
 
   <font color="darkgreen">// Z-axis linear momentum</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalZ.mechanical, face.mechanicalZ);
-  <font color="red">connect</font>(u.mechanicalZ, mechanicalZ.u);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverseZ.mechanical, face.transverseZ);
+  <font color="red">connect</font>(u.transverseZ, transverseZ.u);</textblock>
 
   <font color="darkgreen">// Heat</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(thermal.thermal, face.thermal);</textblock>
@@ -160,7 +159,7 @@ Extends from <a href="FCSys_BCs_Face_BaseClasses.html#FCSys.BCs.Face.BaseClasses
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:25:08 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:26:46 2013.
 </div>
 </body>
 </html>

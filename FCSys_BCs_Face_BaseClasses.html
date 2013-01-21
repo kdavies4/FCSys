@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.BCs.Face.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="Base classes (not for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -67,10 +67,9 @@ Extends from <a href="FCSys_BaseClasses_Icons_BCs.html#FCSys.BaseClasses.Icons.B
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Assumptions</td></tr>
-<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a></td><td>thermoOpt</td><td>ThermoOpt.OpenDiabatic</td><td>Options for material and thermal subconnectors</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Material</td></tr>
-<tr><td><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Density">Density</a></td><td>material</td><td>redeclare Material.Density m...</td><td>Type of condition</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Normal linear momentum</td></tr>
+<tr><td>Boolean</td><td>isobaric</td><td>false</td><td>Isobaric condition</td></tr>
+<tr><td><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Density">Density</a></td><td>normal</td><td>redeclare Material.Density n...</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Heat</td></tr>
 <tr><td><a href="FCSys_BCs_Face_Thermal.html#FCSys.BCs.Face.Thermal.Temperature">Temperature</a></td><td>thermal</td><td>redeclare Thermal.Temperatur...</td><td>Type of condition</td></tr>
 </table>
@@ -85,28 +84,25 @@ Extends from <a href="FCSys_BaseClasses_Icons_BCs.html#FCSys.BaseClasses.Icons.B
   &quot;Partial BC for a face of a <a href="FCSys_Subregions.html#FCSys.Subregions.Species">Species</a> model (single-species)&quot;</font>
   <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_BCs.html#FCSys.BaseClasses.Icons.BCs.Single">FCSys.BaseClasses.Icons.BCs.Single</a>;
 
-  <font color="blue">parameter </font><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.ThermoOpt">ThermoOpt</a> thermoOpt=ThermoOpt.OpenDiabatic <font color="darkgreen">
-    &quot;Options for material and thermal subconnectors&quot;</font>;
-
   <font color="darkgreen">// Material</font>
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Density">Material.Density</a> material(spec(k=4*U.C/U.cm^3)) <font color="blue">if </font>thermoOpt ==
-    ThermoOpt.OpenDiabatic <font color="blue">constrainedby </font>Material.BaseClasses.PartialBC <font color="darkgreen">
+  <font color="blue">parameter </font>Boolean isobaric=false <font color="darkgreen">&quot;Isobaric condition&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Density">Material.Density</a> normal(spec(k(start=U.atm/(298.15*U.K)))) <font color="blue">if </font><font color="blue">
+    not </font>isobaric <font color="blue">constrainedby </font>Material.BaseClasses.PartialBC <font color="darkgreen">
     &quot;Type of condition&quot;</font>;</textblock>
+  <font color="darkgreen">// Note:  In Dymola 7.4, the value of k must be specified here instead</font>
+  <font color="darkgreen">// of at the lower level (e.g., Material.Density) so that the spec</font>
+  <font color="darkgreen">// subcomponent can be replaced by blocks that don&#39;t contain the</font>
+  <font color="darkgreen">// parameter k.</font>
 
   <font color="darkgreen">// Heat</font>
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_BCs_Face_Thermal.html#FCSys.BCs.Face.Thermal.Temperature">Thermal.Temperature</a> thermal(spec(k=298.15*U.K)) <font color="blue">if </font>thermoOpt &lt;&gt;
-    ThermoOpt.ClosedAdiabatic <font color="blue">constrainedby </font>Thermal.BaseClasses.PartialBC <font color="darkgreen">
-    &quot;Type of condition&quot;</font>;</textblock>
-  <font color="darkgreen">// Note:  Dymola 7.4 doesn&#39;t recognize enumerations in the dialog enable</font>
-  <font color="darkgreen">// option, e.g.,</font>
-  <font color="darkgreen">//     enable=thermoOpt &lt;&gt; ThermoOpt.ClosedAdiabatic.</font>
-  <font color="darkgreen">// Therefore, the values of the enumerations are specified numerically.</font>
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_BCs_Face_Thermal.html#FCSys.BCs.Face.Thermal.Temperature">Thermal.Temperature</a> thermal(spec(k(start=298.15*U.K))) <font color="blue">
+    constrainedby </font>Thermal.BaseClasses.PartialBC <font color="darkgreen">&quot;Type of condition&quot;</font>;</textblock>
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">FCSys.Connectors.RealInputBus</a> u <font color="darkgreen">&quot;Input bus for external signal sources&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Material</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u.material, material.u);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u.normal, material.u);</textblock>
 
   <font color="darkgreen">// Heat</font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u.thermal, thermal.u);</textblock>
@@ -150,7 +146,6 @@ Extends from <a href="FCSys_BaseClasses_Icons_BCs.html#FCSys.BaseClasses.Icons.B
 <font color="blue">equation </font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u, u_final);
   <font color="red">connect</font>(spec.y, u_final);</textblock>
-
 <font color="blue">end </font>PartialBC;
 </pre>
       </div>
@@ -158,7 +153,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_BCs.html#FCSys.BaseClasses.Icons.B
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:25:18 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:26:56 2013.
 </div>
 </body>
 </html>

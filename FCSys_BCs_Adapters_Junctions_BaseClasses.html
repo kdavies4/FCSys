@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.BCs.Adapters.Junctions.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="Base classes (not for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -78,9 +78,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 
 <textblock type="annotcomp" expanded="false">  <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.a">Modelica.Fluid.Interfaces.FluidPort_a</a> mixturePort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
       Medium = <a href="FCSys_BCs_Adapters_Junctions_BaseClasses_MixtureMedium.html#FCSys.BCs.Adapters.Junctions.BaseClasses.PartialJunction.MixtureMedium">MixtureMedium</a>) <font color="darkgreen">&quot;Fluid port for the mixture&quot;</font>;</textblock>
-  <font color="darkgreen">// Note:  In Dymola 7.4, &quot;redeclare final package Medium = MixtureMedium&quot;</font>
-  <font color="darkgreen">// must be used instead of &quot;redeclare final MixtureMedium Medium&quot; in</font>
-  <font color="darkgreen">// order for this model to pass its check.</font>
+
   <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.html#Modelica.SIunits.MassFraction">SI.MassFraction</a> X[MixtureMedium.nX] <font color="darkgreen">&quot;Mass fractions within the mixture&quot;</font>;
 
 <font color="blue">equation </font>
@@ -102,7 +100,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:24:14 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:25:53 2013.
 </div>
 </body>
 </html>

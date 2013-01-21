@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Quantities.Examples</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-16">
+<meta name="date" content="2013-1-21">
 <meta name="description" content="Examples and tests">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -86,20 +86,19 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Amount</a></td><td>Amount</td><td>1*U.C</td><td>Amount [N]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.AmountReciprocal">AmountReciprocal</a></td><td>AmountReciprocal</td><td>1/U.C</td><td>Reciprocal amount [1/N]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.AmountVolumic">AmountVolumic</a></td><td>AmountVolumic</td><td>1*U.C/U.m^3</td><td>Volumic amount [N/l3]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.AmountVolumicRate">AmountVolumicRate</a></td><td>AmountVolumicRate</td><td>1*U.C/(U.m^3*U.s)</td><td>Rate of volumic amount [N/(l3.T)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Angle</a></td><td>Angle</td><td>1*U.rad</td><td>Angle [A]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Angle2">Angle2</a></td><td>Angle2</td><td>1*U.sr</td><td>Solid angle [A2]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Area</a></td><td>Area</td><td>1*U.m^2</td><td>Area [l2]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Capacitance">Capacitance</a></td><td>Capacitance</td><td>1*U.F</td><td>Capacitance [N2.T2/(l2.m)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CompressibilityDynamic">CompressibilityDynamic</a></td><td>CompressibilityDynamic</td><td>1*U.mol/(U.J*U.s)</td><td>Dynamic compressibility [N.T/(l2.m)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ConductanceElectrical">ConductanceElectrical</a></td><td>ConductanceElectrical</td><td>1*U.S</td><td>Electrical conductance [N2.T/(l2.m)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>Current</td><td>1*U.A</td><td>Current [N/T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">CurrentAreic</a></td><td>CurrentAreic</td><td>1*U.A/U.m^2</td><td>Areic current [N/(l2.T)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentRate">CurrentRate</a></td><td>CurrentRate</td><td>1*U.A/U.s</td><td>Rate of current [N/T2]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Energy">Energy</a></td><td>Energy</td><td>1*U.J</td><td>Energy [l2.m/T2]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>Fluidity</td><td>1/(U.Pa*U.s)</td><td>Fluidity [l.T/m]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.FluidityDynamic">FluidityDynamic</a></td><td>FluidityDynamic</td><td>1/(U.Pa*U.s)</td><td>Dynamic fluidity [l.T/m]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>Force</td><td>1*U.N</td><td>Force [l.m/T2]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Frequency">Frequency</a></td><td>Frequency</td><td>1*U.rad/U.s</td><td>Frequency [A/T]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fusivity">Fusivity</a></td><td>Fusivity</td><td>1*U.s/U.m^2</td><td>Fusivity [T/l2]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Inductance">Inductance</a></td><td>Inductance</td><td>1*U.H</td><td>Inductance [l2.m/N2]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>Length</td><td>1*U.m</td><td>Length [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.LengthSpecific">LengthSpecific</a></td><td>LengthSpecific</td><td>1*U.m/U.C</td><td>Specific length [l/N]</td></tr>
@@ -111,7 +110,6 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.MomentumAngular">MomentumAngular</a></td><td>MomentumAngular</td><td>1*U.J*U.s/U.rad</td><td>Angular momentum [l2.m/(A.T)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Number</a></td><td>Number</td><td>1</td><td>Number [1]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>NumberAbsolute</td><td>1*U.J/(U.mol*U.K)</td><td>Absolute number [1]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberRate">NumberRate</a></td><td>NumberRate</td><td>1/U.s</td><td>NumberRate [1/T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Permeability">Permeability</a></td><td>Permeability</td><td>1*U.H/U.m</td><td>Permeability [l.m/N2]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Permittivity">Permittivity</a></td><td>Permittivity</td><td>1*U.F/U.m</td><td>Permittivity [N2.T2/(l3.m)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PermittivityReciprocal">PermittivityReciprocal</a></td><td>PermittivityReciprocal</td><td>1*U.m/U.H</td><td>Reciprocal permittivity [l3.m/(N2.T2)]</td></tr>
@@ -127,6 +125,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Pressure</a></td><td>Pressure</td><td>1*U.Pa</td><td>Pressure [m/(l.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>PressureAbsolute</td><td>1*U.Pa</td><td>Absolute pressure [m/(l.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureRate">PressureRate</a></td><td>PressureRate</td><td>1*U.Pa/U.s</td><td>Rate of pressure [m/(l.T3)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureReciprocal">PressureReciprocal</a></td><td>PressureReciprocal</td><td>1/U.Pa</td><td>Reciprocal of pressure [l.T2/m]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistanceElectrical">ResistanceElectrical</a></td><td>ResistanceElectrical</td><td>1*U.ohm</td><td>Electrical resistance [l2.m/(N2.T)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Resistivity</a></td><td>Resistivity</td><td>1*U.m/U.A</td><td>Resistivity [l.T/N]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Time</a></td><td>Time</td><td>1*U.s</td><td>Time [T]</td></tr>
@@ -136,6 +135,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeRate">VolumeRate</a></td><td>VolumeRate</td><td>1*U.m^3/U.s</td><td>Rate of volume [l3/T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>VolumeSpecific</td><td>1*U.m^3/U.C</td><td>Specific volume [l3/N]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">VolumeSpecificAbsolute</a></td><td>VolumeSpecificAbsolute</td><td>1*U.m^3/U.C</td><td>Absolute specific volume [l3/N]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificRate">VolumeSpecificRate</a></td><td>VolumeSpecificRate</td><td>1*U.m^3/(U.C*U.s)</td><td>Rate of specific volume [l3/(N.T)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Wavenumber">Wavenumber</a></td><td>Wavenumber</td><td>1*U.rad/U.m</td><td>Wavenumber [A/l]</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
@@ -143,27 +143,26 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
 <font color="blue">model</font> ExampleModel <font color="darkgreen">&quot;Model that uses all of the quantities&quot;</font>
   <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous">FCSys.BaseClasses.Icons.Blocks.Continuous</a>;
 
-  <font color="darkgreen">// Generated from FCSys/resources/quantities.xls, 2013-1-3</font>
+  <font color="darkgreen">// Generated from FCSys/resources/quantities.xls, 2013-1-20</font>
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Acceleration">Q.Acceleration</a> Acceleration=1*U.m/U.s^2 <font color="darkgreen">&quot;Acceleration&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> Amount=1*U.C <font color="darkgreen">&quot;Amount&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.AmountReciprocal">Q.AmountReciprocal</a> AmountReciprocal=1/U.C <font color="darkgreen">&quot;Reciprocal amount&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.AmountVolumic">Q.AmountVolumic</a> AmountVolumic=1*U.C/U.m^3 <font color="darkgreen">&quot;Volumic amount&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.AmountVolumicRate">Q.AmountVolumicRate</a> AmountVolumicRate=1*U.C/(U.m^3*U.s) <font color="darkgreen">
-    &quot;Rate of volumic amount&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Q.Angle</a> Angle=1*U.rad <font color="darkgreen">&quot;Angle&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle2">Q.Angle2</a> Angle2=1*U.sr <font color="darkgreen">&quot;Solid angle&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> Area=1*U.m^2 <font color="darkgreen">&quot;Area&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Capacitance">Q.Capacitance</a> Capacitance=1*U.F <font color="darkgreen">&quot;Capacitance&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.CompressibilityDynamic">Q.CompressibilityDynamic</a> CompressibilityDynamic=1*U.mol/(U.J*U.s) <font color="darkgreen">
+    &quot;Dynamic compressibility&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ConductanceElectrical">Q.ConductanceElectrical</a> ConductanceElectrical=1*U.S <font color="darkgreen">
     &quot;Electrical conductance&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Current=1*U.A <font color="darkgreen">&quot;Current&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">Q.CurrentAreic</a> CurrentAreic=1*U.A/U.m^2 <font color="darkgreen">&quot;Areic current&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentRate">Q.CurrentRate</a> CurrentRate=1*U.A/U.s <font color="darkgreen">&quot;Rate of current&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Energy">Q.Energy</a> Energy=1*U.J <font color="darkgreen">&quot;Energy&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Q.Fluidity</a> Fluidity=1/(U.Pa*U.s) <font color="darkgreen">&quot;Fluidity&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.FluidityDynamic">Q.FluidityDynamic</a> FluidityDynamic=1/(U.Pa*U.s) <font color="darkgreen">&quot;Dynamic fluidity&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> Force=1*U.N <font color="darkgreen">&quot;Force&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Frequency">Q.Frequency</a> Frequency=1*U.rad/U.s <font color="darkgreen">&quot;Frequency&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Fusivity">Q.Fusivity</a> Fusivity=1*U.s/U.m^2 <font color="darkgreen">&quot;Fusivity&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Inductance">Q.Inductance</a> Inductance=1*U.H <font color="darkgreen">&quot;Inductance&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> Length=1*U.m <font color="darkgreen">&quot;Length&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.LengthSpecific">Q.LengthSpecific</a> LengthSpecific=1*U.m/U.C <font color="darkgreen">&quot;Specific length&quot;</font>;
@@ -177,7 +176,6 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
     &quot;Angular momentum&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> Number=1 <font color="darkgreen">&quot;Number&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> NumberAbsolute=1*U.J/(U.mol*U.K) <font color="darkgreen">&quot;Absolute number&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberRate">Q.NumberRate</a> NumberRate=1/U.s <font color="darkgreen">&quot;NumberRate&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Permeability">Q.Permeability</a> Permeability=1*U.H/U.m <font color="darkgreen">&quot;Permeability&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Permittivity">Q.Permittivity</a> Permittivity=1*U.F/U.m <font color="darkgreen">&quot;Permittivity&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PermittivityReciprocal">Q.PermittivityReciprocal</a> PermittivityReciprocal=1*U.m/U.H <font color="darkgreen">
@@ -196,6 +194,8 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> Pressure=1*U.Pa <font color="darkgreen">&quot;Pressure&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> PressureAbsolute=1*U.Pa <font color="darkgreen">&quot;Absolute pressure&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureRate">Q.PressureRate</a> PressureRate=1*U.Pa/U.s <font color="darkgreen">&quot;Rate of pressure&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureReciprocal">Q.PressureReciprocal</a> PressureReciprocal=1/U.Pa <font color="darkgreen">
+    &quot;Reciprocal of pressure&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistanceElectrical">Q.ResistanceElectrical</a> ResistanceElectrical=1*U.ohm <font color="darkgreen">
     &quot;Electrical resistance&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> Resistivity=1*U.m/U.A <font color="darkgreen">&quot;Resistivity&quot;</font>;
@@ -207,7 +207,10 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> VolumeSpecific=1*U.m^3/U.C <font color="darkgreen">&quot;Specific volume&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> VolumeSpecificAbsolute=1*U.m^3/U.C <font color="darkgreen">
     &quot;Absolute specific volume&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificRate">Q.VolumeSpecificRate</a> VolumeSpecificRate=1*U.m^3/(U.C*U.s) <font color="darkgreen">
+    &quot;Rate of specific volume&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Wavenumber">Q.Wavenumber</a> Wavenumber=1*U.rad/U.m <font color="darkgreen">&quot;Wavenumber&quot;</font>;
+
 <font color="blue">end </font>ExampleModel;
 </pre>
       </div>
@@ -215,7 +218,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Jan 13 12:31:55 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:32:48 2013.
 </div>
 </body>
 </html>
