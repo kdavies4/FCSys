@@ -21,7 +21,7 @@ package BCs "Models for boundary conditions"
         inclFacesZ=false,
         inclLinX=false,
         inclLinY=true,
-        graphite(inclC=true, C(V_IC=0.5*U.cc)),
+        graphite('inclC+'=true, 'C+'(V_IC=0.5*U.cc)),
         gas(inclH2O=true, H2O(
             xNegative(isobaric=true, inviscidY=true),
             xPositive(isobaric=true, inviscidY=true),
@@ -129,7 +129,7 @@ package BCs "Models for boundary conditions"
         inclFacesY=false,
         inclFacesZ=false,
         gas(inclH2=true, inclH2O=true),
-        graphite(inclC=true, 'incle-'=true),
+        graphite('inclC+'=true, 'incle-'=true),
         liquid(inclH2O=true))
         annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
       Adapters.Anode anodeAdapter(redeclare package LiquidMedium =
@@ -646,19 +646,19 @@ package BCs "Models for boundary conditions"
               FCSys.Characteristics.'e-'.Graphite)
           annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
 
-        Species.Solid C(redeclare package Data =
-              FCSys.Characteristics.C.Graphite)
+        Species.Solid 'C+'(redeclare package Data =
+              FCSys.Characteristics.'C+'.Graphite)
           annotation (Placement(transformation(extent={{-10,10},{10,30}})));
         Modelica.Electrical.Analog.Interfaces.NegativePin pin
           "Modelica electrical pin" annotation (Placement(transformation(extent
                 ={{70,30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
       equation
         // C
-        connect(C.face.thermal, face.C.thermal) annotation (Line(
+        connect('C+'.face.thermal, face.C.thermal) annotation (Line(
             points={{-8,20},{-40,20},{-40,5.55112e-16},{-80,5.55112e-16}},
             color={127,127,127},
             smooth=Smooth.None));
-        connect(C.heatPort, heatPort) annotation (Line(
+        connect('C+'.heatPort, heatPort) annotation (Line(
             points={{8,20},{40,20},{40,5.55112e-16},{80,5.55112e-16}},
             color={191,0,0},
             smooth=Smooth.None));
@@ -1833,13 +1833,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={40,-160})));
 
         FaceBus.SubregionClosed anEndBC[n_y, n_z](each final axis=FCSys.BaseClasses.Axis.x,
-            each graphite(inclC=true, 'incle-'=true)) annotation (Placement(
+            each graphite('inclC+'=true, 'incle-'=true)) annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-136,0})));
         FaceBus.SubregionClosed caEndBC[n_y, n_z](each final axis=FCSys.BaseClasses.Axis.x,
-            each graphite(inclC=true, 'incle-'=true)) annotation (Placement(
+            each graphite('inclC+'=true, 'incle-'=true)) annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=90,
@@ -1884,13 +1884,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={160,-160})));
         replaceable FaceBusDifferential.Subregion current[n_y, n_z](each final
             axis=FCSys.BaseClasses.Axis.x, graphite(
-            inclC=true,
-            C(isobaric=true),
+            'inclC+'=true,
+            'C+'(isobaric=true),
             'incle-'=true,
             'e-'(isobaric=false))) if inclIO constrainedby
           FaceBusDifferential.Subregion(graphite(
-            inclC=true,
-            C(isobaric=true),
+            'inclC+'=true,
+            'C+'(isobaric=true),
             'incle-'=true,
             'e-'(isobaric=false)))
           annotation (Placement(transformation(extent={{-140,20},{-120,40}})));
@@ -1998,7 +1998,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         FaceBus.SubregionClosed anEnd[n_y, n_z](each final axis=FCSys.BaseClasses.Axis.x,
             each graphite(
-            inclC=true,
+            'inclC+'=true,
             'incle-'=true,
             'e-'(redeclare Face.Material.Current normal(redeclare
                   Modelica.Blocks.Sources.Ramp spec(height=U.A,duration=50)))))
@@ -2008,7 +2008,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={-30,0})));
         FaceBus.SubregionClosed caEnd[n_y, n_z](each final axis=FCSys.BaseClasses.Axis.x,
             each graphite(
-            inclC=true,
+            'inclC+'=true,
             'incle-'=true,
             'e-'(redeclare Face.Material.Current normal(redeclare
                   Modelica.Blocks.Sources.Ramp spec(height=U.A,duration=50)))))
@@ -2205,25 +2205,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       extends BaseClasses.NullPhase;
 
       // Conditionally include species.
-      parameter Boolean inclC=false "Carbon (C)" annotation (
-        Evaluate=true,
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          group="Species",
-          __Dymola_descriptionLabel=true,
-          __Dymola_joinNext=true));
-      Chemical.Species C(
-        final inclLinX=inclLinX,
-        final inclLinY=inclLinY,
-        final inclLinZ=inclLinZ,
-        redeclare FCSys.Characteristics.C.Graphite Data) if inclC "Model"
-        annotation (Dialog(
-          group="Species",
-          __Dymola_descriptionLabel=true,
-          enable=inclC), Placement(transformation(extent={{-10,-10},{10,10}})));
-
-      parameter Boolean 'incle-'=false "<html>Electrons (e<sup>-</sup>)</html>"
+      parameter Boolean Error "<html>Carbon plus (C<sup>+</sup>)</html>"
         annotation (
         Evaluate=true,
         HideResult=true,
@@ -2232,6 +2214,22 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
+      Chemical.Species 'C+'(
+        final inclLinX=inclLinX,
+        final inclLinY=inclLinY,
+        final inclLinZ=inclLinZ,
+        redeclare FCSys.Characteristics.'C+'.Graphite Data) if '' + ERROR
+        annotation (Dialog(
+          group="Species",
+          __Dymola_descriptionLabel=true,
+          enable='' + ERROR annotation (
+            Evaluate=true,
+            HideResult=true,
+            choices(__Dymola_checkBox=true),
+            Dialog(
+              group="Species",
+              __Dymola_descriptionLabel=true,
+              __Dymola_joinNext=true))));
       Chemical.Species 'e-'(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
@@ -2243,12 +2241,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           enable='incle-'), Placement(transformation(extent={{-10,-10},{10,10}})));
 
     equation
-      // C
-      connect(C.chemical, chemical.C) annotation (Line(
+      // C+
+      connect('C+'.chemical, chemical.'C+') annotation (Line(
           points={{-5.08852e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
           color={208,104,0},
           smooth=Smooth.None));
-      connect(u.C, C.u) annotation (Line(
+      connect(u.'C+', 'C+'.u) annotation (Line(
           points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
               4}},
           color={0,0,127},
@@ -2273,8 +2271,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       extends BaseClasses.NullPhase;
 
       // Conditionally include species.
-      parameter Boolean inclC19HF37O5S=false
-        "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</html>"
+      parameter Boolean 'inclC19HF37O5S-'=false
+        "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)</html>"
         annotation (
         Evaluate=true,
         HideResult=true,
@@ -2283,34 +2281,16 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      Chemical.Species C19HF37O5S(
+      Chemical.Species 'C19HF37O5S-'(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
-        redeclare FCSys.Characteristics.C19HF37O5S.Ionomer Data) if
-        inclC19HF37O5S "Model" annotation (Dialog(
+        redeclare FCSys.Characteristics.'C19HF37O5S-'.Ionomer Data) if
+        'inclC19HF37O5S-' "Model" annotation (Dialog(
           group="Species",
           __Dymola_descriptionLabel=true,
-          enable=inclC19HF37O5S), Placement(transformation(extent={{-10,-10},{
-                10,10}})));
-      parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
-        annotation (
-        Evaluate=true,
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(
-          group="Species",
-          __Dymola_descriptionLabel=true,
-          __Dymola_joinNext=true));
-      Chemical.Species H2O(
-        final inclLinX=inclLinX,
-        final inclLinY=inclLinY,
-        final inclLinZ=inclLinZ,
-        redeclare FCSys.Characteristics.H2O.Gas Data) if inclH2O "Model"
-        annotation (Dialog(
-          group="Species",
-          __Dymola_descriptionLabel=true,
-          enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,10}})));
+          enable='inclC19HF37O5S-'), Placement(transformation(extent={{-10,-10},
+                {10,10}})));
       parameter Boolean 'inclH+'=false "<html>Protons (H<sup>+</sup>)</html>"
         annotation (
         Evaluate=true,
@@ -2329,26 +2309,32 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           group="Species",
           __Dymola_descriptionLabel=true,
           enable='inclH+'), Placement(transformation(extent={{-10,-10},{10,10}})));
+      parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
+        annotation (
+        Evaluate=true,
+        HideResult=true,
+        choices(__Dymola_checkBox=true),
+        Dialog(
+          group="Species",
+          __Dymola_descriptionLabel=true,
+          __Dymola_joinNext=true));
+      Chemical.Species H2O(
+        final inclLinX=inclLinX,
+        final inclLinY=inclLinY,
+        final inclLinZ=inclLinZ,
+        redeclare FCSys.Characteristics.H2O.Gas Data) if inclH2O "Model"
+        annotation (Dialog(
+          group="Species",
+          __Dymola_descriptionLabel=true,
+          enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,10}})));
 
     equation
-      // C19HF37O5S
-      connect(C19HF37O5S.chemical, chemical.C19HF37O5S) annotation (Line(
+      // C19HF37O5S-
+      connect('C19HF37O5S-'.chemical, chemical.'C19HF37O5S-') annotation (Line(
           points={{-5.08852e-16,-4},{5.55112e-16,-40}},
           color={208,104,0},
           smooth=Smooth.None));
-      connect(u.C19HF37O5S, C19HF37O5S.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-              4}},
-          color={0,0,127},
-          thickness=0.5,
-          smooth=Smooth.None));
-
-      // H2O
-      connect(H2O.chemical, chemical.H2O) annotation (Line(
-          points={{-5.08852e-16,-4},{5.55112e-16,-40}},
-          color={208,104,0},
-          smooth=Smooth.None));
-      connect(u.H2O, H2O.u) annotation (Line(
+      connect(u.'C19HF37O5S-', 'C19HF37O5S-'.u) annotation (Line(
           points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
               4}},
           color={0,0,127},
@@ -2361,6 +2347,18 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           color={208,104,0},
           smooth=Smooth.None));
       connect(u.'H+', 'H+'.u) annotation (Line(
+          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
+              4}},
+          color={0,0,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+
+      // H2O
+      connect(H2O.chemical, chemical.H2O) annotation (Line(
+          points={{-5.08852e-16,-4},{5.55112e-16,-40}},
+          color={208,104,0},
+          smooth=Smooth.None));
+      connect(u.H2O, H2O.u) annotation (Line(
           points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
               4}},
           color={0,0,127},
@@ -3774,7 +3772,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             redeclare replaceable Face.Mechanical.Force transverseZ,
             redeclare replaceable Face.Thermal.HeatFlowRate thermal(spec(k=0)))),
 
-        graphite(C(
+        graphite('C+'(
             redeclare replaceable Face.Material.Current normal(spec(k=0)),
             redeclare replaceable Face.Mechanical.Force transverseX,
             redeclare replaceable Face.Mechanical.Force transverseY,
@@ -3787,27 +3785,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             redeclare replaceable Face.Mechanical.Force transverseZ,
             redeclare replaceable Face.Thermal.HeatFlowRate thermal(spec(k=0)))),
 
-        ionomer(
-          C19HF37O5S(
-            redeclare replaceable Face.Material.Current normal(spec(k=0)),
-            redeclare replaceable Face.Mechanical.Force transverseX,
-            redeclare replaceable Face.Mechanical.Force transverseY,
-            redeclare replaceable Face.Mechanical.Force transverseZ,
-            redeclare replaceable Face.Thermal.HeatFlowRate thermal(spec(k=0))),
+        ionomer);
 
-          H2O(
-            redeclare replaceable Face.Material.Current normal(spec(k=0)),
-            redeclare replaceable Face.Mechanical.Force transverseX,
-            redeclare replaceable Face.Mechanical.Force transverseY,
-            redeclare replaceable Face.Mechanical.Force transverseZ,
-            redeclare replaceable Face.Thermal.HeatFlowRate thermal(spec(k=0))),
-
-          'H+'(
-            redeclare replaceable Face.Material.Current normal(spec(k=0)),
-            redeclare replaceable Face.Mechanical.Force transverseX,
-            redeclare replaceable Face.Mechanical.Force transverseY,
-            redeclare replaceable Face.Mechanical.Force transverseZ,
-            redeclare replaceable Face.Thermal.HeatFlowRate thermal(spec(k=0)))));
+      redeclare replaceable Face.Mechanical.Force transverseX;
+      redeclare replaceable Face.Mechanical.Force Error;
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
@@ -3821,11 +3802,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           H2O(isobaric=true),
           N2(isobaric=true),
           O2(isobaric=true)),
-        graphite(C(isobaric=true), 'e-'(thermoOpt=ThermoOpt.ClosedDiabatic)),
-        ionomer(
-          C19HF37O5S(isobaric=true),
-          H2O(isobaric=true),
-          'H+'(isobaric=true)));
+        graphite('C+'(isobaric=true), 'e-'(thermoOpt=ThermoOpt.ClosedDiabatic)),
+
+        ionomer(Error),
+        H2O(isobaric=true),
+        'H+'(isobaric=true));
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
@@ -3839,11 +3820,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           H2O(isobaric=true),
           N2(isobaric=true),
           O2(isobaric=true)),
-        graphite(C(isobaric=true), 'e-'(thermoOpt=ThermoOpt.ClosedAdiabatic)),
-        ionomer(
-          C19HF37O5S(isobaric=true),
-          H2O(isobaric=true),
-          'H+'(isobaric=true)));
+        graphite('C+'(isobaric=true), 'e-'(thermoOpt=ThermoOpt.ClosedAdiabatic)),
+
+        ionomer(Error),
+        H2O(isobaric=true),
+        'H+'(isobaric=true));
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
@@ -4055,29 +4036,24 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends BaseClasses.NullPhase;
 
         // Conditionally include species.
-        parameter Boolean inclC=false "Carbon (C)" annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
-        Face.Species C(final axis=axis, isobaric=true) if inclC "Model"
+        parameter Boolean HideResult=true;
+        parameter Boolean choices(__Dymola_checkBox=true);
+        parameter Boolean Dialog(
+          group="Species",
+          __Dymola_descriptionLabel=true,
+          __Dymola_joinNext=true);
+        Face.Species 'C+'(final axis=axis, isobaric=true) if '' + ERROR
           annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
-            enable=inclC), Placement(transformation(extent={{-10,-10},{10,10}})));
-
-        parameter Boolean 'incle-'=false
-          "<html>Electrons (e<sup>-</sup>)</html>" annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
+            enable='' + ERROR annotation (
+              Evaluate=true,
+              HideResult=true,
+              choices(__Dymola_checkBox=true),
+              Dialog(
+                group="Species",
+                __Dymola_descriptionLabel=true,
+                __Dymola_joinNext=true))));
         Face.Species 'e-'(final axis=axis) if 'incle-' "Model" annotation (
             Dialog(
             group="Species",
@@ -4085,33 +4061,33 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             enable='incle-'), Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
-        // C
-        connect(C.face.normal, face.C.normal) annotation (Line(
+        // C+
+        connect('C+'.face.normal, face.'C+'.normal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.face.transverseX, face.C.transverseX) annotation (Line(
+        connect('C+'.face.transverseX, face.'C+'.transverseX) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.face.transverseY, face.C.transverseY) annotation (Line(
+        connect('C+'.face.transverseY, face.'C+'.transverseY) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.face.transverseZ, face.C.transverseZ) annotation (Line(
+        connect('C+'.face.transverseZ, face.'C+'.transverseZ) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.face.thermal, face.C.thermal) annotation (Line(
+        connect('C+'.face.thermal, face.'C+'.thermal) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(u.C, C.u) annotation (Line(
+        connect(u.'C+', 'C+'.u) annotation (Line(
             points={{5.55112e-16,40},{5.55112e-16,14},{6.10623e-16,14},{
                 6.10623e-16,4}},
             color={0,0,127},
@@ -4150,6 +4126,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
+
       end Graphite;
 
       model Ionomer "BC for ionomer"
@@ -4157,8 +4134,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends BaseClasses.NullPhase;
 
         // Conditionally include species.
-        parameter Boolean inclC19HF37O5S=false
-          "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</html>"
+        parameter Boolean 'inclC19HF37O5S-'=false
+          "<html>Nafion sulfonate minus (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)</html>"
           annotation (
           Evaluate=true,
           HideResult=true,
@@ -4167,11 +4144,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        Face.Species C19HF37O5S(final axis=axis,isobaric=true) if
-          inclC19HF37O5S "Model" annotation (Dialog(
+        Face.Species 'C19HF37O5S-'(final axis=axis,isobaric=true) if
+          'inclC19HF37O5S-' "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
-            enable=inclC19HF37O5S), Placement(transformation(extent={{-10,-10},
+            enable='inclC19HF37O5S-'), Placement(transformation(extent={{-10,-10},
                   {10,10}})));
 
         parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
@@ -4204,38 +4181,38 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             enable='inclH+'), Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
-        // C19HF37O5S
-        connect(C19HF37O5S.face.normal, face.C19HF37O5S.normal) annotation (
-            Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect(C19HF37O5S.face.transverseX, face.C19HF37O5S.transverseX)
+        // C19HF37O5S-
+        connect('C19HF37O5S-'.face.normal, face.'C19HF37O5S-'.normal)
           annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.face.transverseY, face.C19HF37O5S.transverseY)
+        connect('C19HF37O5S-'.face.transverseX, face.'C19HF37O5S-'.transverseX)
           annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.face.transverseZ, face.C19HF37O5S.transverseZ)
+        connect('C19HF37O5S-'.face.transverseY, face.'C19HF37O5S-'.transverseY)
           annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.face.thermal, face.C19HF37O5S.thermal) annotation (
-            Line(
+        connect('C19HF37O5S-'.face.transverseZ, face.'C19HF37O5S-'.transverseZ)
+          annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(u.C19HF37O5S, C19HF37O5S.u) annotation (Line(
+        connect('C19HF37O5S-'.face.thermal, face.'C19HF37O5S-'.thermal)
+          annotation (Line(
+            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
+            color={127,127,127},
+            pattern=LinePattern.None,
+            smooth=Smooth.None));
+        connect(u.'C19HF37O5S-', 'C19HF37O5S-'.u) annotation (Line(
             points={{5.55112e-16,40},{5.55112e-16,14},{6.10623e-16,14},{
                 6.10623e-16,4}},
             color={0,0,127},
@@ -4274,6 +4251,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
+
       end Ionomer;
 
       model Liquid "BC for liquid"
@@ -4904,7 +4882,7 @@ boundary condition</a> model.
 
             redeclare replaceable FaceDifferential.Thermal.HeatFlowRate thermal)),
 
-        graphite(C(
+        graphite('C+'(
             redeclare replaceable FaceDifferential.Material.Current material,
             redeclare replaceable FaceDifferential.Mechanical.Force transverseX,
 
@@ -4924,35 +4902,24 @@ boundary condition</a> model.
             redeclare replaceable FaceDifferential.Thermal.HeatFlowRate thermal)),
 
         ionomer(
-          C19HF37O5S(
-            redeclare replaceable FaceDifferential.Material.Current material,
-            redeclare replaceable FaceDifferential.Mechanical.Force transverseX,
+          redeclare replaceable FaceDifferential.Mechanical.Force transverseX,
+          redeclare replaceable FaceDifferential.Mechanical.Force transverseY,
+          redeclare replaceable FaceDifferential.Mechanical.Force transverseZ,
+          redeclare replaceable FaceDifferential.Thermal.HeatFlowRate thermal),
 
-            redeclare replaceable FaceDifferential.Mechanical.Force transverseY,
+        H2O(
+          redeclare replaceable FaceDifferential.Material.Current material,
+          redeclare replaceable FaceDifferential.Mechanical.Force transverseX,
+          redeclare replaceable FaceDifferential.Mechanical.Force transverseY,
+          redeclare replaceable FaceDifferential.Mechanical.Force transverseZ,
+          redeclare replaceable FaceDifferential.Thermal.HeatFlowRate thermal),
 
-            redeclare replaceable FaceDifferential.Mechanical.Force transverseZ,
-
-            redeclare replaceable FaceDifferential.Thermal.HeatFlowRate thermal),
-
-          H2O(
-            redeclare replaceable FaceDifferential.Material.Current material,
-            redeclare replaceable FaceDifferential.Mechanical.Force transverseX,
-
-            redeclare replaceable FaceDifferential.Mechanical.Force transverseY,
-
-            redeclare replaceable FaceDifferential.Mechanical.Force transverseZ,
-
-            redeclare replaceable FaceDifferential.Thermal.HeatFlowRate thermal),
-
-          'H+'(
-            redeclare replaceable FaceDifferential.Material.Current material,
-            redeclare replaceable FaceDifferential.Mechanical.Force transverseX,
-
-            redeclare replaceable FaceDifferential.Mechanical.Force transverseY,
-
-            redeclare replaceable FaceDifferential.Mechanical.Force transverseZ,
-
-            redeclare replaceable FaceDifferential.Thermal.HeatFlowRate thermal)));
+        'H+'(
+          redeclare replaceable FaceDifferential.Material.Current material,
+          redeclare replaceable FaceDifferential.Mechanical.Force transverseX,
+          redeclare replaceable FaceDifferential.Mechanical.Force transverseY,
+          redeclare replaceable FaceDifferential.Mechanical.Force transverseZ,
+          redeclare replaceable FaceDifferential.Thermal.HeatFlowRate thermal));
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
@@ -4966,11 +4933,11 @@ boundary condition</a> model.
           H2O(isobaric=true),
           N2(isobaric=true),
           O2(isobaric=true)),
-        graphite(C(isobaric=true), 'e-'(thermoOpt=ThermoOpt.ClosedDiabatic)),
-        ionomer(
-          C19HF37O5S(isobaric=true),
-          H2O(isobaric=true),
-          'H+'(isobaric=true)));
+        graphite('C+'(isobaric=true), 'e-'(thermoOpt=ThermoOpt.ClosedDiabatic)),
+
+        ionomer(Error),
+        H2O(isobaric=true),
+        'H+'(isobaric=true));
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
@@ -4984,11 +4951,11 @@ boundary condition</a> model.
           H2O(isobaric=true),
           N2(isobaric=true),
           O2(isobaric=true)),
-        graphite(C(isobaric=true), 'e-'(thermoOpt=ThermoOpt.ClosedAdiabatic)),
-        ionomer(
-          C19HF37O5S(isobaric=true),
-          H2O(isobaric=true),
-          'H+'(isobaric=true)));
+        graphite('C+'(isobaric=true), 'e-'(thermoOpt=ThermoOpt.ClosedAdiabatic)),
+
+        ionomer(Error),
+        H2O(isobaric=true),
+        'H+'(isobaric=true));
 
       annotation (defaultComponentPrefixes="replaceable",defaultComponentName=
             "subregionFaceBC");
@@ -5139,7 +5106,8 @@ boundary condition</a> model.
         extends BaseClasses.NullPhase;
 
         // Conditionally include species.
-        parameter Boolean inclC=false "Carbon (C)" annotation (
+        parameter Boolean 'inclC+'=false
+          "<html>Carbon plus (C<sup>+</sup>)</html>" annotation (
           Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
@@ -5147,39 +5115,36 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FaceDifferential.Species C(isobaric=true) if inclC "Model" annotation (
+        FaceDifferential.Species 'C+'(isobaric=true) if '' + ERROR annotation (
             Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
-            enable=inclC), Placement(transformation(extent={{-10,-10},{10,10}})));
-
-        parameter Boolean 'incle-'=false
-          "<html>Electrons (e<sup>-</sup>)</html>" annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(
-            group="Species",
-            __Dymola_descriptionLabel=true,
-            __Dymola_joinNext=true));
+            enable='' + ERROR annotation (
+              Evaluate=true,
+              HideResult=true,
+              choices(__Dymola_checkBox=true),
+              Dialog(
+                group="Species",
+                __Dymola_descriptionLabel=true,
+                __Dymola_joinNext=true))));
         FaceDifferential.Species 'e-' if 'incle-' "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable='incle-'), Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
-        // C
-        connect(C.negative, negative.C) annotation (Line(
+        // C+
+        connect('C+'.negative, negative.'C+') annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive, positive.C) annotation (Line(
+        connect('C+'.positive, positive.'C+') annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(u.C, C.u) annotation (Line(
+        connect(u.'C+', 'C+'.u) annotation (Line(
             points={{5.55112e-16,40},{5.55112e-16,14},{6.10623e-16,14},{
                 6.10623e-16,4}},
             color={0,0,127},
@@ -5203,6 +5168,7 @@ boundary condition</a> model.
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
+
       end Graphite;
 
       model Ionomer "BC for ionomer"
@@ -5210,8 +5176,8 @@ boundary condition</a> model.
         extends BaseClasses.NullPhase;
 
         // Conditionally include species.
-        parameter Boolean inclC19HF37O5S=false
-          "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</html>"
+        parameter Boolean 'inclC19HF37O5S-'=false
+          "<html>Nafion sulfonate minus (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)</html>"
           annotation (
           Evaluate=true,
           HideResult=true,
@@ -5220,11 +5186,11 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FaceDifferential.Species C19HF37O5S(isobaric=true) if inclC19HF37O5S
-          "Model" annotation (Dialog(
+        FaceDifferential.Species 'C19HF37O5S-'(isobaric=true) if
+          'inclC19HF37O5S-' "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
-            enable=inclC19HF37O5S), Placement(transformation(extent={{-10,-10},
+            enable='inclC19HF37O5S-'), Placement(transformation(extent={{-10,-10},
                   {10,10}})));
 
         parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
@@ -5256,18 +5222,20 @@ boundary condition</a> model.
             enable='inclH+'), Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
-        // C19HF37O5S
-        connect(C19HF37O5S.negative, negative.C19HF37O5S) annotation (Line(
+        // C19HF37O5S-
+        connect('C19HF37O5S-'.negative, negative.'C19HF37O5S-') annotation (
+            Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive, positive.C19HF37O5S) annotation (Line(
+        connect('C19HF37O5S-'.positive, positive.'C19HF37O5S-') annotation (
+            Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(u.C19HF37O5S, C19HF37O5S.u) annotation (Line(
+        connect(u.'C19HF37O5S-', 'C19HF37O5S-'.u) annotation (Line(
             points={{5.55112e-16,40},{5.55112e-16,14},{6.10623e-16,14},{
                 6.10623e-16,4}},
             color={0,0,127},
@@ -5309,6 +5277,7 @@ boundary condition</a> model.
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
+
       end Ionomer;
 
       model Liquid "BC for liquid"
@@ -5952,57 +5921,47 @@ those generated by the model's <code>connect</code> statements.</p>
 For simulation, specify global default settings by dragging FCSys.BCs.Environment into your model.
 The default global default settings will be used for the current simulation.",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-              100}}), graphics={
-          Rectangle(
-            extent={{-120,60},{120,100}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Text(
-            extent={{-120,60},{120,100}},
-            textString="%name",
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-80,60},{80,-100}},
-            lineColor={0,0,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.Dash),
-          Rectangle(
-            extent={{-70,50},{70,-98}},
-            lineColor={255,255,255},
-            fillPattern=FillPattern.HorizontalCylinder,
-            fillColor={170,170,255}),
-          Rectangle(
-            extent={{-72,-60},{72,-98}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0}),
-          Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
-          Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),
-          Ellipse(
-            extent={{30,10},{50,-10}},
-            pattern=LinePattern.None,
-            lineColor={255,255,255},
-            fillColor={240,0,0},
-            fillPattern=FillPattern.Sphere),
-          Line(points={{-66,-90},{-36,-60}}, color={0,0,0}),
-          Line(points={{2,-90},{32,-60}}, color={0,0,0}),
-          Line(points={{36,-90},{66,-60}}, color={0,0,0}),
-          Line(points={{-32,-90},{-2,-60}}, color={0,0,0}),
-          Rectangle(
-            extent={{70,50},{76,-60}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-76,50},{-70,-60}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0})}),
+              100}}), graphics={Rectangle(
+              extent={{-120,60},{120,100}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Text(
+              extent={{-120,60},{120,100}},
+              textString="%name",
+              lineColor={0,0,0}),Rectangle(
+              extent={{-80,60},{80,-100}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.Dash),Rectangle(
+              extent={{-70,50},{70,-98}},
+              lineColor={255,255,255},
+              fillPattern=FillPattern.HorizontalCylinder,
+              fillColor={170,170,255}),Rectangle(
+              extent={{-72,-60},{72,-98}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
+            Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),Ellipse(
+              extent={{30,10},{50,-10}},
+              pattern=LinePattern.None,
+              lineColor={255,255,255},
+              fillColor={240,0,0},
+              fillPattern=FillPattern.Sphere),Line(points={{-66,-90},{-36,-60}},
+            color={0,0,0}),Line(points={{2,-90},{32,-60}}, color={0,0,0}),Line(
+            points={{36,-90},{66,-60}}, color={0,0,0}),Line(points={{-32,-90},{
+            -2,-60}}, color={0,0,0}),Rectangle(
+              extent={{70,50},{76,-60}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),Rectangle(
+              extent={{-76,50},{-70,-60}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0})}),
       Diagram(graphics));
   end Environment;
 

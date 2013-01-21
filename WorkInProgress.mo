@@ -465,9 +465,7 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
     extends BCs.Adapters.Phases.BaseClasses.PartialPhase;
     extends Modelica.Icons.UnderConstruction;
 
-    BCs.Adapters.Species.Solid C19HF37O5S(redeclare package Data =
-          FCSys.Characteristics.C19HF37O5S.Ionomer)
-      annotation (Placement(transformation(extent={{-10,10},{10,30}})));
+    BCs.Adapters.Species.Solid Error;
     FCSys.WorkInProgress.BCsAdaptersSpeciesFluid 'H+'(redeclare package Data =
           FCSys.Characteristics.'H+'.Ionomer, redeclare package Medium =
           Modelica.Media.IdealGases.SingleGases.H2)
@@ -488,7 +486,8 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
       "Modelica electrical pin" annotation (Placement(transformation(extent={{
               70,30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
   equation
-    connect(C19HF37O5S.face.thermal, face.C19HF37O5S.thermal) annotation (Line(
+    connect('C19HF37O5S-'.face.thermal, face.'C19HF37O5S-'.thermal) annotation
+      (Line(
         points={{-8,20},{-40,20},{-40,5.55112e-16},{-80,5.55112e-16}},
         color={127,127,127},
         smooth=Smooth.None));
@@ -512,7 +511,7 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
         points={{8,-20},{40,-20},{40,5.55112e-16},{80,5.55112e-16}},
         color={191,0,0},
         smooth=Smooth.None));
-    connect(C19HF37O5S.heatPort, heatPort) annotation (Line(
+    connect('C19HF37O5S-'.heatPort, heatPort) annotation (Line(
         points={{8,20},{40,20},{40,5.55112e-16},{80,5.55112e-16}},
         color={191,0,0},
         smooth=Smooth.None));
@@ -520,7 +519,8 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
         points={{58,-40},{80,-40}},
         color={0,127,255},
         smooth=Smooth.None));
-    annotation (Icon(graphics={Line(
+    annotation (Placement(transformation(extent={{-10,10},{10,30}})), Icon(
+          graphics={Line(
               points={{0,60},{0,-60}},
               color={0,0,0},
               smooth=Smooth.None,

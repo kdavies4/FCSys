@@ -715,7 +715,7 @@ This icon is designed for a <b>signal bus</b> connector.
 
           // countElements()
           for i in 1:2 loop
-            assert((countElements({"H2O","H+","C19HF37O5S",""}))[i] == {2,1,5,0}
+            assert((countElements({"H2O","H+","C19HF37O5S-",""}))[i] == {2,1,5,0}
               [i], "The countElements function failed on entry " + String(i) +
               ".");
           end for;
@@ -803,7 +803,7 @@ This icon is designed for a <b>signal bus</b> connector.
       </p>
 
       <p><b>Examples:</b><br>
-    <code>countElements(\"C19HF37O5S\")</code> returns 5 and <code>countElements(\"H+\")</code> returns 2.</p>
+    <code>countElements(\"C19HF37O5S-\")</code> returns 5 and <code>countElements(\"H+\")</code> returns 2.</p>
 
   <p>See the
   <a href=\"modelica://FCSys.BaseClasses.Utilities.ReadFormula\">ReadFormula</a> function

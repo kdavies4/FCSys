@@ -14,8 +14,8 @@ package Characteristics
       extends Modelica.Icons.Example;
 
       // Data
-      import DataC = FCSys.Characteristics.C.Graphite;
-      import DataC19HF37O5S = FCSys.Characteristics.C19HF37O5S.Ionomer;
+      import 'DataC+' = FCSys.Characteristics.'C+'.Graphite;
+      import 'DataC19HF37O5S-' = FCSys.Characteristics.'C19HF37O5S-'.Ionomer;
       import 'Datae-' = FCSys.Characteristics.'e-'.Graphite;
       import DataH2 = FCSys.Characteristics.H2.Gas;
     protected
@@ -32,31 +32,25 @@ package Characteristics
       Q.PressureAbsolute p=U.atm + time*10*U.bar/10;
       Q.TemperatureAbsolute T=273.15*U.K + 0*200*time*U.K/10;
 
-      //**temp:
-      output Q.Resistivity alpha=DataH2O.F()*DataH2O.m;
-      output Q.Time tau=2/DataH2O.F()/U.atm;
-
       // Results
       // -------
       // Isochoric specific heat capacity
-      output Q.CapacityThermalSpecific c_V_C=DataC.c_V(T, p);
-      output Q.CapacityThermalSpecific c_V_C19HF37O5S=
-          FCSys.Characteristics.C19HF37O5S.Ionomer.c_V(T, p);
+      output Q.CapacityThermalSpecific 'c_V_C+'='DataC+'.c_V(T, p);
+      output Q.CapacityThermalSpecific 'c_V_C19HF37O5S-'='DataC19HF37O5S-'.c_V(
+          T, p);
       output Q.CapacityThermalSpecific 'c_V_e-'='Datae-'.c_V(T, p);
       output Q.CapacityThermalSpecific c_V_H2=DataH2.c_V(T, p);
-      output Q.CapacityThermalSpecific c_V_H2_IG=DataH2IG.c_V(T, p_IG);
+      output Q.CapacityThermalSpecific c_V_H2_IG=DataH2IG.c_V(T, p);
       output Q.CapacityThermalSpecific c_V_H2O=DataH2O.c_V(T, p);
       output Q.CapacityThermalSpecific c_V_H2O_liquid=DataH2OLiquid.c_V(T, p);
       output Q.CapacityThermalSpecific 'c_V_H+'=
           FCSys.Characteristics.'H+'.Ionomer.c_V(T, p);
       output Q.CapacityThermalSpecific c_V_N2=DataN2.c_V(T, p);
       output Q.CapacityThermalSpecific c_V_O2=DataO2.c_V(T, p);
-
       //
       // Gibbs potential
-      output Q.Potential g_C=DataC.g(T, p);
-      output Q.Potential g_C19HF37O5S=
-          FCSys.Characteristics.C19HF37O5S.Ionomer.g(T, p);
+      output Q.Potential 'g_C+'='DataC+'.g(T, p);
+      output Q.Potential 'g_C19HF37O5S-'='DataC19HF37O5S-'.g(T, p);
       output Q.Potential 'g_e-'='Datae-'.g(T, p);
       output Q.Potential g_H2=DataH2.g(T, p);
       output Q.Potential g_H2O=DataH2O.g(T, p);
@@ -66,9 +60,8 @@ package Characteristics
       output Q.Potential g_O2=DataO2.g(T, p);
       //
       // Specific enthalpy
-      output Q.Potential h_C=DataC.h(T);
-      output Q.Potential h_C19HF37O5S=
-          FCSys.Characteristics.C19HF37O5S.Ionomer.h(T);
+      output Q.Potential 'h_C+'='DataC+'.h(T);
+      output Q.Potential 'h_C19HF37O5S-'='DataC19HF37O5S-'.h(T);
       output Q.Potential 'h_e-'='Datae-'.h(T);
       output Q.Potential h_H2=DataH2.h(T);
       output Q.Potential h_H2O=DataH2O.h(T);
@@ -78,10 +71,9 @@ package Characteristics
       output Q.Potential h_O2=DataO2.h(T);
       //
       // Pressure
-      output Q.PressureAbsolute p_C=DataC.p_Tv(T, v_C) if DataC.isCompressible;
-      output Q.PressureAbsolute p_C19HF37O5S=
-          FCSys.Characteristics.C19HF37O5S.Ionomer.p_Tv(T, v_C19HF37O5S) if
-        DataC19HF37O5S.isCompressible;
+      output Q.PressureAbsolute 'p_C+'='DataC+'.p_Tv(T, v_C) if 'DataC+'.isCompressible;
+      output Q.PressureAbsolute 'p_C19HF37O5S-'='DataC19HF37O5S-'.p_Tv(T,
+          'v_C19HF37O5S-') if 'DataC19HF37O5S-'.isCompressible;
       output Q.PressureAbsolute 'p_e-'='Datae-'.p_Tv(T, 'v_e-') if 'Datae-'.isCompressible;
       output Q.PressureAbsolute p_H2=DataH2.p_Tv(T, v_H2) if DataH2.isCompressible;
       output Q.PressureAbsolute p_IG=DataH2IG.p_Tv(T, v_IG) if DataH2IG.isCompressible
@@ -95,9 +87,8 @@ package Characteristics
       output Q.PressureAbsolute p_O2=DataO2.p_Tv(T, v_O2) if DataO2.isCompressible;
       //
       // Specific entropy
-      output Q.Number s_C=DataC.s(T, p);
-      output Q.Number s_C19HF37O5S=FCSys.Characteristics.C19HF37O5S.Ionomer.s(T,
-          p);
+      output Q.Number 's_C+'='DataC+'.s(T, p);
+      output Q.Number 's_C19HF37O5S-'='DataC19HF37O5S-'.s(T, p);
       output Q.Number 's_e-'='Datae-'.s(T, p);
       output Q.Number s_H2=DataH2.s(T, p);
       output Q.Number s_H2O=DataH2O.s(T, p);
@@ -107,9 +98,9 @@ package Characteristics
       output Q.Number s_O2=DataO2.s(T, p);
       //
       // Specific volume
-      output Q.VolumeSpecificAbsolute v_C=DataC.v_Tp(T, p);
-      output Q.VolumeSpecificAbsolute v_C19HF37O5S=
-          FCSys.Characteristics.C19HF37O5S.Ionomer.v_Tp(T, p);
+      output Q.VolumeSpecificAbsolute 'v_C+'='DataC+'.v_Tp(T, p);
+      output Q.VolumeSpecificAbsolute 'v_C19HF37O5S-'='DataC19HF37O5S-'.v_Tp(T,
+          p);
       output Q.VolumeSpecificAbsolute 'v_e-'='Datae-'.v_Tp(T, p);
       output Q.VolumeSpecificAbsolute v_H2=DataH2.v_Tp(T, p);
       output Q.VolumeSpecificAbsolute v_IG=DataH2IG.v_Tp(T, p)
@@ -125,7 +116,12 @@ package Characteristics
         experimentSetupOutput,
         Commands(file=
               "resources/scripts/Dymola/Characteristics.Examples.TestCorrelations.mos"));
+
     end TestCorrelations;
+    //
+    // Specific entropy
+    //
+    // Specific volume
 
     model VerifyDerivativep
       "<html>Verify that <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a>() is the correct derivative of <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_Tv\">p_Tv</a>()</html>"
@@ -192,12 +188,12 @@ package Characteristics
     end VerifyDerivativev;
   end Examples;
 
-  package C "C"
+  package 'C+' "<html>C<sup>+</sup></html>"
     extends Modelica.Icons.Package;
-    package Graphite "C graphite"
+    package Graphite "C+ graphite"
 
       extends BaseClasses.Characteristic(
-        final formula="C",
+        final formula="C+",
         final phase="graphite",
         p0=U.atm,
         specVolPow={0,0},
@@ -216,6 +212,7 @@ package Characteristics
         B_c=[8.943859760e3*U.K, -7.295824740e1; 1.398412456e4*U.K, -4.477183040e1;
             5.848134850e3, -2.350925275e1] - b_c[:, 2:3]*ln(U.K),
         r=170*U.pico*U.m/U.q);
+      // **Note:  This data is for C, not C+.
 
       annotation (Documentation(info="<html>
 
@@ -242,17 +239,18 @@ package Characteristics
 <p>For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
     end Graphite;
-  end C;
+  end 'C+';
 
-  package C19HF37O5S "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S</html>"
+  package 'C19HF37O5S-'
+    "<html>C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup></html>"
     extends Modelica.Icons.Package;
-    package Ionomer "C9HF17O5S ionomer"
+    package Ionomer "C9HF17O5S- ionomer"
       // Note:  HTML formatting isn't used in the description because
       // Dymola 7.4 doesn't support it in the GUI for replaceable lists.
       // The same applies to other species.
 
       extends BaseClasses.Characteristic(
-        final formula="C9HF17O5S",
+        final formula="C9HF17O5S-",
         final phase="solid",
         p0=U.atm,
         m=1044.214*U.g/U.mol,
@@ -303,7 +301,7 @@ package Characteristics
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"),
           Icon(graphics));
     end Ionomer;
-  end C19HF37O5S;
+  end 'C19HF37O5S-';
 
   package 'e-' "<html>e<sup>-</sup></html>"
     extends Modelica.Icons.Package;
@@ -1275,10 +1273,9 @@ package Characteristics
   <p>For an ideal gas, this function is independent of temperature
   (although temperature remains as a valid input).</p>
   </html>"));
-
       end beta_T;
-    public
 
+    public
       function c_V
         "<html>Isochoric specific heat capacity as a function of temperature and specific volume (<i>c</i><sub><i>V</i></sub>)</html>"
         extends Modelica.Icons.Function;

@@ -1845,7 +1845,7 @@ of length n_y and n_x is the number of states. Accordingly
 <pre>
         A has the dimension: A(n_x,n_x),
         B has the dimension: B(n_x,n_u),
-        C has the dimension: C(n_y,n_x),
+        C has the dimension: 'C+'(n_y,n_x),
         D has the dimension: D(n_y,n_u)
 </pre>
 <p>
@@ -3841,7 +3841,7 @@ of length n_y and n_x is the number of states. Accordingly
 <pre>
         A has the dimension: A(n_x,n_x),
         B has the dimension: B(n_x,nu),
-        C has the dimension: C(n_y,n_x),
+        C has the dimension: 'C+'(n_y,n_x),
         D has the dimension: D(n_y,nu)
 </pre>
 <p>

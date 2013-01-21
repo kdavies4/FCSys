@@ -158,7 +158,8 @@ package Sensors "Models to measure conditions"
       extends BaseClasses.NullPhase;
 
       // Conditionally include species.
-      parameter Boolean inclC=false "Carbon (C)" annotation (
+      parameter Boolean ''inclC+'=false "<html>Carbon (C<sup>+</sup>)</html>"
+        annotation (
         Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
@@ -166,7 +167,7 @@ package Sensors "Models to measure conditions"
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      replaceable Chemical.Species C(final n_lin=n_lin) if inclC "Model"
+      replaceable Chemical.Species 'C+'(final n_lin=n_lin) if ''inclC+' "Model"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
       parameter Boolean 'incle-'=false "<html>Electrons (e<sup>-</sup>)</html>"
@@ -182,21 +183,21 @@ package Sensors "Models to measure conditions"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
     equation
-      // C
-      connect(C.chemical, chemical.C) annotation (Line(
+      // C+
+      connect('C+'.chemical, chemical.'C+') annotation (Line(
           points={{6.10623e-16,-40},{5.55112e-16,5.55112e-16}},
           color={208,104,0},
           smooth=Smooth.None));
-      connect(C.muPerT, y.C.muPerT) annotation (Line(
+      connect('C+'.muPerT, y.'C+'.muPerT) annotation (Line(
           points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(C.phi, y.C.phi) annotation (Line(
+      connect('C+'.phi, y.'C+'.phi) annotation (Line(
           points={{6.10623e-16,-50},{5.55112e-16,-50},{5.55112e-16,-100}},
           color={0,0,127},
           smooth=Smooth.None));
 
-      connect(C.hbar, y.C.hbar) annotation (Line(
+      connect('C+'.hbar, y.'C+'.hbar) annotation (Line(
           points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
           color={0,0,127},
           smooth=Smooth.None));
@@ -231,8 +232,8 @@ package Sensors "Models to measure conditions"
       extends BaseClasses.NullPhase;
 
       // Conditionally include species.
-      parameter Boolean inclC19HF37O5S=false
-        "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</html>"
+      parameter Boolean 'inclC19HF37O5S-'=false
+        "<html>Nafion sulfonate minus (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)</html>"
         annotation (
         Evaluate=true,
         HideResult=true,
@@ -241,7 +242,8 @@ package Sensors "Models to measure conditions"
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
-      Chemical.Species C19HF37O5S(final n_lin=n_lin) if inclC19HF37O5S "Model"
+      Chemical.Species 'C19HF37O5S-'(final n_lin=n_lin) if 'inclC19HF37O5S-'
+        "Model"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
       parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
@@ -269,23 +271,23 @@ package Sensors "Models to measure conditions"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
     equation
-      // C19HF37O5S
-      connect(C19HF37O5S.chemical, chemical.C19HF37O5S) annotation (Line(
+      // C19HF37O5S-
+      connect('C19HF37O5S-'.chemical, chemical.'C19HF37O5S-') annotation (Line(
           points={{6.10623e-16,-40},{5.55112e-16,-40},{5.55112e-16,5.55112e-16}},
 
           color={208,104,0},
           smooth=Smooth.None));
 
-      connect(C19HF37O5S.muPerT, y.C19HF37O5S.muPerT) annotation (Line(
+      connect('C19HF37O5S-'.muPerT, y.'C19HF37O5S-'.muPerT) annotation (Line(
           points={{-4,-50},{-4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(C19HF37O5S.phi, y.C19HF37O5S.phi) annotation (Line(
+      connect('C19HF37O5S-'.phi, y.'C19HF37O5S-'.phi) annotation (Line(
           points={{6.10623e-16,-50},{5.55112e-16,-50},{5.55112e-16,-100}},
           color={0,0,127},
           smooth=Smooth.None));
 
-      connect(C19HF37O5S.hbar, y.C19HF37O5S.hbar) annotation (Line(
+      connect('C19HF37O5S-'.hbar, y.'C19HF37O5S-'.hbar) annotation (Line(
           points={{4,-50},{4,-70},{0,-70},{0,-100},{5.55112e-16,-100}},
           color={0,0,127},
           smooth=Smooth.None));
@@ -1149,7 +1151,7 @@ sensor</a> models.
         extends BaseClasses.NullPhase;
 
         // Conditionally include species.
-        parameter Boolean inclC=false "Carbon (C)" annotation (
+        parameter Boolean 'inclC+'=false "<html>Carbon plus (C<sup>+</sup>)</html>" annotation (
           Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
@@ -1157,10 +1159,10 @@ sensor</a> models.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        Face.Species C(final axis=axis) if inclC "Model" annotation (Dialog(
+        Face.Species 'C+'(final axis=axis) if 'inclC+' "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
-            enable=inclC), Placement(transformation(extent={{-10,-40},{10,-20}})));
+            enable='inclC+'), Placement(transformation(extent={{-10,-40},{10,-20}})));
         parameter Boolean 'incle-'=false
           "<html>Electrons (e<sup>-</sup>)</html>" annotation (
           Evaluate=true,
@@ -1178,31 +1180,31 @@ sensor</a> models.
 
       equation
         // C
-        connect(C.face.normal, face.C.normal) annotation (Line(
+        connect('C+'.face.normal, face.C.normal) annotation (Line(
             points={{6.10623e-16,-30},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.face.thermal, face.C.thermal) annotation (Line(
+        connect('C+'.face.thermal, face.C.thermal) annotation (Line(
             points={{6.10623e-16,-30},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.face.transverseX, face.C.transverseX) annotation (Line(
+        connect('C+'.face.transverseX, face.C.transverseX) annotation (Line(
             points={{6.10623e-16,-30},{5.55112e-16,-30},{5.55112e-16,
                 5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
 
-        connect(C.face.transverseY, face.C.transverseY) annotation (Line(
+        connect('C+'.face.transverseY, face.C.transverseY) annotation (Line(
             points={{6.10623e-16,-30},{5.55112e-16,-30},{5.55112e-16,
                 5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
 
-        connect(C.face.transverseZ, face.C.transverseZ) annotation (Line(
+        connect('C+'.face.transverseZ, face.C.transverseZ) annotation (Line(
             points={{6.10623e-16,-30},{5.55112e-16,-30},{5.55112e-16,
                 5.55112e-16}},
             color={127,127,127},
@@ -1259,8 +1261,8 @@ sensor</a> models.
         extends BaseClasses.NullPhase;
 
         // Conditionally include species.
-        parameter Boolean inclC19HF37O5S=false
-          "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</html>"
+        parameter Boolean 'inclC19HF37O5S-'=false
+          "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)</html>"
           annotation (
           Evaluate=true,
           HideResult=true,
@@ -1269,11 +1271,11 @@ sensor</a> models.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        Face.Species C19HF37O5S(final axis=axis) if inclC19HF37O5S "Model"
-          annotation (Dialog(
+        Face.Species 'C19HF37O5S-'(final axis=axis) if 'inclC19HF37O5S-'
+          "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
-            enable=inclC19HF37O5S), Placement(transformation(extent={{-10,-40},
+            enable='inclC19HF37O5S-'), Placement(transformation(extent={{-10,-40},
                   {10,-20}})));
         parameter Boolean 'inclH+'=false "<html>Protons (H<sup>+</sup>)</html>"
           annotation (
@@ -1304,20 +1306,20 @@ sensor</a> models.
             enable=inclH2O), Placement(transformation(extent={{-10,-40},{10,-20}})));
 
       equation
-        // C19HF37O5S
-        connect(C19HF37O5S.face.normal, face.C19HF37O5S.normal) annotation (
-            Line(
+        // C19HF37O5S-
+        connect('C19HF37O5S-'.face.normal, face.'C19HF37O5S-'.normal)
+          annotation (Line(
             points={{6.10623e-16,-30},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.face.thermal, face.C19HF37O5S.thermal) annotation (
-            Line(
+        connect('C19HF37O5S-'.face.thermal, face.'C19HF37O5S-'.thermal)
+          annotation (Line(
             points={{6.10623e-16,-30},{5.55112e-16,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.face.transverseX, face.C19HF37O5S.transverseX)
+        connect('C19HF37O5S-'.face.transverseX, face.'C19HF37O5S-'.transverseX)
           annotation (Line(
             points={{6.10623e-16,-30},{5.55112e-16,-30},{5.55112e-16,
                 5.55112e-16}},
@@ -1325,7 +1327,7 @@ sensor</a> models.
             pattern=LinePattern.None,
             smooth=Smooth.None));
 
-        connect(C19HF37O5S.face.transverseY, face.C19HF37O5S.transverseY)
+        connect('C19HF37O5S-'.face.transverseY, face.'C19HF37O5S-'.transverseY)
           annotation (Line(
             points={{6.10623e-16,-30},{5.55112e-16,-30},{5.55112e-16,
                 5.55112e-16}},
@@ -1333,7 +1335,7 @@ sensor</a> models.
             pattern=LinePattern.None,
             smooth=Smooth.None));
 
-        connect(C19HF37O5S.face.transverseZ, face.C19HF37O5S.transverseZ)
+        connect('C19HF37O5S-'.face.transverseZ, face.'C19HF37O5S-'.transverseZ)
           annotation (Line(
             points={{6.10623e-16,-30},{5.55112e-16,-30},{5.55112e-16,
                 5.55112e-16}},
@@ -1341,7 +1343,7 @@ sensor</a> models.
             pattern=LinePattern.None,
             smooth=Smooth.None));
 
-        connect(y.C19HF37O5S, C19HF37O5S.y) annotation (Line(
+        connect(y.'C19HF37O5S-', 'C19HF37O5S-'.y) annotation (Line(
             points={{5.55112e-16,-100},{6.10623e-16,-40}},
             color={0,0,127},
             thickness=0.5,
@@ -1905,9 +1907,9 @@ sensor</a> model.
       y = material.rho;
       0 = material.Ndot "Conservation of material (no storage)";
       annotation (Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="rho")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="rho")}));
     end Density;
 
     model Velocity "Sensor for velocity"
@@ -1921,9 +1923,9 @@ sensor</a> model.
       y = mechanical.phi "Measurement";
       0 = mechanical.mPhidot "Conservation of linear momentum (no storage)";
       annotation (Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="phi")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="phi")}));
     end Velocity;
 
     model Temperature "Sensor for temperature"
@@ -1936,9 +1938,9 @@ sensor</a> model.
       y = thermal.T "Measurement";
       0 = thermal.Qdot "Conservation of energy (no storage)";
       annotation (Icon(graphics={Text(
-              extent={{-100,-20},{100,-50}},
-              lineColor={127,127,127},
-              textString="T")}));
+                  extent={{-100,-20},{100,-50}},
+                  lineColor={127,127,127},
+                  textString="T")}));
     end Temperature;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -2097,12 +2099,12 @@ sensor</a> model.
         defaultComponentPrefixes="replaceable",
         defaultComponentName="subregionFaceSensor",
         Icon(graphics={Line(
-                  points={{-70,0},{-100,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None),Line(
-                  points={{100,0},{70,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None)}),
+              points={{-70,0},{-100,0}},
+              color={127,127,127},
+              smooth=Smooth.None), Line(
+              points={{100,0},{70,0}},
+              color={127,127,127},
+              smooth=Smooth.None)}),
         Diagram(graphics));
     end Subregion;
 
@@ -2245,7 +2247,8 @@ sensor</a> model.
         extends BaseClasses.NullPhase;
 
         // Conditionally include species.
-        parameter Boolean inclC=false "Carbon (C)" annotation (
+        parameter Boolean ''inclC+'=false
+          "<html>Carbon plus (C<sup>+</sup>)</html>" annotation (
           Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
@@ -2253,10 +2256,11 @@ sensor</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        Face.Species C(final axis=axis) if inclC "Model" annotation (Dialog(
+        Face.Species 'C+'(final axis=axis) if ''inclC+' "Model" annotation (
+            Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
-            enable=inclC), Placement(transformation(extent={{-10,-10},{10,10}})));
+            enable='inclC+'), Placement(transformation(extent={{-10,-10},{10,10}})));
         parameter Boolean 'incle-'=false
           "<html>Electrons (e<sup>-</sup>)</html>" annotation (
           Evaluate=true,
@@ -2273,18 +2277,18 @@ sensor</a> model.
             enable='incle-'), Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
-        // C
-        connect(C.negative, negative.C) annotation (Line(
+        // C+
+        connect('C+'.negative, negative.'C+') annotation (Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C.positive, positive.C) annotation (Line(
+        connect('C+'.positive, positive.'C+') annotation (Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(y.C, C.y) annotation (Line(
+        connect(y.'C+', 'C+'.y) annotation (Line(
             points={{5.55112e-16,-100},{6.10623e-16,-10}},
             color={0,0,127},
             thickness=0.5,
@@ -2316,8 +2320,8 @@ sensor</a> model.
         extends BaseClasses.NullPhase;
 
         // Conditionally include species.
-        parameter Boolean inclC19HF37O5S=false
-          "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</html>"
+        parameter Boolean 'inclC19HF37O5S-'=false
+          "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)</html>"
           annotation (
           Evaluate=true,
           HideResult=true,
@@ -2326,11 +2330,11 @@ sensor</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FaceDifferential.Species C19HF37O5S(final axis=axis) if inclC19HF37O5S
-          "Model" annotation (Dialog(
+        FaceDifferential.Species 'C19HF37O5S-'(final axis=axis) if
+          'inclC19HF37O5S-' "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
-            enable=inclC19HF37O5S), Placement(transformation(extent={{-10,-10},
+            enable='inclC19HF37O5S-'), Placement(transformation(extent={{-10,-10},
                   {10,10}})));
         parameter Boolean 'inclH+'=false "<html>Protons (H<sup>+</sup>)</html>"
           annotation (
@@ -2362,17 +2366,20 @@ sensor</a> model.
             enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,10}})));
 
       equation
-        connect(C19HF37O5S.negative, negative.C19HF37O5S) annotation (Line(
+        // C19HF37O5S-
+        connect('C19HF37O5S-'.negative, negative.'C19HF37O5S-') annotation (
+            Line(
             points={{-10,6.10623e-16},{-100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(C19HF37O5S.positive, positive.C19HF37O5S) annotation (Line(
+        connect('C19HF37O5S-'.positive, positive.'C19HF37O5S-') annotation (
+            Line(
             points={{10,6.10623e-16},{100,5.55112e-16}},
             color={127,127,127},
             pattern=LinePattern.None,
             smooth=Smooth.None));
-        connect(y.C19HF37O5S, C19HF37O5S.y) annotation (Line(
+        connect(y.'C19HF37O5S-', 'C19HF37O5S-'.y) annotation (Line(
             points={{5.55112e-16,-100},{6.10623e-16,-9.8}},
             color={0,0,127},
             thickness=0.5,
@@ -2488,12 +2495,13 @@ sensor</a> model.
                 origin={0,-100})));
 
           annotation (defaultComponentName="phaseFaceSensor", Icon(graphics={
-                  Line(   points={{-70,0},{-100,0}},
-                          color={127,127,127},
-                          smooth=Smooth.None),Line(
-                          points={{100,0},{70,0}},
-                          color={127,127,127},
-                          smooth=Smooth.None)}));
+                  Line(
+                  points={{-70,0},{-100,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None), Line(
+                  points={{100,0},{70,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None)}));
         end NullPhase;
       end BaseClasses;
     end Phases;
@@ -2685,12 +2693,12 @@ sensor</a> model.
           smooth=Smooth.None));
 
       annotation (defaultComponentName="speciesFaceSensor", Icon(graphics={Line(
-                  points={{-70,0},{-100,0}},
-                  color={0,0,0},
-                  smooth=Smooth.None),Line(
-                  points={{100,0},{70,0}},
-                  color={0,0,0},
-                  smooth=Smooth.None)}));
+              points={{-70,0},{-100,0}},
+              color={0,0,0},
+              smooth=Smooth.None), Line(
+              points={{100,0},{70,0}},
+              color={0,0,0},
+              smooth=Smooth.None)}));
     end Species;
 
     model SpeciesX
@@ -3350,12 +3358,13 @@ sensor</a> model.
             smooth=Smooth.None));
 
         annotation (defaultComponentName="speciesFaceSensor", Icon(graphics={
-                Line( points={{-70,0},{-100,0}},
-                      color={0,0,0},
-                      smooth=Smooth.None),Line(
-                      points={{100,0},{70,0}},
-                      color={0,0,0},
-                      smooth=Smooth.None)}));
+                Line(
+                points={{-70,0},{-100,0}},
+                color={0,0,0},
+                smooth=Smooth.None), Line(
+                points={{100,0},{70,0}},
+                color={0,0,0},
+                smooth=Smooth.None)}));
       end PartialSpecies;
     end BaseClasses;
   end FaceDifferential;

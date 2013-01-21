@@ -44,9 +44,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Placement(transformation(extent={{50,-10},{70,10}})));
 
       FCSys.BCs.FaceBus.SubregionClosed bC1[n_y, n_z](each graphite(
-          inclC=true,
+          'inclC+'=true,
           'incle-'=true,
-          C(thermal(spec(k=environment.T))),
+          'C+'(thermal(spec(k=environment.T))),
           'e-'(thermal(spec(k=environment.T))))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -54,9 +54,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
             origin={-84,0})));
 
       FCSys.BCs.FaceBus.SubregionClosed bC2[n_y, n_z](each graphite(
-          inclC=true,
+          'inclC+'=true,
           'incle-'=true,
-          C(thermal(spec(k=environment.T))),
+          'C+'(thermal(spec(k=environment.T))),
           'e-'(thermal(spec(k=environment.T)), redeclare
               FCSys.BCs.Face.Material.Density normal(spec(k(start=U.atm/(298.15
                       *U.K))))))) annotation (Placement(transformation(
@@ -219,9 +219,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
           inclH2=true,
           H2(thermal(spec(k=environment.T))),
           H2O(thermal(spec(k=environment.T)))), each graphite(
-          inclC=true,
+          'inclC+'=true,
           'incle-'=true,
-          C(thermal(spec(k=environment.T))),
+          'C+'(thermal(spec(k=environment.T))),
           'e-'(thermal(spec(k=environment.T))))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -235,9 +235,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
           N2(thermal(spec(k=environment.T))),
           O2(thermal(spec(k=environment.T))),
           H2O(thermal(spec(k=environment.T)))), each graphite(
-          inclC=true,
+          'inclC+'=true,
           'incle-'=true,
-          C(thermal(spec(k=environment.T))),
+          'C+'(thermal(spec(k=environment.T))),
           'e-'(thermal(spec(k=environment.T)), redeclare
               FCSys.BCs.Face.Material.Density normal(spec(k(start=U.atm/(298.15
                       *U.K))))))) annotation (Placement(transformation(
@@ -321,8 +321,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       FCSys.BCs.FaceBus.SubregionFlow bC1[n_y, n_z](
         each gas(inclH2=true, inclH2O=true),
-        each graphite(inclC=true, 'incle-'=true),
-        each ionomer(inclC19HF37O5S=true, 'inclH+'=true)) annotation (Placement(
+        each graphite('inclC+'=true, 'incle-'=true),
+        each ionomer('inclC19HF37O5S-'=true, 'inclH+'=true)) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
@@ -338,13 +338,13 @@ package Regions "3D arrays of discrete, interconnected subregions"
           H2O(redeclare FCSys.BCs.Face.Material.Density normal(spec(k(start=U.atm
                       /(298.15*U.K)))))),
         each graphite(
-          inclC=true,
+          'inclC+'=true,
           'incle-'=true,
           'e-'(redeclare FCSys.BCs.Face.Material.Current normal(redeclare
                 Modelica.Blocks.Sources.Ramp spec(duration=1000, height=-2*U.A)))),
 
         each ionomer(
-          inclC19HF37O5S=true,
+          'inclC19HF37O5S-'=true,
           'inclH+'=true,
           'H+'(redeclare FCSys.BCs.Face.Material.Density normal(spec(k(start=U.atm
                       /(298.15*U.K))))))) annotation (Placement(transformation(
@@ -415,9 +415,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
         annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
 
       FCSys.BCs.FaceBus.SubregionClosed bC1[n_y, n_z](each graphite(
-          inclC=true,
+          'inclC+'=true,
           'incle-'=true,
-          C(thermal(spec(k=environment.T))),
+          'C+'(thermal(spec(k=environment.T))),
           'e-'(thermal(spec(k=environment.T))))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -428,9 +428,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
           inclH2O=true,
           H2(thermal(spec(k=environment.T))),
           H2O(thermal(spec(k=environment.T)))),each graphite(
-          inclC=true,
+          'inclC+'=true,
           'incle-'=true,
-          C(thermal(spec(k=environment.T))),
+          'C+'(thermal(spec(k=environment.T))),
           'e-'(thermal(spec(k=environment.T)),redeclare
               FCSys.BCs.Face.Material.Density material))) annotation (Placement(
             transformation(
@@ -516,9 +516,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
           inclH2O=true,
           H2(thermal(spec(k=environment.T))),
           H2O(thermal(spec(k=environment.T)))), each graphite(
-          inclC=true,
+          'inclC+'=true,
           'incle-'=true,
-          C(thermal(spec(k=environment.T))),
+          'C+'(thermal(spec(k=environment.T))),
           'e-'(thermal(spec(k=environment.T))))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -529,9 +529,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
           inclH2O=true,
           H2(thermal(spec(k=environment.T))),
           H2O(thermal(spec(k=environment.T)))), each graphite(
-          inclC=true,
+          'inclC+'=true,
           'incle-'=true,
-          C(thermal(spec(k=environment.T))),
+          'C+'(thermal(spec(k=environment.T))),
           'e-'(thermal(spec(k=environment.T))))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -581,8 +581,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       FCSys.BCs.FaceBus.SubregionFlow bC1[n_y, n_z](
         each gas(inclH2=true, inclH2O=true),
-        each graphite(inclC=true, 'incle-'=true),
-        each ionomer(inclC19HF37O5S=true, 'inclH+'=true)) annotation (Placement(
+        each graphite('inclC+'=true, 'incle-'=true),
+        each ionomer('inclC19HF37O5S-'=true, 'inclH+'=true)) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
@@ -597,13 +597,13 @@ package Regions "3D arrays of discrete, interconnected subregions"
           H2O(redeclare FCSys.BCs.Face.Material.Density normal(spec(k=U.atm/(
                     298.15*U.K))))),
         each graphite(
-          inclC=true,
+          'inclC+'=true,
           'incle-'=true,
           'e-'(redeclare FCSys.BCs.Face.Material.Current normal(redeclare
                 Modelica.Blocks.Sources.Ramp spec(duration=1000, height=2*U.A)))),
 
         each ionomer(
-          inclC19HF37O5S=true,
+          'inclC19HF37O5S-'=true,
           'inclH+'=true,
           'H+'(redeclare FCSys.BCs.Face.Material.Density normal(spec(k(start=U.atm
                       /(298.15*U.K))))))) annotation (Placement(transformation(
@@ -663,9 +663,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
 
       FCSys.BCs.FaceBus.SubregionClosed bC1[n_y, n_z](each gas(inclH2O=true,
             H2O(thermal(spec(k=environment.T)))), each ionomer(
-          inclC19HF37O5S=true,
+          'inclC19HF37O5S-'=true,
           'inclH+'=true,
-          C19HF37O5S(thermal(spec(k=environment.T))),
+          'C19HF37O5S-('thermal(spec(k=environment.T))),
           'H+'(thermal(spec(k=environment.T))))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -673,9 +673,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
             origin={-24,-8.88178e-16})));
       FCSys.BCs.FaceBus.SubregionClosed bC2[n_y, n_z](each gas(inclH2O=true,
             H2O(thermal(spec(k=environment.T)))), each ionomer(
-          inclC19HF37O5S=true,
+          'inclC19HF37O5S-'=true,
           'inclH+'=true,
-          C19HF37O5S(thermal(spec(k=environment.T))),
+          'C19HF37O5S-('thermal(spec(k=environment.T))),
           'H+'(thermal(spec(k=environment.T))))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -730,8 +730,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           inclH2O=true,
           inclN2=true,
           inclO2=true),
-        each graphite(inclC=true, 'incle-'=true),
-        each ionomer(inclC19HF37O5S=true, 'inclH+'=true)) annotation (Placement(
+        each graphite('inclC+'=true, 'incle-'=true),
+        each ionomer('inclC19HF37O5S-'=true, 'inclH+'=true)) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
@@ -746,15 +746,15 @@ package Regions "3D arrays of discrete, interconnected subregions"
           H2O(redeclare FCSys.BCs.Face.Material.Density normal(spec(k(start=U.atm
                       /(298.15*U.K)))))),
         each graphite(
-          inclC=true,
+          'inclC+'=true,
           'incle-'=true,
-          C(redeclare FCSys.BCs.Face.Thermal.Temperature thermal(spec(k(start=
+          'C+'(redeclare FCSys.BCs.Face.Thermal.Temperature thermal(spec(k(start=
                       298.15*U.K)))),
           'e-'(redeclare FCSys.BCs.Face.Material.Current normal(redeclare
                 Modelica.Blocks.Sources.Ramp spec(duration=1000, height=-2*U.A)))),
 
         each ionomer(
-          inclC19HF37O5S=true,
+          'inclC19HF37O5S-'=true,
           'inclH+'=true,
           'H+'(redeclare FCSys.BCs.Face.Material.Density normal(spec(k(start=U.atm
                       /(298.15*U.K))))))) annotation (Placement(transformation(
@@ -818,9 +818,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
           N2(thermal(spec(k=environment.T))),
           O2(thermal(spec(k=environment.T))),
           H2O(thermal(spec(k=environment.T)))), each graphite(
-          inclC=true,
+          'inclC+'=true,
           'incle-'=true,
-          C(thermal(spec(k=environment.T))),
+          'C+'(thermal(spec(k=environment.T))),
           'e-'(thermal(spec(k=environment.T))))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -833,9 +833,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
           N2(thermal(spec(k=environment.T))),
           O2(thermal(spec(k=environment.T))),
           H2O(thermal(spec(k=environment.T)))), each graphite(
-          inclC=true,
+          'inclC+'=true,
           'incle-'=true,
-          C(thermal(spec(k=environment.T))),
+          'C+'(thermal(spec(k=environment.T))),
           'e-'(thermal(spec(k=environment.T))))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -890,18 +890,18 @@ package Regions "3D arrays of discrete, interconnected subregions"
           N2(thermal(spec(k=environment.T))),
           O2(thermal(spec(k=environment.T))),
           H2O(thermal(spec(k=environment.T)))),each graphite(
-          inclC=true,
+          'inclC+'=true,
           'incle-'=true,
-          C(thermal(spec(k=environment.T))),
+          'C+'(thermal(spec(k=environment.T))),
           'e-'(thermal(spec(k=environment.T))))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={36,0})));
       FCSys.BCs.FaceBus.SubregionClosed bC2[n_y, n_z](each graphite(
-          inclC=true,
+          'inclC+'=true,
           'incle-'=true,
-          C(thermal(spec(k=environment.T))),
+          'C+'(thermal(spec(k=environment.T))),
           'e-'(thermal(spec(k=environment.T)),redeclare
               FCSys.BCs.Face.Material.Density material))) annotation (Placement(
             transformation(
@@ -1002,9 +1002,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
               yNegative(isobaric=false),
               yPositive(isobaric=false))),
           each graphite(
-            inclC=true,
+            'inclC+'=true,
             'incle-'=true,
-            C(V_IC=V - xV),
+            'C+'(V_IC=V - xV),
             'e-'(
               xNegative(isobaric=false),
               xPositive(isobaric=false),
@@ -1215,7 +1215,7 @@ used as the inlet. The z axis extends across the width of the channel.</p></html
 
     model GM "General Motors cathodic test flow plate and current collector"
       extends AnFP(
-        subregions(each graphite(C(alpha_Qdot=U.m*U.K/(95*U.W), alpha_Qdot=U.m*
+        subregions(each graphite('C+'(alpha_Qdot=U.m*U.K/(95*U.W), alpha_Qdot=U.m*
                   U.K/(95*U.W)))),
         L_x=fill(35.22*U.mm/1, 1),
         L_y=fill(1.543*U.m, 1),
@@ -1280,9 +1280,9 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
               xNegative(isobaric=true, inviscidY=false),
               xPositive(isobaric=false))),
           each graphite(
-            inclC=true,
+            'inclC+'=true,
             'incle-'=true,
-            C(V_IC=V - xV),
+            'C+'(V_IC=V - xV),
             'e-'(xNegative(isobaric=false), xPositive(
                   isobaric=false))),
           each liquid(inclH2O=true, H2O(
@@ -1600,10 +1600,10 @@ the z axis extends across the width of the channel.</p></html>"),
               xNegative(isobaric=false),
               xPositive(isobaric=false))),
           each ionomer(
-            inclC19HF37O5S=true,
+            'inclC19HF37O5S-'=true,
             'inclH+'=true,
             inclH2O=true,
-            C19HF37O5S(V_IC=V - xV),
+            'C19HF37O5S-('V_IC=V - xV),
             'H+'(xNegative(isobaric=false), xPositive(
                   isobaric=false)),
             H2O(xNegative(isobaric=false), xPositive(
@@ -1618,7 +1618,7 @@ the z axis extends across the width of the channel.</p></html>"),
 
       //alpha_tau=1e-4*subregions[1,1,1].gas.H2.Data.alpha()),
 
-      //each ionomer(C19HF37O5S(V_IC=0.15*V)))
+      //each ionomer('C19HF37O5S-'(V_IC=0.15*V)))
 
       parameter Q.NumberAbsolute x(nominal=1) = 0.25 "Volumetric porosity";
       parameter Q.NumberAbsolute lambda_IC=14
@@ -1841,10 +1841,10 @@ the z axis extends across the width of the channel.</p>
         inclFacesZ=false,
         redeclare FCSys.Subregions.SubregionIonomerOnly subregions[n_x, n_y,
           n_z](each inclLinX=false, each ionomer(
-            inclC19HF37O5S=true,
+            'inclC19HF37O5S-'=true,
             'inclH+'=true,
             inclH2O=true,
-            C19HF37O5S(initMethPartNum=InitMethScalar.Pressure, p_IC=0),
+            'C19HF37O5S-('initMethPartNum=InitMethScalar.Pressure, p_IC=0),
             'H+'(xNegative(isobaric=false), xPositive(
                   isobaric=false)),
             H2O(xNegative(isobaric=false), xPositive(
@@ -1857,15 +1857,15 @@ the z axis extends across the width of the channel.</p>
       // TODO:  Clean up (move to Species models if possible):
 
       // Note:  In Dymola 7.4 the following can't be used:
-      //     each final N_IC=lambda_IC*subregions[1, 1, 1].ionomer.C19HF37O5S.N_IC)
+      //     each final N_IC=lambda_IC*subregions[1, 1, 1].ionomer.'C19HF37O5S-'.N_IC)
       // due to the following error:
       //     "The left hand side of the following equation is a scalar and the
       //     right hand side is a 3 dimensional array, i.e. it has non-compatible
       //     parts"
       // even though subregions and thus H2O.N_IC is a 3D array.  Instead, the
-      // lambda ratio is multiplied by the first subregion's C19HF37O5S.N_IC and
+      // lambda ratio is multiplied by the first subregion's 'C19HF37O5S-'.N_IC and
       // applied to each H2O.N_IC.  A similar note applies to
-      // C19HF37O5S.V_IC.
+      // 'C19HF37O5S-'.V_IC.
 
       // Eq. 16 from [Springer1991] gives ratio of H2O molecules to SO3- units of
       // Nafion EW 1100 series:
@@ -1892,7 +1892,7 @@ the z axis extends across the width of the channel.</p>
             iconTransformation(extent={{-10,90},{10,110}})));
 
     initial equation
-      //subregions.gas.H2O.N = subregions.ionomer.C19HF37O5S.N*lambda_IC;
+      //subregions.gas.H2O.N = subregions.ionomer.'C19HF37O5S-'.N*lambda_IC;
 
       annotation (
         defaultComponentPrefixes="replaceable",
@@ -2102,15 +2102,15 @@ the z axis extends across the width of the channel.</p>
               xNegative(isobaric=false),
               xPositive(isobaric=false))),
           each graphite(
-            inclC=true,
+            'inclC+'=true,
             'incle-'=true,
-            C(V_IC=V - xV),
+            'C+'(V_IC=V - xV),
             'e-'(xNegative(isobaric=false), xPositive(
                   isobaric=false))),
           each ionomer(
-            inclC19HF37O5S=true,
+            'inclC19HF37O5S-'=true,
             'inclH+'=true,
-            C19HF37O5S(V_IC=V - xV),
+            'C19HF37O5S-('V_IC=V - xV),
             'H+'(xNegative(isobaric=false), xPositive(
                   isobaric=false)),
             H2O(xNegative(isobaric=false), xPositive(
@@ -2124,7 +2124,7 @@ the z axis extends across the width of the channel.</p>
       //'H+'(xPositive(isobaric=true),
 
       //O2(
-      //  each ionomer(C19HF37O5S(V_IC=0.15*V))));
+      //  each ionomer('C19HF37O5S-'(V_IC=0.15*V))));
 
       //
       //
@@ -2327,9 +2327,9 @@ the z axis extends across the width of the channel.</p>
               xNegative(isobaric=false),
               xPositive(isobaric=false,inviscidY=false))),
           each graphite(
-            inclC=true,
+            'inclC+'=true,
             'incle-'=true,
-            C(V_IC=V - xV),
+            'C+'(V_IC=V - xV),
             'e-'(xNegative(isobaric=false), xPositive(
                   isobaric=false))),
           each liquid(inclH2O=true, H2O(
@@ -2664,9 +2664,9 @@ the z axis extends across the width of the channel.</p>
               yNegative(isobaric=false),
               yPositive(isobaric=false))),
           each graphite(
-            inclC=true,
+            'inclC+'=true,
             'incle-'=true,
-            C(V_IC=V - xV),
+            'C+'(V_IC=V - xV),
             'e-'(
               xNegative(isobaric=false),
               xPositive(isobaric=false),
@@ -2817,7 +2817,7 @@ used as the inlet. The z axis extends across the width of the channel.</p>
 
     model GM "General Motors cathodic test flow plate and current collector"
       extends CaFP(
-        subregions(each graphite(C(alpha_Qdot=U.m*U.K/(95*U.W), alpha_Qdot=U.m*
+        subregions(each graphite('C+'(alpha_Qdot=U.m*U.K/(95*U.W), alpha_Qdot=U.m*
                   U.K/(95*U.W)))),
         L_x=fill(35.22*U.mm/1, 1),
         L_y=fill(1.028*U.m, 1),
