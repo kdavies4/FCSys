@@ -8,10 +8,8 @@ package BCs "Models for boundary conditions"
     model FaceBC "<html>Test the BCs for the face of a subregion</html>"
       extends Modelica.Icons.Example;
 
-      FaceBus.Subregion subregionFaceBC(gas(inclH2O=true, H2O(
-            redeclare Face.Material.Current normal(spec(k=0)),
-            inviscidX=false,
-            inviscidZ=false)))
+      FaceBus.Subregion subregionFaceBC(gas(inclH2O=true, H2O(redeclare
+              Face.Normal.CurrentAreic normal(spec(k=0)))))
         annotation (Placement(transformation(extent={{-10,14},{10,34}})));
       Subregions.Subregion subregion(
         L={1,1,1}*U.cm,
@@ -22,15 +20,7 @@ package BCs "Models for boundary conditions"
         inclLinX=false,
         inclLinY=true,
         graphite('inclC+'=true, 'C+'(V_IC=0.5*U.cc)),
-        gas(inclH2O=true, H2O(
-            xNegative(isobaric=true, inviscidY=true),
-            xPositive(isobaric=true, inviscidY=true),
-            zNegative(inviscidY=true),
-            zPositive(inviscidY=true),
-            yPositive(
-              isobaric=false,
-              inviscidX=false,
-              inviscidZ=false))))
+        gas(inclH2O=true))
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
       inner BCs.Environment environment
@@ -58,11 +48,8 @@ package BCs "Models for boundary conditions"
       final inner parameter Q.Area A[Axis]={L[cartWrap(axis + 1)]*L[cartWrap(
           axis + 2)] for axis in Axis} "Cross-sectional area";
 
-      FaceBus.Phases.Gas phaseFaceBC(
-        inclH2O=true,
-        H2O(isobaric=false, redeclare Face.Material.Current normal(spec(k=0))),
-
-        axis=FCSys.BaseClasses.Axis.y)
+      FaceBus.Phases.Gas phaseFaceBC(inclH2O=true, H2O(redeclare
+            Face.Normal.CurrentAreic normal(spec(k=0))))
         annotation (Placement(transformation(extent={{-10,14},{10,34}})));
 
       Subregions.Volume volume
@@ -71,13 +58,7 @@ package BCs "Models for boundary conditions"
         inclReact=false,
         inclLin={false,true,false},
         inclH2=false,
-        inclH2O=true,
-        H2O(
-          xNegative(isobaric=true, inviscidY=true),
-          xPositive(isobaric=true, inviscidY=true),
-          yPositive(isobaric=false),
-          zNegative(inviscidY=true),
-          zPositive(inviscidY=true)))
+        inclH2O=true)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
       inner BCs.Environment environment
@@ -101,7 +82,7 @@ package BCs "Models for boundary conditions"
       extends Modelica.Icons.Example;
 
       // TODO:  Make this into a meaningful example.
-      Router router
+      BCs.Router router
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
     end Router;
 
@@ -109,11 +90,7 @@ package BCs "Models for boundary conditions"
 
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
-      /* **fails simulation:
-  "Model error - power: (1/subregion.graphite.'e-'.rho_face[1, 2]) ** (-1.66666666666667) = (-0.000669271) ** (-1.66667)
-
-  Non-linear solver will attempt to handle this problem."
-  */
+      // **fails check
       inner Modelica.Fluid.System system(T_ambient=293.15 + 5)
         annotation (Placement(transformation(extent={{40,70},{60,90}})));
       inner BCs.Environment environment(T=350*U.K)
@@ -281,28 +258,34 @@ package BCs "Models for boundary conditions"
           color={191,0,0},
           smooth=Smooth.None));
 
-      annotation (Icon(graphics={Line(
-                  points={{0,60},{0,-60}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash,
-                  thickness=0.5),Line(
-                  points={{0,0},{-80,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,20},{80,20}},
-                  color={0,0,255},
-                  smooth=Smooth.None),Line(
-                  points={{0,-20},{80,-20}},
-                  color={191,0,0},
-                  smooth=Smooth.None),Line(
-                  points={{0,60},{80,60}},
-                  color={0,127,255},
-                  smooth=Smooth.None),Line(
-                  points={{0,-60},{80,-60}},
-                  color={0,127,255},
-                  smooth=Smooth.None)}));
+      annotation (Icon(graphics={
+            Line(
+              points={{0,60},{0,-60}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),
+            Line(
+              points={{0,0},{-80,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,20},{80,20}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-20},{80,-20}},
+              color={191,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{0,60},{80,60}},
+              color={0,127,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-60},{80,-60}},
+              color={0,127,255},
+              smooth=Smooth.None)}));
     end Anode;
 
     model Cathode
@@ -387,28 +370,34 @@ package BCs "Models for boundary conditions"
           color={191,0,0},
           smooth=Smooth.None));
 
-      annotation (Icon(graphics={Line(
-                  points={{0,60},{0,-60}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash,
-                  thickness=0.5),Line(
-                  points={{0,0},{-80,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,20},{80,20}},
-                  color={0,0,255},
-                  smooth=Smooth.None),Line(
-                  points={{0,-20},{80,-20}},
-                  color={191,0,0},
-                  smooth=Smooth.None),Line(
-                  points={{0,60},{80,60}},
-                  color={0,127,255},
-                  smooth=Smooth.None),Line(
-                  points={{0,-60},{80,-60}},
-                  color={0,127,255},
-                  smooth=Smooth.None)}));
+      annotation (Icon(graphics={
+            Line(
+              points={{0,60},{0,-60}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),
+            Line(
+              points={{0,0},{-80,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,20},{80,20}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-20},{80,-20}},
+              color={191,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{0,60},{80,60}},
+              color={0,127,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-60},{80,-60}},
+              color={0,127,255},
+              smooth=Smooth.None)}));
     end Cathode;
 
     package Phases "Adapters for material phases"
@@ -1008,12 +997,12 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
   </ol>
   </p></html>"),
           Icon(graphics={Line(
-                      points={{0,-40},{80,-40}},
-                      color={0,127,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,40},{80,40}},
-                      color={0,127,255},
-                      smooth=Smooth.None)}));
+                points={{0,-40},{80,-40}},
+                color={0,127,255},
+                smooth=Smooth.None), Line(
+                points={{0,40},{80,40}},
+                color={0,127,255},
+                smooth=Smooth.None)}));
       end Junction2;
 
       model Junction3
@@ -1139,16 +1128,19 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   </li>
   </ol>
   </p></html>"),
-          Icon(graphics={Line(
-                      points={{0,-40},{80,-40}},
-                      color={0,127,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,40},{80,40}},
-                      color={0,127,255},
-                      smooth=Smooth.None),Line(
-                      points={{6,0},{80,0}},
-                      color={0,127,255},
-                      smooth=Smooth.None)}));
+          Icon(graphics={
+              Line(
+                points={{0,-40},{80,-40}},
+                color={0,127,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,40},{80,40}},
+                color={0,127,255},
+                smooth=Smooth.None),
+              Line(
+                points={{6,0},{80,0}},
+                color={0,127,255},
+                smooth=Smooth.None)}));
       end Junction3;
 
       package BaseClasses "Base classes (not for direct use)"
@@ -1182,17 +1174,20 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     mixturePort.Xi_outflow,
                     1 - sum(X[1:MixtureMedium.nXi])) else mixturePort.Xi_outflow;
 
-          annotation (defaultComponentName="junction", Icon(graphics={Line(
-                          points={{-80,0},{0,0}},
-                          color={0,127,255},
-                          smooth=Smooth.None),Line(
-                          points={{0,-40},{0,40}},
-                          color={0,127,255},
-                          smooth=Smooth.None),Ellipse(
-                          extent={{-6,6},{6,-6}},
-                          lineColor={0,127,255},
-                          fillColor={255,255,255},
-                          fillPattern=FillPattern.Solid)}));
+          annotation (defaultComponentName="junction", Icon(graphics={
+                Line(
+                  points={{-80,0},{0,0}},
+                  color={0,127,255},
+                  smooth=Smooth.None),
+                Line(
+                  points={{0,-40},{0,40}},
+                  color={0,127,255},
+                  smooth=Smooth.None),
+                Ellipse(
+                  extent={{-6,6},{6,-6}},
+                  lineColor={0,127,255},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid)}));
         end PartialJunction;
       end BaseClasses;
     end Junctions;
@@ -1242,7 +1237,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
   package TestStands "Test stands"
     extends Modelica.Icons.Package;
-
     model TestProfile "Cell test profile"
       extends Modelica.Icons.Example;
       extends BaseClasses.PartialTestStandNoIO;
@@ -1725,6 +1719,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       extends Modelica.Icons.BasesPackage;
       partial model PartialTestStand "Partial cell test stand"
         extends FCSys.BaseClasses.Icons.Names.Top9;
+        extends Modelica.Icons.UnderConstruction;
         final parameter Integer n_x_an=1
           "<html>Number of subregions along the through-cell axis in anode FP (<i>n</i><sub>x an</sub>)</html>";
         final parameter Integer n_x_ca=1
@@ -1789,40 +1784,34 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               rotation=270,
               origin={40,-160})));
 
-        FaceBus.SubregionClosed anEndBC[n_y, n_z](each final axis=FCSys.BaseClasses.Axis.x,
-            each graphite('inclC+'=true, 'incle-'=true)) annotation (Placement(
-              transformation(
+        FaceBus.SubregionFlow anEndBC[n_y, n_z](each graphite('inclC+'=true,
+              'incle-'=true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-136,0})));
-        FaceBus.SubregionClosed caEndBC[n_y, n_z](each final axis=FCSys.BaseClasses.Axis.x,
-            each graphite('inclC+'=true, 'incle-'=true)) annotation (Placement(
-              transformation(
+        FaceBus.SubregionFlow caEndBC[n_y, n_z](each graphite('inclC+'=true,
+              'incle-'=true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=90,
               origin={136,0})));
-        FaceBus.SubregionClosed anSourceBC[n_x_an, n_z](each final axis=FCSys.BaseClasses.Axis.y,
-            each gas(inclH2=true, inclH2O=true)) annotation (Placement(
-              transformation(
+        FaceBus.SubregionFlow anSourceBC[n_x_an, n_z](each gas(inclH2=true,
+              inclH2O=true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-40,-136})));
-        FaceBus.SubregionClosed anSinkBC[n_x_an, n_z](each final axis=FCSys.BaseClasses.Axis.y,
-            each gas(inclH2=true, inclH2O=true)) annotation (Placement(
-              transformation(
+        FaceBus.SubregionFlow anSinkBC[n_x_an, n_z](each gas(inclH2=true,
+              inclH2O=true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=180,
               origin={-40,136})));
-        FaceBus.SubregionClosed caSourceBC[n_x_ca, n_z](each final axis=FCSys.BaseClasses.Axis.y,
-            each gas(
+        FaceBus.SubregionFlow caSourceBC[n_x_ca, n_z](each gas(
             inclH2O=true,
             inclN2=true,
             inclO2=true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={40,-136})));
-        FaceBus.SubregionClosed caSinkBC[n_x_ca, n_z](each final axis=FCSys.BaseClasses.Axis.y,
-            each gas(
+        FaceBus.SubregionFlow caSinkBC[n_x_ca, n_z](each gas(
             inclH2O=true,
             inclN2=true,
             inclO2=true)) annotation (Placement(transformation(
@@ -1839,24 +1828,16 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{-10,-10},{10,10}},
               rotation=315,
               origin={160,-160})));
-        replaceable FaceBusDifferential.Subregion current[n_y, n_z](each final
-            axis=FCSys.BaseClasses.Axis.x, graphite(
-            'inclC+'=true,
-            'C+'(isobaric=true),
-            'incle-'=true,
-            'e-'(isobaric=false))) if inclIO constrainedby
-          FaceBusDifferential.Subregion(graphite(
-            'inclC+'=true,
-            'C+'(isobaric=true),
-            'incle-'=true,
-            'e-'(isobaric=false)))
+        replaceable FaceBusDifferential.Subregion current[n_y, n_z](graphite(
+              'inclC+'=true, 'incle-'=true)) if inclIO constrainedby
+          FaceBusDifferential.Subregion(graphite('inclC+'=true, 'incle-'=true))
           annotation (Placement(transformation(extent={{-140,20},{-120,40}})));
 
         replaceable FCSys.Sensors.FaceBusDifferential.Subregion voltage[n_y,
-          n_z](each final axis=FCSys.BaseClasses.Axis.x) if inclIO
+          n_z] if inclIO
           annotation (Placement(transformation(extent={{120,-40},{140,-20}})));
-      equation
 
+      equation
         connect(anSourceBC.face, anSource) annotation (Line(
             points={{-40,-140},{-40,-160}},
             color={127,127,127},
@@ -1933,11 +1914,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                   {160,160}}), graphics),
           Icon(coordinateSystem(preserveAspectRatio=true,extent={{-160,-160},{
                   160,160}}), graphics={Rectangle(
-                      extent={{-160,160},{160,-160}},
-                      lineColor={191,191,191},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Backward),Rectangle(extent={{-160,
-                160},{160,-160}}, lineColor={0,0,0})}));
+                extent={{-160,160},{160,-160}},
+                lineColor={191,191,191},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Backward), Rectangle(extent={{-160,160},
+                    {160,-160}}, lineColor={0,0,0})}));
       end PartialTestStand;
 
       partial model PartialTestStandNoIO
@@ -1953,48 +1934,42 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         final parameter Integer n_z=1
           "<html>Number of subregions across the channel (<i>n</i><sub>z</sub>)</html>";
 
-        FaceBus.SubregionClosed anEnd[n_y, n_z](each final axis=FCSys.BaseClasses.Axis.x,
-            each graphite(
+        FaceBus.SubregionFlow anEnd[n_y, n_z](each graphite(
             'inclC+'=true,
             'incle-'=true,
-            'e-'(redeclare Face.Material.Current normal(redeclare
-                  Modelica.Blocks.Sources.Ramp spec(height=U.A,duration=50)))))
-          annotation (Placement(transformation(
+            'e-'(redeclare Face.Normal.CurrentAreic normal(redeclare
+                  Modelica.Blocks.Sources.Ramp spec(height=U.A/U.cm^2,duration=
+                      50))))) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=90,
               origin={-30,0})));
-        FaceBus.SubregionClosed caEnd[n_y, n_z](each final axis=FCSys.BaseClasses.Axis.x,
-            each graphite(
+        FaceBus.SubregionFlow caEnd[n_y, n_z](each graphite(
             'inclC+'=true,
             'incle-'=true,
-            'e-'(redeclare Face.Material.Current normal(redeclare
-                  Modelica.Blocks.Sources.Ramp spec(height=U.A,duration=50)))))
-          annotation (Placement(transformation(
+            'e-'(redeclare Face.Normal.CurrentAreic normal(redeclare
+                  Modelica.Blocks.Sources.Ramp spec(height=U.A/U.cm^2,duration=
+                      50))))) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={30,0})));
-        FaceBus.SubregionClosed anSource[n_x_an, n_z](each final axis=FCSys.BaseClasses.Axis.y,
-            each gas(inclH2=true, inclH2O=true)) annotation (Placement(
-              transformation(
+        FaceBus.SubregionFlow anSource[n_x_an, n_z](each gas(inclH2=true,
+              inclH2O=true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=180,
               origin={-20,-30})));
-        FaceBus.SubregionClosed anSink[n_x_an, n_z](each final axis=FCSys.BaseClasses.Axis.y,
-            each gas(inclH2=true, inclH2O=true)) annotation (Placement(
-              transformation(
+        FaceBus.SubregionFlow anSink[n_x_an, n_z](each gas(inclH2=true, inclH2O
+              =true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-20,30})));
-        FaceBus.SubregionClosed caSource[n_x_ca, n_z](each final axis=FCSys.BaseClasses.Axis.y,
-            each gas(
+        FaceBus.SubregionFlow caSource[n_x_ca, n_z](each gas(
             inclH2O=true,
             inclN2=true,
             inclO2=true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=180,
               origin={20,-30})));
-        FaceBus.SubregionClosed caSink[n_x_ca, n_z](each final axis=FCSys.BaseClasses.Axis.y,
-            each gas(
+        FaceBus.SubregionFlow caSink[n_x_ca, n_z](each gas(
             inclH2O=true,
             inclN2=true,
             inclO2=true)) annotation (Placement(transformation(
@@ -2710,7 +2685,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       chemical.hbar = u_fluid_int;
       //  end if;
 
-      connect(u.normal, u_material) annotation (Line(
+      connect(u.material, u_material) annotation (Line(
           points={{5.55112e-16,60},{5.55112e-16,40},{-70,40},{-70,30}},
           color={0,0,127},
           thickness=0.5,
@@ -3818,27 +3793,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       equation
         // H2
-        connect(H2.face.normal, face.H2.normal) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect(H2.face.transverseX, face.H2.transverseX) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect(H2.face.transverseY, face.H2.transverseY) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect(H2.face.transverseZ, face.H2.transverseZ) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect(H2.face.thermal, face.H2.thermal) annotation (Line(
+        connect(H2.face, face.H2) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3851,27 +3806,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             smooth=Smooth.None));
 
         // H2O
-        connect(H2O.face.normal, face.H2O.normal) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect(H2O.face.transverseX, face.H2O.transverseX) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect(H2O.face.transverseY, face.H2O.transverseY) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect(H2O.face.transverseZ, face.H2O.transverseZ) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect(H2O.face.thermal, face.H2O.thermal) annotation (Line(
+        connect(H2O.face, face.H2O) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3884,27 +3819,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             smooth=Smooth.None));
 
         // N2
-        connect(N2.face.normal, face.N2.normal) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect(N2.face.transverseX, face.N2.transverseX) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect(N2.face.transverseY, face.N2.transverseY) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect(N2.face.transverseZ, face.N2.transverseZ) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect(N2.face.thermal, face.N2.thermal) annotation (Line(
+        connect(N2.face, face.N2) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3917,27 +3832,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             smooth=Smooth.None));
 
         // O2
-        connect(O2.face.normal, face.O2.normal) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect(O2.face.transverseX, face.O2.transverseX) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect(O2.face.transverseY, face.O2.transverseY) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect(O2.face.transverseZ, face.O2.transverseZ) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect(O2.face.thermal, face.O2.thermal) annotation (Line(
+        connect(O2.face, face.O2) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -3987,27 +3882,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       equation
         // C+
-        connect('C+'.face.normal, face.'C+'.normal) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect('C+'.face.transverseX, face.'C+'.transverseX) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect('C+'.face.transverseY, face.'C+'.transverseY) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect('C+'.face.transverseZ, face.'C+'.transverseZ) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect('C+'.face.thermal, face.'C+'.thermal) annotation (Line(
+        connect('C+'.face, face.'C+') annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4020,27 +3895,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             smooth=Smooth.None));
 
         // e-
-        connect('e-'.face.normal, face.'e-'.normal) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect('e-'.face.transverseX, face.'e-'.transverseX) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect('e-'.face.transverseY, face.'e-'.transverseY) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect('e-'.face.transverseZ, face.'e-'.transverseZ) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect('e-'.face.thermal, face.H2.thermal) annotation (Line(
+        connect('e-'.face, face.'e-') annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4051,6 +3906,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
+
       end Graphite;
 
       model Ionomer "BC for ionomer"
@@ -4105,32 +3961,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       equation
         // C19HF37O5S-
-        connect('C19HF37O5S-'.face.normal, face.'C19HF37O5S-'.normal)
-          annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect('C19HF37O5S-'.face.transverseX, face.'C19HF37O5S-'.transverseX)
-          annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect('C19HF37O5S-'.face.transverseY, face.'C19HF37O5S-'.transverseY)
-          annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect('C19HF37O5S-'.face.transverseZ, face.'C19HF37O5S-'.transverseZ)
-          annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect('C19HF37O5S-'.face.thermal, face.'C19HF37O5S-'.thermal)
-          annotation (Line(
+        connect('C19HF37O5S-'.face, face.'C19HF37O5S-') annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4143,27 +3974,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             smooth=Smooth.None));
 
         // H+
-        connect('H+'.face.normal, face.'H+'.normal) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect('H+'.face.transverseX, face.'H+'.transverseX) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect('H+'.face.transverseY, face.'H+'.transverseY) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect('H+'.face.transverseZ, face.'H+'.transverseZ) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect('H+'.face.thermal, face.'H+'.thermal) annotation (Line(
+        connect('H+'.face, face.'H+') annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4174,6 +3985,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
+
       end Ionomer;
 
       model Liquid "BC for liquid"
@@ -4197,27 +4009,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       equation
         // H2O
-        connect(H2O.face.normal, face.H2O.normal) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect(H2O.face.transverseX, face.H2O.transverseX) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect(H2O.face.transverseY, face.H2O.transverseY) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect(H2O.face.transverseZ, face.H2O.transverseZ) annotation (Line(
-            points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
-            color={127,127,127},
-            pattern=LinePattern.None,
-            smooth=Smooth.None));
-        connect(H2O.face.thermal, face.H2O.thermal) annotation (Line(
+        connect(H2O.face, face.H2O) annotation (Line(
             points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
             color={127,127,127},
             pattern=LinePattern.None,
@@ -4228,6 +4020,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
+
       end Liquid;
 
       package BaseClasses "Base classes (not for direct use)"
@@ -5555,27 +5348,31 @@ those generated by the model's <code>connect</code> statements.</p>
         <td colspan=2 align=center><b>Figure 1:</b> Modes of connection.</td>
       </tr>
     </table>
-</html>"), Icon(graphics={Line(
-              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier),Line(
-              points={{-80,40},{80,40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-80,-40},{80,-40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier)}));
+</html>"), Icon(graphics={
+          Line(
+            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier),
+          Line(
+            points={{-80,40},{80,40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{80,-40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier)}));
   end Router;
 
   record Environment "Environmental properties for a model"
@@ -5611,47 +5408,57 @@ those generated by the model's <code>connect</code> statements.</p>
 For simulation, specify global default settings by dragging FCSys.BCs.Environment into your model.
 The default global default settings will be used for the current simulation.",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-              100}}), graphics={Rectangle(
-              extent={{-120,60},{120,100}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Text(
-              extent={{-120,60},{120,100}},
-              textString="%name",
-              lineColor={0,0,0}),Rectangle(
-              extent={{-80,60},{80,-100}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.Dash),Rectangle(
-              extent={{-70,50},{70,-98}},
-              lineColor={255,255,255},
-              fillPattern=FillPattern.HorizontalCylinder,
-              fillColor={170,170,255}),Rectangle(
-              extent={{-72,-60},{72,-98}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
-            Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),Ellipse(
-              extent={{30,10},{50,-10}},
-              pattern=LinePattern.None,
-              lineColor={255,255,255},
-              fillColor={240,0,0},
-              fillPattern=FillPattern.Sphere),Line(points={{-66,-90},{-36,-60}},
-            color={0,0,0}),Line(points={{2,-90},{32,-60}}, color={0,0,0}),Line(
-            points={{36,-90},{66,-60}}, color={0,0,0}),Line(points={{-32,-90},{
-            -2,-60}}, color={0,0,0}),Rectangle(
-              extent={{70,50},{76,-60}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),Rectangle(
-              extent={{-76,50},{-70,-60}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0})}));
+              100}}), graphics={
+          Rectangle(
+            extent={{-120,60},{120,100}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Text(
+            extent={{-120,60},{120,100}},
+            textString="%name",
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-80,60},{80,-100}},
+            lineColor={0,0,0},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.Dash),
+          Rectangle(
+            extent={{-70,50},{70,-98}},
+            lineColor={255,255,255},
+            fillPattern=FillPattern.HorizontalCylinder,
+            fillColor={170,170,255}),
+          Rectangle(
+            extent={{-72,-60},{72,-98}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0}),
+          Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
+          Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),
+          Ellipse(
+            extent={{30,10},{50,-10}},
+            pattern=LinePattern.None,
+            lineColor={255,255,255},
+            fillColor={240,0,0},
+            fillPattern=FillPattern.Sphere),
+          Line(points={{-66,-90},{-36,-60}}, color={0,0,0}),
+          Line(points={{2,-90},{32,-60}}, color={0,0,0}),
+          Line(points={{36,-90},{66,-60}}, color={0,0,0}),
+          Line(points={{-32,-90},{-2,-60}}, color={0,0,0}),
+          Rectangle(
+            extent={{70,50},{76,-60}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-76,50},{-70,-60}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0})}));
   end Environment;
 
   package BaseClasses "Base classes (not for direct use)"
@@ -5677,13 +5484,13 @@ The default global default settings will be used for the current simulation.",
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             grid={2,2}),graphics={Rectangle(
-                  extent={{-100,40},{100,-40}},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  lineColor={0,0,0}),Text(
-                  extent={{-100,-10},{100,10}},
-                  lineColor={127,127,127},
-                  textString="%y")}),
+              extent={{-100,40},{100,-40}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={0,0,0}), Text(
+              extent={{-100,-10},{100,10}},
+              lineColor={127,127,127},
+              textString="%y")}),
         Diagram(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},

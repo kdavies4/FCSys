@@ -1,14 +1,16 @@
 within FCSys;
 package Test
   "<html>Models and functions to validate <a href=\"modelica://FCSys\">FCSys</a></html>"
-  model TestAll "Test all the functions and models in this package (recursive)"
+  model TestAll "Run all of the tests on this package (recursive)"
     extends Modelica.Icons.Example;
 
     Characteristics.TestAll CharacteristicsTestAll;
+    Units.TestUnits UnitsTestUnits;
     BaseClasses.Utilities.TestAll BaseClassesUtilitiesTestAll;
     annotation (Documentation(info="<html><p>If this model simulates without failure,
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
     // Note:  The simulation tolerance is set to 1e-8.
+
   end TestAll;
   extends Modelica.Icons.Package;
   package Characteristics
@@ -123,12 +125,12 @@ package Test
 
     equation
       y1 = Data.p_Tv(T, v);
-      der(y2) = Data.dp(
+      der(y2) = Data.dp_Tv(
             T,
             v,
             der(T),
             der(v));
-      // Note:  This is equivalent to der(y1) = der(y2), but it must be
+      // Note:  This is equivalent to der(y2) = der(y1), but it must be
       // explicit to ensure that the translator uses the defined derivative
       // instead of the automatically derived one.
 
@@ -162,12 +164,12 @@ package Test
 
     equation
       y1 = Data.v_Tp(T, p);
-      der(y2) = Data.dv(
+      der(y2) = Data.dv_Tp(
             T,
             p,
             der(T),
             der(p));
-      // Note:  This is equivalent to der(y1) = der(y2), but it must be
+      // Note:  This is equivalent to der(y2) = der(y1), but it must be
       // explicit to ensure that the translator uses the defined derivative
       // instead of the automatically derived one.
 
@@ -189,25 +191,21 @@ package Test
       // The data choice is arbitrary but the b_c values must have sufficient
       // richness.
 
+      // Arguments to functions
       Q.TemperatureAbsolute T=(300 + 100*time)*U.K "Temperature";
-      Q.PressureAbsolute p=U.atm "Pressure";
-      Q.Potential y1 "Direct result of function";
-      Q.Potential y2 "Integral of derivative of y1";
+      Q.PressureAbsolute p=U.atm*(1 + time^2) "Pressure";
+      // Note:  The values are arbitrary but must have sufficient richness.
 
-    initial equation
-      y2 = y1;
+      // Results of functions
+      Q.Potential dh "Direct derivative of h";
+      Q.Potential y "Indirect derivative of h";
 
     equation
-      y1 = Data.h(T, p);
-      // **update:
-      der(y2) = Data.c_V(T, p)*der(T);
-      // Note:  This is equivalent to der(y1) = der(y2), but it must be
-      // explicit to ensure that the translator uses the defined derivative
-      // instead of the automatically derived one.
+      dh = der(Data.h(T, p));
+      y = T*der(Data.s(T, p)) + Data.v_Tp(T, p)*der(p);
 
-      // **assert(abs(y1 - y2) < 1e-4*U.V, "The relationship is incorrect.");
+      assert(abs(dh - y) < 1e-16*U.V, "The relationship is incorrect.");
       // Note:  The simulation tolerance is set to 1e-8.
-
       annotation (Documentation(info="<html><p>If this model simulates without failure,
     then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
     end Testh;
@@ -269,6 +267,206 @@ package Test
     then the test has passed.</p></html>"));
     end TestProperties;
   end Characteristics;
+
+  package Units
+    extends Modelica.Icons.Package;
+    model TestUnits "Test the unit relations"
+      import FCSys.Units.*;
+      extends Modelica.Icons.Example;
+
+    protected
+      function test "Test that a ratio is approximately unity"
+
+        input Real x "Ratio";
+        input Real tolerance=1e-7 "Error tolerance";
+        input String name "Name of test";
+
+      algorithm
+        assert(max(abs(x - 1)) <= tolerance, "Test " + name +
+          " is incorrect.\nIt must be approximately 1.0 (+/- " + String(
+          tolerance) + ") but is " + String(x) + ".");
+      end test;
+
+    initial equation
+      // ----------------------------------------------------------------------
+      // Set 1:  Mathematical constants and relations
+      test(pi/3.14159265358979323846264338327950288419716939937510, name=
+        "1 in set 1");
+      // Value from http://en.wikipedia.org/wiki/Pi#Approximate_value
+      test(e/2.71828182845904523536028747135266249775724709369995, name=
+        "2 in set 1");
+      // Value from http://en.wikipedia.org/wiki/E_(mathematical_constant)
+      test(2*pi*rad/(360*degree), name="3 in set 1");
+      test('%'/0.01, name="4 in set 1");
+
+      // ----------------------------------------------------------------------
+      // Set 2:  Relations from [BIPM2006]
+      test(q/(1.602176487E-19*C), name="1 in set 2");
+      test(C*V/J, name="2 in set 2");
+
+      // ----------------------------------------------------------------------
+      // Set 3: Coherent derived units in the SI with special names and
+      // symbols [BIPM2006]
+      test(sr, name="1 in set 3");
+      test(Hz/(cyc/s), name="2 in set 3");
+      // BIPM implicitly assumes that the unit cycle is 1, but the unit rad is 1
+      // too---a discrepency.
+      test(N/(kg*m/s^2), name="3 in set 3");
+      test(Pa/(N/m^2), name="4 in set 3");
+      test(J/(N*m), name="5 in set 3");
+      test(W/(J/s), name="6 in set 3");
+      test(C/(A*s), name="7 in set 3");
+      test(V/(W/A), name="8 in set 3");
+      test(F/(C/V), name="9 in set 3");
+      test(ohm/(V/A), name="10 in set 3");
+      test(S/(A/V), name="11 in set 3");
+      test(Wb/(V*s), name="12 in set 3");
+      test(T/(Wb/m^2), name="13 in set 3");
+      test(H/(Wb/A), name="14 in set 3");
+      test(lm/('cd'*sr), name="15 in set 3");
+      test(lx/(lm/m^2), name="16 in set 3");
+      test(Bq/(cyc/s), name="17 in set 3");
+      // See Hz.
+      test(Gy/(J/kg), name="18 in set 3");
+      test(Sv/(J/kg), name="19 in set 3");
+      test(kat/(mol/s), name="20 in set 3");
+
+      // ----------------------------------------------------------------------
+      // Set 4:  Relations from [NIST2010]
+      // Generated from FCSys/resources/NIST.xls, 2013-1-23
+      test(1/alpha/137.035999074, name="inverse fine-structure constant");
+      test(1/G_0/(12906.4037217*ohm), name="inverse of conductance quantum");
+      test(1/m*h*c/(1.239841930E-6*eV), name=
+        "inverse meter-electron volt relationship");
+      test(1/m*h*c/(4.556335252755E-8*E_h), name=
+        "inverse meter-hartree relationship");
+      test(1/m*h*c/(1.986445684E-25*J), name="inverse meter-joule relationship");
+      test(1/m*h*c/k_B/(1.4387770E-2*K), name=
+        "inverse meter-kelvin relationship");
+      test(1/m*h/c/(2.210218902E-42*kg), name=
+        "inverse meter-kilogram relationship");
+      test(100*kPa/(k_B*273.15*K)/(2.6516462E25/m^3), name=
+        "Loschmidt constant (273.15 K, 100 kPa)");
+      test(101.325*kPa/(k_B*273.15*K)/(2.6867805E25/m^3), name=
+        "Loschmidt constant (273.15 K, 101.325 kPa)");
+      test(12*g/mol/(12E-3*kg/mol), name="molar mass of carbon-12");
+      test(alpha/7.2973525698E-3, name="fine-structure constant");
+      test(atm/(101325*Pa), name="standard atmosphere");
+      test(c/(299792458*m/s), name="speed of light in vacuum");
+      test(c_1/(3.74177153E-16*W*m^2), name="first radiation constant");
+      test(c_2/(1.4387770E-2*m*K), name="second radiation constant");
+      test(c_3_f*cyc/(5.8789254E10*Hz/K), name=
+        "Wien frequency displacement law constant");
+      // Factor of cyc due to inconsistencies b/w rad and cyc in [BIPM2006]
+      test(c_3_lambda/(2.8977721E-3*m*K), name=
+        "Wien wavelength displacement law constant");
+      test(cyc/m*c/(299792458*Hz), name="inverse meter-hertz relationship");
+      test(E_h/(4.35974434E-18*J), name="Hartree energy");
+      test(E_h/(27.21138505*eV), name="Hartree energy in eV");
+      test(E_h/(27.21138505*eV), name="hartree-electron volt relationship");
+      test(E_h/(4.35974434E-18*J), name="hartree-joule relationship");
+      test(E_h/(h*c)/(2.194746313708E7/m), name=
+        "hartree-inverse meter relationship");
+      test(E_h/c^2/(4.85086979E-35*kg), name="hartree-kilogram relationship");
+      test(E_h/h*cyc/(6.579683920729E15*Hz), name="hartree-hertz relationship");
+      // Factor of cyc due to inconsistencies b/w rad and cyc in [BIPM2006]
+      test(E_h/k_B/(3.1577504E5*K), name="hartree-kelvin relationship");
+      test(epsilon_0/(8.854187817E-12*F/m), name="electric constant");
+      test(eV/(1.602176565E-19*J), name="electron volt");
+      test(eV/(3.674932379E-2*E_h), name="electron volt-hartree relationship");
+      test(eV/(1.602176565E-19*J), name="electron volt-joule relationship");
+      test(eV/(h*c)/(8.06554429E5/m), name=
+        "electron volt-inverse meter relationship");
+      test(eV/c^2/(1.782661845E-36*kg), name=
+        "electron volt-kilogram relationship");
+      test(eV/h*cyc/(2.417989348E14*Hz), name=
+        "electron volt-hertz relationship");
+      // Factor of cyc due to inconsistencies b/w rad and cyc in [BIPM2006]
+      test(eV/k_B/(1.1604519E4*K), name="electron volt-kelvin relationship");
+      test(G_0/(7.7480917346E-5*S), name="conductance quantum");
+      test(g/mol/(1E-3*kg/mol), name="molar mass constant");
+      test(h/(6.62606957E-34*J*s), name="Planck constant");
+      test(h/(4.135667516E-15*eV*s), name="Planck constant in eV s");
+      test(h*c/(2*pi)/(197.3269718*mega*eV*femto*m), name=
+        "Planck constant over 2 pi times c in MeV fm");
+      test(h/(2*pi)/(1.054571726E-34*J*s), name="Planck constant over 2 pi");
+      test(h/(2*pi)/(6.58211928E-16*eV*s), name=
+        "Planck constant over 2 pi in eV s");
+      test(Hz*h/cyc/(4.135667516E-15*eV), name=
+        "hertz-electron volt relationship");
+      // Factor of 1/cyc due to inconsistencies b/w rad and cyc in [BIPM2006]
+      test(Hz*h/cyc/(1.5198298460045E-16*E_h), name=
+        "hertz-hartree relationship");
+      // Factor of 1/cyc due to inconsistencies b/w rad and cyc in [BIPM2006]
+      test(Hz*h/cyc/(6.62606957E-34*J), name="hertz-joule relationship");
+      // Factor of 1/cyc due to inconsistencies b/w rad and cyc in [BIPM2006]
+      test(Hz*h/c^2/cyc/(7.37249668E-51*kg), name="hertz-kilogram relationship");
+      // Factor of 1/cyc due to inconsistencies b/w rad and cyc in [BIPM2006]
+      test(Hz*h/k_B/cyc/(4.7992434E-11*K), name="hertz-kelvin relationship");
+      // Factor of 1/cyc due to inconsistencies b/w rad and cyc in [BIPM2006]
+      test(Hz/c/cyc/(3.335640951E-9/m), name="hertz-inverse meter relationship");
+      // Factor of 1/cyc due to inconsistencies b/w rad and cyc in [BIPM2006]
+      test(J/(6.24150934E18*eV), name="joule-electron volt relationship");
+      test(J/(2.29371248E17*E_h), name="joule-hartree relationship");
+      test(J/(h*c)/(5.03411701E24/m), name="joule-inverse meter relationship");
+      test(J/c^2/(1.112650056E-17*kg), name="joule-kilogram relationship");
+      test(J/h*cyc/(1.509190311E33*Hz), name="joule-hertz relationship");
+      test(J/k_B/(7.2429716E22*K), name="joule-kelvin relationship");
+      test(k_B/(1.3806488E-23*J/K), name="Boltzmann constant");
+      test(k_B/(8.6173324E-5*eV/K), name="Boltzmann constant in eV/K");
+      test(k_B/(h*c)/(69.503476/(m*K)), name=
+        "Boltzmann constant in inverse meters per kelvin");
+      test(k_B/h*cyc/(2.0836618E10*Hz/K), name="Boltzmann constant in Hz/K");
+      // Factor of cyc due to inconsistencies b/w rad and cyc in [BIPM2006]
+      test(k_F/(96485.3365*C/mol), name="Faraday constant");
+      test(k_J*cyc/(483597.9E9*Hz/V), name=
+        "conventional value of Josephson constant");
+      test(k_J*cyc/(483597.870E9*Hz/V), name="Josephson constant");
+      // Factor of cyc due to inconsistencies b/w rad and cyc in [BIPM2006]
+      test(K*k_B/(8.6173324E-5*eV), name="kelvin-electron volt relationship");
+      test(K*k_B/(3.1668114E-6*E_h), name="kelvin-hartree relationship");
+      test(K*k_B/(1.3806488E-23*J), name="kelvin-joule relationship");
+      test(K*k_B/(h*c)/(69.503476/m), name="kelvin-inverse meter relationship");
+      test(K*k_B/c^2/(1.5361790E-40*kg), name="kelvin-kilogram relationship");
+      test(K*k_B/h*cyc/(2.0836618E10*Hz), name="kelvin-hertz relationship");
+      // Factor of cyc due to inconsistencies b/w rad and cyc in [BIPM2006]
+      test(kg*c^2/(5.60958885E35*eV), name=
+        "kilogram-electron volt relationship");
+      test(kg*c^2/(2.061485968E34*E_h), name="kilogram-hartree relationship");
+      test(kg*c^2/(8.987551787E16*J), name="kilogram-joule relationship");
+      test(kg*c^2/h*cyc/(1.356392608E50*Hz), name="kilogram-hertz relationship");
+      // Factor of cyc due to inconsistencies b/w rad and cyc in [BIPM2006]
+      test(kg*c^2/k_B/(6.5096582E39*K), name="kilogram-kelvin relationship");
+      test(kg*c/h/(4.52443873E41/m), name="kilogram-inverse meter relationship");
+      test(mu_0/(12.566370614E-7*N/A^2), name="mag. constant");
+      test(N_A/(6.02214129E23/mol), name="Avogadro constant");
+      test(N_A*h/(3.9903127176E-10*J*s/mol), name="molar Planck constant");
+      test(N_A*h*c/(0.119626565779*J*m/mol), name=
+        "molar Planck constant times c");
+      test(Phi_0/(2.067833758E-15*Wb), name="mag. flux quantum");
+      test(q/(1.602176565E-19*C), name="elementary charge");
+      test(q/h/(2.417989348E14*A/J), name="elementary charge over h");
+      test(R/(8.3144621*J/(mol*K)), name="molar gas constant");
+      test(R_inf/(10973731.568539/m), name="Rydberg constant");
+      test(R_inf*c*cyc/(3.289841960364E15*Hz), name=
+        "Rydberg constant times c in Hz");
+      // Factor of cyc due to inconsistencies b/w rad and cyc in [BIPM2006]
+      test(R_inf*h*c/(13.60569253*eV), name="Rydberg constant times hc in eV");
+      test(R_inf*h*c/(2.179872171E-18*J), name="Rydberg constant times hc in J");
+      test(R_K/(25812.807*ohm), name=
+        "conventional value of von Klitzing constant");
+      test(R_K/(25812.8074434*ohm), name="von Klitzing constant");
+      test(R*273.15*K/(100*kPa)/(22.710953E-3*m^3/mol), name=
+        "molar volume of ideal gas (273.15 K, 100 kPa)");
+      test(R*273.15*K/(101.325*kPa)/(22.413968E-3*m^3/mol), name=
+        "molar volume of ideal gas (273.15 K, 101.325 kPa)");
+      test(sigma/(5.670373E-8*W/(m^2*K^4)), name="Stefan-Boltzmann constant");
+      test(Z_0/(376.730313461*ohm), name="characteristic impedance of vacuum");
+
+      annotation (Documentation(info="<html><p>If this model simulates without failure,
+  then the test has passed.</p></html>"));
+    end TestUnits;
+  end Units;
 
   package BaseClasses
     extends Modelica.Icons.BasesPackage;
@@ -696,200 +894,4 @@ matches that of <a href=\"modelica://FCSys\">FCSys</a>, although not all
 packages are represented.
 </p>
 </html>"));
-  package Units
-    extends Modelica.Icons.Package;
-    model TestUnits "Test the unit relations"
-      import FCSys.Units.*;
-      extends Modelica.Icons.Example;
-
-    protected
-      function Test "Test a single value or ratio"
-
-        input Real x "Actual value";
-        input Real tolerance=1e-7 "Error tolerance";
-        input String name "Name of test";
-
-      algorithm
-        assert(max(abs(x - 1)) < tolerance, "Test " + name +
-          " is incorrect.\nIt must be approximately 1.0 (tolerance " + String(
-          tolerance) + ") but is " + String(x) + ".");
-      end Test;
-
-    initial equation
-      // Set 1:  Mathematical constants and relations
-      Test(pi/3.14159265358979323846264338327950288419716939937510, name=
-        "1 in set 1");
-      // Value from http://en.wikipedia.org/wiki/Pi#Approximate_value
-      Test(e/2.71828182845904523536028747135266249775724709369995, name=
-        "2 in set 1");
-      // Value from http://en.wikipedia.org/wiki/E_(mathematical_constant)
-      Test(2*pi*rad/(360*degree), name="3 in set 1");
-      Test('%'/0.01, name="4 in set 1");
-
-      // Set 2:  Relations from BIPM (2006)
-      Test(q/(1.602176487E-19*C), name="1 in set 2");
-      Test(C*V/J, name="2 in set 2");
-
-      // Set 3:  Coherent derived units in the SI with special names and
-      // symbols (BIPM, 2006)
-      // These must be correct to the computer's numerical accuracy.
-      Test(sr, name="1 in set 3");
-      Test(Hz/(cyc/s), name="2 in set 3");
-      // BIPM implicitly assumes that the unit cycle is 1, but the unit rad is 1
-      // too---a discrepency.
-      Test(N/(kg*m/s^2), name="3 in set 3");
-      Test(Pa/(N/m^2), name="4 in set 3");
-      Test(J/(N*m), name="5 in set 3");
-      Test(W/(J/s), name="6 in set 3");
-      Test(C/(A*s), name="7 in set 3");
-      Test(V/(W/A), name="8 in set 3");
-      Test(F/(C/V), name="9 in set 3");
-      Test(ohm/(V/A), name="10 in set 3");
-      Test(S/(A/V), name="11 in set 3");
-      Test(Wb/(V*s), name="12 in set 3");
-      Test(T/(Wb/m^2), name="13 in set 3");
-      Test(H/(Wb/A), name="14 in set 3");
-      Test(lm/('cd'*sr), name="15 in set 3");
-      Test(lx/(lm/m^2), name="16 in set 3");
-      Test(Bq/(cyc/s), name="17 in set 3");
-      // See Hz.
-      Test(Gy/(J/kg), name="18 in set 3");
-      Test(Sv/(J/kg), name="19 in set 3");
-      Test(kat/(mol/s), name="20 in set 3");
-
-      // Set 4:  Relations from NIST (2010)
-      // This has been generated from FCSys/misc/NIST.xls.
-      Test(1/alpha/137.035999074, name="inverse fine-structure constant");
-      Test(1/G_0/(12906.4037217*ohm), name="inverse of conductance quantum");
-      Test(1/m*h*c/(1.239841930E-6*eV), name=
-        "inverse meter-electron volt relationship");
-      Test(1/m*h*c/(4.556335252755E-8*E_h), name=
-        "inverse meter-hartree relationship");
-      Test(1/m*h*c/(1.986445684E-25*J), name="inverse meter-joule relationship");
-      Test(1/m*h*c/k_B/(1.4387770E-2*K), name=
-        "inverse meter-kelvin relationship");
-      Test(1/m*h/c/(2.210218902E-42*kg), name=
-        "inverse meter-kilogram relationship");
-      Test(100*kPa/(k_B*273.15*K)/(2.6516462E25/m^3), name=
-        "Loschmidt constant (273.15 K, 100 kPa)");
-      Test(101.325*kPa/(k_B*273.15*K)/(2.6867805E25/m^3), name=
-        "Loschmidt constant (273.15 K, 101.325 kPa)");
-      Test(12*g/mol/(12E-3*kg/mol), name="molar mass of carbon-12");
-      Test(alpha/7.2973525698E-3, name="fine-structure constant");
-      Test(atm/(101325*Pa), name="standard atmosphere");
-      Test(c/(299792458*m/s), name="speed of light in vacuum");
-      Test(c_1/(3.74177153E-16*W*m^2), name="first radiation constant");
-      Test(c_2/(1.4387770E-2*m*K), name="second radiation constant");
-      Test(c_3_f*cyc/(5.8789254E10*Hz/K), name=
-        "Wien frequency displacement law constant");
-      // Factor of cyc due to inconsistencies b/w rad and cyc in BIPM (2006)
-      Test(c_3_lambda/(2.8977721E-3*m*K), name=
-        "Wien wavelength displacement law constant");
-      Test(cyc/m*c/(299792458*Hz), name="inverse meter-hertz relationship");
-      Test(E_h/(4.35974434E-18*J), name="Hartree energy");
-      Test(E_h/(27.21138505*eV), name="Hartree energy in eV");
-      Test(E_h/(27.21138505*eV), name="hartree-electron volt relationship");
-      Test(E_h/(4.35974434E-18*J), name="hartree-joule relationship");
-      Test(E_h/(h*c)/(2.194746313708E7/m), name=
-        "hartree-inverse meter relationship");
-      Test(E_h/c^2/(4.85086979E-35*kg), name="hartree-kilogram relationship");
-      Test(E_h/h*cyc/(6.579683920729E15*Hz), name="hartree-hertz relationship");
-      // Factor of cyc due to inconsistencies b/w rad and cyc in BIPM (2006)
-      Test(E_h/k_B/(3.1577504E5*K), name="hartree-kelvin relationship");
-      Test(epsilon_0/(8.854187817E-12*F/m), name="electric constant");
-      Test(eV/(1.602176565E-19*J), name="electron volt");
-      Test(eV/(3.674932379E-2*E_h), name="electron volt-hartree relationship");
-      Test(eV/(1.602176565E-19*J), name="electron volt-joule relationship");
-      Test(eV/(h*c)/(8.06554429E5/m), name=
-        "electron volt-inverse meter relationship");
-      Test(eV/c^2/(1.782661845E-36*kg), name=
-        "electron volt-kilogram relationship");
-      Test(eV/h*cyc/(2.417989348E14*Hz), name=
-        "electron volt-hertz relationship");
-      // Factor of cyc due to inconsistencies b/w rad and cyc in BIPM (2006)
-      Test(eV/k_B/(1.1604519E4*K), name="electron volt-kelvin relationship");
-      Test(G_0/(7.7480917346E-5*S), name="conductance quantum");
-      Test(g/mol/(1E-3*kg/mol), name="molar mass constant");
-      Test(h/(6.62606957E-34*J*s), name="Planck constant");
-      Test(h/(4.135667516E-15*eV*s), name="Planck constant in eV s");
-      Test(h*c/(2*pi)/(197.3269718*mega*eV*femto*m), name=
-        "Planck constant over 2 pi times c in MeV fm");
-      Test(h/(2*pi)/(1.054571726E-34*J*s), name="Planck constant over 2 pi");
-      Test(h/(2*pi)/(6.58211928E-16*eV*s), name=
-        "Planck constant over 2 pi in eV s");
-      Test(Hz*h/cyc/(4.135667516E-15*eV), name=
-        "hertz-electron volt relationship");
-      // Factor of 1/cyc due to inconsistencies b/w rad and cyc in BIPM (2006)
-      Test(Hz*h/cyc/(1.5198298460045E-16*E_h), name=
-        "hertz-hartree relationship");
-      // Factor of 1/cyc due to inconsistencies b/w rad and cyc in BIPM (2006)
-      Test(Hz*h/cyc/(6.62606957E-34*J), name="hertz-joule relationship");
-      // Factor of 1/cyc due to inconsistencies b/w rad and cyc in BIPM (2006)
-      Test(Hz*h/c^2/cyc/(7.37249668E-51*kg), name="hertz-kilogram relationship");
-      // Factor of 1/cyc due to inconsistencies b/w rad and cyc in BIPM (2006)
-      Test(Hz*h/k_B/cyc/(4.7992434E-11*K), name="hertz-kelvin relationship");
-      // Factor of 1/cyc due to inconsistencies b/w rad and cyc in BIPM (2006)
-      Test(Hz/c/cyc/(3.335640951E-9/m), name="hertz-inverse meter relationship");
-      // Factor of 1/cyc due to inconsistencies b/w rad and cyc in BIPM (2006)
-      Test(J/(6.24150934E18*eV), name="joule-electron volt relationship");
-      Test(J/(2.29371248E17*E_h), name="joule-hartree relationship");
-      Test(J/(h*c)/(5.03411701E24/m), name="joule-inverse meter relationship");
-      Test(J/c^2/(1.112650056E-17*kg), name="joule-kilogram relationship");
-      Test(J/h*cyc/(1.509190311E33*Hz), name="joule-hertz relationship");
-      Test(J/k_B/(7.2429716E22*K), name="joule-kelvin relationship");
-      Test(k_B/(1.3806488E-23*J/K), name="Boltzmann constant");
-      Test(k_B/(8.6173324E-5*eV/K), name="Boltzmann constant in eV/K");
-      Test(k_B/(h*c)/(69.503476/(m*K)), name=
-        "Boltzmann constant in inverse meters per kelvin");
-      Test(k_B/h*cyc/(2.0836618E10*Hz/K), name="Boltzmann constant in Hz/K");
-      // Factor of cyc due to inconsistencies b/w rad and cyc in BIPM (2006)
-      Test(k_F/(96485.3365*C/mol), name="Faraday constant");
-      Test(k_J*cyc/(483597.9E9*Hz/V), name=
-        "conventional value of Josephson constant");
-      Test(k_J*cyc/(483597.870E9*Hz/V), name="Josephson constant");
-      // Factor of cyc due to inconsistencies b/w rad and cyc in BIPM (2006)
-      Test(K*k_B/(8.6173324E-5*eV), name="kelvin-electron volt relationship");
-      Test(K*k_B/(3.1668114E-6*E_h), name="kelvin-hartree relationship");
-      Test(K*k_B/(1.3806488E-23*J), name="kelvin-joule relationship");
-      Test(K*k_B/(h*c)/(69.503476/m), name="kelvin-inverse meter relationship");
-      Test(K*k_B/c^2/(1.5361790E-40*kg), name="kelvin-kilogram relationship");
-      Test(K*k_B/h*cyc/(2.0836618E10*Hz), name="kelvin-hertz relationship");
-      // Factor of cyc due to inconsistencies b/w rad and cyc in BIPM (2006)
-      Test(kg*c^2/(5.60958885E35*eV), name=
-        "kilogram-electron volt relationship");
-      Test(kg*c^2/(2.061485968E34*E_h), name="kilogram-hartree relationship");
-      Test(kg*c^2/(8.987551787E16*J), name="kilogram-joule relationship");
-      Test(kg*c^2/h*cyc/(1.356392608E50*Hz), name="kilogram-hertz relationship");
-      // Factor of cyc due to inconsistencies b/w rad and cyc in BIPM (2006)
-      Test(kg*c^2/k_B/(6.5096582E39*K), name="kilogram-kelvin relationship");
-      Test(kg*c/h/(4.52443873E41/m), name="kilogram-inverse meter relationship");
-      Test(mu_0/(12.566370614E-7*N/A^2), name="mag. constant");
-      Test(N_A/(6.02214129E23/mol), name="Avogadro constant");
-      Test(N_A*h/(3.9903127176E-10*J*s/mol), name="molar Planck constant");
-      Test(N_A*h*c/(0.119626565779*J*m/mol), name=
-        "molar Planck constant times c");
-      Test(Phi_0/(2.067833758E-15*Wb), name="mag. flux quantum");
-      Test(q/(1.602176565E-19*C), name="elementary charge");
-      Test(q/h/(2.417989348E14*A/J), name="elementary charge over h");
-      Test(R/(8.3144621*J/(mol*K)), name="molar gas constant");
-      Test(R_inf/(10973731.568539/m), name="Rydberg constant");
-      Test(R_inf*c*cyc/(3.289841960364E15*Hz), name=
-        "Rydberg constant times c in Hz");
-      // Factor of cyc due to inconsistencies b/w rad and cyc in BIPM (2006)
-      Test(R_inf*h*c/(13.60569253*eV), name="Rydberg constant times hc in eV");
-      Test(R_inf*h*c/(2.179872171E-18*J), name="Rydberg constant times hc in J");
-      Test(R_K/(25812.807*ohm), name=
-        "conventional value of von Klitzing constant");
-      Test(R_K/(25812.8074434*ohm), name="von Klitzing constant");
-      Test(R*273.15*K/(100*kPa)/(22.710953E-3*m^3/mol), name=
-        "molar volume of ideal gas (273.15 K, 100 kPa)");
-      Test(R*273.15*K/(101.325*kPa)/(22.413968E-3*m^3/mol), name=
-        "molar volume of ideal gas (273.15 K, 101.325 kPa)");
-      Test(sigma/(5.670373E-8*W/(m^2*K^4)), name="Stefan-Boltzmann constant");
-      Test(Z_0/(376.730313461*ohm), name="characteristic impedance of vacuum");
-
-      annotation (Documentation(info="<html><p>If this model simulates without failure,
-  then the test has passed.</p></html>"));
-    end TestUnits;
-  end Units;
 end Test;

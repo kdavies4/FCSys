@@ -135,9 +135,9 @@ package Characteristics
         annotation (Placement(transformation(extent={{-20,40},{0,60}})));
       Modelica.Blocks.Sources.Constant pressureOffset(k=U.atm)
         annotation (Placement(transformation(extent={{-20,-60},{0,-40}})));
-      Modelica.Blocks.Math.Gain temperatureGain(k=0*200*time*U.K)
+      Modelica.Blocks.Math.Gain temperatureGain(k=200*U.K)
         annotation (Placement(transformation(extent={{-20,10},{0,30}})));
-      Modelica.Blocks.Math.Gain pressureGain(k=U.bar)
+      Modelica.Blocks.Math.Gain pressureGain(k=0*U.bar)
         annotation (Placement(transformation(extent={{-20,-30},{0,-10}})));
       Modelica.Blocks.Math.Add addTemperature
         annotation (Placement(transformation(extent={{20,16},{40,36}})));
@@ -863,8 +863,7 @@ package Characteristics
         output Q.Resistivity alpha "Resistivity";
 
       algorithm
-        alpha := 3*U.pi*r^2*U.q*sqrt(U.pi*m/T)
-          annotation (Inline=true, smoothOrder=999);
+        alpha := 3*U.pi*r^2*U.q*sqrt(U.pi*m/T) annotation (Inline=true);
         annotation (Documentation(info="<html>
   <p>This function is based on the kinetic theory of gases with the rigid-sphere (\"billiard-ball\")
   assumption [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].  It is
@@ -884,7 +883,7 @@ package Characteristics
         output Q.PressureReciprocal beta_T "Isothermal compressibility";
 
       algorithm
-        beta_T := -dv(
+        beta_T := -dv_Tp(
                 T=T,
                 p=p,
                 dT=0,
@@ -978,38 +977,26 @@ package Characteristics
         output Q.CapacityThermalSpecific c_V "Isochoric specific heat capacity";
 
       algorithm
-        /*
-  c_V := c_p(T, p) + T*dp(
-    T,
-    v_Tp(T, p),
-    dT=0,
-    dv=1)*dv(
-    T,
-    p,
-    dT=1,
-    dp=0)^2 "[Moran2004, p. 546, eq. 11.68]" annotation (Inline=true);
-  */
-
-        // Note:  This reduces to c_V = c_p - 1 for an ideal gas (where in
-        // FCSys 1 = U.R).
-        // Note:  [Dymond2002, p.17, eqs. 1.43 & 1.44] may be incorrect.
-
-        c_V := c_p(T, p) - T*dp(
+        c_V := c_p(T, p) - T*dp_Tv(
                 T,
                 v_Tp(T, p),
                 dT=1,
-                dv=0)*dv(
+                dv=0)*dv_Tp(
                 T,
                 p,
                 dT=1,
-                dp=0) "**Wikipedia" annotation (Inline=true);
+                dp=0) "[Moran2004, p. 546, eq. 11.66]" annotation (Inline=true);
+        // Note 1:  This reduces to c_V = c_p - 1 for an ideal gas (where in
+        // FCSys 1 = U.R).
+        // Note 2:  [Dymond2002, p.17, eqs. 1.43 & 1.44] may be incorrect.
+
         annotation (Documentation(info="<html>
   <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
   </html>"));
       end c_V;
 
-      function dp
+      function dp_Tv
         "<html>Derivative of pressure as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_Tv\">p_Tv</a>()</html>"
 
         extends Modelica.Icons.Function;
@@ -1023,21 +1010,23 @@ package Characteristics
       algorithm
         dp := if isCompressible then Polynomial.f(
                 v,
-                {(pressPow[1] + i - 1)*Polynomial.f(
+                {Polynomial.f(
                   T,
-                  b_p[i, :],
-                  pressPow[2]) for i in 1:size(b_p, 1)},
-                pressPow[1] - 1)*dv + Polynomial.f(
-                T,
-                {(pressPow[2] + i - 1)*Polynomial.f(
-                  v,
-                  b_p[:, i],
-                  pressPow[1]) for i in 1:size(b_p, 2)},
-                pressPow[2] - 1)*dT else 0
-          annotation (Inline=true, smoothOrder=999);
-      end dp;
+                  b_p[i, :] .* {(pressPow[1] + i - 1)*T*dv + (pressPow[2] + j
+               - 1)*v*dT for j in 1:size(b_p, 2)},
+                  pressPow[2] - 1) for i in 1:size(b_p, 1)},
+                pressPow[1] - 1) else 0 annotation (
+          Inline=true,
+          inverse(dv=dv_Tp(
+                      T,
+                      p_Tv(T, v),
+                      dT,
+                      dp)),
+          smoothOrder=999);
 
-      function dv
+      end dp_Tv;
+
+      function dv_Tp
         "<html>Derivative of specific volume as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_Tp\">v_Tp</a>()</html>"
         extends Modelica.Icons.Function;
 
@@ -1048,11 +1037,19 @@ package Characteristics
         output Q.VolumeSpecific dv "Derivative of specific volume";
 
       algorithm
-        dv := sum(sum(b_v[i, j]*p^(specVolPow[1] + i - 2)*T^(specVolPow[2] + j
-           - specVolPow[1] - i - 1)*((specVolPow[1] + i - 1)*T*dp + (specVolPow[
-          2] + j - specVolPow[1] - i)*p*dT) for i in 1:size(b_v, 1)) for j in 1
-          :size(b_v, 2)) annotation (Inline=true, smoothOrder=999);
-      end dv;
+        dv := Polynomial.f(
+                p,
+                {Polynomial.f(
+                  T,
+                  b_v[i, :] .* {(specVolPow[1] + i - 1)*T*dp + (specVolPow[2]
+               - specVolPow[1] + j - i)*p*dT for j in 1:size(b_v, 2)},
+                  specVolPow[2] - specVolPow[1] - i) for i in 1:size(b_v, 1)},
+                specVolPow[1] - 1) annotation (Inline=true, inverse(dp=dp_Tv(
+                      T,
+                      v_Tp(T, p),
+                      dT,
+                      dv)));
+      end dv_Tp;
 
       replaceable function F "Fluidity as a function of temperature"
 
@@ -1084,10 +1081,7 @@ package Characteristics
         g := h( T,
                 p,
                 referenceEnthalpy) - T*s(T, p)
-          annotation (
-          InlineNoEvent=true,
-          Inline=true,
-          smoothOrder=1);
+          annotation (InlineNoEvent=true, Inline=true);
       end g;
 
       function h "Specific enthalpy as a function of temperature and pressure"
@@ -1217,7 +1211,7 @@ package Characteristics
                 pressPow[1]) else 0 annotation (
           Inline=true,
           inverse(v=v_Tp(T, p)),
-          derivative=dp);
+          derivative=dp_Tv);
 
         annotation (Documentation(info="<html><p>If the species is incompressible, then <i>p</i>(<i>T</i>, <i>v</i>) is undefined,
   and the function will return a value of zero.</p>
@@ -1269,13 +1263,12 @@ package Characteristics
 
         algorithm
           s_resid := Polynomial.F(
-                    p/T,
+                    p,
                     {if i == -specVolPow[1] then 0 else coeff(T, i) for i in 1:
               size(b_v, 1)},
-                    0) annotation (Inline=true);
+                    specVolPow[1]) annotation (Inline=true);
           // Note:  According to the Maxwell relations the partial derivative
           // (dels/delp)_T is equal to -(delv/delT)_p.
-          // **check and clean this up.
         end s_resid;
 
         function coeff
@@ -1285,15 +1278,11 @@ package Characteristics
           output Real coeff "Coefficient";
 
         algorithm
-          coeff := (specVolPow[1] + i - 1)*Polynomial.f(
+          coeff := Polynomial.f(
                     T,
-                    b_v[i, :],
-                    specVolPow[2] - 1) - Polynomial.df(
-                    T,
-                    b_v[i, :],
-                    specVolPow[2],
-                    1,
-                    zeros(size(b_v, 2))) annotation (Inline=true);
+                    b_v[i, :] .* {specVolPow[1] - specVolPow[2] + i - j for j
+               in 1:size(b_v, 2)},
+                    specVolPow[2] - specVolPow[1] - i) annotation (Inline=true);
         end coeff;
 
       algorithm
@@ -1309,9 +1298,9 @@ package Characteristics
 
         s := smooth(1, sum((if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i
            + 1] or i == size(T_lim_c, 1) - 1) then s0_i(T, i) else 0) for i in
-          1:size(T_lim_c, 1) - 1)) + sum(if i == -specVolPow[1] then coeff(T, i)
-          *ln(p/p0) else 0 for i in 1:size(b_v, 1)) + s_resid(T, p) - s_resid(T,
-          if phase == "gas" then 0 else p0)
+          1:size(T_lim_c, 1) - 1)) + (if -size(b_v, 1) <= specVolPow[1] and
+          specVolPow[1] <= -1 then coeff(T, -specVolPow[1])*ln(p/p0) else 0) +
+          s_resid(T, p) - s_resid(T, if phase == "gas" then 0 else p0)
           annotation (
           InlineNoEvent=true,
           Inline=true,
@@ -1337,15 +1326,15 @@ package Characteristics
 
       algorithm
         v := Polynomial.f(
-                p/T,
+                p,
                 {Polynomial.f(
                   T,
                   b_v[i, :],
-                  specVolPow[2]) for i in 1:size(b_v, 1)},
+                  specVolPow[2] - specVolPow[1] - i + 1) for i in 1:size(b_v, 1)},
                 specVolPow[1]) annotation (
           Inline=true,
           inverse(p=p_Tv(T, v)),
-          derivative=dv);
+          derivative=dv_Tp);
 
         annotation (Documentation(info="<html>
   <p>The derivative of this function is

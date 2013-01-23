@@ -18,13 +18,13 @@ package Subregions
       parameter Boolean 'incle-'=false "<html>Electrons (e<sup>-</sup>)</html>"
         annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
             __Dymola_descriptionLabel=true));
+      parameter Boolean 'inclH+'=false "<html>Protons (H<sup>+</sup>)</html>"
+        annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
+            __Dymola_descriptionLabel=true));
       parameter Boolean inclH2=true "<html>Hydrogen (H<sub>2</sub>)</html>"
         annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
             __Dymola_descriptionLabel=true));
       parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
-        annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
-            __Dymola_descriptionLabel=true));
-      parameter Boolean 'inclH+'=false "<html>Protons (H<sup>+</sup>)</html>"
         annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
             __Dymola_descriptionLabel=true));
       parameter Boolean inclN2=false "<html>Nitrogen (N<sub>2</sub>)</html>"
@@ -244,11 +244,11 @@ package Subregions
           N2(p_IC=environment.p - 1*U.kPa),
           O2(p_IC=environment.p - 1*U.kPa)),
         graphite(
-          final inclC=inclC,
+          final 'inclC+'='inclC+',
           final 'incle-'='incle-',
           'C+'(V_IC=subregion2.V/4)),
         ionomer(
-          final inclC19HF37O5S=inclC19HF37O5S,
+          final 'inclC19HF37O5S-'='inclC19HF37O5S-1',
           final 'inclH+'='inclH+',
           'C19HF37O5S-'(V_IC=subregion2.V/4)),
         inclLinY=false,
@@ -668,18 +668,18 @@ package Subregions
             zNegative(inviscidX=true),
             zPositive(inviscidX=true))),
         graphite(
-          inclC=true,
+          'inclC+'=true,
           'incle-'=true,
-          C(V_IC=subregion1.V/4),
+          'C+'(V_IC=subregion1.V/4),
           'e-'(
             yNegative(inviscidX=true),
             yPositive(inviscidX=true),
             zNegative(inviscidX=true),
             zPositive(inviscidX=true))),
         ionomer(
-          inclC19HF37O5S=true,
+          'inclC19HF37O5S-'=true,
           'inclH+'=true,
-          C19HF37O5S(V_IC=subregion1.V/4),
+          'C19HF37O5S-'(V_IC=subregion1.V/4),
           'H+'(
             yNegative(inviscidX=true),
             yPositive(inviscidX=true),
@@ -695,9 +695,9 @@ package Subregions
         each L={1,1,1}*U.cm,
         gas(each inclH2O=false),
         ionomer(
-          each inclC19HF37O5S=true,
+          each 'inclC19HF37O5S-'=true,
           each 'inclH+'=true,
-          C19HF37O5S(each V_IC=subregions[1].V/4),
+          'C19HF37O5S-'(each V_IC=subregions[1].V/4),
           'H+'(
             each yNegative(inviscidX=true),
             each yPositive(inviscidX=true),
@@ -735,18 +735,18 @@ package Subregions
             zNegative(inviscidX=true),
             zPositive(inviscidX=true))),
         graphite(
-          inclC=true,
+          'inclC+'=true,
           'incle-'=true,
-          C(V_IC=subregion2.V/4),
+          'C+'(V_IC=subregion2.V/4),
           'e-'(
             yNegative(inviscidX=true),
             yPositive(inviscidX=true),
             zNegative(inviscidX=true),
             zPositive(inviscidX=true))),
         ionomer(
-          inclC19HF37O5S=true,
+          'inclC19HF37O5S-'=true,
           'inclH+'=true,
-          C19HF37O5S(V_IC=subregion2.V/4),
+          'C19HF37O5S-'(V_IC=subregion2.V/4),
           'H+'(
             yNegative(inviscidX=true),
             yPositive(inviscidX=true),
@@ -766,9 +766,9 @@ package Subregions
           inclH2O=false,
           inclN2=false,
           inclO2=false), graphite(
-          inclC=true,
+          'inclC+'=true,
           'incle-'=true,
-          C(redeclare FCSys.BCs.Face.Thermal.Temperature thermal(spec(k=
+          'C+'(redeclare FCSys.BCs.Face.Thermal.Temperature thermal(spec(k=
                     environment.T))),
           'e-'(redeclare FCSys.BCs.Face.Material.Current normal(redeclare
                 Modelica.Blocks.Sources.Ramp spec(duration=1000, height=-2*U.A)))))
@@ -783,9 +783,9 @@ package Subregions
           inclH2O=true,
           inclN2=false,
           inclO2=true), graphite(
-          inclC=true,
+          'inclC+'=true,
           'incle-'=true,
-          C(redeclare FCSys.BCs.Face.Thermal.Temperature thermal(spec(k=
+          'C+'(redeclare FCSys.BCs.Face.Thermal.Temperature thermal(spec(k=
                     environment.T))),
           'e-'(redeclare FCSys.BCs.Face.Material.Current normal(redeclare
                 Modelica.Blocks.Sources.Ramp spec(duration=1000, height=2*U.A)))))
@@ -859,122 +859,7 @@ package Subregions
                       298.15*U.K/U.atm))))));
     end SubregionH2PipeTest;
 
-    model SubregionH22 "Test a subregion"
-      extends Modelica.Icons.Example;
-      parameter Boolean inclC=false "Carbon (C)" annotation (choices(
-            __Dymola_checkBox=true), Dialog(group="Species",
-            __Dymola_descriptionLabel=true));
-      parameter Boolean inclC19HF37O5S=false
-        "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</html>"
-        annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
-            __Dymola_descriptionLabel=true));
-      parameter Boolean 'incle-'=false "<html>Electrons (e<sup>-</sup>)</html>"
-        annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
-            __Dymola_descriptionLabel=true));
-      parameter Boolean inclH2=true "<html>Hydrogen (H<sub>2</sub>)</html>"
-        annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
-            __Dymola_descriptionLabel=true));
-      parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
-        annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
-            __Dymola_descriptionLabel=true));
-      parameter Boolean 'inclH+'=false "<html>Protons (H<sup>+</sup>)</html>"
-        annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
-            __Dymola_descriptionLabel=true));
-      parameter Boolean inclN2=false "<html>Nitrogen (N<sub>2</sub>)</html>"
-        annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
-            __Dymola_descriptionLabel=true));
-      parameter Boolean inclO2=false "<html>Oxygen (O<sub>2</sub>)</html>"
-        annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
-            __Dymola_descriptionLabel=true));
 
-      Subregion subregion(
-        L={1,1,1}*U.cm,
-        gas(
-          final inclH2=inclH2,
-          final inclH2O=inclH2O,
-          final inclN2=inclN2,
-          final inclO2=inclO2),
-        graphite(
-          final inclC=inclC,
-          final 'incle-'='incle-',
-          C(V_IC=subregion.V/4)),
-        ionomer(
-          final inclC19HF37O5S=inclC19HF37O5S,
-          final 'inclH+'='inclH+',
-          C19HF37O5S(V_IC=subregion.V/4)),
-        inclLinY=false,
-        inclLinZ=false,
-        inclFacesY=false,
-        inclFacesZ=false)
-        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-      inner FCSys.BCs.Environment environment(analysis=true)
-        annotation (Placement(transformation(extent={{30,20},{50,40}})));
-
-      annotation (
-        Placement(transformation(extent={{70,70},{90,90}})),
-        experiment(StopTime=10),
-        Commands(file(ensureSimulated=true) =
-            "resources/scripts/Dymola/Subregions.Examples.SubregionH2.mos"));
-    end SubregionH22;
-
-    model SubregionH23 "Test a subregion"
-      extends Modelica.Icons.Example;
-      parameter Boolean 'inclC+'=false
-        "<html>Carbon plus (C<sup>+</sup>)</html>" annotation (choices(
-            __Dymola_checkBox=true), Dialog(group="Species",
-            __Dymola_descriptionLabel=true));
-      parameter Boolean 'inclC19HF37O5S-'=false
-        "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</html>"
-        annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
-            __Dymola_descriptionLabel=true));
-      parameter Boolean 'incle-'=false "<html>Electrons (e<sup>-</sup>)</html>"
-        annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
-            __Dymola_descriptionLabel=true));
-      parameter Boolean inclH2=true "<html>Hydrogen (H<sub>2</sub>)</html>"
-        annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
-            __Dymola_descriptionLabel=true));
-      parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
-        annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
-            __Dymola_descriptionLabel=true));
-      parameter Boolean 'inclH+'=false "<html>Protons (H<sup>+</sup>)</html>"
-        annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
-            __Dymola_descriptionLabel=true));
-      parameter Boolean inclN2=false "<html>Nitrogen (N<sub>2</sub>)</html>"
-        annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
-            __Dymola_descriptionLabel=true));
-      parameter Boolean inclO2=false "<html>Oxygen (O<sub>2</sub>)</html>"
-        annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
-            __Dymola_descriptionLabel=true));
-
-      Subregion subregion(
-        L={1,1,1}*U.cm,
-        graphite(
-          final 'inclC+'='inclC+',
-          final 'incle-'='incle-',
-          'C+'(V_IC=subregion.V/4)),
-        ionomer(
-          final 'inclC19HF37O5S-'='inclC19HF37O5S-',
-          final 'inclH+'='inclH+',
-          'C19HF37O5S-'(V_IC=subregion.V/4)),
-        inclLinY=false,
-        inclLinZ=false,
-        inclFacesY=false,
-        inclFacesZ=false,
-        gas(
-          final inclH2=inclH2,
-          final inclH2O=inclH2O,
-          final inclN2=inclN2,
-          final inclO2=inclO2))
-        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-      inner FCSys.BCs.Environment environment(analysis=true)
-        annotation (Placement(transformation(extent={{30,20},{50,40}})));
-
-      annotation (
-        Placement(transformation(extent={{70,70},{90,90}})),
-        experiment(StopTime=10),
-        Commands(file(ensureSimulated=true) =
-            "resources/scripts/Dymola/Subregions.Examples.SubregionH2.mos"));
-    end SubregionH23;
   end Examples;
 
   model Subregion "Subregion with all phases"
@@ -1914,8 +1799,8 @@ package Subregions
 
     model Graphite "Graphite phase"
       extends BaseClasses.NullPhase(final n_spec=countTrue({'inclC+','incle-'}),
-          common(mechanical(phi(fixed=if inclC then fill(false, n_lin) else {
-                  initVelX,initVelY,initVelZ}[cartAxes]))));
+          common(mechanical(phi(fixed=if 'inclC+' then fill(false, n_lin) else
+                  {initVelX,initVelY,initVelZ}[cartAxes]))));
 
       // Conditionally include species.
       parameter Boolean 'inclC+'=false
@@ -1957,11 +1842,11 @@ package Subregions
         Species.Species(
         final k=k,
         final inclLin=inclLin,
-        initMethX=if (initVelX or inclC) and reduceVel then InitMethVelocity.None
+        initMethX=if (initVelX or 'inclC+') and reduceVel then InitMethVelocity.None
              else InitMethVelocity.Velocity,
-        initMethY=if (initVelY or inclC) and reduceVel then InitMethVelocity.None
+        initMethY=if (initVelY or 'inclC+') and reduceVel then InitMethVelocity.None
              else InitMethVelocity.Velocity,
-        initMethZ=if (initVelZ or inclC) and reduceVel then InitMethVelocity.None
+        initMethZ=if (initVelZ or 'inclC+') and reduceVel then InitMethVelocity.None
              else InitMethVelocity.Velocity,
         initMethTemp=if initTemp and reduceTemp then InitMethScalar.None else
             InitMethScalar.Temperature,
@@ -2082,9 +1967,9 @@ package Subregions
 
       annotation (
         defaultComponentPrefixes="replaceable",
-        Documentation(info="<html><p>If C is included (<code>inclC</code>=<code>true</code>),
+        Documentation(info="<html><p>If C<sup>+</sup> is included (<code>'inclC+'</code>=<code>true</code>),
     then <code>initVelX</code>, <code>initVelY</code>, and <code>initVelZ</code> are
-    ignored.  Velocity is not initialized because it is set by C. **update this</p>
+    ignored.  Velocity is not initialized because it is set by C<sup>+</sup>. **update this</p>
 
     <p>Assumptions:
     <ol>
@@ -2097,13 +1982,14 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
+
     end Graphite;
 
     model Ionomer "Ionomer phase"
       extends BaseClasses.NullPhase(final n_spec=countTrue({'inclC19HF37O5S-',
-            'inclH+',inclH2O}), common(mechanical(phi(fixed=if inclC19HF37O5S
-                   then fill(false, n_lin) else {initVelX,initVelY,initVelZ}[
-                  cartAxes]))));
+            'inclH+',inclH2O}), common(mechanical(phi(fixed=if
+                  'inclC19HF37O5S-' then fill(false, n_lin) else {initVelX,
+                  initVelY,initVelZ}[cartAxes]))));
 
       // Conditionally include species.
       parameter Boolean 'inclC19HF37O5S-'=false
@@ -2131,7 +2017,7 @@ package Subregions
         Dialog(
           group="Species",
           __Dymola_descriptionLabel=true,
-          enable=inclC19HF37O5S),
+          enable='inclC19HF37O5S-'),
         Placement(transformation(extent={{-10,-10},{10,10}})));
 
       parameter Boolean 'inclH+'=false "<html>Protons (H<sup>+</sup>)</html>"
@@ -2179,11 +2065,11 @@ package Subregions
         Species.Species(
         final k=k,
         final inclLin=inclLin,
-        initMethX=if (initVelX or inclC19HF37O5S) and reduceVel then
+        initMethX=if (initVelX or 'inclC19HF37O5S-') and reduceVel then
             InitMethVelocity.None else InitMethVelocity.Velocity,
-        initMethY=if (initVelY or inclC19HF37O5S) and reduceVel then
+        initMethY=if (initVelY or 'inclC19HF37O5S-') and reduceVel then
             InitMethVelocity.None else InitMethVelocity.Velocity,
-        initMethZ=if (initVelZ or inclC19HF37O5S) and reduceVel then
+        initMethZ=if (initVelZ or 'inclC19HF37O5S-') and reduceVel then
             InitMethVelocity.None else InitMethVelocity.Velocity,
         initMethTemp=if initTemp and reduceTemp then InitMethScalar.None else
             InitMethScalar.Temperature,
@@ -2379,6 +2265,7 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
+
     end Ionomer;
 
     model Liquid "Liquid phase"
@@ -2648,50 +2535,58 @@ package Subregions
 
 <p>Notes:<ul>
   <li>The x-axis component of linear momentum is included by default.  At least one component must be included.</li></ul></html>"),
-            Icon(graphics={Ellipse(
-                      extent={{-40,100},{40,20}},
-                      lineColor={127,127,127},
-                      startAngle=30,
-                      endAngle=149,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{20,-4},{100,-84}},
-                      lineColor={127,127,127},
-                      startAngle=270,
-                      endAngle=390,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{-100,-4},{-20,-84}},
-                      lineColor={127,127,127},
-                      startAngle=149,
-                      endAngle=270,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Polygon(
-                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
-                  80},{94.5,-24},{60,-84}},
-                      pattern=LinePattern.None,
-                      fillPattern=FillPattern.Sphere,
-                      smooth=Smooth.None,
-                      fillColor={225,225,225},
-                      lineColor={0,0,0}),Line(
-                      points={{-60,-84},{60,-84}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{34.5,80},{94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{-34.5,80},{-94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+            Icon(graphics={
+              Ellipse(
+                extent={{-40,100},{40,20}},
+                lineColor={127,127,127},
+                startAngle=30,
+                endAngle=149,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{20,-4},{100,-84}},
+                lineColor={127,127,127},
+                startAngle=270,
+                endAngle=390,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{-100,-4},{-20,-84}},
+                lineColor={127,127,127},
+                startAngle=149,
+                endAngle=270,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Polygon(
+                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
+                    94.5,-24},{60,-84}},
+                pattern=LinePattern.None,
+                fillPattern=FillPattern.Sphere,
+                smooth=Smooth.None,
+                fillColor={225,225,225},
+                lineColor={0,0,0}),
+              Line(
+                points={{-60,-84},{60,-84}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{34.5,80},{94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{-34.5,80},{-94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end NullPhase;
     end BaseClasses;
   end Phases;
@@ -5018,14 +4913,14 @@ Choose a condition besides None.");
             extent={{-100,-100},{100,100}},
             initialScale=0.1), graphics),
         Icon(graphics={Ellipse(
-                  extent={{-100,100},{100,-100}},
-                  lineColor={127,127,127},
-                  pattern=LinePattern.Dash,
-                  fillColor={225,225,225},
-                  fillPattern=FillPattern.Solid),Text(
-                  extent={{-100,20},{100,60}},
-                  textString="%name",
-                  lineColor={0,0,0})}));
+              extent={{-100,100},{100,-100}},
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash,
+              fillColor={225,225,225},
+              fillPattern=FillPattern.Solid), Text(
+              extent={{-100,20},{100,60}},
+              textString="%name",
+              lineColor={0,0,0})}));
     end Species;
 
     package BaseClasses "Base classes (not for direct use)"

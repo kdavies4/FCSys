@@ -4,8 +4,5 @@ openModel("package.mo");
 // Load settings (including units).
 RunScript("resources/scripts/settings.mos", silent=true);
 
-// Run checks.
-//RunScript("FCSys/test/check.mos");
-
 // Run tests.
 //RunScript("FCSys/test/test.mos");
