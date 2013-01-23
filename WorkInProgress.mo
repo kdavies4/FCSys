@@ -55,9 +55,8 @@ package WorkInProgress "Incomplete classes under development"
         color={127,127,127},
         thickness=0.5,
         smooth=Smooth.None));
-    annotation (
-      experiment(StopTime=10),
-      Commands(file="resources/scripts/Dymola/BCs.Examples.FluidAdapt.mos"));
+    annotation (experiment(StopTime=10), Commands(file=
+            "resources/scripts/Dymola/BCs.Examples.FluidAdapt.mos"));
   end BCsExamplesClosedVolume;
 
   partial model BCsBaseClassesPartialLumpedVessel
@@ -363,9 +362,9 @@ should be used if these values are needed.
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Text(
-              extent={{-150,110},{150,150}},
-              textString="%name",
-              lineColor={0,0,255})}));
+            extent={{-150,110},{150,150}},
+            textString="%name",
+            lineColor={0,0,255})}));
   end BCsBaseClassesPartialLumpedVessel;
 
   model ClosedVolume
@@ -389,13 +388,13 @@ should be used if these values are needed.
       defaultComponentName="volume",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,0},
-              fillPattern=FillPattern.Sphere,
-              fillColor={170,213,255}),Text(
-              extent={{-150,12},{150,-18}},
-              lineColor={0,0,0},
-              textString="V=%V")}),
+            extent={{-100,100},{100,-100}},
+            lineColor={0,0,0},
+            fillPattern=FillPattern.Sphere,
+            fillColor={170,213,255}), Text(
+            extent={{-150,12},{150,-18}},
+            lineColor={0,0,0},
+            textString="V=%V")}),
       Documentation(info="<html>
 <p>
 Ideally mixed volume of constant size with two fluid ports and one medium model.
@@ -440,22 +439,20 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
 
   equation
     // **Add electrical equations.
-    annotation (
-      Documentation(info="<html><p>The electrical connector (<code>pin</code>) is only included
+    annotation (Documentation(info="<html><p>The electrical connector (<code>pin</code>) is only included
     if the species is ionic.
     </p>
     <p>For additional information, see the
     <a href=\"modelica://FCSys.BCs.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
-    </html>"),
-      Icon(graphics={Line(
-              points={{0,40},{80,40}},
-              color={0,0,255},
-              smooth=Smooth.None),Line(
-              points={{0,60},{0,20}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash)}));
+    </html>"), Icon(graphics={Line(
+            points={{0,40},{80,40}},
+            color={0,0,255},
+            smooth=Smooth.None), Line(
+            points={{0,60},{0,20}},
+            color={0,0,0},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash)}));
   end BCsAdaptersSpeciesFluid;
 
   model BCsAdaptersPhasesIonomer
@@ -518,24 +515,110 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
         color={0,127,255},
         smooth=Smooth.None));
     annotation (Placement(transformation(extent={{-10,10},{10,30}})), Icon(
-          graphics={Line(
-              points={{0,60},{0,-60}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),Line(
-              points={{0,0},{-80,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{0,40},{80,40}},
-              color={0,0,255},
-              smooth=Smooth.None),Line(
-              points={{0,0},{80,0}},
-              color={191,0,0},
-              smooth=Smooth.None),Line(
-              points={{0,-40},{80,-40}},
-              color={0,127,255},
-              smooth=Smooth.None)}));
+          graphics={
+          Line(
+            points={{0,60},{0,-60}},
+            color={0,0,0},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash,
+            thickness=0.5),
+          Line(
+            points={{0,0},{-80,0}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{0,40},{80,40}},
+            color={0,0,255},
+            smooth=Smooth.None),
+          Line(
+            points={{0,0},{80,0}},
+            color={191,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{0,-40},{80,-40}},
+            color={0,127,255},
+            smooth=Smooth.None)}));
   end BCsAdaptersPhasesIonomer;
+
+  partial model PartialSensor "Partial model for a sensor"
+
+    extends FCSys.BaseClasses.Icons.Sensor;
+    FCSys.Connectors.RealOutput y "Measurement" annotation (Placement(
+          transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=270,
+          origin={0,-100})));
+  end PartialSensor;
+
+  partial model PartialSensorNonideal
+    "Partial sensor with dynamics, saturation, and noise"
+
+    extends FCSys.WorkInProgress.PartialSensor;
+
+    replaceable FCSys.WorkInProgress.PartialSensor sensor constrainedby
+      FCSys.WorkInProgress.PartialSensor "Sensor" annotation (
+        choicesAllMatching=true, Placement(transformation(extent={{-10,44},{10,
+              64}})));
+
+    parameter Real y_min=-y_max
+      "<html>Lower limit of measurement (<i>y</i><sub>min</sub>)</html>";
+    parameter Real y_max=Modelica.Constants.inf
+      "<html>Upper limit of measurement (<i>y</i><sub>max</sub>)</html>";
+    parameter Real k_noise=0
+      "<html>Amplitude of noise signal (<i>k</i><sub>noise</sub>)</html>";
+
+    replaceable Modelica.Blocks.Continuous.FirstOrder dynamics(each initType=
+          Modelica.Blocks.Types.Init.SteadyState, each T=Modelica.Constants.eps)
+      constrainedby Modelica.Blocks.Interfaces.SISO "Dynamics" annotation (
+        choicesAllMatching=true, Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=270,
+          origin={0,16})));
+    Modelica.Blocks.Nonlinear.Limiter saturation(uMax=y_max, uMin=y_min)
+      "Saturation" annotation (Placement(transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=270,
+          origin={0,-40})));
+    FCSys.Blocks.Math.AddSkipInclIncl add "Addition" annotation (Placement(
+          transformation(
+          extent={{-10,-10},{10,10}},
+          rotation=270,
+          origin={0,-10})));
+    replaceable FCSys.Blocks.Continuous.Sources.RandomNormal noise "Noise"
+      annotation (Placement(transformation(extent={{-40,-20},{-20,0}})));
+
+  equation
+    connect(dynamics.y, add.u_1[1]) annotation (Line(
+        points={{-1.40998e-15,5},{2.16493e-15,-1}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(add.y[1], saturation.u) annotation (Line(
+        points={{-1.05471e-15,-19},{-1.05471e-15,-27.5},{2.87043e-15,-27.5},{
+            2.87043e-15,-28}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(noise.y, add.u_2) annotation (Line(
+        points={{-19,-10},{-14,-10},{-14,-10},{-9,-10}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    connect(dynamics.u, sensor.y) annotation (Line(
+        points={{2.87043e-15,28},{2.87043e-15,36},{6.10623e-16,36},{6.10623e-16,
+            44}},
+        color={0,0,127},
+        smooth=Smooth.None));
+
+    connect(y, saturation.y) annotation (Line(
+        points={{5.55112e-16,-100},{5.55112e-16,-75},{-1.40998e-15,-75},{
+            -1.40998e-15,-51}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    annotation (Icon(coordinateSystem(
+          preserveAspectRatio=true,
+          extent={{-100,-100},{100,100}},
+          grid={2,2}), graphics), Diagram(coordinateSystem(
+          preserveAspectRatio=true,
+          extent={{-100,-100},{100,100}},
+          grid={2,2}), graphics));
+  end PartialSensorNonideal;
 end WorkInProgress;

@@ -1,6 +1,5 @@
 UsersGuide
 BCs
-Sensors
 Assemblies
 Regions
 Subregions
@@ -9,3 +8,8 @@ Characteristics
 Units
 Quantities
 BaseClasses
+Blocks
+Figures
+Systems
+Test
+WorkInProgress

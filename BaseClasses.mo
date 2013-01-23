@@ -6,47 +6,57 @@ package BaseClasses "Base classes (not for direct use)"
       extends Modelica.Icons.Package;
       partial class Double "Icon for a two-connector boundary condition"
         //extends Names.Middle;
-        annotation (Icon(graphics={Rectangle(
-                      extent={{-100,40},{100,-40}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Line(
-                      points={{-100,40},{100,40}},
-                      pattern=LinePattern.None,
-                      smooth=Smooth.None),Line(
-                      points={{-100,-40},{-100,40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash),Text(
-                      extent={{-150,-20},{150,20}},
-                      textString="%name",
-                      lineColor={0,0,0}),Line(
-                      points={{-100,-40},{100,-40}},
-                      pattern=LinePattern.None,
-                      smooth=Smooth.None),Line(
-                      points={{100,-40},{100,40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash)}));
+        annotation (Icon(graphics={
+              Rectangle(
+                extent={{-100,40},{100,-40}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None),
+              Line(
+                points={{-100,40},{100,40}},
+                pattern=LinePattern.None,
+                smooth=Smooth.None),
+              Line(
+                points={{-100,-40},{-100,40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash),
+              Text(
+                extent={{-150,-20},{150,20}},
+                textString="%name",
+                lineColor={0,0,0}),
+              Line(
+                points={{-100,-40},{100,-40}},
+                pattern=LinePattern.None,
+                smooth=Smooth.None),
+              Line(
+                points={{100,-40},{100,40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash)}));
       end Double;
 
       partial class Single "Icon for a single-connector boundary condition"
         //extends Names.Middle;
-        annotation (Icon(graphics={Rectangle(
-                      extent={{-100,40},{100,-40}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Line(
-                      points={{-100,-40},{-100,40},{100,40},{100,-40}},
-                      pattern=LinePattern.None,
-                      smooth=Smooth.None),Line(
-                      points={{-100,-40},{100,-40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+        annotation (Icon(graphics={
+              Rectangle(
+                extent={{-100,40},{100,-40}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None),
+              Line(
+                points={{-100,-40},{-100,40},{100,40},{100,-40}},
+                pattern=LinePattern.None,
+                smooth=Smooth.None),
+              Line(
+                points={{-100,-40},{100,-40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end Single;
     end BCs;
     extends Modelica.Icons.Package;
@@ -59,25 +69,25 @@ package BaseClasses "Base classes (not for direct use)"
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                      extent={{-100,-100},{100,100}},
-                      lineColor={0,0,127},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,-100},{100,100}},
+                lineColor={0,0,127},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid), Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end Continuous;
 
       partial class ContinuousShort "Short icon for a continuous block"
         extends Names.Middle;
         annotation (Icon(graphics={Rectangle(
-                      extent={{-100,40},{100,-40}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      lineColor={0,0,0}),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,40},{100,-40}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                lineColor={0,0,0}), Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end ContinuousShort;
 
       partial class ContinuousShortWide
@@ -152,13 +162,13 @@ package BaseClasses "Base classes (not for direct use)"
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                      extent={{-100,180},{100,220}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Text(
-                      extent={{-100,180},{100,220}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,180},{100,220}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None), Text(
+                extent={{-100,180},{100,220}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end Top9;
 
       partial class Top8
@@ -217,39 +227,39 @@ package BaseClasses "Base classes (not for direct use)"
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                      extent={{-100,80},{100,120}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Text(
-                      extent={{-100,80},{100,120}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,80},{100,120}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None), Text(
+                extent={{-100,80},{100,120}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end Top4;
 
       partial class Top3
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                      extent={{-100,60},{100,100}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Text(
-                      extent={{-100,60},{100,100}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,60},{100,100}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None), Text(
+                extent={{-100,60},{100,100}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end Top3;
 
       partial class Top2
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                      extent={{-100,40},{100,80}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Text(
-                      extent={{-100,40},{100,80}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,40},{100,80}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None), Text(
+                extent={{-100,40},{100,80}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end Top2;
 
       partial class Top1
@@ -269,13 +279,13 @@ package BaseClasses "Base classes (not for direct use)"
 
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                      extent={{-100,-20},{100,20}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,-20},{100,20}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None), Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end Middle;
     end Names;
 
@@ -573,32 +583,38 @@ This icon is designed for a <b>signal bus</b> connector.
     partial class Sensor "Icon for a sensor"
 
       //extends Names.Top4;
-      annotation (Icon(graphics={Rectangle(
-                  extent={{-100,74},{100,114}},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),Ellipse(
-                  extent={{-70,70},{70,-70}},
-                  lineColor={0,0,0},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid),Line(points={{0,70},{0,40}},
-              color={0,0,0}),Line(points={{22.9,32.8},{40.2,57.3}}, color={0,0,
-              0}),Line(points={{-22.9,32.8},{-40.2,57.3}}, color={0,0,0}),Line(
-              points={{37.6,13.7},{65.8,23.9}}, color={0,0,0}),Line(points={{-37.6,
-              13.7},{-65.8,23.9}}, color={0,0,0}),Line(points={{0,0},{9.02,28.6}},
-              color={0,0,0}),Polygon(
-                  points={{-0.48,31.6},{18,26},{18,57.2},{-0.48,31.6}},
-                  lineColor={0,0,0},
-                  fillColor={0,0,0},
-                  fillPattern=FillPattern.Solid),Ellipse(
-                  extent={{-5,5},{5,-5}},
-                  lineColor={0,0,0},
-                  fillColor={0,0,0},
-                  fillPattern=FillPattern.Solid),Line(points={{0,-100},{0,-70}},
-              color={0,0,127}),Text(
-                  extent={{-100,74},{100,114}},
-                  textString="%name",
-                  lineColor={0,0,0})}));
+      annotation (Icon(graphics={
+            Rectangle(
+              extent={{-100,74},{100,114}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Ellipse(
+              extent={{-70,70},{70,-70}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(points={{0,70},{0,40}}, color={0,0,0}),
+            Line(points={{22.9,32.8},{40.2,57.3}}, color={0,0,0}),
+            Line(points={{-22.9,32.8},{-40.2,57.3}}, color={0,0,0}),
+            Line(points={{37.6,13.7},{65.8,23.9}}, color={0,0,0}),
+            Line(points={{-37.6,13.7},{-65.8,23.9}}, color={0,0,0}),
+            Line(points={{0,0},{9.02,28.6}}, color={0,0,0}),
+            Polygon(
+              points={{-0.48,31.6},{18,26},{18,57.2},{-0.48,31.6}},
+              lineColor={0,0,0},
+              fillColor={0,0,0},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-5,5},{5,-5}},
+              lineColor={0,0,0},
+              fillColor={0,0,0},
+              fillPattern=FillPattern.Solid),
+            Line(points={{0,-100},{0,-70}}, color={0,0,127}),
+            Text(
+              extent={{-100,74},{100,114}},
+              textString="%name",
+              lineColor={0,0,0})}));
     end Sensor;
   end Icons;
 

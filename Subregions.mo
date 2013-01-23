@@ -859,7 +859,6 @@ package Subregions
                       298.15*U.K/U.atm))))));
     end SubregionH2PipeTest;
 
-
   end Examples;
 
   model Subregion "Subregion with all phases"
@@ -1982,7 +1981,6 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
-
     end Graphite;
 
     model Ionomer "Ionomer phase"
@@ -2265,7 +2263,6 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
-
     end Ionomer;
 
     model Liquid "Liquid phase"
@@ -2359,7 +2356,7 @@ package Subregions
 
       annotation (
         defaultComponentPrefixes="replaceable",
-        Documentation(info="<html><p>For more information, see the
+        Documentation(info="<html><p>For information, see the
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
@@ -2535,58 +2532,50 @@ package Subregions
 
 <p>Notes:<ul>
   <li>The x-axis component of linear momentum is included by default.  At least one component must be included.</li></ul></html>"),
-            Icon(graphics={
-              Ellipse(
-                extent={{-40,100},{40,20}},
-                lineColor={127,127,127},
-                startAngle=30,
-                endAngle=149,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{20,-4},{100,-84}},
-                lineColor={127,127,127},
-                startAngle=270,
-                endAngle=390,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{-100,-4},{-20,-84}},
-                lineColor={127,127,127},
-                startAngle=149,
-                endAngle=270,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Polygon(
-                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
-                    94.5,-24},{60,-84}},
-                pattern=LinePattern.None,
-                fillPattern=FillPattern.Sphere,
-                smooth=Smooth.None,
-                fillColor={225,225,225},
-                lineColor={0,0,0}),
-              Line(
-                points={{-60,-84},{60,-84}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{34.5,80},{94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{-34.5,80},{-94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+            Icon(graphics={Ellipse(
+                      extent={{-40,100},{40,20}},
+                      lineColor={127,127,127},
+                      startAngle=30,
+                      endAngle=149,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{20,-4},{100,-84}},
+                      lineColor={127,127,127},
+                      startAngle=270,
+                      endAngle=390,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{-100,-4},{-20,-84}},
+                      lineColor={127,127,127},
+                      startAngle=149,
+                      endAngle=270,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Polygon(
+                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
+                  80},{94.5,-24},{60,-84}},
+                      pattern=LinePattern.None,
+                      fillPattern=FillPattern.Sphere,
+                      smooth=Smooth.None,
+                      fillColor={225,225,225},
+                      lineColor={0,0,0}),Line(
+                      points={{-60,-84},{60,-84}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{34.5,80},{94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{-34.5,80},{-94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end NullPhase;
     end BaseClasses;
   end Phases;
@@ -2615,7 +2604,7 @@ package Subregions
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="C",
-            Documentation(info="<html><p>For more information, see the
+            Documentation(info="<html><p>For information, see the
     <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
 
             Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
@@ -2636,7 +2625,7 @@ package Subregions
             defaultComponentPrefixes="replaceable",
             defaultComponentName="C",
             Documentation(info=
-                  "<html><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
+                  "<html><p>For information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
 
             Icon(graphics));
 
@@ -2733,7 +2722,7 @@ package Subregions
             defaultComponentPrefixes="replaceable",
             defaultComponentName="C19HF37O5S",
             Documentation(info=
-                  "<html><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
+                  "<html><p>For information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
 
             Diagram(graphics));
 
@@ -2747,7 +2736,7 @@ package Subregions
             defaultComponentPrefixes="replaceable",
             defaultComponentName="C19HF37O5S",
             Documentation(info=
-                  "<html><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+                  "<html><p>For information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
         end Correlated;
 
         model Fixed "Fixed properties"
@@ -2799,7 +2788,7 @@ package Subregions
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'e-'",
             Documentation(info=
-                  "<html><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+                  "<html><p>For information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
         end Calibrated;
 
         model Correlated "Correlated properties"
@@ -2814,7 +2803,7 @@ package Subregions
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'e-'",
             Documentation(info=
-                  "<html><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+                  "<html><p>For information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
         end Correlated;
 
         model Fixed "Fixed properties"
@@ -4913,14 +4902,14 @@ Choose a condition besides None.");
             extent={{-100,-100},{100,100}},
             initialScale=0.1), graphics),
         Icon(graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={127,127,127},
-              pattern=LinePattern.Dash,
-              fillColor={225,225,225},
-              fillPattern=FillPattern.Solid), Text(
-              extent={{-100,20},{100,60}},
-              textString="%name",
-              lineColor={0,0,0})}));
+                  extent={{-100,100},{100,-100}},
+                  lineColor={127,127,127},
+                  pattern=LinePattern.Dash,
+                  fillColor={225,225,225},
+                  fillPattern=FillPattern.Solid),Text(
+                  extent={{-100,20},{100,60}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
     end Species;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -5003,62 +4992,53 @@ Choose a condition besides None.");
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-180,-180},{180,
-              180}}), graphics={
-          Rectangle(
-            extent={{-170,120},{170,160}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Ellipse(
-            extent={{-60,188},{60,68}},
-            lineColor={127,127,127},
-            startAngle=30,
-            endAngle=149,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255}),
-          Ellipse(
-            extent={{-170,-2},{-50,-122}},
-            lineColor={127,127,127},
-            startAngle=149,
-            endAngle=270,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255}),
-          Ellipse(
-            extent={{50,-2},{170,-122}},
-            lineColor={127,127,127},
-            startAngle=270,
-            endAngle=390,
-            pattern=LinePattern.Dash,
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255}),
-          Polygon(
-            points={{51.5,159},{162,-32},{110,-122},{-110,-122},{-162,-32},{-51.5,
-                159},{51.5,159}},
-            smooth=Smooth.None,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Line(
-            points={{51.5,159},{162,-32}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{110,-122},{-110,-122}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{-162,-32},{-51.5,159}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Text(
-            extent={{-170,120},{170,160}},
-            textString="%name",
-            lineColor={0,0,0})}));
+              180}}), graphics={Rectangle(
+              extent={{-170,120},{170,160}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Ellipse(
+              extent={{-60,188},{60,68}},
+              lineColor={127,127,127},
+              startAngle=30,
+              endAngle=149,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}),Ellipse(
+              extent={{-170,-2},{-50,-122}},
+              lineColor={127,127,127},
+              startAngle=149,
+              endAngle=270,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}),Ellipse(
+              extent={{50,-2},{170,-122}},
+              lineColor={127,127,127},
+              startAngle=270,
+              endAngle=390,
+              pattern=LinePattern.Dash,
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255}),Polygon(
+              points={{51.5,159},{162,-32},{110,-122},{-110,-122},{-162,-32},{-51.5,
+              159},{51.5,159}},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Line(
+              points={{51.5,159},{162,-32}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{110,-122},{-110,-122}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{-162,-32},{-51.5,159}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Text(
+              extent={{-170,120},{170,160}},
+              textString="%name",
+              lineColor={0,0,0})}));
   end PhaseBoundary;
 
   model Reaction "Model for a chemical or electrochemical reaction"
@@ -5168,26 +5148,22 @@ Check the chemical formulas and the specific masses of the species.");
     <li>No storage of material, linear momentum, or energy</li></ul>
     </p>
     </html>"),
-      Icon(graphics={
-          Rectangle(
-            extent={{-140,40},{140,80}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Text(
-            extent={{-140,40},{140,80}},
-            textString="%name",
-            lineColor={0,0,0}),
-          Ellipse(
-            extent={{-80,40},{80,-40}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            lineColor={127,127,127},
-            pattern=LinePattern.Dash),
-          Text(
-            extent={{-100,-16},{100,-40}},
-            lineColor={127,127,127},
-            textString="%n_spec")}));
+      Icon(graphics={Rectangle(
+              extent={{-140,40},{140,80}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Text(
+              extent={{-140,40},{140,80}},
+              textString="%name",
+              lineColor={0,0,0}),Ellipse(
+              extent={{-80,40},{80,-40}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash),Text(
+              extent={{-100,-16},{100,-40}},
+              lineColor={127,127,127},
+              textString="%n_spec")}));
   end Reaction;
 
   model Volume "Model to establish a fixed volume for phases"
@@ -5222,24 +5198,21 @@ Check the chemical formulas and the specific masses of the species.");
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-160,-160},{160,
-              160}}), graphics={
-          Rectangle(
-            extent={{-160,112},{160,152}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Polygon(
-            points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,-160},
-                {-160,60}},
-            lineColor={127,127,127},
-            smooth=Smooth.None,
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.Dash),
-          Text(
-            extent={{-160,112},{160,152}},
-            textString="%name",
-            lineColor={0,0,0})}),
+              160}}), graphics={Rectangle(
+              extent={{-160,112},{160,152}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Polygon(
+              points={{-160,60},{-60,160},{160,160},{160,-60},{60,-160},{-160,-160},
+              {-160,60}},
+              lineColor={127,127,127},
+              smooth=Smooth.None,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.Dash),Text(
+              extent={{-160,112},{160,152}},
+              textString="%name",
+              lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics));
   end Volume;
@@ -5358,91 +5331,76 @@ Check the chemical formulas and the specific masses of the species.");
   <code>thermoOpt==ThermoOpt.ClosedDiabatic</code>), then the interface will be closed.
   note applies to the viscous/inviscous and diabatic/adiabatic properties.</li>
   <li>The x-axis component of linear momentum is included by default.  At least one component must be included.</li>
-  </ul></p></html>"), Icon(graphics={
-            Line(
-              points={{-100,0},{-40,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesX,
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{0,-100}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesY,
-              smooth=Smooth.None),
-            Line(
-              points={{40,40},{50,50}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesZ,
-              smooth=Smooth.None),
-            Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                  16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-40,-40},{-16,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{-16,40},{-16,-16},{40,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{-40,0},{28,0}},
-              color={210,210,210},
-              visible=inclFacesX,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,28},{0,-40}},
-              color={210,210,210},
-              visible=inclFacesY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{28,0},{100,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesX,
-              smooth=Smooth.None),
-            Line(
-              points={{0,100},{0,28}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesY,
-              smooth=Smooth.None),
-            Line(
-              points={{-12,-12},{40,40}},
-              color={210,210,210},
-              visible=inclFacesZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-40,16},{16,16},{16,-40}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{-50,-50},{-12,-12}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesZ,
-              smooth=Smooth.None),
-            Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                  16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{40,40},{16,16}},
-              color={127,127,127},
-              smooth=Smooth.None)}));
+  </ul></p></html>"), Icon(graphics={Line(
+                  points={{-100,0},{-40,0}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesX,
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{0,-100}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesY,
+                  smooth=Smooth.None),Line(
+                  points={{40,40},{50,50}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesZ,
+                  smooth=Smooth.None),Polygon(
+                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
+                {-40,16}},
+                  lineColor={127,127,127},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Line(
+                  points={{-40,-40},{-16,-16}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),Line(
+                  points={{-16,40},{-16,-16},{40,-16}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),Line(
+                  points={{-40,0},{28,0}},
+                  color={210,210,210},
+                  visible=inclFacesX,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,28},{0,-40}},
+                  color={210,210,210},
+                  visible=inclFacesY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{28,0},{100,0}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesX,
+                  smooth=Smooth.None),Line(
+                  points={{0,100},{0,28}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesY,
+                  smooth=Smooth.None),Line(
+                  points={{-12,-12},{40,40}},
+                  color={210,210,210},
+                  visible=inclFacesZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-40,16},{16,16},{16,-40}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{-50,-50},{-12,-12}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesZ,
+                  smooth=Smooth.None),Polygon(
+                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
+                {-40,16}},
+                  lineColor={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{40,40},{16,16}},
+                  color={127,127,127},
+                  smooth=Smooth.None)}));
     end PartialSubregion;
   end BaseClasses;
 

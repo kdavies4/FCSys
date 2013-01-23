@@ -72,10 +72,8 @@ package Figures "Graphical layouts for documentation"
                   6.10623e-16},{-10,6.10623e-16},{-19,6.10623e-16}},
               color={0,0,127},
               smooth=Smooth.None));
-          annotation (
-            Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                    {100,100}}), graphics),
-            experiment(StopTime=2));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
+                  ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
         end Test_vi;
 
         model Test_iv
@@ -106,10 +104,8 @@ package Figures "Graphical layouts for documentation"
               points={{-1,-40},{-10,-40},{-10,6.10623e-16},{-19,6.10623e-16}},
               color={0,0,127},
               smooth=Smooth.None));
-          annotation (
-            Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                    {100,100}}), graphics),
-            experiment(StopTime=2));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
+                  ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
         end Test_iv;
 
         model Declarative
@@ -647,10 +643,8 @@ package Figures "Graphical layouts for documentation"
               points={{-1,-20},{-10,-20},{-10,6.10623e-16},{-19,6.10623e-16}},
               color={0,0,127},
               smooth=Smooth.None));
-          annotation (
-            Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                    {100,100}}), graphics),
-            experiment(StopTime=2));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
+                  ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
         end Test;
       end Examples;
       extends Modelica.Icons.Package;
@@ -1527,9 +1521,7 @@ package Figures "Graphical layouts for documentation"
           color={0,0,0},
           smooth=Smooth.None));
 
-      annotation (
-        experiment(StopTime=10),
-        Commands);
+      annotation (experiment(StopTime=10), Commands);
     end Test;
 
     model TraditionalReaction
