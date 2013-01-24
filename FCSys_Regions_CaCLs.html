@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Regions.CaCLs</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-21">
+<meta name="date" content="2013-1-24">
 <meta name="description" content="Cathode catalyst layers">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,8 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-    <li><a href="FCSys_BCs.html">BCs</a></li>
-    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
@@ -192,9 +191,8 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
   <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> xV=x*V <font color="darkgreen">&quot;Gas volume&quot;</font>;
 
 <textblock type="annotcomp" expanded="false"><font color="blue">protected </font>
-  <font color="blue">outer </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">BCs.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;</textblock>
+  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>CaCL;
 </pre>
 <hr>
@@ -204,7 +202,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <b>Integrated cathode catalyst/gas diffusion layer</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.CaCLs.CaCGDL">
 <p><h3>Information</h3></p>
-<p>For more information, see the
+<p>For information, see the
     <a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCL</a> and <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> models</p><p>
 Extends from <a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCL</a> (Cathode catalyst layer).
 <p><h3>Parameters</h3><p>
@@ -236,15 +234,15 @@ Extends from <a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCL</a
 <pre>
 <font color="blue">model</font> CaCGDL <font color="darkgreen">&quot;Integrated cathode catalyst/gas diffusion layer&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCL</a>(L_x=<font color="red">fill</font>((28.7*U.micro*U.m + 0.3*U.mm)/1, 1));
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>CaCGDL;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>CaCGDL;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:40:31 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:08:39 2013.
 </div>
 </body>
 </html>

@@ -2,8 +2,8 @@
 <head>
 <title>FCSys.Characteristics.Examples</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-21">
-<meta name="description" content="Examples and tests">
+<meta name="date" content="2013-1-24">
+<meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
@@ -19,8 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-    <li><a href="FCSys_BCs.html">BCs</a></li>
-    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
@@ -44,30 +43,34 @@
       <div class="body">
 
 <h2><a name="FCSys.Characteristics.Examples"></a><a href="FCSys_Characteristics.html#FCSys.Characteristics">FCSys.Characteristics</a>.Examples</h2>
-<b>Examples and tests</b>
+<b>Examples</b>
 <p>
 <p><h3>Information</h3></p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.ExamplesPackage.html#Modelica.Icons.ExamplesPackage">Modelica.Icons.ExamplesPackage</a> (Icon for packages containing runnable examples).
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td><img src="images/FCSys.Characteristics.Examples.TestCorrelationsS.png" alt="FCSys.Characteristics.Examples.TestCorrelations" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples.TestCorrelations">TestCorrelations</a>
-</td><td>Test the property correlations</td></tr>
-<tr><td><img src="images/FCSys.Characteristics.Examples.TestCorrelationsS.png" alt="FCSys.Characteristics.Examples.VerifyDerivativep" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples.VerifyDerivativep">VerifyDerivativep</a>
-</td><td>Verify that <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.dp">dp</a>() is the correct derivative of <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.p_Tv">p_Tv</a>()</td></tr>
-<tr><td><img src="images/FCSys.Characteristics.Examples.TestCorrelationsS.png" alt="FCSys.Characteristics.Examples.VerifyDerivativev" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples.VerifyDerivativev">VerifyDerivativev</a>
-</td><td>Verify that <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.dv">dv</a>() is the correct derivative of <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.v_Tp">v_Tp</a>()</td></tr>
+<tr><td><img src="images/FCSys.Characteristics.Examples.CorrelationsS.png" alt="FCSys.Characteristics.Examples.Correlations" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples.Correlations">Correlations</a>
+</td><td>Evaluate the material properties over varying temperature and pressure</td></tr>
 </table>
 <hr>
 
-<h2><img src="images/FCSys.Characteristics.Examples.TestCorrelationsI.png" alt="FCSys.Characteristics.Examples.TestCorrelations" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Characteristics.Examples.TestCorrelations"></a><a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples">FCSys.Characteristics.Examples</a>.TestCorrelations</h2>
-<b>Test the property correlations</b><p>
+<h2><img src="images/FCSys.Characteristics.Examples.CorrelationsI.png" alt="FCSys.Characteristics.Examples.Correlations" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Characteristics.Examples.Correlations"></a><a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples">FCSys.Characteristics.Examples</a>.Correlations</h2>
+<b>Evaluate the material properties over varying temperature and pressure</b><p>
+<img src="images/FCSys.Characteristics.Examples.CorrelationsD.png" alt="FCSys.Characteristics.Examples.Correlations">
 <p><h3>Information</h3></p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">RealOutputInternal</a></td><td>T</td><td>Temperature [l2.m/(N.T2)]</td></tr>
+<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">RealOutputInternal</a></td><td>p</td><td>Pressure [m/(l.T2)]</td></tr>
+</table>
 <p><h3>Modelica definition</h3>
 <pre>
-<font color="blue">model</font> TestCorrelations <font color="darkgreen">&quot;Test the property correlations&quot;</font>
+<font color="blue">model</font> Correlations <font color="darkgreen">
+  &quot;Evaluate the material properties over varying temperature and pressure&quot;</font>
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
 
   <font color="darkgreen">// Data</font>
@@ -75,6 +78,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">import </font>&#39;DataC19HF37O5S-&#39; = <a href="FCSys_Characteristics_'C19HF37O5S-'_Ionomer.html#FCSys.Characteristics.'C19HF37O5S-'.Ionomer">FCSys.Characteristics.'C19HF37O5S-'.Ionomer</a>;
   <font color="blue">import </font>&#39;Datae-&#39; = <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>;
   <font color="blue">import </font>DataH2 = <a href="FCSys_Characteristics_H2_Gas.html#FCSys.Characteristics.H2.Gas">FCSys.Characteristics.H2.Gas</a>;
+
 <font color="blue">protected </font>
   <font color="blue">package</font> DataH2IG = <a href="FCSys_Characteristics_H2_Gas.html#FCSys.Characteristics.H2.Gas">FCSys.Characteristics.H2.Gas</a> (b_v=[1], specVolPow={-1,0}) <font color="darkgreen">
     &quot;H2 as ideal gas&quot;</font>;
@@ -85,22 +89,33 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">import </font>DataO2 = <a href="FCSys_Characteristics_O2_Gas.html#FCSys.Characteristics.O2.Gas">FCSys.Characteristics.O2.Gas</a>;
 
   <font color="darkgreen">// Conditions</font>
-<font color="blue">public </font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p=U.atm + time*10*U.bar/10;
-  <a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=273.15*U.K + 0*200*time*U.K/10;
+
+<textblock type="annotcomp" expanded="false"><font color="blue">public </font>
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> T(unit=&quot;l2.m/(N.T2)&quot;,displayUnit=&quot;K&quot;) <font color="darkgreen">
+    &quot;Temperature&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> p(unit=&quot;m/(l.T2)&quot;) <font color="darkgreen">&quot;Pressure&quot;</font>;</textblock>
 
   <font color="darkgreen">// Results</font>
   <font color="darkgreen">// -------</font>
+  <font color="darkgreen">// Isobaric specific heat capacity</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_p_C+&#39;=<font color="red">&#39;DataC+&#39;.c_p</font>(T, p);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_p_C19HF37O5S-&#39;=<font color="red">&#39;DataC19HF37O5S-&#39;.c_p</font>(T, p);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_p_e-&#39;=<font color="red">&#39;Datae-&#39;.c_p</font>(T, p);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_p_H+&#39;=<font color="red">&#39;DataH+&#39;.c_p</font>(T, p);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_p_H2=<font color="red">DataH2.c_p</font>(T, p);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_p_H2O=<font color="red">DataH2O.c_p</font>(T, p);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_p_H2O_liquid=<font color="red">DataH2OLiquid.c_p</font>(T, p);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_p_N2=<font color="red">DataN2.c_p</font>(T, p);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_p_O2=<font color="red">DataO2.c_p</font>(T, p);
+  <font color="darkgreen">//</font>
   <font color="darkgreen">// Isochoric specific heat capacity</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_V_C+&#39;=<font color="red">&#39;DataC+&#39;.c_V</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_V_C19HF37O5S-&#39;=<font color="red">&#39;DataC19HF37O5S-&#39;.c_V</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_V_e-&#39;=<font color="red">&#39;Datae-&#39;.c_V</font>(T, p);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_V_H+&#39;=<font color="red">&#39;DataH+&#39;.c_V</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_H2=<font color="red">DataH2.c_V</font>(T, p);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_H2_IG=<font color="red">DataH2IG.c_V</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_H2O=<font color="red">DataH2O.c_V</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_H2O_liquid=<font color="red">DataH2OLiquid.c_V</font>(T, p);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_V_H+&#39;=<font color="red">
-      FCSys.Characteristics.&#39;H+&#39;.Ionomer.c_V</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_N2=<font color="red">DataN2.c_V</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_O2=<font color="red">DataO2.c_V</font>(T, p);
   <font color="darkgreen">//</font>
@@ -108,10 +123,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> &#39;g_C+&#39;=<font color="red">&#39;DataC+&#39;.g</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> &#39;g_C19HF37O5S-&#39;=<font color="red">&#39;DataC19HF37O5S-&#39;.g</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> &#39;g_e-&#39;=<font color="red">&#39;Datae-&#39;.g</font>(T, p);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> &#39;g_H+&#39;=<font color="red">&#39;DataH+&#39;.g</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_H2=<font color="red">DataH2.g</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_H2O=<font color="red">DataH2O.g</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_H2O_liquid=<font color="red">DataH2OLiquid.g</font>(T, p);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> &#39;g_H+&#39;=<font color="red">FCSys.Characteristics.&#39;H+&#39;.Ionomer.g</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_N2=<font color="red">DataN2.g</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> g_O2=<font color="red">DataO2.g</font>(T, p);
   <font color="darkgreen">//</font>
@@ -119,37 +134,39 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> &#39;h_C+&#39;=<font color="red">&#39;DataC+&#39;.h</font>(T);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> &#39;h_C19HF37O5S-&#39;=<font color="red">&#39;DataC19HF37O5S-&#39;.h</font>(T);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> &#39;h_e-&#39;=<font color="red">&#39;Datae-&#39;.h</font>(T);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> &#39;h_H+&#39;=<font color="red">FCSys.Characteristics.&#39;H+&#39;.Ionomer.h</font>(T);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> h_H2=<font color="red">DataH2.h</font>(T);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> h_H2O=<font color="red">DataH2O.h</font>(T);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> h_H2O_liquid=<font color="red">DataH2OLiquid.h</font>(T);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> &#39;h_H+&#39;=<font color="red">FCSys.Characteristics.&#39;H+&#39;.Ionomer.h</font>(T);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> h_N2=<font color="red">DataN2.h</font>(T);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> h_O2=<font color="red">DataO2.h</font>(T);
   <font color="darkgreen">//</font>
-  <font color="darkgreen">// Pressure</font>
+  <font color="darkgreen">// Pressure (indirectly via v_Tp())</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> &#39;p_C+&#39;=<font color="red">&#39;DataC+&#39;.p_Tv</font>(T, v_C) <font color="blue">if </font>'DataC+'.isCompressible;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> &#39;p_C19HF37O5S-&#39;=<font color="red">&#39;DataC19HF37O5S-&#39;.p_Tv</font>(T,
       'v_C19HF37O5S-') <font color="blue">if </font>'DataC19HF37O5S-'.isCompressible;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> &#39;p_e-&#39;=<font color="red">&#39;Datae-&#39;.p_Tv</font>(T, 'v_e-') <font color="blue">if </font>'Datae-'.isCompressible;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> &#39;p_H+&#39;=<font color="red">&#39;DataH+&#39;.p_Tv</font>(T, 'v_H+') <font color="blue">if </font>'DataH+'.isCompressible;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_H2=<font color="red">DataH2.p_Tv</font>(T, v_H2) <font color="blue">if </font>DataH2.isCompressible;
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_IG=<font color="red">DataH2IG.p_Tv</font>(T, v_IG) <font color="blue">if </font>DataH2IG.isCompressible
-    <font color="darkgreen">&quot;Pressure of ideal gas&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_H2O=<font color="red">DataH2O.p_Tv</font>(T, v_H2O) <font color="blue">if </font>DataH2O.isCompressible;
+  <font color="darkgreen">// Note that p_H2O diverges from p in Dymola 7.4 due to the large</font>
+  <font color="darkgreen">// coefficients in the second row of DataH2O.b_v, which cause numerical</font>
+  <font color="darkgreen">// errors.</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_H2O_liquid=<font color="red">DataH2OLiquid.p_Tv</font>(T, v_H2O_liquid) <font color="blue">
     if </font>DataH2OLiquid.isCompressible;
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> &#39;p_H+&#39;=<font color="red">FCSys.Characteristics.&#39;H+&#39;.Ionomer.p_Tv</font>(T,
-      'v_H+') <font color="blue">if </font>'DataH+'.isCompressible;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_N2=<font color="red">DataN2.p_Tv</font>(T, v_N2) <font color="blue">if </font>DataN2.isCompressible;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_O2=<font color="red">DataO2.p_Tv</font>(T, v_O2) <font color="blue">if </font>DataO2.isCompressible;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p_IG=<font color="red">DataH2IG.p_Tv</font>(T, v_IG) <font color="blue">if </font>DataH2IG.isCompressible
+    <font color="darkgreen">&quot;Pressure of ideal gas&quot;</font>;
   <font color="darkgreen">//</font>
   <font color="darkgreen">// Specific entropy</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> &#39;s_C+&#39;=<font color="red">&#39;DataC+&#39;.s</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> &#39;s_C19HF37O5S-&#39;=<font color="red">&#39;DataC19HF37O5S-&#39;.s</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> &#39;s_e-&#39;=<font color="red">&#39;Datae-&#39;.s</font>(T, p);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> &#39;s_H+&#39;=<font color="red">FCSys.Characteristics.&#39;H+&#39;.Ionomer.s</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> s_H2=<font color="red">DataH2.s</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> s_H2O=<font color="red">DataH2O.s</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> s_H2O_liquid=<font color="red">DataH2OLiquid.s</font>(T, p);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> &#39;s_H+&#39;=<font color="red">FCSys.Characteristics.&#39;H+&#39;.Ionomer.s</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> s_N2=<font color="red">DataN2.s</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> s_O2=<font color="red">DataO2.s</font>(T, p);
   <font color="darkgreen">//</font>
@@ -157,104 +174,41 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> &#39;v_C+&#39;=<font color="red">&#39;DataC+&#39;.v_Tp</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> &#39;v_C19HF37O5S-&#39;=<font color="red">&#39;DataC19HF37O5S-&#39;.v_Tp</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> &#39;v_e-&#39;=<font color="red">&#39;Datae-&#39;.v_Tp</font>(T, p);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> &#39;v_H+&#39;=<font color="red">&#39;DataH+&#39;.v_Tp</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> v_H2=<font color="red">DataH2.v_Tp</font>(T, p);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> v_IG=<font color="red">DataH2IG.v_Tp</font>(T, p) <font color="darkgreen">
-    &quot;Specific volume of ideal gas&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> v_H2O=<font color="red">DataH2O.v_Tp</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> v_H2O_liquid=<font color="red">DataH2OLiquid.v_Tp</font>(T, p);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> &#39;v_H+&#39;=<font color="red">
-      FCSys.Characteristics.&#39;H+&#39;.Ionomer.v_Tp</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> v_N2=<font color="red">DataN2.v_Tp</font>(T, p);
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> v_O2=<font color="red">DataO2.v_Tp</font>(T, p);
-<textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>TestCorrelations;
-</pre>
-<hr>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> v_IG=<font color="red">DataH2IG.v_Tp</font>(T, p) <font color="darkgreen">
+    &quot;Specific volume of ideal gas&quot;</font>;
 
-<h2><img src="images/FCSys.Characteristics.Examples.TestCorrelationsI.png" alt="FCSys.Characteristics.Examples.VerifyDerivativep" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Characteristics.Examples.VerifyDerivativep"></a><a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples">FCSys.Characteristics.Examples</a>.VerifyDerivativep</h2>
-<b>Verify that <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.dp">dp</a>() is the correct derivative of <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.p_Tv">p_Tv</a>()</b><p>
-<p><h3>Information</h3></p>
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
-<p><h3>Modelica definition</h3>
-<pre>
-<font color="blue">model</font> VerifyDerivativep <font color="darkgreen">
-  &quot;Verify that <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.dp">dp</a>() is the correct derivative of <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.p_Tv">p_Tv</a>()&quot;</font>
-  <font color="darkgreen">// This approach is based on [Dassault2010, vol. 2, pp. 300-301].</font>
-
-  <font color="blue">import </font><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>;
-
-  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
-
-  Real u[2]={1 + time,1 + time^2} <font color="darkgreen">
-    &quot;Real arguments to function (must have sufficient richness)&quot;</font>;
-  Real y1 <font color="darkgreen">&quot;Direct result of function&quot;</font>;
-  Real y2 <font color="darkgreen">&quot;Integral of derivative of y1&quot;</font>;
-
-<font color="blue">initial </font><font color="blue">equation </font>
-  y2 = y1;
+<textblock type="annotcomp" expanded="false"><font color="blue">protected </font>
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Clock">Modelica.Blocks.Sources.Clock</a> clock;
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Modelica.Blocks.Sources.Constant</a> temperatureOffset(k=273.15*U.K);
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Modelica.Blocks.Sources.Constant</a> pressureOffset(k=U.atm);
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> temperatureGain(k=200*U.K);
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> pressureGain(k=0*U.bar);
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Add">Modelica.Blocks.Math.Add</a> addTemperature;
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Add">Modelica.Blocks.Math.Add</a> addPressure;</textblock>
 
 <font color="blue">equation </font>
-  y1 = <font color="red">Characteristic.p_Tv</font>(u[1], u[2]);
-  <font color="red">Characteristic.dp</font>(
-    u[1],
-    u[2],
-    <font color="red">der</font>(u[1]),
-    <font color="red">der</font>(u[2])) = <font color="red">der</font>(y2);
-  <font color="darkgreen">// Note:  This is equivalent to der(y1) = der(y2), but it must be</font>
-  <font color="darkgreen">// explicit to ensure that the translator uses the defined derivative</font>
-  <font color="darkgreen">// instead of the automatically derived one.</font>
-
-  <font color="red">assert</font>(<font color="red">abs</font>(y1 - y2) &lt; 1e-6, &quot;The derivative is incorrect.&quot;);
-  <font color="darkgreen">// The simulation tolerance is set to 1e-8.</font>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>VerifyDerivativep;
-</pre>
-<hr>
-
-<h2><img src="images/FCSys.Characteristics.Examples.TestCorrelationsI.png" alt="FCSys.Characteristics.Examples.VerifyDerivativev" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Characteristics.Examples.VerifyDerivativev"></a><a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples">FCSys.Characteristics.Examples</a>.VerifyDerivativev</h2>
-<b>Verify that <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.dv">dv</a>() is the correct derivative of <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.v_Tp">v_Tp</a>()</b><p>
-<p><h3>Information</h3></p>
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
-<p><h3>Modelica definition</h3>
-<pre>
-<font color="blue">model</font> VerifyDerivativev <font color="darkgreen">
-  &quot;Verify that <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.dv">dv</a>() is the correct derivative of <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.v_Tp">v_Tp</a>()&quot;</font>
-  <font color="darkgreen">// This approach is based on [Dassault2010, vol. 2, pp. 300-301].</font>
-
-  <font color="blue">import </font><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>;
-
-  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
-
-  Real u[2]={1 + time,1 + time^2} <font color="darkgreen">
-    &quot;Real arguments to function (must have sufficient richness)&quot;</font>;
-  Real y1 <font color="darkgreen">&quot;Direct result of function&quot;</font>;
-  Real y2 <font color="darkgreen">&quot;Integral of derivative of y1&quot;</font>;
-
-<font color="blue">initial </font><font color="blue">equation </font>
-  y2 = y1;
-
-<font color="blue">equation </font>
-  y1 = <font color="red">Characteristic.v_Tp</font>(u[1], u[2]);
-  <font color="red">Characteristic.dv</font>(
-    u[1],
-    u[2],
-    <font color="red">der</font>(u[1]),
-    <font color="red">der</font>(u[2])) = <font color="red">der</font>(y2);
-  <font color="darkgreen">// Note:  This is equivalent to der(y1) = der(y2), but it must be</font>
-  <font color="darkgreen">// explicit to ensure that the translator uses the defined derivative</font>
-  <font color="darkgreen">// instead of the automatically derived one.</font>
-
-  <font color="red">assert</font>(<font color="red">abs</font>(y1 - y2) &lt; 1e-6, &quot;The derivative is incorrect.&quot;);
-  <font color="darkgreen">// The simulation tolerance is set to 1e-8.</font>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>VerifyDerivativev;
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(clock.y, temperatureGain.u);
+  <font color="red">connect</font>(clock.y, pressureGain.u);
+  <font color="red">connect</font>(temperatureOffset.y, addTemperature.u1);
+  <font color="red">connect</font>(pressureOffset.y, addPressure.u2);
+  <font color="red">connect</font>(temperatureGain.y, addTemperature.u2);
+  <font color="red">connect</font>(pressureGain.y, addPressure.u1);
+  <font color="red">connect</font>(addTemperature.y, T);
+  <font color="red">connect</font>(addPressure.y, p);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Correlations;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:32:31 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:10:42 2013.
 </div>
 </body>
 </html>

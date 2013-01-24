@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Connectors</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-21">
+<meta name="date" content="2013-1-24">
 <meta name="description" content="Declarative and imperative connectors">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,8 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-    <li><a href="FCSys_BCs.html">BCs</a></li>
-    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
@@ -372,7 +371,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <font color="blue">expandable connector</font> ChemicalBus <font color="darkgreen">
   &quot;Bus of <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a> and <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a> connectors (for multiple species)&quot;</font>
 
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>ChemicalBus;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>ChemicalBus;
 </pre>
 <hr>
 
@@ -400,7 +400,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <b>Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as input</b><p>
 <img src="images/FCSys.Connectors.ChemicalInputD.png" alt="FCSys.Connectors.ChemicalInput">
 <p><h3>Information</h3></p>
-<p>For more information, see the documentation in the
+<p>For information, see the
+    <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.PartialChemical">PartialChemical</a>
+    connector and the documentation in the
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
 Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.PartialChemical">BaseClasses.PartialChemical</a> (Partial connector to exchange material while advecting linear momentum and enthalpy).
 <p><h3>Parameters</h3><p>
@@ -441,7 +443,9 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
 <b>Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as output</b><p>
 <img src="images/FCSys.Connectors.ChemicalOutputD.png" alt="FCSys.Connectors.ChemicalOutput">
 <p><h3>Information</h3></p>
-<p>For more information, see the documentation in the
+<p>For information, see the
+    <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.PartialChemical">PartialChemical</a>
+    connector and the documentation in the
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
 Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.PartialChemical">BaseClasses.PartialChemical</a> (Partial connector to exchange material while advecting linear momentum and enthalpy).
 <p><h3>Parameters</h3><p>
@@ -471,7 +475,6 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
 
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.MassSpecific">Q.MassSpecific</a> m <font color="darkgreen">&quot;Specific mass&quot;</font>;
   <font color="blue">output </font>String formula <font color="darkgreen">&quot;Chemical formula&quot;</font>;
-
 <textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>ChemicalOutput;
 </pre>
@@ -491,7 +494,8 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
 <font color="blue">expandable connector</font> FaceBus <font color="darkgreen">
   &quot;Bus of <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> connectors (for multiple species)&quot;</font>
 
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>FaceBus;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>FaceBus;
 </pre>
 <hr>
 
@@ -521,12 +525,16 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
 <p><h3>Information</h3></p>
 
     <p>Note that the geometric orientation is global.
-    Areic current is positive in the globally positive direction (not inward).
     Force is the rate of globally-referenced linear momentum into the component.
+    Areic current is positive in the globally positive direction (not inward).
+    This is different than the
+    <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a> and
+    <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a> connectors,
+    where current is positive into the component.
     </p>
 
-    <p>For more information, see the documentation in the 
-    <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Mechanical">Mechanical</a> base class and the 
+    <p>For more information, see the documentation in the
+    <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Mechanical">Mechanical</a> base class and the
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
 Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Mechanical">BaseClasses.Mechanical</a> (Connector to exchange or transport linear momentum), <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Thermal">BaseClasses.Thermal</a> (Connector to exchange or transport heat).
 <p><h3>Parameters</h3><p>
@@ -553,13 +561,11 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
   <font color="darkgreen">// Normal</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">Q.CurrentAreic</a> J(nominal=U.A/U.cm^2) <font color="darkgreen">&quot;Areic current&quot;</font>;
   <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> mPhidot_0(nominal=U.atm*U.cm^2) <font color="darkgreen">&quot;Normal force&quot;</font>;
-
   <font color="darkgreen">// Transverse</font>
   <font color="blue">extends </font><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Mechanical">BaseClasses.Mechanical</a>(<font color="blue">final </font>n_lin=2);
 
   <font color="darkgreen">// Thermal</font>
   <font color="blue">extends </font><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Thermal">BaseClasses.Thermal</a>;
-
 <textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>Face;
 </pre>
@@ -599,7 +605,6 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
   <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Mechanical">BaseClasses.Mechanical</a> mechanical(<font color="blue">final </font>n_lin=n_lin) <font color="darkgreen">
     &quot;Subconnector for linear momentum&quot;</font>;
   <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Thermal">BaseClasses.Thermal</a> thermal <font color="darkgreen">&quot;Subconnector for heat&quot;</font>;
-
 <textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>Inert;
 </pre>
@@ -635,7 +640,7 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
     <p>Note that this connector extends from
     the <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Mechanical">Mechanical</a> and
     <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Thermal">Thermal</a> connectors,
-    whereas the <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> and 
+    whereas the <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> and
     <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connectors includes
     them as subconnectors.</p>
 
@@ -671,7 +676,6 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
   <font color="darkgreen">// Additivity of volume</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p(nominal=U.atm) <font color="darkgreen">&quot;Pressure&quot;</font>;
   <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V(min=-Modelica.Constants.inf, nominal=U.cc) <font color="darkgreen">&quot;Volume&quot;</font>;
-
 <textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>InertAmagat;
 </pre>
@@ -698,7 +702,7 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
     <p>Note that this connector extends from
     the <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Mechanical">Mechanical</a> and
     <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Thermal">Thermal</a> connectors,
-    whereas the <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> and 
+    whereas the <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> and
     <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connectors includes
     them as subconnectors.</p>
 
@@ -734,7 +738,6 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
   <font color="darkgreen">// Additivity of pressure</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V(nominal=U.cc) <font color="darkgreen">&quot;Volume&quot;</font>;
   <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> p(nominal=U.atm) <font color="darkgreen">&quot;Pressure&quot;</font>;
-
 <textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>InertDalton;
 </pre>
@@ -781,8 +784,8 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
   <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Mechanical">BaseClasses.Mechanical</a> mechanical(<font color="blue">final </font>n_lin=n_lin) <font color="blue">if </font>inclMechanical <font color="darkgreen">
     &quot;Subconnector for linear momentum&quot;</font>;
   <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Thermal">BaseClasses.Thermal</a> thermal <font color="blue">if </font>inclThermal <font color="darkgreen">&quot;Subconnector for heat&quot;</font>;
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>InertInternal;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>InertInternal;
 </pre>
 <hr>
 
@@ -933,7 +936,7 @@ Extends from Real.
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:32:29 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:10:39 2013.
 </div>
 </body>
 </html>

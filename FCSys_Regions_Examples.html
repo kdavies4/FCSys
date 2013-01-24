@@ -2,8 +2,8 @@
 <head>
 <title>FCSys.Regions.Examples</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-21">
-<meta name="description" content="Examples and tests">
+<meta name="date" content="2013-1-24">
+<meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
@@ -19,8 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-    <li><a href="FCSys_BCs.html">BCs</a></li>
-    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
@@ -44,7 +43,7 @@
       <div class="body">
 
 <h2><a name="FCSys.Regions.Examples"></a><a href="FCSys_Regions.html#FCSys.Regions">FCSys.Regions</a>.Examples</h2>
-<b>Examples and tests</b>
+<b>Examples</b>
 <p>
 <p><h3>Information</h3></p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.ExamplesPackage.html#Modelica.Icons.ExamplesPackage">Modelica.Icons.ExamplesPackage</a> (Icon for packages containing runnable examples).
@@ -102,7 +101,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     &quot;Number of regions along the channel&quot;</font>;
   <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
     &quot;Number of regions across the channel&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">FCSys.BCs.Environment</a> environment(analysis=true);
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment(analysis=true);
   <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFPs.AnFP</a> anFP(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDLs.AnGDL</a> anGDL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
@@ -117,38 +116,38 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">CaFPs.CaFP</a> caFP(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC1[n_y, n_z](<font color="blue">each </font>graphite(
+<textblock type="annotcomp" expanded="false">  FCSys.Conditions.FaceBus.SubregionClosed bC1[n_y, n_z](<font color="blue">each </font>graphite(
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;=true,
       &#39;C+&#39;(thermal(spec(k=environment.T))),
       &#39;e-&#39;(thermal(spec(k=environment.T)))));</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC2[n_y, n_z](<font color="blue">each </font>graphite(
+<textblock type="annotcomp" expanded="false">  FCSys.Conditions.FaceBus.SubregionClosed bC2[n_y, n_z](<font color="blue">each </font>graphite(
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;=true,
       &#39;C+&#39;(thermal(spec(k=environment.T))),
-      &#39;e-&#39;(thermal(spec(k=environment.T)), <font color="blue">redeclare </font><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Density">FCSys.BCs.Face.Material.Density</a>
+      &#39;e-&#39;(thermal(spec(k=environment.T)), <font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Density
           normal(spec(k(start=U.atm/(298.15*U.K)))))));
-  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC3[anFP.n_x, n_z](<font color="blue">each </font>gas(
+  FCSys.Conditions.FaceBus.SubregionClosed bC3[anFP.n_x, n_z](<font color="blue">each </font>gas(
       inclH2=true,
       inclH2O=true,
       H2(thermal(spec(k=environment.T))),
       H2O(thermal(spec(k=environment.T)))));</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC4[anFP.n_x, n_z](<font color="blue">each </font>gas(
+<textblock type="annotcomp" expanded="false">  FCSys.Conditions.FaceBus.SubregionClosed bC4[anFP.n_x, n_z](<font color="blue">each </font>gas(
       inclH2=true,
       inclH2O=true,
       H2(thermal(spec(k=environment.T))),
       H2O(thermal(spec(k=environment.T)))));</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC5[caFP.n_x, n_z](<font color="blue">each </font>gas(
+<textblock type="annotcomp" expanded="false">  FCSys.Conditions.FaceBus.SubregionClosed bC5[caFP.n_x, n_z](<font color="blue">each </font>gas(
       inclH2O=true,
       inclN2=true,
       inclO2=true,
       N2(thermal(spec(k=environment.T))),
       O2(thermal(spec(k=environment.T))),
       H2O(thermal(spec(k=environment.T)))));
-  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC6[caFP.n_x, n_z](<font color="blue">each </font>gas(
+  FCSys.Conditions.FaceBus.SubregionClosed bC6[caFP.n_x, n_z](<font color="blue">each </font>gas(
       inclH2O=true,
       inclN2=true,
       inclO2=true,
@@ -216,7 +215,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDLs.CaGDL</a> caGDL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC1[n_y, n_z](<font color="blue">each </font>gas(
+<textblock type="annotcomp" expanded="false">  FCSys.Conditions.FaceBus.SubregionClosed bC1[n_y, n_z](<font color="blue">each </font>gas(
       inclH2O=true,
       inclH2=true,
       H2(thermal(spec(k=environment.T))),
@@ -226,7 +225,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
       &#39;C+&#39;(thermal(spec(k=environment.T))),
       &#39;e-&#39;(thermal(spec(k=environment.T)))));</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC2[n_y, n_z](<font color="blue">each </font>gas(
+<textblock type="annotcomp" expanded="false">  FCSys.Conditions.FaceBus.SubregionClosed bC2[n_y, n_z](<font color="blue">each </font>gas(
       inclH2O=true,
       inclN2=true,
       inclO2=true,
@@ -236,10 +235,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;=true,
       &#39;C+&#39;(thermal(spec(k=environment.T))),
-      &#39;e-&#39;(thermal(spec(k=environment.T)), <font color="blue">redeclare </font><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Density">FCSys.BCs.Face.Material.Density</a>
+      &#39;e-&#39;(thermal(spec(k=environment.T)), <font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Density
           normal(spec(k(start=U.atm/(298.15*U.K)))))));</textblock>
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">FCSys.BCs.Environment</a> environment(analysis=true);</textblock>
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment(analysis=true);</textblock>
 
 <font color="blue">equation </font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(bC1.face, anGDL.xNegative);
@@ -252,7 +251,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(caCL.xPositive, caGDL.xNegative);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(caGDL.xPositive, bC2.face);</textblock>
-
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>GDLToGDL;
 </pre>
 <hr>
@@ -292,32 +290,32 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCLs.CaCL</a> caCL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionFlow">FCSys.BCs.FaceBus.SubregionFlow</a> bC1[n_y, n_z](
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlow">FCSys.Conditions.FaceBus.SubregionFlow</a> bC1[n_y, n_z](
     <font color="blue">each </font>gas(inclH2=true, inclH2O=true),
     <font color="blue">each </font>graphite(&#39;inclC+&#39;=true, &#39;incle-&#39;=true),
     <font color="blue">each </font>ionomer(&#39;inclC19HF37O5S-&#39;=true, &#39;inclH+&#39;=true));</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionFlow">FCSys.BCs.FaceBus.SubregionFlow</a> bC2[n_y, n_z](
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlow">FCSys.Conditions.FaceBus.SubregionFlow</a> bC2[n_y, n_z](
     <font color="blue">each </font>gas(
       inclH2O=true,
       inclN2=true,
       inclO2=true,
-      O2(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Density">FCSys.BCs.Face.Material.Density</a> normal(spec(k(start=U.atm/(298.15
-                  *U.K))))),
-      H2O(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Density">FCSys.BCs.Face.Material.Density</a> normal(spec(k(start=U.atm/(298.15
-                  *U.K)))))),
+      O2(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Density normal(spec(k(start=U.atm
+                  /(298.15*U.K))))),
+      H2O(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Density normal(spec(k(start=
+                  U.atm/(298.15*U.K)))))),
     <font color="blue">each </font>graphite(
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;=true,
-      &#39;e-&#39;(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Current">FCSys.BCs.Face.Material.Current</a> normal(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a>
+      &#39;e-&#39;(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Current normal(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a>
             spec(duration=1000, height=-2*U.A)))),
     <font color="blue">each </font>ionomer(
       &#39;inclC19HF37O5S-&#39;=true,
       &#39;inclH+&#39;=true,
-      &#39;H+&#39;(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Density">FCSys.BCs.Face.Material.Density</a> normal(spec(k(start=U.atm/(
-                  298.15*U.K)))))));</textblock>
+      &#39;H+&#39;(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Density normal(spec(k(start
+                =U.atm/(298.15*U.K)))))));</textblock>
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">FCSys.BCs.Environment</a> environment(analysis=true);</textblock>
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment(analysis=true);</textblock>
 
 <font color="blue">equation </font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(bC1.face, anCL.xNegative);</textblock>
@@ -326,7 +324,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="red">connect</font>(pEM.xPositive, caCL.xNegative);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(caCL.xPositive, bC2.face);</textblock>
-
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>CLToCL;
 </pre>
 <hr>
@@ -359,18 +356,18 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     &quot;Number of regions along the channel&quot;</font>;
   <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
     &quot;Number of regions across the channel&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">FCSys.BCs.Environment</a> environment(
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment(
     p=149.6*U.kPa,
     T=333.15*U.K,
     analysis=true);
   <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFPs.AnFP</a> anFP(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC1[n_y, n_z](<font color="blue">each </font>graphite(
+<textblock type="annotcomp" expanded="false">  FCSys.Conditions.FaceBus.SubregionClosed bC1[n_y, n_z](<font color="blue">each </font>graphite(
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;=true,
       &#39;C+&#39;(thermal(spec(k=environment.T))),
       &#39;e-&#39;(thermal(spec(k=environment.T)))));
-  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC2[n_y, n_z](<font color="blue">each </font>gas(
+  FCSys.Conditions.FaceBus.SubregionClosed bC2[n_y, n_z](<font color="blue">each </font>gas(
       inclH2=true,
       inclH2O=true,
       H2(thermal(spec(k=environment.T))),
@@ -378,15 +375,15 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;=true,
       &#39;C+&#39;(thermal(spec(k=environment.T))),
-      &#39;e-&#39;(thermal(spec(k=environment.T)),<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Density">FCSys.BCs.Face.Material.Density</a>
+      &#39;e-&#39;(thermal(spec(k=environment.T)),<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Density
           material)));</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC3[anFP.n_x, n_z](<font color="blue">each </font>gas(
+<textblock type="annotcomp" expanded="false">  FCSys.Conditions.FaceBus.SubregionClosed bC3[anFP.n_x, n_z](<font color="blue">each </font>gas(
       inclH2=true,
       inclH2O=true,
       H2(thermal(spec(k=environment.T))),
       H2O(thermal(spec(k=environment.T)))));
-  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC4[anFP.n_x, n_z](<font color="blue">each </font>gas(
+  FCSys.Conditions.FaceBus.SubregionClosed bC4[anFP.n_x, n_z](<font color="blue">each </font>gas(
       inclH2=true,
       inclH2O=true,
       H2(thermal(spec(k=environment.T))),
@@ -431,13 +428,13 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     &quot;Number of regions along the channel&quot;</font>;
   <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
     &quot;Number of regions across the channel&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">FCSys.BCs.Environment</a> environment(
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment(
     p=149.6*U.kPa,
     T=333.15*U.K,
     analysis=true);
   <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDLs.AnGDL</a> anGDL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC1[n_y, n_z](<font color="blue">each </font>gas(
+<textblock type="annotcomp" expanded="false">  FCSys.Conditions.FaceBus.SubregionClosed bC1[n_y, n_z](<font color="blue">each </font>gas(
       inclH2=true,
       inclH2O=true,
       H2(thermal(spec(k=environment.T))),
@@ -446,7 +443,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
       &#39;incle-&#39;=true,
       &#39;C+&#39;(thermal(spec(k=environment.T))),
       &#39;e-&#39;(thermal(spec(k=environment.T)))));
-  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC2[n_y, n_z](<font color="blue">each </font>gas(
+  FCSys.Conditions.FaceBus.SubregionClosed bC2[n_y, n_z](<font color="blue">each </font>gas(
       inclH2=true,
       inclH2O=true,
       H2(thermal(spec(k=environment.T))),
@@ -460,7 +457,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(bC1.face, anGDL.xNegative);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(anGDL.xPositive, bC2.face);</textblock>
-
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>AnGDL;
 </pre>
 <hr>
@@ -493,41 +489,40 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     &quot;Number of regions along the channel&quot;</font>;
   <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
     &quot;Number of regions across the channel&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">FCSys.BCs.Environment</a> environment(
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment(
     p=149.6*U.kPa,
     T=333.15*U.K,
     analysis=false);
   <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCLs.AnCL</a> anCL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionFlow">FCSys.BCs.FaceBus.SubregionFlow</a> bC1[n_y, n_z](
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlow">FCSys.Conditions.FaceBus.SubregionFlow</a> bC1[n_y, n_z](
     <font color="blue">each </font>gas(inclH2=true, inclH2O=true),
     <font color="blue">each </font>graphite(&#39;inclC+&#39;=true, &#39;incle-&#39;=true),
     <font color="blue">each </font>ionomer(&#39;inclC19HF37O5S-&#39;=true, &#39;inclH+&#39;=true));</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionFlow">FCSys.BCs.FaceBus.SubregionFlow</a> bC2[n_y, n_z](
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlow">FCSys.Conditions.FaceBus.SubregionFlow</a> bC2[n_y, n_z](
     <font color="blue">each </font>gas(
       inclH2=true,
       inclH2O=true,
-      H2(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Density">FCSys.BCs.Face.Material.Density</a> normal(spec(k=U.atm/(298.15*
-                U.K)))),
-      H2O(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Density">FCSys.BCs.Face.Material.Density</a> normal(spec(k=U.atm/(298.15*
-                U.K))))),
+      H2(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Density normal(spec(k=U.atm/(298.15
+                *U.K)))),
+      H2O(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Density normal(spec(k=U.atm/(
+                298.15*U.K))))),
     <font color="blue">each </font>graphite(
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;=true,
-      &#39;e-&#39;(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Current">FCSys.BCs.Face.Material.Current</a> normal(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a>
+      &#39;e-&#39;(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Current normal(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a>
             spec(duration=1000, height=2*U.A)))),
     <font color="blue">each </font>ionomer(
       &#39;inclC19HF37O5S-&#39;=true,
       &#39;inclH+&#39;=true,
-      &#39;H+&#39;(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Density">FCSys.BCs.Face.Material.Density</a> normal(spec(k(start=U.atm/(
-                  298.15*U.K)))))));</textblock>
+      &#39;H+&#39;(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Density normal(spec(k(start
+                =U.atm/(298.15*U.K)))))));</textblock>
 
 <font color="blue">equation </font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(bC1.face, anCL.xNegative);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(anCL.xPositive, bC2.face);</textblock>
-
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>AnCL;
 </pre>
 <hr>
@@ -561,27 +556,27 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
     &quot;Number of regions across the channel&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">FCSys.BCs.Environment</a> environment(
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment(
     p=149.6*U.kPa,
     T=333.15*U.K,
     analysis=true);
   <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEMs.PEM</a> pEM(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
 
-  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC1[n_y, n_z](<font color="blue">each </font>gas(inclH2O=true, H2O(
-          thermal(spec(k=environment.T)))), <font color="blue">each </font>ionomer(
+  FCSys.Conditions.FaceBus.SubregionClosed bC1[n_y, n_z](<font color="blue">each </font>gas(inclH2O=true,
+        H2O(thermal(spec(k=environment.T)))), <font color="blue">each </font>ionomer(
       &#39;inclC19HF37O5S-&#39;=true,
       &#39;inclH+&#39;=true,
       Error));
-  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC2[n_y, n_z](<font color="blue">each </font>gas(inclH2O=true, H2O(
-          thermal(spec(k=environment.T)))), <font color="blue">each </font>ionomer(
+  FCSys.Conditions.FaceBus.SubregionClosed bC2[n_y, n_z](<font color="blue">each </font>gas(inclH2O=true,
+        H2O(thermal(spec(k=environment.T)))), <font color="blue">each </font>ionomer(
       &#39;inclC19HF37O5S-&#39;=true,
       &#39;inclH+&#39;=true,
       Error));
+
 <font color="blue">equation </font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(bC1.face, pEM.xNegative);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(bC2.face, pEM.xPositive);</textblock>
-
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>PEM;
 </pre>
 <hr>
@@ -614,47 +609,46 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     &quot;Number of regions along the channel&quot;</font>;
   <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
     &quot;Number of regions across the channel&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">FCSys.BCs.Environment</a> environment(
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment(
     p=149.6*U.kPa,
     T=333.15*U.K,
     analysis=true);</textblock>
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCLs.CaCL</a> caCL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionFlow">FCSys.BCs.FaceBus.SubregionFlow</a> bC1[n_y, n_z](
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlow">FCSys.Conditions.FaceBus.SubregionFlow</a> bC1[n_y, n_z](
     <font color="blue">each </font>gas(
       inclH2O=true,
       inclN2=true,
       inclO2=true),
     <font color="blue">each </font>graphite(&#39;inclC+&#39;=true, &#39;incle-&#39;=true),
     <font color="blue">each </font>ionomer(&#39;inclC19HF37O5S-&#39;=true, &#39;inclH+&#39;=true));
-  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionFlow">FCSys.BCs.FaceBus.SubregionFlow</a> bC2[n_y, n_z](
+  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlow">FCSys.Conditions.FaceBus.SubregionFlow</a> bC2[n_y, n_z](
     <font color="blue">each </font>gas(
       inclH2O=true,
       inclN2=true,
       inclO2=true,
-      O2(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Density">FCSys.BCs.Face.Material.Density</a> normal(spec(k(start=U.atm/(298.15
-                  *U.K))))),
-      H2O(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Density">FCSys.BCs.Face.Material.Density</a> normal(spec(k(start=U.atm/(298.15
-                  *U.K)))))),
+      O2(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Density normal(spec(k(start=U.atm
+                  /(298.15*U.K))))),
+      H2O(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Density normal(spec(k(start=
+                  U.atm/(298.15*U.K)))))),
     <font color="blue">each </font>graphite(
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;=true,
-      &#39;C+&#39;(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Thermal.html#FCSys.BCs.Face.Thermal.Temperature">FCSys.BCs.Face.Thermal.Temperature</a> thermal(spec(k(start=298.15
-                  *U.K)))),
-      &#39;e-&#39;(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Current">FCSys.BCs.Face.Material.Current</a> normal(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a>
+      &#39;C+&#39;(<font color="blue">redeclare </font><a href="FCSys_Conditions_Face_Thermal.html#FCSys.Conditions.Face.Thermal.Temperature">FCSys.Conditions.Face.Thermal.Temperature</a> thermal(spec(k(
+                start=298.15*U.K)))),
+      &#39;e-&#39;(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Current normal(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a>
             spec(duration=1000, height=-2*U.A)))),
     <font color="blue">each </font>ionomer(
       &#39;inclC19HF37O5S-&#39;=true,
       &#39;inclH+&#39;=true,
-      &#39;H+&#39;(<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Density">FCSys.BCs.Face.Material.Density</a> normal(spec(k(start=U.atm/(
-                  298.15*U.K)))))));</textblock>
+      &#39;H+&#39;(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Density normal(spec(k(start
+                =U.atm/(298.15*U.K)))))));</textblock>
 
 <font color="blue">equation </font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(bC1.face, caCL.xNegative);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(bC2.face, caCL.xPositive);</textblock>
-
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>CaCL;
 </pre>
 <hr>
@@ -687,13 +681,13 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     &quot;Number of regions along the channel&quot;</font>;
   <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
     &quot;Number of regions across the channel&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">FCSys.BCs.Environment</a> environment(
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment(
     p=149.6*U.kPa,
     T=333.15*U.K,
     analysis=true);
   <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDLs.CaGDL</a> caGDL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC1[n_y, n_z](<font color="blue">each </font>gas(
+<textblock type="annotcomp" expanded="false">  FCSys.Conditions.FaceBus.SubregionClosed bC1[n_y, n_z](<font color="blue">each </font>gas(
       inclH2O=true,
       inclN2=true,
       inclO2=true,
@@ -704,7 +698,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
       &#39;incle-&#39;=true,
       &#39;C+&#39;(thermal(spec(k=environment.T))),
       &#39;e-&#39;(thermal(spec(k=environment.T)))));
-  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC2[n_y, n_z](<font color="blue">each </font>gas(
+  FCSys.Conditions.FaceBus.SubregionClosed bC2[n_y, n_z](<font color="blue">each </font>gas(
       inclH2O=true,
       inclN2=true,
       inclO2=true,
@@ -720,7 +714,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(bC1.face, caGDL.xNegative);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(bC2.face, caGDL.xPositive);</textblock>
-
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>CaGDL;
 </pre>
 <hr>
@@ -753,13 +746,13 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     &quot;Number of regions along the channel&quot;</font>;
   <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
     &quot;Number of regions across the channel&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">FCSys.BCs.Environment</a> environment(
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment(
     p=149.6*U.kPa,
     T=333.15*U.K,
     analysis=true);
   <a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">CaFPs.CaFP</a> caFP(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC1[n_y, n_z](<font color="blue">each </font>gas(
+<textblock type="annotcomp" expanded="false">  FCSys.Conditions.FaceBus.SubregionClosed bC1[n_y, n_z](<font color="blue">each </font>gas(
       inclH2O=true,
       inclN2=true,
       inclO2=true,
@@ -770,26 +763,27 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
       &#39;incle-&#39;=true,
       &#39;C+&#39;(thermal(spec(k=environment.T))),
       &#39;e-&#39;(thermal(spec(k=environment.T)))));
-  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC2[n_y, n_z](<font color="blue">each </font>graphite(
+  FCSys.Conditions.FaceBus.SubregionClosed bC2[n_y, n_z](<font color="blue">each </font>graphite(
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;=true,
       &#39;C+&#39;(thermal(spec(k=environment.T))),
-      &#39;e-&#39;(thermal(spec(k=environment.T)),<font color="blue">redeclare </font><a href="FCSys_BCs_Face_Material.html#FCSys.BCs.Face.Material.Density">FCSys.BCs.Face.Material.Density</a>
+      &#39;e-&#39;(thermal(spec(k=environment.T)),<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Density
           material)));
-  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC3[caFP.n_x, n_z](<font color="blue">each </font>gas(
+  FCSys.Conditions.FaceBus.SubregionClosed bC3[caFP.n_x, n_z](<font color="blue">each </font>gas(
       inclH2O=true,
       inclN2=true,
       inclO2=true,
       H2O(thermal(spec(k=environment.T))),
       N2(thermal(spec(k=environment.T))),
       O2(thermal(spec(k=environment.T)))));
-  <a href="FCSys_BCs_FaceBus.html#FCSys.BCs.FaceBus.SubregionClosed">FCSys.BCs.FaceBus.SubregionClosed</a> bC4[caFP.n_x, n_z](<font color="blue">each </font>gas(
+  FCSys.Conditions.FaceBus.SubregionClosed bC4[caFP.n_x, n_z](<font color="blue">each </font>gas(
       inclH2O=true,
       inclN2=true,
       inclO2=true,
       H2O(thermal(spec(k=environment.T))),
       N2(thermal(spec(k=environment.T))),
       O2(thermal(spec(k=environment.T)))));</textblock>
+
 <font color="blue">equation </font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(bC1.face, caFP.xNegative);</textblock>
 
@@ -804,7 +798,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:39:39 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:08:09 2013.
 </div>
 </body>
 </html>

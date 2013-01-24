@@ -1,0 +1,199 @@
+<html>
+<head>
+<title>FCSys.Conditions.FaceBusPair</title>
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
+<meta name="date" content="2013-1-24">
+<meta name="description" content="&lt;html&gt;Conditions for a pair of &lt;a href=\&quot;modelica://FCSys.Connectors.FaceBus\&quot;&gt;FaceBus&lt;/a&gt; connectors&lt;/html&gt;">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Conditions.FaceBusPair"></a><a href="FCSys_Conditions.html#FCSys.Conditions">FCSys.Conditions</a>.FaceBusPair</h2>
+<b>Conditions for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connectors</b>
+<p>
+<p><h3>Information</h3></p>
+<p>The hierarchy of these
+ boundary condition models is similar to that of the models in the
+ <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus">Conditions.FaceBus</a> package.
+ For more information, please see the documentation in that package.</p><p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Conditions.FaceBusPair.SubregionS.png" alt="FCSys.Conditions.FaceBusPair.Subregion" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FaceBusPair.html#FCSys.Conditions.FaceBusPair.Subregion">Subregion</a>
+</td><td>Condition for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with efforts by default</td></tr>
+<tr><td><img src="images/FCSys.Conditions.FaceBusPair.SubregionS.png" alt="FCSys.Conditions.FaceBusPair.SubregionFlow" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FaceBusPair.html#FCSys.Conditions.FaceBusPair.SubregionFlow">SubregionFlow</a>
+</td><td>Condition for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with flows by default</td></tr>
+<tr><td><img src="images/FCSys.Conditions.FaceBusPair.PhasesS.png" alt="FCSys.Conditions.FaceBusPair.Phases" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FaceBusPair_Phases.html#FCSys.Conditions.FaceBusPair.Phases">Phases</a>
+</td><td>Conditions for the <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, e.g., of a <a href="FCSys_Subregions.html#FCSys.Subregions.Phase">Phase</a> model (multi-species)</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.FaceBusPair.SubregionI.png" alt="FCSys.Conditions.FaceBusPair.Subregion" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.FaceBusPair.Subregion"></a><a href="FCSys_Conditions_FaceBusPair.html#FCSys.Conditions.FaceBusPair">FCSys.Conditions.FaceBusPair</a>.Subregion</h2>
+<b>Condition for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with efforts by default</b><p>
+<img src="images/FCSys.Conditions.FaceBusPair.SubregionD.png" alt="FCSys.Conditions.FaceBusPair.Subregion">
+<p><h3>Information</h3></p>
+Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.Icons.Conditions.Double">FCSys.BaseClasses.Icons.Conditions.Double</a> (Icon for a two-connector boundary condition).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Phases</td></tr>
+<tr><td><a href="FCSys_Conditions_FaceBusPair_Phases.html#FCSys.Conditions.FaceBusPair.Phases.Gas">Gas</a></td><td>gas</td><td>redeclare Phases.Gas gas</td><td>Gas</td></tr>
+<tr><td><a href="FCSys_Conditions_FaceBusPair_Phases.html#FCSys.Conditions.FaceBusPair.Phases.Graphite">Graphite</a></td><td>graphite</td><td>redeclare Phases.Graphite gr...</td><td>Graphite</td></tr>
+<tr><td><a href="FCSys_Conditions_FaceBusPair_Phases.html#FCSys.Conditions.FaceBusPair.Phases.Ionomer">Ionomer</a></td><td>ionomer</td><td>redeclare Phases.Ionomer ion...</td><td>Ionomer</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive</td><td>&nbsp;</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Subregion <font color="darkgreen">
+  &quot;Condition for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with efforts by default&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.Icons.Conditions.Double">FCSys.BaseClasses.Icons.Conditions.Double</a>;
+
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Conditions_FaceBusPair_Phases.html#FCSys.Conditions.FaceBusPair.Phases.Gas">Phases.Gas</a> gas <font color="darkgreen">&quot;Gas&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Conditions_FaceBusPair_Phases.html#FCSys.Conditions.FaceBusPair.Phases.Graphite">Phases.Graphite</a> graphite <font color="darkgreen">&quot;Graphite&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Conditions_FaceBusPair_Phases.html#FCSys.Conditions.FaceBusPair.Phases.Ionomer">Phases.Ionomer</a> ionomer <font color="darkgreen">&quot;Ionomer&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> negative;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">FCSys.Connectors.RealInputBus</a> u;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> positive;</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(gas.negative, negative.gas);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(graphite.negative, negative.graphite);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(ionomer.negative, negative.ionomer);
+  <font color="red">connect</font>(gas.positive, positive.gas);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(graphite.positive, positive.graphite);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(ionomer.positive, positive.ionomer);
+  <font color="red">connect</font>(u.gas, gas.u);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u.graphite, graphite.u);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u.ionomer, ionomer.u);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Subregion;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.FaceBusPair.SubregionI.png" alt="FCSys.Conditions.FaceBusPair.SubregionFlow" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.FaceBusPair.SubregionFlow"></a><a href="FCSys_Conditions_FaceBusPair.html#FCSys.Conditions.FaceBusPair">FCSys.Conditions.FaceBusPair</a>.SubregionFlow</h2>
+<b>Condition for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with flows by default</b><p>
+<img src="images/FCSys.Conditions.FaceBusPair.SubregionD.png" alt="FCSys.Conditions.FaceBusPair.SubregionFlow">
+<p><h3>Information</h3></p>
+Extends from <a href="FCSys_Conditions_FaceBusPair.html#FCSys.Conditions.FaceBusPair.Subregion">Subregion</a> (Condition for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with efforts by default).
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive</td><td>&nbsp;</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> SubregionFlow <font color="darkgreen">
+  &quot;Condition for faces of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model, with flows by default&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_FaceBusPair.html#FCSys.Conditions.FaceBusPair.Subregion">Subregion</a>(
+    gas(
+      H2(
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Normal.Force normal,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Transverse.Force transverse1,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Transverse.Force transverse2,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatRate thermal),
+      H2O(
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Normal.Force normal,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Transverse.Force transverse1,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Transverse.Force transverse2,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatRate thermal),
+      N2(
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Normal.Force normal,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Transverse.Force transverse1,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Transverse.Force transverse2,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatRate thermal),
+      O2(
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Normal.Force normal,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Transverse.Force transverse1,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Transverse.Force transverse2,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatRate thermal)),
+    graphite(&#39;C+&#39;(
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Normal.Force normal,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Transverse.Force transverse1,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Transverse.Force transverse2,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatRate thermal), &#39;e-&#39;(
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Normal.Force normal,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Transverse.Force transverse1,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Transverse.Force transverse2,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatRate thermal)),
+    ionomer(
+      &#39;C19HF37O5S-&#39;(
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Normal.Force normal,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Transverse.Force transverse1,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Transverse.Force transverse2,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatRate thermal),
+      H2O(
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Normal.Force normal,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Transverse.Force transverse1,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Transverse.Force transverse2,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatRate thermal),
+      &#39;H+&#39;(
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Normal.Force normal,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Transverse.Force transverse1,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Transverse.Force transverse2,
+        <font color="blue">redeclare </font><font color="blue">replaceable </font>FaceDifferential.Thermal.HeatRate thermal)));
+
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>SubregionFlow;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:07:01 2013.
+</div>
+</body>
+</html>

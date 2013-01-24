@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # Clean up the HTML help files by making custom replacements.
 #
-# The first argument is the directory, which defaults to ./.
+# The first argument is the directory, which defaults to the present directory.
 #
 # Created by Kevin Davies, 5/30/2012
 
@@ -38,7 +38,7 @@ rpls = [
     ('(<link rel="shortcut icon" href=".*\.ico">\n)(</head>)', r"""\1<script type="text/javascript" src="javascripts/analytics.js"></script>
 \2"""),
     # Remove the self-reference.
-    ('Updates to this package may be available at the *\n *<a href="http://kdavies4\.github\.com/FCSys/">main project site</a>\. *\n *Development is being carried out at', 'The development site is'),
+    ('Updates to this package may be available at.*\n *<a href="http://kdavies4\.github\.com/FCSys/">.*\n *Development is being carried out at', 'The development site is'),
     ]
 
 # Directory specification

@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.Species.'e-'.Graphite</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-21">
+<meta name="date" content="2013-1-24">
 <meta name="description" content="&lt;html&gt;e&lt;sup&gt;-&lt;/sup&gt; in graphite&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,8 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-    <li><a href="FCSys_BCs.html">BCs</a></li>
-    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
@@ -65,7 +64,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <b>Correlations with adjustment factors</b><p>
 <img src="images/FCSys.Subregions.Species.SpeciesSolidD.png" alt="FCSys.Subregions.Species.'e-'.Graphite.Calibrated">
 <p><h3>Information</h3></p>
-<p>For more information, see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
+<p>For information, see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> (Model for single-species exchange, transport, and storage of material, linear momentum, and energy).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -158,8 +157,8 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     &quot;Adjustment factor for dynamic fluidity (<i>k</i><sub><i>F</i></sub>)&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_R(<font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
     &quot;Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S&#775;</i></sub>)&quot;</font>;
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Calibrated;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>Calibrated;
 </pre>
 <hr>
 
@@ -168,7 +167,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <b>Correlated properties</b><p>
 <img src="images/FCSys.Subregions.Species.SpeciesSolidD.png" alt="FCSys.Subregions.Species.'e-'.Graphite.Correlated">
 <p><h3>Information</h3></p>
-<p>For more information, see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
+<p>For information, see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> (Model for single-species exchange, transport, and storage of material, linear momentum, and energy).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -251,8 +250,8 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     Xi=<font color="red">Data.Xi</font>(T),
     F=<font color="red">Data.F</font>(T),
     R=<font color="red">Data.R</font>(T));
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Correlated;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>Correlated;
 </pre>
 <hr>
 
@@ -342,7 +341,6 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.CompressibilityDynamic">Q.CompressibilityDynamic</a> Xi=<font color="red">Data.Xi</font>(),
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.FluidityDynamic">Q.FluidityDynamic</a> F=<font color="red">Data.F</font>(),
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> R=<font color="red">Data.R</font>());
-
 <textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>Fixed;
 </pre>
@@ -351,7 +349,7 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:31:36 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:09:47 2013.
 </div>
 </body>
 </html>

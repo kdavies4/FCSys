@@ -1,0 +1,138 @@
+<html>
+<head>
+<title>FCSys.Conditions.InertDalton.Mechanical</title>
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
+<meta name="date" content="2013-1-24">
+<meta name="description" content="Mechanical Conditions">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Conditions.InertDalton.Mechanical"></a><a href="FCSys_Conditions_InertDalton.html#FCSys.Conditions.InertDalton">FCSys.Conditions.InertDalton</a>.Mechanical</h2>
+<b>Mechanical Conditions</b>
+<p>
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Conditions.InertDalton.Mechanical.VelocityS.png" alt="FCSys.Conditions.InertDalton.Mechanical.Velocity" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_InertDalton_Mechanical.html#FCSys.Conditions.InertDalton.Mechanical.Velocity">Velocity</a>
+</td><td>Impose velocity</td></tr>
+<tr><td><img src="images/FCSys.Conditions.InertDalton.Mechanical.VelocityS.png" alt="FCSys.Conditions.InertDalton.Mechanical.Force" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_InertDalton_Mechanical.html#FCSys.Conditions.InertDalton.Mechanical.Force">Force</a>
+</td><td>Impose force</td></tr>
+<tr><td><img src="images/FCSys.Conditions.InertDalton.Mechanical.BaseClassesS.png" alt="FCSys.Conditions.InertDalton.Mechanical.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_InertDalton_Mechanical_BaseClasses.html#FCSys.Conditions.InertDalton.Mechanical.BaseClasses">BaseClasses</a>
+</td><td>Base classes (not for direct use)</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.InertDalton.Mechanical.VelocityI.png" alt="FCSys.Conditions.InertDalton.Mechanical.Velocity" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.InertDalton.Mechanical.Velocity"></a><a href="FCSys_Conditions_InertDalton_Mechanical.html#FCSys.Conditions.InertDalton.Mechanical">FCSys.Conditions.InertDalton.Mechanical</a>.Velocity</h2>
+<b>Impose velocity</b><p>
+<img src="images/FCSys.Conditions.InertDalton.Pressure.VolumeD.png" alt="FCSys.Conditions.InertDalton.Mechanical.Velocity">
+<p><h3>Information</h3></p>
+Extends from <a href="FCSys_Conditions_InertDalton_Mechanical_BaseClasses.html#FCSys.Conditions.InertDalton.Mechanical.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a mechanical condition).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>spec</td><td>redeclare Modelica.Blocks.So...</td><td>Internal specification</td></tr>
+<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis</a></td><td>axis</td><td>Axis.x</td><td>Axis</td></tr>
+<tr><td><a href="FCSys_Conditions_InertDalton_Mechanical_BaseClasses.html#FCSys.Conditions.InertDalton.Mechanical.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Ve...</td><td>Type of condition</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
+<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Connector for linear momentum and heat, with additivity of pressure</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Velocity <font color="darkgreen">&quot;Impose velocity&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_InertDalton_Mechanical_BaseClasses.html#FCSys.Conditions.InertDalton.Mechanical.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(<font color="blue">final </font>conditionType=BaseClasses.ConditionType.Velocity,
+      u(<font color="blue">final </font>unit=&quot;l/T&quot;));
+
+<font color="blue">equation </font>
+  inert.phi[linAxes[axis]] = u_final;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Velocity;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.InertDalton.Mechanical.VelocityI.png" alt="FCSys.Conditions.InertDalton.Mechanical.Force" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.InertDalton.Mechanical.Force"></a><a href="FCSys_Conditions_InertDalton_Mechanical.html#FCSys.Conditions.InertDalton.Mechanical">FCSys.Conditions.InertDalton.Mechanical</a>.Force</h2>
+<b>Impose force</b><p>
+<img src="images/FCSys.Conditions.InertDalton.Pressure.VolumeD.png" alt="FCSys.Conditions.InertDalton.Mechanical.Force">
+<p><h3>Information</h3></p>
+Extends from <a href="FCSys_Conditions_InertDalton_Mechanical_BaseClasses.html#FCSys.Conditions.InertDalton.Mechanical.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a mechanical condition).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>spec</td><td>redeclare Modelica.Blocks.So...</td><td>Internal specification</td></tr>
+<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis</a></td><td>axis</td><td>Axis.x</td><td>Axis</td></tr>
+<tr><td><a href="FCSys_Conditions_InertDalton_Mechanical_BaseClasses.html#FCSys.Conditions.InertDalton.Mechanical.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Fo...</td><td>Type of condition</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
+<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Connector for linear momentum and heat, with additivity of pressure</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Force <font color="darkgreen">&quot;Impose force&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_InertDalton_Mechanical_BaseClasses.html#FCSys.Conditions.InertDalton.Mechanical.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(<font color="blue">final </font>conditionType=BaseClasses.ConditionType.Force,
+      u(<font color="blue">final </font>unit=&quot;l.m/T2&quot;));
+
+<font color="blue">equation </font>
+  inert.mPhidot[linAxes[axis]] = u_final;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Force;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:06:38 2013.
+</div>
+</body>
+</html>

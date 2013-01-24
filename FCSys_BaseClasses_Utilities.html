@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.BaseClasses.Utilities</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-21">
+<meta name="date" content="2013-1-24">
 <meta name="description" content="Functions that implement useful algorithms">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,8 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-    <li><a href="FCSys_BCs.html">BCs</a></li>
-    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
@@ -51,8 +50,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td><img src="images/FCSys.BaseClasses.Utilities.ExamplesS.png" alt="FCSys.BaseClasses.Utilities.Examples" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Examples.html#FCSys.BaseClasses.Utilities.Examples">Examples</a>
-</td><td>Examples and tests</td></tr>
 <tr><td><img src="images/FCSys.BaseClasses.Utilities.ChemistryS.png" alt="FCSys.BaseClasses.Utilities.Chemistry" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry">Chemistry</a>
 </td><td>Functions to support chemistry</td></tr>
 <tr><td><img src="images/FCSys.BaseClasses.Utilities.ChemistryS.png" alt="FCSys.BaseClasses.Utilities.Polynomial" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial">Polynomial</a>
@@ -107,6 +104,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <font color="blue">algorithm </font>
   average := <font color="red">sum</font>(u)/<font color="red">size</font>(u, 1);
+
 <font color="blue">end </font>average;
 </pre>
 <hr>
@@ -164,7 +162,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <font color="blue">algorithm </font>
   n := <font color="red">sum</font>(<font color="blue">if </font>u[i]<font color="blue"> then </font>1<font color="blue"> else </font>0 <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(u, 1));
-
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>countTrue;
 </pre>
 <hr>
@@ -197,6 +194,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <font color="blue">algorithm </font>
   Delta := u[1] - u[2];
+
 <font color="blue">end </font>Delta;
 </pre>
 <hr>
@@ -321,9 +319,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>inSign;
 </pre>
 <hr>
-<!--[if supportFields]><span style='mso-element:field-begin'></span>
-<span style='mso-spacerun:yes'></span>XE mod1<![endif]-->
-<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+
 <h2><img src="images/FCSys.BaseClasses.Utilities.averageI.png" alt="FCSys.BaseClasses.Utilities.mod1" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.mod1"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.mod1</h2>
 <b>Modulo operator for 1-based indexing (compatible with Modelica)</b><p>
@@ -356,6 +352,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <font color="blue">algorithm </font>
   index := <font color="red">mod</font>(num - 1, den) + 1;
+
 <font color="blue">end </font>mod1;
 </pre>
 <hr>
@@ -421,6 +418,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <font color="blue">algorithm </font>
   Sigma := u[1] + u[2];
+
 <font color="blue">end </font>Sigma;
 </pre>
       </div>
@@ -428,7 +426,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:32:49 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:11:00 2013.
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-21">
+<meta name="date" content="2013-1-24">
 <meta name="description" content="Control volumes with multi-species transport, exchange, and storage">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,8 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-    <li><a href="FCSys_BCs.html">BCs</a></li>
-    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
@@ -65,7 +64,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Subregions.ExamplesS.png" alt="FCSys.Subregions.Examples" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples">Examples</a>
-</td><td>Examples and tests</td></tr>
+</td><td>Examples</td></tr>
 <tr><td><img src="images/FCSys.Subregions.SubregionS.png" alt="FCSys.Subregions.Subregion" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a>
 </td><td>Subregion with all phases</td></tr>
 <tr><td><img src="images/FCSys.Subregions.SubregionS.png" alt="FCSys.Subregions.SubregionIonomerOnly" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions.SubregionIonomerOnly">SubregionIonomerOnly</a>
@@ -270,9 +269,7 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   <font color="red">connect</font>(liquid.yPositive, yPositive.liquid);
   <font color="red">connect</font>(liquid.zNegative, zNegative.liquid);
   <font color="red">connect</font>(liquid.zPositive, zPositive.liquid);</textblock>
-
-<textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>Subregion;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Subregion;
 </pre>
 <hr>
 
@@ -333,7 +330,6 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   <font color="red">connect</font>(ionomer.yPositive, yPositive.ionomer);
   <font color="red">connect</font>(ionomer.zNegative, zNegative.ionomer);
   <font color="red">connect</font>(ionomer.zPositive, zPositive.ionomer);</textblock>
-
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>SubregionIonomerOnly;
 </pre>
 <hr>
@@ -401,6 +397,7 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">Reaction</a> evaporation(<font color="blue">final </font>n_lin=n_lin, n_spec=2) <font color="blue">if </font>inclReact<font color="blue"> and </font>(gas.inclH2O<font color="blue">
      and </font>liquid.inclH2O) <font color="darkgreen">&quot;Water evaporation/condensation&quot;</font>;</textblock>
+
 <font color="blue">equation </font>
   <font color="darkgreen">// Chemical interactions (not shown graphically)</font>
   <font color="red">connect</font>(evaporation.chemical[1], chemical.gas.H2O);
@@ -438,7 +435,6 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   <font color="red">connect</font>(liquid.yPositive, yPositive.liquid);
   <font color="red">connect</font>(liquid.zNegative, zNegative.liquid);
   <font color="red">connect</font>(liquid.zPositive, zPositive.liquid);</textblock>
-
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>SubregionNoIonomer;
 </pre>
 <hr>
@@ -676,7 +672,7 @@ Check the chemical formulas and the specific masses of the species.&quot;);
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:30:38 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:08:59 2013.
 </div>
 </body>
 </html>

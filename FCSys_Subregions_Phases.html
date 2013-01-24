@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.Phases</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-21">
+<meta name="date" content="2013-1-24">
 <meta name="description" content="Phases or mixtures of species">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,8 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-    <li><a href="FCSys_BCs.html">BCs</a></li>
-    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
@@ -288,9 +287,16 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <b>Graphite phase</b><p>
 <img src="images/FCSys.Subregions.Phases.GraphiteD.png" alt="FCSys.Subregions.Phases.Graphite">
 <p><h3>Information</h3></p>
-<p>If C is included (<code>inclC</code>=<code>true</code>),
+<p>If C<sup>+</sup> is included (<code>'inclC+'</code>=<code>true</code>),
     then <code>initVelX</code>, <code>initVelY</code>, and <code>initVelZ</code> are
-    ignored.  Velocity is not initialized because it is set by C.</p>
+    ignored.  Velocity is not initialized because it is set by C<sup>+</sup>. **update this</p>
+
+    <p>Assumptions:
+    <ol>
+    <li>The density of e<sup>-</sup> is equal to that of C<sup>+</sup>.</li>
+    <li>All of the C has been ionized to C<sup>+</sup>.</li>
+    </ol>
+    </p>
 
     <p>For more information, see the
  <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.NullPhase">NullPhase</a> model.</p><p>
@@ -335,7 +341,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <pre>
 <font color="blue">model</font> Graphite <font color="darkgreen">&quot;Graphite phase&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.NullPhase">BaseClasses.NullPhase</a>(<font color="blue">final </font>n_spec=<font color="red">countTrue</font>({'inclC+','incle-'}),
-      common(mechanical(phi(fixed=<font color="blue">if </font>inclC<font color="blue"> then </font><font color="red">fill</font>(false, n_lin)<font color="blue"> else </font>{
+      common(mechanical(phi(fixed=<font color="blue">if </font>'inclC+'<font color="blue"> then </font><font color="red">fill</font>(false, n_lin)<font color="blue"> else </font>{
               initVelX,initVelY,initVelZ}[cartAxes]))));
 
   <font color="darkgreen">// Conditionally include species.</font>
@@ -356,11 +362,11 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
     Species.Species(
     <font color="blue">final </font>k=k,
     <font color="blue">final </font>inclLin=inclLin,
-    initMethX=<font color="blue">if </font>(initVelX<font color="blue"> or </font>inclC)<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue">
+    initMethX=<font color="blue">if </font>(initVelX<font color="blue"> or </font>'inclC+')<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue">
          else </font>InitMethVelocity.Velocity,
-    initMethY=<font color="blue">if </font>(initVelY<font color="blue"> or </font>inclC)<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue">
+    initMethY=<font color="blue">if </font>(initVelY<font color="blue"> or </font>'inclC+')<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue">
          else </font>InitMethVelocity.Velocity,
-    initMethZ=<font color="blue">if </font>(initVelZ<font color="blue"> or </font>inclC)<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue">
+    initMethZ=<font color="blue">if </font>(initVelZ<font color="blue"> or </font>'inclC+')<font color="blue"> and </font>reduceVel<font color="blue"> then </font>InitMethVelocity.None<font color="blue">
          else </font>InitMethVelocity.Velocity,
     initMethTemp=<font color="blue">if </font>initTemp<font color="blue"> and </font>reduceTemp<font color="blue"> then </font>InitMethScalar.None<font color="blue"> else </font>
         InitMethScalar.Temperature,
@@ -406,9 +412,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.zNegative, zNegative.'e-');
   <font color="red">connect</font>('e-'.zPositive, zPositive.'e-');</textblock>
-
-<textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>Graphite;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Graphite;
 </pre>
 <hr>
 
@@ -417,9 +421,19 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <b>Ionomer phase</b><p>
 <img src="images/FCSys.Subregions.Phases.IonomerD.png" alt="FCSys.Subregions.Phases.Ionomer">
 <p><h3>Information</h3></p>
-<p>If C19HF37O5S is included (<code>inclC19HF37O5S</code>=<code>true</code>),
+<p>If C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> is included
+    (<code>'inclC19HF37O5S-'</code>=<code>true</code>),
     then <code>initVelX</code>, <code>initVelY</code>, and <code>initVelZ</code> are
-    ignored.  Velocity is not initialized because it is set by C19HF37O5S.</p>
+    ignored.  Velocity is not initialized because it is set by C19HF37O5S.**update this</p>
+
+    <p>Assumptions:
+    <ol>
+    <li>The density of H<sup>+</sup> is equal to that of C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>.</li>
+    <li>All of the C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S has been ionized to
+    C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>.  Note that this is not true in practice
+    (see <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">Characteristics.'H+'.Ionomer</a>).</li>
+    </ol>
+    </p>
 
     <p>For more information, see the
  <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.NullPhase">NullPhase</a> model.</p><p>
@@ -466,8 +480,9 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <pre>
 <font color="blue">model</font> Ionomer <font color="darkgreen">&quot;Ionomer phase&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.NullPhase">BaseClasses.NullPhase</a>(<font color="blue">final </font>n_spec=<font color="red">countTrue</font>({'inclC19HF37O5S-',
-        'inclH+',inclH2O}), common(mechanical(phi(fixed=<font color="blue">if </font>inclC19HF37O5S<font color="blue"> then </font><font color="red">
-              fill</font>(false, n_lin)<font color="blue"> else </font>{initVelX,initVelY,initVelZ}[cartAxes]))));
+        'inclH+',inclH2O}), common(mechanical(phi(fixed=<font color="blue">if </font>'inclC19HF37O5S-'<font color="blue">
+               then </font><font color="red">fill</font>(false, n_lin)<font color="blue"> else </font>{initVelX,initVelY,initVelZ}[
+              cartAxes]))));
 
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean &#39;inclC19HF37O5S-&#39;=false <font color="darkgreen">
@@ -506,11 +521,11 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
     Species.Species(
     <font color="blue">final </font>k=k,
     <font color="blue">final </font>inclLin=inclLin,
-    initMethX=<font color="blue">if </font>(initVelX<font color="blue"> or </font>inclC19HF37O5S)<font color="blue"> and </font>reduceVel<font color="blue"> then </font>
+    initMethX=<font color="blue">if </font>(initVelX<font color="blue"> or </font>'inclC19HF37O5S-')<font color="blue"> and </font>reduceVel<font color="blue"> then </font>
         InitMethVelocity.None<font color="blue"> else </font>InitMethVelocity.Velocity,
-    initMethY=<font color="blue">if </font>(initVelY<font color="blue"> or </font>inclC19HF37O5S)<font color="blue"> and </font>reduceVel<font color="blue"> then </font>
+    initMethY=<font color="blue">if </font>(initVelY<font color="blue"> or </font>'inclC19HF37O5S-')<font color="blue"> and </font>reduceVel<font color="blue"> then </font>
         InitMethVelocity.None<font color="blue"> else </font>InitMethVelocity.Velocity,
-    initMethZ=<font color="blue">if </font>(initVelZ<font color="blue"> or </font>inclC19HF37O5S)<font color="blue"> and </font>reduceVel<font color="blue"> then </font>
+    initMethZ=<font color="blue">if </font>(initVelZ<font color="blue"> or </font>'inclC19HF37O5S-')<font color="blue"> and </font>reduceVel<font color="blue"> then </font>
         InitMethVelocity.None<font color="blue"> else </font>InitMethVelocity.Velocity,
     initMethTemp=<font color="blue">if </font>initTemp<font color="blue"> and </font>reduceTemp<font color="blue"> then </font>InitMethScalar.None<font color="blue"> else </font>
         InitMethScalar.Temperature,
@@ -573,9 +588,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative, zNegative.H2O);
   <font color="red">connect</font>(H2O.zPositive, zPositive.H2O);</textblock>
-
-<textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>Ionomer;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Ionomer;
 </pre>
 <hr>
 
@@ -584,7 +597,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 <b>Liquid phase</b><p>
 <img src="images/FCSys.Subregions.Phases.LiquidD.png" alt="FCSys.Subregions.Phases.Liquid">
 <p><h3>Information</h3></p>
-<p>For more information, see the
+<p>For information, see the
  <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.NullPhase">NullPhase</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.NullPhase">BaseClasses.NullPhase</a> (Model for a phase with no species or reactions).
 <p><h3>Parameters</h3><p>
@@ -664,7 +677,6 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.zNegative, zNegative.H2O);
   <font color="red">connect</font>(H2O.zPositive, zPositive.H2O);</textblock>
-
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>Liquid;
 </pre>
       </div>
@@ -672,7 +684,7 @@ Extends from <a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:31:07 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:09:20 2013.
 </div>
 </body>
 </html>

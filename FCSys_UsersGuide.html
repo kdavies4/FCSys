@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.UsersGuide</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-21">
+<meta name="date" content="2013-1-24">
 <meta name="description" content="User&#39;s Guide">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,8 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-    <li><a href="FCSys_BCs.html">BCs</a></li>
-    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
@@ -62,7 +61,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h2><img src="images/FCSys.UsersGuideI.png" alt="FCSys.UsersGuide.GettingStarted" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.UsersGuide.GettingStarted"></a><a href="FCSys_UsersGuide.html#FCSys.UsersGuide">FCSys.UsersGuide</a>.GettingStarted</h2>
-<img src="images/FCSys.UsersGuideD.png" alt="FCSys.UsersGuide.GettingStarted">
 
     <table border=1 cellspacing=0 cellpadding=4 bordercolor=#86989b >
       <tr bgcolor=#afc1c4>
@@ -134,7 +132,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
         be accessed through the parameter dialog by editing the replaceable model.  Note that
         many models have auxiliary output variables available for additional analysis and diagnostics.
         These may be included by setting <code>analysis=true</code> in the outer environment model (instance
-        of <a href="FCSys_BCs.html#FCSys.BCs.Environment">Environment</a>).</li>
+        of <a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Environment</a>).</li>
         <li>Develop your own classes.  It should be possible to model other electrochemical
         devices (solid oxide fuel cells, lithium ion batteries, flow batteries/regenerative fuel cells, etc.) by
         extending the existing classes and
@@ -151,7 +149,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h2><img src="images/FCSys.UsersGuide.ReferencesI.png" alt="FCSys.UsersGuide.References" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.UsersGuide.References"></a><a href="FCSys_UsersGuide.html#FCSys.UsersGuide">FCSys.UsersGuide</a>.References</h2>
-<img src="images/FCSys.UsersGuideD.png" alt="FCSys.UsersGuide.References">
 
     <p>These papers describe work leading to the current <a href="index.html#FCSys">FCSys</a> package:
     <ol>
@@ -165,10 +162,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
     <p>These references are cited throughout the library:</p>
     <table border=0 cellspacing=0 cellpadding=2 class=noBorder>
-    <tr>
-      <td valign=top class=noBorder>[<a name="Ashcroft1976" class=bookmark>Ashcroft1976</a>]</td>
-      <td valign=top class=noBorder>N. W. Ashcroft and N. D. Mermin, <i>Solid State Physics</i>, New York:  Holt, Rinehard and Winston, 1976.</td>
-    </tr>
     <tr>
       <td valign=top class=noBorder>[<a name="Avogadro1.03" class=bookmark>Avogadro1.03</a>]</td>
       <td valign=top class=noBorder>Avogadro: An Open-Source Molecular Builder and Visualization Tool, ver. 1.03. <a href="http://avogadro.openmolecules.net">http://avogadro.openmolecules.net</a>.</td>
@@ -324,7 +317,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h2><img src="images/FCSys.UsersGuide.ContactI.png" alt="FCSys.UsersGuide.Contact" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.UsersGuide.Contact"></a><a href="FCSys_UsersGuide.html#FCSys.UsersGuide">FCSys.UsersGuide</a>.Contact</h2>
-<img src="images/FCSys.UsersGuideD.png" alt="FCSys.UsersGuide.Contact">
 
     <p>Updates to this package may be available online at the
     <a href="http://kdavies4.github.com/FCSys/">main project site</a>.
@@ -363,12 +355,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Contact">Modelica.Icons.Contact</a> (Icon for contact information).
 <hr>
-<!--[if supportFields]><span style='mso-element:field-begin'></span>
-<span style='mso-spacerun:yes'></span>XE ModelicaLicense2<![endif]-->
-<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+
 <h2><img src="images/FCSys.UsersGuide.ModelicaLicense2I.png" alt="FCSys.UsersGuide.ModelicaLicense2" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.UsersGuide.ModelicaLicense2"></a><a href="FCSys_UsersGuide.html#FCSys.UsersGuide">FCSys.UsersGuide</a>.ModelicaLicense2</h2>
-<img src="images/FCSys.UsersGuideD.png" alt="FCSys.UsersGuide.ModelicaLicense2">
 
 <head>
         <title>The Modelica License 2</title>
@@ -518,7 +507,7 @@ the duration of the copyright, to do the following:</p>
         Work</u>, alternatively to Section 2c), under <u>any other license</u>
         of your choice, especially also under a license for
         commercial/proprietary software, as long as You comply with Sections
-        3, 4 and 8 below.<br><br>For the matter of clarity, no
+        3, 4 and 8 below.<br>      For the matter of clarity, no
         restrictions regarding fees, either as to a copyright-license fee or
         as to a selling fee for the copy as such apply.</p></li>
         <li><p>
@@ -931,7 +920,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:25:29 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:05:47 2013.
 </div>
 </body>
 </html>

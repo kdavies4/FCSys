@@ -1,0 +1,182 @@
+<html>
+<head>
+<title>FCSys.Conditions.FacePair2.Thermal</title>
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
+<meta name="date" content="2013-1-24">
+<meta name="description" content="Thermal Conditions">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Conditions.FacePair2.Thermal"></a><a href="FCSys_Conditions_FacePair2.html#FCSys.Conditions.FacePair2">FCSys.Conditions.FacePair2</a>.Thermal</h2>
+<b>Thermal Conditions</b>
+<p>
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Conditions.FacePair2.Thermal.TemperatureS.png" alt="FCSys.Conditions.FacePair2.Thermal.Temperature" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FacePair2_Thermal.html#FCSys.Conditions.FacePair2.Thermal.Temperature">Temperature</a>
+</td><td>Impose temperature (measure heat flow rate)</td></tr>
+<tr><td><img src="images/FCSys.Conditions.FacePair2.Thermal.TemperatureS.png" alt="FCSys.Conditions.FacePair2.Thermal.HeatRate" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FacePair2_Thermal.html#FCSys.Conditions.FacePair2.Thermal.HeatRate">HeatRate</a>
+</td><td>Impose heat flow rate (measure temperature)</td></tr>
+<tr><td><img src="images/FCSys.Conditions.FacePair2.Thermal.TemperatureS.png" alt="FCSys.Conditions.FacePair2.Thermal.Custom" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FacePair2_Thermal.html#FCSys.Conditions.FacePair2.Thermal.Custom">Custom</a>
+</td><td>Apply condition to a custom expression</td></tr>
+<tr><td><img src="images/FCSys.Conditions.FacePair2.Thermal.BaseClassesS.png" alt="FCSys.Conditions.FacePair2.Thermal.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FacePair2_Thermal_BaseClasses.html#FCSys.Conditions.FacePair2.Thermal.BaseClasses">BaseClasses</a>
+</td><td>Base classes (not for direct use)</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.FacePair2.Thermal.TemperatureI.png" alt="FCSys.Conditions.FacePair2.Thermal.Temperature" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.FacePair2.Thermal.Temperature"></a><a href="FCSys_Conditions_FacePair2_Thermal.html#FCSys.Conditions.FacePair2.Thermal">FCSys.Conditions.FacePair2.Thermal</a>.Temperature</h2>
+<b>Impose temperature (measure heat flow rate)</b><p>
+<img src="images/FCSys.Conditions.FacePair2.Normal.CurrentAreicD.png" alt="FCSys.Conditions.FacePair2.Thermal.Temperature">
+<p><h3>Information</h3></p>
+Extends from <a href="FCSys_Conditions_FacePair2_Thermal_BaseClasses.html#FCSys.Conditions.FacePair2.Thermal.BaseClasses.PartialCondition">Thermal.BaseClasses.PartialCondition</a> (Partial model for a thermal condition).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Conditions_FacePair2_Thermal_BaseClasses.html#FCSys.Conditions.FacePair2.Thermal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Te...</td><td>Type of condition</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Imposition</td></tr>
+<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal condition</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So...</td><td>Source of internal condition</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>negative</td><td>Negative-side connector</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>positive</td><td>Positive-side connector</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Temperature <font color="darkgreen">&quot;Impose temperature (measure heat flow rate)&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_FacePair2_Thermal_BaseClasses.html#FCSys.Conditions.FacePair2.Thermal.BaseClasses.PartialCondition">Thermal.BaseClasses.PartialCondition</a>(
+    <font color="blue">final </font>conditionType=BaseClasses.ConditionType.Temperature,
+    u(<font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;, displayUnit=&quot;K&quot;),
+    <font color="blue">final </font>y(unit=&quot;l2.m/T3&quot;) = face.Qdot);
+
+<font color="blue">equation </font>
+  face.T = u_final;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Temperature;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.FacePair2.Thermal.TemperatureI.png" alt="FCSys.Conditions.FacePair2.Thermal.HeatRate" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.FacePair2.Thermal.HeatRate"></a><a href="FCSys_Conditions_FacePair2_Thermal.html#FCSys.Conditions.FacePair2.Thermal">FCSys.Conditions.FacePair2.Thermal</a>.HeatRate</h2>
+<b>Impose heat flow rate (measure temperature)</b><p>
+<img src="images/FCSys.Conditions.FacePair2.Normal.CurrentAreicD.png" alt="FCSys.Conditions.FacePair2.Thermal.HeatRate">
+<p><h3>Information</h3></p>
+Extends from <a href="FCSys_Conditions_FacePair2_Thermal_BaseClasses.html#FCSys.Conditions.FacePair2.Thermal.BaseClasses.PartialCondition">Thermal.BaseClasses.PartialCondition</a> (Partial model for a thermal condition).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Conditions_FacePair2_Thermal_BaseClasses.html#FCSys.Conditions.FacePair2.Thermal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.He...</td><td>Type of condition</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Imposition</td></tr>
+<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal condition</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So...</td><td>Source of internal condition</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>negative</td><td>Negative-side connector</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>positive</td><td>Positive-side connector</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> HeatRate <font color="darkgreen">&quot;Impose heat flow rate (measure temperature)&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_FacePair2_Thermal_BaseClasses.html#FCSys.Conditions.FacePair2.Thermal.BaseClasses.PartialCondition">Thermal.BaseClasses.PartialCondition</a>(
+    <font color="blue">final </font>conditionType=BaseClasses.ConditionType.HeatRate,
+    u(<font color="blue">final </font>unit=&quot;l2.m/T3&quot;),
+    <font color="blue">final </font>y(
+      <font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;,
+      displayUnit=&quot;K&quot;) = face.T);
+
+<font color="blue">equation </font>
+  face.Qdot = u_final;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>HeatRate;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.FacePair2.Thermal.TemperatureI.png" alt="FCSys.Conditions.FacePair2.Thermal.Custom" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.FacePair2.Thermal.Custom"></a><a href="FCSys_Conditions_FacePair2_Thermal.html#FCSys.Conditions.FacePair2.Thermal">FCSys.Conditions.FacePair2.Thermal</a>.Custom</h2>
+<b>Apply condition to a custom expression</b><p>
+<img src="images/FCSys.Conditions.FacePair2.Normal.CurrentAreicD.png" alt="FCSys.Conditions.FacePair2.Thermal.Custom">
+<p><h3>Information</h3></p>
+<p>The expression to which the condition is applied (<code>x</code>)
+    must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p><p>
+Extends from <a href="FCSys_Conditions_FacePair2_Thermal_BaseClasses.html#FCSys.Conditions.FacePair2.Thermal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a thermal condition).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Conditions_FacePair2_Thermal_BaseClasses.html#FCSys.Conditions.FacePair2.Thermal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Cu...</td><td>Type of condition</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Imposition</td></tr>
+<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal condition</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So...</td><td>Source of internal condition</td></tr>
+<tr><td>Real</td><td>x</td><td>face.T</td><td>Expression to which the condition is applied</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>face.Qdot</td><td>Expression of measurement</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Value of imposed condition</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>negative</td><td>Negative-side connector</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>positive</td><td>Positive-side connector</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=3>Measurement</td></tr>
+<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Expression of measurement</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Custom <font color="darkgreen">&quot;Apply condition to a custom expression&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_FacePair2_Thermal_BaseClasses.html#FCSys.Conditions.FacePair2.Thermal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(<font color="blue">final </font>conditionType=BaseClasses.ConditionType.Custom,
+      y=face.Qdot);
+
+  Real x=face.T <font color="darkgreen">&quot;Expression to which the condition is applied&quot;</font>;
+
+<font color="blue">equation </font>
+  x = u_final;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Custom;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:07:34 2013.
+</div>
+</body>
+</html>

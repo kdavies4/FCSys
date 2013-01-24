@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Regions.CaGDLs</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-21">
+<meta name="date" content="2013-1-24">
 <meta name="description" content="Cathode gas diffusion layers">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,8 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-    <li><a href="FCSys_BCs.html">BCs</a></li>
-    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
@@ -181,26 +180,25 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
     n_y,
     n_z) - x_H2O - x_N2 <font color="blue">if </font>environment.analysis<font color="blue"> and </font>hasSubregions <font color="darkgreen">
     &quot;Molar concentration of O2&quot;</font>;
+
 <font color="blue">protected </font>
   <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> xV=x*V <font color="darkgreen">&quot;Gas volume&quot;</font>;
 
   <font color="darkgreen">// See AnGDLs.AnGDL for additional notes and data.</font>
 
 <textblock type="annotcomp" expanded="false"><font color="blue">protected </font>
-  <font color="blue">outer </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">BCs.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;</textblock>
+  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
 
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>CaGDL;
+<font color="blue">end </font>CaGDL;
 </pre>
 <hr>
-<!--[if supportFields]><span style='mso-element:field-begin'></span>
-<span style='mso-spacerun:yes'></span>XE Sigracet10BA<![endif]-->
-<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+
 <h2><img src="images/FCSys.Regions.CaGDLs.CaGDLI.png" alt="FCSys.Regions.CaGDLs.Sigracet10BA" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Regions.CaGDLs.Sigracet10BA"></a><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs">FCSys.Regions.CaGDLs</a>.Sigracet10BA</h2>
 <b>SGL Carbon Group Sigracet&reg; 10 BA</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.CaGDLs.Sigracet10BA">
 <p><h3>Information</h3></p>
-<p>For more information, see the
+<p>For information, see the
                 <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p><h3>Parameters</h3><p>
@@ -234,18 +232,17 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
   <font color="darkgreen">//     Diffusivity: L = 0.400 mm, p = 0.85 m/s (for air) =&gt; D = P*L = 340 mm2/s</font>
   <font color="darkgreen">//     Density: (85 g/m2)/(0.400 mm)/0.88 = 212.5 kg/m3</font>
   <font color="darkgreen">//     Electronic resistivity: (12 mohm.cm2)/(0.400 mm) = 3 mohm.m</font>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Sigracet10BA;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>Sigracet10BA;
 </pre>
 <hr>
-<!--[if supportFields]><span style='mso-element:field-begin'></span>
-<span style='mso-spacerun:yes'></span>XE Sigracet10BB<![endif]-->
-<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+
 <h2><img src="images/FCSys.Regions.CaGDLs.CaGDLI.png" alt="FCSys.Regions.CaGDLs.Sigracet10BB" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Regions.CaGDLs.Sigracet10BB"></a><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs">FCSys.Regions.CaGDLs</a>.Sigracet10BB</h2>
 <b>SGL Carbon Group Sigracet&reg; 10 BB</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.CaGDLs.Sigracet10BB">
 <p><h3>Information</h3></p>
-<p>For more information, see the
+<p>For information, see the
                 <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p><h3>Parameters</h3><p>
@@ -279,18 +276,17 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
   <font color="darkgreen">//     Diffusivity: L = 0.420 mm, p = 0.03 m/s (for air) =&gt; D = P*L = 12.6 mm2/s</font>
   <font color="darkgreen">//     Density: (125 g/m2)/(0.420 mm) = 297.62 kg/m3</font>
   <font color="darkgreen">//     Electronic resistivity: (15 mohm.cm2)/(0.420 mm) = 3.5714 mohm.m</font>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Sigracet10BB;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>Sigracet10BB;
 </pre>
 <hr>
-<!--[if supportFields]><span style='mso-element:field-begin'></span>
-<span style='mso-spacerun:yes'></span>XE Sigracet10BC<![endif]-->
-<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+
 <h2><img src="images/FCSys.Regions.CaGDLs.CaGDLI.png" alt="FCSys.Regions.CaGDLs.Sigracet10BC" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Regions.CaGDLs.Sigracet10BC"></a><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs">FCSys.Regions.CaGDLs</a>.Sigracet10BC</h2>
 <b>SGL Carbon Group Sigracet&reg; 10 BC</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.CaGDLs.Sigracet10BC">
 <p><h3>Information</h3></p>
-<p>For more information, see the
+<p>For information, see the
                 <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p><h3>Parameters</h3><p>
@@ -324,18 +320,17 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
   <font color="darkgreen">//     Diffusivity: L = 0.420 mm, p = 0.0145 m/s (for air) =&gt; D = P*L = 6.09 mm2/s</font>
   <font color="darkgreen">//     Density: (135 g/m2)/(0.420 mm) = 321.43 kg/m3</font>
   <font color="darkgreen">//     Electronic resistivity: (16 mohm.cm2)/(0.420 mm) = 3.8095 mohm.m</font>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Sigracet10BC;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>Sigracet10BC;
 </pre>
 <hr>
-<!--[if supportFields]><span style='mso-element:field-begin'></span>
-<span style='mso-spacerun:yes'></span>XE Sigracet24BA<![endif]-->
-<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+
 <h2><img src="images/FCSys.Regions.CaGDLs.CaGDLI.png" alt="FCSys.Regions.CaGDLs.Sigracet24BA" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Regions.CaGDLs.Sigracet24BA"></a><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs">FCSys.Regions.CaGDLs</a>.Sigracet24BA</h2>
 <b>SGL Carbon Group Sigracet&reg; 24 BA</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.CaGDLs.Sigracet24BA">
 <p><h3>Information</h3></p>
-<p>For more information, see the
+<p>For information, see the
                 <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p><h3>Parameters</h3><p>
@@ -369,18 +364,17 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
   <font color="darkgreen">//     Diffusivity: L = 0.190 mm, p = 0.30 m/s (for air) =&gt; D = P*L = 57 mm2/s</font>
   <font color="darkgreen">//     Density: (54 g/m2)/(0.190 mm) = 284.21 kg/m3</font>
   <font color="darkgreen">//     Electronic resistivity: (10 mohm.cm2)/(0.190 mm) = 5.2632 mohm.m</font>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Sigracet24BA;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>Sigracet24BA;
 </pre>
 <hr>
-<!--[if supportFields]><span style='mso-element:field-begin'></span>
-<span style='mso-spacerun:yes'></span>XE Sigracet24BC<![endif]-->
-<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+
 <h2><img src="images/FCSys.Regions.CaGDLs.CaGDLI.png" alt="FCSys.Regions.CaGDLs.Sigracet24BC" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Regions.CaGDLs.Sigracet24BC"></a><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs">FCSys.Regions.CaGDLs</a>.Sigracet24BC</h2>
 <b>SGL Carbon Group Sigracet&reg; 24 BC</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.CaGDLs.Sigracet24BC">
 <p><h3>Information</h3></p>
-<p>For more information, see the
+<p>For information, see the
                 <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p><h3>Parameters</h3><p>
@@ -414,18 +408,17 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
   <font color="darkgreen">//     Diffusivity: L = 0.235 mm, p = 0.0045 m/s (for air) =&gt; D = P*L = 1.0575 mm2/s</font>
   <font color="darkgreen">//     Density: (100 g/m2)/(0.235 mm) = 425.53 kg/m3</font>
   <font color="darkgreen">//     Electronic resistivity: (11 mohm.cm2)/(0.235 mm) = 4.6809 mohm.m</font>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Sigracet24BC;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>Sigracet24BC;
 </pre>
 <hr>
-<!--[if supportFields]><span style='mso-element:field-begin'></span>
-<span style='mso-spacerun:yes'></span>XE Sigracet25BA<![endif]-->
-<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+
 <h2><img src="images/FCSys.Regions.CaGDLs.CaGDLI.png" alt="FCSys.Regions.CaGDLs.Sigracet25BA" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Regions.CaGDLs.Sigracet25BA"></a><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs">FCSys.Regions.CaGDLs</a>.Sigracet25BA</h2>
 <b>SGL Carbon Group Sigracet&reg; 25 BA</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.CaGDLs.Sigracet25BA">
 <p><h3>Information</h3></p>
-<p>For more information, see the
+<p>For information, see the
                 <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p><h3>Parameters</h3><p>
@@ -459,18 +452,17 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
   <font color="darkgreen">//     Diffusivity: L = 0.190 mm, p = 0.90 m/s (for air) =&gt; D = P*L = 171 mm2/s</font>
   <font color="darkgreen">//     Density: (40 g/m2)/(0.190 mm) = 210.53 kg/m3</font>
   <font color="darkgreen">//     Electronic resistivity: (10 mohm.cm2)/(0.190 mm) = 5.2632 mohm.m</font>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Sigracet25BA;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>Sigracet25BA;
 </pre>
 <hr>
-<!--[if supportFields]><span style='mso-element:field-begin'></span>
-<span style='mso-spacerun:yes'></span>XE Sigracet25BC<![endif]-->
-<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+
 <h2><img src="images/FCSys.Regions.CaGDLs.CaGDLI.png" alt="FCSys.Regions.CaGDLs.Sigracet25BC" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Regions.CaGDLs.Sigracet25BC"></a><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs">FCSys.Regions.CaGDLs</a>.Sigracet25BC</h2>
 <b>SGL Carbon Group Sigracet&reg; 25 BC</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.CaGDLs.Sigracet25BC">
 <p><h3>Information</h3></p>
-<p>For more information, see the
+<p>For information, see the
                 <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p><h3>Parameters</h3><p>
@@ -504,18 +496,17 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
   <font color="darkgreen">//     Diffusivity: L = 0.235 mm, p = 0.008 m/s (for air) =&gt; D = P*L = 1.88 mm2/s</font>
   <font color="darkgreen">//     Density: (86 g/m2)/(0.235 mm) = 365.96 kg/m3</font>
   <font color="darkgreen">//     Electronic resistivity: (12 mohm.cm2)/(0.235 mm) = 5.1064 mohm.m</font>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Sigracet25BC;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>Sigracet25BC;
 </pre>
 <hr>
-<!--[if supportFields]><span style='mso-element:field-begin'></span>
-<span style='mso-spacerun:yes'></span>XE TorayTGPH030<![endif]-->
-<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+
 <h2><img src="images/FCSys.Regions.CaGDLs.CaGDLI.png" alt="FCSys.Regions.CaGDLs.TorayTGPH030" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Regions.CaGDLs.TorayTGPH030"></a><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs">FCSys.Regions.CaGDLs</a>.TorayTGPH030</h2>
 <b>Toray Industries TGP-H-030</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.CaGDLs.TorayTGPH030">
 <p><h3>Information</h3></p>
-<p>For more information, see the
+<p>For information, see the
                 <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p><h3>Parameters</h3><p>
@@ -554,18 +545,17 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
   <font color="darkgreen">//     Thermal conductivity (in plane, 20 degC): not listed</font>
   <font color="darkgreen">//     Thermal conductivity (in plane, 100 degC): not listed</font>
   <font color="darkgreen">//     Bulk Density: 0.4 g/cm3</font>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>TorayTGPH030;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>TorayTGPH030;
 </pre>
 <hr>
-<!--[if supportFields]><span style='mso-element:field-begin'></span>
-<span style='mso-spacerun:yes'></span>XE TorayTGPH060<![endif]-->
-<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+
 <h2><img src="images/FCSys.Regions.CaGDLs.CaGDLI.png" alt="FCSys.Regions.CaGDLs.TorayTGPH060" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Regions.CaGDLs.TorayTGPH060"></a><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs">FCSys.Regions.CaGDLs</a>.TorayTGPH060</h2>
 <b>Toray Industries TGP-H-060</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.CaGDLs.TorayTGPH060">
 <p><h3>Information</h3></p>
-<p>For more information, see the
+<p>For information, see the
                 <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p><h3>Parameters</h3><p>
@@ -604,18 +594,17 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
   <font color="darkgreen">//     Thermal resistivity (in plane, 20 degC): (1/21) m.K/W</font>
   <font color="darkgreen">//     Thermal resistivity (in plane, 100 degC): (1/23) m.K/W</font>
   <font color="darkgreen">//     Bulk density: 0.44 g/cm3</font>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>TorayTGPH060;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>TorayTGPH060;
 </pre>
 <hr>
-<!--[if supportFields]><span style='mso-element:field-begin'></span>
-<span style='mso-spacerun:yes'></span>XE TorayTGPH090<![endif]-->
-<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+
 <h2><img src="images/FCSys.Regions.CaGDLs.CaGDLI.png" alt="FCSys.Regions.CaGDLs.TorayTGPH090" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Regions.CaGDLs.TorayTGPH090"></a><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs">FCSys.Regions.CaGDLs</a>.TorayTGPH090</h2>
 <b>Toray Industries TGP-H-090</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.CaGDLs.TorayTGPH090">
 <p><h3>Information</h3></p>
-<p>For more information, see the
+<p>For information, see the
                 <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p><h3>Parameters</h3><p>
@@ -654,18 +643,17 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
   <font color="darkgreen">//     Thermal resistivity (in plane, 20 degC): (1/21) m.K/W</font>
   <font color="darkgreen">//     Thermal resistivity (in plane, 100 degC): (1/23) m.K/W</font>
   <font color="darkgreen">//     Bulk density: 0.44 g/cm3</font>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>TorayTGPH090;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>TorayTGPH090;
 </pre>
 <hr>
-<!--[if supportFields]><span style='mso-element:field-begin'></span>
-<span style='mso-spacerun:yes'></span>XE TorayTGPH120<![endif]-->
-<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+
 <h2><img src="images/FCSys.Regions.CaGDLs.CaGDLI.png" alt="FCSys.Regions.CaGDLs.TorayTGPH120" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Regions.CaGDLs.TorayTGPH120"></a><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs">FCSys.Regions.CaGDLs</a>.TorayTGPH120</h2>
 <b>Toray Industries TGP-H-030</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.CaGDLs.TorayTGPH120">
 <p><h3>Information</h3></p>
-<p>For more information, see the
+<p>For information, see the
                 <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p><h3>Parameters</h3><p>
@@ -704,14 +692,15 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
   <font color="darkgreen">//     Thermal resistivity (in plane, 20 degC): (1/21) m.K/W</font>
   <font color="darkgreen">//     Thermal resistivity (in plane, 100 degC): (1/23) m.K/W</font>
   <font color="darkgreen">//     Bulk density: 0.44 g/cm3</font>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>TorayTGPH120;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>TorayTGPH120;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:40:54 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:08:52 2013.
 </div>
 </body>
 </html>

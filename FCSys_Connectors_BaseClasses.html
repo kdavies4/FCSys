@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Connectors.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-21">
+<meta name="date" content="2013-1-24">
 <meta name="description" content="Base classes (not for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,8 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-    <li><a href="FCSys_BCs.html">BCs</a></li>
-    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
@@ -63,9 +62,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><a name="FCSys.Connectors.BaseClasses.Mechanical"></a><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses">FCSys.Connectors.BaseClasses</a>.Mechanical</h2>
 <b>Connector to exchange or transport linear momentum</b><p>
 <p><h3>Information</h3></p>
-<p>This connector is used to transport the transverse 
+<p>This connector is used to transport the transverse
   orientation of linear momentum only.  The normal orientation is transported by the Normal
-  effort-flow pair (see the top-level documentation in the 
+  effort-flow pair (see the top-level documentation in the
   <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package).</p>
   <p>
 
@@ -93,8 +92,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
   <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi[n_lin](<font color="blue">each </font>nominal=U.cm/U.s) <font color="darkgreen">&quot;Velocity&quot;</font>;
   <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> mPhidot[n_lin](<font color="blue">each </font>nominal=U.N) <font color="darkgreen">&quot;Force&quot;</font>;
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Mechanical;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>Mechanical;
 </pre>
 <hr>
 
@@ -116,8 +115,8 @@ For information, see the documentation in the
 
   <a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T(nominal=298.15*U.K) <font color="darkgreen">&quot;Temperature&quot;</font>;
   <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot(nominal=U.W) <font color="darkgreen">&quot;Heat flow rate&quot;</font>;
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Thermal;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>Thermal;
 </pre>
 <hr>
 
@@ -126,7 +125,12 @@ For information, see the documentation in the
 <b>Partial connector to exchange material while advecting linear momentum and enthalpy</b><p>
 <img src="images/FCSys.Connectors.BaseClasses.PartialChemicalD.png" alt="FCSys.Connectors.BaseClasses.PartialChemical">
 <p><h3>Information</h3></p>
-<p>For more information, see the documentation in the
+<p>Current is positive into the component.
+    Note that this is different than the
+    <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> connector,
+    where areic current is positive in the globally positive direction.</p>
+
+    <p>For more information, see the documentation in the
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
 Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Mechanical">Mechanical</a> (Connector to exchange or transport linear momentum).
 <p><h3>Parameters</h3><p>
@@ -161,7 +165,6 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
   <font color="darkgreen">// Fluid</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity2">Q.Velocity2</a> hbar(nominal=U.V) <font color="darkgreen">&quot;Massic enthalpy&quot;</font>;
   <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Hdot(nominal=10*U.W) <font color="darkgreen">&quot;Enthalpy flow rate&quot;</font>;
-
 <textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>PartialChemical;
 </pre>
@@ -170,7 +173,7 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:32:30 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:10:39 2013.
 </div>
 </body>
 </html>

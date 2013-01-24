@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.Species.'H+'.Ionomer</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-21">
+<meta name="date" content="2013-1-24">
 <meta name="description" content="&lt;html&gt;H&lt;sup&gt;+&lt;/sup&gt; in ionomer&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,8 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-    <li><a href="FCSys_BCs.html">BCs</a></li>
-    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
@@ -65,7 +64,17 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <b>Correlations with adjustment factors</b><p>
 <img src="images/FCSys.Subregions.Species.SpeciesSolidD.png" alt="FCSys.Subregions.Species.'H+'.Ionomer.Calibrated">
 <p><h3>Information</h3></p>
-<p>For more information, see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
+<p>Assumptions:<ol>
+    <li>The density of H<sup>+</sup> is equal to that of
+  C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> or approximately 1.912 M.  Note that
+  this is greater than that measured by Spry and Fayer (see
+  <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">Characteristics.'H+'.Ionomer</a>), but it
+  simplifies the model by requiring only C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>
+  (not C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S) for charge neutrality.
+    </li>
+    </ol></p>
+
+  <p>For more information, see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> (Model for single-species exchange, transport, and storage of material, linear momentum, and energy).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -147,7 +156,9 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <pre>
 <font color="blue">model</font> Calibrated <font color="darkgreen">&quot;Correlations with adjustment factors&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a>(
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a>,
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a> (
+          specVolPow=FCSys.Characteristics.'C19HF37O5S-'.Ionomer.specVolPow,
+          b_v=FCSys.Characteristics.'C19HF37O5S-'.Ionomer.b_v),
     Xi=k_Xi*<font color="red">Data.Xi</font>(T),
     F=k_F*<font color="red">Data.F</font>(T),
     R=k_R*<font color="red">Data.R</font>(T));
@@ -158,8 +169,8 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     &quot;Adjustment factor for dynamic fluidity (<i>k</i><sub><i>F</i></sub>)&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_R(<font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
     &quot;Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S&#775;</i></sub>)&quot;</font>;
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Calibrated;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>Calibrated;
 </pre>
 <hr>
 
@@ -168,7 +179,17 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <b>Correlated properties</b><p>
 <img src="images/FCSys.Subregions.Species.SpeciesSolidD.png" alt="FCSys.Subregions.Species.'H+'.Ionomer.Correlated">
 <p><h3>Information</h3></p>
-<p>For more information, see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
+<p>Assumptions:<ol>
+    <li>The density of H<sup>+</sup> is equal to that of
+  C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> or approximately 1.912 M.  Note that
+  this is greater than that measured by Spry and Fayer (see
+  <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">Characteristics.'H+'.Ionomer</a>), but it
+  simplifies the model by requiring only C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>
+  (not C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S) for charge neutrality.
+    </li>
+    </ol></p>
+
+    <p>For more information, see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
 Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> (Model for single-species exchange, transport, and storage of material, linear momentum, and energy).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -247,12 +268,14 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <pre>
 <font color="blue">model</font> Correlated <font color="darkgreen">&quot;Correlated properties&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a>(
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a>,
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a> (
+          specVolPow=FCSys.Characteristics.'C19HF37O5S-'.Ionomer.specVolPow,
+          b_v=FCSys.Characteristics.'C19HF37O5S-'.Ionomer.b_v),
     Xi=<font color="red">Data.Xi</font>(T),
     F=<font color="red">Data.F</font>(T),
     R=<font color="red">Data.R</font>(T));
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Correlated;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>Correlated;
 </pre>
 <hr>
 
@@ -263,6 +286,13 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <p><h3>Information</h3></p>
 <p>Assumptions:<ol>
     <li>The generalized resistivities (&Xi;, <i>F</i>, <i>R</i>) are fixed (e.g., independent of temperature).</li>
+    <li>The density of H<sup>+</sup> is equal to that of
+  C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> or approximately 1.912 M.  Note that
+  this is greater than that measured by Spry and Fayer (see
+  <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">Characteristics.'H+'.Ionomer</a>), but it
+  simplifies the model by requiring only C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>
+  (not C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S) for charge neutrality.
+    </li>
     </ol></p>
 
   <p>The default resistivities (<code>F=1/(5.3e-6*U.Pa*U.s)</code> and <code>R=U.m*U.K/(0.1661*U.W)</code>) are of H gas
@@ -403,22 +433,24 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <pre>
 <font color="blue">model</font> Fixed <font color="darkgreen">&quot;Fixed properties&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a>(
-    <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a>,
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a> (
+          specVolPow=FCSys.Characteristics.'C19HF37O5S-'.Ionomer.specVolPow,
+          b_v=FCSys.Characteristics.'C19HF37O5S-'.Ionomer.b_v),
     initMethPartNum=InitMethScalar.None,
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.CompressibilityDynamic">Q.CompressibilityDynamic</a> Xi=<font color="red">Data.Xi</font>(),
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.FluidityDynamic">Q.FluidityDynamic</a> F=<font color="red">Data.F</font>(),
     <font color="blue">redeclare </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> R=U.m*U.K/(0.1661*U.W));
   <font color="darkgreen">// **temp initmeth (if keep it, copy to other models)</font>
   <font color="darkgreen">// See the documentation for a table of values.</font>
-
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Fixed;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>Fixed;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:31:43 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:09:54 2013.
 </div>
 </body>
 </html>

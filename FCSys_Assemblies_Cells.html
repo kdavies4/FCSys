@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Assemblies.Cells</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-21">
+<meta name="date" content="2013-1-24">
 <meta name="description" content="Single-cell PEMFC models">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,8 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-    <li><a href="FCSys_BCs.html">BCs</a></li>
-    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
@@ -52,7 +51,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Assemblies.Cells.ExamplesS.png" alt="FCSys.Assemblies.Cells.Examples" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples">Examples</a>
-</td><td>Examples and tests</td></tr>
+</td><td>Examples</td></tr>
 <tr><td><img src="images/FCSys.Assemblies.Cells.CellS.png" alt="FCSys.Assemblies.Cells.Cell" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a>
 </td><td>Default single-cell PEMFC</td></tr>
 <tr><td><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.CalibratedCell">CalibratedCell</a>
@@ -201,7 +200,7 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell"
     &quot;Cathode flow plate&quot;</font>;</textblock>
 
 <font color="blue">protected </font>
-  <font color="blue">outer </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">FCSys.BCs.Environment</a> environment <font color="darkgreen">
+  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment <font color="darkgreen">
     &quot;Environmental properties and settings&quot;</font>;
 
 <font color="blue">equation </font>
@@ -247,6 +246,7 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell"
     <font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
     &quot;For C (<i>k</i><sub>&alpha; &Phi; C</sub>)&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> Error;
+
 <font color="blue">end </font>CalibratedCell;
 </pre>
 <hr>
@@ -256,7 +256,7 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell"
 <b>Baseline cell, with integrated CLs and GDLs</b><p>
 <img src="images/FCSys.Assemblies.Cells.IntegratedCellD.png" alt="FCSys.Assemblies.Cells.IntegratedCell">
 <p><h3>Information</h3></p>
-<p>For more information, see the
+<p>For information, see the
   <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a> model.</p><p>
 Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell">FCSys.BaseClasses.Icons.Cell</a> (Icon for a cell).
 <p><h3>Parameters</h3><p>
@@ -375,7 +375,7 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell"
     &quot;Cathode flow plate&quot;</font>;</textblock>
 
 <font color="blue">protected </font>
-  <font color="blue">outer </font><a href="FCSys_BCs.html#FCSys.BCs.Environment">FCSys.BCs.Environment</a> environment <font color="darkgreen">
+  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment <font color="darkgreen">
     &quot;Environmental properties and settings&quot;</font>;
 
 <font color="blue">equation </font>
@@ -450,6 +450,7 @@ Extends from <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">C
   pEM.subregions.ionomer.'H+'.mu = caCL.subregions.ionomer.'H+'.mu;
   caCL.subregions.graphite.'e-'.mu = caGDL.subregions.graphite.'e-'.mu;
   caFP.subregions.graphite.'e-'.mu = caGDL.subregions.graphite.'e-'.mu;
+
 <font color="blue">end </font>CellSSIC;
 </pre>
       </div>
@@ -457,7 +458,7 @@ Extends from <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">C
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:28:51 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:07:54 2013.
 </div>
 </body>
 </html>

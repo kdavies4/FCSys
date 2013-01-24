@@ -2,7 +2,7 @@
 <head>
 <title>FCSys &mdash; Modelica library of fuel cell models</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-21">
+<meta name="date" content="2013-1-24">
 <meta name="description" content="Modelica library of fuel cell models">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,8 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-    <li><a href="FCSys_BCs.html">BCs</a></li>
-    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
@@ -127,8 +126,8 @@ margin-right: auto;" class=noBorder>
 <br>Figure 1: Layers and primary flows of a PEMFC</p>
 
     <a name="Fig2"></a>
-    <!--<p align=center><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600 width=600>-->
-    <p align=center><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell"><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600></a>
+    <!--<p align=center><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600 width=600 width=600>-->
+    <p align=center><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell"><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600 width=600></a>
 <br>Figure 2: Diagram of the PEMFC model (<a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">FCSys.Assemblies.Cells.Cell</a>).</p>
 
     <p>The models describe the advection, diffusion, and storage of
@@ -173,15 +172,13 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.UsersGuideS.png" alt="FCSys.UsersGuide" width=20  height=20 align=top>&nbsp;<a href="FCSys_UsersGuide.html#FCSys.UsersGuide">UsersGuide</a>
 </td><td>User&#39;s Guide</td></tr>
-<tr><td><img src="images/FCSys.BCsS.png" alt="FCSys.BCs" width=20  height=20 align=top>&nbsp;<a href="FCSys_BCs.html#FCSys.BCs">BCs</a>
-</td><td>Models for boundary conditions</td></tr>
-<tr><td><img src="images/FCSys.SensorsS.png" alt="FCSys.Sensors" width=20  height=20 align=top>&nbsp;<a href="FCSys_Sensors.html#FCSys.Sensors">Sensors</a>
-</td><td>Models to measure conditions</td></tr>
-<tr><td><img src="images/FCSys.AssembliesS.png" alt="FCSys.Assemblies" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies.html#FCSys.Assemblies">Assemblies</a>
+<tr><td><img src="images/FCSys.ConditionsS.png" alt="FCSys.Conditions" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions.html#FCSys.Conditions">Conditions</a>
+</td><td>Models to impose and measure operating conditions</td></tr>
+<tr><td><img src="images/FCSys.ConditionsS.png" alt="FCSys.Assemblies" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies.html#FCSys.Assemblies">Assemblies</a>
 </td><td>Combinations of regions (e.g., cells)</td></tr>
-<tr><td><img src="images/FCSys.AssembliesS.png" alt="FCSys.Regions" width=20  height=20 align=top>&nbsp;<a href="FCSys_Regions.html#FCSys.Regions">Regions</a>
+<tr><td><img src="images/FCSys.ConditionsS.png" alt="FCSys.Regions" width=20  height=20 align=top>&nbsp;<a href="FCSys_Regions.html#FCSys.Regions">Regions</a>
 </td><td>3D arrays of discrete, interconnected subregions</td></tr>
-<tr><td><img src="images/FCSys.AssembliesS.png" alt="FCSys.Subregions" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions">Subregions</a>
+<tr><td><img src="images/FCSys.ConditionsS.png" alt="FCSys.Subregions" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions.html#FCSys.Subregions">Subregions</a>
 </td><td>Control volumes with multi-species transport, exchange, and storage</td></tr>
 <tr><td><img src="images/FCSys.ConnectorsS.png" alt="FCSys.Connectors" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a>
 </td><td>Declarative and imperative connectors</td></tr>
@@ -199,7 +196,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 21 07:25:28 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:05:45 2013.
 </div>
 </body>
 </html>
