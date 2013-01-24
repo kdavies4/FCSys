@@ -2,7 +2,7 @@ within FCSys;
 package BaseClasses "Base classes (not for direct use)"
   extends Modelica.Icons.BasesPackage;
   package Icons "Icons to annotate and represent classes"
-    package BCs "Icons for boundary conditions"
+    package Conditions "Icons for boundary conditions"
       extends Modelica.Icons.Package;
       partial class Double "Icon for a two-connector boundary condition"
         //extends Names.Middle;
@@ -58,7 +58,7 @@ package BaseClasses "Base classes (not for direct use)"
                 textString="%name",
                 lineColor={0,0,0})}));
       end Single;
-    end BCs;
+    end Conditions;
     extends Modelica.Icons.Package;
     package Blocks "Icons for blocks (imperative or causal models)"
       extends Modelica.Icons.Package;

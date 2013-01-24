@@ -1,11 +1,11 @@
 within FCSys;
-package BCs "Models for boundary conditions"
-  extends Modelica.Icons.SourcesPackage;
+package Conditions "Models to impose and measure operating conditions"
+  extends Modelica.Icons.Package;
 
   package Examples "Examples"
     extends Modelica.Icons.ExamplesPackage;
 
-    model FaceBC "<html>Test the BCs for the face of a subregion</html>"
+    model FaceBC "<html>Test the Conditions for the face of a subregion</html>"
       extends Modelica.Icons.Example;
 
       FaceBus.Subregion subregionFaceBC(gas(inclH2O=true, H2O(redeclare
@@ -38,7 +38,7 @@ package BCs "Models for boundary conditions"
     end FaceBC;
 
     model FaceBCPhases
-      "<html>Test the BCs for the face of a subregion with phases</html>"
+      "<html>Test the Conditions for the face of a subregion with phases</html>"
       extends Modelica.Icons.Example;
 
       // Geometric parameters
@@ -165,8 +165,8 @@ package BCs "Models for boundary conditions"
           smooth=Smooth.None));
       annotation (
         experiment(StopTime=2e-10),
-        Commands(file="resources/scripts/Dymola/Conditions.Examples.Adapteminus.mos"),
-
+        Commands(file=
+              "resources/scripts/Dymola/Conditions.Examples.Adapteminus.mos"),
         Diagram(graphics));
     end AnodeAdapter;
   end Examples;
@@ -258,34 +258,28 @@ package BCs "Models for boundary conditions"
           color={191,0,0},
           smooth=Smooth.None));
 
-      annotation (Icon(graphics={
-            Line(
-              points={{0,60},{0,-60}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-80,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,20},{80,20}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-20},{80,-20}},
-              color={191,0,0},
-              smooth=Smooth.None),
-            Line(
-              points={{0,60},{80,60}},
-              color={0,127,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-60},{80,-60}},
-              color={0,127,255},
-              smooth=Smooth.None)}));
+      annotation (Icon(graphics={Line(
+                  points={{0,60},{0,-60}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-80,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,20},{80,20}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-20},{80,-20}},
+                  color={191,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{0,60},{80,60}},
+                  color={0,127,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-60},{80,-60}},
+                  color={0,127,255},
+                  smooth=Smooth.None)}));
     end Anode;
 
     model Cathode
@@ -370,34 +364,28 @@ package BCs "Models for boundary conditions"
           color={191,0,0},
           smooth=Smooth.None));
 
-      annotation (Icon(graphics={
-            Line(
-              points={{0,60},{0,-60}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-80,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,20},{80,20}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-20},{80,-20}},
-              color={191,0,0},
-              smooth=Smooth.None),
-            Line(
-              points={{0,60},{80,60}},
-              color={0,127,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-60},{80,-60}},
-              color={0,127,255},
-              smooth=Smooth.None)}));
+      annotation (Icon(graphics={Line(
+                  points={{0,60},{0,-60}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-80,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,20},{80,20}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-20},{80,-20}},
+                  color={191,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{0,60},{80,60}},
+                  color={0,127,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-60},{80,-60}},
+                  color={0,127,255},
+                  smooth=Smooth.None)}));
     end Cathode;
 
     package Phases "Adapters for material phases"
@@ -1822,9 +1810,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{-10,-10},{10,10}},
               rotation=315,
               origin={160,-160})));
-        replaceable FCSys.Conditions.FaceBusPair.Subregion current[n_y, n_z](graphite(
-              'inclC+'=true, 'incle-'=true)) if inclIO constrainedby
-          FCSys.Conditions.FaceBusPair.Subregion(graphite('inclC+'=true, 'incle-'=true))
+        replaceable FCSys.Conditions.FaceBusPair.Subregion current[n_y, n_z](
+            graphite('inclC+'=true, 'incle-'=true)) if inclIO constrainedby
+          FCSys.Conditions.FaceBusPair.Subregion(graphite('inclC+'=true,
+              'incle-'=true))
           annotation (Placement(transformation(extent={{-140,20},{-120,40}})));
 
       equation
@@ -1982,7 +1971,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   end TestStands;
 
   package ChemicalBus
-    "<html>BCs for the <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> connector</html>"
+    "<html>Conditions for the <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> connector</html>"
     extends Modelica.Icons.Package;
 
     model Gas "BC for gas"
@@ -2365,11 +2354,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   end ChemicalBus;
 
   package Chemical
-    "<html>BCs for the <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connector</html>"
+    "<html>Conditions for the <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connector</html>"
     extends Modelica.Icons.Package;
 
     model Species
-      "<html>BCs for the <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connector</html>"
+      "<html>Conditions for the <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connector</html>"
 
       import FCSys.Conditions.Chemical.BaseClasses.BCTypeMaterial;
       import FCSys.Conditions.Chemical.BaseClasses.BCTypeMechanical;
@@ -2761,7 +2750,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             graphics));
     end Species;
 
-    package Material "Material BCs"
+    package Material "Material Conditions"
       extends Modelica.Icons.Package;
 
       model Current "Prescribed current"
@@ -2801,7 +2790,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         type BCType = enumeration(
             CurrentAreic "Areic current",
-            Force "Force") "Types of BCs";
+            Force "Force") "Types of Conditions";
       end BaseClasses;
     end Material;
 
@@ -2811,25 +2800,25 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           PotentialPerTemperature
             "Prescribed quotient of electrochemical potential and temperature",
 
-          Current "Prescribed current") "Types of material BCs";
+          Current "Prescribed current") "Types of material Conditions";
 
       type BCTypeMechanical = enumeration(
           Velocity "Prescribed velocity",
-          Force "Prescribed force") "Types of mechanical BCs";
+          Force "Prescribed force") "Types of mechanical Conditions";
       type BCTypeFluid = enumeration(
           EnthalpyMassic "Prescribed massic enthalpy",
-          EnthalpyRate "Prescribed enthalpy flow rate") "Types of fluid BCs";
+          EnthalpyRate "Prescribed enthalpy flow rate") "Types of fluid Conditions";
     end BaseClasses;
   end Chemical;
 
   package Inert
-    "<html>BCs for the <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> or <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a> connector</html>"
+    "<html>Conditions for the <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> or <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a> connector</html>"
     extends Modelica.Icons.Package;
 
   end Inert;
 
   package InertAmagat
-    "<html>BCs for the <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector</html>"
+    "<html>Conditions for the <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector</html>"
     extends Modelica.Icons.Package;
 
     model Phase
@@ -3007,7 +2996,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           extent={{-6,3},{-6,3}}));
     end Phase;
 
-    package Volume "BCs for additivity of volume"
+    package Volume "Conditions for additivity of volume"
       extends Modelica.Icons.Package;
 
       model Pressure "Prescribed pressure"
@@ -3050,11 +3039,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         type BCType = enumeration(
             Volume "Volume",
-            Pressure "Pressure") "Types of BCs";
+            Pressure "Pressure") "Types of Conditions";
       end BaseClasses;
     end Volume;
 
-    package Mechanical "Mechanical BCs"
+    package Mechanical "Mechanical Conditions"
       extends Modelica.Icons.Package;
       model Velocity "Prescribed velocity"
         extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.Velocity,
@@ -3107,11 +3096,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         type BCType = enumeration(
             Velocity "Velocity",
-            Force "Force") "Types of BCs";
+            Force "Force") "Types of Conditions";
       end BaseClasses;
     end Mechanical;
 
-    package Thermal "Thermal BCs"
+    package Thermal "Thermal Conditions"
       extends Modelica.Icons.Package;
 
       model Temperature "Prescribed temperature"
@@ -3151,7 +3140,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         type BCType = enumeration(
             Temperature "Temperature",
-            HeatFlowRate "Heat flow rate") "Types of BCs";
+            HeatFlowRate "Heat flow rate") "Types of Conditions";
       end BaseClasses;
     end Thermal;
 
@@ -3227,9 +3216,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     end BaseClasses;
   end InertAmagat;
 
-
   package InertDalton
-    "<html>BCs for the <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector</html>"
+    "<html>Conditions for the <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector</html>"
     extends Modelica.Icons.Package;
 
     model Species
@@ -3405,7 +3393,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           extent={{-6,3},{-6,3}}));
     end Species;
 
-    package Pressure "BCs for additivity of pressure"
+    package Pressure "Conditions for additivity of pressure"
       extends Modelica.Icons.Package;
 
       model Volume "Prescribed volume"
@@ -3442,11 +3430,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         type BCType = enumeration(
             Volume "Volume",
-            Pressure "Pressure") "Types of BCs";
+            Pressure "Pressure") "Types of Conditions";
       end BaseClasses;
     end Pressure;
 
-    package Mechanical "Mechanical BCs"
+    package Mechanical "Mechanical Conditions"
       extends Modelica.Icons.Package;
       model Velocity "Prescribed velocity"
         extends BaseClasses.PartialBC(final bCType=BaseClasses.BCType.Velocity,
@@ -3499,11 +3487,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         type BCType = enumeration(
             Velocity "Velocity",
-            Force "Force") "Types of BCs";
+            Force "Force") "Types of Conditions";
       end BaseClasses;
     end Mechanical;
 
-    package Thermal "BCs for heat"
+    package Thermal "Conditions for heat"
       extends Modelica.Icons.Package;
 
       model Temperature "Prescribed temperature"
@@ -3543,7 +3531,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         type BCType = enumeration(
             Temperature "Temperature",
-            HeatFlowRate "Heat flow rate") "Types of BCs";
+            HeatFlowRate "Heat flow rate") "Types of Conditions";
       end BaseClasses;
     end Thermal;
 
@@ -3620,7 +3608,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   end InertDalton;
 
   package FaceBus
-    "<html>BCs for a <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector</html>"
+    "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector</html>"
     extends Modelica.Icons.Package;
 
     model Subregion
@@ -3770,7 +3758,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     end SubregionFlow;
 
     package Phases
-      "<html>BCs for the <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Phase\">Phase</a> model (multi-species)</html>"
+      "<html>Conditions for the <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Phase\">Phase</a> model (multi-species)</html>"
       extends Modelica.Icons.Package;
 
       model Gas "BC for gas"
@@ -4106,7 +4094,7 @@ boundary condition</a> model.
   end FaceBus;
 
   package Face
-    "<html>BCs for a <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
+    "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
     model Species
       "<html>BC for a face of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
 
@@ -4229,7 +4217,7 @@ boundary condition</a> model.
     end Species;
     extends Modelica.Icons.Package;
 
-    package Normal "Normal mechanical BCs"
+    package Normal "Normal mechanical Conditions"
       extends Modelica.Icons.Package;
 
       model CurrentAreic "Prescribed areic current"
@@ -4283,11 +4271,11 @@ boundary condition</a> model.
         type BCType = enumeration(
             CurrentAreic "Areic current",
             Force "Force",
-            Custom "Custom expression") "Types of BCs";
+            Custom "Custom expression") "Types of Conditions";
       end BaseClasses;
     end Normal;
 
-    package Transverse "Transverse mechanical BCs"
+    package Transverse "Transverse mechanical Conditions"
       extends Modelica.Icons.Package;
 
       model Velocity "Prescribed velocity"
@@ -4331,11 +4319,11 @@ boundary condition</a> model.
 
         type BCType = enumeration(
             Velocity "Velocity",
-            Force "Shear force") "Types of BCs";
+            Force "Shear force") "Types of Conditions";
       end BaseClasses;
     end Transverse;
 
-    package Thermal "Thermal BCs"
+    package Thermal "Thermal Conditions"
       extends Modelica.Icons.Package;
 
       model Temperature "Prescribed temperature"
@@ -4375,7 +4363,7 @@ boundary condition</a> model.
 
         type BCType = enumeration(
             Temperature "Temperature",
-            HeatRate "Heat flow rate") "Types of BCs";
+            HeatRate "Heat flow rate") "Types of Conditions";
       end BaseClasses;
     end Thermal;
 
@@ -4440,7 +4428,7 @@ boundary condition</a> model.
   end Face;
 
   package FaceBusPair
-    "<html>BCs for a pair of <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connectors</html>"
+    "<html>Conditions for a pair of <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connectors</html>"
     extends Modelica.Icons.Package;
 
     model Subregion
@@ -4608,7 +4596,7 @@ boundary condition</a> model.
     end SubregionFlow;
 
     package Phases
-      "<html>BCs for the <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Phase\">Phase</a> model (multi-species)</html>"
+      "<html>Conditions for the <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Phase\">Phase</a> model (multi-species)</html>"
       extends Modelica.Icons.Package;
 
       model Gas "BC for gas"
@@ -4625,7 +4613,8 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Conditions.FacePair.Species H2 if inclH2 "Model" annotation (Dialog(
+        FCSys.Conditions.FacePair.Species H2 if inclH2 "Model" annotation (
+            Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclH2), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -4639,7 +4628,8 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Conditions.FacePair.Species H2O if inclH2O "Model" annotation (Dialog(
+        FCSys.Conditions.FacePair.Species H2O if inclH2O "Model" annotation (
+            Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -4653,7 +4643,8 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Conditions.FacePair.Species N2 if inclN2 "Model" annotation (Dialog(
+        FCSys.Conditions.FacePair.Species N2 if inclN2 "Model" annotation (
+            Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclN2), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -4667,7 +4658,8 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Conditions.FacePair.Species O2 if inclO2 "Model" annotation (Dialog(
+        FCSys.Conditions.FacePair.Species O2 if inclO2 "Model" annotation (
+            Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclO2), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -4760,7 +4752,8 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Conditions.FacePair.Species 'C+' if 'inclC+' "Model" annotation (Dialog(
+        FCSys.Conditions.FacePair.Species 'C+' if 'inclC+' "Model" annotation (
+            Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable='inclC+'), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -4774,7 +4767,8 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Conditions.FacePair.Species 'e-' if 'incle-' "Model" annotation (Dialog(
+        FCSys.Conditions.FacePair.Species 'e-' if 'incle-' "Model" annotation (
+            Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable='incle-'), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -4832,8 +4826,8 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Conditions.FacePair.Species 'C19HF37O5S-' if 'inclC19HF37O5S-' "Model"
-          annotation (Dialog(
+        FCSys.Conditions.FacePair.Species 'C19HF37O5S-' if 'inclC19HF37O5S-'
+          "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable='inclC19HF37O5S-'), Placement(transformation(extent={{-10,-10},
@@ -4848,7 +4842,8 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Conditions.FacePair.Species 'H+' if 'inclH+' "Model" annotation (Dialog(
+        FCSys.Conditions.FacePair.Species 'H+' if 'inclH+' "Model" annotation (
+            Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable='inclH+'), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -4862,7 +4857,8 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Conditions.FacePair.Species H2O if inclH2O "Model" annotation (Dialog(
+        FCSys.Conditions.FacePair.Species H2O if inclH2O "Model" annotation (
+            Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -4939,7 +4935,8 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.Conditions.FacePair.Species H2O if inclH2O "Model" annotation (Dialog(
+        FCSys.Conditions.FacePair.Species H2O if inclH2O "Model" annotation (
+            Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -4992,7 +4989,7 @@ boundary condition</a> model.
   end FaceBusPair;
 
   package FacePair
-    "<html>BCs for a pair of <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors</html>"
+    "<html>Conditions for a pair of <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors</html>"
 
     extends Modelica.Icons.Package;
 
@@ -5133,7 +5130,7 @@ boundary condition</a> model.
       annotation (Icon(graphics));
     end Species;
 
-    package Normal "Normal mechanical BCs"
+    package Normal "Normal mechanical Conditions"
       extends Modelica.Icons.Package;
 
       model CurrentAreic "Prescribed areic current, with material conservation"
@@ -5175,11 +5172,11 @@ boundary condition</a> model.
 
         type BCType = enumeration(
             CurrentAreic "Areic current",
-            Force "Force") "Types of BCs";
+            Force "Force") "Types of Conditions";
       end BaseClasses;
     end Normal;
 
-    package Transverse "Transverse mechanical BCs"
+    package Transverse "Transverse mechanical Conditions"
       extends Modelica.Icons.Package;
 
       model Velocity
@@ -5229,11 +5226,11 @@ boundary condition</a> model.
 
         type BCType = enumeration(
             Velocity "Shear velocity",
-            Force "Shear force") "Types of BCs";
+            Force "Shear force") "Types of Conditions";
       end BaseClasses;
     end Transverse;
 
-    package Thermal "Thermal BCs"
+    package Thermal "Thermal Conditions"
       extends Modelica.Icons.Package;
 
       model Temperature
@@ -5277,7 +5274,7 @@ boundary condition</a> model.
 
         type BCType = enumeration(
             Temperature "Temperature difference",
-            HeatRate "Heat flow rate") "Types of BCs";
+            HeatRate "Heat flow rate") "Types of Conditions";
       end BaseClasses;
     end Thermal;
 
@@ -5403,11 +5400,11 @@ those generated by the model's <code>connect</code> statements.</p>
     <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\" align=center>
       <tr align=center>
         <td align=center width=120>
-          <img src=\"modelica://FCSys/resources/documentation/BCs/Router/PassThrough.png\">
+          <img src=\"modelica://FCSys/resources/documentation/Conditions/Router/PassThrough.png\">
 <br><b>a:</b>  Pass-through
         </td>
         <td align=center>
-          <img src=\"modelica://FCSys/resources/documentation/BCs/Router/CrossOver.png\">
+          <img src=\"modelica://FCSys/resources/documentation/Conditions/Router/CrossOver.png\">
 <br><b>b:</b>  Cross-over
         </td>
       </tr>
@@ -5551,13 +5548,13 @@ The default global default settings will be used for the current simulation.",
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             grid={2,2}),graphics={Rectangle(
-              extent={{-100,40},{100,-40}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineColor={0,0,0}), Text(
-              extent={{-100,-10},{100,10}},
-              lineColor={127,127,127},
-              textString="%y")}),
+                  extent={{-100,40},{100,-40}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  lineColor={0,0,0}),Text(
+                  extent={{-100,-10},{100,10}},
+                  lineColor={127,127,127},
+                  textString="%y")}),
         Diagram(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
@@ -5584,12 +5581,12 @@ Variable <i>u</i> is too, and it may be used in the expression for <i>y</i>.
   <a href=\"modelica://FCSys.Conditions.InertDalton\">InertDalton</a>, <a href=\"modelica://FCSys.Conditions.Face\">Face</a>, and
   <a href=\"modelica://FCSys.Conditions.FaceBus\">FaceBus</a> packages contain models to impose boundary conditions on the
   connectors with the same names (<a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> or
-  <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a>, <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> or 
+  <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a>, <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> or
   <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a>, <a href=\"modelica://FCSys.Conditions.InertAmagat\">InertAmagat</a>,
   <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a>, <a href=\"modelica://FCSys.Conditions.Face\">Face</a>, and
   <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>).  The <a href=\"modelica://FCSys.Conditions.FaceDifferential\">FacePair</a> and
   <a href=\"modelica://FCSys.Conditions.FaceBusPair\">FaceBusPair</a> packages contain models for pairs of <a href=\"modelica://FCSys.Conditions.Face\">Face</a> and
   <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connectors.
-  
+
 </p></html>"));
-end BCs;
+end Conditions;

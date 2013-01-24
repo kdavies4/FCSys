@@ -2,7 +2,7 @@ within FCSys;
 package WorkInProgress "Incomplete classes under development"
   extends Modelica.Icons.Package;
 
-  model BCsExamplesClosedVolume
+  model ConditionsExamplesClosedVolume
     "<html>Test the <code>ClosedVolume</code> model</html>"
 
     extends Modelica.Icons.Example;
@@ -57,9 +57,9 @@ package WorkInProgress "Incomplete classes under development"
         smooth=Smooth.None));
     annotation (experiment(StopTime=10), Commands(file=
             "resources/scripts/Dymola/Conditions.Examples.FluidAdapt.mos"));
-  end BCsExamplesClosedVolume;
+  end ConditionsExamplesClosedVolume;
 
-  partial model BCsBaseClassesPartialLumpedVessel
+  partial model ConditionsBaseClassesPartialLumpedVessel
     "Lumped volume with a vector of fluid ports and replaceable heat transfer model"
     // Copied and modified from Modelica.Fluid.
 
@@ -365,7 +365,7 @@ should be used if these values are needed.
             extent={{-150,110},{150,150}},
             textString="%name",
             lineColor={0,0,255})}));
-  end BCsBaseClassesPartialLumpedVessel;
+  end ConditionsBaseClassesPartialLumpedVessel;
 
   model ClosedVolume
     "Volume of fixed size, closed to the ambient, with inlet/outlet ports"
@@ -374,7 +374,7 @@ should be used if these values are needed.
     import Modelica.Constants.pi;
 
     // Mass and energy balance, ports
-    extends FCSys.WorkInProgress.BCsBaseClassesPartialLumpedVessel(
+    extends FCSys.WorkInProgress.ConditionsBaseClassesPartialLumpedVessel(
       final fluidVolume=V,
       vesselArea=pi*(3/4*V)^(2/3),
       heatTransfer(surfaceAreas={4*pi*(3/4*V/pi)^(2/3)}));
@@ -427,7 +427,7 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
   <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
   end SubRegionsSpeciesSpecies0Amount;
 
-  model BCsAdaptersSpeciesFluid
+  model ConditionsAdaptersSpeciesFluid
     "<html>Adapter to connect a single fluid species between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
 
     extends Conditions.Adapters.Species.FluidNonionic;
@@ -453,15 +453,15 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
             color={0,0,0},
             smooth=Smooth.None,
             pattern=LinePattern.Dash)}));
-  end BCsAdaptersSpeciesFluid;
+  end ConditionsAdaptersSpeciesFluid;
 
-  model BCsAdaptersPhasesIonomer
+  model ConditionsAdaptersPhasesIonomer
     "<html>Adapter for ionomer between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
     extends Conditions.Adapters.Phases.BaseClasses.PartialPhase;
     extends Modelica.Icons.UnderConstruction;
 
     Conditions.Adapters.Species.Solid Error;
-    FCSys.WorkInProgress.BCsAdaptersSpeciesFluid 'H+'(redeclare package Data =
+    FCSys.WorkInProgress.ConditionsAdaptersSpeciesFluid 'H+'(redeclare package Data =
           FCSys.Characteristics.'H+'.Ionomer, redeclare package Medium =
           Modelica.Media.IdealGases.SingleGases.H2)
       annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
@@ -539,7 +539,7 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
             points={{0,-40},{80,-40}},
             color={0,127,255},
             smooth=Smooth.None)}));
-  end BCsAdaptersPhasesIonomer;
+  end ConditionsAdaptersPhasesIonomer;
 
   partial model PartialSensor "Partial model for a sensor"
 

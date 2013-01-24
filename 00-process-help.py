@@ -63,8 +63,7 @@ rpls = [
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
-    <li><a href="FCSys_BCs.html">BCs</a></li>
-    <li><a href="FCSys_Sensors.html">Sensors</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
     <li><a href="FCSys_Subregions.html">Subregions</a></li>
@@ -114,6 +113,7 @@ rpls = [
     ('<tr><td><img src="FCSys\.BlocksS\.png" alt="FCSys\.Blocks" width=20  height=20 align=top>&nbsp;<a href="FCSys_Blocks\.html#FCSys\.Blocks">Blocks</a>\n</td><td>[^<]+</td></tr>\n', ''),
     ('<tr><td><img src="FCSys\.BlocksS\.png" alt="FCSys\.Figures" width=20  height=20 align=top>&nbsp;<a href="FCSys_Figures\.html#FCSys\.Figures">Figures</a>\n</td><td>[^<]+</td></tr>\n', ''),
     ('<tr><td><img src="FCSys\.SystemsS\.png" alt="FCSys\.Systems" width=20  height=20 align=top>&nbsp;<a href="FCSys_Systems\.html#FCSys\.Systems">Systems</a>\n</td><td>[^<]+</td></tr>\n', ''),
+    ('<tr><td><img src="FCSys\.TestS\.png" alt="FCSys\.Test" width=20  height=20 align=top>&nbsp;<a href="FCSys_Test\.html#FCSys\.Test">Test</a>\n</td><td>[^<]+</td></tr>\n', ''),
     ('<tr><td><img src="FCSys\.WorkInProgressS\.png" alt="FCSys\.WorkInProgress" width=20  height=20 align=top>&nbsp;<a href="FCSys_WorkInProgress\.html#FCSys\.WorkInProgress">WorkInProgress</a>\n</td><td>[^<]+</td></tr>\n', ''),
     # Remove nested quotes from meta description.
     ('(<meta name="description" content=")&quot;(.*)&quot;(">)', r'\1\2\3'),

@@ -21,7 +21,10 @@ rm $dest_dir/$foldername.zip
 #awk '/versionBuild=[0-9]+/ { printf "versionBuild=%d\n", $2+1 }' package.mo
 
 # Copy this folder with the relevant files.
-rsync $thisfolder -rL --delete --include-from $thisfolder/.include --exclude-from $thisfolder/.exclude $dest_dir/
+rsync $thisfolder -rL --delete --include-from $thisfolder/.releaseinclude --exclude-from $thisfolder/.releaseexclude $dest_dir/
+
+# Copy the static files for documentation of FCRes
+cp resources/source/Python/doc/build/html/_static/* $dest_dir/$foldername/resources/source/Python/doc/_static
 
 # Record the date/time and abbreviated SHA of the last git commit.
 # This is recorded in the released version, not in the master copy.

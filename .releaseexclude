@@ -15,15 +15,16 @@ Blocks.mo
 help/FCSys_Blocks*.html
 help/FCSys.Blocks*.png
 
-# Figures (for documentation only)
-*Figures*
-
 # Systems
 Systems.mo
 help/FCSys_Systems*.html
 help/FCSys.Systems*.png
 resources/documentation/system.png
-install
+
+# Test
+Test.mo
+help/FCSys_Test*.html
+help/FCSys.Test*.png
 
 # Figures (for documentation only)
 *Figures*
@@ -70,6 +71,7 @@ resources/source/Python/doc/*.rst
 resources/source/Python/doc/*.py
 resources/source/Python/doc/Makefile
 resources/source/Python/doc/_templates
+resources/source/Python/MANIFEST*
 
 # Hidden, synchronization, temporary, and backup files
 .*
@@ -81,6 +83,10 @@ resources/source/Python/fcres/temp_plot.png
 # Web documentation
 images/
 javascripts
+
+# Other
+install
+test
 
 # Work in progress
 WorkInProgress.mo

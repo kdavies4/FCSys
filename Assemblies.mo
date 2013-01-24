@@ -28,8 +28,8 @@ package Assemblies "Combinations of regions (e.g., cells)"
       model CellProfile
         "Apply boundary conditions to a cell according to a test profile"
 
-        extends FCSys.Conditions.TestStands.TestProfile(anEnd(each graphite('incle-'=
-                  true, 'e-'(redeclare Modelica.Blocks.Sources.Ramp
+        extends FCSys.Conditions.TestStands.TestProfile(anEnd(each graphite(
+                'incle-'=true, 'e-'(redeclare Modelica.Blocks.Sources.Ramp
                   materialSpec(height=10000*U.A, duration=500)))), caEnd(each
               graphite('incle-'=true, 'e-'(redeclare
                   Modelica.Blocks.Sources.Ramp materialSpec(height=-10000*U.A,
@@ -88,7 +88,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
       end Polarization;
 
       model CellProfileIO
-        "Apply BCs to a cell according to a test profile, with inputs and outputs"
+        "Apply Conditions to a cell according to a test profile, with inputs and outputs"
         extends CellProfile(testStand(final inclIO=true));
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
 
@@ -143,11 +143,11 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
         inner FCSys.Conditions.Environment environment(analysis=false)
           annotation (Placement(transformation(extent={{40,60},{60,80}})));
-        FCSys.Conditions.Adapters.Phases.Graphite caModelicaAdapt(A=cell.L_y[1]*cell.L_z[
-              1])
+        FCSys.Conditions.Adapters.Phases.Graphite caModelicaAdapt(A=cell.L_y[1]
+              *cell.L_z[1])
           annotation (Placement(transformation(extent={{20,-10},{40,10}})));
-        FCSys.Conditions.Adapters.Phases.Graphite anModelicaAdapt(A=cell.L_y[1]*cell.L_z[
-              1])
+        FCSys.Conditions.Adapters.Phases.Graphite anModelicaAdapt(A=cell.L_y[1]
+              *cell.L_z[1])
           annotation (Placement(transformation(extent={{-20,-10},{-40,10}})));
         FCSys.WorkInProgress.TanConduct tanConduct
           annotation (Placement(transformation(extent={{10,40},{-10,60}})));
@@ -412,37 +412,43 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={Line(
-                  points={{-40,-58},{-40,-100}},
-                  color={240,0,0},
-                  visible=inclY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-8,-1},{28,-1}},
-                  color={0,0,240},
-                  visible=inclX,
-                  thickness=0.5,
-                  origin={39,-92},
-                  rotation=90),Line(
-                  points={{-40,100},{-40,60}},
-                  color={240,0,0},
-                  visible=inclY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-66,0},{-100,0}},
-                  color={127,127,127},
-                  visible=inclX,
-                  thickness=0.5),Line(
-                  points={{-8,-1},{44,-1}},
-                  color={0,0,240},
-                  visible=inclX,
-                  thickness=0.5,
-                  origin={39,56},
-                  rotation=90),Line(
-                  points={{100,0},{56,0}},
-                  color={127,127,127},
-                  visible=inclX,
-                  thickness=0.5)}),
+            initialScale=0.1), graphics={
+            Line(
+              points={{-40,-58},{-40,-100}},
+              color={240,0,0},
+              visible=inclY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-8,-1},{28,-1}},
+              color={0,0,240},
+              visible=inclX,
+              thickness=0.5,
+              origin={39,-92},
+              rotation=90),
+            Line(
+              points={{-40,100},{-40,60}},
+              color={240,0,0},
+              visible=inclY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-66,0},{-100,0}},
+              color={127,127,127},
+              visible=inclX,
+              thickness=0.5),
+            Line(
+              points={{-8,-1},{44,-1}},
+              color={0,0,240},
+              visible=inclX,
+              thickness=0.5,
+              origin={39,56},
+              rotation=90),
+            Line(
+              points={{100,0},{56,0}},
+              color={127,127,127},
+              visible=inclX,
+              thickness=0.5)}),
         experiment(StopTime=120, Tolerance=1e-06));
     end Cell;
 
@@ -705,37 +711,43 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={Line(
-                  points={{-40,100},{-40,60}},
-                  color={255,128,0},
-                  visible=inclY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-8,-1},{44,-1}},
-                  color={0,128,255},
-                  visible=inclX,
-                  thickness=0.5,
-                  origin={39,56},
-                  rotation=90),Line(
-                  points={{100,0},{56,0}},
-                  color={127,127,127},
-                  visible=inclX,
-                  thickness=0.5),Line(
-                  points={{-8,-1},{28,-1}},
-                  color={0,128,255},
-                  visible=inclX,
-                  thickness=0.5,
-                  origin={39,-92},
-                  rotation=90),Line(
-                  points={{-40,-58},{-40,-100}},
-                  color={255,128,0},
-                  visible=inclY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-66,0},{-100,0}},
-                  color={127,127,127},
-                  visible=inclX,
-                  thickness=0.5)}));
+            initialScale=0.1), graphics={
+            Line(
+              points={{-40,100},{-40,60}},
+              color={255,128,0},
+              visible=inclY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-8,-1},{44,-1}},
+              color={0,128,255},
+              visible=inclX,
+              thickness=0.5,
+              origin={39,56},
+              rotation=90),
+            Line(
+              points={{100,0},{56,0}},
+              color={127,127,127},
+              visible=inclX,
+              thickness=0.5),
+            Line(
+              points={{-8,-1},{28,-1}},
+              color={0,128,255},
+              visible=inclX,
+              thickness=0.5,
+              origin={39,-92},
+              rotation=90),
+            Line(
+              points={{-40,-58},{-40,-100}},
+              color={255,128,0},
+              visible=inclY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-66,0},{-100,0}},
+              color={127,127,127},
+              visible=inclX,
+              thickness=0.5)}));
     end IntegratedCell;
 
     model CellSSIC
