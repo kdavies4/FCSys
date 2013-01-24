@@ -1,7 +1,7 @@
 #!/bin/bash
-# Spell check all the Modelica files.
+# Spellcheck all of the Modelica files.
 #
-# Kevin L. Davies, 10/6/12
+# Kevin L. Davies, 10/6/2012
 
 # Options
 wordfile=.fcsys.pws # Name of custom word file
@@ -12,6 +12,7 @@ if $reduce; then
    cp $wordfile $wordfile.bak
    head --lines=1 $wordfile.bak > $wordfile
    while read word; do
+       echo $word
        files=`grep --files-with-matches --max-count=1 "$word" *.mo`
        if [ ! -z "$files" ]; then
            echo $word >> $wordfile

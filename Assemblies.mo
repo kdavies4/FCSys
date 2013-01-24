@@ -85,6 +85,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
         extends CellProfile;
         annotation (Commands(file=
                 "resources/scripts/Dymola/Assemblies.Cells.Examples.Polarization.mos"));
+
       end Polarization;
 
       model CellProfileIO
@@ -108,8 +109,8 @@ package Assemblies "Combinations of regions (e.g., cells)"
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,-100})));
-      equation
 
+      equation
         connect(y, testStand.y) annotation (Line(
             points={{30,-30},{16,-16}},
             color={0,0,127},
@@ -154,6 +155,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
         Modelica.Blocks.Sources.Ramp loadSweep(duration=1000)
           "This is the arctangent of conductance."
           annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
+
       equation
         connect(anModelicaAdapt.normal, cell.anFPX[1, 1]) annotation (Line(
             points={{-20,6.10623e-16},{-16,6.10623e-16},{-16,5.55112e-16},{-10,
@@ -183,6 +185,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
             smooth=Smooth.None));
         annotation (experiment(StopTime=1000));
       end CellModelica;
+
     end Examples;
 
     model Cell "Default single-cell PEMFC"
@@ -412,43 +415,37 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={
-            Line(
-              points={{-40,-58},{-40,-100}},
-              color={240,0,0},
-              visible=inclY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-8,-1},{28,-1}},
-              color={0,0,240},
-              visible=inclX,
-              thickness=0.5,
-              origin={39,-92},
-              rotation=90),
-            Line(
-              points={{-40,100},{-40,60}},
-              color={240,0,0},
-              visible=inclY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-66,0},{-100,0}},
-              color={127,127,127},
-              visible=inclX,
-              thickness=0.5),
-            Line(
-              points={{-8,-1},{44,-1}},
-              color={0,0,240},
-              visible=inclX,
-              thickness=0.5,
-              origin={39,56},
-              rotation=90),
-            Line(
-              points={{100,0},{56,0}},
-              color={127,127,127},
-              visible=inclX,
-              thickness=0.5)}),
+            initialScale=0.1), graphics={Line(
+                  points={{-40,-58},{-40,-100}},
+                  color={240,0,0},
+                  visible=inclY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-8,-1},{28,-1}},
+                  color={0,0,240},
+                  visible=inclX,
+                  thickness=0.5,
+                  origin={39,-92},
+                  rotation=90),Line(
+                  points={{-40,100},{-40,60}},
+                  color={240,0,0},
+                  visible=inclY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-66,0},{-100,0}},
+                  color={127,127,127},
+                  visible=inclX,
+                  thickness=0.5),Line(
+                  points={{-8,-1},{44,-1}},
+                  color={0,0,240},
+                  visible=inclX,
+                  thickness=0.5,
+                  origin={39,56},
+                  rotation=90),Line(
+                  points={{100,0},{56,0}},
+                  color={127,127,127},
+                  visible=inclX,
+                  thickness=0.5)}),
         experiment(StopTime=120, Tolerance=1e-06));
     end Cell;
 
@@ -463,6 +460,7 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         "<html>For C (<i>k</i><sub>&alpha; &Phi; C</sub>)</html>" annotation (
           Dialog(tab="Calibration factors", group="Exchange of linear momentum"));
       parameter Q.NumberAbsolute Error;
+
     end CalibratedCell;
 
     // Thermal exchange
@@ -711,43 +709,37 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={
-            Line(
-              points={{-40,100},{-40,60}},
-              color={255,128,0},
-              visible=inclY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-8,-1},{44,-1}},
-              color={0,128,255},
-              visible=inclX,
-              thickness=0.5,
-              origin={39,56},
-              rotation=90),
-            Line(
-              points={{100,0},{56,0}},
-              color={127,127,127},
-              visible=inclX,
-              thickness=0.5),
-            Line(
-              points={{-8,-1},{28,-1}},
-              color={0,128,255},
-              visible=inclX,
-              thickness=0.5,
-              origin={39,-92},
-              rotation=90),
-            Line(
-              points={{-40,-58},{-40,-100}},
-              color={255,128,0},
-              visible=inclY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-66,0},{-100,0}},
-              color={127,127,127},
-              visible=inclX,
-              thickness=0.5)}));
+            initialScale=0.1), graphics={Line(
+                  points={{-40,100},{-40,60}},
+                  color={255,128,0},
+                  visible=inclY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-8,-1},{44,-1}},
+                  color={0,128,255},
+                  visible=inclX,
+                  thickness=0.5,
+                  origin={39,56},
+                  rotation=90),Line(
+                  points={{100,0},{56,0}},
+                  color={127,127,127},
+                  visible=inclX,
+                  thickness=0.5),Line(
+                  points={{-8,-1},{28,-1}},
+                  color={0,128,255},
+                  visible=inclX,
+                  thickness=0.5,
+                  origin={39,-92},
+                  rotation=90),Line(
+                  points={{-40,-58},{-40,-100}},
+                  color={255,128,0},
+                  visible=inclY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-66,0},{-100,0}},
+                  color={127,127,127},
+                  visible=inclX,
+                  thickness=0.5)}));
     end IntegratedCell;
 
     model CellSSIC
@@ -778,7 +770,9 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
       pEM.subregions.ionomer.'H+'.mu = caCL.subregions.ionomer.'H+'.mu;
       caCL.subregions.graphite.'e-'.mu = caGDL.subregions.graphite.'e-'.mu;
       caFP.subregions.graphite.'e-'.mu = caGDL.subregions.graphite.'e-'.mu;
+
     end CellSSIC;
+
   end Cells;
   annotation (Documentation(info="
 <html>
@@ -794,4 +788,5 @@ FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
 </p>
 </html>"));
+
 end Assemblies;

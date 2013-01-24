@@ -6,58 +6,51 @@ package BaseClasses "Base classes (not for direct use)"
       extends Modelica.Icons.Package;
       partial class Double "Icon for a two-connector boundary condition"
         //extends Names.Middle;
-        annotation (Icon(graphics={
-              Rectangle(
-                extent={{-100,40},{100,-40}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Line(
-                points={{-100,40},{100,40}},
-                pattern=LinePattern.None,
-                smooth=Smooth.None),
-              Line(
-                points={{-100,-40},{-100,40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash),
-              Text(
-                extent={{-150,-20},{150,20}},
-                textString="%name",
-                lineColor={0,0,0}),
-              Line(
-                points={{-100,-40},{100,-40}},
-                pattern=LinePattern.None,
-                smooth=Smooth.None),
-              Line(
-                points={{100,-40},{100,40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash)}));
+        annotation (Icon(graphics={Rectangle(
+                      extent={{-100,40},{100,-40}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Line(
+                      points={{-100,40},{100,40}},
+                      pattern=LinePattern.None,
+                      smooth=Smooth.None),Line(
+                      points={{-100,-40},{-100,40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash),Text(
+                      extent={{-150,-20},{150,20}},
+                      textString="%name",
+                      lineColor={0,0,0}),Line(
+                      points={{-100,-40},{100,-40}},
+                      pattern=LinePattern.None,
+                      smooth=Smooth.None),Line(
+                      points={{100,-40},{100,40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash)}));
+
       end Double;
 
       partial class Single "Icon for a single-connector boundary condition"
         //extends Names.Middle;
-        annotation (Icon(graphics={
-              Rectangle(
-                extent={{-100,40},{100,-40}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Line(
-                points={{-100,-40},{-100,40},{100,40},{100,-40}},
-                pattern=LinePattern.None,
-                smooth=Smooth.None),
-              Line(
-                points={{-100,-40},{100,-40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash),
-              Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+        annotation (Icon(graphics={Rectangle(
+                      extent={{-100,40},{100,-40}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Line(
+                      points={{-100,-40},{-100,40},{100,40},{100,-40}},
+                      pattern=LinePattern.None,
+                      smooth=Smooth.None),Line(
+                      points={{-100,-40},{100,-40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
+
       end Single;
+
     end Conditions;
     extends Modelica.Icons.Package;
     package Blocks "Icons for blocks (imperative or causal models)"
@@ -66,28 +59,29 @@ package BaseClasses "Base classes (not for direct use)"
         //extends Names.Middle;
 
         // This has been modified from Modelica.Blocks.Interfaces.BlockIcon.
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,-100},{100,100}},
-                lineColor={0,0,127},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid), Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,-100},{100,100}},
+                      lineColor={0,0,127},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
+
       end Continuous;
 
       partial class ContinuousShort "Short icon for a continuous block"
         extends Names.Middle;
         annotation (Icon(graphics={Rectangle(
-                extent={{-100,40},{100,-40}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                lineColor={0,0,0}), Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,40},{100,-40}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      lineColor={0,0,0}),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
+
       end ContinuousShort;
 
       partial class ContinuousShortWide
@@ -101,6 +95,7 @@ package BaseClasses "Base classes (not for direct use)"
                       extent={{-120,-20},{120,20}},
                       textString="%name",
                       lineColor={0,0,0})}));
+
       end ContinuousShortWide;
 
       partial class Discrete "Icon for a discrete-time block"
@@ -113,14 +108,15 @@ package BaseClasses "Base classes (not for direct use)"
                       lineColor={0,0,127},
                       fillColor={223,223,159},
                       fillPattern=FillPattern.Solid)}));
+
       end Discrete;
+
     end Blocks;
 
     package Names
       "Icons labeled with the name of the class at various positions"
       extends Modelica.Icons.Package;
       partial class Top12
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                       extent={{-100,240},{100,280}},
@@ -130,10 +126,10 @@ package BaseClasses "Base classes (not for direct use)"
                       extent={{-100,240},{100,280}},
                       textString="%name",
                       lineColor={0,0,0})}));
+
       end Top12;
 
       partial class Top11
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                       extent={{-100,220},{100,260}},
@@ -143,10 +139,10 @@ package BaseClasses "Base classes (not for direct use)"
                       extent={{-100,220},{100,260}},
                       textString="%name",
                       lineColor={0,0,0})}));
+
       end Top11;
 
       partial class Top10
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                       extent={{-100,200},{100,240}},
@@ -156,23 +152,23 @@ package BaseClasses "Base classes (not for direct use)"
                       extent={{-100,200},{100,240}},
                       textString="%name",
                       lineColor={0,0,0})}));
+
       end Top10;
 
       partial class Top9
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,180},{100,220}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,180},{100,220}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,180},{100,220}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,180},{100,220}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
+
       end Top9;
 
       partial class Top8
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                       extent={{-100,160},{100,200}},
@@ -182,10 +178,10 @@ package BaseClasses "Base classes (not for direct use)"
                       extent={{-100,160},{100,200}},
                       textString="%name",
                       lineColor={0,0,0})}));
+
       end Top8;
 
       partial class Top7
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                       extent={{-100,140},{100,180}},
@@ -195,10 +191,10 @@ package BaseClasses "Base classes (not for direct use)"
                       extent={{-100,140},{100,180}},
                       textString="%name",
                       lineColor={0,0,0})}));
+
       end Top7;
 
       partial class Top6
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                       extent={{-100,120},{100,160}},
@@ -208,10 +204,10 @@ package BaseClasses "Base classes (not for direct use)"
                       extent={{-100,120},{100,160}},
                       textString="%name",
                       lineColor={0,0,0})}));
+
       end Top6;
 
       partial class Top5
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                       extent={{-100,100},{100,140}},
@@ -221,23 +217,23 @@ package BaseClasses "Base classes (not for direct use)"
                       extent={{-100,100},{100,140}},
                       textString="%name",
                       lineColor={0,0,0})}));
+
       end Top5;
 
       partial class Top4
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,80},{100,120}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,80},{100,120}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,80},{100,120}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,80},{100,120}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
+
       end Top4;
 
       partial class Top3
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                 extent={{-100,60},{100,100}},
@@ -247,23 +243,23 @@ package BaseClasses "Base classes (not for direct use)"
                 extent={{-100,60},{100,100}},
                 textString="%name",
                 lineColor={0,0,0})}));
+
       end Top3;
 
       partial class Top2
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,40},{100,80}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,40},{100,80}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,40},{100,80}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,40},{100,80}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
+
       end Top2;
 
       partial class Top1
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                       extent={{-100,20},{100,60}},
@@ -273,26 +269,27 @@ package BaseClasses "Base classes (not for direct use)"
                       extent={{-100,20},{100,60}},
                       textString="%name",
                       lineColor={0,0,0})}));
+
       end Top1;
 
       partial class Middle
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,-20},{100,20}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,-20},{100,20}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
+
       end Middle;
+
     end Names;
 
     package SignalBuses "Icons for buses of signals (expandable connectors)"
       extends Modelica.Icons.Package;
       partial class Bidirectional "Icon for a signal bus"
-
         annotation (
           Icon(coordinateSystem(
               preserveAspectRatio=true,
@@ -365,6 +362,7 @@ package BaseClasses "Base classes (not for direct use)"
 This icon is designed for a <b>signal bus</b> connector.
 </p>
 </html>"));
+
       end Bidirectional;
 
       partial class In "Icon for a bus input"
@@ -390,6 +388,7 @@ This icon is designed for a <b>signal bus</b> connector.
                       origin={80,-8},
                       rotation=90,
                       lineColor={255,204,51})}));
+
       end In;
 
       partial class Out "Icon for a bus output"
@@ -415,7 +414,9 @@ This icon is designed for a <b>signal bus</b> connector.
                       rotation=270,
                       fillColor={255,255,255},
                       fillPattern=FillPattern.Solid)}));
+
       end Out;
+
     end SignalBuses;
 
     partial class Cell "Icon for a cell"
@@ -565,6 +566,7 @@ This icon is designed for a <b>signal bus</b> connector.
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             initialScale=0.1)));
+
     end Cell;
 
     partial class PackageUnderConstruction
@@ -578,44 +580,9 @@ This icon is designed for a <b>signal bus</b> connector.
               smooth=Smooth.None)}), Documentation(info="<html>
 <p>Package developers can use this icon to indicate that the respective model is under construction.</p>
 </html>"));
+
     end PackageUnderConstruction;
 
-    partial class Sensor "Icon for a sensor"
-
-      //extends Names.Top4;
-      annotation (Icon(graphics={
-            Rectangle(
-              extent={{-100,74},{100,114}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Ellipse(
-              extent={{-70,70},{70,-70}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(points={{0,70},{0,40}}, color={0,0,0}),
-            Line(points={{22.9,32.8},{40.2,57.3}}, color={0,0,0}),
-            Line(points={{-22.9,32.8},{-40.2,57.3}}, color={0,0,0}),
-            Line(points={{37.6,13.7},{65.8,23.9}}, color={0,0,0}),
-            Line(points={{-37.6,13.7},{-65.8,23.9}}, color={0,0,0}),
-            Line(points={{0,0},{9.02,28.6}}, color={0,0,0}),
-            Polygon(
-              points={{-0.48,31.6},{18,26},{18,57.2},{-0.48,31.6}},
-              lineColor={0,0,0},
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-5,5},{5,-5}},
-              lineColor={0,0,0},
-              fillColor={0,0,0},
-              fillPattern=FillPattern.Solid),
-            Line(points={{0,-100},{0,-70}}, color={0,0,127}),
-            Text(
-              extent={{-100,74},{100,114}},
-              textString="%name",
-              lineColor={0,0,0})}));
-    end Sensor;
   end Icons;
 
   package Utilities "Functions that implement useful algorithms"
@@ -641,6 +608,7 @@ This icon is designed for a <b>signal bus</b> connector.
   <p><b>Example:</b><br>
   <code>charge(\"Hg2+2\")</code> returns 2.</p>
   </html>"));
+
       end charge;
 
       function countElements
@@ -663,6 +631,7 @@ This icon is designed for a <b>signal bus</b> connector.
   <p>See the
   <a href=\"modelica://FCSys.BaseClasses.Utilities.ReadFormula\">ReadFormula</a> function
   for details about the format of the chemical formula.</p></html>"));
+
       end countElements;
 
       function elements
@@ -700,7 +669,6 @@ This icon is designed for a <b>signal bus</b> connector.
           symbols[i] := "e-";
           coeffs[i] := -z_net;
         end if;
-
         annotation (Documentation(info="<html><p>This function reads a chemical formula
   (<code>formula</code>) and returns the symbols (<code>symbols</code>)
   and coefficients (<code>coeffs</code>).  Each element
@@ -755,6 +723,7 @@ This icon is designed for a <b>signal bus</b> connector.
   <code>(symbol, coeff, z, nextindex) = ReadFormula(\"Hg2+2\")</code> returns
   <code>symbol=\"Hg\"</code>, <code>coeff=2</code>, <code>z=2</code>, and <code>nextindex=6</code>.</p>
   </html>"));
+
       end readElement;
 
       function stoich
@@ -837,7 +806,6 @@ This icon is designed for a <b>signal bus</b> connector.
         assert(minabs > 0, "The reaction is ill-posed.
 An unrelated species may be included.");
         nu := round(u[:, end]/minabs);
-
         annotation (Documentation(info="<html><p>This function returns a vector of
   stoichiometric coefficients (<code>nu</code>) that balance a chemical reaction
   among the species given by a vector of chemical formulas (<code>formulas</code>).
@@ -851,6 +819,7 @@ An unrelated species may be included.");
   which indicates the reaction 4e<sup>-</sup> + 4H<sup>+</sup> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O.</p>
   </html>"));
       end stoich;
+
     end Chemistry;
 
     package Polynomial "Polynomial functions"
@@ -872,7 +841,6 @@ An unrelated species may be included.");
                 a .* {if n + i == 0 then ln(x) else 1/(n + i) for i in 1:size(a,
             1)},
                 n + 1) annotation (Inline=true, derivative=dF);
-
         annotation (Documentation(info="<html>
   <p>By definition, the partial derivative of this function with respect to <code>x</code>
   (with <code>a</code> constant)
@@ -901,6 +869,7 @@ An unrelated species may be included.");
                 da .* {if n + i == 0 then ln(x) else 1/(n + i) for i in 1:size(
             a, 1)},
                 n + 1) annotation (Inline=true);
+
       end dF;
 
       function f
@@ -937,6 +906,7 @@ An unrelated species may be included.");
           // parentheses.  The implementation here ("unrolled" only up to the 10th
           // order) allows poly() to be called from within one other function within a
           // model.
+
         end positivePoly;
 
       algorithm
@@ -1005,7 +975,9 @@ An unrelated species may be included.");
                 {a[i]*(n + i - 1)*(n + i - 2)*dx^2,(n + i - 1)*(2*da[i]*dx + a[
             i]*d2x),d2a[i]},
                 n + i - 3) for i in 1:size(a, 1)) annotation (Inline=true);
+
       end d2f;
+
     end Polynomial;
 
     function average "Return the arithmetic mean of numbers"
@@ -1017,6 +989,7 @@ An unrelated species may be included.");
     algorithm
       average := sum(u)/size(u, 1) annotation (Inline=true,Documentation(info="<html><p><b>Example:</b><br>
     <code>average({1,2,3})</code> returns 2.</p></html>"));
+
     end average;
 
     function cartWrap = mod1 (final den=Axis.z)
@@ -1034,7 +1007,6 @@ An unrelated species may be included.");
     algorithm
       n := sum(if u[i] then 1 else 0 for i in 1:size(u, 1))
         annotation (Inline=true);
-
       annotation (Documentation(info="<html><p><b>Example:</b><br>
     <code>countTrue({true,false,true})</code> returns 2.</p></html>"));
     end countTrue;
@@ -1049,6 +1021,7 @@ An unrelated species may be included.");
     algorithm
       Delta := u[1] - u[2] annotation (Inline=true, Documentation(info="<html><p>The translator should automatically
   vectorize (or \"matricize\") this function.  For example, <code>Delta([1,2;3,4])</code> returns <code>{-1,-1}</code>.</p></html>"));
+
     end Delta;
 
     function enumerate
@@ -1129,6 +1102,7 @@ An unrelated species may be included.");
   <code>mod1(4,3)</code> returns
   1.  <code>mod1(3,3)</code> returns 3, but <code>mod(3,3)</code> returns 0 (where
   <code>mod</code> is the built-in modulo operator).</html>"));
+
     end mod1;
 
     function round
@@ -1155,7 +1129,9 @@ An unrelated species may be included.");
       Sigma := u[1] + u[2] annotation (Inline=true,Documentation(info="<html><p>The translator should automatically
   vectorize (or \"matricize\") this function.  For example, <code>Sigma([1,2;3,4])</code> returns <code>{3,7}</code>.
   In contrast, <code>sum([1,2;3,4])</code> returns 10.</p></html>"));
+
     end Sigma;
+
   end Utilities;
 
   type Axis = enumeration(
@@ -1187,4 +1163,5 @@ disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.ModelicaLicens
 FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
 </p></html>"));
+
 end BaseClasses;

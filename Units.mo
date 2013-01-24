@@ -150,6 +150,7 @@ package Units "Constants and units of physical measure"
   <p>For more information, see the documentation in the
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
         Commands(file="resources/scripts/units.mos" "Re-initialize the units."));
+
   end Evaluate;
 
   package Bases "Sets of base constants and units"
@@ -164,7 +165,6 @@ package Units "Constants and units of physical measure"
         final k_F=1,
         final R=1);
       // Note:  k_J = 483597.870e9*sqrt(S*s/x)/m sets kg = x.
-
       annotation (Documentation(info="<html><p>The values of this record result in the following values for the base SI units
   (besides cd = 1, which is the default):
        <ul>
@@ -182,6 +182,7 @@ package Units "Constants and units of physical measure"
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
           Commands(file="resources/scripts/units.mos"
             "Re-initialize the units."));
+
     end ScaledFC;
 
     record AK
@@ -195,7 +196,6 @@ package Units "Constants and units of physical measure"
         final 'cd'=1,
         final k_F=1,
         final R=1);
-
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
   \"FCSys/resources/unit-systems.cdf\"):
   <ul>
@@ -206,6 +206,7 @@ package Units "Constants and units of physical measure"
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
           Commands(file="resources/scripts/units.mos"
             "Re-initialize the units."));
+
     end AK;
 
     record Am
@@ -219,7 +220,6 @@ package Units "Constants and units of physical measure"
         final 'cd'=1,
         final k_F=1,
         final R=1);
-
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
   \"FCSys/resources/unit-systems.cdf\"):
   <ul>
@@ -230,6 +230,7 @@ package Units "Constants and units of physical measure"
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
           Commands(file="resources/scripts/units.mos"
             "Re-initialize the units."));
+
     end Am;
 
     record As
@@ -242,7 +243,6 @@ package Units "Constants and units of physical measure"
         final 'cd'=1,
         final k_F=1,
         final R=1);
-
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
   \"FCSys/resources/unit-systems.cdf\"):
   <ul>
@@ -255,6 +255,7 @@ package Units "Constants and units of physical measure"
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
           Commands(file="resources/scripts/units.mos"
             "Re-initialize the units."));
+
     end As;
 
     record Kmol
@@ -267,7 +268,6 @@ package Units "Constants and units of physical measure"
         final 'cd'=1,
         final k_F=1,
         final R=1);
-
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
   \"FCSys/resources/unit-systems.cdf\"):
   <ul>
@@ -278,6 +278,7 @@ package Units "Constants and units of physical measure"
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
           Commands(file="resources/scripts/units.mos"
             "Re-initialize the units."));
+
     end Kmol;
 
     record Ks
@@ -290,7 +291,6 @@ package Units "Constants and units of physical measure"
         final 'cd'=1,
         final k_F=1,
         final R=1);
-
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
   \"FCSys/resources/unit-systems.cdf\"):
   <ul>
@@ -301,6 +301,7 @@ package Units "Constants and units of physical measure"
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
           Commands(file="resources/scripts/units.mos"
             "Re-initialize the units."));
+
     end Ks;
 
     record mmol
@@ -313,7 +314,6 @@ package Units "Constants and units of physical measure"
         final 'cd'=1,
         final k_F=1,
         final R=1);
-
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
   \"FCSys/resources/unit-systems.cdf\"):
   <ul>
@@ -324,6 +324,7 @@ package Units "Constants and units of physical measure"
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
           Commands(file="resources/scripts/units.mos"
             "Re-initialize the units."));
+
     end mmol;
 
     record ms
@@ -336,7 +337,6 @@ package Units "Constants and units of physical measure"
         final 'cd'=1,
         final k_F=1,
         final R=1);
-
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
   \"FCSys/resources/unit-systems.cdf\"):
   <ul>
@@ -347,6 +347,7 @@ package Units "Constants and units of physical measure"
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
           Commands(file="resources/scripts/units.mos"
             "Re-initialize the units."));
+
     end ms;
 
     record mols
@@ -359,7 +360,6 @@ package Units "Constants and units of physical measure"
         final 'cd'=1,
         final k_F=1,
         final R=1);
-
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
   \"FCSys/resources/unit-systems.cdf\"):
   <ul>
@@ -370,12 +370,12 @@ package Units "Constants and units of physical measure"
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
           Commands(file="resources/scripts/units.mos"
             "Re-initialize the units."));
+
     end mols;
 
     record BasisGaussian
       "<html>Base constants and units for Gaussian units (<i>k</i><sub>A</sub> = <i>k</i><sub>e</sub> = 1)</html>"
       extends U.Bases.Base(final c=1, final R_K=2*pi/alpha);
-
       annotation (Documentation(info="<html><p>Gaussian systems of units impose:
   <ul>
   <li><i>k</i><sub>A</sub> = 1 &rArr; <i>R</i><sub>K</sub>/<i>c</i> = 2&pi;/&alpha;</li>
@@ -383,12 +383,12 @@ package Units "Constants and units of physical measure"
   </ul>
   Together, <i>c</i> = 1 and <i>R</i><sub>K</sub> = 2&pi;/&alpha;</p>  <p>For more information, see the documentation in the
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"));
+
     end BasisGaussian;
 
     record BasisLH
       "<html>Base constants and units for Lorentz-Heaviside units (&mu;<sub>0</sub> = &epsilon;<sub>0</sub> = 1)</html>"
       extends U.Bases.Base(final c=1, final R_K=1/(2*U.alpha));
-
       annotation (Documentation(info="<html><p>Lorentz-Heaviside systems of units impose:
   <ul>
   <li>&mu;<sub>0</sub> = 1 &rArr; <i>R</i><sub>K</sub>/<i>c</i> = 1/(2&alpha;)</li>
@@ -396,6 +396,7 @@ package Units "Constants and units of physical measure"
   </ul>
   Together, <i>c</i> = 1 and <i>R</i><sub>K</sub> = 1/(2&alpha;)</p>  <p>For more information, see the documentation in the
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"));
+
     end BasisLH;
 
     record Base "Base constants and units"
@@ -440,11 +441,11 @@ package Units "Constants and units of physical measure"
       // The unit of temperature (kelvin) is inversely proportional to this
       // value, which should be increased for larger temperature numbers.  If R
       // is set to 1, then temperature is considered to be a potential.
-
       annotation (Documentation(info="<html>For more information, see the notes in the Modelica code and the documentation in the
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
           Commands(file="resources/scripts/units.mos"
             "Re-initialize the units."));
+
     end Base;
     annotation (Documentation(info="<html><p>The International System of Units (SI)-like
   sets in this package are named by listing (in alphabetical order) the two units that are
@@ -453,6 +454,7 @@ package Units "Constants and units of physical measure"
   <p>For more information, see the documentation in the
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
         Commands(file="resources/scripts/units.mos" "Re-initialize the units."));
+
   end Bases;
 
   // -----------------------------------------------------------------------
@@ -757,7 +759,6 @@ package Units "Constants and units of physical measure"
   final constant Q.Number '%'=centi "percent (%)";
   final constant Q.AmountVolumic M=U.mol/U.L "molar";
   final constant Q.Volume cc=U.cm^3 "cubic centimeter";
-
   annotation (Documentation(info="<html><p>When a physical variable is assigned a quantity, it is the product of a number
     and a unit [<a href=\"modelica://FCSys.UsersGuide.References\">BIPM2006</a>].  In <a href=\"modelica://FCSys\">FCSys</a>, units are also assigned numeric values in a consistent
     manner.  A unit
@@ -845,4 +846,5 @@ package Units "Constants and units of physical measure"
   http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
   </p></html>"), Commands(file="resources/scripts/units.mos"
         "Re-initialize the units."));
+
 end Units;

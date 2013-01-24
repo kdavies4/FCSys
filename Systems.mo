@@ -86,6 +86,7 @@ package Systems
             origin={-30,50},
             extent={{-10,-10},{10,10}},
             rotation=270)));
+
     equation
       connect(valveSetpoint.y, fCPlant.exitValvePosAn)
         annotation (Line(points={{-79,-60},{42,-60},{42,2}}, color={0,0,127}));
@@ -120,6 +121,7 @@ package Systems
       annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{100,100}}), graphics));
     end FCPlantNoRecirc;
+
   end Examples;
 
   package FC
@@ -200,6 +202,7 @@ package Systems
       FCSys.Connectors.FaceBus ambientP annotation (Placement(transformation(
               extent={{190,70},{210,90}}), iconTransformation(extent={{-110,50},
                 {-90,70}})));
+
     equation
       v = pinP.v - pinP.v;
 
@@ -393,9 +396,9 @@ package Systems
         input Real qdot_compressor;
         input Real qdot_H2Opump;
         input Real qdot_coolingPump;
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics));
+
       end ActBusIn;
 
       expandable connector ActBusOut
@@ -404,6 +407,7 @@ package Systems
         output SI.Current current_ref;
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics));
+
       end ActBusOut;
 
       expandable connector SenBusIn
@@ -414,6 +418,7 @@ package Systems
         input Q.RotationalVelocity speed;
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics));
+
       end SenBusIn;
 
       expandable connector SenBusOut
@@ -424,6 +429,7 @@ package Systems
         output Q.RotationalVelocity speed;
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics));
+
       end SenBusOut;
 
       model ActArrayToBus
@@ -439,8 +445,8 @@ package Systems
         FCSys.Connectors.RealInput actIN[1] annotation (Placement(
               transformation(extent={{-110,-10},{-90,10}}), iconTransformation(
                 extent={{-60,-20},{-20,20}})));
-      equation
 
+      equation
         connect(actIN[1], actBusOut.current_ref) annotation (Line(
             points={{-100,0},{-4,0},{-4,5.55112e-16},{100,5.55112e-16}},
             color={0,0,127},
@@ -472,8 +478,8 @@ package Systems
         FCSys.Connectors.RealOutput senOut[3] annotation (Placement(
               transformation(extent={{90,-10},{110,10}}), iconTransformation(
                 extent={{20,-20},{60,20}})));
-      equation
 
+      equation
         connect(senBusIn.angle, senOut[3]) annotation (Line(
             points={{-100,5.55112e-16},{0,5.55112e-16},{0,6.66667},{100,6.66667}},
 
@@ -515,7 +521,9 @@ package Systems
                       color={0,0,127},
                       smooth=Smooth.None)}));
       end SenBusToArray;
+
     end Interfaces;
+
   end FC;
 
   package Humidifier
@@ -574,6 +582,7 @@ package Systems
                   origin={0,-60},
                   rotation=90)}), Diagram(coordinateSystem(preserveAspectRatio=
                 true, extent={{-100,-100},{100,100}}), graphics));
+
     end Humidifier;
 
     package Interfaces
@@ -591,9 +600,9 @@ package Systems
         input Real qdot_compressor;
         input Real qdot_H2Opump;
         input Real qdot_coolingPump;
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics));
+
       end ActBusIn;
 
       expandable connector ActBusOut
@@ -602,6 +611,7 @@ package Systems
         output SI.Current current_ref;
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics));
+
       end ActBusOut;
 
       expandable connector SenBusIn
@@ -612,6 +622,7 @@ package Systems
         input Q.RotationalVelocity speed;
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics));
+
       end SenBusIn;
 
       expandable connector SenBusOut
@@ -622,6 +633,7 @@ package Systems
         output Q.RotationalVelocity speed;
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics));
+
       end SenBusOut;
 
       model ActArrayToBus
@@ -637,8 +649,8 @@ package Systems
         FCSys.Connectors.RealInput actIN[1] annotation (Placement(
               transformation(extent={{-110,-10},{-90,10}}), iconTransformation(
                 extent={{-60,-20},{-20,20}})));
-      equation
 
+      equation
         connect(actIN[1], actBusOut.current_ref) annotation (Line(
             points={{-100,0},{-4,0},{-4,5.55112e-16},{100,5.55112e-16}},
             color={0,0,127},
@@ -670,8 +682,8 @@ package Systems
         FCSys.Connectors.RealOutput senOut[3] annotation (Placement(
               transformation(extent={{90,-10},{110,10}}), iconTransformation(
                 extent={{20,-20},{60,20}})));
-      equation
 
+      equation
         connect(senBusIn.angle, senOut[3]) annotation (Line(
             points={{-100,5.55112e-16},{0,5.55112e-16},{0,6.66667},{100,6.66667}},
 
@@ -713,7 +725,9 @@ package Systems
                       color={0,0,127},
                       smooth=Smooth.None)}));
       end SenBusToArray;
+
     end Interfaces;
+
   end Humidifier;
 
   package DCDC
@@ -786,6 +800,7 @@ package Systems
       FCSys.Connectors.FaceBus wireP1 annotation (Placement(transformation(
               extent={{94,-66},{106,-54}}), iconTransformation(extent={{90,-70},
                 {110,-50}})));
+
     equation
       Delta_v1 = chargeP1.v - chargeN1.v;
       Delta_qdot1 = chargeP1.qdot - chargeN1.qdot;
@@ -840,7 +855,6 @@ package Systems
            then
         Delta_qdot1 = k_internal;
       end if;
-
       annotation (Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
@@ -895,8 +909,8 @@ package Systems
         final k_sigma=1,
         final k_Delta_v1=1,
         final k_Delta_qdot1=1);
-
       annotation (Icon(graphics));
+
     end IdealDCDC;
 
     model ElecElec
@@ -1074,9 +1088,9 @@ package Systems
         input Real qdot_compressor;
         input Real qdot_H2Opump;
         input Real qdot_coolingPump;
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics));
+
       end ActBusIn;
 
       expandable connector ActBusOut
@@ -1085,6 +1099,7 @@ package Systems
         output SI.Current current_ref;
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics));
+
       end ActBusOut;
 
       expandable connector SenBusIn
@@ -1095,6 +1110,7 @@ package Systems
         input Q.RotationalVelocity speed;
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics));
+
       end SenBusIn;
 
       expandable connector SenBusOut
@@ -1105,6 +1121,7 @@ package Systems
         output Q.RotationalVelocity speed;
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics));
+
       end SenBusOut;
 
       model ActArrayToBus
@@ -1120,8 +1137,8 @@ package Systems
         FCSys.Connectors.RealInput actIN[1] annotation (Placement(
               transformation(extent={{-110,-10},{-90,10}}), iconTransformation(
                 extent={{-60,-20},{-20,20}})));
-      equation
 
+      equation
         connect(actIN[1], actBusOut.current_ref) annotation (Line(
             points={{-100,0},{-4,0},{-4,5.55112e-16},{100,5.55112e-16}},
             color={0,0,127},
@@ -1153,8 +1170,8 @@ package Systems
         FCSys.Connectors.RealOutput senOut[3] annotation (Placement(
               transformation(extent={{90,-10},{110,10}}), iconTransformation(
                 extent={{20,-20},{60,20}})));
-      equation
 
+      equation
         connect(senBusIn.angle, senOut[3]) annotation (Line(
             points={{-100,5.55112e-16},{0,5.55112e-16},{0,6.66667},{100,6.66667}},
 
@@ -1196,7 +1213,9 @@ package Systems
                       color={0,0,127},
                       smooth=Smooth.None)}));
       end SenBusToArray;
+
     end Interfaces;
+
   end DCDC;
 
   package Pump
@@ -1226,8 +1245,6 @@ package Systems
       FCSys.Connectors.FaceBus pipeN annotation (Placement(transformation(
               extent={{-106,-6},{-94,6}}), iconTransformation(extent={{-110,-10},
                 {-90,10}})));
-    equation
-
       annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{100,100}}), graphics), Icon(coordinateSystem(
               preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
@@ -1244,6 +1261,7 @@ package Systems
                   points={{-90,0},{-20,0}},
                   color={0,0,0},
                   smooth=Smooth.None)}));
+
     end Pump;
 
     package Interfaces
@@ -1254,6 +1272,7 @@ package Systems
         input SI.Current current_ref;
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics));
+
       end ActBusIn;
 
       expandable connector ActBusOut
@@ -1262,6 +1281,7 @@ package Systems
         output SI.Current current_ref;
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics));
+
       end ActBusOut;
 
       expandable connector SenBusIn
@@ -1272,6 +1292,7 @@ package Systems
         input Q.RotationalVelocity speed;
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics));
+
       end SenBusIn;
 
       expandable connector SenBusOut
@@ -1282,6 +1303,7 @@ package Systems
         output Q.RotationalVelocity speed;
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics));
+
       end SenBusOut;
 
       model ActArrayToBus
@@ -1297,8 +1319,8 @@ package Systems
         FCSys.Connectors.RealInput actIN[1] annotation (Placement(
               transformation(extent={{-110,-10},{-90,10}}), iconTransformation(
                 extent={{-60,-20},{-20,20}})));
-      equation
 
+      equation
         connect(actIN[1], actBusOut.current_ref) annotation (Line(
             points={{-100,0},{-4,0},{-4,5.55112e-16},{100,5.55112e-16}},
             color={0,0,127},
@@ -1330,8 +1352,8 @@ package Systems
         FCSys.Connectors.RealOutput senOut[3] annotation (Placement(
               transformation(extent={{90,-10},{110,10}}), iconTransformation(
                 extent={{20,-20},{60,20}})));
-      equation
 
+      equation
         connect(senBusIn.angle, senOut[3]) annotation (Line(
             points={{-100,5.55112e-16},{0,5.55112e-16},{0,6.66667},{100,6.66667}},
 
@@ -1373,7 +1395,9 @@ package Systems
                       color={0,0,127},
                       smooth=Smooth.None)}));
       end SenBusToArray;
+
     end Interfaces;
+
   end Pump;
 
   package Valve
@@ -1431,6 +1455,7 @@ a simple model of a variable pressure loss is needed.</p>
        Adapted from the ThermoPower library.</li>
 </ul>
 </html>"));
+
     end Valve;
 
     package Interfaces
@@ -1449,9 +1474,9 @@ a simple model of a variable pressure loss is needed.</p>
         input Real qdot_compressor;
         input Real qdot_H2Opump;
         input Real qdot_coolingPump;
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics));
+
       end ActBusIn;
 
       expandable connector ActBusOut
@@ -1460,6 +1485,7 @@ a simple model of a variable pressure loss is needed.</p>
         output SI.Current current_ref;
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics));
+
       end ActBusOut;
 
       expandable connector SenBusIn
@@ -1470,6 +1496,7 @@ a simple model of a variable pressure loss is needed.</p>
         input Q.RotationalVelocity speed;
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics));
+
       end SenBusIn;
 
       expandable connector SenBusOut
@@ -1480,6 +1507,7 @@ a simple model of a variable pressure loss is needed.</p>
         output Q.RotationalVelocity speed;
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics));
+
       end SenBusOut;
 
       model ActArrayToBus
@@ -1495,8 +1523,8 @@ a simple model of a variable pressure loss is needed.</p>
         FCSys.Connectors.RealInput actIN[1] annotation (Placement(
               transformation(extent={{-110,-10},{-90,10}}), iconTransformation(
                 extent={{-60,-20},{-20,20}})));
-      equation
 
+      equation
         connect(actIN[1], actBusOut.current_ref) annotation (Line(
             points={{-100,0},{-4,0},{-4,5.55112e-16},{100,5.55112e-16}},
             color={0,0,127},
@@ -1528,8 +1556,8 @@ a simple model of a variable pressure loss is needed.</p>
         FCSys.Connectors.RealOutput senOut[3] annotation (Placement(
               transformation(extent={{90,-10},{110,10}}), iconTransformation(
                 extent={{20,-20},{60,20}})));
-      equation
 
+      equation
         connect(senBusIn.angle, senOut[3]) annotation (Line(
             points={{-100,5.55112e-16},{0,5.55112e-16},{0,6.66667},{100,6.66667}},
 
@@ -1571,7 +1599,9 @@ a simple model of a variable pressure loss is needed.</p>
                       color={0,0,127},
                       smooth=Smooth.None)}));
       end SenBusToArray;
+
     end Interfaces;
+
   end Valve;
 
   package FluidHeater
@@ -1601,6 +1631,7 @@ a simple model of a variable pressure loss is needed.</p>
       FCSys.Systems.Valve.Interfaces.SenBusOut senBusOut annotation (Placement(
             transformation(extent={{30,-70},{50,-50}}), iconTransformation(
               extent={{10,-90},{30,-70}})));
+
     equation
       connect(fCConvection.matN1, fCConvection.matP1) annotation (Line(
           points={{90,122},{110,122}},
@@ -1644,6 +1675,7 @@ a simple model of a variable pressure loss is needed.</p>
               preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
             graphics));
     end FluidHeater;
+
   end FluidHeater;
 
   package BaseClasses "Base classes (not for direct use)"
@@ -1660,8 +1692,8 @@ a simple model of a variable pressure loss is needed.</p>
         unity "Unity (independent of side 2)")
       "Enumeration defining the right hand side (RHS) variable of an electrical-electrical transformer"
       annotation (Evaluate=true);
-  end BaseClasses;
 
+  end BaseClasses;
   annotation (Documentation(info="<html><p>
 <b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
 Copyright 2007&ndash;2013, Georgia Tech Research Corporation.
@@ -1673,4 +1705,5 @@ disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.ModelicaLicens
 FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
 </p></html>"));
+
 end Systems;

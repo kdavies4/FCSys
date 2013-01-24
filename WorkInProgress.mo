@@ -35,8 +35,8 @@ package WorkInProgress "Incomplete classes under development"
   protected
     FCSys.Connectors.FaceBusInternal xNegative "Positive face along the x axis"
       annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-  equation
 
+  equation
     connect(xNegative.H2.normal, volume.face.normal) annotation (Line(
         points={{5.55112e-16,5.55112e-16},{-6,5.55112e-16},{-6,0},{-10,0},{-10,
             6.10623e-16},{-20,6.10623e-16}},
@@ -178,6 +178,7 @@ package WorkInProgress "Incomplete classes under development"
     Modelica.Blocks.Interfaces.RealInput[nPorts] portsData_height;
     Modelica.Blocks.Interfaces.RealInput[nPorts] portsData_zeta_in;
     Modelica.Blocks.Interfaces.RealInput[nPorts] portsData_zeta_out;
+
   equation
     // Added for FCSys:
     face.normal.rho = (medium.d/medium.MM)*Units.mol/Units.m^3;
@@ -301,7 +302,6 @@ of the modeler. Increase nPorts to add an additional port.
             2.22045e-15}},
         color={191,0,0},
         smooth=Smooth.None));
-
     annotation (
       Documentation(info="<html>
 <p>
@@ -362,9 +362,9 @@ should be used if these values are needed.
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Text(
-            extent={{-150,110},{150,150}},
-            textString="%name",
-            lineColor={0,0,255})}));
+              extent={{-150,110},{150,150}},
+              textString="%name",
+              lineColor={0,0,255})}));
   end ConditionsBaseClassesPartialLumpedVessel;
 
   model ClosedVolume
@@ -379,6 +379,7 @@ should be used if these values are needed.
       vesselArea=pi*(3/4*V)^(2/3),
       heatTransfer(surfaceAreas={4*pi*(3/4*V/pi)^(2/3)}));
     parameter SI.Volume V "Volume";
+
   equation
     Wb_flow = 0;
     for i in 1:nPorts loop
@@ -388,13 +389,13 @@ should be used if these values are needed.
       defaultComponentName="volume",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={0,0,0},
-            fillPattern=FillPattern.Sphere,
-            fillColor={170,213,255}), Text(
-            extent={{-150,12},{150,-18}},
-            lineColor={0,0,0},
-            textString="V=%V")}),
+              extent={{-100,100},{100,-100}},
+              lineColor={0,0,0},
+              fillPattern=FillPattern.Sphere,
+              fillColor={170,213,255}),Text(
+              extent={{-150,12},{150,-18}},
+              lineColor={0,0,0},
+              textString="V=%V")}),
       Documentation(info="<html>
 <p>
 Ideally mixed volume of constant size with two fluid ports and one medium model.
@@ -425,6 +426,7 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
     // in Dymola 7.4.
     annotation (Documentation(info="<html>
   <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+
   end SubRegionsSpeciesSpecies0Amount;
 
   model ConditionsAdaptersSpeciesFluid
@@ -446,13 +448,13 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
     <a href=\"modelica://FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"), Icon(graphics={Line(
-            points={{0,40},{80,40}},
-            color={0,0,255},
-            smooth=Smooth.None), Line(
-            points={{0,60},{0,20}},
-            color={0,0,0},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash)}));
+              points={{0,40},{80,40}},
+              color={0,0,255},
+              smooth=Smooth.None),Line(
+              points={{0,60},{0,20}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash)}));
   end ConditionsAdaptersSpeciesFluid;
 
   model ConditionsAdaptersPhasesIonomer
@@ -461,8 +463,8 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
     extends Modelica.Icons.UnderConstruction;
 
     Conditions.Adapters.Species.Solid Error;
-    FCSys.WorkInProgress.ConditionsAdaptersSpeciesFluid 'H+'(redeclare package Data =
-          FCSys.Characteristics.'H+'.Ionomer, redeclare package Medium =
+    FCSys.WorkInProgress.ConditionsAdaptersSpeciesFluid 'H+'(redeclare package
+        Data = FCSys.Characteristics.'H+'.Ionomer, redeclare package Medium =
           Modelica.Media.IdealGases.SingleGases.H2)
       annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
     // **Use model for H instead.
@@ -480,6 +482,7 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
     Modelica.Electrical.Analog.Interfaces.NegativePin pin
       "Modelica electrical pin" annotation (Placement(transformation(extent={{
               70,30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
+
   equation
     connect('C19HF37O5S-'.face.thermal, face.'C19HF37O5S-'.thermal) annotation
       (Line(
@@ -515,40 +518,36 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
         color={0,127,255},
         smooth=Smooth.None));
     annotation (Placement(transformation(extent={{-10,10},{10,30}})), Icon(
-          graphics={
-          Line(
-            points={{0,60},{0,-60}},
-            color={0,0,0},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash,
-            thickness=0.5),
-          Line(
-            points={{0,0},{-80,0}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{0,40},{80,40}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{0,0},{80,0}},
-            color={191,0,0},
-            smooth=Smooth.None),
-          Line(
-            points={{0,-40},{80,-40}},
-            color={0,127,255},
-            smooth=Smooth.None)}));
+          graphics={Line(
+              points={{0,60},{0,-60}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),Line(
+              points={{0,0},{-80,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{0,40},{80,40}},
+              color={0,0,255},
+              smooth=Smooth.None),Line(
+              points={{0,0},{80,0}},
+              color={191,0,0},
+              smooth=Smooth.None),Line(
+              points={{0,-40},{80,-40}},
+              color={0,127,255},
+              smooth=Smooth.None)}));
   end ConditionsAdaptersPhasesIonomer;
 
   partial model PartialSensor "Partial model for a sensor"
 
-    extends FCSys.BaseClasses.Icons.Sensor;
+    extends Extra.Sensor;
     FCSys.Connectors.RealOutput y "Measurement" annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
           origin={0,-100})));
+
   end PartialSensor;
 
   partial model PartialSensorNonideal
@@ -609,8 +608,8 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
         smooth=Smooth.None));
 
     connect(y, saturation.y) annotation (Line(
-        points={{5.55112e-16,-100},{5.55112e-16,-75},{-1.40998e-15,-75},{
-            -1.40998e-15,-51}},
+        points={{5.55112e-16,-100},{5.55112e-16,-75},{-1.40998e-15,-75},{-1.40998e-15,
+            -51}},
         color={0,0,127},
         smooth=Smooth.None));
     annotation (Icon(coordinateSystem(
@@ -621,4 +620,5 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics));
   end PartialSensorNonideal;
+
 end WorkInProgress;

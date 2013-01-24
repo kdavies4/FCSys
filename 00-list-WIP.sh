@@ -1,7 +1,7 @@
 #!/bin/bash
 # List the work in progress in the *.mo files (besides WorkInProgress.mo).
 #
-# Kevin Davies, 7/13/12
+# Kevin Davies, 7/13/2012
 
 function find_item {
    #grep -c $item --color --exclude WorkInProgress.mo *.mo

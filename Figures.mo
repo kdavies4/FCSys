@@ -19,6 +19,7 @@ package Figures "Graphical layouts for documentation"
       connector Pin
         SI.Voltage v;
         flow SI.Current i;
+
       end Pin;
 
     equation
@@ -26,6 +27,7 @@ package Figures "Graphical layouts for documentation"
       i = (n.i - p.i)/2 "Current through the resistor";
       Deltav = i*r "Transport (Ohm's law)";
       0 = n.i + p.i "Conservation of charge (no storage)";
+
     end ResistorDeclarative;
 
     function ResistorImperative "Electrical resistor in imperative formalism"
@@ -38,6 +40,7 @@ package Figures "Graphical layouts for documentation"
 
     algorithm
       Deltav := i*r "Transport (Ohm's law)";
+
     end ResistorImperative;
 
     package SwitchCausality
@@ -58,6 +61,7 @@ package Figures "Graphical layouts for documentation"
             annotation (Placement(transformation(extent={{0,-10},{20,10}})));
           ImperativeTF_vi imperativeTF_vi
             annotation (Placement(transformation(extent={{0,-50},{20,-30}})));
+
         equation
           connect(pulse.y, declarative_vi.v) annotation (Line(
               points={{-19,6.10623e-16},{-10,6.10623e-16},{-10,40},{-1,40}},
@@ -90,6 +94,7 @@ package Figures "Graphical layouts for documentation"
             annotation (Placement(transformation(extent={{0,-10},{20,10}})));
           ImperativeTF_iv imperativeTF_iv
             annotation (Placement(transformation(extent={{0,-50},{20,-30}})));
+
         equation
           connect(pulse.y, declarative_iv.i) annotation (Line(
               points={{-19,6.10623e-16},{-10,6.10623e-16},{-10,40},{-1,40}},
@@ -134,6 +139,7 @@ package Figures "Graphical layouts for documentation"
                 origin={30,-20})));
           Modelica.Electrical.Analog.Basic.Ground ground
             annotation (Placement(transformation(extent={{20,-60},{40,-40}})));
+
         equation
           connect(res2.p, res1.p) annotation (Line(
               points={{60,20},{60,30},{30,30},{30,20}},
@@ -160,6 +166,7 @@ package Figures "Graphical layouts for documentation"
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
                   ={{-80,-60},{80,60}}), graphics));
         end Declarative;
+
       end Examples;
       extends Modelica.Icons.Package;
 
@@ -209,6 +216,7 @@ package Figures "Graphical layouts for documentation"
               extent={{-10,10},{10,-10}},
               rotation=270,
               origin={-20,10})));
+
       equation
         connect(res2.p, res1.p) annotation (Line(
             points={{60,20},{60,30},{30,30},{30,20}},
@@ -257,7 +265,6 @@ package Figures "Graphical layouts for documentation"
                 {-20,-10}},
             color={0,0,255},
             smooth=Smooth.None));
-
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-80,-60},{80,60}}), graphics));
       end Declarative_vi;
@@ -308,6 +315,7 @@ package Figures "Graphical layouts for documentation"
               extent={{-10,10},{10,-10}},
               rotation=270,
               origin={-20,10})));
+
       equation
         connect(currentSource.i, i) annotation (Line(
             points={{-47,-20},{-70,-20}},
@@ -383,6 +391,7 @@ package Figures "Graphical layouts for documentation"
           annotation (Placement(transformation(extent={{20,50},{40,70}})));
         Modelica.Blocks.Math.Gain res2(k=R2)
           annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+
       equation
         connect(diff1.y, res1.u) annotation (Line(
             points={{-39,60},{-22,60}},
@@ -455,6 +464,7 @@ package Figures "Graphical layouts for documentation"
       model Imperative_iv "Imperative circuit with current in, voltage out"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
+
       public
         FCSys.Connectors.RealInput i annotation (Placement(transformation(
                 extent={{-100,20},{-80,40}}), iconTransformation(extent={{-120,
@@ -476,6 +486,7 @@ package Figures "Graphical layouts for documentation"
           annotation (Placement(transformation(extent={{50,-40},{30,-20}})));
         Modelica.Blocks.Math.Gain res2(k=R2)
           annotation (Placement(transformation(extent={{-10,-80},{10,-60}})));
+
       equation
         connect(res2.u, ind.y) annotation (Line(
             points={{-12,-70},{-20,-70},{-20,-30},{-11,-30}},
@@ -554,6 +565,7 @@ package Figures "Graphical layouts for documentation"
         Modelica.Blocks.Continuous.TransferFunction transferFunction(a={R1*L*C,
               R1*R2*C + L,R2}, b={-L*C,-(R1 + R2)*C,-1})
           annotation (Placement(transformation(extent={{-10,20},{10,40}})));
+
       equation
         connect(v, transferFunction.u) annotation (Line(
             points={{-90,30},{-12,30}},
@@ -571,6 +583,7 @@ package Figures "Graphical layouts for documentation"
         "Equivalent transfer function for voltage in, current out"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
+
       public
         FCSys.Connectors.RealInput i annotation (Placement(transformation(
                 extent={{-100,20},{-80,40}}), iconTransformation(extent={{-120,
@@ -581,6 +594,7 @@ package Figures "Graphical layouts for documentation"
         Modelica.Blocks.Continuous.TransferFunction transferFunction(b={R1*L*C,
               R1*R2*C + L,R2}, a={-L*C,-(R1 + R2)*C,-1})
           annotation (Placement(transformation(extent={{-10,20},{10,40}})));
+
       equation
         connect(transferFunction.y, v) annotation (Line(
             points={{11,30},{90,30}},
@@ -603,8 +617,11 @@ package Figures "Graphical layouts for documentation"
           parameter SI.Resistance R2=100 "Resistance at temperature T_ref";
           parameter SI.Inductance L=0.1 "Inductance";
           parameter SI.Capacitance C=0.01 "Capacitance";
+
         end Parameters;
+
       end BaseClasses;
+
     end SwitchCausality;
 
     package Cascade "Examples showing cascaded electrical circuits"
@@ -626,6 +643,7 @@ package Figures "Graphical layouts for documentation"
             annotation (Placement(transformation(extent={{0,-30},{20,-10}})));
           ImperativeABIncorrect imperativeABIncorrect
             annotation (Placement(transformation(extent={{0,-70},{20,-50}})));
+
         equation
           connect(declarativeAB.vIn, pulse.y) annotation (Line(
               points={{-1,60},{-10,60},{-10,6.10623e-16},{-19,6.10623e-16}},
@@ -646,6 +664,7 @@ package Figures "Graphical layouts for documentation"
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
                   ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
         end Test;
+
       end Examples;
       extends Modelica.Icons.Package;
 
@@ -680,6 +699,7 @@ package Figures "Graphical layouts for documentation"
               extent={{10,-10},{-10,10}},
               rotation=90,
               origin={10,-20})));
+
       equation
         connect(cap.n, ground.p) annotation (Line(
             points={{-20,-30},{-20,-35},{-20,-35},{-20,-40}},
@@ -749,6 +769,7 @@ package Figures "Graphical layouts for documentation"
               extent={{10,-10},{-10,10}},
               rotation=90,
               origin={50,-20})));
+
       equation
         connect(voltageSource.p, res2.p) annotation (Line(
             points={{-10,-10},{-10,40},{20,40},{20,30}},
@@ -822,6 +843,7 @@ package Figures "Graphical layouts for documentation"
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={20,-20})));
+
       public
         Modelica.Electrical.Analog.Basic.Ground ground
           annotation (Placement(transformation(extent={{-10,-60},{10,-40}})));
@@ -830,6 +852,7 @@ package Figures "Graphical layouts for documentation"
               extent={{10,-10},{-10,10}},
               rotation=90,
               origin={50,-20})));
+
       equation
         connect(voltageSource.p, res1.p) annotation (Line(
             points={{-50,-10},{-50,40},{-20,40},{-20,30}},
@@ -895,6 +918,7 @@ package Figures "Graphical layouts for documentation"
           annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
         Modelica.Blocks.Math.Add KVL1
           annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
+
       equation
         connect(KVL1.y, vOut) annotation (Line(
             points={{-9,6.10623e-16},{-10,6.10623e-16},{-10,5.55112e-16},{10,
@@ -922,7 +946,6 @@ package Figures "Graphical layouts for documentation"
                 -150,5.55112e-16}},
             color={200,0,0},
             smooth=Smooth.None));
-
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-160,-40},{160,40}}), graphics={Rectangle(
                       extent={{-15,7},{15,-7}},
@@ -956,14 +979,17 @@ package Figures "Graphical layouts for documentation"
         FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
                 extent={{140,-10},{160,10}}), iconTransformation(extent={{100,-10},
                   {120,10}})));
+
       public
         Modelica.Blocks.Math.Gain res2(k=1/R2)
           annotation (Placement(transformation(extent={{60,-10},{80,10}})));
+
       public
         Modelica.Blocks.Math.Gain res3(k=R3)
           annotation (Placement(transformation(extent={{100,-10},{120,10}})));
         Modelica.Blocks.Math.Add KVL2(k2=-1, k1=1)
           annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+
       equation
         connect(res3.y, vOut) annotation (Line(
             points={{121,6.10623e-16},{136,6.10623e-16},{136,5.55112e-16},{150,
@@ -992,7 +1018,6 @@ package Figures "Graphical layouts for documentation"
                 6.10623e-16}},
             color={200,0,0},
             smooth=Smooth.None));
-
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-160,-40},{160,40}}), graphics={Rectangle(
                       extent={{-15,7},{15,-7}},
@@ -1041,6 +1066,7 @@ package Figures "Graphical layouts for documentation"
           annotation (Placement(transformation(extent={{0,-10},{-20,10}})));
         Modelica.Blocks.Math.Add KVL2(k2=-1)
           annotation (Placement(transformation(extent={{-60,-50},{-40,-30}})));
+
       equation
         connect(res3.y, vOut) annotation (Line(
             points={{61,-40},{70,-40},{70,40},{90,40}},
@@ -1088,7 +1114,6 @@ package Figures "Graphical layouts for documentation"
             points={{-62,-46},{-70,-46},{-70,-60},{70,-60},{70,-40},{61,-40}},
             color={200,0,0},
             smooth=Smooth.None));
-
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-120,-80},{120,80}}), graphics={Rectangle(
                       extent={{-15,7},{15,-7}},
@@ -1127,14 +1152,17 @@ package Figures "Graphical layouts for documentation"
           annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
         Modelica.Blocks.Math.Add KVL1
           annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
+
       public
         Modelica.Blocks.Math.Gain res2(k=1/R2)
           annotation (Placement(transformation(extent={{60,-10},{80,10}})));
+
       public
         Modelica.Blocks.Math.Gain res3(k=R3)
           annotation (Placement(transformation(extent={{100,-10},{120,10}})));
         Modelica.Blocks.Math.Add KVL2(k2=-1, k1=1)
           annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+
       equation
         connect(ind.y, KVL1.u1) annotation (Line(
             points={{-59,6.10623e-16},{-50,6.10623e-16},{-50,6},{-32,6}},
@@ -1182,7 +1210,6 @@ package Figures "Graphical layouts for documentation"
                 150,5.55112e-16}},
             color={200,0,0},
             smooth=Smooth.None));
-
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-160,-40},{160,40}}), graphics={Rectangle(
                       extent={{-15,7},{15,-7}},
@@ -1218,6 +1245,7 @@ package Figures "Graphical layouts for documentation"
         Modelica.Blocks.Continuous.TransferFunction transferFunction(b={R3}, a=
               {C*R1*(R2 + R3),R1 + R2 + R3})
           annotation (Placement(transformation(extent={{-20,30},{0,50}})));
+
       equation
         connect(transferFunction.y, vOut) annotation (Line(
             points={{1,40},{90,40}},
@@ -1239,9 +1267,13 @@ package Figures "Graphical layouts for documentation"
           parameter SI.Resistance R2=1 "Resistance at temperature T_ref";
           parameter SI.Resistance R3=1 "Resistance at temperature T_ref";
           parameter SI.Capacitance C=100e-3 "Capacitance";
+
         end Parameters;
+
       end BaseClasses;
+
     end Cascade;
+
   end DeclarativeVsImperative;
 
   model EnvironmentIcon
@@ -1249,77 +1281,88 @@ package Figures "Graphical layouts for documentation"
     FCSys.Conditions.Environment Environment
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
     annotation (Diagram(graphics));
+
   end EnvironmentIcon;
 
   model RouterCrossOver
 
     Conditions.Router router(crossOver=true)
       annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
   end RouterCrossOver;
 
   model RouterPassThrough
 
     Conditions.Router router
       annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
   end RouterPassThrough;
 
   model CellIcon
 
     FCSys.Assemblies.Cells.Cell Cell
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
+
   end CellIcon;
 
   model Logo
     extends FCSys.BaseClasses.Icons.Cell;
-
     annotation (Icon(graphics={Rectangle(
               extent={{-100,100},{100,65}},
               fillPattern=FillPattern.Solid,
               fillColor={255,255,255},
               pattern=LinePattern.None,
               lineColor={0,0,0})}));
+
   end Logo;
 
   model AnFPIcon "Anode flow plate"
 
     FCSys.Regions.AnFPs.AnFP AnFP
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
+
   end AnFPIcon;
 
   model AnGDLIcon "Anode gas diffusion layer"
 
     FCSys.Regions.AnGDLs.AnGDL AnGDL
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
+
   end AnGDLIcon;
 
   model AnCLIcon "Anode catalyst layer"
 
     FCSys.Regions.AnCLs.AnCL AnCL
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
+
   end AnCLIcon;
 
   model PEMIcon "Proton exchange membrane"
 
     FCSys.Regions.PEMs.PEM PEM
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
+
   end PEMIcon;
 
   model CaCLIcon "Cathode catalyst layer"
 
     FCSys.Regions.CaCLs.CaCL CaCL
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
+
   end CaCLIcon;
 
   model CaGDLIcon "Cathode gas diffusion layer"
 
     FCSys.Regions.CaGDLs.CaGDL CaGDL
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
+
   end CaGDLIcon;
 
   model CaFPIcon "Cathode flow plate"
 
     FCSys.Regions.CaFPs.CaFP CaFP
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
+
   end CaFPIcon;
 
   model Matrix3D
@@ -1364,6 +1407,7 @@ package Figures "Graphical layouts for documentation"
       inclY=true,
       inclZ=true)
       annotation (Placement(transformation(extent={{10,0},{30,20}})));
+
   equation
     connect(subreg010.yNegative, subreg000.yPositive) annotation (Line(
         points={{-20,20},{-20,-10}},
@@ -1435,6 +1479,7 @@ package Figures "Graphical layouts for documentation"
       inclZ=true,
       inclY=true)
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
+
   end SubregionIcon;
 
   partial model PhaseIcon
@@ -1442,6 +1487,7 @@ package Figures "Graphical layouts for documentation"
     Subregions.Phases.BaseClasses.NullPhase Phase
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
     annotation (structurallyIncomplete=true);
+
   end PhaseIcon;
 
   partial model SpeciesIcon
@@ -1449,24 +1495,28 @@ package Figures "Graphical layouts for documentation"
     FCSys.Subregions.Species.Species Species
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
     annotation (structurallyIncomplete=true);
+
   end SpeciesIcon;
 
   model PhaseBoundaryIcon
 
     FCSys.Subregions.PhaseBoundary PhaseBoundary
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
+
   end PhaseBoundaryIcon;
 
   model ReactionIcon
 
     Subregions.Reaction Reaction
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
+
   end ReactionIcon;
 
   model VolumeIcon
 
     FCSys.Subregions.Volume Volume
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
+
   end VolumeIcon;
 
   package ReactionComparison
@@ -1565,7 +1615,6 @@ package Figures "Graphical layouts for documentation"
 
       // Material conservation
       der(N)/U.s = -nu*Xidot "stoichiometry";
-
       annotation (Icon(graphics={Rectangle(
                   extent={{-100,100},{100,-100}},
                   lineColor={0,0,0},
@@ -1594,7 +1643,6 @@ package Figures "Graphical layouts for documentation"
     equation
       nu*material.rho = 0 - 1 "Equilibrium";
       material.Ndot = nu*Xidot "stoichiometry";
-
       annotation (Icon(graphics={Rectangle(
                   extent={{-100,100},{100,-100}},
                   lineColor={0,0,0},
@@ -1649,7 +1697,9 @@ package Figures "Graphical layouts for documentation"
     connector Material "Connector for density-driven reaction"
       Q.AmountVolumic rho(nominal=U.C/U.cc) "Volumetric density";
       flow Q.Current Ndot(nominal=U.A) "Current";
+
     end Material;
+
   end ReactionComparison;
 
   model ConnectorHieararchy
@@ -1657,7 +1707,6 @@ package Figures "Graphical layouts for documentation"
 
     FCSys.Connectors.Face Face annotation (Placement(transformation(extent={{-62,
               -10},{-42,10}}), iconTransformation(extent={{-10,-10},{10,10}})));
-
     annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,
               -60},{120,60}}), graphics={Line(
               points={{70,-2},{92,-24}},
@@ -1918,5 +1967,7 @@ package Figures "Graphical layouts for documentation"
               arrow={Arrow.Filled,Arrow.None},
               origin={9,40},
               rotation=360)}));
+
   end ConnectorHieararchy;
+
 end Figures;

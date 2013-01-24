@@ -3,7 +3,7 @@
 #
 # The first argument is the directory.
 #
-# Created by Kevin Davies, 5/30/12
+# Kevin Davies, 5/30/2012
 
 import re
 import glob
@@ -16,9 +16,10 @@ import os
 rpls = [# Remove empty annotation tags.
         (r'\n? *Diagram\(graphics\), *', ' '),
         (r',\n? *Diagram\(graphics\)', ''),
+        (r'annotation\(Diagram\(graphics\)\);', ''),
         (r'\n? *Icon\(graphics\), *', ' '),
         (r',\n? *Icon\(graphics\)', ''),
-        (r'\n? *Icon\(graphics\), *', ' '),
+        (r'annotation\(Icon\(graphics\)\);', ''),
         (r'\n? *experimentSetupOutput, *', ' '),
         (r',\n? *experimentSetupOutput\)', ')'),
         # Remove spaces on the outside of bold and underline tags.
@@ -37,16 +38,31 @@ rpls = [# Remove empty annotation tags.
         # Remove empty lines above annotations.
         (r'\n+(\n *annotation\()', r'\1'),
         # Use shortcuts for Units and Quantities.
-        (r' FCSys\.Quantities\.', ' Q.'),
-        (r' FCSys\.Units\.', ' U.'),
-        # Don't use 1 when unnecessary.
+        (r' FCSys\.Quantities\.', ' Q.'), # Leading spaces distinguish these from hyperlinks.
+        (r' FCSys\.Units\.([^*])', r' U.\1'),
+        # Don't use factor of 1 if unnecessary.
         (r'=1*U\.', '=U.'),
-        # Use absolute referencing for Connectors.
+        # Use absolute references for Connectors.
         (r' Connectors\.', r' FCSys.Connectors.'),
-        # Sometimes Dymola adds a useless import.
+        # Remove useless import statements.
         (r'import FCSys;\n', ''),
-        # No empty line before "end x;".
-        (r'\n(\n +end )([^; ]+);', r'\1\2;'),
+        # One empty line before "end x;"
+        (r'\n*(\n *end) +(.*;)', r'\n\1 \2'),
+        # unless end if, for, loop, when, or while.
+        (r'\n(\n *end if;)', r'\1'),
+        (r'\n(\n *end for;)', r'\1'),
+        (r'\n(\n *end loop;)', r'\1'),
+        (r'\n(\n *end when;)', r'\1'),
+        (r'\n(\n *end while;)', r'\1'),
+        # No empty line before annotation
+        (r'\n+(\n *annotation)', r'\1'),
+        # One empty line before algorithm, equation, initial equation,
+        # protected, and public but not after.
+        (r'\n*(\n *algorithm\n)\n*', r'\n\1'),
+        (r'\n*(\n *equation\n)\n*', r'\n\1'),
+        (r'\n*(\n *initial equation\n)\n*', r'\n\1'),
+        (r'\n*(\n *protected\n)\n*', r'\n\1'),
+        (r'\n*(\n *public\n)\n*', r'\n\1'),
         # Two spaces after "Note:" and "TODO:".
         ('Note: +([^ ])', r'Note:  \1'),
         ('TODO: +([^ ])', r'TODO:  \1'),

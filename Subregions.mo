@@ -100,7 +100,6 @@ package Subregions
           pattern=LinePattern.None,
           thickness=0.5,
           smooth=Smooth.None));
-
       annotation (
         Placement(transformation(extent={{70,70},{90,90}})),
         experiment(StopTime=10),
@@ -124,10 +123,10 @@ package Subregions
 
       extends Modelica.Icons.UnderConstruction;
       // **fails sim
-
       annotation (experiment(StopTime=1000, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionHOR.mos"));
+
     end SubregionHOR;
 
     model SubregionORR
@@ -151,6 +150,7 @@ package Subregions
       annotation (experiment(StopTime=1000, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionORR.mos"));
+
     end SubregionORR;
 
     model SubregionsH2 "Test a one-dimensional array of subregions"
@@ -211,7 +211,7 @@ package Subregions
       Subregion inclFacesZ=false;
 
       Subregion subregions[n_x](
-        each L={100,1,1}*U.cmm,
+        each L={100,1,1}*U.cm,
         gas(
           each final inclH2=inclH2,
           each final inclH2O=inclH2O,
@@ -235,7 +235,7 @@ package Subregions
         each inclFacesZ=false) if n_x > 0
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       Subregion subregion2(
-        L={100,1,1}*U.cmm,
+        L={100,1,1}*U.mm,
         gas(
           final inclH2=inclH2,
           final inclH2O=inclH2O,
@@ -328,7 +328,6 @@ package Subregions
           pattern=LinePattern.None,
           thickness=0.5,
           smooth=Smooth.None));
-
       annotation (
         Placement(transformation(extent={{70,70},{90,90}})),
         experiment(
@@ -342,10 +341,10 @@ package Subregions
     model SubregionsCAndH2
       "<html>Test a one-dimensional array of subregions with C and H<sub>2</sub></html>"
       extends SubregionsH2('inclC+'=true, environment(analysis=true));
-
       annotation (experiment(StopTime=3, NumberOfIntervals=5000), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionsCAndH2.mos"));
+
     end SubregionsCAndH2;
 
     model SubregionsCAndH2AndH2O
@@ -354,10 +353,10 @@ package Subregions
         'inclC+'=true,
         inclH2=true,
         inclH2O=true);
-
       annotation (experiment(StopTime=8, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionsCAndH2AndH2O.mos"));
+
     end SubregionsCAndH2AndH2O;
 
     model SubregionsCAndN2
@@ -366,10 +365,10 @@ package Subregions
         inclH2=false,
         'inclC+'=true,
         inclN2=true);
-
       annotation (experiment(StopTime=40, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionsCAndN2.mos"));
+
     end SubregionsCAndN2;
 
     model SubregionsCAndO2
@@ -378,13 +377,13 @@ package Subregions
         inclH2=false,
         'inclC+'=true,
         inclO2=true);
-
       annotation (experiment(
           StopTime=25,
           NumberOfIntervals=5000,
           Tolerance=1e-06,
           Algorithm="Dassl"), Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionsCAndO2.mos"));
+
     end SubregionsCAndO2;
 
     model SubregionsC19HF37O5SminusAndH2OAndHplus
@@ -398,6 +397,7 @@ package Subregions
       annotation (experiment(StopTime=150, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionsC19HF37O5SminusAndH2OAndHplus.mos"));
+
     end SubregionsC19HF37O5SminusAndH2OAndHplus;
 
     model SubregionsCAndeminus
@@ -408,10 +408,10 @@ package Subregions
         'incle-'=true,
         environment(analysis=false));
       extends Modelica.Icons.UnderConstruction;
-
       annotation (experiment(Tolerance=1e-06), Commands(file(ensureSimulated=
                 true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionsCAndeminus.mos"));
+
     end SubregionsCAndeminus;
 
     model ThermalConduction "Test thermal conduction (through solid)"
@@ -434,7 +434,6 @@ package Subregions
               T(displayUnit="degC")))),
         redeclare FCSys.Conditions.FaceBus.SubregionClosedAdiabatic bC1,
         redeclare FCSys.Conditions.FaceBus.SubregionClosedAdiabatic bC2);
-
       annotation (Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ThermalConduction.mos"),
           experiment(StopTime=298.15, Algorithm="Dassl"));
@@ -462,7 +461,6 @@ package Subregions
             graphite('C+'(V_IC=0.5*subregion2.V, T(displayUnit="degC")))),
         redeclare FCSys.Conditions.FaceBus.SubregionClosedAdiabatic bC1,
         redeclare FCSys.Conditions.FaceBus.SubregionClosedAdiabatic bC2);
-
       annotation (Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ThermalConductionConvection.mos"),
           experiment(StopTime=200, Algorithm="Dassl"));
@@ -478,14 +476,14 @@ package Subregions
       Reaction reaction(n_spec=3)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       FCSys.Conditions.Chemical.Species species1(redeclare
-          FCSys.Characteristics.'e-'.Graphite Data, material=FCSys.Conditions.Chemical.BaseClasses.BCTypeMaterial.PotentialPerTemperature)
+          FCSys.Characteristics.'e-'.Graphite Data, material=FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMaterial.PotentialPerTemperature)
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={-30,-24})));
 
       FCSys.Conditions.Chemical.Species species2(redeclare
-          FCSys.Characteristics.'H+'.Gas Data, material=FCSys.Conditions.Chemical.BaseClasses.BCTypeMaterial.PotentialPerTemperature)
+          FCSys.Characteristics.'H+'.Gas Data, material=FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMaterial.PotentialPerTemperature)
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
@@ -493,7 +491,8 @@ package Subregions
 
       FCSys.Conditions.Chemical.Species species3(
         redeclare FCSys.Characteristics.H2.Gas Data,
-        material=FCSys.Conditions.Chemical.BaseClasses.BCTypeMaterial.Current,
+        material=FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMaterial.Current,
+
         redeclare Modelica.Blocks.Sources.Ramp materialSpec(height=100*U.A,
             duration=3600e2)) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
@@ -502,6 +501,7 @@ package Subregions
 
       inner FCSys.Conditions.Environment environment(analysis=true)
         annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
+
     equation
       connect(species1.chemical, reaction.chemical[1]) annotation (Line(
           points={{-30,-20},{-30,-10},{5.55112e-16,-10},{5.55112e-16,-0.666667}},
@@ -519,7 +519,6 @@ package Subregions
           points={{30,-20},{30,-10},{5.55112e-16,-10},{5.55112e-16,0.666667}},
           color={208,104,0},
           smooth=Smooth.None));
-
       annotation (experiment(StopTime=36000), Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ReactionRamp.mos"));
     end ReactionRamp;
@@ -538,7 +537,7 @@ package Subregions
       Reaction reaction(final n_lin=n_lin, n_spec=3)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       FCSys.Conditions.Chemical.Species 'e-'(
-        material=FCSys.Conditions.Chemical.BaseClasses.BCTypeMaterial.PotentialPerTemperature,
+        material=FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMaterial.PotentialPerTemperature,
 
         redeclare FCSys.Characteristics.'e-'.Graphite Data,
         final n_lin=n_lin) annotation (Placement(transformation(
@@ -547,7 +546,7 @@ package Subregions
             origin={-30,-24})));
 
       FCSys.Conditions.Chemical.Species 'H+'(
-        material=FCSys.Conditions.Chemical.BaseClasses.BCTypeMaterial.PotentialPerTemperature,
+        material=FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMaterial.PotentialPerTemperature,
 
         redeclare FCSys.Characteristics.'H+'.Ionomer Data,
         final n_lin=n_lin) annotation (Placement(transformation(
@@ -556,7 +555,8 @@ package Subregions
             origin={0,-24})));
 
       FCSys.Conditions.Chemical.Species H2(
-        material=FCSys.Conditions.Chemical.BaseClasses.BCTypeMaterial.Current,
+        material=FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMaterial.Current,
+
         redeclare FCSys.Characteristics.H2.Gas Data,
         final n_lin=n_lin,
         redeclare Modelica.Blocks.Sources.Ramp materialSpec(height=100*U.A,
@@ -567,6 +567,7 @@ package Subregions
 
       inner FCSys.Conditions.Environment environment(analysis=true)
         annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
+
     equation
       connect('e-'.chemical, reaction.chemical[1]) annotation (Line(
           points={{-30,-20},{-30,-10},{5.55112e-16,-10},{5.55112e-16,-0.666667}},
@@ -584,7 +585,6 @@ package Subregions
           points={{30,-20},{30,-10},{5.55112e-16,-10},{5.55112e-16,0.666667}},
           color={208,104,0},
           smooth=Smooth.None));
-
       annotation (experiment(StopTime=100), Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.Reaction.mos"));
     end Reaction;
@@ -605,13 +605,14 @@ package Subregions
         annotation (Placement(transformation(extent={{20,20},{40,40}})));
       replaceable Species.H2.Gas.Fixed species constrainedby Species.Species
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-      FCSys.Conditions.InertDalton.Species inertBC annotation (Placement(
+      FCSys.Conditions.InertDalton.Species inertCondition annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=225,
             origin={20,-20})));
+
     equation
-      connect(inertBC.inert, species.inert) annotation (Line(
+      connect(inertCondition.inert, species.inert) annotation (Line(
           points={{17.1716,-17.1716},{7,-7}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -624,19 +625,19 @@ package Subregions
       extends Modelica.Icons.UnderConstruction;
 
       extends SpeciesH2(redeclare Species.'e-'.Graphite.Fixed species);
-      FCSys.Conditions.Face.BaseClasses.PartialSpecies faceBC(redeclare
+      FCSys.Conditions.Face.BaseClasses.PartialSpecies faceCondition(redeclare
           FCSys.Conditions.Face.Material.Pressure material) annotation (
           Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-24,0})));
+
     equation
-      connect(faceBC.face, species.xNegative) annotation (Line(
+      connect(faceCondition.face, species.xNegative) annotation (Line(
           points={{-20,3.65701e-16},{-14,3.65701e-16},{-14,6.10623e-16},{-10,
               6.10623e-16}},
           color={127,127,127},
           smooth=Smooth.None));
-
       annotation (
         Placement(transformation(extent={{70,70},{90,90}})),
         experiment(StopTime=10),
@@ -858,10 +859,11 @@ package Subregions
     end SubregionsCell;
 
     model SubregionH2PipeTest
-      extends SubregionH2(subregion(L={100,1,1}*U.cm), bC1(gas(H2(redeclare
+      extends SubregionH2(subregion(L={100,1,1}*U.mm), bC1(gas(H2(redeclare
                 FCSys.Conditions.Face.Material.Density normal(redeclare
                   Modelica.Blocks.Sources.Ramp spec(height=U.C/U.cc, offset=
                       298.15*U.K/U.atm))))));
+
     end SubregionH2PipeTest;
 
   end Examples;
@@ -1155,7 +1157,6 @@ package Subregions
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
-
     annotation (
       defaultComponentPrefixes="replaceable",
       Documentation(info="<html><p>Notes:<ul>
@@ -1222,7 +1223,6 @@ package Subregions
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
-
     annotation (
       defaultComponentPrefixes="replaceable",
       Documentation(info="<html><p>Notes:<ul>
@@ -1262,6 +1262,7 @@ package Subregions
     Reaction evaporation(final n_lin=n_lin, n_spec=2) if inclReact and (gas.inclH2O
        and liquid.inclH2O) "Water evaporation/condensation"
       annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
+
   equation
     // Chemical interactions (not shown graphically)
     connect(evaporation.chemical[1], chemical.gas.H2O);
@@ -1405,7 +1406,6 @@ package Subregions
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
-
     annotation (
       defaultComponentPrefixes="replaceable",
       Documentation(info="<html><p>Notes:<ul>
@@ -1968,7 +1968,6 @@ package Subregions
           points={{-7,-7},{-20,-20}},
           color={127,127,127},
           smooth=Smooth.None));
-
       annotation (
         defaultComponentPrefixes="replaceable",
         Documentation(info="<html><p>If C<sup>+</sup> is included (<code>'inclC+'</code>=<code>true</code>),
@@ -2247,7 +2246,6 @@ package Subregions
           points={{-7,-7},{-20,-20}},
           color={127,127,127},
           smooth=Smooth.None));
-
       annotation (
         defaultComponentPrefixes="replaceable",
         Documentation(info="<html><p>If C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> is included
@@ -2358,7 +2356,6 @@ package Subregions
           points={{-7,-7},{-20,-20}},
           color={127,127,127},
           smooth=Smooth.None));
-
       annotation (
         defaultComponentPrefixes="replaceable",
         Documentation(info="<html><p>For information, see the
@@ -2521,7 +2518,6 @@ package Subregions
             points={{12,-12},{20,-20}},
             color={72,90,180},
             smooth=Smooth.None));
-
         annotation (Documentation(info="<html><p>If one of the species has <code>setTemp = true</code>, then
     <code>initTemp</code> should be set to <code>false</code>.
     Likewise, if one of the species has <code>setVelX = true</code>,
@@ -2537,60 +2533,54 @@ package Subregions
 
 <p>Notes:<ul>
   <li>The x-axis component of linear momentum is included by default.  At least one component must be included.</li></ul></html>"),
-            Icon(graphics={
-              Ellipse(
-                extent={{-40,100},{40,20}},
-                lineColor={127,127,127},
-                startAngle=30,
-                endAngle=149,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{20,-4},{100,-84}},
-                lineColor={127,127,127},
-                startAngle=270,
-                endAngle=390,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{-100,-4},{-20,-84}},
-                lineColor={127,127,127},
-                startAngle=149,
-                endAngle=270,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Polygon(
-                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
-                    94.5,-24},{60,-84}},
-                pattern=LinePattern.None,
-                fillPattern=FillPattern.Sphere,
-                smooth=Smooth.None,
-                fillColor={225,225,225},
-                lineColor={0,0,0}),
-              Line(
-                points={{-60,-84},{60,-84}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{34.5,80},{94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{-34.5,80},{-94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+            Icon(graphics={Ellipse(
+                      extent={{-40,100},{40,20}},
+                      lineColor={127,127,127},
+                      startAngle=30,
+                      endAngle=149,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{20,-4},{100,-84}},
+                      lineColor={127,127,127},
+                      startAngle=270,
+                      endAngle=390,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{-100,-4},{-20,-84}},
+                      lineColor={127,127,127},
+                      startAngle=149,
+                      endAngle=270,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Polygon(
+                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
+                  80},{94.5,-24},{60,-84}},
+                      pattern=LinePattern.None,
+                      fillPattern=FillPattern.Sphere,
+                      smooth=Smooth.None,
+                      fillColor={225,225,225},
+                      lineColor={0,0,0}),Line(
+                      points={{-60,-84},{60,-84}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{34.5,80},{94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{-34.5,80},{-94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end NullPhase;
+
     end BaseClasses;
+
   end Phases;
 
   package Species
@@ -2613,7 +2603,6 @@ package Subregions
           parameter Q.NumberAbsolute k_R(final nominal=1) = 1
             "<html>Adjustment factor for thermal resistivity (<i>k</i><sub><i>R</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="C",
@@ -2624,16 +2613,15 @@ package Subregions
                     {100,100}}), graphics),
             Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics={Text(
-                  extent={{-150,90},{-118,52}},
-                  lineColor={0,0,255},
-                  textString="%t.test")}));
+                          extent={{-150,90},{-118,52}},
+                          lineColor={0,0,255},
+                          textString="%t.test")}));
 
         end Calibrated;
 
         model Correlated "Correlated properties"
           extends SpeciesSolid(redeclare replaceable package Data =
                 FCSys.Characteristics.'C+'.Graphite, R=Data.R(T));
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="C",
@@ -2663,7 +2651,6 @@ package Subregions
           // Note:  Parameter expressions (e.g., involving environment.T) are not used
           // here since they would render the parameters unadjustable in Dymola 7.4.
           // A similar note applies to the other species.
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="C",
@@ -2714,8 +2701,11 @@ package Subregions
   </table>
 
   <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+
         end Fixed;
+
       end Graphite;
+
     end 'C+';
 
     package 'C19HF37O5S-'
@@ -2744,19 +2734,18 @@ package Subregions
         model Correlated "Correlated properties"
           extends SpeciesSolid(redeclare replaceable package Data =
                 FCSys.Characteristics.'C19HF37O5S-'.Ionomer, R=Data.R(T));
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="C19HF37O5S",
             Documentation(info=
                   "<html><p>For information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+
         end Correlated;
 
         model Fixed "Fixed properties"
           extends SpeciesSolid(redeclare replaceable package Data =
                 FCSys.Characteristics.'C19HF37O5S-'.Ionomer, redeclare
               parameter Q.ResistivityThermal R=Data.R());
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="C19HF37O5S",
@@ -2771,8 +2760,11 @@ package Subregions
   </ul>
   </p><p>For more information, see the
     <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+
         end Fixed;
+
       end Ionomer;
+
     end 'C19HF37O5S-';
 
     package 'e-' "<html>e<sup>-</sup></html>"
@@ -2796,12 +2788,12 @@ package Subregions
           parameter Q.NumberAbsolute k_R(final nominal=1) = 1
             "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S&#775;</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'e-'",
             Documentation(info=
                   "<html><p>For information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+
         end Calibrated;
 
         model Correlated "Correlated properties"
@@ -2811,12 +2803,12 @@ package Subregions
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'e-'",
             Documentation(info=
                   "<html><p>For information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+
         end Correlated;
 
         model Fixed "Fixed properties"
@@ -2826,7 +2818,6 @@ package Subregions
             redeclare parameter Q.CompressibilityDynamic Xi=Data.Xi(),
             redeclare parameter Q.FluidityDynamic F=Data.F(),
             redeclare parameter Q.ResistivityThermal R=Data.R());
-
           annotation (
             group="Material properties",
             defaultComponentPrefixes="replaceable",
@@ -2837,7 +2828,9 @@ package Subregions
             Diagram(graphics));
 
         end Fixed;
+
       end Graphite;
+
     end 'e-';
 
     package 'H+' "<html>H<sup>+</sup></html>"
@@ -2863,7 +2856,6 @@ package Subregions
           parameter Q.NumberAbsolute k_R(final nominal=1) = 1
             "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S&#775;</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'H+'",
@@ -2878,6 +2870,7 @@ package Subregions
     </ol></p>
 
   <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+
         end Calibrated;
 
         model Correlated "Correlated properties"
@@ -2889,7 +2882,6 @@ package Subregions
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'H+'",
@@ -2904,6 +2896,7 @@ package Subregions
     </ol></p>
 
     <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+
         end Correlated;
 
         model Fixed "Fixed properties"
@@ -2918,7 +2911,6 @@ package Subregions
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(0.1661*U.W));
           // **temp initmeth (if keep it, copy to other models)
           // See the documentation for a table of values.
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'H+'",
@@ -2996,8 +2988,11 @@ package Subregions
   </table>
 
 </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+
         end Fixed;
+
       end Ionomer;
+
     end 'H+';
 
     package H2 "<html>H<sub>2</sub></html>"
@@ -3021,7 +3016,6 @@ package Subregions
           parameter Q.NumberAbsolute k_R(final nominal=1) = 1
             "<html>Adjustment factor for thermal resistivity (<i>k</i><sub><i>R</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2",
@@ -3029,6 +3023,7 @@ package Subregions
     <li>Ideal gas</li>
           </ol>
           </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+
         end Calibrated;
 
         model Correlated "Correlated properties"
@@ -3038,7 +3033,6 @@ package Subregions
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2",
@@ -3046,6 +3040,7 @@ package Subregions
     <li>Ideal gas</li>
           </ol>
           </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+
         end Correlated;
 
         model Fixed "Fixed properties"
@@ -3056,7 +3051,6 @@ package Subregions
             redeclare parameter Q.FluidityDynamic F=1/(89.6e-7*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(183e-3*U.W));
           // See the documentation for a table of values.
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2",
@@ -3118,7 +3112,9 @@ and <code>R=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas 
             Diagram(graphics));
 
         end Fixed;
+
       end Gas;
+
     end H2;
 
     package H2O "<html>H<sub>2</sub>O</html>"
@@ -3142,7 +3138,6 @@ and <code>R=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas 
           parameter Q.NumberAbsolute k_R(final nominal=1) = 1
             "<html>Adjustment factor for thermal resistivity (<i>k</i><sub><i>R</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2O",
@@ -3150,6 +3145,7 @@ and <code>R=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas 
     <li>Ideal gas</li>
           </ol>
           </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+
         end Calibrated;
 
         model Correlated "Correlated properties"
@@ -3159,7 +3155,6 @@ and <code>R=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas 
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2O",
@@ -3167,6 +3162,7 @@ and <code>R=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas 
     <li>Ideal gas</li>
           </ol>
           </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+
         end Correlated;
 
         model Fixed "Fixed properties"
@@ -3178,7 +3174,6 @@ and <code>R=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas 
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(19.6e-3*U.W));
 
           // See the documentation for tables of values.
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2O",
@@ -3289,7 +3284,9 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
 <br>
 
   </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+
         end Fixed;
+
       end Gas;
 
       package Ionomer "<html>H<sub>2</sub>O in ionomer</html>"
@@ -3312,7 +3309,6 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
           parameter Q.NumberAbsolute k_R(final nominal=1) = 1
             "<html>Adjustment factor for thermal resistivity (<i>k</i><sub><i>R</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2O",
@@ -3320,6 +3316,7 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
     <li>Ideal gas</li>
           </ol>
           </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+
         end Calibrated;
 
         model Correlated "Correlated properties"
@@ -3338,6 +3335,7 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
     <li>Ideal gas</li>
           </ol>
           </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+
         end Correlated;
 
         model Fixed "Fixed properties"
@@ -3359,7 +3357,9 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
     </ol></p>
 
   </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+
         end Fixed;
+
       end Ionomer;
 
       package Liquid "<html>H<sub>2</sub>O liquid</html>"
@@ -3381,12 +3381,12 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
           parameter Q.NumberAbsolute k_R(final nominal=1) = 1
             "<html>Adjustment factor for thermal resistivity (<i>k</i><sub><i>R</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2O",
             Documentation(info="<html>
     <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+
         end Calibrated;
 
         model Correlated "Correlated properties"
@@ -3396,12 +3396,12 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2O",
             Documentation(info="<html>
          <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+
         end Correlated;
 
         model Fixed "Fixed properties"
@@ -3413,7 +3413,6 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(613e-3*U.W));
 
           // See the documentation for tables of values.
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2O",
@@ -3500,8 +3499,11 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
 <br>
 
   <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+
         end Fixed;
+
       end Liquid;
+
     end H2O;
 
     package N2 "<html>N<sub>2</sub></html>"
@@ -3525,7 +3527,6 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
           parameter Q.NumberAbsolute k_R(final nominal=1) = 1
             "<html>Adjustment factor for thermal resistivity (<i>k</i><sub><i>R</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="N2",
@@ -3533,6 +3534,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
     <li>Ideal gas</li>
           </ol>
           </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+
         end Calibrated;
 
         model Correlated "Correlated properties"
@@ -3542,7 +3544,6 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="N2",
@@ -3550,6 +3551,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
     <li>Ideal gas</li>
           </ol>
           </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+
         end Correlated;
 
         model Fixed "Fixed properties"
@@ -3571,7 +3573,6 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(25.9e-3*U.W));
 
           // See the documentation for a table of values.
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="N2",
@@ -3619,8 +3620,11 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
   <p>The dynamic fluidity of air at 15.0 &deg;C and 1 atm is given by
        <code>F=1/(178e-7*U.Pa*U.s)</code>
    (<a href=\"http://en.wikipedia.org/wiki/Viscosity\">http://en.wikipedia.org/wiki/Viscosity</a>).</p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+
         end Fixed;
+
       end Gas;
+
     end N2;
 
     package O2 "<html>O<sub>2</sub></html>"
@@ -3651,6 +3655,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
     <li>Ideal gas</li>
           </ol>
           </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+
         end Calibrated;
 
         model Correlated "Correlated properties"
@@ -3660,7 +3665,6 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="O2",
@@ -3668,6 +3672,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
     <li>Ideal gas</li>
           </ol>
           </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+
         end Correlated;
 
         model Fixed "Fixed properties"
@@ -3679,7 +3684,6 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(26.8e-3*U.W));
 
           // See the documentation for a table of values.
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="O2",
@@ -3728,8 +3732,11 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
 <tr><td>1300</td><td>1.125e3</td><td>1/588.4e-7</td><td>1/87.1e-3</td></tr>
   </table>
 </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+
         end Fixed;
+
       end Gas;
+
     end O2;
 
     model SpeciesSolid "Solid species (inert and stagnant)"
@@ -3744,7 +3751,6 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         final derphi_IC,
         final I_IC,
         final derI_IC);
-
       annotation (Documentation(info="<html><p>Assumptions:<ol>
   <li>Zero dynamic compressibility (&rArr; uniform current)</li>
   <li>Zero dynamic fluidity (&rArr; no shearing)</li></ol>
@@ -3758,6 +3764,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
   to <code>false</code>, which will set the current and transverse components of velocity to zero.</p>
 
   <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+
     end SpeciesSolid;
 
     model SpeciesIncompressible "Incompressible species"
@@ -3766,6 +3773,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
       // species.
       annotation (Documentation(info="<html>
   <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+
     end SpeciesIncompressible;
 
     model Species
@@ -4348,6 +4356,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
                 {-60,-60}})));
 
       // Geometric parameters
+
     protected
       final parameter Q.Length Lstar_trans[Axis]=k .* A ./ L
         "Effective cross-sectional area per length";
@@ -4915,14 +4924,14 @@ Choose a condition besides None.");
             extent={{-100,-100},{100,100}},
             initialScale=0.1), graphics),
         Icon(graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={127,127,127},
-              pattern=LinePattern.Dash,
-              fillColor={225,225,225},
-              fillPattern=FillPattern.Solid), Text(
-              extent={{-100,20},{100,60}},
-              textString="%name",
-              lineColor={0,0,0})}));
+                  extent={{-100,100},{100,-100}},
+                  lineColor={127,127,127},
+                  pattern=LinePattern.Dash,
+                  fillColor={225,225,225},
+                  fillPattern=FillPattern.Solid),Text(
+                  extent={{-100,20},{100,60}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
     end Species;
 
     package BaseClasses "Base classes (not for direct use)"
@@ -4956,7 +4965,9 @@ Choose a condition besides None.");
           Current "Initialize the current.",
           CurrentRate "Initialize the rate of ditto.")
         "Methods of initializing linear momentum";
+
     end BaseClasses;
+
   end Species;
 
   model PhaseBoundary
@@ -5344,6 +5355,7 @@ Check the chemical formulas and the specific masses of the species.");
       Volume volume(final n_lin=n_lin, final V=V)
         "Model to establish space for species"
         annotation (Placement(transformation(extent={{-16,-16},{16,16}})));
+
     protected
       final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
         "Number of components of linear momentum" annotation (Evaluate=true);
@@ -5445,9 +5457,10 @@ Check the chemical formulas and the specific masses of the species.");
               points={{40,40},{16,16}},
               color={127,127,127},
               smooth=Smooth.None)}));
-    end PartialSubregion;
-  end BaseClasses;
 
+    end PartialSubregion;
+
+  end BaseClasses;
   annotation (Documentation(info="<html>
 <p>
 <b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
@@ -5461,4 +5474,5 @@ FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
 </p>
 </html>"));
+
 end Subregions;

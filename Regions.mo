@@ -58,8 +58,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           'incle-'=true,
           'C+'(thermal(spec(k=environment.T))),
           'e-'(thermal(spec(k=environment.T)), redeclare
-              FCSys.Conditions.Face.Material.Density normal(spec(k(start=U.atm/(298.15
-                      *U.K))))))) annotation (Placement(transformation(
+              FCSys.Conditions.Face.Material.Density normal(spec(k(start=U.atm/
+                      (298.15*U.K))))))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={84,0})));
@@ -236,8 +236,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           'incle-'=true,
           'C+'(thermal(spec(k=environment.T))),
           'e-'(thermal(spec(k=environment.T)), redeclare
-              FCSys.Conditions.Face.Material.Density normal(spec(k(start=U.atm/(298.15
-                      *U.K))))))) annotation (Placement(transformation(
+              FCSys.Conditions.Face.Material.Density normal(spec(k(start=U.atm/
+                      (298.15*U.K))))))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={64,0})));
@@ -280,7 +280,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
-
       annotation (Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.GDLToGDL.mos"),
           experiment(
@@ -328,21 +327,22 @@ package Regions "3D arrays of discrete, interconnected subregions"
           inclH2O=true,
           inclN2=true,
           inclO2=true,
-          O2(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k(start=U.atm
-                      /(298.15*U.K))))),
-          H2O(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k(start=U.atm
-                      /(298.15*U.K)))))),
+          O2(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k(
+                    start=U.atm/(298.15*U.K))))),
+          H2O(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k(
+                    start=U.atm/(298.15*U.K)))))),
         each graphite(
           'inclC+'=true,
           'incle-'=true,
-          'e-'(redeclare FCSys.Conditions.Face.Material.Current normal(redeclare
-                Modelica.Blocks.Sources.Ramp spec(duration=1000, height=-2*U.A)))),
-
+          'e-'(redeclare FCSys.Conditions.Face.Material.Current normal(
+                redeclare Modelica.Blocks.Sources.Ramp spec(duration=1000,
+                  height=-2*U.A)))),
         each ionomer(
           'inclC19HF37O5S-'=true,
           'inclH+'=true,
-          'H+'(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k(start=U.atm
-                      /(298.15*U.K))))))) annotation (Placement(transformation(
+          'H+'(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k(
+                    start=U.atm/(298.15*U.K))))))) annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={44,0})));
@@ -375,7 +375,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
-
       annotation (Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.CLToCL.mos"), experiment(
           StopTime=25,
@@ -424,8 +423,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           'incle-'=true,
           'C+'(thermal(spec(k=environment.T))),
           'e-'(thermal(spec(k=environment.T)),redeclare
-              FCSys.Conditions.Face.Material.Density material))) annotation (Placement(
-            transformation(
+              FCSys.Conditions.Face.Material.Density material))) annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-36,0})));
@@ -540,7 +539,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={240,0,0},
           thickness=0.5,
           smooth=Smooth.None));
-
       annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.AnGDL.mos"));
@@ -582,21 +580,22 @@ package Regions "3D arrays of discrete, interconnected subregions"
         each gas(
           inclH2=true,
           inclH2O=true,
-          H2(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k=U.atm/(
-                    298.15*U.K)))),
-          H2O(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k=U.atm/(
-                    298.15*U.K))))),
+          H2(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k=U.atm
+                    /(298.15*U.K)))),
+          H2O(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k=U.atm
+                    /(298.15*U.K))))),
         each graphite(
           'inclC+'=true,
           'incle-'=true,
-          'e-'(redeclare FCSys.Conditions.Face.Material.Current normal(redeclare
-                Modelica.Blocks.Sources.Ramp spec(duration=1000, height=2*U.A)))),
-
+          'e-'(redeclare FCSys.Conditions.Face.Material.Current normal(
+                redeclare Modelica.Blocks.Sources.Ramp spec(duration=1000,
+                  height=2*U.A)))),
         each ionomer(
           'inclC19HF37O5S-'=true,
           'inclH+'=true,
-          'H+'(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k(start=U.atm
-                      /(298.15*U.K))))))) annotation (Placement(transformation(
+          'H+'(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k(
+                    start=U.atm/(298.15*U.K))))))) annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={4,0})));
@@ -614,7 +613,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={240,0,0},
           thickness=0.5,
           smooth=Smooth.None));
-
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
@@ -650,16 +648,17 @@ package Regions "3D arrays of discrete, interconnected subregions"
       PEMs.PEM pEM(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      FCSys.Conditions.FaceBus.SubregionClosed bC1[n_y, n_z](each gas(inclH2O=true,
-            H2O(thermal(spec(k=environment.T)))), each ionomer(
+      FCSys.Conditions.FaceBus.SubregionClosed bC1[n_y, n_z](each gas(inclH2O=
+              true, H2O(thermal(spec(k=environment.T)))), each ionomer(
           'inclC19HF37O5S-'=true,
           'inclH+'=true,
           Error));
-      FCSys.Conditions.FaceBus.SubregionClosed bC2[n_y, n_z](each gas(inclH2O=true,
-            H2O(thermal(spec(k=environment.T)))), each ionomer(
+      FCSys.Conditions.FaceBus.SubregionClosed bC2[n_y, n_z](each gas(inclH2O=
+              true, H2O(thermal(spec(k=environment.T)))), each ionomer(
           'inclC19HF37O5S-'=true,
           'inclH+'=true,
           Error));
+
     equation
       connect(bC1.face, pEM.xNegative) annotation (Line(
           points={{-20,3.65701e-16},{-20,6.10623e-16},{-10,6.10623e-16}},
@@ -672,7 +671,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
-
       annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.PEM.mos"));
@@ -718,23 +716,24 @@ package Regions "3D arrays of discrete, interconnected subregions"
           inclH2O=true,
           inclN2=true,
           inclO2=true,
-          O2(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k(start=U.atm
-                      /(298.15*U.K))))),
-          H2O(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k(start=U.atm
-                      /(298.15*U.K)))))),
+          O2(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k(
+                    start=U.atm/(298.15*U.K))))),
+          H2O(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k(
+                    start=U.atm/(298.15*U.K)))))),
         each graphite(
           'inclC+'=true,
           'incle-'=true,
-          'C+'(redeclare FCSys.Conditions.Face.Thermal.Temperature thermal(spec(k(
-                    start=298.15*U.K)))),
-          'e-'(redeclare FCSys.Conditions.Face.Material.Current normal(redeclare
-                Modelica.Blocks.Sources.Ramp spec(duration=1000, height=-2*U.A)))),
-
+          'C+'(redeclare FCSys.Conditions.Face.Thermal.Temperature thermal(spec(
+                  k(start=298.15*U.K)))),
+          'e-'(redeclare FCSys.Conditions.Face.Material.Current normal(
+                redeclare Modelica.Blocks.Sources.Ramp spec(duration=1000,
+                  height=-2*U.A)))),
         each ionomer(
           'inclC19HF37O5S-'=true,
           'inclH+'=true,
-          'H+'(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k(start=U.atm
-                      /(298.15*U.K))))))) annotation (Placement(transformation(
+          'H+'(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k(
+                    start=U.atm/(298.15*U.K))))))) annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={44,0})));
@@ -752,7 +751,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
-
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics),
@@ -830,7 +828,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           color={0,0,240},
           thickness=0.5,
           smooth=Smooth.None));
-
       annotation (experiment(StopTime=10, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.CaGDL.mos"));
@@ -879,8 +876,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           'incle-'=true,
           'C+'(thermal(spec(k=environment.T))),
           'e-'(thermal(spec(k=environment.T)),redeclare
-              FCSys.Conditions.Face.Material.Density material))) annotation (Placement(
-            transformation(
+              FCSys.Conditions.Face.Material.Density material))) annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={84,0})));
@@ -906,6 +903,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={60,24})));
+
     equation
       connect(bC1.face, caFP.xNegative) annotation (Line(
           points={{40,3.65701e-16},{42,3.65701e-16},{42,6.10623e-16},{50,
@@ -935,6 +933,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
               ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.CaFP.mos"));
     end CaFP;
+
   end Examples;
 
   package AnFPs "Anode flow plates"
@@ -1065,10 +1064,9 @@ package Regions "3D arrays of discrete, interconnected subregions"
       //         @ 300K, 0.03531 bar (saturation pressure): 9.09e-6 Pa.s
       //         @ 350K, 0.4163 bar (saturation pressure): 1.109e-5 Pa.s
 
-      outer Conditions.Environment environment "Environmental conditions" annotation (
-          Placement(transformation(extent={{40,40},{60,60}}),
+      outer Conditions.Environment environment "Environmental conditions"
+        annotation (Placement(transformation(extent={{40,40},{60,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
-
       annotation (
         defaultComponentPrefixes="replaceable",
         Documentation(info="<html>
@@ -1195,7 +1193,6 @@ used as the inlet. The z axis extends across the width of the channel.</p></html
         L_y=fill(1.543*U.m, 1),
         L_z=fill((5/1.543)*U.mm, 1),
         x=0.011);
-
       annotation (Documentation(info="<html>
   <p>Assumptions:<ol>
 <li>The x-axis length of this region is the thickness
@@ -1218,7 +1215,9 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
 </ul>
 </p>
 </html>"));
+
     end GM;
+
   end AnFPs;
 
   package AnGDLs "Anode gas diffusion layers"
@@ -1295,10 +1294,9 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
       // Teflon: 0.45 W/(m.K) at 400 K [Incropera2002, p. 916]
 
     protected
-      outer Conditions.Environment environment "Environmental conditions" annotation (
-          Placement(transformation(extent={{40,40},{60,60}}),
+      outer Conditions.Environment environment "Environmental conditions"
+        annotation (Placement(transformation(extent={{40,40},{60,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
-
       annotation (
         defaultComponentPrefixes="replaceable",
         Documentation(info="<html>
@@ -1379,6 +1377,7 @@ the z axis extends across the width of the channel.</p></html>"),
                   textString="%name",
                   visible=not inclFacesY,
                   lineColor={0,0,0})}));
+
     end AnGDL;
 
     model Sigracet10BA "<html>SGL Carbon Group Sigracet&reg; 10 BA</html>"
@@ -1392,6 +1391,7 @@ the z axis extends across the width of the channel.</p></html>"),
         defaultComponentName="anGDL",
         Documentation(info="<html><p>For information, see the
     <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> model.</p></html>"));
+
     end Sigracet10BA;
 
     model Sigracet10BB "<html>SGL Carbon Group Sigracet&reg; 10 BB</html>"
@@ -1405,6 +1405,7 @@ the z axis extends across the width of the channel.</p></html>"),
         defaultComponentName="anGDL",
         Documentation(info="<html><p>For information, see the
           <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> model.</p></html>"));
+
     end Sigracet10BB;
 
     model Sigracet10BC "<html>SGL Carbon Group Sigracet&reg; 10 BC</html>"
@@ -1418,6 +1419,7 @@ the z axis extends across the width of the channel.</p></html>"),
         defaultComponentName="anGDL",
         Documentation(info="<html><p>For information, see the
           <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> model.</p></html>"));
+
     end Sigracet10BC;
 
     model Sigracet24BA "<html>SGL Carbon Group Sigracet&reg; 24 BA</html>"
@@ -1431,6 +1433,7 @@ the z axis extends across the width of the channel.</p></html>"),
         defaultComponentName="anGDL",
         Documentation(info="<html><p>For information, see the
           <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> model.</p></html>"));
+
     end Sigracet24BA;
 
     model Sigracet24BC "<html>SGL Carbon Group Sigracet&reg; 24 BC</html>"
@@ -1444,6 +1447,7 @@ the z axis extends across the width of the channel.</p></html>"),
         defaultComponentName="anGDL",
         Documentation(info="<html><p>For information, see the
           <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> model.</p></html>"));
+
     end Sigracet24BC;
 
     model Sigracet25BA "<html>SGL Carbon Group Sigracet&reg; 25 BA</html>"
@@ -1457,6 +1461,7 @@ the z axis extends across the width of the channel.</p></html>"),
         defaultComponentName="anGDL",
         Documentation(info="<html><p>For information, see the
           <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> model.</p></html>"));
+
     end Sigracet25BA;
 
     model Sigracet25BC "<html>SGL Carbon Group Sigracet&reg; 25 BC</html>"
@@ -1470,6 +1475,7 @@ the z axis extends across the width of the channel.</p></html>"),
         defaultComponentName="anGDL",
         Documentation(info="<html><p>For information, see the
           <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> model.</p></html>"));
+
     end Sigracet25BC;
 
     model TorayTGPH030 "Toray Industries TGP-H-030"
@@ -1488,6 +1494,7 @@ the z axis extends across the width of the channel.</p></html>"),
         defaultComponentName="anGDL",
         Documentation(info="<html><p>For information, see the
           <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> model.</p></html>"));
+
     end TorayTGPH030;
 
     model TorayTGPH060 "Toray Industries TGP-H-060"
@@ -1506,6 +1513,7 @@ the z axis extends across the width of the channel.</p></html>"),
         defaultComponentName="anGDL",
         Documentation(info="<html><p>For information, see the
           <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> model.</p></html>"));
+
     end TorayTGPH060;
 
     model TorayTGPH090 "Toray Industries TGP-H-090"
@@ -1524,6 +1532,7 @@ the z axis extends across the width of the channel.</p></html>"),
         defaultComponentName="anGDL",
         Documentation(info="<html><p>For information, see the
           <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> model.</p></html>"));
+
     end TorayTGPH090;
 
     model TorayTGPH120 "Toray Industries TGP-H-030"
@@ -1542,7 +1551,9 @@ the z axis extends across the width of the channel.</p></html>"),
         defaultComponentName="anGDL",
         Documentation(info="<html><p>For information, see the
           <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> model.</p></html>"));
+
     end TorayTGPH120;
+
   end AnGDLs;
 
   package AnCLs "Anode catalyst layers"
@@ -1667,10 +1678,9 @@ the z axis extends across the width of the channel.</p></html>"),
       // (1 - epsilon) is the volume fraction of the conducting solid, and the power of (1 - epsilon)^(3/2) is the area fraction of the conducting solid.
 
     protected
-      outer Conditions.Environment environment "Environmental conditions" annotation (
-          Placement(transformation(extent={{40,40},{60,60}}),
+      outer Conditions.Environment environment "Environmental conditions"
+        annotation (Placement(transformation(extent={{40,40},{60,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
-
       annotation (
         defaultComponentPrefixes="replaceable",
         Documentation(info="<html>
@@ -1779,6 +1789,7 @@ the z axis extends across the width of the channel.</p>
                   textString="%name",
                   visible=not inclFacesY,
                   lineColor={0,0,0})}));
+
     end AnCL;
 
     model AnCGDL "Integrated anode catalyst/gas diffusion layer"
@@ -1788,7 +1799,9 @@ the z axis extends across the width of the channel.</p>
         "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>)</html>";
       annotation (Documentation(info="<html><p>For information, see the
     <a href=\"modelica://FCSys.Regions.AnCLs.AnCL\">AnCL</a> and <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> models</p></html>"));
+
     end AnCGDL;
+
   end AnCLs;
 
   package PEMs "Proton exchange membranes"
@@ -1858,13 +1871,12 @@ the z axis extends across the width of the channel.</p>
       // TODO:  Add proper value of Xi for H+.
 
     protected
-      outer Conditions.Environment environment "Environmental conditions" annotation (
-          Placement(transformation(extent={{40,40},{60,60}}),
+      outer Conditions.Environment environment "Environmental conditions"
+        annotation (Placement(transformation(extent={{40,40},{60,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
 
     initial equation
       //subregions.gas.H2O.N = subregions.ionomer.'C19HF37O5S-'.N*lambda_IC;
-
       annotation (
         defaultComponentPrefixes="replaceable",
         Documentation(info="<html>
@@ -1965,6 +1977,7 @@ the z axis extends across the width of the channel.</p>
         defaultComponentName="pEM",
         Documentation(info="<html><p>For information, see the
           <a href=\"modelica://FCSys.Regions.PEMs.PEM\">PEM</a> model.</p></html>"));
+
     end DuPontN112;
 
     model DuPontN115 "<html>DuPont<sup>TM</sup> Nafion&reg; N-115</html>"
@@ -1977,6 +1990,7 @@ the z axis extends across the width of the channel.</p>
         defaultComponentName="pEM",
         Documentation(info="<html><p>For information, see the
                 <a href=\"modelica://FCSys.Regions.PEMs.PEM\">PEM</a> model.</p></html>"));
+
     end DuPontN115;
 
     model DuPontN117 "<html>DuPont<sup>TM</sup> Nafion&reg; N-115</html>"
@@ -1989,6 +2003,7 @@ the z axis extends across the width of the channel.</p>
         defaultComponentName="pEM",
         Documentation(info="<html><p>For information, see the
                 <a href=\"modelica://FCSys.Regions.PEMs.PEM\">PEM</a> model.</p></html>"));
+
     end DuPontN117;
 
     model DuPontNE1110 "<html>DuPont<sup>TM</sup> Nafion&reg; NE-1110</html>"
@@ -2001,6 +2016,7 @@ the z axis extends across the width of the channel.</p>
         defaultComponentName="pEM",
         Documentation(info="<html><p>For information, see the
                 <a href=\"modelica://FCSys.Regions.PEMs.PEM\">PEM</a> model.</p></html>"));
+
     end DuPontNE1110;
 
     model DuPontNE1135 "<html>DuPont<sup>TM</sup> Nafion&reg; NE-1135</html>"
@@ -2013,6 +2029,7 @@ the z axis extends across the width of the channel.</p>
         defaultComponentName="pEM",
         Documentation(info="<html><p>For information, see the
                 <a href=\"modelica://FCSys.Regions.PEMs.PEM\">PEM</a> model.</p></html>"));
+
     end DuPontNE1135;
 
     model DuPontNRE211 "<html>DuPont<sup>TM</sup> Nafion&reg; NRE-1110</html>"
@@ -2025,6 +2042,7 @@ the z axis extends across the width of the channel.</p>
         defaultComponentName="pEM",
         Documentation(info="<html><p>For information, see the
                 <a href=\"modelica://FCSys.Regions.PEMs.PEM\">PEM</a> model.</p></html>"));
+
     end DuPontNRE211;
 
     model DuPontNRE212 "<html>DuPont<sup>TM</sup> Nafion&reg; NRE-1110</html>"
@@ -2037,7 +2055,9 @@ the z axis extends across the width of the channel.</p>
         defaultComponentName="pEM",
         Documentation(info="<html><p>For information, see the
                 <a href=\"modelica://FCSys.Regions.PEMs.PEM\">PEM</a> model.</p></html>"));
+
     end DuPontNRE212;
+
   end PEMs;
 
   package CaCLs "Cathode catalyst layers"
@@ -2129,10 +2149,9 @@ the z axis extends across the width of the channel.</p>
       final parameter Q.Volume xV=x*V "Gas volume";
 
     protected
-      outer Conditions.Environment environment "Environmental conditions" annotation (
-          Placement(transformation(extent={{40,40},{60,60}}),
+      outer Conditions.Environment environment "Environmental conditions"
+        annotation (Placement(transformation(extent={{40,40},{60,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
-
       annotation (
         defaultComponentPrefixes="replaceable",
         Documentation(info="<html>
@@ -2240,14 +2259,16 @@ the z axis extends across the width of the channel.</p>
                   textString="%name",
                   visible=not inclFacesY,
                   lineColor={0,0,0})}));
+
     end CaCL;
 
     model CaCGDL "Integrated cathode catalyst/gas diffusion layer"
       extends CaCL(L_x=fill((28.7*U.micro*U.m + 0.3*U.mm)/1, 1));
-
       annotation (Documentation(info="<html><p>For information, see the
     <a href=\"modelica://FCSys.Regions.CaCLs.CaCL\">CaCL</a> and <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> models</p></html>"));
+
     end CaCGDL;
+
   end CaCLs;
 
   package CaGDLs "Cathode gas diffusion layers"
@@ -2322,16 +2343,16 @@ the z axis extends across the width of the channel.</p>
             n_y,
             n_z) - x_H2O - x_N2 if environment.analysis and hasSubregions
         "Molar concentration of O2";
+
     protected
       final parameter Q.Volume xV=x*V "Gas volume";
 
       // See AnGDLs.AnGDL for additional notes and data.
 
     protected
-      outer Conditions.Environment environment "Environmental conditions" annotation (
-          Placement(transformation(extent={{40,40},{60,60}}),
+      outer Conditions.Environment environment "Environmental conditions"
+        annotation (Placement(transformation(extent={{40,40},{60,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
-
       annotation (
         defaultComponentPrefixes="replaceable",
         Documentation(info="<html>
@@ -2415,6 +2436,7 @@ the z axis extends across the width of the channel.</p>
                   textString="%name",
                   visible=not inclFacesY,
                   lineColor={0,0,0})}));
+
     end CaGDL;
 
     model Sigracet10BA "<html>SGL Carbon Group Sigracet&reg; 10 BA</html>"
@@ -2428,6 +2450,7 @@ the z axis extends across the width of the channel.</p>
         defaultComponentName="caGDL",
         Documentation(info="<html><p>For information, see the
                 <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> model.</p></html>"));
+
     end Sigracet10BA;
 
     model Sigracet10BB "<html>SGL Carbon Group Sigracet&reg; 10 BB</html>"
@@ -2441,6 +2464,7 @@ the z axis extends across the width of the channel.</p>
         defaultComponentName="caGDL",
         Documentation(info="<html><p>For information, see the
                 <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> model.</p></html>"));
+
     end Sigracet10BB;
 
     model Sigracet10BC "<html>SGL Carbon Group Sigracet&reg; 10 BC</html>"
@@ -2454,6 +2478,7 @@ the z axis extends across the width of the channel.</p>
         defaultComponentName="caGDL",
         Documentation(info="<html><p>For information, see the
                 <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> model.</p></html>"));
+
     end Sigracet10BC;
 
     model Sigracet24BA "<html>SGL Carbon Group Sigracet&reg; 24 BA</html>"
@@ -2467,6 +2492,7 @@ the z axis extends across the width of the channel.</p>
         defaultComponentName="caGDL",
         Documentation(info="<html><p>For information, see the
                 <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> model.</p></html>"));
+
     end Sigracet24BA;
 
     model Sigracet24BC "<html>SGL Carbon Group Sigracet&reg; 24 BC</html>"
@@ -2480,6 +2506,7 @@ the z axis extends across the width of the channel.</p>
         defaultComponentName="caGDL",
         Documentation(info="<html><p>For information, see the
                 <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> model.</p></html>"));
+
     end Sigracet24BC;
 
     model Sigracet25BA "<html>SGL Carbon Group Sigracet&reg; 25 BA</html>"
@@ -2493,6 +2520,7 @@ the z axis extends across the width of the channel.</p>
         defaultComponentName="caGDL",
         Documentation(info="<html><p>For information, see the
                 <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> model.</p></html>"));
+
     end Sigracet25BA;
 
     model Sigracet25BC "<html>SGL Carbon Group Sigracet&reg; 25 BC</html>"
@@ -2506,6 +2534,7 @@ the z axis extends across the width of the channel.</p>
         defaultComponentName="caGDL",
         Documentation(info="<html><p>For information, see the
                 <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> model.</p></html>"));
+
     end Sigracet25BC;
 
     model TorayTGPH030 "Toray Industries TGP-H-030"
@@ -2524,6 +2553,7 @@ the z axis extends across the width of the channel.</p>
         defaultComponentName="caGDL",
         Documentation(info="<html><p>For information, see the
                 <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> model.</p></html>"));
+
     end TorayTGPH030;
 
     model TorayTGPH060 "Toray Industries TGP-H-060"
@@ -2542,6 +2572,7 @@ the z axis extends across the width of the channel.</p>
         defaultComponentName="caGDL",
         Documentation(info="<html><p>For information, see the
                 <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> model.</p></html>"));
+
     end TorayTGPH060;
 
     model TorayTGPH090 "Toray Industries TGP-H-090"
@@ -2560,6 +2591,7 @@ the z axis extends across the width of the channel.</p>
         defaultComponentName="caGDL",
         Documentation(info="<html><p>For information, see the
                 <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> model.</p></html>"));
+
     end TorayTGPH090;
 
     model TorayTGPH120 "Toray Industries TGP-H-030"
@@ -2578,7 +2610,9 @@ the z axis extends across the width of the channel.</p>
         defaultComponentName="caGDL",
         Documentation(info="<html><p>For information, see the
                 <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> model.</p></html>"));
+
     end TorayTGPH120;
+
   end CaGDLs;
 
   package CaFPs "Cathode flow plates"
@@ -2674,6 +2708,7 @@ the z axis extends across the width of the channel.</p>
             n_y,
             n_z) - x_H2O - x_N2 if environment.analysis and hasSubregions
         "Molar concentration of O2";
+
     protected
       final parameter Q.Volume xV=x*V "Gas volume";
 
@@ -2686,10 +2721,9 @@ the z axis extends across the width of the channel.</p>
       // See AnFPs.AnFP for data on additional materials.
 
     protected
-      outer Conditions.Environment environment "Environmental conditions" annotation (
-          Placement(transformation(extent={{40,40},{60,60}}),
+      outer Conditions.Environment environment "Environmental conditions"
+        annotation (Placement(transformation(extent={{40,40},{60,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
-
       annotation (
         defaultComponentPrefixes="replaceable",
         Documentation(info="<html>
@@ -2779,6 +2813,7 @@ used as the inlet. The z axis extends across the width of the channel.</p>
                   textString="%name",
                   visible=not inclFacesY,
                   lineColor={0,0,0})}));
+
     end CaFP;
 
     model GM "General Motors cathodic test flow plate and current collector"
@@ -2789,7 +2824,6 @@ used as the inlet. The z axis extends across the width of the channel.</p>
         L_y=fill(1.028*U.m, 1),
         L_z=fill((5/1.028)*U.mm, 1),
         x=0.011);
-
       annotation (Documentation(info="<html><p>Assumptions:<ol>
 <li>The x-axis length of this region is the thickness
 of the GM-compatible <a href=\"modelica://FCSys/resources/documentation/Regions/CaFPs/GM/Flow field.pdf\">flow field</a>,
@@ -2810,7 +2844,9 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
 [<a href=\"modelica://FCSys.UsersGuide.References\">Entegris2012</a>].</li>
 </ul>
 </p></html>"));
+
     end GM;
+
   end CaFPs;
 
   partial model Region "Base model for a 3D array of subregions"
@@ -3008,7 +3044,6 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
               visible=not inclFacesY,
               lineColor={0,0,0})}));
   end Region;
-
   annotation (Documentation(info="<html>
 <p>
 <b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
@@ -3022,4 +3057,5 @@ FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
 </p>
 </html>"));
+
 end Regions;

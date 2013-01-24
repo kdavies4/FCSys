@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # Clean up the HTML help files by making custom replacements.
 #
-# The first argument is the directory, which defaults to ./.
+# The first argument is the directory, which defaults to the help directory.
 #
-# Created by Kevin Davies, 5/30/2012
+# Kevin Davies, 5/30/2012
 
 import re, glob, sys, os
 
@@ -20,8 +20,8 @@ rpls = [
     ('<(/?)BODY>',  r'<\1body>'),
     ('<(/?)B>',  r'<\1b>'),
     ('<(/?)H([1-9]+)>', r'<\1h\2>'),
-    ('<A HREF=', '<a href='),
-    ('<A NAME=', '<a name='),
+    ('<A +HREF *= *', '<a href='),
+    ('<A +NAME *= *', '<a name='),
     ('</A>', '</a>'),
     ('<HR>', '<hr>'),
     ('<(/?)TABLE>', r'<\1table>'),
@@ -29,11 +29,11 @@ rpls = [
     ('<(/?)TR>', r'<\1tr>'),
     ('<(/?)P>', r'<\1p>'),
     ('<(/?)PRE>', r'<\1pre>'),
-    ('<IMG SRC=',  '<img src='),
+    ('<IMG +SRC *= *',  '<img src='),
     ('</IMG>',  '</img>'),
-    ('<META name', '<meta name'),
+    ('<META +name', '<meta name'),
     ('<(/?)TH *>', r'<\1th>'), # Dymola adds a space.
-    ('<TABLE ', '<table '),
+    ('<TABLE +', '<table '),
     (' BORDER *= *', ' border='),
     (' CELLSPACING *= *', ' cellspacing='),
     (' CELLPADDING *= *', ' cellpadding='),
@@ -45,12 +45,11 @@ rpls = [
     # Remove strange line breaks.
     ('"\n>', '">'),
     # Remove empty groups.
-    (r'&quot;</pre>', r'&quot;'),
-    (r'<pre>&quot;', r'&quot;'),
     ('<pre>\n*</pre>', r''),
+    (r'<pre>&quot;', r'&quot;'),
+    (r'&quot;</pre>', r'&quot;'),
     # Remove extra line spacing.
-    (r' *<br> +(<br>)* *', r'<br><br>'),
-    (r'<br><br>(<br>)+', r'<br><br>'),
+    (r' *<br> *(<br>)+ *', r'<br><br>'),
     # Add the sidebar.
     ('<body><p>', """<body>
 <div class="sidebar">
@@ -89,13 +88,8 @@ rpls = [
   &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated %s.
 </div>
 """ % r'\1'),
-    # Remove horizontal lines.
-    #(r'<hr>', ''),
-    # Remove the internal links.
-    #(r'<a href="FCSys[^>]+\n*[^>]*>(.*)</a>', r'<code>\1</code>'),
-    #(r'<a href="file://[^>]+>(.*)</A>', r'<code>\1</code>'),
     # Remove Dymola tags for the Microsoft office template.
-    ("<!--\[if supportFields\]><span style='mso-element:field-begin'></span>\n<span style='mso-spacerun:yes'></span>XE [A-Za-z.]+<!\[endif\]-->\n<!--\[if supportFields\]><span style='mso-element:field-end'></span><!\[endif\]-->", ''),
+    ("<!--.+'mso-element:field-begin'.+\n.+\n.+'mso-element:field-end'.+-->", ''),
     # Make the local links local again.
     ('<a href="FCSys\.html#Fig([1-3])">', r'<a href="#Fig\1">'),
     # Use relative links again.
@@ -110,19 +104,39 @@ rpls = [
     ('/cell\.png"', '/cell.svg" width=450'),
     ('/FCSys\.Assemblies\.Cells\.CellD\.png"', '/FCSys.Assemblies.Cells.CellD.png" width=600'),
     # Remove some classes from the main page.
-    ('<tr><td><img src="FCSys\.BlocksS\.png" alt="FCSys\.Blocks" width=20  height=20 align=top>&nbsp;<a href="FCSys_Blocks\.html#FCSys\.Blocks">Blocks</a>\n</td><td>[^<]+</td></tr>\n', ''),
-    ('<tr><td><img src="FCSys\.BlocksS\.png" alt="FCSys\.Figures" width=20  height=20 align=top>&nbsp;<a href="FCSys_Figures\.html#FCSys\.Figures">Figures</a>\n</td><td>[^<]+</td></tr>\n', ''),
-    ('<tr><td><img src="FCSys\.SystemsS\.png" alt="FCSys\.Systems" width=20  height=20 align=top>&nbsp;<a href="FCSys_Systems\.html#FCSys\.Systems">Systems</a>\n</td><td>[^<]+</td></tr>\n', ''),
-    ('<tr><td><img src="FCSys\.TestS\.png" alt="FCSys\.Test" width=20  height=20 align=top>&nbsp;<a href="FCSys_Test\.html#FCSys\.Test">Test</a>\n</td><td>[^<]+</td></tr>\n', ''),
-    ('<tr><td><img src="FCSys\.WorkInProgressS\.png" alt="FCSys\.WorkInProgress" width=20  height=20 align=top>&nbsp;<a href="FCSys_WorkInProgress\.html#FCSys\.WorkInProgress">WorkInProgress</a>\n</td><td>[^<]+</td></tr>\n', ''),
+    ('<tr><td><img .+>.+<a .+>Blocks</a>\n?</td><td>.+</td></tr>\n?', ''),
+    ('<tr><td><img .+>.+<a .+>Figures</a>\n?</td><td>.+</td></tr>\n?', ''),
+    ('<tr><td><img .+>.+<a .+>Systems</a>\n?</td><td>.+</td></tr>\n?', ''),
+    ('<tr><td><img .+>.+<a .+>Test</a>\n?</td><td>.+</td></tr>\n?', ''),
+    ('<tr><td><img .+>.+<a .+>WorkInProgress</a>\n?</td><td>.+</td></tr>\n?', ''),
     # Remove nested quotes from meta description.
     ('(<meta name="description" content=")&quot;(.*)&quot;(">)', r'\1\2\3'),
     # Don't escape the quotation marks.
     (r'\\"', '"'),
     # Change the style.
-    ('<style type="text/css"> *\n\*       \{ font-size: 10pt; font-family: Arial,sans-serif; \} *\npre     \{ font-size:  9pt; font-family: Courier,monospace;\} *\nh4      \{ font-size: 10pt; font-weight: bold; color: green; \} *\nh3      \{ font-size: 11pt; font-weight: bold; color: green; \} *\nh2      \{ font-size: 13pt; font-weight: bold; color: green; \} *\naddress \{                  font-weight: normal} *\ntd      \{ solid \#000; vertical-align:top; \} *\nth      \{ solid \#000; vertical-align:top; font-weight: bold; \} *\ntable   \{ solid \#000; border-collapse: collapse;\}\n</style>', '<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="%s">' % stylesheet + '\n<link rel="shortcut icon" href="%s">' % favicon),
+    ("""<style type="text/css"> *
+\*.*
+pre.*
+h4.*
+h3.*
+h2.*
+address.*
+td.*
+th.*
+table.*
+</style>""", '<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="%s">' % stylesheet + '\n<link rel="shortcut icon" href="%s">' % favicon),
     # Remove the custom style for the Modelica license.
-    #('<style type="text/css">\n\*       \{ font-size: 10pt; font-family: Arial,sans-serif; \}\ncode    \{ font-size:  9pt; font-family: Courier,monospace;\}\nh6      \{ font-size: 10pt; font-weight: bold; color: green; \}\nh5      { font-size: 11pt; font-weight: bold; color: green; \}\nh4      \{ font-size: 13pt; font-weight: bold; color: green; \}\naddress \{                  font-weight: normal\}\ntd      \{ solid #000; vertical-align:top; \}\nth      \{ solid #000; vertical-align:top; font-weight: bold; \}\ntable   \{ solid #000; border-collapse: collapse;\}\n</style>', ''),
+    #("""<style type="text/css">
+#\*.*
+#code.*
+#h6.*
+#h5.*
+#h4.*
+#address.*
+#td.*
+#th.*
+#table.*
+#</style>""", ''),
     # Try to replace the internal Modelica references with the proper HTML
     # page.
     (r'\\?"modelica://([^"\\]+)\.([^"\\]+)\.([^"\\]+)\.([^"\\]+)\.([^"\\]+)\.([^"\\]+)\.([^"\\]+)\\?"', r'"\1_\2_\3_\4_\5_\6.html#\1.\2.\3.\4.\5.\6.\7"'),

@@ -10,7 +10,6 @@ package FCSys "Modelica library of fuel cell models"
 // the LaTeX document:
 //------------------------------------------------------------------------
 
-
 extends Modelica.Icons.Package;
 // extends FCSys.Icons.Cell;
 
@@ -37,7 +36,6 @@ import FCSys.BaseClasses.Side;
 import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
 import FCSys.Subregions.Species.BaseClasses.InitMethVelocity;
 import FCSys.Subregions.Species.BaseClasses.InitMethScalar;
-
 
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
@@ -130,11 +128,11 @@ package UsersGuide "User's Guide"
         Please also feel free to use the <a href=\"modelica://FCSys.UsersGuide.Contact\">contact information</a>.</li>
     </ol></p>
     </html>"));
+
     end GettingStarted;
 
   class References "References"
     extends Modelica.Icons.References;
-
     annotation (
       preferedView="info",
       DocumentationClass=true,
@@ -151,10 +149,6 @@ package UsersGuide "User's Guide"
 
     <p>These references are cited throughout the library:</p>
     <table border=0 cellspacing=0 cellpadding=2 class=noBorder>
-    <tr>
-      <td valign=top class=noBorder>[<a name=\"Ashcroft1976\" class=bookmark>Ashcroft1976</a>]</td>
-      <td valign=top class=noBorder>N. W. Ashcroft and N. D. Mermin, <i>Solid State Physics</i>, New York:  Holt, Rinehard and Winston, 1976.</td>
-    </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Avogadro1.03\" class=bookmark>Avogadro1.03</a>]</td>
       <td valign=top class=noBorder>Avogadro: An Open-Source Molecular Builder and Visualization Tool, ver. 1.03. <a href=\"http://avogadro.openmolecules.net\">http://avogadro.openmolecules.net</a>.</td>
@@ -305,6 +299,7 @@ package UsersGuide "User's Guide"
     </tr>
     </table>
     </html>"));
+
     end References;
 
   class Contact "Contact"
@@ -349,6 +344,7 @@ package UsersGuide "User's Guide"
 
 </html>"));
     // TODO:  Create the Modelica page and include it in the first paragraph too.
+
     end Contact;
 
   class ModelicaLicense2 "Modelica License 2"
@@ -912,11 +908,11 @@ a selling fee for a (in this case physical) copy. However, mere
 printing and shipping costs may be recovered.</p>
 </body>
 </html>"));
+
     end ModelicaLicense2;
   annotation (preferedView="info", DocumentationClass=true);
+
   end UsersGuide;
-
-
 annotation (
   uses(Modelica(version="3.2"), Modelica_LinearSystems2(version="2.1")),
   preferedView="info",
@@ -1226,4 +1222,5 @@ margin-right: auto;\" class=noBorder>
   versionBuild=0,
   dateModified="",
   revisionID="");
+
 end FCSys;

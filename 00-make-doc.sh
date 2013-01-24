@@ -1,6 +1,8 @@
 #!/bin/bash
 # Process the help files and upload a version to github pages
 # (http://kdavies4.github.com/FCSys/).
+#
+# Kevin Davies, 1/24/2013
 
 # Remove some of the help files.
 rm -f help/FCSys.Blocks*.png
@@ -21,7 +23,6 @@ branch=`git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3` # Original branch
 stash_msg=`git stash save`
 git checkout gh-pages
 git checkout $branch resources/documentation
-# Note:  This won't catch any of the stashed changes.
 
 # Update the style sheet.
 mv -f resources/documentation/ModelicaDoc.css stylesheets
@@ -34,8 +35,9 @@ do
     cp $f images/
 done
 cp help/*.png images/
-# This replaces resources/documentation/FCSys.Subassemblies.Cells.CellD.png
-# (copied above), which is lower resolution.
+# Note:  This replaces
+# resources/documentation/FCSys.Subassemblies.Cells.CellD.png (copied above),
+# which is lower resolution.
 
 # Copy and process the HTML files.
 cp -f help/*.html ./

@@ -69,6 +69,7 @@ package Blocks "Imperative models (e.g., controllers and observers)"
         B=B,
         C=C,
         L=L) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
     equation
       connect(reference.y, controller.ref) annotation (Line(
           points={{-30,-59},{-30,-55.5},{-30,-51},{-30,-51}},
@@ -135,6 +136,7 @@ package Blocks "Imperative models (e.g., controllers and observers)"
             extent={{10,10},{-10,-10}},
             rotation=270,
             origin={-30,-70})));
+
     equation
       controller.x = aircraft.x;
       connect(controller.act, aircraft.u) annotation (Line(
@@ -150,12 +152,12 @@ package Blocks "Imperative models (e.g., controllers and observers)"
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                 {100,100}}), graphics={Text(
-              extent={{-40,6},{60,0}},
-              lineColor={0,0,255},
-              textString="This example assumes a perfect observer:"), Text(
-              extent={{-40,0},{60,-6}},
-              lineColor={0,0,255},
-              textString="controller.x = aircraft.x")}),
+                  extent={{-40,6},{60,0}},
+                  lineColor={0,0,255},
+                  textString="This example assumes a perfect observer:"),Text(
+                  extent={{-40,0},{60,-6}},
+                  lineColor={0,0,255},
+                  textString="controller.x = aircraft.x")}),
         experiment(StopTime=20),
         Documentation(info="<html>In this example, the states of the plant are fed directly to the controller.  The plant is not observable with the given output (<b>C</b>) matrix, since there are 4 states and the rank of the observability matrix is only 3.
  <p>The matrices of the controller are the discretized version of the plant model in continuous-time.
@@ -1256,6 +1258,7 @@ package Blocks "Imperative models (e.g., controllers and observers)"
             extent={{10,10},{-10,-10}},
             rotation=270,
             origin={-30,-60})));
+
     equation
       connect(observer.x, controller.x) annotation (Line(
           points={{6.10623e-16,-11},{6.10623e-16,-30},{-19,-30}},
@@ -1337,6 +1340,7 @@ package Blocks "Imperative models (e.g., controllers and observers)"
             extent={{10,10},{-10,-10}},
             rotation=270,
             origin={-30,-60})));
+
     equation
       connect(observer.x, controller.x) annotation (Line(
           points={{6.10623e-16,-11},{6.10623e-16,-30},{-19,-30}},
@@ -1420,6 +1424,7 @@ package Blocks "Imperative models (e.g., controllers and observers)"
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-10,-70})));
+
     equation
       connect(observer.x, controller.x) annotation (Line(
           points={{6.10623e-16,-11},{6.10623e-16,-30},{-19,-30}},
@@ -1465,6 +1470,7 @@ assembled system.
 ALT=\"model Examples.Elementary.Pendulum\">
 </html>"));
     end PendulumMPC;
+
   end Examples;
 
   package Continuous
@@ -1528,6 +1534,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
           annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
         FCSys.Blocks.Continuous.Plants.Pendulum pendulum
           annotation (Placement(transformation(extent={{10,-10},{30,10}})));
+
       equation
         connect(ForceProfile.y, pendulum.u[1]) annotation (Line(
             points={{-9,6.10623e-16},{-4.5,6.10623e-16},{-4.5,1.16573e-15},{0,
@@ -1551,6 +1558,7 @@ assembled system.
 ALT=\"model Examples.Elementary.Pendulum\">
 </html>"));
       end Pendulum;
+
     end Examples;
     extends Modelica.Icons.Package;
     package Controllers
@@ -1606,6 +1614,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
               extent={{-10,-10},{10,10}},
               rotation=90,
               origin={0,-30})));
+
       equation
         connect(NbarGain.u, ref) annotation (Line(
             points={{-2.90675e-16,-42},{5.55112e-16,-100}},
@@ -1641,6 +1650,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
                 preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
               graphics));
       end Controller;
+
     end Controllers;
 
     package Observers
@@ -1703,6 +1713,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
         FCSys.Blocks.Math.AddSkipInclIncl addSkipInclIncl2(final isPos2=false,
             final n=n_sen)
           annotation (Placement(transformation(extent={{80,-10},{60,10}})));
+
       equation
         connect(addInclSkipIncl.y, xInt.u) annotation (Line(
             points={{10,-9},{10,-13.5},{10,-19},{10,-19}},
@@ -1776,6 +1787,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
                 preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
               graphics));
       end Observer;
+
     end Observers;
 
     package Plants
@@ -1802,9 +1814,11 @@ ALT=\"model Examples.Elementary.Pendulum\">
         extends FCSys.Blocks.Continuous.Plants.BaseClasses.PartialPlant(final
             n_in=size(B, 2), final n_out=size(C, 1));
         output Real x[size(A, 1)](start=x_0) "State vector";
+
       protected
         final parameter Integer n_x=size(A, 1) "number of states";
         final parameter Integer n_y=size(C, 1) "number of outputs";
+
       initial equation
         if initType == Init.SteadyState then
           der(x)/U.s = zeros(n_x);
@@ -1817,6 +1831,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
                   C,
                   y_0 - D*u);
         end if;
+
       equation
         der(x)/U.s = A*x + B*u;
         y = C*x + D*u;
@@ -1930,6 +1945,7 @@ results in the following equations:
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={60,0})));
+
       equation
         connect(addDisturbance.y, stateSpace.u) annotation (Line(
             points={{-11,6.10623e-16},{-6.25,6.10623e-16},{-6.25,1.27676e-15},{
@@ -1980,10 +1996,10 @@ results in the following equations:
                   {-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
                 preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
               graphics={Rectangle(
-                extent={{-100,-100},{100,100}},
-                lineColor={0,0,127},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid)}));
+                      extent={{-100,-100},{100,100}},
+                      lineColor={0,0,127},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid)}));
       end StateSpaceWNoise;
 
       model Pendulum "Simple pendulum with one revolute joint and one body"
@@ -2015,6 +2031,7 @@ results in the following equations:
           annotation (Placement(transformation(extent={{-40,-90},{-20,-70}})));
         Modelica.Mechanics.Translational.Sources.Force2 force
           annotation (Placement(transformation(extent={{-40,-30},{-20,-10}})));
+
       equation
         connect(damper.flange_b, joint.axis) annotation (Line(points={{40,-40},
                 {50,-40},{50,-60},{30,-60},{30,-70}}, color={0,0,0}));
@@ -2085,45 +2102,39 @@ assembled system.
 <IMG src=\"modelica://Modelica/Resources/Images/MultiBody/Examples/Elementary/Pendulum.png\"
 ALT=\"model Examples.Elementary.Pendulum\">
 </html>"),
-          Icon(graphics={
-              Ellipse(
-                extent={{10,80},{30,60}},
-                lineColor={215,215,215},
-                fillColor={0,0,0},
-                fillPattern=FillPattern.Sphere,
-                lineThickness=0.5),
-              Line(
-                points={{20,70},{0,0}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                thickness=0.5),
-              Line(
-                points={{50,0},{-50,0}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                origin={0,0},
-                rotation=180,
-                thickness=0.5),
-              Polygon(
-                points={{-48,6},{-60,0},{-48,-6},{-48,6}},
-                smooth=Smooth.None,
-                fillColor={0,0,0},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Polygon(
-                points={{6,6},{-6,0},{6,-6},{6,6}},
-                smooth=Smooth.None,
-                fillColor={0,0,0},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None,
-                origin={54,0},
-                rotation=180),
-              Ellipse(
-                extent={{-4,4},{4,-4}},
-                lineColor={0,0,0},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                lineThickness=0.5)}));
+          Icon(graphics={Ellipse(
+                      extent={{10,80},{30,60}},
+                      lineColor={215,215,215},
+                      fillColor={0,0,0},
+                      fillPattern=FillPattern.Sphere,
+                      lineThickness=0.5),Line(
+                      points={{20,70},{0,0}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      thickness=0.5),Line(
+                      points={{50,0},{-50,0}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      origin={0,0},
+                      rotation=180,
+                      thickness=0.5),Polygon(
+                      points={{-48,6},{-60,0},{-48,-6},{-48,6}},
+                      smooth=Smooth.None,
+                      fillColor={0,0,0},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Polygon(
+                      points={{6,6},{-6,0},{6,-6},{6,6}},
+                      smooth=Smooth.None,
+                      fillColor={0,0,0},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None,
+                      origin={54,0},
+                      rotation=180),Ellipse(
+                      extent={{-4,4},{4,-4}},
+                      lineColor={0,0,0},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      lineThickness=0.5)}));
       end Pendulum;
 
       model PendulumDummy
@@ -2138,6 +2149,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
   matrices with have NaN entries that Dymola cannot handle.
   */
         annotation (Diagram(graphics));
+
       end PendulumDummy;
 
       package BaseClasses "Base classes (not for direct use)"
@@ -2150,8 +2162,11 @@ ALT=\"model Examples.Elementary.Pendulum\">
                   ={{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
                   preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
                 graphics));
+
         end PartialPlant;
+
       end BaseClasses;
+
     end Plants;
 
     package Sources
@@ -2173,6 +2188,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
         parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative
           "Smoothness of sample interpolation"
           annotation (Dialog(group="Advanced"));
+
       protected
         final parameter Real mu_internal[n_out]=(if size(mu, 1) == 1 then mu[1]
             *ones(n_out) else mu)
@@ -2184,10 +2200,12 @@ ALT=\"model Examples.Elementary.Pendulum\">
         Real table[n_s, n_out + 1]
           "Matrix of normal random numbers (the first column is time /s)";
         Integer tableID "table identification number";
+
       public
         FCSys.Connectors.RealOutput y[n_out] "Connector of Real output signals"
           annotation (Placement(transformation(extent={{90,-10},{110,10}},
                 rotation=0), iconTransformation(extent={{100,-10},{120,10}})));
+
       equation
         // Interpolate data from the table
         for i in 1:n_out loop
@@ -2226,52 +2244,44 @@ ALT=\"model Examples.Elementary.Pendulum\">
 </ul></p>
 </html>"),
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
-                  100,100}}), graphics={
-              Polygon(
-                points={{-80,98},{-88,76},{-72,76},{-80,98}},
-                lineColor={192,192,192},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid),
-              Line(points={{-80,76},{-80,20}}, color={192,192,192}),
-              Line(points={{-90,50},{82,50}}, color={192,192,192}),
-              Polygon(
-                points={{90,50},{68,58},{68,42},{90,50}},
-                lineColor={192,192,192},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid),
-              Line(
-                points={{-80,26},{-64,72},{-58,16},{-44,104},{-32,30},{-20,56},
-                    {-12,14},{4,114},{6,-12},{18,94},{32,22},{40,90},{56,38},{
-                    60,40}},
-                color={0,0,127},
-                smooth=Smooth.Bezier),
-              Text(
-                extent={{68,42},{92,16}},
-                lineColor={175,175,175},
-                textString="t"),
-              Polygon(
-                points={{0,8},{-8,-14},{8,-14},{0,8}},
-                lineColor={192,192,192},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid),
-              Line(points={{0,-14},{0,-70}}, color={192,192,192}),
-              Polygon(
-                points={{90,-60},{68,-52},{68,-68},{90,-60}},
-                lineColor={192,192,192},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid),
-              Text(
-                extent={{68,-68},{92,-94}},
-                lineColor={175,175,175},
-                textString="x"),
-              Polygon(
-                points={{-60,-60},{-30,-60},{-18,-54},{-12,-40},{-4,-18},{4,-18},
-                    {12,-40},{18,-54},{30,-60},{60,-60},{-60,-60}},
-                lineColor={0,0,127},
-                smooth=Smooth.Bezier,
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid),
-              Line(points={{-90,-60},{82,-60}}, color={192,192,192})}),
+                  100,100}}), graphics={Polygon(
+                      points={{-80,98},{-88,76},{-72,76},{-80,98}},
+                      lineColor={192,192,192},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid),Line(points={{-80,76},{-80,
+                20}}, color={192,192,192}),Line(points={{-90,50},{82,50}},
+                color={192,192,192}),Polygon(
+                      points={{90,50},{68,58},{68,42},{90,50}},
+                      lineColor={192,192,192},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid),Line(
+                      points={{-80,26},{-64,72},{-58,16},{-44,104},{-32,30},{-20,
+                  56},{-12,14},{4,114},{6,-12},{18,94},{32,22},{40,90},{56,38},
+                  {60,40}},
+                      color={0,0,127},
+                      smooth=Smooth.Bezier),Text(
+                      extent={{68,42},{92,16}},
+                      lineColor={175,175,175},
+                      textString="t"),Polygon(
+                      points={{0,8},{-8,-14},{8,-14},{0,8}},
+                      lineColor={192,192,192},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid),Line(points={{0,-14},{0,-70}},
+                color={192,192,192}),Polygon(
+                      points={{90,-60},{68,-52},{68,-68},{90,-60}},
+                      lineColor={192,192,192},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid),Text(
+                      extent={{68,-68},{92,-94}},
+                      lineColor={175,175,175},
+                      textString="x"),Polygon(
+                      points={{-60,-60},{-30,-60},{-18,-54},{-12,-40},{-4,-18},
+                  {4,-18},{12,-40},{18,-54},{30,-60},{60,-60},{-60,-60}},
+                      lineColor={0,0,127},
+                      smooth=Smooth.Bezier,
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid),Line(points={{-90,-60},{82,
+                -60}}, color={192,192,192})}),
           Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics));
       end RandomNormal;
@@ -2291,6 +2301,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
         parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative
           "Smoothness of sample interpolation"
           annotation (Dialog(group="Advanced"));
+
       protected
         final parameter Real x_min_internal[n_out]=(if size(x_min, 1) == 1
              then ones(n_out)*x_min[1] else x_min)
@@ -2302,10 +2313,12 @@ ALT=\"model Examples.Elementary.Pendulum\">
         Real table[n_s, n_out + 1]
           "Matrix of uniform random numbers (the first column is time /s)";
         Integer tableID "table identification number";
+
       public
         FCSys.Connectors.RealOutput y[n_out] "Connector of Real output signals"
           annotation (Placement(transformation(extent={{90,-10},{110,10}},
                 rotation=0), iconTransformation(extent={{100,-10},{120,10}})));
+
       equation
         // Interpolate data from the table
         for i in 1:n_out loop
@@ -2350,54 +2363,45 @@ ALT=\"model Examples.Elementary.Pendulum\">
 </ul></p>
 </html>"),
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
-                  100,100}}), graphics={
-              Polygon(
-                points={{-80,98},{-88,76},{-72,76},{-80,98}},
-                lineColor={192,192,192},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid),
-              Line(points={{-80,76},{-80,20}}, color={192,192,192}),
-              Line(points={{-90,50},{82,50}}, color={192,192,192}),
-              Polygon(
-                points={{90,50},{68,58},{68,42},{90,50}},
-                lineColor={192,192,192},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid),
-              Line(
-                points={{-80,26},{-64,72},{-58,16},{-44,104},{-32,30},{-20,56},
-                    {-12,14},{4,114},{6,-12},{18,94},{32,22},{40,90},{56,38},{
-                    60,40}},
-                color={0,0,127},
-                smooth=Smooth.Bezier),
-              Text(
-                extent={{68,42},{92,16}},
-                lineColor={175,175,175},
-                textString="t"),
-              Polygon(
-                points={{0,8},{-8,-14},{8,-14},{0,8}},
-                lineColor={192,192,192},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid),
-              Line(points={{0,-14},{0,-70}}, color={192,192,192}),
-              Polygon(
-                points={{90,-60},{68,-52},{68,-68},{90,-60}},
-                lineColor={192,192,192},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid),
-              Text(
-                extent={{68,-68},{92,-94}},
-                lineColor={175,175,175},
-                textString="x"),
-              Line(
-                points={{-60,-60},{-60,-36},{60,-36},{60,-60}},
-                color={0,0,127},
-                smooth=Smooth.None),
-              Rectangle(
-                extent={{-60,-36},{60,-60}},
-                lineColor={0,0,127},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid),
-              Line(points={{-90,-60},{82,-60}}, color={192,192,192})}),
+                  100,100}}), graphics={Polygon(
+                      points={{-80,98},{-88,76},{-72,76},{-80,98}},
+                      lineColor={192,192,192},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid),Line(points={{-80,76},{-80,
+                20}}, color={192,192,192}),Line(points={{-90,50},{82,50}},
+                color={192,192,192}),Polygon(
+                      points={{90,50},{68,58},{68,42},{90,50}},
+                      lineColor={192,192,192},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid),Line(
+                      points={{-80,26},{-64,72},{-58,16},{-44,104},{-32,30},{-20,
+                  56},{-12,14},{4,114},{6,-12},{18,94},{32,22},{40,90},{56,38},
+                  {60,40}},
+                      color={0,0,127},
+                      smooth=Smooth.Bezier),Text(
+                      extent={{68,42},{92,16}},
+                      lineColor={175,175,175},
+                      textString="t"),Polygon(
+                      points={{0,8},{-8,-14},{8,-14},{0,8}},
+                      lineColor={192,192,192},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid),Line(points={{0,-14},{0,-70}},
+                color={192,192,192}),Polygon(
+                      points={{90,-60},{68,-52},{68,-68},{90,-60}},
+                      lineColor={192,192,192},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid),Text(
+                      extent={{68,-68},{92,-94}},
+                      lineColor={175,175,175},
+                      textString="x"),Line(
+                      points={{-60,-60},{-60,-36},{60,-36},{60,-60}},
+                      color={0,0,127},
+                      smooth=Smooth.None),Rectangle(
+                      extent={{-60,-36},{60,-60}},
+                      lineColor={0,0,127},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid),Line(points={{-90,-60},{82,
+                -60}}, color={192,192,192})}),
           Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics));
       end RandomUniform;
@@ -2428,6 +2432,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
 <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/1/7:<br/>Original version; copied from Modelica.Blocks.Sources.CombiTimeTable</li>
 </ul></p>
 </html>"), Library="ModelicaExternalC");
+
         end tableTimeInit;
 
         function tableTimeIpo
@@ -2446,6 +2451,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
 <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/1/7:<br/>Original version; copied from Modelica.Blocks.Sources.CombiTimeTable</li>
 </ul></p>
 </html>"), Library="ModelicaExternalC");
+
         end tableTimeIpo;
 
         function tableTimeTmin
@@ -2459,6 +2465,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
 <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/1/7:<br/>Original version; copied from Modelica.Blocks.Sources.CombiTimeTable</li>
 </ul></p>
 </html>"), Library="ModelicaExternalC");
+
         end tableTimeTmin;
 
         function tableTimeTmax
@@ -2472,13 +2479,16 @@ ALT=\"model Examples.Elementary.Pendulum\">
 <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/1/7:<br/>Original version; copied from Modelica.Blocks.Sources.CombiTimeTable</li>
 </ul></p>
 </html>"), Library="ModelicaExternalC");
+
         end tableTimeTmax;
+
       end BaseClasses;
 
       block Constant "Generate constant signal of type Real"
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
         parameter Real k[:] "Constant output value(s)";
         extends FCSys.Blocks.BaseClasses.MO(final n_out=size(k, 1));
+
       equation
         y = k;
         annotation (
@@ -2486,29 +2496,27 @@ ALT=\"model Examples.Elementary.Pendulum\">
           Icon(coordinateSystem(
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
-              grid={2,2}), graphics={
-              Line(points={{-80,68},{-80,-80}}, color={192,192,192}),
-              Polygon(
-                points={{-80,90},{-88,68},{-72,68},{-80,90}},
-                lineColor={192,192,192},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid),
-              Line(points={{-90,-70},{82,-70}}, color={192,192,192}),
-              Polygon(
-                points={{90,-70},{68,-62},{68,-78},{90,-70}},
-                lineColor={192,192,192},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid),
-              Line(points={{-80,0},{80,0}}, color={0,0,0}),
-              Text(
-                extent={{-150,-150},{150,-110}},
-                lineColor={0,0,0},
-                textString="k=%k")}),
+              grid={2,2}), graphics={Line(points={{-80,68},{-80,-80}}, color={
+                192,192,192}),Polygon(
+                      points={{-80,90},{-88,68},{-72,68},{-80,90}},
+                      lineColor={192,192,192},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid),Line(points={{-90,-70},{82,
+                -70}}, color={192,192,192}),Polygon(
+                      points={{90,-70},{68,-62},{68,-78},{90,-70}},
+                      lineColor={192,192,192},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid),Line(points={{-80,0},{80,0}},
+                color={0,0,0}),Text(
+                      extent={{-150,-150},{150,-110}},
+                      lineColor={0,0,0},
+                      textString="k=%k")}),
           Diagram(coordinateSystem(
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
               grid={2,2}), graphics));
       end Constant;
+
     end Sources;
 
     block FirstOrder "First order transport function block (= 1 pole)"
@@ -2525,6 +2533,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
         annotation (Dialog(group="Initial Conditions"));
       extends FCSys.Blocks.BaseClasses.MI(final n_in=n);
       extends FCSys.Blocks.BaseClasses.MO(y(final start=y_0), final n_out=n);
+
     initial equation
       if initType == Init.SteadyState then
         der(y)/U.s = zeros(n);
@@ -2532,6 +2541,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
            then
         y = y_0;
       end if;
+
     equation
       der(y)/U.s = (k*u - y)/T;
       annotation (Documentation(
@@ -2618,6 +2628,7 @@ Example:
       extends FCSys.Blocks.BaseClasses.MI(final n_in=n);
       extends FCSys.Blocks.BaseClasses.MO(y(final start=y_0), final n_out=n);
       parameter Integer n=1 "Number of signals";
+
     initial equation
       if initType == Init.SteadyState then
         der(y)/U.s = zeros(n);
@@ -2625,6 +2636,7 @@ Example:
            then
         y = y_0;
       end if;
+
     equation
       der(y)/U.s = k .* u;
       annotation (Documentation(
@@ -2682,6 +2694,7 @@ This is discussed in the description of package
                     lineColor={0,0,0},
                     textString="s"),Line(points={{-46,0},{46,0}}, color={0,0,0})})));
     end Integrator;
+
   end Continuous;
 
   package Discrete
@@ -2747,6 +2760,7 @@ This is discussed in the description of package
           annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
         Modelica.Blocks.Discrete.FirstOrderHold hold(samplePeriod=1/40)
           annotation (Placement(transformation(extent={{40,-10},{60,10}})));
+
       equation
         connect(source.y, sample.u) annotation (Line(
             points={{-59,6.10623e-16},{-49.75,6.10623e-16},{-49.75,1.27676e-15},
@@ -2762,6 +2776,7 @@ This is discussed in the description of package
                   {-100,-100},{100,100}}), graphics), experiment(Algorithm=
                 "Dassl"));
       end Sampler;
+
     end Examples;
     extends Modelica.Icons.Package;
     package Controllers
@@ -2833,6 +2848,7 @@ This is discussed in the description of package
             height={-1},
             offset={-1})
             annotation (Placement(transformation(extent={{60,-40},{40,-20}})));
+
         equation
           connect(J.y, qPSolver.J_set) annotation (Line(
               points={{39,60},{20,60},{20,8},{-11,8}},
@@ -2865,6 +2881,7 @@ This is discussed in the description of package
             Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics));
         end QPSolverFerreauExample;
+
       end Examples;
 
       block MPC "Model predictive controller"
@@ -2965,6 +2982,7 @@ This is discussed in the description of package
           annotation (Placement(transformation(extent={{-10,30},{10,50}})));
         FCSys.Blocks.Math.AddInclInclSkip addSkipInclIncl1(final n=n_act)
           annotation (Placement(transformation(extent={{-60,-10},{-80,10}})));
+
       equation
         connect(addInclInclIncl.y, G_partGain.u) annotation (Line(
             points={{21,6.10623e-16},{18.75,6.10623e-16},{18.75,1.27676e-15},{
@@ -3056,9 +3074,9 @@ This is discussed in the description of package
             thickness=0.5));
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
-                extent={{-100,40},{100,-40}},
-                lineColor={0,0,255},
-                textString="MPC")}), Diagram(coordinateSystem(
+                      extent={{-100,40},{100,-40}},
+                      lineColor={0,0,255},
+                      textString="MPC")}), Diagram(coordinateSystem(
                 preserveAspectRatio=true, extent={{-140,-100},{140,100}}),
               graphics));
       end MPC;
@@ -3137,6 +3155,7 @@ This is discussed in the description of package
           annotation (Placement(transformation(extent={{-30,-60},{-50,-40}})));
         Modelica.Blocks.Math.MatrixGain feedbackGain(final K=-K_fb)
           annotation (Placement(transformation(extent={{-30,40},{-50,60}})));
+
       equation
         connect(feedbackGain.u, x) annotation (Line(
             points={{-28,50},{80,50},{80,5.55112e-16},{100,5.55112e-16}},
@@ -3206,9 +3225,9 @@ This is discussed in the description of package
             smooth=Smooth.None));
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Text(
-                extent={{-100,40},{100,-40}},
-                lineColor={0,0,255},
-                textString="MPC")}), Diagram(coordinateSystem(
+                      extent={{-100,40},{100,-40}},
+                      lineColor={0,0,255},
+                      textString="MPC")}), Diagram(coordinateSystem(
                 preserveAspectRatio=true, extent={{-100,-80},{100,80}}),
               graphics));
       end MPCWRej;
@@ -3298,6 +3317,7 @@ This is discussed in the description of package
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={100,0}), iconTransformation(extent={{100,-10},{120,10}})));
+
         protected
           Real x_min[n_x] "<html>Lower bound of <b>x</b></html>";
           Real x_max[n_x] "<html>Upper bound of <b>x</b></html>";
@@ -3342,6 +3362,7 @@ This is discussed in the description of package
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={-70,-80}),iconTransformation(extent={{120,-20},{80,20}})));
+
         algorithm
           when (sampleTrigger) then
             for i in 1:integer(n_x/n_y) loop
@@ -3374,6 +3395,7 @@ This is discussed in the description of package
                       n_bG=n_bG);
             y := x[1:n_y];
           end when;
+
         equation
           if JAsParam then
             J_internal = J;
@@ -3477,6 +3499,7 @@ This is discussed in the description of package
    and this in Linux:
     Library="qpOASES"
   */
+
         end GetInfo;
 
         function Hotstart "<html>Restart a quadratic programming problem to find <b>x</b> that minimizes:
@@ -3518,6 +3541,7 @@ This is discussed in the description of package
    and this in Linux:
     Library="qpOASES"
   */
+
         end Hotstart;
 
         function Init "<html>Initialize a quadratic programming problem to find <b>x</b> that minimizes:
@@ -3567,6 +3591,7 @@ This is discussed in the description of package
    and this in Linux:
     Library="qpOASES"
   */
+
         end Init;
 
         class qpOASESmem
@@ -3600,6 +3625,7 @@ This is discussed in the description of package
    and this in Linux:
     Library="qpOASES"
   */
+
           end constructor;
 
           function destructor
@@ -3616,7 +3642,9 @@ This is discussed in the description of package
    and this in Linux:
     Library="qpOASES"
   */
+
           end destructor;
+
         end qpOASESmem;
 
         function ObservabilityMatrix "Calculate observability matrix"
@@ -3625,8 +3653,10 @@ This is discussed in the description of package
           input Real[:, size(A, 1)] C "Output matrix";
           input Integer n_p "Prediction horizon";
           output Real[n_p*size(C, 1), size(A, 1)] L "Observability matrix";
+
         protected
           constant Integer n_sen=size(C, 1) "Number of sensors";
+
         algorithm
           // Only suitable for stable plants, since numerical problems for computing A^i may/will arise for unstable systems
           // see Maciejowski, p. 56 (and [RWR98])
@@ -3635,6 +3665,7 @@ This is discussed in the description of package
             L[(i - 1)*n_sen + 1:i*n_sen, :] := L[(i - 2)*n_sen + 1:(i - 1)*
               n_sen, :]*A;
           end for;
+
         end ObservabilityMatrix;
 
         function ThetaPredictionMatrix "Calculate Theta prediction matrix"
@@ -3643,15 +3674,18 @@ This is discussed in the description of package
           input Integer n_c "Control horizon";
           input Integer n_p "Prediction horizon";
           output Real[size(Y, 1), n_c*size(Y, 2)] Theta;
+
         protected
           constant Integer n_act=size(Y, 2) "Number of actuators";
           constant Integer n_sen=integer(size(Y, 1)/n_p) "Number of sensors";
+
         algorithm
           Theta := zeros(size(Theta, 1), size(Theta, 2));
           for i in 1:n_c loop
             Theta[(i - 1)*n_sen + 1:size(Theta, 1), (i - 1)*n_act + 1:i*n_act]
               := Y[1:size(Y, 1) - (i - 1)*n_sen, :];
           end for;
+
         end ThetaPredictionMatrix;
 
         function YPredictionMatrix "Calculate Y prediction matrix"
@@ -3661,12 +3695,14 @@ This is discussed in the description of package
           input Real[:, size(A, 1)] C "Output matrix";
           input Integer n_p "Prediction horizon";
           output Real[n_p*size(C, 1), size(B, 2)] Y;
+
         protected
           constant Integer n_act=size(B, 2) "Number of actuators";
           constant Integer n_x=size(A, 1) "Number of states";
           constant Integer n_sen=size(C, 1) "Number of sensors";
           Real[n_sen, n_act] Y_new_part=zeros(n_sen, n_act);
           Real[n_x, n_x] A_raised_i=identity(n_x);
+
         algorithm
           // Only suitable for stable plants, since numerical problems for computing A^i may/will arise for unstable systems
           // see Maciejowski, p. 56 (and [RWR98])
@@ -3675,8 +3711,11 @@ This is discussed in the description of package
             Y[i*n_sen + 1:(i + 1)*n_sen, :] := Y_new_part;
             A_raised_i := A*A_raised_i;
           end for;
+
         end YPredictionMatrix;
+
       end BaseClasses;
+
     end Controllers;
 
     package Observers
@@ -3741,6 +3780,7 @@ This is discussed in the description of package
         FCSys.Blocks.Math.AddSkipInclIncl addSkipInclIncl2(final isPos2=false,
             final n=n_sen)
           annotation (Placement(transformation(extent={{80,-10},{60,10}})));
+
       equation
         connect(addInclSkipIncl.y, xDelay.u) annotation (Line(
             points={{10,-9},{10,-14},{10,-19},{10,-19}},
@@ -3814,6 +3854,7 @@ This is discussed in the description of package
                 preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
               graphics));
       end Observer;
+
     end Observers;
 
     package Plants
@@ -3827,6 +3868,7 @@ This is discussed in the description of package
         extends Modelica.Blocks.Interfaces.DiscreteMIMO(final nin=size(B, 2),
             final nout=size(C, 1));
         output Real x[size(A, 1)] "State vector";
+
       equation
         when sampleTrigger then
           x = A*pre(x) + B*u;
@@ -3921,6 +3963,7 @@ results in the following equations:
                   {-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
                 preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
               graphics));
+
       end StateSpaceWNoise;
 
       model Pendulum
@@ -3929,45 +3972,40 @@ results in the following equations:
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
                 preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
-              graphics={
-              Ellipse(
-                extent={{10,80},{30,60}},
-                lineColor={215,215,215},
-                fillColor={0,0,0},
-                fillPattern=FillPattern.Sphere,
-                lineThickness=0.5),
-              Line(
-                points={{20,70},{0,0}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                thickness=0.5),
-              Line(
-                points={{50,0},{-50,0}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                origin={0,0},
-                rotation=180,
-                thickness=0.5),
-              Polygon(
-                points={{-48,6},{-60,0},{-48,-6},{-48,6}},
-                smooth=Smooth.None,
-                fillColor={0,0,0},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Polygon(
-                points={{6,6},{-6,0},{6,-6},{6,6}},
-                smooth=Smooth.None,
-                fillColor={0,0,0},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None,
-                origin={54,0},
-                rotation=180),
-              Ellipse(
-                extent={{-4,4},{4,-4}},
-                lineColor={0,0,0},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                lineThickness=0.5)}));
+              graphics={Ellipse(
+                      extent={{10,80},{30,60}},
+                      lineColor={215,215,215},
+                      fillColor={0,0,0},
+                      fillPattern=FillPattern.Sphere,
+                      lineThickness=0.5),Line(
+                      points={{20,70},{0,0}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      thickness=0.5),Line(
+                      points={{50,0},{-50,0}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      origin={0,0},
+                      rotation=180,
+                      thickness=0.5),Polygon(
+                      points={{-48,6},{-60,0},{-48,-6},{-48,6}},
+                      smooth=Smooth.None,
+                      fillColor={0,0,0},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Polygon(
+                      points={{6,6},{-6,0},{6,-6},{6,6}},
+                      smooth=Smooth.None,
+                      fillColor={0,0,0},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None,
+                      origin={54,0},
+                      rotation=180),Ellipse(
+                      extent={{-4,4},{4,-4}},
+                      lineColor={0,0,0},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      lineThickness=0.5)}));
+
       end Pendulum;
 
       package BaseClasses "Base classes (not for direct use)"
@@ -3999,6 +4037,7 @@ results in the following equations:
             gas.H2.Data.FCSys.Blocks.Continuous.Plants.BaseClasses.PartialPlant
             annotation (choicesInPackage=true, Placement(transformation(extent=
                     {{-40,-10},{-20,10}})));
+
         equation
           connect(antiAliasing.y, sample.u) annotation (Line(
               points={{41,6.10623e-16},{45.25,6.10623e-16},{45.25,1.27676e-15},
@@ -4031,13 +4070,14 @@ results in the following equations:
               color={0,0,127},
               thickness=0.5,
               smooth=Smooth.None));
-
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
                   ={{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
                   preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
                 graphics));
         end PartialPlant;
+
       end BaseClasses;
+
     end Plants;
 
     package Sources
@@ -4055,6 +4095,7 @@ results in the following equations:
         // Note KLD 1/8/10: without annotation(Evaluate=true), Dymola doesn't seem to recognize internal_twister_uniform() when sigma=ones(n_out)
         parameter Integer n_s=500 "Number of samples"
           annotation (Dialog(group="Advanced"));
+
       protected
         final parameter Real mu_internal[n_out]=(if size(mu, 1) == 1 then mu[1]
             *ones(n_out) else mu)
@@ -4064,6 +4105,7 @@ results in the following equations:
           "Standard deviation(s) of random signal(s), with entries for every signal";
         Real table[n_s, n_out](start=zeros(n_s, n_out), fixed=true)
           "Matrix of normal random numbers (the first column is time /s)";
+
       equation
         when firstTrigger then
           // (Re)generate the table of random numbers
@@ -4087,86 +4129,70 @@ results in the following equations:
 <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2010/1/6:<br/>Original version using the Box-Muller transform; copied and modified portions of code from Modelica.Blocks.Sources.CombiTimeTable</li>
 </ul></p>
 </html>"), Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                  {100,100}}),graphics={
-              Polygon(
-                points={{0,8},{-8,-14},{8,-14},{0,8}},
-                lineColor={192,192,192},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid),
-              Line(points={{0,-14},{0,-70}}, color={192,192,192}),
-              Polygon(
-                points={{90,-60},{68,-52},{68,-68},{90,-60}},
-                lineColor={192,192,192},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid),
-              Text(
-                extent={{68,-68},{92,-94}},
-                lineColor={175,175,175},
-                textString="x"),
-              Polygon(
-                points={{-60,-60},{-30,-60},{-18,-54},{-12,-40},{-4,-18},{4,-18},
-                    {12,-40},{18,-54},{30,-60},{60,-60},{-60,-60}},
-                lineColor={0,0,127},
-                smooth=Smooth.Bezier,
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid),
-              Line(points={{-90,-60},{82,-60}}, color={192,192,192}),
-              Polygon(
-                points={{-80,98},{-88,76},{-72,76},{-80,98}},
-                lineColor={192,192,192},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid),
-              Line(points={{-80,76},{-80,20}}, color={192,192,192}),
-              Line(points={{-90,50},{82,50}}, color={192,192,192}),
-              Polygon(
-                points={{90,50},{68,58},{68,42},{90,50}},
-                lineColor={192,192,192},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid),
-              Text(
-                extent={{68,42},{92,16}},
-                lineColor={175,175,175},
-                textString="t"),
-              Line(
-                points={{-80,50},{-80,26}},
-                color={0,0,127},
-                smooth=Smooth.None),
-              Line(
-                points={{-60,50},{-60,38}},
-                color={0,0,127},
-                smooth=Smooth.None),
-              Line(
-                points={{-40,50},{-40,76}},
-                color={0,0,127},
-                smooth=Smooth.None),
-              Line(
-                points={{-20,50},{-20,48}},
-                color={0,0,127},
-                smooth=Smooth.None),
-              Line(
-                points={{0,50},{0,82}},
-                color={0,0,127},
-                smooth=Smooth.None),
-              Line(
-                points={{20,50},{20,72}},
-                color={0,0,127},
-                smooth=Smooth.None),
-              Line(
-                points={{40,50},{40,74}},
-                color={0,0,127},
-                smooth=Smooth.None),
-              Line(
-                points={{60,50},{60,40}},
-                color={0,0,127},
-                smooth=Smooth.None),
-              Ellipse(extent={{-44,80},{-36,72}}, lineColor={0,0,127}),
-              Ellipse(extent={{-64,42},{-56,34}}, lineColor={0,0,127}),
-              Ellipse(extent={{-84,30},{-76,22}}, lineColor={0,0,127}),
-              Ellipse(extent={{-24,52},{-16,44}}, lineColor={0,0,127}),
-              Ellipse(extent={{-4,86},{4,78}}, lineColor={0,0,127}),
-              Ellipse(extent={{16,76},{24,68}}, lineColor={0,0,127}),
-              Ellipse(extent={{36,78},{44,70}}, lineColor={0,0,127}),
-              Ellipse(extent={{56,44},{64,36}}, lineColor={0,0,127})}));
+                  {100,100}}),graphics={Polygon(
+                      points={{0,8},{-8,-14},{8,-14},{0,8}},
+                      lineColor={192,192,192},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid),Line(points={{0,-14},{0,-70}},
+                color={192,192,192}),Polygon(
+                      points={{90,-60},{68,-52},{68,-68},{90,-60}},
+                      lineColor={192,192,192},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid),Text(
+                      extent={{68,-68},{92,-94}},
+                      lineColor={175,175,175},
+                      textString="x"),Polygon(
+                      points={{-60,-60},{-30,-60},{-18,-54},{-12,-40},{-4,-18},
+                  {4,-18},{12,-40},{18,-54},{30,-60},{60,-60},{-60,-60}},
+                      lineColor={0,0,127},
+                      smooth=Smooth.Bezier,
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid),Line(points={{-90,-60},{82,
+                -60}}, color={192,192,192}),Polygon(
+                      points={{-80,98},{-88,76},{-72,76},{-80,98}},
+                      lineColor={192,192,192},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid),Line(points={{-80,76},{-80,
+                20}}, color={192,192,192}),Line(points={{-90,50},{82,50}},
+                color={192,192,192}),Polygon(
+                      points={{90,50},{68,58},{68,42},{90,50}},
+                      lineColor={192,192,192},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid),Text(
+                      extent={{68,42},{92,16}},
+                      lineColor={175,175,175},
+                      textString="t"),Line(
+                      points={{-80,50},{-80,26}},
+                      color={0,0,127},
+                      smooth=Smooth.None),Line(
+                      points={{-60,50},{-60,38}},
+                      color={0,0,127},
+                      smooth=Smooth.None),Line(
+                      points={{-40,50},{-40,76}},
+                      color={0,0,127},
+                      smooth=Smooth.None),Line(
+                      points={{-20,50},{-20,48}},
+                      color={0,0,127},
+                      smooth=Smooth.None),Line(
+                      points={{0,50},{0,82}},
+                      color={0,0,127},
+                      smooth=Smooth.None),Line(
+                      points={{20,50},{20,72}},
+                      color={0,0,127},
+                      smooth=Smooth.None),Line(
+                      points={{40,50},{40,74}},
+                      color={0,0,127},
+                      smooth=Smooth.None),Line(
+                      points={{60,50},{60,40}},
+                      color={0,0,127},
+                      smooth=Smooth.None),Ellipse(extent={{-44,80},{-36,72}},
+                lineColor={0,0,127}),Ellipse(extent={{-64,42},{-56,34}},
+                lineColor={0,0,127}),Ellipse(extent={{-84,30},{-76,22}},
+                lineColor={0,0,127}),Ellipse(extent={{-24,52},{-16,44}},
+                lineColor={0,0,127}),Ellipse(extent={{-4,86},{4,78}}, lineColor
+                ={0,0,127}),Ellipse(extent={{16,76},{24,68}}, lineColor={0,0,
+                127}),Ellipse(extent={{36,78},{44,70}}, lineColor={0,0,127}),
+                Ellipse(extent={{56,44},{64,36}}, lineColor={0,0,127})}));
       end RandomNormal;
 
       model RandomUniform "Generate a sequence of uniform random numbers"
@@ -4179,6 +4205,7 @@ results in the following equations:
           "Upper bound(s) of the random signal(s)";
         parameter Integer n_s=500 "Number of samples"
           annotation (Dialog(group="Advanced"));
+
       protected
         final parameter Real x_min_internal[n_out]=(if size(x_min, 1) == 1
              then ones(n_out)*x_min[1] else x_min)
@@ -4187,6 +4214,7 @@ results in the following equations:
              then ones(n_out)*x_max[1] else x_max)
           "Upper bound(s) of random signal(s), with entries for every signal";
         Real table[n_s, n_out] "Matrix of uniform random numbers";
+
       equation
         when firstTrigger then
           // Check the min/max range
@@ -4216,89 +4244,73 @@ results in the following equations:
 <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2010/1/6:<br/>Copied and modified portions of code from Modelica.Blocks.Sources.CombiTimeTable</li>
 </ul></p>
 </html>"),Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
-                  100,100}}), graphics={
-              Polygon(
-                points={{-80,98},{-88,76},{-72,76},{-80,98}},
-                lineColor={192,192,192},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid),
-              Line(points={{-80,76},{-80,20}}, color={192,192,192}),
-              Line(points={{-90,50},{82,50}}, color={192,192,192}),
-              Polygon(
-                points={{90,50},{68,58},{68,42},{90,50}},
-                lineColor={192,192,192},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid),
-              Text(
-                extent={{68,42},{92,16}},
-                lineColor={175,175,175},
-                textString="t"),
-              Polygon(
-                points={{0,8},{-8,-14},{8,-14},{0,8}},
-                lineColor={192,192,192},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid),
-              Line(points={{0,-14},{0,-70}}, color={192,192,192}),
-              Polygon(
-                points={{90,-60},{68,-52},{68,-68},{90,-60}},
-                lineColor={192,192,192},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid),
-              Text(
-                extent={{68,-68},{92,-94}},
-                lineColor={175,175,175},
-                textString="x"),
-              Line(
-                points={{-60,-60},{-60,-36},{60,-36},{60,-60}},
-                color={0,0,127},
-                smooth=Smooth.None),
-              Rectangle(
-                extent={{-60,-36},{60,-60}},
-                lineColor={0,0,127},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid),
-              Line(points={{-90,-60},{82,-60}}, color={192,192,192}),
-              Line(
-                points={{-80,50},{-80,26}},
-                color={0,0,127},
-                smooth=Smooth.None),
-              Ellipse(extent={{-84,30},{-76,22}}, lineColor={0,0,127}),
-              Line(
-                points={{-60,50},{-60,38}},
-                color={0,0,127},
-                smooth=Smooth.None),
-              Line(
-                points={{-40,50},{-40,76}},
-                color={0,0,127},
-                smooth=Smooth.None),
-              Line(
-                points={{-20,50},{-20,48}},
-                color={0,0,127},
-                smooth=Smooth.None),
-              Line(
-                points={{0,50},{0,82}},
-                color={0,0,127},
-                smooth=Smooth.None),
-              Line(
-                points={{20,50},{20,72}},
-                color={0,0,127},
-                smooth=Smooth.None),
-              Line(
-                points={{40,50},{40,74}},
-                color={0,0,127},
-                smooth=Smooth.None),
-              Line(
-                points={{60,50},{60,40}},
-                color={0,0,127},
-                smooth=Smooth.None),
-              Ellipse(extent={{-64,42},{-56,34}}, lineColor={0,0,127}),
-              Ellipse(extent={{-44,80},{-36,72}}, lineColor={0,0,127}),
-              Ellipse(extent={{-24,52},{-16,44}}, lineColor={0,0,127}),
-              Ellipse(extent={{-4,86},{4,78}}, lineColor={0,0,127}),
-              Ellipse(extent={{16,76},{24,68}}, lineColor={0,0,127}),
-              Ellipse(extent={{36,78},{44,70}}, lineColor={0,0,127}),
-              Ellipse(extent={{56,44},{64,36}}, lineColor={0,0,127})}));
+                  100,100}}), graphics={Polygon(
+                      points={{-80,98},{-88,76},{-72,76},{-80,98}},
+                      lineColor={192,192,192},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid),Line(points={{-80,76},{-80,
+                20}}, color={192,192,192}),Line(points={{-90,50},{82,50}},
+                color={192,192,192}),Polygon(
+                      points={{90,50},{68,58},{68,42},{90,50}},
+                      lineColor={192,192,192},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid),Text(
+                      extent={{68,42},{92,16}},
+                      lineColor={175,175,175},
+                      textString="t"),Polygon(
+                      points={{0,8},{-8,-14},{8,-14},{0,8}},
+                      lineColor={192,192,192},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid),Line(points={{0,-14},{0,-70}},
+                color={192,192,192}),Polygon(
+                      points={{90,-60},{68,-52},{68,-68},{90,-60}},
+                      lineColor={192,192,192},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid),Text(
+                      extent={{68,-68},{92,-94}},
+                      lineColor={175,175,175},
+                      textString="x"),Line(
+                      points={{-60,-60},{-60,-36},{60,-36},{60,-60}},
+                      color={0,0,127},
+                      smooth=Smooth.None),Rectangle(
+                      extent={{-60,-36},{60,-60}},
+                      lineColor={0,0,127},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid),Line(points={{-90,-60},{82,
+                -60}}, color={192,192,192}),Line(
+                      points={{-80,50},{-80,26}},
+                      color={0,0,127},
+                      smooth=Smooth.None),Ellipse(extent={{-84,30},{-76,22}},
+                lineColor={0,0,127}),Line(
+                      points={{-60,50},{-60,38}},
+                      color={0,0,127},
+                      smooth=Smooth.None),Line(
+                      points={{-40,50},{-40,76}},
+                      color={0,0,127},
+                      smooth=Smooth.None),Line(
+                      points={{-20,50},{-20,48}},
+                      color={0,0,127},
+                      smooth=Smooth.None),Line(
+                      points={{0,50},{0,82}},
+                      color={0,0,127},
+                      smooth=Smooth.None),Line(
+                      points={{20,50},{20,72}},
+                      color={0,0,127},
+                      smooth=Smooth.None),Line(
+                      points={{40,50},{40,74}},
+                      color={0,0,127},
+                      smooth=Smooth.None),Line(
+                      points={{60,50},{60,40}},
+                      color={0,0,127},
+                      smooth=Smooth.None),Ellipse(extent={{-64,42},{-56,34}},
+                lineColor={0,0,127}),Ellipse(extent={{-44,80},{-36,72}},
+                lineColor={0,0,127}),Ellipse(extent={{-24,52},{-16,44}},
+                lineColor={0,0,127}),Ellipse(extent={{-4,86},{4,78}}, lineColor
+                ={0,0,127}),Ellipse(extent={{16,76},{24,68}}, lineColor={0,0,
+                127}),Ellipse(extent={{36,78},{44,70}}, lineColor={0,0,127}),
+                Ellipse(extent={{56,44},{64,36}}, lineColor={0,0,127})}));
       end RandomUniform;
+
     end Sources;
 
     block ZeroOrderHold "Zero order hold of a sampled-data system"
@@ -4308,6 +4320,7 @@ results in the following equations:
       output Real y_sample[n](start=y_0, fixed=true);
       parameter Real y_0[:]=zeros(1) "Initial value of output signal";
       final parameter Integer n=size(y_0, 1) "Number of signals";
+
     equation
       when {sampleTrigger,initial()} then
         y_sample = u;
@@ -4321,8 +4334,8 @@ results in the following equations:
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             grid={2,2}), graphics={Line(points={{-78,-42},{-52,-42},{-52,0},{-26,
-                  0},{-26,24},{-6,24},{-6,64},{18,64},{18,20},{38,20},{38,0},{
-                  44,0},{44,0},{62,0}}, color={0,0,127})}), Documentation(info="<html>
+              0},{-26,24},{-6,24},{-6,64},{18,64},{18,20},{38,20},{38,0},{44,0},
+              {44,0},{62,0}}, color={0,0,127})}), Documentation(info="<html>
 <p>
 The output is identical to the sampled input signal at sample
 time instants and holds the output at the value of the last
@@ -4339,10 +4352,12 @@ sample instant during the sample points.
       parameter Integer n=1 "Number of signals";
       parameter Real y_0[n]=zeros(n) "Initial condition of input";
       parameter Real c0[n]=zeros(n) "Initial condition of Delta_y/Delta_t";
+
     protected
       Real y_sample[n](start=y_0,fixed=true);
       Modelica.SIunits.Time t_sample;
       Real c[n](start=c0,fixed=true) "Delta_y/Delta_t";
+
     equation
       when sampleTrigger then
         y_sample = u;
@@ -4360,9 +4375,8 @@ sample instant during the sample points.
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             grid={2,2}), graphics={Line(points={{-79,-41},{-59,-33},{-40,1},{-20,
-                  9},{0,63},{21,20},{41,10},{60,20}}, color={0,0,127}), Line(
-                points={{60,19},{81,10}}, color={0,0,255})}), Documentation(
-            info="<html>
+              9},{0,63},{21,20},{41,10},{60,20}}, color={0,0,127}),Line(points=
+              {{60,19},{81,10}}, color={0,0,255})}), Documentation(info="<html>
 <p>
 The output signal is the extrapolation through the
 values of the last two sampled input signals.
@@ -4380,6 +4394,7 @@ values of the last two sampled input signals.
       output Real x[size(a, 1) - 1, n](each start=0,each fixed=true)
         "State of transport function from controller canonical form";
       parameter Integer n=1 "Number of signals";
+
     protected
       parameter Integer n_b=size(b, 1)
         "Size of Numerator of transport function";
@@ -4387,6 +4402,7 @@ values of the last two sampled input signals.
         "Size of Denominator of transport function";
       Real x_1[n];
       Real x_ext[size(a, 1), n];
+
     equation
       when sampleTrigger then
         /* State variables x are defined according to
@@ -4404,6 +4420,7 @@ values of the last two sampled input signals.
        on pre(x)).
     */
       /* Corresponding (simpler) version using when-semantics of Modelica 1.3:
+
    equation
      when sampleTrigger then
       [x; xn] = [x_1; pre(x)];
@@ -4450,35 +4467,29 @@ states can be set as start values of <b>x</b>.<p>
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics={
-            Line(points={{82,0},{-84,0}}, color={0,0,127}),
-            Text(
-              extent={{-92,92},{86,12}},
-              lineColor={0,0,127},
-              textString="b(z)"),
-            Text(
-              extent={{-90,-12},{90,-90}},
-              lineColor={0,0,127},
-              textString="a(z)")}),
+            grid={2,2}), graphics={Line(points={{82,0},{-84,0}}, color={0,0,127}),
+              Text(
+                  extent={{-92,92},{86,12}},
+                  lineColor={0,0,127},
+                  textString="b(z)"),Text(
+                  extent={{-90,-12},{90,-90}},
+                  lineColor={0,0,127},
+                  textString="a(z)")}),
         Diagram(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            grid={2,2}), graphics={
-            Rectangle(extent={{-60,60},{60,-60}}, lineColor={0,0,255}),
-            Line(
-              points={{40,0},{-44,0}},
-              color={0,0,0},
-              thickness=0.5),
-            Text(
-              extent={{-54,54},{54,4}},
-              lineColor={0,0,0},
-              textString="b(z)"),
-            Text(
-              extent={{-54,-6},{56,-56}},
-              lineColor={0,0,0},
-              textString="a(z)"),
-            Line(points={{-100,0},{-60,0}}, color={0,0,255}),
-            Line(points={{60,0},{100,0}}, color={0,0,255})}));
+            grid={2,2}), graphics={Rectangle(extent={{-60,60},{60,-60}},
+              lineColor={0,0,255}),Line(
+                  points={{40,0},{-44,0}},
+                  color={0,0,0},
+                  thickness=0.5),Text(
+                  extent={{-54,54},{54,4}},
+                  lineColor={0,0,0},
+                  textString="b(z)"),Text(
+                  extent={{-54,-6},{56,-56}},
+                  lineColor={0,0,0},
+                  textString="a(z)"),Line(points={{-100,0},{-60,0}}, color={0,0,
+              255}),Line(points={{60,0},{100,0}}, color={0,0,255})}));
     end TransportFunction;
 
     block UnitDelay "Unit Delay Block"
@@ -4488,10 +4499,12 @@ states can be set as start values of <b>x</b>.<p>
       extends FCSys.Blocks.BaseClasses.MO(final n_out=n);
       extends FCSys.Blocks.Discrete.BaseClasses.DiscreteBlock;
       final parameter Integer n=size(y_0, 1) "Number of signals";
+
     equation
       when sampleTrigger then
         y = pre(u);
       end when;
+
     initial equation
       //  y = y_0;
       annotation (Documentation(
@@ -4549,41 +4562,36 @@ the output y is identical to parameter yStart.
       extends FCSys.Blocks.BaseClasses.MO(final n_out=n);
       extends FCSys.Blocks.Discrete.BaseClasses.DiscreteBlock;
       parameter Integer n=1 "Number of signals";
+
     equation
       when {sampleTrigger,initial()} then
         y = u;
       end when;
       annotation (
         Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
-                100,100}}), graphics={
-            Ellipse(
-              extent={{-25,-10},{-45,10}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{45,-10},{25,10}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(points={{-100,0},{-45,0}}, color={0,0,127}),
-            Line(points={{45,0},{100,0}}, color={0,0,127}),
-            Line(points={{-35,0},{30,35}}, color={0,0,127})}),
+                100,100}}), graphics={Ellipse(
+                  extent={{-25,-10},{-45,10}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Ellipse(
+                  extent={{45,-10},{25,10}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Line(points={{-100,0},{-45,0}},
+              color={0,0,127}),Line(points={{45,0},{100,0}}, color={0,0,127}),
+              Line(points={{-35,0},{30,35}}, color={0,0,127})}),
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                {100,100}}), graphics={
-            Ellipse(
-              extent={{-25,-10},{-45,10}},
-              lineColor={0,0,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{45,-10},{25,10}},
-              lineColor={0,0,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(points={{-100,0},{-45,0}}, color={0,0,255}),
-            Line(points={{45,0},{100,0}}, color={0,0,255}),
-            Line(points={{-35,0},{30,35}}, color={0,0,255})}),
+                {100,100}}), graphics={Ellipse(
+                  extent={{-25,-10},{-45,10}},
+                  lineColor={0,0,255},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Ellipse(
+                  extent={{45,-10},{25,10}},
+                  lineColor={0,0,255},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Line(points={{-100,0},{-45,0}},
+              color={0,0,255}),Line(points={{45,0},{100,0}}, color={0,0,255}),
+              Line(points={{-35,0},{30,35}}, color={0,0,255})}),
         Documentation(info="<html>
 <p>
 Samples the continues input signal with a sampling rate defined
@@ -4600,16 +4608,21 @@ via parameter <b>samplePeriod</b>.
         parameter SI.Time samplePeriod(min=100*Modelica.Constants.eps, start=
               0.1) "Sample period of species";
         parameter SI.Time startTime=0 "First sample time instant";
+
       protected
         output Boolean sampleTrigger "true, if sample time instant";
         output Boolean firstTrigger "Rising edge signals first sample instant";
+
       equation
         sampleTrigger = sample(startTime, samplePeriod);
         when sampleTrigger then
           firstTrigger = time <= startTime + samplePeriod/2;
         end when;
+
       end DiscreteBlock;
+
     end BaseClasses;
+
   end Discrete;
 
   package Math
@@ -4628,6 +4641,7 @@ via parameter <b>samplePeriod</b>.
         "Connector 2 of Real input signals" annotation (Placement(
             transformation(extent={{-110,-70},{-90,-50}}, rotation=0),
             iconTransformation(extent={{-120,-70},{-100,-50}})));
+
     equation
       y = k_1*u_1 + k_2*u_2;
       annotation (Documentation(
@@ -4693,6 +4707,7 @@ Example:
         "Connector 3 of Real input signals" annotation (Placement(
             transformation(extent={{-110,-90},{-90,-70}}, rotation=0),
             iconTransformation(extent={{-120,-70},{-100,-50}})));
+
     equation
       y = k_1*u_1 + k_2*u_2 + k_3*u_3;
       annotation (Documentation(
@@ -4766,6 +4781,7 @@ Example:
       output FCSys.Connectors.RealOutput y[n] annotation (Placement(
             transformation(extent={{80,-10},{100,10}}, rotation=0),
             iconTransformation(extent={{80,-10},{100,10}})));
+
     equation
       y = (if isPos1 then u_1 else -u_1) + (if isPos2 then u_2 else -u_2);
       annotation (Documentation(info="
@@ -4790,44 +4806,36 @@ Example:
 </pre>
 
 </html>
-"), Icon(graphics={
-            Ellipse(
-              extent={{-20,20},{20,-20}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Text(
-              extent={{-80,60},{-20,0}},
-              lineColor={0,0,0},
-              textString="+",
-              visible=isPos1),
-            Text(
-              extent={{-80,70},{-20,0}},
-              lineColor={0,0,0},
-              textString="-",
-              visible=not isPos1),
-            Text(
-              extent={{-60,-20},{0,-80}},
-              lineColor={0,0,0},
-              textString="+",
-              visible=isPos2),
-            Text(
-              extent={{-60,-10},{0,-80}},
-              lineColor={0,0,0},
-              textString="-",
-              visible=not isPos2),
-            Line(
-              points={{-100,0},{-20,0}},
-              color={0,0,127},
-              thickness=0.5),
-            Line(
-              points={{0,-20},{0,-100}},
-              color={0,0,127},
-              thickness=0.5),
-            Line(
-              points={{20,0},{80,0}},
-              color={0,0,127},
-              thickness=0.5)}));
+"), Icon(graphics={Ellipse(
+                  extent={{-20,20},{20,-20}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Text(
+                  extent={{-80,60},{-20,0}},
+                  lineColor={0,0,0},
+                  textString="+",
+                  visible=isPos1),Text(
+                  extent={{-80,70},{-20,0}},
+                  lineColor={0,0,0},
+                  textString="-",
+                  visible=not isPos1),Text(
+                  extent={{-60,-20},{0,-80}},
+                  lineColor={0,0,0},
+                  textString="+",
+                  visible=isPos2),Text(
+                  extent={{-60,-10},{0,-80}},
+                  lineColor={0,0,0},
+                  textString="-",
+                  visible=not isPos2),Line(
+                  points={{-100,0},{-20,0}},
+                  color={0,0,127},
+                  thickness=0.5),Line(
+                  points={{0,-20},{0,-100}},
+                  color={0,0,127},
+                  thickness=0.5),Line(
+                  points={{20,0},{80,0}},
+                  color={0,0,127},
+                  thickness=0.5)}));
     end AddSkipInclIncl;
 
     block AddInclInclIncl "Add or subtract three inputs"
@@ -4867,6 +4875,7 @@ Example:
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={0,-90})));
+
     equation
       y = (if isPos1 then u_1 else -u_1) + (if isPos2 then u_2 else -u_2) + (
         if isPos3 then u_3 else -u_3);
@@ -4892,60 +4901,49 @@ Example:
 </pre>
 
 </html>
-"), Icon(graphics={
-            Ellipse(
-              extent={{-20,20},{20,-20}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Text(
-              extent={{0,80},{60,20}},
-              lineColor={0,0,0},
-              textString="+",
-              visible=isPos1),
-            Text(
-              extent={{0,80},{60,10}},
-              lineColor={0,0,0},
-              textString="-",
-              visible=not isPos1),
-            Text(
-              extent={{-80,60},{-20,0}},
-              lineColor={0,0,0},
-              textString="+",
-              visible=isPos2),
-            Text(
-              extent={{-80,70},{-20,0}},
-              lineColor={0,0,0},
-              textString="-",
-              visible=not isPos2),
-            Line(
-              points={{20,0},{80,0}},
-              color={0,0,127},
-              thickness=0.5),
-            Line(
-              points={{-20,0},{60,1.93341e-015}},
-              color={0,0,127},
-              thickness=0.5,
-              origin={0,40},
-              rotation=90),
-            Line(
-              points={{0,-20},{0,-100}},
-              color={0,0,127},
-              thickness=0.5),
-            Line(
-              points={{-100,0},{-20,0}},
-              color={0,0,127},
-              thickness=0.5),
-            Text(
-              extent={{-60,-20},{0,-80}},
-              lineColor={0,0,0},
-              textString="+",
-              visible=isPos3),
-            Text(
-              extent={{-60,-10},{0,-80}},
-              lineColor={0,0,0},
-              textString="-",
-              visible=not isPos3)}));
+"), Icon(graphics={Ellipse(
+                  extent={{-20,20},{20,-20}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Text(
+                  extent={{0,80},{60,20}},
+                  lineColor={0,0,0},
+                  textString="+",
+                  visible=isPos1),Text(
+                  extent={{0,80},{60,10}},
+                  lineColor={0,0,0},
+                  textString="-",
+                  visible=not isPos1),Text(
+                  extent={{-80,60},{-20,0}},
+                  lineColor={0,0,0},
+                  textString="+",
+                  visible=isPos2),Text(
+                  extent={{-80,70},{-20,0}},
+                  lineColor={0,0,0},
+                  textString="-",
+                  visible=not isPos2),Line(
+                  points={{20,0},{80,0}},
+                  color={0,0,127},
+                  thickness=0.5),Line(
+                  points={{-20,0},{60,1.93341e-015}},
+                  color={0,0,127},
+                  thickness=0.5,
+                  origin={0,40},
+                  rotation=90),Line(
+                  points={{0,-20},{0,-100}},
+                  color={0,0,127},
+                  thickness=0.5),Line(
+                  points={{-100,0},{-20,0}},
+                  color={0,0,127},
+                  thickness=0.5),Text(
+                  extent={{-60,-20},{0,-80}},
+                  lineColor={0,0,0},
+                  textString="+",
+                  visible=isPos3),Text(
+                  extent={{-60,-10},{0,-80}},
+                  lineColor={0,0,0},
+                  textString="-",
+                  visible=not isPos3)}));
     end AddInclInclIncl;
 
     block AddInclInclSkip "Add or subtract two inputs"
@@ -4974,6 +4972,7 @@ Example:
       output FCSys.Connectors.RealOutput y[n] annotation (Placement(
             transformation(extent={{80,-10},{100,10}}, rotation=0),
             iconTransformation(extent={{80,-10},{100,10}})));
+
     equation
       y = (if isPos1 then u_1 else -u_1) + (if isPos2 then u_2 else -u_2);
       annotation (Documentation(info="
@@ -4998,46 +4997,38 @@ Example:
 </pre>
 
 </html>
-"), Icon(graphics={
-            Ellipse(
-              extent={{-20,20},{20,-20}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Text(
-              extent={{0,80},{60,20}},
-              lineColor={0,0,0},
-              textString="+",
-              visible=isPos1),
-            Text(
-              extent={{0,80},{60,10}},
-              lineColor={0,0,0},
-              textString="-",
-              visible=not isPos1),
-            Text(
-              extent={{-60,60},{0,0}},
-              lineColor={0,0,0},
-              textString="+",
-              visible=isPos2),
-            Text(
-              extent={{-60,70},{0,0}},
-              lineColor={0,0,0},
-              textString="-",
-              visible=not isPos2),
-            Line(
-              points={{-100,0},{-20,0}},
-              color={0,0,127},
-              thickness=0.5),
-            Line(
-              points={{-20,0},{60,1.93341e-015}},
-              color={0,0,127},
-              thickness=0.5,
-              origin={0,40},
-              rotation=90),
-            Line(
-              points={{20,0},{80,0}},
-              color={0,0,127},
-              thickness=0.5)}));
+"), Icon(graphics={Ellipse(
+                  extent={{-20,20},{20,-20}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Text(
+                  extent={{0,80},{60,20}},
+                  lineColor={0,0,0},
+                  textString="+",
+                  visible=isPos1),Text(
+                  extent={{0,80},{60,10}},
+                  lineColor={0,0,0},
+                  textString="-",
+                  visible=not isPos1),Text(
+                  extent={{-60,60},{0,0}},
+                  lineColor={0,0,0},
+                  textString="+",
+                  visible=isPos2),Text(
+                  extent={{-60,70},{0,0}},
+                  lineColor={0,0,0},
+                  textString="-",
+                  visible=not isPos2),Line(
+                  points={{-100,0},{-20,0}},
+                  color={0,0,127},
+                  thickness=0.5),Line(
+                  points={{-20,0},{60,1.93341e-015}},
+                  color={0,0,127},
+                  thickness=0.5,
+                  origin={0,40},
+                  rotation=90),Line(
+                  points={{20,0},{80,0}},
+                  color={0,0,127},
+                  thickness=0.5)}));
     end AddInclInclSkip;
 
     block AddInclSkipIncl "Add or subtract two inputs"
@@ -5069,6 +5060,7 @@ Example:
       output FCSys.Connectors.RealOutput y[n] annotation (Placement(
             transformation(extent={{80,-10},{100,10}}, rotation=0),
             iconTransformation(extent={{80,-10},{100,10}})));
+
     equation
       y = (if isPos1 then u_1 else -u_1) + (if isPos2 then u_2 else -u_2);
       annotation (Documentation(info="
@@ -5093,46 +5085,38 @@ Example:
 </pre>
 
 </html>
-"), Icon(graphics={
-            Ellipse(
-              extent={{-20,20},{20,-20}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Text(
-              extent={{0,80},{60,20}},
-              lineColor={0,0,0},
-              textString="+",
-              visible=isPos1),
-            Text(
-              extent={{-80,70},{-20,0}},
-              lineColor={0,0,0},
-              textString="-",
-              visible=not isPos1),
-            Text(
-              extent={{-60,-20},{0,-80}},
-              lineColor={0,0,0},
-              textString="+",
-              visible=isPos2),
-            Text(
-              extent={{-60,-10},{0,-80}},
-              lineColor={0,0,0},
-              textString="-",
-              visible=not isPos2),
-            Line(
-              points={{-20,0},{60,1.93341e-015}},
-              color={0,0,127},
-              thickness=0.5,
-              origin={0,40},
-              rotation=90),
-            Line(
-              points={{0,-20},{0,-100}},
-              color={0,0,127},
-              thickness=0.5),
-            Line(
-              points={{20,0},{80,0}},
-              color={0,0,127},
-              thickness=0.5)}));
+"), Icon(graphics={Ellipse(
+                  extent={{-20,20},{20,-20}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Text(
+                  extent={{0,80},{60,20}},
+                  lineColor={0,0,0},
+                  textString="+",
+                  visible=isPos1),Text(
+                  extent={{-80,70},{-20,0}},
+                  lineColor={0,0,0},
+                  textString="-",
+                  visible=not isPos1),Text(
+                  extent={{-60,-20},{0,-80}},
+                  lineColor={0,0,0},
+                  textString="+",
+                  visible=isPos2),Text(
+                  extent={{-60,-10},{0,-80}},
+                  lineColor={0,0,0},
+                  textString="-",
+                  visible=not isPos2),Line(
+                  points={{-20,0},{60,1.93341e-015}},
+                  color={0,0,127},
+                  thickness=0.5,
+                  origin={0,40},
+                  rotation=90),Line(
+                  points={{0,-20},{0,-100}},
+                  color={0,0,127},
+                  thickness=0.5),Line(
+                  points={{20,0},{80,0}},
+                  color={0,0,127},
+                  thickness=0.5)}));
     end AddInclSkipIncl;
 
     block Limiter "Limit the range of a signal"
@@ -5144,6 +5128,7 @@ Example:
       extends FCSys.BaseClasses.Icons.Blocks.Continuous;
       extends FCSys.Blocks.BaseClasses.MI(final n_in=n);
       extends FCSys.Blocks.BaseClasses.MO(final n_out=n);
+
     equation
       for i in 1:n loop
         assert(u_max[i] >= u_min[i],
@@ -5200,6 +5185,7 @@ as output.
               extent={{-100,-100},{100,100}},
               grid={2,2}), graphics)));
     end Limiter;
+
   end Math;
 
   package Routing
@@ -5209,6 +5195,7 @@ as output.
       extends FCSys.Blocks.BaseClasses.MI;
       extends FCSys.Blocks.BaseClasses.MO(final n_out=n_in*n_dup);
       parameter Integer n_dup=1 "Number of duplications";
+
     equation
       for i in 1:n_dup loop
         y[n_in*(i - 1) + 1:n_in*i] = u;
@@ -5280,6 +5267,7 @@ This is discussed in the description of package
               extent={{-100,-100},{100,100}},
               grid={2,2}), graphics)));
     end Duplicate;
+
   end Routing;
 
   package BaseClasses "Base classes (not for direct use)"
@@ -5295,6 +5283,7 @@ Block has one continuous Real input and one continuous Real output signal.
 </p>
 </html>", Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics)));
+
     end SI;
 
     partial block MI "Multiple Input block"
@@ -5310,6 +5299,7 @@ The signal sizes of the input and output vector may be different.
 </html>
 ", Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
                   100}}), graphics)));
+
     end MI;
 
     partial block SO "Single Output block"
@@ -5325,6 +5315,7 @@ The signal sizes of the input and output vector may be different.
 Block has one continuous Real output signal.
 </p>
 </html>"));
+
     end SO;
 
     partial block MO "Multiple Output block"
@@ -5338,6 +5329,7 @@ Block has one continuous Real output signal vector.
 </p>
 </html>", Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics)));
+
     end MO;
 
     function randu "Return a vector of uniform random numbers"
@@ -5346,9 +5338,11 @@ Block has one continuous Real output signal vector.
       input Real x_max=0.5 "Upper bound of random number(s)";
       input Integer n=1 "Number of random numbers";
       output Real x[n] "Uniform random number(s)";
+
     protected
       Real Delta;
       Real Sigma;
+
     algorithm
       Delta := x_max - x_min;
       Sigma := x_max + x_min;
@@ -5364,8 +5358,10 @@ Block has one continuous Real output signal vector.
       input Real sigma=1 "Standard deviation";
       input Integer n=1 "Number of random numbers";
       output Real x[n] "Normal random number(s)";
+
     protected
       Real x_0[n];
+
     algorithm
       x_0 := sqrt(-2*ln(FCSys.Blocks.BaseClasses.randu(
             x_min=0,
@@ -5381,6 +5377,7 @@ Block has one continuous Real output signal vector.
   which in turn uses the Mersenne twister pseudorandom number generator and is
   specific to Dymola (i.e., not general to Modelica).</p></html>"));
     end randn;
+
   end BaseClasses;
   annotation (Documentation(info="<html><p>
 <b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
@@ -5393,4 +5390,5 @@ disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.ModelicaLicens
 FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
 </p></html>"));
+
 end Blocks;

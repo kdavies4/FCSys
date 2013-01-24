@@ -19,6 +19,7 @@ package Characteristics
       import 'DataC19HF37O5S-' = FCSys.Characteristics.'C19HF37O5S-'.Ionomer;
       import 'Datae-' = FCSys.Characteristics.'e-'.Graphite;
       import DataH2 = FCSys.Characteristics.H2.Gas;
+
     protected
       package DataH2IG = FCSys.Characteristics.H2.Gas (b_v=[1], specVolPow={-1,
               0}) "H2 as ideal gas";
@@ -29,6 +30,7 @@ package Characteristics
       import DataO2 = FCSys.Characteristics.O2.Gas;
 
       // Conditions
+
     public
       FCSys.Connectors.RealOutputInternal T(unit="l2.m/(N.T2)",displayUnit="K")
         "Temperature" annotation (Placement(transformation(extent={{50,16},{70,
@@ -184,6 +186,7 @@ package Characteristics
 
         Icon(graphics));
     end Correlations;
+
   end Examples;
 
   package 'C+' "<html>C<sup>+</sup></html>"
@@ -210,7 +213,6 @@ package Characteristics
         B_c=[8.943859760e3*U.K, -7.295824740e1; 1.398412456e4*U.K, -4.477183040e1;
             5.848134850e3, -2.350925275e1] - b_c[:, 2:3]*ln(U.K),
         r=170*U.pico*U.m/U.q);
-
       annotation (Documentation(info="<html>
 
      <p>Assumptions:
@@ -236,7 +238,9 @@ package Characteristics
      </p>
 <p>For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+
     end Graphite;
+
   end 'C+';
 
   package 'C19HF37O5S-'
@@ -262,7 +266,6 @@ package Characteristics
         b_c=[4188*U.J*m/(U.kg*U.K)],
         B_c=[-298.15*U.K*b_c[1, 1] + Deltah0_f, 0],
         r=(147 + 2259.8/2)*U.pico*U.m/U.q);
-
       annotation (Documentation(info="<html>
        <p>Assumptions:
      <ol>
@@ -299,7 +302,9 @@ package Characteristics
 
 <p>For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+
     end Ionomer;
+
   end 'C19HF37O5S-';
 
   package 'e-' "<html>e<sup>-</sup></html>"
@@ -321,7 +326,6 @@ package Characteristics
         B_c={Data.blow} .* fill({U.K,1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*ln(
             U.K),
         r=U.k_A/m);
-
       annotation (Documentation(info="<html>
      <p>Notes:
      <ul>
@@ -342,6 +346,7 @@ package Characteristics
 </p>
 <p>For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+
     end Gas;
 
     package Graphite "e- in graphite"
@@ -349,7 +354,6 @@ package Characteristics
         final phase="graphite",
         specVolPow='C+'.Graphite.specVolPow,
         b_v='C+'.Graphite.b_v);
-
       annotation (Documentation(info="<html>
   <p>Assumptions:<ol>
     <li>The density of e<sup>-</sup> is equal to that of C<sup>+</sup> as graphite.
@@ -358,7 +362,9 @@ package Characteristics
 
      <p>For more information, see the
      <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+
     end Graphite;
+
   end 'e-';
 
   package 'H+' "<html>H<sup>+</sup></html>"
@@ -381,7 +387,6 @@ package Characteristics
         B_c={Data.blow} .* fill({U.K,1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*ln(
             U.K),
         r=120*U.pico*U.m/U.q);
-
       annotation (Documentation(info="<html>
          <p>Assumptions:
      <ol>
@@ -409,6 +414,7 @@ package Characteristics
      </p>
   <p>For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+
     end Gas;
 
     package Ionomer "H+ in ionomer"
@@ -417,7 +423,6 @@ package Characteristics
         final phase="solid",
         specVolPow={0,0},
         b_v=[1/(0.95*U.M)]);
-
       annotation (Documentation(info="<html>
   <p>The specific volume of protons corresponds to the concentration measured
   by Spry and Fayer (0.95 M) in Nafion<sup>&reg;</sup> at
@@ -426,7 +431,9 @@ package Characteristics
   endgroups.  At &lambda; = 22, the concentration was measured at 0.54 M
   [<a href=\"modelica://FCSys.UsersGuide.References\">Spry2009</a>].</p>
 </html>"));
+
     end Ionomer;
+
   end 'H+';
 
   package H2 "<html>H<sub>2</sub></html>"
@@ -461,7 +468,6 @@ package Characteristics
 
       // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
       // doesn't.
-
       annotation (Documentation(info="<html>
             <p>Notes:
      <ul>
@@ -476,7 +482,9 @@ package Characteristics
 
 <p>For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+
     end Gas;
+
   end H2;
 
   package H2O "<html>H<sub>2</sub>O</html>"
@@ -509,7 +517,6 @@ package Characteristics
             -0.14096649e5*U.K,0.19179190e8*U.K^2,14.345613}});
       // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
       // doesn't.
-
       annotation (Documentation(info="<html>
         <p>Notes:
      <ul>
@@ -525,6 +532,7 @@ package Characteristics
 
   <p>For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+
     end Gas;
 
     package Ionomer "H2O in ionomer"
@@ -538,6 +546,7 @@ package Characteristics
 
   <p>For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+
     end Ionomer;
 
     package Liquid "H2O liquid"
@@ -560,7 +569,6 @@ package Characteristics
         B_c=[1.101760476e8*U.K, -9.779700970e5; 8.113176880e7*U.K, -5.134418080e5]
              - b_c[:, 2:3]*ln(U.K),
         r=(282/2)*U.pico*U.m/U.q);
-
       annotation (Documentation(info="<html>     <p>Assumptions:
      <ol>
      <li>Constant specific volume (i.e., incompressible and without
@@ -575,7 +583,9 @@ package Characteristics
      </p>
   <p>For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+
     end Liquid;
+
   end H2O;
 
   package N2 "<html>N<sub>2</sub></html>"
@@ -623,7 +633,9 @@ package Characteristics
      </p>
   <p>For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+
     end Gas;
+
   end N2;
 
   package O2 "<html>O<sub>2</sub></html>"
@@ -657,7 +669,6 @@ package Characteristics
             -0.19286378e5*U.K,0.23295011e8*U.K^2,20.342043}});
       // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
       // doesn't.
-
       annotation (Documentation(info="<html><p>Notes:<ul>
   <li>According to [<a href=\"modelica://FCSys.UsersGuide.References\">Avogadro1.03</a>], the (center-to-center)
    bond length of O-O is 128.2 pm.  The radius of O is from
@@ -669,7 +680,9 @@ package Characteristics
      </p>
 <p>For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+
     end Gas;
+
   end O2;
 
   package BaseClasses "Base classes (not for direct use)"
@@ -704,6 +717,7 @@ package Characteristics
           b_eta_adj := transpose({b_eta[:, 1],b_eta[:, 2],b_eta[:, 3],b_eta[:,
             4] - b_eta[:, 1]*ln(U.K) + fill(ln(1e-6*U.g/(U.cm*U.s*m)), size(
             T_lim_alpha, 1) - 1)}) annotation (Inline=true);
+
         end b_eta_adj;
 
       algorithm
@@ -725,7 +739,6 @@ package Characteristics
           annotation (Inline=true, smoothOrder=2);
         // Note:  The annotation is set assuming that the values of the constants
         // result in a function that is first-order continuous.
-
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p>
 
@@ -752,10 +765,12 @@ package Characteristics
           // would need to be updated manually when b_eta is changed.
           output Real b_lambda_adj[size(T_lim_alpha, 1) - 1, 4]
             "Unit-adjusted NASA CEA constants for thermal conductivity";
+
         algorithm
           b_lambda_adj := transpose({b_lambda[:, 1],b_lambda[:, 2],b_lambda[:,
             3],b_lambda[:, 4] - b_lambda[:, 1]*ln(U.K) + fill(ln(1e-6*U.W/(U.cm
             *U.K)), size(T_lim_alpha, 1) - 1)}) annotation (Inline=true);
+
         end b_lambda_adj;
 
       algorithm
@@ -780,11 +795,11 @@ package Characteristics
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p></html>"));
       end R;
-
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html><p>The correlations for transport properties are available in
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>,
   <a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>]. For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
+
     end CharacteristicNASA;
 
     package Characteristic "Record for thermodynamic and resistive properties"
@@ -875,7 +890,7 @@ package Characteristics
 
     public
       function beta_T
-        "<html>Isothermal compressiblity as a function of temperature and pressure (&beta;<sub><i>T</i></sub>)</html>"
+        "<html>Isothermal compressibility as a function of temperature and pressure (&beta;<sub><i>T</i></sub>)</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
@@ -890,7 +905,7 @@ package Characteristics
                 dp=1)/v_Tp(T, p) annotation (Inline=true);
         annotation (Documentation(info="<html>
   <p>Note that the compressibility given by this function is static&mdash;unique
-  from the dynamic compressiblity given by
+  from the dynamic compressibility given by
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.Xi\">Xi</a>().</p>
 
   <p>For an ideal gas, this function is independent of temperature
@@ -934,6 +949,7 @@ package Characteristics
             InlineNoEvent=true,
             Inline=true,
             smoothOrder=0);
+
         end c0_p;
 
         function c_p_resid
@@ -955,6 +971,7 @@ package Characteristics
           // See h_resid() in Characteristic.h for the integral of (delh/delp)_T*dp.
           // This is the isobaric partial derivative of that function with respect
           // to temperature.  It is zero for an ideal gas.
+
         end c_p_resid;
 
       algorithm
@@ -989,7 +1006,6 @@ package Characteristics
         // Note 1:  This reduces to c_V = c_p - 1 for an ideal gas (where in
         // FCSys 1 = U.R).
         // Note 2:  [Dymond2002, p.17, eqs. 1.43 & 1.44] may be incorrect.
-
         annotation (Documentation(info="<html>
   <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
@@ -1049,6 +1065,7 @@ package Characteristics
                       v_Tp(T, p),
                       dT,
                       dv)));
+
       end dv_Tp;
 
       replaceable function F "Fluidity as a function of temperature"
@@ -1082,6 +1099,7 @@ package Characteristics
                 p,
                 referenceEnthalpy) - T*s(T, p)
           annotation (InlineNoEvent=true, Inline=true);
+
       end g;
 
       function h "Specific enthalpy as a function of temperature and pressure"
@@ -1130,6 +1148,7 @@ package Characteristics
                     T,
                     b_c[i, :],
                     specHeatCapPow)*dT annotation (Inline=true);
+
         end dh0_i;
 
         function h_resid "Residual specific enthalpy for pressure adjustment"
@@ -1153,6 +1172,7 @@ package Characteristics
           // and to v - T*(delv/delT)_p by applying the appropriate Maxwell relation
           // ((dels/delp)_T = -(delv/delT)_p).
           // Note:  This is zero for an ideal gas.
+
         end h_resid;
 
       algorithm
@@ -1181,7 +1201,6 @@ package Characteristics
         // gas.  In that case, the lower limit of the integral (delh/delp)_T*dp is
         // p=0, where a real gas behaves as an ideal gas.  Otherwise, the lower limit
         // is simply the reference pressure (p0).  See [Rao 1997, p. 271].
-
         annotation (Documentation(info="<html>
   <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
@@ -1212,7 +1231,6 @@ package Characteristics
           Inline=true,
           inverse(v=v_Tp(T, p)),
           derivative=dp_Tv);
-
         annotation (Documentation(info="<html><p>If the species is incompressible, then <i>p</i>(<i>T</i>, <i>v</i>) is undefined,
   and the function will return a value of zero.</p>
   <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a>().</p></html>"));
@@ -1229,6 +1247,7 @@ package Characteristics
 
       algorithm
         R := 2*alpha(T)/c_V(T, p) annotation (Inline=true);
+
       end R;
 
       function s "Specific entropy as a function of temperature and pressure"
@@ -1253,6 +1272,7 @@ package Characteristics
                     specHeatCapPow - 1) + B_c[i, 2] annotation (Inline=true);
           // This is the integral of c0_p/T*dT up to T at p0 with the
           // absolute entropy at the lower bound [McBride2002, p. 2].
+
         end s0_i;
 
         function s_resid "Residual specific entropy for pressure adjustment"
@@ -1269,6 +1289,7 @@ package Characteristics
                     specVolPow[1]) annotation (Inline=true);
           // Note:  According to the Maxwell relations the partial derivative
           // (dels/delp)_T is equal to -(delv/delT)_p.
+
         end s_resid;
 
         function coeff
@@ -1283,6 +1304,7 @@ package Characteristics
                     b_v[i, :] .* {specVolPow[1] - specVolPow[2] + i - j for j
                in 1:size(b_v, 2)},
                     specVolPow[2] - specVolPow[1] - i) annotation (Inline=true);
+
         end coeff;
 
       algorithm
@@ -1315,6 +1337,7 @@ package Characteristics
         // behaves as an ideal gas.  See [Rao1997, p. 272].  Note that the first
         // V_m inside the curly brackets of eq. 1.47 in [Dymond2002, p. 17] should
         // be a subscript rather than a multiplicative factor.
+
       end s;
 
       function v_Tp "Specific volume as a function of temperature and pressure"
@@ -1335,7 +1358,6 @@ package Characteristics
           Inline=true,
           inverse(p=p_Tv(T, v)),
           derivative=dv_Tp);
-
         annotation (Documentation(info="<html>
   <p>The derivative of this function is
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv\">dv</a>().</p></html>"));
@@ -1430,6 +1452,7 @@ second, or bulk dynamic viscosity and specific volume (see
     this requirement.</li>
     </ul>
     </p></html>"));
+
     end Characteristic;
 
     type ReferenceEnthalpy = enumeration(
@@ -1439,6 +1462,7 @@ second, or bulk dynamic viscosity and specific volume (see
         EnthalpyOfFormationAt25degC
           "Enthalpy at 25 degC and p0 is enthalpy of formation at 25 degC and p0 (if no additional offset)")
       "Enumeration for the reference enthalpy of a species";
+
   end BaseClasses;
   annotation (Documentation(info="<html>
   <p>Each species has a subpackage for each material phase in which the species
@@ -1466,4 +1490,5 @@ disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.ModelicaLicens
 FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
 </p></html>"));
+
 end Characteristics;
