@@ -29,7 +29,7 @@ package WorkInProgress "Incomplete classes under development"
           setVelX=true)))
       annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
-    inner BCs.Environment environment(analysis=true, T=293.15*U.K)
+    inner Conditions.Environment environment(analysis=true, T=293.15*U.K)
       annotation (Placement(transformation(extent={{70,70},{90,90}})));
 
   protected
@@ -56,7 +56,7 @@ package WorkInProgress "Incomplete classes under development"
         thickness=0.5,
         smooth=Smooth.None));
     annotation (experiment(StopTime=10), Commands(file=
-            "resources/scripts/Dymola/BCs.Examples.FluidAdapt.mos"));
+            "resources/scripts/Dymola/Conditions.Examples.FluidAdapt.mos"));
   end BCsExamplesClosedVolume;
 
   partial model BCsBaseClassesPartialLumpedVessel
@@ -430,7 +430,7 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
   model BCsAdaptersSpeciesFluid
     "<html>Adapter to connect a single fluid species between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
 
-    extends BCs.Adapters.Species.FluidNonionic;
+    extends Conditions.Adapters.Species.FluidNonionic;
     extends Modelica.Icons.UnderConstruction;
 
     Modelica.Electrical.Analog.Interfaces.NegativePin pin if Data.z <> 0
@@ -443,7 +443,7 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
     if the species is ionic.
     </p>
     <p>For additional information, see the
-    <a href=\"modelica://FCSys.BCs.Adapters.Species.BaseClasses.PartialSpecies\">
+    <a href=\"modelica://FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"), Icon(graphics={Line(
             points={{0,40},{80,40}},
@@ -457,21 +457,21 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
 
   model BCsAdaptersPhasesIonomer
     "<html>Adapter for ionomer between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
-    extends BCs.Adapters.Phases.BaseClasses.PartialPhase;
+    extends Conditions.Adapters.Phases.BaseClasses.PartialPhase;
     extends Modelica.Icons.UnderConstruction;
 
-    BCs.Adapters.Species.Solid Error;
+    Conditions.Adapters.Species.Solid Error;
     FCSys.WorkInProgress.BCsAdaptersSpeciesFluid 'H+'(redeclare package Data =
           FCSys.Characteristics.'H+'.Ionomer, redeclare package Medium =
           Modelica.Media.IdealGases.SingleGases.H2)
       annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
     // **Use model for H instead.
 
-    BCs.Adapters.Species.FluidNonionic H2O(redeclare package Data =
+    Conditions.Adapters.Species.FluidNonionic H2O(redeclare package Data =
           FCSys.Characteristics.H2O.Ionomer, redeclare package Medium =
           Modelica.Media.IdealGases.SingleGases.H2O)
       annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-    BCs.Adapters.Junctions.Junction2 junction2
+    Conditions.Adapters.Junctions.Junction2 junction2
       annotation (Placement(transformation(extent={{60,-50},{40,-30}})));
     Modelica.Fluid.Interfaces.FluidPort_b fluidPort(redeclare final package
         Medium = Medium) "Modelica fluid port" annotation (Placement(

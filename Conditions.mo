@@ -23,7 +23,7 @@ package BCs "Models for boundary conditions"
         gas(inclH2O=true))
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      inner BCs.Environment environment
+      inner Conditions.Environment environment
         annotation (Placement(transformation(extent={{30,30},{50,50}})));
     equation
       connect(subregion.yPositive, subregionFaceBC.face) annotation (Line(
@@ -34,7 +34,7 @@ package BCs "Models for boundary conditions"
           smooth=Smooth.None));
 
       annotation (experiment(NumberOfIntervals=5000), Commands(file=
-              "resources/scripts/Dymola/BCs.Examples.FaceBC.mos"));
+              "resources/scripts/Dymola/Conditions.Examples.FaceBC.mos"));
     end FaceBC;
 
     model FaceBCPhases
@@ -61,7 +61,7 @@ package BCs "Models for boundary conditions"
         inclH2O=true)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      inner BCs.Environment environment
+      inner Conditions.Environment environment
         annotation (Placement(transformation(extent={{30,30},{50,50}})));
     equation
       connect(gas.yPositive, phaseFaceBC.face) annotation (Line(
@@ -82,7 +82,7 @@ package BCs "Models for boundary conditions"
       extends Modelica.Icons.Example;
 
       // TODO:  Make this into a meaningful example.
-      BCs.Router router
+      Conditions.Router router
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
     end Router;
 
@@ -93,7 +93,7 @@ package BCs "Models for boundary conditions"
       // **fails check
       inner Modelica.Fluid.System system(T_ambient=293.15 + 5)
         annotation (Placement(transformation(extent={{40,70},{60,90}})));
-      inner BCs.Environment environment(T=350*U.K)
+      inner Conditions.Environment environment(T=350*U.K)
         annotation (Placement(transformation(extent={{70,72},{90,92}})));
       Subregions.SubregionNoIonomer subregion(
         L={1,1,1}*U.cm,
@@ -165,7 +165,7 @@ package BCs "Models for boundary conditions"
           smooth=Smooth.None));
       annotation (
         experiment(StopTime=2e-10),
-        Commands(file="resources/scripts/Dymola/BCs.Examples.Adapteminus.mos"),
+        Commands(file="resources/scripts/Dymola/Conditions.Examples.Adapteminus.mos"),
 
         Diagram(graphics));
     end AnodeAdapter;
@@ -765,7 +765,7 @@ package BCs "Models for boundary conditions"
         0 = A*face.J + pin.i*U.A/Data.z "Material";
 
         annotation (Documentation(info="<html><p>For additional information, see the
-    <a href=\"modelica://FCSys.BCs.Adapters.Species.BaseClasses.PartialSpecies\">
+    <a href=\"modelica://FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"), Icon(graphics={Line(
                       points={{0,40},{80,40}},
@@ -816,7 +816,7 @@ package BCs "Models for boundary conditions"
     if the species is ionic.
     </p>
     <p>For additional information, see the
-    <a href=\"modelica://FCSys.BCs.Adapters.Species.BaseClasses.PartialSpecies\">
+    <a href=\"modelica://FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"), Icon(graphics={Line(
                       points={{0,-40},{80,-40}},
@@ -836,7 +836,7 @@ package BCs "Models for boundary conditions"
       equation
         face.J = 0 "Closed";
         annotation (Documentation(info="<html><p>For additional information, see the
-    <a href=\"modelica://FCSys.BCs.Adapters.Species.BaseClasses.PartialSpecies\">
+    <a href=\"modelica://FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"), Icon(graphics={Line(
                       points={{0,20},{0,-20}},
@@ -1294,22 +1294,22 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-114,0})));
-      FCSys.BCs.BaseClasses.RealFunction unit4(y=unit4.u*U.kPa + U.atm)
+      FCSys.Conditions.BaseClasses.RealFunction unit4(y=unit4.u*U.kPa + U.atm)
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-94,-30})));
-      FCSys.BCs.BaseClasses.RealFunction unit5(y=unit5.u*U.kPa + U.atm)
+      FCSys.Conditions.BaseClasses.RealFunction unit5(y=unit5.u*U.kPa + U.atm)
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-74,0})));
-      FCSys.BCs.BaseClasses.RealFunction unit6(y=unit6.u*U.kPa + U.atm)
+      FCSys.Conditions.BaseClasses.RealFunction unit6(y=unit6.u*U.kPa + U.atm)
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-54,-30})));
-      FCSys.BCs.BaseClasses.RealFunction unit7(y=unit7.u*U.kPa + U.atm)
+      FCSys.Conditions.BaseClasses.RealFunction unit7(y=unit7.u*U.kPa + U.atm)
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -1324,32 +1324,32 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={14,0})));
-      FCSys.BCs.BaseClasses.RealFunction unit10(y=(unit10.u + 273.15)*U.K)
+      FCSys.Conditions.BaseClasses.RealFunction unit10(y=(unit10.u + 273.15)*U.K)
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={32,-30})));
-      FCSys.BCs.BaseClasses.RealFunction unit11(y=(unit11.u + 273.15)*U.K)
+      FCSys.Conditions.BaseClasses.RealFunction unit11(y=(unit11.u + 273.15)*U.K)
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={52,0})));
-      FCSys.BCs.BaseClasses.RealFunction unit12(y=(unit12.u + 273.15)*U.K)
+      FCSys.Conditions.BaseClasses.RealFunction unit12(y=(unit12.u + 273.15)*U.K)
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={72,-30})));
-      FCSys.BCs.BaseClasses.RealFunction unit13(y=(unit13.u + 273.15)*U.K)
+      FCSys.Conditions.BaseClasses.RealFunction unit13(y=(unit13.u + 273.15)*U.K)
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={92,0})));
-      FCSys.BCs.BaseClasses.RealFunction unit14(y=(unit14.u + 273.15)*U.K)
+      FCSys.Conditions.BaseClasses.RealFunction unit14(y=(unit14.u + 273.15)*U.K)
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={112,-30})));
-      FCSys.BCs.BaseClasses.RealFunction unit15(y=(unit15.u + 273.15)*U.K)
+      FCSys.Conditions.BaseClasses.RealFunction unit15(y=(unit15.u + 273.15)*U.K)
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -1822,9 +1822,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{-10,-10},{10,10}},
               rotation=315,
               origin={160,-160})));
-        replaceable FCSys.BCs.FaceBusPair.Subregion current[n_y, n_z](graphite(
+        replaceable FCSys.Conditions.FaceBusPair.Subregion current[n_y, n_z](graphite(
               'inclC+'=true, 'incle-'=true)) if inclIO constrainedby
-          FCSys.BCs.FaceBusPair.Subregion(graphite('inclC+'=true, 'incle-'=true))
+          FCSys.Conditions.FaceBusPair.Subregion(graphite('inclC+'=true, 'incle-'=true))
           annotation (Placement(transformation(extent={{-140,20},{-120,40}})));
 
       equation
@@ -2333,7 +2333,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       extends Modelica.Icons.BasesPackage;
 
       model NullPhase "Empty BC for a phase (no species)"
-        extends FCSys.BaseClasses.Icons.BCs.Single;
+        extends FCSys.BaseClasses.Icons.Conditions.Single;
 
         parameter Boolean inclLinX=true "X" annotation (
           Evaluate=true,
@@ -2371,10 +2371,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     model Species
       "<html>BCs for the <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connector</html>"
 
-      import FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial;
-      import FCSys.BCs.Chemical.BaseClasses.BCTypeMechanical;
-      import FCSys.BCs.Chemical.BaseClasses.BCTypeFluid;
-      extends FCSys.BaseClasses.Icons.BCs.Single;
+      import FCSys.Conditions.Chemical.BaseClasses.BCTypeMaterial;
+      import FCSys.Conditions.Chemical.BaseClasses.BCTypeMechanical;
+      import FCSys.Conditions.Chemical.BaseClasses.BCTypeFluid;
+      extends FCSys.BaseClasses.Icons.Conditions.Single;
 
       replaceable package Data =
           FCSys.Characteristics.BaseClasses.Characteristic constrainedby
@@ -2834,7 +2834,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     model Phase
       "<html>BC for the <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Phases\">Phase</a> model</html>"
-      extends FCSys.BaseClasses.Icons.BCs.Single;
+      extends FCSys.BaseClasses.Icons.Conditions.Single;
 
       // Volume
       replaceable Volume.Volume volumeBC(
@@ -3036,7 +3036,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       package BaseClasses "Base classes (not for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialBC "Partial model for a BC for volume"
-          extends FCSys.BCs.InertAmagat.BaseClasses.PartialBC;
+          extends FCSys.Conditions.InertAmagat.BaseClasses.PartialBC;
 
           constant BCType bCType "Type of BC";
           // Note:  This is included so that the type of BC is recorded with the
@@ -3077,7 +3077,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       package BaseClasses "Base classes (not for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialBC "Partial model for a mechanical BC"
-          extends FCSys.BCs.InertAmagat.BaseClasses.PartialBC;
+          extends FCSys.Conditions.InertAmagat.BaseClasses.PartialBC;
 
           parameter Axis axis=Axis.x "Axis" annotation (HideResult=true);
 
@@ -3137,7 +3137,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       package BaseClasses "Base classes (not for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialBC "Partial model for a thermal BC"
-          extends FCSys.BCs.InertAmagat.BaseClasses.PartialBC;
+          extends FCSys.Conditions.InertAmagat.BaseClasses.PartialBC;
 
           constant BCType bCType "Type of BC";
           // Note:  This is included so that the type of BC is recorded with the
@@ -3158,7 +3158,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     package BaseClasses "Base classes (not for direct use)"
       extends Modelica.Icons.BasesPackage;
       partial model PartialBC "Partial model for a BC"
-        extends FCSys.BaseClasses.Icons.BCs.Single;
+        extends FCSys.BaseClasses.Icons.Conditions.Single;
 
         parameter Boolean inclLinX=true "X" annotation (
           Evaluate=true,
@@ -3235,7 +3235,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     model Species
       "<html>BC for the <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model</html>"
 
-      extends FCSys.BaseClasses.Icons.BCs.Single;
+      extends FCSys.BaseClasses.Icons.Conditions.Single;
 
       // Pressure
       replaceable Pressure.Volume pressureBC(
@@ -3429,7 +3429,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       package BaseClasses "Base classes (not for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialBC "Partial model for a BC for pressure"
-          extends FCSys.BCs.InertDalton.BaseClasses.PartialBC;
+          extends FCSys.Conditions.InertDalton.BaseClasses.PartialBC;
 
           constant BCType bCType "Type of BC";
           // Note:  This is included so that the type of BC is recorded with the
@@ -3469,7 +3469,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       package BaseClasses "Base classes (not for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialBC "Partial model for a mechanical BC"
-          extends FCSys.BCs.InertDalton.BaseClasses.PartialBC;
+          extends FCSys.Conditions.InertDalton.BaseClasses.PartialBC;
 
           parameter Axis axis=Axis.x "Axis" annotation (HideResult=true);
 
@@ -3529,7 +3529,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       package BaseClasses "Base classes (not for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialBC "Partial model for a thermal BC"
-          extends FCSys.BCs.InertDalton.BaseClasses.PartialBC;
+          extends FCSys.Conditions.InertDalton.BaseClasses.PartialBC;
 
           constant BCType bCType "Type of BC";
           // Note:  This is included so that the type of BC is recorded with the
@@ -3550,7 +3550,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     package BaseClasses "Base classes (not for direct use)"
       extends Modelica.Icons.BasesPackage;
       partial model PartialBC "Partial model for a BC"
-        extends FCSys.BaseClasses.Icons.BCs.Single;
+        extends FCSys.BaseClasses.Icons.Conditions.Single;
 
         parameter Boolean inclLinX=true "X" annotation (
           Evaluate=true,
@@ -3625,7 +3625,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     model Subregion
       "<html>BC for a face of a <a href=\"modelica://FCSys.Regions.Region\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with efforts by default</html>"
-      extends FCSys.BaseClasses.Icons.BCs.Single;
+      extends FCSys.BaseClasses.Icons.Conditions.Single;
 
       Phases.Gas gas "Gas" annotation (Dialog(group="Phases",
             __Dymola_descriptionLabel=true), Placement(transformation(extent={{
@@ -4069,7 +4069,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       package BaseClasses "Base classes (not for direct use)"
         extends Modelica.Icons.BasesPackage;
         model NullPhase "Empty BC for a phase (no species)"
-          extends FCSys.BaseClasses.Icons.BCs.Single;
+          extends FCSys.BaseClasses.Icons.Conditions.Single;
 
           FCSys.Connectors.FaceBus face
             "Multi-species connector for linear momentum and heat"
@@ -4092,15 +4092,15 @@ connector (<a href=\"modelica://FCSys.Connectors.Face\">Face</a>,
 <a href=\"modelica://FCSys.Connectors.Face\">Face</a>, or
 <a href=\"modelica://FCSys.Connectors.Face\">Face</a>)
 is used in <a href=\"modelica://FCSys.Subregions.Species\">Species</a> models,
-and there is a corresponding <a href=\"modelica://FCSys.BCs.Face.Species.Species\">Species
+and there is a corresponding <a href=\"modelica://FCSys.Conditions.Face.Species.Species\">Species
 boundary condition</a> model in this package. The
 <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>
 connector is used in <a href=\"modelica://FCSys.Subregions.Phases\">Phase</a> models,
-and there are corresponding <a href=\"modelica://FCSys.BCs.Face.Phases\">Phase
+and there are corresponding <a href=\"modelica://FCSys.Conditions.Face.Phases\">Phase
 boundary condition</a> models.  The
 <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector is nested once more
 in models such as the <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a>,
-and there is a corresponding <a href=\"modelica://FCSys.BCs.Face.Subregion\">Subregion
+and there is a corresponding <a href=\"modelica://FCSys.Conditions.Face.Subregion\">Subregion
 boundary condition</a> model.
 </p></html>"));
   end FaceBus;
@@ -4110,7 +4110,7 @@ boundary condition</a> model.
     model Species
       "<html>BC for a face of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
 
-      extends FCSys.BaseClasses.Icons.BCs.Single;
+      extends FCSys.BaseClasses.Icons.Conditions.Single;
 
       // Normal
       replaceable Normal.CurrentAreic normal(source(k=0)) constrainedby
@@ -4383,7 +4383,7 @@ boundary condition</a> model.
       extends Modelica.Icons.BasesPackage;
 
       partial model PartialBC "Partial model for a BC"
-        extends FCSys.BaseClasses.Icons.BCs.Single;
+        extends FCSys.BaseClasses.Icons.Conditions.Single;
 
         parameter Boolean internal=true "Use internal value" annotation (
           Evaluate=true,
@@ -4445,7 +4445,7 @@ boundary condition</a> model.
 
     model Subregion
       "<html>BC for faces of a <a href=\"modelica://FCSys.Regions.Region\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with efforts by default</html>"
-      extends FCSys.BaseClasses.Icons.BCs.Double;
+      extends FCSys.BaseClasses.Icons.Conditions.Double;
 
       replaceable Phases.Gas gas "Gas" annotation (Dialog(group="Phases",
             __Dymola_descriptionLabel=true), Placement(transformation(extent={{
@@ -4625,7 +4625,7 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.FacePair.Species H2 if inclH2 "Model" annotation (Dialog(
+        FCSys.Conditions.FacePair.Species H2 if inclH2 "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclH2), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -4639,7 +4639,7 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.FacePair.Species H2O if inclH2O "Model" annotation (Dialog(
+        FCSys.Conditions.FacePair.Species H2O if inclH2O "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -4653,7 +4653,7 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.FacePair.Species N2 if inclN2 "Model" annotation (Dialog(
+        FCSys.Conditions.FacePair.Species N2 if inclN2 "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclN2), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -4667,7 +4667,7 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.FacePair.Species O2 if inclO2 "Model" annotation (Dialog(
+        FCSys.Conditions.FacePair.Species O2 if inclO2 "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclO2), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -4760,7 +4760,7 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.FacePair.Species 'C+' if 'inclC+' "Model" annotation (Dialog(
+        FCSys.Conditions.FacePair.Species 'C+' if 'inclC+' "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable='inclC+'), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -4774,7 +4774,7 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.FacePair.Species 'e-' if 'incle-' "Model" annotation (Dialog(
+        FCSys.Conditions.FacePair.Species 'e-' if 'incle-' "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable='incle-'), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -4832,7 +4832,7 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.FacePair.Species 'C19HF37O5S-' if 'inclC19HF37O5S-' "Model"
+        FCSys.Conditions.FacePair.Species 'C19HF37O5S-' if 'inclC19HF37O5S-' "Model"
           annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -4848,7 +4848,7 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.FacePair.Species 'H+' if 'inclH+' "Model" annotation (Dialog(
+        FCSys.Conditions.FacePair.Species 'H+' if 'inclH+' "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable='inclH+'), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -4862,7 +4862,7 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.FacePair.Species H2O if inclH2O "Model" annotation (Dialog(
+        FCSys.Conditions.FacePair.Species H2O if inclH2O "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -4939,7 +4939,7 @@ boundary condition</a> model.
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
-        FCSys.BCs.FacePair.Species H2O if inclH2O "Model" annotation (Dialog(
+        FCSys.Conditions.FacePair.Species H2O if inclH2O "Model" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             enable=inclH2O), Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -4967,7 +4967,7 @@ boundary condition</a> model.
       package BaseClasses "Base classes (not for direct use)"
         extends Modelica.Icons.BasesPackage;
         model NullPhase "Empty BC for a phase (no species)"
-          extends FCSys.BaseClasses.Icons.BCs.Double;
+          extends FCSys.BaseClasses.Icons.Conditions.Double;
 
           FCSys.Connectors.FaceBus negative
             "Multi-species connector for linear momentum and heat" annotation (
@@ -4987,7 +4987,7 @@ boundary condition</a> model.
 
     annotation (Documentation(info="<html><p>The hierarchy of these
  boundary condition models is similar to that of the models in the
- <a href=\"modelica://FCSys.BCs.FaceBus\">BCs.FaceBus</a> package.
+ <a href=\"modelica://FCSys.Conditions.FaceBus\">Conditions.FaceBus</a> package.
  For more information, please see the documentation in that package.</p></html>"));
   end FaceBusPair;
 
@@ -4998,7 +4998,7 @@ boundary condition</a> model.
 
     model Species
       "<html>BC for a pair of faces of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
-      extends FCSys.BaseClasses.Icons.BCs.Double;
+      extends FCSys.BaseClasses.Icons.Conditions.Double;
 
       // Normal
       replaceable Normal.CurrentAreic normal constrainedby
@@ -5285,7 +5285,7 @@ boundary condition</a> model.
       extends Modelica.Icons.BasesPackage;
 
       partial model PartialBC "Partial model for a BC"
-        extends FCSys.BaseClasses.Icons.BCs.Double;
+        extends FCSys.BaseClasses.Icons.Conditions.Double;
 
         parameter Boolean internal=true "Use internal specification"
           annotation (
@@ -5472,7 +5472,7 @@ those generated by the model's <code>connect</code> statements.</p>
     annotation (
       defaultComponentPrefixes="inner",
       missingInnerMessage="Your model is using an outer \"environment\" record, but an inner \"environment\" record is not defined.
-For simulation, specify global default settings by dragging FCSys.BCs.Environment into your model.
+For simulation, specify global default settings by dragging FCSys.Conditions.Environment into your model.
 The default global default settings will be used for the current simulation.",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={
@@ -5578,17 +5578,17 @@ Variable <i>u</i> is too, and it may be used in the expression for <i>y</i>.
 </html>"));
     end RealFunction;
   end BaseClasses;
-  annotation (Documentation(info="<html><p>The <a href=\"modelica://FCSys.BCs.Chemical\">Chemical</a>,
-  <a href=\"modelica://FCSys.BCs.ChemicalBus\">ChemicalBus</a>, <a href=\"modelica://FCSys.BCs.InertAmagat\">Inert</a>,
-  <a href=\"modelica://FCSys.BCs.InertAmagat\">InertAmagat</a>,
-  <a href=\"modelica://FCSys.BCs.InertDalton\">InertDalton</a>, <a href=\"modelica://FCSys.BCs.Face\">Face</a>, and
-  <a href=\"modelica://FCSys.BCs.FaceBus\">FaceBus</a> packages contain models to impose boundary conditions on the
+  annotation (Documentation(info="<html><p>The <a href=\"modelica://FCSys.Conditions.Chemical\">Chemical</a>,
+  <a href=\"modelica://FCSys.Conditions.ChemicalBus\">ChemicalBus</a>, <a href=\"modelica://FCSys.Conditions.InertAmagat\">Inert</a>,
+  <a href=\"modelica://FCSys.Conditions.InertAmagat\">InertAmagat</a>,
+  <a href=\"modelica://FCSys.Conditions.InertDalton\">InertDalton</a>, <a href=\"modelica://FCSys.Conditions.Face\">Face</a>, and
+  <a href=\"modelica://FCSys.Conditions.FaceBus\">FaceBus</a> packages contain models to impose boundary conditions on the
   connectors with the same names (<a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> or
   <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a>, <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> or 
-  <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a>, <a href=\"modelica://FCSys.BCs.InertAmagat\">InertAmagat</a>,
-  <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a>, <a href=\"modelica://FCSys.BCs.Face\">Face</a>, and
-  <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>).  The <a href=\"modelica://FCSys.BCs.FaceDifferential\">FacePair</a> and
-  <a href=\"modelica://FCSys.BCs.FaceBusPair\">FaceBusPair</a> packages contain models for pairs of <a href=\"modelica://FCSys.BCs.Face\">Face</a> and
+  <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a>, <a href=\"modelica://FCSys.Conditions.InertAmagat\">InertAmagat</a>,
+  <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a>, <a href=\"modelica://FCSys.Conditions.Face\">Face</a>, and
+  <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>).  The <a href=\"modelica://FCSys.Conditions.FaceDifferential\">FacePair</a> and
+  <a href=\"modelica://FCSys.Conditions.FaceBusPair\">FaceBusPair</a> packages contain models for pairs of <a href=\"modelica://FCSys.Conditions.Face\">Face</a> and
   <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connectors.
   
 </p></html>"));

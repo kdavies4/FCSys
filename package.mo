@@ -118,7 +118,7 @@ package UsersGuide "User's Guide"
         be accessed through the parameter dialog by editing the replaceable model.  Note that
         many models have auxiliary output variables available for additional analysis and diagnostics.
         These may be included by setting <code>analysis=true</code> in the outer environment model (instance
-        of <a href=\"modelica://FCSys.BCs.Environment\">Environment</a>).</li>
+        of <a href=\"modelica://FCSys.Conditions.Environment\">Environment</a>).</li>
         <li>Develop your own classes.  It should be possible to model other electrochemical
         devices (solid oxide fuel cells, lithium ion batteries, flow batteries/regenerative fuel cells, etc.) by
         extending the existing classes and

@@ -20,7 +20,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         "Number of regions along the channel" annotation (HideResult=true);
       final parameter Integer n_z=size(L_z, 1)
         "Number of regions across the channel" annotation (HideResult=true);
-      inner FCSys.BCs.Environment environment(analysis=true)
+      inner FCSys.Conditions.Environment environment(analysis=true)
         annotation (Placement(transformation(extent={{70,70},{90,90}})));
       AnFPs.AnFP anFP(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
@@ -43,7 +43,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaFPs.CaFP caFP(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{50,-10},{70,10}})));
 
-      FCSys.BCs.FaceBus.SubregionClosed bC1[n_y, n_z](each graphite(
+      FCSys.Conditions.FaceBus.SubregionClosed bC1[n_y, n_z](each graphite(
           'inclC+'=true,
           'incle-'=true,
           'C+'(thermal(spec(k=environment.T))),
@@ -53,17 +53,17 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=90,
             origin={-84,0})));
 
-      FCSys.BCs.FaceBus.SubregionClosed bC2[n_y, n_z](each graphite(
+      FCSys.Conditions.FaceBus.SubregionClosed bC2[n_y, n_z](each graphite(
           'inclC+'=true,
           'incle-'=true,
           'C+'(thermal(spec(k=environment.T))),
           'e-'(thermal(spec(k=environment.T)), redeclare
-              FCSys.BCs.Face.Material.Density normal(spec(k(start=U.atm/(298.15
+              FCSys.Conditions.Face.Material.Density normal(spec(k(start=U.atm/(298.15
                       *U.K))))))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={84,0})));
-      FCSys.BCs.FaceBus.SubregionClosed bC3[anFP.n_x, n_z](each gas(
+      FCSys.Conditions.FaceBus.SubregionClosed bC3[anFP.n_x, n_z](each gas(
           inclH2=true,
           inclH2O=true,
           H2(thermal(spec(k=environment.T))),
@@ -73,7 +73,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=180,
             origin={-60,-24})));
 
-      FCSys.BCs.FaceBus.SubregionClosed bC4[anFP.n_x, n_z](each gas(
+      FCSys.Conditions.FaceBus.SubregionClosed bC4[anFP.n_x, n_z](each gas(
           inclH2=true,
           inclH2O=true,
           H2(thermal(spec(k=environment.T))),
@@ -83,7 +83,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=0,
             origin={-60,24})));
 
-      FCSys.BCs.FaceBus.SubregionClosed bC5[caFP.n_x, n_z](each gas(
+      FCSys.Conditions.FaceBus.SubregionClosed bC5[caFP.n_x, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -94,7 +94,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={60,-24})));
-      FCSys.BCs.FaceBus.SubregionClosed bC6[caFP.n_x, n_z](each gas(
+      FCSys.Conditions.FaceBus.SubregionClosed bC6[caFP.n_x, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -211,7 +211,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaGDLs.CaGDL caGDL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{30,-10},{50,10}})));
 
-      FCSys.BCs.FaceBus.SubregionClosed bC1[n_y, n_z](each gas(
+      FCSys.Conditions.FaceBus.SubregionClosed bC1[n_y, n_z](each gas(
           inclH2O=true,
           inclH2=true,
           H2(thermal(spec(k=environment.T))),
@@ -225,7 +225,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=90,
             origin={-64,0})));
 
-      FCSys.BCs.FaceBus.SubregionClosed bC2[n_y, n_z](each gas(
+      FCSys.Conditions.FaceBus.SubregionClosed bC2[n_y, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -236,13 +236,13 @@ package Regions "3D arrays of discrete, interconnected subregions"
           'incle-'=true,
           'C+'(thermal(spec(k=environment.T))),
           'e-'(thermal(spec(k=environment.T)), redeclare
-              FCSys.BCs.Face.Material.Density normal(spec(k(start=U.atm/(298.15
+              FCSys.Conditions.Face.Material.Density normal(spec(k(start=U.atm/(298.15
                       *U.K))))))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={64,0})));
 
-      inner FCSys.BCs.Environment environment(analysis=true)
+      inner FCSys.Conditions.Environment environment(analysis=true)
         annotation (Placement(transformation(extent={{70,70},{90,90}})));
 
     equation
@@ -314,7 +314,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaCLs.CaCL caCL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{10,-10},{30,10}})));
 
-      FCSys.BCs.FaceBus.SubregionFlow bC1[n_y, n_z](
+      FCSys.Conditions.FaceBus.SubregionFlow bC1[n_y, n_z](
         each gas(inclH2=true, inclH2O=true),
         each graphite('inclC+'=true, 'incle-'=true),
         each ionomer('inclC19HF37O5S-'=true, 'inclH+'=true)) annotation (
@@ -323,31 +323,31 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=90,
             origin={-44,-8.88178e-16})));
 
-      FCSys.BCs.FaceBus.SubregionFlow bC2[n_y, n_z](
+      FCSys.Conditions.FaceBus.SubregionFlow bC2[n_y, n_z](
         each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
-          O2(redeclare FCSys.BCs.Face.Material.Density normal(spec(k(start=U.atm
+          O2(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k(start=U.atm
                       /(298.15*U.K))))),
-          H2O(redeclare FCSys.BCs.Face.Material.Density normal(spec(k(start=U.atm
+          H2O(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k(start=U.atm
                       /(298.15*U.K)))))),
         each graphite(
           'inclC+'=true,
           'incle-'=true,
-          'e-'(redeclare FCSys.BCs.Face.Material.Current normal(redeclare
+          'e-'(redeclare FCSys.Conditions.Face.Material.Current normal(redeclare
                 Modelica.Blocks.Sources.Ramp spec(duration=1000, height=-2*U.A)))),
 
         each ionomer(
           'inclC19HF37O5S-'=true,
           'inclH+'=true,
-          'H+'(redeclare FCSys.BCs.Face.Material.Density normal(spec(k(start=U.atm
+          'H+'(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k(start=U.atm
                       /(298.15*U.K))))))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={44,0})));
 
-      inner FCSys.BCs.Environment environment(analysis=true)
+      inner FCSys.Conditions.Environment environment(analysis=true)
         annotation (Placement(transformation(extent={{70,70},{90,90}})));
 
     equation
@@ -398,7 +398,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         "Number of regions along the channel" annotation (HideResult=true);
       final parameter Integer n_z=size(L_z, 1)
         "Number of regions across the channel" annotation (HideResult=true);
-      inner FCSys.BCs.Environment environment(
+      inner FCSys.Conditions.Environment environment(
         p=149.6*U.kPa,
         T=333.15*U.K,
         analysis=true)
@@ -406,7 +406,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnFPs.AnFP anFP(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
 
-      FCSys.BCs.FaceBus.SubregionClosed bC1[n_y, n_z](each graphite(
+      FCSys.Conditions.FaceBus.SubregionClosed bC1[n_y, n_z](each graphite(
           'inclC+'=true,
           'incle-'=true,
           'C+'(thermal(spec(k=environment.T))),
@@ -415,7 +415,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-84,0})));
-      FCSys.BCs.FaceBus.SubregionClosed bC2[n_y, n_z](each gas(
+      FCSys.Conditions.FaceBus.SubregionClosed bC2[n_y, n_z](each gas(
           inclH2=true,
           inclH2O=true,
           H2(thermal(spec(k=environment.T))),
@@ -424,13 +424,13 @@ package Regions "3D arrays of discrete, interconnected subregions"
           'incle-'=true,
           'C+'(thermal(spec(k=environment.T))),
           'e-'(thermal(spec(k=environment.T)),redeclare
-              FCSys.BCs.Face.Material.Density material))) annotation (Placement(
+              FCSys.Conditions.Face.Material.Density material))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-36,0})));
 
-      FCSys.BCs.FaceBus.SubregionClosed bC3[anFP.n_x, n_z](each gas(
+      FCSys.Conditions.FaceBus.SubregionClosed bC3[anFP.n_x, n_z](each gas(
           inclH2=true,
           inclH2O=true,
           H2(thermal(spec(k=environment.T))),
@@ -439,7 +439,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={-60,-24})));
-      FCSys.BCs.FaceBus.SubregionClosed bC4[anFP.n_x, n_z](each gas(
+      FCSys.Conditions.FaceBus.SubregionClosed bC4[anFP.n_x, n_z](each gas(
           inclH2=true,
           inclH2O=true,
           H2(thermal(spec(k=environment.T))),
@@ -493,7 +493,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         "Number of regions along the channel" annotation (HideResult=true);
       final parameter Integer n_z=size(L_z, 1)
         "Number of regions across the channel" annotation (HideResult=true);
-      inner FCSys.BCs.Environment environment(
+      inner FCSys.Conditions.Environment environment(
         p=149.6*U.kPa,
         T=333.15*U.K,
         analysis=true)
@@ -501,7 +501,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnGDLs.AnGDL anGDL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
 
-      FCSys.BCs.FaceBus.SubregionClosed bC1[n_y, n_z](each gas(
+      FCSys.Conditions.FaceBus.SubregionClosed bC1[n_y, n_z](each gas(
           inclH2=true,
           inclH2O=true,
           H2(thermal(spec(k=environment.T))),
@@ -514,7 +514,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-64,0})));
-      FCSys.BCs.FaceBus.SubregionClosed bC2[n_y, n_z](each gas(
+      FCSys.Conditions.FaceBus.SubregionClosed bC2[n_y, n_z](each gas(
           inclH2=true,
           inclH2O=true,
           H2(thermal(spec(k=environment.T))),
@@ -561,7 +561,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         "Number of regions along the channel" annotation (HideResult=true);
       final parameter Integer n_z=size(L_z, 1)
         "Number of regions across the channel" annotation (HideResult=true);
-      inner FCSys.BCs.Environment environment(
+      inner FCSys.Conditions.Environment environment(
         p=149.6*U.kPa,
         T=333.15*U.K,
         analysis=false)
@@ -569,7 +569,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnCLs.AnCL anCL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 
-      FCSys.BCs.FaceBus.SubregionFlow bC1[n_y, n_z](
+      FCSys.Conditions.FaceBus.SubregionFlow bC1[n_y, n_z](
         each gas(inclH2=true, inclH2O=true),
         each graphite('inclC+'=true, 'incle-'=true),
         each ionomer('inclC19HF37O5S-'=true, 'inclH+'=true)) annotation (
@@ -578,24 +578,24 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=90,
             origin={-44,-8.88178e-16})));
 
-      FCSys.BCs.FaceBus.SubregionFlow bC2[n_y, n_z](
+      FCSys.Conditions.FaceBus.SubregionFlow bC2[n_y, n_z](
         each gas(
           inclH2=true,
           inclH2O=true,
-          H2(redeclare FCSys.BCs.Face.Material.Density normal(spec(k=U.atm/(
+          H2(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k=U.atm/(
                     298.15*U.K)))),
-          H2O(redeclare FCSys.BCs.Face.Material.Density normal(spec(k=U.atm/(
+          H2O(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k=U.atm/(
                     298.15*U.K))))),
         each graphite(
           'inclC+'=true,
           'incle-'=true,
-          'e-'(redeclare FCSys.BCs.Face.Material.Current normal(redeclare
+          'e-'(redeclare FCSys.Conditions.Face.Material.Current normal(redeclare
                 Modelica.Blocks.Sources.Ramp spec(duration=1000, height=2*U.A)))),
 
         each ionomer(
           'inclC19HF37O5S-'=true,
           'inclH+'=true,
-          'H+'(redeclare FCSys.BCs.Face.Material.Density normal(spec(k(start=U.atm
+          'H+'(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k(start=U.atm
                       /(298.15*U.K))))))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -642,7 +642,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       final parameter Integer n_z=size(L_z, 1)
         "Number of regions across the channel" annotation (HideResult=true);
 
-      inner FCSys.BCs.Environment environment(
+      inner FCSys.Conditions.Environment environment(
         p=149.6*U.kPa,
         T=333.15*U.K,
         analysis=true)
@@ -650,12 +650,12 @@ package Regions "3D arrays of discrete, interconnected subregions"
       PEMs.PEM pEM(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      FCSys.BCs.FaceBus.SubregionClosed bC1[n_y, n_z](each gas(inclH2O=true,
+      FCSys.Conditions.FaceBus.SubregionClosed bC1[n_y, n_z](each gas(inclH2O=true,
             H2O(thermal(spec(k=environment.T)))), each ionomer(
           'inclC19HF37O5S-'=true,
           'inclH+'=true,
           Error));
-      FCSys.BCs.FaceBus.SubregionClosed bC2[n_y, n_z](each gas(inclH2O=true,
+      FCSys.Conditions.FaceBus.SubregionClosed bC2[n_y, n_z](each gas(inclH2O=true,
             H2O(thermal(spec(k=environment.T)))), each ionomer(
           'inclC19HF37O5S-'=true,
           'inclH+'=true,
@@ -693,7 +693,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         "Number of regions along the channel" annotation (HideResult=true);
       final parameter Integer n_z=size(L_z, 1)
         "Number of regions across the channel" annotation (HideResult=true);
-      inner FCSys.BCs.Environment environment(
+      inner FCSys.Conditions.Environment environment(
         p=149.6*U.kPa,
         T=333.15*U.K,
         analysis=true)
@@ -702,7 +702,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaCLs.CaCL caCL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{10,-10},{30,10}})));
 
-      FCSys.BCs.FaceBus.SubregionFlow bC1[n_y, n_z](
+      FCSys.Conditions.FaceBus.SubregionFlow bC1[n_y, n_z](
         each gas(
           inclH2O=true,
           inclN2=true,
@@ -713,27 +713,27 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-4,-8.88178e-16})));
-      FCSys.BCs.FaceBus.SubregionFlow bC2[n_y, n_z](
+      FCSys.Conditions.FaceBus.SubregionFlow bC2[n_y, n_z](
         each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
-          O2(redeclare FCSys.BCs.Face.Material.Density normal(spec(k(start=U.atm
+          O2(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k(start=U.atm
                       /(298.15*U.K))))),
-          H2O(redeclare FCSys.BCs.Face.Material.Density normal(spec(k(start=U.atm
+          H2O(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k(start=U.atm
                       /(298.15*U.K)))))),
         each graphite(
           'inclC+'=true,
           'incle-'=true,
-          'C+'(redeclare FCSys.BCs.Face.Thermal.Temperature thermal(spec(k(
+          'C+'(redeclare FCSys.Conditions.Face.Thermal.Temperature thermal(spec(k(
                     start=298.15*U.K)))),
-          'e-'(redeclare FCSys.BCs.Face.Material.Current normal(redeclare
+          'e-'(redeclare FCSys.Conditions.Face.Material.Current normal(redeclare
                 Modelica.Blocks.Sources.Ramp spec(duration=1000, height=-2*U.A)))),
 
         each ionomer(
           'inclC19HF37O5S-'=true,
           'inclH+'=true,
-          'H+'(redeclare FCSys.BCs.Face.Material.Density normal(spec(k(start=U.atm
+          'H+'(redeclare FCSys.Conditions.Face.Material.Density normal(spec(k(start=U.atm
                       /(298.15*U.K))))))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -779,7 +779,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         "Number of regions along the channel" annotation (HideResult=true);
       final parameter Integer n_z=size(L_z, 1)
         "Number of regions across the channel" annotation (HideResult=true);
-      inner FCSys.BCs.Environment environment(
+      inner FCSys.Conditions.Environment environment(
         p=149.6*U.kPa,
         T=333.15*U.K,
         analysis=true)
@@ -787,7 +787,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaGDLs.CaGDL caGDL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{30,-10},{50,10}})));
 
-      FCSys.BCs.FaceBus.SubregionClosed bC1[n_y, n_z](each gas(
+      FCSys.Conditions.FaceBus.SubregionClosed bC1[n_y, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -802,7 +802,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={16,-8.88178e-16})));
-      FCSys.BCs.FaceBus.SubregionClosed bC2[n_y, n_z](each gas(
+      FCSys.Conditions.FaceBus.SubregionClosed bC2[n_y, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -851,7 +851,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
         "Number of regions along the channel" annotation (HideResult=true);
       final parameter Integer n_z=size(L_z, 1)
         "Number of regions across the channel" annotation (HideResult=true);
-      inner FCSys.BCs.Environment environment(
+      inner FCSys.Conditions.Environment environment(
         p=149.6*U.kPa,
         T=333.15*U.K,
         analysis=true)
@@ -859,7 +859,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaFPs.CaFP caFP(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{50,-10},{70,10}})));
 
-      FCSys.BCs.FaceBus.SubregionClosed bC1[n_y, n_z](each gas(
+      FCSys.Conditions.FaceBus.SubregionClosed bC1[n_y, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -874,17 +874,17 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={36,0})));
-      FCSys.BCs.FaceBus.SubregionClosed bC2[n_y, n_z](each graphite(
+      FCSys.Conditions.FaceBus.SubregionClosed bC2[n_y, n_z](each graphite(
           'inclC+'=true,
           'incle-'=true,
           'C+'(thermal(spec(k=environment.T))),
           'e-'(thermal(spec(k=environment.T)),redeclare
-              FCSys.BCs.Face.Material.Density material))) annotation (Placement(
+              FCSys.Conditions.Face.Material.Density material))) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={84,0})));
-      FCSys.BCs.FaceBus.SubregionClosed bC3[caFP.n_x, n_z](each gas(
+      FCSys.Conditions.FaceBus.SubregionClosed bC3[caFP.n_x, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -895,7 +895,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={60,-24})));
-      FCSys.BCs.FaceBus.SubregionClosed bC4[caFP.n_x, n_z](each gas(
+      FCSys.Conditions.FaceBus.SubregionClosed bC4[caFP.n_x, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -1065,7 +1065,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       //         @ 300K, 0.03531 bar (saturation pressure): 9.09e-6 Pa.s
       //         @ 350K, 0.4163 bar (saturation pressure): 1.109e-5 Pa.s
 
-      outer BCs.Environment environment "Environmental conditions" annotation (
+      outer Conditions.Environment environment "Environmental conditions" annotation (
           Placement(transformation(extent={{40,40},{60,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
 
@@ -1295,7 +1295,7 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
       // Teflon: 0.45 W/(m.K) at 400 K [Incropera2002, p. 916]
 
     protected
-      outer BCs.Environment environment "Environmental conditions" annotation (
+      outer Conditions.Environment environment "Environmental conditions" annotation (
           Placement(transformation(extent={{40,40},{60,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
 
@@ -1667,7 +1667,7 @@ the z axis extends across the width of the channel.</p></html>"),
       // (1 - epsilon) is the volume fraction of the conducting solid, and the power of (1 - epsilon)^(3/2) is the area fraction of the conducting solid.
 
     protected
-      outer BCs.Environment environment "Environmental conditions" annotation (
+      outer Conditions.Environment environment "Environmental conditions" annotation (
           Placement(transformation(extent={{40,40},{60,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
 
@@ -1858,7 +1858,7 @@ the z axis extends across the width of the channel.</p>
       // TODO:  Add proper value of Xi for H+.
 
     protected
-      outer BCs.Environment environment "Environmental conditions" annotation (
+      outer Conditions.Environment environment "Environmental conditions" annotation (
           Placement(transformation(extent={{40,40},{60,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
 
@@ -2129,7 +2129,7 @@ the z axis extends across the width of the channel.</p>
       final parameter Q.Volume xV=x*V "Gas volume";
 
     protected
-      outer BCs.Environment environment "Environmental conditions" annotation (
+      outer Conditions.Environment environment "Environmental conditions" annotation (
           Placement(transformation(extent={{40,40},{60,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
 
@@ -2328,7 +2328,7 @@ the z axis extends across the width of the channel.</p>
       // See AnGDLs.AnGDL for additional notes and data.
 
     protected
-      outer BCs.Environment environment "Environmental conditions" annotation (
+      outer Conditions.Environment environment "Environmental conditions" annotation (
           Placement(transformation(extent={{40,40},{60,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
 
@@ -2686,7 +2686,7 @@ the z axis extends across the width of the channel.</p>
       // See AnFPs.AnFP for data on additional materials.
 
     protected
-      outer BCs.Environment environment "Environmental conditions" annotation (
+      outer Conditions.Environment environment "Environmental conditions" annotation (
           Placement(transformation(extent={{40,40},{60,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
 

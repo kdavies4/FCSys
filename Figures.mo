@@ -1246,20 +1246,20 @@ package Figures "Graphical layouts for documentation"
 
   model EnvironmentIcon
 
-    FCSys.BCs.Environment Environment
+    FCSys.Conditions.Environment Environment
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
     annotation (Diagram(graphics));
   end EnvironmentIcon;
 
   model RouterCrossOver
 
-    BCs.Router router(crossOver=true)
+    Conditions.Router router(crossOver=true)
       annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   end RouterCrossOver;
 
   model RouterPassThrough
 
-    BCs.Router router
+    Conditions.Router router
       annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   end RouterPassThrough;
 

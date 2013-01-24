@@ -54,9 +54,9 @@ package Subregions
           final inclN2=inclN2,
           final inclO2=inclO2))
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-      inner FCSys.BCs.Environment environment(analysis=true)
+      inner FCSys.Conditions.Environment environment(analysis=true)
         annotation (Placement(transformation(extent={{30,20},{50,40}})));
-      replaceable FCSys.BCs.FaceBus.SubregionClosed bC1(
+      replaceable FCSys.Conditions.FaceBus.SubregionClosed bC1(
         gas(
           final inclH2=inclH2,
           final inclH2O=inclH2O,
@@ -64,13 +64,13 @@ package Subregions
           final inclO2=inclO2),
         graphite(final 'inclC+'='inclC+', final 'incle-'='incle-'),
         ionomer(final 'inclC19HF37O5S-'='inclC19HF37O5S-', final 'inclH+'=
-              'inclH+')) constrainedby FCSys.BCs.FaceBus.Subregion annotation (
+              'inclH+')) constrainedby FCSys.Conditions.FaceBus.Subregion annotation (
           Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-20,0})));
 
-      replaceable FCSys.BCs.FaceBus.SubregionClosed bC2(
+      replaceable FCSys.Conditions.FaceBus.SubregionClosed bC2(
         gas(
           final inclH2=inclH2,
           final inclH2O=inclH2O,
@@ -78,7 +78,7 @@ package Subregions
           final inclO2=inclO2),
         graphite(final 'inclC+'='inclC+', final 'incle-'='incle-'),
         ionomer(final 'inclC19HF37O5S-'='inclC19HF37O5S-', final 'inclH+'=
-              'inclH+')) constrainedby FCSys.BCs.FaceBus.Subregion annotation (
+              'inclH+')) constrainedby FCSys.Conditions.FaceBus.Subregion annotation (
           Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -117,8 +117,8 @@ package Subregions
         'incle-'=true,
         inclH2=true,
         'inclH+'=true,
-        redeclare FCSys.BCs.FaceBus.Subregion bC2(graphite('e-'(redeclare
-                FCSys.BCs.Face.Material.Current normal(redeclare
+        redeclare FCSys.Conditions.FaceBus.Subregion bC2(graphite('e-'(redeclare
+                FCSys.Conditions.Face.Material.Current normal(redeclare
                   Modelica.Blocks.Sources.Ramp spec(duration=1000, height=2*U.A))))));
 
       extends Modelica.Icons.UnderConstruction;
@@ -140,8 +140,8 @@ package Subregions
         inclH2O=true,
         'inclH+'=true,
         inclO2=true,
-        redeclare FCSys.BCs.FaceBus.Subregion bC2(graphite('e-'(redeclare
-                FCSys.BCs.Face.Material.Current normal(redeclare
+        redeclare FCSys.Conditions.FaceBus.Subregion bC2(graphite('e-'(redeclare
+                FCSys.Conditions.Face.Material.Current normal(redeclare
                   Modelica.Blocks.Sources.Ramp spec(duration=1000, height=2*U.A))))));
 
       extends Modelica.Icons.UnderConstruction;
@@ -257,10 +257,10 @@ package Subregions
         inclFacesZ=false)
         annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
-      inner FCSys.BCs.Environment environment(analysis=true)
+      inner FCSys.Conditions.Environment environment(analysis=true)
         annotation (Placement(transformation(extent={{60,20},{80,40}})));
-      replaceable FCSys.BCs.FaceBus.SubregionClosed bC1 constrainedby
-        FCSys.BCs.FaceBus.Subregion(
+      replaceable FCSys.Conditions.FaceBus.SubregionClosed bC1 constrainedby
+        FCSys.Conditions.FaceBus.Subregion(
         gas(
           final inclH2=inclH2,
           final inclH2O=inclH2O,
@@ -273,8 +273,8 @@ package Subregions
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-50,0})));
-      replaceable FCSys.BCs.FaceBus.SubregionClosed bC2 constrainedby
-        FCSys.BCs.FaceBus.Subregion(
+      replaceable FCSys.Conditions.FaceBus.SubregionClosed bC2 constrainedby
+        FCSys.Conditions.FaceBus.Subregion(
         gas(
           final inclH2=inclH2,
           final inclH2O=inclH2O,
@@ -283,11 +283,11 @@ package Subregions
         graphite(
           final 'inclC+'='inclC+',
           final 'incle-'='incle-',
-          'C+'(redeclare BCs.Face.Material.Force material)),
+          'C+'(redeclare Conditions.Face.Material.Force material)),
         ionomer(
           final 'inclC19HF37O5S-'='inclC19HF37O5S-',
           final 'inclH+'='inclH+',
-          'C19HF37O5S-'(redeclare BCs.Face.Material.Force material)))
+          'C19HF37O5S-'(redeclare Conditions.Face.Material.Force material)))
         annotation (__Dymola_choicesFromPackage=true, Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -430,8 +430,8 @@ package Subregions
               initMethPartNum=InitMethScalar.Pressure,
               V_IC=0.99*subregion2.V,
               T(displayUnit="degC")))),
-        redeclare FCSys.BCs.FaceBus.SubregionClosedAdiabatic bC1,
-        redeclare FCSys.BCs.FaceBus.SubregionClosedAdiabatic bC2);
+        redeclare FCSys.Conditions.FaceBus.SubregionClosedAdiabatic bC1,
+        redeclare FCSys.Conditions.FaceBus.SubregionClosedAdiabatic bC2);
 
       annotation (Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ThermalConduction.mos"),
@@ -458,8 +458,8 @@ package Subregions
                     "degC")))),
         subregion2(gas(N2(p_IC=environment.p, phi(displayUnit="mm/s"))),
             graphite('C+'(V_IC=0.5*subregion2.V, T(displayUnit="degC")))),
-        redeclare FCSys.BCs.FaceBus.SubregionClosedAdiabatic bC1,
-        redeclare FCSys.BCs.FaceBus.SubregionClosedAdiabatic bC2);
+        redeclare FCSys.Conditions.FaceBus.SubregionClosedAdiabatic bC1,
+        redeclare FCSys.Conditions.FaceBus.SubregionClosedAdiabatic bC2);
 
       annotation (Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ThermalConductionConvection.mos"),
@@ -475,30 +475,30 @@ package Subregions
 
       Reaction reaction(n_spec=3)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-      FCSys.BCs.Chemical.Species species1(redeclare
-          FCSys.Characteristics.'e-'.Graphite Data, material=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.PotentialPerTemperature)
+      FCSys.Conditions.Chemical.Species species1(redeclare
+          FCSys.Characteristics.'e-'.Graphite Data, material=FCSys.Conditions.Chemical.BaseClasses.BCTypeMaterial.PotentialPerTemperature)
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={-30,-24})));
 
-      FCSys.BCs.Chemical.Species species2(redeclare
-          FCSys.Characteristics.'H+'.Gas Data, material=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.PotentialPerTemperature)
+      FCSys.Conditions.Chemical.Species species2(redeclare
+          FCSys.Characteristics.'H+'.Gas Data, material=FCSys.Conditions.Chemical.BaseClasses.BCTypeMaterial.PotentialPerTemperature)
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={0,-24})));
 
-      FCSys.BCs.Chemical.Species species3(
+      FCSys.Conditions.Chemical.Species species3(
         redeclare FCSys.Characteristics.H2.Gas Data,
-        material=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.Current,
+        material=FCSys.Conditions.Chemical.BaseClasses.BCTypeMaterial.Current,
         redeclare Modelica.Blocks.Sources.Ramp materialSpec(height=100*U.A,
             duration=3600e2)) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={30,-24})));
 
-      inner FCSys.BCs.Environment environment(analysis=true)
+      inner FCSys.Conditions.Environment environment(analysis=true)
         annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
     equation
       connect(species1.chemical, reaction.chemical[1]) annotation (Line(
@@ -535,8 +535,8 @@ package Subregions
 
       Reaction reaction(final n_lin=n_lin, n_spec=3)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-      FCSys.BCs.Chemical.Species 'e-'(
-        material=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.PotentialPerTemperature,
+      FCSys.Conditions.Chemical.Species 'e-'(
+        material=FCSys.Conditions.Chemical.BaseClasses.BCTypeMaterial.PotentialPerTemperature,
 
         redeclare FCSys.Characteristics.'e-'.Graphite Data,
         final n_lin=n_lin) annotation (Placement(transformation(
@@ -544,8 +544,8 @@ package Subregions
             rotation=180,
             origin={-30,-24})));
 
-      FCSys.BCs.Chemical.Species 'H+'(
-        material=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.PotentialPerTemperature,
+      FCSys.Conditions.Chemical.Species 'H+'(
+        material=FCSys.Conditions.Chemical.BaseClasses.BCTypeMaterial.PotentialPerTemperature,
 
         redeclare FCSys.Characteristics.'H+'.Ionomer Data,
         final n_lin=n_lin) annotation (Placement(transformation(
@@ -553,8 +553,8 @@ package Subregions
             rotation=180,
             origin={0,-24})));
 
-      FCSys.BCs.Chemical.Species H2(
-        material=FCSys.BCs.Chemical.BaseClasses.BCTypeMaterial.Current,
+      FCSys.Conditions.Chemical.Species H2(
+        material=FCSys.Conditions.Chemical.BaseClasses.BCTypeMaterial.Current,
         redeclare FCSys.Characteristics.H2.Gas Data,
         final n_lin=n_lin,
         redeclare Modelica.Blocks.Sources.Ramp materialSpec(height=100*U.A,
@@ -563,7 +563,7 @@ package Subregions
             rotation=180,
             origin={30,-24})));
 
-      inner FCSys.BCs.Environment environment(analysis=true)
+      inner FCSys.Conditions.Environment environment(analysis=true)
         annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
     equation
       connect('e-'.chemical, reaction.chemical[1]) annotation (Line(
@@ -599,11 +599,11 @@ package Subregions
            + 2)] for ax in 1:3} "Cross-sectional area";
       final parameter Q.Volume V=product(L) "Volume";
 
-      inner FCSys.BCs.Environment environment(analysis=false)
+      inner FCSys.Conditions.Environment environment(analysis=false)
         annotation (Placement(transformation(extent={{20,20},{40,40}})));
       replaceable Species.H2.Gas.Fixed species constrainedby Species.Species
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-      FCSys.BCs.InertDalton.Species inertBC annotation (Placement(
+      FCSys.Conditions.InertDalton.Species inertBC annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=225,
@@ -622,8 +622,8 @@ package Subregions
       extends Modelica.Icons.UnderConstruction;
 
       extends SpeciesH2(redeclare Species.'e-'.Graphite.Fixed species);
-      FCSys.BCs.Face.BaseClasses.PartialSpecies faceBC(redeclare
-          FCSys.BCs.Face.Material.Pressure material) annotation (Placement(
+      FCSys.Conditions.Face.BaseClasses.PartialSpecies faceBC(redeclare
+          FCSys.Conditions.Face.Material.Pressure material) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
@@ -758,45 +758,45 @@ package Subregions
         inclFacesZ=false)
         annotation (Placement(transformation(extent={{20,-10},{40,10}})));
 
-      inner FCSys.BCs.Environment environment(analysis=true)
+      inner FCSys.Conditions.Environment environment(analysis=true)
         annotation (Placement(transformation(extent={{60,20},{80,40}})));
-      replaceable FCSys.BCs.FaceBus.SubregionFlow bC1 constrainedby
-        FCSys.BCs.FaceBus.Subregion(gas(
+      replaceable FCSys.Conditions.FaceBus.SubregionFlow bC1 constrainedby
+        FCSys.Conditions.FaceBus.Subregion(gas(
           inclH2=true,
           inclH2O=false,
           inclN2=false,
           inclO2=false), graphite(
           'inclC+'=true,
           'incle-'=true,
-          'C+'(redeclare FCSys.BCs.Face.Thermal.Temperature thermal(spec(k=
+          'C+'(redeclare FCSys.Conditions.Face.Thermal.Temperature thermal(spec(k=
                     environment.T))),
-          'e-'(redeclare FCSys.BCs.Face.Material.Current normal(redeclare
+          'e-'(redeclare FCSys.Conditions.Face.Material.Current normal(redeclare
                 Modelica.Blocks.Sources.Ramp spec(duration=1000, height=-2*U.A)))))
         annotation (__Dymola_choicesFromPackage=true, Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-50,0})));
 
-      replaceable FCSys.BCs.FaceBus.SubregionFlow bC2 constrainedby
-        FCSys.BCs.FaceBus.Subregion(gas(
+      replaceable FCSys.Conditions.FaceBus.SubregionFlow bC2 constrainedby
+        FCSys.Conditions.FaceBus.Subregion(gas(
           inclH2=false,
           inclH2O=true,
           inclN2=false,
           inclO2=true), graphite(
           'inclC+'=true,
           'incle-'=true,
-          'C+'(redeclare FCSys.BCs.Face.Thermal.Temperature thermal(spec(k=
+          'C+'(redeclare FCSys.Conditions.Face.Thermal.Temperature thermal(spec(k=
                     environment.T))),
-          'e-'(redeclare FCSys.BCs.Face.Material.Current normal(redeclare
+          'e-'(redeclare FCSys.Conditions.Face.Material.Current normal(redeclare
                 Modelica.Blocks.Sources.Ramp spec(duration=1000, height=2*U.A)))))
         annotation (__Dymola_choicesFromPackage=true, Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={50,0})));
 
-      replaceable FCSys.BCs.FaceBus.SubregionFlow ground(graphite('incle-'=true,
-            'e-'(redeclare FCSys.BCs.Face.Material.Pressure material,
-              materialSpec(k=0)))) constrainedby FCSys.BCs.FaceBus.Subregion
+      replaceable FCSys.Conditions.FaceBus.SubregionFlow ground(graphite('incle-'=true,
+            'e-'(redeclare FCSys.Conditions.Face.Material.Pressure material,
+              materialSpec(k=0)))) constrainedby FCSys.Conditions.FaceBus.Subregion
         annotation (__Dymola_choicesFromPackage=true, Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
@@ -854,7 +854,7 @@ package Subregions
 
     model SubregionH2PipeTest
       extends SubregionH2(subregion(L={100,1,1}*U.cm), bC1(gas(H2(redeclare
-                FCSys.BCs.Face.Material.Density normal(redeclare
+                FCSys.Conditions.Face.Material.Density normal(redeclare
                   Modelica.Blocks.Sources.Ramp spec(height=U.C/U.cc, offset=
                       298.15*U.K/U.atm))))));
     end SubregionH2PipeTest;
@@ -2506,7 +2506,7 @@ package Subregions
                 origin={-20,20}), iconTransformation(extent={{-10,-10},{10,10}},
                 origin={-20,20})));
 
-        outer BCs.Environment environment "Environmental conditions"
+        outer Conditions.Environment environment "Environmental conditions"
           annotation (Placement(transformation(extent={{40,40},{60,60}}),
               iconTransformation(extent={{-10,90},{10,110}})));
 
@@ -4383,9 +4383,9 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         "Temperatures at the faces";
       Q.Power Qdot_face[Axis, Side] "Heat flow rates into the faces";
 
-      outer FCSys.BCs.Environment environment "Environmental conditions"
+      outer FCSys.Conditions.Environment environment "Environmental conditions"
         annotation (missingInnerMessage="Your model is using an outer \"environment\" record, but an inner \"environment\" record is not defined.
-For simulation, specify global default settings by dragging FCSys.BCs.Environment into your model.
+For simulation, specify global default settings by dragging FCSys.Conditions.Environment into your model.
 The default global default settings will be used for the current simulation.",
           Placement(transformation(extent={{40,40},{60,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
@@ -4863,7 +4863,7 @@ Choose a condition besides None.");
     to <code>InitMethScalar.Pressure</code> for one of the species.</li>
     <li>The <code>start</code> values of the initial conditions for pressure and temperature
     (<i>p</i><sub>IC</sub> and <i>T</i><sub>IC</sub>) are the global default pressure and
-    temperature (via the <code>outer</code> instance of the <a href=\"modelica://FCSys.BCs.Environment\">Environment</a> model).
+    temperature (via the <code>outer</code> instance of the <a href=\"modelica://FCSys.Conditions.Environment\">Environment</a> model).
     The <code>start</code> values of the initial conditions for
     other intensive properties (<i>v</i><sub>IC</sub>, <i>h</i><sub>IC</sub>, and
     &mu;<sub>IC</sub>) are related to the initial pressure and temperature

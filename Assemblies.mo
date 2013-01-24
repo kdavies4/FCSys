@@ -9,7 +9,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
       model Cell "<html>Isolated <code>Cell</code> model</html>"
         extends Modelica.Icons.Example;
-        inner FCSys.BCs.Environment environment(
+        inner FCSys.Conditions.Environment environment(
           analysis=false,
           p=149.6*U.kPa,
           T=333.15*U.K)
@@ -28,7 +28,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
       model CellProfile
         "Apply boundary conditions to a cell according to a test profile"
 
-        extends FCSys.BCs.TestStands.TestProfile(anEnd(each graphite('incle-'=
+        extends FCSys.Conditions.TestStands.TestProfile(anEnd(each graphite('incle-'=
                   true, 'e-'(redeclare Modelica.Blocks.Sources.Ramp
                   materialSpec(height=10000*U.A, duration=500)))), caEnd(each
               graphite('incle-'=true, 'e-'(redeclare
@@ -141,12 +141,12 @@ package Assemblies "Combinations of regions (e.g., cells)"
               each gas(inclH2=true, inclH2O=true))))
           annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
-        inner FCSys.BCs.Environment environment(analysis=false)
+        inner FCSys.Conditions.Environment environment(analysis=false)
           annotation (Placement(transformation(extent={{40,60},{60,80}})));
-        FCSys.BCs.Adapters.Phases.Graphite caModelicaAdapt(A=cell.L_y[1]*cell.L_z[
+        FCSys.Conditions.Adapters.Phases.Graphite caModelicaAdapt(A=cell.L_y[1]*cell.L_z[
               1])
           annotation (Placement(transformation(extent={{20,-10},{40,10}})));
-        FCSys.BCs.Adapters.Phases.Graphite anModelicaAdapt(A=cell.L_y[1]*cell.L_z[
+        FCSys.Conditions.Adapters.Phases.Graphite anModelicaAdapt(A=cell.L_y[1]*cell.L_z[
               1])
           annotation (Placement(transformation(extent={{-20,-10},{-40,10}})));
         FCSys.WorkInProgress.TanConduct tanConduct
@@ -332,7 +332,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
             transformation(extent={{50,-10},{70,10}})));
 
     protected
-      outer FCSys.BCs.Environment environment
+      outer FCSys.Conditions.Environment environment
         "Environmental properties and settings";
 
     equation
@@ -633,7 +633,7 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         Placement(transformation(extent={{30,-10},{50,10}})));
 
     protected
-      outer FCSys.BCs.Environment environment
+      outer FCSys.Conditions.Environment environment
         "Environmental properties and settings";
 
     equation
