@@ -852,12 +852,9 @@ package Characteristics
         "true, if specific volume depends on temperature";
 
     protected
-      constant Integer pressPow[2]=if specVolPow[1] == 0 then {0,0} else {round(
-          1/specVolPow[1]) - size(b_v, 1) + 1,1 - round(specVolPow[2]/
-          specVolPow[1])}
+      constant Integer pressPow[2]={specVolPow[1] - size(b_v, 1) + 1,specVolPow[
+          2] + 1}
         "Powers of v and T for 1st row and column of b_p, respectively";
-      // Note:  The round() function is used to maintain the values as integers
-      // if possible.  That way, they can be used as indices.
       final constant Real b_p[size(b_v, 1), size(b_v, 2)]=if size(b_v, 1) == 1
            then b_v .^ (-pressPow[1]) else {(if specVolPow[1] + i == 0 or
           specVolPow[1] + i == 1 or size(b_v, 1) == 1 then b_v[i, :] else (if

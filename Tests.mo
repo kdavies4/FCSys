@@ -19,7 +19,7 @@ package Tests "Models and functions for test and validation"
       H2O.TestGas H2OTestGas;
       N2.TestGas N2TestGas;
       O2.TestGas O2TestGas;
-      //**BaseClasses.Characteristic.TestAll BaseClassesCharacteristicTestAll;
+      BaseClasses.Characteristic.TestAll BaseClassesCharacteristicTestAll;
 
       annotation (Documentation(info="<html><p>If this model simulates without failure,
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
