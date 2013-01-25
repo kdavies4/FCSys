@@ -236,13 +236,13 @@ package BaseClasses "Base classes (not for direct use)"
       partial class Top3
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,60},{100,100}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,60},{100,100}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,60},{100,100}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,60},{100,100}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Top3;
 

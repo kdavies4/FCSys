@@ -21,8 +21,9 @@ help/FCSys_Systems*.html
 help/FCSys.Systems*.png
 resources/documentation/system.png
 
-# Test
+# Test and Tests
 Test.mo
+Tests.mo
 help/FCSys_Test*.html
 help/FCSys.Test*.png
 

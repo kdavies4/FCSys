@@ -15,7 +15,6 @@ dsmodel.c
 dsmodel.mof
 dymosim
 buildlog.txt
-/test/LOOCV/Case
 request
 status
 *.exe
