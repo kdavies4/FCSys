@@ -824,7 +824,7 @@ package Characteristics
       // Note:  p/T is the argument instead of p so that b_p will have the
       // same size as b_v for the typical definitions of the second virial
       // coefficients in [Dymond2002].
-      constant Real specVolPow[2]={-1,0}
+      constant Integer specVolPow[2]={-1,0}
         "<html>Powers of <i>p</i>/<i>T</i> and <i>T</i> for 1<sup>st</sup> row and column of <i>b</i><sub><i>v</i></sub>, respectively</html>";
       constant Q.PotentialChemical Deltah0_f
         "<html>Enthalpy of formation at 298.15 K, <i>p</i>&deg; (&Delta;<i>h</i>&deg;<sub>f</sub>)</html>";
@@ -852,10 +852,9 @@ package Characteristics
         "true, if specific volume depends on temperature";
 
     protected
-      constant Real pressPow[2]=if specVolPow[1] == 0 then {0,0} else {1/
-          specVolPow[1] - size(b_v, 1) + 1,1 - (if mod(abs(specVolPow[2]/
-          specVolPow[1]), 1) < Modelica.Constants.small then round(specVolPow[2]
-          /specVolPow[1]) else specVolPow[2]/specVolPow[1])}
+      constant Integer pressPow[2]=if specVolPow[1] == 0 then {0,0} else {round(
+          1/specVolPow[1]) - size(b_v, 1) + 1,1 - round(specVolPow[2]/
+          specVolPow[1])}
         "Powers of v and T for 1st row and column of b_p, respectively";
       // Note:  The round() function is used to maintain the values as integers
       // if possible.  That way, they can be used as indices.
@@ -1189,14 +1188,15 @@ package Characteristics
         h := smooth(1, sum((if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i
            + 1] or i == size(T_lim_c, 1) - 1) then h0_i(T, i) else 0) for i in
           1:size(T_lim_c, 1) - 1)) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K
-           then Deltah0 else 0) - (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt25degC
+           then Deltah0 else 0) - (if referenceEnthalpy <> ReferenceEnthalpy.EnthalpyOfFormationAt25degC
            then Deltah0_f else 0) + h_offset + h_resid(T, p) - h_resid(T, if
           phase == "gas" then 0 else p0)
           annotation (
           InlineNoEvent=true,
           Inline=true,
           smoothOrder=1);
-        // The last two terms adjust for the actual pressure relative to the
+        // **temp -Deltah0_f
+        // **The last two terms adjust for the actual pressure relative to the
         // reference.  If the material is gaseous, then the reference is the ideal
         // gas.  In that case, the lower limit of the integral (delh/delp)_T*dp is
         // p=0, where a real gas behaves as an ideal gas.  Otherwise, the lower limit
