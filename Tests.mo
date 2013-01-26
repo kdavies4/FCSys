@@ -113,6 +113,8 @@ package Tests "Models and functions for test and validation"
             v_OC_table_g,
             1e-3*U.V,
             name="v_OC_g");
+      //**v_OC_gas(T)
+      //**    1e-3*U.V,
       assertValue(
             v_OC_model_l,
             v_OC_table_l,
@@ -227,13 +229,13 @@ package Tests "Models and functions for test and validation"
           "<html>Run all of the tests on the <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package</html>"
           extends Modelica.Icons.Example;
 
-          TestProperties testProperties;
           c_p testc_p;
           c_V testc_V;
           dp testdp;
           dv testdv;
           h testh;
           p_Tv testp;
+          TestProperties testProperties;
           annotation (Documentation(info="<html><p>If this model simulates without failure,
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
 

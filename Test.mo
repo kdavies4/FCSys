@@ -30,7 +30,7 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
       assert(size(expected, 1) > 0,
         "The expected trajectory contains no points.");
       assert(expected[1, 1] >= time,
-        "Some trajectory points precede the simulation.");
+        "Some trajectory points precede the start of the simulation.");
       cur := 1;
       if (expected[1, 1] >= time and expected[1, 1] <= time) then
         assertValue(

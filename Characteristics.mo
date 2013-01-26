@@ -909,7 +909,6 @@ package Characteristics
   </html>"));
       end beta_T;
 
-    public
       function c_p
         "<html>Isobaric specific heat capacity as a function of temperature and pressure (<i>c</i><sub><i>p</i></sub>)</html>"
         extends Modelica.Icons.Function;
@@ -980,7 +979,6 @@ package Characteristics
   </html>"));
       end c_p;
 
-    public
       function c_V
         "<html>Isochoric specific heat capacity as a function of temperature and pressure (<i>c</i><sub><i>V</i></sub>)</html>"
         extends Modelica.Icons.Function;
@@ -1093,8 +1091,7 @@ package Characteristics
       algorithm
         g := h( T,
                 p,
-                referenceEnthalpy) - T*s(T, p)
-          annotation (InlineNoEvent=true, Inline=true);
+                referenceEnthalpy) - T*s(T, p) annotation (Inline=true);
 
       end g;
 
@@ -1130,7 +1127,7 @@ package Characteristics
         function dh0_i "Derivative of h0_i"
 
           // Note:  This function is necessary to allow Dymola 7.4 to choose T
-          // as a state in FCSys.Subregions.Species and thus avoid nonlinear
+          // as a state in FCSys.Subregions.Species.Species and thus avoid nonlinear
           // systems of equations.
 
           input Q.TemperatureAbsolute T "Temperature";
@@ -1163,13 +1160,38 @@ package Characteristics
                       specVolPow[2] - specVolPow[1] - i + 1) for i in 1:size(
               b_v, 1)},
                     specVolPow[1]) annotation (Inline=true);
-          // Note:  The partial derivative (delh/delp)_T is equal to
-          // v + T*(dels/delp)_T by definition of enthalpy change (dh = T*ds + v*dp)
-          // and to v - T*(delv/delT)_p by applying the appropriate Maxwell relation
-          // ((dels/delp)_T = -(delv/delT)_p).
+          // Note:  The partial derivative (delh/delp)_T is equal to v +
+          // T*(dels/delp)_T by definition of enthalpy change (dh = T*ds + v*dp)
+          // and then to v - T*(delv/delT)_p by applying the appropriate Maxwell
+          // relation, (dels/delp)_T = -(delv/delT)_p.
           // Note:  This is zero for an ideal gas.
 
         end h_resid;
+
+        function h_resid_IG
+          "Residual specific enthalpy for pressure adjustment"
+          // **remove this function
+          input Q.TemperatureAbsolute T "Temperature";
+          input Q.PressureAbsolute p "Pressure";
+          output Q.Potential h_resid
+            "Integral of (delh/delp)_T*dp up to p with zero integration constant";
+
+        algorithm
+          h_resid := Polynomial.F(
+                    p,
+                    {Polynomial.f(
+                      T,
+                      b_v[-specVolPow[1], :] .* {-specVolPow[2] - j + 1 for j
+                 in 1:size(b_v, 2)},
+                      specVolPow[2] + 1)},
+                    -1) annotation (Inline=true);
+          // Note:  The partial derivative (delh/delp)_T is equal to v +
+          // T*(dels/delp)_T by definition of enthalpy change (dh = T*ds + v*dp)
+          // and then to v - T*(delv/delT)_p by applying the appropriate Maxwell
+          // relation, (dels/delp)_T = -(delv/delT)_p.
+          // Note:  This is zero for an ideal gas.
+
+        end h_resid_IG;
 
       algorithm
         /*
@@ -1186,13 +1208,12 @@ package Characteristics
            + 1] or i == size(T_lim_c, 1) - 1) then h0_i(T, i) else 0) for i in
           1:size(T_lim_c, 1) - 1)) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K
            then Deltah0 else 0) - (if referenceEnthalpy <> ReferenceEnthalpy.EnthalpyOfFormationAt25degC
-           then Deltah0_f else 0) + h_offset + h_resid(T, p) - h_resid(T, if
-          phase == "gas" then 0 else p0)
+           then Deltah0_f else 0) + h_offset + h_resid(T, p) - (if phase <>
+          "gas" then h_resid(T, p0) else 0)
           annotation (
           InlineNoEvent=true,
           Inline=true,
           smoothOrder=1);
-        // **temp -Deltah0_f
         // **The last two terms adjust for the actual pressure relative to the
         // reference.  If the material is gaseous, then the reference is the ideal
         // gas.  In that case, the lower limit of the integral (delh/delp)_T*dp is
@@ -1272,44 +1293,36 @@ package Characteristics
 
         end s0_i;
 
-        function s_resid "Residual specific entropy for pressure adjustment"
+        function s_resid
+          "Residual specific entropy for pressure adjustment for selected rows of b_v"
           input Q.TemperatureAbsolute T "Temperature";
           input Q.PressureAbsolute p "Pressure";
+          input Integer rowLimits[2]
+            "Beginning and ending indices of rows of b_v to be included";
           output Q.NumberAbsolute s_resid
-            "Integral of (dels/delp)_T*dp up to p with zero integration constant, excluding the ideal gas term";
+            "Integral of (dels/delp)_T*dp up to p with zero integration constant (for selected rows)";
 
         algorithm
           s_resid := Polynomial.F(
                     p,
-                    {if i == -specVolPow[1] then 0 else coeff(T, i) for i in 1:
-              size(b_v, 1)},
-                    specVolPow[1]) annotation (Inline=true);
+                    {Polynomial.f(
+                      T,
+                      b_v[i, :] .* {specVolPow[1] - specVolPow[2] + i - j for j
+                 in 1:size(b_v, 2)},
+                      specVolPow[2] - specVolPow[1] - i) for i in rowLimits[1]:
+              rowLimits[2]},
+                    specVolPow[1] + rowLimits[1] - 1) annotation (Inline=true);
           // Note:  According to the Maxwell relations the partial derivative
           // (dels/delp)_T is equal to -(delv/delT)_p.
 
         end s_resid;
-
-        function coeff
-          "Return the coefficient for a term in the integral of (dels/delp)_T*dp"
-          input Q.TemperatureAbsolute T "Temperature";
-          input Integer i "Row index to b_v";
-          output Real coeff "Coefficient";
-
-        algorithm
-          coeff := Polynomial.f(
-                    T,
-                    b_v[i, :] .* {specVolPow[1] - specVolPow[2] + i - j for j
-               in 1:size(b_v, 2)},
-                    specVolPow[2] - specVolPow[1] - i) annotation (Inline=true);
-
-        end coeff;
 
       algorithm
         /*
   assert(T_lim_c[1] <= T and T <= T_lim_c[size(T_lim_c, 1)], "Temperature " +
     String(T/U.K) + " K is out of bounds for " + name + " ([" + String(T_lim_c[1]
     /U.K) + ", " + String(T_lim_c[size(T_lim_c, 1)]/U.K) + "] K).");
-    */
+        */
         // Note:  This is commented out so that the function can be inlined.
         // Note:  In Dymola 7.4 T_lim_c[size(T_lim_c, 1)] must be used
         // instead of T_lim_c[end] due to:
@@ -1317,9 +1330,16 @@ package Characteristics
 
         s := smooth(1, sum((if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i
            + 1] or i == size(T_lim_c, 1) - 1) then s0_i(T, i) else 0) for i in
-          1:size(T_lim_c, 1) - 1)) + (if -size(b_v, 1) <= specVolPow[1] and
-          specVolPow[1] <= -1 then coeff(T, -specVolPow[1])*ln(p/p0) else 0) +
-          s_resid(T, p) - s_resid(T, if phase == "gas" then 0 else p0)
+          1:size(T_lim_c, 1) - 1)) + s_resid(
+                T,
+                p,
+                {1,size(b_v, 1)}) - (if phase == "gas" then s_resid(
+                T,
+                p0,
+                {1,-specVolPow[1]}) else s_resid(
+                T,
+                p0,
+                {1,size(b_v, 1)}))
           annotation (
           InlineNoEvent=true,
           Inline=true,
@@ -1329,11 +1349,15 @@ package Characteristics
         // pressure (p) by integrating (dels/delp)_T*dp.  In general, the
         // integration is from p0 to p.  However, for gases the reference state
         // is the ideal gas at the reference pressure.  Therefore, the lower
-        // integration limit for the real gas terms (non-ideal; besides the
-        // first virial term) is p=0---the pressure limit at which a real gas
-        // behaves as an ideal gas.  See [Rao1997, p. 272].  Note that the first
-        // V_m inside the curly brackets of eq. 1.47 in [Dymond2002, p. 17] should
-        // be a subscript rather than a multiplicative factor.
+        // integration limit for the higher-order real gas terms (i.e., terms with
+        // power of p greater than -1) is p=0.  This is pressure limit at which a
+        // real gas behaves as an ideal gas, and it implies that those terms are
+        // zero.  See [Rao1997, p. 272].  Note that the first V_m inside the curly
+        // brackets of the related eq. 1.47 in [Dymond2002, p. 17] should be a
+        // subscript rather than a multiplicative factor.
+        // Note:  If the phase is gas, the virial equation of state (as defined by
+        // b_v and specVolPow) must include an ideal gas term (v = ... + f(T)/p +
+        // ...).  Otherwise, an indexing error will occur.
 
       end s;
 

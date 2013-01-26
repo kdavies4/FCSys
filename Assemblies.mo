@@ -502,7 +502,7 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         annotation (Dialog(tab="Calibration factors", group=
               "Exchange of linear momentum"));
 
-    // Thermal exchange
+      // Thermal exchange
       parameter Q.NumberAbsolute k_alpha_Qdot_C(
         final min=0,
         final nominal=1) = 1
@@ -544,8 +544,8 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         "<html>For O<sub>2</sub> (<i>k</i><sub><i>S</i> O2</sub>)</html>"
         annotation (Dialog(tab="Calibration factors", group="Thermal exchange"));
 
-    // Material transport
-    /*
+      // Material transport
+      /*
   parameter Q.NumberAbsolute 'k_alpha_Xi_C+'(
     final min=0,
     final nominal=1) = 1 "<html>For C (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;C</sub>)</html>"
@@ -593,8 +593,8 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         annotation (Dialog(tab="Calibration factors", group=
               "Material transport"));
 
-    // Transport of linear momentum
-    /*
+      // Transport of linear momentum
+      /*
   parameter Q.NumberAbsolute 'k_alpha_F_C+'(
     final min=0,
     final nominal=1) = 1 "<html>For C (<i>k</i><sub>&Phi; C</sub>)</html>"
@@ -608,7 +608,7 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
     ;
   */
 
-    // Thermal transport
+      // Thermal transport
 
       extends Cell(
         anFP(subregions(each gas(
@@ -908,6 +908,7 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
 <html><p>For more information, see the
   <a href=\"modelica://FCSys.Assemblies.Cells.Cell\">Cell</a> model.</p></html>"));
     end CalibratedCell;
+
     model IntegratedCell "Baseline cell, with integrated CLs and GDLs"
       extends FCSys.BaseClasses.Icons.Cell;
       // Geometric parameters

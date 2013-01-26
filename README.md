@@ -1,10 +1,12 @@
 FCSys
 -----
-**Warning!**  This package is still in development.  Some models still have
-issues or are incomplete.  These models should be marked with an "under
-construction" icon (red triangle) or have notes marked with "TODO" or "**". If
-you have problems besides those noted, please [open an issue]
-(https://github.com/kdavies4/FCSys/issues/new).
+**Warning!**  This package is still in development.  Changes at this point may
+affect the public interfaces of the classes.  The package is not yet under full
+version control and conversion scripts are not being provided for these
+changes.  Some models still have issues or are incomplete.  These models should
+be marked with an "under construction" icon (red triangle) or have notes marked
+with "TODO" or "**".  If you have problems besides those noted, please
+[open an issue](https://github.com/kdavies4/FCSys/issues/new).
 
 This package contains models of proton exchange membrane fuel cells in the
 [Modelica language](https://www.modelica.org/).  More information is available
