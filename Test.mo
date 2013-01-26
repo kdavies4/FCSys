@@ -1,6 +1,5 @@
 within FCSys;
-package Test
-  "Stand-alone library to facilitate assertion-based testing of Modelica code"
+package Test "Library to facilitate assertion-based testing of Modelica code"
   extends Modelica.Icons.Package;
   function assertValue "Assert that a value is within specification"
     extends Modelica.Icons.Function;
@@ -260,7 +259,6 @@ package Test
       extends Modelica.Icons.Package;
       constant Real pi=3.141592653589793238462643383279502884197169399;
 
-
       model CheckSuccess "Check for a longer interval"
         Real x=sin(2*time);
         AssertAverageBetween check_x(
@@ -334,9 +332,9 @@ package Test
   end Features;
 
   annotation (Documentation(info="<html><p>This package is a (slightly) modified version
-  of XogenyTest version 1.0 by Michael Tiller of Xogeny, Inc.  It is available at 
+  of XogenyTest version 1.0 by Michael Tiller of Xogeny, Inc.  It is available at
   <a href=\"https://github.com/xogeny/XogenyTest\">https://github.com/xogeny/XogenyTest</a> under
-  a <a href=\"https://creativecommons.org/licenses/by/3.0/deed.en_US\">Creative Commons 
+  a <a href=\"https://creativecommons.org/licenses/by/3.0/deed.en_US\">Creative Commons
   Attribution 3.0 Unported License</a>.
   </p></html>"));
 end Test;

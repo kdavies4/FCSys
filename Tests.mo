@@ -26,6 +26,84 @@ package Tests "Models and functions for test and validation"
 
     end TestAll;
     extends Modelica.Icons.Package;
+    model TestFormation
+      "<html>Test the specific enthalpy and Gibbs potential of 2H<sub>2</sub> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O</html>"
+      import FCSys.Characteristics.*;
+      import FCSys.Test.assertValue;
+      extends Modelica.Icons.Example;
+      constant Q.Temperature T=298*U.K "Temperature";
+      constant Q.Pressure p=1*U.atm "Pressure";
+      // **finish this model
+      function v_OC_gas "**"
+      end v_OC_gas;
+
+      function v_OC_liquid "**"
+      end v_OC_liquid;
+
+      function v_OC_equil "**"
+      end v_OC_equil;
+      Q.Potential v_therm_model_g=0.5*(H2O.Gas.h(T, p) - H2.Gas.h(T, p) - 0.5*
+          O2.Gas.h(T, p)) "Correlated thermodynamic potential of H2/O2 cell";
+      Q.Potential v_therm_table_g=-241820*U.J/U.mol/2
+        "Tabulated thermodynamic potential of H2/O2 cell [Moran2004, p. 803]";
+      Q.Potential v_OC_model_g=0.5*(H2O.Gas.g(T, p) - H2.Gas.g(T, p) - 0.5*
+          O2.Gas.g(T, p)) "Correlated open circuit potential of H2/O2 cell";
+      Q.Potential v_OC_table_g=-228590*U.J/U.mol/2
+        "Tabulated open circuit potential of H2/O2 cell [Moran2004, p. 803]";
+
+      Q.Potential v_therm_model_l=0.5*(H2O.Liquid.h(T, p) - H2.Gas.h(T, p) -
+          0.5*O2.Gas.h(T, p))
+        "Correlated thermodynamic potential of H2/O2 cell";
+      Q.Potential v_therm_table_l=-285830*U.J/U.mol/2
+        "Tabulated thermodynamic potential of H2/O2 cell [Moran2004, p. 803]";
+      Q.Potential v_OC_model_l=0.5*(H2O.Liquid.g(T, p) - H2.Gas.g(T, p) - 0.5*
+          O2.Gas.g(T, p)) "Correlated open circuit potential of H2/O2 cell";
+      Q.Potential v_OC_table_l=-237180*U.J/U.mol/2
+        "Tabulated open circuit potential of H2/O2 cell [Moran2004, p. 803]";
+
+      Q.Potential g1=-237.2e3*U.J/U.mol/2
+        "298.15K, liq: h=g/0.83 [Larminie2003, p. 28 & 33]";
+      Q.Potential g2=-228.2e3*U.J/U.mol/2
+        "353.15K, liq: h=g/0.80 [Larminie2003, p. 28 & 33]";
+      Q.Potential g3=-226.1e3*U.J/U.mol/2
+        "353.15K, gas:  [Larminie2003, p. 28 & 33]";
+      Q.Potential g4=-225.2e3*U.J/U.mol/2
+        "373.15K, gas: h=g/0.79 [Larminie2003, p. 28 & 33]";
+      Q.Potential g5=-220.4e3*U.J/U.mol/2
+        "473.15K, gas: h=g/0.77 [Larminie2003, p. 28 & 33]";
+      Q.Potential g6=-210.3e3*U.J/U.mol/2
+        "673.15K, gas: h=g/0.74 [Larminie2003, p. 28 & 33]";
+      Q.Potential g7=-199.6e3*U.J/U.mol/2
+        "873.15K, gas: h=g/0.70 [Larminie2003, p. 28 & 33]";
+      Q.Potential g8=-188.6e3*U.J/U.mol/2
+        "1073.15K, gas: h=g/0.66 [Larminie2003, p. 28 & 33]";
+      Q.Potential g9=-177.4e3*U.J/U.mol/2
+        "1273.15K, gas: h=g/0.62 [Larminie2003, p. 28 & 33]";
+
+    initial equation
+      assertValue(
+            v_OC_model_g,
+            v_OC_table_g,
+            1e-3*U.V,
+            name="v_OC_g");
+      assertValue(
+            v_OC_model_l,
+            v_OC_table_l,
+            1e-3*U.V,
+            name="v_OC_l");
+      assertValue(
+            v_therm_model_g,
+            v_therm_table_g,
+            1e-2*U.V,
+            name="v_therm_g");
+      assertValue(
+            v_therm_model_l,
+            v_therm_table_l,
+            1e-6*U.V,
+            name="v_therm_l");
+
+    end TestFormation;
+
     package H2O
       extends Modelica.Icons.Package;
       model TestGas

@@ -208,6 +208,10 @@ package UsersGuide "User's Guide"
       <td valign=top class=noBorder>S. G. Kandlikar and Z. Lu, \"<a href=\"http://dx.doi.org/10.1016/j.applthermaleng.2008.05.009\">Thermal Management Issues in a PEMFC Stack&mdash;A Brief Review of Current Status</a>,\" <i>Appl. Therm. Eng.</i>, vol. 29, no. 7, pp. 1276&ndash;1280, 2009.</td>
     </tr>
     <tr>
+      <td valign=top class=noBorder>[<a name=\"Larminie2003\" class=bookmark>Larminie2003</a>]</td>
+      <td valign=top class=noBorder>J. Larminie and A. Dicks, <i>Fuel Cell Systems Explained</i>, John Wiley &amp; Sons, 2003.</td>
+    </tr>
+    <tr>
       <td valign=top class=noBorder>[<a name=\"Lin2006\" class=bookmark>Lin2006</a>]</td>
       <td valign=top class=noBorder>J. Lin, J. K. Lee, M. Kellner, R. Wycisk, and P. N. Pintauroa, \"<a href=\"http://dx.doi.org/10.1149/1.2196687\">Nafion-Flourinated Ethylene-Propylene Resin Membrane Blends for Direct Methanol Fuel Cells</a>,\" <i>J. Electrochem. Soc.</i>, vol. 153, no. 7, pp. A1325&ndash;A1331, 2006.</td>
     </tr>
