@@ -652,12 +652,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
               true, H2O(thermal(spec(k=environment.T)))), each ionomer(
           'inclC19HF37O5S-'=true,
           'inclH+'=true,
-          Error));
+          'C19HF37O5S-'(thermal(spec(k=environment.T))),
+          'H+'(thermal(spec(k=environment.T)))));
       FCSys.Conditions.FaceBus.SubregionClosed bC2[n_y, n_z](each gas(inclH2O=
               true, H2O(thermal(spec(k=environment.T)))), each ionomer(
           'inclC19HF37O5S-'=true,
           'inclH+'=true,
-          Error));
+          'C19HF37O5S-'(thermal(spec(k=environment.T))),
+          'H+'(thermal(spec(k=environment.T)))));
 
     equation
       connect(bC1.face, pEM.xNegative) annotation (Line(
@@ -1586,7 +1588,7 @@ the z axis extends across the width of the channel.</p></html>"),
             'inclC19HF37O5S-'=true,
             'inclH+'=true,
             inclH2O=true,
-            Error),
+            'C19HF37O5S-'(V_IC=V - xV),),
           'H+'(xNegative(isobaric=false), xPositive(isobaric=false)),
           H2O(xNegative(isobaric=false), xPositive(isobaric=false))),
         each liquid(inclH2O=true, H2O(
@@ -1829,10 +1831,10 @@ the z axis extends across the width of the channel.</p>
             'inclC19HF37O5S-'=true,
             'inclH+'=true,
             inclH2O=true,
-            Error,
+             'C19HF37O5S-'(initMethPartNum=InitMethScalar.Pressure, 
             p_IC=0),
           'H+'(xNegative(isobaric=false), xPositive(isobaric=false)),
-          H2O(xNegative(isobaric=false), xPositive(isobaric=false))));
+          H2O(xNegative(isobaric=false), xPositive(isobaric=false)))));
 
       parameter Q.NumberAbsolute lambda_IC=14
         "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>)</html>"
@@ -2100,13 +2102,13 @@ the z axis extends across the width of the channel.</p>
           each ionomer(
             'inclC19HF37O5S-'=true,
             'inclH+'=true,
-            Error),
+            'C19HF37O5S-'(V_IC=V - xV),
           'H+'(xNegative(isobaric=false), xPositive(isobaric=false)),
           H2O(xNegative(isobaric=false), xPositive(isobaric=false))),
         each liquid(inclH2O=true, H2O(
             V_IC=0,
             xNegative(isobaric=false),
-            xPositive(isobaric=false))));
+            xPositive(isobaric=false)))));
 
       //'e-'(xNegative(isobaric=true),
       //'H+'(xPositive(isobaric=true),

@@ -459,11 +459,90 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         final nominal=1) = 1
         "<html>For C (<i>k</i><sub>&alpha; &Phi; C</sub>)</html>" annotation (
           Dialog(tab="Calibration factors", group="Exchange of linear momentum"));
-      parameter Q.NumberAbsolute Error;
-
-    end CalibratedCell;
+      parameter Q.NumberAbsolute k_alpha_tau_C19HF37O5S(
+        final min=0,
+        final nominal=1) = 1
+        "<html>For C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S (<i>k</i><sub>&alpha; &Phi; C19HF37O5S</sub>)</html>"
+        annotation (Dialog(tab="Calibration factors", group=
+              "Exchange of linear momentum"));
+      parameter Q.NumberAbsolute 'k_alpha_tau_e-'(
+        final min=0,
+        final nominal=1) = 1
+        "<html>For e<sup>-</sup> (<i>k</i><sub>&alpha; &Phi; e-</sub>)</html>"
+        annotation (Dialog(tab="Calibration factors", group=
+              "Exchange of linear momentum"));
+      parameter Q.NumberAbsolute k_alpha_tau_H2(
+        final min=0,
+        final nominal=1) = 1
+        "<html>For H<sub>2</sub> (<i>k</i><sub>&alpha; &Phi; H2</sub>)</html>"
+        annotation (Dialog(tab="Calibration factors", group=
+              "Exchange of linear momentum"));
+      parameter Q.NumberAbsolute k_alpha_tau_H2O(
+        final min=0,
+        final nominal=1) = 1
+        "<html>For H<sub>2</sub>O (<i>k</i><sub>&alpha; &Phi; H2O</sub>)</html>"
+        annotation (Dialog(tab="Calibration factors", group=
+              "Exchange of linear momentum"));
+      parameter Q.NumberAbsolute 'k_alpha_tau_H+'(
+        final min=0,
+        final nominal=1) = 1
+        "<html>For H<sup>+</sup> (<i>k</i><sub>&alpha; &Phi; H+</sub>)</html>"
+        annotation (Dialog(tab="Calibration factors", group=
+              "Exchange of linear momentum"));
+      parameter Q.NumberAbsolute k_alpha_tau_N2(
+        final min=0,
+        final nominal=1) = 1
+        "<html>For N<sub>2</sub> (<i>k</i><sub>&alpha; &Phi; N2</sub>)</html>"
+        annotation (Dialog(tab="Calibration factors", group=
+              "Exchange of linear momentum"));
+      parameter Q.NumberAbsolute k_alpha_tau_O2(
+        final min=0,
+        final nominal=1) = 1
+        "<html>For O<sub>2</sub> (<i>k</i><sub>&alpha; &Phi; O2</sub>)</html>"
+        annotation (Dialog(tab="Calibration factors", group=
+              "Exchange of linear momentum"));
 
     // Thermal exchange
+      parameter Q.NumberAbsolute k_alpha_Qdot_C(
+        final min=0,
+        final nominal=1) = 1
+        "<html>For C (<i>k</i><sub><i>S</i> C</sub>)</html>" annotation (Dialog(
+            tab="Calibration factors", group="Thermal exchange"));
+      parameter Q.NumberAbsolute k_alpha_Qdot_C19HF37O5S(
+        final min=0,
+        final nominal=1) = 1
+        "<html>For C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S (<i>k</i><sub><i>S</i> C19HF37O5S</sub>)</html>"
+        annotation (Dialog(tab="Calibration factors", group="Thermal exchange"));
+      parameter Q.NumberAbsolute 'k_alpha_Qdot_e-'(
+        final min=0,
+        final nominal=1) = 1
+        "<html>For e<sup>-</sup> (<i>k</i><sub><i>S</i> e-</sub>)</html>"
+        annotation (Dialog(tab="Calibration factors", group="Thermal exchange"));
+      parameter Q.NumberAbsolute k_alpha_Qdot_H2(
+        final min=0,
+        final nominal=1) = 1
+        "<html>For H<sub>2</sub> (<i>k</i><sub><i>S</i> H2</sub>)</html>"
+        annotation (Dialog(tab="Calibration factors", group="Thermal exchange"));
+      parameter Q.NumberAbsolute k_alpha_Qdot_H2O(
+        final min=0,
+        final nominal=1) = 1
+        "<html>For H<sub>2</sub>O (<i>k</i><sub><i>S</i> H2O</sub>)</html>"
+        annotation (Dialog(tab="Calibration factors", group="Thermal exchange"));
+      parameter Q.NumberAbsolute 'k_alpha_Qdot_H+'(
+        final min=0,
+        final nominal=1) = 1
+        "<html>For H<sup>+</sup> (<i>k</i><sub><i>S</i> H+</sub>)</html>"
+        annotation (Dialog(tab="Calibration factors", group="Thermal exchange"));
+      parameter Q.NumberAbsolute k_alpha_Qdot_N2(
+        final min=0,
+        final nominal=1) = 1
+        "<html>For N<sub>2</sub> (<i>k</i><sub><i>S</i> N2</sub>)</html>"
+        annotation (Dialog(tab="Calibration factors", group="Thermal exchange"));
+      parameter Q.NumberAbsolute k_alpha_Qdot_O2(
+        final min=0,
+        final nominal=1) = 1
+        "<html>For O<sub>2</sub> (<i>k</i><sub><i>S</i> O2</sub>)</html>"
+        annotation (Dialog(tab="Calibration factors", group="Thermal exchange"));
 
     // Material transport
     /*
@@ -477,6 +556,42 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
     "<html>For C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;C19HF37O5S-</sub>)</html>"
     annotation (Dialog(tab="Calibration factors", group="Material transport"));
   */
+      parameter Q.NumberAbsolute 'k_alpha_Ndot_e-'(
+        final min=0,
+        final nominal=1) = 1
+        "<html>For e<sup>-</sup> (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;e-</sub>)</html>"
+        annotation (Dialog(tab="Calibration factors", group=
+              "Material transport"));
+      parameter Q.NumberAbsolute k_alpha_Ndot_H2(
+        final min=0,
+        final nominal=1) = 1
+        "<html>For H<sub>2</sub> (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;H2</sub>)</html>"
+        annotation (Dialog(tab="Calibration factors", group=
+              "Material transport"));
+      parameter Q.NumberAbsolute k_alpha_Ndot_H2O(
+        final min=0,
+        final nominal=1) = 1
+        "<html>For H<sub>2</sub>O (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;H2O</sub>)</html>"
+        annotation (Dialog(tab="Calibration factors", group=
+              "Material transport"));
+      parameter Q.NumberAbsolute 'k_alpha_Ndot_H+'(
+        final min=0,
+        final nominal=1) = 1
+        "<html>For H<sup>+</sup> (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;H+</sub>)</html>"
+        annotation (Dialog(tab="Calibration factors", group=
+              "Material transport"));
+      parameter Q.NumberAbsolute k_alpha_Ndot_N2(
+        final min=0,
+        final nominal=1) = 1
+        "<html>For N<sub>2</sub> (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;N2</sub>)</html>"
+        annotation (Dialog(tab="Calibration factors", group=
+              "Material transport"));
+      parameter Q.NumberAbsolute k_alpha_Ndot_O2(
+        final min=0,
+        final nominal=1) = 1
+        "<html>For O<sub>2</sub> (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;O2</sub>)</html>"
+        annotation (Dialog(tab="Calibration factors", group=
+              "Material transport"));
 
     // Transport of linear momentum
     /*
@@ -495,6 +610,304 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
 
     // Thermal transport
 
+      extends Cell(
+        anFP(subregions(each gas(
+              redeclare Species.H2.Gas.Calibrated H2(
+                final k_alpha_tau=k_alpha_tau_H2,
+                final k_alpha_Qdot=k_alpha_Qdot_H2,
+                final k_alpha_Ndot=k_alpha_Ndot_H2,
+                final k_alpha_tau=k_alpha_tau_H2,
+                final k_alpha_Qdot=k_alpha_Qdot_H2),
+              redeclare Species.H2O.Gas.Calibrated H2O(
+                final k_alpha_tau=k_alpha_tau_H2O,
+                final k_alpha_Qdot=k_alpha_Qdot_H2O,
+                final k_alpha_Ndot=k_alpha_Ndot_H2O,
+                final k_alpha_tau=k_alpha_tau_H2O,
+                final k_alpha_Qdot=k_alpha_Qdot_H2O),
+              redeclare Species.N2.Gas.Calibrated N2(
+                final k_alpha_tau=k_alpha_tau_N2,
+                final k_alpha_Qdot=k_alpha_Qdot_N2,
+                final k_alpha_Ndot=k_alpha_Ndot_N2,
+                final k_alpha_tau=k_alpha_tau_N2,
+                final k_alpha_Qdot=k_alpha_Qdot_N2),
+              redeclare Species.O2.Gas.Calibrated O2(
+                final k_alpha_tau=k_alpha_tau_O2,
+                final k_alpha_Qdot=k_alpha_Qdot_O2,
+                final k_alpha_Ndot=k_alpha_Ndot_O2,
+                final k_alpha_tau=k_alpha_tau_O2,
+                final k_alpha_Qdot=k_alpha_Qdot_O2)), each graphite(redeclare
+                Species.C.Graphite.Calibrated C(
+                final k_alpha_tau=k_alpha_tau_C,
+                final k_alpha_Qdot=k_alpha_Qdot_C,
+                final k_alpha_Qdot=k_alpha_Qdot_C), redeclare
+                Species.'e-'.solid.Calibrated 'e-'(
+                final k_alpha_tau='k_alpha_tau_e-',
+                final k_alpha_Qdot='k_alpha_Qdot_e-',
+                final k_alpha_Ndot='k_alpha_Ndot_e-',
+                final k_alpha_tau='k_alpha_tau_e-',
+                final k_alpha_Qdot='k_alpha_Qdot_e-')))),
+        anGDL(subregions(each gas(
+              redeclare Species.H2.Gas.Calibrated H2(
+                final k_alpha_tau=k_alpha_tau_H2,
+                final k_alpha_Qdot=k_alpha_Qdot_H2,
+                final k_alpha_Ndot=k_alpha_Ndot_H2,
+                final k_alpha_tau=k_alpha_tau_H2,
+                final k_alpha_Qdot=k_alpha_Qdot_H2),
+              redeclare Species.H2O.Gas.Calibrated H2O(
+                final k_alpha_tau=k_alpha_tau_H2O,
+                final k_alpha_Qdot=k_alpha_Qdot_H2O,
+                final k_alpha_Ndot=k_alpha_Ndot_H2O,
+                final k_alpha_tau=k_alpha_tau_H2O,
+                final k_alpha_Qdot=k_alpha_Qdot_H2O),
+              redeclare Species.N2.Gas.Calibrated N2(
+                final k_alpha_tau=k_alpha_tau_N2,
+                final k_alpha_Qdot=k_alpha_Qdot_N2,
+                final k_alpha_Ndot=k_alpha_Ndot_N2,
+                final k_alpha_tau=k_alpha_tau_N2,
+                final k_alpha_Qdot=k_alpha_Qdot_N2),
+              redeclare Species.O2.Gas.Calibrated O2(
+                final k_alpha_tau=k_alpha_tau_O2,
+                final k_alpha_Qdot=k_alpha_Qdot_O2,
+                final k_alpha_Ndot=k_alpha_Ndot_O2,
+                final k_alpha_tau=k_alpha_tau_O2,
+                final k_alpha_Qdot=k_alpha_Qdot_O2)), each graphite(redeclare
+                Species.C.Graphite.Calibrated C(
+                final k_alpha_tau=k_alpha_tau_C,
+                final k_alpha_Qdot=k_alpha_Qdot_C,
+                final k_alpha_Qdot=k_alpha_Qdot_C), redeclare
+                Species.'e-'.solid.Calibrated 'e-'(
+                final k_alpha_tau='k_alpha_tau_e-',
+                final k_alpha_Qdot='k_alpha_Qdot_e-',
+                final k_alpha_Ndot='k_alpha_Ndot_e-',
+                final k_alpha_tau='k_alpha_tau_e-',
+                final k_alpha_Qdot='k_alpha_Qdot_e-')))),
+        anCL(subregions(
+            each gas(
+              redeclare Species.H2.Gas.Calibrated H2(
+                final k_alpha_tau=k_alpha_tau_H2,
+                final k_alpha_Qdot=k_alpha_Qdot_H2,
+                final k_alpha_Ndot=k_alpha_Ndot_H2,
+                final k_alpha_tau=k_alpha_tau_H2,
+                final k_alpha_Qdot=k_alpha_Qdot_H2),
+              redeclare Species.H2O.Gas.Calibrated H2O(
+                final k_alpha_tau=k_alpha_tau_H2O,
+                final k_alpha_Qdot=k_alpha_Qdot_H2O,
+                final k_alpha_Ndot=k_alpha_Ndot_H2O,
+                final k_alpha_tau=k_alpha_tau_H2O,
+                final k_alpha_Qdot=k_alpha_Qdot_H2O),
+              redeclare Species.N2.Gas.Calibrated N2(
+                final k_alpha_tau=k_alpha_tau_N2,
+                final k_alpha_Qdot=k_alpha_Qdot_N2,
+                final k_alpha_Ndot=k_alpha_Ndot_N2,
+                final k_alpha_tau=k_alpha_tau_N2,
+                final k_alpha_Qdot=k_alpha_Qdot_N2),
+              redeclare Species.O2.Gas.Calibrated O2(
+                final k_alpha_tau=k_alpha_tau_O2,
+                final k_alpha_Qdot=k_alpha_Qdot_O2,
+                final k_alpha_Ndot=k_alpha_Ndot_O2,
+                final k_alpha_tau=k_alpha_tau_O2,
+                final k_alpha_Qdot=k_alpha_Qdot_O2)),
+            each graphite(redeclare Species.C.Graphite.Calibrated C(
+                final k_alpha_tau=k_alpha_tau_C,
+                final k_alpha_Qdot=k_alpha_Qdot_C,
+                final k_alpha_Qdot=k_alpha_Qdot_C), redeclare
+                Species.'e-'.solid.Calibrated 'e-'(
+                final k_alpha_tau='k_alpha_tau_e-',
+                final k_alpha_Qdot='k_alpha_Qdot_e-',
+                final k_alpha_Ndot='k_alpha_Ndot_e-',
+                final k_alpha_tau='k_alpha_tau_e-',
+                final k_alpha_Qdot='k_alpha_Qdot_e-')),
+            each ionomer(
+              redeclare Species.C19HF37O5S.Solid.Calibrated C19HF37O5S(
+                final k_alpha_tau=k_alpha_tau_C19HF37O5S,
+                final k_alpha_Qdot=k_alpha_Qdot_C19HF37O5S,
+                final k_alpha_Qdot=k_alpha_Qdot_C19HF37O5S),
+              redeclare Species.H2O.Gas.Calibrated H2O(
+                final k_alpha_tau=k_alpha_tau_H2O,
+                final k_alpha_Qdot=k_alpha_Qdot_H2O,
+                final k_alpha_Ndot=k_alpha_Ndot_H2O,
+                final k_alpha_tau=k_alpha_tau_H2O,
+                final k_alpha_Qdot=k_alpha_Qdot_H2O),
+              redeclare Species.'H+'.Solid.Calibrated 'H+'(
+                final k_alpha_tau='k_alpha_tau_H+',
+                final k_alpha_Qdot='k_alpha_Qdot_H+',
+                final k_alpha_Ndot='k_alpha_Ndot_H+',
+                final k_alpha_tau='k_alpha_tau_H+',
+                final k_alpha_Qdot='k_alpha_Qdot_H+')))),
+        pEM(subregions(each gas(
+              redeclare Species.H2.Gas.Calibrated H2(
+                final k_alpha_tau=k_alpha_tau_H2,
+                final k_alpha_Qdot=k_alpha_Qdot_H2,
+                final k_alpha_Ndot=k_alpha_Ndot_H2,
+                final k_alpha_tau=k_alpha_tau_H2,
+                final k_alpha_Qdot=k_alpha_Qdot_H2),
+              redeclare Species.H2O.Gas.Calibrated H2O(
+                final k_alpha_tau=k_alpha_tau_H2O,
+                final k_alpha_Qdot=k_alpha_Qdot_H2O,
+                final k_alpha_Ndot=k_alpha_Ndot_H2O,
+                final k_alpha_tau=k_alpha_tau_H2O,
+                final k_alpha_Qdot=k_alpha_Qdot_H2O),
+              redeclare Species.N2.Gas.Calibrated N2(
+                final k_alpha_tau=k_alpha_tau_N2,
+                final k_alpha_Qdot=k_alpha_Qdot_N2,
+                final k_alpha_Ndot=k_alpha_Ndot_N2,
+                final k_alpha_tau=k_alpha_tau_N2,
+                final k_alpha_Qdot=k_alpha_Qdot_N2),
+              redeclare Species.O2.Gas.Calibrated O2(
+                final k_alpha_tau=k_alpha_tau_O2,
+                final k_alpha_Qdot=k_alpha_Qdot_O2,
+                final k_alpha_Ndot=k_alpha_Ndot_O2,
+                final k_alpha_tau=k_alpha_tau_O2,
+                final k_alpha_Qdot=k_alpha_Qdot_O2)), each ionomer(
+              redeclare Species.C19HF37O5S.Solid.Calibrated C19HF37O5S(
+                final k_alpha_tau=k_alpha_tau_C19HF37O5S,
+                final k_alpha_Qdot=k_alpha_Qdot_C19HF37O5S,
+                final k_alpha_Qdot=k_alpha_Qdot_C19HF37O5S),
+              redeclare Species.H2O.Gas.Calibrated H2O(
+                final k_alpha_tau=k_alpha_tau_H2O,
+                final k_alpha_Qdot=k_alpha_Qdot_H2O,
+                final k_alpha_Ndot=k_alpha_Ndot_H2O,
+                final k_alpha_tau=k_alpha_tau_H2O,
+                final k_alpha_Qdot=k_alpha_Qdot_H2O),
+              redeclare Species.'H+'.Solid.Calibrated 'H+'(
+                final k_alpha_tau='k_alpha_tau_H+',
+                final k_alpha_Qdot='k_alpha_Qdot_H+',
+                final k_alpha_Ndot='k_alpha_Ndot_H+',
+                final k_alpha_tau='k_alpha_tau_H+',
+                final k_alpha_Qdot='k_alpha_Qdot_H+')))),
+        caCL(subregions(
+            each gas(
+              redeclare Species.H2.Gas.Calibrated H2(
+                final k_alpha_tau=k_alpha_tau_H2,
+                final k_alpha_Qdot=k_alpha_Qdot_H2,
+                final k_alpha_Ndot=k_alpha_Ndot_H2,
+                final k_alpha_tau=k_alpha_tau_H2,
+                final k_alpha_Qdot=k_alpha_Qdot_H2),
+              redeclare Species.H2O.Gas.Calibrated H2O(
+                final k_alpha_tau=k_alpha_tau_H2O,
+                final k_alpha_Qdot=k_alpha_Qdot_H2O,
+                final k_alpha_Ndot=k_alpha_Ndot_H2O,
+                final k_alpha_tau=k_alpha_tau_H2O,
+                final k_alpha_Qdot=k_alpha_Qdot_H2O),
+              redeclare Species.N2.Gas.Calibrated N2(
+                final k_alpha_tau=k_alpha_tau_N2,
+                final k_alpha_Qdot=k_alpha_Qdot_N2,
+                final k_alpha_Ndot=k_alpha_Ndot_N2,
+                final k_alpha_tau=k_alpha_tau_N2,
+                final k_alpha_Qdot=k_alpha_Qdot_N2),
+              redeclare Species.O2.Gas.Calibrated O2(
+                final k_alpha_tau=k_alpha_tau_O2,
+                final k_alpha_Qdot=k_alpha_Qdot_O2,
+                final k_alpha_Ndot=k_alpha_Ndot_O2,
+                final k_alpha_tau=k_alpha_tau_O2,
+                final k_alpha_Qdot=k_alpha_Qdot_O2)),
+            each graphite(redeclare Species.C.Graphite.Calibrated C(
+                final k_alpha_tau=k_alpha_tau_C,
+                final k_alpha_Qdot=k_alpha_Qdot_C,
+                final k_alpha_Qdot=k_alpha_Qdot_C), redeclare
+                Species.'e-'.solid.Calibrated 'e-'(
+                final k_alpha_tau='k_alpha_tau_e-',
+                final k_alpha_Qdot='k_alpha_Qdot_e-',
+                final k_alpha_Ndot='k_alpha_Ndot_e-',
+                final k_alpha_tau='k_alpha_tau_e-',
+                final k_alpha_Qdot='k_alpha_Qdot_e-')),
+            each ionomer(
+              redeclare Species.C19HF37O5S.Solid.Calibrated C19HF37O5S(
+                final k_alpha_tau=k_alpha_tau_C19HF37O5S,
+                final k_alpha_Qdot=k_alpha_Qdot_C19HF37O5S,
+                final k_alpha_Qdot=k_alpha_Qdot_C19HF37O5S),
+              redeclare Species.H2O.Gas.Calibrated H2O(
+                final k_alpha_tau=k_alpha_tau_H2O,
+                final k_alpha_Qdot=k_alpha_Qdot_H2O,
+                final k_alpha_Ndot=k_alpha_Ndot_H2O,
+                final k_alpha_tau=k_alpha_tau_H2O,
+                final k_alpha_Qdot=k_alpha_Qdot_H2O),
+              redeclare Species.'H+'.Solid.Calibrated 'H+'(
+                final k_alpha_tau='k_alpha_tau_H+',
+                final k_alpha_Qdot='k_alpha_Qdot_H+',
+                final k_alpha_Ndot='k_alpha_Ndot_H+',
+                final k_alpha_tau='k_alpha_tau_H+',
+                final k_alpha_Qdot='k_alpha_Qdot_H+')))),
+        caGDL(subregions(each gas(
+              redeclare Species.H2.Gas.Calibrated H2(
+                final k_alpha_tau=k_alpha_tau_H2,
+                final k_alpha_Qdot=k_alpha_Qdot_H2,
+                final k_alpha_Ndot=k_alpha_Ndot_H2,
+                final k_alpha_tau=k_alpha_tau_H2,
+                final k_alpha_Qdot=k_alpha_Qdot_H2),
+              redeclare Species.H2O.Gas.Calibrated H2O(
+                final k_alpha_tau=k_alpha_tau_H2O,
+                final k_alpha_Qdot=k_alpha_Qdot_H2O,
+                final k_alpha_Ndot=k_alpha_Ndot_H2O,
+                final k_alpha_tau=k_alpha_tau_H2O,
+                final k_alpha_Qdot=k_alpha_Qdot_H2O),
+              redeclare Species.N2.Gas.Calibrated N2(
+                final k_alpha_tau=k_alpha_tau_N2,
+                final k_alpha_Qdot=k_alpha_Qdot_N2,
+                final k_alpha_Ndot=k_alpha_Ndot_N2,
+                final k_alpha_tau=k_alpha_tau_N2,
+                final k_alpha_Qdot=k_alpha_Qdot_N2),
+              redeclare Species.O2.Gas.Calibrated O2(
+                final k_alpha_tau=k_alpha_tau_O2,
+                final k_alpha_Qdot=k_alpha_Qdot_O2,
+                final k_alpha_Ndot=k_alpha_Ndot_O2,
+                final k_alpha_tau=k_alpha_tau_O2,
+                final k_alpha_Qdot=k_alpha_Qdot_O2)), each graphite(redeclare
+                Species.C.Graphite.Calibrated C(
+                final k_alpha_tau=k_alpha_tau_C,
+                final k_alpha_Qdot=k_alpha_Qdot_C,
+                final k_alpha_Qdot=k_alpha_Qdot_C), redeclare
+                Species.'e-'.solid.Calibrated 'e-'(
+                final k_alpha_tau='k_alpha_tau_e-',
+                final k_alpha_Qdot='k_alpha_Qdot_e-',
+                final k_alpha_Ndot='k_alpha_Ndot_e-',
+                final k_alpha_tau='k_alpha_tau_e-',
+                final k_alpha_Qdot='k_alpha_Qdot_e-')))),
+        caFP(subregions(each gas(
+              redeclare Species.H2.Gas.Calibrated H2(
+                final k_alpha_tau=k_alpha_tau_H2,
+                final k_alpha_Qdot=k_alpha_Qdot_H2,
+                final k_alpha_Ndot=k_alpha_Ndot_H2,
+                final k_alpha_tau=k_alpha_tau_H2,
+                final k_alpha_Qdot=k_alpha_Qdot_H2),
+              redeclare Species.H2O.Gas.Calibrated H2O(
+                final k_alpha_tau=k_alpha_tau_H2O,
+                final k_alpha_Qdot=k_alpha_Qdot_H2O,
+                final k_alpha_Ndot=k_alpha_Ndot_H2O,
+                final k_alpha_tau=k_alpha_tau_H2O,
+                final k_alpha_Qdot=k_alpha_Qdot_H2O),
+              redeclare Species.N2.Gas.Calibrated N2(
+                final k_alpha_tau=k_alpha_tau_N2,
+                final k_alpha_Qdot=k_alpha_Qdot_N2,
+                final k_alpha_Ndot=k_alpha_Ndot_N2,
+                final k_alpha_tau=k_alpha_tau_N2,
+                final k_alpha_Qdot=k_alpha_Qdot_N2),
+              redeclare Species.O2.Gas.Calibrated O2(
+                final k_alpha_tau=k_alpha_tau_O2,
+                final k_alpha_Qdot=k_alpha_Qdot_O2,
+                final k_alpha_Ndot=k_alpha_Ndot_O2,
+                final k_alpha_tau=k_alpha_tau_O2,
+                final k_alpha_Qdot=k_alpha_Qdot_O2)), each graphite(redeclare
+                Species.C.Graphite.Calibrated C(
+                final k_alpha_tau=k_alpha_tau_C,
+                final k_alpha_Qdot=k_alpha_Qdot_C,
+                final k_alpha_Qdot=k_alpha_Qdot_C), redeclare
+                Species.'e-'.solid.Calibrated 'e-'(
+                final k_alpha_tau='k_alpha_tau_e-',
+                final k_alpha_Qdot='k_alpha_Qdot_e-',
+                final k_alpha_Ndot='k_alpha_Ndot_e-',
+                final k_alpha_tau='k_alpha_tau_e-',
+                final k_alpha_Qdot='k_alpha_Qdot_e-')))));
+
+      annotation (
+        defaultComponentPrefixes="replaceable",
+        defaultComponentName="cell",
+        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-80,-20},{
+                80,20}}), graphics),
+        Documentation(info="
+<html><p>For more information, see the
+  <a href=\"modelica://FCSys.Assemblies.Cells.Cell\">Cell</a> model.</p></html>"));
+    end CalibratedCell;
     model IntegratedCell "Baseline cell, with integrated CLs and GDLs"
       extends FCSys.BaseClasses.Icons.Cell;
       // Geometric parameters
