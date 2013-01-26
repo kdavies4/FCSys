@@ -11,7 +11,7 @@ rm -f help/FCSys.Figures*.png
 rm -f help/FCSys_Figures*.html
 rm -f help/FCSys.Systems*.png
 rm -f help/FCSys_Systems*.html
-rm -f help/FCSys.Test*.png
+rm -f help/FCSys.Test*.png # Test and Tests
 rm -f help/FCSys_Test*.html
 rm -f help/*WorkInProgress*
 

@@ -21,8 +21,10 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
     parameter Real expected[:, 2];
     parameter Real eps=1e-6;
     input Real actual;
+
   protected
     Integer cur(start=1,fixed=true);
+
   algorithm
     when initial() then
       assert(size(expected, 1) > 0,
@@ -51,12 +53,14 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
       // Note:  In Dymola 7.4, the simulation log may state "Integration
       // terminated successfully" and then the assertion statement below it.
     end when;
+
   end AssertTrajectory;
 
   model AssertBecomesTrueAt
     parameter Modelica.SIunits.Time at;
     parameter Modelica.SIunits.Time eps=1e-6;
     input Boolean event;
+
   algorithm
     when initial() then
       assert(at > time + eps,
@@ -74,12 +78,14 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
       // Note:  In Dymola 7.4, the simulation log may state "Integration
       // terminated successfully" and then the assertion statement below it.
     end when;
+
   end AssertBecomesTrueAt;
 
   model AssertInitial "Assert the initial value of a signal"
     parameter Real expected;
     parameter Real eps=1e-6;
     input Real actual;
+
   algorithm
     when initial() then
       assertValue(
@@ -87,12 +93,14 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
           expected,
           eps);
     end when;
+
   end AssertInitial;
 
   model AssertFinal "Assert the final value of a signal"
     parameter Real expected;
     parameter Real eps=1e-6;
     input Real actual;
+
   algorithm
     when terminal() then
       assertValue(
@@ -102,6 +110,7 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
       // Note:  In Dymola 7.4, the simulation log may state "Integration
       // terminated successfully" and then the assertion statement below it.
     end when;
+
   end AssertFinal;
 
   model AssertAverageBetween "Assert an average value between two times."
@@ -110,13 +119,16 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
     parameter Real finish;
     parameter Real eps=1e-6;
     input Real signal;
+
   protected
     Real integral;
+
   initial equation
     integral = 0;
     assert(finish > start,
       "The end of interval must be after start of interval.");
     assert(time <= start, "The simulation started after the interval.");
+
   equation
     der(integral) = if (time < start) then 0 else signal;
     when time >= finish then
@@ -125,6 +137,7 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
         finish) + " was " + String(average) + " but should have been within "
          + String(eps) + " of " + String(integral/(finish - start)) + ".");
     end when;
+
   algorithm
     when terminal() then
       assert(time >= finish,
@@ -132,6 +145,7 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
       // Note:  In Dymola 7.4, the simulation log may state "Integration
       // terminated successfully" and then the assertion statement below it.
     end when;
+
   end AssertAverageBetween;
 
   model AssertValueAt "Assert the initial value of a signal at a specific time"
@@ -139,6 +153,7 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
     parameter Modelica.SIunits.Time at;
     parameter Real eps=1e-6;
     input Real actual;
+
   algorithm
     when initial() then
       assert(at >= time,
@@ -156,6 +171,7 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
       // Note:  In Dymola 7.4, the simulation log may state "Integration
       // terminated successfully" and then the assertion statement below it.
     end when;
+
   end AssertValueAt;
 
   package Tests "A library to test the assertion primitives in this library"
@@ -167,12 +183,14 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
         AssertTrajectory check_x(actual=x, expected=[0, 0; 1, 1; 2, 4; 3, 9]);
         annotation (TestCase(action="simulate",result="success"), experiment(
               StopTime=4));
+
       end CheckSuccess;
 
       model CheckFailure1 "Check for failure when first point is before start"
         extends CheckSuccess(check_x(expected=[-1, 1; 0, 0; 1, 1]));
         annotation (TestCase(action="simulate",result="failure"), experiment(
               StopTime=4));
+
       end CheckFailure1;
 
       model CheckFailure2
@@ -180,13 +198,16 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
         extends CheckSuccess(x=time);
         annotation (TestCase(action="simulate",result="failure"), experiment(
               StopTime=4));
+
       end CheckFailure2;
 
       model CheckFailure3 "Check for failure when all points aren't checked"
         extends CheckSuccess(check_x(expected=[0, 0; 1, 1; 5, 25]));
         annotation (TestCase(action="simulate",result="failure"), experiment(
               StopTime=4));
+
       end CheckFailure3;
+
     end Trajectory;
 
     package BecomesTrueAt "Tests on the AssertBecomesTrueAt model"
@@ -196,6 +217,7 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
         AssertBecomesTrueAt check_event(event=(x > 2), at=2);
         annotation (TestCase(action="simulate",result="success"), experiment(
               StopTime=4));
+
       end CheckSuccess;
 
       model CheckFailure1
@@ -203,18 +225,21 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
         extends CheckSuccess(check_event(at=-1));
         annotation (TestCase(action="simulate", result="failure"), experiment(
               StopTime=4));
+
       end CheckFailure1;
 
       model CheckFailure2 "Check for failure when transition is early"
         extends CheckSuccess(check_event(event=(x > 1)));
         annotation (TestCase(action="simulate", result="failure"), experiment(
               StopTime=4));
+
       end CheckFailure2;
 
       model CheckFailure3 "Check for failure when transition is late"
         extends CheckSuccess(check_event(event=(x > 3)));
         annotation (TestCase(action="simulate",result="success"), experiment(
               StopTime=4));
+
       end CheckFailure3;
 
       model CheckFailure4
@@ -222,7 +247,9 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
         extends CheckSuccess(check_event(at=5));
         annotation (TestCase(action="simulate", result="failure"), experiment(
               StopTime=4));
+
       end CheckFailure4;
+
     end BecomesTrueAt;
 
     package Initial "Tests associated with AssertInitial model"
@@ -231,12 +258,15 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
         Real x=2*time + 1;
         AssertInitial check_x(actual=x, expected=1);
         annotation (TestCase(action="simulate",result="success"));
+
       end CheckSuccess;
 
       model CheckFailure1 "Check for failure when initial value is incorrect"
         extends CheckSuccess(x=time);
         annotation (TestCase(action="simulate",result="failure"));
+
       end CheckFailure1;
+
     end Initial;
 
     package Final "Tests associated with AssertFinal model"
@@ -246,13 +276,16 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
         AssertFinal check_x(actual=x, expected=9);
         annotation (TestCase(action="simulate",result="success"), experiment(
               StopTime=4));
+
       end CheckSuccess;
 
       model CheckFailure1 "Check for failure when final value is incorrect"
         extends CheckSuccess(x=time);
         annotation (TestCase(action="simulate",result="failure"), experiment(
               StopTime=4));
+
       end CheckFailure1;
+
     end Final;
 
     package Average "Tests associated with AssertAverage model"
@@ -269,6 +302,7 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
           eps=1e-4);
         annotation (TestCase(action="simulate",result="success"), experiment(
               StopTime=8));
+
       end CheckSuccess;
 
       model CheckFailure1
@@ -276,6 +310,7 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
         extends CheckSuccess(check_x(start=-pi,finish=pi));
         annotation (TestCase(action="simulate",result="failure"), experiment(
               StopTime=8));
+
       end CheckFailure1;
 
       model CheckFailure2
@@ -283,13 +318,16 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
         extends CheckSuccess(check_x(start=pi,finish=3*pi));
         annotation (TestCase(action="simulate",result="failure"), experiment(
               StopTime=8));
+
       end CheckFailure2;
 
       model CheckFailure3 "Check for failure when values don't agree"
         extends CheckSuccess(check_x(finish=7*pi/8));
         annotation (TestCase(action="simulate",result="failure"), experiment(
               StopTime=8));
+
       end CheckFailure3;
+
     end Average;
 
     package ValueAt "Tests associated with AssertValueAt model"
@@ -302,6 +340,7 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
           at=2);
         annotation (TestCase(action="simulate",result="success"), experiment(
               StopTime=4));
+
       end CheckSuccess;
 
       model CheckFailure1
@@ -309,12 +348,14 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
         extends CheckSuccess(check_x(at=-1));
         annotation (TestCase(action="simulate",result="failure"), experiment(
               StopTime=4));
+
       end CheckFailure1;
 
       model CheckFailure2 "Check for failure when value is incorrect"
         extends CheckSuccess(x=time);
         annotation (TestCase(action="simulate",result="failure"), experiment(
               StopTime=4));
+
       end CheckFailure2;
 
       model CheckFailure3
@@ -322,19 +363,24 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
         extends CheckSuccess(check_x(at=5));
         annotation (TestCase(action="simulate",result="failure"), experiment(
               StopTime=4));
+
       end CheckFailure3;
+
     end ValueAt;
+
   end Tests;
 
   package Features
     extends Modelica.Icons.Package;
 
   end Features;
-
-  annotation (Documentation(info="<html><p>This package is a (slightly) modified version
-  of XogenyTest version 1.0 by Michael Tiller of Xogeny, Inc.  It is available at
+  annotation (Documentation(info="<html><p>This package is modified from
+  XogenyTest version 1.0 by Michael Tiller of Xogeny, Inc.  XogenyTest is available at
   <a href=\"https://github.com/xogeny/XogenyTest\">https://github.com/xogeny/XogenyTest</a> under
   a <a href=\"https://creativecommons.org/licenses/by/3.0/deed.en_US\">Creative Commons
-  Attribution 3.0 Unported License</a>.
+  Attribution 3.0 Unported License</a>.  If the <a href=\"modelica://FCSys.Tests\">Tests</a> 
+  package is removed from the <a href=\"modelica://FCSys\">FCSys</a> distribution, this
+  package can be safely removed as well.
   </p></html>"));
+
 end Test;
