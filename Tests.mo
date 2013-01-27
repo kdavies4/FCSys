@@ -18,7 +18,7 @@ package Tests "Models and functions for test and validation"
       "<html>Run all of the tests on the <a href=\"modelica://FCSys.Characteristics\">Characteristics</a> package</html>"
       extends Modelica.Icons.Example;
 
-      TestCellPotentials testCellPotentials;
+      FCSys.Tests.Characteristics.TestCellPotentialsGas testCellPotentials;
       H2O.Gas testH2OGas;
       N2.Gas testN2Gas;
       O2.Gas testO2Gas;
@@ -29,109 +29,88 @@ package Tests "Models and functions for test and validation"
 
     end TestAll;
     extends Modelica.Icons.Package;
-    model TestCellPotentials
-      "<html>Test the potentials of the reaction 2H<sub>2</sub> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O</html>"
+    model TestCellPotentialsGas
+      "<html>Test the potentials of the reaction 2H<sub>2</sub> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O<sub>(g)</sub></html>"
       import FCSys.Characteristics.*;
       import FCSys.Test.assertValue;
       extends Modelica.Icons.Example;
-      constant Q.Temperature T=298*U.K "Temperature";
-      // **finish this model
 
-      Q.Potential v_therm_model_g=v_therm_gas(T)
-        "Correlated thermodynamic potential of H2/O2 cell";
-      Q.Potential v_OC_model_g=v_OC_gas(T)
-        "Correlated open circuit potential of H2/O2 cell";
-
-      Q.Potential v_therm_model_l=v_therm_liquid(T)
-        "Correlated thermodynamic potential of H2/O2 cell";
-      Q.Potential v_OC_model_l=v_OC_liquid(T)
-        "Correlated open circuit potential of H2/O2 cell";
-      Q.Potential v_therm_table_l=-285830*U.J/U.mol/2
-        "Tabulated thermodynamic potential of H2/O2 cell [Moran2004, p. 803]";
-      Q.Potential v_therm_table_g=-241820*U.J/U.mol/2
-        "Tabulated thermodynamic potential of H2/O2 cell [Moran2004, p. 803]";
-      Q.Potential v_OC_table_g=-228590*U.J/U.mol/2
-        "Tabulated open circuit potential of H2/O2 cell [Moran2004, p. 803]";
-      Q.Potential v_OC_table_l=-237180*U.J/U.mol/2
-        "Tabulated open circuit potential of H2/O2 cell [Moran2004, p. 803]";
-
-      Q.Potential g1=-237.2e3*U.J/U.mol/2
-        "298.15K, liq: h=g/0.83 [Larminie2003, p. 28 & 33]";
-      Q.Potential g2=-228.2e3*U.J/U.mol/2
-        "353.15K, liq: h=g/0.80 [Larminie2003, p. 28 & 33]";
-      Q.Potential g3=-226.1e3*U.J/U.mol/2
-        "353.15K, gas:  [Larminie2003, p. 28 & 33]";
-      Q.Potential g4=-225.2e3*U.J/U.mol/2
-        "373.15K, gas: h=g/0.79 [Larminie2003, p. 28 & 33]";
-      Q.Potential g5=-220.4e3*U.J/U.mol/2
-        "473.15K, gas: h=g/0.77 [Larminie2003, p. 28 & 33]";
-      Q.Potential g6=-210.3e3*U.J/U.mol/2
-        "673.15K, gas: h=g/0.74 [Larminie2003, p. 28 & 33]";
-      Q.Potential g7=-199.6e3*U.J/U.mol/2
-        "873.15K, gas: h=g/0.70 [Larminie2003, p. 28 & 33]";
-      Q.Potential g8=-188.6e3*U.J/U.mol/2
-        "1073.15K, gas: h=g/0.66 [Larminie2003, p. 28 & 33]";
-      Q.Potential g9=-177.4e3*U.J/U.mol/2
-        "1273.15K, gas: h=g/0.62 [Larminie2003, p. 28 & 33]";
+      parameter Q.Temperature T[:]={298,373.15,473.15,673.15,873.15,1073.15,
+          1273.15}*U.K "Temperatures";
+      final parameter Q.Potential v_OC_model[:]=v_OC(T)
+        "Correlated open circuit potentials";
+      // Note:  The potentials are scaled in terms of electrons.
+      parameter Q.Potential v_OC_table[size(T, 1)]=0.5*{-228590,-225.2e3,-220.4e3,
+          -210.3e3,-199.6e3,-188.6e3,-177.4e3}*U.J/U.mol
+        "Tabulated open circuit potentials";
+      // The first entry is based on [Moran2004, p. 803].  The others are
+      // from [Larminie2003, p. 28].
 
     protected
-      function v_OC_gas "Open-circuit voltage with H2O as gas"
+      replaceable function v_OC "Open-circuit voltage"
         input Q.Temperature T "Temperature";
         input Q.Pressure p=1*U.atm "Pressure";
         output Q.Potential v_OC "Potential";
       algorithm
-        v_OC := 0.5*(H2O.Gas.g(T, p) - H2.Gas.g(T, p) - 0.5*O2.Gas.g(T, p));
-      end v_OC_gas;
-
-      function v_OC_liquid "Open-circuit voltage with H2O as liquid"
-        input Q.Temperature T "Temperature";
-        input Q.Pressure p=1*U.atm "Pressure";
-        output Q.Potential v_OC "Potential";
-      algorithm
-        v_OC := 0.5*(H2O.Liquid.g(T, p) - H2.Gas.g(T, p) - 0.5*O2.Gas.g(T, p));
-      end v_OC_liquid;
-
-      function v_therm_gas "Thermodynamic potential with H2O as gas"
-        input Q.Temperature T "Temperature";
-        input Q.Pressure p=1*U.atm "Pressure";
-        output Q.Potential v_therm "Potential";
-      algorithm
-        v_therm := 0.5*(H2O.Gas.h(T, p) - H2.Gas.h(T, p) - 0.5*O2.Gas.h(T, p));
-      end v_therm_gas;
-
-      function v_therm_liquid "Thermodynamic potential with H2O as liquid"
-        input Q.Temperature T "Temperature";
-        input Q.Pressure p=1*U.atm "Pressure";
-        output Q.Potential v_therm "Potential";
-      algorithm
-        v_therm := 0.5*(H2O.Liquid.h(T, p) - H2.Gas.h(T, p) - 0.5*O2.Gas.h(T, p));
-      end v_therm_liquid;
+        v_OC := 0.5*(H2O.Gas.g(T, p) - H2.Gas.g(T, p) - 0.5*O2.Gas.g(T, p))
+          annotation (Inline=true);
+      end v_OC;
 
     initial equation
-      assertValue(
-            v_OC_model_g,
-            v_OC_table_g,
-            1e-3*U.V,
-            name="v_OC_g");
-      //**v_OC_gas(T)
-      //**    1e-3*U.V,
-      assertValue(
-            v_OC_model_l,
-            v_OC_table_l,
-            1e-3*U.V,
-            name="v_OC_l");
-      assertValue(
-            v_therm_model_g,
-            v_therm_table_g,
-            1e-2*U.V,
-            name="v_therm_g");
-      assertValue(
-            v_therm_model_l,
-            v_therm_table_l,
-            1e-6*U.V,
-            name="v_therm_l");
+      for i in 1:size(T, 1) loop
+        assertValue(
+              v_OC_model[i],
+              v_OC_table[i],
+              1e-3*U.V,
+              name="of v_OC at " + String(T[i]/U.K) + " K");
+        // Note:  In Dymola 7.4, the v_OC() function call cannot be used
+        // directly here.  Instead, intermediate variables must be used.  Otherwise,
+        // the result is different.
+      end for;
+    end TestCellPotentialsGas;
 
-    end TestCellPotentials;
+    model TestCellPotentialsLiquid
+      "<html>Test the potentials of the reaction 2H<sub>2</sub> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O<sub>(l)</sub></html>"
+      import FCSys.Characteristics.*;
+      import FCSys.Test.assertValue;
+      extends TestCellPotentialsGas(T={298,298.15,353.15}*U.K, v_OC_table=0.5*{
+            -237180,-237.2e3,-228.2e3}*U.J/U.mol);
+
+      final parameter Q.Potential v_therm_model[:]=v_therm(T)
+        "Correlated thermodynamic potentials";
+      parameter Q.Potential v_therm_table[size(T, 1)]=0.5*{-285830,-237.2e3/
+          0.83,-228.2e3/0.80}*U.J/U.mol "Tabulated thermodynamic potentials";
+      // The first entry is based on [Moran2004, p. 803].  The others are
+      // from [Larminie2003, pp. 28 & 33].
+
+    protected
+      redeclare function v_OC "Open-circuit voltage"
+        input Q.Temperature T "Temperature";
+        input Q.Pressure p=1*U.atm "Pressure";
+        output Q.Potential v_OC "Potential";
+      algorithm
+        v_OC := 0.5*(H2O.Liquid.g(T, p) - H2.Gas.g(T, p) - 0.5*O2.Gas.g(T, p))
+          annotation (Inline=true);
+      end v_OC;
+
+      function v_therm "Thermodynamic potential"
+        input Q.Temperature T "Temperature";
+        input Q.Pressure p=1*U.atm "Pressure";
+        output Q.Potential v_therm "Potential";
+      algorithm
+        v_therm := 0.5*(H2O.Liquid.h(T, p) - H2.Gas.h(T, p) - 0.5*O2.Gas.h(T, p))
+          annotation (Inline=true);
+      end v_therm;
+
+    initial equation
+      for i in 1:size(T, 1) loop
+        assertValue(
+              v_therm_model[i],
+              v_therm_table[i],
+              1e-2*U.V,
+              name="of v_therm at " + String(T[i]/U.K) + " K");
+      end for;
+    end TestCellPotentialsLiquid;
 
     package H2O
       extends Modelica.Icons.Package;
@@ -150,14 +129,16 @@ package Tests "Models and functions for test and validation"
           "Relative error tolerance for specific enthalpy";
         parameter Q.NumberAbsolute eps_s=3e-3
           "Relative error tolerance for specific entropy";
-        Q.Temperature T[:]={220,300,400,600,800,1000,2000,3250}*U.K
+        parameter Q.Temperature T[:]={220,300,400,600,800,1000,2000,3250}*U.K
           "Temperature";
-        Q.Potential h_model[:]=Data.h(T) "Correlated specific enthalpy";
-        Q.Potential h_table[size(T, 1)]={7295,9966,13356,20402,27896,35882,
-            82593,150272}*U.J/U.mol "Tabulated specific enthalpy";
-        Q.NumberAbsolute s_model[:]=Data.s(T) "Correlated specific entropy";
-        Q.NumberAbsolute s_table[size(T, 1)]={178.576,188.928,198.673,212.920,
-            223.693,232.597,264.571,290.756}*U.J/(U.mol*U.K)
+        final parameter Q.Potential h_model[:]=Data.h(T)
+          "Correlated specific enthalpy";
+        parameter Q.Potential h_table[size(T, 1)]={7295,9966,13356,20402,27896,
+            35882,82593,150272}*U.J/U.mol "Tabulated specific enthalpy";
+        final parameter Q.NumberAbsolute s_model[:]=Data.s(T)
+          "Correlated specific entropy";
+        parameter Q.NumberAbsolute s_table[size(T, 1)]={178.576,188.928,198.673,
+            212.920,223.693,232.597,264.571,290.756}*U.J/(U.mol*U.K)
           "Tabulated specific entropy";
 
       initial equation

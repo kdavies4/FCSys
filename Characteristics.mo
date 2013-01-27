@@ -1117,11 +1117,11 @@ package Characteristics
           h0 := Polynomial.F(
                     T,
                     b_c[i, :],
-                    specHeatCapPow) + B_c[i, 1];
+                    specHeatCapPow) + B_c[i, 1]
+            annotation (Inline=true, derivative=dh0_i);
           // This is the integral of c0_p*dT up to T at p0.  The lower bound is the
           // enthalpy of formation (of ideal gas, if the material is gaseous) at
           // 25 degC [McBride2002, p. 2].
-          annotation (Inline=true, derivative=dh0_i);
         end h0_i;
 
         function dh0_i "Derivative of h0_i"
@@ -1144,11 +1144,14 @@ package Characteristics
 
         end dh0_i;
 
-        function h_resid "Residual specific enthalpy for pressure adjustment"
+        function h_resid
+          "Residual specific enthalpy for pressure adjustment for selected rows of b_v"
           input Q.TemperatureAbsolute T "Temperature";
           input Q.PressureAbsolute p "Pressure";
+          input Integer rowLimits[2]
+            "Beginning and ending indices of rows of b_v to be included";
           output Q.Potential h_resid
-            "Integral of (delh/delp)_T*dp up to p with zero integration constant";
+            "Integral of (delh/delp)_T*dp up to p with zero integration constant (for selected rows)";
 
         algorithm
           h_resid := Polynomial.F(
@@ -1157,9 +1160,9 @@ package Characteristics
                       T,
                       b_v[i, :] .* {specVolPow[1] - specVolPow[2] + i - j + 1
                 for j in 1:size(b_v, 2)},
-                      specVolPow[2] - specVolPow[1] - i + 1) for i in 1:size(
-              b_v, 1)},
-                    specVolPow[1]) annotation (Inline=true);
+                      specVolPow[2] - specVolPow[1] - i + 1) for i in rowLimits[
+              1]:rowLimits[2]},
+                    specVolPow[1] + rowLimits[1] - 1) annotation (Inline=true);
           // Note:  The partial derivative (delh/delp)_T is equal to v +
           // T*(dels/delp)_T by definition of enthalpy change (dh = T*ds + v*dp)
           // and then to v - T*(delv/delT)_p by applying the appropriate Maxwell
@@ -1167,31 +1170,6 @@ package Characteristics
           // Note:  This is zero for an ideal gas.
 
         end h_resid;
-
-        function h_resid_IG
-          "Residual specific enthalpy for pressure adjustment"
-          // **remove this function
-          input Q.TemperatureAbsolute T "Temperature";
-          input Q.PressureAbsolute p "Pressure";
-          output Q.Potential h_resid
-            "Integral of (delh/delp)_T*dp up to p with zero integration constant";
-
-        algorithm
-          h_resid := Polynomial.F(
-                    p,
-                    {Polynomial.f(
-                      T,
-                      b_v[-specVolPow[1], :] .* {-specVolPow[2] - j + 1 for j
-                 in 1:size(b_v, 2)},
-                      specVolPow[2] + 1)},
-                    -1) annotation (Inline=true);
-          // Note:  The partial derivative (delh/delp)_T is equal to v +
-          // T*(dels/delp)_T by definition of enthalpy change (dh = T*ds + v*dp)
-          // and then to v - T*(delv/delT)_p by applying the appropriate Maxwell
-          // relation, (dels/delp)_T = -(delv/delT)_p.
-          // Note:  This is zero for an ideal gas.
-
-        end h_resid_IG;
 
       algorithm
         /*
@@ -1208,12 +1186,21 @@ package Characteristics
            + 1] or i == size(T_lim_c, 1) - 1) then h0_i(T, i) else 0) for i in
           1:size(T_lim_c, 1) - 1)) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K
            then Deltah0 else 0) - (if referenceEnthalpy <> ReferenceEnthalpy.EnthalpyOfFormationAt25degC
-           then Deltah0_f else 0) + h_offset + h_resid(T, p) - (if phase <>
-          "gas" then h_resid(T, p0) else 0)
+           then Deltah0_f else 0) + h_offset + h_resid(
+                T,
+                p,
+                {1,size(b_v, 1)}) - (if phase == "gas" then h_resid(
+                T,
+                p0,
+                {1,-specVolPow[1]}) else h_resid(
+                T,
+                p0,
+                {1,size(b_v, 1)}))
           annotation (
           InlineNoEvent=true,
           Inline=true,
           smoothOrder=1);
+
         // **The last two terms adjust for the actual pressure relative to the
         // reference.  If the material is gaseous, then the reference is the ideal
         // gas.  In that case, the lower limit of the integral (delh/delp)_T*dp is
