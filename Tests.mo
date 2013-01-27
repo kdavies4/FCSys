@@ -8,6 +8,7 @@ package Tests "Models and functions for test and validation"
     Characteristics.TestAll testCharacteristics;
     Units testUnits;
     BaseClasses.Utilities.TestAll testBaseClassesUtilities;
+
     annotation (Documentation(info="<html><p>If this model simulates without failure,
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
 
@@ -18,7 +19,8 @@ package Tests "Models and functions for test and validation"
       "<html>Run all of the tests on the <a href=\"modelica://FCSys.Characteristics\">Characteristics</a> package</html>"
       extends Modelica.Icons.Example;
 
-      FCSys.Tests.Characteristics.TestCellPotentialsGas testCellPotentials;
+      TestCellPotentialsGas testCellPotentialsGas;
+      TestCellPotentialsLiquid testCellPotentialsLiquid;
       H2O.Gas testH2OGas;
       N2.Gas testN2Gas;
       O2.Gas testO2Gas;
@@ -32,7 +34,7 @@ package Tests "Models and functions for test and validation"
     model TestCellPotentialsGas
       "<html>Test the potentials of the reaction 2H<sub>2</sub> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O<sub>(g)</sub></html>"
       import FCSys.Characteristics.*;
-      import FCSys.Test.assertValue;
+      import FCSys.Test.assertValues;
       extends Modelica.Icons.Example;
 
       parameter Q.Temperature T[:]={298,373.15,473.15,673.15,873.15,1073.15,
@@ -57,22 +59,20 @@ package Tests "Models and functions for test and validation"
       end v_OC;
 
     initial equation
-      for i in 1:size(T, 1) loop
-        assertValue(
-              v_OC_model[i],
-              v_OC_table[i],
-              1e-3*U.V,
-              name="of v_OC at " + String(T[i]/U.K) + " K");
-        // Note:  In Dymola 7.4, the v_OC() function call cannot be used
-        // directly here.  Instead, intermediate variables must be used.  Otherwise,
-        // the result is different.
-      end for;
+      assertValues(
+            v_OC_model,
+            v_OC_table,
+            1e-3*U.V,
+            name="open circuit potential");
+      // Note:  In Dymola 7.4, the v_OC() function call cannot be used
+      // directly here.  Instead, intermediate variables must be used.  Otherwise,
+      // the result is different.
     end TestCellPotentialsGas;
 
     model TestCellPotentialsLiquid
       "<html>Test the potentials of the reaction 2H<sub>2</sub> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O<sub>(l)</sub></html>"
       import FCSys.Characteristics.*;
-      import FCSys.Test.assertValue;
+      import FCSys.Test.assertValues;
       extends TestCellPotentialsGas(T={298,298.15,353.15}*U.K, v_OC_table=0.5*{
             -237180,-237.2e3,-228.2e3}*U.J/U.mol);
 
@@ -103,17 +103,26 @@ package Tests "Models and functions for test and validation"
       end v_therm;
 
     initial equation
-      for i in 1:size(T, 1) loop
-        assertValue(
-              v_therm_model[i],
-              v_therm_table[i],
-              1e-2*U.V,
-              name="of v_therm at " + String(T[i]/U.K) + " K");
-      end for;
+      assertValues(
+            v_therm_model,
+            v_therm_table,
+            1e-2*U.V,
+            name="thermodynamic potential");
     end TestCellPotentialsLiquid;
 
     package H2O
       extends Modelica.Icons.Package;
+      model TestAll
+        "<html>Run all of the tests on the <a href=\"modelica://FCSys.Characteristics.H2O\">H2O</a> package</html>"
+        extends Modelica.Icons.Example;
+
+        Gas testGas;
+        TestSaturationPressure testSaturationPressure;
+        annotation (Documentation(info="<html><p>If this model simulates without failure,
+  then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
+
+      end TestAll;
+
       model Gas
         "<html>Test the specific enthalpy and entropy of H<sub>2</sub>O gas according to [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, pp. 799&ndash;801]</html>"
 
@@ -130,7 +139,7 @@ package Tests "Models and functions for test and validation"
         parameter Q.NumberAbsolute eps_s=3e-3
           "Relative error tolerance for specific entropy";
         parameter Q.Temperature T[:]={220,300,400,600,800,1000,2000,3250}*U.K
-          "Temperature";
+          "Temperatures";
         final parameter Q.Potential h_model[:]=Data.h(T)
           "Correlated specific enthalpy";
         parameter Q.Potential h_table[size(T, 1)]={7295,9966,13356,20402,27896,
@@ -158,6 +167,35 @@ package Tests "Models and functions for test and validation"
         end for;
 
       end Gas;
+
+      model TestSaturationPressure
+        "<html>Test the saturation pressure of H<sub>2</sub>O according to [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, pp. **&ndash;**]</html>"
+
+        import FCSys.Test.assertValue;
+        import FCSys.Characteristics.H2O;
+        extends Modelica.Icons.Example;
+
+        parameter Q.Temperature T[:]=U.from_degC({0.01,25,50,80,100,150,200})
+          "Temperatures";
+        parameter Q.PressureAbsolute p_sat[size(T, 1)]={0.00611,0.03169,0.1235,
+            0.4739,1.014,4.758,15.54}*U.bar
+          "Saturation pressures [Moran2004, pp. 760-761]";
+        Q.PressureAbsolute p[size(T, 1)](each start=U.atm) "Pressures";
+
+      initial equation
+        for i in 1:size(T, 1) loop
+          assertValue(
+                  p[i],
+                  p_sat[i],
+                  eps=1e-2*p_sat[i],
+                  name="of saturation pressure at " + String(U.to_degC(T[i]))
+               + " deg C");
+        end for;
+
+      equation
+        H2O.Gas.g(T, p) = H2O.Liquid.g(T, p);
+
+      end TestSaturationPressure;
 
     end H2O;
 
@@ -657,11 +695,9 @@ package Tests "Models and functions for test and validation"
 
         extends Modelica.Icons.Example;
 
+        constant Boolean x[:]={Chemistry(),TestFunctions()} "Function tests";
         Polynomial.TestAll testPolynomial;
 
-      initial equation
-        assert(Chemistry(), "The Chemistry subpackage failed.");
-        assert(TestFunctions(), "TestFunctions failed.");
         annotation (Documentation(info="<html><p>If this model simulates without failure,
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
       end TestAll;
@@ -701,9 +737,11 @@ package Tests "Models and functions for test and validation"
           FCSys.BaseClasses.Utilities.Chemistry.elements("C19HF37O5S-");
         for i in 1:6 loop
           assert(strings[i] == {"C","H","F","O","S","e-"}[i],
-            "The elements function failed on entry " + String(i) + ".");
+            "The elements function failed on element name of entry " + String(i)
+             + ".");
           assert(integers[i] == {19,1,37,5,1,1}[i],
-            "The elements function failed on entry " + String(i) + ".");
+            "The elements function failed on element stoichiometric coefficient of entry "
+             + String(i) + ".");
         end for;
 
         // readElement()
@@ -754,14 +792,14 @@ package Tests "Models and functions for test and validation"
           "<html>Run all of the tests on the <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial\">Polynomial</a> package</html>"
           extends Modelica.Icons.Example;
 
+          constant Boolean x[:]={f()} "Function tests";
+
           F testF;
           dF testdF;
           df testdf;
           d2f testd2f;
           Translatef translatef;
 
-        initial equation
-          assert(f(), "Testf failed.");
           annotation (Documentation(info="<html><p>If this model simulates without failure,
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
         end TestAll;

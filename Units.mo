@@ -460,6 +460,28 @@ package Units "Constants and units of physical measure"
   // -----------------------------------------------------------------------
   // Mathematical constants
 
+  function from_degC
+    "Convert a temperature in degree Celsius to thermodynamic temperature"
+    extends Modelica.SIunits.Conversions.ConversionIcon;
+    input Modelica.SIunits.Conversions.NonSIunits.Temperature_degC T_degC
+      "Temperature in degree Celsius";
+    output Q.Temperature T "Thermodynamic temperature";
+
+  algorithm
+    T := (T_degC + 273.15)*K
+      annotation (Inline=true, inverse(T_degC=to_degC(T)));
+  end from_degC;
+
+  function to_degC "Express a thermodynamic temperature in degree Celsius"
+    extends Modelica.SIunits.Conversions.ConversionIcon;
+    input Q.Temperature T "Thermodynamic temperature";
+    output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC T_degC
+      "Temperature in degree Celsius";
+
+  algorithm
+    T_degC := T/K - 273.15
+      annotation (Inline=true, inverse(T=from_degC(T_degC)));
+  end to_degC;
   final constant Q.Number pi=2*arccos(0) "<html>pi (<i>&pi;</i>)</html>";
   // Circumference per unit diameter
   final constant Q.Number e=exp(1) "Euler number";
