@@ -204,11 +204,12 @@ package Subregions
         ionomer(
           final 'inclC19HF37O5S-'='inclC19HF37O5S-',
           final 'inclH+'='inclH+',
-          Error));
-      Subregion inclLinY=false;
-      Subregion inclLinZ=false;
-      Subregion inclFacesY=false;
-      Subregion inclFacesZ=false;
+          'C19HF37O5S-'(V_IC=subregion1.V/4)),
+       inclLinY=false;
+       inclLinZ=false;
+       inclFacesY=false;
+       inclFacesZ=false)
+        annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
 
       Subregion subregions[n_x](
         each L={100,1,1}*U.cm,

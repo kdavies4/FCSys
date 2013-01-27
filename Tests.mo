@@ -1,35 +1,50 @@
 within FCSys;
 package Tests "Models and functions for test and validation"
   extends Modelica.Icons.Package;
-  model TestAll
-    "<html>Run all of the tests on <a href=\"modelica://FCSys\">FCSys</a></html>"
+  function CallAll
+    "<html>Call all of the test functions for <a href=\"modelica://FCSys\">FCSys</a></html>"
+
+    extends Modelica.Icons.Function;
+
+    output Boolean ok "true, if all tests passed";
+
+  algorithm
+    ok := Units() and BaseClasses.Utilities.CallAll();
+    annotation (Documentation(info="<html><p>
+  This function call will fail if any of the functions return an
+  incorrect result.  It will return <code>true</code> if all of the functions pass.
+  There are no inputs.</p></html>"));
+  end CallAll;
+
+  model RunAll
+    "<html>Run all of the test models for <a href=\"modelica://FCSys\">FCSys</a></html>"
     extends Modelica.Icons.Example;
 
-    Characteristics.TestAll testCharacteristics;
-    Units testUnits;
-    BaseClasses.Utilities.TestAll testBaseClassesUtilities;
+    Characteristics.RunAll testCharacteristics;
+    BaseClasses.Utilities.Polynomial.RunAll testBaseClassesUtilities;
 
     annotation (Documentation(info="<html><p>If this model simulates without failure,
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
 
-  end TestAll;
+  end RunAll;
 
   package Characteristics
-    model TestAll
-      "<html>Run all of the tests on the <a href=\"modelica://FCSys.Characteristics\">Characteristics</a> package</html>"
+    model RunAll
+      "<html>Run all of the test models for the <a href=\"modelica://FCSys.Characteristics\">Characteristics</a> package</html>"
       extends Modelica.Icons.Example;
 
       TestCellPotentialsGas testCellPotentialsGas;
       TestCellPotentialsLiquid testCellPotentialsLiquid;
-      H2O.Gas testH2OGas;
-      N2.Gas testN2Gas;
-      O2.Gas testO2Gas;
-      BaseClasses.Characteristic.TestAll testBaseClassesCharacteristic;
+      H2.Gas.RunAll testH2Gas;
+      H2O.RunAll testH2O;
+      N2.Gas.RunAll testN2Gas;
+      O2.Gas.RunAll testO2Gas;
+      BaseClasses.Characteristic.RunAll testBaseClassesCharacteristic;
 
       annotation (Documentation(info="<html><p>If this model simulates without failure,
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
 
-    end TestAll;
+    end RunAll;
     extends Modelica.Icons.Package;
     model TestCellPotentialsGas
       "<html>Test the potentials of the reaction 2H<sub>2</sub> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O<sub>(g)</sub></html>"
@@ -37,8 +52,8 @@ package Tests "Models and functions for test and validation"
       import FCSys.Test.assertValues;
       extends Modelica.Icons.Example;
 
-      parameter Q.Temperature T[:]={298,373.15,473.15,673.15,873.15,1073.15,
-          1273.15}*U.K "Temperatures";
+      parameter Q.TemperatureAbsolute T[:]={298,373.15,473.15,673.15,873.15,
+          1073.15,1273.15}*U.K "Temperatures";
       final parameter Q.Potential v_OC_model[:]=v_OC(T)
         "Correlated open circuit potentials";
       // Note:  The potentials are scaled in terms of electrons.
@@ -50,8 +65,8 @@ package Tests "Models and functions for test and validation"
 
     protected
       replaceable function v_OC "Open-circuit voltage"
-        input Q.Temperature T "Temperature";
-        input Q.Pressure p=1*U.atm "Pressure";
+        input Q.TemperatureAbsolute T "Temperature";
+        input Q.PressureAbsolute p=1*U.atm "Pressure";
         output Q.Potential v_OC "Potential";
       algorithm
         v_OC := 0.5*(H2O.Gas.g(T, p) - H2.Gas.g(T, p) - 0.5*O2.Gas.g(T, p))
@@ -85,8 +100,8 @@ package Tests "Models and functions for test and validation"
 
     protected
       redeclare function v_OC "Open-circuit voltage"
-        input Q.Temperature T "Temperature";
-        input Q.Pressure p=1*U.atm "Pressure";
+        input Q.TemperatureAbsolute T "Temperature";
+        input Q.PressureAbsolute p=1*U.atm "Pressure";
         output Q.Potential v_OC "Potential";
       algorithm
         v_OC := 0.5*(H2O.Liquid.g(T, p) - H2.Gas.g(T, p) - 0.5*O2.Gas.g(T, p))
@@ -94,8 +109,8 @@ package Tests "Models and functions for test and validation"
       end v_OC;
 
       function v_therm "Thermodynamic potential"
-        input Q.Temperature T "Temperature";
-        input Q.Pressure p=1*U.atm "Pressure";
+        input Q.TemperatureAbsolute T "Temperature";
+        input Q.PressureAbsolute p=1*U.atm "Pressure";
         output Q.Potential v_therm "Potential";
       algorithm
         v_therm := 0.5*(H2O.Liquid.h(T, p) - H2.Gas.h(T, p) - 0.5*O2.Gas.h(T, p))
@@ -110,76 +125,106 @@ package Tests "Models and functions for test and validation"
             name="thermodynamic potential");
     end TestCellPotentialsLiquid;
 
+    package H2
+      extends Modelica.Icons.Package;
+
+      package Gas
+        extends Modelica.Icons.Package;
+        model RunAll
+          "<html>Run all of the test models for the <a href=\"modelica://FCSys.Characteristics.N2.Gas\">N2.Gas</a> package</html>"
+          extends Modelica.Icons.Example;
+
+          c_p testc_p;
+          c_V testc_V;
+          annotation (Documentation(info="<html><p>If this model simulates without failure,
+  then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
+
+        end RunAll;
+
+        model c_p
+          "<html>Test the isobaric specific heat capacity of H<sub>2</sub> gas according to [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, p. 794]</html>"
+
+          import FCSys.Test.assertValue;
+          extends Modelica.Icons.Example;
+
+          replaceable package Data = FCSys.Characteristics.H2.Gas (b_v=[1],
+                specVolPow={-1,0}) "Ideal gas properties";
+          parameter Q.NumberAbsolute eps=2e-3 "Relative error tolerance";
+          parameter Q.TemperatureAbsolute T[:]={250,300,350,400,600,800,1000}*U.K
+            "Temperatures";
+          final parameter Q.CapacityThermalSpecific c_p_model[:]=Data.c_p(T)
+            "Correlated isobaric specific heat capacity";
+          parameter Q.CapacityThermalSpecific c_p_table[size(T, 1)]=Data.m*{
+              14.051,14.307,14.427,14.476,14.546,14.695,14.983}*U.J/(U.g*U.K)
+            "Tabulated isobaric specific heat capacity";
+
+        initial equation
+          for i in 1:size(T, 1) loop
+            assertValue(
+                      actual=c_p_model[i],
+                      expected=c_p_table[i],
+                      eps=eps*c_p_table[i],
+                      name="of isobaric specific heat capacity of " + Data.formula
+                 + " as ideal gas at " + String(T[i]/U.K) + " K");
+          end for;
+
+        end c_p;
+
+        model c_V
+          "<html>Test the isochoric specific heat capacity of H<sub>2</sub> gas according to [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, p. 794]</html>"
+
+          import FCSys.Test.assertValue;
+          extends Modelica.Icons.Example;
+
+          replaceable package Data = FCSys.Characteristics.H2.Gas (b_v=[1],
+                specVolPow={-1,0}) "Ideal gas properties";
+          parameter Q.NumberAbsolute eps=2e-3 "Relative error tolerance";
+          parameter Q.TemperatureAbsolute T[:]={250,300,350,400,600,800,1000}*U.K
+            "Temperatures";
+          final parameter Q.CapacityThermalSpecific c_V_model[:]=Data.c_V(T)
+            "Correlated isochoric specific heat capacity";
+          parameter Q.CapacityThermalSpecific c_V_table[size(T, 1)]=Data.m*{
+              9.927,10.183,10.302,10.352,10.422,10.570,10.859}*U.J/(U.g*U.K)
+            "Tabulated isochoric specific heat capacity";
+
+        initial equation
+          for i in 1:size(T, 1) loop
+            assertValue(
+                      actual=c_V_model[i],
+                      expected=c_V_table[i],
+                      eps=eps*c_V_table[i],
+                      name="of isochoric specific heat capacity of " + Data.formula
+                 + " as ideal gas at " + String(T[i]/U.K) + " K");
+          end for;
+
+        end c_V;
+      end Gas;
+    end H2;
+
     package H2O
       extends Modelica.Icons.Package;
-      model TestAll
-        "<html>Run all of the tests on the <a href=\"modelica://FCSys.Characteristics.H2O\">H2O</a> package</html>"
+      model RunAll
+        "<html>Run all of the test models for the <a href=\"modelica://FCSys.Characteristics.H2O\">H2O</a> package</html>"
         extends Modelica.Icons.Example;
 
-        Gas testGas;
+        Gas.RunAll testGas;
         TestSaturationPressure testSaturationPressure;
         annotation (Documentation(info="<html><p>If this model simulates without failure,
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
 
-      end TestAll;
-
-      model Gas
-        "<html>Test the specific enthalpy and entropy of H<sub>2</sub>O gas according to [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, pp. 799&ndash;801]</html>"
-
-        import FCSys.Test.assertValue;
-        extends Modelica.Icons.Example;
-
-        replaceable package Data = FCSys.Characteristics.H2O.Gas (
-            b_v=[1],
-            specVolPow={-1,0},
-            h(referenceEnthalpy=ReferenceEnthalpy.ZeroAt0K))
-          "Ideal gas properties w/ 0K enthalpy reference";
-        parameter Q.NumberAbsolute eps_h=2e-2
-          "Relative error tolerance for specific enthalpy";
-        parameter Q.NumberAbsolute eps_s=3e-3
-          "Relative error tolerance for specific entropy";
-        parameter Q.Temperature T[:]={220,300,400,600,800,1000,2000,3250}*U.K
-          "Temperatures";
-        final parameter Q.Potential h_model[:]=Data.h(T)
-          "Correlated specific enthalpy";
-        parameter Q.Potential h_table[size(T, 1)]={7295,9966,13356,20402,27896,
-            35882,82593,150272}*U.J/U.mol "Tabulated specific enthalpy";
-        final parameter Q.NumberAbsolute s_model[:]=Data.s(T)
-          "Correlated specific entropy";
-        parameter Q.NumberAbsolute s_table[size(T, 1)]={178.576,188.928,198.673,
-            212.920,223.693,232.597,264.571,290.756}*U.J/(U.mol*U.K)
-          "Tabulated specific entropy";
-
-      initial equation
-        for i in 1:size(T, 1) loop
-          assertValue(
-                  actual=h_model[i],
-                  expected=h_table[i],
-                  eps=eps_h*h_table[i],
-                  name="of specific enthalpy of " + Data.formula +
-              " as ideal gas at " + String(T[i]/U.K) + " K");
-          assertValue(
-                  actual=s_model[i],
-                  expected=s_table[i],
-                  eps=eps_s*s_table[i],
-                  name="of specific entropy of " + Data.formula +
-              " as ideal gas at " + String(T[i]/U.K) + " K");
-        end for;
-
-      end Gas;
+      end RunAll;
 
       model TestSaturationPressure
-        "<html>Test the saturation pressure of H<sub>2</sub>O according to [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, pp. **&ndash;**]</html>"
+        "<html>Test the saturation pressure of H<sub>2</sub>O according to [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, pp. 760-761]</html>"
 
         import FCSys.Test.assertValue;
         import FCSys.Characteristics.H2O;
         extends Modelica.Icons.Example;
 
-        parameter Q.Temperature T[:]=U.from_degC({0.01,25,50,80,100,150,200})
-          "Temperatures";
+        parameter Q.TemperatureAbsolute T[:]=U.from_degC({0.01,25,50,80,100,150,
+            200}) "Temperatures";
         parameter Q.PressureAbsolute p_sat[size(T, 1)]={0.00611,0.03169,0.1235,
-            0.4739,1.014,4.758,15.54}*U.bar
-          "Saturation pressures [Moran2004, pp. 760-761]";
+            0.4739,1.014,4.758,15.54}*U.bar "Saturation pressures";
         Q.PressureAbsolute p[size(T, 1)](each start=U.atm) "Pressures";
 
       initial equation
@@ -197,55 +242,294 @@ package Tests "Models and functions for test and validation"
 
       end TestSaturationPressure;
 
-    end H2O;
+      package Gas
+        extends Modelica.Icons.Package;
+        model RunAll
+          "<html>Run all of the test models for the <a href=\"modelica://FCSys.Characteristics.H2O.Gas\">H2O.Gas</a> package</html>"
+          extends Modelica.Icons.Example;
 
-    package O2
-      extends Modelica.Icons.Package;
-      model Gas
-        "<html>Test the specific enthalpy and entropy of O<sub>2</sub> gas according to [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, pp. 799&ndash;801]</html>"
+          Gas.h testh;
+          Gas.s tests;
+          annotation (Documentation(info="<html><p>If this model simulates without failure,
+  then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
 
-        extends H2O.Gas(
-          redeclare package Data = FCSys.Characteristics.O2.Gas (
+        end RunAll;
+
+        model h
+          "<html>Test the specific enthalpy of H<sub>2</sub>O gas according to [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, pp. 799&ndash;801]</html>"
+
+          import FCSys.Test.assertValue;
+          extends Modelica.Icons.Example;
+
+          replaceable package Data = FCSys.Characteristics.H2O.Gas (
               b_v=[1],
               specVolPow={-1,0},
-              h(referenceEnthalpy=ReferenceEnthalpy.ZeroAt0K)),
-          eps_h=1e-2,
-          eps_s=1e-4,
-          h_table={6404,8736,11711,17929,24523,31389,67881,116827}*U.J/U.mol,
-          s_table={196.171,205.213,213.765,226.346,235.810,243.471,268.655,
-              287.614}*U.J/(U.mol*U.K));
+              h(referenceEnthalpy=ReferenceEnthalpy.ZeroAt0K))
+            "Ideal gas properties w/ 0K enthalpy reference";
+          parameter Q.NumberAbsolute eps=2e-2 "Relative error tolerance";
+          parameter Q.TemperatureAbsolute T[:]={220,300,400,600,800,1000,2000,
+              3250}*U.K "Temperatures";
+          final parameter Q.Potential h_model[:]=Data.h(T)
+            "Correlated specific enthalpy";
+          parameter Q.Potential h_table[size(T, 1)]={7295,9966,13356,20402,
+              27896,35882,82593,150272}*U.J/U.mol "Tabulated specific enthalpy";
 
+        initial equation
+          for i in 1:size(T, 1) loop
+            assertValue(
+                      actual=h_model[i],
+                      expected=h_table[i],
+                      eps=eps*h_table[i],
+                      name="of specific enthalpy of " + Data.formula +
+                " as ideal gas at " + String(T[i]/U.K) + " K");
+          end for;
+
+        end h;
+
+        model s
+          "<html>Test the specific entropy of H<sub>2</sub>O gas according to [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, pp. 799&ndash;801]</html>"
+
+          import FCSys.Test.assertValue;
+          extends Modelica.Icons.Example;
+
+          replaceable package Data = FCSys.Characteristics.H2O.Gas (b_v=[1],
+                specVolPow={-1,0})
+            "Ideal gas properties w/ 0K enthalpy reference";
+          parameter Q.NumberAbsolute eps=3e-3 "Relative error tolerance";
+          parameter Q.TemperatureAbsolute T[:]={220,300,400,600,800,1000,2000,
+              3250}*U.K "Temperatures";
+          final parameter Q.NumberAbsolute s_model[:]=Data.s(T)
+            "Correlated specific entropy";
+          parameter Q.NumberAbsolute s_table[size(T, 1)]={178.576,188.928,
+              198.673,212.920,223.693,232.597,264.571,290.756}*U.J/(U.mol*U.K)
+            "Tabulated specific entropy";
+
+        initial equation
+          for i in 1:size(T, 1) loop
+            assertValue(
+                      actual=s_model[i],
+                      expected=s_table[i],
+                      eps=eps*s_table[i],
+                      name="of specific entropy of " + Data.formula +
+                " as ideal gas at " + String(T[i]/U.K) + " K");
+          end for;
+
+        end s;
       end Gas;
-
-    end O2;
+    end H2O;
 
     package N2
       extends Modelica.Icons.Package;
-      model Gas
-        "<html>Test the specific enthalpy and entropy of N<sub>2</sub> gas according to [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, pp. 799&ndash;801]</html>"
 
-        extends H2O.Gas(
-          redeclare package Data = FCSys.Characteristics.N2.Gas (
-              b_v=[1],
-              specVolPow={-1,0},
-              h(referenceEnthalpy=ReferenceEnthalpy.ZeroAt0K)),
-          eps_h=1e-3,
-          eps_s=1e-4,
-          h_table={6391,8723,11640,17563,23714,30129,64810,110690}*U.J/U.mol,
-          s_table={182.638,191.682,200.071,212.066,220.907,228.057,251.969,
-              269.763}*U.J/(U.mol*U.K));
+      package Gas
+        extends Modelica.Icons.Package;
+        model RunAll
+          "<html>Run all of the test models for the <a href=\"modelica://FCSys.Characteristics.N2.Gas\">N2.Gas</a> package</html>"
+          extends Modelica.Icons.Example;
 
+          c_p testc_p;
+          c_V testc_V;
+          h testh;
+          s tests;
+          annotation (Documentation(info="<html><p>If this model simulates without failure,
+  then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
+
+        end RunAll;
+
+        model c_p
+          "<html>Test the isobaric specific heat capacity of N<sub>2</sub> gas according to [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, p. 794]</html>"
+
+          import FCSys.Test.assertValue;
+          extends Modelica.Icons.Example;
+
+          replaceable package Data = FCSys.Characteristics.N2.Gas (b_v=[1],
+                specVolPow={-1,0}) "Ideal gas properties";
+          parameter Q.NumberAbsolute eps=1e-3 "Relative error tolerance";
+          parameter Q.TemperatureAbsolute T[:]={250,300,350,400,600,800,1000}*U.K
+            "Temperatures";
+          final parameter Q.CapacityThermalSpecific c_p_model[:]=Data.c_p(T)
+            "Correlated isobaric specific heat capacity";
+          parameter Q.CapacityThermalSpecific c_p_table[size(T, 1)]=Data.m*{
+              1.039,1.039,1.041,1.044,1.075,1.121,1.167}*U.J/(U.g*U.K)
+            "Tabulated isobaric specific heat capacity";
+
+        initial equation
+          for i in 1:size(T, 1) loop
+            assertValue(
+                      actual=c_p_model[i],
+                      expected=c_p_table[i],
+                      eps=eps*c_p_table[i],
+                      name="of isobaric specific heat capacity of " + Data.formula
+                 + " as ideal gas at " + String(T[i]/U.K) + " K");
+          end for;
+
+        end c_p;
+
+        model c_V
+          "<html>Test the isochoric specific heat capacity of N<sub>2</sub> gas according to [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, p. 794]</html>"
+
+          import FCSys.Test.assertValue;
+          extends Modelica.Icons.Example;
+
+          replaceable package Data = FCSys.Characteristics.N2.Gas (b_v=[1],
+                specVolPow={-1,0}) "Ideal gas properties";
+          parameter Q.NumberAbsolute eps=2e-2 "Relative error tolerance";
+          parameter Q.TemperatureAbsolute T[:]={250,300,350,400,600,800,1000}*U.K
+            "Temperatures";
+          final parameter Q.CapacityThermalSpecific c_V_model[:]=Data.c_V(T)
+            "Correlated isochoric specific heat capacity";
+          parameter Q.CapacityThermalSpecific c_V_table[size(T, 1)]=Data.m*{
+              0.742,0.743,0.744,0.757,0.778,0.825,0.870}*U.J/(U.g*U.K)
+            "Tabulated isochoric specific heat capacity";
+
+        initial equation
+          for i in 1:size(T, 1) loop
+            assertValue(
+                      actual=c_V_model[i],
+                      expected=c_V_table[i],
+                      eps=eps*c_V_table[i],
+                      name="of isochoric specific heat capacity of " + Data.formula
+                 + " as ideal gas at " + String(T[i]/U.K) + " K");
+          end for;
+
+        end c_V;
+
+        model h
+          "<html>Test the specific enthalpy of N<sub>2</sub> gas according to [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, pp. 799&ndash;801]</html>"
+
+          extends H2O.Gas.h(
+            redeclare package Data = FCSys.Characteristics.N2.Gas (
+                b_v=[1],
+                specVolPow={-1,0},
+                h(referenceEnthalpy=ReferenceEnthalpy.ZeroAt0K)),
+            eps=1e-3,
+            h_table={6391,8723,11640,17563,23714,30129,64810,110690}*U.J/U.mol);
+        end h;
+
+        model s
+          "<html>Test the specific entropy of N<sub>2</sub> gas according to [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, pp. 799&ndash;801]</html>"
+
+          extends H2O.Gas.s(
+            redeclare package Data = FCSys.Characteristics.N2.Gas (b_v=[1],
+                  specVolPow={-1,0}),
+            eps=1e-4,
+            s_table={182.638,191.682,200.071,212.066,220.907,228.057,251.969,
+                269.763}*U.J/(U.mol*U.K));
+
+        end s;
       end Gas;
-
     end N2;
+
+    package O2
+      extends Modelica.Icons.Package;
+
+      package Gas
+        extends Modelica.Icons.Package;
+        model RunAll
+          "<html>Run all of the test models for the <a href=\"modelica://FCSys.Characteristics.O2.Gas\">O2.Gas</a> package</html>"
+          extends Modelica.Icons.Example;
+
+          c_p testc_p;
+          c_V testc_V;
+          h testh;
+          s tests;
+          annotation (Documentation(info="<html><p>If this model simulates without failure,
+  then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
+
+        end RunAll;
+
+        model c_p
+          "<html>Test the isobaric specific heat capacity of O<sub>2</sub> gas according to [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, p. 794]</html>"
+
+          import FCSys.Test.assertValue;
+          extends Modelica.Icons.Example;
+
+          replaceable package Data = FCSys.Characteristics.O2.Gas (b_v=[1],
+                specVolPow={-1,0}) "Ideal gas properties";
+          parameter Q.NumberAbsolute eps=1e-3 "Relative error tolerance";
+          parameter Q.TemperatureAbsolute T[:]={250,300,350,400,600,800,1000}*U.K
+            "Temperatures";
+          final parameter Q.CapacityThermalSpecific c_p_model[:]=Data.c_p(T)
+            "Correlated isobaric specific heat capacity";
+          parameter Q.CapacityThermalSpecific c_p_table[size(T, 1)]=Data.m*{
+              0.913,0.918,0.928,0.941,1.003,1.054,1.090}*U.J/(U.g*U.K)
+            "Tabulated isobaric specific heat capacity";
+
+        initial equation
+          for i in 1:size(T, 1) loop
+            assertValue(
+                      actual=c_p_model[i],
+                      expected=c_p_table[i],
+                      eps=eps*c_p_table[i],
+                      name="of isobaric specific heat capacity of " + Data.formula
+                 + " as ideal gas at " + String(T[i]/U.K) + " K");
+          end for;
+
+        end c_p;
+
+        model c_V
+          "<html>Test the isochoric specific heat capacity of O<sub>2</sub> gas according to [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, p. 794]</html>"
+
+          import FCSys.Test.assertValue;
+          extends Modelica.Icons.Example;
+
+          replaceable package Data = FCSys.Characteristics.O2.Gas (b_v=[1],
+                specVolPow={-1,0}) "Ideal gas properties";
+          parameter Q.NumberAbsolute eps=2e-2 "Relative error tolerance";
+          parameter Q.TemperatureAbsolute T[:]={250,300,350,400,600,800,1000}*U.K
+            "Temperatures";
+          final parameter Q.CapacityThermalSpecific c_V_model[:]=Data.c_V(T)
+            "Correlated isochoric specific heat capacity";
+          parameter Q.CapacityThermalSpecific c_V_table[size(T, 1)]=Data.m*{
+              0.653,0.658,0.668,0.681,0.743,0.794,0.830}*U.J/(U.g*U.K)
+            "Tabulated isochoric specific heat capacity";
+
+        initial equation
+          for i in 1:size(T, 1) loop
+            assertValue(
+                      actual=c_V_model[i],
+                      expected=c_V_table[i],
+                      eps=eps*c_V_table[i],
+                      name="of isochoric specific heat capacity of " + Data.formula
+                 + " as ideal gas at " + String(T[i]/U.K) + " K");
+          end for;
+
+        end c_V;
+
+        model h
+          "<html>Test the specific enthalpy of O<sub>2</sub> gas according to [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, pp. 794, 799&ndash;801]</html>"
+
+          extends H2O.Gas.h(
+            redeclare package Data = FCSys.Characteristics.O2.Gas (
+                b_v=[1],
+                specVolPow={-1,0},
+                h(referenceEnthalpy=ReferenceEnthalpy.ZeroAt0K)),
+            eps=1e-2,
+            h_table={6404,8736,11711,17929,24523,31389,67881,116827}*U.J/U.mol);
+
+        end h;
+
+        model s
+          "<html>Test the specific entropy of O<sub>2</sub> gas according to [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, pp. 794, 799&ndash;801]</html>"
+
+          extends H2O.Gas.s(
+            redeclare package Data = FCSys.Characteristics.O2.Gas (b_v=[1],
+                  specVolPow={-1,0}),
+            eps=1e-4,
+            s_table={196.171,205.213,213.765,226.346,235.810,243.471,268.655,
+                287.614}*U.J/(U.mol*U.K));
+
+        end s;
+      end Gas;
+    end O2;
 
     package BaseClasses
       extends Modelica.Icons.Package;
 
       package Characteristic
         extends Modelica.Icons.Package;
-        model TestAll
-          "<html>Run all of the tests on the <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package</html>"
+        model RunAll
+          "<html>Run all of the test models for the <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package</html>"
           extends Modelica.Icons.Example;
 
           c_p testc_p;
@@ -258,7 +542,7 @@ package Tests "Models and functions for test and validation"
           annotation (Documentation(info="<html><p>If this model simulates without failure,
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
 
-        end TestAll;
+        end RunAll;
 
         model TestProperties
           "<html>Test the <code>z</code>, <code>isCompressible</code>, <code>hasThermalExpansion</code> constants of the <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package</html>"
@@ -340,7 +624,7 @@ package Tests "Models and functions for test and validation"
           // Note:  The values are arbitrary but must have sufficient richness.
 
           // Intermediate variables
-          Q.Pressure p "Pressure";
+          Q.PressureAbsolute p "Pressure";
 
           // Results of functions
           Q.Potential u "Internal potential";
@@ -503,16 +787,20 @@ package Tests "Models and functions for test and validation"
 
   end Characteristics;
 
-  model Units
+  function Units
     "<html>Test the <a href=\"modelica://FCSys.Units\">Units</a> package</html>"
 
     import FCSys.Units.*;
-    extends Modelica.Icons.Example;
+    extends Modelica.Icons.Function;
+
+    output Boolean ok "true, if all tests passed";
 
   protected
     function test = FCSys.Test.assertValue (final expected=1);
 
-  initial equation
+  algorithm
+    ok := false;
+
     // ----------------------------------------------------------------------
     // Set 1:  Mathematical constants and relations
     test(pi/3.14159265358979323846264338327950288419716939937510, name=
@@ -681,8 +969,12 @@ package Tests "Models and functions for test and validation"
       "molar volume of ideal gas (273.15 K, 101.325 kPa)");
     test(sigma/(5.670373e-8*W/(m^2*K^4)), name="Stefan-Boltzmann constant");
     test(Z_0/(376.730313461*ohm), name="characteristic impedance of vacuum");
-    annotation (Documentation(info="<html><p>If this model simulates without failure,
-  then the test has passed.</p></html>"));
+
+    ok := true;
+    annotation (Documentation(info="<html><p>
+  This function call will fail if any of the functions return an
+  incorrect result.  It will return <code>true</code> if all of the functions pass.
+  There are no inputs.</p></html>"));
   end Units;
 
   package BaseClasses
@@ -690,20 +982,24 @@ package Tests "Models and functions for test and validation"
     package Utilities
       extends Modelica.Icons.Package;
 
-      model TestAll
-        "<html>Run all of the tests on the <a href=\"modelica://FCSys.BaseClasses.Utilities\">Utilities</a> package (recursive)</html>"
 
-        extends Modelica.Icons.Example;
+      function CallAll
+        "<html>Call all of the test functions on the <a href=\"modelica://FCSys.BaseClasses.Utilities\">Utilities</a> package (recursive)</html>"
 
-        constant Boolean x[:]={Chemistry(),TestFunctions()} "Function tests";
-        Polynomial.TestAll testPolynomial;
+        extends Modelica.Icons.Function;
 
-        annotation (Documentation(info="<html><p>If this model simulates without failure,
-  then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
-      end TestAll;
+        output Boolean ok "true, if all tests passed";
+
+      algorithm
+        ok := Chemistry() and Polynomial.f() and testFunctions();
+        annotation (Documentation(info="<html><p>
+  This function call will fail if any of the functions return an
+  incorrect result.  It will return <code>true</code> if all of the functions pass.
+  There are no inputs.</p></html>"));
+      end CallAll;
 
       function Chemistry
-        "<html>Test all of the functions in the <a href=\"modelica://FCSys.BaseClasses.Utilities.Chemistry\">Chemistry</a> package</html>"
+        "<html>Test the <a href=\"modelica://FCSys.BaseClasses.Utilities.Chemistry\">Chemistry</a> package</html>"
 
         import FCSys.BaseClasses.Utilities.Chemistry.*;
         extends Modelica.Icons.Function;
@@ -788,8 +1084,8 @@ package Tests "Models and functions for test and validation"
 
         import FCSys.BaseClasses.Utilities.Polynomial.*;
 
-        model TestAll
-          "<html>Run all of the tests on the <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial\">Polynomial</a> package</html>"
+        model RunAll
+          "<html>Run all of the test models for the <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial\">Polynomial</a> package</html>"
           extends Modelica.Icons.Example;
 
           constant Boolean x[:]={f()} "Function tests";
@@ -802,7 +1098,7 @@ package Tests "Models and functions for test and validation"
 
           annotation (Documentation(info="<html><p>If this model simulates without failure,
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
-        end TestAll;
+        end RunAll;
 
         model Translatef
           "<html>Evaluate the translated version of <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.f\">f</a>()</html>"
@@ -1020,7 +1316,7 @@ package Tests "Models and functions for test and validation"
 
       end Polynomial;
 
-      function TestFunctions
+      function testFunctions
         "<html>Test the functions in the <a href=\"modelica://FCSys.BaseClasses.Utilities\">Utilities</a> package (non-recursive)</html>"
 
         extends Modelica.Icons.Function;
@@ -1096,7 +1392,7 @@ package Tests "Models and functions for test and validation"
   This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
-      end TestFunctions;
+      end testFunctions;
 
     end Utilities;
 
@@ -1107,6 +1403,11 @@ package Tests "Models and functions for test and validation"
 The structure  of the subpackages matches that of <a href=\"modelica://FCSys\">FCSys</a>, 
 although not all packages are represented.
 </p>
+
+<p>The <a href=\"modelica://FCSys.Tests.CallAll\">CallAll</a>() function calls of the test 
+functions and the <a href=\"modelica://FCSys.Tests.RunAll\">RunAll</a> model includes all of the
+test models.  Both should be tested to verify the <a href=\"modelica://FCSys\">FCSys</a> 
+package.</p>
 </html>"));
 
 end Tests;

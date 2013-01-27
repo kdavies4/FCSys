@@ -465,7 +465,7 @@ package Units "Constants and units of physical measure"
     extends Modelica.SIunits.Conversions.ConversionIcon;
     input Modelica.SIunits.Conversions.NonSIunits.Temperature_degC T_degC
       "Temperature in degree Celsius";
-    output Q.Temperature T "Thermodynamic temperature";
+    output Q.TemperatureAbsolute T "Thermodynamic temperature";
 
   algorithm
     T := (T_degC + 273.15)*K
@@ -474,7 +474,7 @@ package Units "Constants and units of physical measure"
 
   function to_degC "Express a thermodynamic temperature in degree Celsius"
     extends Modelica.SIunits.Conversions.ConversionIcon;
-    input Q.Temperature T "Thermodynamic temperature";
+    input Q.TemperatureAbsolute T "Thermodynamic temperature";
     output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC T_degC
       "Temperature in degree Celsius";
 
