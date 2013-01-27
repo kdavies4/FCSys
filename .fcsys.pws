@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1148 
+personal_ws-1.1 en 1161 
 TorayTGPH
 AISI
 DAE
@@ -118,6 +118,7 @@ anCGDL
 noiseGain
 OpenD
 dCDC
+loadres
 MaciejowskiAircraftMPC
 isPos
 iff
@@ -154,6 +155,7 @@ stiffCharacteristicForEmptyPort
 caSinkCondition
 valign
 xSpec
+testCellPotentialsLiquid
 ldquo
 Unported
 RHSchoice
@@ -190,8 +192,8 @@ Perfluorinated
 elementCoeffs
 kPa
 delp
-lim
 MFC
+lim
 minabs
 liquidVolume
 PFSA
@@ -233,6 +235,7 @@ fanSpeed
 derI
 perfectMaterialDiff
 LHSchoice
+RunAll
 NegativePin
 coolingPump
 CurrentAreic
@@ -323,6 +326,7 @@ SpeciesIcon
 Diedam
 getInfo
 heatPorts
+testGas
 ret
 pre
 rArr
@@ -542,6 +546,7 @@ li
 inclFacesX
 na
 modeler
+testSaturationPressure
 inclFacesY
 Cowen
 nb
@@ -609,6 +614,7 @@ Wb
 ul
 Sv
 Loschmidt
+CallAll
 un
 hellip
 anSink
@@ -752,6 +758,7 @@ PermittivityReciprocal
 vect
 TODO
 sqrt
+rowLimits
 subpackage
 tableID
 ssdata
@@ -832,7 +839,7 @@ Dassl
 candela
 flowplate
 Amagat's
-TestFunctions
+testFunctions
 hotstart
 Adapteminus
 relPositionSensor
@@ -853,6 +860,7 @@ arccos
 elecN
 elecP
 allSymbols
+LogValues
 RealInput
 Wdot
 CheckSuccess
@@ -881,6 +889,7 @@ ImperativeA
 ImperativeB
 AmountVolumic
 TransportFunction
+LogValue
 Syst
 combiTimeTable
 imperativeABTF
@@ -917,6 +926,7 @@ Kellner
 linYCondition
 steradian
 internalVolume
+testCellPotentialsGas
 RossiterExample
 tableTimeTmax
 vesselArea
@@ -931,6 +941,7 @@ FirstOrder
 fluidPort
 hasThermalExpansion
 Hilding
+assertLogValue
 AssertFinal
 PartialPhase
 anSource
@@ -983,6 +994,7 @@ inclReact
 ExtraPropertyFlowRate
 OAndHplus
 fluidCondition
+assertLogValues
 multi
 reduceTemp
 milli
@@ -1028,6 +1040,7 @@ Gundlach
 Feedforward
 yCondition
 TestProfile
+assertValues
 fixedX
 SminusAndH
 referenceChoice

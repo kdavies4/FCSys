@@ -452,19 +452,21 @@ package Characteristics
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
         Deltah0=Data.MM*Data.H0*U.J/U.mol,
         T_lim_c={200.000,Data.Tlimit,6000.000,20000.000}*U.K,
-        b_c={Data.alow,Data.ahigh,{4.966884120e8,-3.147547149e5,7.984121880e1,-8.414789210e-3,
+        b_c={Data.alow,Data.ahigh,{4.966884120e8,-3.147547149e5,79.84121880,-8.414789210e-3,
             4.753248350e-7,-1.371873492e-11,1.605461756e-16}} .* fill({U.K^(3
              - i) for i in 1:size(Data.alow, 1)}, size(T_lim_c, 1) - 1),
-        B_c={Data.blow,Data.bhigh,{2.488433516e6,-6.695728110e2}} .* fill({U.K,
-            1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*ln(U.K),
+        B_c={Data.blow,Data.bhigh,{2.488433516e6,-669.5728110}} .* fill({U.K,1},
+            size(T_lim_c, 1) - 1) - b_c[:, 2:3]*ln(U.K),
         r=(120 + 100.3/2)*U.pico*U.m/U.q,
-        T_lim_alpha={200.0,1000.0,5000.0,15000.0}*U.K,
-        b_eta={{0.74553182,43.555109*U.K,-0.32579340e4*U.K^2,0.13556243},{
-            0.96730605,679.31897*U.K,-0.21025179e6*U.K^2,-1.8251697},{1.0126129,
-            0.14973739e4*U.K,-0.14428484e7*U.K^2,-2.3254928}},
-        b_lambda={{1.0059461,279.51262*U.K,-0.29792018e5*U.K^2,1.1996252},{
-            1.0582450,248.75372*U.K,0.11736907e5*U.K^2,0.82758695},{-0.22364420,
-            -0.69650442e4*U.K,-0.77771313e5*U.K^2,13.189369}});
+        T_lim_F_R={200.0,1000.0,5000.0,15000.0}*U.K,
+        b_F={fromNASAViscosity({0.74553182,43.555109,-3.2579340e3,0.13556243}),
+            fromNASAViscosity({0.96730605,679.31897,-2.1025179e5,-1.8251697}),
+            fromNASAViscosity({1.0126129,1.4973739e3,-1.4428484e6,-2.3254928})},
+
+        b_R={fromNASAThermalConductivity({1.0059461,279.51262,-2.9792018e4,
+            1.1996252}),fromNASAThermalConductivity({1.0582450,248.75372,
+            1.1736907e4,0.82758695}),fromNASAThermalConductivity({-0.22364420,-6.9650442e3,
+            -7.7771313e4,13.189369})});
 
       // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
       // doesn't.
@@ -508,13 +510,16 @@ package Characteristics
         B_c={Data.blow,Data.bhigh} .* fill({U.K,1}, size(T_lim_c, 1) - 1) - b_c[
             :, 2:3]*ln(U.K),
         r=(282/2)*U.pico*U.m/U.q,
-        T_lim_alpha={373.2,1073.2,5000.0,15000.0}*U.K,
-        b_eta={{0.50019557,-697.12796*U.K,0.88163892e5*U.K^2,3.0836508},{
-            0.58988538,-537.69814*U.K,0.54263513e5*U.K^2,2.3386375},{0.64330087,
-            -95.668913*U.K,-0.37742283e6*U.K^2,1.8125190}},
-        b_lambda={{1.0966389,-555.13429*U.K,0.10623408e6*U.K^2,-0.24664550},{
-            0.39367933,-0.22524226e4*U.K,0.61217458e6*U.K^2,5.8011317},{-0.41858737,
-            -0.14096649e5*U.K,0.19179190e8*U.K^2,14.345613}});
+        T_lim_F_R={373.2,1073.2,5000.0,15000.0}*U.K,
+        b_F={fromNASAViscosity({0.50019557,-697.12796,8.8163892e4,3.0836508}),
+            fromNASAViscosity({0.58988538,-537.69814,5.4263513e4,2.3386375}),
+            fromNASAViscosity({0.64330087,-95.668913,-3.7742283e5,1.8125190})},
+
+        b_R={fromNASAThermalConductivity({1.0966389,-555.13429,1.0623408e5,-0.24664550}),
+            fromNASAThermalConductivity({0.39367933,-2.2524226e3,6.1217458e5,
+            5.8011317}),fromNASAThermalConductivity({-0.41858737,-1.4096649e4,
+            1.9179190e7,14.345613})});
+
       // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
       // doesn't.
       annotation (Documentation(info="<html>
@@ -610,13 +615,16 @@ package Characteristics
         B_c={Data.blow,Data.bhigh,{4.938707040e6,-1.672099740e3}} .* fill({U.K,
             1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*ln(U.K),
         r=(155 + 145.2/2)*U.pico*U.m/U.q,
-        T_lim_alpha={200.0,1000.0,5000.0,15000.0}*U.K,
-        b_eta={{0.62526577,-31.779652*U.K,-0.16407983e4*U.K^2,1.7454992},{
-            0.87395209,561.52222*U.K,-0.17394809e6*U.K^2,-0.39335958},{
-            0.88503551,909.02171*U.K,-0.73129061e6*U.K^2,-0.53503838}},
-        b_lambda={{0.85439436,105.73224*U.K,-0.12347848e5*U.K^2,0.47793128},{
-            0.88407146,133.57293*U.K,-0.11429640e5*U.K^2,0.24417019},{2.4176185,
-            0.80477749e4*U.K,0.31055802e7*U.K^2,-14.517761}});
+        T_lim_F_R={200.0,1000.0,5000.0,15000.0}*U.K,
+        b_F={fromNASAViscosity({0.62526577,-31.779652,-1.6407983e3,1.7454992}),
+            fromNASAViscosity({0.87395209,561.52222,-1.7394809e5,-0.39335958}),
+            fromNASAViscosity({0.88503551,909.02171,-7.3129061e5,-0.53503838})},
+
+        b_R={fromNASAThermalConductivity({0.85439436,105.73224,-1.2347848e4,
+            0.47793128}),fromNASAThermalConductivity({0.88407146,133.57293,-1.1429640e4,
+            0.24417019}),fromNASAThermalConductivity({2.4176185,8.0477749e3,
+            3.1055802e6,-14.517761})});
+
       // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
       // doesn't.
       annotation (Documentation(info="<html>
@@ -660,13 +668,16 @@ package Characteristics
         B_c={Data.blow,Data.bhigh,{2.293554027e6,-5.530621610e2}} .* fill({U.K,
             1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*ln(U.K),
         r=(152 + 128.2/2)*U.pico*U.m/U.q,
-        T_lim_alpha={200.0,1000.0,5000.0,15000.0}*U.K,
-        b_eta={{0.60916180,-52.244847*U.K,-599.74009*U.K^2,2.0410801},{
-            0.72216486,175.50839*U.K,-0.57974816e5*U.K^2,1.0901044},{0.73981127,
-            391.94906*U.K,-0.37833168e6*U.K^2,0.90931780}},
-        b_lambda={{0.77229167,6.8463210*U.K,-0.58933377e4*U.K^2,1.2210365},{
-            0.90917351,291.24182*U.K,-0.79650171e5*U.K^2,0.064851631},{-1.1218262,
-            -0.19286378e5*U.K,0.23295011e8*U.K^2,20.342043}});
+        T_lim_F_R={200.0,1000.0,5000.0,15000.0}*U.K,
+        b_F={fromNASAViscosity({0.60916180,-52.244847,-599.74009,2.0410801}),
+            fromNASAViscosity({0.72216486,175.50839,-5.7974816e4,1.0901044}),
+            fromNASAViscosity({0.73981127,391.94906,-3.7833168e5,0.90931780})},
+
+        b_R={fromNASAThermalConductivity({0.77229167,6.8463210,-5.8933377e3,
+            1.2210365}),fromNASAThermalConductivity({0.90917351,291.24182,-7.9650171e4,
+            0.064851631}),fromNASAThermalConductivity({-1.1218262,-1.9286378e4,
+            2.3295011e7,20.342043})});
+
       // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
       // doesn't.
       annotation (Documentation(info="<html><p>Notes:<ul>
@@ -692,53 +703,62 @@ package Characteristics
 
       extends Characteristic;
 
-      constant Q.TemperatureAbsolute T_lim_alpha[:]={0,Modelica.Constants.inf}
-        "<html>Temperature limits for the rows of b_eta and b_lambda (<i>T</i><sub>lim &alpha;</sub>)</html>";
-      constant Real b_eta[size(T_lim_alpha, 1) - 1, 4]
-        "<html>Constants in NASA correlation for viscosity (<i>b</i><sub>&eta;</sub>)</html>";
-      constant Real b_lambda[size(T_lim_alpha, 1) - 1, 4]
-        "<html>Constants in NASA correlation for thermal conductivity (<i>b</i><sub>&lambda;</sub>)</html>";
+      constant Q.TemperatureAbsolute T_lim_F_R[:]={0,Modelica.Constants.inf}
+        "<html>Temperature limits for the rows of <i>b</i><sub><i>F</i></sub> and <i>b</i><sub><i>R</i></sub> (<i>T</i><sub>lim <i>F</i> <i>R</i></sub>)</html>";
+      constant Real b_F[size(T_lim_F_R, 1) - 1, 4]
+        "<html>Correlation constants for fluidity (<i>b</i><sub><i>F</i></sub>)</html>";
+      constant Real b_R[size(T_lim_F_R, 1) - 1, 4]
+        "<html>Correlation constants for thermal resistivity (<i>b</i><sub><i>R</i></sub>)</html>";
 
+    protected
+      function fromNASAViscosity
+        "Return constants for fluidity given NASA CEA constants for viscosity"
+        input Real b_eta[4] "NASA CEA constants for viscosity";
+        output Real b_F[4] "Constants for fluidity";
+
+      algorithm
+        b_F := {-b_eta[1],-b_eta[2]*U.K,-b_eta[3]*U.K^2,-b_eta[4] + b_eta[1]*ln(
+          U.K) + ln(1e4*U.m*U.s/U.g)} annotation (Inline=true);
+      end fromNASAViscosity;
+
+      function fromNASAThermalConductivity
+        "Return constants for thermal resistivity given NASA CEA constants for thermal conductivity"
+        input Real b_lambda[4] "NASA CEA constants for thermal conductivity";
+        output Real b_R[4] "Constants for thermal resistivity";
+
+      algorithm
+        b_R := {-b_lambda[1],-b_lambda[2]*U.K,-b_lambda[3]*U.K^2,-b_lambda[4]
+           + b_lambda[1]*ln(U.K) + ln(1e4*U.m*U.K/U.W)}
+          annotation (Inline=true);
+      end fromNASAThermalConductivity;
+
+    public
       redeclare function F "Fluidity as a function of temperature"
-
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         output Q.FluidityDynamic F "Dynamic fluidity";
 
-      protected
-        function b_eta_adj
-          "Return unit-adjusted NASA CEA constants for viscosity"
-          // See note in b_eta_adj() in alpha_tau().
-          output Real b_eta_adj[size(CharacteristicNASA.T_lim_alpha, 1) - 1, 4]
-            "Unit-adjusted NASA CEA constants for viscosity";
-
-        algorithm
-          b_eta_adj := transpose({b_eta[:, 1],b_eta[:, 2],b_eta[:, 3],b_eta[:,
-            4] - b_eta[:, 1]*ln(U.K) + fill(ln(1e-6*U.g/(U.cm*U.s*m)), size(
-            T_lim_alpha, 1) - 1)}) annotation (Inline=true);
-
-        end b_eta_adj;
-
       algorithm
         /*
-  assert(T_lim_alpha[1] <= T and T <= T_lim_alpha[size(T_lim_alpha, 1)], "Temperature "
-     + String(T/(U.K)) + " K is out of range for the diffusion properties ([" +
-    String(T_lim_alpha[1]/U.K) + ", " + String(T_lim_alpha[size(T_lim_alpha, 1)]
+    assert(T_lim_F_R[1] <= T and T <= T_lim_F_R[size(T_lim_F_R, 1)], "Temperature "
+     + String(T/(U.K)) + " K is out of range for the resistivities ([" +
+    String(T_lim_F_R[1]/U.K) + ", " + String(T_lim_F_R[size(T_lim_F_R, 1)]
     /U.K) + "] K).");
-  */
+    */
         // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4 T_lim_alpha[end] can't be used instead of
-        // T_lim_alpha[size(T_lim_alpha, 1)] due to:
+        // Note:  In Dymola 7.4 T_lim_F_R[end] can't be used instead of
+        // T_lim_F_R[size(T_lim_F_R, 1)] due to:
         //     "Error, not all "end" could be expanded."
 
-        F := smooth(0, exp(-sum(if (T_lim_alpha[i] <= T or i == 1) and (T <=
-          T_lim_alpha[i + 1] or i == size(T_lim_alpha, 1) - 1) then (b_eta_adj())
-          [i, 1]*ln(T) + ((b_eta_adj())[i, 2] + (b_eta_adj())[i, 3]/T)/T + (
-          b_eta_adj())[i, 4] else 0 for i in 1:size(T_lim_alpha, 1) - 1)))
-          annotation (Inline=true, smoothOrder=2);
-        // Note:  The annotation is set assuming that the values of the constants
-        // result in a function that is first-order continuous.
+        F := smooth(0, exp(sum(if (T_lim_F_R[i] <= T or i == 1) and (T <
+          T_lim_F_R[i + 1] or i == size(T_lim_F_R, 1) - 1) then b_F[i, 1]*ln(T)
+           + (b_F[i, 2] + b_F[i, 3]/T)/T + b_F[i, 4] else 0 for i in 1:size(
+          T_lim_F_R, 1) - 1)))
+          annotation (
+          InlineNoEvent=true,
+          Inline=true,
+          smoothOrder=0);
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p>
 
@@ -748,7 +768,6 @@ package Characteristics
 
       redeclare function R
         "Thermal resistivity as a function of temperature and pressure"
-
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
@@ -756,44 +775,31 @@ package Characteristics
         // Note:  Pressure isn't used here but is included for generality.
         output Q.ResistivityThermal R "Thermal resistivity";
 
-      protected
-        function b_lambda_adj
-          "Return unit-adjusted NASA CEA constants for thermal conductivity"
-          // Note:  If b_lambda were defined as a local constant instead of a
-          // function, it would prevent the alpha_tau function from
-          // being inlined.  If it were defined as a global final constant, it
-          // would need to be updated manually when b_eta is changed.
-          output Real b_lambda_adj[size(T_lim_alpha, 1) - 1, 4]
-            "Unit-adjusted NASA CEA constants for thermal conductivity";
-
-        algorithm
-          b_lambda_adj := transpose({b_lambda[:, 1],b_lambda[:, 2],b_lambda[:,
-            3],b_lambda[:, 4] - b_lambda[:, 1]*ln(U.K) + fill(ln(1e-6*U.W/(U.cm
-            *U.K)), size(T_lim_alpha, 1) - 1)}) annotation (Inline=true);
-
-        end b_lambda_adj;
-
       algorithm
         /*
-  assert(T_lim_alpha[1] <= T and T <= T_lim_alpha[size(T_lim_alpha, 1)], "Temperature "
-     + String(T/(U.K)) + " K is out of range for the diffusion properties ([" +
-    String(T_lim_alpha[1]/U.K) + ", " + String(T_lim_alpha[size(T_lim_alpha, 1)]
+    assert(T_lim_F_R[1] <= T and T <= T_lim_F_R[size(T_lim_F_R, 1)], "Temperature "
+     + String(T/(U.K)) + " K is out of range for the resistivities ([" +
+    String(T_lim_F_R[1]/U.K) + ", " + String(T_lim_F_R[size(T_lim_F_R, 1)]
     /U.K) + "] K).");
-  */
+    */
         // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4 T_lim_alpha[end] can't be used instead of
-        // T_lim_alpha[size(T_lim_alpha, 1)] due to:
+        // Note:  In Dymola 7.4 T_lim_F_R[end] can't be used instead of
+        // T_lim_F_R[size(T_lim_F_R, 1)] due to:
         //     "Error, not all "end" could be expanded."
 
-        R := smooth(0, exp(-sum(if (T_lim_alpha[i] <= T or i == 1) and (T <=
-          T_lim_alpha[i + 1] or i == size(T_lim_alpha, 1) - 1) then (
-          b_lambda_adj())[i, 1]*ln(T) + ((b_lambda_adj())[i, 2] + (b_lambda_adj())
-          [i, 3]/T)/T + (b_lambda_adj())[i, 4] else 0 for i in 1:size(
-          T_lim_alpha, 1) - 1))) annotation (Inline=true, smoothOrder=2);
-        // Note:  The annotation is set assuming that the values of the constants
-        // result in a function that is first-order continuous.
+        R := smooth(0, exp(sum(if (T_lim_F_R[i] <= T or i == 1) and (T <
+          T_lim_F_R[i + 1] or i == size(T_lim_F_R, 1) - 1) then b_R[i, 1]*ln(T)
+           + (b_R[i, 2] + b_R[i, 3]/T)/T + b_R[i, 4] else 0 for i in 1:size(
+          T_lim_F_R, 1) - 1)))
+          annotation (
+          InlineNoEvent=true,
+          Inline=true,
+          smoothOrder=0);
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
-  [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p></html>"));
+  [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p>
+  
+    <p>For more information, see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.R\">Characteristic.R</a>().</p>
+    </html>"));
       end R;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html><p>The correlations for transport properties are available in
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>,
