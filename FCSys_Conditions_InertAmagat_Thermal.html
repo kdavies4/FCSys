@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.InertAmagat.Thermal</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-24">
+<meta name="date" content="2013-1-29">
 <meta name="description" content="Thermal conditions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,6 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
@@ -51,29 +52,32 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Conditions.InertAmagat.Thermal.TemperatureS.png" alt="FCSys.Conditions.InertAmagat.Thermal.Temperature" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_InertAmagat_Thermal.html#FCSys.Conditions.InertAmagat.Thermal.Temperature">Temperature</a>
-</td><td>Impose temperature</td></tr>
-<tr><td><img src="images/FCSys.Conditions.InertAmagat.Thermal.TemperatureS.png" alt="FCSys.Conditions.InertAmagat.Thermal.HeatFlowRate" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_InertAmagat_Thermal.html#FCSys.Conditions.InertAmagat.Thermal.HeatFlowRate">HeatFlowRate</a>
-</td><td>Impose heat flow rate</td></tr>
+</td><td>Specify temperature (measure heat flow rate)</td></tr>
+<tr><td><img src="images/FCSys.Conditions.InertAmagat.Thermal.TemperatureS.png" alt="FCSys.Conditions.InertAmagat.Thermal.HeatRate" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_InertAmagat_Thermal.html#FCSys.Conditions.InertAmagat.Thermal.HeatRate">HeatRate</a>
+</td><td>Specify heat flow rate (measure temperature)</td></tr>
+<tr><td><img src="images/FCSys.Conditions.InertAmagat.Thermal.TemperatureS.png" alt="FCSys.Conditions.InertAmagat.Thermal.Custom" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_InertAmagat_Thermal.html#FCSys.Conditions.InertAmagat.Thermal.Custom">Custom</a>
+</td><td>Custom expressions</td></tr>
 <tr><td><img src="images/FCSys.Conditions.InertAmagat.Thermal.BaseClassesS.png" alt="FCSys.Conditions.InertAmagat.Thermal.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_InertAmagat_Thermal_BaseClasses.html#FCSys.Conditions.InertAmagat.Thermal.BaseClasses">BaseClasses</a>
-</td><td>Base classes (not for direct use)</td></tr>
+</td><td>Base classes (not generally for direct use)</td></tr>
 </table>
 <hr>
 
 <h2><img src="images/FCSys.Conditions.InertAmagat.Thermal.TemperatureI.png" alt="FCSys.Conditions.InertAmagat.Thermal.Temperature" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.InertAmagat.Thermal.Temperature"></a><a href="FCSys_Conditions_InertAmagat_Thermal.html#FCSys.Conditions.InertAmagat.Thermal">FCSys.Conditions.InertAmagat.Thermal</a>.Temperature</h2>
-<b>Impose temperature</b><p>
-<img src="images/FCSys.Conditions.InertAmagat.Volume.PressureD.png" alt="FCSys.Conditions.InertAmagat.Thermal.Temperature">
+<b>Specify temperature (measure heat flow rate)</b><p>
+<img src="images/FCSys.Conditions.InertAmagat.Amagat.PressureD.png" alt="FCSys.Conditions.InertAmagat.Thermal.Temperature">
 <p><h3>Information</h3></p>
 Extends from <a href="FCSys_Conditions_InertAmagat_Thermal_BaseClasses.html#FCSys.Conditions.InertAmagat.Thermal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a thermal condition).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
 <tr><td><a href="FCSys_Conditions_InertAmagat_Thermal_BaseClasses.html#FCSys.Conditions.InertAmagat.Thermal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Te...</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
 <tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
 <tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
+<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -82,11 +86,12 @@ Extends from <a href="FCSys_Conditions_InertAmagat_Thermal_BaseClasses.html#FCSy
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
-<font color="blue">model</font> Temperature <font color="darkgreen">&quot;Impose temperature&quot;</font>
+<font color="blue">model</font> Temperature <font color="darkgreen">&quot;Specify temperature (measure heat flow rate)&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Conditions_InertAmagat_Thermal_BaseClasses.html#FCSys.Conditions.InertAmagat.Thermal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(
     <font color="blue">final </font>conditionType=BaseClasses.ConditionType.Temperature,
     u(<font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;, displayUnit=&quot;K&quot;),
-    spec(k(start=298.15*U.K)));
+    source(k(start=298.15*U.K)),
+    <font color="blue">final </font>y(<font color="blue">final </font>unit=&quot;l2.m/T3&quot;) = inert.Qdot);
 
 <font color="blue">equation </font>
   inert.T = u_final;
@@ -94,22 +99,23 @@ Extends from <a href="FCSys_Conditions_InertAmagat_Thermal_BaseClasses.html#FCSy
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.InertAmagat.Thermal.TemperatureI.png" alt="FCSys.Conditions.InertAmagat.Thermal.HeatFlowRate" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.InertAmagat.Thermal.HeatFlowRate"></a><a href="FCSys_Conditions_InertAmagat_Thermal.html#FCSys.Conditions.InertAmagat.Thermal">FCSys.Conditions.InertAmagat.Thermal</a>.HeatFlowRate</h2>
-<b>Impose heat flow rate</b><p>
-<img src="images/FCSys.Conditions.InertAmagat.Volume.PressureD.png" alt="FCSys.Conditions.InertAmagat.Thermal.HeatFlowRate">
+<h2><img src="images/FCSys.Conditions.InertAmagat.Thermal.TemperatureI.png" alt="FCSys.Conditions.InertAmagat.Thermal.HeatRate" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.InertAmagat.Thermal.HeatRate"></a><a href="FCSys_Conditions_InertAmagat_Thermal.html#FCSys.Conditions.InertAmagat.Thermal">FCSys.Conditions.InertAmagat.Thermal</a>.HeatRate</h2>
+<b>Specify heat flow rate (measure temperature)</b><p>
+<img src="images/FCSys.Conditions.InertAmagat.Amagat.PressureD.png" alt="FCSys.Conditions.InertAmagat.Thermal.HeatRate">
 <p><h3>Information</h3></p>
 Extends from <a href="FCSys_Conditions_InertAmagat_Thermal_BaseClasses.html#FCSys.Conditions.InertAmagat.Thermal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a thermal condition).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>spec</td><td>redeclare Modelica.Blocks.So...</td><td>Internal specification</td></tr>
 <tr><td><a href="FCSys_Conditions_InertAmagat_Thermal_BaseClasses.html#FCSys.Conditions.InertAmagat.Thermal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.He...</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
 <tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
 <tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
+<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So...</td><td>Source of internal specification</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -118,20 +124,69 @@ Extends from <a href="FCSys_Conditions_InertAmagat_Thermal_BaseClasses.html#FCSy
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
-<font color="blue">model</font> HeatFlowRate <font color="darkgreen">&quot;Impose heat flow rate&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Conditions_InertAmagat_Thermal_BaseClasses.html#FCSys.Conditions.InertAmagat.Thermal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(<font color="blue">final </font>conditionType=BaseClasses.ConditionType.HeatFlowRate,
-      u(<font color="blue">final </font>unit=&quot;l2.m/T3&quot;));
+<font color="blue">model</font> HeatRate <font color="darkgreen">&quot;Specify heat flow rate (measure temperature)&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_InertAmagat_Thermal_BaseClasses.html#FCSys.Conditions.InertAmagat.Thermal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(
+    <font color="blue">final </font>conditionType=BaseClasses.ConditionType.HeatRate,
+    u(<font color="blue">final </font>unit=&quot;l2.m/T3&quot;),
+    <font color="blue">final </font>y(
+      <font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;,
+      displayUnit=&quot;K&quot;) = inert.T);
 
 <font color="blue">equation </font>
   inert.Qdot = u_final;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>HeatFlowRate;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>HeatRate;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.InertAmagat.Thermal.TemperatureI.png" alt="FCSys.Conditions.InertAmagat.Thermal.Custom" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.InertAmagat.Thermal.Custom"></a><a href="FCSys_Conditions_InertAmagat_Thermal.html#FCSys.Conditions.InertAmagat.Thermal">FCSys.Conditions.InertAmagat.Thermal</a>.Custom</h2>
+<b>Custom expressions</b><p>
+<img src="images/FCSys.Conditions.InertAmagat.Amagat.PressureD.png" alt="FCSys.Conditions.InertAmagat.Thermal.Custom">
+<p><h3>Information</h3></p>
+<p>The expression to which the condition is applied (<code>x</code>)
+    must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p><p>
+Extends from <a href="FCSys_Conditions_InertAmagat_Thermal_BaseClasses.html#FCSys.Conditions.InertAmagat.Thermal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a thermal condition).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Conditions_InertAmagat_Thermal_BaseClasses.html#FCSys.Conditions.InertAmagat.Thermal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Cu...</td><td>Type of condition</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
+<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
+<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So...</td><td>Source of internal specification</td></tr>
+<tr><td>Real</td><td>x</td><td>inert.T</td><td>Expression to which the condition is applied</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>inert.Qdot</td><td>Measurement expression</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Value of specified condition</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a></td><td>inert</td><td>Connector for linear momentum and heat, with additivity of volume</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=3>Measurement</td></tr>
+<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Measurement expression</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Custom <font color="darkgreen">&quot;Custom expressions&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_InertAmagat_Thermal_BaseClasses.html#FCSys.Conditions.InertAmagat.Thermal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(<font color="blue">final </font>conditionType=BaseClasses.ConditionType.Custom,
+      y=inert.Qdot);
+
+  Real x=inert.T <font color="darkgreen">&quot;Expression to which the condition is applied&quot;</font>;
+
+<font color="blue">equation </font>
+  x = u_final;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Custom;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:06:27 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 11:17:16 2013.
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.TestStands</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-24">
+<meta name="date" content="2013-1-29">
 <meta name="description" content="Test stands">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,6 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
@@ -46,7 +47,7 @@
 <b>Test stands</b>
 <p>
 <p><h3>Information</h3></p>
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages), <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.PackageUnderConstruction">FCSys.BaseClasses.Icons.PackageUnderConstruction</a> (Overlay to indicate that a package is in development).
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
@@ -55,7 +56,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Conditions.TestStands.ReplayS.png" alt="FCSys.Conditions.TestStands.Replay" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands.Replay">Replay</a>
 </td><td>Regenerate signals recorded from HNEI&#39;s Greenlight FC test stand</td></tr>
 <tr><td><img src="images/FCSys.Conditions.TestStands.BaseClassesS.png" alt="FCSys.Conditions.TestStands.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_TestStands_BaseClasses.html#FCSys.Conditions.TestStands.BaseClasses">BaseClasses</a>
-</td><td>Base classes (not for direct use)</td></tr>
+</td><td>Base classes (not generally for direct use)</td></tr>
 </table>
 <hr>
 
@@ -116,24 +117,24 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
   <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Add">Modelica.Blocks.Math.Add</a> sumAnMFC;
   <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Add">Modelica.Blocks.Math.Add</a> sumCaMFC;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> unit1(k=U.V);
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> unit2(k=U.'%');
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> unit3(k=U.'%');
-  <a href="FCSys_Conditions_BaseClasses.html#FCSys.Conditions.BaseClasses.RealFunction">FCSys.Conditions.BaseClasses.RealFunction</a> unit4(y=unit4.u*U.kPa + U.atm);
-  <a href="FCSys_Conditions_BaseClasses.html#FCSys.Conditions.BaseClasses.RealFunction">FCSys.Conditions.BaseClasses.RealFunction</a> unit5(y=unit5.u*U.kPa + U.atm);
-  <a href="FCSys_Conditions_BaseClasses.html#FCSys.Conditions.BaseClasses.RealFunction">FCSys.Conditions.BaseClasses.RealFunction</a> unit6(y=unit6.u*U.kPa + U.atm);
-  <a href="FCSys_Conditions_BaseClasses.html#FCSys.Conditions.BaseClasses.RealFunction">FCSys.Conditions.BaseClasses.RealFunction</a> unit7(y=unit7.u*U.kPa + U.atm);
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> unit8(k=U.L/U.min);
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> unit9(k=U.L/U.min);
-  <a href="FCSys_Conditions_BaseClasses.html#FCSys.Conditions.BaseClasses.RealFunction">FCSys.Conditions.BaseClasses.RealFunction</a> unit10(y=(unit10.u + 273.15)*U.K);
-  <a href="FCSys_Conditions_BaseClasses.html#FCSys.Conditions.BaseClasses.RealFunction">FCSys.Conditions.BaseClasses.RealFunction</a> unit11(y=(unit11.u + 273.15)*U.K);
-  <a href="FCSys_Conditions_BaseClasses.html#FCSys.Conditions.BaseClasses.RealFunction">FCSys.Conditions.BaseClasses.RealFunction</a> unit12(y=(unit12.u + 273.15)*U.K);
-  <a href="FCSys_Conditions_BaseClasses.html#FCSys.Conditions.BaseClasses.RealFunction">FCSys.Conditions.BaseClasses.RealFunction</a> unit13(y=(unit13.u + 273.15)*U.K);
-  <a href="FCSys_Conditions_BaseClasses.html#FCSys.Conditions.BaseClasses.RealFunction">FCSys.Conditions.BaseClasses.RealFunction</a> unit14(y=(unit14.u + 273.15)*U.K);
-  <a href="FCSys_Conditions_BaseClasses.html#FCSys.Conditions.BaseClasses.RealFunction">FCSys.Conditions.BaseClasses.RealFunction</a> unit15(y=(unit15.u + 273.15)*U.K);
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> unit16(k=U.A);</textblock>
+<textblock type="annotcomp" expanded="false">  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> from_V(k=U.V);
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> &#39;from1_%&#39;(k=U.'%');
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> &#39;from2_%&#39;(k=U.'%');
+  <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_kPag">Blocks.UnitConversions.From_kPag</a> from1_kPag;
+  <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_kPag">Blocks.UnitConversions.From_kPag</a> from2_kPag;
+  <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_kPag">Blocks.UnitConversions.From_kPag</a> from3_kPag;
+  <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_kPag">Blocks.UnitConversions.From_kPag</a> from4_kPag;
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> from1_LPM(k=U.L/U.min);
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> from2_LPM(k=U.L/U.min);
+  <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_degC">Blocks.UnitConversions.From_degC</a> from1_degC;
+  <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_degC">Blocks.UnitConversions.From_degC</a> from2_degC;
+  <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_degC">Blocks.UnitConversions.From_degC</a> from3_degC;
+  <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_degC">Blocks.UnitConversions.From_degC</a> from4_degC;
+  <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_degC">Blocks.UnitConversions.From_degC</a> from5_degC;
+  <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_degC">Blocks.UnitConversions.From_degC</a> from6_degC;
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> from_A(k=U.A);</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> Deltamu(<font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;) <font color="darkgreen">
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> v(<font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;) <font color="darkgreen">
     &quot;CVM Cell 1 Voltage&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> RHAnFPNegX(
     <font color="blue">final </font>unit=&quot;1&quot;,
@@ -179,7 +180,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
     <font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;,
     displayUnit=&quot;K&quot;,
     <font color="blue">final </font>min=0) <font color="darkgreen">&quot;Temperature end plate cathode&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> J(<font color="blue">final </font>unit=&quot;N/T&quot;) <font color="darkgreen">&quot;Measured load&quot;</font>;</textblock>
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> I(<font color="blue">final </font>unit=&quot;N/T&quot;) <font color="darkgreen">&quot;Measured load&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
   <font color="darkgreen">//  Terminate as desired</font>
@@ -190,53 +191,53 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
   <font color="blue">end if</font>;
 
   <font color="darkgreen">// Connections from source to unit conversion</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(unit1.u, combiTimeTable.y[1]);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(from_V.u, combiTimeTable.y[1]);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(unit2.u, combiTimeTable.y[2]);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('from1_%'.u, combiTimeTable.y[2]);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(unit3.u, combiTimeTable.y[3]);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('from2_%'.u, combiTimeTable.y[3]);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(unit4.u, combiTimeTable.y[4]);
-  <font color="red">connect</font>(unit5.u, combiTimeTable.y[5]);
-  <font color="red">connect</font>(unit6.u, combiTimeTable.y[6]);
-  <font color="red">connect</font>(unit7.u, combiTimeTable.y[7]);
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(from1_kPag.u, combiTimeTable.y[4]);
+  <font color="red">connect</font>(from2_kPag.u, combiTimeTable.y[5]);
+  <font color="red">connect</font>(from3_kPag.u, combiTimeTable.y[6]);
+  <font color="red">connect</font>(from4_kPag.u, combiTimeTable.y[7]);
   <font color="red">connect</font>(sumAnMFC.u1, combiTimeTable.y[8]);
   <font color="red">connect</font>(sumAnMFC.u2, combiTimeTable.y[9]);
   <font color="red">connect</font>(sumCaMFC.u1, combiTimeTable.y[10]);
   <font color="red">connect</font>(sumCaMFC.u2, combiTimeTable.y[11]);
-  <font color="red">connect</font>(unit10.u, combiTimeTable.y[12]);
-  <font color="red">connect</font>(unit11.u, combiTimeTable.y[13]);
-  <font color="red">connect</font>(unit12.u, combiTimeTable.y[14]);
-  <font color="red">connect</font>(unit13.u, combiTimeTable.y[15]);
-  <font color="red">connect</font>(unit14.u, combiTimeTable.y[16]);
-  <font color="red">connect</font>(unit15.u, combiTimeTable.y[17]);
-  <font color="red">connect</font>(unit16.u, combiTimeTable.y[18]);</textblock>
+  <font color="red">connect</font>(from1_degC.u, combiTimeTable.y[12]);
+  <font color="red">connect</font>(from2_degC.u, combiTimeTable.y[13]);
+  <font color="red">connect</font>(from3_degC.u, combiTimeTable.y[14]);
+  <font color="red">connect</font>(from4_degC.u, combiTimeTable.y[15]);
+  <font color="red">connect</font>(from5_degC.u, combiTimeTable.y[16]);
+  <font color="red">connect</font>(from6_degC.u, combiTimeTable.y[17]);
+  <font color="red">connect</font>(from_A.u, combiTimeTable.y[18]);</textblock>
 
   <font color="darkgreen">// Connections from unit conversion to internal outputs</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(Deltamu, unit1.y);
-  <font color="red">connect</font>(RHAnFPNegX, unit2.y);
-  <font color="red">connect</font>(RHCaFPNegX, unit3.y);
-  <font color="red">connect</font>(p_anFPNegY, unit4.y);
-  <font color="red">connect</font>(p_anFPPosY, unit5.y);
-  <font color="red">connect</font>(p_caFPNegY, unit6.y);
-  <font color="red">connect</font>(p_caFPPosY, unit7.y);
-  <font color="red">connect</font>(Vdot_anFPNegY_H2, unit8.y);
-  <font color="red">connect</font>(Vdot_caFPNegY_air, unit9.y);
-  <font color="red">connect</font>(T_anFPNegY, unit10.y);
-  <font color="red">connect</font>(T_anFPPosY, unit11.y);
-  <font color="red">connect</font>(T_caFPNegY, unit12.y);
-  <font color="red">connect</font>(T_caFPPosY, unit13.y);
-  <font color="red">connect</font>(T_anFPX, unit14.y);
-  <font color="red">connect</font>(T_caFPX, unit15.y);
-  <font color="red">connect</font>(J, unit16.y);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(v, from_V.y);
+  <font color="red">connect</font>(RHAnFPNegX, 'from1_%'.y);
+  <font color="red">connect</font>(RHCaFPNegX, 'from2_%'.y);
+  <font color="red">connect</font>(p_anFPNegY, from1_kPag.y);
+  <font color="red">connect</font>(p_anFPPosY, from2_kPag.y);
+  <font color="red">connect</font>(p_caFPNegY, from3_kPag.y);
+  <font color="red">connect</font>(p_caFPPosY, from4_kPag.y);
+  <font color="red">connect</font>(Vdot_anFPNegY_H2, from1_LPM.y);
+  <font color="red">connect</font>(Vdot_caFPNegY_air, from2_LPM.y);
+  <font color="red">connect</font>(T_anFPNegY, from1_degC.y);
+  <font color="red">connect</font>(T_anFPPosY, from2_degC.y);
+  <font color="red">connect</font>(T_caFPNegY, from3_degC.y);
+  <font color="red">connect</font>(T_caFPPosY, from4_degC.y);
+  <font color="red">connect</font>(T_anFPX, from5_degC.y);
+  <font color="red">connect</font>(T_caFPX, from6_degC.y);
+  <font color="red">connect</font>(I, from_A.y);</textblock>
 
   <font color="darkgreen">// Summations</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(sumAnMFC.y, unit8.u);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(sumAnMFC.y, from1_LPM.u);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(sumCaMFC.y, unit9.u);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(sumCaMFC.y, from2_LPM.u);</textblock>
 
   <font color="darkgreen">// Connections from internal outputs to public output</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(Deltamu, y.Deltamu);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(v, y.v);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(RHAnFPNegX, y.RHAnFPNegX);</textblock>
 
@@ -261,7 +262,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(T_caFPX, y.T_caFPX);</textblock>
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(J, y.J);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(I, y.I);</textblock>
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>Replay;
 </pre>
       </div>
@@ -269,7 +270,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:06:06 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 11:16:26 2013.
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Characteristics.BaseClasses.CharacteristicNASA</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-24">
+<meta name="date" content="2013-1-28">
 <meta name="description" content="Thermodynamic record with transport properties based on NASA CEA">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,6 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
@@ -54,9 +55,13 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td>T_lim_alpha={0,Modelica.Constants.inf}</td><td>Temperature limits for the rows of b_eta and b_lambda (<i>T</i><sub>lim &alpha;</sub>)</td></tr>
-<tr><td>b_eta</td><td>Constants in NASA correlation for viscosity (<i>b</i><sub>&eta;</sub>)</td></tr>
-<tr><td>b_lambda</td><td>Constants in NASA correlation for thermal conductivity (<i>b</i><sub>&lambda;</sub>)</td></tr>
+<tr><td>T_lim_F_R={0,Modelica.Constants.inf}</td><td>Temperature limits for the rows of <i>b</i><sub><i>F</i></sub> and <i>b</i><sub><i>R</i></sub> (<i>T</i><sub>lim <i>F</i> <i>R</i></sub>)</td></tr>
+<tr><td>b_F</td><td>Correlation constants for fluidity (<i>b</i><sub><i>F</i></sub>)</td></tr>
+<tr><td>b_R</td><td>Correlation constants for thermal resistivity (<i>b</i><sub><i>R</i></sub>)</td></tr>
+<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.fromNASAViscosityS.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.fromNASAViscosity" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA.fromNASAViscosity">fromNASAViscosity</a>
+</td><td>Return constants for fluidity given NASA CEA constants for viscosity</td></tr>
+<tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.fromNASAViscosityS.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.fromNASAThermalConductivity" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA.fromNASAThermalConductivity">fromNASAThermalConductivity</a>
+</td><td>Return constants for thermal resistivity given NASA CEA constants for thermal conductivity</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.FS.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.F" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA.F">F</a>
 </td><td>Fluidity as a function of temperature</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.FS.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.R" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA.R">R</a>
@@ -80,7 +85,7 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
 <tr><td>B_c</td><td>Integration constants for specific enthalpy and entropy (<i>B</i><sub><i>c</i></sub>)</td></tr>
 <tr><td>isCompressible=anyTrue({anyTrue({abs(b_v[i, j]) &gt; Modelica.Constants.small and specVolPow[1] + i - 1 &lt;&gt; 0 for i in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})</td><td>true, if specific volume depends on pressure</td></tr>
 <tr><td>hasThermalExpansion=anyTrue({anyTrue({abs(b_v[i, j]) &gt; Modelica.Constants.small and specVolPow[2] + j - specVolPow[1] - i &lt;&gt; 0 for i in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})</td><td>true, if specific volume depends on temperature</td></tr>
-<tr><td>pressPow=if specVolPow[1] == 0 then {0,0} else {1/specVolPow[1] - size(b_v, 1) + 1,1 - (if mod(abs(specVolPow[2]/specVolPow[1]), 1) &lt; Modelica.Constants.small then round(specVolPow[2]/specVolPow[1]) else specVolPow[2]/specVolPow[1])}</td><td>Powers of v and T for 1st row and column of b_p, respectively</td></tr>
+<tr><td>pressPow={specVolPow[1] - size(b_v, 1) + 1,specVolPow[2] + 1}</td><td>Powers of v and T for 1st row and column of b_p, respectively</td></tr>
 <tr><td>b_p=if size(b_v, 1) == 1 then b_v .^ (-pressPow[1]) else {(if specVolPow[1] + i == 0 or specVolPow[1] + i == 1 or size(b_v, 1) == 1 then b_v[i, :] else (if specVolPow[1] + i == 2 and specVolPow[1] &lt;= 0 then b_v[i, :] + b_v[i - 1, :] .^ 2 else (if specVolPow[1] + i == 3 and specVolPow[1] &lt;= 0 then b_v[i, :] + b_v[i - 2, :] .* (b_v[i - 2, :] .^ 2 + 3*b_v[i - 1, :]) else zeros(size(b_v, 2))))) for i in size(b_v, 1):-1:1}</td><td>Coefficients of p as a polynomial in v and T</td></tr>
 <tr><td><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.FS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.alpha" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.alpha">alpha</a>
 </td><td>Ideal base resistivity factor as a function of temperature (&alpha;)</td></tr>
@@ -108,12 +113,64 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
 </td><td>Dynamic compressibility as a function of temperature and specific volume (&Xi;)</td></tr>
 </table>
 <p><h3>Types and constants</h3>
-<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_lim_alpha[:]={0,Modelica.Constants.inf} <font color="darkgreen">
-  &quot;Temperature limits for the rows of b_eta and b_lambda (<i>T</i><sub>lim &alpha;</sub>)&quot;</font>;</pre><p>
-<pre><font color="blue">constant </font>Real b_eta[<font color="red">size</font>(T_lim_alpha, 1) - 1, 4] <font color="darkgreen">
-  &quot;Constants in NASA correlation for viscosity (<i>b</i><sub>&eta;</sub>)&quot;</font>;</pre><p>
-<pre><font color="blue">constant </font>Real b_lambda[<font color="red">size</font>(T_lim_alpha, 1) - 1, 4] <font color="darkgreen">
-  &quot;Constants in NASA correlation for thermal conductivity (<i>b</i><sub>&lambda;</sub>)&quot;</font>;</pre><p>
+<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_lim_F_R[:]={0,Modelica.Constants.inf} <font color="darkgreen">
+  &quot;Temperature limits for the rows of <i>b</i><sub><i>F</i></sub> and <i>b</i><sub><i>R</i></sub> (<i>T</i><sub>lim <i>F</i> <i>R</i></sub>)&quot;</font>;</pre><p>
+<pre><font color="blue">constant </font>Real b_F[<font color="red">size</font>(T_lim_F_R, 1) - 1, 4] <font color="darkgreen">
+  &quot;Correlation constants for fluidity (<i>b</i><sub><i>F</i></sub>)&quot;</font>;</pre><p>
+<pre><font color="blue">constant </font>Real b_R[<font color="red">size</font>(T_lim_F_R, 1) - 1, 4] <font color="darkgreen">
+  &quot;Correlation constants for thermal resistivity (<i>b</i><sub><i>R</i></sub>)&quot;</font>;</pre><p>
+<hr>
+
+<h2><a name="FCSys.Characteristics.BaseClasses.CharacteristicNASA.fromNASAViscosity"></a><a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA">FCSys.Characteristics.BaseClasses.CharacteristicNASA</a>.fromNASAViscosity</h2>
+<b>Return constants for fluidity given NASA CEA constants for viscosity</b><p>
+<p><h3>Inputs</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Real</td><td>b_eta[4]</td><td>&nbsp;</td><td>NASA CEA constants for viscosity</td></tr>
+</table>
+<p><h3>Outputs</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Real</td><td>b_F[4]</td><td>Constants for fluidity</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">function</font> fromNASAViscosity <font color="darkgreen">
+  &quot;Return constants for fluidity given NASA CEA constants for viscosity&quot;</font>
+  <font color="blue">input </font>Real b_eta[4] <font color="darkgreen">&quot;NASA CEA constants for viscosity&quot;</font>;
+  <font color="blue">output </font>Real b_F[4] <font color="darkgreen">&quot;Constants for fluidity&quot;</font>;
+
+<font color="blue">algorithm </font>
+  b_F := {-b_eta[1],-b_eta[2]*U.K,-b_eta[3]*U.K^2,-b_eta[4] + b_eta[1]*<font color="red">ln</font>(U.K) + <font color="red">
+    ln</font>(1e4*U.m*U.s/U.g)};
+<font color="blue">end </font>fromNASAViscosity;
+</pre>
+<hr>
+
+<h2><a name="FCSys.Characteristics.BaseClasses.CharacteristicNASA.fromNASAThermalConductivity"></a><a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA">FCSys.Characteristics.BaseClasses.CharacteristicNASA</a>.fromNASAThermalConductivity</h2>
+<b>Return constants for thermal resistivity given NASA CEA constants for thermal conductivity</b><p>
+<p><h3>Inputs</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Real</td><td>b_lambda[4]</td><td>&nbsp;</td><td>NASA CEA constants for thermal conductivity</td></tr>
+</table>
+<p><h3>Outputs</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Real</td><td>b_R[4]</td><td>Constants for thermal resistivity</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">function</font> fromNASAThermalConductivity <font color="darkgreen">
+  &quot;Return constants for thermal resistivity given NASA CEA constants for thermal conductivity&quot;</font>
+  <font color="blue">input </font>Real b_lambda[4] <font color="darkgreen">&quot;NASA CEA constants for thermal conductivity&quot;</font>;
+  <font color="blue">output </font>Real b_R[4] <font color="darkgreen">&quot;Constants for thermal resistivity&quot;</font>;
+
+<font color="blue">algorithm </font>
+  b_R := {-b_lambda[1],-b_lambda[2]*U.K,-b_lambda[3]*U.K^2,-b_lambda[4] +
+    b_lambda[1]*<font color="red">ln</font>(U.K) + <font color="red">ln</font>(1e4*U.m*U.K/U.W)};
+<font color="blue">end </font>fromNASAThermalConductivity;
+</pre>
 <hr>
 
 <h2><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.FI.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.F" align=RIGHT border=1 width=80  height=80 >
@@ -139,44 +196,26 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">redeclare </font><font color="blue">function</font> F <font color="darkgreen">&quot;Fluidity as a function of temperature&quot;</font>
-
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.FluidityDynamic">Q.FluidityDynamic</a> F <font color="darkgreen">&quot;Dynamic fluidity&quot;</font>;
 
-<font color="blue">protected </font>
-  <textblock type="model" expanded="false" path="FCSys.Characteristics.BaseClasses.CharacteristicNASA.F.b_eta_adj"><font color="blue">function</font> b_eta_adj <font color="darkgreen">
-    &quot;Return unit-adjusted NASA CEA constants for viscosity&quot;</font>
-    <font color="darkgreen">// See note in b_eta_adj() in alpha_tau().</font>
-    <font color="blue">output </font>Real b_eta_adj[<font color="red">size</font>(CharacteristicNASA.T_lim_alpha, 1) - 1, 4] <font color="darkgreen">
-      &quot;Unit-adjusted NASA CEA constants for viscosity&quot;</font>;
-
-  <font color="blue">algorithm </font>
-    b_eta_adj := <font color="red">transpose</font>({b_eta[:, 1],b_eta[:, 2],b_eta[:, 3],b_eta[:, 4] -
-      b_eta[:, 1]*<font color="red">ln</font>(U.K) + <font color="red">fill</font>(<font color="red">ln</font>(1e-6*U.g/(U.cm*U.s*m)), <font color="red">size</font>(T_lim_alpha, 1)
-       - 1)});
-
-  <font color="blue">end </font>b_eta_adj</textblock>;
-
 <font color="blue">algorithm </font>
   <font color="darkgreen">/*
-  assert(T_lim_alpha[1] &lt;= T and T &lt;= T_lim_alpha[size(T_lim_alpha, 1)], &quot;Temperature &quot;
-     + String(T/(U.K)) + &quot; K is out of range for the diffusion properties ([&quot; +
-    String(T_lim_alpha[1]/U.K) + &quot;, &quot; + String(T_lim_alpha[size(T_lim_alpha, 1)]
+    assert(T_lim_F_R[1] &lt;= T and T &lt;= T_lim_F_R[size(T_lim_F_R, 1)], &quot;Temperature &quot;
+     + String(T/(U.K)) + &quot; K is out of range for the resistivities ([&quot; +
+    String(T_lim_F_R[1]/U.K) + &quot;, &quot; + String(T_lim_F_R[size(T_lim_F_R, 1)]
     /U.K) + &quot;] K).&quot;);
-  */</font>
+    */</font>
   <font color="darkgreen">// Note:  This is commented out so that the function can be inlined.</font>
-  <font color="darkgreen">// Note:  In Dymola 7.4 T_lim_alpha[end] can&#39;t be used instead of</font>
-  <font color="darkgreen">// T_lim_alpha[size(T_lim_alpha, 1)] due to:</font>
+  <font color="darkgreen">// Note:  In Dymola 7.4 T_lim_F_R[end] can&#39;t be used instead of</font>
+  <font color="darkgreen">// T_lim_F_R[size(T_lim_F_R, 1)] due to:</font>
   <font color="darkgreen">//     &quot;Error, not all &quot;end&quot; could be expanded.&quot;</font>
 
-  F := <font color="red">smooth</font>(0, <font color="red">exp</font>(-<font color="red">sum</font>(<font color="blue">if </font>(T_lim_alpha[i] &lt;= T<font color="blue"> or </font>i == 1)<font color="blue"> and </font>(T &lt;=
-    T_lim_alpha[i + 1]<font color="blue"> or </font>i == <font color="red">size</font>(T_lim_alpha, 1) - 1)<font color="blue"> then </font>(<font color="red">b_eta_adj</font>())[i, 1]
-    *<font color="red">ln</font>(T) + ((<font color="red">b_eta_adj</font>())[i, 2] + (<font color="red">b_eta_adj</font>())[i, 3]/T)/T + (<font color="red">b_eta_adj</font>())[i,
-    4]<font color="blue"> else </font>0 <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(T_lim_alpha, 1) - 1)));
-  <font color="darkgreen">// Note:  The annotation is set assuming that the values of the constants</font>
-  <font color="darkgreen">// result in a function that is first-order continuous.</font>
+  F := <font color="red">smooth</font>(0, <font color="red">exp</font>(<font color="red">sum</font>(<font color="blue">if </font>(T_lim_F_R[i] &lt;= T<font color="blue"> or </font>i == 1)<font color="blue"> and </font>(T &lt; T_lim_F_R[i +
+    1]<font color="blue"> or </font>i == <font color="red">size</font>(T_lim_F_R, 1) - 1)<font color="blue"> then </font>b_F[i, 1]*<font color="red">ln</font>(T) + (b_F[i, 2] + b_F[
+    i, 3]/T)/T + b_F[i, 4]<font color="blue"> else </font>0 <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(T_lim_F_R, 1) - 1)));
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>F;
 </pre>
 <hr>
@@ -186,7 +225,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <b>Thermal resistivity as a function of temperature and pressure</b><p>
 <p><h3>Information</h3></p>
 <p>This function is based on based on NASA CEA
-  [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride1996</a>, <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Svehla1995</a>]</p><p>
+  [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride1996</a>, <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Svehla1995</a>]</p>
+  
+    <p>For more information, see <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.R">Characteristic.R</a>().</p>
+    <p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p><h3>Inputs</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
@@ -203,7 +245,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <pre>
 <font color="blue">redeclare </font><font color="blue">function</font> R <font color="darkgreen">
   &quot;Thermal resistivity as a function of temperature and pressure&quot;</font>
-
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
@@ -211,41 +252,21 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="darkgreen">// Note:  Pressure isn&#39;t used here but is included for generality.</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> R <font color="darkgreen">&quot;Thermal resistivity&quot;</font>;
 
-<font color="blue">protected </font>
-  <textblock type="model" expanded="false" path="FCSys.Characteristics.BaseClasses.CharacteristicNASA.R.b_lambda_adj"><font color="blue">function</font> b_lambda_adj <font color="darkgreen">
-    &quot;Return unit-adjusted NASA CEA constants for thermal conductivity&quot;</font>
-    <font color="darkgreen">// Note:  If b_lambda were defined as a local constant instead of a</font>
-    <font color="darkgreen">// function, it would prevent the alpha_tau function from</font>
-    <font color="darkgreen">// being inlined.  If it were defined as a global final constant, it</font>
-    <font color="darkgreen">// would need to be updated manually when b_eta is changed.</font>
-    <font color="blue">output </font>Real b_lambda_adj[<font color="red">size</font>(T_lim_alpha, 1) - 1, 4] <font color="darkgreen">
-      &quot;Unit-adjusted NASA CEA constants for thermal conductivity&quot;</font>;
-
-  <font color="blue">algorithm </font>
-    b_lambda_adj := <font color="red">transpose</font>({b_lambda[:, 1],b_lambda[:, 2],b_lambda[:, 3],
-      b_lambda[:, 4] - b_lambda[:, 1]*<font color="red">ln</font>(U.K) + <font color="red">fill</font>(<font color="red">ln</font>(1e-6*U.W/(U.cm*U.K)), <font color="red">
-      size</font>(T_lim_alpha, 1) - 1)});
-
-  <font color="blue">end </font>b_lambda_adj</textblock>;
-
 <font color="blue">algorithm </font>
   <font color="darkgreen">/*
-  assert(T_lim_alpha[1] &lt;= T and T &lt;= T_lim_alpha[size(T_lim_alpha, 1)], &quot;Temperature &quot;
-     + String(T/(U.K)) + &quot; K is out of range for the diffusion properties ([&quot; +
-    String(T_lim_alpha[1]/U.K) + &quot;, &quot; + String(T_lim_alpha[size(T_lim_alpha, 1)]
+    assert(T_lim_F_R[1] &lt;= T and T &lt;= T_lim_F_R[size(T_lim_F_R, 1)], &quot;Temperature &quot;
+     + String(T/(U.K)) + &quot; K is out of range for the resistivities ([&quot; +
+    String(T_lim_F_R[1]/U.K) + &quot;, &quot; + String(T_lim_F_R[size(T_lim_F_R, 1)]
     /U.K) + &quot;] K).&quot;);
-  */</font>
+    */</font>
   <font color="darkgreen">// Note:  This is commented out so that the function can be inlined.</font>
-  <font color="darkgreen">// Note:  In Dymola 7.4 T_lim_alpha[end] can&#39;t be used instead of</font>
-  <font color="darkgreen">// T_lim_alpha[size(T_lim_alpha, 1)] due to:</font>
+  <font color="darkgreen">// Note:  In Dymola 7.4 T_lim_F_R[end] can&#39;t be used instead of</font>
+  <font color="darkgreen">// T_lim_F_R[size(T_lim_F_R, 1)] due to:</font>
   <font color="darkgreen">//     &quot;Error, not all &quot;end&quot; could be expanded.&quot;</font>
 
-  R := <font color="red">smooth</font>(0, <font color="red">exp</font>(-<font color="red">sum</font>(<font color="blue">if </font>(T_lim_alpha[i] &lt;= T<font color="blue"> or </font>i == 1)<font color="blue"> and </font>(T &lt;=
-    T_lim_alpha[i + 1]<font color="blue"> or </font>i == <font color="red">size</font>(T_lim_alpha, 1) - 1)<font color="blue"> then </font>(<font color="red">b_lambda_adj</font>())[
-    i, 1]*<font color="red">ln</font>(T) + ((<font color="red">b_lambda_adj</font>())[i, 2] + (<font color="red">b_lambda_adj</font>())[i, 3]/T)/T + (<font color="red">
-    b_lambda_adj</font>())[i, 4]<font color="blue"> else </font>0 <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(T_lim_alpha, 1) - 1)));
-  <font color="darkgreen">// Note:  The annotation is set assuming that the values of the constants</font>
-  <font color="darkgreen">// result in a function that is first-order continuous.</font>
+  R := <font color="red">smooth</font>(0, <font color="red">exp</font>(<font color="red">sum</font>(<font color="blue">if </font>(T_lim_F_R[i] &lt;= T<font color="blue"> or </font>i == 1)<font color="blue"> and </font>(T &lt; T_lim_F_R[i +
+    1]<font color="blue"> or </font>i == <font color="red">size</font>(T_lim_F_R, 1) - 1)<font color="blue"> then </font>b_R[i, 1]*<font color="red">ln</font>(T) + (b_R[i, 2] + b_R[
+    i, 3]/T)/T + b_R[i, 4]<font color="blue"> else </font>0 <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(T_lim_F_R, 1) - 1)));
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>R;
 </pre>
       </div>
@@ -253,7 +274,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:10:44 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 28 11:05:19 2013.
 </div>
 </body>
 </html>

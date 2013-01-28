@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Regions.Examples</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-24">
+<meta name="date" content="2013-1-28">
 <meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,6 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
@@ -566,12 +567,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
         H2O(thermal(spec(k=environment.T)))), <font color="blue">each </font>ionomer(
       &#39;inclC19HF37O5S-&#39;=true,
       &#39;inclH+&#39;=true,
-      Error));
+      &#39;C19HF37O5S-&#39;(thermal(spec(k=environment.T))),
+      &#39;H+&#39;(thermal(spec(k=environment.T)))));
   FCSys.Conditions.FaceBus.SubregionClosed bC2[n_y, n_z](<font color="blue">each </font>gas(inclH2O=true,
         H2O(thermal(spec(k=environment.T)))), <font color="blue">each </font>ionomer(
       &#39;inclC19HF37O5S-&#39;=true,
       &#39;inclH+&#39;=true,
-      Error));
+      &#39;C19HF37O5S-&#39;(thermal(spec(k=environment.T))),
+      &#39;H+&#39;(thermal(spec(k=environment.T)))));
 
 <font color="blue">equation </font>
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(bC1.face, pEM.xNegative);</textblock>
@@ -798,7 +801,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:08:09 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 28 11:02:40 2013.
 </div>
 </body>
 </html>

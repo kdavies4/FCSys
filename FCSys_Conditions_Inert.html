@@ -2,8 +2,8 @@
 <head>
 <title>FCSys.Conditions.Inert</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-24">
-<meta name="description" content="&lt;html&gt;Conditions for the &lt;a href=\&quot;modelica://FCSys.Connectors.Inert\&quot;&gt;Inert&lt;/a&gt; or &lt;a href=\&quot;modelica://FCSys.Connectors.InertInternal\&quot;&gt;InertInternal&lt;/a&gt; connector&lt;/html&gt;">
+<meta name="date" content="2013-1-29">
+<meta name="description" content="&lt;html&gt;Conditions for a &lt;a href=\&quot;modelica://FCSys.Connectors.Inert\&quot;&gt;Inert&lt;/a&gt; or &lt;a href=\&quot;modelica://FCSys.Connectors.InertInternal\&quot;&gt;InertInternal&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
@@ -19,6 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
@@ -43,16 +44,173 @@
       <div class="body">
 
 <h2><a name="FCSys.Conditions.Inert"></a><a href="FCSys_Conditions.html#FCSys.Conditions">FCSys.Conditions</a>.Inert</h2>
-<b>Conditions for the <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> or <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector</b>
+<b>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> or <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector</b>
 <p>
 <p><h3>Information</h3></p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Conditions.Inert.SpeciesS.png" alt="FCSys.Conditions.Inert.Species" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Inert.html#FCSys.Conditions.Inert.Species">Species</a>
+</td><td>Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> or <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Species">Species</a> model), with efforts by default</td></tr>
+<tr><td><img src="images/FCSys.Conditions.Inert.SpeciesS.png" alt="FCSys.Conditions.Inert.SpeciesFlow" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Inert.html#FCSys.Conditions.Inert.SpeciesFlow">SpeciesFlow</a>
+</td><td>Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> or <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Species">Species</a> model), with efforts by default</td></tr>
+<tr><td><img src="images/FCSys.Conditions.Inert.MechanicalS.png" alt="FCSys.Conditions.Inert.Mechanical" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Inert_Mechanical.html#FCSys.Conditions.Inert.Mechanical">Mechanical</a>
+</td><td>Mechanical Conditions</td></tr>
+<tr><td><img src="images/FCSys.Conditions.Inert.MechanicalS.png" alt="FCSys.Conditions.Inert.Thermal" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Inert_Thermal.html#FCSys.Conditions.Inert.Thermal">Thermal</a>
+</td><td>Thermal conditions</td></tr>
+<tr><td><img src="images/FCSys.Conditions.Inert.BaseClassesS.png" alt="FCSys.Conditions.Inert.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Inert_BaseClasses.html#FCSys.Conditions.Inert.BaseClasses">BaseClasses</a>
+</td><td>Base classes (not generally for direct use)</td></tr>
+</table>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.Inert.SpeciesI.png" alt="FCSys.Conditions.Inert.Species" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.Inert.Species"></a><a href="FCSys_Conditions_Inert.html#FCSys.Conditions.Inert">FCSys.Conditions.Inert</a>.Species</h2>
+<b>Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> or <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Species">Species</a> model), with efforts by default</b><p>
+<img src="images/FCSys.Conditions.Inert.SpeciesD.png" alt="FCSys.Conditions.Inert.Species">
+<p><h3>Information</h3></p>
+Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single">FCSys.Conditions.BaseClasses.Icons.Single</a> (Icon for a single-connector boundary condition).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
+<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Included subconnectors</td></tr>
+<tr><td>Boolean</td><td>inclMechanical</td><td>true</td><td>Mechanical</td></tr>
+<tr><td>Boolean</td><td>inclThermal</td><td>true</td><td>Thermal</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Conditions</td></tr>
+<tr><td><a href="FCSys_Conditions_Inert_Mechanical.html#FCSys.Conditions.Inert.Mechanical.Velocity">Velocity</a></td><td>mechanicalX</td><td>redeclare Mechanical.Velocit...</td><td>X-axis mechanical</td></tr>
+<tr><td><a href="FCSys_Conditions_Inert_Mechanical.html#FCSys.Conditions.Inert.Mechanical.Velocity">Velocity</a></td><td>mechanicalY</td><td>redeclare Mechanical.Velocit...</td><td>Y-axis mechanical</td></tr>
+<tr><td><a href="FCSys_Conditions_Inert_Mechanical.html#FCSys.Conditions.Inert.Mechanical.Velocity">Velocity</a></td><td>mechanicalZ</td><td>redeclare Mechanical.Velocit...</td><td>Z-axis mechanical</td></tr>
+<tr><td><a href="FCSys_Conditions_Inert_Thermal.html#FCSys.Conditions.Inert.Thermal.Temperature">Temperature</a></td><td>thermal</td><td>redeclare Thermal.Temperatur...</td><td>Thermal</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Input bus for values of specified conditions</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a></td><td>inert</td><td>Single-species connector for linear momentum and heat</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Species <font color="darkgreen">
+  &quot;Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> or <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Species">Species</a> model), with efforts by default&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single">FCSys.Conditions.BaseClasses.Icons.Single</a>;
+
+  <font color="darkgreen">// Included components of linear momentum</font>
+  <font color="blue">parameter </font>Boolean inclLinX=true <font color="darkgreen">&quot;X&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclLinY=false <font color="darkgreen">&quot;Y&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclLinZ=false <font color="darkgreen">&quot;Z&quot;</font>;
+
+  <font color="darkgreen">// Included subconnectors</font>
+  <font color="blue">parameter </font>Boolean inclMechanical=true <font color="darkgreen">&quot;Mechanical&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclThermal=true <font color="darkgreen">&quot;Thermal&quot;</font>;
+
+  <font color="darkgreen">// Conditions</font>
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Conditions_Inert_Mechanical.html#FCSys.Conditions.Inert.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalX(source(k=0)) <font color="blue">if </font>inclLinX <font color="blue">
+    constrainedby </font>Mechanical.BaseClasses.PartialCondition(
+    <font color="blue">final </font>inclLinX=inclLinX,
+    <font color="blue">final </font>inclLinY=inclLinY,
+    <font color="blue">final </font>inclLinZ=inclLinZ,
+    <font color="blue">final </font>axis=Axis.x) <font color="darkgreen">&quot;X-axis mechanical&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_Inert_Mechanical.html#FCSys.Conditions.Inert.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalY(source(k=0)) <font color="blue">if </font>inclLinY <font color="blue">
+    constrainedby </font>Mechanical.BaseClasses.PartialCondition(
+    <font color="blue">final </font>inclLinX=inclLinX,
+    <font color="blue">final </font>inclLinY=inclLinY,
+    <font color="blue">final </font>inclLinZ=inclLinZ,
+    <font color="blue">final </font>axis=Axis.y) <font color="darkgreen">&quot;Y-axis mechanical&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_Inert_Mechanical.html#FCSys.Conditions.Inert.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalZ(source(k=0)) <font color="blue">if </font>inclLinZ <font color="blue">
+    constrainedby </font>Mechanical.BaseClasses.PartialCondition(
+    <font color="blue">final </font>inclLinX=inclLinX,
+    <font color="blue">final </font>inclLinY=inclLinY,
+    <font color="blue">final </font>inclLinZ=inclLinZ,
+    <font color="blue">final </font>axis=Axis.z) <font color="darkgreen">&quot;Z-axis mechanical&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_Inert_Thermal.html#FCSys.Conditions.Inert.Thermal.Temperature">Thermal.Temperature</a> thermal(source(k=298.15*U.K)) <font color="blue">constrainedby </font>
+    Thermal.BaseClasses.PartialCondition(
+    <font color="blue">final </font>inclLinX=inclLinX,
+    <font color="blue">final </font>inclLinY=inclLinY,
+    <font color="blue">final </font>inclLinZ=inclLinZ) <font color="darkgreen">&quot;Thermal&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">FCSys.Connectors.RealInputBus</a> u <font color="darkgreen">
+    &quot;Input bus for values of specified conditions&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">FCSys.Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Output bus of measurements&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">FCSys.Connectors.InertInternal</a> inert(
+    <font color="blue">final </font>n_lin=<font color="red">countTrue</font>({inclLinX,inclLinY,inclLinZ}),
+    inclMechanical=inclMechanical,
+    inclThermal=inclThermal) <font color="darkgreen">
+    &quot;Single-species connector for linear momentum and heat&quot;</font>;</textblock>
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// X-axis mechanical</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalX.mechanical, inert.mechanical);
+  <font color="red">connect</font>(u.mechanicalX, mechanicalX.u);
+  <font color="red">connect</font>(mechanicalX.y, y.mechanicalX);</textblock>
+
+  <font color="darkgreen">// Y-axis mechanical</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalY.mechanical, inert.mechanical);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u.mechanicalY, mechanicalY.u);
+  <font color="red">connect</font>(mechanicalY.y, y.mechanicalY);</textblock>
+
+  <font color="darkgreen">// Z-axis mechanical</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalZ.mechanical, inert.mechanical);
+  <font color="red">connect</font>(u.mechanicalZ, mechanicalZ.u);
+  <font color="red">connect</font>(mechanicalZ.y, y.mechanicalZ);</textblock>
+
+  <font color="darkgreen">// Thermal</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(thermal.thermal, inert.thermal);
+  <font color="red">connect</font>(u.thermal, thermal.u);
+  <font color="red">connect</font>(thermal.y, y.thermal);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Species;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.Inert.SpeciesI.png" alt="FCSys.Conditions.Inert.SpeciesFlow" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.Inert.SpeciesFlow"></a><a href="FCSys_Conditions_Inert.html#FCSys.Conditions.Inert">FCSys.Conditions.Inert</a>.SpeciesFlow</h2>
+<b>Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> or <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Species">Species</a> model), with efforts by default</b><p>
+<img src="images/FCSys.Conditions.Inert.SpeciesD.png" alt="FCSys.Conditions.Inert.SpeciesFlow">
+<p><h3>Information</h3></p>
+Extends from <a href="FCSys_Conditions_Inert.html#FCSys.Conditions.Inert.Species">Species</a> (Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> or <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Species">Species</a> model), with efforts by default).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
+<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Included subconnectors</td></tr>
+<tr><td>Boolean</td><td>inclMechanical</td><td>true</td><td>Mechanical</td></tr>
+<tr><td>Boolean</td><td>inclThermal</td><td>true</td><td>Thermal</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Input bus for values of specified conditions</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a></td><td>inert</td><td>Single-species connector for linear momentum and heat</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> SpeciesFlow <font color="darkgreen">
+  &quot;Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> or <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Species">Species</a> model), with efforts by default&quot;</font>
+
+  <font color="blue">extends </font><a href="FCSys_Conditions_Inert.html#FCSys.Conditions.Inert.Species">Species</a>(
+    <font color="blue">redeclare </font><a href="FCSys_Conditions_Inert_Mechanical.html#FCSys.Conditions.Inert.Mechanical.Force">Mechanical.Force</a> mechanicalX,
+    <font color="blue">redeclare </font><a href="FCSys_Conditions_Inert_Mechanical.html#FCSys.Conditions.Inert.Mechanical.Force">Mechanical.Force</a> mechanicalY,
+    <font color="blue">redeclare </font><a href="FCSys_Conditions_Inert_Mechanical.html#FCSys.Conditions.Inert.Mechanical.Force">Mechanical.Force</a> mechanicalZ,
+    <font color="blue">redeclare </font><a href="FCSys_Conditions_Inert_Thermal.html#FCSys.Conditions.Inert.Thermal.HeatRate">Thermal.HeatRate</a> thermal(source(k=0)));
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>SpeciesFlow;
+</pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:06:18 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 11:16:54 2013.
 </div>
 </body>
 </html>

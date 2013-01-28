@@ -1,0 +1,132 @@
+<html>
+<head>
+<title>FCSys.Conditions.Inert.Mechanical.BaseClasses</title>
+<meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
+<meta name="date" content="2013-1-29">
+<meta name="description" content="Base classes (not generally for direct use)">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+<script type="text/javascript" src="javascripts/analytics.js"></script>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="index.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="index.html">
+    <img src="images/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+  <h3>Table of Contents</h3>
+    <ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    </ul>
+
+  <h3>Download</h3>
+    <ul>
+      <li>Latest: <a href="release/FCSys-2.0.zip" rel="nofollow">FCSys-2.0.zip</a> (**Please check back soon or contact kdavies4 at gmail.com.)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Conditions.Inert.Mechanical.BaseClasses"></a><a href="FCSys_Conditions_Inert_Mechanical.html#FCSys.Conditions.Inert.Mechanical">FCSys.Conditions.Inert.Mechanical</a>.BaseClasses</h2>
+<b>Base classes (not generally for direct use)</b>
+<p>
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.BasesPackage.html#Modelica.Icons.BasesPackage">Modelica.Icons.BasesPackage</a> (Icon for packages containing base classes).
+<p><h3>Package Content</h3><p>
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Conditions.Inert.Mechanical.BaseClasses.PartialConditionS.png" alt="FCSys.Conditions.Inert.Mechanical.BaseClasses.PartialCondition" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Inert_Mechanical_BaseClasses.html#FCSys.Conditions.Inert.Mechanical.BaseClasses.PartialCondition">PartialCondition</a>
+</td><td>Partial model for a mechanical condition</td></tr>
+<tr><td><a href="FCSys_Conditions_Inert_Mechanical_BaseClasses.html#FCSys.Conditions.Inert.Mechanical.BaseClasses.ConditionType">ConditionType</a>
+</td><td>Types of conditions</td></tr>
+</table>
+<p><h3>Types and constants</h3>
+<a name="FCSys.Conditions.Inert.Mechanical.BaseClasses.ConditionType"></a><pre><font color="blue">type</font> ConditionType = <font color="blue">enumeration</font>(
+    Velocity <font color="darkgreen">&quot;Specify velocity (measure force)&quot;</font>,
+    Force <font color="darkgreen">&quot;Specify force (measure velocity)&quot;</font>,
+    Custom <font color="darkgreen">&quot;Custom expressions&quot;</font>) <font color="darkgreen">&quot;Types of conditions&quot;</font>;</pre><p>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.Inert.Mechanical.BaseClasses.PartialConditionI.png" alt="FCSys.Conditions.Inert.Mechanical.BaseClasses.PartialCondition" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.Inert.Mechanical.BaseClasses.PartialCondition"></a><a href="FCSys_Conditions_Inert_Mechanical_BaseClasses.html#FCSys.Conditions.Inert.Mechanical.BaseClasses">FCSys.Conditions.Inert.Mechanical.BaseClasses</a>.PartialCondition</h2>
+<b>Partial model for a mechanical condition</b><p>
+<img src="images/FCSys.Conditions.Inert.Mechanical.VelocityD.png" alt="FCSys.Conditions.Inert.Mechanical.BaseClasses.PartialCondition">
+<p><h3>Information</h3></p>
+Extends from <a href="FCSys_Conditions_Inert_BaseClasses.html#FCSys.Conditions.Inert.BaseClasses.PartialCondition">FCSys.Conditions.Inert.BaseClasses.PartialCondition</a> (Partial model of a condition).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis</a></td><td>axis</td><td>Axis.x</td><td>Axis</td></tr>
+<tr><td><a href="FCSys_Conditions_Inert_Mechanical_BaseClasses.html#FCSys.Conditions.Inert.Mechanical.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>&nbsp;</td><td>Type of condition</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
+<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
+<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So...</td><td>Source of internal specification</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>&nbsp;</td><td>Measurement expression</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Value of specified condition</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">Mechanical</a></td><td>mechanical</td><td>Connector to exchange linear momentum</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=3>Measurement</td></tr>
+<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Measurement expression</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">partial </font><font color="blue">model</font> PartialCondition <font color="darkgreen">
+  &quot;Partial model for a mechanical condition&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_Inert_BaseClasses.html#FCSys.Conditions.Inert.BaseClasses.PartialCondition">FCSys.Conditions.Inert.BaseClasses.PartialCondition</a>;
+
+  <font color="blue">parameter </font><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis</a> axis=Axis.x <font color="darkgreen">&quot;Axis&quot;</font>;
+
+  <font color="blue">constant </font><a href="FCSys_Conditions_Inert_Mechanical_BaseClasses.html#FCSys.Conditions.Inert.Mechanical.BaseClasses.ConditionType">ConditionType</a> conditionType <font color="darkgreen">&quot;Type of condition&quot;</font>;
+  <font color="darkgreen">// Note:  This is included so that the type of condition is recorded with the</font>
+  <font color="darkgreen">// results.</font>
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">FCSys.Connectors.Mechanical</a> mechanical(<font color="blue">final </font>n_lin=n_lin) <font color="darkgreen">
+    &quot;Connector to exchange linear momentum&quot;</font>;</textblock>
+
+<font color="blue">protected </font>
+  <font color="blue">final </font><font color="blue">parameter </font>Integer cartAxes[n_lin]=<font color="red">index</font>({inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">
+    &quot;Cartesian-axis indices of the axes of linear momentum&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer linAxes[Axis]=<font color="red">enumerate</font>({inclLinX,inclLinY,inclLinZ})
+    <font color="darkgreen">&quot;Linear momentum component indices of the Cartesian axes&quot;</font>;
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Zero values of other flows</font>
+  <font color="blue">for </font>i<font color="blue"> in </font>1:n_lin<font color="blue"> loop</font>
+    <font color="blue">if </font>cartAxes[i] &lt;&gt; axis<font color="blue"> then</font>
+      mechanical.mPhidot[i] = 0 <font color="darkgreen">&quot;Force along the other axes&quot;</font>;
+    <font color="blue">end if</font>;
+  <font color="blue">end for</font>;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>PartialCondition;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 11:16:57 2013.
+</div>
+</body>
+</html>

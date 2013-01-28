@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Regions.PEMs</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-24">
+<meta name="date" content="2013-1-28">
 <meta name="description" content="Proton exchange membranes">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,6 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
@@ -131,16 +132,14 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
     <font color="blue">final </font>inclFacesX=true,
     inclFacesY=false,
     inclFacesZ=false,
-    <font color="blue">redeclare </font><a href="FCSys_Subregions.html#FCSys.Subregions.SubregionIonomerOnly">FCSys.Subregions.SubregionIonomerOnly</a> subregions[n_x, n_y, n_z](
-      <font color="blue">each </font>inclLinX=false,
-      <font color="blue">each </font>ionomer(
+    <font color="blue">redeclare </font><a href="FCSys_Subregions.html#FCSys.Subregions.SubregionIonomerOnly">FCSys.Subregions.SubregionIonomerOnly</a> subregions[n_x, n_y, n_z](<font color="blue">
+        each </font>inclLinX=false, <font color="blue">each </font>ionomer(
         &#39;inclC19HF37O5S-&#39;=true,
         &#39;inclH+&#39;=true,
         inclH2O=true,
-        Error,
-        p_IC=0),
-      &#39;H+&#39;(xNegative(isobaric=false), xPositive(isobaric=false)),
-      H2O(xNegative(isobaric=false), xPositive(isobaric=false))));
+        &#39;C19HF37O5S-&#39;(initMethPartNum=InitMethScalar.Pressure, p_IC=0),
+        &#39;H+&#39;(xNegative(isobaric=false), xPositive(isobaric=false)),
+        H2O(xNegative(isobaric=false), xPositive(isobaric=false)))));
 
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> lambda_IC=14 <font color="darkgreen">
     &quot;Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>)&quot;</font>;
@@ -191,7 +190,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <b>DuPont<sup>TM</sup> Nafion&reg; N-112</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.PEMs.DuPontN112">
 <p><h3>Information</h3></p>
-<p>For information, see the
+<p>See the
           <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> model.</p><p>
 Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (Proton exchange membrane).
 <p><h3>Parameters</h3><p>
@@ -235,7 +234,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <b>DuPont<sup>TM</sup> Nafion&reg; N-115</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.PEMs.DuPontN115">
 <p><h3>Information</h3></p>
-<p>For information, see the
+<p>See the
                 <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> model.</p><p>
 Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (Proton exchange membrane).
 <p><h3>Parameters</h3><p>
@@ -279,7 +278,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <b>DuPont<sup>TM</sup> Nafion&reg; N-115</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.PEMs.DuPontN117">
 <p><h3>Information</h3></p>
-<p>For information, see the
+<p>See the
                 <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> model.</p><p>
 Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (Proton exchange membrane).
 <p><h3>Parameters</h3><p>
@@ -323,7 +322,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <b>DuPont<sup>TM</sup> Nafion&reg; NE-1110</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.PEMs.DuPontNE1110">
 <p><h3>Information</h3></p>
-<p>For information, see the
+<p>See the
                 <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> model.</p><p>
 Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (Proton exchange membrane).
 <p><h3>Parameters</h3><p>
@@ -368,7 +367,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <b>DuPont<sup>TM</sup> Nafion&reg; NE-1135</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.PEMs.DuPontNE1135">
 <p><h3>Information</h3></p>
-<p>For information, see the
+<p>See the
                 <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> model.</p><p>
 Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (Proton exchange membrane).
 <p><h3>Parameters</h3><p>
@@ -413,7 +412,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <b>DuPont<sup>TM</sup> Nafion&reg; NRE-1110</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.PEMs.DuPontNRE211">
 <p><h3>Information</h3></p>
-<p>For information, see the
+<p>See the
                 <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> model.</p><p>
 Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (Proton exchange membrane).
 <p><h3>Parameters</h3><p>
@@ -458,7 +457,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
 <b>DuPont<sup>TM</sup> Nafion&reg; NRE-1110</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.PEMs.DuPontNRE212">
 <p><h3>Information</h3></p>
-<p>For information, see the
+<p>See the
                 <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> model.</p><p>
 Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (Proton exchange membrane).
 <p><h3>Parameters</h3><p>
@@ -501,7 +500,7 @@ Extends from <a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a> (P
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:08:36 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 28 11:03:07 2013.
 </div>
 </body>
 </html>

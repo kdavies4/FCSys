@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Assemblies.Cells.Examples</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-24">
+<meta name="date" content="2013-1-28">
 <meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,6 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
@@ -60,6 +61,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>Apply Conditions to a cell according to a test profile, with inputs and outputs</td></tr>
 <tr><td><img src="images/FCSys.Assemblies.Cells.Examples.CellModelicaS.png" alt="FCSys.Assemblies.Cells.Examples.CellModelica" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellModelica">CellModelica</a>
 </td><td>Cell interfaced to components from the <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a> package</td></tr>
+<tr><td><img src="images/FCSys.Assemblies.Cells.Examples.plotS.png" alt="FCSys.Assemblies.Cells.Examples.plot" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.plot">plot</a>
+</td><td>&quot;**&quot;</td></tr>
 </table>
 <hr>
 
@@ -218,12 +221,27 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="red">connect</font>(tanConduct.n, anModelicaAdapt.pin);</textblock>
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>CellModelica;
 </pre>
+<hr>
+
+<h2><img src="images/FCSys.Assemblies.Cells.Examples.plotI.png" alt="FCSys.Assemblies.Cells.Examples.plot" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Assemblies.Cells.Examples.plot"></a><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples">FCSys.Assemblies.Cells.Examples</a>.plot</h2>
+<b>&quot;**&quot;</b><p>
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">function</font> plot <font color="darkgreen">&quot;\&quot;**\&quot;&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+<font color="blue">algorithm </font>
+  <font color="red">Modelica.Utilities.System.command</font>(&quot;loadres&quot;);
+<font color="blue">end </font>plot;
+</pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:08:00 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 28 11:02:30 2013.
 </div>
 </body>
 </html>

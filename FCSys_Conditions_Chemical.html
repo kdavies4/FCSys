@@ -2,8 +2,8 @@
 <head>
 <title>FCSys.Conditions.Chemical</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-24">
-<meta name="description" content="&lt;html&gt;Conditions for the &lt;a href=\&quot;modelica://FCSys.Connectors.ChemicalOutput\&quot;&gt;ChemicalOutput&lt;/a&gt; connector&lt;/html&gt;">
+<meta name="date" content="2013-1-29">
+<meta name="description" content="&lt;html&gt;Conditions for a &lt;a href=\&quot;modelica://FCSys.Connectors.ChemicalInput\&quot;&gt;ChemicalInput&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
@@ -19,6 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
@@ -43,201 +44,209 @@
       <div class="body">
 
 <h2><a name="FCSys.Conditions.Chemical"></a><a href="FCSys_Conditions.html#FCSys.Conditions">FCSys.Conditions</a>.Chemical</h2>
-<b>Conditions for the <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a> connector</b>
+<b>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a> connector</b>
 <p>
 <p><h3>Information</h3></p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
 <p><h3>Package Content</h3><p>
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="images/FCSys.Conditions.Chemical.ReactionS.png" alt="FCSys.Conditions.Chemical.Reaction" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical.Reaction">Reaction</a>
+</td><td>Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">Reaction</a> model)</td></tr>
 <tr><td><img src="images/FCSys.Conditions.Chemical.SpeciesS.png" alt="FCSys.Conditions.Chemical.Species" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical.Species">Species</a>
-</td><td>Conditions for the <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a> connector</td></tr>
+</td><td>Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalOutput</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Species">Species</a> model)</td></tr>
 <tr><td><img src="images/FCSys.Conditions.Chemical.MaterialS.png" alt="FCSys.Conditions.Chemical.Material" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Chemical_Material.html#FCSys.Conditions.Chemical.Material">Material</a>
-</td><td>Material Conditions</td></tr>
+</td><td>Conditions for additivity of volume</td></tr>
+<tr><td><img src="images/FCSys.Conditions.Chemical.MaterialS.png" alt="FCSys.Conditions.Chemical.Mechanical" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Chemical_Mechanical.html#FCSys.Conditions.Chemical.Mechanical">Mechanical</a>
+</td><td>Mechanical Conditions</td></tr>
+<tr><td><img src="images/FCSys.Conditions.Chemical.MaterialS.png" alt="FCSys.Conditions.Chemical.Fluid" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Chemical_Fluid.html#FCSys.Conditions.Chemical.Fluid">Fluid</a>
+</td><td>Fluid conditions</td></tr>
 <tr><td><img src="images/FCSys.Conditions.Chemical.BaseClassesS.png" alt="FCSys.Conditions.Chemical.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Chemical_BaseClasses.html#FCSys.Conditions.Chemical.BaseClasses">BaseClasses</a>
-</td><td>Base classes (not for direct use)</td></tr>
+</td><td>Base classes (not generally for direct use)</td></tr>
 </table>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.Chemical.SpeciesI.png" alt="FCSys.Conditions.Chemical.Species" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.Chemical.Species"></a><a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical">FCSys.Conditions.Chemical</a>.Species</h2>
-<b>Conditions for the <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a> connector</b><p>
-<img src="images/FCSys.Conditions.Chemical.SpeciesD.png" alt="FCSys.Conditions.Chemical.Species">
+<h2><img src="images/FCSys.Conditions.Chemical.ReactionI.png" alt="FCSys.Conditions.Chemical.Reaction" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.Chemical.Reaction"></a><a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical">FCSys.Conditions.Chemical</a>.Reaction</h2>
+<b>Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">Reaction</a> model)</b><p>
+<img src="images/FCSys.Conditions.Chemical.ReactionD.png" alt="FCSys.Conditions.Chemical.Reaction">
 <p><h3>Information</h3></p>
-Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.Icons.Conditions.Single">FCSys.BaseClasses.Icons.Conditions.Single</a> (Icon for a single-connector boundary condition).
+Extends from <a href="FCSys_Conditions_Chemical_BaseClasses.html#FCSys.Conditions.Chemical.BaseClasses.PartialConditions">BaseClasses.PartialConditions</a> (Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">Reaction</a> model), with efforts by default).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Material</td></tr>
-<tr><td><a href="FCSys_Conditions_Chemical_BaseClasses.html#FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMaterial">ConditionTypeMaterial</a></td><td>material</td><td>ConditionTypeMaterial.Potent...</td><td>Type of condition</td></tr>
-<tr><td>Boolean</td><td>internalMaterial</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>materialSpec</td><td>redeclare Modelica.Blocks.So...</td><td>Internal specification</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>X component of linear momentum</td></tr>
-<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>Include</td></tr>
-<tr><td><a href="FCSys_Conditions_Chemical_BaseClasses.html#FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMechanical">ConditionTypeMechanical</a></td><td>xCondition</td><td>ConditionTypeMechanical.Velo...</td><td>Type of condition</td></tr>
-<tr><td>Boolean</td><td>internalLinX</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>xSpec</td><td>redeclare Modelica.Blocks.So...</td><td>Internal specification</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Y component of linear momentum</td></tr>
-<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Include</td></tr>
-<tr><td><a href="FCSys_Conditions_Chemical_BaseClasses.html#FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMechanical">ConditionTypeMechanical</a></td><td>yCondition</td><td>ConditionTypeMechanical.Velo...</td><td>Type of condition</td></tr>
-<tr><td>Boolean</td><td>internalLinY</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>ySpec</td><td>redeclare Modelica.Blocks.So...</td><td>Internal specification</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Z component of linear momentum</td></tr>
-<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Include</td></tr>
-<tr><td><a href="FCSys_Conditions_Chemical_BaseClasses.html#FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMechanical">ConditionTypeMechanical</a></td><td>zCondition</td><td>ConditionTypeMechanical.Velo...</td><td>Type of condition</td></tr>
-<tr><td>Boolean</td><td>internalLinZ</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>zSpec</td><td>redeclare Modelica.Blocks.So...</td><td>Internal specification</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Enthalpy</td></tr>
-<tr><td><a href="FCSys_Conditions_Chemical_BaseClasses.html#FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMechanical">ConditionTypeMechanical</a></td><td>fluidCondition</td><td>ConditionTypeFluid.EnthalpyM...</td><td>Type of condition</td></tr>
-<tr><td>Boolean</td><td>internalFluid</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>fluidSpec</td><td>redeclare Modelica.Blocks.So...</td><td>Internal specification</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
+<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Conditions</td></tr>
+<tr><td><a href="FCSys_Conditions_Chemical_Material.html#FCSys.Conditions.Chemical.Material.PotentialPerTemperature">PotentialPerTemperature</a></td><td>material</td><td>redeclare Material.Potential...</td><td>Material</td></tr>
+<tr><td><a href="FCSys_Conditions_Chemical_Mechanical.html#FCSys.Conditions.Chemical.Mechanical.Velocity">Velocity</a></td><td>mechanicalX</td><td>redeclare Mechanical.Velocit...</td><td>X-axis mechanical</td></tr>
+<tr><td><a href="FCSys_Conditions_Chemical_Mechanical.html#FCSys.Conditions.Chemical.Mechanical.Velocity">Velocity</a></td><td>mechanicalY</td><td>redeclare Mechanical.Velocit...</td><td>Y-axis mechanical</td></tr>
+<tr><td><a href="FCSys_Conditions_Chemical_Mechanical.html#FCSys.Conditions.Chemical.Mechanical.Velocity">Velocity</a></td><td>mechanicalZ</td><td>redeclare Mechanical.Velocit...</td><td>Z-axis mechanical</td></tr>
+<tr><td><a href="FCSys_Conditions_Chemical_Fluid.html#FCSys.Conditions.Chemical.Fluid.EnthalpyMassic">EnthalpyMassic</a></td><td>fluid</td><td>redeclare Fluid.EnthalpyMass...</td><td>Fluid</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a></td><td>chemical</td><td>Single-species connector for material, with advection of linear momentum and enthalpy</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Bus of inputs to specify conditions</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Input bus for values of specified conditions</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a></td><td>chemical</td><td>Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as input</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Reaction <font color="darkgreen">
+  &quot;Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">Reaction</a> model)&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_Chemical_BaseClasses.html#FCSys.Conditions.Chemical.BaseClasses.PartialConditions">BaseClasses.PartialConditions</a>;
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">FCSys.Connectors.ChemicalInput</a> chemical(<font color="blue">final </font>n_lin=<font color="red">countTrue</font>({inclLinX,
+        inclLinY,inclLinZ})) <font color="darkgreen">
+    &quot;Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as input&quot;</font>;
+    </textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(material.chemical, chemical);
+  <font color="red">connect</font>(mechanicalX.chemical, chemical);
+  <font color="red">connect</font>(mechanicalY.chemical, chemical);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalZ.chemical, chemical);
+  <font color="red">connect</font>(fluid.chemical, chemical);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Reaction;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.Chemical.SpeciesI.png" alt="FCSys.Conditions.Chemical.Species" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.Chemical.Species"></a><a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical">FCSys.Conditions.Chemical</a>.Species</h2>
+<b>Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalOutput</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Species">Species</a> model)</b><p>
+<img src="images/FCSys.Conditions.Chemical.SpeciesD.png" alt="FCSys.Conditions.Chemical.Species">
+<p><h3>Information</h3></p>
+Extends from <a href="FCSys_Conditions_Chemical_BaseClasses.html#FCSys.Conditions.Chemical.BaseClasses.PartialConditions">BaseClasses.PartialConditions</a> (Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">Reaction</a> model), with efforts by default).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
+<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Conditions</td></tr>
+<tr><td><a href="FCSys_Conditions_Chemical_Material.html#FCSys.Conditions.Chemical.Material.PotentialPerTemperature">PotentialPerTemperature</a></td><td>material</td><td>redeclare Material.Potential...</td><td>Material</td></tr>
+<tr><td><a href="FCSys_Conditions_Chemical_Mechanical.html#FCSys.Conditions.Chemical.Mechanical.Velocity">Velocity</a></td><td>mechanicalX</td><td>redeclare Mechanical.Velocit...</td><td>X-axis mechanical</td></tr>
+<tr><td><a href="FCSys_Conditions_Chemical_Mechanical.html#FCSys.Conditions.Chemical.Mechanical.Velocity">Velocity</a></td><td>mechanicalY</td><td>redeclare Mechanical.Velocit...</td><td>Y-axis mechanical</td></tr>
+<tr><td><a href="FCSys_Conditions_Chemical_Mechanical.html#FCSys.Conditions.Chemical.Mechanical.Velocity">Velocity</a></td><td>mechanicalZ</td><td>redeclare Mechanical.Velocit...</td><td>Z-axis mechanical</td></tr>
+<tr><td><a href="FCSys_Conditions_Chemical_Fluid.html#FCSys.Conditions.Chemical.Fluid.EnthalpyMassic">EnthalpyMassic</a></td><td>fluid</td><td>redeclare Fluid.EnthalpyMass...</td><td>Fluid</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Input bus for values of specified conditions</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a></td><td>chemical</td><td>Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as output</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">model</font> Species <font color="darkgreen">
-  &quot;Conditions for the <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a> connector&quot;</font>
-
-  <font color="blue">import </font><a href="FCSys_Conditions_Chemical_BaseClasses.html#FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMaterial">FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMaterial</a>;
-  <font color="blue">import </font><a href="FCSys_Conditions_Chemical_BaseClasses.html#FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMechanical">FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMechanical</a>;
-  <font color="blue">import </font><a href="FCSys_Conditions_Chemical_BaseClasses.html#FCSys.Conditions.Chemical.BaseClasses.ConditionTypeFluid">FCSys.Conditions.Chemical.BaseClasses.ConditionTypeFluid</a>;
-  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.Icons.Conditions.Single">FCSys.BaseClasses.Icons.Conditions.Single</a>;
+  &quot;Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalOutput</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Species">Species</a> model)&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_Chemical_BaseClasses.html#FCSys.Conditions.Chemical.BaseClasses.PartialConditions">BaseClasses.PartialConditions</a>;
 
   <font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a> <font color="blue">
     constrainedby </font>FCSys.Characteristics.BaseClasses.Characteristic <font color="darkgreen">
     &quot;Characteristic data&quot;</font>;
 
-  <font color="darkgreen">// Material</font>
-  <font color="blue">parameter </font><a href="FCSys_Conditions_Chemical_BaseClasses.html#FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMaterial">ConditionTypeMaterial</a> material=ConditionTypeMaterial.PotentialPerTemperature
-    <font color="darkgreen">&quot;Type of condition&quot;</font>;
-  <font color="blue">parameter </font>Boolean internalMaterial=true <font color="darkgreen">&quot;Use internal specification&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Modelica.Blocks.Sources.Constant</a> materialSpec(k(start=<font color="red">Data.g</font>(298.15
-          *U.K)/(298.15*U.K))) <font color="blue">if </font>internalMaterial <font color="blue">constrainedby </font>
-    Modelica.Blocks.Interfaces.SO <font color="darkgreen">&quot;Internal specification&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">FCSys.Connectors.ChemicalOutput</a> chemical(<font color="blue">final </font>n_lin=<font color="red">countTrue</font>({inclLinX,
+        inclLinY,inclLinZ})) <font color="darkgreen">
+    &quot;Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as output&quot;</font>;
+    </textblock>
 
-  <font color="darkgreen">// X component of linear momentum</font>
-  <font color="blue">parameter </font>Boolean inclLinX=true <font color="darkgreen">&quot;Include&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Conditions_Chemical_BaseClasses.html#FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMechanical">ConditionTypeMechanical</a> xCondition=ConditionTypeMechanical.Velocity
-    <font color="darkgreen">&quot;Type of condition&quot;</font>;
-  <font color="blue">parameter </font>Boolean internalLinX=true <font color="darkgreen">&quot;Use internal specification&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Modelica.Blocks.Sources.Constant</a> xSpec(k(start=0)) <font color="blue">if </font>inclLinX<font color="blue">
-     and </font>internalLinX <font color="blue">constrainedby </font>Modelica.Blocks.Interfaces.SO <font color="darkgreen">
-    &quot;Internal specification&quot;</font>;</textblock>
-
-  <font color="darkgreen">// Y component of linear momentum</font>
-  <font color="blue">parameter </font>Boolean inclLinY=false <font color="darkgreen">&quot;Include&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Conditions_Chemical_BaseClasses.html#FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMechanical">ConditionTypeMechanical</a> yCondition=ConditionTypeMechanical.Velocity
-    <font color="darkgreen">&quot;Type of condition&quot;</font>;
-  <font color="blue">parameter </font>Boolean internalLinY=true <font color="darkgreen">&quot;Use internal specification&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Modelica.Blocks.Sources.Constant</a> ySpec(k(start=0)) <font color="blue">if </font>inclLinY<font color="blue">
-     and </font>internalLinY <font color="blue">constrainedby </font>Modelica.Blocks.Interfaces.SO <font color="darkgreen">
-    &quot;Internal specification&quot;</font>;</textblock>
-
-  <font color="darkgreen">// Z component of linear momentum</font>
-  <font color="blue">parameter </font>Boolean inclLinZ=false <font color="darkgreen">&quot;Include&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Conditions_Chemical_BaseClasses.html#FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMechanical">ConditionTypeMechanical</a> zCondition=ConditionTypeMechanical.Velocity
-    <font color="darkgreen">&quot;Type of condition&quot;</font>;
-  <font color="blue">parameter </font>Boolean internalLinZ=true <font color="darkgreen">&quot;Use internal specification&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Modelica.Blocks.Sources.Constant</a> zSpec(k(start=0)) <font color="blue">if </font>inclLinZ<font color="blue">
-     and </font>internalLinZ <font color="blue">constrainedby </font>Modelica.Blocks.Interfaces.SO <font color="darkgreen">
-    &quot;Internal specification&quot;</font>;</textblock>
-
-  <font color="darkgreen">// Enthalpy</font>
-  <font color="blue">parameter </font><a href="FCSys_Conditions_Chemical_BaseClasses.html#FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMechanical">ConditionTypeMechanical</a> fluidCondition=ConditionTypeFluid.EnthalpyMassic
-    <font color="darkgreen">&quot;Type of condition&quot;</font>;
-  <font color="blue">parameter </font>Boolean internalFluid=true <font color="darkgreen">&quot;Use internal specification&quot;</font>;
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Modelica.Blocks.Sources.Constant</a> fluidSpec(k(start=<font color="red">Data.h</font>()/Data.m))
-    <font color="blue">if </font>internalFluid <font color="blue">constrainedby </font>Modelica.Blocks.Interfaces.SO <font color="darkgreen">
-    &quot;Internal specification&quot;</font>;</textblock>
-
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">FCSys.Connectors.ChemicalOutput</a> chemical(
-    <font color="blue">final </font>n_lin=n_lin,
-    <font color="blue">final </font>formula=Data.formula,
-    <font color="blue">final </font>m=Data.m) <font color="darkgreen">
-    &quot;Single-species connector for material, with advection of linear momentum and enthalpy&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">FCSys.Connectors.RealInputBus</a> u <font color="darkgreen">&quot;Bus of inputs to specify conditions&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical.Species.Properties">Properties</a> properties(<font color="blue">final </font>n_lin=n_lin,<font color="blue">final </font>Data=Data);</textblock>
 
 <font color="blue">protected </font>
   <font color="blue">final </font><font color="blue">parameter </font>Integer n_lin=<font color="red">countTrue</font>({inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">
     &quot;Number of components of linear momentum&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputInternal">FCSys.Connectors.RealInputInternal</a> u_material(<font color="blue">final </font>unit=<font color="blue">if </font>material ==
-        ConditionTypeMaterial.PotentialPerTemperature<font color="blue"> then </font>&quot;1&quot;<font color="blue"> else </font>&quot;N/T&quot;) <font color="blue">if </font><font color="blue">
-    not </font>internalMaterial <font color="darkgreen">&quot;Material signal&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputInternal">FCSys.Connectors.RealInputInternal</a> u_x(<font color="blue">final </font>unit=&quot;l/T&quot;) <font color="blue">if </font><font color="blue">not </font>internalLinX<font color="blue">
-     and </font>inclLinX <font color="darkgreen">&quot;Signal for the x component of linear momentum&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputInternal">FCSys.Connectors.RealInputInternal</a> u_y(<font color="blue">final </font>unit=&quot;l/T&quot;) <font color="blue">if </font><font color="blue">not </font>internalLinY<font color="blue">
-     and </font>inclLinY <font color="darkgreen">&quot;Signal for the y component of linear momentum&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputInternal">FCSys.Connectors.RealInputInternal</a> u_z(<font color="blue">final </font>unit=&quot;l/T&quot;) <font color="blue">if </font><font color="blue">not </font>internalLinZ<font color="blue">
-     and </font>inclLinZ <font color="darkgreen">&quot;Signal for the z component of linear momentum&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputInternal">FCSys.Connectors.RealInputInternal</a> u_fluid(<font color="blue">final </font>unit=&quot;l2/T2&quot;) <font color="blue">if </font><font color="blue">not </font>
-    internalFluid <font color="darkgreen">&quot;Fluid signal&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputInternal">FCSys.Connectors.RealInputInternal</a> u_material_int <font color="darkgreen">&quot;Internal material signal&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputInternal">FCSys.Connectors.RealInputInternal</a> u_int[n_lin] <font color="darkgreen">&quot;Internal mechanical signal&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputInternal">FCSys.Connectors.RealInputInternal</a> u_fluid_int <font color="darkgreen">&quot;Internal fluid signal&quot;</font>;</textblock>
+  <textblock type="model" expanded="false" path="FCSys.Conditions.Chemical.Species.Properties"><font color="blue">model</font> Properties <font color="darkgreen">
+    &quot;Apply material data to a ChemicalOutput connector&quot;</font>
+    <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.ContinuousShort">FCSys.BaseClasses.Icons.Blocks.ContinuousShort</a>;
+    <font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>
+      <font color="blue">constrainedby </font>FCSys.Characteristics.BaseClasses.Characteristic <font color="darkgreen">
+      &quot;Characteristic data&quot;</font>;
+    <font color="blue">parameter </font>Integer n_lin <font color="darkgreen">&quot;Number of components of linear momentum&quot;</font>;
+
+<textblock type="annotcomp" expanded="false">    <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">FCSys.Connectors.ChemicalOutput</a> chemical(<font color="blue">final </font>n_lin=n_lin) <font color="darkgreen">
+      &quot;Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as output&quot;</font>;
+      </textblock>
+
+  <font color="blue">equation </font>
+    <font color="darkgreen">// Material data</font>
+    chemical.formula = Data.formula;
+    chemical.m = Data.m;
+
+    <font color="darkgreen">// Zero flows</font>
+    chemical.Ndot = 0;
+    chemical.mPhidot = <font color="red">zeros</font>(n_lin);
+    chemical.Hdot = 0;
+
+  <font color="blue">end </font>Properties</textblock>;
 
 <font color="blue">equation </font>
-  <font color="darkgreen">// Material</font>
-  <font color="blue">if </font>material == ConditionTypeMaterial.PotentialPerTemperature<font color="blue"> then</font>
-    chemical.muPerT = u_material_int;
-  <font color="blue">else</font>
-    chemical.Ndot = u_material_int;
-  <font color="blue">end if</font>;
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(material.chemical, chemical);
+  <font color="red">connect</font>(mechanicalX.chemical, chemical);
+  <font color="red">connect</font>(mechanicalY.chemical, chemical);</textblock>
 
-  <font color="darkgreen">// X component of linear momentum</font>
-  <font color="blue">if </font>inclLinX<font color="blue"> then</font>
-    <font color="darkgreen">//  if xCondition == ConditionTypeMechanical.Velocity then</font>
-    chemical.phi[1] = u_int[1];
-    <font color="darkgreen">//  end if;</font>
-  <font color="blue">end if</font>;
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalZ.chemical, chemical);
+  <font color="red">connect</font>(fluid.chemical, chemical);</textblock>
 
-  <font color="darkgreen">// Y component of linear momentum</font>
-  <font color="blue">if </font>inclLinY<font color="blue"> then</font>
-    <font color="darkgreen">//  if yCondition == ConditionTypeMechanical.Velocity then</font>
-    chemical.phi[2] = u_int[2];
-    <font color="darkgreen">//  end if;</font>
-  <font color="blue">end if</font>;
-
-  <font color="darkgreen">// Z component of linear momentum</font>
-  <font color="blue">if </font>inclLinZ<font color="blue"> then</font>
-    <font color="darkgreen">//  if zCondition == ConditionTypeMechanical.Velocity then</font>
-    chemical.phi[3] = u_int[3];
-    <font color="darkgreen">//  end if;</font>
-  <font color="blue">end if</font>;
-
-  <font color="darkgreen">// Enthalpy</font>
-  <font color="darkgreen">//  if fluidCondition == ConditionTypeFluid.EnthalpyMassic then</font>
-  chemical.hbar = u_fluid_int;
-  <font color="darkgreen">//  end if;</font>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u.material, u_material);
-  <font color="red">connect</font>(u.x, u_x);
-  <font color="red">connect</font>(u.y, u_y);
-  <font color="red">connect</font>(u.z, u_z);
-  <font color="red">connect</font>(u.fluid, u_fluid);
-  <font color="red">connect</font>(u_material_int, u_material);
-  <font color="red">connect</font>(u_x, u_int[1]);
-  <font color="red">connect</font>(u_y, u_int[2]);
-  <font color="red">connect</font>(u_z, u_int[3]);
-  <font color="red">connect</font>(u_fluid, u_fluid_int);
-  <font color="red">connect</font>(materialSpec.y, u_material_int);
-  <font color="red">connect</font>(xSpec.y, u_int[1]);
-  <font color="red">connect</font>(ySpec.y, u_int[2]);
-  <font color="red">connect</font>(zSpec.y, u_int[3]);
-  <font color="red">connect</font>(fluidSpec.y, u_fluid_int);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(properties.chemical, chemical);</textblock>
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>Species;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Conditions.Chemical.Species.PropertiesI.png" alt="FCSys.Conditions.Chemical.Species.Properties" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.Chemical.Species.Properties"></a><a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical.Species">FCSys.Conditions.Chemical.Species</a>.Properties</h2>
+<b>Apply material data to a ChemicalOutput connector</b><p>
+<img src="images/FCSys.Conditions.Chemical.Species.PropertiesD.png" alt="FCSys.Conditions.Chemical.Species.Properties">
+<p><h3>Information</h3></p>
+Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.ContinuousShort">FCSys.BaseClasses.Icons.Blocks.ContinuousShort</a> (Short icon for a continuous block).
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Integer</td><td>n_lin</td><td>&nbsp;</td><td>Number of components of linear momentum</td></tr>
+</table>
+<p><h3>Connectors</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a></td><td>chemical</td><td>Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as output</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">model</font> Properties <font color="darkgreen">&quot;Apply material data to a ChemicalOutput connector&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.ContinuousShort">FCSys.BaseClasses.Icons.Blocks.ContinuousShort</a>;
+  <font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a> <font color="blue">
+    constrainedby </font>FCSys.Characteristics.BaseClasses.Characteristic <font color="darkgreen">
+    &quot;Characteristic data&quot;</font>;
+  <font color="blue">parameter </font>Integer n_lin <font color="darkgreen">&quot;Number of components of linear momentum&quot;</font>;
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">FCSys.Connectors.ChemicalOutput</a> chemical(<font color="blue">final </font>n_lin=n_lin) <font color="darkgreen">
+    &quot;Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as output&quot;</font>;
+    </textblock>
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Material data</font>
+  chemical.formula = Data.formula;
+  chemical.m = Data.m;
+
+  <font color="darkgreen">// Zero flows</font>
+  chemical.Ndot = 0;
+  chemical.mPhidot = <font color="red">zeros</font>(n_lin);
+  chemical.Hdot = 0;
+
+<font color="blue">end </font>Properties;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:06:15 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 11:16:38 2013.
 </div>
 </body>
 </html>

@@ -2,8 +2,8 @@
 <head>
 <title>FCSys.Conditions.FacePair</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-24">
-<meta name="description" content="&lt;html&gt;Conditions for a pair of &lt;a href=\&quot;modelica://FCSys.Connectors.Face\&quot;&gt;Face&lt;/a&gt; connectors&lt;/html&gt;">
+<meta name="date" content="2013-1-29">
+<meta name="description" content="&lt;html&gt;Conditions for a pair of &lt;a href=\&quot;modelica://FCSys.Connectors.Face\&quot;&gt;Face&lt;/a&gt; connectors (e.g., as in a &lt;a href=\&quot;modelica://FCSys.Subregions.Species\&quot;&gt;Species&lt;/a&gt; model)&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
@@ -19,6 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
@@ -43,7 +44,7 @@
       <div class="body">
 
 <h2><a name="FCSys.Conditions.FacePair"></a><a href="FCSys_Conditions.html#FCSys.Conditions">FCSys.Conditions</a>.FacePair</h2>
-<b>Conditions for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> connectors</b>
+<b>Conditions for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> connectors (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Species">Species</a> model)</b>
 <p>
 <p><h3>Information</h3></p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
@@ -51,7 +52,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Conditions.FacePair.SpeciesS.png" alt="FCSys.Conditions.FacePair.Species" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FacePair.html#FCSys.Conditions.FacePair.Species">Species</a>
-</td><td>Condition for a pair of faces of a <a href="FCSys_Subregions.html#FCSys.Subregions.Species">Species</a> model (single-species)</td></tr>
+</td><td>Conditions for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> connectors</td></tr>
 <tr><td><img src="images/FCSys.Conditions.FacePair.NormalS.png" alt="FCSys.Conditions.FacePair.Normal" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FacePair_Normal.html#FCSys.Conditions.FacePair.Normal">Normal</a>
 </td><td>Normal mechanical Conditions</td></tr>
 <tr><td><img src="images/FCSys.Conditions.FacePair.NormalS.png" alt="FCSys.Conditions.FacePair.Transverse" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FacePair_Transverse.html#FCSys.Conditions.FacePair.Transverse">Transverse</a>
@@ -59,88 +60,92 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Conditions.FacePair.NormalS.png" alt="FCSys.Conditions.FacePair.Thermal" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FacePair_Thermal.html#FCSys.Conditions.FacePair.Thermal">Thermal</a>
 </td><td>Thermal Conditions</td></tr>
 <tr><td><img src="images/FCSys.Conditions.FacePair.BaseClassesS.png" alt="FCSys.Conditions.FacePair.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FacePair_BaseClasses.html#FCSys.Conditions.FacePair.BaseClasses">BaseClasses</a>
-</td><td>Base classes (not for direct use)</td></tr>
+</td><td>Base classes (not generally for direct use)</td></tr>
 </table>
 <hr>
 
 <h2><img src="images/FCSys.Conditions.FacePair.SpeciesI.png" alt="FCSys.Conditions.FacePair.Species" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.FacePair.Species"></a><a href="FCSys_Conditions_FacePair.html#FCSys.Conditions.FacePair">FCSys.Conditions.FacePair</a>.Species</h2>
-<b>Condition for a pair of faces of a <a href="FCSys_Subregions.html#FCSys.Subregions.Species">Species</a> model (single-species)</b><p>
+<b>Conditions for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> connectors</b><p>
 <img src="images/FCSys.Conditions.FacePair.SpeciesD.png" alt="FCSys.Conditions.FacePair.Species">
 <p><h3>Information</h3></p>
-Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.Icons.Conditions.Double">FCSys.BaseClasses.Icons.Conditions.Double</a> (Icon for a two-connector boundary condition).
+Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Double">FCSys.Conditions.BaseClasses.Icons.Double</a> (Icon for a two-connector boundary condition).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Linear momentum</td></tr>
-<tr><td><a href="FCSys_Conditions_FacePair_Normal.html#FCSys.Conditions.FacePair.Normal.CurrentAreic">CurrentAreic</a></td><td>normal</td><td>redeclare Normal.CurrentArei...</td><td>Normal condition</td></tr>
-<tr><td><a href="FCSys_Conditions_FacePair_Transverse.html#FCSys.Conditions.FacePair.Transverse.Velocity">Velocity</a></td><td>transverse1</td><td>redeclare Transverse.Velocit...</td><td>1<sup>st</sup> transverse condition</td></tr>
-<tr><td><a href="FCSys_Conditions_FacePair_Transverse.html#FCSys.Conditions.FacePair.Transverse.Velocity">Velocity</a></td><td>transverse2</td><td>redeclare Transverse.Velocit...</td><td>2<sup>nd</sup> transverse condition</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Heat</td></tr>
-<tr><td><a href="FCSys_Conditions_FacePair_Thermal.html#FCSys.Conditions.FacePair.Thermal.Temperature">Temperature</a></td><td>thermal</td><td>redeclare Thermal.Temperatur...</td><td>Type of condition</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Conditions</td></tr>
+<tr><td><a href="FCSys_Conditions_FacePair_Normal.html#FCSys.Conditions.FacePair.Normal.CurrentAreic">CurrentAreic</a></td><td>normal</td><td>redeclare Normal.CurrentArei...</td><td>Normal</td></tr>
+<tr><td><a href="FCSys_Conditions_FacePair_Transverse.html#FCSys.Conditions.FacePair.Transverse.Velocity">Velocity</a></td><td>transverse1</td><td>redeclare Transverse.Velocit...</td><td>1<sup>st</sup> transverse</td></tr>
+<tr><td><a href="FCSys_Conditions_FacePair_Transverse.html#FCSys.Conditions.FacePair.Transverse.Velocity">Velocity</a></td><td>transverse2</td><td>redeclare Transverse.Velocit...</td><td>2<sup>nd</sup> transverse</td></tr>
+<tr><td><a href="FCSys_Conditions_FacePair_Thermal.html#FCSys.Conditions.FacePair.Thermal.Temperature">Temperature</a></td><td>thermal</td><td>redeclare Thermal.Temperatur...</td><td>Thermal</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Input bus for external signal sources</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>negative</td><td>Negative face</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>positive</td><td>Positive face</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>negative</td><td>Negative-side single-species connector for linear momentum and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>positive</td><td>Positive-side single-species connector for linear momentum and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Input bus for values of specified conditions</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">model</font> Species <font color="darkgreen">
-  &quot;Condition for a pair of faces of a <a href="FCSys_Subregions.html#FCSys.Subregions.Species">Species</a> model (single-species)&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.Icons.Conditions.Double">FCSys.BaseClasses.Icons.Conditions.Double</a>;
+  &quot;Conditions for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> connectors&quot;</font>
 
-  <font color="darkgreen">// Normal</font>
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Conditions_FacePair_Normal.html#FCSys.Conditions.FacePair.Normal.CurrentAreic">Normal.CurrentAreic</a> normal <font color="blue">constrainedby </font>
-    Normal.BaseClasses.PartialCondition <font color="darkgreen">&quot;Normal condition&quot;</font>;</textblock>
+  <font color="blue">extends </font><a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Double">FCSys.Conditions.BaseClasses.Icons.Double</a>;
 
-  <font color="darkgreen">// 1st transverse</font>
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Conditions_FacePair_Transverse.html#FCSys.Conditions.FacePair.Transverse.Velocity">Transverse.Velocity</a> transverse1(spec(k=0),<font color="blue">final </font>orientation=
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Conditions_FacePair_Normal.html#FCSys.Conditions.FacePair.Normal.CurrentAreic">Normal.CurrentAreic</a> normal(source(k=0)) <font color="blue">constrainedby </font>
+    Normal.BaseClasses.PartialCondition <font color="darkgreen">&quot;Normal&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_FacePair_Transverse.html#FCSys.Conditions.FacePair.Transverse.Velocity">Transverse.Velocity</a> transverse1(source(k=0),<font color="blue">final </font>orientation=
         Orientation.preceding) <font color="blue">constrainedby </font>
     Transverse.BaseClasses.PartialCondition <font color="darkgreen">
-    &quot;1<sup>st</sup> transverse condition&quot;</font>;</textblock>
-
-  <font color="darkgreen">// 2nd transverse</font>
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Conditions_FacePair_Transverse.html#FCSys.Conditions.FacePair.Transverse.Velocity">Transverse.Velocity</a> transverse2(spec(k=0),<font color="blue">final </font>orientation=
+    &quot;1<sup>st</sup> transverse&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_FacePair_Transverse.html#FCSys.Conditions.FacePair.Transverse.Velocity">Transverse.Velocity</a> transverse2(source(k=0),<font color="blue">final </font>orientation=
         Orientation.following) <font color="blue">constrainedby </font>
     Transverse.BaseClasses.PartialCondition <font color="darkgreen">
-    &quot;2<sup>nd</sup> transverse condition&quot;</font>;</textblock>
-
-  <font color="darkgreen">// Thermal</font>
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Conditions_FacePair_Thermal.html#FCSys.Conditions.FacePair.Thermal.Temperature">Thermal.Temperature</a> thermal(spec(k(start=298.15*U.K))) <font color="blue">
-    constrainedby </font>Thermal.BaseClasses.PartialCondition <font color="darkgreen">&quot;Type of condition&quot;</font>;</textblock>
+    &quot;2<sup>nd</sup> transverse&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_FacePair_Thermal.html#FCSys.Conditions.FacePair.Thermal.Temperature">Thermal.Temperature</a> thermal(source(k=298.15*U.K)) <font color="blue">constrainedby </font>
+    Thermal.BaseClasses.PartialCondition <font color="darkgreen">&quot;Thermal&quot;</font>;</textblock>
   <font color="darkgreen">// Note:  In Dymola 7.4, the value of k must be specified here instead</font>
-  <font color="darkgreen">// of at the lower level (e.g., Thermal.Temperature) so that the spec</font>
+  <font color="darkgreen">// of at the lower level (e.g., Thermal.Temperature) so that the source</font>
   <font color="darkgreen">// subcomponent can be replaced by blocks that don&#39;t contain the</font>
   <font color="darkgreen">// parameter k.</font>
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">FCSys.Connectors.RealInputBus</a> u <font color="darkgreen">&quot;Input bus for external signal sources&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">FCSys.Connectors.Face</a> negative <font color="darkgreen">&quot;Negative face&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">FCSys.Connectors.Face</a> positive <font color="darkgreen">&quot;Positive face&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">FCSys.Connectors.Face</a> negative <font color="darkgreen">
+    &quot;Negative-side single-species connector for linear momentum and heat&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">FCSys.Connectors.Face</a> positive <font color="darkgreen">
+    &quot;Positive-side single-species connector for linear momentum and heat&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">FCSys.Connectors.RealInputBus</a> u <font color="darkgreen">
+    &quot;Input bus for values of specified conditions&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">FCSys.Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Output bus of measurements&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Normal</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u.normal, normal.u);
-  <font color="red">connect</font>(normal.negative, negative);
-  <font color="red">connect</font>(normal.positive, positive);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(negative, normal.negative);
+  <font color="red">connect</font>(normal.positive, positive);
+  <font color="red">connect</font>(u.normal, normal.u);
+  <font color="red">connect</font>(normal.y, y.normal);</textblock>
 
   <font color="darkgreen">// 1st transverse</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u.transverse1, transverse1.u);
-  <font color="red">connect</font>(transverse1.negative, negative);
-  <font color="red">connect</font>(transverse1.positive, positive);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(negative, transverse1.negative);
+  <font color="red">connect</font>(transverse1.positive, positive);
+  <font color="red">connect</font>(u.transverse1, transverse1.u);
+  <font color="red">connect</font>(transverse1.y, y.transverse1);</textblock>
 
   <font color="darkgreen">// 2nd transverse</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u.transverse2, transverse2.u);</textblock>
-
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverse2.negative, negative);
-  <font color="red">connect</font>(transverse2.positive, positive);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(negative, transverse2.negative);
+  <font color="red">connect</font>(transverse2.positive, positive);
+  <font color="red">connect</font>(u.transverse2, transverse2.u);
+  <font color="red">connect</font>(transverse2.y, y.transverse2);</textblock>
 
   <font color="darkgreen">// Thermal</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u.thermal, thermal.u);
-  <font color="red">connect</font>(thermal.negative, negative);
-  <font color="red">connect</font>(thermal.positive, positive);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(negative, thermal.negative);
+  <font color="red">connect</font>(thermal.positive, positive);
+  <font color="red">connect</font>(u.thermal, thermal.u);
+  <font color="red">connect</font>(thermal.y, y.thermal);</textblock>
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>Species;
 </pre>
       </div>
@@ -148,7 +153,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:07:14 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 11:17:59 2013.
 </div>
 </body>
 </html>

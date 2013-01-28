@@ -2,8 +2,8 @@
 <head>
 <title>FCSys.Conditions.InertAmagat.Mechanical.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-24">
-<meta name="description" content="Base classes (not for direct use)">
+<meta name="date" content="2013-1-29">
+<meta name="description" content="Base classes (not generally for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
@@ -19,6 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
@@ -43,7 +44,7 @@
       <div class="body">
 
 <h2><a name="FCSys.Conditions.InertAmagat.Mechanical.BaseClasses"></a><a href="FCSys_Conditions_InertAmagat_Mechanical.html#FCSys.Conditions.InertAmagat.Mechanical">FCSys.Conditions.InertAmagat.Mechanical</a>.BaseClasses</h2>
-<b>Base classes (not for direct use)</b>
+<b>Base classes (not generally for direct use)</b>
 <p>
 <p><h3>Information</h3></p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.BasesPackage.html#Modelica.Icons.BasesPackage">Modelica.Icons.BasesPackage</a> (Icon for packages containing base classes).
@@ -53,43 +54,49 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Conditions.InertAmagat.Mechanical.BaseClasses.PartialConditionS.png" alt="FCSys.Conditions.InertAmagat.Mechanical.BaseClasses.PartialCondition" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_InertAmagat_Mechanical_BaseClasses.html#FCSys.Conditions.InertAmagat.Mechanical.BaseClasses.PartialCondition">PartialCondition</a>
 </td><td>Partial model for a mechanical condition</td></tr>
 <tr><td><a href="FCSys_Conditions_InertAmagat_Mechanical_BaseClasses.html#FCSys.Conditions.InertAmagat.Mechanical.BaseClasses.ConditionType">ConditionType</a>
-</td><td>Types of Conditions</td></tr>
+</td><td>Types of conditions</td></tr>
 </table>
 <p><h3>Types and constants</h3>
 <a name="FCSys.Conditions.InertAmagat.Mechanical.BaseClasses.ConditionType"></a><pre><font color="blue">type</font> ConditionType = <font color="blue">enumeration</font>(
-    Velocity <font color="darkgreen">&quot;Velocity&quot;</font>,
-    Force <font color="darkgreen">&quot;Force&quot;</font>) <font color="darkgreen">&quot;Types of Conditions&quot;</font>;</pre><p>
+    Velocity <font color="darkgreen">&quot;Specify velocity (measure force)&quot;</font>,
+    Force <font color="darkgreen">&quot;Specify force (measure velocity)&quot;</font>,
+    Custom <font color="darkgreen">&quot;Custom expressions&quot;</font>) <font color="darkgreen">&quot;Types of conditions&quot;</font>;</pre><p>
 <hr>
 
 <h2><img src="images/FCSys.Conditions.InertAmagat.Mechanical.BaseClasses.PartialConditionI.png" alt="FCSys.Conditions.InertAmagat.Mechanical.BaseClasses.PartialCondition" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.InertAmagat.Mechanical.BaseClasses.PartialCondition"></a><a href="FCSys_Conditions_InertAmagat_Mechanical_BaseClasses.html#FCSys.Conditions.InertAmagat.Mechanical.BaseClasses">FCSys.Conditions.InertAmagat.Mechanical.BaseClasses</a>.PartialCondition</h2>
 <b>Partial model for a mechanical condition</b><p>
-<img src="images/FCSys.Conditions.InertAmagat.Volume.PressureD.png" alt="FCSys.Conditions.InertAmagat.Mechanical.BaseClasses.PartialCondition">
+<img src="images/FCSys.Conditions.InertAmagat.Amagat.PressureD.png" alt="FCSys.Conditions.InertAmagat.Mechanical.BaseClasses.PartialCondition">
 <p><h3>Information</h3></p>
-Extends from <a href="FCSys_Conditions_InertAmagat_BaseClasses.html#FCSys.Conditions.InertAmagat.BaseClasses.PartialCondition">FCSys.Conditions.InertAmagat.BaseClasses.PartialCondition</a> (Partial model of a condition).
+Extends from <a href="FCSys_Conditions_InertAmagat_BaseClasses.html#FCSys.Conditions.InertAmagat.BaseClasses.PartialCondition">InertAmagat.BaseClasses.PartialCondition</a> (Partial model of a condition).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>spec</td><td>redeclare Modelica.Blocks.So...</td><td>Internal specification</td></tr>
 <tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis</a></td><td>axis</td><td>Axis.x</td><td>Axis</td></tr>
 <tr><td><a href="FCSys_Conditions_InertAmagat_Mechanical_BaseClasses.html#FCSys.Conditions.InertAmagat.Mechanical.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>&nbsp;</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
 <tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
 <tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
+<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So...</td><td>Source of internal specification</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>&nbsp;</td><td>Measurement expression</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Value of condition</td></tr>
+<tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Value of specified condition</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a></td><td>inert</td><td>Connector for linear momentum and heat, with additivity of volume</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=3>Measurement</td></tr>
+<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Measurement expression</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">partial </font><font color="blue">model</font> PartialCondition <font color="darkgreen">
   &quot;Partial model for a mechanical condition&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_Conditions_InertAmagat_BaseClasses.html#FCSys.Conditions.InertAmagat.BaseClasses.PartialCondition">FCSys.Conditions.InertAmagat.BaseClasses.PartialCondition</a>;
+  <font color="blue">extends </font><a href="FCSys_Conditions_InertAmagat_BaseClasses.html#FCSys.Conditions.InertAmagat.BaseClasses.PartialCondition">InertAmagat.BaseClasses.PartialCondition</a>;
 
   <font color="blue">parameter </font><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis</a> axis=Axis.x <font color="darkgreen">&quot;Axis&quot;</font>;
 
@@ -104,13 +111,14 @@ Extends from <a href="FCSys_Conditions_InertAmagat_BaseClasses.html#FCSys.Condit
     <font color="darkgreen">&quot;Linear momentum component indices of the Cartesian axes&quot;</font>;
 
 <font color="blue">equation </font>
-  inert.V = 0 <font color="darkgreen">&quot;No volume&quot;</font>;
+  <font color="darkgreen">// Zero values of other flows</font>
+  inert.V = 0 <font color="darkgreen">&quot;Volume&quot;</font>;
   <font color="blue">for </font>i<font color="blue"> in </font>1:n_lin<font color="blue"> loop</font>
     <font color="blue">if </font>cartAxes[i] &lt;&gt; axis<font color="blue"> then</font>
-      inert.mPhidot[i] = 0 <font color="darkgreen">&quot;No force along the other axes&quot;</font>;
+      inert.mPhidot[i] = 0 <font color="darkgreen">&quot;Force along the other axes&quot;</font>;
     <font color="blue">end if</font>;
   <font color="blue">end for</font>;
-  inert.Qdot = 0 <font color="darkgreen">&quot;Adiabatic&quot;</font>;
+  inert.Qdot = 0 <font color="darkgreen">&quot;Heat flow rate&quot;</font>;
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>PartialCondition;
 </pre>
       </div>
@@ -118,7 +126,7 @@ Extends from <a href="FCSys_Conditions_InertAmagat_BaseClasses.html#FCSys.Condit
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:06:25 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 11:17:13 2013.
 </div>
 </body>
 </html>

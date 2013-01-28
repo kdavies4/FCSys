@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Units</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-24">
+<meta name="date" content="2013-1-28">
 <meta name="description" content="Constants and units of physical measure">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,6 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
@@ -116,6 +117,14 @@
   The structure of <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a> allows the constraints on the Faraday and gas constants
   to be relaxed, but the models in <a href="index.html#FCSys">FCSys</a> generally do not.</p>
 
+  <p>This package also contains functions (e.g., <a href="FCSys_Units.html#FCSys.Units.to_degC">to_degC</a>) that
+  convert quantities from the unit system defined in <a href="index.html#FCSys">FCSys</a> to quantities 
+  expressed in units.  Functions are
+  included for units that involve offsets<!-- or other functions besides simple scaling-->.  
+  For conversions that require just a scaling factor, it is best to use the 
+  units directly.  For example, to convert from potential in volts use <code>v = v_V*U.V</code>,
+  where <code>v</code> is potential and <code>v_V</code> is potential expressed in volts.</p>
+
   <p>Although it is not necessary in <a href="http://www.modelica.org">Modelica</a>, the declarations
   in this package are presorted so that they can be easily ported to imperative or causal languages (e.g.,
   <a href="http://www.python.org">Python</a>, C).</p>
@@ -140,6 +149,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>Evaluate the values assigned to constants and units</td></tr>
 <tr><td><img src="images/FCSys.Units.BasesS.png" alt="FCSys.Units.Bases" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases">Bases</a>
 </td><td>Sets of base constants and units</td></tr>
+<tr><td><img src="images/FCSys.Units.from_degCS.png" alt="FCSys.Units.from_degC" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units.html#FCSys.Units.from_degC">from_degC</a>
+</td><td>From temperature in degree Celsius</td></tr>
+<tr><td><img src="images/FCSys.Units.from_degCS.png" alt="FCSys.Units.to_degC" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units.html#FCSys.Units.to_degC">to_degC</a>
+</td><td>To temperature in degree Celsius</td></tr>
+<tr><td><img src="images/FCSys.Units.from_degCS.png" alt="FCSys.Units.from_kPag" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units.html#FCSys.Units.from_kPag">from_kPag</a>
+</td><td>From gauge pressure in kilopascals</td></tr>
+<tr><td><img src="images/FCSys.Units.from_degCS.png" alt="FCSys.Units.to_kPag" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units.html#FCSys.Units.to_kPag">to_kPag</a>
+</td><td>To gauge pressure in kilopascals</td></tr>
 <tr><td>pi=2*arccos(0)</td><td>pi (<i>&pi;</i>)</td></tr>
 <tr><td>e=exp(1)</td><td>Euler number</td></tr>
 <tr><td>base</td><td>Scalable base constants and units</td></tr>
@@ -507,12 +524,125 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>Evaluate;
 </pre>
+<hr>
+
+<h2><img src="images/FCSys.Units.from_degCI.png" alt="FCSys.Units.from_degC" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Units.from_degC"></a><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>.from_degC</h2>
+<b>From temperature in degree Celsius</b><p>
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a> (Base icon for conversion functions).
+<p><h3>Inputs</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Real</td><td>T_degC</td><td>&nbsp;</td><td>Temperature in degree Celsius</td></tr>
+</table>
+<p><h3>Outputs</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>Thermodynamic temperature</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">function</font> from_degC <font color="darkgreen">&quot;From temperature in degree Celsius&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a>;
+  <font color="blue">input </font>Real T_degC <font color="darkgreen">&quot;Temperature in degree Celsius&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Thermodynamic temperature&quot;</font>;
+
+<font color="blue">algorithm </font>
+  T := (T_degC + 273.15)*K;
+<font color="blue">end </font>from_degC;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Units.from_degCI.png" alt="FCSys.Units.to_degC" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Units.to_degC"></a><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>.to_degC</h2>
+<b>To temperature in degree Celsius</b><p>
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a> (Base icon for conversion functions).
+<p><h3>Inputs</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>&nbsp;</td><td>Thermodynamic temperature</td></tr>
+</table>
+<p><h3>Outputs</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Real</td><td>T_degC</td><td>Temperature in degree Celsius</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">function</font> to_degC <font color="darkgreen">&quot;To temperature in degree Celsius&quot;</font>
+
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Thermodynamic temperature&quot;</font>;
+  <font color="blue">output </font>Real T_degC <font color="darkgreen">&quot;Temperature in degree Celsius&quot;</font>;
+
+<font color="blue">algorithm </font>
+  T_degC := T/K - 273.15;
+<font color="blue">end </font>to_degC;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Units.from_degCI.png" alt="FCSys.Units.from_kPag" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Units.from_kPag"></a><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>.from_kPag</h2>
+<b>From gauge pressure in kilopascals</b><p>
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a> (Base icon for conversion functions).
+<p><h3>Inputs</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Real</td><td>p_kPag</td><td>&nbsp;</td><td>Gauge pressure in kilopascals</td></tr>
+</table>
+<p><h3>Outputs</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>Absolute pressure [m/(l.T2)]</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">function</font> from_kPag <font color="darkgreen">&quot;From gauge pressure in kilopascals&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a>;
+  <font color="blue">input </font>Real p_kPag <font color="darkgreen">&quot;Gauge pressure in kilopascals&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p <font color="darkgreen">&quot;Absolute pressure&quot;</font>;
+
+<font color="blue">algorithm </font>
+  p := p_kPag*U.kPa + U.atm;
+<font color="blue">end </font>from_kPag;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Units.from_degCI.png" alt="FCSys.Units.to_kPag" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Units.to_kPag"></a><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>.to_kPag</h2>
+<b>To gauge pressure in kilopascals</b><p>
+<p><h3>Information</h3></p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a> (Base icon for conversion functions).
+<p><h3>Inputs</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>&nbsp;</td><td>Absolute pressure [m/(l.T2)]</td></tr>
+</table>
+<p><h3>Outputs</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Real</td><td>p_kPag</td><td>Gauge pressure in kilopascals</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">function</font> to_kPag <font color="darkgreen">&quot;To gauge pressure in kilopascals&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p <font color="darkgreen">&quot;Absolute pressure&quot;</font>;
+  <font color="blue">output </font>Real p_kPag <font color="darkgreen">&quot;Gauge pressure in kilopascals&quot;</font>;
+
+<font color="blue">algorithm </font>
+  p_kPag := (p - U.atm)/U.kPa;
+<font color="blue">end </font>to_kPag;
+</pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:10:50 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 28 11:05:25 2013.
 </div>
 </body>
 </html>

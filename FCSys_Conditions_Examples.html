@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.Examples</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-24">
+<meta name="date" content="2013-1-29">
 <meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,6 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
@@ -54,7 +55,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>Test the Conditions for the face of a subregion</td></tr>
 <tr><td><img src="images/FCSys.Conditions.Examples.FaceConditionS.png" alt="FCSys.Conditions.Examples.FaceConditionPhases" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples.FaceConditionPhases">FaceConditionPhases</a>
 </td><td>Test the Conditions for the face of a subregion with phases</td></tr>
-<tr><td><img src="images/FCSys.Conditions.Examples.FaceConditionS.png" alt="FCSys.Conditions.Examples.Router" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples.Router">Router</a>
+<tr><td><img src="images/FCSys.Conditions.Examples.RouterS.png" alt="FCSys.Conditions.Examples.Router" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples.Router">Router</a>
 </td><td>Test the <code>Router<code> model</td></tr>
 <tr><td><img src="images/FCSys.Conditions.Examples.AnodeAdapterS.png" alt="FCSys.Conditions.Examples.AnodeAdapter" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples.AnodeAdapter">AnodeAdapter</a>
 </td><td>Test the <code>'Adapte-'</code> model</td></tr>
@@ -66,13 +67,13 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <b>Test the Conditions for the face of a subregion</b><p>
 <img src="images/FCSys.Conditions.Examples.FaceConditionD.png" alt="FCSys.Conditions.Examples.FaceCondition">
 <p><h3>Information</h3></p>
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>.
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">model</font> FaceCondition <font color="darkgreen">
   &quot;Test the Conditions for the face of a subregion&quot;</font>
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
-
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>;
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.Subregion">FaceBus.Subregion</a> subregionFaceCondition(gas(inclH2O=true, H2O(<font color="blue">redeclare </font><a href="FCSys_Conditions_Face_Normal.html#FCSys.Conditions.Face.Normal.CurrentAreic">Face.Normal.CurrentAreic</a>
           normal(spec(k=0)))));
   <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregions.Subregion</a> subregion(
@@ -99,7 +100,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <b>Test the Conditions for the face of a subregion with phases</b><p>
 <img src="images/FCSys.Conditions.Examples.FaceConditionPhasesD.png" alt="FCSys.Conditions.Examples.FaceConditionPhases">
 <p><h3>Information</h3></p>
-Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>.
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -111,7 +112,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <font color="blue">model</font> FaceConditionPhases <font color="darkgreen">
   &quot;Test the Conditions for the face of a subregion with phases&quot;</font>
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
-
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>;
   <font color="darkgreen">// Geometric parameters</font>
   <font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis](<font color="blue">each </font>min=Modelica.Constants.small,start=<font color="red">ones</font>
         (3)*U.cm) <font color="darkgreen">&quot;Length (<b>L</b>)&quot;</font>;
@@ -138,7 +139,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.Examples.FaceConditionI.png" alt="FCSys.Conditions.Examples.Router" align=RIGHT border=1 width=80  height=80 >
+<h2><img src="images/FCSys.Conditions.Examples.RouterI.png" alt="FCSys.Conditions.Examples.Router" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.Examples.Router"></a><a href="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples">FCSys.Conditions.Examples</a>.Router</h2>
 <b>Test the <code>Router<code> model</b><p>
 <img src="images/FCSys.Conditions.Examples.RouterD.png" alt="FCSys.Conditions.Examples.Router">
@@ -218,7 +219,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:05:50 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 11:16:10 2013.
 </div>
 </body>
 </html>

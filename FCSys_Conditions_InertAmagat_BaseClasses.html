@@ -2,8 +2,8 @@
 <head>
 <title>FCSys.Conditions.InertAmagat.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-24">
-<meta name="description" content="Base classes (not for direct use)">
+<meta name="date" content="2013-1-29">
+<meta name="description" content="Base classes (not generally for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
@@ -19,6 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
@@ -43,7 +44,7 @@
       <div class="body">
 
 <h2><a name="FCSys.Conditions.InertAmagat.BaseClasses"></a><a href="FCSys_Conditions_InertAmagat.html#FCSys.Conditions.InertAmagat">FCSys.Conditions.InertAmagat</a>.BaseClasses</h2>
-<b>Base classes (not for direct use)</b>
+<b>Base classes (not generally for direct use)</b>
 <p>
 <p><h3>Information</h3></p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.BasesPackage.html#Modelica.Icons.BasesPackage">Modelica.Icons.BasesPackage</a> (Icon for packages containing base classes).
@@ -58,29 +59,34 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Conditions.InertAmagat.BaseClasses.PartialConditionI.png" alt="FCSys.Conditions.InertAmagat.BaseClasses.PartialCondition" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Conditions.InertAmagat.BaseClasses.PartialCondition"></a><a href="FCSys_Conditions_InertAmagat_BaseClasses.html#FCSys.Conditions.InertAmagat.BaseClasses">FCSys.Conditions.InertAmagat.BaseClasses</a>.PartialCondition</h2>
 <b>Partial model of a condition</b><p>
-<img src="images/FCSys.Conditions.InertAmagat.Volume.PressureD.png" alt="FCSys.Conditions.InertAmagat.BaseClasses.PartialCondition">
+<img src="images/FCSys.Conditions.InertAmagat.Amagat.PressureD.png" alt="FCSys.Conditions.InertAmagat.BaseClasses.PartialCondition">
 <p><h3>Information</h3></p>
-Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.Icons.Conditions.Single">FCSys.BaseClasses.Icons.Conditions.Single</a> (Icon for a single-connector boundary condition).
+Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single">FCSys.Conditions.BaseClasses.Icons.Single</a> (Icon for a single-connector boundary condition).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>spec</td><td>redeclare Modelica.Blocks.So...</td><td>Internal specification</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
 <tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
 <tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
+<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So...</td><td>Source of internal specification</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>&nbsp;</td><td>Measurement expression</td></tr>
 </table>
 <p><h3>Connectors</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Value of condition</td></tr>
+<tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Value of specified condition</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a></td><td>inert</td><td>Connector for linear momentum and heat, with additivity of volume</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=3>Measurement</td></tr>
+<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Measurement expression</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
 <font color="blue">partial </font><font color="blue">model</font> PartialCondition <font color="darkgreen">&quot;Partial model of a condition&quot;</font>
-  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.Icons.Conditions.Single">FCSys.BaseClasses.Icons.Conditions.Single</a>;
+  <font color="blue">extends </font><a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single">FCSys.Conditions.BaseClasses.Icons.Single</a>;
 
   <font color="blue">parameter </font>Boolean inclLinX=true <font color="darkgreen">&quot;X&quot;</font>;
   <font color="blue">parameter </font>Boolean inclLinY=false <font color="darkgreen">&quot;Y&quot;</font>;
@@ -88,10 +94,12 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
 
   <font color="blue">parameter </font>Boolean internal=true <font color="darkgreen">&quot;Use internal specification&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Modelica.Blocks.Sources.Constant</a> spec <font color="blue">if </font>internal <font color="blue">constrainedby </font>
-    Modelica.Blocks.Interfaces.SO <font color="darkgreen">&quot;Internal specification&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Modelica.Blocks.Sources.Constant</a> source <font color="blue">if </font>internal <font color="blue">
+    constrainedby </font>Modelica.Blocks.Interfaces.SO <font color="darkgreen">
+    &quot;Source of internal specification&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">FCSys.Connectors.RealInput</a> u <font color="blue">if </font><font color="blue">not </font>internal <font color="darkgreen">&quot;Value of specified condition&quot;</font>;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">FCSys.Connectors.RealInput</a> u <font color="blue">if </font><font color="blue">not </font>internal <font color="darkgreen">&quot;Value of condition&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">FCSys.Connectors.RealOutput</a> y <font color="darkgreen">&quot;Measurement expression&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">FCSys.Connectors.InertAmagat</a> inert(<font color="blue">final </font>n_lin=n_lin) <font color="darkgreen">
     &quot;Connector for linear momentum and heat, with additivity of volume&quot;</font>;</textblock>
 
@@ -99,11 +107,12 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
   <font color="blue">final </font><font color="blue">parameter </font>Integer n_lin=<font color="red">countTrue</font>({inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">
     &quot;Number of components of linear momentum&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputInternal">FCSys.Connectors.RealInputInternal</a> u_final <font color="darkgreen">&quot;Final value of condition&quot;</font>;</textblock>
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> u_final <font color="darkgreen">
+    &quot;Final value of specified condition&quot;</font>;</textblock>
 
 <font color="blue">equation </font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u, u_final);
-  <font color="red">connect</font>(spec.y, u_final);</textblock>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(source.y, u_final);
+  <font color="red">connect</font>(u, u_final);</textblock>
 
 <font color="blue">end </font>PartialCondition;
 </pre>
@@ -112,7 +121,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:06:29 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 11:17:17 2013.
 </div>
 </body>
 </html>

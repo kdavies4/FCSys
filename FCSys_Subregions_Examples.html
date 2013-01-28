@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.Examples</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-24">
+<meta name="date" content="2013-1-28">
 <meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -19,6 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
@@ -298,7 +299,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">parameter </font>Boolean inclN2=false <font color="darkgreen">&quot;Nitrogen (N<sub>2</sub>)&quot;</font>;
   <font color="blue">parameter </font>Boolean inclO2=false <font color="darkgreen">&quot;Oxygen (O<sub>2</sub>)&quot;</font>;
 
-  <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> subregion1(
+<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> subregion1(
     L={100,1,1}*U.cm,
     gas(
       <font color="blue">final </font>inclH2=inclH2,
@@ -316,11 +317,11 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     ionomer(
       <font color="blue">final </font>&#39;inclC19HF37O5S-&#39;='inclC19HF37O5S-',
       <font color="blue">final </font>&#39;inclH+&#39;='inclH+',
-      Error));
-  <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> inclLinY=false;
-  <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> inclLinZ=false;
-  <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> inclFacesY=false;
-  <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> inclFacesZ=false;
+      &#39;C19HF37O5S-&#39;(V_IC=subregion1.V/4)),
+    inclLinY=false,
+    inclLinZ=false,
+    inclFacesY=false,
+    inclFacesZ=false);</textblock>
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> subregions[n_x](
     <font color="blue">each </font>L={100,1,1}*U.cm,
@@ -1094,7 +1095,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:09:14 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 28 11:03:48 2013.
 </div>
 </body>
 </html>

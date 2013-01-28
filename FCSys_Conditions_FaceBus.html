@@ -2,8 +2,8 @@
 <head>
 <title>FCSys.Conditions.FaceBus</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-24">
-<meta name="description" content="&lt;html&gt;Conditions for a &lt;a href=\&quot;modelica://FCSys.Connectors.FaceBus\&quot;&gt;FaceBus&lt;/a&gt; connector, e.g., of a &lt;a href=\&quot;modelica://FCSys.Regions.Region\&quot;&gt;Region&lt;/a&gt; or &lt;a href=\&quot;modelica://FCSys.Subregions.Subregion\&quot;&gt;Subregion&lt;/a&gt; model&lt;/html&gt;">
+<meta name="date" content="2013-1-29">
+<meta name="description" content="&lt;html&gt;Conditions for a &lt;a href=\&quot;modelica://FCSys.Connectors.FaceBus\&quot;&gt;FaceBus&lt;/a&gt; connector (e.g., as in a &lt;a href=\&quot;modelica://FCSys.Regions.Region\&quot;&gt;Region&lt;/a&gt; or &lt;a href=\&quot;modelica://FCSys.Subregions.Subregion\&quot;&gt;Subregion&lt;/a&gt; model)&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
@@ -19,6 +19,7 @@
   <h3>Table of Contents</h3>
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
     <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
     <li><a href="FCSys_Regions.html">Regions</a></li>
@@ -43,7 +44,7 @@
       <div class="body">
 
 <h2><a name="FCSys.Conditions.FaceBus"></a><a href="FCSys_Conditions.html#FCSys.Conditions">FCSys.Conditions</a>.FaceBus</h2>
-<b>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, e.g., of a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model</b>
+<b>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector (e.g., as in a <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> or <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> model)</b>
 <p>
 <p><h3>Information</h3></p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
@@ -52,10 +53,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Conditions.FaceBus.SubregionS.png" alt="FCSys.Conditions.FaceBus.Subregion" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.Subregion">Subregion</a>
 </td><td>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with efforts by default</td></tr>
-<tr><td><img src="images/FCSys.Conditions.FaceBus.SubregionS.png" alt="FCSys.Conditions.FaceBus.SubregionFlow" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlow">SubregionFlow</a>
+<tr><td><img src="images/FCSys.Conditions.FaceBus.SubregionS.png" alt="FCSys.Conditions.FaceBus.SubregionFlows" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">SubregionFlows</a>
 </td><td>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with flows by default</td></tr>
 <tr><td><img src="images/FCSys.Conditions.FaceBus.PhasesS.png" alt="FCSys.Conditions.FaceBus.Phases" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FaceBus_Phases.html#FCSys.Conditions.FaceBus.Phases">Phases</a>
-</td><td>Conditions for the <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, e.g., of a <a href="FCSys_Subregions.html#FCSys.Subregions.Phase">Phase</a> model (multi-species)</td></tr>
+</td><td>Conditions for the <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Phase">Phase</a> model)</td></tr>
 </table>
 <hr>
 
@@ -64,7 +65,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <b>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with efforts by default</b><p>
 <img src="images/FCSys.Conditions.FaceBus.SubregionD.png" alt="FCSys.Conditions.FaceBus.Subregion">
 <p><h3>Information</h3></p>
-Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.Icons.Conditions.Single">FCSys.BaseClasses.Icons.Conditions.Single</a> (Icon for a single-connector boundary condition).
+Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single">FCSys.Conditions.BaseClasses.Icons.Single</a> (Icon for a single-connector boundary condition).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -86,7 +87,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
 <font color="blue">model</font> Subregion <font color="darkgreen">
   &quot;Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with efforts by default&quot;</font>
 
-  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.Icons.Conditions.Single">FCSys.BaseClasses.Icons.Conditions.Single</a>;
+  <font color="blue">extends </font><a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single">FCSys.Conditions.BaseClasses.Icons.Single</a>;
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Conditions_FaceBus_Phases.html#FCSys.Conditions.FaceBus.Phases.Gas">Phases.Gas</a> gas <font color="darkgreen">&quot;Gas&quot;</font>;</textblock>
 
@@ -124,14 +125,15 @@ Extends from <a href="FCSys_BaseClasses_Icons_Conditions.html#FCSys.BaseClasses.
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(liquid.face, face.liquid);
   <font color="red">connect</font>(u.liquid, liquid.u);
   <font color="red">connect</font>(liquid.y, y.liquid);</textblock>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Subregion;
+
+<font color="blue">end </font>Subregion;
 </pre>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.FaceBus.SubregionI.png" alt="FCSys.Conditions.FaceBus.SubregionFlow" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.FaceBus.SubregionFlow"></a><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus">FCSys.Conditions.FaceBus</a>.SubregionFlow</h2>
+<h2><img src="images/FCSys.Conditions.FaceBus.SubregionI.png" alt="FCSys.Conditions.FaceBus.SubregionFlows" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.FaceBus.SubregionFlows"></a><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus">FCSys.Conditions.FaceBus</a>.SubregionFlows</h2>
 <b>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with flows by default</b><p>
-<img src="images/FCSys.Conditions.FaceBus.SubregionD.png" alt="FCSys.Conditions.FaceBus.SubregionFlow">
+<img src="images/FCSys.Conditions.FaceBus.SubregionD.png" alt="FCSys.Conditions.FaceBus.SubregionFlows">
 <p><h3>Information</h3></p>
 Extends from <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.Subregion">FaceBus.Subregion</a> (Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with efforts by default).
 <p><h3>Connectors</h3><p>
@@ -143,7 +145,7 @@ Extends from <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.Sub
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
-<font color="blue">model</font> SubregionFlow <font color="darkgreen">
+<font color="blue">model</font> SubregionFlows <font color="darkgreen">
   &quot;Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connector, with flows by default&quot;</font>
 
   <font color="blue">extends </font><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.Subregion">FaceBus.Subregion</a>(
@@ -201,14 +203,14 @@ Extends from <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.Sub
         <font color="blue">redeclare </font><font color="blue">replaceable </font><a href="FCSys_Conditions_Face_Thermal.html#FCSys.Conditions.Face.Thermal.HeatRate">Face.Thermal.HeatRate</a> thermal(source(k=0)))));
 
 <textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>SubregionFlow;
+<font color="blue">end </font>SubregionFlows;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Thu Jan 24 22:06:43 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 11:17:35 2013.
 </div>
 </body>
 </html>
