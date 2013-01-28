@@ -313,7 +313,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaCLs.CaCL caCL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{10,-10},{30,10}})));
 
-      FCSys.Conditions.FaceBus.SubregionFlow bC1[n_y, n_z](
+      FCSys.Conditions.FaceBus.SubregionFlows bC1[n_y, n_z](
         each gas(inclH2=true, inclH2O=true),
         each graphite('inclC+'=true, 'incle-'=true),
         each ionomer('inclC19HF37O5S-'=true, 'inclH+'=true)) annotation (
@@ -322,7 +322,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=90,
             origin={-44,-8.88178e-16})));
 
-      FCSys.Conditions.FaceBus.SubregionFlow bC2[n_y, n_z](
+      FCSys.Conditions.FaceBus.SubregionFlows bC2[n_y, n_z](
         each gas(
           inclH2O=true,
           inclN2=true,
@@ -567,7 +567,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnCLs.AnCL anCL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 
-      FCSys.Conditions.FaceBus.SubregionFlow bC1[n_y, n_z](
+      FCSys.Conditions.FaceBus.SubregionFlows bC1[n_y, n_z](
         each gas(inclH2=true, inclH2O=true),
         each graphite('inclC+'=true, 'incle-'=true),
         each ionomer('inclC19HF37O5S-'=true, 'inclH+'=true)) annotation (
@@ -576,7 +576,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=90,
             origin={-44,-8.88178e-16})));
 
-      FCSys.Conditions.FaceBus.SubregionFlow bC2[n_y, n_z](
+      FCSys.Conditions.FaceBus.SubregionFlows bC2[n_y, n_z](
         each gas(
           inclH2=true,
           inclH2O=true,
@@ -702,7 +702,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaCLs.CaCL caCL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{10,-10},{30,10}})));
 
-      FCSys.Conditions.FaceBus.SubregionFlow bC1[n_y, n_z](
+      FCSys.Conditions.FaceBus.SubregionFlows bC1[n_y, n_z](
         each gas(
           inclH2O=true,
           inclN2=true,
@@ -713,7 +713,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-4,-8.88178e-16})));
-      FCSys.Conditions.FaceBus.SubregionFlow bC2[n_y, n_z](
+      FCSys.Conditions.FaceBus.SubregionFlows bC2[n_y, n_z](
         each gas(
           inclH2O=true,
           inclN2=true,
@@ -1391,7 +1391,7 @@ the z axis extends across the width of the channel.</p></html>"),
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="anGDL",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
     <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> model.</p></html>"));
 
     end Sigracet10BA;
@@ -1405,7 +1405,7 @@ the z axis extends across the width of the channel.</p></html>"),
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="anGDL",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
           <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> model.</p></html>"));
 
     end Sigracet10BB;
@@ -1419,7 +1419,7 @@ the z axis extends across the width of the channel.</p></html>"),
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="anGDL",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
           <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> model.</p></html>"));
 
     end Sigracet10BC;
@@ -1433,7 +1433,7 @@ the z axis extends across the width of the channel.</p></html>"),
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="anGDL",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
           <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> model.</p></html>"));
 
     end Sigracet24BA;
@@ -1447,7 +1447,7 @@ the z axis extends across the width of the channel.</p></html>"),
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="anGDL",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
           <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> model.</p></html>"));
 
     end Sigracet24BC;
@@ -1461,7 +1461,7 @@ the z axis extends across the width of the channel.</p></html>"),
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="anGDL",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
           <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> model.</p></html>"));
 
     end Sigracet25BA;
@@ -1475,7 +1475,7 @@ the z axis extends across the width of the channel.</p></html>"),
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="anGDL",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
           <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> model.</p></html>"));
 
     end Sigracet25BC;
@@ -1494,7 +1494,7 @@ the z axis extends across the width of the channel.</p></html>"),
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="anGDL",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
           <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> model.</p></html>"));
 
     end TorayTGPH030;
@@ -1513,7 +1513,7 @@ the z axis extends across the width of the channel.</p></html>"),
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="anGDL",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
           <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> model.</p></html>"));
 
     end TorayTGPH060;
@@ -1532,7 +1532,7 @@ the z axis extends across the width of the channel.</p></html>"),
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="anGDL",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
           <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> model.</p></html>"));
 
     end TorayTGPH090;
@@ -1551,7 +1551,7 @@ the z axis extends across the width of the channel.</p></html>"),
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="anGDL",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
           <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> model.</p></html>"));
 
     end TorayTGPH120;
@@ -1799,7 +1799,7 @@ the z axis extends across the width of the channel.</p>
 
       parameter Q.NumberAbsolute lambda_IC=14
         "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>)</html>";
-      annotation (Documentation(info="<html><p>See the
+      annotation (Documentation(info="<html><p>See the information in the
     <a href=\"modelica://FCSys.Regions.AnCLs.AnCL\">AnCL</a> and <a href=\"modelica://FCSys.Regions.AnGDLs.AnGDL\">AnGDL</a> models</p></html>"));
 
     end AnCGDL;
@@ -1974,7 +1974,7 @@ the z axis extends across the width of the channel.</p>
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="pEM",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
           <a href=\"modelica://FCSys.Regions.PEMs.PEM\">PEM</a> model.</p></html>"));
 
     end DuPontN112;
@@ -1987,7 +1987,7 @@ the z axis extends across the width of the channel.</p>
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="pEM",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
                 <a href=\"modelica://FCSys.Regions.PEMs.PEM\">PEM</a> model.</p></html>"));
 
     end DuPontN115;
@@ -2000,7 +2000,7 @@ the z axis extends across the width of the channel.</p>
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="pEM",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
                 <a href=\"modelica://FCSys.Regions.PEMs.PEM\">PEM</a> model.</p></html>"));
 
     end DuPontN117;
@@ -2013,7 +2013,7 @@ the z axis extends across the width of the channel.</p>
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="pEM",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
                 <a href=\"modelica://FCSys.Regions.PEMs.PEM\">PEM</a> model.</p></html>"));
 
     end DuPontNE1110;
@@ -2026,7 +2026,7 @@ the z axis extends across the width of the channel.</p>
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="pEM",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
                 <a href=\"modelica://FCSys.Regions.PEMs.PEM\">PEM</a> model.</p></html>"));
 
     end DuPontNE1135;
@@ -2039,7 +2039,7 @@ the z axis extends across the width of the channel.</p>
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="pEM",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
                 <a href=\"modelica://FCSys.Regions.PEMs.PEM\">PEM</a> model.</p></html>"));
 
     end DuPontNRE211;
@@ -2052,7 +2052,7 @@ the z axis extends across the width of the channel.</p>
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="pEM",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
                 <a href=\"modelica://FCSys.Regions.PEMs.PEM\">PEM</a> model.</p></html>"));
 
     end DuPontNRE212;
@@ -2263,7 +2263,7 @@ the z axis extends across the width of the channel.</p>
 
     model CaCGDL "Integrated cathode catalyst/gas diffusion layer"
       extends CaCL(L_x=fill((28.7*U.micro*U.m + 0.3*U.mm)/1, 1));
-      annotation (Documentation(info="<html><p>See the
+      annotation (Documentation(info="<html><p>See the information in the
     <a href=\"modelica://FCSys.Regions.CaCLs.CaCL\">CaCL</a> and <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> models</p></html>"));
 
     end CaCGDL;
@@ -2447,7 +2447,7 @@ the z axis extends across the width of the channel.</p>
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="caGDL",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
                 <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> model.</p></html>"));
 
     end Sigracet10BA;
@@ -2461,7 +2461,7 @@ the z axis extends across the width of the channel.</p>
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="caGDL",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
                 <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> model.</p></html>"));
 
     end Sigracet10BB;
@@ -2475,7 +2475,7 @@ the z axis extends across the width of the channel.</p>
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="caGDL",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
                 <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> model.</p></html>"));
 
     end Sigracet10BC;
@@ -2489,7 +2489,7 @@ the z axis extends across the width of the channel.</p>
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="caGDL",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
                 <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> model.</p></html>"));
 
     end Sigracet24BA;
@@ -2503,7 +2503,7 @@ the z axis extends across the width of the channel.</p>
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="caGDL",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
                 <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> model.</p></html>"));
 
     end Sigracet24BC;
@@ -2517,7 +2517,7 @@ the z axis extends across the width of the channel.</p>
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="caGDL",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
                 <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> model.</p></html>"));
 
     end Sigracet25BA;
@@ -2531,7 +2531,7 @@ the z axis extends across the width of the channel.</p>
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="caGDL",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
                 <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> model.</p></html>"));
 
     end Sigracet25BC;
@@ -2550,7 +2550,7 @@ the z axis extends across the width of the channel.</p>
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="caGDL",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
                 <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> model.</p></html>"));
 
     end TorayTGPH030;
@@ -2569,7 +2569,7 @@ the z axis extends across the width of the channel.</p>
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="caGDL",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
                 <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> model.</p></html>"));
 
     end TorayTGPH060;
@@ -2588,7 +2588,7 @@ the z axis extends across the width of the channel.</p>
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="caGDL",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
                 <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> model.</p></html>"));
 
     end TorayTGPH090;
@@ -2607,7 +2607,7 @@ the z axis extends across the width of the channel.</p>
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="caGDL",
-        Documentation(info="<html><p>See the
+        Documentation(info="<html><p>See the information in the
                 <a href=\"modelica://FCSys.Regions.CaGDLs.CaGDL\">CaGDL</a> model.</p></html>"));
 
     end TorayTGPH120;

@@ -485,7 +485,7 @@ package Units "Constants and units of physical measure"
     output Q.PressureAbsolute p "Absolute pressure";
 
   algorithm
-    p := p_kPag*U.kPa + U.atm annotation (Inline=true);
+    p := p_kPag*kPa + atm annotation (Inline=true);
   end from_kPag;
 
   function to_kPag "To gauge pressure in kilopascals"
@@ -494,7 +494,7 @@ package Units "Constants and units of physical measure"
     output Real p_kPag "Gauge pressure in kilopascals";
 
   algorithm
-    p_kPag := (p - U.atm)/U.kPa annotation (Inline=true);
+    p_kPag := (p - atm)/kPa annotation (Inline=true);
   end to_kPag;
   final constant Q.Number pi=2*arccos(0) "<html>pi (<i>&pi;</i>)</html>";
   // Circumference per unit diameter
@@ -865,6 +865,14 @@ package Units "Constants and units of physical measure"
   (<a href=\"http://en.wikipedia.org/wiki/Natural_units\">http://en.wikipedia.org/wiki/Natural_units</a>).
   The structure of <a href=\"modelica://FCSys.Units\">FCSys.Units</a> allows the constraints on the Faraday and gas constants
   to be relaxed, but the models in <a href=\"modelica://FCSys\">FCSys</a> generally do not.</p>
+
+  <p>This package also contains functions (e.g., <a href=\"modelica://FCSys.Units.to_degC\">to_degC</a>) that
+  convert quantities from the unit system defined in <a href=\"modelica://FCSys\">FCSys</a> to quantities 
+  expressed in units.  Functions are
+  included for units that involve offsets<!-- or other functions besides simple scaling-->.  
+  For conversions that require just a scaling factor, it is best to use the 
+  units directly.  For example, to convert from potential in volts use <code>v = v_V*U.V</code>,
+  where <code>v</code> is potential and <code>v_V</code> is potential expressed in volts.</p>
 
   <p>Although it is not necessary in <a href=\"http://www.modelica.org\">Modelica</a>, the declarations
   in this package are presorted so that they can be easily ported to imperative or causal languages (e.g.,

@@ -2,9 +2,11 @@ within FCSys;
 package Figures "Graphical layouts for documentation"
   extends Modelica.Icons.Package;
   package DeclarativeVsImperative
+    import SI = Modelica.SIunits;
     extends Modelica.Icons.Package;
     // See notes from 12/7/10 for the derivation of the equations in this
     // package.
+
     model ResistorDeclarative "Electrical resistor in declarative formalism"
 
       parameter SI.Resistance r=1 "Resistance";
@@ -77,7 +79,7 @@ package Figures "Graphical layouts for documentation"
               color={0,0,127},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
+                  ={{-100,-100},{100,100}}),graphics), experiment(StopTime=2));
         end Test_vi;
 
         model Test_iv
@@ -110,7 +112,7 @@ package Figures "Graphical layouts for documentation"
               color={0,0,127},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
+                  ={{-100,-100},{100,100}}),graphics), experiment(StopTime=2));
         end Test_iv;
 
         model Declarative
@@ -164,7 +166,7 @@ package Figures "Graphical layouts for documentation"
               color={0,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-80,-60},{80,60}}), graphics));
+                  ={{-80,-60},{80,60}}),graphics));
         end Declarative;
 
       end Examples;
@@ -662,7 +664,7 @@ package Figures "Graphical layouts for documentation"
               color={0,0,127},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
+                  ={{-100,-100},{100,100}}),graphics), experiment(StopTime=2));
         end Test;
 
       end Examples;
@@ -1018,6 +1020,7 @@ package Figures "Graphical layouts for documentation"
                 6.10623e-16}},
             color={200,0,0},
             smooth=Smooth.None));
+
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-160,-40},{160,40}}), graphics={Rectangle(
                       extent={{-15,7},{15,-7}},

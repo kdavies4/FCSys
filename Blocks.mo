@@ -87,24 +87,22 @@ package Blocks "Imperative models (inputs and/or outputs only)"
 <p>See the documentation in the 
   <a href=\"modelica://FCSys.Blocks.UnitConversions\">UnitConversions</a> package.</p></html>"),
 
-          Icon(graphics={
-              Rectangle(
-                extent={{-100,40},{100,-40}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                lineColor={0,0,0}),
-              Line(points={{-70,0},{10,0}}, color={191,0,0}),
-              Polygon(
-                points={{70,0},{10,20},{10,-20},{70,0}},
-                lineColor={191,0,0},
-                fillColor={191,0,0},
-                fillPattern=FillPattern.Solid)}),
+          Icon(graphics={Rectangle(
+                      extent={{-100,40},{100,-40}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      lineColor={0,0,0}),Line(points={{-70,0},{10,0}}, color={
+                191,0,0}),Polygon(
+                      points={{70,0},{10,20},{10,-20},{70,0}},
+                      lineColor={191,0,0},
+                      fillColor={191,0,0},
+                      fillPattern=FillPattern.Solid)}),
           Diagram(graphics));
 
       end PartialUnitConversion;
     end BaseClasses;
     annotation (Documentation(info="<html>
-  <p>This package contains blocks to convert from the unit system in 
+  <p>This package contains blocks to convert quantities from the unit system in 
   <a href=\"modelica://FCSys\">FCSys</a> (see <a href=\"modelica://FCSys.Units\">FCSys.Units</a>)
   to quantities expressed in units or vice versa.  
   The <a href=\"modelica://FCSys.Blocks.UnitConversions.UnitConversion\">UnitConversion</a> block 

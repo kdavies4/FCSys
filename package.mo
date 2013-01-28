@@ -12,12 +12,11 @@ package FCSys "Modelica library of fuel cell models"
 
 
 extends Modelica.Icons.Package;
-// extends FCSys.Icons.Cell;
+// extends FCSys.BaseClasses.Icons.Cell;
 
 // Units and quantities
 import U = FCSys.Units;
 import Q = FCSys.Quantities;
-import SI = Modelica.SIunits;
 
 // Functions
 import Modelica.Math;
@@ -919,6 +918,19 @@ printing and shipping costs may be recovered.</p>
   annotation (preferedView="info", DocumentationClass=true);
 
   end UsersGuide;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 annotation (
