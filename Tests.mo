@@ -288,13 +288,13 @@ package Tests "Models and functions for test and validation"
           assertValue(
                   p[i],
                   p_sat[i],
-                  eps=1e-2*p_sat[i],
+                  eps=0.01*p_sat[i],
                   name="of saturation pressure at " + String(U.to_degC(T[i]))
                + " deg C");
         end for;
 
       equation
-        H2O.Gas.g(T, p) = H2O.Liquid.g(T, p);
+        H2O.Gas.g(T, p) = H2O.Liquid.g(T, p) "Chemical/phase equilibrium";
 
       end TestSaturationPressure;
 
@@ -324,7 +324,7 @@ package Tests "Models and functions for test and validation"
               specVolPow={-1,0},
               h(referenceEnthalpy=ReferenceEnthalpy.ZeroAt0K))
             "Ideal gas properties w/ 0K enthalpy reference";
-          parameter Q.NumberAbsolute eps=2e-2 "Relative error tolerance";
+          parameter Q.NumberAbsolute eps=0.02 "Relative error tolerance";
           parameter Q.TemperatureAbsolute T[:]={220,300,400,600,800,1000,2000,
               3250}*U.K "Temperatures";
           final parameter Q.Potential h_model[:]=Data.h(T)
@@ -435,7 +435,7 @@ package Tests "Models and functions for test and validation"
           extends H2.Gas.c_V(
             redeclare package Data = FCSys.Characteristics.N2.Gas (b_v=[1],
                   specVolPow={-1,0}),
-            eps=2e-2,
+            eps=0.02,
             c_V_table=Data.m*{0.742,0.743,0.744,0.757,0.778,0.825,0.870}*U.J/(U.g
                 *U.K));
 
@@ -543,7 +543,7 @@ package Tests "Models and functions for test and validation"
                 b_v=[1],
                 specVolPow={-1,0},
                 h(referenceEnthalpy=ReferenceEnthalpy.ZeroAt0K)),
-            eps=1e-2,
+            eps=0.01,
             h_table={6404,8736,11711,17929,24523,31389,67881,116827}*U.J/U.mol);
 
         end h;

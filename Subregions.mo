@@ -2365,7 +2365,7 @@ package Subregions
         Diagram(graphics));
     end Liquid;
 
-    package BaseClasses "Base classes (not for direct use)"
+    package BaseClasses "Base classes (not generally for direct use)"
       extends Modelica.Icons.BasesPackage;
       model NullPhase "Model for a phase with no species or reactions"
         //extends FCSys.BaseClasses.Icons.Names.Middle;
@@ -4925,17 +4925,17 @@ Choose a condition besides None.");
             extent={{-100,-100},{100,100}},
             initialScale=0.1), graphics),
         Icon(graphics={Ellipse(
-                  extent={{-100,100},{100,-100}},
-                  lineColor={127,127,127},
-                  pattern=LinePattern.Dash,
-                  fillColor={225,225,225},
-                  fillPattern=FillPattern.Solid),Text(
-                  extent={{-100,20},{100,60}},
-                  textString="%name",
-                  lineColor={0,0,0})}));
+              extent={{-100,100},{100,-100}},
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash,
+              fillColor={225,225,225},
+              fillPattern=FillPattern.Solid), Text(
+              extent={{-100,20},{100,60}},
+              textString="%name",
+              lineColor={0,0,0})}));
     end Species;
 
-    package BaseClasses "Base classes (not for direct use)"
+    package BaseClasses "Base classes (not generally for direct use)"
 
       extends Modelica.Icons.BasesPackage;
 
@@ -5242,7 +5242,7 @@ Check the chemical formulas and the specific masses of the species.");
               100,100}}), graphics));
   end Volume;
 
-  package BaseClasses "Base classes (not for direct use)"
+  package BaseClasses "Base classes (not generally for direct use)"
 
     extends Modelica.Icons.BasesPackage;
 

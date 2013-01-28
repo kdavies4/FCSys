@@ -781,6 +781,19 @@ package Units "Constants and units of physical measure"
   final constant Q.Number '%'=centi "percent (%)";
   final constant Q.AmountVolumic M=U.mol/U.L "molar";
   final constant Q.Volume cc=U.cm^3 "cubic centimeter";
+
+  function Test
+
+    replaceable function f "Conversion function"
+    end f;
+
+    Connectors.RealInput u
+      annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
+    Connectors.RealOutput y
+      annotation (Placement(transformation(extent={{86,-12},{106,8}})));
+  equation
+    y = f(u);
+  end Test;
   annotation (Documentation(info="<html><p>When a physical variable is assigned a quantity, it is the product of a number
     and a unit [<a href=\"modelica://FCSys.UsersGuide.References\">BIPM2006</a>].  In <a href=\"modelica://FCSys\">FCSys</a>, units are also assigned numeric values in a consistent
     manner.  A unit
@@ -868,5 +881,4 @@ package Units "Constants and units of physical measure"
   http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
   </p></html>"), Commands(file="resources/scripts/units.mos"
         "Re-initialize the units."));
-
 end Units;

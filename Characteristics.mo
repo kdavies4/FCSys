@@ -696,7 +696,7 @@ package Characteristics
 
   end O2;
 
-  package BaseClasses "Base classes (not for direct use)"
+  package BaseClasses "Base classes (not generally for direct use)"
     extends Modelica.Icons.BasesPackage;
     package CharacteristicNASA
       "Thermodynamic record with transport properties based on NASA CEA"

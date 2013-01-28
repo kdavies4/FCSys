@@ -1588,7 +1588,7 @@ the z axis extends across the width of the channel.</p></html>"),
             'inclC19HF37O5S-'=true,
             'inclH+'=true,
             inclH2O=true,
-            'C19HF37O5S-'(V_IC=V - xV),),
+            'C19HF37O5S-'(V_IC=V - xV)),
           'H+'(xNegative(isobaric=false), xPositive(isobaric=false)),
           H2O(xNegative(isobaric=false), xPositive(isobaric=false))),
         each liquid(inclH2O=true, H2O(
@@ -1825,16 +1825,13 @@ the z axis extends across the width of the channel.</p>
         inclFacesY=false,
         inclFacesZ=false,
         redeclare FCSys.Subregions.SubregionIonomerOnly subregions[n_x, n_y,
-          n_z](
-          each inclLinX=false,
-          each ionomer(
+          n_z](each inclLinX=false, each ionomer(
             'inclC19HF37O5S-'=true,
             'inclH+'=true,
             inclH2O=true,
-             'C19HF37O5S-'(initMethPartNum=InitMethScalar.Pressure, 
-            p_IC=0),
-          'H+'(xNegative(isobaric=false), xPositive(isobaric=false)),
-          H2O(xNegative(isobaric=false), xPositive(isobaric=false)))));
+            'C19HF37O5S-'(initMethPartNum=InitMethScalar.Pressure, p_IC=0),
+            'H+'(xNegative(isobaric=false), xPositive(isobaric=false)),
+            H2O(xNegative(isobaric=false), xPositive(isobaric=false)))));
 
       parameter Q.NumberAbsolute lambda_IC=14
         "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>)</html>"
@@ -2103,12 +2100,12 @@ the z axis extends across the width of the channel.</p>
             'inclC19HF37O5S-'=true,
             'inclH+'=true,
             'C19HF37O5S-'(V_IC=V - xV),
-          'H+'(xNegative(isobaric=false), xPositive(isobaric=false)),
-          H2O(xNegative(isobaric=false), xPositive(isobaric=false))),
-        each liquid(inclH2O=true, H2O(
-            V_IC=0,
-            xNegative(isobaric=false),
-            xPositive(isobaric=false)))));
+            'H+'(xNegative(isobaric=false), xPositive(isobaric=false)),
+            H2O(xNegative(isobaric=false), xPositive(isobaric=false))),
+          each liquid(inclH2O=true, H2O(
+              V_IC=0,
+              xNegative(isobaric=false),
+              xPositive(isobaric=false)))));
 
       //'e-'(xNegative(isobaric=true),
       //'H+'(xPositive(isobaric=true),

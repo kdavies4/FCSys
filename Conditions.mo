@@ -701,7 +701,7 @@ package Conditions "Models to impose and measure operating conditions"
                       smooth=Smooth.None)}));
       end Liquid;
 
-      package BaseClasses "Base classes (not for direct use)"
+      package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
 
         partial model PartialPhase
@@ -716,13 +716,13 @@ package Conditions "Models to impose and measure operating conditions"
               Placement(transformation(extent={{-90,-10},{-70,10}}),
                 iconTransformation(extent={{-90,-10},{-70,10}})));
           annotation (Icon(graphics={Line(
-                          points={{0,0},{-80,0}},
-                          color={127,127,127},
-                          smooth=Smooth.None,
-                          thickness=0.5),Line(
-                          points={{0,0},{80,0}},
-                          color={191,0,0},
-                          smooth=Smooth.None)}));
+                  points={{0,0},{-80,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5), Line(
+                  points={{0,0},{80,0}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}));
 
         end PartialPhase;
 
@@ -809,13 +809,13 @@ package Conditions "Models to impose and measure operating conditions"
     <a href=\"modelica://FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"), Icon(graphics={Line(
-                      points={{0,-40},{80,-40}},
-                      color={0,127,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,20},{0,-60}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash)}));
+                points={{0,-40},{80,-40}},
+                color={0,127,255},
+                smooth=Smooth.None), Line(
+                points={{0,20},{0,-60}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash)}));
       end FluidNonionic;
 
       model Solid
@@ -835,7 +835,7 @@ package Conditions "Models to impose and measure operating conditions"
                       pattern=LinePattern.Dash)}));
       end Solid;
 
-      package BaseClasses "Base classes (not for direct use)"
+      package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
 
         partial model PartialSpecies
@@ -875,12 +875,12 @@ package Conditions "Models to impose and measure operating conditions"
             Documentation(info="<html><p>Note that shear force is not included.</p>
   </html>"),
             Icon(graphics={Line(
-                          points={{0,0},{-80,0}},
-                          color={127,127,127},
-                          smooth=Smooth.None),Line(
-                          points={{0,0},{80,0}},
-                          color={191,0,0},
-                          smooth=Smooth.None)}));
+                  points={{0,0},{-80,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None), Line(
+                  points={{0,0},{80,0}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}));
         end PartialSpecies;
 
       end BaseClasses;
@@ -1127,7 +1127,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       smooth=Smooth.None)}));
       end Junction3;
 
-      package BaseClasses "Base classes (not for direct use)"
+      package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialJunction
           "Partial model for a junction between pure substances and their mixture"
@@ -1700,7 +1700,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             Algorithm="Euler"));
     end Replay;
 
-    package BaseClasses "Base classes (not for direct use)"
+    package BaseClasses "Base classes (not generally for direct use)"
       extends Modelica.Icons.BasesPackage;
       partial model PartialTestStand "Partial cell test stand"
         extends FCSys.BaseClasses.Icons.Names.Top9;
@@ -2326,11 +2326,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     end Liquid;
 
-    package BaseClasses "Base classes (not for direct use)"
+    package BaseClasses "Base classes (not generally for direct use)"
       extends Modelica.Icons.BasesPackage;
 
       model NullPhase "Empty condition for a phase (no species)"
-        extends FCSys.BaseClasses.Icons.Conditions.Single;
+        extends FCSys.Conditions.BaseClasses.Icons.Single;
 
         parameter Boolean inclLinX=true "X" annotation (
           Evaluate=true,
@@ -2374,7 +2374,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       import FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMaterial;
       import FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMechanical;
       import FCSys.Conditions.Chemical.BaseClasses.ConditionTypeFluid;
-      extends FCSys.BaseClasses.Icons.Conditions.Single;
+      extends FCSys.Conditions.BaseClasses.Icons.Single;
 
       replaceable package Data =
           FCSys.Characteristics.BaseClasses.Characteristic constrainedby
@@ -2785,7 +2785,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             defaultComponentName="normal");
       end Force;
 
-      package BaseClasses "Base classes (not for direct use)"
+      package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition "Partial model for a normal condition"
           extends Face.BaseClasses.PartialCondition;
@@ -2808,7 +2808,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     end Material;
 
-    package BaseClasses "Base classes (not for direct use)"
+    package BaseClasses "Base classes (not generally for direct use)"
       extends Modelica.Icons.BasesPackage;
       type ConditionTypeMaterial = enumeration(
           PotentialPerTemperature
@@ -2838,7 +2838,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     model Phase
       "<html>Condition for the <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Phases\">Phase</a> model</html>"
-      extends FCSys.BaseClasses.Icons.Conditions.Single;
+      extends FCSys.Conditions.BaseClasses.Icons.Single;
 
       // Volume
       replaceable Volume.Volume volumeCondition(
@@ -3039,7 +3039,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             ="volumeCondition");
       end Volume;
 
-      package BaseClasses "Base classes (not for direct use)"
+      package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition
           "Partial model of a condition for volume"
@@ -3085,7 +3085,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             ="mechanicalCondition");
       end Force;
 
-      package BaseClasses "Base classes (not for direct use)"
+      package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition
           "Partial model for a mechanical condition"
@@ -3149,7 +3149,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             ="thermal");
       end HeatFlowRate;
 
-      package BaseClasses "Base classes (not for direct use)"
+      package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition "Partial model for a thermal condition"
           extends FCSys.Conditions.InertAmagat.BaseClasses.PartialCondition;
@@ -3172,10 +3172,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     end Thermal;
 
-    package BaseClasses "Base classes (not for direct use)"
+    package BaseClasses "Base classes (not generally for direct use)"
       extends Modelica.Icons.BasesPackage;
       partial model PartialCondition "Partial model of a condition"
-        extends FCSys.BaseClasses.Icons.Conditions.Single;
+        extends FCSys.Conditions.BaseClasses.Icons.Single;
 
         parameter Boolean inclLinX=true "X" annotation (
           Evaluate=true,
@@ -3254,7 +3254,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     model Species
       "<html>Condition for the <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector, e.g., of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model</html>"
 
-      extends FCSys.BaseClasses.Icons.Conditions.Single;
+      extends FCSys.Conditions.BaseClasses.Icons.Single;
 
       // Pressure
       replaceable Pressure.Volume pressureCondition(
@@ -3448,7 +3448,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             defaultComponentName="pressureCondition");
       end Pressure;
 
-      package BaseClasses "Base classes (not for direct use)"
+      package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition
           "Partial model of a condition for pressure"
@@ -3494,7 +3494,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             ="mechanicalCondition");
       end Force;
 
-      package BaseClasses "Base classes (not for direct use)"
+      package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition
           "Partial model for a mechanical condition"
@@ -3556,7 +3556,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             ="thermal");
       end HeatFlowRate;
 
-      package BaseClasses "Base classes (not for direct use)"
+      package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition "Partial model for a thermal condition"
           extends FCSys.Conditions.InertDalton.BaseClasses.PartialCondition;
@@ -3579,10 +3579,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     end Thermal;
 
-    package BaseClasses "Base classes (not for direct use)"
+    package BaseClasses "Base classes (not generally for direct use)"
       extends Modelica.Icons.BasesPackage;
       partial model PartialCondition "Partial model of a condition"
-        extends FCSys.BaseClasses.Icons.Conditions.Single;
+        extends FCSys.Conditions.BaseClasses.Icons.Single;
 
         parameter Boolean inclLinX=true "X" annotation (
           Evaluate=true,
@@ -3662,7 +3662,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     model Subregion
       "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector, with efforts by default</html>"
 
-      extends FCSys.BaseClasses.Icons.Conditions.Single;
+      extends FCSys.Conditions.BaseClasses.Icons.Single;
 
       Phases.Gas gas "Gas" annotation (Dialog(group="Phases",
             __Dymola_descriptionLabel=true), Placement(transformation(extent={{
@@ -4190,10 +4190,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Liquid;
 
-      package BaseClasses "Base classes (not for direct use)"
+      package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
         model NullPhase "Empty condition for a phase (no species)"
-          extends FCSys.BaseClasses.Icons.Conditions.Single;
+          extends FCSys.Conditions.BaseClasses.Icons.Single;
 
           FCSys.Connectors.FaceBus face
             "Multi-species connector for linear momentum and heat"
@@ -4230,7 +4230,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     model Species
       "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connector</html>"
 
-      extends FCSys.BaseClasses.Icons.Conditions.Single;
+      extends FCSys.Conditions.BaseClasses.Icons.Single;
 
       replaceable Normal.CurrentAreic normal(source(k=0)) constrainedby
         Normal.BaseClasses.PartialCondition "Normal condition" annotation (
@@ -4401,7 +4401,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             y=face.mPhidot_0);
 
         Real x=face.J "Expression to which the condition is applied"
-          annotation (Dialog(group="Imposition"));
+          annotation (Dialog(group="Specification"));
 
       equation
         x = u_final;
@@ -4412,7 +4412,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     must involve <code>face.J</code> and/or <code>face.mPhidot_0</code>.</p></html>"));
       end Custom;
 
-      package BaseClasses "Base classes (not for direct use)"
+      package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition "Partial model for a normal condition"
           extends Face.BaseClasses.PartialCondition;
@@ -4469,7 +4469,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         Real x=face.phi[orientation]
           "Expression to which the condition is applied"
-          annotation (Dialog(group="Imposition"));
+          annotation (Dialog(group="Specification"));
 
       equation
         x = u_final;
@@ -4480,7 +4480,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     must involve <code>face.phi[orientation]</code> and/or <code>face.mPhidot[orientation]</code>.</p></html>"));
       end Custom;
 
-      package BaseClasses "Base classes (not for direct use)"
+      package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition
           "Partial model for a transverse mechanical condition"
@@ -4544,7 +4544,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             y=face.Qdot);
 
         Real x=face.T "Expression to which the condition is applied"
-          annotation (Dialog(group="Imposition"));
+          annotation (Dialog(group="Specification"));
 
       equation
         x = u_final;
@@ -4555,7 +4555,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p></html>"));
       end Custom;
 
-      package BaseClasses "Base classes (not for direct use)"
+      package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition "Partial model for a thermal condition"
           extends Face.BaseClasses.PartialCondition;
@@ -4579,23 +4579,24 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     end Thermal;
 
-    package BaseClasses "Base classes (not for direct use)"
+    package BaseClasses "Base classes (not generally for direct use)"
       extends Modelica.Icons.BasesPackage;
 
-      partial model PartialCondition "Partial model of a condition"
-        extends FCSys.BaseClasses.Icons.Conditions.Single;
+      partial model PartialCondition
+        "Partial model to specify and measure conditions on a connector"
+        extends FCSys.Conditions.BaseClasses.Icons.Single;
 
         parameter Boolean internal=true "Use internal condition" annotation (
           Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
-          Dialog(group="Imposition"));
+          Dialog(group="Specification"));
 
         replaceable Modelica.Blocks.Sources.Constant source if internal
           constrainedby Modelica.Blocks.Interfaces.SO
           "Source of internal condition" annotation (
           __Dymola_choicesFromPackage=true,
-          Dialog(group="Imposition",enable=internal),
+          Dialog(group="Specification",enable=internal),
           Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
@@ -4634,6 +4635,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 5.55112e-16}},
             color={0,0,127},
             smooth=Smooth.None));
+
         connect(source.y, u_final) annotation (Line(
             points={{-59,30},{-40,30},{-40,5.55112e-16},{-20,5.55112e-16}},
             color={0,0,127},
@@ -4651,7 +4653,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     model Subregion
       "<html>Condition for faces of a <a href=\"modelica://FCSys.Regions.Region\">Region</a> or <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> model, with efforts by default</html>"
-      extends FCSys.BaseClasses.Icons.Conditions.Double;
+      extends FCSys.Conditions.BaseClasses.Icons.Double;
 
       replaceable Phases.Gas gas "Gas" annotation (Dialog(group="Phases",
             __Dymola_descriptionLabel=true), Placement(transformation(extent={{
@@ -5183,10 +5185,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Liquid;
 
-      package BaseClasses "Base classes (not for direct use)"
+      package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
         model NullPhase "Empty condition for a phase (no species)"
-          extends FCSys.BaseClasses.Icons.Conditions.Double;
+          extends FCSys.Conditions.BaseClasses.Icons.Double;
 
           FCSys.Connectors.FaceBus negative
             "Multi-species connector for linear momentum and heat" annotation (
@@ -5221,7 +5223,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     model Subregion
       "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector, with efforts by default</html>"
 
-      extends FCSys.BaseClasses.Icons.Conditions.Single;
+      extends FCSys.Conditions.BaseClasses.Icons.Single;
 
       Phases.Gas gas "Gas" annotation (Dialog(group="Phases",
             __Dymola_descriptionLabel=true), Placement(transformation(extent={{
@@ -5749,10 +5751,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       end Liquid;
 
-      package BaseClasses "Base classes (not for direct use)"
+      package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
         model NullPhase "Empty condition for a phase (no species)"
-          extends FCSys.BaseClasses.Icons.Conditions.Single;
+          extends FCSys.Conditions.BaseClasses.Icons.Single;
 
           FCSys.Connectors.FaceBus face
             "Multi-species connector for linear momentum and heat"
@@ -5791,7 +5793,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     model Species
       "<html>Condition for a pair of faces of a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model (single-species)</html>"
-      extends FCSys.BaseClasses.Icons.Conditions.Double;
+      extends FCSys.Conditions.BaseClasses.Icons.Double;
 
       // Normal
       replaceable Normal.CurrentAreic normal constrainedby
@@ -5948,7 +5950,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             defaultComponentName="transverse");
       end Force;
 
-      package BaseClasses "Base classes (not for direct use)"
+      package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition
           "Partial model for a normal mechanical condition"
@@ -5997,7 +5999,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             defaultComponentName="transverse");
       end Force;
 
-      package BaseClasses "Base classes (not for direct use)"
+      package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition
           "Partial model of a condition for linear momentum"
@@ -6052,7 +6054,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             defaultComponentName="thermal");
       end HeatRate;
 
-      package BaseClasses "Base classes (not for direct use)"
+      package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition "Partial model of a condition for heat"
 
@@ -6076,11 +6078,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     end Thermal;
 
-    package BaseClasses "Base classes (not for direct use)"
+    package BaseClasses "Base classes (not generally for direct use)"
       extends Modelica.Icons.BasesPackage;
 
       partial model PartialCondition "Partial model of a condition"
-        extends FCSys.BaseClasses.Icons.Conditions.Double;
+        extends FCSys.Conditions.BaseClasses.Icons.Double;
 
         parameter Boolean internal=true "Use internal specification"
           annotation (
@@ -6146,7 +6148,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     model Species
       "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connector</html>"
 
-      extends FCSys.BaseClasses.Icons.Conditions.Single;
+      extends FCSys.Conditions.BaseClasses.Icons.Single;
 
       replaceable Normal.CurrentAreic normal(source(k=0)) constrainedby
         Normal.BaseClasses.PartialCondition "Normal condition" annotation (
@@ -6328,7 +6330,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     must involve <code>face.J</code> and/or <code>face.mPhidot_0</code>.</p></html>"));
       end Custom;
 
-      package BaseClasses "Base classes (not for direct use)"
+      package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition "Partial model for a normal condition"
           extends FCSys.Conditions.FacePair2.BaseClasses.PartialCondition;
@@ -6396,7 +6398,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     must involve <code>face.phi[orientation]</code> and/or <code>face.mPhidot[orientation]</code>.</p></html>"));
       end Custom;
 
-      package BaseClasses "Base classes (not for direct use)"
+      package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition
           "Partial model for a transverse mechanical condition"
@@ -6471,7 +6473,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p></html>"));
       end Custom;
 
-      package BaseClasses "Base classes (not for direct use)"
+      package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition "Partial model for a thermal condition"
           extends FCSys.Conditions.FacePair2.BaseClasses.PartialCondition;
@@ -6495,11 +6497,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     end Thermal;
 
-    package BaseClasses "Base classes (not for direct use)"
+    package BaseClasses "Base classes (not generally for direct use)"
       extends Modelica.Icons.BasesPackage;
 
       partial model PartialCondition "Partial model of a condition"
-        extends FCSys.BaseClasses.Icons.Conditions.Double;
+        extends FCSys.Conditions.BaseClasses.Icons.Double;
 
         parameter Boolean internal=true "Use internal condition" annotation (
           Evaluate=true,
@@ -6634,27 +6636,31 @@ connected to <code>positive1</code>, as shown by Figure 1b.</p>
         <td colspan=2 align=center><b>Figure 1:</b> Modes of connection.</td>
       </tr>
     </table>
-</html>"), Icon(graphics={Line(
-              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier),Line(
-              points={{-80,40},{80,40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-80,-40},{80,-40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier)}));
+</html>"), Icon(graphics={
+          Line(
+            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier),
+          Line(
+            points={{-80,40},{80,40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{80,-40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier)}));
   end Router;
 
   record Environment "Environmental properties for a model"
@@ -6689,52 +6695,123 @@ connected to <code>positive1</code>, as shown by Figure 1b.</p>
 For simulation, specify global default settings by dragging FCSys.Conditions.Environment into your model.
 The default global default settings will be used for the current simulation.",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-              100}}), graphics={Rectangle(
-              extent={{-120,60},{120,100}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Text(
-              extent={{-120,60},{120,100}},
-              textString="%name",
-              lineColor={0,0,0}),Rectangle(
-              extent={{-80,60},{80,-100}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.Dash),Rectangle(
-              extent={{-70,50},{70,-98}},
-              lineColor={255,255,255},
-              fillPattern=FillPattern.HorizontalCylinder,
-              fillColor={170,170,255}),Rectangle(
-              extent={{-72,-60},{72,-98}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
-            Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),Ellipse(
-              extent={{30,10},{50,-10}},
-              pattern=LinePattern.None,
-              lineColor={255,255,255},
-              fillColor={240,0,0},
-              fillPattern=FillPattern.Sphere),Line(points={{-66,-90},{-36,-60}},
-            color={0,0,0}),Line(points={{2,-90},{32,-60}}, color={0,0,0}),Line(
-            points={{36,-90},{66,-60}}, color={0,0,0}),Line(points={{-32,-90},{
-            -2,-60}}, color={0,0,0}),Rectangle(
-              extent={{70,50},{76,-60}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),Rectangle(
-              extent={{-76,50},{-70,-60}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0})}));
+              100}}), graphics={
+          Rectangle(
+            extent={{-120,60},{120,100}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Text(
+            extent={{-120,60},{120,100}},
+            textString="%name",
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-80,60},{80,-100}},
+            lineColor={0,0,0},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.Dash),
+          Rectangle(
+            extent={{-70,50},{70,-98}},
+            lineColor={255,255,255},
+            fillPattern=FillPattern.HorizontalCylinder,
+            fillColor={170,170,255}),
+          Rectangle(
+            extent={{-72,-60},{72,-98}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0}),
+          Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
+          Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),
+          Ellipse(
+            extent={{30,10},{50,-10}},
+            pattern=LinePattern.None,
+            lineColor={255,255,255},
+            fillColor={240,0,0},
+            fillPattern=FillPattern.Sphere),
+          Line(points={{-66,-90},{-36,-60}}, color={0,0,0}),
+          Line(points={{2,-90},{32,-60}}, color={0,0,0}),
+          Line(points={{36,-90},{66,-60}}, color={0,0,0}),
+          Line(points={{-32,-90},{-2,-60}}, color={0,0,0}),
+          Rectangle(
+            extent={{70,50},{76,-60}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-76,50},{-70,-60}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0})}));
 
   end Environment;
 
-  package BaseClasses "Base classes (not for direct use)"
+  package BaseClasses "Base classes (not generally for direct use)"
     extends Modelica.Icons.BasesPackage;
+
+    package Icons "Icons for conditions"
+      extends Modelica.Icons.Package;
+      partial class Double "Icon for a two-connector boundary condition"
+        //extends Names.Middle;
+        annotation (Icon(graphics={
+              Rectangle(
+                extent={{-100,40},{100,-40}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None),
+              Line(
+                points={{-100,40},{100,40}},
+                pattern=LinePattern.None,
+                smooth=Smooth.None),
+              Line(
+                points={{-100,-40},{-100,40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash),
+              Text(
+                extent={{-150,-20},{150,20}},
+                textString="%name",
+                lineColor={0,0,0}),
+              Line(
+                points={{-100,-40},{100,-40}},
+                pattern=LinePattern.None,
+                smooth=Smooth.None),
+              Line(
+                points={{100,-40},{100,40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash)}));
+
+      end Double;
+
+      partial class Single "Icon for a single-connector boundary condition"
+        //extends Names.Middle;
+        annotation (Icon(graphics={
+              Rectangle(
+                extent={{-100,40},{100,-40}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None),
+              Line(
+                points={{-100,-40},{-100,40},{100,40},{100,-40}},
+                pattern=LinePattern.None,
+                smooth=Smooth.None),
+              Line(
+                points={{-100,-40},{100,-40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}));
+
+      end Single;
+
+    end Icons;
 
     block RealFunction
       "<html>Set an output signal according to a <code>Real</code> function of an input</html>"
@@ -6755,13 +6832,13 @@ The default global default settings will be used for the current simulation.",
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             grid={2,2}),graphics={Rectangle(
-                  extent={{-100,40},{100,-40}},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  lineColor={0,0,0}),Text(
-                  extent={{-100,-10},{100,10}},
-                  lineColor={127,127,127},
-                  textString="%y")}),
+              extent={{-100,40},{100,-40}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={0,0,0}), Text(
+              extent={{-100,-10},{100,10}},
+              lineColor={127,127,127},
+              textString="%y")}),
         Diagram(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},

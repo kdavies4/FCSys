@@ -10,16 +10,8 @@
 # This is used by rsync via 00-release.sh.
 # KLD 5/22/12
 
-# Blocks
-Blocks.mo
-help/FCSys_Blocks*.html
-help/FCSys.Blocks*.png
-
 # Systems
-Systems.mo
-help/FCSys_Systems*.html
-help/FCSys.Systems*.png
-resources/documentation/system.png
+resources/documentation/Systems
 
 # Figures (for documentation only)
 *Figures*
