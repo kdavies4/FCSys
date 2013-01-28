@@ -716,13 +716,13 @@ package Conditions "Models to impose and measure operating conditions"
               Placement(transformation(extent={{-90,-10},{-70,10}}),
                 iconTransformation(extent={{-90,-10},{-70,10}})));
           annotation (Icon(graphics={Line(
-                  points={{0,0},{-80,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5), Line(
-                  points={{0,0},{80,0}},
-                  color={191,0,0},
-                  smooth=Smooth.None)}));
+                          points={{0,0},{-80,0}},
+                          color={127,127,127},
+                          smooth=Smooth.None,
+                          thickness=0.5),Line(
+                          points={{0,0},{80,0}},
+                          color={191,0,0},
+                          smooth=Smooth.None)}));
 
         end PartialPhase;
 
@@ -809,13 +809,13 @@ package Conditions "Models to impose and measure operating conditions"
     <a href=\"modelica://FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"), Icon(graphics={Line(
-                points={{0,-40},{80,-40}},
-                color={0,127,255},
-                smooth=Smooth.None), Line(
-                points={{0,20},{0,-60}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash)}));
+                      points={{0,-40},{80,-40}},
+                      color={0,127,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,20},{0,-60}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash)}));
       end FluidNonionic;
 
       model Solid
@@ -875,12 +875,12 @@ package Conditions "Models to impose and measure operating conditions"
             Documentation(info="<html><p>Note that shear force is not included.</p>
   </html>"),
             Icon(graphics={Line(
-                  points={{0,0},{-80,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None), Line(
-                  points={{0,0},{80,0}},
-                  color={191,0,0},
-                  smooth=Smooth.None)}));
+                          points={{0,0},{-80,0}},
+                          color={127,127,127},
+                          smooth=Smooth.None),Line(
+                          points={{0,0},{80,0}},
+                          color={191,0,0},
+                          smooth=Smooth.None)}));
         end PartialSpecies;
 
       end BaseClasses;
@@ -1271,88 +1271,88 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             rotation=270,
             origin={14,30})));
 
-      Modelica.Blocks.Math.Gain unit1(k=U.V) annotation (Placement(
+      Modelica.Blocks.Math.Gain from_V(k=U.V) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-152,0})));
-      Modelica.Blocks.Math.Gain unit2(k=U.'%') annotation (Placement(
+      Modelica.Blocks.Math.Gain 'from1_%'(k=U.'%') annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-134,-30})));
-      Modelica.Blocks.Math.Gain unit3(k=U.'%') annotation (Placement(
+      Modelica.Blocks.Math.Gain 'from2_%'(k=U.'%') annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-114,0})));
-      FCSys.Conditions.BaseClasses.RealFunction unit4(y=unit4.u*U.kPa + U.atm)
-        annotation (Placement(transformation(
+      Blocks.UnitConversions.From_kPag from1_kPag annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-94,-30})));
-      FCSys.Conditions.BaseClasses.RealFunction unit5(y=unit5.u*U.kPa + U.atm)
-        annotation (Placement(transformation(
+      Blocks.UnitConversions.From_kPag from2_kPag annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-74,0})));
-      FCSys.Conditions.BaseClasses.RealFunction unit6(y=unit6.u*U.kPa + U.atm)
-        annotation (Placement(transformation(
+      Blocks.UnitConversions.From_kPag from3_kPag annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-54,-30})));
-      FCSys.Conditions.BaseClasses.RealFunction unit7(y=unit7.u*U.kPa + U.atm)
-        annotation (Placement(transformation(
+      Blocks.UnitConversions.From_kPag from4_kPag annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-34,0})));
-      Modelica.Blocks.Math.Gain unit8(k=U.L/U.min) annotation (Placement(
+      Modelica.Blocks.Math.Gain from1_LPM(k=U.L/U.min) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-14,-30})));
-      Modelica.Blocks.Math.Gain unit9(k=U.L/U.min) annotation (Placement(
+      Modelica.Blocks.Math.Gain from2_LPM(k=U.L/U.min) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={14,0})));
-      FCSys.Conditions.BaseClasses.RealFunction unit10(y=(unit10.u + 273.15)*U.K)
-        annotation (Placement(transformation(
+      Blocks.UnitConversions.From_degC from1_degC annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={32,-30})));
-      FCSys.Conditions.BaseClasses.RealFunction unit11(y=(unit11.u + 273.15)*U.K)
-        annotation (Placement(transformation(
+      Blocks.UnitConversions.From_degC from2_degC annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={52,0})));
-      FCSys.Conditions.BaseClasses.RealFunction unit12(y=(unit12.u + 273.15)*U.K)
-        annotation (Placement(transformation(
+      Blocks.UnitConversions.From_degC from3_degC annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={72,-30})));
-      FCSys.Conditions.BaseClasses.RealFunction unit13(y=(unit13.u + 273.15)*U.K)
-        annotation (Placement(transformation(
+      Blocks.UnitConversions.From_degC from4_degC annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={92,0})));
-      FCSys.Conditions.BaseClasses.RealFunction unit14(y=(unit14.u + 273.15)*U.K)
-        annotation (Placement(transformation(
+      Blocks.UnitConversions.From_degC from5_degC annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={112,-30})));
-      FCSys.Conditions.BaseClasses.RealFunction unit15(y=(unit15.u + 273.15)*U.K)
-        annotation (Placement(transformation(
+      Blocks.UnitConversions.From_degC from6_degC annotation (Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={132,0})));
-      Modelica.Blocks.Math.Gain unit16(k=U.A) annotation (Placement(
+      Modelica.Blocks.Math.Gain from_A(k=U.A) annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={152,-30})));
 
-      FCSys.Connectors.RealOutputInternal Deltamu(final unit="l2.m/(N.T2)")
+      FCSys.Connectors.RealOutputInternal v(final unit="l2.m/(N.T2)")
         "CVM Cell 1 Voltage" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -1451,7 +1451,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={132,-60})));
-      FCSys.Connectors.RealOutputInternal J(final unit="N/T") "Measured load"
+      FCSys.Connectors.RealOutputInternal I(final unit="N/T") "Measured load"
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -1466,35 +1466,35 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end if;
 
       // Connections from source to unit conversion
-      connect(unit1.u, combiTimeTable.y[1]) annotation (Line(
+      connect(from_V.u, combiTimeTable.y[1]) annotation (Line(
           points={{-152,12},{-152,50},{-1.44329e-15,50},{-1.44329e-15,69}},
           color={0,0,127},
           smooth=Smooth.None));
 
-      connect(unit2.u, combiTimeTable.y[2]) annotation (Line(
+      connect('from1_%'.u, combiTimeTable.y[2]) annotation (Line(
           points={{-134,-18},{-134,50},{-1.44329e-15,50},{-1.44329e-15,69}},
           color={0,0,127},
           smooth=Smooth.None));
 
-      connect(unit3.u, combiTimeTable.y[3]) annotation (Line(
+      connect('from2_%'.u, combiTimeTable.y[3]) annotation (Line(
           points={{-114,12},{-114,50},{-1.44329e-15,50},{-1.44329e-15,69}},
           color={0,0,127},
           smooth=Smooth.None));
 
-      connect(unit4.u, combiTimeTable.y[4]) annotation (Line(
-          points={{-94,-20},{-94,50},{-1.44329e-15,50},{-1.44329e-15,69}},
+      connect(from1_kPag.u, combiTimeTable.y[4]) annotation (Line(
+          points={{-94,-19},{-94,50},{-1.44329e-15,50},{-1.44329e-15,69}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(unit5.u, combiTimeTable.y[5]) annotation (Line(
-          points={{-74,10},{-74,50},{-1.44329e-15,50},{-1.44329e-15,69}},
+      connect(from2_kPag.u, combiTimeTable.y[5]) annotation (Line(
+          points={{-74,11},{-74,50},{-1.44329e-15,50},{-1.44329e-15,69}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(unit6.u, combiTimeTable.y[6]) annotation (Line(
-          points={{-54,-20},{-54,50},{-1.44329e-15,50},{-1.44329e-15,69}},
+      connect(from3_kPag.u, combiTimeTable.y[6]) annotation (Line(
+          points={{-54,-19},{-54,50},{-1.44329e-15,50},{-1.44329e-15,69}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(unit7.u, combiTimeTable.y[7]) annotation (Line(
-          points={{-34,10},{-34,50},{-1.44329e-15,50},{-1.44329e-15,69}},
+      connect(from4_kPag.u, combiTimeTable.y[7]) annotation (Line(
+          points={{-34,11},{-34,50},{-1.44329e-15,50},{-1.44329e-15,69}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(sumAnMFC.u1, combiTimeTable.y[8]) annotation (Line(
@@ -1513,115 +1513,115 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           points={{8,42},{8,50},{-1.44329e-15,50},{-1.44329e-15,69}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(unit10.u, combiTimeTable.y[12]) annotation (Line(
-          points={{32,-20},{32,50},{-1.44329e-15,50},{-1.44329e-15,69}},
+      connect(from1_degC.u, combiTimeTable.y[12]) annotation (Line(
+          points={{32,-19},{32,50},{-1.44329e-15,50},{-1.44329e-15,69}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(unit11.u, combiTimeTable.y[13]) annotation (Line(
-          points={{52,10},{52,50},{-1.44329e-15,50},{-1.44329e-15,69}},
+      connect(from2_degC.u, combiTimeTable.y[13]) annotation (Line(
+          points={{52,11},{52,50},{-1.44329e-15,50},{-1.44329e-15,69}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(unit12.u, combiTimeTable.y[14]) annotation (Line(
-          points={{72,-20},{72,50},{-1.44329e-15,50},{-1.44329e-15,69}},
+      connect(from3_degC.u, combiTimeTable.y[14]) annotation (Line(
+          points={{72,-19},{72,50},{-1.44329e-15,50},{-1.44329e-15,69}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(unit13.u, combiTimeTable.y[15]) annotation (Line(
-          points={{92,10},{92,50},{-1.44329e-15,50},{-1.44329e-15,69}},
+      connect(from4_degC.u, combiTimeTable.y[15]) annotation (Line(
+          points={{92,11},{92,50},{-1.44329e-15,50},{-1.44329e-15,69}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(unit14.u, combiTimeTable.y[16]) annotation (Line(
-          points={{112,-20},{112,50},{-1.44329e-15,50},{-1.44329e-15,69}},
+      connect(from5_degC.u, combiTimeTable.y[16]) annotation (Line(
+          points={{112,-19},{112,50},{-1.44329e-15,50},{-1.44329e-15,69}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(unit15.u, combiTimeTable.y[17]) annotation (Line(
-          points={{132,10},{132,50},{-1.44329e-15,50},{-1.44329e-15,69}},
+      connect(from6_degC.u, combiTimeTable.y[17]) annotation (Line(
+          points={{132,11},{132,50},{-1.44329e-15,50},{-1.44329e-15,69}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(unit16.u, combiTimeTable.y[18]) annotation (Line(
+      connect(from_A.u, combiTimeTable.y[18]) annotation (Line(
           points={{152,-18},{152,50},{-1.44329e-15,50},{-1.44329e-15,69}},
           color={0,0,127},
           smooth=Smooth.None));
 
       // Connections from unit conversion to internal outputs
-      connect(Deltamu, unit1.y) annotation (Line(
+      connect(v, from_V.y) annotation (Line(
           points={{-152,-60},{-152,-11}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(RHAnFPNegX, unit2.y) annotation (Line(
+      connect(RHAnFPNegX, 'from1_%'.y) annotation (Line(
           points={{-134,-60},{-134,-41}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(RHCaFPNegX, unit3.y) annotation (Line(
+      connect(RHCaFPNegX, 'from2_%'.y) annotation (Line(
           points={{-114,-60},{-114,-11}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(p_anFPNegY, unit4.y) annotation (Line(
-          points={{-94,-60},{-94,-40}},
+      connect(p_anFPNegY, from1_kPag.y) annotation (Line(
+          points={{-94,-60},{-94,-41}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(p_anFPPosY, unit5.y) annotation (Line(
-          points={{-74,-60},{-74,-10}},
+      connect(p_anFPPosY, from2_kPag.y) annotation (Line(
+          points={{-74,-60},{-74,-11}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(p_caFPNegY, unit6.y) annotation (Line(
-          points={{-54,-60},{-54,-40}},
+      connect(p_caFPNegY, from3_kPag.y) annotation (Line(
+          points={{-54,-60},{-54,-41}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(p_caFPPosY, unit7.y) annotation (Line(
-          points={{-34,-60},{-34,-10}},
+      connect(p_caFPPosY, from4_kPag.y) annotation (Line(
+          points={{-34,-60},{-34,-11}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(Vdot_anFPNegY_H2, unit8.y) annotation (Line(
+      connect(Vdot_anFPNegY_H2, from1_LPM.y) annotation (Line(
           points={{-14,-60},{-14,-50.5},{-14,-41},{-14,-41}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(Vdot_caFPNegY_air, unit9.y) annotation (Line(
+      connect(Vdot_caFPNegY_air, from2_LPM.y) annotation (Line(
           points={{14,-60},{14,-35.5},{14,-11},{14,-11}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(T_anFPNegY, unit10.y) annotation (Line(
-          points={{32,-60},{32,-50},{32,-40},{32,-40}},
+      connect(T_anFPNegY, from1_degC.y) annotation (Line(
+          points={{32,-60},{32,-50.5},{32,-41},{32,-41}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(T_anFPPosY, unit11.y) annotation (Line(
-          points={{52,-60},{52,-10}},
+      connect(T_anFPPosY, from2_degC.y) annotation (Line(
+          points={{52,-60},{52,-11}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(T_caFPNegY, unit12.y) annotation (Line(
-          points={{72,-60},{72,-40}},
+      connect(T_caFPNegY, from3_degC.y) annotation (Line(
+          points={{72,-60},{72,-41}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(T_caFPPosY, unit13.y) annotation (Line(
-          points={{92,-60},{92,-10}},
+      connect(T_caFPPosY, from4_degC.y) annotation (Line(
+          points={{92,-60},{92,-11}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(T_anFPX, unit14.y) annotation (Line(
-          points={{112,-60},{112,-40}},
+      connect(T_anFPX, from5_degC.y) annotation (Line(
+          points={{112,-60},{112,-41}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(T_caFPX, unit15.y) annotation (Line(
-          points={{132,-60},{132,-10}},
+      connect(T_caFPX, from6_degC.y) annotation (Line(
+          points={{132,-60},{132,-11}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(J, unit16.y) annotation (Line(
+      connect(I, from_A.y) annotation (Line(
           points={{152,-60},{152,-41}},
           color={0,0,127},
           smooth=Smooth.None));
 
       // Summations
-      connect(sumAnMFC.y, unit8.u) annotation (Line(
+      connect(sumAnMFC.y, from1_LPM.u) annotation (Line(
           points={{-14,19},{-14,9.75},{-14,9.75},{-14,0.5},{-14,-18},{-14,-18}},
 
           color={0,0,127},
           smooth=Smooth.None));
 
-      connect(sumCaMFC.y, unit9.u) annotation (Line(
+      connect(sumCaMFC.y, from2_LPM.u) annotation (Line(
           points={{14,19},{14,17.25},{14,17.25},{14,15.5},{14,12},{14,12}},
           color={0,0,127},
           smooth=Smooth.None));
 
       // Connections from internal outputs to public output
-      connect(Deltamu, y.Deltamu) annotation (Line(
+      connect(v, y.v) annotation (Line(
           points={{-152,-60},{-152,-80},{5.55112e-16,-80},{5.55112e-16,-100}},
           color={0,0,127},
           smooth=Smooth.None));
@@ -1691,7 +1691,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           color={0,0,127},
           smooth=Smooth.None));
 
-      connect(J, y.J) annotation (Line(
+      connect(I, y.I) annotation (Line(
           points={{152,-60},{152,-80},{5.55112e-16,-80},{5.55112e-16,-100}},
           color={0,0,127},
           smooth=Smooth.None));
@@ -1896,11 +1896,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                   {160,160}}), graphics),
           Icon(coordinateSystem(preserveAspectRatio=true,extent={{-160,-160},{
                   160,160}}), graphics={Rectangle(
-                      extent={{-160,160},{160,-160}},
-                      lineColor={191,191,191},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Backward),Rectangle(extent={{-160,
-                160},{160,-160}}, lineColor={0,0,0})}));
+                extent={{-160,160},{160,-160}},
+                lineColor={191,191,191},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Backward), Rectangle(extent={{-160,160},
+                    {160,-160}}, lineColor={0,0,0})}));
       end PartialTestStand;
 
       partial model PartialTestStandNoIO
@@ -4606,16 +4606,16 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           "Value of imposed condition" annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
-              origin={-100,0})));
+              origin={-110,0})));
 
         FCSys.Connectors.RealOutput y "Expression of measurement" annotation (
             Dialog(group="Measurement"), Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
-              origin={100,0}), iconTransformation(
+              origin={110,0}), iconTransformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
-              origin={100,0})));
+              origin={110,0})));
 
         FCSys.Connectors.Face face
           "Connector to transport linear momentum and heat of a single species"
@@ -4631,8 +4631,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       equation
         connect(u, u_final) annotation (Line(
-            points={{-100,5.55112e-16},{-62,-4.87687e-22},{-62,5.55112e-16},{-20,
-                5.55112e-16}},
+            points={{-110,5.55112e-16},{-62,-4.87687e-22},{-62,5.55112e-16},{
+                -20,5.55112e-16}},
             color={0,0,127},
             smooth=Smooth.None));
 
@@ -4640,7 +4640,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             points={{-59,30},{-40,30},{-40,5.55112e-16},{-20,5.55112e-16}},
             color={0,0,127},
             smooth=Smooth.None));
-        annotation (Icon(graphics));
+        annotation (Icon(graphics), Diagram(graphics));
       end PartialCondition;
 
     end BaseClasses;
@@ -6756,34 +6756,28 @@ The default global default settings will be used for the current simulation.",
       extends Modelica.Icons.Package;
       partial class Double "Icon for a two-connector boundary condition"
         //extends Names.Middle;
-        annotation (Icon(graphics={
-              Rectangle(
-                extent={{-100,40},{100,-40}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Line(
-                points={{-100,40},{100,40}},
-                pattern=LinePattern.None,
-                smooth=Smooth.None),
-              Line(
-                points={{-100,-40},{-100,40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash),
-              Text(
-                extent={{-150,-20},{150,20}},
-                textString="%name",
-                lineColor={0,0,0}),
-              Line(
-                points={{-100,-40},{100,-40}},
-                pattern=LinePattern.None,
-                smooth=Smooth.None),
-              Line(
-                points={{100,-40},{100,40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash)}));
+        annotation (Icon(graphics={Rectangle(
+                      extent={{-100,40},{100,-40}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Line(
+                      points={{-100,40},{100,40}},
+                      pattern=LinePattern.None,
+                      smooth=Smooth.None),Line(
+                      points={{-100,-40},{-100,40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash),Text(
+                      extent={{-150,-20},{150,20}},
+                      textString="%name",
+                      lineColor={0,0,0}),Line(
+                      points={{-100,-40},{100,-40}},
+                      pattern=LinePattern.None,
+                      smooth=Smooth.None),Line(
+                      points={{100,-40},{100,40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash)}));
 
       end Double;
 
@@ -6813,52 +6807,6 @@ The default global default settings will be used for the current simulation.",
 
     end Icons;
 
-    block RealFunction
-      "<html>Set an output signal according to a <code>Real</code> function of an input</html>"
-
-      extends FCSys.BaseClasses.Icons.Names.Top2;
-      //extends FCSys.BaseClasses.Icons.Blocks.ContinuousShort;
-
-      FCSys.Connectors.RealInput u "Value of Real input" annotation (Placement(
-            transformation(extent={{-110,-10},{-90,10}}), iconTransformation(
-              extent={{-110,-10},{-90,10}})));
-      FCSys.Connectors.RealOutput y=0.0*u
-        "<html>Value of <code>Real</code> output</html>" annotation (Dialog(
-            group="Time varying output signal"), Placement(transformation(
-              extent={{90,-10},{110,10}}, rotation=0), iconTransformation(
-              extent={{90,-10},{110,10}})));
-      annotation (
-        Icon(coordinateSystem(
-            preserveAspectRatio=true,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}),graphics={Rectangle(
-              extent={{-100,40},{100,-40}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineColor={0,0,0}), Text(
-              extent={{-100,-10},{100,10}},
-              lineColor={127,127,127},
-              textString="%y")}),
-        Diagram(coordinateSystem(
-            preserveAspectRatio=true,
-            extent={{-100,-100},{100,100}},
-            grid={2,2}),graphics),
-        Documentation(info="<html>
-<p>
-The (time-varying) <code>Real</code> output signal of this block can be defined in its
-parameter menu via variable <i>y</i>. The purpose is to support the
-easy definition of <code>Real</code> expressions in a block diagram. For example,
-in the y-menu the definition <code>if time &gt; 1 then 1 else 0</code> can be given in order
-to produce an output signal that transitions from zero to one at time one.  Note that
-<code>time</code> is a built-in variable that is always
-accessible and represents the \"model time.\"
-Variable <i>y</i> is both a variable and a connector.
-Variable <i>u</i> is too, and it may be used in the expression for <i>y</i>.
-</p>
-<p>This block has been adapted from <a href=\"modelica://Modelica.Blocks.Sources.RealExpression\">Modelica.Blocks.Sources.RealExpression</a>.</p>
-</html>"));
-
-    end RealFunction;
 
   end BaseClasses;
   annotation (Documentation(info="<html><p>**Since the connectors in

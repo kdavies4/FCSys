@@ -96,11 +96,10 @@ Modelica.Utilities.Files.copy("dsmodel.mof", "FCSys/resources/scripts/units-valu
 // ***********************************************************************
 
 // Conversions with offsets
-defineUnitConversion("l2.m/(N.T2)", "degC", 1/K, -273.15) "Temperature";
+defineUnitConversion("l2.m/(N.T2)", "degC", 1/K, -273.15) "Temperature in degC";
 // See BIPM (2006, Table 3).
-defineUnitConversion("l2.m/(N.T2)", "degF", 9/(5*K), 32 - (9/5)*273.15) "Temperature";
-defineUnitConversion("m/(l.T2)", "kPag", 1/kPa, -101.325) "Pressure";
-// Value from "standard atmosphere" NIST (2010)
+defineUnitConversion("l2.m/(N.T2)", "degF", 9/(5*K), 32 - (9/5)*273.15) "Temperature in degF";
+defineUnitConversion("m/(l.T2)", "kPag", 1/kPa, -atm/kPa) "Pressure in kPag";
 // See BIPM (2006, p. 129 Sec. 4.2).
 
 // Conversions without offsets (generated from FCSys/resources/quantities.xls,

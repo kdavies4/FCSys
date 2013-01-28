@@ -1120,7 +1120,7 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         defaultComponentName="cell",
         Documentation(info="
 
-<html><p>For information, see the
+<html><p>See the
   <a href=\"modelica://FCSys.Assemblies.Cells.Cell\">Cell</a> model.</p></html>"),
 
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-60,-20},{

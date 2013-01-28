@@ -2359,7 +2359,7 @@ package Subregions
           smooth=Smooth.None));
       annotation (
         defaultComponentPrefixes="replaceable",
-        Documentation(info="<html><p>For information, see the
+        Documentation(info="<html><p>See the
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
@@ -2607,7 +2607,7 @@ package Subregions
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="C",
-            Documentation(info="<html><p>For information, see the
+            Documentation(info="<html><p>See the
     <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
 
             Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
@@ -2627,7 +2627,7 @@ package Subregions
             defaultComponentPrefixes="replaceable",
             defaultComponentName="C",
             Documentation(info=
-                  "<html><p>For information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
+                  "<html><p>See the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
 
             Icon(graphics));
 
@@ -2726,7 +2726,7 @@ package Subregions
             defaultComponentPrefixes="replaceable",
             defaultComponentName="C19HF37O5S",
             Documentation(info=
-                  "<html><p>For information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
+                  "<html><p>See the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"),
 
             Diagram(graphics));
 
@@ -2739,7 +2739,7 @@ package Subregions
             defaultComponentPrefixes="replaceable",
             defaultComponentName="C19HF37O5S",
             Documentation(info=
-                  "<html><p>For information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+                  "<html><p>See the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Correlated;
 
@@ -2793,7 +2793,7 @@ package Subregions
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'e-'",
             Documentation(info=
-                  "<html><p>For information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+                  "<html><p>See the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Calibrated;
 
@@ -2808,7 +2808,7 @@ package Subregions
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'e-'",
             Documentation(info=
-                  "<html><p>For information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+                  "<html><p>See the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Correlated;
 
@@ -4925,14 +4925,14 @@ Choose a condition besides None.");
             extent={{-100,-100},{100,100}},
             initialScale=0.1), graphics),
         Icon(graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={127,127,127},
-              pattern=LinePattern.Dash,
-              fillColor={225,225,225},
-              fillPattern=FillPattern.Solid), Text(
-              extent={{-100,20},{100,60}},
-              textString="%name",
-              lineColor={0,0,0})}));
+                  extent={{-100,100},{100,-100}},
+                  lineColor={127,127,127},
+                  pattern=LinePattern.Dash,
+                  fillColor={225,225,225},
+                  fillPattern=FillPattern.Solid),Text(
+                  extent={{-100,20},{100,60}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
     end Species;
 
     package BaseClasses "Base classes (not generally for direct use)"

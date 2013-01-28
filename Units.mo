@@ -441,7 +441,7 @@ package Units "Constants and units of physical measure"
       // The unit of temperature (kelvin) is inversely proportional to this
       // value, which should be increased for larger temperature numbers.  If R
       // is set to 1, then temperature is considered to be a potential.
-      annotation (Documentation(info="<html>For more information, see the notes in the Modelica code and the documentation in the
+      annotation (Documentation(info="<html><p>For more information, see the notes in the Modelica code and the documentation in the
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
           Commands(file="resources/scripts/units.mos"
             "Re-initialize the units."));
@@ -460,28 +460,42 @@ package Units "Constants and units of physical measure"
   // -----------------------------------------------------------------------
   // Mathematical constants
 
-  function from_degC
-    "Convert a temperature in degree Celsius to thermodynamic temperature"
+  function from_degC "From temperature in degree Celsius"
     extends Modelica.SIunits.Conversions.ConversionIcon;
-    input Modelica.SIunits.Conversions.NonSIunits.Temperature_degC T_degC
-      "Temperature in degree Celsius";
+    input Real T_degC "Temperature in degree Celsius";
     output Q.TemperatureAbsolute T "Thermodynamic temperature";
 
   algorithm
-    T := (T_degC + 273.15)*K
-      annotation (Inline=true, inverse(T_degC=to_degC(T)));
+    T := (T_degC + 273.15)*K annotation (Inline=true);
   end from_degC;
 
-  function to_degC "Express a thermodynamic temperature in degree Celsius"
+  function to_degC "To temperature in degree Celsius"
+
     extends Modelica.SIunits.Conversions.ConversionIcon;
     input Q.TemperatureAbsolute T "Thermodynamic temperature";
-    output Modelica.SIunits.Conversions.NonSIunits.Temperature_degC T_degC
-      "Temperature in degree Celsius";
+    output Real T_degC "Temperature in degree Celsius";
 
   algorithm
-    T_degC := T/K - 273.15
-      annotation (Inline=true, inverse(T=from_degC(T_degC)));
+    T_degC := T/K - 273.15 annotation (Inline=true);
   end to_degC;
+
+  function from_kPag "From gauge pressure in kilopascals"
+    extends Modelica.SIunits.Conversions.ConversionIcon;
+    input Real p_kPag "Gauge pressure in kilopascals";
+    output Q.PressureAbsolute p "Absolute pressure";
+
+  algorithm
+    p := p_kPag*U.kPa + U.atm annotation (Inline=true);
+  end from_kPag;
+
+  function to_kPag "To gauge pressure in kilopascals"
+    extends Modelica.SIunits.Conversions.ConversionIcon;
+    input Q.PressureAbsolute p "Absolute pressure";
+    output Real p_kPag "Gauge pressure in kilopascals";
+
+  algorithm
+    p_kPag := (p - U.atm)/U.kPa annotation (Inline=true);
+  end to_kPag;
   final constant Q.Number pi=2*arccos(0) "<html>pi (<i>&pi;</i>)</html>";
   // Circumference per unit diameter
   final constant Q.Number e=exp(1) "Euler number";
@@ -782,18 +796,6 @@ package Units "Constants and units of physical measure"
   final constant Q.AmountVolumic M=U.mol/U.L "molar";
   final constant Q.Volume cc=U.cm^3 "cubic centimeter";
 
-  function Test
-
-    replaceable function f "Conversion function"
-    end f;
-
-    Connectors.RealInput u
-      annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
-    Connectors.RealOutput y
-      annotation (Placement(transformation(extent={{86,-12},{106,8}})));
-  equation
-    y = f(u);
-  end Test;
   annotation (Documentation(info="<html><p>When a physical variable is assigned a quantity, it is the product of a number
     and a unit [<a href=\"modelica://FCSys.UsersGuide.References\">BIPM2006</a>].  In <a href=\"modelica://FCSys\">FCSys</a>, units are also assigned numeric values in a consistent
     manner.  A unit

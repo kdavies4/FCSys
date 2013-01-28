@@ -165,7 +165,7 @@ package WorkInProgress "Incomplete classes under development"
                       lineColor={0,0,255},
                       textString="controller.x = aircraft.x")}),
           experiment(StopTime=20),
-          Documentation(info="<html>In this example, the states of the plant are fed directly to the controller.  The plant is not observable with the given output (<b>C</b>) matrix, since there are 4 states and the rank of the observability matrix is only 3.
+          Documentation(info="<html><p>In this example, the states of the plant are fed directly to the controller.  The plant is not observable with the given output (<b>C</b>) matrix, since there are 4 states and the rank of the observability matrix is only 3.
  <p>The matrices of the controller are the discretized version of the plant model in continuous-time.
  They can be calculated in MATLAB by:
  <table border=\"0\" bgcolor=\"lightgray\"><tr><td><code>
@@ -2048,10 +2048,10 @@ results in the following equations:
                   ={{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
                   preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
                 graphics={Rectangle(
-                  extent={{-100,-100},{100,100}},
-                  lineColor={0,0,127},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid)}));
+                          extent={{-100,-100},{100,100}},
+                          lineColor={0,0,127},
+                          fillColor={255,255,255},
+                          fillPattern=FillPattern.Solid)}));
         end StateSpaceWNoise;
 
         model Pendulum "Simple pendulum with one revolute joint and one body"
@@ -2155,45 +2155,39 @@ assembled system.
 <IMG src=\"modelica://Modelica/Resources/Images/MultiBody/Examples/Elementary/Pendulum.png\"
 ALT=\"model Examples.Elementary.Pendulum\">
 </html>"),
-            Icon(graphics={
-                Ellipse(
-                  extent={{10,80},{30,60}},
-                  lineColor={215,215,215},
-                  fillColor={0,0,0},
-                  fillPattern=FillPattern.Sphere,
-                  lineThickness=0.5),
-                Line(
-                  points={{20,70},{0,0}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  thickness=0.5),
-                Line(
-                  points={{50,0},{-50,0}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  origin={0,0},
-                  rotation=180,
-                  thickness=0.5),
-                Polygon(
-                  points={{-48,6},{-60,0},{-48,-6},{-48,6}},
-                  smooth=Smooth.None,
-                  fillColor={0,0,0},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None),
-                Polygon(
-                  points={{6,6},{-6,0},{6,-6},{6,6}},
-                  smooth=Smooth.None,
-                  fillColor={0,0,0},
-                  fillPattern=FillPattern.Solid,
-                  pattern=LinePattern.None,
-                  origin={54,0},
-                  rotation=180),
-                Ellipse(
-                  extent={{-4,4},{4,-4}},
-                  lineColor={0,0,0},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  lineThickness=0.5)}));
+            Icon(graphics={Ellipse(
+                          extent={{10,80},{30,60}},
+                          lineColor={215,215,215},
+                          fillColor={0,0,0},
+                          fillPattern=FillPattern.Sphere,
+                          lineThickness=0.5),Line(
+                          points={{20,70},{0,0}},
+                          color={0,0,0},
+                          smooth=Smooth.None,
+                          thickness=0.5),Line(
+                          points={{50,0},{-50,0}},
+                          color={0,0,0},
+                          smooth=Smooth.None,
+                          origin={0,0},
+                          rotation=180,
+                          thickness=0.5),Polygon(
+                          points={{-48,6},{-60,0},{-48,-6},{-48,6}},
+                          smooth=Smooth.None,
+                          fillColor={0,0,0},
+                          fillPattern=FillPattern.Solid,
+                          pattern=LinePattern.None),Polygon(
+                          points={{6,6},{-6,0},{6,-6},{6,6}},
+                          smooth=Smooth.None,
+                          fillColor={0,0,0},
+                          fillPattern=FillPattern.Solid,
+                          pattern=LinePattern.None,
+                          origin={54,0},
+                          rotation=180),Ellipse(
+                          extent={{-4,4},{4,-4}},
+                          lineColor={0,0,0},
+                          fillColor={255,255,255},
+                          fillPattern=FillPattern.Solid,
+                          lineThickness=0.5)}));
         end Pendulum;
 
         model PendulumDummy
@@ -2307,52 +2301,44 @@ ALT=\"model Examples.Elementary.Pendulum\">
 </ul></p>
 </html>"),
             Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                    {100,100}}),graphics={
-                Polygon(
-                  points={{-80,98},{-88,76},{-72,76},{-80,98}},
-                  lineColor={192,192,192},
-                  fillColor={192,192,192},
-                  fillPattern=FillPattern.Solid),
-                Line(points={{-80,76},{-80,20}}, color={192,192,192}),
-                Line(points={{-90,50},{82,50}}, color={192,192,192}),
-                Polygon(
-                  points={{90,50},{68,58},{68,42},{90,50}},
-                  lineColor={192,192,192},
-                  fillColor={192,192,192},
-                  fillPattern=FillPattern.Solid),
-                Line(
-                  points={{-80,26},{-64,72},{-58,16},{-44,104},{-32,30},{-20,56},
-                      {-12,14},{4,114},{6,-12},{18,94},{32,22},{40,90},{56,38},
-                      {60,40}},
-                  color={0,0,127},
-                  smooth=Smooth.Bezier),
-                Text(
-                  extent={{68,42},{92,16}},
-                  lineColor={175,175,175},
-                  textString="t"),
-                Polygon(
-                  points={{0,8},{-8,-14},{8,-14},{0,8}},
-                  lineColor={192,192,192},
-                  fillColor={192,192,192},
-                  fillPattern=FillPattern.Solid),
-                Line(points={{0,-14},{0,-70}}, color={192,192,192}),
-                Polygon(
-                  points={{90,-60},{68,-52},{68,-68},{90,-60}},
-                  lineColor={192,192,192},
-                  fillColor={192,192,192},
-                  fillPattern=FillPattern.Solid),
-                Text(
-                  extent={{68,-68},{92,-94}},
-                  lineColor={175,175,175},
-                  textString="x"),
-                Polygon(
-                  points={{-60,-60},{-30,-60},{-18,-54},{-12,-40},{-4,-18},{4,-18},
-                      {12,-40},{18,-54},{30,-60},{60,-60},{-60,-60}},
-                  lineColor={0,0,127},
-                  smooth=Smooth.Bezier,
-                  fillColor={192,192,192},
-                  fillPattern=FillPattern.Solid),
-                Line(points={{-90,-60},{82,-60}}, color={192,192,192})}),
+                    {100,100}}),graphics={Polygon(
+                          points={{-80,98},{-88,76},{-72,76},{-80,98}},
+                          lineColor={192,192,192},
+                          fillColor={192,192,192},
+                          fillPattern=FillPattern.Solid),Line(points={{-80,76},
+                  {-80,20}}, color={192,192,192}),Line(points={{-90,50},{82,50}},
+                  color={192,192,192}),Polygon(
+                          points={{90,50},{68,58},{68,42},{90,50}},
+                          lineColor={192,192,192},
+                          fillColor={192,192,192},
+                          fillPattern=FillPattern.Solid),Line(
+                          points={{-80,26},{-64,72},{-58,16},{-44,104},{-32,30},
+                    {-20,56},{-12,14},{4,114},{6,-12},{18,94},{32,22},{40,90},{
+                    56,38},{60,40}},
+                          color={0,0,127},
+                          smooth=Smooth.Bezier),Text(
+                          extent={{68,42},{92,16}},
+                          lineColor={175,175,175},
+                          textString="t"),Polygon(
+                          points={{0,8},{-8,-14},{8,-14},{0,8}},
+                          lineColor={192,192,192},
+                          fillColor={192,192,192},
+                          fillPattern=FillPattern.Solid),Line(points={{0,-14},{
+                  0,-70}}, color={192,192,192}),Polygon(
+                          points={{90,-60},{68,-52},{68,-68},{90,-60}},
+                          lineColor={192,192,192},
+                          fillColor={192,192,192},
+                          fillPattern=FillPattern.Solid),Text(
+                          extent={{68,-68},{92,-94}},
+                          lineColor={175,175,175},
+                          textString="x"),Polygon(
+                          points={{-60,-60},{-30,-60},{-18,-54},{-12,-40},{-4,-18},
+                    {4,-18},{12,-40},{18,-54},{30,-60},{60,-60},{-60,-60}},
+                          lineColor={0,0,127},
+                          smooth=Smooth.Bezier,
+                          fillColor={192,192,192},
+                          fillPattern=FillPattern.Solid),Line(points={{-90,-60},
+                  {82,-60}}, color={192,192,192})}),
             Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics));
         end RandomNormal;
@@ -2438,54 +2424,45 @@ ALT=\"model Examples.Elementary.Pendulum\">
 </ul></p>
 </html>"),
             Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-                    {100,100}}),graphics={
-                Polygon(
-                  points={{-80,98},{-88,76},{-72,76},{-80,98}},
-                  lineColor={192,192,192},
-                  fillColor={192,192,192},
-                  fillPattern=FillPattern.Solid),
-                Line(points={{-80,76},{-80,20}}, color={192,192,192}),
-                Line(points={{-90,50},{82,50}}, color={192,192,192}),
-                Polygon(
-                  points={{90,50},{68,58},{68,42},{90,50}},
-                  lineColor={192,192,192},
-                  fillColor={192,192,192},
-                  fillPattern=FillPattern.Solid),
-                Line(
-                  points={{-80,26},{-64,72},{-58,16},{-44,104},{-32,30},{-20,56},
-                      {-12,14},{4,114},{6,-12},{18,94},{32,22},{40,90},{56,38},
-                      {60,40}},
-                  color={0,0,127},
-                  smooth=Smooth.Bezier),
-                Text(
-                  extent={{68,42},{92,16}},
-                  lineColor={175,175,175},
-                  textString="t"),
-                Polygon(
-                  points={{0,8},{-8,-14},{8,-14},{0,8}},
-                  lineColor={192,192,192},
-                  fillColor={192,192,192},
-                  fillPattern=FillPattern.Solid),
-                Line(points={{0,-14},{0,-70}}, color={192,192,192}),
-                Polygon(
-                  points={{90,-60},{68,-52},{68,-68},{90,-60}},
-                  lineColor={192,192,192},
-                  fillColor={192,192,192},
-                  fillPattern=FillPattern.Solid),
-                Text(
-                  extent={{68,-68},{92,-94}},
-                  lineColor={175,175,175},
-                  textString="x"),
-                Line(
-                  points={{-60,-60},{-60,-36},{60,-36},{60,-60}},
-                  color={0,0,127},
-                  smooth=Smooth.None),
-                Rectangle(
-                  extent={{-60,-36},{60,-60}},
-                  lineColor={0,0,127},
-                  fillColor={192,192,192},
-                  fillPattern=FillPattern.Solid),
-                Line(points={{-90,-60},{82,-60}}, color={192,192,192})}),
+                    {100,100}}),graphics={Polygon(
+                          points={{-80,98},{-88,76},{-72,76},{-80,98}},
+                          lineColor={192,192,192},
+                          fillColor={192,192,192},
+                          fillPattern=FillPattern.Solid),Line(points={{-80,76},
+                  {-80,20}}, color={192,192,192}),Line(points={{-90,50},{82,50}},
+                  color={192,192,192}),Polygon(
+                          points={{90,50},{68,58},{68,42},{90,50}},
+                          lineColor={192,192,192},
+                          fillColor={192,192,192},
+                          fillPattern=FillPattern.Solid),Line(
+                          points={{-80,26},{-64,72},{-58,16},{-44,104},{-32,30},
+                    {-20,56},{-12,14},{4,114},{6,-12},{18,94},{32,22},{40,90},{
+                    56,38},{60,40}},
+                          color={0,0,127},
+                          smooth=Smooth.Bezier),Text(
+                          extent={{68,42},{92,16}},
+                          lineColor={175,175,175},
+                          textString="t"),Polygon(
+                          points={{0,8},{-8,-14},{8,-14},{0,8}},
+                          lineColor={192,192,192},
+                          fillColor={192,192,192},
+                          fillPattern=FillPattern.Solid),Line(points={{0,-14},{
+                  0,-70}}, color={192,192,192}),Polygon(
+                          points={{90,-60},{68,-52},{68,-68},{90,-60}},
+                          lineColor={192,192,192},
+                          fillColor={192,192,192},
+                          fillPattern=FillPattern.Solid),Text(
+                          extent={{68,-68},{92,-94}},
+                          lineColor={175,175,175},
+                          textString="x"),Line(
+                          points={{-60,-60},{-60,-36},{60,-36},{60,-60}},
+                          color={0,0,127},
+                          smooth=Smooth.None),Rectangle(
+                          extent={{-60,-36},{60,-60}},
+                          lineColor={0,0,127},
+                          fillColor={192,192,192},
+                          fillPattern=FillPattern.Solid),Line(points={{-90,-60},
+                  {82,-60}}, color={192,192,192})}),
             Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics));
         end RandomUniform;
@@ -2581,24 +2558,21 @@ ALT=\"model Examples.Elementary.Pendulum\">
             Icon(coordinateSystem(
                 preserveAspectRatio=true,
                 extent={{-100,-100},{100,100}},
-                grid={2,2}), graphics={
-                Line(points={{-80,68},{-80,-80}}, color={192,192,192}),
-                Polygon(
-                  points={{-80,90},{-88,68},{-72,68},{-80,90}},
-                  lineColor={192,192,192},
-                  fillColor={192,192,192},
-                  fillPattern=FillPattern.Solid),
-                Line(points={{-90,-70},{82,-70}}, color={192,192,192}),
-                Polygon(
-                  points={{90,-70},{68,-62},{68,-78},{90,-70}},
-                  lineColor={192,192,192},
-                  fillColor={192,192,192},
-                  fillPattern=FillPattern.Solid),
-                Line(points={{-80,0},{80,0}}, color={0,0,0}),
-                Text(
-                  extent={{-150,-150},{150,-110}},
-                  lineColor={0,0,0},
-                  textString="k=%k")}),
+                grid={2,2}), graphics={Line(points={{-80,68},{-80,-80}}, color=
+                  {192,192,192}),Polygon(
+                          points={{-80,90},{-88,68},{-72,68},{-80,90}},
+                          lineColor={192,192,192},
+                          fillColor={192,192,192},
+                          fillPattern=FillPattern.Solid),Line(points={{-90,-70},
+                  {82,-70}}, color={192,192,192}),Polygon(
+                          points={{90,-70},{68,-62},{68,-78},{90,-70}},
+                          lineColor={192,192,192},
+                          fillColor={192,192,192},
+                          fillPattern=FillPattern.Solid),Line(points={{-80,0},{
+                  80,0}}, color={0,0,0}),Text(
+                          extent={{-150,-150},{150,-110}},
+                          lineColor={0,0,0},
+                          textString="k=%k")}),
             Diagram(coordinateSystem(
                 preserveAspectRatio=true,
                 extent={{-100,-100},{100,100}},
@@ -7199,47 +7173,39 @@ a simple model of a variable pressure loss is needed.</p>
             smooth=Smooth.None,
             thickness=0.5));
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
-                  -100},{100,100}}), graphics={
-              Rectangle(
-                extent={{-72,-20},{72,-60}},
-                lineColor={215,215,215},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid),
-              Rectangle(
-                extent={{-72,60},{72,20}},
-                lineColor={215,215,215},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid),
-              Line(
-                points={{-90,40},{-72,40},{-60,60},{-36,20},{-12,60},{12,20},{
-                    36,60},{60,20},{72,40},{90,40}},
-                color={0,0,0},
-                smooth=Smooth.None),
-              Rectangle(
-                extent={{-40,-60},{40,-100}},
-                fillColor={0,0,0},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Line(
-                points={{-38,-24},{-38,-24},{-38,-24},{-12,20},{12,-20},{36,20},
-                    {60,-20},{72,0}},
-                color={191,0,0},
-                smooth=Smooth.Bezier,
-                origin={0,-2},
-                rotation=90),
-              Line(
-                points={{0,70},{4,56}},
-                color={191,0,0},
-                smooth=Smooth.Bezier),
-              Line(
-                points={{0,70},{16,70}},
-                color={191,0,0},
-                smooth=Smooth.Bezier),
-              Line(
-                points={{-90,-40},{-72,-40},{-60,-20},{-36,-60},{-12,-20},{12,-60},
-                    {36,-20},{60,-60},{72,-40},{90,-40}},
-                color={0,200,0},
-                smooth=Smooth.None)}), Diagram(coordinateSystem(
+                  -100},{100,100}}), graphics={Rectangle(
+                      extent={{-72,-20},{72,-60}},
+                      lineColor={215,215,215},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid),Rectangle(
+                      extent={{-72,60},{72,20}},
+                      lineColor={215,215,215},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid),Line(
+                      points={{-90,40},{-72,40},{-60,60},{-36,20},{-12,60},{12,
+                  20},{36,60},{60,20},{72,40},{90,40}},
+                      color={0,0,0},
+                      smooth=Smooth.None),Rectangle(
+                      extent={{-40,-60},{40,-100}},
+                      fillColor={0,0,0},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Line(
+                      points={{-38,-24},{-38,-24},{-38,-24},{-12,20},{12,-20},{
+                  36,20},{60,-20},{72,0}},
+                      color={191,0,0},
+                      smooth=Smooth.Bezier,
+                      origin={0,-2},
+                      rotation=90),Line(
+                      points={{0,70},{4,56}},
+                      color={191,0,0},
+                      smooth=Smooth.Bezier),Line(
+                      points={{0,70},{16,70}},
+                      color={191,0,0},
+                      smooth=Smooth.Bezier),Line(
+                      points={{-90,-40},{-72,-40},{-60,-20},{-36,-60},{-12,-20},
+                  {12,-60},{36,-20},{60,-60},{72,-40},{90,-40}},
+                      color={0,200,0},
+                      smooth=Smooth.None)}), Diagram(coordinateSystem(
                 preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
               graphics));
       end FluidHeater;
@@ -7272,82 +7238,68 @@ a simple model of a variable pressure loss is needed.</p>
                   preserveAspectRatio=true,
                   extent={{-100,-100},{100,100}},
                   grid={2,2},
-                  initialScale=0.2), graphics={
-                  Rectangle(
-                    extent={{-20,2},{20,-2}},
-                    lineColor={255,204,51},
-                    lineThickness=0.5),
-                  Polygon(
-                    points={{-80,50},{80,50},{100,30},{80,-40},{60,-50},{-60,-50},
-                        {-80,-40},{-100,30},{-80,50}},
-                    lineColor={0,0,0},
-                    fillColor={255,204,51},
-                    fillPattern=FillPattern.Solid),
-                  Ellipse(
-                    extent={{-65,25},{-55,15}},
-                    lineColor={0,0,0},
-                    fillColor={0,0,0},
-                    fillPattern=FillPattern.Solid),
-                  Ellipse(
-                    extent={{-5,25},{5,15}},
-                    lineColor={0,0,0},
-                    fillColor={0,0,0},
-                    fillPattern=FillPattern.Solid),
-                  Ellipse(
-                    extent={{55,25},{65,15}},
-                    lineColor={0,0,0},
-                    fillColor={0,0,0},
-                    fillPattern=FillPattern.Solid),
-                  Ellipse(
-                    extent={{-35,-15},{-25,-25}},
-                    lineColor={0,0,0},
-                    fillColor={0,0,0},
-                    fillPattern=FillPattern.Solid),
-                  Ellipse(
-                    extent={{25,-15},{35,-25}},
-                    lineColor={0,0,0},
-                    fillColor={0,0,0},
-                    fillPattern=FillPattern.Solid)}),
+                  initialScale=0.2), graphics={Rectangle(
+                              extent={{-20,2},{20,-2}},
+                              lineColor={255,204,51},
+                              lineThickness=0.5),Polygon(
+                              points={{-80,50},{80,50},{100,30},{80,-40},{60,-50},
+                      {-60,-50},{-80,-40},{-100,30},{-80,50}},
+                              lineColor={0,0,0},
+                              fillColor={255,204,51},
+                              fillPattern=FillPattern.Solid),Ellipse(
+                              extent={{-65,25},{-55,15}},
+                              lineColor={0,0,0},
+                              fillColor={0,0,0},
+                              fillPattern=FillPattern.Solid),Ellipse(
+                              extent={{-5,25},{5,15}},
+                              lineColor={0,0,0},
+                              fillColor={0,0,0},
+                              fillPattern=FillPattern.Solid),Ellipse(
+                              extent={{55,25},{65,15}},
+                              lineColor={0,0,0},
+                              fillColor={0,0,0},
+                              fillPattern=FillPattern.Solid),Ellipse(
+                              extent={{-35,-15},{-25,-25}},
+                              lineColor={0,0,0},
+                              fillColor={0,0,0},
+                              fillPattern=FillPattern.Solid),Ellipse(
+                              extent={{25,-15},{35,-25}},
+                              lineColor={0,0,0},
+                              fillColor={0,0,0},
+                              fillPattern=FillPattern.Solid)}),
               Diagram(coordinateSystem(
                   preserveAspectRatio=true,
                   extent={{-100,-100},{100,100}},
                   grid={2,2},
-                  initialScale=0.2), graphics={
-                  Polygon(
-                    points={{-40,25},{40,25},{50,15},{40,-20},{30,-25},{-30,-25},
-                        {-40,-20},{-50,15},{-40,25}},
-                    lineColor={0,0,0},
-                    fillColor={255,204,51},
-                    fillPattern=FillPattern.Solid),
-                  Ellipse(
-                    extent={{-32.5,7.5},{-27.5,12.5}},
-                    lineColor={0,0,0},
-                    fillColor={0,0,0},
-                    fillPattern=FillPattern.Solid),
-                  Ellipse(
-                    extent={{-2.5,12.5},{2.5,7.5}},
-                    lineColor={0,0,0},
-                    fillColor={0,0,0},
-                    fillPattern=FillPattern.Solid),
-                  Ellipse(
-                    extent={{27.5,12.5},{32.5,7.5}},
-                    lineColor={0,0,0},
-                    fillColor={0,0,0},
-                    fillPattern=FillPattern.Solid),
-                  Ellipse(
-                    extent={{-17.5,-7.5},{-12.5,-12.5}},
-                    lineColor={0,0,0},
-                    fillColor={0,0,0},
-                    fillPattern=FillPattern.Solid),
-                  Ellipse(
-                    extent={{12.5,-7.5},{17.5,-12.5}},
-                    lineColor={0,0,0},
-                    fillColor={0,0,0},
-                    fillPattern=FillPattern.Solid),
-                  Text(
-                    extent={{-150,50},{150,90}},
-                    textString="%name",
-                    lineColor={0,0,0})}),
+                  initialScale=0.2), graphics={Polygon(
+                              points={{-40,25},{40,25},{50,15},{40,-20},{30,-25},
+                      {-30,-25},{-40,-20},{-50,15},{-40,25}},
+                              lineColor={0,0,0},
+                              fillColor={255,204,51},
+                              fillPattern=FillPattern.Solid),Ellipse(
+                              extent={{-32.5,7.5},{-27.5,12.5}},
+                              lineColor={0,0,0},
+                              fillColor={0,0,0},
+                              fillPattern=FillPattern.Solid),Ellipse(
+                              extent={{-2.5,12.5},{2.5,7.5}},
+                              lineColor={0,0,0},
+                              fillColor={0,0,0},
+                              fillPattern=FillPattern.Solid),Ellipse(
+                              extent={{27.5,12.5},{32.5,7.5}},
+                              lineColor={0,0,0},
+                              fillColor={0,0,0},
+                              fillPattern=FillPattern.Solid),Ellipse(
+                              extent={{-17.5,-7.5},{-12.5,-12.5}},
+                              lineColor={0,0,0},
+                              fillColor={0,0,0},
+                              fillPattern=FillPattern.Solid),Ellipse(
+                              extent={{12.5,-7.5},{17.5,-12.5}},
+                              lineColor={0,0,0},
+                              fillColor={0,0,0},
+                              fillPattern=FillPattern.Solid),Text(
+                              extent={{-150,50},{150,90}},
+                              textString="%name",
+                              lineColor={0,0,0})}),
               Documentation(info="<html>
 <p>
 This icon is designed for a <b>signal bus</b> connector.
@@ -7360,25 +7312,25 @@ This icon is designed for a <b>signal bus</b> connector.
             extends Bidirectional;
             annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent=
                       {{-100,-100},{100,100}}), graphics={Polygon(
-                    points={{-160,40},{40,40},{-60,-160},{-160,40}},
-                    smooth=Smooth.None,
-                    fillColor={255,255,255},
-                    fillPattern=FillPattern.Solid,
-                    origin={-240,60},
-                    rotation=90,
-                    lineColor={255,204,51}), Rectangle(
-                    extent={{-20,2},{20,-2}},
-                    lineColor={255,204,51},
-                    lineThickness=0.5)}), Diagram(coordinateSystem(
+                              points={{-160,40},{40,40},{-60,-160},{-160,40}},
+                              smooth=Smooth.None,
+                              fillColor={255,255,255},
+                              fillPattern=FillPattern.Solid,
+                              origin={-240,60},
+                              rotation=90,
+                              lineColor={255,204,51}),Rectangle(
+                              extent={{-20,2},{20,-2}},
+                              lineColor={255,204,51},
+                              lineThickness=0.5)}), Diagram(coordinateSystem(
                     preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
                   graphics={Polygon(
-                    points={{-42,40},{58,40},{8,-60},{-42,40}},
-                    smooth=Smooth.None,
-                    fillColor={255,204,51},
-                    fillPattern=FillPattern.Solid,
-                    origin={80,-8},
-                    rotation=90,
-                    lineColor={255,204,51})}));
+                              points={{-42,40},{58,40},{8,-60},{-42,40}},
+                              smooth=Smooth.None,
+                              fillColor={255,204,51},
+                              fillPattern=FillPattern.Solid,
+                              origin={80,-8},
+                              rotation=90,
+                              lineColor={255,204,51})}));
 
           end In;
 
@@ -7386,25 +7338,25 @@ This icon is designed for a <b>signal bus</b> connector.
             extends Bidirectional;
             annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent=
                       {{-100,-100},{100,100}}), graphics={Rectangle(
-                    extent={{-20,2},{20,-2}},
-                    lineColor={255,204,51},
-                    lineThickness=0.5), Polygon(
-                    points={{-160,40},{40,40},{-60,-160},{-160,40}},
-                    smooth=Smooth.None,
-                    fillColor={255,204,51},
-                    fillPattern=FillPattern.Solid,
-                    origin={120,60},
-                    rotation=90,
-                    lineColor={255,204,51})}), Diagram(coordinateSystem(
-                    preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
-                  graphics={Polygon(
-                    points={{-10,40},{90,40},{40,140},{-10,40}},
-                    lineColor={255,204,51},
-                    smooth=Smooth.None,
-                    origin={-178,40},
-                    rotation=270,
-                    fillColor={255,255,255},
-                    fillPattern=FillPattern.Solid)}));
+                              extent={{-20,2},{20,-2}},
+                              lineColor={255,204,51},
+                              lineThickness=0.5),Polygon(
+                              points={{-160,40},{40,40},{-60,-160},{-160,40}},
+                              smooth=Smooth.None,
+                              fillColor={255,204,51},
+                              fillPattern=FillPattern.Solid,
+                              origin={120,60},
+                              rotation=90,
+                              lineColor={255,204,51})}), Diagram(
+                  coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
+                      {100,100}}), graphics={Polygon(
+                              points={{-10,40},{90,40},{40,140},{-10,40}},
+                              lineColor={255,204,51},
+                              smooth=Smooth.None,
+                              origin={-178,40},
+                              rotation=270,
+                              fillColor={255,255,255},
+                              fillPattern=FillPattern.Solid)}));
 
           end Out;
 
@@ -7786,9 +7738,9 @@ should be used if these values are needed.
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Text(
-            extent={{-150,110},{150,150}},
-            textString="%name",
-            lineColor={0,0,255})}));
+              extent={{-150,110},{150,150}},
+              textString="%name",
+              lineColor={0,0,255})}));
   end ConditionsBaseClassesPartialLumpedVessel;
 
   model ClosedVolume
@@ -7813,13 +7765,13 @@ should be used if these values are needed.
       defaultComponentName="volume",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={0,0,0},
-            fillPattern=FillPattern.Sphere,
-            fillColor={170,213,255}), Text(
-            extent={{-150,12},{150,-18}},
-            lineColor={0,0,0},
-            textString="V=%V")}),
+              extent={{-100,100},{100,-100}},
+              lineColor={0,0,0},
+              fillPattern=FillPattern.Sphere,
+              fillColor={170,213,255}),Text(
+              extent={{-150,12},{150,-18}},
+              lineColor={0,0,0},
+              textString="V=%V")}),
       Documentation(info="<html>
 <p>
 Ideally mixed volume of constant size with two fluid ports and one medium model.
@@ -7872,13 +7824,13 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
     <a href=\"modelica://FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"), Icon(graphics={Line(
-            points={{0,40},{80,40}},
-            color={0,0,255},
-            smooth=Smooth.None), Line(
-            points={{0,60},{0,20}},
-            color={0,0,0},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash)}));
+              points={{0,40},{80,40}},
+              color={0,0,255},
+              smooth=Smooth.None),Line(
+              points={{0,60},{0,20}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash)}));
   end ConditionsAdaptersSpeciesFluid;
 
   model ConditionsAdaptersPhasesIonomer
@@ -7942,30 +7894,25 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
         color={0,127,255},
         smooth=Smooth.None));
     annotation (Placement(transformation(extent={{-10,10},{10,30}})), Icon(
-          graphics={
-          Line(
-            points={{0,60},{0,-60}},
-            color={0,0,0},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash,
-            thickness=0.5),
-          Line(
-            points={{0,0},{-80,0}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{0,40},{80,40}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{0,0},{80,0}},
-            color={191,0,0},
-            smooth=Smooth.None),
-          Line(
-            points={{0,-40},{80,-40}},
-            color={0,127,255},
-            smooth=Smooth.None)}));
+          graphics={Line(
+              points={{0,60},{0,-60}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),Line(
+              points={{0,0},{-80,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{0,40},{80,40}},
+              color={0,0,255},
+              smooth=Smooth.None),Line(
+              points={{0,0},{80,0}},
+              color={191,0,0},
+              smooth=Smooth.None),Line(
+              points={{0,-40},{80,-40}},
+              color={0,127,255},
+              smooth=Smooth.None)}));
   end ConditionsAdaptersPhasesIonomer;
 
   partial model PartialSensor "Partial model for a sensor"
@@ -8052,6 +7999,5 @@ the direction of mass flow. See <a href=\"modelica://Modelica.Fluid.Vessels.Base
   end PartialSensorNonideal;
   annotation (Commands(file="resources/scripts/units-values.mos"
         "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate)."));
-
 
 end WorkInProgress;
