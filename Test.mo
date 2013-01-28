@@ -27,10 +27,11 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
 
   algorithm
     for i in 1:size(actual, 1) loop
-      assert(abs(actual[i] - expected[i]) <= eps, "Test " + String(i) + (if name <> "" then
-              " of " + name else "") + " failed.\n" + "The actual value (" +
-        String(actual[i]) + ") was not within " + String(eps) + " of the expected value ("
-         + String(expected[i]) + ").") annotation (Inline=true);
+      assert(abs(actual[i] - expected[i]) <= eps, "Test " + String(i) + (if
+        name <> "" then " of " + name else "") + " failed.\n" +
+        "The actual value (" + String(actual[i]) + ") was not within " + String(
+        eps) + " of the expected value (" + String(expected[i]) + ").")
+        annotation (Inline=true);
     end for;
 
   end assertValues;
@@ -47,8 +48,9 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
     input String name="" "Name of test";
 
   algorithm
-    assert((abs(actual) < small and abs(expected) < small) or abs(log10(actual/expected)) <= o, (if name <> "" then "Test " + name + " failed.\n" else
-            "") + "The actual value (" + String(actual) + ") was not within " +
+    assert((abs(actual) < small and abs(expected) < small) or abs(log10(actual/
+      expected)) <= o, (if name <> "" then "Test " + name + " failed.\n" else
+      "") + "The actual value (" + String(actual) + ") was not within " +
       String(o) + " orders of magnitude of the expected value (" + String(
       expected) + ").") annotation (Inline=true);
 
@@ -61,16 +63,18 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
     extends Modelica.Icons.Function;
 
     input Real actual[:] "Actual values";
-    input Real expected[size(actual,1)] "Expected values";
+    input Real expected[size(actual, 1)] "Expected values";
     input Real o=1 "Error tolerance in orders of magnitude";
     input String name="" "Name of test";
 
   algorithm
     for i in 1:size(actual, 1) loop
-      assert((abs(actual[i]) < small and abs(expected[i]) < small) or abs(log10(actual[i]/expected[i])) <= o, "Test " + String(i) + (if
-        name <> "" then " of " + name else "") + " failed.\n" + "The actual value ("
-         + String(actual[i]) + ") was not within " + String(o) + " orders of magnitude of the expected value ("
-         + String(expected[i]) + ").") annotation (Inline=true);
+      assert((abs(actual[i]) < small and abs(expected[i]) < small) or abs(log10
+        (actual[i]/expected[i])) <= o, "Test " + String(i) + (if name <> ""
+         then " of " + name else "") + " failed.\n" + "The actual value (" +
+        String(actual[i]) + ") was not within " + String(o) +
+        " orders of magnitude of the expected value (" + String(expected[i]) +
+        ").") annotation (Inline=true);
     end for;
 
   end assertLogValues;
@@ -121,7 +125,8 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
 
   algorithm
     when initial() then
-      assert(at>time+eps, "The expected crossing time is before the start of the simulation.");
+      assert(at > time + eps,
+        "The expected crossing time is before the start of the simulation.");
     end when;
     when time >= at - eps then
       assert(not event, "The signal became true before expected crossing time.");
@@ -238,26 +243,30 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
       model CheckSuccess
         Real x=time^2;
         AssertTrajectory check_x(actual=x, expected=[0, 0; 1, 1; 2, 4; 3, 9]);
-        annotation(TestCase(action="simulate", result="success"), experiment(StopTime=4));
+        annotation (TestCase(action="simulate",result="success"), experiment(
+              StopTime=4));
 
       end CheckSuccess;
 
       model CheckFailure1 "Check for failure when first point is before start"
         extends CheckSuccess(check_x(expected=[-1, 1; 0, 0; 1, 1]));
-        annotation(TestCase(action="simulate", result="failure"), experiment(StopTime=4));
+        annotation (TestCase(action="simulate",result="failure"), experiment(
+              StopTime=4));
 
       end CheckFailure1;
 
       model CheckFailure2
         "Check for failure when values don't match during simulation"
         extends CheckSuccess(x=time);
-        annotation(TestCase(action="simulate", result="failure"), experiment(StopTime=4));
+        annotation (TestCase(action="simulate",result="failure"), experiment(
+              StopTime=4));
 
       end CheckFailure2;
 
       model CheckFailure3 "Check for failure when all points aren't checked"
         extends CheckSuccess(check_x(expected=[0, 0; 1, 1; 5, 25]));
-        annotation(TestCase(action="simulate", result="failure"), experiment(StopTime=4));
+        annotation (TestCase(action="simulate",result="failure"), experiment(
+              StopTime=4));
 
       end CheckFailure3;
 
@@ -268,21 +277,22 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
       model CheckSuccess
         Real x=time;
         AssertBecomesTrueAt check_event(event=(x > 2), at=2);
-        annotation(TestCase(action="simulate", result="success"), experiment(StopTime=4));
+        annotation (TestCase(action="simulate",result="success"), experiment(
+              StopTime=4));
 
       end CheckSuccess;
 
       model CheckFailure1
         "Check for failure when expected transition is before simulation start"
         extends CheckSuccess(check_event(at=-1));
-        annotation(TestCase(action="simulate", result="failure"), experiment(
+        annotation (TestCase(action="simulate",result="failure"), experiment(
               StopTime=4));
 
       end CheckFailure1;
 
       model CheckFailure2 "Check for failure when transition is early"
         extends CheckSuccess(check_event(event=(x > 1)));
-        annotation(TestCase(action="simulate", result="failure"), experiment(
+        annotation (TestCase(action="simulate",result="failure"), experiment(
               StopTime=4));
 
       end CheckFailure2;
@@ -325,13 +335,15 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
       model CheckSuccess
         Real x=2*time + 1;
         AssertFinal check_x(actual=x, expected=9);
-        annotation(TestCase(action="simulate", result="success"), experiment(StopTime=4));
+        annotation (TestCase(action="simulate",result="success"), experiment(
+              StopTime=4));
 
       end CheckSuccess;
 
       model CheckFailure1 "Check for failure when final value is incorrect"
         extends CheckSuccess(x=time);
-        annotation(TestCase(action="simulate", result="failure"), experiment(StopTime=4));
+        annotation (TestCase(action="simulate",result="failure"), experiment(
+              StopTime=4));
 
       end CheckFailure1;
 
@@ -349,27 +361,31 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
           finish=2*pi,
           signal=x,
           eps=1e-4);
-        annotation(TestCase(action="simulate", result="success"), experiment(StopTime=8));
+        annotation (TestCase(action="simulate",result="success"), experiment(
+              StopTime=8));
 
       end CheckSuccess;
 
       model CheckFailure1
         "Check for failure when starting in the middle of the interval"
         extends CheckSuccess(check_x(start=-pi,finish=pi));
-        annotation(TestCase(action="simulate", result="failure"), experiment(StopTime=8));
+        annotation (TestCase(action="simulate",result="failure"), experiment(
+              StopTime=8));
 
       end CheckFailure1;
 
       model CheckFailure2
         "Check for failure when simulation ends before interval"
         extends CheckSuccess(check_x(start=pi,finish=3*pi));
-        annotation(TestCase(action="simulate", result="failure"), experiment(StopTime=8));
+        annotation (TestCase(action="simulate",result="failure"), experiment(
+              StopTime=8));
 
       end CheckFailure2;
 
       model CheckFailure3 "Check for failure when values don't agree"
         extends CheckSuccess(check_x(finish=7*pi/8));
-        annotation(TestCase(action="simulate", result="failure"), experiment(StopTime=8));
+        annotation (TestCase(action="simulate",result="failure"), experiment(
+              StopTime=8));
 
       end CheckFailure3;
 
@@ -417,7 +433,10 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
       extends Modelica.Icons.Package;
       function CheckSuccess
       algorithm
-        assertValues(actual={1,1 + 1e-4}, expected={1,1}, eps=1e-4);
+        assertValues(
+                actual={1,1 + 1e-4},
+                expected={1,1},
+                eps=1e-4);
         annotation (TestCase(action="call",result="success"));
       end CheckSuccess;
 
@@ -462,16 +481,12 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
     end LogValues;
   end Tests;
 
-  package Features
-    extends Modelica.Icons.Package;
-
-  end Features;
   annotation (Documentation(info="<html><p>This package is modified from
   XogenyTest version 1.1 by Michael Tiller of Xogeny, Inc.  XogenyTest is available at
   <a href=\"https://github.com/xogeny/XogenyTest\">https://github.com/xogeny/XogenyTest</a> under
   a <a href=\"https://creativecommons.org/licenses/by/3.0/deed.en_US\">Creative Commons
   Attribution 3.0 Unported License</a>.  If the <a href=\"modelica://FCSys.Tests\">Tests</a> 
-  package is removed from the <a href=\"modelica://FCSys\">FCSys</a> distribution, this
+  package is removed from the <a href=\"modelica://FCSys\">FCSys</a> distribution, then this
   package can be safely removed as well.
   </p></html>"));
 

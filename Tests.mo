@@ -599,8 +599,10 @@ package Tests "Models and functions for test and validation"
           c_V testc_V;
           dp testdp;
           dv testdv;
+          F testF;
           h testh;
           p_Tv testp;
+          R testR;
           TestProperties testProperties;
           annotation (Documentation(info="<html><p>If this model simulates without failure,
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
@@ -815,6 +817,29 @@ package Tests "Models and functions for test and validation"
     then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
         end h;
 
+        model F
+          "<html>Test the rigid-sphere estimate of <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.F\">F</a>() against the actual fluidity of H<sub>2</sub></html>"
+          import FCSys.Test.assertLogValue;
+          extends Modelica.Icons.Example;
+
+          import DataH2 = FCSys.Characteristics.H2.Gas;
+          package Data = FCSys.Characteristics.BaseClasses.Characteristic (m=
+                  DataH2.m, r=DataH2.r)
+            "Properties to estimate fluidity via rigid-sphere assumption";
+
+          constant Q.FluidityDynamic F=Data.F(300*U.K);
+
+        initial equation
+          assertLogValue(
+                    actual=F,
+                    expected=1/(89.6e-7*U.Pa*U.s),
+                    o=0.4);
+          // The fluidity is from [Incropera2002, p. 919].
+
+          annotation (Documentation(info="<html><p>If this model simulates without failure,
+    then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
+        end F;
+
         model p_Tv
           "<html>Test <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_Tv\">p_Tv</a>() based on its relation to <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_Tp\">v_Tp</a>()</html>"
 
@@ -844,6 +869,33 @@ package Tests "Models and functions for test and validation"
     then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
         end p_Tv;
 
+        model R
+          "<html>Test the rigid-sphere estimate of <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.R\">R</a>() against the actual thermal resistivity of H<sub>2</sub></html>"
+          import FCSys.Test.assertLogValue;
+          extends Modelica.Icons.Example;
+
+          import DataH2 = FCSys.Characteristics.H2.Gas;
+
+          package Data = FCSys.Characteristics.BaseClasses.Characteristic (
+              formula=DataH2.formula,
+              phase=DataH2.phase,
+              m=DataH2.m,
+              r=DataH2.r,
+              b_c=DataH2.b_c)
+            "Properties to estimate thermal resistivity via rigid-sphere assumption";
+
+          constant Q.CapacityThermalSpecific R=Data.R(300*U.K);
+
+        initial equation
+          assertLogValue(
+                    actual=R,
+                    expected=(1/0.183)*U.m*U.K/U.W,
+                    o=0.7);
+          // The thermal resistivity is from [Incropera2002, p. 919].
+
+          annotation (Documentation(info="<html><p>If this model simulates without failure,
+    then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
+        end R;
       end Characteristic;
 
     end BaseClasses;

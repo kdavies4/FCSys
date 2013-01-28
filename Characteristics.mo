@@ -1206,12 +1206,12 @@ package Characteristics
           InlineNoEvent=true,
           Inline=true,
           smoothOrder=1);
-
-        // **The last two terms adjust for the actual pressure relative to the
-        // reference.  If the material is gaseous, then the reference is the ideal
-        // gas.  In that case, the lower limit of the integral (delh/delp)_T*dp is
-        // p=0, where a real gas behaves as an ideal gas.  Otherwise, the lower limit
-        // is simply the reference pressure (p0).  See [Rao 1997, p. 271].
+        // The last two terms adjust for the actual pressure relative to the
+        // reference.  In general, the lower limit of the integral of
+        // (delh/delp)_T*dp is the reference pressure (p0).  However, if the
+        // material is gaseous, then the reference is the corresponding ideal gas.
+        // In that case, the lower limit of the real gas terms of the integral is
+        // p=0, where a real gas behaves as an ideal gas.  See [Rao 1997, p. 271].
         annotation (Documentation(info="<html>
   <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
