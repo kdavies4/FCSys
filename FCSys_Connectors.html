@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Connectors</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-28">
+<meta name="date" content="2013-1-29">
 <meta name="description" content="Declarative and imperative connectors">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -335,6 +335,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> connector with additivity of pressure</td></tr>
 <tr><td><img src="images/FCSys.Connectors.InertInternalS.png" alt="FCSys.Connectors.InertInternal" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">InertInternal</a>
 </td><td>Internal <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> connector</td></tr>
+<tr><td><img src="images/FCSys.Connectors.MechanicalS.png" alt="FCSys.Connectors.Mechanical" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">Mechanical</a>
+</td><td>Connector to exchange or transport linear momentum</td></tr>
+<tr><td><img src="images/FCSys.Connectors.MechanicalS.png" alt="FCSys.Connectors.Thermal" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.Thermal">Thermal</a>
+</td><td>Connector to exchange or transport heat</td></tr>
 <tr><td><img src="images/FCSys.Connectors.RealInputS.png" alt="FCSys.Connectors.RealInput" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a>
 </td><td>"<code>input Real</code>" as a connector</td></tr>
 <tr><td><img src="images/FCSys.Connectors.RealInputS.png" alt="FCSys.Connectors.RealInputInternal" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.RealInputInternal">RealInputInternal</a>
@@ -401,7 +405,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <b>Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as input</b><p>
 <img src="images/FCSys.Connectors.ChemicalInputD.png" alt="FCSys.Connectors.ChemicalInput">
 <p><h3>Information</h3></p>
-<p>See the
+<p>See the information in the
     <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.PartialChemical">PartialChemical</a>
     connector and the documentation in the
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
@@ -444,7 +448,7 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
 <b>Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as output</b><p>
 <img src="images/FCSys.Connectors.ChemicalOutputD.png" alt="FCSys.Connectors.ChemicalOutput">
 <p><h3>Information</h3></p>
-<p>See the
+<p>See the information in the
     <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.PartialChemical">PartialChemical</a>
     connector and the documentation in the
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
@@ -537,7 +541,7 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
     <p>For more information, see the documentation in the
     <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Mechanical">Mechanical</a> base class and the
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
-Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Mechanical">BaseClasses.Mechanical</a> (Connector to exchange or transport linear momentum), <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Thermal">BaseClasses.Thermal</a> (Connector to exchange or transport heat).
+Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">FCSys.Connectors.Mechanical</a> (Connector to exchange or transport linear momentum), <a href="FCSys_Connectors.html#FCSys.Connectors.Thermal">FCSys.Connectors.Thermal</a> (Connector to exchange or transport heat).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -563,10 +567,10 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
   <a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">Q.CurrentAreic</a> J(nominal=U.A/U.cm^2) <font color="darkgreen">&quot;Areic current&quot;</font>;
   <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> mPhidot_0(nominal=U.atm*U.cm^2) <font color="darkgreen">&quot;Normal force&quot;</font>;
   <font color="darkgreen">// Transverse</font>
-  <font color="blue">extends </font><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Mechanical">BaseClasses.Mechanical</a>(<font color="blue">final </font>n_lin=2);
+  <font color="blue">extends </font><a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">FCSys.Connectors.Mechanical</a>(<font color="blue">final </font>n_lin=2);
 
   <font color="darkgreen">// Thermal</font>
-  <font color="blue">extends </font><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Thermal">BaseClasses.Thermal</a>;
+  <font color="blue">extends </font><a href="FCSys_Connectors.html#FCSys.Connectors.Thermal">FCSys.Connectors.Thermal</a>;
 <textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>Face;
 </pre>
@@ -590,8 +594,8 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_lin</td><td>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</td></tr>
-<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Mechanical">Mechanical</a></td><td>mechanical</td><td>Subconnector for linear momentum</td></tr>
-<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Thermal">Thermal</a></td><td>thermal</td><td>Subconnector for heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">Mechanical</a></td><td>mechanical</td><td>Subconnector for linear momentum</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Thermal">Thermal</a></td><td>thermal</td><td>Subconnector for heat</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -603,9 +607,9 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
     <font color="blue">final </font>max=3) = 0 <font color="darkgreen">
     &quot;Number of components of linear momentum (<i>n</i><sub>lin</sub>)&quot;</font>;
 
-  <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Mechanical">BaseClasses.Mechanical</a> mechanical(<font color="blue">final </font>n_lin=n_lin) <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">FCSys.Connectors.Mechanical</a> mechanical(<font color="blue">final </font>n_lin=n_lin) <font color="darkgreen">
     &quot;Subconnector for linear momentum&quot;</font>;
-  <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Thermal">BaseClasses.Thermal</a> thermal <font color="darkgreen">&quot;Subconnector for heat&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Thermal">FCSys.Connectors.Thermal</a> thermal <font color="darkgreen">&quot;Subconnector for heat&quot;</font>;
 <textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>Inert;
 </pre>
@@ -649,7 +653,7 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
     <a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a> connectors and
     the documentation in the
     <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
-Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Mechanical">BaseClasses.Mechanical</a> (Connector to exchange or transport linear momentum), <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Thermal">BaseClasses.Thermal</a> (Connector to exchange or transport heat).
+Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">FCSys.Connectors.Mechanical</a> (Connector to exchange or transport linear momentum), <a href="FCSys_Connectors.html#FCSys.Connectors.Thermal">FCSys.Connectors.Thermal</a> (Connector to exchange or transport heat).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -671,8 +675,8 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
 <font color="blue">connector</font> InertAmagat <font color="darkgreen">
   &quot;<a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> connector with additivity of volume&quot;</font>
 
-  <font color="blue">extends </font><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Mechanical">BaseClasses.Mechanical</a>;
-  <font color="blue">extends </font><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Thermal">BaseClasses.Thermal</a>;
+  <font color="blue">extends </font><a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">FCSys.Connectors.Mechanical</a>;
+  <font color="blue">extends </font><a href="FCSys_Connectors.html#FCSys.Connectors.Thermal">FCSys.Connectors.Thermal</a>;
 
   <font color="darkgreen">// Additivity of volume</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p(nominal=U.atm) <font color="darkgreen">&quot;Pressure&quot;</font>;
@@ -711,7 +715,7 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
     <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> connectors and
     the documentation in the
   <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
-Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Mechanical">BaseClasses.Mechanical</a> (Connector to exchange or transport linear momentum), <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Thermal">BaseClasses.Thermal</a> (Connector to exchange or transport heat).
+Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">FCSys.Connectors.Mechanical</a> (Connector to exchange or transport linear momentum), <a href="FCSys_Connectors.html#FCSys.Connectors.Thermal">FCSys.Connectors.Thermal</a> (Connector to exchange or transport heat).
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -733,8 +737,8 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
 <font color="blue">connector</font> InertDalton <font color="darkgreen">
   &quot;<a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a> connector with additivity of pressure&quot;</font>
 
-  <font color="blue">extends </font><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Mechanical">BaseClasses.Mechanical</a>;
-  <font color="blue">extends </font><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Thermal">BaseClasses.Thermal</a>;
+  <font color="blue">extends </font><a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">FCSys.Connectors.Mechanical</a>;
+  <font color="blue">extends </font><a href="FCSys_Connectors.html#FCSys.Connectors.Thermal">FCSys.Connectors.Thermal</a>;
 
   <font color="darkgreen">// Additivity of pressure</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V(nominal=U.cc) <font color="darkgreen">&quot;Volume&quot;</font>;
@@ -767,8 +771,8 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
 <tr><td>Integer</td><td>n_lin</td><td>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</td></tr>
 <tr><td>Boolean</td><td>inclMechanical</td><td>Include the mechanical subconnector</td></tr>
 <tr><td>Boolean</td><td>inclThermal</td><td>Include the thermal subconnector</td></tr>
-<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Mechanical">Mechanical</a></td><td>mechanical</td><td>Subconnector for linear momentum</td></tr>
-<tr><td><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Thermal">Thermal</a></td><td>thermal</td><td>Subconnector for heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">Mechanical</a></td><td>mechanical</td><td>Subconnector for linear momentum</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Thermal">Thermal</a></td><td>thermal</td><td>Subconnector for heat</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -782,11 +786,82 @@ Extends from <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseCla
   <font color="blue">parameter </font>Boolean inclMechanical=true <font color="darkgreen">&quot;Include the mechanical subconnector&quot;</font>;
   <font color="blue">parameter </font>Boolean inclThermal=true <font color="darkgreen">&quot;Include the thermal subconnector&quot;</font>;
 
-  <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Mechanical">BaseClasses.Mechanical</a> mechanical(<font color="blue">final </font>n_lin=n_lin) <font color="blue">if </font>inclMechanical <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">FCSys.Connectors.Mechanical</a> mechanical(<font color="blue">final </font>n_lin=n_lin) <font color="blue">if </font>inclMechanical <font color="darkgreen">
     &quot;Subconnector for linear momentum&quot;</font>;
-  <a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.Thermal">BaseClasses.Thermal</a> thermal <font color="blue">if </font>inclThermal <font color="darkgreen">&quot;Subconnector for heat&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Thermal">FCSys.Connectors.Thermal</a> thermal <font color="blue">if </font>inclThermal <font color="darkgreen">&quot;Subconnector for heat&quot;</font>;
 <textblock type="annotcomp" expanded="false">
 <font color="blue">end </font>InertInternal;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Connectors.MechanicalI.png" alt="FCSys.Connectors.Mechanical" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Connectors.Mechanical"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.Mechanical</h2>
+<b>Connector to exchange or transport linear momentum</b><p>
+<img src="images/FCSys.Connectors.MechanicalD.png" alt="FCSys.Connectors.Mechanical">
+<p><h3>Information</h3></p>
+<p>This connector is used to transport the transverse
+  orientation of linear momentum only.  The normal orientation is transported by the Normal
+  effort-flow pair (see the top-level documentation in the
+  <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package).</p>
+  <p>
+
+<p><h3>Parameters</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Integer</td><td>n_lin</td><td>1</td><td>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</td></tr>
+</table>
+<p><h3>Contents</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Integer</td><td>n_lin</td><td>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi[n_lin]</td><td>Velocity [l/T]</td></tr>
+<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[n_lin]</td><td>Force [l.m/T2]</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">connector</font> Mechanical <font color="darkgreen">
+  &quot;Connector to exchange or transport linear momentum&quot;</font>
+
+  <font color="blue">parameter </font>Integer n_lin(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>max=3) = 1 <font color="darkgreen">
+    &quot;Number of components of linear momentum (<i>n</i><sub>lin</sub>)&quot;</font>;
+
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi[n_lin](<font color="blue">each </font>nominal=U.cm/U.s) <font color="darkgreen">&quot;Velocity&quot;</font>;
+  <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> mPhidot[n_lin](<font color="blue">each </font>nominal=U.N) <font color="darkgreen">&quot;Force&quot;</font>;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>Mechanical;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Connectors.MechanicalI.png" alt="FCSys.Connectors.Thermal" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Connectors.Thermal"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.Thermal</h2>
+<b>Connector to exchange or transport heat</b><p>
+<img src="images/FCSys.Connectors.ThermalD.png" alt="FCSys.Connectors.Thermal">
+<p><h3>Information</h3></p>
+
+    <p>See the documentation in the
+    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
+
+<p><h3>Contents</h3><p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>Temperature</td></tr>
+<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Qdot</td><td>Heat flow rate [l2.m/T3]</td></tr>
+</table>
+<p><h3>Modelica definition</h3>
+<pre>
+<font color="blue">connector</font> Thermal <font color="darkgreen">&quot;Connector to exchange or transport heat&quot;</font>
+
+  <a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T(nominal=298.15*U.K) <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot(nominal=U.W) <font color="darkgreen">&quot;Heat flow rate&quot;</font>;
+<textblock type="annotcomp" expanded="false">
+  <font color="darkgreen">// Note:  The icon doesn&#39;t contain a &quot;%name&quot; tag because it overlaps</font>
+  <font color="darkgreen">// with the tag in the Mechanical connector when both are included in</font>
+  <font color="darkgreen">// another connector by extension.  In Dymola 7.4, the overlap isn&#39;t</font>
+  <font color="darkgreen">// perfect, so the text appears bolder than it should.</font>
+
+<font color="blue">end </font>Thermal;
 </pre>
 <hr>
 
@@ -937,7 +1012,7 @@ Extends from Real.
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 28 11:05:13 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:52:49 2013.
 </div>
 </body>
 </html>

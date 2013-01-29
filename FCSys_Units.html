@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Units</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-28">
+<meta name="date" content="2013-1-29">
 <meta name="description" content="Constants and units of physical measure">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -118,10 +118,10 @@
   to be relaxed, but the models in <a href="index.html#FCSys">FCSys</a> generally do not.</p>
 
   <p>This package also contains functions (e.g., <a href="FCSys_Units.html#FCSys.Units.to_degC">to_degC</a>) that
-  convert quantities from the unit system defined in <a href="index.html#FCSys">FCSys</a> to quantities 
+  convert quantities from the unit system defined in <a href="index.html#FCSys">FCSys</a> to quantities
   expressed in units.  Functions are
-  included for units that involve offsets<!-- or other functions besides simple scaling-->.  
-  For conversions that require just a scaling factor, it is best to use the 
+  included for units that involve offsets<!-- or other functions besides simple scaling-->.
+  For conversions that require just a scaling factor, it is best to use the
   units directly.  For example, to convert from potential in volts use <code>v = v_V*U.V</code>,
   where <code>v</code> is potential and <code>v_V</code> is potential expressed in volts.</p>
 
@@ -550,6 +550,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIuni
 
 <font color="blue">algorithm </font>
   T := (T_degC + 273.15)*K;
+
 <font color="blue">end </font>from_degC;
 </pre>
 <hr>
@@ -579,6 +580,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIuni
 
 <font color="blue">algorithm </font>
   T_degC := T/K - 273.15;
+
 <font color="blue">end </font>to_degC;
 </pre>
 <hr>
@@ -606,7 +608,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIuni
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p <font color="darkgreen">&quot;Absolute pressure&quot;</font>;
 
 <font color="blue">algorithm </font>
-  p := p_kPag*U.kPa + U.atm;
+  p := p_kPag*kPa + atm;
+
 <font color="blue">end </font>from_kPag;
 </pre>
 <hr>
@@ -634,7 +637,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIuni
   <font color="blue">output </font>Real p_kPag <font color="darkgreen">&quot;Gauge pressure in kilopascals&quot;</font>;
 
 <font color="blue">algorithm </font>
-  p_kPag := (p - U.atm)/U.kPa;
+  p_kPag := (p - atm)/kPa;
+
 <font color="blue">end </font>to_kPag;
 </pre>
       </div>
@@ -642,7 +646,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIuni
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 28 11:05:25 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:53:02 2013.
 </div>
 </body>
 </html>

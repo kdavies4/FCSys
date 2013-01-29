@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.Examples</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-28">
+<meta name="date" content="2013-1-29">
 <meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -99,8 +99,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>&nbsp;</td><td>bC1</td><td>redeclare FCSys.Conditions.F...</td><td>&nbsp;</td></tr>
-<tr><td>&nbsp;</td><td>bC2</td><td>redeclare FCSys.Conditions.F...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.Subregion">Subregion</a></td><td>bC1</td><td>redeclare FCSys.Conditions.F...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.Subregion">Subregion</a></td><td>bC2</td><td>redeclare FCSys.Conditions.F...</td><td>&nbsp;</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>&#39;inclC+&#39;</td><td>false</td><td>Carbon plus (C<sup>+</sup>)</td></tr>
 <tr><td>Boolean</td><td>&#39;inclC19HF37O5S-&#39;</td><td>false</td><td>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</td></tr>
@@ -127,6 +127,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a> subregion(
     L={1,1,1}*U.cm,
+    gas(
+      <font color="blue">final </font>inclH2=inclH2,
+      <font color="blue">final </font>inclH2O=inclH2O,
+      <font color="blue">final </font>inclN2=inclN2,
+      <font color="blue">final </font>inclO2=inclO2,
+      H2(
+        inclFaceNegY=false,
+        inclFacePosY=false,
+        inclFaceNegZ=false,
+        inclFacePosZ=false)),
     graphite(
       <font color="blue">final </font>&#39;inclC+&#39;='inclC+',
       <font color="blue">final </font>&#39;incle-&#39;='incle-',
@@ -138,14 +148,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     inclLinY=false,
     inclLinZ=false,
     inclFacesY=false,
-    inclFacesZ=false,
-    gas(
-      <font color="blue">final </font>inclH2=inclH2,
-      <font color="blue">final </font>inclH2O=inclH2O,
-      <font color="blue">final </font>inclN2=inclN2,
-      <font color="blue">final </font>inclO2=inclO2));
+    inclFacesZ=false);
   <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment(analysis=true);
-  <font color="blue">replaceable </font>FCSys.Conditions.FaceBus.SubregionClosed bC1(
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.Subregion">FCSys.Conditions.FaceBus.Subregion</a> bC1(
     gas(
       <font color="blue">final </font>inclH2=inclH2,
       <font color="blue">final </font>inclH2O=inclH2O,
@@ -155,7 +160,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     ionomer(<font color="blue">final </font>&#39;inclC19HF37O5S-&#39;='inclC19HF37O5S-', <font color="blue">final </font>&#39;inclH+&#39;='inclH+'))
     <font color="blue">constrainedby </font>FCSys.Conditions.FaceBus.Subregion;</textblock>
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font>FCSys.Conditions.FaceBus.SubregionClosed bC2(
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.Subregion">FCSys.Conditions.FaceBus.Subregion</a> bC2(
     gas(
       <font color="blue">final </font>inclH2=inclH2,
       <font color="blue">final </font>inclH2O=inclH2O,
@@ -169,6 +174,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(bC1.face, subregion.xNegative);</textblock>
 
 <textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(bC2.face, subregion.xPositive);</textblock>
+
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>SubregionH2;
 </pre>
 <hr>
@@ -176,13 +182,13 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Subregions.Examples.SubregionHORI.png" alt="FCSys.Subregions.Examples.SubregionHOR" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Subregions.Examples.SubregionHOR"></a><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples">FCSys.Subregions.Examples</a>.SubregionHOR</h2>
 <b>Test a subregion with the hydrogen oxidation reaction and the essential species for it (C+, C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S, e<sup>-</sup>, H<sub>2</sub>, and H<sup>+</sup>)</b><p>
-<img src="images/FCSys.Subregions.Examples.SubregionHORD.png" alt="FCSys.Subregions.Examples.SubregionHOR">
+<img src="images/FCSys.Subregions.Examples.SubregionH2D.png" alt="FCSys.Subregions.Examples.SubregionHOR">
 <p><h3>Information</h3></p>
 Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.SubregionH2">SubregionH2</a> (Test a subregion), <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>.
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>&nbsp;</td><td>bC1</td><td>redeclare FCSys.Conditions.F...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.Subregion">Subregion</a></td><td>bC1</td><td>redeclare FCSys.Conditions.F...</td><td>&nbsp;</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>&#39;inclC+&#39;</td><td>true</td><td>Carbon plus (C<sup>+</sup>)</td></tr>
 <tr><td>Boolean</td><td>&#39;inclC19HF37O5S-&#39;</td><td>true</td><td>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</td></tr>
@@ -218,13 +224,13 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 <h2><img src="images/FCSys.Subregions.Examples.SubregionHORI.png" alt="FCSys.Subregions.Examples.SubregionORR" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Subregions.Examples.SubregionORR"></a><a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples">FCSys.Subregions.Examples</a>.SubregionORR</h2>
 <b>Test a subregion with the oxygen reduction reaction and the essential species for it (C+, C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S, e<sup>-</sup>, H<sub>2</sub>O, H<sup>+</sup>, and O<sub>2</sub>)</b><p>
-<img src="images/FCSys.Subregions.Examples.SubregionHORD.png" alt="FCSys.Subregions.Examples.SubregionORR">
+<img src="images/FCSys.Subregions.Examples.SubregionH2D.png" alt="FCSys.Subregions.Examples.SubregionORR">
 <p><h3>Information</h3></p>
 Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.SubregionH2">SubregionH2</a> (Test a subregion), <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>.
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>&nbsp;</td><td>bC1</td><td>redeclare FCSys.Conditions.F...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.Subregion">Subregion</a></td><td>bC1</td><td>redeclare FCSys.Conditions.F...</td><td>&nbsp;</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>&#39;inclC+&#39;</td><td>true</td><td>Carbon plus (C<sup>+</sup>)</td></tr>
 <tr><td>Boolean</td><td>&#39;inclC19HF37O5S-&#39;</td><td>true</td><td>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</td></tr>
@@ -892,9 +898,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n_x</td><td>1</td><td>Number of discrete regions through the PEM along the x axis</td></tr>
-<tr><td><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlow">SubregionFlow</a></td><td>bC1</td><td>redeclare FCSys.Conditions.F...</td><td>&nbsp;</td></tr>
-<tr><td><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlow">SubregionFlow</a></td><td>bC2</td><td>redeclare FCSys.Conditions.F...</td><td>&nbsp;</td></tr>
-<tr><td><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlow">SubregionFlow</a></td><td>ground</td><td>redeclare FCSys.Conditions.F...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">SubregionFlows</a></td><td>bC1</td><td>redeclare FCSys.Conditions.F...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">SubregionFlows</a></td><td>bC2</td><td>redeclare FCSys.Conditions.F...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">SubregionFlows</a></td><td>ground</td><td>redeclare FCSys.Conditions.F...</td><td>&nbsp;</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -1012,7 +1018,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     inclFacesZ=false);</textblock>
 
 <textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment(analysis=true);
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlow">FCSys.Conditions.FaceBus.SubregionFlow</a> bC1 <font color="blue">constrainedby </font>
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">FCSys.Conditions.FaceBus.SubregionFlows</a> bC1 <font color="blue">constrainedby </font>
     FCSys.Conditions.FaceBus.Subregion(gas(
       inclH2=true,
       inclH2O=false,
@@ -1025,7 +1031,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
       &#39;e-&#39;(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Current normal(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a>
             spec(duration=1000, height=-2*U.A)))));</textblock>
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlow">FCSys.Conditions.FaceBus.SubregionFlow</a> bC2 <font color="blue">constrainedby </font>
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">FCSys.Conditions.FaceBus.SubregionFlows</a> bC2 <font color="blue">constrainedby </font>
     FCSys.Conditions.FaceBus.Subregion(gas(
       inclH2=false,
       inclH2O=true,
@@ -1038,7 +1044,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
       &#39;e-&#39;(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Current normal(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a>
             spec(duration=1000, height=2*U.A)))));</textblock>
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlow">FCSys.Conditions.FaceBus.SubregionFlow</a> ground(graphite(&#39;incle-&#39;=true,
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">FCSys.Conditions.FaceBus.SubregionFlows</a> ground(graphite(&#39;incle-&#39;=true,
         &#39;e-&#39;(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Pressure material,
           materialSpec(k=0)))) <font color="blue">constrainedby </font>FCSys.Conditions.FaceBus.Subregion;</textblock>
 
@@ -1070,7 +1076,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
 <p><h3>Parameters</h3><p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>&nbsp;</td><td>bC2</td><td>redeclare FCSys.Conditions.F...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.Subregion">Subregion</a></td><td>bC2</td><td>redeclare FCSys.Conditions.F...</td><td>&nbsp;</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>&#39;inclC+&#39;</td><td>false</td><td>Carbon plus (C<sup>+</sup>)</td></tr>
 <tr><td>Boolean</td><td>&#39;inclC19HF37O5S-&#39;</td><td>false</td><td>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</td></tr>
@@ -1095,7 +1101,7 @@ Extends from <a href="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.S
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 28 11:03:48 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:50:55 2013.
 </div>
 </body>
 </html>

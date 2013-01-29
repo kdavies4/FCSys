@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Characteristics.BaseClasses.CharacteristicNASA</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-28">
+<meta name="date" content="2013-1-29">
 <meta name="description" content="Thermodynamic record with transport properties based on NASA CEA">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -143,6 +143,7 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
 <font color="blue">algorithm </font>
   b_F := {-b_eta[1],-b_eta[2]*U.K,-b_eta[3]*U.K^2,-b_eta[4] + b_eta[1]*<font color="red">ln</font>(U.K) + <font color="red">
     ln</font>(1e4*U.m*U.s/U.g)};
+
 <font color="blue">end </font>fromNASAViscosity;
 </pre>
 <hr>
@@ -169,6 +170,7 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
 <font color="blue">algorithm </font>
   b_R := {-b_lambda[1],-b_lambda[2]*U.K,-b_lambda[3]*U.K^2,-b_lambda[4] +
     b_lambda[1]*<font color="red">ln</font>(U.K) + <font color="red">ln</font>(1e4*U.m*U.K/U.W)};
+
 <font color="blue">end </font>fromNASAThermalConductivity;
 </pre>
 <hr>
@@ -226,7 +228,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p><h3>Information</h3></p>
 <p>This function is based on based on NASA CEA
   [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride1996</a>, <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Svehla1995</a>]</p>
-  
+
     <p>For more information, see <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.R">Characteristic.R</a>().</p>
     <p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
@@ -274,7 +276,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 28 11:05:19 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:52:55 2013.
 </div>
 </body>
 </html>

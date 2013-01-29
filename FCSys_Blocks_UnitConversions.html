@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Blocks.UnitConversions</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-28">
+<meta name="date" content="2013-1-29">
 <meta name="description" content="Blocks to convert to or from quantities expressed in units">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -48,21 +48,20 @@
 <p>
 <p><h3>Information</h3></p>
 
-  <p>This package contains blocks to convert quantities from the unit system in 
+  <p>This package contains blocks to convert quantities from the unit system in
   <a href="index.html#FCSys">FCSys</a> (see <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>)
-  to quantities expressed in units or vice versa.  
-  The <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.UnitConversion">UnitConversion</a> block 
-  has a parameter that allows that allows it to be configured 
+  to quantities expressed in units or vice versa.
+  The <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.UnitConversion">UnitConversion</a> block
+  has a parameter that allows that allows it to be configured
   to convert to or from any of the supported units.
   All other blocks convert to or from a predefined unit.
   </p>
 
-
 <p>Blocks are only included for
-  units that involve offsets or other functions besides simple scaling.  
+  units that involve offsets or other functions besides simple scaling.
   For conversions that require just a scaling factor, it is best to use
 the <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a>
-block with the appropriate factors from <a href="FCSys_Units.html#FCSys.Units">Units</a> package 
+block with the appropriate factors from <a href="FCSys_Units.html#FCSys.Units">Units</a> package
 (<code>U</code>).  For example, to convert from potential in volts use:
 <br><code>Modelica.Blocks.Math.Gain from_V(k=U.V);</code>
 <br>To convert to current in amperes use:
@@ -95,7 +94,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <img src="images/FCSys.Blocks.UnitConversions.From_degCD.png" alt="FCSys.Blocks.UnitConversions.From_degC">
 <p><h3>Information</h3></p>
 
-    <p>See the documentation in the 
+    <p>See the documentation in the
     <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions">UnitConversions</a> package.</p>
     <p>
 Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks.UnitConversions.BaseClasses.PartialUnitConversion">BaseClasses.PartialUnitConversion</a> (Partial block to convert to or from quantities expressed in units).
@@ -110,6 +109,7 @@ Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks
   &quot;Convert from temperature in degree Celsius to thermodynamic temperature&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks.UnitConversions.BaseClasses.PartialUnitConversion">BaseClasses.PartialUnitConversion</a>(y(<font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;,
         displayUnit=&quot;U.K&quot;));
+
 <font color="blue">equation </font>
   y = <font color="red">U.from_degC</font>(u);
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>From_degC;
@@ -122,7 +122,7 @@ Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks
 <img src="images/FCSys.Blocks.UnitConversions.From_degCD.png" alt="FCSys.Blocks.UnitConversions.To_degC">
 <p><h3>Information</h3></p>
 
-    <p>See the documentation in the 
+    <p>See the documentation in the
     <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions">UnitConversions</a> package.</p>
     <p>
 Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks.UnitConversions.BaseClasses.PartialUnitConversion">BaseClasses.PartialUnitConversion</a> (Partial block to convert to or from quantities expressed in units).
@@ -137,6 +137,7 @@ Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks
   &quot;Convert from thermodynamic temperature to temperature in degree Celsius&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks.UnitConversions.BaseClasses.PartialUnitConversion">BaseClasses.PartialUnitConversion</a>(u(<font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;,
         displayUnit=&quot;U.K&quot;));
+
 <font color="blue">equation </font>
   y = <font color="red">U.to_degC</font>(u);
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>To_degC;
@@ -149,7 +150,7 @@ Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks
 <img src="images/FCSys.Blocks.UnitConversions.From_degCD.png" alt="FCSys.Blocks.UnitConversions.From_kPag">
 <p><h3>Information</h3></p>
 
-    <p>See the documentation in the 
+    <p>See the documentation in the
     <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions">UnitConversions</a> package.</p>
     <p>
 Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks.UnitConversions.BaseClasses.PartialUnitConversion">BaseClasses.PartialUnitConversion</a> (Partial block to convert to or from quantities expressed in units).
@@ -163,6 +164,7 @@ Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks
 <font color="blue">block</font> From_kPag <font color="darkgreen">
   &quot;Convert from gauge pressure in kilopascals to absolute pressure &quot;</font>
   <font color="blue">extends </font><a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks.UnitConversions.BaseClasses.PartialUnitConversion">BaseClasses.PartialUnitConversion</a>(y(<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;));
+
 <font color="blue">equation </font>
   y = <font color="red">U.from_kPag</font>(u);
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>From_kPag;
@@ -175,7 +177,7 @@ Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks
 <img src="images/FCSys.Blocks.UnitConversions.From_degCD.png" alt="FCSys.Blocks.UnitConversions.To_kPag">
 <p><h3>Information</h3></p>
 
-    <p>See the documentation in the 
+    <p>See the documentation in the
     <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions">UnitConversions</a> package.</p>
     <p>
 Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks.UnitConversions.BaseClasses.PartialUnitConversion">BaseClasses.PartialUnitConversion</a> (Partial block to convert to or from quantities expressed in units).
@@ -189,6 +191,7 @@ Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks
 <font color="blue">block</font> To_kPag <font color="darkgreen">
   &quot;Convert absolute pressure to gauge pressure in kilopascals&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks.UnitConversions.BaseClasses.PartialUnitConversion">BaseClasses.PartialUnitConversion</a>(u(<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;));
+
 <font color="blue">equation </font>
   y = <font color="red">U.to_kPag</font>(u);
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>To_kPag;
@@ -201,7 +204,7 @@ Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks
 <img src="images/FCSys.Blocks.UnitConversions.From_degCD.png" alt="FCSys.Blocks.UnitConversions.UnitConversion">
 <p><h3>Information</h3></p>
 
-    <p>See the documentation in the 
+    <p>See the documentation in the
     <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions">UnitConversions</a> package.</p>
     <p>
 Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks.UnitConversions.BaseClasses.PartialUnitConversion">BaseClasses.PartialUnitConversion</a> (Partial block to convert to or from quantities expressed in units).
@@ -221,7 +224,6 @@ Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks
 
 <font color="blue">equation </font>
   y = <font color="red">f</font>(u);
-
 <textblock type="annotcomp" expanded="false"><font color="blue">end </font>UnitConversion;
 </pre>
       </div>
@@ -229,7 +231,7 @@ Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 28 11:00:19 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:46:39 2013.
 </div>
 </body>
 </html>

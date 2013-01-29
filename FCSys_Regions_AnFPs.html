@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Regions.AnFPs</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-28">
+<meta name="date" content="2013-1-29">
 <meta name="description" content="Anode flow plates">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -115,46 +115,28 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
         inclH2O=true,
         H2(
           p_IC=(1 - environment.x_H2O)*environment.p,
-          xNegative(
-            isobaric=true,
-            inviscidY=true,
-            inviscidZ=true),
-          xPositive(isobaric=false),
-          yNegative(isobaric=false),
-          yPositive(isobaric=false)),
+          inclFaceNegX=false,
+          inclFaceNegZ=false,
+          inclFacePosZ=false),
         H2O(
           p_IC=environment.x_H2O*environment.p,
-          xNegative(
-            isobaric=true,
-            inviscidY=true,
-            inviscidZ=true),
-          xPositive(isobaric=false),
-          yNegative(isobaric=false),
-          yPositive(isobaric=false))),
+          inclFaceNegX=false,
+          inclFaceNegZ=false,
+          inclFacePosZ=false)),
       <font color="blue">each </font>graphite(
         &#39;inclC+&#39;=true,
         &#39;incle-&#39;=true,
         &#39;C+&#39;(V_IC=V - xV),
         &#39;e-&#39;(
-          xNegative(isobaric=false),
-          xPositive(isobaric=false),
-          yNegative(
-            isobaric=true,
-            inviscidZ=true,
-            inviscidX=true),
-          yPositive(
-            isobaric=true,
-            inviscidZ=true,
-            inviscidX=true))),
+          inclFaceNegY=false,
+          inclFacePosY=false,
+          inclFaceNegZ=false,
+          inclFacePosZ=false)),
       <font color="blue">each </font>liquid(inclH2O=true, H2O(
           V_IC=0,
-          xNegative(
-            isobaric=true,
-            inviscidY=true,
-            inviscidZ=true),
-          xPositive(isobaric=false),
-          yNegative(isobaric=false),
-          yPositive(isobaric=false)))));
+          inclFaceNegX=false,
+          inclFaceNegZ=false,
+          inclFacePosZ=false))));
   <font color="darkgreen">// **for e-: setVelY=true,</font>
 
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> x(nominal=1) = 0.1 <font color="darkgreen">&quot;Volumetric porosity&quot;</font>;
@@ -296,7 +278,7 @@ Extends from <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 28 11:02:43 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:49:42 2013.
 </div>
 </body>
 </html>

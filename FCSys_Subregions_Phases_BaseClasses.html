@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.Phases.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-28">
+<meta name="date" content="2013-1-29">
 <meta name="description" content="Base classes (not generally for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -106,7 +106,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">ChemicalBus</a></td><td>chemical</td><td>**</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">ChemicalBus</a></td><td>chemical</td><td>Bus of chemical connectors for the species</td></tr>
 </table>
 <p><h3>Modelica definition</h3>
 <pre>
@@ -155,7 +155,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     &quot;Negative face along the z axis&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> zPositive <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
     &quot;Positive face along the z axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">FCSys.Connectors.ChemicalBus</a> chemical <font color="darkgreen">&quot;**&quot;</font>;</textblock>
+  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">FCSys.Connectors.ChemicalBus</a> chemical <font color="darkgreen">
+    &quot;Bus of chemical connectors for the species&quot;</font>;</textblock>
 
 <textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.PhaseBoundary">PhaseBoundary</a> phaseBoundary(<font color="blue">final </font>n_lin=n_lin) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Phase boundary&quot;</font>;</textblock>
   <font color="darkgreen">// This component is conditional because if two or more empty phases</font>
@@ -195,7 +196,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Jan 28 11:03:55 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:51:06 2013.
 </div>
 </body>
 </html>
