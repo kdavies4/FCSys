@@ -35,7 +35,6 @@ package Conditions "Models to specify and measure operating conditions"
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
-
       annotation (experiment(NumberOfIntervals=5000), Commands(file=
               "resources/scripts/Dymola/Conditions.Examples.FaceCondition.mos"));
     end FaceCondition;
@@ -261,34 +260,28 @@ package Conditions "Models to specify and measure operating conditions"
           points={{8,-40},{30,-40},{30,-20},{80,-20}},
           color={191,0,0},
           smooth=Smooth.None));
-      annotation (Icon(graphics={
-            Line(
-              points={{0,60},{0,-60}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-80,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,20},{80,20}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-20},{80,-20}},
-              color={191,0,0},
-              smooth=Smooth.None),
-            Line(
-              points={{0,60},{80,60}},
-              color={0,127,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-60},{80,-60}},
-              color={0,127,255},
-              smooth=Smooth.None)}));
+      annotation (Icon(graphics={Line(
+                  points={{0,60},{0,-60}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-80,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,20},{80,20}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-20},{80,-20}},
+                  color={191,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{0,60},{80,60}},
+                  color={0,127,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-60},{80,-60}},
+                  color={0,127,255},
+                  smooth=Smooth.None)}));
     end Anode;
 
     model Cathode
@@ -1264,10 +1257,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
-            origin={0,-100}),iconTransformation(
+            origin={0,-110}),iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
-            origin={0,-40})));
+            origin={0,-50})));
 
     protected
       Modelica.Blocks.Math.Add sumAnMFC annotation (Placement(transformation(
@@ -1630,82 +1623,84 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       // Connections from internal outputs to public output
       connect(v, y.v) annotation (Line(
-          points={{-152,-60},{-152,-80},{5.55112e-16,-80},{5.55112e-16,-100}},
+          points={{-152,-60},{-152,-80},{5.55112e-16,-80},{5.55112e-16,-110}},
           color={0,0,127},
           smooth=Smooth.None));
 
       connect(RHAnFPNegX, y.RHAnFPNegX) annotation (Line(
-          points={{-134,-60},{-134,-80},{5.55112e-16,-80},{5.55112e-16,-100}},
+          points={{-134,-60},{-134,-80},{5.55112e-16,-80},{5.55112e-16,-110}},
           color={0,0,127},
           smooth=Smooth.None));
 
       connect(RHCaFPNegX, y.RHCaFPNegX) annotation (Line(
-          points={{-114,-60},{-114,-80},{5.55112e-16,-80},{5.55112e-16,-100}},
+          points={{-114,-60},{-114,-80},{5.55112e-16,-80},{5.55112e-16,-110}},
           color={0,0,127},
           smooth=Smooth.None));
 
       connect(p_anFPNegY, y.p_anFPNegY) annotation (Line(
-          points={{-94,-60},{-94,-80},{5.55112e-16,-80},{5.55112e-16,-100}},
+          points={{-94,-60},{-94,-80},{5.55112e-16,-80},{5.55112e-16,-110}},
           color={0,0,127},
           smooth=Smooth.None));
 
       connect(p_anFPPosY, y.p_anFPPosY) annotation (Line(
-          points={{-74,-60},{-74,-80},{5.55112e-16,-80},{5.55112e-16,-100}},
+          points={{-74,-60},{-74,-80},{5.55112e-16,-80},{5.55112e-16,-110}},
           color={0,0,127},
           smooth=Smooth.None));
 
       connect(p_caFPNegY, y.p_caFPNegY) annotation (Line(
-          points={{-54,-60},{-54,-80},{5.55112e-16,-80},{5.55112e-16,-100}},
+          points={{-54,-60},{-54,-80},{5.55112e-16,-80},{5.55112e-16,-110}},
           color={0,0,127},
           smooth=Smooth.None));
 
       connect(p_caFPPosY, y.p_caFPPosY) annotation (Line(
-          points={{-34,-60},{-34,-80},{5.55112e-16,-80},{5.55112e-16,-100}},
+          points={{-34,-60},{-34,-80},{5.55112e-16,-80},{5.55112e-16,-110}},
           color={0,0,127},
           smooth=Smooth.None));
 
       connect(Vdot_anFPNegY_H2, y.Vdot_anFPNegY_H2) annotation (Line(
-          points={{-14,-60},{-14,-80},{5.55112e-16,-80},{5.55112e-16,-100}},
+          points={{-14,-60},{-14,-80},{5.55112e-16,-80},{5.55112e-16,-110}},
           color={0,0,127},
           smooth=Smooth.None));
 
       connect(Vdot_caFPNegY_air, y.Vdot_caFPNegY_air) annotation (Line(
-          points={{14,-60},{14,-80},{5.55112e-16,-80},{5.55112e-16,-100}},
+          points={{14,-60},{14,-80},{5.55112e-16,-80},{5.55112e-16,-110}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(T_anFPNegY, y.T_anFPNegY) annotation (Line(
-          points={{32,-60},{32,-80},{5.55112e-16,-80},{5.55112e-16,-100}},
+          points={{32,-60},{32,-80},{5.55112e-16,-80},{5.55112e-16,-110}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(T_anFPPosY, y.T_anFPPosY) annotation (Line(
-          points={{52,-60},{52,-80},{5.55112e-16,-80},{5.55112e-16,-100}},
+          points={{52,-60},{52,-80},{5.55112e-16,-80},{5.55112e-16,-110}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(T_caFPNegY, y.T_caFPNegY) annotation (Line(
-          points={{72,-60},{72,-80},{5.55112e-16,-80},{5.55112e-16,-100}},
+          points={{72,-60},{72,-80},{5.55112e-16,-80},{5.55112e-16,-110}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(T_caFPPosY, y.T_caFPPosY) annotation (Line(
-          points={{92,-60},{92,-80},{5.55112e-16,-80},{5.55112e-16,-100}},
+          points={{92,-60},{92,-80},{5.55112e-16,-80},{5.55112e-16,-110}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(T_anFPX, y.T_anFPX) annotation (Line(
-          points={{112,-60},{112,-80},{5.55112e-16,-80},{5.55112e-16,-100}},
+          points={{112,-60},{112,-80},{5.55112e-16,-80},{5.55112e-16,-110}},
           color={0,0,127},
           smooth=Smooth.None));
 
       connect(T_caFPX, y.T_caFPX) annotation (Line(
-          points={{132,-60},{132,-80},{5.55112e-16,-80},{5.55112e-16,-100}},
+          points={{132,-60},{132,-80},{5.55112e-16,-80},{5.55112e-16,-110}},
           color={0,0,127},
           smooth=Smooth.None));
 
       connect(I, y.I) annotation (Line(
-          points={{152,-60},{152,-80},{5.55112e-16,-80},{5.55112e-16,-100}},
+          points={{152,-60},{152,-80},{5.55112e-16,-80},{5.55112e-16,-110}},
           color={0,0,127},
           smooth=Smooth.None));
-      annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-180,
-                -100},{180,100}}), graphics), experiment(StopTime=15481,
-            Algorithm="Euler"));
+      annotation (
+        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-180,-100},
+                {180,100}}), graphics),
+        experiment(StopTime=15481, Algorithm="Euler"),
+        Icon(graphics));
     end Replay;
 
     package BaseClasses "Base classes (not generally for direct use)"
@@ -1821,12 +1816,18 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=315,
-              origin={-160,160})));
+              origin={-160,160}), iconTransformation(
+              extent={{-10,-10},{10,10}},
+              rotation=315,
+              origin={-166,166})));
         FCSys.Connectors.RealOutputBus y[n_y, n_z] if inclIO annotation (
             Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=315,
-              origin={160,-160})));
+              origin={160,-160}), iconTransformation(
+              extent={{-10,-10},{10,10}},
+              rotation=315,
+              origin={166,-166})));
         replaceable FCSys.Conditions.FaceBusPair.Subregion current[n_y, n_z](
             graphite('inclC+'=true, 'incle-'=true)) if inclIO constrainedby
           FCSys.Conditions.FaceBusPair.Subregion(graphite('inclC+'=true,
@@ -1877,7 +1878,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             smooth=Smooth.None));
 
         connect(u, current.u) annotation (Line(
-            points={{-160,160},{-130,130},{-130,34}},
+            points={{-160,160},{-130,130},{-130,35}},
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -2086,8 +2087,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           color={208,104,0},
           smooth=Smooth.None));
       connect(u.H2, H2.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,14},{-11,14},{-11,6.10623e-16}},
-
+          points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
+          color={0,0,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(H2.y, y.H2) annotation (Line(
+          points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -2098,8 +2103,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           color={208,104,0},
           smooth=Smooth.None));
       connect(u.H2O, H2O.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,14},{-11,14},{-11,6.10623e-16}},
-
+          points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
+          color={0,0,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(H2O.y, y.H2O) annotation (Line(
+          points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -2110,8 +2119,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           color={208,104,0},
           smooth=Smooth.None));
       connect(u.N2, N2.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,14},{-11,14},{-11,6.10623e-16}},
-
+          points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
+          color={0,0,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(N2.y, y.N2) annotation (Line(
+          points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -2122,12 +2135,17 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           color={208,104,0},
           smooth=Smooth.None));
       connect(u.O2, O2.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,14},{-11,14},{-11,6.10623e-16}},
-
+          points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
+          color={0,0,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(O2.y, y.O2) annotation (Line(
+          points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
 
+      annotation (Diagram(graphics));
     end Gas;
 
     model Graphite "Condition for graphite"
@@ -2176,24 +2194,32 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     equation
       // C+
       connect('C+'.chemical, chemical.'C+') annotation (Line(
-          points={{-5.08852e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
+          points={{6.10623e-16,-4},{1.16573e-15,-40},{5.55112e-16,-40}},
           color={208,104,0},
           smooth=Smooth.None));
       connect(u.'C+', 'C+'.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-              4}},
+          points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
+          color={0,0,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect('C+'.y, y.'C+') annotation (Line(
+          points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
 
       // e-
       connect('e-'.chemical, chemical.'e-') annotation (Line(
-          points={{-5.08852e-16,-4},{5.55112e-16,-40}},
+          points={{6.10623e-16,-4},{5.55112e-16,-40}},
           color={208,104,0},
           smooth=Smooth.None));
       connect(u.'e-', 'e-'.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-              4}},
+          points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
+          color={0,0,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect('e-'.y, y.'e-') annotation (Line(
+          points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -2265,36 +2291,48 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     equation
       // C19HF37O5S-
       connect('C19HF37O5S-'.chemical, chemical.'C19HF37O5S-') annotation (Line(
-          points={{-5.08852e-16,-4},{5.55112e-16,-40}},
+          points={{6.10623e-16,-4},{5.55112e-16,-40}},
           color={208,104,0},
           smooth=Smooth.None));
       connect(u.'C19HF37O5S-', 'C19HF37O5S-'.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-              4}},
+          points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
+          color={0,0,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect('C19HF37O5S-'.y, y.'C19HF37O5S-') annotation (Line(
+          points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
 
       // H+
       connect('H+'.chemical, chemical.'H+') annotation (Line(
-          points={{-5.08852e-16,-4},{5.55112e-16,-40}},
+          points={{6.10623e-16,-4},{5.55112e-16,-40}},
           color={208,104,0},
           smooth=Smooth.None));
       connect(u.'H+', 'H+'.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-              4}},
+          points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
+          color={0,0,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect('H+'.y, y.'H+') annotation (Line(
+          points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
 
       // H2O
       connect(H2O.chemical, chemical.H2O) annotation (Line(
-          points={{-5.08852e-16,-4},{5.55112e-16,-40}},
+          points={{6.10623e-16,-4},{5.55112e-16,-40}},
           color={208,104,0},
           smooth=Smooth.None));
       connect(u.H2O, H2O.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-              4}},
+          points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
+          color={0,0,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(H2O.y, y.H2O) annotation (Line(
+          points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -2328,12 +2366,16 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     equation
       // H2O
       connect(H2O.chemical, chemical.H2O) annotation (Line(
-          points={{-5.08852e-16,-4},{5.55112e-16,-40}},
+          points={{6.10623e-16,-4},{5.55112e-16,-40}},
           color={208,104,0},
           smooth=Smooth.None));
       connect(u.H2O, H2O.u) annotation (Line(
-          points={{5.55112e-16,40},{5.55112e-16,14},{-5.08852e-16,14},{-5.08852e-16,
-              4}},
+          points={{-110,5.55112e-16},{-110,0},{-11,0},{-11,6.10623e-16}},
+          color={0,0,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(H2O.y, y.H2O) annotation (Line(
+          points={{11,6.10623e-16},{11,0},{110,0},{110,5.55112e-16}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -2369,25 +2411,32 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         FCSys.Connectors.RealInputBus u "Bus of inputs to specify conditions"
           annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={0,40})));
+              rotation=0,
+              origin={-110,0})));
 
+        Connectors.RealOutputBus y "Bus of measurement outputs" annotation (
+            Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={110,0})));
+        annotation (Diagram(graphics));
       end NullPhase;
 
     end BaseClasses;
     annotation (Documentation(info="<html><p>
-  All of the submodels for the individual species in 
+  All of the submodels for the individual species in
   <a href=\"modelica://FCSys.Conditions.ChemicalBus.Gas\">Gas</a>,
   <a href=\"modelica://FCSys.Conditions.ChemicalBus.Graphite\">Graphite</a>,
   <a href=\"modelica://FCSys.Conditions.ChemicalBus.Ionomer\">Ionomer</a>, and
   <a href=\"modelica://FCSys.Conditions.ChemicalBus.Liquid\">Liquid</a> models
   are instances of the <a href=\"modelica://FCSys.Conditions.Chemical.Species\">Conditions.Chemical.Species</a>
   model rather than <a href=\"modelica://FCSys.Conditions.Chemical.Reaction\">Conditions.Chemical.Reaction</a>).
-  That means that the subconnectors in the 
-  (<code>chemical</code> connectors of the models in this package are 
+  That means that the subconnectors in the
+  (<code>chemical</code> connectors of the models in this package are
   <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connectors
   (rather than <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a>).
   </p></html>"));
+
   end ChemicalBus;
 
   package Chemical
@@ -2426,8 +2475,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           points={{64,-24},{64,-30},{0,-30},{0,-40},{5.55112e-16,-40}},
           color={208,104,0},
           smooth=Smooth.None));
-
-      annotation (Icon(graphics), Diagram(graphics));
+      annotation (Icon(graphics));
     end Reaction;
 
     model Species
@@ -2443,7 +2491,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         Placement(transformation(extent={{-60,40},{-40,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
 
-      Connectors.ChemicalOutput chemical(final n_lin=countTrue({inclLinX,
+      FCSys.Connectors.ChemicalOutput chemical(final n_lin=countTrue({inclLinX,
             inclLinY,inclLinZ}))
         "Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as output"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
@@ -2474,6 +2522,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         FCSys.Connectors.ChemicalOutput chemical(final n_lin=n_lin)
           "Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as output"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+
       equation
         // Material data
         chemical.formula = Data.formula;
@@ -2483,6 +2532,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         chemical.Ndot = 0;
         chemical.mPhidot = zeros(n_lin);
         chemical.Hdot = 0;
+
       end Properties;
 
     equation
@@ -2513,9 +2563,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           points={{9.89443e-16,-52},{0,-52},{0,-40},{5.55112e-16,-40}},
           color={208,104,0},
           smooth=Smooth.None));
-
-      annotation (Icon(graphics), Diagram(graphics));
-
+      annotation (Icon(graphics));
     end Species;
 
     package Material "Conditions for additivity of volume"
@@ -2640,7 +2688,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         protected
           final parameter Integer cartAxes[n_lin]=index({inclLinX,inclLinY,
               inclLinZ})
-            "Cartesian-axis indices of the axes of linear momentum";
+            "Cartesian-axis indices of the components of linear momentum";
           final parameter Integer linAxes[Axis]=enumerate({inclLinX,inclLinY,
               inclLinZ})
             "Linear momentum component indices of the Cartesian axes";
@@ -2889,8 +2937,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             string="%second",
             index=1,
             extent={{2,3},{2,3}}));
-
-        annotation (Icon(graphics), Diagram(graphics));
+        annotation (Icon(graphics));
       end PartialConditions;
 
       partial model PartialCondition "Partial model of a condition"
@@ -2928,8 +2975,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-70,30})));
-        Connectors.RealInput u if not internal "Value of specified condition"
-          annotation (Placement(transformation(
+        FCSys.Connectors.RealInput u if not internal
+          "Value of specified condition" annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-110,0})));
@@ -2950,14 +2997,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
           "Number of components of linear momentum" annotation (Evaluate=true);
 
-        Connectors.RealOutputInternal u_final
+        FCSys.Connectors.RealOutputInternal u_final
           "Final value of specified condition" annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-20,0})));
-      equation
 
+      equation
         connect(source.y, u_final) annotation (Line(
             points={{-59,30},{-40,30},{-40,5.55112e-16},{-20,5.55112e-16}},
             color={0,0,127},
@@ -2967,6 +3014,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 5.55112e-16},{-20,5.55112e-16}},
             color={0,0,127},
             smooth=Smooth.None));
+
       end PartialCondition;
 
     end BaseClasses;
@@ -3063,7 +3111,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             rotation=0,
             origin={110,0})));
 
-      Connectors.InertInternal inert(
+      FCSys.Connectors.InertInternal inert(
         final n_lin=countTrue({inclLinX,inclLinY,inclLinZ}),
         inclMechanical=inclMechanical,
         inclThermal=inclThermal)
@@ -3152,8 +3200,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           string="%second",
           index=1,
           extent={{2,3},{2,3}}));
-
-      annotation (defaultComponentName="species", Diagram(graphics));
+      annotation (defaultComponentName="species");
     end Species;
 
     model SpeciesFlow
@@ -3165,6 +3212,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         redeclare Mechanical.Force mechanicalZ,
         redeclare Thermal.HeatRate thermal(source(k=0)));
       annotation (defaultComponentName="species");
+
     end SpeciesFlow;
 
     package Mechanical "Mechanical Conditions"
@@ -3228,7 +3276,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         protected
           final parameter Integer cartAxes[n_lin]=index({inclLinX,inclLinY,
               inclLinZ})
-            "Cartesian-axis indices of the axes of linear momentum";
+            "Cartesian-axis indices of the components of linear momentum";
           final parameter Integer linAxes[Axis]=enumerate({inclLinX,inclLinY,
               inclLinZ})
             "Linear momentum component indices of the Cartesian axes";
@@ -3309,13 +3357,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
           FCSys.Connectors.Thermal thermal "Connector to exchange heat"
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
           annotation (defaultComponentName="thermal", Diagram(graphics={Text(
                           extent={{-8,-32},{8,-36}},
                           lineColor={0,0,0},
                           fillColor={255,255,255},
                           fillPattern=FillPattern.Solid,
                           textString="thermal")}));
+
         end PartialCondition;
 
         type ConditionType = enumeration(
@@ -3364,8 +3412,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-70,30})));
-        Connectors.RealInput u if not internal "Value of specified condition"
-          annotation (Placement(transformation(
+        FCSys.Connectors.RealInput u if not internal
+          "Value of specified condition" annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-110,0})));
@@ -3383,14 +3431,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
           "Number of components of linear momentum" annotation (Evaluate=true);
 
-        Connectors.RealOutputInternal u_final
+        FCSys.Connectors.RealOutputInternal u_final
           "Final value of specified condition" annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-20,0})));
-      equation
 
+      equation
         connect(source.y, u_final) annotation (Line(
             points={{-59,30},{-40,30},{-40,5.55112e-16},{-20,5.55112e-16}},
             color={0,0,127},
@@ -3400,6 +3448,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 5.55112e-16},{-20,5.55112e-16}},
             color={0,0,127},
             smooth=Smooth.None));
+
       end PartialCondition;
 
     end BaseClasses;
@@ -3603,8 +3652,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           string="%second",
           index=1,
           extent={{2,3},{2,3}}));
-
-      annotation (Icon(graphics), Diagram(graphics));
+      annotation (Icon(graphics));
     end Phase;
 
     model PhaseFlow
@@ -3617,6 +3665,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         redeclare Mechanical.Force mechanicalZ,
         redeclare Thermal.HeatRate thermal(source(k=0)));
       annotation (defaultComponentName="phase");
+
     end PhaseFlow;
 
     package Amagat "Conditions for additivity of volume"
@@ -3748,7 +3797,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         protected
           final parameter Integer cartAxes[n_lin]=index({inclLinX,inclLinY,
               inclLinZ})
-            "Cartesian-axis indices of the axes of linear momentum";
+            "Cartesian-axis indices of the components of linear momentum";
           final parameter Integer linAxes[Axis]=enumerate({inclLinX,inclLinY,
               inclLinZ})
             "Linear momentum component indices of the Cartesian axes";
@@ -3882,8 +3931,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-70,30})));
-        Connectors.RealInput u if not internal "Value of specified condition"
-          annotation (Placement(transformation(
+        FCSys.Connectors.RealInput u if not internal
+          "Value of specified condition" annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-110,0})));
@@ -3904,14 +3953,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
           "Number of components of linear momentum" annotation (Evaluate=true);
 
-        Connectors.RealOutputInternal u_final
+        FCSys.Connectors.RealOutputInternal u_final
           "Final value of specified condition" annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-20,0})));
-      equation
 
+      equation
         connect(source.y, u_final) annotation (Line(
             points={{-59,30},{-40,30},{-40,5.55112e-16},{-20,5.55112e-16}},
             color={0,0,127},
@@ -3921,6 +3970,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 5.55112e-16},{-20,5.55112e-16}},
             color={0,0,127},
             smooth=Smooth.None));
+
       end PartialCondition;
 
     end BaseClasses;
@@ -4123,8 +4173,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           string="%second",
           index=1,
           extent={{2,3},{2,3}}));
-
-      annotation (Icon(graphics), Diagram(graphics));
+      annotation (Icon(graphics));
     end Species;
 
     model SpeciesFlow
@@ -4137,6 +4186,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         redeclare Mechanical.Force mechanicalZ,
         redeclare Thermal.HeatRate thermal(source(k=0)));
       annotation (defaultComponentName="species");
+
     end SpeciesFlow;
 
     package Dalton "Conditions for additivity of volume"
@@ -4188,7 +4238,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition
           "Partial model of a volume/pressure condition"
-          import FCSys;
           extends FCSys.Conditions.InertDalton.BaseClasses.PartialCondition;
 
           constant ConditionType conditionType "Type of condition";
@@ -4258,7 +4307,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition
           "Partial model for a mechanical condition"
-          import FCSys;
           extends FCSys.Conditions.InertDalton.BaseClasses.PartialCondition;
 
           parameter Axis axis=Axis.x "Axis" annotation (HideResult=true);
@@ -4270,7 +4318,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         protected
           final parameter Integer cartAxes[n_lin]=index({inclLinX,inclLinY,
               inclLinZ})
-            "Cartesian-axis indices of the axes of linear momentum";
+            "Cartesian-axis indices of the components of linear momentum";
           final parameter Integer linAxes[Axis]=enumerate({inclLinX,inclLinY,
               inclLinZ})
             "Linear momentum component indices of the Cartesian axes";
@@ -4345,7 +4393,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       package BaseClasses "Base classes (not generally for direct use)"
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition "Partial model for a thermal condition"
-          import FCSys;
           extends FCSys.Conditions.InertDalton.BaseClasses.PartialCondition;
 
           constant ConditionType conditionType "Type of condition";
@@ -4405,8 +4452,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-70,30})));
-        Connectors.RealInput u if not internal "Value of specified condition"
-          annotation (Placement(transformation(
+        FCSys.Connectors.RealInput u if not internal
+          "Value of specified condition" annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-110,0})));
@@ -4427,14 +4474,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
           "Number of components of linear momentum" annotation (Evaluate=true);
 
-        Connectors.RealOutputInternal u_final
+        FCSys.Connectors.RealOutputInternal u_final
           "Final value of specified condition" annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-20,0})));
-      equation
 
+      equation
         connect(source.y, u_final) annotation (Line(
             points={{-59,30},{-40,30},{-40,5.55112e-16},{-20,5.55112e-16}},
             color={0,0,127},
@@ -4444,6 +4491,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 5.55112e-16},{-20,5.55112e-16}},
             color={0,0,127},
             smooth=Smooth.None));
+
       end PartialCondition;
 
     end BaseClasses;
@@ -4484,13 +4532,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
-            origin={-100,0})));
+            origin={-110,0})));
 
       FCSys.Connectors.RealOutputBus y "Output bus of measurements" annotation
         (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
-            origin={100,0})));
+            origin={110,0})));
 
     equation
       // Gas
@@ -4502,12 +4550,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           smooth=Smooth.None));
 
       connect(u.gas, gas.u) annotation (Line(
-          points={{-100,5.55112e-16},{-10,5.55112e-16},{-10,6.10623e-16}},
+          points={{-110,5.55112e-16},{-10,5.55112e-16},{-10,6.10623e-16}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
       connect(gas.y, y.gas) annotation (Line(
-          points={{10,6.10623e-16},{100,6.10623e-16},{100,5.55112e-16}},
+          points={{10,6.10623e-16},{110,6.10623e-16},{110,5.55112e-16}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -4521,12 +4569,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           smooth=Smooth.None));
 
       connect(u.graphite, graphite.u) annotation (Line(
-          points={{-100,5.55112e-16},{-10,5.55112e-16},{-10,6.10623e-16}},
+          points={{-110,5.55112e-16},{-10,5.55112e-16},{-10,6.10623e-16}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
       connect(graphite.y, y.graphite) annotation (Line(
-          points={{10,6.10623e-16},{100,6.10623e-16},{100,5.55112e-16}},
+          points={{10,6.10623e-16},{110,6.10623e-16},{110,5.55112e-16}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -4540,12 +4588,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           thickness=0.5,
           smooth=Smooth.None));
       connect(u.ionomer, ionomer.u) annotation (Line(
-          points={{-100,5.55112e-16},{-10,5.55112e-16},{-10,6.10623e-16}},
+          points={{-110,5.55112e-16},{-10,5.55112e-16},{-10,6.10623e-16}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
       connect(ionomer.y, y.ionomer) annotation (Line(
-          points={{10,6.10623e-16},{100,6.10623e-16},{100,5.55112e-16}},
+          points={{10,6.10623e-16},{110,6.10623e-16},{110,5.55112e-16}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
@@ -4559,16 +4607,17 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           thickness=0.5,
           smooth=Smooth.None));
       connect(u.liquid, liquid.u) annotation (Line(
-          points={{-100,5.55112e-16},{-10,5.55112e-16},{-10,6.10623e-16}},
+          points={{-110,5.55112e-16},{-10,5.55112e-16},{-10,6.10623e-16}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
       connect(liquid.y, y.liquid) annotation (Line(
-          points={{10,6.10623e-16},{100,6.10623e-16},{100,5.55112e-16}},
+          points={{10,6.10623e-16},{110,6.10623e-16},{110,5.55112e-16}},
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
 
+      annotation (Diagram(graphics));
     end Subregion;
 
     model SubregionFlows
@@ -4632,6 +4681,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             redeclare replaceable Face.Thermal.HeatRate thermal(source(k=0)))));
 
       annotation (defaultComponentName="subregion");
+
     end SubregionFlows;
 
     package Phases
@@ -5025,11 +5075,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       extends FCSys.Conditions.BaseClasses.Icons.Single;
 
-      replaceable Normal.CurrentAreic normal(source(k=0)) constrainedby
+      replaceable Normal.CurrentAreic normal constrainedby
         Normal.BaseClasses.PartialCondition "Normal" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{-58,10},{-38,30}})));
+      // **How is it possible to set (source(k(start=0))), but still allow replaceable change?
+      // **Update in all other Condition models.
       replaceable Transverse.Velocity transverse1(source(k=0),final orientation
           =Orientation.preceding) constrainedby
         Transverse.BaseClasses.PartialCondition
@@ -5163,6 +5215,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
+
     end Species;
     extends Modelica.Icons.Package;
 
@@ -5222,7 +5275,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           // No flows of other quantities
           face.mPhidot = {0,0} "Linear momentum in transverse directions";
           face.Qdot = 0 "Heat";
-
           annotation (defaultComponentName="normal");
         end PartialCondition;
 
@@ -5443,7 +5495,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             points={{-59,30},{-40,30},{-40,5.55112e-16},{-20,5.55112e-16}},
             color={0,0,127},
             smooth=Smooth.None));
-        annotation (Icon(graphics), Diagram(graphics));
+        annotation (Icon(graphics));
       end PartialCondition;
 
     end BaseClasses;
@@ -5476,27 +5528,37 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             __Dymola_descriptionLabel=true), Placement(transformation(extent={{
                 -10,-10},{10,10}})));
 
-      Connectors.FaceBus negative
+      FCSys.Connectors.FaceBus negative
         "Negative-side multi-species connector for linear momentum and heat"
         annotation (Placement(transformation(extent={{-110,-10},{-90,10}}),
-            iconTransformation(extent={{-110,-10},{-90,10}})));
-      Connectors.FaceBus positive
+            iconTransformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={-100,0})));
+      FCSys.Connectors.FaceBus positive
         "Positive-side multi-species connector for linear momentum and heat"
         annotation (Placement(transformation(extent={{90,-10},{110,10}}),
-            iconTransformation(extent={{90,-10},{110,10}})));
+            iconTransformation(
+            extent={{-10,-10},{10,10}},
+            rotation=90,
+            origin={100,0})));
       FCSys.Connectors.RealInputBus u "Bus of inputs to specify conditions"
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
-            origin={0,50}), iconTransformation(extent={{-10,-10},{10,10}},
-              origin={-100,0})));
+            origin={0,50}), iconTransformation(
+            extent={{-10,-10},{10,10}},
+            origin={0,50},
+            rotation=270)));
 
       FCSys.Connectors.RealOutputBus y "Output bus of measurements" annotation
         (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
-            origin={0,-50}), iconTransformation(extent={{-10,-10},{10,10}},
-              origin={100,0})));
+            origin={0,-50}), iconTransformation(
+            extent={{-10,-10},{10,10}},
+            origin={0,-50},
+            rotation=270)));
 
     equation
       // Gas
@@ -5595,6 +5657,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           thickness=0.5,
           smooth=Smooth.None));
 
+      annotation (Icon(graphics));
     end Subregion;
 
     model SubregionFlow
@@ -6115,6 +6178,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 rotation=270,
                 origin={0,-50})));
           annotation (Icon(graphics));
+
         end NullPhase;
 
       end BaseClasses;
@@ -6285,7 +6349,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           points={{48,-25},{48,-30},{5.55112e-16,-30},{5.55112e-16,-50}},
           color={0,0,127},
           smooth=Smooth.None));
-      annotation (Diagram(graphics), Icon(graphics));
+      annotation (Icon(graphics));
     end Species;
 
     package Normal "Normal mechanical Conditions"
@@ -6300,14 +6364,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       equation
         negative.J = u_final;
-
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="normal",
           Documentation(info="<html>
   <p>Assumptions:
   <ol>
-  <li>The conservation of material is applied with the assumption that the cross sectional areas of the two 
+  <li>The conservation of material is applied with the assumption that the cross sectional areas of the two
   interfaces are equal.</li>
   </ol></html>"));
       end CurrentAreic;
@@ -6321,14 +6384,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       equation
         negative.mPhidot_0 + positive.mPhidot_0 = u_final;
-
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="normal",
           Documentation(info="<html>
   <p>Assumptions:
   <ol>
-  <li>The conservation of material is applied with the assumption that the cross sectional areas of the two 
+  <li>The conservation of material is applied with the assumption that the cross sectional areas of the two
   interfaces are equal.</li>
   </ol></html>"));
       end Force;
@@ -6371,7 +6433,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           // Heat
           negative.Qdot = 0;
           positive.Qdot = 0;
-
           annotation (defaultComponentName="normal");
         end PartialCondition;
 
@@ -6461,7 +6522,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           // Heat
           negative.Qdot = 0;
           positive.Qdot = 0;
-
           annotation (defaultComponentName="transverse");
         end PartialCondition;
 
@@ -6545,7 +6605,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           // Linear momentum in transverse directions
           negative.mPhidot = {0,0};
           positive.mPhidot = {0,0};
-
           annotation (defaultComponentName="thermal");
         end PartialCondition;
 
@@ -6624,7 +6683,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             points={{40,9},{40,0},{0,0},{0,-20},{5.55112e-16,-20}},
             color={0,0,127},
             smooth=Smooth.None));
-        annotation (Icon(graphics), Diagram(graphics));
+        annotation (Icon(graphics));
       end PartialCondition;
 
     end BaseClasses;
@@ -6880,40 +6939,27 @@ The default global default settings will be used for the current simulation.",
     end Icons;
 
   end BaseClasses;
-  annotation (Documentation(info="<html><p>**Since the connectors in
-<a href=\"modelica://FCSys\">FCSys</a> are hierarchical
-(see the <a href=\"modelica://FCSys.Connectors\">Connectors</a> package),
-the models for the boundary conditions must be as well.  A
-<a href=\"modelica://FCSys.Connectors.Face\">Face</a>
-connector (<a href=\"modelica://FCSys.Connectors.Face\">Face</a>,
-<a href=\"modelica://FCSys.Connectors.Face\">Face</a>, or
-<a href=\"modelica://FCSys.Connectors.Face\">Face</a>)
-is used in <a href=\"modelica://FCSys.Subregions.Species\">Species</a> models,
-and there is a corresponding <a href=\"modelica://FCSys.Conditions.Face.Species.Species\">Species
-boundary condition</a> model in this package. The
-<a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>
-connector is used in <a href=\"modelica://FCSys.Subregions.Phases\">Phase</a> models,
-and there are corresponding <a href=\"modelica://FCSys.Conditions.Face.Phases\">Phase
-boundary condition</a> models.  The
-<a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector is nested once more
-in models such as the <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a>,
-and there is a corresponding <a href=\"modelica://FCSys.Conditions.Face.Subregion\">Subregion
-boundary condition</a> model.
-</p>
-
-<p>**The <a href=\"modelica://FCSys.Conditions.Chemical\">Chemical</a>,
+  annotation (Documentation(info="<html>
+  <p>The <a href=\"modelica://FCSys.Conditions.Chemical\">Chemical</a>,
   <a href=\"modelica://FCSys.Conditions.ChemicalBus\">ChemicalBus</a>, <a href=\"modelica://FCSys.Conditions.InertAmagat\">Inert</a>,
   <a href=\"modelica://FCSys.Conditions.InertAmagat\">InertAmagat</a>,
   <a href=\"modelica://FCSys.Conditions.InertDalton\">InertDalton</a>, <a href=\"modelica://FCSys.Conditions.Face\">Face</a>, and
   <a href=\"modelica://FCSys.Conditions.FaceBus\">FaceBus</a> packages contain models to specify conditions on the
   connectors with the same names (<a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> or
   <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a>, <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> or
-  <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a>, <a href=\"modelica://FCSys.Conditions.InertAmagat\">InertAmagat</a>,
+  <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a>, 
+  <a href=\"modelica://FCSys.Conditions.InertAmagat\">InertAmagat</a>,
   <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a>, <a href=\"modelica://FCSys.Conditions.Face\">Face</a>, and
-  <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>).  The <a href=\"modelica://FCSys.Conditions.FaceDifferential\">FacePair</a> and
-  <a href=\"modelica://FCSys.Conditions.FaceBusPair\">FaceBusPair</a> packages contain models for pairs of <a href=\"modelica://FCSys.Conditions.Face\">Face</a> and
-  <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connectors.
-
-</p></html>"));
+  <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>).  
+  The <a href=\"modelica://FCSys.Conditions.FaceDifferential\">FacePair</a> and
+  <a href=\"modelica://FCSys.Conditions.FaceBusPair\">FaceBusPair</a> packages contain models 
+  for pairs of <a href=\"modelica://FCSys.Conditions.Face\">Face</a> and
+  <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connectors.  Each model is given the same name as the
+  model from the <a href=\"modelica://FCSys.Subregions\">Subregions</a> package that it may be used to represent.  For
+  example, the model to interface with the <a href=\"modelica://FCSys.Conditions.Face\">Face</a> connector
+  is named <a href=\"modelica://FCSys.Conditions.Face.Species\">Species</a> (in the 
+  <a href=\"modelica://FCSys.Conditions.Face\">Conditions.Face</a> package).
+  </p>
+</html>"));
 
 end Conditions;

@@ -5,7 +5,7 @@
 
 # Options
 wordfile=.fcsys.pws # Name of custom word file
-reduce=false # true, if unused words should be removed from the word file (slow)
+reduce=true # true, if unused words should be removed from the word file (slow)
 
 # Remove unused words from the word file.
 if $reduce; then

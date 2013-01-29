@@ -188,9 +188,12 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
       function plot "\"**\""
         extends Modelica.Icons.Function;
+
       algorithm
         Modelica.Utilities.System.command("loadres");
+
       end plot;
+
     end Examples;
 
     model Cell "Default single-cell PEMFC"
@@ -903,7 +906,6 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                 final k_alpha_Ndot='k_alpha_Ndot_e-',
                 final k_alpha_tau='k_alpha_tau_e-',
                 final k_alpha_Qdot='k_alpha_Qdot_e-')))));
-
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="cell",
@@ -912,6 +914,7 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         Documentation(info="
 <html><p>For more information, see the
   <a href=\"modelica://FCSys.Assemblies.Cells.Cell\">Cell</a> model.</p></html>"));
+
     end CalibratedCell;
 
     model IntegratedCell "Baseline cell, with integrated CLs and GDLs"

@@ -1020,7 +1020,6 @@ package Figures "Graphical layouts for documentation"
                 6.10623e-16}},
             color={200,0,0},
             smooth=Smooth.None));
-
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-160,-40},{160,40}}), graphics={Rectangle(
                       extent={{-15,7},{15,-7}},
@@ -1311,11 +1310,11 @@ package Figures "Graphical layouts for documentation"
   model Logo
     extends FCSys.BaseClasses.Icons.Cell;
     annotation (Icon(graphics={Rectangle(
-            extent={{-100,100},{100,65}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0})}));
+              extent={{-100,100},{100,65}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0})}));
 
   end Logo;
 

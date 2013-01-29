@@ -719,6 +719,7 @@ package Characteristics
       algorithm
         b_F := {-b_eta[1],-b_eta[2]*U.K,-b_eta[3]*U.K^2,-b_eta[4] + b_eta[1]*ln(
           U.K) + ln(1e4*U.m*U.s/U.g)} annotation (Inline=true);
+
       end fromNASAViscosity;
 
       function fromNASAThermalConductivity
@@ -730,6 +731,7 @@ package Characteristics
         b_R := {-b_lambda[1],-b_lambda[2]*U.K,-b_lambda[3]*U.K^2,-b_lambda[4]
            + b_lambda[1]*ln(U.K) + ln(1e4*U.m*U.K/U.W)}
           annotation (Inline=true);
+
       end fromNASAThermalConductivity;
 
     public
@@ -797,7 +799,7 @@ package Characteristics
           smoothOrder=0);
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p>
-  
+
     <p>For more information, see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.R\">Characteristic.R</a>().</p>
     </html>"));
       end R;
@@ -1128,6 +1130,7 @@ package Characteristics
           // This is the integral of c0_p*dT up to T at p0.  The lower bound is the
           // enthalpy of formation (of ideal gas, if the material is gaseous) at
           // 25 degC [McBride2002, p. 2].
+
         end h0_i;
 
         function dh0_i "Derivative of h0_i"

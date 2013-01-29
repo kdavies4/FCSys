@@ -36,6 +36,7 @@ cp help/*.png images/
 # which is lower resolution.
 
 # Copy and process the HTML files.
+rm *.html
 cp -f help/*.html ./
 mv -f FCSys.html index.html
 ./00-process-gh-pages.py

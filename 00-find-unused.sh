@@ -13,7 +13,7 @@ do
 done
 
 # References
-for s in Avogadro1.03 Bejan2006 BIPM2006 Bernardi1992 Dassault2010 DuPont2004N DuPont2004NRE DuPont2005 Dymond2002 Entegris2012 Gurau1998 Hogan2006 Incropera2002 Kandlikar2009 Lin2006 Mark1999 McBride1996 McBride2002 Moran2004 NIST2010 Nitta2008 Present1958 Rao1997 Reichert2010 Salzman2004 Schetz1996 SGL2004 SGL2007 Shah2009 Springer1991 Spry2009 Svehla1995 Takenaka1990 Tissandier1998 Toray2010 Weber2004 Woo1995
+for s in Avogadro1.03 Bejan2006 BIPM2006 Bernardi1992 Dassault2010 DuPont2004N DuPont2004NRE DuPont2005 Dymond2002 Entegris2012 Gurau1998 Hogan2006 Incropera2002 Kandlikar2009 Larminie2003 Lin2006 Mark1999 McBride1996 McBride2002 Moran2004 NIST2010 Nitta2008 Present1958 Rao1997 Reichert2010 Salzman2004 Schetz1996 SGL2004 SGL2007 Shah2009 Springer1991 Spry2009 Svehla1995 Takenaka1990 Tissandier1998 Toray2010 Weber2004 Woo1995
 do
     hits=`find \( -iname "*.mo" -o -iname "*.cdf" \) | xargs grep --files-with-matches --max-count=1 --exclude package.mo --exclude WorkInProgress.mo $s`
     if [ -z "$hits" ]; then

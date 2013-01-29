@@ -5,8 +5,9 @@ package Subregions
   package Examples "Examples"
     extends Modelica.Icons.ExamplesPackage;
 
-    model SubregionH2 "Test a subregion"
+    model SubregionH2 "<html>Test a subregion with H<sub>2</sub></html>"
       extends Modelica.Icons.Example;
+
       parameter Boolean 'inclC+'=false
         "<html>Carbon plus (C<sup>+</sup>)</html>" annotation (choices(
             __Dymola_checkBox=true), Dialog(group="Species",
@@ -24,8 +25,9 @@ package Subregions
       parameter Boolean inclH2=true "<html>Hydrogen (H<sub>2</sub>)</html>"
         annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
             __Dymola_descriptionLabel=true));
-      parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
-        annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
+      parameter Boolean inclH2O=false
+        "<html>Water vapor (H<sub>2</sub>O)</html>" annotation (choices(
+            __Dymola_checkBox=true), Dialog(group="Species",
             __Dymola_descriptionLabel=true));
       parameter Boolean inclN2=false "<html>Nitrogen (N<sub>2</sub>)</html>"
         annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
@@ -36,27 +38,67 @@ package Subregions
 
       Subregion subregion(
         L={1,1,1}*U.cm,
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2,
+          H2(
+            inclFaceNegY=false,
+            inclFacePosY=false,
+            inclFaceNegZ=false,
+            inclFacePosZ=false),
+          H2O(
+            inclFaceNegY=false,
+            inclFacePosY=false,
+            inclFaceNegZ=false,
+            inclFacePosZ=false),
+          N2(
+            inclFaceNegY=false,
+            inclFacePosY=false,
+            inclFaceNegZ=false,
+            inclFacePosZ=false),
+          O2(
+            inclFaceNegY=false,
+            inclFacePosY=false,
+            inclFaceNegZ=false,
+            inclFacePosZ=false)),
         graphite(
           final 'inclC+'='inclC+',
           final 'incle-'='incle-',
-          'C+'(V_IC=subregion.V/4)),
+          'C+'(
+            V_IC=subregion.V/4,
+            inclFaceNegY=false,
+            inclFacePosY=false,
+            inclFaceNegZ=false,
+            inclFacePosZ=false),
+          'e-'(
+            inclFaceNegY=false,
+            inclFacePosY=false,
+            inclFaceNegZ=false,
+            inclFacePosZ=false)),
         ionomer(
           final 'inclC19HF37O5S-'='inclC19HF37O5S-',
           final 'inclH+'='inclH+',
-          'C19HF37O5S-'(V_IC=subregion.V/4)),
+          'C19HF37O5S-'(
+            V_IC=subregion.V/4,
+            inclFaceNegY=false,
+            inclFacePosY=false,
+            inclFaceNegZ=false,
+            inclFacePosZ=false),
+          'H+'(
+            inclFaceNegY=false,
+            inclFacePosY=false,
+            inclFaceNegZ=false,
+            inclFacePosZ=false)),
         inclLinY=false,
         inclLinZ=false,
         inclFacesY=false,
-        inclFacesZ=false,
-        gas(
-          final inclH2=inclH2,
-          final inclH2O=inclH2O,
-          final inclN2=inclN2,
-          final inclO2=inclO2))
+        inclFacesZ=false)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       inner FCSys.Conditions.Environment environment(analysis=true)
         annotation (Placement(transformation(extent={{30,20},{50,40}})));
-      replaceable FCSys.Conditions.FaceBus.SubregionClosed bC1(
+      FCSys.Conditions.FaceBus.Subregion bC1(
         gas(
           final inclH2=inclH2,
           final inclH2O=inclH2O,
@@ -64,13 +106,12 @@ package Subregions
           final inclO2=inclO2),
         graphite(final 'inclC+'='inclC+', final 'incle-'='incle-'),
         ionomer(final 'inclC19HF37O5S-'='inclC19HF37O5S-', final 'inclH+'=
-              'inclH+')) constrainedby FCSys.Conditions.FaceBus.Subregion
-        annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
+              'inclH+')) annotation (Placement(transformation(
+            extent={{10,-10},{-10,10}},
             rotation=90,
             origin={-20,0})));
 
-      replaceable FCSys.Conditions.FaceBus.SubregionClosed bC2(
+      FCSys.Conditions.FaceBus.Subregion bC2(
         gas(
           final inclH2=inclH2,
           final inclH2O=inclH2O,
@@ -78,15 +119,14 @@ package Subregions
           final inclO2=inclO2),
         graphite(final 'inclC+'='inclC+', final 'incle-'='incle-'),
         ionomer(final 'inclC19HF37O5S-'='inclC19HF37O5S-', final 'inclH+'=
-              'inclH+')) constrainedby FCSys.Conditions.FaceBus.Subregion
-        annotation (Placement(transformation(
+              'inclH+')) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={20,0})));
 
     equation
       connect(bC1.face, subregion.xNegative) annotation (Line(
-          points={{-16,3.65701e-16},{-15,1.11022e-15},{-15,6.10623e-16},{-10,
+          points={{-16,2.54679e-16},{-15,1.11022e-15},{-15,6.10623e-16},{-10,
               6.10623e-16}},
           color={127,127,127},
           pattern=LinePattern.None,
@@ -100,6 +140,7 @@ package Subregions
           pattern=LinePattern.None,
           thickness=0.5,
           smooth=Smooth.None));
+
       annotation (
         Placement(transformation(extent={{70,70},{90,90}})),
         experiment(StopTime=10),
@@ -116,10 +157,9 @@ package Subregions
         'incle-'=true,
         inclH2=true,
         'inclH+'=true,
-        redeclare FCSys.Conditions.FaceBus.Subregion bC2(graphite('e-'(
-                redeclare FCSys.Conditions.Face.Material.Current normal(
-                  redeclare Modelica.Blocks.Sources.Ramp spec(duration=1000,
-                    height=2*U.A))))));
+        bC2(graphite('e-'(normal(redeclare Modelica.Blocks.Sources.Ramp source(
+                    duration=1000, height=2*U.A)))),ionomer('H+'(redeclare
+                FCSys.Conditions.Face.Normal.Force normal))));
 
       extends Modelica.Icons.UnderConstruction;
       // **fails sim
@@ -153,7 +193,8 @@ package Subregions
 
     end SubregionORR;
 
-    model SubregionsH2 "Test a one-dimensional array of subregions"
+    model SubregionsH2
+      "<html>Test a one-dimensional array of subregions with H<sub>2</sub></html>"
       extends Modelica.Icons.Example;
 
       // **fails sim
@@ -173,8 +214,9 @@ package Subregions
       parameter Boolean inclH2=true "<html>Hydrogen (H<sub>2</sub>)</html>"
         annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
             __Dymola_descriptionLabel=true));
-      parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
-        annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
+      parameter Boolean inclH2O=false
+        "<html>Water vapor (H<sub>2</sub>O)</html>" annotation (choices(
+            __Dymola_checkBox=true), Dialog(group="Species",
             __Dymola_descriptionLabel=true));
       parameter Boolean 'inclH+'=false "<html>Protons (H<sup>+</sup>)</html>"
         annotation (choices(__Dymola_checkBox=true), Dialog(group="Species",
@@ -867,11 +909,22 @@ package Subregions
 
     end SubregionH2PipeTest;
 
+    model Temp
+      inner Conditions.Environment environment(analysis=true)
+        annotation (Placement(transformation(extent={{30,12},{50,32}})));
+      replaceable Subregion subregion(
+        inclFacesY=false,
+        inclFacesZ=false,
+        gas(inclH2=true, inclH2O=false),
+        graphite('inclC+'=true, 'incle-'=true),
+        ionomer('inclC19HF37O5S-'=true, 'inclH+'=true))
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+    end Temp;
   end Examples;
 
   model Subregion "Subregion with all phases"
 
-    parameter Boolean inclReact=true "Include reaction(s), as appropriate"
+    parameter Boolean inclReact=true "Include reactions (as appropriate)"
       annotation (
       Evaluate=true,
       HideResult=true,
@@ -1170,6 +1223,7 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
+
   end Subregion;
 
   model SubregionIonomerOnly "Subregion with only the ionomer phase"
@@ -1237,7 +1291,7 @@ package Subregions
   end SubregionIonomerOnly;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
-    parameter Boolean inclReact=false "Include reaction(s), as appropriate"
+    parameter Boolean inclReact=false "Include reactions (as appropriate)"
       annotation (
       Evaluate=true,
       HideResult=true,
@@ -1419,6 +1473,7 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
+
   end SubregionNoIonomer;
 
   package Phases "Phases or mixtures of species"
@@ -1429,7 +1484,7 @@ package Subregions
       extends BaseClasses.NullPhase(final n_spec=countTrue({inclH2,inclH2O,
             inclN2,inclO2}));
 
-      parameter Boolean inclReact=true "Include reaction(s), as appropriate"
+      parameter Boolean inclReact=true "Include reactions (as appropriate)"
         annotation (
         Evaluate=true,
         HideResult=true,
@@ -1800,6 +1855,7 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
+
     end Gas;
 
     model Graphite "Graphite phase"
@@ -2472,7 +2528,8 @@ package Subregions
           "Positive face along the z axis" annotation (Placement(transformation(
                 extent={{-30,-30},{-10,-10}}),iconTransformation(extent={{-90,-90},
                   {-70,-70}})));
-        FCSys.Connectors.ChemicalBus chemical "**"
+        FCSys.Connectors.ChemicalBus chemical
+          "Bus of chemical connectors for the species"
           annotation (Placement(transformation(extent={{-54,42},{-34,62}})));
 
         PhaseBoundary phaseBoundary(final n_lin=n_lin) if n_spec > 0
@@ -2490,7 +2547,7 @@ package Subregions
           "Number of components of linear momentum"
           annotation (Evaluate=true,HideResult=true);
         final parameter Integer cartAxes[n_lin]=index(inclLin)
-          "Cartesian-axis indices of the axes of linear momentum";
+          "Cartesian-axis indices of the components of linear momentum";
 
         FCSys.Connectors.InertInternal common(
           n_lin=n_lin,
@@ -2534,50 +2591,58 @@ package Subregions
 
 <p>Notes:<ul>
   <li>The x-axis component of linear momentum is included by default.  At least one component must be included.</li></ul></html>"),
-            Icon(graphics={Ellipse(
-                      extent={{-40,100},{40,20}},
-                      lineColor={127,127,127},
-                      startAngle=30,
-                      endAngle=149,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{20,-4},{100,-84}},
-                      lineColor={127,127,127},
-                      startAngle=270,
-                      endAngle=390,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{-100,-4},{-20,-84}},
-                      lineColor={127,127,127},
-                      startAngle=149,
-                      endAngle=270,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Polygon(
-                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
-                  80},{94.5,-24},{60,-84}},
-                      pattern=LinePattern.None,
-                      fillPattern=FillPattern.Sphere,
-                      smooth=Smooth.None,
-                      fillColor={225,225,225},
-                      lineColor={0,0,0}),Line(
-                      points={{-60,-84},{60,-84}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{34.5,80},{94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{-34.5,80},{-94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+            Icon(graphics={
+              Ellipse(
+                extent={{-40,100},{40,20}},
+                lineColor={127,127,127},
+                startAngle=30,
+                endAngle=149,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{20,-4},{100,-84}},
+                lineColor={127,127,127},
+                startAngle=270,
+                endAngle=390,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{-100,-4},{-20,-84}},
+                lineColor={127,127,127},
+                startAngle=149,
+                endAngle=270,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Polygon(
+                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
+                    94.5,-24},{60,-84}},
+                pattern=LinePattern.None,
+                fillPattern=FillPattern.Sphere,
+                smooth=Smooth.None,
+                fillColor={225,225,225},
+                lineColor={0,0,0}),
+              Line(
+                points={{-60,-84},{60,-84}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{34.5,80},{94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{-34.5,80},{-94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end NullPhase;
 
     end BaseClasses;
@@ -2614,9 +2679,9 @@ package Subregions
                     {100,100}}), graphics),
             Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics={Text(
-                          extent={{-150,90},{-118,52}},
-                          lineColor={0,0,255},
-                          textString="%t.test")}));
+                  extent={{-150,90},{-118,52}},
+                  lineColor={0,0,255},
+                  textString="%t.test")}));
 
         end Calibrated;
 
@@ -3235,7 +3300,7 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
 <tr><td>410</td><td>2221</td><td>1/13.42e-6</td><td>1/28.2e-3</td></tr>
 <tr><td>420</td><td>2291</td><td>1/13.79e-6</td><td>1/29.8e-3</td></tr>
 <tr><td>430</td><td>2369</td><td>1/14.14e-6</td><td>1/30.4e-3</td></tr>
-<tr><td>440</td><td>2460</td><td>1/14.50e-6</td><td>1/3.17e-3**fix</td></tr>
+<tr><td>440</td><td>2460</td><td>1/14.50e-6</td><td>1/31.7e-3</td></tr>
 <tr><td>450</td><td>2560</td><td>1/14.85e-6</td><td>1/33.1e-3</td></tr>
 <tr><td>460</td><td>2680</td><td>1/15.19e-6</td><td>1/34.6e-3</td></tr>
 <tr><td>470</td><td>2790</td><td>1/15.54e-6</td><td>1/36.3e-3</td></tr>
@@ -4364,7 +4429,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
       final parameter Integer n_lin=countTrue(inclLin)
         "Number of components of linear momentum";
       final parameter Integer cartAxes[n_lin]=index(inclLin)
-        "Cartesian-axis indices of the axes of linear momentum";
+        "Cartesian-axis indices of the components of linear momentum";
       final parameter Integer linAxes[Axis]=enumerate(inclLin)
         "Linear momentum component indices of the Cartesian axes";
       final parameter Boolean upstream[Axis]={upstreamX,upstreamY,upstreamZ}
@@ -4925,14 +4990,14 @@ Choose a condition besides None.");
             extent={{-100,-100},{100,100}},
             initialScale=0.1), graphics),
         Icon(graphics={Ellipse(
-                  extent={{-100,100},{100,-100}},
-                  lineColor={127,127,127},
-                  pattern=LinePattern.Dash,
-                  fillColor={225,225,225},
-                  fillPattern=FillPattern.Solid),Text(
-                  extent={{-100,20},{100,60}},
-                  textString="%name",
-                  lineColor={0,0,0})}));
+              extent={{-100,100},{100,-100}},
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash,
+              fillColor={225,225,225},
+              fillPattern=FillPattern.Solid), Text(
+              extent={{-100,20},{100,60}},
+              textString="%name",
+              lineColor={0,0,0})}));
     end Species;
 
     package BaseClasses "Base classes (not generally for direct use)"

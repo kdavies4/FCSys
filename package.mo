@@ -934,7 +934,7 @@ printing and shipping costs may be recovered.</p>
 
 
 annotation (
-  uses(Modelica(version="3.2"), Modelica_LinearSystems2(version="2.1")),
+  uses(Modelica(version="3.2")),
   preferedView="info",
   Documentation(info="<html>
     <p><a href=\"modelica://FCSys\">FCSys</a> is an open-source library of

@@ -1,7 +1,7 @@
 within FCSys;
 package Tests "Models and functions for test and validation"
   extends Modelica.Icons.Package;
-  function CallAll
+  function callAll
     "<html>Call all of the test functions for <a href=\"modelica://FCSys\">FCSys</a></html>"
 
     extends Modelica.Icons.Function;
@@ -9,12 +9,12 @@ package Tests "Models and functions for test and validation"
     output Boolean ok "true, if all tests passed";
 
   algorithm
-    ok := Units.CallAll() and BaseClasses.Utilities.CallAll();
+    ok := Units.callAll() and BaseClasses.Utilities.callAll();
     annotation (Documentation(info="<html><p>
   This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
-  end CallAll;
+  end callAll;
 
   model RunAll
     "<html>Run all of the test models for <a href=\"modelica://FCSys\">FCSys</a></html>"
@@ -22,7 +22,6 @@ package Tests "Models and functions for test and validation"
 
     Characteristics.RunAll testCharacteristics;
     BaseClasses.Utilities.Polynomial.RunAll testBaseClassesUtilities;
-
     annotation (Documentation(info="<html><p>If this model simulates without failure,
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
 
@@ -40,7 +39,6 @@ package Tests "Models and functions for test and validation"
       N2.Gas.RunAll testN2Gas;
       O2.Gas.RunAll testO2Gas;
       BaseClasses.Characteristic.RunAll testBaseClassesCharacteristic;
-
       annotation (Documentation(info="<html><p>If this model simulates without failure,
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
 
@@ -68,9 +66,11 @@ package Tests "Models and functions for test and validation"
         input Q.TemperatureAbsolute T "Temperature";
         input Q.PressureAbsolute p=1*U.atm "Pressure";
         output Q.Potential v_OC "Potential";
+
       algorithm
         v_OC := 0.5*(H2O.Gas.g(T, p) - H2.Gas.g(T, p) - 0.5*O2.Gas.g(T, p))
           annotation (Inline=true);
+
       end v_OC;
 
     initial equation
@@ -79,9 +79,10 @@ package Tests "Models and functions for test and validation"
             v_OC_table,
             1e-3*U.V,
             name="open circuit potential");
-      // Note:  In Dymola 7.4, the v_OC() function call cannot be used
+      // Note:  In Dymola 7.4, the v_OC() function call can't be used
       // directly here.  Instead, intermediate variables must be used.  Otherwise,
       // the result is different.
+
     end TestCellPotentialsGas;
 
     model TestCellPotentialsLiquid
@@ -103,18 +104,22 @@ package Tests "Models and functions for test and validation"
         input Q.TemperatureAbsolute T "Temperature";
         input Q.PressureAbsolute p=1*U.atm "Pressure";
         output Q.Potential v_OC "Potential";
+
       algorithm
         v_OC := 0.5*(H2O.Liquid.g(T, p) - H2.Gas.g(T, p) - 0.5*O2.Gas.g(T, p))
           annotation (Inline=true);
+
       end v_OC;
 
       function v_therm "Thermodynamic potential"
         input Q.TemperatureAbsolute T "Temperature";
         input Q.PressureAbsolute p=1*U.atm "Pressure";
         output Q.Potential v_therm "Potential";
+
       algorithm
         v_therm := 0.5*(H2O.Liquid.h(T, p) - H2.Gas.h(T, p) - 0.5*O2.Gas.h(T, p))
           annotation (Inline=true);
+
       end v_therm;
 
     initial equation
@@ -123,6 +128,7 @@ package Tests "Models and functions for test and validation"
             v_therm_table,
             1e-2*U.V,
             name="thermodynamic potential");
+
     end TestCellPotentialsLiquid;
 
     package H2
@@ -254,7 +260,9 @@ package Tests "Models and functions for test and validation"
           end for;
 
         end R;
+
       end Gas;
+
     end H2;
 
     package H2O
@@ -382,10 +390,11 @@ package Tests "Models and functions for test and validation"
             eps=0.1,
             T={373.15,400,600}*U.K,
             F_table={1/12.02e-6,1/13.05e-6,1/22.7e-6}/(U.Pa*U.s));
+
         end F;
 
         model R
-          "<html>Test the thermal resisitivity of H<sub>2</sub>O gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 924&ndash;925]</html>"
+          "<html>Test the thermal resistivity of H<sub>2</sub>O gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 924&ndash;925]</html>"
           extends H2.Gas.R(
             redeclare package Data = FCSys.Characteristics.H2O.Gas,
             eps=1.1,
@@ -393,8 +402,11 @@ package Tests "Models and functions for test and validation"
             R_table={1/24.8e-3,1/27.2e-3,1/92.9e-3}*U.m*U.K/U.W);
           // Note:  Tolerance must be very large to pass check (due to value
           // at 600 K).
+
         end R;
+
       end Gas;
+
     end H2O;
 
     package N2
@@ -451,6 +463,7 @@ package Tests "Models and functions for test and validation"
                 h(referenceEnthalpy=ReferenceEnthalpy.ZeroAt0K)),
             eps=1e-3,
             h_table={6391,8723,11640,17563,23714,30129,64810,110690}*U.J/U.mol);
+
         end h;
 
         model s
@@ -478,7 +491,7 @@ package Tests "Models and functions for test and validation"
         end F;
 
         model R
-          "<html>Test the thermal resisitivity of H<sub>2</sub>O gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 920&ndash;921]</html>"
+          "<html>Test the thermal resistivity of H<sub>2</sub>O gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 920&ndash;921]</html>"
 
           extends H2.Gas.R(
             redeclare package Data = FCSys.Characteristics.N2.Gas,
@@ -488,7 +501,9 @@ package Tests "Models and functions for test and validation"
                 44.6e-3,1/54.8e-3,1/64.7e-3,1/75.8e-3}*U.m*U.K/U.W);
 
         end R;
+
       end Gas;
+
     end N2;
 
     package O2
@@ -573,7 +588,7 @@ package Tests "Models and functions for test and validation"
         end F;
 
         model R
-          "<html>Test the thermal resisitivity of O<sub>2</sub>O gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, p. 924&ndash;925]</html>"
+          "<html>Test the thermal resistivity of O<sub>2</sub>O gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, p. 924&ndash;925]</html>"
 
           extends H2.Gas.R(
             redeclare package Data = FCSys.Characteristics.O2.Gas,
@@ -583,7 +598,9 @@ package Tests "Models and functions for test and validation"
                 47.3e-3,1/58.9e-3,1/71.0e-3,1/81.9e-3}*U.m*U.K/U.W);
 
         end R;
+
       end Gas;
+
     end O2;
 
     package BaseClasses
@@ -835,7 +852,6 @@ package Tests "Models and functions for test and validation"
                     expected=1/(89.6e-7*U.Pa*U.s),
                     o=0.4);
           // The fluidity is from [Incropera2002, p. 919].
-
           annotation (Documentation(info="<html><p>If this model simulates without failure,
     then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
         end F;
@@ -892,10 +908,10 @@ package Tests "Models and functions for test and validation"
                     expected=(1/0.183)*U.m*U.K/U.W,
                     o=0.7);
           // The thermal resistivity is from [Incropera2002, p. 919].
-
           annotation (Documentation(info="<html><p>If this model simulates without failure,
     then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
         end R;
+
       end Characteristic;
 
     end BaseClasses;
@@ -904,7 +920,7 @@ package Tests "Models and functions for test and validation"
 
   package Units
     extends Modelica.Icons.Package;
-    function CallAll
+    function callAll
       "<html>Call all of the test functions for the <a href=\"modelica://FCSys.Units\">Units</a> package</html>"
 
       extends Modelica.Icons.Function;
@@ -912,14 +928,14 @@ package Tests "Models and functions for test and validation"
       output Boolean ok "true, if all tests passed";
 
     algorithm
-      ok := TestValues() and TestConversions();
+      ok := testValues() and testConversions();
       annotation (Documentation(info="<html><p>
   This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
-    end CallAll;
+    end callAll;
 
-    function TestValues
+    function testValues
       "<html>Test the values of units and constants in the <a href=\"modelica://FCSys.Units\">Units</a> package</html>"
 
       import FCSys.Units.*;
@@ -1113,9 +1129,9 @@ package Tests "Models and functions for test and validation"
   This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
-    end TestValues;
+    end testValues;
 
-    function TestConversions
+    function testConversions
       "<html>Test the unit conversions in the <a href=\"modelica://FCSys.Units\">Units</a> package</html>"
 
       import FCSys.Test.assertValue;
@@ -1152,7 +1168,8 @@ package Tests "Models and functions for test and validation"
   This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
-    end TestConversions;
+    end testConversions;
+
   end Units;
 
   package BaseClasses
@@ -1160,7 +1177,7 @@ package Tests "Models and functions for test and validation"
     package Utilities
       extends Modelica.Icons.Package;
 
-      function CallAll
+      function callAll
         "<html>Call all of the test functions for the <a href=\"modelica://FCSys.BaseClasses.Utilities\">Utilities</a> package (recursive)</html>"
 
         extends Modelica.Icons.Function;
@@ -1173,7 +1190,7 @@ package Tests "Models and functions for test and validation"
   This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
-      end CallAll;
+      end callAll;
 
       function Chemistry
         "<html>Test the <a href=\"modelica://FCSys.BaseClasses.Utilities.Chemistry\">Chemistry</a> package</html>"
@@ -1272,9 +1289,9 @@ package Tests "Models and functions for test and validation"
           df testdf;
           d2f testd2f;
           Translatef translatef;
-
           annotation (Documentation(info="<html><p>If this model simulates without failure,
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
+
         end RunAll;
 
         model Translatef
@@ -1575,15 +1592,15 @@ package Tests "Models and functions for test and validation"
 
   end BaseClasses;
   annotation (Documentation(info="<html>
-<p>This package may be safely removed from the 
-<a href=\"modelica://FCSys\">FCSys</a> distribution, but it is useful for debugging.  
-The structure  of the subpackages matches that of <a href=\"modelica://FCSys\">FCSys</a>, 
+<p>This package may be safely removed from the
+<a href=\"modelica://FCSys\">FCSys</a> distribution (along with resources/NIST.xls), but it may be helpful for debugging.
+The structure  of the subpackages matches that of <a href=\"modelica://FCSys\">FCSys</a>,
 although not all packages are represented.
 </p>
 
-<p>The <a href=\"modelica://FCSys.Tests.CallAll\">CallAll</a>() function calls of the test 
+<p>The <a href=\"modelica://FCSys.Tests.CallAll\">CallAll</a>() function calls of the test
 functions and the <a href=\"modelica://FCSys.Tests.RunAll\">RunAll</a> model includes all of the
-test models.  Both should be tested to verify the <a href=\"modelica://FCSys\">FCSys</a> 
+test models.  Both should be tested to verify the <a href=\"modelica://FCSys\">FCSys</a>
 package.</p>
 </html>"));
 

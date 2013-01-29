@@ -460,16 +460,17 @@ package Units "Constants and units of physical measure"
   // -----------------------------------------------------------------------
   // Mathematical constants
 
-  function from_degC "From temperature in degree Celsius"
+  function from_degC "Convert from temperature in degree Celsius"
     extends Modelica.SIunits.Conversions.ConversionIcon;
     input Real T_degC "Temperature in degree Celsius";
     output Q.TemperatureAbsolute T "Thermodynamic temperature";
 
   algorithm
     T := (T_degC + 273.15)*K annotation (Inline=true);
+
   end from_degC;
 
-  function to_degC "To temperature in degree Celsius"
+  function to_degC "Convert to temperature in degree Celsius"
 
     extends Modelica.SIunits.Conversions.ConversionIcon;
     input Q.TemperatureAbsolute T "Thermodynamic temperature";
@@ -477,24 +478,27 @@ package Units "Constants and units of physical measure"
 
   algorithm
     T_degC := T/K - 273.15 annotation (Inline=true);
+
   end to_degC;
 
-  function from_kPag "From gauge pressure in kilopascals"
+  function from_kPag "Convert from gauge pressure in kilopascals"
     extends Modelica.SIunits.Conversions.ConversionIcon;
     input Real p_kPag "Gauge pressure in kilopascals";
     output Q.PressureAbsolute p "Absolute pressure";
 
   algorithm
     p := p_kPag*kPa + atm annotation (Inline=true);
+
   end from_kPag;
 
-  function to_kPag "To gauge pressure in kilopascals"
+  function to_kPag "Convert to gauge pressure in kilopascals"
     extends Modelica.SIunits.Conversions.ConversionIcon;
     input Q.PressureAbsolute p "Absolute pressure";
     output Real p_kPag "Gauge pressure in kilopascals";
 
   algorithm
     p_kPag := (p - atm)/kPa annotation (Inline=true);
+
   end to_kPag;
   final constant Q.Number pi=2*arccos(0) "<html>pi (<i>&pi;</i>)</html>";
   // Circumference per unit diameter
@@ -795,7 +799,6 @@ package Units "Constants and units of physical measure"
   final constant Q.Number '%'=centi "percent (%)";
   final constant Q.AmountVolumic M=U.mol/U.L "molar";
   final constant Q.Volume cc=U.cm^3 "cubic centimeter";
-
   annotation (Documentation(info="<html><p>When a physical variable is assigned a quantity, it is the product of a number
     and a unit [<a href=\"modelica://FCSys.UsersGuide.References\">BIPM2006</a>].  In <a href=\"modelica://FCSys\">FCSys</a>, units are also assigned numeric values in a consistent
     manner.  A unit
@@ -867,10 +870,10 @@ package Units "Constants and units of physical measure"
   to be relaxed, but the models in <a href=\"modelica://FCSys\">FCSys</a> generally do not.</p>
 
   <p>This package also contains functions (e.g., <a href=\"modelica://FCSys.Units.to_degC\">to_degC</a>) that
-  convert quantities from the unit system defined in <a href=\"modelica://FCSys\">FCSys</a> to quantities 
+  convert quantities from the unit system defined in <a href=\"modelica://FCSys\">FCSys</a> to quantities
   expressed in units.  Functions are
-  included for units that involve offsets<!-- or other functions besides simple scaling-->.  
-  For conversions that require just a scaling factor, it is best to use the 
+  included for units that involve offsets<!-- or other functions besides simple scaling-->.
+  For conversions that require just a scaling factor, it is best to use the
   units directly.  For example, to convert from potential in volts use <code>v = v_V*U.V</code>,
   where <code>v</code> is potential and <code>v_V</code> is potential expressed in volts.</p>
 
@@ -891,4 +894,5 @@ package Units "Constants and units of physical measure"
   http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
   </p></html>"), Commands(file="resources/scripts/units.mos"
         "Re-initialize the units."));
+
 end Units;

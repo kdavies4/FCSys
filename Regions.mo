@@ -960,46 +960,28 @@ package Regions "3D arrays of discrete, interconnected subregions"
             inclH2O=true,
             H2(
               p_IC=(1 - environment.x_H2O)*environment.p,
-              xNegative(
-                isobaric=true,
-                inviscidY=true,
-                inviscidZ=true),
-              xPositive(isobaric=false),
-              yNegative(isobaric=false),
-              yPositive(isobaric=false)),
+              inclFaceNegX=false,
+              inclFaceNegZ=false,
+              inclFacePosZ=false),
             H2O(
               p_IC=environment.x_H2O*environment.p,
-              xNegative(
-                isobaric=true,
-                inviscidY=true,
-                inviscidZ=true),
-              xPositive(isobaric=false),
-              yNegative(isobaric=false),
-              yPositive(isobaric=false))),
+              inclFaceNegX=false,
+              inclFaceNegZ=false,
+              inclFacePosZ=false)),
           each graphite(
             'inclC+'=true,
             'incle-'=true,
             'C+'(V_IC=V - xV),
             'e-'(
-              xNegative(isobaric=false),
-              xPositive(isobaric=false),
-              yNegative(
-                isobaric=true,
-                inviscidZ=true,
-                inviscidX=true),
-              yPositive(
-                isobaric=true,
-                inviscidZ=true,
-                inviscidX=true))),
+              inclFaceNegY=false,
+              inclFacePosY=false,
+              inclFaceNegZ=false,
+              inclFacePosZ=false)),
           each liquid(inclH2O=true, H2O(
               V_IC=0,
-              xNegative(
-                isobaric=true,
-                inviscidY=true,
-                inviscidZ=true),
-              xPositive(isobaric=false),
-              yNegative(isobaric=false),
-              yPositive(isobaric=false)))));
+              inclFaceNegX=false,
+              inclFaceNegZ=false,
+              inclFacePosZ=false))));
       // **for e-: setVelY=true,
 
       parameter Q.NumberAbsolute x(nominal=1) = 0.1 "Volumetric porosity";
@@ -3007,9 +2989,9 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
       connect(zNegative, zPositive)
         "Direct pass-through (not shown the diagram)";
     end if;
-    // TODO:  Once primitivesVisible is supported, complete the icon for this
-    // model and use primitivesVisible=false in the icons of the fuel cell
-    // layer models.
+    // TODO:  Once primitivesVisible is supported by Modelica tools, complete
+    // the icon for this model and use primitivesVisible=false in the icons of
+    // the fuel cell layer models.
     annotation (
       Documentation(info="<html><p>The following notes apply to the parameters:
   <ul>
