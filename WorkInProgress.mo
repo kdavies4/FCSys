@@ -7398,13 +7398,13 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
     <a href=\"modelica://FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"), Icon(graphics={Line(
-            points={{0,40},{80,40}},
-            color={0,0,255},
-            smooth=Smooth.None), Line(
-            points={{0,60},{0,20}},
-            color={0,0,0},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash)}));
+              points={{0,40},{80,40}},
+              color={0,0,255},
+              smooth=Smooth.None),Line(
+              points={{0,60},{0,20}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash)}));
   end ConditionsAdaptersSpeciesFluid;
 
   model ConditionsAdaptersPhasesIonomer
@@ -7468,33 +7468,30 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
         color={0,127,255},
         smooth=Smooth.None));
     annotation (Placement(transformation(extent={{-10,10},{10,30}})), Icon(
-          graphics={
-          Line(
-            points={{0,60},{0,-60}},
-            color={0,0,0},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash,
-            thickness=0.5),
-          Line(
-            points={{0,0},{-80,0}},
-            color={127,127,127},
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{0,40},{80,40}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{0,0},{80,0}},
-            color={191,0,0},
-            smooth=Smooth.None),
-          Line(
-            points={{0,-40},{80,-40}},
-            color={0,127,255},
-            smooth=Smooth.None)}));
+          graphics={Line(
+              points={{0,60},{0,-60}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),Line(
+              points={{0,0},{-80,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{0,40},{80,40}},
+              color={0,0,255},
+              smooth=Smooth.None),Line(
+              points={{0,0},{80,0}},
+              color={191,0,0},
+              smooth=Smooth.None),Line(
+              points={{0,-40},{80,-40}},
+              color={0,127,255},
+              smooth=Smooth.None)}));
   end ConditionsAdaptersPhasesIonomer;
 
   annotation (Commands(file="resources/scripts/units-values.mos"
-        "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate)."));
+        "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate).",
+        file="test/check.mos"
+        "Check all of FCSys using Dymola's check function."));
 
 end WorkInProgress;

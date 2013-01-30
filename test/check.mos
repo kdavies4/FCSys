@@ -1,6 +1,7 @@
 // Strings identifying the packages or models to be checked (in Modelica dot
 // notation).
 packages = {"FCSys.UsersGuide",
+            "FCSys.Blocks",
             "FCSys.Conditions",
             "FCSys.Assemblies",
             "FCSys.Regions",
@@ -9,11 +10,9 @@ packages = {"FCSys.UsersGuide",
             "FCSys.Characteristics",
             "FCSys.Units",
             "FCSys.Quantities",
-            "FCSys.BaseClasses"
-            //"FCSys.Blocks",
-            //"FCSys.Figures",
-            //"FCSys.Systems",
+            "FCSys.BaseClasses",
             "FCSys.Test",
+            "FCSys.Tests"
            };
 
 // Check the models (low to high level).

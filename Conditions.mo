@@ -10,7 +10,7 @@ package Conditions "Models to specify and measure operating conditions"
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
       FaceBus.Subregion subregionFaceCondition(gas(inclH2O=true, H2O(redeclare
-              Face.Normal.CurrentAreic normal(spec(k=0)))))
+              Face.Normal.CurrentAreic normal(source(k=0)))))
         annotation (Placement(transformation(extent={{-10,14},{10,34}})));
       Subregions.Subregion subregion(
         L={1,1,1}*U.cm,
@@ -51,7 +51,7 @@ package Conditions "Models to specify and measure operating conditions"
           axis + 2)] for axis in Axis} "Cross-sectional area";
 
       FaceBus.Phases.Gas phaseFaceCondition(inclH2O=true, H2O(redeclare
-            Face.Normal.CurrentAreic normal(spec(k=0))))
+            Face.Normal.CurrentAreic normal(source(k=0))))
         annotation (Placement(transformation(extent={{-10,14},{10,34}})));
 
       Subregions.Volume volume
@@ -716,13 +716,13 @@ package Conditions "Models to specify and measure operating conditions"
               Placement(transformation(extent={{-90,-10},{-70,10}}),
                 iconTransformation(extent={{-90,-10},{-70,10}})));
           annotation (Icon(graphics={Line(
-                          points={{0,0},{-80,0}},
-                          color={127,127,127},
-                          smooth=Smooth.None,
-                          thickness=0.5),Line(
-                          points={{0,0},{80,0}},
-                          color={191,0,0},
-                          smooth=Smooth.None)}));
+                  points={{0,0},{-80,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5), Line(
+                  points={{0,0},{80,0}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}));
 
         end PartialPhase;
 
@@ -809,13 +809,13 @@ package Conditions "Models to specify and measure operating conditions"
     <a href=\"modelica://FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"), Icon(graphics={Line(
-                      points={{0,-40},{80,-40}},
-                      color={0,127,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,20},{0,-60}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash)}));
+                points={{0,-40},{80,-40}},
+                color={0,127,255},
+                smooth=Smooth.None), Line(
+                points={{0,20},{0,-60}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash)}));
       end FluidNonionic;
 
       model Solid
@@ -875,12 +875,12 @@ package Conditions "Models to specify and measure operating conditions"
             Documentation(info="<html><p>Note that shear force is not included.</p>
   </html>"),
             Icon(graphics={Line(
-                          points={{0,0},{-80,0}},
-                          color={127,127,127},
-                          smooth=Smooth.None),Line(
-                          points={{0,0},{80,0}},
-                          color={191,0,0},
-                          smooth=Smooth.None)}));
+                  points={{0,0},{-80,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None), Line(
+                  points={{0,0},{80,0}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}));
         end PartialSpecies;
 
       end BaseClasses;
@@ -1911,11 +1911,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                   {160,160}}), graphics),
           Icon(coordinateSystem(preserveAspectRatio=true,extent={{-160,-160},{
                   160,160}}), graphics={Rectangle(
-                extent={{-160,160},{160,-160}},
-                lineColor={191,191,191},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Backward), Rectangle(extent={{-160,160},
-                    {160,-160}}, lineColor={0,0,0})}));
+                      extent={{-160,160},{160,-160}},
+                      lineColor={191,191,191},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Backward),Rectangle(extent={{-160,
+                160},{160,-160}}, lineColor={0,0,0})}));
       end PartialTestStand;
 
       partial model PartialTestStandNoIO
@@ -1935,8 +1935,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             'inclC+'=true,
             'incle-'=true,
             'e-'(redeclare Face.Normal.CurrentAreic normal(redeclare
-                  Modelica.Blocks.Sources.Ramp spec(height=U.A/U.cm^2,duration=
-                      50))))) annotation (Placement(transformation(
+                  Modelica.Blocks.Sources.Ramp source(height=U.A/U.cm^2,
+                    duration=50))))) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=90,
               origin={-30,0})));
@@ -1944,8 +1944,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             'inclC+'=true,
             'incle-'=true,
             'e-'(redeclare Face.Normal.CurrentAreic normal(redeclare
-                  Modelica.Blocks.Sources.Ramp spec(height=U.A/U.cm^2,duration=
-                      50))))) annotation (Placement(transformation(
+                  Modelica.Blocks.Sources.Ramp source(height=U.A/U.cm^2,
+                    duration=50))))) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={30,0})));
@@ -2794,16 +2794,16 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           Dialog(group="Axes with linear momentum included", compact=true));
 
         // Conditions
-        replaceable Material.PotentialPerTemperature material(source(k=0))
-          constrainedby Material.BaseClasses.PartialCondition(
+        replaceable Material.PotentialPerTemperature material constrainedby
+          Material.BaseClasses.PartialCondition(
           final inclLinX=inclLinX,
           final inclLinY=inclLinY,
           final inclLinZ=inclLinZ) "Material" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(group="Conditions"),
           Placement(transformation(extent={{-74,20},{-54,40}})));
-        replaceable Mechanical.Velocity mechanicalX(source(k=0)) if inclLinX
-          constrainedby Mechanical.BaseClasses.PartialCondition(
+        replaceable Mechanical.Velocity mechanicalX if inclLinX constrainedby
+          Mechanical.BaseClasses.PartialCondition(
           final inclLinX=inclLinX,
           final inclLinY=inclLinY,
           final inclLinZ=inclLinZ,
@@ -2811,8 +2811,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           __Dymola_choicesFromPackage=true,
           Dialog(group="Conditions",enable=inclLinX),
           Placement(transformation(extent={{-42,8},{-22,28}})));
-        replaceable Mechanical.Velocity mechanicalY(source(k=0)) if inclLinY
-          constrainedby Mechanical.BaseClasses.PartialCondition(
+        replaceable Mechanical.Velocity mechanicalY if inclLinY constrainedby
+          Mechanical.BaseClasses.PartialCondition(
           final inclLinX=inclLinX,
           final inclLinY=inclLinY,
           final inclLinZ=inclLinZ,
@@ -2820,8 +2820,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           __Dymola_choicesFromPackage=true,
           Dialog(group="Conditions",enable=inclLinY),
           Placement(transformation(extent={{-10,-4},{10,16}})));
-        replaceable Mechanical.Velocity mechanicalZ(source(k=0)) if inclLinZ
-          constrainedby Mechanical.BaseClasses.PartialCondition(
+        replaceable Mechanical.Velocity mechanicalZ if inclLinZ constrainedby
+          Mechanical.BaseClasses.PartialCondition(
           final inclLinX=inclLinX,
           final inclLinY=inclLinY,
           final inclLinZ=inclLinZ,
@@ -2829,7 +2829,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           __Dymola_choicesFromPackage=true,
           Dialog(group="Conditions",enable=inclLinZ),
           Placement(transformation(extent={{22,-16},{42,4}})));
-        replaceable Fluid.EnthalpyMassic fluid(source(k=0)) constrainedby
+        replaceable Fluid.EnthalpyMassic fluid constrainedby
           Fluid.BaseClasses.PartialCondition(
           final inclLinX=inclLinX,
           final inclLinY=inclLinY,
@@ -3057,8 +3057,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         Dialog(group="Included subconnectors",compact=true));
 
       // Conditions
-      replaceable Mechanical.Velocity mechanicalX(source(k=0)) if inclLinX
-        constrainedby Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalX if inclLinX constrainedby
+        Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -3066,8 +3066,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinX),
         Placement(transformation(extent={{-58,8},{-38,28}})));
-      replaceable Mechanical.Velocity mechanicalY(source(k=0)) if inclLinY
-        constrainedby Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalY if inclLinY constrainedby
+        Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -3075,8 +3075,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinY),
         Placement(transformation(extent={{-26,-4},{-6,16}})));
-      replaceable Mechanical.Velocity mechanicalZ(source(k=0)) if inclLinZ
-        constrainedby Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalZ if inclLinZ constrainedby
+        Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -3084,8 +3084,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinZ),
         Placement(transformation(extent={{6,-16},{26,4}})));
-      replaceable Thermal.Temperature thermal(source(k=298.15*U.K))
-        constrainedby Thermal.BaseClasses.PartialCondition(
+      replaceable Thermal.Temperature thermal constrainedby
+        Thermal.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ) "Thermal" annotation (
@@ -3210,7 +3210,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         redeclare Mechanical.Force mechanicalX,
         redeclare Mechanical.Force mechanicalY,
         redeclare Mechanical.Force mechanicalZ,
-        redeclare Thermal.HeatRate thermal(source(k=0)));
+        redeclare Thermal.HeatRate thermal);
       annotation (defaultComponentName="species");
 
     end SpeciesFlow;
@@ -3481,7 +3481,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         Dialog(group="Axes with linear momentum included", compact=true));
 
       // Conditions
-      replaceable Amagat.Pressure amagat(source(k=-U.atm)) constrainedby
+      replaceable Amagat.Pressure amagat constrainedby
         Amagat.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
@@ -3489,8 +3489,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{-74,20},{-54,40}})));
-      replaceable Mechanical.Velocity mechanicalX(source(k=0)) if inclLinX
-        constrainedby Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalX if inclLinX constrainedby
+        Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -3498,8 +3498,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinX),
         Placement(transformation(extent={{-42,8},{-22,28}})));
-      replaceable Mechanical.Velocity mechanicalY(source(k=0)) if inclLinY
-        constrainedby Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalY if inclLinY constrainedby
+        Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -3507,8 +3507,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinY),
         Placement(transformation(extent={{-10,-4},{10,16}})));
-      replaceable Mechanical.Velocity mechanicalZ(source(k=0)) if inclLinZ
-        constrainedby Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalZ if inclLinZ constrainedby
+        Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -3516,8 +3516,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinZ),
         Placement(transformation(extent={{22,-16},{42,4}})));
-      replaceable Thermal.Temperature thermal(source(k=298.15*U.K))
-        constrainedby Thermal.BaseClasses.PartialCondition(
+      replaceable Thermal.Temperature thermal constrainedby
+        Thermal.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ) "Thermal" annotation (
@@ -3659,11 +3659,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       "<html>Condition for a <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector (e.g., as in a <a href=\"modelica://FCSys.Subregions.Phases\">Phase</a> model), with flows by default</html>"
 
       extends Phase(
-        redeclare Amagat.Volume amagat(source(k=-U.cc)),
+        redeclare Amagat.Volume amagat,
         redeclare Mechanical.Force mechanicalX,
         redeclare Mechanical.Force mechanicalY,
         redeclare Mechanical.Force mechanicalZ,
-        redeclare Thermal.HeatRate thermal(source(k=0)));
+        redeclare Thermal.HeatRate thermal);
       annotation (defaultComponentName="phase");
 
     end PhaseFlow;
@@ -4003,7 +4003,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         Dialog(group="Axes with linear momentum included", compact=true));
 
       // Conditions
-      replaceable Dalton.Volume dalton(source(k=-U.cc)) constrainedby
+      replaceable Dalton.Volume dalton constrainedby
         Dalton.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
@@ -4011,8 +4011,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{-74,20},{-54,40}})));
-      replaceable Mechanical.Velocity mechanicalX(source(k=0)) if inclLinX
-        constrainedby Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalX if inclLinX constrainedby
+        Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -4020,8 +4020,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinX),
         Placement(transformation(extent={{-42,8},{-22,28}})));
-      replaceable Mechanical.Velocity mechanicalY(source(k=0)) if inclLinY
-        constrainedby Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalY if inclLinY constrainedby
+        Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -4029,8 +4029,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinY),
         Placement(transformation(extent={{-10,-4},{10,16}})));
-      replaceable Mechanical.Velocity mechanicalZ(source(k=0)) if inclLinZ
-        constrainedby Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalZ if inclLinZ constrainedby
+        Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -4038,8 +4038,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinZ),
         Placement(transformation(extent={{22,-16},{42,4}})));
-      replaceable Thermal.Temperature thermal(source(k=298.15*U.K))
-        constrainedby Thermal.BaseClasses.PartialCondition(
+      replaceable Thermal.Temperature thermal constrainedby
+        Thermal.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ) "Thermal" annotation (
@@ -4180,11 +4180,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       "<html>Condition for a <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector (e.g., as in a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model), with flows by default</html>"
 
       extends Species(
-        redeclare Dalton.Pressure dalton(source(k=-U.atm)),
+        redeclare Dalton.Pressure dalton,
         redeclare Mechanical.Force mechanicalX,
         redeclare Mechanical.Force mechanicalY,
         redeclare Mechanical.Force mechanicalZ,
-        redeclare Thermal.HeatRate thermal(source(k=0)));
+        redeclare Thermal.HeatRate thermal);
       annotation (defaultComponentName="species");
 
     end SpeciesFlow;
@@ -4629,56 +4629,52 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             redeclare replaceable Face.Normal.Force normal,
             redeclare replaceable Face.Transverse.Force transverse1,
             redeclare replaceable Face.Transverse.Force transverse2,
-            redeclare replaceable Face.Thermal.HeatRate thermal(source(k=0))),
+            redeclare replaceable Face.Thermal.HeatRate thermal),
           H2O(
             redeclare replaceable Face.Normal.Force normal,
             redeclare replaceable Face.Transverse.Force transverse1,
             redeclare replaceable Face.Transverse.Force transverse2,
-            redeclare replaceable Face.Thermal.HeatRate thermal(source(k=0))),
+            redeclare replaceable Face.Thermal.HeatRate thermal),
           N2(
             redeclare replaceable Face.Normal.Force normal,
             redeclare replaceable Face.Transverse.Force transverse1,
             redeclare replaceable Face.Transverse.Force transverse2,
-            redeclare replaceable Face.Thermal.HeatRate thermal(source(k=0))),
+            redeclare replaceable Face.Thermal.HeatRate thermal),
           O2(
             redeclare replaceable Face.Normal.Force normal,
             redeclare replaceable Face.Transverse.Force transverse1,
             redeclare replaceable Face.Transverse.Force transverse2,
-            redeclare replaceable Face.Thermal.HeatRate thermal(source(k=0)))),
-
+            redeclare replaceable Face.Thermal.HeatRate thermal)),
         graphite('C+'(
             redeclare replaceable Face.Normal.Force normal,
             redeclare replaceable Face.Transverse.Force transverse1,
             redeclare replaceable Face.Transverse.Force transverse2,
-            redeclare replaceable Face.Thermal.HeatRate thermal(source(k=0))),
-            'e-'(
+            redeclare replaceable Face.Thermal.HeatRate thermal), 'e-'(
             redeclare replaceable Face.Normal.Force normal,
             redeclare replaceable Face.Transverse.Force transverse1,
             redeclare replaceable Face.Transverse.Force transverse2,
-            redeclare replaceable Face.Thermal.HeatRate thermal(source(k=0)))),
-
+            redeclare replaceable Face.Thermal.HeatRate thermal)),
         ionomer(
           'C19HF37O5S-'(
             redeclare replaceable Face.Normal.Force normal,
             redeclare replaceable Face.Transverse.Force transverse1,
             redeclare replaceable Face.Transverse.Force transverse2,
-            redeclare replaceable Face.Thermal.HeatRate thermal(source(k=0))),
+            redeclare replaceable Face.Thermal.HeatRate thermal),
           'H+'(
             redeclare replaceable Face.Normal.Force normal,
             redeclare replaceable Face.Transverse.Force transverse1,
             redeclare replaceable Face.Transverse.Force transverse2,
-            redeclare replaceable Face.Thermal.HeatRate thermal(source(k=0))),
+            redeclare replaceable Face.Thermal.HeatRate thermal),
           H2O(
             redeclare replaceable Face.Normal.Force normal,
             redeclare replaceable Face.Transverse.Force transverse1,
             redeclare replaceable Face.Transverse.Force transverse2,
-            redeclare replaceable Face.Thermal.HeatRate thermal(source(k=0)))),
-
+            redeclare replaceable Face.Thermal.HeatRate thermal)),
         liquid(H2O(
             redeclare replaceable Face.Normal.Force normal,
             redeclare replaceable Face.Transverse.Force transverse1,
             redeclare replaceable Face.Transverse.Force transverse2,
-            redeclare replaceable Face.Thermal.HeatRate thermal(source(k=0)))));
+            redeclare replaceable Face.Thermal.HeatRate thermal)));
 
       annotation (defaultComponentName="subregion");
 
@@ -5080,25 +5076,20 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{-58,10},{-38,30}})));
-      // **How is it possible to set (source(k(start=0))), but still allow replaceable change?
-      // **Update in all other Condition models.
-      replaceable Transverse.Velocity transverse1(source(k=0),final orientation
-          =Orientation.preceding) constrainedby
-        Transverse.BaseClasses.PartialCondition
+      replaceable Transverse.Velocity transverse1(final orientation=Orientation.preceding)
+        constrainedby Transverse.BaseClasses.PartialCondition
         "<html>1<sup>st</sup> transverse</html>" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{-26,-2},{-6,18}})));
-      replaceable Transverse.Velocity transverse2(source(k=0),final orientation
-          =Orientation.following) constrainedby
-        Transverse.BaseClasses.PartialCondition
+      replaceable Transverse.Velocity transverse2(final orientation=Orientation.following)
+        constrainedby Transverse.BaseClasses.PartialCondition
         "<html>2<sup>nd</sup> transverse</html>" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{6,-18},{26,2}})));
-      replaceable Thermal.Temperature thermal(source(k=298.15*U.K))
-        constrainedby Thermal.BaseClasses.PartialCondition "Thermal"
-        annotation (
+      replaceable Thermal.Temperature thermal constrainedby
+        Thermal.BaseClasses.PartialCondition "Thermal" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{38,-30},{58,-10}})));
@@ -5486,8 +5477,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       equation
         connect(u, u_final) annotation (Line(
-            points={{-110,5.55112e-16},{-62,-4.87687e-22},{-62,5.55112e-16},{-20,
-                5.55112e-16}},
+            points={{-110,5.55112e-16},{-62,-4.87687e-22},{-62,5.55112e-16},{
+                -20,5.55112e-16}},
             color={0,0,127},
             smooth=Smooth.None));
 
@@ -5669,61 +5660,52 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             redeclare replaceable FacePair.Normal.Force normal,
             redeclare replaceable FacePair.Transverse.Force transverse1,
             redeclare replaceable FacePair.Transverse.Force transverse2,
-            redeclare replaceable FacePair.Thermal.HeatRate thermal(source(k=0))),
-
+            redeclare replaceable FacePair.Thermal.HeatRate thermal),
           H2O(
             redeclare replaceable FacePair.Normal.Force normal,
             redeclare replaceable FacePair.Transverse.Force transverse1,
             redeclare replaceable FacePair.Transverse.Force transverse2,
-            redeclare replaceable FacePair.Thermal.HeatRate thermal(source(k=0))),
-
+            redeclare replaceable FacePair.Thermal.HeatRate thermal),
           N2(
             redeclare replaceable FacePair.Normal.Force normal,
             redeclare replaceable FacePair.Transverse.Force transverse1,
             redeclare replaceable FacePair.Transverse.Force transverse2,
-            redeclare replaceable FacePair.Thermal.HeatRate thermal(source(k=0))),
-
+            redeclare replaceable FacePair.Thermal.HeatRate thermal),
           O2(
             redeclare replaceable FacePair.Normal.Force normal,
             redeclare replaceable FacePair.Transverse.Force transverse1,
             redeclare replaceable FacePair.Transverse.Force transverse2,
-            redeclare replaceable FacePair.Thermal.HeatRate thermal(source(k=0)))),
-
+            redeclare replaceable FacePair.Thermal.HeatRate thermal)),
         graphite('C+'(
             redeclare replaceable FacePair.Normal.Force normal,
             redeclare replaceable FacePair.Transverse.Force transverse1,
             redeclare replaceable FacePair.Transverse.Force transverse2,
-            redeclare replaceable FacePair.Thermal.HeatRate thermal(source(k=0))),
-            'e-'(
+            redeclare replaceable FacePair.Thermal.HeatRate thermal), 'e-'(
             redeclare replaceable FacePair.Normal.Force normal,
             redeclare replaceable FacePair.Transverse.Force transverse1,
             redeclare replaceable FacePair.Transverse.Force transverse2,
-            redeclare replaceable FacePair.Thermal.HeatRate thermal(source(k=0)))),
-
+            redeclare replaceable FacePair.Thermal.HeatRate thermal)),
         ionomer(
           'C19HF37O5S-'(
             redeclare replaceable FacePair.Normal.Force normal,
             redeclare replaceable FacePair.Transverse.Force transverse1,
             redeclare replaceable FacePair.Transverse.Force transverse2,
-            redeclare replaceable FacePair.Thermal.HeatRate thermal(source(k=0))),
-
+            redeclare replaceable FacePair.Thermal.HeatRate thermal),
           'H+'(
             redeclare replaceable FacePair.Normal.Force normal,
             redeclare replaceable FacePair.Transverse.Force transverse1,
             redeclare replaceable FacePair.Transverse.Force transverse2,
-            redeclare replaceable FacePair.Thermal.HeatRate thermal(source(k=0))),
-
+            redeclare replaceable FacePair.Thermal.HeatRate thermal),
           H2O(
             redeclare replaceable FacePair.Normal.Force normal,
             redeclare replaceable FacePair.Transverse.Force transverse1,
             redeclare replaceable FacePair.Transverse.Force transverse2,
-            redeclare replaceable FacePair.Thermal.HeatRate thermal(source(k=0)))),
-
+            redeclare replaceable FacePair.Thermal.HeatRate thermal)),
         liquid(H2O(
             redeclare replaceable FacePair.Normal.Force normal,
             redeclare replaceable FacePair.Transverse.Force transverse1,
             redeclare replaceable FacePair.Transverse.Force transverse2,
-            redeclare replaceable FacePair.Thermal.HeatRate thermal(source(k=0)))));
+            redeclare replaceable FacePair.Thermal.HeatRate thermal)));
 
       annotation (defaultComponentName="subregion");
 
@@ -6195,28 +6177,25 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       extends FCSys.Conditions.BaseClasses.Icons.Double;
 
-      replaceable Normal.CurrentAreic normal(source(k=0)) constrainedby
+      replaceable Normal.CurrentAreic normal constrainedby
         Normal.BaseClasses.PartialCondition "Normal" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{-58,10},{-38,30}})));
-      replaceable Transverse.Velocity transverse1(source(k=0),final orientation
-          =Orientation.preceding) constrainedby
-        Transverse.BaseClasses.PartialCondition
+      replaceable Transverse.Velocity transverse1(final orientation=Orientation.preceding)
+        constrainedby Transverse.BaseClasses.PartialCondition
         "<html>1<sup>st</sup> transverse</html>" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{-26,-2},{-6,18}})));
-      replaceable Transverse.Velocity transverse2(source(k=0),final orientation
-          =Orientation.following) constrainedby
-        Transverse.BaseClasses.PartialCondition
+      replaceable Transverse.Velocity transverse2(final orientation=Orientation.following)
+        constrainedby Transverse.BaseClasses.PartialCondition
         "<html>2<sup>nd</sup> transverse</html>" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{6,-18},{26,2}})));
-      replaceable Thermal.Temperature thermal(source(k=298.15*U.K))
-        constrainedby Thermal.BaseClasses.PartialCondition "Thermal"
-        annotation (
+      replaceable Thermal.Temperature thermal constrainedby
+        Thermal.BaseClasses.PartialCondition "Thermal" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{38,-30},{58,-10}})));

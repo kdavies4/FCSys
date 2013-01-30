@@ -1,5 +1,5 @@
 // Define signals.
-filename = "SubregionH2.mat";
+filename = "SubregionH2Alone.mat";
 y1 = {"subregion.gas.H2.N"};
 y2 = {"subregion.gas.H2.phi[1]"};
 y3 = {"subregion.gas.H2.p", "subregion.gas.H2.p_face[1, 1]",

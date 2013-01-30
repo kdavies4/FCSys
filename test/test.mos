@@ -2,12 +2,11 @@
 // The first column contains the models to be tested (in Modelica dot
 // notation).  The second column contains the stop times of the simulations (as
 // strings).
-list = ["FCSys.BCs.Examples.Defaults", "1";
-        //"FCSys.BCs.Examples.FaceBC", "1;"
-        //"FCSys.BCs.Examples.FaceBCMixtures", "1";
-        "FCSys.BCs.Examples.Router", "1";
-        //"FCSys.BCs.Examples.Adapteminus", "1";
-        //"FCSys.BCs.Examples.AdaptFluid", "1";
+list = [//"FCSys.Conditions.Examples.FaceCondition", "1;"
+        //"FCSys.Conditions.Examples.FaceonditionMixtures", "1";
+        "FCSys.Conditions.Examples.Router", "1";
+        //"FCSys.Conditions.Examples.Adapteminus", "1";
+        //"FCSys.Conditions.Examples.AdaptFluid", "1";
         //"FCSys.Assemblies.Examples.Cell", "1";
         //"FCSys.Assemblies.Examples.CellProfile", "1";
         //"FCSys.Assemblies.Examples.Polarization", "1";
@@ -40,7 +39,7 @@ list = ["FCSys.BCs.Examples.Defaults", "1";
         "FCSys.Subregions.Examples.SpeciesH2", "10";
         "FCSys.Subregions.Examples.Specieseminus", "10";
         "FCSys.Subregions.Examples.SubregionsCell", "4";
-        "FCSys.Characteristics.Examples.TestCorrelations", "1";
+        "FCSys.Characteristics.Examples.Correlations", "1";
         "FCSys.Units.Evaluate", "1";
         "FCSys.Quantities.Examples.TestQuantities", "1";
         "FCSys.BaseClasses.Utilities.Examples.TranslatePoly", "1"
