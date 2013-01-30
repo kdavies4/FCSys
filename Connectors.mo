@@ -209,9 +209,9 @@ package Connectors "Declarative and imperative connectors"
       "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
       annotation (HideResult=true);
 
-    FCSys.Connectors.Mechanical mechanical(final n_lin=n_lin)
+    Connectors.Mechanical mechanical(final n_lin=n_lin)
       "Subconnector for linear momentum";
-    FCSys.Connectors.Thermal thermal "Subconnector for heat";
+    Connectors.Thermal thermal "Subconnector for heat";
     annotation (
       Documentation(info="<html>
     <p>For more information, see the documentation in the
@@ -388,9 +388,9 @@ package Connectors "Declarative and imperative connectors"
       choices(__Dymola_checkBox=true),
       Dialog(compact=true));
 
-    FCSys.Connectors.Mechanical mechanical(final n_lin=n_lin) if inclMechanical
+    Connectors.Mechanical mechanical(final n_lin=n_lin) if inclMechanical
       "Subconnector for linear momentum";
-    FCSys.Connectors.Thermal thermal if inclThermal "Subconnector for heat";
+    Connectors.Thermal thermal if inclThermal "Subconnector for heat";
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="inert",

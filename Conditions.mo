@@ -56,7 +56,7 @@ package Conditions "Models to specify and measure operating conditions"
 
       Subregions.Volume volume
         annotation (Placement(transformation(extent={{-16,-16},{16,16}})));
-      FCSys.Subregions.Phases.Gas gas(
+      Subregions.Phases.Gas gas(
         inclReact=false,
         inclLin={false,true,false},
         inclH2=false,
@@ -189,7 +189,7 @@ package Conditions "Models to specify and measure operating conditions"
         Modelica.Media.Interfaces.PartialMedium "Medium model for the liquid"
         annotation (choicesAllMatching=true, Dialog(group="Material properties"));
 
-      FCSys.Connectors.FaceBus face
+      Connectors.FaceBus face
         "Multi-species connector for linear momentum and heat" annotation (
           Placement(transformation(extent={{-90,-10},{-70,10}}),
             iconTransformation(extent={{-90,-10},{-70,10}})));
@@ -296,7 +296,7 @@ package Conditions "Models to specify and measure operating conditions"
         Modelica.Media.Interfaces.PartialMedium "Medium model for the liquid"
         annotation (choicesAllMatching=true, Dialog(group="Material properties"));
 
-      FCSys.Connectors.FaceBus face
+      Connectors.FaceBus face
         "Multi-species connector for linear momentum and heat" annotation (
           Placement(transformation(extent={{-90,-10},{-70,10}}),
             iconTransformation(extent={{-90,-10},{-70,10}})));
@@ -712,17 +712,17 @@ package Conditions "Models to specify and measure operating conditions"
             "Modelica heat port" annotation (Placement(transformation(extent={{
                     70,-10},{90,10}}), iconTransformation(extent={{70,-10},{90,
                     10}})));
-          FCSys.Connectors.FaceBus face "FCSys face connector" annotation (
-              Placement(transformation(extent={{-90,-10},{-70,10}}),
-                iconTransformation(extent={{-90,-10},{-70,10}})));
+          Connectors.FaceBus face "FCSys face connector" annotation (Placement(
+                transformation(extent={{-90,-10},{-70,10}}), iconTransformation(
+                  extent={{-90,-10},{-70,10}})));
           annotation (Icon(graphics={Line(
-                  points={{0,0},{-80,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5), Line(
-                  points={{0,0},{80,0}},
-                  color={191,0,0},
-                  smooth=Smooth.None)}));
+                          points={{0,0},{-80,0}},
+                          color={127,127,127},
+                          smooth=Smooth.None,
+                          thickness=0.5),Line(
+                          points={{0,0},{80,0}},
+                          color={191,0,0},
+                          smooth=Smooth.None)}));
 
         end PartialPhase;
 
@@ -809,13 +809,13 @@ package Conditions "Models to specify and measure operating conditions"
     <a href=\"modelica://FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"), Icon(graphics={Line(
-                points={{0,-40},{80,-40}},
-                color={0,127,255},
-                smooth=Smooth.None), Line(
-                points={{0,20},{0,-60}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash)}));
+                      points={{0,-40},{80,-40}},
+                      color={0,127,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,20},{0,-60}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash)}));
       end FluidNonionic;
 
       model Solid
@@ -850,7 +850,7 @@ package Conditions "Models to specify and measure operating conditions"
             Placement(transformation(extent={{-60,40},{-40,60}}),
                 iconTransformation(extent={{-10,90},{10,110}})));
 
-          FCSys.Connectors.Face face
+          Connectors.Face face
             "Connector for linear momentum and heat of a single species"
             annotation (Placement(transformation(extent={{-90,-10},{-70,10}}),
                 iconTransformation(extent={{-90,-10},{-70,10}})));
@@ -875,12 +875,12 @@ package Conditions "Models to specify and measure operating conditions"
             Documentation(info="<html><p>Note that shear force is not included.</p>
   </html>"),
             Icon(graphics={Line(
-                  points={{0,0},{-80,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None), Line(
-                  points={{0,0},{80,0}},
-                  color={191,0,0},
-                  smooth=Smooth.None)}));
+                          points={{0,0},{-80,0}},
+                          color={127,127,127},
+                          smooth=Smooth.None),Line(
+                          points={{0,0},{80,0}},
+                          color={191,0,0},
+                          smooth=Smooth.None)}));
         end PartialSpecies;
 
       end BaseClasses;
@@ -1253,7 +1253,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={0,80})));
-      FCSys.Connectors.RealOutputBus y "Output signals as a bus" annotation (
+      Connectors.RealOutputBus y "Output signals as a bus" annotation (
           Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -1353,58 +1353,56 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             rotation=270,
             origin={152,-30})));
 
-      FCSys.Connectors.RealOutputInternal v(final unit="l2.m/(N.T2)")
+      Connectors.RealOutputInternal v(final unit="l2.m/(N.T2)")
         "CVM Cell 1 Voltage" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-152,-60})));
-      FCSys.Connectors.RealOutputInternal RHAnFPNegX(
+      Connectors.RealOutputInternal RHAnFPNegX(
         final unit="1",
         displayUnit="%",
         final min=0) "Anode inlet RH" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-134,-60})));
-      FCSys.Connectors.RealOutputInternal RHCaFPNegX(
+      Connectors.RealOutputInternal RHCaFPNegX(
         final unit="1",
         displayUnit="%",
         final min=0) "Cathode inlet RH" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-114,-60})));
-      FCSys.Connectors.RealOutputInternal p_anFPNegY(final unit="m/(l.T2)")
+      Connectors.RealOutputInternal p_anFPNegY(final unit="m/(l.T2)")
         "Pressure anode inlet" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-94,-60})));
-      FCSys.Connectors.RealOutputInternal p_anFPPosY(final unit="m/(l.T2)",
-          final min=0) "Pressure anode outlet" annotation (Placement(
-            transformation(
+      Connectors.RealOutputInternal p_anFPPosY(final unit="m/(l.T2)", final min
+          =0) "Pressure anode outlet" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-74,-60})));
-      FCSys.Connectors.RealOutputInternal p_caFPNegY(final unit="m/(l.T2)")
+      Connectors.RealOutputInternal p_caFPNegY(final unit="m/(l.T2)")
         "Pressure cathode inlet" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-54,-60})));
-      FCSys.Connectors.RealOutputInternal p_caFPPosY(final unit="m/(l.T2)",
-          final min=0) "Pressure anode outlet" annotation (Placement(
-            transformation(
+      Connectors.RealOutputInternal p_caFPPosY(final unit="m/(l.T2)", final min
+          =0) "Pressure anode outlet" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-34,-60})));
-      FCSys.Connectors.RealOutputInternal Vdot_anFPNegY_H2(final unit="l3/T")
+      Connectors.RealOutputInternal Vdot_anFPNegY_H2(final unit="l3/T")
         "Flow anode H2 MFC" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-14,-60})));
-      FCSys.Connectors.RealOutputInternal Vdot_caFPNegY_air(final unit="l3/T")
+      Connectors.RealOutputInternal Vdot_caFPNegY_air(final unit="l3/T")
         "Flow cathode H2 MFC" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={14,-60})));
-      FCSys.Connectors.RealOutputInternal T_anFPNegY(
+      Connectors.RealOutputInternal T_anFPNegY(
         final unit="l2.m/(N.T2)",
         displayUnit="K",
         final min=0) "Temperature anode inlet" annotation (Placement(
@@ -1412,7 +1410,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={32,-60})));
-      FCSys.Connectors.RealOutputInternal T_anFPPosY(
+      Connectors.RealOutputInternal T_anFPPosY(
         final unit="l2.m/(N.T2)",
         displayUnit="K",
         final min=0) "Temperature anode outlet" annotation (Placement(
@@ -1420,7 +1418,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={52,-60})));
-      FCSys.Connectors.RealOutputInternal T_caFPNegY(
+      Connectors.RealOutputInternal T_caFPNegY(
         final unit="l2.m/(N.T2)",
         displayUnit="K",
         final min=0) "Temperature cathode inlet" annotation (Placement(
@@ -1428,7 +1426,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={72,-60})));
-      FCSys.Connectors.RealOutputInternal T_caFPPosY(
+      Connectors.RealOutputInternal T_caFPPosY(
         final unit="l2.m/(N.T2)",
         displayUnit="K",
         final min=0) "Temperature cathode outlet" annotation (Placement(
@@ -1436,7 +1434,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={92,-60})));
-      FCSys.Connectors.RealOutputInternal T_anFPX(
+      Connectors.RealOutputInternal T_anFPX(
         final unit="l2.m/(N.T2)",
         displayUnit="K",
         final min=0) "Temperature end plate anode" annotation (Placement(
@@ -1444,7 +1442,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={112,-60})));
-      FCSys.Connectors.RealOutputInternal T_caFPX(
+      Connectors.RealOutputInternal T_caFPX(
         final unit="l2.m/(N.T2)",
         displayUnit="K",
         final min=0) "Temperature end plate cathode" annotation (Placement(
@@ -1452,7 +1450,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={132,-60})));
-      FCSys.Connectors.RealOutputInternal I(final unit="N/T") "Measured load"
+      Connectors.RealOutputInternal I(final unit="N/T") "Measured load"
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -1696,11 +1694,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           points={{152,-60},{152,-80},{5.55112e-16,-80},{5.55112e-16,-110}},
           color={0,0,127},
           smooth=Smooth.None));
-      annotation (
-        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-180,-100},
-                {180,100}}), graphics),
-        experiment(StopTime=15481, Algorithm="Euler"),
-        Icon(graphics));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-180,
+                -100},{180,100}}), graphics), experiment(StopTime=15481,
+            Algorithm="Euler"));
     end Replay;
 
     package BaseClasses "Base classes (not generally for direct use)"
@@ -1723,7 +1719,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           HideResult=true,
           choices(__Dymola_checkBox=true));
 
-        FCSys.Connectors.FaceBus anEnd[n_y, n_z] "Anode end plate" annotation (
+        Connectors.FaceBus anEnd[n_y, n_z] "Anode end plate" annotation (
             Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
@@ -1731,23 +1727,23 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-160,0})));
-        FCSys.Connectors.FaceBus caEnd[n_y, n_z] "Cathode end plate"
-          annotation (Placement(transformation(
+        Connectors.FaceBus caEnd[n_y, n_z] "Cathode end plate" annotation (
+            Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={160,0}), iconTransformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={162,0})));
-        FCSys.Connectors.FaceBus anSource[n_x_an, n_z] "Anode source"
-          annotation (Placement(transformation(
+        Connectors.FaceBus anSource[n_x_an, n_z] "Anode source" annotation (
+            Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-40,-160}), iconTransformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-40,-160})));
-        FCSys.Connectors.FaceBus anSink[n_x_an, n_z] "Anode sink" annotation (
+        Connectors.FaceBus anSink[n_x_an, n_z] "Anode sink" annotation (
             Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
@@ -1755,16 +1751,16 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-40,160})));
-        FCSys.Connectors.FaceBus caSource[n_x_ca, n_z] "Cathode source"
-          annotation (Placement(transformation(
+        Connectors.FaceBus caSource[n_x_ca, n_z] "Cathode source" annotation (
+            Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={40,-160}),iconTransformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={40,160})));
-        FCSys.Connectors.FaceBus caSink[n_x_ca, n_z] "Cathode sink" annotation
-          (Placement(transformation(
+        Connectors.FaceBus caSink[n_x_ca, n_z] "Cathode sink" annotation (
+            Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={40,160}), iconTransformation(
@@ -1772,56 +1768,54 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               rotation=270,
               origin={40,-160})));
 
-        FCSys.Conditions.FaceBus.SubregionFlows anEndCondition[n_y, n_z](each
+        Conditions.FaceBus.SubregionFlows anEndCondition[n_y, n_z](each
             graphite('inclC+'=true, 'incle-'=true)) annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-136,0})));
-        FCSys.Conditions.FaceBus.SubregionFlows caEndCondition[n_y, n_z](each
+        Conditions.FaceBus.SubregionFlows caEndCondition[n_y, n_z](each
             graphite('inclC+'=true, 'incle-'=true)) annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=90,
               origin={136,0})));
-        FCSys.Conditions.FaceBus.SubregionFlows anSourceCondition[n_x_an, n_z](
-            each gas(inclH2=true, inclH2O=true)) annotation (Placement(
+        Conditions.FaceBus.SubregionFlows anSourceCondition[n_x_an, n_z](each
+            gas(inclH2=true, inclH2O=true)) annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-40,-136})));
-        FCSys.Conditions.FaceBus.SubregionFlows anSinkCondition[n_x_an, n_z](
-            each gas(inclH2=true, inclH2O=true)) annotation (Placement(
-              transformation(
+        Conditions.FaceBus.SubregionFlows anSinkCondition[n_x_an, n_z](each gas(
+              inclH2=true, inclH2O=true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=180,
               origin={-40,136})));
-        FCSys.Conditions.FaceBus.SubregionFlows caSourceCondition[n_x_ca, n_z](
-            each gas(
+        Conditions.FaceBus.SubregionFlows caSourceCondition[n_x_ca, n_z](each
+            gas(
             inclH2O=true,
             inclN2=true,
             inclO2=true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={40,-136})));
-        FCSys.Conditions.FaceBus.SubregionFlows caSinkCondition[n_x_ca, n_z](
-            each gas(
+        Conditions.FaceBus.SubregionFlows caSinkCondition[n_x_ca, n_z](each gas(
             inclH2O=true,
             inclN2=true,
             inclO2=true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=180,
               origin={40,136})));
-        FCSys.Connectors.RealInputBus u[n_y, n_z] if inclIO annotation (
-            Placement(transformation(
+        Connectors.RealInputBus u[n_y, n_z] if inclIO annotation (Placement(
+              transformation(
               extent={{-10,-10},{10,10}},
               rotation=315,
               origin={-160,160}), iconTransformation(
               extent={{-10,-10},{10,10}},
               rotation=315,
               origin={-166,166})));
-        FCSys.Connectors.RealOutputBus y[n_y, n_z] if inclIO annotation (
-            Placement(transformation(
+        Connectors.RealOutputBus y[n_y, n_z] if inclIO annotation (Placement(
+              transformation(
               extent={{-10,-10},{10,10}},
               rotation=315,
               origin={160,-160}), iconTransformation(
@@ -1830,8 +1824,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               origin={166,-166})));
         replaceable FCSys.Conditions.FaceBusPair.Subregion current[n_y, n_z](
             graphite('inclC+'=true, 'incle-'=true)) if inclIO constrainedby
-          FCSys.Conditions.FaceBusPair.Subregion(graphite('inclC+'=true,
-              'incle-'=true))
+          Conditions.FaceBusPair.Subregion(graphite('inclC+'=true, 'incle-'=
+                true))
           annotation (Placement(transformation(extent={{-140,20},{-120,40}})));
 
       equation
@@ -1931,7 +1925,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         final parameter Integer n_z=1
           "<html>Number of subregions across the channel (<i>n</i><sub>z</sub>)</html>";
 
-        FCSys.Conditions.FaceBus.SubregionFlows anEnd[n_y, n_z](each graphite(
+        Conditions.FaceBus.SubregionFlows anEnd[n_y, n_z](each graphite(
             'inclC+'=true,
             'incle-'=true,
             'e-'(redeclare Face.Normal.CurrentAreic normal(redeclare
@@ -1940,7 +1934,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{-10,-10},{10,10}},
               rotation=90,
               origin={-30,0})));
-        FCSys.Conditions.FaceBus.SubregionFlows caEnd[n_y, n_z](each graphite(
+        Conditions.FaceBus.SubregionFlows caEnd[n_y, n_z](each graphite(
             'inclC+'=true,
             'incle-'=true,
             'e-'(redeclare Face.Normal.CurrentAreic normal(redeclare
@@ -1949,24 +1943,24 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={30,0})));
-        FCSys.Conditions.FaceBus.SubregionFlows anSource[n_x_an, n_z](each gas(
-              inclH2=true, inclH2O=true)) annotation (Placement(transformation(
+        Conditions.FaceBus.SubregionFlows anSource[n_x_an, n_z](each gas(inclH2
+              =true, inclH2O=true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=180,
               origin={-20,-30})));
-        FCSys.Conditions.FaceBus.SubregionFlows anSink[n_x_an, n_z](each gas(
-              inclH2=true, inclH2O=true)) annotation (Placement(transformation(
+        Conditions.FaceBus.SubregionFlows anSink[n_x_an, n_z](each gas(inclH2=
+                true, inclH2O=true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-20,30})));
-        FCSys.Conditions.FaceBus.SubregionFlows caSource[n_x_ca, n_z](each gas(
+        Conditions.FaceBus.SubregionFlows caSource[n_x_ca, n_z](each gas(
             inclH2O=true,
             inclN2=true,
             inclO2=true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=180,
               origin={20,-30})));
-        FCSys.Conditions.FaceBus.SubregionFlows caSink[n_x_ca, n_z](each gas(
+        Conditions.FaceBus.SubregionFlows caSink[n_x_ca, n_z](each gas(
             inclH2O=true,
             inclN2=true,
             inclO2=true)) annotation (Placement(transformation(
@@ -2144,7 +2138,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
-
       annotation (Diagram(graphics));
     end Gas;
 
@@ -2404,11 +2397,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           choices(__Dymola_checkBox=true),
           Dialog(group="Axes with linear momentum included", compact=true));
 
-        FCSys.Connectors.ChemicalBus chemical
+        Connectors.ChemicalBus chemical
           "Bus of ChemicalInput and ChemicalOutput connectors of multiple species"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
-        FCSys.Connectors.RealInputBus u "Bus of inputs to specify conditions"
+        Connectors.RealInputBus u "Bus of inputs to specify conditions"
           annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
@@ -2420,6 +2413,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               rotation=0,
               origin={110,0})));
         annotation (Diagram(graphics));
+
       end NullPhase;
 
     end BaseClasses;
@@ -2447,7 +2441,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       "<html>Condition for a <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> connector (e.g., as in a <a href=\"modelica://FCSys.Subregions.Reaction\">Reaction</a> model)</html>"
       extends BaseClasses.PartialConditions;
 
-      FCSys.Connectors.ChemicalInput chemical(final n_lin=countTrue({inclLinX,
+      Connectors.ChemicalInput chemical(final n_lin=countTrue({inclLinX,
             inclLinY,inclLinZ}))
         "Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as input"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
@@ -2491,7 +2485,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         Placement(transformation(extent={{-60,40},{-40,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
 
-      FCSys.Connectors.ChemicalOutput chemical(final n_lin=countTrue({inclLinX,
+      Connectors.ChemicalOutput chemical(final n_lin=countTrue({inclLinX,
             inclLinY,inclLinZ}))
         "Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as output"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
@@ -2519,7 +2513,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         parameter Integer n_lin "Number of components of linear momentum"
           annotation (Evaluate=true);
 
-        FCSys.Connectors.ChemicalOutput chemical(final n_lin=n_lin)
+        Connectors.ChemicalOutput chemical(final n_lin=n_lin)
           "Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as output"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -2838,7 +2832,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           Dialog(group="Conditions"),
           Placement(transformation(extent={{54,-30},{74,-10}})));
 
-        FCSys.Connectors.RealInputBus u
+        Connectors.RealInputBus u
           "Input bus for values of specified conditions" annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
@@ -2847,8 +2841,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-110,0})));
-        FCSys.Connectors.RealOutputBus y "Output bus of measurements"
-          annotation (Placement(transformation(
+        Connectors.RealOutputBus y "Output bus of measurements" annotation (
+            Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={110,0}),iconTransformation(
@@ -2975,21 +2969,21 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-70,30})));
-        FCSys.Connectors.RealInput u if not internal
-          "Value of specified condition" annotation (Placement(transformation(
+        Connectors.RealInput u if not internal "Value of specified condition"
+          annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-110,0})));
 
-        FCSys.Connectors.RealOutput y "Measurement expression" annotation (
-            Dialog(group="Measurement"), Placement(transformation(
+        Connectors.RealOutput y "Measurement expression" annotation (Dialog(
+              group="Measurement"), Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={110,0}), iconTransformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={110,0})));
-        FCSys.Connectors.ChemicalInput chemical(final n_lin=n_lin)
+        Connectors.ChemicalInput chemical(final n_lin=n_lin)
           "Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as input"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -2997,7 +2991,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
           "Number of components of linear momentum" annotation (Evaluate=true);
 
-        FCSys.Connectors.RealOutputInternal u_final
+        Connectors.RealOutputInternal u_final
           "Final value of specified condition" annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
@@ -3093,17 +3087,16 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         Dialog(group="Conditions"),
         Placement(transformation(extent={{38,-30},{58,-10}})));
 
-      FCSys.Connectors.RealInputBus u
-        "Input bus for values of specified conditions" annotation (Placement(
-            transformation(
+      Connectors.RealInputBus u "Input bus for values of specified conditions"
+        annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-110,0}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-112,0})));
-      FCSys.Connectors.RealOutputBus y "Output bus of measurements" annotation
-        (Placement(transformation(
+      Connectors.RealOutputBus y "Output bus of measurements" annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={110,0}),iconTransformation(
@@ -3111,7 +3104,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             rotation=0,
             origin={110,0})));
 
-      FCSys.Connectors.InertInternal inert(
+      Connectors.InertInternal inert(
         final n_lin=countTrue({inclLinX,inclLinY,inclLinZ}),
         inclMechanical=inclMechanical,
         inclThermal=inclThermal)
@@ -3269,7 +3262,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           constant ConditionType conditionType "Type of condition";
           // Note:  This is included so that the type of condition is recorded with the
           // results.
-          FCSys.Connectors.Mechanical mechanical(final n_lin=n_lin)
+          Connectors.Mechanical mechanical(final n_lin=n_lin)
             "Connector to exchange linear momentum"
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -3355,7 +3348,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           // Note:  This is included so that the type of condition is recorded with the
           // results.
 
-          FCSys.Connectors.Thermal thermal "Connector to exchange heat"
+          Connectors.Thermal thermal "Connector to exchange heat"
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
           annotation (defaultComponentName="thermal", Diagram(graphics={Text(
                           extent={{-8,-32},{8,-36}},
@@ -3412,14 +3405,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-70,30})));
-        FCSys.Connectors.RealInput u if not internal
-          "Value of specified condition" annotation (Placement(transformation(
+        Connectors.RealInput u if not internal "Value of specified condition"
+          annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-110,0})));
 
-        FCSys.Connectors.RealOutput y "Measurement expression" annotation (
-            Dialog(group="Measurement"), Placement(transformation(
+        Connectors.RealOutput y "Measurement expression" annotation (Dialog(
+              group="Measurement"), Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={110,0}), iconTransformation(
@@ -3431,7 +3424,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
           "Number of components of linear momentum" annotation (Evaluate=true);
 
-        FCSys.Connectors.RealOutputInternal u_final
+        Connectors.RealOutputInternal u_final
           "Final value of specified condition" annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
@@ -3525,18 +3518,18 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         Dialog(group="Conditions"),
         Placement(transformation(extent={{54,-30},{74,-10}})));
 
-      FCSys.Connectors.RealInputBus u
-        "Input bus for values of specified conditions" annotation (HideResult=
-            not (internalVolume or internalLinX or internalLinY or internalLinZ
-             or internalThermal), Placement(transformation(
+      Connectors.RealInputBus u "Input bus for values of specified conditions"
+        annotation (HideResult=not (internalVolume or internalLinX or
+            internalLinY or internalLinZ or internalThermal), Placement(
+            transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-110,0}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-110,0})));
-      FCSys.Connectors.RealOutputBus y "Output bus of measurements" annotation
-        (Placement(transformation(
+      Connectors.RealOutputBus y "Output bus of measurements" annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={110,0}),iconTransformation(
@@ -3544,8 +3537,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             rotation=0,
             origin={110,0})));
 
-      FCSys.Connectors.InertAmagat inert(final n_lin=countTrue({inclLinX,
-            inclLinY,inclLinZ}))
+      Connectors.InertAmagat inert(final n_lin=countTrue({inclLinX,inclLinY,
+            inclLinZ}))
         "Single-species connector for linear momentum and heat, with additivity of volume"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
@@ -3931,21 +3924,21 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-70,30})));
-        FCSys.Connectors.RealInput u if not internal
-          "Value of specified condition" annotation (Placement(transformation(
+        Connectors.RealInput u if not internal "Value of specified condition"
+          annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-110,0})));
 
-        FCSys.Connectors.RealOutput y "Measurement expression" annotation (
-            Dialog(group="Measurement"), Placement(transformation(
+        Connectors.RealOutput y "Measurement expression" annotation (Dialog(
+              group="Measurement"), Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={110,0}), iconTransformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={110,0})));
-        FCSys.Connectors.InertAmagat inert(final n_lin=n_lin)
+        Connectors.InertAmagat inert(final n_lin=n_lin)
           "Connector for linear momentum and heat, with additivity of volume"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -3953,7 +3946,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
           "Number of components of linear momentum" annotation (Evaluate=true);
 
-        FCSys.Connectors.RealOutputInternal u_final
+        Connectors.RealOutputInternal u_final
           "Final value of specified condition" annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
@@ -4047,17 +4040,16 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         Dialog(group="Conditions"),
         Placement(transformation(extent={{54,-30},{74,-10}})));
 
-      FCSys.Connectors.RealInputBus u
-        "Input bus for values of specified conditions" annotation (Placement(
-            transformation(
+      Connectors.RealInputBus u "Input bus for values of specified conditions"
+        annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-110,0}), iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-110,0})));
-      FCSys.Connectors.RealOutputBus y "Output bus of measurements" annotation
-        (Placement(transformation(
+      Connectors.RealOutputBus y "Output bus of measurements" annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={110,0}),iconTransformation(
@@ -4065,8 +4057,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             rotation=0,
             origin={110,0})));
 
-      FCSys.Connectors.InertDalton inert(final n_lin=countTrue({inclLinX,
-            inclLinY,inclLinZ}))
+      Connectors.InertDalton inert(final n_lin=countTrue({inclLinX,inclLinY,
+            inclLinZ}))
         "Single-species connector for linear momentum and heat, with additivity of pressure"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
@@ -4452,21 +4444,21 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-70,30})));
-        FCSys.Connectors.RealInput u if not internal
-          "Value of specified condition" annotation (Placement(transformation(
+        Connectors.RealInput u if not internal "Value of specified condition"
+          annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-110,0})));
 
-        FCSys.Connectors.RealOutput y "Measurement expression" annotation (
-            Dialog(group="Measurement"), Placement(transformation(
+        Connectors.RealOutput y "Measurement expression" annotation (Dialog(
+              group="Measurement"), Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={110,0}), iconTransformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={110,0})));
-        FCSys.Connectors.InertDalton inert(final n_lin=n_lin)
+        Connectors.InertDalton inert(final n_lin=n_lin)
           "Connector for linear momentum and heat, with additivity of pressure"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -4474,7 +4466,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
           "Number of components of linear momentum" annotation (Evaluate=true);
 
-        FCSys.Connectors.RealOutputInternal u_final
+        Connectors.RealOutputInternal u_final
           "Final value of specified condition" annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
@@ -4524,18 +4516,18 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             __Dymola_descriptionLabel=true), Placement(transformation(extent={{
                 -10,-10},{10,10}})));
 
-      FCSys.Connectors.FaceBus face
+      Connectors.FaceBus face
         "Connector for linear momentum and heat of multiple species"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
-      FCSys.Connectors.RealInputBus u "Bus of inputs to specify conditions"
+      Connectors.RealInputBus u "Bus of inputs to specify conditions"
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-110,0})));
 
-      FCSys.Connectors.RealOutputBus y "Output bus of measurements" annotation
-        (Placement(transformation(
+      Connectors.RealOutputBus y "Output bus of measurements" annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={110,0})));
@@ -4616,7 +4608,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
-
       annotation (Diagram(graphics));
     end Subregion;
 
@@ -4675,7 +4666,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             redeclare replaceable Face.Transverse.Force transverse1,
             redeclare replaceable Face.Transverse.Force transverse2,
             redeclare replaceable Face.Thermal.HeatRate thermal)));
-
       annotation (defaultComponentName="subregion");
 
     end SubregionFlows;
@@ -5034,10 +5024,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         model NullPhase "Empty condition for a phase (no species)"
           extends FCSys.Conditions.BaseClasses.Icons.Single;
 
-          FCSys.Connectors.FaceBus face
+          Connectors.FaceBus face
             "Multi-species connector for linear momentum and heat"
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-          FCSys.Connectors.RealInputBus u
+          Connectors.RealInputBus u
             "Input bus for values of specified conditions" annotation (
               Placement(transformation(
                 extent={{-10,-10},{10,10}},
@@ -5047,8 +5037,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 rotation=0,
                 origin={-100,0})));
 
-          FCSys.Connectors.RealOutputBus y "Output bus of measurements"
-            annotation (Placement(transformation(
+          Connectors.RealOutputBus y "Output bus of measurements" annotation (
+              Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={100,0}),iconTransformation(
@@ -5098,14 +5088,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       // subcomponent can be replaced by blocks that don't contain the
       // parameter k.
 
-      FCSys.Connectors.Face face
+      Connectors.Face face
         "Single-species connector for linear momentum and heat" annotation (
           Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
 
-      FCSys.Connectors.RealInputBus u
-        "Input bus for values of specified conditions" annotation (Placement(
-            transformation(
+      Connectors.RealInputBus u "Input bus for values of specified conditions"
+        annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-100,0}), iconTransformation(
@@ -5113,8 +5102,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             rotation=0,
             origin={-100,0})));
 
-      FCSys.Connectors.RealOutputBus y "Output bus of measurements" annotation
-        (Placement(transformation(
+      Connectors.RealOutputBus y "Output bus of measurements" annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={100,0}),iconTransformation(
@@ -5448,14 +5437,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               rotation=0,
               origin={-70,30})));
 
-        FCSys.Connectors.RealInput u if not internal
-          "Value of specified condition" annotation (Placement(transformation(
+        Connectors.RealInput u if not internal "Value of specified condition"
+          annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-110,0})));
 
-        FCSys.Connectors.RealOutput y "Measurement expression" annotation (
-            Dialog(group="Measurement"), Placement(transformation(
+        Connectors.RealOutput y "Measurement expression" annotation (Dialog(
+              group="Measurement"), Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={110,0}), iconTransformation(
@@ -5463,12 +5452,12 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               rotation=0,
               origin={110,0})));
 
-        FCSys.Connectors.Face face
+        Connectors.Face face
           "Connector to transport linear momentum and heat of a single species"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
       protected
-        FCSys.Connectors.RealOutputInternal u_final
+        Connectors.RealOutputInternal u_final
           "Final value of specified condition" annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
@@ -5477,8 +5466,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       equation
         connect(u, u_final) annotation (Line(
-            points={{-110,5.55112e-16},{-62,-4.87687e-22},{-62,5.55112e-16},{
-                -20,5.55112e-16}},
+            points={{-110,5.55112e-16},{-62,-4.87687e-22},{-62,5.55112e-16},{-20,
+                5.55112e-16}},
             color={0,0,127},
             smooth=Smooth.None));
 
@@ -5519,21 +5508,21 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             __Dymola_descriptionLabel=true), Placement(transformation(extent={{
                 -10,-10},{10,10}})));
 
-      FCSys.Connectors.FaceBus negative
+      Connectors.FaceBus negative
         "Negative-side multi-species connector for linear momentum and heat"
         annotation (Placement(transformation(extent={{-110,-10},{-90,10}}),
             iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-100,0})));
-      FCSys.Connectors.FaceBus positive
+      Connectors.FaceBus positive
         "Positive-side multi-species connector for linear momentum and heat"
         annotation (Placement(transformation(extent={{90,-10},{110,10}}),
             iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={100,0})));
-      FCSys.Connectors.RealInputBus u "Bus of inputs to specify conditions"
+      Connectors.RealInputBus u "Bus of inputs to specify conditions"
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -5542,8 +5531,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             origin={0,50},
             rotation=270)));
 
-      FCSys.Connectors.RealOutputBus y "Output bus of measurements" annotation
-        (Placement(transformation(
+      Connectors.RealOutputBus y "Output bus of measurements" annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={0,-50}), iconTransformation(
@@ -5647,7 +5636,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           color={0,0,127},
           thickness=0.5,
           smooth=Smooth.None));
-
       annotation (Icon(graphics));
     end Subregion;
 
@@ -5706,7 +5694,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             redeclare replaceable FacePair.Transverse.Force transverse1,
             redeclare replaceable FacePair.Transverse.Force transverse2,
             redeclare replaceable FacePair.Thermal.HeatRate thermal)));
-
       annotation (defaultComponentName="subregion");
 
     end SubregionFlow;
@@ -6133,15 +6120,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         model NullPhase "Empty condition for a phase (no species)"
           extends FCSys.Conditions.BaseClasses.Icons.Double;
 
-          FCSys.Connectors.FaceBus negative
+          Connectors.FaceBus negative
             "Negative-side multi-species connector for linear momentum and heat"
             annotation (Placement(transformation(extent={{-110,-10},{-90,10}}),
                 iconTransformation(extent={{-110,-10},{-90,10}})));
-          FCSys.Connectors.FaceBus positive
+          Connectors.FaceBus positive
             "Positive-side multi-species connector for linear momentum and heat"
             annotation (Placement(transformation(extent={{90,-10},{110,10}}),
                 iconTransformation(extent={{90,-10},{110,10}})));
-          FCSys.Connectors.RealInputBus u
+          Connectors.RealInputBus u
             "Input bus for values of specified conditions" annotation (
               Placement(transformation(
                 extent={{-10,-10},{10,10}},
@@ -6151,8 +6138,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 rotation=270,
                 origin={0,50})));
 
-          FCSys.Connectors.RealOutputBus y "Output bus of measurements"
-            annotation (Placement(transformation(
+          Connectors.RealOutputBus y "Output bus of measurements" annotation (
+              Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={0,-50}),iconTransformation(
@@ -6204,7 +6191,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       // subcomponent can be replaced by blocks that don't contain the
       // parameter k.
 
-      FCSys.Connectors.Face negative
+      Connectors.Face negative
         "Negative-side single-species connector for linear momentum and heat"
         annotation (Placement(transformation(extent={{-110,-10},{-90,10}}),
             iconTransformation(
@@ -6212,14 +6199,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             rotation=180,
             origin={-100,0})));
 
-      FCSys.Connectors.Face positive
+      Connectors.Face positive
         "Positive-side single-species connector for linear momentum and heat"
         annotation (Placement(transformation(extent={{90,-10},{110,10}}),
             iconTransformation(extent={{90,-10},{110,10}})));
 
-      FCSys.Connectors.RealInputBus u
-        "Input bus for values of specified conditions" annotation (Placement(
-            transformation(
+      Connectors.RealInputBus u "Input bus for values of specified conditions"
+        annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={0,50}), iconTransformation(
@@ -6227,8 +6213,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             rotation=270,
             origin={0,50})));
 
-      FCSys.Connectors.RealOutputBus y "Output bus of measurements" annotation
-        (Placement(transformation(
+      Connectors.RealOutputBus y "Output bus of measurements" annotation (
+          Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={0,-50}), iconTransformation(
@@ -6622,14 +6608,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               rotation=270,
               origin={40,20})));
 
-        FCSys.Connectors.RealInput u if not internal
-          "Value of specified condition" annotation (Placement(transformation(
+        Connectors.RealInput u if not internal "Value of specified condition"
+          annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,50})));
 
-        FCSys.Connectors.RealOutput y "Measurement expression" annotation (
-            Dialog(group="Measurement"), Placement(transformation(
+        Connectors.RealOutput y "Measurement expression" annotation (Dialog(
+              group="Measurement"), Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,-50}), iconTransformation(
@@ -6637,15 +6623,15 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               rotation=270,
               origin={0,-50})));
 
-        FCSys.Connectors.Face negative
+        Connectors.Face negative
           "Negative-side connector to transport linear momentum and heat of a single species"
           annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-        FCSys.Connectors.Face positive
+        Connectors.Face positive
           "Positive-side connector to transport linear momentum and heat of a single species"
           annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 
       protected
-        FCSys.Connectors.RealOutputInternal u_final
+        Connectors.RealOutputInternal u_final
           "Final value of specified condition" annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
@@ -6673,16 +6659,16 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
     extends FCSys.BaseClasses.Icons.Names.Top3;
     parameter Boolean crossOver=false "Cross over (otherwise, pass through)"
       annotation (Evaluate=true,choices(__Dymola_checkBox=true));
-    FCSys.Connectors.FaceBus negative1 "Negative face 1" annotation (Placement(
+    Connectors.FaceBus negative1 "Negative face 1" annotation (Placement(
           transformation(extent={{-90,-50},{-70,-30}}, rotation=0),
           iconTransformation(extent={{-90,-50},{-70,-30}})));
-    FCSys.Connectors.FaceBus positive1 "Positive face 1" annotation (Placement(
+    Connectors.FaceBus positive1 "Positive face 1" annotation (Placement(
           transformation(extent={{70,-50},{90,-30}}, rotation=0),
           iconTransformation(extent={{70,-50},{90,-30}})));
-    FCSys.Connectors.FaceBus negative2 "Negative face 2" annotation (Placement(
+    Connectors.FaceBus negative2 "Negative face 2" annotation (Placement(
           transformation(extent={{-90,30},{-70,50}}, rotation=0),
           iconTransformation(extent={{-90,30},{-70,50}})));
-    FCSys.Connectors.FaceBus positive2 "Positive face 2" annotation (Placement(
+    Connectors.FaceBus positive2 "Positive face 2" annotation (Placement(
           transformation(extent={{70,30},{90,50}}, rotation=0),
           iconTransformation(extent={{70,30},{90,50}})));
 
@@ -6740,31 +6726,27 @@ connected to <code>positive1</code>, as shown by Figure 1b.</p>
         <td colspan=2 align=center><b>Figure 1:</b> Modes of connection.</td>
       </tr>
     </table>
-</html>"), Icon(graphics={
-          Line(
-            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=crossOver,
-            smooth=Smooth.Bezier),
-          Line(
-            points={{-80,40},{80,40}},
-            color={127,127,127},
-            visible=not crossOver,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{-80,-40},{80,-40}},
-            color={127,127,127},
-            visible=not crossOver,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=crossOver,
-            smooth=Smooth.Bezier)}));
+</html>"), Icon(graphics={Line(
+              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=crossOver,
+              smooth=Smooth.Bezier),Line(
+              points={{-80,40},{80,40}},
+              color={127,127,127},
+              visible=not crossOver,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{-80,-40},{80,-40}},
+              color={127,127,127},
+              visible=not crossOver,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=crossOver,
+              smooth=Smooth.Bezier)}));
   end Router;
 
   record Environment "Environmental properties for a model"
@@ -6860,34 +6842,28 @@ The default global default settings will be used for the current simulation.",
       extends Modelica.Icons.Package;
       partial class Double "Icon for a two-connector boundary condition"
         //extends Names.Middle;
-        annotation (Icon(graphics={
-              Rectangle(
-                extent={{-100,40},{100,-40}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Line(
-                points={{-100,40},{100,40}},
-                pattern=LinePattern.None,
-                smooth=Smooth.None),
-              Line(
-                points={{-100,-40},{-100,40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash),
-              Text(
-                extent={{-150,-20},{150,20}},
-                textString="%name",
-                lineColor={0,0,0}),
-              Line(
-                points={{-100,-40},{100,-40}},
-                pattern=LinePattern.None,
-                smooth=Smooth.None),
-              Line(
-                points={{100,-40},{100,40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash)}));
+        annotation (Icon(graphics={Rectangle(
+                      extent={{-100,40},{100,-40}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Line(
+                      points={{-100,40},{100,40}},
+                      pattern=LinePattern.None,
+                      smooth=Smooth.None),Line(
+                      points={{-100,-40},{-100,40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash),Text(
+                      extent={{-150,-20},{150,20}},
+                      textString="%name",
+                      lineColor={0,0,0}),Line(
+                      points={{-100,-40},{100,-40}},
+                      pattern=LinePattern.None,
+                      smooth=Smooth.None),Line(
+                      points={{100,-40},{100,40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash)}));
 
       end Double;
 
@@ -6926,17 +6902,17 @@ The default global default settings will be used for the current simulation.",
   <a href=\"modelica://FCSys.Conditions.FaceBus\">FaceBus</a> packages contain models to specify conditions on the
   connectors with the same names (<a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> or
   <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a>, <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> or
-  <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a>, 
+  <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a>,
   <a href=\"modelica://FCSys.Conditions.InertAmagat\">InertAmagat</a>,
   <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a>, <a href=\"modelica://FCSys.Conditions.Face\">Face</a>, and
-  <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>).  
+  <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>).
   The <a href=\"modelica://FCSys.Conditions.FaceDifferential\">FacePair</a> and
-  <a href=\"modelica://FCSys.Conditions.FaceBusPair\">FaceBusPair</a> packages contain models 
+  <a href=\"modelica://FCSys.Conditions.FaceBusPair\">FaceBusPair</a> packages contain models
   for pairs of <a href=\"modelica://FCSys.Conditions.Face\">Face</a> and
   <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connectors.  Each model is given the same name as the
   model from the <a href=\"modelica://FCSys.Subregions\">Subregions</a> package that it may be used to represent.  For
   example, the model to interface with the <a href=\"modelica://FCSys.Conditions.Face\">Face</a> connector
-  is named <a href=\"modelica://FCSys.Conditions.Face.Species\">Species</a> (in the 
+  is named <a href=\"modelica://FCSys.Conditions.Face.Species\">Species</a> (in the
   <a href=\"modelica://FCSys.Conditions.Face\">Conditions.Face</a> package).
   </p>
 </html>"));

@@ -93,7 +93,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
         extends CellProfile(testStand(final inclIO=true));
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
 
-        FCSys.Connectors.RealInputBus u "Input bus" annotation (Placement(
+        Connectors.RealInputBus u "Input bus" annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=315,
@@ -101,7 +101,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-2,100})));
-        FCSys.Connectors.RealOutputBus y "Output bus" annotation (Placement(
+        Connectors.RealOutputBus y "Output bus" annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=315,
@@ -144,11 +144,11 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
         inner FCSys.Conditions.Environment environment(analysis=false)
           annotation (Placement(transformation(extent={{40,60},{60,80}})));
-        FCSys.Conditions.Adapters.Phases.Graphite caModelicaAdapt(A=cell.L_y[1]
-              *cell.L_z[1])
+        Conditions.Adapters.Phases.Graphite caModelicaAdapt(A=cell.L_y[1]*cell.L_z[
+              1])
           annotation (Placement(transformation(extent={{20,-10},{40,10}})));
-        FCSys.Conditions.Adapters.Phases.Graphite anModelicaAdapt(A=cell.L_y[1]
-              *cell.L_z[1])
+        Conditions.Adapters.Phases.Graphite anModelicaAdapt(A=cell.L_y[1]*cell.L_z[
+              1])
           annotation (Placement(transformation(extent={{-20,-10},{-40,10}})));
         FCSys.WorkInProgress.TanConduct tanConduct
           annotation (Placement(transformation(extent={{10,40},{-10,60}})));
@@ -271,13 +271,13 @@ package Assemblies "Combinations of regions (e.g., cells)"
         1, 1] - caFP.subregions[:, n_y, :].gas.O2.Ndot_face[1, 2]) if
         environment.analysis "Rate of oxygen intake";
 
-      FCSys.Connectors.FaceBus anFPX[n_y, n_z] "Anode plate face" annotation (
+      Connectors.FaceBus anFPX[n_y, n_z] "Anode plate face" annotation (
           Placement(transformation(extent={{-90,-10},{-70,10}},rotation=0),
             iconTransformation(extent={{-110,-10},{-90,10}})));
-      FCSys.Connectors.FaceBus caFPX[n_y, n_z] "Cathode plate face" annotation
-        (Placement(transformation(extent={{70,-10},{90,10}}, rotation=0),
+      Connectors.FaceBus caFPX[n_y, n_z] "Cathode plate face" annotation (
+          Placement(transformation(extent={{70,-10},{90,10}},rotation=0),
             iconTransformation(extent={{90,-10},{110,10}})));
-      FCSys.Connectors.FaceBus anFPPosY[anFP.n_x, n_z]
+      Connectors.FaceBus anFPPosY[anFP.n_x, n_z]
         "Positive anode flow plate face along the y axis" annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -286,7 +286,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={-40,100})));
-      FCSys.Connectors.FaceBus caFPPosY[caFP.n_x, n_z]
+      Connectors.FaceBus caFPPosY[caFP.n_x, n_z]
         "Positive anode flow plate face along the y axis" annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -295,7 +295,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={40,100})));
-      FCSys.Connectors.FaceBus caFPNegY[caFP.n_x, n_z]
+      Connectors.FaceBus caFPNegY[caFP.n_x, n_z]
         "Negative cathode flow plate face along the y axis" annotation (
           Placement(transformation(
             extent={{-10,-10},{10,10}},
@@ -304,7 +304,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={40,-100})));
-      FCSys.Connectors.FaceBus anFPNegY[anFP.n_x, n_z]
+      Connectors.FaceBus anFPNegY[anFP.n_x, n_z]
         "Negative anode flow plate face along the y axis" annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -986,13 +986,13 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         'e-'.mu_face[2, 2]) if environment.analysis
         "Rate of electrical work (negative for work done)";
 
-      FCSys.Connectors.FaceBus anFPX[n_y, n_z] "Anode plate face" annotation (
+      Connectors.FaceBus anFPX[n_y, n_z] "Anode plate face" annotation (
           Placement(transformation(extent={{-70,-10},{-50,10}},rotation=0),
             iconTransformation(extent={{-110,-10},{-90,10}})));
-      FCSys.Connectors.FaceBus caFPX[n_y, n_z] "Cathode plate face" annotation
-        (Placement(transformation(extent={{50,-10},{70,10}}, rotation=0),
+      Connectors.FaceBus caFPX[n_y, n_z] "Cathode plate face" annotation (
+          Placement(transformation(extent={{50,-10},{70,10}},rotation=0),
             iconTransformation(extent={{90,-10},{110,10}})));
-      FCSys.Connectors.FaceBus anFPPosY[anFP.n_x, n_z]
+      Connectors.FaceBus anFPPosY[anFP.n_x, n_z]
         "Positive anode flow plate face along the y axis" annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -1001,7 +1001,7 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={-40,100})));
-      FCSys.Connectors.FaceBus caFPPosY[caFP.n_x, n_z]
+      Connectors.FaceBus caFPPosY[caFP.n_x, n_z]
         "Positive anode flow plate face along the y axis" annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
@@ -1010,7 +1010,7 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={40,100})));
-      FCSys.Connectors.FaceBus caFPNegY[caFP.n_x, n_z]
+      Connectors.FaceBus caFPNegY[caFP.n_x, n_z]
         "Negative cathode flow plate face along the y axis" annotation (
           Placement(transformation(
             extent={{-10,-10},{10,10}},
@@ -1019,7 +1019,7 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={40,-100})));
-      FCSys.Connectors.FaceBus anFPNegY[anFP.n_x, n_z]
+      Connectors.FaceBus anFPNegY[anFP.n_x, n_z]
         "Negative anode flow plate face along the y axis" annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},

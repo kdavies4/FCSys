@@ -42,8 +42,13 @@ rpls = [# Remove empty annotation tags.
         (r' FCSys\.Units\.([^*])', r' U.\1'),
         # Don't use factor of 1 if unnecessary.
         (r'=1*U\.', '=U.'),
-        # Use absolute references for Connectors.
-        (r' Connectors\.', r' FCSys.Connectors.'),
+        # Use relative references where possible.
+        (r'  FCSys.Conditions\.', r'  Conditions.'), # Two spaces to prevent change of import statements
+        (r'  FCSys.Assemblies\.', r'  Assemblies.'),
+        (r'  FCSys.Regions\.', r'  Regions.'),
+        (r'  FCSys.Subregions\.', r'  Subregions.'),
+        (r'  FCSys.Connectors\.', r'  Connectors.'),
+        (r'  FCSys.Characteristics\.', r'  Characteristics.'),
         # Remove useless import statements.
         (r'import FCSys;\n', ''),
         # One empty line before "end x;"

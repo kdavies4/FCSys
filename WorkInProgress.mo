@@ -1626,21 +1626,21 @@ ALT=\"model Examples.Elementary.Pendulum\">
           final parameter Integer n_act=size(B, 2) "Number of actuators";
           final parameter Integer n_x=size(A, 1) "Number of states";
           final parameter Integer n_sen=size(C, 1) "Number of sensors";
-          FCSys.Connectors.RealOutput act[n_act] "Actuation" annotation (
-              Placement(transformation(
+          Connectors.RealOutput act[n_act] "Actuation" annotation (Placement(
+                transformation(
                 extent={{10,-10},{-10,10}},
                 rotation=0,
                 origin={-100,0}), iconTransformation(extent={{10,-10},{-10,10}},
                   origin={-110,0})));
-          FCSys.Connectors.RealInput ref[n_x] "Reference state" annotation (
-              Placement(transformation(
+          Connectors.RealInput ref[n_x] "Reference state" annotation (Placement(
+                transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=90,
                 origin={0,-100}), iconTransformation(
                 extent={{-10,-10},{10,10}},
                 rotation=90,
                 origin={0,-110})));
-          FCSys.Connectors.RealInput x[n_x] "State" annotation (Placement(
+          Connectors.RealInput x[n_x] "State" annotation (Placement(
                 transformation(
                 extent={{10,-10},{-10,10}},
                 rotation=0,
@@ -1715,22 +1715,22 @@ ALT=\"model Examples.Elementary.Pendulum\">
           final parameter Integer n_act=size(B, 2) "Number of actuators";
           final parameter Integer n_x=size(A, 1) "Number of states";
           final parameter Integer n_sen=size(C, 1) "Number of sensors";
-          FCSys.Connectors.RealInput act[n_act] "Actuator command" annotation (
+          Connectors.RealInput act[n_act] "Actuator command" annotation (
               Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={-100,0}), iconTransformation(extent={{-10,-10},{10,10}},
                   origin={-110,0})));
-          FCSys.Connectors.RealOutput x[n_x] "Estimated state" annotation (
-              Placement(transformation(
+          Connectors.RealOutput x[n_x] "Estimated state" annotation (Placement(
+                transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={10,-100}), iconTransformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={0,-110})));
-          FCSys.Connectors.RealInput sen[n_sen] "Sensor measurement"
-            annotation (Placement(transformation(
+          Connectors.RealInput sen[n_sen] "Sensor measurement" annotation (
+              Placement(transformation(
                 extent={{10,-10},{-10,10}},
                 rotation=0,
                 origin={100,0}), iconTransformation(extent={{120,-10},{100,10}})));
@@ -2256,10 +2256,9 @@ ALT=\"model Examples.Elementary.Pendulum\">
           Integer tableID "table identification number";
 
         public
-          FCSys.Connectors.RealOutput y[n_out]
-            "Connector of Real output signals" annotation (Placement(
-                transformation(extent={{90,-10},{110,10}}, rotation=0),
-                iconTransformation(extent={{100,-10},{120,10}})));
+          Connectors.RealOutput y[n_out] "Connector of Real output signals"
+            annotation (Placement(transformation(extent={{90,-10},{110,10}},
+                  rotation=0), iconTransformation(extent={{100,-10},{120,10}})));
 
         equation
           // Interpolate data from the table
@@ -2373,10 +2372,9 @@ ALT=\"model Examples.Elementary.Pendulum\">
           Integer tableID "table identification number";
 
         public
-          FCSys.Connectors.RealOutput y[n_out]
-            "Connector of Real output signals" annotation (Placement(
-                transformation(extent={{90,-10},{110,10}}, rotation=0),
-                iconTransformation(extent={{100,-10},{120,10}})));
+          Connectors.RealOutput y[n_out] "Connector of Real output signals"
+            annotation (Placement(transformation(extent={{90,-10},{110,10}},
+                  rotation=0), iconTransformation(extent={{100,-10},{120,10}})));
 
         equation
           // Interpolate data from the table
@@ -2955,12 +2953,12 @@ This is discussed in the description of package
         block MPC "Model predictive controller"
           extends
             FCSys.WorkInProgress.Blocks.Discrete.BaseClasses.DiscreteBlock;
-          FCSys.Connectors.RealInput x[n_x] "State" annotation (Placement(
+          Connectors.RealInput x[n_x] "State" annotation (Placement(
                 transformation(
                 extent={{10,-10},{-10,10}},
                 rotation=0,
                 origin={140,0}), iconTransformation(extent={{120,-10},{100,10}})));
-          FCSys.Connectors.RealInput ref[n_sen] "Reference state" annotation (
+          Connectors.RealInput ref[n_sen] "Reference state" annotation (
               Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=90,
@@ -2968,8 +2966,8 @@ This is discussed in the description of package
                 extent={{-10,-10},{10,10}},
                 rotation=90,
                 origin={0,-110})));
-          FCSys.Connectors.RealOutput act[n_act] "Actuation" annotation (
-              Placement(transformation(
+          Connectors.RealOutput act[n_act] "Actuation" annotation (Placement(
+                transformation(
                 extent={{10,-10},{-10,10}},
                 rotation=0,
                 origin={-140,0}),iconTransformation(extent={{-100,-10},{-120,10}})));
@@ -3192,21 +3190,21 @@ This is discussed in the description of package
             "Number of degrees of freedom in the quadratic programming problem";
           final parameter Integer n_bG=size(G, 1)
             "<html>Number of bounds of the form <b>Gx_min &le; G x &le; Gx_max</b></html>";
-          FCSys.Connectors.RealInput x[n_x] "State" annotation (Placement(
+          Connectors.RealInput x[n_x] "State" annotation (Placement(
                 transformation(
                 extent={{10,-10},{-10,10}},
                 rotation=0,
                 origin={100,0}), iconTransformation(extent={{120,-10},{100,10}})));
-          FCSys.Connectors.RealInput ref[n_ref] "Reference" annotation (
-              Placement(transformation(
+          Connectors.RealInput ref[n_ref] "Reference" annotation (Placement(
+                transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=90,
                 origin={0,-80}), iconTransformation(
                 extent={{-10,-10},{10,10}},
                 rotation=90,
                 origin={0,-110})));
-          FCSys.Connectors.RealOutput act[n_act] "Actuation" annotation (
-              Placement(transformation(
+          Connectors.RealOutput act[n_act] "Actuation" annotation (Placement(
+                transformation(
                 extent={{10,-10},{-10,10}},
                 rotation=0,
                 origin={-100,0}),iconTransformation(extent={{-100,-10},{-120,10}})));
@@ -3371,40 +3369,40 @@ This is discussed in the description of package
             parameter Real Gx_max[size(G, 1)]=ones(size(G, 1))
               "<html>Upper bound of <b>G x</b></html>"
               annotation (Dialog(enable=AxMaxAsParam));
-            FCSys.Connectors.RealInput J_set[n_x] if (not JAsParam)
+            Connectors.RealInput J_set[n_x] if (not JAsParam)
               "Jacobian vector of the quadratic programming problem"
               annotation (Placement(transformation(
                   extent={{-10,-10},{10,10}},
                   rotation=0,
                   origin={-100,80}),iconTransformation(extent={{-120,70},{-100,
                       90}})));
-            FCSys.Connectors.RealInput y_min_set[n_y] if (not yMinAsParam)
+            Connectors.RealInput y_min_set[n_y] if (not yMinAsParam)
               "Lower bound of output" annotation (Placement(transformation(
                   extent={{-10,-10},{10,10}},
                   rotation=0,
                   origin={-100,40}), iconTransformation(extent={{-120,30},{-100,
                       50}})));
-            FCSys.Connectors.RealInput y_max_set[n_y] if (not yMaxAsParam)
+            Connectors.RealInput y_max_set[n_y] if (not yMaxAsParam)
               "Upper bound of output" annotation (Placement(transformation(
                   extent={{-10,-10},{10,10}},
                   rotation=0,
                   origin={-100,0}),iconTransformation(extent={{-120,-10},{-100,
                       10}})));
-            FCSys.Connectors.RealInput Gx_min_set[n_bG] if (not GxMinAsParam)
+            Connectors.RealInput Gx_min_set[n_bG] if (not GxMinAsParam)
               "<html>Lower bound of <b>A x</b></html>" annotation (Placement(
                   transformation(
                   extent={{-10,-10},{10,10}},
                   rotation=0,
                   origin={-100,-40}),iconTransformation(extent={{-120,-50},{-100,
                       -30}})));
-            FCSys.Connectors.RealInput Gx_max_set[n_bG] if (not AxMaxAsParam)
+            Connectors.RealInput Gx_max_set[n_bG] if (not AxMaxAsParam)
               "<html>Upper bound of <b>A x</b></html>" annotation (Placement(
                   transformation(
                   extent={{-10,-10},{10,10}},
                   rotation=0,
                   origin={-100,-80}),iconTransformation(extent={{-120,-90},{-100,
                       -70}})));
-            FCSys.Connectors.RealOutput y[n_y] "Solution of the optimization"
+            Connectors.RealOutput y[n_y] "Solution of the optimization"
               annotation (Placement(transformation(
                   extent={{-10,-10},{10,10}},
                   rotation=0,
@@ -3424,32 +3422,32 @@ This is discussed in the description of package
                           n_x=n_x,
                           n_bG=n_bG)
               "Memory object for the quadratic programming problem";
-            FCSys.Connectors.RealInput J_internal[n_x]
+            Connectors.RealInput J_internal[n_x]
               "Internal connector for the Jacobian vector of the quadratic problem"
               annotation (Placement(transformation(
                   extent={{-10,-10},{10,10}},
                   rotation=0,
                   origin={-70,80}),iconTransformation(extent={{120,-20},{80,20}})));
-            FCSys.Connectors.RealInput y_min_internal[n_y]
+            Connectors.RealInput y_min_internal[n_y]
               "Internal connector for lower bound of output" annotation (
                 Placement(transformation(
                   extent={{-10,-10},{10,10}},
                   rotation=0,
                   origin={-70,40}), iconTransformation(extent={{120,-20},{80,20}})));
-            FCSys.Connectors.RealInput y_max_internal[n_y]
+            Connectors.RealInput y_max_internal[n_y]
               "Internal connector for upper bound of output" annotation (
                 Placement(transformation(
                   extent={{-10,-10},{10,10}},
                   rotation=0,
                   origin={-70,0}),iconTransformation(extent={{120,-20},{80,20}})));
-            FCSys.Connectors.RealInput Gx_min_internal[n_bG]
+            Connectors.RealInput Gx_min_internal[n_bG]
               "<html>Internal connector for lower bound of <b>A x</b></html>"
               annotation (Placement(transformation(
                   extent={{-10,-10},{10,10}},
                   rotation=0,
                   origin={-70,-40}), iconTransformation(extent={{120,-20},{80,
                       20}})));
-            FCSys.Connectors.RealInput Gx_max_internal[n_bG]
+            Connectors.RealInput Gx_max_internal[n_bG]
               "<html>Internal connector for upper bound of <b>A x</b></html>"
               annotation (Placement(transformation(
                   extent={{-10,-10},{10,10}},
@@ -3835,22 +3833,22 @@ This is discussed in the description of package
           final parameter Integer n_act=size(B, 2) "Number of actuators";
           final parameter Integer n_x=size(A, 1) "Number of states";
           final parameter Integer n_sen=size(C, 1) "Number of sensors";
-          FCSys.Connectors.RealInput act[n_act] "Actuation" annotation (
-              Placement(transformation(
+          Connectors.RealInput act[n_act] "Actuation" annotation (Placement(
+                transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={-100,0}), iconTransformation(extent={{-120,-10},{-100,
                     10}})));
-          FCSys.Connectors.RealOutput x[n_x] "Estimated state" annotation (
-              Placement(transformation(
+          Connectors.RealOutput x[n_x] "Estimated state" annotation (Placement(
+                transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={10,-100}), iconTransformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={0,-110})));
-          FCSys.Connectors.RealInput sen[n_sen] "Sensor measurement"
-            annotation (Placement(transformation(
+          Connectors.RealInput sen[n_sen] "Sensor measurement" annotation (
+              Placement(transformation(
                 extent={{10,-10},{-10,10}},
                 rotation=0,
                 origin={100,0}), iconTransformation(extent={{120,-10},{100,10}})));
@@ -5390,9 +5388,9 @@ This is discussed in the description of package
       extends Modelica.Icons.BasesPackage;
       partial block SI "Single Input block"
 
-        FCSys.Connectors.RealInput u "Connector for Real input signal"
-          annotation (Placement(transformation(extent={{-110,-10},{-90,10}},
-                rotation=0), iconTransformation(extent={{-120,-10},{-100,10}})));
+        Connectors.RealInput u "Connector for Real input signal" annotation (
+            Placement(transformation(extent={{-110,-10},{-90,10}}, rotation=0),
+              iconTransformation(extent={{-120,-10},{-100,10}})));
         annotation (Documentation(info="<html>
 <p>
 Block has one continuous Real input and one continuous Real output signal.
@@ -5404,7 +5402,7 @@ Block has one continuous Real input and one continuous Real output signal.
 
       partial block MI "Multiple Input block"
         parameter Integer n_in(min=1) = 1 "Number of inputs";
-        FCSys.Connectors.RealInput u[n_in] "Connector of Real input signals"
+        Connectors.RealInput u[n_in] "Connector of Real input signals"
           annotation (Placement(transformation(extent={{-110,-10},{-90,10}},
                 rotation=0), iconTransformation(extent={{-120,-10},{-100,10}})));
         annotation (Documentation(info="<html>
@@ -5420,9 +5418,9 @@ The signal sizes of the input and output vector may be different.
 
       partial block SO "Single Output block"
 
-        FCSys.Connectors.RealOutput y "Connector for Real output signal"
-          annotation (Placement(transformation(extent={{90,-10},{110,10}},
-                rotation=0), iconTransformation(extent={{100,-10},{120,10}})));
+        Connectors.RealOutput y "Connector for Real output signal" annotation (
+            Placement(transformation(extent={{90,-10},{110,10}}, rotation=0),
+              iconTransformation(extent={{100,-10},{120,10}})));
         annotation (Diagram(coordinateSystem(
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
@@ -5436,7 +5434,7 @@ Block has one continuous Real output signal.
 
       partial block MO "Multiple Output block"
         parameter Integer n_out(min=1) = 1 "Number of outputs";
-        FCSys.Connectors.RealOutput y[n_out] "Connector of Real output signals"
+        Connectors.RealOutput y[n_out] "Connector of Real output signals"
           annotation (Placement(transformation(extent={{90,-10},{110,10}},
                 rotation=0), iconTransformation(extent={{100,-10},{120,10}})));
         annotation (Documentation(info="<html>
@@ -5641,11 +5639,11 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
         extends FCSys.WorkInProgress.FCSysPlant;
         SI.Voltage v "Voltage drop between the two pins (= pinP.v - pinP.v)";
 
-        FCSys.Connectors.FaceBus wireP
+        Connectors.FaceBus wireP
           "Positive pin Positive pin (potential pinP.v > pinP.v for positive voltage drop v)"
           annotation (Placement(transformation(extent={{170,110},{190,130}},
                 rotation=0), iconTransformation(extent={{90,-50},{110,-70}})));
-        FCSys.Connectors.FaceBus wireN "Negative pin" annotation (Placement(
+        Connectors.FaceBus wireN "Negative pin" annotation (Placement(
               transformation(
               extent={{-10,10},{10,-10}},
               rotation=180,
@@ -5688,9 +5686,9 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
               transformation(extent={{-110,-60},{-90,-40}}, rotation=0)));
         FCSys.WorkInProgress.Systems.Pump.Pump condensatePump annotation (
             Placement(transformation(extent={{-110,22},{-90,42}}, rotation=0)));
-        FCSys.Connectors.FaceBus ambientN annotation (Placement(transformation(
-                extent={{-210,70},{-190,90}}), iconTransformation(extent={{-110,
-                  50},{-90,70}})));
+        Connectors.FaceBus ambientN annotation (Placement(transformation(extent
+                ={{-210,70},{-190,90}}), iconTransformation(extent={{-110,50},{
+                  -90,70}})));
         outer FCSys.WorkInProgress.Systems.FC.Interfaces.ActBusIn actBusIn
           annotation (Placement(transformation(extent={{-210,-90},{-190,-70}}),
               iconTransformation(extent={{-92,-10},{-72,10}})));
@@ -5711,9 +5709,9 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
           annotation (Placement(transformation(extent={{-50,-54},{-30,-34}})));
         FCSys.WorkInProgress.AssembliesHeatExchanger radiator
           annotation (Placement(transformation(extent={{-60,66},{-40,86}})));
-        FCSys.Connectors.FaceBus ambientP annotation (Placement(transformation(
-                extent={{190,70},{210,90}}), iconTransformation(extent={{-110,
-                  50},{-90,70}})));
+        Connectors.FaceBus ambientP annotation (Placement(transformation(extent
+                ={{190,70},{210,90}}), iconTransformation(extent={{-110,50},{-90,
+                  70}})));
 
       equation
         v = pinP.v - pinP.v;
@@ -5956,9 +5954,9 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
                 extent={{-80,-20},{-40,20}},
                 rotation=0,
                 origin={100,0})));
-          FCSys.Connectors.RealInput actIN[1] annotation (Placement(
-                transformation(extent={{-110,-10},{-90,10}}),
-                iconTransformation(extent={{-60,-20},{-20,20}})));
+          Connectors.RealInput actIN[1] annotation (Placement(transformation(
+                  extent={{-110,-10},{-90,10}}), iconTransformation(extent={{-60,
+                    -20},{-20,20}})));
 
         equation
           connect(actIN[1], actBusOut.current_ref) annotation (Line(
@@ -5990,9 +5988,9 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
           SenBusIn senBusIn annotation (Placement(transformation(extent={{-110,
                     -10},{-90,10}}), iconTransformation(extent={{-60,-20},{-20,
                     20}})));
-          FCSys.Connectors.RealOutput senOut[3] annotation (Placement(
-                transformation(extent={{90,-10},{110,10}}), iconTransformation(
-                  extent={{20,-20},{60,20}})));
+          Connectors.RealOutput senOut[3] annotation (Placement(transformation(
+                  extent={{90,-10},{110,10}}), iconTransformation(extent={{20,-20},
+                    {60,20}})));
 
         equation
           connect(senBusIn.angle, senOut[3]) annotation (Line(
@@ -6049,9 +6047,9 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
 
         extends FCSys.BaseClasses.Icons.Name.Top4;
 
-        FCSys.Connectors.FaceBus mixturePipeN annotation (Placement(
-              transformation(extent={{90,-70},{110,-50}}), iconTransformation(
-                extent={{90,-70},{110,-50}})));
+        Connectors.FaceBus mixturePipeN annotation (Placement(transformation(
+                extent={{90,-70},{110,-50}}), iconTransformation(extent={{90,-70},
+                  {110,-50}})));
         FCSys.WorkInProgress.Systems.Humidifier.Interfaces.ActBusIn actBusIn
           annotation (Placement(transformation(extent={{-32,60},{-12,80}}),
               iconTransformation(extent={{-32,10},{-12,30}})));
@@ -6063,12 +6061,12 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,50})));
-        FCSys.Connectors.FaceBus H2OPipe annotation (Placement(transformation(
-                extent={{-10,50},{10,70}}), iconTransformation(extent={{-10,50},
-                  {10,70}})));
-        FCSys.Connectors.FaceBus mixturePipeP annotation (Placement(
-              transformation(extent={{90,-10},{110,10}}), iconTransformation(
-                extent={{-110,-70},{-90,-50}})));
+        Connectors.FaceBus H2OPipe annotation (Placement(transformation(extent=
+                  {{-10,50},{10,70}}), iconTransformation(extent={{-10,50},{10,
+                  70}})));
+        Connectors.FaceBus mixturePipeP annotation (Placement(transformation(
+                extent={{90,-10},{110,10}}), iconTransformation(extent={{-110,-70},
+                  {-90,-50}})));
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Line(
                       points={{10,-30},{0,-50}},
@@ -6165,9 +6163,9 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
                 extent={{-80,-20},{-40,20}},
                 rotation=0,
                 origin={100,0})));
-          FCSys.Connectors.RealInput actIN[1] annotation (Placement(
-                transformation(extent={{-110,-10},{-90,10}}),
-                iconTransformation(extent={{-60,-20},{-20,20}})));
+          Connectors.RealInput actIN[1] annotation (Placement(transformation(
+                  extent={{-110,-10},{-90,10}}), iconTransformation(extent={{-60,
+                    -20},{-20,20}})));
 
         equation
           connect(actIN[1], actBusOut.current_ref) annotation (Line(
@@ -6199,9 +6197,9 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
           SenBusIn senBusIn annotation (Placement(transformation(extent={{-110,
                     -10},{-90,10}}), iconTransformation(extent={{-60,-20},{-20,
                     20}})));
-          FCSys.Connectors.RealOutput senOut[3] annotation (Placement(
-                transformation(extent={{90,-10},{110,10}}), iconTransformation(
-                  extent={{20,-20},{60,20}})));
+          Connectors.RealOutput senOut[3] annotation (Placement(transformation(
+                  extent={{90,-10},{110,10}}), iconTransformation(extent={{20,-20},
+                    {60,20}})));
 
         equation
           connect(senBusIn.angle, senOut[3]) annotation (Line(
@@ -6310,18 +6308,18 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
         FCSys.WorkInProgress.Systems.DCDC.Interfaces.SenBusOut senBusOut
           annotation (Placement(transformation(extent={{42,-10},{62,10}}),
               iconTransformation(extent={{32,-10},{52,10}})));
-        FCSys.Connectors.FaceBus wireN2 annotation (Placement(transformation(
-                extent={{-106,54},{-94,66}}), iconTransformation(extent={{-110,
-                  50},{-90,70}})));
-        FCSys.Connectors.FaceBus wireP2 annotation (Placement(transformation(
-                extent={{94,54},{106,66}}), iconTransformation(extent={{90,50},
-                  {110,70}})));
-        FCSys.Connectors.FaceBus wireN1 annotation (Placement(transformation(
-                extent={{-106,-66},{-94,-54}}), iconTransformation(extent={{-110,
-                  -70},{-90,-50}})));
-        FCSys.Connectors.FaceBus wireP1 annotation (Placement(transformation(
-                extent={{94,-66},{106,-54}}), iconTransformation(extent={{90,-70},
-                  {110,-50}})));
+        Connectors.FaceBus wireN2 annotation (Placement(transformation(extent={
+                  {-106,54},{-94,66}}), iconTransformation(extent={{-110,50},{-90,
+                  70}})));
+        Connectors.FaceBus wireP2 annotation (Placement(transformation(extent={
+                  {94,54},{106,66}}), iconTransformation(extent={{90,50},{110,
+                  70}})));
+        Connectors.FaceBus wireN1 annotation (Placement(transformation(extent={
+                  {-106,-66},{-94,-54}}), iconTransformation(extent={{-110,-70},
+                  {-90,-50}})));
+        Connectors.FaceBus wireP1 annotation (Placement(transformation(extent={
+                  {94,-66},{106,-54}}), iconTransformation(extent={{90,-70},{
+                  110,-50}})));
 
       equation
         Delta_v1 = chargeP1.v - chargeN1.v;
@@ -6484,13 +6482,13 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
         FCSys.WorkInProgress.Magnetic2.QuantumRate Sigma_qdot2
           "Net current stored or destroyed (positive into each interface)";
 
-        FCSys.Connectors.RealInput k_set(final unit=if (LHS == RHS) then "1"
-               else if (LHS == 1 and RHS == 2) then "1/Q2" else if (LHS == 2
-               and RHS == 1) then "Q2" else if (LHS == 1 and RHS == 3) then
-              "1/(Q.T)" else "Q/T", displayUnit=if (LHS == RHS) then "1" else
-              if (LHS == 1 and RHS == 2) then "ohm" else if (LHS == 2 and RHS
-               == 1) then "S" else if (LHS == 1 and RHS == 3) then "V" else "A")
-          if (not specAsParam)
+        Connectors.RealInput k_set(final unit=if (LHS == RHS) then "1" else if
+              (LHS == 1 and RHS == 2) then "1/Q2" else if (LHS == 2 and RHS ==
+              1) then "Q2" else if (LHS == 1 and RHS == 3) then "1/(Q.T)" else
+              "Q/T", displayUnit=if (LHS == RHS) then "1" else if (LHS == 1
+               and RHS == 2) then "ohm" else if (LHS == 2 and RHS == 1) then
+              "S" else if (LHS == 1 and RHS == 3) then "V" else "A") if (not
+          specAsParam)
           "Coefficient for the RHS of the governing equation as an input"
           annotation (Placement(transformation(
               origin={0,-120},
@@ -6501,8 +6499,8 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
               origin={0,-80})));
 
       protected
-        FCSys.Connectors.RealInput k_internal(final unit=if (LHS == RHS) then
-              "1" else if (LHS == 1 and RHS == 2) then "1/Q2" else if (LHS == 2
+        Connectors.RealInput k_internal(final unit=if (LHS == RHS) then "1"
+               else if (LHS == 1 and RHS == 2) then "1/Q2" else if (LHS == 2
                and RHS == 1) then "Q2" else if (LHS == 1 and RHS == 3) then
               "1/(Q.T)" else "Q/T", displayUnit=if (LHS == RHS) then "1" else
               if (LHS == 1 and RHS == 2) then "ohm" else if (LHS == 2 and RHS
@@ -6661,9 +6659,9 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
                 extent={{-80,-20},{-40,20}},
                 rotation=0,
                 origin={100,0})));
-          FCSys.Connectors.RealInput actIN[1] annotation (Placement(
-                transformation(extent={{-110,-10},{-90,10}}),
-                iconTransformation(extent={{-60,-20},{-20,20}})));
+          Connectors.RealInput actIN[1] annotation (Placement(transformation(
+                  extent={{-110,-10},{-90,10}}), iconTransformation(extent={{-60,
+                    -20},{-20,20}})));
 
         equation
           connect(actIN[1], actBusOut.current_ref) annotation (Line(
@@ -6695,9 +6693,9 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
           SenBusIn senBusIn annotation (Placement(transformation(extent={{-110,
                     -10},{-90,10}}), iconTransformation(extent={{-60,-20},{-20,
                     20}})));
-          FCSys.Connectors.RealOutput senOut[3] annotation (Placement(
-                transformation(extent={{90,-10},{110,10}}), iconTransformation(
-                  extent={{20,-20},{60,20}})));
+          Connectors.RealOutput senOut[3] annotation (Placement(transformation(
+                  extent={{90,-10},{110,10}}), iconTransformation(extent={{20,-20},
+                    {60,20}})));
 
         equation
           connect(senBusIn.angle, senOut[3]) annotation (Line(
@@ -6755,24 +6753,22 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
         // extends FCSys.Processes.BaseClasses.PartialTransport.Middle;
         // extends FCSys.Processes.BaseClasses.PartialTransport.Bottom2;
 
-        FCSys.Connectors.FaceBus wireN annotation (Placement(transformation(
-                extent={{-30,-10},{-10,10}}), iconTransformation(extent={{-110,
-                  -50},{-90,-30}})));
-        FCSys.Connectors.FaceBus wireP annotation (Placement(transformation(
-                extent={{10,-10},{30,10}}), iconTransformation(extent={{90,-50},
-                  {110,-30}})));
+        Connectors.FaceBus wireN annotation (Placement(transformation(extent={{
+                  -30,-10},{-10,10}}), iconTransformation(extent={{-110,-50},{-90,
+                  -30}})));
+        Connectors.FaceBus wireP annotation (Placement(transformation(extent={{
+                  10,-10},{30,10}}), iconTransformation(extent={{90,-50},{110,-30}})));
         FCSys.WorkInProgress.Systems.Pump.Interfaces.ActBusIn actBusIn
           annotation (Placement(transformation(extent={{-42,-70},{-22,-50}}),
               iconTransformation(extent={{-32,-90},{-12,-70}})));
         FCSys.WorkInProgress.Systems.Pump.Interfaces.SenBusOut senBusOut
           annotation (Placement(transformation(extent={{2,-70},{22,-50}}),
               iconTransformation(extent={{10,-90},{30,-70}})));
-        FCSys.Connectors.FaceBus pipeP annotation (Placement(transformation(
-                extent={{94,-6},{106,6}}), iconTransformation(extent={{90,-10},
-                  {110,10}})));
-        FCSys.Connectors.FaceBus pipeN annotation (Placement(transformation(
-                extent={{-106,-6},{-94,6}}), iconTransformation(extent={{-110,-10},
-                  {-90,10}})));
+        Connectors.FaceBus pipeP annotation (Placement(transformation(extent={{
+                  94,-6},{106,6}}), iconTransformation(extent={{90,-10},{110,10}})));
+        Connectors.FaceBus pipeN annotation (Placement(transformation(extent={{
+                  -106,-6},{-94,6}}), iconTransformation(extent={{-110,-10},{-90,
+                  10}})));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
                 preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
@@ -6846,9 +6842,9 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
                 extent={{-80,-20},{-40,20}},
                 rotation=0,
                 origin={100,0})));
-          FCSys.Connectors.RealInput actIN[1] annotation (Placement(
-                transformation(extent={{-110,-10},{-90,10}}),
-                iconTransformation(extent={{-60,-20},{-20,20}})));
+          Connectors.RealInput actIN[1] annotation (Placement(transformation(
+                  extent={{-110,-10},{-90,10}}), iconTransformation(extent={{-60,
+                    -20},{-20,20}})));
 
         equation
           connect(actIN[1], actBusOut.current_ref) annotation (Line(
@@ -6880,9 +6876,9 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
           SenBusIn senBusIn annotation (Placement(transformation(extent={{-110,
                     -10},{-90,10}}), iconTransformation(extent={{-60,-20},{-20,
                     20}})));
-          FCSys.Connectors.RealOutput senOut[3] annotation (Placement(
-                transformation(extent={{90,-10},{110,10}}), iconTransformation(
-                  extent={{20,-20},{60,20}})));
+          Connectors.RealOutput senOut[3] annotation (Placement(transformation(
+                  extent={{90,-10},{110,10}}), iconTransformation(extent={{20,-20},
+                    {60,20}})));
 
         equation
           connect(senBusIn.angle, senOut[3]) annotation (Line(
@@ -6945,12 +6941,11 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
         FCSys.WorkInProgress.Systems.Valve.Interfaces.SenBusOut senBusOut
           annotation (Placement(transformation(extent={{30,-70},{50,-50}}),
               iconTransformation(extent={{12,-30},{32,-10}})));
-        FCSys.Connectors.FaceBus pipeN annotation (Placement(transformation(
-                extent={{-106,14},{-94,26}}), iconTransformation(extent={{-110,
-                  10},{-90,30}})));
-        FCSys.Connectors.FaceBus pipeP annotation (Placement(transformation(
-                extent={{94,14},{106,26}}), iconTransformation(extent={{90,10},
-                  {110,30}})));
+        Connectors.FaceBus pipeN annotation (Placement(transformation(extent={{
+                  -106,14},{-94,26}}), iconTransformation(extent={{-110,10},{-90,
+                  30}})));
+        Connectors.FaceBus pipeP annotation (Placement(transformation(extent={{
+                  94,14},{106,26}}), iconTransformation(extent={{90,10},{110,30}})));
         annotation (
           Icon(coordinateSystem(
               preserveAspectRatio=true,
@@ -7053,9 +7048,9 @@ a simple model of a variable pressure loss is needed.</p>
                 extent={{-80,-20},{-40,20}},
                 rotation=0,
                 origin={100,0})));
-          FCSys.Connectors.RealInput actIN[1] annotation (Placement(
-                transformation(extent={{-110,-10},{-90,10}}),
-                iconTransformation(extent={{-60,-20},{-20,20}})));
+          Connectors.RealInput actIN[1] annotation (Placement(transformation(
+                  extent={{-110,-10},{-90,10}}), iconTransformation(extent={{-60,
+                    -20},{-20,20}})));
 
         equation
           connect(actIN[1], actBusOut.current_ref) annotation (Line(
@@ -7087,9 +7082,9 @@ a simple model of a variable pressure loss is needed.</p>
           SenBusIn senBusIn annotation (Placement(transformation(extent={{-110,
                     -10},{-90,10}}), iconTransformation(extent={{-60,-20},{-20,
                     20}})));
-          FCSys.Connectors.RealOutput senOut[3] annotation (Placement(
-                transformation(extent={{90,-10},{110,10}}), iconTransformation(
-                  extent={{20,-20},{60,20}})));
+          Connectors.RealOutput senOut[3] annotation (Placement(transformation(
+                  extent={{90,-10},{110,10}}), iconTransformation(extent={{20,-20},
+                    {60,20}})));
 
         equation
           connect(senBusIn.angle, senOut[3]) annotation (Line(
@@ -7145,20 +7140,19 @@ a simple model of a variable pressure loss is needed.</p>
 
         extends FCSys.BaseClasses.Icons.Name.Top4;
 
-        FCSys.Subregions.HeatExchanger fCConvection annotation (Placement(
+        Subregions.HeatExchanger fCConvection annotation (Placement(
               transformation(extent={{90,116},{110,136}}, rotation=0)));
-        FCSys.Connectors.FaceBus wireN annotation (Placement(transformation(
-                extent={{-110,-50},{-90,-30}}), iconTransformation(extent={{-110,
-                  -50},{-90,-30}})));
-        FCSys.Connectors.FaceBus wireP annotation (Placement(transformation(
-                extent={{90,-50},{110,-30}}), iconTransformation(extent={{90,-50},
-                  {110,-30}})));
-        FCSys.Connectors.FaceBus pipeP annotation (Placement(transformation(
-                extent={{90,30},{110,50}}), iconTransformation(extent={{90,30},
-                  {110,50}})));
-        FCSys.Connectors.FaceBus pipeN annotation (Placement(transformation(
-                extent={{-110,30},{-90,50}}), iconTransformation(extent={{-110,
-                  30},{-90,50}})));
+        Connectors.FaceBus wireN annotation (Placement(transformation(extent={{
+                  -110,-50},{-90,-30}}), iconTransformation(extent={{-110,-50},
+                  {-90,-30}})));
+        Connectors.FaceBus wireP annotation (Placement(transformation(extent={{
+                  90,-50},{110,-30}}), iconTransformation(extent={{90,-50},{110,
+                  -30}})));
+        Connectors.FaceBus pipeP annotation (Placement(transformation(extent={{
+                  90,30},{110,50}}), iconTransformation(extent={{90,30},{110,50}})));
+        Connectors.FaceBus pipeN annotation (Placement(transformation(extent={{
+                  -110,30},{-90,50}}), iconTransformation(extent={{-110,30},{-90,
+                  50}})));
         FCSys.WorkInProgress.Systems.Valve.Interfaces.ActBusIn actBusIn
           annotation (Placement(transformation(extent={{-50,-70},{-30,-50}}),
               iconTransformation(extent={{-34,-90},{-14,-70}})));
@@ -7488,7 +7482,6 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
               color={0,127,255},
               smooth=Smooth.None)}));
   end ConditionsAdaptersPhasesIonomer;
-
   annotation (Commands(file="resources/scripts/units-values.mos"
         "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate).",
         file="test/check.mos"

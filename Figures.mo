@@ -176,10 +176,10 @@ package Figures "Graphical layouts for documentation"
         "Declarative-based circuit with voltage in, current out"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput v annotation (Placement(transformation(
-                extent={{-60,-30},{-40,-10}}), iconTransformation(extent={{-120,
-                  -10},{-100,10}})));
-        FCSys.Connectors.RealOutput i annotation (Placement(transformation(
+        Connectors.RealInput v annotation (Placement(transformation(extent={{-60,
+                  -30},{-40,-10}}), iconTransformation(extent={{-120,-10},{-100,
+                  10}})));
+        Connectors.RealOutput i annotation (Placement(transformation(
               extent={{10,-10},{-10,10}},
               rotation=180,
               origin={10,10}), iconTransformation(
@@ -275,10 +275,10 @@ package Figures "Graphical layouts for documentation"
         "Declarative-based circuit with current in, voltage out"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput i annotation (Placement(transformation(
-                extent={{-80,-30},{-60,-10}}), iconTransformation(extent={{-120,
-                  -10},{-100,10}})));
-        FCSys.Connectors.RealOutput v annotation (Placement(transformation(
+        Connectors.RealInput i annotation (Placement(transformation(extent={{-80,
+                  -30},{-60,-10}}), iconTransformation(extent={{-120,-10},{-100,
+                  10}})));
+        Connectors.RealOutput v annotation (Placement(transformation(
               extent={{10,-10},{-10,10}},
               rotation=180,
               origin={10,10}), iconTransformation(
@@ -373,12 +373,12 @@ package Figures "Graphical layouts for documentation"
       model Imperative_vi "Imperative circuit with voltage in, current out"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput v annotation (Placement(transformation(
-                extent={{-100,20},{-80,40}}), iconTransformation(extent={{-120,
-                  -10},{-100,10}})));
-        FCSys.Connectors.RealOutput i annotation (Placement(transformation(
-                extent={{80,20},{100,40}}), iconTransformation(extent={{100,-10},
-                  {120,10}})));
+        Connectors.RealInput v annotation (Placement(transformation(extent={{-100,
+                  20},{-80,40}}), iconTransformation(extent={{-120,-10},{-100,
+                  10}})));
+        Connectors.RealOutput i annotation (Placement(transformation(extent={{
+                  80,20},{100,40}}), iconTransformation(extent={{100,-10},{120,
+                  10}})));
         Modelica.Blocks.Continuous.Integrator ind(k=1/L)
           annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
         Modelica.Blocks.Math.Gain res1(k=1/R1)
@@ -468,12 +468,12 @@ package Figures "Graphical layouts for documentation"
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
 
       public
-        FCSys.Connectors.RealInput i annotation (Placement(transformation(
-                extent={{-100,20},{-80,40}}), iconTransformation(extent={{-120,
-                  -10},{-100,10}})));
-        FCSys.Connectors.RealOutput v annotation (Placement(transformation(
-                extent={{80,20},{100,40}}), iconTransformation(extent={{100,-10},
-                  {120,10}})));
+        Connectors.RealInput i annotation (Placement(transformation(extent={{-100,
+                  20},{-80,40}}), iconTransformation(extent={{-120,-10},{-100,
+                  10}})));
+        Connectors.RealOutput v annotation (Placement(transformation(extent={{
+                  80,20},{100,40}}), iconTransformation(extent={{100,-10},{120,
+                  10}})));
         Modelica.Blocks.Math.Gain res1(k=R1)
           annotation (Placement(transformation(extent={{-10,0},{10,20}})));
         Modelica.Blocks.Math.Add sum
@@ -558,12 +558,12 @@ package Figures "Graphical layouts for documentation"
         "Equivalent transfer function for voltage in, current out"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput v annotation (Placement(transformation(
-                extent={{-100,20},{-80,40}}), iconTransformation(extent={{-120,
-                  -10},{-100,10}})));
-        FCSys.Connectors.RealOutput i annotation (Placement(transformation(
-                extent={{80,20},{100,40}}), iconTransformation(extent={{100,-10},
-                  {120,10}})));
+        Connectors.RealInput v annotation (Placement(transformation(extent={{-100,
+                  20},{-80,40}}), iconTransformation(extent={{-120,-10},{-100,
+                  10}})));
+        Connectors.RealOutput i annotation (Placement(transformation(extent={{
+                  80,20},{100,40}}), iconTransformation(extent={{100,-10},{120,
+                  10}})));
         Modelica.Blocks.Continuous.TransferFunction transferFunction(a={R1*L*C,
               R1*R2*C + L,R2}, b={-L*C,-(R1 + R2)*C,-1})
           annotation (Placement(transformation(extent={{-10,20},{10,40}})));
@@ -587,12 +587,12 @@ package Figures "Graphical layouts for documentation"
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
 
       public
-        FCSys.Connectors.RealInput i annotation (Placement(transformation(
-                extent={{-100,20},{-80,40}}), iconTransformation(extent={{-120,
-                  -10},{-100,10}})));
-        FCSys.Connectors.RealOutput v annotation (Placement(transformation(
-                extent={{80,20},{100,40}}), iconTransformation(extent={{100,-10},
-                  {120,10}})));
+        Connectors.RealInput i annotation (Placement(transformation(extent={{-100,
+                  20},{-80,40}}), iconTransformation(extent={{-120,-10},{-100,
+                  10}})));
+        Connectors.RealOutput v annotation (Placement(transformation(extent={{
+                  80,20},{100,40}}), iconTransformation(extent={{100,-10},{120,
+                  10}})));
         Modelica.Blocks.Continuous.TransferFunction transferFunction(b={R1*L*C,
               R1*R2*C + L,R2}, a={-L*C,-(R1 + R2)*C,-1})
           annotation (Placement(transformation(extent={{-10,20},{10,40}})));
@@ -673,12 +673,12 @@ package Figures "Graphical layouts for documentation"
       model DeclarativeA "First circuit in declarative formalism"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
-                extent={{-100,-10},{-80,10}}), iconTransformation(extent={{-120,
-                  -10},{-100,10}})));
-        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
-                extent={{40,-10},{60,10}}), iconTransformation(extent={{100,-10},
-                  {120,10}})));
+        Connectors.RealInput vIn annotation (Placement(transformation(extent={{
+                  -100,-10},{-80,10}}), iconTransformation(extent={{-120,-10},{
+                  -100,10}})));
+        Connectors.RealOutput vOut annotation (Placement(transformation(extent=
+                  {{40,-10},{60,10}}), iconTransformation(extent={{100,-10},{
+                  120,10}})));
         Modelica.Electrical.Analog.Sources.SignalVoltage voltageSource
           annotation (Placement(transformation(
               extent={{-10,10},{10,-10}},
@@ -743,12 +743,12 @@ package Figures "Graphical layouts for documentation"
       model DeclarativeB "First circuit in declarative formalism"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
-                extent={{-60,-10},{-40,10}}), iconTransformation(extent={{-120,
-                  -10},{-100,10}})));
-        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
-                extent={{80,-10},{100,10}}), iconTransformation(extent={{100,-10},
-                  {120,10}})));
+        Connectors.RealInput vIn annotation (Placement(transformation(extent={{
+                  -60,-10},{-40,10}}), iconTransformation(extent={{-120,-10},{-100,
+                  10}})));
+        Connectors.RealOutput vOut annotation (Placement(transformation(extent=
+                  {{80,-10},{100,10}}), iconTransformation(extent={{100,-10},{
+                  120,10}})));
         Modelica.Electrical.Analog.Sources.SignalVoltage voltageSource
           annotation (Placement(transformation(
               extent={{-10,10},{10,-10}},
@@ -814,12 +814,12 @@ package Figures "Graphical layouts for documentation"
         "Cascaded first and second circuits in declarative formalism"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
-                extent={{-100,-10},{-80,10}}), iconTransformation(extent={{-120,
-                  -10},{-100,10}})));
-        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
-                extent={{80,-10},{100,10}}), iconTransformation(extent={{100,-10},
-                  {120,10}})));
+        Connectors.RealInput vIn annotation (Placement(transformation(extent={{
+                  -100,-10},{-80,10}}), iconTransformation(extent={{-120,-10},{
+                  -100,10}})));
+        Connectors.RealOutput vOut annotation (Placement(transformation(extent=
+                  {{80,-10},{100,10}}), iconTransformation(extent={{100,-10},{
+                  120,10}})));
         Modelica.Electrical.Analog.Sources.SignalVoltage voltageSource
           annotation (Placement(transformation(
               extent={{-10,10},{10,-10}},
@@ -908,12 +908,12 @@ package Figures "Graphical layouts for documentation"
       model ImperativeA "First circuit in imperative formalism"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
-                extent={{-160,-10},{-140,10}}), iconTransformation(extent={{-120,
-                  -10},{-100,10}})));
-        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
-                extent={{0,-10},{20,10}}), iconTransformation(extent={{100,-10},
-                  {120,10}})));
+        Connectors.RealInput vIn annotation (Placement(transformation(extent={{
+                  -160,-10},{-140,10}}), iconTransformation(extent={{-120,-10},
+                  {-100,10}})));
+        Connectors.RealOutput vOut annotation (Placement(transformation(extent=
+                  {{0,-10},{20,10}}), iconTransformation(extent={{100,-10},{120,
+                  10}})));
         Modelica.Blocks.Math.Gain res1(k=R1)
           annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
         Modelica.Blocks.Continuous.Derivative ind(k=C)
@@ -975,12 +975,12 @@ package Figures "Graphical layouts for documentation"
       model ImperativeB "Second circuit in imperative formalism"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
-                extent={{-30,-10},{-10,10}}), iconTransformation(extent={{-120,
-                  -10},{-100,10}})));
-        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
-                extent={{140,-10},{160,10}}), iconTransformation(extent={{100,-10},
-                  {120,10}})));
+        Connectors.RealInput vIn annotation (Placement(transformation(extent={{
+                  -30,-10},{-10,10}}), iconTransformation(extent={{-120,-10},{-100,
+                  10}})));
+        Connectors.RealOutput vOut annotation (Placement(transformation(extent=
+                  {{140,-10},{160,10}}), iconTransformation(extent={{100,-10},{
+                  120,10}})));
 
       public
         Modelica.Blocks.Math.Gain res2(k=1/R2)
@@ -1048,12 +1048,12 @@ package Figures "Graphical layouts for documentation"
         "Cascaded first and second circuits in imperative formalism"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
-                extent={{-110,30},{-90,50}}), iconTransformation(extent={{-120,
-                  -10},{-100,10}})));
-        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
-                extent={{80,30},{100,50}}), iconTransformation(extent={{100,-10},
-                  {120,10}})));
+        Connectors.RealInput vIn annotation (Placement(transformation(extent={{
+                  -110,30},{-90,50}}), iconTransformation(extent={{-120,-10},{-100,
+                  10}})));
+        Connectors.RealOutput vOut annotation (Placement(transformation(extent=
+                  {{80,30},{100,50}}), iconTransformation(extent={{100,-10},{
+                  120,10}})));
         Modelica.Blocks.Continuous.Integrator cap(k=1/C)
           annotation (Placement(transformation(extent={{-40,-10},{-60,10}})));
         Modelica.Blocks.Math.Gain res1(k=1/R1)
@@ -1142,12 +1142,12 @@ package Figures "Graphical layouts for documentation"
         "Incorrectly cascaded first and second circuits in imperative formalism"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
-                extent={{-160,-10},{-140,10}}), iconTransformation(extent={{-120,
-                  -10},{-100,10}})));
-        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
-                extent={{140,-10},{160,10}}), iconTransformation(extent={{100,-10},
-                  {120,10}})));
+        Connectors.RealInput vIn annotation (Placement(transformation(extent={{
+                  -160,-10},{-140,10}}), iconTransformation(extent={{-120,-10},
+                  {-100,10}})));
+        Connectors.RealOutput vOut annotation (Placement(transformation(extent=
+                  {{140,-10},{160,10}}), iconTransformation(extent={{100,-10},{
+                  120,10}})));
         Modelica.Blocks.Math.Gain res1(k=R1)
           annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));
         Modelica.Blocks.Continuous.Derivative ind(k=C)
@@ -1238,12 +1238,12 @@ package Figures "Graphical layouts for documentation"
         "Cascaded first and second circuits as a transfer function"
         extends BaseClasses.Parameters;
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
-        FCSys.Connectors.RealInput vIn annotation (Placement(transformation(
-                extent={{-110,30},{-90,50}}), iconTransformation(extent={{-120,
-                  -10},{-100,10}})));
-        FCSys.Connectors.RealOutput vOut annotation (Placement(transformation(
-                extent={{80,30},{100,50}}), iconTransformation(extent={{100,-10},
-                  {120,10}})));
+        Connectors.RealInput vIn annotation (Placement(transformation(extent={{
+                  -110,30},{-90,50}}), iconTransformation(extent={{-120,-10},{-100,
+                  10}})));
+        Connectors.RealOutput vOut annotation (Placement(transformation(extent=
+                  {{80,30},{100,50}}), iconTransformation(extent={{100,-10},{
+                  120,10}})));
         Modelica.Blocks.Continuous.TransferFunction transferFunction(b={R3}, a=
               {C*R1*(R2 + R3),R1 + R2 + R3})
           annotation (Placement(transformation(extent={{-20,30},{0,50}})));
@@ -1280,7 +1280,7 @@ package Figures "Graphical layouts for documentation"
 
   model EnvironmentIcon
 
-    FCSys.Conditions.Environment Environment
+    Conditions.Environment Environment
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
     annotation (Diagram(graphics));
 
@@ -1320,91 +1320,91 @@ package Figures "Graphical layouts for documentation"
 
   model AnFPIcon "Anode flow plate"
 
-    FCSys.Regions.AnFPs.AnFP AnFP
+    Regions.AnFPs.AnFP AnFP
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
 
   end AnFPIcon;
 
   model AnGDLIcon "Anode gas diffusion layer"
 
-    FCSys.Regions.AnGDLs.AnGDL AnGDL
+    Regions.AnGDLs.AnGDL AnGDL
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
 
   end AnGDLIcon;
 
   model AnCLIcon "Anode catalyst layer"
 
-    FCSys.Regions.AnCLs.AnCL AnCL
+    Regions.AnCLs.AnCL AnCL
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
 
   end AnCLIcon;
 
   model PEMIcon "Proton exchange membrane"
 
-    FCSys.Regions.PEMs.PEM PEM
+    Regions.PEMs.PEM PEM
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
 
   end PEMIcon;
 
   model CaCLIcon "Cathode catalyst layer"
 
-    FCSys.Regions.CaCLs.CaCL CaCL
+    Regions.CaCLs.CaCL CaCL
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
 
   end CaCLIcon;
 
   model CaGDLIcon "Cathode gas diffusion layer"
 
-    FCSys.Regions.CaGDLs.CaGDL CaGDL
+    Regions.CaGDLs.CaGDL CaGDL
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
 
   end CaGDLIcon;
 
   model CaFPIcon "Cathode flow plate"
 
-    FCSys.Regions.CaFPs.CaFP CaFP
+    Regions.CaFPs.CaFP CaFP
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
 
   end CaFPIcon;
 
   model Matrix3D
 
-    FCSys.Subregions.BaseClasses.PartialSubregion subreg000(
+    Subregions.BaseClasses.PartialSubregion subreg000(
       inclX=true,
       inclY=true,
       inclZ=true)
       annotation (Placement(transformation(extent={{-30,-30},{-10,-10}})));
-    FCSys.Subregions.BaseClasses.PartialSubregion subreg001(
+    Subregions.BaseClasses.PartialSubregion subreg001(
       inclX=true,
       inclY=true,
       inclZ=true)
       annotation (Placement(transformation(extent={{-50,-50},{-30,-30}})));
-    FCSys.Subregions.BaseClasses.PartialSubregion subreg010(
+    Subregions.BaseClasses.PartialSubregion subreg010(
       inclX=true,
       inclY=true,
       inclZ=true)
       annotation (Placement(transformation(extent={{-30,20},{-10,40}})));
-    FCSys.Subregions.BaseClasses.PartialSubregion subreg011(
+    Subregions.BaseClasses.PartialSubregion subreg011(
       inclX=true,
       inclY=true,
       inclZ=true)
       annotation (Placement(transformation(extent={{-50,0},{-30,20}})));
-    FCSys.Subregions.BaseClasses.PartialSubregion subreg100(
+    Subregions.BaseClasses.PartialSubregion subreg100(
       inclX=true,
       inclY=true,
       inclZ=true)
       annotation (Placement(transformation(extent={{30,-30},{50,-10}})));
-    FCSys.Subregions.BaseClasses.PartialSubregion subreg101(
+    Subregions.BaseClasses.PartialSubregion subreg101(
       inclX=true,
       inclY=true,
       inclZ=true)
       annotation (Placement(transformation(extent={{10,-50},{30,-30}})));
-    FCSys.Subregions.BaseClasses.PartialSubregion subreg110(
+    Subregions.BaseClasses.PartialSubregion subreg110(
       inclX=true,
       inclY=true,
       inclZ=true)
       annotation (Placement(transformation(extent={{30,20},{50,40}})));
-    FCSys.Subregions.BaseClasses.PartialSubregion subreg111(
+    Subregions.BaseClasses.PartialSubregion subreg111(
       inclX=true,
       inclY=true,
       inclZ=true)
@@ -1476,7 +1476,7 @@ package Figures "Graphical layouts for documentation"
 
   model SubregionIcon
 
-    FCSys.Subregions.BaseClasses.PartialSubregion Subregion(
+    Subregions.BaseClasses.PartialSubregion Subregion(
       inclX=true,
       inclZ=true,
       inclY=true)
@@ -1494,7 +1494,7 @@ package Figures "Graphical layouts for documentation"
 
   partial model SpeciesIcon
 
-    FCSys.Subregions.Species.Species Species
+    Subregions.Species.Species Species
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
     annotation (structurallyIncomplete=true);
 
@@ -1502,7 +1502,7 @@ package Figures "Graphical layouts for documentation"
 
   model PhaseBoundaryIcon
 
-    FCSys.Subregions.PhaseBoundary PhaseBoundary
+    Subregions.PhaseBoundary PhaseBoundary
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
 
   end PhaseBoundaryIcon;
@@ -1516,7 +1516,7 @@ package Figures "Graphical layouts for documentation"
 
   model VolumeIcon
 
-    FCSys.Subregions.Volume Volume
+    Subregions.Volume Volume
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
 
   end VolumeIcon;
@@ -1707,8 +1707,8 @@ package Figures "Graphical layouts for documentation"
   model ConnectorHieararchy
     "Extension and instantiation hierarchy of the connectors"
 
-    FCSys.Connectors.Face Face annotation (Placement(transformation(extent={{-62,
-              -10},{-42,10}}), iconTransformation(extent={{-10,-10},{10,10}})));
+    Connectors.Face Face annotation (Placement(transformation(extent={{-62,-10},
+              {-42,10}}), iconTransformation(extent={{-10,-10},{10,10}})));
     annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-120,
               -60},{120,60}}), graphics={Line(
               points={{70,-2},{92,-24}},

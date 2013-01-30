@@ -32,11 +32,11 @@ package Characteristics
       // Conditions
 
     public
-      FCSys.Connectors.RealOutputInternal T(unit="l2.m/(N.T2)",displayUnit="K")
+      Connectors.RealOutputInternal T(unit="l2.m/(N.T2)",displayUnit="K")
         "Temperature" annotation (Placement(transformation(extent={{50,16},{70,
                 36}}), iconTransformation(extent={{-10,16},{10,36}})));
-      FCSys.Connectors.RealOutputInternal p(unit="m/(l.T2)") "Pressure"
-        annotation (Placement(transformation(extent={{50,-36},{70,-16}}),
+      Connectors.RealOutputInternal p(unit="m/(l.T2)") "Pressure" annotation (
+          Placement(transformation(extent={{50,-36},{70,-16}}),
             iconTransformation(extent={{-10,-36},{10,-16}})));
 
       // Results

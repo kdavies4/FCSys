@@ -66,7 +66,7 @@ package Blocks "Imperative models (inputs and/or outputs only)"
       annotation (Documentation(info="<html>
     <p>See the documentation in the
     <a href=\"modelica://FCSys.Blocks.UnitConversions\">UnitConversions</a> package.</p>
-    </html>"), Icon(graphics));
+    </html>"));
     end UnitConversion;
 
     package BaseClasses "Base classes (not generally for direct use)"
@@ -77,29 +77,26 @@ package Blocks "Imperative models (inputs and/or outputs only)"
         //extends FCSys.BaseClasses.Icons.Blocks.ContinuousShort;
         extends FCSys.BaseClasses.Icons.Names.Top2;
 
-        FCSys.Connectors.RealInput u
-          "Real input for value in source representation" annotation (Placement(
-              transformation(extent={{-120,-10},{-100,10}}, rotation=0),
-              iconTransformation(extent={{-120,-10},{-100,10}})));
-        FCSys.Connectors.RealOutput y
+        Connectors.RealInput u "Real input for value in source representation"
+          annotation (Placement(transformation(extent={{-120,-10},{-100,10}},
+                rotation=0), iconTransformation(extent={{-120,-10},{-100,10}})));
+        Connectors.RealOutput y
           "Real output for quantity in desired representation" annotation (
             Placement(transformation(extent={{100,-10},{120,10}}, rotation=0),
               iconTransformation(extent={{100,-10},{120,10}})));
         annotation (Documentation(info="<html>
 <p>See the documentation in the
   <a href=\"modelica://FCSys.Blocks.UnitConversions\">UnitConversions</a> package.</p></html>"),
-            Icon(graphics={
-              Rectangle(
-                extent={{-100,40},{100,-40}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                lineColor={0,0,0}),
-              Line(points={{-70,0},{10,0}}, color={191,0,0}),
-              Polygon(
-                points={{70,0},{10,20},{10,-20},{70,0}},
-                lineColor={191,0,0},
-                fillColor={191,0,0},
-                fillPattern=FillPattern.Solid)}));
+            Icon(graphics={Rectangle(
+                      extent={{-100,40},{100,-40}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      lineColor={0,0,0}),Line(points={{-70,0},{10,0}}, color={
+                191,0,0}),Polygon(
+                      points={{70,0},{10,20},{10,-20},{70,0}},
+                      lineColor={191,0,0},
+                      fillColor={191,0,0},
+                      fillPattern=FillPattern.Solid)}));
 
       end PartialUnitConversion;
 

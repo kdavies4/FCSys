@@ -43,7 +43,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaFPs.CaFP caFP(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{50,-10},{70,10}})));
 
-      FCSys.Conditions.FaceBus.SubregionClosed condition1[n_y, n_z](each graphite(
+      Conditions.FaceBus.SubregionClosed condition1[n_y, n_z](each graphite(
           'inclC+'=true,
           'incle-'=true,
           'C+'(thermal(source(k=environment.T))),
@@ -53,17 +53,17 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=90,
             origin={-84,0})));
 
-      FCSys.Conditions.FaceBus.SubregionClosed condition2[n_y, n_z](each graphite(
+      Conditions.FaceBus.SubregionClosed condition2[n_y, n_z](each graphite(
           'inclC+'=true,
           'incle-'=true,
           'C+'(thermal(source(k=environment.T))),
           'e-'(thermal(source(k=environment.T)), redeclare
-              FCSys.Conditions.Face.Material.Density normal(source(k(start=U.atm/
-                      (298.15*U.K))))))) annotation (Placement(transformation(
+              Conditions.Face.Material.Density normal(source(k(start=U.atm/(
+                      298.15*U.K))))))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={84,0})));
-      FCSys.Conditions.FaceBus.SubregionClosed bC3[anFP.n_x, n_z](each gas(
+      Conditions.FaceBus.SubregionClosed bC3[anFP.n_x, n_z](each gas(
           inclH2=true,
           inclH2O=true,
           H2(thermal(source(k=environment.T))),
@@ -73,7 +73,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=180,
             origin={-60,-24})));
 
-      FCSys.Conditions.FaceBus.SubregionClosed bC4[anFP.n_x, n_z](each gas(
+      Conditions.FaceBus.SubregionClosed bC4[anFP.n_x, n_z](each gas(
           inclH2=true,
           inclH2O=true,
           H2(thermal(source(k=environment.T))),
@@ -83,7 +83,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=0,
             origin={-60,24})));
 
-      FCSys.Conditions.FaceBus.SubregionClosed bC5[caFP.n_x, n_z](each gas(
+      Conditions.FaceBus.SubregionClosed bC5[caFP.n_x, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -94,7 +94,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={60,-24})));
-      FCSys.Conditions.FaceBus.SubregionClosed bC6[caFP.n_x, n_z](each gas(
+      Conditions.FaceBus.SubregionClosed bC6[caFP.n_x, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -211,7 +211,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaGDLs.CaGDL caGDL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{30,-10},{50,10}})));
 
-      FCSys.Conditions.FaceBus.SubregionClosed condition1[n_y, n_z](each gas(
+      Conditions.FaceBus.SubregionClosed condition1[n_y, n_z](each gas(
           inclH2O=true,
           inclH2=true,
           H2(thermal(source(k=environment.T))),
@@ -225,7 +225,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=90,
             origin={-64,0})));
 
-      FCSys.Conditions.FaceBus.SubregionClosed condition2[n_y, n_z](each gas(
+      Conditions.FaceBus.SubregionClosed condition2[n_y, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -236,8 +236,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           'incle-'=true,
           'C+'(thermal(source(k=environment.T))),
           'e-'(thermal(source(k=environment.T)), redeclare
-              FCSys.Conditions.Face.Material.Density normal(source(k(start=U.atm/
-                      (298.15*U.K))))))) annotation (Placement(transformation(
+              Conditions.Face.Material.Density normal(source(k(start=U.atm/(
+                      298.15*U.K))))))) annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={64,0})));
@@ -313,7 +313,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaCLs.CaCL caCL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{10,-10},{30,10}})));
 
-      FCSys.Conditions.FaceBus.SubregionFlows condition1[n_y, n_z](
+      Conditions.FaceBus.SubregionFlows condition1[n_y, n_z](
         each gas(inclH2=true, inclH2O=true),
         each graphite('inclC+'=true, 'incle-'=true),
         each ionomer('inclC19HF37O5S-'=true, 'inclH+'=true)) annotation (
@@ -322,7 +322,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=90,
             origin={-44,-8.88178e-16})));
 
-      FCSys.Conditions.FaceBus.SubregionFlows condition2[n_y, n_z](
+      Conditions.FaceBus.SubregionFlows condition2[n_y, n_z](
         each gas(
           inclH2O=true,
           inclN2=true,
@@ -405,7 +405,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnFPs.AnFP anFP(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
 
-      FCSys.Conditions.FaceBus.SubregionClosed condition1[n_y, n_z](each graphite(
+      Conditions.FaceBus.SubregionClosed condition1[n_y, n_z](each graphite(
           'inclC+'=true,
           'incle-'=true,
           'C+'(thermal(source(k=environment.T))),
@@ -414,7 +414,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-84,0})));
-      FCSys.Conditions.FaceBus.SubregionClosed condition2[n_y, n_z](each gas(
+      Conditions.FaceBus.SubregionClosed condition2[n_y, n_z](each gas(
           inclH2=true,
           inclH2O=true,
           H2(thermal(source(k=environment.T))),
@@ -423,13 +423,13 @@ package Regions "3D arrays of discrete, interconnected subregions"
           'incle-'=true,
           'C+'(thermal(source(k=environment.T))),
           'e-'(thermal(source(k=environment.T)),redeclare
-              FCSys.Conditions.Face.Material.Density material))) annotation (
+              Conditions.Face.Material.Density material))) annotation (
           Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-36,0})));
 
-      FCSys.Conditions.FaceBus.SubregionClosed bC3[anFP.n_x, n_z](each gas(
+      Conditions.FaceBus.SubregionClosed bC3[anFP.n_x, n_z](each gas(
           inclH2=true,
           inclH2O=true,
           H2(thermal(source(k=environment.T))),
@@ -438,7 +438,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={-60,-24})));
-      FCSys.Conditions.FaceBus.SubregionClosed bC4[anFP.n_x, n_z](each gas(
+      Conditions.FaceBus.SubregionClosed bC4[anFP.n_x, n_z](each gas(
           inclH2=true,
           inclH2O=true,
           H2(thermal(source(k=environment.T))),
@@ -500,7 +500,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnGDLs.AnGDL anGDL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
 
-      FCSys.Conditions.FaceBus.SubregionClosed condition1[n_y, n_z](each gas(
+      Conditions.FaceBus.SubregionClosed condition1[n_y, n_z](each gas(
           inclH2=true,
           inclH2O=true,
           H2(thermal(source(k=environment.T))),
@@ -513,7 +513,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-64,0})));
-      FCSys.Conditions.FaceBus.SubregionClosed condition2[n_y, n_z](each gas(
+      Conditions.FaceBus.SubregionClosed condition2[n_y, n_z](each gas(
           inclH2=true,
           inclH2O=true,
           H2(thermal(source(k=environment.T))),
@@ -567,7 +567,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       AnCLs.AnCL anCL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 
-      FCSys.Conditions.FaceBus.SubregionFlows condition1[n_y, n_z](
+      Conditions.FaceBus.SubregionFlows condition1[n_y, n_z](
         each gas(inclH2=true, inclH2O=true),
         each graphite('inclC+'=true, 'incle-'=true),
         each ionomer('inclC19HF37O5S-'=true, 'inclH+'=true)) annotation (
@@ -576,14 +576,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
             rotation=90,
             origin={-44,-8.88178e-16})));
 
-      FCSys.Conditions.FaceBus.SubregionFlows condition2[n_y, n_z](
+      Conditions.FaceBus.SubregionFlows condition2[n_y, n_z](
         each gas(
           inclH2=true,
           inclH2O=true,
           H2(redeclare FCSys.Conditions.Face.Material.Density normal(source(k=U.atm
                     /(298.15*U.K)))),
-          H2O(redeclare FCSys.Conditions.Face.Material.Density normal(source(k=U.atm
-                    /(298.15*U.K))))),
+          H2O(redeclare FCSys.Conditions.Face.Material.Density normal(source(k=
+                    U.atm/(298.15*U.K))))),
         each graphite(
           'inclC+'=true,
           'incle-'=true,
@@ -648,13 +648,13 @@ package Regions "3D arrays of discrete, interconnected subregions"
       PEMs.PEM pEM(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      FCSys.Conditions.FaceBus.SubregionClosed condition1[n_y, n_z](each gas(inclH2O=
+      Conditions.FaceBus.SubregionClosed condition1[n_y, n_z](each gas(inclH2O=
               true, H2O(thermal(source(k=environment.T)))), each ionomer(
           'inclC19HF37O5S-'=true,
           'inclH+'=true,
           'C19HF37O5S-'(thermal(source(k=environment.T))),
           'H+'(thermal(source(k=environment.T)))));
-      FCSys.Conditions.FaceBus.SubregionClosed condition2[n_y, n_z](each gas(inclH2O=
+      Conditions.FaceBus.SubregionClosed condition2[n_y, n_z](each gas(inclH2O=
               true, H2O(thermal(source(k=environment.T)))), each ionomer(
           'inclC19HF37O5S-'=true,
           'inclH+'=true,
@@ -702,7 +702,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaCLs.CaCL caCL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{10,-10},{30,10}})));
 
-      FCSys.Conditions.FaceBus.SubregionFlows condition1[n_y, n_z](
+      Conditions.FaceBus.SubregionFlows condition1[n_y, n_z](
         each gas(
           inclH2O=true,
           inclN2=true,
@@ -713,7 +713,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={-4,-8.88178e-16})));
-      FCSys.Conditions.FaceBus.SubregionFlows condition2[n_y, n_z](
+      Conditions.FaceBus.SubregionFlows condition2[n_y, n_z](
         each gas(
           inclH2O=true,
           inclN2=true,
@@ -725,8 +725,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
         each graphite(
           'inclC+'=true,
           'incle-'=true,
-          'C+'(redeclare FCSys.Conditions.Face.Thermal.Temperature thermal(source(
-                  k(start=298.15*U.K)))),
+          'C+'(redeclare FCSys.Conditions.Face.Thermal.Temperature thermal(
+                source(k(start=298.15*U.K)))),
           'e-'(redeclare FCSys.Conditions.Face.Material.Current normal(
                 redeclare Modelica.Blocks.Sources.Ramp source(duration=1000,
                   height=-2*U.A)))),
@@ -787,7 +787,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaGDLs.CaGDL caGDL(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{30,-10},{50,10}})));
 
-      FCSys.Conditions.FaceBus.SubregionClosed condition1[n_y, n_z](each gas(
+      Conditions.FaceBus.SubregionClosed condition1[n_y, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -802,7 +802,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={16,-8.88178e-16})));
-      FCSys.Conditions.FaceBus.SubregionClosed condition2[n_y, n_z](each gas(
+      Conditions.FaceBus.SubregionClosed condition2[n_y, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -858,7 +858,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       CaFPs.CaFP caFP(final L_y=L_y, final L_z=L_z)
         annotation (Placement(transformation(extent={{50,-10},{70,10}})));
 
-      FCSys.Conditions.FaceBus.SubregionClosed condition1[n_y, n_z](each gas(
+      Conditions.FaceBus.SubregionClosed condition1[n_y, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -873,17 +873,17 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={36,0})));
-      FCSys.Conditions.FaceBus.SubregionClosed condition2[n_y, n_z](each graphite(
+      Conditions.FaceBus.SubregionClosed condition2[n_y, n_z](each graphite(
           'inclC+'=true,
           'incle-'=true,
           'C+'(thermal(source(k=environment.T))),
           'e-'(thermal(source(k=environment.T)),redeclare
-              FCSys.Conditions.Face.Material.Density material))) annotation (
+              Conditions.Face.Material.Density material))) annotation (
           Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={84,0})));
-      FCSys.Conditions.FaceBus.SubregionClosed bC3[caFP.n_x, n_z](each gas(
+      Conditions.FaceBus.SubregionClosed bC3[caFP.n_x, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -894,7 +894,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={60,-24})));
-      FCSys.Conditions.FaceBus.SubregionClosed bC4[caFP.n_x, n_z](each gas(
+      Conditions.FaceBus.SubregionClosed bC4[caFP.n_x, n_z](each gas(
           inclH2O=true,
           inclN2=true,
           inclO2=true,
@@ -2885,27 +2885,27 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
         group="Axes with faces included",
         compact=true));
 
-    FCSys.Connectors.FaceBus xNegative[n_y, n_z] if inclFacesX
+    Connectors.FaceBus xNegative[n_y, n_z] if inclFacesX
       "Negative face along the x axis" annotation (Placement(transformation(
             extent={{-50,-10},{-30,10}}), iconTransformation(extent={{-110,-10},
               {-90,10}})));
-    FCSys.Connectors.FaceBus xPositive[n_y, n_z] if inclFacesX
+    Connectors.FaceBus xPositive[n_y, n_z] if inclFacesX
       "Positive face along the x axis" annotation (Placement(transformation(
             extent={{30,-10},{50,10}}), iconTransformation(extent={{90,-10},{
               110,10}})));
-    FCSys.Connectors.FaceBus yNegative[n_x, n_z] if inclFacesY
+    Connectors.FaceBus yNegative[n_x, n_z] if inclFacesY
       "Negative face along the y axis" annotation (Placement(transformation(
             extent={{-10,-50},{10,-30}}), iconTransformation(extent={{-10,-110},
               {10,-90}})));
-    FCSys.Connectors.FaceBus yPositive[n_x, n_z] if inclFacesY
+    Connectors.FaceBus yPositive[n_x, n_z] if inclFacesY
       "Positive face along the y axis" annotation (Placement(transformation(
             extent={{-10,30},{10,50}}), iconTransformation(extent={{-10,90},{10,
               110}})));
-    FCSys.Connectors.FaceBus zNegative[n_x, n_y] if inclFacesZ
+    Connectors.FaceBus zNegative[n_x, n_y] if inclFacesZ
       "Negative face along the z axis" annotation (Placement(transformation(
             extent={{10,10},{30,30}}), iconTransformation(extent={{40,40},{60,
               60}})));
-    FCSys.Connectors.FaceBus zPositive[n_x, n_y] if inclFacesZ
+    Connectors.FaceBus zPositive[n_x, n_y] if inclFacesZ
       "Positive face along the z axis" annotation (Placement(transformation(
             extent={{-30,-30},{-10,-10}}), iconTransformation(extent={{-60,-60},
               {-40,-40}})));
