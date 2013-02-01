@@ -109,13 +109,14 @@ package Subregions
             inclFacePosY=false,
             inclFaceNegZ=false,
             inclFacePosZ=false)),
-        inclLinY=false,
         inclLinZ=false,
         inclFacesX=false,
         inclFacesY=false,
-        inclFacesZ=false)
+        inclFacesZ=false,
+        inclLinX=false,
+        inclLinY=true)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-      inner FCSys.Conditions.Environment environment(analysis=true)
+      inner FCSys.Conditions.Environment environment(analysis=false)
         annotation (Placement(transformation(extent={{30,20},{50,40}})));
       annotation (
         Placement(transformation(extent={{70,70},{90,90}})),
@@ -1176,16 +1177,14 @@ package Subregions
     // first in the parameter dialog.
     extends BaseClasses.PartialSubregion;
 
-    Phases.Gas gas(inclH2O=true, final inclLin={inclLinX,inclLinY,inclLinZ})
-      "Gas" annotation (Dialog(group="Phases"), Placement(transformation(extent
-            ={{-10,-10},{10,10}})));
+    Phases.Gas gas(inclH2O=true) "Gas" annotation (Dialog(group="Phases"),
+        Placement(transformation(extent={{-10,-10},{10,10}})));
 
-    Phases.Graphite graphite(final inclLin={inclLinX,inclLinY,inclLinZ},'e-'(
-          initMethPartNum=if inclHOR or inclORR then InitMethScalar.None else
-            InitMethScalar.Pressure)) "Graphite" annotation (Dialog(group=
-            "Phases"), Placement(transformation(extent={{-10,-10},{10,10}})));
-    Phases.Ionomer ionomer(final inclLin={inclLinX,inclLinY,inclLinZ},
-        'C19HF37O5S-'(
+    Phases.Graphite graphite('e-'(initMethPartNum=if inclHOR or inclORR then
+            InitMethScalar.None else InitMethScalar.Pressure)) "Graphite"
+      annotation (Dialog(group="Phases"), Placement(transformation(extent={{-10,
+              -10},{10,10}})));
+    Phases.Ionomer ionomer('C19HF37O5S-'(
         setVelX=not graphite.'inclC+',
         setVelY=not graphite.'inclC+',
         setVelZ=not graphite.'inclC+',
@@ -1197,34 +1196,32 @@ package Subregions
             InitMethVelocity.Velocity)) "Ionomer" annotation (Dialog(group=
             "Phases"), Placement(transformation(extent={{-10,-10},{10,10}})));
 
-    Phases.Liquid liquid(final inclLin={inclLinX,inclLinY,inclLinZ}) "Liquid"
-      annotation (Dialog(group="Phases"), Placement(transformation(extent={{-10,
-              -10},{10,10}})));
+    Phases.Liquid liquid "Liquid" annotation (Dialog(group="Phases"), Placement(
+          transformation(extent={{-10,-10},{10,10}})));
 
-    final parameter Boolean inclHOR=inclReact and (graphite.'incle-' and
-        ionomer.'inclH+' and gas.inclH2 and not (gas.inclO2 and gas.inclH2O))
-      "true, if HOR is included";
-    Reaction HOR(final n_lin=n_lin, n_spec=3) if inclHOR
-      "Hydrogen oxidation reaction"
+    Reaction HOR(n_spec=3) if inclHOR "Hydrogen oxidation reaction"
       annotation (Placement(transformation(extent={{-30,24},{-10,44}})));
-    final parameter Boolean inclORR=inclReact and (graphite.'incle-' and
-        ionomer.'inclH+' and gas.inclO2 and gas.inclH2O and not gas.inclH2)
-      "true, if ORR is included";
-    Reaction ORR(final n_lin=n_lin, n_spec=4) if inclORR
-      "Oxygen reduction reaction"
+    Reaction ORR(n_spec=4) if inclORR "Oxygen reduction reaction"
       annotation (Placement(transformation(extent={{-30,10},{-10,30}})));
-    Reaction evaporation(final n_lin=n_lin, n_spec=2) if inclReact and (gas.inclH2O
-       and liquid.inclH2O) "Water evaporation/condensation"
+    Reaction evaporation(n_spec=2) if inclReact and (gas.inclH2O and liquid.inclH2O)
+      "Water evaporation/condensation"
       annotation (Placement(transformation(extent={{-50,38},{-30,58}})));
-    Reaction hydration1(final n_lin=n_lin, n_spec=2) if inclReact and (gas.inclH2O
-       and ionomer.inclH2O) "Water vapor absorption/desorption from ionomer"
+    Reaction hydration1(n_spec=2) if inclReact and (gas.inclH2O and ionomer.inclH2O)
+      "Water vapor absorption/desorption from ionomer"
       annotation (Placement(transformation(extent={{-50,24},{-30,44}})));
-    Reaction hydration2(final n_lin=n_lin, n_spec=2) if inclReact and (ionomer.inclH2O
-       and liquid.inclH2O and not gas.inclH2O)
-      "Liquid water absorption/desorption from ionomer"
+    Reaction hydration2(n_spec=2) if inclReact and (ionomer.inclH2O and liquid.inclH2O
+       and not gas.inclH2O) "Liquid water absorption/desorption from ionomer"
       annotation (Placement(transformation(extent={{-50,10},{-30,30}})));
     // Note:  The additional condition (not gas.inclH2O) prevents a singularity
     // if water is included as gas, liquid, and in ionomer.
+
+  protected
+    final parameter Boolean inclHOR=inclReact and (graphite.'incle-' and
+        ionomer.'inclH+' and gas.inclH2 and not (gas.inclO2 and gas.inclH2O))
+      "true, if HOR is included";
+    final parameter Boolean inclORR=inclReact and (graphite.'incle-' and
+        ionomer.'inclH+' and gas.inclO2 and gas.inclH2O and not gas.inclH2)
+      "true, if ORR is included";
 
   equation
     // Chemical interactions (not shown graphically)
@@ -1466,6 +1463,7 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
+
   end Subregion;
 
   model SubregionIonomerOnly "Subregion with only the ionomer phase"
@@ -1744,8 +1742,6 @@ package Subregions
           __Dymola_joinNext=true));
       replaceable Species.H2.Gas.Fixed H2 if inclH2 constrainedby
         Species.Species(
-        final k=k,
-        final inclLin=inclLin,
         initMethX=if initVelX and reduceVel then InitMethVelocity.None else
             InitMethVelocity.Velocity,
         initMethY=if initVelY and reduceVel then InitMethVelocity.None else
@@ -1776,8 +1772,6 @@ package Subregions
           __Dymola_joinNext=true));
       replaceable Species.H2O.Gas.Fixed H2O if inclH2O constrainedby
         Species.Species(
-        final k=k,
-        final inclLin=inclLin,
         initMethX=if initVelX and reduceVel then InitMethVelocity.None else
             InitMethVelocity.Velocity,
         initMethY=if initVelY and reduceVel then InitMethVelocity.None else
@@ -1808,8 +1802,6 @@ package Subregions
           __Dymola_joinNext=true));
       replaceable Species.N2.Gas.Fixed N2 if inclN2 constrainedby
         Species.Species(
-        final k=k,
-        final inclLin=inclLin,
         initMethX=if initVelX and reduceVel then InitMethVelocity.None else
             InitMethVelocity.Velocity,
         initMethY=if initVelY and reduceVel then InitMethVelocity.None else
@@ -1840,8 +1832,6 @@ package Subregions
           __Dymola_joinNext=true));
       replaceable Species.O2.Gas.Fixed O2 if inclO2 constrainedby
         Species.Species(
-        final k=k,
-        final inclLin=inclLin,
         initMethX=if initVelX and reduceVel then InitMethVelocity.None else
             InitMethVelocity.Velocity,
         initMethY=if initVelY and reduceVel then InitMethVelocity.None else
@@ -1861,8 +1851,8 @@ package Subregions
           enable=inclO2),
         Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      Reaction combustion(final n_lin=n_lin, n_spec=3) if inclReact and (inclH2
-         and inclH2O and inclO2) "2H2 + O2 <=> 2H2O"
+      Reaction combustion(n_spec=3) if inclReact and (inclH2 and inclH2O and
+        inclO2) "2H2 + O2 <=> 2H2O"
         annotation (Placement(transformation(extent={{-50,10},{-30,30}})));
 
       // **Clean up diagram for this and other phases.
@@ -2096,6 +2086,7 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
+
     end Gas;
 
     model Graphite "Graphite phase"
@@ -2115,8 +2106,6 @@ package Subregions
           __Dymola_joinNext=true));
       replaceable Species.'C+'.Graphite.Fixed 'C+' if 'inclC+' constrainedby
         Species.Species(
-        final k=k,
-        final inclLin=inclLin,
         initMethTemp=if initTemp and reduceTemp then InitMethScalar.None else
             InitMethScalar.Temperature,
         phi(each stateSelect=if reduceVel then StateSelect.default else
@@ -2141,8 +2130,6 @@ package Subregions
           __Dymola_joinNext=true));
       replaceable Species.'e-'.Graphite.Fixed 'e-' if 'incle-' constrainedby
         Species.Species(
-        final k=k,
-        final inclLin=inclLin,
         initMethX=if (initVelX or 'inclC+') and reduceVel then InitMethVelocity.None
              else InitMethVelocity.Velocity,
         initMethY=if (initVelY or 'inclC+') and reduceVel then InitMethVelocity.None
@@ -2282,6 +2269,7 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
+
     end Graphite;
 
     model Ionomer "Ionomer phase"
@@ -2303,8 +2291,6 @@ package Subregions
           __Dymola_joinNext=true));
       replaceable Species.'C19HF37O5S-'.Ionomer.Fixed 'C19HF37O5S-' if
         'inclC19HF37O5S-' constrainedby Species.Species(
-        final k=k,
-        final inclLin=inclLin,
         initMethTemp=if initTemp and reduceTemp then InitMethScalar.None else
             InitMethScalar.Temperature,
         phi(each stateSelect=if reduceVel then StateSelect.default else
@@ -2330,8 +2316,6 @@ package Subregions
           __Dymola_joinNext=true));
       replaceable Species.'H+'.Ionomer.Fixed 'H+' if 'inclH+' constrainedby
         Species.Species(
-        final k=k,
-        final inclLin=inclLin,
         initMethX=if initVelX and reduceVel then InitMethVelocity.None else
             InitMethVelocity.Velocity,
         initMethY=if initVelY and reduceVel then InitMethVelocity.None else
@@ -2362,8 +2346,6 @@ package Subregions
           __Dymola_joinNext=true));
       replaceable Species.H2O.Ionomer.Fixed H2O if inclH2O constrainedby
         Species.Species(
-        final k=k,
-        final inclLin=inclLin,
         initMethX=if (initVelX or 'inclC19HF37O5S-') and reduceVel then
             InitMethVelocity.None else InitMethVelocity.Velocity,
         initMethY=if (initVelY or 'inclC19HF37O5S-') and reduceVel then
@@ -2563,6 +2545,7 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
+
     end Ionomer;
 
     model Liquid "Liquid phase"
@@ -2581,8 +2564,6 @@ package Subregions
           __Dymola_joinNext=true));
       replaceable Species.H2O.Liquid.Fixed H2O if inclH2O constrainedby
         Species.Species(
-        final k=k,
-        final inclLin=inclLin,
         initMethX=if initVelX and reduceVel then InitMethVelocity.None else
             InitMethVelocity.Velocity,
         initMethY=if initVelY and reduceVel then InitMethVelocity.None else
@@ -2659,8 +2640,8 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
-    end Liquid;
 
+    end Liquid;
 
     package BaseClasses "Base classes (not generally for direct use)"
       extends Modelica.Icons.BasesPackage;
@@ -2668,34 +2649,24 @@ package Subregions
         //extends FCSys.BaseClasses.Icons.Names.Middle;
 
         // Geometric parameters
-        outer parameter Q.Length L[Axis](each final min=Modelica.Constants.small)
-          "Length" annotation (HideResult=true, missingInnerMessage=
-              "This model should be used within the Subregion model.");
-        outer parameter Q.Area A[Axis]={L[cartWrap(axis + 1)]*L[cartWrap(axis
-             + 2)] for axis in Axis} "Cross-sectional area" annotation (
-            missingInnerMessage=
-              "This model should be used within the Subregion model.");
-        Q.NumberAbsolute k[3](
+        inner parameter Q.NumberAbsolute k[3](
           each min=Modelica.Constants.small,
-          each final nominal=1) = {1,1,1}
+          each final nominal=1) = {1,1,1} if n_spec > 0
           "<html>Areal fill factor (<b>k</b>)</html>"
           annotation (Dialog(group="Geometry"));
 
         // Assumptions
-        parameter Boolean reduceVel=true "Same velocity for all species"
-          annotation (
-          HideResult=true,
-          Dialog(tab="Assumptions",enable=n_spec > 1),
-          choices(__Dymola_checkBox=true));
-        parameter Boolean reduceTemp=true "Same temperature for all species"
-          annotation (
-          HideResult=true,
-          Dialog(tab="Assumptions",enable=n_spec > 1),
-          choices(__Dymola_checkBox=true));
+        parameter Boolean reduceVel=true if n_spec > 0
+          "Same velocity for all species" annotation (Dialog(tab="Assumptions",
+              enable=n_spec > 1), choices(__Dymola_checkBox=true));
+        parameter Boolean reduceTemp=true if n_spec > 0
+          "Same temperature for all species" annotation (Dialog(tab=
+                "Assumptions", enable=n_spec > 1), choices(__Dymola_checkBox=
+                true));
 
         // Initialization
-        parameter Boolean initVelX=true "Initialize the x component"
-          annotation (
+        parameter Boolean initVelX=true if n_spec > 0
+          "Initialize the x component" annotation (
           compact=true,
           Dialog(
             tab="Initialization",
@@ -2703,8 +2674,8 @@ package Subregions
             enable=reduceVel),
           __Dymola_joinNext=true,
           choices(__Dymola_checkBox=true));
-        parameter Boolean initVelY=true "Initialize the y component"
-          annotation (
+        parameter Boolean initVelY=true if n_spec > 0
+          "Initialize the y component" annotation (
           compact=true,
           Dialog(
             tab="Initialization",
@@ -2712,8 +2683,8 @@ package Subregions
             enable=reduceVel),
           __Dymola_joinNext=true,
           choices(__Dymola_checkBox=true));
-        parameter Boolean initVelZ=true "Initialize the z component"
-          annotation (
+        parameter Boolean initVelZ=true if n_spec > 0
+          "Initialize the z component" annotation (
           compact=true,
           Dialog(
             tab="Initialization",
@@ -2721,11 +2692,11 @@ package Subregions
             enable=reduceVel),
           __Dymola_joinNext=true,
           choices(__Dymola_checkBox=true));
-        parameter Q.Velocity phi_IC[Axis]={0,0,0}
+        parameter Q.Velocity phi_IC[Axis]={0,0,0} if n_spec > 0
           "<html>Initial velocity (<b>&phi;</b><sub>IC</sub>)</html>"
           annotation (Dialog(tab="Initialization",group="Velocity"));
         // This is always enabled in the dialog since it's used as a guess value.
-        parameter Boolean initTemp=true "Initialize" annotation (
+        parameter Boolean initTemp=true if n_spec > 0 "Initialize" annotation (
           compact=true,
           Dialog(
             tab="Initialization",
@@ -2734,14 +2705,14 @@ package Subregions
           choices(__Dymola_checkBox=true));
 
         parameter Q.TemperatureAbsolute T_IC(nominal=298.15*U.K,start=
-              environment.T)
+              environment.T) if n_spec > 0
           "<html>Initial temperature (<i>T</i><sub>IC</sub>)</html>"
           annotation (Dialog(tab="Initialization",group="Temperature"));
         // This is always enabled in the dialog since it's used as a guess value.
 
-        parameter Boolean inclLin[3]={true,false,false}
-          "true, if each component of linear momentum is included"
-          annotation (Evaluate=true, Dialog(tab="Assumptions"));
+        Connectors.ChemicalBus chemical if n_spec > 0
+          "Bus of chemical connectors for the species"
+          annotation (Placement(transformation(extent={{-54,42},{-34,62}})));
 
         Connectors.InertAmagat inert(final n_lin=n_lin) if n_spec > 0
           annotation (Placement(transformation(extent={{10,-30},{30,-10}}),
@@ -2770,9 +2741,30 @@ package Subregions
           "Positive face along the z axis" annotation (Placement(transformation(
                 extent={{-30,-30},{-10,-10}}), iconTransformation(extent={{-90,
                   -90},{-70,-70}})));
-        Connectors.ChemicalBus chemical
-          "Bus of chemical connectors for the species"
-          annotation (Placement(transformation(extent={{-54,42},{-34,62}})));
+
+      protected
+        outer parameter Q.Length L[Axis] "Length" annotation (
+            missingInnerMessage=
+              "This model should be used within a subregion model.");
+        outer parameter Q.Area A[Axis] "Cross-sectional area" annotation (
+            missingInnerMessage=
+              "This model should be used within a subregion model.");
+        final inner parameter Q.Length Lstar_trans[Axis]=k .* A ./ L if n_spec
+           > 0 "Effective cross-sectional area per length";
+        outer parameter Integer n_lin "Number of components of linear momentum"
+          annotation (missingInnerMessage=
+              "This model should be used within a subregion model.");
+        outer parameter Boolean inclLin[3]
+          "true, if each component of linear momentum is included"
+          annotation (Dialog(tab="Assumptions"));
+        outer parameter Integer cartAxes[:]
+          "Cartesian-axis indices of the components of linear momentum"
+          annotation (missingInnerMessage=
+              "This model should be used within a subregion model.");
+        // Note:  The size is n_lin, but isn't entered here to prevent errors
+        // in Dymola 74.
+
+        parameter Integer n_spec "Number of species";
 
         PhaseBoundary phaseBoundary(final n_lin=n_lin) if n_spec > 0
           "Phase boundary" annotation (Placement(transformation(
@@ -2782,14 +2774,6 @@ package Subregions
         // This component is conditional because if two or more empty phases
         // (without any species included) were connected within a subregion, there
         // would be a mathematical singularity.
-
-      protected
-        parameter Integer n_spec "Number of species";
-        final parameter Integer n_lin=countTrue(inclLin)
-          "Number of components of linear momentum"
-          annotation (Evaluate=true,HideResult=true);
-        final parameter Integer cartAxes[n_lin]=index(inclLin)
-          "Cartesian-axis indices of the components of linear momentum";
 
         Connectors.InertInternal common(
           n_lin=n_lin,
@@ -2802,7 +2786,8 @@ package Subregions
           thermal(T(
               stateSelect=StateSelect.prefer,
               final start=T_IC,
-              final fixed=initTemp))) if n_spec > 0
+              final fixed=initTemp))) if n_spec > 0 and (reduceVel or
+          reduceTemp)
           "Internal connector to directly couple velocities and/or temperatures"
           annotation (Placement(transformation(extent={{-10,-10},{10,10}},
                 origin={-20,20}), iconTransformation(extent={{-10,-10},{10,10}},
@@ -4089,23 +4074,12 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
       //extends FCSys.BaseClasses.Icons.Names.Top1;
 
       // Geometric parameters
-      outer parameter Q.Length L[Axis](each min=Modelica.Constants.small)
-        "Length" annotation (HideResult=true, missingInnerMessage=
-            "This model should be used within the Subregion model.");
-      outer parameter Q.Area A[Axis] "Cross-sectional area" annotation (
-          HideResult=true, missingInnerMessage=
-            "This model should be used within the Subregion model.");
       parameter Q.Length Lstar(
         min=Modelica.Constants.small,
         nominal=10*U.m,
         start=1e3*product(L)^(1/3))
         "<html>Characteristic length for exchange (<i>L</i><sup>&#9733;</sup>)</html>"
         annotation (Dialog(group="Geometry"));
-      parameter Q.NumberAbsolute k[Axis](
-        each min=Modelica.Constants.small,
-        each final nominal=1) = {1,1,1}
-        "<html>Areal fill factor for transport (<b>k</b>)</html>"
-        annotation (HideResult=true, Dialog(group="Geometry"));
 
       // Material properties
       replaceable package Data =
@@ -4120,15 +4094,10 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
       // Assumptions
       // -----------
       // General
-      parameter Boolean inclLin[Axis]={true,false,false}
-        "<html>true, if each component of linear momentum is included (<i>Do not adjust here.</i>)</html>"
-        annotation (
-        HideResult=true,
-        Evaluate=true,
-        Dialog(tab="Assumptions", enable=false));
-      // Even though this parameter is set as final within the constrainedby
-      // clauses of the models in the Phases package, Dymola 7.4 still shows
-      // it in the parameter dialog (hence the "Do not adjust").
+      outer parameter Boolean inclLin[Axis]
+        "true, if each component of linear momentum is included" annotation (
+          HideResult=true, missingInnerMessage=
+            "This model should be used within a phase model.");
       //
       // Dynamics
       parameter Boolean setPartNum=false "Particle number" annotation (
@@ -4382,6 +4351,11 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
           enable=initMethX == 5 or initMethY == 5 or initMethZ == 5));
 
       // Material properties
+      Real x(nominal=10*U.cm*U.atm/U.A) = Data.alpha(T)*p
+        "<html>**Dynamic compressibility (&Xi;)</html>"
+        annotation (Dialog(group="Material properties"));
+      // **add and use quantity for M.L2/N.T
+      // **Add function to Characteristic
       Q.CompressibilityDynamic Xi(nominal=1e8/(U.V*U.s)) = Data.Xi(T, v=v)
         "<html>Dynamic compressibility (&Xi;)</html>"
         annotation (Dialog(group="Material properties"));
@@ -4473,11 +4447,11 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
       output Q.Time tau_trans_thermal[Axis](each stateSelect=StateSelect.never)
          = fill(alpha_R*N, 3) ./ Lstar_trans if environment.analysis
         "Time constants for thermal transport";
-      output Q.NumberAbsolute eta=log10(max({tau_exch_mechanical,
-          tau_exch_thermal,max([tau_trans_normal; tau_trans_transverse;
-          tau_trans_thermal])})) - log10(min({tau_exch_mechanical,
-          tau_exch_thermal,min([tau_trans_normal; tau_trans_transverse;
-          tau_trans_thermal])})) if environment.analysis
+      output Q.NumberAbsolute eta(stateSelect=StateSelect.never) = log10(max({
+        tau_exch_mechanical,tau_exch_thermal,max([tau_trans_normal;
+        tau_trans_transverse; tau_trans_thermal])})) - log10(min({
+        tau_exch_mechanical,tau_exch_thermal,min([tau_trans_normal;
+        tau_trans_transverse; tau_trans_thermal])})) if environment.analysis
         "Range of time constants in order of magnitude";
       //
       // Peclet numbers (only for the axes with linear momentum included; others are
@@ -4585,6 +4559,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         annotation (Placement(transformation(extent={{10,-30},{30,-10}}),
             iconTransformation(extent={{60,-80},{80,-60}})));
       Connectors.Face xNegative(
+        final p=p_face2[Axis.x, Side.n],
+        final Ndot=Ndot_face[Axis.x, Side.n],
         final J(start=I_IC[Axis.x]/A[Axis.x]) = J_face[Axis.x, Side.n],
         final mPhidot_0(start=p_IC*A[Axis.x]) = mPhidot_face_0[Axis.x, Side.n],
 
@@ -4598,6 +4574,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
                 {-90,10}})));
 
       Connectors.Face xPositive(
+        final p=p_face2[Axis.x, Side.p],
+        final Ndot=Ndot_face[Axis.x, Side.p],
         final J(start=I_IC[Axis.x]/A[Axis.x]) = J_face[Axis.x, Side.p],
         final mPhidot_0(start=-p_IC*A[Axis.x]) = mPhidot_face_0[Axis.x, Side.p],
 
@@ -4611,6 +4589,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
                 110,10}})));
 
       Connectors.Face yNegative(
+        final p=p_face2[Axis.y, Side.n],
+        final Ndot=Ndot_face[Axis.y, Side.n],
         final J(start=I_IC[Axis.y]/A[Axis.y]) = J_face[Axis.y, Side.n],
         final mPhidot_0(start=p_IC*A[Axis.y]) = mPhidot_face_0[Axis.y, Side.n],
 
@@ -4624,6 +4604,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
                 {10,-90}})));
 
       Connectors.Face yPositive(
+        final p=p_face2[Axis.y, Side.p],
+        final Ndot=Ndot_face[Axis.y, Side.p],
         final J(start=I_IC[Axis.y]/A[Axis.y]) = J_face[Axis.y, Side.p],
         final mPhidot_0(start=-p_IC*A[Axis.y]) = mPhidot_face_0[Axis.y, Side.p],
 
@@ -4637,6 +4619,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
                 10,110}})));
 
       Connectors.Face zNegative(
+        final p=p_face2[Axis.z, Side.n],
+        final Ndot=Ndot_face[Axis.z, Side.n],
         final J(start=I_IC[Axis.z]/A[Axis.z]) = J_face[Axis.z, Side.n],
         final mPhidot_0(start=p_IC*A[Axis.z]) = mPhidot_face_0[Axis.z, Side.n],
 
@@ -4650,6 +4634,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
                 80}})));
 
       Connectors.Face zPositive(
+        final p=p_face2[Axis.z, Side.p],
+        final Ndot=Ndot_face[Axis.z, Side.p],
         final J(start=I_IC[Axis.z]/A[Axis.z]) = J_face[Axis.z, Side.p],
         final mPhidot_0(start=-p_IC*A[Axis.z]) = mPhidot_face_0[Axis.z, Side.p],
 
@@ -4663,16 +4649,30 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
                 {-60,-60}})));
 
       // Geometric parameters
-
     protected
-      final parameter Q.Length Lstar_trans[Axis]=k .* A ./ L
-        "Effective cross-sectional area per length";
-      final parameter Integer n_lin=countTrue(inclLin)
-        "Number of components of linear momentum";
-      final parameter Integer cartAxes[n_lin]=index(inclLin)
-        "Cartesian-axis indices of the components of linear momentum";
-      final parameter Integer linAxes[Axis]=enumerate(inclLin)
-        "Linear momentum component indices of the Cartesian axes";
+      outer parameter Q.Length L[Axis] "Length" annotation (missingInnerMessage
+          ="This model should be used within a subregion model.");
+      outer parameter Q.Area A[Axis] "Cross-sectional area" annotation (
+          missingInnerMessage=
+            "This model should be used within a subregion model.");
+      outer parameter Q.Length Lstar_trans[Axis]
+        "Effective cross-sectional area per length" annotation (
+          missingInnerMessage="This model should be used within a phase model.");
+      outer parameter Integer n_lin "Number of components of linear momentum"
+        annotation (missingInnerMessage=
+            "This model should be used within a subregion model.");
+      outer parameter Integer linAxes[Axis]
+        "Linear momentum component indices of the Cartesian axes" annotation (
+          missingInnerMessage=
+            "This model should be used within a subregion model.");
+      outer parameter Integer cartAxes[:]
+        "Cartesian-axis indices of the components of linear momentum"
+        annotation (missingInnerMessage=
+            "This model should be used within a subregion model.");
+      // Note:  The size is n_lin, but isn't entered here to prevent errors
+      // in Dymola 74.
+
+      // Assumptions
       final parameter Boolean upstream[Axis]={upstreamX,upstreamY,upstreamZ}
         "true, if each Cartesian axis uses upstream discretization";
       final parameter Boolean setVel[Axis]={setVelX,setVelY,setVelZ}
@@ -4681,6 +4681,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
           initMethY,initMethZ} "Initialization methods for velocity";
 
       // Base resistivity factors
+      Q.Resistivity alpha_x(nominal=5*U.cm/U.A) = x/p
+        "Base resistivity factor for self diffusivity**";
       Q.Resistivity alpha_Xi(nominal=5*U.cm/U.A) = Xi*Data.m*v/2
         "Base resistivity factor for dynamic compressibility";
       Q.Resistivity alpha_F(nominal=5*U.cm/U.A) = F*Data.m/2
@@ -4689,6 +4691,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         "Base resistivity factor for thermal resistivity";
 
       // Efforts and flows of the conditional connectors
+      Real p_face2[Axis, Side] "Areic currents at the faces **temp";
+      Real Ndot_face[Axis, Side] "Forces on the faces **temp";
       Q.CurrentAreic J_face[Axis, Side](each nominal=U.A,start=transpose(fill(
             I_IC ./ A, 2))) "Areic currents at the faces";
       Q.Force mPhidot_face_0[Axis, Side](each nominal=U.atm*U.cm^2,start=
@@ -4924,6 +4928,14 @@ Choose a condition besides None.");
       for axis in Axis loop
         for side in Side loop
           // Normal
+          x*(Ndot_face[axis, side] - inSign(side)*(if inclLin[axis] then I[
+            linAxes[axis]] else 0)) = Lstar_trans[axis]*(p_face2[axis, side] -
+            p)*(if upstream[axis] and inclLin[axis] then exp(-inSign(side)*I[
+            linAxes[axis]]*alpha_x/Lstar_trans[axis]) + 1 else 2);
+
+          // **Make connectors non-conditional, remove alias variables
+
+          // Normal
           Xi*(inSign(side)*mPhidot_face_0[axis, side] - p*A[axis]) =
             Lstar_trans[axis]*(J_face[axis, side] - (if inclLin[axis] then I[
             linAxes[axis]]/A[axis] else 0))*(if upstream[axis] and inclLin[axis]
@@ -4947,6 +4959,7 @@ Choose a condition besides None.");
           // Apply boundary conditions if the connectors are removed.
           if not [inclFaceNegX, inclFacePosX; inclFaceNegY, inclFacePosY;
               inclFaceNegZ, inclFacePosZ][axis, side] then
+            Ndot_face[axis, side] = 0 "Closed";
             J_face[axis, side] = 0 "Closed";
             phi_face[axis, side, :] = {0,0} "No slip";
             Qdot_face[axis, side] = 0 "Adiabatic";
@@ -5392,9 +5405,6 @@ Choose a condition besides None.");
       annotation (Dialog(connectorSizing=true));
     // Note  The minimum is 2 for a meaningful reaction, but the default
     // must be 0 to use connectorSizing.
-    parameter Integer n_lin=1
-      "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
-      annotation (Evaluate=true, HideResult=true);
 
     Real nu[n_spec]=Chemistry.stoich(chemical.formula)
       "Stoichiometric coefficients";
@@ -5415,6 +5425,10 @@ Choose a condition besides None.");
       annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
   protected
+    outer parameter Integer n_lin "Number of components of linear momentum"
+      annotation (missingInnerMessage=
+          "This model should be used within a subregion model.");
+
     Q.Velocity phi[n_lin](each nominal=U.cm/U.s,each start=0) "Velocity";
     Q.Velocity2 hbar(nominal=U.V*U.mol/U.g, start=0) "Massic enthalpy";
 
@@ -5517,18 +5531,17 @@ Check the chemical formulas and the specific masses of the species.");
   model Volume "Model to establish a fixed volume for phases"
     //extends FCSys.BaseClasses.Icons.Names.Top7;
 
-    // Geometric parameters
-    parameter Q.Volume V(start=U.cc) "Volume";
-    parameter Integer n_lin(
-      final min=0,
-      final max=3) = 1
-      "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
-      annotation (Evaluate=true, HideResult=true);
-
     Connectors.InertAmagat inert(final n_lin=n_lin)
       "Connector for linear momentum and heat, with additivity of volume"
       annotation (Placement(transformation(extent={{60,-80},{80,-60}}),
           iconTransformation(extent={{100,-120},{120,-100}})));
+
+  protected
+    outer parameter Q.Volume V "Volume" annotation (missingInnerMessage=
+          "This model should be used within a subregion model.");
+    outer parameter Integer n_lin "Number of components of linear momentum"
+      annotation (missingInnerMessage=
+          "This model should be used within a subregion model.");
 
   equation
     // Specified volume
@@ -5566,6 +5579,7 @@ Check the chemical formulas and the specific masses of the species.");
             lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics));
+
   end Volume;
 
   package BaseClasses "Base classes (not generally for direct use)"
@@ -5580,11 +5594,8 @@ Check the chemical formulas and the specific masses of the species.");
       inner parameter Q.Length L[Axis](each min=Modelica.Constants.small,start=
             ones(3)*U.cm) "<html>Length (<b>L</b>)</html>"
         annotation (Dialog(group="Geometry"));
-      final inner parameter Q.Area A[Axis]={L[cartWrap(axis + 1)]*L[cartWrap(
-          axis + 2)] for axis in Axis} "Cross-sectional area" annotation (
-          Dialog(group="Geometry"), missingInnerMessage=
-            "This model should be used within the Subregion model.");
-      final parameter Q.Volume V=product(L) "Volume";
+      final inner parameter Integer cartAxes[n_lin]=index(inclLin)
+        "Cartesian-axis indices of the components of linear momentum";
 
       // Assumptions
       // -----------
@@ -5665,13 +5676,21 @@ Check the chemical formulas and the specific masses of the species.");
               extent={{-30,-30},{-10,-10}}), iconTransformation(extent={{-60,-60},
                 {-40,-40}})));
 
-      Volume volume(final n_lin=n_lin, final V=V)
-        "Model to establish space for species"
-        annotation (Placement(transformation(extent={{-16,-16},{16,16}})));
-
+      // Geometric parameters
     protected
-      final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
+      final inner parameter Q.Area A[Axis]={L[cartWrap(axis + 1)]*L[cartWrap(
+          axis + 2)] for axis in Axis} "Cross-sectional areas";
+      final inner parameter Q.Volume V=product(L) "Volume";
+      final inner parameter Boolean inclLin[Axis]={inclLinX,inclLinY,inclLinZ}
+        "true, if each component of linear momentum is included"
+        annotation (Evaluate=true, Dialog(tab="Assumptions"));
+      final inner parameter Integer n_lin=countTrue(inclLin)
         "Number of components of linear momentum" annotation (Evaluate=true);
+      final inner parameter Integer linAxes[Axis]=enumerate(inclLin)
+        "Linear momentum component indices of the Cartesian axes";
+
+      Volume volume "Model to establish space for species"
+        annotation (Placement(transformation(extent={{-16,-16},{16,16}})));
 
       Connectors.ChemicalBusInternal chemical "**"
         annotation (Placement(transformation(extent={{-44,52},{-24,72}})));

@@ -6726,34 +6726,38 @@ connected to <code>positive1</code>, as shown by Figure 1b.</p>
         <td colspan=2 align=center><b>Figure 1:</b> Modes of connection.</td>
       </tr>
     </table>
-</html>"), Icon(graphics={Line(
-              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier),Line(
-              points={{-80,40},{80,40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-80,-40},{80,-40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier)}));
+</html>"), Icon(graphics={
+          Line(
+            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier),
+          Line(
+            points={{-80,40},{80,40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{80,-40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier)}));
   end Router;
 
   record Environment "Environmental properties for a model"
     extends FCSys.BaseClasses.Icons.Names.Top3;
 
     // Store the values of the base constants and units.
-    final constant U.Bases.Base base=U.base "Base constants and units";
+    final constant U.Bases.Base baseUnits=U.base "Base constants and units";
 
     parameter Boolean analysis=true "Include optional variables for analysis"
       annotation (choices(__Dymola_checkBox=true));
@@ -6869,25 +6873,21 @@ The default global default settings will be used for the current simulation.",
 
       partial class Single "Icon for a single-connector boundary condition"
         //extends Names.Middle;
-        annotation (Icon(graphics={
-              Rectangle(
-                extent={{-100,40},{100,-40}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Line(
-                points={{-100,-40},{-100,40},{100,40},{100,-40}},
-                pattern=LinePattern.None,
-                smooth=Smooth.None),
-              Line(
-                points={{-100,-40},{100,-40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash),
-              Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+        annotation (Icon(graphics={Rectangle(
+                      extent={{-100,40},{100,-40}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Line(
+                      points={{-100,-40},{-100,40},{100,40},{100,-40}},
+                      pattern=LinePattern.None,
+                      smooth=Smooth.None),Line(
+                      points={{-100,-40},{100,-40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Single;
 
