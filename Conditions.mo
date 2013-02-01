@@ -6782,8 +6782,8 @@ connected to <code>positive1</code>, as shown by Figure 1b.</p>
     annotation (
       defaultComponentPrefixes="inner",
       missingInnerMessage="Your model is using an outer \"environment\" record, but an inner \"environment\" record is not defined.
-For simulation, specify global default settings by dragging FCSys.Conditions.Environment into your model.
-The default global default settings will be used for the current simulation.",
+For simulation, specify global conditions and defaults by dragging FCSys.Conditions.Environment into your model.
+The default global conditions and defaults will be used for the current simulation.",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={
           Rectangle(
