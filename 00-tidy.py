@@ -30,6 +30,8 @@ rpls = [# Remove empty annotation tags.
         # Remove unless open/close tags.
         ('</b>( *<u>)<b>', r'\1'),
         ('</b>(</u> *)<b>', r'\1'),
+        # Start single-line comments with a space.
+        (r'([ \n]//)([^ ])', r'\1 \2'),
         # Remove extra spacing.
         (r' +\n', r'\n'),
         (r'\n\n\n+', r'\n\n'),
@@ -45,8 +47,8 @@ rpls = [# Remove empty annotation tags.
         # Use relative references where possible.
         (r'  FCSys.Conditions\.', r'  Conditions.'), # Two spaces to prevent change of import statements
         (r'  FCSys.Assemblies\.', r'  Assemblies.'),
-        (r'  FCSys.Regions\.', r'  Regions.'),
-        (r'  FCSys.Subregions\.', r'  Subregions.'),
+        #(r'  FCSys.Regions\.', r'  Regions.'),
+        #(r'  FCSys.Subregions\.', r'  Subregions.'),
         (r'  FCSys.Connectors\.', r'  Connectors.'),
         (r'  FCSys.Characteristics\.', r'  Characteristics.'),
         # Remove useless import statements.

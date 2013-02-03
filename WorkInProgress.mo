@@ -4054,9 +4054,9 @@ results in the following equations:
             "Input gain of continuous-time state space model (actuation to derivative of state)";
           parameter Real C[:, size(A, 1)]=identity(2)
             "Output gain of continuous-time state space model (state to measurement)";
-          //final parameter Integer n_in=size(B, 2) "Number of actuators";
+          // final parameter Integer n_in=size(B, 2) "Number of actuators";
           final parameter Integer n_x=size(A, 1) "Number of states";
-          //final parameter Integer n_out=size(C, 1) "Number of sensors";
+          // final parameter Integer n_out=size(C, 1) "Number of sensors";
           parameter Real x_0[n_x]=zeros(n_x) "Initial states of the plant"
             annotation (Dialog(group="Initial Conditions"));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
@@ -4117,7 +4117,7 @@ results in the following equations:
             extends FCSys.WorkInProgress.Blocks.BaseClasses.MI(final n_in=plant.n_in);
             extends FCSys.WorkInProgress.Blocks.BaseClasses.MO(final n_out=
                   plant.n_out);
-            //extends FCSys.Blocks.Discrete.BaseClasses.DiscreteBlock;
+            // extends FCSys.Blocks.Discrete.BaseClasses.DiscreteBlock;
             FCSys.WorkInProgress.Blocks.Discrete.Sampler sample(
               each final samplePeriod=samplePeriod,
               final n=n_out,
@@ -5666,7 +5666,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
         FCSys.WorkInProgress.Systems.Humidifier.Humidifier anHumidifier
           annotation (Placement(transformation(extent={{-50,-14},{-30,6}},
                 rotation=0)));
-        FCSys.Assemblies.ClosedTank tankH2 annotation (Placement(transformation(
+        Assemblies.ClosedTank tankH2 annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-190,-10})));
@@ -5680,8 +5680,8 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
               extent={{10,-10},{-10,10}},
               rotation=270,
               origin={174,-12})));
-        FCSys.Assemblies.OpenTank H2OTank annotation (Placement(transformation(
-                extent={{-30,10},{-10,30}}, rotation=0)));
+        Assemblies.OpenTank H2OTank annotation (Placement(transformation(extent
+                ={{-30,10},{-10,30}}, rotation=0)));
         FCSys.WorkInProgress.Systems.Pump.Pump compressor annotation (Placement(
               transformation(extent={{-110,-60},{-90,-40}}, rotation=0)));
         FCSys.WorkInProgress.Systems.Pump.Pump condensatePump annotation (
@@ -5703,7 +5703,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
             Placement(transformation(extent={{-180,-22},{-160,-2}}, rotation=0)));
         FCSys.WorkInProgress.Systems.FluidHeater.FluidHeater anPreheater
           annotation (Placement(transformation(extent={{-110,-24},{-90,-4}})));
-        FCSys.Assemblies.Condenser condenser
+        Assemblies.Condenser condenser
           annotation (Placement(transformation(extent={{70,-54},{90,-34}})));
         FCSys.WorkInProgress.Systems.Humidifier.Humidifier caHumidifier
           annotation (Placement(transformation(extent={{-50,-54},{-30,-34}})));
@@ -7414,7 +7414,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
     // **Use model for H instead.
 
     Conditions.Adapters.Species.FluidNonionic H2O(redeclare package Data =
-          FCSys.Characteristics.H2O.Ionomer, redeclare package Medium =
+          Characteristics.H2O.Ionomer, redeclare package Medium =
           Modelica.Media.IdealGases.SingleGases.H2O)
       annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
     Conditions.Adapters.Junctions.Junction2 junction2

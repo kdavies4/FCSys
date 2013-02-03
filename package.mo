@@ -1,14 +1,14 @@
 within ;
 package FCSys "Modelica library of fuel cell models"
 
-// Line of 80 characters (including leading spaces and //):
-//----------------------------------------------------------------------------
+// Line of 80 characters (including leading spaces and // ):
+// ----------------------------------------------------------------------------
 // Maximum line width before a new word is wrapped in Dymola 7.4 (81
 // characters):
-//-----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // Maximum line width before a new word is wrapped in the code listing in
 // the LaTeX document:
-//------------------------------------------------------------------------
+// ------------------------------------------------------------------------
 
 extends Modelica.Icons.Package;
 // extends FCSys.BaseClasses.Icons.Cell;

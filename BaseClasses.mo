@@ -6,7 +6,7 @@ package BaseClasses "Base classes (not generally for direct use)"
     package Blocks "Icons for blocks (imperative or causal models)"
       extends Modelica.Icons.Package;
       partial class Continuous "Icon for a continuous-time block"
-        //extends Names.Middle;
+        // extends Names.Middle;
 
         // This has been modified from Modelica.Blocks.Interfaces.BlockIcon.
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
@@ -186,13 +186,13 @@ package BaseClasses "Base classes (not generally for direct use)"
       partial class Top3
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                      extent={{-100,60},{100,100}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Text(
-                      extent={{-100,60},{100,100}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,60},{100,100}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None), Text(
+                extent={{-100,60},{100,100}},
+                textString="%name",
+                lineColor={0,0,0})}));
 
       end Top3;
 
@@ -238,7 +238,7 @@ package BaseClasses "Base classes (not generally for direct use)"
     end Names;
 
     partial class Cell "Icon for a cell"
-      //extends Names.Top3;
+      // extends Names.Top3;
       annotation (Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},

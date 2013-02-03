@@ -20,6 +20,7 @@ package Tests "Models and functions for test and validation"
     "<html>Run all of the test models for <a href=\"modelica://FCSys\">FCSys</a></html>"
     extends Modelica.Icons.Example;
 
+    Subregions.RunAll testSubregions;
     Characteristics.RunAll testCharacteristics;
     BaseClasses.Utilities.Polynomial.RunAll testBaseClassesUtilities;
     annotation (Documentation(info="<html><p>If this model simulates without failure,
@@ -27,7 +28,69 @@ package Tests "Models and functions for test and validation"
 
   end RunAll;
 
+  package Subregions
+    extends Modelica.Icons.Package;
+    model RunAll
+      "<html>Run all of the test models for the <a href=\"modelica://FCSys.Subregions\">Subregions</a> package</html>"
+      extends Modelica.Icons.Example;
+
+      Subregion testSubregion;
+      Test2Subregions test2Subregions;
+      annotation (Documentation(info="<html><p>If this model simulates without failure,
+  then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
+
+    end RunAll;
+
+    model Subregion "Test a single subregion"
+      extends FCSys.Subregions.Examples.Subregion(
+        'inclC+'=true,
+        'inclC19HF37O5S-'=true,
+        inclH2=true,
+        inclN2=true,
+        inclO2=true);
+
+      // **fix singularity and include these:
+      // **'incle-'=true,
+      // **inclH2O=true,
+      // **excluded to prevent reactions: 'inclH+'=true (create separate model to test reactions)
+
+      // Currently, there are no assertions.  This model just checks that the simulation
+      // runs.
+
+    end Subregion;
+
+    model Test2Subregions
+      "Test two subregions with an initial pressure gradient"
+
+      extends FCSys.Subregions.Examples.Subregions(
+        n_x=0,
+        'inclC+'=true,
+        'inclC19HF37O5S-'=true,
+        inclH2=true,
+        inclN2=true,
+        inclO2=true,
+        environment(final analysis=true));
+
+      // **fix singularity and include these:
+      // 'incle-'=true,
+      // **inclH2O=true,
+      // **excluded to prevent reactions: 'inclH+'=true,
+
+      output Q.Amount S(stateSelect=StateSelect.never) = subregion1.graphite.
+        'C+'.S + subregion2.graphite.'C+'.S + subregion1.ionomer.'C19HF37O5S-'.S
+         + subregion2.ionomer.'C19HF37O5S-'.S + subregion1.gas.H2.S +
+        subregion2.gas.H2.S + subregion1.gas.N2.S + subregion2.gas.N2.S +
+        subregion1.gas.O2.S + subregion2.gas.O2.S "Total entropy";
+
+    equation
+      assert(der(S) >= 0, "Entropy may not decrease.");
+
+    end Test2Subregions;
+
+  end Subregions;
+
   package Characteristics
+    extends Modelica.Icons.Package;
     model RunAll
       "<html>Run all of the test models for the <a href=\"modelica://FCSys.Characteristics\">Characteristics</a> package</html>"
       extends Modelica.Icons.Example;
@@ -43,7 +106,7 @@ package Tests "Models and functions for test and validation"
   then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
 
     end RunAll;
-    extends Modelica.Icons.Package;
+
     model TestCellPotentialsGas
       "<html>Test the potentials of the reaction 2H<sub>2</sub> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O<sub>(g)</sub></html>"
       import FCSys.Characteristics.*;

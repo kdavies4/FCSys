@@ -1,0 +1,49 @@
+// Setup
+removePlots();
+filename = "Subregions.mat";
+species = cat(1,
+              if inclH2 then {"gas.H2"} else fill("",0),
+              if inclH2O then {"gas.H2O"} else fill("",0),
+              if inclN2 then {"gas.N2"} else fill("",0),
+              if inclO2 then {"gas.O2"} else fill("",0),
+              if 'inclC+' then {"graphite.'C+'"} else fill("",0),
+              if 'incle-' then {"graphite.'e-'"} else fill("",0),
+              if 'inclC19HF37O5S-' then {"ionomer.'C19HF37O5S-'"} else fill("",0),
+              if 'inclH+' then {"ionomer.'H+'"} else fill("",0));
+
+for i in 1:size(species, 1) loop
+   // Define signals.
+   y1 = cat(1,
+            {"subregion1." + species[i] + ".N"},
+            {"subregions[" + String(j) + "]." + species[i] + ".N" for j in 1:n_x},
+            {"subregion2." + species[i] + ".N"});
+   y2 = cat(1,
+            {"subregion1." + species[i] + ".phi_face_0[1, 1]", "subregion1." + species[i] + ".phi[1]"},
+            {"subregions[" + String(j) + "]." + species[i] + ".phi_face_0[1, 1]" for j in 1:n_x},
+            {"subregions[" + String(j) + "]." + species[i] + ".phi[1]" for j in 1:n_x},
+            {"subregion2." + species[i] + ".phi_face_0[1, 1]", "subregion2." + species[i] + ".phi[1]",
+             "subregion2." + species[i] + ".phi_face_0[1, 2]"});
+   y3 = cat(1,
+            {"subregion1." + species[i] + ".faces[1, 1].p", "subregion1." + species[i] + ".p"},
+            {"subregions[" + String(j) + "]." + species[i] + ".p" for j in 1:n_x},
+            {"subregions[" + String(j) + "]." + species[i] + ".faces[1, 1].p" for j in 1:n_x},
+            {"subregion2." + species[i] + ".faces[1, 1].p", "subregion2." + species[i] + ".p",
+             "subregion2." + species[i] + ".faces[1, 2].p"});
+   y4 = cat(1,
+            {"subregion1." + species[i] + ".faces[1, 1].T", "subregion1." + species[i] + ".T"},
+            {"subregions[" + String(j) + "]." + species[i] + ".T" for j in 1:n_x},
+            {"subregions[" + String(j) + "]." + species[i] + ".faces[1, 1].T" for j in 1:n_x},
+            {"subregion2." + species[i] + ".faces[1, 1].T", "subregion2." + species[i] + ".T",
+             "subregion2." + species[i] + ".faces[1, 2].T"});
+   y5 = cat(1,
+            {"subregion1." + species[i] + ".v"},
+            {"subregions[" + String(j) + "]." + species[i] + ".v" for j in 1:n_x},
+            {"subregion2." + species[i] + ".v"});
+   y6 = cat(1,
+            {"subregion1." + species[i] + ".mu"},
+            {"subregions[" + String(j) + "]." + species[i] + ".mu" for j in 1:n_x},
+            {"subregion2." + species[i] + ".mu"});
+
+   // Make plots.
+   RunScript("FCSys/resources/scripts/Dymola/plot6.mos");
+end for;

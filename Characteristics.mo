@@ -739,6 +739,8 @@ package Characteristics
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.PressureAbsolute p=U.atm "Pressure";
+        // Note:  Pressure isn't used here but is included for generality.
         output Q.FluidityDynamic F "Dynamic fluidity";
 
       algorithm
@@ -852,8 +854,7 @@ package Characteristics
       final constant Boolean isCompressible=anyTrue({anyTrue({abs(b_v[i, j]) >
           Modelica.Constants.small and specVolPow[1] + i - 1 <> 0 for i in 1:
           size(b_v, 1)}) for j in 1:size(b_v, 2)})
-        "true, if specific volume depends on pressure"
-        annotation (evaluate=true, Evaluate=true);
+        "true, if specific volume depends on pressure";
       final constant Boolean hasThermalExpansion=anyTrue({anyTrue({abs(b_v[i, j])
            > Modelica.Constants.small and specVolPow[2] + j - specVolPow[1] - i
            <> 0 for i in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})
@@ -882,7 +883,7 @@ package Characteristics
         output Q.Resistivity alpha "Resistivity";
 
       algorithm
-        alpha := 3*U.pi*r^2*U.q*sqrt(U.pi*m/T) annotation (Inline=true);
+        alpha := 6*U.pi*r^2*U.q*sqrt(U.pi*m/T) annotation (Inline=true);
         annotation (Documentation(info="<html>
   <p>This function is based on the kinetic theory of gases with the rigid-sphere (\"billiard-ball\")
   assumption [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].  It is
@@ -1075,10 +1076,12 @@ package Characteristics
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.PressureAbsolute p=U.atm "Pressure";
+        // Note:  Pressure isn't used here but is included for generality.
         output Q.FluidityDynamic F "Dynamic fluidity";
 
       algorithm
-        F := 2*alpha(T)/m annotation (Inline=true);
+        F := alpha(T)/m annotation (Inline=true);
         annotation (Documentation(info="<html>
 <p>Note that dynamic fluidity is defined as the reciprocal of viscosity&mdash;typically dynamic viscosity
 (see <a href=\"http://en.wikipedia.org/wiki/Viscosity#Fluidity\">http://en.wikipedia.org/wiki/Viscosity#Fluidity</a>).
@@ -1134,10 +1137,7 @@ package Characteristics
         end h0_i;
 
         function dh0_i "Derivative of h0_i"
-
-          // Note:  This function is necessary to allow Dymola 7.4 to choose T
-          // as a state in FCSys.Subregions.Species.Species and thus avoid nonlinear
-          // systems of equations.
+          // Note:  This function is necessary for Dymola 7.4 to differentiate h().
 
           input Q.TemperatureAbsolute T "Temperature";
           input Integer i "Index of the temperature interval";
@@ -1193,7 +1193,7 @@ package Characteristics
 
         h := smooth(1, sum((if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i
            + 1] or i == size(T_lim_c, 1) - 1) then h0_i(T, i) else 0) for i in
-          1:size(T_lim_c, 1) - 1)) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K
+          1:size(b_c, 1))) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K
            then Deltah0 else 0) - (if referenceEnthalpy <> ReferenceEnthalpy.EnthalpyOfFormationAt25degC
            then Deltah0_f else 0) + h_offset + h_resid(
                 T,
@@ -1220,6 +1220,29 @@ package Characteristics
   (although pressure remains as a valid input).</p>
     </html>"));
       end h;
+
+      replaceable function nu
+        "<html>Dynamic **bulk viscosity as a function of temperature and specific volume (&Xi;)</html>"
+        extends Modelica.Icons.Function;
+
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.PressureAbsolute p=U.atm "Pressure";
+        // Note:  Pressure isn't used here but is included for generality.
+        output Real nu "**Dynamic bulk viscosity";
+        // **Dimension
+
+      algorithm
+        nu := m/alpha(T) annotation (Inline=true);
+
+        // **note in doc here and/or in species model: Dynamic compressibility is a modified self diffusivity (2/2/13 notes)
+
+        annotation (Documentation(info="<html>
+<p>\"Dynamic compressibility\" is defined here as the reciprocal of the volume,
+second, or bulk dynamic viscosity and specific volume (see
+<a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).
+</p>
+</html>"));
+      end nu;
 
       function p_Tv "Pressure as a function of temperature and specific volume"
         extends Modelica.Icons.Function;
@@ -1260,7 +1283,7 @@ package Characteristics
         output Q.ResistivityThermal R "Thermal resistivity";
 
       algorithm
-        R := 2*alpha(T)/c_V(T, p) annotation (Inline=true);
+        R := alpha(T)/c_V(T, p) annotation (Inline=true);
 
       end R;
 
@@ -1283,11 +1306,29 @@ package Characteristics
           s0 := Polynomial.F(
                     T,
                     b_c[i, :],
-                    specHeatCapPow - 1) + B_c[i, 2] annotation (Inline=true);
-          // This is the integral of c0_p/T*dT up to T at p0 with the
-          // absolute entropy at the lower bound [McBride2002, p. 2].
+                    specHeatCapPow - 1) + B_c[i, 2]
+            annotation (Inline=true, derivative=ds0_i);
+          // This is the integral of c0_p/T*dT up to T at p0 with the absolute
+          // entropy at the lower bound [McBride2002, p. 2].
 
         end s0_i;
+
+        function ds0_i "Derivative of s0_i"
+          // Note:  This function is necessary for Dymola 7.4 to differentiate s().
+
+          input Q.TemperatureAbsolute T "Temperature";
+          input Integer i "Index of the temperature interval";
+          input Q.Temperature dT "Derivative of temperature";
+          output Q.NumberAbsolute ds0
+            "Derivative of specific entropy at given temperature and reference pressure";
+
+        algorithm
+          ds0 := Polynomial.f(
+                    T,
+                    b_c[i, :],
+                    specHeatCapPow - 1)*dT annotation (Inline=true);
+
+        end ds0_i;
 
         function s_resid
           "Residual specific entropy for pressure adjustment for selected rows of b_v"
@@ -1326,7 +1367,7 @@ package Characteristics
 
         s := smooth(1, sum((if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i
            + 1] or i == size(T_lim_c, 1) - 1) then s0_i(T, i) else 0) for i in
-          1:size(T_lim_c, 1) - 1)) + s_resid(
+          1:size(b_c, 1))) + s_resid(
                 T,
                 p,
                 {1,size(b_v, 1)}) - (if phase == "gas" then s_resid(
@@ -1385,11 +1426,16 @@ package Characteristics
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
-        output Q.CompressibilityDynamic Xi "Dynamic compressibility";
+        input Q.PressureAbsolute p=U.atm "Pressure";
+        // Note:  Pressure isn't used here but is included for generality.
+        output Q.CompressibilityDynamic Xi "**Dynamic compressibility";
+        // **Dimension: M.L2/(N.T) Weber?
 
       algorithm
-        Xi := 2*alpha(T)/(m*v) annotation (Inline=true);
+        Xi := p*alpha(T) annotation (Inline=true);
+
+        // **note in doc here and/or in species model: Dynamic compressibility is a modified self diffusivity (2/2/13 notes)
+
         annotation (Documentation(info="<html>
 <p>\"Dynamic compressibility\" is defined here as the reciprocal of the volume,
 second, or bulk dynamic viscosity and specific volume (see

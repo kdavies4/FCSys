@@ -1,0 +1,34 @@
+// Setup
+removePlots();
+filename = "Subregion.mat";
+species = cat(1,
+              if inclH2 then {"gas.H2"} else fill("",0),
+              if inclH2O then {"gas.H2O"} else fill("",0),
+              if inclN2 then {"gas.N2"} else fill("",0),
+              if inclO2 then {"gas.O2"} else fill("",0),
+              if 'inclC+' then {"graphite.'C+'"} else fill("",0),
+              if 'incle-' then {"graphite.'e-'"} else fill("",0),
+              if 'inclC19HF37O5S-' then {"ionomer.'C19HF37O5S-'"} else fill("",0),
+              if 'inclH+' then {"ionomer.'H+'"} else fill("",0));
+
+for i in 1:size(species, 1) loop
+   // Define signals.
+   y1 = {"subregion." + species[i] + ".N"};
+   y2 = {"subregion." + species[i] + ".phi[1]", "subregion." + species[i] + ".phi_face_0[1, 1]",
+         "subregion." + species[i] + ".phi_face_0[1, 2]", "subregion." + species[i] + ".faces[2, 1].phi[2]",
+         "subregion." + species[i] + ".faces[2, 2].phi[2]", "subregion." + species[i] + ".faces[3, 1].phi[1]",
+         "subregion." + species[i] + ".faces[3, 2].phi[1]"};
+   y3 = {"subregion." + species[i] + ".p", "subregion." + species[i] + ".faces[1, 1].p",
+         "subregion." + species[i] + ".faces[1, 2].p", "subregion." + species[i] + ".faces[2, 1].p",
+         "subregion." + species[i] + ".faces[2, 2].p", "subregion." + species[i] + ".faces[3, 1].p",
+         "subregion." + species[i] + ".faces[3, 2].p"};
+   y4 = {"subregion." + species[i] + ".T", "subregion." + species[i] + ".faces[1, 1].T",
+         "subregion." + species[i] + ".faces[1, 2].T", "subregion." + species[i] + ".faces[2, 1].T",
+         "subregion." + species[i] + ".faces[2, 2].T", "subregion." + species[i] + ".faces[3, 1].T",
+         "subregion." + species[i] + ".faces[3, 2].T"};
+   y5 = {"subregion." + species[i] + ".v"};
+   y6 = {"subregion." + species[i] + ".mu"};
+
+   // Make plots.
+   RunScript("FCSys/resources/scripts/Dymola/plot6.mos");
+end for;

@@ -1,7 +1,7 @@
 within FCSys;
 package Conditions "Models to specify and measure operating conditions"
   extends Modelica.Icons.Package;
-
+  // **Add notes in all models where appropriate to see the documentation in the Conditions package.
   package Examples "Examples"
     extends Modelica.Icons.ExamplesPackage;
 
@@ -406,10 +406,10 @@ package Conditions "Models to specify and measure operating conditions"
               Modelica.Media.IdealGases.SingleGases.H2 (referenceChoice=
                   Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
                 excludeEnthalpyOfFormation=false), redeclare package Data =
-              FCSys.Characteristics.H2.Gas)
+              Characteristics.H2.Gas)
           annotation (Placement(transformation(extent={{-10,10},{10,30}})));
         Species.FluidNonionic H2O(redeclare package Data =
-              FCSys.Characteristics.H2O.Gas (referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
+              Characteristics.H2O.Gas (referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
                 excludeEnthalpyOfFormation=false), redeclare final package
             Medium = Modelica.Media.IdealGases.SingleGases.H2O)
           annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
@@ -496,19 +496,19 @@ package Conditions "Models to specify and measure operating conditions"
           annotation (Placement(transformation(extent={{60,-50},{40,-30}})));
 
         Species.FluidNonionic H2O(redeclare package Data =
-              FCSys.Characteristics.H2O.Gas, redeclare final package Medium =
+              Characteristics.H2O.Gas, redeclare final package Medium =
               Modelica.Media.IdealGases.SingleGases.H2O (referenceChoice=
                   Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
                 excludeEnthalpyOfFormation=false))
           annotation (Placement(transformation(extent={{-10,10},{10,30}})));
         Species.FluidNonionic N2(redeclare package Data =
-              FCSys.Characteristics.N2.Gas, redeclare final package Medium =
+              Characteristics.N2.Gas, redeclare final package Medium =
               Modelica.Media.IdealGases.SingleGases.N2 (referenceChoice=
                   Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
                 excludeEnthalpyOfFormation=false))
           annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
         Species.FluidNonionic O2(redeclare package Data =
-              FCSys.Characteristics.O2.Gas, redeclare final package Medium =
+              Characteristics.O2.Gas, redeclare final package Medium =
               Modelica.Media.IdealGases.SingleGases.O2 (referenceChoice=
                   Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
                 excludeEnthalpyOfFormation=false))
@@ -594,11 +594,11 @@ package Conditions "Models to specify and measure operating conditions"
         extends BaseClasses.PartialPhase;
 
         Species.'e-' 'e-'(redeclare package Data =
-              FCSys.Characteristics.'e-'.Graphite)
+              Characteristics.'e-'.Graphite)
           annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
 
         Species.Solid 'C+'(redeclare package Data =
-              FCSys.Characteristics.'C+'.Graphite)
+              Characteristics.'C+'.Graphite)
           annotation (Placement(transformation(extent={{-10,10},{10,30}})));
         Modelica.Electrical.Analog.Interfaces.NegativePin pin
           "Modelica electrical pin" annotation (Placement(transformation(extent
@@ -659,8 +659,8 @@ package Conditions "Models to specify and measure operating conditions"
               group="Material properties"));
 
         Species.FluidNonionic H2O(redeclare package Data =
-              FCSys.Characteristics.H2O.Liquid, redeclare final package Medium
-            = Medium)
+              Characteristics.H2O.Liquid, redeclare final package Medium =
+              Medium)
           annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
         Modelica.Fluid.Interfaces.FluidPort_b fluidPort(redeclare final package
@@ -737,7 +737,7 @@ package Conditions "Models to specify and measure operating conditions"
         "<html>Adapter to connect e<sup>-</sup> between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a> (electrical and heat only)</html>"
 
         extends BaseClasses.PartialSpecies(redeclare
-            FCSys.Characteristics.'e-'.Graphite Data);
+            Characteristics.'e-'.Graphite Data);
 
         parameter Q.Area A=U.cm^2 "Area of the interface";
         parameter Side side=Side.n
@@ -842,8 +842,7 @@ package Conditions "Models to specify and measure operating conditions"
           "<html>Partial single-species adapter between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
           extends FCSys.BaseClasses.Icons.Names.Top3;
 
-          replaceable package Data =
-              FCSys.Characteristics.BaseClasses.Characteristic
+          replaceable package Data = Characteristics.BaseClasses.Characteristic
             "Characteristic data (FCSys)" annotation (
             Dialog(group="Material properties"),
             __Dymola_choicesAllMatching=true,
@@ -1714,10 +1713,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           "<html>Number of subregions across the channel (<i>n</i><sub>z</sub>)</html>";
 
         parameter Boolean inclIO=false "true, if input and output are included"
-          annotation (
-          Evaluate=true,
-          HideResult=true,
-          choices(__Dymola_checkBox=true));
+          annotation (HideResult=true, choices(__Dymola_checkBox=true));
 
         Connectors.FaceBus anEnd[n_y, n_z] "Anode end plate" annotation (
             Placement(transformation(
@@ -1994,13 +1990,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       // Conditionally include species.
       parameter Boolean inclH2=false "<html>Hydrogen (H<sub>2</sub>)</html>"
         annotation (
-        Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
+
       Chemical.Species H2(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
@@ -2013,13 +2009,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
         annotation (
-        Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
+
       Chemical.Species H2O(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
@@ -2032,13 +2028,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       parameter Boolean inclN2=false "<html>Nitrogen (N<sub>2</sub>)</html>"
         annotation (
-        Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
+
       Chemical.Species N2(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
@@ -2051,13 +2047,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       parameter Boolean inclO2=false "<html>Oxygen (O<sub>2</sub>)</html>"
         annotation (
-        Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
+
       Chemical.Species O2(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
@@ -2148,13 +2144,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       // Conditionally include species.
       parameter Boolean 'inclC+'=false
         "<html>Carbon plus (C<sup>+</sup>)</html>" annotation (
-        Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
+
       Chemical.Species 'C+'(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
@@ -2167,13 +2163,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       parameter Boolean 'incle-'=false "<html>Electrons (e<sup>-</sup>)</html>"
         annotation (
-        Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
+
       Chemical.Species 'e-'(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
@@ -2227,13 +2223,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       parameter Boolean 'inclC19HF37O5S-'=false
         "<html>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)</html>"
         annotation (
-        Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
+
       Chemical.Species 'C19HF37O5S-'(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
@@ -2246,13 +2242,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                 {10,10}})));
       parameter Boolean 'inclH+'=false "<html>Protons (H<sup>+</sup>)</html>"
         annotation (
-        Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
+
       Chemical.Species 'H+'(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
@@ -2264,13 +2260,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           enable='inclH+'), Placement(transformation(extent={{-10,-10},{10,10}})));
       parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
         annotation (
-        Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
+
       Chemical.Species H2O(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
@@ -2339,13 +2335,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       // Conditionally include species.
       parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
         annotation (
-        Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(
           group="Species",
           __Dymola_descriptionLabel=true,
           __Dymola_joinNext=true));
+
       Chemical.Species H2O(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
@@ -2382,17 +2378,16 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends FCSys.Conditions.BaseClasses.Icons.Single;
 
         parameter Boolean inclLinX=true "X" annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Axes with linear momentum included", compact=true));
+
         parameter Boolean inclLinY=false "Y" annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Axes with linear momentum included", compact=true));
+
         parameter Boolean inclLinZ=false "Z" annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Axes with linear momentum included", compact=true));
@@ -2469,17 +2464,19 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           points={{64,-24},{64,-30},{0,-30},{0,-40},{5.55112e-16,-40}},
           color={208,104,0},
           smooth=Smooth.None));
-      annotation (Icon(graphics));
+      annotation (Documentation(info="<html>
+<p>See the <a href=\"modelica://FCSys.Conditions.Chemical.BaseClasses.PartialConditions\">PartialConditions</a> 
+model.</p>
+</html>"));
     end Reaction;
 
     model Species
       "<html>Condition for a <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalOutput</a> connector (e.g., as in a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model)</html>"
       extends BaseClasses.PartialConditions;
 
-      replaceable package Data =
-          FCSys.Characteristics.BaseClasses.Characteristic constrainedby
-        FCSys.Characteristics.BaseClasses.Characteristic "Characteristic data"
-        annotation (
+      replaceable package Data = Characteristics.BaseClasses.Characteristic
+        constrainedby Characteristics.BaseClasses.Characteristic
+        "Characteristic data" annotation (
         __Dymola_choicesAllMatching=true,
         Dialog(group="Material properties"),
         Placement(transformation(extent={{-60,40},{-40,60}}),
@@ -2498,20 +2495,18 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     protected
       final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
-        "Number of components of linear momentum" annotation (Evaluate=true);
+        "Number of components of linear momentum";
 
       model Properties "Apply material data to a ChemicalOutput connector"
         extends FCSys.BaseClasses.Icons.Blocks.ContinuousShort;
-        replaceable package Data =
-            FCSys.Characteristics.BaseClasses.Characteristic constrainedby
-          FCSys.Characteristics.BaseClasses.Characteristic
+        replaceable package Data = Characteristics.BaseClasses.Characteristic
+          constrainedby Characteristics.BaseClasses.Characteristic
           "Characteristic data" annotation (
           __Dymola_choicesAllMatching=true,
           Dialog(group="Material properties"),
           Placement(transformation(extent={{-60,40},{-40,60}}),
               iconTransformation(extent={{-10,90},{10,110}})));
-        parameter Integer n_lin "Number of components of linear momentum"
-          annotation (Evaluate=true);
+        parameter Integer n_lin "Number of components of linear momentum";
 
         Connectors.ChemicalOutput chemical(final n_lin=n_lin)
           "Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as output"
@@ -2557,7 +2552,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           points={{9.89443e-16,-52},{0,-52},{0,-40},{5.55112e-16,-40}},
           color={208,104,0},
           smooth=Smooth.None));
-      annotation (Icon(graphics));
+      annotation (Documentation(info="<html>
+<p>See the <a href=\"modelica://FCSys.Conditions.Chemical.BaseClasses.PartialConditions\">PartialConditions</a> 
+model.</p>
+</html>"));
     end Species;
 
     package Material "Conditions for additivity of volume"
@@ -2635,7 +2633,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     end Material;
 
-    package Mechanical "Mechanical Conditions"
+    package Mechanical "Mechanical conditions"
       extends Modelica.Icons.Package;
       model Velocity "Specify velocity (measure force)"
         extends BaseClasses.PartialCondition(
@@ -2772,32 +2770,31 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         // Included components of linear momentum
         parameter Boolean inclLinX=true "X" annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Axes with linear momentum included", compact=true));
+
         parameter Boolean inclLinY=false "Y" annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Axes with linear momentum included", compact=true));
+
         parameter Boolean inclLinZ=false "Z" annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Axes with linear momentum included", compact=true));
 
         // Conditions
-        replaceable Material.PotentialPerTemperature material constrainedby
-          Material.BaseClasses.PartialCondition(
+        replaceable Material.PotentialPerTemperature material(source(k(start=0)))
+          constrainedby Material.BaseClasses.PartialCondition(
           final inclLinX=inclLinX,
           final inclLinY=inclLinY,
           final inclLinZ=inclLinZ) "Material" annotation (
           __Dymola_choicesFromPackage=true,
           Dialog(group="Conditions"),
           Placement(transformation(extent={{-74,20},{-54,40}})));
-        replaceable Mechanical.Velocity mechanicalX if inclLinX constrainedby
-          Mechanical.BaseClasses.PartialCondition(
+        replaceable Mechanical.Velocity mechanicalX(source(k(start=0))) if
+          inclLinX constrainedby Mechanical.BaseClasses.PartialCondition(
           final inclLinX=inclLinX,
           final inclLinY=inclLinY,
           final inclLinZ=inclLinZ,
@@ -2805,8 +2802,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           __Dymola_choicesFromPackage=true,
           Dialog(group="Conditions",enable=inclLinX),
           Placement(transformation(extent={{-42,8},{-22,28}})));
-        replaceable Mechanical.Velocity mechanicalY if inclLinY constrainedby
-          Mechanical.BaseClasses.PartialCondition(
+        replaceable Mechanical.Velocity mechanicalY(source(k(start=0))) if
+          inclLinY constrainedby Mechanical.BaseClasses.PartialCondition(
           final inclLinX=inclLinX,
           final inclLinY=inclLinY,
           final inclLinZ=inclLinZ,
@@ -2814,8 +2811,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           __Dymola_choicesFromPackage=true,
           Dialog(group="Conditions",enable=inclLinY),
           Placement(transformation(extent={{-10,-4},{10,16}})));
-        replaceable Mechanical.Velocity mechanicalZ if inclLinZ constrainedby
-          Mechanical.BaseClasses.PartialCondition(
+        replaceable Mechanical.Velocity mechanicalZ(source(k(start=0))) if
+          inclLinZ constrainedby Mechanical.BaseClasses.PartialCondition(
           final inclLinX=inclLinX,
           final inclLinY=inclLinY,
           final inclLinZ=inclLinZ,
@@ -2823,8 +2820,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           __Dymola_choicesFromPackage=true,
           Dialog(group="Conditions",enable=inclLinZ),
           Placement(transformation(extent={{22,-16},{42,4}})));
-        replaceable Fluid.EnthalpyMassic fluid constrainedby
-          Fluid.BaseClasses.PartialCondition(
+        replaceable Fluid.EnthalpyMassic fluid(source(k(start=0)))
+          constrainedby Fluid.BaseClasses.PartialCondition(
           final inclLinX=inclLinX,
           final inclLinY=inclLinY,
           final inclLinZ=inclLinZ) "Fluid" annotation (
@@ -2931,31 +2928,37 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             string="%second",
             index=1,
             extent={{2,3},{2,3}}));
-        annotation (Icon(graphics));
+        annotation (Documentation(info="<html>
+  <p>If the source of an internal specification is redeclared to a block besides
+  <a href=\"modelica://Modelica.Blocks.Sources.Constant\">Modelica.Blocks.Sources.Constant</a>,
+  then the related condition must be redeclared as well.  For example, use:<br>
+  <code>redeclare Conditions.Chemical.Material.Current material(redeclare Modelica.Blocks.Sources.Ramp source)</code><br>
+  rather than simply:<br>
+  <code>material(redeclare Modelica.Blocks.Sources.Ramp source)</code>
+  </p>
+  </html>"));
       end PartialConditions;
 
       partial model PartialCondition "Partial model of a condition"
         extends FCSys.Conditions.BaseClasses.Icons.Single;
 
         parameter Boolean inclLinX=true "X" annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Axes with linear momentum included", compact=true));
+
         parameter Boolean inclLinY=false "Y" annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Axes with linear momentum included", compact=true));
+
         parameter Boolean inclLinZ=false "Z" annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Axes with linear momentum included", compact=true));
 
         parameter Boolean internal=true "Use internal specification"
           annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Specification"));
@@ -2989,7 +2992,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       protected
         final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
-          "Number of components of linear momentum" annotation (Evaluate=true);
+          "Number of components of linear momentum";
 
         Connectors.RealOutputInternal u_final
           "Final value of specified condition" annotation (Placement(
@@ -3025,17 +3028,16 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       // Included components of linear momentum
       parameter Boolean inclLinX=true "X" annotation (
-        Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(group="Axes with linear momentum included", compact=true));
+
       parameter Boolean inclLinY=false "Y" annotation (
-        Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(group="Axes with linear momentum included", compact=true));
+
       parameter Boolean inclLinZ=false "Z" annotation (
-        Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(group="Axes with linear momentum included", compact=true));
@@ -3051,8 +3053,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         Dialog(group="Included subconnectors",compact=true));
 
       // Conditions
-      replaceable Mechanical.Velocity mechanicalX if inclLinX constrainedby
-        Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalX(source(k(start=0))) if
+        inclLinX constrainedby Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -3060,8 +3062,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinX),
         Placement(transformation(extent={{-58,8},{-38,28}})));
-      replaceable Mechanical.Velocity mechanicalY if inclLinY constrainedby
-        Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalY(source(k(start=0))) if
+        inclLinY constrainedby Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -3069,8 +3071,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinY),
         Placement(transformation(extent={{-26,-4},{-6,16}})));
-      replaceable Mechanical.Velocity mechanicalZ if inclLinZ constrainedby
-        Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalZ(source(k(start=0))) if
+        inclLinZ constrainedby Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -3078,8 +3080,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinZ),
         Placement(transformation(extent={{6,-16},{26,4}})));
-      replaceable Thermal.Temperature thermal constrainedby
-        Thermal.BaseClasses.PartialCondition(
+      replaceable Thermal.Temperature thermal(source(k(start=298.15*U.K)))
+        constrainedby Thermal.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ) "Thermal" annotation (
@@ -3193,22 +3195,32 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           string="%second",
           index=1,
           extent={{2,3},{2,3}}));
-      annotation (defaultComponentName="species");
+      annotation (Documentation(info="<html>
+  <p>If the source of an internal specification is redeclared to a block besides
+  <a href=\"modelica://Modelica.Blocks.Sources.Constant\">Modelica.Blocks.Sources.Constant</a>,
+  then the related condition must be redeclared as well.  For example, use:<br>
+  <code>redeclare Conditions.Inert.Mechanical.Force mechanicalX(redeclare Modelica.Blocks.Sources.Ramp source)</code><br>
+  rather than simply:<br>
+  <code>mechanicalX(redeclare Modelica.Blocks.Sources.Ramp source)</code>
+  </p>
+  </html>"));
     end Species;
 
     model SpeciesFlow
       "<html>Condition for a <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> or <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a> connector (e.g., as in a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model), with efforts by default</html>"
 
       extends Species(
-        redeclare Mechanical.Force mechanicalX,
-        redeclare Mechanical.Force mechanicalY,
-        redeclare Mechanical.Force mechanicalZ,
-        redeclare Thermal.HeatRate thermal);
-      annotation (defaultComponentName="species");
-
+        redeclare Mechanical.Force mechanicalX(source(k(start=0))),
+        redeclare Mechanical.Force mechanicalY(source(k(start=0))),
+        redeclare Mechanical.Force mechanicalZ(source(k(start=0))),
+        redeclare Thermal.HeatRate thermal(source(k(start=0))));
+      annotation (defaultComponentName="species",Documentation(info="<html>
+<p>See the <a href=\"modelica://FCSys.Conditions.Inert.Species\">Species</a> 
+model.</p>
+</html>"));
     end SpeciesFlow;
 
-    package Mechanical "Mechanical Conditions"
+    package Mechanical "Mechanical conditions"
       extends Modelica.Icons.Package;
       model Velocity "Specify velocity (measure force)"
         extends BaseClasses.PartialCondition(
@@ -3351,11 +3363,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           Connectors.Thermal thermal "Connector to exchange heat"
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
           annotation (defaultComponentName="thermal", Diagram(graphics={Text(
-                          extent={{-8,-32},{8,-36}},
-                          lineColor={0,0,0},
-                          fillColor={255,255,255},
-                          fillPattern=FillPattern.Solid,
-                          textString="thermal")}));
+                  extent={{-8,-32},{8,-36}},
+                  lineColor={0,0,0},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  textString="thermal")}));
 
         end PartialCondition;
 
@@ -3374,24 +3386,22 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends FCSys.Conditions.BaseClasses.Icons.Single;
 
         parameter Boolean inclLinX=true "X" annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Axes with linear momentum included", compact=true));
+
         parameter Boolean inclLinY=false "Y" annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Axes with linear momentum included", compact=true));
+
         parameter Boolean inclLinZ=false "Z" annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Axes with linear momentum included", compact=true));
 
         parameter Boolean internal=true "Use internal specification"
           annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Specification"));
@@ -3422,7 +3432,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       protected
         final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
-          "Number of components of linear momentum" annotation (Evaluate=true);
+          "Number of components of linear momentum";
 
         Connectors.RealOutputInternal u_final
           "Final value of specified condition" annotation (Placement(
@@ -3458,23 +3468,22 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       // Included components of linear momentum
       parameter Boolean inclLinX=true "X" annotation (
-        Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(group="Axes with linear momentum included", compact=true));
+
       parameter Boolean inclLinY=false "Y" annotation (
-        Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(group="Axes with linear momentum included", compact=true));
+
       parameter Boolean inclLinZ=false "Z" annotation (
-        Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(group="Axes with linear momentum included", compact=true));
 
       // Conditions
-      replaceable Amagat.Pressure amagat constrainedby
+      replaceable Amagat.Pressure amagat(source(k=U.atm)) constrainedby
         Amagat.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
@@ -3482,8 +3491,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{-74,20},{-54,40}})));
-      replaceable Mechanical.Velocity mechanicalX if inclLinX constrainedby
-        Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalX(source(k=0)) if inclLinX
+        constrainedby Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -3491,8 +3500,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinX),
         Placement(transformation(extent={{-42,8},{-22,28}})));
-      replaceable Mechanical.Velocity mechanicalY if inclLinY constrainedby
-        Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalY(source(k=0)) if inclLinY
+        constrainedby Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -3500,8 +3509,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinY),
         Placement(transformation(extent={{-10,-4},{10,16}})));
-      replaceable Mechanical.Velocity mechanicalZ if inclLinZ constrainedby
-        Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalZ(source(k=0)) if inclLinZ
+        constrainedby Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -3509,8 +3518,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinZ),
         Placement(transformation(extent={{22,-16},{42,4}})));
-      replaceable Thermal.Temperature thermal constrainedby
-        Thermal.BaseClasses.PartialCondition(
+      replaceable Thermal.Temperature thermal(source(k=298.15*U.K))
+        constrainedby Thermal.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ) "Thermal" annotation (
@@ -3645,20 +3654,31 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           string="%second",
           index=1,
           extent={{2,3},{2,3}}));
-      annotation (Icon(graphics));
+      annotation (Documentation(info="<html>
+  <p>If the source of an internal specification is redeclared to a block besides
+  <a href=\"modelica://Modelica.Blocks.Sources.Constant\">Modelica.Blocks.Sources.Constant</a>,
+  then the related condition must be redeclared as well.  For example, use:<br>
+  <code>redeclare Conditions.InertAmagat.Amagat.Volume amagat(redeclare Modelica.Blocks.Sources.Ramp source)</code><br>
+  rather than simply:<br>
+  <code>amagat(redeclare Modelica.Blocks.Sources.Ramp source)</code>
+  </p>
+  </html>"));
     end Phase;
 
     model PhaseFlow
       "<html>Condition for a <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector (e.g., as in a <a href=\"modelica://FCSys.Subregions.Phases\">Phase</a> model), with flows by default</html>"
 
       extends Phase(
-        redeclare Amagat.Volume amagat,
+        redeclare Amagat.Volume amagat(source(k=-U.cc)),
         redeclare Mechanical.Force mechanicalX,
         redeclare Mechanical.Force mechanicalY,
         redeclare Mechanical.Force mechanicalZ,
-        redeclare Thermal.HeatRate thermal);
+        redeclare Thermal.HeatRate thermal(source(k=0)));
       annotation (defaultComponentName="phase");
-
+      annotation (Documentation(info="<html>
+<p>See the <a href=\"modelica://FCSys.Conditions.InertAmagat.Phase\">Phase</a> 
+model.</p>
+</html>"));
     end PhaseFlow;
 
     package Amagat "Conditions for additivity of volume"
@@ -3669,7 +3689,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           final conditionType=BaseClasses.ConditionType.Pressure,
           u(final unit="m/(l.T2)"),
           final y(final unit="l3") = inert.V,
-          source(k(start=U.atm)));
+          source(k=U.atm));
 
       equation
         inert.p = u_final;
@@ -3681,8 +3701,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Volume,
           u(final unit="l3"),
-          final y(final unit="m/(l.T2)") = inert.p,
-          source(k(start=U.cc)));
+          final y(final unit="m/(l.T2)") = inert.p);
 
       equation
         inert.V = u_final;
@@ -3732,13 +3751,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     end Amagat;
 
-    package Mechanical "Mechanical Conditions"
+    package Mechanical "Mechanical conditions"
       extends Modelica.Icons.Package;
       model Velocity "Specify velocity (measure force)"
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Velocity,
           u(final unit="l/T"),
-          final y(final unit="l.m/T2") = inert.mPhidot[linAxes[axis]]);
+          final y(final unit="l.m/T2") = inert.mPhidot[linAxes[axis]],
+          source(k=0));
 
       equation
         inert.phi[linAxes[axis]] = u_final;
@@ -3750,7 +3770,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Force,
           u(final unit="l.m/T2"),
-          final y(final unit="l/T") = inert.phi[linAxes[axis]]);
+          final y(final unit="l/T") = inert.phi[linAxes[axis]],
+          source(k=0));
 
       equation
         inert.mPhidot[linAxes[axis]] = u_final;
@@ -3759,8 +3780,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Force;
 
       model Custom "Custom expressions"
-        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=inert.mPhidot[linAxes[axis]]);
+        extends BaseClasses.PartialCondition(
+          final conditionType=BaseClasses.ConditionType.Custom,
+          y=inert.mPhidot[linAxes[axis]],
+          source(k=0));
 
         Real x=inert.phi[linAxes[axis]]
           "Expression to which the condition is applied"
@@ -3824,7 +3847,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           final conditionType=BaseClasses.ConditionType.Temperature,
           u(final unit="l2.m/(N.T2)", displayUnit="K"),
           source(k(start=298.15*U.K)),
-          final y(final unit="l2.m/T3") = inert.Qdot);
+          final y(final unit="l2.m/T3") = inert.Qdot,
+          source(k=298.15*U.K));
 
       equation
         inert.T = u_final;
@@ -3838,7 +3862,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           u(final unit="l2.m/T3"),
           final y(
             final unit="l2.m/(N.T2)",
-            displayUnit="K") = inert.T);
+            displayUnit="K") = inert.T,
+          source(k=0));
 
       equation
         inert.Qdot = u_final;
@@ -3847,8 +3872,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end HeatRate;
 
       model Custom "Custom expressions"
-        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=inert.Qdot);
+        extends BaseClasses.PartialCondition(
+          final conditionType=BaseClasses.ConditionType.Custom,
+          y=inert.Qdot,
+          source(k=298.15*U.K));
 
         Real x=inert.T "Expression to which the condition is applied"
           annotation (Dialog(group="Specification"));
@@ -3893,24 +3920,22 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends FCSys.Conditions.BaseClasses.Icons.Single;
 
         parameter Boolean inclLinX=true "X" annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Axes with linear momentum included", compact=true));
+
         parameter Boolean inclLinY=false "Y" annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Axes with linear momentum included", compact=true));
+
         parameter Boolean inclLinZ=false "Z" annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Axes with linear momentum included", compact=true));
 
         parameter Boolean internal=true "Use internal specification"
           annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Specification"));
@@ -3944,7 +3969,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       protected
         final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
-          "Number of components of linear momentum" annotation (Evaluate=true);
+          "Number of components of linear momentum";
 
         Connectors.RealOutputInternal u_final
           "Final value of specified condition" annotation (Placement(
@@ -3980,23 +4005,22 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       // Included components of linear momentum
       parameter Boolean inclLinX=true "X" annotation (
-        Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(group="Axes with linear momentum included", compact=true));
+
       parameter Boolean inclLinY=false "Y" annotation (
-        Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(group="Axes with linear momentum included", compact=true));
+
       parameter Boolean inclLinZ=false "Z" annotation (
-        Evaluate=true,
         HideResult=true,
         choices(__Dymola_checkBox=true),
         Dialog(group="Axes with linear momentum included", compact=true));
 
       // Conditions
-      replaceable Dalton.Volume dalton constrainedby
+      replaceable Dalton.Volume dalton(source(k=U.cc)) constrainedby
         Dalton.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
@@ -4004,8 +4028,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{-74,20},{-54,40}})));
-      replaceable Mechanical.Velocity mechanicalX if inclLinX constrainedby
-        Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalX(source(k=0)) if inclLinX
+        constrainedby Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -4013,8 +4037,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinX),
         Placement(transformation(extent={{-42,8},{-22,28}})));
-      replaceable Mechanical.Velocity mechanicalY if inclLinY constrainedby
-        Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalY(source(k=0)) if inclLinY
+        constrainedby Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -4022,8 +4046,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinY),
         Placement(transformation(extent={{-10,-4},{10,16}})));
-      replaceable Mechanical.Velocity mechanicalZ if inclLinZ constrainedby
-        Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalZ(source(k=0)) if inclLinZ
+        constrainedby Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -4031,8 +4055,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinZ),
         Placement(transformation(extent={{22,-16},{42,4}})));
-      replaceable Thermal.Temperature thermal constrainedby
-        Thermal.BaseClasses.PartialCondition(
+      replaceable Thermal.Temperature thermal(source(k=298.15*U.K))
+        constrainedby Thermal.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ) "Thermal" annotation (
@@ -4165,20 +4189,30 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           string="%second",
           index=1,
           extent={{2,3},{2,3}}));
-      annotation (Icon(graphics));
+      annotation (Documentation(info="<html>
+  <p>If the source of an internal specification is redeclared to a block besides
+  <a href=\"modelica://Modelica.Blocks.Sources.Constant\">Modelica.Blocks.Sources.Constant</a>,
+  then the related condition must be redeclared as well.  For example, use:<br>
+  <code>redeclare Conditions.InertDalton.Dalton.Pressure dalton(redeclare Modelica.Blocks.Sources.Ramp source)</code><br>
+  rather than simply:<br>
+  <code>dalton(redeclare Modelica.Blocks.Sources.Ramp source)</code>
+  </p>
+  </html>"));
     end Species;
 
     model SpeciesFlow
       "<html>Condition for a <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector (e.g., as in a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model), with flows by default</html>"
 
       extends Species(
-        redeclare Dalton.Pressure dalton,
+        redeclare Dalton.Pressure dalton(source(k=-U.atm)),
         redeclare Mechanical.Force mechanicalX,
         redeclare Mechanical.Force mechanicalY,
         redeclare Mechanical.Force mechanicalZ,
-        redeclare Thermal.HeatRate thermal);
-      annotation (defaultComponentName="species");
-
+        redeclare Thermal.HeatRate thermal(source(k=0)));
+      annotation (defaultComponentName="species",Documentation(info="<html>
+<p>See the <a href=\"modelica://FCSys.Conditions.InertDalton.Species\">Species</a> 
+model.</p>
+</html>"));
     end SpeciesFlow;
 
     package Dalton "Conditions for additivity of volume"
@@ -4189,7 +4223,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           final conditionType=BaseClasses.ConditionType.Volume,
           u(final unit="l3"),
           final y(final unit="m/(l.T2)") = inert.p,
-          source(k(start=U.cc)));
+          source(k=U.cc));
 
       equation
         inert.V = u_final;
@@ -4202,7 +4236,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           final conditionType=BaseClasses.ConditionType.Pressure,
           u(final unit="m/(l.T2)"),
           final y(final unit="l3") = inert.V,
-          source(k(start=U.atm)));
+          source(k=-U.atm));
 
       equation
         inert.p = u_final;
@@ -4211,8 +4245,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Pressure;
 
       model Custom "Custom expressions"
-        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=inert.p);
+        extends BaseClasses.PartialCondition(
+          final conditionType=BaseClasses.ConditionType.Custom,
+          y=inert.p,
+          source(k=U.cc));
 
         Real x=inert.V "Expression to which the condition is applied"
           annotation (Dialog(group="Specification"));
@@ -4252,13 +4288,14 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     end Dalton;
 
-    package Mechanical "Mechanical Conditions"
+    package Mechanical "Mechanical conditions"
       extends Modelica.Icons.Package;
       model Velocity "Specify velocity (measure force)"
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Velocity,
           u(final unit="l/T"),
-          final y(final unit="l.m/T2") = inert.mPhidot[linAxes[axis]]);
+          final y(final unit="l.m/T2") = inert.mPhidot[linAxes[axis]],
+          source(k=0));
 
       equation
         inert.phi[linAxes[axis]] = u_final;
@@ -4270,7 +4307,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Force,
           u(final unit="l.m/T2"),
-          final y(final unit="l/T") = inert.phi[linAxes[axis]]);
+          final y(final unit="l/T") = inert.phi[linAxes[axis]],
+          source(k=0));
 
       equation
         inert.mPhidot[linAxes[axis]] = u_final;
@@ -4279,8 +4317,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Force;
 
       model Custom "Custom expressions"
-        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=inert.mPhidot[linAxes[axis]]);
+        extends BaseClasses.PartialCondition(
+          final conditionType=BaseClasses.ConditionType.Custom,
+          y=inert.mPhidot[linAxes[axis]],
+          source(k=0));
 
         Real x=inert.phi[linAxes[axis]]
           "Expression to which the condition is applied"
@@ -4344,7 +4384,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           final conditionType=BaseClasses.ConditionType.Temperature,
           u(final unit="l2.m/(N.T2)", displayUnit="K"),
           source(k(start=298.15*U.K)),
-          final y(final unit="l2.m/T3") = inert.Qdot);
+          final y(final unit="l2.m/T3") = inert.Qdot,
+          source(k=298.15*U.K));
 
       equation
         inert.T = u_final;
@@ -4358,7 +4399,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           u(final unit="l2.m/T3"),
           final y(
             final unit="l2.m/(N.T2)",
-            displayUnit="K") = inert.T);
+            displayUnit="K") = inert.T,
+          source(k=0));
 
       equation
         inert.Qdot = u_final;
@@ -4367,8 +4409,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end HeatRate;
 
       model Custom "Custom expressions"
-        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=inert.Qdot);
+        extends BaseClasses.PartialCondition(
+          final conditionType=BaseClasses.ConditionType.Custom,
+          y=inert.Qdot,
+          source(k=298.15*U.K));
 
         Real x=inert.T "Expression to which the condition is applied"
           annotation (Dialog(group="Specification"));
@@ -4413,24 +4457,22 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends FCSys.Conditions.BaseClasses.Icons.Single;
 
         parameter Boolean inclLinX=true "X" annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Axes with linear momentum included", compact=true));
+
         parameter Boolean inclLinY=false "Y" annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Axes with linear momentum included", compact=true));
+
         parameter Boolean inclLinZ=false "Z" annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Axes with linear momentum included", compact=true));
 
         parameter Boolean internal=true "Use internal specification"
           annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Specification"));
@@ -4464,7 +4506,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       protected
         final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
-          "Number of components of linear momentum" annotation (Evaluate=true);
+          "Number of components of linear momentum";
 
         Connectors.RealOutputInternal u_final
           "Final value of specified condition" annotation (Placement(
@@ -4617,56 +4659,65 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       extends FaceBus.Subregion(
         gas(
           H2(
-            redeclare replaceable Face.Normal.Force normal,
+            redeclare replaceable Face.Material.Current material,
             redeclare replaceable Face.Transverse.Force transverse1,
             redeclare replaceable Face.Transverse.Force transverse2,
             redeclare replaceable Face.Thermal.HeatRate thermal),
           H2O(
-            redeclare replaceable Face.Normal.Force normal,
+            redeclare replaceable Face.Material.Current material,
             redeclare replaceable Face.Transverse.Force transverse1,
             redeclare replaceable Face.Transverse.Force transverse2,
             redeclare replaceable Face.Thermal.HeatRate thermal),
           N2(
-            redeclare replaceable Face.Normal.Force normal,
+            redeclare replaceable Face.Material.Current material,
             redeclare replaceable Face.Transverse.Force transverse1,
             redeclare replaceable Face.Transverse.Force transverse2,
             redeclare replaceable Face.Thermal.HeatRate thermal),
           O2(
-            redeclare replaceable Face.Normal.Force normal,
+            redeclare replaceable Face.Material.Current material,
             redeclare replaceable Face.Transverse.Force transverse1,
             redeclare replaceable Face.Transverse.Force transverse2,
             redeclare replaceable Face.Thermal.HeatRate thermal)),
         graphite('C+'(
-            redeclare replaceable Face.Normal.Force normal,
+            redeclare replaceable Face.Material.Current material,
             redeclare replaceable Face.Transverse.Force transverse1,
             redeclare replaceable Face.Transverse.Force transverse2,
             redeclare replaceable Face.Thermal.HeatRate thermal), 'e-'(
-            redeclare replaceable Face.Normal.Force normal,
+            redeclare replaceable Face.Material.Current material,
             redeclare replaceable Face.Transverse.Force transverse1,
             redeclare replaceable Face.Transverse.Force transverse2,
             redeclare replaceable Face.Thermal.HeatRate thermal)),
         ionomer(
           'C19HF37O5S-'(
-            redeclare replaceable Face.Normal.Force normal,
+            redeclare replaceable Face.Material.Current material,
             redeclare replaceable Face.Transverse.Force transverse1,
             redeclare replaceable Face.Transverse.Force transverse2,
             redeclare replaceable Face.Thermal.HeatRate thermal),
           'H+'(
-            redeclare replaceable Face.Normal.Force normal,
+            redeclare replaceable Face.Material.Current material,
             redeclare replaceable Face.Transverse.Force transverse1,
             redeclare replaceable Face.Transverse.Force transverse2,
             redeclare replaceable Face.Thermal.HeatRate thermal),
           H2O(
-            redeclare replaceable Face.Normal.Force normal,
+            redeclare replaceable Face.Material.Current material,
             redeclare replaceable Face.Transverse.Force transverse1,
             redeclare replaceable Face.Transverse.Force transverse2,
             redeclare replaceable Face.Thermal.HeatRate thermal)),
         liquid(H2O(
-            redeclare replaceable Face.Normal.Force normal,
+            redeclare replaceable Face.Material.Current material,
             redeclare replaceable Face.Transverse.Force transverse1,
             redeclare replaceable Face.Transverse.Force transverse2,
             redeclare replaceable Face.Thermal.HeatRate thermal)));
-      annotation (defaultComponentName="subregion");
+
+      annotation (Documentation(info="<html>
+  <p>If the source of an internal specification is redeclared to a block besides
+  <a href=\"modelica://Modelica.Blocks.Sources.Constant\">Modelica.Blocks.Sources.Constant</a>,
+  then the related condition must be redeclared as well.  For example, use:<br>
+  <code>gas(H2O(redeclare Conditions.Face.Material.Current material(redeclare Modelica.Blocks.Sources.Ramp source)))</code><br>
+  rather than simply:<br>
+  <code>gas(H2O(material(redeclare Modelica.Blocks.Sources.Ramp source)))</code>
+  </p>
+  </html>"), defaultComponentName="subregion");
 
     end SubregionFlows;
 
@@ -4681,13 +4732,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         // Conditionally include species.
         parameter Boolean inclH2=false "<html>Hydrogen (H<sub>2</sub>)</html>"
           annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
+
         Face.Species H2 if inclH2 "Conditions" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -4695,13 +4746,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
           annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
+
         Face.Species H2O if inclH2O "Conditions" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -4709,13 +4760,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         parameter Boolean inclN2=false "<html>Nitrogen (N<sub>2</sub>)</html>"
           annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
+
         Face.Species N2 if inclN2 "Conditions" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -4723,13 +4774,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         parameter Boolean inclO2=false "<html>Oxygen (O<sub>2</sub>)</html>"
           annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
+
         Face.Species O2 if inclO2 "Conditions" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -4813,13 +4864,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         // Conditionally include species.
         parameter Boolean 'inclC+'=false
           "<html>Carbon plus (C<sup>+</sup>)</html>" annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
+
         Face.Species 'C+' if 'inclC+' "Conditions" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -4827,13 +4878,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         parameter Boolean 'incle-'=false
           "<html>Electrons (e<sup>-</sup>)</html>" annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
+
         Face.Species 'e-' if 'incle-' "Conditions" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -4884,13 +4935,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         parameter Boolean 'inclC19HF37O5S-'=false
           "<html>Nafion sulfonate minus (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)</html>"
           annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
+
         Face.Species 'C19HF37O5S-' if 'inclC19HF37O5S-' "Conditions"
           annotation (Dialog(
             group="Species",
@@ -4900,13 +4951,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         parameter Boolean 'inclH+'=false "<html>Protons (H<sup>+</sup>)</html>"
           annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
+
         Face.Species 'H+' if 'inclH+' "Conditions" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -4914,13 +4965,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
           annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
+
         Face.Species H2O if inclH2O "Conditions" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -4987,13 +5038,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         // Conditionally include species.
         parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
           annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
+
         Face.Species H2O if inclH2O "Conditions" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -5016,7 +5067,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
-
+        annotation (Diagram(graphics));
       end Liquid;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -5061,25 +5112,29 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       extends FCSys.Conditions.BaseClasses.Icons.Single;
 
-      replaceable Normal.CurrentAreic normal constrainedby
-        Normal.BaseClasses.PartialCondition "Normal" annotation (
+      replaceable Material.Pressure material(source(k(start=U.atm)))
+        constrainedby Material.BaseClasses.PartialCondition "Material"
+        annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{-58,10},{-38,30}})));
-      replaceable Transverse.Velocity transverse1(final orientation=Orientation.preceding)
-        constrainedby Transverse.BaseClasses.PartialCondition
+      replaceable Transverse.Velocity transverse1(final orientation=Orientation.preceding,
+          source(k(start=0))) constrainedby
+        Transverse.BaseClasses.PartialCondition
         "<html>1<sup>st</sup> transverse</html>" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{-26,-2},{-6,18}})));
-      replaceable Transverse.Velocity transverse2(final orientation=Orientation.following)
-        constrainedby Transverse.BaseClasses.PartialCondition
+      replaceable Transverse.Velocity transverse2(final orientation=Orientation.following,
+          source(k(start=0))) constrainedby
+        Transverse.BaseClasses.PartialCondition
         "<html>2<sup>nd</sup> transverse</html>" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{6,-18},{26,2}})));
-      replaceable Thermal.Temperature thermal constrainedby
-        Thermal.BaseClasses.PartialCondition "Thermal" annotation (
+      replaceable Thermal.Temperature thermal(source(k(start=298.15*U.K)))
+        constrainedby Thermal.BaseClasses.PartialCondition "Thermal"
+        annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{38,-30},{58,-10}})));
@@ -5113,19 +5168,19 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     equation
       // Normal
-      connect(normal.face, face) annotation (Line(
+      connect(material.face, face) annotation (Line(
           points={{-48,16},{-48,-30},{0,-30},{0,-40},{5.55112e-16,-40}},
           color={127,127,127},
           pattern=LinePattern.None,
           smooth=Smooth.None));
-      connect(u.normal, normal.u) annotation (Line(
+      connect(u.normal, material.u) annotation (Line(
           points={{-100,5.55112e-16},{-80,5.55112e-16},{-80,20},{-59,20}},
           color={0,0,127},
           smooth=Smooth.None), Text(
           string="%first",
           index=-1,
           extent={{-6,3},{-6,3}}));
-      connect(normal.y, y.normal) annotation (Line(
+      connect(material.y, y.normal) annotation (Line(
           points={{-37,20},{80,20},{80,0},{100,0},{100,5.55112e-16}},
           color={0,0,127},
           smooth=Smooth.None), Text(
@@ -5195,42 +5250,54 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           string="%second",
           index=1,
           extent={{6,3},{6,3}}));
-
+      annotation (Documentation(info="<html>
+  <p>If the source of an internal specification is redeclared to a block besides
+  <a href=\"modelica://Modelica.Blocks.Sources.Constant\">Modelica.Blocks.Sources.Constant</a>,
+  then the related condition must be redeclared as well.  For example, use:<br>
+  <code>redeclare Conditions.Face.Material.Pressure material(redeclare Modelica.Blocks.Sources.Ramp source)</code><br>
+  rather than simply:<br>
+  <code>material(redeclare Modelica.Blocks.Sources.Ramp source)</code>
+  </p>
+  </html>"));
     end Species;
     extends Modelica.Icons.Package;
 
-    package Normal "Normal mechanical Conditions"
+    package Material "Material conditions"
       extends Modelica.Icons.Package;
 
-      model CurrentAreic "Specify areic current (measure normal force)"
+      model Pressure "Specify pressure (measure current)"
         extends BaseClasses.PartialCondition(
-          final conditionType=BaseClasses.ConditionType.CurrentAreic,
-          u(final unit="N/(l2.T)"),
-          final y(final unit="l.m/T2") = face.mPhidot_0);
+          final conditionType=BaseClasses.ConditionType.Pressure,
+          u(final unit="m/(l.T2)"),
+          final y(final unit="N/T") = face.Ndot,
+          source(k=U.atm));
 
       equation
-        face.J = u_final;
+        face.p = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="normal");
-      end CurrentAreic;
+      end Pressure;
 
-      model Force "Specify normal force (measure areic current)"
+      model Current "Specify current (measure pressure)"
         extends BaseClasses.PartialCondition(
-          final conditionType=BaseClasses.ConditionType.Force,
-          u(final unit="l.m/T2"),
-          final y(final unit="N/(l2.T)") = face.J);
+          final conditionType=BaseClasses.ConditionType.Current,
+          u(final unit="N/T"),
+          final y(final unit="m/(l.T2)") = face.p,
+          source(k=0));
 
       equation
-        face.mPhidot_0 = u_final;
+        face.Ndot = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="normal");
-      end Force;
+      end Current;
 
       model Custom "Custom expressions"
-        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=face.mPhidot_0);
+        extends BaseClasses.PartialCondition(
+          final conditionType=BaseClasses.ConditionType.Custom,
+          y=face.Ndot,
+          source(k=0));
 
-        Real x=face.J "Expression to which the condition is applied"
+        Real x=face.p "Expression to which the condition is applied"
           annotation (Dialog(group="Specification"));
 
       equation
@@ -5239,7 +5306,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           defaultComponentPrefixes="replaceable",
           defaultComponentName="normal",
           Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
-    must involve <code>face.J</code> and/or <code>face.mPhidot_0</code>.</p></html>"));
+    must involve <code>face.p</code> and/or <code>face.Ndot</code>.</p></html>"));
       end Custom;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -5259,22 +5326,23 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         end PartialCondition;
 
         type ConditionType = enumeration(
-            CurrentAreic "Specify areic current (measure force)",
-            Force "Specify force (measure areic current)",
+            Pressure "Specify pressure (measure current)",
+            Current "Specify current (measure pressure)",
             Custom "Custom expressions") "Types of conditions";
 
       end BaseClasses;
 
-    end Normal;
+    end Material;
 
-    package Transverse "Transverse mechanical Conditions"
+    package Transverse "Transverse mechanical conditions"
       extends Modelica.Icons.Package;
 
       model Velocity "Specify velocity (measure shear force)"
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Velocity,
           u(final unit="l/T"),
-          final y(final unit="l.m/T2") = face.mPhidot[orientation]);
+          final y(final unit="l.m/T2") = face.mPhidot[orientation],
+          source(k=0));
 
       equation
         face.phi[orientation] = u_final;
@@ -5286,7 +5354,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Force,
           u(final unit="l.m/T2"),
-          final y(final unit="l/T") = face.phi[orientation]);
+          final y(final unit="l/T") = face.phi[orientation],
+          source(k=0));
 
       equation
         face.mPhidot[orientation] = u_final;
@@ -5295,8 +5364,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Force;
 
       model Custom "Custom expressions"
-        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=face.mPhidot[orientation]);
+        extends BaseClasses.PartialCondition(
+          final conditionType=BaseClasses.ConditionType.Custom,
+          y=face.mPhidot[orientation],
+          source(k=0));
 
         Real x=face.phi[orientation]
           "Expression to which the condition is applied"
@@ -5326,7 +5397,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         equation
           // No flows of other quantities
-          face.mPhidot_0 = 0 "Linear momentum in the normal direction";
+          face.Ndot = 0 "Material";
           face.mPhidot[mod1(orientation + 1, 2)] = 0
             "Linear momentum in the other transverse direction";
           face.Qdot = 0 "Heat";
@@ -5342,7 +5413,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     end Transverse;
 
-    package Thermal "Thermal Conditions"
+    package Thermal "Thermal conditions"
       extends Modelica.Icons.Package;
 
       model Temperature "Specify temperature (measure heat flow rate)"
@@ -5350,7 +5421,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           final conditionType=BaseClasses.ConditionType.Temperature,
           u(final unit="l2.m/(N.T2)", displayUnit="K"),
           final y(unit="l2.m/T3") = face.Qdot,
-          source(k(start=298.15*U.K)));
+          source(k=298.15*U.K));
 
       equation
         face.T = u_final;
@@ -5364,7 +5435,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           u(final unit="l2.m/T3"),
           final y(
             final unit="l2.m/(N.T2)",
-            displayUnit="K") = face.T);
+            displayUnit="K") = face.T,
+          source(k=0));
 
       equation
         face.Qdot = u_final;
@@ -5373,8 +5445,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end HeatRate;
 
       model Custom "Custom expressions"
-        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=face.Qdot);
+        extends BaseClasses.PartialCondition(
+          final conditionType=BaseClasses.ConditionType.Custom,
+          y=face.Qdot,
+          source(k=298.15*U.K));
 
         Real x=face.T "Expression to which the condition is applied"
           annotation (Dialog(group="Specification"));
@@ -5399,7 +5473,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         equation
           // No flows of other quantities
-          face.mPhidot_0 = 0 "Linear momentum in normal direction";
+          face.Ndot = 0 "Material";
           face.mPhidot = {0,0} "Linear momentum in transverse directions";
           annotation (defaultComponentName="thermal");
         end PartialCondition;
@@ -5422,7 +5496,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         parameter Boolean internal=true "Use internal specification"
           annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Specification"));
@@ -5466,8 +5539,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       equation
         connect(u, u_final) annotation (Line(
-            points={{-110,5.55112e-16},{-62,-4.87687e-22},{-62,5.55112e-16},{-20,
-                5.55112e-16}},
+            points={{-110,5.55112e-16},{-62,-4.87687e-22},{-62,5.55112e-16},{
+                -20,5.55112e-16}},
             color={0,0,127},
             smooth=Smooth.None));
 
@@ -5709,13 +5782,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         // Conditionally include species.
         parameter Boolean inclH2=false "<html>Hydrogen (H<sub>2</sub>)</html>"
           annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
+
         FacePair.Species H2 if inclH2 "Conditions" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -5723,13 +5796,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
           annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
+
         FacePair.Species H2O if inclH2O "Conditions" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -5737,13 +5810,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         parameter Boolean inclN2=false "<html>Nitrogen (N<sub>2</sub>)</html>"
           annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
+
         FacePair.Species N2 if inclN2 "Conditions" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -5751,13 +5824,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         parameter Boolean inclO2=false "<html>Oxygen (O<sub>2</sub>)</html>"
           annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
+
         FacePair.Species O2 if inclO2 "Conditions" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -5868,13 +5941,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         // Conditionally include species.
         parameter Boolean 'inclC+'=false
           "<html>Carbon plus (C<sup>+</sup>)</html>" annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
+
         FacePair.Species 'C+' if 'inclC+' "Conditions" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -5882,13 +5955,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         parameter Boolean 'incle-'=false
           "<html>Electrons (e<sup>-</sup>)</html>" annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
+
         FacePair.Species 'e-' if 'incle-' "Conditions" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -5953,13 +6026,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         parameter Boolean 'inclC19HF37O5S-'=false
           "<html>Nafion sulfonate minus (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)</html>"
           annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
+
         FacePair.Species 'C19HF37O5S-' if 'inclC19HF37O5S-' "Conditions"
           annotation (Dialog(
             group="Species",
@@ -5969,13 +6042,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         parameter Boolean 'inclH+'=false "<html>Protons (H<sup>+</sup>)</html>"
           annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
+
         FacePair.Species 'H+' if 'inclH+' "Conditions" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -5983,13 +6056,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
           annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
+
         FacePair.Species H2O if inclH2O "Conditions" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -6076,13 +6149,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         // Conditionally include species.
         parameter Boolean inclH2O=false "<html>Water (H<sub>2</sub>O)</html>"
           annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
             __Dymola_joinNext=true));
+
         FacePair.Species H2O if inclH2O "Conditions" annotation (Dialog(
             group="Species",
             __Dymola_descriptionLabel=true,
@@ -6164,8 +6237,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       extends FCSys.Conditions.BaseClasses.Icons.Double;
 
-      replaceable Normal.CurrentAreic normal constrainedby
-        Normal.BaseClasses.PartialCondition "Normal" annotation (
+      replaceable Material.Pressure material constrainedby
+        Normal.BaseClasses.PartialCondition "Material" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{-58,10},{-38,30}})));
@@ -6314,10 +6387,18 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           points={{48,-25},{48,-30},{5.55112e-16,-30},{5.55112e-16,-50}},
           color={0,0,127},
           smooth=Smooth.None));
-      annotation (Icon(graphics));
+      annotation (Documentation(info="<html>
+  <p>If the source of an internal specification is redeclared to a block besides
+  <a href=\"modelica://Modelica.Blocks.Sources.Constant\">Modelica.Blocks.Sources.Constant</a>,
+  then the related condition must be redeclared as well.  For example, use:<br>
+  <code>redeclare Conditions.FacePair.Material.Pressure material(redeclare Modelica.Blocks.Sources.Ramp source)</code><br>
+  rather than simply:<br>
+  <code>material(redeclare Modelica.Blocks.Sources.Ramp source)</code>
+  </p>
+  </html>"));
     end Species;
 
-    package Normal "Normal mechanical Conditions"
+    package Normal "Normal mechanical conditions"
       extends Modelica.Icons.Package;
 
       model CurrentAreic
@@ -6325,7 +6406,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.CurrentAreic,
           u(final unit="N/(l2.T)"),
-          final y(final unit="l.m/T2") = negative.mPhidot_0 + positive.mPhidot_0);
+          final y(final unit="l.m/T2") = negative.mPhidot_0 + positive.mPhidot_0,
+          source(k=U.atm));
 
       equation
         negative.J = u_final;
@@ -6345,7 +6427,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Force,
           u(final unit="l.m/T2"),
-          final y(final unit="N/(l2.T)") = negative.J);
+          final y(final unit="N/(l2.T)") = negative.J,
+          source(k=0));
 
       equation
         negative.mPhidot_0 + positive.mPhidot_0 = u_final;
@@ -6361,8 +6444,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Force;
 
       model Custom "Custom expressions"
-        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=negative.mPhidot_0 + positive.mPhidot_0);
+        extends BaseClasses.PartialCondition(
+          final conditionType=BaseClasses.ConditionType.Custom,
+          y=negative.mPhidot_0 + positive.mPhidot_0,
+          source(k=U.atm));
 
         Real x=negative.J "Expression to which the condition is applied"
           annotation (Dialog(group="Specification"));
@@ -6410,7 +6495,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     end Normal;
 
-    package Transverse "Transverse mechanical Conditions"
+    package Transverse "Transverse mechanical conditions"
       extends Modelica.Icons.Package;
 
       model Velocity
@@ -6418,7 +6503,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Velocity,
           u(final unit="l/T"),
-          final y(final unit="l.m/T2") = negative.mPhidot[orientation]);
+          final y(final unit="l.m/T2") = negative.mPhidot[orientation],
+          source(k=0));
 
       equation
         negative.phi[orientation] - positive.phi[orientation] = u_final;
@@ -6432,7 +6518,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           final conditionType=BaseClasses.ConditionType.Force,
           u(final unit="l.m/T2"),
           final y(final unit="l/T") = negative.phi[orientation] - positive.phi[
-            orientation]);
+            orientation],
+          source(k=0));
 
       equation
         negative.mPhidot[orientation] = u_final;
@@ -6441,8 +6528,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       end Force;
 
       model Custom "Custom expressions"
-        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=negative.mPhidot[orientation]);
+        extends BaseClasses.PartialCondition(
+          final conditionType=BaseClasses.ConditionType.Custom,
+          y=negative.mPhidot[orientation],
+          source(k=0));
 
         Real x=negative.phi[orientation] - positive.phi[orientation]
           "Expression to which the condition is applied"
@@ -6499,7 +6588,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     end Transverse;
 
-    package Thermal "Thermal Conditions"
+    package Thermal "Thermal conditions"
       extends Modelica.Icons.Package;
 
       model Temperature
@@ -6507,7 +6596,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends Thermal.BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Temperature,
           u(final unit="l2.m/(N.T2)", displayUnit="K"),
-          final y(unit="l2.m/T3") = negative.Qdot);
+          final y(unit="l2.m/T3") = negative.Qdot,
+          source(k=298.15*U.K));
 
       equation
         negative.T - positive.T = u_final;
@@ -6522,7 +6612,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           u(final unit="l2.m/T3"),
           final y(
             final unit="l2.m/(N.T2)",
-            displayUnit="K") = negative.T - positive.T);
+            displayUnit="K") = negative.T - positive.T,
+          source(k=0));
 
       equation
         negative.Qdot = u_final;
@@ -6532,8 +6623,10 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       model Custom
         "Apply condition to a custom expression, with conversation of energy"
-        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=negative.Qdot);
+        extends BaseClasses.PartialCondition(
+          final conditionType=BaseClasses.ConditionType.Custom,
+          y=negative.Qdot,
+          source(k=298.15*U.K));
 
         Real x=negative.T - positive.T
           "Expression to which the condition is applied"
@@ -6593,7 +6686,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         parameter Boolean internal=true "Use internal specification"
           annotation (
-          Evaluate=true,
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="Specification"));
@@ -6658,7 +6750,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   model Router "Connect two pairs of faces to pass through or cross over"
     extends FCSys.BaseClasses.Icons.Names.Top3;
     parameter Boolean crossOver=false "Cross over (otherwise, pass through)"
-      annotation (Evaluate=true,choices(__Dymola_checkBox=true));
+      annotation (choices(__Dymola_checkBox=true));
     Connectors.FaceBus negative1 "Negative face 1" annotation (Placement(
           transformation(extent={{-90,-50},{-70,-30}}, rotation=0),
           iconTransformation(extent={{-90,-50},{-70,-30}})));
@@ -6771,7 +6863,7 @@ connected to <code>positive1</code>, as shown by Figure 1b.</p>
       displayUnit="%") = 0.208
       "<html>Dry gas O<sub>2</sub> fraction (<i>y</i><sub>O2 dry</sub>)</html>";
     // Value from http://en.wikipedia.org/wiki/Oxygen
-    parameter Q.Acceleration a[FCSys.BaseClasses.Axis]=zeros(3)
+    parameter Q.Acceleration a[Axis]={0,0,0}
       "Acceleration of the reference frame";
 
     final parameter Q.NumberAbsolute x_H2O(
@@ -6784,6 +6876,7 @@ connected to <code>positive1</code>, as shown by Figure 1b.</p>
       missingInnerMessage="Your model is using an outer \"environment\" record, but an inner \"environment\" record is not defined.
 For simulation, specify global conditions and defaults by dragging FCSys.Conditions.Environment into your model.
 The default global conditions and defaults will be used for the current simulation.",
+
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={
           Rectangle(
@@ -6845,49 +6938,59 @@ The default global conditions and defaults will be used for the current simulati
     package Icons "Icons for conditions"
       extends Modelica.Icons.Package;
       partial class Double "Icon for a two-connector boundary condition"
-        //extends Names.Middle;
-        annotation (Icon(graphics={Rectangle(
-                      extent={{-100,40},{100,-40}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Line(
-                      points={{-100,40},{100,40}},
-                      pattern=LinePattern.None,
-                      smooth=Smooth.None),Line(
-                      points={{-100,-40},{-100,40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash),Text(
-                      extent={{-150,-20},{150,20}},
-                      textString="%name",
-                      lineColor={0,0,0}),Line(
-                      points={{-100,-40},{100,-40}},
-                      pattern=LinePattern.None,
-                      smooth=Smooth.None),Line(
-                      points={{100,-40},{100,40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash)}));
+        // extends Names.Middle;
+        annotation (Icon(graphics={
+              Rectangle(
+                extent={{-100,40},{100,-40}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None),
+              Line(
+                points={{-100,40},{100,40}},
+                pattern=LinePattern.None,
+                smooth=Smooth.None),
+              Line(
+                points={{-100,-40},{-100,40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash),
+              Text(
+                extent={{-150,-20},{150,20}},
+                textString="%name",
+                lineColor={0,0,0}),
+              Line(
+                points={{-100,-40},{100,-40}},
+                pattern=LinePattern.None,
+                smooth=Smooth.None),
+              Line(
+                points={{100,-40},{100,40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash)}));
 
       end Double;
 
       partial class Single "Icon for a single-connector boundary condition"
-        //extends Names.Middle;
-        annotation (Icon(graphics={Rectangle(
-                      extent={{-100,40},{100,-40}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Line(
-                      points={{-100,-40},{-100,40},{100,40},{100,-40}},
-                      pattern=LinePattern.None,
-                      smooth=Smooth.None),Line(
-                      points={{-100,-40},{100,-40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+        // extends Names.Middle;
+        annotation (Icon(graphics={
+              Rectangle(
+                extent={{-100,40},{100,-40}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None),
+              Line(
+                points={{-100,-40},{-100,40},{100,40},{100,-40}},
+                pattern=LinePattern.None,
+                smooth=Smooth.None),
+              Line(
+                points={{-100,-40},{100,-40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}));
 
       end Single;
 

@@ -74,7 +74,7 @@ package Blocks "Imperative models (inputs and/or outputs only)"
 
       partial block PartialUnitConversion
         "Partial block to convert to or from quantities expressed in units"
-        //extends FCSys.BaseClasses.Icons.Blocks.ContinuousShort;
+        // extends FCSys.BaseClasses.Icons.Blocks.ContinuousShort;
         extends FCSys.BaseClasses.Icons.Names.Top2;
 
         Connectors.RealInput u "Real input for value in source representation"

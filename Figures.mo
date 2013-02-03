@@ -1302,7 +1302,7 @@ package Figures "Graphical layouts for documentation"
 
   model CellIcon
 
-    FCSys.Assemblies.Cells.Cell Cell
+    Assemblies.Cells.Cell Cell
       annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
 
   end CellIcon;
@@ -1578,7 +1578,7 @@ package Figures "Graphical layouts for documentation"
 
     model TraditionalReaction
 
-      //extends FCSys.BaseClasses.Icons.Names.Top2;
+      // extends FCSys.BaseClasses.Icons.Names.Top2;
 
       parameter Integer nu[:]={1,1,-1}
         "<html>stoichiometric coefficients (&nu;)</html>"
@@ -1629,7 +1629,7 @@ package Figures "Graphical layouts for documentation"
 
     model Reaction
       "Model for a reaction characterized by equilibrium of volumetric density"
-      //extends FCSys.BaseClasses.Icons.Names.Top2;
+      // extends FCSys.BaseClasses.Icons.Names.Top2;
 
       parameter Integer nu[:]={1,1,-1}
         "<html>stoichiometric coefficients (&nu;)</html>";
