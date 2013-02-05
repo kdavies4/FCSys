@@ -3363,11 +3363,11 @@ model.</p>
           Connectors.Thermal thermal "Connector to exchange heat"
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
           annotation (defaultComponentName="thermal", Diagram(graphics={Text(
-                  extent={{-8,-32},{8,-36}},
-                  lineColor={0,0,0},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  textString="thermal")}));
+                          extent={{-8,-32},{8,-36}},
+                          lineColor={0,0,0},
+                          fillColor={255,255,255},
+                          fillPattern=FillPattern.Solid,
+                          textString="thermal")}));
 
         end PartialCondition;
 
@@ -3483,7 +3483,7 @@ model.</p>
         Dialog(group="Axes with linear momentum included", compact=true));
 
       // Conditions
-      replaceable Amagat.Pressure amagat(source(k=U.atm)) constrainedby
+      replaceable Amagat.Pressure amagat(source(k(start=U.atm))) constrainedby
         Amagat.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
@@ -3491,8 +3491,8 @@ model.</p>
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{-74,20},{-54,40}})));
-      replaceable Mechanical.Velocity mechanicalX(source(k=0)) if inclLinX
-        constrainedby Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalX(source(k(start=0))) if
+        inclLinX constrainedby Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -3500,8 +3500,8 @@ model.</p>
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinX),
         Placement(transformation(extent={{-42,8},{-22,28}})));
-      replaceable Mechanical.Velocity mechanicalY(source(k=0)) if inclLinY
-        constrainedby Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalY(source(k(start=0))) if
+        inclLinY constrainedby Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -3509,8 +3509,8 @@ model.</p>
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinY),
         Placement(transformation(extent={{-10,-4},{10,16}})));
-      replaceable Mechanical.Velocity mechanicalZ(source(k=0)) if inclLinZ
-        constrainedby Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalZ(source(k(start=0))) if
+        inclLinZ constrainedby Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -3518,7 +3518,7 @@ model.</p>
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinZ),
         Placement(transformation(extent={{22,-16},{42,4}})));
-      replaceable Thermal.Temperature thermal(source(k=298.15*U.K))
+      replaceable Thermal.Temperature thermal(source(k(start=298.15*U.K)))
         constrainedby Thermal.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
@@ -3669,13 +3669,12 @@ model.</p>
       "<html>Condition for a <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector (e.g., as in a <a href=\"modelica://FCSys.Subregions.Phases\">Phase</a> model), with flows by default</html>"
 
       extends Phase(
-        redeclare Amagat.Volume amagat(source(k=-U.cc)),
-        redeclare Mechanical.Force mechanicalX,
-        redeclare Mechanical.Force mechanicalY,
-        redeclare Mechanical.Force mechanicalZ,
-        redeclare Thermal.HeatRate thermal(source(k=0)));
-      annotation (defaultComponentName="phase");
-      annotation (Documentation(info="<html>
+        redeclare Amagat.Volume amagat(source(k(start=-U.cc))),
+        redeclare Mechanical.Force mechanicalX(source(k(start=0))),
+        redeclare Mechanical.Force mechanicalY(source(k(start=0))),
+        redeclare Mechanical.Force mechanicalZ(source(k(start=0))),
+        redeclare Thermal.HeatRate thermal(source(k(start=0))));
+      annotation (defaultComponentName="phase", Documentation(info="<html>
 <p>See the <a href=\"modelica://FCSys.Conditions.InertAmagat.Phase\">Phase</a> 
 model.</p>
 </html>"));
@@ -3688,8 +3687,7 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Pressure,
           u(final unit="m/(l.T2)"),
-          final y(final unit="l3") = inert.V,
-          source(k=U.atm));
+          final y(final unit="l3") = inert.V);
 
       equation
         inert.p = u_final;
@@ -3757,8 +3755,7 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Velocity,
           u(final unit="l/T"),
-          final y(final unit="l.m/T2") = inert.mPhidot[linAxes[axis]],
-          source(k=0));
+          final y(final unit="l.m/T2") = inert.mPhidot[linAxes[axis]]);
 
       equation
         inert.phi[linAxes[axis]] = u_final;
@@ -3770,8 +3767,7 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Force,
           u(final unit="l.m/T2"),
-          final y(final unit="l/T") = inert.phi[linAxes[axis]],
-          source(k=0));
+          final y(final unit="l/T") = inert.phi[linAxes[axis]]);
 
       equation
         inert.mPhidot[linAxes[axis]] = u_final;
@@ -3780,10 +3776,8 @@ model.</p>
       end Force;
 
       model Custom "Custom expressions"
-        extends BaseClasses.PartialCondition(
-          final conditionType=BaseClasses.ConditionType.Custom,
-          y=inert.mPhidot[linAxes[axis]],
-          source(k=0));
+        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
+            y=inert.mPhidot[linAxes[axis]]);
 
         Real x=inert.phi[linAxes[axis]]
           "Expression to which the condition is applied"
@@ -3847,8 +3841,7 @@ model.</p>
           final conditionType=BaseClasses.ConditionType.Temperature,
           u(final unit="l2.m/(N.T2)", displayUnit="K"),
           source(k(start=298.15*U.K)),
-          final y(final unit="l2.m/T3") = inert.Qdot,
-          source(k=298.15*U.K));
+          final y(final unit="l2.m/T3") = inert.Qdot);
 
       equation
         inert.T = u_final;
@@ -3862,8 +3855,7 @@ model.</p>
           u(final unit="l2.m/T3"),
           final y(
             final unit="l2.m/(N.T2)",
-            displayUnit="K") = inert.T,
-          source(k=0));
+            displayUnit="K") = inert.T);
 
       equation
         inert.Qdot = u_final;
@@ -3872,10 +3864,8 @@ model.</p>
       end HeatRate;
 
       model Custom "Custom expressions"
-        extends BaseClasses.PartialCondition(
-          final conditionType=BaseClasses.ConditionType.Custom,
-          y=inert.Qdot,
-          source(k=298.15*U.K));
+        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
+            y=inert.Qdot);
 
         Real x=inert.T "Expression to which the condition is applied"
           annotation (Dialog(group="Specification"));
@@ -4020,7 +4010,7 @@ model.</p>
         Dialog(group="Axes with linear momentum included", compact=true));
 
       // Conditions
-      replaceable Dalton.Volume dalton(source(k=U.cc)) constrainedby
+      replaceable Dalton.Volume dalton(source(k(start=U.cc))) constrainedby
         Dalton.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
@@ -4028,8 +4018,8 @@ model.</p>
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{-74,20},{-54,40}})));
-      replaceable Mechanical.Velocity mechanicalX(source(k=0)) if inclLinX
-        constrainedby Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalX(source(k(start=0))) if
+        inclLinX constrainedby Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -4037,8 +4027,8 @@ model.</p>
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinX),
         Placement(transformation(extent={{-42,8},{-22,28}})));
-      replaceable Mechanical.Velocity mechanicalY(source(k=0)) if inclLinY
-        constrainedby Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalY(source(k(start=0))) if
+        inclLinY constrainedby Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -4046,8 +4036,8 @@ model.</p>
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinY),
         Placement(transformation(extent={{-10,-4},{10,16}})));
-      replaceable Mechanical.Velocity mechanicalZ(source(k=0)) if inclLinZ
-        constrainedby Mechanical.BaseClasses.PartialCondition(
+      replaceable Mechanical.Velocity mechanicalZ(source(k(start=0))) if
+        inclLinZ constrainedby Mechanical.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
         final inclLinZ=inclLinZ,
@@ -4055,7 +4045,7 @@ model.</p>
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions",enable=inclLinZ),
         Placement(transformation(extent={{22,-16},{42,4}})));
-      replaceable Thermal.Temperature thermal(source(k=298.15*U.K))
+      replaceable Thermal.Temperature thermal(source(k(start=298.15*U.K)))
         constrainedby Thermal.BaseClasses.PartialCondition(
         final inclLinX=inclLinX,
         final inclLinY=inclLinY,
@@ -4204,11 +4194,11 @@ model.</p>
       "<html>Condition for a <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector (e.g., as in a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model), with flows by default</html>"
 
       extends Species(
-        redeclare Dalton.Pressure dalton(source(k=-U.atm)),
-        redeclare Mechanical.Force mechanicalX,
-        redeclare Mechanical.Force mechanicalY,
-        redeclare Mechanical.Force mechanicalZ,
-        redeclare Thermal.HeatRate thermal(source(k=0)));
+        redeclare Dalton.Pressure dalton(source(k(start=-U.atm))),
+        redeclare Mechanical.Force mechanicalX(source(k(start=0))),
+        redeclare Mechanical.Force mechanicalY(source(k(start=0))),
+        redeclare Mechanical.Force mechanicalZ(source(k(start=0))),
+        redeclare Thermal.HeatRate thermal(source(k(start=0))));
       annotation (defaultComponentName="species",Documentation(info="<html>
 <p>See the <a href=\"modelica://FCSys.Conditions.InertDalton.Species\">Species</a> 
 model.</p>
@@ -4222,8 +4212,7 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Volume,
           u(final unit="l3"),
-          final y(final unit="m/(l.T2)") = inert.p,
-          source(k=U.cc));
+          final y(final unit="m/(l.T2)") = inert.p);
 
       equation
         inert.V = u_final;
@@ -4235,8 +4224,7 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Pressure,
           u(final unit="m/(l.T2)"),
-          final y(final unit="l3") = inert.V,
-          source(k=-U.atm));
+          final y(final unit="l3") = inert.V);
 
       equation
         inert.p = u_final;
@@ -4245,10 +4233,8 @@ model.</p>
       end Pressure;
 
       model Custom "Custom expressions"
-        extends BaseClasses.PartialCondition(
-          final conditionType=BaseClasses.ConditionType.Custom,
-          y=inert.p,
-          source(k=U.cc));
+        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
+            y=inert.p);
 
         Real x=inert.V "Expression to which the condition is applied"
           annotation (Dialog(group="Specification"));
@@ -4294,8 +4280,7 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Velocity,
           u(final unit="l/T"),
-          final y(final unit="l.m/T2") = inert.mPhidot[linAxes[axis]],
-          source(k=0));
+          final y(final unit="l.m/T2") = inert.mPhidot[linAxes[axis]]);
 
       equation
         inert.phi[linAxes[axis]] = u_final;
@@ -4307,8 +4292,7 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Force,
           u(final unit="l.m/T2"),
-          final y(final unit="l/T") = inert.phi[linAxes[axis]],
-          source(k=0));
+          final y(final unit="l/T") = inert.phi[linAxes[axis]]);
 
       equation
         inert.mPhidot[linAxes[axis]] = u_final;
@@ -4317,10 +4301,8 @@ model.</p>
       end Force;
 
       model Custom "Custom expressions"
-        extends BaseClasses.PartialCondition(
-          final conditionType=BaseClasses.ConditionType.Custom,
-          y=inert.mPhidot[linAxes[axis]],
-          source(k=0));
+        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
+            y=inert.mPhidot[linAxes[axis]]);
 
         Real x=inert.phi[linAxes[axis]]
           "Expression to which the condition is applied"
@@ -4384,8 +4366,7 @@ model.</p>
           final conditionType=BaseClasses.ConditionType.Temperature,
           u(final unit="l2.m/(N.T2)", displayUnit="K"),
           source(k(start=298.15*U.K)),
-          final y(final unit="l2.m/T3") = inert.Qdot,
-          source(k=298.15*U.K));
+          final y(final unit="l2.m/T3") = inert.Qdot);
 
       equation
         inert.T = u_final;
@@ -4399,8 +4380,7 @@ model.</p>
           u(final unit="l2.m/T3"),
           final y(
             final unit="l2.m/(N.T2)",
-            displayUnit="K") = inert.T,
-          source(k=0));
+            displayUnit="K") = inert.T);
 
       equation
         inert.Qdot = u_final;
@@ -4409,10 +4389,8 @@ model.</p>
       end HeatRate;
 
       model Custom "Custom expressions"
-        extends BaseClasses.PartialCondition(
-          final conditionType=BaseClasses.ConditionType.Custom,
-          y=inert.Qdot,
-          source(k=298.15*U.K));
+        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
+            y=inert.Qdot);
 
         Real x=inert.T "Expression to which the condition is applied"
           annotation (Dialog(group="Specification"));
@@ -4659,55 +4637,95 @@ model.</p>
       extends FaceBus.Subregion(
         gas(
           H2(
-            redeclare replaceable Face.Material.Current material,
-            redeclare replaceable Face.Transverse.Force transverse1,
-            redeclare replaceable Face.Transverse.Force transverse2,
-            redeclare replaceable Face.Thermal.HeatRate thermal),
+            redeclare replaceable Face.Material.Current material(source(k(start
+                    =0))),
+            redeclare replaceable Face.Transverse.Force transverse1(source(k(
+                    start=0))),
+            redeclare replaceable Face.Transverse.Force transverse2(source(k(
+                    start=0))),
+            redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
+                      0)))),
           H2O(
-            redeclare replaceable Face.Material.Current material,
-            redeclare replaceable Face.Transverse.Force transverse1,
-            redeclare replaceable Face.Transverse.Force transverse2,
-            redeclare replaceable Face.Thermal.HeatRate thermal),
+            redeclare replaceable Face.Material.Current material(source(k(start
+                    =0))),
+            redeclare replaceable Face.Transverse.Force transverse1(source(k(
+                    start=0))),
+            redeclare replaceable Face.Transverse.Force transverse2(source(k(
+                    start=0))),
+            redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
+                      0)))),
           N2(
-            redeclare replaceable Face.Material.Current material,
-            redeclare replaceable Face.Transverse.Force transverse1,
-            redeclare replaceable Face.Transverse.Force transverse2,
-            redeclare replaceable Face.Thermal.HeatRate thermal),
+            redeclare replaceable Face.Material.Current material(source(k(start
+                    =0))),
+            redeclare replaceable Face.Transverse.Force transverse1(source(k(
+                    start=0))),
+            redeclare replaceable Face.Transverse.Force transverse2(source(k(
+                    start=0))),
+            redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
+                      0)))),
           O2(
-            redeclare replaceable Face.Material.Current material,
-            redeclare replaceable Face.Transverse.Force transverse1,
-            redeclare replaceable Face.Transverse.Force transverse2,
-            redeclare replaceable Face.Thermal.HeatRate thermal)),
+            redeclare replaceable Face.Material.Current material(source(k(start
+                    =0))),
+            redeclare replaceable Face.Transverse.Force transverse1(source(k(
+                    start=0))),
+            redeclare replaceable Face.Transverse.Force transverse2(source(k(
+                    start=0))),
+            redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
+                      0))))),
         graphite('C+'(
-            redeclare replaceable Face.Material.Current material,
-            redeclare replaceable Face.Transverse.Force transverse1,
-            redeclare replaceable Face.Transverse.Force transverse2,
-            redeclare replaceable Face.Thermal.HeatRate thermal), 'e-'(
-            redeclare replaceable Face.Material.Current material,
-            redeclare replaceable Face.Transverse.Force transverse1,
-            redeclare replaceable Face.Transverse.Force transverse2,
-            redeclare replaceable Face.Thermal.HeatRate thermal)),
+            redeclare replaceable Face.Material.Current material(source(k(start
+                    =0))),
+            redeclare replaceable Face.Transverse.Force transverse1(source(k(
+                    start=0))),
+            redeclare replaceable Face.Transverse.Force transverse2(source(k(
+                    start=0))),
+            redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
+                      0)))), 'e-'(
+            redeclare replaceable Face.Material.Current material(source(k(start
+                    =0))),
+            redeclare replaceable Face.Transverse.Force transverse1(source(k(
+                    start=0))),
+            redeclare replaceable Face.Transverse.Force transverse2(source(k(
+                    start=0))),
+            redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
+                      0))))),
         ionomer(
           'C19HF37O5S-'(
-            redeclare replaceable Face.Material.Current material,
-            redeclare replaceable Face.Transverse.Force transverse1,
-            redeclare replaceable Face.Transverse.Force transverse2,
-            redeclare replaceable Face.Thermal.HeatRate thermal),
+            redeclare replaceable Face.Material.Current material(source(k(start
+                    =0))),
+            redeclare replaceable Face.Transverse.Force transverse1(source(k(
+                    start=0))),
+            redeclare replaceable Face.Transverse.Force transverse2(source(k(
+                    start=0))),
+            redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
+                      0)))),
           'H+'(
-            redeclare replaceable Face.Material.Current material,
-            redeclare replaceable Face.Transverse.Force transverse1,
-            redeclare replaceable Face.Transverse.Force transverse2,
-            redeclare replaceable Face.Thermal.HeatRate thermal),
+            redeclare replaceable Face.Material.Current material(source(k(start
+                    =0))),
+            redeclare replaceable Face.Transverse.Force transverse1(source(k(
+                    start=0))),
+            redeclare replaceable Face.Transverse.Force transverse2(source(k(
+                    start=0))),
+            redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
+                      0)))),
           H2O(
-            redeclare replaceable Face.Material.Current material,
-            redeclare replaceable Face.Transverse.Force transverse1,
-            redeclare replaceable Face.Transverse.Force transverse2,
-            redeclare replaceable Face.Thermal.HeatRate thermal)),
+            redeclare replaceable Face.Material.Current material(source(k(start
+                    =0))),
+            redeclare replaceable Face.Transverse.Force transverse1(source(k(
+                    start=0))),
+            redeclare replaceable Face.Transverse.Force transverse2(source(k(
+                    start=0))),
+            redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
+                      0))))),
         liquid(H2O(
-            redeclare replaceable Face.Material.Current material,
-            redeclare replaceable Face.Transverse.Force transverse1,
-            redeclare replaceable Face.Transverse.Force transverse2,
-            redeclare replaceable Face.Thermal.HeatRate thermal)));
+            redeclare replaceable Face.Material.Current material(source(k(start
+                    =0))),
+            redeclare replaceable Face.Transverse.Force transverse1(source(k(
+                    start=0))),
+            redeclare replaceable Face.Transverse.Force transverse2(source(k(
+                    start=0))),
+            redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
+                      0))))));
 
       annotation (Documentation(info="<html>
   <p>If the source of an internal specification is redeclared to a block besides
@@ -5269,8 +5287,7 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Pressure,
           u(final unit="m/(l.T2)"),
-          final y(final unit="N/T") = face.Ndot,
-          source(k=U.atm));
+          final y(final unit="N/T") = face.Ndot);
 
       equation
         face.p = u_final;
@@ -5282,8 +5299,7 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Current,
           u(final unit="N/T"),
-          final y(final unit="m/(l.T2)") = face.p,
-          source(k=0));
+          final y(final unit="m/(l.T2)") = face.p);
 
       equation
         face.Ndot = u_final;
@@ -5292,10 +5308,8 @@ model.</p>
       end Current;
 
       model Custom "Custom expressions"
-        extends BaseClasses.PartialCondition(
-          final conditionType=BaseClasses.ConditionType.Custom,
-          y=face.Ndot,
-          source(k=0));
+        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
+            y=face.Ndot);
 
         Real x=face.p "Expression to which the condition is applied"
           annotation (Dialog(group="Specification"));
@@ -5341,8 +5355,7 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Velocity,
           u(final unit="l/T"),
-          final y(final unit="l.m/T2") = face.mPhidot[orientation],
-          source(k=0));
+          final y(final unit="l.m/T2") = face.mPhidot[orientation]);
 
       equation
         face.phi[orientation] = u_final;
@@ -5354,8 +5367,7 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Force,
           u(final unit="l.m/T2"),
-          final y(final unit="l/T") = face.phi[orientation],
-          source(k=0));
+          final y(final unit="l/T") = face.phi[orientation]);
 
       equation
         face.mPhidot[orientation] = u_final;
@@ -5364,10 +5376,8 @@ model.</p>
       end Force;
 
       model Custom "Custom expressions"
-        extends BaseClasses.PartialCondition(
-          final conditionType=BaseClasses.ConditionType.Custom,
-          y=face.mPhidot[orientation],
-          source(k=0));
+        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
+            y=face.mPhidot[orientation]);
 
         Real x=face.phi[orientation]
           "Expression to which the condition is applied"
@@ -5420,8 +5430,7 @@ model.</p>
         extends Thermal.BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Temperature,
           u(final unit="l2.m/(N.T2)", displayUnit="K"),
-          final y(unit="l2.m/T3") = face.Qdot,
-          source(k=298.15*U.K));
+          final y(unit="l2.m/T3") = face.Qdot);
 
       equation
         face.T = u_final;
@@ -5435,8 +5444,7 @@ model.</p>
           u(final unit="l2.m/T3"),
           final y(
             final unit="l2.m/(N.T2)",
-            displayUnit="K") = face.T,
-          source(k=0));
+            displayUnit="K") = face.T);
 
       equation
         face.Qdot = u_final;
@@ -5445,10 +5453,8 @@ model.</p>
       end HeatRate;
 
       model Custom "Custom expressions"
-        extends BaseClasses.PartialCondition(
-          final conditionType=BaseClasses.ConditionType.Custom,
-          y=face.Qdot,
-          source(k=298.15*U.K));
+        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
+            y=face.Qdot);
 
         Real x=face.T "Expression to which the condition is applied"
           annotation (Dialog(group="Specification"));
@@ -5718,55 +5724,95 @@ model.</p>
       extends Subregion(
         gas(
           H2(
-            redeclare replaceable FacePair.Normal.Force normal,
-            redeclare replaceable FacePair.Transverse.Force transverse1,
-            redeclare replaceable FacePair.Transverse.Force transverse2,
-            redeclare replaceable FacePair.Thermal.HeatRate thermal),
+            redeclare replaceable FacePair.Material.Current material(source(k(
+                    start=0))),
+            redeclare replaceable FacePair.Transverse.Force transverse1(source(
+                  k(start=0))),
+            redeclare replaceable FacePair.Transverse.Force transverse2(source(
+                  k(start=0))),
+            redeclare replaceable FacePair.Thermal.HeatRate thermal(source(k(
+                    start=0)))),
           H2O(
-            redeclare replaceable FacePair.Normal.Force normal,
-            redeclare replaceable FacePair.Transverse.Force transverse1,
-            redeclare replaceable FacePair.Transverse.Force transverse2,
-            redeclare replaceable FacePair.Thermal.HeatRate thermal),
+            redeclare replaceable FacePair.Material.Current material(source(k(
+                    start=0))),
+            redeclare replaceable FacePair.Transverse.Force transverse1(source(
+                  k(start=0))),
+            redeclare replaceable FacePair.Transverse.Force transverse2(source(
+                  k(start=0))),
+            redeclare replaceable FacePair.Thermal.HeatRate thermal(source(k(
+                    start=0)))),
           N2(
-            redeclare replaceable FacePair.Normal.Force normal,
-            redeclare replaceable FacePair.Transverse.Force transverse1,
-            redeclare replaceable FacePair.Transverse.Force transverse2,
-            redeclare replaceable FacePair.Thermal.HeatRate thermal),
+            redeclare replaceable FacePair.Material.Current material(source(k(
+                    start=0))),
+            redeclare replaceable FacePair.Transverse.Force transverse1(source(
+                  k(start=0))),
+            redeclare replaceable FacePair.Transverse.Force transverse2(source(
+                  k(start=0))),
+            redeclare replaceable FacePair.Thermal.HeatRate thermal(source(k(
+                    start=0)))),
           O2(
-            redeclare replaceable FacePair.Normal.Force normal,
-            redeclare replaceable FacePair.Transverse.Force transverse1,
-            redeclare replaceable FacePair.Transverse.Force transverse2,
-            redeclare replaceable FacePair.Thermal.HeatRate thermal)),
+            redeclare replaceable FacePair.Material.Current material(source(k(
+                    start=0))),
+            redeclare replaceable FacePair.Transverse.Force transverse1(source(
+                  k(start=0))),
+            redeclare replaceable FacePair.Transverse.Force transverse2(source(
+                  k(start=0))),
+            redeclare replaceable FacePair.Thermal.HeatRate thermal(source(k(
+                    start=0))))),
         graphite('C+'(
-            redeclare replaceable FacePair.Normal.Force normal,
-            redeclare replaceable FacePair.Transverse.Force transverse1,
-            redeclare replaceable FacePair.Transverse.Force transverse2,
-            redeclare replaceable FacePair.Thermal.HeatRate thermal), 'e-'(
-            redeclare replaceable FacePair.Normal.Force normal,
-            redeclare replaceable FacePair.Transverse.Force transverse1,
-            redeclare replaceable FacePair.Transverse.Force transverse2,
-            redeclare replaceable FacePair.Thermal.HeatRate thermal)),
+            redeclare replaceable FacePair.Material.Current material(source(k(
+                    start=0))),
+            redeclare replaceable FacePair.Transverse.Force transverse1(source(
+                  k(start=0))),
+            redeclare replaceable FacePair.Transverse.Force transverse2(source(
+                  k(start=0))),
+            redeclare replaceable FacePair.Thermal.HeatRate thermal(source(k(
+                    start=0)))), 'e-'(
+            redeclare replaceable FacePair.Material.Current material(source(k(
+                    start=0))),
+            redeclare replaceable FacePair.Transverse.Force transverse1(source(
+                  k(start=0))),
+            redeclare replaceable FacePair.Transverse.Force transverse2(source(
+                  k(start=0))),
+            redeclare replaceable FacePair.Thermal.HeatRate thermal(source(k(
+                    start=0))))),
         ionomer(
           'C19HF37O5S-'(
-            redeclare replaceable FacePair.Normal.Force normal,
-            redeclare replaceable FacePair.Transverse.Force transverse1,
-            redeclare replaceable FacePair.Transverse.Force transverse2,
-            redeclare replaceable FacePair.Thermal.HeatRate thermal),
+            redeclare replaceable FacePair.Material.Current material(source(k(
+                    start=0))),
+            redeclare replaceable FacePair.Transverse.Force transverse1(source(
+                  k(start=0))),
+            redeclare replaceable FacePair.Transverse.Force transverse2(source(
+                  k(start=0))),
+            redeclare replaceable FacePair.Thermal.HeatRate thermal(source(k(
+                    start=0)))),
           'H+'(
-            redeclare replaceable FacePair.Normal.Force normal,
-            redeclare replaceable FacePair.Transverse.Force transverse1,
-            redeclare replaceable FacePair.Transverse.Force transverse2,
-            redeclare replaceable FacePair.Thermal.HeatRate thermal),
+            redeclare replaceable FacePair.Material.Current material(source(k(
+                    start=0))),
+            redeclare replaceable FacePair.Transverse.Force transverse1(source(
+                  k(start=0))),
+            redeclare replaceable FacePair.Transverse.Force transverse2(source(
+                  k(start=0))),
+            redeclare replaceable FacePair.Thermal.HeatRate thermal(source(k(
+                    start=0)))),
           H2O(
-            redeclare replaceable FacePair.Normal.Force normal,
-            redeclare replaceable FacePair.Transverse.Force transverse1,
-            redeclare replaceable FacePair.Transverse.Force transverse2,
-            redeclare replaceable FacePair.Thermal.HeatRate thermal)),
+            redeclare replaceable FacePair.Material.Current material(source(k(
+                    start=0))),
+            redeclare replaceable FacePair.Transverse.Force transverse1(source(
+                  k(start=0))),
+            redeclare replaceable FacePair.Transverse.Force transverse2(source(
+                  k(start=0))),
+            redeclare replaceable FacePair.Thermal.HeatRate thermal(source(k(
+                    start=0))))),
         liquid(H2O(
-            redeclare replaceable FacePair.Normal.Force normal,
-            redeclare replaceable FacePair.Transverse.Force transverse1,
-            redeclare replaceable FacePair.Transverse.Force transverse2,
-            redeclare replaceable FacePair.Thermal.HeatRate thermal)));
+            redeclare replaceable FacePair.Material.Current material(source(k(
+                    start=0))),
+            redeclare replaceable FacePair.Transverse.Force transverse1(source(
+                  k(start=0))),
+            redeclare replaceable FacePair.Transverse.Force transverse2(source(
+                  k(start=0))),
+            redeclare replaceable FacePair.Thermal.HeatRate thermal(source(k(
+                    start=0))))));
       annotation (defaultComponentName="subregion");
 
     end SubregionFlow;
@@ -6237,25 +6283,29 @@ model.</p>
 
       extends FCSys.Conditions.BaseClasses.Icons.Double;
 
-      replaceable Material.Pressure material constrainedby
-        Normal.BaseClasses.PartialCondition "Material" annotation (
+      replaceable Material.Pressure material(source(k(start=U.atm)))
+        constrainedby Normal.BaseClasses.PartialCondition "Material"
+        annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{-58,10},{-38,30}})));
-      replaceable Transverse.Velocity transverse1(final orientation=Orientation.preceding)
-        constrainedby Transverse.BaseClasses.PartialCondition
+      replaceable Transverse.Velocity transverse1(final orientation=Orientation.preceding,
+          source(k(start=0))) constrainedby
+        Transverse.BaseClasses.PartialCondition
         "<html>1<sup>st</sup> transverse</html>" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{-26,-2},{-6,18}})));
-      replaceable Transverse.Velocity transverse2(final orientation=Orientation.following)
-        constrainedby Transverse.BaseClasses.PartialCondition
+      replaceable Transverse.Velocity transverse2(final orientation=Orientation.following,
+          source(k(start=0))) constrainedby
+        Transverse.BaseClasses.PartialCondition
         "<html>2<sup>nd</sup> transverse</html>" annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{6,-18},{26,2}})));
-      replaceable Thermal.Temperature thermal constrainedby
-        Thermal.BaseClasses.PartialCondition "Thermal" annotation (
+      replaceable Thermal.Temperature thermal(source(k(start=298.15*U.K)))
+        constrainedby Thermal.BaseClasses.PartialCondition "Thermal"
+        annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Conditions"),
         Placement(transformation(extent={{38,-30},{58,-10}})));
@@ -6406,8 +6456,7 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.CurrentAreic,
           u(final unit="N/(l2.T)"),
-          final y(final unit="l.m/T2") = negative.mPhidot_0 + positive.mPhidot_0,
-          source(k=U.atm));
+          final y(final unit="l.m/T2") = negative.mPhidot_0 + positive.mPhidot_0);
 
       equation
         negative.J = u_final;
@@ -6427,8 +6476,7 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Force,
           u(final unit="l.m/T2"),
-          final y(final unit="N/(l2.T)") = negative.J,
-          source(k=0));
+          final y(final unit="N/(l2.T)") = negative.J);
 
       equation
         negative.mPhidot_0 + positive.mPhidot_0 = u_final;
@@ -6444,10 +6492,8 @@ model.</p>
       end Force;
 
       model Custom "Custom expressions"
-        extends BaseClasses.PartialCondition(
-          final conditionType=BaseClasses.ConditionType.Custom,
-          y=negative.mPhidot_0 + positive.mPhidot_0,
-          source(k=U.atm));
+        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
+            y=negative.mPhidot_0 + positive.mPhidot_0);
 
         Real x=negative.J "Expression to which the condition is applied"
           annotation (Dialog(group="Specification"));
@@ -6503,8 +6549,7 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Velocity,
           u(final unit="l/T"),
-          final y(final unit="l.m/T2") = negative.mPhidot[orientation],
-          source(k=0));
+          final y(final unit="l.m/T2") = negative.mPhidot[orientation]);
 
       equation
         negative.phi[orientation] - positive.phi[orientation] = u_final;
@@ -6518,8 +6563,7 @@ model.</p>
           final conditionType=BaseClasses.ConditionType.Force,
           u(final unit="l.m/T2"),
           final y(final unit="l/T") = negative.phi[orientation] - positive.phi[
-            orientation],
-          source(k=0));
+            orientation]);
 
       equation
         negative.mPhidot[orientation] = u_final;
@@ -6528,10 +6572,8 @@ model.</p>
       end Force;
 
       model Custom "Custom expressions"
-        extends BaseClasses.PartialCondition(
-          final conditionType=BaseClasses.ConditionType.Custom,
-          y=negative.mPhidot[orientation],
-          source(k=0));
+        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
+            y=negative.mPhidot[orientation]);
 
         Real x=negative.phi[orientation] - positive.phi[orientation]
           "Expression to which the condition is applied"
@@ -6596,8 +6638,7 @@ model.</p>
         extends Thermal.BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Temperature,
           u(final unit="l2.m/(N.T2)", displayUnit="K"),
-          final y(unit="l2.m/T3") = negative.Qdot,
-          source(k=298.15*U.K));
+          final y(unit="l2.m/T3") = negative.Qdot);
 
       equation
         negative.T - positive.T = u_final;
@@ -6612,8 +6653,7 @@ model.</p>
           u(final unit="l2.m/T3"),
           final y(
             final unit="l2.m/(N.T2)",
-            displayUnit="K") = negative.T - positive.T,
-          source(k=0));
+            displayUnit="K") = negative.T - positive.T);
 
       equation
         negative.Qdot = u_final;
@@ -6623,10 +6663,8 @@ model.</p>
 
       model Custom
         "Apply condition to a custom expression, with conversation of energy"
-        extends BaseClasses.PartialCondition(
-          final conditionType=BaseClasses.ConditionType.Custom,
-          y=negative.Qdot,
-          source(k=298.15*U.K));
+        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
+            y=negative.Qdot);
 
         Real x=negative.T - positive.T
           "Expression to which the condition is applied"
