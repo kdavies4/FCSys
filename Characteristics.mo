@@ -54,16 +54,16 @@ package Characteristics
       output Q.CapacityThermalSpecific c_p_O2=DataO2.c_p(T, p);
       //
       // Isochoric specific heat capacity
-      output Q.CapacityThermalSpecific 'c_V_C+'='DataC+'.c_V(T, p);
-      output Q.CapacityThermalSpecific 'c_V_C19HF37O5S-'='DataC19HF37O5S-'.c_V(
+      output Q.CapacityThermalSpecific 'c_v_C+'='DataC+'.c_v(T, p);
+      output Q.CapacityThermalSpecific 'c_v_C19HF37O5S-'='DataC19HF37O5S-'.c_v(
           T, p);
-      output Q.CapacityThermalSpecific 'c_V_e-'='Datae-'.c_V(T, p);
-      output Q.CapacityThermalSpecific 'c_V_H+'='DataH+'.c_V(T, p);
-      output Q.CapacityThermalSpecific c_V_H2=DataH2.c_V(T, p);
-      output Q.CapacityThermalSpecific c_V_H2O=DataH2O.c_V(T, p);
-      output Q.CapacityThermalSpecific c_V_H2O_liquid=DataH2OLiquid.c_V(T, p);
-      output Q.CapacityThermalSpecific c_V_N2=DataN2.c_V(T, p);
-      output Q.CapacityThermalSpecific c_V_O2=DataO2.c_V(T, p);
+      output Q.CapacityThermalSpecific 'c_v_e-'='Datae-'.c_v(T, p);
+      output Q.CapacityThermalSpecific 'c_v_H+'='DataH+'.c_v(T, p);
+      output Q.CapacityThermalSpecific c_v_H2=DataH2.c_v(T, p);
+      output Q.CapacityThermalSpecific c_v_H2O=DataH2O.c_v(T, p);
+      output Q.CapacityThermalSpecific c_v_H2O_liquid=DataH2OLiquid.c_v(T, p);
+      output Q.CapacityThermalSpecific c_v_N2=DataN2.c_v(T, p);
+      output Q.CapacityThermalSpecific c_v_O2=DataO2.c_v(T, p);
       //
       // Gibbs potential
       output Q.Potential 'g_C+'='DataC+'.g(T, p);
@@ -961,9 +961,10 @@ package Characteristics
           input Q.TemperatureAbsolute T "Temperature";
           input Q.PressureAbsolute p "Pressure";
           output Q.CapacityThermalSpecific c_p_resid
-            "Partial derivative of integral of (delh/delp)_T*dp up to p w.r.t. T";
+            "Temperature times the partial derivative of the integral of (dels/delp)_T*dp up to p w.r.t. T";
 
         algorithm
+          // **Update this and test it.
           c_p_resid := Polynomial.F(
                     p,
                     {Polynomial.f(
@@ -972,15 +973,29 @@ package Characteristics
                 specVolPow[1] - specVolPow[2] + i - j + 1) for j in 1:size(b_v,
                 2)},  specVolPow[2] - specVolPow[1] - i) for i in 1:size(b_v, 1)},
                     specVolPow[1]) annotation (Inline=true);
-          // See h_resid() in Characteristic.h for the integral of (delh/delp)_T*dp.
-          // This is the isobaric partial derivative of that function with respect
-          // to temperature.  It is zero for an ideal gas.
+          s_resid := Polynomial.F(
+                    p,
+                    {Polynomial.f(
+                      T,
+                      b_v[i, :] .* {specVolPow[1] - specVolPow[2] + i - j for j
+                 in 1:size(b_v, 2)},
+                      specVolPow[2] - specVolPow[1] - i) for i in rowLimits[1]:
+              rowLimits[2]},
+                    specVolPow[1] + rowLimits[1] - 1) annotation (Inline=true);
+
+          // See s_resid() in Characteristic.s for the integral of (dels/delp)_T*dp.
+          // This is temperature times the isobaric partial derivative of that function
+          // with respect to temperature.  It is zero for an ideal gas.
 
         end c_p_resid;
 
       algorithm
-        c_p := c0_p(T) + c_p_resid(T, p) - c_p_resid(T, if phase == "gas" then
-          0 else p0) annotation (Inline=true);
+        c_p := c0_p(T) + c_p_resid(T, p) - c_p_resid(T, if phase <> "gas" then
+          p0 else 0) + s_resid(T, p) - (if phase <> "gas" then s_resid(T, p0)
+           else s_resid(
+                T,
+                p0,
+                {1,-specVolPow[1]})) annotation (Inline=true);
         // Note:  [Dymond2002, p.17, eqs. 1.45 & 1.46] may be incorrect.
         annotation (Documentation(info="<html>
   <p>For an ideal gas, this function is independent of pressure
@@ -988,16 +1003,16 @@ package Characteristics
   </html>"));
       end c_p;
 
-      function c_V
-        "<html>Isochoric specific heat capacity as a function of temperature and pressure (<i>c</i><sub><i>V</i></sub>)</html>"
+      function c_v
+        "<html>Isochoric specific heat capacity as a function of temperature and pressure (<i>c</i><sub><i>v</i></sub>)</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.PressureAbsolute p=U.atm "Pressure";
-        output Q.CapacityThermalSpecific c_V "Isochoric specific heat capacity";
+        output Q.CapacityThermalSpecific c_v "Isochoric specific heat capacity";
 
       algorithm
-        c_V := c_p(T, p) - T*dp_Tv(
+        c_v := c_p(T, p) - T*dp_Tv(
                 T,
                 v_Tp(T, p),
                 dT=1,
@@ -1006,14 +1021,14 @@ package Characteristics
                 p,
                 dT=1,
                 dp=0) "[Moran2004, p. 546, eq. 11.66]" annotation (Inline=true);
-        // Note 1:  This reduces to c_V = c_p - 1 for an ideal gas (where in
+        // Note 1:  This reduces to c_v = c_p - 1 for an ideal gas (where in
         // FCSys 1 = U.R).
         // Note 2:  [Dymond2002, p.17, eqs. 1.43 & 1.44] may be incorrect.
         annotation (Documentation(info="<html>
   <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
   </html>"));
-      end c_V;
+      end c_v;
 
       function dp_Tv
         "<html>Derivative of pressure as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_Tv\">p_Tv</a>()</html>"
@@ -1157,7 +1172,7 @@ package Characteristics
           "Residual specific enthalpy for pressure adjustment for selected rows of b_v"
           input Q.TemperatureAbsolute T "Temperature";
           input Q.PressureAbsolute p "Pressure";
-          input Integer rowLimits[2]
+          input Integer rowLimits[2]={1,size(b_v, 1)}
             "Beginning and ending indices of rows of b_v to be included";
           output Q.Potential h_resid
             "Integral of (delh/delp)_T*dp up to p with zero integration constant (for selected rows)";
@@ -1191,20 +1206,15 @@ package Characteristics
         // instead of T_lim_c[end] due to:
         //    "Error, not all 'end' could be expanded."
 
-        h := smooth(1, sum((if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i
-           + 1] or i == size(T_lim_c, 1) - 1) then h0_i(T, i) else 0) for i in
-          1:size(b_c, 1))) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K
-           then Deltah0 else 0) - (if referenceEnthalpy <> ReferenceEnthalpy.EnthalpyOfFormationAt25degC
-           then Deltah0_f else 0) + h_offset + h_resid(
-                T,
-                p,
-                {1,size(b_v, 1)}) - (if phase == "gas" then h_resid(
+        h := smooth(1, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i +
+          1] or i == size(b_c, 1)) then h0_i(T, i) else 0 for i in 1:size(b_c,
+          1))) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K then
+          Deltah0 else 0) - (if referenceEnthalpy <> ReferenceEnthalpy.EnthalpyOfFormationAt25degC
+           then Deltah0_f else 0) + h_offset + h_resid(T, p) - (if phase <>
+          "gas" then h_resid(T, p0) else h_resid(
                 T,
                 p0,
-                {1,-specVolPow[1]}) else h_resid(
-                T,
-                p0,
-                {1,size(b_v, 1)}))
+                {1,-specVolPow[1]}))
           annotation (
           InlineNoEvent=true,
           Inline=true,
@@ -1283,7 +1293,7 @@ second, or bulk dynamic viscosity and specific volume (see
         output Q.ResistivityThermal R "Thermal resistivity";
 
       algorithm
-        R := alpha(T)/c_V(T, p) annotation (Inline=true);
+        R := alpha(T)/c_v(T, p) annotation (Inline=true);
 
       end R;
 
@@ -1334,7 +1344,7 @@ second, or bulk dynamic viscosity and specific volume (see
           "Residual specific entropy for pressure adjustment for selected rows of b_v"
           input Q.TemperatureAbsolute T "Temperature";
           input Q.PressureAbsolute p "Pressure";
-          input Integer rowLimits[2]
+          input Integer rowLimits[2]={1,size(b_v, 1)}
             "Beginning and ending indices of rows of b_v to be included";
           output Q.NumberAbsolute s_resid
             "Integral of (dels/delp)_T*dp up to p with zero integration constant (for selected rows)";
@@ -1359,24 +1369,19 @@ second, or bulk dynamic viscosity and specific volume (see
   assert(T_lim_c[1] <= T and T <= T_lim_c[size(T_lim_c, 1)], "Temperature " +
     String(T/U.K) + " K is out of bounds for " + name + " ([" + String(T_lim_c[1]
     /U.K) + ", " + String(T_lim_c[size(T_lim_c, 1)]/U.K) + "] K).");
-        */
+  */
         // Note:  This is commented out so that the function can be inlined.
         // Note:  In Dymola 7.4 T_lim_c[size(T_lim_c, 1)] must be used
         // instead of T_lim_c[end] due to:
         //    "Error, not all 'end' could be expanded.";
 
-        s := smooth(1, sum((if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i
-           + 1] or i == size(T_lim_c, 1) - 1) then s0_i(T, i) else 0) for i in
-          1:size(b_c, 1))) + s_resid(
-                T,
-                p,
-                {1,size(b_v, 1)}) - (if phase == "gas" then s_resid(
+        s := smooth(1, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i +
+          1] or i == size(b_c, 1)) then s0_i(T, i) else 0 for i in 1:size(b_c,
+          1))) + s_resid(T, p) - (if phase <> "gas" then s_resid(T, p0) else
+          s_resid(
                 T,
                 p0,
-                {1,-specVolPow[1]}) else s_resid(
-                T,
-                p0,
-                {1,size(b_v, 1)}))
+                {1,-specVolPow[1]}))
           annotation (
           InlineNoEvent=true,
           Inline=true,

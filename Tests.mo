@@ -204,7 +204,7 @@ package Tests "Models and functions for test and validation"
           extends Modelica.Icons.Example;
 
           c_p testc_p;
-          c_V testc_V;
+          c_v testc_v;
           F testF;
           R testR;
           annotation (Documentation(info="<html><p>If this model simulates without failure,
@@ -268,7 +268,7 @@ package Tests "Models and functions for test and validation"
 
         end F;
 
-        model c_V
+        model c_v
           "<html>Test the isochoric specific heat capacity of H<sub>2</sub> gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, p. 794]</html>"
 
           import FCSys.Test.assertValue;
@@ -279,23 +279,23 @@ package Tests "Models and functions for test and validation"
           parameter Q.NumberAbsolute eps=2e-3 "Relative error tolerance";
           parameter Q.TemperatureAbsolute T[:]={250,300,350,400,600,800,1000}*U.K
             "Temperatures";
-          final parameter Q.CapacityThermalSpecific c_V_model[:]=Data.c_V(T)
+          final parameter Q.CapacityThermalSpecific c_v_model[:]=Data.c_v(T)
             "Correlated isochoric specific heat capacity";
-          parameter Q.CapacityThermalSpecific c_V_table[size(T, 1)]=Data.m*{
+          parameter Q.CapacityThermalSpecific c_v_table[size(T, 1)]=Data.m*{
               9.927,10.183,10.302,10.352,10.422,10.570,10.859}*U.J/(U.g*U.K)
             "Tabulated isochoric specific heat capacity";
 
         initial equation
           for i in 1:size(T, 1) loop
             assertValue(
-                      actual=c_V_model[i],
-                      expected=c_V_table[i],
-                      eps=eps*c_V_table[i],
+                      actual=c_v_model[i],
+                      expected=c_v_table[i],
+                      eps=eps*c_v_table[i],
                       name="of isochoric specific heat capacity of " + Data.formula
                  + " as ideal gas at " + String(T[i]/U.K) + " K");
           end for;
 
-        end c_V;
+        end c_v;
 
         model R
           "<html>Test the thermal resistivity of H<sub>2</sub> gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 919&ndash;920]</html>"
@@ -482,7 +482,7 @@ package Tests "Models and functions for test and validation"
           extends Modelica.Icons.Example;
 
           c_p testc_p;
-          c_V testc_V;
+          c_v testc_v;
           h testh;
           s tests;
           F testF;
@@ -504,17 +504,17 @@ package Tests "Models and functions for test and validation"
 
         end c_p;
 
-        model c_V
+        model c_v
           "<html>Test the isochoric specific heat capacity of N<sub>2</sub> gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, p. 794]</html>"
 
-          extends H2.Gas.c_V(
+          extends H2.Gas.c_v(
             redeclare package Data = FCSys.Characteristics.N2.Gas (b_v=[1],
                   specVolPow={-1,0}),
             eps=0.02,
-            c_V_table=Data.m*{0.742,0.743,0.744,0.757,0.778,0.825,0.870}*U.J/(U.g
+            c_v_table=Data.m*{0.742,0.743,0.744,0.757,0.778,0.825,0.870}*U.J/(U.g
                 *U.K));
 
-        end c_V;
+        end c_v;
 
         model h
           "<html>Test the specific enthalpy of N<sub>2</sub> gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, pp. 799&ndash;801]</html>"
@@ -579,7 +579,7 @@ package Tests "Models and functions for test and validation"
           extends Modelica.Icons.Example;
 
           c_p testc_p;
-          c_V testc_V;
+          c_v testc_v;
           h testh;
           s tests;
           F testF;
@@ -601,17 +601,17 @@ package Tests "Models and functions for test and validation"
 
         end c_p;
 
-        model c_V
+        model c_v
           "<html>Test the isochoric specific heat capacity of O<sub>2</sub> gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, p. 794]</html>"
 
-          extends H2.Gas.c_V(
+          extends H2.Gas.c_v(
             redeclare package Data = FCSys.Characteristics.O2.Gas (b_v=[1],
                   specVolPow={-1,0}),
             eps=1e-3,
-            c_V_table=Data.m*{0.653,0.658,0.668,0.681,0.743,0.794,0.830}*U.J/(U.g
+            c_v_table=Data.m*{0.653,0.658,0.668,0.681,0.743,0.794,0.830}*U.J/(U.g
                 *U.K));
 
-        end c_V;
+        end c_v;
 
         model h
           "<html>Test the specific enthalpy of O<sub>2</sub> gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, pp. 794, 799&ndash;801]</html>"
@@ -676,7 +676,7 @@ package Tests "Models and functions for test and validation"
           extends Modelica.Icons.Example;
 
           c_p testc_p;
-          c_V testc_V;
+          c_v testc_v;
           dp testdp;
           dv testdv;
           F testF;
@@ -752,8 +752,8 @@ package Tests "Models and functions for test and validation"
     then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
         end c_p;
 
-        model c_V
-          "<html>Test <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.c_V\">c_V</a>() based on its relation to <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.h\">h</a>() - p&middot;v</html>"
+        model c_v
+          "<html>Test <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.c_v\">c_v</a>() based on its relation to <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.h\">h</a>() - p&middot;v</html>"
           // This approach is based on [Dassault2010, vol. 2, pp. 300-301].
 
           extends Modelica.Icons.Example;
@@ -773,7 +773,7 @@ package Tests "Models and functions for test and validation"
 
           // Results of functions
           Q.Potential u "Internal potential";
-          Q.Potential y "Integral of c_V*dT";
+          Q.Potential y "Integral of c_v*dT";
 
         initial equation
           y = u;
@@ -781,13 +781,13 @@ package Tests "Models and functions for test and validation"
         equation
           p = Data.p_Tv(T, v);
           u = Data.h(T, p) - p*v;
-          der(y) = Data.c_V(T, p)*der(T);
+          der(y) = Data.c_v(T, p)*der(T);
 
           assert(abs(u - y) < 1e-5*U.V, "The relationship is incorrect.");
           // Note:  The simulation tolerance is set to 1e-8.
           annotation (Documentation(info="<html><p>If this model simulates without failure,
     then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
-        end c_V;
+        end c_v;
 
         model dp
           "<html>Test <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp_Tv\">dp_Tv</a>() based on its relation to <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_Tv\">p_Tv</a>()</html>"

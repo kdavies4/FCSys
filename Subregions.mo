@@ -4099,8 +4099,8 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
       output Q.PressureAbsolute q[n_lin](each stateSelect=StateSelect.never) =
         Data.m*phi .* I ./ (2*A[cartAxes]) if environment.analysis
         "Dynamic pressure";
-      output Q.CapacityThermalSpecific c_V(stateSelect=StateSelect.never) =
-        Data.c_V(T, p) if environment.analysis
+      output Q.CapacityThermalSpecific c_v(stateSelect=StateSelect.never) =
+        Data.c_v(T, p) if environment.analysis
         "Isochoric specific heat capacity";
       output Q.PressureReciprocal beta_T(stateSelect=StateSelect.never) =
         Data.beta_T(T, p) if environment.analysis
@@ -4305,7 +4305,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         "**fix Half of base resistivity factor for dynamic compressibility";
       Q.Resistivity halfalpha_F(nominal=5*U.cm/U.A) = F*Data.m/2
         "Half of base resistivity factor for dynamic fluidity";
-      Q.Resistivity halfalpha_R(nominal=5*U.cm/U.A) = R*Data.c_V(T, p)/2
+      Q.Resistivity halfalpha_R(nominal=5*U.cm/U.A) = R*Data.c_v(T, p)/2
         "Half of base resistivity factor for thermal resistivity";
 
       // **Efforts and flows of the conditional connectors
@@ -5251,100 +5251,83 @@ Check the chemical formulas and the specific masses of the species.");
   <code>thermoOpt==ThermoOpt.ClosedDiabatic</code>), then the interface will be closed.
   note applies to the viscous/inviscous and diabatic/adiabatic properties.</li>
   <li>The x-axis component of linear momentum is included by default.  At least one component must be included.</li>
-  </ul></p></html>"), Icon(graphics={
-            Line(
-              points={{-100,0},{-40,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesX,
-              smooth=Smooth.None),
-            Line(
-              points={{0,-40},{0,-100}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesY,
-              smooth=Smooth.None),
-            Line(
-              points={{40,40},{50,50}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesZ,
-              smooth=Smooth.None),
-            Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                  16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None,
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-40,-40},{-16,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{-16,40},{-16,-16},{40,-16}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash),
-            Line(
-              points={{-40,0},{28,0}},
-              color={210,210,210},
-              visible=inclFacesX,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,28},{0,-40}},
-              color={210,210,210},
-              visible=inclFacesY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{28,0},{100,0}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesX,
-              smooth=Smooth.None),
-            Line(
-              points={{0,100},{0,28}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesY,
-              smooth=Smooth.None),
-            Line(
-              points={{-12,-12},{40,40}},
-              color={210,210,210},
-              visible=inclFacesZ,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-40,16},{16,16},{16,-40}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{-50,-50},{-12,-12}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=inclFacesZ,
-              smooth=Smooth.None),
-            Polygon(
-              points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},{-40,
-                  16}},
-              lineColor={127,127,127},
-              smooth=Smooth.None),
-            Line(
-              points={{40,40},{16,16}},
-              color={127,127,127},
-              smooth=Smooth.None),
-            Rectangle(
-              extent={{-100,56},{100,96}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-            Text(
-              extent={{-100,56},{100,96}},
-              textString="%name",
-              lineColor={0,0,0})}));
+  </ul></p></html>"), Icon(graphics={Line(
+                  points={{-100,0},{-40,0}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesX,
+                  smooth=Smooth.None),Line(
+                  points={{0,-40},{0,-100}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesY,
+                  smooth=Smooth.None),Line(
+                  points={{40,40},{50,50}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesZ,
+                  smooth=Smooth.None),Polygon(
+                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
+                {-40,16}},
+                  lineColor={127,127,127},
+                  smooth=Smooth.None,
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Line(
+                  points={{-40,-40},{-16,-16}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),Line(
+                  points={{-16,40},{-16,-16},{40,-16}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash),Line(
+                  points={{-40,0},{28,0}},
+                  color={210,210,210},
+                  visible=inclFacesX,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,28},{0,-40}},
+                  color={210,210,210},
+                  visible=inclFacesY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{28,0},{100,0}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesX,
+                  smooth=Smooth.None),Line(
+                  points={{0,100},{0,28}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesY,
+                  smooth=Smooth.None),Line(
+                  points={{-12,-12},{40,40}},
+                  color={210,210,210},
+                  visible=inclFacesZ,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-40,16},{16,16},{16,-40}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{-50,-50},{-12,-12}},
+                  color={127,127,127},
+                  thickness=0.5,
+                  visible=inclFacesZ,
+                  smooth=Smooth.None),Polygon(
+                  points={{-40,16},{-16,40},{40,40},{40,-16},{16,-40},{-40,-40},
+                {-40,16}},
+                  lineColor={127,127,127},
+                  smooth=Smooth.None),Line(
+                  points={{40,40},{16,16}},
+                  color={127,127,127},
+                  smooth=Smooth.None),Rectangle(
+                  extent={{-100,56},{100,96}},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  pattern=LinePattern.None),Text(
+                  extent={{-100,56},{100,96}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
 
     end PartialSubregion;
 
