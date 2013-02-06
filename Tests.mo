@@ -721,7 +721,7 @@ package Tests "Models and functions for test and validation"
         end TestProperties;
 
         model c_p
-          "<html>Test <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.c_p\">c_p</a>() based on its relation to <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.h\">h</a>()</html>"
+          "<html>Test <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.c_p\">c_p</a>() based on its relation to <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.s\">s</a>()</html>"
           // This approach is based on [Dassault2010, vol. 2, pp. 300-301].
 
           extends Modelica.Icons.Example;
@@ -736,17 +736,17 @@ package Tests "Models and functions for test and validation"
           // Note:  The values are arbitrary but must have sufficient richness.
 
           // Results of functions
-          Q.Potential h "Specific enthalpy";
-          Q.Potential y "Integral of c_p*dT";
+          Q.Potential s "Specific entropy";
+          Q.Potential y "Integral of (c_p/T)*dT";
 
         initial equation
-          y = h;
+          y = s;
 
         equation
-          h = Data.h(T, p);
-          der(y) = Data.c_p(T, p)*der(T);
+          s = Data.s(T, p);
+          T*der(y) = Data.c_p(T, p)*der(T) "c_p = T*(dels/delT)_p";
 
-          assert(abs(h - y) < 1e-7*U.V, "The relationship is incorrect.");
+          assert(abs(s - y) < 1e-7*U.V, "The relationship is incorrect.");
           // Note:  The simulation tolerance is set to 1e-8.
           annotation (Documentation(info="<html><p>If this model simulates without failure,
     then the test has passed.</p></html>"), experiment(Tolerance=1e-8));
@@ -781,7 +781,7 @@ package Tests "Models and functions for test and validation"
         equation
           p = Data.p_Tv(T, v);
           u = Data.h(T, p) - p*v;
-          der(y) = Data.c_v(T, p)*der(T);
+          der(y) = Data.c_v(T, p)*der(T) "c_v = (delu/delT)_v";
 
           assert(abs(u - y) < 1e-5*U.V, "The relationship is incorrect.");
           // Note:  The simulation tolerance is set to 1e-8.

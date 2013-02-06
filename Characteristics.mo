@@ -960,43 +960,35 @@ package Characteristics
           "Residual isobaric specific heat capacity for pressure adjustment"
           input Q.TemperatureAbsolute T "Temperature";
           input Q.PressureAbsolute p "Pressure";
+          input Integer rowLimits[2]={1,size(b_v, 1)}
+            "Beginning and ending indices of rows of b_v to be included";
           output Q.CapacityThermalSpecific c_p_resid
             "Temperature times the partial derivative of the integral of (dels/delp)_T*dp up to p w.r.t. T";
 
         algorithm
-          // **Update this and test it.
           c_p_resid := Polynomial.F(
                     p,
                     {Polynomial.f(
                       T,
                       b_v[i, :] .* {(specVolPow[2] - specVolPow[1] + j - i)*(
                 specVolPow[1] - specVolPow[2] + i - j + 1) for j in 1:size(b_v,
-                2)},  specVolPow[2] - specVolPow[1] - i) for i in 1:size(b_v, 1)},
-                    specVolPow[1]) annotation (Inline=true);
-          s_resid := Polynomial.F(
-                    p,
-                    {Polynomial.f(
-                      T,
-                      b_v[i, :] .* {specVolPow[1] - specVolPow[2] + i - j for j
-                 in 1:size(b_v, 2)},
-                      specVolPow[2] - specVolPow[1] - i) for i in rowLimits[1]:
+                2)},  specVolPow[2] - specVolPow[1] - i) for i in rowLimits[1]:
               rowLimits[2]},
-                    specVolPow[1] + rowLimits[1] - 1) annotation (Inline=true);
-
+                    specVolPow[1]) annotation (Inline=true);
           // See s_resid() in Characteristic.s for the integral of (dels/delp)_T*dp.
           // This is temperature times the isobaric partial derivative of that function
           // with respect to temperature.  It is zero for an ideal gas.
-
         end c_p_resid;
 
       algorithm
-        c_p := c0_p(T) + c_p_resid(T, p) - c_p_resid(T, if phase <> "gas" then
-          p0 else 0) + s_resid(T, p) - (if phase <> "gas" then s_resid(T, p0)
-           else s_resid(
+        c_p := c0_p(T) + c_p_resid(T, p) - (if phase <> "gas" then c_p_resid(T,
+          p0) else c_p_resid(
                 T,
                 p0,
                 {1,-specVolPow[1]})) annotation (Inline=true);
+        // See the notes in the algorithm of Characteristic.s.
         // Note:  [Dymond2002, p.17, eqs. 1.45 & 1.46] may be incorrect.
+
         annotation (Documentation(info="<html>
   <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
@@ -1359,8 +1351,7 @@ second, or bulk dynamic viscosity and specific volume (see
                       specVolPow[2] - specVolPow[1] - i) for i in rowLimits[1]:
               rowLimits[2]},
                     specVolPow[1] + rowLimits[1] - 1) annotation (Inline=true);
-          // Note:  According to the Maxwell relations the partial derivative
-          // (dels/delp)_T is equal to -(delv/delT)_p.
+          // Note:  According to the Maxwell relations, (dels/delp)_T = -(delv/delT)_p.
 
         end s_resid;
 
