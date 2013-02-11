@@ -749,7 +749,7 @@ package Conditions "Models to specify and measure operating conditions"
 
       equation
         // Efforts
-        Data.g(face.T, inSign(side)*face.mPhidot_0/A) = Data.z*pin.v*U.V
+        Data.g(face.T, inSign(side)*face.Mphidot_0/A) = Data.z*pin.v*U.V
           "Electrical potential";
 
         // Conservation (no storage)
@@ -795,7 +795,7 @@ package Conditions "Models to specify and measure operating conditions"
         medium.Xi = ones(Medium.nXi)/Medium.nXi;
 
         // Efforts
-        face.mPhidot_0 = inSign(side)*A*fluidPort.p*U.Pa;
+        face.Mphidot_0 = inSign(side)*A*fluidPort.p*U.Pa;
         medium.h = fluidPort.h_outflow;
 
         // Conservation (no storage)
@@ -864,7 +864,7 @@ package Conditions "Models to specify and measure operating conditions"
           face.T = heatPort.T*U.K "Temperature";
 
           // Conservation (no storage)
-          face.mPhidot = {0,0} "Transverse linear momentum";
+          face.Mphidot = {0,0} "Transverse linear momentum";
           0 = face.Qdot + heatPort.Q_flow*U.W "Energy";
           // Note:  The enthalpy, kinetic energy, and electric work terms each
           // cancel since there's no material storage and the thermodynamic state
@@ -2519,7 +2519,7 @@ model.</p>
 
         // Zero flows
         chemical.Ndot = 0;
-        chemical.mPhidot = zeros(n_lin);
+        chemical.Mphidot = zeros(n_lin);
         chemical.Hdot = 0;
 
       end Properties;
@@ -2615,7 +2615,7 @@ model.</p>
 
         equation
           // Zero values of other flows
-          chemical.mPhidot = zeros(n_lin) "Force";
+          chemical.Mphidot = zeros(n_lin) "Force";
           chemical.Hdot = 0 "Enthalpy flow rate";
           annotation (defaultComponentName="volumeCondition");
         end PartialCondition;
@@ -2639,7 +2639,7 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Velocity,
           u(final unit="l/T"),
-          final y(final unit="l.m/T2") = chemical.mPhidot[linAxes[axis]]);
+          final y(final unit="l.m/T2") = chemical.Mphidot[linAxes[axis]]);
 
       equation
         chemical.phi[linAxes[axis]] = u_final;
@@ -2649,7 +2649,7 @@ model.</p>
 
       model Custom "Custom expressions"
         extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=chemical.mPhidot[linAxes[axis]]);
+            y=chemical.Mphidot[linAxes[axis]]);
 
         Real x=chemical.phi[linAxes[axis]]
           "Expression to which the condition is applied"
@@ -2690,7 +2690,7 @@ model.</p>
           chemical.Ndot = 0 "Current";
           for i in 1:n_lin loop
             if cartAxes[i] <> axis then
-              chemical.mPhidot[i] = 0 "Force along the other axes";
+              chemical.Mphidot[i] = 0 "Force along the other axes";
             end if;
           end for;
           chemical.Hdot = 0 "Enthalpy flow rate";
@@ -2749,7 +2749,7 @@ model.</p>
         equation
           // Zero values of other flows
           chemical.Ndot = 0 "Current";
-          chemical.mPhidot = zeros(n_lin) "Force";
+          chemical.Mphidot = zeros(n_lin) "Force";
           annotation (defaultComponentName="fluid");
         end PartialCondition;
 
@@ -3226,7 +3226,7 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Velocity,
           u(final unit="l/T"),
-          final y(final unit="l.m/T2") = mechanical.mPhidot[linAxes[axis]]);
+          final y(final unit="l.m/T2") = mechanical.Mphidot[linAxes[axis]]);
 
       equation
         mechanical.phi[linAxes[axis]] = u_final;
@@ -3241,14 +3241,14 @@ model.</p>
           final y(final unit="l/T") = mechanical.phi[linAxes[axis]]);
 
       equation
-        mechanical.mPhidot[linAxes[axis]] = u_final;
+        mechanical.Mphidot[linAxes[axis]] = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="mechanical");
       end Force;
 
       model Custom "Custom expressions"
         extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=mechanical.mPhidot[linAxes[axis]]);
+            y=mechanical.Mphidot[linAxes[axis]]);
 
         Real x=mechanical.phi[linAxes[axis]]
           "Expression to which the condition is applied"
@@ -3290,7 +3290,7 @@ model.</p>
           // Zero values of other flows
           for i in 1:n_lin loop
             if cartAxes[i] <> axis then
-              mechanical.mPhidot[i] = 0 "Force along the other axes";
+              mechanical.Mphidot[i] = 0 "Force along the other axes";
             end if;
           end for;
           annotation (defaultComponentName="mechanicalCondition");
@@ -3735,7 +3735,7 @@ model.</p>
 
         equation
           // Zero values of other flows
-          inert.mPhidot = zeros(n_lin) "Force";
+          inert.Mphidot = zeros(n_lin) "Force";
           inert.Qdot = 0 "Heat flow rate";
           annotation (defaultComponentName="volumeCondition");
         end PartialCondition;
@@ -3755,7 +3755,7 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Velocity,
           u(final unit="l/T"),
-          final y(final unit="l.m/T2") = inert.mPhidot[linAxes[axis]]);
+          final y(final unit="l.m/T2") = inert.Mphidot[linAxes[axis]]);
 
       equation
         inert.phi[linAxes[axis]] = u_final;
@@ -3770,14 +3770,14 @@ model.</p>
           final y(final unit="l/T") = inert.phi[linAxes[axis]]);
 
       equation
-        inert.mPhidot[linAxes[axis]] = u_final;
+        inert.Mphidot[linAxes[axis]] = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="mechanical");
       end Force;
 
       model Custom "Custom expressions"
         extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=inert.mPhidot[linAxes[axis]]);
+            y=inert.Mphidot[linAxes[axis]]);
 
         Real x=inert.phi[linAxes[axis]]
           "Expression to which the condition is applied"
@@ -3817,7 +3817,7 @@ model.</p>
           inert.V = 0 "Volume";
           for i in 1:n_lin loop
             if cartAxes[i] <> axis then
-              inert.mPhidot[i] = 0 "Force along the other axes";
+              inert.Mphidot[i] = 0 "Force along the other axes";
             end if;
           end for;
           inert.Qdot = 0 "Heat flow rate";
@@ -3891,7 +3891,7 @@ model.</p>
         equation
           // Zero values of other flows
           inert.V = 0 "Volume";
-          inert.mPhidot = zeros(n_lin) "Force";
+          inert.Mphidot = zeros(n_lin) "Force";
           annotation (defaultComponentName="thermal");
         end PartialCondition;
 
@@ -4260,7 +4260,7 @@ model.</p>
 
         equation
           // Zero values of other flows
-          inert.mPhidot = zeros(n_lin) "Force";
+          inert.Mphidot = zeros(n_lin) "Force";
           inert.Qdot = 0 "Heat flow rate";
           annotation (defaultComponentName="volumeCondition");
         end PartialCondition;
@@ -4280,7 +4280,7 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Velocity,
           u(final unit="l/T"),
-          final y(final unit="l.m/T2") = inert.mPhidot[linAxes[axis]]);
+          final y(final unit="l.m/T2") = inert.Mphidot[linAxes[axis]]);
 
       equation
         inert.phi[linAxes[axis]] = u_final;
@@ -4295,14 +4295,14 @@ model.</p>
           final y(final unit="l/T") = inert.phi[linAxes[axis]]);
 
       equation
-        inert.mPhidot[linAxes[axis]] = u_final;
+        inert.Mphidot[linAxes[axis]] = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="mechanical");
       end Force;
 
       model Custom "Custom expressions"
         extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=inert.mPhidot[linAxes[axis]]);
+            y=inert.Mphidot[linAxes[axis]]);
 
         Real x=inert.phi[linAxes[axis]]
           "Expression to which the condition is applied"
@@ -4342,7 +4342,7 @@ model.</p>
           inert.p = 0 "Pressure";
           for i in 1:n_lin loop
             if cartAxes[i] <> axis then
-              inert.mPhidot[i] = 0 "Force along the other axes";
+              inert.Mphidot[i] = 0 "Force along the other axes";
             end if;
           end for;
           inert.Qdot = 0 "Heat flow rate";
@@ -4416,7 +4416,7 @@ model.</p>
         equation
           // Zero values of other flows
           inert.p = 0 "Pressure";
-          inert.mPhidot = zeros(n_lin) "Force";
+          inert.Mphidot = zeros(n_lin) "Force";
           annotation (defaultComponentName="thermal");
         end PartialCondition;
 
@@ -5334,7 +5334,7 @@ model.</p>
 
         equation
           // No flows of other quantities
-          face.mPhidot = {0,0} "Linear momentum in transverse directions";
+          face.Mphidot = {0,0} "Linear momentum in transverse directions";
           face.Qdot = 0 "Heat";
           annotation (defaultComponentName="normal");
         end PartialCondition;
@@ -5355,7 +5355,7 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Velocity,
           u(final unit="l/T"),
-          final y(final unit="l.m/T2") = face.mPhidot[orientation]);
+          final y(final unit="l.m/T2") = face.Mphidot[orientation]);
 
       equation
         face.phi[orientation] = u_final;
@@ -5370,14 +5370,14 @@ model.</p>
           final y(final unit="l/T") = face.phi[orientation]);
 
       equation
-        face.mPhidot[orientation] = u_final;
+        face.Mphidot[orientation] = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="transverse");
       end Force;
 
       model Custom "Custom expressions"
         extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=face.mPhidot[orientation]);
+            y=face.Mphidot[orientation]);
 
         Real x=face.phi[orientation]
           "Expression to which the condition is applied"
@@ -5389,7 +5389,7 @@ model.</p>
           defaultComponentPrefixes="replaceable",
           defaultComponentName="normal",
           Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
-    must involve <code>face.phi[orientation]</code> and/or <code>face.mPhidot[orientation]</code>.</p></html>"));
+    must involve <code>face.phi[orientation]</code> and/or <code>face.Mphidot[orientation]</code>.</p></html>"));
       end Custom;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -5408,7 +5408,7 @@ model.</p>
         equation
           // No flows of other quantities
           face.Ndot = 0 "Material";
-          face.mPhidot[mod1(orientation + 1, 2)] = 0
+          face.Mphidot[mod1(orientation + 1, 2)] = 0
             "Linear momentum in the other transverse direction";
           face.Qdot = 0 "Heat";
           annotation (defaultComponentName="transverse");
@@ -5480,7 +5480,7 @@ model.</p>
         equation
           // No flows of other quantities
           face.Ndot = 0 "Material";
-          face.mPhidot = {0,0} "Linear momentum in transverse directions";
+          face.Mphidot = {0,0} "Linear momentum in transverse directions";
           annotation (defaultComponentName="thermal");
         end PartialCondition;
 
@@ -6456,7 +6456,7 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.CurrentAreic,
           u(final unit="N/(l2.T)"),
-          final y(final unit="l.m/T2") = negative.mPhidot_0 + positive.mPhidot_0);
+          final y(final unit="l.m/T2") = negative.Mphidot_0 + positive.Mphidot_0);
 
       equation
         negative.J = u_final;
@@ -6479,7 +6479,7 @@ model.</p>
           final y(final unit="N/(l2.T)") = negative.J);
 
       equation
-        negative.mPhidot_0 + positive.mPhidot_0 = u_final;
+        negative.Mphidot_0 + positive.Mphidot_0 = u_final;
         annotation (
           defaultComponentPrefixes="replaceable",
           defaultComponentName="normal",
@@ -6493,7 +6493,7 @@ model.</p>
 
       model Custom "Custom expressions"
         extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=negative.mPhidot_0 + positive.mPhidot_0);
+            y=negative.Mphidot_0 + positive.Mphidot_0);
 
         Real x=negative.J "Expression to which the condition is applied"
           annotation (Dialog(group="Specification"));
@@ -6504,7 +6504,7 @@ model.</p>
           defaultComponentPrefixes="replaceable",
           defaultComponentName="normal",
           Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
-    must involve <code>face.J</code> and/or <code>face.mPhidot_0</code>.</p></html>"));
+    must involve <code>face.J</code> and/or <code>face.Mphidot_0</code>.</p></html>"));
       end Custom;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -6518,13 +6518,13 @@ model.</p>
 
         equation
           // Conservation of material
-          negative.mPhidot_0 = positive.mPhidot_0;
+          negative.Mphidot_0 = positive.Mphidot_0;
 
           // No flows of other quantities
           // ----------------------------
           // Linear momentum in transverse directions
-          negative.mPhidot = {0,0};
-          positive.mPhidot = {0,0};
+          negative.Mphidot = {0,0};
+          positive.Mphidot = {0,0};
           //
           // Heat
           negative.Qdot = 0;
@@ -6549,7 +6549,7 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Velocity,
           u(final unit="l/T"),
-          final y(final unit="l.m/T2") = negative.mPhidot[orientation]);
+          final y(final unit="l.m/T2") = negative.Mphidot[orientation]);
 
       equation
         negative.phi[orientation] - positive.phi[orientation] = u_final;
@@ -6566,14 +6566,14 @@ model.</p>
             orientation]);
 
       equation
-        negative.mPhidot[orientation] = u_final;
+        negative.Mphidot[orientation] = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="transverse");
       end Force;
 
       model Custom "Custom expressions"
         extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=negative.mPhidot[orientation]);
+            y=negative.Mphidot[orientation]);
 
         Real x=negative.phi[orientation] - positive.phi[orientation]
           "Expression to which the condition is applied"
@@ -6585,7 +6585,7 @@ model.</p>
           defaultComponentPrefixes="replaceable",
           defaultComponentName="normal",
           Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
-    must involve <code>face.phi[orientation]</code> and/or <code>face.mPhidot[orientation]</code>.</p></html>"));
+    must involve <code>face.phi[orientation]</code> and/or <code>face.Mphidot[orientation]</code>.</p></html>"));
       end Custom;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -6603,17 +6603,17 @@ model.</p>
 
         equation
           // Conservation of linear momentum in the present transverse direction
-          0 = negative.mPhidot[orientation] + positive.mPhidot[orientation];
+          0 = negative.Mphidot[orientation] + positive.Mphidot[orientation];
 
           // No flows of other quantities
           // ----------------------------
           // Linear momentum in normal direction
-          negative.mPhidot_0 = 0;
-          positive.mPhidot_0 = 0;
+          negative.Mphidot_0 = 0;
+          positive.Mphidot_0 = 0;
           //
           // Linear momentum in the other transverse direction
-          negative.mPhidot[mod1(orientation + 1, 2)] = 0;
-          positive.mPhidot[mod1(orientation + 1, 2)] = 0;
+          negative.Mphidot[mod1(orientation + 1, 2)] = 0;
+          positive.Mphidot[mod1(orientation + 1, 2)] = 0;
           //
           // Heat
           negative.Qdot = 0;
@@ -6695,12 +6695,12 @@ model.</p>
           // No flows of other quantities
           // ----------------------------
           // Linear momentum in normal direction
-          negative.mPhidot_0 = 0;
-          positive.mPhidot_0 = 0;
+          negative.Mphidot_0 = 0;
+          positive.Mphidot_0 = 0;
           //
           // Linear momentum in transverse directions
-          negative.mPhidot = {0,0};
-          positive.mPhidot = {0,0};
+          negative.Mphidot = {0,0};
+          positive.Mphidot = {0,0};
           annotation (defaultComponentName="thermal");
         end PartialCondition;
 

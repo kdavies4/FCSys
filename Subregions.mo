@@ -894,6 +894,54 @@ package Subregions
 
     end SubregionCAndH2;
 
+    model SubregionEvaporation
+      "<html>**Test a subregion with the hydrogen oxidation reaction and the essential species for it (C+, C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S, e<sup>-</sup>, H<sub>2</sub>, and H<sup>+</sup>)</html>"
+
+      extends Examples.Subregion(
+        inclH2O=true,
+        inclH2=false,
+        subregion(
+          inclFacesX=true,
+          gas(H2O(initMethPartNum=InitMethScalar.None)),
+          liquid(inclH2O=inclH2O)));
+
+      Conditions.FaceBus.SubregionFlows reactionBC(
+        graphite(
+          final 'inclC+'='inclC+',
+          final 'incle-'='incle-',
+          'e-'(redeclare Conditions.Face.Material.Current material(redeclare
+                Modelica.Blocks.Sources.Ramp source(duration=1000, height=0.001
+                    *U.A)))),
+        ionomer(
+          final 'inclC19HF37O5S-'='inclC19HF37O5S-',
+          final 'inclH+'='inclH+',
+          'H+'(redeclare Conditions.Face.Material.Pressure material(source(k=U.atm)))),
+
+        gas(
+          final inclH2=inclH2,
+          final inclH2O=inclH2O,
+          final inclN2=inclN2,
+          final inclO2=inclO2),
+        liquid(inclH2O=inclH2O)) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={20,0})));
+
+      extends Modelica.Icons.UnderConstruction;
+      // **fails sim
+
+    equation
+      connect(subregion.xPositive, reactionBC.face) annotation (Line(
+          points={{10,6.10623e-16},{14,6.10623e-16},{14,1.23436e-15},{16,
+              1.23436e-15}},
+          color={127,127,127},
+          thickness=0.5,
+          smooth=Smooth.None));
+
+      annotation (experiment(StopTime=1000, Tolerance=1e-06), Commands(file(
+              ensureSimulated=true) =
+            "resources/scripts/Dymola/Subregions.Examples.SubregionHOR.mos"));
+    end SubregionEvaporation;
   end Examples;
 
   model Subregion "Subregion with all phases"
@@ -965,7 +1013,7 @@ package Subregions
 
     // **Allow for different phases of H2O?
     connect(evaporation.chemical[1], chemical.H2O);
-    connect(evaporation.chemical[2], chemical.H2O);
+    connect(evaporation.chemical[2], chemical.H2Ol);
 
     connect(hydration1.chemical[1], chemical.H2O);
     connect(hydration1.chemical[2], chemical.H2O);
@@ -2324,7 +2372,7 @@ package Subregions
       // H2O
       // ---
       // Exchange
-      connect(H2O.chemical, chemical.H2O) annotation (Line(
+      connect(H2O.chemical, chemical.H2Ol) annotation (Line(
           points={{-3,3},{-44,52}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -3597,6 +3645,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
             redeclare parameter Q.CompressibilityDynamic Xi=Data.Xi(),
             redeclare parameter Q.FluidityDynamic F=1/(178.2e-7*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(25.9e-3*U.W));
+          // **Add table from Present1958 p. 263 to the documentation (see Tests.Characteristics.N2.eta).
 
           // See the documentation for a table of values.
           annotation (
@@ -3708,6 +3757,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
             redeclare parameter Q.CompressibilityDynamic Xi=Data.Xi(),
             redeclare parameter Q.FluidityDynamic F=1/(207.2e-7*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(26.8e-3*U.W));
+          // **Add table from Present1958 p. 263 to the documentation (see Tests.Characteristics.O2.eta).
 
           // See the documentation for a table of values.
           annotation (
@@ -4167,10 +4217,10 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         /U.s - environment.a[cartAxes]) if environment.analysis
         "Acceleration force relative to the frame of reference (constant mass)";
       output Q.Force f_exch_adv[n_lin](each stateSelect=StateSelect.never) =
-        chemical.mPhidot - Data.m*phi*chemical.Ndot if environment.analysis
+        chemical.Mphidot - Data.m*phi*chemical.Ndot if environment.analysis
         "Acceleration force due to advective exchange";
       output Q.Force f_exch_diff[n_lin](each stateSelect=StateSelect.never) =
-        common.mechanical.mPhidot + inert.mPhidot if environment.analysis
+        common.mechanical.Mphidot + inert.Mphidot if environment.analysis
         "Friction from other species (diffusive exchange)";
       output Q.Force f_trans_adv[n_lin](each stateSelect=StateSelect.never) =
         Data.m*{phi_face_0[cartAxes[axis], :]*faces[cartAxes[axis], :].Ndot +
@@ -4180,7 +4230,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         "Acceleration force due to advective transport";
       output Q.Force f_trans_diff[n_lin](each stateSelect=StateSelect.never) =
         {Delta(faces[cartAxes[axis], :].p)*A[cartAxes[axis]] + sum(Sigma(faces[
-        cartWrap(cartAxes[axis] - orientation), :].mPhidot[orientation]) for
+        cartWrap(cartAxes[axis] - orientation), :].Mphidot[orientation]) for
         orientation in Orientation) for axis in 1:n_lin} if environment.analysis
         "Friction from other subregions (diffusive transport; includes volume viscosity)";
       //
@@ -4189,11 +4239,11 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
          + N*der(h) - V*der(p))/U.s if environment.analysis
         "Rate of energy storage (internal and kinetic) at constant mass";
       output Q.Power Wdot_exch(stateSelect=StateSelect.never) = -(chemical.phi*
-        chemical.mPhidot/2 + (Data.m*(chemical.hbar - phi*phi/2) - h)*chemical.Ndot)
+        chemical.Mphidot/2 + (Data.m*(chemical.hbar - phi*phi/2) - h)*chemical.Ndot)
         if environment.analysis
         "Relative rate of work (internal, flow, and kinetic) done by chemical exchange (advection)";
-      output Q.Power Qdot_gen_exch(stateSelect=StateSelect.never) = phi*common.mechanical.mPhidot
-         + inert.phi*inert.mPhidot if environment.analysis
+      output Q.Power Qdot_gen_exch(stateSelect=StateSelect.never) = phi*common.mechanical.Mphidot
+         + inert.phi*inert.Mphidot if environment.analysis
         "Rate of heat generation due to friction with other species";
       output Q.Power Qdot_exch(stateSelect=StateSelect.never) = common.thermal.Qdot
          + inert.Qdot if environment.analysis
@@ -4205,7 +4255,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         environment.analysis
         "Relative rate of work (internal, flow, and kinetic) done by advective transport";
       output Q.Power Qdot_gen_trans(stateSelect=StateSelect.never) = sum(faces.phi
-         .* faces.mPhidot) if environment.analysis
+         .* faces.Mphidot) if environment.analysis
         "Rate of heat generation due to friction with other subregions";
       output Q.Power Qdot_trans(stateSelect=StateSelect.never) = sum(faces.Qdot)
         if environment.analysis
@@ -4249,7 +4299,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         Ndot(start=outerProduct(I_IC, {1,-1})),
         phi(start={{fill(phi_IC[cartWrap(axis + orientation)], 2) for
               orientation in Orientation} for axis in Axis}),
-        mPhidot(each start=0),
+        Mphidot(each start=0),
         T(each start=T_IC),
         Qdot(each start=0))
         "Face connectors to transport material, linear momentum, and heat"
@@ -4510,11 +4560,11 @@ Choose a condition besides None.");
       // Exchange
       // --------
       // Material
-      chemical.mPhidot = semiLinear(
+      chemical.Mphidot = semiLinear(
             Data.m*chemical.Ndot,
             chemical.phi,
             phi) "Advection";
-      F*inert.mPhidot = 2*Lstar*(inert.phi - phi) "Diffusion";
+      F*inert.Mphidot = 2*Lstar*(inert.phi - phi) "Diffusion";
       //
       // Fluid/thermal
       chemical.Hdot = semiLinear(
@@ -4537,7 +4587,7 @@ Choose a condition besides None.");
 
           // Transverse
           for orientation in Orientation loop
-            F*faces[axis, side].mPhidot[orientation] = Lstar_trans[axis]*(faces[
+            F*faces[axis, side].Mphidot[orientation] = Lstar_trans[axis]*(faces[
               axis, side].phi[orientation] - (if inclLin[cartWrap(axis +
               orientation)] then phi[linAxes[cartWrap(axis + orientation)]]
                else 0))*(if inclLin[axis] and upstream[axis] then exp(-inSign(
@@ -4613,13 +4663,13 @@ Choose a condition besides None.");
             // occur due to an assertion.
           end if;
         else
-          der(M*phi[axis])/U.s = chemical.mPhidot[axis] + common.mechanical.mPhidot[
-            axis] + inert.mPhidot[axis] + Delta(faces[cartAxes[axis], :].p)*A[
+          der(M*phi[axis])/U.s = chemical.Mphidot[axis] + common.mechanical.Mphidot[
+            axis] + inert.Mphidot[axis] + Delta(faces[cartAxes[axis], :].p)*A[
             cartAxes[axis]] + Data.m*(phi_face_0[cartAxes[axis], :]*faces[
             cartAxes[axis], :].Ndot) + sum(Data.m*(faces[cartWrap(cartAxes[axis]
              - orientation), :].phi[orientation]*faces[cartWrap(cartAxes[axis]
              - orientation), :].Ndot) + Sigma(faces[cartWrap(cartAxes[axis] -
-            orientation), :].mPhidot[orientation]) for orientation in
+            orientation), :].Mphidot[orientation]) for orientation in
             Orientation) + M*environment.a[cartAxes[axis]]
             "Conservation of linear momentum";
           // **temp last terms
@@ -4664,13 +4714,13 @@ Choose a condition besides None.");
           // assertion.
         end if;
       else
-        (phi*der(M*phi) + der(N*h) - V*der(p))/U.s = chemical.phi*chemical.mPhidot
-           + Data.m*chemical.hbar*chemical.Ndot + phi*common.mechanical.mPhidot
-           + common.thermal.Qdot + inert.phi*inert.mPhidot + inert.Qdot + sum(
+        (phi*der(M*phi) + der(N*h) - V*der(p))/U.s = chemical.phi*chemical.Mphidot
+           + chemical.mu*chemical.Ndot + chemical.Qdot + phi*common.mechanical.Mphidot
+           + common.thermal.Qdot + inert.phi*inert.Mphidot + inert.Qdot + sum(
           sum((Data.m*(phi_face_0[axis, side]^2 + faces[axis, side].phi*faces[
           axis, side].phi) + Data.h(faces[axis, side].T, faces[axis, side].p))*
           faces[axis, side].Ndot for side in Side) for axis in Axis) + sum(sum(
-          faces.phi[orientation] .* faces.mPhidot[orientation]) for orientation
+          faces.phi[orientation] .* faces.Mphidot[orientation]) for orientation
            in Orientation) + sum(faces.Qdot) "Energy conservation";
       end if;
       // **note in doc here or in characteristics: self diffusivity is a modified self diffusivity (2/2/13 notes)
@@ -4692,6 +4742,7 @@ Choose a condition besides None.");
           grid.</li>
        <li>The factors that may cause anisotropic behavior (<b><i>k</i></b>)
           are common to normal, transverse, and thermal transport.</li>
+       <li>There is no radiative heat transfer.</li>
        <li>There are no body or inertial forces (e.g., gravity).</li>
        <li>For the purpose of the material, linear momentum, and energy balances, the
        cross sectional areas of the faces is assumed to be the full cross-sectional
@@ -4902,7 +4953,7 @@ Choose a condition besides None.");
     0 = inertA.V + inertD.V "Volume";
 
     // Conservation (no storage or generation)
-    zeros(n_lin) = inertA.mPhidot + inertD.mPhidot "Linear momentum";
+    zeros(n_lin) = inertA.Mphidot + inertD.Mphidot "Linear momentum";
     0 = inertA.Qdot + inertD.Qdot "Energy";
     annotation (
       Documentation(info="<html><p>This model is essentially an
@@ -4982,8 +5033,9 @@ Choose a condition besides None.");
     // Note  The minimum is 2 for a meaningful reaction, but the default
     // must be 0 to use connectorSizing.
 
-    Real nu[n_spec]=Chemistry.stoich(chemical.formula)
+    Real nu[n_spec]={if i == 1 then 1 else -1 for i in 1:n_spec}
       "Stoichiometric coefficients";
+    //**Chemistry.stoich(chemical.formula)
     // Note 1:  As of Modelica 3.2 and Dymola 7.4, nu can't be a parameter or
     // constant even though it isn't time-varying.  The strings that represent
     // the chemical formulas can't be passed through the connectors as
@@ -5018,13 +5070,13 @@ Check the chemical formulas and the specific masses of the species.");
 
     // Conservation (no storage)
     nu[1:n_spec]*Ndot = chemical.Ndot "Material";
-    zeros(n_lin) = sum(chemical[i].mPhidot for i in 1:n_spec) "Linear momentum";
+    zeros(n_lin) = sum(chemical[i].Mphidot for i in 1:n_spec) "Linear momentum";
     0 = sum(chemical.Hdot) "Energy";
 
     // Ideal mixing/upstream discretization
     // Chemical species
     for i in 1:n_spec loop
-      chemical[i].mPhidot = semiLinear(
+      chemical[i].Mphidot = semiLinear(
           chemical[i].m*chemical[i].Ndot,
           chemical[i].phi,
           phi) "Linear momentum";
@@ -5125,7 +5177,7 @@ Check the chemical formulas and the specific masses of the species.");
     V = inert.V;
 
     // Conservation (no storage or generation)
-    zeros(n_lin) = inert.mPhidot "Linear momentum";
+    zeros(n_lin) = inert.Mphidot "Linear momentum";
     0 = inert.Qdot "Energy";
     annotation (
       Documentation(info="<html><p>This model uses a <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector that imposes

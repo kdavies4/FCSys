@@ -458,12 +458,12 @@ package Characteristics
         B_c={Data.blow,Data.bhigh,{2.488433516e6,-669.5728110}} .* fill({U.K,1},
             size(T_lim_c, 1) - 1) - b_c[:, 2:3]*ln(U.K),
         r=(120 + 100.3/2)*U.pico*U.m/U.q,
-        T_lim_F_R={200.0,1000.0,5000.0,15000.0}*U.K,
-        b_F={fromNASAViscosity({0.74553182,43.555109,-3.2579340e3,0.13556243}),
+        T_lim_zeta_theta={200.0,1000.0,5000.0,15000.0}*U.K,
+        b_zeta={fromNASAViscosity({0.74553182,43.555109,-3.2579340e3,0.13556243}),
             fromNASAViscosity({0.96730605,679.31897,-2.1025179e5,-1.8251697}),
             fromNASAViscosity({1.0126129,1.4973739e3,-1.4428484e6,-2.3254928})},
 
-        b_R={fromNASAThermalConductivity({1.0059461,279.51262,-2.9792018e4,
+        b_theta={fromNASAThermalConductivity({1.0059461,279.51262,-2.9792018e4,
             1.1996252}),fromNASAThermalConductivity({1.0582450,248.75372,
             1.1736907e4,0.82758695}),fromNASAThermalConductivity({-0.22364420,-6.9650442e3,
             -7.7771313e4,13.189369})});
@@ -510,14 +510,14 @@ package Characteristics
         B_c={Data.blow,Data.bhigh} .* fill({U.K,1}, size(T_lim_c, 1) - 1) - b_c[
             :, 2:3]*ln(U.K),
         r=(282/2)*U.pico*U.m/U.q,
-        T_lim_F_R={373.2,1073.2,5000.0,15000.0}*U.K,
-        b_F={fromNASAViscosity({0.50019557,-697.12796,8.8163892e4,3.0836508}),
+        T_lim_zeta_theta={373.2,1073.2,5000.0,15000.0}*U.K,
+        b_zeta={fromNASAViscosity({0.50019557,-697.12796,8.8163892e4,3.0836508}),
             fromNASAViscosity({0.58988538,-537.69814,5.4263513e4,2.3386375}),
             fromNASAViscosity({0.64330087,-95.668913,-3.7742283e5,1.8125190})},
 
-        b_R={fromNASAThermalConductivity({1.0966389,-555.13429,1.0623408e5,-0.24664550}),
-            fromNASAThermalConductivity({0.39367933,-2.2524226e3,6.1217458e5,
-            5.8011317}),fromNASAThermalConductivity({-0.41858737,-1.4096649e4,
+        b_theta={fromNASAThermalConductivity({1.0966389,-555.13429,1.0623408e5,
+            -0.24664550}),fromNASAThermalConductivity({0.39367933,-2.2524226e3,
+            6.1217458e5,5.8011317}),fromNASAThermalConductivity({-0.41858737,-1.4096649e4,
             1.9179190e7,14.345613})});
 
       // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
@@ -615,12 +615,12 @@ package Characteristics
         B_c={Data.blow,Data.bhigh,{4.938707040e6,-1.672099740e3}} .* fill({U.K,
             1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*ln(U.K),
         r=(155 + 145.2/2)*U.pico*U.m/U.q,
-        T_lim_F_R={200.0,1000.0,5000.0,15000.0}*U.K,
-        b_F={fromNASAViscosity({0.62526577,-31.779652,-1.6407983e3,1.7454992}),
+        T_lim_zeta_theta={200.0,1000.0,5000.0,15000.0}*U.K,
+        b_zeta={fromNASAViscosity({0.62526577,-31.779652,-1.6407983e3,1.7454992}),
             fromNASAViscosity({0.87395209,561.52222,-1.7394809e5,-0.39335958}),
             fromNASAViscosity({0.88503551,909.02171,-7.3129061e5,-0.53503838})},
 
-        b_R={fromNASAThermalConductivity({0.85439436,105.73224,-1.2347848e4,
+        b_theta={fromNASAThermalConductivity({0.85439436,105.73224,-1.2347848e4,
             0.47793128}),fromNASAThermalConductivity({0.88407146,133.57293,-1.1429640e4,
             0.24417019}),fromNASAThermalConductivity({2.4176185,8.0477749e3,
             3.1055802e6,-14.517761})});
@@ -668,12 +668,12 @@ package Characteristics
         B_c={Data.blow,Data.bhigh,{2.293554027e6,-5.530621610e2}} .* fill({U.K,
             1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*ln(U.K),
         r=(152 + 128.2/2)*U.pico*U.m/U.q,
-        T_lim_F_R={200.0,1000.0,5000.0,15000.0}*U.K,
-        b_F={fromNASAViscosity({0.60916180,-52.244847,-599.74009,2.0410801}),
+        T_lim_zeta_theta={200.0,1000.0,5000.0,15000.0}*U.K,
+        b_zeta={fromNASAViscosity({0.60916180,-52.244847,-599.74009,2.0410801}),
             fromNASAViscosity({0.72216486,175.50839,-5.7974816e4,1.0901044}),
             fromNASAViscosity({0.73981127,391.94906,-3.7833168e5,0.90931780})},
 
-        b_R={fromNASAThermalConductivity({0.77229167,6.8463210,-5.8933377e3,
+        b_theta={fromNASAThermalConductivity({0.77229167,6.8463210,-5.8933377e3,
             1.2210365}),fromNASAThermalConductivity({0.90917351,291.24182,-7.9650171e4,
             0.064851631}),fromNASAThermalConductivity({-1.1218262,-1.9286378e4,
             2.3295011e7,20.342043})});
@@ -703,62 +703,63 @@ package Characteristics
 
       extends Characteristic;
 
-      constant Q.TemperatureAbsolute T_lim_F_R[:]={0,Modelica.Constants.inf}
-        "<html>Temperature limits for the rows of <i>b</i><sub><i>F</i></sub> and <i>b</i><sub><i>R</i></sub> (<i>T</i><sub>lim <i>F</i> <i>R</i></sub>)</html>";
-      constant Real b_F[size(T_lim_F_R, 1) - 1, 4]
-        "<html>Correlation constants for fluidity (<i>b</i><sub><i>F</i></sub>)</html>";
-      constant Real b_R[size(T_lim_F_R, 1) - 1, 4]
-        "<html>Correlation constants for thermal resistivity (<i>b</i><sub><i>R</i></sub>)</html>";
+      constant Q.TemperatureAbsolute T_lim_zeta_theta[:]={0,Modelica.Constants.inf}
+        "<html>Temperature limits for the rows of <i>b</i><sub><i>F</i></sub> and <i>b</i><sub><i>R</i></sub> (<i>T</i><sub>lim &zeta; &theta;</sub>)</html>";
+      constant Real b_zeta[size(T_lim_zeta_theta, 1) - 1, 4]
+        "<html>Correlation constants for fluidity (<i>b</i>&zeta;</sub>)</html>";
+      constant Real b_theta[size(T_lim_zeta_theta, 1) - 1, 4]
+        "<html>Correlation constants for thermal resistivity (<i>b</i><sub>&theta;</sub>)</html>";
 
     protected
       function fromNASAViscosity
         "Return constants for fluidity given NASA CEA constants for viscosity"
         input Real b_eta[4] "NASA CEA constants for viscosity";
-        output Real b_F[4] "Constants for fluidity";
+        output Real b_zeta[4] "Constants for fluidity";
 
       algorithm
-        b_F := {-b_eta[1],-b_eta[2]*U.K,-b_eta[3]*U.K^2,-b_eta[4] + b_eta[1]*ln(
-          U.K) + ln(1e4*U.m*U.s/U.g)} annotation (Inline=true);
+        b_zeta := {-b_eta[1],-b_eta[2]*U.K,-b_eta[3]*U.K^2,-b_eta[4] + b_eta[1]
+          *ln(U.K) + ln(1e4*U.m*U.s/U.g)} annotation (Inline=true);
 
       end fromNASAViscosity;
 
       function fromNASAThermalConductivity
         "Return constants for thermal resistivity given NASA CEA constants for thermal conductivity"
         input Real b_lambda[4] "NASA CEA constants for thermal conductivity";
-        output Real b_R[4] "Constants for thermal resistivity";
+        output Real b_theta[4] "Constants for thermal resistivity";
 
       algorithm
-        b_R := {-b_lambda[1],-b_lambda[2]*U.K,-b_lambda[3]*U.K^2,-b_lambda[4]
-           + b_lambda[1]*ln(U.K) + ln(1e4*U.m*U.K/U.W)}
+        b_theta := {-b_lambda[1],-b_lambda[2]*U.K,-b_lambda[3]*U.K^2,-b_lambda[
+          4] + b_lambda[1]*ln(U.K) + ln(1e4*U.m*U.K/U.W)}
           annotation (Inline=true);
 
       end fromNASAThermalConductivity;
 
     public
-      redeclare function F "Fluidity as a function of temperature"
+      redeclare function zeta
+        "<html>Fluidity as a function of temperature (&zeta;)</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.PressureAbsolute p=U.atm "Pressure";
         // Note:  Pressure isn't used here but is included for generality.
-        output Q.FluidityDynamic F "Dynamic fluidity";
+        output Q.Fluidity zeta "Fluidity";
 
       algorithm
         /*
-    assert(T_lim_F_R[1] <= T and T <= T_lim_F_R[size(T_lim_F_R, 1)], "Temperature "
+    assert(T_lim_zeta_theta[1] <= T and T <= T_lim_zeta_theta[size(T_lim_zeta_theta, 1)], "Temperature "
      + String(T/(U.K)) + " K is out of range for the resistivities ([" +
-    String(T_lim_F_R[1]/U.K) + ", " + String(T_lim_F_R[size(T_lim_F_R, 1)]
+    String(T_lim_zeta_theta[1]/U.K) + ", " + String(T_lim_zeta_theta[size(T_lim_zeta_theta, 1)]
     /U.K) + "] K).");
     */
         // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4 T_lim_F_R[end] can't be used instead of
-        // T_lim_F_R[size(T_lim_F_R, 1)] due to:
+        // Note:  In Dymola 7.4 T_lim_zeta_theta[end] can't be used instead of
+        // T_lim_zeta_theta[size(T_lim_zeta_theta, 1)] due to:
         //     "Error, not all "end" could be expanded."
 
-        F := smooth(0, exp(sum(if (T_lim_F_R[i] <= T or i == 1) and (T <
-          T_lim_F_R[i + 1] or i == size(T_lim_F_R, 1) - 1) then b_F[i, 1]*ln(T)
-           + (b_F[i, 2] + b_F[i, 3]/T)/T + b_F[i, 4] else 0 for i in 1:size(
-          T_lim_F_R, 1) - 1)))
+        zeta := smooth(0, exp(sum(if (T_lim_zeta_theta[i] <= T or i == 1) and (
+          T < T_lim_zeta_theta[i + 1] or i == size(T_lim_zeta_theta, 1) - 1)
+           then b_zeta[i, 1]*ln(T) + (b_zeta[i, 2] + b_zeta[i, 3]/T)/T + b_zeta[
+          i, 4] else 0 for i in 1:size(T_lim_zeta_theta, 1) - 1)))
           annotation (
           InlineNoEvent=true,
           Inline=true,
@@ -766,35 +767,35 @@ package Characteristics
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p>
 
-  <p>For more information, see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.F\">Characteristic.F</a>().</p>
+  <p>For more information, see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.F\">Characteristic.zeta</a>().</p>
   </html>"));
-      end F;
+      end zeta;
 
-      redeclare function R
-        "Thermal resistivity as a function of temperature and pressure"
+      redeclare function theta
+        "<html>Thermal resistivity as a function of temperature and pressure (&theta;)</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.PressureAbsolute p=U.atm "Pressure";
         // Note:  Pressure isn't used here but is included for generality.
-        output Q.ResistivityThermal R "Thermal resistivity";
+        output Q.ResistivityThermal theta "Thermal resistivity";
 
       algorithm
         /*
-    assert(T_lim_F_R[1] <= T and T <= T_lim_F_R[size(T_lim_F_R, 1)], "Temperature "
+    assert(T_lim_zeta_theta[1] <= T and T <= T_lim_zeta_theta[size(T_lim_zeta_theta, 1)], "Temperature "
      + String(T/(U.K)) + " K is out of range for the resistivities ([" +
-    String(T_lim_F_R[1]/U.K) + ", " + String(T_lim_F_R[size(T_lim_F_R, 1)]
+    String(T_lim_zeta_theta[1]/U.K) + ", " + String(T_lim_zeta_theta[size(T_lim_zeta_theta, 1)]
     /U.K) + "] K).");
     */
         // Note:  This is commented out so that the function can be inlined.
-        // Note:  In Dymola 7.4 T_lim_F_R[end] can't be used instead of
-        // T_lim_F_R[size(T_lim_F_R, 1)] due to:
+        // Note:  In Dymola 7.4 T_lim_zeta_theta[end] can't be used instead of
+        // T_lim_zeta_theta[size(T_lim_zeta_theta, 1)] due to:
         //     "Error, not all "end" could be expanded."
 
-        R := smooth(0, exp(sum(if (T_lim_F_R[i] <= T or i == 1) and (T <
-          T_lim_F_R[i + 1] or i == size(T_lim_F_R, 1) - 1) then b_R[i, 1]*ln(T)
-           + (b_R[i, 2] + b_R[i, 3]/T)/T + b_R[i, 4] else 0 for i in 1:size(
-          T_lim_F_R, 1) - 1)))
+        theta := smooth(0, exp(sum(if (T_lim_zeta_theta[i] <= T or i == 1) and
+          (T < T_lim_zeta_theta[i + 1] or i == size(T_lim_zeta_theta, 1) - 1)
+           then b_theta[i, 1]*ln(T) + (b_theta[i, 2] + b_theta[i, 3]/T)/T +
+          b_theta[i, 4] else 0 for i in 1:size(T_lim_zeta_theta, 1) - 1)))
           annotation (
           InlineNoEvent=true,
           Inline=true,
@@ -802,9 +803,9 @@ package Characteristics
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p>
 
-    <p>For more information, see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.R\">Characteristic.R</a>().</p>
+    <p>For more information, see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.theta\">Characteristic.theta</a>().</p>
     </html>"));
-      end R;
+      end theta;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html><p>The correlations for transport properties are available in
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>,
   <a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>]. For more information, see the
@@ -888,14 +889,14 @@ package Characteristics
   <p>This function is based on the kinetic theory of gases with the rigid-sphere (\"billiard-ball\")
   assumption [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].  It is
   independent of pressure or specific volume.  This independence very accurately matches the measured
-  dynamic fluidity of gases.  However, the dynamic fluidity varies by species and
+  fluidity of gases.  However, the dynamic fluidity varies by species and
   generally falls more rapidly with temperature than shown by this function
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 41].</p></html>"));
       end alpha;
 
     public
-      function beta_T
-        "<html>Isothermal compressibility as a function of temperature and pressure (&beta;<sub><i>T</i></sub>)</html>"
+      function kappa_T
+        "<html>Isothermal compressibility as a function of temperature and pressure (&kappa;<sub><i>T</i></sub>)</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
@@ -916,7 +917,7 @@ package Characteristics
   <p>For an ideal gas, this function is independent of temperature
   (although temperature remains as a valid input).</p>
   </html>"));
-      end beta_T;
+      end kappa_T;
 
       function c_p
         "<html>Isobaric specific heat capacity as a function of temperature and pressure (<i>c</i><sub><i>p</i></sub>)</html>"
@@ -1078,23 +1079,25 @@ package Characteristics
 
       end dv_Tp;
 
-      replaceable function F "Fluidity as a function of temperature"
-
+      replaceable function eta
+        "<html>Material resistivity as a function of temperature and pressure (&eta;)</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.PressureAbsolute p=U.atm "Pressure";
-        // Note:  Pressure isn't used here but is included for generality.
-        output Q.FluidityDynamic F "Dynamic fluidity";
+        output Real eta "**Dynamic compressibility";
+        // **Dimension
 
       algorithm
-        F := alpha(T)/m annotation (Inline=true);
+        eta := p*alpha(T) annotation (Inline=true);
+
         annotation (Documentation(info="<html>
-<p>Note that dynamic fluidity is defined as the reciprocal of viscosity&mdash;typically dynamic viscosity
-(see <a href=\"http://en.wikipedia.org/wiki/Viscosity#Fluidity\">http://en.wikipedia.org/wiki/Viscosity#Fluidity</a>).
+<p>\"**Dynamic compressibility\" is defined here as the reciprocal of the volume,
+second, or bulk dynamic viscosity and specific volume (see
+<a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).
 </p>
 </html>"));
-      end F;
+      end eta;
 
       function g "Gibbs potential as a function of temperature and pressure"
 
@@ -1216,35 +1219,33 @@ package Characteristics
         // (delh/delp)_T*dp is the reference pressure (p0).  However, if the
         // material is gaseous, then the reference is the corresponding ideal gas.
         // In that case, the lower limit of the real gas terms of the integral is
-        // p=0, where a real gas behaves as an ideal gas.  See [Rao 1997, p. 271].
+        // p=0, where a real gas behaves as an ideal gas.  See [Rao1997, p. 271].
         annotation (Documentation(info="<html>
   <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
     </html>"));
       end h;
 
-      replaceable function nu
-        "<html>Dynamic **bulk viscosity as a function of temperature and specific volume (&Xi;)</html>"
+      replaceable function beta
+        "<html>Kinematic compressibility as a function of temperature and pressure (&beta;)</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.PressureAbsolute p=U.atm "Pressure";
         // Note:  Pressure isn't used here but is included for generality.
-        output Real nu "**Dynamic bulk viscosity";
+        output Real beta "Kinematic compressibility";
         // **Dimension
 
       algorithm
-        nu := m/alpha(T) annotation (Inline=true);
-
-        // **note in doc here and/or in species model: Dynamic compressibility is a modified self diffusivity (2/2/13 notes)
+        beta := m/alpha(T) annotation (Inline=true);
 
         annotation (Documentation(info="<html>
-<p>\"Dynamic compressibility\" is defined here as the reciprocal of the volume,
+<p>\"**Dynamic compressibility\" is defined here as the reciprocal of the volume,
 second, or bulk dynamic viscosity and specific volume (see
 <a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).
 </p>
 </html>"));
-      end nu;
+      end beta;
 
       function p_Tv "Pressure as a function of temperature and specific volume"
         extends Modelica.Icons.Function;
@@ -1275,19 +1276,19 @@ second, or bulk dynamic viscosity and specific volume (see
   <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a>().</p></html>"));
       end p_Tv;
 
-      replaceable function R
-        "Thermal resistivity as a function of temperature and pressure"
+      replaceable function theta
+        "<html>Thermal resistivity as a function of temperature and pressure (&theta;)</html>"
 
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.PressureAbsolute p=U.atm "Pressure";
-        output Q.ResistivityThermal R "Thermal resistivity";
+        output Q.ResistivityThermal theta "Thermal resistivity";
 
       algorithm
-        R := alpha(T)/c_v(T, p) annotation (Inline=true);
+        theta := alpha(T)/c_v(T, p) annotation (Inline=true);
 
-      end R;
+      end theta;
 
       function s "Specific entropy as a function of temperature and pressure"
         extends Modelica.Icons.Function;
@@ -1417,28 +1418,24 @@ second, or bulk dynamic viscosity and specific volume (see
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv\">dv</a>().</p></html>"));
       end v_Tp;
 
-      replaceable function Xi
-        "<html>Dynamic compressibility as a function of temperature and specific volume (&Xi;)</html>"
+      replaceable function zeta
+        "<html>Fluidity as a function of temperature (&zeta;)</html>"
+
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.PressureAbsolute p=U.atm "Pressure";
         // Note:  Pressure isn't used here but is included for generality.
-        output Q.CompressibilityDynamic Xi "**Dynamic compressibility";
-        // **Dimension: M.L2/(N.T) Weber?
+        output Q.Fluidity zeta "Fluidity";
 
       algorithm
-        Xi := p*alpha(T) annotation (Inline=true);
-
-        // **note in doc here and/or in species model: Dynamic compressibility is a modified self diffusivity (2/2/13 notes)
-
+        zeta := alpha(T)/m annotation (Inline=true);
         annotation (Documentation(info="<html>
-<p>\"Dynamic compressibility\" is defined here as the reciprocal of the volume,
-second, or bulk dynamic viscosity and specific volume (see
-<a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).
+<p>Note that fluidity is defined as the reciprocal of viscosity&mdash;specifically dynamic viscosity
+(see <a href=\"http://en.wikipedia.org/wiki/Viscosity#Fluidity\">http://en.wikipedia.org/wiki/Viscosity#Fluidity</a>).
 </p>
 </html>"));
-      end Xi;
+      end zeta;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
     <p>This package is compatible with NASA CEA thermodynamic data
     [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>] and the virial equation of state
@@ -1511,7 +1508,6 @@ second, or bulk dynamic viscosity and specific volume (see
     this requirement.</li>
     </ul>
     </p></html>"));
-
     end Characteristic;
 
     type ReferenceEnthalpy = enumeration(

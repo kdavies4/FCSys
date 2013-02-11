@@ -483,6 +483,7 @@ package Tests "Models and functions for test and validation"
 
           c_p testc_p;
           c_v testc_v;
+          eta testeta;
           h testh;
           s tests;
           F testF;
@@ -515,6 +516,33 @@ package Tests "Models and functions for test and validation"
                 *U.K));
 
         end c_v;
+
+        model eta
+          "<html>Test the material resistivity of O<sub>2</sub>O gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 263]</html>"
+
+          import FCSys.Test.assertValue;
+          extends Modelica.Icons.Example;
+
+          replaceable package Data = FCSys.Characteristics.O2.Gas
+            "Material characteristics";
+          parameter Q.NumberAbsolute eps=0.7 "Relative error tolerance";
+          parameter Q.TemperatureAbsolute T[:]={77.7,194.7,273.2,353.2}*U.K
+            "Temperatures";
+          parameter Real D_table[size(T, 1)]={0.0168,0.104,average({0.185,0.172}),
+              0.287}*U.cm^2/U.s "Tabulated self diffusivity";
+          // **Dimension: L2/T
+
+        initial equation
+          for i in 1:size(T, 1) loop
+            assertValue(
+                      actual=U.atm*Data.v_Tp(T[i], U.atm)/Data.eta(T[i], U.atm),
+                      expected=D_table[i],
+                      eps=eps*D_table[i],
+                      name="of material resistivity of " + Data.formula +
+                " at " + String(T[i]/U.K) + " K");
+          end for;
+
+        end eta;
 
         model h
           "<html>Test the specific enthalpy of N<sub>2</sub> gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, pp. 799&ndash;801]</html>"
@@ -612,6 +640,16 @@ package Tests "Models and functions for test and validation"
                 *U.K));
 
         end c_v;
+
+        model eta
+          "<html>Test the fluidity of O<sub>2</sub>O gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, p. 924&ndash;925]</html>"
+
+          extends N2.Gas.eta(
+            redeclare package Data = FCSys.Characteristics.O2.Gas,
+            eps=0.7,
+            D_table={0.0153,0.104,average({0.187,0.175}),0.301}*U.cm^2/U.s);
+
+        end eta;
 
         model h
           "<html>Test the specific enthalpy of O<sub>2</sub> gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, pp. 794, 799&ndash;801]</html>"

@@ -96,7 +96,7 @@ package Quantities "Quantities to represent physical properties"
   extends Modelica.Icons.Package;
   import Modelica.Icons.TypeReal;
 
-  // Generated from FCSys/resources/quantities.xls, 2013-1-20
+  // Generated from FCSys/resources/quantities.xls, 2013-2-9
   type Acceleration = Modelica.Icons.TypeReal (final unit="l/T2");
   type Amount = Modelica.Icons.TypeReal (final unit="N", min=0);
   type AmountReciprocal = Modelica.Icons.TypeReal (final unit="1/N", min=0)
@@ -117,7 +117,7 @@ package Quantities "Quantities to represent physical properties"
   type CurrentRate = Modelica.Icons.TypeReal (final unit="N/T2")
     "Rate of current";
   type Energy = Modelica.Icons.TypeReal (final unit="l2.m/T2");
-  type FluidityDynamic = Modelica.Icons.TypeReal (final unit="l.T/m", min=0)
+  type Fluidity = Modelica.Icons.TypeReal (final unit="l.T/m", min=0)
     "Dynamic fluidity";
   type Force = Modelica.Icons.TypeReal (final unit="l.m/T2");
   type Frequency = Modelica.Icons.TypeReal (final unit="A/T");
@@ -197,7 +197,7 @@ package Quantities "Quantities to represent physical properties"
     "Thermal resistivity";
   annotation (Documentation(info="<html><p>Here, the <code>unit</code> attribute of each <code>Real</code> variable actually denotes the
   dimension.  The dimensions are noted in terms
-  of angle (A), length (l), mass (m), amount or particle number (N) and time (T).
+  of angle (A), length (l), mass (m), amount or particle number (N), and time (T).
   Capital \"L\" and \"M\" are not used to abbreviate length and mass because they are not recognized in Dymola 7.4.
   In <a href=\"modelica://FCSys.FCSys\">FCSys</a>, temperature and charge are considered
   to be derived dimensions (see the <a href=\"modelica://FCSys.Units\">Units</a> package).</p></html>"));
