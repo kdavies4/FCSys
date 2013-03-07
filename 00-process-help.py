@@ -44,12 +44,14 @@ rpls = [
     (' ALIGN *= *', ' align='), # Dymola adds spaces.
     # Remove strange line breaks.
     ('"\n>', '">'),
+    # No space before newline
+    (' *\n', '\n'),
+    # Remove extra line spacing.
+    (r' *<br> *(<br>)+ *', r'<br><br>'),
     # Remove empty groups.
     ('<pre>\n*</pre>', r''),
     (r'<pre>&quot;', r'&quot;'),
     (r'&quot;</pre>', r'&quot;'),
-    # Remove extra line spacing.
-    (r' *<br> *(<br>)+ *', r'<br><br>'),
     # Add the sidebar.
     ('<body><p>', """<body>
 <div class="sidebar">
@@ -89,8 +91,13 @@ rpls = [
   &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated %s.
 </div>
 """ % r'\1'),
-    # Remove Dymola tags for the Microsoft office template.
+    # Remove Dymola's tags for the Microsoft Office template.
     ("<!--.+'mso-element:field-begin'.+\n.+\n.+'mso-element:field-end'.+-->", ''),
+    # Remove the (useless?) textblock tags.
+    ('<textblock type="annotcomp" expanded="false">', ''),
+    ('<textblock type="annotconnect" expanded="false">', ''),
+    ('<textblock type="model" expanded="false" path=".*">', ''),
+    ('</textblock>', ''),
     # Make the local links local again.
     ('<a href="FCSys\.html#Fig([1-3])">', r'<a href="#Fig\1">'),
     # Use relative links again.
@@ -125,18 +132,6 @@ td.*
 th.*
 table.*
 </style>""", '<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="%s">' % stylesheet + '\n<link rel="shortcut icon" href="%s">' % favicon),
-    # Remove the custom style for the Modelica license.
-    #("""<style type="text/css">
-#\*.*
-#code.*
-#h6.*
-#h5.*
-#h4.*
-#address.*
-#td.*
-#th.*
-#table.*
-#</style>""", ''),
     # Try to replace the internal Modelica references with the proper HTML
     # page.
     (r'\\?"modelica://([^"\\]+)\.([^"\\]+)\.([^"\\]+)\.([^"\\]+)\.([^"\\]+)\.([^"\\]+)\.([^"\\]+)\\?"', r'"\1_\2_\3_\4_\5_\6.html#\1.\2.\3.\4.\5.\6.\7"'),
@@ -147,6 +142,17 @@ table.*
     (r'\\?"modelica://([^"\\]+)\.([^"\\]+)\\?"', r'"\1.html#\1.\2"'),
     (r'\\?"modelica://([^"\\]+)\\?"', r'"\1.html#\1"'),
     ('href="Modelica', 'href="http://build.openmodelica.org/Documentation/Modelica'),
+    # Use the ellipsis code.
+    ('\.\.\.', '&hellip;'),
+    # Eliminate back-to-back paragraph starts.
+    ('<p> *\n? *(<p>)+', '<p>'),
+    # Remove paragraph marks around headings.
+    ('<p>(<h\d+>.+</h\d+>)</p>', r'\1'),
+    ('<p>(<h3>Package Content</h3>)<p>', r'\1'),
+    # Newline before and after headings:
+    ('(<h\d+>.+</h\d+>)', r'\n\1\n'),
+    # but no double blank lines:
+    ('(\n *){3,}', '\n\n'),
     ]
 
 # Directory specification

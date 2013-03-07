@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>FCSys.Blocks.UnitConversions.BaseClasses</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta name="description" content="Base classes (not generally for direct use)">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="../resources/documentation/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="FCSys.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="FCSys.html">
+    <img src="../resources/documentation/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+<ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Blocks.UnitConversions.BaseClasses"></a><a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions">FCSys.Blocks.UnitConversions</a>.BaseClasses</h2>
+
+<b>Base classes (not generally for direct use)</b>
+
+<h3>Information</h3>
+
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.BasesPackage.html#Modelica.Icons.BasesPackage">Modelica.Icons.BasesPackage</a> (Icon for packages containing base classes).
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="FCSys.Blocks.UnitConversions.BaseClasses.PartialUnitConversionS.png" alt="FCSys.Blocks.UnitConversions.BaseClasses.PartialUnitConversion" width=20  height=20 align=top>&nbsp;<a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks.UnitConversions.BaseClasses.PartialUnitConversion">PartialUnitConversion</a>
+</td><td>Partial block to convert to or from quantities expressed in units</td></tr>
+</table>
+<hr>
+
+<h2><img src="FCSys.Blocks.UnitConversions.BaseClasses.PartialUnitConversionI.png" alt="FCSys.Blocks.UnitConversions.BaseClasses.PartialUnitConversion" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Blocks.UnitConversions.BaseClasses.PartialUnitConversion"></a><a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks.UnitConversions.BaseClasses">FCSys.Blocks.UnitConversions.BaseClasses</a>.PartialUnitConversion</h2>
+<b>Partial block to convert to or from quantities expressed in units</b><p>
+<img src="FCSys.Blocks.UnitConversions.From_degCD.png" alt="FCSys.Blocks.UnitConversions.BaseClasses.PartialUnitConversion">
+
+<h3>Information</h3>
+
+<p>See the documentation in the
+  <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions">UnitConversions</a> package.</p><p>
+Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top2">FCSys.BaseClasses.Icons.Names.Top2</a>.
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Real input for value in source representation</td></tr>
+<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Real output for quantity in desired representation</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">partial </font><font color="blue">block</font> PartialUnitConversion <font color="darkgreen">
+  &quot;Partial block to convert to or from quantities expressed in units&quot;</font>
+  <font color="darkgreen">// extends FCSys.BaseClasses.Icons.Blocks.ContinuousShort;</font>
+  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top2">FCSys.BaseClasses.Icons.Names.Top2</a>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">Connectors.RealInput</a> u <font color="darkgreen">&quot;Real input for value in source representation&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">Connectors.RealOutput</a> y <font color="darkgreen">&quot;Real output for quantity in desired representation&quot;</font>;
+
+<font color="blue">end </font>PartialUnitConversion;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Fri Mar 22 20:57:52 2013.
+</div>
+</body>
+</html>

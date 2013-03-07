@@ -1,0 +1,119 @@
+<html>
+<head>
+<title>FCSys.Conditions.ChemicalBus.BaseClasses</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta name="description" content="Base classes (not generally for direct use)">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="../resources/documentation/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="FCSys.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="FCSys.html">
+    <img src="../resources/documentation/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+<ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Conditions.ChemicalBus.BaseClasses"></a><a href="FCSys_Conditions_ChemicalBus.html#FCSys.Conditions.ChemicalBus">FCSys.Conditions.ChemicalBus</a>.BaseClasses</h2>
+
+<b>Base classes (not generally for direct use)</b>
+
+<h3>Information</h3>
+
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.BasesPackage.html#Modelica.Icons.BasesPackage">Modelica.Icons.BasesPackage</a> (Icon for packages containing base classes).
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="FCSys.Conditions.ChemicalBus.BaseClasses.NullPhaseS.png" alt="FCSys.Conditions.ChemicalBus.BaseClasses.NullPhase" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses.NullPhase">NullPhase</a>
+</td><td>Empty condition for a phase (no species)</td></tr>
+</table>
+<hr>
+
+<h2><img src="FCSys.Conditions.ChemicalBus.BaseClasses.NullPhaseI.png" alt="FCSys.Conditions.ChemicalBus.BaseClasses.NullPhase" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ChemicalBus.BaseClasses.NullPhase"></a><a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses">FCSys.Conditions.ChemicalBus.BaseClasses</a>.NullPhase</h2>
+<b>Empty condition for a phase (no species)</b><p>
+<img src="FCSys.Conditions.ChemicalBus.BaseClasses.NullPhaseD.png" alt="FCSys.Conditions.ChemicalBus.BaseClasses.NullPhase">
+
+<h3>Information</h3>
+
+Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single">FCSys.Conditions.BaseClasses.Icons.Single</a> (Icon for a single-connector boundary condition).
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
+<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalIOBus">ChemicalIOBus</a></td><td>chemical</td><td>Bus of ChemicalInput and ChemicalOutput connectors of multiple species</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Bus of inputs to specify conditions</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Bus of measurement outputs</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> NullPhase <font color="darkgreen">&quot;Empty condition for a phase (no species)&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single">FCSys.Conditions.BaseClasses.Icons.Single</a>;
+
+  <font color="blue">parameter </font>Boolean inclLinX=true <font color="darkgreen">&quot;X&quot;</font>;
+
+  <font color="blue">parameter </font>Boolean inclLinY=false <font color="darkgreen">&quot;Y&quot;</font>;
+
+  <font color="blue">parameter </font>Boolean inclLinZ=false <font color="darkgreen">&quot;Z&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalIOBus">Connectors.ChemicalIOBus</a> chemical <font color="darkgreen">
+    &quot;Bus of ChemicalInput and ChemicalOutput connectors of multiple species&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">Connectors.RealInputBus</a> u <font color="darkgreen">&quot;Bus of inputs to specify conditions&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Bus of measurement outputs&quot;</font>;
+
+<font color="blue">end </font>NullPhase;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Fri Mar 22 20:58:20 2013.
+</div>
+</body>
+</html>

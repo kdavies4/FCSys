@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>FCSys.Characteristics.'H+'.Gas</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta name="description" content="H+ gas">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="../resources/documentation/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="FCSys.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="FCSys.html">
+    <img src="../resources/documentation/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+<ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Characteristics.'H+'.Gas"></a><a href="FCSys_Characteristics_'H+'.html#FCSys.Characteristics.'H+'">FCSys.Characteristics.'H+'</a>.Gas</h2>
+
+<b>H+ gas</b>
+
+<h3>Information</h3>
+
+<p>Assumptions:
+     <ol>
+  <li>The radius (for the purpose of the rigid-sphere assumption of
+  kinetic theory) is that of H
+  (<a href="http://en.wikipedia.org/wiki/Hydrogen">http://en.wikipedia.org/wiki/Hydrogen</a>).</li>
+     </ol></p>
+
+     <p>Additional notes:
+     <ul>
+     <li>The source data [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride2002</a>] breaks the data into three
+   temperature ranges, but the constants are the same for each.
+   Therefore, the temperature limits are set here such that the entire
+   range is handled without switching.
+   The lower temperature limit in the source data
+   is 298.150 K, but here it is expanded down to 200 K.  The constants are
+   independent of temperature anyway.</li>
+   <li>The enthalpy to produce H<sup>+</sup> from H<sub>2</sub>O (H<sub>2</sub>O &#8640; OH<sup>-</sup> + H<sup>+</sup>) is
+   -96569.804 J/mol.  The enthalpy to produce H<sup>+</sup> from H<sub>3</sub>O<sup>+</sup>
+   (H<sub>3</sub>O<sup>+</sup> &#8640; H<sub>2</sub>O + H<sup>+</sup>) is 839826.0 J/mol.  Based on
+   [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Tissandier1998</a>], the
+   enthalpy of formation of aqueous H<sup>+</sup> is 1150.1e3 J/mol.</li>
+     </ul></p>
+
+<p>For more information, see the
+  <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a> record.</p><p>
+Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">BaseClasses.Characteristic</a> (Record for thermodynamic and resistive properties).
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Fri Mar 22 21:03:07 2013.
+</div>
+</body>
+</html>

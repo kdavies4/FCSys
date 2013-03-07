@@ -10,8 +10,7 @@ package Tests "Models and functions for test and validation"
 
   algorithm
     ok := Units.callAll() and BaseClasses.Utilities.callAll();
-    annotation (Documentation(info="<html><p>
-  This function call will fail if any of the functions return an
+    annotation (Documentation(info="<html><p>This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
   end callAll;
@@ -1030,8 +1029,7 @@ package Tests "Models and functions for test and validation"
 
     algorithm
       ok := testValues() and testConversions();
-      annotation (Documentation(info="<html><p>
-  This function call will fail if any of the functions return an
+      annotation (Documentation(info="<html><p>This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
     end callAll;
@@ -1226,8 +1224,7 @@ package Tests "Models and functions for test and validation"
       test(Z_0/(376.730313461*ohm), name="characteristic impedance of vacuum");
 
       ok := true;
-      annotation (Documentation(info="<html><p>
-  This function call will fail if any of the functions return an
+      annotation (Documentation(info="<html><p>This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
     end testValues;
@@ -1265,8 +1262,7 @@ package Tests "Models and functions for test and validation"
             name="to_kPag");
 
       ok := true;
-      annotation (Documentation(info="<html><p>
-  This function call will fail if any of the functions return an
+      annotation (Documentation(info="<html><p>This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
     end testConversions;
@@ -1287,8 +1283,7 @@ package Tests "Models and functions for test and validation"
 
       algorithm
         ok := Chemistry() and Polynomial.f() and testFunctions();
-        annotation (Documentation(info="<html><p>
-  This function call will fail if any of the functions return an
+        annotation (Documentation(info="<html><p>This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
       end callAll;
@@ -1368,8 +1363,7 @@ package Tests "Models and functions for test and validation"
         end for;
 
         ok := true;
-        annotation (Documentation(info="<html><p>
-  This function call will fail if any of the functions return an
+        annotation (Documentation(info="<html><p>This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
       end Chemistry;
@@ -1519,8 +1513,7 @@ package Tests "Models and functions for test and validation"
           // tested by simulating TestF, TestdF, Testdf, and Testd2f.
 
           ok := true;
-          annotation (Documentation(info="<html><p>
-  This function call will fail if any of the functions return an
+          annotation (Documentation(info="<html><p>This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
         end f;
@@ -1683,8 +1676,7 @@ package Tests "Models and functions for test and validation"
         assert(sum([1, 2; 3, 4]) == 10, "The sum function failed.");
 
         ok := true;
-        annotation (Documentation(info="<html><p>
-  This function call will fail if any of the functions return an
+        annotation (Documentation(info="<html><p>This function call will fail if any of the functions return an
   incorrect result.  It will return <code>true</code> if all of the functions pass.
   There are no inputs.</p></html>"));
       end testFunctions;
@@ -1696,8 +1688,7 @@ package Tests "Models and functions for test and validation"
 <p>This package may be safely removed from the
 <a href=\"modelica://FCSys\">FCSys</a> distribution (along with resources/NIST.xls), but it may be helpful for debugging.
 The structure  of the subpackages matches that of <a href=\"modelica://FCSys\">FCSys</a>,
-although not all packages are represented.
-</p>
+although not all packages are represented.</p>
 
 <p>The <a href=\"modelica://FCSys.Tests.CallAll\">CallAll</a>() function calls of the test
 functions and the <a href=\"modelica://FCSys.Tests.RunAll\">RunAll</a> model includes all of the

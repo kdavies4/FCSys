@@ -219,8 +219,7 @@ package Characteristics
      <ol>
      <li>Constant specific volume (i.e., incompressible and without
           thermal expansion)</li>
-     </ol>
-     </p>
+     </ol></p>
 
      <p>Additional notes:
      <ul>
@@ -234,8 +233,8 @@ package Characteristics
        <li>Amorphous carbon:  <code>v=U.cc*m/(1.950*U.g)</code></li>
        <li>Diamond (type IIa):  <code>v=U.cc*m/(3.500*U.g)</code></li>
        </li>
-     </ul>
-     </p>
+     </ul></p>
+
 <p>For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
 
@@ -271,8 +270,7 @@ package Characteristics
      <ol>
      <li>Constant specific volume (i.e., incompressible and without
           thermal expansion)</li>
-     </ol>
-     </p>
+     </ol></p>
 
      <p>Additional notes:
      <ul>
@@ -297,8 +295,7 @@ package Characteristics
      <li>The specific volume (<code>v = U.cc*m/(2.00*U.g)</code>) is based on
    [<a href=\"modelica://FCSys.UsersGuide.References\">Lin2006</a>, p. A1327].
        </li>
-     </ul>
-     </p>
+     </ul></p>
 
 <p>For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
@@ -342,8 +339,8 @@ package Characteristics
    in the source data is 298.150 K, but here it is expanded down to 200 K.
    The constants are independent of temperature anyway.
   </li>
-</ul>
-</p>
+</ul></p>
+
 <p>For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
 
@@ -393,8 +390,7 @@ package Characteristics
   <li>The radius (for the purpose of the rigid-sphere assumption of
   kinetic theory) is that of H
   (<a href=\"http://en.wikipedia.org/wiki/Hydrogen\">http://en.wikipedia.org/wiki/Hydrogen</a>).</li>
-     </ol>
-     </p>
+     </ol></p>
 
      <p>Additional notes:
      <ul>
@@ -410,9 +406,9 @@ package Characteristics
    (H<sub>3</sub>O<sup>+</sup> &#8640; H<sub>2</sub>O + H<sup>+</sup>) is 839826.0 J/mol.  Based on
    [<a href=\"modelica://FCSys.UsersGuide.References\">Tissandier1998</a>], the
    enthalpy of formation of aqueous H<sup>+</sup> is 1150.1e3 J/mol.</li>
-     </ul>
-     </p>
-  <p>For more information, see the
+     </ul></p>
+
+<p>For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
 
     end Gas;
@@ -479,8 +475,7 @@ package Characteristics
    <a href=\"http://en.wikipedia.org/wiki/Van_der_Waals_radius\">http://en.wikipedia.org/wiki/Van_der_Waals_radius</a>.</li>
   <li>The virial coefficients are from [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>, p. 41].  The
   temperature range of the coefficients is [60, 500] K, but this is not enforced in the functions.</li>
-     </ul>
-     </p>
+     </ul></p>
 
 <p>For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
@@ -532,8 +527,7 @@ package Characteristics
    156.6 pm, the radius of H<sub>2</sub>O would be (120 + 156.6/2) pm = 198.3 pm.</li>
   <li>The virial coefficients are from [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>, p. 4]).  The
   temperature range of the coefficients is [350, 770] K, but this is not enforced in the functions.</li>
-     </ul>
-     </p>
+     </ul></p>
 
   <p>For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
@@ -546,8 +540,7 @@ package Characteristics
         <p>Assumptions:
      <ol>
   <li>The properties are the same as H<sub>2</sub>O gas.</li>
-     </ol>
-     </p>
+     </ol></p>
 
   <p>For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
@@ -578,15 +571,15 @@ package Characteristics
      <ol>
      <li>Constant specific volume (i.e., incompressible and without
           thermal expansion)</li>
-     </ol>
-     </p>
-            <p>Additional notes:
+     </ol></p>
+
+<p>Additional notes:
      <ul>
      <li>See note in <a href=\"modelica://FCSys.Characteristics.H2O.Gas\">Characteristics.H2O.Gas</a> regarding the radius.</li>
      <li>The default specific volume (<code>b_v=[U.cc*m/(0.99656*U.g)]</code>) is at 300 K based on [<a href=\"modelica://FCSys.UsersGuide.References\">Takenaka1990</a>].</li>
-     </ul>
-     </p>
-  <p>For more information, see the
+     </ul></p>
+
+<p>For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
 
     end Liquid;
@@ -637,9 +630,9 @@ package Characteristics
   <li>The virial coefficients are from [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>, p. 69].  The
   temperature range of the coefficients is [75, 745] K, but this is not enforced in the functions.  More precise virial coefficients are available from
   <a href=\"http://www.tpub.com/content/nasa1996/NASA-96-cr4755/NASA-96-cr47550059.htm\">http://www.tpub.com/content/nasa1996/NASA-96-cr4755/NASA-96-cr47550059.htm</a>.</li>
-     </ul>
-     </p>
-  <p>For more information, see the
+     </ul></p>
+
+<p>For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
 
     end Gas;
@@ -687,8 +680,8 @@ package Characteristics
    <a href=\"http://en.wikipedia.org/wiki/Van_der_Waals_radius\">http://en.wikipedia.org/wiki/Van_der_Waals_radius</a>.</li>
   <li>The virial coefficients are from [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>, p. 69].  The
   temperature range of the coefficients is [70, 495] K, but this is not enforced in the functions.</li>
-     </ul>
-     </p>
+     </ul></p>
+
 <p>For more information, see the
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> record.</p></html>"));
 
@@ -824,7 +817,7 @@ package Characteristics
       // Note:  The positive minimum value prevents a structural singularity
       // when checking FCSys.Subregions.Species.SpeciesInertStagnant in Dymola
       // 7.4.
-      constant Q.LengthSpecific r "Specific radius" annotation (Dialog);
+      constant Q.LengthSpecific d "Specific diameter" annotation (Dialog);
       final constant Integer z=Chemistry.charge(formula) "Charge number";
       constant Q.PressureAbsolute p0=U.bar
         "<html>Reference pressure (<i>p</i>&deg;)</html>";
@@ -884,7 +877,7 @@ package Characteristics
         output Q.Resistivity alpha "Resistivity";
 
       algorithm
-        alpha := 6*U.pi*r^2*U.q*sqrt(U.pi*m/T) annotation (Inline=true);
+        alpha := 3*U.pi*d^2*U.q*sqrt(U.pi*m/T)/2 annotation (Inline=true);
         annotation (Documentation(info="<html>
   <p>This function is based on the kinetic theory of gases with the rigid-sphere (\"billiard-ball\")
   assumption [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].  It is
@@ -979,6 +972,7 @@ package Characteristics
           // See s_resid() in Characteristic.s for the integral of (dels/delp)_T*dp.
           // This is temperature times the isobaric partial derivative of that function
           // with respect to temperature.  It is zero for an ideal gas.
+
         end c_p_resid;
 
       algorithm
@@ -989,7 +983,6 @@ package Characteristics
                 {1,-specVolPow[1]})) annotation (Inline=true);
         // See the notes in the algorithm of Characteristic.s.
         // Note:  [Dymond2002, p.17, eqs. 1.45 & 1.46] may be incorrect.
-
         annotation (Documentation(info="<html>
   <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
@@ -1090,12 +1083,10 @@ package Characteristics
 
       algorithm
         eta := p*alpha(T) annotation (Inline=true);
-
         annotation (Documentation(info="<html>
 <p>\"**Dynamic compressibility\" is defined here as the reciprocal of the volume,
 second, or bulk dynamic viscosity and specific volume (see
-<a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).
-</p>
+<a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).</p>
 </html>"));
       end eta;
 
@@ -1238,12 +1229,10 @@ second, or bulk dynamic viscosity and specific volume (see
 
       algorithm
         beta := m/alpha(T) annotation (Inline=true);
-
         annotation (Documentation(info="<html>
 <p>\"**Dynamic compressibility\" is defined here as the reciprocal of the volume,
 second, or bulk dynamic viscosity and specific volume (see
-<a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).
-</p>
+<a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).</p>
 </html>"));
       end beta;
 
@@ -1267,13 +1256,14 @@ second, or bulk dynamic viscosity and specific volume (see
                   T,
                   b_p[i, :],
                   pressPow[2]) for i in 1:size(b_p, 1)},
-                pressPow[1]) else 0 annotation (
+                pressPow[1]) else p0 annotation (
           Inline=true,
           inverse(v=v_Tp(T, p)),
           derivative=dp_Tv);
         annotation (Documentation(info="<html><p>If the species is incompressible, then <i>p</i>(<i>T</i>, <i>v</i>) is undefined,
   and the function will return a value of zero.</p>
-  <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a>().</p></html>"));
+
+<p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a>().</p></html>"));
       end p_Tv;
 
       replaceable function theta
@@ -1432,8 +1422,7 @@ second, or bulk dynamic viscosity and specific volume (see
         zeta := alpha(T)/m annotation (Inline=true);
         annotation (Documentation(info="<html>
 <p>Note that fluidity is defined as the reciprocal of viscosity&mdash;specifically dynamic viscosity
-(see <a href=\"http://en.wikipedia.org/wiki/Viscosity#Fluidity\">http://en.wikipedia.org/wiki/Viscosity#Fluidity</a>).
-</p>
+(see <a href=\"http://en.wikipedia.org/wiki/Viscosity#Fluidity\">http://en.wikipedia.org/wiki/Viscosity#Fluidity</a>).</p>
 </html>"));
       end zeta;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
@@ -1444,12 +1433,12 @@ second, or bulk dynamic viscosity and specific volume (see
     that.</p>
 
     <p>Assumptions:
-    <ol><li>Specific mass is constant.</li></ol>
-    </p>
-    <p>The following notes apply to the constants:
+    <ol><li>Specific mass is constant.</li></ol></p>
+
+<p>The following notes apply to the constants:
     <ul>
     <li>Currently, <code>formula</code> may not contain parentheses or brackets.</li>
-    <li><code>r</code> is the Van der Waals radius or the radius for the
+    <li><code>d</code> is the Van der Waals diameter or the diameter for the
     rigid-sphere (\"billiard-ball\") approximation of the kinetic theory of gases
     [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].</li>
     <li><code>b_v</code>: The powers of <i>p</i>/<i>T</i> increase by row.  The powers of
@@ -1506,8 +1495,8 @@ second, or bulk dynamic viscosity and specific volume (see
     (<a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.h\">h</a>) will be ill-posed.
     Typically the first virial coefficient is one (or equivalently <code>U.R</code>), which satisfies
     this requirement.</li>
-    </ul>
-    </p></html>"));
+    </ul></p></html>"));
+
     end Characteristic;
 
     type ReferenceEnthalpy = enumeration(
@@ -1521,9 +1510,9 @@ second, or bulk dynamic viscosity and specific volume (see
   end BaseClasses;
   annotation (Documentation(info="<html>
   <p>Each species has a subpackage for each material phase in which the species
-  is represented.  The thermodynamic properties are generally different for each phase.
-  </p>
-  <p>Additional materials may be included as needed.  The thermodynamic data for
+  is represented.  The thermodynamic properties are generally different for each phase.</p>
+
+<p>Additional materials may be included as needed.  The thermodynamic data for
   materials that are condensed at standard conditions is available in
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].
   The thermodynamic data for materials
@@ -1532,18 +1521,15 @@ second, or bulk dynamic viscosity and specific volume (see
   (and [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>]). Virial coefficients are available in
   [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>].  Transport characteristics are available in
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>,
-  <a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].
-  </p>
-  <p>
-<b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-Copyright 2007&ndash;2013, Georgia Tech Research Corporation.
-</p>
-<p>
-<i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+  <a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].</p>
+
+<p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2013, Georgia Tech Research Corporation.</p>
+
+<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
 it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
 disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.ModelicaLicense2\">
 FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
-http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
-</p></html>"));
+http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
 
 end Characteristics;

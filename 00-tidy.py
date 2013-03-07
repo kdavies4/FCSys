@@ -27,6 +27,11 @@ rpls = [# Remove empty annotation tags.
         (' </b>', '</b> '),
         ('<u> ', ' <u>'),
         (' </u>', '</u> '),
+        # Insert two newlines between paragraphs.
+        (r' *(</p>) *\n? *( *<p>)', r'\1\n\n\2'),
+        # No newline after start of paragraph or before end
+        (r'(<p>) *\n? *', r'\1'),
+        (r' *\n? *(</p>)', r'\1'),
         # Remove unless open/close tags.
         ('</b>( *<u>)<b>', r'\1'),
         ('</b>(</u> *)<b>', r'\1'),

@@ -2,7 +2,7 @@ within FCSys;
 package Connectors "Declarative and imperative connectors"
   extends Modelica.Icons.InterfacesPackage;
 
-  expandable connector ChemicalBus
+  expandable connector ChemicalIOBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> and <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connectors (for multiple species)</html>"
 
     annotation (
@@ -10,8 +10,8 @@ package Connectors "Declarative and imperative connectors"
       Documentation(info="<html><p>There is no minimal set of variables.  Species are included by connecting instances
     of a <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialChemical\">Chemical</a> connector
     (<a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> or
-    <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a>).
-    </p></html>"),
+    <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a>).</p></html>"),
+
       Icon(graphics={Ellipse(
             extent={{-100,100},{100,-100}},
             lineColor={208,104,0},
@@ -28,84 +28,103 @@ package Connectors "Declarative and imperative connectors"
               fillColor={255,128,0},
               lineThickness=0.5)}));
 
-  end ChemicalBus;
+  end ChemicalIOBus;
 
-  expandable connector ChemicalBusInternal
-    "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> and <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connectors (for multiple species)</html>"
+  connector ChemicalInput
+    "**Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as input"
 
+    input String formula "Chemical formula";
+    input Integer nu "Stoichiometric coefficient";
+    input Integer n_spec(min=0) "Number of species in the reaction";
+    input Q.CurrentAbsolute Io "Exchange current";
+    // Note:  The start value prevents a warning when checked in Dymola 7.4.
     annotation (
-      defaultComponentPrefixes="protected",
       defaultComponentName="chemical",
-      Documentation(info="<html><p>
-    This is copy of the <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> connector, except that it
-    has a smaller icon and a default <code>protected</code> prefix.  For more information, see that connector.</p></html>"),
+      Documentation(info="<html><p>See the information in the
+    <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialChemical\">PartialChemical</a>
+    connector and the documentation in the
+    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
+
+      Icon(graphics={Ellipse(
+            extent={{-100,100},{100,-100}},
+            lineColor={208,104,0},
+            fillColor={255,128,0},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.Dash)}),
+      Diagram(graphics={Text(
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0}),Ellipse(
+              extent={{-30,30},{30,-30}},
+              lineColor={208,104,0},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,128,0},
+              pattern=LinePattern.Dash)}));
+
+  end ChemicalInput;
+
+  connector ChemicalOutput
+    "**Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as input"
+
+    output String formula "Chemical formula";
+    output Integer nu "Stoichiometric coefficient";
+    output Integer n_spec(min=0) "Number of species in the reaction";
+    output Q.CurrentAbsolute Io "Exchange current";
+    // Note:  The start value prevents a warning when checked in Dymola 7.4.
+    annotation (
+      defaultComponentName="chemical",
+      Documentation(info="<html><p>See the information in the
+    <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialChemical\">PartialChemical</a>
+    connector and the documentation in the
+    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
+
+      Icon(graphics={Ellipse(
+            extent={{-100,100},{100,-100}},
+            lineColor={208,104,0},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.Dash)}),
+      Diagram(graphics={Text(
+            extent={{-100,36},{100,76}},
+            textString="%name",
+            lineColor={0,0,0}), Ellipse(
+            extent={{-30,30},{30,-30}},
+            lineColor={208,104,0},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.Dash)}));
+
+  end ChemicalOutput;
+
+  partial connector Chemical
+    "Partial connector to exchange material while advecting linear momentum and enthalpy"
+
+    // Material
+    Q.Number sprime(nominal=10) "Modified specific entropy";
+    flow Q.Number sprime_eq(nominal=10)
+      "Modified specific entropy at equilibrium";
+
+    // Mechanical
+    extends FCSys.Connectors.Mechanical;
+
+    // Fluid
+    extends FCSys.Connectors.Thermal;
+    annotation (
+      Documentation(info="<html><p>For more information, see the documentation in the
+    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Icon(graphics={Ellipse(
             extent={{-100,100},{100,-100}},
             lineColor={208,104,0},
             fillPattern=FillPattern.Solid,
-            fillColor={255,128,0},
-            lineThickness=0.5)}),
+            fillColor={255,128,0})}),
       Diagram(graphics={Ellipse(
-              extent={{-10,10},{10,-10}},
+              extent={{-30,30},{30,-30}},
               lineColor={208,104,0},
               fillPattern=FillPattern.Solid,
-              fillColor={255,128,0},
-              lineThickness=0.5),Text(
-              extent={{-100,20},{100,60}},
-              textString="%name",
-              lineColor={0,0,0})}));
+              fillColor={255,128,0})}));
 
-  end ChemicalBusInternal;
-
-  connector ChemicalInput
-    "Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as input"
-
-    extends BaseClasses.PartialChemical;
-
-    input Q.MassSpecific m "Specific mass";
-    input String formula(start="") "Chemical formula";
-    // Note:  The start value prevents a warning when checked in Dymola 7.4.
-
-    annotation (
-      defaultComponentName="chemical",
-      Documentation(info="<html><p>See the information in the
-    <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialChemical\">PartialChemical</a>
-    connector and the documentation in the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
-
-      Icon(graphics={Ellipse(
-            extent={{-60,60},{60,-60}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            lineColor={208,104,0}), Ellipse(extent={{-100,100},{100,-100}},
-              lineColor={208,104,0})}),
-      Diagram(graphics={Ellipse(
-            extent={{-18,18},{18,-18}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            lineColor={208,104,0})}));
-
-  end ChemicalInput;
-
-  connector ChemicalOutput
-    "Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as output"
-
-    extends BaseClasses.PartialChemical;
-
-    output Q.MassSpecific m "Specific mass";
-    output String formula "Chemical formula";
-    annotation (
-      defaultComponentName="chemical",
-      Documentation(info="<html><p>See the information in the
-    <a href=\"modelica://FCSys.Connectors.BaseClasses.PartialChemical\">PartialChemical</a>
-    connector and the documentation in the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
-
-      Icon(graphics={Ellipse(extent={{-100,100},{100,-100}}, lineColor={208,104,
-                0})}));
-
-  end ChemicalOutput;
+  end Chemical;
 
   expandable connector FaceBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors (for multiple species)</html>"
@@ -113,8 +132,8 @@ package Connectors "Declarative and imperative connectors"
     annotation (
       defaultComponentName="face",
       Documentation(info="<html><p>There is no minimal set of variables.  Species are included by connecting instances
-    of <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors.
-    </p></html>"),
+    of <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors.</p></html>"),
+
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
             extent={{-100,100},{100,-100}},
@@ -141,8 +160,7 @@ package Connectors "Declarative and imperative connectors"
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="face",
-      Documentation(info="<html><p>
-    This is copy of the <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector, except that it
+      Documentation(info="<html><p>This is copy of the <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connector, except that it
     has a smaller icon and a default <code>protected</code> prefix.  For more information, see that connector.</p></html>"),
 
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
@@ -169,15 +187,18 @@ package Connectors "Declarative and imperative connectors"
     "Connector to transport linear momentum and heat of a single species"
 
     // Material
-    Q.Pressure p(nominal=U.atm) "Pressure";
+    Q.AmountVolumic rho(nominal=298.15*U.K/U.atm) "Density";
     flow Q.Current Ndot(nominal=U.A) "Current";
-    // **add this to documentation, remove normal
+
+    // Normal
+    extends Mechanical(final n_lin=1);
 
     // Transverse
-    extends FCSys.Connectors.Mechanical(final n_lin=2);
+    Q.Pressure tau[2] "Shear stress";
+    Q.VolumeRate PAdot[2] "**Perimeter rate times surface area";
 
     // Thermal
-    extends FCSys.Connectors.Thermal;
+    extends Thermal;
     annotation (
       Documentation(info="<html>
     <p>Note that the geometric orientation is global.
@@ -186,8 +207,7 @@ package Connectors "Declarative and imperative connectors"
     This is different than the
     <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> and
     <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connectors,
-    where current is positive into the component.
-    </p>
+    where current is positive into the component.</p>
 
     <p>For more information, see the documentation in the
     <a href=\"modelica://FCSys.Connectors.BaseClasses.Mechanical\">Mechanical</a> base class and the
@@ -262,8 +282,7 @@ package Connectors "Declarative and imperative connectors"
     flow Q.Volume V(min=-Modelica.Constants.inf, nominal=U.cc) "Volume";
     annotation (
       defaultComponentName="inert",
-      Documentation(info="<html><p>
-    The concept of \"additivity of volume\" is defined by
+      Documentation(info="<html><p>The concept of \"additivity of volume\" is defined by
     <a href=\"http://en.wikipedia.org/wiki/Amagat's_law\">Amagat's law</a> or the Law of Partial Volumes, which
     states that the partial extensive volumes of the components of a mixture sum to the total
     extensive volume of the mixture [<a href=\"modelica://FCSys.UsersGuide.References\">Bejan2006</a>, p. 194].
@@ -281,8 +300,7 @@ package Connectors "Declarative and imperative connectors"
 
     <p>In order to implement Amagat's law, this connector includes volume (not rate of volume) as a flow variable.
     The effort variable is pressure such that the effort and flow variables are conjugates of
-    energy (not power).
-    </p>
+    energy (not power).</p>
 
     <p>Note that this connector extends from
     the <a href=\"modelica://FCSys.Connectors.BaseClasses.Mechanical\">Mechanical</a> and
@@ -329,8 +347,7 @@ package Connectors "Declarative and imperative connectors"
     flow Q.Pressure p(nominal=U.atm) "Pressure";
     annotation (
       defaultComponentName="inert",
-      Documentation(info="<html><p>
-    The concept of \"additivity of pressure\" is defined by
+      Documentation(info="<html><p>The concept of \"additivity of pressure\" is defined by
     <a href=\"http://en.wikipedia.org/wiki/Dalton's_law\">Dalton's law</a> or the Law of Partial Pressures,
     which states that the partial pressures of the components of a mixture sum to the total
     pressure of the mixture [<a href=\"modelica://FCSys.UsersGuide.References\">Bejan2006</a>, p. 192].
@@ -339,8 +356,7 @@ package Connectors "Declarative and imperative connectors"
 
     <p>In order to implement Dalton's law, this connector includes pressure as a flow variable.
     The effort variable is volume such that the effort and flow variables are conjugates of
-    energy (not power).
-    </p>
+    energy (not power).</p>
 
     <p>Note that this connector extends from
     the <a href=\"modelica://FCSys.Connectors.BaseClasses.Mechanical\">Mechanical</a> and
@@ -401,8 +417,7 @@ package Connectors "Declarative and imperative connectors"
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="inert",
-      Documentation(info="<html><p>
-    This is copy of the <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> connector, except that it
+      Documentation(info="<html><p>This is copy of the <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> connector, except that it
     has a smaller icon, a default <code>protected</code> prefix, and the subconnectors are conditional.
     For more information, see that connector.</p></html>"),
       Icon(graphics={Ellipse(
@@ -438,7 +453,7 @@ package Connectors "Declarative and imperative connectors"
       annotation (HideResult=true);
 
     Q.Velocity phi[n_lin](each nominal=U.cm/U.s) "Velocity";
-    flow Q.Force Mphidot[n_lin](each nominal=U.N) "Force";
+    flow Q.Force mPhidot[n_lin](each nominal=U.N) "Force";
     annotation (
       Documentation(info="<html><p>This connector is used to transport the transverse
   orientation of linear momentum only.  The normal orientation is transported by the Normal
@@ -513,8 +528,7 @@ package Connectors "Declarative and imperative connectors"
             textString="%name",
             lineColor={0,0,0})}),
     Documentation(info="<html>
-<p>
-Connector with one input signal of type <code>Real</code>.</p>
+<p>Connector with one input signal of type <code>Real</code>.</p>
 </html>"));
   connector RealInputInternal = input Real
     "<html>Internal \"<code>input Real</code>\" as a connector</html>"
@@ -543,8 +557,7 @@ Connector with one input signal of type <code>Real</code>.</p>
             textString="%name",
             lineColor={0,0,0})}),
     Documentation(info="<html>
-<p>
-Protected connector with one input signal of type <code>Real</code>.</p>
+<p>Protected connector with one input signal of type <code>Real</code>.</p>
 </html>"));
   expandable connector RealInputBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.RealInput\">RealInput</a> connectors</html>"
@@ -640,8 +653,7 @@ Protected connector with one input signal of type <code>Real</code>.</p>
             textString="%name",
             lineColor={0,0,0})}),
     Documentation(info="<html>
-<p>
-Connector with one output signal of type <code>Real</code>.</p>
+<p>Connector with one output signal of type <code>Real</code>.</p>
 </html>"));
   connector RealOutputInternal = output Real
     "<html>Internal \"<code>output Real</code>\" as a connector</html>"
@@ -668,8 +680,7 @@ Connector with one output signal of type <code>Real</code>.</p>
             textString="%name",
             lineColor={0,0,0})}),
     Documentation(info="<html>
-<p>
-Protected connector with one output signal of type <code>Real</code>.</p>
+<p>Protected connector with one output signal of type <code>Real</code>.</p>
 </html>"));
   expandable connector RealOutputBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.RealOutput\">RealOutput</a> connectors</html>"
@@ -741,39 +752,10 @@ Protected connector with one output signal of type <code>Real</code>.</p>
   package BaseClasses "Base classes (not generally for direct use)"
     extends Modelica.Icons.BasesPackage;
 
-    partial connector PartialChemical
-      "Partial connector to exchange material while advecting linear momentum and enthalpy"
-
-      // Material
-      Q.Potential g(nominal=U.V) "Electrochemical potential";
-      flow Q.Current Ndot(nominal=U.A) "Current";
-
-      // Mechanical
-      extends FCSys.Connectors.Mechanical;
-
-      // Fluid
-      extends FCSys.Connectors.Thermal;
-      annotation (
-        Documentation(info="<html><p>For more information, see the documentation in the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
-
-        Icon(graphics={Ellipse(
-              extent={{-100,100},{100,-100}},
-              lineColor={208,104,0},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,128,0})}),
-        Diagram(graphics={Ellipse(
-              extent={{-30,30},{30,-30}},
-              lineColor={208,104,0},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,128,0})}));
-
-    end PartialChemical;
-
   end BaseClasses;
   annotation (Documentation(info="<html>
   **review and update all doc within the Connectors package.
-  
+
   <p>Three types of physical connectors are used in <a href=\"modelica://FCSys\">FCSys</a>.
   The chemical connectors (<a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a>,
   <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a>,
@@ -826,14 +808,13 @@ Protected connector with one output signal of type <code>Real</code>.</p>
   <a href=\"modelica://Modelica.Thermal.HeatTransfer\">Modelica.Thermal.HeatTransfer</a>).
   The additivity of volume and
   pressure pairs describe static balances; therefore, their flows are the quantities
-  rather than the rates of the quantities.
-  </p>
+  rather than the rates of the quantities.</p>
 
     <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-    <caption align=\"bottom\" id=\"Tab1\"><b>Table 1:</b> Summary of the effort-flow pairs.</caption>
+    <caption align=\"bottom\" id=\"Tab1\">Table 1: Summary of the effort-flow pairs.</caption>
       <tr>
         <th>Within icon(s)</th>
-        <th>Name or quantity</th>
+        <th>Name</th>
         <th>Effort</th>
         <th>Flow</th>
       </tr>
@@ -851,9 +832,9 @@ Protected connector with one output signal of type <code>Real</code>.</p>
         <td>
           <a href=\"modelica://FCSys.Connectors.Face\"><img src=\"modelica://FCSys/help/FCSys.Connectors.FaceI.png\"></a>
           <a href=\"modelica://FCSys.Connectors.FaceBus\"><img src=\"modelica://FCSys/help/FCSys.Connectors.FaceBusI.png\"></a></td>
-        <td valign=middle>Normal</td>
-        <td valign=middle>Areic current<br><i>J</i> [N L<sup>-2</sup> T<sup>-1</sup>]</td>
-        <td valign=middle>Force<br><i>M</i>&phi;dot [L M T<sup>-2</sup>]</td>
+        <td valign=middle>Material</td>
+        <td valign=middle>Density<br><i>&rho;</i> [N L<sup>-3</sup>]</td>
+        <td valign=middle>Current<br><i>N&#775;</i> [N T<sup>-1</sup>]</td>
       </tr>
       <tr>
         <td>
@@ -868,7 +849,7 @@ Protected connector with one output signal of type <code>Real</code>.</p>
           <a href=\"modelica://FCSys.Connectors.Inert\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertI.png\"></a>
           <a href=\"modelica://FCSys.Connectors.InertAmagat\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertAmagatI.png\"></a>
           <a href=\"modelica://FCSys.Connectors.InertDalton\"><img src=\"modelica://FCSys/help/FCSys.Connectors.InertDaltonI.png\"></a></td>
-        <td valign=middle>Mechanical and Transverse</td>
+        <td valign=middle>Mechanical</td>
         <td valign=middle>Velocity<br>&phi; [L T<sup>-1</sup>]</td>
         <td valign=middle>Force<br><i>M</i>&phi;dot [L M T<sup>-2</sup>]</td>
       </tr>
@@ -879,8 +860,8 @@ Protected connector with one output signal of type <code>Real</code>.</p>
           <a href=\"modelica://FCSys.Connectors.ChemicalBus\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ChemicalBusI.png\"></a></td>
           <!--<a href=\"modelica://FCSys.Connectors.ChemicalBusInternal\"><img src=\"modelica://FCSys/help/FCSys.Connectors.ChemicalBusInternalI.png\"></a></td>-->
         <td valign=middle>Fluid</td>
-        <td valign=middle>Massic enthalpy<br><i>h&#772;</i> [L<sup>2</sup> M N<sup>-1</sup> T<sup>-2</sup>]</td>
-        <td valign=middle>Enthalpy flow rate<br><i>H&#775;</i> [L<sup>2</sup>  M T<sup>-3</sup>]</td>
+        <td valign=middle>Temperature times specific entropy<br><i>Ts</i> [L<sup>2</sup> M N<sup>-1</sup> T<sup>-2</sup>]</td>
+        <td valign=middle>Heat flow rate<br><i>Q&#775;</i> [L<sup>2</sup> M T<sup>-3</sup>]</td>
       </tr>
       <tr>
         <td>
@@ -953,18 +934,15 @@ Protected connector with one output signal of type <code>Real</code>.</p>
   (e.g., <a href=\"modelica://FCSys.Subregions.PhaseBoundary\">PhaseBoundary</a>).</p>
 
   <p align=center id=\"Fig1\"><img src=\"modelica://FCSys/resources/documentation/Connectors/hierarchy.png\">
-<br><b>Figure 1:</b> Hierarchy of the connectors.</p>
+<br>Figure 1: Hierarchy of the connectors.</p>
 
-    <p><b>Relation to thermodynamics and justification of the Amagat and Dalton connectors:</b><p>
-
-    <p>In order to describe the dynamic behavior of a physical system, a model must include conservation laws or rate balances.  These
+    <p><b>Relation to thermodynamics and justification of the Amagat and Dalton connectors:</b><p><p>In order to describe the dynamic behavior of a physical system, a model must include conservation laws or rate balances.  These
     equations involve the storage and flow of extensive quantities within (among species) and into the system.  In chemical/thermal systems, the extensive
     quantities of interest are particle number (or mass) and entropy or energy.
     For the sake of simplicity, momentum will be excluded from the present discussion; assume that the fluid is macroscopically stagnant.
     Also assume that there is only one inlet or outlet to the system.
     In terms of mathematics, we have introduced four variables (2 flows and 2 quantities) but only two equations (material and energy
-    conservation).
-    </p>
+    conservation).</p>
 
     <p>Two additional equations involve flow rates; these are transport equations with spatial nature&mdash;separate from the temporal
     conservation equations.  An
@@ -976,8 +954,7 @@ Protected connector with one output signal of type <code>Real</code>.</p>
     Yet these are intensive
     properties&mdash;distinct from the quantities, which are extensive.
     So far, there are two rate balances to relate extensive quantities to flows and two transport equations
-    (4 equations in all) and six variables (2 quantities, 2 flows, and 2 efforts or intensive properties).
-    </p>
+    (4 equations in all) and six variables (2 quantities, 2 flows, and 2 efforts or intensive properties).</p>
 
     <p>One extensive quantity can be divided by the other to yield an intensive property.
     For example, internal energy can be divided by particle number
@@ -1013,27 +990,22 @@ Protected connector with one output signal of type <code>Real</code>.</p>
     specific volume, and temperature is given by an equation of state.
     This \"additivity of volume\"
     interaction occurs through the
-    <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector.
-    </p>
+    <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector.</p>
 
     <p>If the species are mixed, it may be more appropriate to assume that the pressures
     of the components of a mixture sum to the total pressure of the mixture.  This \"additivity of pressure\"
     is described by connections of the
     <a href=\"modelica://FCSys.Connectors.InertDelton\">InertDalton</a> connector (instead of
-    instead of <a href=\"modelica://FCSys.Connectors.InertDelton\">InertAmagat</a>).
-    </p>
+    instead of <a href=\"modelica://FCSys.Connectors.InertDelton\">InertAmagat</a>).</p>
 
-  <p>
-  <b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-  Copyright 2007&ndash;2013, Georgia Tech Research Corporation.
-  </p>
-  <p>
-  <i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+  <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+  Copyright 2007&ndash;2013, Georgia Tech Research Corporation.</p>
+
+<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
   it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
   disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.ModelicaLicense2\">
   FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
-  http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
-  </p>
+  http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
   </html>"));
 
 end Connectors;

@@ -117,7 +117,6 @@ package Subregions
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
-
       annotation (experiment(StopTime=1000, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionHOR.mos"));
@@ -937,11 +936,11 @@ package Subregions
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
-
       annotation (experiment(StopTime=1000, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionHOR.mos"));
     end SubregionEvaporation;
+
   end Examples;
 
   model Subregion "Subregion with all phases"
@@ -1235,8 +1234,9 @@ package Subregions
     <code>false</code>
     to eliminate unnecessary equations.</li>
   <li>H<sub>2</sub>O vapor is included by default, since at least one species
-  must be included.</li></ul>
-</p><p>For more information, see the
+  must be included.</li></ul></p>
+
+<p>For more information, see the
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
@@ -1298,8 +1298,8 @@ package Subregions
       defaultComponentPrefixes="replaceable",
       Documentation(info="<html><p>Notes:<ul>
   <li>H<sub>2</sub>O is included by default, since at least one species
-  must be included.</li></ul>
-</p>
+  must be included.</li></ul></p>
+
 <p>For more information, see the
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
@@ -1479,8 +1479,9 @@ package Subregions
     <code>false</code>
     to eliminate unnecessary equations.</li>
   <li>H<sub>2</sub>O vapor is included by default, since at least one species
-  must be included.</li></ul>
-</p><p>For more information, see the
+  must be included.</li></ul></p>
+
+<p>For more information, see the
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
@@ -1622,8 +1623,8 @@ package Subregions
         Placement(transformation(extent={{-10,-10},{10,10}})));
 
     protected
-      Reaction combustion(n_spec=3) if inclReact and (inclH2 and inclH2O and
-        inclO2) "2H2 + O2 <=> 2H2O"
+      Reaction combustion(n_spec=3, formulas={"H2","O2","H2O"}) if inclReact
+         and (inclH2 and inclH2O and inclO2) "2H2 + O2 <=> 2H2O"
         annotation (Placement(transformation(extent={{-50,10},{-30,30}})));
 
       // **Clean up diagram for this and other phases.
@@ -1859,8 +1860,8 @@ package Subregions
         defaultComponentPrefixes="replaceable",
         Documentation(info="<html><p>Notes:<ul><li>The <code>inclReact</code> parameter may be set to
     <code>false</code>
-    to eliminate unnecessary equations.</li></ul>
-</p>
+    to eliminate unnecessary equations.</li></ul></p>
+
 <p>For more information, see the
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
@@ -2044,8 +2045,7 @@ package Subregions
     <ol>
     <li>The density of e<sup>-</sup> is equal to that of C<sup>+</sup>.</li>
     <li>All of the C has been ionized to C<sup>+</sup>.</li>
-    </ol>
-    </p>
+    </ol></p>
 
     <p>For more information, see the
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
@@ -2325,8 +2325,7 @@ package Subregions
     <li>All of the C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S has been ionized to
     C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>.  Note that this is not true in practice
     (see <a href=\"modelica://FCSys.Characteristics.'H+'.Ionomer\">Characteristics.'H+'.Ionomer</a>).</li>
-    </ol>
-    </p>
+    </ol></p>
 
     <p>For more information, see the
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
@@ -2496,7 +2495,7 @@ package Subregions
           annotation (Dialog(tab="Initialization",group="Temperature"));
         // This is always enabled in the dialog since it's used as a guess value.
 
-        Connectors.ChemicalBus chemical if n_spec > 0
+        Connectors.ChemicalIOBus chemical if n_spec > 0
           "Bus of chemical connectors for the species"
           annotation (Placement(transformation(extent={{-54,42},{-34,62}})));
 
@@ -2603,50 +2602,58 @@ package Subregions
 
 <p>Notes:<ul>
   <li>The x-axis component of linear momentum is included by default.  At least one component must be included.</li></ul></html>"),
-            Icon(graphics={Ellipse(
-                      extent={{-40,100},{40,20}},
-                      lineColor={127,127,127},
-                      startAngle=30,
-                      endAngle=149,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{20,-4},{100,-84}},
-                      lineColor={127,127,127},
-                      startAngle=270,
-                      endAngle=390,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Ellipse(
-                      extent={{-100,-4},{-20,-84}},
-                      lineColor={127,127,127},
-                      startAngle=149,
-                      endAngle=270,
-                      pattern=LinePattern.Dash,
-                      fillPattern=FillPattern.Solid,
-                      fillColor={225,225,225}),Polygon(
-                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
-                  80},{94.5,-24},{60,-84}},
-                      pattern=LinePattern.None,
-                      fillPattern=FillPattern.Sphere,
-                      smooth=Smooth.None,
-                      fillColor={225,225,225},
-                      lineColor={0,0,0}),Line(
-                      points={{-60,-84},{60,-84}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{34.5,80},{94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Line(
-                      points={{-34.5,80},{-94.5,-24}},
-                      color={127,127,127},
-                      pattern=LinePattern.Dash,
-                      smooth=Smooth.None),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+            Icon(graphics={
+              Ellipse(
+                extent={{-40,100},{40,20}},
+                lineColor={127,127,127},
+                startAngle=30,
+                endAngle=149,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{20,-4},{100,-84}},
+                lineColor={127,127,127},
+                startAngle=270,
+                endAngle=390,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Ellipse(
+                extent={{-100,-4},{-20,-84}},
+                lineColor={127,127,127},
+                startAngle=149,
+                endAngle=270,
+                pattern=LinePattern.Dash,
+                fillPattern=FillPattern.Solid,
+                fillColor={225,225,225}),
+              Polygon(
+                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
+                    94.5,-24},{60,-84}},
+                pattern=LinePattern.None,
+                fillPattern=FillPattern.Sphere,
+                smooth=Smooth.None,
+                fillColor={225,225,225},
+                lineColor={0,0,0}),
+              Line(
+                points={{-60,-84},{60,-84}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{34.5,80},{94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Line(
+                points={{-34.5,80},{-94.5,-24}},
+                color={127,127,127},
+                pattern=LinePattern.Dash,
+                smooth=Smooth.None),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}));
       end NullPhase;
 
     end BaseClasses;
@@ -2683,9 +2690,9 @@ package Subregions
                     {100,100}}), graphics),
             Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics={Text(
-                          extent={{-150,90},{-118,52}},
-                          lineColor={0,0,255},
-                          textString="%t.test")}));
+                  extent={{-150,90},{-118,52}},
+                  lineColor={0,0,255},
+                  textString="%t.test")}));
 
         end Calibrated;
 
@@ -2740,7 +2747,7 @@ package Subregions
    Related data is listed in Table 1.</p>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-    <caption align=\"bottom\"><b>Table 1:</b> Properties of forms of C [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 909].</caption>
+    <caption align=\"bottom\">Table 1: Properties of forms of C [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 909].</caption>
     <tr>
       <th rowspan=3 valign=\"middle\"><code>T/U.K</code></th>
       <th rowspan=1 colspan=2 width=1 valign=\"middle\">Diamond (type IIa)</th>
@@ -2832,8 +2839,9 @@ package Subregions
     <p>Notes:
     <ul><li>The default thermal resistivity (<code>R=U.m*U.K/(0.16*U.W)</code>) is of dry
   Nafion 115 [<a href=\"modelica://FCSys.UsersGuide.References\">Kandlikar2009</a>, p. 1277].</li>
-  </ul>
-  </p><p>For more information, see the
+  </ul></p>
+
+<p>For more information, see the
     <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Fixed;
@@ -3010,7 +3018,7 @@ package Subregions
   Table 1 lists the properties at other temperatures.</p>
 
     <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-  <caption align=\"bottom\"><b>Table 1:</b> Properties of H gas (not H<sup>+</sup>) (<a href=\"modelica://FCSys.UsersGuide.References\">Schetz and Fuhs, 1996</a>, p. 139)</caption>
+  <caption align=\"bottom\">Table 1: Properties of H gas (not H<sup>+</sup>) (<a href=\"modelica://FCSys.UsersGuide.References\">Schetz and Fuhs, 1996</a>, p. 139)</caption>
 <tr>
       <th valign=\"middle\"><code>T/U.K</code></th>
       <th width=1><code>F<br>*U.Pa*U.s</code></th>
@@ -3066,8 +3074,9 @@ package Subregions
 <tr><td>4900</td><td>1/53.2e-6</td><td>1/1.6477</td></tr>
 <tr><td>5000</td><td>1/54.1e-6</td><td>1/1.6750</td></tr>
   </table>
+</p>
 
-</p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
 
         end Fixed;
 
@@ -3101,8 +3110,9 @@ package Subregions
             defaultComponentName="H2",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
-          </ol>
-          </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+          </ol></p>
+
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
 
         end Calibrated;
 
@@ -3118,8 +3128,9 @@ package Subregions
             defaultComponentName="H2",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
-          </ol>
-          </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+          </ol></p>
+
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
 
         end Correlated;
 
@@ -3149,10 +3160,10 @@ package Subregions
 <p>The default resistivities (<code>F=1/(89.6e-7*U.Pa*U.s)</code>
 and <code>R=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas at 1 atm and
   300 K from Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 919&ndash;920].
-  Table 1 lists the properties at  other temperatures. </p>
+  Table 1 lists the properties at  other temperatures.</p>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-    <caption align=\"bottom\"><b>Table 1:</b> Properties of H<sub>2</sub> gas at 1 atm [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 919&ndash;920].</caption>
+    <caption align=\"bottom\">Table 1: Properties of H<sub>2</sub> gas at 1 atm [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 919&ndash;920].</caption>
   <tr>
       <th rowspan=2 valign=\"middle\"><code>T/U.K</code></th>
       <th rowspan=2 width=1><code>c_p*U.kg*U.K<br>/(U.J*Data.m)</code></th>
@@ -3223,8 +3234,9 @@ and <code>R=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas 
             defaultComponentName="H2O",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
-          </ol>
-          </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+          </ol></p>
+
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
 
         end Calibrated;
 
@@ -3240,8 +3252,9 @@ and <code>R=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> gas 
             defaultComponentName="H2O",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
-          </ol>
-          </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+          </ol></p>
+
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
 
         end Correlated;
 
@@ -3277,7 +3290,7 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
   <a href=\"http://www.engineeringtoolbox.com/water-dynamic-kinematic-viscosity-d_596.html\">http://www.engineeringtoolbox.com/water-dynamic-kinematic-viscosity-d_596.html</a>.</p>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-    <caption align=\"bottom\"><b>Table 1:</b> Properties of H<sub>2</sub>O gas at saturation pressure [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 924&ndash;925].</caption>
+    <caption align=\"bottom\">Table 1: Properties of H<sub>2</sub>O gas at saturation pressure [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 924&ndash;925].</caption>
   <tr>
       <th valign=\"middle\"><code>T/U.K</code></th>
       <th width=1><code>c_p*U.kg*U.K<br>/(U.J*Data.m)</code></th>
@@ -3342,7 +3355,7 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
 <br>
 
     <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-    <caption align=\"bottom\"><b>Table 2:</b> Properties of H<sub>2</sub>O gas at 1 atm [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 921].</caption>
+    <caption align=\"bottom\">Table 2: Properties of H<sub>2</sub>O gas at 1 atm [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 921].</caption>
   <tr>
       <th valign=\"middle\"><code>T/U.K</code></th>
       <th width=1><code>c_p*U.kg*U.K<br>/(U.J*Data.m)</code></th>
@@ -3362,8 +3375,9 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
 <tr><td>850</td><td>2.186e3</td><td>1/296.9e-7</td><td>1/63.7e-3</td></tr>
   </table></ul>
 <br>
+</p>
 
-  </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
 
         end Fixed;
 
@@ -3393,8 +3407,9 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
             defaultComponentName="H2O",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
-          </ol>
-          </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+          </ol></p>
+
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
 
         end Calibrated;
 
@@ -3405,14 +3420,14 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
             Xi=Data.Xi(T),
             F=Data.F(T),
             R=Data.R(T));
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2O",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
-          </ol>
-          </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+          </ol></p>
+
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
 
         end Correlated;
 
@@ -3423,7 +3438,6 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
             redeclare parameter Q.CompressibilityDynamic Xi=Data.Xi(),
             redeclare parameter Q.FluidityDynamic F=Data.F(),
             redeclare parameter Q.ResistivityThermal R=Data.R());
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2O",
@@ -3432,8 +3446,9 @@ and <code>R=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at saturatio
         <li>The generalized resistivities (&Xi;, <i>F</i>, <i>R</i>) are fixed (e.g., independent of temperature).</li>
 
     </ol></p>
+</p>
 
-  </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
 
         end Fixed;
 
@@ -3509,7 +3524,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
   <a href=\"http://www.engineeringtoolbox.com/water-dynamic-kinematic-viscosity-d_596.html\">http://www.engineeringtoolbox.com/water-dynamic-kinematic-viscosity-d_596.html</a>.</p>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-    <caption align=\"bottom\"><b>Table 1:</b> Properties of H<sub>2</sub>O liquid at saturation pressure (<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 924&ndash;925).</caption>
+    <caption align=\"bottom\">Table 1: Properties of H<sub>2</sub>O liquid at saturation pressure (<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 924&ndash;925).</caption>
   <tr>
       <th valign=\"middle\"><code>T/U.K</code></th>
       <th width=1><code>c_p*U.kg*U.K<br>/(U.J*Data.m)</code></th>
@@ -3606,8 +3621,9 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
             defaultComponentName="N2",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
-          </ol>
-          </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+          </ol></p>
+
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
 
         end Calibrated;
 
@@ -3623,8 +3639,9 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
             defaultComponentName="N2",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
-          </ol>
-          </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+          </ol></p>
+
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
 
         end Correlated;
 
@@ -3665,7 +3682,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
   reference.</p>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-  <caption align=\"bottom\"><b>Table 1:</b> Properties of N<sub>2</sub> gas at 1 atm [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 920]</caption>
+  <caption align=\"bottom\">Table 1: Properties of N<sub>2</sub> gas at 1 atm [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 920]</caption>
   <tr>
       <th valign=\"middle\"><code>T/U.K</code></th>
       <th width=1><code>c_p*U.kg*U.K<br>/(U.J*Data.m)</code></th>
@@ -3694,7 +3711,9 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
 
   <p>The dynamic fluidity of air at 15.0 &deg;C and 1 atm is given by
        <code>F=1/(178e-7*U.Pa*U.s)</code>
-   (<a href=\"http://en.wikipedia.org/wiki/Viscosity\">http://en.wikipedia.org/wiki/Viscosity</a>).</p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+   (<a href=\"http://en.wikipedia.org/wiki/Viscosity\">http://en.wikipedia.org/wiki/Viscosity</a>).</p>
+
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
 
         end Fixed;
 
@@ -3728,8 +3747,9 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
             defaultComponentName="O2",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
-          </ol>
-          </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+          </ol></p>
+
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
 
         end Calibrated;
 
@@ -3745,8 +3765,9 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
             defaultComponentName="O2",
             Documentation(info="<html><p>Assumptions:<ol>
     <li>Ideal gas</li>
-          </ol>
-          </p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+          </ol></p>
+
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
 
         end Correlated;
 
@@ -3781,7 +3802,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
   Table 1 lists the properties at other temperatures.</p>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-  <caption align=\"bottom\"><b>Table 1:</b> Properties of O<sub>2</sub> gas at 1 atm [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002, pp. 920&ndash;921</a>]</caption>
+  <caption align=\"bottom\">Table 1: Properties of O<sub>2</sub> gas at 1 atm [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002, pp. 920&ndash;921</a>]</caption>
   <tr>
       <th valign=\"middle\"><code>T/U.K</code></th>
       <th width=1><code>c_p*U.kg*U.K<br>/(U.J*Data.m)</code></th>
@@ -3806,8 +3827,9 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
 <tr><td>1100</td><td>1.103e3</td><td>1/505.5e-7</td><td>1/75.8e-3</td></tr>
 <tr><td>1200</td><td>1.115e3</td><td>1/532.5e-7</td><td>1/81.9e-3</td></tr>
 <tr><td>1300</td><td>1.125e3</td><td>1/588.4e-7</td><td>1/87.1e-3</td></tr>
-  </table>
-</p><p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
+  </table></p>
+
+<p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"));
 
         end Fixed;
 
@@ -3824,15 +3846,15 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         final phi_IC=zeros(3),
         final derphi_IC,
         final I_IC,
-        final derI_IC);
+        final derI_IC,
+        inverseEOS=false);
       // **final x=0,
       // **final Xi=0,
       // **final F=0,
       // **temp 0.1s instead of 0s
       annotation (Documentation(info="<html><p>Assumptions:<ol>
   <li>Zero dynamic compressibility (&rArr; uniform current)</li>
-  <li>Zero dynamic fluidity (&rArr; no shearing)</li></ol>
-  </p>
+  <li>Zero dynamic fluidity (&rArr; no shearing)</li></ol></p>
 
   <p>Usually, conditions should be applied to specify the velocity (typically <b>0</b>).  In a group of connected solid species
   of a single type (instances of a model derived from this one), there should be exactly one equation to specify the velocity along each Cartesian axis.
@@ -3876,6 +3898,11 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         __Dymola_choicesFromPackage=true,
         Placement(transformation(extent={{-60,40},{-40,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
+      parameter Boolean inverseEOS=true "Use inverse equation of state"
+        annotation (Dialog(
+          Evaluate=true,
+          group="Material properties",
+          compact=true), choices(__Dymola_checkBox=true));
 
       // Assumptions
       // -----------
@@ -4217,10 +4244,10 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         /U.s - environment.a[cartAxes]) if environment.analysis
         "Acceleration force relative to the frame of reference (constant mass)";
       output Q.Force f_exch_adv[n_lin](each stateSelect=StateSelect.never) =
-        chemical.Mphidot - Data.m*phi*chemical.Ndot if environment.analysis
+        chemical.mPhidot - Data.m*phi*chemical.Ndot if environment.analysis
         "Acceleration force due to advective exchange";
       output Q.Force f_exch_diff[n_lin](each stateSelect=StateSelect.never) =
-        common.mechanical.Mphidot + inert.Mphidot if environment.analysis
+        common.mechanical.mPhidot + inert.mPhidot if environment.analysis
         "Friction from other species (diffusive exchange)";
       output Q.Force f_trans_adv[n_lin](each stateSelect=StateSelect.never) =
         Data.m*{phi_face_0[cartAxes[axis], :]*faces[cartAxes[axis], :].Ndot +
@@ -4230,7 +4257,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         "Acceleration force due to advective transport";
       output Q.Force f_trans_diff[n_lin](each stateSelect=StateSelect.never) =
         {Delta(faces[cartAxes[axis], :].p)*A[cartAxes[axis]] + sum(Sigma(faces[
-        cartWrap(cartAxes[axis] - orientation), :].Mphidot[orientation]) for
+        cartWrap(cartAxes[axis] - orientation), :].mPhidot[orientation]) for
         orientation in Orientation) for axis in 1:n_lin} if environment.analysis
         "Friction from other subregions (diffusive transport; includes volume viscosity)";
       //
@@ -4239,11 +4266,11 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
          + N*der(h) - V*der(p))/U.s if environment.analysis
         "Rate of energy storage (internal and kinetic) at constant mass";
       output Q.Power Wdot_exch(stateSelect=StateSelect.never) = -(chemical.phi*
-        chemical.Mphidot/2 + (Data.m*(chemical.hbar - phi*phi/2) - h)*chemical.Ndot)
+        chemical.mPhidot/2 + (Data.m*(chemical.hbar - phi*phi/2) - h)*chemical.Ndot)
         if environment.analysis
         "Relative rate of work (internal, flow, and kinetic) done by chemical exchange (advection)";
-      output Q.Power Qdot_gen_exch(stateSelect=StateSelect.never) = phi*common.mechanical.Mphidot
-         + inert.phi*inert.Mphidot if environment.analysis
+      output Q.Power Qdot_gen_exch(stateSelect=StateSelect.never) = phi*common.mechanical.mPhidot
+         + inert.phi*inert.mPhidot if environment.analysis
         "Rate of heat generation due to friction with other species";
       output Q.Power Qdot_exch(stateSelect=StateSelect.never) = common.thermal.Qdot
          + inert.Qdot if environment.analysis
@@ -4255,7 +4282,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         environment.analysis
         "Relative rate of work (internal, flow, and kinetic) done by advective transport";
       output Q.Power Qdot_gen_trans(stateSelect=StateSelect.never) = sum(faces.phi
-         .* faces.Mphidot) if environment.analysis
+         .* faces.mPhidot) if environment.analysis
         "Rate of heat generation due to friction with other subregions";
       output Q.Power Qdot_trans(stateSelect=StateSelect.never) = sum(faces.Qdot)
         if environment.analysis
@@ -4299,7 +4326,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
         Ndot(start=outerProduct(I_IC, {1,-1})),
         phi(start={{fill(phi_IC[cartWrap(axis + orientation)], 2) for
               orientation in Orientation} for axis in Axis}),
-        Mphidot(each start=0),
+        mPhidot(each start=0),
         T(each start=T_IC),
         Qdot(each start=0))
         "Face connectors to transport material, linear momentum, and heat"
@@ -4376,6 +4403,10 @@ The default global conditions and defaults will be used for the current simulati
       // Environment model too.
 
     initial equation
+      for i in size(chemical, 1) loop
+        assert(chemical[i].formula == Data.formula, "**");
+      end for;
+
       // Check that the initialization methods are valid.
       assert(initMethPartNum <> initMethTemp or initMethPartNum ==
         InitMethScalar.None,
@@ -4536,6 +4567,30 @@ Choose a condition besides None.");
       end if;
 
     equation
+      /*
+
+      equation
+  // Chemical equilibrium
+  0 = nu*chemical.mu;
+
+  // Conservation (no storage)
+  nu[1:n_spec]*Ndot = chemical.Ndot "Material";
+  zeros(n_lin) = sum(chemical[i].mPhidot for i in 1:n_spec) "Linear momentum";
+  0 = sum(chemical.Hdot) "Energy";
+
+  // Ideal mixing/upstream discretization
+  // Chemical species
+  for i in 1:n_spec loop
+    chemical[i].mPhidot = semiLinear(
+      chemical[i].m*chemical[i].Ndot,
+      chemical[i].phi,
+      phi) "Linear momentum";
+    chemical[i].Hdot = semiLinear(
+      chemical[i].m*chemical[i].Ndot,
+      chemical[i].hbar,
+      hbar) "Energy";
+  end for;
+  */
       // Aliases (only for clarity)
       p = inert.p;
       V = inert.V;
@@ -4546,7 +4601,7 @@ Choose a condition besides None.");
       M = Data.m*N;
 
       // Thermodynamic correlations
-      if Data.isCompressible then
+      if inverseEOS then
         p = Data.p_Tv(T, V/N);
       else
         V = N*Data.v_Tp(T, p);
@@ -4560,11 +4615,11 @@ Choose a condition besides None.");
       // Exchange
       // --------
       // Material
-      chemical.Mphidot = semiLinear(
+      chemical.mPhidot = semiLinear(
             Data.m*chemical.Ndot,
             chemical.phi,
             phi) "Advection";
-      F*inert.Mphidot = 2*Lstar*(inert.phi - phi) "Diffusion";
+      F*inert.mPhidot = 2*Lstar*(inert.phi - phi) "Diffusion";
       //
       // Fluid/thermal
       chemical.Hdot = semiLinear(
@@ -4579,25 +4634,28 @@ Choose a condition besides None.");
           // Material
           (x/Lstar_trans[axis] + 4*Xi/N)*(faces[axis, side].Ndot - (if inclLin[
             axis] then inSign(side)*I[linAxes[axis]] else 0)) = (faces[axis,
-            side].p - p)*(if upstream[axis] and inclLin[axis] then exp(-inSign(
-            side)*I[linAxes[axis]]*halfalpha_x/Lstar_trans[axis]) + 1 else 2);
+            side].p - p)*(if upstream[axis] and inclLin[axis] then 1 + exp(-
+            inSign(side)*I[linAxes[axis]]*halfalpha_x/Lstar_trans[axis]) else 2);
           // **fix or remove effect of Peclet number
           // **temp 0 factor
           // **Make connectors non-conditional, remove alias variables
-
+          // **Include bulk viscosity in Peclet number
+          // **Material resistance/ivity->Self resistance/ivity
+          // **update peclet numbers in these transport equations and the outputs above--see dissertation.
           // Transverse
           for orientation in Orientation loop
-            F*faces[axis, side].Mphidot[orientation] = Lstar_trans[axis]*(faces[
+            F*faces[axis, side].mPhidot[orientation] = Lstar_trans[axis]*(faces[
               axis, side].phi[orientation] - (if inclLin[cartWrap(axis +
               orientation)] then phi[linAxes[cartWrap(axis + orientation)]]
-               else 0))*(if inclLin[axis] and upstream[axis] then exp(-inSign(
-              side)*I[linAxes[axis]]*halfalpha_F/Lstar_trans[axis]) + 1 else 2);
+               else 0))*(if inclLin[axis] and upstream[axis] then 1 + exp(-
+              inSign(side)*I[linAxes[axis]]*halfalpha_F/Lstar_trans[axis])
+               else 2);
           end for;
 
           // Thermal
           R*faces[axis, side].Qdot = Lstar_trans[axis]*(faces[axis, side].T - T)
-            *(if inclLin[axis] and upstream[axis] then exp(-inSign(side)*I[
-            linAxes[axis]]*halfalpha_R/Lstar_trans[axis]) + 1 else 2);
+            *(if inclLin[axis] and upstream[axis] then 1 + exp(-inSign(side)*I[
+            linAxes[axis]]*halfalpha_R/Lstar_trans[axis]) else 2);
         end for;
       end for;
 
@@ -4663,15 +4721,15 @@ Choose a condition besides None.");
             // occur due to an assertion.
           end if;
         else
-          der(M*phi[axis])/U.s = chemical.Mphidot[axis] + common.mechanical.Mphidot[
-            axis] + inert.Mphidot[axis] + Delta(faces[cartAxes[axis], :].p)*A[
+          der(M*phi[axis])/U.s = chemical.mPhidot[axis] + common.mechanical.mPhidot[
+            axis] + inert.mPhidot[axis] + Delta(faces[cartAxes[axis], :].p)*A[
             cartAxes[axis]] + Data.m*(phi_face_0[cartAxes[axis], :]*faces[
             cartAxes[axis], :].Ndot) + sum(Data.m*(faces[cartWrap(cartAxes[axis]
              - orientation), :].phi[orientation]*faces[cartWrap(cartAxes[axis]
              - orientation), :].Ndot) + Sigma(faces[cartWrap(cartAxes[axis] -
-            orientation), :].Mphidot[orientation]) for orientation in
-            Orientation) + M*environment.a[cartAxes[axis]]
-            "Conservation of linear momentum";
+            orientation), :].mPhidot[orientation]) for orientation in
+            Orientation) + M*environment.a[cartAxes[axis]] + N*Data.z*
+            environment.E[cartAxes[axis]] "Conservation of linear momentum";
           // **temp last terms
         end if;
       end for;
@@ -4714,14 +4772,15 @@ Choose a condition besides None.");
           // assertion.
         end if;
       else
-        (phi*der(M*phi) + der(N*h) - V*der(p))/U.s = chemical.phi*chemical.Mphidot
-           + chemical.mu*chemical.Ndot + chemical.Qdot + phi*common.mechanical.Mphidot
-           + common.thermal.Qdot + inert.phi*inert.Mphidot + inert.Qdot + sum(
+        (phi*der(M*phi) + der(N*h) - V*der(p))/U.s = chemical.phi*chemical.mPhidot
+           + chemical.mu*chemical.Ndot + chemical.Qdot + phi*common.mechanical.mPhidot
+           + common.thermal.Qdot + inert.phi*inert.mPhidot + inert.Qdot + sum(
           sum((Data.m*(phi_face_0[axis, side]^2 + faces[axis, side].phi*faces[
           axis, side].phi) + Data.h(faces[axis, side].T, faces[axis, side].p))*
           faces[axis, side].Ndot for side in Side) for axis in Axis) + sum(sum(
-          faces.phi[orientation] .* faces.Mphidot[orientation]) for orientation
+          faces.phi[orientation] .* faces.mPhidot[orientation]) for orientation
            in Orientation) + sum(faces.Qdot) "Energy conservation";
+        // **Update KE terms (LHS and RHS) to match dissertation.
       end if;
       // **note in doc here or in characteristics: self diffusivity is a modified self diffusivity (2/2/13 notes)
       annotation (
@@ -4741,15 +4800,15 @@ Choose a condition besides None.");
           layers must be parallel to one of the planes in the rectilinear
           grid.</li>
        <li>The factors that may cause anisotropic behavior (<b><i>k</i></b>)
-          are common to normal, transverse, and thermal transport.</li>
+          are common to material, mechanical, and thermal transport.</li>
        <li>There is no radiative heat transfer.</li>
-       <li>There are no body or inertial forces (e.g., gravity).</li>
+       <li>Angular momentum is not exchanged, transported, or stored.</li>
        <li>For the purpose of the material, linear momentum, and energy balances, the
-       cross sectional areas of the faces is assumed to be the full cross-sectional
+       cross sectional areas of the faces are assumed to be the full cross-sectional
        areas of the subregion.  If multiple phases are present, then areas are
        actually smaller.</li>
-    </ol>
-    </p>
+       <li>Relativistic effects are negligible.</li>
+    </ol></p>
 
     <p>Figure 1 shows how instances of
     <a href=\"modelica://FCSys.Subregions.Species\">Species</a> models (derived from this
@@ -4773,7 +4832,7 @@ Choose a condition besides None.");
     the transport equations.</p>
 
     <p align=center><img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/exchange.png\">
-<br><b>Figure 1:</b>  Exchange of a quantity (linear momentum or heat) among species
+<br>Figure 1:  Exchange of a quantity (linear momentum or heat) among species
     (A, B, and C) within a subregion.</p>
 
     <p>Figure 2 shows how <a href=\"modelica://FCSys.Subregions.Species\">Species</a>
@@ -4784,7 +4843,7 @@ Choose a condition besides None.");
     etc. parameters.</p>
 
     <p align=center><img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/transport.png\">
-<br><b>Figure 2:</b>  Transport of a quantity associated with the same species
+<br>Figure 2:  Transport of a quantity associated with the same species
     between subregions (1 and 2).</p>
 
     <p>All <a href=\"modelica://FCSys.Subregions.Species\">Species</a> instances
@@ -4809,11 +4868,11 @@ Choose a condition besides None.");
         </td>
       </tr>
       <tr align=center class=noBorder style=\"margin-left: auto; margin-right: auto;\">
-        <td colspan=2 align=center class=noBorder ><b>Figure 3:</b> Methods of attributing pressure and volume.</td>
+        <td colspan=2 align=center class=noBorder>Figure 3: Methods of attributing pressure and volume.</td>
       </tr>
     </table>
 
-    <p> The following notes apply to the parameters:
+    <p>The following notes apply to the parameters:
     <ul>
     <li>Here (and in the rest of <a href=\"modelica://FCSys\">FCSys</a>), the \"specific\"
     adjective means that the following extensive quantity is divided by particle number.
@@ -4856,15 +4915,19 @@ Choose a condition besides None.");
     is related to it via the material characteristics (<code>Data</code>) and the initial pressure and temperature.
     In order to apply other values for any of these initial conditions,
     it may be necessary to do so before translating the model.</li>
-    </p>
+    <li>If upstream discretization is not used (<code>upstreamX=false</code>,
+    etc.), then the central difference scheme is used.
+    <li>If <code>inverseEOS</code> is <code>true</code>, then the equation of state is implemented with pressure
+    as a function of temperature and specific volume.  Otherwise, specific volume is a function of temperature
+    and pressure.</li></p>
 
     <p>In evaluating the dynamics of a phase, it is typically assumed that all of the species
     exist at the same velocity and temperature.  The mechanical and thermal time constants
     are usually much shorter than the time span of interest due to the very small coupling
     resistances.  This assumption can be applied in the model by connecting the <code>common</code>
-    connectors of the species, which will
+    connectors of the species, which will **
 
-    It will cause index reduction during translation.</p>
+    **    It will cause index reduction during translation.</p>
 
     <p>In the variables that relate to transport,
     the first index is the axis and the second index is the side.  The sides
@@ -4953,7 +5016,7 @@ Choose a condition besides None.");
     0 = inertA.V + inertD.V "Volume";
 
     // Conservation (no storage or generation)
-    zeros(n_lin) = inertA.Mphidot + inertD.Mphidot "Linear momentum";
+    zeros(n_lin) = inertA.mPhidot + inertD.mPhidot "Linear momentum";
     0 = inertA.Qdot + inertD.Qdot "Energy";
     annotation (
       Documentation(info="<html><p>This model is essentially an
@@ -5028,14 +5091,19 @@ Choose a condition besides None.");
   model Reaction "Model for a chemical or electrochemical reaction"
     // extends FCSys.BaseClasses.Icons.Names.Top2;
 
-    parameter Integer n_spec(min=2) = 0 "Number of chemical species"
-      annotation (Dialog(connectorSizing=true));
-    // Note  The minimum is 2 for a meaningful reaction, but the default
-    // must be 0 to use connectorSizing.
+    parameter String formulas[:]={""} "Chemical formulas of the species";
 
-    Real nu[n_spec]={if i == 1 then 1 else -1 for i in 1:n_spec}
-      "Stoichiometric coefficients";
-    //**Chemistry.stoich(chemical.formula)
+    parameter Boolean enable=true "true, if the reaction should be enabled"
+      annotation (choices(__Dymola_checkBox=true));
+    Q.CurrentAbsolute Io=0.01*U.A
+      "<html>Exchange current (<i>I<i><sup>o</sup>)</html>" annotation (Dialog);
+
+    Connectors.ChemicalOutput chemical[n_spec](
+      final formula=formulas,
+      final nu=Chemistry.stoich(formulas),
+      each final n_spec=n_spec,
+      each final io=io) "Connector for chemical species"
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
     // Note 1:  As of Modelica 3.2 and Dymola 7.4, nu can't be a parameter or
     // constant even though it isn't time-varying.  The strings that represent
     // the chemical formulas can't be passed through the connectors as
@@ -5046,63 +5114,18 @@ Choose a condition besides None.");
     //     "Cannot differentiate discrete or record variable:
     //         [...].nu[...]
     //     with respect to time."
-    Q.Current Ndot(nominal=U.A) "Reaction rate";
-
-    Connectors.ChemicalInput chemical[n_spec](each final n_lin=n_lin)
-      "Connector for chemical species"
-      annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
   protected
-    outer parameter Integer n_lin "Number of components of linear momentum"
-      annotation (missingInnerMessage=
-          "This model should be used within a subregion model.");
-
-    Q.Velocity phi[n_lin](each nominal=U.cm/U.s,each start=0) "Velocity";
-    Q.Velocity2 hbar(nominal=U.V*U.mol/U.g, start=0) "Massic enthalpy";
-
-  initial equation
-    assert(abs(nu*chemical.m) < 1e-4*U.g/U.mol, "The mass balance is incorrect.
-Check the chemical formulas and the specific masses of the species.");
-
-  equation
-    // Chemical equilibrium
-    0 = nu*chemical.mu;
-
-    // Conservation (no storage)
-    nu[1:n_spec]*Ndot = chemical.Ndot "Material";
-    zeros(n_lin) = sum(chemical[i].Mphidot for i in 1:n_spec) "Linear momentum";
-    0 = sum(chemical.Hdot) "Energy";
-
-    // Ideal mixing/upstream discretization
-    // Chemical species
-    for i in 1:n_spec loop
-      chemical[i].Mphidot = semiLinear(
-          chemical[i].m*chemical[i].Ndot,
-          chemical[i].phi,
-          phi) "Linear momentum";
-      chemical[i].Hdot = semiLinear(
-          chemical[i].m*chemical[i].Ndot,
-          chemical[i].hbar,
-          hbar) "Energy";
-    end for;
-
-    // TODO:  Use stream connectors once they are better supported (some
-    // errors occurred in Dymola 7.4).
-
-    // Note:  This model is marked as structurally incomplete.  It must have
-    // zero species by default (for automatic connector sizing), but at least
-    // one species is mathematically required (two for a meaningful reaction).
-    annotation (
-      structurallyIncomplete=true,
-      Documentation(info="<html>
-    <p>The size of the chemical connector is automatically increased each time a connection is made.
-    At least two species must be connected.
-    The stoichiometry is determined automatically from the chemical formulas
+    final parameter Integer n_spec=size(formulas, 1) "Number of species";
+    annotation (Documentation(info="<html>**Io may be time-varying.
+    **
+    <p>The stoichiometry is determined automatically from the chemical formulas
     of the connected species.  No intermediate species are considered. Each reaction must be
     completely and uniquely defined by the connected species.  Otherwise an error message is given.
     If you suspect a bug in the library, please report it using the
     <a href=\"modelica://FCSys.UsersGuide.Contact\">contact information</a>.</p>
 
+**
   <p>Linear momentum and energy are advected using the <code>semiLinear</code> operator.
   The rate of advection of linear momentum is the
   product of the velocity of the source and the rate of mass
@@ -5126,13 +5149,9 @@ Check the chemical formulas and the specific masses of the species.");
 
     <p>Linear momentum and enthalpy are advected using the <code>semiLinear()</code> operator.  There is no diffusion;
     it is included in the inert connections among species
-    (see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model).<p>
-
-    <p>Assumptions:<ul>
-    <li>No storage of material, linear momentum, or energy</li></ul>
-    </p>
-    </html>"),
-      Icon(graphics={
+    (see the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model).<p><p>Assumptions:<ul>
+    <li>No storage of material, linear momentum, or energy</li></ul></p>
+    </html>"), Icon(graphics={
           Rectangle(
             extent={{-140,40},{140,80}},
             fillColor={255,255,255},
@@ -5151,7 +5170,8 @@ Check the chemical formulas and the specific masses of the species.");
           Text(
             extent={{-100,-16},{100,-40}},
             lineColor={127,127,127},
-            textString="%n_spec")}));
+            textString="%formulas")}));
+
   end Reaction;
 
   model Volume "Model to establish a fixed volume for phases"
@@ -5177,7 +5197,7 @@ Check the chemical formulas and the specific masses of the species.");
     V = inert.V;
 
     // Conservation (no storage or generation)
-    zeros(n_lin) = inert.Mphidot "Linear momentum";
+    zeros(n_lin) = inert.mPhidot "Linear momentum";
     0 = inert.Qdot "Energy";
     annotation (
       Documentation(info="<html><p>This model uses a <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector that imposes
@@ -5418,17 +5438,14 @@ Check the chemical formulas and the specific masses of the species.");
 
   end BaseClasses;
   annotation (Documentation(info="<html>
-<p>
-<b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-Copyright 2007&ndash;2012, Georgia Tech Research Corporation.
-</p>
-<p>
-<i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+<p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2012, Georgia Tech Research Corporation.</p>
+
+<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
 it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
 disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.ModelicaLicense2\">
 FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
-http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
-</p>
+http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
 </html>"));
 
 end Subregions;

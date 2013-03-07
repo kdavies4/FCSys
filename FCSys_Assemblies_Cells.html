@@ -1,0 +1,959 @@
+<html>
+<head>
+<title>FCSys.Assemblies.Cells</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta name="description" content="Single-cell PEMFC models">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="../resources/documentation/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="FCSys.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="FCSys.html">
+    <img src="../resources/documentation/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+<ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Assemblies.Cells"></a><a href="FCSys_Assemblies.html#FCSys.Assemblies">FCSys.Assemblies</a>.Cells</h2>
+
+<b>Single-cell PEMFC models</b>
+
+<h3>Information</h3>
+
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages), <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.PackageUnderConstruction">FCSys.BaseClasses.Icons.PackageUnderConstruction</a> (Overlay to indicate that a package is in development).
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="FCSys.Assemblies.Cells.ExamplesS.png" alt="FCSys.Assemblies.Cells.Examples" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples">Examples</a>
+</td><td>Examples</td></tr>
+<tr><td><img src="FCSys.Assemblies.Cells.CellS.png" alt="FCSys.Assemblies.Cells.Cell" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a>
+</td><td>Default single-cell PEMFC</td></tr>
+<tr><td><img src="FCSys.Assemblies.Cells.CellS.png" alt="FCSys.Assemblies.Cells.CalibratedCell" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.CalibratedCell">CalibratedCell</a>
+</td><td>Cell model with calibration parameters for exchange and transport</td></tr>
+<tr><td><img src="FCSys.Assemblies.Cells.IntegratedCellS.png" alt="FCSys.Assemblies.Cells.IntegratedCell" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.IntegratedCell">IntegratedCell</a>
+</td><td>Baseline cell, with integrated CLs and GDLs</td></tr>
+<tr><td><img src="FCSys.Assemblies.Cells.CellSSICS.png" alt="FCSys.Assemblies.Cells.CellSSIC" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.CellSSIC">CellSSIC</a>
+</td><td>Cell model with steady state initial conditions (no reaction)</td></tr>
+</table>
+<hr>
+
+<h2><img src="FCSys.Assemblies.Cells.CellI.png" alt="FCSys.Assemblies.Cells.Cell" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Assemblies.Cells.Cell"></a><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells">FCSys.Assemblies.Cells</a>.Cell</h2>
+<b>Default single-cell PEMFC</b><p>
+<img src="FCSys.Assemblies.Cells.CellD.png" alt="FCSys.Assemblies.Cells.Cell">
+
+<h3>Information</h3>
+
+<p>This model presents a single-cell proton exchange membrane fuel cell (PEMFC).  An overview
+of a PEMFC is given in the top-level documentation of <a href="FCSys.html#FCSys">FCSys</a>.<p>
+Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell">FCSys.BaseClasses.Icons.Cell</a> (Icon for a cell).
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the channel (L<sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths across the channel (L<sub>z</sub>) [l]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Layers</td></tr>
+<tr><td><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a></td><td>anFP</td><td>redeclare FCSys.Regions.AnFP&hellip;</td><td>Anode flow plate</td></tr>
+<tr><td><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a></td><td>anGDL</td><td>redeclare FCSys.Regions.AnGD&hellip;</td><td>Anode gas diffusion layer</td></tr>
+<tr><td><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a></td><td>anCL</td><td>redeclare FCSys.Regions.AnCL&hellip;</td><td>Anode catalyst layer</td></tr>
+<tr><td><a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a></td><td>pEM</td><td>redeclare FCSys.Regions.PEMs&hellip;</td><td>Proton exchange membrane</td></tr>
+<tr><td><a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCL</a></td><td>caCL</td><td>redeclare FCSys.Regions.CaCL&hellip;</td><td>Cathode catalyst layer</td></tr>
+<tr><td><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a></td><td>caGDL</td><td>redeclare FCSys.Regions.CaGD&hellip;</td><td>Cathode gas diffusion layer</td></tr>
+<tr><td><a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">CaFP</a></td><td>caFP</td><td>redeclare FCSys.Regions.CaFP&hellip;</td><td>Cathode flow plate</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anFPX[n_y, n_z]</td><td>Anode plate face</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>caFPX[n_y, n_z]</td><td>Cathode plate face</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anFPPosY[anFP.n_x, n_z]</td><td>Positive anode flow plate face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>caFPPosY[caFP.n_x, n_z]</td><td>Positive anode flow plate face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>caFPNegY[caFP.n_x, n_z]</td><td>Negative cathode flow plate face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anFPNegY[anFP.n_x, n_z]</td><td>Negative anode flow plate face along the y axis</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> Cell <font color="darkgreen">&quot;Default single-cell PEMFC&quot;</font>
+
+  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell">FCSys.BaseClasses.Icons.Cell</a>;
+
+  <font color="darkgreen">// Geometric parameters</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_y[:]=<font color="red">fill</font>(1*U.m/1, 1) <font color="darkgreen">
+    &quot;Lengths along the channel (L<sub>y</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_z[:]=<font color="red">fill</font>(5*U.mm/1, 1) <font color="darkgreen">
+    &quot;Lengths across the channel (L<sub>z</sub>)&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_y=<font color="red">size</font>(L_y, 1) <font color="darkgreen">
+    &quot;Number of subregions along the channel&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
+    &quot;Number of subregions across the channel&quot;</font>;
+  <font color="darkgreen">// TODO:  For GM cell, use dissimilar L_y and L_z for anode, cathode, and PEM.</font>
+
+  <font color="darkgreen">// Essential analysis variables (x-axis electrical voltage, power, and current)</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> v=<font color="red">average</font>(<font color="red">average</font>(anFP.subregions[1, :, :].graphite.'e-'.mu_face[
+      1, 1] - caFP.subregions[caFP.n_x, :, :].graphite.'e-'.mu_face[1, 2])) <font color="darkgreen">
+    &quot;Average electrical potential (x axis)&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Wdot=-<font color="red">sum</font>(anFP.subregions[1, :, :].graphite.'e-'.mu_face[1, 1] .*
+      anFP.subregions[1, :, :].graphite.'e-'.Ndot_face[1, 1] + caFP.subregions[
+      caFP.n_x, :, :].graphite.'e-'.mu_face[1, 2] .* caFP.subregions[caFP.n_x,
+      :, :].graphite.'e-'.Ndot_face[1, 2]) <font color="darkgreen">&quot;Electrical power output (x axis)&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> I=Wdot/v <font color="darkgreen">&quot;Current&quot;</font>;
+  <font color="darkgreen">// This is the power-effective current that would create the actual</font>
+  <font color="darkgreen">// electrical power at the average voltage (above).</font>
+
+  <font color="darkgreen">// Auxiliary variables (for analysis)</font>
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis](<font color="blue">each </font>stateSelect=StateSelect.never) = {<font color="red">sum</font>(
+    anFP.L_x) + <font color="red">sum</font>(anGDL.L_x) + <font color="red">sum</font>(anCL.L_x) + <font color="red">sum</font>(pEM.L_x) + <font color="red">sum</font>(caCL.L_x) + <font color="red">
+    sum</font>(caGDL.L_x) + <font color="red">sum</font>(caFP.L_x),<font color="red">sum</font>(L_y),<font color="red">sum</font>(L_z)} <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Total lengths along the x, y, and z axes&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A[Axis](<font color="blue">each </font>stateSelect=StateSelect.never) = {L[<font color="red">
+    cartWrap</font>(ax + 2)]*L[<font color="red">cartWrap</font>(ax + 2)] <font color="blue">for </font>ax<font color="blue"> in </font>1:3} <font color="blue">if </font>environment.analysis
+    <font color="darkgreen">&quot;Cross-sectional areas&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V=<font color="red">product</font>(L) <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Volume&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> Deltav_x_seg[n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never)
+     = caFP.subregions[caFP.n_x, :, :].graphite.'e-'.mu_face[1, 2] - anFP.subregions[
+    1, :, :].graphite.'e-'.mu_face[1, 1] <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Electrical potential differences of the segments (x axis)&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> &#39;Wdot_e-_x&#39;[n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) = -(
+    anFP.subregions[1, :, :].graphite.'e-'.mu_face[1, 1] .* anFP.subregions[1,
+    :, :].graphite.'e-'.Ndot_face[1, 1] + caFP.subregions[caFP.n_x, :, :].graphite.
+    'e-'.mu_face[1, 2] .* caFP.subregions[caFP.n_x, :, :].graphite.'e-'.Ndot_face[
+    1, 2]) <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Electrical power of the segments (x axis)&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> I_x_seg[n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) = (
+    caFP.subregions[caFP.n_x, :, :].graphite.'e-'.Ndot_face[1, 2] - anFP.subregions[
+    1, :, :].graphite.'e-'.Ndot_face[1, 1])/2 <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Electrical currents of the segments (x axis)&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">Q.CurrentAreic</a> Iprimeprime_x[n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never)
+     = {I_x_seg[i_y, i_z]/(L_y[i_y]*L_z[i_z]) <font color="blue">for </font>i_z<font color="blue"> in </font>1:n_z, i_y<font color="blue"> in </font>1:n_y} <font color="blue">
+    if </font>environment.analysis <font color="darkgreen">&quot;Areic electrical current of the segments (x axis)&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">Q.CurrentAreic</a> Iprimeprime_x_avg(stateSelect=StateSelect.never) = I/A[1]
+    <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Average areic electrical current (x axis)&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot_H2(stateSelect=StateSelect.never) = <font color="red">sum</font>(anFP.subregions[
+    1, :, :].gas.H2.Ndot_face[1, 1]) + <font color="red">sum</font>(anFP.subregions[:, 1, :].gas.H2.Ndot_face[
+    2, 1] + anFP.subregions[:, n_y, :].gas.H2.Ndot_face[2, 2]) <font color="blue">if </font>environment.analysis
+    <font color="darkgreen">&quot;Rate of hydrogen intake&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot_H2O(stateSelect=StateSelect.never) = <font color="red">sum</font>(anFP.subregions[
+    1, :, :].gas.H2O.Ndot_face[1, 1] + caFP.subregions[caFP.n_x, :, :].gas.H2O.Ndot_face[
+    1, 2]) + <font color="red">sum</font>(anFP.subregions[:, 1, :].gas.H2O.Ndot_face[1, 1] + anFP.subregions[
+    :, n_y, :].gas.H2O.Ndot_face[1, 2]) + <font color="red">sum</font>(caFP.subregions[:, 1, :].gas.H2O.Ndot_face[
+    1, 1] - caFP.subregions[:, n_y, :].gas.H2O.Ndot_face[1, 2]) <font color="blue">if </font>environment.analysis
+    <font color="darkgreen">&quot;Rate of water intake&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot_O2(stateSelect=StateSelect.never) = <font color="red">sum</font>(caFP.subregions[
+    caFP.n_x, :, :].gas.O2.Ndot_face[1, 2]) + <font color="red">sum</font>(caFP.subregions[:, 1, :].gas.O2.Ndot_face[
+    1, 1] - caFP.subregions[:, n_y, :].gas.O2.Ndot_face[1, 2]) <font color="blue">if </font>environment.analysis
+    <font color="darkgreen">&quot;Rate of oxygen intake&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> anFPX[n_y, n_z] <font color="darkgreen">&quot;Anode plate face&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> caFPX[n_y, n_z] <font color="darkgreen">&quot;Cathode plate face&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> anFPPosY[anFP.n_x, n_z] <font color="darkgreen">
+    &quot;Positive anode flow plate face along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> caFPPosY[caFP.n_x, n_z] <font color="darkgreen">
+    &quot;Positive anode flow plate face along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> caFPNegY[caFP.n_x, n_z] <font color="darkgreen">
+    &quot;Negative cathode flow plate face along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> anFPNegY[anFP.n_x, n_z] <font color="darkgreen">
+    &quot;Negative anode flow plate face along the y axis&quot;</font>;
+
+  <font color="blue">replaceable </font><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">FCSys.Regions.AnFPs.AnFP</a> anFP(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
+    &quot;Anode flow plate&quot;</font>;
+
+  <font color="blue">replaceable </font><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">FCSys.Regions.AnGDLs.AnGDL</a> anGDL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
+    &quot;Anode gas diffusion layer&quot;</font>;
+
+  <font color="blue">replaceable </font><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">FCSys.Regions.AnCLs.AnCL</a> anCL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
+    &quot;Anode catalyst layer&quot;</font>;
+
+  <font color="blue">replaceable </font><a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">FCSys.Regions.PEMs.PEM</a> pEM(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
+    &quot;Proton exchange membrane&quot;</font>;
+
+  <font color="blue">replaceable </font><a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">FCSys.Regions.CaCLs.CaCL</a> caCL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
+    &quot;Cathode catalyst layer&quot;</font>;
+
+  <font color="blue">replaceable </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">FCSys.Regions.CaGDLs.CaGDL</a> caGDL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
+    &quot;Cathode gas diffusion layer&quot;</font>;
+
+  <font color="blue">replaceable </font><a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">FCSys.Regions.CaFPs.CaFP</a> caFP(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
+    &quot;Cathode flow plate&quot;</font>;
+
+<font color="blue">protected </font>
+  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment <font color="darkgreen">
+    &quot;Environmental properties and settings&quot;</font>;
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Internal connections (between layers)</font>
+  <font color="red">connect</font>(anFP.xPositive, anGDL.xNegative);
+  <font color="red">connect</font>(anGDL.xPositive, anCL.xNegative);
+  <font color="red">connect</font>(anCL.xPositive, pEM.xNegative);
+  <font color="red">connect</font>(pEM.xPositive, caCL.xNegative);
+  <font color="red">connect</font>(caCL.xPositive, caGDL.xNegative);
+  <font color="red">connect</font>(caGDL.xPositive, caFP.xNegative);
+
+  <font color="darkgreen">// External connections</font>
+  <font color="red">connect</font>(anFPX, anFP.xNegative);
+  <font color="red">connect</font>(anFP.yNegative, anFPNegY);
+  <font color="red">connect</font>(anFP.yPositive, anFPPosY);
+
+  <font color="red">connect</font>(caFP.xPositive, caFPX);
+  <font color="red">connect</font>(caFP.yNegative, caFPNegY);
+  <font color="red">connect</font>(caFP.yPositive, caFPPosY);
+<font color="blue">end </font>Cell;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Assemblies.Cells.CellI.png" alt="FCSys.Assemblies.Cells.CalibratedCell" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Assemblies.Cells.CalibratedCell"></a><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells">FCSys.Assemblies.Cells</a>.CalibratedCell</h2>
+<b>Cell model with calibration parameters for exchange and transport</b><p>
+<img src="FCSys.Assemblies.Cells.CellD.png" alt="FCSys.Assemblies.Cells.CalibratedCell">
+
+<h3>Information</h3>
+
+<p>For more information, see the
+  <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a> model.</p><p>
+Extends from <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a> (Default single-cell PEMFC).
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the channel (L<sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths across the channel (L<sub>z</sub>) [l]</td></tr>
+<TR bgcolor="#c0c0c0"><TD colspan=4><b>Calibration factors</b></td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Exchange of linear momentum</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>&#39;k_alpha_F_C+&#39;</td><td>1</td><td>For C (<i>k</i><sub>&alpha; &Phi; C</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_alpha_tau_C19HF37O5S</td><td>1</td><td>For C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S (<i>k</i><sub>&alpha; &Phi; C19HF37O5S</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>&#39;k_alpha_tau_e-&#39;</td><td>1</td><td>For e<sup>-</sup> (<i>k</i><sub>&alpha; &Phi; e-</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_alpha_tau_H2</td><td>1</td><td>For H<sub>2</sub> (<i>k</i><sub>&alpha; &Phi; H2</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_alpha_tau_H2O</td><td>1</td><td>For H<sub>2</sub>O (<i>k</i><sub>&alpha; &Phi; H2O</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>&#39;k_alpha_tau_H+&#39;</td><td>1</td><td>For H<sup>+</sup> (<i>k</i><sub>&alpha; &Phi; H+</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_alpha_tau_N2</td><td>1</td><td>For N<sub>2</sub> (<i>k</i><sub>&alpha; &Phi; N2</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_alpha_tau_O2</td><td>1</td><td>For O<sub>2</sub> (<i>k</i><sub>&alpha; &Phi; O2</sub>) [1]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Thermal exchange</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_alpha_Qdot_C</td><td>1</td><td>For C (<i>k</i><sub><i>S</i> C</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_alpha_Qdot_C19HF37O5S</td><td>1</td><td>For C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S (<i>k</i><sub><i>S</i> C19HF37O5S</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>&#39;k_alpha_Qdot_e-&#39;</td><td>1</td><td>For e<sup>-</sup> (<i>k</i><sub><i>S</i> e-</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_alpha_Qdot_H2</td><td>1</td><td>For H<sub>2</sub> (<i>k</i><sub><i>S</i> H2</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_alpha_Qdot_H2O</td><td>1</td><td>For H<sub>2</sub>O (<i>k</i><sub><i>S</i> H2O</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>&#39;k_alpha_Qdot_H+&#39;</td><td>1</td><td>For H<sup>+</sup> (<i>k</i><sub><i>S</i> H+</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_alpha_Qdot_N2</td><td>1</td><td>For N<sub>2</sub> (<i>k</i><sub><i>S</i> N2</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_alpha_Qdot_O2</td><td>1</td><td>For O<sub>2</sub> (<i>k</i><sub><i>S</i> O2</sub>) [1]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Material transport</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>&#39;k_alpha_Ndot_e-&#39;</td><td>1</td><td>For e<sup>-</sup> (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;e-</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_alpha_Ndot_H2</td><td>1</td><td>For H<sub>2</sub> (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;H2</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_alpha_Ndot_H2O</td><td>1</td><td>For H<sub>2</sub>O (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;H2O</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>&#39;k_alpha_Ndot_H+&#39;</td><td>1</td><td>For H<sup>+</sup> (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;H+</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_alpha_Ndot_N2</td><td>1</td><td>For N<sub>2</sub> (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;N2</sub>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_alpha_Ndot_O2</td><td>1</td><td>For O<sub>2</sub> (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;O2</sub>) [1]</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anFPX[n_y, n_z]</td><td>Anode plate face</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>caFPX[n_y, n_z]</td><td>Cathode plate face</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anFPPosY[anFP.n_x, n_z]</td><td>Positive anode flow plate face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>caFPPosY[caFP.n_x, n_z]</td><td>Positive anode flow plate face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>caFPNegY[caFP.n_x, n_z]</td><td>Negative cathode flow plate face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anFPNegY[anFP.n_x, n_z]</td><td>Negative anode flow plate face along the y axis</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> CalibratedCell <font color="darkgreen">
+  &quot;Cell model with calibration parameters for exchange and transport&quot;</font>
+  <font color="blue">import </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species">FCSys.Subregions.Species</a>;
+
+  <font color="darkgreen">// Exchange of linear momentum</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> &#39;k_alpha_F_C+&#39;(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;For C (<i>k</i><sub>&alpha; &Phi; C</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_alpha_tau_C19HF37O5S(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;For C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S (<i>k</i><sub>&alpha; &Phi; C19HF37O5S</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> &#39;k_alpha_tau_e-&#39;(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;For e<sup>-</sup> (<i>k</i><sub>&alpha; &Phi; e-</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_alpha_tau_H2(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;For H<sub>2</sub> (<i>k</i><sub>&alpha; &Phi; H2</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_alpha_tau_H2O(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;For H<sub>2</sub>O (<i>k</i><sub>&alpha; &Phi; H2O</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> &#39;k_alpha_tau_H+&#39;(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;For H<sup>+</sup> (<i>k</i><sub>&alpha; &Phi; H+</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_alpha_tau_N2(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;For N<sub>2</sub> (<i>k</i><sub>&alpha; &Phi; N2</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_alpha_tau_O2(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;For O<sub>2</sub> (<i>k</i><sub>&alpha; &Phi; O2</sub>)&quot;</font>;
+
+  <font color="darkgreen">// Thermal exchange</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_alpha_Qdot_C(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">&quot;For C (<i>k</i><sub><i>S</i> C</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_alpha_Qdot_C19HF37O5S(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;For C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S (<i>k</i><sub><i>S</i> C19HF37O5S</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> &#39;k_alpha_Qdot_e-&#39;(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;For e<sup>-</sup> (<i>k</i><sub><i>S</i> e-</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_alpha_Qdot_H2(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;For H<sub>2</sub> (<i>k</i><sub><i>S</i> H2</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_alpha_Qdot_H2O(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;For H<sub>2</sub>O (<i>k</i><sub><i>S</i> H2O</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> &#39;k_alpha_Qdot_H+&#39;(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;For H<sup>+</sup> (<i>k</i><sub><i>S</i> H+</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_alpha_Qdot_N2(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;For N<sub>2</sub> (<i>k</i><sub><i>S</i> N2</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_alpha_Qdot_O2(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;For O<sub>2</sub> (<i>k</i><sub><i>S</i> O2</sub>)&quot;</font>;
+
+  <font color="darkgreen">// Material transport</font>
+  <font color="darkgreen">/*
+  parameter Q.NumberAbsolute &#39;k_alpha_Xi_C+&#39;(
+    final min=0,
+    final nominal=1) = 1 &quot;For C (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;C</sub>)&quot;
+    annotation (Dialog(tab=&quot;Calibration factors&quot;, group=&quot;Material transport&quot;));
+  parameter Q.NumberAbsolute &#39;k_alpha_Xi_C+&#39;19HF37O5S-(
+    final min=0,
+    final nominal=1) = 1
+    &quot;For C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;C19HF37O5S-</sub>)&quot;
+    annotation (Dialog(tab=&quot;Calibration factors&quot;, group=&quot;Material transport&quot;));
+  */</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> &#39;k_alpha_Ndot_e-&#39;(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;For e<sup>-</sup> (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;e-</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_alpha_Ndot_H2(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;For H<sub>2</sub> (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;H2</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_alpha_Ndot_H2O(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;For H<sub>2</sub>O (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;H2O</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> &#39;k_alpha_Ndot_H+&#39;(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;For H<sup>+</sup> (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;H+</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_alpha_Ndot_N2(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;For N<sub>2</sub> (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;N2</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k_alpha_Ndot_O2(
+    <font color="blue">final </font>min=0,
+    <font color="blue">final </font>nominal=1) = 1 <font color="darkgreen">
+    &quot;For O<sub>2</sub> (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;O2</sub>)&quot;</font>;
+
+  <font color="darkgreen">// Transport of linear momentum</font>
+  <font color="darkgreen">/*
+  parameter Q.NumberAbsolute &#39;k_alpha_F_C+&#39;(
+    final min=0,
+    final nominal=1) = 1 &quot;For C (<i>k</i><sub>&Phi; C</sub>)&quot;
+    annotation (Dialog(tab=&quot;Calibration factors&quot;, group=&quot;Transport of linear momentum&quot;))
+    ;
+  parameter Q.NumberAbsolute &#39;k_alpha_F_C+&#39;19HF37O5S-(
+    final min=0,
+    final nominal=1) = 1
+    &quot;For C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S (<i>k</i><sub>&Phi; C19HF37O5S-</sub>)&quot;
+    annotation (Dialog(tab=&quot;Calibration factors&quot;, group=&quot;Transport of linear momentum&quot;))
+    ;
+  */</font>
+
+  <font color="darkgreen">// Thermal transport</font>
+
+  <font color="blue">extends </font><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a>(
+    anFP(subregions(<font color="blue">each </font>gas(
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_H2_Gas.html#FCSys.Subregions.Species.H2.Gas.Calibrated">Species.H2.Gas.Calibrated</a> H2(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_H2,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_H2O_Gas.html#FCSys.Subregions.Species.H2O.Gas.Calibrated">Species.H2O.Gas.Calibrated</a> H2O(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2O,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2O,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_H2O,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2O,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2O),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_N2_Gas.html#FCSys.Subregions.Species.N2.Gas.Calibrated">Species.N2.Gas.Calibrated</a> N2(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_N2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_N2,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_N2,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_N2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_N2),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_O2_Gas.html#FCSys.Subregions.Species.O2.Gas.Calibrated">Species.O2.Gas.Calibrated</a> O2(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_O2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_O2,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_O2,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_O2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_O2)), <font color="blue">each </font>graphite(<font color="blue">redeclare </font>Species.C.Graphite.Calibrated
+            C(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_C,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_C,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_C), <font color="blue">redeclare </font>Species.'e-'.solid.Calibrated
+            &#39;e-&#39;(
+            <font color="blue">final </font>k_alpha_tau='k_alpha_tau_e-',
+            <font color="blue">final </font>k_alpha_Qdot='k_alpha_Qdot_e-',
+            <font color="blue">final </font>k_alpha_Ndot='k_alpha_Ndot_e-',
+            <font color="blue">final </font>k_alpha_tau='k_alpha_tau_e-',
+            <font color="blue">final </font>k_alpha_Qdot='k_alpha_Qdot_e-')))),
+    anGDL(subregions(<font color="blue">each </font>gas(
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_H2_Gas.html#FCSys.Subregions.Species.H2.Gas.Calibrated">Species.H2.Gas.Calibrated</a> H2(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_H2,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_H2O_Gas.html#FCSys.Subregions.Species.H2O.Gas.Calibrated">Species.H2O.Gas.Calibrated</a> H2O(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2O,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2O,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_H2O,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2O,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2O),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_N2_Gas.html#FCSys.Subregions.Species.N2.Gas.Calibrated">Species.N2.Gas.Calibrated</a> N2(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_N2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_N2,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_N2,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_N2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_N2),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_O2_Gas.html#FCSys.Subregions.Species.O2.Gas.Calibrated">Species.O2.Gas.Calibrated</a> O2(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_O2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_O2,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_O2,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_O2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_O2)), <font color="blue">each </font>graphite(<font color="blue">redeclare </font>Species.C.Graphite.Calibrated
+            C(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_C,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_C,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_C), <font color="blue">redeclare </font>Species.'e-'.solid.Calibrated
+            &#39;e-&#39;(
+            <font color="blue">final </font>k_alpha_tau='k_alpha_tau_e-',
+            <font color="blue">final </font>k_alpha_Qdot='k_alpha_Qdot_e-',
+            <font color="blue">final </font>k_alpha_Ndot='k_alpha_Ndot_e-',
+            <font color="blue">final </font>k_alpha_tau='k_alpha_tau_e-',
+            <font color="blue">final </font>k_alpha_Qdot='k_alpha_Qdot_e-')))),
+    anCL(subregions(
+        <font color="blue">each </font>gas(
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_H2_Gas.html#FCSys.Subregions.Species.H2.Gas.Calibrated">Species.H2.Gas.Calibrated</a> H2(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_H2,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_H2O_Gas.html#FCSys.Subregions.Species.H2O.Gas.Calibrated">Species.H2O.Gas.Calibrated</a> H2O(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2O,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2O,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_H2O,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2O,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2O),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_N2_Gas.html#FCSys.Subregions.Species.N2.Gas.Calibrated">Species.N2.Gas.Calibrated</a> N2(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_N2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_N2,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_N2,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_N2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_N2),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_O2_Gas.html#FCSys.Subregions.Species.O2.Gas.Calibrated">Species.O2.Gas.Calibrated</a> O2(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_O2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_O2,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_O2,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_O2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_O2)),
+        <font color="blue">each </font>graphite(<font color="blue">redeclare </font>Species.C.Graphite.Calibrated C(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_C,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_C,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_C), <font color="blue">redeclare </font>Species.'e-'.solid.Calibrated
+            &#39;e-&#39;(
+            <font color="blue">final </font>k_alpha_tau='k_alpha_tau_e-',
+            <font color="blue">final </font>k_alpha_Qdot='k_alpha_Qdot_e-',
+            <font color="blue">final </font>k_alpha_Ndot='k_alpha_Ndot_e-',
+            <font color="blue">final </font>k_alpha_tau='k_alpha_tau_e-',
+            <font color="blue">final </font>k_alpha_Qdot='k_alpha_Qdot_e-')),
+        <font color="blue">each </font>ionomer(
+          <font color="blue">redeclare </font>Species.C19HF37O5S.Solid.Calibrated C19HF37O5S(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_C19HF37O5S,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_C19HF37O5S,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_C19HF37O5S),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_H2O_Gas.html#FCSys.Subregions.Species.H2O.Gas.Calibrated">Species.H2O.Gas.Calibrated</a> H2O(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2O,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2O,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_H2O,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2O,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2O),
+          <font color="blue">redeclare </font>Species.'H+'.Solid.Calibrated &#39;H+&#39;(
+            <font color="blue">final </font>k_alpha_tau='k_alpha_tau_H+',
+            <font color="blue">final </font>k_alpha_Qdot='k_alpha_Qdot_H+',
+            <font color="blue">final </font>k_alpha_Ndot='k_alpha_Ndot_H+',
+            <font color="blue">final </font>k_alpha_tau='k_alpha_tau_H+',
+            <font color="blue">final </font>k_alpha_Qdot='k_alpha_Qdot_H+')))),
+    pEM(subregions(<font color="blue">each </font>gas(
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_H2_Gas.html#FCSys.Subregions.Species.H2.Gas.Calibrated">Species.H2.Gas.Calibrated</a> H2(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_H2,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_H2O_Gas.html#FCSys.Subregions.Species.H2O.Gas.Calibrated">Species.H2O.Gas.Calibrated</a> H2O(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2O,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2O,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_H2O,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2O,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2O),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_N2_Gas.html#FCSys.Subregions.Species.N2.Gas.Calibrated">Species.N2.Gas.Calibrated</a> N2(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_N2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_N2,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_N2,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_N2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_N2),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_O2_Gas.html#FCSys.Subregions.Species.O2.Gas.Calibrated">Species.O2.Gas.Calibrated</a> O2(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_O2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_O2,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_O2,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_O2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_O2)), <font color="blue">each </font>ionomer(
+          <font color="blue">redeclare </font>Species.C19HF37O5S.Solid.Calibrated C19HF37O5S(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_C19HF37O5S,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_C19HF37O5S,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_C19HF37O5S),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_H2O_Gas.html#FCSys.Subregions.Species.H2O.Gas.Calibrated">Species.H2O.Gas.Calibrated</a> H2O(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2O,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2O,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_H2O,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2O,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2O),
+          <font color="blue">redeclare </font>Species.'H+'.Solid.Calibrated &#39;H+&#39;(
+            <font color="blue">final </font>k_alpha_tau='k_alpha_tau_H+',
+            <font color="blue">final </font>k_alpha_Qdot='k_alpha_Qdot_H+',
+            <font color="blue">final </font>k_alpha_Ndot='k_alpha_Ndot_H+',
+            <font color="blue">final </font>k_alpha_tau='k_alpha_tau_H+',
+            <font color="blue">final </font>k_alpha_Qdot='k_alpha_Qdot_H+')))),
+    caCL(subregions(
+        <font color="blue">each </font>gas(
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_H2_Gas.html#FCSys.Subregions.Species.H2.Gas.Calibrated">Species.H2.Gas.Calibrated</a> H2(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_H2,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_H2O_Gas.html#FCSys.Subregions.Species.H2O.Gas.Calibrated">Species.H2O.Gas.Calibrated</a> H2O(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2O,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2O,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_H2O,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2O,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2O),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_N2_Gas.html#FCSys.Subregions.Species.N2.Gas.Calibrated">Species.N2.Gas.Calibrated</a> N2(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_N2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_N2,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_N2,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_N2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_N2),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_O2_Gas.html#FCSys.Subregions.Species.O2.Gas.Calibrated">Species.O2.Gas.Calibrated</a> O2(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_O2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_O2,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_O2,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_O2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_O2)),
+        <font color="blue">each </font>graphite(<font color="blue">redeclare </font>Species.C.Graphite.Calibrated C(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_C,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_C,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_C), <font color="blue">redeclare </font>Species.'e-'.solid.Calibrated
+            &#39;e-&#39;(
+            <font color="blue">final </font>k_alpha_tau='k_alpha_tau_e-',
+            <font color="blue">final </font>k_alpha_Qdot='k_alpha_Qdot_e-',
+            <font color="blue">final </font>k_alpha_Ndot='k_alpha_Ndot_e-',
+            <font color="blue">final </font>k_alpha_tau='k_alpha_tau_e-',
+            <font color="blue">final </font>k_alpha_Qdot='k_alpha_Qdot_e-')),
+        <font color="blue">each </font>ionomer(
+          <font color="blue">redeclare </font>Species.C19HF37O5S.Solid.Calibrated C19HF37O5S(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_C19HF37O5S,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_C19HF37O5S,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_C19HF37O5S),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_H2O_Gas.html#FCSys.Subregions.Species.H2O.Gas.Calibrated">Species.H2O.Gas.Calibrated</a> H2O(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2O,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2O,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_H2O,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2O,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2O),
+          <font color="blue">redeclare </font>Species.'H+'.Solid.Calibrated &#39;H+&#39;(
+            <font color="blue">final </font>k_alpha_tau='k_alpha_tau_H+',
+            <font color="blue">final </font>k_alpha_Qdot='k_alpha_Qdot_H+',
+            <font color="blue">final </font>k_alpha_Ndot='k_alpha_Ndot_H+',
+            <font color="blue">final </font>k_alpha_tau='k_alpha_tau_H+',
+            <font color="blue">final </font>k_alpha_Qdot='k_alpha_Qdot_H+')))),
+    caGDL(subregions(<font color="blue">each </font>gas(
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_H2_Gas.html#FCSys.Subregions.Species.H2.Gas.Calibrated">Species.H2.Gas.Calibrated</a> H2(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_H2,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_H2O_Gas.html#FCSys.Subregions.Species.H2O.Gas.Calibrated">Species.H2O.Gas.Calibrated</a> H2O(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2O,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2O,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_H2O,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2O,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2O),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_N2_Gas.html#FCSys.Subregions.Species.N2.Gas.Calibrated">Species.N2.Gas.Calibrated</a> N2(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_N2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_N2,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_N2,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_N2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_N2),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_O2_Gas.html#FCSys.Subregions.Species.O2.Gas.Calibrated">Species.O2.Gas.Calibrated</a> O2(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_O2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_O2,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_O2,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_O2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_O2)), <font color="blue">each </font>graphite(<font color="blue">redeclare </font>Species.C.Graphite.Calibrated
+            C(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_C,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_C,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_C), <font color="blue">redeclare </font>Species.'e-'.solid.Calibrated
+            &#39;e-&#39;(
+            <font color="blue">final </font>k_alpha_tau='k_alpha_tau_e-',
+            <font color="blue">final </font>k_alpha_Qdot='k_alpha_Qdot_e-',
+            <font color="blue">final </font>k_alpha_Ndot='k_alpha_Ndot_e-',
+            <font color="blue">final </font>k_alpha_tau='k_alpha_tau_e-',
+            <font color="blue">final </font>k_alpha_Qdot='k_alpha_Qdot_e-')))),
+    caFP(subregions(<font color="blue">each </font>gas(
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_H2_Gas.html#FCSys.Subregions.Species.H2.Gas.Calibrated">Species.H2.Gas.Calibrated</a> H2(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_H2,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_H2O_Gas.html#FCSys.Subregions.Species.H2O.Gas.Calibrated">Species.H2O.Gas.Calibrated</a> H2O(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2O,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2O,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_H2O,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_H2O,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_H2O),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_N2_Gas.html#FCSys.Subregions.Species.N2.Gas.Calibrated">Species.N2.Gas.Calibrated</a> N2(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_N2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_N2,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_N2,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_N2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_N2),
+          <font color="blue">redeclare </font><a href="FCSys_Subregions_Species_O2_Gas.html#FCSys.Subregions.Species.O2.Gas.Calibrated">Species.O2.Gas.Calibrated</a> O2(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_O2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_O2,
+            <font color="blue">final </font>k_alpha_Ndot=k_alpha_Ndot_O2,
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_O2,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_O2)), <font color="blue">each </font>graphite(<font color="blue">redeclare </font>Species.C.Graphite.Calibrated
+            C(
+            <font color="blue">final </font>k_alpha_tau=k_alpha_tau_C,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_C,
+            <font color="blue">final </font>k_alpha_Qdot=k_alpha_Qdot_C), <font color="blue">redeclare </font>Species.'e-'.solid.Calibrated
+            &#39;e-&#39;(
+            <font color="blue">final </font>k_alpha_tau='k_alpha_tau_e-',
+            <font color="blue">final </font>k_alpha_Qdot='k_alpha_Qdot_e-',
+            <font color="blue">final </font>k_alpha_Ndot='k_alpha_Ndot_e-',
+            <font color="blue">final </font>k_alpha_tau='k_alpha_tau_e-',
+            <font color="blue">final </font>k_alpha_Qdot='k_alpha_Qdot_e-')))));
+
+<font color="blue">end </font>CalibratedCell;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Assemblies.Cells.IntegratedCellI.png" alt="FCSys.Assemblies.Cells.IntegratedCell" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Assemblies.Cells.IntegratedCell"></a><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells">FCSys.Assemblies.Cells</a>.IntegratedCell</h2>
+<b>Baseline cell, with integrated CLs and GDLs</b><p>
+<img src="FCSys.Assemblies.Cells.IntegratedCellD.png" alt="FCSys.Assemblies.Cells.IntegratedCell">
+
+<h3>Information</h3>
+
+<p>See the
+  <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a> model.</p><p>
+Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell">FCSys.BaseClasses.Icons.Cell</a> (Icon for a cell).
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the channel (L<sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths across the channel (L<sub>z</sub>) [l]</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Layers</td></tr>
+<tr><td><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a></td><td>anFP</td><td>redeclare FCSys.Regions.AnFP&hellip;</td><td>Anode flow plate</td></tr>
+<tr><td><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCGDL">AnCGDL</a></td><td>anCGDL</td><td>redeclare Regions.AnCLs.AnCG&hellip;</td><td>Anode catalyst/gas diffusion layer</td></tr>
+<tr><td><a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a></td><td>pEM</td><td>redeclare FCSys.Regions.PEMs&hellip;</td><td>PEM</td></tr>
+<tr><td><a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCGDL">CaCGDL</a></td><td>caCGDL</td><td>redeclare Regions.CaCLs.CaCG&hellip;</td><td>Cathode catalyst/gas diffusion layer</td></tr>
+<tr><td><a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">CaFP</a></td><td>caFP</td><td>redeclare FCSys.Regions.CaFP&hellip;</td><td>Cathode flow plate</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anFPX[n_y, n_z]</td><td>Anode plate face</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>caFPX[n_y, n_z]</td><td>Cathode plate face</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anFPPosY[anFP.n_x, n_z]</td><td>Positive anode flow plate face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>caFPPosY[caFP.n_x, n_z]</td><td>Positive anode flow plate face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>caFPNegY[caFP.n_x, n_z]</td><td>Negative cathode flow plate face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anFPNegY[anFP.n_x, n_z]</td><td>Negative anode flow plate face along the y axis</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> IntegratedCell <font color="darkgreen">&quot;Baseline cell, with integrated CLs and GDLs&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell">FCSys.BaseClasses.Icons.Cell</a>;
+  <font color="darkgreen">// Geometric parameters</font>
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_y[:]=<font color="red">fill</font>(1*U.m/1, 1) <font color="darkgreen">
+    &quot;Lengths along the channel (L<sub>y</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_z[:]=<font color="red">fill</font>(5*U.mm/1, 1) <font color="darkgreen">
+    &quot;Lengths across the channel (L<sub>z</sub>)&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_y=<font color="red">size</font>(L_y, 1) <font color="darkgreen">
+    &quot;Number of regions along the channel&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
+    &quot;Number of regions across the channel&quot;</font>;
+
+  <font color="darkgreen">// **Update these outputs based on Cell model.</font>
+  <font color="darkgreen">// Auxiliary variables (for analysis)</font>
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis]={<font color="red">sum</font>(anFP.L_x) + <font color="red">sum</font>(anCGDL.L_x) + <font color="red">sum</font>(pEM.L_x)
+       + <font color="red">sum</font>(caCGDL.L_x) + <font color="red">sum</font>(caFP.L_x),<font color="red">sum</font>(L_y),<font color="red">sum</font>(L_z)} <font color="blue">if </font>environment.analysis
+    <font color="darkgreen">&quot;Total lengths along the x, y, and z axes&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A[Axis]={L[<font color="red">cartWrap</font>(ax + 2)]*L[<font color="red">cartWrap</font>(ax + 2)] <font color="blue">for </font>
+      ax<font color="blue"> in </font>1:3} <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Cross-sectional areas&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V=<font color="red">product</font>(L) <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Volume&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> Deltav_x[n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) =
+    caFP.subregions[caFP.n_x, :, :].graphite.'e-'.mu_face[1, 2] - anFP.subregions[
+    1, :, :].graphite.'e-'.mu_face[1, 1] <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Electrical potential differences of the segments (x axis)&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> &#39;Wdot_e-_x&#39;[n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) =
+    anFP.subregions[1, :, :].graphite.'e-'.Ndot_face[1, 1] .* anFP.subregions[1,
+    :, :].graphite.'e-'.mu_face[1, 1] + caFP.subregions[caFP.n_x, :, :].graphite.
+    'e-'.Ndot_face[1, 2] .* caFP.subregions[caFP.n_x, :, :].graphite.'e-'.mu_face[
+    1, 2] <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Rates of intake of electrical energy of the segments (x axis)&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> I_x[n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) = (caFP.subregions[
+    caFP.n_x, :, :].graphite.'e-'.Ndot_face[1, 2] - anFP.subregions[1, :, :].graphite.
+    'e-'.Ndot_face[1, 1])/2 <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Electrical currents of the segments (x axis)&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> I_x_tot(stateSelect=StateSelect.never) = <font color="red">sum</font>(I_x) <font color="blue">if </font>
+    environment.analysis <font color="darkgreen">&quot;Total electrical current (x axis)&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">Q.CurrentAreic</a> Iprimeprime_x[n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never)
+     = {I_x[i_y, i_z]/(L_y[i_y]*L_z[i_z]) <font color="blue">for </font>i_z<font color="blue"> in </font>1:n_z, i_y<font color="blue"> in </font>1:n_y} <font color="blue">if </font>
+    environment.analysis <font color="darkgreen">&quot;Areic electrical current of the segments (x axis)&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">Q.CurrentAreic</a> Iprimeprime_x_avg(stateSelect=StateSelect.never) =
+    I_x_tot/A[1] <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Average areic electrical current (x axis)&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot_H2(stateSelect=StateSelect.never) = <font color="red">sum</font>(anFP.subregions[
+    1, :, :].gas.H2.Ndot_face[1, 1]) + <font color="red">sum</font>(anFP.subregions[:, 1, :].gas.H2.Ndot_face[
+    2, 1] + anFP.subregions[:, n_y, :].gas.H2.Ndot_face[2, 2]) <font color="blue">if </font>environment.analysis
+    <font color="darkgreen">&quot;Rate of hydrogen intake&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot_H2O(stateSelect=StateSelect.never) = <font color="red">sum</font>(anFP.subregions[
+    1, :, :].gas.H2O.Ndot_face[1, 1] + caFP.subregions[caFP.n_x, :, :].gas.H2O.Ndot_face[
+    1, 2]) + <font color="red">sum</font>(anFP.subregions[:, 1, :].gas.H2O.Ndot_face[1, 1] + anFP.subregions[
+    :, n_y, :].gas.H2O.Ndot_face[1, 2]) + <font color="red">sum</font>(caFP.subregions[:, 1, :].gas.H2O.Ndot_face[
+    1, 1] - caFP.subregions[:, n_y, :].gas.H2O.Ndot_face[1, 2]) <font color="blue">if </font>environment.analysis
+    <font color="darkgreen">&quot;Rate of water intake&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot_O2(stateSelect=StateSelect.never) = <font color="red">sum</font>(caFP.subregions[
+    caFP.n_x, :, :].gas.O2.Ndot_face[1, 2]) + <font color="red">sum</font>(caFP.subregions[:, 1, :].gas.O2.Ndot_face[
+    1, 1] - caFP.subregions[:, n_y, :].gas.O2.Ndot_face[1, 2]) <font color="blue">if </font>environment.analysis
+    <font color="darkgreen">&quot;Rate of oxygen intake&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> &#39;Wdot_e-&#39;(stateSelect=StateSelect.never) = <font color="red">sum</font>('Wdot_e-_x') + <font color="red">
+    sum</font>(anFP.subregions[:, 1, :].graphite.'e-'.Ndot_face[2, 1] .* anFP.subregions[
+    :, 1, :].graphite.'e-'.mu_face[2, 1] + anFP.subregions[:, n_y, :].graphite.
+    'e-'.Ndot_face[2, 2] .* anFP.subregions[:, n_y, :].graphite.'e-'.mu_face[2,
+    2]) + <font color="red">sum</font>(caFP.subregions[:, 1, :].graphite.'e-'.Ndot_face[2, 1] .* caFP.subregions[
+    :, 1, :].graphite.'e-'.mu_face[2, 1] + caFP.subregions[:, n_y, :].graphite.
+    'e-'.Ndot_face[2, 2] .* caFP.subregions[:, n_y, :].graphite.'e-'.mu_face[2,
+    2]) <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Rate of electrical work (negative for work done)&quot;</font>;
+
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> anFPX[n_y, n_z] <font color="darkgreen">&quot;Anode plate face&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> caFPX[n_y, n_z] <font color="darkgreen">&quot;Cathode plate face&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> anFPPosY[anFP.n_x, n_z] <font color="darkgreen">
+    &quot;Positive anode flow plate face along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> caFPPosY[caFP.n_x, n_z] <font color="darkgreen">
+    &quot;Positive anode flow plate face along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> caFPNegY[caFP.n_x, n_z] <font color="darkgreen">
+    &quot;Negative cathode flow plate face along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> anFPNegY[anFP.n_x, n_z] <font color="darkgreen">
+    &quot;Negative anode flow plate face along the y axis&quot;</font>;
+
+  <font color="blue">replaceable </font><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">FCSys.Regions.AnFPs.AnFP</a> anFP(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
+    &quot;Anode flow plate&quot;</font>;
+
+  <font color="blue">replaceable </font><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCGDL">Regions.AnCLs.AnCGDL</a> anCGDL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
+    &quot;Anode catalyst/gas diffusion layer&quot;</font>;
+
+  <font color="blue">replaceable </font><a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">FCSys.Regions.PEMs.PEM</a> pEM(<font color="blue">final </font>L_y=L_y,<font color="blue">final </font>L_z=L_z) <font color="darkgreen">&quot;PEM&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCGDL">Regions.CaCLs.CaCGDL</a> caCGDL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
+    &quot;Cathode catalyst/gas diffusion layer&quot;</font>;
+
+  <font color="blue">replaceable </font><a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">FCSys.Regions.CaFPs.CaFP</a> caFP(<font color="blue">final </font>L_y=L_y,<font color="blue">final </font>L_z=L_z) <font color="darkgreen">
+    &quot;Cathode flow plate&quot;</font>;
+
+<font color="blue">protected </font>
+  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment <font color="darkgreen">
+    &quot;Environmental properties and settings&quot;</font>;
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Internal connections (between layers)</font>
+  <font color="red">connect</font>(anFP.xPositive, anCGDL.xNegative);
+  <font color="red">connect</font>(anCGDL.xPositive, pEM.xNegative);
+  <font color="red">connect</font>(pEM.xPositive, caCGDL.xNegative);
+
+  <font color="red">connect</font>(caCGDL.xPositive, caFP.xNegative);
+
+  <font color="darkgreen">// External connections</font>
+  <font color="red">connect</font>(anFPX, anFP.xNegative);
+  <font color="red">connect</font>(caFP.xPositive, caFPX);
+  <font color="red">connect</font>(anFP.yPositive, anFPPosY);
+  <font color="red">connect</font>(caFP.yPositive, caFPPosY);
+  <font color="red">connect</font>(caFP.yNegative, caFPNegY);
+  <font color="red">connect</font>(anFPNegY, anFP.yNegative);
+<font color="blue">end </font>IntegratedCell;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Assemblies.Cells.CellSSICI.png" alt="FCSys.Assemblies.Cells.CellSSIC" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Assemblies.Cells.CellSSIC"></a><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells">FCSys.Assemblies.Cells</a>.CellSSIC</h2>
+<b>Cell model with steady state initial conditions (no reaction)</b><p>
+<img src="FCSys.Assemblies.Cells.CellSSICD.png" alt="FCSys.Assemblies.Cells.CellSSIC">
+
+<h3>Information</h3>
+
+Extends from <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a> (Default single-cell PEMFC).
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the channel (L<sub>y</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths across the channel (L<sub>z</sub>) [l]</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anFPX[n_y, n_z]</td><td>Anode plate face</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>caFPX[n_y, n_z]</td><td>Cathode plate face</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anFPPosY[anFP.n_x, n_z]</td><td>Positive anode flow plate face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>caFPPosY[caFP.n_x, n_z]</td><td>Positive anode flow plate face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>caFPNegY[caFP.n_x, n_z]</td><td>Negative cathode flow plate face along the y axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anFPNegY[anFP.n_x, n_z]</td><td>Negative anode flow plate face along the y axis</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> CellSSIC <font color="darkgreen">
+  &quot;Cell model with steady state initial conditions (no reaction)&quot;</font>
+
+  <font color="blue">extends </font><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a>(
+    anFP(subregions(<font color="blue">each </font>graphite(&#39;e-&#39;(initMethPartNum=InitMethScalar.None)))),
+
+    anGDL(subregions(<font color="blue">each </font>graphite(&#39;e-&#39;(initMethPartNum=InitMethScalar.None)))),
+
+    anCL(subregions(<font color="blue">each </font>graphite(&#39;e-&#39;(<font color="blue">final </font>Ndot_IC=0, <font color="blue">final </font>initMethPartNum=
+                InitMethScalar.ReactionRate)), <font color="blue">each </font>ionomer(&#39;H+&#39;(
+              initMethPartNum=InitMethScalar.None)))),
+    pEM(subregions(<font color="blue">each </font>ionomer(&#39;H+&#39;(<font color="blue">final </font>initMethPartNum=InitMethScalar.None)))),
+
+    caCL(subregions(<font color="blue">each </font>ionomer(&#39;H+&#39;(initMethPartNum=InitMethScalar.Amount)))),
+
+    caGDL(subregions(<font color="blue">each </font>graphite(&#39;e-&#39;(<font color="blue">final </font>initMethPartNum=InitMethScalar.None)))),
+
+    caFP(subregions(<font color="blue">each </font>graphite(&#39;e-&#39;(<font color="blue">final </font>initMethPartNum=InitMethScalar.None)))));
+
+<font color="blue">initial </font><font color="blue">equation </font>
+  <font color="darkgreen">// Equipotential</font>
+  anCL.subregions.graphite.'e-'.mu = anGDL.subregions.graphite.'e-'.mu;
+  anFP.subregions.graphite.'e-'.mu = anGDL.subregions.graphite.'e-'.mu;
+
+  anCL.subregions.ionomer.'H+'.mu = pEM.subregions.ionomer.'H+'.mu;
+  pEM.subregions.ionomer.'H+'.mu = caCL.subregions.ionomer.'H+'.mu;
+  caCL.subregions.graphite.'e-'.mu = caGDL.subregions.graphite.'e-'.mu;
+  caFP.subregions.graphite.'e-'.mu = caGDL.subregions.graphite.'e-'.mu;
+
+<font color="blue">end </font>CellSSIC;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Fri Mar 22 20:59:55 2013.
+</div>
+</body>
+</html>

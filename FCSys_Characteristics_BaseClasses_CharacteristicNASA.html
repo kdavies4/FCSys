@@ -1,0 +1,339 @@
+<html>
+<head>
+<title>FCSys.Characteristics.BaseClasses.CharacteristicNASA</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta name="description" content="Thermodynamic record with transport properties based on NASA CEA">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="../resources/documentation/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="FCSys.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="FCSys.html">
+    <img src="../resources/documentation/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+<ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Characteristics.BaseClasses.CharacteristicNASA"></a><a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses">FCSys.Characteristics.BaseClasses</a>.CharacteristicNASA</h2>
+
+<b>Thermodynamic record with transport properties based on NASA CEA</b>
+
+<h3>Information</h3>
+
+<p>The correlations for transport properties are available in
+  [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride1996</a>,
+  <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride2002</a>]. For more information, see the
+  <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a> record.</p><p>
+Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a> (Record for thermodynamic and resistive properties).
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td>T_lim_zeta_theta={0,Modelica.Constants.inf}</td><td>Temperature limits for the rows of <i>b</i><sub><i>F</i></sub> and <i>b</i><sub><i>R</i></sub> (<i>T</i><sub>lim &zeta; &theta;</sub>)</td></tr>
+<tr><td>b_zeta</td><td>Correlation constants for fluidity (<i>b</i>&zeta;</sub>)</td></tr>
+<tr><td>b_theta</td><td>Correlation constants for thermal resistivity (<i>b</i><sub>&theta;</sub>)</td></tr>
+<tr><td><img src="FCSys.Characteristics.BaseClasses.CharacteristicNASA.fromNASAViscosityS.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.fromNASAViscosity" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA.fromNASAViscosity">fromNASAViscosity</a>
+</td><td>Return constants for fluidity given NASA CEA constants for viscosity</td></tr>
+<tr><td><img src="FCSys.Characteristics.BaseClasses.CharacteristicNASA.fromNASAViscosityS.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.fromNASAThermalConductivity" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA.fromNASAThermalConductivity">fromNASAThermalConductivity</a>
+</td><td>Return constants for thermal resistivity given NASA CEA constants for thermal conductivity</td></tr>
+<tr><td><img src="FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.zeta" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA.zeta">zeta</a>
+</td><td>Fluidity as a function of temperature (&zeta;)</td></tr>
+<tr><td><img src="FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.theta" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA.theta">theta</a>
+</td><td>Thermal resistivity as a function of temperature and pressure (&theta;)</td></tr>
+<tr><TH COLSPAN="2">Inherited</th></tr>
+<tr><td>formula</td><td>Chemical formula</td></tr>
+<tr><td>phase</td><td>Material phase</td></tr>
+<tr><td>m</td><td>Specific mass</td></tr>
+<tr><td>d</td><td>Specific diameter</td></tr>
+<tr><td>z=Chemistry.charge(formula)</td><td>Charge number</td></tr>
+<tr><td>p0=U.bar</td><td>Reference pressure (<i>p</i>&deg;)</td></tr>
+<tr><td>p_min=-Modelica.Constants.inf</td><td>Minimum pressure for numerical protection (<i>p</i><sub>min</sub>)</td></tr>
+<tr><td>b_v=[1]</td><td>Coefficients of specific volume as a polynomial in <i>p</i>/<i>T</i> and <i>T</i> (<i>b</i><sub><i>v</i></sub>)</td></tr>
+<tr><td>specVolPow={-1,0}</td><td>Powers of <i>p</i>/<i>T</i> and <i>T</i> for 1<sup>st</sup> row and column of <i>b</i><sub><i>v</i></sub>, respectively</td></tr>
+<tr><td>Deltah0_f</td><td>Enthalpy of formation at 298.15 K, <i>p</i>&deg; (&Delta;<i>h</i>&deg;<sub>f</sub>)</td></tr>
+<tr><td>Deltah0</td><td><i>h</i>&deg;(298.15 K) - <i>h</i>&deg;(0 K) (&Delta;<i>h</i>&deg;)</td></tr>
+<tr><td>h_offset=0</td><td>Additional enthalpy offset (<i>h</i><sub>offset</sub>)</td></tr>
+<tr><td>specHeatCapPow=-2</td><td>Power of <i>T</i> for 1<sup>st</sup> column of <i>b</i><sub><i>c</i></sub></td></tr>
+<tr><td>T_lim_c={0,Modelica.Constants.inf}</td><td>Temperature limits for the rows of <i>b</i><sub><i>c</i></sub> and <i>B</i><sub><i>c</i></sub> (<i>T</i><sub>lim <i>c</i></sub>)</td></tr>
+<tr><td>b_c</td><td>Coefficients of isobaric specific heat capacity at <i>p</i>&deg; as a polynomial in <i>T</i> (<i>b</i><sub><i>c</i></sub>)</td></tr>
+<tr><td>B_c</td><td>Integration constants for specific enthalpy and entropy (<i>B</i><sub><i>c</i></sub>)</td></tr>
+<tr><td>isCompressible=anyTrue({anyTrue({abs(b_v[i, j]) &gt; Modelica.Constants.small and specVolPow[1] + i - 1 &lt;&gt; 0 for i in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})</td><td>true, if specific volume depends on pressure</td></tr>
+<tr><td>hasThermalExpansion=anyTrue({anyTrue({abs(b_v[i, j]) &gt; Modelica.Constants.small and specVolPow[2] + j - specVolPow[1] - i &lt;&gt; 0 for i in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})</td><td>true, if specific volume depends on temperature</td></tr>
+<tr><td>pressPow={specVolPow[1] - size(b_v, 1) + 1,specVolPow[2] + 1}</td><td>Powers of v and T for 1st row and column of b_p, respectively</td></tr>
+<tr><td>b_p=if size(b_v, 1) == 1 then b_v .^ (-pressPow[1]) else {(if specVolPow[1] + i == 0 or specVolPow[1] + i == 1 or size(b_v, 1) == 1 then b_v[i, :] else (if specVolPow[1] + i == 2 and specVolPow[1] &lt;= 0 then b_v[i, :] + b_v[i - 1, :] .^ 2 else (if specVolPow[1] + i == 3 and specVolPow[1] &lt;= 0 then b_v[i, :] + b_v[i - 2, :] .* (b_v[i - 2, :] .^ 2 + 3*b_v[i - 1, :]) else zeros(size(b_v, 2))))) for i in size(b_v, 1):-1:1}</td><td>Coefficients of p as a polynomial in v and T</td></tr>
+<tr><td><img src="FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.alpha" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.alpha">alpha</a>
+</td><td>Ideal base resistivity factor as a function of temperature (&alpha;)</td></tr>
+<tr><td><img src="FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.kappa_T" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.kappa_T">kappa_T</a>
+</td><td>Isothermal compressibility as a function of temperature and pressure (&kappa;<sub><i>T</i></sub>)</td></tr>
+<tr><td><img src="FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.c_p" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.c_p">c_p</a>
+</td><td>Isobaric specific heat capacity as a function of temperature and pressure (<i>c</i><sub><i>p</i></sub>)</td></tr>
+<tr><td><img src="FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.c_v" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.c_v">c_v</a>
+</td><td>Isochoric specific heat capacity as a function of temperature and pressure (<i>c</i><sub><i>v</i></sub>)</td></tr>
+<tr><td><img src="FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.dp_Tv" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.dp_Tv">dp_Tv</a>
+</td><td>Derivative of pressure as defined by <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.p_Tv">p_Tv</a>()</td></tr>
+<tr><td><img src="FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.dv_Tp" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.dv_Tp">dv_Tp</a>
+</td><td>Derivative of specific volume as defined by <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.v_Tp">v_Tp</a>()</td></tr>
+<tr><td><img src="FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.eta" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.eta">eta</a>
+</td><td>Material resistivity as a function of temperature and pressure (&eta;)</td></tr>
+<tr><td><img src="FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.g" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.g">g</a>
+</td><td>Gibbs potential as a function of temperature and pressure</td></tr>
+<tr><td><img src="FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.h" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.h">h</a>
+</td><td>Specific enthalpy as a function of temperature and pressure</td></tr>
+<tr><td><img src="FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.beta" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.beta">beta</a>
+</td><td>Kinematic compressibility as a function of temperature and pressure (&beta;)</td></tr>
+<tr><td><img src="FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.p_Tv" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.p_Tv">p_Tv</a>
+</td><td>Pressure as a function of temperature and specific volume</td></tr>
+<tr><td><img src="FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.s" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.s">s</a>
+</td><td>Specific entropy as a function of temperature and pressure</td></tr>
+<tr><td><img src="FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaS.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.v_Tp" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.v_Tp">v_Tp</a>
+</td><td>Specific volume as a function of temperature and pressure</td></tr>
+</table>
+<p>
+
+<h3>Types and constants</h3>
+
+<pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_lim_zeta_theta[:]={0,Modelica.Constants.inf} <font color="darkgreen">
+  &quot;Temperature limits for the rows of <i>b</i><sub><i>F</i></sub> and <i>b</i><sub><i>R</i></sub> (<i>T</i><sub>lim &zeta; &theta;</sub>)&quot;</font>;</pre><p>
+<pre><font color="blue">constant </font>Real b_zeta[<font color="red">size</font>(T_lim_zeta_theta, 1) - 1, 4] <font color="darkgreen">
+  &quot;Correlation constants for fluidity (<i>b</i>&zeta;</sub>)&quot;</font>;</pre><p>
+<pre><font color="blue">constant </font>Real b_theta[<font color="red">size</font>(T_lim_zeta_theta, 1) - 1, 4] <font color="darkgreen">
+  &quot;Correlation constants for thermal resistivity (<i>b</i><sub>&theta;</sub>)&quot;</font>;</pre><p>
+<hr>
+
+<h2><a name="FCSys.Characteristics.BaseClasses.CharacteristicNASA.fromNASAViscosity"></a><a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA">FCSys.Characteristics.BaseClasses.CharacteristicNASA</a>.fromNASAViscosity</h2>
+
+<b>Return constants for fluidity given NASA CEA constants for viscosity</b><p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Real</td><td>b_eta[4]</td><td>&nbsp;</td><td>NASA CEA constants for viscosity</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Real</td><td>b_zeta[4]</td><td>Constants for fluidity</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> fromNASAViscosity <font color="darkgreen">
+  &quot;Return constants for fluidity given NASA CEA constants for viscosity&quot;</font>
+  <font color="blue">input </font>Real b_eta[4] <font color="darkgreen">&quot;NASA CEA constants for viscosity&quot;</font>;
+  <font color="blue">output </font>Real b_zeta[4] <font color="darkgreen">&quot;Constants for fluidity&quot;</font>;
+
+<font color="blue">algorithm </font>
+  b_zeta := {-b_eta[1],-b_eta[2]*U.K,-b_eta[3]*U.K^2,-b_eta[4] + b_eta[1]*<font color="red">ln</font>(U.K)
+     + <font color="red">ln</font>(1e4*U.m*U.s/U.g)};
+
+<font color="blue">end </font>fromNASAViscosity;
+</pre>
+<hr>
+
+<h2><a name="FCSys.Characteristics.BaseClasses.CharacteristicNASA.fromNASAThermalConductivity"></a><a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA">FCSys.Characteristics.BaseClasses.CharacteristicNASA</a>.fromNASAThermalConductivity</h2>
+
+<b>Return constants for thermal resistivity given NASA CEA constants for thermal conductivity</b><p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td>Real</td><td>b_lambda[4]</td><td>&nbsp;</td><td>NASA CEA constants for thermal conductivity</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>Real</td><td>b_theta[4]</td><td>Constants for thermal resistivity</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">function</font> fromNASAThermalConductivity <font color="darkgreen">
+  &quot;Return constants for thermal resistivity given NASA CEA constants for thermal conductivity&quot;</font>
+  <font color="blue">input </font>Real b_lambda[4] <font color="darkgreen">&quot;NASA CEA constants for thermal conductivity&quot;</font>;
+  <font color="blue">output </font>Real b_theta[4] <font color="darkgreen">&quot;Constants for thermal resistivity&quot;</font>;
+
+<font color="blue">algorithm </font>
+  b_theta := {-b_lambda[1],-b_lambda[2]*U.K,-b_lambda[3]*U.K^2,-b_lambda[4] +
+    b_lambda[1]*<font color="red">ln</font>(U.K) + <font color="red">ln</font>(1e4*U.m*U.K/U.W)};
+
+<font color="blue">end </font>fromNASAThermalConductivity;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaI.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.zeta" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Characteristics.BaseClasses.CharacteristicNASA.zeta"></a><a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA">FCSys.Characteristics.BaseClasses.CharacteristicNASA</a>.zeta</h2>
+<b>Fluidity as a function of temperature (&zeta;)</b>
+
+<h3>Information</h3>
+
+<p>This function is based on based on NASA CEA
+  [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride1996</a>, <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Svehla1995</a>]</p>
+
+  <p>For more information, see <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.F">Characteristic.zeta</a>().</p>
+  <p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>zeta</td><td>Fluidity [l.T/m]</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">redeclare </font><font color="blue">function</font> zeta <font color="darkgreen">
+  &quot;Fluidity as a function of temperature (&zeta;)&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p=U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="darkgreen">// Note:  Pressure isn&#39;t used here but is included for generality.</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Q.Fluidity</a> zeta <font color="darkgreen">&quot;Fluidity&quot;</font>;
+
+<font color="blue">algorithm </font>
+  <font color="darkgreen">/*
+    assert(T_lim_zeta_theta[1] &lt;= T and T &lt;= T_lim_zeta_theta[size(T_lim_zeta_theta, 1)], &quot;Temperature &quot;
+     + String(T/(U.K)) + &quot; K is out of range for the resistivities ([&quot; +
+    String(T_lim_zeta_theta[1]/U.K) + &quot;, &quot; + String(T_lim_zeta_theta[size(T_lim_zeta_theta, 1)]
+    /U.K) + &quot;] K).&quot;);
+    */</font>
+  <font color="darkgreen">// Note:  This is commented out so that the function can be inlined.</font>
+  <font color="darkgreen">// Note:  In Dymola 7.4 T_lim_zeta_theta[end] can&#39;t be used instead of</font>
+  <font color="darkgreen">// T_lim_zeta_theta[size(T_lim_zeta_theta, 1)] due to:</font>
+  <font color="darkgreen">//     &quot;Error, not all &quot;end&quot; could be expanded.&quot;</font>
+
+  zeta := <font color="red">smooth</font>(0, <font color="red">exp</font>(<font color="red">sum</font>(<font color="blue">if </font>(T_lim_zeta_theta[i] &lt;= T<font color="blue"> or </font>i == 1)<font color="blue"> and </font>(T &lt;
+    T_lim_zeta_theta[i + 1]<font color="blue"> or </font>i == <font color="red">size</font>(T_lim_zeta_theta, 1) - 1)<font color="blue"> then </font>b_zeta[
+    i, 1]*<font color="red">ln</font>(T) + (b_zeta[i, 2] + b_zeta[i, 3]/T)/T + b_zeta[i, 4]<font color="blue"> else </font>0 <font color="blue">for </font>i<font color="blue">
+     in </font>1:<font color="red">size</font>(T_lim_zeta_theta, 1) - 1)));
+<font color="blue">end </font>zeta;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaI.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.theta" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Characteristics.BaseClasses.CharacteristicNASA.theta"></a><a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA">FCSys.Characteristics.BaseClasses.CharacteristicNASA</a>.theta</h2>
+<b>Thermal resistivity as a function of temperature and pressure (&theta;)</b>
+
+<h3>Information</h3>
+
+<p>This function is based on based on NASA CEA
+  [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">McBride1996</a>, <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Svehla1995</a>]</p>
+
+    <p>For more information, see <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.theta">Characteristic.theta</a>().</p>
+    <p>
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
+<p>
+
+<h3>Inputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
+</table>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>theta</td><td>Thermal resistivity</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">redeclare </font><font color="blue">function</font> theta <font color="darkgreen">
+  &quot;Thermal resistivity as a function of temperature and pressure (&theta;)&quot;</font>
+  <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
+
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T=298.15*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p=U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="darkgreen">// Note:  Pressure isn&#39;t used here but is included for generality.</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> theta <font color="darkgreen">&quot;Thermal resistivity&quot;</font>;
+
+<font color="blue">algorithm </font>
+  <font color="darkgreen">/*
+    assert(T_lim_zeta_theta[1] &lt;= T and T &lt;= T_lim_zeta_theta[size(T_lim_zeta_theta, 1)], &quot;Temperature &quot;
+     + String(T/(U.K)) + &quot; K is out of range for the resistivities ([&quot; +
+    String(T_lim_zeta_theta[1]/U.K) + &quot;, &quot; + String(T_lim_zeta_theta[size(T_lim_zeta_theta, 1)]
+    /U.K) + &quot;] K).&quot;);
+    */</font>
+  <font color="darkgreen">// Note:  This is commented out so that the function can be inlined.</font>
+  <font color="darkgreen">// Note:  In Dymola 7.4 T_lim_zeta_theta[end] can&#39;t be used instead of</font>
+  <font color="darkgreen">// T_lim_zeta_theta[size(T_lim_zeta_theta, 1)] due to:</font>
+  <font color="darkgreen">//     &quot;Error, not all &quot;end&quot; could be expanded.&quot;</font>
+
+  theta := <font color="red">smooth</font>(0, <font color="red">exp</font>(<font color="red">sum</font>(<font color="blue">if </font>(T_lim_zeta_theta[i] &lt;= T<font color="blue"> or </font>i == 1)<font color="blue"> and </font>(T &lt;
+    T_lim_zeta_theta[i + 1]<font color="blue"> or </font>i == <font color="red">size</font>(T_lim_zeta_theta, 1) - 1)<font color="blue"> then </font>b_theta[
+    i, 1]*<font color="red">ln</font>(T) + (b_theta[i, 2] + b_theta[i, 3]/T)/T + b_theta[i, 4]<font color="blue"> else </font>0 <font color="blue">
+    for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(T_lim_zeta_theta, 1) - 1)));
+<font color="blue">end </font>theta;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Fri Mar 22 21:03:09 2013.
+</div>
+</body>
+</html>

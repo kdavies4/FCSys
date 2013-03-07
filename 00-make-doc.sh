@@ -5,10 +5,10 @@
 # Kevin Davies, 1/24/2013
 
 # Remove some of the help files.
-rm -f help/FCSys.Figures*.png
-rm -f help/FCSys_Figures*.html
 rm -f help/FCSys.Test*.png # Test and Tests
 rm -f help/FCSys_Test*.html
+rm -f help/FCSys_Figures*.html
+rm -f help/FCSys.Figures*S.png # Leave the diagrams and icons.
 rm -f help/*WorkInProgress*
 
 # Clean up the help files (for local browsing as well as web).
@@ -21,7 +21,7 @@ git checkout gh-pages
 git checkout $branch resources/documentation
 
 # Update the style sheet.
-mv -f resources/documentation/ModelicaDoc.css stylesheets
+cp -f resources/documentation/ModelicaDoc.css stylesheets
 
 # Update the images.
 rm images/*
@@ -34,6 +34,7 @@ cp help/*.png images/
 # Note:  This replaces
 # resources/documentation/FCSys.Subassemblies.Cells.CellD.png (copied above),
 # which is lower resolution.
+rm images/FCSys.Figures*.png
 
 # Copy and process the HTML files.
 rm *.html

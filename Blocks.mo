@@ -1,5 +1,5 @@
 within FCSys;
-package Blocks "Imperative models (inputs and/or outputs only)"
+package Blocks "Imperative models (inputs and outputs only)"
   extends Modelica.Icons.Package;
 
   package UnitConversions
@@ -87,16 +87,18 @@ package Blocks "Imperative models (inputs and/or outputs only)"
         annotation (Documentation(info="<html>
 <p>See the documentation in the
   <a href=\"modelica://FCSys.Blocks.UnitConversions\">UnitConversions</a> package.</p></html>"),
-            Icon(graphics={Rectangle(
-                      extent={{-100,40},{100,-40}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      lineColor={0,0,0}),Line(points={{-70,0},{10,0}}, color={
-                191,0,0}),Polygon(
-                      points={{70,0},{10,20},{10,-20},{70,0}},
-                      lineColor={191,0,0},
-                      fillColor={191,0,0},
-                      fillPattern=FillPattern.Solid)}));
+            Icon(graphics={
+              Rectangle(
+                extent={{-100,40},{100,-40}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                lineColor={0,0,0}),
+              Line(points={{-70,0},{10,0}}, color={191,0,0}),
+              Polygon(
+                points={{70,0},{10,20},{10,-20},{70,0}},
+                lineColor={191,0,0},
+                fillColor={191,0,0},
+                fillPattern=FillPattern.Solid)}));
 
       end PartialUnitConversion;
 
@@ -108,8 +110,7 @@ package Blocks "Imperative models (inputs and/or outputs only)"
   The <a href=\"modelica://FCSys.Blocks.UnitConversions.UnitConversion\">UnitConversion</a> block
   has a parameter that configures it
   to convert to or from any of the supported units.
-  All other blocks convert to or from a predefined unit.
-  </p>
+  All other blocks convert to or from a predefined unit.</p>
 
 <p>Blocks are only included for
   units that involve offsets or other functions besides simple scaling.
@@ -119,8 +120,7 @@ block with the appropriate factors from <a href=\"modelica://FCSys.Units\">Units
 (<code>U</code>).  For example, to convert from potential in volts use:
 <br><code>Modelica.Blocks.Math.Gain from_V(k=U.V);</code>
 <br>To convert to current in amperes use:
-<br><code>Modelica.Blocks.Math.Gain to_A(k=1/U.A);</code>
-</p>
+<br><code>Modelica.Blocks.Math.Gain to_A(k=1/U.A);</code></p>
 
 </html>"));
 

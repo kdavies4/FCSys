@@ -147,7 +147,8 @@ package Units "Constants and units of physical measure"
     final constant Q.Volume cc=U.cc "cubic centimeter";
     annotation (Documentation(info="<html><p>This model is used by the units script (\"FCSys/resources/scripts/units.mos\") to
   establish the values of the units in order to convert values to numbers for display.</p>
-  <p>For more information, see the documentation in the
+
+<p>For more information, see the documentation in the
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
         Commands(file="resources/scripts/units.mos" "Re-initialize the units."));
 
@@ -178,7 +179,9 @@ package Units "Constants and units of physical measure"
    PEMFC.  Also, with these settings:
        <ul>
        <li>10 m/s &asymp; 1</li>
-       <li>9.872e-5 atm &asymp; 1</li></ul></p>  <p>For more information, see the documentation in the
+       <li>9.872e-5 atm &asymp; 1</li></ul></p>
+
+<p>For more information, see the documentation in the
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
           Commands(file="resources/scripts/units.mos"
             "Re-initialize the units."));
@@ -201,8 +204,9 @@ package Units "Constants and units of physical measure"
   <ul>
   <li>A &asymp; 1.03643e-5</li>
   <li>K &asymp; 8.31446</li>
-  </ul>
-  </p>  <p>For more information, see the documentation in the
+  </ul></p>
+
+<p>For more information, see the documentation in the
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
           Commands(file="resources/scripts/units.mos"
             "Re-initialize the units."));
@@ -225,8 +229,9 @@ package Units "Constants and units of physical measure"
   <ul>
   <li>A &asymp; 1.03643e-5</li>
   <li>m &asymp; 0.346803</li>
-  </ul>
-  </p>  <p>For more information, see the documentation in the
+  </ul></p>
+
+<p>For more information, see the documentation in the
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
           Commands(file="resources/scripts/units.mos"
             "Re-initialize the units."));
@@ -248,8 +253,7 @@ package Units "Constants and units of physical measure"
   <ul>
   <li>A &asymp; 3.59436e-6</li>
   <li>s &asymp; 2.88348</li>
-  </ul>
-  </p>
+  </ul></p>
 
   <p>For more information, see the documentation in the
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
@@ -273,8 +277,9 @@ package Units "Constants and units of physical measure"
   <ul>
   <li>K &asymp; 8.61733e-5</li>
   <li>mol &asymp; 96485.3</li>
-  </ul>
-  </p>  <p>For more information, see the documentation in the
+  </ul></p>
+
+<p>For more information, see the documentation in the
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
           Commands(file="resources/scripts/units.mos"
             "Re-initialize the units."));
@@ -297,7 +302,8 @@ package Units "Constants and units of physical measure"
   <li>K &asymp; 7.74028e10</li>
   <li>s &asymp; 1.03643e-5</li>
   </ul></p>
-  <p>For more information, see the documentation in the
+
+<p>For more information, see the documentation in the
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
           Commands(file="resources/scripts/units.mos"
             "Re-initialize the units."));
@@ -319,8 +325,9 @@ package Units "Constants and units of physical measure"
   <ul>
   <li>m &asymp; 107.724</li>
   <li>mol &asymp; 96485.3</li>
-  </ul>
-  </p>  <p>For more information, see the documentation in the
+  </ul></p>
+
+<p>For more information, see the documentation in the
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
           Commands(file="resources/scripts/units.mos"
             "Re-initialize the units."));
@@ -343,7 +350,8 @@ package Units "Constants and units of physical measure"
   <li>m &asymp; 3.59436e-6</li>
   <li>s &asymp; 1.03643e-5</li>
   </ul></p>
-  <p>For more information, see the documentation in the
+
+<p>For more information, see the documentation in the
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
           Commands(file="resources/scripts/units.mos"
             "Re-initialize the units."));
@@ -366,7 +374,8 @@ package Units "Constants and units of physical measure"
   <li>mol &asymp; 4261.73</li>
   <li>s &asymp; 0.0441697</li>
   </ul></p>
-  <p>For more information, see the documentation in the
+
+<p>For more information, see the documentation in the
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
           Commands(file="resources/scripts/units.mos"
             "Re-initialize the units."));
@@ -381,7 +390,9 @@ package Units "Constants and units of physical measure"
   <li><i>k</i><sub>A</sub> = 1 &rArr; <i>R</i><sub>K</sub>/<i>c</i> = 2&pi;/&alpha;</li>
   <li><i>k</i><sub>e</sub> = 1 &rArr; <i>R</i><sub>K</sub>*<i>c</i> = 2&pi;/&alpha;</li>
   </ul>
-  Together, <i>c</i> = 1 and <i>R</i><sub>K</sub> = 2&pi;/&alpha;</p>  <p>For more information, see the documentation in the
+  Together, <i>c</i> = 1 and <i>R</i><sub>K</sub> = 2&pi;/&alpha;</p>
+
+<p>For more information, see the documentation in the
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"));
 
     end BasisGaussian;
@@ -394,7 +405,9 @@ package Units "Constants and units of physical measure"
   <li>&mu;<sub>0</sub> = 1 &rArr; <i>R</i><sub>K</sub>/<i>c</i> = 1/(2&alpha;)</li>
   <li>&epsilon;<sub>0</sub> = 1 &rArr; <i>R</i><sub>K</sub>*<i>c</i> = 1/(2&alpha;)</li>
   </ul>
-  Together, <i>c</i> = 1 and <i>R</i><sub>K</sub> = 1/(2&alpha;)</p>  <p>For more information, see the documentation in the
+  Together, <i>c</i> = 1 and <i>R</i><sub>K</sub> = 1/(2&alpha;)</p>
+
+<p>For more information, see the documentation in the
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"));
 
     end BasisLH;
@@ -451,7 +464,8 @@ package Units "Constants and units of physical measure"
   sets in this package are named by listing (in alphabetical order) the two units that are
   <b>not</b> normalized for the sake of setting the Faraday and gas constants equal to one.
   There are eight possible sets of this type.</p>
-  <p>For more information, see the documentation in the
+
+<p>For more information, see the documentation in the
   <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
         Commands(file="resources/scripts/units.mos" "Re-initialize the units."));
 
@@ -805,13 +819,12 @@ package Units "Constants and units of physical measure"
     may be the product of any of the units defined in <a href=\"modelica://FCSys.Units\">FCSys.Units</a> raised to any power.
     When a quantity is converted to a number for display, it is divided by its unit.
     This conveniently handles unit conversion&mdash;without preference towards any particular set of units.
-     It can also be used to scale
+    It can also be used to scale
     the floating point values associated with quantities.  In order to provide
     well-scaled quantities, the value of the unit should be increased in inverse proportion
     to a typical value of a quantity expressed as a number in that unit.  For example, if a model
     has a length scale on the order of a nanometer, it may be best to chose a unit system that
-    results in a number of 10<sup>9</sup> for the unit meter.
-    </p>
+    results in a number of 10<sup>9</sup> for the unit meter.</p>
 
     <p>Regardless of a quantity's unit, it is mapped through the relations in <a href=\"modelica://FCSys.Units\">FCSys.Units</a> (<code>U</code>)
     to a number times a product of five independent base constants or units each raised to the appropriate powers.
@@ -832,7 +845,7 @@ package Units "Constants and units of physical measure"
     [<a href=\"modelica://FCSys.UsersGuide.References\">NIST2010</a>].</p>
 
     <p>There are five independent constants or units in <a href=\"modelica://FCSys.Units\">FCSys.Units</a>,
-    but the International System of Units (SI) has seven independent base units (<code>U.kg</code>,
+    but SI has seven independent base units (<code>U.kg</code>,
     <code>U.m</code>, <code>U.s</code>, <code>U.A</code>, <code>U.mol</code>, <code>U.K</code>, and
     <code>U.'cd'</code>).  In <a href=\"modelica://FCSys\">FCSys</a>, two additional constraints are imposed in order
     to simplify the model equations and allow electrons and chemical species to be to represented by the
@@ -882,17 +895,15 @@ package Units "Constants and units of physical measure"
   <a href=\"http://www.python.org\">Python</a>, C).</p>
 
   <p>For more information, see the related paper [<a href=\"modelica://FCSys.UsersGuide.References\">Davies and Paredis, 2012</a>].</p>
-  <p>
-  <b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-  Copyright 2007&ndash;2012, Georgia Tech Research Corporation.
-  </p>
-  <p>
-  <i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+
+<p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+  Copyright 2007&ndash;2012, Georgia Tech Research Corporation.</p>
+
+<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
   it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
   disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.ModelicaLicense2\">
   FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
-  http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
-  </p></html>"), Commands(file="resources/scripts/units.mos"
-        "Re-initialize the units."));
+  http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"),
+      Commands(file="resources/scripts/units.mos" "Re-initialize the units."));
 
 end Units;

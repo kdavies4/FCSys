@@ -493,7 +493,6 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
   a <a href=\"https://creativecommons.org/licenses/by/3.0/deed.en_US\">Creative Commons
   Attribution 3.0 Unported License</a>.  If the <a href=\"modelica://FCSys.Tests\">Tests</a>
   package is removed from the <a href=\"modelica://FCSys\">FCSys</a> distribution, then this
-  package can be safely removed as well.
-  </p></html>"));
+  package can be safely removed as well.</p></html>"));
 
 end Test;

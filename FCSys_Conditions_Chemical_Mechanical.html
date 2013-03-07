@@ -1,0 +1,178 @@
+<html>
+<head>
+<title>FCSys.Conditions.Chemical.Mechanical</title>
+<meta name="HTML-Generator" content="Dymola">
+<meta name="description" content="Mechanical conditions">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="../resources/documentation/ModelicaDoc.css">
+<link rel="shortcut icon" href="../resources/documentation/favicon.ico">
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebarwrapper">
+  <a href="FCSys.html"><p class="sidebar-title">FCSys</p></a>
+  <p class="logo"><a href="FCSys.html">
+    <img src="../resources/documentation/icon.gif" class="logo" alt="Logo" width=150>
+  </a></p>
+
+<h3>Table of Contents</h3>
+
+<ul>
+    <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
+    <li><a href="FCSys_Blocks.html">Blocks</a></li>
+    <li><a href="FCSys_Conditions.html">Conditions</a></li>
+    <li><a href="FCSys_Assemblies.html">Assemblies</a></li>
+    <li><a href="FCSys_Regions.html">Regions</a></li>
+    <li><a href="FCSys_Subregions.html">Subregions</a></li>
+    <li><a href="FCSys_Connectors.html">Connectors</a></li>
+    <li><a href="FCSys_Characteristics.html">Characteristics</a></li>
+    <li><a href="FCSys_Units.html">Units</a></li>
+    <li><a href="FCSys_Quantities.html">Quantities</a></li>
+    <li><a href="FCSys_BaseClasses.html">BaseClasses</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="document">
+  <div class="documentwrapper">
+    <div class="bodywrapper">
+      <div class="body">
+
+<h2><a name="FCSys.Conditions.Chemical.Mechanical"></a><a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical">FCSys.Conditions.Chemical</a>.Mechanical</h2>
+
+<b>Mechanical conditions</b>
+
+<h3>Information</h3>
+
+Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
+
+<h3>Package Content</h3>
+
+<table border=1 cellspacing=0 cellpadding=2 >
+<tr><th>Name</th><th>Description</th></tr>
+<tr><td><img src="FCSys.Conditions.Chemical.Mechanical.VelocityS.png" alt="FCSys.Conditions.Chemical.Mechanical.Velocity" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Chemical_Mechanical.html#FCSys.Conditions.Chemical.Mechanical.Velocity">Velocity</a>
+</td><td>Specify velocity (measure force)</td></tr>
+<tr><td><img src="FCSys.Conditions.Chemical.Mechanical.VelocityS.png" alt="FCSys.Conditions.Chemical.Mechanical.Custom" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Chemical_Mechanical.html#FCSys.Conditions.Chemical.Mechanical.Custom">Custom</a>
+</td><td>Custom expressions</td></tr>
+<tr><td><img src="FCSys.Conditions.Chemical.Mechanical.BaseClassesS.png" alt="FCSys.Conditions.Chemical.Mechanical.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Chemical_Mechanical_BaseClasses.html#FCSys.Conditions.Chemical.Mechanical.BaseClasses">BaseClasses</a>
+</td><td>Base classes (not generally for direct use)</td></tr>
+</table>
+<hr>
+
+<h2><img src="FCSys.Conditions.Chemical.Mechanical.VelocityI.png" alt="FCSys.Conditions.Chemical.Mechanical.Velocity" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.Chemical.Mechanical.Velocity"></a><a href="FCSys_Conditions_Chemical_Mechanical.html#FCSys.Conditions.Chemical.Mechanical">FCSys.Conditions.Chemical.Mechanical</a>.Velocity</h2>
+<b>Specify velocity (measure force)</b><p>
+<img src="FCSys.Conditions.Chemical.Material.PotentialPerTemperatureD.png" alt="FCSys.Conditions.Chemical.Mechanical.Velocity">
+
+<h3>Information</h3>
+
+Extends from <a href="FCSys_Conditions_Chemical_Mechanical_BaseClasses.html#FCSys.Conditions.Chemical.Mechanical.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a mechanical condition).
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis</a></td><td>axis</td><td>Axis.x</td><td>Axis</td></tr>
+<tr><td><a href="FCSys_Conditions_Chemical_Mechanical_BaseClasses.html#FCSys.Conditions.Chemical.Mechanical.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Ve&hellip;</td><td>Type of condition</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
+<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
+<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a></td><td>chemical</td><td>Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as input</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> Velocity <font color="darkgreen">&quot;Specify velocity (measure force)&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_Chemical_Mechanical_BaseClasses.html#FCSys.Conditions.Chemical.Mechanical.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(
+    <font color="blue">final </font>conditionType=BaseClasses.ConditionType.Velocity,
+    u(<font color="blue">final </font>unit=&quot;l/T&quot;),
+    <font color="blue">final </font>y(<font color="blue">final </font>unit=&quot;l.m/T2&quot;) = chemical.mPhidot[linAxes[axis]]);
+
+<font color="blue">equation </font>
+  chemical.phi[linAxes[axis]] = u_final;
+<font color="blue">end </font>Velocity;
+</pre>
+<hr>
+
+<h2><img src="FCSys.Conditions.Chemical.Mechanical.VelocityI.png" alt="FCSys.Conditions.Chemical.Mechanical.Custom" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.Chemical.Mechanical.Custom"></a><a href="FCSys_Conditions_Chemical_Mechanical.html#FCSys.Conditions.Chemical.Mechanical">FCSys.Conditions.Chemical.Mechanical</a>.Custom</h2>
+<b>Custom expressions</b><p>
+<img src="FCSys.Conditions.Chemical.Material.PotentialPerTemperatureD.png" alt="FCSys.Conditions.Chemical.Mechanical.Custom">
+
+<h3>Information</h3>
+
+<p>The expression to which the condition is applied (<code>x</code>)
+    must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p><p>
+Extends from <a href="FCSys_Conditions_Chemical_Mechanical_BaseClasses.html#FCSys.Conditions.Chemical.Mechanical.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a mechanical condition).
+<p>
+
+<h3>Parameters</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis</a></td><td>axis</td><td>Axis.x</td><td>Axis</td></tr>
+<tr><td><a href="FCSys_Conditions_Chemical_Mechanical_BaseClasses.html#FCSys.Conditions.Chemical.Mechanical.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Cu&hellip;</td><td>Type of condition</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
+<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
+<tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
+<tr><td>Real</td><td>x</td><td>chemical.phi[linAxes[axis]]</td><td>Expression to which the condition is applied</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>chemical.mPhidot[linAxes[axi&hellip;</td><td>Measurement expression</td></tr>
+</table>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Value of specified condition</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a></td><td>chemical</td><td>Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as input</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=3>Measurement</td></tr>
+<tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Measurement expression</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">model</font> Custom <font color="darkgreen">&quot;Custom expressions&quot;</font>
+  <font color="blue">extends </font><a href="FCSys_Conditions_Chemical_Mechanical_BaseClasses.html#FCSys.Conditions.Chemical.Mechanical.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(<font color="blue">final </font>conditionType=BaseClasses.ConditionType.Custom,
+      y=chemical.mPhidot[linAxes[axis]]);
+
+  Real x=chemical.phi[linAxes[axis]] <font color="darkgreen">
+    &quot;Expression to which the condition is applied&quot;</font>;
+
+<font color="blue">equation </font>
+  x = u_final;
+<font color="blue">end </font>Custom;
+</pre>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Fri Mar 22 20:58:28 2013.
+</div>
+</body>
+</html>
