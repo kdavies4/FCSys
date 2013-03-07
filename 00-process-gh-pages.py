@@ -38,7 +38,9 @@ rpls = [
     ('(<link rel="shortcut icon" href=".*\.ico">\n)(</head>)', r"""\1<script type="text/javascript" src="javascripts/analytics.js"></script>
 \2"""),
     # Remove the self-reference.
-    ('Updates to this package may be available at.*\n *<a href="http://kdavies4\.github\.com/FCSys/">.*\n *Development is being carried out at', 'The development site is'),
+    ("""Updates to this package may be available at.*
+ *<a href="http://kdavies4\.github\.com/FCSys/">.*
+ *Development is being carried out at""", 'The development site is'),
     ]
 
 # Directory specification

@@ -1,0 +1,1339 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.WorkInProgress.Blocks.Examples</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Examples&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Examples<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.WorkInProgress.Blocks.Examples"></A><A HREF="FCSys_WorkInProgress_Blocks.html#FCSys.WorkInProgress.Blocks"
+>FCSys.WorkInProgress.Blocks</A>.Examples</H2>
+<B>Examples</B>
+<P>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_ExamplesPackage.html#Modelica.Icons.ExamplesPackage"
+>Modelica.Icons.ExamplesPackage</A> (Icon for packages containing runnable examples).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Examples.MagneticBallS.png" ALT="FCSys.WorkInProgress.Blocks.Examples.MagneticBall" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Examples.html#FCSys.WorkInProgress.Blocks.Examples.MagneticBall"
+>MagneticBall</A>
+</TD><TD>Example from [Carnegie Mellon, 2009]</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Examples.MagneticBallS.png" ALT="FCSys.WorkInProgress.Blocks.Examples.MaciejowskiAircraftMPC" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Examples.html#FCSys.WorkInProgress.Blocks.Examples.MaciejowskiAircraftMPC"
+>MaciejowskiAircraftMPC</A>
+</TD><TD>Aircraft model from J. Maciejowski, <i>Predictive Control with Constraints</i>, Prentice Hall, 2000</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Examples.MagneticBallS.png" ALT="FCSys.WorkInProgress.Blocks.Examples.RossiterExample2MPC" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Examples.html#FCSys.WorkInProgress.Blocks.Examples.RossiterExample2MPC"
+>RossiterExample2MPC</A>
+</TD><TD>Example2_mimo.m in Rossiter (2003)</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Examples.MagneticBallS.png" ALT="FCSys.WorkInProgress.Blocks.Examples.RossiterExample2MPCNoRej" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Examples.html#FCSys.WorkInProgress.Blocks.Examples.RossiterExample2MPCNoRej"
+>RossiterExample2MPCNoRej</A>
+</TD><TD>Example2_mimo.m in Rossiter (2003)</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Examples.MagneticBallS.png" ALT="FCSys.WorkInProgress.Blocks.Examples.PendulumMPC" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Examples.html#FCSys.WorkInProgress.Blocks.Examples.PendulumMPC"
+>PendulumMPC</A>
+</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE MagneticBall<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Examples.MagneticBallI.png" ALT="FCSys.WorkInProgress.Blocks.Examples.MagneticBall" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Examples.MagneticBall"></A><A HREF="FCSys_WorkInProgress_Blocks_Examples.html#FCSys.WorkInProgress.Blocks.Examples"
+>FCSys.WorkInProgress.Blocks.Examples</A>.MagneticBall</H2>
+<B>Example from [Carnegie Mellon, 2009]</B><p>
+<IMG SRC="FCSys.WorkInProgress.Blocks.Examples.MagneticBallD.png" ALT="FCSys.WorkInProgress.Blocks.Examples.MagneticBall">
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>A[:, n_x]</TD><TD>[0, 1, 0; 980, 0, -2.8; 0, 0...</TD><TD>System gain of state space model (state to derivative of state)</TD></TR>
+<TR><TD>Real</TD><TD>B[n_x, :]</TD><TD>[0; 0; 100]</TD><TD>Input gain of state space model (actuation to derivative of state)</TD></TR>
+<TR><TD>Real</TD><TD>C[:, n_x]</TD><TD>[1, 0, 0]</TD><TD>Output gain of state space model (state to measurement)</TD></TR>
+<TR><TD>Real</TD><TD>K[n_act, n_x]</TD><TD>[-775.7143, -20.6429, 0.4000]</TD><TD>Controller gain (estimated state to actuation)</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Controller</TD></TR>
+<TR><TD>Real</TD><TD>L[n_x, n_sen]</TD><TD>[0.0203e4; 1.1282e4; 0]</TD><TD>Observer gain (measurement to derivative of estimated state)</TD></TR>
+<TR><TD>Real</TD><TD>Nbar[n_act, n_x]</TD><TD>[-35.7143, 0, 0]</TD><TD>Reference gain (actuation to measurement)</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Initial Conditions</TD></TR>
+<TR><TD>Real</TD><TD>x_0[n_x]</TD><TD>{0.005,0,0}</TD><TD>Initial states of the plant</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> MagneticBall <font color="darkgreen">&quot;Example from [Carnegie Mellon, 2009]&quot;</font>
+  <font color="blue">import </font>MPC = <A HREF="FCSys_WorkInProgress_Blocks_Discrete_Controllers.html#FCSys.WorkInProgress.Blocks.Discrete.Controllers"
+>FCSys.WorkInProgress.Blocks.Discrete.Controllers</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+  <font color="blue">parameter </font>Real A[:, n_x]=[0, 1, 0; 980, 0, -2.8; 0, 0, -100] <font color="darkgreen">
+    &quot;System gain of state space model (state to derivative of state)&quot;</font>;
+  <font color="blue">parameter </font>Real B[n_x, :]=[0; 0; 100] <font color="darkgreen">
+    &quot;Input gain of state space model (actuation to derivative of state)&quot;</font>;
+  <font color="blue">parameter </font>Real C[:, n_x]=[1, 0, 0] <font color="darkgreen">
+    &quot;Output gain of state space model (state to measurement)&quot;</font>;
+  <font color="blue">parameter </font>Real L[n_x, n_sen]=[0.0203e4; 1.1282e4; 0] <font color="darkgreen">
+    &quot;Observer gain (measurement to derivative of estimated state)&quot;</font>;
+  <font color="blue">parameter </font>Real Nbar[n_act, n_x]=[-35.7143, 0, 0] <font color="darkgreen">
+    &quot;Reference gain (actuation to measurement)&quot;</font>;
+  <font color="blue">parameter </font>Real K[n_act, n_x]=[-775.7143, -20.6429, 0.4000] <font color="darkgreen">
+    &quot;Controller gain (estimated state to actuation)&quot;</font>;
+  <font color="blue">parameter </font>Real x_0[n_x]={0.005,0,0} <font color="darkgreen">&quot;Initial states of the plant&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_act=<font color="red">size</font>(B, 2) <font color="darkgreen">&quot;Number of actuators&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_x=<font color="red">size</font>(A, 1) <font color="darkgreen">&quot;Number of states&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_sen=<font color="red">size</font>(C, 1) <font color="darkgreen">&quot;Number of sensors&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_WorkInProgress_Blocks_Continuous_Plants.html#FCSys.WorkInProgress.Blocks.Continuous.Plants.StateSpace"
+>Continuous.Plants.StateSpace</A> plant(
+    A=A,
+    B=B,
+    C=C,
+    x_0=x_0,
+    initType=Modelica.Blocks.Types.Init.InitialState);
+  <A HREF="FCSys_WorkInProgress_Blocks_Continuous_Sources.html#FCSys.WorkInProgress.Blocks.Continuous.Sources.Constant"
+>FCSys.WorkInProgress.Blocks.Continuous.Sources.Constant</A> reference(k={0,0,0});
+  <A HREF="FCSys_WorkInProgress_Blocks_Continuous_Controllers.html#FCSys.WorkInProgress.Blocks.Continuous.Controllers.Controller"
+>FCSys.WorkInProgress.Blocks.Continuous.Controllers.Controller</A> controller(
+    A=A,
+    B=B,
+    C=C,
+    L=L,
+    Nbar=Nbar,
+    K=K);
+  <A HREF="FCSys_WorkInProgress_Blocks_Continuous_Observers.html#FCSys.WorkInProgress.Blocks.Continuous.Observers.Observer"
+>FCSys.WorkInProgress.Blocks.Continuous.Observers.Observer</A> observer(
+    A=A,
+    B=B,
+    C=C,
+    L=L);</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(reference.y, controller.ref);
+  <font color="red">connect</font>(observer.x, controller.x);
+  <font color="red">connect</font>(observer.act, controller.act);
+  <font color="red">connect</font>(plant.y, observer.sen);
+  <font color="red">connect</font>(plant.u, controller.act);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>MagneticBall;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE MaciejowskiAircraftMPC<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Examples.MagneticBallI.png" ALT="FCSys.WorkInProgress.Blocks.Examples.MaciejowskiAircraftMPC" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Examples.MaciejowskiAircraftMPC"></A><A HREF="FCSys_WorkInProgress_Blocks_Examples.html#FCSys.WorkInProgress.Blocks.Examples"
+>FCSys.WorkInProgress.Blocks.Examples</A>.MaciejowskiAircraftMPC</H2>
+<B>Aircraft model from J. Maciejowski, <i>Predictive Control with Constraints</i>, Prentice Hall, 2000</B><p>
+<IMG SRC="FCSys.WorkInProgress.Blocks.Examples.MaciejowskiAircraftMPCD.png" ALT="FCSys.WorkInProgress.Blocks.Examples.MaciejowskiAircraftMPC">
+<P><H3>Information</H3></P>
+<PRE></pre><p>In this example, the states of the plant are fed directly to the controller.  The plant is not observable with the given output (<b>C</b>) matrix, since there are 4 states and the rank of the observability matrix is only 3.
+ <p>The matrices of the controller are the discretized version of the plant model in continuous-time.
+ They can be calculated in MATLAB by:
+ <table border="0" bgcolor="lightgray"><tr><td><code>
+ csys = ss(A,B,C,D); % where A,B,C,D are the matrices of the continuous-time model
+<br>T_s = 0.5; % sampling period [s]
+<br>dsys = c2d(csys,'zoh',T_s);
+<br>[A,B,C,D] = ssdata(dsys) % where A,B,C,D are now the matrices of the discrete-time model</code>
+ </td></tr></code></table><pre></PRE><P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples).
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> MaciejowskiAircraftMPC <font color="darkgreen">
+  &quot;</pre>Aircraft model from J. Maciejowski, <i>Predictive Control with Constraints</i>, Prentice Hall, 2000<pre>&quot;</font>
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_WorkInProgress_Blocks_Continuous_Plants.html#FCSys.WorkInProgress.Blocks.Continuous.Plants.StateSpace"
+>Continuous.Plants.StateSpace</A> aircraft(
+    initType=Modelica.Blocks.Types.Init.InitialState,
+    A=[-1.2822, 0, .98, 0; 0, 0, 1, 0; -5.4293, 0, -1.8366, 0; -128.2, 128.2, 0,
+        0],
+    B=[-.3; 0; -17; 0],
+    C=[0, 1, 0, 0; 0, 0, 0, 1; -128.2, 128.2, 0, 0]);
+  <A HREF="FCSys_WorkInProgress_Blocks_Discrete_Controllers.html#FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPC"
+>FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPC</A> controller(
+    A=[.24, 0, .1787, 0; -.3722, 1, .2703, 0; -.9901, 0, .1389, 0; -48.9354, 64.1,
+        2.3992, 1],
+    B=[-1.2346; -1.4383; -4.4828; -1.7999],
+    C=[0, 1, 0, 0; 0, 0, 0, 1; -128.2, 128.2, 0, 0],
+    samplePeriod=0.5,
+    act_min={-Modelica.Constants.inf},
+    act_max={Modelica.Constants.inf});
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Step"
+>Modelica.Blocks.Sources.Step</A> reference[3](height={0,40,0}, startTime={0,0,0});</textblock>
+
+<font color="blue">equation </font>
+  controller.x = aircraft.x;
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(controller.act, aircraft.u);
+  <font color="red">connect</font>(reference.y, controller.ref);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>MaciejowskiAircraftMPC;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE RossiterExample2MPC<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Examples.MagneticBallI.png" ALT="FCSys.WorkInProgress.Blocks.Examples.RossiterExample2MPC" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Examples.RossiterExample2MPC"></A><A HREF="FCSys_WorkInProgress_Blocks_Examples.html#FCSys.WorkInProgress.Blocks.Examples"
+>FCSys.WorkInProgress.Blocks.Examples</A>.RossiterExample2MPC</H2>
+<B>Example2_mimo.m in Rossiter (2003)</B><p>
+<IMG SRC="FCSys.WorkInProgress.Blocks.Examples.RossiterExample2MPCD.png" ALT="FCSys.WorkInProgress.Blocks.Examples.RossiterExample2MPC">
+<P><H3>Information</H3></P>
+<PRE></pre>
+    The matrices of the controller are the discretized version of the plant model in
+    continuous-time. They can be calculated in MATLAB by:
+   <table border="0" bgcolor="lightgray"><tr><td><code>
+   %% Read results
+ <code>csys = ss(A,B,C,D); % where A, B, C, D are the matrices of the continuous-time model
+<br>T_s = 0.5; % sampling period [s]
+<br>dsys = c2d(csys,'zoh',T_s);
+<br>[A,B,C,D] = ssdata(dsys) % where A, B, C, D are now the matrices of the discrete-time model</code>
+</td></tr></code></table>
+ <p>The observer gain matrix, L, can be calculated in MATLAB via the following, where A and C are
+ the system and output matrices of the plant model in discrete time:
+   <table border="0" bgcolor="lightgray"><tr><td><code>
+  LT = dlqr(A',C',eye(n_x),eye(n_sen)*1e-5);
+<br>L = LT'</code>
+</td></tr></code></table>
+  <pre></PRE><P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_SIunits.html#Modelica.SIunits.Time"
+>Time</A></TD><TD>samplePeriod</TD><TD>1</TD><TD>Sample period of discrete species [s]</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> RossiterExample2MPC <font color="darkgreen">&quot;Example2_mimo.m in Rossiter (2003)&quot;</font>
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+  <font color="blue">import </font>MPC = <A HREF="FCSys_WorkInProgress_Blocks_Discrete_Controllers.html#FCSys.WorkInProgress.Blocks.Discrete.Controllers"
+>FCSys.WorkInProgress.Blocks.Discrete.Controllers</A>;
+  <font color="blue">parameter </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_SIunits.html#Modelica.SIunits.Time"
+>Modelica.SIunits.Time</A> samplePeriod(
+    min=100*Modelica.Constants.eps,
+    start=0.1) = 1 <font color="darkgreen">&quot;Sample period of discrete species&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_WorkInProgress_Blocks_Discrete_Plants.html#FCSys.WorkInProgress.Blocks.Discrete.Plants.StateSpaceWNoise"
+>FCSys.WorkInProgress.Blocks.Discrete.Plants.StateSpaceWNoise</A> plant(
+    samplePeriod=samplePeriod,
+    A=[-0.0893, 0, 0.0993; 0.4083, -2.0003, 0.0001; 0, 0, -2.0003],
+    B=[-0.0001, -0.0791; -0.0002, 0.3622; 2.0003, 0],
+    C=[1.7993, 13.216, 0; 0.8233, 0, 0]);
+  <A HREF="FCSys_WorkInProgress_Blocks_Discrete_Observers.html#FCSys.WorkInProgress.Blocks.Discrete.Observers.Observer"
+>FCSys.WorkInProgress.Blocks.Discrete.Observers.Observer</A> observer(
+    samplePeriod=samplePeriod,
+    A=[0.9146, 0, 0.0405, 0, 0; 0.1665, 0.1353, 0.0058, 0, 0; 0, 0, 0.1353, 0, 0;
+        0, 0, 0, 1, 0; 0, 0, 0, 0, 1],
+    B=[0.0544, -0.0757; 0.0053, 0.1477; 0.8647, 0; 0, 0; 0, 0],
+    C=[1.7993, 13.216, 0, 1, 0; 0.8233, 0, 0, 0, 1],
+    L=[0.0300465946139166, 0.307625044040746; 0.0144539216746499, 0.0471237564746761;
+        1.23468336612022e-05, 0.000356017361987146; 0.0633286232734119, 0.261847186879267;
+        -0.027043834850078, 0.723173659232941]);
+  <A HREF="FCSys_WorkInProgress_Blocks_Discrete_Controllers.html#FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPCWRej"
+>FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPCWRej</A> controller(
+    samplePeriod=samplePeriod,
+    K_ff=[0.37916203293428, 1.62844416370545; 0.487563244325183, -0.952185693944061],
+
+    K_fb=[2.02221906314084, 0.1668357018389, 0.0994845626559192, 0.37916203293428,
+        1.62844416370545; 1.22064368996494, 0.730619101772674, 0.0430546102350298,
+        0.487563244325183, -0.952185693944061],
+    K_opt=[2.02221906314084, 0.1668357018389, 0.0994845626559192, 0.37916203293428,
+        1.62844416370545, -0.37916203293428, -1.62844416370545; 1.22064368996494,
+        0.730619101772674, 0.0430546102350298, 0.487563244325183, -0.952185693944061,
+        -0.487563244325183, 0.952185693944061; 1.63586979024534, 0.0835610163426496,
+        0.0822675034041723, 0.367121282729176, 1.18547635742844, -0.367121282729176,
+        -1.18547635742844; 1.00171907394323, 0.0695854625215153, 0.0481361342586214,
+        0.43923960778996, -1.11248283625919, -0.43923960778996, 1.11248283625919;
+        1.32146357607087, 0.0659760405719598, 0.066694151894748, 0.36059896835573,
+        0.817833209821363, -0.36059896835573, -0.817833209821363; 0.812659228286539,
+        0.0412114714754606, 0.0407095372120977, 0.434616839788396, -1.33202232729627,
+        -0.434616839788396, 1.33202232729627; 1.0671057994, 0.0532210066525415,
+        0.0538892478609675, 0.355365040818403, 0.520312762184861, -0.355365040818403,
+        -0.520312762184861; 0.65675527866826, 0.0327902326530564, 0.0331244832623013,
+        0.431450988710252, -1.51447404501116, -0.431450988710252, 1.51447404501116;
+        0.861651802155867, 0.0429707577941614, 0.0435182074705799, 0.351132023975283,
+        0.280006455217349, -0.351132023975283, -0.280006455217349; 0.530380070188078,
+        0.0264535311501976, 0.0267813821102224, 0.428856899243221, -1.66230804485899,
+        -0.428856899243221, 1.66230804485899; 0.695746932608077, 0.0346966977365353,
+        0.0351397027466162, 0.347712794384971, 0.0859605131245224, -0.347712794384971,
+        -0.0859605131245224; 0.428269185641425, 0.021358082072846, 0.0216295610585003,
+        0.426753870611063, -1.78174228481595, -0.426753870611063, 1.78174228481595;
+        0.561784790166957, 0.0280159998477831, 0.028373835838596, 0.34495173752463,
+        -0.0707241859976945, -0.34495173752463, 0.0707241859976945; 0.345809747499483,
+        0.0172454611940975, 0.0174655633001765, 0.425054521953598, -1.87818886697626,
+        -0.425054521953598, 1.87818886697626; 0.453616155185521, 0.0226216639459541,
+        0.0229106182044855, 0.342722282208041, -0.197240255963587, -0.342722282208041,
+        0.197240255963587; 0.279226132590071, 0.0139249080950118, 0.0141027528422942,
+        0.423682199852987, -1.95606637556781, -0.423682199852987, 1.95606637556781;
+        0.366274788014799, 0.0182659825826194, 0.0184993026683911, 0.340922093145758,
+        -0.299396355347263, -0.340922093145758, 0.299396355347263; 0.225462658567228,
+        0.0112437370012064, 0.0113873554590326, 0.422574087061991, -2.01894915033462,
+        -0.422574087061991, 2.01894915033462; 0.295750531688632, 0.0147489649727788,
+        0.0149373608543456, 0.339468520407865, -0.38188284593517, -0.339468520407865,
+        0.38188284593517; 0.182051030097446, 0.00907881481860712, 0.00919478261348588,
+        0.421679332177663, -2.06972420490637, -0.421679332177663, 2.06972420490637;
+        0.238805344284422, 0.0119091304195276, 0.0120612517248262, 0.338294825282217,
+        -0.448487003156653, -0.338294825282217, 0.448487003156653; 0.146998075766575,
+        0.00733073736604938, 0.00742437649750615, 0.420956857120112, -2.11072279665194,
+        -0.420956857120112, 2.11072279665194; 0.192824648928605, 0.00961609087332769,
+        0.00973892203894812, 0.337347118884031, -0.502266885202565, -0.337347118884031,
+        0.502266885202565; 0.118694380370556, 0.00591924297373401, 0.00599485243344218,
+        0.420373490719119, -2.14382732865332, -0.420373490719119, 2.14382732865332;
+        0.155697291214872, 0.00776456386315182, 0.00786374454382391, 0.336581888296952,
+        -0.545691737805683, -0.336581888296952, 0.545691737805683; 0.0958404105004156,
+        0.00477952430806122, 0.00484057557556158, 0.41990244839865, -2.17055775964087,
+        -0.41990244839865, 2.17055775964087; 0.125718608207778, 0.00626953850380324,
+        0.00634962247351441, 0.335963998777864, -0.580755366648988, -0.335963998777864,
+        0.580755366648988; 0.0773868506276398, 0.0038592523940673, 0.00390854856645343,
+        0.419522102763488, -2.19214138871744, -0.419522102763488, 2.19214138871744;
+        0.101512160721329, 0.0050623723036615, 0.00512703653215143, 0.335465080590121,
+        -0.609067680771582, -0.335465080590121, 0.609067680771582; 0.0624864252845467,
+        0.0031161739289978, 0.00315597838642692, 0.419214990651629, -2.20956920513335,
+        -0.419214990651629, 2.20956920513335; 0.0819665355925643, 0.00408763951690391,
+        0.00413985299308895, 0.33506222643843, -0.631928609814461, -0.33506222643843,
+        0.631928609814461; 0.0504549973692387, 0.00251617125917146, 0.00254831158063644,
+        0.418967011338895, -2.22364138845031, -0.418967011338895, 2.22364138845031;
+        0.0661843163351682, 0.00330058632947074, 0.00334274637929878, 0.334736939705012,
+        -0.65038778889958, -0.334736939705012, 0.65038778889958; 0.0407401567290222,
+        0.00203169590329157, 0.00205764777728198, 0.41876677912022, -2.23500404792401,
+        -0.41876677912022, 2.23500404792401; 0.0534408792208483, 0.00266507603550634,
+        0.00269911839260191, 0.334474285197187, -0.66529275150444, -0.334474285197187,
+        0.66529275150444; 0.0328958568396852, 0.00164050369322314, 0.00166145867229208,
+        0.418605100547306, -2.24417888791914, -0.418605100547306, 2.24417888791914;
+        0.0431511229553902, 0.00215192985913177, 0.00217941754193452, 0.334262203413968,
+        -0.677327843055795, -0.334262203413968, 0.677327843055795; 0.0265619350562332,
+        0.00132463345676818, 0.00134155366638144, 0.418474552321289, -2.25158716140749,
+        -0.418474552321289, 2.25158716140749; 0.0348426043781256, 0.00173758724213775,
+        0.00175978231822321, 0.334090956846963, -0.687045641918455, -0.334090956846963,
+        0.687045641918455; 0.0214475761300249, 0.00106958234963934, 0.00108324466313601,
+        0.418369140459908, -2.25756901134791, -0.418369140459908, 2.25756901134791;
+        0.0281338467391826, 0.00140302408613729, 0.00142094561870058, 0.333952682893087,
+        -0.694892330440278, -0.333952682893087, 0.694892330440278; 0.0173179597374728,
+        0.000863639972865511, 0.000874671680766753, 0.41828402509022, -2.26239908798667,
+        -0.41828402509022, 2.26239908798667; 0.0227168246022601, 0.00113287928142218,
+        0.00114735011847544, 0.333841032851541, -0.70122818093777, -0.333841032851541,
+        0.70122818093777; 0.013983478955875, 0.000697350702339699, 0.000706258313722499,
+        0.418215298230999, -2.26629915912999, -0.418215298230999, 2.26629915912999;
+        0.0183428211859535, 0.000914749418029628, 0.000926433972588923, 0.333750880430006,
+        -0.706344097214417, -0.333750880430006, 0.706344097214417; 0.0112910346642215,
+        0.00056307954394487, 0.000570272042264922, 0.418159804361965, -2.26944829237582,
+        -0.418159804361965, 2.26944829237582; 0.0148110087985797, 0.000738619296431209,
+        0.00074805405233003, 0.333678086376407, -0.710474971097888, -0.333678086376407,
+        0.710474971097888; 0.00911700616069436, 0.000454661580959754, 0.000460469202089683,
+        0.418114995541434, -2.27199107681115, -0.418114995541434, 2.27199107681115;
+        0.0119592280493684, 0.000596402090351332, 0.000604020234322385, 0.333619308429579,
+        -0.713810467247234, -0.333619308429579, 0.713810467247234; 0.00736157525027576,
+        0.000367118918496997, 0.000371808313153478, 0.418078814420308, -2.27404426166548,
+        -0.418078814420308, 2.27404426166548; 0.00965654247336047, 0.000481568048782442,
+        0.000487719359763467, 0.333571847862919, -0.716503731402992, -0.333571847862919,
+        0.716503731402992; 0.00594414319901537, 0.000296432128780054, 0.000300218605506456,
+        0.418049599781082, -2.27570211672683, -0.418049599781082, 2.27570211672683;
+        0.00779722672357096, 0.000388844689446872, 0.0003938115983067, 0.333533525575237,
+        -0.718678421910162, -0.333533525575237, 0.718678421910162; 0.00479963012930923,
+        0.000239355703413017, 0.000242413114241035, 0.418026010264821, -2.27704076063834,
+        -0.418026010264821, 2.27704076063834; 0.00629591230468765, 0.000313974718408575,
+        0.000317985275458599, 0.333502582039655, -0.720434387358954, -0.333502582039655,
+        0.720434387358954; 0.00387548694688056, 0.000193269039331592, 0.000195737762011467,
+        0.418006962784101, -2.27812165580438, -0.418006962784101, 2.27812165580438;
+        0.00508366796985528, 0.000253520560972488, 0.000256758906652955, 0.333477596516811,
+        -0.721852251026074, -0.333477596516811, 0.721852251026074; 0.00312928260528343,
+        0.000156056116614455, 0.000158049499909326, 0.417991582794204, -2.27899443037119,
+        -0.417991582794204, 2.27899443037119; 0.00410483481615373, 0.000204706529116676,
+        0.000207321348608182, 0.33345742182313, -0.722997112606309, -0.33345742182313,
+        0.722997112606309; 0.00252675592975781, 0.000126008343690274, 0.000127617911663486,
+        0.417979164139331, -2.27969915685012, -0.417979164139331, 2.27969915685012;
+        0.00331447076556172, 0.000165291378743612, 0.000167402728688246, 0.333441131659114,
+        -0.723921537195422, -0.333441131659114, 0.723921537195422; 0.00204024255201073,
+        0.000101746109181955, 0.000103045763426604, 0.417969136630219, -2.28026819200422,
+        -0.417969136630219, 2.28026819200422; 0.00267628709748107, 0.000133465405353007,
+        0.000135170226126749, 0.333427978079296, -0.724667968760348, -0.333427978079296,
+        0.724667968760348; 0.0016474047303153, 8.21554385248641e-05, 8.32048512764505e-05,
+        0.417961039864505, -2.28072766247436, -0.417961039864505, 2.28072766247436;
+        0.0021609822909178, 0.000107767353393988, 0.000109143920020459, 0.333417357151117,
+        -0.725270678908562, -0.333417357151117, 0.725270678908562; 0.00133020573597514,
+        6.63368470153726e-05, 6.7184200938715e-05, 0.417954502087844, -2.28109866435608,
+        -0.417954502087844, 2.28109866435608; 0.0017448966764648, 8.70173242783555e-05,
+        8.81288403428579e-05, 0.333408781226012, -0.72575734043231, -0.333408781226012,
+        0.72575734043231; 0.00107408171620492, 5.35640409321061e-05, 5.42482413768963e-05,
+        0.41794922312521, -2.28139823180422, -0.41794922312521, 2.28139823180422;
+        0.00140892612786974, 7.02626025980412e-05, 7.11601021726277e-05, 0.333401856549545,
+        -0.726150297875284, -0.333401856549545, 0.726150297875284; 0.000867273010396394,
+        4.3250570536032e-05, 4.38030318343813e-05, 0.417944960598676, -2.28164011913797,
+        -0.417944960598676, 2.28164011913797; 0.00113764491649776, 5.67339132154659e-05,
+        5.74586040338064e-05, 0.3333962651826, -0.726467593458464, -0.3333962651826,
+        0.726467593458464; 0.000700284217870924, 3.49229038575214e-05, 3.53689916794422e-05,
+        0.417941518798892, -2.28183543235573, -0.417941518798892, 2.28183543235573;
+        0.000918597455489066, 4.58101008178388e-05, 4.63952562842679e-05, 0.333391750403538,
+        -0.726723795469408, -0.333391750403538, 0.726723795469408; 0.000565448226706549,
+        2.81986849821004e-05, 2.85588809731331e-05, 0.417938739699299, -2.28199313905511,
+        -0.417938739699299, 2.28199313905511; 0.000741726414801455, 3.69896102348971e-05,
+        3.74620971372093e-05, 0.333388104921104, -0.726930667149605, -0.333388104921104,
+        0.726930667149605; 0.000456574186489112, 2.27691785873208e-05, 2.30600207613961e-05,
+        0.41793649570051, -2.28212048017066, -0.41793649570051, 2.28212048017066;
+        0.000598910949651294, 2.98674580693523e-05, 3.02489701386472e-05, 0.33338516135687,
+        -0.727097706791137, -0.33338516135687, 0.727097706791137; 0.000368663262032616,
+        1.83850946904223e-05, 1.86199367550948e-05, 0.41793468377172, -2.28222330243359,
+        -0.41793468377172, 2.28222330243359; 0.000483593840605273, 2.41166383170731e-05,
+        2.44246922722312e-05, 0.33338278456023, -0.727232583840603, -0.33338278456023,
+        0.727232583840603; 0.000297679117204692, 1.484514276523e-05, 1.50347672428869e-05,
+        0.417933220720154, -2.28230632681819, -0.417933220720154, 2.28230632681819;
+        0.000390480425858837, 1.94731082359273e-05, 1.97218480450346e-05, 0.333380865403106,
+        -0.727341491033565, -0.333380865403106, 0.727341491033565; 0.00024036259086734,
+        1.19867897027947e-05, 1.21399029986466e-05, 0.417932039371364, -2.28237336530036,
+        -0.417932039371364, 2.28237336530036; 0.000315295502498665, 1.57236651055005e-05,
+        1.59245113910254e-05, 0.33337931576945, -0.727429428727381, -0.33337931576945,
+        0.727429428727381; 0.00019408205597685, 9.67879727742045e-06, 9.80242942479035e-06,
+        0.417931085484983, -2.28242749588033, -0.417931085484983, 2.28242749588033;
+        0.000254587035130473, 1.26961572520712e-05, 1.28583316565379e-05, 0.33337806450949,
+        -0.727500434487272, -0.33337806450949, 0.727500434487272; 0.000156712591240916,
+        7.81519648380584e-06, 7.9150239205954e-06, 0.417930315264337, -2.28247120390584,
+        -0.417930315264337, 2.28247120390584; 0.000205567659363613, 1.02515798885166e-05,
+        1.03825284763652e-05, 0.333377054172961, -0.727557768466807, -0.333377054172961,
+        0.727557768466807; 0.000126538417628737, 6.31042208343156e-06, 6.39102827969988e-06,
+        0.417929693345568, -2.28250649618416, -0.417929693345568, 2.28250649618416;
+        0.000165986702954365, 8.2776928580885e-06, 8.38342799376506e-06, 0.333376238371343,
+        -0.727604063094375, -0.333376238371343, 0.727604063094375; 0.000102174120210732,
+        5.09538396809039e-06, 5.16046987118279e-06, 0.417929191173941, -2.28253499312251,
+        -0.417929191173941, 2.28253499312251; 0.000134026848595511, 6.68386724758424e-06,
+        6.76924364682776e-06, 0.333375579647975, -0.727641443938319, -0.333375579647975,
+        0.727641443938319; 8.25010383128598e-05, 4.11429496141629e-06, 4.16684892100585e-06,
+        0.417928785692783, -2.28255800312738, -0.417928785692783, 2.28255800312738;
+        0.000108220693734623, 5.39692425766634e-06, 5.46586188659309e-06, 0.333375047758278,
+        -0.727671627300133, -0.333375047758278, 0.727671627300133; 6.66159034074564e-05,
+        3.32210941030994e-06, 3.36454438527863e-06, 0.417928458284859, -2.28257658267853,
+        -0.417928458284859, 2.28257658267853; 8.73833763543048e-05, 4.35777527650848e-06,
+        4.41343933266628e-06, 0.333374618281105, -0.727695999016614, -0.333374618281105,
+        0.727695999016614; 5.37893665042498e-05, 2.68245496192395e-06, 2.71671930879062e-06,
+        0.417928193917584, -2.28259158483621, -0.417928193917584, 2.28259158483621;
+        7.05581732991161e-05, 3.51870888934062e-06, 3.56365512837113e-06, 0.333374271497472,
+        -0.727715678089073, -0.333374271497472, 0.727715678089073; 4.34325108710401e-05,
+        2.1659625659587e-06, 2.1936294955861e-06, 0.417927980452818, -2.28260369840844,
+        -0.417927980452818, 2.28260369840844; 5.69725733544839e-05, 2.84120025983644e-06,
+        2.87749234026372e-06, 0.333373991485177, -0.72773156806109, -0.333373991485177,
+        0.72773156806109; 3.50698125514078e-05, 1.74891802610901e-06, 1.77125783599905e-06,
+        0.417927808089555, -2.28261347957694, -0.417927808089555, 2.28261347957694;
+        4.60028082199899e-05, 2.29414230343089e-06, 2.32344653733679e-06, 0.333373765387756,
+        -0.727744398503744, -0.333373765387756, 0.727744398503744; 2.83173071905209e-05,
+        1.41217318808795e-06, 1.4302115867337e-06, 0.417927668913918, -2.28262137743362,
+        -0.417927668913918, 2.28262137743362; -2.02221906314084, -0.1668357018389,
+        -0.0994845626559192, -0.37916203293428, -1.62844416370545, 0.37916203293428,
+        1.62844416370545; -1.22064368996494, -0.730619101772674, -0.0430546102350298,
+        -0.487563244325183, 0.952185693944061, 0.487563244325183, -0.952185693944061;
+        -1.63586979024534, -0.0835610163426496, -0.0822675034041723, -0.367121282729176,
+        -1.18547635742844, 0.367121282729176, 1.18547635742844; -1.00171907394323,
+        -0.0695854625215153, -0.0481361342586214, -0.43923960778996, 1.11248283625919,
+        0.43923960778996, -1.11248283625919; -1.32146357607087, -0.0659760405719598,
+        -0.066694151894748, -0.36059896835573, -0.817833209821363, 0.36059896835573,
+        0.817833209821363; -0.812659228286539, -0.0412114714754606, -0.0407095372120977,
+        -0.434616839788396, 1.33202232729627, 0.434616839788396, -1.33202232729627;
+        -1.0671057994, -0.0532210066525415, -0.0538892478609675, -0.355365040818403,
+        -0.520312762184861, 0.355365040818403, 0.520312762184861; -0.65675527866826,
+        -0.0327902326530564, -0.0331244832623013, -0.431450988710252, 1.51447404501116,
+        0.431450988710252, -1.51447404501116; -0.861651802155867, -0.0429707577941614,
+        -0.0435182074705799, -0.351132023975283, -0.280006455217349, 0.351132023975283,
+        0.280006455217349; -0.530380070188078, -0.0264535311501976, -0.0267813821102224,
+        -0.428856899243221, 1.66230804485899, 0.428856899243221, -1.66230804485899;
+        -0.695746932608077, -0.0346966977365353, -0.0351397027466162, -0.347712794384971,
+        -0.0859605131245224, 0.347712794384971, 0.0859605131245224; -0.428269185641425,
+        -0.021358082072846, -0.0216295610585003, -0.426753870611063, 1.78174228481595,
+        0.426753870611063, -1.78174228481595; -0.561784790166957, -0.0280159998477831,
+        -0.028373835838596, -0.34495173752463, 0.0707241859976945, 0.34495173752463,
+        -0.0707241859976945; -0.345809747499483, -0.0172454611940975, -0.0174655633001765,
+        -0.425054521953598, 1.87818886697626, 0.425054521953598, -1.87818886697626;
+        -0.453616155185521, -0.0226216639459541, -0.0229106182044855, -0.342722282208041,
+        0.197240255963587, 0.342722282208041, -0.197240255963587; -0.279226132590071,
+        -0.0139249080950118, -0.0141027528422942, -0.423682199852987, 1.95606637556781,
+        0.423682199852987, -1.95606637556781; -0.366274788014799, -0.0182659825826194,
+        -0.0184993026683911, -0.340922093145758, 0.299396355347263, 0.340922093145758,
+        -0.299396355347263; -0.225462658567228, -0.0112437370012064, -0.0113873554590326,
+        -0.422574087061991, 2.01894915033462, 0.422574087061991, -2.01894915033462;
+        -0.295750531688632, -0.0147489649727788, -0.0149373608543456, -0.339468520407865,
+        0.38188284593517, 0.339468520407865, -0.38188284593517; -0.182051030097446,
+        -0.00907881481860712, -0.00919478261348588, -0.421679332177663, 2.06972420490637,
+        0.421679332177663, -2.06972420490637; -0.238805344284422, -0.0119091304195276,
+        -0.0120612517248262, -0.338294825282217, 0.448487003156653, 0.338294825282217,
+        -0.448487003156653; -0.146998075766575, -0.00733073736604938, -0.00742437649750615,
+        -0.420956857120112, 2.11072279665194, 0.420956857120112, -2.11072279665194;
+        -0.192824648928605, -0.00961609087332769, -0.00973892203894812, -0.337347118884031,
+        0.502266885202565, 0.337347118884031, -0.502266885202565; -0.118694380370556,
+        -0.00591924297373401, -0.00599485243344218, -0.420373490719119, 2.14382732865332,
+        0.420373490719119, -2.14382732865332; -0.155697291214872, -0.00776456386315182,
+        -0.00786374454382391, -0.336581888296952, 0.545691737805683, 0.336581888296952,
+        -0.545691737805683; -0.0958404105004156, -0.00477952430806122, -0.00484057557556158,
+        -0.41990244839865, 2.17055775964087, 0.41990244839865, -2.17055775964087;
+        -0.125718608207778, -0.00626953850380324, -0.00634962247351441, -0.335963998777864,
+        0.580755366648988, 0.335963998777864, -0.580755366648988; -0.0773868506276398,
+        -0.0038592523940673, -0.00390854856645343, -0.419522102763488, 2.19214138871744,
+        0.419522102763488, -2.19214138871744; -0.101512160721329, -0.0050623723036615,
+        -0.00512703653215143, -0.335465080590121, 0.609067680771582, 0.335465080590121,
+        -0.609067680771582; -0.0624864252845467, -0.0031161739289978, -0.00315597838642692,
+        -0.419214990651629, 2.20956920513335, 0.419214990651629, -2.20956920513335;
+        -0.0819665355925643, -0.00408763951690391, -0.00413985299308895, -0.33506222643843,
+        0.631928609814461, 0.33506222643843, -0.631928609814461; -0.0504549973692387,
+        -0.00251617125917146, -0.00254831158063644, -0.418967011338895, 2.22364138845031,
+        0.418967011338895, -2.22364138845031; -0.0661843163351682, -0.00330058632947074,
+        -0.00334274637929878, -0.334736939705012, 0.65038778889958, 0.334736939705012,
+        -0.65038778889958; -0.0407401567290222, -0.00203169590329157, -0.00205764777728198,
+        -0.41876677912022, 2.23500404792401, 0.41876677912022, -2.23500404792401;
+        -0.0534408792208483, -0.00266507603550634, -0.00269911839260191, -0.334474285197187,
+        0.66529275150444, 0.334474285197187, -0.66529275150444; -0.0328958568396852,
+        -0.00164050369322314, -0.00166145867229208, -0.418605100547306, 2.24417888791914,
+        0.418605100547306, -2.24417888791914; -0.0431511229553902, -0.00215192985913177,
+        -0.00217941754193452, -0.334262203413968, 0.677327843055795, 0.334262203413968,
+        -0.677327843055795; -0.0265619350562332, -0.00132463345676818, -0.00134155366638144,
+        -0.418474552321289, 2.25158716140749, 0.418474552321289, -2.25158716140749;
+        -0.0348426043781256, -0.00173758724213775, -0.00175978231822321, -0.334090956846963,
+        0.687045641918455, 0.334090956846963, -0.687045641918455; -0.0214475761300249,
+        -0.00106958234963934, -0.00108324466313601, -0.418369140459908, 2.25756901134791,
+        0.418369140459908, -2.25756901134791; -0.0281338467391826, -0.00140302408613729,
+        -0.00142094561870058, -0.333952682893087, 0.694892330440278, 0.333952682893087,
+        -0.694892330440278; -0.0173179597374728, -0.000863639972865511, -0.000874671680766753,
+        -0.41828402509022, 2.26239908798667, 0.41828402509022, -2.26239908798667;
+        -0.0227168246022601, -0.00113287928142218, -0.00114735011847544, -0.333841032851541,
+        0.70122818093777, 0.333841032851541, -0.70122818093777; -0.013983478955875,
+        -0.000697350702339699, -0.000706258313722499, -0.418215298230999, 2.26629915912999,
+        0.418215298230999, -2.26629915912999; -0.0183428211859535, -0.000914749418029628,
+        -0.000926433972588923, -0.333750880430006, 0.706344097214417, 0.333750880430006,
+        -0.706344097214417; -0.0112910346642215, -0.00056307954394487, -0.000570272042264922,
+        -0.418159804361965, 2.26944829237582, 0.418159804361965, -2.26944829237582;
+        -0.0148110087985797, -0.000738619296431209, -0.00074805405233003, -0.333678086376407,
+        0.710474971097888, 0.333678086376407, -0.710474971097888; -0.00911700616069436,
+        -0.000454661580959754, -0.000460469202089683, -0.418114995541434, 2.27199107681115,
+        0.418114995541434, -2.27199107681115; -0.0119592280493684, -0.000596402090351332,
+        -0.000604020234322385, -0.333619308429579, 0.713810467247234, 0.333619308429579,
+        -0.713810467247234; -0.00736157525027576, -0.000367118918496997, -0.000371808313153478,
+        -0.418078814420308, 2.27404426166548, 0.418078814420308, -2.27404426166548;
+        -0.00965654247336047, -0.000481568048782442, -0.000487719359763467, -0.333571847862919,
+        0.716503731402992, 0.333571847862919, -0.716503731402992; -0.00594414319901537,
+        -0.000296432128780054, -0.000300218605506456, -0.418049599781082, 2.27570211672683,
+        0.418049599781082, -2.27570211672683; -0.00779722672357096, -0.000388844689446872,
+        -0.0003938115983067, -0.333533525575237, 0.718678421910162, 0.333533525575237,
+        -0.718678421910162; -0.00479963012930923, -0.000239355703413017, -0.000242413114241035,
+        -0.418026010264821, 2.27704076063834, 0.418026010264821, -2.27704076063834;
+        -0.00629591230468765, -0.000313974718408575, -0.000317985275458599, -0.333502582039655,
+        0.720434387358954, 0.333502582039655, -0.720434387358954; -0.00387548694688056,
+        -0.000193269039331592, -0.000195737762011467, -0.418006962784101, 2.27812165580438,
+        0.418006962784101, -2.27812165580438; -0.00508366796985528, -0.000253520560972488,
+        -0.000256758906652955, -0.333477596516811, 0.721852251026074, 0.333477596516811,
+        -0.721852251026074; -0.00312928260528343, -0.000156056116614455, -0.000158049499909326,
+        -0.417991582794204, 2.27899443037119, 0.417991582794204, -2.27899443037119;
+        -0.00410483481615373, -0.000204706529116676, -0.000207321348608182, -0.33345742182313,
+        0.722997112606309, 0.33345742182313, -0.722997112606309; -0.00252675592975781,
+        -0.000126008343690274, -0.000127617911663486, -0.417979164139331, 2.27969915685012,
+        0.417979164139331, -2.27969915685012; -0.00331447076556172, -0.000165291378743612,
+        -0.000167402728688246, -0.333441131659114, 0.723921537195422, 0.333441131659114,
+        -0.723921537195422; -0.00204024255201073, -0.000101746109181955, -0.000103045763426604,
+        -0.417969136630219, 2.28026819200422, 0.417969136630219, -2.28026819200422;
+        -0.00267628709748107, -0.000133465405353007, -0.000135170226126749, -0.333427978079296,
+        0.724667968760348, 0.333427978079296, -0.724667968760348; -0.0016474047303153,
+        -8.21554385248641e-05, -8.32048512764505e-05, -0.417961039864505, 2.28072766247436,
+        0.417961039864505, -2.28072766247436; -0.0021609822909178, -0.000107767353393988,
+        -0.000109143920020459, -0.333417357151117, 0.725270678908562, 0.333417357151117,
+        -0.725270678908562; -0.00133020573597514, -6.63368470153726e-05, -6.7184200938715e-05,
+        -0.417954502087844, 2.28109866435608, 0.417954502087844, -2.28109866435608;
+        -0.0017448966764648, -8.70173242783555e-05, -8.81288403428579e-05, -0.333408781226012,
+        0.72575734043231, 0.333408781226012, -0.72575734043231; -0.00107408171620492,
+        -5.35640409321061e-05, -5.42482413768963e-05, -0.41794922312521, 2.28139823180422,
+        0.41794922312521, -2.28139823180422; -0.00140892612786974, -7.02626025980412e-05,
+        -7.11601021726277e-05, -0.333401856549545, 0.726150297875284, 0.333401856549545,
+        -0.726150297875284; -0.000867273010396394, -4.3250570536032e-05, -4.38030318343813e-05,
+        -0.417944960598676, 2.28164011913797, 0.417944960598676, -2.28164011913797;
+        -0.00113764491649776, -5.67339132154659e-05, -5.74586040338064e-05, -0.3333962651826,
+        0.726467593458464, 0.3333962651826, -0.726467593458464; -0.000700284217870924,
+        -3.49229038575214e-05, -3.53689916794422e-05, -0.417941518798892, 2.28183543235573,
+        0.417941518798892, -2.28183543235573; -0.000918597455489066, -4.58101008178388e-05,
+        -4.63952562842679e-05, -0.333391750403538, 0.726723795469408, 0.333391750403538,
+        -0.726723795469408; -0.000565448226706549, -2.81986849821004e-05, -2.85588809731331e-05,
+        -0.417938739699299, 2.28199313905511, 0.417938739699299, -2.28199313905511;
+        -0.000741726414801455, -3.69896102348971e-05, -3.74620971372093e-05, -0.333388104921104,
+        0.726930667149605, 0.333388104921104, -0.726930667149605; -0.000456574186489112,
+        -2.27691785873208e-05, -2.30600207613961e-05, -0.41793649570051, 2.28212048017066,
+        0.41793649570051, -2.28212048017066; -0.000598910949651294, -2.98674580693523e-05,
+        -3.02489701386472e-05, -0.33338516135687, 0.727097706791137, 0.33338516135687,
+        -0.727097706791137; -0.000368663262032616, -1.83850946904223e-05, -1.86199367550948e-05,
+        -0.41793468377172, 2.28222330243359, 0.41793468377172, -2.28222330243359;
+        -0.000483593840605273, -2.41166383170731e-05, -2.44246922722312e-05, -0.33338278456023,
+        0.727232583840603, 0.33338278456023, -0.727232583840603; -0.000297679117204692,
+        -1.484514276523e-05, -1.50347672428869e-05, -0.417933220720154, 2.28230632681819,
+        0.417933220720154, -2.28230632681819; -0.000390480425858837, -1.94731082359273e-05,
+        -1.97218480450346e-05, -0.333380865403106, 0.727341491033565, 0.333380865403106,
+        -0.727341491033565; -0.00024036259086734, -1.19867897027947e-05, -1.21399029986466e-05,
+        -0.417932039371364, 2.28237336530036, 0.417932039371364, -2.28237336530036;
+        -0.000315295502498665, -1.57236651055005e-05, -1.59245113910254e-05, -0.33337931576945,
+        0.727429428727381, 0.33337931576945, -0.727429428727381; -0.00019408205597685,
+        -9.67879727742045e-06, -9.80242942479035e-06, -0.417931085484983, 2.28242749588033,
+        0.417931085484983, -2.28242749588033; -0.000254587035130473, -1.26961572520712e-05,
+        -1.28583316565379e-05, -0.33337806450949, 0.727500434487272, 0.33337806450949,
+        -0.727500434487272; -0.000156712591240916, -7.81519648380584e-06, -7.9150239205954e-06,
+        -0.417930315264337, 2.28247120390584, 0.417930315264337, -2.28247120390584;
+        -0.000205567659363613, -1.02515798885166e-05, -1.03825284763652e-05, -0.333377054172961,
+        0.727557768466807, 0.333377054172961, -0.727557768466807; -0.000126538417628737,
+        -6.31042208343156e-06, -6.39102827969988e-06, -0.417929693345568, 2.28250649618416,
+        0.417929693345568, -2.28250649618416; -0.000165986702954365, -8.2776928580885e-06,
+        -8.38342799376506e-06, -0.333376238371343, 0.727604063094375, 0.333376238371343,
+        -0.727604063094375; -0.000102174120210732, -5.09538396809039e-06, -5.16046987118279e-06,
+        -0.417929191173941, 2.28253499312251, 0.417929191173941, -2.28253499312251;
+        -0.000134026848595511, -6.68386724758424e-06, -6.76924364682776e-06, -0.333375579647975,
+        0.727641443938319, 0.333375579647975, -0.727641443938319; -8.25010383128598e-05,
+        -4.11429496141629e-06, -4.16684892100585e-06, -0.417928785692783, 2.28255800312738,
+        0.417928785692783, -2.28255800312738; -0.000108220693734623, -5.39692425766634e-06,
+        -5.46586188659309e-06, -0.333375047758278, 0.727671627300133, 0.333375047758278,
+        -0.727671627300133; -6.66159034074564e-05, -3.32210941030994e-06, -3.36454438527863e-06,
+        -0.417928458284859, 2.28257658267853, 0.417928458284859, -2.28257658267853;
+        -8.73833763543048e-05, -4.35777527650848e-06, -4.41343933266628e-06, -0.333374618281105,
+        0.727695999016614, 0.333374618281105, -0.727695999016614; -5.37893665042498e-05,
+        -2.68245496192395e-06, -2.71671930879062e-06, -0.417928193917584, 2.28259158483621,
+        0.417928193917584, -2.28259158483621; -7.05581732991161e-05, -3.51870888934062e-06,
+        -3.56365512837113e-06, -0.333374271497472, 0.727715678089073, 0.333374271497472,
+        -0.727715678089073; -4.34325108710401e-05, -2.1659625659587e-06, -2.1936294955861e-06,
+        -0.417927980452818, 2.28260369840844, 0.417927980452818, -2.28260369840844;
+        -5.69725733544839e-05, -2.84120025983644e-06, -2.87749234026372e-06, -0.333373991485177,
+        0.72773156806109, 0.333373991485177, -0.72773156806109; -3.50698125514078e-05,
+        -1.74891802610901e-06, -1.77125783599905e-06, -0.417927808089555, 2.28261347957694,
+        0.417927808089555, -2.28261347957694; -4.60028082199899e-05, -2.29414230343089e-06,
+        -2.32344653733679e-06, -0.333373765387756, 0.727744398503744, 0.333373765387756,
+        -0.727744398503744; -2.83173071905209e-05, -1.41217318808795e-06, -1.4302115867337e-06,
+        -0.417927668913918, 2.28262137743362, 0.417927668913918, -2.28262137743362;
+        0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0,
+        0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0,
+        0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0,
+        0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0,
+        0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0,
+        0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0,
+        0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0;
+        0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0,
+        0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0,
+        0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0,
+        0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0,
+        0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0,
+        0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0,
+        0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0;
+        0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0,
+        0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0,
+        0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0,
+        0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0,
+        0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0,
+        0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0,
+        0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0;
+        0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0,
+        0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0,
+        0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0,
+        0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0,
+        0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0,
+        0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0,
+        0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0;
+        0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0,
+        0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0],
+    H=[1.24209507539066, 0.172147848655681, 0, 0, 0, 0, 0, 0, 0, 0; 0.172147848655681,
+        4.39000872639142, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 1.24209507539066, 0.172147848655681,
+        0, 0, 0, 0, 0, 0; 0, 0, 0.172147848655681, 4.39000872639142, 0, 0, 0, 0,
+        0, 0; 0, 0, 0, 0, 1.24209507539066, 0.172147848655681, 0, 0, 0, 0; 0, 0,
+        0, 0, 0.172147848655681, 4.39000872639142, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0,
+        1.24209507539066, 0.172147848655681, 0, 0; 0, 0, 0, 0, 0, 0, 0.172147848655681,
+        4.39000872639142, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 1.24209507539066, 0.172147848655681;
+        0, 0, 0, 0, 0, 0, 0, 0, 0.172147848655681, 4.39000872639142],
+    J={0,0,0,0,0,0,0,0,0,0},
+    G=[1, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 1, 0, 0, 0, 0, 0, 0, 0, 0; -0.196917247583181,
+        0.128440349918156, 1, 0, 0, 0, 0, 0, 0, 0; -0.107504619443718, -0.015509714001478,
+        0, 1, 0, 0, 0, 0, 0, 0; -0.16057090016955, 0.111493381007763, -0.196917247583181,
+        0.128440349918156, 1, 0, 0, 0, 0, 0; -0.0964856358673057, 0.0655523610830748,
+        -0.107504619443718, -0.015509714001478, 0, 1, 0, 0, 0, 0; -0.129907724696675,
+        0.0902901315160865, -0.16057090016955, 0.111493381007763, -0.196917247583181,
+        0.128440349918156, 1, 0, 0, 0; -0.0796286196449086, 0.0554313692443655,
+        -0.0964856358673057, 0.0655523610830748, -0.107504619443718, -0.015509714001478,
+        0, 1, 0, 0; -0.104930659447997, 0.0729191663319995, -0.129907724696675,
+        0.0902901315160865, -0.16057090016955, 0.111493381007763, -0.196917247583181,
+        0.128440349918156, 1, 0; -0.0645440160695264, 0.0448732572323308, -0.0796286196449086,
+        0.0554313692443655, -0.0964856358673057, 0.0655523610830748, -0.107504619443718,
+        -0.015509714001478, 0, 1; -0.0847317970533986, 0.0588802604970015, -0.104930659447997,
+        0.0729191663319995, -0.129907724696675, 0.0902901315160865, -0.16057090016955,
+        0.111493381007763, -0.196917247583181, 0.128440349918156; -0.0521507406440368,
+        0.0362425847623533, -0.0645440160695264, 0.0448732572323308, -0.0796286196449086,
+        0.0554313692443655, -0.0964856358673057, 0.0655523610830748, -0.107504619443718,
+        -0.015509714001478; -0.068417826596882, 0.0475433405427452, -0.0847317970533986,
+        0.0588802604970015, -0.104930659447997, 0.0729191663319995, -0.129907724696675,
+        0.0902901315160865, -0.16057090016955, 0.111493381007763; -0.0421141229811648,
+        0.0292653886308965, -0.0521507406440368, 0.0362425847623533, -0.0645440160695264,
+        0.0448732572323308, -0.0796286196449086, 0.0554313692443655, -0.0964856358673057,
+        0.0655523610830748; -0.0552444332339097, 0.0383891454381211, -0.068417826596882,
+        0.0475433405427452, -0.0847317970533986, 0.0588802604970015, -0.104930659447997,
+        0.0729191663319995, -0.129907724696675, 0.0902901315160865; -0.0340059237939632,
+        0.0236306432673426, -0.0421141229811648, 0.0292653886308965, -0.0521507406440368,
+        0.0362425847623533, -0.0645440160695264, 0.0448732572323308, -0.0796286196449086,
+        0.0554313692443655; -0.0446074252224245, 0.0309975231827265, -0.0552444332339097,
+        0.0383891454381211, -0.068417826596882, 0.0475433405427452, -0.0847317970533986,
+        0.0588802604970015, -0.104930659447997, 0.0729191663319995; -0.0274583540085353,
+        0.0190807093114352, -0.0340059237939632, 0.0236306432673426, -0.0421141229811648,
+        0.0292653886308965, -0.0521507406440368, 0.0362425847623533, -0.0645440160695264,
+        0.0448732572323308; -0.0360185051930507, 0.0250291158252674, -0.0446074252224245,
+        0.0309975231827265, -0.0552444332339097, 0.0383891454381211, -0.068417826596882,
+        0.0475433405427452, -0.0847317970533986, 0.0588802604970015; -0.0221714066975891,
+        0.015406823298461, -0.0274583540085353, 0.0190807093114352, -0.0340059237939632,
+        0.0236306432673426, -0.0421141229811648, 0.0292653886308965, -0.0521507406440368,
+        0.0362425847623533; -0.0290833343689699, 0.02020989312235, -0.0360185051930507,
+        0.0250291158252674, -0.0446074252224245, 0.0309975231827265, -0.0552444332339097,
+        0.0383891454381211, -0.068417826596882, 0.0475433405427452; -0.0179024222817209,
+        0.0124403220296684, -0.0221714066975891, 0.015406823298461, -0.0274583540085353,
+        0.0190807093114352, -0.0340059237939632, 0.0236306432673426, -0.0421141229811648,
+        0.0292653886308965; -0.0234834934867533, 0.0163185859993666, -0.0290833343689699,
+        0.02020989312235, -0.0360185051930507, 0.0250291158252674, -0.0446074252224245,
+        0.0309975231827265, -0.0552444332339097, 0.0383891454381211; -0.0144554065871353,
+        0.0100450044265642, -0.0179024222817209, 0.0124403220296684, -0.0221714066975891,
+        0.015406823298461, -0.0274583540085353, 0.0190807093114352, -0.0340059237939632,
+        0.0236306432673426; -0.0189618720704232, 0.0131765293019049, -0.0234834934867533,
+        0.0163185859993666, -0.0290833343689699, 0.02020989312235, -0.0360185051930507,
+        0.0250291158252674, -0.0446074252224245, 0.0309975231827265; -0.0116720951791165,
+        0.00811089240683056, -0.0144554065871353, 0.0100450044265642, -0.0179024222817209,
+        0.0124403220296684, -0.0221714066975891, 0.015406823298461, -0.0274583540085353,
+        0.0190807093114352; -0.0153108647376083, 0.0106394588623783, -0.0189618720704232,
+        0.0131765293019049, -0.0234834934867533, 0.0163185859993666, -0.0290833343689699,
+        0.02020989312235, -0.0360185051930507, 0.0250291158252674; -0.00942469551024343,
+        0.00654918333458082, -0.0116720951791165, 0.00811089240683056, -0.0144554065871353,
+        0.0100450044265642, -0.0179024222817209, 0.0124403220296684, -0.0221714066975891,
+        0.015406823298461; -0.0123628393934212, 0.00859088780431706, -0.0153108647376083,
+        0.0106394588623783, -0.0189618720704232, 0.0131765293019049, -0.0234834934867533,
+        0.0163185859993666, -0.0290833343689699, 0.02020989312235; -0.00761002065724444,
+        0.0052881730139086, -0.00942469551024343, 0.00654918333458082, -0.0116720951791165,
+        0.00811089240683056, -0.0144554065871353, 0.0100450044265642, -0.0179024222817209,
+        0.0124403220296684; -0.00998244060580102, 0.00693675817735377, -0.0123628393934212,
+        0.00859088780431706, -0.0153108647376083, 0.0106394588623783, -0.0189618720704232,
+        0.0131765293019049, -0.0234834934867533, 0.0163185859993666; -0.00614475176804639,
+        0.00426996350472721, -0.00761002065724444, 0.0052881730139086, -0.00942469551024343,
+        0.00654918333458082, -0.0116720951791165, 0.00811089240683056, -0.0144554065871353,
+        0.0100450044265642; -0.0080603749087991, 0.00560112238771041, -0.00998244060580102,
+        0.00693675817735377, -0.0123628393934212, 0.00859088780431706, -0.0153108647376083,
+        0.0106394588623783, -0.0189618720704232, 0.0131765293019049; -0.00496161258833652,
+        0.00344780480587174, -0.00614475176804639, 0.00426996350472721, -0.00761002065724444,
+        0.0052881730139086, -0.00942469551024343, 0.00654918333458082, -0.0116720951791165,
+        0.00811089240683056; -0.006508392710359, 0.00452265614570941, -0.0080603749087991,
+        0.00560112238771041, -0.00998244060580102, 0.00693675817735377, -0.0123628393934212,
+        0.00859088780431706, -0.0153108647376083, 0.0106394588623783; -0.00400628054736198,
+        0.00278394837947081, -0.00496161258833652, 0.00344780480587174, -0.00614475176804639,
+        0.00426996350472721, -0.00761002065724444, 0.0052881730139086, -0.00942469551024343,
+        0.00654918333458082; -0.0052552364066852, 0.00365184282657393, -0.006508392710359,
+        0.00452265614570941, -0.0080603749087991, 0.00560112238771041, -0.00998244060580102,
+        0.00693675817735377, -0.0123628393934212, 0.00859088780431706; -0.00323489259558392,
+        0.00224791396727511, -0.00400628054736198, 0.00278394837947081, -0.00496161258833652,
+        0.00344780480587174, -0.00614475176804639, 0.00426996350472721, -0.00761002065724444,
+        0.0052881730139086; -0.00424336866553741, 0.00294869996752928, -0.0052552364066852,
+        0.00365184282657393, -0.006508392710359, 0.00452265614570941, -0.0080603749087991,
+        0.00560112238771041, -0.00998244060580102, 0.00693675817735377; -0.00261203127969999,
+        0.0018150901221922, -0.00323489259558392, 0.00224791396727511, -0.00400628054736198,
+        0.00278394837947081, -0.00496161258833652, 0.00344780480587174, -0.00614475176804639,
+        0.00426996350472721; -0.00342633066112097, 0.00238094351576036, -0.00424336866553741,
+        0.00294869996752928, -0.0052552364066852, 0.00365184282657393, -0.006508392710359,
+        0.00452265614570941, -0.0080603749087991, 0.00560112238771041; -0.00210909858814016,
+        0.00146560420000116, -0.00261203127969999, 0.0018150901221922, -0.00323489259558392,
+        0.00224791396727511, -0.00400628054736198, 0.00278394837947081, -0.00496161258833652,
+        0.00344780480587174; -0.00276660896675846, 0.00192250554063365, -0.00342633066112097,
+        0.00238094351576036, -0.00424336866553741, 0.00294869996752928, -0.0052552364066852,
+        0.00365184282657393, -0.006508392710359, 0.00452265614570941; -0.00170300290393372,
+        0.00118340992813446, -0.00210909858814016, 0.00146560420000116, -0.00261203127969999,
+        0.0018150901221922, -0.00323489259558392, 0.00224791396727511, -0.00400628054736198,
+        0.00278394837947081; -0.0022339131660002, 0.00155233735252503, -0.00276660896675846,
+        0.00192250554063365, -0.00342633066112097, 0.00238094351576036, -0.00424336866553741,
+        0.00294869996752928, -0.0052552364066852, 0.00365184282657393; -0.00137509877779784,
+        0.000955550658224163, -0.00170300290393372, 0.00118340992813446, -0.00210909858814016,
+        0.00146560420000116, -0.00261203127969999, 0.0018150901221922, -0.00323489259558392,
+        0.00224791396727511; -0.00180378510052907, 0.00125344307473371, -0.0022339131660002,
+        0.00155233735252503, -0.00276660896675846, 0.00192250554063365, -0.00342633066112097,
+        0.00238094351576036, -0.00424336866553741, 0.00294869996752928; -0.00111033084226304,
+        0.000771564475440913, -0.00137509877779784, 0.000955550658224163, -0.00170300290393372,
+        0.00118340992813446, -0.00210909858814016, 0.00146560420000116, -0.00261203127969999,
+        0.0018150901221922; -0.0014564758999636, 0.00101209929596959, -0.00180378510052907,
+        0.00125344307473371, -0.0022339131660002, 0.00155233735252503, -0.00276660896675846,
+        0.00192250554063365, -0.00342633066112097, 0.00238094351576036; -0.000896542560567808,
+        0.000623003850856807, -0.00111033084226304, 0.000771564475440913, -0.00137509877779784,
+        0.000955550658224163, -0.00170300290393372, 0.00118340992813446, -0.00210909858814016,
+        0.00146560420000116; -0.00117603923358307, 0.000817224974592298, -0.0014564758999636,
+        0.00101209929596959, -0.00180378510052907, 0.00125344307473371, -0.0022339131660002,
+        0.00155233735252503, -0.00276660896675846, 0.00192250554063365; -0.000723918072266848,
+        0.000503047782183868, -0.000896542560567808, 0.000623003850856807, -0.00111033084226304,
+        0.000771564475440913, -0.00137509877779784, 0.000955550658224163, -0.00170300290393372,
+        0.00118340992813446; -0.000949599151596826, 0.000659872664428221, -0.00117603923358307,
+        0.000817224974592298, -0.0014564758999636, 0.00101209929596959, -0.00180378510052907,
+        0.00125344307473371, -0.0022339131660002, 0.00155233735252503; -0.000584531508490402,
+        0.000406188614744649, -0.000723918072266848, 0.000503047782183868, -0.000896542560567808,
+        0.000623003850856807, -0.00111033084226304, 0.000771564475440913, -0.00137509877779784,
+        0.000955550658224163; -0.000766758899672132, 0.000532817702343018, -0.000949599151596826,
+        0.000659872664428221, -0.00117603923358307, 0.000817224974592298, -0.0014564758999636,
+        0.00101209929596959, -0.00180378510052907, 0.00125344307473371; -0.000471983084146734,
+        0.000327979163394606, -0.000584531508490402, 0.000406188614744649, -0.000723918072266848,
+        0.000503047782183868, -0.000896542560567808, 0.000623003850856807, -0.00111033084226304,
+        0.000771564475440913; -0.000619123563071624, 0.000430226495555908, -0.000766758899672132,
+        0.000532817702343018, -0.000949599151596826, 0.000659872664428221, -0.00117603923358307,
+        0.000817224974592298, -0.0014564758999636, 0.00101209929596959; -0.000381105258630076,
+        0.000264828524769582, -0.000471983084146734, 0.000327979163394606, -0.000584531508490402,
+        0.000406188614744649, -0.000723918072266848, 0.000503047782183868, -0.000896542560567808,
+        0.000623003850856807; -0.000499914623116092, 0.000347388678462408, -0.000619123563071624,
+        0.000430226495555908, -0.000766758899672132, 0.000532817702343018, -0.000949599151596826,
+        0.000659872664428221, -0.00117603923358307, 0.000817224974592298; -0.000307725473717069,
+        0.000213837204796001, -0.000381105258630076, 0.000264828524769582, -0.000471983084146734,
+        0.000327979163394606, -0.000584531508490402, 0.000406188614744649, -0.000723918072266848,
+        0.000503047782183868; -0.000403658728744577, 0.000280500841232304, -0.000499914623116092,
+        0.000347388678462408, -0.000619123563071624, 0.000430226495555908, -0.000766758899672132,
+        0.000532817702343018, -0.000949599151596826, 0.000659872664428221; -0.0002484745750158,
+        0.000172663991519613, -0.000307725473717069, 0.000213837204796001, -0.000381105258630076,
+        0.000264828524769582, -0.000471983084146734, 0.000327979163394606, -0.000584531508490402,
+        0.000406188614744649; -0.000325936393450625, 0.000226491900312591, -0.000403658728744577,
+        0.000280500841232304, -0.000499914623116092, 0.000347388678462408, -0.000619123563071624,
+        0.000430226495555908, -0.000766758899672132, 0.000532817702343018; -0.000200632120843032,
+        0.000139418460861037, -0.0002484745750158, 0.000172663991519613, -0.000307725473717069,
+        0.000213837204796001, -0.000381105258630076, 0.000264828524769582, -0.000471983084146734,
+        0.000327979163394606; -0.000263179079283141, 0.000182882092908678, -0.000325936393450625,
+        0.000226491900312591, -0.000403658728744577, 0.000280500841232304, -0.000499914623116092,
+        0.000347388678462408, -0.000619123563071624, 0.000430226495555908; -0.000162001476052081,
+        0.000112574179814746, -0.000200632120843032, 0.000139418460861037, -0.0002484745750158,
+        0.000172663991519613, -0.000307725473717069, 0.000213837204796001, -0.000381105258630076,
+        0.000264828524769582; -0.000212505351240607, 0.000147669121326185, -0.000263179079283141,
+        0.000182882092908678, -0.000325936393450625, 0.000226491900312591, -0.000403658728744577,
+        0.000280500841232304, -0.000499914623116092, 0.000347388678462408; -0.000130808955877936,
+        9.08986219091476e-05, -0.000162001476052081, 0.000112574179814746, -0.000200632120843032,
+        0.000139418460861037, -0.0002484745750158, 0.000172663991519613, -0.000307725473717069,
+        0.000213837204796001; -0.00017158857926283, 0.000119236219612472, -0.000212505351240607,
+        0.000147669121326185, -0.000263179079283141, 0.000182882092908678, -0.000325936393450625,
+        0.000226491900312591, -0.000403658728744577, 0.000280500841232304; -0.00010562238909709,
+        7.33965770710405e-05, -0.000130808955877936, 9.08986219091476e-05, -0.000162001476052081,
+        0.000112574179814746, -0.000200632120843032, 0.000139418460861037, -0.0002484745750158,
+        0.000172663991519613; -0.000138550113498555, 9.62779214760087e-05, -0.00017158857926283,
+        0.000119236219612472, -0.000212505351240607, 0.000147669121326185, -0.000263179079283141,
+        0.000182882092908678, -0.000325936393450625, 0.000226491900312591; -8.52853614165943e-05,
+        5.92644576188351e-05, -0.00010562238909709, 7.33965770710405e-05, -0.000130808955877936,
+        9.08986219091476e-05, -0.000162001476052081, 0.000112574179814746, -0.000200632120843032,
+        0.000139418460861037; -0.000111873028105553, 7.77401211969565e-05, -0.000138550113498555,
+        9.62779214760087e-05, -0.00017158857926283, 0.000119236219612472, -0.000212505351240607,
+        0.000147669121326185, -0.000263179079283141, 0.000182882092908678; -6.88641199478368e-05,
+        4.7853402393073e-05, -8.52853614165943e-05, 5.92644576188351e-05, -0.00010562238909709,
+        7.33965770710405e-05, -0.000130808955877936, 9.08986219091476e-05, -0.000162001476052081,
+        0.000112574179814746; -9.03324732219462e-05, 6.27716754897275e-05, -0.000111873028105553,
+        7.77401211969565e-05, -0.000138550113498555, 9.62779214760087e-05, -0.00017158857926283,
+        0.000119236219612472, -0.000212505351240607, 0.000147669121326185; -5.56047009407096e-05,
+        3.86394849898296e-05, -6.88641199478368e-05, 4.7853402393073e-05, -8.52853614165943e-05,
+        5.92644576188351e-05, -0.00010562238909709, 7.33965770710405e-05, -0.000130808955877936,
+        9.08986219091476e-05; -7.29394372939889e-05, 5.06853241687758e-05, -9.03324732219462e-05,
+        6.27716754897275e-05, -0.000111873028105553, 7.77401211969565e-05, -0.000138550113498555,
+        9.62779214760087e-05, -0.00017158857926283, 0.000119236219612472; -4.48983123438997e-05,
+        3.11996582398785e-05, -5.56047009407096e-05, 3.86394849898296e-05, -6.88641199478368e-05,
+        4.7853402393073e-05, -8.52853614165943e-05, 5.92644576188351e-05, -0.00010562238909709,
+        7.33965770710405e-05; -5.88953376676862e-05, 4.09261353317596e-05, -7.29394372939889e-05,
+        5.06853241687758e-05, -9.03324732219462e-05, 6.27716754897275e-05, -0.000111873028105553,
+        7.77401211969565e-05, -0.000138550113498555, 9.62779214760087e-05; -3.6253381768564e-05,
+        2.51923304500936e-05, -4.48983123438997e-05, 3.11996582398785e-05, -5.56047009407096e-05,
+        3.86394849898296e-05, -6.88641199478368e-05, 4.7853402393073e-05, -8.52853614165943e-05,
+        5.92644576188351e-05; -4.75553545198056e-05, 3.30460262543875e-05, -5.88953376676862e-05,
+        4.09261353317596e-05, -7.29394372939889e-05, 5.06853241687758e-05, -9.03324732219462e-05,
+        6.27716754897275e-05, -0.000111873028105553, 7.77401211969565e-05; -2.92729864675152e-05,
+        2.03416815859707e-05, -3.6253381768564e-05, 2.51923304500936e-05, -4.48983123438997e-05,
+        3.11996582398785e-05, -5.56047009407096e-05, 3.86394849898296e-05, -6.88641199478368e-05,
+        4.7853402393073e-05; -3.83988246449126e-05, 2.66831901510675e-05, -4.75553545198056e-05,
+        3.30460262543875e-05, -5.88953376676862e-05, 4.09261353317596e-05, -7.29394372939889e-05,
+        5.06853241687758e-05, -9.03324732219462e-05, 6.27716754897275e-05; -2.36366290515378e-05,
+        1.64249992895548e-05, -2.92729864675152e-05, 2.03416815859707e-05, -3.6253381768564e-05,
+        2.51923304500936e-05, -4.48983123438997e-05, 3.11996582398785e-05, -5.56047009407096e-05,
+        3.86394849898296e-05; -3.10053357608062e-05, 2.15454842030665e-05, -3.83988246449126e-05,
+        2.66831901510675e-05, -4.75553545198056e-05, 3.30460262543875e-05, -5.88953376676862e-05,
+        4.09261353317596e-05, -7.29394372939889e-05, 5.06853241687758e-05; -1.90855221943272e-05,
+        1.32624532795725e-05, -2.36366290515378e-05, 1.64249992895548e-05, -2.92729864675152e-05,
+        2.03416815859707e-05, -3.6253381768564e-05, 2.51923304500936e-05, -4.48983123438997e-05,
+        3.11996582398785e-05; -2.5035423727942e-05, 1.73970161332459e-05, -3.10053357608062e-05,
+        2.15454842030665e-05, -3.83988246449126e-05, 2.66831901510675e-05, -4.75553545198056e-05,
+        3.30460262543875e-05, -5.88953376676862e-05, 4.09261353317596e-05; -1.54107066890089e-05,
+        1.07088386362792e-05, -1.90855221943272e-05, 1.32624532795725e-05, -2.36366290515378e-05,
+        1.64249992895548e-05, -2.92729864675152e-05, 2.03416815859707e-05, -3.6253381768564e-05,
+        2.51923304500936e-05; -2.02149864163027e-05, 1.40473134642916e-05, -2.5035423727942e-05,
+        1.73970161332459e-05, -3.10053357608062e-05, 2.15454842030665e-05, -3.83988246449126e-05,
+        2.66831901510675e-05, -4.75553545198056e-05, 3.30460262543875e-05; -1.2443457309502e-05,
+        8.64690887277255e-06, -1.54107066890089e-05, 1.07088386362792e-05, -1.90855221943272e-05,
+        1.32624532795725e-05, -2.36366290515378e-05, 1.64249992895548e-05, -2.92729864675152e-05,
+        2.03416815859707e-05; -1.6322698599074e-05, 1.13425781785057e-05, -2.02149864163027e-05,
+        1.40473134642916e-05, -2.5035423727942e-05, 1.73970161332459e-05, -3.10053357608062e-05,
+        2.15454842030665e-05, -3.83988246449126e-05, 2.66831901510675e-05; -1.00475359721065e-05,
+        6.98199268786545e-06, -1.2443457309502e-05, 8.64690887277255e-06, -1.54107066890089e-05,
+        1.07088386362792e-05, -1.90855221943272e-05, 1.32624532795725e-05, -2.36366290515378e-05,
+        1.64249992895548e-05; -1.317985004142e-05, 9.15862524621201e-06, -1.6322698599074e-05,
+        1.13425781785057e-05, -2.02149864163027e-05, 1.40473134642916e-05, -2.5035423727942e-05,
+        1.73970161332459e-05, -3.10053357608062e-05, 2.15454842030665e-05; -8.11293650950883e-06,
+        5.6376472344823e-06, -1.00475359721065e-05, 6.98199268786545e-06, -1.2443457309502e-05,
+        8.64690887277255e-06, -1.54107066890089e-05, 1.07088386362792e-05, -1.90855221943272e-05,
+        1.32624532795725e-05; -1.06421402110661e-05, 7.39518080285361e-06, -1.317985004142e-05,
+        9.15862524621201e-06, -1.6322698599074e-05, 1.13425781785057e-05, -2.02149864163027e-05,
+        1.40473134642916e-05, -2.5035423727942e-05, 1.73970161332459e-05; -6.5508338551907e-06,
+        4.55214832804167e-06, -8.11293650950883e-06, 5.6376472344823e-06, -1.00475359721065e-05,
+        6.98199268786545e-06, -1.2443457309502e-05, 8.64690887277255e-06, -1.54107066890089e-05,
+        1.07088386362792e-05; -8.5930528735962e-06, 5.97127818168057e-06, -1.06421402110661e-05,
+        7.39518080285361e-06, -1.317985004142e-05, 9.15862524621201e-06, -1.6322698599074e-05,
+        1.13425781785057e-05, -2.02149864163027e-05, 1.40473134642916e-05; -5.28950573544064e-06,
+        3.67565644649554e-06, -6.5508338551907e-06, 4.55214832804167e-06, -8.11293650950883e-06,
+        5.6376472344823e-06, -1.00475359721065e-05, 6.98199268786545e-06, -1.2443457309502e-05,
+        8.64690887277255e-06; -6.93850637408794e-06, 4.82154041578748e-06, -8.5930528735962e-06,
+        5.97127818168057e-06, -1.06421402110661e-05, 7.39518080285361e-06, -1.317985004142e-05,
+        9.15862524621201e-06, -1.6322698599074e-05, 1.13425781785057e-05; -4.27103961781746e-06,
+        2.96792840194563e-06, -5.28950573544064e-06, 3.67565644649554e-06, -6.5508338551907e-06,
+        4.55214832804167e-06, -8.11293650950883e-06, 5.6376472344823e-06, -1.00475359721065e-05,
+        6.98199268786545e-06; -5.6025339784871e-06, 3.89317852455659e-06, -6.93850637408794e-06,
+        4.82154041578748e-06, -8.5930528735962e-06, 5.97127818168057e-06, -1.06421402110661e-05,
+        7.39518080285361e-06, -1.317985004142e-05, 9.15862524621201e-06; -3.44867371912334e-06,
+        2.39646961768527e-06, -4.27103961781746e-06, 2.96792840194563e-06, -5.28950573544064e-06,
+        3.67565644649554e-06, -6.5508338551907e-06, 4.55214832804167e-06, -8.11293650950883e-06,
+        5.6376472344823e-06; -1, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, -1, 0, 0, 0, 0, 0,
+        0, 0, 0; 0.196917247583181, -0.128440349918156, -1, 0, 0, 0, 0, 0, 0, 0;
+        0.107504619443718, 0.015509714001478, 0, -1, 0, 0, 0, 0, 0, 0; 0.16057090016955,
+        -0.111493381007763, 0.196917247583181, -0.128440349918156, -1, 0, 0, 0,
+        0, 0; 0.0964856358673057, -0.0655523610830748, 0.107504619443718, 0.015509714001478,
+        0, -1, 0, 0, 0, 0; 0.129907724696675, -0.0902901315160865, 0.16057090016955,
+        -0.111493381007763, 0.196917247583181, -0.128440349918156, -1, 0, 0, 0;
+        0.0796286196449086, -0.0554313692443655, 0.0964856358673057, -0.0655523610830748,
+        0.107504619443718, 0.015509714001478, 0, -1, 0, 0; 0.104930659447997, -0.0729191663319995,
+        0.129907724696675, -0.0902901315160865, 0.16057090016955, -0.111493381007763,
+        0.196917247583181, -0.128440349918156, -1, 0; 0.0645440160695264, -0.0448732572323308,
+        0.0796286196449086, -0.0554313692443655, 0.0964856358673057, -0.0655523610830748,
+        0.107504619443718, 0.015509714001478, 0, -1; 0.0847317970533986, -0.0588802604970015,
+        0.104930659447997, -0.0729191663319995, 0.129907724696675, -0.0902901315160865,
+        0.16057090016955, -0.111493381007763, 0.196917247583181, -0.128440349918156;
+        0.0521507406440368, -0.0362425847623533, 0.0645440160695264, -0.0448732572323308,
+        0.0796286196449086, -0.0554313692443655, 0.0964856358673057, -0.0655523610830748,
+        0.107504619443718, 0.015509714001478; 0.068417826596882, -0.0475433405427452,
+        0.0847317970533986, -0.0588802604970015, 0.104930659447997, -0.0729191663319995,
+        0.129907724696675, -0.0902901315160865, 0.16057090016955, -0.111493381007763;
+        0.0421141229811648, -0.0292653886308965, 0.0521507406440368, -0.0362425847623533,
+        0.0645440160695264, -0.0448732572323308, 0.0796286196449086, -0.0554313692443655,
+        0.0964856358673057, -0.0655523610830748; 0.0552444332339097, -0.0383891454381211,
+        0.068417826596882, -0.0475433405427452, 0.0847317970533986, -0.0588802604970015,
+        0.104930659447997, -0.0729191663319995, 0.129907724696675, -0.0902901315160865;
+        0.0340059237939632, -0.0236306432673426, 0.0421141229811648, -0.0292653886308965,
+        0.0521507406440368, -0.0362425847623533, 0.0645440160695264, -0.0448732572323308,
+        0.0796286196449086, -0.0554313692443655; 0.0446074252224245, -0.0309975231827265,
+        0.0552444332339097, -0.0383891454381211, 0.068417826596882, -0.0475433405427452,
+        0.0847317970533986, -0.0588802604970015, 0.104930659447997, -0.0729191663319995;
+        0.0274583540085353, -0.0190807093114352, 0.0340059237939632, -0.0236306432673426,
+        0.0421141229811648, -0.0292653886308965, 0.0521507406440368, -0.0362425847623533,
+        0.0645440160695264, -0.0448732572323308; 0.0360185051930507, -0.0250291158252674,
+        0.0446074252224245, -0.0309975231827265, 0.0552444332339097, -0.0383891454381211,
+        0.068417826596882, -0.0475433405427452, 0.0847317970533986, -0.0588802604970015;
+        0.0221714066975891, -0.015406823298461, 0.0274583540085353, -0.0190807093114352,
+        0.0340059237939632, -0.0236306432673426, 0.0421141229811648, -0.0292653886308965,
+        0.0521507406440368, -0.0362425847623533; 0.0290833343689699, -0.02020989312235,
+        0.0360185051930507, -0.0250291158252674, 0.0446074252224245, -0.0309975231827265,
+        0.0552444332339097, -0.0383891454381211, 0.068417826596882, -0.0475433405427452;
+        0.0179024222817209, -0.0124403220296684, 0.0221714066975891, -0.015406823298461,
+        0.0274583540085353, -0.0190807093114352, 0.0340059237939632, -0.0236306432673426,
+        0.0421141229811648, -0.0292653886308965; 0.0234834934867533, -0.0163185859993666,
+        0.0290833343689699, -0.02020989312235, 0.0360185051930507, -0.0250291158252674,
+        0.0446074252224245, -0.0309975231827265, 0.0552444332339097, -0.0383891454381211;
+        0.0144554065871353, -0.0100450044265642, 0.0179024222817209, -0.0124403220296684,
+        0.0221714066975891, -0.015406823298461, 0.0274583540085353, -0.0190807093114352,
+        0.0340059237939632, -0.0236306432673426; 0.0189618720704232, -0.0131765293019049,
+        0.0234834934867533, -0.0163185859993666, 0.0290833343689699, -0.02020989312235,
+        0.0360185051930507, -0.0250291158252674, 0.0446074252224245, -0.0309975231827265;
+        0.0116720951791165, -0.00811089240683056, 0.0144554065871353, -0.0100450044265642,
+        0.0179024222817209, -0.0124403220296684, 0.0221714066975891, -0.015406823298461,
+        0.0274583540085353, -0.0190807093114352; 0.0153108647376083, -0.0106394588623783,
+        0.0189618720704232, -0.0131765293019049, 0.0234834934867533, -0.0163185859993666,
+        0.0290833343689699, -0.02020989312235, 0.0360185051930507, -0.0250291158252674;
+        0.00942469551024343, -0.00654918333458082, 0.0116720951791165, -0.00811089240683056,
+        0.0144554065871353, -0.0100450044265642, 0.0179024222817209, -0.0124403220296684,
+        0.0221714066975891, -0.015406823298461; 0.0123628393934212, -0.00859088780431706,
+        0.0153108647376083, -0.0106394588623783, 0.0189618720704232, -0.0131765293019049,
+        0.0234834934867533, -0.0163185859993666, 0.0290833343689699, -0.02020989312235;
+        0.00761002065724444, -0.0052881730139086, 0.00942469551024343, -0.00654918333458082,
+        0.0116720951791165, -0.00811089240683056, 0.0144554065871353, -0.0100450044265642,
+        0.0179024222817209, -0.0124403220296684; 0.00998244060580102, -0.00693675817735377,
+        0.0123628393934212, -0.00859088780431706, 0.0153108647376083, -0.0106394588623783,
+        0.0189618720704232, -0.0131765293019049, 0.0234834934867533, -0.0163185859993666;
+        0.00614475176804639, -0.00426996350472721, 0.00761002065724444, -0.0052881730139086,
+        0.00942469551024343, -0.00654918333458082, 0.0116720951791165, -0.00811089240683056,
+        0.0144554065871353, -0.0100450044265642; 0.0080603749087991, -0.00560112238771041,
+        0.00998244060580102, -0.00693675817735377, 0.0123628393934212, -0.00859088780431706,
+        0.0153108647376083, -0.0106394588623783, 0.0189618720704232, -0.0131765293019049;
+        0.00496161258833652, -0.00344780480587174, 0.00614475176804639, -0.00426996350472721,
+        0.00761002065724444, -0.0052881730139086, 0.00942469551024343, -0.00654918333458082,
+        0.0116720951791165, -0.00811089240683056; 0.006508392710359, -0.00452265614570941,
+        0.0080603749087991, -0.00560112238771041, 0.00998244060580102, -0.00693675817735377,
+        0.0123628393934212, -0.00859088780431706, 0.0153108647376083, -0.0106394588623783;
+        0.00400628054736198, -0.00278394837947081, 0.00496161258833652, -0.00344780480587174,
+        0.00614475176804639, -0.00426996350472721, 0.00761002065724444, -0.0052881730139086,
+        0.00942469551024343, -0.00654918333458082; 0.0052552364066852, -0.00365184282657393,
+        0.006508392710359, -0.00452265614570941, 0.0080603749087991, -0.00560112238771041,
+        0.00998244060580102, -0.00693675817735377, 0.0123628393934212, -0.00859088780431706;
+        0.00323489259558392, -0.00224791396727511, 0.00400628054736198, -0.00278394837947081,
+        0.00496161258833652, -0.00344780480587174, 0.00614475176804639, -0.00426996350472721,
+        0.00761002065724444, -0.0052881730139086; 0.00424336866553741, -0.00294869996752928,
+        0.0052552364066852, -0.00365184282657393, 0.006508392710359, -0.00452265614570941,
+        0.0080603749087991, -0.00560112238771041, 0.00998244060580102, -0.00693675817735377;
+        0.00261203127969999, -0.0018150901221922, 0.00323489259558392, -0.00224791396727511,
+        0.00400628054736198, -0.00278394837947081, 0.00496161258833652, -0.00344780480587174,
+        0.00614475176804639, -0.00426996350472721; 0.00342633066112097, -0.00238094351576036,
+        0.00424336866553741, -0.00294869996752928, 0.0052552364066852, -0.00365184282657393,
+        0.006508392710359, -0.00452265614570941, 0.0080603749087991, -0.00560112238771041;
+        0.00210909858814016, -0.00146560420000116, 0.00261203127969999, -0.0018150901221922,
+        0.00323489259558392, -0.00224791396727511, 0.00400628054736198, -0.00278394837947081,
+        0.00496161258833652, -0.00344780480587174; 0.00276660896675846, -0.00192250554063365,
+        0.00342633066112097, -0.00238094351576036, 0.00424336866553741, -0.00294869996752928,
+        0.0052552364066852, -0.00365184282657393, 0.006508392710359, -0.00452265614570941;
+        0.00170300290393372, -0.00118340992813446, 0.00210909858814016, -0.00146560420000116,
+        0.00261203127969999, -0.0018150901221922, 0.00323489259558392, -0.00224791396727511,
+        0.00400628054736198, -0.00278394837947081; 0.0022339131660002, -0.00155233735252503,
+        0.00276660896675846, -0.00192250554063365, 0.00342633066112097, -0.00238094351576036,
+        0.00424336866553741, -0.00294869996752928, 0.0052552364066852, -0.00365184282657393;
+        0.00137509877779784, -0.000955550658224163, 0.00170300290393372, -0.00118340992813446,
+        0.00210909858814016, -0.00146560420000116, 0.00261203127969999, -0.0018150901221922,
+        0.00323489259558392, -0.00224791396727511; 0.00180378510052907, -0.00125344307473371,
+        0.0022339131660002, -0.00155233735252503, 0.00276660896675846, -0.00192250554063365,
+        0.00342633066112097, -0.00238094351576036, 0.00424336866553741, -0.00294869996752928;
+        0.00111033084226304, -0.000771564475440913, 0.00137509877779784, -0.000955550658224163,
+        0.00170300290393372, -0.00118340992813446, 0.00210909858814016, -0.00146560420000116,
+        0.00261203127969999, -0.0018150901221922; 0.0014564758999636, -0.00101209929596959,
+        0.00180378510052907, -0.00125344307473371, 0.0022339131660002, -0.00155233735252503,
+        0.00276660896675846, -0.00192250554063365, 0.00342633066112097, -0.00238094351576036;
+        0.000896542560567808, -0.000623003850856807, 0.00111033084226304, -0.000771564475440913,
+        0.00137509877779784, -0.000955550658224163, 0.00170300290393372, -0.00118340992813446,
+        0.00210909858814016, -0.00146560420000116; 0.00117603923358307, -0.000817224974592298,
+        0.0014564758999636, -0.00101209929596959, 0.00180378510052907, -0.00125344307473371,
+        0.0022339131660002, -0.00155233735252503, 0.00276660896675846, -0.00192250554063365;
+        0.000723918072266848, -0.000503047782183868, 0.000896542560567808, -0.000623003850856807,
+        0.00111033084226304, -0.000771564475440913, 0.00137509877779784, -0.000955550658224163,
+        0.00170300290393372, -0.00118340992813446; 0.000949599151596826, -0.000659872664428221,
+        0.00117603923358307, -0.000817224974592298, 0.0014564758999636, -0.00101209929596959,
+        0.00180378510052907, -0.00125344307473371, 0.0022339131660002, -0.00155233735252503;
+        0.000584531508490402, -0.000406188614744649, 0.000723918072266848, -0.000503047782183868,
+        0.000896542560567808, -0.000623003850856807, 0.00111033084226304, -0.000771564475440913,
+        0.00137509877779784, -0.000955550658224163; 0.000766758899672132, -0.000532817702343018,
+        0.000949599151596826, -0.000659872664428221, 0.00117603923358307, -0.000817224974592298,
+        0.0014564758999636, -0.00101209929596959, 0.00180378510052907, -0.00125344307473371;
+        0.000471983084146734, -0.000327979163394606, 0.000584531508490402, -0.000406188614744649,
+        0.000723918072266848, -0.000503047782183868, 0.000896542560567808, -0.000623003850856807,
+        0.00111033084226304, -0.000771564475440913; 0.000619123563071624, -0.000430226495555908,
+        0.000766758899672132, -0.000532817702343018, 0.000949599151596826, -0.000659872664428221,
+        0.00117603923358307, -0.000817224974592298, 0.0014564758999636, -0.00101209929596959;
+        0.000381105258630076, -0.000264828524769582, 0.000471983084146734, -0.000327979163394606,
+        0.000584531508490402, -0.000406188614744649, 0.000723918072266848, -0.000503047782183868,
+        0.000896542560567808, -0.000623003850856807; 0.000499914623116092, -0.000347388678462408,
+        0.000619123563071624, -0.000430226495555908, 0.000766758899672132, -0.000532817702343018,
+        0.000949599151596826, -0.000659872664428221, 0.00117603923358307, -0.000817224974592298;
+        0.000307725473717069, -0.000213837204796001, 0.000381105258630076, -0.000264828524769582,
+        0.000471983084146734, -0.000327979163394606, 0.000584531508490402, -0.000406188614744649,
+        0.000723918072266848, -0.000503047782183868; 0.000403658728744577, -0.000280500841232304,
+        0.000499914623116092, -0.000347388678462408, 0.000619123563071624, -0.000430226495555908,
+        0.000766758899672132, -0.000532817702343018, 0.000949599151596826, -0.000659872664428221;
+        0.0002484745750158, -0.000172663991519613, 0.000307725473717069, -0.000213837204796001,
+        0.000381105258630076, -0.000264828524769582, 0.000471983084146734, -0.000327979163394606,
+        0.000584531508490402, -0.000406188614744649; 0.000325936393450625, -0.000226491900312591,
+        0.000403658728744577, -0.000280500841232304, 0.000499914623116092, -0.000347388678462408,
+        0.000619123563071624, -0.000430226495555908, 0.000766758899672132, -0.000532817702343018;
+        0.000200632120843032, -0.000139418460861037, 0.0002484745750158, -0.000172663991519613,
+        0.000307725473717069, -0.000213837204796001, 0.000381105258630076, -0.000264828524769582,
+        0.000471983084146734, -0.000327979163394606; 0.000263179079283141, -0.000182882092908678,
+        0.000325936393450625, -0.000226491900312591, 0.000403658728744577, -0.000280500841232304,
+        0.000499914623116092, -0.000347388678462408, 0.000619123563071624, -0.000430226495555908;
+        0.000162001476052081, -0.000112574179814746, 0.000200632120843032, -0.000139418460861037,
+        0.0002484745750158, -0.000172663991519613, 0.000307725473717069, -0.000213837204796001,
+        0.000381105258630076, -0.000264828524769582; 0.000212505351240607, -0.000147669121326185,
+        0.000263179079283141, -0.000182882092908678, 0.000325936393450625, -0.000226491900312591,
+        0.000403658728744577, -0.000280500841232304, 0.000499914623116092, -0.000347388678462408;
+        0.000130808955877936, -9.08986219091476e-05, 0.000162001476052081, -0.000112574179814746,
+        0.000200632120843032, -0.000139418460861037, 0.0002484745750158, -0.000172663991519613,
+        0.000307725473717069, -0.000213837204796001; 0.00017158857926283, -0.000119236219612472,
+        0.000212505351240607, -0.000147669121326185, 0.000263179079283141, -0.000182882092908678,
+        0.000325936393450625, -0.000226491900312591, 0.000403658728744577, -0.000280500841232304;
+        0.00010562238909709, -7.33965770710405e-05, 0.000130808955877936, -9.08986219091476e-05,
+        0.000162001476052081, -0.000112574179814746, 0.000200632120843032, -0.000139418460861037,
+        0.0002484745750158, -0.000172663991519613; 0.000138550113498555, -9.62779214760087e-05,
+        0.00017158857926283, -0.000119236219612472, 0.000212505351240607, -0.000147669121326185,
+        0.000263179079283141, -0.000182882092908678, 0.000325936393450625, -0.000226491900312591;
+        8.52853614165943e-05, -5.92644576188351e-05, 0.00010562238909709, -7.33965770710405e-05,
+        0.000130808955877936, -9.08986219091476e-05, 0.000162001476052081, -0.000112574179814746,
+        0.000200632120843032, -0.000139418460861037; 0.000111873028105553, -7.77401211969565e-05,
+        0.000138550113498555, -9.62779214760087e-05, 0.00017158857926283, -0.000119236219612472,
+        0.000212505351240607, -0.000147669121326185, 0.000263179079283141, -0.000182882092908678;
+        6.88641199478368e-05, -4.7853402393073e-05, 8.52853614165943e-05, -5.92644576188351e-05,
+        0.00010562238909709, -7.33965770710405e-05, 0.000130808955877936, -9.08986219091476e-05,
+        0.000162001476052081, -0.000112574179814746; 9.03324732219462e-05, -6.27716754897275e-05,
+        0.000111873028105553, -7.77401211969565e-05, 0.000138550113498555, -9.62779214760087e-05,
+        0.00017158857926283, -0.000119236219612472, 0.000212505351240607, -0.000147669121326185;
+        5.56047009407096e-05, -3.86394849898296e-05, 6.88641199478368e-05, -4.7853402393073e-05,
+        8.52853614165943e-05, -5.92644576188351e-05, 0.00010562238909709, -7.33965770710405e-05,
+        0.000130808955877936, -9.08986219091476e-05; 7.29394372939889e-05, -5.06853241687758e-05,
+        9.03324732219462e-05, -6.27716754897275e-05, 0.000111873028105553, -7.77401211969565e-05,
+        0.000138550113498555, -9.62779214760087e-05, 0.00017158857926283, -0.000119236219612472;
+        4.48983123438997e-05, -3.11996582398785e-05, 5.56047009407096e-05, -3.86394849898296e-05,
+        6.88641199478368e-05, -4.7853402393073e-05, 8.52853614165943e-05, -5.92644576188351e-05,
+        0.00010562238909709, -7.33965770710405e-05; 5.88953376676862e-05, -4.09261353317596e-05,
+        7.29394372939889e-05, -5.06853241687758e-05, 9.03324732219462e-05, -6.27716754897275e-05,
+        0.000111873028105553, -7.77401211969565e-05, 0.000138550113498555, -9.62779214760087e-05;
+        3.6253381768564e-05, -2.51923304500936e-05, 4.48983123438997e-05, -3.11996582398785e-05,
+        5.56047009407096e-05, -3.86394849898296e-05, 6.88641199478368e-05, -4.7853402393073e-05,
+        8.52853614165943e-05, -5.92644576188351e-05; 4.75553545198056e-05, -3.30460262543875e-05,
+        5.88953376676862e-05, -4.09261353317596e-05, 7.29394372939889e-05, -5.06853241687758e-05,
+        9.03324732219462e-05, -6.27716754897275e-05, 0.000111873028105553, -7.77401211969565e-05;
+        2.92729864675152e-05, -2.03416815859707e-05, 3.6253381768564e-05, -2.51923304500936e-05,
+        4.48983123438997e-05, -3.11996582398785e-05, 5.56047009407096e-05, -3.86394849898296e-05,
+        6.88641199478368e-05, -4.7853402393073e-05; 3.83988246449126e-05, -2.66831901510675e-05,
+        4.75553545198056e-05, -3.30460262543875e-05, 5.88953376676862e-05, -4.09261353317596e-05,
+        7.29394372939889e-05, -5.06853241687758e-05, 9.03324732219462e-05, -6.27716754897275e-05;
+        2.36366290515378e-05, -1.64249992895548e-05, 2.92729864675152e-05, -2.03416815859707e-05,
+        3.6253381768564e-05, -2.51923304500936e-05, 4.48983123438997e-05, -3.11996582398785e-05,
+        5.56047009407096e-05, -3.86394849898296e-05; 3.10053357608062e-05, -2.15454842030665e-05,
+        3.83988246449126e-05, -2.66831901510675e-05, 4.75553545198056e-05, -3.30460262543875e-05,
+        5.88953376676862e-05, -4.09261353317596e-05, 7.29394372939889e-05, -5.06853241687758e-05;
+        1.90855221943272e-05, -1.32624532795725e-05, 2.36366290515378e-05, -1.64249992895548e-05,
+        2.92729864675152e-05, -2.03416815859707e-05, 3.6253381768564e-05, -2.51923304500936e-05,
+        4.48983123438997e-05, -3.11996582398785e-05; 2.5035423727942e-05, -1.73970161332459e-05,
+        3.10053357608062e-05, -2.15454842030665e-05, 3.83988246449126e-05, -2.66831901510675e-05,
+        4.75553545198056e-05, -3.30460262543875e-05, 5.88953376676862e-05, -4.09261353317596e-05;
+        1.54107066890089e-05, -1.07088386362792e-05, 1.90855221943272e-05, -1.32624532795725e-05,
+        2.36366290515378e-05, -1.64249992895548e-05, 2.92729864675152e-05, -2.03416815859707e-05,
+        3.6253381768564e-05, -2.51923304500936e-05; 2.02149864163027e-05, -1.40473134642916e-05,
+        2.5035423727942e-05, -1.73970161332459e-05, 3.10053357608062e-05, -2.15454842030665e-05,
+        3.83988246449126e-05, -2.66831901510675e-05, 4.75553545198056e-05, -3.30460262543875e-05;
+        1.2443457309502e-05, -8.64690887277255e-06, 1.54107066890089e-05, -1.07088386362792e-05,
+        1.90855221943272e-05, -1.32624532795725e-05, 2.36366290515378e-05, -1.64249992895548e-05,
+        2.92729864675152e-05, -2.03416815859707e-05; 1.6322698599074e-05, -1.13425781785057e-05,
+        2.02149864163027e-05, -1.40473134642916e-05, 2.5035423727942e-05, -1.73970161332459e-05,
+        3.10053357608062e-05, -2.15454842030665e-05, 3.83988246449126e-05, -2.66831901510675e-05;
+        1.00475359721065e-05, -6.98199268786545e-06, 1.2443457309502e-05, -8.64690887277255e-06,
+        1.54107066890089e-05, -1.07088386362792e-05, 1.90855221943272e-05, -1.32624532795725e-05,
+        2.36366290515378e-05, -1.64249992895548e-05; 1.317985004142e-05, -9.15862524621201e-06,
+        1.6322698599074e-05, -1.13425781785057e-05, 2.02149864163027e-05, -1.40473134642916e-05,
+        2.5035423727942e-05, -1.73970161332459e-05, 3.10053357608062e-05, -2.15454842030665e-05;
+        8.11293650950883e-06, -5.6376472344823e-06, 1.00475359721065e-05, -6.98199268786545e-06,
+        1.2443457309502e-05, -8.64690887277255e-06, 1.54107066890089e-05, -1.07088386362792e-05,
+        1.90855221943272e-05, -1.32624532795725e-05; 1.06421402110661e-05, -7.39518080285361e-06,
+        1.317985004142e-05, -9.15862524621201e-06, 1.6322698599074e-05, -1.13425781785057e-05,
+        2.02149864163027e-05, -1.40473134642916e-05, 2.5035423727942e-05, -1.73970161332459e-05;
+        6.5508338551907e-06, -4.55214832804167e-06, 8.11293650950883e-06, -5.6376472344823e-06,
+        1.00475359721065e-05, -6.98199268786545e-06, 1.2443457309502e-05, -8.64690887277255e-06,
+        1.54107066890089e-05, -1.07088386362792e-05; 8.5930528735962e-06, -5.97127818168057e-06,
+        1.06421402110661e-05, -7.39518080285361e-06, 1.317985004142e-05, -9.15862524621201e-06,
+        1.6322698599074e-05, -1.13425781785057e-05, 2.02149864163027e-05, -1.40473134642916e-05;
+        5.28950573544064e-06, -3.67565644649554e-06, 6.5508338551907e-06, -4.55214832804167e-06,
+        8.11293650950883e-06, -5.6376472344823e-06, 1.00475359721065e-05, -6.98199268786545e-06,
+        1.2443457309502e-05, -8.64690887277255e-06; 6.93850637408794e-06, -4.82154041578748e-06,
+        8.5930528735962e-06, -5.97127818168057e-06, 1.06421402110661e-05, -7.39518080285361e-06,
+        1.317985004142e-05, -9.15862524621201e-06, 1.6322698599074e-05, -1.13425781785057e-05;
+        4.27103961781746e-06, -2.96792840194563e-06, 5.28950573544064e-06, -3.67565644649554e-06,
+        6.5508338551907e-06, -4.55214832804167e-06, 8.11293650950883e-06, -5.6376472344823e-06,
+        1.00475359721065e-05, -6.98199268786545e-06; 5.6025339784871e-06, -3.89317852455659e-06,
+        6.93850637408794e-06, -4.82154041578748e-06, 8.5930528735962e-06, -5.97127818168057e-06,
+        1.06421402110661e-05, -7.39518080285361e-06, 1.317985004142e-05, -9.15862524621201e-06;
+        3.44867371912334e-06, -2.39646961768527e-06, 4.27103961781746e-06, -2.96792840194563e-06,
+        5.28950573544064e-06, -3.67565644649554e-06, 6.5508338551907e-06, -4.55214832804167e-06,
+        8.11293650950883e-06, -5.6376472344823e-06; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0],
+    Gx_max_const={1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,
+        2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,
+        2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,
+        2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,
+        2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,
+        2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,1,1,1,1,1,1,
+        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1});</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Step"
+>Modelica.Blocks.Sources.Step</A> reference[2](height={2,1}, <font color="blue">each </font>startTime=5);</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(observer.x, controller.x);
+  <font color="red">connect</font>(controller.ref, reference.y);
+  <font color="red">connect</font>(controller.act, observer.act);
+  <font color="red">connect</font>(plant.u, controller.act);
+  <font color="red">connect</font>(plant.y, observer.sen);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>RossiterExample2MPC;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE RossiterExample2MPCNoRej<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Examples.MagneticBallI.png" ALT="FCSys.WorkInProgress.Blocks.Examples.RossiterExample2MPCNoRej" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Examples.RossiterExample2MPCNoRej"></A><A HREF="FCSys_WorkInProgress_Blocks_Examples.html#FCSys.WorkInProgress.Blocks.Examples"
+>FCSys.WorkInProgress.Blocks.Examples</A>.RossiterExample2MPCNoRej</H2>
+<B>Example2_mimo.m in Rossiter (2003)</B><p>
+<IMG SRC="FCSys.WorkInProgress.Blocks.Examples.RossiterExample2MPCD.png" ALT="FCSys.WorkInProgress.Blocks.Examples.RossiterExample2MPCNoRej">
+<P><H3>Information</H3></P>
+<PRE></pre>
+    The matrices of the controller are the discretized version of the plant model in
+    continuous-time. They can be calculated in MATLAB by:
+   <table border="0" bgcolor="lightgray"><tr><td><code>
+   %% Read results
+ <code>csys = ss(A,B,C,D); % where A, B, C, D are the matrices of the continuous-time model
+<br>T_s = 0.5; % sampling period [s]
+<br>dsys = c2d(csys,'zoh',T_s);
+<br>[A,B,C,D] = ssdata(dsys) % where A, B, C, D are now the matrices of the discrete-time model</code>
+</td></tr></code></table>
+ <p>The observer gain matrix, L, can be calculated in MATLAB via the following, where A and C are
+ the system and output matrices of the plant model in discrete time:
+   <table border="0" bgcolor="lightgray"><tr><td><code>
+  LT = dlqr(A',C',eye(n_x),eye(n_sen)*1e-5);
+<br>L = LT'</code>
+</td></tr></code></table>
+  <pre></PRE><P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_SIunits.html#Modelica.SIunits.Time"
+>Time</A></TD><TD>samplePeriod</TD><TD>1</TD><TD>Sample period of discrete species [s]</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> RossiterExample2MPCNoRej <font color="darkgreen">&quot;Example2_mimo.m in Rossiter (2003)&quot;</font>
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+  <font color="blue">parameter </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_SIunits.html#Modelica.SIunits.Time"
+>Modelica.SIunits.Time</A> samplePeriod(
+    min=100*Modelica.Constants.eps,
+    start=0.1) = 1 <font color="darkgreen">&quot;Sample period of discrete species&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_WorkInProgress_Blocks_Discrete_Plants.html#FCSys.WorkInProgress.Blocks.Discrete.Plants.StateSpaceWNoise"
+>FCSys.WorkInProgress.Blocks.Discrete.Plants.StateSpaceWNoise</A> plant(
+    samplePeriod=samplePeriod,
+    A=[-0.0893, 0, 0.0993; 0.4083, -2.0003, 0.0001; 0, 0, -2.0003],
+    B=[-0.0001, -0.0791; -0.0002, 0.3622; 2.0003, 0],
+    C=[1.7993, 13.216, 0; 0.8233, 0, 0]);
+  <A HREF="FCSys_WorkInProgress_Blocks_Discrete_Observers.html#FCSys.WorkInProgress.Blocks.Discrete.Observers.Observer"
+>FCSys.WorkInProgress.Blocks.Discrete.Observers.Observer</A> observer(
+    samplePeriod=samplePeriod,
+    A=[0.9146, 0, 0.0405; 0.1665, 0.1353, 0.0058; 0, 0, 0.1353],
+    B=[0.0544, -0.0757; 0.0053, 0.1477; 0.8647, 0],
+    C=[1.7993, 13.216, 0; 0.8233, 0, 0],
+    L=[0.0300465946139166, 0.307625044040746; 0.0144539216746499, 0.0471237564746761;
+        1.23468336612022e-05, 0.000356017361987146]);
+  <A HREF="FCSys_WorkInProgress_Blocks_Discrete_Controllers.html#FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPC"
+>FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPC</A> controller(
+    samplePeriod=samplePeriod,
+    A=[0.9146, 0, 0.0405; 0.1665, 0.1353, 0.0058; 0, 0, 0.1353],
+    B=[0.0544, -0.0757; 0.0053, 0.1477; 0.8647, 0],
+    C=[1.7993, 13.216, 0; 0.8233, 0, 0]);
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Step"
+>Modelica.Blocks.Sources.Step</A> reference[2](height={2,1}, <font color="blue">each </font>startTime=5);</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(observer.x, controller.x);
+  <font color="red">connect</font>(controller.ref, reference.y);
+  <font color="red">connect</font>(controller.act, observer.act);
+  <font color="red">connect</font>(plant.u, controller.act);
+  <font color="red">connect</font>(plant.y, observer.sen);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>RossiterExample2MPCNoRej;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE PendulumMPC<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Examples.MagneticBallI.png" ALT="FCSys.WorkInProgress.Blocks.Examples.PendulumMPC" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Examples.PendulumMPC"></A><A HREF="FCSys_WorkInProgress_Blocks_Examples.html#FCSys.WorkInProgress.Blocks.Examples"
+>FCSys.WorkInProgress.Blocks.Examples</A>.PendulumMPC</H2>
+<IMG SRC="FCSys.WorkInProgress.Blocks.Examples.PendulumMPCD.png" ALT="FCSys.WorkInProgress.Blocks.Examples.PendulumMPC">
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>
+This simple model demonstrates that by just dragging species
+default animation is defined that shows the structure of the
+assembled system.
+
+<IMG src="/opt/dymola/Modelica/Library/Modelica 3.2/Resources/Images/MultiBody/Examples/Elementary/Pendulum.png"
+ALT="model Examples.Elementary.Pendulum">
+<pre></PRE><P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_SIunits.html#Modelica.SIunits.Time"
+>Time</A></TD><TD>samplePeriod</TD><TD>0.02</TD><TD>Sample period of discrete species [s]</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> PendulumMPC
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+  <font color="blue">parameter </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_SIunits.html#Modelica.SIunits.Time"
+>Modelica.SIunits.Time</A> samplePeriod(
+    min=100*Modelica.Constants.eps,
+    start=0.1) = 0.02 <font color="darkgreen">&quot;Sample period of discrete species&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_WorkInProgress_Blocks_Discrete_Plants.html#FCSys.WorkInProgress.Blocks.Discrete.Plants.Pendulum"
+>Discrete.Plants.Pendulum</A> pendulum(<font color="blue">final </font>samplePeriod=samplePeriod);
+  <A HREF="FCSys_WorkInProgress_Blocks_Discrete_Controllers.html#FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPC"
+>FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPC</A> controller(
+    A=[0, 1, 0, 0; 3912.30782269368, -92.9225052459515, 0, 0; 0, 0, 0, 1; 1955.16183781234,
+        -46.4541756173276, 0, 0],
+    B=[0; 464.551618506448; 0; 233.240442071292],
+    C=[1.00000000000474, 0, 0, 0; 0, 0, 1, 0],
+    <font color="blue">final </font>samplePeriod=samplePeriod);
+  <A HREF="FCSys_WorkInProgress_Blocks_Discrete_Observers.html#FCSys.WorkInProgress.Blocks.Discrete.Observers.Observer"
+>Discrete.Observers.Observer</A> observer(
+    <font color="blue">final </font>samplePeriod=samplePeriod,
+    A=[0, 1, 0, 0; 3912.30782269368, -92.9225052459515, 0, 0; 0, 0, 0, 1; 1955.16183781234,
+        -46.4541756173276, 0, 0],
+    B=[0; 464.551618506448; 0; 233.240442071292],
+    C=[1.00000000000474, 0, 0, 0; 0, 0, 1, 0],
+    L=<font color="red">ones</font>(4, 2));
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Constant"
+>Modelica.Blocks.Sources.Constant</A> phi_ref(k=Constants.pi/2);
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Constant"
+>Modelica.Blocks.Sources.Constant</A> s_ref(k=0);</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(observer.x, controller.x);
+  <font color="red">connect</font>(pendulum.y, observer.sen);
+  <font color="red">connect</font>(controller.act, pendulum.u);
+  <font color="red">connect</font>(observer.act, pendulum.u);
+  <font color="red">connect</font>(phi_ref.y, controller.ref[1]);
+  <font color="red">connect</font>(s_ref.y, controller.ref[2]);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>PendulumMPC;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 00:07:26 2013.
+</address></BODY>
+</HTML>

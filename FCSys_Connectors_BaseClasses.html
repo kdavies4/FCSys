@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Connectors.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="Base classes (not generally for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,72 +45,18 @@
       <div class="body">
 
 <h2><a name="FCSys.Connectors.BaseClasses"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.BaseClasses</h2>
+
 <b>Base classes (not generally for direct use)</b>
-<p>
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.BasesPackage.html#Modelica.Icons.BasesPackage">Modelica.Icons.BasesPackage</a> (Icon for packages containing base classes).
-<p><h3>Package Content</h3><p>
-<table border=1 cellspacing=0 cellpadding=2 >
-<tr><th>Name</th><th>Description</th></tr>
-<tr><td><img src="images/FCSys.Connectors.BaseClasses.PartialChemicalS.png" alt="FCSys.Connectors.BaseClasses.PartialChemical" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses.PartialChemical">PartialChemical</a>
-</td><td>Partial connector to exchange material while advecting linear momentum and enthalpy</td></tr>
-</table>
-<hr>
-
-<h2><img src="images/FCSys.Connectors.BaseClasses.PartialChemicalI.png" alt="FCSys.Connectors.BaseClasses.PartialChemical" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Connectors.BaseClasses.PartialChemical"></a><a href="FCSys_Connectors_BaseClasses.html#FCSys.Connectors.BaseClasses">FCSys.Connectors.BaseClasses</a>.PartialChemical</h2>
-<b>Partial connector to exchange material while advecting linear momentum and enthalpy</b><p>
-<img src="images/FCSys.Connectors.BaseClasses.PartialChemicalD.png" alt="FCSys.Connectors.BaseClasses.PartialChemical">
-<p><h3>Information</h3></p>
-<p>Current is positive into the component.
-    Note that this is different than the
-    <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> connector,
-    where areic current is positive in the globally positive direction.</p>
-
-    <p>For more information, see the documentation in the
-    <a href="FCSys_Connectors.html#FCSys.Connectors">Connectors</a> package.</p><p>
-Extends from <a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">FCSys.Connectors.Mechanical</a> (Connector to exchange or transport linear momentum).
-<p><h3>Parameters</h3><p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td>Integer</td><td>n_lin</td><td>1</td><td>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</td></tr>
-</table>
-<p><h3>Contents</h3><p>
-<table border=1 cellspacing=0 cellpadding=2>
-<tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Number</a></td><td>muPerT</td><td>Quotient of electrochemical potential and temperature [1]</td></tr>
-<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>Ndot</td><td>Current [N/T]</td></tr>
-<tr><td>Integer</td><td>n_lin</td><td>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi[n_lin]</td><td>Velocity [l/T]</td></tr>
-<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>mPhidot[n_lin]</td><td>Force [l.m/T2]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity2">Velocity2</a></td><td>hbar</td><td>Massic enthalpy [l2/T2]</td></tr>
-<tr><td>flow <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Power</a></td><td>Hdot</td><td>Enthalpy flow rate [l2.m/T3]</td></tr>
-</table>
-<p><h3>Modelica definition</h3>
-<pre>
-<font color="blue">partial </font><font color="blue">connector</font> PartialChemical <font color="darkgreen">
-  &quot;Partial connector to exchange material while advecting linear momentum and enthalpy&quot;</font>
-
-  <font color="darkgreen">// Material</font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> muPerT(nominal=U.V) <font color="darkgreen">
-    &quot;Quotient of electrochemical potential and temperature&quot;</font>;
-  <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Ndot(nominal=U.A) <font color="darkgreen">&quot;Current&quot;</font>;
-
-  <font color="darkgreen">// Mechanical</font>
-  <font color="blue">extends </font><a href="FCSys_Connectors.html#FCSys.Connectors.Mechanical">FCSys.Connectors.Mechanical</a>;
-
-  <font color="darkgreen">// Fluid</font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity2">Q.Velocity2</a> hbar(nominal=U.V) <font color="darkgreen">&quot;Massic enthalpy&quot;</font>;
-  <font color="blue">flow </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Hdot(nominal=10*U.W) <font color="darkgreen">&quot;Enthalpy flow rate&quot;</font>;
-<textblock type="annotcomp" expanded="false">
-<font color="blue">end </font>PartialChemical;
-</pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:52:49 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Mar 25 20:05:53 2013.
 </div>
 </body>
 </html>

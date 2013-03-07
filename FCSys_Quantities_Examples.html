@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Quantities.Examples</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,11 +45,15 @@
       <div class="body">
 
 <h2><a name="FCSys.Quantities.Examples"></a><a href="FCSys_Quantities.html#FCSys.Quantities">FCSys.Quantities</a>.Examples</h2>
+
 <b>Examples</b>
-<p>
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.ExamplesPackage.html#Modelica.Icons.ExamplesPackage">Modelica.Icons.ExamplesPackage</a> (Icon for packages containing runnable examples).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Quantities.Examples.DisplayS.png" alt="FCSys.Quantities.Examples.Display" width=20  height=20 align=top>&nbsp;<a href="FCSys_Quantities_Examples.html#FCSys.Quantities.Examples.Display">Display</a>
@@ -62,14 +67,19 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Quantities.Examples.Display"></a><a href="FCSys_Quantities_Examples.html#FCSys.Quantities.Examples">FCSys.Quantities.Examples</a>.Display</h2>
 <b>Demonstrate the display units for the quantities</b><p>
 <img src="images/FCSys.Quantities.Examples.DisplayD.png" alt="FCSys.Quantities.Examples.Display">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> Display <font color="darkgreen">&quot;Demonstrate the display units for the quantities&quot;</font>
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Quantities_Examples.html#FCSys.Quantities.Examples.ExampleModel">ExampleModel</a> doubleClickMe;
+  <a href="FCSys_Quantities_Examples.html#FCSys.Quantities.Examples.ExampleModel">ExampleModel</a> doubleClickMe;
 
 <font color="blue">end </font>Display;
 </pre>
@@ -77,10 +87,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h2><img src="images/FCSys.Quantities.Examples.ExampleModelI.png" alt="FCSys.Quantities.Examples.ExampleModel" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Quantities.Examples.ExampleModel"></a><a href="FCSys_Quantities_Examples.html#FCSys.Quantities.Examples">FCSys.Quantities.Examples</a>.ExampleModel</h2>
-<b>Model that uses all of the quantities</b><p>
-<p><h3>Information</h3></p>
+<b>Model that uses all of the quantities</b>
+
+<h3>Information</h3>
+
 Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous">FCSys.BaseClasses.Icons.Blocks.Continuous</a> (Icon for a continuous-time block).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Acceleration">Acceleration</a></td><td>Acceleration</td><td>1*U.m/U.s^2</td><td>Acceleration [l/T2]</td></tr>
@@ -94,10 +110,11 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CompressibilityDynamic">CompressibilityDynamic</a></td><td>CompressibilityDynamic</td><td>1*U.mol/(U.J*U.s)</td><td>Dynamic compressibility [N.T/(l2.m)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ConductanceElectrical">ConductanceElectrical</a></td><td>ConductanceElectrical</td><td>1*U.S</td><td>Electrical conductance [N2.T/(l2.m)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>Current</td><td>1*U.A</td><td>Current [N/T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAbsolute">CurrentAbsolute</a></td><td>CurrentAbsolute</td><td>1*U.A</td><td>Absolute current [N/T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">CurrentAreic</a></td><td>CurrentAreic</td><td>1*U.A/U.m^2</td><td>Areic current [N/(l2.T)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentRate">CurrentRate</a></td><td>CurrentRate</td><td>1*U.A/U.s</td><td>Rate of current [N/T2]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Energy">Energy</a></td><td>Energy</td><td>1*U.J</td><td>Energy [l2.m/T2]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.FluidityDynamic">FluidityDynamic</a></td><td>FluidityDynamic</td><td>1/(U.Pa*U.s)</td><td>Dynamic fluidity [l.T/m]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>Fluidity</td><td>1/(U.Pa*U.s)</td><td>Dynamic fluidity [l.T/m]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Force</a></td><td>Force</td><td>1*U.N</td><td>Force [l.m/T2]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Frequency">Frequency</a></td><td>Frequency</td><td>1*U.rad/U.s</td><td>Frequency [A/T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Inductance">Inductance</a></td><td>Inductance</td><td>1*U.H</td><td>Inductance [l2.m/N2]</td></tr>
@@ -139,12 +156,15 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificRate">VolumeSpecificRate</a></td><td>VolumeSpecificRate</td><td>1*U.m^3/(U.C*U.s)</td><td>Rate of specific volume [l3/(N.T)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Wavenumber">Wavenumber</a></td><td>Wavenumber</td><td>1*U.rad/U.m</td><td>Wavenumber [A/l]</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> ExampleModel <font color="darkgreen">&quot;Model that uses all of the quantities&quot;</font>
   <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous">FCSys.BaseClasses.Icons.Blocks.Continuous</a>;
 
-  <font color="darkgreen">// Generated from FCSys/resources/quantities.xls, 2013-1-20</font>
+  <font color="darkgreen">// Generated from FCSys/resources/quantities.xls, 2013-3-26</font>
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Acceleration">Q.Acceleration</a> Acceleration=1*U.m/U.s^2 <font color="darkgreen">&quot;Acceleration&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> Amount=1*U.C <font color="darkgreen">&quot;Amount&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.AmountReciprocal">Q.AmountReciprocal</a> AmountReciprocal=1/U.C <font color="darkgreen">&quot;Reciprocal amount&quot;</font>;
@@ -158,10 +178,11 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.ConductanceElectrical">Q.ConductanceElectrical</a> ConductanceElectrical=1*U.S <font color="darkgreen">
     &quot;Electrical conductance&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> Current=1*U.A <font color="darkgreen">&quot;Current&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAbsolute">Q.CurrentAbsolute</a> CurrentAbsolute=1*U.A <font color="darkgreen">&quot;Absolute current&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">Q.CurrentAreic</a> CurrentAreic=1*U.A/U.m^2 <font color="darkgreen">&quot;Areic current&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentRate">Q.CurrentRate</a> CurrentRate=1*U.A/U.s <font color="darkgreen">&quot;Rate of current&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Energy">Q.Energy</a> Energy=1*U.J <font color="darkgreen">&quot;Energy&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.FluidityDynamic">Q.FluidityDynamic</a> FluidityDynamic=1/(U.Pa*U.s) <font color="darkgreen">&quot;Dynamic fluidity&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Q.Fluidity</a> Fluidity=1/(U.Pa*U.s) <font color="darkgreen">&quot;Dynamic fluidity&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> Force=1*U.N <font color="darkgreen">&quot;Force&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Frequency">Q.Frequency</a> Frequency=1*U.rad/U.s <font color="darkgreen">&quot;Frequency&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Inductance">Q.Inductance</a> Inductance=1*U.H <font color="darkgreen">&quot;Inductance&quot;</font>;
@@ -219,7 +240,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:53:11 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Apr  1 08:53:20 2013.
 </div>
 </body>
 </html>

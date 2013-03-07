@@ -1,0 +1,294 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.WorkInProgress.Blocks.Continuous.Sources</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Sources<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.WorkInProgress.Blocks.Continuous.Sources"></A><A HREF="FCSys_WorkInProgress_Blocks_Continuous.html#FCSys.WorkInProgress.Blocks.Continuous"
+>FCSys.WorkInProgress.Blocks.Continuous</A>.Sources</H2>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_SourcesPackage.html#Modelica.Icons.SourcesPackage"
+>Modelica.Icons.SourcesPackage</A> (Icon for packages containing sources).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.Sources.RandomNormalS.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Sources.RandomNormal" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Continuous_Sources.html#FCSys.WorkInProgress.Blocks.Continuous.Sources.RandomNormal"
+>RandomNormal</A>
+</TD><TD>Generate a continuous signal of normal (Gaussian) random numbers</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.Sources.RandomUniformS.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Sources.RandomUniform" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Continuous_Sources.html#FCSys.WorkInProgress.Blocks.Continuous.Sources.RandomUniform"
+>RandomUniform</A>
+</TD><TD>Generate a continuous signal of uniform random numbers</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClassesS.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Continuous_Sources_BaseClasses.html#FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses"
+>BaseClasses</A>
+</TD><TD>Base classes (not generally for direct use)</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.Sources.ConstantS.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Sources.Constant" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Continuous_Sources.html#FCSys.WorkInProgress.Blocks.Continuous.Sources.Constant"
+>Constant</A>
+</TD><TD>Generate constant signal of type Real</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE RandomNormal<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.Sources.RandomNormalI.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Sources.RandomNormal" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Continuous.Sources.RandomNormal"></A><A HREF="FCSys_WorkInProgress_Blocks_Continuous_Sources.html#FCSys.WorkInProgress.Blocks.Continuous.Sources"
+>FCSys.WorkInProgress.Blocks.Continuous.Sources</A>.RandomNormal</H2>
+<B>Generate a continuous signal of normal (Gaussian) random numbers</B><p>
+<IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.Sources.RandomNormalD.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Sources.RandomNormal">
+<P><H3>Information</H3></P>
+<PRE></pre><p>The values of the sequence are normally distributed with mean <code>mu</code> and standard deviation <code>sigma</code>. The random numbers are (re)generated at the start of every simulation.</p>
+
+<p>Be sure to set <code>T_s</code> to be smaller than the smallest time step you expect during the simulation.  Otherwise, the output values will not be independent between the simulation time steps (i.e., the autocorrelation of the signal will be nonzero).</p>
+
+<p>Be sure to set <code>T_end</code> to be greater than or equal to the stop time of the simulation.  Otherwise, the sequence will be periodic over the simulation (i.e., it will repeat).  Also, in general, the first derivative of the sequence will be discontinuous even if <code>smoothness = Modelica.Blocks.Types.Smoothness.ContinuousDerivative</code>.</p>
+
+<p>The model uses the Box-Muller transform to generate normal random numbers from uniform random numbers.  It generates the uniform random numbers using <code>internal_twister_uniform()</code>.  This function uses the Mersenne twister pseudorandom number generator and its implementation is specific to Dymola (i.e., not general to Modelica).</p><pre></PRE><P>
+Extends from <A HREF="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous"
+>FCSys.BaseClasses.Icons.Blocks.Continuous</A> (Icon for a continuous-time block), <A HREF="FCSys_WorkInProgress_Blocks_BaseClasses.html#FCSys.WorkInProgress.Blocks.BaseClasses.MO"
+>FCSys.WorkInProgress.Blocks.BaseClasses.MO</A> (Multiple Output block).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>n_out</TD><TD>1</TD><TD>Number of outputs</TD></TR>
+<TR><TD>Real</TD><TD>mu[:]</TD><TD>0*ones(n_out)</TD><TD>Mean or expected value(s) of the random signal(s)</TD></TR>
+<TR><TD>Real</TD><TD>sigma[size(mu, 1)]</TD><TD>0.5*ones(n_out)</TD><TD>Standard deviation(s) of the random signal(s)</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Advanced</TD></TR>
+<TR><TD>&nbsp;</TD><TD>T_s</TD><TD>0.002</TD><TD>Sample time (i.e., sample period)</TD></TR>
+<TR><TD>&nbsp;</TD><TD>T_end</TD><TD>1</TD><TD>End time (i.e., sequence period)</TD></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Types.html#Modelica.Blocks.Types.Smoothness"
+>Smoothness</A></TD><TD>smoothness</TD><TD>Modelica.Blocks.Types.Smooth...</TD><TD>Smoothness of sample interpolation</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>output <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>RealOutput</A></TD><TD>y[n_out]</TD><TD>Connector of Real output signals</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> RandomNormal <font color="darkgreen">
+  &quot;Generate a continuous signal of normal (Gaussian) random numbers&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous"
+>FCSys.BaseClasses.Icons.Blocks.Continuous</A>;
+  <font color="blue">extends </font><A HREF="FCSys_WorkInProgress_Blocks_BaseClasses.html#FCSys.WorkInProgress.Blocks.BaseClasses.MO"
+>FCSys.WorkInProgress.Blocks.BaseClasses.MO</A>;
+  <font color="blue">parameter </font>Real mu[:]=0*<font color="red">ones</font>(n_out) <font color="darkgreen">
+    &quot;Mean or expected value(s) of the random signal(s)&quot;</font>;
+  <font color="blue">parameter </font>Real sigma[<font color="red">size</font>(mu, 1)]=0.5*<font color="red">ones</font>(n_out) <font color="darkgreen">
+    &quot;Standard deviation(s) of the random signal(s)&quot;</font>;
+  <font color="darkgreen">// Note KLD 1/8/10: without annotation(Evaluate=true), Dymola doesn&#39;t seem to recognize internal_twister_uniform() when sigma=ones(n_out)</font>
+  <font color="blue">parameter </font>SI.Time T_s=0.002 <font color="darkgreen">&quot;Sample time (i.e., sample period)&quot;</font>;
+  <font color="blue">parameter </font>SI.Time T_end=1 <font color="darkgreen">&quot;End time (i.e., sequence period)&quot;</font>;
+  <font color="blue">parameter </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Types.html#Modelica.Blocks.Types.Smoothness"
+>Modelica.Blocks.Types.Smoothness</A> smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative
+    <font color="darkgreen">&quot;Smoothness of sample interpolation&quot;</font>;
+
+<font color="blue">protected </font>
+  <font color="blue">final </font><font color="blue">parameter </font>Real mu_internal[n_out]=(<font color="blue">if </font><font color="red">size</font>(mu, 1) == 1<font color="blue"> then </font>mu[1]*<font color="red">ones</font>(
+      n_out)<font color="blue"> else </font>mu) <font color="darkgreen">
+    &quot;Mean or expected value(s) of random signal(s), with entries for every signal&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Real sigma_internal[n_out]=(<font color="blue">if </font><font color="red">size</font>(sigma, 1) == 1<font color="blue"> then </font>sigma[
+      1]*<font color="red">ones</font>(n_out)<font color="blue"> else </font>sigma) <font color="darkgreen">
+    &quot;Standard deviation(s) of random signal(s), with entries for every signal&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_s=<font color="red">integer</font>(T_end/T_s) + 1 <font color="darkgreen">&quot;Number of samples&quot;</font>;
+  Real table[n_s, n_out + 1] <font color="darkgreen">
+    &quot;Matrix of normal random numbers (the first column is time /s)&quot;</font>;
+  Integer tableID <font color="darkgreen">&quot;table identification number&quot;</font>;
+
+<textblock type="annotcomp" expanded="false"><font color="blue">public </font>
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>Connectors.RealOutput</A> y[n_out] <font color="darkgreen">&quot;Connector of Real output signals&quot;</font>;</textblock>
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Interpolate data from the table</font>
+  <font color="blue">for </font>i<font color="blue"> in </font>1:n_out<font color="blue"> loop</font>
+    y[i] = <font color="red">
+      FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeIpo</font>(
+      tableID=tableID,
+      icol=i + 1,
+      timeIn=time);
+  <font color="blue">end for</font>;
+  <font color="blue">when </font><font color="red">initial</font>()<font color="blue"> then</font>
+    <font color="darkgreen">// (Re)generate the table of random numbers</font>
+    table[:, 1] = 0:T_s:T_end <font color="darkgreen">&quot;time column&quot;</font>;
+    <font color="blue">for </font>i<font color="blue"> in </font>1:n_out<font color="blue"> loop</font>
+      <font color="darkgreen">// random numbers</font>
+      table[:, i + 1] = <font color="red">FCSys.WorkInProgress.Blocks.BaseClasses.randn</font>(
+        mu=mu_internal[i],
+        sigma=sigma_internal[i],
+        n=n_s);
+    <font color="blue">end for</font>;
+    <font color="darkgreen">// Initialize the table interpolation function</font>
+    tableID = <font color="red">
+      FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeInit</font>(
+      tableName=&quot;NoName&quot;,
+      fileName=&quot;NoName&quot;,
+      table=table,
+      startTime=0,
+      smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative,
+      extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic);
+  <font color="blue">end when</font>;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>RandomNormal;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE RandomUniform<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.Sources.RandomUniformI.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Sources.RandomUniform" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Continuous.Sources.RandomUniform"></A><A HREF="FCSys_WorkInProgress_Blocks_Continuous_Sources.html#FCSys.WorkInProgress.Blocks.Continuous.Sources"
+>FCSys.WorkInProgress.Blocks.Continuous.Sources</A>.RandomUniform</H2>
+<B>Generate a continuous signal of uniform random numbers</B><p>
+<IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.Sources.RandomNormalD.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Sources.RandomUniform">
+<P><H3>Information</H3></P>
+<PRE></pre><p>The values of the sequence are uniformly distributed over the range <code>[x_min, x_max)</code>. The random numbers are (re)generated at the start of every simulation.</p>
+
+<p>Be sure to set <code>T_s</code> to be smaller than the smallest time step you expect during the simulation.  Otherwise, the output values will not be independent between the simulation time steps (i.e., the autocorrelation of the signal will be nonzero).</p>
+
+<p>Be sure to set <code>T_end</code> to be greater than or equal to the stop time of the simulation.  Otherwise, the sequence will be periodic over the simulation (i.e., it will repeat).  Also, in general, the first derivative of the sequence will be discontinuous even if <code>smoothness = Modelica.Blocks.Types.Smoothness.ContinuousDerivative</code>.</p>
+
+<p>The model generates uniform random numbers using <code>internal_twister_uniform()</code>.  This function uses the Mersenne twister pseudorandom number generator and its implementation is specific to Dymola (i.e., not general to Modelica).</p><pre></PRE><P>
+Extends from <A HREF="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous"
+>FCSys.BaseClasses.Icons.Blocks.Continuous</A> (Icon for a continuous-time block), <A HREF="FCSys_WorkInProgress_Blocks_BaseClasses.html#FCSys.WorkInProgress.Blocks.BaseClasses.MO"
+>FCSys.WorkInProgress.Blocks.BaseClasses.MO</A> (Multiple Output block).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>n_out</TD><TD>1</TD><TD>Number of outputs</TD></TR>
+<TR><TD>Real</TD><TD>x_min[:]</TD><TD>-0.5*ones(n_out)</TD><TD>Lower bound(s) of the random signal(s)</TD></TR>
+<TR><TD>Real</TD><TD>x_max[size(x_min, 1)]</TD><TD>0.5*ones(n_out)</TD><TD>Upper bound(s) of the random signal(s)</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Advanced</TD></TR>
+<TR><TD>&nbsp;</TD><TD>T_s</TD><TD>0.002</TD><TD>Sample time (i.e., sample period)</TD></TR>
+<TR><TD>&nbsp;</TD><TD>T_end</TD><TD>1</TD><TD>End time (i.e., sequence period)</TD></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Types.html#Modelica.Blocks.Types.Smoothness"
+>Smoothness</A></TD><TD>smoothness</TD><TD>Modelica.Blocks.Types.Smooth...</TD><TD>Smoothness of sample interpolation</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>output <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>RealOutput</A></TD><TD>y[n_out]</TD><TD>Connector of Real output signals</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> RandomUniform <font color="darkgreen">
+  &quot;Generate a continuous signal of uniform random numbers&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous"
+>FCSys.BaseClasses.Icons.Blocks.Continuous</A>;
+  <font color="blue">extends </font><A HREF="FCSys_WorkInProgress_Blocks_BaseClasses.html#FCSys.WorkInProgress.Blocks.BaseClasses.MO"
+>FCSys.WorkInProgress.Blocks.BaseClasses.MO</A>;
+  <font color="blue">parameter </font>Real x_min[:]=-0.5*<font color="red">ones</font>(n_out) <font color="darkgreen">
+    &quot;Lower bound(s) of the random signal(s)&quot;</font>;
+  <font color="blue">parameter </font>Real x_max[<font color="red">size</font>(x_min, 1)]=0.5*<font color="red">ones</font>(n_out) <font color="darkgreen">
+    &quot;Upper bound(s) of the random signal(s)&quot;</font>;
+  <font color="blue">parameter </font>SI.Time T_s=0.002 <font color="darkgreen">&quot;Sample time (i.e., sample period)&quot;</font>;
+  <font color="blue">parameter </font>SI.Time T_end=1 <font color="darkgreen">&quot;End time (i.e., sequence period)&quot;</font>;
+  <font color="blue">parameter </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Types.html#Modelica.Blocks.Types.Smoothness"
+>Modelica.Blocks.Types.Smoothness</A> smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative
+    <font color="darkgreen">&quot;Smoothness of sample interpolation&quot;</font>;
+
+<font color="blue">protected </font>
+  <font color="blue">final </font><font color="blue">parameter </font>Real x_min_internal[n_out]=(<font color="blue">if </font><font color="red">size</font>(x_min, 1) == 1<font color="blue"> then </font><font color="red">ones</font>(
+      n_out)*x_min[1]<font color="blue"> else </font>x_min) <font color="darkgreen">
+    &quot;Lower bound(s) of random signal(s), with entries for every signal&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Real x_max_internal[n_out]=(<font color="blue">if </font><font color="red">size</font>(x_max, 1) == 1<font color="blue"> then </font><font color="red">ones</font>(
+      n_out)*x_max[1]<font color="blue"> else </font>x_max) <font color="darkgreen">
+    &quot;Upper bound(s) of random signal(s), with entries for every signal&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_s=<font color="red">integer</font>(T_end/T_s) + 1 <font color="darkgreen">&quot;Number of samples&quot;</font>;
+  Real table[n_s, n_out + 1] <font color="darkgreen">
+    &quot;Matrix of uniform random numbers (the first column is time /s)&quot;</font>;
+  Integer tableID <font color="darkgreen">&quot;table identification number&quot;</font>;
+
+<textblock type="annotcomp" expanded="false"><font color="blue">public </font>
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>Connectors.RealOutput</A> y[n_out] <font color="darkgreen">&quot;Connector of Real output signals&quot;</font>;</textblock>
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Interpolate data from the table</font>
+  <font color="blue">for </font>i<font color="blue"> in </font>1:n_out<font color="blue"> loop</font>
+    y[i] = <font color="red">
+      FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeIpo</font>(
+      tableID=tableID,
+      icol=i + 1,
+      timeIn=time);
+  <font color="blue">end for</font>;
+  <font color="blue">when </font><font color="red">initial</font>()<font color="blue"> then</font>
+    <font color="darkgreen">// Check the min/max range</font>
+    <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(x_min, 1)<font color="blue"> loop</font>
+      <font color="red">assert</font>(x_min[i] &lt; x_max[i], &quot;Entry &quot; + <font color="red">String</font>(i) + &quot; of x_min is greater than that of x_max.&quot;);
+    <font color="blue">end for</font>;
+    <font color="darkgreen">// (Re)generate the table of random numbers</font>
+    table[:, 1] = 0:T_s:T_end <font color="darkgreen">&quot;time column&quot;</font>;
+    <font color="blue">for </font>i<font color="blue"> in </font>1:n_out<font color="blue"> loop</font>
+      <font color="darkgreen">// random numbers</font>
+      table[:, i + 1] = <font color="red">FCSys.WorkInProgress.Blocks.BaseClasses.randu</font>(
+        x_min=x_min_internal[i],
+        x_max=x_max_internal[i],
+        n=n_s);
+    <font color="blue">end for</font>;
+    <font color="darkgreen">// Initialize the table interpolation function</font>
+    tableID = <font color="red">
+      FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeInit</font>(
+      tableName=&quot;NoName&quot;,
+      fileName=&quot;NoName&quot;,
+      table=table,
+      startTime=0,
+      smoothness=smoothness,
+      extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic);
+  <font color="blue">end when</font>;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>RandomUniform;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Constant<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.Sources.ConstantI.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Sources.Constant" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Continuous.Sources.Constant"></A><A HREF="FCSys_WorkInProgress_Blocks_Continuous_Sources.html#FCSys.WorkInProgress.Blocks.Continuous.Sources"
+>FCSys.WorkInProgress.Blocks.Continuous.Sources</A>.Constant</H2>
+<B>Generate constant signal of type Real</B><p>
+<IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.Sources.ConstantD.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Sources.Constant">
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous"
+>FCSys.BaseClasses.Icons.Blocks.Continuous</A> (Icon for a continuous-time block), <A HREF="FCSys_WorkInProgress_Blocks_BaseClasses.html#FCSys.WorkInProgress.Blocks.BaseClasses.MO"
+>FCSys.WorkInProgress.Blocks.BaseClasses.MO</A> (Multiple Output block).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>k[:]</TD><TD>&nbsp;</TD><TD>Constant output value(s)</TD></TR>
+<TR><TD>Integer</TD><TD>n_out</TD><TD>size(k, 1)</TD><TD>Number of outputs</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>output <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>RealOutput</A></TD><TD>y[n_out]</TD><TD>Connector of Real output signals</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">block</font> Constant <font color="darkgreen">&quot;Generate constant signal of type Real&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous"
+>FCSys.BaseClasses.Icons.Blocks.Continuous</A>;
+  <font color="blue">parameter </font>Real k[:] <font color="darkgreen">&quot;Constant output value(s)&quot;</font>;
+  <font color="blue">extends </font><A HREF="FCSys_WorkInProgress_Blocks_BaseClasses.html#FCSys.WorkInProgress.Blocks.BaseClasses.MO"
+>FCSys.WorkInProgress.Blocks.BaseClasses.MO</A>(<font color="blue">final </font>n_out=<font color="red">size</font>(k, 1));
+
+<font color="blue">equation </font>
+  y = k;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Constant;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 01:13:49 2013.
+</address></BODY>
+</HTML>

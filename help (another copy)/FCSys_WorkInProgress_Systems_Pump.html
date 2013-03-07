@@ -1,0 +1,89 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.WorkInProgress.Systems.Pump</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Pump<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.WorkInProgress.Systems.Pump"></A><A HREF="FCSys_WorkInProgress_Systems.html#FCSys.WorkInProgress.Systems"
+>FCSys.WorkInProgress.Systems</A>.Pump</H2>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package"
+>Modelica.Icons.Package</A> (Icon for standard packages).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Systems.Pump.PumpS.png" ALT="FCSys.WorkInProgress.Systems.Pump.Pump" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Systems_Pump.html#FCSys.WorkInProgress.Systems.Pump.Pump"
+>Pump</A>
+</TD><TD>&nbsp;</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Systems.Pump.InterfacesS.png" ALT="FCSys.WorkInProgress.Systems.Pump.Interfaces" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Systems_Pump_Interfaces.html#FCSys.WorkInProgress.Systems.Pump.Interfaces"
+>Interfaces</A>
+</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Pump<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Systems.Pump.PumpI.png" ALT="FCSys.WorkInProgress.Systems.Pump.Pump" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Systems.Pump.Pump"></A><A HREF="FCSys_WorkInProgress_Systems_Pump.html#FCSys.WorkInProgress.Systems.Pump"
+>FCSys.WorkInProgress.Systems.Pump</A>.Pump</H2>
+<IMG SRC="FCSys.WorkInProgress.Systems.Pump.PumpD.png" ALT="FCSys.WorkInProgress.Systems.Pump.Pump">
+<P><H3>Information</H3></P>
+Extends from FCSys.WorkInProgress.BaseClassesIconsPump.
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>wireN</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>wireP</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="FCSys_WorkInProgress_Systems_Pump_Interfaces.html#FCSys.WorkInProgress.Systems.Pump.Interfaces.ActBusIn"
+>ActBusIn</A></TD><TD>actBusIn</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="FCSys_WorkInProgress_Systems_Pump_Interfaces.html#FCSys.WorkInProgress.Systems.Pump.Interfaces.SenBusOut"
+>SenBusOut</A></TD><TD>senBusOut</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>pipeP</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>pipeN</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Pump
+  <font color="darkgreen">// TODO:  Complete this.</font>
+
+  <font color="blue">extends </font>FCSys.WorkInProgress.BaseClassesIconsPump;
+  <font color="darkgreen">// extends FCSys.Processes.BaseClasses.PartialTransport.Middle;</font>
+  <font color="darkgreen">// extends FCSys.Processes.BaseClasses.PartialTransport.Bottom2;</font>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>Connectors.FaceBus</A> wireN;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>Connectors.FaceBus</A> wireP;
+  <A HREF="FCSys_WorkInProgress_Systems_Pump_Interfaces.html#FCSys.WorkInProgress.Systems.Pump.Interfaces.ActBusIn"
+>FCSys.WorkInProgress.Systems.Pump.Interfaces.ActBusIn</A> actBusIn;
+  <A HREF="FCSys_WorkInProgress_Systems_Pump_Interfaces.html#FCSys.WorkInProgress.Systems.Pump.Interfaces.SenBusOut"
+>FCSys.WorkInProgress.Systems.Pump.Interfaces.SenBusOut</A> senBusOut;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>Connectors.FaceBus</A> pipeP;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>Connectors.FaceBus</A> pipeN;
+
+<font color="blue">end </font>Pump;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 01:14:56 2013.
+</address></BODY>
+</HTML>

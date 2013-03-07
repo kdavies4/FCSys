@@ -1,0 +1,396 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.BaseClasses.Utilities.Chemistry</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Functions to support chemistry&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Chemistry<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.BaseClasses.Utilities.Chemistry"></A><A HREF="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities"
+>FCSys.BaseClasses.Utilities</A>.Chemistry</H2>
+<B>Functions to support chemistry</B>
+<P>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package"
+>Modelica.Icons.Package</A> (Icon for standard packages).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.BaseClasses.Utilities.Chemistry.chargeS.png" ALT="FCSys.BaseClasses.Utilities.Chemistry.charge" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry.charge"
+>charge</A>
+</TD><TD>Return the charge of a species given its chemical formula</TD></TR>
+<TR><TD><IMG SRC="FCSys.BaseClasses.Utilities.Chemistry.countElementsS.png" ALT="FCSys.BaseClasses.Utilities.Chemistry.countElements" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry.countElements"
+>countElements</A>
+</TD><TD>Return the number of elements in a chemical formula</TD></TR>
+<TR><TD><IMG SRC="FCSys.BaseClasses.Utilities.Chemistry.countElementsS.png" ALT="FCSys.BaseClasses.Utilities.Chemistry.elements" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry.elements"
+>elements</A>
+</TD><TD>Return the symbols and coefficients of the elements in a chemical formula</TD></TR>
+<TR><TD><IMG SRC="FCSys.BaseClasses.Utilities.Chemistry.readElementS.png" ALT="FCSys.BaseClasses.Utilities.Chemistry.readElement" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry.readElement"
+>readElement</A>
+</TD><TD>Return the symbol, coefficient, and charge of an element at an index in a chemical formula</TD></TR>
+<TR><TD><IMG SRC="FCSys.BaseClasses.Utilities.Chemistry.stoichS.png" ALT="FCSys.BaseClasses.Utilities.Chemistry.stoich" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry.stoich"
+>stoich</A>
+</TD><TD>Return stoichiometric coefficients of a reaction based on chemical formulas of reacting species</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE charge<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.BaseClasses.Utilities.Chemistry.charge"></A><A HREF="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry"
+>FCSys.BaseClasses.Utilities.Chemistry</A>.charge</H2>
+<B>Return the charge of a species given its chemical formula</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre><p>This function returns the net
+  electrical charge associated with a species represented by a chemical
+  formula (<code>formula</code>).  If the charge number is
+  not given explicitly in the formula, then it is assumed to be zero.  A "+" or "-" without any immediately following digits is interpreted as
+  a charge of +1 or -1, respectively.  If there is an error in the chemical formula,
+  then 0 is returned.</p>
+
+  <p><b>Example:</b><br>
+  <code>charge("Hg2+2")</code> returns 2.</p>
+  <pre></PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>formula</TD><TD>&nbsp;</TD><TD>Chemical formula</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>z</TD><TD>Charge number</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> charge <font color="darkgreen">
+  &quot;Return the charge of a species given its chemical formula&quot;</font>
+
+  <font color="blue">input </font>String formula <font color="darkgreen">&quot;Chemical formula&quot;</font>;
+  <font color="blue">output </font>Integer z <font color="darkgreen">&quot;Charge number&quot;</font>;
+
+<font color="blue">external</font>&quot;C&quot;;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>charge;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE countElements<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.BaseClasses.Utilities.Chemistry.countElementsI.png" ALT="FCSys.BaseClasses.Utilities.Chemistry.countElements" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.BaseClasses.Utilities.Chemistry.countElements"></A><A HREF="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry"
+>FCSys.BaseClasses.Utilities.Chemistry</A>.countElements</H2>
+<B>Return the number of elements in a chemical formula</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre><p>This function returns the number of elements
+      in a chemical formula.  Electrons are counted as a present element (or rather particle)
+      if the net charge is nonzero.</p>
+
+      <p><b>Examples:</b><br>
+    <code>countElements("C19HF37O5S-")</code> returns 5 and <code>countElements("H+")</code> returns 2.</p>
+
+  <p>See the
+  <a href="modelica://FCSys.BaseClasses.Utilities.ReadFormula">ReadFormula</a> function
+  for details about the format of the chemical formula.</p><pre></PRE><P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for functions).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>formula</TD><TD>&nbsp;</TD><TD>Chemical formula</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>n</TD><TD>Number of elements</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> countElements <font color="darkgreen">
+  &quot;Return the number of elements in a chemical formula&quot;</font>
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+
+  <font color="blue">input </font>String formula <font color="darkgreen">&quot;Chemical formula&quot;</font>;
+  <font color="blue">output </font>Integer n <font color="darkgreen">&quot;Number of elements&quot;</font>;
+
+<font color="blue">external</font>&quot;C&quot;;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>countElements;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE elements<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.BaseClasses.Utilities.Chemistry.countElementsI.png" ALT="FCSys.BaseClasses.Utilities.Chemistry.elements" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.BaseClasses.Utilities.Chemistry.elements"></A><A HREF="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry"
+>FCSys.BaseClasses.Utilities.Chemistry</A>.elements</H2>
+<B>Return the symbols and coefficients of the elements in a chemical formula</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre><p>This function reads a chemical formula
+  (<code>formula</code>) and returns the symbols (<code>symbols</code>)
+  and coefficients (<code>coeffs</code>).  Each element
+  is interpreted according to the rules in the
+  <A HREF="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry.readElement"
+>readElement</a> function.
+  Currently, <code>formula</code> may not contain parentheses or brackets.</p>
+
+  <p>The symbols correspond to chemical/physical elements or electrons ("e-").
+  Electrons are listed if the charge is nonzero.</p>
+
+  <p><b>Example:</b><br>
+  <code>(symbols, coeffs) = elements("C19HF37O5S-")</code> returns
+  <code>symbols={"C", "H", "F", "O", "S", "e-"}</code> and <code>coeffs={19, 1, 37, 5, 1, 1}</code>.</p><pre></PRE><P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for functions).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>formula</TD><TD>&nbsp;</TD><TD>Chemical formula</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>symbols[countElements(formula)]</TD><TD>Symbols of the elements</TD></TR>
+<TR><TD>Integer</TD><TD>coeffs[size(symbols, 1)]</TD><TD>Coefficients of the elements</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> elements <font color="darkgreen">
+  &quot;Return the symbols and coefficients of the elements in a chemical formula&quot;</font>
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+
+  <font color="blue">input </font>String formula <font color="darkgreen">&quot;Chemical formula&quot;</font>;
+  <font color="blue">output </font>String symbols[<font color="red">countElements</font>(formula)] <font color="darkgreen">&quot;Symbols of the elements&quot;</font>;
+  <font color="blue">output </font>Integer coeffs[<font color="red">size</font>(symbols, 1)] <font color="darkgreen">&quot;Coefficients of the elements&quot;</font>;
+  <font color="darkgreen">// Note:  coeffs[countElements(formula)] would require redundant</font>
+  <font color="darkgreen">// computation.</font>
+
+<font color="blue">protected </font>
+  Integer z <font color="darkgreen">&quot;Charge number&quot;</font>;
+  Integer z_net=0 <font color="darkgreen">&quot;Net charge&quot;</font>;
+  Integer i=1 <font color="darkgreen">&quot;index of element&quot;</font>;
+  Integer j=1 <font color="darkgreen">&quot;index of character in formula string&quot;</font>;
+  Integer length=<font color="red">Modelica.Utilities.Strings.length</font>(formula) <font color="darkgreen">&quot;Length of formula&quot;</font>;
+
+<font color="blue">algorithm </font>
+  <font color="darkgreen">// Read the elements.</font>
+  <font color="blue">while </font>j &lt;= length<font color="blue"> loop</font>
+    (symbols[i],coeffs[i],z,j) := <font color="red">readElement</font>(formula, j);
+    <font color="red">assert</font>(j &lt;&gt; 0, &quot;The formula is invalid.&quot;);
+    z_net := z_net + z;
+    <font color="blue">if </font>symbols[i] &lt;&gt; &quot;e&quot;<font color="blue"> then</font>
+      i := i + 1;
+      <font color="darkgreen">// Electrons are counted below.</font>
+    <font color="blue">end if</font>;
+  <font color="blue">end while</font>;
+
+  <font color="darkgreen">// Add electrons according to the charge.</font>
+  <font color="blue">if </font>z_net &lt;&gt; 0<font color="blue"> then</font>
+    symbols[i] := &quot;e-&quot;;
+    coeffs[i] := -z_net;
+  <font color="blue">end if</font>;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>elements;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE readElement<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.BaseClasses.Utilities.Chemistry.readElement"></A><A HREF="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry"
+>FCSys.BaseClasses.Utilities.Chemistry</A>.readElement</H2>
+<B>Return the symbol, coefficient, and charge of an element at an index in a chemical formula</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre><p>This function returns the symbol (<code>symbol</code>),
+  stoichiometric coefficient (<code>coeff</code>), and
+  electrical charge (<code>z</code>) associated with an element as it appears in a chemical
+  formula (<code>formula</code>).  The <code>formula</code> string is read beginning
+  at <code>startindex</code>. After any initial whitespace, which is ignored,  the
+  symbol must begin with a letter and may continue with lowercase letters.  The symbol may be
+  followed by a positive integer and then a charge number (both independently optional).
+  If present, the charge number must begin with "+" or "-" and may be followed by optional digits.
+  The <code>nextindex</code> output gives the index in the <code>formula</code> string after the symbol
+  and the associated information.</p>
+
+  <p>If the coefficient is not explicitly given, then it is assumed to be one.  If the charge number is
+  not given, then it is assumed to be zero.  A "+" or "-" without following digits is interpreted as
+  a charge of +1 or -1, respectively.  If there is an error,
+  then <code>nextindex</code> will be zero.  Both <code>startindex</code> and <code>nextindex</code> are
+  one-based indices (Modelica compatible).</p>
+
+  <p><b>Example:</b><br>
+  <code>(symbol, coeff, z, nextindex) = ReadFormula("Hg2+2")</code> returns
+  <code>symbol="Hg"</code>, <code>coeff=2</code>, <code>z=2</code>, and <code>nextindex=6</code>.</p>
+  <pre></PRE><P>
+
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>formula</TD><TD>&nbsp;</TD><TD>Chemical formula</TD></TR>
+<TR><TD>Integer</TD><TD>startindex</TD><TD>1</TD><TD>Start index</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>symbol</TD><TD>Name of element</TD></TR>
+<TR><TD>Integer</TD><TD>coeff</TD><TD>Stoichiometric coefficient</TD></TR>
+<TR><TD>Integer</TD><TD>z</TD><TD>Charge number</TD></TR>
+<TR><TD>Integer</TD><TD>nextindex</TD><TD>index after the found element (0 if error)</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> readElement <font color="darkgreen">
+  &quot;Return the symbol, coefficient, and charge of an element at an index in a chemical formula&quot;</font>
+
+  <font color="blue">input </font>String formula <font color="darkgreen">&quot;Chemical formula&quot;</font>;
+  <font color="blue">input </font>Integer startindex(min=1) = 1 <font color="darkgreen">&quot;Start index&quot;</font>;
+  <font color="blue">output </font>String symbol <font color="darkgreen">&quot;Name of element&quot;</font>;
+  <font color="blue">output </font>Integer coeff <font color="darkgreen">&quot;Stoichiometric coefficient&quot;</font>;
+  <font color="blue">output </font>Integer z <font color="darkgreen">&quot;Charge number&quot;</font>;
+  <font color="blue">output </font>Integer nextindex <font color="darkgreen">&quot;index after the found element (0 if error)&quot;</font>;
+
+<font color="blue">external</font>&quot;C&quot; <font color="red">readElement</font>(
+    formula,
+    startindex,
+    symbol,
+    coeff,
+    z,
+    nextindex);
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>readElement;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE stoich<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.BaseClasses.Utilities.Chemistry.stoichI.png" ALT="FCSys.BaseClasses.Utilities.Chemistry.stoich" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.BaseClasses.Utilities.Chemistry.stoich"></A><A HREF="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry"
+>FCSys.BaseClasses.Utilities.Chemistry</A>.stoich</H2>
+<B>Return stoichiometric coefficients of a reaction based on chemical formulas of reacting species</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre><p>This function returns a vector of
+  stoichiometric coefficients (<code>nu</code>) that balance a chemical reaction
+  among the species given by a vector of chemical formulas (<code>formulas</code>).
+  If the reaction is ill-posed or non-unique, then the function will fail with
+  a message.  Each formula is interpreted according to the rules in the
+  <a href="modelica://FCSys.BaseClasses.Utilities.ReadFormula">ReadFormula</a>
+  function.</p>
+
+  <p><b>Example:</b><br>
+  <code>stoich({"e-","H+","O2","H2O"})</code> returns <code>{-4,-4,-1,2}</code>,
+  which indicates the reaction 4e<sup>-</sup> + 4H<sup>+</sup> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O.</p>
+  <pre></PRE><P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for functions).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>formulas[:]</TD><TD>&nbsp;</TD><TD>Chemical formulas of the species</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>nu[size(formulas, 1)]</TD><TD>Stoichiometric coefficients</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> stoich <font color="darkgreen">
+  &quot;Return stoichiometric coefficients of a reaction based on chemical formulas of reacting species&quot;</font>
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+
+  <font color="blue">input </font>String formulas[:] <font color="darkgreen">&quot;Chemical formulas of the species&quot;</font>;
+  <font color="blue">output </font>Integer nu[<font color="red">size</font>(formulas, 1)] <font color="darkgreen">&quot;Stoichiometric coefficients&quot;</font>;
+
+<font color="blue">protected </font>
+  Integer n_species=<font color="red">size</font>(formulas, 1) <font color="darkgreen">&quot;Number of species&quot;</font>;
+  Integer n_elements[n_species]=<font color="red">countElements</font>(formulas) <font color="darkgreen">
+    &quot;Number of elements within each species&quot;</font>;
+  Integer n_tot=<font color="red">sum</font>(n_elements) <font color="darkgreen">&quot;Total number of elements&quot;</font>;
+  String allSymbols[n_tot] <font color="darkgreen">&quot;Symbols of all the elementary components&quot;</font>;
+  String symbols[n_species, <font color="red">max</font>(n_elements)] <font color="darkgreen">
+    &quot;Symbols of the elements of each species&quot;</font>;
+  Integer coeffs[n_species, <font color="red">max</font>(n_elements)] <font color="darkgreen">
+    &quot;Coefficients of the elements of each species&quot;</font>;
+  Integer i <font color="darkgreen">&quot;index&quot;</font>;
+  Integer j=1 <font color="darkgreen">&quot;index&quot;</font>;
+  Real d[n_species] <font color="darkgreen">&quot;Diagonal entries of SVD&quot;</font>;
+  Real u[n_species, n_species] <font color="darkgreen">&quot;1st unitary matrix of SVD&quot;</font>;
+  Real v[n_species, n_species] <font color="darkgreen">&quot;2nd unitary matrix of SVD&quot;</font>;
+  Real minabs <font color="darkgreen">
+    &quot;Minimum magnitude of the unnormalized stoichiometric coefficients&quot;</font>;
+  Real elementCoeffs[n_species, n_tot] <font color="darkgreen">&quot;Elementary coefficients&quot;</font>;
+
+<font color="blue">algorithm </font>
+  <font color="darkgreen">// Generate a list of all the symbols.</font>
+  <font color="blue">for </font>i<font color="blue"> in </font>1:n_species<font color="blue"> loop</font>
+    (symbols[i, 1:n_elements[i]],coeffs[i, 1:n_elements[i]]) := <font color="red">elements</font>(
+      formulas[i]);
+    allSymbols[j:j + n_elements[i] - 1] := symbols[i, 1:n_elements[i]];
+    j := j + n_elements[i];
+  <font color="blue">end for</font>;
+
+  <font color="darkgreen">// Reduce the list to a (unique) set.</font>
+  i := 1;
+  <font color="blue">while </font>i &lt; n_tot<font color="blue"> loop</font>
+    j := i + 1;
+    <font color="blue">while </font>j &lt;= n_tot<font color="blue"> loop</font>
+      <font color="blue">if </font>allSymbols[i] == allSymbols[j]<font color="blue"> then</font>
+        allSymbols[j] := allSymbols[n_tot];
+        n_tot := n_tot - 1;
+      <font color="blue">else</font>
+        j := j + 1;
+      <font color="blue">end if</font>;
+    <font color="blue">end while</font>;
+    i := i + 1;
+  <font color="blue">end while</font>;
+  <font color="darkgreen">// Note:  While loops are used since the upper bound changes.</font>
+
+  <font color="darkgreen">// Find the elementary coefficients for each species in terms of the</font>
+  <font color="darkgreen">// unique list of symbols.</font>
+  elementCoeffs[:, 1:n_tot] := <font color="red">zeros</font>(n_species, n_tot);
+  <font color="blue">for </font>i<font color="blue"> in </font>1:n_species<font color="blue"> loop</font>
+    <font color="blue">for </font>j<font color="blue"> in </font>1:n_elements[i]<font color="blue"> loop</font>
+      <font color="blue">for </font>k<font color="blue"> in </font>1:n_tot<font color="blue"> loop</font>
+        <font color="blue">if </font>allSymbols[k] == symbols[i, j]<font color="blue"> then</font>
+          elementCoeffs[i, k] := coeffs[i, j];
+          break;
+        <font color="blue">end if</font>;
+      <font color="blue">end for</font>;
+    <font color="blue">end for</font>;
+  <font color="blue">end for</font>;
+
+  <font color="darkgreen">// Perform singular value decomposition (SVD).</font>
+  <font color="red">assert</font>(n_species == n_tot + 1, &quot;The reaction is ill-posed.
+&quot; + (<font color="blue">if </font>n_species &gt; n_tot + 1<font color="blue"> then </font>&quot;A species may be included more than once.&quot;<font color="blue">
+     else </font>&quot;A species may be missing or the wrong one has been entered.&quot;));
+  (d,u,v) := <font color="red">Modelica.Math.Matrices.singularValues</font>(<font color="red">cat</font>(
+    2,
+    elementCoeffs[:, 1:n_tot],
+    <font color="red">zeros</font>(n_species, 1)));
+  <font color="darkgreen">// This approach is based on [Reichert2010].</font>
+
+  <font color="darkgreen">// Extract the stoichiometric coefficients and normalize them.</font>
+  minabs := <font color="red">min</font>(<font color="red">abs</font>(u[:, <font color="blue">end</font>]));
+  <font color="red">assert</font>(minabs &gt; 0, &quot;The reaction is ill-posed.
+An unrelated species may be included.&quot;);
+  nu := <font color="red">round</font>(u[:, <font color="blue">end</font>]/minabs);
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>stoich;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 01:12:33 2013.
+</address></BODY>
+</HTML>

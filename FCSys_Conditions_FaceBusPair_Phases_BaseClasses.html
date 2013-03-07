@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.FaceBusPair.Phases.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="Base classes (not generally for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,11 +45,15 @@
       <div class="body">
 
 <h2><a name="FCSys.Conditions.FaceBusPair.Phases.BaseClasses"></a><a href="FCSys_Conditions_FaceBusPair_Phases.html#FCSys.Conditions.FaceBusPair.Phases">FCSys.Conditions.FaceBusPair.Phases</a>.BaseClasses</h2>
+
 <b>Base classes (not generally for direct use)</b>
-<p>
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.BasesPackage.html#Modelica.Icons.BasesPackage">Modelica.Icons.BasesPackage</a> (Icon for packages containing base classes).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Conditions.FaceBusPair.Phases.BaseClasses.NullPhaseS.png" alt="FCSys.Conditions.FaceBusPair.Phases.BaseClasses.NullPhase" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FaceBusPair_Phases_BaseClasses.html#FCSys.Conditions.FaceBusPair.Phases.BaseClasses.NullPhase">NullPhase</a>
@@ -60,9 +65,15 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Conditions.FaceBusPair.Phases.BaseClasses.NullPhase"></a><a href="FCSys_Conditions_FaceBusPair_Phases_BaseClasses.html#FCSys.Conditions.FaceBusPair.Phases.BaseClasses">FCSys.Conditions.FaceBusPair.Phases.BaseClasses</a>.NullPhase</h2>
 <b>Empty condition for a phase (no species)</b><p>
 <img src="images/FCSys.Conditions.FaceBusPair.Phases.BaseClasses.NullPhaseD.png" alt="FCSys.Conditions.FaceBusPair.Phases.BaseClasses.NullPhase">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Double">FCSys.Conditions.BaseClasses.Icons.Double</a> (Icon for a two-connector boundary condition).
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative</td><td>Negative-side multi-species connector for linear momentum and heat</td></tr>
@@ -70,19 +81,21 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Input bus for values of specified conditions</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> NullPhase <font color="darkgreen">&quot;Empty condition for a phase (no species)&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Double">FCSys.Conditions.BaseClasses.Icons.Double</a>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> negative <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> negative <font color="darkgreen">
     &quot;Negative-side multi-species connector for linear momentum and heat&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> positive <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> positive <font color="darkgreen">
     &quot;Positive-side multi-species connector for linear momentum and heat&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">FCSys.Connectors.RealInputBus</a> u <font color="darkgreen">
-    &quot;Input bus for values of specified conditions&quot;</font>;</textblock>
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">Connectors.RealInputBus</a> u <font color="darkgreen">&quot;Input bus for values of specified conditions&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">FCSys.Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Output bus of measurements&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Output bus of measurements&quot;</font>;
 
 <font color="blue">end </font>NullPhase;
 </pre>
@@ -91,7 +104,7 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:48:37 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:45:43 2013.
 </div>
 </body>
 </html>

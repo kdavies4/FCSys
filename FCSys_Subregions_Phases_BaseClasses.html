@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.Phases.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="Base classes (not generally for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,11 +45,15 @@
       <div class="body">
 
 <h2><a name="FCSys.Subregions.Phases.BaseClasses"></a><a href="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases">FCSys.Subregions.Phases</a>.BaseClasses</h2>
+
 <b>Base classes (not generally for direct use)</b>
-<p>
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.BasesPackage.html#Modelica.Icons.BasesPackage">Modelica.Icons.BasesPackage</a> (Icon for packages containing base classes).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Subregions.Phases.BaseClasses.NullPhaseS.png" alt="FCSys.Subregions.Phases.BaseClasses.NullPhase" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses.NullPhase">NullPhase</a>
@@ -60,7 +65,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Subregions.Phases.BaseClasses.NullPhase"></a><a href="FCSys_Subregions_Phases_BaseClasses.html#FCSys.Subregions.Phases.BaseClasses">FCSys.Subregions.Phases.BaseClasses</a>.NullPhase</h2>
 <b>Model for a phase with no species or reactions</b><p>
 <img src="images/FCSys.Subregions.Phases.BaseClasses.NullPhaseD.png" alt="FCSys.Subregions.Phases.BaseClasses.NullPhase">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 <p>If one of the species has <code>setTemp = true</code>, then
     <code>initTemp</code> should be set to <code>false</code>.
     Likewise, if one of the species has <code>setVelX = true</code>,
@@ -77,15 +84,18 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p>Notes:<ul>
   <li>The x-axis component of linear momentum is included by default.  At least one component must be included.</li></ul><p>
 
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k[3]</td><td>{1,1,1}</td><td>Areal fill factor for transport (<b>k</b>) [1]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k[Axis]</td><td>{1,1,1}</td><td>Areal fill factor (<b>k</b>) [1]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
 <tr><td>Boolean</td><td>reduceVel</td><td>true</td><td>Same velocity for all species</td></tr>
 <tr><td>Boolean</td><td>reduceTemp</td><td>true</td><td>Same temperature for all species</td></tr>
-<tr><td>Boolean</td><td>inclLin[3]</td><td>{true,false,false}</td><td>true, if each component of linear momentum is included</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Velocity</td></tr>
 <tr><td>Boolean</td><td>initVelX</td><td>true</td><td>Initialize the x component</td></tr>
@@ -94,9 +104,13 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi_IC[Axis]</td><td>{0,0,0}</td><td>Initial velocity (<b>&phi;</b><sub>IC</sub>) [l/T]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Temperature</td></tr>
 <tr><td>Boolean</td><td>initTemp</td><td>true</td><td>Initialize</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_IC</td><td>&nbsp;</td><td>Initial temperature (<i>T</i><sub>IC</sub>)</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_IC</td><td>&nbsp;</td><td>Initial temperature (<i>T</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a></td><td>inert</td><td>&nbsp;</td></tr>
@@ -106,97 +120,94 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">ChemicalBus</a></td><td>chemical</td><td>Bus of chemical connectors for the species</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> NullPhase <font color="darkgreen">&quot;Model for a phase with no species or reactions&quot;</font>
-  <font color="darkgreen">//extends FCSys.BaseClasses.Icons.Names.Middle;</font>
+  <font color="darkgreen">// extends FCSys.BaseClasses.Icons.Names.Middle;</font>
 
   <font color="darkgreen">// Geometric parameters</font>
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k[3](
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k[Axis](
     <font color="blue">each </font>min=Modelica.Constants.small,
-    <font color="blue">each </font><font color="blue">final </font>nominal=1) = {1,1,1} <font color="darkgreen">
-    &quot;Areal fill factor for transport (<b>k</b>)&quot;</font>;
-  <font color="blue">outer </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis](<font color="blue">each </font><font color="blue">final </font>min=Modelica.Constants.small) <font color="darkgreen">
-    &quot;Length&quot;</font>;
-  <font color="blue">outer </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A[Axis] <font color="darkgreen">&quot;Cross-sectional area&quot;</font>;
+    <font color="blue">each </font><font color="blue">final </font>nominal=1) = {1,1,1} <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
+    &quot;Areal fill factor (<b>k</b>)&quot;</font>;
 
   <font color="darkgreen">// Assumptions</font>
-  <font color="blue">parameter </font>Boolean reduceVel=true <font color="darkgreen">&quot;Same velocity for all species&quot;</font>;
-  <font color="blue">parameter </font>Boolean reduceTemp=true <font color="darkgreen">&quot;Same temperature for all species&quot;</font>;
+  <font color="blue">parameter </font>Boolean reduceVel=true <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
+    &quot;Same velocity for all species&quot;</font>;
+  <font color="blue">parameter </font>Boolean reduceTemp=true <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
+    &quot;Same temperature for all species&quot;</font>;
 
   <font color="darkgreen">// Initialization</font>
-  <font color="blue">parameter </font>Boolean initVelX=true <font color="darkgreen">&quot;Initialize the x component&quot;</font>;
-  <font color="blue">parameter </font>Boolean initVelY=true <font color="darkgreen">&quot;Initialize the y component&quot;</font>;
-  <font color="blue">parameter </font>Boolean initVelZ=true <font color="darkgreen">&quot;Initialize the z component&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi_IC[Axis]={0,0,0} <font color="darkgreen">
+  <font color="blue">parameter </font>Boolean initVelX=true <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Initialize the x component&quot;</font>;
+  <font color="blue">parameter </font>Boolean initVelY=true <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Initialize the y component&quot;</font>;
+  <font color="blue">parameter </font>Boolean initVelZ=true <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Initialize the z component&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi_IC[Axis]={0,0,0} <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
     &quot;Initial velocity (<b>&phi;</b><sub>IC</sub>)&quot;</font>;
   <font color="darkgreen">// This is always enabled in the dialog since it&#39;s used as a guess value.</font>
-  <font color="blue">parameter </font>Boolean initTemp=true <font color="darkgreen">&quot;Initialize&quot;</font>;
+  <font color="blue">parameter </font>Boolean initTemp=true <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Initialize&quot;</font>;
 
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_IC(nominal=298.15*U.K,start=environment.T) <font color="darkgreen">
-    &quot;Initial temperature (<i>T</i><sub>IC</sub>)&quot;</font>;
+  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_IC(nominal=298.15*U.K, start=environment.T)
+    <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Initial temperature (<i>T</i><sub>IC</sub>)&quot;</font>;
   <font color="darkgreen">// This is always enabled in the dialog since it&#39;s used as a guess value.</font>
 
-  <font color="blue">parameter </font>Boolean inclLin[3]={true,false,false} <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">Connectors.InertAmagat</a> inert(<font color="blue">final </font>n_lin=n_lin) <font color="blue">if </font>n_spec &gt; 0;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> xNegative <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Negative face along the x axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> xPositive <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Positive face along the x axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> yNegative <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Negative face along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> yPositive <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Positive face along the y axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> zNegative <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Negative face along the z axis&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> zPositive <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Positive face along the z axis&quot;</font>;
+
+  <font color="blue">outer </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis] <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Length&quot;</font>;
+  <font color="blue">outer </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A[Axis] <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Cross-sectional area&quot;</font>;
+  <font color="darkgreen">// Note:  These must be public in Dymola 7.4, so HideResult is set true</font>
+  <font color="darkgreen">// instead.</font>
+
+<font color="blue">protected </font>
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> Lstar_trans[:]=k .* A ./ L <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
+    &quot;Effective cross-sectional area per length&quot;</font>;
+  <font color="blue">outer </font><font color="blue">parameter </font>Boolean inclLin[Axis] <font color="darkgreen">
     &quot;true, if each component of linear momentum is included&quot;</font>;
+  <font color="blue">outer </font><font color="blue">parameter </font>Integer n_lin <font color="darkgreen">&quot;Number of components of linear momentum&quot;</font>;
+  <font color="blue">outer </font><font color="blue">parameter </font>Integer cartAxes[:] <font color="darkgreen">
+    &quot;Cartesian-axis indices of the components of linear momentum&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">FCSys.Connectors.InertAmagat</a> inert(<font color="blue">final </font>n_lin=n_lin) <font color="blue">if </font>n_spec &gt; 0;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> xNegative <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
-    &quot;Negative face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> xPositive <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
-    &quot;Positive face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> yNegative <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
-    &quot;Negative face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> yPositive <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
-    &quot;Positive face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> zNegative <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
-    &quot;Negative face along the z axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> zPositive <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
-    &quot;Positive face along the z axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">FCSys.Connectors.ChemicalBus</a> chemical <font color="darkgreen">
-    &quot;Bus of chemical connectors for the species&quot;</font>;</textblock>
+  <font color="blue">parameter </font>Integer n_spec <font color="darkgreen">&quot;Number of species&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Subregions.html#FCSys.Subregions.PhaseBoundary">PhaseBoundary</a> phaseBoundary(<font color="blue">final </font>n_lin=n_lin) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Phase boundary&quot;</font>;</textblock>
+  <a href="FCSys_Subregions.html#FCSys.Subregions.PhaseBoundary">PhaseBoundary</a> phaseBoundary <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">&quot;Phase boundary&quot;</font>;
   <font color="darkgreen">// This component is conditional because if two or more empty phases</font>
   <font color="darkgreen">// (without any species included) were connected within a subregion, there</font>
   <font color="darkgreen">// would be a mathematical singularity.</font>
 
-<font color="blue">protected </font>
-  <font color="blue">parameter </font>Integer n_spec <font color="darkgreen">&quot;Number of species&quot;</font>;
-  <font color="blue">final </font><font color="blue">parameter </font>Integer n_lin=<font color="red">countTrue</font>(inclLin) <font color="darkgreen">
-    &quot;Number of components of linear momentum&quot;</font>;
-  <font color="blue">final </font><font color="blue">parameter </font>Integer cartAxes[n_lin]=<font color="red">index</font>(inclLin) <font color="darkgreen">
-    &quot;Cartesian-axis indices of the axes of linear momentum&quot;</font>;
-
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">FCSys.Connectors.InertInternal</a> common(
+  <a href="FCSys_Connectors.html#FCSys.Connectors.InertInternal">Connectors.InertInternal</a> common(
     n_lin=n_lin,
     <font color="blue">final </font>inclMechanical=reduceVel,
     <font color="blue">final </font>inclThermal=reduceTemp,
-    mechanical(phi(
-        <font color="blue">each </font>stateSelect=StateSelect.prefer,
-        <font color="blue">final </font>start=phi_IC[cartAxes],
-        fixed={initVelX,initVelY,initVelZ}[cartAxes])),
+    mechanical(phi(<font color="blue">each </font>stateSelect=StateSelect.prefer, <font color="blue">final </font>start=phi_IC[
+            cartAxes])),
     thermal(T(
         stateSelect=StateSelect.prefer,
         <font color="blue">final </font>start=T_IC,
-        <font color="blue">final </font>fixed=initTemp))) <font color="blue">if </font>n_spec &gt; 0 <font color="darkgreen">
-    &quot;Internal connector to directly couple velocities and/or temperatures&quot;</font>;</textblock>
+        <font color="blue">final </font>fixed=initTemp))) <font color="blue">if </font>n_spec &gt; 0<font color="blue"> and </font>(reduceVel<font color="blue"> or </font>reduceTemp) <font color="darkgreen">
+    &quot;Internal connector to directly couple velocities and/or temperatures&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;</textblock>
+  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Inert interactions</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(phaseBoundary.inertA, inert);</textblock>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>NullPhase;
+  <font color="red">connect</font>(phaseBoundary.inertA, inert);
+<font color="blue">end </font>NullPhase;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:51:06 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:48:24 2013.
 </div>
 </body>
 </html>

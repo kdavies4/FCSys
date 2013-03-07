@@ -1,0 +1,147 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.Conditions.Chemical.Fluid</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Fluid conditions&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Fluid<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Conditions.Chemical.Fluid"></A><A HREF="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical"
+>FCSys.Conditions.Chemical</A>.Fluid</H2>
+<B>Fluid conditions</B>
+<P>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package"
+>Modelica.Icons.Package</A> (Icon for standard packages).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.Chemical.Fluid.EnthalpyMassicS.png" ALT="FCSys.Conditions.Chemical.Fluid.EnthalpyMassic" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_Chemical_Fluid.html#FCSys.Conditions.Chemical.Fluid.EnthalpyMassic"
+>EnthalpyMassic</A>
+</TD><TD>Specify massic enthalpy (measure enthalpy flow rate)</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.Chemical.Fluid.EnthalpyMassicS.png" ALT="FCSys.Conditions.Chemical.Fluid.Custom" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_Chemical_Fluid.html#FCSys.Conditions.Chemical.Fluid.Custom"
+>Custom</A>
+</TD><TD>Custom expressions</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.Chemical.Fluid.BaseClassesS.png" ALT="FCSys.Conditions.Chemical.Fluid.BaseClasses" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_Chemical_Fluid_BaseClasses.html#FCSys.Conditions.Chemical.Fluid.BaseClasses"
+>BaseClasses</A>
+</TD><TD>Base classes (not generally for direct use)</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE EnthalpyMassic<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Conditions.Chemical.Fluid.EnthalpyMassicI.png" ALT="FCSys.Conditions.Chemical.Fluid.EnthalpyMassic" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Conditions.Chemical.Fluid.EnthalpyMassic"></A><A HREF="FCSys_Conditions_Chemical_Fluid.html#FCSys.Conditions.Chemical.Fluid"
+>FCSys.Conditions.Chemical.Fluid</A>.EnthalpyMassic</H2>
+<B>Specify massic enthalpy (measure enthalpy flow rate)</B><p>
+<IMG SRC="FCSys.Conditions.Chemical.Material.PotentialPerTemperatureD.png" ALT="FCSys.Conditions.Chemical.Fluid.EnthalpyMassic">
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_Conditions_Chemical_Fluid_BaseClasses.html#FCSys.Conditions.Chemical.Fluid.BaseClasses.PartialCondition"
+>BaseClasses.PartialCondition</A> (Partial model for a fluid condition).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Conditions_Chemical_Fluid_BaseClasses.html#FCSys.Conditions.Chemical.Fluid.BaseClasses.ConditionType"
+>ConditionType</A></TD><TD>conditionType</TD><TD>BaseClasses.ConditionType.En...</TD><TD>Type of condition</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinX</TD><TD>true</TD><TD>X</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinY</TD><TD>false</TD><TD>Y</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinZ</TD><TD>false</TD><TD>Z</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</TD></TR>
+<TR><TD>Boolean</TD><TD>internal</TD><TD>true</TD><TD>Use internal specification</TD></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Constant"
+>Constant</A></TD><TD>source</TD><TD>redeclare Modelica.Blocks.So...</TD><TD>Source of internal specification</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput"
+>ChemicalInput</A></TD><TD>chemical</TD><TD>Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as input</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> EnthalpyMassic <font color="darkgreen">
+  &quot;Specify massic enthalpy (measure enthalpy flow rate)&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_Conditions_Chemical_Fluid_BaseClasses.html#FCSys.Conditions.Chemical.Fluid.BaseClasses.PartialCondition"
+>BaseClasses.PartialCondition</A>(
+    <font color="blue">final </font>conditionType=BaseClasses.ConditionType.EnthalpyMassic,
+    u(<font color="blue">final </font>unit=&quot;l2/T2&quot;),
+    <font color="blue">final </font>y(<font color="blue">final </font>unit=&quot;l2.m/T3&quot;) = chemical.Hdot);
+
+<font color="blue">equation </font>
+  chemical.hbar = u_final;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>EnthalpyMassic;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Custom<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Conditions.Chemical.Fluid.EnthalpyMassicI.png" ALT="FCSys.Conditions.Chemical.Fluid.Custom" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Conditions.Chemical.Fluid.Custom"></A><A HREF="FCSys_Conditions_Chemical_Fluid.html#FCSys.Conditions.Chemical.Fluid"
+>FCSys.Conditions.Chemical.Fluid</A>.Custom</H2>
+<B>Custom expressions</B><p>
+<IMG SRC="FCSys.Conditions.Chemical.Material.PotentialPerTemperatureD.png" ALT="FCSys.Conditions.Chemical.Fluid.Custom">
+<P><H3>Information</H3></P>
+<PRE></pre><p>The expression to which the condition is applied (<code>x</code>)
+    must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p><pre></PRE><P>
+Extends from <A HREF="FCSys_Conditions_Chemical_Fluid_BaseClasses.html#FCSys.Conditions.Chemical.Fluid.BaseClasses.PartialCondition"
+>BaseClasses.PartialCondition</A> (Partial model for a fluid condition).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Conditions_Chemical_Fluid_BaseClasses.html#FCSys.Conditions.Chemical.Fluid.BaseClasses.ConditionType"
+>ConditionType</A></TD><TD>conditionType</TD><TD>BaseClasses.ConditionType.Cu...</TD><TD>Type of condition</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinX</TD><TD>true</TD><TD>X</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinY</TD><TD>false</TD><TD>Y</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinZ</TD><TD>false</TD><TD>Z</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</TD></TR>
+<TR><TD>Boolean</TD><TD>internal</TD><TD>true</TD><TD>Use internal specification</TD></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Constant"
+>Constant</A></TD><TD>source</TD><TD>redeclare Modelica.Blocks.So...</TD><TD>Source of internal specification</TD></TR>
+<TR><TD>Real</TD><TD>x</TD><TD>chemical.hbar</TD><TD>Expression to which the condition is applied</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>RealOutput</A></TD><TD>y</TD><TD>chemical.Hdot</TD><TD>Measurement expression</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>u</TD><TD>Value of specified condition</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput"
+>ChemicalInput</A></TD><TD>chemical</TD><TD>Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as input</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=3>Measurement</TD></TR>
+<TR><TD>output <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>RealOutput</A></TD><TD>y</TD><TD>Measurement expression</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Custom <font color="darkgreen">&quot;Custom expressions&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_Conditions_Chemical_Fluid_BaseClasses.html#FCSys.Conditions.Chemical.Fluid.BaseClasses.PartialCondition"
+>BaseClasses.PartialCondition</A>(<font color="blue">final </font>conditionType=BaseClasses.ConditionType.Custom,
+      y=chemical.Hdot);
+
+  Real x=chemical.hbar <font color="darkgreen">&quot;Expression to which the condition is applied&quot;</font>;
+
+<font color="blue">equation </font>
+  x = u_final;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Custom;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 00:02:30 2013.
+</address></BODY>
+</HTML>

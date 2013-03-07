@@ -1,0 +1,223 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.WorkInProgress.Blocks.Continuous</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Continuous<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.WorkInProgress.Blocks.Continuous"></A><A HREF="FCSys_WorkInProgress_Blocks.html#FCSys.WorkInProgress.Blocks"
+>FCSys.WorkInProgress.Blocks</A>.Continuous</H2>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package"
+>Modelica.Icons.Package</A> (Icon for standard packages).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.ExamplesS.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Examples" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Continuous_Examples.html#FCSys.WorkInProgress.Blocks.Continuous.Examples"
+>Examples</A>
+</TD><TD>&nbsp;</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.ControllersS.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Controllers" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Continuous_Controllers.html#FCSys.WorkInProgress.Blocks.Continuous.Controllers"
+>Controllers</A>
+</TD><TD>&nbsp;</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.ControllersS.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Observers" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Continuous_Observers.html#FCSys.WorkInProgress.Blocks.Continuous.Observers"
+>Observers</A>
+</TD><TD>&nbsp;</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.ControllersS.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Plants" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Continuous_Plants.html#FCSys.WorkInProgress.Blocks.Continuous.Plants"
+>Plants</A>
+</TD><TD>&nbsp;</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.SourcesS.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Sources" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Continuous_Sources.html#FCSys.WorkInProgress.Blocks.Continuous.Sources"
+>Sources</A>
+</TD><TD>&nbsp;</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.FirstOrderS.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.FirstOrder" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Continuous.html#FCSys.WorkInProgress.Blocks.Continuous.FirstOrder"
+>FirstOrder</A>
+</TD><TD>First order transport function block (= 1 pole)</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.FirstOrderS.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Integrator" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Continuous.html#FCSys.WorkInProgress.Blocks.Continuous.Integrator"
+>Integrator</A>
+</TD><TD>Output the integral of the input signal</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE FirstOrder<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.FirstOrderI.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.FirstOrder" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Continuous.FirstOrder"></A><A HREF="FCSys_WorkInProgress_Blocks_Continuous.html#FCSys.WorkInProgress.Blocks.Continuous"
+>FCSys.WorkInProgress.Blocks.Continuous</A>.FirstOrder</H2>
+<B>First order transport function block (= 1 pole)</B><p>
+<IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.FirstOrderD.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.FirstOrder">
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>This blocks defines the transport function between the input u
+and the output y (element-wise) as <i>first order</i> system:</p>
+<pre>
+               k
+     y = ------------ * u
+            T * s + 1
+</pre>
+<p>If you would like to be able to change easily between different
+transport functions (FirstOrder, SecondOrder, &hellip; ) by changing
+parameters, use the general block <b>TransportFunction</b> instead
+and model a first order SISO system with parameters<br>
+b = {k}, a = {T, 1}.</p>
+<pre>
+Example:
+   parameter: k = 0.3, T = 0.4
+   results in:
+             0.3
+      y = ----------- * u
+          0.4 s + 1.0
+</pre>
+
+<pre>
+</PRE><P>
+Extends from <A HREF="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous"
+>FCSys.BaseClasses.Icons.Blocks.Continuous</A> (Icon for a continuous-time block), <A HREF="FCSys_WorkInProgress_Blocks_BaseClasses.html#FCSys.WorkInProgress.Blocks.BaseClasses.MI"
+>FCSys.WorkInProgress.Blocks.BaseClasses.MI</A> (Multiple Input block), <A HREF="FCSys_WorkInProgress_Blocks_BaseClasses.html#FCSys.WorkInProgress.Blocks.BaseClasses.MO"
+>FCSys.WorkInProgress.Blocks.BaseClasses.MO</A> (Multiple Output block).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>n</TD><TD>1</TD><TD>Number of signals</TD></TR>
+<TR><TD>Real</TD><TD>k</TD><TD>1</TD><TD>Gain</TD></TR>
+<TR><TD>&nbsp;</TD><TD>T</TD><TD>&nbsp;</TD><TD>Time Constant</TD></TR>
+<TR><TD>Integer</TD><TD>n_in</TD><TD>n</TD><TD>Number of inputs</TD></TR>
+<TR><TD>Integer</TD><TD>n_out</TD><TD>n</TD><TD>Number of outputs</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Initial Conditions</TD></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Types.html#Modelica.Blocks.Types.Init"
+>Init</A></TD><TD>initType</TD><TD>Modelica.Blocks.Types.Init.N...</TD><TD>Type of initialization (1: no init, 2: steady state, 3/4: initial output)</TD></TR>
+<TR><TD>Real</TD><TD>y_0[n]</TD><TD>zeros(n)</TD><TD>Initial or guess value of output (= state)</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>u[n_in]</TD><TD>Connector of Real input signals</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">block</font> FirstOrder <font color="darkgreen">&quot;First order transport function block (= 1 pole)&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous"
+>FCSys.BaseClasses.Icons.Blocks.Continuous</A>;
+  <font color="blue">import </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Types.html#Modelica.Blocks.Types.Init"
+>Modelica.Blocks.Types.Init</A>;
+  <font color="blue">parameter </font>Integer n=1 <font color="darkgreen">&quot;Number of signals&quot;</font>;
+  <font color="blue">parameter </font>Real k=1 <font color="darkgreen">&quot;Gain&quot;</font>;
+  <font color="blue">parameter </font>SI.Time T(start=1) <font color="darkgreen">&quot;Time Constant&quot;</font>;
+  <font color="blue">parameter </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Types.html#Modelica.Blocks.Types.Init"
+>Modelica.Blocks.Types.Init</A> initType=Modelica.Blocks.Types.Init.NoInit
+    <font color="darkgreen">&quot;Type of initialization (1: no init, 2: steady state, 3/4: initial output)&quot;</font>;
+  <font color="blue">parameter </font>Real y_0[n]=<font color="red">zeros</font>(n) <font color="darkgreen">&quot;Initial or guess value of output (= state)&quot;</font>;
+  <font color="blue">extends </font><A HREF="FCSys_WorkInProgress_Blocks_BaseClasses.html#FCSys.WorkInProgress.Blocks.BaseClasses.MI"
+>FCSys.WorkInProgress.Blocks.BaseClasses.MI</A>(<font color="blue">final </font>n_in=n);
+  <font color="blue">extends </font><A HREF="FCSys_WorkInProgress_Blocks_BaseClasses.html#FCSys.WorkInProgress.Blocks.BaseClasses.MO"
+>FCSys.WorkInProgress.Blocks.BaseClasses.MO</A>(y(<font color="blue">final </font>start=y_0), <font color="blue">final </font>
+      n_out=n);
+
+<font color="blue">initial </font><font color="blue">equation </font>
+  <font color="blue">if </font>initType == Init.SteadyState<font color="blue"> then</font>
+    <font color="red">der</font>(y)/U.s = <font color="red">zeros</font>(n);
+  <font color="blue">elseif </font>initType == Init.InitialState<font color="blue"> or </font>initType == Init.InitialOutput<font color="blue"> then</font>
+    y = y_0;
+  <font color="blue">end if</font>;
+
+<font color="blue">equation </font>
+  <font color="red">der</font>(y)/U.s = (k*u - y)/T;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>FirstOrder;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Integrator<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.FirstOrderI.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Integrator" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Continuous.Integrator"></A><A HREF="FCSys_WorkInProgress_Blocks_Continuous.html#FCSys.WorkInProgress.Blocks.Continuous"
+>FCSys.WorkInProgress.Blocks.Continuous</A>.Integrator</H2>
+<B>Output the integral of the input signal</B><p>
+<IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.FirstOrderD.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Integrator">
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>This blocks computes output <b>y</b> (element-wise) as
+<i>integral</i> of the input <b>u</b> multiplied with
+the gain <i>k</i>:</p>
+<pre>
+         k
+     y = - u
+         s
+</pre>
+
+<p>It might be difficult to initialize the integrator in steady state.
+This is discussed in the description of package
+<a href="/opt/dymola/Modelica/Library/Modelica 3.2/Blocks/Continuous">Continuous</a>.</p>
+
+<pre>
+</PRE><P>
+Extends from <A HREF="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous"
+>FCSys.BaseClasses.Icons.Blocks.Continuous</A> (Icon for a continuous-time block), <A HREF="FCSys_WorkInProgress_Blocks_BaseClasses.html#FCSys.WorkInProgress.Blocks.BaseClasses.MI"
+>FCSys.WorkInProgress.Blocks.BaseClasses.MI</A> (Multiple Input block), <A HREF="FCSys_WorkInProgress_Blocks_BaseClasses.html#FCSys.WorkInProgress.Blocks.BaseClasses.MO"
+>FCSys.WorkInProgress.Blocks.BaseClasses.MO</A> (Multiple Output block).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>k[n]</TD><TD>ones(n)</TD><TD>Integrator gain</TD></TR>
+<TR><TD>Integer</TD><TD>n_in</TD><TD>n</TD><TD>Number of inputs</TD></TR>
+<TR><TD>Integer</TD><TD>n_out</TD><TD>n</TD><TD>Number of outputs</TD></TR>
+<TR><TD>Integer</TD><TD>n</TD><TD>1</TD><TD>Number of signals</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Initial Conditions</TD></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Types.html#Modelica.Blocks.Types.Init"
+>Init</A></TD><TD>initType</TD><TD>Modelica.Blocks.Types.Init.I...</TD><TD>Type of initialization (1: no init, 2: steady state, 3,4: initial output)</TD></TR>
+<TR><TD>Real</TD><TD>y_0[n]</TD><TD>zeros(n)</TD><TD>Initial or guess value of output (= state)</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>u[n_in]</TD><TD>Connector of Real input signals</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">block</font> Integrator <font color="darkgreen">&quot;Output the integral of the input signal&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous"
+>FCSys.BaseClasses.Icons.Blocks.Continuous</A>;
+  <font color="blue">import </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Types.html#Modelica.Blocks.Types.Init"
+>Modelica.Blocks.Types.Init</A>;
+  <font color="blue">parameter </font>Real k[n]=<font color="red">ones</font>(n) <font color="darkgreen">&quot;Integrator gain&quot;</font>;
+  <font color="darkgreen">/* InitialState is the default, because it was the default in Modelica 2.2
+     and therefore this setting is backward compatible
+  */</font>
+  <font color="blue">parameter </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Types.html#Modelica.Blocks.Types.Init"
+>Modelica.Blocks.Types.Init</A> initType=Modelica.Blocks.Types.Init.InitialState
+    <font color="darkgreen">&quot;Type of initialization (1: no init, 2: steady state, 3,4: initial output)&quot;</font>;
+  <font color="blue">parameter </font>Real y_0[n]=<font color="red">zeros</font>(n) <font color="darkgreen">&quot;Initial or guess value of output (= state)&quot;</font>;
+  <font color="blue">extends </font><A HREF="FCSys_WorkInProgress_Blocks_BaseClasses.html#FCSys.WorkInProgress.Blocks.BaseClasses.MI"
+>FCSys.WorkInProgress.Blocks.BaseClasses.MI</A>(<font color="blue">final </font>n_in=n);
+  <font color="blue">extends </font><A HREF="FCSys_WorkInProgress_Blocks_BaseClasses.html#FCSys.WorkInProgress.Blocks.BaseClasses.MO"
+>FCSys.WorkInProgress.Blocks.BaseClasses.MO</A>(y(<font color="blue">final </font>start=y_0), <font color="blue">final </font>
+      n_out=n);
+  <font color="blue">parameter </font>Integer n=1 <font color="darkgreen">&quot;Number of signals&quot;</font>;
+
+<font color="blue">initial </font><font color="blue">equation </font>
+  <font color="blue">if </font>initType == Init.SteadyState<font color="blue"> then</font>
+    <font color="red">der</font>(y)/U.s = <font color="red">zeros</font>(n);
+  <font color="blue">elseif </font>initType == Init.InitialState<font color="blue"> or </font>initType == Init.InitialOutput<font color="blue"> then</font>
+    y = y_0;
+  <font color="blue">end if</font>;
+
+<font color="blue">equation </font>
+  <font color="red">der</font>(y)/U.s = k .* u;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Integrator;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 01:13:34 2013.
+</address></BODY>
+</HTML>

@@ -1,0 +1,125 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.Test.Tests.Trajectory</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Tests on the AssertTrajectory model&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Trajectory<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Test.Tests.Trajectory"></A><A HREF="FCSys_Test_Tests.html#FCSys.Test.Tests"
+>FCSys.Test.Tests</A>.Trajectory</H2>
+<B>Tests on the AssertTrajectory model</B>
+<P>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package"
+>Modelica.Icons.Package</A> (Icon for standard packages).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Test_Tests_Trajectory.html#FCSys.Test.Tests.Trajectory.CheckSuccess"
+>CheckSuccess</A>
+</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="FCSys_Test_Tests_Trajectory.html#FCSys.Test.Tests.Trajectory.CheckFailure1"
+>CheckFailure1</A>
+</TD><TD>Check for failure when first point is before start</TD></TR>
+<TR><TD><A HREF="FCSys_Test_Tests_Trajectory.html#FCSys.Test.Tests.Trajectory.CheckFailure2"
+>CheckFailure2</A>
+</TD><TD>Check for failure when values don&#39;t match during simulation</TD></TR>
+<TR><TD><A HREF="FCSys_Test_Tests_Trajectory.html#FCSys.Test.Tests.Trajectory.CheckFailure3"
+>CheckFailure3</A>
+</TD><TD>Check for failure when all points aren&#39;t checked</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE CheckSuccess<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Test.Tests.Trajectory.CheckSuccess"></A><A HREF="FCSys_Test_Tests_Trajectory.html#FCSys.Test.Tests.Trajectory"
+>FCSys.Test.Tests.Trajectory</A>.CheckSuccess</H2>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> CheckSuccess
+  Real x=time^2;
+  <A HREF="FCSys_Test.html#FCSys.Test.AssertTrajectory"
+>AssertTrajectory</A> check_x(actual=x, expected=[0, 0; 1, 1; 2, 4; 3, 9]);
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>CheckSuccess;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE CheckFailure1<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Test.Tests.Trajectory.CheckFailure1"></A><A HREF="FCSys_Test_Tests_Trajectory.html#FCSys.Test.Tests.Trajectory"
+>FCSys.Test.Tests.Trajectory</A>.CheckFailure1</H2>
+<B>Check for failure when first point is before start</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_Test_Tests_Trajectory.html#FCSys.Test.Tests.Trajectory.CheckSuccess"
+>CheckSuccess</A>.
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> CheckFailure1 <font color="darkgreen">
+  &quot;Check for failure when first point is before start&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_Test_Tests_Trajectory.html#FCSys.Test.Tests.Trajectory.CheckSuccess"
+>CheckSuccess</A>(check_x(expected=[-1, 1; 0, 0; 1, 1]));
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>CheckFailure1;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE CheckFailure2<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Test.Tests.Trajectory.CheckFailure2"></A><A HREF="FCSys_Test_Tests_Trajectory.html#FCSys.Test.Tests.Trajectory"
+>FCSys.Test.Tests.Trajectory</A>.CheckFailure2</H2>
+<B>Check for failure when values don&#39;t match during simulation</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_Test_Tests_Trajectory.html#FCSys.Test.Tests.Trajectory.CheckSuccess"
+>CheckSuccess</A>.
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>x</TD><TD>time</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> CheckFailure2 <font color="darkgreen">
+  &quot;Check for failure when values don&#39;t match during simulation&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_Test_Tests_Trajectory.html#FCSys.Test.Tests.Trajectory.CheckSuccess"
+>CheckSuccess</A>(x=time);
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>CheckFailure2;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE CheckFailure3<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Test.Tests.Trajectory.CheckFailure3"></A><A HREF="FCSys_Test_Tests_Trajectory.html#FCSys.Test.Tests.Trajectory"
+>FCSys.Test.Tests.Trajectory</A>.CheckFailure3</H2>
+<B>Check for failure when all points aren&#39;t checked</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_Test_Tests_Trajectory.html#FCSys.Test.Tests.Trajectory.CheckSuccess"
+>CheckSuccess</A>.
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> CheckFailure3 <font color="darkgreen">
+  &quot;Check for failure when all points aren&#39;t checked&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_Test_Tests_Trajectory.html#FCSys.Test.Tests.Trajectory.CheckSuccess"
+>CheckSuccess</A>(check_x(expected=[0, 0; 1, 1; 5, 25]));
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>CheckFailure3;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 01:12:35 2013.
+</address></BODY>
+</HTML>

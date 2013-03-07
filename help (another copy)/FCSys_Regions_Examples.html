@@ -1,0 +1,1009 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.Regions.Examples</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Examples&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Examples<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Regions.Examples"></A><A HREF="FCSys_Regions.html#FCSys.Regions"
+>FCSys.Regions</A>.Examples</H2>
+<B>Examples</B>
+<P>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_ExamplesPackage.html#Modelica.Icons.ExamplesPackage"
+>Modelica.Icons.ExamplesPackage</A> (Icon for packages containing runnable examples).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.Regions.Examples.FPToFPS.png" ALT="FCSys.Regions.Examples.FPToFP" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Regions_Examples.html#FCSys.Regions.Examples.FPToFP"
+>FPToFP</A>
+</TD><TD>Test one flow plate to the other</TD></TR>
+<TR><TD><IMG SRC="FCSys.Regions.Examples.FPToFPS.png" ALT="FCSys.Regions.Examples.GDLToGDL" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Regions_Examples.html#FCSys.Regions.Examples.GDLToGDL"
+>GDLToGDL</A>
+</TD><TD>Test one GDL to the other</TD></TR>
+<TR><TD><IMG SRC="FCSys.Regions.Examples.FPToFPS.png" ALT="FCSys.Regions.Examples.CLToCL" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Regions_Examples.html#FCSys.Regions.Examples.CLToCL"
+>CLToCL</A>
+</TD><TD>Test one catalyst layer to the other</TD></TR>
+<TR><TD><IMG SRC="FCSys.Regions.Examples.FPToFPS.png" ALT="FCSys.Regions.Examples.AnFP" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Regions_Examples.html#FCSys.Regions.Examples.AnFP"
+>AnFP</A>
+</TD><TD>Test the anode flow plate</TD></TR>
+<TR><TD><IMG SRC="FCSys.Regions.Examples.FPToFPS.png" ALT="FCSys.Regions.Examples.AnGDL" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Regions_Examples.html#FCSys.Regions.Examples.AnGDL"
+>AnGDL</A>
+</TD><TD>Test the anode gas diffusion layer</TD></TR>
+<TR><TD><IMG SRC="FCSys.Regions.Examples.FPToFPS.png" ALT="FCSys.Regions.Examples.AnCL" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Regions_Examples.html#FCSys.Regions.Examples.AnCL"
+>AnCL</A>
+</TD><TD>Test the anode catalyst layer</TD></TR>
+<TR><TD><IMG SRC="FCSys.Regions.Examples.FPToFPS.png" ALT="FCSys.Regions.Examples.PEM" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Regions_Examples.html#FCSys.Regions.Examples.PEM"
+>PEM</A>
+</TD><TD>Test the proton exchange membrane</TD></TR>
+<TR><TD><IMG SRC="FCSys.Regions.Examples.FPToFPS.png" ALT="FCSys.Regions.Examples.CaCL" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Regions_Examples.html#FCSys.Regions.Examples.CaCL"
+>CaCL</A>
+</TD><TD>Test the cathode catalyst layer</TD></TR>
+<TR><TD><IMG SRC="FCSys.Regions.Examples.FPToFPS.png" ALT="FCSys.Regions.Examples.CaGDL" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Regions_Examples.html#FCSys.Regions.Examples.CaGDL"
+>CaGDL</A>
+</TD><TD>Test the cathode gas diffusion layer</TD></TR>
+<TR><TD><IMG SRC="FCSys.Regions.Examples.FPToFPS.png" ALT="FCSys.Regions.Examples.CaFP" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Regions_Examples.html#FCSys.Regions.Examples.CaFP"
+>CaFP</A>
+</TD><TD>Test the cathode flow plate</TD></TR>
+<TR><TD><IMG SRC="FCSys.Regions.Examples.FPToFPS.png" ALT="FCSys.Regions.Examples.AnFPAlone" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Regions_Examples.html#FCSys.Regions.Examples.AnFPAlone"
+>AnFPAlone</A>
+</TD><TD>Test the anode flow plate</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE FPToFP<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Regions.Examples.FPToFPI.png" ALT="FCSys.Regions.Examples.FPToFP" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Regions.Examples.FPToFP"></A><A HREF="FCSys_Regions_Examples.html#FCSys.Regions.Examples"
+>FCSys.Regions.Examples</A>.FPToFP</H2>
+<B>Test one flow plate to the other</B><p>
+<IMG SRC="FCSys.Regions.Examples.FPToFPD.png" ALT="FCSys.Regions.Examples.FPToFP">
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples), <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>.
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_y[:]</TD><TD>fill(1*U.m/1, 1)</TD><TD>Lengths along the channel (<i>L</i><sub>y</sub>) [l]</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_z[:]</TD><TD>fill(5*U.mm/1, 1)</TD><TD>Lengths across the channel (<i>L</i><sub>z</sub>) [l]</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> FPToFP <font color="darkgreen">&quot;Test one flow plate to the other&quot;</font>
+  <font color="blue">import </font><A HREF="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases"
+>FCSys.Subregions.Phases</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>;
+
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Q.Length</A> L_y[:]=<font color="red">fill</font>(1*U.m/1, 1) <font color="darkgreen">
+    &quot;</pre>Lengths along the channel (<i>L</i><sub>y</sub>)<pre>&quot;</font>;
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Q.Length</A> L_z[:]=<font color="red">fill</font>(5*U.mm/1, 1) <font color="darkgreen">
+    &quot;</pre>Lengths across the channel (<i>L</i><sub>z</sub>)<pre>&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_y=<font color="red">size</font>(L_y, 1) <font color="darkgreen">
+    &quot;Number of regions along the channel&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
+    &quot;Number of regions across the channel&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><A HREF="FCSys_Conditions.html#FCSys.Conditions.Environment"
+>FCSys.Conditions.Environment</A> environment(analysis=true);
+  <A HREF="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP"
+>AnFPs.AnFP</A> anFP(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL"
+>AnGDLs.AnGDL</A> anGDL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL"
+>AnCLs.AnCL</A> anCL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM"
+>PEMs.PEM</A> pEM(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL"
+>CaCLs.CaCL</A> caCL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL"
+>CaGDLs.CaGDL</A> caGDL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP"
+>CaFPs.CaFP</A> caFP(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
+
+<textblock type="annotcomp" expanded="false">  Conditions.FaceBus.SubregionClosed condition1[n_y, n_z](<font color="blue">each </font>graphite(
+      &#39;inclC+&#39;=true,
+      &#39;incle-&#39;=true,
+      &#39;C+&#39;(thermal(source(k=environment.T))),
+      &#39;e-&#39;(thermal(source(k=environment.T)))));</textblock>
+
+<textblock type="annotcomp" expanded="false">  Conditions.FaceBus.SubregionClosed condition2[n_y, n_z](<font color="blue">each </font>graphite(
+      &#39;inclC+&#39;=true,
+      &#39;incle-&#39;=true,
+      &#39;C+&#39;(thermal(source(k=environment.T))),
+      &#39;e-&#39;(thermal(source(k=environment.T)), <font color="blue">redeclare </font>Conditions.Face.Material.Density
+          normal(source(k(start=U.atm/(298.15*U.K)))))));
+  Conditions.FaceBus.SubregionClosed bC3[anFP.n_x, n_z](<font color="blue">each </font>gas(
+      inclH2=true,
+      inclH2O=true,
+      H2(thermal(source(k=environment.T))),
+      H2O(thermal(source(k=environment.T)))));</textblock>
+
+<textblock type="annotcomp" expanded="false">  Conditions.FaceBus.SubregionClosed bC4[anFP.n_x, n_z](<font color="blue">each </font>gas(
+      inclH2=true,
+      inclH2O=true,
+      H2(thermal(source(k=environment.T))),
+      H2O(thermal(source(k=environment.T)))));</textblock>
+
+<textblock type="annotcomp" expanded="false">  Conditions.FaceBus.SubregionClosed bC5[caFP.n_x, n_z](<font color="blue">each </font>gas(
+      inclH2O=true,
+      inclN2=true,
+      inclO2=true,
+      N2(thermal(source(k=environment.T))),
+      O2(thermal(source(k=environment.T))),
+      H2O(thermal(source(k=environment.T)))));
+  Conditions.FaceBus.SubregionClosed bC6[caFP.n_x, n_z](<font color="blue">each </font>gas(
+      inclH2O=true,
+      inclN2=true,
+      inclO2=true,
+      N2(thermal(source(k=environment.T))),
+      O2(thermal(source(k=environment.T))),
+      H2O(thermal(source(k=environment.T)))));</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(condition1.face, anFP.xNegative);
+  <font color="red">connect</font>(anFP.xPositive, anGDL.xNegative);
+  <font color="red">connect</font>(anGDL.xPositive, anCL.xNegative);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(anCL.xPositive, pEM.xNegative);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(pEM.xPositive, caCL.xNegative);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(caCL.xPositive, caGDL.xNegative);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(caGDL.xPositive, caFP.xNegative);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(caFP.xPositive, condition2.face);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(bC3.face, anFP.yNegative);
+  <font color="red">connect</font>(bC4.face, anFP.yPositive);
+  <font color="red">connect</font>(bC5.face, caFP.yNegative);
+  <font color="red">connect</font>(bC6.face, caFP.yPositive);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>FPToFP;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE GDLToGDL<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Regions.Examples.FPToFPI.png" ALT="FCSys.Regions.Examples.GDLToGDL" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Regions.Examples.GDLToGDL"></A><A HREF="FCSys_Regions_Examples.html#FCSys.Regions.Examples"
+>FCSys.Regions.Examples</A>.GDLToGDL</H2>
+<B>Test one GDL to the other</B><p>
+<IMG SRC="FCSys.Regions.Examples.GDLToGDLD.png" ALT="FCSys.Regions.Examples.GDLToGDL">
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples), <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>.
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_y[:]</TD><TD>fill(1*U.m/1, 1)</TD><TD>Lengths along the channel (<i>L</i><sub>y</sub>) [l]</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_z[:]</TD><TD>fill(5*U.mm/1, 1)</TD><TD>Lengths across the channel (<i>L</i><sub>z</sub>) [l]</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> GDLToGDL <font color="darkgreen">&quot;Test one GDL to the other&quot;</font>
+  <font color="blue">import </font><A HREF="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases"
+>FCSys.Subregions.Phases</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>;
+
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Q.Length</A> L_y[:]=<font color="red">fill</font>(1*U.m/1, 1) <font color="darkgreen">
+    &quot;</pre>Lengths along the channel (<i>L</i><sub>y</sub>)<pre>&quot;</font>;
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Q.Length</A> L_z[:]=<font color="red">fill</font>(5*U.mm/1, 1) <font color="darkgreen">
+    &quot;</pre>Lengths across the channel (<i>L</i><sub>z</sub>)<pre>&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_y=<font color="red">size</font>(L_y, 1) <font color="darkgreen">
+    &quot;Number of regions along the channel&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
+    &quot;Number of regions across the channel&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL"
+>AnGDLs.AnGDL</A> anGDL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);
+  <A HREF="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL"
+>AnCLs.AnCL</A> anCL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM"
+>PEMs.PEM</A> pEM(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL"
+>CaCLs.CaCL</A> caCL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL"
+>CaGDLs.CaGDL</A> caGDL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
+
+<textblock type="annotcomp" expanded="false">  Conditions.FaceBus.SubregionClosed condition1[n_y, n_z](<font color="blue">each </font>gas(
+      inclH2O=true,
+      inclH2=true,
+      H2(thermal(source(k=environment.T))),
+      H2O(thermal(source(k=environment.T)))), <font color="blue">each </font>graphite(
+      &#39;inclC+&#39;=true,
+      &#39;incle-&#39;=true,
+      &#39;C+&#39;(thermal(source(k=environment.T))),
+      &#39;e-&#39;(thermal(source(k=environment.T)))));</textblock>
+
+<textblock type="annotcomp" expanded="false">  Conditions.FaceBus.SubregionClosed condition2[n_y, n_z](<font color="blue">each </font>gas(
+      inclH2O=true,
+      inclN2=true,
+      inclO2=true,
+      N2(thermal(source(k=environment.T))),
+      O2(thermal(source(k=environment.T))),
+      H2O(thermal(source(k=environment.T)))), <font color="blue">each </font>graphite(
+      &#39;inclC+&#39;=true,
+      &#39;incle-&#39;=true,
+      &#39;C+&#39;(thermal(source(k=environment.T))),
+      &#39;e-&#39;(thermal(source(k=environment.T)), <font color="blue">redeclare </font>Conditions.Face.Material.Density
+          normal(source(k(start=U.atm/(298.15*U.K)))))));</textblock>
+
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><A HREF="FCSys_Conditions.html#FCSys.Conditions.Environment"
+>FCSys.Conditions.Environment</A> environment(analysis=true);</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(condition1.face, anGDL.xNegative);
+  <font color="red">connect</font>(anGDL.xPositive, anCL.xNegative);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(anCL.xPositive, pEM.xNegative);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(pEM.xPositive, caCL.xNegative);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(caCL.xPositive, caGDL.xNegative);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(caGDL.xPositive, condition2.face);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>GDLToGDL;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE CLToCL<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Regions.Examples.FPToFPI.png" ALT="FCSys.Regions.Examples.CLToCL" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Regions.Examples.CLToCL"></A><A HREF="FCSys_Regions_Examples.html#FCSys.Regions.Examples"
+>FCSys.Regions.Examples</A>.CLToCL</H2>
+<B>Test one catalyst layer to the other</B><p>
+<IMG SRC="FCSys.Regions.Examples.CLToCLD.png" ALT="FCSys.Regions.Examples.CLToCL">
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples), <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>.
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_y[:]</TD><TD>fill(1*U.m/1, 1)</TD><TD>Lengths along the channel (<i>L</i><sub>y</sub>) [l]</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_z[:]</TD><TD>fill(5*U.mm/1, 1)</TD><TD>Lengths across the channel (<i>L</i><sub>z</sub>) [l]</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> CLToCL <font color="darkgreen">&quot;Test one catalyst layer to the other&quot;</font>
+  <font color="blue">import </font><A HREF="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases"
+>FCSys.Subregions.Phases</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>;
+
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Q.Length</A> L_y[:]=<font color="red">fill</font>(1*U.m/1, 1) <font color="darkgreen">
+    &quot;</pre>Lengths along the channel (<i>L</i><sub>y</sub>)<pre>&quot;</font>;
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Q.Length</A> L_z[:]=<font color="red">fill</font>(5*U.mm/1, 1) <font color="darkgreen">
+    &quot;</pre>Lengths across the channel (<i>L</i><sub>z</sub>)<pre>&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_y=<font color="red">size</font>(L_y, 1) <font color="darkgreen">
+    &quot;Number of regions along the channel&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
+    &quot;Number of regions across the channel&quot;</font>;
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL"
+>AnCLs.AnCL</A> anCL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM"
+>PEMs.PEM</A> pEM(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL"
+>CaCLs.CaCL</A> caCL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows"
+>Conditions.FaceBus.SubregionFlows</A> condition1[n_y, n_z](
+    <font color="blue">each </font>gas(inclH2=true, inclH2O=true),
+    <font color="blue">each </font>graphite(&#39;inclC+&#39;=true, &#39;incle-&#39;=true),
+    <font color="blue">each </font>ionomer(&#39;inclC19HF37O5S-&#39;=true, &#39;inclH+&#39;=true));</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows"
+>Conditions.FaceBus.SubregionFlows</A> condition2[n_y, n_z](
+    <font color="blue">each </font>gas(
+      inclH2O=true,
+      inclN2=true,
+      inclO2=true,
+      O2(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Density normal(source(k(start
+                =U.atm/(298.15*U.K))))),
+      H2O(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Density normal(source(k(
+                start=U.atm/(298.15*U.K)))))),
+    <font color="blue">each </font>graphite(
+      &#39;inclC+&#39;=true,
+      &#39;incle-&#39;=true,
+      &#39;e-&#39;(<font color="blue">redeclare </font><A HREF="FCSys_Conditions_Face_Material.html#FCSys.Conditions.Face.Material.Current"
+>FCSys.Conditions.Face.Material.Current</A> normal(<font color="blue">redeclare </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Ramp"
+>Modelica.Blocks.Sources.Ramp</A>
+            source(duration=1000, height=-2*U.A)))),
+    <font color="blue">each </font>ionomer(
+      &#39;inclC19HF37O5S-&#39;=true,
+      &#39;inclH+&#39;=true,
+      &#39;H+&#39;(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Density normal(source(k(
+                start=U.atm/(298.15*U.K)))))));</textblock>
+
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><A HREF="FCSys_Conditions.html#FCSys.Conditions.Environment"
+>FCSys.Conditions.Environment</A> environment(analysis=true);</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(condition1.face, anCL.xNegative);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(anCL.xPositive, pEM.xNegative);
+  <font color="red">connect</font>(pEM.xPositive, caCL.xNegative);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(caCL.xPositive, condition2.face);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>CLToCL;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE AnFP<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Regions.Examples.FPToFPI.png" ALT="FCSys.Regions.Examples.AnFP" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Regions.Examples.AnFP"></A><A HREF="FCSys_Regions_Examples.html#FCSys.Regions.Examples"
+>FCSys.Regions.Examples</A>.AnFP</H2>
+<B>Test the anode flow plate</B><p>
+<IMG SRC="FCSys.Regions.Examples.AnFPD.png" ALT="FCSys.Regions.Examples.AnFP">
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples), <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>.
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_y[:]</TD><TD>fill(1*U.m/1, 1)</TD><TD>Lengths along the channel (<i>L</i><sub>y</sub>) [l]</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_z[:]</TD><TD>fill(5*U.mm/1, 1)</TD><TD>Lengths across the channel (<i>L</i><sub>z</sub>) [l]</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> AnFP <font color="darkgreen">&quot;Test the anode flow plate&quot;</font>
+  <font color="blue">import </font><A HREF="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases"
+>FCSys.Subregions.Phases</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>;
+
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Q.Length</A> L_y[:]=<font color="red">fill</font>(1*U.m/1, 1) <font color="darkgreen">
+    &quot;</pre>Lengths along the channel (<i>L</i><sub>y</sub>)<pre>&quot;</font>;
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Q.Length</A> L_z[:]=<font color="red">fill</font>(5*U.mm/1, 1) <font color="darkgreen">
+    &quot;</pre>Lengths across the channel (<i>L</i><sub>z</sub>)<pre>&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_y=<font color="red">size</font>(L_y, 1) <font color="darkgreen">
+    &quot;Number of regions along the channel&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
+    &quot;Number of regions across the channel&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><A HREF="FCSys_Conditions.html#FCSys.Conditions.Environment"
+>FCSys.Conditions.Environment</A> environment(
+    p=149.6*U.kPa,
+    T=333.15*U.K,
+    analysis=true);
+  <A HREF="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP"
+>AnFPs.AnFP</A> anFP(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
+
+<textblock type="annotcomp" expanded="false">  Conditions.FaceBus.SubregionClosed condition1[n_y, n_z](<font color="blue">each </font>graphite(
+      &#39;inclC+&#39;=true,
+      &#39;incle-&#39;=true,
+      &#39;C+&#39;(thermal(source(k=environment.T))),
+      &#39;e-&#39;(thermal(source(k=environment.T)))));
+  Conditions.FaceBus.SubregionClosed condition2[n_y, n_z](<font color="blue">each </font>gas(
+      inclH2=true,
+      inclH2O=true,
+      H2(thermal(source(k=environment.T))),
+      H2O(thermal(source(k=environment.T)))),<font color="blue">each </font>graphite(
+      &#39;inclC+&#39;=true,
+      &#39;incle-&#39;=true,
+      &#39;C+&#39;(thermal(source(k=environment.T))),
+      &#39;e-&#39;(thermal(source(k=environment.T)),<font color="blue">redeclare </font>Conditions.Face.Material.Density
+          material)));</textblock>
+
+<textblock type="annotcomp" expanded="false">  Conditions.FaceBus.SubregionClosed bC3[anFP.n_x, n_z](<font color="blue">each </font>gas(
+      inclH2=true,
+      inclH2O=true,
+      H2(thermal(source(k=environment.T))),
+      H2O(thermal(source(k=environment.T)))));
+  Conditions.FaceBus.SubregionClosed bC4[anFP.n_x, n_z](<font color="blue">each </font>gas(
+      inclH2=true,
+      inclH2O=true,
+      H2(thermal(source(k=environment.T))),
+      H2O(thermal(source(k=environment.T)))));</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(condition1.face, anFP.xNegative);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(condition2.face, anFP.xPositive);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(bC3.face, anFP.yNegative);
+  <font color="red">connect</font>(bC4.face, anFP.yPositive);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>AnFP;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE AnGDL<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Regions.Examples.FPToFPI.png" ALT="FCSys.Regions.Examples.AnGDL" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Regions.Examples.AnGDL"></A><A HREF="FCSys_Regions_Examples.html#FCSys.Regions.Examples"
+>FCSys.Regions.Examples</A>.AnGDL</H2>
+<B>Test the anode gas diffusion layer</B><p>
+<IMG SRC="FCSys.Regions.Examples.AnGDLD.png" ALT="FCSys.Regions.Examples.AnGDL">
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples), <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>.
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_y[:]</TD><TD>fill(1*U.m/1, 1)</TD><TD>Lengths along the channel (<i>L</i><sub>y</sub>) [l]</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_z[:]</TD><TD>fill(5*U.mm/1, 1)</TD><TD>Lengths across the channel (<i>L</i><sub>z</sub>) [l]</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> AnGDL <font color="darkgreen">&quot;Test the anode gas diffusion layer&quot;</font>
+  <font color="blue">import </font><A HREF="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases"
+>FCSys.Subregions.Phases</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>;
+
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Q.Length</A> L_y[:]=<font color="red">fill</font>(1*U.m/1, 1) <font color="darkgreen">
+    &quot;</pre>Lengths along the channel (<i>L</i><sub>y</sub>)<pre>&quot;</font>;
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Q.Length</A> L_z[:]=<font color="red">fill</font>(5*U.mm/1, 1) <font color="darkgreen">
+    &quot;</pre>Lengths across the channel (<i>L</i><sub>z</sub>)<pre>&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_y=<font color="red">size</font>(L_y, 1) <font color="darkgreen">
+    &quot;Number of regions along the channel&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
+    &quot;Number of regions across the channel&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><A HREF="FCSys_Conditions.html#FCSys.Conditions.Environment"
+>FCSys.Conditions.Environment</A> environment(
+    p=149.6*U.kPa,
+    T=333.15*U.K,
+    analysis=true);
+  <A HREF="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL"
+>AnGDLs.AnGDL</A> anGDL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
+
+<textblock type="annotcomp" expanded="false">  Conditions.FaceBus.SubregionClosed condition1[n_y, n_z](<font color="blue">each </font>gas(
+      inclH2=true,
+      inclH2O=true,
+      H2(thermal(source(k=environment.T))),
+      H2O(thermal(source(k=environment.T)))), <font color="blue">each </font>graphite(
+      &#39;inclC+&#39;=true,
+      &#39;incle-&#39;=true,
+      &#39;C+&#39;(thermal(source(k=environment.T))),
+      &#39;e-&#39;(thermal(source(k=environment.T)))));
+  Conditions.FaceBus.SubregionClosed condition2[n_y, n_z](<font color="blue">each </font>gas(
+      inclH2=true,
+      inclH2O=true,
+      H2(thermal(source(k=environment.T))),
+      H2O(thermal(source(k=environment.T)))), <font color="blue">each </font>graphite(
+      &#39;inclC+&#39;=true,
+      &#39;incle-&#39;=true,
+      &#39;C+&#39;(thermal(source(k=environment.T))),
+      &#39;e-&#39;(thermal(source(k=environment.T)))));</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(condition1.face, anGDL.xNegative);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(anGDL.xPositive, condition2.face);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>AnGDL;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE AnCL<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Regions.Examples.FPToFPI.png" ALT="FCSys.Regions.Examples.AnCL" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Regions.Examples.AnCL"></A><A HREF="FCSys_Regions_Examples.html#FCSys.Regions.Examples"
+>FCSys.Regions.Examples</A>.AnCL</H2>
+<B>Test the anode catalyst layer</B><p>
+<IMG SRC="FCSys.Regions.Examples.AnCLD.png" ALT="FCSys.Regions.Examples.AnCL">
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples), <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>.
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_y[:]</TD><TD>fill(1*U.m/1, 1)</TD><TD>Lengths along the channel (<i>L</i><sub>y</sub>) [l]</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_z[:]</TD><TD>fill(5*U.mm/1, 1)</TD><TD>Lengths across the channel (<i>L</i><sub>z</sub>) [l]</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> AnCL <font color="darkgreen">&quot;Test the anode catalyst layer&quot;</font>
+  <font color="blue">import </font><A HREF="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases"
+>FCSys.Subregions.Phases</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>;
+
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Q.Length</A> L_y[:]=<font color="red">fill</font>(1*U.m/1, 1) <font color="darkgreen">
+    &quot;</pre>Lengths along the channel (<i>L</i><sub>y</sub>)<pre>&quot;</font>;
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Q.Length</A> L_z[:]=<font color="red">fill</font>(5*U.mm/1, 1) <font color="darkgreen">
+    &quot;</pre>Lengths across the channel (<i>L</i><sub>z</sub>)<pre>&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_y=<font color="red">size</font>(L_y, 1) <font color="darkgreen">
+    &quot;Number of regions along the channel&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
+    &quot;Number of regions across the channel&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><A HREF="FCSys_Conditions.html#FCSys.Conditions.Environment"
+>FCSys.Conditions.Environment</A> environment(
+    p=149.6*U.kPa,
+    T=333.15*U.K,
+    analysis=false);
+  <A HREF="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL"
+>AnCLs.AnCL</A> anCL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows"
+>Conditions.FaceBus.SubregionFlows</A> condition1[n_y, n_z](
+    <font color="blue">each </font>gas(inclH2=true, inclH2O=true),
+    <font color="blue">each </font>graphite(&#39;inclC+&#39;=true, &#39;incle-&#39;=true),
+    <font color="blue">each </font>ionomer(&#39;inclC19HF37O5S-&#39;=true, &#39;inclH+&#39;=true));</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows"
+>Conditions.FaceBus.SubregionFlows</A> condition2[n_y, n_z](
+    <font color="blue">each </font>gas(
+      inclH2=true,
+      inclH2O=true,
+      H2(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Density normal(source(k=U.atm/
+                (298.15*U.K)))),
+      H2O(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Density normal(source(k=U.atm
+                /(298.15*U.K))))),
+    <font color="blue">each </font>graphite(
+      &#39;inclC+&#39;=true,
+      &#39;incle-&#39;=true,
+      &#39;e-&#39;(<font color="blue">redeclare </font><A HREF="FCSys_Conditions_Face_Material.html#FCSys.Conditions.Face.Material.Current"
+>FCSys.Conditions.Face.Material.Current</A> normal(<font color="blue">redeclare </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Ramp"
+>Modelica.Blocks.Sources.Ramp</A>
+            source(duration=1000, height=2*U.A)))),
+    <font color="blue">each </font>ionomer(
+      &#39;inclC19HF37O5S-&#39;=true,
+      &#39;inclH+&#39;=true,
+      &#39;H+&#39;(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Density normal(source(k(
+                start=U.atm/(298.15*U.K)))))));</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(condition1.face, anCL.xNegative);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(anCL.xPositive, condition2.face);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>AnCL;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE PEM<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Regions.Examples.FPToFPI.png" ALT="FCSys.Regions.Examples.PEM" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Regions.Examples.PEM"></A><A HREF="FCSys_Regions_Examples.html#FCSys.Regions.Examples"
+>FCSys.Regions.Examples</A>.PEM</H2>
+<B>Test the proton exchange membrane</B><p>
+<IMG SRC="FCSys.Regions.Examples.PEMD.png" ALT="FCSys.Regions.Examples.PEM">
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples), <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>.
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_y[:]</TD><TD>fill(1*U.m/1, 1)</TD><TD>Lengths along the channel (<i>L</i><sub>y</sub>) [l]</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_z[:]</TD><TD>fill(5*U.mm/1, 1)</TD><TD>Lengths across the channel (<i>L</i><sub>z</sub>) [l]</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> PEM <font color="darkgreen">&quot;Test the proton exchange membrane&quot;</font>
+
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>;
+
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Q.Length</A> L_y[:]=<font color="red">fill</font>(1*U.m/1, 1) <font color="darkgreen">
+    &quot;</pre>Lengths along the channel (<i>L</i><sub>y</sub>)<pre>&quot;</font>;
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Q.Length</A> L_z[:]=<font color="red">fill</font>(5*U.mm/1, 1) <font color="darkgreen">
+    &quot;</pre>Lengths across the channel (<i>L</i><sub>z</sub>)<pre>&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_y=<font color="red">size</font>(L_y, 1) <font color="darkgreen">
+    &quot;Number of regions along the channel&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
+    &quot;Number of regions across the channel&quot;</font>;
+
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><A HREF="FCSys_Conditions.html#FCSys.Conditions.Environment"
+>FCSys.Conditions.Environment</A> environment(
+    p=149.6*U.kPa,
+    T=333.15*U.K,
+    analysis=true);
+  <A HREF="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM"
+>PEMs.PEM</A> pEM(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
+
+  Conditions.FaceBus.SubregionClosed condition1[n_y, n_z](<font color="blue">each </font>gas(inclH2O=true,
+        H2O(thermal(source(k=environment.T)))), <font color="blue">each </font>ionomer(
+      &#39;inclC19HF37O5S-&#39;=true,
+      &#39;inclH+&#39;=true,
+      &#39;C19HF37O5S-&#39;(thermal(source(k=environment.T))),
+      &#39;H+&#39;(thermal(source(k=environment.T)))));
+  Conditions.FaceBus.SubregionClosed condition2[n_y, n_z](<font color="blue">each </font>gas(inclH2O=true,
+        H2O(thermal(source(k=environment.T)))), <font color="blue">each </font>ionomer(
+      &#39;inclC19HF37O5S-&#39;=true,
+      &#39;inclH+&#39;=true,
+      &#39;C19HF37O5S-&#39;(thermal(source(k=environment.T))),
+      &#39;H+&#39;(thermal(source(k=environment.T)))));
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(condition1.face, pEM.xNegative);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(condition2.face, pEM.xPositive);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>PEM;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE CaCL<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Regions.Examples.FPToFPI.png" ALT="FCSys.Regions.Examples.CaCL" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Regions.Examples.CaCL"></A><A HREF="FCSys_Regions_Examples.html#FCSys.Regions.Examples"
+>FCSys.Regions.Examples</A>.CaCL</H2>
+<B>Test the cathode catalyst layer</B><p>
+<IMG SRC="FCSys.Regions.Examples.CaCLD.png" ALT="FCSys.Regions.Examples.CaCL">
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples), <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>.
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_y[:]</TD><TD>fill(1*U.m/1, 1)</TD><TD>Lengths along the channel (<i>L</i><sub>y</sub>) [l]</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_z[:]</TD><TD>fill(5*U.mm/1, 1)</TD><TD>Lengths across the channel (<i>L</i><sub>z</sub>) [l]</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> CaCL <font color="darkgreen">&quot;Test the cathode catalyst layer&quot;</font>
+  <font color="blue">import </font><A HREF="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases"
+>FCSys.Subregions.Phases</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>;
+
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Q.Length</A> L_y[:]=<font color="red">fill</font>(1*U.m/1, 1) <font color="darkgreen">
+    &quot;</pre>Lengths along the channel (<i>L</i><sub>y</sub>)<pre>&quot;</font>;
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Q.Length</A> L_z[:]=<font color="red">fill</font>(5*U.mm/1, 1) <font color="darkgreen">
+    &quot;</pre>Lengths across the channel (<i>L</i><sub>z</sub>)<pre>&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_y=<font color="red">size</font>(L_y, 1) <font color="darkgreen">
+    &quot;Number of regions along the channel&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
+    &quot;Number of regions across the channel&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><A HREF="FCSys_Conditions.html#FCSys.Conditions.Environment"
+>FCSys.Conditions.Environment</A> environment(
+    p=149.6*U.kPa,
+    T=333.15*U.K,
+    analysis=true);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL"
+>CaCLs.CaCL</A> caCL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows"
+>Conditions.FaceBus.SubregionFlows</A> condition1[n_y, n_z](
+    <font color="blue">each </font>gas(
+      inclH2O=true,
+      inclN2=true,
+      inclO2=true),
+    <font color="blue">each </font>graphite(&#39;inclC+&#39;=true, &#39;incle-&#39;=true),
+    <font color="blue">each </font>ionomer(&#39;inclC19HF37O5S-&#39;=true, &#39;inclH+&#39;=true));
+  <A HREF="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows"
+>Conditions.FaceBus.SubregionFlows</A> condition2[n_y, n_z](
+    <font color="blue">each </font>gas(
+      inclH2O=true,
+      inclN2=true,
+      inclO2=true,
+      O2(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Density normal(source(k(start
+                =U.atm/(298.15*U.K))))),
+      H2O(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Density normal(source(k(
+                start=U.atm/(298.15*U.K)))))),
+    <font color="blue">each </font>graphite(
+      &#39;inclC+&#39;=true,
+      &#39;incle-&#39;=true,
+      &#39;C+&#39;(<font color="blue">redeclare </font><A HREF="FCSys_Conditions_Face_Thermal.html#FCSys.Conditions.Face.Thermal.Temperature"
+>FCSys.Conditions.Face.Thermal.Temperature</A> thermal(source(k(
+                start=298.15*U.K)))),
+      &#39;e-&#39;(<font color="blue">redeclare </font><A HREF="FCSys_Conditions_Face_Material.html#FCSys.Conditions.Face.Material.Current"
+>FCSys.Conditions.Face.Material.Current</A> normal(<font color="blue">redeclare </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Ramp"
+>Modelica.Blocks.Sources.Ramp</A>
+            source(duration=1000, height=-2*U.A)))),
+    <font color="blue">each </font>ionomer(
+      &#39;inclC19HF37O5S-&#39;=true,
+      &#39;inclH+&#39;=true,
+      &#39;H+&#39;(<font color="blue">redeclare </font>FCSys.Conditions.Face.Material.Density normal(source(k(
+                start=U.atm/(298.15*U.K)))))));</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(condition1.face, caCL.xNegative);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(condition2.face, caCL.xPositive);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>CaCL;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE CaGDL<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Regions.Examples.FPToFPI.png" ALT="FCSys.Regions.Examples.CaGDL" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Regions.Examples.CaGDL"></A><A HREF="FCSys_Regions_Examples.html#FCSys.Regions.Examples"
+>FCSys.Regions.Examples</A>.CaGDL</H2>
+<B>Test the cathode gas diffusion layer</B><p>
+<IMG SRC="FCSys.Regions.Examples.CaGDLD.png" ALT="FCSys.Regions.Examples.CaGDL">
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples), <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>.
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_y[:]</TD><TD>fill(1*U.m/1, 1)</TD><TD>Lengths along the channel (<i>L</i><sub>y</sub>) [l]</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_z[:]</TD><TD>fill(5*U.mm/1, 1)</TD><TD>Lengths across the channel (<i>L</i><sub>z</sub>) [l]</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> CaGDL <font color="darkgreen">&quot;Test the cathode gas diffusion layer&quot;</font>
+  <font color="blue">import </font><A HREF="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases"
+>FCSys.Subregions.Phases</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>;
+
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Q.Length</A> L_y[:]=<font color="red">fill</font>(1*U.m/1, 1) <font color="darkgreen">
+    &quot;</pre>Lengths along the channel (<i>L</i><sub>y</sub>)<pre>&quot;</font>;
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Q.Length</A> L_z[:]=<font color="red">fill</font>(5*U.mm/1, 1) <font color="darkgreen">
+    &quot;</pre>Lengths across the channel (<i>L</i><sub>z</sub>)<pre>&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_y=<font color="red">size</font>(L_y, 1) <font color="darkgreen">
+    &quot;Number of regions along the channel&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
+    &quot;Number of regions across the channel&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><A HREF="FCSys_Conditions.html#FCSys.Conditions.Environment"
+>FCSys.Conditions.Environment</A> environment(
+    p=149.6*U.kPa,
+    T=333.15*U.K,
+    analysis=true);
+  <A HREF="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL"
+>CaGDLs.CaGDL</A> caGDL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
+
+<textblock type="annotcomp" expanded="false">  Conditions.FaceBus.SubregionClosed condition1[n_y, n_z](<font color="blue">each </font>gas(
+      inclH2O=true,
+      inclN2=true,
+      inclO2=true,
+      N2(thermal(source(k=environment.T))),
+      O2(thermal(source(k=environment.T))),
+      H2O(thermal(source(k=environment.T)))), <font color="blue">each </font>graphite(
+      &#39;inclC+&#39;=true,
+      &#39;incle-&#39;=true,
+      &#39;C+&#39;(thermal(source(k=environment.T))),
+      &#39;e-&#39;(thermal(source(k=environment.T)))));
+  Conditions.FaceBus.SubregionClosed condition2[n_y, n_z](<font color="blue">each </font>gas(
+      inclH2O=true,
+      inclN2=true,
+      inclO2=true,
+      N2(thermal(source(k=environment.T))),
+      O2(thermal(source(k=environment.T))),
+      H2O(thermal(source(k=environment.T)))), <font color="blue">each </font>graphite(
+      &#39;inclC+&#39;=true,
+      &#39;incle-&#39;=true,
+      &#39;C+&#39;(thermal(source(k=environment.T))),
+      &#39;e-&#39;(thermal(source(k=environment.T)))));</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(condition1.face, caGDL.xNegative);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(condition2.face, caGDL.xPositive);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>CaGDL;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE CaFP<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Regions.Examples.FPToFPI.png" ALT="FCSys.Regions.Examples.CaFP" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Regions.Examples.CaFP"></A><A HREF="FCSys_Regions_Examples.html#FCSys.Regions.Examples"
+>FCSys.Regions.Examples</A>.CaFP</H2>
+<B>Test the cathode flow plate</B><p>
+<IMG SRC="FCSys.Regions.Examples.CaFPD.png" ALT="FCSys.Regions.Examples.CaFP">
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples), <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>.
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_y[:]</TD><TD>fill(1*U.m/1, 1)</TD><TD>Lengths along the channel (<i>L</i><sub>y</sub>) [l]</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_z[:]</TD><TD>fill(5*U.mm/1, 1)</TD><TD>Lengths across the channel (<i>L</i><sub>z</sub>) [l]</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> CaFP <font color="darkgreen">&quot;Test the cathode flow plate&quot;</font>
+  <font color="blue">import </font><A HREF="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases"
+>FCSys.Subregions.Phases</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>;
+
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Q.Length</A> L_y[:]=<font color="red">fill</font>(1*U.m/1, 1) <font color="darkgreen">
+    &quot;</pre>Lengths along the channel (<i>L</i><sub>y</sub>)<pre>&quot;</font>;
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Q.Length</A> L_z[:]=<font color="red">fill</font>(5*U.mm/1, 1) <font color="darkgreen">
+    &quot;</pre>Lengths across the channel (<i>L</i><sub>z</sub>)<pre>&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_y=<font color="red">size</font>(L_y, 1) <font color="darkgreen">
+    &quot;Number of regions along the channel&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
+    &quot;Number of regions across the channel&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><A HREF="FCSys_Conditions.html#FCSys.Conditions.Environment"
+>FCSys.Conditions.Environment</A> environment(
+    p=149.6*U.kPa,
+    T=333.15*U.K,
+    analysis=true);
+  <A HREF="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP"
+>CaFPs.CaFP</A> caFP(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);</textblock>
+
+<textblock type="annotcomp" expanded="false">  Conditions.FaceBus.SubregionClosed condition1[n_y, n_z](<font color="blue">each </font>gas(
+      inclH2O=true,
+      inclN2=true,
+      inclO2=true,
+      N2(thermal(source(k=environment.T))),
+      O2(thermal(source(k=environment.T))),
+      H2O(thermal(source(k=environment.T)))),<font color="blue">each </font>graphite(
+      &#39;inclC+&#39;=true,
+      &#39;incle-&#39;=true,
+      &#39;C+&#39;(thermal(source(k=environment.T))),
+      &#39;e-&#39;(thermal(source(k=environment.T)))));
+  Conditions.FaceBus.SubregionClosed condition2[n_y, n_z](<font color="blue">each </font>graphite(
+      &#39;inclC+&#39;=true,
+      &#39;incle-&#39;=true,
+      &#39;C+&#39;(thermal(source(k=environment.T))),
+      &#39;e-&#39;(thermal(source(k=environment.T)),<font color="blue">redeclare </font>Conditions.Face.Material.Density
+          material)));
+  Conditions.FaceBus.SubregionClosed bC3[caFP.n_x, n_z](<font color="blue">each </font>gas(
+      inclH2O=true,
+      inclN2=true,
+      inclO2=true,
+      H2O(thermal(source(k=environment.T))),
+      N2(thermal(source(k=environment.T))),
+      O2(thermal(source(k=environment.T)))));
+  Conditions.FaceBus.SubregionClosed bC4[caFP.n_x, n_z](<font color="blue">each </font>gas(
+      inclH2O=true,
+      inclN2=true,
+      inclO2=true,
+      H2O(thermal(source(k=environment.T))),
+      N2(thermal(source(k=environment.T))),
+      O2(thermal(source(k=environment.T)))));</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(condition1.face, caFP.xNegative);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(caFP.xPositive, condition2.face);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(bC3.face, caFP.yNegative);
+  <font color="red">connect</font>(bC4.face, caFP.yPositive);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>CaFP;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE AnFPAlone<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Regions.Examples.FPToFPI.png" ALT="FCSys.Regions.Examples.AnFPAlone" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Regions.Examples.AnFPAlone"></A><A HREF="FCSys_Regions_Examples.html#FCSys.Regions.Examples"
+>FCSys.Regions.Examples</A>.AnFPAlone</H2>
+<B>Test the anode flow plate</B><p>
+<IMG SRC="FCSys.Regions.Examples.AnFPAloneD.png" ALT="FCSys.Regions.Examples.AnFPAlone">
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples), <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>.
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_y[:]</TD><TD>fill(1*U.m/1, 1)</TD><TD>Lengths along the channel (<i>L</i><sub>y</sub>) [l]</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_z[:]</TD><TD>fill(5*U.mm/1, 1)</TD><TD>Lengths across the channel (<i>L</i><sub>z</sub>) [l]</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> AnFPAlone <font color="darkgreen">&quot;Test the anode flow plate&quot;</font>
+  <font color="blue">import </font><A HREF="FCSys_Subregions_Phases.html#FCSys.Subregions.Phases"
+>FCSys.Subregions.Phases</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>;
+
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Q.Length</A> L_y[:]=<font color="red">fill</font>(1*U.m/1, 1) <font color="darkgreen">
+    &quot;</pre>Lengths along the channel (<i>L</i><sub>y</sub>)<pre>&quot;</font>;
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Q.Length</A> L_z[:]=<font color="red">fill</font>(5*U.mm/1, 1) <font color="darkgreen">
+    &quot;</pre>Lengths across the channel (<i>L</i><sub>z</sub>)<pre>&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_y=<font color="red">size</font>(L_y, 1) <font color="darkgreen">
+    &quot;Number of regions along the channel&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=<font color="red">size</font>(L_z, 1) <font color="darkgreen">
+    &quot;Number of regions across the channel&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><A HREF="FCSys_Conditions.html#FCSys.Conditions.Environment"
+>FCSys.Conditions.Environment</A> environment(
+    p=149.6*U.kPa,
+    T=333.15*U.K,
+    analysis=true);
+  <A HREF="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP"
+>AnFPs.AnFP</A> anFP(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z);
+
+<font color="blue">end </font>AnFPAlone;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 01:09:59 2013.
+</address></BODY>
+</HTML>

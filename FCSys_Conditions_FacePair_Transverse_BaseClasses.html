@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.FacePair.Transverse.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="Base classes (not generally for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,11 +45,15 @@
       <div class="body">
 
 <h2><a name="FCSys.Conditions.FacePair.Transverse.BaseClasses"></a><a href="FCSys_Conditions_FacePair_Transverse.html#FCSys.Conditions.FacePair.Transverse">FCSys.Conditions.FacePair.Transverse</a>.BaseClasses</h2>
+
 <b>Base classes (not generally for direct use)</b>
-<p>
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.BasesPackage.html#Modelica.Icons.BasesPackage">Modelica.Icons.BasesPackage</a> (Icon for packages containing base classes).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Conditions.FacePair.Transverse.BaseClasses.PartialConditionS.png" alt="FCSys.Conditions.FacePair.Transverse.BaseClasses.PartialCondition" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FacePair_Transverse_BaseClasses.html#FCSys.Conditions.FacePair.Transverse.BaseClasses.PartialCondition">PartialCondition</a>
@@ -56,7 +61,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Conditions_FacePair_Transverse_BaseClasses.html#FCSys.Conditions.FacePair.Transverse.BaseClasses.ConditionType">ConditionType</a>
 </td><td>Types of conditions</td></tr>
 </table>
-<p><h3>Types and constants</h3>
+<p>
+
+<h3>Types and constants</h3>
+
 <a name="FCSys.Conditions.FacePair.Transverse.BaseClasses.ConditionType"></a><pre><font color="blue">type</font> ConditionType = <font color="blue">enumeration</font>(
     Velocity <font color="darkgreen">&quot;Specify velocity difference (measure shear force)&quot;</font>,
     Force <font color="darkgreen">&quot;Specify shear force (measure velocity difference)&quot;</font>,
@@ -67,20 +75,30 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Conditions.FacePair.Transverse.BaseClasses.PartialCondition"></a><a href="FCSys_Conditions_FacePair_Transverse_BaseClasses.html#FCSys.Conditions.FacePair.Transverse.BaseClasses">FCSys.Conditions.FacePair.Transverse.BaseClasses</a>.PartialCondition</h2>
 <b>Partial model for a transverse mechanical condition</b><p>
 <img src="images/FCSys.Conditions.FacePair.Normal.CurrentAreicD.png" alt="FCSys.Conditions.FacePair.Transverse.BaseClasses.PartialCondition">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="FCSys_Conditions_FacePair_BaseClasses.html#FCSys.Conditions.FacePair.BaseClasses.PartialCondition">FacePair.BaseClasses.PartialCondition</a> (Partial model to specify and measure conditions on a pair of connectors).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Orientation">Orientation</a></td><td>orientation</td><td>Orientation.preceding</td><td>Orientation of linear momentum</td></tr>
 <tr><td><a href="FCSys_Conditions_FacePair_Transverse_BaseClasses.html#FCSys.Conditions.FacePair.Transverse.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>&nbsp;</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So...</td><td>Source of internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>&nbsp;</td><td>Measurement expression</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Value of specified condition</td></tr>
@@ -89,18 +107,22 @@ Extends from <a href="FCSys_Conditions_FacePair_BaseClasses.html#FCSys.Condition
 <TR bgcolor="#e0e0e0"><TD colspan=3>Measurement</td></tr>
 <tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Measurement expression</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">partial </font><font color="blue">model</font> PartialCondition <font color="darkgreen">
   &quot;Partial model for a transverse mechanical condition&quot;</font>
+  <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.mod1">FCSys.BaseClasses.Utilities.mod1</a>;
   <font color="blue">extends </font><a href="FCSys_Conditions_FacePair_BaseClasses.html#FCSys.Conditions.FacePair.BaseClasses.PartialCondition">FacePair.BaseClasses.PartialCondition</a>;
 
   <font color="blue">parameter </font><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Orientation">Orientation</a> orientation=Orientation.preceding <font color="darkgreen">
     &quot;Orientation of linear momentum&quot;</font>;
 
   <font color="blue">constant </font><a href="FCSys_Conditions_FacePair_Transverse_BaseClasses.html#FCSys.Conditions.FacePair.Transverse.BaseClasses.ConditionType">ConditionType</a> conditionType <font color="darkgreen">&quot;Type of condition&quot;</font>;
-  <font color="darkgreen">// Note:  This is included so that the type of condition is recorded with the</font>
-  <font color="darkgreen">// results.</font>
+  <font color="darkgreen">// Note:  This is included so that the type of condition is recorded with</font>
+  <font color="darkgreen">// the results.</font>
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Conservation of linear momentum in the present transverse direction</font>
@@ -119,14 +141,14 @@ Extends from <a href="FCSys_Conditions_FacePair_BaseClasses.html#FCSys.Condition
   <font color="darkgreen">// Heat</font>
   negative.Qdot = 0;
   positive.Qdot = 0;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>PartialCondition;
+<font color="blue">end </font>PartialCondition;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:48:50 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:45:56 2013.
 </div>
 </body>
 </html>

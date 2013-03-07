@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.Adapters.Phases</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="Adapters for material phases">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,11 +45,15 @@
       <div class="body">
 
 <h2><a name="FCSys.Conditions.Adapters.Phases"></a><a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters">FCSys.Conditions.Adapters</a>.Phases</h2>
+
 <b>Adapters for material phases</b>
-<p>
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Conditions.Adapters.Phases.AnodeGasS.png" alt="FCSys.Conditions.Adapters.Phases.AnodeGas" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters_Phases.html#FCSys.Conditions.Adapters.Phases.AnodeGas">AnodeGas</a>
@@ -68,16 +73,25 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Conditions.Adapters.Phases.AnodeGas"></a><a href="FCSys_Conditions_Adapters_Phases.html#FCSys.Conditions.Adapters.Phases">FCSys.Conditions.Adapters.Phases</a>.AnodeGas</h2>
 <b>Adapter for PEMFC anode gas between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a></b><p>
 <img src="images/FCSys.Conditions.Adapters.Phases.AnodeGasD.png" alt="FCSys.Conditions.Adapters.Phases.AnodeGas">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="FCSys_Conditions_Adapters_Phases_BaseClasses.html#FCSys.Conditions.Adapters.Phases.BaseClasses.PartialPhase">BaseClasses.PartialPhase</a> (Partial adapter for a phase between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a>).
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>face</td><td>FCSys face connector</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">FluidPort_b</a></td><td>fluidPort</td><td>Modelica fluid port</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> AnodeGas <font color="darkgreen">
   &quot;Adapter for PEMFC anode gas between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a>&quot;</font>
@@ -86,31 +100,31 @@ Extends from <a href="FCSys_Conditions_Adapters_Phases_BaseClasses.html#FCSys.Co
   <font color="blue">replaceable </font><font color="blue">package</font> Medium = <a href="FCSys_Conditions_Adapters_Media_AnodeGas.html#FCSys.Conditions.Adapters.Media.AnodeGas">Media.AnodeGas</a> <font color="blue">constrainedby </font>
     Modelica.Media.Interfaces.PartialMedium <font color="darkgreen">&quot;Medium model (Modelica)&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.FluidNonionic">Species.FluidNonionic</a> H2(<font color="blue">redeclare </font><font color="blue">package</font> Medium = <a href="http://build.openmodelica.org/Documentation/Modelica.Media.IdealGases.SingleGases.H2.html#Modelica.Media.IdealGases.SingleGases.H2">Modelica.Media.IdealGases.SingleGases.H2</a>
+  <a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.FluidNonionic">Species.FluidNonionic</a> H2(<font color="blue">redeclare </font><font color="blue">package</font> Medium = <a href="http://build.openmodelica.org/Documentation/Modelica.Media.IdealGases.SingleGases.H2.html#Modelica.Media.IdealGases.SingleGases.H2">Modelica.Media.IdealGases.SingleGases.H2</a>
         (referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
-          excludeEnthalpyOfFormation=false), <font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_H2_Gas.html#FCSys.Characteristics.H2.Gas">FCSys.Characteristics.H2.Gas</a>);
-  <a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.FluidNonionic">Species.FluidNonionic</a> H2O(<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_H2O_Gas.html#FCSys.Characteristics.H2O.Gas">FCSys.Characteristics.H2O.Gas</a>
-        (referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
+          excludeEnthalpyOfFormation=false), <font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_H2_Gas.html#FCSys.Characteristics.H2.Gas">Characteristics.H2.Gas</a>);
+  <a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.FluidNonionic">Species.FluidNonionic</a> H2O(<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_H2O_Gas.html#FCSys.Characteristics.H2O.Gas">Characteristics.H2O.Gas</a> (
+          referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
           excludeEnthalpyOfFormation=false), <font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font> Medium = <a href="http://build.openmodelica.org/Documentation/Modelica.Media.IdealGases.SingleGases.H2O.html#Modelica.Media.IdealGases.SingleGases.H2O">Modelica.Media.IdealGases.SingleGases.H2O</a>);
-  <a href="FCSys_Conditions_Adapters_Junctions.html#FCSys.Conditions.Adapters.Junctions.Junction2">Junctions.Junction2</a> junction;</textblock>
+  <a href="FCSys_Conditions_Adapters_Junctions.html#FCSys.Conditions.Adapters.Junctions.Junction2">Junctions.Junction2</a> junction;
 
-<textblock type="annotcomp" expanded="false">  <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> fluidPort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
-      Medium = Medium) <font color="darkgreen">&quot;Modelica fluid port&quot;</font>;</textblock>
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> fluidPort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
+      Medium = Medium) <font color="darkgreen">&quot;Modelica fluid port&quot;</font>;
 
 <font color="blue">equation </font>
   <font color="darkgreen">// H2</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2.face, face.H2);
+  <font color="red">connect</font>(H2.face, face.H2);
   <font color="red">connect</font>(H2.heatPort, heatPort);
-  <font color="red">connect</font>(H2.fluidPort, junction.purePort1);</textblock>
+  <font color="red">connect</font>(H2.fluidPort, junction.purePort1);
 
   <font color="darkgreen">// H2O</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.face, face.H2O);
+  <font color="red">connect</font>(H2O.face, face.H2O);
   <font color="red">connect</font>(H2O.heatPort, heatPort);
-  <font color="red">connect</font>(H2O.fluidPort, junction.purePort2);</textblock>
+  <font color="red">connect</font>(H2O.fluidPort, junction.purePort2);
 
   <font color="darkgreen">// Mixture</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(junction.mixturePort, fluidPort);</textblock>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>AnodeGas;
+  <font color="red">connect</font>(junction.mixturePort, fluidPort);
+<font color="blue">end </font>AnodeGas;
 </pre>
 <hr>
 
@@ -118,16 +132,25 @@ Extends from <a href="FCSys_Conditions_Adapters_Phases_BaseClasses.html#FCSys.Co
 <a name="FCSys.Conditions.Adapters.Phases.CathodeGas"></a><a href="FCSys_Conditions_Adapters_Phases.html#FCSys.Conditions.Adapters.Phases">FCSys.Conditions.Adapters.Phases</a>.CathodeGas</h2>
 <b>Adapter for PEMFC cathode gas between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a></b><p>
 <img src="images/FCSys.Conditions.Adapters.Phases.CathodeGasD.png" alt="FCSys.Conditions.Adapters.Phases.CathodeGas">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="FCSys_Conditions_Adapters_Phases_BaseClasses.html#FCSys.Conditions.Adapters.Phases.BaseClasses.PartialPhase">BaseClasses.PartialPhase</a> (Partial adapter for a phase between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a>).
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>face</td><td>FCSys face connector</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">FluidPort_b</a></td><td>fluidPort</td><td>Modelica fluid port</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> CathodeGas <font color="darkgreen">
   &quot;Adapter for PEMFC cathode gas between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a>&quot;</font>
@@ -136,7 +159,7 @@ Extends from <a href="FCSys_Conditions_Adapters_Phases_BaseClasses.html#FCSys.Co
   <font color="blue">replaceable </font><font color="blue">package</font> Medium = <a href="FCSys_Conditions_Adapters_Media_CathodeGas.html#FCSys.Conditions.Adapters.Media.CathodeGas">Media.CathodeGas</a> <font color="blue">constrainedby </font>
     Modelica.Media.Interfaces.PartialMedium <font color="darkgreen">&quot;Medium model (Modelica)&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Conditions_Adapters_Junctions.html#FCSys.Conditions.Adapters.Junctions.Junction3">Junctions.Junction3</a> junction(
+  <a href="FCSys_Conditions_Adapters_Junctions.html#FCSys.Conditions.Adapters.Junctions.Junction3">Junctions.Junction3</a> junction(
     <font color="blue">redeclare </font><font color="blue">package</font> Medium1 = <a href="http://build.openmodelica.org/Documentation/Modelica.Media.IdealGases.SingleGases.H2O.html#Modelica.Media.IdealGases.SingleGases.H2O">Modelica.Media.IdealGases.SingleGases.H2O</a> (
           referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
           excludeEnthalpyOfFormation=false),
@@ -146,45 +169,45 @@ Extends from <a href="FCSys_Conditions_Adapters_Phases_BaseClasses.html#FCSys.Co
     <font color="blue">redeclare </font><font color="blue">package</font> Medium3 = <a href="http://build.openmodelica.org/Documentation/Modelica.Media.IdealGases.SingleGases.O2.html#Modelica.Media.IdealGases.SingleGases.O2">Modelica.Media.IdealGases.SingleGases.O2</a> (
           referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
           excludeEnthalpyOfFormation=false),
-    <font color="blue">redeclare </font><font color="blue">package</font> MixtureMedium = <a href="FCSys_Conditions_Adapters_Phases_Medium.html#FCSys.Conditions.Adapters.Phases.CathodeGas.Medium">Medium</a>);</textblock>
+    <font color="blue">redeclare </font><font color="blue">package</font> MixtureMedium = <a href="FCSys_Conditions_Adapters_Phases_Medium.html#FCSys.Conditions.Adapters.Phases.CathodeGas.Medium">Medium</a>);
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.FluidNonionic">Species.FluidNonionic</a> H2O(<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_H2O_Gas.html#FCSys.Characteristics.H2O.Gas">FCSys.Characteristics.H2O.Gas</a>,
-      <font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font> Medium = <a href="http://build.openmodelica.org/Documentation/Modelica.Media.IdealGases.SingleGases.H2O.html#Modelica.Media.IdealGases.SingleGases.H2O">Modelica.Media.IdealGases.SingleGases.H2O</a>
+  <a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.FluidNonionic">Species.FluidNonionic</a> H2O(<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_H2O_Gas.html#FCSys.Characteristics.H2O.Gas">Characteristics.H2O.Gas</a>, <font color="blue">
+      redeclare </font><font color="blue">final </font><font color="blue">package</font> Medium = <a href="http://build.openmodelica.org/Documentation/Modelica.Media.IdealGases.SingleGases.H2O.html#Modelica.Media.IdealGases.SingleGases.H2O">Modelica.Media.IdealGases.SingleGases.H2O</a>
         (referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
           excludeEnthalpyOfFormation=false));
-  <a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.FluidNonionic">Species.FluidNonionic</a> N2(<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_N2_Gas.html#FCSys.Characteristics.N2.Gas">FCSys.Characteristics.N2.Gas</a>,
-      <font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font> Medium = <a href="http://build.openmodelica.org/Documentation/Modelica.Media.IdealGases.SingleGases.N2.html#Modelica.Media.IdealGases.SingleGases.N2">Modelica.Media.IdealGases.SingleGases.N2</a>
+  <a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.FluidNonionic">Species.FluidNonionic</a> N2(<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_N2_Gas.html#FCSys.Characteristics.N2.Gas">Characteristics.N2.Gas</a>, <font color="blue">
+      redeclare </font><font color="blue">final </font><font color="blue">package</font> Medium = <a href="http://build.openmodelica.org/Documentation/Modelica.Media.IdealGases.SingleGases.N2.html#Modelica.Media.IdealGases.SingleGases.N2">Modelica.Media.IdealGases.SingleGases.N2</a>
         (referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
           excludeEnthalpyOfFormation=false));
-  <a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.FluidNonionic">Species.FluidNonionic</a> O2(<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_O2_Gas.html#FCSys.Characteristics.O2.Gas">FCSys.Characteristics.O2.Gas</a>,
-      <font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font> Medium = <a href="http://build.openmodelica.org/Documentation/Modelica.Media.IdealGases.SingleGases.O2.html#Modelica.Media.IdealGases.SingleGases.O2">Modelica.Media.IdealGases.SingleGases.O2</a>
+  <a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.FluidNonionic">Species.FluidNonionic</a> O2(<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_O2_Gas.html#FCSys.Characteristics.O2.Gas">Characteristics.O2.Gas</a>, <font color="blue">
+      redeclare </font><font color="blue">final </font><font color="blue">package</font> Medium = <a href="http://build.openmodelica.org/Documentation/Modelica.Media.IdealGases.SingleGases.O2.html#Modelica.Media.IdealGases.SingleGases.O2">Modelica.Media.IdealGases.SingleGases.O2</a>
         (referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
-          excludeEnthalpyOfFormation=false));</textblock>
+          excludeEnthalpyOfFormation=false));
 
-<textblock type="annotcomp" expanded="false">  <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> fluidPort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
-      Medium = Medium) <font color="darkgreen">&quot;Modelica fluid port&quot;</font>;</textblock>
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> fluidPort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
+      Medium = Medium) <font color="darkgreen">&quot;Modelica fluid port&quot;</font>;
 
 <font color="blue">equation </font>
   <font color="darkgreen">// H2O</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.face, face.H2O);
+  <font color="red">connect</font>(H2O.face, face.H2O);
   <font color="red">connect</font>(H2O.fluidPort, junction.purePort1);
-  <font color="red">connect</font>(H2O.heatPort, heatPort);</textblock>
+  <font color="red">connect</font>(H2O.heatPort, heatPort);
 
   <font color="darkgreen">// N2</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.face, face.N2);</textblock>
+  <font color="red">connect</font>(N2.face, face.N2);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.fluidPort, junction.purePort2);</textblock>
+  <font color="red">connect</font>(N2.fluidPort, junction.purePort2);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(N2.heatPort, heatPort);</textblock>
+  <font color="red">connect</font>(N2.heatPort, heatPort);
 
   <font color="darkgreen">// O2</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(O2.face, face.O2);
+  <font color="red">connect</font>(O2.face, face.O2);
   <font color="red">connect</font>(O2.fluidPort, junction.purePort3);
-  <font color="red">connect</font>(O2.heatPort, heatPort);</textblock>
+  <font color="red">connect</font>(O2.heatPort, heatPort);
 
   <font color="darkgreen">// Mixture</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(junction.mixturePort, fluidPort);</textblock>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>CathodeGas;
+  <font color="red">connect</font>(junction.mixturePort, fluidPort);
+<font color="blue">end </font>CathodeGas;
 </pre>
 <hr>
 
@@ -192,39 +215,48 @@ Extends from <a href="FCSys_Conditions_Adapters_Phases_BaseClasses.html#FCSys.Co
 <a name="FCSys.Conditions.Adapters.Phases.Graphite"></a><a href="FCSys_Conditions_Adapters_Phases.html#FCSys.Conditions.Adapters.Phases">FCSys.Conditions.Adapters.Phases</a>.Graphite</h2>
 <b>Adapter for graphite between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a></b><p>
 <img src="images/FCSys.Conditions.Adapters.Phases.GraphiteD.png" alt="FCSys.Conditions.Adapters.Phases.Graphite">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="FCSys_Conditions_Adapters_Phases_BaseClasses.html#FCSys.Conditions.Adapters.Phases.BaseClasses.PartialPhase">BaseClasses.PartialPhase</a> (Partial adapter for a phase between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a>).
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>face</td><td>FCSys face connector</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Electrical.Analog.Interfaces.html#Modelica.Electrical.Analog.Interfaces.NegativePin">NegativePin</a></td><td>pin</td><td>Modelica electrical pin</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> Graphite <font color="darkgreen">
   &quot;Adapter for graphite between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a>&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Conditions_Adapters_Phases_BaseClasses.html#FCSys.Conditions.Adapters.Phases.BaseClasses.PartialPhase">BaseClasses.PartialPhase</a>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.'e-'">Species.'e-'</a> &#39;e-&#39;(<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a>);</textblock>
+  <a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.'e-'">Species.'e-'</a> &#39;e-&#39;(<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">Characteristics.'e-'.Graphite</a>);
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.Solid">Species.Solid</a> &#39;C+&#39;(<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'C+'_Graphite.html#FCSys.Characteristics.'C+'.Graphite">FCSys.Characteristics.'C+'.Graphite</a>);
+  <a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.Solid">Species.Solid</a> &#39;C+&#39;(<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_'C+'_Graphite.html#FCSys.Characteristics.'C+'.Graphite">Characteristics.'C+'.Graphite</a>);
   <a href="http://build.openmodelica.org/Documentation/Modelica.Electrical.Analog.Interfaces.html#Modelica.Electrical.Analog.Interfaces.NegativePin">Modelica.Electrical.Analog.Interfaces.NegativePin</a> pin <font color="darkgreen">
-    &quot;Modelica electrical pin&quot;</font>;</textblock>
+    &quot;Modelica electrical pin&quot;</font>;
 
 <font color="blue">equation </font>
   <font color="darkgreen">// C</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('C+'.face, face.'C+');
-  <font color="red">connect</font>('C+'.heatPort, heatPort);</textblock>
+  <font color="red">connect</font>('C+'.face, face.'C+');
+  <font color="red">connect</font>('C+'.heatPort, heatPort);
 
   <font color="darkgreen">// e-</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.face, face.'e-');</textblock>
+  <font color="red">connect</font>('e-'.face, face.'e-');
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.heatPort, heatPort);</textblock>
+  <font color="red">connect</font>('e-'.heatPort, heatPort);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('e-'.pin, pin);</textblock>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Graphite;
+  <font color="red">connect</font>('e-'.pin, pin);
+<font color="blue">end </font>Graphite;
 </pre>
 <hr>
 
@@ -232,16 +264,25 @@ Extends from <a href="FCSys_Conditions_Adapters_Phases_BaseClasses.html#FCSys.Co
 <a name="FCSys.Conditions.Adapters.Phases.Liquid"></a><a href="FCSys_Conditions_Adapters_Phases.html#FCSys.Conditions.Adapters.Phases">FCSys.Conditions.Adapters.Phases</a>.Liquid</h2>
 <b>Adapter for liquid between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a></b><p>
 <img src="images/FCSys.Conditions.Adapters.Phases.LiquidD.png" alt="FCSys.Conditions.Adapters.Phases.Liquid">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="FCSys_Conditions_Adapters_Phases_BaseClasses.html#FCSys.Conditions.Adapters.Phases.BaseClasses.PartialPhase">BaseClasses.PartialPhase</a> (Partial adapter for a phase between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a>).
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>face</td><td>FCSys face connector</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">FluidPort_b</a></td><td>fluidPort</td><td>Modelica fluid port</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> Liquid <font color="darkgreen">
   &quot;Adapter for liquid between <a href="index.html#FCSys">FCSys</a> and <a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a>&quot;</font>
@@ -251,27 +292,27 @@ Extends from <a href="FCSys_Conditions_Adapters_Phases_BaseClasses.html#FCSys.Co
     <font color="blue">constrainedby </font>Modelica.Media.Interfaces.PartialPureSubstance <font color="darkgreen">
     &quot;Medium model (Modelica)&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.FluidNonionic">Species.FluidNonionic</a> H2O(<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_H2O_Liquid.html#FCSys.Characteristics.H2O.Liquid">FCSys.Characteristics.H2O.Liquid</a>,
-      <font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font> Medium = Medium);</textblock>
+  <a href="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.FluidNonionic">Species.FluidNonionic</a> H2O(<font color="blue">redeclare </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_H2O_Liquid.html#FCSys.Characteristics.H2O.Liquid">Characteristics.H2O.Liquid</a>,
+      <font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font> Medium = Medium);
 
-<textblock type="annotcomp" expanded="false">  <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> fluidPort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
-      Medium = Medium) <font color="darkgreen">&quot;Modelica fluid port&quot;</font>;</textblock>
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> fluidPort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
+      Medium = Medium) <font color="darkgreen">&quot;Modelica fluid port&quot;</font>;
 
 <font color="blue">equation </font>
   <font color="darkgreen">// H2O</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.face, face.H2);</textblock>
+  <font color="red">connect</font>(H2O.face, face.H2);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.heatPort, heatPort);</textblock>
+  <font color="red">connect</font>(H2O.heatPort, heatPort);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(H2O.fluidPort, fluidPort);</textblock>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Liquid;
+  <font color="red">connect</font>(H2O.fluidPort, fluidPort);
+<font color="blue">end </font>Liquid;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:46:52 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:43:51 2013.
 </div>
 </body>
 </html>

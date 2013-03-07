@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.Chemical.Fluid</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="Fluid conditions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,11 +45,15 @@
       <div class="body">
 
 <h2><a name="FCSys.Conditions.Chemical.Fluid"></a><a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical">FCSys.Conditions.Chemical</a>.Fluid</h2>
+
 <b>Fluid conditions</b>
-<p>
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Conditions.Chemical.Fluid.EnthalpyMassicS.png" alt="FCSys.Conditions.Chemical.Fluid.EnthalpyMassic" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Chemical_Fluid.html#FCSys.Conditions.Chemical.Fluid.EnthalpyMassic">EnthalpyMassic</a>
@@ -64,26 +69,39 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Conditions.Chemical.Fluid.EnthalpyMassic"></a><a href="FCSys_Conditions_Chemical_Fluid.html#FCSys.Conditions.Chemical.Fluid">FCSys.Conditions.Chemical.Fluid</a>.EnthalpyMassic</h2>
 <b>Specify massic enthalpy (measure enthalpy flow rate)</b><p>
 <img src="images/FCSys.Conditions.Chemical.Material.PotentialPerTemperatureD.png" alt="FCSys.Conditions.Chemical.Fluid.EnthalpyMassic">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="FCSys_Conditions_Chemical_Fluid_BaseClasses.html#FCSys.Conditions.Chemical.Fluid.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a fluid condition).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Conditions_Chemical_Fluid_BaseClasses.html#FCSys.Conditions.Chemical.Fluid.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.En...</td><td>Type of condition</td></tr>
+<tr><td><a href="FCSys_Conditions_Chemical_Fluid_BaseClasses.html#FCSys.Conditions.Chemical.Fluid.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.En&hellip;</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
 <tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
 <tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So...</td><td>Source of internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a></td><td>chemical</td><td>Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as input</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> EnthalpyMassic <font color="darkgreen">
   &quot;Specify massic enthalpy (measure enthalpy flow rate)&quot;</font>
@@ -94,7 +112,7 @@ Extends from <a href="FCSys_Conditions_Chemical_Fluid_BaseClasses.html#FCSys.Con
 
 <font color="blue">equation </font>
   chemical.hbar = u_final;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>EnthalpyMassic;
+<font color="blue">end </font>EnthalpyMassic;
 </pre>
 <hr>
 
@@ -102,26 +120,36 @@ Extends from <a href="FCSys_Conditions_Chemical_Fluid_BaseClasses.html#FCSys.Con
 <a name="FCSys.Conditions.Chemical.Fluid.Custom"></a><a href="FCSys_Conditions_Chemical_Fluid.html#FCSys.Conditions.Chemical.Fluid">FCSys.Conditions.Chemical.Fluid</a>.Custom</h2>
 <b>Custom expressions</b><p>
 <img src="images/FCSys.Conditions.Chemical.Material.PotentialPerTemperatureD.png" alt="FCSys.Conditions.Chemical.Fluid.Custom">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 <p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p><p>
 Extends from <a href="FCSys_Conditions_Chemical_Fluid_BaseClasses.html#FCSys.Conditions.Chemical.Fluid.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a fluid condition).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Conditions_Chemical_Fluid_BaseClasses.html#FCSys.Conditions.Chemical.Fluid.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Cu...</td><td>Type of condition</td></tr>
+<tr><td><a href="FCSys_Conditions_Chemical_Fluid_BaseClasses.html#FCSys.Conditions.Chemical.Fluid.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Cu&hellip;</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
 <tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
 <tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So...</td><td>Source of internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
 <tr><td>Real</td><td>x</td><td>chemical.hbar</td><td>Expression to which the condition is applied</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>chemical.Hdot</td><td>Measurement expression</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Value of specified condition</td></tr>
@@ -129,7 +157,10 @@ Extends from <a href="FCSys_Conditions_Chemical_Fluid_BaseClasses.html#FCSys.Con
 <TR bgcolor="#e0e0e0"><TD colspan=3>Measurement</td></tr>
 <tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Measurement expression</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> Custom <font color="darkgreen">&quot;Custom expressions&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Conditions_Chemical_Fluid_BaseClasses.html#FCSys.Conditions.Chemical.Fluid.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(<font color="blue">final </font>conditionType=BaseClasses.ConditionType.Custom,
@@ -139,14 +170,14 @@ Extends from <a href="FCSys_Conditions_Chemical_Fluid_BaseClasses.html#FCSys.Con
 
 <font color="blue">equation </font>
   x = u_final;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Custom;
+<font color="blue">end </font>Custom;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:47:20 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:44:35 2013.
 </div>
 </body>
 </html>

@@ -1,0 +1,165 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Examples&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Examples<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples"></A><A HREF="FCSys_Figures_DeclarativeVsImperative_SwitchCausality.html#FCSys.Figures.DeclarativeVsImperative.SwitchCausality"
+>FCSys.Figures.DeclarativeVsImperative.SwitchCausality</A>.Examples</H2>
+<B>Examples</B>
+<P>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_ExamplesPackage.html#Modelica.Icons.ExamplesPackage"
+>Modelica.Icons.ExamplesPackage</A> (Icon for packages containing runnable examples).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.Test_viS.png" ALT="FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.Test_vi" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Figures_DeclarativeVsImperative_SwitchCausality_Examples.html#FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.Test_vi"
+>Test_vi</A>
+</TD><TD>&nbsp;</TD></TR>
+<TR><TD><IMG SRC="FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.Test_viS.png" ALT="FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.Test_iv" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Figures_DeclarativeVsImperative_SwitchCausality_Examples.html#FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.Test_iv"
+>Test_iv</A>
+</TD><TD>&nbsp;</TD></TR>
+<TR><TD><IMG SRC="FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.Test_viS.png" ALT="FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.Declarative" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Figures_DeclarativeVsImperative_SwitchCausality_Examples.html#FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.Declarative"
+>Declarative</A>
+</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Test_vi<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.Test_viI.png" ALT="FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.Test_vi" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.Test_vi"></A><A HREF="FCSys_Figures_DeclarativeVsImperative_SwitchCausality_Examples.html#FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples"
+>FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples</A>.Test_vi</H2>
+<IMG SRC="FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.Test_viD.png" ALT="FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.Test_vi">
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples).
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Test_vi
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+<textblock type="annotcomp" expanded="false">  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Pulse"
+>Modelica.Blocks.Sources.Pulse</A> pulse(
+    period=1,
+    offset=-0.5,
+    startTime=0);
+  <A HREF="FCSys_Figures_DeclarativeVsImperative_SwitchCausality.html#FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Declarative_vi"
+>Declarative_vi</A> declarative_vi;
+  <A HREF="FCSys_Figures_DeclarativeVsImperative_SwitchCausality.html#FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Imperative_vi"
+>Imperative_vi</A> imperative_vi;
+  <A HREF="FCSys_Figures_DeclarativeVsImperative_SwitchCausality.html#FCSys.Figures.DeclarativeVsImperative.SwitchCausality.ImperativeTF_vi"
+>ImperativeTF_vi</A> imperativeTF_vi;</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(pulse.y, declarative_vi.v);
+  <font color="red">connect</font>(imperativeTF_vi.v, pulse.y);
+  <font color="red">connect</font>(imperative_vi.v, pulse.y);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Test_vi;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Test_iv<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.Test_viI.png" ALT="FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.Test_iv" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.Test_iv"></A><A HREF="FCSys_Figures_DeclarativeVsImperative_SwitchCausality_Examples.html#FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples"
+>FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples</A>.Test_iv</H2>
+<IMG SRC="FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.Test_viD.png" ALT="FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.Test_iv">
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples).
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Test_iv
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+<textblock type="annotcomp" expanded="false">  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Pulse"
+>Modelica.Blocks.Sources.Pulse</A> pulse(
+    period=1,
+    offset=-0.5,
+    startTime=0);
+  <A HREF="FCSys_Figures_DeclarativeVsImperative_SwitchCausality.html#FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Declarative_iv"
+>Declarative_iv</A> declarative_iv;
+  <A HREF="FCSys_Figures_DeclarativeVsImperative_SwitchCausality.html#FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Imperative_iv"
+>FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Imperative_iv</A>
+    imperative_iv;
+  <A HREF="FCSys_Figures_DeclarativeVsImperative_SwitchCausality.html#FCSys.Figures.DeclarativeVsImperative.SwitchCausality.ImperativeTF_iv"
+>ImperativeTF_iv</A> imperativeTF_iv;</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(pulse.y, declarative_iv.i);
+  <font color="red">connect</font>(imperative_iv.i, pulse.y);
+  <font color="red">connect</font>(imperativeTF_iv.i, pulse.y);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Test_iv;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Declarative<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.Test_viI.png" ALT="FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.Declarative" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.Declarative"></A><A HREF="FCSys_Figures_DeclarativeVsImperative_SwitchCausality_Examples.html#FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples"
+>FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples</A>.Declarative</H2>
+<IMG SRC="FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.DeclarativeD.png" ALT="FCSys.Figures.DeclarativeVsImperative.SwitchCausality.Examples.Declarative">
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_Figures_DeclarativeVsImperative_SwitchCausality_BaseClasses.html#FCSys.Figures.DeclarativeVsImperative.SwitchCausality.BaseClasses.Parameters"
+>FCSys.Figures.DeclarativeVsImperative.SwitchCausality.BaseClasses.Parameters</A> (Base model with parameters for electrical circuit), <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_SIunits.html#Modelica.SIunits.Resistance"
+>Resistance</A></TD><TD>R1</TD><TD>10</TD><TD>Resistance at temperature T_ref [Ohm]</TD></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_SIunits.html#Modelica.SIunits.Resistance"
+>Resistance</A></TD><TD>R2</TD><TD>100</TD><TD>Resistance at temperature T_ref [Ohm]</TD></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_SIunits.html#Modelica.SIunits.Inductance"
+>Inductance</A></TD><TD>L</TD><TD>0.1</TD><TD>Inductance [H]</TD></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_SIunits.html#Modelica.SIunits.Capacitance"
+>Capacitance</A></TD><TD>C</TD><TD>0.01</TD><TD>Capacitance [F]</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Declarative
+  <font color="blue">extends </font><A HREF="FCSys_Figures_DeclarativeVsImperative_SwitchCausality_BaseClasses.html#FCSys.Figures.DeclarativeVsImperative.SwitchCausality.BaseClasses.Parameters"
+>FCSys.Figures.DeclarativeVsImperative.SwitchCausality.BaseClasses.Parameters</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+<textblock type="annotcomp" expanded="false">  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Electrical_Analog_Basic.html#Modelica.Electrical.Analog.Basic.Resistor"
+>Modelica.Electrical.Analog.Basic.Resistor</A> res1(R=R1);
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Electrical_Analog_Basic.html#Modelica.Electrical.Analog.Basic.Resistor"
+>Modelica.Electrical.Analog.Basic.Resistor</A> res2(R=R2);
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Electrical_Analog_Basic.html#Modelica.Electrical.Analog.Basic.Inductor"
+>Modelica.Electrical.Analog.Basic.Inductor</A> ind(L=L);
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Electrical_Analog_Basic.html#Modelica.Electrical.Analog.Basic.Capacitor"
+>Modelica.Electrical.Analog.Basic.Capacitor</A> cap(C=C);
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Electrical_Analog_Basic.html#Modelica.Electrical.Analog.Basic.Ground"
+>Modelica.Electrical.Analog.Basic.Ground</A> ground;</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(res2.p, res1.p);
+  <font color="red">connect</font>(cap.p, res1.n);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(ind.p, res2.n);
+  <font color="red">connect</font>(ind.n, ground.p);
+  <font color="red">connect</font>(cap.n, ground.p);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Declarative;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 01:13:07 2013.
+</address></BODY>
+</HTML>

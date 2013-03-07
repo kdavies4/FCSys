@@ -1,0 +1,246 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.Conditions.Chemical.BaseClasses</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Base classes (not generally for direct use)&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE BaseClasses<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Conditions.Chemical.BaseClasses"></A><A HREF="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical"
+>FCSys.Conditions.Chemical</A>.BaseClasses</H2>
+<B>Base classes (not generally for direct use)</B>
+<P>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_BasesPackage.html#Modelica.Icons.BasesPackage"
+>Modelica.Icons.BasesPackage</A> (Icon for packages containing base classes).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.Chemical.BaseClasses.PartialConditionsS.png" ALT="FCSys.Conditions.Chemical.BaseClasses.PartialConditions" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_Chemical_BaseClasses.html#FCSys.Conditions.Chemical.BaseClasses.PartialConditions"
+>PartialConditions</A>
+</TD><TD>Condition for a <a href="modelica://FCSys.Connectors.ChemicalInput">ChemicalInput</a> connector (e.g., as in a <a href="modelica://FCSys.Subregions.Reaction">Reaction</a> model), with efforts by default</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.Chemical.BaseClasses.PartialConditionS.png" ALT="FCSys.Conditions.Chemical.BaseClasses.PartialCondition" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_Chemical_BaseClasses.html#FCSys.Conditions.Chemical.BaseClasses.PartialCondition"
+>PartialCondition</A>
+</TD><TD>Partial model of a condition</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE PartialConditions<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Conditions.Chemical.BaseClasses.PartialConditionsI.png" ALT="FCSys.Conditions.Chemical.BaseClasses.PartialConditions" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Conditions.Chemical.BaseClasses.PartialConditions"></A><A HREF="FCSys_Conditions_Chemical_BaseClasses.html#FCSys.Conditions.Chemical.BaseClasses"
+>FCSys.Conditions.Chemical.BaseClasses</A>.PartialConditions</H2>
+<B>Condition for a <a href="modelica://FCSys.Connectors.ChemicalInput">ChemicalInput</a> connector (e.g., as in a <a href="modelica://FCSys.Subregions.Reaction">Reaction</a> model), with efforts by default</B><p>
+<IMG SRC="FCSys.Conditions.Chemical.BaseClasses.PartialConditionsD.png" ALT="FCSys.Conditions.Chemical.BaseClasses.PartialConditions">
+<P><H3>Information</H3></P>
+<PRE></pre>
+  <p>If the source of an internal specification is redeclared to a block besides
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Constant"
+>Modelica.Blocks.Sources.Constant</a>,
+  then the related condition must be redeclared as well.  For example, use:<br>
+  <code>redeclare Conditions.Chemical.Material.Current material(redeclare Modelica.Blocks.Sources.Ramp source)</code><br>
+  rather than simply:<br>
+  <code>material(redeclare Modelica.Blocks.Sources.Ramp source)</code></p>
+  <pre></PRE><P>
+Extends from <A HREF="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single"
+>FCSys.Conditions.BaseClasses.Icons.Single</A> (Icon for a single-connector boundary condition).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinX</TD><TD>true</TD><TD>X</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinY</TD><TD>false</TD><TD>Y</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinZ</TD><TD>false</TD><TD>Z</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Conditions</TD></TR>
+<TR><TD><A HREF="FCSys_Conditions_Chemical_Material.html#FCSys.Conditions.Chemical.Material.PotentialPerTemperature"
+>PotentialPerTemperature</A></TD><TD>material</TD><TD>redeclare Material.Potential...</TD><TD>Material</TD></TR>
+<TR><TD><A HREF="FCSys_Conditions_Chemical_Mechanical.html#FCSys.Conditions.Chemical.Mechanical.Velocity"
+>Velocity</A></TD><TD>mechanicalX</TD><TD>redeclare Mechanical.Velocit...</TD><TD>X-axis mechanical</TD></TR>
+<TR><TD><A HREF="FCSys_Conditions_Chemical_Mechanical.html#FCSys.Conditions.Chemical.Mechanical.Velocity"
+>Velocity</A></TD><TD>mechanicalY</TD><TD>redeclare Mechanical.Velocit...</TD><TD>Y-axis mechanical</TD></TR>
+<TR><TD><A HREF="FCSys_Conditions_Chemical_Mechanical.html#FCSys.Conditions.Chemical.Mechanical.Velocity"
+>Velocity</A></TD><TD>mechanicalZ</TD><TD>redeclare Mechanical.Velocit...</TD><TD>Z-axis mechanical</TD></TR>
+<TR><TD><A HREF="FCSys_Conditions_Chemical_Fluid.html#FCSys.Conditions.Chemical.Fluid.EnthalpyMassic"
+>EnthalpyMassic</A></TD><TD>fluid</TD><TD>redeclare Fluid.EnthalpyMass...</TD><TD>Fluid</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInputBus"
+>RealInputBus</A></TD><TD>u</TD><TD>Input bus for values of specified conditions</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus"
+>RealOutputBus</A></TD><TD>y</TD><TD>Output bus of measurements</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">partial </font><font color="blue">model</font> PartialConditions <font color="darkgreen">
+  &quot;</pre>Condition for a <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> connector (e.g., as in a <a href=\"modelica://FCSys.Subregions.Reaction\">Reaction</a> model), with efforts by default<pre>&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single"
+>FCSys.Conditions.BaseClasses.Icons.Single</A>;
+
+  <font color="darkgreen">// Included components of linear momentum</font>
+  <font color="blue">parameter </font>Boolean inclLinX=true <font color="darkgreen">&quot;X&quot;</font>;
+
+  <font color="blue">parameter </font>Boolean inclLinY=false <font color="darkgreen">&quot;Y&quot;</font>;
+
+  <font color="blue">parameter </font>Boolean inclLinZ=false <font color="darkgreen">&quot;Z&quot;</font>;
+
+  <font color="darkgreen">// Conditions</font>
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><A HREF="FCSys_Conditions_Chemical_Material.html#FCSys.Conditions.Chemical.Material.PotentialPerTemperature"
+>Material.PotentialPerTemperature</A> material(source(k(start=0))) <font color="blue">
+    constrainedby </font>Material.BaseClasses.PartialCondition(
+    <font color="blue">final </font>inclLinX=inclLinX,
+    <font color="blue">final </font>inclLinY=inclLinY,
+    <font color="blue">final </font>inclLinZ=inclLinZ) <font color="darkgreen">&quot;Material&quot;</font>;
+  <font color="blue">replaceable </font><A HREF="FCSys_Conditions_Chemical_Mechanical.html#FCSys.Conditions.Chemical.Mechanical.Velocity"
+>Mechanical.Velocity</A> mechanicalX(source(k(start=0))) <font color="blue">if </font>inclLinX <font color="blue">
+    constrainedby </font>Mechanical.BaseClasses.PartialCondition(
+    <font color="blue">final </font>inclLinX=inclLinX,
+    <font color="blue">final </font>inclLinY=inclLinY,
+    <font color="blue">final </font>inclLinZ=inclLinZ,
+    <font color="blue">final </font>axis=Axis.x) <font color="darkgreen">&quot;X-axis mechanical&quot;</font>;
+  <font color="blue">replaceable </font><A HREF="FCSys_Conditions_Chemical_Mechanical.html#FCSys.Conditions.Chemical.Mechanical.Velocity"
+>Mechanical.Velocity</A> mechanicalY(source(k(start=0))) <font color="blue">if </font>inclLinY <font color="blue">
+    constrainedby </font>Mechanical.BaseClasses.PartialCondition(
+    <font color="blue">final </font>inclLinX=inclLinX,
+    <font color="blue">final </font>inclLinY=inclLinY,
+    <font color="blue">final </font>inclLinZ=inclLinZ,
+    <font color="blue">final </font>axis=Axis.y) <font color="darkgreen">&quot;Y-axis mechanical&quot;</font>;
+  <font color="blue">replaceable </font><A HREF="FCSys_Conditions_Chemical_Mechanical.html#FCSys.Conditions.Chemical.Mechanical.Velocity"
+>Mechanical.Velocity</A> mechanicalZ(source(k(start=0))) <font color="blue">if </font>inclLinZ <font color="blue">
+    constrainedby </font>Mechanical.BaseClasses.PartialCondition(
+    <font color="blue">final </font>inclLinX=inclLinX,
+    <font color="blue">final </font>inclLinY=inclLinY,
+    <font color="blue">final </font>inclLinZ=inclLinZ,
+    <font color="blue">final </font>axis=Axis.z) <font color="darkgreen">&quot;Z-axis mechanical&quot;</font>;
+  <font color="blue">replaceable </font><A HREF="FCSys_Conditions_Chemical_Fluid.html#FCSys.Conditions.Chemical.Fluid.EnthalpyMassic"
+>Fluid.EnthalpyMassic</A> fluid(source(k(start=0))) <font color="blue">constrainedby </font>
+    Fluid.BaseClasses.PartialCondition(
+    <font color="blue">final </font>inclLinX=inclLinX,
+    <font color="blue">final </font>inclLinY=inclLinY,
+    <font color="blue">final </font>inclLinZ=inclLinZ) <font color="darkgreen">&quot;Fluid&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInputBus"
+>Connectors.RealInputBus</A> u <font color="darkgreen">&quot;Input bus for values of specified conditions&quot;</font>;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus"
+>Connectors.RealOutputBus</A> y <font color="darkgreen">&quot;Output bus of measurements&quot;</font>;</textblock>
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Material</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u.material, material.u);
+  <font color="red">connect</font>(material.y, y.material);</textblock>
+
+  <font color="darkgreen">// X-axis mechanical</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u.mechanicalX, mechanicalX.u);
+  <font color="red">connect</font>(mechanicalX.y, y.mechanicalX);</textblock>
+
+  <font color="darkgreen">// Y-axis mechanical</font>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u.mechanicalY, mechanicalY.u);
+  <font color="red">connect</font>(mechanicalY.y, y.mechanicalY);</textblock>
+
+  <font color="darkgreen">// Z-axis mechanical</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u.mechanicalZ, mechanicalZ.u);
+  <font color="red">connect</font>(mechanicalZ.y, y.mechanicalZ);</textblock>
+
+  <font color="darkgreen">// Fluid</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u.fluid, fluid.u);
+  <font color="red">connect</font>(fluid.y, y.fluid);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>PartialConditions;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE PartialCondition<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Conditions.Chemical.BaseClasses.PartialConditionI.png" ALT="FCSys.Conditions.Chemical.BaseClasses.PartialCondition" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Conditions.Chemical.BaseClasses.PartialCondition"></A><A HREF="FCSys_Conditions_Chemical_BaseClasses.html#FCSys.Conditions.Chemical.BaseClasses"
+>FCSys.Conditions.Chemical.BaseClasses</A>.PartialCondition</H2>
+<B>Partial model of a condition</B><p>
+<IMG SRC="FCSys.Conditions.Chemical.BaseClasses.PartialConditionD.png" ALT="FCSys.Conditions.Chemical.BaseClasses.PartialCondition">
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single"
+>FCSys.Conditions.BaseClasses.Icons.Single</A> (Icon for a single-connector boundary condition).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinX</TD><TD>true</TD><TD>X</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinY</TD><TD>false</TD><TD>Y</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinZ</TD><TD>false</TD><TD>Z</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</TD></TR>
+<TR><TD>Boolean</TD><TD>internal</TD><TD>true</TD><TD>Use internal specification</TD></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Constant"
+>Constant</A></TD><TD>source</TD><TD>redeclare Modelica.Blocks.So...</TD><TD>Source of internal specification</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>RealOutput</A></TD><TD>y</TD><TD>&nbsp;</TD><TD>Measurement expression</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>u</TD><TD>Value of specified condition</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput"
+>ChemicalInput</A></TD><TD>chemical</TD><TD>Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as input</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=3>Measurement</TD></TR>
+<TR><TD>output <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>RealOutput</A></TD><TD>y</TD><TD>Measurement expression</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">partial </font><font color="blue">model</font> PartialCondition <font color="darkgreen">&quot;Partial model of a condition&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single"
+>FCSys.Conditions.BaseClasses.Icons.Single</A>;
+
+  <font color="blue">parameter </font>Boolean inclLinX=true <font color="darkgreen">&quot;X&quot;</font>;
+
+  <font color="blue">parameter </font>Boolean inclLinY=false <font color="darkgreen">&quot;Y&quot;</font>;
+
+  <font color="blue">parameter </font>Boolean inclLinZ=false <font color="darkgreen">&quot;Z&quot;</font>;
+
+  <font color="blue">parameter </font>Boolean internal=true <font color="darkgreen">&quot;Use internal specification&quot;</font>;
+
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Constant"
+>Modelica.Blocks.Sources.Constant</A> source <font color="blue">if </font>internal <font color="blue">
+    constrainedby </font>Modelica.Blocks.Interfaces.SO <font color="darkgreen">
+    &quot;Source of internal specification&quot;</font>;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>Connectors.RealInput</A> u <font color="blue">if </font><font color="blue">not </font>internal <font color="darkgreen">&quot;Value of specified condition&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>Connectors.RealOutput</A> y <font color="darkgreen">&quot;Measurement expression&quot;</font>;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput"
+>Connectors.ChemicalInput</A> chemical(<font color="blue">final </font>n_lin=n_lin) <font color="darkgreen">
+    &quot;Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as input&quot;</font>;
+    </textblock>
+
+<font color="blue">protected </font>
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_lin=<font color="red">countTrue</font>({inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">
+    &quot;Number of components of linear momentum&quot;</font>;
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal"
+>Connectors.RealOutputInternal</A> u_final <font color="darkgreen">&quot;Final value of specified condition&quot;</font>;</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(source.y, u_final);
+  <font color="red">connect</font>(u, u_final);</textblock>
+
+<font color="blue">end </font>PartialCondition;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 01:08:29 2013.
+</address></BODY>
+</HTML>

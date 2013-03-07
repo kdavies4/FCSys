@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.BaseClasses.Utilities.Chemistry</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="Functions to support chemistry">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,11 +45,15 @@
       <div class="body">
 
 <h2><a name="FCSys.BaseClasses.Utilities.Chemistry"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.Chemistry</h2>
+
 <b>Functions to support chemistry</b>
-<p>
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.BaseClasses.Utilities.Chemistry.chargeS.png" alt="FCSys.BaseClasses.Utilities.Chemistry.charge" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry.charge">charge</a>
@@ -65,8 +70,11 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <hr>
 
 <h2><a name="FCSys.BaseClasses.Utilities.Chemistry.charge"></a><a href="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry">FCSys.BaseClasses.Utilities.Chemistry</a>.charge</h2>
-<b>Return the charge of a species given its chemical formula</b><p>
-<p><h3>Information</h3></p>
+
+<b>Return the charge of a species given its chemical formula</b>
+
+<h3>Information</h3>
+
 <p>This function returns the net
   electrical charge associated with a species represented by a chemical
   formula (<code>formula</code>).  If the charge number is
@@ -78,17 +86,28 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <code>charge("Hg2+2")</code> returns 2.</p>
   <p>
 
-<p><h3>Inputs</h3><p>
+<p>
+
+<h3>Inputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>String</td><td>formula</td><td>&nbsp;</td><td>Chemical formula</td></tr>
 </table>
-<p><h3>Outputs</h3><p>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Integer</td><td>z</td><td>Charge number</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">function</font> charge <font color="darkgreen">
   &quot;Return the charge of a species given its chemical formula&quot;</font>
@@ -97,19 +116,20 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">output </font>Integer z <font color="darkgreen">&quot;Charge number&quot;</font>;
 
 <font color="blue">external</font>&quot;C&quot;;
-<textblock type="annotcomp" expanded="false">
+
 <font color="blue">end </font>charge;
 </pre>
 <hr>
 
 <h2><img src="images/FCSys.BaseClasses.Utilities.Chemistry.countElementsI.png" alt="FCSys.BaseClasses.Utilities.Chemistry.countElements" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.Chemistry.countElements"></a><a href="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry">FCSys.BaseClasses.Utilities.Chemistry</a>.countElements</h2>
-<b>Return the number of elements in a chemical formula</b><p>
-<p><h3>Information</h3></p>
+<b>Return the number of elements in a chemical formula</b>
+
+<h3>Information</h3>
+
 <p>This function returns the number of elements
       in a chemical formula.  Electrons are counted as a present element (or rather particle)
-      if the net charge is nonzero.
-      </p>
+      if the net charge is nonzero.</p>
 
       <p><b>Examples:</b><br>
     <code>countElements("C19HF37O5S-")</code> returns 5 and <code>countElements("H+")</code> returns 2.</p>
@@ -118,17 +138,28 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.ReadFormula">ReadFormula</a> function
   for details about the format of the chemical formula.</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
-<p><h3>Inputs</h3><p>
+<p>
+
+<h3>Inputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>String</td><td>formula</td><td>&nbsp;</td><td>Chemical formula</td></tr>
 </table>
-<p><h3>Outputs</h3><p>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n</td><td>Number of elements</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">function</font> countElements <font color="darkgreen">
   &quot;Return the number of elements in a chemical formula&quot;</font>
@@ -138,15 +169,17 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">output </font>Integer n <font color="darkgreen">&quot;Number of elements&quot;</font>;
 
 <font color="blue">external</font>&quot;C&quot;;
-<textblock type="annotcomp" expanded="false">
+
 <font color="blue">end </font>countElements;
 </pre>
 <hr>
 
 <h2><img src="images/FCSys.BaseClasses.Utilities.Chemistry.countElementsI.png" alt="FCSys.BaseClasses.Utilities.Chemistry.elements" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.Chemistry.elements"></a><a href="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry">FCSys.BaseClasses.Utilities.Chemistry</a>.elements</h2>
-<b>Return the symbols and coefficients of the elements in a chemical formula</b><p>
-<p><h3>Information</h3></p>
+<b>Return the symbols and coefficients of the elements in a chemical formula</b>
+
+<h3>Information</h3>
+
 <p>This function reads a chemical formula
   (<code>formula</code>) and returns the symbols (<code>symbols</code>)
   and coefficients (<code>coeffs</code>).  Each element
@@ -161,18 +194,29 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <code>(symbols, coeffs) = elements("C19HF37O5S-")</code> returns
   <code>symbols={"C", "H", "F", "O", "S", "e-"}</code> and <code>coeffs={19, 1, 37, 5, 1, 1}</code>.</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
-<p><h3>Inputs</h3><p>
+<p>
+
+<h3>Inputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>String</td><td>formula</td><td>&nbsp;</td><td>Chemical formula</td></tr>
 </table>
-<p><h3>Outputs</h3><p>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>String</td><td>symbols[countElements(formula)]</td><td>Symbols of the elements</td></tr>
 <tr><td>Integer</td><td>coeffs[size(symbols, 1)]</td><td>Coefficients of the elements</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">function</font> elements <font color="darkgreen">
   &quot;Return the symbols and coefficients of the elements in a chemical formula&quot;</font>
@@ -208,13 +252,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     symbols[i] := &quot;e-&quot;;
     coeffs[i] := -z_net;
   <font color="blue">end if</font>;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>elements;
+<font color="blue">end </font>elements;
 </pre>
 <hr>
 
 <h2><a name="FCSys.BaseClasses.Utilities.Chemistry.readElement"></a><a href="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry">FCSys.BaseClasses.Utilities.Chemistry</a>.readElement</h2>
-<b>Return the symbol, coefficient, and charge of an element at an index in a chemical formula</b><p>
-<p><h3>Information</h3></p>
+
+<b>Return the symbol, coefficient, and charge of an element at an index in a chemical formula</b>
+
+<h3>Information</h3>
+
 <p>This function returns the symbol (<code>symbol</code>),
   stoichiometric coefficient (<code>coeff</code>), and
   electrical charge (<code>z</code>) associated with an element as it appears in a chemical
@@ -237,13 +284,21 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <code>symbol="Hg"</code>, <code>coeff=2</code>, <code>z=2</code>, and <code>nextindex=6</code>.</p>
   <p>
 
-<p><h3>Inputs</h3><p>
+<p>
+
+<h3>Inputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>String</td><td>formula</td><td>&nbsp;</td><td>Chemical formula</td></tr>
 <tr><td>Integer</td><td>startindex</td><td>1</td><td>Start index</td></tr>
 </table>
-<p><h3>Outputs</h3><p>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>String</td><td>symbol</td><td>Name of element</td></tr>
@@ -251,7 +306,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td>Integer</td><td>z</td><td>Charge number</td></tr>
 <tr><td>Integer</td><td>nextindex</td><td>index after the found element (0 if error)</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">function</font> readElement <font color="darkgreen">
   &quot;Return the symbol, coefficient, and charge of an element at an index in a chemical formula&quot;</font>
@@ -270,15 +328,17 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     coeff,
     z,
     nextindex);
-<textblock type="annotcomp" expanded="false">
+
 <font color="blue">end </font>readElement;
 </pre>
 <hr>
 
 <h2><img src="images/FCSys.BaseClasses.Utilities.Chemistry.stoichI.png" alt="FCSys.BaseClasses.Utilities.Chemistry.stoich" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.Chemistry.stoich"></a><a href="FCSys_BaseClasses_Utilities_Chemistry.html#FCSys.BaseClasses.Utilities.Chemistry">FCSys.BaseClasses.Utilities.Chemistry</a>.stoich</h2>
-<b>Return stoichiometric coefficients of a reaction based on chemical formulas of reacting species</b><p>
-<p><h3>Information</h3></p>
+<b>Return stoichiometric coefficients of a reaction based on chemical formulas of reacting species</b>
+
+<h3>Information</h3>
+
 <p>This function returns a vector of
   stoichiometric coefficients (<code>nu</code>) that balance a chemical reaction
   among the species given by a vector of chemical formulas (<code>formulas</code>).
@@ -292,17 +352,28 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   which indicates the reaction 4e<sup>-</sup> + 4H<sup>+</sup> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O.</p>
   <p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
-<p><h3>Inputs</h3><p>
+<p>
+
+<h3>Inputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>String</td><td>formulas[:]</td><td>&nbsp;</td><td>Chemical formulas of the species</td></tr>
 </table>
-<p><h3>Outputs</h3><p>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Integer</td><td>nu[size(formulas, 1)]</td><td>Stoichiometric coefficients</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">function</font> stoich <font color="darkgreen">
   &quot;Return stoichiometric coefficients of a reaction based on chemical formulas of reacting species&quot;</font>
@@ -384,14 +455,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="red">assert</font>(minabs &gt; 0, &quot;The reaction is ill-posed.
 An unrelated species may be included.&quot;);
   nu := <font color="red">round</font>(u[:, <font color="blue">end</font>]/minabs);
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>stoich;
+<font color="blue">end </font>stoich;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:53:13 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:48:59 2013.
 </div>
 </body>
 </html>

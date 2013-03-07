@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Characteristics.Examples</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="Examples">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,7 +16,8 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
+<h3>Table of Contents</h3>
+
     <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
@@ -44,11 +45,15 @@
       <div class="body">
 
 <h2><a name="FCSys.Characteristics.Examples"></a><a href="FCSys_Characteristics.html#FCSys.Characteristics">FCSys.Characteristics</a>.Examples</h2>
+
 <b>Examples</b>
-<p>
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.ExamplesPackage.html#Modelica.Icons.ExamplesPackage">Modelica.Icons.ExamplesPackage</a> (Icon for packages containing runnable examples).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Characteristics.Examples.CorrelationsS.png" alt="FCSys.Characteristics.Examples.Correlations" width=20  height=20 align=top>&nbsp;<a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples.Correlations">Correlations</a>
@@ -60,15 +65,21 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Characteristics.Examples.Correlations"></a><a href="FCSys_Characteristics_Examples.html#FCSys.Characteristics.Examples">FCSys.Characteristics.Examples</a>.Correlations</h2>
 <b>Evaluate the material properties over varying temperature and pressure</b><p>
 <img src="images/FCSys.Characteristics.Examples.CorrelationsD.png" alt="FCSys.Characteristics.Examples.Correlations">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
-<p><h3>Connectors</h3><p>
+<p>
+<h3>Connectors</h3>
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">RealOutputInternal</a></td><td>T</td><td>Temperature [l2.m/(N.T2)]</td></tr>
 <tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">RealOutputInternal</a></td><td>p</td><td>Pressure [m/(l.T2)]</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> Correlations <font color="darkgreen">
   &quot;Evaluate the material properties over varying temperature and pressure&quot;</font>
@@ -91,10 +102,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
   <font color="darkgreen">// Conditions</font>
 
-<textblock type="annotcomp" expanded="false"><font color="blue">public </font>
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> T(unit=&quot;l2.m/(N.T2)&quot;,displayUnit=&quot;K&quot;) <font color="darkgreen">
+<font color="blue">public </font>
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> T(unit=&quot;l2.m/(N.T2)&quot;,displayUnit=&quot;K&quot;) <font color="darkgreen">
     &quot;Temperature&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> p(unit=&quot;m/(l.T2)&quot;) <font color="darkgreen">&quot;Pressure&quot;</font>;</textblock>
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> p(unit=&quot;m/(l.T2)&quot;) <font color="darkgreen">&quot;Pressure&quot;</font>;
 
   <font color="darkgreen">// Results</font>
   <font color="darkgreen">// -------</font>
@@ -110,15 +121,15 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_p_O2=<font color="red">DataO2.c_p</font>(T, p);
   <font color="darkgreen">//</font>
   <font color="darkgreen">// Isochoric specific heat capacity</font>
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_V_C+&#39;=<font color="red">&#39;DataC+&#39;.c_V</font>(T, p);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_V_C19HF37O5S-&#39;=<font color="red">&#39;DataC19HF37O5S-&#39;.c_V</font>(T, p);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_V_e-&#39;=<font color="red">&#39;Datae-&#39;.c_V</font>(T, p);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_V_H+&#39;=<font color="red">&#39;DataH+&#39;.c_V</font>(T, p);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_H2=<font color="red">DataH2.c_V</font>(T, p);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_H2O=<font color="red">DataH2O.c_V</font>(T, p);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_H2O_liquid=<font color="red">DataH2OLiquid.c_V</font>(T, p);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_N2=<font color="red">DataN2.c_V</font>(T, p);
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V_O2=<font color="red">DataO2.c_V</font>(T, p);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_v_C+&#39;=<font color="red">&#39;DataC+&#39;.c_v</font>(T, p);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_v_C19HF37O5S-&#39;=<font color="red">&#39;DataC19HF37O5S-&#39;.c_v</font>(T, p);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_v_e-&#39;=<font color="red">&#39;Datae-&#39;.c_v</font>(T, p);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> &#39;c_v_H+&#39;=<font color="red">&#39;DataH+&#39;.c_v</font>(T, p);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_v_H2=<font color="red">DataH2.c_v</font>(T, p);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_v_H2O=<font color="red">DataH2O.c_v</font>(T, p);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_v_H2O_liquid=<font color="red">DataH2OLiquid.c_v</font>(T, p);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_v_N2=<font color="red">DataN2.c_v</font>(T, p);
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_v_O2=<font color="red">DataO2.c_v</font>(T, p);
   <font color="darkgreen">//</font>
   <font color="darkgreen">// Gibbs potential</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> &#39;g_C+&#39;=<font color="red">&#39;DataC+&#39;.g</font>(T, p);
@@ -184,32 +195,32 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">Q.VolumeSpecificAbsolute</a> v_IG=<font color="red">DataH2IG.v_Tp</font>(T, p) <font color="darkgreen">
     &quot;Specific volume of ideal gas&quot;</font>;
 
-<textblock type="annotcomp" expanded="false"><font color="blue">protected </font>
+<font color="blue">protected </font>
   <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Clock">Modelica.Blocks.Sources.Clock</a> clock;
   <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Modelica.Blocks.Sources.Constant</a> temperatureOffset(k=273.15*U.K);
   <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Modelica.Blocks.Sources.Constant</a> pressureOffset(k=U.atm);
   <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> temperatureGain(k=200*U.K);
   <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> pressureGain(k=0*U.bar);
   <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Add">Modelica.Blocks.Math.Add</a> addTemperature;
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Add">Modelica.Blocks.Math.Add</a> addPressure;</textblock>
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Add">Modelica.Blocks.Math.Add</a> addPressure;
 
 <font color="blue">equation </font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(clock.y, temperatureGain.u);
+  <font color="red">connect</font>(clock.y, temperatureGain.u);
   <font color="red">connect</font>(clock.y, pressureGain.u);
   <font color="red">connect</font>(temperatureOffset.y, addTemperature.u1);
   <font color="red">connect</font>(pressureOffset.y, addPressure.u2);
   <font color="red">connect</font>(temperatureGain.y, addTemperature.u2);
   <font color="red">connect</font>(pressureGain.y, addPressure.u1);
   <font color="red">connect</font>(addTemperature.y, T);
-  <font color="red">connect</font>(addPressure.y, p);</textblock>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Correlations;
+  <font color="red">connect</font>(addPressure.y, p);
+<font color="blue">end </font>Correlations;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:52:53 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Apr  1 15:12:30 2013.
 </div>
 </body>
 </html>

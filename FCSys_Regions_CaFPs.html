@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Regions.CaFPs</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="Cathode flow plates">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,11 +45,15 @@
       <div class="body">
 
 <h2><a name="FCSys.Regions.CaFPs"></a><a href="FCSys_Regions.html#FCSys.Regions">FCSys.Regions</a>.CaFPs</h2>
+
 <b>Cathode flow plates</b>
-<p>
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Regions.CaFPs.CaFPS.png" alt="FCSys.Regions.CaFPs.CaFP" width=20  height=20 align=top>&nbsp;<a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">CaFP</a>
@@ -62,7 +67,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Regions.CaFPs.CaFP"></a><a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs">FCSys.Regions.CaFPs</a>.CaFP</h2>
 <b>Cathode flow plate</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.CaFPs.CaFP">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
 
 <p>This model describes the storage and transport of chemical/electrochemical
 species in and through the cathode flow plate of a PEMFC.
@@ -70,11 +76,16 @@ The x axis is intended to extend from the anode to the cathode.
 and the y axis extends along the length of the channel. The model is
 bidirectional, so that either <code>yNegative</code> or <code>yPositive</code> can be
 used as the inlet. The z axis extends across the width of the channel.</p>
+
 <p>For more information, see the
   <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> model.</p>
 <p>
 Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base model for a 3D array of subregions).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.1</td><td>Volumetric porosity [1]</td></tr>
@@ -88,7 +99,11 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td>Boolean</td><td>inclFacesY</td><td>true</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative face along the x axis</td></tr>
@@ -98,10 +113,13 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> CaFP <font color="darkgreen">&quot;Cathode flow plate&quot;</font>
-  <font color="darkgreen">//extends FCSys.BaseClasses.Icons.Names.Top4;</font>
+  <font color="darkgreen">// extends FCSys.BaseClasses.Icons.Names.Top4;</font>
 
   <font color="blue">extends </font><a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a>(
     L_x=<font color="red">fill</font>(8*U.mm/1, 1),
@@ -201,7 +219,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 
   <font color="darkgreen">// See AnFPs.AnFP for data on additional materials.</font>
 
-<textblock type="annotcomp" expanded="false"><font color="blue">protected </font>
+<font color="blue">protected </font>
   <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
 
 <font color="blue">end </font>CaFP;
@@ -212,29 +230,35 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <a name="FCSys.Regions.CaFPs.GM"></a><a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs">FCSys.Regions.CaFPs</a>.GM</h2>
 <b>General Motors cathodic test flow plate and current collector</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.CaFPs.GM">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 <p>Assumptions:<ol>
 <li>The x-axis length of this region is the thickness
-of the GM-compatible <a href="../resources/documentation/Regions/CaFPs/GM/Flow field.pdf">flow field</a>,
-<a href="../resources/documentation/Regions/CaFPs/GM/Current collector plate.pdf">current collector plate</a>,
- and <a href="../resources/documentation/Regions/CaFPs/GM/End plate.pdf">end plate</a> combined.  The material properties are those of epoxy-filled
+of the GM-compatible <a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/resources/documentation/Regions/CaFPs/GM/Flow field.pdf">flow field</a>,
+<a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/resources/documentation/Regions/CaFPs/GM/Current collector plate.pdf">current collector plate</a>,
+ and <a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/resources/documentation/Regions/CaFPs/GM/End plate.pdf">end plate</a> combined.  The material properties are those of epoxy-filled
 graphite, although the current collector is actually gold-plated copper and the end plate is actually aluminium.</li>
 <li>The y-axis length of this region is the length of the triple-serpentine flow channels of the
 GM-compatible
-cathode <a href="../resources/documentation/Regions/AnFPs/GM/Flow field.pdf">flow field</a> as if they were straightened.</li>
+cathode <a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/resources/documentation/Regions/AnFPs/GM/Flow field.pdf">flow field</a> as if they were straightened.</li>
 <li>The z-axis length of this region is 50 cm<sup>2</sup> divided by the y-axis length.  Only the active area
 (50 cm<sup>2</sup>) is modeled&mdash;not the entire area (100 cm<sup>2</sup>).
 <li>It is assumed that the solid (graphite/epoxy composite) constitutes the entire volume except for the flow channels.
 In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
 </ol></p>
+
 <p>Additional notes:
 <ul>
 <li>The default thermal resistivity ((1/95) m K/W) is that of Entegris/Poco Graphite AXM-5Q
 [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Entegris2012</a>].</li>
-</ul>
-</p><p>
+</ul></p><p>
 Extends from <a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">CaFP</a> (Cathode flow plate).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.011</td><td>Volumetric porosity [1]</td></tr>
@@ -246,7 +270,11 @@ Extends from <a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">CaFP</a
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative face along the x axis</td></tr>
@@ -256,7 +284,10 @@ Extends from <a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">CaFP</a
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> GM <font color="darkgreen">
   &quot;General Motors cathodic test flow plate and current collector&quot;</font>
@@ -267,7 +298,7 @@ Extends from <a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">CaFP</a
     L_y=<font color="red">fill</font>(1.028*U.m, 1),
     L_z=<font color="red">fill</font>((5/1.028)*U.mm, 1),
     x=0.011);
-<textblock type="annotcomp" expanded="false">
+
 <font color="blue">end </font>GM;
 </pre>
       </div>
@@ -275,7 +306,7 @@ Extends from <a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">CaFP</a
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:50:29 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:47:59 2013.
 </div>
 </body>
 </html>

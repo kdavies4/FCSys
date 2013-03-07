@@ -1,0 +1,85 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.WorkInProgress.Systems.Humidifier</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Humidifier<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.WorkInProgress.Systems.Humidifier"></A><A HREF="FCSys_WorkInProgress_Systems.html#FCSys.WorkInProgress.Systems"
+>FCSys.WorkInProgress.Systems</A>.Humidifier</H2>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package"
+>Modelica.Icons.Package</A> (Icon for standard packages).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Systems.Humidifier.HumidifierS.png" ALT="FCSys.WorkInProgress.Systems.Humidifier.Humidifier" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Systems_Humidifier.html#FCSys.WorkInProgress.Systems.Humidifier.Humidifier"
+>Humidifier</A>
+</TD><TD>&nbsp;</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Systems.Humidifier.InterfacesS.png" ALT="FCSys.WorkInProgress.Systems.Humidifier.Interfaces" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Systems_Humidifier_Interfaces.html#FCSys.WorkInProgress.Systems.Humidifier.Interfaces"
+>Interfaces</A>
+</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Humidifier<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Systems.Humidifier.HumidifierI.png" ALT="FCSys.WorkInProgress.Systems.Humidifier.Humidifier" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Systems.Humidifier.Humidifier"></A><A HREF="FCSys_WorkInProgress_Systems_Humidifier.html#FCSys.WorkInProgress.Systems.Humidifier"
+>FCSys.WorkInProgress.Systems.Humidifier</A>.Humidifier</H2>
+<IMG SRC="FCSys.WorkInProgress.Systems.Humidifier.HumidifierD.png" ALT="FCSys.WorkInProgress.Systems.Humidifier.Humidifier">
+<P><H3>Information</H3></P>
+Extends from FCSys.BaseClasses.Icons.Name.Top4.
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>mixturePipeN</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="FCSys_WorkInProgress_Systems_Humidifier_Interfaces.html#FCSys.WorkInProgress.Systems.Humidifier.Interfaces.ActBusIn"
+>ActBusIn</A></TD><TD>actBusIn</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="FCSys_WorkInProgress_Systems_Humidifier_Interfaces.html#FCSys.WorkInProgress.Systems.Humidifier.Interfaces.ActBusOut"
+>ActBusOut</A></TD><TD>actBusOut</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>H2OPipe</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>mixturePipeP</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Humidifier
+  <font color="darkgreen">// TODO:  Complete this.</font>
+
+  <font color="blue">extends </font>FCSys.BaseClasses.Icons.Name.Top4;
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>Connectors.FaceBus</A> mixturePipeN;
+  <A HREF="FCSys_WorkInProgress_Systems_Humidifier_Interfaces.html#FCSys.WorkInProgress.Systems.Humidifier.Interfaces.ActBusIn"
+>FCSys.WorkInProgress.Systems.Humidifier.Interfaces.ActBusIn</A> actBusIn;
+  <A HREF="FCSys_WorkInProgress_Systems_Humidifier_Interfaces.html#FCSys.WorkInProgress.Systems.Humidifier.Interfaces.ActBusOut"
+>FCSys.WorkInProgress.Systems.Humidifier.Interfaces.ActBusOut</A> actBusOut;
+  <A HREF="FCSys_WorkInProgress_Systems_Valve.html#FCSys.WorkInProgress.Systems.Valve.Valve"
+>FCSys.WorkInProgress.Systems.Valve.Valve</A> valve;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>Connectors.FaceBus</A> H2OPipe;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>Connectors.FaceBus</A> mixturePipeP;
+
+<font color="blue">end </font>Humidifier;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 00:08:37 2013.
+</address></BODY>
+</HTML>

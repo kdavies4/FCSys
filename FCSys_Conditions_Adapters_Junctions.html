@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.Adapters.Junctions</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="&lt;html&gt;&lt;a href=\&quot;modelica://Modelica\&quot;&gt;Modelica&lt;/a&gt; junctions between pure substances and their mixtures&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,11 +45,15 @@
       <div class="body">
 
 <h2><a name="FCSys.Conditions.Adapters.Junctions"></a><a href="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters">FCSys.Conditions.Adapters</a>.Junctions</h2>
+
 <b><a href="http://build.openmodelica.org/Documentation/Modelica.html#Modelica">Modelica</a> junctions between pure substances and their mixtures</b>
-<p>
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Conditions.Adapters.Junctions.Junction2S.png" alt="FCSys.Conditions.Adapters.Junctions.Junction2" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Adapters_Junctions.html#FCSys.Conditions.Adapters.Junctions.Junction2">Junction2</a>
@@ -64,9 +69,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Conditions.Adapters.Junctions.Junction2"></a><a href="FCSys_Conditions_Adapters_Junctions.html#FCSys.Conditions.Adapters.Junctions">FCSys.Conditions.Adapters.Junctions</a>.Junction2</h2>
 <b>Junction between two pure substances and their mixture</b><p>
 <img src="images/FCSys.Conditions.Adapters.Junctions.Junction2D.png" alt="FCSys.Conditions.Adapters.Junctions.Junction2">
-<p><h3>Information</h3></p>
-<p>
-  Assumptions:
+
+<h3>Information</h3>
+
+<p>Assumptions:
   <ol>
   <li>The mixing is ideal.  If the pure substances are being combined,
   then the massic enthalpy of the mixture is the mass-weighted sum of the pure substances.
@@ -76,23 +82,33 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <li>The mixture observes Dalton's law.  The pressure of the mixture is the sum
   of the pressures of the pure substances.
   </li>
-  </ol>
-  </p><p>
+  </ol></p><p>
 Extends from <a href="FCSys_Conditions_Adapters_Junctions_BaseClasses.html#FCSys.Conditions.Adapters.Junctions.BaseClasses.PartialJunction">BaseClasses.PartialJunction</a> (Partial model for a junction between pure substances and their mixture).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package MixtureMedium</td><td>Media.AnodeGas</td><td>Medium model for the mixture</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.a">FluidPort_a</a></td><td>mixturePort</td><td>Fluid port for the mixture</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">FluidPort_b</a></td><td>purePort1</td><td>Fluid port for the 1st pure substance</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">FluidPort_b</a></td><td>purePort2</td><td>Fluid port for the 2nd pure substance</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> Junction2 <font color="darkgreen">
   &quot;Junction between two pure substances and their mixture&quot;</font>
@@ -109,10 +125,10 @@ Extends from <a href="FCSys_Conditions_Adapters_Junctions_BaseClasses.html#FCSys
     Modelica.Media.Interfaces.PartialPureSubstance <font color="darkgreen">
     &quot;Medium model for the 2<sup>nd</sup> pure substance&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> purePort1(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> purePort1(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
       Medium = <a href="FCSys_Conditions_Adapters_Junctions_Medium1.html#FCSys.Conditions.Adapters.Junctions.Junction2.Medium1">Medium1</a>) <font color="darkgreen">&quot;Fluid port for the 1st pure substance&quot;</font>;
   <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> purePort2(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
-      Medium = <a href="FCSys_Conditions_Adapters_Junctions_Medium2.html#FCSys.Conditions.Adapters.Junctions.Junction2.Medium2">Medium2</a>) <font color="darkgreen">&quot;Fluid port for the 2nd pure substance&quot;</font>;</textblock>
+      Medium = <a href="FCSys_Conditions_Adapters_Junctions_Medium2.html#FCSys.Conditions.Adapters.Junctions.Junction2.Medium2">Medium2</a>) <font color="darkgreen">&quot;Fluid port for the 2nd pure substance&quot;</font>;
 
 <font color="blue">initial </font><font color="blue">equation </font>
   <font color="darkgreen">// Check the number and names of substances</font>
@@ -158,7 +174,7 @@ but that of the second pure substance (Medium2) is \&quot;&quot; + Medium2.extra
   <font color="darkgreen">// Mass conservation (no storage)</font>
   0 = X[1]*mixturePort.m_flow + purePort1.m_flow <font color="darkgreen">&quot;Substance 1&quot;</font>;
   0 = X[2]*mixturePort.m_flow + purePort2.m_flow <font color="darkgreen">&quot;Substance 2&quot;</font>;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Junction2;
+<font color="blue">end </font>Junction2;
 </pre>
 <hr>
 
@@ -166,9 +182,10 @@ but that of the second pure substance (Medium2) is \&quot;&quot; + Medium2.extra
 <a name="FCSys.Conditions.Adapters.Junctions.Junction3"></a><a href="FCSys_Conditions_Adapters_Junctions.html#FCSys.Conditions.Adapters.Junctions">FCSys.Conditions.Adapters.Junctions</a>.Junction3</h2>
 <b>Junction between three pure substances and their mixture</b><p>
 <img src="images/FCSys.Conditions.Adapters.Junctions.Junction3D.png" alt="FCSys.Conditions.Adapters.Junctions.Junction3">
-<p><h3>Information</h3></p>
-<p>
-  Assumptions:
+
+<h3>Information</h3>
+
+<p>Assumptions:
   <ol>
   <li>The mixing is ideal.  If the pure substances are being combined,
   then the massic enthalpy of the mixture is the mass-weighted sum of the pure substances.
@@ -178,16 +195,23 @@ but that of the second pure substance (Medium2) is \&quot;&quot; + Medium2.extra
   <li>The mixture observes Dalton's law.  The pressure of the mixture is the sum
   of the pressures of the pure substances.
   </li>
-  </ol>
-  </p><p>
+  </ol></p><p>
 Extends from <a href="FCSys_Conditions_Adapters_Junctions_BaseClasses.html#FCSys.Conditions.Adapters.Junctions.BaseClasses.PartialJunction">BaseClasses.PartialJunction</a> (Partial model for a junction between pure substances and their mixture).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package MixtureMedium</td><td>Media.CathodeGas</td><td>Medium model for the mixture</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.a">FluidPort_a</a></td><td>mixturePort</td><td>Fluid port for the mixture</td></tr>
@@ -197,7 +221,10 @@ Extends from <a href="FCSys_Conditions_Adapters_Junctions_BaseClasses.html#FCSys
 <TR bgcolor="#e0e0e0"><TD colspan=3>Material properties</td></tr>
 <tr><TD colspan="2">replaceable package MixtureMedium</td><td>Medium model for the mixture</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> Junction3 <font color="darkgreen">
   &quot;Junction between three pure substances and their mixture&quot;</font>
@@ -220,12 +247,12 @@ Extends from <a href="FCSys_Conditions_Adapters_Junctions_BaseClasses.html#FCSys
     Modelica.Media.Interfaces.PartialPureSubstance <font color="darkgreen">
     &quot;Medium model for the 3<sup>rd</sup> pure substance&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> purePort1(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> purePort1(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
       Medium = <a href="FCSys_Conditions_Adapters_Junctions_Medium1.html#FCSys.Conditions.Adapters.Junctions.Junction3.Medium1">Medium1</a>) <font color="darkgreen">&quot;Fluid port for the 1st pure substance&quot;</font>;
   <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> purePort2(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
       Medium = <a href="FCSys_Conditions_Adapters_Junctions_Medium2.html#FCSys.Conditions.Adapters.Junctions.Junction3.Medium2">Medium2</a>) <font color="darkgreen">&quot;Fluid port for the 2nd pure substance&quot;</font>;
   <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> purePort3(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
-      Medium = <a href="FCSys_Conditions_Adapters_Junctions_Medium3.html#FCSys.Conditions.Adapters.Junctions.Junction3.Medium3">Medium3</a>) <font color="darkgreen">&quot;Fluid port for the 3rd pure substance&quot;</font>;</textblock>
+      Medium = <a href="FCSys_Conditions_Adapters_Junctions_Medium3.html#FCSys.Conditions.Adapters.Junctions.Junction3.Medium3">Medium3</a>) <font color="darkgreen">&quot;Fluid port for the 3rd pure substance&quot;</font>;
 
 <font color="blue">initial </font><font color="blue">equation </font>
   <font color="darkgreen">// Check the number and names of substances</font>
@@ -285,14 +312,14 @@ but that of the third pure substance (Medium3) is \&quot;&quot; + Medium3.extraP
   0 = X[1]*mixturePort.m_flow + purePort1.m_flow <font color="darkgreen">&quot;Substance 1&quot;</font>;
   0 = X[2]*mixturePort.m_flow + purePort2.m_flow <font color="darkgreen">&quot;Substance 2&quot;</font>;
   0 = X[3]*mixturePort.m_flow + purePort3.m_flow <font color="darkgreen">&quot;Substance 3&quot;</font>;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Junction3;
+<font color="blue">end </font>Junction3;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:46:55 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:43:53 2013.
 </div>
 </body>
 </html>

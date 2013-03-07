@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.TestStands</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="Test stands">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,11 +45,15 @@
       <div class="body">
 
 <h2><a name="FCSys.Conditions.TestStands"></a><a href="FCSys_Conditions.html#FCSys.Conditions">FCSys.Conditions</a>.TestStands</h2>
+
 <b>Test stands</b>
-<p>
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages), <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.PackageUnderConstruction">FCSys.BaseClasses.Icons.PackageUnderConstruction</a> (Overlay to indicate that a package is in development).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Conditions.TestStands.TestProfileS.png" alt="FCSys.Conditions.TestStands.TestProfile" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands.TestProfile">TestProfile</a>
@@ -64,14 +69,19 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Conditions.TestStands.TestProfile"></a><a href="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands">FCSys.Conditions.TestStands</a>.TestProfile</h2>
 <b>Cell test profile</b><p>
 <img src="images/FCSys.Conditions.TestStands.TestProfileD.png" alt="FCSys.Conditions.TestStands.TestProfile">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples), <a href="FCSys_Conditions_TestStands_BaseClasses.html#FCSys.Conditions.TestStands.BaseClasses.PartialTestStandNoIO">BaseClasses.PartialTestStandNoIO</a> (Partial cell test stand without inputs/outputs).
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> TestProfile <font color="darkgreen">&quot;Cell test profile&quot;</font>
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
   <font color="blue">extends </font><a href="FCSys_Conditions_TestStands_BaseClasses.html#FCSys.Conditions.TestStands.BaseClasses.PartialTestStandNoIO">BaseClasses.PartialTestStandNoIO</a>;
-<textblock type="annotcomp" expanded="false">
+
 <font color="blue">end </font>TestProfile;
 </pre>
 <hr>
@@ -80,20 +90,33 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Conditions.TestStands.Replay"></a><a href="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands">FCSys.Conditions.TestStands</a>.Replay</h2>
 <b>Regenerate signals recorded from HNEI&#39;s Greenlight FC test stand</b><p>
 <img src="images/FCSys.Conditions.TestStands.ReplayD.png" alt="FCSys.Conditions.TestStands.Replay">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.ContinuousShort">FCSys.BaseClasses.Icons.Blocks.ContinuousShort</a> (Short icon for a continuous block).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Integer</td><td>n</td><td>1</td><td>index of the data set</td></tr>
 <tr><td>Boolean</td><td>terminateMaxTime</td><td>true</td><td>Terminate at maximum time of source data</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output signals as a bus</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> Replay <font color="darkgreen">
   &quot;Regenerate signals recorded from HNEI&#39;s Greenlight FC test stand&quot;</font>
@@ -103,7 +126,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
   <font color="blue">parameter </font>Boolean terminateMaxTime=true <font color="darkgreen">
     &quot;Terminate at maximum time of source data&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.CombiTimeTable">Modelica.Blocks.Sources.CombiTimeTable</a> combiTimeTable(
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.CombiTimeTable">Modelica.Blocks.Sources.CombiTimeTable</a> combiTimeTable(
     tableOnFile=true,
     extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
     tableName=&quot;data&quot; + <font color="red">String</font>(n),
@@ -111,13 +134,13 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
     columns=2:19,
     smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments) <font color="darkgreen">
     &quot;Block to load and replay data&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">FCSys.Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Output signals as a bus&quot;</font>;</textblock>
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Output signals as a bus&quot;</font>;
 
-<textblock type="annotcomp" expanded="false"><font color="blue">protected </font>
+<font color="blue">protected </font>
   <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Add">Modelica.Blocks.Math.Add</a> sumAnMFC;
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Add">Modelica.Blocks.Math.Add</a> sumCaMFC;</textblock>
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Add">Modelica.Blocks.Math.Add</a> sumCaMFC;
 
-<textblock type="annotcomp" expanded="false">  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> from_V(k=U.V);
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> from_V(k=U.V);
   <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> &#39;from1_%&#39;(k=U.'%');
   <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> &#39;from2_%&#39;(k=U.'%');
   <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_kPag">Blocks.UnitConversions.From_kPag</a> from1_kPag;
@@ -132,55 +155,55 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
   <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_degC">Blocks.UnitConversions.From_degC</a> from4_degC;
   <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_degC">Blocks.UnitConversions.From_degC</a> from5_degC;
   <a href="FCSys_Blocks_UnitConversions.html#FCSys.Blocks.UnitConversions.From_degC">Blocks.UnitConversions.From_degC</a> from6_degC;
-  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> from_A(k=U.A);</textblock>
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a> from_A(k=U.A);
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> v(<font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;) <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> v(<font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;) <font color="darkgreen">
     &quot;CVM Cell 1 Voltage&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> RHAnFPNegX(
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> RHAnFPNegX(
     <font color="blue">final </font>unit=&quot;1&quot;,
     displayUnit=&quot;%&quot;,
     <font color="blue">final </font>min=0) <font color="darkgreen">&quot;Anode inlet RH&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> RHCaFPNegX(
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> RHCaFPNegX(
     <font color="blue">final </font>unit=&quot;1&quot;,
     displayUnit=&quot;%&quot;,
     <font color="blue">final </font>min=0) <font color="darkgreen">&quot;Cathode inlet RH&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> p_anFPNegY(<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;) <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> p_anFPNegY(<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;) <font color="darkgreen">
     &quot;Pressure anode inlet&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> p_anFPPosY(<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;, <font color="blue">final </font>
-      min=0) <font color="darkgreen">&quot;Pressure anode outlet&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> p_caFPNegY(<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;) <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> p_anFPPosY(<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;, <font color="blue">final </font>min=0) <font color="darkgreen">
+    &quot;Pressure anode outlet&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> p_caFPNegY(<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;) <font color="darkgreen">
     &quot;Pressure cathode inlet&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> p_caFPPosY(<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;, <font color="blue">final </font>
-      min=0) <font color="darkgreen">&quot;Pressure anode outlet&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> Vdot_anFPNegY_H2(<font color="blue">final </font>unit=&quot;l3/T&quot;) <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> p_caFPPosY(<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;, <font color="blue">final </font>min=0) <font color="darkgreen">
+    &quot;Pressure anode outlet&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> Vdot_anFPNegY_H2(<font color="blue">final </font>unit=&quot;l3/T&quot;) <font color="darkgreen">
     &quot;Flow anode H2 MFC&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> Vdot_caFPNegY_air(<font color="blue">final </font>unit=&quot;l3/T&quot;) <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> Vdot_caFPNegY_air(<font color="blue">final </font>unit=&quot;l3/T&quot;) <font color="darkgreen">
     &quot;Flow cathode H2 MFC&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> T_anFPNegY(
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> T_anFPNegY(
     <font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;,
     displayUnit=&quot;K&quot;,
     <font color="blue">final </font>min=0) <font color="darkgreen">&quot;Temperature anode inlet&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> T_anFPPosY(
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> T_anFPPosY(
     <font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;,
     displayUnit=&quot;K&quot;,
     <font color="blue">final </font>min=0) <font color="darkgreen">&quot;Temperature anode outlet&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> T_caFPNegY(
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> T_caFPNegY(
     <font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;,
     displayUnit=&quot;K&quot;,
     <font color="blue">final </font>min=0) <font color="darkgreen">&quot;Temperature cathode inlet&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> T_caFPPosY(
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> T_caFPPosY(
     <font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;,
     displayUnit=&quot;K&quot;,
     <font color="blue">final </font>min=0) <font color="darkgreen">&quot;Temperature cathode outlet&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> T_anFPX(
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> T_anFPX(
     <font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;,
     displayUnit=&quot;K&quot;,
     <font color="blue">final </font>min=0) <font color="darkgreen">&quot;Temperature end plate anode&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> T_caFPX(
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> T_caFPX(
     <font color="blue">final </font>unit=&quot;l2.m/(N.T2)&quot;,
     displayUnit=&quot;K&quot;,
     <font color="blue">final </font>min=0) <font color="darkgreen">&quot;Temperature end plate cathode&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">FCSys.Connectors.RealOutputInternal</a> I(<font color="blue">final </font>unit=&quot;N/T&quot;) <font color="darkgreen">&quot;Measured load&quot;</font>;</textblock>
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> I(<font color="blue">final </font>unit=&quot;N/T&quot;) <font color="darkgreen">&quot;Measured load&quot;</font>;
 
 <font color="blue">equation </font>
   <font color="darkgreen">//  Terminate as desired</font>
@@ -191,13 +214,13 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
   <font color="blue">end if</font>;
 
   <font color="darkgreen">// Connections from source to unit conversion</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(from_V.u, combiTimeTable.y[1]);</textblock>
+  <font color="red">connect</font>(from_V.u, combiTimeTable.y[1]);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('from1_%'.u, combiTimeTable.y[2]);</textblock>
+  <font color="red">connect</font>('from1_%'.u, combiTimeTable.y[2]);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('from2_%'.u, combiTimeTable.y[3]);</textblock>
+  <font color="red">connect</font>('from2_%'.u, combiTimeTable.y[3]);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(from1_kPag.u, combiTimeTable.y[4]);
+  <font color="red">connect</font>(from1_kPag.u, combiTimeTable.y[4]);
   <font color="red">connect</font>(from2_kPag.u, combiTimeTable.y[5]);
   <font color="red">connect</font>(from3_kPag.u, combiTimeTable.y[6]);
   <font color="red">connect</font>(from4_kPag.u, combiTimeTable.y[7]);
@@ -211,10 +234,10 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
   <font color="red">connect</font>(from4_degC.u, combiTimeTable.y[15]);
   <font color="red">connect</font>(from5_degC.u, combiTimeTable.y[16]);
   <font color="red">connect</font>(from6_degC.u, combiTimeTable.y[17]);
-  <font color="red">connect</font>(from_A.u, combiTimeTable.y[18]);</textblock>
+  <font color="red">connect</font>(from_A.u, combiTimeTable.y[18]);
 
   <font color="darkgreen">// Connections from unit conversion to internal outputs</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(v, from_V.y);
+  <font color="red">connect</font>(v, from_V.y);
   <font color="red">connect</font>(RHAnFPNegX, 'from1_%'.y);
   <font color="red">connect</font>(RHCaFPNegX, 'from2_%'.y);
   <font color="red">connect</font>(p_anFPNegY, from1_kPag.y);
@@ -229,48 +252,48 @@ Extends from <a href="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icon
   <font color="red">connect</font>(T_caFPPosY, from4_degC.y);
   <font color="red">connect</font>(T_anFPX, from5_degC.y);
   <font color="red">connect</font>(T_caFPX, from6_degC.y);
-  <font color="red">connect</font>(I, from_A.y);</textblock>
+  <font color="red">connect</font>(I, from_A.y);
 
   <font color="darkgreen">// Summations</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(sumAnMFC.y, from1_LPM.u);</textblock>
+  <font color="red">connect</font>(sumAnMFC.y, from1_LPM.u);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(sumCaMFC.y, from2_LPM.u);</textblock>
+  <font color="red">connect</font>(sumCaMFC.y, from2_LPM.u);
 
   <font color="darkgreen">// Connections from internal outputs to public output</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(v, y.v);</textblock>
+  <font color="red">connect</font>(v, y.v);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(RHAnFPNegX, y.RHAnFPNegX);</textblock>
+  <font color="red">connect</font>(RHAnFPNegX, y.RHAnFPNegX);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(RHCaFPNegX, y.RHCaFPNegX);</textblock>
+  <font color="red">connect</font>(RHCaFPNegX, y.RHCaFPNegX);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(p_anFPNegY, y.p_anFPNegY);</textblock>
+  <font color="red">connect</font>(p_anFPNegY, y.p_anFPNegY);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(p_anFPPosY, y.p_anFPPosY);</textblock>
+  <font color="red">connect</font>(p_anFPPosY, y.p_anFPPosY);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(p_caFPNegY, y.p_caFPNegY);</textblock>
+  <font color="red">connect</font>(p_caFPNegY, y.p_caFPNegY);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(p_caFPPosY, y.p_caFPPosY);</textblock>
+  <font color="red">connect</font>(p_caFPPosY, y.p_caFPPosY);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(Vdot_anFPNegY_H2, y.Vdot_anFPNegY_H2);</textblock>
+  <font color="red">connect</font>(Vdot_anFPNegY_H2, y.Vdot_anFPNegY_H2);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(Vdot_caFPNegY_air, y.Vdot_caFPNegY_air);
+  <font color="red">connect</font>(Vdot_caFPNegY_air, y.Vdot_caFPNegY_air);
   <font color="red">connect</font>(T_anFPNegY, y.T_anFPNegY);
   <font color="red">connect</font>(T_anFPPosY, y.T_anFPPosY);
   <font color="red">connect</font>(T_caFPNegY, y.T_caFPNegY);
   <font color="red">connect</font>(T_caFPPosY, y.T_caFPPosY);
-  <font color="red">connect</font>(T_anFPX, y.T_anFPX);</textblock>
+  <font color="red">connect</font>(T_anFPX, y.T_anFPX);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(T_caFPX, y.T_caFPX);</textblock>
+  <font color="red">connect</font>(T_caFPX, y.T_caFPX);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(I, y.I);</textblock>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Replay;
+  <font color="red">connect</font>(I, y.I);
+<font color="blue">end </font>Replay;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:46:59 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:43:56 2013.
 </div>
 </body>
 </html>

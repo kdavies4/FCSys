@@ -1,0 +1,204 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Base classes (not generally for direct use)&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE BaseClasses<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses"></A><A HREF="FCSys_WorkInProgress_Blocks_Continuous_Sources.html#FCSys.WorkInProgress.Blocks.Continuous.Sources"
+>FCSys.WorkInProgress.Blocks.Continuous.Sources</A>.BaseClasses</H2>
+<B>Base classes (not generally for direct use)</B>
+<P>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_BasesPackage.html#Modelica.Icons.BasesPackage"
+>Modelica.Icons.BasesPackage</A> (Icon for packages containing base classes).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeInitS.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeInit" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Continuous_Sources_BaseClasses.html#FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeInit"
+>tableTimeInit</A>
+</TD><TD>Initialize 1D table where first column is time (for details see: Modelica/C-Sources/ModelicaTables.h)</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeInitS.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeIpo" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Continuous_Sources_BaseClasses.html#FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeIpo"
+>tableTimeIpo</A>
+</TD><TD>Interpolate 1D table where first column is time (for details see: Modelica/C-Sources/ModelicaTables.h)</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeInitS.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeTmin" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Continuous_Sources_BaseClasses.html#FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeTmin"
+>tableTimeTmin</A>
+</TD><TD>Return minimum time value of 1D table where first column is time (for details see: Modelica/C-Sources/ModelicaTables.h)</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeInitS.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeTmax" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Continuous_Sources_BaseClasses.html#FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeTmax"
+>tableTimeTmax</A>
+</TD><TD>Return maximum time value of 1D table where first column is time (for details see: Modelica/C-Sources/ModelicaTables.h)</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE tableTimeInit<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeInitI.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeInit" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeInit"></A><A HREF="FCSys_WorkInProgress_Blocks_Continuous_Sources_BaseClasses.html#FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses"
+>FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses</A>.tableTimeInit</H2>
+<B>Initialize 1D table where first column is time (for details see: Modelica/C-Sources/ModelicaTables.h)</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for functions).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>String</TD><TD>tableName</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>String</TD><TD>fileName</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>table[:, :]</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>startTime</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Types.html#Modelica.Blocks.Types.Smoothness"
+>Smoothness</A></TD><TD>smoothness</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Types.html#Modelica.Blocks.Types.Extrapolation"
+>Extrapolation</A></TD><TD>extrapolation</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>tableID</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> tableTimeInit <font color="darkgreen">
+  &quot;Initialize 1D table where first column is time (for details see: Modelica/C-Sources/ModelicaTables.h)&quot;</font>
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+  <font color="blue">input </font>String tableName;
+  <font color="blue">input </font>String fileName;
+  <font color="blue">input </font>Real table[:, :];
+  <font color="blue">input </font>Real startTime;
+  <font color="blue">input </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Types.html#Modelica.Blocks.Types.Smoothness"
+>Modelica.Blocks.Types.Smoothness</A> smoothness;
+  <font color="blue">input </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Types.html#Modelica.Blocks.Types.Extrapolation"
+>Modelica.Blocks.Types.Extrapolation</A> extrapolation;
+  <font color="blue">output </font>Integer tableID;
+<font color="blue">external</font>&quot;C&quot; tableID = <font color="red">ModelicaTables_CombiTimeTable_init</font>(
+    tableName,
+    fileName,
+    table,
+    <font color="red">size</font>(table, 1),
+    <font color="red">size</font>(table, 2),
+    startTime,
+    smoothness,
+    extrapolation);
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>tableTimeInit;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE tableTimeIpo<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeInitI.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeIpo" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeIpo"></A><A HREF="FCSys_WorkInProgress_Blocks_Continuous_Sources_BaseClasses.html#FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses"
+>FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses</A>.tableTimeIpo</H2>
+<B>Interpolate 1D table where first column is time (for details see: Modelica/C-Sources/ModelicaTables.h)</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for functions).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>tableID</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Integer</TD><TD>icol</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+<TR><TD>Real</TD><TD>timeIn</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> tableTimeIpo <font color="darkgreen">
+  &quot;Interpolate 1D table where first column is time (for details see: Modelica/C-Sources/ModelicaTables.h)&quot;</font>
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+  <font color="blue">input </font>Integer tableID;
+  <font color="blue">input </font>Integer icol;
+  <font color="blue">input </font>Real timeIn;
+  <font color="blue">output </font>Real value;
+<font color="blue">external</font>&quot;C&quot; value = <font color="red">ModelicaTables_CombiTimeTable_interpolate</font>(
+    tableID,
+    icol,
+    timeIn);
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>tableTimeIpo;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE tableTimeTmin<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeInitI.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeTmin" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeTmin"></A><A HREF="FCSys_WorkInProgress_Blocks_Continuous_Sources_BaseClasses.html#FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses"
+>FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses</A>.tableTimeTmin</H2>
+<B>Return minimum time value of 1D table where first column is time (for details see: Modelica/C-Sources/ModelicaTables.h)</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for functions).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>tableID</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>Tmin</TD><TD>minimum time value in table</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> tableTimeTmin <font color="darkgreen">
+  &quot;Return minimum time value of 1D table where first column is time (for details see: Modelica/C-Sources/ModelicaTables.h)&quot;</font>
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+  <font color="blue">input </font>Integer tableID;
+  <font color="blue">output </font>Real Tmin <font color="darkgreen">&quot;minimum time value in table&quot;</font>;
+<font color="blue">external</font>&quot;C&quot; Tmin = <font color="red">ModelicaTables_CombiTimeTable_minimumTime</font>(tableID);
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>tableTimeTmin;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE tableTimeTmax<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeInitI.png" ALT="FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeTmax" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses.tableTimeTmax"></A><A HREF="FCSys_WorkInProgress_Blocks_Continuous_Sources_BaseClasses.html#FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses"
+>FCSys.WorkInProgress.Blocks.Continuous.Sources.BaseClasses</A>.tableTimeTmax</H2>
+<B>Return maximum time value of 1D table where first column is time (for details see: Modelica/C-Sources/ModelicaTables.h)</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A> (Icon for functions).
+<P><H3>Inputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>tableID</TD><TD>&nbsp;</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Outputs</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>Real</TD><TD>Tmax</TD><TD>maximum time value in table</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">function</font> tableTimeTmax <font color="darkgreen">
+  &quot;Return maximum time value of 1D table where first column is time (for details see: Modelica/C-Sources/ModelicaTables.h)&quot;</font>
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Function"
+>Modelica.Icons.Function</A>;
+  <font color="blue">input </font>Integer tableID;
+  <font color="blue">output </font>Real Tmax <font color="darkgreen">&quot;maximum time value in table&quot;</font>;
+<font color="blue">external</font>&quot;C&quot; Tmax = <font color="red">ModelicaTables_CombiTimeTable_maximumTime</font>(tableID);
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>tableTimeTmax;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 00:07:43 2013.
+</address></BODY>
+</HTML>

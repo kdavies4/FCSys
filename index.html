@@ -2,7 +2,7 @@
 <head>
 <title>FCSys &mdash; Modelica library of fuel cell models</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="Modelica library of fuel cell models">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,11 +45,12 @@
       <div class="body">
 
 <h2><a name="FCSys"></a>FCSys</h2>
-<b>Modelica library of fuel cell models</b>
-<p>
-<p><h3>Information</h3></p>
 
-    <p><a href="index.html#FCSys">FCSys</a> is an open-source library of
+<b>Modelica library of fuel cell models</b>
+
+<h3>Information</h3>
+
+<p><a href="index.html#FCSys">FCSys</a> is an open-source library of
     declarative, dynamic, and flexible models of proton exchange membrane
     fuel cells (PEMFCs) in the <a href = "http://www.modelica.org/">Modelica</a>
     language.  The dynamics include chemical, fluid, thermal, and electrical
@@ -57,10 +59,9 @@
     phases. In fact, the framework could be easily extended to model other electrochemical
     devices like batteries.</p>
 
-    <p>A fuel cell is an electrochemical device which is similar to a battery
-    except that the reactants (fuel and oxidant) are externally stored or drawn
+    <p>A fuel cell is similar to a battery except that the reactants (fuel and oxidant)
+    are externally stored or drawn
     from the environment.  The electrochemical reactions of a PEMFC are:
-
     <table border=0 cellspacing=0 cellpadding=2 align=center style="margin-left: auto;
 margin-right: auto;" class=noBorder>
       <tr>
@@ -116,25 +117,23 @@ margin-right: auto;" class=noBorder>
     Fluid enters and exits the cell through channels in the flow plates (FPs).  It spreads through
     the gas diffusion diffusion layers (GDLs) and reacts in the catalyst layers (CLs).  The
     proton exchange membrane (PEM) prevents electronic transport; therefore, electrons must
-    pass through an external load to sustain the net reaction.    As
-    shown in <a href="#Fig2">Figure 2</a>, a PEMFC model may be constructed in
-    <a href="index.html#FCSys">FCSys</a> from models of the same layers.
+    pass through an external load to sustain the net reaction.  As
+    shown in <a href="#Fig2">Figure 2</a>, a PEMFC model may be constructed from models
+    of the same layers in <a href="index.html#FCSys">FCSys</a>.
     The model is modular; the gas diffusion and catalyst layers could be combined,
     or microporous layers could be inserted.</p>
 
-    <a name="Fig1"></a>
-    <p align=center><img src="images/cell.svg" width=450>
-<br>Figure 1: Layers and primary flows of a PEMFC</p>
+    <p align=center id="Fig1"><img src="images/CellFlows.png">
+<br>Figure 1: Layers and primary flows of a PEMFC.</p>
 
-    <a name="Fig2"></a>
-    <!--<p align=center><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600 width=600 width=600>-->
-    <p align=center><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell"><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600 width=600></a>
+    <!--<p align=center id="Fig2"><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600 width=600 width=600 width=600 width=600 width=600>-->
+    <p align=center id="Fig2"><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell"><img src="images/FCSys.Assemblies.Cells.CellD.png" width=600 width=600 width=600 width=600 width=600></a>
 <br>Figure 2: Diagram of the PEMFC model (<a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">FCSys.Assemblies.Cells.Cell</a>).</p>
 
     <p>The models describe the advection, diffusion, and storage of
-    material, linear momentum, and energy.  Upstream
+    material, momentum, and energy.  Upstream
     discretization is applied in a manner that reduces to pure
-    diffusion (i.e., Ohm's law, Fick's law, Newton's law of viscosity, and Fourier's law) when the bulk velocity is zero.
+    diffusion (i.e., Fick's law, Newton's law of viscosity, and Fourier's law) when the bulk velocity is zero.
     The transport equations do
     not use the <a href = "http://www.modelica.org/">Modelica</a>
     <code>stream</code> operator since both diffusion and advection are
@@ -152,8 +151,7 @@ margin-right: auto;" class=noBorder>
     <a href="#Fig3">Figure 3</a>.  Adapters are available to interface with
     <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.html#Modelica.Fluid">Modelica.Fluid</a>.</p>
 
-    <a name="Fig3"></a>
-    <p align=center><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile"><img src="images/FCSys.Assemblies.Cells.Examples.CellProfileD.png"></a>
+    <p align=center id="Fig3"><a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile"><img src="images/FCSys.Assemblies.Cells.Examples.CellProfileD.png"></a>
 <br>Figure 3: Diagram of a test model (<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples.CellProfile">FCSys.Assemblies.Cells.Examples.CellProfile</a>).</p>
 
     <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b>
@@ -168,13 +166,15 @@ margin-right: auto;" class=noBorder>
     or visit <a href="http://www.modelica.org/licenses/ModelicaLicense2">
     http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.UsersGuideS.png" alt="FCSys.UsersGuide" width=20  height=20 align=top>&nbsp;<a href="FCSys_UsersGuide.html#FCSys.UsersGuide">UsersGuide</a>
 </td><td>User&#39;s Guide</td></tr>
 <tr><td><img src="images/FCSys.BlocksS.png" alt="FCSys.Blocks" width=20  height=20 align=top>&nbsp;<a href="FCSys_Blocks.html#FCSys.Blocks">Blocks</a>
-</td><td>Imperative models (inputs and/or outputs only)</td></tr>
+</td><td>Imperative models (inputs and outputs only)</td></tr>
 <tr><td><img src="images/FCSys.BlocksS.png" alt="FCSys.Conditions" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions.html#FCSys.Conditions">Conditions</a>
 </td><td>Models to specify and measure operating conditions</td></tr>
 <tr><td><img src="images/FCSys.BlocksS.png" alt="FCSys.Assemblies" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies.html#FCSys.Assemblies">Assemblies</a>
@@ -199,7 +199,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:46:36 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:43:31 2013.
 </div>
 </body>
 </html>

@@ -2,8 +2,8 @@
 <head>
 <title>FCSys.Conditions.FacePair.Normal</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
-<meta name="description" content="Normal mechanical Conditions">
+<meta name="date" content="2013-4-1">
+<meta name="description" content="Normal mechanical conditions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
 <script type="text/javascript" src="javascripts/analytics.js"></script>
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,11 +45,15 @@
       <div class="body">
 
 <h2><a name="FCSys.Conditions.FacePair.Normal"></a><a href="FCSys_Conditions_FacePair.html#FCSys.Conditions.FacePair">FCSys.Conditions.FacePair</a>.Normal</h2>
-<b>Normal mechanical Conditions</b>
-<p>
-<p><h3>Information</h3></p>
+
+<b>Normal mechanical conditions</b>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Conditions.FacePair.Normal.CurrentAreicS.png" alt="FCSys.Conditions.FacePair.Normal.CurrentAreic" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FacePair_Normal.html#FCSys.Conditions.FacePair.Normal.CurrentAreic">CurrentAreic</a>
@@ -66,29 +71,41 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Conditions.FacePair.Normal.CurrentAreic"></a><a href="FCSys_Conditions_FacePair_Normal.html#FCSys.Conditions.FacePair.Normal">FCSys.Conditions.FacePair.Normal</a>.CurrentAreic</h2>
 <b>Specify areic current (measure normal force), with conservation of material</b><p>
 <img src="images/FCSys.Conditions.FacePair.Normal.CurrentAreicD.png" alt="FCSys.Conditions.FacePair.Normal.CurrentAreic">
-<p><h3>Information</h3></p>
 
-  <p>Assumptions:
+<h3>Information</h3>
+
+<p>Assumptions:
   <ol>
   <li>The conservation of material is applied with the assumption that the cross sectional areas of the two
   interfaces are equal.</li>
   </ol><p>
 Extends from <a href="FCSys_Conditions_FacePair_Normal_BaseClasses.html#FCSys.Conditions.FacePair.Normal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a normal condition).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Conditions_FacePair_Normal_BaseClasses.html#FCSys.Conditions.FacePair.Normal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Cu...</td><td>Type of condition</td></tr>
+<tr><td><a href="FCSys_Conditions_FacePair_Normal_BaseClasses.html#FCSys.Conditions.FacePair.Normal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Cu&hellip;</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So...</td><td>Source of internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>negative</td><td>Negative-side connector to transport linear momentum and heat of a single species</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>positive</td><td>Positive-side connector to transport linear momentum and heat of a single species</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> CurrentAreic <font color="darkgreen">
   &quot;Specify areic current (measure normal force), with conservation of material&quot;</font>
@@ -99,7 +116,7 @@ Extends from <a href="FCSys_Conditions_FacePair_Normal_BaseClasses.html#FCSys.Co
 
 <font color="blue">equation </font>
   negative.J = u_final;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>CurrentAreic;
+<font color="blue">end </font>CurrentAreic;
 </pre>
 <hr>
 
@@ -107,29 +124,41 @@ Extends from <a href="FCSys_Conditions_FacePair_Normal_BaseClasses.html#FCSys.Co
 <a name="FCSys.Conditions.FacePair.Normal.Force"></a><a href="FCSys_Conditions_FacePair_Normal.html#FCSys.Conditions.FacePair.Normal">FCSys.Conditions.FacePair.Normal</a>.Force</h2>
 <b>Specify normal force (measure areic current), with conservation of material</b><p>
 <img src="images/FCSys.Conditions.FacePair.Normal.CurrentAreicD.png" alt="FCSys.Conditions.FacePair.Normal.Force">
-<p><h3>Information</h3></p>
 
-  <p>Assumptions:
+<h3>Information</h3>
+
+<p>Assumptions:
   <ol>
   <li>The conservation of material is applied with the assumption that the cross sectional areas of the two
   interfaces are equal.</li>
   </ol><p>
 Extends from <a href="FCSys_Conditions_FacePair_Normal_BaseClasses.html#FCSys.Conditions.FacePair.Normal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a normal condition).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Conditions_FacePair_Normal_BaseClasses.html#FCSys.Conditions.FacePair.Normal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Fo...</td><td>Type of condition</td></tr>
+<tr><td><a href="FCSys_Conditions_FacePair_Normal_BaseClasses.html#FCSys.Conditions.FacePair.Normal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Fo&hellip;</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So...</td><td>Source of internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>negative</td><td>Negative-side connector to transport linear momentum and heat of a single species</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>positive</td><td>Positive-side connector to transport linear momentum and heat of a single species</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> Force <font color="darkgreen">
   &quot;Specify normal force (measure areic current), with conservation of material&quot;</font>
@@ -140,7 +169,7 @@ Extends from <a href="FCSys_Conditions_FacePair_Normal_BaseClasses.html#FCSys.Co
 
 <font color="blue">equation </font>
   negative.mPhidot_0 + positive.mPhidot_0 = u_final;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Force;
+<font color="blue">end </font>Force;
 </pre>
 <hr>
 
@@ -148,22 +177,32 @@ Extends from <a href="FCSys_Conditions_FacePair_Normal_BaseClasses.html#FCSys.Co
 <a name="FCSys.Conditions.FacePair.Normal.Custom"></a><a href="FCSys_Conditions_FacePair_Normal.html#FCSys.Conditions.FacePair.Normal">FCSys.Conditions.FacePair.Normal</a>.Custom</h2>
 <b>Custom expressions</b><p>
 <img src="images/FCSys.Conditions.FacePair.Normal.CurrentAreicD.png" alt="FCSys.Conditions.FacePair.Normal.Custom">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 <p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>face.J</code> and/or <code>face.mPhidot_0</code>.</p><p>
 Extends from <a href="FCSys_Conditions_FacePair_Normal_BaseClasses.html#FCSys.Conditions.FacePair.Normal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a normal condition).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Conditions_FacePair_Normal_BaseClasses.html#FCSys.Conditions.FacePair.Normal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Cu...</td><td>Type of condition</td></tr>
+<tr><td><a href="FCSys_Conditions_FacePair_Normal_BaseClasses.html#FCSys.Conditions.FacePair.Normal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Cu&hellip;</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So...</td><td>Source of internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
 <tr><td>Real</td><td>x</td><td>negative.J</td><td>Expression to which the condition is applied</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>negative.mPhidot_0 + positiv...</td><td>Measurement expression</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>negative.mPhidot_0 + positiv&hellip;</td><td>Measurement expression</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Value of specified condition</td></tr>
@@ -172,7 +211,10 @@ Extends from <a href="FCSys_Conditions_FacePair_Normal_BaseClasses.html#FCSys.Co
 <TR bgcolor="#e0e0e0"><TD colspan=3>Measurement</td></tr>
 <tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Measurement expression</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> Custom <font color="darkgreen">&quot;Custom expressions&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Conditions_FacePair_Normal_BaseClasses.html#FCSys.Conditions.FacePair.Normal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(<font color="blue">final </font>conditionType=BaseClasses.ConditionType.Custom,
@@ -182,14 +224,14 @@ Extends from <a href="FCSys_Conditions_FacePair_Normal_BaseClasses.html#FCSys.Co
 
 <font color="blue">equation </font>
   x = u_final;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Custom;
+<font color="blue">end </font>Custom;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:48:44 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:45:50 2013.
 </div>
 </body>
 </html>

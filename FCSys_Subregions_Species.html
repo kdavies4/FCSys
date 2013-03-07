@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.Species</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="Models for single-species storage, transport, and exchange of material, linear momentum, and energy">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,11 +45,15 @@
       <div class="body">
 
 <h2><a name="FCSys.Subregions.Species"></a><a href="FCSys_Subregions.html#FCSys.Subregions">FCSys.Subregions</a>.Species</h2>
+
 <b>Models for single-species storage, transport, and exchange of material, linear momentum, and energy</b>
-<p>
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Subregions.Species.'C+'S.png" alt="FCSys.Subregions.Species.'C+'" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Species_'C+'.html#FCSys.Subregions.Species.'C+'">'C+'</a>
@@ -68,11 +73,11 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Subregions.Species.'C+'S.png" alt="FCSys.Subregions.Species.O2" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Species_O2.html#FCSys.Subregions.Species.O2">O2</a>
 </td><td>O<sub>2</sub></td></tr>
 <tr><td><img src="images/FCSys.Subregions.Species.SpeciesSolidS.png" alt="FCSys.Subregions.Species.SpeciesSolid" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesSolid">SpeciesSolid</a>
-</td><td>Solid species (inert and stagnant)</td></tr>
+</td><td><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model for a solid (inert and stagnant)<em>Error:Found no end-tag in HTML-documentation</em></td></tr>
 <tr><td><img src="images/FCSys.Subregions.Species.SpeciesSolidS.png" alt="FCSys.Subregions.Species.SpeciesIncompressible" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesIncompressible">SpeciesIncompressible</a>
-</td><td>Incompressible species</td></tr>
+</td><td><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model for an incompressible fluid<em>Error:Found no end-tag in HTML-documentation</em></td></tr>
 <tr><td><img src="images/FCSys.Subregions.Species.SpeciesSolidS.png" alt="FCSys.Subregions.Species.Species" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a>
-</td><td>Model for single-species exchange, transport, and storage of material, linear momentum, and energy</td></tr>
+</td><td>Model to exchange, transport, and store the material, momentum, and energy of one species</td></tr>
 <tr><td><img src="images/FCSys.Subregions.Species.BaseClassesS.png" alt="FCSys.Subregions.Species.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses">BaseClasses</a>
 </td><td>Base classes (not generally for direct use)</td></tr>
 </table>
@@ -80,13 +85,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h2><img src="images/FCSys.Subregions.Species.SpeciesSolidI.png" alt="FCSys.Subregions.Species.SpeciesSolid" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Subregions.Species.SpeciesSolid"></a><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species">FCSys.Subregions.Species</a>.SpeciesSolid</h2>
-<b>Solid species (inert and stagnant)</b><p>
+<b><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model for a solid (inert and stagnant)<em>Error:Found no end-tag in HTML-documentation</em></b><p>
 <img src="images/FCSys.Subregions.Species.SpeciesSolidD.png" alt="FCSys.Subregions.Species.SpeciesSolid">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 <p>Assumptions:<ol>
   <li>Zero dynamic compressibility (&rArr; uniform current)</li>
-  <li>Zero dynamic fluidity (&rArr; no shearing)</li></ol>
-  </p>
+  <li>Zero dynamic fluidity (&rArr; no shearing)</li></ol></p>
 
   <p>Usually, conditions should be applied to specify the velocity (typically <b>0</b>).  In a group of connected solid species
   of a single type (instances of a model derived from this one), there should be exactly one equation to specify the velocity along each Cartesian axis.
@@ -96,20 +102,25 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   to <code>false</code>, which will set the current and transverse components of velocity to zero.</p>
 
   <p>For more information, see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
-Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesIncompressible">SpeciesIncompressible</a> (Incompressible species).
-<p><h3>Parameters</h3><p>
+Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesIncompressible">SpeciesIncompressible</a> (<a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model for an incompressible fluid<em>Error:Found no end-tag in HTML-documentation</em>).
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>Lstar</td><td>&nbsp;</td><td>Characteristic length for exchange (<i>L</i><sup>&#9733;</sup>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k[Axis]</td><td>{1,1,1}</td><td>Areal fill factor for transport (<b>k</b>) [1]</td></tr>
+<tr><td>Integer</td><td>n_react</td><td>1</td><td>Number of chemical reactions</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
-<tr><TD colspan="2">replaceable package Data</td><td><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a></td><td>Characteristic data</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CompressibilityDynamic">CompressibilityDynamic</a></td><td>Xi</td><td>0</td><td>Dynamic compressibility (&Xi;) [N.T/(l2.m)]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.FluidityDynamic">FluidityDynamic</a></td><td>F</td><td>0</td><td>Dynamic fluidity [l.T/m]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>R</td><td>Data.R(T, p=p)</td><td>Thermal resistivity</td></tr>
+<tr><TD colspan="2">replaceable package Data</td><td>Characteristics.BaseClasses&hellip;.</td><td>Characteristic data</td></tr>
+<tr><td>Boolean</td><td>inverseEOS</td><td>false</td><td>Use inverse equation of state</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Mobility</a></td><td>mu</td><td>Data.mu(T, p)</td><td>Mobility (&mu;) [N.T/m]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>Data.nu(T, p)</td><td>Thermal independence (&nu;) [T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityMaterial">ResistivityMaterial</a></td><td>eta</td><td>Data.eta(T, p)</td><td>Material resistivity (&eta;) [T/l2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CompressibilityDynamic">CompressibilityDynamic</a></td><td>beta</td><td>Data.beta(T, p)</td><td>Dynamic compressibility (&beta;) [N.T/(l2.m)]</td></tr>
+<tr><td>&nbsp;</td><td>zeta</td><td>Data.zeta(T, p)</td><td>Fluidity (&zeta;)</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>theta</td><td>Data.theta(T, p)</td><td>Thermal resistivity (&theta;) [l.T/N]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<tr><td>Boolean</td><td>inclLin[Axis]</td><td>{true,false,false}</td><td>true, if each component of linear momentum is included (<i>Do not adjust here.</i>)</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Prescribed states (via initialization parameters)</td></tr>
 <tr><td>Boolean</td><td>setPartNum</td><td>false</td><td>Particle number</td></tr>
 <tr><td>Boolean</td><td>setVelX</td><td>false</td><td>X-axis component of velocity</td></tr>
@@ -120,13 +131,6 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>Boolean</td><td>upstreamX</td><td>false</td><td>X</td></tr>
 <tr><td>Boolean</td><td>upstreamY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>upstreamZ</td><td>false</td><td>Z</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Included faces</td></tr>
-<tr><td>Boolean</td><td>inclFaceNegX</td><td>true</td><td>Negative X</td></tr>
-<tr><td>Boolean</td><td>inclFacePosX</td><td>true</td><td>Positive X</td></tr>
-<tr><td>Boolean</td><td>inclFaceNegY</td><td>true</td><td>Negative Y</td></tr>
-<tr><td>Boolean</td><td>inclFacePosY</td><td>true</td><td>Positive Y</td></tr>
-<tr><td>Boolean</td><td>inclFaceNegZ</td><td>true</td><td>Negative Z</td></tr>
-<tr><td>Boolean</td><td>inclFacePosZ</td><td>true</td><td>Positive Z</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Scalar properties</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitMethScalar">InitMethScalar</a></td><td>initMethPartNum</td><td>InitMethScalar.Volume</td><td>Method of initializing the particle number</td></tr>
@@ -139,8 +143,8 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeRate">VolumeRate</a></td><td>derV_IC</td><td>0</td><td>Initial rate of volume ((&part;<i>V</i>/&part;<i>t</i>)<sub>IC</sub>) [l3/T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p_IC</td><td>&nbsp;</td><td>Initial pressure (<i>p</i><sub>IC</sub>) [m/(l.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureRate">PressureRate</a></td><td>derp_IC</td><td>0</td><td>Initial rate of pressure ((&part;<i>p</i>/&part;<i>t</i>)<sub>IC</sub>) [m/(l.T3)]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_IC</td><td>&nbsp;</td><td>Initial temperature (<i>T</i><sub>IC</sub>)</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureRate">TemperatureRate</a></td><td>derT_IC</td><td>0</td><td>Initial rate of temperature (&part;<i>T</i>/&part;<i>t</i>)<sub>IC</sub>)</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_IC</td><td>&nbsp;</td><td>Initial temperature (<i>T</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureRate">TemperatureRate</a></td><td>derT_IC</td><td>0</td><td>Initial rate of temperature (&part;<i>T</i>/&part;<i>t</i>)<sub>IC</sub>) [l2.m/(N.T3)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>h_IC</td><td>&nbsp;</td><td>Initial specific enthalpy (<i>h</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialRate">PotentialRate</a></td><td>derh_IC</td><td>0</td><td>Initial rate of specific enthalpy ((&part;<i>h</i>/&part;<i>t</i>)<sub>IC</sub>) [l2.m/(N.T3)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>mu_IC</td><td>&nbsp;</td><td>Initial electrochemical potential (&mu;<sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
@@ -152,25 +156,27 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitMethVelocity">InitMethVelocity</a></td><td>initMethZ</td><td>InitMethVelocity.Velocity</td><td>Method of initializing the z-axis component</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Velocity</a></td><td>phi_IC[Axis]</td><td>zeros(3)</td><td>Initial velocity (<b>&phi;</b><sub>IC</sub>) [l/T]</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a></td><td>chemical</td><td>Connector to exchange material while advecting linear momentum and energy</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a></td><td>chemI[n_react]</td><td>Connector to exchange material while advecting linear momentum and energy</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>common</td><td>Connector to directly couple velocities and temperatures of multiple species</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>chemical[n_react]</td><td>Connector to exchange material while advecting linear momentum and energy</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Connector to exchange linear momentum and heat by diffusion, with additivity of pressure</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>xNegative</td><td>Negative face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>xPositive</td><td>Positive face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>faces[Axis, Side]</td><td>Face connectors to transport material, linear momentum, and heat</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
-<font color="blue">model</font> SpeciesSolid <font color="darkgreen">&quot;Solid species (inert and stagnant)&quot;</font>
+<font color="blue">model</font> SpeciesSolid <font color="darkgreen">
+  &quot;<a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model for a solid (inert and stagnant)"<em>Error:Found no end-tag in HTML-documentation</em><pre></font>
   <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.SpeciesIncompressible">SpeciesIncompressible</a>(
-    <font color="blue">final </font>Xi=0,
-    <font color="blue">final </font>F=0,
     <font color="blue">final </font>upstreamX=false,
     <font color="blue">final </font>upstreamY=false,
     <font color="blue">final </font>upstreamZ=false,
@@ -178,33 +184,44 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     <font color="blue">final </font>phi_IC=<font color="red">zeros</font>(3),
     <font color="blue">final </font>derphi_IC,
     <font color="blue">final </font>I_IC,
-    <font color="blue">final </font>derI_IC);
-<textblock type="annotcomp" expanded="false">
+    <font color="blue">final </font>derI_IC,
+    inverseEOS=false);
+  <font color="darkgreen">// **final x=0,</font>
+  <font color="darkgreen">// **final beta=0,</font>
+  <font color="darkgreen">// **final F=0,</font>
+  <font color="darkgreen">// **temp 0.1s instead of 0s</font>
+
 <font color="blue">end </font>SpeciesSolid;
 </pre>
 <hr>
 
 <h2><img src="images/FCSys.Subregions.Species.SpeciesSolidI.png" alt="FCSys.Subregions.Species.SpeciesIncompressible" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Subregions.Species.SpeciesIncompressible"></a><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species">FCSys.Subregions.Species</a>.SpeciesIncompressible</h2>
-<b>Incompressible species</b><p>
+<b><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model for an incompressible fluid<em>Error:Found no end-tag in HTML-documentation</em></b><p>
 <img src="images/FCSys.Subregions.Species.SpeciesSolidD.png" alt="FCSys.Subregions.Species.SpeciesIncompressible">
-<p><h3>Information</h3></p>
 
-  <p>For more information, see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
-Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> (Model for single-species exchange, transport, and storage of material, linear momentum, and energy).
-<p><h3>Parameters</h3><p>
+<h3>Information</h3>
+
+<p>For more information, see the <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.</p><p>
+Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> (Model to exchange, transport, and store the material, momentum, and energy of one species).
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>Lstar</td><td>&nbsp;</td><td>Characteristic length for exchange (<i>L</i><sup>&#9733;</sup>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k[Axis]</td><td>{1,1,1}</td><td>Areal fill factor for transport (<b>k</b>) [1]</td></tr>
+<tr><td>Integer</td><td>n_react</td><td>1</td><td>Number of chemical reactions</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
-<tr><TD colspan="2">replaceable package Data</td><td><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a></td><td>Characteristic data</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CompressibilityDynamic">CompressibilityDynamic</a></td><td>Xi</td><td>Data.Xi(T, v=v)</td><td>Dynamic compressibility (&Xi;) [N.T/(l2.m)]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.FluidityDynamic">FluidityDynamic</a></td><td>F</td><td>Data.F(T)</td><td>Dynamic fluidity [l.T/m]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>R</td><td>Data.R(T, p=p)</td><td>Thermal resistivity</td></tr>
+<tr><TD colspan="2">replaceable package Data</td><td>Characteristics.BaseClasses&hellip;.</td><td>Characteristic data</td></tr>
+<tr><td>Boolean</td><td>inverseEOS</td><td>true</td><td>Use inverse equation of state</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Mobility</a></td><td>mu</td><td>Data.mu(T, p)</td><td>Mobility (&mu;) [N.T/m]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>Data.nu(T, p)</td><td>Thermal independence (&nu;) [T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityMaterial">ResistivityMaterial</a></td><td>eta</td><td>Data.eta(T, p)</td><td>Material resistivity (&eta;) [T/l2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CompressibilityDynamic">CompressibilityDynamic</a></td><td>beta</td><td>Data.beta(T, p)</td><td>Dynamic compressibility (&beta;) [N.T/(l2.m)]</td></tr>
+<tr><td>&nbsp;</td><td>zeta</td><td>Data.zeta(T, p)</td><td>Fluidity (&zeta;)</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>theta</td><td>Data.theta(T, p)</td><td>Thermal resistivity (&theta;) [l.T/N]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<tr><td>Boolean</td><td>inclLin[Axis]</td><td>{true,false,false}</td><td>true, if each component of linear momentum is included (<i>Do not adjust here.</i>)</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Prescribed states (via initialization parameters)</td></tr>
 <tr><td>Boolean</td><td>setPartNum</td><td>false</td><td>Particle number</td></tr>
 <tr><td>Boolean</td><td>setVelX</td><td>false</td><td>X-axis component of velocity</td></tr>
@@ -215,13 +232,6 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>Boolean</td><td>upstreamX</td><td>true</td><td>X</td></tr>
 <tr><td>Boolean</td><td>upstreamY</td><td>true</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>upstreamZ</td><td>true</td><td>Z</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Included faces</td></tr>
-<tr><td>Boolean</td><td>inclFaceNegX</td><td>true</td><td>Negative X</td></tr>
-<tr><td>Boolean</td><td>inclFacePosX</td><td>true</td><td>Positive X</td></tr>
-<tr><td>Boolean</td><td>inclFaceNegY</td><td>true</td><td>Negative Y</td></tr>
-<tr><td>Boolean</td><td>inclFacePosY</td><td>true</td><td>Positive Y</td></tr>
-<tr><td>Boolean</td><td>inclFaceNegZ</td><td>true</td><td>Negative Z</td></tr>
-<tr><td>Boolean</td><td>inclFacePosZ</td><td>true</td><td>Positive Z</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Scalar properties</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitMethScalar">InitMethScalar</a></td><td>initMethPartNum</td><td>InitMethScalar.Volume</td><td>Method of initializing the particle number</td></tr>
@@ -234,8 +244,8 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeRate">VolumeRate</a></td><td>derV_IC</td><td>0</td><td>Initial rate of volume ((&part;<i>V</i>/&part;<i>t</i>)<sub>IC</sub>) [l3/T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p_IC</td><td>&nbsp;</td><td>Initial pressure (<i>p</i><sub>IC</sub>) [m/(l.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureRate">PressureRate</a></td><td>derp_IC</td><td>0</td><td>Initial rate of pressure ((&part;<i>p</i>/&part;<i>t</i>)<sub>IC</sub>) [m/(l.T3)]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_IC</td><td>&nbsp;</td><td>Initial temperature (<i>T</i><sub>IC</sub>)</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureRate">TemperatureRate</a></td><td>derT_IC</td><td>0</td><td>Initial rate of temperature (&part;<i>T</i>/&part;<i>t</i>)<sub>IC</sub>)</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_IC</td><td>&nbsp;</td><td>Initial temperature (<i>T</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureRate">TemperatureRate</a></td><td>derT_IC</td><td>0</td><td>Initial rate of temperature (&part;<i>T</i>/&part;<i>t</i>)<sub>IC</sub>) [l2.m/(N.T3)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>h_IC</td><td>&nbsp;</td><td>Initial specific enthalpy (<i>h</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialRate">PotentialRate</a></td><td>derh_IC</td><td>0</td><td>Initial rate of specific enthalpy ((&part;<i>h</i>/&part;<i>t</i>)<sub>IC</sub>) [l2.m/(N.T3)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>mu_IC</td><td>&nbsp;</td><td>Initial electrochemical potential (&mu;<sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
@@ -250,37 +260,42 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>I_IC[Axis]</td><td>{0,0,0}</td><td>Initial current (<i><b>I</b></i><sub>IC</sub>) [N/T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentRate">CurrentRate</a></td><td>derI_IC[Axis]</td><td>{0,0,0}</td><td>Initial rate of current ((&part;<i><b>I</b></i>/&part;<i>t</i>)<sub>IC</sub>) [N/T2]</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a></td><td>chemical</td><td>Connector to exchange material while advecting linear momentum and energy</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a></td><td>chemI[n_react]</td><td>Connector to exchange material while advecting linear momentum and energy</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>common</td><td>Connector to directly couple velocities and temperatures of multiple species</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>chemical[n_react]</td><td>Connector to exchange material while advecting linear momentum and energy</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Connector to exchange linear momentum and heat by diffusion, with additivity of pressure</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>xNegative</td><td>Negative face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>xPositive</td><td>Positive face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>faces[Axis, Side]</td><td>Face connectors to transport material, linear momentum, and heat</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
-<font color="blue">model</font> SpeciesIncompressible <font color="darkgreen">&quot;Incompressible species&quot;</font>
+<font color="blue">model</font> SpeciesIncompressible <font color="darkgreen">
+  &quot;<a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model for an incompressible fluid"<em>Error:Found no end-tag in HTML-documentation</em><pre></font>
   <font color="blue">extends </font><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a>(initMethPartNum=InitMethScalar.Volume);
-  <font color="darkgreen">// Note:  The default, pressure, can&#39;t be used to initialize an incompressible</font>
-  <font color="darkgreen">// species.</font>
-<textblock type="annotcomp" expanded="false">
+  <font color="darkgreen">// Note:  The default, pressure, can&#39;t be used to initialize an</font>
+  <font color="darkgreen">// incompressible species.</font>
+
 <font color="blue">end </font>SpeciesIncompressible;
 </pre>
 <hr>
 
 <h2><img src="images/FCSys.Subregions.Species.SpeciesSolidI.png" alt="FCSys.Subregions.Species.Species" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Subregions.Species.Species"></a><a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species">FCSys.Subregions.Species</a>.Species</h2>
-<b>Model for single-species exchange, transport, and storage of material, linear momentum, and energy</b><p>
+<b>Model to exchange, transport, and store the material, momentum, and energy of one species</b><p>
 <img src="images/FCSys.Subregions.Species.SpeciesSolidD.png" alt="FCSys.Subregions.Species.Species">
-<p><h3>Information</h3></p>
 
-    <p>This model is based on the following fixed assumptions.  Other assumptions are
+<h3>Information</h3>
+
+<p>This model is based on the following fixed assumptions.  Other assumptions are
     optional via the parameters.
     <ol>
        <li>All faces are rectangular.
@@ -294,10 +309,15 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
           layers must be parallel to one of the planes in the rectilinear
           grid.</li>
        <li>The factors that may cause anisotropic behavior (<b><i>k</i></b>)
-          are common to normal, transverse, and thermal transport.</li>
-       <li>There are no body or inertial forces (e.g., gravity).</li>
-    </ol>
-    </p>
+          are common to material, mechanical, and thermal transport.</li>
+       <li>There is no radiative heat transfer.</li>
+       <li>Angular momentum is not exchanged, transported, or stored.</li>
+       <li>For the purpose of the material, linear momentum, and energy balances, the
+       cross sectional areas of the faces are assumed to be the full cross-sectional
+       areas of the subregion.  If multiple phases are present, then areas are
+       actually smaller.</li>
+       <li>Relativistic effects are negligible.</li>
+    </ol></p>
 
     <p>Figure 1 shows how instances of
     <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species">Species</a> models (derived from this
@@ -320,8 +340,8 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     the reaction rate is determined solely by
     the transport equations.</p>
 
-    <p align=center><img src="images/exchange.png">
-<br><b>Figure 1:</b>  Exchange of a quantity (linear momentum or heat) among species
+    <p align=center><img src="images/Exchange.png">
+<br>Figure 1:  Exchange of a quantity (linear momentum or heat) among species
     (A, B, and C) within a subregion.</p>
 
     <p>Figure 2 shows how <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species">Species</a>
@@ -331,8 +351,8 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     Upstream discretization is applied if it is enabled via the <code>upstreamX</code>,
     etc. parameters.</p>
 
-    <p align=center><img src="images/transport.png">
-<br><b>Figure 2:</b>  Transport of a quantity associated with the same species
+    <p align=center><img src="images/Transport.png">
+<br>Figure 2:  Transport of a quantity associated with the same species
     between subregions (1 and 2).</p>
 
     <p>All <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species">Species</a> instances
@@ -348,20 +368,29 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     <table border=0 cellspacing=0 cellpadding=2 align=center class=noBorder style="margin-left: auto; margin-right: auto;">
       <tr align=center class=noBorder>
         <td align=center class=noBorder style="margin-left: auto; margin-right: auto;">
-          <img src="images/share_pressure.png">
-<br><b>a:</b>  Pressures of species (A, B, and C) are additive within a phase.
+          <img src="images/SharePressure.png">
+<br>a:  Pressures of species (A, B, and C) are additive within a phase.
         </td>
         <td align=center class=noBorder style="margin-left: auto; margin-right: auto;">
-          <img src="images/share_volume.png">
-<br><b>b:</b>  Volumes of phases (I, II, and III) are additive within a subregion.
+          <img src="images/ShareVolume.png">
+<br>b:  Volumes of phases (I, II, and III) are additive within a subregion.
         </td>
       </tr>
       <tr align=center class=noBorder style="margin-left: auto; margin-right: auto;">
-        <td colspan=2 align=center class=noBorder ><b>Figure 3:</b> Methods of attributing pressure and volume.</td>
+        <td colspan=2 align=center class=noBorder>Figure 3: Methods of attributing pressure and volume.</td>
       </tr>
     </table>
 
-    <p> The following notes apply to the parameters:
+  <p>**Linear momentum and energy are advected using the <code>semiLinear</code> operator.
+  The rate of advection of linear momentum is the
+  product of the velocity of the source and the rate of mass
+  (<i>m</i> &phi; <i>N&#775;</i>).  The rate of thermal advection is the
+  product of the massic enthalpy of the source and the rate of mass
+  (<i>m</i> <i>h&#772;</i> <i>N&#775;</i>).  If there multiple sources, then
+  their contributions are additive.  If there are multiple sinks, then
+  the flow is split on a mass basis.</p>
+
+    <p>The following notes apply to the parameters:
     <ul>
     <li>Here (and in the rest of <a href="index.html#FCSys">FCSys</a>), the "specific"
     adjective means that the following extensive quantity is divided by particle number.
@@ -404,19 +433,19 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     is related to it via the material characteristics (<code>Data</code>) and the initial pressure and temperature.
     In order to apply other values for any of these initial conditions,
     it may be necessary to do so before translating the model.</li>
-    <li>A face connector may be removed by setting the corresponding <code>inclFaceNegX</code>,
-    <code>inclFacePosX</code>, <code>inclFaceNegY</code>, etc. parameter to <code>false</code>.
-    Then the boundary will be closed (zero current) and adiabatic with a no-slip condition
-    (zero transverse velocity).</li>
-    </p>
+    <li>If upstream discretization is not used (<code>upstreamX=false</code>,
+    etc.), then the central difference scheme is used.
+    <li>If <code>inverseEOS</code> is <code>true</code>, then the equation of state is implemented with pressure
+    as a function of temperature and specific volume.  Otherwise, specific volume is a function of temperature
+    and pressure.</li></p>
 
     <p>In evaluating the dynamics of a phase, it is typically assumed that all of the species
     exist at the same velocity and temperature.  The mechanical and thermal time constants
     are usually much shorter than the time span of interest due to the very small coupling
     resistances.  This assumption can be applied in the model by connecting the <code>common</code>
-    connectors of the species, which will
+    connectors of the species, which will **
 
-    It will cause index reduction during translation.</p>
+    **    It will cause index reduction during translation.</p>
 
     <p>In the variables that relate to transport,
     the first index is the axis and the second index is the side.  The sides
@@ -428,19 +457,24 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     normal face, according to the
     <a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Orientation">Orientation</a> enumeration.</p>
     <p>
+Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top4">FCSys.BaseClasses.Icons.Names.Top4</a>.
+<p>
 
-<p><h3>Parameters</h3><p>
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>Lstar</td><td>&nbsp;</td><td>Characteristic length for exchange (<i>L</i><sup>&#9733;</sup>) [l]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k[Axis]</td><td>{1,1,1}</td><td>Areal fill factor for transport (<b>k</b>) [1]</td></tr>
+<tr><td>Integer</td><td>n_react</td><td>1</td><td>Number of chemical reactions</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CompressibilityDynamic">CompressibilityDynamic</a></td><td>Xi</td><td>Data.Xi(T, v=v)</td><td>Dynamic compressibility (&Xi;) [N.T/(l2.m)]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.FluidityDynamic">FluidityDynamic</a></td><td>F</td><td>Data.F(T)</td><td>Dynamic fluidity [l.T/m]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>R</td><td>Data.R(T, p=p)</td><td>Thermal resistivity</td></tr>
+<tr><td>Boolean</td><td>inverseEOS</td><td>true</td><td>Use inverse equation of state</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Mobility</a></td><td>mu</td><td>Data.mu(T, p)</td><td>Mobility (&mu;) [N.T/m]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>Data.nu(T, p)</td><td>Thermal independence (&nu;) [T]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityMaterial">ResistivityMaterial</a></td><td>eta</td><td>Data.eta(T, p)</td><td>Material resistivity (&eta;) [T/l2]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CompressibilityDynamic">CompressibilityDynamic</a></td><td>beta</td><td>Data.beta(T, p)</td><td>Dynamic compressibility (&beta;) [N.T/(l2.m)]</td></tr>
+<tr><td>&nbsp;</td><td>zeta</td><td>Data.zeta(T, p)</td><td>Fluidity (&zeta;)</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>theta</td><td>Data.theta(T, p)</td><td>Thermal resistivity (&theta;) [l.T/N]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<tr><td>Boolean</td><td>inclLin[Axis]</td><td>{true,false,false}</td><td>true, if each component of linear momentum is included (<i>Do not adjust here.</i>)</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Prescribed states (via initialization parameters)</td></tr>
 <tr><td>Boolean</td><td>setPartNum</td><td>false</td><td>Particle number</td></tr>
 <tr><td>Boolean</td><td>setVelX</td><td>false</td><td>X-axis component of velocity</td></tr>
@@ -451,13 +485,6 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td>Boolean</td><td>upstreamX</td><td>true</td><td>X</td></tr>
 <tr><td>Boolean</td><td>upstreamY</td><td>true</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>upstreamZ</td><td>true</td><td>Z</td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Included faces</td></tr>
-<tr><td>Boolean</td><td>inclFaceNegX</td><td>true</td><td>Negative X</td></tr>
-<tr><td>Boolean</td><td>inclFacePosX</td><td>true</td><td>Positive X</td></tr>
-<tr><td>Boolean</td><td>inclFaceNegY</td><td>true</td><td>Negative Y</td></tr>
-<tr><td>Boolean</td><td>inclFacePosY</td><td>true</td><td>Positive Y</td></tr>
-<tr><td>Boolean</td><td>inclFaceNegZ</td><td>true</td><td>Negative Z</td></tr>
-<tr><td>Boolean</td><td>inclFacePosZ</td><td>true</td><td>Positive Z</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Initialization</b></td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Scalar properties</td></tr>
 <tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitMethScalar">InitMethScalar</a></td><td>initMethPartNum</td><td>InitMethScalar.Pressure</td><td>Method of initializing the particle number</td></tr>
@@ -470,8 +497,8 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeRate">VolumeRate</a></td><td>derV_IC</td><td>0</td><td>Initial rate of volume ((&part;<i>V</i>/&part;<i>t</i>)<sub>IC</sub>) [l3/T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p_IC</td><td>&nbsp;</td><td>Initial pressure (<i>p</i><sub>IC</sub>) [m/(l.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureRate">PressureRate</a></td><td>derp_IC</td><td>0</td><td>Initial rate of pressure ((&part;<i>p</i>/&part;<i>t</i>)<sub>IC</sub>) [m/(l.T3)]</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_IC</td><td>&nbsp;</td><td>Initial temperature (<i>T</i><sub>IC</sub>)</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureRate">TemperatureRate</a></td><td>derT_IC</td><td>0</td><td>Initial rate of temperature (&part;<i>T</i>/&part;<i>t</i>)<sub>IC</sub>)</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T_IC</td><td>&nbsp;</td><td>Initial temperature (<i>T</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureRate">TemperatureRate</a></td><td>derT_IC</td><td>0</td><td>Initial rate of temperature (&part;<i>T</i>/&part;<i>t</i>)<sub>IC</sub>) [l2.m/(N.T3)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>h_IC</td><td>&nbsp;</td><td>Initial specific enthalpy (<i>h</i><sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PotentialRate">PotentialRate</a></td><td>derh_IC</td><td>0</td><td>Initial rate of specific enthalpy ((&part;<i>h</i>/&part;<i>t</i>)<sub>IC</sub>) [l2.m/(N.T3)]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>mu_IC</td><td>&nbsp;</td><td>Initial electrochemical potential (&mu;<sub>IC</sub>) [l2.m/(N.T2)]</td></tr>
@@ -486,53 +513,44 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Current</a></td><td>I_IC[Axis]</td><td>{0,0,0}</td><td>Initial current (<i><b>I</b></i><sub>IC</sub>) [N/T]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CurrentRate">CurrentRate</a></td><td>derI_IC[Axis]</td><td>{0,0,0}</td><td>Initial rate of current ((&part;<i><b>I</b></i>/&part;<i>t</i>)<sub>IC</sub>) [N/T2]</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a></td><td>chemical</td><td>Connector to exchange material while advecting linear momentum and energy</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a></td><td>chemI[n_react]</td><td>Connector to exchange material while advecting linear momentum and energy</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Inert</a></td><td>common</td><td>Connector to directly couple velocities and temperatures of multiple species</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>chemical[n_react]</td><td>Connector to exchange material while advecting linear momentum and energy</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Connector to exchange linear momentum and heat by diffusion, with additivity of pressure</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>xNegative</td><td>Negative face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>xPositive</td><td>Positive face along the x axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>yNegative</td><td>Negative face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>yPositive</td><td>Positive face along the y axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>zNegative</td><td>Negative face along the z axis</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>faces[Axis, Side]</td><td>Face connectors to transport material, linear momentum, and heat</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> Species <font color="darkgreen">
-  &quot;Model for single-species exchange, transport, and storage of material, linear momentum, and energy&quot;</font>
+  &quot;Model to exchange, transport, and store the material, momentum, and energy of one species&quot;</font>
   <font color="blue">import </font><a href="http://build.openmodelica.org/Documentation/Modelica.Math.html#Modelica.Math.log10">Modelica.Math.log10</a>;
-  <font color="darkgreen">//extends FCSys.BaseClasses.Icons.Names.Top1;</font>
+  <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.Delta">FCSys.BaseClasses.Utilities.Delta</a>;
+  <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.Sigma">FCSys.BaseClasses.Utilities.Sigma</a>;
+  <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.cartWrap">FCSys.BaseClasses.Utilities.cartWrap</a>;
+  <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.inSign">FCSys.BaseClasses.Utilities.inSign</a>;
 
-  <font color="darkgreen">// Geometric parameters</font>
-  <font color="blue">outer </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis](<font color="blue">each </font>min=Modelica.Constants.small) <font color="darkgreen">&quot;Length&quot;</font>;
-  <font color="blue">outer </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A[Axis] <font color="darkgreen">&quot;Cross-sectional area&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> Lstar(
-    min=Modelica.Constants.small,
-    nominal=10*U.m,
-    start=1e3*<font color="red">product</font>(L)^(1/3)) <font color="darkgreen">
-    &quot;Characteristic length for exchange (<i>L</i><sup>&#9733;</sup>)&quot;</font>;
-  <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> k[Axis](
-    <font color="blue">each </font>min=Modelica.Constants.small,
-    <font color="blue">each </font><font color="blue">final </font>nominal=1) = {1,1,1} <font color="darkgreen">
-    &quot;Areal fill factor for transport (<b>k</b>)&quot;</font>;
+  <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top4">FCSys.BaseClasses.Icons.Names.Top4</a>;
+
+  <font color="blue">parameter </font>Integer n_react(min=0) = 1 <font color="darkgreen">&quot;Number of chemical reactions&quot;</font>;
 
   <font color="darkgreen">// Material properties</font>
-  <font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a> <font color="blue">
-    constrainedby </font>FCSys.Characteristics.BaseClasses.Characteristic <font color="darkgreen">
+  <font color="blue">replaceable </font><font color="blue">package</font> Data = <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">Characteristics.BaseClasses.Characteristic</a> <font color="blue">
+    constrainedby </font>Characteristics.BaseClasses.Characteristic <font color="darkgreen">
     &quot;Characteristic data&quot;</font>;
+  <font color="blue">parameter </font>Boolean inverseEOS=true <font color="darkgreen">&quot;Use inverse equation of state&quot;</font>;
 
   <font color="darkgreen">// Assumptions</font>
   <font color="darkgreen">// -----------</font>
-  <font color="darkgreen">// General</font>
-  <font color="blue">parameter </font>Boolean inclLin[Axis]={true,false,false} <font color="darkgreen">
-    &quot;true, if each component of linear momentum is included (<i>Do not adjust here.</i>)&quot;</font>;
-  <font color="darkgreen">// Even though this parameter is set as final within the constrainedby</font>
-  <font color="darkgreen">// clauses of the models in the Phases package, Dymola 7.4 still shows</font>
-  <font color="darkgreen">// it in the parameter dialog (hence the &quot;Do not adjust&quot;).</font>
-  <font color="darkgreen">//</font>
   <font color="darkgreen">// Dynamics</font>
   <font color="blue">parameter </font>Boolean setPartNum=false <font color="darkgreen">&quot;Particle number&quot;</font>;
   <font color="blue">parameter </font>Boolean setVelX=false <font color="darkgreen">&quot;X-axis component of velocity&quot;</font>;
@@ -544,14 +562,6 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
   <font color="blue">parameter </font>Boolean upstreamX=true <font color="darkgreen">&quot;X&quot;</font>;
   <font color="blue">parameter </font>Boolean upstreamY=true <font color="darkgreen">&quot;Y&quot;</font>;
   <font color="blue">parameter </font>Boolean upstreamZ=true <font color="darkgreen">&quot;Z&quot;</font>;
-  <font color="darkgreen">//</font>
-  <font color="darkgreen">// Included faces</font>
-  <font color="blue">parameter </font>Boolean inclFaceNegX=true <font color="darkgreen">&quot;Negative X&quot;</font>;
-  <font color="blue">parameter </font>Boolean inclFacePosX=true <font color="darkgreen">&quot;Positive X&quot;</font>;
-  <font color="blue">parameter </font>Boolean inclFaceNegY=true <font color="darkgreen">&quot;Negative Y&quot;</font>;
-  <font color="blue">parameter </font>Boolean inclFacePosY=true <font color="darkgreen">&quot;Positive Y&quot;</font>;
-  <font color="blue">parameter </font>Boolean inclFaceNegZ=true <font color="darkgreen">&quot;Negative Z&quot;</font>;
-  <font color="blue">parameter </font>Boolean inclFacePosZ=true <font color="darkgreen">&quot;Positive Z&quot;</font>;
 
   <font color="darkgreen">// Initialization parameters</font>
   <font color="darkgreen">// -------------------------</font>
@@ -619,11 +629,20 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     &quot;Initial rate of current ((&part;<i><b>I</b></i>/&part;<i>t</i>)<sub>IC</sub>)&quot;</font>;
 
   <font color="darkgreen">// Material properties</font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.CompressibilityDynamic">Q.CompressibilityDynamic</a> Xi(nominal=1e8/(U.V*U.s)) = <font color="red">Data.Xi</font>(T, v=v) <font color="darkgreen">
-    &quot;Dynamic compressibility (&Xi;)&quot;</font>;
-  <a href="FCSys_Quantities.html#FCSys.Quantities.FluidityDynamic">Q.FluidityDynamic</a> F(nominal=10*U.cm*U.s/U.g) = <font color="red">Data.F</font>(T) <font color="darkgreen">&quot;Dynamic fluidity&quot;</font>;
-  <a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> R(nominal=10*U.cm/U.A) = <font color="red">Data.R</font>(T, p=p) <font color="darkgreen">
-    &quot;Thermal resistivity&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Q.Mobility</a> mu(nominal=0.1*U.C*U.s/U.kg) = <font color="red">Data.mu</font>(T, p) <font color="darkgreen">
+    &quot;Mobility (&mu;)&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">Q.TimeAbsolute</a> nu(nominal=U.s) = <font color="red">Data.nu</font>(T, p) <font color="darkgreen">
+    &quot;Thermal independence (&nu;)&quot;</font>;
+  <font color="darkgreen">// **Update nominal value.</font>
+  <a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityMaterial">Q.ResistivityMaterial</a> eta(nominal=U.s/U.mm^2) = <font color="red">Data.eta</font>(T, p) <font color="darkgreen">
+    &quot;Material resistivity (&eta;)&quot;</font>;
+  <font color="darkgreen">// **update nominal value.</font>
+  <a href="FCSys_Quantities.html#FCSys.Quantities.CompressibilityDynamic">Q.CompressibilityDynamic</a> beta(nominal=1e8/(U.V*U.s)) = <font color="red">Data.beta</font>(T, p) <font color="darkgreen">
+    &quot;Dynamic compressibility (&beta;)&quot;</font>;
+  Q.FluidityDynamic zeta(nominal=10*U.cm*U.s/U.g) = <font color="red">Data.zeta</font>(T, p) <font color="darkgreen">
+    &quot;Fluidity (&zeta;)&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">Q.ResistivityThermal</a> theta(nominal=10*U.cm/U.A) = <font color="red">Data.theta</font>(T, p) <font color="darkgreen">
+    &quot;Thermal resistivity (&theta;)&quot;</font>;
 
   <font color="darkgreen">// Preferred states</font>
   <a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> N(
@@ -646,6 +665,10 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     stateSelect=StateSelect.prefer) <font color="darkgreen">&quot;Temperature&quot;</font>;
 
   <font color="darkgreen">// Aliases (for common terms)</font>
+  <a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p(
+    nominal=U.atm,
+    <font color="blue">final </font>start=p_IC,
+    <font color="blue">final </font>fixed=false) <font color="darkgreen">&quot;Pressure&quot;</font>;
   <a href="FCSys_Quantities.html#FCSys.Quantities.Mass">Q.Mass</a> M(
     nominal=1e-3*U.g,
     start=Data.m*N_IC,
@@ -654,10 +677,6 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     nominal=U.cc,
     <font color="blue">final </font>start=V_IC,
     <font color="blue">final </font>fixed=false) <font color="darkgreen">&quot;Volume&quot;</font>;
-  <a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p(
-    nominal=U.atm,
-    <font color="blue">final </font>start=p_IC,
-    <font color="blue">final </font>fixed=false) <font color="darkgreen">&quot;Pressure&quot;</font>;
   <a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v(
     nominal=U.cc/(4*U.C),
     <font color="blue">final </font>start=v_IC,
@@ -674,59 +693,75 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
   <font color="darkgreen">// Auxiliary variables (for analysis)</font>
   <font color="darkgreen">// ----------------------------------</font>
   <font color="darkgreen">// Misc. properties and conditions</font>
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> mu(stateSelect=StateSelect.never) = T*chemical.muPerT <font color="blue">if </font>
-    environment.analysis <font color="darkgreen">&quot;Electrochemical potential&quot;</font>;
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> s(stateSelect=StateSelect.never) = h/T - chemical.muPerT
-    <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Specific entropy&quot;</font>;
+  <font color="darkgreen">/*
+  output Q.Potential g(stateSelect=StateSelect.never) = chemical.mu if
+    environment.analysis &quot;Electrochemical potential&quot;;
+  */</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> s(stateSelect=StateSelect.never) = <font color="red">Data.s</font>(T, p) <font color="blue">if </font>
+    environment.analysis <font color="darkgreen">&quot;Specific entropy&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> S(stateSelect=StateSelect.never) = N*s <font color="blue">if </font>environment.analysis
+    <font color="darkgreen">&quot;Entropy&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> q[n_lin](<font color="blue">each </font>stateSelect=StateSelect.never) = Data.m
     *phi .* I ./ (2*A[cartAxes]) <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Dynamic pressure&quot;</font>;
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_V(stateSelect=StateSelect.never) = <font color="red">
-    Data.c_V</font>(T, p) <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Isochoric specific heat capacity&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_v(stateSelect=StateSelect.never) = <font color="red">
+    Data.c_v</font>(T, p) <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Isochoric specific heat capacity&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureReciprocal">Q.PressureReciprocal</a> beta_T(stateSelect=StateSelect.never) = <font color="red">
     Data.beta_T</font>(T, p) <font color="blue">if </font>environment.analysis <font color="darkgreen">
     &quot;Isothermal static compressibility&quot;</font>;
   <font color="darkgreen">//</font>
   <font color="darkgreen">// Time constants</font>
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> tau_exch_mechanical(stateSelect=StateSelect.never) = alpha_F*N/
-    Lstar <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Time constant for mechanical exchange&quot;</font>;
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> tau_exch_thermal(stateSelect=StateSelect.never) = alpha_R*N/
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> tau_exch_mechanical(stateSelect=StateSelect.never) =
+    halfalpha_F*N/Lstar <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Time constant for mechanical exchange&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> tau_exch_thermal(stateSelect=StateSelect.never) = halfalpha_R*N/
     Lstar <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Time constant for thermal exchange&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> tau_trans_material(stateSelect=StateSelect.never) = <font color="red">noEvent</font>(<font color="blue">if </font>
-    alpha_Xi &gt; Modelica.Constants.small<font color="blue"> then </font>Data.m*beta_T/alpha_Xi<font color="blue"> else </font>0) <font color="blue">if </font>
-    environment.analysis <font color="darkgreen">&quot;Time constant for material transport&quot;</font>;
-  <font color="darkgreen">// Note that this isn&#39;t dependent on length or area---only intensive</font>
+    halfalpha_beta &gt; Modelica.Constants.small<font color="blue"> then </font>Data.m*beta_T/halfalpha_beta<font color="blue">
+     else </font>0) <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Time constant for material transport&quot;</font>;
+  <font color="darkgreen">// **Note that this isn&#39;t dependent on length or area---only intensive</font>
   <font color="darkgreen">// properties.</font>
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> tau_trans_normal[Axis](<font color="blue">each </font>stateSelect=StateSelect.never) = <font color="red">
-    fill</font>(alpha_Xi*N, 3) ./ Lstar_trans <font color="blue">if </font>environment.analysis <font color="darkgreen">
-    &quot;Time constants for normal mechanical transport&quot;</font>;
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> tau_trans_transverse[Axis](<font color="blue">each </font>stateSelect=StateSelect.never)
-     = <font color="red">fill</font>(alpha_F*N, 3) ./ Lstar_trans <font color="blue">if </font>environment.analysis <font color="darkgreen">
-    &quot;Time constants for transverse mechanical transport&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> tau_trans_normal[n_lin](<font color="blue">each </font>stateSelect=StateSelect.never) = <font color="red">
+    fill</font>(halfalpha_beta*N, n_lin) ./ Lstar_trans[cartAxes] <font color="blue">if </font>environment.analysis
+    <font color="darkgreen">&quot;Time constants for normal mechanical transport&quot;</font>;
+  <font color="darkgreen">// **Note that only for the axes with linear momentum included; others are</font>
+  <font color="darkgreen">// infinite</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> tau_trans_transverse[n_lin](<font color="blue">each </font>stateSelect=StateSelect.never)
+     = <font color="red">fill</font>(halfalpha_F*N, n_lin) ./ Lstar_trans[cartAxes] <font color="blue">if </font>environment.analysis
+    <font color="darkgreen">&quot;Time constants for transverse mechanical transport&quot;</font>;
+  <font color="darkgreen">// **Note that only for the axes with linear momentum included; others are</font>
+  <font color="darkgreen">// infinite</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> tau_trans_thermal[Axis](<font color="blue">each </font>stateSelect=StateSelect.never) = <font color="red">
-    fill</font>(alpha_R*N, 3) ./ Lstar_trans <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    fill</font>(halfalpha_R*N, 3) ./ Lstar_trans <font color="blue">if </font>environment.analysis <font color="darkgreen">
     &quot;Time constants for thermal transport&quot;</font>;
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> eta=<font color="red">log10</font>(<font color="red">max</font>({tau_exch_mechanical,tau_exch_thermal,<font color="red">
-      max</font>([tau_trans_normal; tau_trans_transverse; tau_trans_thermal])})) - <font color="red">
-      log10</font>(<font color="red">min</font>({tau_exch_mechanical,tau_exch_thermal,<font color="red">min</font>([tau_trans_normal;
-      tau_trans_transverse; tau_trans_thermal])})) <font color="blue">if </font>environment.analysis <font color="darkgreen">
-    &quot;Range of time constants in order of magnitude&quot;</font>;
+  <font color="darkgreen">/*
+  output Q.NumberAbsolute eta(stateSelect=StateSelect.never) = log10(max({
+    tau_exch_mechanical,tau_exch_thermal,max([tau_trans_normal;
+    tau_trans_transverse; tau_trans_thermal])})) - log10(min({
+    tau_exch_mechanical,tau_exch_thermal,min([tau_trans_normal;
+    tau_trans_transverse; tau_trans_thermal])})) if environment.analysis
+    &quot;Range of time constants in order of magnitude&quot;;
+*/</font>
   <font color="darkgreen">//</font>
-  <font color="darkgreen">// Peclet numbers (only for the axes with linear momentum included; others are</font>
-  <font color="darkgreen">// zero)</font>
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> Pe_0[n_lin](<font color="blue">each </font>stateSelect=StateSelect.never) = I*alpha_Xi ./
-    Lstar_trans[cartAxes] <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Normal Peclet numbers&quot;</font>;
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> Pe_12[n_lin](<font color="blue">each </font>stateSelect=StateSelect.never) = I*alpha_F ./
-    Lstar_trans[cartAxes] <font color="blue">if </font>environment.analysis <font color="darkgreen">&quot;Transverse Peclet numbers&quot;</font>;
+  <font color="darkgreen">// Peclet numbers (only for the axes with linear momentum included; others</font>
+  <font color="darkgreen">// are zero)</font>
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> Pe_0[n_lin](<font color="blue">each </font>stateSelect=StateSelect.never) = I*
+    halfalpha_beta ./ Lstar_trans[cartAxes] <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Normal Peclet numbers&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> Pe_12[n_lin](<font color="blue">each </font>stateSelect=StateSelect.never) = I*
+    halfalpha_F ./ Lstar_trans[cartAxes] <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    &quot;Transverse Peclet numbers&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> Pe_therm[n_lin](<font color="blue">each </font>stateSelect=StateSelect.never) = I*
-    alpha_R ./ Lstar_trans[cartAxes] <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    halfalpha_R ./ Lstar_trans[cartAxes] <font color="blue">if </font>environment.analysis <font color="darkgreen">
     &quot;Thermal Peclet numbers&quot;</font>;
   <font color="darkgreen">//</font>
   <font color="darkgreen">// Bulk flow rates</font>
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> mphiI[n_lin, Orientation](<font color="blue">each </font>stateSelect=StateSelect.never)
-     = {(<font color="blue">if </font>inclLin[<font color="red">cartWrap</font>(cartAxes[axis] + orientation)]<font color="blue"> then </font>Data.m*phi[
-    linAxes[<font color="red">cartWrap</font>(cartAxes[axis] + orientation)]]*I[axis]<font color="blue"> else </font>0) <font color="blue">for </font>
-    orientation<font color="blue"> in </font>Orientation, axis<font color="blue"> in </font>1:n_lin} <font color="blue">if </font>n_lin &gt; 0<font color="blue"> and </font>environment.analysis
-    <font color="darkgreen">&quot;Bulk rate of mechanical advection&quot;</font>;
+  <font color="darkgreen">/* **indexing error
+  output Q.Force mphiI[n_lin, Orientation](each stateSelect=StateSelect.never)
+     = {(if inclLin[cartWrap(cartAxes[axis] + orientation)] then Data.m*phi[
+    linAxes[cartWrap(cartAxes[axis] + orientation)]]*I[axis] else 0) for
+    orientation in Orientation, axis in 1:n_lin} if n_lin &gt; 0 and environment.analysis
+    &quot;Bulk rate of mechanical advection&quot;;
+  */</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> TsI[n_lin](<font color="blue">each </font>stateSelect=StateSelect.never) = T*s*I <font color="blue">if </font>
     environment.analysis <font color="darkgreen">&quot;Bulk rate of thermal advection&quot;</font>;
   <font color="darkgreen">//</font>
@@ -740,26 +775,25 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> f_exch_diff[n_lin](<font color="blue">each </font>stateSelect=StateSelect.never) =
     common.mechanical.mPhidot + inert.mPhidot <font color="blue">if </font>environment.analysis <font color="darkgreen">
     &quot;Friction from other species (diffusive exchange)&quot;</font>;
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> f_trans_adv[n_lin](<font color="blue">each </font>stateSelect=StateSelect.never) = {Data.m
-    *<font color="red">Delta</font>(v_face[cartAxes[axis], :] .* J_face[cartAxes[axis], :] .^ 2)*A[
-    cartAxes[axis]] + <font color="red">sum</font>(Data.m*<font color="red">Delta</font>(phi_face[<font color="red">cartWrap</font>(cartAxes[axis] -
-    orientation), :, orientation] .* J_face[<font color="red">cartWrap</font>(cartAxes[axis] -
-    orientation), :])*A[<font color="red">cartWrap</font>(cartAxes[axis] - orientation)] <font color="blue">for </font>orientation<font color="blue">
-     in </font>Orientation) <font color="blue">for </font>axis<font color="blue"> in </font>1:n_lin} <font color="blue">if </font>environment.analysis <font color="darkgreen">
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> f_trans_adv[n_lin](<font color="blue">each </font>stateSelect=StateSelect.never) = Data.m
+    *{phi_face_0[cartAxes[axis], :]*faces[cartAxes[axis], :].Ndot + <font color="red">sum</font>(faces[<font color="red">
+    cartWrap</font>(cartAxes[axis] - orientation), :].phi[orientation]*faces[<font color="red">cartWrap</font>(
+    cartAxes[axis] - orientation), :].Ndot <font color="blue">for </font>orientation<font color="blue"> in </font>Orientation) <font color="blue">for </font>
+    axis<font color="blue"> in </font>1:n_lin} <font color="blue">if </font>environment.analysis <font color="darkgreen">
     &quot;Acceleration force due to advective transport&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> f_trans_diff[n_lin](<font color="blue">each </font>stateSelect=StateSelect.never) = {<font color="red">
-    Sigma</font>(mPhidot_face_0[cartAxes[axis], :]) + <font color="red">sum</font>(<font color="red">Sigma</font>(mPhidot_face[<font color="red">cartWrap</font>(
-    cartAxes[axis] - orientation), :, orientation]) <font color="blue">for </font>orientation<font color="blue"> in </font>
-    Orientation) <font color="blue">for </font>axis<font color="blue"> in </font>1:n_lin} <font color="blue">if </font>environment.analysis <font color="darkgreen">
+    Delta</font>(faces[cartAxes[axis], :].p)*A[cartAxes[axis]] + <font color="red">sum</font>(<font color="red">Sigma</font>(faces[<font color="red">
+    cartWrap</font>(cartAxes[axis] - orientation), :].mPhidot[orientation]) <font color="blue">for </font>
+    orientation<font color="blue"> in </font>Orientation) <font color="blue">for </font>axis<font color="blue"> in </font>1:n_lin} <font color="blue">if </font>environment.analysis <font color="darkgreen">
     &quot;Friction from other subregions (diffusive transport; includes volume viscosity)&quot;</font>;
   <font color="darkgreen">//</font>
   <font color="darkgreen">// Energy balance</font>
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Ndere(stateSelect=StateSelect.never) = (N*(<font color="red">der</font>(h) + Data.m*<font color="red">der</font>
-    (phi*phi)/2) - V*<font color="red">der</font>(p))/U.s <font color="blue">if </font>environment.analysis <font color="darkgreen">
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Ndere(stateSelect=StateSelect.never) = (M*<font color="red">der</font>(phi*phi)/2 + N*<font color="red">
+    der</font>(h) - V*<font color="red">der</font>(p))/U.s <font color="blue">if </font>environment.analysis <font color="darkgreen">
     &quot;Rate of energy storage (internal and kinetic) at constant mass&quot;</font>;
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Wdot_exch(stateSelect=StateSelect.never) = -((Data.m*(chemical.hbar
-     - phi*phi/2) - h)*chemical.Ndot + chemical.phi*chemical.mPhidot/2) <font color="blue">if </font>
-    environment.analysis <font color="darkgreen">
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Wdot_exch(stateSelect=StateSelect.never) = -(chemical.phi*
+    chemical.mPhidot/2 + (Data.m*(chemical.hbar - phi*phi/2) - h)*chemical.Ndot)
+    <font color="blue">if </font>environment.analysis <font color="darkgreen">
     &quot;Relative rate of work (internal, flow, and kinetic) done by chemical exchange (advection)&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot_gen_exch(stateSelect=StateSelect.never) = phi*common.mechanical.mPhidot
      + inert.phi*inert.mPhidot <font color="blue">if </font>environment.analysis <font color="darkgreen">
@@ -767,36 +801,31 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot_exch(stateSelect=StateSelect.never) = common.thermal.Qdot +
     inert.Qdot <font color="blue">if </font>environment.analysis <font color="darkgreen">
     &quot;Rate of thermal conduction from other species&quot;</font>;
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Wdot_trans(stateSelect=StateSelect.never) = -{<font color="red">sum</font>(<font color="red">inSign</font>(side)*
-    (<font color="red">Data.h</font>(T_face[axis, side], p_face[axis, side]) + Data.m*((<font color="red">inSign</font>(side)*
-    v_face[axis, side]*J_face[axis, side])^2 + phi_face[axis, side, :]*phi_face[
-    axis, side, :])/2 - h - Data.m*phi*phi/2)*J_face[axis, side] <font color="blue">for </font>side<font color="blue"> in </font>
-    Side) <font color="blue">for </font>axis<font color="blue"> in </font>Axis}*A <font color="blue">if </font>environment.analysis <font color="darkgreen">
-    &quot;Relative rate of work (internal, flow, and kinetic) done by advective transport&quot;</font>;
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot_gen_trans(stateSelect=StateSelect.never) = <font color="red">sum</font>(phi_face .*
-    mPhidot_face) <font color="blue">if </font>environment.analysis <font color="darkgreen">
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Wdot_trans(stateSelect=StateSelect.never) = -<font color="red">sum</font>(<font color="red">sum</font>((Data.m*(
+    phi_face_0[axis, side]^2 + faces[axis, side].phi*faces[axis, side].phi)/2 + <font color="red">
+    Data.h</font>(faces[axis, side].T, faces[axis, side].p) - Data.m*phi*phi/2 - h)*
+    faces[axis, side].Ndot <font color="blue">for </font>side<font color="blue"> in </font>Side) <font color="blue">for </font>axis<font color="blue"> in </font>Axis) <font color="blue">if </font>environment.analysis
+    <font color="darkgreen">&quot;Relative rate of work (internal, flow, and kinetic) done by advective transport&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot_gen_trans(stateSelect=StateSelect.never) = <font color="red">sum</font>(faces.phi .*
+    faces.mPhidot) <font color="blue">if </font>environment.analysis <font color="darkgreen">
     &quot;Rate of heat generation due to friction with other subregions&quot;</font>;
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot_trans(stateSelect=StateSelect.never) = <font color="red">sum</font>(Qdot_face) <font color="blue">if </font>
-    environment.analysis <font color="darkgreen">&quot;Rate of thermal conduction from other subregions&quot;</font>;
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot_trans(stateSelect=StateSelect.never) = <font color="red">sum</font>(faces.Qdot) <font color="blue">
+    if </font>environment.analysis <font color="darkgreen">&quot;Rate of thermal conduction from other subregions&quot;</font>;
   <font color="darkgreen">// Note:  These auxiliary variables should not be used as states (hence</font>
   <font color="darkgreen">// StateSelect.never); the structure of the problem should not change if</font>
   <font color="darkgreen">// they are included.</font>
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">FCSys.Connectors.ChemicalOutput</a> chemical(
-    <font color="blue">final </font>n_lin=n_lin,
-    <font color="blue">final </font>m=Data.m,
-    <font color="blue">final </font>formula=Data.formula,
-    muPerT(<font color="blue">final </font>start=mu_IC/T_IC,<font color="blue">final </font>fixed=false),
-    phi(<font color="blue">final </font>start=phi_IC[cartAxes]),
-    Ndot(<font color="blue">final </font>start=Ndot_IC,<font color="blue">final </font>fixed=false),
-    hbar(<font color="blue">final </font>start=<font color="red">Data.h</font>(T_IC, p_IC)/Data.m)) <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">Connectors.ChemicalInput</a> chemI[n_react] <font color="darkgreen">
     &quot;Connector to exchange material while advecting linear momentum and energy&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">FCSys.Connectors.Inert</a> common(
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Inert">Connectors.Inert</a> common(
     <font color="blue">final </font>n_lin=n_lin,
     mechanical(phi(<font color="blue">final </font>start=phi_IC[cartAxes], <font color="blue">each </font><font color="blue">final </font>fixed=false)),
-    thermal(T(<font color="blue">final </font>start=T_IC,<font color="blue">final </font>fixed=false))) <font color="darkgreen">
+    thermal(T(<font color="blue">final </font>start=T_IC, <font color="blue">final </font>fixed=false))) <font color="darkgreen">
     &quot;Connector to directly couple velocities and temperatures of multiple species&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">FCSys.Connectors.InertDalton</a> inert(
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Connectors.Chemical</a> chemical[n_react](<font color="blue">final </font>n_lin=n_lin, phi(<font color="blue">final </font>start=
+          phi_IC[cartAxes])) <font color="darkgreen">
+    &quot;Connector to exchange material while advecting linear momentum and energy&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">Connectors.InertDalton</a> inert(
     <font color="blue">final </font>n_lin=n_lin,
     V(
       min=0,
@@ -806,71 +835,37 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
     phi(start=phi_IC[cartAxes]),
     T(start=T_IC)) <font color="darkgreen">
     &quot;Connector to exchange linear momentum and heat by diffusion, with additivity of pressure&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">FCSys.Connectors.Face</a> xNegative(
-    <font color="blue">final </font>J(start=I_IC[Axis.x]/A[Axis.x]) = J_face[Axis.x, Side.n],
-    <font color="blue">final </font>mPhidot_0(start=p_IC*A[Axis.x]) = mPhidot_face_0[Axis.x, Side.n],
-    <font color="blue">final </font>phi(start=phi_IC[{Axis.y,Axis.z}]) = phi_face[Axis.x, Side.n, :],
-    <font color="blue">final </font>mPhidot=mPhidot_face[Axis.x, Side.n, :],
-    <font color="blue">final </font>T(start=T_IC) = T_face[Axis.x, Side.n],
-    <font color="blue">final </font>Qdot(start=0) = Qdot_face[Axis.x, Side.n]) <font color="blue">if </font>inclFaceNegX <font color="darkgreen">
-    &quot;Negative face along the x axis&quot;</font>;</textblock>
-
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">FCSys.Connectors.Face</a> xPositive(
-    <font color="blue">final </font>J(start=I_IC[Axis.x]/A[Axis.x]) = J_face[Axis.x, Side.p],
-    <font color="blue">final </font>mPhidot_0(start=-p_IC*A[Axis.x]) = mPhidot_face_0[Axis.x, Side.p],
-    <font color="blue">final </font>phi(start=phi_IC[{Axis.y,Axis.z}]) = phi_face[Axis.x, Side.p, :],
-    <font color="blue">final </font>mPhidot=mPhidot_face[Axis.x, Side.p, :],
-    <font color="blue">final </font>T(start=T_IC) = T_face[Axis.x, Side.p],
-    <font color="blue">final </font>Qdot(start=0) = Qdot_face[Axis.x, Side.p]) <font color="blue">if </font>inclFacePosX <font color="darkgreen">
-    &quot;Positive face along the x axis&quot;</font>;</textblock>
-
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">FCSys.Connectors.Face</a> yNegative(
-    <font color="blue">final </font>J(start=I_IC[Axis.y]/A[Axis.y]) = J_face[Axis.y, Side.n],
-    <font color="blue">final </font>mPhidot_0(start=p_IC*A[Axis.y]) = mPhidot_face_0[Axis.y, Side.n],
-    <font color="blue">final </font>phi(start=phi_IC[{Axis.z,Axis.x}]) = phi_face[Axis.y, Side.n, :],
-    <font color="blue">final </font>mPhidot=mPhidot_face[Axis.y, Side.n, :],
-    <font color="blue">final </font>T(start=T_IC) = T_face[Axis.y, Side.n],
-    <font color="blue">final </font>Qdot(start=0) = Qdot_face[Axis.y, Side.n]) <font color="blue">if </font>inclFaceNegY <font color="darkgreen">
-    &quot;Negative face along the y axis&quot;</font>;</textblock>
-
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">FCSys.Connectors.Face</a> yPositive(
-    <font color="blue">final </font>J(start=I_IC[Axis.y]/A[Axis.y]) = J_face[Axis.y, Side.p],
-    <font color="blue">final </font>mPhidot_0(start=-p_IC*A[Axis.y]) = mPhidot_face_0[Axis.y, Side.p],
-    <font color="blue">final </font>phi(start=phi_IC[{Axis.z,Axis.x}]) = phi_face[Axis.y, Side.p, :],
-    <font color="blue">final </font>mPhidot=mPhidot_face[Axis.y, Side.p, :],
-    <font color="blue">final </font>T(start=T_IC) = T_face[Axis.y, Side.p],
-    <font color="blue">final </font>Qdot(start=0) = Qdot_face[Axis.y, Side.p]) <font color="blue">if </font>inclFacePosY <font color="darkgreen">
-    &quot;Positive face along the y axis&quot;</font>;</textblock>
-
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">FCSys.Connectors.Face</a> zNegative(
-    <font color="blue">final </font>J(start=I_IC[Axis.z]/A[Axis.z]) = J_face[Axis.z, Side.n],
-    <font color="blue">final </font>mPhidot_0(start=p_IC*A[Axis.z]) = mPhidot_face_0[Axis.z, Side.n],
-    <font color="blue">final </font>phi(start=phi_IC[{Axis.x,Axis.y}]) = phi_face[Axis.z, Side.n, :],
-    <font color="blue">final </font>mPhidot=mPhidot_face[Axis.z, Side.n, :],
-    <font color="blue">final </font>T(start=T_IC) = T_face[Axis.z, Side.n],
-    <font color="blue">final </font>Qdot(start=0) = Qdot_face[Axis.z, Side.n]) <font color="blue">if </font>inclFaceNegZ <font color="darkgreen">
-    &quot;Negative face along the z axis&quot;</font>;</textblock>
-
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">FCSys.Connectors.Face</a> zPositive(
-    <font color="blue">final </font>J(start=I_IC[Axis.z]/A[Axis.z]) = J_face[Axis.z, Side.p],
-    <font color="blue">final </font>mPhidot_0(start=-p_IC*A[Axis.z]) = mPhidot_face_0[Axis.z, Side.p],
-    <font color="blue">final </font>phi(start=phi_IC[{Axis.x,Axis.y}]) = phi_face[Axis.z, Side.p, :],
-    <font color="blue">final </font>mPhidot=mPhidot_face[Axis.z, Side.p, :],
-    <font color="blue">final </font>T(start=T_IC) = T_face[Axis.z, Side.p],
-    <font color="blue">final </font>Qdot(start=0) = Qdot_face[Axis.z, Side.p]) <font color="blue">if </font>inclFacePosZ <font color="darkgreen">
-    &quot;Positive face along the z axis&quot;</font>;</textblock>
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Connectors.Face</a> faces[Axis, Side](
+    p(<font color="blue">each </font>start=p_IC),
+    Ndot(start=<font color="red">outerProduct</font>(I_IC, {1,-1})),
+    phi(start={{<font color="red">fill</font>(phi_IC[<font color="red">cartWrap</font>(axis + orientation)], 2) <font color="blue">for </font>orientation<font color="blue">
+           in </font>Orientation} <font color="blue">for </font>axis<font color="blue"> in </font>Axis}),
+    mPhidot(<font color="blue">each </font>start=0),
+    T(<font color="blue">each </font>start=T_IC),
+    Qdot(<font color="blue">each </font>start=0)) <font color="darkgreen">
+    &quot;Face connectors to transport material, linear momentum, and heat&quot;</font>;
 
   <font color="darkgreen">// Geometric parameters</font>
 
 <font color="blue">protected </font>
-  <font color="blue">final </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> Lstar_trans[Axis]=k .* A ./ L <font color="darkgreen">
+  <font color="blue">outer </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis] <font color="darkgreen">&quot;Length&quot;</font>;
+  <font color="blue">outer </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A[Axis] <font color="darkgreen">&quot;Cross-sectional area&quot;</font>;
+  <font color="blue">outer </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> Lstar_trans[Axis] <font color="darkgreen">
     &quot;Effective cross-sectional area per length&quot;</font>;
-  <font color="blue">final </font><font color="blue">parameter </font>Integer n_lin=<font color="red">countTrue</font>(inclLin) <font color="darkgreen">
-    &quot;Number of components of linear momentum&quot;</font>;
-  <font color="blue">final </font><font color="blue">parameter </font>Integer cartAxes[n_lin]=<font color="red">index</font>(inclLin) <font color="darkgreen">
-    &quot;Cartesian-axis indices of the axes of linear momentum&quot;</font>;
-  <font color="blue">final </font><font color="blue">parameter </font>Integer linAxes[Axis]=<font color="red">enumerate</font>(inclLin) <font color="darkgreen">
+  <font color="blue">outer </font><font color="blue">parameter </font>Boolean inclLin[Axis] <font color="darkgreen">
+    &quot;true, if each component of linear momentum is included&quot;</font>;
+  <font color="darkgreen">// **={true,true,true}</font>
+  <font color="darkgreen">// Even though this parameter is set as final within the constrainedby</font>
+  <font color="darkgreen">// clauses of the models in the Phases package, Dymola 7.4 still shows</font>
+  <font color="darkgreen">// it in the parameter dialog (hence the &quot;Do not adjust&quot;).</font>
+  <font color="darkgreen">//</font>
+  <font color="blue">outer </font><font color="blue">parameter </font>Integer n_lin <font color="darkgreen">&quot;Number of components of linear momentum&quot;</font>;
+  <font color="blue">outer </font><font color="blue">parameter </font>Integer linAxes[:] <font color="darkgreen">
     &quot;Linear momentum component indices of the Cartesian axes&quot;</font>;
+  <font color="blue">outer </font><font color="blue">parameter </font>Integer cartAxes[:] <font color="darkgreen">
+    &quot;Cartesian-axis indices of the components of linear momentum&quot;</font>;
+  <font color="darkgreen">// Note:  The size is n_lin, but it can&#39;t be specified here due to an error</font>
+  <font color="darkgreen">// in Dymola 7.4.</font>
   <font color="blue">final </font><font color="blue">parameter </font>Boolean upstream[Axis]={upstreamX,upstreamY,upstreamZ} <font color="darkgreen">
     &quot;true, if each Cartesian axis uses upstream discretization&quot;</font>;
   <font color="blue">final </font><font color="blue">parameter </font>Boolean setVel[Axis]={setVelX,setVelY,setVelZ} <font color="darkgreen">
@@ -879,43 +874,35 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
       initMethY,initMethZ} <font color="darkgreen">&quot;Initialization methods for velocity&quot;</font>;
 
   <font color="darkgreen">// Base resistivity factors</font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> alpha_Xi(nominal=5*U.cm/U.A) = Xi*Data.m*v/2 <font color="darkgreen">
-    &quot;Base resistivity factor for dynamic compressibility&quot;</font>;
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> alpha_F(nominal=5*U.cm/U.A) = F*Data.m/2 <font color="darkgreen">
-    &quot;Base resistivity factor for dynamic fluidity&quot;</font>;
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> alpha_R(nominal=5*U.cm/U.A) = R*<font color="red">Data.c_V</font>(T, p)/2 <font color="darkgreen">
-    &quot;Base resistivity factor for thermal resistivity&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> halfalpha_x(nominal=5*U.cm/U.A) = x/(2*p) <font color="darkgreen">
+    &quot;Half of base resistivity factor for self diffusivity**&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> halfalpha_beta(nominal=5*U.cm/U.A) = beta*Data.m*v/2 <font color="darkgreen">
+    &quot;**fix Half of base resistivity factor for dynamic compressibility&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> halfalpha_F(nominal=5*U.cm/U.A) = F*Data.m/2 <font color="darkgreen">
+    &quot;Half of base resistivity factor for dynamic fluidity&quot;</font>;
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Q.Resistivity</a> halfalpha_R(nominal=5*U.cm/U.A) = R*<font color="red">Data.c_v</font>(T, p)/2 <font color="darkgreen">
+    &quot;Half of base resistivity factor for thermal resistivity&quot;</font>;
 
-  <font color="darkgreen">// Efforts and flows of the conditional connectors</font>
-  <a href="FCSys_Quantities.html#FCSys.Quantities.CurrentAreic">Q.CurrentAreic</a> J_face[Axis, Side](<font color="blue">each </font>nominal=U.A,start=<font color="red">transpose</font>(<font color="red">fill</font>(I_IC ./
-        A, 2))) <font color="darkgreen">&quot;Areic currents at the faces&quot;</font>;
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> mPhidot_face_0[Axis, Side](<font color="blue">each </font>nominal=U.atm*U.cm^2,start=<font color="red">
-        outerProduct</font>(p_IC*A, {1,-1})) <font color="darkgreen">&quot;Forces on the faces&quot;</font>;
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> p_face[Axis, Side](<font color="blue">each </font>nominal=U.atm,start=<font color="red">fill</font>(
-        p_IC,
-        3,
-        2)) <font color="darkgreen">&quot;Pressures at the faces&quot;</font>;
-  <a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">Q.VolumeSpecific</a> v_face[Axis, Side](<font color="blue">each </font>nominal=U.cc/(4*U.C),start=<font color="red">fill</font>(
+  <font color="darkgreen">// **Efforts and flows of the conditional connectors</font>
+  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi_face_0[Axis, Side](<font color="blue">each </font>nominal=U.cm/U.s,start=<font color="red">fill</font>(
         v_IC,
         3,
-        2)) <font color="darkgreen">&quot;Specific volumes at the faces&quot;</font>;
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Velocity">Q.Velocity</a> phi_face[Axis, Side, Orientation](<font color="blue">each </font>nominal=U.cm/U.s,start={{{<font color="blue">
-        if </font>inclLin[<font color="red">cartWrap</font>(axis + orientation)]<font color="blue"> then </font>phi_IC[<font color="red">cartWrap</font>(axis +
-        orientation)]<font color="blue"> else </font>0 <font color="blue">for </font>orientation<font color="blue"> in </font>Orientation} <font color="blue">for </font>side<font color="blue"> in </font>Side} <font color="blue">
-        for </font>axis<font color="blue"> in </font>Axis}) <font color="darkgreen">&quot;Shear velocities at the faces&quot;</font>;
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Force">Q.Force</a> mPhidot_face[Axis, Side, Orientation](<font color="blue">each </font>nominal=U.N,start={<font color="red">fill</font>({
-        phi_IC[<font color="red">cartWrap</font>(axis + orientation)] <font color="blue">for </font>orientation<font color="blue"> in </font>Orientation}, 2)
-        <font color="blue">for </font>axis<font color="blue"> in </font>Axis}) <font color="darkgreen">&quot;Shear forces on the faces&quot;</font>;
-  <a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_face[Axis, Side](<font color="blue">each </font>start=T_IC) <font color="darkgreen">
-    &quot;Temperatures at the faces&quot;</font>;
-  <a href="FCSys_Quantities.html#FCSys.Quantities.Power">Q.Power</a> Qdot_face[Axis, Side] <font color="darkgreen">&quot;Heat flow rates into the faces&quot;</font>;
+        2)) <font color="darkgreen">&quot;Normal velocities at the faces&quot;</font>;
+  <font color="darkgreen">// **fix start values</font>
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;</textblock>
+  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
   <font color="darkgreen">// Note:  In Dymola 7.4 it&#39;s necessary to add the missing inner message</font>
   <font color="darkgreen">// here to give a warning message, even though it&#39;s included in the</font>
   <font color="darkgreen">// Environment model too.</font>
 
 <font color="blue">initial </font><font color="blue">equation </font>
+  <font color="darkgreen">// Check the chemical formulas given by the reactions.</font>
+  <font color="blue">for </font>i<font color="blue"> in </font><font color="red">size</font>(chemical, 1)<font color="blue"> loop</font>
+    <font color="red">assert</font>(chemical[i].formula == Data.formula, &quot;The chemical formula of this species (&quot;
+       + Data.formula + &quot;) does not match the chemical formula given for reaction &quot;
+       + <font color="red">String</font>(i) + &quot; (&quot; + chemical[i].formula + &quot;).&quot;);
+  <font color="blue">end for</font>;
+
   <font color="darkgreen">// Check that the initialization methods are valid.</font>
   <font color="red">assert</font>(initMethPartNum &lt;&gt; initMethTemp<font color="blue"> or </font>initMethPartNum == InitMethScalar.None,
     &quot;The initialization methods for particle number and temperature cannot be the same (unless None).&quot;);
@@ -938,10 +925,10 @@ Extends from <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Spe
 
   <font color="darkgreen">/* This is commented out because it may be annoying.
   // Warn when index reduction may be necessary.
-  if abs(Xi) &lt; Modelica.Constants.small then
+  if abs(beta) &lt; Modelica.Constants.small then
     Modelica.Utilities.Streams.print(&quot;Warning: The dynamic compressibility is zero.
     This may directly couple the densities within neighboring subregions.
-Consider setting the value of Xi as final (if not already) so that index reduction may be performed.&quot;);
+Consider setting the value of beta as final (if not already) so that index reduction may be performed.&quot;);
   end if;
   if abs(F) &lt; Modelica.Constants.small then
     Modelica.Utilities.Streams.print(&quot;Warning: The dynamic fluidity is zero.
@@ -992,9 +979,9 @@ Choose a condition besides None.&quot;);
     <font color="blue">elseif </font>initMethPartNum == InitMethScalar.SpecificEnthalpyRate<font color="blue"> then</font>
       <font color="red">der</font>(h)/U.s = derh_IC;
     <font color="blue">elseif </font>initMethPartNum == InitMethScalar.PotentialElectrochemical<font color="blue"> then</font>
-      T*chemical.muPerT = mu_IC;
+      chemical.mu = mu_IC;
     <font color="blue">elseif </font>initMethPartNum == InitMethScalar.PotentialElectrochemicalRate<font color="blue"> then</font>
-      <font color="red">der</font>(T*chemical.muPerT)/U.s = dermu_IC;
+      <font color="red">der</font>(chemical.mu)/U.s = dermu_IC;
     <font color="blue">elseif </font>initMethPartNum == InitMethScalar.ReactionRate<font color="blue"> then</font>
       chemical.Ndot = Ndot_IC;
       <font color="darkgreen">// Else, initMethPartNum == InitMethScalar.None; then, there are no</font>
@@ -1062,9 +1049,9 @@ Choose a condition besides None.&quot;);
     <font color="blue">elseif </font>initMethTemp == InitMethScalar.SpecificEnthalpyRate<font color="blue"> then</font>
       <font color="red">der</font>(h)/U.s = derh_IC;
     <font color="blue">elseif </font>initMethTemp == InitMethScalar.PotentialElectrochemical<font color="blue"> then</font>
-      T*chemical.muPerT = mu_IC;
+      chemical.mu = mu_IC;
     <font color="blue">elseif </font>initMethTemp == InitMethScalar.PotentialElectrochemicalRate<font color="blue"> then</font>
-      <font color="red">der</font>(T*chemical.muPerT)/U.s = dermu_IC;
+      <font color="red">der</font>(chemical.mu)/U.s = dermu_IC;
     <font color="blue">elseif </font>initMethTemp == InitMethScalar.ReactionRate<font color="blue"> then</font>
       chemical.Ndot = Ndot_IC;
       <font color="darkgreen">// Else, initMethTemp == InitMethScalar.None; then, there are no</font>
@@ -1073,6 +1060,30 @@ Choose a condition besides None.&quot;);
   <font color="blue">end if</font>;
 
 <font color="blue">equation </font>
+  <font color="darkgreen">/*
+
+      equation
+  // Chemical equilibrium
+  0 = nu*chemical.mu;
+
+  // Conservation (no storage)
+  nu[1:n_spec]*Ndot = chemical.Ndot &quot;Material&quot;;
+  zeros(n_lin) = sum(chemical[i].mPhidot for i in 1:n_spec) &quot;Linear momentum&quot;;
+  0 = sum(chemical.Hdot) &quot;Energy&quot;;
+
+  // Ideal mixing/upstream discretization
+  // Chemical species
+  for i in 1:n_spec loop
+    chemical[i].mPhidot = semiLinear(
+      chemical[i].m*chemical[i].Ndot,
+      chemical[i].phi,
+      phi) &quot;Linear momentum&quot;;
+    chemical[i].Hdot = semiLinear(
+      chemical[i].m*chemical[i].Ndot,
+      chemical[i].hbar,
+      hbar) &quot;Energy&quot;;
+  end for;
+  */</font>
   <font color="darkgreen">// Aliases (only for clarity)</font>
   p = inert.p;
   V = inert.V;
@@ -1081,18 +1092,18 @@ Choose a condition besides None.&quot;);
   phi = common.mechanical.phi;
   N*phi = L[cartAxes] .* I;
   M = Data.m*N;
-  p_face = {{<font color="red">inSign</font>(side)*mPhidot_face_0[axis, side] <font color="blue">for </font>side<font color="blue"> in </font>Side}/A[axis] <font color="blue">
-    for </font>axis<font color="blue"> in </font>Axis};
 
   <font color="darkgreen">// Thermodynamic correlations</font>
-  <font color="blue">if </font>Data.isCompressible<font color="blue"> then</font>
+  <font color="blue">if </font>inverseEOS<font color="blue"> then</font>
     p = <font color="red">Data.p_Tv</font>(T, V/N);
   <font color="blue">else</font>
     V = N*<font color="red">Data.v_Tp</font>(T, p);
   <font color="blue">end if</font>;
   h = <font color="red">Data.h</font>(T, p);
-  h = T*(chemical.muPerT + <font color="red">Data.s</font>(T, p));
-  v_face = {<font color="red">Data.v_Tp</font>(T_face[axis, :], p_face[axis, :]) <font color="blue">for </font>axis<font color="blue"> in </font>Axis};
+  h = chemical.mu + T*<font color="red">Data.s</font>(T, p);
+  <font color="darkgreen">// p = chemical.mu &quot;**temp, use above eq.&quot;;</font>
+  phi_face_0 = {{1,-1} .* <font color="red">Data.v_Tp</font>(faces[axis, :].T, faces[axis, :].p) .*
+    faces[axis, :].Ndot/A[axis] <font color="blue">for </font>axis<font color="blue"> in </font>Axis};
 
   <font color="darkgreen">// Exchange</font>
   <font color="darkgreen">// --------</font>
@@ -1113,33 +1124,30 @@ Choose a condition besides None.&quot;);
   <font color="darkgreen">// Transport</font>
   <font color="blue">for </font>axis<font color="blue"> in </font>Axis<font color="blue"> loop</font>
     <font color="blue">for </font>side<font color="blue"> in </font>Side<font color="blue"> loop</font>
-      <font color="darkgreen">// Normal</font>
-      Xi*(mPhidot_face_0[axis, side] - <font color="red">inSign</font>(side)*p*A[axis]) = Lstar_trans[
-        axis]*(J_face[axis, side] - (<font color="blue">if </font>inclLin[axis]<font color="blue"> then </font>I[linAxes[axis]]/A[
-        axis]<font color="blue"> else </font>0))*(<font color="blue">if </font>upstream[axis]<font color="blue"> and </font>inclLin[axis]<font color="blue"> then </font><font color="red">exp</font>(<font color="red">inSign</font>(
-        side)*I[linAxes[axis]]*alpha_Xi/Lstar_trans[axis]) + 1<font color="blue"> else </font>2);
-
+      <font color="darkgreen">// Material</font>
+      (x/Lstar_trans[axis] + 4*beta/N)*(faces[axis, side].Ndot - (<font color="blue">if </font>inclLin[
+        axis]<font color="blue"> then </font><font color="red">inSign</font>(side)*I[linAxes[axis]]<font color="blue"> else </font>0)) = (faces[axis, side].p
+         - p)*(<font color="blue">if </font>upstream[axis]<font color="blue"> and </font>inclLin[axis]<font color="blue"> then </font>1 + <font color="red">exp</font>(-<font color="red">inSign</font>(side)*I[
+        linAxes[axis]]*halfalpha_x/Lstar_trans[axis])<font color="blue"> else </font>2);
+      <font color="darkgreen">// **fix or remove effect of Peclet number</font>
+      <font color="darkgreen">// **temp 0 factor</font>
+      <font color="darkgreen">// **Make connectors non-conditional, remove alias variables</font>
+      <font color="darkgreen">// **Include bulk viscosity in Peclet number</font>
+      <font color="darkgreen">// **Material resistance/ivity-&gt;Self resistance/ivity</font>
+      <font color="darkgreen">// **update peclet numbers in these transport equations and the outputs above--see dissertation.</font>
       <font color="darkgreen">// Transverse</font>
       <font color="blue">for </font>orientation<font color="blue"> in </font>Orientation<font color="blue"> loop</font>
-        F*mPhidot_face[axis, side, orientation] = Lstar_trans[axis]*(phi_face[
-          axis, side, orientation] - (<font color="blue">if </font>inclLin[<font color="red">cartWrap</font>(axis + orientation)]<font color="blue">
-           then </font>phi[linAxes[<font color="red">cartWrap</font>(axis + orientation)]]<font color="blue"> else </font>0))*(<font color="blue">if </font>
-          upstream[axis]<font color="blue"> and </font>inclLin[axis]<font color="blue"> then </font><font color="red">exp</font>(<font color="red">inSign</font>(side)*I[linAxes[axis]]
-          *alpha_F/Lstar_trans[axis]) + 1<font color="blue"> else </font>2);
+        F*faces[axis, side].mPhidot[orientation] = Lstar_trans[axis]*(faces[
+          axis, side].phi[orientation] - (<font color="blue">if </font>inclLin[<font color="red">cartWrap</font>(axis +
+          orientation)]<font color="blue"> then </font>phi[linAxes[<font color="red">cartWrap</font>(axis + orientation)]]<font color="blue"> else </font>0))
+          *(<font color="blue">if </font>inclLin[axis]<font color="blue"> and </font>upstream[axis]<font color="blue"> then </font>1 + <font color="red">exp</font>(-<font color="red">inSign</font>(side)*I[
+          linAxes[axis]]*halfalpha_F/Lstar_trans[axis])<font color="blue"> else </font>2);
       <font color="blue">end for</font>;
 
       <font color="darkgreen">// Thermal</font>
-      R*Qdot_face[axis, side] = Lstar_trans[axis]*(T_face[axis, side] - T)*(<font color="blue">if </font>
-        upstream[axis]<font color="blue"> and </font>inclLin[axis]<font color="blue"> then </font><font color="red">exp</font>(<font color="red">inSign</font>(side)*I[linAxes[axis]]*
-        alpha_R/Lstar_trans[axis]) + 1<font color="blue"> else </font>2);
-
-      <font color="darkgreen">// Apply Conditions if the connectors are removed.</font>
-      <font color="blue">if </font><font color="blue">not </font>[inclFaceNegX, inclFacePosX; inclFaceNegY, inclFacePosY;
-          inclFaceNegZ, inclFacePosZ][axis, side]<font color="blue"> then</font>
-        J_face[axis, side] = 0 <font color="darkgreen">&quot;Closed&quot;</font>;
-        phi_face[axis, side, :] = {0,0} <font color="darkgreen">&quot;No slip&quot;</font>;
-        Qdot_face[axis, side] = 0 <font color="darkgreen">&quot;Adiabatic&quot;</font>;
-      <font color="blue">end if</font>;
+      R*faces[axis, side].Qdot = Lstar_trans[axis]*(faces[axis, side].T - T)*(<font color="blue">
+        if </font>inclLin[axis]<font color="blue"> and </font>upstream[axis]<font color="blue"> then </font>1 + <font color="red">exp</font>(-<font color="red">inSign</font>(side)*I[
+        linAxes[axis]]*halfalpha_R/Lstar_trans[axis])<font color="blue"> else </font>2);
     <font color="blue">end for</font>;
   <font color="blue">end for</font>;
 
@@ -1171,17 +1179,18 @@ Choose a condition besides None.&quot;);
     <font color="blue">elseif </font>initMethPartNum == InitMethScalar.SpecificEnthalpyRate<font color="blue"> then</font>
       <font color="red">der</font>(h)/U.s = derh_IC;
     <font color="blue">elseif </font>initMethPartNum == InitMethScalar.PotentialElectrochemical<font color="blue"> then</font>
-      T*chemical.muPerT = mu_IC;
+      chemical.mu = mu_IC;
     <font color="blue">elseif </font>initMethPartNum == InitMethScalar.PotentialElectrochemicalRate<font color="blue"> then</font>
-      <font color="red">der</font>(T*chemical.muPerT)/U.s = dermu_IC;
+      <font color="red">der</font>(chemical.mu)/U.s = dermu_IC;
     <font color="blue">else</font>
-      <font color="darkgreen">//if initMethPartNum == InitMethScalar.ReactionRate then</font>
+      <font color="darkgreen">// if initMethPartNum == InitMethScalar.ReactionRate then</font>
       chemical.Ndot = Ndot_IC;
       <font color="darkgreen">// Note:  initMethPartNum == InitMethScalar.None can&#39;t occur due to an</font>
       <font color="darkgreen">// assertion.</font>
     <font color="blue">end if</font>;
   <font color="blue">else</font>
-    <font color="red">der</font>(N)/U.s = chemical.Ndot + A*<font color="red">Delta</font>(J_face) <font color="darkgreen">&quot;Material conservation&quot;</font>;
+    <font color="red">der</font>(N)/U.s = chemical.Ndot + <font color="red">sum</font>(faces.Ndot) <font color="darkgreen">&quot;Material conservation&quot;</font>;
+    <font color="darkgreen">// **temp last term</font>
   <font color="blue">end if</font>;
 
   <font color="darkgreen">// Mechanical dynamics</font>
@@ -1202,14 +1211,15 @@ Choose a condition besides None.&quot;);
       <font color="blue">end if</font>;
     <font color="blue">else</font>
       <font color="red">der</font>(M*phi[axis])/U.s = chemical.mPhidot[axis] + common.mechanical.mPhidot[
-        axis] + inert.mPhidot[axis] + A[cartAxes[axis]]*<font color="red">Sigma</font>(mPhidot_face_0[
-        cartAxes[axis], :]) + Data.m*<font color="red">Delta</font>(v_face[cartAxes[axis], :] .* J_face[
-        cartAxes[axis], :] .^ 2)*A[cartAxes[axis]] + <font color="red">sum</font>(Data.m*<font color="red">Delta</font>(phi_face[<font color="red">
-        cartWrap</font>(cartAxes[axis] - orientation), :, orientation] .* J_face[<font color="red">
-        cartWrap</font>(cartAxes[axis] - orientation), :]*A[<font color="red">cartWrap</font>(cartAxes[axis] -
-        orientation)]) + <font color="red">Sigma</font>(mPhidot_face[<font color="red">cartWrap</font>(cartAxes[axis] -
-        orientation), :, orientation]) <font color="blue">for </font>orientation<font color="blue"> in </font>Orientation) + M*
-        environment.a[cartAxes[axis]] <font color="darkgreen">&quot;Conservation of linear momentum&quot;</font>;
+        axis] + inert.mPhidot[axis] + <font color="red">Delta</font>(faces[cartAxes[axis], :].p)*A[
+        cartAxes[axis]] + Data.m*(phi_face_0[cartAxes[axis], :]*faces[cartAxes[
+        axis], :].Ndot) + <font color="red">sum</font>(Data.m*(faces[<font color="red">cartWrap</font>(cartAxes[axis] -
+        orientation), :].phi[orientation]*faces[<font color="red">cartWrap</font>(cartAxes[axis] -
+        orientation), :].Ndot) + <font color="red">Sigma</font>(faces[<font color="red">cartWrap</font>(cartAxes[axis] -
+        orientation), :].mPhidot[orientation]) <font color="blue">for </font>orientation<font color="blue"> in </font>Orientation) +
+        M*environment.a[cartAxes[axis]] + N*Data.z*environment.E[cartAxes[axis]]
+        <font color="darkgreen">&quot;Conservation of linear momentum&quot;</font>;
+      <font color="darkgreen">// **temp last terms</font>
     <font color="blue">end if</font>;
   <font color="blue">end for</font>;
 
@@ -1241,32 +1251,35 @@ Choose a condition besides None.&quot;);
     <font color="blue">elseif </font>initMethTemp == InitMethScalar.SpecificEnthalpyRate<font color="blue"> then</font>
       <font color="red">der</font>(h)/U.s = derh_IC;
     <font color="blue">elseif </font>initMethTemp == InitMethScalar.PotentialElectrochemical<font color="blue"> then</font>
-      T*chemical.muPerT = mu_IC;
+      chemical.mu = mu_IC;
     <font color="blue">elseif </font>initMethTemp == InitMethScalar.PotentialElectrochemicalRate<font color="blue"> then</font>
-      <font color="red">der</font>(T*chemical.muPerT)/U.s = dermu_IC;
+      <font color="red">der</font>(chemical.mu)/U.s = dermu_IC;
     <font color="blue">else</font>
-      <font color="darkgreen">//if initMethTemp == InitMethScalar.ReactionRate then</font>
+      <font color="darkgreen">// if initMethTemp == InitMethScalar.ReactionRate then</font>
       chemical.Ndot = Ndot_IC;
       <font color="darkgreen">// Note:  initMethTemp == InitMethScalar.None can&#39;t occur due to an</font>
       <font color="darkgreen">// assertion.</font>
     <font color="blue">end if</font>;
   <font color="blue">else</font>
-    (<font color="red">der</font>(N*h) + <font color="red">der</font>(M*phi*phi)/2 - V*<font color="red">der</font>(p))/U.s = chemical.phi*chemical.mPhidot
-      /2 + Data.m*chemical.hbar*chemical.Ndot + phi*common.mechanical.mPhidot +
-      common.thermal.Qdot + inert.phi*inert.mPhidot + inert.Qdot + {<font color="red">sum</font>(<font color="red">inSign</font>(
-      side)*(<font color="red">Data.h</font>(T_face[axis, side], p_face[axis, side]) + Data.m*((v_face[
-      axis, side]*J_face[axis, side])^2 + phi_face[axis, side, :]*phi_face[axis,
-      side, :])/2)*J_face[axis, side] <font color="blue">for </font>side<font color="blue"> in </font>Side) <font color="blue">for </font>axis<font color="blue"> in </font>Axis}*A + <font color="red">
-      sum</font>(phi_face .* mPhidot_face) + <font color="red">sum</font>(Qdot_face) <font color="darkgreen">&quot;Energy conservation&quot;</font>;
+    (phi*<font color="red">der</font>(M*phi) + <font color="red">der</font>(N*h) - V*<font color="red">der</font>(p))/U.s = chemical.phi*chemical.mPhidot +
+      chemical.mu*chemical.Ndot + chemical.Qdot + phi*common.mechanical.mPhidot +
+      common.thermal.Qdot + inert.phi*inert.mPhidot + inert.Qdot + <font color="red">sum</font>(<font color="red">sum</font>((
+      Data.m*(phi_face_0[axis, side]^2 + faces[axis, side].phi*faces[axis, side].phi)
+       + <font color="red">Data.h</font>(faces[axis, side].T, faces[axis, side].p))*faces[axis, side].Ndot
+      <font color="blue">for </font>side<font color="blue"> in </font>Side) <font color="blue">for </font>axis<font color="blue"> in </font>Axis) + <font color="red">sum</font>(<font color="red">sum</font>(faces.phi[orientation] .*
+      faces.mPhidot[orientation]) <font color="blue">for </font>orientation<font color="blue"> in </font>Orientation) + <font color="red">sum</font>(faces.Qdot)
+      <font color="darkgreen">&quot;Energy conservation&quot;</font>;
+    <font color="darkgreen">// **Update KE terms (LHS and RHS) to match dissertation.</font>
   <font color="blue">end if</font>;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Species;
+  <font color="darkgreen">// **note in doc here or in characteristics: self diffusivity is a modified self diffusivity (2/2/13 notes)</font>
+<font color="blue">end </font>Species;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:51:15 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:48:25 2013.
 </div>
 </body>
 </html>

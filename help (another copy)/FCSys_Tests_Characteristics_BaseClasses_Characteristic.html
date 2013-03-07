@@ -1,0 +1,549 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.Tests.Characteristics.BaseClasses.Characteristic</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Characteristic<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Tests.Characteristics.BaseClasses.Characteristic"></A><A HREF="FCSys_Tests_Characteristics_BaseClasses.html#FCSys.Tests.Characteristics.BaseClasses"
+>FCSys.Tests.Characteristics.BaseClasses</A>.Characteristic</H2>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package"
+>Modelica.Icons.Package</A> (Icon for standard packages).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAllS.png" ALT="FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAll" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAll"
+>RunAll</A>
+</TD><TD>Run all of the test models for the <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a> package</TD></TR>
+<TR><TD><IMG SRC="FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAllS.png" ALT="FCSys.Tests.Characteristics.BaseClasses.Characteristic.TestProperties" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic.TestProperties"
+>TestProperties</A>
+</TD><TD>Test the <code>z</code>, <code>isCompressible</code>, <code>hasThermalExpansion</code> constants of the <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a> package</TD></TR>
+<TR><TD><IMG SRC="FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAllS.png" ALT="FCSys.Tests.Characteristics.BaseClasses.Characteristic.c_p" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic.c_p"
+>c_p</A>
+</TD><TD>Test <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.c_p">c_p</a>() based on its relation to <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.s">s</a>()</TD></TR>
+<TR><TD><IMG SRC="FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAllS.png" ALT="FCSys.Tests.Characteristics.BaseClasses.Characteristic.c_v" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic.c_v"
+>c_v</A>
+</TD><TD>Test <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.c_v">c_v</a>() based on its relation to <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.h">h</a>() - p&middot;v</TD></TR>
+<TR><TD><IMG SRC="FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAllS.png" ALT="FCSys.Tests.Characteristics.BaseClasses.Characteristic.dp" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic.dp"
+>dp</A>
+</TD><TD>Test <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp_Tv">dp_Tv</a>() based on its relation to <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_Tv">p_Tv</a>()</TD></TR>
+<TR><TD><IMG SRC="FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAllS.png" ALT="FCSys.Tests.Characteristics.BaseClasses.Characteristic.dv" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic.dv"
+>dv</A>
+</TD><TD>Test <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv_Tp">dv_Tp</a>() based on its relation to <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_Tp">v_Tp</a>()</TD></TR>
+<TR><TD><IMG SRC="FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAllS.png" ALT="FCSys.Tests.Characteristics.BaseClasses.Characteristic.h" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic.h"
+>h</A>
+</TD><TD>Test <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.h">h</a>(<i>T</i>, <i>p</i>) based on its relation to <i>T</i>, <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.s">s</a>(<i>T</i>, <i>p</i>), <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_Tp">v_Tp</a>(<i>T</i>, <i>p</i>), and <i>p</i></TD></TR>
+<TR><TD><IMG SRC="FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAllS.png" ALT="FCSys.Tests.Characteristics.BaseClasses.Characteristic.F" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic.F"
+>F</A>
+</TD><TD>Test the rigid-sphere estimate of <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.F">F</a>() against the actual fluidity of H<sub>2</sub></TD></TR>
+<TR><TD><IMG SRC="FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAllS.png" ALT="FCSys.Tests.Characteristics.BaseClasses.Characteristic.p_Tv" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic.p_Tv"
+>p_Tv</A>
+</TD><TD>Test <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_Tv">p_Tv</a>() based on its relation to <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_Tp">v_Tp</a>()</TD></TR>
+<TR><TD><IMG SRC="FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAllS.png" ALT="FCSys.Tests.Characteristics.BaseClasses.Characteristic.R" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic.R"
+>R</A>
+</TD><TD>Test the rigid-sphere estimate of <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.R">R</a>() against the actual thermal resistivity of H<sub>2</sub></TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE RunAll<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAllI.png" ALT="FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAll" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAll"></A><A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic"
+>FCSys.Tests.Characteristics.BaseClasses.Characteristic</A>.RunAll</H2>
+<B>Run all of the test models for the <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a> package</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre><p>If this model simulates without failure,
+  then the test has passed.</p><pre></PRE><P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples).
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> RunAll <font color="darkgreen">
+  &quot;</pre>Run all of the test models for the <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package<pre>&quot;</font>
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+
+  <A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic.c_p"
+>c_p</A> testc_p;
+  <A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic.c_v"
+>c_v</A> testc_v;
+  <A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic.dp"
+>dp</A> testdp;
+  <A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic.dv"
+>dv</A> testdv;
+  <A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic.F"
+>F</A> testF;
+  <A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic.h"
+>h</A> testh;
+  <A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic.p_Tv"
+>p_Tv</A> testp;
+  <A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic.R"
+>R</A> testR;
+  <A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic.TestProperties"
+>TestProperties</A> testProperties;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>RunAll;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE TestProperties<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAllI.png" ALT="FCSys.Tests.Characteristics.BaseClasses.Characteristic.TestProperties" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Tests.Characteristics.BaseClasses.Characteristic.TestProperties"></A><A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic"
+>FCSys.Tests.Characteristics.BaseClasses.Characteristic</A>.TestProperties</H2>
+<B>Test the <code>z</code>, <code>isCompressible</code>, <code>hasThermalExpansion</code> constants of the <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic">Characteristic</a> package</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre><p>If this model simulates without failure,
+    then the test has passed.</p><pre></PRE><P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples).
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> TestProperties <font color="darkgreen">
+  &quot;</pre>Test the <code>z</code>, <code>isCompressible</code>, <code>hasThermalExpansion</code> constants of the <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic\">Characteristic</a> package<pre>&quot;</font>
+  <font color="blue">import </font><A HREF="FCSys_Characteristics.html#FCSys.Characteristics"
+>FCSys.Characteristics</A>.*;
+
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+
+  <font color="darkgreen">// Note:  In Dymola 7.4, this test must be implemented as a model</font>
+  <font color="darkgreen">// (not as a function) due to the following error when checking</font>
+  <font color="darkgreen">// isCompressible and hasThermalExpansion:</font>
+  <font color="darkgreen">//     &quot;Error: Cannot handle unexpanded expression with iterators.&quot;</font>
+
+<font color="blue">initial </font><font color="blue">equation </font>
+  <font color="darkgreen">// z</font>
+  <font color="red">assert</font>(H2O.Gas.z == 0, &quot;z failed on test 1.&quot;);
+  <font color="red">assert</font>('C+'.Graphite.z == 1, &quot;z failed on test 2.&quot;);
+  <font color="red">assert</font>('C19HF37O5S-'.Ionomer.z == -1, &quot;z failed on test 3.&quot;);
+
+  <font color="darkgreen">// isCompressible</font>
+  <font color="red">assert</font>(H2O.Gas.isCompressible, &quot;isCompressible failed on test 1.&quot;);
+  <font color="red">assert</font>(<font color="blue">not </font>H2O.Liquid.isCompressible, &quot;isCompressible failed on test 2.&quot;);
+
+  <font color="darkgreen">// hasThermalExpansion</font>
+  <font color="red">assert</font>(H2O.Gas.hasThermalExpansion, &quot;hasThermalExpansion failed on test 1.&quot;);
+  <font color="red">assert</font>(<font color="blue">not </font>H2O.Liquid.hasThermalExpansion, &quot;hasThermalExpansion failed on test 2.&quot;);
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>TestProperties;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE c_p<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAllI.png" ALT="FCSys.Tests.Characteristics.BaseClasses.Characteristic.c_p" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Tests.Characteristics.BaseClasses.Characteristic.c_p"></A><A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic"
+>FCSys.Tests.Characteristics.BaseClasses.Characteristic</A>.c_p</H2>
+<B>Test <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.c_p">c_p</a>() based on its relation to <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.s">s</a>()</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre><p>If this model simulates without failure,
+    then the test has passed.</p><pre></PRE><P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples).
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> c_p <font color="darkgreen">
+  &quot;</pre>Test <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.c_p\">c_p</a>() based on its relation to <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.s\">s</a>()<pre>&quot;</font>
+  <font color="darkgreen">// This approach is based on [Dassault2010, vol. 2, pp. 300-301].</font>
+
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+
+  <font color="blue">package</font> Data = <A HREF="FCSys_Characteristics_H2O_Gas.html#FCSys.Characteristics.H2O.Gas"
+>FCSys.Characteristics.H2O.Gas</A>;
+  <font color="darkgreen">// The data choice is arbitrary but the b_c values must have sufficient</font>
+  <font color="darkgreen">// richness.</font>
+
+  <font color="darkgreen">// Arguments to functions</font>
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute"
+>Q.TemperatureAbsolute</A> T=(300 + 100*time)*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute"
+>Q.PressureAbsolute</A> p=U.atm <font color="darkgreen">&quot;Pressure (must be constant)&quot;</font>;
+  <font color="darkgreen">// Note:  The values are arbitrary but must have sufficient richness.</font>
+
+  <font color="darkgreen">// Results of functions</font>
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.Potential"
+>Q.Potential</A> s <font color="darkgreen">&quot;Specific entropy&quot;</font>;
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.Potential"
+>Q.Potential</A> y <font color="darkgreen">&quot;Integral of (c_p/T)*dT&quot;</font>;
+
+<font color="blue">initial </font><font color="blue">equation </font>
+  y = s;
+
+<font color="blue">equation </font>
+  s = <font color="red">Data.s</font>(T, p);
+  T*<font color="red">der</font>(y) = <font color="red">Data.c_p</font>(T, p)*<font color="red">der</font>(T) <font color="darkgreen">&quot;c_p = T*(dels/delT)_p&quot;</font>;
+
+  <font color="red">assert</font>(<font color="red">abs</font>(s - y) &lt; 1e-7*U.V, &quot;The relationship is incorrect.&quot;);
+  <font color="darkgreen">// Note:  The simulation tolerance is set to 1e-8.</font>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>c_p;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE c_v<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAllI.png" ALT="FCSys.Tests.Characteristics.BaseClasses.Characteristic.c_v" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Tests.Characteristics.BaseClasses.Characteristic.c_v"></A><A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic"
+>FCSys.Tests.Characteristics.BaseClasses.Characteristic</A>.c_v</H2>
+<B>Test <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.c_v">c_v</a>() based on its relation to <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.h">h</a>() - p&middot;v</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre><p>If this model simulates without failure,
+    then the test has passed.</p><pre></PRE><P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples).
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> c_v <font color="darkgreen">
+  &quot;</pre>Test <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.c_v\">c_v</a>() based on its relation to <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.h\">h</a>() - p&middot;v<pre>&quot;</font>
+  <font color="darkgreen">// This approach is based on [Dassault2010, vol. 2, pp. 300-301].</font>
+
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+
+  <font color="blue">package</font> Data = <A HREF="FCSys_Characteristics_H2O_Gas.html#FCSys.Characteristics.H2O.Gas"
+>FCSys.Characteristics.H2O.Gas</A>;
+  <font color="darkgreen">// The data choice is arbitrary but the b_c values must have sufficient</font>
+  <font color="darkgreen">// richness.</font>
+
+  <font color="darkgreen">// Arguments to functions</font>
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute"
+>Q.TemperatureAbsolute</A> T=(300 + 100*time)*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific"
+>Q.VolumeSpecific</A> v=<font color="red">Data.v_Tp</font>(300*U.K, U.atm) <font color="darkgreen">
+    &quot;Specific volume (must be constant)&quot;</font>;
+  <font color="darkgreen">// Note:  The values are arbitrary but must have sufficient richness.</font>
+
+  <font color="darkgreen">// Intermediate variables</font>
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute"
+>Q.PressureAbsolute</A> p <font color="darkgreen">&quot;Pressure&quot;</font>;
+
+  <font color="darkgreen">// Results of functions</font>
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.Potential"
+>Q.Potential</A> u <font color="darkgreen">&quot;Internal potential&quot;</font>;
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.Potential"
+>Q.Potential</A> y <font color="darkgreen">&quot;Integral of c_v*dT&quot;</font>;
+
+<font color="blue">initial </font><font color="blue">equation </font>
+  y = u;
+
+<font color="blue">equation </font>
+  p = <font color="red">Data.p_Tv</font>(T, v);
+  u = <font color="red">Data.h</font>(T, p) - p*v;
+  <font color="red">der</font>(y) = <font color="red">Data.c_v</font>(T, p)*<font color="red">der</font>(T) <font color="darkgreen">&quot;c_v = (delu/delT)_v&quot;</font>;
+
+  <font color="red">assert</font>(<font color="red">abs</font>(u - y) &lt; 1e-5*U.V, &quot;The relationship is incorrect.&quot;);
+  <font color="darkgreen">// Note:  The simulation tolerance is set to 1e-8.</font>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>c_v;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE dp<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAllI.png" ALT="FCSys.Tests.Characteristics.BaseClasses.Characteristic.dp" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Tests.Characteristics.BaseClasses.Characteristic.dp"></A><A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic"
+>FCSys.Tests.Characteristics.BaseClasses.Characteristic</A>.dp</H2>
+<B>Test <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp_Tv">dp_Tv</a>() based on its relation to <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_Tv">p_Tv</a>()</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre><p>If this model simulates without failure,
+    then the test has passed.</p><pre></PRE><P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples).
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> dp <font color="darkgreen">
+  &quot;</pre>Test <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp_Tv\">dp_Tv</a>() based on its relation to <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_Tv\">p_Tv</a>()<pre>&quot;</font>
+  <font color="darkgreen">// This approach is based on [Dassault2010, vol. 2, pp. 300-301].</font>
+
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+
+  <font color="blue">package</font> Data = <A HREF="FCSys_Characteristics_H2O_Gas.html#FCSys.Characteristics.H2O.Gas"
+>FCSys.Characteristics.H2O.Gas</A>;
+  <font color="darkgreen">// The data choice is arbitrary but the b_v values must have sufficient</font>
+  <font color="darkgreen">// richness.</font>
+
+  <font color="darkgreen">// Arguments to functions</font>
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute"
+>Q.TemperatureAbsolute</A> T=(300 + 100*time)*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific"
+>Q.VolumeSpecific</A> v=(T/U.atm)*(1 + time) <font color="darkgreen">&quot;Specific volume&quot;</font>;
+  <font color="darkgreen">// Note:  The values are arbitrary but must have sufficient richness.</font>
+
+  <font color="darkgreen">// Results of functions</font>
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.Pressure"
+>Q.Pressure</A> y1 <font color="darkgreen">&quot;Direct result of function&quot;</font>;
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.Pressure"
+>Q.Pressure</A> y2 <font color="darkgreen">&quot;Integral of derivative of y1&quot;</font>;
+
+<font color="blue">initial </font><font color="blue">equation </font>
+  y2 = y1;
+
+<font color="blue">equation </font>
+  y1 = <font color="red">Data.p_Tv</font>(T, v);
+  <font color="red">der</font>(y2) = <font color="red">Data.dp_Tv</font>(
+    T,
+    v,
+    <font color="red">der</font>(T),
+    <font color="red">der</font>(v));
+  <font color="darkgreen">// Note:  This is equivalent to der(y2) = der(y1), but it must be</font>
+  <font color="darkgreen">// explicit to ensure that the translator uses the defined derivative</font>
+  <font color="darkgreen">// instead of the automatically derived one.</font>
+
+  <font color="red">assert</font>(<font color="red">abs</font>(y1 - y2) &lt; 1e-7*U.atm, &quot;The derivative is incorrect.&quot;);
+  <font color="darkgreen">// Note:  The simulation tolerance is set to 1e-8.</font>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>dp;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE dv<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAllI.png" ALT="FCSys.Tests.Characteristics.BaseClasses.Characteristic.dv" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Tests.Characteristics.BaseClasses.Characteristic.dv"></A><A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic"
+>FCSys.Tests.Characteristics.BaseClasses.Characteristic</A>.dv</H2>
+<B>Test <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv_Tp">dv_Tp</a>() based on its relation to <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_Tp">v_Tp</a>()</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre><p>If this model simulates without failure,
+    then the test has passed.</p><pre></PRE><P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples).
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> dv <font color="darkgreen">
+  &quot;</pre>Test <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv_Tp\">dv_Tp</a>() based on its relation to <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_Tp\">v_Tp</a>()<pre>&quot;</font>
+  <font color="darkgreen">// This approach is based on [Dassault2010, vol. 2, pp. 300-301].</font>
+
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+
+  <font color="blue">package</font> Data = <A HREF="FCSys_Characteristics_H2O_Gas.html#FCSys.Characteristics.H2O.Gas"
+>FCSys.Characteristics.H2O.Gas</A>;
+  <font color="darkgreen">// The data choice is arbitrary but the b_v values must have sufficient</font>
+  <font color="darkgreen">// richness.</font>
+
+  <font color="darkgreen">// Arguments to functions</font>
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute"
+>Q.TemperatureAbsolute</A> T=(300 + 100*time)*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute"
+>Q.PressureAbsolute</A> p=U.atm*(1 + time^2) <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="darkgreen">// Note:  The values are arbitrary but must have sufficient richness.</font>
+
+  <font color="darkgreen">// Results of functions</font>
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific"
+>Q.VolumeSpecific</A> y1 <font color="darkgreen">&quot;Direct result of function&quot;</font>;
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific"
+>Q.VolumeSpecific</A> y2 <font color="darkgreen">&quot;Integral of derivative of y1&quot;</font>;
+
+<font color="blue">initial </font><font color="blue">equation </font>
+  y2 = y1;
+
+<font color="blue">equation </font>
+  y1 = <font color="red">Data.v_Tp</font>(T, p);
+  <font color="red">der</font>(y2) = <font color="red">Data.dv_Tp</font>(
+    T,
+    p,
+    <font color="red">der</font>(T),
+    <font color="red">der</font>(p));
+  <font color="darkgreen">// Note:  This is equivalent to der(y2) = der(y1), but it must be</font>
+  <font color="darkgreen">// explicit to ensure that the translator uses the defined derivative</font>
+  <font color="darkgreen">// instead of the automatically derived one.</font>
+
+  <font color="red">assert</font>(<font color="red">abs</font>(y1 - y2) &lt; 1e-6*(300*U.K/U.atm), &quot;The derivative is incorrect.&quot;);
+  <font color="darkgreen">// Note:  The simulation tolerance is set to 1e-8.</font>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>dv;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE h<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAllI.png" ALT="FCSys.Tests.Characteristics.BaseClasses.Characteristic.h" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Tests.Characteristics.BaseClasses.Characteristic.h"></A><A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic"
+>FCSys.Tests.Characteristics.BaseClasses.Characteristic</A>.h</H2>
+<B>Test <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.h">h</a>(<i>T</i>, <i>p</i>) based on its relation to <i>T</i>, <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.s">s</a>(<i>T</i>, <i>p</i>), <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_Tp">v_Tp</a>(<i>T</i>, <i>p</i>), and <i>p</i></B><p>
+<P><H3>Information</H3></P>
+<PRE></pre><p>If this model simulates without failure,
+    then the test has passed.</p><pre></PRE><P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples).
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> h <font color="darkgreen">
+  &quot;</pre>Test <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.h\">h</a>(<i>T</i>, <i>p</i>) based on its relation to <i>T</i>, <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.s\">s</a>(<i>T</i>, <i>p</i>), <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_Tp\">v_Tp</a>(<i>T</i>, <i>p</i>), and <i>p</i><pre>&quot;</font>
+  <font color="darkgreen">// This approach is based on [Dassault2010, vol. 2, pp. 300-301].</font>
+
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+
+  <font color="blue">package</font> Data = <A HREF="FCSys_Characteristics_H2O_Gas.html#FCSys.Characteristics.H2O.Gas"
+>FCSys.Characteristics.H2O.Gas</A>;
+  <font color="darkgreen">// The data choice is arbitrary but the b_c values must have sufficient</font>
+  <font color="darkgreen">// richness.</font>
+
+  <font color="darkgreen">// Arguments to functions</font>
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute"
+>Q.TemperatureAbsolute</A> T=(300 + 100*time)*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute"
+>Q.PressureAbsolute</A> p=U.atm*(1 + time^2) <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="darkgreen">// Note:  The values are arbitrary but must have sufficient richness.</font>
+
+  <font color="darkgreen">// Results of functions</font>
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.Potential"
+>Q.Potential</A> dh <font color="darkgreen">&quot;Direct derivative of h&quot;</font>;
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.Potential"
+>Q.Potential</A> y <font color="darkgreen">&quot;Indirect derivative of h&quot;</font>;
+
+<font color="blue">equation </font>
+  dh = <font color="red">der</font>(<font color="red">Data.h</font>(T, p));
+  y = T*<font color="red">der</font>(<font color="red">Data.s</font>(T, p)) + <font color="red">Data.v_Tp</font>(T, p)*<font color="red">der</font>(p) <font color="darkgreen">&quot;dh = T*ds + v*dp&quot;</font>;
+
+  <font color="red">assert</font>(<font color="red">abs</font>(dh - y) &lt; 1e-16*U.V, &quot;The relationship is incorrect.&quot;);
+  <font color="darkgreen">// Note:  The simulation tolerance is set to 1e-8.</font>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>h;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE F<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAllI.png" ALT="FCSys.Tests.Characteristics.BaseClasses.Characteristic.F" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Tests.Characteristics.BaseClasses.Characteristic.F"></A><A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic"
+>FCSys.Tests.Characteristics.BaseClasses.Characteristic</A>.F</H2>
+<B>Test the rigid-sphere estimate of <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.F">F</a>() against the actual fluidity of H<sub>2</sub></B><p>
+<P><H3>Information</H3></P>
+<PRE></pre><p>If this model simulates without failure,
+    then the test has passed.</p><pre></PRE><P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples).
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> F <font color="darkgreen">
+  &quot;</pre>Test the rigid-sphere estimate of <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.F\">F</a>() against the actual fluidity of H<sub>2</sub><pre>&quot;</font>
+  <font color="blue">import </font><A HREF="FCSys_Test.html#FCSys.Test.assertLogValue"
+>FCSys.Test.assertLogValue</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+
+  <font color="blue">import </font>DataH2 = <A HREF="FCSys_Characteristics_H2_Gas.html#FCSys.Characteristics.H2.Gas"
+>FCSys.Characteristics.H2.Gas</A>;
+  <font color="blue">package</font> Data = <A HREF="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic"
+>FCSys.Characteristics.BaseClasses.Characteristic</A> (m=DataH2.m,
+        r=DataH2.r) <font color="darkgreen">
+    &quot;Properties to estimate fluidity via rigid-sphere assumption&quot;</font>;
+
+  <font color="blue">constant </font>Q.FluidityDynamic F=<font color="red">Data.F</font>(300*U.K);
+
+<font color="blue">initial </font><font color="blue">equation </font>
+  <font color="red">assertLogValue</font>(
+    actual=F,
+    expected=1/(89.6e-7*U.Pa*U.s),
+    o=0.4);
+  <font color="darkgreen">// The fluidity is from [Incropera2002, p. 919].</font>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>F;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE p_Tv<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAllI.png" ALT="FCSys.Tests.Characteristics.BaseClasses.Characteristic.p_Tv" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Tests.Characteristics.BaseClasses.Characteristic.p_Tv"></A><A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic"
+>FCSys.Tests.Characteristics.BaseClasses.Characteristic</A>.p_Tv</H2>
+<B>Test <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_Tv">p_Tv</a>() based on its relation to <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_Tp">v_Tp</a>()</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre><p>If this model simulates without failure,
+    then the test has passed.</p><pre></PRE><P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples).
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> p_Tv <font color="darkgreen">
+  &quot;</pre>Test <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_Tv\">p_Tv</a>() based on its relation to <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_Tp\">v_Tp</a>()<pre>&quot;</font>
+
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+
+  <font color="blue">package</font> Data = <A HREF="FCSys_Characteristics_H2_Gas.html#FCSys.Characteristics.H2.Gas"
+>FCSys.Characteristics.H2.Gas</A>;
+  <font color="darkgreen">// The data choice is arbitrary but the b_v values must have sufficient</font>
+  <font color="darkgreen">// richness.</font>
+  <font color="darkgreen">// Note:  This test fails for H2O.Gas due to numerics (not mathematics).</font>
+  <font color="darkgreen">// See FCSys.Examples.Correlations.</font>
+
+  <font color="darkgreen">// Arguments to functions</font>
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute"
+>Q.TemperatureAbsolute</A> T=(300 + 100*time)*U.K <font color="darkgreen">&quot;Temperature&quot;</font>;
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute"
+>Q.PressureAbsolute</A> p=U.atm*(1 + time^2) <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="darkgreen">// Note:  The values are arbitrary but must have sufficient richness.</font>
+
+  <font color="darkgreen">// Results of functions</font>
+  <A HREF="FCSys_Quantities.html#FCSys.Quantities.Pressure"
+>Q.Pressure</A> y <font color="darkgreen">&quot;Indirectly calculated pressure&quot;</font>;
+
+<font color="blue">equation </font>
+  y = <font color="red">Data.p_Tv</font>(T, <font color="red">Data.v_Tp</font>(T, p)) <font color="darkgreen">&quot;p_Tv and v_Tp are inverses w.r.t. p and v&quot;</font>;
+
+  <font color="red">assert</font>(<font color="red">abs</font>(p - y) &lt; 1e-5*U.atm, &quot;The relationship is incorrect.&quot;);
+  <font color="darkgreen">// Note:  The simulation tolerance is set to 1e-8.</font>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>p_Tv;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE R<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Tests.Characteristics.BaseClasses.Characteristic.RunAllI.png" ALT="FCSys.Tests.Characteristics.BaseClasses.Characteristic.R" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Tests.Characteristics.BaseClasses.Characteristic.R"></A><A HREF="FCSys_Tests_Characteristics_BaseClasses_Characteristic.html#FCSys.Tests.Characteristics.BaseClasses.Characteristic"
+>FCSys.Tests.Characteristics.BaseClasses.Characteristic</A>.R</H2>
+<B>Test the rigid-sphere estimate of <a href="modelica://FCSys.Characteristics.BaseClasses.Characteristic.R">R</a>() against the actual thermal resistivity of H<sub>2</sub></B><p>
+<P><H3>Information</H3></P>
+<PRE></pre><p>If this model simulates without failure,
+    then the test has passed.</p><pre></PRE><P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples).
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> R <font color="darkgreen">
+  &quot;</pre>Test the rigid-sphere estimate of <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.R\">R</a>() against the actual thermal resistivity of H<sub>2</sub><pre>&quot;</font>
+  <font color="blue">import </font><A HREF="FCSys_Test.html#FCSys.Test.assertLogValue"
+>FCSys.Test.assertLogValue</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+
+  <font color="blue">import </font>DataH2 = <A HREF="FCSys_Characteristics_H2_Gas.html#FCSys.Characteristics.H2.Gas"
+>FCSys.Characteristics.H2.Gas</A>;
+
+  <font color="blue">package</font> Data = <A HREF="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic"
+>FCSys.Characteristics.BaseClasses.Characteristic</A> (
+      formula=DataH2.formula,
+      phase=DataH2.phase,
+      m=DataH2.m,
+      r=DataH2.r,
+      b_c=DataH2.b_c) <font color="darkgreen">
+    &quot;Properties to estimate thermal resistivity via rigid-sphere assumption&quot;</font>;
+
+  <font color="blue">constant </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific"
+>Q.CapacityThermalSpecific</A> R=<font color="red">Data.R</font>(300*U.K);
+
+<font color="blue">initial </font><font color="blue">equation </font>
+  <font color="red">assertLogValue</font>(
+    actual=R,
+    expected=(1/0.183)*U.m*U.K/U.W,
+    o=0.7);
+  <font color="darkgreen">// The thermal resistivity is from [Incropera2002, p. 919].</font>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>R;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 01:12:51 2013.
+</address></BODY>
+</HTML>

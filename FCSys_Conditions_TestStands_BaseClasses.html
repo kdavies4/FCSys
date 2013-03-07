@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.TestStands.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="Base classes (not generally for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,11 +45,15 @@
       <div class="body">
 
 <h2><a name="FCSys.Conditions.TestStands.BaseClasses"></a><a href="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands">FCSys.Conditions.TestStands</a>.BaseClasses</h2>
+
 <b>Base classes (not generally for direct use)</b>
-<p>
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.BasesPackage.html#Modelica.Icons.BasesPackage">Modelica.Icons.BasesPackage</a> (Icon for packages containing base classes).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Conditions.TestStands.BaseClasses.PartialTestStandS.png" alt="FCSys.Conditions.TestStands.BaseClasses.PartialTestStand" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_TestStands_BaseClasses.html#FCSys.Conditions.TestStands.BaseClasses.PartialTestStand">PartialTestStand</a>
@@ -62,15 +67,25 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Conditions.TestStands.BaseClasses.PartialTestStand"></a><a href="FCSys_Conditions_TestStands_BaseClasses.html#FCSys.Conditions.TestStands.BaseClasses">FCSys.Conditions.TestStands.BaseClasses</a>.PartialTestStand</h2>
 <b>Partial cell test stand</b><p>
 <img src="images/FCSys.Conditions.TestStands.BaseClasses.PartialTestStandD.png" alt="FCSys.Conditions.TestStands.BaseClasses.PartialTestStand">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top9">FCSys.BaseClasses.Icons.Names.Top9</a>, <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.UnderConstruction">Modelica.Icons.UnderConstruction</a>.
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Boolean</td><td>inclIO</td><td>false</td><td>true, if input and output are included</td></tr>
-<tr><td><a href="FCSys_Conditions_FaceBusPair.html#FCSys.Conditions.FaceBusPair.Subregion">Subregion</a></td><td>current[n_y, n_z]</td><td>redeclare FCSys.Conditions.F...</td><td>&nbsp;</td></tr>
+<tr><td><a href="FCSys_Conditions_FaceBusPair.html#FCSys.Conditions.FaceBusPair.Subregion">Subregion</a></td><td>current[n_y, n_z]</td><td>redeclare FCSys.Conditions.F&hellip;</td><td>&nbsp;</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anEnd[n_y, n_z]</td><td>Anode end plate</td></tr>
@@ -82,7 +97,10 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u[n_y, n_z]</td><td>&nbsp;</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y[n_y, n_z]</td><td>&nbsp;</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">partial </font><font color="blue">model</font> PartialTestStand <font color="darkgreen">&quot;Partial cell test stand&quot;</font>
   <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top9">FCSys.BaseClasses.Icons.Names.Top9</a>;
@@ -98,58 +116,57 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 
   <font color="blue">parameter </font>Boolean inclIO=false <font color="darkgreen">&quot;true, if input and output are included&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> anEnd[n_y, n_z] <font color="darkgreen">&quot;Anode end plate&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> caEnd[n_y, n_z] <font color="darkgreen">&quot;Cathode end plate&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> anSource[n_x_an, n_z] <font color="darkgreen">&quot;Anode source&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> anSink[n_x_an, n_z] <font color="darkgreen">&quot;Anode sink&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> caSource[n_x_ca, n_z] <font color="darkgreen">&quot;Cathode source&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> caSink[n_x_ca, n_z] <font color="darkgreen">&quot;Cathode sink&quot;</font>;</textblock>
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> anEnd[n_y, n_z] <font color="darkgreen">&quot;Anode end plate&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> caEnd[n_y, n_z] <font color="darkgreen">&quot;Cathode end plate&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> anSource[n_x_an, n_z] <font color="darkgreen">&quot;Anode source&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> anSink[n_x_an, n_z] <font color="darkgreen">&quot;Anode sink&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> caSource[n_x_ca, n_z] <font color="darkgreen">&quot;Cathode source&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> caSink[n_x_ca, n_z] <font color="darkgreen">&quot;Cathode sink&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">FCSys.Conditions.FaceBus.SubregionFlows</a> anEndCondition[n_y, n_z](<font color="blue">each </font>
-      graphite(&#39;inclC+&#39;=true, &#39;incle-&#39;=true));
-  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">FCSys.Conditions.FaceBus.SubregionFlows</a> caEndCondition[n_y, n_z](<font color="blue">each </font>
-      graphite(&#39;inclC+&#39;=true, &#39;incle-&#39;=true));
-  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">FCSys.Conditions.FaceBus.SubregionFlows</a> anSourceCondition[n_x_an, n_z](<font color="blue">each </font>
-      gas(inclH2=true, inclH2O=true));
-  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">FCSys.Conditions.FaceBus.SubregionFlows</a> anSinkCondition[n_x_an, n_z](<font color="blue">each </font>gas(
+  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">Conditions.FaceBus.SubregionFlows</a> anEndCondition[n_y, n_z](<font color="blue">each </font>graphite(
+        &#39;inclC+&#39;=true, &#39;incle-&#39;=true));
+  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">Conditions.FaceBus.SubregionFlows</a> caEndCondition[n_y, n_z](<font color="blue">each </font>graphite(
+        &#39;inclC+&#39;=true, &#39;incle-&#39;=true));
+  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">Conditions.FaceBus.SubregionFlows</a> anSourceCondition[n_x_an, n_z](<font color="blue">each </font>gas(
         inclH2=true, inclH2O=true));
-  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">FCSys.Conditions.FaceBus.SubregionFlows</a> caSourceCondition[n_x_ca, n_z](<font color="blue">each </font>
-      gas(
+  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">Conditions.FaceBus.SubregionFlows</a> anSinkCondition[n_x_an, n_z](<font color="blue">each </font>gas(
+        inclH2=true, inclH2O=true));
+  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">Conditions.FaceBus.SubregionFlows</a> caSourceCondition[n_x_ca, n_z](<font color="blue">each </font>gas(
       inclH2O=true,
       inclN2=true,
       inclO2=true));
-  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">FCSys.Conditions.FaceBus.SubregionFlows</a> caSinkCondition[n_x_ca, n_z](<font color="blue">each </font>gas(
+  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">Conditions.FaceBus.SubregionFlows</a> caSinkCondition[n_x_ca, n_z](<font color="blue">each </font>gas(
       inclH2O=true,
       inclN2=true,
       inclO2=true));
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">FCSys.Connectors.RealInputBus</a> u[n_y, n_z] <font color="blue">if </font>inclIO;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">FCSys.Connectors.RealOutputBus</a> y[n_y, n_z] <font color="blue">if </font>inclIO;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">Connectors.RealInputBus</a> u[n_y, n_z] <font color="blue">if </font>inclIO;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">Connectors.RealOutputBus</a> y[n_y, n_z] <font color="blue">if </font>inclIO;
   <font color="blue">replaceable </font><a href="FCSys_Conditions_FaceBusPair.html#FCSys.Conditions.FaceBusPair.Subregion">FCSys.Conditions.FaceBusPair.Subregion</a> current[n_y, n_z](graphite(
         &#39;inclC+&#39;=true, &#39;incle-&#39;=true)) <font color="blue">if </font>inclIO <font color="blue">constrainedby </font>
-    FCSys.Conditions.FaceBusPair.Subregion(graphite(&#39;inclC+&#39;=true, &#39;incle-&#39;=true));</textblock>
+    Conditions.FaceBusPair.Subregion(graphite(&#39;inclC+&#39;=true, &#39;incle-&#39;=true));
 
 <font color="blue">equation </font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(anSourceCondition.face, anSource);</textblock>
+  <font color="red">connect</font>(anSourceCondition.face, anSource);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(anSinkCondition.face, anSink);</textblock>
+  <font color="red">connect</font>(anSinkCondition.face, anSink);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(caSourceCondition.face, caSource);</textblock>
+  <font color="red">connect</font>(caSourceCondition.face, caSource);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(caSinkCondition.face, caSink);</textblock>
+  <font color="red">connect</font>(caSinkCondition.face, caSink);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(caEndCondition.face, caEnd);
-  <font color="red">connect</font>(current.positive, caEnd);</textblock>
+  <font color="red">connect</font>(caEndCondition.face, caEnd);
+  <font color="red">connect</font>(current.positive, caEnd);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(current.negative, anEnd);</textblock>
+  <font color="red">connect</font>(current.negative, anEnd);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u, current.u);
-  <font color="red">connect</font>(voltage.negative, anEndCondition.face);</textblock>
+  <font color="red">connect</font>(u, current.u);
+  <font color="red">connect</font>(voltage.negative, anEndCondition.face);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(caEnd, voltage.positive);
-  <font color="red">connect</font>(voltage.y, y);</textblock>
+  <font color="red">connect</font>(caEnd, voltage.positive);
+  <font color="red">connect</font>(voltage.y, y);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(anEndCondition.face, anEnd);</textblock>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>PartialTestStand;
+  <font color="red">connect</font>(anEndCondition.face, anEnd);
+<font color="blue">end </font>PartialTestStand;
 </pre>
 <hr>
 
@@ -157,9 +174,14 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 <a name="FCSys.Conditions.TestStands.BaseClasses.PartialTestStandNoIO"></a><a href="FCSys_Conditions_TestStands_BaseClasses.html#FCSys.Conditions.TestStands.BaseClasses">FCSys.Conditions.TestStands.BaseClasses</a>.PartialTestStandNoIO</h2>
 <b>Partial cell test stand without inputs/outputs</b><p>
 <img src="images/FCSys.Conditions.TestStands.BaseClasses.PartialTestStandNoIOD.png" alt="FCSys.Conditions.TestStands.BaseClasses.PartialTestStandNoIO">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top9">FCSys.BaseClasses.Icons.Names.Top9</a>.
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">partial </font><font color="blue">model</font> PartialTestStandNoIO <font color="darkgreen">
   &quot;Partial cell test stand without inputs/outputs&quot;</font>
@@ -174,30 +196,30 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=1 <font color="darkgreen">
     &quot;Number of subregions across the channel (<i>n</i><sub>z</sub>)&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">FCSys.Conditions.FaceBus.SubregionFlows</a> anEnd[n_y, n_z](<font color="blue">each </font>graphite(
+  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">Conditions.FaceBus.SubregionFlows</a> anEnd[n_y, n_z](<font color="blue">each </font>graphite(
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;=true,
-      &#39;e-&#39;(<font color="blue">redeclare </font><a href="FCSys_Conditions_Face_Normal.html#FCSys.Conditions.Face.Normal.CurrentAreic">Face.Normal.CurrentAreic</a> normal(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a>
-            spec(height=U.A/U.cm^2, duration=50)))));
-  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">FCSys.Conditions.FaceBus.SubregionFlows</a> caEnd[n_y, n_z](<font color="blue">each </font>graphite(
+      &#39;e-&#39;(<font color="blue">redeclare </font>Face.Normal.CurrentAreic normal(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a>
+            source(height=U.A/U.cm^2, duration=50)))));
+  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">Conditions.FaceBus.SubregionFlows</a> caEnd[n_y, n_z](<font color="blue">each </font>graphite(
       &#39;inclC+&#39;=true,
       &#39;incle-&#39;=true,
-      &#39;e-&#39;(<font color="blue">redeclare </font><a href="FCSys_Conditions_Face_Normal.html#FCSys.Conditions.Face.Normal.CurrentAreic">Face.Normal.CurrentAreic</a> normal(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a>
-            spec(height=U.A/U.cm^2, duration=50)))));
-  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">FCSys.Conditions.FaceBus.SubregionFlows</a> anSource[n_x_an, n_z](<font color="blue">each </font>gas(inclH2
-        =true, inclH2O=true));
-  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">FCSys.Conditions.FaceBus.SubregionFlows</a> anSink[n_x_an, n_z](<font color="blue">each </font>gas(inclH2=true,
+      &#39;e-&#39;(<font color="blue">redeclare </font>Face.Normal.CurrentAreic normal(<font color="blue">redeclare </font><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Ramp">Modelica.Blocks.Sources.Ramp</a>
+            source(height=U.A/U.cm^2, duration=50)))));
+  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">Conditions.FaceBus.SubregionFlows</a> anSource[n_x_an, n_z](<font color="blue">each </font>gas(inclH2=true,
         inclH2O=true));
-  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">FCSys.Conditions.FaceBus.SubregionFlows</a> caSource[n_x_ca, n_z](<font color="blue">each </font>gas(
+  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">Conditions.FaceBus.SubregionFlows</a> anSink[n_x_an, n_z](<font color="blue">each </font>gas(inclH2=true,
+        inclH2O=true));
+  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">Conditions.FaceBus.SubregionFlows</a> caSource[n_x_ca, n_z](<font color="blue">each </font>gas(
       inclH2O=true,
       inclN2=true,
       inclO2=true));
-  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">FCSys.Conditions.FaceBus.SubregionFlows</a> caSink[n_x_ca, n_z](<font color="blue">each </font>gas(
+  <a href="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows">Conditions.FaceBus.SubregionFlows</a> caSink[n_x_ca, n_z](<font color="blue">each </font>gas(
       inclH2O=true,
       inclN2=true,
-      inclO2=true));</textblock>
+      inclO2=true));
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Environment</a> environment;
+  <font color="blue">inner </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Environment</a> environment;
 
 <font color="blue">end </font>PartialTestStandNoIO;
 </pre>
@@ -206,7 +228,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:47:04 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:44:23 2013.
 </div>
 </body>
 </html>

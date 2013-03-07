@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.BaseClasses.Utilities.Polynomial</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="Polynomial functions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,11 +45,15 @@
       <div class="body">
 
 <h2><a name="FCSys.BaseClasses.Utilities.Polynomial"></a><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities">FCSys.BaseClasses.Utilities</a>.Polynomial</h2>
+
 <b>Polynomial functions</b>
-<p>
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.BaseClasses.Utilities.Chemistry.stoichS.png" alt="FCSys.BaseClasses.Utilities.Polynomial.F" width=20  height=20 align=top>&nbsp;<a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.F">F</a>
@@ -66,31 +71,44 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h2><img src="images/FCSys.BaseClasses.Utilities.Polynomial.FI.png" alt="FCSys.BaseClasses.Utilities.Polynomial.F" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.Polynomial.F"></a><a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial">FCSys.BaseClasses.Utilities.Polynomial</a>.F</h2>
-<b>&int;<a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.f">f</a>()&middot;d<i>x</i> evaluated at <i>x</i> with zero integration constant</b><p>
-<p><h3>Information</h3></p>
+<b>&int;<a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.f">f</a>()&middot;d<i>x</i> evaluated at <i>x</i> with zero integration constant</b>
 
-  <p>By definition, the partial derivative of this function with respect to <code>x</code>
+<h3>Information</h3>
+
+<p>By definition, the partial derivative of this function with respect to <code>x</code>
   (with <code>a</code> constant)
   is <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.f">f</a>().  The complete derivative,
   however, is <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.dF">dF</a>().</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
-<p><h3>Inputs</h3><p>
+<p>
+
+<h3>Inputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Real</td><td>x</td><td>&nbsp;</td><td>Argument</td></tr>
 <tr><td>Real</td><td>a[:]</td><td>&nbsp;</td><td>Coefficients</td></tr>
 <tr><td>Integer</td><td>n</td><td>0</td><td>Power associated with the first term (before integral)</td></tr>
 </table>
-<p><h3>Outputs</h3><p>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Real</td><td>F</td><td>Integral</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">function</font> F <font color="darkgreen">
   &quot;&int;<a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.f">f</a>()&middot;d<i>x</i> evaluated at <i>x</i> with zero integration constant&quot;</font>
   annotation(derivative=<a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.dF">dF</a>);
+  <font color="blue">import </font><a href="http://build.openmodelica.org/Documentation/Modelica.Math.html#Modelica.Math.log">Modelica.Math.log</a>;
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
   <font color="blue">input </font>Real x <font color="darkgreen">&quot;Argument&quot;</font>;
@@ -102,18 +120,24 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <font color="blue">algorithm </font>
   F := <font color="red">f</font>(
     x,
-    a .* {<font color="blue">if </font>n + i == 0<font color="blue"> then </font><font color="red">ln</font>(x)<font color="blue"> else </font>1/(n + i) <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(a, 1)},
+    a .* {<font color="blue">if </font>n + i == 0<font color="blue"> then </font><font color="red">log</font>(x)<font color="blue"> else </font>1/(n + i) <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(a, 1)},
     n + 1);
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>F;
+<font color="blue">end </font>F;
 </pre>
 <hr>
 
 <h2><img src="images/FCSys.BaseClasses.Utilities.Polynomial.FI.png" alt="FCSys.BaseClasses.Utilities.Polynomial.dF" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.Polynomial.dF"></a><a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial">FCSys.BaseClasses.Utilities.Polynomial</a>.dF</h2>
-<b>Derivative of <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.F">F</a>()</b><p>
-<p><h3>Information</h3></p>
+<b>Derivative of <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.F">F</a>()</b>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
-<p><h3>Inputs</h3><p>
+<p>
+
+<h3>Inputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Real</td><td>x</td><td>&nbsp;</td><td>Argument</td></tr>
@@ -122,15 +146,23 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td>Real</td><td>dx</td><td>&nbsp;</td><td>Derivative of argument</td></tr>
 <tr><td>Real</td><td>da[size(a, 1)]</td><td>&nbsp;</td><td>Derivatives of coefficients</td></tr>
 </table>
-<p><h3>Outputs</h3><p>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Real</td><td>dF</td><td>Derivative</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">function</font> dF <font color="darkgreen">
   &quot;Derivative of <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.F">F</a>()&quot;</font>
+  <font color="blue">import </font><a href="http://build.openmodelica.org/Documentation/Modelica.Math.html#Modelica.Math.log">Modelica.Math.log</a>;
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a>;
 
   <font color="blue">input </font>Real x <font color="darkgreen">&quot;Argument&quot;</font>;
@@ -147,7 +179,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     a,
     n)*dx + <font color="red">f</font>(
     x,
-    da .* {<font color="blue">if </font>n + i == 0<font color="blue"> then </font><font color="red">ln</font>(x)<font color="blue"> else </font>1/(n + i) <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(a, 1)},
+    da .* {<font color="blue">if </font>n + i == 0<font color="blue"> then </font><font color="red">log</font>(x)<font color="blue"> else </font>1/(n + i) <font color="blue">for </font>i<font color="blue"> in </font>1:<font color="red">size</font>(a, 1)},
     n + 1);
 
 <font color="blue">end </font>dF;
@@ -156,8 +188,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h2><img src="images/FCSys.BaseClasses.Utilities.Polynomial.FI.png" alt="FCSys.BaseClasses.Utilities.Polynomial.f" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.Polynomial.f"></a><a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial">FCSys.BaseClasses.Utilities.Polynomial</a>.f</h2>
-<b>Polynomial expressed in form: <i>f</i> = ((&hellip; + <i>a</i><sub>-1-<i>n</i></sub>)/<i>x</i> + <i>a</i><sub>-<i>n</i></sub>)/<i>x</i> + <i>a</i><sub>1-<i>n</i></sub> + <i>x</i>&middot;(<i>a</i><sub>2-<i>n</i></sub> + <i>x</i>&middot;(<i>a</i><sub>3-<i>n</i></sub> + &hellip;))</b><p>
-<p><h3>Information</h3></p>
+<b>Polynomial expressed in form: <i>f</i> = ((&hellip; + <i>a</i><sub>-1-<i>n</i></sub>)/<i>x</i> + <i>a</i><sub>-<i>n</i></sub>)/<i>x</i> + <i>a</i><sub>1-<i>n</i></sub> + <i>x</i>&middot;(<i>a</i><sub>2-<i>n</i></sub> + <i>x</i>&middot;(<i>a</i><sub>3-<i>n</i></sub> + &hellip;))</b>
+
+<h3>Information</h3>
+
 <p>For high-order polynomials, this
   is more computationally efficient than the form
   &Sigma;<i>a</i><sub><i>i</i></sub> <i>x</i><sup><i>n</i> + <i>i</i> - 1</sup>.</p>
@@ -166,21 +200,32 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <code>n + size(a, 1) - 1</code> (not <code>n</code>).</p>
 
   <p>The derivative of this function is
-  <a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.df">df</a>().</p><p>
+  <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.df">df</a>().</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
-<p><h3>Inputs</h3><p>
+<p>
+
+<h3>Inputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Real</td><td>x</td><td>&nbsp;</td><td>Argument</td></tr>
 <tr><td>Real</td><td>a[:]</td><td>&nbsp;</td><td>Coefficients</td></tr>
 <tr><td>Integer</td><td>n</td><td>0</td><td>Power of the first term</td></tr>
 </table>
-<p><h3>Outputs</h3><p>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Real</td><td>f</td><td>Result</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">function</font> f <font color="darkgreen">
   &quot;Polynomial expressed in form: <i>f</i> = ((&hellip; + <i>a</i><sub>-1-<i>n</i></sub>)/<i>x</i> + <i>a</i><sub>-<i>n</i></sub>)/<i>x</i> + <i>a</i><sub>1-<i>n</i></sub> + <i>x</i>&middot;(<i>a</i><sub>2-<i>n</i></sub> + <i>x</i>&middot;(<i>a</i><sub>3-<i>n</i></sub> + &hellip;))&quot;</font>
@@ -194,8 +239,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">output </font>Real f <font color="darkgreen">&quot;Result&quot;</font>;
 
 <font color="blue">protected </font>
-  <textblock type="model" expanded="false" path="FCSys.BaseClasses.Utilities.Polynomial.f.positivePoly"><font color="blue">function</font> positivePoly <font color="darkgreen">
-    &quot;polynomial expressed in form: y = x*(a<sub>1</sub> + x*(a<sub>2</sub> + &hellip;))&quot;</font>
+
+    &quot;Polynomial expressed in form: y = x*(a<sub>1</sub> + x*(a<sub>2</sub> + &hellip;))&quot;</font>
 
     <font color="blue">input </font>Real x <font color="darkgreen">&quot;Argument&quot;</font>;
     <font color="blue">input </font>Real a[:] <font color="darkgreen">&quot;Coefficients&quot;</font>;
@@ -214,10 +259,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     <font color="darkgreen">// Also, in Dymola 7.4, if this function is called from a stack of (nested)</font>
     <font color="darkgreen">// functions, it seems to reduce the depth allowed for the nested</font>
     <font color="darkgreen">// parentheses.  The implementation here (&quot;unrolled&quot; only up to the 10th</font>
-    <font color="darkgreen">// order) allows poly() to be called from within one other function within a</font>
-    <font color="darkgreen">// model.</font>
+    <font color="darkgreen">// order) allows poly() to be called from within one other function within</font>
+    <font color="darkgreen">// a model.</font>
 
-  <font color="blue">end </font>positivePoly</textblock>;
+  <font color="blue">end </font>positivePoly;
 
 <font color="blue">algorithm </font>
   f := (<font color="blue">if </font>n &lt; 0<font color="blue"> then </font>(<font color="blue">if </font>n + <font color="red">size</font>(a, 1) &lt; 0<font color="blue"> then </font>x^(n + <font color="red">size</font>(a, 1))<font color="blue"> else </font>1)*<font color="red">
@@ -227,19 +272,24 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
      else </font>0);
   <font color="darkgreen">// Here, Dymola 7.4 won&#39;t allow indexing via a[1 + max(0, 1 - n):end], so</font>
   <font color="darkgreen">// a[1 + max(0, 1 - n):size(a, 1)] is necessary.</font>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>f;
+<font color="blue">end </font>f;
 </pre>
 <hr>
 
 <h2><img src="images/FCSys.BaseClasses.Utilities.Polynomial.FI.png" alt="FCSys.BaseClasses.Utilities.Polynomial.df" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.Polynomial.df"></a><a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial">FCSys.BaseClasses.Utilities.Polynomial</a>.df</h2>
-<b>Derivative of <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.f">f</a>()</b><p>
-<p><h3>Information</h3></p>
+<b>Derivative of <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.f">f</a>()</b>
+
+<h3>Information</h3>
 
 <p>The derivative of this function is
-  <a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.d2f">d2f</a>().</p><p>
+  <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.d2f">d2f</a>().</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
-<p><h3>Inputs</h3><p>
+<p>
+
+<h3>Inputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Real</td><td>x</td><td>&nbsp;</td><td>Argument</td></tr>
@@ -248,12 +298,19 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td>Real</td><td>dx</td><td>&nbsp;</td><td>Derivative of argument</td></tr>
 <tr><td>Real</td><td>da[size(a, 1)]</td><td>&nbsp;</td><td>Derivatives of coefficients</td></tr>
 </table>
-<p><h3>Outputs</h3><p>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Real</td><td>df</td><td>Derivative</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">function</font> df <font color="darkgreen">
   &quot;Derivative of <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.f">f</a>()&quot;</font>
@@ -276,16 +333,22 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     x,
     da,
     n);
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>df;
+<font color="blue">end </font>df;
 </pre>
 <hr>
 
 <h2><img src="images/FCSys.BaseClasses.Utilities.Polynomial.FI.png" alt="FCSys.BaseClasses.Utilities.Polynomial.d2f" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.BaseClasses.Utilities.Polynomial.d2f"></a><a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial">FCSys.BaseClasses.Utilities.Polynomial</a>.d2f</h2>
-<b>Derivative of <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.df">df</a>()</b><p>
-<p><h3>Information</h3></p>
+<b>Derivative of <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.df">df</a>()</b>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
-<p><h3>Inputs</h3><p>
+<p>
+
+<h3>Inputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Real</td><td>x</td><td>&nbsp;</td><td>Argument</td></tr>
@@ -296,12 +359,19 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td>Real</td><td>d2x</td><td>&nbsp;</td><td>Second derivative of argument</td></tr>
 <tr><td>Real</td><td>d2a[size(a, 1)]</td><td>&nbsp;</td><td>Second derivatives of coefficients</td></tr>
 </table>
-<p><h3>Outputs</h3><p>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Real</td><td>d2f</td><td>Second derivative</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">function</font> d2f <font color="darkgreen">
   &quot;Derivative of <a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.df">df</a>()&quot;</font>
@@ -331,7 +401,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:53:14 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:48:59 2013.
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Regions.AnFPs</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="Anode flow plates">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,11 +45,15 @@
       <div class="body">
 
 <h2><a name="FCSys.Regions.AnFPs"></a><a href="FCSys_Regions.html#FCSys.Regions">FCSys.Regions</a>.AnFPs</h2>
+
 <b>Anode flow plates</b>
-<p>
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Regions.AnFPs.AnFPS.png" alt="FCSys.Regions.AnFPs.AnFP" width=20  height=20 align=top>&nbsp;<a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a>
@@ -62,7 +67,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Regions.AnFPs.AnFP"></a><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs">FCSys.Regions.AnFPs</a>.AnFP</h2>
 <b>Anode flow plate</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.AnFPs.AnFP">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
 
 <p>This model describes the storage and transport of chemical/electrochemical
 species in and through the anode flow plate of a PEMFC.
@@ -71,7 +77,11 @@ and the y axis extends along the length of the channel. The model is
 bidirectional, so that either <code>yNegative</code> or <code>yPositive</code> can be
 used as the inlet. The z axis extends across the width of the channel.</p><p>
 Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base model for a 3D array of subregions).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.1</td><td>Volumetric porosity [1]</td></tr>
@@ -85,7 +95,11 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td>Boolean</td><td>inclFacesY</td><td>true</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative face along the x axis</td></tr>
@@ -95,10 +109,13 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> AnFP <font color="darkgreen">&quot;Anode flow plate&quot;</font>
-  <font color="darkgreen">//extends FCSys.BaseClasses.Icons.Names.Top4;</font>
+  <font color="darkgreen">// extends FCSys.BaseClasses.Icons.Names.Top4;</font>
 
   <font color="blue">extends </font><a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a>(
     L_x=<font color="red">fill</font>(8*U.mm/1, 1),
@@ -113,31 +130,17 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
       <font color="blue">each </font>gas(
         inclH2=true,
         inclH2O=true,
-        H2(
-          p_IC=(1 - environment.x_H2O)*environment.p,
-          inclFaceNegX=false,
-          inclFaceNegZ=false,
-          inclFacePosZ=false),
-        H2O(
-          p_IC=environment.x_H2O*environment.p,
-          inclFaceNegX=false,
-          inclFaceNegZ=false,
-          inclFacePosZ=false)),
+        H2(p_IC=(1 - environment.x_H2O)*environment.p),
+        H2O(p_IC=environment.x_H2O*environment.p)),
       <font color="blue">each </font>graphite(
         &#39;inclC+&#39;=true,
         &#39;incle-&#39;=true,
-        &#39;C+&#39;(V_IC=V - xV),
-        &#39;e-&#39;(
-          inclFaceNegY=false,
-          inclFacePosY=false,
-          inclFaceNegZ=false,
-          inclFacePosZ=false)),
-      <font color="blue">each </font>liquid(inclH2O=true, H2O(
-          V_IC=0,
-          inclFaceNegX=false,
-          inclFaceNegZ=false,
-          inclFacePosZ=false))));
+        &#39;C+&#39;(V_IC=V - xV)),
+      <font color="blue">each </font>liquid(inclH2O=true, H2O(V_IC=0))));
   <font color="darkgreen">// **for e-: setVelY=true,</font>
+  <font color="darkgreen">// **set phi[x] = 0 for gases if terminal velocity/bulk current is negligible w.r.t.</font>
+  <font color="darkgreen">// diffusion, since momentum time constant is very, very fast (see 2/3/13 p.1</font>
+  <font color="darkgreen">// notes); do the same for all other layers</font>
 
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> x(nominal=1) = 0.1 <font color="darkgreen">&quot;Volumetric porosity&quot;</font>;
 
@@ -161,8 +164,8 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
   <font color="darkgreen">// DeWitt (2002, p. 909).  See FCSys.Subregions.Species.C.Fixed for more</font>
   <font color="darkgreen">// data.</font>
 
-  <font color="darkgreen">// Thermal resistivity of some other flowplate materials from [Incropera2002,</font>
-  <font color="darkgreen">// pp. 905 &amp;amp; 907]:</font>
+  <font color="darkgreen">// Thermal resistivity of some other flowplate materials from</font>
+  <font color="darkgreen">// [Incropera2002, pp. 905 &amp;amp; 907]:</font>
   <font color="darkgreen">//                                   Stainless steel</font>
   <font color="darkgreen">//                                   ------------------------------------------------------------------------------------</font>
   <font color="darkgreen">//             Aluminium (pure)      AISI 302              AISI 304              AISI 316              AISI 347</font>
@@ -203,7 +206,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
   <font color="darkgreen">//         @ 300K, 0.03531 bar (saturation pressure): 9.09e-6 Pa.s</font>
   <font color="darkgreen">//         @ 350K, 0.4163 bar (saturation pressure): 1.109e-5 Pa.s</font>
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
+  <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
 
 <font color="blue">end </font>AnFP;
 </pre>
@@ -213,31 +216,36 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <a name="FCSys.Regions.AnFPs.GM"></a><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs">FCSys.Regions.AnFPs</a>.GM</h2>
 <b>General Motors cathodic test flow plate and current collector</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.AnFPs.GM">
-<p><h3>Information</h3></p>
 
-  <p>Assumptions:<ol>
+<h3>Information</h3>
+
+<p>Assumptions:<ol>
 <li>The x-axis length of this region is the thickness
-of the GM-compatible <a href="../resources/documentation/Regions/AnFPs/GM/Flow field.pdf">flow field</a>,
-<a href="../resources/documentation/Regions/AnFPs/GM/Current collector plate.pdf">current collector plate</a>,
+of the GM-compatible <a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/resources/documentation/Regions/AnFPs/GM/Flow field.pdf">flow field</a>,
+<a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/resources/documentation/Regions/AnFPs/GM/Current collector plate.pdf">current collector plate</a>,
  and end plate combined.  The material properties are those of epoxy-filled
 graphite, although the current collector is actually gold-plated copper and the end plate is actually aluminium.</li>
 <li>The y-axis length of this region is the length of the double-serpentine flow channels of the
 GM-compatible
-anode <a href="../resources/documentation/Regions/AnFPs/GM/Flow field.pdf">flow field</a> as if they were straightened.</li>
+anode <a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/resources/documentation/Regions/AnFPs/GM/Flow field.pdf">flow field</a> as if they were straightened.</li>
 <li>The z-axis length of this region is 50 cm<sup>2</sup> divided by the y-axis length.  Only the active area
 (50 cm<sup>2</sup>) is modeled&mdash;not the entire area (100 cm<sup>2</sup>).
 <li>It is assumed that the solid (graphite/epoxy composite) constitutes the entire volume except for the flow channels.
 In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
 </ol></p>
+
 <p>Additional notes:
 <ul>
 <li>The default thermal resistivity ((1/95) m K/W) is that of Entegris/Poco Graphite AXM-5Q
 [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Entegris2012</a>].</li>
-</ul>
-</p>
+</ul></p>
 <p>
 Extends from <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a> (Anode flow plate).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.011</td><td>Volumetric porosity [1]</td></tr>
@@ -249,7 +257,11 @@ Extends from <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative face along the x axis</td></tr>
@@ -259,7 +271,10 @@ Extends from <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> GM <font color="darkgreen">
   &quot;General Motors cathodic test flow plate and current collector&quot;</font>
@@ -270,7 +285,7 @@ Extends from <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a
     L_y=<font color="red">fill</font>(1.543*U.m, 1),
     L_z=<font color="red">fill</font>((5/1.543)*U.mm, 1),
     x=0.011);
-<textblock type="annotcomp" expanded="false">
+
 <font color="blue">end </font>GM;
 </pre>
       </div>
@@ -278,7 +293,7 @@ Extends from <a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:49:42 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:47:00 2013.
 </div>
 </body>
 </html>

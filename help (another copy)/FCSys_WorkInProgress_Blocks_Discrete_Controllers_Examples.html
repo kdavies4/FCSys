@@ -1,0 +1,139 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Examples<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples"></A><A HREF="FCSys_WorkInProgress_Blocks_Discrete_Controllers.html#FCSys.WorkInProgress.Blocks.Discrete.Controllers"
+>FCSys.WorkInProgress.Blocks.Discrete.Controllers</A>.Examples</H2>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_ExamplesPackage.html#Modelica.Icons.ExamplesPackage"
+>Modelica.Icons.ExamplesPackage</A> (Icon for packages containing runnable examples).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples.QPSolverMathworksExampleS.png" ALT="FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples.QPSolverMathworksExample" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Discrete_Controllers_Examples.html#FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples.QPSolverMathworksExample"
+>QPSolverMathworksExample</A>
+</TD><TD>Quadratic programming example from <a href="http://www.mathworks.com/access/helpdesk/help/toolbox/optim/ug/quadprog.html">http://www.mathworks.com/access/helpdesk/help/toolbox/optim/ug/quadprog.html</a>, accessed 12/11/09</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples.QPSolverMathworksExampleS.png" ALT="FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples.QPSolverFerreauExample" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Discrete_Controllers_Examples.html#FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples.QPSolverFerreauExample"
+>QPSolverFerreauExample</A>
+</TD><TD>First and second quadratic programming problems in Section 3.3, &quot;A Tutorial Example&quot;, p. 12 of Ferreau et al. (2009)</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE QPSolverMathworksExample<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples.QPSolverMathworksExampleI.png" ALT="FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples.QPSolverMathworksExample" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples.QPSolverMathworksExample"></A><A HREF="FCSys_WorkInProgress_Blocks_Discrete_Controllers_Examples.html#FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples"
+>FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples</A>.QPSolverMathworksExample</H2>
+<B>Quadratic programming example from <a href="http://www.mathworks.com/access/helpdesk/help/toolbox/optim/ug/quadprog.html">http://www.mathworks.com/access/helpdesk/help/toolbox/optim/ug/quadprog.html</a>, accessed 12/11/09</B><p>
+<IMG SRC="FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples.QPSolverMathworksExampleD.png" ALT="FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples.QPSolverMathworksExample">
+<P><H3>Information</H3></P>
+<PRE></pre><p>This should give a solution of <code>qPSolver.y = {0.6667, 1.3333}</code>.</p><pre></PRE><P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples).
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> QPSolverMathworksExample <font color="darkgreen">
+  &quot;</pre>Quadratic programming example from <a href=\"http://www.mathworks.com/access/helpdesk/help/toolbox/optim/ug/quadprog.html\">http://www.mathworks.com/access/helpdesk/help/toolbox/optim/ug/quadprog.html</a>, accessed 12/11/09<pre>&quot;</font>
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_WorkInProgress_Blocks_Discrete_Controllers_BaseClasses.html#FCSys.WorkInProgress.Blocks.Discrete.Controllers.BaseClasses.QPSolver"
+>FCSys.WorkInProgress.Blocks.Discrete.Controllers.BaseClasses.QPSolver</A>
+    qPSolver(
+    samplePeriod=1,
+    H=[1, -1; -1, 2],
+    J={-2,-6},
+    G=[1, 1; -1, 2; 2, 1],
+    JAsParam=true,
+    n_y=2,
+    y_max=Modelica.Constants.inf*<font color="red">ones</font>(2),
+    Gx_min=-Modelica.Constants.inf*<font color="red">ones</font>(3),
+    y_min=<font color="red">zeros</font>(2),
+    Gx_max={2,2,3},
+    AxMaxAsParam=true);
+
+<font color="blue">end </font>QPSolverMathworksExample;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE QPSolverFerreauExample<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples.QPSolverMathworksExampleI.png" ALT="FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples.QPSolverFerreauExample" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples.QPSolverFerreauExample"></A><A HREF="FCSys_WorkInProgress_Blocks_Discrete_Controllers_Examples.html#FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples"
+>FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples</A>.QPSolverFerreauExample</H2>
+<B>First and second quadratic programming problems in Section 3.3, &quot;A Tutorial Example&quot;, p. 12 of Ferreau et al. (2009)</B><p>
+<IMG SRC="FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples.QPSolverFerreauExampleD.png" ALT="FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples.QPSolverFerreauExample">
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples).
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> QPSolverFerreauExample <font color="darkgreen">
+  &quot;First and second quadratic programming problems in Section 3.3, \&quot;A Tutorial Example\&quot;, p. 12 of Ferreau et al. (2009)&quot;</font>
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_WorkInProgress_Blocks_Discrete_Controllers_BaseClasses.html#FCSys.WorkInProgress.Blocks.Discrete.Controllers.BaseClasses.QPSolver"
+>FCSys.WorkInProgress.Blocks.Discrete.Controllers.BaseClasses.QPSolver</A>
+    qPSolver(
+    samplePeriod=1,
+    H=[1, 0; 0, 0.5],
+    G=[1, 1],
+    n_y=2,
+    JAsParam=false,
+    yMinAsParam=false,
+    yMaxAsParam=false,
+    GxMinAsParam=false,
+    AxMaxAsParam=false);
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Step"
+>Modelica.Blocks.Sources.Step</A> J[2](
+    <font color="blue">each </font>startTime=1,
+    height={-0.5,0.5},
+    offset={1.5,1});
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Step"
+>Modelica.Blocks.Sources.Step</A> y_min[2](
+    <font color="blue">each </font>startTime=1,
+    height={-0.5,1},
+    offset={0.5,-2});
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Step"
+>Modelica.Blocks.Sources.Step</A> y_max[2](
+    <font color="blue">each </font>startTime=1,
+    height={0,-2.5},
+    offset={5,2});
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Step"
+>Modelica.Blocks.Sources.Step</A> Gx_max[1](
+    <font color="blue">each </font>startTime=1,
+    height={-1},
+    offset={2});
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Step"
+>Modelica.Blocks.Sources.Step</A> Gx_min[1](
+    <font color="blue">each </font>startTime=1,
+    height={-1},
+    offset={-1});</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(J.y, qPSolver.J_set);
+  <font color="red">connect</font>(y_min.y, qPSolver.y_min_set);
+  <font color="red">connect</font>(y_max.y, qPSolver.y_max_set);
+  <font color="red">connect</font>(Gx_min.y, qPSolver.Gx_min_set);
+  <font color="red">connect</font>(Gx_max.y, qPSolver.Gx_max_set);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>QPSolverFerreauExample;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 01:14:10 2013.
+</address></BODY>
+</HTML>

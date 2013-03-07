@@ -1,0 +1,309 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.WorkInProgress.Blocks.Discrete.Controllers</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Controllers<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.WorkInProgress.Blocks.Discrete.Controllers"></A><A HREF="FCSys_WorkInProgress_Blocks_Discrete.html#FCSys.WorkInProgress.Blocks.Discrete"
+>FCSys.WorkInProgress.Blocks.Discrete</A>.Controllers</H2>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package"
+>Modelica.Icons.Package</A> (Icon for standard packages).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Discrete.Controllers.ExamplesS.png" ALT="FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Discrete_Controllers_Examples.html#FCSys.WorkInProgress.Blocks.Discrete.Controllers.Examples"
+>Examples</A>
+</TD><TD>&nbsp;</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPCS.png" ALT="FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPC" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Discrete_Controllers.html#FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPC"
+>MPC</A>
+</TD><TD>Model predictive controller</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPCS.png" ALT="FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPCWRej" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Discrete_Controllers.html#FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPCWRej"
+>MPCWRej</A>
+</TD><TD>Model predictive controller with disturbance rejection</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Discrete.Controllers.BaseClassesS.png" ALT="FCSys.WorkInProgress.Blocks.Discrete.Controllers.BaseClasses" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Discrete_Controllers_BaseClasses.html#FCSys.WorkInProgress.Blocks.Discrete.Controllers.BaseClasses"
+>BaseClasses</A>
+</TD><TD>Base classes (not generally for direct use)</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE MPC<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPCI.png" ALT="FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPC" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPC"></A><A HREF="FCSys_WorkInProgress_Blocks_Discrete_Controllers.html#FCSys.WorkInProgress.Blocks.Discrete.Controllers"
+>FCSys.WorkInProgress.Blocks.Discrete.Controllers</A>.MPC</H2>
+<B>Model predictive controller</B><p>
+<IMG SRC="FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPCD.png" ALT="FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPC">
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_WorkInProgress_Blocks_Discrete_BaseClasses.html#FCSys.WorkInProgress.Blocks.Discrete.BaseClasses.DiscreteBlock"
+>FCSys.WorkInProgress.Blocks.Discrete.BaseClasses.DiscreteBlock</A> (Base class of discrete blocks).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>&nbsp;</TD><TD>samplePeriod</TD><TD>&nbsp;</TD><TD>Sample period of species</TD></TR>
+<TR><TD>&nbsp;</TD><TD>startTime</TD><TD>0</TD><TD>First sample time instant</TD></TR>
+<TR><TD>Real</TD><TD>A[:, size(A, 1)]</TD><TD>[.24, 0, .1787, 0; -.3722, 1...</TD><TD>System gain of discrete-time state space model (old state to new state)</TD></TR>
+<TR><TD>Real</TD><TD>B[size(A, 1), :]</TD><TD>[-1.2346; -1.4383; -4.4828; ...</TD><TD>Input gain of discrete-time state space model (actuation to new state)</TD></TR>
+<TR><TD>Real</TD><TD>C[:, size(A, 1)]</TD><TD>[0, 1, 0, 0; 0, 0, 0, 1; -12...</TD><TD>Output gain of discrete-time state space model (old state to measurement)</TD></TR>
+<TR><TD>Integer</TD><TD>n_p</TD><TD>10</TD><TD>Prediction horizon</TD></TR>
+<TR><TD>Real</TD><TD>act_min[size(B, 2)]</TD><TD>-ones(size(B, 2))</TD><TD>Minimum actuation</TD></TR>
+<TR><TD>Real</TD><TD>act_max[size(B, 2)]</TD><TD>ones(size(B, 2))</TD><TD>Maximum actuation</TD></TR>
+<TR><TD>Real</TD><TD>act_SS[n_act]</TD><TD>zeros(n_act)</TD><TD>Steady state actuation</TD></TR>
+<TR><TD>Real</TD><TD>x_SS[n_x]</TD><TD>zeros(n_x)</TD><TD>Steady states</TD></TR>
+<TR><TD>Real</TD><TD>mea_SS[n_sen]</TD><TD>zeros(n_sen)</TD><TD>Steady state measurement</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>x[n_x]</TD><TD>State</TD></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>ref[n_sen]</TD><TD>Reference state</TD></TR>
+<TR><TD>output <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>RealOutput</A></TD><TD>act[n_act]</TD><TD>Actuation</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">block</font> MPC <font color="darkgreen">&quot;Model predictive controller&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_WorkInProgress_Blocks_Discrete_BaseClasses.html#FCSys.WorkInProgress.Blocks.Discrete.BaseClasses.DiscreteBlock"
+>FCSys.WorkInProgress.Blocks.Discrete.BaseClasses.DiscreteBlock</A>;
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>Connectors.RealInput</A> x[n_x] <font color="darkgreen">&quot;State&quot;</font>;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>Connectors.RealInput</A> ref[n_sen] <font color="darkgreen">&quot;Reference state&quot;</font>;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>Connectors.RealOutput</A> act[n_act] <font color="darkgreen">&quot;Actuation&quot;</font>;</textblock>
+  <font color="blue">parameter </font>Real A[:, <font color="red">size</font>(A, 1)]=[.24, 0, .1787, 0; -.3722, 1, .2703, 0; -.9901,
+      0, .1389, 0; -48.9354, 64.1, 2.3992, 1] <font color="darkgreen">
+    &quot;System gain of discrete-time state space model (old state to new state)&quot;</font>;
+  <font color="blue">parameter </font>Real B[<font color="red">size</font>(A, 1), :]=[-1.2346; -1.4383; -4.4828; -1.7999] <font color="darkgreen">
+    &quot;Input gain of discrete-time state space model (actuation to new state)&quot;</font>;
+  <font color="blue">parameter </font>Real C[:, <font color="red">size</font>(A, 1)]=[0, 1, 0, 0; 0, 0, 0, 1; -128.2, 128.2, 0, 0]
+    <font color="darkgreen">&quot;Output gain of discrete-time state space model (old state to measurement)&quot;</font>;
+  <font color="blue">parameter </font>Integer n_p=10 <font color="darkgreen">&quot;Prediction horizon&quot;</font>;
+  <font color="blue">constant </font>Integer n_c=3 <font color="darkgreen">&quot;Control horizon&quot;</font>;
+  <font color="blue">parameter </font>Real act_min[<font color="red">size</font>(B, 2)]=-<font color="red">ones</font>(<font color="red">size</font>(B, 2)) <font color="darkgreen">&quot;Minimum actuation&quot;</font>;
+  <font color="blue">parameter </font>Real act_max[<font color="red">size</font>(B, 2)]=<font color="red">ones</font>(<font color="red">size</font>(B, 2)) <font color="darkgreen">&quot;Maximum actuation&quot;</font>;
+  <font color="blue">parameter </font>Real[n_act] act_SS=<font color="red">zeros</font>(n_act) <font color="darkgreen">&quot;Steady state actuation&quot;</font>;
+  <font color="blue">parameter </font>Real[n_x] x_SS=<font color="red">zeros</font>(n_x) <font color="darkgreen">&quot;Steady states&quot;</font>;
+  <font color="blue">parameter </font>Real[n_sen] mea_SS=<font color="red">zeros</font>(n_sen) <font color="darkgreen">&quot;Steady state measurement&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_act=<font color="red">size</font>(B, 2) <font color="darkgreen">&quot;Number of actuators&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_x=<font color="red">size</font>(A, 1) <font color="darkgreen">&quot;Number of states&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_sen=<font color="red">size</font>(C, 1) <font color="darkgreen">&quot;Number of sensors&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Real[n_p*n_sen, n_x] L=<font color="red">BaseClasses.ObservabilityMatrix</font>(
+      A=A,
+      C=C,
+      n_p=n_p);
+  <font color="blue">final </font><font color="blue">parameter </font>Real[n_p*n_sen, n_act] Y=<font color="red">BaseClasses.YPredictionMatrix</font>(
+      A=A,
+      B=B,
+      C=C,
+      n_p=n_p);
+  <font color="blue">final </font><font color="blue">parameter </font>Real[n_p*n_sen, n_c*n_act] Theta=<font color="red">
+      BaseClasses.ThetaPredictionMatrix</font>(
+      Y=Y,
+      n_c=n_c,
+      n_p=n_p);
+  <font color="blue">final </font><font color="blue">parameter </font>Real[n_c*n_act, n_p*n_sen] G_part=2*<font color="red">transpose</font>(Theta)*10;
+  <font color="blue">final </font><font color="blue">parameter </font>Real[n_c*n_act, n_c*n_act] H=G_part*Theta + 2*<font color="red">identity</font>(n_c*
+      n_act);
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_WorkInProgress_Blocks_Math.html#FCSys.WorkInProgress.Blocks.Math.AddSkipInclIncl"
+>FCSys.WorkInProgress.Blocks.Math.AddSkipInclIncl</A> addSkipInclIncl3(<font color="blue">final </font>
+      isPos2=false, <font color="blue">final </font>n=n_x);
+  <A HREF="FCSys_WorkInProgress_Blocks_Continuous_Sources.html#FCSys.WorkInProgress.Blocks.Continuous.Sources.Constant"
+>FCSys.WorkInProgress.Blocks.Continuous.Sources.Constant</A> xConst(<font color="blue">final </font>k=x_SS);
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.MatrixGain"
+>Modelica.Blocks.Math.MatrixGain</A> LGain(<font color="blue">final </font>K=L);
+  <A HREF="FCSys_WorkInProgress_Blocks_Math.html#FCSys.WorkInProgress.Blocks.Math.AddInclInclIncl"
+>FCSys.WorkInProgress.Blocks.Math.AddInclInclIncl</A> addInclInclIncl(<font color="blue">final </font>n=n_p*
+        n_sen, <font color="blue">final </font>isPos3=false);
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.MatrixGain"
+>Modelica.Blocks.Math.MatrixGain</A> G_partGain(<font color="blue">final </font>K=G_part);
+  <A HREF="FCSys_WorkInProgress_Blocks_Discrete_Controllers_BaseClasses.html#FCSys.WorkInProgress.Blocks.Discrete.Controllers.BaseClasses.QPSolver"
+>FCSys.WorkInProgress.Blocks.Discrete.Controllers.BaseClasses.QPSolver</A>
+    qPSolver(
+    <font color="blue">final </font>y_min=-Modelica.Constants.inf*<font color="red">ones</font>(n_act),
+    <font color="blue">final </font>y_max=Modelica.Constants.inf*<font color="red">ones</font>(n_act),
+    <font color="blue">final </font>H=H,
+    <font color="blue">final </font>G=<font color="red">zeros</font>(0, <font color="red">size</font>(H, 2)),
+    <font color="blue">final </font>n_y=n_act,
+    <font color="blue">final </font>samplePeriod=samplePeriod,
+    <font color="blue">final </font>startTime=startTime);
+  <A HREF="FCSys_WorkInProgress_Blocks_Math.html#FCSys.WorkInProgress.Blocks.Math.AddSkipInclIncl"
+>FCSys.WorkInProgress.Blocks.Math.AddSkipInclIncl</A> addSkipInclIncl2(<font color="blue">final </font>
+      isPos2=false, <font color="blue">final </font>n=n_sen);
+  <A HREF="FCSys_WorkInProgress_Blocks_Continuous_Sources.html#FCSys.WorkInProgress.Blocks.Continuous.Sources.Constant"
+>FCSys.WorkInProgress.Blocks.Continuous.Sources.Constant</A> meaConst(<font color="blue">final </font>k=
+        mea_SS);
+  <A HREF="FCSys_WorkInProgress_Blocks_Routing.html#FCSys.WorkInProgress.Blocks.Routing.Duplicate"
+>FCSys.WorkInProgress.Blocks.Routing.Duplicate</A> duplicate(<font color="blue">final </font>n_in=n_sen, <font color="blue">
+      final </font>n_dup=n_p);
+  <A HREF="FCSys_WorkInProgress_Blocks_Discrete.html#FCSys.WorkInProgress.Blocks.Discrete.UnitDelay"
+>FCSys.WorkInProgress.Blocks.Discrete.UnitDelay</A> unitDelay(
+    <font color="blue">final </font>y_0=<font color="red">zeros</font>(n_act),
+    <font color="blue">final </font>samplePeriod=samplePeriod,
+    <font color="blue">final </font>startTime=startTime);
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.MatrixGain"
+>Modelica.Blocks.Math.MatrixGain</A> YGain(<font color="blue">final </font>K=Y);
+  <A HREF="FCSys_WorkInProgress_Blocks_Math.html#FCSys.WorkInProgress.Blocks.Math.AddInclInclSkip"
+>FCSys.WorkInProgress.Blocks.Math.AddInclInclSkip</A> addSkipInclIncl1(<font color="blue">final </font>n=
+        n_act);</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(addInclInclIncl.y, G_partGain.u);
+  <font color="red">connect</font>(YGain.y, addInclInclIncl.u_1);
+  <font color="red">connect</font>(addSkipInclIncl3.y, LGain.u);
+  <font color="red">connect</font>(xConst.y, addSkipInclIncl3.u_2);
+  <font color="red">connect</font>(duplicate.y, addInclInclIncl.u_3);
+  <font color="red">connect</font>(addSkipInclIncl2.y, duplicate.u);
+  <font color="red">connect</font>(meaConst.y, addSkipInclIncl2.u_2);
+  <font color="red">connect</font>(LGain.y, addInclInclIncl.u_2);
+  <font color="red">connect</font>(ref, addSkipInclIncl2.u_1);
+  <font color="red">connect</font>(x, addSkipInclIncl3.u_1);
+  <font color="red">connect</font>(qPSolver.J_set, G_partGain.y);
+  <font color="red">connect</font>(unitDelay.y, YGain.u);
+  <font color="red">connect</font>(addSkipInclIncl1.y, unitDelay.u);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(addSkipInclIncl1.y, act);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(addSkipInclIncl1.u_2, qPSolver.y);
+  <font color="red">connect</font>(unitDelay.y, addSkipInclIncl1.u_1);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>MPC;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE MPCWRej<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPCI.png" ALT="FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPCWRej" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPCWRej"></A><A HREF="FCSys_WorkInProgress_Blocks_Discrete_Controllers.html#FCSys.WorkInProgress.Blocks.Discrete.Controllers"
+>FCSys.WorkInProgress.Blocks.Discrete.Controllers</A>.MPCWRej</H2>
+<B>Model predictive controller with disturbance rejection</B><p>
+<IMG SRC="FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPCWRejD.png" ALT="FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPCWRej">
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_WorkInProgress_Blocks_Discrete_BaseClasses.html#FCSys.WorkInProgress.Blocks.Discrete.BaseClasses.DiscreteBlock"
+>FCSys.WorkInProgress.Blocks.Discrete.BaseClasses.DiscreteBlock</A> (Base class of discrete blocks).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>&nbsp;</TD><TD>samplePeriod</TD><TD>&nbsp;</TD><TD>Sample period of species</TD></TR>
+<TR><TD>&nbsp;</TD><TD>startTime</TD><TD>0</TD><TD>First sample time instant</TD></TR>
+<TR><TD>Real</TD><TD>K_fb[:, :]</TD><TD>ones(1, 1)</TD><TD>Feedback gain (estimated state to actuation)</TD></TR>
+<TR><TD>Real</TD><TD>K_ff[size(K_fb, 1), :]</TD><TD>ones(size(K_fb, 1), 1)</TD><TD>Feedforward gain (reference to actuation)</TD></TR>
+<TR><TD>Real</TD><TD>K_opt[n_bG, size(K_fb, 2) + size(K_ff, 2)]</TD><TD>ones(n_bG, n_x + n_ref)</TD><TD>Optimizer gain ([estimated state; estimated disturbance; reference] to dynamic optimizer constraint)</TD></TR>
+<TR><TD>Real</TD><TD>H[:, size(H, 1)]</TD><TD>{if i == j then 1 else 0 for...</TD><TD>Hessian matrix of the quadratic problem  (QP)</TD></TR>
+<TR><TD>Real</TD><TD>J[size(H, 1)]</TD><TD>&nbsp;</TD><TD>Jacobian vector of the QP</TD></TR>
+<TR><TD>Real</TD><TD>G[:, size(H, 1)]</TD><TD>zeros(1, size(H, 1))</TD><TD>Matrix for constraints of type <b>Gx_min &le; G x &le; Gx_max</b> in the QP</TD></TR>
+<TR><TD>Real</TD><TD>Gx_max_const[size(G, 1)]</TD><TD>zeros(size(G, 1))</TD><TD>Offset for constraints of type <b>Gx_min &le; G x &le; Gx_max</b> in the QP</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>x[n_x]</TD><TD>State</TD></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>ref[n_ref]</TD><TD>Reference</TD></TR>
+<TR><TD>output <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>RealOutput</A></TD><TD>act[n_act]</TD><TD>Actuation</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">block</font> MPCWRej <font color="darkgreen">
+  &quot;Model predictive controller with disturbance rejection&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_WorkInProgress_Blocks_Discrete_BaseClasses.html#FCSys.WorkInProgress.Blocks.Discrete.BaseClasses.DiscreteBlock"
+>FCSys.WorkInProgress.Blocks.Discrete.BaseClasses.DiscreteBlock</A>;
+  <font color="blue">parameter </font>Real K_fb[:, :]=<font color="red">ones</font>(1, 1) <font color="darkgreen">
+    &quot;Feedback gain (estimated state to actuation)&quot;</font>;
+  <font color="blue">parameter </font>Real K_ff[<font color="red">size</font>(K_fb, 1), :]=<font color="red">ones</font>(<font color="red">size</font>(K_fb, 1), 1) <font color="darkgreen">
+    &quot;Feedforward gain (reference to actuation)&quot;</font>;
+  <font color="blue">parameter </font>Real K_opt[n_bG, <font color="red">size</font>(K_fb, 2) + <font color="red">size</font>(K_ff, 2)]=<font color="red">ones</font>(n_bG, n_x +
+      n_ref) <font color="darkgreen">
+    &quot;Optimizer gain ([estimated state; estimated disturbance; reference] to dynamic optimizer constraint)&quot;</font>;
+  <font color="blue">parameter </font>Real H[:, <font color="red">size</font>(H, 1)]={<font color="blue">if </font>i == j<font color="blue"> then </font>1<font color="blue"> else </font>0 <font color="blue">for </font>j<font color="blue"> in </font>1:5, i<font color="blue"> in </font>1:
+      5} <font color="darkgreen">&quot;Hessian matrix of the quadratic problem  (QP)&quot;</font>;
+  <font color="darkgreen">// If the default is identity(5) in Dymola 7.4, the parameter dialog doesn&#39;t allow the values</font>
+  <font color="darkgreen">// to be loaded from a MAT file, so the identity matrix is created by nested loops.</font>
+  <font color="blue">parameter </font>Real J[<font color="red">size</font>(H, 1)] <font color="darkgreen">&quot;Jacobian vector of the QP&quot;</font>;
+  <font color="blue">parameter </font>Real G[:, <font color="red">size</font>(H, 1)]=<font color="red">zeros</font>(1, <font color="red">size</font>(H, 1)) <font color="darkgreen">
+    &quot;</pre>Matrix for constraints of type <b>Gx_min &le; G x &le; Gx_max</b> in the QP<pre>&quot;</font>;
+  <font color="blue">parameter </font>Real Gx_max_const[<font color="red">size</font>(G, 1)]=<font color="red">zeros</font>(<font color="red">size</font>(G, 1)) <font color="darkgreen">
+    &quot;</pre>Offset for constraints of type <b>Gx_min &le; G x &le; Gx_max</b> in the QP<pre>&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_act=<font color="red">size</font>(K_fb, 1) <font color="darkgreen">&quot;Number of actuators&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_x=<font color="red">size</font>(K_fb, 2) <font color="darkgreen">&quot;Number of states&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_c=<font color="red">integer</font>(<font color="red">size</font>(H, 1)/n_act) <font color="darkgreen">&quot;Control horizon&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_ref=<font color="red">size</font>(K_ff, 2) <font color="darkgreen">&quot;Number of reference signals&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_DOF=n_c*n_act <font color="darkgreen">
+    &quot;Number of degrees of freedom in the quadratic programming problem&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_bG=<font color="red">size</font>(G, 1) <font color="darkgreen">
+    &quot;</pre>Number of bounds of the form <b>Gx_min &le; G x &le; Gx_max</b><pre>&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>Connectors.RealInput</A> x[n_x] <font color="darkgreen">&quot;State&quot;</font>;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>Connectors.RealInput</A> ref[n_ref] <font color="darkgreen">&quot;Reference&quot;</font>;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>Connectors.RealOutput</A> act[n_act] <font color="darkgreen">&quot;Actuation&quot;</font>;
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Routing.html#Modelica.Blocks.Routing.Multiplex2"
+>Modelica.Blocks.Routing.Multiplex2</A> concatenate(<font color="blue">final </font>n1=n_x,<font color="blue">final </font>n2=n_ref);
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.MatrixGain"
+>Modelica.Blocks.Math.MatrixGain</A> optimizerGain(<font color="blue">final </font>K=K_opt);
+  <A HREF="FCSys_WorkInProgress_Blocks_Math.html#FCSys.WorkInProgress.Blocks.Math.AddSkipInclIncl"
+>FCSys.WorkInProgress.Blocks.Math.AddSkipInclIncl</A> addSkipInclIncl1(<font color="blue">final </font>n=
+        n_bG);
+  <A HREF="FCSys_WorkInProgress_Blocks_Continuous_Sources.html#FCSys.WorkInProgress.Blocks.Continuous.Sources.Constant"
+>FCSys.WorkInProgress.Blocks.Continuous.Sources.Constant</A> constConstraint(<font color="blue">
+      final </font>k=Gx_max_const);
+  <A HREF="FCSys_WorkInProgress_Blocks_Discrete_Controllers_BaseClasses.html#FCSys.WorkInProgress.Blocks.Discrete.Controllers.BaseClasses.QPSolver"
+>FCSys.WorkInProgress.Blocks.Discrete.Controllers.BaseClasses.QPSolver</A>
+    qPSolver(
+    <font color="blue">final </font>H=H,
+    <font color="blue">final </font>J=J,
+    <font color="blue">final </font>G=G,
+    <font color="blue">final </font>JAsParam=true,
+    <font color="blue">final </font>n_y=n_act,
+    <font color="blue">final </font>AxMaxAsParam=false,
+    <font color="blue">final </font>Gx_min=-Modelica.Constants.inf*<font color="red">ones</font>(<font color="red">size</font>(G, 1)),
+    <font color="blue">final </font>y_min=-Modelica.Constants.inf*<font color="red">ones</font>(n_act),
+    <font color="blue">final </font>y_max=Modelica.Constants.inf*<font color="red">ones</font>(n_act),
+    <font color="blue">final </font>samplePeriod=samplePeriod,
+    <font color="blue">final </font>startTime=startTime);
+  <A HREF="FCSys_WorkInProgress_Blocks_Math.html#FCSys.WorkInProgress.Blocks.Math.AddInclInclIncl"
+>FCSys.WorkInProgress.Blocks.Math.AddInclInclIncl</A> addSkipInclIncl(<font color="blue">final </font>n=
+        n_act);
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.MatrixGain"
+>Modelica.Blocks.Math.MatrixGain</A> feedforwardGain(<font color="blue">final </font>K=K_ff);
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.MatrixGain"
+>Modelica.Blocks.Math.MatrixGain</A> feedbackGain(<font color="blue">final </font>K=-K_fb);</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(feedbackGain.u, x);
+  <font color="red">connect</font>(ref, feedforwardGain.u);
+  <font color="red">connect</font>(addSkipInclIncl.y, act);
+  <font color="red">connect</font>(addSkipInclIncl.u_1, feedbackGain.y);
+  <font color="red">connect</font>(concatenate.u1, x);
+  <font color="red">connect</font>(ref, concatenate.u2);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(optimizerGain.u, concatenate.y);
+  <font color="red">connect</font>(addSkipInclIncl1.u_1, optimizerGain.y);
+  <font color="red">connect</font>(addSkipInclIncl1.u_2, constConstraint.y);
+  <font color="red">connect</font>(feedforwardGain.y, addSkipInclIncl.u_3);
+  <font color="red">connect</font>(qPSolver.Gx_max_set, addSkipInclIncl1.y);
+  <font color="red">connect</font>(addSkipInclIncl.u_2, qPSolver.y);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>MPCWRej;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 00:07:59 2013.
+</address></BODY>
+</HTML>

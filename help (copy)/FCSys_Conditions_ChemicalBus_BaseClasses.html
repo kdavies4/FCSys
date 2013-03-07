@@ -1,0 +1,93 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.Conditions.ChemicalBus.BaseClasses</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Base classes (not generally for direct use)&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE BaseClasses<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Conditions.ChemicalBus.BaseClasses"></A><A HREF="FCSys_Conditions_ChemicalBus.html#FCSys.Conditions.ChemicalBus"
+>FCSys.Conditions.ChemicalBus</A>.BaseClasses</H2>
+<B>Base classes (not generally for direct use)</B>
+<P>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_BasesPackage.html#Modelica.Icons.BasesPackage"
+>Modelica.Icons.BasesPackage</A> (Icon for packages containing base classes).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.ChemicalBus.BaseClasses.NullPhaseS.png" ALT="FCSys.Conditions.ChemicalBus.BaseClasses.NullPhase" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses.NullPhase"
+>NullPhase</A>
+</TD><TD>Empty condition for a phase (no species)</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE NullPhase<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Conditions.ChemicalBus.BaseClasses.NullPhaseI.png" ALT="FCSys.Conditions.ChemicalBus.BaseClasses.NullPhase" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Conditions.ChemicalBus.BaseClasses.NullPhase"></A><A HREF="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses"
+>FCSys.Conditions.ChemicalBus.BaseClasses</A>.NullPhase</H2>
+<B>Empty condition for a phase (no species)</B><p>
+<IMG SRC="FCSys.Conditions.ChemicalBus.BaseClasses.NullPhaseD.png" ALT="FCSys.Conditions.ChemicalBus.BaseClasses.NullPhase">
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single"
+>FCSys.Conditions.BaseClasses.Icons.Single</A> (Icon for a single-connector boundary condition).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinX</TD><TD>true</TD><TD>X</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinY</TD><TD>false</TD><TD>Y</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinZ</TD><TD>false</TD><TD>Z</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.ChemicalIOBus"
+>ChemicalIOBus</A></TD><TD>chemical</TD><TD>Bus of ChemicalInput and ChemicalOutput connectors of multiple species</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInputBus"
+>RealInputBus</A></TD><TD>u</TD><TD>Bus of inputs to specify conditions</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus"
+>RealOutputBus</A></TD><TD>y</TD><TD>Bus of measurement outputs</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> NullPhase <font color="darkgreen">&quot;Empty condition for a phase (no species)&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single"
+>FCSys.Conditions.BaseClasses.Icons.Single</A>;
+
+  <font color="blue">parameter </font>Boolean inclLinX=true <font color="darkgreen">&quot;X&quot;</font>;
+
+  <font color="blue">parameter </font>Boolean inclLinY=false <font color="darkgreen">&quot;Y&quot;</font>;
+
+  <font color="blue">parameter </font>Boolean inclLinZ=false <font color="darkgreen">&quot;Z&quot;</font>;
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Connectors.html#FCSys.Connectors.ChemicalIOBus"
+>FCSys.Connectors.ChemicalIOBus</A> chemical <font color="darkgreen">
+    &quot;Bus of ChemicalInput and ChemicalOutput connectors of multiple species&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInputBus"
+>Connectors.RealInputBus</A> u <font color="darkgreen">&quot;Bus of inputs to specify conditions&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus"
+>Connectors.RealOutputBus</A> y <font color="darkgreen">&quot;Bus of measurement outputs&quot;</font>;
+
+<font color="blue">end </font>NullPhase;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 00:02:21 2013.
+</address></BODY>
+</HTML>

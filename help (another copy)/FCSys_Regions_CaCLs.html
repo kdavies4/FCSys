@@ -1,0 +1,268 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.Regions.CaCLs</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Cathode catalyst layers&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE CaCLs<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Regions.CaCLs"></A><A HREF="FCSys_Regions.html#FCSys.Regions"
+>FCSys.Regions</A>.CaCLs</H2>
+<B>Cathode catalyst layers</B>
+<P>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package"
+>Modelica.Icons.Package</A> (Icon for standard packages).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.Regions.CaCLs.CaCLS.png" ALT="FCSys.Regions.CaCLs.CaCL" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL"
+>CaCL</A>
+</TD><TD>Cathode catalyst layer</TD></TR>
+<TR><TD><IMG SRC="FCSys.Regions.CaCLs.CaCLS.png" ALT="FCSys.Regions.CaCLs.CaCGDL" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCGDL"
+>CaCGDL</A>
+</TD><TD>Integrated cathode catalyst/gas diffusion layer</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE CaCL<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Regions.CaCLs.CaCLI.png" ALT="FCSys.Regions.CaCLs.CaCL" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Regions.CaCLs.CaCL"></A><A HREF="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs"
+>FCSys.Regions.CaCLs</A>.CaCL</H2>
+<B>Cathode catalyst layer</B><p>
+<IMG SRC="FCSys.Regions.AnFPs.AnFPD.png" ALT="FCSys.Regions.CaCLs.CaCL">
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>This model describes the storage, reaction, and transport of
+chemical/electrochemical species in and through the cathode catalyst layer of a PEMFC.
+The x axis is intended to extend from the anode to the cathode.
+The y axis extends along the length of the channel and
+the z axis extends across the width of the channel.</p>
+
+<p>Assumptions:
+<ol>
+<li>Half of the solid is graphite and half is ionomer (by volume).
+</li>
+</ol></p>
+
+<p>For more information, see the
+    <A HREF="FCSys_Regions.html#FCSys.Regions.Region"
+>Region</a> model.</p>
+<pre></PRE><P>
+Extends from <A HREF="FCSys_Regions.html#FCSys.Regions.Region"
+>Region</A> (Base model for a 3D array of subregions).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute"
+>NumberAbsolute</A></TD><TD>x</TD><TD>0.25</TD><TD>Volumetric porosity [1]</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_x[:]</TD><TD>fill(28.7*U.micro*U.m/1, 1)</TD><TD>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_y[:]</TD><TD>fill(1*U.m/1, 1)</TD><TD>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_z[:]</TD><TD>fill(5*U.mm/1, 1)</TD><TD>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Initialization</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute"
+>NumberAbsolute</A></TD><TD>lambda_IC</TD><TD>14</TD><TD>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>) [1]</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=4><B>Assumptions</B></TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</TD></TR>
+<TR><TD>Boolean</TD><TD>inclFacesX</TD><TD>true</TD><TD>X</TD></TR>
+<TR><TD>Boolean</TD><TD>inclFacesY</TD><TD>false</TD><TD>Y</TD></TR>
+<TR><TD>Boolean</TD><TD>inclFacesZ</TD><TD>false</TD><TD>Z</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>xNegative[n_y, n_z]</TD><TD>Negative face along the x axis</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>xPositive[n_y, n_z]</TD><TD>Positive face along the x axis</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>yNegative[n_x, n_z]</TD><TD>Negative face along the y axis</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>yPositive[n_x, n_z]</TD><TD>Positive face along the y axis</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>zNegative[n_x, n_y]</TD><TD>Negative face along the z axis</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>zPositive[n_x, n_y]</TD><TD>Positive face along the z axis</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> CaCL <font color="darkgreen">&quot;Cathode catalyst layer&quot;</font>
+  <font color="darkgreen">// extends FCSys.BaseClasses.Icons.Names.Top4;</font>
+
+  <font color="blue">extends </font><A HREF="FCSys_Regions.html#FCSys.Regions.Region"
+>Region</A>(
+    L_x=<font color="red">fill</font>(28.7*U.micro*U.m/1, 1),
+    L_y=<font color="red">fill</font>(1*U.m/1, 1),
+    L_z=<font color="red">fill</font>(5*U.mm/1, 1),
+    <font color="blue">final </font>inclFacesX=true,
+    inclFacesY=false,
+    inclFacesZ=false,
+    <font color="blue">redeclare </font><A HREF="FCSys_Subregions.html#FCSys.Subregions.Subregion"
+>FCSys.Subregions.Subregion</A> subregions[n_x, n_y, n_z](
+      <font color="blue">each </font>inclLinX=false,
+      <font color="blue">each </font>gas(
+        inclH2O=true,
+        inclN2=true,
+        inclO2=true,
+        H2O(
+          p_IC=environment.x_H2O*environment.p,
+          xNegative(isobaric=true),
+          xPositive(isobaric=false)),
+        N2(
+          p_IC=(1 - environment.x_H2O)*(1 - environment.x_O2_dry)*environment.p,
+
+          xNegative(isobaric=false),
+          xPositive(isobaric=false)),
+        O2(
+          p_IC=(1 - environment.x_H2O)*environment.x_O2_dry*environment.p,
+          xNegative(isobaric=false),
+          xPositive(isobaric=false))),
+      <font color="blue">each </font>graphite(
+        &#39;inclC+&#39;=true,
+        &#39;incle-&#39;=true,
+        &#39;C+&#39;(V_IC=V - xV),
+        &#39;e-&#39;(xNegative(isobaric=false), xPositive(isobaric=false))),
+      <font color="blue">each </font>ionomer(
+        &#39;inclC19HF37O5S-&#39;=true,
+        &#39;inclH+&#39;=true,
+        &#39;C19HF37O5S-&#39;(V_IC=V - xV),
+        &#39;H+&#39;(xNegative(isobaric=false), xPositive(isobaric=false)),
+        H2O(xNegative(isobaric=false), xPositive(isobaric=false))),
+      <font color="blue">each </font>liquid(inclH2O=true, H2O(
+          V_IC=0,
+          xNegative(isobaric=false),
+          xPositive(isobaric=false)))));
+
+  <font color="darkgreen">// &#39;e-&#39;(xNegative(isobaric=true),</font>
+  <font color="darkgreen">// &#39;H+&#39;(xPositive(isobaric=true),</font>
+
+  <font color="darkgreen">// O2(</font>
+  <font color="darkgreen">//  each ionomer(&#39;C19HF37O5S-&#39;(V_IC=0.15*V))));</font>
+
+  <font color="darkgreen">//</font>
+  <font color="darkgreen">//</font>
+
+  <font color="darkgreen">// initMethPartNum=InitMethScalar.ReactionRate</font>
+
+  <font color="darkgreen">// See AnCLs.AnCL for data on additional materials.</font>
+
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute"
+>Q.NumberAbsolute</A> x(nominal=1) = 0.25 <font color="darkgreen">&quot;Volumetric porosity&quot;</font>;
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute"
+>Q.NumberAbsolute</A> lambda_IC=14 <font color="darkgreen">
+    &quot;</pre>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>)<pre>&quot;</font>;
+  <font color="darkgreen">// TODO:  Add H2O to the ionomer according to lambda_IC.</font>
+  <font color="darkgreen">// TODO:  Include reaction to absorb H2O into ionomer.</font>
+  <font color="darkgreen">// Assume zero volume of H2O in the ionomer?</font>
+
+  <font color="darkgreen">// Auxiliary variables (for analysis)</font>
+  <font color="blue">output </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Number"
+>Q.Number</A> x_H2O[n_x, n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) =
+    subregions.gas.H2O.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N +
+    subregions.gas.O2.N) <font color="blue">if </font>environment.analysis<font color="blue"> and </font>hasSubregions <font color="darkgreen">
+    &quot;Molar concentration of H2&quot;</font>;
+  <font color="blue">output </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Number"
+>Q.Number</A> x_N2[n_x, n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) =
+    subregions.gas.N2.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N +
+    subregions.gas.O2.N) <font color="blue">if </font>environment.analysis<font color="blue"> and </font>hasSubregions <font color="darkgreen">
+    &quot;Molar concentration of N2&quot;</font>;
+  <font color="blue">output </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Number"
+>Q.Number</A> x_O2[n_x, n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) = <font color="red">
+    ones</font>(
+    n_x,
+    n_y,
+    n_z) - x_H2O - x_N2 <font color="blue">if </font>environment.analysis<font color="blue"> and </font>hasSubregions <font color="darkgreen">
+    &quot;Molar concentration of O2&quot;</font>;
+
+<font color="blue">protected </font>
+  <font color="blue">final </font><font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Volume"
+>Q.Volume</A> xV=x*V <font color="darkgreen">&quot;Gas volume&quot;</font>;
+
+<textblock type="annotcomp" expanded="false"><font color="blue">protected </font>
+  <font color="blue">outer </font><A HREF="FCSys_Conditions.html#FCSys.Conditions.Environment"
+>Conditions.Environment</A> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
+
+<font color="blue">end </font>CaCL;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE CaCGDL<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Regions.CaCLs.CaCLI.png" ALT="FCSys.Regions.CaCLs.CaCGDL" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Regions.CaCLs.CaCGDL"></A><A HREF="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs"
+>FCSys.Regions.CaCLs</A>.CaCGDL</H2>
+<B>Integrated cathode catalyst/gas diffusion layer</B><p>
+<IMG SRC="FCSys.Regions.AnFPs.AnFPD.png" ALT="FCSys.Regions.CaCLs.CaCGDL">
+<P><H3>Information</H3></P>
+<PRE></pre><p>See the information in the
+    <A HREF="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL"
+>CaCL</a> and <A HREF="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL"
+>CaGDL</a> models</p><pre></PRE><P>
+Extends from <A HREF="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL"
+>CaCL</A> (Cathode catalyst layer).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute"
+>NumberAbsolute</A></TD><TD>x</TD><TD>0.25</TD><TD>Volumetric porosity [1]</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_x[:]</TD><TD>fill((28.7*U.micro*U.m + 0.3...</TD><TD>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_y[:]</TD><TD>fill(1*U.m/1, 1)</TD><TD>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_z[:]</TD><TD>fill(5*U.mm/1, 1)</TD><TD>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Initialization</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute"
+>NumberAbsolute</A></TD><TD>lambda_IC</TD><TD>14</TD><TD>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>) [1]</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=4><B>Assumptions</B></TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</TD></TR>
+<TR><TD>Boolean</TD><TD>inclFacesY</TD><TD>false</TD><TD>Y</TD></TR>
+<TR><TD>Boolean</TD><TD>inclFacesZ</TD><TD>false</TD><TD>Z</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>xNegative[n_y, n_z]</TD><TD>Negative face along the x axis</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>xPositive[n_y, n_z]</TD><TD>Positive face along the x axis</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>yNegative[n_x, n_z]</TD><TD>Negative face along the y axis</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>yPositive[n_x, n_z]</TD><TD>Positive face along the y axis</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>zNegative[n_x, n_y]</TD><TD>Negative face along the z axis</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>zPositive[n_x, n_y]</TD><TD>Positive face along the z axis</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> CaCGDL <font color="darkgreen">&quot;Integrated cathode catalyst/gas diffusion layer&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL"
+>CaCL</A>(L_x=<font color="red">fill</font>((28.7*U.micro*U.m + 0.3*U.mm)/1, 1));
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>CaCGDL;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 01:10:15 2013.
+</address></BODY>
+</HTML>

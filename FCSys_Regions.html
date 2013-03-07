@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Regions</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="3D arrays of discrete, interconnected subregions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,24 +45,24 @@
       <div class="body">
 
 <h2><a name="FCSys.Regions"></a><a href="index.html#FCSys">FCSys</a>.Regions</h2>
-<b>3D arrays of discrete, interconnected subregions</b>
-<p>
-<p><h3>Information</h3></p>
 
-<p>
-<b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-Copyright 2007&ndash;2013, Georgia Tech Research Corporation.
-</p>
-<p>
-<i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+<b>3D arrays of discrete, interconnected subregions</b>
+
+<h3>Information</h3>
+
+<p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+Copyright 2007&ndash;2013, Georgia Tech Research Corporation.</p>
+
+<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
 it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
 disclaimer of warranty) see <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.ModelicaLicense2">
 FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href="http://www.modelica.org/licenses/ModelicaLicense2">
-http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
-</p>
+http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
 <p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Regions.ExamplesS.png" alt="FCSys.Regions.Examples" width=20  height=20 align=top>&nbsp;<a href="FCSys_Regions_Examples.html#FCSys.Regions.Examples">Examples</a>
@@ -89,20 +90,25 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Regions.Region"></a><a href="FCSys_Regions.html#FCSys.Regions">FCSys.Regions</a>.Region</h2>
 <b>Base model for a 3D array of subregions</b><p>
 <img src="images/FCSys.Regions.RegionD.png" alt="FCSys.Regions.Region">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 <p>The following notes apply to the parameters:
   <ul>
   <li>If <code>L_x = zeros(0)</code> (or <code>ones(0)</code> or <code>fill(1, 0)</code>), then there are no
    subregions along the x axis and the boundaries along the x axis are
    directly connected.  The same applies to the other axes.</li>
-  </ul>
-  </p>
+  </ul></p>
 <p>
 
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a></td><td>subregions[n_x, n_y, n_z]</td><td>redeclare FCSys.Subregions.S...</td><td>Base subregion model and its modifications for each subregion</td></tr>
+<tr><td><a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a></td><td>subregions[n_x, n_y, n_z]</td><td>redeclare FCSys.Subregions.S&hellip;</td><td>Base subregion model and its modifications for each subregion</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
@@ -113,7 +119,11 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td>Boolean</td><td>inclFacesY</td><td>true</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclFacesZ</td><td>true</td><td>Z</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative face along the x axis</td></tr>
@@ -123,11 +133,15 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">partial </font><font color="blue">model</font> Region <font color="darkgreen">&quot;Base model for a 3D array of subregions&quot;</font>
-  <font color="darkgreen">//extends FCSys.BaseClasses.Icons.Names.Top3;</font>
-  <font color="darkgreen">//extends FCSys.BaseClasses.Icons.Names.Top6;</font>
+  <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.cartWrap">FCSys.BaseClasses.Utilities.cartWrap</a>;
+  <font color="darkgreen">// extends FCSys.BaseClasses.Icons.Names.Top3;</font>
+  <font color="darkgreen">// extends FCSys.BaseClasses.Icons.Names.Top6;</font>
 
   <font color="darkgreen">// Geometric parameters</font>
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_x[:](<font color="blue">each </font><font color="blue">final </font>min=Modelica.Constants.small) = <font color="red">fill</font>(1*U.m
@@ -150,30 +164,32 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
   <font color="darkgreen">// Assumptions about included faces</font>
   <font color="blue">parameter </font>Boolean inclFacesX=true <font color="darkgreen">&quot;X&quot;</font>;
+
   <font color="blue">parameter </font>Boolean inclFacesY=true <font color="darkgreen">&quot;Y&quot;</font>;
+
   <font color="blue">parameter </font>Boolean inclFacesZ=true <font color="darkgreen">&quot;Z&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> xNegative[n_y, n_z] <font color="blue">if </font>inclFacesX <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> xNegative[n_y, n_z] <font color="blue">if </font>inclFacesX <font color="darkgreen">
     &quot;Negative face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> xPositive[n_y, n_z] <font color="blue">if </font>inclFacesX <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> xPositive[n_y, n_z] <font color="blue">if </font>inclFacesX <font color="darkgreen">
     &quot;Positive face along the x axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> yNegative[n_x, n_z] <font color="blue">if </font>inclFacesY <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> yNegative[n_x, n_z] <font color="blue">if </font>inclFacesY <font color="darkgreen">
     &quot;Negative face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> yPositive[n_x, n_z] <font color="blue">if </font>inclFacesY <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> yPositive[n_x, n_z] <font color="blue">if </font>inclFacesY <font color="darkgreen">
     &quot;Positive face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> zNegative[n_x, n_y] <font color="blue">if </font>inclFacesZ <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> zNegative[n_x, n_y] <font color="blue">if </font>inclFacesZ <font color="darkgreen">
     &quot;Negative face along the z axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> zPositive[n_x, n_y] <font color="blue">if </font>inclFacesZ <font color="darkgreen">
-    &quot;Positive face along the z axis&quot;</font>;</textblock>
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> zPositive[n_x, n_y] <font color="blue">if </font>inclFacesZ <font color="darkgreen">
+    &quot;Positive face along the z axis&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">FCSys.Subregions.Subregion</a> subregions[n_x, n_y, n_z] <font color="blue">if </font>
+  <font color="blue">replaceable </font><a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">FCSys.Subregions.Subregion</a> subregions[n_x, n_y, n_z] <font color="blue">if </font>
     hasSubregions <font color="blue">constrainedby </font>FCSys.Subregions.BaseClasses.PartialSubregion(
     <font color="blue">final </font>L={{L_x[i_x],L_y[i_y],L_z[i_z]} <font color="blue">for </font>i_z<font color="blue"> in </font>1:n_z, i_y<font color="blue"> in </font>1:n_y, i_x<font color="blue">
          in </font>1:n_x},
     <font color="blue">each </font><font color="blue">final </font>inclFacesX=inclFacesX,
     <font color="blue">each </font><font color="blue">final </font>inclFacesY=inclFacesY,
     <font color="blue">each </font><font color="blue">final </font>inclFacesZ=inclFacesZ) <font color="darkgreen">
-    &quot;Base subregion model and its modifications for each subregion&quot;</font>;</textblock>
+    &quot;Base subregion model and its modifications for each subregion&quot;</font>;
 
 <font color="blue">protected </font>
   <font color="blue">final </font><font color="blue">parameter </font>Boolean hasSubregions=n_x &gt; 0<font color="blue"> and </font>n_y &gt; 0<font color="blue"> and </font>n_z &gt; 0 <font color="darkgreen">
@@ -181,49 +197,49 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <font color="blue">equation </font>
   <font color="darkgreen">// X axis</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(xNegative, subregions[1, :, :].xNegative);</textblock>
+  <font color="red">connect</font>(xNegative, subregions[1, :, :].xNegative);
   <font color="blue">for </font>i<font color="blue"> in </font>1:n_x - 1<font color="blue"> loop</font>
     <font color="red">connect</font>(subregions[i, :, :].xPositive, subregions[i + 1, :, :].xNegative) <font color="darkgreen">
       &quot;Connection b/w neighboring subregions (not shown the diagram)&quot;</font>;
   <font color="blue">end for</font>;
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(subregions[n_x, :, :].xPositive, xPositive);</textblock>
+  <font color="red">connect</font>(subregions[n_x, :, :].xPositive, xPositive);
   <font color="blue">if </font>n_x == 0<font color="blue"> then</font>
     <font color="red">connect</font>(xNegative, xPositive) <font color="darkgreen">&quot;Direct pass-through (not shown the diagram)&quot;</font>;
   <font color="blue">end if</font>;
 
   <font color="darkgreen">// Y axis</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(yNegative, subregions[:, 1, :].yNegative);</textblock>
+  <font color="red">connect</font>(yNegative, subregions[:, 1, :].yNegative);
   <font color="blue">for </font>i<font color="blue"> in </font>1:n_y - 1<font color="blue"> loop</font>
     <font color="red">connect</font>(subregions[:, i, :].yPositive, subregions[:, i + 1, :].yNegative) <font color="darkgreen">
       &quot;Connection b/w neighboring subregions (not shown the diagram)&quot;</font>;
   <font color="blue">end for</font>;
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(subregions[:, n_y, :].yPositive, yPositive);</textblock>
+  <font color="red">connect</font>(subregions[:, n_y, :].yPositive, yPositive);
 
   <font color="blue">if </font>n_y == 0<font color="blue"> then</font>
     <font color="red">connect</font>(yNegative, yPositive) <font color="darkgreen">&quot;Direct pass-through (not shown the diagram)&quot;</font>;
   <font color="blue">end if</font>;
 
   <font color="darkgreen">// Z axis</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(zNegative, subregions[:, :, 1].zNegative);</textblock>
+  <font color="red">connect</font>(zNegative, subregions[:, :, 1].zNegative);
   <font color="blue">for </font>i<font color="blue"> in </font>1:n_z - 1<font color="blue"> loop</font>
     <font color="red">connect</font>(subregions[:, :, i].zPositive, subregions[:, :, i + 1].zNegative) <font color="darkgreen">
       &quot;Connection b/w neighboring subregions (not shown the diagram)&quot;</font>;
   <font color="blue">end for</font>;
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(zPositive, subregions[:, :, n_z].zPositive);</textblock>
+  <font color="red">connect</font>(zPositive, subregions[:, :, n_z].zPositive);
   <font color="blue">if </font>n_z == 0<font color="blue"> then</font>
     <font color="red">connect</font>(zNegative, zPositive) <font color="darkgreen">&quot;Direct pass-through (not shown the diagram)&quot;</font>;
   <font color="blue">end if</font>;
   <font color="darkgreen">// TODO:  Once primitivesVisible is supported by Modelica tools, complete</font>
   <font color="darkgreen">// the icon for this model and use primitivesVisible=false in the icons of</font>
   <font color="darkgreen">// the fuel cell layer models.</font>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Region;
+<font color="blue">end </font>Region;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:49:30 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:46:51 2013.
 </div>
 </body>
 </html>

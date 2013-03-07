@@ -1,0 +1,295 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.Regions.CaFPs</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Cathode flow plates&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE CaFPs<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Regions.CaFPs"></A><A HREF="FCSys_Regions.html#FCSys.Regions"
+>FCSys.Regions</A>.CaFPs</H2>
+<B>Cathode flow plates</B>
+<P>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package"
+>Modelica.Icons.Package</A> (Icon for standard packages).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.Regions.CaFPs.CaFPS.png" ALT="FCSys.Regions.CaFPs.CaFP" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP"
+>CaFP</A>
+</TD><TD>Cathode flow plate</TD></TR>
+<TR><TD><IMG SRC="FCSys.Regions.CaFPs.CaFPS.png" ALT="FCSys.Regions.CaFPs.GM" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.GM"
+>GM</A>
+</TD><TD>General Motors cathodic test flow plate and current collector</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE CaFP<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Regions.CaFPs.CaFPI.png" ALT="FCSys.Regions.CaFPs.CaFP" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Regions.CaFPs.CaFP"></A><A HREF="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs"
+>FCSys.Regions.CaFPs</A>.CaFP</H2>
+<B>Cathode flow plate</B><p>
+<IMG SRC="FCSys.Regions.AnFPs.AnFPD.png" ALT="FCSys.Regions.CaFPs.CaFP">
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>This model describes the storage and transport of chemical/electrochemical
+species in and through the cathode flow plate of a PEMFC.
+The x axis is intended to extend from the anode to the cathode.
+and the y axis extends along the length of the channel. The model is
+bidirectional, so that either <code>yNegative</code> or <code>yPositive</code> can be
+used as the inlet. The z axis extends across the width of the channel.</p>
+<p>For more information, see the
+  <A HREF="FCSys_Regions.html#FCSys.Regions.Region"
+>Region</a> model.</p>
+<pre></PRE><P>
+Extends from <A HREF="FCSys_Regions.html#FCSys.Regions.Region"
+>Region</A> (Base model for a 3D array of subregions).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute"
+>NumberAbsolute</A></TD><TD>x</TD><TD>0.1</TD><TD>Volumetric porosity [1]</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_x[:]</TD><TD>fill(8*U.mm/1, 1)</TD><TD>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_y[:]</TD><TD>fill(1*U.m/1, 1)</TD><TD>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_z[:]</TD><TD>fill(5*U.mm/1, 1)</TD><TD>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=4><B>Assumptions</B></TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</TD></TR>
+<TR><TD>Boolean</TD><TD>inclFacesX</TD><TD>true</TD><TD>X</TD></TR>
+<TR><TD>Boolean</TD><TD>inclFacesY</TD><TD>true</TD><TD>Y</TD></TR>
+<TR><TD>Boolean</TD><TD>inclFacesZ</TD><TD>false</TD><TD>Z</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>xNegative[n_y, n_z]</TD><TD>Negative face along the x axis</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>xPositive[n_y, n_z]</TD><TD>Positive face along the x axis</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>yNegative[n_x, n_z]</TD><TD>Negative face along the y axis</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>yPositive[n_x, n_z]</TD><TD>Positive face along the y axis</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>zNegative[n_x, n_y]</TD><TD>Negative face along the z axis</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>zPositive[n_x, n_y]</TD><TD>Positive face along the z axis</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> CaFP <font color="darkgreen">&quot;Cathode flow plate&quot;</font>
+  <font color="darkgreen">// extends FCSys.BaseClasses.Icons.Names.Top4;</font>
+
+  <font color="blue">extends </font><A HREF="FCSys_Regions.html#FCSys.Regions.Region"
+>Region</A>(
+    L_x=<font color="red">fill</font>(8*U.mm/1, 1),
+    L_y=<font color="red">fill</font>(1*U.m/1, 1),
+    L_z=<font color="red">fill</font>(5*U.mm/1, 1),
+    <font color="blue">final </font>inclFacesX=true,
+    <font color="blue">final </font>inclFacesY=true,
+    inclFacesZ=false,
+    <font color="blue">redeclare </font><A HREF="FCSys_Subregions.html#FCSys.Subregions.SubregionNoIonomer"
+>FCSys.Subregions.SubregionNoIonomer</A> subregions[n_x, n_y, n_z](
+      <font color="blue">each </font>inclLinX=false,
+      <font color="blue">each </font>inclLinY=true,
+      <font color="blue">each </font>gas(
+        inclH2O=true,
+        inclN2=true,
+        inclO2=true,
+        H2O(
+          p_IC=environment.x_H2O*environment.p,
+          xNegative(isobaric=false),
+          xPositive(
+            isobaric=true,
+            inviscidY=true,
+            inviscidZ=true),
+          yNegative(isobaric=false),
+          yPositive(isobaric=false)),
+        N2(
+          p_IC=(1 - environment.x_H2O)*(1 - environment.x_O2_dry)*environment.p,
+
+          xNegative(isobaric=false),
+          xPositive(
+            isobaric=true,
+            inviscidY=true,
+            inviscidZ=true),
+          yNegative(isobaric=false),
+          yPositive(isobaric=false)),
+        O2(
+          p_IC=(1 - environment.x_H2O)*environment.x_O2_dry*environment.p,
+          xNegative(isobaric=false),
+          xPositive(
+            isobaric=true,
+            inviscidY=true,
+            inviscidZ=true),
+          yNegative(isobaric=false),
+          yPositive(isobaric=false))),
+      <font color="blue">each </font>graphite(
+        &#39;inclC+&#39;=true,
+        &#39;incle-&#39;=true,
+        &#39;C+&#39;(V_IC=V - xV),
+        &#39;e-&#39;(
+          xNegative(isobaric=false),
+          xPositive(isobaric=false),
+          yNegative(
+            isobaric=true,
+            inviscidZ=true,
+            inviscidX=true),
+          yPositive(
+            isobaric=true,
+            inviscidZ=true,
+            inviscidX=true))),
+      <font color="blue">each </font>liquid(inclH2O=true, H2O(
+          V_IC=0,
+          xNegative(isobaric=false),
+          xPositive(
+            isobaric=true,
+            inviscidY=true,
+            inviscidZ=true),
+          yNegative(isobaric=false),
+          yPositive(isobaric=false)))));
+
+  <font color="darkgreen">// **for e-: setVelY=true,</font>
+
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute"
+>Q.NumberAbsolute</A> x(nominal=1) = 0.1 <font color="darkgreen">&quot;Volumetric porosity&quot;</font>;
+
+  <font color="darkgreen">// Auxiliary variables (for analysis)</font>
+  <font color="blue">output </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Number"
+>Q.Number</A> x_H2O[n_x, n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) =
+    subregions.gas.H2O.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N +
+    subregions.gas.O2.N) <font color="blue">if </font>environment.analysis<font color="blue"> and </font>hasSubregions <font color="darkgreen">
+    &quot;Molar concentration of H2&quot;</font>;
+  <font color="blue">output </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Number"
+>Q.Number</A> x_N2[n_x, n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) =
+    subregions.gas.N2.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N +
+    subregions.gas.O2.N) <font color="blue">if </font>environment.analysis<font color="blue"> and </font>hasSubregions <font color="darkgreen">
+    &quot;Molar concentration of N2&quot;</font>;
+  <font color="blue">output </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Number"
+>Q.Number</A> x_O2[n_x, n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) = <font color="red">
+    ones</font>(
+    n_x,
+    n_y,
+    n_z) - x_H2O - x_N2 <font color="blue">if </font>environment.analysis<font color="blue"> and </font>hasSubregions <font color="darkgreen">
+    &quot;Molar concentration of O2&quot;</font>;
+
+<font color="blue">protected </font>
+  <font color="blue">final </font><font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Volume"
+>Q.Volume</A> xV=x*V <font color="darkgreen">&quot;Gas volume&quot;</font>;
+
+  <font color="darkgreen">// The isobaric specific heat capacity and thermal</font>
+  <font color="darkgreen">// resistivity is based on data of graphite fiber epoxy (25% vol)</font>
+  <font color="darkgreen">// composite (heat flow parallel to fibers) at 300 K from Incropera and</font>
+  <font color="darkgreen">// DeWitt (2002, p. 909).  See FCSys.Subregions.Species.C.Fixed for more</font>
+  <font color="darkgreen">// data.</font>
+
+  <font color="darkgreen">// See AnFPs.AnFP for data on additional materials.</font>
+
+<textblock type="annotcomp" expanded="false"><font color="blue">protected </font>
+  <font color="blue">outer </font><A HREF="FCSys_Conditions.html#FCSys.Conditions.Environment"
+>Conditions.Environment</A> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
+
+<font color="blue">end </font>CaFP;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE GM<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Regions.CaFPs.CaFPI.png" ALT="FCSys.Regions.CaFPs.GM" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Regions.CaFPs.GM"></A><A HREF="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs"
+>FCSys.Regions.CaFPs</A>.GM</H2>
+<B>General Motors cathodic test flow plate and current collector</B><p>
+<IMG SRC="FCSys.Regions.AnFPs.AnFPD.png" ALT="FCSys.Regions.CaFPs.GM">
+<P><H3>Information</H3></P>
+<PRE></pre><p>Assumptions:<ol>
+<li>The x-axis length of this region is the thickness
+of the GM-compatible <a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/resources/documentation/Regions/CaFPs/GM/Flow field.pdf">flow field</a>,
+<a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/resources/documentation/Regions/CaFPs/GM/Current collector plate.pdf">current collector plate</a>,
+ and <a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/resources/documentation/Regions/CaFPs/GM/End plate.pdf">end plate</a> combined.  The material properties are those of epoxy-filled
+graphite, although the current collector is actually gold-plated copper and the end plate is actually aluminium.</li>
+<li>The y-axis length of this region is the length of the triple-serpentine flow channels of the
+GM-compatible
+cathode <a href="/media/Storage/Dropbox/Documents/Modelica/FCSys/resources/documentation/Regions/AnFPs/GM/Flow field.pdf">flow field</a> as if they were straightened.</li>
+<li>The z-axis length of this region is 50 cm<sup>2</sup> divided by the y-axis length.  Only the active area
+(50 cm<sup>2</sup>) is modeled&mdash;not the entire area (100 cm<sup>2</sup>).
+<li>It is assumed that the solid (graphite/epoxy composite) constitutes the entire volume except for the flow channels.
+In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
+</ol></p>
+<p>Additional notes:
+<ul>
+<li>The default thermal resistivity ((1/95) m K/W) is that of Entegris/Poco Graphite AXM-5Q
+[<A HREF="FCSys_UsersGuide.html#FCSys.UsersGuide.References"
+>Entegris2012</a>].</li>
+</ul>
+</p><pre></PRE><P>
+Extends from <A HREF="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP"
+>CaFP</A> (Cathode flow plate).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute"
+>NumberAbsolute</A></TD><TD>x</TD><TD>0.011</TD><TD>Volumetric porosity [1]</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_x[:]</TD><TD>fill(35.22*U.mm/1, 1)</TD><TD>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_y[:]</TD><TD>fill(1.028*U.m, 1)</TD><TD>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Length"
+>Length</A></TD><TD>L_z[:]</TD><TD>fill((5/1.028)*U.mm, 1)</TD><TD>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</TD></TR>
+<TR bgcolor="#c0c0c0"><TD colspan=4><B>Assumptions</B></TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</TD></TR>
+<TR><TD>Boolean</TD><TD>inclFacesZ</TD><TD>false</TD><TD>Z</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>xNegative[n_y, n_z]</TD><TD>Negative face along the x axis</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>xPositive[n_y, n_z]</TD><TD>Positive face along the x axis</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>yNegative[n_x, n_z]</TD><TD>Negative face along the y axis</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>yPositive[n_x, n_z]</TD><TD>Positive face along the y axis</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>zNegative[n_x, n_y]</TD><TD>Negative face along the z axis</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>zPositive[n_x, n_y]</TD><TD>Positive face along the z axis</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> GM <font color="darkgreen">
+  &quot;General Motors cathodic test flow plate and current collector&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP"
+>CaFP</A>(
+    subregions(<font color="blue">each </font>graphite(&#39;C+&#39;(alpha_Qdot=U.m*U.K/(95*U.W), alpha_Qdot=U.m*U.K
+              /(95*U.W)))),
+    L_x=<font color="red">fill</font>(35.22*U.mm/1, 1),
+    L_y=<font color="red">fill</font>(1.028*U.m, 1),
+    L_z=<font color="red">fill</font>((5/1.028)*U.mm, 1),
+    x=0.011);
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>GM;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 00:04:25 2013.
+</address></BODY>
+</HTML>

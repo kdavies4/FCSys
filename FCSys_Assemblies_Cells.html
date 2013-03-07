@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Assemblies.Cells</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="Single-cell PEMFC models">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,11 +45,15 @@
       <div class="body">
 
 <h2><a name="FCSys.Assemblies.Cells"></a><a href="FCSys_Assemblies.html#FCSys.Assemblies">FCSys.Assemblies</a>.Cells</h2>
+
 <b>Single-cell PEMFC models</b>
-<p>
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages), <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.PackageUnderConstruction">FCSys.BaseClasses.Icons.PackageUnderConstruction</a> (Overlay to indicate that a package is in development).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Assemblies.Cells.ExamplesS.png" alt="FCSys.Assemblies.Cells.Examples" width=20  height=20 align=top>&nbsp;<a href="FCSys_Assemblies_Cells_Examples.html#FCSys.Assemblies.Cells.Examples">Examples</a>
@@ -68,26 +73,36 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Assemblies.Cells.Cell"></a><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells">FCSys.Assemblies.Cells</a>.Cell</h2>
 <b>Default single-cell PEMFC</b><p>
 <img src="images/FCSys.Assemblies.Cells.CellD.png" alt="FCSys.Assemblies.Cells.Cell">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 <p>This model presents a single-cell proton exchange membrane fuel cell (PEMFC).  An overview
 of a PEMFC is given in the top-level documentation of <a href="index.html#FCSys">FCSys</a>.<p>
 Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell">FCSys.BaseClasses.Icons.Cell</a> (Icon for a cell).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the channel (L<sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths across the channel (L<sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Layers</td></tr>
-<tr><td><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a></td><td>anFP</td><td>redeclare FCSys.Regions.AnFP...</td><td>Anode flow plate</td></tr>
-<tr><td><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a></td><td>anGDL</td><td>redeclare FCSys.Regions.AnGD...</td><td>Anode gas diffusion layer</td></tr>
-<tr><td><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a></td><td>anCL</td><td>redeclare FCSys.Regions.AnCL...</td><td>Anode catalyst layer</td></tr>
-<tr><td><a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a></td><td>pEM</td><td>redeclare FCSys.Regions.PEMs...</td><td>Proton exchange membrane</td></tr>
-<tr><td><a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCL</a></td><td>caCL</td><td>redeclare FCSys.Regions.CaCL...</td><td>Cathode catalyst layer</td></tr>
-<tr><td><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a></td><td>caGDL</td><td>redeclare FCSys.Regions.CaGD...</td><td>Cathode gas diffusion layer</td></tr>
-<tr><td><a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">CaFP</a></td><td>caFP</td><td>redeclare FCSys.Regions.CaFP...</td><td>Cathode flow plate</td></tr>
+<tr><td><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a></td><td>anFP</td><td>redeclare FCSys.Regions.AnFP&hellip;</td><td>Anode flow plate</td></tr>
+<tr><td><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a></td><td>anGDL</td><td>redeclare FCSys.Regions.AnGD&hellip;</td><td>Anode gas diffusion layer</td></tr>
+<tr><td><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a></td><td>anCL</td><td>redeclare FCSys.Regions.AnCL&hellip;</td><td>Anode catalyst layer</td></tr>
+<tr><td><a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a></td><td>pEM</td><td>redeclare FCSys.Regions.PEMs&hellip;</td><td>Proton exchange membrane</td></tr>
+<tr><td><a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">CaCL</a></td><td>caCL</td><td>redeclare FCSys.Regions.CaCL&hellip;</td><td>Cathode catalyst layer</td></tr>
+<tr><td><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a></td><td>caGDL</td><td>redeclare FCSys.Regions.CaGD&hellip;</td><td>Cathode gas diffusion layer</td></tr>
+<tr><td><a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">CaFP</a></td><td>caFP</td><td>redeclare FCSys.Regions.CaFP&hellip;</td><td>Cathode flow plate</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anFPX[n_y, n_z]</td><td>Anode plate face</td></tr>
@@ -97,10 +112,14 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell"
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>caFPNegY[caFP.n_x, n_z]</td><td>Negative cathode flow plate face along the y axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anFPNegY[anFP.n_x, n_z]</td><td>Negative anode flow plate face along the y axis</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> Cell <font color="darkgreen">&quot;Default single-cell PEMFC&quot;</font>
-
+  <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.average">FCSys.BaseClasses.Utilities.average</a>;
+  <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.cartWrap">FCSys.BaseClasses.Utilities.cartWrap</a>;
   <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell">FCSys.BaseClasses.Icons.Cell</a>;
 
   <font color="darkgreen">// Geometric parameters</font>
@@ -114,7 +133,8 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell"
     &quot;Number of subregions across the channel&quot;</font>;
   <font color="darkgreen">// TODO:  For GM cell, use dissimilar L_y and L_z for anode, cathode, and PEM.</font>
 
-  <font color="darkgreen">// Essential analysis variables (x-axis electrical voltage, power, and current)</font>
+  <font color="darkgreen">// Essential analysis variables (x-axis electrical voltage, power, and</font>
+  <font color="darkgreen">// current)</font>
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> v=<font color="red">average</font>(<font color="red">average</font>(anFP.subregions[1, :, :].graphite.'e-'.mu_face[
       1, 1] - caFP.subregions[caFP.n_x, :, :].graphite.'e-'.mu_face[1, 2])) <font color="darkgreen">
     &quot;Average electrical potential (x axis)&quot;</font>;
@@ -168,37 +188,37 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell"
     1, 1] - caFP.subregions[:, n_y, :].gas.O2.Ndot_face[1, 2]) <font color="blue">if </font>environment.analysis
     <font color="darkgreen">&quot;Rate of oxygen intake&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> anFPX[n_y, n_z] <font color="darkgreen">&quot;Anode plate face&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> caFPX[n_y, n_z] <font color="darkgreen">&quot;Cathode plate face&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> anFPPosY[anFP.n_x, n_z] <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> anFPX[n_y, n_z] <font color="darkgreen">&quot;Anode plate face&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> caFPX[n_y, n_z] <font color="darkgreen">&quot;Cathode plate face&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> anFPPosY[anFP.n_x, n_z] <font color="darkgreen">
     &quot;Positive anode flow plate face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> caFPPosY[caFP.n_x, n_z] <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> caFPPosY[caFP.n_x, n_z] <font color="darkgreen">
     &quot;Positive anode flow plate face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> caFPNegY[caFP.n_x, n_z] <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> caFPNegY[caFP.n_x, n_z] <font color="darkgreen">
     &quot;Negative cathode flow plate face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> anFPNegY[anFP.n_x, n_z] <font color="darkgreen">
-    &quot;Negative anode flow plate face along the y axis&quot;</font>;</textblock>
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> anFPNegY[anFP.n_x, n_z] <font color="darkgreen">
+    &quot;Negative anode flow plate face along the y axis&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">FCSys.Regions.AnFPs.AnFP</a> anFP(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
-    &quot;Anode flow plate&quot;</font>;</textblock>
+  <font color="blue">replaceable </font><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">FCSys.Regions.AnFPs.AnFP</a> anFP(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
+    &quot;Anode flow plate&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">FCSys.Regions.AnGDLs.AnGDL</a> anGDL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
-    &quot;Anode gas diffusion layer&quot;</font>;</textblock>
+  <font color="blue">replaceable </font><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">FCSys.Regions.AnGDLs.AnGDL</a> anGDL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
+    &quot;Anode gas diffusion layer&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">FCSys.Regions.AnCLs.AnCL</a> anCL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
-    &quot;Anode catalyst layer&quot;</font>;</textblock>
+  <font color="blue">replaceable </font><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">FCSys.Regions.AnCLs.AnCL</a> anCL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
+    &quot;Anode catalyst layer&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">FCSys.Regions.PEMs.PEM</a> pEM(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
-    &quot;Proton exchange membrane&quot;</font>;</textblock>
+  <font color="blue">replaceable </font><a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">FCSys.Regions.PEMs.PEM</a> pEM(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
+    &quot;Proton exchange membrane&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">FCSys.Regions.CaCLs.CaCL</a> caCL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
-    &quot;Cathode catalyst layer&quot;</font>;</textblock>
+  <font color="blue">replaceable </font><a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCL">FCSys.Regions.CaCLs.CaCL</a> caCL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
+    &quot;Cathode catalyst layer&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">FCSys.Regions.CaGDLs.CaGDL</a> caGDL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
-    &quot;Cathode gas diffusion layer&quot;</font>;</textblock>
+  <font color="blue">replaceable </font><a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">FCSys.Regions.CaGDLs.CaGDL</a> caGDL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
+    &quot;Cathode gas diffusion layer&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">FCSys.Regions.CaFPs.CaFP</a> caFP(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
-    &quot;Cathode flow plate&quot;</font>;</textblock>
+  <font color="blue">replaceable </font><a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">FCSys.Regions.CaFPs.CaFP</a> caFP(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
+    &quot;Cathode flow plate&quot;</font>;
 
 <font color="blue">protected </font>
   <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment <font color="darkgreen">
@@ -206,22 +226,23 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell"
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Internal connections (between layers)</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(anFP.xPositive, anGDL.xNegative);
+  <font color="red">connect</font>(anFP.xPositive, anGDL.xNegative);
   <font color="red">connect</font>(anGDL.xPositive, anCL.xNegative);
   <font color="red">connect</font>(anCL.xPositive, pEM.xNegative);
   <font color="red">connect</font>(pEM.xPositive, caCL.xNegative);
   <font color="red">connect</font>(caCL.xPositive, caGDL.xNegative);
-  <font color="red">connect</font>(caGDL.xPositive, caFP.xNegative);</textblock>
+  <font color="red">connect</font>(caGDL.xPositive, caFP.xNegative);
 
   <font color="darkgreen">// External connections</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(anFPX, anFP.xNegative);
+  <font color="red">connect</font>(anFPX, anFP.xNegative);
   <font color="red">connect</font>(anFP.yNegative, anFPNegY);
-  <font color="red">connect</font>(anFP.yPositive, anFPPosY);</textblock>
+  <font color="red">connect</font>(anFP.yPositive, anFPPosY);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(caFP.xPositive, caFPX);
+  <font color="red">connect</font>(caFP.xPositive, caFPX);
   <font color="red">connect</font>(caFP.yNegative, caFPNegY);
-  <font color="red">connect</font>(caFP.yPositive, caFPPosY);</textblock>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Cell;
+  <font color="red">connect</font>(caFP.yPositive, caFPPosY);
+
+<font color="blue">end </font>Cell;
 </pre>
 <hr>
 
@@ -229,11 +250,17 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell"
 <a name="FCSys.Assemblies.Cells.CalibratedCell"></a><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells">FCSys.Assemblies.Cells</a>.CalibratedCell</h2>
 <b>Cell model with calibration parameters for exchange and transport</b><p>
 <img src="images/FCSys.Assemblies.Cells.CellD.png" alt="FCSys.Assemblies.Cells.CalibratedCell">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 <p>For more information, see the
   <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a> model.</p><p>
 Extends from <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a> (Default single-cell PEMFC).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
@@ -266,7 +293,11 @@ Extends from <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">C
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_alpha_Ndot_N2</td><td>1</td><td>For N<sub>2</sub> (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;N2</sub>) [1]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>k_alpha_Ndot_O2</td><td>1</td><td>For O<sub>2</sub> (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;O2</sub>) [1]</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anFPX[n_y, n_z]</td><td>Anode plate face</td></tr>
@@ -276,7 +307,10 @@ Extends from <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">C
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>caFPNegY[caFP.n_x, n_z]</td><td>Negative cathode flow plate face along the y axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anFPNegY[anFP.n_x, n_z]</td><td>Negative anode flow plate face along the y axis</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> CalibratedCell <font color="darkgreen">
   &quot;Cell model with calibration parameters for exchange and transport&quot;</font>
@@ -691,7 +725,7 @@ Extends from <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">C
             <font color="blue">final </font>k_alpha_Ndot='k_alpha_Ndot_e-',
             <font color="blue">final </font>k_alpha_tau='k_alpha_tau_e-',
             <font color="blue">final </font>k_alpha_Qdot='k_alpha_Qdot_e-')))));
-<textblock type="annotcomp" expanded="false">
+
 <font color="blue">end </font>CalibratedCell;
 </pre>
 <hr>
@@ -700,24 +734,34 @@ Extends from <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">C
 <a name="FCSys.Assemblies.Cells.IntegratedCell"></a><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells">FCSys.Assemblies.Cells</a>.IntegratedCell</h2>
 <b>Baseline cell, with integrated CLs and GDLs</b><p>
 <img src="images/FCSys.Assemblies.Cells.IntegratedCellD.png" alt="FCSys.Assemblies.Cells.IntegratedCell">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 <p>See the
   <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a> model.</p><p>
 Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell">FCSys.BaseClasses.Icons.Cell</a> (Icon for a cell).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the channel (L<sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths across the channel (L<sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Layers</td></tr>
-<tr><td><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a></td><td>anFP</td><td>redeclare FCSys.Regions.AnFP...</td><td>Anode flow plate</td></tr>
-<tr><td><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCGDL">AnCGDL</a></td><td>anCGDL</td><td>redeclare Regions.AnCLs.AnCG...</td><td>Anode catalyst/gas diffusion layer</td></tr>
-<tr><td><a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a></td><td>pEM</td><td>redeclare FCSys.Regions.PEMs...</td><td>PEM</td></tr>
-<tr><td><a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCGDL">CaCGDL</a></td><td>caCGDL</td><td>redeclare Regions.CaCLs.CaCG...</td><td>Cathode catalyst/gas diffusion layer</td></tr>
-<tr><td><a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">CaFP</a></td><td>caFP</td><td>redeclare FCSys.Regions.CaFP...</td><td>Cathode flow plate</td></tr>
+<tr><td><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">AnFP</a></td><td>anFP</td><td>redeclare FCSys.Regions.AnFP&hellip;</td><td>Anode flow plate</td></tr>
+<tr><td><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCGDL">AnCGDL</a></td><td>anCGDL</td><td>redeclare Regions.AnCLs.AnCG&hellip;</td><td>Anode catalyst/gas diffusion layer</td></tr>
+<tr><td><a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">PEM</a></td><td>pEM</td><td>redeclare FCSys.Regions.PEMs&hellip;</td><td>PEM</td></tr>
+<tr><td><a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCGDL">CaCGDL</a></td><td>caCGDL</td><td>redeclare Regions.CaCLs.CaCG&hellip;</td><td>Cathode catalyst/gas diffusion layer</td></tr>
+<tr><td><a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">CaFP</a></td><td>caFP</td><td>redeclare FCSys.Regions.CaFP&hellip;</td><td>Cathode flow plate</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anFPX[n_y, n_z]</td><td>Anode plate face</td></tr>
@@ -727,9 +771,13 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell"
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>caFPNegY[caFP.n_x, n_z]</td><td>Negative cathode flow plate face along the y axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anFPNegY[anFP.n_x, n_z]</td><td>Negative anode flow plate face along the y axis</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> IntegratedCell <font color="darkgreen">&quot;Baseline cell, with integrated CLs and GDLs&quot;</font>
+  <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.cartWrap">FCSys.BaseClasses.Utilities.cartWrap</a>;
   <font color="blue">extends </font><a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell">FCSys.BaseClasses.Icons.Cell</a>;
   <font color="darkgreen">// Geometric parameters</font>
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L_y[:]=<font color="red">fill</font>(1*U.m/1, 1) <font color="darkgreen">
@@ -795,29 +843,29 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell"
     2]) <font color="blue">if </font>environment.analysis <font color="darkgreen">
     &quot;Rate of electrical work (negative for work done)&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> anFPX[n_y, n_z] <font color="darkgreen">&quot;Anode plate face&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> caFPX[n_y, n_z] <font color="darkgreen">&quot;Cathode plate face&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> anFPPosY[anFP.n_x, n_z] <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> anFPX[n_y, n_z] <font color="darkgreen">&quot;Anode plate face&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> caFPX[n_y, n_z] <font color="darkgreen">&quot;Cathode plate face&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> anFPPosY[anFP.n_x, n_z] <font color="darkgreen">
     &quot;Positive anode flow plate face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> caFPPosY[caFP.n_x, n_z] <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> caFPPosY[caFP.n_x, n_z] <font color="darkgreen">
     &quot;Positive anode flow plate face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> caFPNegY[caFP.n_x, n_z] <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> caFPNegY[caFP.n_x, n_z] <font color="darkgreen">
     &quot;Negative cathode flow plate face along the y axis&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FCSys.Connectors.FaceBus</a> anFPNegY[anFP.n_x, n_z] <font color="darkgreen">
-    &quot;Negative anode flow plate face along the y axis&quot;</font>;</textblock>
+  <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> anFPNegY[anFP.n_x, n_z] <font color="darkgreen">
+    &quot;Negative anode flow plate face along the y axis&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">FCSys.Regions.AnFPs.AnFP</a> anFP(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
-    &quot;Anode flow plate&quot;</font>;</textblock>
+  <font color="blue">replaceable </font><a href="FCSys_Regions_AnFPs.html#FCSys.Regions.AnFPs.AnFP">FCSys.Regions.AnFPs.AnFP</a> anFP(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
+    &quot;Anode flow plate&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCGDL">Regions.AnCLs.AnCGDL</a> anCGDL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
-    &quot;Anode catalyst/gas diffusion layer&quot;</font>;</textblock>
+  <font color="blue">replaceable </font><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCGDL">Regions.AnCLs.AnCGDL</a> anCGDL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
+    &quot;Anode catalyst/gas diffusion layer&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">FCSys.Regions.PEMs.PEM</a> pEM(<font color="blue">final </font>L_y=L_y,<font color="blue">final </font>L_z=L_z) <font color="darkgreen">&quot;PEM&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Regions_PEMs.html#FCSys.Regions.PEMs.PEM">FCSys.Regions.PEMs.PEM</a> pEM(<font color="blue">final </font>L_y=L_y,<font color="blue">final </font>L_z=L_z) <font color="darkgreen">&quot;PEM&quot;</font>;
   <font color="blue">replaceable </font><a href="FCSys_Regions_CaCLs.html#FCSys.Regions.CaCLs.CaCGDL">Regions.CaCLs.CaCGDL</a> caCGDL(<font color="blue">final </font>L_y=L_y, <font color="blue">final </font>L_z=L_z) <font color="darkgreen">
-    &quot;Cathode catalyst/gas diffusion layer&quot;</font>;</textblock>
+    &quot;Cathode catalyst/gas diffusion layer&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">FCSys.Regions.CaFPs.CaFP</a> caFP(<font color="blue">final </font>L_y=L_y,<font color="blue">final </font>L_z=L_z) <font color="darkgreen">
-    &quot;Cathode flow plate&quot;</font>;</textblock>
+  <font color="blue">replaceable </font><a href="FCSys_Regions_CaFPs.html#FCSys.Regions.CaFPs.CaFP">FCSys.Regions.CaFPs.CaFP</a> caFP(<font color="blue">final </font>L_y=L_y,<font color="blue">final </font>L_z=L_z) <font color="darkgreen">
+    &quot;Cathode flow plate&quot;</font>;
 
 <font color="blue">protected </font>
   <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">FCSys.Conditions.Environment</a> environment <font color="darkgreen">
@@ -825,20 +873,21 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell"
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Internal connections (between layers)</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(anFP.xPositive, anCGDL.xNegative);
+  <font color="red">connect</font>(anFP.xPositive, anCGDL.xNegative);
   <font color="red">connect</font>(anCGDL.xPositive, pEM.xNegative);
-  <font color="red">connect</font>(pEM.xPositive, caCGDL.xNegative);</textblock>
+  <font color="red">connect</font>(pEM.xPositive, caCGDL.xNegative);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(caCGDL.xPositive, caFP.xNegative);</textblock>
+  <font color="red">connect</font>(caCGDL.xPositive, caFP.xNegative);
 
   <font color="darkgreen">// External connections</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(anFPX, anFP.xNegative);
+  <font color="red">connect</font>(anFPX, anFP.xNegative);
   <font color="red">connect</font>(caFP.xPositive, caFPX);
   <font color="red">connect</font>(anFP.yPositive, anFPPosY);
   <font color="red">connect</font>(caFP.yPositive, caFPPosY);
   <font color="red">connect</font>(caFP.yNegative, caFPNegY);
-  <font color="red">connect</font>(anFPNegY, anFP.yNegative);</textblock>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>IntegratedCell;
+  <font color="red">connect</font>(anFPNegY, anFP.yNegative);
+
+<font color="blue">end </font>IntegratedCell;
 </pre>
 <hr>
 
@@ -846,16 +895,26 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell"
 <a name="FCSys.Assemblies.Cells.CellSSIC"></a><a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells">FCSys.Assemblies.Cells</a>.CellSSIC</h2>
 <b>Cell model with steady state initial conditions (no reaction)</b><p>
 <img src="images/FCSys.Assemblies.Cells.CellSSICD.png" alt="FCSys.Assemblies.Cells.CellSSIC">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">Cell</a> (Default single-cell PEMFC).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the channel (L<sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths across the channel (L<sub>z</sub>) [l]</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anFPX[n_y, n_z]</td><td>Anode plate face</td></tr>
@@ -865,7 +924,10 @@ Extends from <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">C
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>caFPNegY[caFP.n_x, n_z]</td><td>Negative cathode flow plate face along the y axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>anFPNegY[anFP.n_x, n_z]</td><td>Negative anode flow plate face along the y axis</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> CellSSIC <font color="darkgreen">
   &quot;Cell model with steady state initial conditions (no reaction)&quot;</font>
@@ -903,7 +965,7 @@ Extends from <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">C
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:49:22 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:46:41 2013.
 </div>
 </body>
 </html>

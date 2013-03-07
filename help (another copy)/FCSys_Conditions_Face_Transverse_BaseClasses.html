@@ -1,0 +1,109 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.Conditions.Face.Transverse.BaseClasses</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Base classes (not generally for direct use)&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE BaseClasses<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Conditions.Face.Transverse.BaseClasses"></A><A HREF="FCSys_Conditions_Face_Transverse.html#FCSys.Conditions.Face.Transverse"
+>FCSys.Conditions.Face.Transverse</A>.BaseClasses</H2>
+<B>Base classes (not generally for direct use)</B>
+<P>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_BasesPackage.html#Modelica.Icons.BasesPackage"
+>Modelica.Icons.BasesPackage</A> (Icon for packages containing base classes).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.Face.Transverse.BaseClasses.PartialConditionS.png" ALT="FCSys.Conditions.Face.Transverse.BaseClasses.PartialCondition" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_Face_Transverse_BaseClasses.html#FCSys.Conditions.Face.Transverse.BaseClasses.PartialCondition"
+>PartialCondition</A>
+</TD><TD>Partial model for a transverse mechanical condition</TD></TR>
+<TR><TD><A HREF="FCSys_Conditions_Face_Transverse_BaseClasses.html#FCSys.Conditions.Face.Transverse.BaseClasses.ConditionType"
+>ConditionType</A>
+</TD><TD>Types of conditions</TD></TR>
+</TABLE>
+<P><H3>Types and constants</H3>
+<A NAME="FCSys.Conditions.Face.Transverse.BaseClasses.ConditionType"></A><PRE><font color="blue">type</font> ConditionType = <font color="blue">enumeration</font>(
+    Velocity <font color="darkgreen">&quot;Specify velocity (measure shear force)&quot;</font>,
+    Force <font color="darkgreen">&quot;Specify shear force (measure velocity)&quot;</font>,
+    Custom <font color="darkgreen">&quot;Custom expressions&quot;</font>) <font color="darkgreen">&quot;Types of conditions&quot;</font>;</PRE><p>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE PartialCondition<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Conditions.Face.Transverse.BaseClasses.PartialConditionI.png" ALT="FCSys.Conditions.Face.Transverse.BaseClasses.PartialCondition" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Conditions.Face.Transverse.BaseClasses.PartialCondition"></A><A HREF="FCSys_Conditions_Face_Transverse_BaseClasses.html#FCSys.Conditions.Face.Transverse.BaseClasses"
+>FCSys.Conditions.Face.Transverse.BaseClasses</A>.PartialCondition</H2>
+<B>Partial model for a transverse mechanical condition</B><p>
+<IMG SRC="FCSys.Conditions.Face.Material.PressureD.png" ALT="FCSys.Conditions.Face.Transverse.BaseClasses.PartialCondition">
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_Conditions_Face_BaseClasses.html#FCSys.Conditions.Face.BaseClasses.PartialCondition"
+>Face.BaseClasses.PartialCondition</A> (Partial model to specify and measure conditions on a connector).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_BaseClasses.html#FCSys.BaseClasses.Orientation"
+>Orientation</A></TD><TD>orientation</TD><TD>Orientation.preceding</TD><TD>Orientation of linear momentum</TD></TR>
+<TR><TD><A HREF="FCSys_Conditions_Face_Transverse_BaseClasses.html#FCSys.Conditions.Face.Transverse.BaseClasses.ConditionType"
+>ConditionType</A></TD><TD>conditionType</TD><TD>&nbsp;</TD><TD>Type of condition</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</TD></TR>
+<TR><TD>Boolean</TD><TD>internal</TD><TD>true</TD><TD>Use internal specification</TD></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Constant"
+>Constant</A></TD><TD>source</TD><TD>redeclare Modelica.Blocks.So...</TD><TD>Source of internal specification</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>RealOutput</A></TD><TD>y</TD><TD>&nbsp;</TD><TD>Measurement expression</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>u</TD><TD>Value of specified condition</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.Face"
+>Face</A></TD><TD>face</TD><TD>Connector to transport linear momentum and heat of a single species</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=3>Measurement</TD></TR>
+<TR><TD>output <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>RealOutput</A></TD><TD>y</TD><TD>Measurement expression</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">partial </font><font color="blue">model</font> PartialCondition <font color="darkgreen">
+  &quot;Partial model for a transverse mechanical condition&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_Conditions_Face_BaseClasses.html#FCSys.Conditions.Face.BaseClasses.PartialCondition"
+>Face.BaseClasses.PartialCondition</A>;
+
+  <font color="blue">parameter </font><A HREF="FCSys_BaseClasses.html#FCSys.BaseClasses.Orientation"
+>Orientation</A> orientation=Orientation.preceding <font color="darkgreen">
+    &quot;Orientation of linear momentum&quot;</font>;
+
+  <font color="blue">constant </font><A HREF="FCSys_Conditions_Face_Transverse_BaseClasses.html#FCSys.Conditions.Face.Transverse.BaseClasses.ConditionType"
+>ConditionType</A> conditionType <font color="darkgreen">&quot;Type of condition&quot;</font>;
+  <font color="darkgreen">// Note:  This is included so that the type of condition is recorded with the</font>
+  <font color="darkgreen">// results.</font>
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// No flows of other quantities</font>
+  face.Ndot = 0 <font color="darkgreen">&quot;Material&quot;</font>;
+  face.mPhidot[<font color="red">mod1</font>(orientation + 1, 2)] = 0 <font color="darkgreen">
+    &quot;Linear momentum in the other transverse direction&quot;</font>;
+  face.Qdot = 0 <font color="darkgreen">&quot;Heat&quot;</font>;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>PartialCondition;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 01:09:12 2013.
+</address></BODY>
+</HTML>

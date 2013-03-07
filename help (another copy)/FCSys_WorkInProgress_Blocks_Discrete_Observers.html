@@ -1,0 +1,131 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.WorkInProgress.Blocks.Discrete.Observers</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Observers<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.WorkInProgress.Blocks.Discrete.Observers"></A><A HREF="FCSys_WorkInProgress_Blocks_Discrete.html#FCSys.WorkInProgress.Blocks.Discrete"
+>FCSys.WorkInProgress.Blocks.Discrete</A>.Observers</H2>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package"
+>Modelica.Icons.Package</A> (Icon for standard packages).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Discrete.Observers.ObserverS.png" ALT="FCSys.WorkInProgress.Blocks.Discrete.Observers.Observer" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Discrete_Observers.html#FCSys.WorkInProgress.Blocks.Discrete.Observers.Observer"
+>Observer</A>
+</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Observer<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Discrete.Observers.ObserverI.png" ALT="FCSys.WorkInProgress.Blocks.Discrete.Observers.Observer" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Discrete.Observers.Observer"></A><A HREF="FCSys_WorkInProgress_Blocks_Discrete_Observers.html#FCSys.WorkInProgress.Blocks.Discrete.Observers"
+>FCSys.WorkInProgress.Blocks.Discrete.Observers</A>.Observer</H2>
+<IMG SRC="FCSys.WorkInProgress.Blocks.Discrete.Observers.ObserverD.png" ALT="FCSys.WorkInProgress.Blocks.Discrete.Observers.Observer">
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_WorkInProgress_Blocks_Discrete_BaseClasses.html#FCSys.WorkInProgress.Blocks.Discrete.BaseClasses.DiscreteBlock"
+>FCSys.WorkInProgress.Blocks.Discrete.BaseClasses.DiscreteBlock</A> (Base class of discrete blocks).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>&nbsp;</TD><TD>samplePeriod</TD><TD>&nbsp;</TD><TD>Sample period of species</TD></TR>
+<TR><TD>&nbsp;</TD><TD>startTime</TD><TD>0</TD><TD>First sample time instant</TD></TR>
+<TR><TD>Real</TD><TD>A[:, size(A, 1)]</TD><TD>&nbsp;</TD><TD>System gain of state space model (old state to new state)</TD></TR>
+<TR><TD>Real</TD><TD>B[size(A, 1), :]</TD><TD>&nbsp;</TD><TD>Input gain of state space model (actuation to new state)</TD></TR>
+<TR><TD>Real</TD><TD>C[:, n_x]</TD><TD>&nbsp;</TD><TD>Output gain of state space model (old state to measurement)</TD></TR>
+<TR><TD>Real</TD><TD>L[size(A, 1), size(C, 1)]</TD><TD>&nbsp;</TD><TD>Observer gain (measurement to new state)</TD></TR>
+<TR><TD>Real</TD><TD>x_0[n_x]</TD><TD>zeros(n_x)</TD><TD>Initial state</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>act[n_act]</TD><TD>Actuation</TD></TR>
+<TR><TD>output <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>RealOutput</A></TD><TD>x[n_x]</TD><TD>Estimated state</TD></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>sen[n_sen]</TD><TD>Sensor measurement</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">block</font> Observer
+  <font color="blue">extends </font><A HREF="FCSys_WorkInProgress_Blocks_Discrete_BaseClasses.html#FCSys.WorkInProgress.Blocks.Discrete.BaseClasses.DiscreteBlock"
+>FCSys.WorkInProgress.Blocks.Discrete.BaseClasses.DiscreteBlock</A>;
+  <font color="blue">parameter </font>Real A[:, <font color="red">size</font>(A, 1)] <font color="darkgreen">
+    &quot;System gain of state space model (old state to new state)&quot;</font>;
+  <font color="blue">parameter </font>Real B[<font color="red">size</font>(A, 1), :] <font color="darkgreen">
+    &quot;Input gain of state space model (actuation to new state)&quot;</font>;
+  <font color="blue">parameter </font>Real C[:, n_x] <font color="darkgreen">
+    &quot;Output gain of state space model (old state to measurement)&quot;</font>;
+  <font color="blue">parameter </font>Real L[<font color="red">size</font>(A, 1), <font color="red">size</font>(C, 1)] <font color="darkgreen">
+    &quot;Observer gain (measurement to new state)&quot;</font>;
+  <font color="darkgreen">// Can be calculated in MATLAB via the following, where A and C are the system and output matrices of the plant model in discrete time:</font>
+  <font color="darkgreen">// LT = dlqr(A&#39;,C&#39;,eye(n_x),eye(n_sen)*1e-5);</font>
+  <font color="darkgreen">// L = LT&#39;</font>
+  <font color="blue">parameter </font>Real x_0[n_x]=<font color="red">zeros</font>(n_x) <font color="darkgreen">&quot;Initial state&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_act=<font color="red">size</font>(B, 2) <font color="darkgreen">&quot;Number of actuators&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_x=<font color="red">size</font>(A, 1) <font color="darkgreen">&quot;Number of states&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_sen=<font color="red">size</font>(C, 1) <font color="darkgreen">&quot;Number of sensors&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>Connectors.RealInput</A> act[n_act] <font color="darkgreen">&quot;Actuation&quot;</font>;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>Connectors.RealOutput</A> x[n_x] <font color="darkgreen">&quot;Estimated state&quot;</font>;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>Connectors.RealInput</A> sen[n_sen] <font color="darkgreen">&quot;Sensor measurement&quot;</font>;
+  <A HREF="FCSys_WorkInProgress_Blocks_Discrete.html#FCSys.WorkInProgress.Blocks.Discrete.UnitDelay"
+>FCSys.WorkInProgress.Blocks.Discrete.UnitDelay</A> xDelay(
+    <font color="blue">final </font>samplePeriod=samplePeriod,
+    <font color="blue">final </font>startTime=startTime,
+    <font color="blue">final </font>y_0=x_0);
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.MatrixGain"
+>Modelica.Blocks.Math.MatrixGain</A> Lgain(<font color="blue">final </font>K=L);
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.MatrixGain"
+>Modelica.Blocks.Math.MatrixGain</A> Bgain(<font color="blue">final </font>K=B);
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.MatrixGain"
+>Modelica.Blocks.Math.MatrixGain</A> Again(<font color="blue">final </font>K=A);
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Math.html#Modelica.Blocks.Math.MatrixGain"
+>Modelica.Blocks.Math.MatrixGain</A> Cgain(<font color="blue">final </font>K=C);
+  <A HREF="FCSys_WorkInProgress_Blocks_Math.html#FCSys.WorkInProgress.Blocks.Math.AddSkipInclIncl"
+>FCSys.WorkInProgress.Blocks.Math.AddSkipInclIncl</A> addSkipInclIncl1(<font color="blue">final </font>n=n_x);
+  <A HREF="FCSys_WorkInProgress_Blocks_Math.html#FCSys.WorkInProgress.Blocks.Math.AddInclSkipIncl"
+>FCSys.WorkInProgress.Blocks.Math.AddInclSkipIncl</A> addInclSkipIncl(<font color="blue">final </font>n=n_x);
+  <A HREF="FCSys_WorkInProgress_Blocks_Math.html#FCSys.WorkInProgress.Blocks.Math.AddSkipInclIncl"
+>FCSys.WorkInProgress.Blocks.Math.AddSkipInclIncl</A> addSkipInclIncl2(<font color="blue">final </font>
+      isPos2=false, <font color="blue">final </font>n=n_sen);</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(addInclSkipIncl.y, xDelay.u);
+  <font color="red">connect</font>(addSkipInclIncl2.y, Lgain.u);
+  <font color="red">connect</font>(Lgain.y, addInclSkipIncl.u_1);
+  <font color="red">connect</font>(addInclSkipIncl.u_2, addSkipInclIncl1.y);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(addSkipInclIncl1.u_1, Bgain.y);
+  <font color="red">connect</font>(Bgain.u, act);
+  <font color="red">connect</font>(Again.y, addSkipInclIncl1.u_2);
+  <font color="red">connect</font>(Again.u, xDelay.y);
+  <font color="red">connect</font>(Cgain.u, xDelay.y);
+  <font color="red">connect</font>(xDelay.y, x);
+  <font color="red">connect</font>(addSkipInclIncl2.u_1, sen);
+  <font color="red">connect</font>(addSkipInclIncl2.u_2, Cgain.y);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Observer;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 01:14:18 2013.
+</address></BODY>
+</HTML>

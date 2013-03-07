@@ -1,0 +1,175 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.Tests.Subregions</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Subregions<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Tests.Subregions"></A><A HREF="FCSys_Tests.html#FCSys.Tests"
+>FCSys.Tests</A>.Subregions</H2>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package"
+>Modelica.Icons.Package</A> (Icon for standard packages).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.Tests.Subregions.RunAllS.png" ALT="FCSys.Tests.Subregions.RunAll" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Tests_Subregions.html#FCSys.Tests.Subregions.RunAll"
+>RunAll</A>
+</TD><TD>Run all of the test models for the <a href="modelica://FCSys.Subregions">Subregions</a> package</TD></TR>
+<TR><TD><IMG SRC="FCSys.Tests.Subregions.RunAllS.png" ALT="FCSys.Tests.Subregions.Subregion" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Tests_Subregions.html#FCSys.Tests.Subregions.Subregion"
+>Subregion</A>
+</TD><TD>Test a single subregion</TD></TR>
+<TR><TD><IMG SRC="FCSys.Tests.Subregions.RunAllS.png" ALT="FCSys.Tests.Subregions.Test2Subregions" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Tests_Subregions.html#FCSys.Tests.Subregions.Test2Subregions"
+>Test2Subregions</A>
+</TD><TD>Test two subregions with an initial pressure gradient</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE RunAll<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Tests.Subregions.RunAllI.png" ALT="FCSys.Tests.Subregions.RunAll" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Tests.Subregions.RunAll"></A><A HREF="FCSys_Tests_Subregions.html#FCSys.Tests.Subregions"
+>FCSys.Tests.Subregions</A>.RunAll</H2>
+<B>Run all of the test models for the <a href="modelica://FCSys.Subregions">Subregions</a> package</B><p>
+<P><H3>Information</H3></P>
+<PRE></pre><p>If this model simulates without failure,
+  then the test has passed.</p><pre></PRE><P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A> (Icon for runnable examples).
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> RunAll <font color="darkgreen">
+  &quot;</pre>Run all of the test models for the <a href=\"modelica://FCSys.Subregions\">Subregions</a> package<pre>&quot;</font>
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.Example"
+>Modelica.Icons.Example</A>;
+
+  <A HREF="FCSys_Tests_Subregions.html#FCSys.Tests.Subregions.Subregion"
+>Subregion</A> testSubregion;
+  <A HREF="FCSys_Tests_Subregions.html#FCSys.Tests.Subregions.Test2Subregions"
+>Test2Subregions</A> test2Subregions;
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>RunAll;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Subregion<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Tests.Subregions.RunAllI.png" ALT="FCSys.Tests.Subregions.Subregion" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Tests.Subregions.Subregion"></A><A HREF="FCSys_Tests_Subregions.html#FCSys.Tests.Subregions"
+>FCSys.Tests.Subregions</A>.Subregion</H2>
+<B>Test a single subregion</B><p>
+<IMG SRC="FCSys.Tests.Subregions.SubregionD.png" ALT="FCSys.Tests.Subregions.Subregion">
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Subregion"
+>FCSys.Subregions.Examples.Subregion</A> (Evaluate a single subregion, with H<sub>2</sub> by default).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Species</TD></TR>
+<TR><TD>Boolean</TD><TD>&#39;inclC+&#39;</TD><TD>true</TD><TD>Carbon plus (C<sup>+</sup>)</TD></TR>
+<TR><TD>Boolean</TD><TD>&#39;inclC19HF37O5S-&#39;</TD><TD>true</TD><TD>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</TD></TR>
+<TR><TD>Boolean</TD><TD>&#39;incle-&#39;</TD><TD>false</TD><TD>Electrons (e<sup>-</sup>)</TD></TR>
+<TR><TD>Boolean</TD><TD>&#39;inclH+&#39;</TD><TD>false</TD><TD>Protons (H<sup>+</sup>)</TD></TR>
+<TR><TD>Boolean</TD><TD>inclH2</TD><TD>true</TD><TD>Hydrogen (H<sub>2</sub>)</TD></TR>
+<TR><TD>Boolean</TD><TD>inclH2O</TD><TD>false</TD><TD>Water vapor (H<sub>2</sub>O)</TD></TR>
+<TR><TD>Boolean</TD><TD>inclN2</TD><TD>true</TD><TD>Nitrogen (N<sub>2</sub>)</TD></TR>
+<TR><TD>Boolean</TD><TD>inclO2</TD><TD>true</TD><TD>Oxygen (O<sub>2</sub>)</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Subregion <font color="darkgreen">&quot;Test a single subregion&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Subregion"
+>FCSys.Subregions.Examples.Subregion</A>(
+    &#39;inclC+&#39;=true,
+    &#39;inclC19HF37O5S-&#39;=true,
+    inclH2=true,
+    inclN2=true,
+    inclO2=true);
+
+  <font color="darkgreen">// **fix singularity and include these:</font>
+  <font color="darkgreen">// **&#39;incle-&#39;=true,</font>
+  <font color="darkgreen">// **inclH2O=true,</font>
+  <font color="darkgreen">// **excluded to prevent reactions: &#39;inclH+&#39;=true (create separate model to test reactions)</font>
+
+  <font color="darkgreen">// Currently, there are no assertions.  This model just checks that the simulation</font>
+  <font color="darkgreen">// runs.</font>
+
+<font color="blue">end </font>Subregion;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Test2Subregions<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Tests.Subregions.RunAllI.png" ALT="FCSys.Tests.Subregions.Test2Subregions" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Tests.Subregions.Test2Subregions"></A><A HREF="FCSys_Tests_Subregions.html#FCSys.Tests.Subregions"
+>FCSys.Tests.Subregions</A>.Test2Subregions</H2>
+<B>Test two subregions with an initial pressure gradient</B><p>
+<IMG SRC="FCSys.Tests.Subregions.Test2SubregionsD.png" ALT="FCSys.Tests.Subregions.Test2Subregions">
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Subregions"
+>FCSys.Subregions.Examples.Subregions</A> (Test a one-dimensional array of subregions with an initial pressure gradient (H<sub>2</sub> included by default)).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>n_x</TD><TD>0</TD><TD>Number of discrete subregions along the x axis, besides the 2 side subregions</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Pressure"
+>Pressure</A></TD><TD>Deltap_IC</TD><TD>10*U.kPa</TD><TD>Initial pressure difference (&Delta;<i>p</i><sub>IC</sub>) [m/(l.T2)]</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Species</TD></TR>
+<TR><TD>Boolean</TD><TD>&#39;inclC+&#39;</TD><TD>true</TD><TD>Carbon plus (C<sup>+</sup>)</TD></TR>
+<TR><TD>Boolean</TD><TD>&#39;inclC19HF37O5S-&#39;</TD><TD>true</TD><TD>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S)</TD></TR>
+<TR><TD>Boolean</TD><TD>&#39;incle-&#39;</TD><TD>false</TD><TD>Electrons (e<sup>-</sup>)</TD></TR>
+<TR><TD>Boolean</TD><TD>inclH2</TD><TD>true</TD><TD>Hydrogen (H<sub>2</sub>)</TD></TR>
+<TR><TD>Boolean</TD><TD>inclH2O</TD><TD>false</TD><TD>Water vapor (H<sub>2</sub>O)</TD></TR>
+<TR><TD>Boolean</TD><TD>&#39;inclH+&#39;</TD><TD>false</TD><TD>Protons (H<sup>+</sup>)</TD></TR>
+<TR><TD>Boolean</TD><TD>inclN2</TD><TD>true</TD><TD>Nitrogen (N<sub>2</sub>)</TD></TR>
+<TR><TD>Boolean</TD><TD>inclO2</TD><TD>true</TD><TD>Oxygen (O<sub>2</sub>)</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Test2Subregions <font color="darkgreen">
+  &quot;Test two subregions with an initial pressure gradient&quot;</font>
+
+  <font color="blue">extends </font><A HREF="FCSys_Subregions_Examples.html#FCSys.Subregions.Examples.Subregions"
+>FCSys.Subregions.Examples.Subregions</A>(
+    n_x=0,
+    &#39;inclC+&#39;=true,
+    &#39;inclC19HF37O5S-&#39;=true,
+    inclH2=true,
+    inclN2=true,
+    inclO2=true,
+    environment(<font color="blue">final </font>analysis=true));
+
+  <font color="darkgreen">// **fix singularity and include these:</font>
+  <font color="darkgreen">// &#39;incle-&#39;=true,</font>
+  <font color="darkgreen">// **inclH2O=true,</font>
+  <font color="darkgreen">// **excluded to prevent reactions: &#39;inclH+&#39;=true,</font>
+
+  <font color="blue">output </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Amount"
+>Q.Amount</A> S(stateSelect=StateSelect.never) = subregion1.graphite.'C+'.S +
+    subregion2.graphite.'C+'.S + subregion1.ionomer.'C19HF37O5S-'.S +
+    subregion2.ionomer.'C19HF37O5S-'.S + subregion1.gas.H2.S + subregion2.gas.H2.S
+     + subregion1.gas.N2.S + subregion2.gas.N2.S + subregion1.gas.O2.S +
+    subregion2.gas.O2.S <font color="darkgreen">&quot;Total entropy&quot;</font>;
+
+<font color="blue">equation </font>
+  <font color="red">assert</font>(<font color="red">der</font>(S) &gt;= 0, &quot;Entropy may not decrease.&quot;);
+
+<font color="blue">end </font>Test2Subregions;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 01:12:37 2013.
+</address></BODY>
+</HTML>

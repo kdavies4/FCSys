@@ -1,0 +1,153 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.Conditions.Face</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;&lt;html&gt;Conditions for a &lt;a href=\&quot;modelica://FCSys.Connectors.Face\&quot;&gt;Face&lt;/a&gt; connector (e.g., as in a &lt;a href=\&quot;modelica://FCSys.Subregions.Species\&quot;&gt;Species&lt;/a&gt; model)&lt;/html&gt;&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Face<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Conditions.Face"></A><A HREF="FCSys_Conditions.html#FCSys.Conditions"
+>FCSys.Conditions</A>.Face</H2>
+<B>Conditions for a <a href="modelica://FCSys.Connectors.Face">Face</a> connector (e.g., as in a <a href="modelica://FCSys.Subregions.Species">Species</a> model)</B>
+<P>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package"
+>Modelica.Icons.Package</A> (Icon for standard packages).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.Face.SpeciesS.png" ALT="FCSys.Conditions.Face.Species" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_Face.html#FCSys.Conditions.Face.Species"
+>Species</A>
+</TD><TD>Conditions for a <a href="modelica://FCSys.Connectors.Face">Face</a> connector</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.Face.MaterialS.png" ALT="FCSys.Conditions.Face.Material" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_Face_Material.html#FCSys.Conditions.Face.Material"
+>Material</A>
+</TD><TD>Material conditions</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.Face.MaterialS.png" ALT="FCSys.Conditions.Face.Transverse" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_Face_Transverse.html#FCSys.Conditions.Face.Transverse"
+>Transverse</A>
+</TD><TD>Transverse mechanical conditions</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.Face.MaterialS.png" ALT="FCSys.Conditions.Face.Thermal" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_Face_Thermal.html#FCSys.Conditions.Face.Thermal"
+>Thermal</A>
+</TD><TD>Thermal conditions</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.Face.BaseClassesS.png" ALT="FCSys.Conditions.Face.BaseClasses" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_Face_BaseClasses.html#FCSys.Conditions.Face.BaseClasses"
+>BaseClasses</A>
+</TD><TD>Base classes (not generally for direct use)</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Species<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Conditions.Face.SpeciesI.png" ALT="FCSys.Conditions.Face.Species" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Conditions.Face.Species"></A><A HREF="FCSys_Conditions_Face.html#FCSys.Conditions.Face"
+>FCSys.Conditions.Face</A>.Species</H2>
+<B>Conditions for a <a href="modelica://FCSys.Connectors.Face">Face</a> connector</B><p>
+<IMG SRC="FCSys.Conditions.Face.SpeciesD.png" ALT="FCSys.Conditions.Face.Species">
+<P><H3>Information</H3></P>
+<PRE></pre>
+  <p>If the source of an internal specification is redeclared to a block besides
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Constant"
+>Modelica.Blocks.Sources.Constant</a>,
+  then the related condition must be redeclared as well.  For example, use:<br>
+  <code>redeclare Conditions.Face.Material.Pressure material(redeclare Modelica.Blocks.Sources.Ramp source)</code><br>
+  rather than simply:<br>
+  <code>material(redeclare Modelica.Blocks.Sources.Ramp source)</code></p>
+  <pre></PRE><P>
+Extends from <A HREF="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single"
+>FCSys.Conditions.BaseClasses.Icons.Single</A> (Icon for a single-connector boundary condition).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Conditions</TD></TR>
+<TR><TD><A HREF="FCSys_Conditions_Face_Material.html#FCSys.Conditions.Face.Material.Pressure"
+>Pressure</A></TD><TD>material</TD><TD>redeclare Material.Pressure ...</TD><TD>Material</TD></TR>
+<TR><TD><A HREF="FCSys_Conditions_Face_Transverse.html#FCSys.Conditions.Face.Transverse.Velocity"
+>Velocity</A></TD><TD>transverse1</TD><TD>redeclare Transverse.Velocit...</TD><TD>1<sup>st</sup> transverse</TD></TR>
+<TR><TD><A HREF="FCSys_Conditions_Face_Transverse.html#FCSys.Conditions.Face.Transverse.Velocity"
+>Velocity</A></TD><TD>transverse2</TD><TD>redeclare Transverse.Velocit...</TD><TD>2<sup>nd</sup> transverse</TD></TR>
+<TR><TD><A HREF="FCSys_Conditions_Face_Thermal.html#FCSys.Conditions.Face.Thermal.Temperature"
+>Temperature</A></TD><TD>thermal</TD><TD>redeclare Thermal.Temperatur...</TD><TD>Thermal</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.Face"
+>Face</A></TD><TD>face</TD><TD>Single-species connector for linear momentum and heat</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInputBus"
+>RealInputBus</A></TD><TD>u</TD><TD>Input bus for values of specified conditions</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus"
+>RealOutputBus</A></TD><TD>y</TD><TD>Output bus of measurements</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Species <font color="darkgreen">
+  &quot;</pre>Conditions for a <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connector<pre>&quot;</font>
+
+  <font color="blue">extends </font><A HREF="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single"
+>FCSys.Conditions.BaseClasses.Icons.Single</A>;
+
+<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><A HREF="FCSys_Conditions_Face_Material.html#FCSys.Conditions.Face.Material.Pressure"
+>Material.Pressure</A> material(source(k(start=U.atm))) <font color="blue">constrainedby </font>
+    Material.BaseClasses.PartialCondition <font color="darkgreen">&quot;Material&quot;</font>;
+  <font color="blue">replaceable </font><A HREF="FCSys_Conditions_Face_Transverse.html#FCSys.Conditions.Face.Transverse.Velocity"
+>Transverse.Velocity</A> transverse1(<font color="blue">final </font>orientation=Orientation.preceding,
+      source(k(start=0))) <font color="blue">constrainedby </font>Transverse.BaseClasses.PartialCondition
+    <font color="darkgreen">&quot;</pre>1<sup>st</sup> transverse<pre>&quot;</font>;
+  <font color="blue">replaceable </font><A HREF="FCSys_Conditions_Face_Transverse.html#FCSys.Conditions.Face.Transverse.Velocity"
+>Transverse.Velocity</A> transverse2(<font color="blue">final </font>orientation=Orientation.following,
+      source(k(start=0))) <font color="blue">constrainedby </font>Transverse.BaseClasses.PartialCondition
+    <font color="darkgreen">&quot;</pre>2<sup>nd</sup> transverse<pre>&quot;</font>;
+  <font color="blue">replaceable </font><A HREF="FCSys_Conditions_Face_Thermal.html#FCSys.Conditions.Face.Thermal.Temperature"
+>Thermal.Temperature</A> thermal(source(k(start=298.15*U.K))) <font color="blue">
+    constrainedby </font>Thermal.BaseClasses.PartialCondition <font color="darkgreen">&quot;Thermal&quot;</font>;</textblock>
+  <font color="darkgreen">// Note:  In Dymola 7.4, the value of k must be specified here instead</font>
+  <font color="darkgreen">// of at the lower level (e.g., Thermal.Temperature) so that the source</font>
+  <font color="darkgreen">// subcomponent can be replaced by blocks that don&#39;t contain the</font>
+  <font color="darkgreen">// parameter k.</font>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Connectors.html#FCSys.Connectors.Face"
+>Connectors.Face</A> face <font color="darkgreen">&quot;Single-species connector for linear momentum and heat&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInputBus"
+>Connectors.RealInputBus</A> u <font color="darkgreen">&quot;Input bus for values of specified conditions&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus"
+>Connectors.RealOutputBus</A> y <font color="darkgreen">&quot;Output bus of measurements&quot;</font>;</textblock>
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// Normal</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(material.face, face);
+  <font color="red">connect</font>(u.normal, material.u);
+  <font color="red">connect</font>(material.y, y.normal);</textblock>
+
+  <font color="darkgreen">// 1st transverse</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverse1.face, face);
+  <font color="red">connect</font>(u.transverse1, transverse1.u);
+  <font color="red">connect</font>(transverse1.y, y.transverse1);</textblock>
+
+  <font color="darkgreen">// 2nd transverse</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(transverse2.face, face);
+  <font color="red">connect</font>(u.transverse2, transverse2.u);
+  <font color="red">connect</font>(transverse2.y, y.transverse2);</textblock>
+
+  <font color="darkgreen">// Thermal</font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(thermal.face, face);
+  <font color="red">connect</font>(u.thermal, thermal.u);
+  <font color="red">connect</font>(thermal.y, y.thermal);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Species;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 01:09:08 2013.
+</address></BODY>
+</HTML>

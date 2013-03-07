@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.InertDalton.Thermal</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="Thermal conditions">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,11 +45,15 @@
       <div class="body">
 
 <h2><a name="FCSys.Conditions.InertDalton.Thermal"></a><a href="FCSys_Conditions_InertDalton.html#FCSys.Conditions.InertDalton">FCSys.Conditions.InertDalton</a>.Thermal</h2>
+
 <b>Thermal conditions</b>
-<p>
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Conditions.InertDalton.Thermal.TemperatureS.png" alt="FCSys.Conditions.InertDalton.Thermal.Temperature" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_InertDalton_Thermal.html#FCSys.Conditions.InertDalton.Thermal.Temperature">Temperature</a>
@@ -66,12 +71,18 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Conditions.InertDalton.Thermal.Temperature"></a><a href="FCSys_Conditions_InertDalton_Thermal.html#FCSys.Conditions.InertDalton.Thermal">FCSys.Conditions.InertDalton.Thermal</a>.Temperature</h2>
 <b>Specify temperature (measure heat flow rate)</b><p>
 <img src="images/FCSys.Conditions.InertDalton.Dalton.VolumeD.png" alt="FCSys.Conditions.InertDalton.Thermal.Temperature">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="FCSys_Conditions_InertDalton_Thermal_BaseClasses.html#FCSys.Conditions.InertDalton.Thermal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a thermal condition).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Conditions_InertDalton_Thermal_BaseClasses.html#FCSys.Conditions.InertDalton.Thermal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Te...</td><td>Type of condition</td></tr>
+<tr><td><a href="FCSys_Conditions_InertDalton_Thermal_BaseClasses.html#FCSys.Conditions.InertDalton.Thermal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Te&hellip;</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
 <tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
 <tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
@@ -79,12 +90,19 @@ Extends from <a href="FCSys_Conditions_InertDalton_Thermal_BaseClasses.html#FCSy
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Connector for linear momentum and heat, with additivity of pressure</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> Temperature <font color="darkgreen">&quot;Specify temperature (measure heat flow rate)&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Conditions_InertDalton_Thermal_BaseClasses.html#FCSys.Conditions.InertDalton.Thermal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(
@@ -95,7 +113,7 @@ Extends from <a href="FCSys_Conditions_InertDalton_Thermal_BaseClasses.html#FCSy
 
 <font color="blue">equation </font>
   inert.T = u_final;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Temperature;
+<font color="blue">end </font>Temperature;
 </pre>
 <hr>
 
@@ -103,26 +121,39 @@ Extends from <a href="FCSys_Conditions_InertDalton_Thermal_BaseClasses.html#FCSy
 <a name="FCSys.Conditions.InertDalton.Thermal.HeatRate"></a><a href="FCSys_Conditions_InertDalton_Thermal.html#FCSys.Conditions.InertDalton.Thermal">FCSys.Conditions.InertDalton.Thermal</a>.HeatRate</h2>
 <b>Specify heat flow rate (measure temperature)</b><p>
 <img src="images/FCSys.Conditions.InertDalton.Dalton.VolumeD.png" alt="FCSys.Conditions.InertDalton.Thermal.HeatRate">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="FCSys_Conditions_InertDalton_Thermal_BaseClasses.html#FCSys.Conditions.InertDalton.Thermal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a thermal condition).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Conditions_InertDalton_Thermal_BaseClasses.html#FCSys.Conditions.InertDalton.Thermal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.He...</td><td>Type of condition</td></tr>
+<tr><td><a href="FCSys_Conditions_InertDalton_Thermal_BaseClasses.html#FCSys.Conditions.InertDalton.Thermal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.He&hellip;</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
 <tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
 <tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So...</td><td>Source of internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Connector for linear momentum and heat, with additivity of pressure</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> HeatRate <font color="darkgreen">&quot;Specify heat flow rate (measure temperature)&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Conditions_InertDalton_Thermal_BaseClasses.html#FCSys.Conditions.InertDalton.Thermal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(
@@ -134,7 +165,7 @@ Extends from <a href="FCSys_Conditions_InertDalton_Thermal_BaseClasses.html#FCSy
 
 <font color="blue">equation </font>
   inert.Qdot = u_final;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>HeatRate;
+<font color="blue">end </font>HeatRate;
 </pre>
 <hr>
 
@@ -142,26 +173,36 @@ Extends from <a href="FCSys_Conditions_InertDalton_Thermal_BaseClasses.html#FCSy
 <a name="FCSys.Conditions.InertDalton.Thermal.Custom"></a><a href="FCSys_Conditions_InertDalton_Thermal.html#FCSys.Conditions.InertDalton.Thermal">FCSys.Conditions.InertDalton.Thermal</a>.Custom</h2>
 <b>Custom expressions</b><p>
 <img src="images/FCSys.Conditions.InertDalton.Dalton.VolumeD.png" alt="FCSys.Conditions.InertDalton.Thermal.Custom">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 <p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p><p>
 Extends from <a href="FCSys_Conditions_InertDalton_Thermal_BaseClasses.html#FCSys.Conditions.InertDalton.Thermal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a> (Partial model for a thermal condition).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Conditions_InertDalton_Thermal_BaseClasses.html#FCSys.Conditions.InertDalton.Thermal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Cu...</td><td>Type of condition</td></tr>
+<tr><td><a href="FCSys_Conditions_InertDalton_Thermal_BaseClasses.html#FCSys.Conditions.InertDalton.Thermal.BaseClasses.ConditionType">ConditionType</a></td><td>conditionType</td><td>BaseClasses.ConditionType.Cu&hellip;</td><td>Type of condition</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
 <tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
 <tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
-<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So...</td><td>Source of internal specification</td></tr>
+<tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
 <tr><td>Real</td><td>x</td><td>inert.T</td><td>Expression to which the condition is applied</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>inert.Qdot</td><td>Measurement expression</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Value of specified condition</td></tr>
@@ -169,7 +210,10 @@ Extends from <a href="FCSys_Conditions_InertDalton_Thermal_BaseClasses.html#FCSy
 <TR bgcolor="#e0e0e0"><TD colspan=3>Measurement</td></tr>
 <tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Measurement expression</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> Custom <font color="darkgreen">&quot;Custom expressions&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Conditions_InertDalton_Thermal_BaseClasses.html#FCSys.Conditions.InertDalton.Thermal.BaseClasses.PartialCondition">BaseClasses.PartialCondition</a>(<font color="blue">final </font>conditionType=BaseClasses.ConditionType.Custom,
@@ -179,14 +223,14 @@ Extends from <a href="FCSys_Conditions_InertDalton_Thermal_BaseClasses.html#FCSy
 
 <font color="blue">equation </font>
   x = u_final;
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Custom;
+<font color="blue">end </font>Custom;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:48:11 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:45:22 2013.
 </div>
 </body>
 </html>

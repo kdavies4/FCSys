@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.InertAmagat</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="&lt;html&gt;Conditions for a &lt;a href=\&quot;modelica://FCSys.Connectors.InertAmagat\&quot;&gt;InertAmagat&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,11 +45,15 @@
       <div class="body">
 
 <h2><a name="FCSys.Conditions.InertAmagat"></a><a href="FCSys_Conditions.html#FCSys.Conditions">FCSys.Conditions</a>.InertAmagat</h2>
+
 <b>Conditions for a <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a> connector</b>
-<p>
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Conditions.InertAmagat.PhaseS.png" alt="FCSys.Conditions.InertAmagat.Phase" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_InertAmagat.html#FCSys.Conditions.InertAmagat.Phase">Phase</a>
@@ -58,7 +63,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Conditions.InertAmagat.AmagatS.png" alt="FCSys.Conditions.InertAmagat.Amagat" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_InertAmagat_Amagat.html#FCSys.Conditions.InertAmagat.Amagat">Amagat</a>
 </td><td>Conditions for additivity of volume</td></tr>
 <tr><td><img src="images/FCSys.Conditions.InertAmagat.AmagatS.png" alt="FCSys.Conditions.InertAmagat.Mechanical" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_InertAmagat_Mechanical.html#FCSys.Conditions.InertAmagat.Mechanical">Mechanical</a>
-</td><td>Mechanical Conditions</td></tr>
+</td><td>Mechanical conditions</td></tr>
 <tr><td><img src="images/FCSys.Conditions.InertAmagat.AmagatS.png" alt="FCSys.Conditions.InertAmagat.Thermal" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_InertAmagat_Thermal.html#FCSys.Conditions.InertAmagat.Thermal">Thermal</a>
 </td><td>Thermal conditions</td></tr>
 <tr><td><img src="images/FCSys.Conditions.InertAmagat.BaseClassesS.png" alt="FCSys.Conditions.InertAmagat.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_InertAmagat_BaseClasses.html#FCSys.Conditions.InertAmagat.BaseClasses">BaseClasses</a>
@@ -70,9 +75,22 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Conditions.InertAmagat.Phase"></a><a href="FCSys_Conditions_InertAmagat.html#FCSys.Conditions.InertAmagat">FCSys.Conditions.InertAmagat</a>.Phase</h2>
 <b>Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Phases">Phase</a> model), with efforts by default</b><p>
 <img src="images/FCSys.Conditions.InertAmagat.PhaseD.png" alt="FCSys.Conditions.InertAmagat.Phase">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
+<p>If the source of an internal specification is redeclared to a block besides
+  <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Modelica.Blocks.Sources.Constant</a>,
+  then the related condition must be redeclared as well.  For example, use:<br>
+  <code>redeclare Conditions.InertAmagat.Amagat.Volume amagat(redeclare Modelica.Blocks.Sources.Ramp source)</code><br>
+  rather than simply:<br>
+  <code>amagat(redeclare Modelica.Blocks.Sources.Ramp source)</code></p>
+  <p>
 Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single">FCSys.Conditions.BaseClasses.Icons.Single</a> (Icon for a single-connector boundary condition).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
@@ -80,95 +98,104 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
 <tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Conditions</td></tr>
-<tr><td><a href="FCSys_Conditions_InertAmagat_Amagat.html#FCSys.Conditions.InertAmagat.Amagat.Pressure">Pressure</a></td><td>amagat</td><td>redeclare Amagat.Pressure am...</td><td>Amagat</td></tr>
-<tr><td><a href="FCSys_Conditions_InertAmagat_Mechanical.html#FCSys.Conditions.InertAmagat.Mechanical.Velocity">Velocity</a></td><td>mechanicalX</td><td>redeclare Mechanical.Velocit...</td><td>X-axis mechanical</td></tr>
-<tr><td><a href="FCSys_Conditions_InertAmagat_Mechanical.html#FCSys.Conditions.InertAmagat.Mechanical.Velocity">Velocity</a></td><td>mechanicalY</td><td>redeclare Mechanical.Velocit...</td><td>Y-axis mechanical</td></tr>
-<tr><td><a href="FCSys_Conditions_InertAmagat_Mechanical.html#FCSys.Conditions.InertAmagat.Mechanical.Velocity">Velocity</a></td><td>mechanicalZ</td><td>redeclare Mechanical.Velocit...</td><td>Z-axis mechanical</td></tr>
-<tr><td><a href="FCSys_Conditions_InertAmagat_Thermal.html#FCSys.Conditions.InertAmagat.Thermal.Temperature">Temperature</a></td><td>thermal</td><td>redeclare Thermal.Temperatur...</td><td>Thermal</td></tr>
+<tr><td><a href="FCSys_Conditions_InertAmagat_Amagat.html#FCSys.Conditions.InertAmagat.Amagat.Pressure">Pressure</a></td><td>amagat</td><td>redeclare Amagat.Pressure am&hellip;</td><td>Amagat</td></tr>
+<tr><td><a href="FCSys_Conditions_InertAmagat_Mechanical.html#FCSys.Conditions.InertAmagat.Mechanical.Velocity">Velocity</a></td><td>mechanicalX</td><td>redeclare Mechanical.Velocit&hellip;</td><td>X-axis mechanical</td></tr>
+<tr><td><a href="FCSys_Conditions_InertAmagat_Mechanical.html#FCSys.Conditions.InertAmagat.Mechanical.Velocity">Velocity</a></td><td>mechanicalY</td><td>redeclare Mechanical.Velocit&hellip;</td><td>Y-axis mechanical</td></tr>
+<tr><td><a href="FCSys_Conditions_InertAmagat_Mechanical.html#FCSys.Conditions.InertAmagat.Mechanical.Velocity">Velocity</a></td><td>mechanicalZ</td><td>redeclare Mechanical.Velocit&hellip;</td><td>Z-axis mechanical</td></tr>
+<tr><td><a href="FCSys_Conditions_InertAmagat_Thermal.html#FCSys.Conditions.InertAmagat.Thermal.Temperature">Temperature</a></td><td>thermal</td><td>redeclare Thermal.Temperatur&hellip;</td><td>Thermal</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Input bus for values of specified conditions</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a></td><td>inert</td><td>Single-species connector for linear momentum and heat, with additivity of volume</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> Phase <font color="darkgreen">
   &quot;Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Phases">Phase</a> model), with efforts by default&quot;</font>
+  <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.countTrue">FCSys.BaseClasses.Utilities.countTrue</a>;
   <font color="blue">extends </font><a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single">FCSys.Conditions.BaseClasses.Icons.Single</a>;
 
   <font color="darkgreen">// Included components of linear momentum</font>
   <font color="blue">parameter </font>Boolean inclLinX=true <font color="darkgreen">&quot;X&quot;</font>;
+
   <font color="blue">parameter </font>Boolean inclLinY=false <font color="darkgreen">&quot;Y&quot;</font>;
+
   <font color="blue">parameter </font>Boolean inclLinZ=false <font color="darkgreen">&quot;Z&quot;</font>;
 
   <font color="darkgreen">// Conditions</font>
-<textblock type="annotcomp" expanded="false">  <font color="blue">replaceable </font><a href="FCSys_Conditions_InertAmagat_Amagat.html#FCSys.Conditions.InertAmagat.Amagat.Pressure">Amagat.Pressure</a> amagat(source(k=-U.atm)) <font color="blue">constrainedby </font>
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_InertAmagat_Amagat.html#FCSys.Conditions.InertAmagat.Amagat.Pressure">Amagat.Pressure</a> amagat(source(k(start=U.atm))) <font color="blue">constrainedby </font>
     Amagat.BaseClasses.PartialCondition(
     <font color="blue">final </font>inclLinX=inclLinX,
     <font color="blue">final </font>inclLinY=inclLinY,
     <font color="blue">final </font>inclLinZ=inclLinZ) <font color="darkgreen">&quot;Amagat&quot;</font>;
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_InertAmagat_Mechanical.html#FCSys.Conditions.InertAmagat.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalX(source(k=0)) <font color="blue">if </font>inclLinX <font color="blue">
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_InertAmagat_Mechanical.html#FCSys.Conditions.InertAmagat.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalX(source(k(start=0))) <font color="blue">if </font>inclLinX <font color="blue">
     constrainedby </font>Mechanical.BaseClasses.PartialCondition(
     <font color="blue">final </font>inclLinX=inclLinX,
     <font color="blue">final </font>inclLinY=inclLinY,
     <font color="blue">final </font>inclLinZ=inclLinZ,
     <font color="blue">final </font>axis=Axis.x) <font color="darkgreen">&quot;X-axis mechanical&quot;</font>;
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_InertAmagat_Mechanical.html#FCSys.Conditions.InertAmagat.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalY(source(k=0)) <font color="blue">if </font>inclLinY <font color="blue">
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_InertAmagat_Mechanical.html#FCSys.Conditions.InertAmagat.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalY(source(k(start=0))) <font color="blue">if </font>inclLinY <font color="blue">
     constrainedby </font>Mechanical.BaseClasses.PartialCondition(
     <font color="blue">final </font>inclLinX=inclLinX,
     <font color="blue">final </font>inclLinY=inclLinY,
     <font color="blue">final </font>inclLinZ=inclLinZ,
     <font color="blue">final </font>axis=Axis.y) <font color="darkgreen">&quot;Y-axis mechanical&quot;</font>;
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_InertAmagat_Mechanical.html#FCSys.Conditions.InertAmagat.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalZ(source(k=0)) <font color="blue">if </font>inclLinZ <font color="blue">
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_InertAmagat_Mechanical.html#FCSys.Conditions.InertAmagat.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalZ(source(k(start=0))) <font color="blue">if </font>inclLinZ <font color="blue">
     constrainedby </font>Mechanical.BaseClasses.PartialCondition(
     <font color="blue">final </font>inclLinX=inclLinX,
     <font color="blue">final </font>inclLinY=inclLinY,
     <font color="blue">final </font>inclLinZ=inclLinZ,
     <font color="blue">final </font>axis=Axis.z) <font color="darkgreen">&quot;Z-axis mechanical&quot;</font>;
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_InertAmagat_Thermal.html#FCSys.Conditions.InertAmagat.Thermal.Temperature">Thermal.Temperature</a> thermal(source(k=298.15*U.K)) <font color="blue">constrainedby </font>
-    Thermal.BaseClasses.PartialCondition(
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_InertAmagat_Thermal.html#FCSys.Conditions.InertAmagat.Thermal.Temperature">Thermal.Temperature</a> thermal(source(k(start=298.15*U.K))) <font color="blue">
+    constrainedby </font>Thermal.BaseClasses.PartialCondition(
     <font color="blue">final </font>inclLinX=inclLinX,
     <font color="blue">final </font>inclLinY=inclLinY,
-    <font color="blue">final </font>inclLinZ=inclLinZ) <font color="darkgreen">&quot;Thermal&quot;</font>;</textblock>
+    <font color="blue">final </font>inclLinZ=inclLinZ) <font color="darkgreen">&quot;Thermal&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">FCSys.Connectors.RealInputBus</a> u <font color="darkgreen">
-    &quot;Input bus for values of specified conditions&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">FCSys.Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Output bus of measurements&quot;</font>;</textblock>
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">Connectors.RealInputBus</a> u <font color="darkgreen">&quot;Input bus for values of specified conditions&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Output bus of measurements&quot;</font>;
 
-<textblock type="annotcomp" expanded="false">  <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">FCSys.Connectors.InertAmagat</a> inert(<font color="blue">final </font>n_lin=<font color="red">countTrue</font>({inclLinX,inclLinY,
+  <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">Connectors.InertAmagat</a> inert(<font color="blue">final </font>n_lin=<font color="red">countTrue</font>({inclLinX,inclLinY,
         inclLinZ})) <font color="darkgreen">
-    &quot;Single-species connector for linear momentum and heat, with additivity of volume&quot;</font>;</textblock>
+    &quot;Single-species connector for linear momentum and heat, with additivity of volume&quot;</font>;
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Amagat</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(amagat.inert, inert);
+  <font color="red">connect</font>(amagat.inert, inert);
   <font color="red">connect</font>(u.amagat, amagat.u);
-  <font color="red">connect</font>(amagat.y, y.amagat);</textblock>
+  <font color="red">connect</font>(amagat.y, y.amagat);
 
   <font color="darkgreen">// X-axis mechanical</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalX.inert, inert);
+  <font color="red">connect</font>(mechanicalX.inert, inert);
   <font color="red">connect</font>(u.mechanicalX, mechanicalX.u);
-  <font color="red">connect</font>(mechanicalX.y, y.mechanicalX);</textblock>
+  <font color="red">connect</font>(mechanicalX.y, y.mechanicalX);
 
   <font color="darkgreen">// Y-axis mechanical</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalY.inert, inert);</textblock>
+  <font color="red">connect</font>(mechanicalY.inert, inert);
 
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u.mechanicalY, mechanicalY.u);
-  <font color="red">connect</font>(mechanicalY.y, y.mechanicalY);</textblock>
+  <font color="red">connect</font>(u.mechanicalY, mechanicalY.u);
+  <font color="red">connect</font>(mechanicalY.y, y.mechanicalY);
 
   <font color="darkgreen">// Z-axis mechanical</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(mechanicalZ.inert, inert);
+  <font color="red">connect</font>(mechanicalZ.inert, inert);
   <font color="red">connect</font>(u.mechanicalZ, mechanicalZ.u);
-  <font color="red">connect</font>(mechanicalZ.y, y.mechanicalZ);</textblock>
+  <font color="red">connect</font>(mechanicalZ.y, y.mechanicalZ);
 
   <font color="darkgreen">// Thermal</font>
-<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(thermal.inert, inert);
+  <font color="red">connect</font>(thermal.inert, inert);
   <font color="red">connect</font>(u.thermal, thermal.u);
-  <font color="red">connect</font>(thermal.y, y.thermal);</textblock>
-<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Phase;
+  <font color="red">connect</font>(thermal.y, y.thermal);
+<font color="blue">end </font>Phase;
 </pre>
 <hr>
 
@@ -176,9 +203,18 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
 <a name="FCSys.Conditions.InertAmagat.PhaseFlow"></a><a href="FCSys_Conditions_InertAmagat.html#FCSys.Conditions.InertAmagat">FCSys.Conditions.InertAmagat</a>.PhaseFlow</h2>
 <b>Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Phases">Phase</a> model), with flows by default</b><p>
 <img src="images/FCSys.Conditions.InertAmagat.PhaseD.png" alt="FCSys.Conditions.InertAmagat.PhaseFlow">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
+<p>See the <a href="FCSys_Conditions_InertAmagat.html#FCSys.Conditions.InertAmagat.Phase">Phase</a>
+model.</p>
+<p>
 Extends from <a href="FCSys_Conditions_InertAmagat.html#FCSys.Conditions.InertAmagat.Phase">Phase</a> (Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Phases">Phase</a> model), with efforts by default).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
@@ -186,25 +222,32 @@ Extends from <a href="FCSys_Conditions_InertAmagat.html#FCSys.Conditions.InertAm
 <tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Input bus for values of specified conditions</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a></td><td>inert</td><td>Single-species connector for linear momentum and heat, with additivity of volume</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> PhaseFlow <font color="darkgreen">
   &quot;Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">InertAmagat</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Phases">Phase</a> model), with flows by default&quot;</font>
 
   <font color="blue">extends </font><a href="FCSys_Conditions_InertAmagat.html#FCSys.Conditions.InertAmagat.Phase">Phase</a>(
-    <font color="blue">redeclare </font><a href="FCSys_Conditions_InertAmagat_Amagat.html#FCSys.Conditions.InertAmagat.Amagat.Volume">Amagat.Volume</a> amagat(source(k=-U.cc)),
-    <font color="blue">redeclare </font><a href="FCSys_Conditions_InertAmagat_Mechanical.html#FCSys.Conditions.InertAmagat.Mechanical.Force">Mechanical.Force</a> mechanicalX,
-    <font color="blue">redeclare </font><a href="FCSys_Conditions_InertAmagat_Mechanical.html#FCSys.Conditions.InertAmagat.Mechanical.Force">Mechanical.Force</a> mechanicalY,
-    <font color="blue">redeclare </font><a href="FCSys_Conditions_InertAmagat_Mechanical.html#FCSys.Conditions.InertAmagat.Mechanical.Force">Mechanical.Force</a> mechanicalZ,
-    <font color="blue">redeclare </font><a href="FCSys_Conditions_InertAmagat_Thermal.html#FCSys.Conditions.InertAmagat.Thermal.HeatRate">Thermal.HeatRate</a> thermal(source(k=0)));
-<textblock type="annotcomp" expanded="false">
+    <font color="blue">redeclare </font><a href="FCSys_Conditions_InertAmagat_Amagat.html#FCSys.Conditions.InertAmagat.Amagat.Volume">Amagat.Volume</a> amagat(source(k(start=-U.cc))),
+    <font color="blue">redeclare </font><a href="FCSys_Conditions_InertAmagat_Mechanical.html#FCSys.Conditions.InertAmagat.Mechanical.Force">Mechanical.Force</a> mechanicalX(source(k(start=0))),
+    <font color="blue">redeclare </font><a href="FCSys_Conditions_InertAmagat_Mechanical.html#FCSys.Conditions.InertAmagat.Mechanical.Force">Mechanical.Force</a> mechanicalY(source(k(start=0))),
+    <font color="blue">redeclare </font><a href="FCSys_Conditions_InertAmagat_Mechanical.html#FCSys.Conditions.InertAmagat.Mechanical.Force">Mechanical.Force</a> mechanicalZ(source(k(start=0))),
+    <font color="blue">redeclare </font><a href="FCSys_Conditions_InertAmagat_Thermal.html#FCSys.Conditions.InertAmagat.Thermal.HeatRate">Thermal.HeatRate</a> thermal(source(k(start=0))));
+
 <font color="blue">end </font>PhaseFlow;
 </pre>
       </div>
@@ -212,7 +255,7 @@ Extends from <a href="FCSys_Conditions_InertAmagat.html#FCSys.Conditions.InertAm
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:47:43 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:45:00 2013.
 </div>
 </body>
 </html>

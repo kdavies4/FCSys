@@ -1,0 +1,194 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.Conditions.InertAmagat.Amagat</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Conditions for additivity of volume&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Amagat<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Conditions.InertAmagat.Amagat"></A><A HREF="FCSys_Conditions_InertAmagat.html#FCSys.Conditions.InertAmagat"
+>FCSys.Conditions.InertAmagat</A>.Amagat</H2>
+<B>Conditions for additivity of volume</B>
+<P>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package"
+>Modelica.Icons.Package</A> (Icon for standard packages).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.InertAmagat.Amagat.PressureS.png" ALT="FCSys.Conditions.InertAmagat.Amagat.Pressure" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_InertAmagat_Amagat.html#FCSys.Conditions.InertAmagat.Amagat.Pressure"
+>Pressure</A>
+</TD><TD>Specify pressure (measure volume)</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.InertAmagat.Amagat.PressureS.png" ALT="FCSys.Conditions.InertAmagat.Amagat.Volume" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_InertAmagat_Amagat.html#FCSys.Conditions.InertAmagat.Amagat.Volume"
+>Volume</A>
+</TD><TD>Specify volume (measure pressure)</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.InertAmagat.Amagat.PressureS.png" ALT="FCSys.Conditions.InertAmagat.Amagat.Custom" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_InertAmagat_Amagat.html#FCSys.Conditions.InertAmagat.Amagat.Custom"
+>Custom</A>
+</TD><TD>Custom expressions</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.InertAmagat.Amagat.BaseClassesS.png" ALT="FCSys.Conditions.InertAmagat.Amagat.BaseClasses" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_InertAmagat_Amagat_BaseClasses.html#FCSys.Conditions.InertAmagat.Amagat.BaseClasses"
+>BaseClasses</A>
+</TD><TD>Base classes (not generally for direct use)</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Pressure<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Conditions.InertAmagat.Amagat.PressureI.png" ALT="FCSys.Conditions.InertAmagat.Amagat.Pressure" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Conditions.InertAmagat.Amagat.Pressure"></A><A HREF="FCSys_Conditions_InertAmagat_Amagat.html#FCSys.Conditions.InertAmagat.Amagat"
+>FCSys.Conditions.InertAmagat.Amagat</A>.Pressure</H2>
+<B>Specify pressure (measure volume)</B><p>
+<IMG SRC="FCSys.Conditions.InertAmagat.Amagat.PressureD.png" ALT="FCSys.Conditions.InertAmagat.Amagat.Pressure">
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_Conditions_InertAmagat_Amagat_BaseClasses.html#FCSys.Conditions.InertAmagat.Amagat.BaseClasses.PartialCondition"
+>BaseClasses.PartialCondition</A> (Partial model of pressure/volume condition).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Conditions_InertAmagat_Amagat_BaseClasses.html#FCSys.Conditions.InertAmagat.Amagat.BaseClasses.ConditionType"
+>ConditionType</A></TD><TD>conditionType</TD><TD>BaseClasses.ConditionType.Pr...</TD><TD>Type of condition</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinX</TD><TD>true</TD><TD>X</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinY</TD><TD>false</TD><TD>Y</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinZ</TD><TD>false</TD><TD>Z</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</TD></TR>
+<TR><TD>Boolean</TD><TD>internal</TD><TD>true</TD><TD>Use internal specification</TD></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Constant"
+>Constant</A></TD><TD>source</TD><TD>redeclare Modelica.Blocks.So...</TD><TD>Source of internal specification</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.InertAmagat"
+>InertAmagat</A></TD><TD>inert</TD><TD>Connector for linear momentum and heat, with additivity of volume</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Pressure <font color="darkgreen">&quot;Specify pressure (measure volume)&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_Conditions_InertAmagat_Amagat_BaseClasses.html#FCSys.Conditions.InertAmagat.Amagat.BaseClasses.PartialCondition"
+>BaseClasses.PartialCondition</A>(
+    <font color="blue">final </font>conditionType=BaseClasses.ConditionType.Pressure,
+    u(<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;),
+    <font color="blue">final </font>y(<font color="blue">final </font>unit=&quot;l3&quot;) = inert.V);
+
+<font color="blue">equation </font>
+  inert.p = u_final;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Pressure;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Volume<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Conditions.InertAmagat.Amagat.PressureI.png" ALT="FCSys.Conditions.InertAmagat.Amagat.Volume" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Conditions.InertAmagat.Amagat.Volume"></A><A HREF="FCSys_Conditions_InertAmagat_Amagat.html#FCSys.Conditions.InertAmagat.Amagat"
+>FCSys.Conditions.InertAmagat.Amagat</A>.Volume</H2>
+<B>Specify volume (measure pressure)</B><p>
+<IMG SRC="FCSys.Conditions.InertAmagat.Amagat.PressureD.png" ALT="FCSys.Conditions.InertAmagat.Amagat.Volume">
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_Conditions_InertAmagat_Amagat_BaseClasses.html#FCSys.Conditions.InertAmagat.Amagat.BaseClasses.PartialCondition"
+>BaseClasses.PartialCondition</A> (Partial model of pressure/volume condition).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Conditions_InertAmagat_Amagat_BaseClasses.html#FCSys.Conditions.InertAmagat.Amagat.BaseClasses.ConditionType"
+>ConditionType</A></TD><TD>conditionType</TD><TD>BaseClasses.ConditionType.Vo...</TD><TD>Type of condition</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinX</TD><TD>true</TD><TD>X</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinY</TD><TD>false</TD><TD>Y</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinZ</TD><TD>false</TD><TD>Z</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</TD></TR>
+<TR><TD>Boolean</TD><TD>internal</TD><TD>true</TD><TD>Use internal specification</TD></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Constant"
+>Constant</A></TD><TD>source</TD><TD>redeclare Modelica.Blocks.So...</TD><TD>Source of internal specification</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.InertAmagat"
+>InertAmagat</A></TD><TD>inert</TD><TD>Connector for linear momentum and heat, with additivity of volume</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Volume <font color="darkgreen">&quot;Specify volume (measure pressure)&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_Conditions_InertAmagat_Amagat_BaseClasses.html#FCSys.Conditions.InertAmagat.Amagat.BaseClasses.PartialCondition"
+>BaseClasses.PartialCondition</A>(
+    <font color="blue">final </font>conditionType=BaseClasses.ConditionType.Volume,
+    u(<font color="blue">final </font>unit=&quot;l3&quot;),
+    <font color="blue">final </font>y(<font color="blue">final </font>unit=&quot;m/(l.T2)&quot;) = inert.p);
+
+<font color="blue">equation </font>
+  inert.V = u_final;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Volume;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Custom<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Conditions.InertAmagat.Amagat.PressureI.png" ALT="FCSys.Conditions.InertAmagat.Amagat.Custom" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Conditions.InertAmagat.Amagat.Custom"></A><A HREF="FCSys_Conditions_InertAmagat_Amagat.html#FCSys.Conditions.InertAmagat.Amagat"
+>FCSys.Conditions.InertAmagat.Amagat</A>.Custom</H2>
+<B>Custom expressions</B><p>
+<IMG SRC="FCSys.Conditions.InertAmagat.Amagat.PressureD.png" ALT="FCSys.Conditions.InertAmagat.Amagat.Custom">
+<P><H3>Information</H3></P>
+<PRE></pre><p>The expression to which the condition is applied (<code>x</code>)
+    must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p><pre></PRE><P>
+Extends from <A HREF="FCSys_Conditions_InertAmagat_Amagat_BaseClasses.html#FCSys.Conditions.InertAmagat.Amagat.BaseClasses.PartialCondition"
+>BaseClasses.PartialCondition</A> (Partial model of pressure/volume condition).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Conditions_InertAmagat_Amagat_BaseClasses.html#FCSys.Conditions.InertAmagat.Amagat.BaseClasses.ConditionType"
+>ConditionType</A></TD><TD>conditionType</TD><TD>BaseClasses.ConditionType.Cu...</TD><TD>Type of condition</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinX</TD><TD>true</TD><TD>X</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinY</TD><TD>false</TD><TD>Y</TD></TR>
+<TR><TD>Boolean</TD><TD>inclLinZ</TD><TD>false</TD><TD>Z</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Specification</TD></TR>
+<TR><TD>Boolean</TD><TD>internal</TD><TD>true</TD><TD>Use internal specification</TD></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Constant"
+>Constant</A></TD><TD>source</TD><TD>redeclare Modelica.Blocks.So...</TD><TD>Source of internal specification</TD></TR>
+<TR><TD>Real</TD><TD>x</TD><TD>inert.p</TD><TD>Expression to which the condition is applied</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Measurement</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>RealOutput</A></TD><TD>y</TD><TD>inert.V</TD><TD>Measurement expression</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>u</TD><TD>Value of specified condition</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.InertAmagat"
+>InertAmagat</A></TD><TD>inert</TD><TD>Connector for linear momentum and heat, with additivity of volume</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=3>Measurement</TD></TR>
+<TR><TD>output <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>RealOutput</A></TD><TD>y</TD><TD>Measurement expression</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Custom <font color="darkgreen">&quot;Custom expressions&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_Conditions_InertAmagat_Amagat_BaseClasses.html#FCSys.Conditions.InertAmagat.Amagat.BaseClasses.PartialCondition"
+>BaseClasses.PartialCondition</A>(<font color="blue">final </font>conditionType=BaseClasses.ConditionType.Custom,
+      y=inert.V);
+
+  Real x=inert.p <font color="darkgreen">&quot;Expression to which the condition is applied&quot;</font>;
+
+<font color="blue">equation </font>
+  x = u_final;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Custom;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 01:08:43 2013.
+</address></BODY>
+</HTML>

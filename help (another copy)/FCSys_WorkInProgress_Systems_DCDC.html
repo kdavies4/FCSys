@@ -1,0 +1,397 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.WorkInProgress.Systems.DCDC</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE DCDC<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.WorkInProgress.Systems.DCDC"></A><A HREF="FCSys_WorkInProgress_Systems.html#FCSys.WorkInProgress.Systems"
+>FCSys.WorkInProgress.Systems</A>.DCDC</H2>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package"
+>Modelica.Icons.Package</A> (Icon for standard packages).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Systems.DCDC.DCDCS.png" ALT="FCSys.WorkInProgress.Systems.DCDC.DCDC" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Systems_DCDC.html#FCSys.WorkInProgress.Systems.DCDC.DCDC"
+>DCDC</A>
+</TD><TD>&nbsp;</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Systems.DCDC.IdealDCDCS.png" ALT="FCSys.WorkInProgress.Systems.DCDC.IdealDCDC" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Systems_DCDC.html#FCSys.WorkInProgress.Systems.DCDC.IdealDCDC"
+>IdealDCDC</A>
+</TD><TD>&nbsp;</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Systems.DCDC.IdealDCDCS.png" ALT="FCSys.WorkInProgress.Systems.DCDC.ElecElec" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Systems_DCDC.html#FCSys.WorkInProgress.Systems.DCDC.ElecElec"
+>ElecElec</A>
+</TD><TD>&nbsp;</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Systems.DCDC.InterfacesS.png" ALT="FCSys.WorkInProgress.Systems.DCDC.Interfaces" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Systems_DCDC_Interfaces.html#FCSys.WorkInProgress.Systems.DCDC.Interfaces"
+>Interfaces</A>
+</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE DCDC<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Systems.DCDC.DCDCI.png" ALT="FCSys.WorkInProgress.Systems.DCDC.DCDC" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Systems.DCDC.DCDC"></A><A HREF="FCSys_WorkInProgress_Systems_DCDC.html#FCSys.WorkInProgress.Systems.DCDC"
+>FCSys.WorkInProgress.Systems.DCDC</A>.DCDC</H2>
+<IMG SRC="FCSys.WorkInProgress.Systems.DCDC.DCDCD.png" ALT="FCSys.WorkInProgress.Systems.DCDC.DCDC">
+<P><H3>Information</H3></P>
+Extends from FCSys.WorkInProgress.BaseClassesIconsTransformer.
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_WorkInProgress_Systems_BaseClasses.html#FCSys.WorkInProgress.Systems.BaseClasses.LHSchoice"
+>LHSchoice</A></TD><TD>LHS</TD><TD>BaseClasses.LHSchoice.Delta_v1</TD><TD>Choice of variable for the left hand side (LHS) of the governing equation</TD></TR>
+<TR><TD><A HREF="FCSys_WorkInProgress_Systems_BaseClasses.html#FCSys.WorkInProgress.Systems.BaseClasses.RHSchoice"
+>RHSchoice</A></TD><TD>RHS</TD><TD>BaseClasses.RHSchoice.Delta_v2</TD><TD>Choice of variable for the right hand side (RHS) of the governing equation</TD></TR>
+<TR><TD>Boolean</TD><TD>specAsParam</TD><TD>true</TD><TD>true: use a parameter to specify the governing equation; false: use dynamic input</TD></TR>
+<TR><TD>&nbsp;</TD><TD>k_ratio</TD><TD>1</TD><TD>Voltage or current ratio of side 1:side 2</TD></TR>
+<TR><TD>&nbsp;</TD><TD>k_R</TD><TD>U.ohm</TD><TD>Hall resistance across side 1 (Delta_v1/Delta_qdot2)</TD></TR>
+<TR><TD>&nbsp;</TD><TD>k_sigma</TD><TD>U.S</TD><TD>Hall conductance through side 1 (Delta_qdot1/Delta_v2)</TD></TR>
+<TR><TD>&nbsp;</TD><TD>k_Delta_v1</TD><TD>U.V</TD><TD>Voltage across side 1</TD></TR>
+<TR><TD>&nbsp;</TD><TD>k_Delta_qdot1</TD><TD>U.A</TD><TD>Total current through side 1</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_WorkInProgress_Systems_DCDC_Interfaces.html#FCSys.WorkInProgress.Systems.DCDC.Interfaces.ActBusIn"
+>ActBusIn</A></TD><TD>actBusIn</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="FCSys_WorkInProgress_Systems_DCDC_Interfaces.html#FCSys.WorkInProgress.Systems.DCDC.Interfaces.SenBusOut"
+>SenBusOut</A></TD><TD>senBusOut</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>wireN2</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>wireP2</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>wireN1</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>wireP1</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> DCDC
+
+  <font color="darkgreen">// TODO:  Complete this.</font>
+
+  <font color="blue">extends </font>FCSys.WorkInProgress.BaseClassesIconsTransformer;
+  <font color="blue">import </font>DomainQ = FCSys.Domains.MagneticElectroMechanical.Quantities;
+
+  <font color="blue">parameter </font><A HREF="FCSys_WorkInProgress_Systems_BaseClasses.html#FCSys.WorkInProgress.Systems.BaseClasses.LHSchoice"
+>FCSys.WorkInProgress.Systems.BaseClasses.LHSchoice</A> LHS=BaseClasses.LHSchoice.Delta_v1
+    <font color="darkgreen">&quot;Choice of variable for the left hand side (LHS) of the governing equation&quot;</font>;
+  <font color="blue">parameter </font><A HREF="FCSys_WorkInProgress_Systems_BaseClasses.html#FCSys.WorkInProgress.Systems.BaseClasses.RHSchoice"
+>FCSys.WorkInProgress.Systems.BaseClasses.RHSchoice</A> RHS=BaseClasses.RHSchoice.Delta_v2
+    <font color="darkgreen">&quot;Choice of variable for the right hand side (RHS) of the governing equation&quot;</font>;
+  <font color="blue">parameter </font>Boolean specAsParam=true <font color="darkgreen">
+    &quot;true: use a parameter to specify the governing equation; false: use dynamic input&quot;</font>;
+
+  <font color="blue">parameter </font>Q.Unity k_ratio=1 <font color="darkgreen">&quot;Voltage or current ratio of side 1:side 2&quot;</font>;
+  <font color="blue">parameter </font>FCSys.WorkInProgress.Magnetic.Conductance k_R=U.ohm <font color="darkgreen">
+    &quot;Hall resistance across side 1 (Delta_v1/Delta_qdot2)&quot;</font>;
+  <font color="blue">parameter </font>FCSys.WorkInProgress.Magnetic2.Conductance k_sigma=U.S <font color="darkgreen">
+    &quot;Hall conductance through side 1 (Delta_qdot1/Delta_v2)&quot;</font>;
+  <font color="blue">parameter </font>FCSys.WorkInProgress.Magnetic2.Effort k_Delta_v1=U.V <font color="darkgreen">
+    &quot;Voltage across side 1&quot;</font>;
+  <font color="blue">parameter </font>FCSys.WorkInProgress.Magnetic2.Flow k_Delta_qdot1=U.A <font color="darkgreen">
+    &quot;Total current through side 1&quot;</font>;
+
+  FCSys.WorkInProgress.Magnetic2.Effort Delta_v1 <font color="darkgreen">
+    &quot;Electrical driving force (for net current positive from chargeP to chargeN)&quot;</font>;
+  FCSys.WorkInProgress.Magnetic2.Flow Delta_qdot1 <font color="darkgreen">
+    &quot;Total current of both pins (positive by right hand rule from chargeP to chargeN)&quot;</font>;
+  FCSys.WorkInProgress.Magnetic2.Effort Sigma_v1 <font color="darkgreen">
+    &quot;Electrical sink force (for net current into each flange)&quot;</font>;
+  FCSys.WorkInProgress.Magnetic2.Flow Sigma_qdot1 <font color="darkgreen">
+    &quot;Net current stored or destroyed (positive into each pin)&quot;</font>;
+
+  FCSys.WorkInProgress.Magnetic2.Effort Delta_v2 <font color="darkgreen">
+    &quot;Electrical driving force (for net current positive from chargeP to chargeN)&quot;</font>;
+  FCSys.WorkInProgress.Magnetic2.Flow Delta_qdot2 <font color="darkgreen">
+    &quot;Total current of both pins (positive by right hand rule from chargeP to chargeN)&quot;</font>;
+  FCSys.WorkInProgress.Magnetic2.Effort Sigma_v2 <font color="darkgreen">
+    &quot;Electrical sink force (for net current into each flange)&quot;</font>;
+  FCSys.WorkInProgress.Magnetic2.Flow Sigma_qdot2 <font color="darkgreen">
+    &quot;Net current stored or destroyed (positive into each pin)&quot;</font>;
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_WorkInProgress_Systems_DCDC_Interfaces.html#FCSys.WorkInProgress.Systems.DCDC.Interfaces.ActBusIn"
+>FCSys.WorkInProgress.Systems.DCDC.Interfaces.ActBusIn</A> actBusIn;
+  <A HREF="FCSys_WorkInProgress_Systems_DCDC_Interfaces.html#FCSys.WorkInProgress.Systems.DCDC.Interfaces.SenBusOut"
+>FCSys.WorkInProgress.Systems.DCDC.Interfaces.SenBusOut</A> senBusOut;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>Connectors.FaceBus</A> wireN2;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>Connectors.FaceBus</A> wireP2;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>Connectors.FaceBus</A> wireN1;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>Connectors.FaceBus</A> wireP1;</textblock>
+
+<font color="blue">equation </font>
+  Delta_v1 = chargeP1.v - chargeN1.v;
+  Delta_qdot1 = chargeP1.qdot - chargeN1.qdot;
+  Sigma_v1 = chargeP1.v + chargeN1.v;
+  Sigma_qdot1 = chargeP1.qdot + chargeN1.qdot;
+
+  Delta_v2 = chargeP2.v - chargeN2.v;
+  Delta_qdot2 = chargeP2.qdot - chargeN2.qdot;
+  Sigma_v2 = chargeP2.v + chargeN2.v;
+  Sigma_qdot2 = chargeP2.qdot + chargeN2.qdot;
+
+  <font color="darkgreen">// Steady state charge balance (no current destroyed or stored)</font>
+  0 = Sigma_qdot1;
+  0 = Sigma_qdot2;
+
+  <font color="darkgreen">// Steady state energy balance</font>
+  0 = Delta_v1*Delta_qdot1 + Delta_v2*Delta_qdot2 + Sigma_v1*Sigma_qdot1 +
+    Sigma_v2*Sigma_qdot2;
+
+  <font color="darkgreen">// Internal connector</font>
+  <font color="blue">if </font>specAsParam<font color="blue"> then</font>
+    <font color="blue">if </font>(LHS == RHS)<font color="blue"> then</font>
+      k_internal = k_ratio;
+    <font color="blue">elseif </font>(LHS == 1<font color="blue"> and </font>RHS == 2)<font color="blue"> then</font>
+      k_internal = k_R;
+    <font color="blue">elseif </font>(LHS == 2<font color="blue"> and </font>RHS == 1)<font color="blue"> then</font>
+      k_internal = k_sigma;
+    <font color="blue">elseif </font>(LHS == 1<font color="blue"> and </font>RHS == 3)<font color="blue"> then</font>
+      k_internal = k_Delta_v1;
+    <font color="blue">elseif </font>(LHS == 2<font color="blue"> and </font>RHS == 3)<font color="blue"> then</font>
+      k_internal = k_Delta_qdot1;
+    <font color="blue">end if</font>;
+  <font color="blue">end if</font>;
+
+  <font color="darkgreen">// Governing linear equation</font>
+  <font color="blue">if </font>(LHS == BaseClasses.LHSchoice.Delta_v1<font color="blue"> and </font>RHS == BaseClasses.RHSchoice.Delta_v2)<font color="blue">
+       then</font>
+    Delta_v1 = k_internal*Delta_v2;
+  <font color="blue">elseif </font>(LHS == BaseClasses.LHSchoice.Delta_v1<font color="blue"> and </font>RHS == BaseClasses.RHSchoice.Delta_qdot2)<font color="blue">
+       then</font>
+    Delta_v1 = k_internal*Delta_qdot2;
+  <font color="blue">elseif </font>(LHS == BaseClasses.LHSchoice.Delta_qdot1<font color="blue"> and </font>RHS == BaseClasses.RHSchoice.Delta_v2)<font color="blue">
+       then</font>
+    Delta_qdot1 = k_internal*Delta_v2;
+  <font color="blue">elseif </font>(LHS == BaseClasses.LHSchoice.Delta_qdot1<font color="blue"> and </font>RHS == BaseClasses.RHSchoice.Delta_qdot2)<font color="blue">
+       then</font>
+    Delta_qdot1 = k_internal*Delta_qdot2;
+  <font color="blue">elseif </font>(LHS == BaseClasses.LHSchoice.Delta_v1<font color="blue"> and </font>RHS == BaseClasses.RHSchoice.unity)<font color="blue">
+       then</font>
+    Delta_v1 = k_internal;
+  <font color="blue">elseif </font>(LHS == BaseClasses.LHSchoice.Delta_qdot1<font color="blue"> and </font>RHS == BaseClasses.RHSchoice.unity)<font color="blue">
+       then</font>
+    Delta_qdot1 = k_internal;
+  <font color="blue">end if</font>;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>DCDC;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE IdealDCDC<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Systems.DCDC.IdealDCDCI.png" ALT="FCSys.WorkInProgress.Systems.DCDC.IdealDCDC" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Systems.DCDC.IdealDCDC"></A><A HREF="FCSys_WorkInProgress_Systems_DCDC.html#FCSys.WorkInProgress.Systems.DCDC"
+>FCSys.WorkInProgress.Systems.DCDC</A>.IdealDCDC</H2>
+<IMG SRC="FCSys.WorkInProgress.Systems.DCDC.IdealDCDCD.png" ALT="FCSys.WorkInProgress.Systems.DCDC.IdealDCDC">
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_WorkInProgress_Systems_DCDC.html#FCSys.WorkInProgress.Systems.DCDC.ElecElec"
+>FCSys.WorkInProgress.Systems.DCDC.ElecElec</A>.
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_WorkInProgress_Systems_BaseClasses.html#FCSys.WorkInProgress.Systems.BaseClasses.LHSchoice"
+>LHSchoice</A></TD><TD>LHS</TD><TD>BaseClasses.LHSchoice.Delta_v1</TD><TD>Choice of variable for the left hand side (LHS) of the governing equation</TD></TR>
+<TR><TD><A HREF="FCSys_WorkInProgress_Systems_BaseClasses.html#FCSys.WorkInProgress.Systems.BaseClasses.RHSchoice"
+>RHSchoice</A></TD><TD>RHS</TD><TD>BaseClasses.RHSchoice.unity</TD><TD>Choice of variable for the right hand side (RHS) of the governing equation</TD></TR>
+<TR><TD>Boolean</TD><TD>specAsParam</TD><TD>false</TD><TD>true: use a parameter to specify the governing equation; false: use dynamic input</TD></TR>
+<TR><TD>&nbsp;</TD><TD>k_ratio</TD><TD>1</TD><TD>Voltage or current ratio of side 1:side 2</TD></TR>
+<TR><TD>&nbsp;</TD><TD>k_R</TD><TD>1</TD><TD>Hall resistance across side 1 (Delta_v1/Delta_qdot2)</TD></TR>
+<TR><TD>&nbsp;</TD><TD>k_sigma</TD><TD>1</TD><TD>Hall conductance through side 1 (Delta_qdot1/Delta_v2)</TD></TR>
+<TR><TD>&nbsp;</TD><TD>k_Delta_v1</TD><TD>1</TD><TD>Voltage across side 1</TD></TR>
+<TR><TD>&nbsp;</TD><TD>k_Delta_qdot1</TD><TD>1</TD><TD>Total current through side 1</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>k_set</TD><TD>Coefficient for the RHS of the governing equation as an input [11/Q2Q21/(Q.T)Q/T]</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> IdealDCDC
+  <font color="blue">extends </font><A HREF="FCSys_WorkInProgress_Systems_DCDC.html#FCSys.WorkInProgress.Systems.DCDC.ElecElec"
+>FCSys.WorkInProgress.Systems.DCDC.ElecElec</A>(
+    <font color="blue">final </font>LHS=BaseClasses.LHSchoice.Delta_v1,
+    <font color="blue">final </font>RHS=BaseClasses.RHSchoice.unity,
+    <font color="blue">final </font>specAsParam=false,
+    <font color="blue">final </font>k_ratio=1,
+    <font color="blue">final </font>k_R=1,
+    <font color="blue">final </font>k_sigma=1,
+    <font color="blue">final </font>k_Delta_v1=1,
+    <font color="blue">final </font>k_Delta_qdot1=1);
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>IdealDCDC;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE ElecElec<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Systems.DCDC.IdealDCDCI.png" ALT="FCSys.WorkInProgress.Systems.DCDC.ElecElec" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Systems.DCDC.ElecElec"></A><A HREF="FCSys_WorkInProgress_Systems_DCDC.html#FCSys.WorkInProgress.Systems.DCDC"
+>FCSys.WorkInProgress.Systems.DCDC</A>.ElecElec</H2>
+<IMG SRC="FCSys.WorkInProgress.Systems.DCDC.ElecElecD.png" ALT="FCSys.WorkInProgress.Systems.DCDC.ElecElec">
+<P><H3>Information</H3></P>
+Extends from FCSys.WorkInProgress.TwoElecStreams, FCSys.WorkInProgress.BaseClassesIconsTransformer.
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_WorkInProgress_Systems_BaseClasses.html#FCSys.WorkInProgress.Systems.BaseClasses.LHSchoice"
+>LHSchoice</A></TD><TD>LHS</TD><TD>BaseClasses.LHSchoice.Delta_v1</TD><TD>Choice of variable for the left hand side (LHS) of the governing equation</TD></TR>
+<TR><TD><A HREF="FCSys_WorkInProgress_Systems_BaseClasses.html#FCSys.WorkInProgress.Systems.BaseClasses.RHSchoice"
+>RHSchoice</A></TD><TD>RHS</TD><TD>BaseClasses.RHSchoice.Delta_v2</TD><TD>Choice of variable for the right hand side (RHS) of the governing equation</TD></TR>
+<TR><TD>Boolean</TD><TD>specAsParam</TD><TD>true</TD><TD>true: use a parameter to specify the governing equation; false: use dynamic input</TD></TR>
+<TR><TD>&nbsp;</TD><TD>k_ratio</TD><TD>1</TD><TD>Voltage or current ratio of side 1:side 2</TD></TR>
+<TR><TD>&nbsp;</TD><TD>k_R</TD><TD>U.ohm</TD><TD>Hall resistance across side 1 (Delta_v1/Delta_qdot2)</TD></TR>
+<TR><TD>&nbsp;</TD><TD>k_sigma</TD><TD>U.S</TD><TD>Hall conductance through side 1 (Delta_qdot1/Delta_v2)</TD></TR>
+<TR><TD>&nbsp;</TD><TD>k_Delta_v1</TD><TD>U.V</TD><TD>Voltage across side 1</TD></TR>
+<TR><TD>&nbsp;</TD><TD>k_Delta_qdot1</TD><TD>U.A</TD><TD>Total current through side 1</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>k_set</TD><TD>Coefficient for the RHS of the governing equation as an input [11/Q2Q21/(Q.T)Q/T]</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> ElecElec
+  <font color="blue">extends </font>FCSys.WorkInProgress.TwoElecStreams;
+  <font color="blue">extends </font>FCSys.WorkInProgress.BaseClassesIconsTransformer;
+
+  <font color="blue">parameter </font><A HREF="FCSys_WorkInProgress_Systems_BaseClasses.html#FCSys.WorkInProgress.Systems.BaseClasses.LHSchoice"
+>FCSys.WorkInProgress.Systems.BaseClasses.LHSchoice</A> LHS=BaseClasses.LHSchoice.Delta_v1
+    <font color="darkgreen">&quot;Choice of variable for the left hand side (LHS) of the governing equation&quot;</font>;
+  <font color="blue">parameter </font><A HREF="FCSys_WorkInProgress_Systems_BaseClasses.html#FCSys.WorkInProgress.Systems.BaseClasses.RHSchoice"
+>FCSys.WorkInProgress.Systems.BaseClasses.RHSchoice</A> RHS=BaseClasses.RHSchoice.Delta_v2
+    <font color="darkgreen">&quot;Choice of variable for the right hand side (RHS) of the governing equation&quot;</font>;
+  <font color="blue">parameter </font>Boolean specAsParam=true <font color="darkgreen">
+    &quot;true: use a parameter to specify the governing equation; false: use dynamic input&quot;</font>;
+
+  <font color="blue">parameter </font>Q.Unity k_ratio=1 <font color="darkgreen">&quot;Voltage or current ratio of side 1:side 2&quot;</font>;
+  <font color="blue">parameter </font>FCSys.WorkInProgress.Magnetic.Conductance k_R=U.ohm <font color="darkgreen">
+    &quot;Hall resistance across side 1 (Delta_v1/Delta_qdot2)&quot;</font>;
+  <font color="blue">parameter </font>FCSys.WorkInProgress.Magnetic2.Conductance k_sigma=U.S <font color="darkgreen">
+    &quot;Hall conductance through side 1 (Delta_qdot1/Delta_v2)&quot;</font>;
+  <font color="blue">parameter </font>FCSys.WorkInProgress.Magnetic2.Effort k_Delta_v1=U.V <font color="darkgreen">
+    &quot;Voltage across side 1&quot;</font>;
+  <font color="blue">parameter </font>FCSys.WorkInProgress.Magnetic2.QuantumRate k_Delta_qdot1=U.A <font color="darkgreen">
+    &quot;Total current through side 1&quot;</font>;
+
+  FCSys.WorkInProgress.Magnetic2.Effort Delta_v1 <font color="darkgreen">
+    &quot;Electrical driving force (for net current positive from elecP to elecN)&quot;</font>;
+  FCSys.WorkInProgress.Magnetic2.QuantumRate Delta_qdot1 <font color="darkgreen">
+    &quot;Total current of both interfaces (positive by right hand rule from elecP to elecN)&quot;</font>;
+  FCSys.WorkInProgress.Magnetic2.Effort Sigma_v1 <font color="darkgreen">
+    &quot;Electrical sink force (for net current into each interface)&quot;</font>;
+  FCSys.WorkInProgress.Magnetic2.QuantumRate Sigma_qdot1 <font color="darkgreen">
+    &quot;Net current stored or destroyed (positive into each interface)&quot;</font>;
+
+  FCSys.WorkInProgress.Magnetic2.Effort Delta_v2 <font color="darkgreen">
+    &quot;Electrical driving force (for net current positive from elecP to elecN)&quot;</font>;
+  FCSys.WorkInProgress.Magnetic2.QuantumRate Delta_qdot2 <font color="darkgreen">
+    &quot;Total current of both interfaces (positive by right hand rule from elecP to elecN)&quot;</font>;
+  FCSys.WorkInProgress.Magnetic2.Effort Sigma_v2 <font color="darkgreen">
+    &quot;Electrical sink force (for net current into each interface)&quot;</font>;
+  FCSys.WorkInProgress.Magnetic2.QuantumRate Sigma_qdot2 <font color="darkgreen">
+    &quot;Net current stored or destroyed (positive into each interface)&quot;</font>;
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>Connectors.RealInput</A> k_set(<font color="blue">final </font>unit=<font color="blue">if </font>(LHS == RHS)<font color="blue"> then </font>&quot;1&quot;<font color="blue"> else </font><font color="blue">if </font>(LHS ==
+        1<font color="blue"> and </font>RHS == 2)<font color="blue"> then </font>&quot;1/Q2&quot;<font color="blue"> else </font><font color="blue">if </font>(LHS == 2<font color="blue"> and </font>RHS == 1)<font color="blue"> then </font>&quot;Q2&quot;<font color="blue">
+         else </font><font color="blue">if </font>(LHS == 1<font color="blue"> and </font>RHS == 3)<font color="blue"> then </font>&quot;1/(Q.T)&quot;<font color="blue"> else </font>&quot;Q/T&quot;, displayUnit
+      =<font color="blue">if </font>(LHS == RHS)<font color="blue"> then </font>&quot;1&quot;<font color="blue"> else </font><font color="blue">if </font>(LHS == 1<font color="blue"> and </font>RHS == 2)<font color="blue"> then </font>&quot;ohm&quot;<font color="blue">
+         else </font><font color="blue">if </font>(LHS == 2<font color="blue"> and </font>RHS == 1)<font color="blue"> then </font>&quot;S&quot;<font color="blue"> else </font><font color="blue">if </font>(LHS == 1<font color="blue"> and </font>RHS == 3)<font color="blue">
+         then </font>&quot;V&quot;<font color="blue"> else </font>&quot;A&quot;) <font color="blue">if </font>(<font color="blue">not </font>specAsParam) <font color="darkgreen">
+    &quot;Coefficient for the RHS of the governing equation as an input&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false"><font color="blue">protected </font>
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>Connectors.RealInput</A> k_internal(<font color="blue">final </font>unit=<font color="blue">if </font>(LHS == RHS)<font color="blue"> then </font>&quot;1&quot;<font color="blue"> else </font><font color="blue">if </font>(
+        LHS == 1<font color="blue"> and </font>RHS == 2)<font color="blue"> then </font>&quot;1/Q2&quot;<font color="blue"> else </font><font color="blue">if </font>(LHS == 2<font color="blue"> and </font>RHS == 1)<font color="blue">
+         then </font>&quot;Q2&quot;<font color="blue"> else </font><font color="blue">if </font>(LHS == 1<font color="blue"> and </font>RHS == 3)<font color="blue"> then </font>&quot;1/(Q.T)&quot;<font color="blue"> else </font>&quot;Q/T&quot;,
+      displayUnit=<font color="blue">if </font>(LHS == RHS)<font color="blue"> then </font>&quot;1&quot;<font color="blue"> else </font><font color="blue">if </font>(LHS == 1<font color="blue"> and </font>RHS == 2)<font color="blue">
+         then </font>&quot;ohm&quot;<font color="blue"> else </font><font color="blue">if </font>(LHS == 2<font color="blue"> and </font>RHS == 1)<font color="blue"> then </font>&quot;S&quot;<font color="blue"> else </font><font color="blue">if </font>(LHS == 1<font color="blue">
+         and </font>RHS == 3)<font color="blue"> then </font>&quot;V&quot;<font color="blue"> else </font>&quot;A&quot;) <font color="darkgreen">
+    &quot;Coefficient for the RHS of the governing equation as an internal connector&quot;</font>;</textblock>
+
+<font color="blue">equation </font>
+  Delta_v1 = elecP1.Phidot_d - elecN1.Phidot_d;
+  Delta_qdot1 = elecP1.qdot_t - elecN1.qdot_t;
+  Sigma_v1 = elecP1.Phidot_d + elecN1.Phidot_d;
+  Sigma_qdot1 = elecP1.qdot_t + elecN1.qdot_t;
+
+  Delta_v2 = elecP2.Phidot_d - elecN2.Phidot_d;
+  Delta_qdot2 = elecP2.qdot_t - elecN2.qdot_t;
+  Sigma_v2 = elecP2.Phidot_d + elecN2.Phidot_d;
+  Sigma_qdot2 = elecP2.qdot_t + elecN2.qdot_t;
+
+  <font color="darkgreen">// Steady state charge balance (no current destroyed or stored)</font>
+  0 = Sigma_qdot1;
+  0 = Sigma_qdot2;
+
+  <font color="darkgreen">// Steady state energy balance</font>
+  0 = Delta_v1*Delta_qdot1 + Delta_v2*Delta_qdot2 + Sigma_v1*Sigma_qdot1 +
+    Sigma_v2*Sigma_qdot2;
+
+  <font color="darkgreen">// Internal connector</font>
+  <font color="blue">if </font>specAsParam<font color="blue"> then</font>
+    <font color="blue">if </font>(LHS == RHS)<font color="blue"> then</font>
+      k_internal = k_ratio;
+    <font color="blue">elseif </font>(LHS == 1<font color="blue"> and </font>RHS == 2)<font color="blue"> then</font>
+      k_internal = k_R;
+    <font color="blue">elseif </font>(LHS == 2<font color="blue"> and </font>RHS == 1)<font color="blue"> then</font>
+      k_internal = k_sigma;
+    <font color="blue">elseif </font>(LHS == 1<font color="blue"> and </font>RHS == 3)<font color="blue"> then</font>
+      k_internal = k_Delta_v1;
+    <font color="blue">elseif </font>(LHS == 2<font color="blue"> and </font>RHS == 3)<font color="blue"> then</font>
+      k_internal = k_Delta_qdot1;
+    <font color="blue">end if</font>;
+  <font color="blue">end if</font>;
+
+  <font color="darkgreen">// Governing linear equation</font>
+  <font color="blue">if </font>(LHS == BaseClasses.LHSchoice.Delta_v1<font color="blue"> and </font>RHS == BaseClasses.RHSchoice.Delta_v2)<font color="blue">
+       then</font>
+    Delta_v1 = k_internal*Delta_v2;
+  <font color="blue">elseif </font>(LHS == BaseClasses.LHSchoice.Delta_v1<font color="blue"> and </font>RHS == BaseClasses.RHSchoice.Delta_qdot2)<font color="blue">
+       then</font>
+    Delta_v1 = k_internal*Delta_qdot2;
+  <font color="blue">elseif </font>(LHS == BaseClasses.LHSchoice.Delta_qdot1<font color="blue"> and </font>RHS == BaseClasses.RHSchoice.Delta_v2)<font color="blue">
+       then</font>
+    Delta_qdot1 = k_internal*Delta_v2;
+  <font color="blue">elseif </font>(LHS == BaseClasses.LHSchoice.Delta_qdot1<font color="blue"> and </font>RHS == BaseClasses.RHSchoice.Delta_qdot2)<font color="blue">
+       then</font>
+    Delta_qdot1 = k_internal*Delta_qdot2;
+  <font color="blue">elseif </font>(LHS == BaseClasses.LHSchoice.Delta_v1<font color="blue"> and </font>RHS == BaseClasses.RHSchoice.unity)<font color="blue">
+       then</font>
+    Delta_v1 = k_internal;
+  <font color="blue">elseif </font>(LHS == BaseClasses.LHSchoice.Delta_qdot1<font color="blue"> and </font>RHS == BaseClasses.RHSchoice.unity)<font color="blue">
+       then</font>
+    Delta_qdot1 = k_internal;
+  <font color="blue">end if</font>;
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(k_set, k_internal);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>ElecElec;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 01:14:53 2013.
+</address></BODY>
+</HTML>

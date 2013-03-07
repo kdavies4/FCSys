@@ -1,0 +1,274 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.Conditions</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Models to specify and measure operating conditions&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Conditions<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Conditions"></A><A HREF="FCSys.html#FCSys"
+>FCSys</A>.Conditions</H2>
+<B>Models to specify and measure operating conditions</B>
+<P>
+<P><H3>Information</H3></P>
+<PRE></pre>
+  <p>The <A HREF="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical"
+>Chemical</a>,
+  <A HREF="FCSys_Conditions_ChemicalBus.html#FCSys.Conditions.ChemicalBus"
+>ChemicalBus</a>, <A HREF="FCSys_Conditions_InertAmagat.html#FCSys.Conditions.InertAmagat"
+>Inert</a>,
+  <A HREF="FCSys_Conditions_InertAmagat.html#FCSys.Conditions.InertAmagat"
+>InertAmagat</a>,
+  <A HREF="FCSys_Conditions_InertDalton.html#FCSys.Conditions.InertDalton"
+>InertDalton</a>, <A HREF="FCSys_Conditions_Face.html#FCSys.Conditions.Face"
+>Face</a>, and
+  <A HREF="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus"
+>FaceBus</a> packages contain models to specify conditions on the
+  connectors with the same names (<A HREF="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput"
+>ChemicalInput</a> or
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput"
+>ChemicalOutput</a>, <A HREF="FCSys_Connectors.html#FCSys.Connectors.Inert"
+>Inert</a> or
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.InertInternal"
+>InertInternal</a>,
+  <A HREF="FCSys_Conditions_InertAmagat.html#FCSys.Conditions.InertAmagat"
+>InertAmagat</a>,
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.InertDalton"
+>InertDalton</a>, <A HREF="FCSys_Conditions_Face.html#FCSys.Conditions.Face"
+>Face</a>, and
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</a>).
+  The <a href="modelica://FCSys.Conditions.FaceDifferential">FacePair</a> and
+  <A HREF="FCSys_Conditions_FaceBusPair.html#FCSys.Conditions.FaceBusPair"
+>FaceBusPair</a> packages contain models
+  for pairs of <A HREF="FCSys_Conditions_Face.html#FCSys.Conditions.Face"
+>Face</a> and
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</a> connectors.  Each model is given the same name as the
+  model from the <A HREF="FCSys_Subregions.html#FCSys.Subregions"
+>Subregions</a> package that it may be used to represent.  For
+  example, the model to interface with the <A HREF="FCSys_Conditions_Face.html#FCSys.Conditions.Face"
+>Face</a> connector
+  is named <A HREF="FCSys_Conditions_Face.html#FCSys.Conditions.Face.Species"
+>Species</a> (in the
+  <A HREF="FCSys_Conditions_Face.html#FCSys.Conditions.Face"
+>Conditions.Face</a> package).</p>
+<pre></PRE><P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package"
+>Modelica.Icons.Package</A> (Icon for standard packages).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.ExamplesS.png" ALT="FCSys.Conditions.Examples" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_Examples.html#FCSys.Conditions.Examples"
+>Examples</A>
+</TD><TD>Examples</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.AdaptersS.png" ALT="FCSys.Conditions.Adapters" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_Adapters.html#FCSys.Conditions.Adapters"
+>Adapters</A>
+</TD><TD>Adapters to <a href="modelica://Modelica">Package Modelica</a></TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.TestStandsS.png" ALT="FCSys.Conditions.TestStands" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands"
+>TestStands</A>
+</TD><TD>Test stands</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.ChemicalBusS.png" ALT="FCSys.Conditions.ChemicalBus" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_ChemicalBus.html#FCSys.Conditions.ChemicalBus"
+>ChemicalBus</A>
+</TD><TD>Conditions for the <a href="modelica://FCSys.Connectors.ChemicalBus">ChemicalBus</a> connector</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.ChemicalBusS.png" ALT="FCSys.Conditions.Chemical" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical"
+>Chemical</A>
+</TD><TD>Conditions for a <a href="modelica://FCSys.Connectors.ChemicalInput">ChemicalInput</a> connector</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.ChemicalBusS.png" ALT="FCSys.Conditions.Inert" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_Inert.html#FCSys.Conditions.Inert"
+>Inert</A>
+</TD><TD>Conditions for a <a href="modelica://FCSys.Connectors.Inert">Inert</a> or <a href="modelica://FCSys.Connectors.InertInternal">InertInternal</a> connector</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.ChemicalBusS.png" ALT="FCSys.Conditions.InertAmagat" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_InertAmagat.html#FCSys.Conditions.InertAmagat"
+>InertAmagat</A>
+</TD><TD>Conditions for a <a href="modelica://FCSys.Connectors.InertAmagat">InertAmagat</a> connector</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.ChemicalBusS.png" ALT="FCSys.Conditions.InertDalton" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_InertDalton.html#FCSys.Conditions.InertDalton"
+>InertDalton</A>
+</TD><TD>Conditions for a <a href="modelica://FCSys.Connectors.InertDalton">InertDalton</a> connector</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.ChemicalBusS.png" ALT="FCSys.Conditions.FaceBus" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus"
+>FaceBus</A>
+</TD><TD>Conditions for a <a href="modelica://FCSys.Connectors.FaceBus">FaceBus</a> connector (e.g., as in a <a href="modelica://FCSys.Regions.Region">Region</a> or <a href="modelica://FCSys.Subregions.Subregion">Subregion</a> model)</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.ChemicalBusS.png" ALT="FCSys.Conditions.Face" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_Face.html#FCSys.Conditions.Face"
+>Face</A>
+</TD><TD>Conditions for a <a href="modelica://FCSys.Connectors.Face">Face</a> connector (e.g., as in a <a href="modelica://FCSys.Subregions.Species">Species</a> model)</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.ChemicalBusS.png" ALT="FCSys.Conditions.FaceBusPair" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_FaceBusPair.html#FCSys.Conditions.FaceBusPair"
+>FaceBusPair</A>
+</TD><TD>Conditions for a <a href="modelica://FCSys.Connectors.FaceBus">FaceBus</a> connector (e.g., as in a <a href="modelica://FCSys.Regions.Region">Region</a> or <a href="modelica://FCSys.Subregions.Subregion">Subregion</a> model)</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.ChemicalBusS.png" ALT="FCSys.Conditions.FacePair" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_FacePair.html#FCSys.Conditions.FacePair"
+>FacePair</A>
+</TD><TD>Conditions for a pair of <a href="modelica://FCSys.Connectors.Face">Face</a> connectors (e.g., as in a <a href="modelica://FCSys.Subregions.Species">Species</a> model)</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.RouterS.png" ALT="FCSys.Conditions.Router" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions.html#FCSys.Conditions.Router"
+>Router</A>
+</TD><TD>Connect two pairs of faces to pass through or cross over</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.EnvironmentS.png" ALT="FCSys.Conditions.Environment" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions.html#FCSys.Conditions.Environment"
+>Environment</A>
+</TD><TD>Environmental properties for a model</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.BaseClassesS.png" ALT="FCSys.Conditions.BaseClasses" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_BaseClasses.html#FCSys.Conditions.BaseClasses"
+>BaseClasses</A>
+</TD><TD>Base classes (not generally for direct use)</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Router<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Conditions.RouterI.png" ALT="FCSys.Conditions.Router" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Conditions.Router"></A><A HREF="FCSys_Conditions.html#FCSys.Conditions"
+>FCSys.Conditions</A>.Router</H2>
+<B>Connect two pairs of faces to pass through or cross over</B><p>
+<IMG SRC="FCSys.Conditions.RouterD.png" ALT="FCSys.Conditions.Router">
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>This model acts as a connection switch.
+It has a single parameter, <code>crossOver</code>.</p>
+
+<p>If <code>crossOver</code> is
+set to <code>false</code>, then
+the router will be in the pass-through mode.  In that case,
+<code>negative1</code> is connected to <code>positive1</code> and <code>negative2</code>
+is connected to <code>positive2</code>, as shown by Figure 1a.</p>
+
+<p>If <code>crossOver</code> is set to <code>true</code>, then the router will be in cross-over mode.  In that case, <code>negative1</code> is connected to <code>positive2</code>
+and <code>negative2</code> is
+connected to <code>positive1</code>, as shown by Figure 1b.</p>
+
+    <table border="0" cellspacing="0" cellpadding="2" align=center>
+      <tr align=center>
+        <td align=center width=120>
+          <img src="/media/Storage/Dropbox/Documents/Modelica/FCSys/resources/documentation/Conditions/Router/PassThrough.png">
+<br><b>a:</b>  Pass-through
+        </td>
+        <td align=center>
+          <img src="/media/Storage/Dropbox/Documents/Modelica/FCSys/resources/documentation/Conditions/Router/CrossOver.png">
+<br><b>b:</b>  Cross-over
+        </td>
+      </tr>
+      <tr align=center>
+        <td colspan=2 align=center><b>Figure 1:</b> Modes of connection.</td>
+      </tr>
+    </table>
+<pre></PRE><P>
+Extends from <A HREF="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top3"
+>FCSys.BaseClasses.Icons.Names.Top3</A>.
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Boolean</TD><TD>crossOver</TD><TD>false</TD><TD>Cross over (otherwise, pass through)</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>negative1</TD><TD>Negative face 1</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>positive1</TD><TD>Positive face 1</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>negative2</TD><TD>Negative face 2</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>positive2</TD><TD>Positive face 2</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Router <font color="darkgreen">
+  &quot;Connect two pairs of faces to pass through or cross over&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top3"
+>FCSys.BaseClasses.Icons.Names.Top3</A>;
+  <font color="blue">parameter </font>Boolean crossOver=false <font color="darkgreen">&quot;Cross over (otherwise, pass through)&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>Connectors.FaceBus</A> negative1 <font color="darkgreen">&quot;Negative face 1&quot;</font>;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>Connectors.FaceBus</A> positive1 <font color="darkgreen">&quot;Positive face 1&quot;</font>;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>Connectors.FaceBus</A> negative2 <font color="darkgreen">&quot;Negative face 2&quot;</font>;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>Connectors.FaceBus</A> positive2 <font color="darkgreen">&quot;Positive face 2&quot;</font>;</textblock>
+
+<font color="blue">equation </font>
+  <font color="blue">if </font>crossOver<font color="blue"> then</font>
+<textblock type="annotconnect" expanded="false">    <font color="red">connect</font>(negative1, positive2);
+    <font color="red">connect</font>(negative2, positive1);</textblock>
+  <font color="blue">else</font>
+    <font color="darkgreen">// Pass-through</font>
+<textblock type="annotconnect" expanded="false">    <font color="red">connect</font>(negative1, positive1);
+    <font color="red">connect</font>(negative2, positive2);</textblock>
+  <font color="blue">end if</font>;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Router;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Environment<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Conditions.EnvironmentI.png" ALT="FCSys.Conditions.Environment" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Conditions.Environment"></A><A HREF="FCSys_Conditions.html#FCSys.Conditions"
+>FCSys.Conditions</A>.Environment</H2>
+<B>Environmental properties for a model</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top3"
+>FCSys.BaseClasses.Icons.Names.Top3</A>.
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Boolean</TD><TD>analysis</TD><TD>true</TD><TD>Include optional variables for analysis</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute"
+>PressureAbsolute</A></TD><TD>p</TD><TD>1*U.atm</TD><TD>Pressure [m/(l.T2)]</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute"
+>TemperatureAbsolute</A></TD><TD>T</TD><TD>298.15*U.K</TD><TD>Temperature</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute"
+>NumberAbsolute</A></TD><TD>RH</TD><TD>1</TD><TD>Relative humidity [1]</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute"
+>NumberAbsolute</A></TD><TD>x_O2_dry</TD><TD>0.208</TD><TD>Dry gas O<sub>2</sub> fraction (<i>y</i><sub>O2 dry</sub>) [1]</TD></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Acceleration"
+>Acceleration</A></TD><TD>a[Axis]</TD><TD>{0,0,0}</TD><TD>Acceleration of the reference frame [l/T2]</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">record</font> Environment <font color="darkgreen">&quot;Environmental properties for a model&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top3"
+>FCSys.BaseClasses.Icons.Names.Top3</A>;
+
+  <font color="darkgreen">// Store the values of the base constants and units.</font>
+  <font color="blue">final </font><font color="blue">constant </font><A HREF="FCSys_Units_Bases.html#FCSys.Units.Bases.Base"
+>U.Bases.Base</A> baseUnits=U.base <font color="darkgreen">&quot;Base constants and units&quot;</font>;
+
+  <font color="blue">parameter </font>Boolean analysis=true <font color="darkgreen">&quot;Include optional variables for analysis&quot;</font>;
+
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute"
+>Q.PressureAbsolute</A> p(nominal=U.atm) = 1*U.atm <font color="darkgreen">&quot;Pressure&quot;</font>;
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute"
+>Q.TemperatureAbsolute</A> T(nominal=298.15*U.K) = 298.15*U.K <font color="darkgreen">
+    &quot;Temperature&quot;</font>;
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute"
+>Q.NumberAbsolute</A> RH(displayUnit=&quot;%&quot;) = 1 <font color="darkgreen">&quot;Relative humidity&quot;</font>;
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute"
+>Q.NumberAbsolute</A> x_O2_dry(
+    <font color="blue">final </font>max=1,
+    displayUnit=&quot;%&quot;) = 0.208 <font color="darkgreen">
+    &quot;</pre>Dry gas O<sub>2</sub> fraction (<i>y</i><sub>O2 dry</sub>)<pre>&quot;</font>;
+  <font color="darkgreen">// Value from http://en.wikipedia.org/wiki/Oxygen</font>
+  <font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.Acceleration"
+>Q.Acceleration</A> a[Axis]={0,0,0} <font color="darkgreen">
+    &quot;Acceleration of the reference frame&quot;</font>;
+
+  <font color="blue">final </font><font color="blue">parameter </font><A HREF="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute"
+>Q.NumberAbsolute</A> x_H2O(
+    <font color="blue">final </font>max=1,
+    displayUnit=&quot;%&quot;) = 0.2 <font color="darkgreen">
+    &quot;</pre>Gas H<sub>2</sub>O fraction (<i>y</i><sub>H2O</sub>)<pre>&quot;</font>;
+  <font color="darkgreen">// TODO:  Cast this in terms of relative humidity.</font>
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>Environment;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 01:07:54 2013.
+</address></BODY>
+</HTML>

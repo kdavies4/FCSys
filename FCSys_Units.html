@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Units</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="Constants and units of physical measure">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,105 +45,233 @@
       <div class="body">
 
 <h2><a name="FCSys.Units"></a><a href="index.html#FCSys">FCSys</a>.Units</h2>
+
 <b>Constants and units of physical measure</b>
-<p>
-<p><h3>Information</h3></p>
-<p>When a physical variable is assigned a quantity, it is the product of a number
-    and a unit [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">BIPM2006</a>].  In <a href="index.html#FCSys">FCSys</a>, units are also assigned numeric values in a consistent
-    manner.  A unit
-    may be the product of any of the units defined in <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a> raised to any power.
-    When a quantity is converted to a number for display, it is divided by its unit.
-    This conveniently handles unit conversion&mdash;without preference towards any particular set of units.
-     It can also be used to scale
-    the floating point values associated with quantities.  In order to provide
-    well-scaled quantities, the value of the unit should be increased in inverse proportion
-    to a typical value of a quantity expressed as a number in that unit.  For example, if a model
-    has a length scale on the order of a nanometer, it may be best to chose a unit system that
-    results in a number of 10<sup>9</sup> for the unit meter.
-    </p>
 
-    <p>Regardless of a quantity's unit, it is mapped through the relations in <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a> (<code>U</code>)
-    to a number times a product of five independent base constants or units each raised to the appropriate powers.
-    These five are: the Rydberg constant (<code>U.R_inf</code>), speed of light in vacuum (<code>U.c</code>),
-    Josephson constant (<code>U.k_J</code>), von Klitzing constant (<code>U.R_K</code>), and
-    the candela (<code>U.'cd'</code>).  The constants are related to units through the
-    experimentally-derived definitions (e.g., <code>U.Wb=483597.870e9/U.k_J</code>).
-    Here the designation of "constant" is in the physical sense; even the units
-    are <code>constant</code> in the Modelica sense.  These experimental relations, along with
-    direct relations among the units (e.g., <code>U.V=U.Wb*U.rad/U.s</code>), establish the values
-    of all the units of the International System of Units (SI) and other convenient units for
-    modeling fuel cells.</p>
+<h3>Information</h3>
 
-    <p>This method of defining the base units from measured physical quantities (rather than
-    vice versa) is natural and reflects the way that standards organizations define units.
-    Here, the experimentally-derived relations for the physical constants are
-    used rather the "exact" or "conventional" ones, where they exist
-    [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">NIST2010</a>].</p>
+<p>The <a href="FCSys_Units.html#FCSys.Units">Units</a> package is abbreviated as <code>U</code> for convenience throughout
+  the rest of <a href="index.html#FCSys.FCSys">FCSys</a>.  For example, an initial pressure might be defined as
+  <code>p_IC = U.atm</code>.</p>
 
-    <p>There are five independent constants or units in <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>,
-    but the International System of Units (SI) has seven independent base units (<code>U.kg</code>,
-    <code>U.m</code>, <code>U.s</code>, <code>U.A</code>, <code>U.mol</code>, <code>U.K</code>, and
-    <code>U.'cd'</code>).  In <a href="index.html#FCSys">FCSys</a>, two additional constraints are imposed in order
+<p><b>Overview:</b></p>
+
+<p>Models of physical systems involve variables that represent physical quantities.
+As stated by the Bureau International des Poids et Mesures (BIPM)
+[<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">BIPM2006</a>, p. 103]:
+<blockquote>
+  "The value of a quantity is generally expressed as the product of a number and a unit.  The
+  unit is simply a particular example of the quantity concerned which is used as a reference, and
+  the number is the ratio of the value of the quantity to the unit."
+</blockquote>
+In general, a unit may be the product of powers of other units, whether they are base units or
+units derived from the base units in the same manner.</p>
+
+<p>In Modelica, a physical quantity is generally expressed as an instance of the <code>Real</code> type.
+Its <code>value</code> attribute is typically the number associated with the value of the
+quantity (not the value of the quantity, as will be seen).  The <code>unit</code> attribute is a
+string that describes the unit by which the value of the quantity is divided to arrive at the
+number.<sup><a href="#fn1">1</a></sup>  The <code>displayUnit</code> attribute (also a
+string) describes the unit by which the value should be divided to arrive at the number as it
+is entered by or presented to the user.  The <code>Real</code> type contains other attributes as well,
+including <code>quantity</code> string.</p>
+
+<p>The <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.html#Modelica.SIunits">SIunits</a> package of the Modelica Standard Library contains types that
+extend the <code>Real</code> type.  The type definitions modify the
+<code>unit</code>, <code>displayUnit</code>, and <code>quantity</code> attributes (among others)
+to represent various physical quantities.  The <code>unit</code> and <code>displayUnit</code>
+attributes are based on SI.   The <code>quantity</code> string is generally used to
+describe the name of the physical quantity.  For example, the <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.html#Modelica.SIunits.Velocity">Velocity</a> type has
+a <code>unit</code> of "m/s" and a <code>quantity</code> of
+"Velocity".</p>
+
+<p>If an instance of <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.html#Modelica.SIunits.Velocity">Velocity</a> has
+a <code>value</code> of one (<i>v</i> = 1),
+then it is meant that "the value of velocity is one meter per second."  Again, the
+<code>value</code> attribute represents the number, or the value divided by the unit, not the
+value itself.  This apparent conflict is solved in <a href="index.html#FCSys">FCSys</a> by
+establishing units (including the meter and the second) as mathematical entities and writing
+<i>v</i> = 1&sdot;m/s.  Here, the variable <i>v</i> directly represents the value.
+Its <code>value</code> attribute is truly the value in the context of the statement by BIPM.</p>
+
+One advantage is that unit conversion is handled
+naturally.  The essence of unit conversion is that the phrase "value in unit" mathematically means
+"value divided by unit."  Continuing with the previous example, <i>v</i>
+is divided by m/s in order to display <i>v</i> in meters per second (as a
+number).  If another unit of length like the foot is established by the
+appropriate relation (ft &asymp; 0.3048&sdot;m) and <i>v</i> is divided by
+ft/s, the result is velocity in feet per second (&sim;3.2894).</p>
+
+<p>As another example, frequency is sometimes represented by a variable
+in hertz or cycles per second (e.g., &nu;) and other times by a variable in radians
+per second (e.g., &omega;).  If the variable represents the value directly, then there
+is no need to specify which units it is in.  The units are included; they have not been factored
+out by division.  A common variable (e.g., <i>f</i>) can be used in both cases, which
+standardizes the equations. The math is equivalent due to the relationships
+among units (e.g., 1&sdot;cycle = 2&pi;&sdot;rad).</p>
+
+<p><b>Method:</b></p>
+
+<p>Each unit is represented by a constant.  The values of most units is derived from
+the values of other units and constants (e.g., 1&sdot;cycle = 2&pi;&sdot;rad).  However,
+there are several units (in SI, 7) that are independent.  These
+base units are established by the "particular example of the quantity
+concerned which is used as a reference" quoted previously
+[<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">BIPM2006</a>].  The designation of "base"
+or "derived" is somewhat arbitrary [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Fritzson2004</a>, p. 375]
+but regardless, there are a number of units that must be defined by example.  Considering only
+the immediate physical system, these units are linearly independent.</p>
+
+<p>If only SI will be used, then it is easiest to strictly set each of the base units of
+SI equal to one&mdash;the meter (m), kilogram (kg), second (s), ampere (A),
+kelvin (K), mole (mol), and candela (cd).  This is implicitly the case in
+<code>Modelica.SIunits</code>, but again, it hardly captures the idea that a value is the
+product of a number and a unit.</p>
+
+<p>Instead, most of the base units are established by universal physical constants.
+The "particular example of the quantity concerned which is used as a reference"
+[<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">BIPM2006</a>] is an experiment that yields
+precise and repeatable results in determining a constant rather than a prototype which is
+carefully controlled and distributed via replicas.
+This method of defining the base units from measured physical quantities (rather than
+vice versa) is natural and reflects the way that standards organizations (e.g., NIST) define units.
+A system of units is considered to be natural if
+all of its base units are established by physical constants
+[<a href="http://en.wikipedia.org/wiki/Natural_units">http://en.wikipedia.org/wiki/Natural_units</a>].
+Often, those physical constants are defined to be equal to one, but the values can be chosen to scale
+the numerical values of variables during simulation.</p>
+
+<p>There are systems where typical values are many orders of magnitude larger or smaller than the
+related product of powers of base SI units (e.g., the domains of astrophysics and atomic
+physics).  In modeling and simulating those systems, it may be advantageous to choose
+appropriately small or large values (respectively) for the corresponding base units such that the
+product of the number (large or small in magnitude) and the unit (small or large, respectively)
+is well-scaled.  Products of this type are often involved in initial conditions or parameter
+expressions, which are not time-varying.  Therefore, the number and the unit can be multiplied
+before the dynamic simulation.  During the simulation, only the value is important.  After the
+simulation, the trajectory of the value may be divided by the unit for display.  This scaling is
+usually unnecessary due to the wide range and appropriate distribution of the real numbers that
+are representable in floating point space.  The Modelica language specification recommends that
+floating point numbers be represented in at least IEEE double precision, which covers magnitudes
+from &sim;2.225&times;10<sup>-308</sup> to &sim;1.798&times;10<sup>308</sup>
+[<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Modelica3.2</a>, p. 13].
+However, in some cases it may be preferable to carefully scale the units and use single
+precision instead for the sake of computational performance.  There are fields of research where,
+even today, simulations are sometimes performed in single precision
+[<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Brown2011</a>,
+<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Hess2008</a>]
+and where scaling is a concern [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Rapaport2004</a>, p. 29].</p>
+
+<p>The method is neutral
+with regards to not only the values of the base units, but also the choice of the base units and
+even the number of base units.  This is an advantage because many systems of units are used besides SI.
+As mentioned previously, the choice of base units is somewhat
+arbitrary, and different systems of units are based on different choices.  Some systems of units
+have fewer base units (lower rank) than SI, since additional constraints are added that
+exchange base units for derived units.  For example, the Planck, Stoney, Hartree, and Rydberg
+systems of units define the Boltzmann constant to be equal to one (<i>k</i><sub>B</sub> = 1)
+[<a href="http://en.wikipedia.org/wiki/Natural_units">http://en.wikipedia.org/wiki/Natural_units</a>].
+The unit K is eliminated
+[<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Greiner1995</a>, p. 386]
+or, more precisely, considered a derived unit instead of a base unit.  In SI, the
+kelvin would be derived from the units kilogram, meter, and second (K
+&asymp; 1.381&times;10<sup>-23</sup>&sdot;kg&sdot;m<sup>2</sup>/s<sup>2</sup>).</p>
+
+    <p>There are six independent constants or units in the <a href="FCSys_Units.html#FCSys.Units">Units</a> package (see
+    <a href="FCSys_Units_Bases.html#FCSys.Units.Bases">Units.Bases</a>),
+    but SI has seven independent base units (m, kg, s, A, K, mol, and cd).
+      In <a href="index.html#FCSys">FCSys</a>, two additional constraints are imposed in order
     to simplify the model equations and allow electrons and chemical species to be to represented by the
     same base <a href="FCSys_Subregions_Species.html#FCSys.Subregions.Species.Species">Species</a> model.
-    First, the Faraday constant (<code>U.k_F</code> or <code>96485.3399*U.C/U.mol</code>)
-    is normalized to one.
-    This implies that the mole (<code>U.mol</code>) is proportional to the coulomb (<code>U.C</code> or <code>U.Wb*U.S</code>),
-    which is considered a number of reference particles given the charge number.
-    Also, the gas constant (<code>U.R</code> or <code>8.314472*U.J/(U.mol*U.K)</code>) is normalized to one.
-    Therefore, the kelvin (<code>U.K</code>) is proportional to the volt
-    (<code>U.V</code> or <code>U.J/U.C</code>). In addition, the radian <code>U.rad</code> is defined as a base constant.  However, it must
-    be set equal to one in the current version International System of Units (SI)
+    First, the Faraday constant (k<sub>F</sub> or 96485.3399&sdot;C/mol)
+    is normalized to one. This implies that the mole (mol) is proportional to the coulomb
+    (C or Wb&sdot;S), which is considered a number of reference particles given the charge number.
+    Also, the gas constant (R or 8.314472&sdot;J/(mol&sdot;K)) is normalized to one.
+    Therefore, the kelvin (K) is proportional to the volt
+    (V or J/C). In addition, the radian (rad) is defined as a base constant.
+    However, it must be set equal to one in the current version of the International System of Units (SI)
     [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">BIPM2006</a>].</p>
 
-    <p>The user should be aware of several aspects of the implementation.
-    A script
-    ("FCSys/resources/scripts/units.mos") runs a model (<a href="Units.html#Units.Evaluate">Units.Evaluate</a>)
-    to determine the values of the units and defines the conversions to display values as numbers
-    in units.  This script is set to run when <a href="index.html#FCSys">FCSys</a> is loaded via
-    "FCSys/load.mos" or from a link in the "Commands" menu of <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a> (when viewed within
-    Dymola).  Unless the values of the base constants and units are changed during an editing session, it should be sufficient
-    to simply allow the script to run when the package is loaded.
-    When the <code>der()</code> operator is utilized, it must be divided by
-    the unit second (<code>U.s</code>), since this scaling is not automatic in Modelica's specification
-    and Dymola's implementation.  Currently, it is not possible to define a function that implements
-    <code>der()</code> with built-in scaling.</p>
+<p><b>Implementation:</b><p>
 
-  <p>Note that the common "natural" units systems (Planck, Stoney, Hartree, Rydberg,
-  or Natural) cannot be implemented given the constraints that the gas and
-  Faraday constants equal one.  Since these systems set the Boltzmann constant equal
-  to one, the Planck constant must equal the von Klitzing constant.  That is not the
-  case for any of these systems of units
-  (<a href="http://en.wikipedia.org/wiki/Natural_units">http://en.wikipedia.org/wiki/Natural_units</a>).
-  The structure of <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a> allows the constraints on the Faraday and gas constants
-  to be relaxed, but the models in <a href="index.html#FCSys">FCSys</a> generally do not.</p>
+<p>The units and constants are defined as variables in this
+<a href="FCSys_Units.html#FCSys.Units">Units</a> package.  Each is a <code>constant</code> of
+the appropriate type from the <a href="FCSys_Quantities.html#FCSys.Quantities">Quantities</a> package. The
+first section of the Modelica definition of this package establishes mathematical constants.  The next
+ section establishes the base constants and units, which grouped in a replaceable subpackage.  The third section
+ establishes the constants and units which may be derived from the base units and constants using
+ accepted empirical relations.  The rest of the code establishes the SI prefixes
+ and the remaining derived units and constants.  The SI prefixes are included in their
+ unabbreviated form in order to avoid name conflicts.  All of the primary units of SI
+ are included (Tables 1 and 3 of
+ [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">BIPM2006</a>]) except for &deg;C, since
+ it involves an offset.  Other convenient units are included for the system at hand (e.g.,
+ atm).</p>
+
+<p>In Dymola the units, constants, and prefixes are identically defined in the workspace so that
+they can be used to convert values to numbers for display.  When <a href="index.html#FCSys">FCSys</a> is
+loaded from the "FCSys/load.mos" script or when the "Re-initialize the units" command is used
+(available in Dymola from the <a href="FCSys_Units.html#FCSys.Units">Units</a> package or any subpackage),
+the "FCSys/resources/scripts/units.mos"
+script is run.  It causes the <a href="FCSys_Units.html#FCSys.Units.Evaluate">Units.Evaluate</a>
+model to be translated, which simply evaluates all the units, constants, and prefixes from the
+<a href="FCSys_Units.html#FCSys.Units.Evaluate">Units</a> package.  The translated copy is saved as
+"FCSys/resources/scripts/units-values.mos" for convenience.  Then the
+units script ("units.mos") uses the values of the units, constants, and
+prefixes to establish unit conversions.  These unit conversions may include offsets.  The script
+also sets the default display units.
+A spreadsheet ("FCSys/resources/quantities.xls") is available to help
+maintain the quantities, default units, and the units script.
 
   <p>This package also contains functions (e.g., <a href="FCSys_Units.html#FCSys.Units.to_degC">to_degC</a>) that
   convert quantities from the unit system defined in <a href="index.html#FCSys">FCSys</a> to quantities
   expressed in units.  Functions are
   included for units that involve offsets<!-- or other functions besides simple scaling-->.
-  For conversions that require just a scaling factor, it is best to use the
-  units directly.  For example, to convert from potential in volts use <code>v = v_V*U.V</code>,
+  For conversions that require just a scaling factor, it is simpler to use the
+  units directly.  For example, to convert from potential in volts use <code>v = v_V*V</code>,
   where <code>v</code> is potential and <code>v_V</code> is potential expressed in volts.</p>
+
+<p>An instance of the <a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Environment</a> model is usually included
+at the top level of a model.  It records the base units or constants so that it is possible to re-derive
+all of the other units and constants.  This is important in order to properly interpret simulation results if the
+base units or constants are later re-adjusted.</p>
+
+<p>Where the <code>der</code> operator is used in models, it is explicitly divided by the unit second
+(e.g., <code>der(x)/s</code>).  This is necessary because the global variable <code>time</code>
+is in seconds.</p>
+
+<p>In theory, standard Modelica unit checking tools may be used to check the dimensions of equations
+in <a href="index.html#FCSys">FCSys</a>.</p>
+
+<p>Some units are defined that include prefixes (e.g., kg, mm, and kPa).  However,
+most prefixes must be given as explicit factors (e.g., <code>kilo*m</code>).</p>
 
   <p>Although it is not necessary in <a href="http://www.modelica.org">Modelica</a>, the declarations
   in this package are presorted so that they can be easily ported to imperative or causal languages (e.g.,
   <a href="http://www.python.org">Python</a>, C).</p>
 
-  <p>For more information, see the related paper [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Davies and Paredis, 2012</a>].</p>
-  <p>
-  <b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
-  Copyright 2007&ndash;2012, Georgia Tech Research Corporation.
-  </p>
-  <p>
-  <i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
+  <p>For more information, see the related paper
+  [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Davies and Paredis, 2012</a>].</p>
+
+<hr>
+
+    <small>
+    <p id="fn1">1. Hereafter, the value of the quantity is referred to as simply the value, but
+    it should not be confused with the <code>value</code> attribute (which, as of version 3.3 of the
+    Modelica specification, is the number).<a href="#ref1">&#8629;</a></p>
+
+<p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
+  Copyright 2007&ndash;2012, Georgia Tech Research Corporation.</p>
+
+<p><i>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>;
   it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the
   disclaimer of warranty) see <a href="FCSys_UsersGuide.html#FCSys.UsersGuide.ModelicaLicense2">
   FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href="http://www.modelica.org/licenses/ModelicaLicense2">
-  http://www.modelica.org/licenses/ModelicaLicense2</a>.</i>
-  </p><p>
+  http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Units.EvaluateS.png" alt="FCSys.Units.Evaluate" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units.html#FCSys.Units.Evaluate">Evaluate</a>
@@ -150,13 +279,13 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Units.BasesS.png" alt="FCSys.Units.Bases" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases">Bases</a>
 </td><td>Sets of base constants and units</td></tr>
 <tr><td><img src="images/FCSys.Units.from_degCS.png" alt="FCSys.Units.from_degC" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units.html#FCSys.Units.from_degC">from_degC</a>
-</td><td>From temperature in degree Celsius</td></tr>
+</td><td>Convert from temperature in degree Celsius</td></tr>
 <tr><td><img src="images/FCSys.Units.from_degCS.png" alt="FCSys.Units.to_degC" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units.html#FCSys.Units.to_degC">to_degC</a>
-</td><td>To temperature in degree Celsius</td></tr>
+</td><td>Convert to temperature in degree Celsius</td></tr>
 <tr><td><img src="images/FCSys.Units.from_degCS.png" alt="FCSys.Units.from_kPag" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units.html#FCSys.Units.from_kPag">from_kPag</a>
-</td><td>From gauge pressure in kilopascals</td></tr>
+</td><td>Convert from gauge pressure in kilopascals</td></tr>
 <tr><td><img src="images/FCSys.Units.from_degCS.png" alt="FCSys.Units.to_kPag" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units.html#FCSys.Units.to_kPag">to_kPag</a>
-</td><td>To gauge pressure in kilopascals</td></tr>
+</td><td>Convert to gauge pressure in kilopascals</td></tr>
 <tr><td>pi=2*arccos(0)</td><td>pi (<i>&pi;</i>)</td></tr>
 <tr><td>e=exp(1)</td><td>Euler number</td></tr>
 <tr><td>base</td><td>Scalable base constants and units</td></tr>
@@ -250,7 +379,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td>M=U.mol/U.L</td><td>molar</td></tr>
 <tr><td>cc=U.cm^3</td><td>cubic centimeter</td></tr>
 </table>
-<p><h3>Types and constants</h3>
+<p>
+
+<h3>Types and constants</h3>
+
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> pi=2*<font color="red">arccos</font>(0) <font color="darkgreen">&quot;pi (<i>&pi;</i>)&quot;</font>;</pre><p>
 <pre><font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> e=<font color="red">exp</font>(1) <font color="darkgreen">&quot;Euler number&quot;</font>;</pre><p>
 <pre><font color="blue">replaceable </font><font color="blue">constant </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.ScaledFC">Bases.ScaledFC</a> base <font color="blue">constrainedby </font>Bases.Base <font color="darkgreen">
@@ -369,25 +501,31 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h2><img src="images/FCSys.Units.EvaluateI.png" alt="FCSys.Units.Evaluate" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Units.Evaluate"></a><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>.Evaluate</h2>
-<b>Evaluate the values assigned to constants and units</b><p>
-<p><h3>Information</h3></p>
+<b>Evaluate the values assigned to constants and units</b>
+
+<h3>Information</h3>
+
 <p>This model is used by the units script ("FCSys/resources/scripts/units.mos") to
   establish the values of the units in order to convert values to numbers for display.</p>
-  <p>For more information, see the documentation in the
+
+<p>For more information, see the documentation in the
   <a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a> package.</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a> (Icon for runnable examples).
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> Evaluate <font color="darkgreen">&quot;Evaluate the values assigned to constants and units&quot;</font>
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Example">Modelica.Icons.Example</a>;
 
-  <font color="darkgreen">// -----------------------------------------------------------------------</font>
+  <font color="darkgreen">// ------------------------------------------------------------------------</font>
   <font color="darkgreen">// Mathematical constants</font>
 
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> pi=U.pi <font color="darkgreen">&quot;pi&quot;</font>;
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> e=U.e <font color="darkgreen">&quot;Euler number&quot;</font>;
 
-  <font color="darkgreen">// -----------------------------------------------------------------------</font>
+  <font color="darkgreen">// ------------------------------------------------------------------------</font>
   <font color="darkgreen">// Base physical constants and units</font>
 
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Q.Angle</a> rad=U.rad <font color="darkgreen">&quot;radian&quot;</font>;
@@ -399,7 +537,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> k_F=U.k_F <font color="darkgreen">&quot;Faraday constant&quot;</font>;
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> R=U.R <font color="darkgreen">&quot;gas constant&quot;</font>;
 
-  <font color="darkgreen">// -----------------------------------------------------------------------</font>
+  <font color="darkgreen">// ------------------------------------------------------------------------</font>
   <font color="darkgreen">// Empirical units</font>
 
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> m=U.m <font color="darkgreen">&quot;meter&quot;</font>;
@@ -409,7 +547,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Amount">Q.Amount</a> mol=U.mol <font color="darkgreen">&quot;mole&quot;</font>;
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> K=U.K <font color="darkgreen">&quot;kelvin&quot;</font>;
 
-  <font color="darkgreen">// -----------------------------------------------------------------------</font>
+  <font color="darkgreen">// ------------------------------------------------------------------------</font>
   <font color="darkgreen">// SI prefixes [BIPM2006, Table 5]</font>
 
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> yotta=U.yotta <font color="darkgreen">&quot;yotta (Y)&quot;</font>;
@@ -433,7 +571,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> zepto=U.zepto <font color="darkgreen">&quot;zepto (z)&quot;</font>;
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> yocto=U.yocto <font color="darkgreen">&quot;yocto (y)&quot;</font>;
 
-  <font color="darkgreen">// -----------------------------------------------------------------------</font>
+  <font color="darkgreen">// ------------------------------------------------------------------------</font>
   <font color="darkgreen">// SI base units [BIPM2006, Table 1] and intermediate units</font>
 
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> V=U.V <font color="darkgreen">&quot;volt&quot;</font>;
@@ -443,9 +581,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Velocity2">Q.Velocity2</a> Sv=U.Sv <font color="darkgreen">&quot;sievert&quot;</font>;
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Mass">Q.Mass</a> kg=U.kg <font color="darkgreen">&quot;kilogram &quot;</font>;
 
-  <font color="darkgreen">// -----------------------------------------------------------------------</font>
-  <font color="darkgreen">// Coherent derived units in the SI with special names and symbols</font>
-  <font color="darkgreen">// [BIPM2006, Table 3]</font>
+  <font color="darkgreen">// ------------------------------------------------------------------------</font>
+  <font color="darkgreen">// Coherent derived units in SI with special names and symbols [BIPM2006,</font>
+  <font color="darkgreen">// Table 3]</font>
 
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Q.Angle</a> cyc=U.cyc <font color="darkgreen">&quot;cycle&quot;</font>;
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Frequency">Q.Frequency</a> Hz=U.Hz <font color="darkgreen">&quot;hertz&quot;</font>;
@@ -464,7 +602,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Current">Q.Current</a> kat=U.kat <font color="darkgreen">&quot;katal&quot;</font>;
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Mass">Q.Mass</a> g=U.g <font color="darkgreen">&quot;gram&quot;</font>;
 
-  <font color="darkgreen">// -----------------------------------------------------------------------</font>
+  <font color="darkgreen">// ------------------------------------------------------------------------</font>
   <font color="darkgreen">// Non-SI units accepted for use with SI units [BIPM2006, Table 6].</font>
 
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Time">Q.Time</a> min=U.min <font color="darkgreen">&quot;minute&quot;</font>;
@@ -473,7 +611,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Angle">Q.Angle</a> degree=U.degree <font color="darkgreen">&quot;degree&quot;</font>;
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> L=U.L <font color="darkgreen">&quot;liter (L or l)&quot;</font>;
 
-  <font color="darkgreen">// -----------------------------------------------------------------------</font>
+  <font color="darkgreen">// ------------------------------------------------------------------------</font>
   <font color="darkgreen">// Physical constants</font>
 
   <font color="darkgreen">// Electromagnetism</font>
@@ -505,13 +643,13 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.PowerAreicPerPotential4">Q.PowerAreicPerPotential4</a> sigma=U.sigma <font color="darkgreen">
     &quot;Stefan-Boltzmann constant&quot;</font>;
 
-  <font color="darkgreen">// -----------------------------------------------------------------------</font>
+  <font color="darkgreen">// ------------------------------------------------------------------------</font>
   <font color="darkgreen">// Selected other non-SI units from [BIPM2006, Table 8]</font>
 
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> bar=U.bar <font color="darkgreen">&quot;bar&quot;</font>;
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> Aring=U.Aring <font color="darkgreen">&quot;angstrom&quot;</font>;
 
-  <font color="darkgreen">// -----------------------------------------------------------------------</font>
+  <font color="darkgreen">// ------------------------------------------------------------------------</font>
   <font color="darkgreen">// Additional units that are useful for fuel cells</font>
 
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Q.Pressure</a> atm=U.atm <font color="darkgreen">&quot;atmosphere&quot;</font>;
@@ -521,29 +659,42 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> &#39;%&#39;=U.'%' <font color="darkgreen">&quot;percent&quot;</font>;
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.AmountVolumic">Q.AmountVolumic</a> M=U.M <font color="darkgreen">&quot;molar&quot;</font>;
   <font color="blue">final </font><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> cc=U.cc <font color="darkgreen">&quot;cubic centimeter&quot;</font>;
-<textblock type="annotcomp" expanded="false">
+
 <font color="blue">end </font>Evaluate;
 </pre>
 <hr>
 
 <h2><img src="images/FCSys.Units.from_degCI.png" alt="FCSys.Units.from_degC" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Units.from_degC"></a><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>.from_degC</h2>
-<b>From temperature in degree Celsius</b><p>
-<p><h3>Information</h3></p>
+<b>Convert from temperature in degree Celsius</b>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a> (Base icon for conversion functions).
-<p><h3>Inputs</h3><p>
+<p>
+
+<h3>Inputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Real</td><td>T_degC</td><td>&nbsp;</td><td>Temperature in degree Celsius</td></tr>
 </table>
-<p><h3>Outputs</h3><p>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>Thermodynamic temperature</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>Thermodynamic temperature [l2.m/(N.T2)]</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
-<font color="blue">function</font> from_degC <font color="darkgreen">&quot;From temperature in degree Celsius&quot;</font>
+<font color="blue">function</font> from_degC <font color="darkgreen">&quot;Convert from temperature in degree Celsius&quot;</font>
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a>;
   <font color="blue">input </font>Real T_degC <font color="darkgreen">&quot;Temperature in degree Celsius&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Thermodynamic temperature&quot;</font>;
@@ -557,22 +708,35 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIuni
 
 <h2><img src="images/FCSys.Units.from_degCI.png" alt="FCSys.Units.to_degC" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Units.to_degC"></a><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>.to_degC</h2>
-<b>To temperature in degree Celsius</b><p>
-<p><h3>Information</h3></p>
+<b>Convert to temperature in degree Celsius</b>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a> (Base icon for conversion functions).
-<p><h3>Inputs</h3><p>
+<p>
+
+<h3>Inputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>&nbsp;</td><td>Thermodynamic temperature</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>&nbsp;</td><td>Thermodynamic temperature [l2.m/(N.T2)]</td></tr>
 </table>
-<p><h3>Outputs</h3><p>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Real</td><td>T_degC</td><td>Temperature in degree Celsius</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
-<font color="blue">function</font> to_degC <font color="darkgreen">&quot;To temperature in degree Celsius&quot;</font>
+<font color="blue">function</font> to_degC <font color="darkgreen">&quot;Convert to temperature in degree Celsius&quot;</font>
 
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a>;
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T <font color="darkgreen">&quot;Thermodynamic temperature&quot;</font>;
@@ -587,22 +751,35 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIuni
 
 <h2><img src="images/FCSys.Units.from_degCI.png" alt="FCSys.Units.from_kPag" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Units.from_kPag"></a><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>.from_kPag</h2>
-<b>From gauge pressure in kilopascals</b><p>
-<p><h3>Information</h3></p>
+<b>Convert from gauge pressure in kilopascals</b>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a> (Base icon for conversion functions).
-<p><h3>Inputs</h3><p>
+<p>
+
+<h3>Inputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Real</td><td>p_kPag</td><td>&nbsp;</td><td>Gauge pressure in kilopascals</td></tr>
 </table>
-<p><h3>Outputs</h3><p>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>Absolute pressure [m/(l.T2)]</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
-<font color="blue">function</font> from_kPag <font color="darkgreen">&quot;From gauge pressure in kilopascals&quot;</font>
+<font color="blue">function</font> from_kPag <font color="darkgreen">&quot;Convert from gauge pressure in kilopascals&quot;</font>
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a>;
   <font color="blue">input </font>Real p_kPag <font color="darkgreen">&quot;Gauge pressure in kilopascals&quot;</font>;
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p <font color="darkgreen">&quot;Absolute pressure&quot;</font>;
@@ -616,22 +793,35 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIuni
 
 <h2><img src="images/FCSys.Units.from_degCI.png" alt="FCSys.Units.to_kPag" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Units.to_kPag"></a><a href="FCSys_Units.html#FCSys.Units">FCSys.Units</a>.to_kPag</h2>
-<b>To gauge pressure in kilopascals</b><p>
-<p><h3>Information</h3></p>
+<b>Convert to gauge pressure in kilopascals</b>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a> (Base icon for conversion functions).
-<p><h3>Inputs</h3><p>
+<p>
+
+<h3>Inputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>&nbsp;</td><td>Absolute pressure [m/(l.T2)]</td></tr>
 </table>
-<p><h3>Outputs</h3><p>
+<p>
+
+<h3>Outputs</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Real</td><td>p_kPag</td><td>Gauge pressure in kilopascals</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
-<font color="blue">function</font> to_kPag <font color="darkgreen">&quot;To gauge pressure in kilopascals&quot;</font>
+<font color="blue">function</font> to_kPag <font color="darkgreen">&quot;Convert to gauge pressure in kilopascals&quot;</font>
   <font color="blue">extends </font><a href="http://build.openmodelica.org/Documentation/Modelica.SIunits.Conversions.html#Modelica.SIunits.Conversions.ConversionIcon">Modelica.SIunits.Conversions.ConversionIcon</a>;
   <font color="blue">input </font><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">Q.PressureAbsolute</a> p <font color="darkgreen">&quot;Absolute pressure&quot;</font>;
   <font color="blue">output </font>Real p_kPag <font color="darkgreen">&quot;Gauge pressure in kilopascals&quot;</font>;
@@ -646,7 +836,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.SIuni
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:53:02 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Apr  1 09:25:54 2013.
 </div>
 </body>
 </html>

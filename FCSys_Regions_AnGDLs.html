@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Regions.AnGDLs</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="Anode gas diffusion layers">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,11 +45,15 @@
       <div class="body">
 
 <h2><a name="FCSys.Regions.AnGDLs"></a><a href="FCSys_Regions.html#FCSys.Regions">FCSys.Regions</a>.AnGDLs</h2>
+
 <b>Anode gas diffusion layers</b>
-<p>
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Regions.AnGDLs.AnGDLS.png" alt="FCSys.Regions.AnGDLs.AnGDL" width=20  height=20 align=top>&nbsp;<a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a>
@@ -82,7 +87,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Regions.AnGDLs.AnGDL"></a><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs">FCSys.Regions.AnGDLs</a>.AnGDL</h2>
 <b>Anode gas diffusion layer</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.AnGDLs.AnGDL">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
 
 <p>This model describes the storage and transport of
 chemical/electrochemical species in and through the anode gas diffusion layer of a PEMFC.
@@ -90,7 +96,11 @@ The x axis is intended to extend from the anode to the cathode.
 The y axis extends along the length of the channel and
 the z axis extends across the width of the channel.</p><p>
 Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base model for a 3D array of subregions).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.76</td><td>Volumetric porosity [1]</td></tr>
@@ -104,7 +114,11 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative face along the x axis</td></tr>
@@ -114,10 +128,13 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> AnGDL <font color="darkgreen">&quot;Anode gas diffusion layer&quot;</font>
-  <font color="darkgreen">//extends FCSys.BaseClasses.Icons.Names.Top4;</font>
+  <font color="darkgreen">// extends FCSys.BaseClasses.Icons.Names.Top4;</font>
   <font color="darkgreen">// Note:  Extensions of AnGDL should be placed directly in the AnGDLs</font>
   <font color="darkgreen">// package rather than subpackages (e.g., by manufacturer) so that</font>
   <font color="darkgreen">// __Dymola_choicesFromPackage can be used.  Dymola 7.4 launches the</font>
@@ -185,7 +202,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
   <font color="darkgreen">// Teflon: 0.35 W/(m.K) at 300 K [Incropera2002, p. 916]</font>
   <font color="darkgreen">// Teflon: 0.45 W/(m.K) at 400 K [Incropera2002, p. 916]</font>
 
-<textblock type="annotcomp" expanded="false"><font color="blue">protected </font>
+<font color="blue">protected </font>
   <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
 
 <font color="blue">end </font>AnGDL;
@@ -196,11 +213,17 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <a name="FCSys.Regions.AnGDLs.Sigracet10BA"></a><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs">FCSys.Regions.AnGDLs</a>.Sigracet10BA</h2>
 <b>SGL Carbon Group Sigracet&reg; 10 BA</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.AnGDLs.Sigracet10BA">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 <p>See the information in the
     <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> (Anode gas diffusion layer).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.88</td><td>Volumetric porosity [1]</td></tr>
@@ -213,7 +236,11 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative face along the x axis</td></tr>
@@ -223,7 +250,10 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> Sigracet10BA <font color="darkgreen">&quot;SGL Carbon Group Sigracet&reg; 10 BA&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a>(L_x=<font color="red">fill</font>(0.400*U.mm/1, 1),x=0.88);
@@ -231,7 +261,7 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
   <font color="darkgreen">//     Diffusivity: L = 0.400 mm, p = 0.85 m/s (for air) =&gt; D = P*L = 340 mm2/s</font>
   <font color="darkgreen">//     Density: (85 g/m2)/(0.400 mm)/0.88 = 212.5 kg/m3</font>
   <font color="darkgreen">//     Electronic resistivity: (12 mohm.cm2)/(0.400 mm) = 3 mohm.m</font>
-<textblock type="annotcomp" expanded="false">
+
 <font color="blue">end </font>Sigracet10BA;
 </pre>
 <hr>
@@ -240,11 +270,17 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <a name="FCSys.Regions.AnGDLs.Sigracet10BB"></a><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs">FCSys.Regions.AnGDLs</a>.Sigracet10BB</h2>
 <b>SGL Carbon Group Sigracet&reg; 10 BB</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.AnGDLs.Sigracet10BB">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 <p>See the information in the
           <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> (Anode gas diffusion layer).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.84</td><td>Volumetric porosity [1]</td></tr>
@@ -257,7 +293,11 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative face along the x axis</td></tr>
@@ -267,7 +307,10 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> Sigracet10BB <font color="darkgreen">&quot;SGL Carbon Group Sigracet&reg; 10 BB&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a>(L_x=<font color="red">fill</font>(0.420*U.mm/1, 1),x=0.84);
@@ -275,7 +318,7 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
   <font color="darkgreen">//     Diffusivity: L = 0.420 mm, p = 0.03 m/s (for air) =&gt; D = P*L = 12.6 mm2/s</font>
   <font color="darkgreen">//     Density: (125 g/m2)/(0.420 mm) = 297.62 kg/m3</font>
   <font color="darkgreen">//     Electronic resistivity: (15 mohm.cm2)/(0.420 mm) = 3.5714 mohm.m</font>
-<textblock type="annotcomp" expanded="false">
+
 <font color="blue">end </font>Sigracet10BB;
 </pre>
 <hr>
@@ -284,11 +327,17 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <a name="FCSys.Regions.AnGDLs.Sigracet10BC"></a><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs">FCSys.Regions.AnGDLs</a>.Sigracet10BC</h2>
 <b>SGL Carbon Group Sigracet&reg; 10 BC</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.AnGDLs.Sigracet10BC">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 <p>See the information in the
           <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> (Anode gas diffusion layer).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.82</td><td>Volumetric porosity [1]</td></tr>
@@ -301,7 +350,11 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative face along the x axis</td></tr>
@@ -311,7 +364,10 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> Sigracet10BC <font color="darkgreen">&quot;SGL Carbon Group Sigracet&reg; 10 BC&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a>(L_x=<font color="red">fill</font>(0.420*U.mm/1, 1),x=0.82);
@@ -319,7 +375,7 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
   <font color="darkgreen">//     Diffusivity: L = 0.420 mm, p = 0.0145 m/s (for air) =&gt; D = P*L = 6.09 mm2/s</font>
   <font color="darkgreen">//     Density: (135 g/m2)/(0.420 mm) = 321.43 kg/m3</font>
   <font color="darkgreen">//     Electronic resistivity: (16 mohm.cm2)/(0.420 mm) = 3.8095 mohm.m</font>
-<textblock type="annotcomp" expanded="false">
+
 <font color="blue">end </font>Sigracet10BC;
 </pre>
 <hr>
@@ -328,11 +384,17 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <a name="FCSys.Regions.AnGDLs.Sigracet24BA"></a><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs">FCSys.Regions.AnGDLs</a>.Sigracet24BA</h2>
 <b>SGL Carbon Group Sigracet&reg; 24 BA</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.AnGDLs.Sigracet24BA">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 <p>See the information in the
           <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> (Anode gas diffusion layer).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.84</td><td>Volumetric porosity [1]</td></tr>
@@ -345,7 +407,11 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative face along the x axis</td></tr>
@@ -355,7 +421,10 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> Sigracet24BA <font color="darkgreen">&quot;SGL Carbon Group Sigracet&reg; 24 BA&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a>(L_x=<font color="red">fill</font>(0.190*U.mm/1, 1),x=0.84);
@@ -363,7 +432,7 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
   <font color="darkgreen">//     Diffusivity: L = 0.190 mm, p = 0.30 m/s (for air) =&gt; D = P*L = 57 mm2/s</font>
   <font color="darkgreen">//     Density: (54 g/m2)/(0.190 mm) = 284.21 kg/m3</font>
   <font color="darkgreen">//     Electronic resistivity: (10 mohm.cm2)/(0.190 mm) = 5.2632 mohm.m</font>
-<textblock type="annotcomp" expanded="false">
+
 <font color="blue">end </font>Sigracet24BA;
 </pre>
 <hr>
@@ -372,11 +441,17 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <a name="FCSys.Regions.AnGDLs.Sigracet24BC"></a><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs">FCSys.Regions.AnGDLs</a>.Sigracet24BC</h2>
 <b>SGL Carbon Group Sigracet&reg; 24 BC</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.AnGDLs.Sigracet24BC">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 <p>See the information in the
           <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> (Anode gas diffusion layer).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.76</td><td>Volumetric porosity [1]</td></tr>
@@ -389,7 +464,11 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative face along the x axis</td></tr>
@@ -399,7 +478,10 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> Sigracet24BC <font color="darkgreen">&quot;SGL Carbon Group Sigracet&reg; 24 BC&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a>(L_x=<font color="red">fill</font>(0.235*U.mm/1, 1),x=0.76);
@@ -407,7 +489,7 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
   <font color="darkgreen">//     Diffusivity: L = 0.235 mm, p = 0.0045 m/s (for air) =&gt; D = P*L = 1.0575 mm2/s</font>
   <font color="darkgreen">//     Density: (100 g/m2)/(0.235 mm) = 425.53 kg/m3</font>
   <font color="darkgreen">//     Electronic resistivity: (11 mohm.cm2)/(0.235 mm) = 4.6809 mohm.m</font>
-<textblock type="annotcomp" expanded="false">
+
 <font color="blue">end </font>Sigracet24BC;
 </pre>
 <hr>
@@ -416,11 +498,17 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <a name="FCSys.Regions.AnGDLs.Sigracet25BA"></a><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs">FCSys.Regions.AnGDLs</a>.Sigracet25BA</h2>
 <b>SGL Carbon Group Sigracet&reg; 25 BA</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.AnGDLs.Sigracet25BA">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 <p>See the information in the
           <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> (Anode gas diffusion layer).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.88</td><td>Volumetric porosity [1]</td></tr>
@@ -433,7 +521,11 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative face along the x axis</td></tr>
@@ -443,7 +535,10 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> Sigracet25BA <font color="darkgreen">&quot;SGL Carbon Group Sigracet&reg; 25 BA&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a>(L_x=<font color="red">fill</font>(0.190*U.mm/1, 1),x=0.88);
@@ -451,7 +546,7 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
   <font color="darkgreen">//     Diffusivity: L = 0.190 mm, p = 0.90 m/s (for air) =&gt; D = P*L = 171 mm2/s</font>
   <font color="darkgreen">//     Density: (40 g/m2)/(0.190 mm) = 210.53 kg/m3</font>
   <font color="darkgreen">//     Electronic resistivity: (10 mohm.cm2)/(0.190 mm) = 5.2632 mohm.m</font>
-<textblock type="annotcomp" expanded="false">
+
 <font color="blue">end </font>Sigracet25BA;
 </pre>
 <hr>
@@ -460,11 +555,17 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <a name="FCSys.Regions.AnGDLs.Sigracet25BC"></a><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs">FCSys.Regions.AnGDLs</a>.Sigracet25BC</h2>
 <b>SGL Carbon Group Sigracet&reg; 25 BC</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.AnGDLs.Sigracet25BC">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 <p>See the information in the
           <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> (Anode gas diffusion layer).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.80</td><td>Volumetric porosity [1]</td></tr>
@@ -477,7 +578,11 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative face along the x axis</td></tr>
@@ -487,7 +592,10 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> Sigracet25BC <font color="darkgreen">&quot;SGL Carbon Group Sigracet&reg; 25 BC&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a>(L_x=<font color="red">fill</font>(0.235*U.mm/1, 1),x=0.80);
@@ -495,7 +603,7 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
   <font color="darkgreen">//     Diffusivity: L = 0.235 mm, p = 0.008 m/s (for air) =&gt; D = P*L = 1.88 mm2/s</font>
   <font color="darkgreen">//     Density: (86 g/m2)/(0.235 mm) = 365.96 kg/m3</font>
   <font color="darkgreen">//     Electronic resistivity: (12 mohm.cm2)/(0.235 mm) = 5.1064 mohm.m</font>
-<textblock type="annotcomp" expanded="false">
+
 <font color="blue">end </font>Sigracet25BC;
 </pre>
 <hr>
@@ -504,11 +612,17 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <a name="FCSys.Regions.AnGDLs.TorayTGPH030"></a><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs">FCSys.Regions.AnGDLs</a>.TorayTGPH030</h2>
 <b>Toray Industries TGP-H-030</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.AnGDLs.TorayTGPH030">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 <p>See the information in the
           <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> (Anode gas diffusion layer).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.80</td><td>Volumetric porosity [1]</td></tr>
@@ -521,7 +635,11 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative face along the x axis</td></tr>
@@ -531,7 +649,10 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> TorayTGPH030 <font color="darkgreen">&quot;Toray Industries TGP-H-030&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a>(L_x=<font color="red">fill</font>(0.110*U.mm/1, 1),x=0.80);
@@ -544,7 +665,7 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
   <font color="darkgreen">//     Thermal resistivity (in plane, 20 degC): (1/21) m.K/W</font>
   <font color="darkgreen">//     Thermal resistivity (in plane, 100 degC): (1/23) m.K/W</font>
   <font color="darkgreen">//     Bulk density: 0.44 g/cm3</font>
-<textblock type="annotcomp" expanded="false">
+
 <font color="blue">end </font>TorayTGPH030;
 </pre>
 <hr>
@@ -553,11 +674,17 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <a name="FCSys.Regions.AnGDLs.TorayTGPH060"></a><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs">FCSys.Regions.AnGDLs</a>.TorayTGPH060</h2>
 <b>Toray Industries TGP-H-060</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.AnGDLs.TorayTGPH060">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 <p>See the information in the
           <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> (Anode gas diffusion layer).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.78</td><td>Volumetric porosity [1]</td></tr>
@@ -570,7 +697,11 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative face along the x axis</td></tr>
@@ -580,7 +711,10 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> TorayTGPH060 <font color="darkgreen">&quot;Toray Industries TGP-H-060&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a>(L_x=<font color="red">fill</font>(0.190*U.mm/1, 1),x=0.78);
@@ -593,7 +727,7 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
   <font color="darkgreen">//     Thermal resistivity (in plane, 20 degC): (1/21) m.K/W</font>
   <font color="darkgreen">//     Thermal resistivity (in plane, 100 degC): (1/23) m.K/W</font>
   <font color="darkgreen">//     Bulk density: 0.44 g/cm3</font>
-<textblock type="annotcomp" expanded="false">
+
 <font color="blue">end </font>TorayTGPH060;
 </pre>
 <hr>
@@ -602,11 +736,17 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <a name="FCSys.Regions.AnGDLs.TorayTGPH090"></a><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs">FCSys.Regions.AnGDLs</a>.TorayTGPH090</h2>
 <b>Toray Industries TGP-H-090</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.AnGDLs.TorayTGPH090">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 <p>See the information in the
           <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> (Anode gas diffusion layer).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.78</td><td>Volumetric porosity [1]</td></tr>
@@ -619,7 +759,11 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative face along the x axis</td></tr>
@@ -629,7 +773,10 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> TorayTGPH090 <font color="darkgreen">&quot;Toray Industries TGP-H-090&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a>(L_x=<font color="red">fill</font>(0.280*U.mm/1, 1),x=0.78);
@@ -642,7 +789,7 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
   <font color="darkgreen">//     Thermal resistivity (in plane, 20 degC): (1/21) m.K/W</font>
   <font color="darkgreen">//     Thermal resistivity (in plane, 100 degC): (1/23) m.K/W</font>
   <font color="darkgreen">//     Bulk density: 0.44 g/cm3</font>
-<textblock type="annotcomp" expanded="false">
+
 <font color="blue">end </font>TorayTGPH090;
 </pre>
 <hr>
@@ -651,11 +798,17 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <a name="FCSys.Regions.AnGDLs.TorayTGPH120"></a><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs">FCSys.Regions.AnGDLs</a>.TorayTGPH120</h2>
 <b>Toray Industries TGP-H-030</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.AnGDLs.TorayTGPH120">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 <p>See the information in the
           <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> (Anode gas diffusion layer).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.78</td><td>Volumetric porosity [1]</td></tr>
@@ -668,7 +821,11 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative face along the x axis</td></tr>
@@ -678,7 +835,10 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> TorayTGPH120 <font color="darkgreen">&quot;Toray Industries TGP-H-030&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a>(L_x=<font color="red">fill</font>(0.370*U.mm/1, 1),x=0.78);
@@ -691,7 +851,7 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
   <font color="darkgreen">//     Thermal resistivity (in plane, 20 degC): (1/21) m.K/W</font>
   <font color="darkgreen">//     Thermal resistivity (in plane, 100 degC): (1/23) m.K/W</font>
   <font color="darkgreen">//     Bulk density: 0.44 g/cm3</font>
-<textblock type="annotcomp" expanded="false">
+
 <font color="blue">end </font>TorayTGPH120;
 </pre>
       </div>
@@ -699,7 +859,7 @@ Extends from <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGD
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:49:57 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:47:18 2013.
 </div>
 </body>
 </html>

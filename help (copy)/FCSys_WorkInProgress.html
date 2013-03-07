@@ -1,0 +1,184 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.WorkInProgress</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Incomplete classes under development&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE WorkInProgress<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.WorkInProgress"></A><A HREF="FCSys.html#FCSys"
+>FCSys</A>.WorkInProgress</H2>
+<B>Incomplete classes under development</B>
+<P>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package"
+>Modelica.Icons.Package</A> (Icon for standard packages), <A HREF="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.PackageUnderConstruction"
+>FCSys.BaseClasses.Icons.PackageUnderConstruction</A> (Overlay to indicate that a package is in development).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.BlocksS.png" ALT="FCSys.WorkInProgress.Blocks" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks.html#FCSys.WorkInProgress.Blocks"
+>Blocks</A>
+</TD><TD>Imperative models (e.g., controllers and observers)</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.BlocksS.png" ALT="FCSys.WorkInProgress.Systems" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Systems.html#FCSys.WorkInProgress.Systems"
+>Systems</A>
+</TD><TD>Models of systems containing both hardware devices and control blocks</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.ConditionsAdaptersSpeciesFluidS.png" ALT="FCSys.WorkInProgress.ConditionsAdaptersSpeciesFluid" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress.html#FCSys.WorkInProgress.ConditionsAdaptersSpeciesFluid"
+>ConditionsAdaptersSpeciesFluid</A>
+</TD><TD>Adapter to connect a single fluid species between <a href="modelica://FCSys">FCSys</a> and <a href="modelica://Modelica">Modelica</a></TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.ConditionsAdaptersPhasesIonomerS.png" ALT="FCSys.WorkInProgress.ConditionsAdaptersPhasesIonomer" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress.html#FCSys.WorkInProgress.ConditionsAdaptersPhasesIonomer"
+>ConditionsAdaptersPhasesIonomer</A>
+</TD><TD>Adapter for ionomer between <a href="modelica://FCSys">FCSys</a> and <a href="modelica://Modelica">Modelica</a></TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE ConditionsAdaptersSpeciesFluid<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.ConditionsAdaptersSpeciesFluidI.png" ALT="FCSys.WorkInProgress.ConditionsAdaptersSpeciesFluid" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.ConditionsAdaptersSpeciesFluid"></A><A HREF="FCSys_WorkInProgress.html#FCSys.WorkInProgress"
+>FCSys.WorkInProgress</A>.ConditionsAdaptersSpeciesFluid</H2>
+<B>Adapter to connect a single fluid species between <a href="modelica://FCSys">FCSys</a> and <a href="modelica://Modelica">Modelica</a></B><p>
+<IMG SRC="FCSys.WorkInProgress.ConditionsAdaptersSpeciesFluidD.png" ALT="FCSys.WorkInProgress.ConditionsAdaptersSpeciesFluid">
+<P><H3>Information</H3></P>
+<PRE></pre><p>The electrical connector (<code>pin</code>) is only included
+    if the species is ionic.
+    </p>
+    <p>For additional information, see the
+    <A HREF="FCSys_Conditions_Adapters_Species_BaseClasses.html#FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies"
+>
+    PartialSpecies</a> model.</p>
+    <pre></PRE><P>
+Extends from <A HREF="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.FluidNonionic"
+>Conditions.Adapters.Species.FluidNonionic</A> (Adapter to connect a single nonionic fluid species between <a href="modelica://FCSys">FCSys</a> and <a href="modelica://Modelica">Modelica</a>), <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>.
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Quantities.html#FCSys.Quantities.Area"
+>Area</A></TD><TD>A</TD><TD>U.cm^2</TD><TD>Area of the interface [l2]</TD></TR>
+<TR><TD><A HREF="FCSys_BaseClasses.html#FCSys.BaseClasses.Side"
+>Side</A></TD><TD>side</TD><TD>Side.n</TD><TD>Side of the interface w.r.t. this component</TD></TR>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Material properties</TD></TR>
+<TR><TD colspan="2">replaceable package Data</TD><TD>Characteristics.BaseClasses....</TD><TD>Characteristic data (FCSys)</TD></TR>
+<TR><TD colspan="2">replaceable package Medium</TD><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Media_IdealGases_SingleGases_H2O.html#Modelica.Media.IdealGases.SingleGases.H2O"
+>H2O</A></TD><TD>Medium model (Modelica)</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.Face"
+>Face</A></TD><TD>face</TD><TD>Connector for linear momentum and heat of a single species</TD></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Thermal_HeatTransfer_Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b"
+>HeatPort_b</A></TD><TD>heatPort</TD><TD>Modelica heat port</TD></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Fluid_Interfaces.html#Modelica.Fluid.Interfaces.FluidPort_b"
+>FluidPort_b</A></TD><TD>fluidPort</TD><TD>Modelica fluid port</TD></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Electrical_Analog_Interfaces.html#Modelica.Electrical.Analog.Interfaces.NegativePin"
+>NegativePin</A></TD><TD>pin</TD><TD>Modelica electrical pin</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> ConditionsAdaptersSpeciesFluid <font color="darkgreen">
+  &quot;</pre>Adapter to connect a single fluid species between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a><pre>&quot;</font>
+
+  <font color="blue">extends </font><A HREF="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.FluidNonionic"
+>Conditions.Adapters.Species.FluidNonionic</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>;
+
+<textblock type="annotcomp" expanded="false">  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Electrical_Analog_Interfaces.html#Modelica.Electrical.Analog.Interfaces.NegativePin"
+>Modelica.Electrical.Analog.Interfaces.NegativePin</A> pin <font color="blue">if </font>Data.z &lt;&gt; 0 <font color="darkgreen">
+    &quot;Modelica electrical pin&quot;</font>;</textblock>
+
+<font color="blue">equation </font>
+  <font color="darkgreen">// **Add electrical equations.</font>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>ConditionsAdaptersSpeciesFluid;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE ConditionsAdaptersPhasesIonomer<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.ConditionsAdaptersPhasesIonomerI.png" ALT="FCSys.WorkInProgress.ConditionsAdaptersPhasesIonomer" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.ConditionsAdaptersPhasesIonomer"></A><A HREF="FCSys_WorkInProgress.html#FCSys.WorkInProgress"
+>FCSys.WorkInProgress</A>.ConditionsAdaptersPhasesIonomer</H2>
+<B>Adapter for ionomer between <a href="modelica://FCSys">FCSys</a> and <a href="modelica://Modelica">Modelica</a></B><p>
+<IMG SRC="FCSys.WorkInProgress.ConditionsAdaptersPhasesIonomerD.png" ALT="FCSys.WorkInProgress.ConditionsAdaptersPhasesIonomer">
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_Conditions_Adapters_Phases_BaseClasses.html#FCSys.Conditions.Adapters.Phases.BaseClasses.PartialPhase"
+>Conditions.Adapters.Phases.BaseClasses.PartialPhase</A> (Partial adapter for a phase between <a href="modelica://FCSys">FCSys</a> and <a href="modelica://Modelica">Modelica</a>), <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>.
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Thermal_HeatTransfer_Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b"
+>HeatPort_b</A></TD><TD>heatPort</TD><TD>Modelica heat port</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>face</TD><TD>FCSys face connector</TD></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Fluid_Interfaces.html#Modelica.Fluid.Interfaces.FluidPort_b"
+>FluidPort_b</A></TD><TD>fluidPort</TD><TD>Modelica fluid port</TD></TR>
+<TR><TD><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Electrical_Analog_Interfaces.html#Modelica.Electrical.Analog.Interfaces.NegativePin"
+>NegativePin</A></TD><TD>pin</TD><TD>Modelica electrical pin</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> ConditionsAdaptersPhasesIonomer <font color="darkgreen">
+  &quot;</pre>Adapter for ionomer between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a><pre>&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_Conditions_Adapters_Phases_BaseClasses.html#FCSys.Conditions.Adapters.Phases.BaseClasses.PartialPhase"
+>Conditions.Adapters.Phases.BaseClasses.PartialPhase</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>;
+
+  <A HREF="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.Solid"
+>Conditions.Adapters.Species.Solid</A> &#39;C19HF37O5S-&#39;;
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_WorkInProgress.html#FCSys.WorkInProgress.ConditionsAdaptersSpeciesFluid"
+>FCSys.WorkInProgress.ConditionsAdaptersSpeciesFluid</A> &#39;H+&#39;(<font color="blue">redeclare </font><font color="blue">package</font>
+      Data = <A HREF="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer"
+>FCSys.Characteristics.'H+'.Ionomer</A>, <font color="blue">redeclare </font><font color="blue">package</font> Medium = <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Media_IdealGases_SingleGases_H2.html#Modelica.Media.IdealGases.SingleGases.H2"
+>Modelica.Media.IdealGases.SingleGases.H2</A>);
+    </textblock>
+  <font color="darkgreen">// **Use model for H instead.</font>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Conditions_Adapters_Species.html#FCSys.Conditions.Adapters.Species.FluidNonionic"
+>Conditions.Adapters.Species.FluidNonionic</A> H2O(<font color="blue">redeclare </font><font color="blue">package</font> Data = <A HREF="FCSys_Characteristics_H2O_Ionomer.html#FCSys.Characteristics.H2O.Ionomer"
+>Characteristics.H2O.Ionomer</A>,
+      <font color="blue">redeclare </font><font color="blue">package</font> Medium = <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Media_IdealGases_SingleGases_H2O.html#Modelica.Media.IdealGases.SingleGases.H2O"
+>Modelica.Media.IdealGases.SingleGases.H2O</A>);
+  <A HREF="FCSys_Conditions_Adapters_Junctions.html#FCSys.Conditions.Adapters.Junctions.Junction2"
+>Conditions.Adapters.Junctions.Junction2</A> junction2;
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Fluid_Interfaces.html#Modelica.Fluid.Interfaces.FluidPort_b"
+>Modelica.Fluid.Interfaces.FluidPort_b</A> fluidPort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font>
+      Medium = Medium) <font color="darkgreen">&quot;Modelica fluid port&quot;</font>;
+  <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Electrical_Analog_Interfaces.html#Modelica.Electrical.Analog.Interfaces.NegativePin"
+>Modelica.Electrical.Analog.Interfaces.NegativePin</A> pin <font color="darkgreen">
+    &quot;Modelica electrical pin&quot;</font>;</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('C19HF37O5S-'.face.thermal, face.'C19HF37O5S-'.thermal);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.face.normal, face.'H+'.normal);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.face.thermal, face.'H+'.thermal);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.pin, pin);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>('H+'.heatPort, heatPort);
+  <font color="red">connect</font>('C19HF37O5S-'.heatPort, heatPort);
+  <font color="red">connect</font>(junction2.mixturePort, fluidPort);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>ConditionsAdaptersPhasesIonomer;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 00:07:19 2013.
+</address></BODY>
+</HTML>

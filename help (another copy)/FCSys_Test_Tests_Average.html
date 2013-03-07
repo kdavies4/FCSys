@@ -1,0 +1,128 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.Test.Tests.Average</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Tests associated with AssertAverage model&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Average<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Test.Tests.Average"></A><A HREF="FCSys_Test_Tests.html#FCSys.Test.Tests"
+>FCSys.Test.Tests</A>.Average</H2>
+<B>Tests associated with AssertAverage model</B>
+<P>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package"
+>Modelica.Icons.Package</A> (Icon for standard packages).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD>pi=3.141592653589793238462643383279502884197169399</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="FCSys_Test_Tests_Average.html#FCSys.Test.Tests.Average.CheckSuccess"
+>CheckSuccess</A>
+</TD><TD>Check for successful value of average</TD></TR>
+<TR><TD><A HREF="FCSys_Test_Tests_Average.html#FCSys.Test.Tests.Average.CheckFailure1"
+>CheckFailure1</A>
+</TD><TD>Check for failure when starting in the middle of the interval</TD></TR>
+<TR><TD><A HREF="FCSys_Test_Tests_Average.html#FCSys.Test.Tests.Average.CheckFailure2"
+>CheckFailure2</A>
+</TD><TD>Check for failure when simulation ends before interval</TD></TR>
+<TR><TD><A HREF="FCSys_Test_Tests_Average.html#FCSys.Test.Tests.Average.CheckFailure3"
+>CheckFailure3</A>
+</TD><TD>Check for failure when values don&#39;t agree</TD></TR>
+</TABLE>
+<P><H3>Types and constants</H3>
+<PRE><font color="blue">constant </font>Real pi=3.141592653589793238462643383279502884197169399;</PRE><p>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE CheckSuccess<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Test.Tests.Average.CheckSuccess"></A><A HREF="FCSys_Test_Tests_Average.html#FCSys.Test.Tests.Average"
+>FCSys.Test.Tests.Average</A>.CheckSuccess</H2>
+<B>Check for successful value of average</B><p>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> CheckSuccess <font color="darkgreen">&quot;Check for successful value of average&quot;</font>
+  Real x=<font color="red">sin</font>(2*time);
+  <A HREF="FCSys_Test.html#FCSys.Test.AssertAverageBetween"
+>AssertAverageBetween</A> check_x(
+    average=0,
+    start=0,
+    finish=2*pi,
+    signal=x,
+    eps=1e-4);
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>CheckSuccess;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE CheckFailure1<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Test.Tests.Average.CheckFailure1"></A><A HREF="FCSys_Test_Tests_Average.html#FCSys.Test.Tests.Average"
+>FCSys.Test.Tests.Average</A>.CheckFailure1</H2>
+<B>Check for failure when starting in the middle of the interval</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_Test_Tests_Average.html#FCSys.Test.Tests.Average.CheckSuccess"
+>CheckSuccess</A> (Check for successful value of average).
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> CheckFailure1 <font color="darkgreen">
+  &quot;Check for failure when starting in the middle of the interval&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_Test_Tests_Average.html#FCSys.Test.Tests.Average.CheckSuccess"
+>CheckSuccess</A>(check_x(start=-pi,finish=pi));
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>CheckFailure1;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE CheckFailure2<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Test.Tests.Average.CheckFailure2"></A><A HREF="FCSys_Test_Tests_Average.html#FCSys.Test.Tests.Average"
+>FCSys.Test.Tests.Average</A>.CheckFailure2</H2>
+<B>Check for failure when simulation ends before interval</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_Test_Tests_Average.html#FCSys.Test.Tests.Average.CheckSuccess"
+>CheckSuccess</A> (Check for successful value of average).
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> CheckFailure2 <font color="darkgreen">
+  &quot;Check for failure when simulation ends before interval&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_Test_Tests_Average.html#FCSys.Test.Tests.Average.CheckSuccess"
+>CheckSuccess</A>(check_x(start=pi,finish=3*pi));
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>CheckFailure2;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE CheckFailure3<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Test.Tests.Average.CheckFailure3"></A><A HREF="FCSys_Test_Tests_Average.html#FCSys.Test.Tests.Average"
+>FCSys.Test.Tests.Average</A>.CheckFailure3</H2>
+<B>Check for failure when values don&#39;t agree</B><p>
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_Test_Tests_Average.html#FCSys.Test.Tests.Average.CheckSuccess"
+>CheckSuccess</A> (Check for successful value of average).
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> CheckFailure3 <font color="darkgreen">&quot;Check for failure when values don&#39;t agree&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_Test_Tests_Average.html#FCSys.Test.Tests.Average.CheckSuccess"
+>CheckSuccess</A>(check_x(finish=7*pi/8));
+<textblock type="annotcomp" expanded="false">
+<font color="blue">end </font>CheckFailure3;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 01:12:35 2013.
+</address></BODY>
+</HTML>

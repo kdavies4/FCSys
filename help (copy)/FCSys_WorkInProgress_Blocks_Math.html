@@ -1,0 +1,573 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.WorkInProgress.Blocks.Math</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Math<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.WorkInProgress.Blocks.Math"></A><A HREF="FCSys_WorkInProgress_Blocks.html#FCSys.WorkInProgress.Blocks"
+>FCSys.WorkInProgress.Blocks</A>.Math</H2>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package"
+>Modelica.Icons.Package</A> (Icon for standard packages).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Math.Add2S.png" ALT="FCSys.WorkInProgress.Blocks.Math.Add2" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Math.html#FCSys.WorkInProgress.Blocks.Math.Add2"
+>Add2</A>
+</TD><TD>Output the weighted sum of two inputs</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Math.Add3S.png" ALT="FCSys.WorkInProgress.Blocks.Math.Add3" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Math.html#FCSys.WorkInProgress.Blocks.Math.Add3"
+>Add3</A>
+</TD><TD>Output the weighted sum of three inputs</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Math.AddSkipInclInclS.png" ALT="FCSys.WorkInProgress.Blocks.Math.AddSkipInclIncl" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Math.html#FCSys.WorkInProgress.Blocks.Math.AddSkipInclIncl"
+>AddSkipInclIncl</A>
+</TD><TD>Add or subtract two inputs</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Math.AddInclInclInclS.png" ALT="FCSys.WorkInProgress.Blocks.Math.AddInclInclIncl" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Math.html#FCSys.WorkInProgress.Blocks.Math.AddInclInclIncl"
+>AddInclInclIncl</A>
+</TD><TD>Add or subtract three inputs</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Math.AddInclInclSkipS.png" ALT="FCSys.WorkInProgress.Blocks.Math.AddInclInclSkip" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Math.html#FCSys.WorkInProgress.Blocks.Math.AddInclInclSkip"
+>AddInclInclSkip</A>
+</TD><TD>Add or subtract two inputs</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Math.AddInclSkipInclS.png" ALT="FCSys.WorkInProgress.Blocks.Math.AddInclSkipIncl" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Math.html#FCSys.WorkInProgress.Blocks.Math.AddInclSkipIncl"
+>AddInclSkipIncl</A>
+</TD><TD>Add or subtract two inputs</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Blocks.Math.LimiterS.png" ALT="FCSys.WorkInProgress.Blocks.Math.Limiter" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Blocks_Math.html#FCSys.WorkInProgress.Blocks.Math.Limiter"
+>Limiter</A>
+</TD><TD>Limit the range of a signal</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Add2<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Math.Add2I.png" ALT="FCSys.WorkInProgress.Blocks.Math.Add2" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Math.Add2"></A><A HREF="FCSys_WorkInProgress_Blocks_Math.html#FCSys.WorkInProgress.Blocks.Math"
+>FCSys.WorkInProgress.Blocks.Math</A>.Add2</H2>
+<B>Output the weighted sum of two inputs</B><p>
+<IMG SRC="FCSys.WorkInProgress.Blocks.Math.Add2D.png" ALT="FCSys.WorkInProgress.Blocks.Math.Add2">
+<P><H3>Information</H3></P>
+<PRE>
+</pre>
+<p>
+This blocks computes output <b>y</b> as <i>sum</i> of the
+three input signals <b>u_1</b>, <b>u_2</b> and <b>u_3</b>:
+<pre>
+    <b>y</b> = k_1*<b>u_1</b> + k_2*<b>u_2</b> + k_3*<b>u_3</b>;
+</pre>
+</p>
+<p>
+Example:
+<pre>
+     parameter:   k_1= +2, k_2= -3, k_3=1;
+</pre>
+</p>
+<p>
+  results in the following equations:
+<pre>
+     y = 2 * u_1 - 3 * u_2 + u_3;
+</pre>
+</p>
+
+<pre>
+</PRE><P>
+Extends from <A HREF="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous"
+>FCSys.BaseClasses.Icons.Blocks.Continuous</A> (Icon for a continuous-time block), <A HREF="FCSys_WorkInProgress_Blocks_BaseClasses.html#FCSys.WorkInProgress.Blocks.BaseClasses.MO"
+>FCSys.WorkInProgress.Blocks.BaseClasses.MO</A> (Multiple Output block).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>n_out</TD><TD>n</TD><TD>Number of outputs</TD></TR>
+<TR><TD>Integer</TD><TD>n</TD><TD>1</TD><TD>Size of vector</TD></TR>
+<TR><TD>Real</TD><TD>k_1</TD><TD>1</TD><TD>Gain (i.e., weight) of upper input</TD></TR>
+<TR><TD>Real</TD><TD>k_2</TD><TD>1</TD><TD>Gain (i.e., weight) of middle input</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>output <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>RealOutput</A></TD><TD>y[n_out]</TD><TD>Connector of Real output signals</TD></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>u_1[n]</TD><TD>Connector 1 of Real input signals</TD></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>u_2[n]</TD><TD>Connector 2 of Real input signals</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">block</font> Add2 <font color="darkgreen">&quot;Output the weighted sum of two inputs&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous"
+>FCSys.BaseClasses.Icons.Blocks.Continuous</A>;
+  <font color="blue">extends </font><A HREF="FCSys_WorkInProgress_Blocks_BaseClasses.html#FCSys.WorkInProgress.Blocks.BaseClasses.MO"
+>FCSys.WorkInProgress.Blocks.BaseClasses.MO</A>(<font color="blue">final </font>n_out=n);
+  <font color="blue">parameter </font>Integer n=1 <font color="darkgreen">&quot;Size of vector&quot;</font>;
+  <font color="blue">parameter </font>Real k_1=1 <font color="darkgreen">&quot;Gain (i.e., weight) of upper input&quot;</font>;
+  <font color="blue">parameter </font>Real k_2=1 <font color="darkgreen">&quot;Gain (i.e., weight) of middle input&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">input </font><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>FCSys.Connectors.RealInput</A> u_1[n] <font color="darkgreen">&quot;Connector 1 of Real input signals&quot;</font>;
+  <font color="blue">input </font><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>FCSys.Connectors.RealInput</A> u_2[n] <font color="darkgreen">&quot;Connector 2 of Real input signals&quot;</font>;</textblock>
+
+<font color="blue">equation </font>
+  y = k_1*u_1 + k_2*u_2;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Add2;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Add3<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Math.Add3I.png" ALT="FCSys.WorkInProgress.Blocks.Math.Add3" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Math.Add3"></A><A HREF="FCSys_WorkInProgress_Blocks_Math.html#FCSys.WorkInProgress.Blocks.Math"
+>FCSys.WorkInProgress.Blocks.Math</A>.Add3</H2>
+<B>Output the weighted sum of three inputs</B><p>
+<IMG SRC="FCSys.WorkInProgress.Blocks.Math.Add3D.png" ALT="FCSys.WorkInProgress.Blocks.Math.Add3">
+<P><H3>Information</H3></P>
+<PRE>
+</pre>
+<p>
+This blocks computes output <b>y</b> as <i>sum</i> of the
+three input signals <b>u_1</b>, <b>u_2</b> and <b>u_3</b>:
+</p>
+<pre>
+    <b>y</b> = k_1*<b>u_1</b> + k_2*<b>u_2</b> + k_3*<b>u_3</b>;
+</pre>
+<p>
+Example:
+</p>
+<pre>
+     parameter:   k_1= +2, k_2= -3, k_3=1;
+
+  results in the following equations:
+
+     y = 2 * u_1 - 3 * u_2 + u_3;
+</pre>
+
+<pre>
+</PRE><P>
+Extends from <A HREF="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous"
+>FCSys.BaseClasses.Icons.Blocks.Continuous</A> (Icon for a continuous-time block), <A HREF="FCSys_WorkInProgress_Blocks_BaseClasses.html#FCSys.WorkInProgress.Blocks.BaseClasses.MO"
+>FCSys.WorkInProgress.Blocks.BaseClasses.MO</A> (Multiple Output block).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>n_out</TD><TD>n</TD><TD>Number of outputs</TD></TR>
+<TR><TD>Integer</TD><TD>n</TD><TD>1</TD><TD>Size of vector</TD></TR>
+<TR><TD>Real</TD><TD>k_1</TD><TD>1</TD><TD>Gain (i.e., weight) of upper input</TD></TR>
+<TR><TD>Real</TD><TD>k_2</TD><TD>1</TD><TD>Gain (i.e., weight) of middle input</TD></TR>
+<TR><TD>Real</TD><TD>k_3</TD><TD>1</TD><TD>Gain (i.e., weight) of lower input</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>output <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>RealOutput</A></TD><TD>y[n_out]</TD><TD>Connector of Real output signals</TD></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>u_1[n]</TD><TD>Connector 1 of Real input signals</TD></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>u_2[n]</TD><TD>Connector 2 of Real input signals</TD></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>u_3[n]</TD><TD>Connector 3 of Real input signals</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">block</font> Add3 <font color="darkgreen">&quot;Output the weighted sum of three inputs&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous"
+>FCSys.BaseClasses.Icons.Blocks.Continuous</A>;
+  <font color="blue">extends </font><A HREF="FCSys_WorkInProgress_Blocks_BaseClasses.html#FCSys.WorkInProgress.Blocks.BaseClasses.MO"
+>FCSys.WorkInProgress.Blocks.BaseClasses.MO</A>(<font color="blue">final </font>n_out=n);
+  <font color="blue">parameter </font>Integer n=1 <font color="darkgreen">&quot;Size of vector&quot;</font>;
+  <font color="blue">parameter </font>Real k_1=1 <font color="darkgreen">&quot;Gain (i.e., weight) of upper input&quot;</font>;
+  <font color="blue">parameter </font>Real k_2=1 <font color="darkgreen">&quot;Gain (i.e., weight) of middle input&quot;</font>;
+  <font color="blue">parameter </font>Real k_3=1 <font color="darkgreen">&quot;Gain (i.e., weight) of lower input&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">input </font><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>FCSys.Connectors.RealInput</A> u_1[n] <font color="darkgreen">&quot;Connector 1 of Real input signals&quot;</font>;
+  <font color="blue">input </font><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>FCSys.Connectors.RealInput</A> u_2[n] <font color="darkgreen">&quot;Connector 2 of Real input signals&quot;</font>;
+  <font color="blue">input </font><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>FCSys.Connectors.RealInput</A> u_3[n] <font color="darkgreen">&quot;Connector 3 of Real input signals&quot;</font>;</textblock>
+
+<font color="blue">equation </font>
+  y = k_1*u_1 + k_2*u_2 + k_3*u_3;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Add3;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE AddSkipInclIncl<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Math.AddSkipInclInclI.png" ALT="FCSys.WorkInProgress.Blocks.Math.AddSkipInclIncl" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Math.AddSkipInclIncl"></A><A HREF="FCSys_WorkInProgress_Blocks_Math.html#FCSys.WorkInProgress.Blocks.Math"
+>FCSys.WorkInProgress.Blocks.Math</A>.AddSkipInclIncl</H2>
+<B>Add or subtract two inputs</B><p>
+<IMG SRC="FCSys.WorkInProgress.Blocks.Math.AddSkipInclInclD.png" ALT="FCSys.WorkInProgress.Blocks.Math.AddSkipInclIncl">
+<P><H3>Information</H3></P>
+<PRE>
+</pre>
+<p>
+This blocks computes output <b>y</b> as <i>difference</i> of the
+commanded input <b>u_1</b> and the feedback
+input <b>u_2</b>:
+</p>
+<pre>
+    <b>y</b> = <b>u_1</b> - <b>u_2</b>;
+</pre>
+<p>
+Example:
+</p>
+<pre>
+     parameter:   n = 2
+
+  results in the following equations:
+
+     y = u_1 - u_2
+</pre>
+
+<pre>
+</PRE><P>
+
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Boolean</TD><TD>isPos1</TD><TD>true</TD><TD>true: 1st input is positive; false: negative</TD></TR>
+<TR><TD>Boolean</TD><TD>isPos2</TD><TD>true</TD><TD>true: 2nd input is positive; false: negative</TD></TR>
+<TR><TD>Integer</TD><TD>n</TD><TD>1</TD><TD>Size of vector</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>u_1[n]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>u_2[n]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>output <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>RealOutput</A></TD><TD>y[n]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">block</font> AddSkipInclIncl <font color="darkgreen">&quot;Add or subtract two inputs&quot;</font>
+  <font color="darkgreen">// extends FCSys.Blocks.BaseClasses.MO(final n_out=n);</font>
+  <font color="darkgreen">// TODO:  Fix the icon.</font>
+  <font color="blue">parameter </font>Boolean isPos1=true <font color="darkgreen">&quot;true: 1st input is positive; false: negative&quot;</font>;
+  <font color="blue">parameter </font>Boolean isPos2=true <font color="darkgreen">&quot;true: 2nd input is positive; false: negative&quot;</font>;
+  <font color="blue">parameter </font>Integer n=1 <font color="darkgreen">&quot;Size of vector&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">input </font><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>FCSys.Connectors.RealInput</A> u_1[n];
+  <font color="blue">input </font><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>FCSys.Connectors.RealInput</A> u_2[n];
+  <font color="blue">output </font><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>FCSys.Connectors.RealOutput</A> y[n];</textblock>
+
+<font color="blue">equation </font>
+  y = (<font color="blue">if </font>isPos1<font color="blue"> then </font>u_1<font color="blue"> else </font>-u_1) + (<font color="blue">if </font>isPos2<font color="blue"> then </font>u_2<font color="blue"> else </font>-u_2);
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>AddSkipInclIncl;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE AddInclInclIncl<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Math.AddInclInclInclI.png" ALT="FCSys.WorkInProgress.Blocks.Math.AddInclInclIncl" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Math.AddInclInclIncl"></A><A HREF="FCSys_WorkInProgress_Blocks_Math.html#FCSys.WorkInProgress.Blocks.Math"
+>FCSys.WorkInProgress.Blocks.Math</A>.AddInclInclIncl</H2>
+<B>Add or subtract three inputs</B><p>
+<IMG SRC="FCSys.WorkInProgress.Blocks.Math.AddInclInclInclD.png" ALT="FCSys.WorkInProgress.Blocks.Math.AddInclInclIncl">
+<P><H3>Information</H3></P>
+<PRE>
+</pre>
+<p>
+This blocks computes output <b>y</b> as <i>difference</i> of the
+commanded input <b>u_1</b> and the feedback
+input <b>u_2</b>:
+</p>
+<pre>
+    <b>y</b> = <b>u_1</b> - <b>u_2</b>;
+</pre>
+<p>
+Example:
+</p>
+<pre>
+     parameter:   n = 2
+
+  results in the following equations:
+
+     y = u_1 - u_2
+</pre>
+
+<pre>
+</PRE><P>
+
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Boolean</TD><TD>isPos1</TD><TD>true</TD><TD>true: 1st input is positive; false: negative</TD></TR>
+<TR><TD>Boolean</TD><TD>isPos2</TD><TD>true</TD><TD>true: 2nd input is positive; false: negative</TD></TR>
+<TR><TD>Boolean</TD><TD>isPos3</TD><TD>true</TD><TD>true: 3rd input is positive; false: negative</TD></TR>
+<TR><TD>Integer</TD><TD>n</TD><TD>1</TD><TD>Size of vector</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>u_1[n]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>u_2[n]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>output <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>RealOutput</A></TD><TD>y[n]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>u_3[n]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">block</font> AddInclInclIncl <font color="darkgreen">&quot;Add or subtract three inputs&quot;</font>
+  <font color="darkgreen">// extends FCSys.Blocks.BaseClasses.MO(final n_out=n);</font>
+  <font color="darkgreen">// TODO:  Fix the icon.</font>
+  <font color="blue">parameter </font>Boolean isPos1=true <font color="darkgreen">&quot;true: 1st input is positive; false: negative&quot;</font>;
+  <font color="blue">parameter </font>Boolean isPos2=true <font color="darkgreen">&quot;true: 2nd input is positive; false: negative&quot;</font>;
+  <font color="blue">parameter </font>Boolean isPos3=true <font color="darkgreen">&quot;true: 3rd input is positive; false: negative&quot;</font>;
+  <font color="blue">parameter </font>Integer n=1 <font color="darkgreen">&quot;Size of vector&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">input </font><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>FCSys.Connectors.RealInput</A> u_1[n];
+  <font color="blue">input </font><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>FCSys.Connectors.RealInput</A> u_2[n];
+  <font color="blue">output </font><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>FCSys.Connectors.RealOutput</A> y[n];
+  <font color="blue">input </font><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>FCSys.Connectors.RealInput</A> u_3[n];</textblock>
+
+<font color="blue">equation </font>
+  y = (<font color="blue">if </font>isPos1<font color="blue"> then </font>u_1<font color="blue"> else </font>-u_1) + (<font color="blue">if </font>isPos2<font color="blue"> then </font>u_2<font color="blue"> else </font>-u_2) + (<font color="blue">if </font>
+    isPos3<font color="blue"> then </font>u_3<font color="blue"> else </font>-u_3);
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>AddInclInclIncl;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE AddInclInclSkip<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Math.AddInclInclSkipI.png" ALT="FCSys.WorkInProgress.Blocks.Math.AddInclInclSkip" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Math.AddInclInclSkip"></A><A HREF="FCSys_WorkInProgress_Blocks_Math.html#FCSys.WorkInProgress.Blocks.Math"
+>FCSys.WorkInProgress.Blocks.Math</A>.AddInclInclSkip</H2>
+<B>Add or subtract two inputs</B><p>
+<IMG SRC="FCSys.WorkInProgress.Blocks.Math.AddInclInclSkipD.png" ALT="FCSys.WorkInProgress.Blocks.Math.AddInclInclSkip">
+<P><H3>Information</H3></P>
+<PRE>
+</pre>
+<p>
+This blocks computes output <b>y</b> as <i>difference</i> of the
+commanded input <b>u_1</b> and the feedback
+input <b>u_2</b>:
+</p>
+<pre>
+    <b>y</b> = <b>u_1</b> - <b>u_2</b>;
+</pre>
+<p>
+Example:
+</p>
+<pre>
+     parameter:   n = 2
+
+  results in the following equations:
+
+     y = u_1 - u_2
+</pre>
+
+<pre>
+</PRE><P>
+
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Boolean</TD><TD>isPos1</TD><TD>true</TD><TD>true: 1st input is positive; false: negative</TD></TR>
+<TR><TD>Boolean</TD><TD>isPos2</TD><TD>true</TD><TD>true: 2nd input is positive; false: negative</TD></TR>
+<TR><TD>Integer</TD><TD>n</TD><TD>1</TD><TD>Size of vector</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>u_1[n]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>u_2[n]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>output <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>RealOutput</A></TD><TD>y[n]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">block</font> AddInclInclSkip <font color="darkgreen">&quot;Add or subtract two inputs&quot;</font>
+  <font color="darkgreen">// extends FCSys.Blocks.BaseClasses.MO(final n_out=n);</font>
+  <font color="darkgreen">// TODO:  Fix the icon.</font>
+  <font color="blue">parameter </font>Boolean isPos1=true <font color="darkgreen">&quot;true: 1st input is positive; false: negative&quot;</font>;
+  <font color="blue">parameter </font>Boolean isPos2=true <font color="darkgreen">&quot;true: 2nd input is positive; false: negative&quot;</font>;
+  <font color="blue">parameter </font>Integer n=1 <font color="darkgreen">&quot;Size of vector&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">input </font><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>FCSys.Connectors.RealInput</A> u_1[n];
+  <font color="blue">input </font><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>FCSys.Connectors.RealInput</A> u_2[n];
+  <font color="blue">output </font><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>FCSys.Connectors.RealOutput</A> y[n];</textblock>
+
+<font color="blue">equation </font>
+  y = (<font color="blue">if </font>isPos1<font color="blue"> then </font>u_1<font color="blue"> else </font>-u_1) + (<font color="blue">if </font>isPos2<font color="blue"> then </font>u_2<font color="blue"> else </font>-u_2);
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>AddInclInclSkip;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE AddInclSkipIncl<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Math.AddInclSkipInclI.png" ALT="FCSys.WorkInProgress.Blocks.Math.AddInclSkipIncl" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Math.AddInclSkipIncl"></A><A HREF="FCSys_WorkInProgress_Blocks_Math.html#FCSys.WorkInProgress.Blocks.Math"
+>FCSys.WorkInProgress.Blocks.Math</A>.AddInclSkipIncl</H2>
+<B>Add or subtract two inputs</B><p>
+<IMG SRC="FCSys.WorkInProgress.Blocks.Math.AddInclSkipInclD.png" ALT="FCSys.WorkInProgress.Blocks.Math.AddInclSkipIncl">
+<P><H3>Information</H3></P>
+<PRE>
+</pre>
+<p>
+This blocks computes output <b>y</b> as <i>difference</i> of the
+commanded input <b>u_1</b> and the feedback
+input <b>u_2</b>:
+</p>
+<pre>
+    <b>y</b> = <b>u_1</b> - <b>u_2</b>;
+</pre>
+<p>
+Example:
+</p>
+<pre>
+     parameter:   n = 2
+
+  results in the following equations:
+
+     y = u_1 - u_2
+</pre>
+
+<pre>
+</PRE><P>
+
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Boolean</TD><TD>isPos1</TD><TD>true</TD><TD>true: 1st input is positive; false: negative</TD></TR>
+<TR><TD>Boolean</TD><TD>isPos2</TD><TD>true</TD><TD>true: 2nd input is positive; false: negative</TD></TR>
+<TR><TD>Integer</TD><TD>n</TD><TD>1</TD><TD>Size of vector</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>u_1[n]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>u_2[n]</TD><TD>&nbsp;</TD></TR>
+<TR><TD>output <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>RealOutput</A></TD><TD>y[n]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">block</font> AddInclSkipIncl <font color="darkgreen">&quot;Add or subtract two inputs&quot;</font>
+  <font color="darkgreen">// extends FCSys.Blocks.BaseClasses.MO(final n_out=n);</font>
+  <font color="darkgreen">// TODO:  Fix the icon.</font>
+  <font color="blue">parameter </font>Boolean isPos1=true <font color="darkgreen">&quot;true: 1st input is positive; false: negative&quot;</font>;
+  <font color="blue">parameter </font>Boolean isPos2=true <font color="darkgreen">&quot;true: 2nd input is positive; false: negative&quot;</font>;
+  <font color="blue">parameter </font>Integer n=1 <font color="darkgreen">&quot;Size of vector&quot;</font>;
+<textblock type="annotcomp" expanded="false">  <font color="blue">input </font><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>FCSys.Connectors.RealInput</A> u_1[n];
+  <font color="blue">input </font><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>FCSys.Connectors.RealInput</A> u_2[n];
+  <font color="blue">output </font><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>FCSys.Connectors.RealOutput</A> y[n];</textblock>
+
+<font color="blue">equation </font>
+  y = (<font color="blue">if </font>isPos1<font color="blue"> then </font>u_1<font color="blue"> else </font>-u_1) + (<font color="blue">if </font>isPos2<font color="blue"> then </font>u_2<font color="blue"> else </font>-u_2);
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>AddInclSkipIncl;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Limiter<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Blocks.Math.LimiterI.png" ALT="FCSys.WorkInProgress.Blocks.Math.Limiter" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Blocks.Math.Limiter"></A><A HREF="FCSys_WorkInProgress_Blocks_Math.html#FCSys.WorkInProgress.Blocks.Math"
+>FCSys.WorkInProgress.Blocks.Math</A>.Limiter</H2>
+<B>Limit the range of a signal</B><p>
+<IMG SRC="FCSys.WorkInProgress.Blocks.Math.LimiterD.png" ALT="FCSys.WorkInProgress.Blocks.Math.Limiter">
+<P><H3>Information</H3></P>
+<PRE>
+</pre>
+<p>
+The Limiter block passes its input signal as output signal
+as long as the input is within the specified upper and lower
+limits. If this is not the case, the corresponding limits are passed
+as output.
+</p>
+<pre>
+</PRE><P>
+Extends from <A HREF="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous"
+>FCSys.BaseClasses.Icons.Blocks.Continuous</A> (Icon for a continuous-time block), <A HREF="FCSys_WorkInProgress_Blocks_BaseClasses.html#FCSys.WorkInProgress.Blocks.BaseClasses.MI"
+>FCSys.WorkInProgress.Blocks.BaseClasses.MI</A> (Multiple Input block), <A HREF="FCSys_WorkInProgress_Blocks_BaseClasses.html#FCSys.WorkInProgress.Blocks.BaseClasses.MO"
+>FCSys.WorkInProgress.Blocks.BaseClasses.MO</A> (Multiple Output block).
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Integer</TD><TD>n</TD><TD>1</TD><TD>Number of signals</TD></TR>
+<TR><TD>Real</TD><TD>u_max[n]</TD><TD>&nbsp;</TD><TD>Upper limits of input signals</TD></TR>
+<TR><TD>Real</TD><TD>u_min[n]</TD><TD>-u_max</TD><TD>Lower limits of input signals</TD></TR>
+<TR><TD>Boolean</TD><TD>limitsAtInit</TD><TD>true</TD><TD>= false, if limits are ignored during initialization (i.e., y=u)</TD></TR>
+<TR><TD>Integer</TD><TD>n_in</TD><TD>n</TD><TD>Number of inputs</TD></TR>
+<TR><TD>Integer</TD><TD>n_out</TD><TD>n</TD><TD>Number of outputs</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD>input <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInput"
+>RealInput</A></TD><TD>u[n_in]</TD><TD>Connector of Real input signals</TD></TR>
+<TR><TD>output <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutput"
+>RealOutput</A></TD><TD>y[n_out]</TD><TD>Connector of Real output signals</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">block</font> Limiter <font color="darkgreen">&quot;Limit the range of a signal&quot;</font>
+  <font color="blue">parameter </font>Integer n=1 <font color="darkgreen">&quot;Number of signals&quot;</font>;
+  <font color="blue">parameter </font>Real u_max[n](start=<font color="red">ones</font>(n)) <font color="darkgreen">&quot;Upper limits of input signals&quot;</font>;
+  <font color="blue">parameter </font>Real u_min[n]=-u_max <font color="darkgreen">&quot;Lower limits of input signals&quot;</font>;
+  <font color="blue">parameter </font>Boolean limitsAtInit=true <font color="darkgreen">
+    &quot;= false, if limits are ignored during initialization (i.e., y=u)&quot;</font>;
+  <font color="blue">extends </font><A HREF="FCSys_BaseClasses_Icons_Blocks.html#FCSys.BaseClasses.Icons.Blocks.Continuous"
+>FCSys.BaseClasses.Icons.Blocks.Continuous</A>;
+  <font color="blue">extends </font><A HREF="FCSys_WorkInProgress_Blocks_BaseClasses.html#FCSys.WorkInProgress.Blocks.BaseClasses.MI"
+>FCSys.WorkInProgress.Blocks.BaseClasses.MI</A>(<font color="blue">final </font>n_in=n);
+  <font color="blue">extends </font><A HREF="FCSys_WorkInProgress_Blocks_BaseClasses.html#FCSys.WorkInProgress.Blocks.BaseClasses.MO"
+>FCSys.WorkInProgress.Blocks.BaseClasses.MO</A>(<font color="blue">final </font>n_out=n);
+
+<font color="blue">equation </font>
+  <font color="blue">for </font>i<font color="blue"> in </font>1:n<font color="blue"> loop</font>
+    <font color="red">assert</font>(u_max[i] &gt;= u_min[i], &quot;Limiter: Limits must be consistent. However, u_max(&quot;
+       + <font color="red">String</font>(i) + &quot;) (=&quot; + <font color="red">String</font>(u_max[i]) + &quot;) &lt; u_min(&quot; + <font color="red">String</font>(i) + &quot;) (=&quot;
+       + <font color="red">String</font>(u_min[i]) + &quot;)&quot;);
+  <font color="blue">end for</font>;
+  <font color="blue">if </font><font color="red">initial</font>()<font color="blue"> and </font><font color="blue">not </font>limitsAtInit<font color="blue"> then</font>
+    y = u;
+    <font color="blue">for </font>i<font color="blue"> in </font>1:n<font color="blue"> loop</font>
+      <font color="red">assert</font>(u[i] &gt;= u_min[i] - 0.01*<font color="red">abs</font>(u_min[i])<font color="blue"> and </font>u[i] &lt;= u_max[i] + 0.01*<font color="red">
+        abs</font>(u_max[i]), &quot;Limiter: During initialization the limits have been ignored.
+However, the result is that the input u is not within the required limits:
+  u(&quot; + <font color="red">String</font>(i) + &quot;) = &quot; + <font color="red">String</font>(u[i]) + &quot;, u_min(&quot; + <font color="red">String</font>(i) + &quot;) = &quot; + <font color="red">
+        String</font>(u_min[i]) + &quot;, u_max(&quot; + <font color="red">String</font>(i) + &quot;) = &quot; + <font color="red">String</font>(u_max[i]));
+    <font color="blue">end for</font>;
+  <font color="blue">else</font>
+    <font color="blue">for </font>i<font color="blue"> in </font>1:n<font color="blue"> loop</font>
+      y[i] = <font color="red">smooth</font>(0, <font color="blue">if </font>u[i] &gt; u_max[i]<font color="blue"> then </font>u_max[i]<font color="blue"> else </font><font color="blue">if </font>u[i] &lt; u_min[i]<font color="blue">
+         then </font>u_min[i]<font color="blue"> else </font>u[i]);
+    <font color="blue">end for</font>;
+  <font color="blue">end if</font>;
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>Limiter;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 00:08:26 2013.
+</address></BODY>
+</HTML>

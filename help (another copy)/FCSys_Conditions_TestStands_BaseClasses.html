@@ -1,0 +1,231 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.Conditions.TestStands.BaseClasses</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<META name="description" content="&quot;Base classes (not generally for direct use)&quot;">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE BaseClasses<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.Conditions.TestStands.BaseClasses"></A><A HREF="FCSys_Conditions_TestStands.html#FCSys.Conditions.TestStands"
+>FCSys.Conditions.TestStands</A>.BaseClasses</H2>
+<B>Base classes (not generally for direct use)</B>
+<P>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_BasesPackage.html#Modelica.Icons.BasesPackage"
+>Modelica.Icons.BasesPackage</A> (Icon for packages containing base classes).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.TestStands.BaseClasses.PartialTestStandS.png" ALT="FCSys.Conditions.TestStands.BaseClasses.PartialTestStand" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_TestStands_BaseClasses.html#FCSys.Conditions.TestStands.BaseClasses.PartialTestStand"
+>PartialTestStand</A>
+</TD><TD>Partial cell test stand</TD></TR>
+<TR><TD><IMG SRC="FCSys.Conditions.TestStands.BaseClasses.PartialTestStandNoIOS.png" ALT="FCSys.Conditions.TestStands.BaseClasses.PartialTestStandNoIO" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_Conditions_TestStands_BaseClasses.html#FCSys.Conditions.TestStands.BaseClasses.PartialTestStandNoIO"
+>PartialTestStandNoIO</A>
+</TD><TD>Partial cell test stand without inputs/outputs</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE PartialTestStand<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Conditions.TestStands.BaseClasses.PartialTestStandI.png" ALT="FCSys.Conditions.TestStands.BaseClasses.PartialTestStand" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Conditions.TestStands.BaseClasses.PartialTestStand"></A><A HREF="FCSys_Conditions_TestStands_BaseClasses.html#FCSys.Conditions.TestStands.BaseClasses"
+>FCSys.Conditions.TestStands.BaseClasses</A>.PartialTestStand</H2>
+<B>Partial cell test stand</B><p>
+<IMG SRC="FCSys.Conditions.TestStands.BaseClasses.PartialTestStandD.png" ALT="FCSys.Conditions.TestStands.BaseClasses.PartialTestStand">
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top9"
+>FCSys.BaseClasses.Icons.Names.Top9</A>, <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>.
+<P><H3>Parameters</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Default</TH><TH>Description</TH></TR>
+<TR><TD>Boolean</TD><TD>inclIO</TD><TD>false</TD><TD>true, if input and output are included</TD></TR>
+<TR><TD><A HREF="FCSys_Conditions_FaceBusPair.html#FCSys.Conditions.FaceBusPair.Subregion"
+>Subregion</A></TD><TD>current[n_y, n_z]</TD><TD>redeclare FCSys.Conditions.F...</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>anEnd[n_y, n_z]</TD><TD>Anode end plate</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>caEnd[n_y, n_z]</TD><TD>Cathode end plate</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>anSource[n_x_an, n_z]</TD><TD>Anode source</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>anSink[n_x_an, n_z]</TD><TD>Anode sink</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>caSource[n_x_ca, n_z]</TD><TD>Cathode source</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>caSink[n_x_ca, n_z]</TD><TD>Cathode sink</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInputBus"
+>RealInputBus</A></TD><TD>u[n_y, n_z]</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus"
+>RealOutputBus</A></TD><TD>y[n_y, n_z]</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">partial </font><font color="blue">model</font> PartialTestStand <font color="darkgreen">&quot;Partial cell test stand&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top9"
+>FCSys.BaseClasses.Icons.Names.Top9</A>;
+  <font color="blue">extends </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons.html#Modelica.Icons.UnderConstruction"
+>Modelica.Icons.UnderConstruction</A>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_x_an=1 <font color="darkgreen">
+    &quot;</pre>Number of subregions along the through-cell axis in anode FP (<i>n</i><sub>x an</sub>)<pre>&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_x_ca=1 <font color="darkgreen">
+    &quot;</pre>Number of subregions along the through-cell axis in anode FP (<i>n</i><sub>x ca</sub>)<pre>&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_y=1 <font color="darkgreen">
+    &quot;</pre>Number of subregions along the channel (<i>n</i><sub>y</sub>)<pre>&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=1 <font color="darkgreen">
+    &quot;</pre>Number of subregions across the channel (<i>n</i><sub>z</sub>)<pre>&quot;</font>;
+
+  <font color="blue">parameter </font>Boolean inclIO=false <font color="darkgreen">&quot;true, if input and output are included&quot;</font>;
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>Connectors.FaceBus</A> anEnd[n_y, n_z] <font color="darkgreen">&quot;Anode end plate&quot;</font>;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>Connectors.FaceBus</A> caEnd[n_y, n_z] <font color="darkgreen">&quot;Cathode end plate&quot;</font>;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>Connectors.FaceBus</A> anSource[n_x_an, n_z] <font color="darkgreen">&quot;Anode source&quot;</font>;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>Connectors.FaceBus</A> anSink[n_x_an, n_z] <font color="darkgreen">&quot;Anode sink&quot;</font>;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>Connectors.FaceBus</A> caSource[n_x_ca, n_z] <font color="darkgreen">&quot;Cathode source&quot;</font>;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>Connectors.FaceBus</A> caSink[n_x_ca, n_z] <font color="darkgreen">&quot;Cathode sink&quot;</font>;</textblock>
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows"
+>Conditions.FaceBus.SubregionFlows</A> anEndCondition[n_y, n_z](<font color="blue">each </font>graphite(
+        &#39;inclC+&#39;=true, &#39;incle-&#39;=true));
+  <A HREF="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows"
+>Conditions.FaceBus.SubregionFlows</A> caEndCondition[n_y, n_z](<font color="blue">each </font>graphite(
+        &#39;inclC+&#39;=true, &#39;incle-&#39;=true));
+  <A HREF="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows"
+>Conditions.FaceBus.SubregionFlows</A> anSourceCondition[n_x_an, n_z](<font color="blue">each </font>gas(
+        inclH2=true, inclH2O=true));
+  <A HREF="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows"
+>Conditions.FaceBus.SubregionFlows</A> anSinkCondition[n_x_an, n_z](<font color="blue">each </font>gas(
+        inclH2=true, inclH2O=true));
+  <A HREF="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows"
+>Conditions.FaceBus.SubregionFlows</A> caSourceCondition[n_x_ca, n_z](<font color="blue">each </font>gas(
+      inclH2O=true,
+      inclN2=true,
+      inclO2=true));
+  <A HREF="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows"
+>Conditions.FaceBus.SubregionFlows</A> caSinkCondition[n_x_ca, n_z](<font color="blue">each </font>gas(
+      inclH2O=true,
+      inclN2=true,
+      inclO2=true));
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealInputBus"
+>Connectors.RealInputBus</A> u[n_y, n_z] <font color="blue">if </font>inclIO;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus"
+>Connectors.RealOutputBus</A> y[n_y, n_z] <font color="blue">if </font>inclIO;
+  <font color="blue">replaceable </font><A HREF="FCSys_Conditions_FaceBusPair.html#FCSys.Conditions.FaceBusPair.Subregion"
+>FCSys.Conditions.FaceBusPair.Subregion</A> current[n_y, n_z](graphite(
+        &#39;inclC+&#39;=true, &#39;incle-&#39;=true)) <font color="blue">if </font>inclIO <font color="blue">constrainedby </font>
+    Conditions.FaceBusPair.Subregion(graphite(&#39;inclC+&#39;=true, &#39;incle-&#39;=true));</textblock>
+
+<font color="blue">equation </font>
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(anSourceCondition.face, anSource);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(anSinkCondition.face, anSink);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(caSourceCondition.face, caSource);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(caSinkCondition.face, caSink);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(caEndCondition.face, caEnd);
+  <font color="red">connect</font>(current.positive, caEnd);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(current.negative, anEnd);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(u, current.u);
+  <font color="red">connect</font>(voltage.negative, anEndCondition.face);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(caEnd, voltage.positive);
+  <font color="red">connect</font>(voltage.y, y);</textblock>
+
+<textblock type="annotconnect" expanded="false">  <font color="red">connect</font>(anEndCondition.face, anEnd);</textblock>
+<textblock type="annotcomp" expanded="false"><font color="blue">end </font>PartialTestStand;
+</PRE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE PartialTestStandNoIO<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.Conditions.TestStands.BaseClasses.PartialTestStandNoIOI.png" ALT="FCSys.Conditions.TestStands.BaseClasses.PartialTestStandNoIO" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.Conditions.TestStands.BaseClasses.PartialTestStandNoIO"></A><A HREF="FCSys_Conditions_TestStands_BaseClasses.html#FCSys.Conditions.TestStands.BaseClasses"
+>FCSys.Conditions.TestStands.BaseClasses</A>.PartialTestStandNoIO</H2>
+<B>Partial cell test stand without inputs/outputs</B><p>
+<IMG SRC="FCSys.Conditions.TestStands.BaseClasses.PartialTestStandNoIOD.png" ALT="FCSys.Conditions.TestStands.BaseClasses.PartialTestStandNoIO">
+<P><H3>Information</H3></P>
+Extends from <A HREF="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top9"
+>FCSys.BaseClasses.Icons.Names.Top9</A>.
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">partial </font><font color="blue">model</font> PartialTestStandNoIO <font color="darkgreen">
+  &quot;Partial cell test stand without inputs/outputs&quot;</font>
+  <font color="blue">extends </font><A HREF="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top9"
+>FCSys.BaseClasses.Icons.Names.Top9</A>;
+
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_x_an=1 <font color="darkgreen">
+    &quot;</pre>Number of subregions along the through-cell axis in anode FP (<i>n</i><sub>x an</sub>)<pre>&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_x_ca=1 <font color="darkgreen">
+    &quot;</pre>Number of subregions along the through-cell axis in anode FP (<i>n</i><sub>x ca</sub>)<pre>&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_y=1 <font color="darkgreen">
+    &quot;</pre>Number of subregions along the channel (<i>n</i><sub>y</sub>)<pre>&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_z=1 <font color="darkgreen">
+    &quot;</pre>Number of subregions across the channel (<i>n</i><sub>z</sub>)<pre>&quot;</font>;
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows"
+>Conditions.FaceBus.SubregionFlows</A> anEnd[n_y, n_z](<font color="blue">each </font>graphite(
+      &#39;inclC+&#39;=true,
+      &#39;incle-&#39;=true,
+      &#39;e-&#39;(<font color="blue">redeclare </font>Face.Normal.CurrentAreic normal(<font color="blue">redeclare </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Ramp"
+>Modelica.Blocks.Sources.Ramp</A>
+            source(height=U.A/U.cm^2, duration=50)))));
+  <A HREF="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows"
+>Conditions.FaceBus.SubregionFlows</A> caEnd[n_y, n_z](<font color="blue">each </font>graphite(
+      &#39;inclC+&#39;=true,
+      &#39;incle-&#39;=true,
+      &#39;e-&#39;(<font color="blue">redeclare </font>Face.Normal.CurrentAreic normal(<font color="blue">redeclare </font><A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Blocks_Sources.html#Modelica.Blocks.Sources.Ramp"
+>Modelica.Blocks.Sources.Ramp</A>
+            source(height=U.A/U.cm^2, duration=50)))));
+  <A HREF="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows"
+>Conditions.FaceBus.SubregionFlows</A> anSource[n_x_an, n_z](<font color="blue">each </font>gas(inclH2=true,
+        inclH2O=true));
+  <A HREF="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows"
+>Conditions.FaceBus.SubregionFlows</A> anSink[n_x_an, n_z](<font color="blue">each </font>gas(inclH2=true,
+        inclH2O=true));
+  <A HREF="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows"
+>Conditions.FaceBus.SubregionFlows</A> caSource[n_x_ca, n_z](<font color="blue">each </font>gas(
+      inclH2O=true,
+      inclN2=true,
+      inclO2=true));
+  <A HREF="FCSys_Conditions_FaceBus.html#FCSys.Conditions.FaceBus.SubregionFlows"
+>Conditions.FaceBus.SubregionFlows</A> caSink[n_x_ca, n_z](<font color="blue">each </font>gas(
+      inclH2O=true,
+      inclN2=true,
+      inclO2=true));</textblock>
+
+<textblock type="annotcomp" expanded="false">  <font color="blue">inner </font><A HREF="FCSys_Conditions.html#FCSys.Conditions.Environment"
+>Environment</A> environment;
+
+<font color="blue">end </font>PartialTestStandNoIO;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 01:08:15 2013.
+</address></BODY>
+</HTML>

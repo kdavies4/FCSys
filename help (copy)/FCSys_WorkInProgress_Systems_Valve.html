@@ -1,0 +1,87 @@
+<HTML>
+<HEAD>
+<TITLE>FCSys.WorkInProgress.Systems.Valve</TITLE>
+<META name="HTML-Generator" content="Dymola">
+<style type="text/css">
+*       { font-size: 10pt; font-family: Arial,sans-serif; }
+pre     { font-size:  9pt; font-family: Courier,monospace;}
+h4      { font-size: 10pt; font-weight: bold; color: green; }
+h3      { font-size: 11pt; font-weight: bold; color: green; }
+h2      { font-size: 13pt; font-weight: bold; color: green; }
+address {                  font-weight: normal} 
+td      { solid #000; vertical-align:top; }
+th      { solid #000; vertical-align:top; font-weight: bold; }
+table   { solid #000; border-collapse: collapse;}
+</style>
+</HEAD>
+<BODY><P>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Valve<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><A NAME="FCSys.WorkInProgress.Systems.Valve"></A><A HREF="FCSys_WorkInProgress_Systems.html#FCSys.WorkInProgress.Systems"
+>FCSys.WorkInProgress.Systems</A>.Valve</H2>
+<P><H3>Information</H3></P>
+Extends from <A HREF="file:////opt/dymola/Modelica/Library/Modelica 3.2/help/Modelica_Icons_Package.html#Modelica.Icons.Package"
+>Modelica.Icons.Package</A> (Icon for standard packages).
+<P><H3>Package Content</H3><p>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2 >
+<TR><TH >Name</TH><TH>Description</TH></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Systems.Valve.ValveS.png" ALT="FCSys.WorkInProgress.Systems.Valve.Valve" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Systems_Valve.html#FCSys.WorkInProgress.Systems.Valve.Valve"
+>Valve</A>
+</TD><TD>Valve for water/steam flows with linear pressure drop</TD></TR>
+<TR><TD><IMG SRC="FCSys.WorkInProgress.Systems.Valve.InterfacesS.png" ALT="FCSys.WorkInProgress.Systems.Valve.Interfaces" WIDTH=20  HEIGHT=20 ALIGN = TOP >&nbsp;<A HREF="FCSys_WorkInProgress_Systems_Valve_Interfaces.html#FCSys.WorkInProgress.Systems.Valve.Interfaces"
+>Interfaces</A>
+</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<HR>
+<!--[if supportFields]><span style='mso-element:field-begin'></span>
+<span style='mso-spacerun:yes'></span>XE Valve<![endif]-->
+<!--[if supportFields]><span style='mso-element:field-end'></span><![endif]-->
+<H2><IMG SRC="FCSys.WorkInProgress.Systems.Valve.ValveI.png" ALT="FCSys.WorkInProgress.Systems.Valve.Valve" ALIGN=RIGHT BORDER=1 WIDTH=80  HEIGHT=80 >
+<A NAME="FCSys.WorkInProgress.Systems.Valve.Valve"></A><A HREF="FCSys_WorkInProgress_Systems_Valve.html#FCSys.WorkInProgress.Systems.Valve"
+>FCSys.WorkInProgress.Systems.Valve</A>.Valve</H2>
+<B>Valve for water/steam flows with linear pressure drop</B><p>
+<IMG SRC="FCSys.WorkInProgress.Systems.Valve.ValveD.png" ALT="FCSys.WorkInProgress.Systems.Valve.Valve">
+<P><H3>Information</H3></P>
+<PRE></pre>
+<p>This very simple model provides a pressure drop which is proportional to the flow rate and to the <code>face</code> input, without computing any fluid property. It can be used for testing purposes, when
+a simple model of a variable pressure loss is needed.</p>
+<p>A medium model must be nevertheless be specified, so that the fluid ports can be connected to other species using the same medium model.</p>
+<p>The model is adiabatic (no heat losses to the ambient) and neglects changes in kinetic energy from the inlet to the outlet. </p>
+<pre></PRE><P>
+Extends from FCSys.BaseClasses.Icons.Name.Top3.
+<P><H3>Connectors</H3><P>
+<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=2>
+<TR><TH>Type</TH><TH>Name</TH><TH>Description</TH></TR>
+<TR><TD><A HREF="FCSys_WorkInProgress_Systems_Valve_Interfaces.html#FCSys.WorkInProgress.Systems.Valve.Interfaces.ActBusIn"
+>ActBusIn</A></TD><TD>actBusIn</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="FCSys_WorkInProgress_Systems_Valve_Interfaces.html#FCSys.WorkInProgress.Systems.Valve.Interfaces.SenBusOut"
+>SenBusOut</A></TD><TD>senBusOut</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>pipeN</TD><TD>&nbsp;</TD></TR>
+<TR><TD><A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>FaceBus</A></TD><TD>pipeP</TD><TD>&nbsp;</TD></TR>
+</TABLE>
+<P><H3>Modelica definition</H3>
+<PRE>
+<font color="blue">model</font> Valve <font color="darkgreen">&quot;Valve for water/steam flows with linear pressure drop&quot;</font>
+  <font color="darkgreen">// TODO:  Complete this.</font>
+
+  <font color="darkgreen">//  extends FCSys.Processes.BaseClasses.PartialTransport.Top1;</font>
+  <font color="blue">extends </font>FCSys.BaseClasses.Icons.Name.Top3;
+
+<textblock type="annotcomp" expanded="false">  <A HREF="FCSys_WorkInProgress_Systems_Valve_Interfaces.html#FCSys.WorkInProgress.Systems.Valve.Interfaces.ActBusIn"
+>FCSys.WorkInProgress.Systems.Valve.Interfaces.ActBusIn</A> actBusIn;
+  <A HREF="FCSys_WorkInProgress_Systems_Valve_Interfaces.html#FCSys.WorkInProgress.Systems.Valve.Interfaces.SenBusOut"
+>FCSys.WorkInProgress.Systems.Valve.Interfaces.SenBusOut</A> senBusOut;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>Connectors.FaceBus</A> pipeN;
+  <A HREF="FCSys_Connectors.html#FCSys.Connectors.FaceBus"
+>Connectors.FaceBus</A> pipeP;
+
+<font color="blue">end </font>Valve;
+</PRE>
+<HR>
+<address>HTML-documentation generated by <a href="http://www.Dymola.com/">Dymola</a> Fri Mar 22 00:08:50 2013.
+</address></BODY>
+</HTML>

@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Regions.AnCLs</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-1-29">
+<meta name="date" content="2013-4-1">
 <meta name="description" content="Anode catalyst layers">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -16,8 +16,9 @@
     <img src="images/icon.gif" class="logo" alt="Logo" width=150>
   </a></p>
 
-  <h3>Table of Contents</h3>
-    <ul>
+<h3>Table of Contents</h3>
+
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -44,11 +45,15 @@
       <div class="body">
 
 <h2><a name="FCSys.Regions.AnCLs"></a><a href="FCSys_Regions.html#FCSys.Regions">FCSys.Regions</a>.AnCLs</h2>
+
 <b>Anode catalyst layers</b>
-<p>
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
-<p><h3>Package Content</h3><p>
+
+<h3>Package Content</h3>
+
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
 <tr><td><img src="images/FCSys.Regions.AnCLs.AnCLS.png" alt="FCSys.Regions.AnCLs.AnCL" width=20  height=20 align=top>&nbsp;<a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a>
@@ -62,7 +67,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <a name="FCSys.Regions.AnCLs.AnCL"></a><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs">FCSys.Regions.AnCLs</a>.AnCL</h2>
 <b>Anode catalyst layer</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.AnCLs.AnCL">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
 
 <p>This model describes the storage, reaction, and transport of
 chemical/electrochemical species in and through the anode catalyst layer of a PEMFC.
@@ -74,13 +80,17 @@ the z axis extends across the width of the channel.</p>
 <ol>
 <li>Half of the solid is graphite and half is ionomer (by volume).
 </li>
-</ol>
-</p>
+</ol></p>
+
 <p>For more information, see the
     <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> model.</p>
 <p>
 Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base model for a 3D array of subregions).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.25</td><td>Volumetric porosity [1]</td></tr>
@@ -96,7 +106,11 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative face along the x axis</td></tr>
@@ -106,10 +120,13 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> AnCL <font color="darkgreen">&quot;Anode catalyst layer&quot;</font>
-  <font color="darkgreen">//extends FCSys.BaseClasses.Icons.Names.Top4;</font>
+  <font color="darkgreen">// extends FCSys.BaseClasses.Icons.Names.Top4;</font>
 
   <font color="blue">extends </font><a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a>(
     L_x=<font color="red">fill</font>(28.7*U.micro*U.m/1, 1),
@@ -142,13 +159,14 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
         V_IC=0,
         xNegative(isobaric=false),
         xPositive(isobaric=false))));
+  <font color="darkgreen">// **Use e- and H+ as gases (here and in CaCL)</font>
 
-  <font color="darkgreen">//&#39;e-&#39;( xPositive(isobaric=true),</font>
-  <font color="darkgreen">//&#39;H+&#39;xNegative(isobaric=true),</font>
+  <font color="darkgreen">// &#39;e-&#39;( xPositive(isobaric=true),</font>
+  <font color="darkgreen">// &#39;H+&#39;xNegative(isobaric=true),</font>
 
-  <font color="darkgreen">//alpha_tau=1e-4*subregions[1,1,1].gas.H2.Data.alpha()),</font>
+  <font color="darkgreen">// alpha_tau=1e-4*subregions[1,1,1].gas.H2.Data.alpha()),</font>
 
-  <font color="darkgreen">//each ionomer(&#39;C19HF37O5S-&#39;(V_IC=0.15*V)))</font>
+  <font color="darkgreen">// each ionomer(&#39;C19HF37O5S-&#39;(V_IC=0.15*V)))</font>
 
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> x(nominal=1) = 0.25 <font color="darkgreen">&quot;Volumetric porosity&quot;</font>;
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> lambda_IC=14 <font color="darkgreen">
@@ -225,7 +243,7 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
   <font color="darkgreen">// assuming all of the solid volume is electrically conducting.</font>
   <font color="darkgreen">// (1 - epsilon) is the volume fraction of the conducting solid, and the power of (1 - epsilon)^(3/2) is the area fraction of the conducting solid.</font>
 
-<textblock type="annotcomp" expanded="false"><font color="blue">protected </font>
+<font color="blue">protected </font>
   <font color="blue">outer </font><a href="FCSys_Conditions.html#FCSys.Conditions.Environment">Conditions.Environment</a> environment <font color="darkgreen">&quot;Environmental conditions&quot;</font>;
 
 <font color="blue">end </font>AnCL;
@@ -236,16 +254,22 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <a name="FCSys.Regions.AnCLs.AnCGDL"></a><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs">FCSys.Regions.AnCLs</a>.AnCGDL</h2>
 <b>Integrated anode catalyst/gas diffusion layer</b><p>
 <img src="images/FCSys.Regions.AnFPs.AnFPD.png" alt="FCSys.Regions.AnCLs.AnCGDL">
-<p><h3>Information</h3></p>
+
+<h3>Information</h3>
+
 <p>See the information in the
     <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a> and <a href="FCSys_Regions_AnGDLs.html#FCSys.Regions.AnGDLs.AnGDL">AnGDL</a> models</p><p>
 Extends from <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a> (Anode catalyst layer).
-<p><h3>Parameters</h3><p>
+<p>
+
+<h3>Parameters</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.25</td><td>Volumetric porosity [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill((28.7*U.micro*U.m + 0.3...</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill((28.7*U.micro*U.m + 0.3&hellip;</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_y[:]</td><td>fill(1*U.m/1, 1)</td><td>Lengths along the y axis (<i>L</i><sub>y</sub>) [l]</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_z[:]</td><td>fill(5*U.mm/1, 1)</td><td>Lengths along the z axis (<i>L</i><sub>z</sub>) [l]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Initialization</td></tr>
@@ -255,7 +279,11 @@ Extends from <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a
 <tr><td>Boolean</td><td>inclFacesY</td><td>false</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
-<p><h3>Connectors</h3><p>
+<p>
+
+<h3>Connectors</h3>
+
+<p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative face along the x axis</td></tr>
@@ -265,14 +293,17 @@ Extends from <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zNegative[n_x, n_y]</td><td>Negative face along the z axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
-<p><h3>Modelica definition</h3>
+<p>
+
+<h3>Modelica definition</h3>
+
 <pre>
 <font color="blue">model</font> AnCGDL <font color="darkgreen">&quot;Integrated anode catalyst/gas diffusion layer&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a>(L_x=<font color="red">fill</font>((28.7*U.micro*U.m + 0.3*U.mm)/1, 1));
 
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> lambda_IC=14 <font color="darkgreen">
     &quot;Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>)&quot;</font>;
-<textblock type="annotcomp" expanded="false">
+
 <font color="blue">end </font>AnCGDL;
 </pre>
       </div>
@@ -280,7 +311,7 @@ Extends from <a href="FCSys_Regions_AnCLs.html#FCSys.Regions.AnCLs.AnCL">AnCL</a
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Jan 29 17:50:00 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:47:22 2013.
 </div>
 </body>
 </html>
