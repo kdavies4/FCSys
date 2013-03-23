@@ -1,6 +1,8 @@
 within ;
 package FCSys "Modelica library of fuel cell models"
 
+// **use local import statements (besides U and Q)
+
 // Line of 80 characters (including leading spaces and // ):
 // ----------------------------------------------------------------------------
 // Maximum line width before a new word is wrapped in Dymola 7.4 (81
@@ -977,8 +979,8 @@ margin-right: auto;\" class=noBorder>
     the gas diffusion diffusion layers (GDLs) and reacts in the catalyst layers (CLs).  The
     proton exchange membrane (PEM) prevents electronic transport; therefore, electrons must
     pass through an external load to sustain the net reaction.    As
-    shown in <a href=\"#Fig2\">Figure 2</a>, a PEMFC model may be constructed in
-    <a href=\"modelica://FCSys\">FCSys</a> from models of the same layers.
+    shown in <a href=\"#Fig2\">Figure 2</a>, a PEMFC model may be constructed from models 
+    of the same layers in <a href=\"modelica://FCSys\">FCSys</a> .
     The model is modular; the gas diffusion and catalyst layers could be combined,
     or microporous layers could be inserted.</p>
 
@@ -992,7 +994,7 @@ margin-right: auto;\" class=noBorder>
 <br>Figure 2: Diagram of the PEMFC model (<a href=\"modelica://FCSys.Assemblies.Cells.Cell\">FCSys.Assemblies.Cells.Cell</a>).</p>
 
     <p>The models describe the advection, diffusion, and storage of
-    material, linear momentum, and energy.  Upstream
+    material, momentum, and energy.  Upstream
     discretization is applied in a manner that reduces to pure
     diffusion (i.e., Fick's law, Newton's law of viscosity, and Fourier's law) when the bulk velocity is zero.
     The transport equations do

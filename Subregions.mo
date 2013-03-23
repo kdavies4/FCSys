@@ -4110,7 +4110,7 @@ and <code>R=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at saturat
       // **add and use quantity for M.L2/N.T
       // **Add function to Characteristic
       Q.CompressibilityDynamic x(nominal=1e8/(U.V*U.s)) = Data.Xi(T, p)
-        "**<html>Dynamic compressibility (&Xi;)</html>"
+        "<html>**Dynamic compressibility (&Xi;)</html>"
         annotation (Dialog(group="Material properties"));
       // **Dimension
       Q.FluidityDynamic F(nominal=10*U.cm*U.s/U.g) = Data.F(T, p)
@@ -4831,7 +4831,7 @@ Choose a condition besides None.");
     the reaction rate is determined solely by
     the transport equations.</p>
 
-    <p align=center><img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/exchange.png\">
+    <p align=center><img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/Exchange.png\">
 <br>Figure 1:  Exchange of a quantity (linear momentum or heat) among species
     (A, B, and C) within a subregion.</p>
 
@@ -4842,7 +4842,7 @@ Choose a condition besides None.");
     Upstream discretization is applied if it is enabled via the <code>upstreamX</code>,
     etc. parameters.</p>
 
-    <p align=center><img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/transport.png\">
+    <p align=center><img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/Transport.png\">
 <br>Figure 2:  Transport of a quantity associated with the same species
     between subregions (1 and 2).</p>
 
@@ -4859,11 +4859,11 @@ Choose a condition besides None.");
     <table border=0 cellspacing=0 cellpadding=2 align=center class=noBorder style=\"margin-left: auto; margin-right: auto;\">
       <tr align=center class=noBorder>
         <td align=center class=noBorder style=\"margin-left: auto; margin-right: auto;\">
-          <img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/share_pressure.png\">
+          <img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/SharePressure.png\">
 <br><b>a:</b>  Pressures of species (A, B, and C) are additive within a phase.
         </td>
         <td align=center class=noBorder style=\"margin-left: auto; margin-right: auto;\">
-          <img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/share_volume.png\">
+          <img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/ShareVolume.png\">
 <br><b>b:</b>  Volumes of phases (I, II, and III) are additive within a subregion.
         </td>
       </tr>
@@ -5200,7 +5200,7 @@ Choose a condition besides None.");
     zeros(n_lin) = inert.mPhidot "Linear momentum";
     0 = inert.Qdot "Energy";
     annotation (
-      Documentation(info="<html><p>This model uses a <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector that imposes
+      Documentation(info="<html><p>This model uses an <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector that imposes
     additivity of volume.  In order to convert to additivity of pressure, use
     the <a href=\"modelica://FCSys.Subregions.PhaseBoundary\">PhaseBoundary</a> model.</p>
 

@@ -5,9 +5,9 @@
 
    Copyright (C) 2012, Kevin Davies.
 
-   The content of this file is free software; it can be redistributed
-   and/or modified under the terms of the Modelica License 2, see the
-   license conditions and the accompanying disclaimer in file
+   The content of this file is free software; it can be redistributed and/or
+   modified under the terms of the Modelica License 2, see the license
+   conditions and the accompanying disclaimer in file
    FCSys/resources/documentation/ModelicaLicense2.html or in
    FCSys.UsersGuide.ModelicaLicense2.                                         */
 // Initial version: 2012-10-07
@@ -49,7 +49,7 @@ static int charge(const char* formula)
         // Read the charge.
         if (formula[i] != '\0' && (formula[i] == '+' || formula[i] == '-')) {
             if (isdigit(formula[i+1])) {
-                z += atoi(formula + i); // Automatically continues until nondigit
+                z += atoi(formula + i); // Continues until nondigit
                 while (formula[++i] != '\0' && isdigit(formula[i]));
             } else if (formula[i] == '+') {
                 z++;
@@ -64,8 +64,7 @@ static int charge(const char* formula)
 
 static int countElements(const char* formula)
 {
-    /* Return the number of elements in a species based on its chemical
-       formula.                                                               */
+    // Return the number of elements in a species based on its chemical formula.
 
     int z = 0; // Charge number
     int i = 0; // Index
@@ -96,7 +95,7 @@ static int countElements(const char* formula)
         // Read the charge.
         if (formula[i] != '\0' && (formula[i] == '+' || formula[i] == '-')) {
             if (isdigit(formula[i+1])) {
-                z += atoi(formula + i); // Automatically continues until nondigit
+                z += atoi(formula + i); // Continues until nondigit
                 while (formula[++i] != '\0' && isdigit(formula[i]));
             } else if (formula[i] == '+') {
                 z++;
@@ -122,7 +121,7 @@ static void readElement(const char* formula, int startIndex, char** symbol,
        chemical formula.
 
        Note: startIndex and nextIndex are 1-based indices (Modelica format), but
-       all other indices are 0-based (C format).                              */
+       all other indices are 0-based (C format).                          */
 
 	int i, symbol_length;
 
@@ -147,7 +146,7 @@ static void readElement(const char* formula, int startIndex, char** symbol,
 
     // Read the coefficient.
     if (formula[i] != '\0' && isdigit(formula[i])) {
-        *coeff = atoi(formula + i); // Automatically continues until nondigit
+        *coeff = atoi(formula + i); // Continues until nondigit
         while (formula[++i] != '\0' && isdigit(formula[i]));
     } else
         *coeff = 1;
@@ -155,7 +154,7 @@ static void readElement(const char* formula, int startIndex, char** symbol,
     // Read the charge.
     if (formula[i] != '\0' && (formula[i] == '+' || formula[i] == '-')) {
         if (isdigit(formula[i+1])) {
-            *z = atoi(formula + i); // Automatically continues until nondigit
+            *z = atoi(formula + i); // Continues until nondigit
             while (formula[++i] != '\0' && isdigit(formula[i]));
         } else if (formula[i] == '+') {
             *z = 1;

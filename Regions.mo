@@ -2444,7 +2444,7 @@ The x axis is intended to extend from the anode to the cathode.
 The y axis extends along the length of the channel and
 the z axis extends across the width of the channel.</p>
 
-<p>For more information, see the b
+<p>For more information, see the
     <a href=\"modelica://FCSys.Regions.Region\">Region</a> model.</p>
 </html>"),
         Icon(coordinateSystem(
