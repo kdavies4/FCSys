@@ -10,9 +10,6 @@
 # This is used by rsync via 00-release.sh.
 # KLD 5/22/12
 
-# Systems
-resources/documentation/Systems
-
 # Figures (for documentation only)
 *Figures*
 

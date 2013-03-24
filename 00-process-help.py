@@ -39,6 +39,7 @@ rpls = [
     (' CELLPADDING *= *', ' cellpadding='),
     (' ALT *= *', ' alt='),
     (' WIDTH *= *', ' width='),
+    (r'( width=\d) >', r'\1>'),
     (' HEIGHT *= *', ' height='),
     (' ALIGN *= *TOP *', ' align=top'), # Dymola adds spaces.
     (' ALIGN *= *', ' align='), # Dymola adds spaces.
@@ -101,7 +102,7 @@ rpls = [
     ('<textblock type="model" expanded="false" path=".*">', ''),
     ('</textblock>', ''),
     # Make the local links local again.
-    ('<a href="FCSys\.html#Fig(\d+)">', r'<a href="#Fig\1">'),
+    ('<a href="FCSys.*\.html(#\w*\d+)">', r'<a href="\1">'),
     # Use relative links again.
     ('/media/Storage/Documents/Dymola/FCSys/', '../'),
     # Use online links to the Modelica Standard Library.

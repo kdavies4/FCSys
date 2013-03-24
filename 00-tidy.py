@@ -13,7 +13,11 @@ import os
 ## Settings
 
 # Replacement pairs
-rpls = [# Remove empty annotation tags.
+rpls = [# Remove tabs.
+        ('\t', ' '),
+        # No space before newline
+        (' +[\n\r]', '\n'),
+        # Remove empty annotation tags.
         (r'\n? *Diagram\(graphics\), *', ' '),
         (r',\n? *Diagram\(graphics\)', ''),
         (r'annotation\(Diagram\(graphics\)\);', ''),
@@ -106,7 +110,7 @@ def removeNonAscii(s): return "".join(i for i in s if ord(i)<128)
 
 # Compile the regular expressions.
 for i, rpl in enumerate(rpls):
-    rpls[i] = (re.compile(rpl[0]), rpl[1])
+    rpls[i] = (re.compile(rpl[0], re.MULTILINE), rpl[1])
 
 # Replace strings.
 for fname in glob.glob(os.path.join(directory, '*.mo')):

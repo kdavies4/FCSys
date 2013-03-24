@@ -213,7 +213,8 @@ package Assemblies "Combinations of regions (e.g., cells)"
         "Number of subregions across the channel";
       // TODO:  For GM cell, use dissimilar L_y and L_z for anode, cathode, and PEM.
 
-      // Essential analysis variables (x-axis electrical voltage, power, and current)
+      // Essential analysis variables (x-axis electrical voltage, power, and
+      // current)
       output Q.Potential v=average(average(anFP.subregions[1, :, :].graphite.
           'e-'.mu_face[1, 1] - caFP.subregions[caFP.n_x, :, :].graphite.'e-'.mu_face[
           1, 2])) "Average electrical potential (x axis)";
@@ -272,10 +273,10 @@ package Assemblies "Combinations of regions (e.g., cells)"
         environment.analysis "Rate of oxygen intake";
 
       Connectors.FaceBus anFPX[n_y, n_z] "Anode plate face" annotation (
-          Placement(transformation(extent={{-90,-10},{-70,10}},rotation=0),
+          Placement(transformation(extent={{-90,-10},{-70,10}}, rotation=0),
             iconTransformation(extent={{-110,-10},{-90,10}})));
       Connectors.FaceBus caFPX[n_y, n_z] "Cathode plate face" annotation (
-          Placement(transformation(extent={{70,-10},{90,10}},rotation=0),
+          Placement(transformation(extent={{70,-10},{90,10}}, rotation=0),
             iconTransformation(extent={{90,-10},{110,10}})));
       Connectors.FaceBus anFPPosY[anFP.n_x, n_z]
         "Positive anode flow plate face along the y axis" annotation (Placement(
@@ -461,6 +462,7 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
               visible=inclX,
               thickness=0.5)}),
         experiment(StopTime=120, Tolerance=1e-06));
+
     end Cell;
 
     model CalibratedCell

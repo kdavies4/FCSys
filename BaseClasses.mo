@@ -51,7 +51,8 @@ package BaseClasses "Base classes (not generally for direct use)"
       partial class Discrete "Icon for a discrete-time block"
         extends Names.Top5;
 
-        // This has been modified from Modelica.Blocks.Interfaces.DiscreteBlockIcon.
+        // This has been modified from
+        // Modelica.Blocks.Interfaces.DiscreteBlockIcon.
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                 extent={{-100,-100},{100,100}},
@@ -69,91 +70,91 @@ package BaseClasses "Base classes (not generally for direct use)"
       partial class Top12
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,240},{100,280}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,240},{100,280}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,240},{100,280}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,240},{100,280}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Top12;
 
       partial class Top11
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,220},{100,260}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,220},{100,260}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,220},{100,260}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,220},{100,260}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Top11;
 
       partial class Top10
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,200},{100,240}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,200},{100,240}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,200},{100,240}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,200},{100,240}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Top10;
 
       partial class Top9
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,180},{100,220}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,180},{100,220}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,180},{100,220}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,180},{100,220}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Top9;
 
       partial class Top8
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,160},{100,200}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,160},{100,200}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,160},{100,200}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,160},{100,200}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Top8;
 
       partial class Top7
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,140},{100,180}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,140},{100,180}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,140},{100,180}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,140},{100,180}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Top7;
 
       partial class Top6
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,120},{100,160}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,120},{100,160}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,120},{100,160}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,120},{100,160}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Top6;
 
@@ -173,13 +174,13 @@ package BaseClasses "Base classes (not generally for direct use)"
       partial class Top4
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,80},{100,120}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,80},{100,120}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,80},{100,120}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,80},{100,120}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Top4;
 
@@ -199,26 +200,26 @@ package BaseClasses "Base classes (not generally for direct use)"
       partial class Top2
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,40},{100,80}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,40},{100,80}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,40},{100,80}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,40},{100,80}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Top2;
 
       partial class Top1
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,20},{100,60}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,20},{100,60}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,20},{100,60}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,20},{100,60}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Top1;
 
@@ -754,8 +755,8 @@ An unrelated species may be included.");
           // Also, in Dymola 7.4, if this function is called from a stack of (nested)
           // functions, it seems to reduce the depth allowed for the nested
           // parentheses.  The implementation here ("unrolled" only up to the 10th
-          // order) allows poly() to be called from within one other function within a
-          // model.
+          // order) allows poly() to be called from within one other function within
+          // a model.
 
         end positivePoly;
 

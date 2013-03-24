@@ -3,15 +3,9 @@ package FCSys "Modelica library of fuel cell models"
 
 // **use local import statements (besides U and Q)
 
-// Line of 80 characters (including leading spaces and // ):
-// ----------------------------------------------------------------------------
-// Maximum line width before a new word is wrapped in Dymola 7.4 (81
-// characters):
-// -----------------------------------------------------------------------------
 // Maximum line width before a new word is wrapped in the code listing in
-// the LaTeX document:
+// the LaTeX document (76 characters, including leading spaces and // )
 // ------------------------------------------------------------------------
-
 
 extends Modelica.Icons.Package;
 // extends FCSys.BaseClasses.Icons.Cell;
@@ -38,7 +32,6 @@ import FCSys.BaseClasses.Side;
 import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
 import FCSys.Subregions.Species.BaseClasses.InitMethVelocity;
 import FCSys.Subregions.Species.BaseClasses.InitMethScalar;
-
 
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
@@ -892,21 +885,6 @@ printing and shipping costs may be recovered.</p>
   annotation (preferedView="info", DocumentationClass=true);
 
   end UsersGuide;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 annotation (
   uses(Modelica(version="3.2")),
   preferedView="info",
@@ -920,7 +898,7 @@ annotation (
     phases. In fact, the framework could be easily extended to model other electrochemical
     devices like batteries.</p>
 
-    <p>A fuel cell is similar to a battery except that the reactants (fuel and oxidant) 
+    <p>A fuel cell is similar to a battery except that the reactants (fuel and oxidant)
     are externally stored or drawn
     from the environment.  The electrochemical reactions of a PEMFC are:
     <table border=0 cellspacing=0 cellpadding=2 align=center style=\"margin-left: auto;
@@ -978,19 +956,17 @@ margin-right: auto;\" class=noBorder>
     Fluid enters and exits the cell through channels in the flow plates (FPs).  It spreads through
     the gas diffusion diffusion layers (GDLs) and reacts in the catalyst layers (CLs).  The
     proton exchange membrane (PEM) prevents electronic transport; therefore, electrons must
-    pass through an external load to sustain the net reaction.    As
-    shown in <a href=\"#Fig2\">Figure 2</a>, a PEMFC model may be constructed from models 
-    of the same layers in <a href=\"modelica://FCSys\">FCSys</a> .
+    pass through an external load to sustain the net reaction.  As
+    shown in <a href=\"#Fig2\">Figure 2</a>, a PEMFC model may be constructed from models
+    of the same layers in <a href=\"modelica://FCSys\">FCSys</a>.
     The model is modular; the gas diffusion and catalyst layers could be combined,
     or microporous layers could be inserted.</p>
 
-    <a name=\"Fig1\"></a>
-    <p align=center><img src=\"modelica://FCSys/resources/documentation/cell.png\">
+    <p align=center id=\"Fig1\"><img src=\"modelica://FCSys/resources/documentation/CellFlows.png\">
 <br>Figure 1: Layers and primary flows of a PEMFC.</p>
 
-    <a name=\"Fig2\"></a>
-    <!--<p align=center><img src=\"modelica://FCSys/help/FCSys.Assemblies.Cells.CellD.png\" width=600>-->
-    <p align=center><a href=\"modelica://FCSys.Assemblies.Cells.Cell\"><img src=\"modelica://FCSys/resources/documentation/FCSys.Assemblies.Cells.CellD.png\"></a>
+    <!--<p align=center id=\"Fig2\"><img src=\"modelica://FCSys/help/FCSys.Assemblies.Cells.CellD.png\" width=600>-->
+    <p align=center id=\"Fig2\"><a href=\"modelica://FCSys.Assemblies.Cells.Cell\"><img src=\"modelica://FCSys/resources/documentation/FCSys.Assemblies.Cells.CellD.png\"></a>
 <br>Figure 2: Diagram of the PEMFC model (<a href=\"modelica://FCSys.Assemblies.Cells.Cell\">FCSys.Assemblies.Cells.Cell</a>).</p>
 
     <p>The models describe the advection, diffusion, and storage of
@@ -1014,8 +990,7 @@ margin-right: auto;\" class=noBorder>
     <a href=\"#Fig3\">Figure 3</a>.  Adapters are available to interface with
     <a href=\"modelica://Modelica.Fluid\">Modelica.Fluid</a>.</p>
 
-    <a name=\"Fig3\"></a>
-    <p align=center><a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\"><img src=\"modelica://FCSys/help/FCSys.Assemblies.Cells.Examples.CellProfileD.png\"></a>
+    <p align=center id=\"Fig3\"><a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\"><img src=\"modelica://FCSys/help/FCSys.Assemblies.Cells.Examples.CellProfileD.png\"></a>
 <br>Figure 3: Diagram of a test model (<a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\">FCSys.Assemblies.Cells.Examples.CellProfile</a>).</p>
 
     <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b>
@@ -1215,4 +1190,5 @@ margin-right: auto;\" class=noBorder>
   versionBuild=0,
   dateModified="",
   revisionID="");
+
 end FCSys;

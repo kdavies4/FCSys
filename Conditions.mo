@@ -260,34 +260,28 @@ package Conditions "Models to specify and measure operating conditions"
           points={{8,-40},{30,-40},{30,-20},{80,-20}},
           color={191,0,0},
           smooth=Smooth.None));
-      annotation (Icon(graphics={
-            Line(
-              points={{0,60},{0,-60}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-80,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,20},{80,20}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-20},{80,-20}},
-              color={191,0,0},
-              smooth=Smooth.None),
-            Line(
-              points={{0,60},{80,60}},
-              color={0,127,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-60},{80,-60}},
-              color={0,127,255},
-              smooth=Smooth.None)}));
+      annotation (Icon(graphics={Line(
+                  points={{0,60},{0,-60}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-80,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,20},{80,20}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-20},{80,-20}},
+                  color={191,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{0,60},{80,60}},
+                  color={0,127,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-60},{80,-60}},
+                  color={0,127,255},
+                  smooth=Smooth.None)}));
     end Anode;
 
     model Cathode
@@ -372,34 +366,28 @@ package Conditions "Models to specify and measure operating conditions"
           points={{8,-40},{30,-40},{30,-20},{80,-20}},
           color={191,0,0},
           smooth=Smooth.None));
-      annotation (Icon(graphics={
-            Line(
-              points={{0,60},{0,-60}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),
-            Line(
-              points={{0,0},{-80,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{0,20},{80,20}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-20},{80,-20}},
-              color={191,0,0},
-              smooth=Smooth.None),
-            Line(
-              points={{0,60},{80,60}},
-              color={0,127,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,-60},{80,-60}},
-              color={0,127,255},
-              smooth=Smooth.None)}));
+      annotation (Icon(graphics={Line(
+                  points={{0,60},{0,-60}},
+                  color={0,0,0},
+                  smooth=Smooth.None,
+                  pattern=LinePattern.Dash,
+                  thickness=0.5),Line(
+                  points={{0,0},{-80,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{0,20},{80,20}},
+                  color={0,0,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-20},{80,-20}},
+                  color={191,0,0},
+                  smooth=Smooth.None),Line(
+                  points={{0,60},{80,60}},
+                  color={0,127,255},
+                  smooth=Smooth.None),Line(
+                  points={{0,-60},{80,-60}},
+                  color={0,127,255},
+                  smooth=Smooth.None)}));
     end Cathode;
 
     package Phases "Adapters for material phases"
@@ -467,26 +455,22 @@ package Conditions "Models to specify and measure operating conditions"
             points={{58,-40},{80,-40}},
             color={0,127,255},
             smooth=Smooth.None));
-        annotation (Icon(graphics={
-              Line(
-                points={{0,20},{0,-60}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash,
-                thickness=0.5),
-              Line(
-                points={{0,0},{-80,0}},
-                color={127,127,127},
-                smooth=Smooth.None,
-                thickness=0.5),
-              Line(
-                points={{0,0},{80,0}},
-                color={191,0,0},
-                smooth=Smooth.None),
-              Line(
-                points={{0,-40},{80,-40}},
-                color={0,127,255},
-                smooth=Smooth.None)}));
+        annotation (Icon(graphics={Line(
+                      points={{0,20},{0,-60}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash,
+                      thickness=0.5),Line(
+                      points={{0,0},{-80,0}},
+                      color={127,127,127},
+                      smooth=Smooth.None,
+                      thickness=0.5),Line(
+                      points={{0,0},{80,0}},
+                      color={191,0,0},
+                      smooth=Smooth.None),Line(
+                      points={{0,-40},{80,-40}},
+                      color={0,127,255},
+                      smooth=Smooth.None)}));
       end AnodeGas;
 
       model CathodeGas
@@ -587,26 +571,22 @@ package Conditions "Models to specify and measure operating conditions"
             points={{58,-40},{80,-40}},
             color={0,127,255},
             smooth=Smooth.None));
-        annotation (Icon(graphics={
-              Line(
-                points={{0,20},{0,-60}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash,
-                thickness=0.5),
-              Line(
-                points={{0,0},{-80,0}},
-                color={127,127,127},
-                smooth=Smooth.None,
-                thickness=0.5),
-              Line(
-                points={{0,0},{80,0}},
-                color={191,0,0},
-                smooth=Smooth.None),
-              Line(
-                points={{0,-40},{80,-40}},
-                color={0,127,255},
-                smooth=Smooth.None)}));
+        annotation (Icon(graphics={Line(
+                      points={{0,20},{0,-60}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash,
+                      thickness=0.5),Line(
+                      points={{0,0},{-80,0}},
+                      color={127,127,127},
+                      smooth=Smooth.None,
+                      thickness=0.5),Line(
+                      points={{0,0},{80,0}},
+                      color={191,0,0},
+                      smooth=Smooth.None),Line(
+                      points={{0,-40},{80,-40}},
+                      color={0,127,255},
+                      smooth=Smooth.None)}));
       end CathodeGas;
 
       model Graphite
@@ -650,26 +630,22 @@ package Conditions "Models to specify and measure operating conditions"
             points={{8,-16},{60,-16},{60,40},{80,40}},
             color={0,0,255},
             smooth=Smooth.None));
-        annotation (Icon(graphics={
-              Line(
-                points={{0,60},{0,-20}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash,
-                thickness=0.5),
-              Line(
-                points={{0,0},{-80,0}},
-                color={127,127,127},
-                smooth=Smooth.None,
-                thickness=0.5),
-              Line(
-                points={{0,40},{80,40}},
-                color={0,0,255},
-                smooth=Smooth.None),
-              Line(
-                points={{0,0},{80,0}},
-                color={191,0,0},
-                smooth=Smooth.None)}));
+        annotation (Icon(graphics={Line(
+                      points={{0,60},{0,-20}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash,
+                      thickness=0.5),Line(
+                      points={{0,0},{-80,0}},
+                      color={127,127,127},
+                      smooth=Smooth.None,
+                      thickness=0.5),Line(
+                      points={{0,40},{80,40}},
+                      color={0,0,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,0},{80,0}},
+                      color={191,0,0},
+                      smooth=Smooth.None)}));
       end Graphite;
 
       model Liquid
@@ -710,22 +686,19 @@ package Conditions "Models to specify and measure operating conditions"
             points={{8,-4},{40,-4},{40,-40},{80,-40}},
             color={0,127,255},
             smooth=Smooth.None));
-        annotation (Icon(graphics={
-              Line(
-                points={{0,20},{0,-60}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash,
-                thickness=0.5),
-              Line(
-                points={{0,0},{-80,0}},
-                color={127,127,127},
-                smooth=Smooth.None,
-                thickness=0.5),
-              Line(
-                points={{0,-40},{80,-40}},
-                color={0,127,255},
-                smooth=Smooth.None)}));
+        annotation (Icon(graphics={Line(
+                      points={{0,20},{0,-60}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash,
+                      thickness=0.5),Line(
+                      points={{0,0},{-80,0}},
+                      color={127,127,127},
+                      smooth=Smooth.None,
+                      thickness=0.5),Line(
+                      points={{0,-40},{80,-40}},
+                      color={0,127,255},
+                      smooth=Smooth.None)}));
       end Liquid;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -743,13 +716,13 @@ package Conditions "Models to specify and measure operating conditions"
                 transformation(extent={{-90,-10},{-70,10}}), iconTransformation(
                   extent={{-90,-10},{-70,10}})));
           annotation (Icon(graphics={Line(
-                  points={{0,0},{-80,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5), Line(
-                  points={{0,0},{80,0}},
-                  color={191,0,0},
-                  smooth=Smooth.None)}));
+                          points={{0,0},{-80,0}},
+                          color={127,127,127},
+                          smooth=Smooth.None,
+                          thickness=0.5),Line(
+                          points={{0,0},{80,0}},
+                          color={191,0,0},
+                          smooth=Smooth.None)}));
 
         end PartialPhase;
 
@@ -785,13 +758,13 @@ package Conditions "Models to specify and measure operating conditions"
     <a href=\"modelica://FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"), Icon(graphics={Line(
-                points={{0,40},{80,40}},
-                color={0,0,255},
-                smooth=Smooth.None), Line(
-                points={{0,60},{0,-20}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash)}));
+                      points={{0,40},{80,40}},
+                      color={0,0,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,60},{0,-20}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash)}));
       end 'e-';
 
       model FluidNonionic
@@ -836,13 +809,13 @@ package Conditions "Models to specify and measure operating conditions"
     <a href=\"modelica://FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"), Icon(graphics={Line(
-                points={{0,-40},{80,-40}},
-                color={0,127,255},
-                smooth=Smooth.None), Line(
-                points={{0,20},{0,-60}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash)}));
+                      points={{0,-40},{80,-40}},
+                      color={0,127,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,20},{0,-60}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash)}));
       end FluidNonionic;
 
       model Solid
@@ -856,10 +829,10 @@ package Conditions "Models to specify and measure operating conditions"
     <a href=\"modelica://FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"), Icon(graphics={Line(
-                points={{0,20},{0,-20}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash)}));
+                      points={{0,20},{0,-20}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash)}));
       end Solid;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -901,12 +874,12 @@ package Conditions "Models to specify and measure operating conditions"
             Documentation(info="<html><p>Note that shear force is not included.</p>
   </html>"),
             Icon(graphics={Line(
-                  points={{0,0},{-80,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None), Line(
-                  points={{0,0},{80,0}},
-                  color={191,0,0},
-                  smooth=Smooth.None)}));
+                          points={{0,0},{-80,0}},
+                          color={127,127,127},
+                          smooth=Smooth.None),Line(
+                          points={{0,0},{80,0}},
+                          color={191,0,0},
+                          smooth=Smooth.None)}));
         end PartialSpecies;
 
       end BaseClasses;
@@ -1010,12 +983,12 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
   </li>
   </ol></p></html>"),
           Icon(graphics={Line(
-                points={{0,-40},{80,-40}},
-                color={0,127,255},
-                smooth=Smooth.None), Line(
-                points={{0,40},{80,40}},
-                color={0,127,255},
-                smooth=Smooth.None)}));
+                      points={{0,-40},{80,-40}},
+                      color={0,127,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,40},{80,40}},
+                      color={0,127,255},
+                      smooth=Smooth.None)}));
       end Junction2;
 
       model Junction3
@@ -1137,19 +1110,16 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
   of the pressures of the pure substances.
   </li>
   </ol></p></html>"),
-          Icon(graphics={
-              Line(
-                points={{0,-40},{80,-40}},
-                color={0,127,255},
-                smooth=Smooth.None),
-              Line(
-                points={{0,40},{80,40}},
-                color={0,127,255},
-                smooth=Smooth.None),
-              Line(
-                points={{6,0},{80,0}},
-                color={0,127,255},
-                smooth=Smooth.None)}));
+          Icon(graphics={Line(
+                      points={{0,-40},{80,-40}},
+                      color={0,127,255},
+                      smooth=Smooth.None),Line(
+                      points={{0,40},{80,40}},
+                      color={0,127,255},
+                      smooth=Smooth.None),Line(
+                      points={{6,0},{80,0}},
+                      color={0,127,255},
+                      smooth=Smooth.None)}));
       end Junction3;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -1182,20 +1152,17 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                     1,
                     mixturePort.Xi_outflow,
                     1 - sum(X[1:MixtureMedium.nXi])) else mixturePort.Xi_outflow;
-          annotation (defaultComponentName="junction", Icon(graphics={
-                Line(
-                  points={{-80,0},{0,0}},
-                  color={0,127,255},
-                  smooth=Smooth.None),
-                Line(
-                  points={{0,-40},{0,40}},
-                  color={0,127,255},
-                  smooth=Smooth.None),
-                Ellipse(
-                  extent={{-6,6},{6,-6}},
-                  lineColor={0,127,255},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid)}));
+          annotation (defaultComponentName="junction", Icon(graphics={Line(
+                          points={{-80,0},{0,0}},
+                          color={0,127,255},
+                          smooth=Smooth.None),Line(
+                          points={{0,-40},{0,40}},
+                          color={0,127,255},
+                          smooth=Smooth.None),Ellipse(
+                          extent={{-6,6},{6,-6}},
+                          lineColor={0,127,255},
+                          fillColor={255,255,255},
+                          fillPattern=FillPattern.Solid)}));
         end PartialJunction;
 
       end BaseClasses;
@@ -1930,11 +1897,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                   {160,160}}), graphics),
           Icon(coordinateSystem(preserveAspectRatio=true,extent={{-160,-160},{
                   160,160}}), graphics={Rectangle(
-                extent={{-160,160},{160,-160}},
-                lineColor={191,191,191},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Backward), Rectangle(extent={{-160,160},
-                    {160,-160}}, lineColor={0,0,0})}));
+                      extent={{-160,160},{160,-160}},
+                      lineColor={191,191,191},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Backward),Rectangle(extent={{-160,
+                160},{160,-160}}, lineColor={0,0,0})}));
       end PartialTestStand;
 
       partial model PartialTestStandNoIO
@@ -2637,8 +2604,8 @@ model.</p>
           extends Chemical.BaseClasses.PartialCondition;
 
           constant ConditionType conditionType "Type of condition";
-          // Note:  This is included so that the type of condition is recorded with the
-          // results.
+          // Note:  This is included so that the type of condition is recorded with
+          // the results.
 
         equation
           // Zero values of other flows
@@ -2701,8 +2668,8 @@ model.</p>
           parameter Axis axis=Axis.x "Axis" annotation (HideResult=true);
 
           constant ConditionType conditionType "Type of condition";
-          // Note:  This is included so that the type of condition is recorded with the
-          // results.
+          // Note:  This is included so that the type of condition is recorded with
+          // the results.
 
         protected
           final parameter Integer cartAxes[n_lin]=index({inclLinX,inclLinY,
@@ -2770,8 +2737,8 @@ model.</p>
           extends Chemical.BaseClasses.PartialCondition;
 
           constant ConditionType conditionType "Type of condition";
-          // Note:  This is included so that the type of condition is recorded with the
-          // results.
+          // Note:  This is included so that the type of condition is recorded with
+          // the results.
 
         equation
           // Zero values of other flows
@@ -3298,9 +3265,10 @@ model.</p>
           parameter Axis axis=Axis.x "Axis" annotation (HideResult=true);
 
           constant ConditionType conditionType "Type of condition";
-          // Note:  This is included so that the type of condition is recorded with the
-          // results.
-          Connectors.Mechanical mechanical(final n_lin=n_lin)
+          // Note:  This is included so that the type of condition is recorded with
+          // the results.
+
+          Connectors.Translational mechanical(final n_lin=n_lin)
             "Connector to exchange linear momentum"
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -3383,10 +3351,10 @@ model.</p>
           extends FCSys.Conditions.Inert.BaseClasses.PartialCondition;
 
           constant ConditionType conditionType "Type of condition";
-          // Note:  This is included so that the type of condition is recorded with the
-          // results.
+          // Note:  This is included so that the type of condition is recorded with
+          // the results.
 
-          Connectors.Thermal thermal "Connector to exchange heat"
+          Connectors.ThermalDiffusion thermal "Connector to exchange heat"
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
           annotation (defaultComponentName="thermal", Diagram(graphics={Text(
                   extent={{-8,-32},{8,-36}},
@@ -3756,8 +3724,8 @@ model.</p>
           extends InertAmagat.BaseClasses.PartialCondition;
 
           constant ConditionType conditionType "Type of condition";
-          // Note:  This is included so that the type of condition is recorded with the
-          // results.
+          // Note:  This is included so that the type of condition is recorded with
+          // the results.
 
         equation
           // Zero values of other flows
@@ -3827,8 +3795,8 @@ model.</p>
           parameter Axis axis=Axis.x "Axis" annotation (HideResult=true);
 
           constant ConditionType conditionType "Type of condition";
-          // Note:  This is included so that the type of condition is recorded with the
-          // results.
+          // Note:  This is included so that the type of condition is recorded with
+          // the results.
 
         protected
           final parameter Integer cartAxes[n_lin]=index({inclLinX,inclLinY,
@@ -3911,8 +3879,8 @@ model.</p>
           extends InertAmagat.BaseClasses.PartialCondition;
 
           constant ConditionType conditionType "Type of condition";
-          // Note:  This is included so that the type of condition is recorded with the
-          // results.
+          // Note:  This is included so that the type of condition is recorded with
+          // the results.
 
         equation
           // Zero values of other flows
@@ -4281,8 +4249,8 @@ model.</p>
           extends FCSys.Conditions.InertDalton.BaseClasses.PartialCondition;
 
           constant ConditionType conditionType "Type of condition";
-          // Note:  This is included so that the type of condition is recorded with the
-          // results.
+          // Note:  This is included so that the type of condition is recorded with
+          // the results.
 
         equation
           // Zero values of other flows
@@ -4352,8 +4320,8 @@ model.</p>
           parameter Axis axis=Axis.x "Axis" annotation (HideResult=true);
 
           constant ConditionType conditionType "Type of condition";
-          // Note:  This is included so that the type of condition is recorded with the
-          // results.
+          // Note:  This is included so that the type of condition is recorded with
+          // the results.
 
         protected
           final parameter Integer cartAxes[n_lin]=index({inclLinX,inclLinY,
@@ -4436,8 +4404,8 @@ model.</p>
           extends FCSys.Conditions.InertDalton.BaseClasses.PartialCondition;
 
           constant ConditionType conditionType "Type of condition";
-          // Note:  This is included so that the type of condition is recorded with the
-          // results.
+          // Note:  This is included so that the type of condition is recorded with
+          // the results.
 
         equation
           // Zero values of other flows
@@ -5352,8 +5320,8 @@ model.</p>
           extends Face.BaseClasses.PartialCondition;
 
           constant ConditionType conditionType "Type of condition";
-          // Note:  This is included so that the type of condition is recorded with the
-          // results.
+          // Note:  This is included so that the type of condition is recorded with
+          // the results.
 
         equation
           // No flows of other quantities
@@ -5425,8 +5393,8 @@ model.</p>
             "Orientation of linear momentum";
 
           constant ConditionType conditionType "Type of condition";
-          // Note:  This is included so that the type of condition is recorded with the
-          // results.
+          // Note:  This is included so that the type of condition is recorded with
+          // the results.
 
         equation
           // No flows of other quantities
@@ -5497,8 +5465,8 @@ model.</p>
           extends Face.BaseClasses.PartialCondition;
 
           constant ConditionType conditionType "Type of condition";
-          // Note:  This is included so that the type of condition is recorded with the
-          // results.
+          // Note:  This is included so that the type of condition is recorded with
+          // the results.
 
         equation
           // No flows of other quantities
@@ -6535,8 +6503,8 @@ model.</p>
           extends FacePair.BaseClasses.PartialCondition;
 
           constant ConditionType conditionType "Type of condition";
-          // Note:  This is included so that the type of condition is recorded with the
-          // results.
+          // Note:  This is included so that the type of condition is recorded with
+          // the results.
 
         equation
           // Conservation of material
@@ -6620,8 +6588,8 @@ model.</p>
             "Orientation of linear momentum";
 
           constant ConditionType conditionType "Type of condition";
-          // Note:  This is included so that the type of condition is recorded with the
-          // results.
+          // Note:  This is included so that the type of condition is recorded with
+          // the results.
 
         equation
           // Conservation of linear momentum in the present transverse direction
@@ -6707,8 +6675,8 @@ model.</p>
           extends FacePair.BaseClasses.PartialCondition;
 
           constant ConditionType conditionType "Type of condition";
-          // Note:  This is included so that the type of condition is recorded with the
-          // results.
+          // Note:  This is included so that the type of condition is recorded with
+          // the results.
 
         equation
           // Conservation of energy (no storage)

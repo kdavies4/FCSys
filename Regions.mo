@@ -995,8 +995,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           each liquid(inclH2O=true, H2O(V_IC=0))));
       // **for e-: setVelY=true,
       // **set phi[x] = 0 for gases if terminal velocity/bulk current is negligible w.r.t.
-      // diffusion, since momentum time constant is very, very fast (see 2/3/13 p.1 notes);
-      // do the same for all other layers
+      // diffusion, since momentum time constant is very, very fast (see 2/3/13 p.1
+      // notes); do the same for all other layers
 
       parameter Q.NumberAbsolute x(nominal=1) = 0.1 "Volumetric porosity";
 
@@ -1020,8 +1020,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
       // DeWitt (2002, p. 909).  See FCSys.Subregions.Species.C.Fixed for more
       // data.
 
-      // Thermal resistivity of some other flowplate materials from [Incropera2002,
-      // pp. 905 &amp; 907]:
+      // Thermal resistivity of some other flowplate materials from
+      // [Incropera2002, pp. 905 &amp; 907]:
       //                                   Stainless steel
       //                                   ------------------------------------------------------------------------------------
       //             Aluminium (pure)      AISI 302              AISI 304              AISI 316              AISI 347
@@ -1895,8 +1895,8 @@ the z axis extends across the width of the channel.</p>
       //     right hand side is a 3 dimensional array, i.e. it has non-compatible
       //     parts"
       // even though subregions and thus H2O.N_IC is a 3D array.  Instead, the
-      // lambda ratio is multiplied by the first subregion's 'C19HF37O5S-'.N_IC and
-      // applied to each H2O.N_IC.  A similar note applies to
+      // lambda ratio is multiplied by the first subregion's 'C19HF37O5S-'.N_IC
+      // and applied to each H2O.N_IC.  A similar note applies to
       // 'C19HF37O5S-'.V_IC.
 
       // Eq. 16 from [Springer1991] gives ratio of H2O molecules to SO3- units of
@@ -1904,12 +1904,12 @@ the z axis extends across the width of the channel.</p>
       //     lambda_30degC = 0.043 + 17.81*a - 39.85*a^2 + 36.0*a^3
       //     => lambda = 3.4855 in equilibrium with 50% RH gas @ 30 degC
       //     => lambda = 14.003 in equilibrium with 100% RH gas @ 30 degC
-      // The change in thickness and linear expansion of Nafion 1100 EW series are 14%
-      // and 15% (respectively) from 50% RH @ 23 degC to water soaked @ 100 degC (DuPont,
-      // "Nafion PFSA Membranes N-112, NE-1135, N-115, N-117, NE-1110", 2004).  This
-      // corresponds to a volumic expansion of 51%.  Meanwhile, the water content
-      // increased from 5% to 38% on a dry-weight basis.  Therefore, based on this
-      // interval, the Amagat specific volume of H2O in Nafion is **m3/C.
+      // The change in thickness and linear expansion of Nafion 1100 EW series are
+      // 14% and 15% (respectively) from 50% RH @ 23 degC to water soaked @ 100
+      // degC [DuPont2004NRE].  This corresponds to a volumic expansion of 51%.
+      // Meanwhile, the water content increased from 5% to 38% on a dry-weight
+      // basis.  Therefore, based on this interval, the Amagat specific volume of
+      // H2O in Nafion is **m3/C.
 
       // Free proton density from [Spry2009, p. 10214]:
       //     @ lambda = 12: 0.95 M

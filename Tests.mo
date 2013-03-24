@@ -53,8 +53,8 @@ package Tests "Models and functions for test and validation"
       // **inclH2O=true,
       // **excluded to prevent reactions: 'inclH+'=true (create separate model to test reactions)
 
-      // Currently, there are no assertions.  This model just checks that the simulation
-      // runs.
+      // Currently, there are no assertions.  This model just checks that the
+      // simulation runs.
 
     end Subregion;
 
@@ -142,8 +142,8 @@ package Tests "Models and functions for test and validation"
             1e-3*U.V,
             name="open circuit potential");
       // Note:  In Dymola 7.4, the v_OC() function call can't be used
-      // directly here.  Instead, intermediate variables must be used.  Otherwise,
-      // the result is different.
+      // directly here.  Instead, intermediate variables must be used.
+      // Otherwise, the result is different.
 
     end TestCellPotentialsGas;
 

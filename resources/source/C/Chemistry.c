@@ -1,15 +1,15 @@
-/* Functions to read information from chemical formulas
-
-   See the corresponding functions in the FCSys.BaseClasses.Utilities package
-   (Modelica) for full descriptions and examples.
-
-   Copyright (C) 2012, Kevin Davies.
-
-   The content of this file is free software; it can be redistributed and/or
-   modified under the terms of the Modelica License 2, see the license
-   conditions and the accompanying disclaimer in file
-   FCSys/resources/documentation/ModelicaLicense2.html or in
-   FCSys.UsersGuide.ModelicaLicense2.                                         */
+// Functions to read information from chemical formulas
+//
+// See the corresponding functions in the FCSys.BaseClasses.Utilities package
+// (Modelica) for full descriptions and examples.
+//
+// Copyright (C) 2012, Kevin Davies.
+//
+// The content of this file is free software; it can be redistributed and/or
+// modified under the terms of the Modelica License 2, see the license
+// conditions and the accompanying disclaimer in file
+// FCSys/resources/documentation/ModelicaLicense2.html or in
+// FCSys.UsersGuide.ModelicaLicense2.
 // Initial version: 2012-10-07
 
 // Prevent multiple inclusion.
@@ -22,7 +22,7 @@
 
 static int charge(const char* formula)
 {
-    /* Return the charge of a species based on its chemical formula.          */
+    // Return the charge of a species based on its chemical formula.
 
     int z = 0; // Charge number
     int i = 0; // Index
@@ -117,13 +117,13 @@ static int countElements(const char* formula)
 static void readElement(const char* formula, int startIndex, char** symbol,
                         int* coeff, int* z, int* nextIndex)
 {
-    /* Read the symbol, coefficient, and charge of an element at an index in a
-       chemical formula.
+    // Read the symbol, coefficient, and charge of an element at an index in a
+    // chemical formula.
+    //
+    // Note: startIndex and nextIndex are 1-based indices (Modelica format), but
+    // all other indices are 0-based (C format).
 
-       Note: startIndex and nextIndex are 1-based indices (Modelica format), but
-       all other indices are 0-based (C format).                          */
-
-	int i, symbol_length;
+    int i, symbol_length;
 
     // Ignore leading whitespace.
     int symbol_start = ModelicaStrings_skipWhiteSpace(formula, startIndex) - 1;

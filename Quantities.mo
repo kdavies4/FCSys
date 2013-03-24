@@ -17,7 +17,7 @@ package Quantities "Quantities to represent physical properties"
     model ExampleModel "Model that uses all of the quantities"
       extends FCSys.BaseClasses.Icons.Blocks.Continuous;
 
-      // Generated from FCSys/resources/quantities.xls, 2013-1-20
+      // Generated from FCSys/resources/quantities.xls, 2013-3-26
       parameter Q.Acceleration Acceleration=1*U.m/U.s^2 "Acceleration";
       parameter Q.Amount Amount=1*U.C "Amount";
       parameter Q.AmountReciprocal AmountReciprocal=1/U.C "Reciprocal amount";
@@ -31,11 +31,11 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.ConductanceElectrical ConductanceElectrical=1*U.S
         "Electrical conductance";
       parameter Q.Current Current=1*U.A "Current";
+      parameter Q.CurrentAbsolute CurrentAbsolute=1*U.A "Absolute current";
       parameter Q.CurrentAreic CurrentAreic=1*U.A/U.m^2 "Areic current";
       parameter Q.CurrentRate CurrentRate=1*U.A/U.s "Rate of current";
       parameter Q.Energy Energy=1*U.J "Energy";
-      parameter Q.FluidityDynamic FluidityDynamic=1/(U.Pa*U.s)
-        "Dynamic fluidity";
+      parameter Q.Fluidity Fluidity=1/(U.Pa*U.s) "Dynamic fluidity";
       parameter Q.Force Force=1*U.N "Force";
       parameter Q.Frequency Frequency=1*U.rad/U.s "Frequency";
       parameter Q.Inductance Inductance=1*U.H "Inductance";
@@ -112,6 +112,8 @@ package Quantities "Quantities to represent physical properties"
   type ConductanceElectrical = Modelica.Icons.TypeReal (final unit=
           "N2.T/(l2.m)", min=0) "Electrical conductance";
   type Current = Modelica.Icons.TypeReal (final unit="N/T");
+  type CurrentAbsolute = Modelica.Icons.TypeReal (final unit="N/T", min=0)
+    "Absolute current";
   type CurrentAreic = Modelica.Icons.TypeReal (final unit="N/(l2.T)")
     "Areic current";
   type CurrentRate = Modelica.Icons.TypeReal (final unit="N/T2")

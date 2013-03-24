@@ -760,7 +760,7 @@ package Characteristics
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p>
 
-  <p>For more information, see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.F\">Characteristic.zeta</a>().</p>
+  <p>For more information, see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.zeta\">Characteristic.zeta</a>().</p>
   </html>"));
       end zeta;
 
@@ -870,48 +870,25 @@ package Characteristics
       // can be computed using FCSys/resources/virial-relations.cdf.
 
       partial function alpha
-        "<html>Ideal base resistivity factor as a function of temperature (&alpha;)</html>"
+        "<html>Base transport coefficient as a function of temperature (&alpha;)</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        output Q.Resistivity alpha "Resistivity";
+        output Q.Resistivity alpha "Base transport coefficient";
 
       algorithm
         alpha := 3*U.pi*d^2*U.q*sqrt(U.pi*m/T)/2 annotation (Inline=true);
         annotation (Documentation(info="<html>
   <p>This function is based on the kinetic theory of gases with the rigid-sphere (\"billiard-ball\")
-  assumption [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].  It is
-  independent of pressure or specific volume.  This independence very accurately matches the measured
-  fluidity of gases.  However, the dynamic fluidity varies by species and
-  generally falls more rapidly with temperature than shown by this function
+  assumption.  It is
+  independent of pressure or specific volume.  According to Present
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>], this independence very accurately matches the measured
+  fluidity of gases.  However, the fluidity varies by species and
+  generally falls more rapidly with temperature than indicated
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 41].</p></html>"));
       end alpha;
 
     public
-      function kappa_T
-        "<html>Isothermal compressibility as a function of temperature and pressure (&kappa;<sub><i>T</i></sub>)</html>"
-        extends Modelica.Icons.Function;
-
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=U.atm "Pressure";
-        output Q.PressureReciprocal beta_T "Isothermal compressibility";
-
-      algorithm
-        beta_T := -dv_Tp(
-                T=T,
-                p=p,
-                dT=0,
-                dp=1)/v_Tp(T, p) annotation (Inline=true);
-        annotation (Documentation(info="<html>
-  <p>Note that the compressibility given by this function is static&mdash;unique
-  from the dynamic compressibility given by
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.Xi\">Xi</a>().</p>
-
-  <p>For an ideal gas, this function is independent of temperature
-  (although temperature remains as a valid input).</p>
-  </html>"));
-      end kappa_T;
-
       function c_p
         "<html>Isobaric specific heat capacity as a function of temperature and pressure (<i>c</i><sub><i>p</i></sub>)</html>"
         extends Modelica.Icons.Function;
@@ -970,8 +947,8 @@ package Characteristics
               rowLimits[2]},
                     specVolPow[1]) annotation (Inline=true);
           // See s_resid() in Characteristic.s for the integral of (dels/delp)_T*dp.
-          // This is temperature times the isobaric partial derivative of that function
-          // with respect to temperature.  It is zero for an ideal gas.
+          // This is temperature times the isobaric partial derivative of that
+          // function with respect to temperature.  It is zero for an ideal gas.
 
         end c_p_resid;
 
@@ -1342,7 +1319,8 @@ second, or bulk dynamic viscosity and specific volume (see
                       specVolPow[2] - specVolPow[1] - i) for i in rowLimits[1]:
               rowLimits[2]},
                     specVolPow[1] + rowLimits[1] - 1) annotation (Inline=true);
-          // Note:  According to the Maxwell relations, (dels/delp)_T = -(delv/delT)_p.
+          // Note:  According to the Maxwell relations,
+          // (dels/delp)_T = -(delv/delT)_p.
 
         end s_resid;
 

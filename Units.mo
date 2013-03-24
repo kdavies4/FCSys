@@ -4,13 +4,13 @@ package Units "Constants and units of physical measure"
   model Evaluate "Evaluate the values assigned to constants and units"
     extends Modelica.Icons.Example;
 
-    // -----------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // Mathematical constants
 
     final constant Q.Number pi=U.pi "pi";
     final constant Q.Number e=U.e "Euler number";
 
-    // -----------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // Base physical constants and units
 
     final constant Q.Angle rad=U.rad "radian";
@@ -22,7 +22,7 @@ package Units "Constants and units of physical measure"
     final constant Q.Number k_F=U.k_F "Faraday constant";
     final constant Q.Number R=U.R "gas constant";
 
-    // -----------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // Empirical units
 
     final constant Q.Length m=U.m "meter";
@@ -32,7 +32,7 @@ package Units "Constants and units of physical measure"
     final constant Q.Amount mol=U.mol "mole";
     final constant Q.Potential K=U.K "kelvin";
 
-    // -----------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // SI prefixes [BIPM2006, Table 5]
 
     final constant Q.Number yotta=U.yotta "yotta (Y)";
@@ -56,7 +56,7 @@ package Units "Constants and units of physical measure"
     final constant Q.Number zepto=U.zepto "zepto (z)";
     final constant Q.Number yocto=U.yocto "yocto (y)";
 
-    // -----------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // SI base units [BIPM2006, Table 1] and intermediate units
 
     final constant Q.Potential V=U.V "volt";
@@ -66,7 +66,7 @@ package Units "Constants and units of physical measure"
     final constant Q.Velocity2 Sv=U.Sv "sievert";
     final constant Q.Mass kg=U.kg "kilogram ";
 
-    // -----------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // Coherent derived units in the SI with special names and symbols
     // [BIPM2006, Table 3]
 
@@ -87,7 +87,7 @@ package Units "Constants and units of physical measure"
     final constant Q.Current kat=U.kat "katal";
     final constant Q.Mass g=U.g "gram";
 
-    // -----------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // Non-SI units accepted for use with SI units [BIPM2006, Table 6].
 
     final constant Q.Time min=U.min "minute";
@@ -96,7 +96,7 @@ package Units "Constants and units of physical measure"
     final constant Q.Angle degree=U.degree "degree";
     final constant Q.Volume L=U.L "liter (L or l)";
 
-    // -----------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // Physical constants
 
     // Electromagnetism
@@ -129,13 +129,13 @@ package Units "Constants and units of physical measure"
     final constant Q.PowerAreicPerPotential4 sigma=U.sigma
       "Stefan-Boltzmann constant";
 
-    // -----------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // Selected other non-SI units from [BIPM2006, Table 8]
 
     final constant Q.Pressure bar=U.bar "bar";
     final constant Q.Length Aring=U.Aring "angstrom";
 
-    // -----------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // Additional units that are useful for fuel cells
 
     final constant Q.Pressure atm=U.atm "atmosphere";
@@ -471,7 +471,7 @@ package Units "Constants and units of physical measure"
 
   end Bases;
 
-  // -----------------------------------------------------------------------
+  // ------------------------------------------------------------------------
   // Mathematical constants
 
   function from_degC "Convert from temperature in degree Celsius"
@@ -519,7 +519,7 @@ package Units "Constants and units of physical measure"
   final constant Q.Number e=exp(1) "Euler number";
   // Natural base
 
-  // -----------------------------------------------------------------------
+  // ------------------------------------------------------------------------
   // Base physical constants and units
 
   replaceable constant Bases.ScaledFC base constrainedby Bases.Base
@@ -541,7 +541,7 @@ package Units "Constants and units of physical measure"
     "<html>Faraday constant (<i>k</i><sub>F</sub>)</html>";
   final constant Q.Number R=base.R "gas constant";
 
-  // -----------------------------------------------------------------------
+  // ------------------------------------------------------------------------
   // Empirical units
   // Note:  The values are currently based on the those from [NIST2010].
   // The measured values are used rather than conventional values (where
@@ -588,7 +588,7 @@ package Units "Constants and units of physical measure"
   // electronic noise
   // (http://en.wikipedia.org/wiki/Johnson-Nyquist_noise).
 
-  // -----------------------------------------------------------------------
+  // ------------------------------------------------------------------------
   // SI base units [BIPM2006, Table 1] and intermediate units
   // Note:  Only A and kg  are remaining (s, m, S, K, mol, and cd
   // already defined).
@@ -609,7 +609,7 @@ package Units "Constants and units of physical measure"
   final constant Q.Mass kg=J/Sv "kilogram ";
   // SI unit of mass
 
-  // -----------------------------------------------------------------------
+  // ------------------------------------------------------------------------
   // SI prefixes [BIPM2006, Table 5]
 
   final constant Q.Number yotta=1e24 "yotta (Y)";
@@ -633,12 +633,12 @@ package Units "Constants and units of physical measure"
   final constant Q.Number zepto=1e-21 "zepto (z)";
   final constant Q.Number yocto=1e-24 "yocto (y)";
 
-  // -----------------------------------------------------------------------
+  // ------------------------------------------------------------------------
   // Coherent derived units in the SI with special names and symbols
   // [BIPM2006, Table 3]
   // Note:  rad, S, C, Wb, V, J, and Sv have already been defined.  Degree
-  // Celsius is defined in FCSys/resources/scripts/units.mos since it includes
-  // an offset.
+  // Celsius is defined in FCSys/resources/scripts/units.mos since it
+  // includes an offset.
 
   final constant Q.Angle cyc=2*pi*rad "cycle";
   // This is defined for convenience (not listed by [BIPM2006]).
@@ -686,7 +686,7 @@ package Units "Constants and units of physical measure"
   // The base SI unit of mass includes a prefix.  See section 3.2 of
   // [BIPM2006].
 
-  // -----------------------------------------------------------------------
+  // ------------------------------------------------------------------------
   // Non-SI units accepted for use with SI units [BIPM2006, Table 6]
 
   final constant Q.Time min=60*s "minute";
@@ -695,7 +695,7 @@ package Units "Constants and units of physical measure"
   final constant Q.Angle degree=2*pi*rad/360 "<html>degree (&deg;)</html>";
   final constant Q.Volume L=(deci*m)^3 "liter (L or l)";
 
-  // -----------------------------------------------------------------------
+  // ------------------------------------------------------------------------
   // Derived physical constants
   // Note:  These are established by definition, but may include
   // transcendental mathematical constants.
@@ -794,7 +794,7 @@ package Units "Constants and units of physical measure"
   // Stefan-Boltzmann constant.  Here, the unit rad has been included for
   // dimensional consistency.
 
-  // -----------------------------------------------------------------------
+  // ------------------------------------------------------------------------
   // Selected other non-SI units from [BIPM2006, Table 8]
   // Note:  Logarithmic ratios have been excluded because they can't be
   // represented in Dymola's unit conversion GUI.
@@ -802,7 +802,7 @@ package Units "Constants and units of physical measure"
   final constant Q.Pressure bar=1e5*Pa "bar";
   final constant Q.Length Aring=0.1*nano*m "<html>angstrom (&#8491;)</html>";
 
-  // -----------------------------------------------------------------------
+  // ------------------------------------------------------------------------
   // Additional units that are useful for fuel cells
 
   final constant Q.Pressure atm=101325*Pa "atmosphere";
