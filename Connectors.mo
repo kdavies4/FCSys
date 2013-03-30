@@ -2,42 +2,22 @@ within FCSys;
 package Connectors "Declarative and imperative connectors"
   extends Modelica.Icons.InterfacesPackage;
 
-  expandable connector ChemicalIOBus
-    "<html>Bus to connect <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> and <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connectors of multiple species</html>"
-    annotation (
-      defaultComponentName="chemIO",
-      Documentation(info="<html><p>There is no minimal set of variables.  Species are included by connecting instances
-    of the <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> and
-    <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connectors.</p></html>"),
-
-      Icon(graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={208,104,0},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            lineThickness=0.5,
-            pattern=LinePattern.Dash)}),
-      Diagram(graphics={Text(
-            extent={{-100,36},{100,76}},
-            textString="%name",
-            lineColor={0,0,0}), Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={208,104,0},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            lineThickness=0.5,
-            pattern=LinePattern.Dash)}));
-
-  end ChemicalIOBus;
-
   connector ChemicalInput
     "Connector to receive information about a species in chemical reaction"
 
     input String formula(start="") "Chemical formula";
-    input Integer nu "Stoichiometric coefficient";
-    input Integer n_spec(min=0) "Number of species in the reaction";
+    input Integer n
+      "Product of stoichiometric coefficient and number of species";
     input Q.CurrentAbsolute Io "Exchange current";
     // Note:  The start value prevents a warning when checked in Dymola 7.4.
+
+    // Note 2:  This is a Real variable (rather than Integer) to avoid the
+    // following warning in Dymola 7.4:
+    //     "Cannot differentiate discrete or record variable:
+    //         [...].n[...]
+    //     with respect to time."
+    // **check if still true
+
     annotation (
       defaultComponentName="chemI",
       Documentation(info="<html><p>See the documentation in the
@@ -66,9 +46,16 @@ package Connectors "Declarative and imperative connectors"
     "Connector to provide information about a species in chemical reaction"
 
     output String formula "Chemical formula";
-    output Integer nu "Stoichiometric coefficient";
-    output Integer n_spec(min=0) "Number of species in the reaction";
+    output Integer n
+      "Product of stoichiometric coefficient and number of species";
     output Q.CurrentAbsolute Io "Exchange current";
+    // Note:  This is a Real variable (rather than Integer) to avoid the
+    // following warning in Dymola 7.4:
+    //     "Cannot differentiate discrete or record variable:
+    //         [...].n[...]
+    //     with respect to time."
+    // **check if still true
+
     annotation (
       defaultComponentName="chemO",
       Documentation(info="<html><p>See the documentation in the
@@ -94,13 +81,19 @@ package Connectors "Declarative and imperative connectors"
   end ChemicalOutput;
 
   expandable connector ChemicalBus
-    "<html>Bus of <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> connectors (for multiple reactions)</html>"
-
+    "<html>Bus of <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a>, <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a>, and <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connectors</html>"
+    Chemical chemical "Physical subconnector for the reaction";
     annotation (
       defaultComponentName="chemical",
-      Documentation(info="<html><p>There is no minimal set of variables.  Species are included by connecting instances
-    of the <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> connector.</p></html>"),
-
+      Documentation(info="<html><p>The <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> connector is directly instantiated as 
+    <code>chemical</code>.  The <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> connectors are included by
+    connecting the <code>chemI</code> connector of instances of the
+    <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model. 
+    The <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalOutput</a> connectors are included by
+    connecting the appropriate index of the <code>chemO</code> connector of a
+    <a href=\"modelica://FCSys.Subregions.Reaction\">Reaction</a> model.    
+    For a traditional chemical or electrochemical reaction, those connection instances are named by the formula of the species.
+    For a phase change, they are given the name of the phase.</p></html>"),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
             extent={{-100,100},{100,-100}},
@@ -127,8 +120,46 @@ package Connectors "Declarative and imperative connectors"
     "Connector to exchange material while advecting linear momentum and thermal energy"
 
     // Material exchange
-    Q.Number s_net(nominal=10) "Net specific entropy";
-    flow Q.Number s_eq(nominal=10) "Equilibrium specific entropy";
+    Q.Current I(nominal=U.A) "Reaction rate";
+    flow Q.Potential g(nominal=U.V) "Chemical potential";
+
+    /*
+sum s, set Ndot
+EC: model to interface
+C: model to set Ndot
+
+alpha: fraction of energy applied to generation of the species (other applied to recombination)
+for every species, a "this" and "other" terminal; "this" is internal
+
+(1 - exp(x/2))*(1 + exp(-x/2))
+exp(-x/2) - exp(x/2)
+
+(1 - exp(x/2))*(1 + exp(-x))
+(1 - exp(x/2))*exp(-x) + 1 - exp(x/2)
+exp(-x) - exp(-x/2) + 1 - exp(x/2)
+
+eta*rho*phi*dx = -drho
+rho_n = rho*exp(Pe/2)
+rho_p = rho*exp(-Pe/2)
+
+R*Ndot_p = (rho_p - rho)*(1 + exp(Pe/2))
+R*Ndot_p = rho*(exp(-Pe/2) - 1)*(1 + exp(Pe/2))
+R*Ndot_p = rho*(exp(-Pe/2) - exp(Pe/2))
+
+R*Ndot_n = (rho_n - rho)*(1 + exp(-Pe/2))
+R*Ndot_n = rho*(exp(Pe/2) - 1)*(1 + exp(-Pe/2))
+R*Ndot_n = rho*(exp(Pe/2) - exp(-Pe/2))
+
+For 
+
+R*Ndot_p = rho_p*(1 - exp(Pe))
+R*Ndot_p = rho_n*(exp(-Pe) - 1)
+R*Ndot_n = rho_n*(1 - exp(-Pe))
+R*Ndot_n = rho_p*(exp(Pe) - 1)
+
+sum s, give total s
+C: every model has rate equation, no model req'd
+*/
 
     // Translational advection
     extends Translational;
@@ -155,6 +186,7 @@ package Connectors "Declarative and imperative connectors"
 
   expandable connector FaceBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors (for multiple species)</html>"
+
     annotation (
       defaultComponentName="face",
       Documentation(info="<html><p>There is no minimal set of variables.  Species are included by connecting instances
@@ -182,6 +214,7 @@ package Connectors "Declarative and imperative connectors"
 
   expandable connector FaceBusInternal
     "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors (for multiple species)</html>"
+
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="face",
@@ -571,6 +604,7 @@ package Connectors "Declarative and imperative connectors"
 </html>"));
   expandable connector RealInputBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.RealInput\">RealInput</a> connectors</html>"
+
     annotation (
       defaultComponentName="u",
       Documentation(info="<html><p>There is no minimal set of variables.
@@ -605,6 +639,7 @@ package Connectors "Declarative and imperative connectors"
 
   expandable connector RealInputBusInternal
     "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.RealInput\">RealInput</a> connectors</html>"
+
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="u",
@@ -692,6 +727,7 @@ package Connectors "Declarative and imperative connectors"
 </html>"));
   expandable connector RealOutputBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.RealOutput\">RealOutput</a> connectors</html>"
+
     annotation (
       defaultComponentName="y",
       Documentation(info="<html><p>There is no minimal set of variables.
@@ -724,6 +760,7 @@ package Connectors "Declarative and imperative connectors"
 
   expandable connector RealOutputBusInternal
     "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.RealOutput\">RealOutput</a> connectors</html>"
+
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="y",
@@ -754,6 +791,7 @@ package Connectors "Declarative and imperative connectors"
               lineColor={0,0,0})}));
 
   end RealOutputBusInternal;
+
   annotation (Documentation(info="<html>
   <p>Three types of physical connectors are used in <a href=\"modelica://FCSys\">FCSys</a>.
   The <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> connector
@@ -805,16 +843,16 @@ package Connectors "Declarative and imperative connectors"
   The <a href=\"modelica://FCSys.Connectors.RealInput\">RealInput</a>,
   <a href=\"modelica://FCSys.Connectors.RealInputInternal\">RealInputInternal</a>,
   <a href=\"modelica://FCSys.Connectors.RealInputBus\">RealInputBus</a>, and
-  <a href=\"modelica://FCSys.Connectors.RealInputBusInternal\">RealInputBusInternal</a>
+  <a href=\"modelica://FCSys.Connectors.RealInputBusInternal\">RealInputBusInternal</a> connectors
   contain only <code>Real input</code> variables.
   The <a href=\"modelica://FCSys.Connectors.RealOutput\">RealOutput</a>,
   <a href=\"modelica://FCSys.Connectors.RealOutputInternal\">RealOutputInternal</a>,
   <a href=\"modelica://FCSys.Connectors.RealOutputBus\">RealOutputBus</a>, and
-  <a href=\"modelica://FCSys.Connectors.RealOutputBusInternal\">RealOutputBusInternal</a>
+  <a href=\"modelica://FCSys.Connectors.RealOutputBusInternal\">RealOutputBusInternal</a> connectors
   contain only <code>Real output</code> variables.  The
   <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a>,
   <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a>, and
-  <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> also contain
+  <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> connectors also contain
   <code>Integer</code> and <code>String</code> variables to communicate how species are
   involved in a chemical reaction (e.g., stoichiometric ratio).</p>
 
@@ -895,38 +933,4 @@ package Connectors "Declarative and imperative connectors"
   FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
   http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
   </html>"));
-
-  model test
-
-    Chemical chemical(n_lin=1)
-      annotation (Placement(transformation(extent={{-86,8},{-66,28}})));
-    annotation (Diagram(graphics));
-  equation
-    chemical.s_net = chemical.s_eq;
-    chemical.phi = chemical.mPhidot;
-    chemical.Ts = chemical.Qdot;
-  end test;
-
-  model test2
-    test test1 annotation (Placement(transformation(extent={{-68,2},{-48,22}})));
-    Chemical chemical
-      annotation (Placement(transformation(extent={{-64,30},{-44,50}})));
-    annotation (Diagram(graphics));
-  equation
-    connect(test1.chemical, chemical) annotation (Line(
-        points={{-65.6,13.8},{-65.6,27.9},{-54,27.9},{-54,40}},
-        color={208,104,0},
-        smooth=Smooth.None), Text(
-        string="%second",
-        index=1,
-        extent={{6,3},{6,3}}));
-    connect(test1.chemI, chemical.H2) annotation (Line(
-        points={{-60.4,14},{-56,14},{-56,40},{-54,40}},
-        color={208,104,0},
-        pattern=LinePattern.Dash,
-        smooth=Smooth.None), Text(
-        string="%second",
-        index=1,
-        extent={{6,3},{6,3}}));
-  end test2;
 end Connectors;

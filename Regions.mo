@@ -2963,6 +2963,7 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
   end CaFPs;
 
   partial model Region "Base model for a 3D array of subregions"
+    import FCSys.BaseClasses.Utilities.cartWrap;
     // extends FCSys.BaseClasses.Icons.Names.Top3;
     // extends FCSys.BaseClasses.Icons.Names.Top6;
 

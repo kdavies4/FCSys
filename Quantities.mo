@@ -124,6 +124,7 @@ package Quantities "Quantities to represent physical properties"
   type Force = Modelica.Icons.TypeReal (final unit="l.m/T2");
   type Frequency = Modelica.Icons.TypeReal (final unit="A/T");
   type Inductance = Modelica.Icons.TypeReal (final unit="l2.m/N2", min=0);
+  type Isolation = Modelica.Icons.TypeReal (final unit="1/T", min=0);
   type Length = Modelica.Icons.TypeReal (final unit="l", min=0);
   type LengthSpecific = Modelica.Icons.TypeReal (final unit="l/N", min=0)
     "Specific length";
@@ -136,6 +137,7 @@ package Quantities "Quantities to represent physical properties"
   type Mass = Modelica.Icons.TypeReal (final unit="m", min=0);
   type MassSpecific = Modelica.Icons.TypeReal (final unit="m/N", min=0)
     "Specific mass";
+  type Mobility = Modelica.Icons.TypeReal (final unit="N.T/m", min=0);
   type MomentumAngular = Modelica.Icons.TypeReal (final unit="l2.m/(A.T)")
     "Angular momentum";
   type Number = Modelica.Icons.TypeReal (final unit="1");
@@ -170,7 +172,9 @@ package Quantities "Quantities to represent physical properties"
   type ResistanceElectrical = Modelica.Icons.TypeReal (final unit="l2.m/(N2.T)",
         min=0) "Electrical resistance";
   type Resistivity = Modelica.Icons.TypeReal (final unit="l.T/N", min=0);
+  type ResistivityMaterial = Modelica.Icons.TypeReal (final unit="T/l2", min=0);
   type Time = Modelica.Icons.TypeReal (final unit="T");
+  type TimeAbsolute = Modelica.Icons.TypeReal (final unit="T", min=0);
   type Velocity = Modelica.Icons.TypeReal (final unit="l/T");
   type Velocity2 = Modelica.Icons.TypeReal (final unit="l2/T2")
     "Squared velocity";

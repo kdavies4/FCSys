@@ -1,5 +1,8 @@
 within FCSys;
 package Units "Constants and units of physical measure"
+  import arccos = Modelica.Math.acos;
+  // Note:  The command line of Dymola 7.4 recognizes arccos() rather than
+  // acos().
   extends Modelica.Icons.Package;
   model Evaluate "Evaluate the values assigned to constants and units"
     extends Modelica.Icons.Example;

@@ -1367,6 +1367,14 @@ package Figures "Graphical layouts for documentation"
 
   end CaFPIcon;
 
+  model RegionIcon "Region"
+
+    Regions.AnFPs.AnFP Region
+      annotation (Placement(transformation(extent={{-100,-100},{100,100}})));
+
+    annotation (Diagram(graphics));
+  end RegionIcon;
+
   model Matrix3D
 
     Subregions.BaseClasses.PartialSubregion subreg000(

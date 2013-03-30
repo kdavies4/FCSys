@@ -197,7 +197,8 @@ package Assemblies "Combinations of regions (e.g., cells)"
     end Examples;
 
     model Cell "Default single-cell PEMFC"
-
+      import FCSys.BaseClasses.Utilities.average;
+      import FCSys.BaseClasses.Utilities.cartWrap;
       extends FCSys.BaseClasses.Icons.Cell;
 
       // Geometric parameters
@@ -926,6 +927,7 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
     end CalibratedCell;
 
     model IntegratedCell "Baseline cell, with integrated CLs and GDLs"
+      import FCSys.BaseClasses.Utilities.cartWrap;
       extends FCSys.BaseClasses.Icons.Cell;
       // Geometric parameters
       parameter Q.Length L_y[:]=fill(1*U.m/1, 1)
@@ -995,10 +997,10 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         "Rate of electrical work (negative for work done)";
 
       Connectors.FaceBus anFPX[n_y, n_z] "Anode plate face" annotation (
-          Placement(transformation(extent={{-70,-10},{-50,10}},rotation=0),
+          Placement(transformation(extent={{-70,-10},{-50,10}}, rotation=0),
             iconTransformation(extent={{-110,-10},{-90,10}})));
       Connectors.FaceBus caFPX[n_y, n_z] "Cathode plate face" annotation (
-          Placement(transformation(extent={{50,-10},{70,10}},rotation=0),
+          Placement(transformation(extent={{50,-10},{70,10}}, rotation=0),
             iconTransformation(extent={{90,-10},{110,10}})));
       Connectors.FaceBus anFPPosY[anFP.n_x, n_z]
         "Positive anode flow plate face along the y axis" annotation (Placement(
@@ -1176,6 +1178,7 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
               color={127,127,127},
               visible=inclX,
               thickness=0.5)}));
+
     end IntegratedCell;
 
     model CellSSIC

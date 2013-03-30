@@ -192,6 +192,7 @@ package Characteristics
   package 'C+' "<html>C<sup>+</sup></html>"
     extends Modelica.Icons.Package;
     package Graphite "C+ graphite"
+      import Modelica.Math.log;
 
       extends BaseClasses.Characteristic(
         final formula="C+",
@@ -211,7 +212,7 @@ package Characteristics
             6.343683250e-8, -7.068589480e-12, 3.335435980e-16] .* fill({U.K^(3
              - i) for i in 1:7}, size(T_lim_c, 1) - 1),
         B_c=[8.943859760e3*U.K, -7.295824740e1; 1.398412456e4*U.K, -4.477183040e1;
-            5.848134850e3, -2.350925275e1] - b_c[:, 2:3]*ln(U.K),
+            5.848134850e3, -2.350925275e1] - b_c[:, 2:3]*log(U.K),
         r=170*U.pico*U.m/U.q);
       annotation (Documentation(info="<html>
 
@@ -308,6 +309,7 @@ package Characteristics
     extends Modelica.Icons.Package;
     package Gas "e- gas"
       import Data = Modelica.Media.IdealGases.Common.SingleGasesData.eminus;
+      import Modelica.Math.log;
 
       extends BaseClasses.Characteristic(
         final formula="e-",
@@ -320,9 +322,10 @@ package Characteristics
         T_lim_c={200.000,20000.000}*U.K,
         b_c={Data.alow} .* fill({U.K^(3 - i) for i in 1:size(Data.alow, 1)},
             size(T_lim_c, 1) - 1),
-        B_c={Data.blow} .* fill({U.K,1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*ln(
-            U.K),
+        B_c={Data.blow} .* fill({U.K,1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*
+            log(U.K),
         r=U.k_A/m);
+
       annotation (Documentation(info="<html>
      <p>Notes:
      <ul>
@@ -368,6 +371,7 @@ package Characteristics
     extends Modelica.Icons.Package;
     package Gas "H+ gas"
       import Data = Modelica.Media.IdealGases.Common.SingleGasesData.Hplus;
+      import Modelica.Math.log;
 
       extends BaseClasses.Characteristic(
         final formula="H+",
@@ -381,9 +385,10 @@ package Characteristics
         T_lim_c={200.000,20000.000}*U.K,
         b_c={Data.alow} .* fill({U.K^(3 - i) for i in 1:size(Data.alow, 1)},
             size(T_lim_c, 1) - 1),
-        B_c={Data.blow} .* fill({U.K,1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*ln(
-            U.K),
+        B_c={Data.blow} .* fill({U.K,1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*
+            log(U.K),
         r=120*U.pico*U.m/U.q);
+
       annotation (Documentation(info="<html>
          <p>Assumptions:
      <ol>
@@ -436,6 +441,7 @@ package Characteristics
     extends Modelica.Icons.Package;
     package Gas "H2 gas"
       import Data = Modelica.Media.IdealGases.Common.SingleGasesData.H2;
+      import Modelica.Math.log;
 
       extends BaseClasses.CharacteristicNASA(
         final formula=Data.name,
@@ -452,7 +458,7 @@ package Characteristics
             4.753248350e-7,-1.371873492e-11,1.605461756e-16}} .* fill({U.K^(3
              - i) for i in 1:size(Data.alow, 1)}, size(T_lim_c, 1) - 1),
         B_c={Data.blow,Data.bhigh,{2.488433516e6,-669.5728110}} .* fill({U.K,1},
-            size(T_lim_c, 1) - 1) - b_c[:, 2:3]*ln(U.K),
+            size(T_lim_c, 1) - 1) - b_c[:, 2:3]*log(U.K),
         r=(120 + 100.3/2)*U.pico*U.m/U.q,
         T_lim_zeta_theta={200.0,1000.0,5000.0,15000.0}*U.K,
         b_zeta={fromNASAViscosity({0.74553182,43.555109,-3.2579340e3,0.13556243}),
@@ -464,7 +470,7 @@ package Characteristics
             1.1736907e4,0.82758695}),fromNASAThermalConductivity({-0.22364420,-6.9650442e3,
             -7.7771313e4,13.189369})});
 
-      // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
+      // Note:  In Dymola 7.4 log(1e-323) returns a valid result, but log(1e-324)
       // doesn't.
       annotation (Documentation(info="<html>
             <p>Notes:
@@ -488,6 +494,7 @@ package Characteristics
     extends Modelica.Icons.Package;
     package Gas "H2O gas"
       import Data = Modelica.Media.IdealGases.Common.SingleGasesData.H2O;
+      import Modelica.Math.log;
 
       extends BaseClasses.CharacteristicNASA(
         final formula=Data.name,
@@ -503,7 +510,7 @@ package Characteristics
         b_c={Data.alow,Data.ahigh} .* fill({U.K^(3 - i) for i in 1:size(Data.alow,
             1)}, size(T_lim_c, 1) - 1),
         B_c={Data.blow,Data.bhigh} .* fill({U.K,1}, size(T_lim_c, 1) - 1) - b_c[
-            :, 2:3]*ln(U.K),
+            :, 2:3]*log(U.K),
         r=(282/2)*U.pico*U.m/U.q,
         T_lim_zeta_theta={373.2,1073.2,5000.0,15000.0}*U.K,
         b_zeta={fromNASAViscosity({0.50019557,-697.12796,8.8163892e4,3.0836508}),
@@ -515,7 +522,7 @@ package Characteristics
             6.1217458e5,5.8011317}),fromNASAThermalConductivity({-0.41858737,-1.4096649e4,
             1.9179190e7,14.345613})});
 
-      // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
+      // Note:  In Dymola 7.4 log(1e-323) returns a valid result, but log(1e-324)
       // doesn't.
       annotation (Documentation(info="<html>
         <p>Notes:
@@ -548,6 +555,7 @@ package Characteristics
     end Ionomer;
 
     package Liquid "H2O liquid"
+      import Modelica.Math.log;
 
       extends BaseClasses.Characteristic(
         final formula="H2O",
@@ -565,7 +573,7 @@ package Characteristics
             1.425743266e-7] .* fill({U.K^(3 - i) for i in 1:7}, size(T_lim_c, 1)
              - 1),
         B_c=[1.101760476e8*U.K, -9.779700970e5; 8.113176880e7*U.K, -5.134418080e5]
-             - b_c[:, 2:3]*ln(U.K),
+             - b_c[:, 2:3]*log(U.K),
         r=(282/2)*U.pico*U.m/U.q);
       annotation (Documentation(info="<html>     <p>Assumptions:
      <ol>
@@ -590,6 +598,7 @@ package Characteristics
     extends Modelica.Icons.Package;
     package Gas "N2 gas"
       import Data = Modelica.Media.IdealGases.Common.SingleGasesData.N2;
+      import Modelica.Math.log;
 
       extends BaseClasses.CharacteristicNASA(
         final formula=Data.name,
@@ -606,7 +615,7 @@ package Characteristics
             2.486903333e-6,-9.705954110e-11,1.437538881e-15}} .* fill({U.K^(3
              - i) for i in 1:size(Data.alow, 1)}, size(T_lim_c, 1) - 1),
         B_c={Data.blow,Data.bhigh,{4.938707040e6,-1.672099740e3}} .* fill({U.K,
-            1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*ln(U.K),
+            1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*log(U.K),
         r=(155 + 145.2/2)*U.pico*U.m/U.q,
         T_lim_zeta_theta={200.0,1000.0,5000.0,15000.0}*U.K,
         b_zeta={fromNASAViscosity({0.62526577,-31.779652,-1.6407983e3,1.7454992}),
@@ -618,7 +627,7 @@ package Characteristics
             0.24417019}),fromNASAThermalConductivity({2.4176185,8.0477749e3,
             3.1055802e6,-14.517761})});
 
-      // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
+      // Note:  In Dymola 7.4 log(1e-323) returns a valid result, but log(1e-324)
       // doesn't.
       annotation (Documentation(info="<html>
                   <p>Notes:
@@ -643,6 +652,7 @@ package Characteristics
     extends Modelica.Icons.Package;
     package Gas "O2 gas"
       import Data = Modelica.Media.IdealGases.Common.SingleGasesData.O2;
+      import Modelica.Math.log;
 
       extends BaseClasses.CharacteristicNASA(
         final formula=Data.name,
@@ -659,7 +669,7 @@ package Characteristics
             3.016396027e-7,-7.421416600e-12,7.278175770e-17}} .* fill({U.K^(3
              - i) for i in 1:size(Data.alow, 1)}, size(T_lim_c, 1) - 1),
         B_c={Data.blow,Data.bhigh,{2.293554027e6,-5.530621610e2}} .* fill({U.K,
-            1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*ln(U.K),
+            1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*log(U.K),
         r=(152 + 128.2/2)*U.pico*U.m/U.q,
         T_lim_zeta_theta={200.0,1000.0,5000.0,15000.0}*U.K,
         b_zeta={fromNASAViscosity({0.60916180,-52.244847,-599.74009,2.0410801}),
@@ -671,7 +681,7 @@ package Characteristics
             0.064851631}),fromNASAThermalConductivity({-1.1218262,-1.9286378e4,
             2.3295011e7,20.342043})});
 
-      // Note:  In Dymola 7.4 ln(1e-323) returns a valid result, but ln(1e-324)
+      // Note:  In Dymola 7.4 log(1e-323) returns a valid result, but log(1e-324)
       // doesn't.
       annotation (Documentation(info="<html><p>Notes:<ul>
   <li>According to [<a href=\"modelica://FCSys.UsersGuide.References\">Avogadro1.03</a>], the (center-to-center)
@@ -706,23 +716,25 @@ package Characteristics
     protected
       function fromNASAViscosity
         "Return constants for fluidity given NASA CEA constants for viscosity"
+        import Modelica.Math.log;
         input Real b_eta[4] "NASA CEA constants for viscosity";
         output Real b_zeta[4] "Constants for fluidity";
 
       algorithm
         b_zeta := {-b_eta[1],-b_eta[2]*U.K,-b_eta[3]*U.K^2,-b_eta[4] + b_eta[1]
-          *ln(U.K) + ln(1e4*U.m*U.s/U.g)} annotation (Inline=true);
+          *log(U.K) + log(1e4*U.m*U.s/U.g)} annotation (Inline=true);
 
       end fromNASAViscosity;
 
       function fromNASAThermalConductivity
         "Return constants for thermal resistivity given NASA CEA constants for thermal conductivity"
+        import Modelica.Math.log;
         input Real b_lambda[4] "NASA CEA constants for thermal conductivity";
         output Real b_theta[4] "Constants for thermal resistivity";
 
       algorithm
         b_theta := {-b_lambda[1],-b_lambda[2]*U.K,-b_lambda[3]*U.K^2,-b_lambda[
-          4] + b_lambda[1]*ln(U.K) + ln(1e4*U.m*U.K/U.W)}
+          4] + b_lambda[1]*log(U.K) + log(1e4*U.m*U.K/U.W)}
           annotation (Inline=true);
 
       end fromNASAThermalConductivity;
@@ -730,6 +742,7 @@ package Characteristics
     public
       redeclare function zeta
         "<html>Fluidity as a function of temperature (&zeta;)</html>"
+        import Modelica.Math.log;
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
@@ -751,8 +764,8 @@ package Characteristics
 
         zeta := smooth(0, exp(sum(if (T_lim_zeta_theta[i] <= T or i == 1) and (
           T < T_lim_zeta_theta[i + 1] or i == size(T_lim_zeta_theta, 1) - 1)
-           then b_zeta[i, 1]*ln(T) + (b_zeta[i, 2] + b_zeta[i, 3]/T)/T + b_zeta[
-          i, 4] else 0 for i in 1:size(T_lim_zeta_theta, 1) - 1)))
+           then b_zeta[i, 1]*log(T) + (b_zeta[i, 2] + b_zeta[i, 3]/T)/T +
+          b_zeta[i, 4] else 0 for i in 1:size(T_lim_zeta_theta, 1) - 1)))
           annotation (
           InlineNoEvent=true,
           Inline=true,
@@ -766,6 +779,7 @@ package Characteristics
 
       redeclare function theta
         "<html>Thermal resistivity as a function of temperature and pressure (&theta;)</html>"
+        import Modelica.Math.log;
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
@@ -787,7 +801,7 @@ package Characteristics
 
         theta := smooth(0, exp(sum(if (T_lim_zeta_theta[i] <= T or i == 1) and
           (T < T_lim_zeta_theta[i + 1] or i == size(T_lim_zeta_theta, 1) - 1)
-           then b_theta[i, 1]*ln(T) + (b_theta[i, 2] + b_theta[i, 3]/T)/T +
+           then b_theta[i, 1]*log(T) + (b_theta[i, 2] + b_theta[i, 3]/T)/T +
           b_theta[i, 4] else 0 for i in 1:size(T_lim_zeta_theta, 1) - 1)))
           annotation (
           InlineNoEvent=true,
@@ -807,6 +821,7 @@ package Characteristics
     end CharacteristicNASA;
 
     package Characteristic "Record for thermodynamic and resistive properties"
+      import FCSys.BaseClasses.Utilities.Chemistry.charge;
       import Modelica.Math.BooleanVectors.anyTrue;
 
       extends Modelica.Icons.MaterialPropertiesPackage;
@@ -818,7 +833,7 @@ package Characteristics
       // when checking FCSys.Subregions.Species.SpeciesInertStagnant in Dymola
       // 7.4.
       constant Q.LengthSpecific d "Specific diameter" annotation (Dialog);
-      final constant Integer z=Chemistry.charge(formula) "Charge number";
+      final constant Integer z=charge(formula) "Charge number";
       constant Q.PressureAbsolute p0=U.bar
         "<html>Reference pressure (<i>p</i>&deg;)</html>";
       constant Q.Pressure p_min=-Modelica.Constants.inf
@@ -888,9 +903,33 @@ package Characteristics
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 41].</p></html>"));
       end alpha;
 
+      partial function tau
+        "<html>Base exchange coefficient as a function of temperature and specific volume (&tau;)</html>"
+        extends Modelica.Icons.Function;
+
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.VolumeSpecificAbsolute v=298.15*U.K/U.atm "Specific volume";
+        output Q.TimeAbsolute tau "Base exchange coefficient";
+
+      algorithm
+        tau := 2*v*sqrt(m/(U.pi*T))/(3*U.pi*d^2*U.q) annotation (Inline=true);
+
+        annotation (Documentation(info="<html>
+  <p>This is the mean time between collisions** 
+  **Note that alpha and tau are related through Einstein relation
+  This function is based on the kinetic theory of gases with the rigid-sphere (\"billiard-ball\")
+  assumption.  It is
+  independent of pressure or specific volume.  According to Present
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>], this independence very accurately matches the measured
+  fluidity of gases.  However, the fluidity varies by species and
+  generally falls more rapidly with temperature than indicated
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 41].</p></html>"));
+      end tau;
+
     public
       function c_p
         "<html>Isobaric specific heat capacity as a function of temperature and pressure (<i>c</i><sub><i>p</i></sub>)</html>"
+        import FCSys.BaseClasses.Utilities.Polynomial;
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
@@ -900,6 +939,7 @@ package Characteristics
       protected
         function c0_p
           "Isobaric specific heat capacity at reference pressure as a function of temperature"
+          import FCSys.BaseClasses.Utilities.Polynomial;
 
           input Q.TemperatureAbsolute T "Temperature";
           output Q.CapacityThermalSpecific c0_p
@@ -929,6 +969,8 @@ package Characteristics
 
         function c_p_resid
           "Residual isobaric specific heat capacity for pressure adjustment"
+          import FCSys.BaseClasses.Utilities.Polynomial;
+
           input Q.TemperatureAbsolute T "Temperature";
           input Q.PressureAbsolute p "Pressure";
           input Integer rowLimits[2]={1,size(b_v, 1)}
@@ -995,7 +1037,7 @@ package Characteristics
 
       function dp_Tv
         "<html>Derivative of pressure as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.p_Tv\">p_Tv</a>()</html>"
-
+        import FCSys.BaseClasses.Utilities.Polynomial;
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
@@ -1025,6 +1067,7 @@ package Characteristics
 
       function dv_Tp
         "<html>Derivative of specific volume as defined by <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.v_Tp\">v_Tp</a>()</html>"
+        import FCSys.BaseClasses.Utilities.Polynomial;
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
@@ -1055,11 +1098,10 @@ package Characteristics
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.PressureAbsolute p=U.atm "Pressure";
-        output Real eta "**Dynamic compressibility";
-        // **Dimension
+        output Q.ResistivityMaterial eta "Material resistivity";
 
       algorithm
-        eta := p*alpha(T) annotation (Inline=true);
+        eta := alpha(T)/v_Tp(T, p) annotation (Inline=true);
         annotation (Documentation(info="<html>
 <p>\"**Dynamic compressibility\" is defined here as the reciprocal of the volume,
 second, or bulk dynamic viscosity and specific volume (see
@@ -1085,7 +1127,7 @@ second, or bulk dynamic viscosity and specific volume (see
       end g;
 
       function h "Specific enthalpy as a function of temperature and pressure"
-
+        import FCSys.BaseClasses.Utilities.Polynomial;
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
@@ -1097,6 +1139,7 @@ second, or bulk dynamic viscosity and specific volume (see
       protected
         function h0_i
           "Return h0 as a function of T using one of the temperature intervals"
+          import FCSys.BaseClasses.Utilities.Polynomial;
           input Q.TemperatureAbsolute T "Temperature";
           input Integer i "Index of the temperature interval";
           output Q.Potential h0
@@ -1116,6 +1159,7 @@ second, or bulk dynamic viscosity and specific volume (see
 
         function dh0_i "Derivative of h0_i"
           // Note:  This function is necessary for Dymola 7.4 to differentiate h().
+          import FCSys.BaseClasses.Utilities.Polynomial;
 
           input Q.TemperatureAbsolute T "Temperature";
           input Integer i "Index of the temperature interval";
@@ -1133,6 +1177,8 @@ second, or bulk dynamic viscosity and specific volume (see
 
         function h_resid
           "Residual specific enthalpy for pressure adjustment for selected rows of b_v"
+          import FCSys.BaseClasses.Utilities.Polynomial;
+
           input Q.TemperatureAbsolute T "Temperature";
           input Q.PressureAbsolute p "Pressure";
           input Integer rowLimits[2]={1,size(b_v, 1)}
@@ -1195,7 +1241,7 @@ second, or bulk dynamic viscosity and specific volume (see
       end h;
 
       replaceable function beta
-        "<html>Kinematic compressibility as a function of temperature and pressure (&beta;)</html>"
+        "<html>Dynamic compressibility as a function of temperature and pressure (&beta;)</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
@@ -1205,7 +1251,7 @@ second, or bulk dynamic viscosity and specific volume (see
         // **Dimension
 
       algorithm
-        beta := m/alpha(T) annotation (Inline=true);
+        beta := alpha(T)/m annotation (Inline=true);
         annotation (Documentation(info="<html>
 <p>\"**Dynamic compressibility\" is defined here as the reciprocal of the volume,
 second, or bulk dynamic viscosity and specific volume (see
@@ -1213,7 +1259,43 @@ second, or bulk dynamic viscosity and specific volume (see
 </html>"));
       end beta;
 
+      replaceable function mu
+        "<html>Mobility as a function of temperature and pressure (&mu;)</html>"
+        extends Modelica.Icons.Function;
+
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.PressureAbsolute p=U.atm "Pressure";
+        output Q.Mobility mu "Mobility";
+
+      algorithm
+        mu := alpha(T) annotation (Inline=true);
+        // **fix
+        annotation (Documentation(info="<html>
+<p>\"**Dynamic compressibility\" is defined here as the reciprocal of the volume,
+second, or bulk dynamic viscosity and specific volume (see
+<a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).</p>
+</html>"));
+      end mu;
+
+      replaceable function nu
+        "<html>Thermal independence as a function of temperature and specific volume (&nu;)</html>"
+        extends Modelica.Icons.Function;
+
+        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
+        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
+        output Q.TimeAbsolute nu "Thermal independence";
+
+      algorithm
+        nu := tau(T, v)/c_v(T, p_Tv(T, v)) annotation (Inline=true);
+        annotation (Documentation(info="<html>
+<p>\"**Dynamic compressibility\" is defined here as the reciprocal of the volume,
+second, or bulk dynamic viscosity and specific volume (see
+<a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).</p>
+</html>"));
+      end nu;
+
       function p_Tv "Pressure as a function of temperature and specific volume"
+        import FCSys.BaseClasses.Utilities.Polynomial;
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
@@ -1250,7 +1332,7 @@ second, or bulk dynamic viscosity and specific volume (see
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.PressureAbsolute p=U.atm "Pressure";
-        output Q.ResistivityThermal theta "Thermal resistivity";
+        output Q.Resistivity theta "Thermal resistivity";
 
       algorithm
         theta := alpha(T)/c_v(T, p) annotation (Inline=true);
@@ -1258,6 +1340,7 @@ second, or bulk dynamic viscosity and specific volume (see
       end theta;
 
       function s "Specific entropy as a function of temperature and pressure"
+        import FCSys.BaseClasses.Utilities.Polynomial;
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
@@ -1267,14 +1350,15 @@ second, or bulk dynamic viscosity and specific volume (see
       protected
         function s0_i
           "Return s0 as a function of T using one of the temperature intervals"
+          import FCSys.BaseClasses.Utilities.Polynomial.F;
+
           input Q.TemperatureAbsolute T "Temperature";
           input Integer i "Index of the temperature interval";
           output Q.NumberAbsolute s0
             "Specific entropy at given temperature and reference pressure";
 
         algorithm
-          s0 := Polynomial.F(
-                    T,
+          s0 := F(  T,
                     b_c[i, :],
                     specHeatCapPow - 1) + B_c[i, 2]
             annotation (Inline=true, derivative=ds0_i);
@@ -1285,6 +1369,7 @@ second, or bulk dynamic viscosity and specific volume (see
 
         function ds0_i "Derivative of s0_i"
           // Note:  This function is necessary for Dymola 7.4 to differentiate s().
+          import FCSys.BaseClasses.Utilities.Polynomial.f;
 
           input Q.TemperatureAbsolute T "Temperature";
           input Integer i "Index of the temperature interval";
@@ -1293,8 +1378,7 @@ second, or bulk dynamic viscosity and specific volume (see
             "Derivative of specific entropy at given temperature and reference pressure";
 
         algorithm
-          ds0 := Polynomial.f(
-                    T,
+          ds0 := f( T,
                     b_c[i, :],
                     specHeatCapPow - 1)*dT annotation (Inline=true);
 
@@ -1302,6 +1386,8 @@ second, or bulk dynamic viscosity and specific volume (see
 
         function s_resid
           "Residual specific entropy for pressure adjustment for selected rows of b_v"
+          import FCSys.BaseClasses.Utilities.Polynomial;
+
           input Q.TemperatureAbsolute T "Temperature";
           input Q.PressureAbsolute p "Pressure";
           input Integer rowLimits[2]={1,size(b_v, 1)}
@@ -1364,6 +1450,7 @@ second, or bulk dynamic viscosity and specific volume (see
       end s;
 
       function v_Tp "Specific volume as a function of temperature and pressure"
+        import FCSys.BaseClasses.Utilities.Polynomial;
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";

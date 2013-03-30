@@ -518,7 +518,7 @@ package Tests "Models and functions for test and validation"
 
         model eta
           "<html>Test the material resistivity of O<sub>2</sub>O gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 263]</html>"
-
+          import FCSys.BaseClasses.Utilities.average;
           import FCSys.Test.assertValue;
           extends Modelica.Icons.Example;
 
@@ -642,6 +642,7 @@ package Tests "Models and functions for test and validation"
 
         model eta
           "<html>Test the fluidity of O<sub>2</sub>O gas against [<a href=\"modelica://FCSys.UsersGuide.References\">Moran2004</a>, p. 924&ndash;925]</html>"
+          import FCSys.BaseClasses.Utilities.average;
 
           extends N2.Gas.eta(
             redeclare package Data = FCSys.Characteristics.O2.Gas,
@@ -1606,7 +1607,7 @@ package Tests "Models and functions for test and validation"
 
       function testFunctions
         "<html>Test the functions in the <a href=\"modelica://FCSys.BaseClasses.Utilities\">Utilities</a> package (non-recursive)</html>"
-
+        import FCSys.BaseClasses.Utilities.*;
         extends Modelica.Icons.Function;
 
         output Boolean ok "true, if all tests passed";

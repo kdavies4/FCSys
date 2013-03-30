@@ -1,11 +1,10 @@
 within ;
 package FCSys "Modelica library of fuel cell models"
 
-// **use local import statements (besides U and Q)
-
 // Maximum line width before a new word is wrapped in the code listing in
 // the LaTeX document (76 characters, including leading spaces and // )
 // ------------------------------------------------------------------------
+
 
 extends Modelica.Icons.Package;
 // extends FCSys.BaseClasses.Icons.Cell;
@@ -14,17 +13,6 @@ extends Modelica.Icons.Package;
 import U = FCSys.Units;
 import Q = FCSys.Quantities;
 
-// Functions
-import Modelica.Math;
-import arcsin = Modelica.Math.asin;
-// Note:  The command line of Dymola 7.4 recognizes arcsin() rather than
-// asin().  In this package, arcsin() is used.  A similar note applies
-// to functions below.
-import arccos = Modelica.Math.acos;
-import arctan = Modelica.Math.atan;
-import ln = Modelica.Math.log;
-import FCSys.BaseClasses.Utilities.*;
-
 // Enumerations
 import FCSys.BaseClasses.Axis;
 import FCSys.BaseClasses.Orientation;
@@ -32,6 +20,7 @@ import FCSys.BaseClasses.Side;
 import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
 import FCSys.Subregions.Species.BaseClasses.InitMethVelocity;
 import FCSys.Subregions.Species.BaseClasses.InitMethScalar;
+
 
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
@@ -885,6 +874,21 @@ printing and shipping costs may be recovered.</p>
   annotation (preferedView="info", DocumentationClass=true);
 
   end UsersGuide;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 annotation (
   uses(Modelica(version="3.2")),
   preferedView="info",
@@ -992,7 +996,7 @@ margin-right: auto;\" class=noBorder>
 
     <p align=center id=\"Fig3\"><a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\"><img src=\"modelica://FCSys/help/FCSys.Assemblies.Cells.Examples.CellProfileD.png\"></a>
 <br>Figure 3: Diagram of a test model (<a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\">FCSys.Assemblies.Cells.Examples.CellProfile</a>).</p>
-
+    
     <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b>
 <br>Copyright 2007&ndash;2013, Georgia Tech Research Corporation.</p>
 
@@ -1190,5 +1194,4 @@ margin-right: auto;\" class=noBorder>
   versionBuild=0,
   dateModified="",
   revisionID="");
-
 end FCSys;

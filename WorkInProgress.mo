@@ -5405,7 +5405,9 @@ The signal sizes of the input and output vector may be different.</p>
       end randu;
 
       function randn "Return a vector of normal random numbers"
+        import Modelica.Math.log;
         extends Modelica.Icons.Function;
+
         input Real mu=0 "Mean or expected value";
         input Real sigma=1 "Standard deviation";
         input Integer n=1 "Number of random numbers";
@@ -5415,7 +5417,7 @@ The signal sizes of the input and output vector may be different.</p>
         Real x_0[n];
 
       algorithm
-        x_0 := sqrt(-2*ln(FCSys.WorkInProgress.Blocks.BaseClasses.randu(
+        x_0 := sqrt(-2*log(FCSys.WorkInProgress.Blocks.BaseClasses.randu(
                 x_min=0,
                 x_max=1,
                 n=n))) .* sin(FCSys.WorkInProgress.Blocks.BaseClasses.randu(
@@ -7324,13 +7326,13 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
     <a href=\"modelica://FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"), Icon(graphics={Line(
-              points={{0,40},{80,40}},
-              color={0,0,255},
-              smooth=Smooth.None),Line(
-              points={{0,60},{0,20}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash)}));
+            points={{0,40},{80,40}},
+            color={0,0,255},
+            smooth=Smooth.None), Line(
+            points={{0,60},{0,20}},
+            color={0,0,0},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash)}));
   end ConditionsAdaptersSpeciesFluid;
 
   model ConditionsAdaptersPhasesIonomer
@@ -7394,25 +7396,30 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
         color={0,127,255},
         smooth=Smooth.None));
     annotation (Placement(transformation(extent={{-10,10},{10,30}})), Icon(
-          graphics={Line(
-              points={{0,60},{0,-60}},
-              color={0,0,0},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dash,
-              thickness=0.5),Line(
-              points={{0,0},{-80,0}},
-              color={127,127,127},
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{0,40},{80,40}},
-              color={0,0,255},
-              smooth=Smooth.None),Line(
-              points={{0,0},{80,0}},
-              color={191,0,0},
-              smooth=Smooth.None),Line(
-              points={{0,-40},{80,-40}},
-              color={0,127,255},
-              smooth=Smooth.None)}));
+          graphics={
+          Line(
+            points={{0,60},{0,-60}},
+            color={0,0,0},
+            smooth=Smooth.None,
+            pattern=LinePattern.Dash,
+            thickness=0.5),
+          Line(
+            points={{0,0},{-80,0}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{0,40},{80,40}},
+            color={0,0,255},
+            smooth=Smooth.None),
+          Line(
+            points={{0,0},{80,0}},
+            color={191,0,0},
+            smooth=Smooth.None),
+          Line(
+            points={{0,-40},{80,-40}},
+            color={0,127,255},
+            smooth=Smooth.None)}));
   end ConditionsAdaptersPhasesIonomer;
 
 public

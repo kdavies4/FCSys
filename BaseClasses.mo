@@ -38,13 +38,13 @@ package BaseClasses "Base classes (not generally for direct use)"
         "Short and wide icon for a continuous block"
         extends Names.Middle;
         annotation (Icon(graphics={Rectangle(
-                extent={{-120,40},{120,-40}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                lineColor={0,0,0}), Text(
-                extent={{-120,-20},{120,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-120,40},{120,-40}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      lineColor={0,0,0}),Text(
+                      extent={{-120,-20},{120,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end ContinuousShortWide;
 
@@ -55,10 +55,10 @@ package BaseClasses "Base classes (not generally for direct use)"
         // Modelica.Blocks.Interfaces.DiscreteBlockIcon.
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,-100},{100,100}},
-                lineColor={0,0,127},
-                fillColor={223,223,159},
-                fillPattern=FillPattern.Solid)}));
+                      extent={{-100,-100},{100,100}},
+                      lineColor={0,0,127},
+                      fillColor={223,223,159},
+                      fillPattern=FillPattern.Solid)}));
 
       end Discrete;
 
@@ -109,13 +109,13 @@ package BaseClasses "Base classes (not generally for direct use)"
       partial class Top9
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                      extent={{-100,180},{100,220}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Text(
-                      extent={{-100,180},{100,220}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,180},{100,220}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None), Text(
+                extent={{-100,180},{100,220}},
+                textString="%name",
+                lineColor={0,0,0})}));
 
       end Top9;
 
@@ -161,26 +161,26 @@ package BaseClasses "Base classes (not generally for direct use)"
       partial class Top5
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,100},{100,140}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,100},{100,140}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,100},{100,140}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,100},{100,140}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Top5;
 
       partial class Top4
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                      extent={{-100,80},{100,120}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Text(
-                      extent={{-100,80},{100,120}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,80},{100,120}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None), Text(
+                extent={{-100,80},{100,120}},
+                textString="%name",
+                lineColor={0,0,0})}));
 
       end Top4;
 
@@ -200,13 +200,13 @@ package BaseClasses "Base classes (not generally for direct use)"
       partial class Top2
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                      extent={{-100,40},{100,80}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Text(
-                      extent={{-100,40},{100,80}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+                extent={{-100,40},{100,80}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None), Text(
+                extent={{-100,40},{100,80}},
+                textString="%name",
+                lineColor={0,0,0})}));
 
       end Top2;
 
@@ -678,6 +678,7 @@ An unrelated species may be included.");
 
       function F
         "<html>&int;<a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.f\">f</a>()&middot;d<i>x</i> evaluated at <i>x</i> with zero integration constant</html>"
+        import Modelica.Math.log;
         extends Modelica.Icons.Function;
 
         input Real x "Argument";
@@ -689,8 +690,8 @@ An unrelated species may be included.");
 
       algorithm
         F := f( x,
-                a .* {if n + i == 0 then ln(x) else 1/(n + i) for i in 1:size(a,
-            1)},
+                a .* {if n + i == 0 then log(x) else 1/(n + i) for i in 1:size(
+            a, 1)},
                 n + 1) annotation (Inline=true, derivative=dF);
         annotation (Documentation(info="<html>
   <p>By definition, the partial derivative of this function with respect to <code>x</code>
@@ -701,6 +702,7 @@ An unrelated species may be included.");
 
       function dF
         "<html>Derivative of <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.F\">F</a>()</html>"
+        import Modelica.Math.log;
         extends Modelica.Icons.Function;
 
         input Real x "Argument";
@@ -717,7 +719,7 @@ An unrelated species may be included.");
                 a,
                 n)*dx + f(
                 x,
-                da .* {if n + i == 0 then ln(x) else 1/(n + i) for i in 1:size(
+                da .* {if n + i == 0 then log(x) else 1/(n + i) for i in 1:size(
             a, 1)},
                 n + 1) annotation (Inline=true);
 

@@ -41,6 +41,7 @@ package Conditions "Models to specify and measure operating conditions"
 
     model FaceConditionPhases
       "<html>Test the Conditions for the face of a subregion with phases</html>"
+      import FCSys.BaseClasses.Utilities.cartWrap;
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
       // Geometric parameters
@@ -260,28 +261,34 @@ package Conditions "Models to specify and measure operating conditions"
           points={{8,-40},{30,-40},{30,-20},{80,-20}},
           color={191,0,0},
           smooth=Smooth.None));
-      annotation (Icon(graphics={Line(
-                  points={{0,60},{0,-60}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash,
-                  thickness=0.5),Line(
-                  points={{0,0},{-80,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,20},{80,20}},
-                  color={0,0,255},
-                  smooth=Smooth.None),Line(
-                  points={{0,-20},{80,-20}},
-                  color={191,0,0},
-                  smooth=Smooth.None),Line(
-                  points={{0,60},{80,60}},
-                  color={0,127,255},
-                  smooth=Smooth.None),Line(
-                  points={{0,-60},{80,-60}},
-                  color={0,127,255},
-                  smooth=Smooth.None)}));
+      annotation (Icon(graphics={
+            Line(
+              points={{0,60},{0,-60}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),
+            Line(
+              points={{0,0},{-80,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,20},{80,20}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-20},{80,-20}},
+              color={191,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{0,60},{80,60}},
+              color={0,127,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-60},{80,-60}},
+              color={0,127,255},
+              smooth=Smooth.None)}));
     end Anode;
 
     model Cathode
@@ -366,28 +373,34 @@ package Conditions "Models to specify and measure operating conditions"
           points={{8,-40},{30,-40},{30,-20},{80,-20}},
           color={191,0,0},
           smooth=Smooth.None));
-      annotation (Icon(graphics={Line(
-                  points={{0,60},{0,-60}},
-                  color={0,0,0},
-                  smooth=Smooth.None,
-                  pattern=LinePattern.Dash,
-                  thickness=0.5),Line(
-                  points={{0,0},{-80,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{0,20},{80,20}},
-                  color={0,0,255},
-                  smooth=Smooth.None),Line(
-                  points={{0,-20},{80,-20}},
-                  color={191,0,0},
-                  smooth=Smooth.None),Line(
-                  points={{0,60},{80,60}},
-                  color={0,127,255},
-                  smooth=Smooth.None),Line(
-                  points={{0,-60},{80,-60}},
-                  color={0,127,255},
-                  smooth=Smooth.None)}));
+      annotation (Icon(graphics={
+            Line(
+              points={{0,60},{0,-60}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash,
+              thickness=0.5),
+            Line(
+              points={{0,0},{-80,0}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{0,20},{80,20}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-20},{80,-20}},
+              color={191,0,0},
+              smooth=Smooth.None),
+            Line(
+              points={{0,60},{80,60}},
+              color={0,127,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-60},{80,-60}},
+              color={0,127,255},
+              smooth=Smooth.None)}));
     end Cathode;
 
     package Phases "Adapters for material phases"
@@ -630,22 +643,26 @@ package Conditions "Models to specify and measure operating conditions"
             points={{8,-16},{60,-16},{60,40},{80,40}},
             color={0,0,255},
             smooth=Smooth.None));
-        annotation (Icon(graphics={Line(
-                      points={{0,60},{0,-20}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash,
-                      thickness=0.5),Line(
-                      points={{0,0},{-80,0}},
-                      color={127,127,127},
-                      smooth=Smooth.None,
-                      thickness=0.5),Line(
-                      points={{0,40},{80,40}},
-                      color={0,0,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,0},{80,0}},
-                      color={191,0,0},
-                      smooth=Smooth.None)}));
+        annotation (Icon(graphics={
+              Line(
+                points={{0,60},{0,-20}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash,
+                thickness=0.5),
+              Line(
+                points={{0,0},{-80,0}},
+                color={127,127,127},
+                smooth=Smooth.None,
+                thickness=0.5),
+              Line(
+                points={{0,40},{80,40}},
+                color={0,0,255},
+                smooth=Smooth.None),
+              Line(
+                points={{0,0},{80,0}},
+                color={191,0,0},
+                smooth=Smooth.None)}));
       end Graphite;
 
       model Liquid
@@ -716,13 +733,13 @@ package Conditions "Models to specify and measure operating conditions"
                 transformation(extent={{-90,-10},{-70,10}}), iconTransformation(
                   extent={{-90,-10},{-70,10}})));
           annotation (Icon(graphics={Line(
-                          points={{0,0},{-80,0}},
-                          color={127,127,127},
-                          smooth=Smooth.None,
-                          thickness=0.5),Line(
-                          points={{0,0},{80,0}},
-                          color={191,0,0},
-                          smooth=Smooth.None)}));
+                  points={{0,0},{-80,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None,
+                  thickness=0.5), Line(
+                  points={{0,0},{80,0}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}));
 
         end PartialPhase;
 
@@ -735,6 +752,7 @@ package Conditions "Models to specify and measure operating conditions"
 
       model 'e-'
         "<html>Adapter to connect e<sup>-</sup> between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a> (electrical and heat only)</html>"
+        import FCSys.BaseClasses.Utilities.inSign;
 
         extends BaseClasses.PartialSpecies(redeclare
             Characteristics.'e-'.Graphite Data);
@@ -758,17 +776,18 @@ package Conditions "Models to specify and measure operating conditions"
     <a href=\"modelica://FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"), Icon(graphics={Line(
-                      points={{0,40},{80,40}},
-                      color={0,0,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,60},{0,-20}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash)}));
+                points={{0,40},{80,40}},
+                color={0,0,255},
+                smooth=Smooth.None), Line(
+                points={{0,60},{0,-20}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash)}));
       end 'e-';
 
       model FluidNonionic
         "<html>Adapter to connect a single nonionic fluid species between <a href=\"modelica://FCSys\">FCSys</a> and <a href=\"modelica://Modelica\">Modelica</a></html>"
+        import FCSys.BaseClasses.Utilities.inSign;
 
         extends BaseClasses.PartialSpecies;
 
@@ -809,13 +828,13 @@ package Conditions "Models to specify and measure operating conditions"
     <a href=\"modelica://FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"), Icon(graphics={Line(
-                      points={{0,-40},{80,-40}},
-                      color={0,127,255},
-                      smooth=Smooth.None),Line(
-                      points={{0,20},{0,-60}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash)}));
+                points={{0,-40},{80,-40}},
+                color={0,127,255},
+                smooth=Smooth.None), Line(
+                points={{0,20},{0,-60}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash)}));
       end FluidNonionic;
 
       model Solid
@@ -829,10 +848,10 @@ package Conditions "Models to specify and measure operating conditions"
     <a href=\"modelica://FCSys.Conditions.Adapters.Species.BaseClasses.PartialSpecies\">
     PartialSpecies</a> model.</p>
     </html>"), Icon(graphics={Line(
-                      points={{0,20},{0,-20}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash)}));
+                points={{0,20},{0,-20}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash)}));
       end Solid;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -874,12 +893,12 @@ package Conditions "Models to specify and measure operating conditions"
             Documentation(info="<html><p>Note that shear force is not included.</p>
   </html>"),
             Icon(graphics={Line(
-                          points={{0,0},{-80,0}},
-                          color={127,127,127},
-                          smooth=Smooth.None),Line(
-                          points={{0,0},{80,0}},
-                          color={191,0,0},
-                          smooth=Smooth.None)}));
+                  points={{0,0},{-80,0}},
+                  color={127,127,127},
+                  smooth=Smooth.None), Line(
+                  points={{0,0},{80,0}},
+                  color={191,0,0},
+                  smooth=Smooth.None)}));
         end PartialSpecies;
 
       end BaseClasses;
@@ -2428,6 +2447,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
     model Reaction
       "<html>Condition for a <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> connector (e.g., as in a <a href=\"modelica://FCSys.Subregions.Reaction\">Reaction</a> model)</html>"
+      import FCSys.BaseClasses.Utilities.countTrue;
       extends BaseClasses.PartialConditions;
 
       Connectors.ChemicalInput chemical(final n_lin=countTrue({inclLinX,
@@ -2466,6 +2486,7 @@ model.</p>
 
     model Species
       "<html>Condition for a <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalOutput</a> connector (e.g., as in a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model)</html>"
+      import FCSys.BaseClasses.Utilities.countTrue;
       extends BaseClasses.PartialConditions;
 
       replaceable package Data = Characteristics.BaseClasses.Characteristic
@@ -2662,7 +2683,8 @@ model.</p>
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition
           "Partial model for a mechanical condition"
-
+          import FCSys.BaseClasses.Utilities.enumerate;
+          import FCSys.BaseClasses.Utilities.index;
           extends Chemical.BaseClasses.PartialCondition;
 
           parameter Axis axis=Axis.x "Axis" annotation (HideResult=true);
@@ -2933,6 +2955,7 @@ model.</p>
       end PartialConditions;
 
       partial model PartialCondition "Partial model of a condition"
+        import FCSys.BaseClasses.Utilities.countTrue;
         extends FCSys.Conditions.BaseClasses.Icons.Single;
 
         parameter Boolean inclLinX=true "X" annotation (
@@ -3017,6 +3040,7 @@ model.</p>
 
     model Species
       "<html>Condition for a <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> or <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a> connector (e.g., as in a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model), with efforts by default</html>"
+      import FCSys.BaseClasses.Utilities.countTrue;
       extends FCSys.Conditions.BaseClasses.Icons.Single;
 
       // Included components of linear momentum
@@ -3260,6 +3284,8 @@ model.</p>
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition
           "Partial model for a mechanical condition"
+          import FCSys.BaseClasses.Utilities.enumerate;
+          import FCSys.BaseClasses.Utilities.index;
           extends FCSys.Conditions.Inert.BaseClasses.PartialCondition;
 
           parameter Axis axis=Axis.x "Axis" annotation (HideResult=true);
@@ -3357,11 +3383,11 @@ model.</p>
           Connectors.ThermalDiffusion thermal "Connector to exchange heat"
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
           annotation (defaultComponentName="thermal", Diagram(graphics={Text(
-                  extent={{-8,-32},{8,-36}},
-                  lineColor={0,0,0},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid,
-                  textString="thermal")}));
+                          extent={{-8,-32},{8,-36}},
+                          lineColor={0,0,0},
+                          fillColor={255,255,255},
+                          fillPattern=FillPattern.Solid,
+                          textString="thermal")}));
 
         end PartialCondition;
 
@@ -3377,6 +3403,7 @@ model.</p>
     package BaseClasses "Base classes (not generally for direct use)"
       extends Modelica.Icons.BasesPackage;
       partial model PartialCondition "Partial model of a condition"
+        import FCSys.BaseClasses.Utilities.countTrue;
         extends FCSys.Conditions.BaseClasses.Icons.Single;
 
         parameter Boolean inclLinX=true "X" annotation (
@@ -3458,6 +3485,7 @@ model.</p>
 
     model Phase
       "<html>Condition for a <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector (e.g., as in a <a href=\"modelica://FCSys.Subregions.Phases\">Phase</a> model), with efforts by default</html>"
+      import FCSys.BaseClasses.Utilities.countTrue;
       extends FCSys.Conditions.BaseClasses.Icons.Single;
 
       // Included components of linear momentum
@@ -3790,6 +3818,8 @@ model.</p>
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition
           "Partial model for a mechanical condition"
+          import FCSys.BaseClasses.Utilities.enumerate;
+          import FCSys.BaseClasses.Utilities.index;
           extends InertAmagat.BaseClasses.PartialCondition;
 
           parameter Axis axis=Axis.x "Axis" annotation (HideResult=true);
@@ -3901,6 +3931,7 @@ model.</p>
     package BaseClasses "Base classes (not generally for direct use)"
       extends Modelica.Icons.BasesPackage;
       partial model PartialCondition "Partial model of a condition"
+        import FCSys.BaseClasses.Utilities.countTrue;
         extends FCSys.Conditions.BaseClasses.Icons.Single;
 
         parameter Boolean inclLinX=true "X" annotation (
@@ -3985,6 +4016,7 @@ model.</p>
 
     model Species
       "<html>Condition for a <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector (e.g., as in a <a href=\"modelica://FCSys.Subregions.Species\">Species</a> model), with efforts by default</html>"
+      import FCSys.BaseClasses.Utilities.countTrue;
       extends FCSys.Conditions.BaseClasses.Icons.Single;
 
       // Included components of linear momentum
@@ -4315,6 +4347,8 @@ model.</p>
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition
           "Partial model for a mechanical condition"
+          import FCSys.BaseClasses.Utilities.enumerate;
+          import FCSys.BaseClasses.Utilities.index;
           extends FCSys.Conditions.InertDalton.BaseClasses.PartialCondition;
 
           parameter Axis axis=Axis.x "Axis" annotation (HideResult=true);
@@ -4426,6 +4460,7 @@ model.</p>
     package BaseClasses "Base classes (not generally for direct use)"
       extends Modelica.Icons.BasesPackage;
       partial model PartialCondition "Partial model of a condition"
+        import FCSys.BaseClasses.Utilities.countTrue;
         extends FCSys.Conditions.BaseClasses.Icons.Single;
 
         parameter Boolean inclLinX=true "X" annotation (
@@ -5387,6 +5422,7 @@ model.</p>
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition
           "Partial model for a transverse mechanical condition"
+          import FCSys.BaseClasses.Utilities.mod1;
           extends Face.BaseClasses.PartialCondition;
 
           parameter Orientation orientation=Orientation.preceding
@@ -6582,6 +6618,7 @@ model.</p>
         extends Modelica.Icons.BasesPackage;
         partial model PartialCondition
           "Partial model for a transverse mechanical condition"
+          import FCSys.BaseClasses.Utilities.mod1;
           extends FacePair.BaseClasses.PartialCondition;
 
           parameter Orientation orientation=Orientation.preceding
@@ -6918,17 +6955,16 @@ The default global conditions and defaults will be used for the current simulati
             lineColor={0,0,0}),
           Rectangle(
             extent={{-80,60},{80,-100}},
-            lineColor={0,0,0},
             fillColor={255,255,255},
             fillPattern=FillPattern.Solid,
-            pattern=LinePattern.Dash),
+            pattern=LinePattern.None),
           Rectangle(
             extent={{-70,50},{70,-98}},
             lineColor={255,255,255},
             fillPattern=FillPattern.HorizontalCylinder,
             fillColor={170,170,255}),
           Rectangle(
-            extent={{-72,-60},{72,-98}},
+            extent={{-72,-60},{70,-100}},
             fillPattern=FillPattern.Solid,
             fillColor={255,255,255},
             pattern=LinePattern.None,
@@ -6956,7 +6992,11 @@ The default global conditions and defaults will be used for the current simulati
             fillPattern=FillPattern.Solid,
             fillColor={255,255,255},
             pattern=LinePattern.None,
-            lineColor={0,0,0})}));
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-82,60},{78,-100}},
+            lineColor={0,0,0},
+            pattern=LinePattern.Dash)}));
 
   end Environment;
 
