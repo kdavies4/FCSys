@@ -3713,7 +3713,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
   <a href=\"http://www.engineeringtoolbox.com/water-dynamic-kinematic-viscosity-d_596.html\">http://www.engineeringtoolbox.com/water-dynamic-kinematic-viscosity-d_596.html</a>.</p>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-    <caption align=\"top\" id=\"Tab1\">Table 1: Properties of H<sub>2</sub>O liquid at saturation pressure (<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 924&ndash;925).</caption>
+    <caption align=\"top\" id=\"Tab1\">Table 1: Properties of H<sub>2</sub>O liquid at saturation pressure [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 924&ndash;925].</caption>
   <tr>
       <th valign=\"middle\"><code>T<br>/U.K</code></th>
       <th width=1><code>c_p*U.kg*U.K<br>/(U.J*Data.m)</code></th>
@@ -3994,7 +3994,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
   <a href=\"#Tab1\">Table 1</a> lists the properties at other temperatures.</p>
 
   <table border=\"1\" cellspacing=0 cellpadding=2 style=\"border-collapse:collapse;\">
-  <caption align=\"top\" id=\"Tab1\">Table 1: Properties of O<sub>2</sub> gas at 1 atm [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002, pp. 920&ndash;921</a>]</caption>
+  <caption align=\"top\" id=\"Tab1\">Table 1: Properties of O<sub>2</sub> gas at 1 atm [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, pp. 920&ndash;921]</caption>
   <tr>
       <th valign=\"middle\"><code>T<br>/U.K</code></th>
       <th width=1><code>c_p*U.kg*U.K<br>/(U.J*Data.m)</code></th>

@@ -131,6 +131,17 @@ package UsersGuide "User's Guide"
     <li>K. L. Davies and R. M. Moore, \"<a href=\"http://link.aip.org/link/abstract/ECSTF8/v11/i1/p797/s1\">Object-Oriented Fuel Cell Model Library</a>,\" <i>Electrochem. Soc. T.</i>, vol. 11, no. 1, pp. 797&ndash;808, 2007.</li>
     </ol></p>
 
+**Add citations:
+<a href=\"modelica://FCSys.UsersGuide.References\">Aronsson2009</a>
+<a href=\"modelica://FCSys.UsersGuide.References\">Broman2008</a>
+<a href=\"modelica://FCSys.UsersGuide.References\">Brown2011</a> 
+<a href=\"modelica://FCSys.UsersGuide.References\">Fritzson2004</a>
+<a href=\"modelica://FCSys.UsersGuide.References\">Greiner1995</a>
+<a href=\"modelica://FCSys.UsersGuide.References\">Hess2008</a>
+<a href=\"modelica://FCSys.UsersGuide.References\">Mattsson2008</a>
+<a href=\"modelica://FCSys.UsersGuide.References\">Modelica3.2</a>
+<a href=\"modelica://FCSys.UsersGuide.References\">Rapaport2004</a>
+
     <p>These references are cited throughout the library:</p>
     <table border=0 cellspacing=0 cellpadding=2 class=noBorder>
     <tr>

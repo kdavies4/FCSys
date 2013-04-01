@@ -138,6 +138,7 @@ exp(-x/2) - exp(x/2)
 (1 - exp(x/2))*exp(-x) + 1 - exp(x/2)
 exp(-x) - exp(-x/2) + 1 - exp(x/2)
 
+Equilibrium: advection equals diffusion
 eta*rho*phi*dx = -drho
 rho_n = rho*exp(Pe/2)
 rho_p = rho*exp(-Pe/2)
@@ -145,17 +146,26 @@ rho_p = rho*exp(-Pe/2)
 R*Ndot_p = (rho_p - rho)*(1 + exp(Pe/2))
 R*Ndot_p = rho*(exp(-Pe/2) - 1)*(1 + exp(Pe/2))
 R*Ndot_p = rho*(exp(-Pe/2) - exp(Pe/2))
+Negative boundary as if center and center as if positive boundary (shift left 1/2 region):
+R*Ndot_gen = rho_n*(exp(-Pe/2) - exp(Pe/2))
+Pe = -g/T + z*E*L
+R*Ndot_gen_n = rho_n*(exp((g - z*E*L)/(2*T)) - exp(-(g - z*E*L)/(2*T)))
+If e- (z=1):
+R*Ndot_gen_n = rho_n*(exp((g + E*L)/(2*T)) - exp(-(g + E*L)/(2*T)))
 
 R*Ndot_n = (rho_n - rho)*(1 + exp(-Pe/2))
 R*Ndot_n = rho*(exp(Pe/2) - 1)*(1 + exp(-Pe/2))
 R*Ndot_n = rho*(exp(Pe/2) - exp(-Pe/2))
+Positive boundary as if center and center as if negative boundary (shift right 1/2 region):
+R*Ndot_gen = rho_p*(exp(Pe/2) - exp(-Pe/2))
+Pe = g/T + z*E*L
+R*Ndot_gen_p = rho_p*(exp((g/T + z*E*L)/(2*T)) - exp(-(g/T + z*E*L)/(2*T)))
+If H+ (z=1):
+R*Ndot_gen_p = rho_p*(exp((g/T + E*L)/(2*T)) - exp(-(g/T + E*L)/(2*T)))
 
-For 
+Ndot_gen = Ndot_gen_n + Ndot_gen_p 
+Ndot_gen = (rho_n + rho_p)*(exp((g/T + E*L)/(2*T)) - exp(-(g/T + E*L)/(2*T)))/R
 
-R*Ndot_p = rho_p*(1 - exp(Pe))
-R*Ndot_p = rho_n*(exp(-Pe) - 1)
-R*Ndot_n = rho_n*(1 - exp(-Pe))
-R*Ndot_n = rho_p*(exp(Pe) - 1)
 
 sum s, give total s
 C: every model has rate equation, no model req'd
