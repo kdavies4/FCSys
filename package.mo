@@ -5,7 +5,6 @@ package FCSys "Modelica library of fuel cell models"
 // the LaTeX document (76 characters, including leading spaces and // )
 // ------------------------------------------------------------------------
 
-
 extends Modelica.Icons.Package;
 // extends FCSys.BaseClasses.Icons.Cell;
 
@@ -20,7 +19,6 @@ import FCSys.BaseClasses.Side;
 import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
 import FCSys.Subregions.Species.BaseClasses.InitMethVelocity;
 import FCSys.Subregions.Species.BaseClasses.InitMethScalar;
-
 
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
@@ -134,7 +132,7 @@ package UsersGuide "User's Guide"
 **Add citations:
 <a href=\"modelica://FCSys.UsersGuide.References\">Aronsson2009</a>
 <a href=\"modelica://FCSys.UsersGuide.References\">Broman2008</a>
-<a href=\"modelica://FCSys.UsersGuide.References\">Brown2011</a> 
+<a href=\"modelica://FCSys.UsersGuide.References\">Brown2011</a>
 <a href=\"modelica://FCSys.UsersGuide.References\">Fritzson2004</a>
 <a href=\"modelica://FCSys.UsersGuide.References\">Greiner1995</a>
 <a href=\"modelica://FCSys.UsersGuide.References\">Hess2008</a>
@@ -885,21 +883,6 @@ printing and shipping costs may be recovered.</p>
   annotation (preferedView="info", DocumentationClass=true);
 
   end UsersGuide;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 annotation (
   uses(Modelica(version="3.2")),
   preferedView="info",
@@ -1007,7 +990,7 @@ margin-right: auto;\" class=noBorder>
 
     <p align=center id=\"Fig3\"><a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\"><img src=\"modelica://FCSys/help/FCSys.Assemblies.Cells.Examples.CellProfileD.png\"></a>
 <br>Figure 3: Diagram of a test model (<a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\">FCSys.Assemblies.Cells.Examples.CellProfile</a>).</p>
-    
+
     <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b>
 <br>Copyright 2007&ndash;2013, Georgia Tech Research Corporation.</p>
 
@@ -1205,4 +1188,5 @@ margin-right: auto;\" class=noBorder>
   versionBuild=0,
   dateModified="",
   revisionID="");
+
 end FCSys;

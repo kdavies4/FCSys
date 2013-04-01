@@ -185,6 +185,7 @@ package Characteristics
               "resources/scripts/Dymola/Characteristics.Examples.Correlations.mos"),
 
         Icon(graphics));
+
     end Correlations;
 
   end Examples;
@@ -200,7 +201,6 @@ package Characteristics
         p0=U.atm,
         specVolPow={0,0},
         b_v=[U.cc*m/(2.2210*U.g)],
-        p_min=-Modelica.Constants.inf,
         m=12.0107000*U.g/U.mol - 'e-'.Graphite.m,
         Deltah0_f=0*U.J/U.mol,
         Deltah0=1053.500*U.J/U.mol,
@@ -258,7 +258,6 @@ package Characteristics
         m=1044.214*U.g/U.mol - 'H+'.Ionomer.m,
         specVolPow={0,0},
         b_v=[U.cc*m/(2.00*U.g)],
-        p_min=-Modelica.Constants.inf,
         Deltah0_f=0,
         Deltah0=0,
         specHeatCapPow=0,
@@ -279,7 +278,7 @@ package Characteristics
      C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup> (with the exception of specific mass).</li>
      <li>A form of C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S is
      C<sub>7</sub>HF<sub>13</sub>O<sub>5</sub>S.(C<sub>2</sub>F<sub>4</sub>)<sub>6</sub>, which is a typical
-   configuration of Nafion sulfonate resin after hydrolysis
+   configuration of Nafion sulfonate (after hydrolysis)
    [<a href=\"modelica://FCSys.UsersGuide.References\">Mark1999</a>, p. 234].</li>
      <li>Thermodynamic data for this material is not available from
      [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>].  The default specific heat capacity
@@ -325,7 +324,6 @@ package Characteristics
         B_c={Data.blow} .* fill({U.K,1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*
             log(U.K),
         r=U.k_A/m);
-
       annotation (Documentation(info="<html>
      <p>Notes:
      <ul>
@@ -333,7 +331,7 @@ package Characteristics
      constants in the <a href=\"modelica://FCSys.Units\">Units</a> package:
      <code>2*R_inf*h/(q*c*alpha^2)</code>
   (from <a href=\"http://en.wikipedia.org/wiki/Electron_rest_mass\">http://en.wikipedia.org/wiki/Electron_rest_mass</a>,
-  with <code>q</code> representing a single particle).  This evaluates to  
+  with <code>q</code> representing a single particle).  This evaluates to
      <code>R_inf*(R_K*m*S)^2/(k_J*c^3*(pi*1e-7*s)^2)</code> or
      <code>R_inf*25812.8074434^2/(k_J*c*(pi*1e-7*299792458)^2)</code> in terms of the base constants.</li>
   <li>McBride and Gordon [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>] provide correlations for the transport
@@ -399,7 +397,6 @@ package Characteristics
         B_c={Data.blow} .* fill({U.K,1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*
             log(U.K),
         r=120*U.pico*U.m/U.q);
-
       annotation (Documentation(info="<html>
          <p>Assumptions:
      <ol>
@@ -461,7 +458,6 @@ package Characteristics
         specVolPow={-1,-3},
         b_v={{0,0,0,1},{8.0282e6*U.K^3,-2.6988e5*U.K^2,-129.26*U.K,17.472}*U.cm
             ^3/U.mol},
-        p_min=1e-323*p0,
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
         Deltah0=Data.MM*Data.H0*U.J/U.mol,
         T_lim_c={200.000,Data.Tlimit,6000.000,20000.000}*U.K,
@@ -480,9 +476,6 @@ package Characteristics
             1.1996252}),fromNASAThermalConductivity({1.0582450,248.75372,
             1.1736907e4,0.82758695}),fromNASAThermalConductivity({-0.22364420,-6.9650442e3,
             -7.7771313e4,13.189369})});
-
-      // Note:  In Dymola 7.4 log(1e-323) returns a valid result, but log(1e-324)
-      // doesn't.
       annotation (Documentation(info="<html>
             <p>Notes:
      <ul>
@@ -514,7 +507,6 @@ package Characteristics
         specVolPow={-1,-3},
         b_v={{0,0,0,1},{-5.6932e10*U.K^3,1.8189e8*U.K^2,-3.0107e5*U.K,158.83}*U.cm
             ^3/U.mol},
-        p_min=1e-323*p0,
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
         Deltah0=Data.MM*Data.H0*U.J/U.mol,
         T_lim_c={200.000,Data.Tlimit,6000.000}*U.K,
@@ -532,9 +524,6 @@ package Characteristics
             -0.24664550}),fromNASAThermalConductivity({0.39367933,-2.2524226e3,
             6.1217458e5,5.8011317}),fromNASAThermalConductivity({-0.41858737,-1.4096649e4,
             1.9179190e7,14.345613})});
-
-      // Note:  In Dymola 7.4 log(1e-323) returns a valid result, but log(1e-324)
-      // doesn't.
       annotation (Documentation(info="<html>
         <p>Notes:
      <ul>
@@ -618,7 +607,6 @@ package Characteristics
         specVolPow={-1,-4},
         b_v={{0,0,0,0,1},{-2.7198e9*U.K^4,6.1253e7*U.K^3,-1.4164e6*U.K^2,-9.3378e3
             *U.K,40.286}*U.cc/U.mol},
-        p_min=1e-323*p0,
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
         Deltah0=Data.MM*Data.H0*U.J/U.mol,
         T_lim_c={200.000,Data.Tlimit,6000.000,20000.000}*U.K,
@@ -637,9 +625,6 @@ package Characteristics
             0.47793128}),fromNASAThermalConductivity({0.88407146,133.57293,-1.1429640e4,
             0.24417019}),fromNASAThermalConductivity({2.4176185,8.0477749e3,
             3.1055802e6,-14.517761})});
-
-      // Note:  In Dymola 7.4 log(1e-323) returns a valid result, but log(1e-324)
-      // doesn't.
       annotation (Documentation(info="<html>
                   <p>Notes:
      <ul>
@@ -672,7 +657,6 @@ package Characteristics
         specVolPow={-1,-4},
         b_v={{0,0,0,0,1},{5.0855e9*U.K^4,-1.6393e8*U.K^3,5.2007e5*U.K^2,-1.7696e4
             *U.K,42.859}*U.cc/U.mol},
-        p_min=1e-323*p0,
         Deltah0_f=Data.MM*Data.Hf*U.J/U.mol,
         Deltah0=Data.MM*Data.H0*U.J/U.mol,
         T_lim_c={200.000,Data.Tlimit,6000.000,20000.000}*U.K,
@@ -691,9 +675,6 @@ package Characteristics
             1.2210365}),fromNASAThermalConductivity({0.90917351,291.24182,-7.9650171e4,
             0.064851631}),fromNASAThermalConductivity({-1.1218262,-1.9286378e4,
             2.3295011e7,20.342043})});
-
-      // Note:  In Dymola 7.4 log(1e-323) returns a valid result, but log(1e-324)
-      // doesn't.
       annotation (Documentation(info="<html><p>Notes:<ul>
   <li>According to [<a href=\"modelica://FCSys.UsersGuide.References\">Avogadro1.03</a>], the (center-to-center)
    bond length of O-O is 128.2 pm.  The radius of O is from
@@ -786,6 +767,7 @@ package Characteristics
 
   <p>For more information, see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.zeta\">Characteristic.zeta</a>().</p>
   </html>"));
+
       end zeta;
 
       redeclare function theta
@@ -823,6 +805,7 @@ package Characteristics
 
     <p>For more information, see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.theta\">Characteristic.theta</a>().</p>
     </html>"));
+
       end theta;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html><p>The correlations for transport properties are available in
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>,
@@ -847,15 +830,13 @@ package Characteristics
       final constant Integer z=charge(formula) "Charge number";
       constant Q.PressureAbsolute p0=U.bar
         "<html>Reference pressure (<i>p</i>&deg;)</html>";
-      constant Q.Pressure p_min=-Modelica.Constants.inf
-        "<html>Minimum pressure for numerical protection (<i>p</i><sub>min</sub>)</html>";
       constant Real b_v[:, :]=[1]
-        "<html>Coefficients of specific volume as a polynomial in <i>p</i>/<i>T</i> and <i>T</i> (<i>b</i><sub><i>v</i></sub>)</html>";
+        "<html>Coefficients for specific volume as a polynomial in <i>p</i>/<i>T</i> and <i>T</i> (<i>b</i><sub><i>v</i></sub>)</html>";
       // Note:  p/T is the argument instead of p so that b_p will have the
       // same size as b_v for the typical definitions of the second virial
       // coefficients in [Dymond2002].
       constant Integer specVolPow[2]={-1,0}
-        "<html>Powers of <i>p</i>/<i>T</i> and <i>T</i> for 1<sup>st</sup> row and column of <i>b</i><sub><i>v</i></sub>, respectively</html>";
+        "<html>Powers of <i>p</i>/<i>T</i> and <i>T</i> for 1<sup>st</sup> row and column of <i>b</i><sub><i>v</i></sub></html>";
       constant Q.PotentialChemical Deltah0_f
         "<html>Enthalpy of formation at 298.15 K, <i>p</i>&deg; (&Delta;<i>h</i>&deg;<sub>f</sub>)</html>";
       constant Q.PotentialChemical Deltah0
@@ -882,8 +863,7 @@ package Characteristics
 
     protected
       constant Integer pressPow[2]={specVolPow[1] - size(b_v, 1) + 1,specVolPow[
-          2] + 1}
-        "Powers of v and T for 1st row and column of b_p, respectively";
+          2] + 1} "Powers of v and T for 1st row and column of b_p";
       final constant Real b_p[size(b_v, 1), size(b_v, 2)]=if size(b_v, 1) == 1
            then b_v .^ (-pressPow[1]) else {(if specVolPow[1] + i == 0 or
           specVolPow[1] + i == 1 or size(b_v, 1) == 1 then b_v[i, :] else (if
@@ -912,6 +892,7 @@ package Characteristics
   fluidity of gases.  However, the fluidity varies by species and
   generally falls more rapidly with temperature than indicated
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 41].</p></html>"));
+
       end alpha;
 
       partial function tau
@@ -924,9 +905,8 @@ package Characteristics
 
       algorithm
         tau := 2*v*sqrt(m/(U.pi*T))/(3*U.pi*d^2*U.q) annotation (Inline=true);
-
         annotation (Documentation(info="<html>
-  <p>This is the mean time between collisions** 
+  <p>This is the mean time between collisions**
   **Note that alpha and tau are related through Einstein relation
   This function is based on the kinetic theory of gases with the rigid-sphere (\"billiard-ball\")
   assumption.  It is
@@ -935,6 +915,7 @@ package Characteristics
   fluidity of gases.  However, the fluidity varies by species and
   generally falls more rapidly with temperature than indicated
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 41].</p></html>"));
+
       end tau;
 
     public
@@ -1017,6 +998,7 @@ package Characteristics
   <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
   </html>"));
+
       end c_p;
 
       function c_v
@@ -1044,6 +1026,7 @@ package Characteristics
   <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
   </html>"));
+
       end c_v;
 
       function dp_Tv
@@ -1118,6 +1101,7 @@ package Characteristics
 second, or bulk dynamic viscosity and specific volume (see
 <a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).</p>
 </html>"));
+
       end eta;
 
       function g "Gibbs potential as a function of temperature and pressure"
@@ -1249,6 +1233,7 @@ second, or bulk dynamic viscosity and specific volume (see
   <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
     </html>"));
+
       end h;
 
       replaceable function beta
@@ -1268,6 +1253,7 @@ second, or bulk dynamic viscosity and specific volume (see
 second, or bulk dynamic viscosity and specific volume (see
 <a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).</p>
 </html>"));
+
       end beta;
 
       replaceable function mu
@@ -1286,6 +1272,7 @@ second, or bulk dynamic viscosity and specific volume (see
 second, or bulk dynamic viscosity and specific volume (see
 <a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).</p>
 </html>"));
+
       end mu;
 
       replaceable function nu
@@ -1303,6 +1290,7 @@ second, or bulk dynamic viscosity and specific volume (see
 second, or bulk dynamic viscosity and specific volume (see
 <a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).</p>
 </html>"));
+
       end nu;
 
       function p_Tv "Pressure as a function of temperature and specific volume"
@@ -1334,6 +1322,7 @@ second, or bulk dynamic viscosity and specific volume (see
   and the function will return a value of zero.</p>
 
 <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a>().</p></html>"));
+
       end p_Tv;
 
       replaceable function theta
@@ -1482,6 +1471,7 @@ second, or bulk dynamic viscosity and specific volume (see
         annotation (Documentation(info="<html>
   <p>The derivative of this function is
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv\">dv</a>().</p></html>"));
+
       end v_Tp;
 
       replaceable function zeta
@@ -1500,6 +1490,7 @@ second, or bulk dynamic viscosity and specific volume (see
 <p>Note that fluidity is defined as the reciprocal of viscosity&mdash;specifically dynamic viscosity
 (see <a href=\"http://en.wikipedia.org/wiki/Viscosity#Fluidity\">http://en.wikipedia.org/wiki/Viscosity#Fluidity</a>).</p>
 </html>"));
+
       end zeta;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
     <p>This package is compatible with NASA CEA thermodynamic data
@@ -1511,7 +1502,7 @@ second, or bulk dynamic viscosity and specific volume (see
     <p>Assumptions:
     <ol><li>Specific mass is constant.</li></ol></p>
 
-<p>The following notes apply to the constants:
+<p>Notes regarding the constants:
     <ul>
     <li>Currently, <code>formula</code> may not contain parentheses or brackets.</li>
     <li><code>d</code> is the Van der Waals diameter or the diameter for the
@@ -1525,14 +1516,11 @@ second, or bulk dynamic viscosity and specific volume (see
     1, <i>B</i><sup>*</sup>, <i>C</i><sup>*</sup>, and <i>D</i><sup>*</sup> are
     the first, second, third, and fourth coefficients in the volume-explicit
     virial equation of state
-    ([<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>, pp. 1&ndash;2]).
+    [<a href=\"modelica://FCSys.UsersGuide.References\">Dymond2002</a>, pp. 1&ndash;2].
     Currently,
     virial equations of state are supported up to the fourth coefficient (<i>D</i><sup>*</sup>).
     If additional terms are required, review and modify the definition of <code>b_p</code>.</li>
-    <li><code>specVolPow</code> is defined as a <code>Real</code> vector.  However,
-    special modifications are necessary if non-integer values are used
-    (see <a href=\"modelica://FCSys.Characteristics.'e-'.Graphite\">'e-'.Graphite</a>).
-    <li>The environment for <code>b_v</code> and <code>specVolPow</code> represent ideal gas.</li>
+    <li>The defaults for <code>b_v</code> and <code>specVolPow</code> represent ideal gas.</li>
     <li><code>b_c</code>: The rows give the coefficients for the temperature intervals bounded
     by the values in <code>T_lim_c</code>.
     The powers of <i>T</i> increase
@@ -1561,11 +1549,6 @@ second, or bulk dynamic viscosity and specific volume (see
     For example, the enthalpy of a non-ideal (real) gas at 25 &deg;C and <code>p0</code> with
     <code>ReferenceEnthalpy.ZeroAt25degC</code> selected is not exactly zero.
     </li>
-    <li>If the <i>p</i>-<i>v</i>-<i>T</i> equation of state includes an ideal gas term (nonzero first virial coefficient), then the
-    correlation for specific entropy (<a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.s\">s</a>) will involve the logarithm of pressure.
-    The <code>p_min</code> parameter is used to guard against the logarithm of non-positive pressures.
-    To disable this protection (and simplify the translated code), set <code>p_min</code> to zero or a
-    negative pressure.</li>
     <li>If the material is gaseous (<code>phase == \"gas\"</code>), then the first virial coefficient
     must be independent of temperature.  Otherwise, the function for specific enthalpy
     (<a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.h\">h</a>) will be ill-posed.

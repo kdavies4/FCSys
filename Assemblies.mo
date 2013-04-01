@@ -79,6 +79,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
                 "resources/scripts/Dymola/Assemblies.Cells.Examples.CellProfile.mos"),
 
           experiment(StopTime=600, Tolerance=1e-08));
+
       end CellProfile;
 
       model Polarization "Run a cell polarization"
@@ -128,6 +129,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
                 "resources/scripts/Dymola/Assemblies.Examples.CellPolarizationstoich.mos"),
 
           Icon(graphics));
+
       end CellProfileIO;
 
       model CellModelica
@@ -184,6 +186,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
             color={0,0,255},
             smooth=Smooth.None));
         annotation (experiment(StopTime=1000));
+
       end CellModelica;
 
       function plot "\"**\""
@@ -457,6 +460,7 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                   visible=inclX,
                   thickness=0.5)}),
         experiment(StopTime=120, Tolerance=1e-06));
+
     end Cell;
 
     model CalibratedCell
@@ -556,11 +560,11 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
 
       // Material transport
       /*
-  parameter Q.NumberAbsolute 'k_alpha_Xi_C+'(
+  parameter Q.NumberAbsolute 'k_alpha_beta_C+'(
     final min=0,
     final nominal=1) = 1 "<html>For C (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;C</sub>)</html>"
     annotation (Dialog(tab="Calibration factors", group="Material transport"));
-  parameter Q.NumberAbsolute 'k_alpha_Xi_C+'19HF37O5S-(
+  parameter Q.NumberAbsolute 'k_alpha_beta_C+'19HF37O5S-(
     final min=0,
     final nominal=1) = 1
     "<html>For C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;C19HF37O5S-</sub>)</html>"
@@ -1134,37 +1138,44 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={Line(
-                  points={{-40,100},{-40,60}},
-                  color={255,128,0},
-                  visible=inclY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-8,-1},{44,-1}},
-                  color={0,128,255},
-                  visible=inclX,
-                  thickness=0.5,
-                  origin={39,56},
-                  rotation=90),Line(
-                  points={{100,0},{56,0}},
-                  color={127,127,127},
-                  visible=inclX,
-                  thickness=0.5),Line(
-                  points={{-8,-1},{28,-1}},
-                  color={0,128,255},
-                  visible=inclX,
-                  thickness=0.5,
-                  origin={39,-92},
-                  rotation=90),Line(
-                  points={{-40,-58},{-40,-100}},
-                  color={255,128,0},
-                  visible=inclY,
-                  smooth=Smooth.None,
-                  thickness=0.5),Line(
-                  points={{-66,0},{-100,0}},
-                  color={127,127,127},
-                  visible=inclX,
-                  thickness=0.5)}));
+            initialScale=0.1), graphics={
+            Line(
+              points={{-40,100},{-40,60}},
+              color={255,128,0},
+              visible=inclY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-8,-1},{44,-1}},
+              color={0,128,255},
+              visible=inclX,
+              thickness=0.5,
+              origin={39,56},
+              rotation=90),
+            Line(
+              points={{100,0},{56,0}},
+              color={127,127,127},
+              visible=inclX,
+              thickness=0.5),
+            Line(
+              points={{-8,-1},{28,-1}},
+              color={0,128,255},
+              visible=inclX,
+              thickness=0.5,
+              origin={39,-92},
+              rotation=90),
+            Line(
+              points={{-40,-58},{-40,-100}},
+              color={255,128,0},
+              visible=inclY,
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{-66,0},{-100,0}},
+              color={127,127,127},
+              visible=inclX,
+              thickness=0.5)}));
+
     end IntegratedCell;
 
     model CellSSIC

@@ -17,7 +17,6 @@ package Connectors "Declarative and imperative connectors"
     //         [...].n[...]
     //     with respect to time."
     // **check if still true
-
     annotation (
       defaultComponentName="chemI",
       Documentation(info="<html><p>See the documentation in the
@@ -32,13 +31,13 @@ package Connectors "Declarative and imperative connectors"
             fillColor={255,255,255},
             fillPattern=FillPattern.Solid)}),
       Diagram(graphics={Polygon(
-            points={{0,50},{100,0},{0,-50},{0,50}},
-            lineColor={208,104,0},
-            fillColor={255,128,0},
-            fillPattern=FillPattern.Solid), Text(
-            extent={{-200,50},{200,90}},
-            textString="%name",
-            lineColor={0,0,0})}));
+              points={{0,50},{100,0},{0,-50},{0,50}},
+              lineColor={208,104,0},
+              fillColor={255,128,0},
+              fillPattern=FillPattern.Solid),Text(
+              extent={{-200,50},{200,90}},
+              textString="%name",
+              lineColor={0,0,0})}));
 
   end ChemicalInput;
 
@@ -55,7 +54,6 @@ package Connectors "Declarative and imperative connectors"
     //         [...].n[...]
     //     with respect to time."
     // **check if still true
-
     annotation (
       defaultComponentName="chemO",
       Documentation(info="<html><p>See the documentation in the
@@ -85,13 +83,13 @@ package Connectors "Declarative and imperative connectors"
     Chemical chemical "Physical subconnector for the reaction";
     annotation (
       defaultComponentName="chemical",
-      Documentation(info="<html><p>The <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> connector is directly instantiated as 
+      Documentation(info="<html><p>The <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> connector is directly instantiated as
     <code>chemical</code>.  The <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> connectors are included by
     connecting the <code>chemI</code> connector of instances of the
-    <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model. 
+    <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.
     The <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalOutput</a> connectors are included by
     connecting the appropriate index of the <code>chemO</code> connector of a
-    <a href=\"modelica://FCSys.Subregions.Reaction\">Reaction</a> model.    
+    <a href=\"modelica://FCSys.Subregions.Reaction\">Reaction</a> model.
     For a traditional chemical or electrochemical reaction, those connection instances are named by the formula of the species.
     For a phase change, they are given the name of the phase.</p></html>"),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
@@ -115,6 +113,35 @@ package Connectors "Declarative and imperative connectors"
             lineThickness=0.5)}));
 
   end ChemicalBus;
+
+  expandable connector ChemicalBusInternal
+    "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a>, <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a>, and <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a> connectors</html>"
+    Chemical chemical "Physical subconnector for the reaction";
+    annotation (
+      defaultComponentName="chemical",
+      Documentation(info="<html><p>This is copy of the <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> connector, except that it
+    has a smaller icon and a default <code>protected</code> prefix.  Please see that connector for more information.</p></html>"),
+
+      Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
+              100}}), graphics={Ellipse(
+            extent={{-100,100},{100,-100}},
+            fillColor={255,128,0},
+            fillPattern=FillPattern.Solid,
+            lineColor={208,104,0},
+            lineThickness=0.5,
+            pattern=LinePattern.Solid)}),
+      Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
+              100,100}}), graphics={Ellipse(
+            extent={{-10,10},{10,-10}},
+            lineColor={208,104,0},
+            fillColor={255,128,0},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5), Text(
+            extent={{-100,20},{100,60}},
+            textString="%name",
+            lineColor={0,0,0})}));
+
+  end ChemicalBusInternal;
 
   connector Chemical
     "Connector to exchange material while advecting linear momentum and thermal energy"
@@ -163,9 +190,8 @@ R*Ndot_gen_p = rho_p*(exp((g/T + z*E*L)/(2*T)) - exp(-(g/T + z*E*L)/(2*T)))
 If H+ (z=1):
 R*Ndot_gen_p = rho_p*(exp((g/T + E*L)/(2*T)) - exp(-(g/T + E*L)/(2*T)))
 
-Ndot_gen = Ndot_gen_n + Ndot_gen_p 
+Ndot_gen = Ndot_gen_n + Ndot_gen_p
 Ndot_gen = (rho_n + rho_p)*(exp((g/T + E*L)/(2*T)) - exp(-(g/T + E*L)/(2*T)))/R
-
 
 sum s, give total s
 C: every model has rate equation, no model req'd
@@ -196,7 +222,6 @@ C: every model has rate equation, no model req'd
 
   expandable connector FaceBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors (for multiple species)</html>"
-
     annotation (
       defaultComponentName="face",
       Documentation(info="<html><p>There is no minimal set of variables.  Species are included by connecting instances
@@ -224,7 +249,6 @@ C: every model has rate equation, no model req'd
 
   expandable connector FaceBusInternal
     "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors (for multiple species)</html>"
-
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="face",
@@ -240,14 +264,14 @@ C: every model has rate equation, no model req'd
             lineThickness=0.5)}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics={Ellipse(
-              extent={{-10,10},{10,-10}},
-              lineColor={127,127,127},
-              fillColor={191,191,191},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{-100,20},{100,60}},
-              textString="%name",
-              lineColor={0,0,0})}));
+            extent={{-10,10},{10,-10}},
+            lineColor={127,127,127},
+            fillColor={191,191,191},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5), Text(
+            extent={{-100,20},{100,60}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end FaceBusInternal;
 
@@ -302,21 +326,18 @@ C: every model has rate equation, no model req'd
     <p>See the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Diagram(graphics={
-          Text(
-            extent={{-100,36},{100,76}},
-            textString="%name",
-            lineColor={0,0,0}),
-          Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={72,90,180},
-            fillPattern=FillPattern.Solid,
-            fillColor={102,128,255}),
-          Ellipse(
-            extent={{-18,18},{18,-18}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            lineColor={72,90,180})}),
+      Diagram(graphics={Text(
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0}),Ellipse(
+              extent={{-30,30},{30,-30}},
+              lineColor={72,90,180},
+              fillPattern=FillPattern.Solid,
+              fillColor={102,128,255}),Ellipse(
+              extent={{-18,18},{18,-18}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={72,90,180})}),
       Icon(graphics={Ellipse(
             extent={{-100,100},{100,-100}},
             lineColor={72,90,180},
@@ -480,21 +501,18 @@ C: every model has rate equation, no model req'd
             fillColor={255,255,255},
             fillPattern=FillPattern.Solid,
             lineColor={72,90,180})}),
-      Diagram(graphics={
-          Ellipse(
-            extent={{-10,10},{10,-10}},
-            lineColor={72,90,180},
-            fillPattern=FillPattern.Solid,
-            fillColor={102,128,255}),
-          Text(
-            extent={{-100,20},{100,60}},
-            textString="%name",
-            lineColor={0,0,0}),
-          Ellipse(
-            extent={{-4,4},{4,-4}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            lineColor={72,90,180})}));
+      Diagram(graphics={Ellipse(
+              extent={{-10,10},{10,-10}},
+              lineColor={72,90,180},
+              fillPattern=FillPattern.Solid,
+              fillColor={102,128,255}),Text(
+              extent={{-100,20},{100,60}},
+              textString="%name",
+              lineColor={0,0,0}),Ellipse(
+              extent={{-4,4},{4,-4}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={72,90,180})}));
 
   end InertInternal;
 
@@ -573,13 +591,13 @@ C: every model has rate equation, no model req'd
         initialScale=0.1,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Polygon(
-          points={{0,50},{100,0},{0,-50},{0,50}},
-          lineColor={0,0,127},
-          fillColor={0,0,127},
-          fillPattern=FillPattern.Solid), Text(
-          extent={{-200,50},{200,90}},
-          textString="%name",
-          lineColor={0,0,0})}),
+            points={{0,50},{100,0},{0,-50},{0,50}},
+            lineColor={0,0,127},
+            fillColor={0,0,127},
+            fillPattern=FillPattern.Solid),Text(
+            extent={{-200,50},{200,90}},
+            textString="%name",
+            lineColor={0,0,0})}),
     Documentation(info="<html>
 <p>Connector with one input signal of type <code>Real</code>.</p>
 </html>"));
@@ -614,7 +632,6 @@ C: every model has rate equation, no model req'd
 </html>"));
   expandable connector RealInputBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.RealInput\">RealInput</a> connectors</html>"
-
     annotation (
       defaultComponentName="u",
       Documentation(info="<html><p>There is no minimal set of variables.
@@ -649,7 +666,6 @@ C: every model has rate equation, no model req'd
 
   expandable connector RealInputBusInternal
     "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.RealInput\">RealInput</a> connectors</html>"
-
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="u",
@@ -698,13 +714,13 @@ C: every model has rate equation, no model req'd
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Polygon(
-          points={{-100,50},{0,0},{-100,-50},{-100,50}},
-          lineColor={0,0,127},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid), Text(
-          extent={{-200,50},{200,90}},
-          textString="%name",
-          lineColor={0,0,0})}),
+            points={{-100,50},{0,0},{-100,-50},{-100,50}},
+            lineColor={0,0,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),Text(
+            extent={{-200,50},{200,90}},
+            textString="%name",
+            lineColor={0,0,0})}),
     Documentation(info="<html>
 <p>Connector with one output signal of type <code>Real</code>.</p>
 </html>"));
@@ -737,7 +753,6 @@ C: every model has rate equation, no model req'd
 </html>"));
   expandable connector RealOutputBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.RealOutput\">RealOutput</a> connectors</html>"
-
     annotation (
       defaultComponentName="y",
       Documentation(info="<html><p>There is no minimal set of variables.
@@ -770,7 +785,6 @@ C: every model has rate equation, no model req'd
 
   expandable connector RealOutputBusInternal
     "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.RealOutput\">RealOutput</a> connectors</html>"
-
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="y",
@@ -801,7 +815,6 @@ C: every model has rate equation, no model req'd
               lineColor={0,0,0})}));
 
   end RealOutputBusInternal;
-
   annotation (Documentation(info="<html>
   <p>Three types of physical connectors are used in <a href=\"modelica://FCSys\">FCSys</a>.
   The <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> connector
@@ -868,13 +881,16 @@ C: every model has rate equation, no model req'd
 
     <p><b>Relation to Thermodynamics:</b></p>
 
-    <p>In order to describe the dynamic behavior of a physical system, a model must include conservation laws or rate balances.  These
-    equations involve the storage and flow of extensive quantities within (among species) and into the system.  In chemical/thermal systems, the extensive
+    <p>In order to describe the dynamic behavior of a physical system, a model must include conservation
+    laws or rate balances.  These
+    equations involve the storage and flow of extensive quantities within (among species) and into the system.
+    In chemical/thermal systems, the extensive
     quantities of interest are particle number (or mass) and energy.
-    For the sake of simplicity, momentum will be excluded from the present discussion; assume that the fluid is macroscopically stagnant.
+    For the sake of simplicity, momentum will be excluded from the present discussion; assume that the fluid is
+    macroscopically stagnant.
     Also assume that there is only one inlet or outlet to the system.
-    In terms of mathematics, we have introduced four variables (2 flows and 2 quantities) but only two equations (material and energy
-    conservation).</p>
+    In terms of mathematics, we have introduced four variables (2 flows and 2 quantities) but only two equations
+    (material and energy conservation).</p>
 
     <p>Two additional equations involve flow rates; these are transport equations with spatial nature&mdash;separate from the temporal
     conservation equations.  Empirical evidence indicates that the
@@ -943,4 +959,5 @@ C: every model has rate equation, no model req'd
   FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
   http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
   </html>"));
+
 end Connectors;

@@ -202,37 +202,37 @@ package Quantities "Quantities to represent physical properties"
   type ResistivityThermal = Resistivity (displayUnit="m.K/W")
     "Thermal resistivity";
   annotation (Documentation(info="<html><p>In this package the <code>unit</code> attribute of each <code>Real</code> variable actually denotes the
-  dimension.<sup><a href=\"#fn1\" id=\"ref1\">1</a></sup>  The dimensions are 
-  angle (A), length (l), mass (m), particle number (N), and time (T).<sup><a href=\"#fn2\" id=\"ref1\">2</a></sup>  These 
-  are combined according to the rules established for unit strings 
-  [<a href=\"modelica://FCSys.UsersGuide.References\">Modelica3.2</a>, p. 210].  In 
-  <a href=\"modelica://FCSys.FCSys\">FCSys</a>, temperature and charge are considered to be derived dimensions 
-  (see the <a href=\"modelica://FCSys.Units\">Units</a> package).</p> 
-          
-  <p>The <code>quantity</code> attribute is not used since the type <i>is</i> the quantity.  The <code>displayUnit</code> attribute is 
+  dimension.<sup><a href=\"#fn1\" id=\"ref1\">1</a></sup>  The dimensions are
+  angle (A), length (l), mass (m), particle number (N), and time (T).<sup><a href=\"#fn2\" id=\"ref1\">2</a></sup>  These
+  are combined according to the rules established for unit strings
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Modelica3.2</a>, p. 210].  In
+  <a href=\"modelica://FCSys.FCSys\">FCSys</a>, temperature and charge are considered to be derived dimensions
+  (see the <a href=\"modelica://FCSys.Units\">Units</a> package).</p>
+
+  <p>The <code>quantity</code> attribute is not used since the type <i>is</i> the quantity.  The <code>displayUnit</code> attribute is
   only used for quantities that imply a certain display unit.</p>
 
-  <p>It is helpful to check that the terms of each model equation have the same dimension.  Fortunately, methods for unit checking 
-  have been established [<a href=\"modelica://FCSys.UsersGuide.References\">Mattsson2008</a>, 
-  <a href=\"modelica://FCSys.UsersGuide.References\">Broman2008</a>, 
+  <p>It is helpful to check that the terms of each model equation have the same dimension.  Fortunately, methods for unit checking
+  have been established [<a href=\"modelica://FCSys.UsersGuide.References\">Mattsson2008</a>,
+  <a href=\"modelica://FCSys.UsersGuide.References\">Broman2008</a>,
   <a href=\"modelica://FCSys.UsersGuide.References\">Aronsson2009</a>] and can, in theory, be applied to
   dimension checking instead.</p>
 
   <p>The quantities are generally named with adjectives following the noun so that the
   quantities are grouped when alphabetized.</p>
 
-  <p>The <a href=\"modelica://FCSys.Quantities\">Quantities</a> package is abbreviated as <code>Q</code> throughout 
+  <p>The <a href=\"modelica://FCSys.Quantities\">Quantities</a> package is abbreviated as <code>Q</code> throughout
   the rest of <a href=\"modelica://FCSys.FCSys\">FCSys</a>.</p>
 
     <hr>
-    
+
     <small>
-    <p id=\"fn1\">1. This misnomer is necessary because <code>Real</code> variables do not have a <code>dimension</code> 
+    <p id=\"fn1\">1. This misnomer is necessary because <code>Real</code> variables do not have a <code>dimension</code>
     attribute.<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></p>
-    <p id=\"fn2\">2. Capital \"L\" and \"M\" are not used to abbreviate length and mass because they are not recognized 
+    <p id=\"fn2\">2. Capital \"L\" and \"M\" are not used to abbreviate length and mass because they are not recognized
     in Dymola 7.4.<a href=\"#ref2\" title=\"Jump back to footnote 2 in the text.\">&#8629;</a></p>
-    </small>    
-    
+    </small>
+
     </small>
     </html>"));
 

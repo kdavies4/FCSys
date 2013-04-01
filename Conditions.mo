@@ -37,6 +37,7 @@ package Conditions "Models to specify and measure operating conditions"
           smooth=Smooth.None));
       annotation (experiment(NumberOfIntervals=5000), Commands(file=
               "resources/scripts/Dymola/Conditions.Examples.FaceCondition.mos"));
+
     end FaceCondition;
 
     model FaceConditionPhases
@@ -80,6 +81,7 @@ package Conditions "Models to specify and measure operating conditions"
           color={72,90,180},
           smooth=Smooth.None));
       annotation (experiment);
+
     end FaceConditionPhases;
 
     model Router "<html>Test the <code>Router<code> model</html>"
@@ -170,6 +172,7 @@ package Conditions "Models to specify and measure operating conditions"
           smooth=Smooth.None));
       annotation (experiment(StopTime=2e-10), Commands(file=
               "resources/scripts/Dymola/Conditions.Examples.Adapteminus.mos"));
+
     end AnodeAdapter;
 
   end Examples;
@@ -289,6 +292,7 @@ package Conditions "Models to specify and measure operating conditions"
               points={{0,-60},{80,-60}},
               color={0,127,255},
               smooth=Smooth.None)}));
+
     end Anode;
 
     model Cathode
@@ -401,6 +405,7 @@ package Conditions "Models to specify and measure operating conditions"
               points={{0,-60},{80,-60}},
               color={0,127,255},
               smooth=Smooth.None)}));
+
     end Cathode;
 
     package Phases "Adapters for material phases"
@@ -484,6 +489,7 @@ package Conditions "Models to specify and measure operating conditions"
                       points={{0,-40},{80,-40}},
                       color={0,127,255},
                       smooth=Smooth.None)}));
+
       end AnodeGas;
 
       model CathodeGas
@@ -600,6 +606,7 @@ package Conditions "Models to specify and measure operating conditions"
                       points={{0,-40},{80,-40}},
                       color={0,127,255},
                       smooth=Smooth.None)}));
+
       end CathodeGas;
 
       model Graphite
@@ -663,6 +670,7 @@ package Conditions "Models to specify and measure operating conditions"
                 points={{0,0},{80,0}},
                 color={191,0,0},
                 smooth=Smooth.None)}));
+
       end Graphite;
 
       model Liquid
@@ -716,6 +724,7 @@ package Conditions "Models to specify and measure operating conditions"
                       points={{0,-40},{80,-40}},
                       color={0,127,255},
                       smooth=Smooth.None)}));
+
       end Liquid;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -733,13 +742,13 @@ package Conditions "Models to specify and measure operating conditions"
                 transformation(extent={{-90,-10},{-70,10}}), iconTransformation(
                   extent={{-90,-10},{-70,10}})));
           annotation (Icon(graphics={Line(
-                  points={{0,0},{-80,0}},
-                  color={127,127,127},
-                  smooth=Smooth.None,
-                  thickness=0.5), Line(
-                  points={{0,0},{80,0}},
-                  color={191,0,0},
-                  smooth=Smooth.None)}));
+                          points={{0,0},{-80,0}},
+                          color={127,127,127},
+                          smooth=Smooth.None,
+                          thickness=0.5),Line(
+                          points={{0,0},{80,0}},
+                          color={191,0,0},
+                          smooth=Smooth.None)}));
 
         end PartialPhase;
 
@@ -783,6 +792,7 @@ package Conditions "Models to specify and measure operating conditions"
                 color={0,0,0},
                 smooth=Smooth.None,
                 pattern=LinePattern.Dash)}));
+
       end 'e-';
 
       model FluidNonionic
@@ -835,6 +845,7 @@ package Conditions "Models to specify and measure operating conditions"
                 color={0,0,0},
                 smooth=Smooth.None,
                 pattern=LinePattern.Dash)}));
+
       end FluidNonionic;
 
       model Solid
@@ -852,6 +863,7 @@ package Conditions "Models to specify and measure operating conditions"
                 color={0,0,0},
                 smooth=Smooth.None,
                 pattern=LinePattern.Dash)}));
+
       end Solid;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -899,6 +911,7 @@ package Conditions "Models to specify and measure operating conditions"
                   points={{0,0},{80,0}},
                   color={191,0,0},
                   smooth=Smooth.None)}));
+
         end PartialSpecies;
 
       end BaseClasses;
@@ -1008,6 +1021,7 @@ but that of the second pure substance (Medium2) is \"" + Medium2.extraProperties
                       points={{0,40},{80,40}},
                       color={0,127,255},
                       smooth=Smooth.None)}));
+
       end Junction2;
 
       model Junction3
@@ -1139,6 +1153,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       points={{6,0},{80,0}},
                       color={0,127,255},
                       smooth=Smooth.None)}));
+
       end Junction3;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -1182,6 +1197,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                           lineColor={0,127,255},
                           fillColor={255,255,255},
                           fillPattern=FillPattern.Solid)}));
+
         end PartialJunction;
 
       end BaseClasses;
@@ -1204,7 +1220,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
 
           excludeEnthalpyOfFormation=false);
-
         annotation (Documentation(info="<html>
 
 </html>"));
@@ -1224,7 +1239,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
 
           excludeEnthalpyOfFormation=false);
-
         annotation (Documentation(info="<html>
 
 </html>"));
@@ -1711,6 +1725,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-180,
                 -100},{180,100}}), graphics), experiment(StopTime=15481,
             Algorithm="Euler"));
+
     end Replay;
 
     package BaseClasses "Base classes (not generally for direct use)"
@@ -1921,6 +1936,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
                       fillColor={255,255,255},
                       fillPattern=FillPattern.Backward),Rectangle(extent={{-160,
                 160},{160,-160}}, lineColor={0,0,0})}));
+
       end PartialTestStand;
 
       partial model PartialTestStandNoIO
@@ -2150,6 +2166,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
           thickness=0.5,
           smooth=Smooth.None));
       annotation (Diagram(graphics));
+
     end Gas;
 
     model Graphite "Condition for graphite"
@@ -2482,6 +2499,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 <p>See the <a href=\"modelica://FCSys.Conditions.Chemical.BaseClasses.PartialConditions\">PartialConditions</a>
 model.</p>
 </html>"));
+
     end Reaction;
 
     model Species
@@ -2571,6 +2589,7 @@ model.</p>
 <p>See the <a href=\"modelica://FCSys.Conditions.Chemical.BaseClasses.PartialConditions\">PartialConditions</a>
 model.</p>
 </html>"));
+
     end Species;
 
     package Material "Conditions for additivity of volume"
@@ -2588,6 +2607,7 @@ model.</p>
         chemical.muPerT = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="amagat");
+
       end PotentialPerTemperature;
 
       model Current
@@ -2601,6 +2621,7 @@ model.</p>
         chemical.Ndot = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="amagat");
+
       end Current;
 
       model Custom "Custom expressions"
@@ -2617,6 +2638,7 @@ model.</p>
           defaultComponentName="amagat",
           Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p></html>"));
+
       end Custom;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -2633,6 +2655,7 @@ model.</p>
           chemical.mPhidot = zeros(n_lin) "Force";
           chemical.Hdot = 0 "Enthalpy flow rate";
           annotation (defaultComponentName="volumeCondition");
+
         end PartialCondition;
 
         type ConditionType = enumeration(
@@ -2660,6 +2683,7 @@ model.</p>
         chemical.phi[linAxes[axis]] = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="mechanical");
+
       end Velocity;
 
       model Custom "Custom expressions"
@@ -2677,6 +2701,7 @@ model.</p>
           defaultComponentName="mechanical",
           Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p></html>"));
+
       end Custom;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -2711,6 +2736,7 @@ model.</p>
           end for;
           chemical.Hdot = 0 "Enthalpy flow rate";
           annotation (defaultComponentName="mechanicalCondition");
+
         end PartialCondition;
 
         type ConditionType = enumeration(
@@ -2735,6 +2761,7 @@ model.</p>
         chemical.hbar = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="fluid");
+
       end EnthalpyMassic;
 
       model Custom "Custom expressions"
@@ -2751,6 +2778,7 @@ model.</p>
           defaultComponentName="fluid",
           Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p></html>"));
+
       end Custom;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -2767,6 +2795,7 @@ model.</p>
           chemical.Ndot = 0 "Current";
           chemical.mPhidot = zeros(n_lin) "Force";
           annotation (defaultComponentName="fluid");
+
         end PartialCondition;
 
         type ConditionType = enumeration(
@@ -2952,6 +2981,7 @@ model.</p>
   rather than simply:<br>
   <code>material(redeclare Modelica.Blocks.Sources.Ramp source)</code></p>
   </html>"));
+
       end PartialConditions;
 
       partial model PartialCondition "Partial model of a condition"
@@ -3220,6 +3250,7 @@ model.</p>
   rather than simply:<br>
   <code>mechanicalX(redeclare Modelica.Blocks.Sources.Ramp source)</code></p>
   </html>"));
+
     end Species;
 
     model SpeciesFlow
@@ -3249,6 +3280,7 @@ model.</p>
         mechanical.phi[linAxes[axis]] = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="mechanical");
+
       end Velocity;
 
       model Force "Specify force (measure velocity)"
@@ -3261,6 +3293,7 @@ model.</p>
         mechanical.mPhidot[linAxes[axis]] = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="mechanical");
+
       end Force;
 
       model Custom "Custom expressions"
@@ -3278,6 +3311,7 @@ model.</p>
           defaultComponentName="mechanical",
           Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p></html>"));
+
       end Custom;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -3314,6 +3348,7 @@ model.</p>
             end if;
           end for;
           annotation (defaultComponentName="mechanicalCondition");
+
         end PartialCondition;
 
         type ConditionType = enumeration(
@@ -3339,6 +3374,7 @@ model.</p>
         thermal.T = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="thermal");
+
       end Temperature;
 
       model HeatRate "Specify heat flow rate (measure temperature)"
@@ -3353,6 +3389,7 @@ model.</p>
         thermal.Qdot = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="thermal");
+
       end HeatRate;
 
       model Custom "Custom expressions"
@@ -3369,6 +3406,7 @@ model.</p>
           defaultComponentName="thermal",
           Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p></html>"));
+
       end Custom;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -3684,6 +3722,7 @@ model.</p>
   rather than simply:<br>
   <code>amagat(redeclare Modelica.Blocks.Sources.Ramp source)</code></p>
   </html>"));
+
     end Phase;
 
     model PhaseFlow
@@ -3715,6 +3754,7 @@ model.</p>
         inert.p = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="amagat");
+
       end Pressure;
 
       model Volume "Specify volume (measure pressure)"
@@ -3727,6 +3767,7 @@ model.</p>
         inert.V = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="amagat");
+
       end Volume;
 
       model Custom "Custom expressions"
@@ -3743,6 +3784,7 @@ model.</p>
           defaultComponentName="amagat",
           Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p></html>"));
+
       end Custom;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -3760,6 +3802,7 @@ model.</p>
           inert.mPhidot = zeros(n_lin) "Force";
           inert.Qdot = 0 "Heat flow rate";
           annotation (defaultComponentName="volumeCondition");
+
         end PartialCondition;
 
         type ConditionType = enumeration(
@@ -3783,6 +3826,7 @@ model.</p>
         inert.phi[linAxes[axis]] = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="mechanical");
+
       end Velocity;
 
       model Force "Specify force (measure velocity)"
@@ -3795,6 +3839,7 @@ model.</p>
         inert.mPhidot[linAxes[axis]] = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="mechanical");
+
       end Force;
 
       model Custom "Custom expressions"
@@ -3812,6 +3857,7 @@ model.</p>
           defaultComponentName="mechanical",
           Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p></html>"));
+
       end Custom;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -3846,6 +3892,7 @@ model.</p>
           end for;
           inert.Qdot = 0 "Heat flow rate";
           annotation (defaultComponentName="mechanicalCondition");
+
         end PartialCondition;
 
         type ConditionType = enumeration(
@@ -3871,6 +3918,7 @@ model.</p>
         inert.T = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="thermal");
+
       end Temperature;
 
       model HeatRate "Specify heat flow rate (measure temperature)"
@@ -3885,6 +3933,7 @@ model.</p>
         inert.Qdot = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="thermal");
+
       end HeatRate;
 
       model Custom "Custom expressions"
@@ -3901,6 +3950,7 @@ model.</p>
           defaultComponentName="thermal",
           Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p></html>"));
+
       end Custom;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -3917,6 +3967,7 @@ model.</p>
           inert.V = 0 "Volume";
           inert.mPhidot = zeros(n_lin) "Force";
           annotation (defaultComponentName="thermal");
+
         end PartialCondition;
 
         type ConditionType = enumeration(
@@ -4213,6 +4264,7 @@ model.</p>
   rather than simply:<br>
   <code>dalton(redeclare Modelica.Blocks.Sources.Ramp source)</code></p>
   </html>"));
+
     end Species;
 
     model SpeciesFlow
@@ -4244,6 +4296,7 @@ model.</p>
         inert.V = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="dalton");
+
       end Volume;
 
       model Pressure "Specify pressure (measure volume)"
@@ -4256,6 +4309,7 @@ model.</p>
         inert.p = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="dalton");
+
       end Pressure;
 
       model Custom "Custom expressions"
@@ -4272,6 +4326,7 @@ model.</p>
           defaultComponentName="dalton",
           Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p></html>"));
+
       end Custom;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -4289,6 +4344,7 @@ model.</p>
           inert.mPhidot = zeros(n_lin) "Force";
           inert.Qdot = 0 "Heat flow rate";
           annotation (defaultComponentName="volumeCondition");
+
         end PartialCondition;
 
         type ConditionType = enumeration(
@@ -4312,6 +4368,7 @@ model.</p>
         inert.phi[linAxes[axis]] = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="mechanical");
+
       end Velocity;
 
       model Force "Specify force (measure velocity)"
@@ -4324,6 +4381,7 @@ model.</p>
         inert.mPhidot[linAxes[axis]] = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="mechanical");
+
       end Force;
 
       model Custom "Custom expressions"
@@ -4341,6 +4399,7 @@ model.</p>
           defaultComponentName="mechanical",
           Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p></html>"));
+
       end Custom;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -4375,6 +4434,7 @@ model.</p>
           end for;
           inert.Qdot = 0 "Heat flow rate";
           annotation (defaultComponentName="mechanicalCondition");
+
         end PartialCondition;
 
         type ConditionType = enumeration(
@@ -4400,6 +4460,7 @@ model.</p>
         inert.T = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="thermal");
+
       end Temperature;
 
       model HeatRate "Specify heat flow rate (measure temperature)"
@@ -4414,6 +4475,7 @@ model.</p>
         inert.Qdot = u_final;
         annotation (defaultComponentPrefixes="replaceable",defaultComponentName
             ="thermal");
+
       end HeatRate;
 
       model Custom "Custom expressions"
@@ -4430,6 +4492,7 @@ model.</p>
           defaultComponentName="thermal",
           Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p></html>"));
+
       end Custom;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -4446,6 +4509,7 @@ model.</p>
           inert.p = 0 "Pressure";
           inert.mPhidot = zeros(n_lin) "Force";
           annotation (defaultComponentName="thermal");
+
         end PartialCondition;
 
         type ConditionType = enumeration(
@@ -4658,6 +4722,7 @@ model.</p>
           thickness=0.5,
           smooth=Smooth.None));
       annotation (Diagram(graphics));
+
     end Subregion;
 
     model SubregionFlows
@@ -4900,6 +4965,7 @@ model.</p>
             thickness=0.5,
             smooth=Smooth.None));
         annotation (Diagram(graphics));
+
       end Gas;
 
       model Graphite "Condition for graphite"
@@ -5113,6 +5179,7 @@ model.</p>
             thickness=0.5,
             smooth=Smooth.None));
         annotation (Diagram(graphics));
+
       end Liquid;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -5303,6 +5370,7 @@ model.</p>
   rather than simply:<br>
   <code>material(redeclare Modelica.Blocks.Sources.Ramp source)</code></p>
   </html>"));
+
     end Species;
     extends Modelica.Icons.Package;
 
@@ -5319,6 +5387,7 @@ model.</p>
         face.p = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="normal");
+
       end Pressure;
 
       model Current "Specify current (measure pressure)"
@@ -5331,6 +5400,7 @@ model.</p>
         face.Ndot = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="normal");
+
       end Current;
 
       model Custom "Custom expressions"
@@ -5347,6 +5417,7 @@ model.</p>
           defaultComponentName="normal",
           Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>face.p</code> and/or <code>face.Ndot</code>.</p></html>"));
+
       end Custom;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -5363,6 +5434,7 @@ model.</p>
           face.mPhidot = {0,0} "Linear momentum in transverse directions";
           face.Qdot = 0 "Heat";
           annotation (defaultComponentName="normal");
+
         end PartialCondition;
 
         type ConditionType = enumeration(
@@ -5387,6 +5459,7 @@ model.</p>
         face.phi[orientation] = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="transverse");
+
       end Velocity;
 
       model Force "Specify shear force (measure velocity)"
@@ -5399,6 +5472,7 @@ model.</p>
         face.mPhidot[orientation] = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="transverse");
+
       end Force;
 
       model Custom "Custom expressions"
@@ -5416,6 +5490,7 @@ model.</p>
           defaultComponentName="normal",
           Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>face.phi[orientation]</code> and/or <code>face.mPhidot[orientation]</code>.</p></html>"));
+
       end Custom;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -5439,6 +5514,7 @@ model.</p>
             "Linear momentum in the other transverse direction";
           face.Qdot = 0 "Heat";
           annotation (defaultComponentName="transverse");
+
         end PartialCondition;
 
         type ConditionType = enumeration(
@@ -5463,6 +5539,7 @@ model.</p>
         face.T = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="thermal");
+
       end Temperature;
 
       model HeatRate "Specify heat flow rate (measure temperature)"
@@ -5477,6 +5554,7 @@ model.</p>
         face.Qdot = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="thermal");
+
       end HeatRate;
 
       model Custom "Custom expressions"
@@ -5493,6 +5571,7 @@ model.</p>
           defaultComponentName="thermal",
           Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p></html>"));
+
       end Custom;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -5509,6 +5588,7 @@ model.</p>
           face.Ndot = 0 "Material";
           face.mPhidot = {0,0} "Linear momentum in transverse directions";
           annotation (defaultComponentName="thermal");
+
         end PartialCondition;
 
         type ConditionType = enumeration(
@@ -5572,8 +5652,8 @@ model.</p>
 
       equation
         connect(u, u_final) annotation (Line(
-            points={{-110,5.55112e-16},{-62,-4.87687e-22},{-62,5.55112e-16},{
-                -20,5.55112e-16}},
+            points={{-110,5.55112e-16},{-62,-4.87687e-22},{-62,5.55112e-16},{-20,
+                5.55112e-16}},
             color={0,0,127},
             smooth=Smooth.None));
 
@@ -5582,6 +5662,7 @@ model.</p>
             color={0,0,127},
             smooth=Smooth.None));
         annotation (Icon(graphics));
+
       end PartialCondition;
 
     end BaseClasses;
@@ -5743,6 +5824,7 @@ model.</p>
           thickness=0.5,
           smooth=Smooth.None));
       annotation (Icon(graphics));
+
     end Subregion;
 
     model SubregionFlow
@@ -6005,6 +6087,7 @@ model.</p>
             thickness=0.5,
             smooth=Smooth.None));
         annotation (Diagram(graphics));
+
       end Gas;
 
       model Graphite "Condition for graphite"
@@ -6472,6 +6555,7 @@ model.</p>
   rather than simply:<br>
   <code>material(redeclare Modelica.Blocks.Sources.Ramp source)</code></p>
   </html>"));
+
     end Species;
 
     package Normal "Normal mechanical conditions"
@@ -6495,6 +6579,7 @@ model.</p>
   <li>The conservation of material is applied with the assumption that the cross sectional areas of the two
   interfaces are equal.</li>
   </ol></html>"));
+
       end CurrentAreic;
 
       model Force
@@ -6515,6 +6600,7 @@ model.</p>
   <li>The conservation of material is applied with the assumption that the cross sectional areas of the two
   interfaces are equal.</li>
   </ol></html>"));
+
       end Force;
 
       model Custom "Custom expressions"
@@ -6531,6 +6617,7 @@ model.</p>
           defaultComponentName="normal",
           Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>face.J</code> and/or <code>face.mPhidot_0</code>.</p></html>"));
+
       end Custom;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -6556,6 +6643,7 @@ model.</p>
           negative.Qdot = 0;
           positive.Qdot = 0;
           annotation (defaultComponentName="normal");
+
         end PartialCondition;
 
         type ConditionType = enumeration(
@@ -6581,6 +6669,7 @@ model.</p>
         negative.phi[orientation] - positive.phi[orientation] = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="transverse");
+
       end Velocity;
 
       model Force
@@ -6595,6 +6684,7 @@ model.</p>
         negative.mPhidot[orientation] = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="transverse");
+
       end Force;
 
       model Custom "Custom expressions"
@@ -6612,6 +6702,7 @@ model.</p>
           defaultComponentName="normal",
           Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>face.phi[orientation]</code> and/or <code>face.mPhidot[orientation]</code>.</p></html>"));
+
       end Custom;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -6646,6 +6737,7 @@ model.</p>
           negative.Qdot = 0;
           positive.Qdot = 0;
           annotation (defaultComponentName="transverse");
+
         end PartialCondition;
 
         type ConditionType = enumeration(
@@ -6671,6 +6763,7 @@ model.</p>
         negative.T - positive.T = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="thermal");
+
       end Temperature;
 
       model HeatRate
@@ -6686,6 +6779,7 @@ model.</p>
         negative.Qdot = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="thermal");
+
       end HeatRate;
 
       model Custom
@@ -6704,6 +6798,7 @@ model.</p>
           defaultComponentName="thermal",
           Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
     must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p></html>"));
+
       end Custom;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -6729,6 +6824,7 @@ model.</p>
           negative.mPhidot = {0,0};
           positive.mPhidot = {0,0};
           annotation (defaultComponentName="thermal");
+
         end PartialCondition;
 
         type ConditionType = enumeration(
@@ -6806,6 +6902,7 @@ model.</p>
             color={0,0,127},
             smooth=Smooth.None));
         annotation (Icon(graphics));
+
       end PartialCondition;
 
     end BaseClasses;
@@ -6908,6 +7005,7 @@ connected to <code>positive1</code>, as shown by Figure 1b.</p>
             thickness=0.5,
             visible=crossOver,
             smooth=Smooth.Bezier)}));
+
   end Router;
 
   record Environment "Environmental properties for a model"
@@ -7007,58 +7105,48 @@ The default global conditions and defaults will be used for the current simulati
       extends Modelica.Icons.Package;
       partial class Double "Icon for a two-connector boundary condition"
         // extends Names.Middle;
-        annotation (Icon(graphics={
-              Rectangle(
-                extent={{-100,40},{100,-40}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Line(
-                points={{-100,40},{100,40}},
-                pattern=LinePattern.None,
-                smooth=Smooth.None),
-              Line(
-                points={{-100,-40},{-100,40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash),
-              Text(
-                extent={{-150,-20},{150,20}},
-                textString="%name",
-                lineColor={0,0,0}),
-              Line(
-                points={{-100,-40},{100,-40}},
-                pattern=LinePattern.None,
-                smooth=Smooth.None),
-              Line(
-                points={{100,-40},{100,40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash)}));
+        annotation (Icon(graphics={Rectangle(
+                      extent={{-100,40},{100,-40}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Line(
+                      points={{-100,40},{100,40}},
+                      pattern=LinePattern.None,
+                      smooth=Smooth.None),Line(
+                      points={{-100,-40},{-100,40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash),Text(
+                      extent={{-150,-20},{150,20}},
+                      textString="%name",
+                      lineColor={0,0,0}),Line(
+                      points={{-100,-40},{100,-40}},
+                      pattern=LinePattern.None,
+                      smooth=Smooth.None),Line(
+                      points={{100,-40},{100,40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash)}));
 
       end Double;
 
       partial class Single "Icon for a single-connector boundary condition"
         // extends Names.Middle;
-        annotation (Icon(graphics={
-              Rectangle(
-                extent={{-100,40},{100,-40}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Line(
-                points={{-100,-40},{-100,40},{100,40},{100,-40}},
-                pattern=LinePattern.None,
-                smooth=Smooth.None),
-              Line(
-                points={{-100,-40},{100,-40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash),
-              Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+        annotation (Icon(graphics={Rectangle(
+                      extent={{-100,40},{100,-40}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Line(
+                      points={{-100,-40},{-100,40},{100,40},{100,-40}},
+                      pattern=LinePattern.None,
+                      smooth=Smooth.None),Line(
+                      points={{-100,-40},{100,-40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Single;
 
