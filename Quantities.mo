@@ -231,7 +231,7 @@ package Quantities "Quantities to represent physical properties"
     attribute.<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></p>
     <p id=\"fn2\">2. Capital \"L\" and \"M\" are not used to abbreviate length and mass because they are not recognized 
     in Dymola 7.4.<a href=\"#ref2\" title=\"Jump back to footnote 2 in the text.\">&#8629;</a></p>
-    
+    </small>    
     
     </small>
     </html>"));
