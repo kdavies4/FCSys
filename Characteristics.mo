@@ -329,6 +329,17 @@ package Characteristics
       annotation (Documentation(info="<html>
      <p>Notes:
      <ul>
+     <li>The specific electron mass (<code>m</code>) is also given by the
+     constants in the <a href=\"modelica://FCSys.Units\">Units</a> package:
+     <code>2*R_inf*h/(q*c*alpha^2)</code>
+  (from <a href=\"http://en.wikipedia.org/wiki/Electron_rest_mass\">http://en.wikipedia.org/wiki/Electron_rest_mass</a>,
+  with <code>q</code> representing a single particle).  This evaluates to  
+     <code>R_inf*(R_K*m*S)^2/(k_J*c^3*(pi*1e-7*s)^2)</code> or
+     <code>R_inf*25812.8074434^2/(k_J*c*(pi*1e-7*299792458)^2)</code> in terms of the base constants.</li>
+  <li>McBride and Gordon [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>] provide correlations for the transport
+  properties of e<sup>-</sup> gas.  However, they are not entered here, since they
+  contain only one temperature range (2000 to 5000 K) which is beyond the expected operating range of the model.</li>
+  <li>
      <li>The equation for the radius is the classical radius of an electron (see
   <a href=\"http://en.wikipedia.org/wiki/Classical_electron_radius\">http://en.wikipedia.org/wiki/Classical_electron_radius</a>).</li>
   <li>McBride and Gordon [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>] provide correlations for the transport

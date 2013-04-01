@@ -159,15 +159,101 @@ package Units "Constants and units of physical measure"
 
   package Bases "Sets of base constants and units"
     extends Modelica.Icons.Package;
+    record Gaussian
+      "<html>Base constants and units for Gaussian units (<i>k</i><sub>A</sub> = <i>k</i><sub>e</sub> = 1)</html>"
+      extends Base(final c=1,final R_K=25812.8074434/(299792458*1e-7));
+
+      annotation (Documentation(info="<html><p>Gaussian systems of units impose:
+  <ul>
+  <li><i>k</i><sub>A</sub> = 1 &rArr; <i>R</i><sub>K</sub>/<i>c</i> = 2&pi;/&alpha;</li>
+  <li><i>k</i><sub>e</sub> = 1 &rArr; <i>R</i><sub>K</sub>*<i>c</i> = 2&pi;/&alpha;</li>
+  </ul>
+  Together, <i>c</i> = 1 and <i>R</i><sub>K</sub> = 2&pi;/&alpha;</p>
+
+<p>The Gaussian conditions are not sufficient
+to fully establish the values of the base constants and units of the 
+<a href=\"modelica://FCSys.Units\">Units</a> package.  Gaussian units 
+encompass other systems of units.</p>
+
+<p>For more information, see the documentation in the
+  <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"));
+
+    end Gaussian;
+
+    record Hartree "Base constants and units for Hartree units"
+
+      extends Base(
+        final R_inf=pi*(299792458*1e-7/25812.8074434)^2,
+        final c=25812.8074434/(2*pi*299792458*1e-7),
+        final k_J=1/pi,
+        final R_K=2*pi);
+
+      // R_inf = pi*(299792458*1e-7/25812.8074434)^2
+
+      // **need to update R_inf
+      // Use:
+      // h = 2*pi
+      // q = 1
+      // k_B = 1
+      // 2*R_inf*h/(q*c*alpha^2) = 1
+
+      // 2*Phi_0 = 2*pi
+      // G_0*Phi_0 = 1
+      // k_B = 1
+      // 4*R_inf/alpha^2 = k_J
+
+      annotation (Documentation(info="<html><p>The candela (<code>'cd'</code>) 
+  is not final because luminous intensity is not included in Hartree units.</p>
+
+<p>For more information, see the documentation in the
+  <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
+            file="resources/scripts/units.mos" "Re-initialize the units."));
+
+    end Hartree;
+
+    record LH
+      "<html>Base constants and units for Lorentz-Heaviside units (&mu;<sub>0</sub> = &epsilon;<sub>0</sub> = 1)</html>"
+      extends Base(final c=1,final R_K=25812.8074434/(4*pi*299792458*1e-7));
+
+      annotation (Documentation(info="<html><p>Lorentz-Heaviside systems of units impose:
+  <ul>
+  <li>&mu;<sub>0</sub> = 1 &rArr; <i>R</i><sub>K</sub>/<i>c</i> = 1/(2&alpha;)</li>
+  <li>&epsilon;<sub>0</sub> = 1 &rArr; <i>R</i><sub>K</sub>*<i>c</i> = 1/(2&alpha;)</li>
+  </ul>
+  Together, <i>c</i> = 1 and <i>R</i><sub>K</sub> = 1/(2&alpha;)</p>
+
+<p>The Lorentz-Heaviside conditions are not sufficient
+to fully establish the values of the base constants and units of the 
+<a href=\"modelica://FCSys.Units\">Units</a> package.  Lorentz-Heaviside units 
+encompass other systems of units.</p>
+
+<p>For more information, see the documentation in the
+  <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"));
+
+    end LH;
+
+    record Stoney "Base constants and units for Stoney units"
+
+      extends Gaussian(final k_J=2e-7*299792458/25812.8074434);
+
+      annotation (Documentation(info="<html><p>The Rydberg constant (<code>R_inf</code>)
+  is not final because the <a href=\"modelica://FCSys.Units\">Units</a> package does not
+  include the gravitational constant.  The candela (<code>'cd'</code>) 
+  is not final because luminous intensity is not included in Stoney units.</p>
+
+<p>For more information, see the documentation in the
+  <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
+            file="resources/scripts/units.mos" "Re-initialize the units."));
+
+    end Stoney;
+
     record ScaledFC
       "Base constants and units that are well-scaled for fuel cell simulation and analysis"
-      extends U.Bases.Base(
+      extends Base(
         final R_inf=1e-1*10973731.568539,
         final c=1e-1*299792458,
         final R_K=1e10*25812.8074434,
-        final k_J=483597.870e9*sqrt(S*s/1e4)/m,
-        final k_F=1,
-        final R=1);
+        final k_J=483597.870e9*sqrt(S*s/1e4)/m);
       // Note:  k_J = 483597.870e9*sqrt(S*s/x)/m sets kg = x.
       annotation (Documentation(info="<html><p>The values of this record result in the following values for the base SI units
   (besides cd = 1, which is the default):
@@ -185,23 +271,20 @@ package Units "Constants and units of physical measure"
        <li>9.872e-5 atm &asymp; 1</li></ul></p>
 
 <p>For more information, see the documentation in the
-  <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
-          Commands(file="resources/scripts/units.mos"
-            "Re-initialize the units."));
+  <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
+            file="resources/scripts/units.mos" "Re-initialize the units."));
 
     end ScaledFC;
 
-    record AK
+    record SIAK
       "<html>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of A and K</html>"
 
-      extends U.Bases.Base(
+      extends Base(
         final R_inf=10973731.568539,
         final c=299792458,
         final R_K=96485.3365^2*25812.8074434,
         final k_J=483597.870e9*sqrt(S*s)/m,
-        final 'cd'=1,
-        final k_F=1,
-        final R=1);
+        final 'cd'=1);
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
   \"FCSys/resources/unit-systems.cdf\"):
   <ul>
@@ -210,23 +293,20 @@ package Units "Constants and units of physical measure"
   </ul></p>
 
 <p>For more information, see the documentation in the
-  <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
-          Commands(file="resources/scripts/units.mos"
-            "Re-initialize the units."));
+  <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
+            file="resources/scripts/units.mos" "Re-initialize the units."));
 
-    end AK;
+    end SIAK;
 
-    record Am
+    record SIAm
       "<html>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of A and m</html>"
 
-      extends U.Bases.Base(
+      extends Base(
         final R_inf=sqrt(8.3144621)*10973731.568539,
         final c=299792458/sqrt(8.3144621),
         final R_K=(96485.3365^2*25812.8074434)/8.3144621,
         final k_J=483597.870e9*sqrt(S*s)/m,
-        final 'cd'=1,
-        final k_F=1,
-        final R=1);
+        final 'cd'=1);
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
   \"FCSys/resources/unit-systems.cdf\"):
   <ul>
@@ -235,22 +315,19 @@ package Units "Constants and units of physical measure"
   </ul></p>
 
 <p>For more information, see the documentation in the
-  <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
-          Commands(file="resources/scripts/units.mos"
-            "Re-initialize the units."));
+  <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
+            file="resources/scripts/units.mos" "Re-initialize the units."));
 
-    end Am;
+    end SIAm;
 
-    record As
+    record SIAs
       "<html>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of A and s</html>"
-      extends U.Bases.Base(
+      extends Base(
         final R_inf=10973731.568539,
         final c=299792458/sqrt(8.3144621),
         final R_K=(96485.3365^2*25812.8074434)/sqrt(8.3144621),
         final k_J=483597.870e9*sqrt(S*s)/m,
-        final 'cd'=1,
-        final k_F=1,
-        final R=1);
+        final 'cd'=1);
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
   \"FCSys/resources/unit-systems.cdf\"):
   <ul>
@@ -259,22 +336,19 @@ package Units "Constants and units of physical measure"
   </ul></p>
 
   <p>For more information, see the documentation in the
-  <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
-          Commands(file="resources/scripts/units.mos"
-            "Re-initialize the units."));
+  <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
+            file="resources/scripts/units.mos" "Re-initialize the units."));
 
-    end As;
+    end SIAs;
 
-    record Kmol
+    record SIKmol
       "<html>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of K and mol</html>"
-      extends U.Bases.Base(
+      extends Base(
         final R_inf=10973731.568539,
         final c=299792458,
         final R_K=25812.8074434,
         final k_J=483597.870e9*sqrt(S*s)/m,
-        final 'cd'=1,
-        final k_F=1,
-        final R=1);
+        final 'cd'=1);
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
   \"FCSys/resources/unit-systems.cdf\"):
   <ul>
@@ -283,22 +357,19 @@ package Units "Constants and units of physical measure"
   </ul></p>
 
 <p>For more information, see the documentation in the
-  <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
-          Commands(file="resources/scripts/units.mos"
-            "Re-initialize the units."));
+  <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
+            file="resources/scripts/units.mos" "Re-initialize the units."));
 
-    end Kmol;
+    end SIKmol;
 
-    record Ks
+    record SIKs
       "<html>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of K and s</html>"
-      extends U.Bases.Base(
+      extends Base(
         final R_inf=10973731.568539,
         final c=96485.3365*299792458,
         final R_K=96485.3365^3*25812.8074434,
         final k_J=483597.870e9*sqrt(S*s)/m,
-        final 'cd'=1,
-        final k_F=1,
-        final R=1);
+        final 'cd'=1);
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
   \"FCSys/resources/unit-systems.cdf\"):
   <ul>
@@ -307,22 +378,19 @@ package Units "Constants and units of physical measure"
   </ul></p>
 
 <p>For more information, see the documentation in the
-  <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
-          Commands(file="resources/scripts/units.mos"
-            "Re-initialize the units."));
+  <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
+            file="resources/scripts/units.mos" "Re-initialize the units."));
 
-    end Ks;
+    end SIKs;
 
-    record mmol
+    record SImmol
       "<html>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of m and mol</html>"
-      extends U.Bases.Base(
+      extends Base(
         final R_inf=sqrt(8.3144621/96485.3365)*10973731.568539,
         final c=sqrt(96485.3365/8.3144621)*299792458,
         final R_K=(96485.3365*25812.8074434)/8.3144621,
         final k_J=483597.870e9*sqrt(S*s)/m,
-        final 'cd'=1,
-        final k_F=1,
-        final R=1);
+        final 'cd'=1);
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
   \"FCSys/resources/unit-systems.cdf\"):
   <ul>
@@ -331,22 +399,19 @@ package Units "Constants and units of physical measure"
   </ul></p>
 
 <p>For more information, see the documentation in the
-  <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
-          Commands(file="resources/scripts/units.mos"
-            "Re-initialize the units."));
+  <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
+            file="resources/scripts/units.mos" "Re-initialize the units."));
 
-    end mmol;
+    end SImmol;
 
-    record ms
+    record SIms
       "<html>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of m and s</html>"
-      extends U.Bases.Base(
+      extends Base(
         final R_inf=96485.3365*sqrt(8.3144621)*10973731.568539,
         final c=299792458/sqrt(8.3144621),
         final R_K=(96485.3365*25812.8074434)/8.3144621,
         final k_J=483597.870e9*sqrt(S*s)/m,
-        final 'cd'=1,
-        final k_F=1,
-        final R=1);
+        final 'cd'=1);
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
   \"FCSys/resources/unit-systems.cdf\"):
   <ul>
@@ -355,22 +420,19 @@ package Units "Constants and units of physical measure"
   </ul></p>
 
 <p>For more information, see the documentation in the
-  <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
-          Commands(file="resources/scripts/units.mos"
-            "Re-initialize the units."));
+  <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
+            file="resources/scripts/units.mos" "Re-initialize the units."));
 
-    end ms;
+    end SIms;
 
-    record mols
+    record SImols
       "<html>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of mol and s</html>"
-      extends U.Bases.Base(
+      extends Base(
         final R_inf=10973731.568539,
         final c=(96485.3365/8.3144621)^(1/3)*299792458,
         final R_K=(96485.3365*25812.8074434)/8.3144621,
         final k_J=483597.870e9*sqrt(S*s)/m,
-        final 'cd'=1,
-        final k_F=1,
-        final R=1);
+        final 'cd'=1);
       annotation (Documentation(info="<html><p>The values of the un-normalized SI base units are (see
   \"FCSys/resources/unit-systems.cdf\"):
   <ul>
@@ -379,50 +441,19 @@ package Units "Constants and units of physical measure"
   </ul></p>
 
 <p>For more information, see the documentation in the
-  <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
-          Commands(file="resources/scripts/units.mos"
-            "Re-initialize the units."));
+  <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
+            file="resources/scripts/units.mos" "Re-initialize the units."));
 
-    end mols;
-
-    record BasisGaussian
-      "<html>Base constants and units for Gaussian units (<i>k</i><sub>A</sub> = <i>k</i><sub>e</sub> = 1)</html>"
-      extends U.Bases.Base(final c=1, final R_K=2*pi/alpha);
-      annotation (Documentation(info="<html><p>Gaussian systems of units impose:
-  <ul>
-  <li><i>k</i><sub>A</sub> = 1 &rArr; <i>R</i><sub>K</sub>/<i>c</i> = 2&pi;/&alpha;</li>
-  <li><i>k</i><sub>e</sub> = 1 &rArr; <i>R</i><sub>K</sub>*<i>c</i> = 2&pi;/&alpha;</li>
-  </ul>
-  Together, <i>c</i> = 1 and <i>R</i><sub>K</sub> = 2&pi;/&alpha;</p>
-
-<p>For more information, see the documentation in the
-  <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"));
-
-    end BasisGaussian;
-
-    record BasisLH
-      "<html>Base constants and units for Lorentz-Heaviside units (&mu;<sub>0</sub> = &epsilon;<sub>0</sub> = 1)</html>"
-      extends U.Bases.Base(final c=1, final R_K=1/(2*U.alpha));
-      annotation (Documentation(info="<html><p>Lorentz-Heaviside systems of units impose:
-  <ul>
-  <li>&mu;<sub>0</sub> = 1 &rArr; <i>R</i><sub>K</sub>/<i>c</i> = 1/(2&alpha;)</li>
-  <li>&epsilon;<sub>0</sub> = 1 &rArr; <i>R</i><sub>K</sub>*<i>c</i> = 1/(2&alpha;)</li>
-  </ul>
-  Together, <i>c</i> = 1 and <i>R</i><sub>K</sub> = 1/(2&alpha;)</p>
-
-<p>For more information, see the documentation in the
-  <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"));
-
-    end BasisLH;
+    end SImols;
 
     record Base "Base constants and units"
 
       final constant Q.Angle rad=1 "radian";
       // SI unit of rotation or planar angle
-      // This relation is from [BIPM2006, Table 3].  The radian is currently
-      // not adjustable because BIPM doesn't explicitly use angle in the
+      // This condition is required by BIPM [BIPM2006, Table 3].  It cannot
+      // be relaxed  because BIPM doesn't explicitly use angle in the
       // definitions of Hz, sr, etc. and NIST doesn't explicitly use angle
-      // in the relations for R_inf, c_3_nu, etc [NIST2010].
+      // in the relations for R_inf, c_3_nu, etc. [NIST2010].
       constant Q.Wavenumber R_inf=1
         "<html>Rydberg constant (R<sub>&infin;</sub>)</html>";
       // The SI unit length (meter) is inversely proportional to this value,
@@ -449,28 +480,50 @@ package Units "Constants and units of physical measure"
       // emitted by a light source in a particular direction per unit solid
       // angle, based on the luminosity function, a standardized model of the
       // sensitivity of the human eye."
-      constant Q.Number k_F=1 "<html>Faraday constant (k<sub>F</sub>)</html>";
-      // The unit of substance (mole) is inversely proportional to this value,
-      // which should be increased for larger particle numbers.  If k_F is set
-      // to 1, then charge is considered an to be amount of substance.
-      constant Q.Number R=1 "gas constant";
-      // The unit of temperature (kelvin) is inversely proportional to this
-      // value, which should be increased for larger temperature numbers.  If R
-      // is set to 1, then temperature is considered to be a potential.
+      final constant Q.Number k_F=1
+        "<html>Faraday constant (k<sub>F</sub>)</html>";
+      // The unit of substance (mole) is inversely proportional to this value.
+      // The Faraday constant is not adjustable because the equations of FCSys
+      // require that it is one, which means that charge is considered to be
+      // an amount of substance.
+      final constant Q.Number R=1 "gas constant";
+      // The unit of temperature (kelvin) is inversely proportional to this value.
+      // The gas constant is not adjustable because the equations of FCSys
+      // require that it is one, which means that temperature is considered to
+      // be a potential.
       annotation (Documentation(info="<html><p>For more information, see the notes in the Modelica code and the documentation in the
-  <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
-          Commands(file="resources/scripts/units.mos"
-            "Re-initialize the units."));
+  <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
+            file="resources/scripts/units.mos" "Re-initialize the units."));
 
     end Base;
-    annotation (Documentation(info="<html><p>The International System of Units (SI)-like
-  sets in this package are named by listing (in alphabetical order) the two units that are
-  <b>not</b> normalized for the sake of setting the Faraday and gas constants equal to one.
-  There are eight possible sets of this type.</p>
+    annotation (Documentation(info="<html>  
+  <p><a href=\"modelica://FCSys\">FCys</a> requires that the Faraday and gas constants are
+  normalized to one.  The structure of the <a href=\"modelica://FCSys.Units\">Units</a> package allows
+  those constants to be relaxed, but the models in <a href=\"modelica://FCSys\">FCSys</a> 
+  generally do not.</p>
 
-<p>For more information, see the documentation in the
-  <a href=\"modelica://FCSys.Units\">FCSys.Units</a> package.</p></html>"),
-        Commands(file="resources/scripts/units.mos" "Re-initialize the units."));
+  <p>Some natural systems of units
+  are not compatible with <a href=\"modelica://FCSys\">FCys</a>.
+  Since the Faraday and gas constants
+  are both normalized, it follows that <code>k_B = q</code>.  This is not 
+  the case for the Planck, Rydberg, and Natural systems of units 
+  [<a href=\"http://en.wikipedia.org/wiki/Natural_units\">http://en.wikipedia.org/wiki/Natural_units</a>].</p>
+
+  <p>The quasi-SI
+  sets in this package are named by listing (in alphabetical order) the two units that are
+  <i>not</i> normalized for the sake of setting the Faraday and gas constants equal to one.
+  There are eight possible sets of this type (<a href=\"modelica://FCSys.Units.Bases.AK\">AK</a>,
+  <a href=\"modelica://FCSys.Units.Bases.SIAm\">SIAm</a>,
+  <a href=\"modelica://FCSys.Units.Bases.SIAs\">SIAs</a>,
+  <a href=\"modelica://FCSys.Units.Bases.SIKmol\">SIKmol</a>,
+  <a href=\"modelica://FCSys.Units.Bases.SIKs\">SIKs</a>,
+  <a href=\"modelica://FCSys.Units.Bases.SImmol\">SImmol</a>
+  <a href=\"modelica://FCSys.Units.Bases.SIms\">SIms</a>,
+  <a href=\"modelica://FCSys.Units.Bases.SImols\">SImols</a>).</p>
+  
+  <p>For more information, see the documentation in the
+  <a href=\"modelica://FCSys.Units\">Units</a> package.</p></html>"), Commands(
+          file="resources/scripts/units.mos" "Re-initialize the units."));
 
   end Bases;
 
@@ -525,7 +578,7 @@ package Units "Constants and units of physical measure"
   // ------------------------------------------------------------------------
   // Base physical constants and units
 
-  replaceable constant Bases.ScaledFC base constrainedby Bases.Base
+  replaceable constant Bases.Hartree base constrainedby Bases.Base
     "Scalable base constants and units";
   // Note:  The base constants and units may be replaced to suit the scale
   // of the physical system.
@@ -852,15 +905,6 @@ package Units "Constants and units of physical measure"
     be set equal to one in the current version International System of Units (SI)
     [<a href=\"modelica://FCSys.UsersGuide.References\">BIPM2006</a>].</p>
 
-  <p>Note that the common \"natural\" units systems (Planck, Stoney, Hartree, Rydberg,
-  or Natural) cannot be implemented given the constraints that the gas and
-  Faraday constants equal one.  Since these systems set the Boltzmann constant equal
-  to one, the Planck constant must equal the von Klitzing constant.  That is not the
-  case for any of these systems of units
-  (<a href=\"http://en.wikipedia.org/wiki/Natural_units\">http://en.wikipedia.org/wiki/Natural_units</a>).
-  The structure of <a href=\"modelica://FCSys.Units\">FCSys.Units</a> allows the constraints on the Faraday and gas constants
-  to be relaxed, but the models in <a href=\"modelica://FCSys\">FCSys</a> generally do not.</p>
-
 // **end edit
 
   <p>The <a href=\"modelica://FCSys.Units\">Units</a> package is abbreviated as <code>U</code> for convenience throughout 
@@ -1007,14 +1051,17 @@ first section of the Modelica definition of this package establishes mathematica
 
 <p>In Dymola the units, constants, and prefixes are identically defined in the workspace so that 
 they can be used to convert values to numbers for display.  When <a href=\"modelica://FCSys\">FCSys</a> is 
-loaded from the <code>FCSys/load.mos</code> script, the <a href=\"modelica://FCSys.Units.Evaluate\">Units.Evaluate</a>
-model is simulated.  It simply evaluates all the units, constants, and prefixes from the 
+loaded from the \"FCSys/load.mos\" script or when the \"Re-initialize the units\" command is used 
+(available in Dymola from the <a href=\"modelica://FCSys.Units\">Units</a> package or any subpackage), 
+the \"FCSys/resources/scripts/units.mos\"
+script is run.  It causes the <a href=\"modelica://FCSys.Units.Evaluate\">Units.Evaluate</a>
+model to be translated, which simply evaluates all the units, constants, and prefixes from the 
 <a href=\"modelica://FCSys.Units.Evaluate\">Units</a> package.  The translated copy is saved as
-<code>FCSys/resources/scripts/units-values.mos</code> for convenience.  Then the 
-<code>FCSys/resources/scripts/units.mos</code> script uses the values of the units, constants, and 
-prefixes to establish unit conversions.  This unit conversions may include offsets.  The script
+\"FCSys/resources/scripts/units-values.mos\" for convenience.  Then the 
+units.mos script uses the values of the units, constants, and 
+prefixes to establish unit conversions.  These unit conversions may include offsets.  The script
 also sets the default display units.
-A spreadsheet (<code>FCSys/resources/quantities.xls</code> is available to help 
+A spreadsheet (\"FCSys/resources/quantities.xls\") is available to help 
 maintain the quantities, default units, and the <code>units.mos</code> script.
 
   <p>This package also contains functions (e.g., <a href=\"modelica://FCSys.Units.to_degC\">to_degC</a>) that
