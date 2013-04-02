@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Characteristics.BaseClasses.Characteristic</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-4-1">
+<meta name="date" content="2013-4-2">
 <meta name="description" content="Record for thermodynamic and resistive properties">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +18,7 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -173,6 +173,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>Fluidity as a function of temperature (&zeta;)</td></tr>
 </table>
 <p>
+
 <h3>Types and constants</h3>
 
 <pre><font color="blue">constant </font>String formula <font color="darkgreen">&quot;Chemical formula&quot;</font>;</pre><p>
@@ -222,6 +223,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Characteristics.BaseClasses.Characteristic.alphaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.alpha" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.Characteristic.alpha"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.alpha</h2>
 <b>Base transport coefficient as a function of temperature (&alpha;)</b>
+
 <h3>Information</h3>
 
 <p>This function is based on the kinetic theory of gases with the rigid-sphere ("billiard-ball")
@@ -233,20 +235,25 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Present1958</a>, p. 41].</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">TemperatureAbsolute</a></td><td>T</td><td>298.15*U.K</td><td>Temperature [l2.m/(N.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Resistivity</a></td><td>alpha</td><td>Base transport coefficient [l.T/N]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -266,6 +273,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Characteristics.BaseClasses.Characteristic.alphaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.tau" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.Characteristic.tau"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.tau</h2>
 <b>Base exchange coefficient as a function of temperature and specific volume (&tau;)</b>
+
 <h3>Information</h3>
 
 <p>This is the mean time between collisions**
@@ -279,7 +287,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   [<a href="FCSys_UsersGuide.html#FCSys.UsersGuide.References">Present1958</a>, p. 41].</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -287,13 +297,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">VolumeSpecificAbsolute</a></td><td>v</td><td>298.15*U.K/U.atm</td><td>Specific volume [l3/N]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>tau</td><td>Base exchange coefficient [T]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -307,7 +320,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <font color="blue">algorithm </font>
   tau := 2*v*<font color="red">sqrt</font>(m/(U.pi*T))/(3*U.pi*d^2*U.q);
-
 <font color="blue">end </font>tau;
 </pre>
 <hr>
@@ -315,6 +327,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Characteristics.BaseClasses.Characteristic.alphaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.c_p" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.Characteristic.c_p"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.c_p</h2>
 <b>Isobaric specific heat capacity as a function of temperature and pressure (<i>c</i><sub><i>p</i></sub>)</b>
+
 <h3>Information</h3>
 
 <p>For an ideal gas, this function is independent of pressure
@@ -322,7 +335,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -330,13 +345,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">CapacityThermalSpecific</a></td><td>c_p</td><td>Isobaric specific heat capacity [1]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -350,7 +368,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">Q.CapacityThermalSpecific</a> c_p <font color="darkgreen">&quot;Isobaric specific heat capacity&quot;</font>;
 
 <font color="blue">protected </font>
-  
+
     &quot;Isobaric specific heat capacity at reference pressure as a function of temperature&quot;</font>
     <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial">FCSys.BaseClasses.Utilities.Polynomial</a>;
 
@@ -416,6 +434,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Characteristics.BaseClasses.Characteristic.alphaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.c_v" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.Characteristic.c_v"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.c_v</h2>
 <b>Isochoric specific heat capacity as a function of temperature and pressure (<i>c</i><sub><i>v</i></sub>)</b>
+
 <h3>Information</h3>
 
 <p>For an ideal gas, this function is independent of pressure
@@ -423,7 +442,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -431,13 +452,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.CapacityThermalSpecific">CapacityThermalSpecific</a></td><td>c_v</td><td>Isochoric specific heat capacity [1]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -469,11 +493,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Characteristics.BaseClasses.Characteristic.alphaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.dp_Tv" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.Characteristic.dp_Tv"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.dp_Tv</h2>
 <b>Derivative of pressure as defined by <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.p_Tv">p_Tv</a>()</b>
+
 <h3>Information</h3>
 
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -483,13 +510,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>dv</td><td>0</td><td>Derivative of specific volume [l3/N]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Pressure</a></td><td>dp</td><td>Derivative of pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -521,11 +551,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Characteristics.BaseClasses.Characteristic.alphaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.dv_Tp" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.Characteristic.dv_Tp"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.dv_Tp</h2>
 <b>Derivative of specific volume as defined by <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.v_Tp">v_Tp</a>()</b>
+
 <h3>Information</h3>
 
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -535,13 +568,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Pressure">Pressure</a></td><td>dp</td><td>0</td><td>Derivative of pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>dv</td><td>Derivative of specific volume [l3/N]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -573,6 +609,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Characteristics.BaseClasses.Characteristic.alphaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.eta" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.Characteristic.eta"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.eta</h2>
 <b>Material resistivity as a function of temperature and pressure (&eta;)</b>
+
 <h3>Information</h3>
 
 <p>"**Dynamic compressibility" is defined here as the reciprocal of the volume,
@@ -581,7 +618,9 @@ second, or bulk dynamic viscosity and specific volume (see
 <p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -589,13 +628,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityMaterial">ResistivityMaterial</a></td><td>eta</td><td>Material resistivity [T/l2]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -616,11 +658,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Characteristics.BaseClasses.Characteristic.alphaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.g" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.Characteristic.g"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.g</h2>
 <b>Gibbs potential as a function of temperature and pressure</b>
+
 <h3>Information</h3>
 
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -629,13 +674,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses.ReferenceEnthalpy">ReferenceEnthalpy</a></td><td>referenceEnthalpy</td><td>ReferenceEnthalpy.EnthalpyOf&hellip;</td><td>Choice of enthalpy reference</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>g</td><td>Gibbs potential [l2.m/(N.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -663,6 +711,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Characteristics.BaseClasses.Characteristic.alphaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.h" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.Characteristic.h"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.h</h2>
 <b>Specific enthalpy as a function of temperature and pressure</b>
+
 <h3>Information</h3>
 
 <p>For an ideal gas, this function is independent of pressure
@@ -670,7 +719,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     <p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -679,13 +730,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Characteristics_BaseClasses.html#FCSys.Characteristics.BaseClasses.ReferenceEnthalpy">ReferenceEnthalpy</a></td><td>referenceEnthalpy</td><td>ReferenceEnthalpy.EnthalpyOf&hellip;</td><td>Choice of enthalpy reference</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>h</td><td>Specific enthalpy [l2.m/(N.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -701,7 +755,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Q.Potential</a> h <font color="darkgreen">&quot;Specific enthalpy&quot;</font>;
 
 <font color="blue">protected </font>
-  
+
     &quot;Return h0 as a function of T using one of the temperature intervals&quot;</font>
   annotation(derivative=<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.h.dh0_i">dh0_i</a>);
     <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial">FCSys.BaseClasses.Utilities.Polynomial</a>;
@@ -800,6 +854,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Characteristics.BaseClasses.Characteristic.alphaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.beta" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.Characteristic.beta"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.beta</h2>
 <b>Dynamic compressibility as a function of temperature and pressure (&beta;)</b>
+
 <h3>Information</h3>
 
 <p>"**Dynamic compressibility" is defined here as the reciprocal of the volume,
@@ -808,7 +863,9 @@ second, or bulk dynamic viscosity and specific volume (see
 <p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -816,13 +873,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Real</td><td>beta</td><td>Kinematic compressibility</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -845,6 +905,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Characteristics.BaseClasses.Characteristic.alphaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.mu" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.Characteristic.mu"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.mu</h2>
 <b>Mobility as a function of temperature and pressure (&mu;)</b>
+
 <h3>Information</h3>
 
 <p>"**Dynamic compressibility" is defined here as the reciprocal of the volume,
@@ -853,7 +914,9 @@ second, or bulk dynamic viscosity and specific volume (see
 <p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -861,13 +924,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Mobility">Mobility</a></td><td>mu</td><td>Mobility [N.T/m]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -889,6 +955,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Characteristics.BaseClasses.Characteristic.alphaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.nu" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.Characteristic.nu"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.nu</h2>
 <b>Thermal independence as a function of temperature and specific volume (&nu;)</b>
+
 <h3>Information</h3>
 
 <p>"**Dynamic compressibility" is defined here as the reciprocal of the volume,
@@ -897,7 +964,9 @@ second, or bulk dynamic viscosity and specific volume (see
 <p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -905,13 +974,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecific">VolumeSpecific</a></td><td>v</td><td>298.15*U.K/U.atm</td><td>Specific volume [l3/N]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.TimeAbsolute">TimeAbsolute</a></td><td>nu</td><td>Thermal independence [T]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -932,6 +1004,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Characteristics.BaseClasses.Characteristic.alphaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.p_Tv" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.Characteristic.p_Tv"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.p_Tv</h2>
 <b>Pressure as a function of temperature and specific volume</b>
+
 <h3>Information</h3>
 
 <p>If the species is incompressible, then <i>p</i>(<i>T</i>, <i>v</i>) is undefined,
@@ -940,7 +1013,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p>The derivative of this function is <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.dp">dp</a>().</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -948,13 +1023,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">VolumeSpecificAbsolute</a></td><td>v</td><td>298.15*U.K/U.atm</td><td>Specific volume [l3/N]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>Pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -989,11 +1067,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Characteristics.BaseClasses.Characteristic.alphaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.theta" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.Characteristic.theta"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.theta</h2>
 <b>Thermal resistivity as a function of temperature and pressure (&theta;)</b>
+
 <h3>Information</h3>
 
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -1001,13 +1082,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Resistivity">Resistivity</a></td><td>theta</td><td>Thermal resistivity [l.T/N]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -1030,11 +1114,14 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Characteristics.BaseClasses.Characteristic.alphaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.s" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.Characteristic.s"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.s</h2>
 <b>Specific entropy as a function of temperature and pressure</b>
+
 <h3>Information</h3>
 
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -1042,13 +1129,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>s</td><td>Specific entropy [1]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -1062,7 +1152,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> s <font color="darkgreen">&quot;Specific entropy&quot;</font>;
 
 <font color="blue">protected </font>
-  
+
     &quot;Return s0 as a function of T using one of the temperature intervals&quot;</font>
   annotation(derivative=<a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.s.ds0_i">ds0_i</a>);
     <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities_Polynomial.html#FCSys.BaseClasses.Utilities.Polynomial.F">FCSys.BaseClasses.Utilities.Polynomial.F</a>;
@@ -1163,13 +1253,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Characteristics.BaseClasses.Characteristic.alphaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.v_Tp" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.Characteristic.v_Tp"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.v_Tp</h2>
 <b>Specific volume as a function of temperature and pressure</b>
+
 <h3>Information</h3>
 
 <p>The derivative of this function is
   <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.dv">dv</a>().</p><p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -1177,13 +1270,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.VolumeSpecificAbsolute">VolumeSpecificAbsolute</a></td><td>v</td><td>Specific volume [l3/N]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -1212,6 +1308,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Characteristics.BaseClasses.Characteristic.alphaI.png" alt="FCSys.Characteristics.BaseClasses.Characteristic.zeta" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.Characteristic.zeta"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic">FCSys.Characteristics.BaseClasses.Characteristic</a>.zeta</h2>
 <b>Fluidity as a function of temperature (&zeta;)</b>
+
 <h3>Information</h3>
 
 <p>Note that fluidity is defined as the reciprocal of viscosity&mdash;specifically dynamic viscosity
@@ -1219,7 +1316,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -1227,13 +1326,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>zeta</td><td>Fluidity [l.T/m]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -1256,7 +1358,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><a name="FCSys.Characteristics.BaseClasses.Characteristic.h.dh0_i"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.h">FCSys.Characteristics.BaseClasses.Characteristic.h</a>.dh0_i</h2>
 
 <b>Derivative of h0_i</b><p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -1265,13 +1369,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Temperature</a></td><td>dT</td><td>&nbsp;</td><td>Derivative of temperature [l2.m/(N.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Potential">Potential</a></td><td>dh0</td><td>Derivative of specific enthalpy at reference pressure [l2.m/(N.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -1298,7 +1405,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><a name="FCSys.Characteristics.BaseClasses.Characteristic.s.ds0_i"></a><a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSys.Characteristics.BaseClasses.Characteristic.s">FCSys.Characteristics.BaseClasses.Characteristic.s</a>.ds0_i</h2>
 
 <b>Derivative of s0_i</b><p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -1307,13 +1416,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Temperature">Temperature</a></td><td>dT</td><td>&nbsp;</td><td>Derivative of temperature [l2.m/(N.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>ds0</td><td>Derivative of specific entropy at given temperature and reference pressure [1]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -1340,7 +1452,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Apr  1 15:12:32 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Apr  2 18:54:18 2013.
 </div>
 </body>
 </html>

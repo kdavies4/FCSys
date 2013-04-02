@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Assemblies.Cells</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-4-1">
+<meta name="date" content="2013-4-2">
 <meta name="description" content="Single-cell PEMFC models">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -241,7 +241,6 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell"
   <font color="red">connect</font>(caFP.xPositive, caFPX);
   <font color="red">connect</font>(caFP.yNegative, caFPNegY);
   <font color="red">connect</font>(caFP.yPositive, caFPPosY);
-
 <font color="blue">end </font>Cell;
 </pre>
 <hr>
@@ -385,11 +384,11 @@ Extends from <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">C
 
   <font color="darkgreen">// Material transport</font>
   <font color="darkgreen">/*
-  parameter Q.NumberAbsolute &#39;k_alpha_Xi_C+&#39;(
+  parameter Q.NumberAbsolute &#39;k_alpha_beta_C+&#39;(
     final min=0,
     final nominal=1) = 1 &quot;For C (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;C</sub>)&quot;
     annotation (Dialog(tab=&quot;Calibration factors&quot;, group=&quot;Material transport&quot;));
-  parameter Q.NumberAbsolute &#39;k_alpha_Xi_C+&#39;19HF37O5S-(
+  parameter Q.NumberAbsolute &#39;k_alpha_beta_C+&#39;19HF37O5S-(
     final min=0,
     final nominal=1) = 1
     &quot;For C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S (<i>k</i><sub>&alpha; <i>N&#775;</i> &nbsp;C19HF37O5S-</sub>)&quot;
@@ -886,7 +885,6 @@ Extends from <a href="FCSys_BaseClasses_Icons.html#FCSys.BaseClasses.Icons.Cell"
   <font color="red">connect</font>(caFP.yPositive, caFPPosY);
   <font color="red">connect</font>(caFP.yNegative, caFPNegY);
   <font color="red">connect</font>(anFPNegY, anFP.yNegative);
-
 <font color="blue">end </font>IntegratedCell;
 </pre>
 <hr>
@@ -965,7 +963,7 @@ Extends from <a href="FCSys_Assemblies_Cells.html#FCSys.Assemblies.Cells.Cell">C
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:46:41 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Apr  2 18:52:18 2013.
 </div>
 </body>
 </html>

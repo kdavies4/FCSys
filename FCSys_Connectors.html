@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Connectors</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-4-1">
+<meta name="date" content="2013-4-2">
 <meta name="description" content="Declarative and imperative connectors">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -115,13 +115,16 @@
 
     <p><b>Relation to Thermodynamics:</b></p>
 
-    <p>In order to describe the dynamic behavior of a physical system, a model must include conservation laws or rate balances.  These
-    equations involve the storage and flow of extensive quantities within (among species) and into the system.  In chemical/thermal systems, the extensive
+    <p>In order to describe the dynamic behavior of a physical system, a model must include conservation
+    laws or rate balances.  These
+    equations involve the storage and flow of extensive quantities within (among species) and into the system.
+    In chemical/thermal systems, the extensive
     quantities of interest are particle number (or mass) and energy.
-    For the sake of simplicity, momentum will be excluded from the present discussion; assume that the fluid is macroscopically stagnant.
+    For the sake of simplicity, momentum will be excluded from the present discussion; assume that the fluid is
+    macroscopically stagnant.
     Also assume that there is only one inlet or outlet to the system.
-    In terms of mathematics, we have introduced four variables (2 flows and 2 quantities) but only two equations (material and energy
-    conservation).</p>
+    In terms of mathematics, we have introduced four variables (2 flows and 2 quantities) but only two equations
+    (material and energy conservation).</p>
 
     <p>Two additional equations involve flow rates; these are transport equations with spatial nature&mdash;separate from the temporal
     conservation equations.  Empirical evidence indicates that the
@@ -202,6 +205,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>Connector to provide information about a species in chemical reaction</td></tr>
 <tr><td><img src="images/FCSys.Connectors.ChemicalBusS.png" alt="FCSys.Connectors.ChemicalBus" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">ChemicalBus</a>
 </td><td>Bus of <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a>, <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a>, and <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a> connectors</td></tr>
+<tr><td><img src="images/FCSys.Connectors.ChemicalBusS.png" alt="FCSys.Connectors.ChemicalBusInternal" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBusInternal">ChemicalBusInternal</a>
+</td><td>Internal bus of <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a>, <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a>, and <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a> connectors</td></tr>
 <tr><td><img src="images/FCSys.Connectors.ChemicalS.png" alt="FCSys.Connectors.Chemical" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a>
 </td><td>Connector to exchange material while advecting linear momentum and thermal energy</td></tr>
 <tr><td><img src="images/FCSys.Connectors.FaceBusS.png" alt="FCSys.Connectors.FaceBus" width=20  height=20 align=top>&nbsp;<a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a>
@@ -366,6 +371,38 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a> chemical <font color="darkgreen">&quot;Physical subconnector for the reaction&quot;</font>;
 
 <font color="blue">end </font>ChemicalBus;
+</pre>
+<hr>
+
+<h2><img src="images/FCSys.Connectors.ChemicalBusI.png" alt="FCSys.Connectors.ChemicalBusInternal" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Connectors.ChemicalBusInternal"></a><a href="FCSys_Connectors.html#FCSys.Connectors">FCSys.Connectors</a>.ChemicalBusInternal</h2>
+<b>Internal bus of <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a>, <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a>, and <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a> connectors</b><p>
+<img src="images/FCSys.Connectors.ChemicalBusInternalD.png" alt="FCSys.Connectors.ChemicalBusInternal">
+
+<h3>Information</h3>
+
+<p>This is copy of the <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">ChemicalBus</a> connector, except that it
+    has a smaller icon and a default <code>protected</code> prefix.  Please see that connector for more information.</p><p>
+
+<p>
+
+<h3>Contents</h3>
+
+<p>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a></td><td>chemical</td><td>Physical subconnector for the reaction</td></tr>
+</table>
+<p>
+
+<h3>Modelica definition</h3>
+
+<pre>
+<font color="blue">expandable connector</font> ChemicalBusInternal <font color="darkgreen">
+  &quot;Internal bus of <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a>, <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a>, and <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalOutput">ChemicalOutput</a> connectors&quot;</font>
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Chemical">Chemical</a> chemical <font color="darkgreen">&quot;Physical subconnector for the reaction&quot;</font>;
+
+<font color="blue">end </font>ChemicalBusInternal;
 </pre>
 <hr>
 
@@ -1098,7 +1135,7 @@ Extends from Real.
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:48:45 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Apr  2 18:54:12 2013.
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-4-1">
+<meta name="date" content="2013-4-2">
 <meta name="description" content="Control volumes with multi-species transport, exchange, and storage">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -192,11 +192,13 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
   <font color="darkgreen">// Note:  The additional condition (not gas.inclH2O) prevents a singularity</font>
   <font color="darkgreen">// if water is included as gas, liquid, and in ionomer.</font>
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">Connectors.ChemicalBus</a> CondEvap <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBusInternal">Connectors.ChemicalBusInternal</a> CondEvap <font color="darkgreen">
     &quot;Connector for H2O condensation and evaporation&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">Connectors.ChemicalBus</a> HOR <font color="darkgreen">&quot;Connector for hydrogen oxidation reaction&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">Connectors.ChemicalBus</a> Hydration <font color="darkgreen">&quot;Connector for ionomer hydration and drying&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">Connectors.ChemicalBus</a> ORR <font color="darkgreen">&quot;Connector for oxygen reduction reaction&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBusInternal">Connectors.ChemicalBusInternal</a> HOR <font color="darkgreen">
+    &quot;Connector for hydrogen oxidation reaction&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBusInternal">Connectors.ChemicalBusInternal</a> Hydration <font color="darkgreen">
+    &quot;Connector for ionomer hydration and drying&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBusInternal">Connectors.ChemicalBusInternal</a> ORR <font color="darkgreen">&quot;Connector for oxygen reduction reaction&quot;</font>;
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Chemical reactions</font>
@@ -415,8 +417,9 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <font color="blue">protected </font>
   <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">Reaction</a> condEvap(formulas={&quot;H2O&quot;,&quot;H2O&quot;}) <font color="blue">if </font>inclReact<font color="blue"> and </font>(gas.inclH2O<font color="blue"> and </font>
     liquid.inclH2O) <font color="darkgreen">&quot;H2O condensation and evaporation&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBus">Connectors.ChemicalBus</a> CondEvap <font color="darkgreen">
+  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalBusInternal">Connectors.ChemicalBusInternal</a> CondEvap <font color="darkgreen">
     &quot;Connector for H2O condensation and evaporation&quot;</font>;
+
 <font color="blue">equation </font>
   <font color="darkgreen">// Chemical interactions (not shown graphically)</font>
 
@@ -493,7 +496,7 @@ Extends from <a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseCla
 <font color="blue">model</font> PhaseBoundary <font color="darkgreen">
   &quot;Phase boundary (adapter between Amagat and Dalton mixtures)&quot;</font>
 
-  <font color="darkgreen">//extends FCSys.BaseClasses.Icons.Names.Top7;</font>
+  <font color="darkgreen">// extends FCSys.BaseClasses.Icons.Names.Top7;</font>
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.InertAmagat">Connectors.InertAmagat</a> inertA(<font color="blue">final </font>n_lin=n_lin) <font color="darkgreen">
     &quot;Connector for volume, linear momentum, and heat&amp;mdash;with Amagat&#39;s law&quot;</font>;
@@ -695,7 +698,7 @@ Extends from <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">Reaction<
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Sun Mar 31 11:48:05 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Apr  2 18:53:38 2013.
 </div>
 </body>
 </html>

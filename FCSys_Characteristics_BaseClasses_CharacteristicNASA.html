@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Characteristics.BaseClasses.CharacteristicNASA</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-4-1">
+<meta name="date" content="2013-4-2">
 <meta name="description" content="Thermodynamic record with transport properties based on NASA CEA">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +18,7 @@
 
 <h3>Table of Contents</h3>
 
-    <ul>
+<ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -123,6 +123,7 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
 </td><td>Specific volume as a function of temperature and pressure</td></tr>
 </table>
 <p>
+
 <h3>Types and constants</h3>
 
 <pre><font color="blue">constant </font><a href="FCSys_Quantities.html#FCSys.Quantities.TemperatureAbsolute">Q.TemperatureAbsolute</a> T_lim_zeta_theta[:]={0,Modelica.Constants.inf} <font color="darkgreen">
@@ -136,20 +137,25 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
 <h2><a name="FCSys.Characteristics.BaseClasses.CharacteristicNASA.fromNASAViscosity"></a><a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA">FCSys.Characteristics.BaseClasses.CharacteristicNASA</a>.fromNASAViscosity</h2>
 
 <b>Return constants for fluidity given NASA CEA constants for viscosity</b><p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Real</td><td>b_eta[4]</td><td>&nbsp;</td><td>NASA CEA constants for viscosity</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Real</td><td>b_zeta[4]</td><td>Constants for fluidity</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -170,20 +176,25 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
 <h2><a name="FCSys.Characteristics.BaseClasses.CharacteristicNASA.fromNASAThermalConductivity"></a><a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA">FCSys.Characteristics.BaseClasses.CharacteristicNASA</a>.fromNASAThermalConductivity</h2>
 
 <b>Return constants for thermal resistivity given NASA CEA constants for thermal conductivity</b><p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <tr><td>Real</td><td>b_lambda[4]</td><td>&nbsp;</td><td>NASA CEA constants for thermal conductivity</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>Real</td><td>b_theta[4]</td><td>Constants for thermal resistivity</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -204,6 +215,7 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
 <h2><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaI.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.zeta" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.CharacteristicNASA.zeta"></a><a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA">FCSys.Characteristics.BaseClasses.CharacteristicNASA</a>.zeta</h2>
 <b>Fluidity as a function of temperature (&zeta;)</b>
+
 <h3>Information</h3>
 
 <p>This function is based on based on NASA CEA
@@ -213,7 +225,9 @@ Extends from <a href="FCSys_Characteristics_BaseClasses_Characteristic.html#FCSy
   <p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -221,13 +235,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Fluidity">Fluidity</a></td><td>zeta</td><td>Fluidity [l.T/m]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -264,6 +281,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><img src="images/FCSys.Characteristics.BaseClasses.CharacteristicNASA.zetaI.png" alt="FCSys.Characteristics.BaseClasses.CharacteristicNASA.theta" align=RIGHT border=1 width=80  height=80 >
 <a name="FCSys.Characteristics.BaseClasses.CharacteristicNASA.theta"></a><a href="FCSys_Characteristics_BaseClasses_CharacteristicNASA.html#FCSys.Characteristics.BaseClasses.CharacteristicNASA">FCSys.Characteristics.BaseClasses.CharacteristicNASA</a>.theta</h2>
 <b>Thermal resistivity as a function of temperature and pressure (&theta;)</b>
+
 <h3>Information</h3>
 
 <p>This function is based on based on NASA CEA
@@ -273,7 +291,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     <p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.html#Modelica.Icons.Function">Modelica.Icons.Function</a> (Icon for functions).
 <p>
+
 <h3>Inputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -281,13 +301,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.PressureAbsolute">PressureAbsolute</a></td><td>p</td><td>U.atm</td><td>Pressure [m/(l.T2)]</td></tr>
 </table>
 <p>
+
 <h3>Outputs</h3>
+
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.ResistivityThermal">ResistivityThermal</a></td><td>theta</td><td>Thermal resistivity [l.T/N]</td></tr>
 </table>
 <p>
+
 <h3>Modelica definition</h3>
 
 <pre>
@@ -324,7 +347,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Mon Apr  1 15:12:31 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Apr  2 18:54:17 2013.
 </div>
 </body>
 </html>
