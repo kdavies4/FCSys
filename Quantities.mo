@@ -48,8 +48,8 @@ package Quantities "Quantities to represent physical properties"
         "Reciprocal magnetic flux";
       parameter Q.Mass Mass=1*U.kg "Mass";
       parameter Q.MassSpecific MassSpecific=1*U.micro*U.g/U.C "Specific mass";
-      parameter Q.MomentumAngular MomentumAngular=1*U.J*U.s/U.rad
-        "Angular momentum";
+      parameter Q.MomentumRotational MomentumRotational=1*U.J*U.s/U.rad
+        "Rotational momentum";
       parameter Q.Number Number=1 "Number";
       parameter Q.NumberAbsolute NumberAbsolute=1*U.J/(U.mol*U.K)
         "Absolute number";
@@ -138,8 +138,8 @@ package Quantities "Quantities to represent physical properties"
   type MassSpecific = Modelica.Icons.TypeReal (final unit="m/N", min=0)
     "Specific mass";
   type Mobility = Modelica.Icons.TypeReal (final unit="N.T/m", min=0);
-  type MomentumAngular = Modelica.Icons.TypeReal (final unit="l2.m/(A.T)")
-    "Angular momentum";
+  type MomentumRotational = Modelica.Icons.TypeReal (final unit="l2.m/(A.T)")
+    "Rotational momentum";
   type Number = Modelica.Icons.TypeReal (final unit="1");
   type NumberAbsolute = Modelica.Icons.TypeReal (final unit="1", min=0)
     "Absolute number";

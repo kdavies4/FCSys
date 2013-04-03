@@ -105,6 +105,8 @@ rpls = [
     ('<a href="FCSys.*\.html(#\w*\d+)">', r'<a href="\1">'),
     # Use relative links again.
     ('/media/Storage/Documents/Dymola/FCSys/', '../'),
+    # Remove the return from footnote links (they don't work).
+    ('<a href="#ref\d+">&#8629;</a>', ''),
     # Use online links to the Modelica Standard Library.
     ('"file:////opt/dymola/Modelica/Library/Modelica.*/help/(.*)"', r'"http://build.openmodelica.org/Documentation/\1"'),
     ('"(http://build\.openmodelica\.org/Documentation/[^"]+)_([^"]+)_([^"]+)_([^"]+)_([^"]+)_([^"]+)_([^"]+)_([^"]+)"', r'"\1.\2.\3.\4.\5.\6.\7.\8"'),

@@ -1631,9 +1631,9 @@ package Tests "Models and functions for test and validation"
           "The countTrue function failed.");
 
         // Delta()
-        assert(Delta({1,2}) == -1, "The Delta function failed.");
+        assert(Delta({1,2}) == 1, "The Delta function failed.");
         for i in 1:2 loop
-          assert((Delta([1, 2; 3, 4]))[i] == -1,
+          assert((Delta([1, 2; 3, 4]))[i] == 1,
             "The Delta function failed on entry " + String(i) + ".");
         end for;
 

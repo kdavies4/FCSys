@@ -23,13 +23,13 @@ package Connectors "Declarative and imperative connectors"
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Icon(graphics={Polygon(
-            points={{-100,100},{100,0},{-100,-100},{-100,100}},
-            lineColor={208,104,0},
-            pattern=LinePattern.Dash), Polygon(
-            points={{-100,100},{100,0},{-100,-100},{-100,100}},
-            lineColor={208,104,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid)}),
+              points={{-100,100},{100,0},{-100,-100},{-100,100}},
+              lineColor={208,104,0},
+              pattern=LinePattern.Dash),Polygon(
+              points={{-100,100},{100,0},{-100,-100},{-100,100}},
+              lineColor={208,104,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}),
       Diagram(graphics={Polygon(
               points={{0,50},{100,0},{0,-50},{0,50}},
               lineColor={208,104,0},
@@ -60,21 +60,21 @@ package Connectors "Declarative and imperative connectors"
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Icon(graphics={Polygon(
-            points={{-100,100},{100,0},{-100,-100},{-100,100}},
-            lineColor={208,104,0},
-            pattern=LinePattern.Dash), Polygon(
-            points={{-100,100},{100,0},{-100,-100},{-100,100}},
-            lineColor={208,104,0},
-            fillColor={255,128,0},
-            fillPattern=FillPattern.Solid)}),
+              points={{-100,100},{100,0},{-100,-100},{-100,100}},
+              lineColor={208,104,0},
+              pattern=LinePattern.Dash),Polygon(
+              points={{-100,100},{100,0},{-100,-100},{-100,100}},
+              lineColor={208,104,0},
+              fillColor={255,128,0},
+              fillPattern=FillPattern.Solid)}),
       Diagram(graphics={Text(
-            extent={{-100,50},{100,90}},
-            textString="%name",
-            lineColor={0,0,0}), Polygon(
-            points={{-100,50},{0,0},{-100,-50},{-100,50}},
-            lineColor={208,104,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid)}));
+              extent={{-100,50},{100,90}},
+              textString="%name",
+              lineColor={0,0,0}),Polygon(
+              points={{-100,50},{0,0},{-100,-50},{-100,50}},
+              lineColor={208,104,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}));
 
   end ChemicalOutput;
 
@@ -94,23 +94,23 @@ package Connectors "Declarative and imperative connectors"
     For a phase change, they are given the name of the phase.</p></html>"),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            fillColor={255,128,0},
-            fillPattern=FillPattern.Solid,
-            lineColor={208,104,0},
-            lineThickness=0.5,
-            pattern=LinePattern.Solid)}),
+              extent={{-100,100},{100,-100}},
+              fillColor={255,128,0},
+              fillPattern=FillPattern.Solid,
+              lineColor={208,104,0},
+              lineThickness=0.5,
+              pattern=LinePattern.Solid)}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics={Text(
-            extent={{-100,36},{100,76}},
-            textString="%name",
-            lineColor={0,0,0}), Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={208,104,0},
-            fillColor={255,128,0},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.Solid,
-            lineThickness=0.5)}));
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0}),Ellipse(
+              extent={{-30,30},{30,-30}},
+              lineColor={208,104,0},
+              fillColor={255,128,0},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.Solid,
+              lineThickness=0.5)}));
 
   end ChemicalBus;
 
@@ -124,33 +124,33 @@ package Connectors "Declarative and imperative connectors"
 
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            fillColor={255,128,0},
-            fillPattern=FillPattern.Solid,
-            lineColor={208,104,0},
-            lineThickness=0.5,
-            pattern=LinePattern.Solid)}),
+              extent={{-100,100},{100,-100}},
+              fillColor={255,128,0},
+              fillPattern=FillPattern.Solid,
+              lineColor={208,104,0},
+              lineThickness=0.5,
+              pattern=LinePattern.Solid)}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics={Ellipse(
-            extent={{-10,10},{10,-10}},
-            lineColor={208,104,0},
-            fillColor={255,128,0},
-            fillPattern=FillPattern.Solid,
-            lineThickness=0.5), Text(
-            extent={{-100,20},{100,60}},
-            textString="%name",
-            lineColor={0,0,0})}));
+              extent={{-10,10},{10,-10}},
+              lineColor={208,104,0},
+              fillColor={255,128,0},
+              fillPattern=FillPattern.Solid,
+              lineThickness=0.5),Text(
+              extent={{-100,20},{100,60}},
+              textString="%name",
+              lineColor={0,0,0})}));
 
   end ChemicalBusInternal;
 
   connector Chemical
-    "Connector to exchange material while advecting linear momentum and thermal energy"
+    "Connector to exchange material while advecting translational momentum and thermal energy"
 
     // Material exchange
     Q.Current I(nominal=U.A) "Reaction rate";
     flow Q.Potential g(nominal=U.V) "Chemical potential";
 
-    /*
+    /* **
 sum s, set Ndot
 EC: model to interface
 C: model to set Ndot
@@ -158,43 +158,17 @@ C: model to set Ndot
 alpha: fraction of energy applied to generation of the species (other applied to recombination)
 for every species, a "this" and "other" terminal; "this" is internal
 
-(1 - exp(x/2))*(1 + exp(-x/2))
-exp(-x/2) - exp(x/2)
-
-(1 - exp(x/2))*(1 + exp(-x))
-(1 - exp(x/2))*exp(-x) + 1 - exp(x/2)
-exp(-x) - exp(-x/2) + 1 - exp(x/2)
-
-Equilibrium: advection equals diffusion
-eta*rho*phi*dx = -drho
-rho_n = rho*exp(Pe/2)
-rho_p = rho*exp(-Pe/2)
-
-R*Ndot_p = (rho_p - rho)*(1 + exp(Pe/2))
-R*Ndot_p = rho*(exp(-Pe/2) - 1)*(1 + exp(Pe/2))
-R*Ndot_p = rho*(exp(-Pe/2) - exp(Pe/2))
-Negative boundary as if center and center as if positive boundary (shift left 1/2 region):
-R*Ndot_gen = rho_n*(exp(-Pe/2) - exp(Pe/2))
-Pe = -g/T + z*E*L
-R*Ndot_gen_n = rho_n*(exp((g - z*E*L)/(2*T)) - exp(-(g - z*E*L)/(2*T)))
-If e- (z=1):
-R*Ndot_gen_n = rho_n*(exp((g + E*L)/(2*T)) - exp(-(g + E*L)/(2*T)))
-
-R*Ndot_n = (rho_n - rho)*(1 + exp(-Pe/2))
-R*Ndot_n = rho*(exp(Pe/2) - 1)*(1 + exp(-Pe/2))
-R*Ndot_n = rho*(exp(Pe/2) - exp(-Pe/2))
-Positive boundary as if center and center as if negative boundary (shift right 1/2 region):
-R*Ndot_gen = rho_p*(exp(Pe/2) - exp(-Pe/2))
-Pe = g/T + z*E*L
-R*Ndot_gen_p = rho_p*(exp((g/T + z*E*L)/(2*T)) - exp(-(g/T + z*E*L)/(2*T)))
-If H+ (z=1):
-R*Ndot_gen_p = rho_p*(exp((g/T + E*L)/(2*T)) - exp(-(g/T + E*L)/(2*T)))
-
-Ndot_gen = Ndot_gen_n + Ndot_gen_p
-Ndot_gen = (rho_n + rho_p)*(exp((g/T + E*L)/(2*T)) - exp(-(g/T + E*L)/(2*T)))/R
-
 sum s, give total s
 C: every model has rate equation, no model req'd
+
+Interfaces:
+  e- positive side:
+    Translational
+    Material diffusion
+  other species at center:
+    current, entropy summation
+  density at center
+
 */
 
     // Translational advection
@@ -208,20 +182,21 @@ C: every model has rate equation, no model req'd
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Icon(graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={208,104,0},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,128,0})}),
+              extent={{-100,100},{100,-100}},
+              lineColor={208,104,0},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,128,0})}),
       Diagram(graphics={Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={208,104,0},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,128,0})}));
+              extent={{-30,30},{30,-30}},
+              lineColor={208,104,0},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,128,0})}));
 
   end Chemical;
 
   expandable connector FaceBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors (for multiple species)</html>"
+
     annotation (
       defaultComponentName="face",
       Documentation(info="<html><p>There is no minimal set of variables.  Species are included by connecting instances
@@ -229,26 +204,27 @@ C: every model has rate equation, no model req'd
 
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            fillColor={191,191,191},
-            fillPattern=FillPattern.Solid,
-            lineColor={127,127,127},
-            lineThickness=0.5)}),
+              extent={{-100,100},{100,-100}},
+              fillColor={191,191,191},
+              fillPattern=FillPattern.Solid,
+              lineColor={127,127,127},
+              lineThickness=0.5)}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics={Text(
-            extent={{-100,36},{100,76}},
-            textString="%name",
-            lineColor={0,0,0}), Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={127,127,127},
-            fillColor={191,191,191},
-            fillPattern=FillPattern.Solid,
-            lineThickness=0.5)}));
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0}),Ellipse(
+              extent={{-30,30},{30,-30}},
+              lineColor={127,127,127},
+              fillColor={191,191,191},
+              fillPattern=FillPattern.Solid,
+              lineThickness=0.5)}));
 
   end FaceBus;
 
   expandable connector FaceBusInternal
     "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors (for multiple species)</html>"
+
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="face",
@@ -257,26 +233,26 @@ C: every model has rate equation, no model req'd
 
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            fillColor={191,191,191},
-            fillPattern=FillPattern.Solid,
-            lineColor={127,127,127},
-            lineThickness=0.5)}),
+              extent={{-100,100},{100,-100}},
+              fillColor={191,191,191},
+              fillPattern=FillPattern.Solid,
+              lineColor={127,127,127},
+              lineThickness=0.5)}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics={Ellipse(
-            extent={{-10,10},{10,-10}},
-            lineColor={127,127,127},
-            fillColor={191,191,191},
-            fillPattern=FillPattern.Solid,
-            lineThickness=0.5), Text(
-            extent={{-100,20},{100,60}},
-            textString="%name",
-            lineColor={0,0,0})}));
+              extent={{-10,10},{10,-10}},
+              lineColor={127,127,127},
+              fillColor={191,191,191},
+              fillPattern=FillPattern.Solid,
+              lineThickness=0.5),Text(
+              extent={{-100,20},{100,60}},
+              textString="%name",
+              lineColor={0,0,0})}));
 
   end FaceBusInternal;
 
   connector Face
-    "Connector to transport material, linear momentum, and thermal energy by diffusion"
+    "Connector to transport material, translational momentum, and thermal energy by diffusion"
 
     // Material diffusion
     Q.AmountVolumic rho(nominal=298.15*U.K/U.atm) "Density";
@@ -296,26 +272,26 @@ C: every model has rate equation, no model req'd
 
       Diagram(coordinateSystem(preserveAspectRatio=true,extent={{-100,-100},{
               100,100}}), graphics={Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={127,127,127},
-            fillColor={191,191,191},
-            fillPattern=FillPattern.Solid)}),
+              extent={{-30,30},{30,-30}},
+              lineColor={127,127,127},
+              fillColor={191,191,191},
+              fillPattern=FillPattern.Solid)}),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={127,127,127},
-            fillColor={191,191,191},
-            fillPattern=FillPattern.Solid)}));
+              extent={{-100,100},{100,-100}},
+              lineColor={127,127,127},
+              fillColor={191,191,191},
+              fillPattern=FillPattern.Solid)}));
 
   end Face;
 
   connector Inert
-    "Connector to exchange linear momentum and thermal energy by diffusion"
+    "Connector to exchange translational momentum and thermal energy by diffusion"
 
     parameter Integer n_lin(
       final min=0,
       final max=3) = 0
-      "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
+      "<html>Number of components of translational momentum (<i>n</i><sub>lin</sub>)</html>"
       annotation (HideResult=true);
 
     Translational translational(final n_lin=n_lin)
@@ -333,20 +309,12 @@ C: every model has rate equation, no model req'd
               extent={{-30,30},{30,-30}},
               lineColor={72,90,180},
               fillPattern=FillPattern.Solid,
-              fillColor={102,128,255}),Ellipse(
-              extent={{-18,18},{18,-18}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineColor={72,90,180})}),
+              fillColor={102,128,255})}),
       Icon(graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={72,90,180},
-            fillPattern=FillPattern.Solid,
-            fillColor={102,128,255}), Ellipse(
-            extent={{-60,60},{60,-60}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            lineColor={72,90,180})}));
+              extent={{-100,100},{100,-100}},
+              lineColor={134,134,201},
+              fillPattern=FillPattern.Solid,
+              fillColor={102,128,255})}));
 
   end Inert;
 
@@ -390,24 +358,34 @@ C: every model has rate equation, no model req'd
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Diagram(graphics={Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={72,90,180},
-            fillPattern=FillPattern.Solid,
-            fillColor={102,128,255}), Text(
-            extent={{-30,20},{30,-20}},
-            lineColor={0,0,0},
-            textString="A")}),
-      Icon(graphics={
-          Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={72,90,180},
-            fillPattern=FillPattern.Solid,
-            fillColor={102,128,255}),
-          Ellipse(extent={{-100,100},{100,-100}}, lineColor={72,90,180}),
-          Text(
-            extent={{-100,80},{100,-90}},
-            lineColor={0,0,0},
-            textString="A")}));
+              extent={{-30,30},{30,-30}},
+              lineColor={72,90,180},
+              fillPattern=FillPattern.Solid,
+              fillColor={102,128,255}),Text(
+              extent={{-28,26},{24,-26}},
+              lineColor={255,255,255},
+              textString="A"),Text(
+              extent={{-24,26},{28,-26}},
+              lineColor={255,255,255},
+              textString="A"),Text(
+              extent={{-26,26},{26,-26}},
+              lineColor={255,255,255},
+              textString="A")}),
+      Icon(graphics={Ellipse(
+              extent={{-100,100},{100,-100}},
+              lineColor={72,90,180},
+              fillPattern=FillPattern.Solid,
+              fillColor={102,128,255}),Ellipse(extent={{-100,100},{100,-100}},
+            lineColor={72,90,180}),Text(
+              extent={{-100,96},{100,-96}},
+              lineColor={255,255,255},
+              textString="A"),Text(
+              extent={{-96,96},{104,-96}},
+              lineColor={255,255,255},
+              textString="A"),Text(
+              extent={{-92,96},{108,-96}},
+              lineColor={255,255,255},
+              textString="A")}));
 
   end InertAmagat;
 
@@ -442,24 +420,46 @@ C: every model has rate equation, no model req'd
   <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Diagram(graphics={Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={72,90,180},
-            fillPattern=FillPattern.Solid,
-            fillColor={102,128,255}), Text(
-            extent={{-30,20},{30,-20}},
-            lineColor={0,0,0},
-            textString="D")}),
-      Icon(graphics={
-          Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={72,90,180},
-            fillPattern=FillPattern.Solid,
-            fillColor={102,128,255}),
-          Ellipse(extent={{-100,100},{100,-100}}, lineColor={72,90,180}),
-          Text(
-            extent={{-100,80},{100,-90}},
-            lineColor={0,0,0},
-            textString="D")}));
+              extent={{-30,30},{30,-30}},
+              lineColor={72,90,180},
+              fillPattern=FillPattern.Solid,
+              fillColor={102,128,255}),Text(
+              extent={{-24,26},{28,-26}},
+              lineColor={255,255,255},
+              textString="D"),Text(
+              extent={{-22,26},{30,-26}},
+              lineColor={255,255,255},
+              textString="D"),Text(
+              extent={{-24,24},{28,-28}},
+              lineColor={255,255,255},
+              textString="D"),Text(
+              extent={{-22,24},{30,-28}},
+              lineColor={255,255,255},
+              textString="D")}),
+      Icon(graphics={Ellipse(
+              extent={{-100,100},{100,-100}},
+              lineColor={72,90,180},
+              fillPattern=FillPattern.Solid,
+              fillColor={102,128,255}),Text(
+              extent={{-94,92},{106,-88}},
+              lineColor={255,255,255},
+              textString="D"),Ellipse(extent={{-100,100},{100,-100}}, lineColor
+            ={72,90,180}),Text(
+              extent={{-90,92},{110,-88}},
+              lineColor={255,255,255},
+              textString="D"),Text(
+              extent={{-84,92},{116,-88}},
+              lineColor={255,255,255},
+              textString="D"),Text(
+              extent={{-84,86},{116,-94}},
+              lineColor={255,255,255},
+              textString="D"),Text(
+              extent={{-88,86},{112,-94}},
+              lineColor={255,255,255},
+              textString="D"),Text(
+              extent={{-94,86},{106,-94}},
+              lineColor={255,255,255},
+              textString="D")}));
 
   end InertDalton;
 
@@ -469,7 +469,7 @@ C: every model has rate equation, no model req'd
     parameter Integer n_lin(
       final min=0,
       final max=3) = 0
-      "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
+      "<html>Number of components of translational momentum (<i>n</i><sub>lin</sub>)</html>"
       annotation (HideResult=true);
     parameter Boolean inclTranslational=true
       "Include the translational subconnector" annotation (
@@ -493,14 +493,10 @@ C: every model has rate equation, no model req'd
     has a smaller icon, a default <code>protected</code> prefix, and the subconnectors are conditional.
     Please see that connector for more information.</p></html>"),
       Icon(graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={72,90,180},
-            fillPattern=FillPattern.Solid,
-            fillColor={102,128,255}), Ellipse(
-            extent={{-60,60},{60,-60}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            lineColor={72,90,180})}),
+              extent={{-100,100},{100,-100}},
+              lineColor={72,90,180},
+              fillPattern=FillPattern.Solid,
+              fillColor={102,128,255})}),
       Diagram(graphics={Ellipse(
               extent={{-10,10},{10,-10}},
               lineColor={72,90,180},
@@ -508,21 +504,17 @@ C: every model has rate equation, no model req'd
               fillColor={102,128,255}),Text(
               extent={{-100,20},{100,60}},
               textString="%name",
-              lineColor={0,0,0}),Ellipse(
-              extent={{-4,4},{4,-4}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineColor={72,90,180})}));
+              lineColor={0,0,0})}));
 
   end InertInternal;
 
   connector Translational
-    "Connector for advection or diffusion of linear momentum"
+    "Connector for advection or diffusion of translational momentum"
 
     parameter Integer n_lin(
       final min=0,
       final max=3) = 1
-      "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>"
+      "<html>Number of components of translational momentum (<i>n</i><sub>lin</sub>)</html>"
       annotation (HideResult=true);
 
     Q.Velocity phi[n_lin](each nominal=U.cm/U.s) "Velocity";
@@ -532,18 +524,18 @@ C: every model has rate equation, no model req'd
   <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p>
   </html>"),
       Icon(graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid)}),
+              extent={{-100,100},{100,-100}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}),
       Diagram(graphics={Text(
-            extent={{-100,36},{100,76}},
-            textString="%name",
-            lineColor={0,0,0}), Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid)}));
+              extent={{-100,36},{100,76}},
+              textString="%name",
+              lineColor={0,0,0}),Ellipse(
+              extent={{-30,30},{30,-30}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}));
 
   end Translational;
 
@@ -557,15 +549,15 @@ C: every model has rate equation, no model req'd
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Icon(graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid)}),
+              extent={{-100,100},{100,-100}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}),
       Diagram(graphics={Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid)}));
+              extent={{-30,30},{30,-30}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}));
 
     // Note:  The icon doesn't contain a "%name" tag because it overlaps
     // with the tag in the Mechanical connector when both are included in
@@ -578,10 +570,10 @@ C: every model has rate equation, no model req'd
     "<html>\"<code>input Real</code>\" as a connector</html>" annotation (
     defaultComponentName="u",
     Icon(graphics={Polygon(
-          points={{-100,100},{100,0},{-100,-100},{-100,100}},
-          lineColor={0,0,127},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid)}, coordinateSystem(
+            points={{-100,100},{100,0},{-100,-100},{-100,100}},
+            lineColor={0,0,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid)}, coordinateSystem(
         extent={{-100,-100},{100,100}},
         preserveAspectRatio=true,
         initialScale=0.1,
@@ -607,10 +599,10 @@ C: every model has rate equation, no model req'd
     defaultComponentPrefixes="protected",
     defaultComponentName="u",
     Icon(graphics={Polygon(
-          points={{-100,100},{100,0},{-100,-100},{-100,100}},
-          lineColor={0,0,127},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid)}, coordinateSystem(
+            points={{-100,100},{100,0},{-100,-100},{-100,100}},
+            lineColor={0,0,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid)}, coordinateSystem(
         extent={{-100,-100},{100,100}},
         preserveAspectRatio=true,
         initialScale=0.1,
@@ -632,18 +624,19 @@ C: every model has rate equation, no model req'd
 </html>"));
   expandable connector RealInputBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.RealInput\">RealInput</a> connectors</html>"
+
     annotation (
       defaultComponentName="u",
       Documentation(info="<html><p>There is no minimal set of variables.
     Signals are included by connecting instances
-   of the <a href=\"modelica://FCSys.Connectors.RealInput\">RealInput</a> connector.<p></html>"),
+   of the <a href=\"modelica://FCSys.Connectors.RealInput\">RealInput</a> connector.</html>"),
 
       Icon(graphics={Polygon(
-            points={{-100,100},{100,0},{-100,-100},{-100,100}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            lineThickness=0.5)}, coordinateSystem(
+              points={{-100,100},{100,0},{-100,-100},{-100,100}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineThickness=0.5)}, coordinateSystem(
           extent={{-100,-100},{100,100}},
           preserveAspectRatio=true,
           initialScale=0.1,
@@ -653,32 +646,33 @@ C: every model has rate equation, no model req'd
           initialScale=0.1,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-            points={{0,50},{100,0},{0,-50},{0,50}},
-            lineColor={0,0,127},
-            fillColor={0,0,127},
-            fillPattern=FillPattern.Solid,
-            lineThickness=0.5), Text(
-            extent={{-200,50},{200,90}},
-            textString="%name",
-            lineColor={0,0,0})}));
+              points={{0,50},{100,0},{0,-50},{0,50}},
+              lineColor={0,0,127},
+              fillColor={0,0,127},
+              fillPattern=FillPattern.Solid,
+              lineThickness=0.5),Text(
+              extent={{-200,50},{200,90}},
+              textString="%name",
+              lineColor={0,0,0})}));
 
   end RealInputBus;
 
   expandable connector RealInputBusInternal
     "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.RealInput\">RealInput</a> connectors</html>"
+
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="u",
       Documentation(info="<html><p>There is no minimal set of variables.
     Signals are included by connecting instances
-   of the <a href=\"modelica://FCSys.Connectors.RealInput\">RealInput</a> connector.<p></html>"),
+   of the <a href=\"modelica://FCSys.Connectors.RealInput\">RealInput</a> connector.</p></html>"),
 
       Icon(graphics={Polygon(
-            points={{-100,100},{100,0},{-100,-100},{-100,100}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            lineThickness=0.5)}, coordinateSystem(
+              points={{-100,100},{100,0},{-100,-100},{-100,100}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineThickness=0.5)}, coordinateSystem(
           extent={{-100,-100},{100,100}},
           preserveAspectRatio=true,
           initialScale=0.1,
@@ -706,10 +700,10 @@ C: every model has rate equation, no model req'd
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Polygon(
-          points={{-100,100},{100,0},{-100,-100},{-100,100}},
-          lineColor={0,0,127},
-          fillColor={0,0,127},
-          fillPattern=FillPattern.Solid)}),
+            points={{-100,100},{100,0},{-100,-100},{-100,100}},
+            lineColor={0,0,127},
+            fillColor={0,0,127},
+            fillPattern=FillPattern.Solid)}),
     Diagram(coordinateSystem(
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
@@ -733,74 +727,76 @@ C: every model has rate equation, no model req'd
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Polygon(
-          points={{-100,100},{100,0},{-100,-100},{-100,100}},
-          lineColor={0,0,127},
-          fillColor={0,0,127},
-          fillPattern=FillPattern.Solid)}),
+            points={{-100,100},{100,0},{-100,-100},{-100,100}},
+            lineColor={0,0,127},
+            fillColor={0,0,127},
+            fillPattern=FillPattern.Solid)}),
     Diagram(coordinateSystem(
         preserveAspectRatio=true,
         extent={{-100,-100},{100,100}},
         grid={2,2}), graphics={Polygon(
-          points={{-40,20},{0,0},{-40,-20},{-40,20}},
-          lineColor={0,0,127},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid), Text(
-          extent={{-200,24},{200,64}},
-          textString="%name",
-          lineColor={0,0,0})}),
+            points={{-40,20},{0,0},{-40,-20},{-40,20}},
+            lineColor={0,0,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),Text(
+            extent={{-200,24},{200,64}},
+            textString="%name",
+            lineColor={0,0,0})}),
     Documentation(info="<html>
 <p>Protected connector with one output signal of type <code>Real</code>.</p>
 </html>"));
   expandable connector RealOutputBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.RealOutput\">RealOutput</a> connectors</html>"
+
     annotation (
       defaultComponentName="y",
       Documentation(info="<html><p>There is no minimal set of variables.
     Signals are included by connecting instances
-   of the <a href=\"modelica://FCSys.Connectors.RealOutput\">RealOutput</a> connector.<p></html>"),
+   of the <a href=\"modelica://FCSys.Connectors.RealOutput\">RealOutput</a> connector.</html>"),
 
       Icon(coordinateSystem(
           preserveAspectRatio=true,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-            points={{-100,100},{100,0},{-100,-100},{-100,100}},
-            lineColor={0,0,127},
-            fillColor={0,0,127},
-            fillPattern=FillPattern.Solid,
-            lineThickness=0.5)}),
+              points={{-100,100},{100,0},{-100,-100},{-100,100}},
+              lineColor={0,0,127},
+              fillColor={0,0,127},
+              fillPattern=FillPattern.Solid,
+              lineThickness=0.5)}),
       Diagram(coordinateSystem(
           preserveAspectRatio=true,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-            points={{-100,50},{0,0},{-100,-50},{-100,50}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            lineThickness=0.5), Text(
-            extent={{-200,50},{200,90}},
-            textString="%name",
-            lineColor={0,0,0})}));
+              points={{-100,50},{0,0},{-100,-50},{-100,50}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineThickness=0.5),Text(
+              extent={{-200,50},{200,90}},
+              textString="%name",
+              lineColor={0,0,0})}));
 
   end RealOutputBus;
 
   expandable connector RealOutputBusInternal
     "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.RealOutput\">RealOutput</a> connectors</html>"
+
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="y",
       Documentation(info="<html><p>There is no minimal set of variables.
     Signals are included by connecting instances
-   of the <a href=\"modelica://FCSys.Connectors.RealOutput\">RealOutput</a> connector.<p></html>"),
+   of the <a href=\"modelica://FCSys.Connectors.RealOutput\">RealOutput</a> connector.</p></html>"),
 
       Icon(coordinateSystem(
           preserveAspectRatio=true,
           extent={{-100,-100},{100,100}},
           grid={2,2}), graphics={Polygon(
-            points={{-100,100},{100,0},{-100,-100},{-100,100}},
-            lineColor={0,0,127},
-            fillColor={0,0,127},
-            fillPattern=FillPattern.Solid,
-            lineThickness=0.5)}),
+              points={{-100,100},{100,0},{-100,-100},{-100,100}},
+              lineColor={0,0,127},
+              fillColor={0,0,127},
+              fillPattern=FillPattern.Solid,
+              lineThickness=0.5)}),
       Diagram(coordinateSystem(
           preserveAspectRatio=true,
           extent={{-100,-100},{100,100}},

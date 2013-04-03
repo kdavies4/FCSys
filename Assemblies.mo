@@ -16,12 +16,8 @@ package Assemblies "Combinations of regions (e.g., cells)"
           annotation (Placement(transformation(extent={{24,-8},{44,12}})));
         replaceable Cells.CellSSIC cell annotation (__Dymola_choicesFromPackage
             =true, Placement(transformation(extent={{-10,-10},{10,10}})));
-        annotation (
-          experiment(StopTime=1e-24, Tolerance=1e-06),
-          Commands(file=
-                "resources/scripts/Dymola/Assemblies.Cells.Examples.Cell.mos"),
-
-          Icon(graphics));
+        annotation (experiment(StopTime=1e-24, Tolerance=1e-06), Commands(file=
+                "resources/scripts/Dymola/Assemblies.Cells.Examples.Cell.mos"));
 
       end Cell;
       extends Modelica.Icons.ExamplesPackage;
@@ -79,6 +75,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
                 "resources/scripts/Dymola/Assemblies.Cells.Examples.CellProfile.mos"),
 
           experiment(StopTime=600, Tolerance=1e-08));
+
       end CellProfile;
 
       model Polarization "Run a cell polarization"
@@ -122,12 +119,8 @@ package Assemblies "Combinations of regions (e.g., cells)"
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
-        annotation (
-          experiment(StopTime=600, Tolerance=1e-08),
-          Commands(file=
-                "resources/scripts/Dymola/Assemblies.Examples.CellPolarizationstoich.mos"),
-
-          Icon(graphics));
+        annotation (experiment(StopTime=600, Tolerance=1e-08), Commands(file=
+                "resources/scripts/Dymola/Assemblies.Examples.CellPolarizationstoich.mos"));
       end CellProfileIO;
 
       model CellModelica
@@ -425,98 +418,94 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={
-            Line(
-              points={{-40,-58},{-40,-100}},
-              color={240,0,0},
-              visible=inclY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-8,-1},{28,-1}},
-              color={0,0,240},
-              visible=inclX,
-              thickness=0.5,
-              origin={39,-92},
-              rotation=90),
-            Line(
-              points={{-40,100},{-40,60}},
-              color={240,0,0},
-              visible=inclY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-66,0},{-100,0}},
-              color={127,127,127},
-              visible=inclX,
-              thickness=0.5),
-            Line(
-              points={{-8,-1},{44,-1}},
-              color={0,0,240},
-              visible=inclX,
-              thickness=0.5,
-              origin={39,56},
-              rotation=90),
-            Line(
-              points={{100,0},{56,0}},
-              color={127,127,127},
-              visible=inclX,
-              thickness=0.5)}),
+            initialScale=0.1), graphics={Line(
+                  points={{-40,-58},{-40,-100}},
+                  color={240,0,0},
+                  visible=inclY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-8,-1},{28,-1}},
+                  color={0,0,240},
+                  visible=inclX,
+                  thickness=0.5,
+                  origin={39,-92},
+                  rotation=90),Line(
+                  points={{-40,100},{-40,60}},
+                  color={240,0,0},
+                  visible=inclY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-66,0},{-100,0}},
+                  color={127,127,127},
+                  visible=inclX,
+                  thickness=0.5),Line(
+                  points={{-8,-1},{44,-1}},
+                  color={0,0,240},
+                  visible=inclX,
+                  thickness=0.5,
+                  origin={39,56},
+                  rotation=90),Line(
+                  points={{100,0},{56,0}},
+                  color={127,127,127},
+                  visible=inclX,
+                  thickness=0.5)}),
         experiment(StopTime=120, Tolerance=1e-06));
+
     end Cell;
 
     model CalibratedCell
       "Cell model with calibration parameters for exchange and transport"
       import FCSys.Subregions.Species;
 
-      // Exchange of linear momentum
+      // Exchange of translational momentum
       parameter Q.NumberAbsolute 'k_alpha_F_C+'(
         final min=0,
         final nominal=1) = 1
         "<html>For C (<i>k</i><sub>&alpha; &Phi; C</sub>)</html>" annotation (
-          Dialog(tab="Calibration factors", group="Exchange of linear momentum"));
+          Dialog(tab="Calibration factors",group=
+              "Exchange of translational momentum"));
       parameter Q.NumberAbsolute k_alpha_tau_C19HF37O5S(
         final min=0,
         final nominal=1) = 1
         "<html>For C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S (<i>k</i><sub>&alpha; &Phi; C19HF37O5S</sub>)</html>"
         annotation (Dialog(tab="Calibration factors", group=
-              "Exchange of linear momentum"));
+              "Exchange of translational momentum"));
       parameter Q.NumberAbsolute 'k_alpha_tau_e-'(
         final min=0,
         final nominal=1) = 1
         "<html>For e<sup>-</sup> (<i>k</i><sub>&alpha; &Phi; e-</sub>)</html>"
         annotation (Dialog(tab="Calibration factors", group=
-              "Exchange of linear momentum"));
+              "Exchange of translational momentum"));
       parameter Q.NumberAbsolute k_alpha_tau_H2(
         final min=0,
         final nominal=1) = 1
         "<html>For H<sub>2</sub> (<i>k</i><sub>&alpha; &Phi; H2</sub>)</html>"
         annotation (Dialog(tab="Calibration factors", group=
-              "Exchange of linear momentum"));
+              "Exchange of translational momentum"));
       parameter Q.NumberAbsolute k_alpha_tau_H2O(
         final min=0,
         final nominal=1) = 1
         "<html>For H<sub>2</sub>O (<i>k</i><sub>&alpha; &Phi; H2O</sub>)</html>"
         annotation (Dialog(tab="Calibration factors", group=
-              "Exchange of linear momentum"));
+              "Exchange of translational momentum"));
       parameter Q.NumberAbsolute 'k_alpha_tau_H+'(
         final min=0,
         final nominal=1) = 1
         "<html>For H<sup>+</sup> (<i>k</i><sub>&alpha; &Phi; H+</sub>)</html>"
         annotation (Dialog(tab="Calibration factors", group=
-              "Exchange of linear momentum"));
+              "Exchange of translational momentum"));
       parameter Q.NumberAbsolute k_alpha_tau_N2(
         final min=0,
         final nominal=1) = 1
         "<html>For N<sub>2</sub> (<i>k</i><sub>&alpha; &Phi; N2</sub>)</html>"
         annotation (Dialog(tab="Calibration factors", group=
-              "Exchange of linear momentum"));
+              "Exchange of translational momentum"));
       parameter Q.NumberAbsolute k_alpha_tau_O2(
         final min=0,
         final nominal=1) = 1
         "<html>For O<sub>2</sub> (<i>k</i><sub>&alpha; &Phi; O2</sub>)</html>"
         annotation (Dialog(tab="Calibration factors", group=
-              "Exchange of linear momentum"));
+              "Exchange of translational momentum"));
 
       // Thermal exchange
       parameter Q.NumberAbsolute k_alpha_Qdot_C(
@@ -609,18 +598,18 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         annotation (Dialog(tab="Calibration factors", group=
               "Material transport"));
 
-      // Transport of linear momentum
+      // Transport of translational momentum
       /*
   parameter Q.NumberAbsolute 'k_alpha_F_C+'(
     final min=0,
     final nominal=1) = 1 "<html>For C (<i>k</i><sub>&Phi; C</sub>)</html>"
-    annotation (Dialog(tab="Calibration factors", group="Transport of linear momentum"))
+    annotation (Dialog(tab="Calibration factors", group="Transport of translational momentum"))
     ;
   parameter Q.NumberAbsolute 'k_alpha_F_C+'19HF37O5S-(
     final min=0,
     final nominal=1) = 1
     "<html>For C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S (<i>k</i><sub>&Phi; C19HF37O5S-</sub>)</html>"
-    annotation (Dialog(tab="Calibration factors", group="Transport of linear momentum"))
+    annotation (Dialog(tab="Calibration factors", group="Transport of translational momentum"))
     ;
   */
 
@@ -1140,43 +1129,38 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.1), graphics={
-            Line(
-              points={{-40,100},{-40,60}},
-              color={255,128,0},
-              visible=inclY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-8,-1},{44,-1}},
-              color={0,128,255},
-              visible=inclX,
-              thickness=0.5,
-              origin={39,56},
-              rotation=90),
-            Line(
-              points={{100,0},{56,0}},
-              color={127,127,127},
-              visible=inclX,
-              thickness=0.5),
-            Line(
-              points={{-8,-1},{28,-1}},
-              color={0,128,255},
-              visible=inclX,
-              thickness=0.5,
-              origin={39,-92},
-              rotation=90),
-            Line(
-              points={{-40,-58},{-40,-100}},
-              color={255,128,0},
-              visible=inclY,
-              smooth=Smooth.None,
-              thickness=0.5),
-            Line(
-              points={{-66,0},{-100,0}},
-              color={127,127,127},
-              visible=inclX,
-              thickness=0.5)}));
+            initialScale=0.1), graphics={Line(
+                  points={{-40,100},{-40,60}},
+                  color={255,128,0},
+                  visible=inclY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-8,-1},{44,-1}},
+                  color={0,128,255},
+                  visible=inclX,
+                  thickness=0.5,
+                  origin={39,56},
+                  rotation=90),Line(
+                  points={{100,0},{56,0}},
+                  color={127,127,127},
+                  visible=inclX,
+                  thickness=0.5),Line(
+                  points={{-8,-1},{28,-1}},
+                  color={0,128,255},
+                  visible=inclX,
+                  thickness=0.5,
+                  origin={39,-92},
+                  rotation=90),Line(
+                  points={{-40,-58},{-40,-100}},
+                  color={255,128,0},
+                  visible=inclY,
+                  smooth=Smooth.None,
+                  thickness=0.5),Line(
+                  points={{-66,0},{-100,0}},
+                  color={127,127,127},
+                  visible=inclX,
+                  thickness=0.5)}));
+
     end IntegratedCell;
 
     model CellSSIC

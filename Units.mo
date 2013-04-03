@@ -106,7 +106,7 @@ package Units "Constants and units of physical measure"
     final constant Q.ConductanceElectrical G_0=U.G_0 "conductance quantum";
     final constant Q.MagneticFlux Phi_0=U.Phi_0 "magnetic flux quantum";
     final constant Q.Amount q=U.q "elementary charge";
-    final constant Q.MomentumAngular h=U.h "Planck constant";
+    final constant Q.MomentumRotational h=U.h "Planck constant";
     final constant Q.Number alpha=U.alpha "fine-structure constant";
     final constant Q.ResistanceElectrical Z_0=U.Z_0
       "characteristic impedance of vacuum";
@@ -758,7 +758,7 @@ encompass other systems of units.</p>
   final constant Q.MagneticFlux Phi_0=1/k_J
     "<html>magnetic flux quantum (&Phi;<sub>0</sub>)</html>";
   final constant Q.Amount q=G_0*Phi_0 "elementary charge";
-  final constant Q.MomentumAngular h=2*q*Phi_0 "Planck constant";
+  final constant Q.MomentumRotational h=2*q*Phi_0 "Planck constant";
   // The Planck constant over 2*pi (hbar) isn't included as a unique
   // variable.  The unit of angle (rad or cyc) should be factored into the
   // variable that represents frequency as a quantity.  Then, it's
@@ -870,6 +870,11 @@ encompass other systems of units.</p>
   the rest of <a href=\"modelica://FCSys.FCSys\">FCSys</a>.  For example, an initial pressure might be defined as
   <code>p_IC = U.atm</code>.</p>
 
+  <p>The information below has been updated from
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Davies and Paredis, 2012</a>].  That paper
+  also offers suggestions as to how the approach might be better integrated in
+  <a href=\"http://www.modelica.org\">Modelica</a>.</p>
+
 <p><b>Overview:</b></p>
 
 <p>Models of physical systems involve variables that represent physical quantities.
@@ -883,14 +888,14 @@ As stated by the Bureau International des Poids et Mesures (BIPM)
 In general, a unit may be the product of powers of other units, whether they are base units or
 units derived from the base units in the same manner.</p>
 
-<p>In Modelica, a physical quantity is generally expressed as an instance of the <code>Real</code> type.
-Its <code>value</code> attribute is typically the number associated with the value of the
+<p>In Modelica, a physical quantity is generally expressed as an instance of the <code>Real</code>
+type.  Its <code>value</code> attribute is typically the number associated with the value of the
 quantity (not the value of the quantity, as will be seen).  The <code>unit</code> attribute is a
 string that describes the unit by which the value of the quantity is divided to arrive at the
-number.<sup><a href=\"#fn1\" id=\"ref1\">1</a></sup>  The <code>displayUnit</code> attribute (also a
-string) describes the unit by which the value should be divided to arrive at the number as it
-is entered by or presented to the user.  The <code>Real</code> type contains other attributes as well,
-including <code>quantity</code> string.</p>
+number.<sup><a href=\"#fn1\" id=\"ref1\">1</a></sup>  The <code>displayUnit</code> attribute (also
+a string) describes the unit by which the value should be divided to arrive at the number as it
+is entered by or presented to the user.  The <code>Real</code> type contains other attributes as
+well, including <code>quantity</code> string.</p>
 
 <p>The <a href=\"modelica://Modelica.SIunits\">SIunits</a> package of the Modelica Standard Library contains types that
 extend the <code>Real</code> type.  The type definitions modify the
@@ -976,12 +981,13 @@ precision instead for the sake of computational performance.  There are fields o
 even today, simulations are sometimes performed in single precision
 [<a href=\"modelica://FCSys.UsersGuide.References\">Brown2011</a>,
 <a href=\"modelica://FCSys.UsersGuide.References\">Hess2008</a>]
-and where scaling is a concern [<a href=\"modelica://FCSys.UsersGuide.References\">Rapaport2004</a>, p. 29].</p>
+and where scaling is a concern
+[<a href=\"modelica://FCSys.UsersGuide.References\">Rapaport2004</a>, p. 29].</p>
 
 <p>The method is neutral
 with regards to not only the values of the base units, but also the choice of the base units and
-even the number of base units.  This is an advantage because many systems of units are used besides SI.
-As mentioned previously, the choice of base units is somewhat
+even the number of base units.  This is an advantage because many systems of units are used besides
+SI. As mentioned previously, the choice of base units is somewhat
 arbitrary, and different systems of units are based on different choices.  Some systems of units
 have fewer base units (lower rank) than SI, since additional constraints are added that
 exchange base units for derived units.  For example, the Planck, Stoney, Hartree, and Rydberg
@@ -996,7 +1002,7 @@ kelvin would be derived from the units kilogram, meter, and second (K
     <p>There are six independent constants or units in the <a href=\"modelica://FCSys.Units\">Units</a> package (see
     <a href=\"modelica://FCSys.Units.Bases\">Units.Bases</a>),
     but SI has seven independent base units (m, kg, s, A, K, mol, and cd).
-      In <a href=\"modelica://FCSys\">FCSys</a>, two additional constraints are imposed in order
+    In <a href=\"modelica://FCSys\">FCSys</a>, two additional constraints are imposed in order
     to simplify the model equations and allow electrons and chemical species to be to represented by the
     same base <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.
     First, the Faraday constant (k<sub>F</sub> or 96485.3399&middot;C/mol)
@@ -1008,8 +1014,7 @@ kelvin would be derived from the units kilogram, meter, and second (K
     However, it must be set equal to one in the current version of the International System of Units (SI)
     [<a href=\"modelica://FCSys.UsersGuide.References\">BIPM2006</a>].</p>
 
-<p><b>Implementation:</b><p>
-<p>The units and constants are defined as variables in this
+<p><b>Implementation:</b><p><p>The units and constants are defined as variables in this
 <a href=\"modelica://FCSys.Units\">Units</a> package.  Each is a <code>constant</code> of
 the appropriate type from the <a href=\"modelica://FCSys.Quantities\">Quantities</a> package. The
 first section of the Modelica definition of this package establishes mathematical constants.  The next
@@ -1064,9 +1069,6 @@ most prefixes must be given as explicit factors (e.g., <code>kilo*m</code>).</p>
   <p>Although it is not necessary in <a href=\"http://www.modelica.org\">Modelica</a>, the declarations
   in this package are presorted so that they can be easily ported to imperative or causal languages (e.g.,
   <a href=\"http://www.python.org\">Python</a>, C).</p>
-
-  <p>For more information, see the related paper
-  [<a href=\"modelica://FCSys.UsersGuide.References\">Davies and Paredis, 2012</a>].</p>
 
 <hr>
 

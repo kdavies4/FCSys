@@ -2,7 +2,7 @@ within ;
 package FCSys "Modelica library of fuel cell models"
 
 // Maximum line width before a new word is wrapped in the code listing in
-// the LaTeX document (76 characters, including leading spaces and // )
+// the LaTeX document (76 characters, including leading spaces and //)
 // ------------------------------------------------------------------------
 
 
@@ -81,7 +81,7 @@ package UsersGuide "User's Guide"
             <li><a href=\"modelica://FCSys.Connectors.InertDalton\">FCSys.Connectors.InertDalton</a> connector:
             Introduction to the \"additivity of pressure\" concept</li>
             <li><a href=\"modelica://FCSys.Subregions.Species.Species\">FCSys.Subregions.Species.Species</a> model:
-            Details about the exchange, transport, and storage of material, volume, linear momentum, and
+            Details about the exchange, transport, and storage of material, volume, translational momentum, and
             energy</li>
             <li><a href=\"modelica://FCSys.Subregions.Reaction\">FCSys.Subregions.Reaction</a> model:
             Summary of the connections for a chemical reaction</li>
@@ -131,20 +131,12 @@ package UsersGuide "User's Guide"
     <li>K. L. Davies and R. M. Moore, \"<a href=\"http://link.aip.org/link/abstract/ECSTF8/v11/i1/p797/s1\">Object-Oriented Fuel Cell Model Library</a>,\" <i>Electrochem. Soc. T.</i>, vol. 11, no. 1, pp. 797&ndash;808, 2007.</li>
     </ol></p>
 
-**Add citations:
-<a href=\"modelica://FCSys.UsersGuide.References\">Aronsson2009</a>
-<a href=\"modelica://FCSys.UsersGuide.References\">Broman2008</a>
-<a href=\"modelica://FCSys.UsersGuide.References\">Brown2011</a>
-<a href=\"modelica://FCSys.UsersGuide.References\">Fritzson2004</a>
-<a href=\"modelica://FCSys.UsersGuide.References\">Greiner1995</a>
-<a href=\"modelica://FCSys.UsersGuide.References\">Hess2008</a>
-<a href=\"modelica://FCSys.Subregions.Species\">Mattsson1993B</a>
-<a href=\"modelica://FCSys.UsersGuide.References\">Mattsson2008</a>
-<a href=\"modelica://FCSys.UsersGuide.References\">Modelica3.2</a>
-<a href=\"modelica://FCSys.UsersGuide.References\">Rapaport2004</a>
-
     <p>These references are cited throughout the library:</p>
     <table border=0 cellspacing=0 cellpadding=2 class=noBorder>
+    <tr>
+      <td valign=top class=noBorder>[<a name=\"Aronsson2009\" class=bookmark>Aronsson2009</a>]</td>
+      <td valign=top class=noBorder>P. Aronsson and D. Broman, \"<a href=\"http://www.ep.liu.se/ecp_article/index.en.aspx?issue=043;article=105\">Extendable Physical Unit Checking with Understandable Error Reporting</a>,\"  in <i>Modelica Conference</i> (Como, Italy), Modelica Assoc., Sep. 2009.</td>
+    </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Avogadro1.03\" class=bookmark>Avogadro1.03</a>]</td>
       <td valign=top class=noBorder>Avogadro: An Open-Source Molecular Builder and Visualization Tool, ver. 1.03. <a href=\"http://avogadro.openmolecules.net\">http://avogadro.openmolecules.net</a>.</td>
@@ -152,6 +144,14 @@ package UsersGuide "User's Guide"
     <tr>
       <td valign=top class=noBorder>[<a name=\"Bejan2006\" class=bookmark>Bejan2006</a>]</td>
       <td valign=top class=noBorder>A. Bejan, <i>Advanced Engineering Thermodynamics</i>, John Wiley &amp; Sons, 3rd ed., 2006.</td>
+    </tr>
+    <tr>
+      <td valign=top class=noBorder>[<a name=\"Broman2008\" class=bookmark>Broman2008</a>]</td>
+      <td valign=top class=noBorder>D. Broman and P. Aronsson and P. Fritzson, \"<a href=\"http://dx.doi.org/10.1149/1.2221251\">Design Considerations for Dimensional Inference and Unit Consistency Checking in Modelica</a>,\"  in <i>Modelica Conference</i> (Bielefeld, Germany), Modelica Assoc., Mar. 2008.</td>
+    </tr>
+    <tr>
+      <td valign=top class=noBorder>[<a name=\"Brown2011\" class=bookmark>Brown2011</a>]</td>
+      <td valign=top class=noBorder>W. M. Brown, P. Wang, S. J. Plimpton, and A. N. Tharrington, \"<a href=\"http://dx.doi.org/10.1016/j.cpc.2010.12.021\">Implementing Molecular Dynamics on Hybrid High Performance Computers&mdash;Short Range Forces</a>,\" <i>Comput. Phys. Commun.</i>, vol. 182, no. 4, pp. 898&ndash;911, 2011.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"BIPM2006\" class=bookmark>BIPM2006</a>]</td>
@@ -186,8 +186,20 @@ package UsersGuide "User's Guide"
       <td valign=top class=noBorder>Entegris, \"Industrial Graphite,\" <a href=\"http://www.entegris.com/Resources/assets/6204-7085-0312.pdf\">http://www.entegris.com/Resources/assets/6204-7085-0312.pdf</a>, Apr. 2012.</td>
     </tr>
     <tr>
+      <td valign=top class=noBorder>[<a name=\"Fritzson2004\" class=bookmark>Fritzson2004</a>]</td>
+      <td valign=top class=noBorder>P. Fritzson, <i>Principles of Object-Oriented Modeling and Simulation with Modelica 2.1</i>, IEEE Press (Piscataway, NJ), 2004.</td>
+    </tr>
+    <tr>
+      <td valign=top class=noBorder>[<a name=\"Greiner1995\" class=bookmark>Greiner1995</a>]</td>
+      <td valign=top class=noBorder>W. Greiner, L. Neisem and H. St&ouml;cker, \"<a href=\http://books.google.com/books?id=12DKsFtFTgYC\">A Mathematical Model of the Solid-Polymer-Electrolyte Fuel Cell</a>,\" <i>J. Electrochem. Soc.</i>, vol. 139, no. 9, pp. 2477&ndash;2491, Sep. 1992.</td>
+    </tr>
+    <tr>
       <td valign=top class=noBorder>[<a name=\"Gurau1998\" class=bookmark>Gurau1998</a>]</td>
       <td valign=top class=noBorder>V. Gurau, H. Liu, and S. Kaka, \"<a href=\"http://dx.doi.org/10.1002/aic.690441109\">Two-Dimensional Model for Proton Exchange Membrane Fuel Cells</a>,\" <i>AIChE J.</i>, vol. 44, no. 11, pp. 2410&ndash;2422, Nov. 1998.</td>
+    </tr>
+    <tr>
+      <td valign=top class=noBorder>[<a name=\"Hess2008\" class=bookmark>Hess2008</a>]</td>
+      <td valign=top class=noBorder>B. Hess, C. Kutzner, D. van der Spoel, and E. Lindahl, \"GROMACS 4: Algorithms for Highly Efficient, Load-Balanced, and Scalable Molecular Simulation,\" <i>J. Chem. Theory Comput.</i>, vol. 4, no. 3, pp. 435&ndash;447, 2008.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Hogan2006\" class=bookmark>Hogan2006</a>]</td>
@@ -214,12 +226,24 @@ package UsersGuide "User's Guide"
       <td valign=top class=noBorder>J. E. Mark, <i>Polymer Data Handbook</i>, Oxford University Press, 1999.</td>
     </tr>
     <tr>
+      <td valign=top class=noBorder>[<a name=\"Mattsson2008\" class=bookmark>Mattsson2008</a>]</td>
+      <td valign=top class=noBorder>S. E. Mattsson and H. Elmqvist, \"Unit Checking and Quantity Conservation,\" in <i>Modelica Conf.</i> (Bielefeld, Germany), Modelica Assoc., Mar. 2008.</td>
+    </tr>
+    <tr>
+      <td valign=top class=noBorder>[<a name=\"Mattsson1993B\" class=bookmark>Mattsson1993B</a>]</td>
+      <td valign=top class=noBorder>S. E. Mattsson and G. Soderlind, \"Index Reduction in Differential-Algebraic Equations Using Dummy Derivatives,\" <i>SIAM J. Sci. Comput.</i>, vol. 14, no. 3, pp. 677&ndash;692, May 1993.</td>
+    </tr>
+    <tr>
       <td valign=top class=noBorder>[<a name=\"McBride1996\" class=bookmark>McBride1996</a>]</td>
       <td valign=top class=noBorder>B. J. McBride and S. Gordon, \"<a href=\"http://www.grc.nasa.gov/WWW/CEAWeb/RP-1311P2.htm\">Computer Program for Calculating Complex Chemical Equilibrium Compositions and Applications II. Users Manual and Program Description</a>,\" NASA Reference Publication 1311, Jun. 1996.  Recent data available at <a href=\"http://www.grc.nasa.gov/WWW/CEAWeb/ceaHome.htm\">http://www.grc.nasa.gov/WWW/CEAWeb/ceaHome.htm</a>.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"McBride2002\" class=bookmark>McBride2002</a>]</td>
       <td valign=top class=noBorder>B. J. McBride, M. J. Zehe, and S. Gordon, \"<a href=\"http://gltrs.grc.nasa.gov/cgi-bin/GLTRS/browse.pl?2002/TP-2002-211556.html\">NASA Glenn Coefficients for Calculating Thermodynamic Properties of Individual Species</a>,\" NASA report TP-2002-211556, Sep. 2002.</td>
+    </tr>
+    <tr>
+      <td valign=top class=noBorder>[<a name=\"Modelica3.2\" class=bookmark>Modelica3.2</a>]</td>
+      <td valign=top class=\"noBorder\">Modelica Association, <i><a href=\"https://www.modelica.org/documents/ModelicaSpec32.pdf\">Modelica: A Unified Object-Oriented Language for Physical Systems Modeling: Language Specification</i></a>, Ver. 3.2, Mar. 2010.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Moran2004\" class=bookmark>Moran2004</a>]</td>
@@ -240,6 +264,10 @@ package UsersGuide "User's Guide"
     <tr>
       <td valign=top class=noBorder>[<a name=\"Rao1997\" class=bookmark>Rao1997</a>]</td>
       <td valign=top class=noBorder>Y. V. C. Rao, <i>Chemical Engineering Thermodynamics</i>, Hyderabad, India:  Universities Press, 1997.</td>
+    </tr>
+    <tr>
+      <td valign=top class=noBorder>[<a name=\"Rapaport2004\" class=bookmark>Rapaport2004</a>]</td>
+      <td valign=top class=noBorder>D. C. Rapaport, <i>The Art of Molecular Dynamics Simulation</i>, Cambridge University Press, 2nd ed., 2004.</td>
     </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Reichert2010\" class=bookmark>Reichert2010</a>]</td>
@@ -886,6 +914,19 @@ printing and shipping costs may be recovered.</p>
   annotation (preferedView="info", DocumentationClass=true);
 
   end UsersGuide;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 annotation (
