@@ -907,7 +907,7 @@ then it is meant that \"the value of velocity is one meter per second.\"  Again,
 <code>value</code> attribute represents the number, or the value divided by the unit, not the
 value itself.  This apparent conflict is solved in <a href=\"modelica://FCSys\">FCSys</a> by
 establishing units (including the meter and the second) as mathematical entities and writing
-<i>v</i> = 1&sdot;m/s.  Here, the variable <i>v</i> directly represents the value.
+<i>v</i> = 1&middot;m/s.  Here, the variable <i>v</i> directly represents the value.
 Its <code>value</code> attribute is truly the value in the context of the statement by BIPM.</p>
 
 One advantage is that unit conversion is handled
@@ -915,7 +915,7 @@ naturally.  The essence of unit conversion is that the phrase \"value in unit\" 
 \"value divided by unit.\"  Continuing with the previous example, <i>v</i>
 is divided by m/s in order to display <i>v</i> in meters per second (as a
 number).  If another unit of length like the foot is established by the
-appropriate relation (ft &asymp; 0.3048&sdot;m) and <i>v</i> is divided by
+appropriate relation (ft &asymp; 0.3048&middot;m) and <i>v</i> is divided by
 ft/s, the result is velocity in feet per second (&sim;3.2894).</p>
 
 <p>As another example, frequency is sometimes represented by a variable
@@ -924,12 +924,12 @@ per second (e.g., &omega;).  If the variable represents the value directly, then
 is no need to specify which units it is in.  The units are included; they have not been factored
 out by division.  A common variable (e.g., <i>f</i>) can be used in both cases, which
 standardizes the equations. The math is equivalent due to the relationships
-among units (e.g., 1&sdot;cycle = 2&pi;&sdot;rad).</p>
+among units (e.g., 1&middot;cycle = 2&pi;&middot;rad).</p>
 
 <p><b>Method:</b></p>
 
 <p>Each unit is represented by a constant.  The values of most units is derived from
-the values of other units and constants (e.g., 1&sdot;cycle = 2&pi;&sdot;rad).  However,
+the values of other units and constants (e.g., 1&middot;cycle = 2&pi;&middot;rad).  However,
 there are several units (in SI, 7) that are independent.  These
 base units are established by the \"particular example of the quantity
 concerned which is used as a reference\" quoted previously
@@ -991,7 +991,7 @@ The unit K is eliminated
 [<a href=\"modelica://FCSys.UsersGuide.References\">Greiner1995</a>, p. 386]
 or, more precisely, considered a derived unit instead of a base unit.  In SI, the
 kelvin would be derived from the units kilogram, meter, and second (K
-&asymp; 1.381&times;10<sup>-23</sup>&sdot;kg&sdot;m<sup>2</sup>/s<sup>2</sup>).</p>
+&asymp; 1.381&times;10<sup>-23</sup>&middot;kg&middot;m<sup>2</sup>/s<sup>2</sup>).</p>
 
     <p>There are six independent constants or units in the <a href=\"modelica://FCSys.Units\">Units</a> package (see
     <a href=\"modelica://FCSys.Units.Bases\">Units.Bases</a>),
@@ -999,10 +999,10 @@ kelvin would be derived from the units kilogram, meter, and second (K
       In <a href=\"modelica://FCSys\">FCSys</a>, two additional constraints are imposed in order
     to simplify the model equations and allow electrons and chemical species to be to represented by the
     same base <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.
-    First, the Faraday constant (k<sub>F</sub> or 96485.3399&sdot;C/mol)
+    First, the Faraday constant (k<sub>F</sub> or 96485.3399&middot;C/mol)
     is normalized to one. This implies that the mole (mol) is proportional to the coulomb
-    (C or Wb&sdot;S), which is considered a number of reference particles given the charge number.
-    Also, the gas constant (R or 8.314472&sdot;J/(mol&sdot;K)) is normalized to one.
+    (C or Wb&middot;S), which is considered a number of reference particles given the charge number.
+    Also, the gas constant (R or 8.314472&middot;J/(mol&middot;K)) is normalized to one.
     Therefore, the kelvin (K) is proportional to the volt
     (V or J/C). In addition, the radian (rad) is defined as a base constant.
     However, it must be set equal to one in the current version of the International System of Units (SI)

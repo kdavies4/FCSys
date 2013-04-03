@@ -120,7 +120,6 @@ package Subregions
       annotation (experiment(StopTime=1000, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionHOR.mos"));
-
     end SubregionHOR;
 
     model SubregionORR
@@ -281,7 +280,6 @@ package Subregions
           Algorithm="Dassl"),
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.Subregions.mos"));
-
     end Subregions;
 
     model SubregionsCAndH2
@@ -387,6 +385,7 @@ package Subregions
         redeclare FCSys.Conditions.FaceBus.SubregionClosedAdiabatic condition1,
 
         redeclare FCSys.Conditions.FaceBus.SubregionClosedAdiabatic condition2);
+
       annotation (Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ThermalConduction.mos"),
           experiment(StopTime=298.15, Algorithm="Dassl"));
@@ -415,6 +414,7 @@ package Subregions
         redeclare FCSys.Conditions.FaceBus.SubregionClosedAdiabatic condition1,
 
         redeclare FCSys.Conditions.FaceBus.SubregionClosedAdiabatic condition2);
+
       annotation (Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ThermalConductionConvection.mos"),
           experiment(StopTime=200, Algorithm="Dassl"));
@@ -475,7 +475,6 @@ package Subregions
           smooth=Smooth.None));
       annotation (experiment(StopTime=36000), Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ReactionRamp.mos"));
-
     end ReactionRamp;
 
     model Reaction "Test an electrochemical reaction"
@@ -541,7 +540,6 @@ package Subregions
           smooth=Smooth.None));
       annotation (experiment(StopTime=100), Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.Reaction.mos"));
-
     end Reaction;
 
     model SpeciesH2 "Test a species"
@@ -574,7 +572,6 @@ package Subregions
           smooth=Smooth.None));
       annotation (Placement(transformation(extent={{70,70},{90,90}})),
           experiment(StopTime=10));
-
     end SpeciesH2;
 
     model Specieseminus "Test a species"
@@ -600,7 +597,6 @@ package Subregions
         experiment(StopTime=10),
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionH2.mos"));
-
     end Specieseminus;
 
     model SubregionsCell "Test a one-dimensional array of subregions"
@@ -814,7 +810,6 @@ package Subregions
           Algorithm="Dassl"),
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionsH2.mos"));
-
     end SubregionsCell;
 
     model SubregionH2PipeTest
@@ -945,7 +940,6 @@ package Subregions
       annotation (experiment(StopTime=1000, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionHOR.mos"));
-
     end SubregionEvaporation;
 
   end Examples;
@@ -1333,7 +1327,6 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
-
   end Subregion;
 
   model SubregionIonomerOnly "Subregion with only the ionomer phase"
@@ -1398,7 +1391,6 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
-
   end SubregionIonomerOnly;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
@@ -1600,7 +1592,6 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
-
   end SubregionNoIonomer;
 
   package Phases "Phases or mixtures of species"
@@ -2004,7 +1995,6 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Icon(graphics));
-
     end Gas;
 
     model Graphite "Graphite phase"
@@ -2128,8 +2118,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect('C+'.faces[Axis.y, Side.n], yNegative.'C+') annotation (Line(
-          points={{6.10623e-16,6.10623e-16},{-4.87687e-22,6.10623e-16},{-4.87687e-22,
-              -40},{5.55112e-16,-40}},
+          points={{6.10623e-16,6.10623e-16},{-4.87687e-22,6.10623e-16},{
+              -4.87687e-22,-40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
@@ -2175,8 +2165,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect('e-'.faces[Axis.y, Side.n], yNegative.'e-') annotation (Line(
-          points={{6.10623e-16,6.10623e-16},{-4.87687e-22,6.10623e-16},{-4.87687e-22,
-              -40},{5.55112e-16,-40}},
+          points={{6.10623e-16,6.10623e-16},{-4.87687e-22,6.10623e-16},{
+              -4.87687e-22,-40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
@@ -2209,7 +2199,6 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
-
     end Graphite;
 
     model Ionomer "Ionomer phase"
@@ -2522,7 +2511,6 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
-
     end Ionomer;
 
     model Liquid "Liquid phase"
@@ -2631,7 +2619,6 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Icon(graphics));
-
     end Liquid;
 
     package BaseClasses "Base classes (not generally for direct use)"
@@ -2643,7 +2630,7 @@ package Subregions
         parameter Q.NumberAbsolute k[Axis](
           each min=Modelica.Constants.small,
           each final nominal=1) = {1,1,1} if n_spec > 0
-          "<html>Areal fill factor (<b>k</b>)</html>"
+          "<html>Area fill factor (<b>k</b>)</html>"
           annotation (Dialog(group="Geometry"));
 
         // Assumptions
@@ -2790,24 +2777,35 @@ package Subregions
             points={{6.2,-12.2},{13.33,-26.67}},
             color={72,90,180},
             smooth=Smooth.None));
-        annotation (
-          Documentation(info="<html><p>If one of the species has <code>setTemp = true</code>, then
+        annotation (Documentation(info="<html><p>If one of the species has <code>setTemp = true</code>, then
     <code>initTemp</code> should be set to <code>false</code>.
     Likewise, if one of the species has <code>setVelX = true</code>,
     <code>setVelY = true</code>, or <code>setVelZ = true</code>, then
     <code>initVelX</code>, <code>initVelY</code>, or <code>initVelZ</code> should
     be set to <code>false</code> (respectively).</p>
 
-    <p>Assumptions:
-           <ol>
-           <li>The factors that may cause anisotropic transport (<b><i>k</i></b>)
-          are common to all of the species within the phase.</li>
-</ol></p>
+    <p>The area fill factor (<code>k</code>) is a vector which adjusts (inversely) all 
+    the transport coefficients (&eta;, &beta;, &zeta;, and &theta;) of all of the species
+    within the phase.  It can be used to introduce minor head loss or the effects of 
+    porosity or torousity.  These effects may be anisotropic.</p>
+      
+    <p>Porosity is often quoted in material data sheets (e.g., 
+    [<a href=\"modelica://FCSys.UsersGuide.References\">Toray2010</a>]) as volumetric porosity.  Using the 
+    Bruggeman correction factor [<a href=\"modelica://FCSys.UsersGuide.References\">Weber2004</a>, p. 4696],
+    the area fill factor for the solid should be set to (1 - &epsilon;)<sup>3/2</sup>
+    along each axis, where &epsilon; is the volumetric porosity (or volumetric fill factor 
+    of the gas).<sup><a href=\"#fn1\" id=\"ref1\">1</a></sup></p>
+    
+    <p>The x-axis component of linear momentum is included by default.  At least one component must be included.</p>
 
-<p>Notes:<ul>
-  <li>The x-axis component of linear momentum is included by default.  At least one component must be included.</li></ul></html>"),
+    <hr>
 
-          Icon(graphics={
+    <small>
+    <p id=\"fn1\">1. Note that the Bruggeman correction is in contradiction with what one would
+    expect based on geometry&mdash;that the area fill factor would be the volumetric fill factor (1 - &epsilon;) 
+    raised to the two-thirds power (not three halfs).<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></p>
+
+</html>"), Icon(graphics={
               Ellipse(
                 extent={{-40,100},{40,20}},
                 lineColor={127,127,127},
@@ -2859,7 +2857,6 @@ package Subregions
                 extent={{-100,-20},{100,20}},
                 textString="%name",
                 lineColor={0,0,0})}));
-
       end NullPhase;
 
     end BaseClasses;
@@ -2896,9 +2893,9 @@ package Subregions
                     {100,100}}), graphics),
             Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics={Text(
-                          extent={{-150,90},{-118,52}},
-                          lineColor={0,0,255},
-                          textString="%t.test")}));
+                  extent={{-150,90},{-118,52}},
+                  lineColor={0,0,255},
+                  textString="%t.test")}));
 
         end Calibrated;
 
@@ -3095,6 +3092,7 @@ package Subregions
             beta=Data.beta(T),
             F=Data.zeta(T),
             R=Data.theta(T));
+
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'e-'",
@@ -3110,6 +3108,7 @@ package Subregions
             redeclare parameter Q.CompressibilityDynamic beta=Data.beta(),
             redeclare parameter Q.FluidityDynamic F=Data.zeta(),
             redeclare parameter Q.ResistivityThermal R=Data.R());
+
           annotation (
             group="Material properties",
             defaultComponentPrefixes="replaceable",
@@ -4043,7 +4042,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
     end O2;
 
     model SpeciesSolid
-      "<html><a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model for a solid (inert and stagnant)"
+      "<html><a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model for a solid (inert and stagnant)</html>"
       extends SpeciesIncompressible(
         final upstreamX=false,
         final upstreamY=false,
@@ -4074,7 +4073,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
     end SpeciesSolid;
 
     model SpeciesIncompressible
-      "<html><a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model for an incompressible fluid"
+      "<html><a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model for an incompressible fluid</html>"
       extends Species(initMethPartNum=InitMethScalar.Volume);
       // Note:  The default, pressure, can't be used to initialize an
       // incompressible species.
@@ -4609,7 +4608,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         annotation (missingInnerMessage="Your model is using an outer \"environment\" record, but an inner \"environment\" record is not defined.
 For simulation, specify global conditions and defaults by dragging FCSys.Conditions.Environment into your model.
 The default global conditions and defaults will be used for the current simulation.",
-          Placement(transformation(extent={{40,40},{60,60}}),
+          Placement(transformation(extent={{20,20},{40,40}}),
             iconTransformation(extent={{-10,90},{10,110}})));
       // Note:  In Dymola 7.4 it's necessary to add the missing inner message
       // here to give a warning message, even though it's included in the
@@ -5104,12 +5103,12 @@ Choose a condition besides None.");
     <li>Here (and in the rest of <a href=\"modelica://FCSys\">FCSys</a>), the \"specific\"
     adjective means that the following extensive quantity is divided by particle number.
     (\"Massic\" indicates a quantity divided by mass.)</li>
-    <li>In general, if dynamic compressibility, dynamic fluidity, or thermal resistivity is zero, then
+    <li>In general, if material resistivity, dynamic compressibility, dynamic fluidity, or thermal resistivity is zero, then
     it should be set as <code>final</code> so that index reduction may be performed.
     If two <a href=\"modelica://FCSys.Subregions.Species\">Species</a> instances
     are connected through their <code>inert</code> connectors or faces (<code>xNegative</code>,
     <code>xPositive</code>, etc.) and both have zero generalized resistivities for a
-    quantity, then index reduction is necessary.</li>
+    quantity, then index reduction [<a href=\"modelica://FCSys.Subregions.Species\">Mattsson1993B</a>] is necessary.</li>
     <li>Even if an initialization parameter is not selected to be used explicitly,
     it may be used a guess value.</li>
     <li>The <b><i>k</i></b> factor can be used to account for the effects of porosity and tortousity
@@ -5171,12 +5170,11 @@ Choose a condition besides None.");
             extent={{-100,-100},{100,100}},
             initialScale=0.1), graphics),
         Icon(graphics={Ellipse(
-                  extent={{-80,80},{80,-80}},
-                  lineColor={127,127,127},
-                  pattern=LinePattern.Dash,
-                  fillColor={225,225,225},
-                  fillPattern=FillPattern.Solid)}));
-
+              extent={{-80,80},{80,-80}},
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash,
+              fillColor={225,225,225},
+              fillPattern=FillPattern.Solid)}));
     end Species;
 
     package BaseClasses "Base classes (not generally for direct use)"
@@ -5314,7 +5312,6 @@ Choose a condition besides None.");
             extent={{-170,140},{170,180}},
             textString="%name",
             lineColor={0,0,0})}));
-
   end PhaseBoundary;
 
   model Reaction
@@ -5338,8 +5335,7 @@ Choose a condition besides None.");
 
   protected
     final parameter Integer n_spec=size(formulas, 1) "Number of species";
-    annotation (
-      Documentation(info="<html>
+    annotation (Documentation(info="<html>
     <p>This model has no physical connectors.  It simply provides information about a reaction
     to instances of the <a href=\"modelica://FCSys.Connectors.Species\">Species</a> model, which
     contains equations that govern the reaction.</p>
@@ -5350,8 +5346,7 @@ Choose a condition besides None.");
     Otherwise an error message is given.</p>
 
     <p>The exchange current (<code>Io</code>) may be time-varying (e.g., dependent on operating conditions).</p>
-    </html>"),
-      Icon(graphics={Ellipse(
+    </html>"), Icon(graphics={Ellipse(
             extent={{-80,40},{80,-40}},
             fillColor={255,255,255},
             fillPattern=FillPattern.Solid,
@@ -5418,7 +5413,6 @@ Choose a condition besides None.");
             lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics));
-
   end Volume;
 
   package BaseClasses "Base classes (not generally for direct use)"

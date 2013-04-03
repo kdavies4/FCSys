@@ -439,7 +439,6 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
                 expected={1,1},
                 eps=1e-4);
         annotation (TestCase(action="call",result="success"));
-
       end CheckSuccess;
 
       function CheckFailure1 "Check for failure when a value is incorrect"
@@ -447,7 +446,6 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
       algorithm
         assertValues(actual={1,2}, expected={1,1});
         annotation (TestCase(action="call",result="failure"));
-
       end CheckFailure1;
 
     end Values;
@@ -459,7 +457,6 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
       algorithm
         assertLogValue(actual=10, expected=1);
         annotation (TestCase(action="call",result="success"));
-
       end CheckSuccess;
 
       function CheckFailure1 "Check for failure when value is incorrect"
@@ -467,7 +464,6 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
       algorithm
         assertLogValue(actual=11, expected=1);
         annotation (TestCase(action="call",result="failure"));
-
       end CheckFailure1;
 
     end LogValue;
@@ -479,7 +475,6 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
       algorithm
         assertLogValues(actual={0,1,100}, expected={0,10,10});
         annotation (TestCase(action="call",result="success"));
-
       end CheckSuccess;
 
       function CheckFailure1 "Check for failure when a value is incorrect"
@@ -487,7 +482,6 @@ package Test "Library to facilitate assertion-based testing of Modelica code"
       algorithm
         assertLogValues(actual={1,101}, expected={10,10});
         annotation (TestCase(action="call",result="failure"));
-
       end CheckFailure1;
 
     end LogValues;

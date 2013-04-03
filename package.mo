@@ -5,6 +5,7 @@ package FCSys "Modelica library of fuel cell models"
 // the LaTeX document (76 characters, including leading spaces and // )
 // ------------------------------------------------------------------------
 
+
 extends Modelica.Icons.Package;
 // extends FCSys.BaseClasses.Icons.Cell;
 
@@ -19,6 +20,7 @@ import FCSys.BaseClasses.Side;
 import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
 import FCSys.Subregions.Species.BaseClasses.InitMethVelocity;
 import FCSys.Subregions.Species.BaseClasses.InitMethScalar;
+
 
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
@@ -136,6 +138,7 @@ package UsersGuide "User's Guide"
 <a href=\"modelica://FCSys.UsersGuide.References\">Fritzson2004</a>
 <a href=\"modelica://FCSys.UsersGuide.References\">Greiner1995</a>
 <a href=\"modelica://FCSys.UsersGuide.References\">Hess2008</a>
+<a href=\"modelica://FCSys.Subregions.Species\">Mattsson1993B</a>
 <a href=\"modelica://FCSys.UsersGuide.References\">Mattsson2008</a>
 <a href=\"modelica://FCSys.UsersGuide.References\">Modelica3.2</a>
 <a href=\"modelica://FCSys.UsersGuide.References\">Rapaport2004</a>
@@ -883,6 +886,8 @@ printing and shipping costs may be recovered.</p>
   annotation (preferedView="info", DocumentationClass=true);
 
   end UsersGuide;
+
+
 annotation (
   uses(Modelica(version="3.2")),
   preferedView="info",
@@ -1188,5 +1193,4 @@ margin-right: auto;\" class=noBorder>
   versionBuild=0,
   dateModified="",
   revisionID="");
-
 end FCSys;

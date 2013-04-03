@@ -185,7 +185,6 @@ package Characteristics
               "resources/scripts/Dymola/Characteristics.Examples.Correlations.mos"),
 
         Icon(graphics));
-
     end Correlations;
 
   end Examples;
@@ -476,6 +475,7 @@ package Characteristics
             1.1996252}),fromNASAThermalConductivity({1.0582450,248.75372,
             1.1736907e4,0.82758695}),fromNASAThermalConductivity({-0.22364420,-6.9650442e3,
             -7.7771313e4,13.189369})});
+
       annotation (Documentation(info="<html>
             <p>Notes:
      <ul>
@@ -524,6 +524,7 @@ package Characteristics
             -0.24664550}),fromNASAThermalConductivity({0.39367933,-2.2524226e3,
             6.1217458e5,5.8011317}),fromNASAThermalConductivity({-0.41858737,-1.4096649e4,
             1.9179190e7,14.345613})});
+
       annotation (Documentation(info="<html>
         <p>Notes:
      <ul>
@@ -625,6 +626,7 @@ package Characteristics
             0.47793128}),fromNASAThermalConductivity({0.88407146,133.57293,-1.1429640e4,
             0.24417019}),fromNASAThermalConductivity({2.4176185,8.0477749e3,
             3.1055802e6,-14.517761})});
+
       annotation (Documentation(info="<html>
                   <p>Notes:
      <ul>
@@ -675,6 +677,7 @@ package Characteristics
             1.2210365}),fromNASAThermalConductivity({0.90917351,291.24182,-7.9650171e4,
             0.064851631}),fromNASAThermalConductivity({-1.1218262,-1.9286378e4,
             2.3295011e7,20.342043})});
+
       annotation (Documentation(info="<html><p>Notes:<ul>
   <li>According to [<a href=\"modelica://FCSys.UsersGuide.References\">Avogadro1.03</a>], the (center-to-center)
    bond length of O-O is 128.2 pm.  The radius of O is from
@@ -767,7 +770,6 @@ package Characteristics
 
   <p>For more information, see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.zeta\">Characteristic.zeta</a>().</p>
   </html>"));
-
       end zeta;
 
       redeclare function theta
@@ -805,7 +807,6 @@ package Characteristics
 
     <p>For more information, see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.theta\">Characteristic.theta</a>().</p>
     </html>"));
-
       end theta;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html><p>The correlations for transport properties are available in
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>,
@@ -892,7 +893,6 @@ package Characteristics
   fluidity of gases.  However, the fluidity varies by species and
   generally falls more rapidly with temperature than indicated
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 41].</p></html>"));
-
       end alpha;
 
       partial function tau
@@ -915,7 +915,6 @@ package Characteristics
   fluidity of gases.  However, the fluidity varies by species and
   generally falls more rapidly with temperature than indicated
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 41].</p></html>"));
-
       end tau;
 
     public
@@ -998,7 +997,6 @@ package Characteristics
   <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
   </html>"));
-
       end c_p;
 
       function c_v
@@ -1026,7 +1024,6 @@ package Characteristics
   <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
   </html>"));
-
       end c_v;
 
       function dp_Tv
@@ -1101,7 +1098,6 @@ package Characteristics
 second, or bulk dynamic viscosity and specific volume (see
 <a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).</p>
 </html>"));
-
       end eta;
 
       function g "Gibbs potential as a function of temperature and pressure"
@@ -1233,7 +1229,6 @@ second, or bulk dynamic viscosity and specific volume (see
   <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
     </html>"));
-
       end h;
 
       replaceable function beta
@@ -1253,7 +1248,6 @@ second, or bulk dynamic viscosity and specific volume (see
 second, or bulk dynamic viscosity and specific volume (see
 <a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).</p>
 </html>"));
-
       end beta;
 
       replaceable function mu
@@ -1272,7 +1266,6 @@ second, or bulk dynamic viscosity and specific volume (see
 second, or bulk dynamic viscosity and specific volume (see
 <a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).</p>
 </html>"));
-
       end mu;
 
       replaceable function nu
@@ -1290,7 +1283,6 @@ second, or bulk dynamic viscosity and specific volume (see
 second, or bulk dynamic viscosity and specific volume (see
 <a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).</p>
 </html>"));
-
       end nu;
 
       function p_Tv "Pressure as a function of temperature and specific volume"
@@ -1322,7 +1314,6 @@ second, or bulk dynamic viscosity and specific volume (see
   and the function will return a value of zero.</p>
 
 <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a>().</p></html>"));
-
       end p_Tv;
 
       replaceable function theta
@@ -1471,7 +1462,6 @@ second, or bulk dynamic viscosity and specific volume (see
         annotation (Documentation(info="<html>
   <p>The derivative of this function is
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv\">dv</a>().</p></html>"));
-
       end v_Tp;
 
       replaceable function zeta
@@ -1490,7 +1480,6 @@ second, or bulk dynamic viscosity and specific volume (see
 <p>Note that fluidity is defined as the reciprocal of viscosity&mdash;specifically dynamic viscosity
 (see <a href=\"http://en.wikipedia.org/wiki/Viscosity#Fluidity\">http://en.wikipedia.org/wiki/Viscosity#Fluidity</a>).</p>
 </html>"));
-
       end zeta;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
     <p>This package is compatible with NASA CEA thermodynamic data
