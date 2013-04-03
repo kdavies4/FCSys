@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.FaceBusPair.Phases.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-4-2">
+<meta name="date" content="2013-6-5">
 <meta name="description" content="Base classes (not generally for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +18,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -56,55 +56,52 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td><img src="images/FCSys.Conditions.FaceBusPair.Phases.BaseClasses.NullPhaseS.png" alt="FCSys.Conditions.FaceBusPair.Phases.BaseClasses.NullPhase" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FaceBusPair_Phases_BaseClasses.html#FCSys.Conditions.FaceBusPair.Phases.BaseClasses.NullPhase">NullPhase</a>
+<tr><td><img src="images/FCSys.Conditions.FaceBusPair.Phases.BaseClasses.EmptyPhaseS.png" alt="FCSys.Conditions.FaceBusPair.Phases.BaseClasses.EmptyPhase" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FaceBusPair_Phases_BaseClasses.html#FCSys.Conditions.FaceBusPair.Phases.BaseClasses.EmptyPhase">EmptyPhase</a>
 </td><td>Empty condition for a phase (no species)</td></tr>
 </table>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.FaceBusPair.Phases.BaseClasses.NullPhaseI.png" alt="FCSys.Conditions.FaceBusPair.Phases.BaseClasses.NullPhase" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.FaceBusPair.Phases.BaseClasses.NullPhase"></a><a href="FCSys_Conditions_FaceBusPair_Phases_BaseClasses.html#FCSys.Conditions.FaceBusPair.Phases.BaseClasses">FCSys.Conditions.FaceBusPair.Phases.BaseClasses</a>.NullPhase</h2>
+<h2><img src="images/FCSys.Conditions.FaceBusPair.Phases.BaseClasses.EmptyPhaseI.png" alt="FCSys.Conditions.FaceBusPair.Phases.BaseClasses.EmptyPhase" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.FaceBusPair.Phases.BaseClasses.EmptyPhase"></a><a href="FCSys_Conditions_FaceBusPair_Phases_BaseClasses.html#FCSys.Conditions.FaceBusPair.Phases.BaseClasses">FCSys.Conditions.FaceBusPair.Phases.BaseClasses</a>.EmptyPhase</h2>
 <b>Empty condition for a phase (no species)</b><p>
-<img src="images/FCSys.Conditions.FaceBusPair.Phases.BaseClasses.NullPhaseD.png" alt="FCSys.Conditions.FaceBusPair.Phases.BaseClasses.NullPhase">
+<img src="images/FCSys.Conditions.FaceBusPair.Phases.BaseClasses.EmptyPhaseD.png" alt="FCSys.Conditions.FaceBusPair.Phases.BaseClasses.EmptyPhase">
 
 <h3>Information</h3>
 
 Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Double">FCSys.Conditions.BaseClasses.Icons.Double</a> (Icon for a two-connector boundary condition).
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative</td><td>Negative-side multi-species connector for linear momentum and heat</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive</td><td>Positive-side multi-species connector for linear momentum and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative</td><td>Negative-side multi-species connector for translational momentum and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive</td><td>Positive-side multi-species connector for translational momentum and heat</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Input bus for values of specified conditions</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> NullPhase <font color="darkgreen">&quot;Empty condition for a phase (no species)&quot;</font>
+<font color="blue">model</font> EmptyPhase <font color="darkgreen">&quot;Empty condition for a phase (no species)&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Double">FCSys.Conditions.BaseClasses.Icons.Double</a>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> negative <font color="darkgreen">
-    &quot;Negative-side multi-species connector for linear momentum and heat&quot;</font>;
+    &quot;Negative-side multi-species connector for translational momentum and heat&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> positive <font color="darkgreen">
-    &quot;Positive-side multi-species connector for linear momentum and heat&quot;</font>;
+    &quot;Positive-side multi-species connector for translational momentum and heat&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">Connectors.RealInputBus</a> u <font color="darkgreen">&quot;Input bus for values of specified conditions&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Output bus of measurements&quot;</font>;
 
-<font color="blue">end </font>NullPhase;
+<font color="blue">end </font>EmptyPhase;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Apr  2 18:51:22 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun  5 08:41:45 2013.
 </div>
 </body>
 </html>

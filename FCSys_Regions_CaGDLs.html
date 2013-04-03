@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Regions.CaGDLs</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-4-2">
+<meta name="date" content="2013-6-5">
 <meta name="description" content="Cathode gas diffusion layers">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +18,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -101,12 +101,11 @@ the z axis extends across the width of the channel.</p>
 <p>
 Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base model for a 3D array of subregions).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><TD colspan="2">replaceable model Subregion</td><td><a href="FCSys_Subregions.html#FCSys.Subregions.Subregion">Subregion</a></td><td>Base subregion model</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.76</td><td>Volumetric porosity [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.3*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
@@ -119,12 +118,11 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
+<tr><TD colspan="2">replaceable model Subregion</td><td>Base subregion model</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xNegative[n_y, n_z]</td><td>Negative face along the x axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>xPositive[n_y, n_z]</td><td>Positive face along the x axis</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>yNegative[n_x, n_z]</td><td>Negative face along the y axis</td></tr>
@@ -133,7 +131,6 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -152,52 +149,44 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
     <font color="blue">final </font>inclFacesX=true,
     inclFacesY=false,
     inclFacesZ=false,
-    <font color="blue">redeclare </font><a href="FCSys_Subregions.html#FCSys.Subregions.SubregionNoIonomer">FCSys.Subregions.SubregionNoIonomer</a> subregions[n_x, n_y, n_z](
-      <font color="blue">each </font>inclLinX=false,
-      <font color="blue">each </font>gas(
-        inclH2O=true,
-        inclN2=true,
-        inclO2=true,
-        H2O(
-          p_IC=environment.x_H2O*environment.p,
-          xNegative(isobaric=true),
-          xPositive(isobaric=false,inviscidY=false)),
-        N2(
-          p_IC=(1 - environment.x_H2O)*(1 - environment.x_O2_dry)*environment.p,
+    <font color="blue">redeclare </font><font color="blue">replaceable </font><font color="blue">model</font> Subregion = <a href="FCSys_Subregions.html#FCSys.Subregions.SubregionNoIonomer">FCSys.Subregions.SubregionNoIonomer</a>
+        (
+        inclTransX=true,
+        inclTransY=false,
+        inclTransZ=false,
+        gas(
+          inclH2O=true,
+          inclN2=true,
+          inclO2=true,
+          H2O(p_IC=environment.n_H2O*environment.p, consTransX=Conservation.IC),
 
-          xNegative(isobaric=false),
-          xPositive(isobaric=false,inviscidY=false)),
-        O2(
-          p_IC=(1 - environment.x_H2O)*environment.x_O2_dry*environment.p,
-          xNegative(isobaric=false),
-          xPositive(isobaric=false,inviscidY=false))),
-      <font color="blue">each </font>graphite(
-        &#39;inclC+&#39;=true,
-        &#39;incle-&#39;=true,
-        &#39;C+&#39;(V_IC=V - xV),
-        &#39;e-&#39;(xNegative(isobaric=false), xPositive(isobaric=false))),
-      <font color="blue">each </font>liquid(inclH2O=true, H2O(
-          V_IC=0,
-          xNegative(isobaric=false),
-          xPositive(isobaric=false,inviscidY=false)))));
+          N2(p_IC=(1 - environment.n_H2O)*(1 - environment.n_O2_dry)*
+                environment.p),
+          O2(p_IC=(1 - environment.n_H2O)*environment.n_O2_dry*environment.p)),
+
+        graphite(
+          &#39;inclC+&#39;=true,
+          &#39;incle-&#39;=true,
+          &#39;C+&#39;(V_IC=V - xV)),
+        liquid(inclH2O=true, H2O(V_IC=0))));
 
   <font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">Q.NumberAbsolute</a> x(nominal=1) = 0.76 <font color="darkgreen">&quot;Volumetric porosity&quot;</font>;
   <font color="darkgreen">// The default porosity is for Sigracet 24 BC.</font>
 
   <font color="darkgreen">// Auxiliary variables (for analysis)</font>
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> x_H2O[n_x, n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) =
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> n_H2O[n_x, n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) =
     subregions.gas.H2O.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N +
     subregions.gas.O2.N) <font color="blue">if </font>environment.analysis<font color="blue"> and </font>hasSubregions <font color="darkgreen">
     &quot;Molar concentration of H2&quot;</font>;
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> x_N2[n_x, n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) =
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> n_N2[n_x, n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) =
     subregions.gas.N2.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N +
     subregions.gas.O2.N) <font color="blue">if </font>environment.analysis<font color="blue"> and </font>hasSubregions <font color="darkgreen">
     &quot;Molar concentration of N2&quot;</font>;
-  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> x_O2[n_x, n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) = <font color="red">
+  <font color="blue">output </font><a href="FCSys_Quantities.html#FCSys.Quantities.Number">Q.Number</a> n_O2[n_x, n_y, n_z](<font color="blue">each </font>stateSelect=StateSelect.never) = <font color="red">
     ones</font>(
     n_x,
     n_y,
-    n_z) - x_H2O - x_N2 <font color="blue">if </font>environment.analysis<font color="blue"> and </font>hasSubregions <font color="darkgreen">
+    n_z) - n_H2O - n_N2 <font color="blue">if </font>environment.analysis<font color="blue"> and </font>hasSubregions <font color="darkgreen">
     &quot;Molar concentration of O2&quot;</font>;
 
 <font color="blue">protected </font>
@@ -223,12 +212,11 @@ Extends from <a href="FCSys_Regions.html#FCSys.Regions.Region">Region</a> (Base 
                 <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.88</td><td>Volumetric porosity [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.400*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
@@ -240,9 +228,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -254,7 +240,6 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -280,12 +265,11 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
                 <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.84</td><td>Volumetric porosity [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.420*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
@@ -297,9 +281,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -311,7 +293,6 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -337,12 +318,11 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
                 <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.82</td><td>Volumetric porosity [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.420*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
@@ -354,9 +334,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -368,7 +346,6 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -394,12 +371,11 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
                 <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.84</td><td>Volumetric porosity [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.190*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
@@ -411,9 +387,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -425,7 +399,6 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -451,12 +424,11 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
                 <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.76</td><td>Volumetric porosity [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.235*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
@@ -468,9 +440,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -482,7 +452,6 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -508,12 +477,11 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
                 <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.88</td><td>Volumetric porosity [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.190*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
@@ -525,9 +493,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -539,7 +505,6 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -565,12 +530,11 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
                 <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.80</td><td>Volumetric porosity [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.235*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
@@ -582,9 +546,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -596,7 +558,6 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -622,12 +583,11 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
                 <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.80</td><td>Volumetric porosity [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.110*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
@@ -639,9 +599,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -653,7 +611,6 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -684,12 +641,11 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
                 <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.78</td><td>Volumetric porosity [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.190*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
@@ -701,9 +657,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -715,7 +669,6 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -746,12 +699,11 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
                 <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.78</td><td>Volumetric porosity [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.280*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
@@ -763,9 +715,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -777,7 +727,6 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -808,12 +757,11 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
                 <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> model.</p><p>
 Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGDL</a> (Cathode gas diffusion layer).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
+<tr><TD colspan="2">replaceable model Subregion</td><td>FCSys.Subregions.SubregionNo&hellip;</td><td>Base subregion model</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.NumberAbsolute">NumberAbsolute</a></td><td>x</td><td>0.78</td><td>Volumetric porosity [1]</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
 <tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L_x[:]</td><td>fill(0.370*U.mm/1, 1)</td><td>Lengths along the x axis (<i>L</i><sub>x</sub>) [l]</td></tr>
@@ -825,9 +773,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td>Boolean</td><td>inclFacesZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -839,7 +785,6 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive[n_x, n_y]</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -862,7 +807,7 @@ Extends from <a href="FCSys_Regions_CaGDLs.html#FCSys.Regions.CaGDLs.CaGDL">CaGD
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Apr  2 18:53:30 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun  5 08:44:00 2013.
 </div>
 </body>
 </html>

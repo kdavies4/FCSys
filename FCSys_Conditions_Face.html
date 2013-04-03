@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.Face</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-4-2">
+<meta name="date" content="2013-6-5">
 <meta name="description" content="&lt;html&gt;Conditions for a &lt;a href=\&quot;modelica://FCSys.Connectors.Face\&quot;&gt;Face&lt;/a&gt; connector (e.g., as in a &lt;a href=\&quot;modelica://FCSys.Subregions.Species\&quot;&gt;Species&lt;/a&gt; model)&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +18,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -61,7 +61,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Conditions.Face.MaterialS.png" alt="FCSys.Conditions.Face.Material" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Face_Material.html#FCSys.Conditions.Face.Material">Material</a>
 </td><td>Material conditions</td></tr>
 <tr><td><img src="images/FCSys.Conditions.Face.MaterialS.png" alt="FCSys.Conditions.Face.Transverse" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Face_Transverse.html#FCSys.Conditions.Face.Transverse">Transverse</a>
-</td><td>Transverse mechanical conditions</td></tr>
+</td><td>Transverse translational conditions</td></tr>
 <tr><td><img src="images/FCSys.Conditions.Face.MaterialS.png" alt="FCSys.Conditions.Face.Thermal" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Face_Thermal.html#FCSys.Conditions.Face.Thermal">Thermal</a>
 </td><td>Thermal conditions</td></tr>
 <tr><td><img src="images/FCSys.Conditions.Face.BaseClassesS.png" alt="FCSys.Conditions.Face.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_Face_BaseClasses.html#FCSys.Conditions.Face.BaseClasses">BaseClasses</a>
@@ -85,9 +85,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <p>
 Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single">FCSys.Conditions.BaseClasses.Icons.Single</a> (Icon for a single-connector boundary condition).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -98,18 +96,15 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
 <tr><td><a href="FCSys_Conditions_Face_Thermal.html#FCSys.Conditions.Face.Thermal.Temperature">Temperature</a></td><td>thermal</td><td>redeclare Thermal.Temperatur&hellip;</td><td>Thermal</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Single-species connector for linear momentum and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>face</td><td>Single-species connector for translational momentum and heat</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Input bus for values of specified conditions</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -133,7 +128,8 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
   <font color="darkgreen">// subcomponent can be replaced by blocks that don&#39;t contain the</font>
   <font color="darkgreen">// parameter k.</font>
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Connectors.Face</a> face <font color="darkgreen">&quot;Single-species connector for linear momentum and heat&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Connectors.Face</a> face <font color="darkgreen">
+    &quot;Single-species connector for translational momentum and heat&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">Connectors.RealInputBus</a> u <font color="darkgreen">&quot;Input bus for values of specified conditions&quot;</font>;
 
@@ -166,7 +162,7 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Apr  2 18:51:11 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun  5 08:41:32 2013.
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.FaceBusPair</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-4-2">
+<meta name="date" content="2013-6-5">
 <meta name="description" content="&lt;html&gt;Conditions for a &lt;a href=\&quot;modelica://FCSys.Connectors.FaceBus\&quot;&gt;FaceBus&lt;/a&gt; connector (e.g., as in a &lt;a href=\&quot;modelica://FCSys.Regions.Region\&quot;&gt;Region&lt;/a&gt; or &lt;a href=\&quot;modelica://FCSys.Subregions.Subregion\&quot;&gt;Subregion&lt;/a&gt; model)&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +18,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -74,9 +74,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single">FCSys.Conditions.BaseClasses.Icons.Single</a> (Icon for a single-connector boundary condition).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -87,19 +85,16 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
 <tr><td><a href="FCSys_Conditions_FaceBusPair_Phases.html#FCSys.Conditions.FaceBusPair.Phases.Liquid">Liquid</a></td><td>liquid</td><td>&nbsp;</td><td>Liquid</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative</td><td>Negative-side multi-species connector for linear momentum and heat</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive</td><td>Positive-side multi-species connector for linear momentum and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative</td><td>Negative-side multi-species connector for translational momentum and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive</td><td>Positive-side multi-species connector for translational momentum and heat</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Bus of inputs to specify conditions</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -117,9 +112,9 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
   <a href="FCSys_Conditions_FaceBusPair_Phases.html#FCSys.Conditions.FaceBusPair.Phases.Liquid">Phases.Liquid</a> liquid <font color="darkgreen">&quot;Liquid&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> negative <font color="darkgreen">
-    &quot;Negative-side multi-species connector for linear momentum and heat&quot;</font>;
+    &quot;Negative-side multi-species connector for translational momentum and heat&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> positive <font color="darkgreen">
-    &quot;Positive-side multi-species connector for linear momentum and heat&quot;</font>;
+    &quot;Positive-side multi-species connector for translational momentum and heat&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">Connectors.RealInputBus</a> u <font color="darkgreen">&quot;Bus of inputs to specify conditions&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Output bus of measurements&quot;</font>;
@@ -161,19 +156,16 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
 
 Extends from <a href="FCSys_Conditions_FaceBusPair.html#FCSys.Conditions.FaceBusPair.Subregion">Subregion</a> (Conditions for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a> connectors, with efforts by default).
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative</td><td>Negative-side multi-species connector for linear momentum and heat</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive</td><td>Positive-side multi-species connector for linear momentum and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>negative</td><td>Negative-side multi-species connector for translational momentum and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>positive</td><td>Positive-side multi-species connector for translational momentum and heat</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Bus of inputs to specify conditions</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -279,7 +271,7 @@ Extends from <a href="FCSys_Conditions_FaceBusPair.html#FCSys.Conditions.FaceBus
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Apr  2 18:51:19 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun  5 08:41:42 2013.
 </div>
 </body>
 </html>

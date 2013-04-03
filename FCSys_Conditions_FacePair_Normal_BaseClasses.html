@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.FacePair.Normal.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-4-2">
+<meta name="date" content="2013-6-5">
 <meta name="description" content="Base classes (not generally for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +18,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -62,7 +62,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>Types of conditions</td></tr>
 </table>
 <p>
-
 <h3>Types and constants</h3>
 
 <a name="FCSys.Conditions.FacePair.Normal.BaseClasses.ConditionType"></a><pre><font color="blue">type</font> ConditionType = <font color="blue">enumeration</font>(
@@ -80,9 +79,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 Extends from <a href="FCSys_Conditions_FacePair_BaseClasses.html#FCSys.Conditions.FacePair.BaseClasses.PartialCondition">FacePair.BaseClasses.PartialCondition</a> (Partial model to specify and measure conditions on a pair of connectors).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -94,20 +91,17 @@ Extends from <a href="FCSys_Conditions_FacePair_BaseClasses.html#FCSys.Condition
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>&nbsp;</td><td>Measurement expression</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Value of specified condition</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>negative</td><td>Negative-side connector to transport linear momentum and heat of a single species</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>positive</td><td>Positive-side connector to transport linear momentum and heat of a single species</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>negative</td><td>Negative-side connector to transport translational momentum and heat of a single species</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>positive</td><td>Positive-side connector to transport translational momentum and heat of a single species</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=3>Measurement</td></tr>
 <tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Measurement expression</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -124,7 +118,7 @@ Extends from <a href="FCSys_Conditions_FacePair_BaseClasses.html#FCSys.Condition
 
   <font color="darkgreen">// No flows of other quantities</font>
   <font color="darkgreen">// ----------------------------</font>
-  <font color="darkgreen">// Linear momentum in transverse directions</font>
+  <font color="darkgreen">// Translational momentum in transverse directions</font>
   negative.mPhidot = {0,0};
   positive.mPhidot = {0,0};
   <font color="darkgreen">//</font>
@@ -138,7 +132,7 @@ Extends from <a href="FCSys_Conditions_FacePair_BaseClasses.html#FCSys.Condition
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Apr  2 18:51:30 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun  5 08:41:53 2013.
 </div>
 </body>
 </html>

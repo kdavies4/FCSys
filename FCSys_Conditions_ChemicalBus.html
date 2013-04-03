@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.ChemicalBus</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-4-2">
+<meta name="date" content="2013-6-5">
 <meta name="description" content="&lt;html&gt;Conditions for the &lt;a href=\&quot;modelica://FCSys.Connectors.ChemicalBus\&quot;&gt;ChemicalBus&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +18,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -87,18 +87,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <h3>Information</h3>
 
-Extends from <a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses.NullPhase">BaseClasses.NullPhase</a> (Empty condition for a phase (no species)).
+Extends from <a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses.EmptyPhase">BaseClasses.EmptyPhase</a> (Empty condition for a phase (no species)).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
-<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with translational momentum included</td></tr>
+<tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclTransY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclTransZ</td><td>false</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>inclH2</td><td>false</td><td>Hydrogen (H<sub>2</sub>)</td></tr>
 <tr><td><a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical.Species">Species</a></td><td>H2</td><td>&nbsp;</td><td>Model</td></tr>
@@ -110,9 +108,7 @@ Extends from <a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Condit
 <tr><td><a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical.Species">Species</a></td><td>O2</td><td>&nbsp;</td><td>Model</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -120,45 +116,44 @@ Extends from <a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Condit
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Bus of measurement outputs</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">model</font> Gas <font color="darkgreen">&quot;Condition for gas&quot;</font>
 
-  <font color="blue">extends </font><a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses.NullPhase">BaseClasses.NullPhase</a>;
+  <font color="blue">extends </font><a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses.EmptyPhase">BaseClasses.EmptyPhase</a>;
 
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean inclH2=false <font color="darkgreen">&quot;Hydrogen (H<sub>2</sub>)&quot;</font>;
 
   <a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical.Species">Chemical.Species</a> H2(
-    <font color="blue">final </font>inclLinX=inclLinX,
-    <font color="blue">final </font>inclLinY=inclLinY,
-    <font color="blue">final </font>inclLinZ=inclLinZ,
+    <font color="blue">final </font>inclTransX=inclTransX,
+    <font color="blue">final </font>inclTransY=inclTransY,
+    <font color="blue">final </font>inclTransZ=inclTransZ,
     <font color="blue">redeclare </font><a href="FCSys_Characteristics_H2_Gas.html#FCSys.Characteristics.H2.Gas">FCSys.Characteristics.H2.Gas</a> Data) <font color="blue">if </font>inclH2 <font color="darkgreen">&quot;Model&quot;</font>;
 
   <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Water (H<sub>2</sub>O)&quot;</font>;
 
   <a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical.Species">Chemical.Species</a> H2O(
-    <font color="blue">final </font>inclLinX=inclLinX,
-    <font color="blue">final </font>inclLinY=inclLinY,
-    <font color="blue">final </font>inclLinZ=inclLinZ,
+    <font color="blue">final </font>inclTransX=inclTransX,
+    <font color="blue">final </font>inclTransY=inclTransY,
+    <font color="blue">final </font>inclTransZ=inclTransZ,
     <font color="blue">redeclare </font><a href="FCSys_Characteristics_H2O_Gas.html#FCSys.Characteristics.H2O.Gas">FCSys.Characteristics.H2O.Gas</a> Data) <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Model&quot;</font>;
 
   <font color="blue">parameter </font>Boolean inclN2=false <font color="darkgreen">&quot;Nitrogen (N<sub>2</sub>)&quot;</font>;
 
   <a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical.Species">Chemical.Species</a> N2(
-    <font color="blue">final </font>inclLinX=inclLinX,
-    <font color="blue">final </font>inclLinY=inclLinY,
-    <font color="blue">final </font>inclLinZ=inclLinZ,
+    <font color="blue">final </font>inclTransX=inclTransX,
+    <font color="blue">final </font>inclTransY=inclTransY,
+    <font color="blue">final </font>inclTransZ=inclTransZ,
     <font color="blue">redeclare </font><a href="FCSys_Characteristics_N2_Gas.html#FCSys.Characteristics.N2.Gas">FCSys.Characteristics.N2.Gas</a> Data) <font color="blue">if </font>inclN2 <font color="darkgreen">&quot;Model&quot;</font>;
 
   <font color="blue">parameter </font>Boolean inclO2=false <font color="darkgreen">&quot;Oxygen (O<sub>2</sub>)&quot;</font>;
 
   <a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical.Species">Chemical.Species</a> O2(
-    <font color="blue">final </font>inclLinX=inclLinX,
-    <font color="blue">final </font>inclLinY=inclLinY,
-    <font color="blue">final </font>inclLinZ=inclLinZ,
+    <font color="blue">final </font>inclTransX=inclTransX,
+    <font color="blue">final </font>inclTransY=inclTransY,
+    <font color="blue">final </font>inclTransZ=inclTransZ,
     <font color="blue">redeclare </font><a href="FCSys_Characteristics_O2_Gas.html#FCSys.Characteristics.O2.Gas">FCSys.Characteristics.O2.Gas</a> Data) <font color="blue">if </font>inclO2 <font color="darkgreen">&quot;Model&quot;</font>;
 
 <font color="blue">equation </font>
@@ -198,18 +193,16 @@ Extends from <a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Condit
 
 <h3>Information</h3>
 
-Extends from <a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses.NullPhase">BaseClasses.NullPhase</a> (Empty condition for a phase (no species)).
+Extends from <a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses.EmptyPhase">BaseClasses.EmptyPhase</a> (Empty condition for a phase (no species)).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
-<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with translational momentum included</td></tr>
+<tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclTransY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclTransZ</td><td>false</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>&#39;inclC+&#39;</td><td>false</td><td>Carbon plus (C<sup>+</sup>)</td></tr>
 <tr><td><a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical.Species">Species</a></td><td>&#39;C+&#39;</td><td>&nbsp;</td><td>Model</td></tr>
@@ -217,9 +210,7 @@ Extends from <a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Condit
 <tr><td><a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical.Species">Species</a></td><td>&#39;e-&#39;</td><td>&nbsp;</td><td>Model</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -227,29 +218,28 @@ Extends from <a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Condit
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Bus of measurement outputs</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">model</font> Graphite <font color="darkgreen">&quot;Condition for graphite&quot;</font>
 
-  <font color="blue">extends </font><a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses.NullPhase">BaseClasses.NullPhase</a>;
+  <font color="blue">extends </font><a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses.EmptyPhase">BaseClasses.EmptyPhase</a>;
 
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean &#39;inclC+&#39;=false <font color="darkgreen">&quot;Carbon plus (C<sup>+</sup>)&quot;</font>;
 
   <a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical.Species">Chemical.Species</a> &#39;C+&#39;(
-    <font color="blue">final </font>inclLinX=inclLinX,
-    <font color="blue">final </font>inclLinY=inclLinY,
-    <font color="blue">final </font>inclLinZ=inclLinZ,
+    <font color="blue">final </font>inclTransX=inclTransX,
+    <font color="blue">final </font>inclTransY=inclTransY,
+    <font color="blue">final </font>inclTransZ=inclTransZ,
     <font color="blue">redeclare </font><a href="FCSys_Characteristics_'C+'_Graphite.html#FCSys.Characteristics.'C+'.Graphite">FCSys.Characteristics.'C+'.Graphite</a> Data) <font color="blue">if </font>'inclC+' <font color="darkgreen">&quot;Model&quot;</font>;
 
   <font color="blue">parameter </font>Boolean &#39;incle-&#39;=false <font color="darkgreen">&quot;Electrons (e<sup>-</sup>)&quot;</font>;
 
   <a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical.Species">Chemical.Species</a> &#39;e-&#39;(
-    <font color="blue">final </font>inclLinX=inclLinX,
-    <font color="blue">final </font>inclLinY=inclLinY,
-    <font color="blue">final </font>inclLinZ=inclLinZ,
+    <font color="blue">final </font>inclTransX=inclTransX,
+    <font color="blue">final </font>inclTransY=inclTransY,
+    <font color="blue">final </font>inclTransZ=inclTransZ,
     <font color="blue">redeclare </font><a href="FCSys_Characteristics_'e-'_Graphite.html#FCSys.Characteristics.'e-'.Graphite">FCSys.Characteristics.'e-'.Graphite</a> Data) <font color="blue">if </font>'incle-' <font color="darkgreen">&quot;Model&quot;</font>;
 
 <font color="blue">equation </font>
@@ -274,18 +264,16 @@ Extends from <a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Condit
 
 <h3>Information</h3>
 
-Extends from <a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses.NullPhase">BaseClasses.NullPhase</a> (Empty condition for a phase (no species)).
+Extends from <a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses.EmptyPhase">BaseClasses.EmptyPhase</a> (Empty condition for a phase (no species)).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
-<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with translational momentum included</td></tr>
+<tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclTransY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclTransZ</td><td>false</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>&#39;inclC19HF37O5S-&#39;</td><td>false</td><td>Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)</td></tr>
 <tr><td><a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical.Species">Species</a></td><td>&#39;C19HF37O5S-&#39;</td><td>&nbsp;</td><td>Model</td></tr>
@@ -295,9 +283,7 @@ Extends from <a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Condit
 <tr><td><a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical.Species">Species</a></td><td>H2O</td><td>&nbsp;</td><td>Model</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -305,37 +291,36 @@ Extends from <a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Condit
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Bus of measurement outputs</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">model</font> Ionomer <font color="darkgreen">&quot;Condition for ionomer&quot;</font>
 
-  <font color="blue">extends </font><a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses.NullPhase">BaseClasses.NullPhase</a>;
+  <font color="blue">extends </font><a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses.EmptyPhase">BaseClasses.EmptyPhase</a>;
 
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean &#39;inclC19HF37O5S-&#39;=false <font color="darkgreen">
     &quot;Nafion sulfonate (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)&quot;</font>;
 
   <a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical.Species">Chemical.Species</a> &#39;C19HF37O5S-&#39;(
-    <font color="blue">final </font>inclLinX=inclLinX,
-    <font color="blue">final </font>inclLinY=inclLinY,
-    <font color="blue">final </font>inclLinZ=inclLinZ,
+    <font color="blue">final </font>inclTransX=inclTransX,
+    <font color="blue">final </font>inclTransY=inclTransY,
+    <font color="blue">final </font>inclTransZ=inclTransZ,
     <font color="blue">redeclare </font><a href="FCSys_Characteristics_'C19HF37O5S-'_Ionomer.html#FCSys.Characteristics.'C19HF37O5S-'.Ionomer">FCSys.Characteristics.'C19HF37O5S-'.Ionomer</a> Data) <font color="blue">if </font>
     'inclC19HF37O5S-' <font color="darkgreen">&quot;Model&quot;</font>;
   <font color="blue">parameter </font>Boolean &#39;inclH+&#39;=false <font color="darkgreen">&quot;Protons (H<sup>+</sup>)&quot;</font>;
 
   <a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical.Species">Chemical.Species</a> &#39;H+&#39;(
-    <font color="blue">final </font>inclLinX=inclLinX,
-    <font color="blue">final </font>inclLinY=inclLinY,
-    <font color="blue">final </font>inclLinZ=inclLinZ,
+    <font color="blue">final </font>inclTransX=inclTransX,
+    <font color="blue">final </font>inclTransY=inclTransY,
+    <font color="blue">final </font>inclTransZ=inclTransZ,
     <font color="blue">redeclare </font><a href="FCSys_Characteristics_'H+'_Ionomer.html#FCSys.Characteristics.'H+'.Ionomer">FCSys.Characteristics.'H+'.Ionomer</a> Data) <font color="blue">if </font>'inclH+' <font color="darkgreen">&quot;Model&quot;</font>;
   <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Water (H<sub>2</sub>O)&quot;</font>;
 
   <a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical.Species">Chemical.Species</a> H2O(
-    <font color="blue">final </font>inclLinX=inclLinX,
-    <font color="blue">final </font>inclLinY=inclLinY,
-    <font color="blue">final </font>inclLinZ=inclLinZ,
+    <font color="blue">final </font>inclTransX=inclTransX,
+    <font color="blue">final </font>inclTransY=inclTransY,
+    <font color="blue">final </font>inclTransZ=inclTransZ,
     <font color="blue">redeclare </font><a href="FCSys_Characteristics_H2O_Gas.html#FCSys.Characteristics.H2O.Gas">FCSys.Characteristics.H2O.Gas</a> Data) <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Model&quot;</font>;
 
 <font color="blue">equation </font>
@@ -365,26 +350,22 @@ Extends from <a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Condit
 
 <h3>Information</h3>
 
-Extends from <a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses.NullPhase">BaseClasses.NullPhase</a> (Empty condition for a phase (no species)).
+Extends from <a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses.EmptyPhase">BaseClasses.EmptyPhase</a> (Empty condition for a phase (no species)).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
-<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with translational momentum included</td></tr>
+<tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclTransY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclTransZ</td><td>false</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Species</td></tr>
 <tr><td>Boolean</td><td>inclH2O</td><td>false</td><td>Water (H<sub>2</sub>O)</td></tr>
 <tr><td><a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical.Species">Species</a></td><td>H2O</td><td>&nbsp;</td><td>Model</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -392,21 +373,20 @@ Extends from <a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Condit
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Bus of measurement outputs</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">model</font> Liquid <font color="darkgreen">&quot;Condition for liquid&quot;</font>
 
-  <font color="blue">extends </font><a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses.NullPhase">BaseClasses.NullPhase</a>;
+  <font color="blue">extends </font><a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses.EmptyPhase">BaseClasses.EmptyPhase</a>;
 
   <font color="darkgreen">// Conditionally include species.</font>
   <font color="blue">parameter </font>Boolean inclH2O=false <font color="darkgreen">&quot;Water (H<sub>2</sub>O)&quot;</font>;
 
   <a href="FCSys_Conditions_Chemical.html#FCSys.Conditions.Chemical.Species">Chemical.Species</a> H2O(
-    <font color="blue">final </font>inclLinX=inclLinX,
-    <font color="blue">final </font>inclLinY=inclLinY,
-    <font color="blue">final </font>inclLinZ=inclLinZ,
+    <font color="blue">final </font>inclTransX=inclTransX,
+    <font color="blue">final </font>inclTransY=inclTransY,
+    <font color="blue">final </font>inclTransZ=inclTransZ,
     <font color="blue">redeclare </font><a href="FCSys_Characteristics_H2O_Liquid.html#FCSys.Characteristics.H2O.Liquid">FCSys.Characteristics.H2O.Liquid</a> Data) <font color="blue">if </font>inclH2O <font color="darkgreen">&quot;Model&quot;</font>;
 
 <font color="blue">equation </font>
@@ -422,7 +402,7 @@ Extends from <a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Condit
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Apr  2 18:50:12 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun  5 08:40:44 2013.
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.Chemical.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-4-2">
+<meta name="date" content="2013-6-5">
 <meta name="description" content="Base classes (not generally for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +18,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -79,27 +79,23 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <p>
 Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single">FCSys.Conditions.BaseClasses.Icons.Single</a> (Icon for a single-connector boundary condition).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
-<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with translational momentum included</td></tr>
+<tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclTransY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclTransZ</td><td>false</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Conditions</td></tr>
 <tr><td><a href="FCSys_Conditions_Chemical_Material.html#FCSys.Conditions.Chemical.Material.PotentialPerTemperature">PotentialPerTemperature</a></td><td>material</td><td>redeclare Material.Potential&hellip;</td><td>Material</td></tr>
-<tr><td><a href="FCSys_Conditions_Chemical_Mechanical.html#FCSys.Conditions.Chemical.Mechanical.Velocity">Velocity</a></td><td>mechanicalX</td><td>redeclare Mechanical.Velocit&hellip;</td><td>X-axis mechanical</td></tr>
-<tr><td><a href="FCSys_Conditions_Chemical_Mechanical.html#FCSys.Conditions.Chemical.Mechanical.Velocity">Velocity</a></td><td>mechanicalY</td><td>redeclare Mechanical.Velocit&hellip;</td><td>Y-axis mechanical</td></tr>
-<tr><td><a href="FCSys_Conditions_Chemical_Mechanical.html#FCSys.Conditions.Chemical.Mechanical.Velocity">Velocity</a></td><td>mechanicalZ</td><td>redeclare Mechanical.Velocit&hellip;</td><td>Z-axis mechanical</td></tr>
+<tr><td><a href="FCSys_Conditions_Chemical_Translational.html#FCSys.Conditions.Chemical.Translational.Velocity">Velocity</a></td><td>translationalX</td><td>redeclare FCSys.Conditions.C&hellip;</td><td>X-axis translational</td></tr>
+<tr><td><a href="FCSys_Conditions_Chemical_Translational.html#FCSys.Conditions.Chemical.Translational.Velocity">Velocity</a></td><td>translationalY</td><td>redeclare FCSys.Conditions.C&hellip;</td><td>Y-axis translational</td></tr>
+<tr><td><a href="FCSys_Conditions_Chemical_Translational.html#FCSys.Conditions.Chemical.Translational.Velocity">Velocity</a></td><td>translationalZ</td><td>redeclare FCSys.Conditions.C&hellip;</td><td>Z-axis translational</td></tr>
 <tr><td><a href="FCSys_Conditions_Chemical_Fluid.html#FCSys.Conditions.Chemical.Fluid.EnthalpyMassic">EnthalpyMassic</a></td><td>fluid</td><td>redeclare Fluid.EnthalpyMass&hellip;</td><td>Fluid</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -107,7 +103,6 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -115,42 +110,45 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
   &quot;Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Reaction">Reaction</a> model), with efforts by default&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single">FCSys.Conditions.BaseClasses.Icons.Single</a>;
 
-  <font color="darkgreen">// Included components of linear momentum</font>
-  <font color="blue">parameter </font>Boolean inclLinX=true <font color="darkgreen">&quot;X&quot;</font>;
+  <font color="darkgreen">// Included components of translational momentum</font>
+  <font color="blue">parameter </font>Boolean inclTransX=true <font color="darkgreen">&quot;X&quot;</font>;
 
-  <font color="blue">parameter </font>Boolean inclLinY=false <font color="darkgreen">&quot;Y&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclTransY=false <font color="darkgreen">&quot;Y&quot;</font>;
 
-  <font color="blue">parameter </font>Boolean inclLinZ=false <font color="darkgreen">&quot;Z&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclTransZ=false <font color="darkgreen">&quot;Z&quot;</font>;
 
   <font color="darkgreen">// Conditions</font>
   <font color="blue">replaceable </font><a href="FCSys_Conditions_Chemical_Material.html#FCSys.Conditions.Chemical.Material.PotentialPerTemperature">Material.PotentialPerTemperature</a> material(source(k(start=0))) <font color="blue">
     constrainedby </font>Material.BaseClasses.PartialCondition(
-    <font color="blue">final </font>inclLinX=inclLinX,
-    <font color="blue">final </font>inclLinY=inclLinY,
-    <font color="blue">final </font>inclLinZ=inclLinZ) <font color="darkgreen">&quot;Material&quot;</font>;
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_Chemical_Mechanical.html#FCSys.Conditions.Chemical.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalX(source(k(start=0))) <font color="blue">if </font>inclLinX <font color="blue">
-    constrainedby </font>Mechanical.BaseClasses.PartialCondition(
-    <font color="blue">final </font>inclLinX=inclLinX,
-    <font color="blue">final </font>inclLinY=inclLinY,
-    <font color="blue">final </font>inclLinZ=inclLinZ,
-    <font color="blue">final </font>axis=Axis.x) <font color="darkgreen">&quot;X-axis mechanical&quot;</font>;
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_Chemical_Mechanical.html#FCSys.Conditions.Chemical.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalY(source(k(start=0))) <font color="blue">if </font>inclLinY <font color="blue">
-    constrainedby </font>Mechanical.BaseClasses.PartialCondition(
-    <font color="blue">final </font>inclLinX=inclLinX,
-    <font color="blue">final </font>inclLinY=inclLinY,
-    <font color="blue">final </font>inclLinZ=inclLinZ,
-    <font color="blue">final </font>axis=Axis.y) <font color="darkgreen">&quot;Y-axis mechanical&quot;</font>;
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_Chemical_Mechanical.html#FCSys.Conditions.Chemical.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalZ(source(k(start=0))) <font color="blue">if </font>inclLinZ <font color="blue">
-    constrainedby </font>Mechanical.BaseClasses.PartialCondition(
-    <font color="blue">final </font>inclLinX=inclLinX,
-    <font color="blue">final </font>inclLinY=inclLinY,
-    <font color="blue">final </font>inclLinZ=inclLinZ,
-    <font color="blue">final </font>axis=Axis.z) <font color="darkgreen">&quot;Z-axis mechanical&quot;</font>;
+    <font color="blue">final </font>inclTransX=inclTransX,
+    <font color="blue">final </font>inclTransY=inclTransY,
+    <font color="blue">final </font>inclTransZ=inclTransZ) <font color="darkgreen">&quot;Material&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_Chemical_Translational.html#FCSys.Conditions.Chemical.Translational.Velocity">FCSys.Conditions.Chemical.Translational.Velocity</a> translationalX(
+      source(k(start=0))) <font color="blue">if </font>inclTransX <font color="blue">constrainedby </font>
+    Conditions.Chemical.Translational.BaseClasses.PartialCondition(
+    <font color="blue">final </font>inclTransX=inclTransX,
+    <font color="blue">final </font>inclTransY=inclTransY,
+    <font color="blue">final </font>inclTransZ=inclTransZ,
+    <font color="blue">final </font>axis=Axis.x) <font color="darkgreen">&quot;X-axis translational&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_Chemical_Translational.html#FCSys.Conditions.Chemical.Translational.Velocity">FCSys.Conditions.Chemical.Translational.Velocity</a> translationalY(
+      source(k(start=0))) <font color="blue">if </font>inclTransY <font color="blue">constrainedby </font>
+    Conditions.Chemical.Translational.BaseClasses.PartialCondition(
+    <font color="blue">final </font>inclTransX=inclTransX,
+    <font color="blue">final </font>inclTransY=inclTransY,
+    <font color="blue">final </font>inclTransZ=inclTransZ,
+    <font color="blue">final </font>axis=Axis.y) <font color="darkgreen">&quot;Y-axis translational&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_Chemical_Translational.html#FCSys.Conditions.Chemical.Translational.Velocity">FCSys.Conditions.Chemical.Translational.Velocity</a> translationalZ(
+      source(k(start=0))) <font color="blue">if </font>inclTransZ <font color="blue">constrainedby </font>
+    Conditions.Chemical.Translational.BaseClasses.PartialCondition(
+    <font color="blue">final </font>inclTransX=inclTransX,
+    <font color="blue">final </font>inclTransY=inclTransY,
+    <font color="blue">final </font>inclTransZ=inclTransZ,
+    <font color="blue">final </font>axis=Axis.z) <font color="darkgreen">&quot;Z-axis translational&quot;</font>;
   <font color="blue">replaceable </font><a href="FCSys_Conditions_Chemical_Fluid.html#FCSys.Conditions.Chemical.Fluid.EnthalpyMassic">Fluid.EnthalpyMassic</a> fluid(source(k(start=0))) <font color="blue">constrainedby </font>
     Fluid.BaseClasses.PartialCondition(
-    <font color="blue">final </font>inclLinX=inclLinX,
-    <font color="blue">final </font>inclLinY=inclLinY,
-    <font color="blue">final </font>inclLinZ=inclLinZ) <font color="darkgreen">&quot;Fluid&quot;</font>;
+    <font color="blue">final </font>inclTransX=inclTransX,
+    <font color="blue">final </font>inclTransY=inclTransY,
+    <font color="blue">final </font>inclTransZ=inclTransZ) <font color="darkgreen">&quot;Fluid&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">Connectors.RealInputBus</a> u <font color="darkgreen">&quot;Input bus for values of specified conditions&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Output bus of measurements&quot;</font>;
@@ -160,18 +158,18 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
   <font color="red">connect</font>(u.material, material.u);
   <font color="red">connect</font>(material.y, y.material);
 
-  <font color="darkgreen">// X-axis mechanical</font>
-  <font color="red">connect</font>(u.mechanicalX, mechanicalX.u);
-  <font color="red">connect</font>(mechanicalX.y, y.mechanicalX);
+  <font color="darkgreen">// X-axis translational</font>
+  <font color="red">connect</font>(u.translationalX, translationalX.u);
+  <font color="red">connect</font>(translationalX.y, y.translationalX);
 
-  <font color="darkgreen">// Y-axis mechanical</font>
+  <font color="darkgreen">// Y-axis translational</font>
 
-  <font color="red">connect</font>(u.mechanicalY, mechanicalY.u);
-  <font color="red">connect</font>(mechanicalY.y, y.mechanicalY);
+  <font color="red">connect</font>(u.translationalY, translationalY.u);
+  <font color="red">connect</font>(translationalY.y, y.translationalY);
 
-  <font color="darkgreen">// Z-axis mechanical</font>
-  <font color="red">connect</font>(u.mechanicalZ, mechanicalZ.u);
-  <font color="red">connect</font>(mechanicalZ.y, y.mechanicalZ);
+  <font color="darkgreen">// Z-axis translational</font>
+  <font color="red">connect</font>(u.translationalZ, translationalZ.u);
+  <font color="red">connect</font>(translationalZ.y, y.translationalZ);
 
   <font color="darkgreen">// Fluid</font>
   <font color="red">connect</font>(u.fluid, fluid.u);
@@ -189,16 +187,14 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
 
 Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single">FCSys.Conditions.BaseClasses.Icons.Single</a> (Icon for a single-connector boundary condition).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
-<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with translational momentum included</td></tr>
+<tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclTransY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclTransZ</td><td>false</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Specification</td></tr>
 <tr><td>Boolean</td><td>internal</td><td>true</td><td>Use internal specification</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Sources.html#Modelica.Blocks.Sources.Constant">Constant</a></td><td>source</td><td>redeclare Modelica.Blocks.So&hellip;</td><td>Source of internal specification</td></tr>
@@ -206,19 +202,15 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>&nbsp;</td><td>Measurement expression</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Value of specified condition</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">ChemicalInput</a></td><td>chemical</td><td>Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as input</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=3>Measurement</td></tr>
 <tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Measurement expression</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -226,11 +218,11 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
   <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.countTrue">FCSys.BaseClasses.Utilities.countTrue</a>;
   <font color="blue">extends </font><a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single">FCSys.Conditions.BaseClasses.Icons.Single</a>;
 
-  <font color="blue">parameter </font>Boolean inclLinX=true <font color="darkgreen">&quot;X&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclTransX=true <font color="darkgreen">&quot;X&quot;</font>;
 
-  <font color="blue">parameter </font>Boolean inclLinY=false <font color="darkgreen">&quot;Y&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclTransY=false <font color="darkgreen">&quot;Y&quot;</font>;
 
-  <font color="blue">parameter </font>Boolean inclLinZ=false <font color="darkgreen">&quot;Z&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclTransZ=false <font color="darkgreen">&quot;Z&quot;</font>;
 
   <font color="blue">parameter </font>Boolean internal=true <font color="darkgreen">&quot;Use internal specification&quot;</font>;
 
@@ -240,12 +232,12 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">Connectors.RealInput</a> u <font color="blue">if </font><font color="blue">not </font>internal <font color="darkgreen">&quot;Value of specified condition&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">Connectors.RealOutput</a> y <font color="darkgreen">&quot;Measurement expression&quot;</font>;
-  <a href="FCSys_Connectors.html#FCSys.Connectors.ChemicalInput">Connectors.ChemicalInput</a> chemical(<font color="blue">final </font>n_lin=n_lin) <font color="darkgreen">
-    &quot;Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as input&quot;</font>;
+  Connectors.ChemicalInput chemical(<font color="blue">final </font>n_trans=n_trans) <font color="darkgreen">
+    &quot;Connector to exchange material while advecting translational momentum and enthalpy, with characteristic data as input&quot;</font>;
 
 <font color="blue">protected </font>
-  <font color="blue">final </font><font color="blue">parameter </font>Integer n_lin=<font color="red">countTrue</font>({inclLinX,inclLinY,inclLinZ}) <font color="darkgreen">
-    &quot;Number of components of linear momentum&quot;</font>;
+  <font color="blue">final </font><font color="blue">parameter </font>Integer n_trans=<font color="red">countTrue</font>({inclTransX,inclTransY,inclTransZ})
+    <font color="darkgreen">&quot;Number of components of translational momentum&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputInternal">Connectors.RealOutputInternal</a> u_final <font color="darkgreen">&quot;Final value of specified condition&quot;</font>;
 
@@ -260,7 +252,7 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Apr  2 18:50:24 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun  5 08:40:58 2013.
 </div>
 </body>
 </html>

@@ -1,3 +1,3 @@
-This folder contains PNG pictures and other files which are referenced in the
-documentation of the FCSys package.  Where available, vector graphics (e.g.,
-SVG or PDF) are included too.
+This folder contains images and other files which are used in the documentation
+of the FCSys package.  Vector graphics (e.g., SVG or PDF) are included where
+available.

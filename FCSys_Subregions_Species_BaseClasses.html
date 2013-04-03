@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.Species.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-4-2">
+<meta name="date" content="2013-6-5">
 <meta name="description" content="Base classes (not generally for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -56,45 +56,51 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitMethScalar">InitMethScalar</a>
-</td><td>Methods of initializing scalar properties (particle number and temperature)</td></tr>
-<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitMethVelocity">InitMethVelocity</a>
-</td><td>Methods of initializing linear momentum</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.Conservation">Conservation</a>
+</td><td>Options for a conservation equation</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitScalar">InitScalar</a>
+</td><td>Methods of initializing scalar quantities (material and energy)</td></tr>
+<tr><td><a href="FCSys_Subregions_Species_BaseClasses.html#FCSys.Subregions.Species.BaseClasses.InitTranslational">InitTranslational</a>
+</td><td>Methods of initializing translational momentum</td></tr>
 </table>
 <p>
 <h3>Types and constants</h3>
 
-<a name="FCSys.Subregions.Species.BaseClasses.InitMethScalar"></a><pre><font color="blue">type</font> InitMethScalar = <font color="blue">enumeration</font>(
-    None <font color="darkgreen">&quot;Do not explicitly initialize.&quot;</font>,
-    Amount <font color="darkgreen">&quot;Initialize the amount.&quot;</font>,
-    AmountRate <font color="darkgreen">&quot;Initialize the rate of ditto.&quot;</font>,
-    VolumeSpecific <font color="darkgreen">&quot;Initialize the specific volume.&quot;</font>,
-    VolumeSpecificRate <font color="darkgreen">&quot;Initialize the rate of ditto.&quot;</font>,
-    Volume <font color="darkgreen">&quot;Initialize the volume.&quot;</font>,
-    VolumeRate <font color="darkgreen">&quot;Initialize the rate of ditto.&quot;</font>,
-    Pressure <font color="darkgreen">&quot;Initialize the pressure.&quot;</font>,
-    PressureRate <font color="darkgreen">&quot;Initialize the rate of ditto.&quot;</font>,
-    Temperature <font color="darkgreen">&quot;Initialize the temperature.&quot;</font>,
-    TemperatureRate <font color="darkgreen">&quot;Initialize the rate of ditto.&quot;</font>,
-    SpecificEnthalpy <font color="darkgreen">&quot;Initialize the specific enthalpy.&quot;</font>,
-    SpecificEnthalpyRate <font color="darkgreen">&quot;Initialize the rate of ditto.&quot;</font>,
-    PotentialElectrochemical <font color="darkgreen">&quot;Initialize the electrochemical potential.&quot;</font>,
-    PotentialElectrochemicalRate <font color="darkgreen">&quot;Initialize the rate of ditto.&quot;</font>,
-    ReactionRate <font color="darkgreen">&quot;Initialize the reaction rate.&quot;</font>) <font color="darkgreen">
-  &quot;Methods of initializing scalar properties (particle number and temperature)&quot;</font>;</pre><p>
-<a name="FCSys.Subregions.Species.BaseClasses.InitMethVelocity"></a><pre><font color="blue">type</font> InitMethVelocity = <font color="blue">enumeration</font>(
-    None <font color="darkgreen">&quot;Do not explicitly initialize.&quot;</font>,
-    Velocity <font color="darkgreen">&quot;Initialize the velocity.&quot;</font>,
-    Acceleration <font color="darkgreen">&quot;Initialize the acceleration.&quot;</font>,
-    Current <font color="darkgreen">&quot;Initialize the current.&quot;</font>,
-    CurrentRate <font color="darkgreen">&quot;Initialize the rate of ditto.&quot;</font>) <font color="darkgreen">
-  &quot;Methods of initializing linear momentum&quot;</font>;</pre><p>
+<a name="FCSys.Subregions.Species.BaseClasses.Conservation"></a><pre><font color="blue">type</font> Conservation = <font color="blue">enumeration</font>(
+    IC <font color="darkgreen">&quot;Initial condition imposed forever (no conservation)&quot;</font>,
+    Static <font color="darkgreen">&quot;Static (conservation without storage)&quot;</font>,
+    Dynamic <font color="darkgreen">&quot;Dynamic (conservation with storage)&quot;</font>) <font color="darkgreen">
+  &quot;Options for a conservation equation&quot;</font>;</pre><p>
+<a name="FCSys.Subregions.Species.BaseClasses.InitScalar"></a><pre><font color="blue">type</font> InitScalar = <font color="blue">enumeration</font>(
+    None <font color="darkgreen">&quot;No initialization&quot;</font>,
+    Amount <font color="darkgreen">&quot;Prescribed amount&quot;</font>,
+    AmountSS <font color="darkgreen">&quot;Steady-state amount&quot;</font>,
+    Density <font color="darkgreen">&quot;Prescribed density&quot;</font>,
+    DensitySS <font color="darkgreen">&quot;Steady-state density&quot;</font>,
+    Volume <font color="darkgreen">&quot;Prescribed volume&quot;</font>,
+    VolumeSS <font color="darkgreen">&quot;Steady-state volume&quot;</font>,
+    Pressure <font color="darkgreen">&quot;Prescribed pressure&quot;</font>,
+    PressureSS <font color="darkgreen">&quot;Steady-state pressure&quot;</font>,
+    Temperature <font color="darkgreen">&quot;Prescribed temperature&quot;</font>,
+    TemperatureSS <font color="darkgreen">&quot;Steady-state temperature&quot;</font>,
+    SpecificEnthalpy <font color="darkgreen">&quot;Prescribed specific enthalpy&quot;</font>,
+    SpecificEnthalpySS <font color="darkgreen">&quot;Steady-state specific enthalpy&quot;</font>,
+    PotentialGibbs <font color="darkgreen">&quot;Prescribed Gibbs potential&quot;</font>,
+    PotentialGibbsSS <font color="darkgreen">&quot;Steady-state Gibbs potential&quot;</font>) <font color="darkgreen">
+  &quot;Methods of initializing scalar quantities (material and energy)&quot;</font>;</pre><p>
+<a name="FCSys.Subregions.Species.BaseClasses.InitTranslational"></a><pre><font color="blue">type</font> InitTranslational = <font color="blue">enumeration</font>(
+    None <font color="darkgreen">&quot;No initialization&quot;</font>,
+    Velocity <font color="darkgreen">&quot;Prescribed velocity&quot;</font>,
+    VelocitySS <font color="darkgreen">&quot;Steady-state velocity&quot;</font>,
+    Current <font color="darkgreen">&quot;Prescribed advective current&quot;</font>,
+    CurrentSS <font color="darkgreen">&quot;Steady-state advective current&quot;</font>) <font color="darkgreen">
+  &quot;Methods of initializing translational momentum&quot;</font>;</pre><p>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Apr  2 20:24:08 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun  5 09:08:14 2013.
 </div>
 </body>
 </html>

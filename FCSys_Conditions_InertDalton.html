@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.InertDalton</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-4-2">
+<meta name="date" content="2013-6-5">
 <meta name="description" content="&lt;html&gt;Conditions for a &lt;a href=\&quot;modelica://FCSys.Connectors.InertDalton\&quot;&gt;InertDalton&lt;/a&gt; connector&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +18,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -62,8 +62,8 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 </td><td>Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Species">Species</a> model), with flows by default</td></tr>
 <tr><td><img src="images/FCSys.Conditions.InertDalton.DaltonS.png" alt="FCSys.Conditions.InertDalton.Dalton" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_InertDalton_Dalton.html#FCSys.Conditions.InertDalton.Dalton">Dalton</a>
 </td><td>Conditions for additivity of volume</td></tr>
-<tr><td><img src="images/FCSys.Conditions.InertDalton.DaltonS.png" alt="FCSys.Conditions.InertDalton.Mechanical" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_InertDalton_Mechanical.html#FCSys.Conditions.InertDalton.Mechanical">Mechanical</a>
-</td><td>Mechanical conditions</td></tr>
+<tr><td><img src="images/FCSys.Conditions.InertDalton.DaltonS.png" alt="FCSys.Conditions.InertDalton.Translational" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_InertDalton_Translational.html#FCSys.Conditions.InertDalton.Translational">Translational</a>
+</td><td>Translational conditions</td></tr>
 <tr><td><img src="images/FCSys.Conditions.InertDalton.DaltonS.png" alt="FCSys.Conditions.InertDalton.Thermal" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_InertDalton_Thermal.html#FCSys.Conditions.InertDalton.Thermal">Thermal</a>
 </td><td>Thermal conditions</td></tr>
 <tr><td><img src="images/FCSys.Conditions.InertDalton.BaseClassesS.png" alt="FCSys.Conditions.InertDalton.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_InertDalton_BaseClasses.html#FCSys.Conditions.InertDalton.BaseClasses">BaseClasses</a>
@@ -87,36 +87,31 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <p>
 Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single">FCSys.Conditions.BaseClasses.Icons.Single</a> (Icon for a single-connector boundary condition).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
-<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with translational momentum included</td></tr>
+<tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclTransY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclTransZ</td><td>false</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Conditions</td></tr>
 <tr><td><a href="FCSys_Conditions_InertDalton_Dalton.html#FCSys.Conditions.InertDalton.Dalton.Volume">Volume</a></td><td>dalton</td><td>redeclare Dalton.Volume dalt&hellip;</td><td>Dalton</td></tr>
-<tr><td><a href="FCSys_Conditions_InertDalton_Mechanical.html#FCSys.Conditions.InertDalton.Mechanical.Velocity">Velocity</a></td><td>mechanicalX</td><td>redeclare Mechanical.Velocit&hellip;</td><td>X-axis mechanical</td></tr>
-<tr><td><a href="FCSys_Conditions_InertDalton_Mechanical.html#FCSys.Conditions.InertDalton.Mechanical.Velocity">Velocity</a></td><td>mechanicalY</td><td>redeclare Mechanical.Velocit&hellip;</td><td>Y-axis mechanical</td></tr>
-<tr><td><a href="FCSys_Conditions_InertDalton_Mechanical.html#FCSys.Conditions.InertDalton.Mechanical.Velocity">Velocity</a></td><td>mechanicalZ</td><td>redeclare Mechanical.Velocit&hellip;</td><td>Z-axis mechanical</td></tr>
+<tr><td><a href="FCSys_Conditions_InertDalton_Translational.html#FCSys.Conditions.InertDalton.Translational.Velocity">Velocity</a></td><td>translationalX</td><td>redeclare Translational.Velo&hellip;</td><td>X-axis translational</td></tr>
+<tr><td><a href="FCSys_Conditions_InertDalton_Translational.html#FCSys.Conditions.InertDalton.Translational.Velocity">Velocity</a></td><td>translationalY</td><td>redeclare Translational.Velo&hellip;</td><td>Y-axis translational</td></tr>
+<tr><td><a href="FCSys_Conditions_InertDalton_Translational.html#FCSys.Conditions.InertDalton.Translational.Velocity">Velocity</a></td><td>translationalZ</td><td>redeclare Translational.Velo&hellip;</td><td>Z-axis translational</td></tr>
 <tr><td><a href="FCSys_Conditions_InertDalton_Thermal.html#FCSys.Conditions.InertDalton.Thermal.Temperature">Temperature</a></td><td>thermal</td><td>redeclare Thermal.Temperatur&hellip;</td><td>Thermal</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Input bus for values of specified conditions</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Single-species connector for linear momentum and heat, with additivity of pressure</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Single-species connector for translational momentum and heat, with additivity of pressure</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -125,49 +120,49 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
   <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.countTrue">FCSys.BaseClasses.Utilities.countTrue</a>;
   <font color="blue">extends </font><a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single">FCSys.Conditions.BaseClasses.Icons.Single</a>;
 
-  <font color="darkgreen">// Included components of linear momentum</font>
-  <font color="blue">parameter </font>Boolean inclLinX=true <font color="darkgreen">&quot;X&quot;</font>;
+  <font color="darkgreen">// Included components of translational momentum</font>
+  <font color="blue">parameter </font>Boolean inclTransX=true <font color="darkgreen">&quot;X&quot;</font>;
 
-  <font color="blue">parameter </font>Boolean inclLinY=false <font color="darkgreen">&quot;Y&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclTransY=false <font color="darkgreen">&quot;Y&quot;</font>;
 
-  <font color="blue">parameter </font>Boolean inclLinZ=false <font color="darkgreen">&quot;Z&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclTransZ=false <font color="darkgreen">&quot;Z&quot;</font>;
 
   <font color="darkgreen">// Conditions</font>
   <font color="blue">replaceable </font><a href="FCSys_Conditions_InertDalton_Dalton.html#FCSys.Conditions.InertDalton.Dalton.Volume">Dalton.Volume</a> dalton(source(k(start=U.cc))) <font color="blue">constrainedby </font>
     Dalton.BaseClasses.PartialCondition(
-    <font color="blue">final </font>inclLinX=inclLinX,
-    <font color="blue">final </font>inclLinY=inclLinY,
-    <font color="blue">final </font>inclLinZ=inclLinZ) <font color="darkgreen">&quot;Dalton&quot;</font>;
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_InertDalton_Mechanical.html#FCSys.Conditions.InertDalton.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalX(source(k(start=0))) <font color="blue">if </font>inclLinX <font color="blue">
-    constrainedby </font>Mechanical.BaseClasses.PartialCondition(
-    <font color="blue">final </font>inclLinX=inclLinX,
-    <font color="blue">final </font>inclLinY=inclLinY,
-    <font color="blue">final </font>inclLinZ=inclLinZ,
-    <font color="blue">final </font>axis=Axis.x) <font color="darkgreen">&quot;X-axis mechanical&quot;</font>;
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_InertDalton_Mechanical.html#FCSys.Conditions.InertDalton.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalY(source(k(start=0))) <font color="blue">if </font>inclLinY <font color="blue">
-    constrainedby </font>Mechanical.BaseClasses.PartialCondition(
-    <font color="blue">final </font>inclLinX=inclLinX,
-    <font color="blue">final </font>inclLinY=inclLinY,
-    <font color="blue">final </font>inclLinZ=inclLinZ,
-    <font color="blue">final </font>axis=Axis.y) <font color="darkgreen">&quot;Y-axis mechanical&quot;</font>;
-  <font color="blue">replaceable </font><a href="FCSys_Conditions_InertDalton_Mechanical.html#FCSys.Conditions.InertDalton.Mechanical.Velocity">Mechanical.Velocity</a> mechanicalZ(source(k(start=0))) <font color="blue">if </font>inclLinZ <font color="blue">
-    constrainedby </font>Mechanical.BaseClasses.PartialCondition(
-    <font color="blue">final </font>inclLinX=inclLinX,
-    <font color="blue">final </font>inclLinY=inclLinY,
-    <font color="blue">final </font>inclLinZ=inclLinZ,
-    <font color="blue">final </font>axis=Axis.z) <font color="darkgreen">&quot;Z-axis mechanical&quot;</font>;
+    <font color="blue">final </font>inclTransX=inclTransX,
+    <font color="blue">final </font>inclTransY=inclTransY,
+    <font color="blue">final </font>inclTransZ=inclTransZ) <font color="darkgreen">&quot;Dalton&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_InertDalton_Translational.html#FCSys.Conditions.InertDalton.Translational.Velocity">Translational.Velocity</a> translationalX(source(k(start=0))) <font color="blue">if </font>
+    inclTransX <font color="blue">constrainedby </font>Translational.BaseClasses.PartialCondition(
+    <font color="blue">final </font>inclTransX=inclTransX,
+    <font color="blue">final </font>inclTransY=inclTransY,
+    <font color="blue">final </font>inclTransZ=inclTransZ,
+    <font color="blue">final </font>axis=Axis.x) <font color="darkgreen">&quot;X-axis translational&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_InertDalton_Translational.html#FCSys.Conditions.InertDalton.Translational.Velocity">Translational.Velocity</a> translationalY(source(k(start=0))) <font color="blue">if </font>
+    inclTransY <font color="blue">constrainedby </font>Translational.BaseClasses.PartialCondition(
+    <font color="blue">final </font>inclTransX=inclTransX,
+    <font color="blue">final </font>inclTransY=inclTransY,
+    <font color="blue">final </font>inclTransZ=inclTransZ,
+    <font color="blue">final </font>axis=Axis.y) <font color="darkgreen">&quot;Y-axis translational&quot;</font>;
+  <font color="blue">replaceable </font><a href="FCSys_Conditions_InertDalton_Translational.html#FCSys.Conditions.InertDalton.Translational.Velocity">Translational.Velocity</a> translationalZ(source(k(start=0))) <font color="blue">if </font>
+    inclTransZ <font color="blue">constrainedby </font>Translational.BaseClasses.PartialCondition(
+    <font color="blue">final </font>inclTransX=inclTransX,
+    <font color="blue">final </font>inclTransY=inclTransY,
+    <font color="blue">final </font>inclTransZ=inclTransZ,
+    <font color="blue">final </font>axis=Axis.z) <font color="darkgreen">&quot;Z-axis translational&quot;</font>;
   <font color="blue">replaceable </font><a href="FCSys_Conditions_InertDalton_Thermal.html#FCSys.Conditions.InertDalton.Thermal.Temperature">Thermal.Temperature</a> thermal(source(k(start=298.15*U.K))) <font color="blue">
     constrainedby </font>Thermal.BaseClasses.PartialCondition(
-    <font color="blue">final </font>inclLinX=inclLinX,
-    <font color="blue">final </font>inclLinY=inclLinY,
-    <font color="blue">final </font>inclLinZ=inclLinZ) <font color="darkgreen">&quot;Thermal&quot;</font>;
+    <font color="blue">final </font>inclTransX=inclTransX,
+    <font color="blue">final </font>inclTransY=inclTransY,
+    <font color="blue">final </font>inclTransZ=inclTransZ) <font color="darkgreen">&quot;Thermal&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">Connectors.RealInputBus</a> u <font color="darkgreen">&quot;Input bus for values of specified conditions&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Output bus of measurements&quot;</font>;
 
-  <a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">Connectors.InertDalton</a> inert(<font color="blue">final </font>n_lin=<font color="red">countTrue</font>({inclLinX,inclLinY,
-        inclLinZ})) <font color="darkgreen">
-    &quot;Single-species connector for linear momentum and heat, with additivity of pressure&quot;</font>;
+  <a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">Connectors.InertDalton</a> inert(<font color="blue">final </font>n_trans=<font color="red">countTrue</font>({inclTransX,inclTransY,
+        inclTransZ})) <font color="darkgreen">
+    &quot;Single-species connector for translational momentum and heat, with additivity of pressure&quot;</font>;
 
 <font color="blue">equation </font>
   <font color="darkgreen">// Dalton</font>
@@ -175,21 +170,21 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
   <font color="red">connect</font>(u.dalton, dalton.u);
   <font color="red">connect</font>(dalton.y, y.dalton);
 
-  <font color="darkgreen">// X-axis mechanical</font>
-  <font color="red">connect</font>(mechanicalX.inert, inert);
-  <font color="red">connect</font>(u.mechanicalX, mechanicalX.u);
-  <font color="red">connect</font>(mechanicalX.y, y.mechanicalX);
+  <font color="darkgreen">// X-axis translational</font>
+  <font color="red">connect</font>(translationalX.inert, inert);
+  <font color="red">connect</font>(u.translationalX, translationalX.u);
+  <font color="red">connect</font>(translationalX.y, y.translationalX);
 
-  <font color="darkgreen">// Y-axis mechanical</font>
-  <font color="red">connect</font>(mechanicalY.inert, inert);
+  <font color="darkgreen">// Y-axis translational</font>
+  <font color="red">connect</font>(translationalY.inert, inert);
 
-  <font color="red">connect</font>(u.mechanicalY, mechanicalY.u);
-  <font color="red">connect</font>(mechanicalY.y, y.mechanicalY);
+  <font color="red">connect</font>(u.translationalY, translationalY.u);
+  <font color="red">connect</font>(translationalY.y, y.translationalY);
 
-  <font color="darkgreen">// Z-axis mechanical</font>
-  <font color="red">connect</font>(mechanicalZ.inert, inert);
-  <font color="red">connect</font>(u.mechanicalZ, mechanicalZ.u);
-  <font color="red">connect</font>(mechanicalZ.y, y.mechanicalZ);
+  <font color="darkgreen">// Z-axis translational</font>
+  <font color="red">connect</font>(translationalZ.inert, inert);
+  <font color="red">connect</font>(u.translationalZ, translationalZ.u);
+  <font color="red">connect</font>(translationalZ.y, y.translationalZ);
 
   <font color="darkgreen">// Thermal</font>
   <font color="red">connect</font>(thermal.inert, inert);
@@ -211,30 +206,25 @@ model.</p>
 <p>
 Extends from <a href="FCSys_Conditions_InertDalton.html#FCSys.Conditions.InertDalton.Species">Species</a> (Condition for a <a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a> connector (e.g., as in a <a href="FCSys_Subregions.html#FCSys.Subregions.Species">Species</a> model), with efforts by default).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
-<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with translational momentum included</td></tr>
+<tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclTransY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclTransZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Input bus for values of specified conditions</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Single-species connector for linear momentum and heat, with additivity of pressure</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.InertDalton">InertDalton</a></td><td>inert</td><td>Single-species connector for translational momentum and heat, with additivity of pressure</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -243,9 +233,9 @@ Extends from <a href="FCSys_Conditions_InertDalton.html#FCSys.Conditions.InertDa
 
   <font color="blue">extends </font><a href="FCSys_Conditions_InertDalton.html#FCSys.Conditions.InertDalton.Species">Species</a>(
     <font color="blue">redeclare </font><a href="FCSys_Conditions_InertDalton_Dalton.html#FCSys.Conditions.InertDalton.Dalton.Pressure">Dalton.Pressure</a> dalton(source(k(start=-U.atm))),
-    <font color="blue">redeclare </font><a href="FCSys_Conditions_InertDalton_Mechanical.html#FCSys.Conditions.InertDalton.Mechanical.Force">Mechanical.Force</a> mechanicalX(source(k(start=0))),
-    <font color="blue">redeclare </font><a href="FCSys_Conditions_InertDalton_Mechanical.html#FCSys.Conditions.InertDalton.Mechanical.Force">Mechanical.Force</a> mechanicalY(source(k(start=0))),
-    <font color="blue">redeclare </font><a href="FCSys_Conditions_InertDalton_Mechanical.html#FCSys.Conditions.InertDalton.Mechanical.Force">Mechanical.Force</a> mechanicalZ(source(k(start=0))),
+    <font color="blue">redeclare </font><a href="FCSys_Conditions_InertDalton_Translational.html#FCSys.Conditions.InertDalton.Translational.Force">Translational.Force</a> translationalX(source(k(start=0))),
+    <font color="blue">redeclare </font><a href="FCSys_Conditions_InertDalton_Translational.html#FCSys.Conditions.InertDalton.Translational.Force">Translational.Force</a> translationalY(source(k(start=0))),
+    <font color="blue">redeclare </font><a href="FCSys_Conditions_InertDalton_Translational.html#FCSys.Conditions.InertDalton.Translational.Force">Translational.Force</a> translationalZ(source(k(start=0))),
     <font color="blue">redeclare </font><a href="FCSys_Conditions_InertDalton_Thermal.html#FCSys.Conditions.InertDalton.Thermal.HeatRate">Thermal.HeatRate</a> thermal(source(k(start=0))));
 
 <font color="blue">end </font>SpeciesFlow;
@@ -255,7 +245,7 @@ Extends from <a href="FCSys_Conditions_InertDalton.html#FCSys.Conditions.InertDa
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Apr  2 18:50:58 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun  5 08:41:17 2013.
 </div>
 </body>
 </html>

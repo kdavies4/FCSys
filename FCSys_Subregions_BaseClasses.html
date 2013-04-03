@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Subregions.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-4-2">
+<meta name="date" content="2013-6-5">
 <meta name="description" content="Base classes (not generally for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +18,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -56,47 +56,46 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td><img src="images/FCSys.Subregions.BaseClasses.PartialSubregionS.png" alt="FCSys.Subregions.BaseClasses.PartialSubregion" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.PartialSubregion">PartialSubregion</a>
-</td><td>Partial model for multi-dimensional and multi-species storage, transport, and exchange</td></tr>
+<tr><td><img src="images/FCSys.Subregions.BaseClasses.EmptySubregionS.png" alt="FCSys.Subregions.BaseClasses.EmptySubregion" width=20  height=20 align=top>&nbsp;<a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses.EmptySubregion">EmptySubregion</a>
+</td><td>Base model for multi-dimensional, multi-species storage, transport, and exchange</td></tr>
 </table>
 <hr>
 
-<h2><img src="images/FCSys.Subregions.BaseClasses.PartialSubregionI.png" alt="FCSys.Subregions.BaseClasses.PartialSubregion" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Subregions.BaseClasses.PartialSubregion"></a><a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses">FCSys.Subregions.BaseClasses</a>.PartialSubregion</h2>
-<b>Partial model for multi-dimensional and multi-species storage, transport, and exchange</b><p>
-<img src="images/FCSys.Subregions.BaseClasses.PartialSubregionD.png" alt="FCSys.Subregions.BaseClasses.PartialSubregion">
+<h2><img src="images/FCSys.Subregions.BaseClasses.EmptySubregionI.png" alt="FCSys.Subregions.BaseClasses.EmptySubregion" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Subregions.BaseClasses.EmptySubregion"></a><a href="FCSys_Subregions_BaseClasses.html#FCSys.Subregions.BaseClasses">FCSys.Subregions.BaseClasses</a>.EmptySubregion</h2>
+<b>Base model for multi-dimensional, multi-species storage, transport, and exchange</b><p>
+<img src="images/FCSys.Subregions.BaseClasses.EmptySubregionD.png" alt="FCSys.Subregions.BaseClasses.EmptySubregion">
 
 <h3>Information</h3>
 
-<p>This model must be be extended so that models can be added for
-  relevant species, phases, and reactions.</p>
+<p>At least one component of translational momentum must be included.
+  All of the components are included by default.</p>
 
-  <p>All of the component of linear momentum are included by default.  At least one component must be included.</p>
+    <p>At least one pair of faces must be included.
+  All of the faces are included by default.</p>
+
+  <p>This model should be extended to include the appropriate phases and reactions.</p>
   <p>
 
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Geometry</td></tr>
-<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>&nbsp;</td><td>Length (<b>L</b>) [l]</td></tr>
+<tr><td><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Length</a></td><td>L[Axis]</td><td>{U.cm,U.cm,U.cm}</td><td>Length (<b>L</b>) [l]</td></tr>
 <TR bgcolor="#c0c0c0"><TD colspan=4><b>Assumptions</b></td></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
-<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclLinY</td><td>true</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclLinZ</td><td>true</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with translational momentum included</td></tr>
+<tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclTransY</td><td>true</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclTransZ</td><td>true</td><td>Z</td></tr>
 <TR bgcolor="#e0e0e0"><TD colspan=4>Axes with faces included</td></tr>
 <tr><td>Boolean</td><td>inclFacesX</td><td>true</td><td>X</td></tr>
 <tr><td>Boolean</td><td>inclFacesY</td><td>true</td><td>Y</td></tr>
 <tr><td>Boolean</td><td>inclFacesZ</td><td>true</td><td>Z</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -108,12 +107,11 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>zPositive</td><td>Positive face along the z axis</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">partial </font><font color="blue">model</font> PartialSubregion <font color="darkgreen">
-  &quot;Partial model for multi-dimensional and multi-species storage, transport, and exchange&quot;</font>
+<font color="blue">partial </font><font color="blue">model</font> EmptySubregion <font color="darkgreen">
+  &quot;Base model for multi-dimensional, multi-species storage, transport, and exchange&quot;</font>
   <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.cartWrap">FCSys.BaseClasses.Utilities.cartWrap</a>;
   <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.countTrue">FCSys.BaseClasses.Utilities.countTrue</a>;
   <font color="blue">import </font><a href="FCSys_BaseClasses_Utilities.html#FCSys.BaseClasses.Utilities.enumerate">FCSys.BaseClasses.Utilities.enumerate</a>;
@@ -121,16 +119,16 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <font color="darkgreen">// extends FCSys.BaseClasses.Icons.Names.Top3;</font>
 
   <font color="darkgreen">// Geometric parameters</font>
-  <font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis](<font color="blue">each </font>min=Modelica.Constants.small,start=<font color="red">ones</font>
-        (3)*U.cm) <font color="darkgreen">&quot;Length (<b>L</b>)&quot;</font>;
+  <font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Length">Q.Length</a> L[Axis](<font color="blue">each </font>min=Modelica.Constants.small) = {U.cm,U.cm,
+    U.cm} <font color="darkgreen">&quot;Length (<b>L</b>)&quot;</font>;
   <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Volume">Q.Volume</a> V=<font color="red">product</font>(L) <font color="darkgreen">&quot;Volume&quot;</font>;
 
   <font color="darkgreen">// Assumptions</font>
   <font color="darkgreen">// -----------</font>
-  <font color="darkgreen">// Included components of linear momentum</font>
-  <font color="blue">parameter </font>Boolean inclLinX=true <font color="darkgreen">&quot;X&quot;</font>;
-  <font color="blue">parameter </font>Boolean inclLinY=true <font color="darkgreen">&quot;Y&quot;</font>;
-  <font color="blue">parameter </font>Boolean inclLinZ=true <font color="darkgreen">&quot;Z&quot;</font>;
+  <font color="darkgreen">// Included components of translational momentum</font>
+  <font color="blue">parameter </font>Boolean inclTransX=true <font color="darkgreen">&quot;X&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclTransY=true <font color="darkgreen">&quot;Y&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclTransZ=true <font color="darkgreen">&quot;Z&quot;</font>;
   <font color="darkgreen">//</font>
   <font color="darkgreen">// Included faces</font>
   <font color="blue">parameter </font>Boolean inclFacesX=true <font color="darkgreen">&quot;X&quot;</font>;
@@ -144,29 +142,41 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> zNegative <font color="blue">if </font>inclFacesZ <font color="darkgreen">&quot;Negative face along the z axis&quot;</font>;
   <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> zPositive <font color="blue">if </font>inclFacesZ <font color="darkgreen">&quot;Positive face along the z axis&quot;</font>;
 
-  <font color="darkgreen">// Geometric parameters</font>
-
 <font color="blue">protected </font>
+  <font color="blue">parameter </font>Boolean hasSpecies <font color="darkgreen">&quot;true, if any species are included&quot;</font>;
   <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font><a href="FCSys_Quantities.html#FCSys.Quantities.Area">Q.Area</a> A[Axis]={L[<font color="red">cartWrap</font>(axis + 1)]*L[<font color="red">cartWrap</font>(axis +
       2)] <font color="blue">for </font>axis<font color="blue"> in </font>Axis} <font color="darkgreen">&quot;Cross-sectional areas&quot;</font>;
-  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Boolean inclLin[Axis]={inclLinX,inclLinY,inclLinZ} <font color="darkgreen">
-    &quot;true, if each component of linear momentum is included&quot;</font>;
-  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer n_lin=<font color="red">countTrue</font>(inclLin) <font color="darkgreen">
-    &quot;Number of components of linear momentum&quot;</font>;
-  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer cartAxes[:]=<font color="red">index</font>(inclLin) <font color="darkgreen">
-    &quot;Cartesian-axis indices of the components of linear momentum&quot;</font>;
-  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer linAxes[Axis]=<font color="red">enumerate</font>(inclLin) <font color="darkgreen">
-    &quot;Linear momentum component indices of the Cartesian axes&quot;</font>;
-  <a href="FCSys_Subregions.html#FCSys.Subregions.Volume">Volume</a> volume <font color="darkgreen">&quot;Model to establish space for species&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Boolean inclTrans[Axis]={inclTransX,inclTransY,
+      inclTransZ} <font color="darkgreen">
+    &quot;true, if each component of translational momentum is included&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Boolean inclFaces[Axis]={inclFacesX,inclFacesY,
+      inclFacesZ} <font color="darkgreen">&quot;true, if each pairs of faces is included&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Boolean inclRot[Axis]={inclFacesY<font color="blue"> and </font>inclFacesZ,
+      inclFacesZ<font color="blue"> and </font>inclFacesX,inclFacesX<font color="blue"> and </font>inclFacesY} <font color="darkgreen">
+    &quot;true, if each axis of rotation has all its tangential faces included&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer n_trans=<font color="red">countTrue</font>(inclTrans) <font color="darkgreen">
+    &quot;Number of components of translational momentum&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer n_faces=<font color="red">countTrue</font>(inclFaces) <font color="darkgreen">
+    &quot;Number of pairs of faces&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer cartTrans[n_trans]=<font color="red">index</font>(inclTrans) <font color="darkgreen">
+    &quot;Cartesian-axis indices of the components of translational momentum&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer cartFaces[n_faces]=<font color="red">index</font>(inclFaces) <font color="darkgreen">
+    &quot;Cartesian-axis indices of the pairs of faces&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer transCart[Axis]=<font color="red">enumerate</font>(inclTrans) <font color="darkgreen">
+    &quot;Translational-momentum-component indices of the Cartesian axes&quot;</font>;
+  <font color="blue">final </font><font color="blue">inner </font><font color="blue">parameter </font>Integer facesCart[Axis]=<font color="red">enumerate</font>(inclFaces) <font color="darkgreen">
+    &quot;Face-pair indices of the Cartesian axes&quot;</font>;
 
-<font color="blue">end </font>PartialSubregion;
+  <a href="FCSys_Subregions.html#FCSys.Subregions.Volume">Volume</a> volume <font color="blue">if </font>hasSpecies <font color="darkgreen">&quot;Model to establish a fixed total volume&quot;</font>;
+
+<font color="blue">end </font>EmptySubregion;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Apr  2 18:54:09 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun  5 08:44:48 2013.
 </div>
 </body>
 </html>

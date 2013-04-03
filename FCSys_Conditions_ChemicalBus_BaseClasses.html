@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.ChemicalBus.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-4-2">
+<meta name="date" content="2013-6-5">
 <meta name="description" content="Base classes (not generally for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +18,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -56,35 +56,31 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 <table border=1 cellspacing=0 cellpadding=2 >
 <tr><th>Name</th><th>Description</th></tr>
-<tr><td><img src="images/FCSys.Conditions.ChemicalBus.BaseClasses.NullPhaseS.png" alt="FCSys.Conditions.ChemicalBus.BaseClasses.NullPhase" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses.NullPhase">NullPhase</a>
+<tr><td><img src="images/FCSys.Conditions.ChemicalBus.BaseClasses.EmptyPhaseS.png" alt="FCSys.Conditions.ChemicalBus.BaseClasses.EmptyPhase" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses.EmptyPhase">EmptyPhase</a>
 </td><td>Empty condition for a phase (no species)</td></tr>
 </table>
 <hr>
 
-<h2><img src="images/FCSys.Conditions.ChemicalBus.BaseClasses.NullPhaseI.png" alt="FCSys.Conditions.ChemicalBus.BaseClasses.NullPhase" align=RIGHT border=1 width=80  height=80 >
-<a name="FCSys.Conditions.ChemicalBus.BaseClasses.NullPhase"></a><a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses">FCSys.Conditions.ChemicalBus.BaseClasses</a>.NullPhase</h2>
+<h2><img src="images/FCSys.Conditions.ChemicalBus.BaseClasses.EmptyPhaseI.png" alt="FCSys.Conditions.ChemicalBus.BaseClasses.EmptyPhase" align=RIGHT border=1 width=80  height=80 >
+<a name="FCSys.Conditions.ChemicalBus.BaseClasses.EmptyPhase"></a><a href="FCSys_Conditions_ChemicalBus_BaseClasses.html#FCSys.Conditions.ChemicalBus.BaseClasses">FCSys.Conditions.ChemicalBus.BaseClasses</a>.EmptyPhase</h2>
 <b>Empty condition for a phase (no species)</b><p>
-<img src="images/FCSys.Conditions.ChemicalBus.BaseClasses.NullPhaseD.png" alt="FCSys.Conditions.ChemicalBus.BaseClasses.NullPhase">
+<img src="images/FCSys.Conditions.ChemicalBus.BaseClasses.EmptyPhaseD.png" alt="FCSys.Conditions.ChemicalBus.BaseClasses.EmptyPhase">
 
 <h3>Information</h3>
 
 Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single">FCSys.Conditions.BaseClasses.Icons.Single</a> (Icon for a single-connector boundary condition).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
-<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with linear momentum included</td></tr>
-<tr><td>Boolean</td><td>inclLinX</td><td>true</td><td>X</td></tr>
-<tr><td>Boolean</td><td>inclLinY</td><td>false</td><td>Y</td></tr>
-<tr><td>Boolean</td><td>inclLinZ</td><td>false</td><td>Z</td></tr>
+<TR bgcolor="#e0e0e0"><TD colspan=4>Axes with translational momentum included</td></tr>
+<tr><td>Boolean</td><td>inclTransX</td><td>true</td><td>X</td></tr>
+<tr><td>Boolean</td><td>inclTransY</td><td>false</td><td>Y</td></tr>
+<tr><td>Boolean</td><td>inclTransZ</td><td>false</td><td>Z</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -92,18 +88,17 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Bus of measurement outputs</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
-<font color="blue">model</font> NullPhase <font color="darkgreen">&quot;Empty condition for a phase (no species)&quot;</font>
+<font color="blue">model</font> EmptyPhase <font color="darkgreen">&quot;Empty condition for a phase (no species)&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Single">FCSys.Conditions.BaseClasses.Icons.Single</a>;
 
-  <font color="blue">parameter </font>Boolean inclLinX=true <font color="darkgreen">&quot;X&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclTransX=true <font color="darkgreen">&quot;X&quot;</font>;
 
-  <font color="blue">parameter </font>Boolean inclLinY=false <font color="darkgreen">&quot;Y&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclTransY=false <font color="darkgreen">&quot;Y&quot;</font>;
 
-  <font color="blue">parameter </font>Boolean inclLinZ=false <font color="darkgreen">&quot;Z&quot;</font>;
+  <font color="blue">parameter </font>Boolean inclTransZ=false <font color="darkgreen">&quot;Z&quot;</font>;
 
   Connectors.ChemicalIOBus chemical <font color="darkgreen">
     &quot;Bus of ChemicalInput and ChemicalOutput connectors of multiple species&quot;</font>;
@@ -112,14 +107,14 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">Connectors.RealOutputBus</a> y <font color="darkgreen">&quot;Bus of measurement outputs&quot;</font>;
 
-<font color="blue">end </font>NullPhase;
+<font color="blue">end </font>EmptyPhase;
 </pre>
       </div>
     </div>
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Apr  2 18:50:12 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun  5 08:40:45 2013.
 </div>
 </body>
 </html>

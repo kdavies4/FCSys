@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Units.Bases</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-4-2">
+<meta name="date" content="2013-6-5">
 <meta name="description" content="Sets of base constants and units">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +18,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -87,7 +87,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Units.Bases.GaussianS.png" alt="FCSys.Units.Bases.Hartree" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Hartree">Hartree</a>
 </td><td>Base constants and units for Hartree units</td></tr>
 <tr><td><img src="images/FCSys.Units.Bases.GaussianS.png" alt="FCSys.Units.Bases.LH" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases.LH">LH</a>
-</td><td>Base constants and units for Lorentz-Heaviside units (&mu;<sub>0</sub> = &epsilon;<sub>0</sub> = 1)</td></tr>
+</td><td>Base constants and units for Lorentz-Heaviside units (&mu;<sup>0</sub> = &epsilon;<sup>0</sub> = 1)</td></tr>
 <tr><td><img src="images/FCSys.Units.Bases.GaussianS.png" alt="FCSys.Units.Bases.Stoney" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Stoney">Stoney</a>
 </td><td>Base constants and units for Stoney units</td></tr>
 <tr><td><img src="images/FCSys.Units.Bases.GaussianS.png" alt="FCSys.Units.Bases.ScaledFC" width=20  height=20 align=top>&nbsp;<a href="FCSys_Units_Bases.html#FCSys.Units.Bases.ScaledFC">ScaledFC</a>
@@ -116,7 +116,6 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <h2><a name="FCSys.Units.Bases.Gaussian"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.Gaussian</h2>
 
 <b>Base constants and units for Gaussian units (<i>k</i><sub>A</sub> = <i>k</i><sub>e</sub> = 1)</b>
-
 <h3>Information</h3>
 
 <p>Gaussian systems of units impose:
@@ -135,7 +134,6 @@ encompass other systems of units.</p>
   <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p><p>
 Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -150,7 +148,6 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (B
 <h2><a name="FCSys.Units.Bases.Hartree"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.Hartree</h2>
 
 <b>Base constants and units for Hartree units</b>
-
 <h3>Information</h3>
 
 <p>The candela (<code>'cd'</code>)
@@ -160,7 +157,6 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (B
   <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p><p>
 Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -172,34 +168,19 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (B
     <font color="blue">final </font>k_J=1/pi,
     <font color="blue">final </font>R_K=2*pi);
 
-  <font color="darkgreen">// R_inf = pi*(299792458*1e-7/25812.8074434)^2</font>
-
-  <font color="darkgreen">// **need to update R_inf</font>
-  <font color="darkgreen">// Use:</font>
-  <font color="darkgreen">// h = 2*pi</font>
-  <font color="darkgreen">// q = 1</font>
-  <font color="darkgreen">// k_B = 1</font>
-  <font color="darkgreen">// 2*R_inf*h/(q*c*alpha^2) = 1</font>
-
-  <font color="darkgreen">// 2*Phi_0 = 2*pi</font>
-  <font color="darkgreen">// G_0*Phi_0 = 1</font>
-  <font color="darkgreen">// k_B = 1</font>
-  <font color="darkgreen">// 4*R_inf/alpha^2 = k_J</font>
-
 <font color="blue">end </font>Hartree;
 </pre>
 <hr>
 
 <h2><a name="FCSys.Units.Bases.LH"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.LH</h2>
 
-<b>Base constants and units for Lorentz-Heaviside units (&mu;<sub>0</sub> = &epsilon;<sub>0</sub> = 1)</b>
-
+<b>Base constants and units for Lorentz-Heaviside units (&mu;<sup>0</sub> = &epsilon;<sup>0</sub> = 1)</b>
 <h3>Information</h3>
 
 <p>Lorentz-Heaviside systems of units impose:
   <ul>
-  <li>&mu;<sub>0</sub> = 1 &rArr; <i>R</i><sub>K</sub>/<i>c</i> = 1/(2&alpha;)</li>
-  <li>&epsilon;<sub>0</sub> = 1 &rArr; <i>R</i><sub>K</sub>*<i>c</i> = 1/(2&alpha;)</li>
+  <li>&mu;<sup>0</sub> = 1 &rArr; <i>R</i><sub>K</sub>/<i>c</i> = 1/(2&alpha;)</li>
+  <li>&epsilon;<sup>0</sub> = 1 &rArr; <i>R</i><sub>K</sub>*<i>c</i> = 1/(2&alpha;)</li>
   </ul>
   Together, <i>c</i> = 1 and <i>R</i><sub>K</sub> = 1/(2&alpha;)</p>
 
@@ -212,12 +193,11 @@ encompass other systems of units.</p>
   <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p><p>
 Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
 <font color="blue">record</font> LH <font color="darkgreen">
-  &quot;Base constants and units for Lorentz-Heaviside units (&mu;<sub>0</sub> = &epsilon;<sub>0</sub> = 1)&quot;</font>
+  &quot;Base constants and units for Lorentz-Heaviside units (&mu;<sup>0</sub> = &epsilon;<sup>0</sub> = 1)&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a>(<font color="blue">final </font>c=1,<font color="blue">final </font>R_K=25812.8074434/(4*pi*299792458*1e-7));
 
 <font color="blue">end </font>LH;
@@ -227,7 +207,6 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (B
 <h2><a name="FCSys.Units.Bases.Stoney"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.Stoney</h2>
 
 <b>Base constants and units for Stoney units</b>
-
 <h3>Information</h3>
 
 <p>The Rydberg constant (<code>R_inf</code>)
@@ -239,7 +218,6 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (B
   <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p><p>
 Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Gaussian">Gaussian</a> (Base constants and units for Gaussian units (<i>k</i><sub>A</sub> = <i>k</i><sub>e</sub> = 1)).
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -254,7 +232,6 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Gaussian">Gaussia
 <h2><a name="FCSys.Units.Bases.ScaledFC"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.ScaledFC</h2>
 
 <b>Base constants and units that are well-scaled for fuel cell simulation and analysis</b>
-
 <h3>Information</h3>
 
 <p>The values of this record result in the following values for the base SI units
@@ -276,7 +253,6 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Gaussian">Gaussia
   <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p><p>
 Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -296,7 +272,6 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (B
 <h2><a name="FCSys.Units.Bases.SIAK"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.SIAK</h2>
 
 <b>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of A and K</b>
-
 <h3>Information</h3>
 
 <p>The values of the un-normalized SI base units are (see
@@ -310,7 +285,6 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (B
   <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p><p>
 Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -331,7 +305,6 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (B
 <h2><a name="FCSys.Units.Bases.SIAm"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.SIAm</h2>
 
 <b>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of A and m</b>
-
 <h3>Information</h3>
 
 <p>The values of the un-normalized SI base units are (see
@@ -345,7 +318,6 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (B
   <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p><p>
 Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -366,7 +338,6 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (B
 <h2><a name="FCSys.Units.Bases.SIAs"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.SIAs</h2>
 
 <b>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of A and s</b>
-
 <h3>Information</h3>
 
 <p>The values of the un-normalized SI base units are (see
@@ -380,7 +351,6 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (B
   <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p><p>
 Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -400,7 +370,6 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (B
 <h2><a name="FCSys.Units.Bases.SIKmol"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.SIKmol</h2>
 
 <b>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of K and mol</b>
-
 <h3>Information</h3>
 
 <p>The values of the un-normalized SI base units are (see
@@ -414,7 +383,6 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (B
   <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p><p>
 Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -434,7 +402,6 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (B
 <h2><a name="FCSys.Units.Bases.SIKs"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.SIKs</h2>
 
 <b>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of K and s</b>
-
 <h3>Information</h3>
 
 <p>The values of the un-normalized SI base units are (see
@@ -448,7 +415,6 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (B
   <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p><p>
 Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -468,7 +434,6 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (B
 <h2><a name="FCSys.Units.Bases.SImmol"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.SImmol</h2>
 
 <b>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of m and mol</b>
-
 <h3>Information</h3>
 
 <p>The values of the un-normalized SI base units are (see
@@ -482,7 +447,6 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (B
   <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p><p>
 Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -502,7 +466,6 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (B
 <h2><a name="FCSys.Units.Bases.SIms"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.SIms</h2>
 
 <b>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of m and s</b>
-
 <h3>Information</h3>
 
 <p>The values of the un-normalized SI base units are (see
@@ -516,7 +479,6 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (B
   <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p><p>
 Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -536,7 +498,6 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (B
 <h2><a name="FCSys.Units.Bases.SImols"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.SImols</h2>
 
 <b>Base constants and units for SI with <i>k</i><sub>F</sub> and <i>R</i> normalized instead of mol and s</b>
-
 <h3>Information</h3>
 
 <p>The values of the un-normalized SI base units are (see
@@ -550,7 +511,6 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (B
   <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p><p>
 Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (Base constants and units).
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -570,14 +530,12 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (B
 <h2><a name="FCSys.Units.Bases.Base"></a><a href="FCSys_Units_Bases.html#FCSys.Units.Bases">FCSys.Units.Bases</a>.Base</h2>
 
 <b>Base constants and units</b>
-
 <h3>Information</h3>
 
 <p>For more information, see the notes in the Modelica code and the documentation in the
   <a href="FCSys_Units.html#FCSys.Units">Units</a> package.</p><p>
 
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -633,7 +591,7 @@ Extends from <a href="FCSys_Units_Bases.html#FCSys.Units.Bases.Base">Base</a> (B
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Apr  2 18:54:19 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun  5 08:44:59 2013.
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.BaseClasses</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-4-2">
+<meta name="date" content="2013-6-5">
 <meta name="description" content="Base classes (not generally for direct use)">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +18,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -71,12 +71,11 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Axis">Axis</a>
 </td><td>Enumeration for Cartesian axes</td></tr>
 <tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Orientation">Orientation</a>
-</td><td>Enumeration for transverse orientations across a face</td></tr>
+</td><td>Enumeration for orientations relative to a face</td></tr>
 <tr><td><a href="FCSys_BaseClasses.html#FCSys.BaseClasses.Side">Side</a>
 </td><td>Enumeration for sides of a region or subregion</td></tr>
 </table>
 <p>
-
 <h3>Types and constants</h3>
 
 <a name="FCSys.BaseClasses.Axis"></a><pre><font color="blue">type</font> Axis = <font color="blue">enumeration</font>(
@@ -84,9 +83,10 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     y <font color="darkgreen">&quot;Y&quot;</font>,
     z <font color="darkgreen">&quot;Z&quot;</font>) <font color="darkgreen">&quot;Enumeration for Cartesian axes&quot;</font>;</pre><p>
 <a name="FCSys.BaseClasses.Orientation"></a><pre><font color="blue">type</font> Orientation = <font color="blue">enumeration</font>(
+    normal <font color="darkgreen">&quot;Along the normal axis&quot;</font>,
     following <font color="darkgreen">&quot;Along axis following normal axis in Cartesian coordinates&quot;</font>,
     preceding <font color="darkgreen">&quot;Along axis preceding normal axis in Cartesian coordinates&quot;</font>) <font color="darkgreen">
-  &quot;Enumeration for transverse orientations across a face&quot;</font>;</pre><p>
+  &quot;Enumeration for orientations relative to a face&quot;</font>;</pre><p>
 <a name="FCSys.BaseClasses.Side"></a><pre><font color="blue">type</font> Side = <font color="blue">enumeration</font>(
     n <font color="darkgreen">&quot;Negative&quot;</font>,
     p <font color="darkgreen">&quot;Positive (greater position along the Cartesian axis)&quot;</font>) <font color="darkgreen">
@@ -96,7 +96,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Apr  2 18:54:22 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun  5 08:45:00 2013.
 </div>
 </body>
 </html>

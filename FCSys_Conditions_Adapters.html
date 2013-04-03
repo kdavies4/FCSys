@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.Adapters</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-4-2">
+<meta name="date" content="2013-6-5">
 <meta name="description" content="&lt;html&gt;Adapters to &lt;a href=\&quot;modelica://Modelica\&quot;&gt;Package Modelica&lt;/a&gt;&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +18,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -80,20 +80,17 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 
 Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top4">FCSys.BaseClasses.Icons.Names.Top4</a>.
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>face</td><td>Multi-species connector for linear momentum and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>face</td><td>Multi-species connector for translational momentum and heat</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">FluidPort_b</a></td><td>gasPort</td><td>Modelica fluid port for the gas</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Electrical.Analog.Interfaces.html#Modelica.Electrical.Analog.Interfaces.NegativePin">NegativePin</a></td><td>pin</td><td>Modelica electrical pin</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">FluidPort_b</a></td><td>liquidPort</td><td>Modelica fluid port for the liquid</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -108,7 +105,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
     &quot;Medium model for the liquid&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> face <font color="darkgreen">
-    &quot;Multi-species connector for linear momentum and heat&quot;</font>;
+    &quot;Multi-species connector for translational momentum and heat&quot;</font>;
   <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> gasPort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font> Medium
       = <a href="FCSys_Conditions_Adapters_GasMedium.html#FCSys.Conditions.Adapters.Anode.GasMedium">GasMedium</a>) <font color="darkgreen">&quot;Modelica fluid port for the gas&quot;</font>;
   <a href="http://build.openmodelica.org/Documentation/Modelica.Electrical.Analog.Interfaces.html#Modelica.Electrical.Analog.Interfaces.NegativePin">Modelica.Electrical.Analog.Interfaces.NegativePin</a> pin <font color="darkgreen">
@@ -149,20 +146,17 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
 
 Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons.Names.Top4">FCSys.BaseClasses.Icons.Names.Top4</a>.
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>face</td><td>Multi-species connector for linear momentum and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">FaceBus</a></td><td>face</td><td>Multi-species connector for translational momentum and heat</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">FluidPort_b</a></td><td>gasPort</td><td>Modelica fluid port for the gas</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Electrical.Analog.Interfaces.html#Modelica.Electrical.Analog.Interfaces.NegativePin">NegativePin</a></td><td>pin</td><td>Modelica electrical pin</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Thermal.HeatTransfer.Interfaces.html#Modelica.Thermal.HeatTransfer.Interfaces.HeatPort.b">HeatPort_b</a></td><td>heatPort</td><td>Modelica heat port</td></tr>
 <tr><td><a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">FluidPort_b</a></td><td>liquidPort</td><td>Modelica fluid port for the liquid</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -177,7 +171,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
     &quot;Medium model for the liquid&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.FaceBus">Connectors.FaceBus</a> face <font color="darkgreen">
-    &quot;Multi-species connector for linear momentum and heat&quot;</font>;
+    &quot;Multi-species connector for translational momentum and heat&quot;</font>;
   <a href="http://build.openmodelica.org/Documentation/Modelica.Fluid.Interfaces.html#Modelica.Fluid.Interfaces.FluidPort.b">Modelica.Fluid.Interfaces.FluidPort_b</a> gasPort(<font color="blue">redeclare </font><font color="blue">final </font><font color="blue">package</font> Medium
       = <a href="FCSys_Conditions_Adapters_GasMedium.html#FCSys.Conditions.Adapters.Cathode.GasMedium">GasMedium</a>) <font color="darkgreen">&quot;Modelica fluid port for the gas&quot;</font>;
   <a href="http://build.openmodelica.org/Documentation/Modelica.Electrical.Analog.Interfaces.html#Modelica.Electrical.Analog.Interfaces.NegativePin">Modelica.Electrical.Analog.Interfaces.NegativePin</a> pin <font color="darkgreen">
@@ -211,7 +205,7 @@ Extends from <a href="FCSys_BaseClasses_Icons_Names.html#FCSys.BaseClasses.Icons
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Apr  2 18:49:30 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun  5 08:39:57 2013.
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Conditions.FacePair</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-4-2">
+<meta name="date" content="2013-6-5">
 <meta name="description" content="&lt;html&gt;Conditions for a pair of &lt;a href=\&quot;modelica://FCSys.Connectors.Face\&quot;&gt;Face&lt;/a&gt; connectors (e.g., as in a &lt;a href=\&quot;modelica://FCSys.Subregions.Species\&quot;&gt;Species&lt;/a&gt; model)&lt;/html&gt;">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +18,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -59,9 +59,9 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
 <tr><td><img src="images/FCSys.Conditions.FacePair.SpeciesS.png" alt="FCSys.Conditions.FacePair.Species" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FacePair.html#FCSys.Conditions.FacePair.Species">Species</a>
 </td><td>Conditions for a pair of <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a> connectors</td></tr>
 <tr><td><img src="images/FCSys.Conditions.FacePair.NormalS.png" alt="FCSys.Conditions.FacePair.Normal" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FacePair_Normal.html#FCSys.Conditions.FacePair.Normal">Normal</a>
-</td><td>Normal mechanical conditions</td></tr>
+</td><td>Normal translational conditions</td></tr>
 <tr><td><img src="images/FCSys.Conditions.FacePair.NormalS.png" alt="FCSys.Conditions.FacePair.Transverse" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FacePair_Transverse.html#FCSys.Conditions.FacePair.Transverse">Transverse</a>
-</td><td>Transverse mechanical conditions</td></tr>
+</td><td>Transverse translational conditions</td></tr>
 <tr><td><img src="images/FCSys.Conditions.FacePair.NormalS.png" alt="FCSys.Conditions.FacePair.Thermal" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FacePair_Thermal.html#FCSys.Conditions.FacePair.Thermal">Thermal</a>
 </td><td>Thermal conditions</td></tr>
 <tr><td><img src="images/FCSys.Conditions.FacePair.BaseClassesS.png" alt="FCSys.Conditions.FacePair.BaseClasses" width=20  height=20 align=top>&nbsp;<a href="FCSys_Conditions_FacePair_BaseClasses.html#FCSys.Conditions.FacePair.BaseClasses">BaseClasses</a>
@@ -85,9 +85,7 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
   <p>
 Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.BaseClasses.Icons.Double">FCSys.Conditions.BaseClasses.Icons.Double</a> (Icon for a two-connector boundary condition).
 <p>
-
 <h3>Parameters</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Default</th><th>Description</th></tr>
@@ -98,19 +96,16 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
 <tr><td><a href="FCSys_Conditions_FacePair_Thermal.html#FCSys.Conditions.FacePair.Thermal.Temperature">Temperature</a></td><td>thermal</td><td>redeclare Thermal.Temperatur&hellip;</td><td>Thermal</td></tr>
 </table>
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>negative</td><td>Negative-side single-species connector for linear momentum and heat</td></tr>
-<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>positive</td><td>Positive-side single-species connector for linear momentum and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>negative</td><td>Negative-side single-species connector for translational momentum and heat</td></tr>
+<tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.Face">Face</a></td><td>positive</td><td>Positive-side single-species connector for translational momentum and heat</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">RealInputBus</a></td><td>u</td><td>Input bus for values of specified conditions</td></tr>
 <tr><td><a href="FCSys_Connectors.html#FCSys.Connectors.RealOutputBus">RealOutputBus</a></td><td>y</td><td>Output bus of measurements</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -135,10 +130,10 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
   <font color="darkgreen">// parameter k.</font>
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Connectors.Face</a> negative <font color="darkgreen">
-    &quot;Negative-side single-species connector for linear momentum and heat&quot;</font>;
+    &quot;Negative-side single-species connector for translational momentum and heat&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.Face">Connectors.Face</a> positive <font color="darkgreen">
-    &quot;Positive-side single-species connector for linear momentum and heat&quot;</font>;
+    &quot;Positive-side single-species connector for translational momentum and heat&quot;</font>;
 
   <a href="FCSys_Connectors.html#FCSys.Connectors.RealInputBus">Connectors.RealInputBus</a> u <font color="darkgreen">&quot;Input bus for values of specified conditions&quot;</font>;
 
@@ -175,7 +170,7 @@ Extends from <a href="FCSys_Conditions_BaseClasses_Icons.html#FCSys.Conditions.B
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Apr  2 18:51:26 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun  5 08:41:50 2013.
 </div>
 </body>
 </html>

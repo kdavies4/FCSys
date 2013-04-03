@@ -2,7 +2,7 @@
 <head>
 <title>FCSys.Blocks.UnitConversions</title>
 <meta name="keywords" content="fuel cell library, FCSys, fuel cell, PEM, proton exchange membrane, polymer exchange membrance, PEMFC, Modelica, Dymola, electrochemistry">
-<meta name="date" content="2013-4-2">
+<meta name="date" content="2013-6-5">
 <meta name="description" content="Blocks to convert to or from quantities expressed in units">
 <link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="stylesheets/ModelicaDoc.css">
 <link rel="shortcut icon" href="../resources/documentation/favicon.ico">
@@ -18,7 +18,7 @@
 
 <h3>Table of Contents</h3>
 
-<ul>
+    <ul>
     <li><a href="FCSys_UsersGuide.html">User's Guide</a></li>
     <li><a href="FCSys_Blocks.html">Blocks</a></li>
     <li><a href="FCSys_Conditions.html">Conditions</a></li>
@@ -63,11 +63,10 @@
   For conversions that require just a scaling factor, it is best to use
 the <a href="http://build.openmodelica.org/Documentation/Modelica.Blocks.Math.html#Modelica.Blocks.Math.Gain">Modelica.Blocks.Math.Gain</a>
 block with the appropriate factors from <a href="FCSys_Units.html#FCSys.Units">Units</a> package
-(<code>U</code>).  For example, to convert from potential in volts use:
-<br><code>Modelica.Blocks.Math.Gain from_V(k=U.V);</code>
-<br>To convert to current in amperes use:
-<br><code>Modelica.Blocks.Math.Gain to_A(k=1/U.A);</code></p>
-
+(<code>U</code>).  For example, to convert from potential in volts use:<br>
+<code>Modelica.Blocks.Math.Gain from_V(k=U.V);</code><br>
+To convert to current in amperes use:<br>
+<code>Modelica.Blocks.Math.Gain to_A(k=1/U.A);</code></p>
 <p>
 Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons.Package.html#Modelica.Icons.Package">Modelica.Icons.Package</a> (Icon for standard packages).
 
@@ -102,16 +101,13 @@ Extends from <a href="http://build.openmodelica.org/Documentation/Modelica.Icons
     <p>
 Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks.UnitConversions.BaseClasses.PartialUnitConversion">BaseClasses.PartialUnitConversion</a> (Partial block to convert to or from quantities expressed in units).
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Real input for value in source representation</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -138,16 +134,13 @@ Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks
     <p>
 Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks.UnitConversions.BaseClasses.PartialUnitConversion">BaseClasses.PartialUnitConversion</a> (Partial block to convert to or from quantities expressed in units).
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Real output for quantity in desired representation</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -174,16 +167,13 @@ Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks
     <p>
 Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks.UnitConversions.BaseClasses.PartialUnitConversion">BaseClasses.PartialUnitConversion</a> (Partial block to convert to or from quantities expressed in units).
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>input <a href="FCSys_Connectors.html#FCSys.Connectors.RealInput">RealInput</a></td><td>u</td><td>Real input for value in source representation</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -209,16 +199,13 @@ Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks
     <p>
 Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks.UnitConversions.BaseClasses.PartialUnitConversion">BaseClasses.PartialUnitConversion</a> (Partial block to convert to or from quantities expressed in units).
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
 <tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Real output for quantity in desired representation</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -244,9 +231,7 @@ Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks
     <p>
 Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks.UnitConversions.BaseClasses.PartialUnitConversion">BaseClasses.PartialUnitConversion</a> (Partial block to convert to or from quantities expressed in units).
 <p>
-
 <h3>Connectors</h3>
-
 <p>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Type</th><th>Name</th><th>Description</th></tr>
@@ -254,7 +239,6 @@ Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks
 <tr><td>output <a href="FCSys_Connectors.html#FCSys.Connectors.RealOutput">RealOutput</a></td><td>y</td><td>Real output for quantity in desired representation</td></tr>
 </table>
 <p>
-
 <h3>Modelica definition</h3>
 
 <pre>
@@ -262,7 +246,8 @@ Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks
   &quot;Generic block to convert to or from quantities expressed in units&quot;</font>
   <font color="blue">extends </font><a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks.UnitConversions.BaseClasses.PartialUnitConversion">BaseClasses.PartialUnitConversion</a>;
 
-  <font color="blue">replaceable </font><font color="blue">function</font> f = <a href="FCSys_Units.html#FCSys.Units.from_degC">U.from_degC</a> <font color="darkgreen">&quot;Conversion function&quot;</font>;
+  <font color="blue">replaceable </font><font color="blue">function</font> f = <a href="FCSys_Units.html#FCSys.Units.from_degC">U.from_degC</a> <font color="blue">constrainedby </font>
+    Modelica.SIunits.Conversions.ConversionIcon <font color="darkgreen">&quot;Conversion function&quot;</font>;
 
 <font color="blue">equation </font>
   y = <font color="red">f</font>(u);
@@ -273,7 +258,7 @@ Extends from <a href="FCSys_Blocks_UnitConversions_BaseClasses.html#FCSys.Blocks
   </div>
 </div>
 <div class="footer">
-  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Tue Apr  2 18:49:19 2013.
+  &copy; Copyright 2012, Kevin Davies, Georgia Tech Research Corporation. Last updated Wed Jun  5 08:39:46 2013.
 </div>
 </body>
 </html>
