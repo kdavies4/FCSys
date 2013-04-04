@@ -45,8 +45,8 @@ package Conditions "Models to specify and measure operating conditions"
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
       // Geometric parameters
-      inner parameter Q.Length L[Axis](each min=Modelica.Constants.small, start
-          =ones(3)*U.cm) "<html>Length (<b>L</b>)</html>"
+      inner parameter Q.Length L[Axis](each min=Modelica.Constants.small,start=
+            ones(3)*U.cm) "<html>Length (<b>L</b>)</html>"
         annotation (Dialog(group="Geometry"));
       final inner parameter Q.Area A[Axis]={L[cartWrap(axis + 1)]*L[cartWrap(
           axis + 2)] for axis in Axis} "Cross-sectional area";
@@ -191,8 +191,8 @@ package Conditions "Models to specify and measure operating conditions"
         annotation (choicesAllMatching=true, Dialog(group="Material properties"));
 
       Connectors.FaceBus face
-        "Multi-species connector for translational momentum and heat"
-        annotation (Placement(transformation(extent={{-90,-10},{-70,10}}),
+        "Multi-species connector for linear momentum and heat" annotation (
+          Placement(transformation(extent={{-90,-10},{-70,10}}),
             iconTransformation(extent={{-90,-10},{-70,10}})));
       Modelica.Fluid.Interfaces.FluidPort_b gasPort(redeclare final package
           Medium = GasMedium) "Modelica fluid port for the gas" annotation (
@@ -203,7 +203,7 @@ package Conditions "Models to specify and measure operating conditions"
                 {70,10},{90,30}}),iconTransformation(extent={{70,10},{90,30}})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
         "Modelica heat port" annotation (Placement(transformation(extent={{70,-30},
-                {90,-10}}), iconTransformation(extent={{70,-30},{90,-10}})));
+                {90,-10}}),iconTransformation(extent={{70,-30},{90,-10}})));
       Modelica.Fluid.Interfaces.FluidPort_b liquidPort(redeclare final package
           Medium = LiquidMedium) "Modelica fluid port for the liquid"
         annotation (Placement(transformation(extent={{70,-70},{90,-50}}),
@@ -298,8 +298,8 @@ package Conditions "Models to specify and measure operating conditions"
         annotation (choicesAllMatching=true, Dialog(group="Material properties"));
 
       Connectors.FaceBus face
-        "Multi-species connector for translational momentum and heat"
-        annotation (Placement(transformation(extent={{-90,-10},{-70,10}}),
+        "Multi-species connector for linear momentum and heat" annotation (
+          Placement(transformation(extent={{-90,-10},{-70,10}}),
             iconTransformation(extent={{-90,-10},{-70,10}})));
       Modelica.Fluid.Interfaces.FluidPort_b gasPort(redeclare final package
           Medium = GasMedium) "Modelica fluid port for the gas" annotation (
@@ -310,7 +310,7 @@ package Conditions "Models to specify and measure operating conditions"
                 {70,10},{90,30}}),iconTransformation(extent={{70,10},{90,30}})));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b heatPort
         "Modelica heat port" annotation (Placement(transformation(extent={{70,-30},
-                {90,-10}}), iconTransformation(extent={{70,-30},{90,-10}})));
+                {90,-10}}),iconTransformation(extent={{70,-30},{90,-10}})));
       Modelica.Fluid.Interfaces.FluidPort_b liquidPort(redeclare final package
           Medium = LiquidMedium) "Modelica fluid port for the liquid"
         annotation (Placement(transformation(extent={{70,-70},{90,-50}}),
@@ -853,7 +853,7 @@ package Conditions "Models to specify and measure operating conditions"
                 iconTransformation(extent={{-10,90},{10,110}})));
 
           Connectors.Face face
-            "Connector for translational momentum and heat of a single species"
+            "Connector for linear momentum and heat of a single species"
             annotation (Placement(transformation(extent={{-90,-10},{-70,10}}),
                 iconTransformation(extent={{-90,-10},{-70,10}})));
 
@@ -867,7 +867,7 @@ package Conditions "Models to specify and measure operating conditions"
           face.T = heatPort.T*U.K "Temperature";
 
           // Conservation (no storage)
-          face.mPhidot = {0,0} "Transverse translational momentum";
+          face.mPhidot = {0,0} "Transverse linear momentum";
           0 = face.Qdot + heatPort.Q_flow*U.W "Energy";
           // Note:  The enthalpy, kinetic energy, and electric work terms each
           // cancel since there's no material storage and the thermodynamic state
@@ -1883,7 +1883,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={127,127,127},
             thickness=0.5,
             smooth=Smooth.None));
-
         connect(voltage.y, y) annotation (Line(
             points={{130,-40},{130,-140},{160,-160}},
             color={0,0,127},
@@ -1895,7 +1894,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             color={127,127,127},
             thickness=0.5,
             smooth=Smooth.None));
-
         annotation (
           defaultComponentName="testStand",
           Diagram(coordinateSystem(preserveAspectRatio=true,extent={{-160,-160},
@@ -1946,7 +1944,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               rotation=180,
               origin={-20,-30})));
         Conditions.FaceBus.SubregionFlows anSink[n_x_an, n_z](each gas(inclH2=
-                true,inclH2O=true)) annotation (Placement(transformation(
+                true, inclH2O=true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-20,30})));
@@ -2381,20 +2379,17 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         parameter Boolean inclLinX=true "X" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
-          Dialog(group="Axes with translational momentum included", compact=
-                true));
+          Dialog(group="Axes with linear momentum included", compact=true));
 
         parameter Boolean inclLinY=false "Y" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
-          Dialog(group="Axes with translational momentum included", compact=
-                true));
+          Dialog(group="Axes with linear momentum included", compact=true));
 
         parameter Boolean inclLinZ=false "Z" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
-          Dialog(group="Axes with translational momentum included", compact=
-                true));
+          Dialog(group="Axes with linear momentum included", compact=true));
 
         Connectors.ChemicalIOBus chemical
           "Bus of ChemicalInput and ChemicalOutput connectors of multiple species"
@@ -2441,7 +2436,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
       Connectors.ChemicalInput chemical(final n_lin=countTrue({inclLinX,
             inclLinY,inclLinZ}))
-        "Connector to exchange material while advecting translational momentum and enthalpy, with characteristic data as input"
+        "Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as input"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
     equation
@@ -2488,7 +2483,7 @@ model.</p>
 
       Connectors.Chemical chemical(final n_lin=countTrue({inclLinX,inclLinY,
             inclLinZ}))
-        "Connector to exchange material while advecting translational momentum and enthalpy, with characteristic data as output"
+        "Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as output"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
       Properties properties(final n_lin=n_lin,final Data=Data) annotation (
@@ -2499,7 +2494,7 @@ model.</p>
 
     protected
       final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
-        "Number of components of translational momentum";
+        "Number of components of linear momentum";
 
       model Properties "Apply material data to a ChemicalOutput connector"
         extends FCSys.BaseClasses.Icons.Blocks.ContinuousShort;
@@ -2510,11 +2505,10 @@ model.</p>
           Dialog(group="Material properties"),
           Placement(transformation(extent={{-60,40},{-40,60}}),
               iconTransformation(extent={{-10,90},{10,110}})));
-        parameter Integer n_lin
-          "Number of components of translational momentum";
+        parameter Integer n_lin "Number of components of linear momentum";
 
         Connectors.Chemical chemical(final n_lin=n_lin)
-          "Connector to exchange material while advecting translational momentum and enthalpy, with characteristic data as output"
+          "Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as output"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
       equation
@@ -2576,8 +2570,8 @@ model.</p>
 
       equation
         chemical.muPerT = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="amagat");
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="amagat");
       end PotentialPerTemperature;
 
       model Current
@@ -2589,8 +2583,8 @@ model.</p>
 
       equation
         chemical.Ndot = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="amagat");
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="amagat");
       end Current;
 
       model Custom "Custom expressions"
@@ -2648,8 +2642,8 @@ model.</p>
 
       equation
         chemical.phi[linAxes[axis]] = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="mechanical");
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="mechanical");
       end Velocity;
 
       model Custom "Custom expressions"
@@ -2686,10 +2680,10 @@ model.</p>
         protected
           final parameter Integer cartAxes[n_lin]=index({inclLinX,inclLinY,
               inclLinZ})
-            "Cartesian-axis indices of the components of translational momentum";
+            "Cartesian-axis indices of the components of linear momentum";
           final parameter Integer linAxes[Axis]=enumerate({inclLinX,inclLinY,
               inclLinZ})
-            "Translational momentum component indices of the Cartesian axes";
+            "Linear momentum component indices of the Cartesian axes";
 
         equation
           // Zero values of other flows
@@ -2723,8 +2717,8 @@ model.</p>
 
       equation
         chemical.hbar = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="fluid");
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="fluid");
       end EnthalpyMassic;
 
       model Custom "Custom expressions"
@@ -2774,24 +2768,21 @@ model.</p>
         "<html>Condition for a <a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> connector (e.g., as in a <a href=\"modelica://FCSys.Subregions.Reaction\">Reaction</a> model), with efforts by default</html>"
         extends FCSys.Conditions.BaseClasses.Icons.Single;
 
-        // Included components of translational momentum
+        // Included components of linear momentum
         parameter Boolean inclLinX=true "X" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
-          Dialog(group="Axes with translational momentum included", compact=
-                true));
+          Dialog(group="Axes with linear momentum included", compact=true));
 
         parameter Boolean inclLinY=false "Y" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
-          Dialog(group="Axes with translational momentum included", compact=
-                true));
+          Dialog(group="Axes with linear momentum included", compact=true));
 
         parameter Boolean inclLinZ=false "Z" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
-          Dialog(group="Axes with translational momentum included", compact=
-                true));
+          Dialog(group="Axes with linear momentum included", compact=true));
 
         // Conditions
         replaceable Material.PotentialPerTemperature material(source(k(start=0)))
@@ -2954,20 +2945,17 @@ model.</p>
         parameter Boolean inclLinX=true "X" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
-          Dialog(group="Axes with translational momentum included", compact=
-                true));
+          Dialog(group="Axes with linear momentum included", compact=true));
 
         parameter Boolean inclLinY=false "Y" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
-          Dialog(group="Axes with translational momentum included", compact=
-                true));
+          Dialog(group="Axes with linear momentum included", compact=true));
 
         parameter Boolean inclLinZ=false "Z" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
-          Dialog(group="Axes with translational momentum included", compact=
-                true));
+          Dialog(group="Axes with linear momentum included", compact=true));
 
         parameter Boolean internal=true "Use internal specification"
           annotation (
@@ -2999,12 +2987,12 @@ model.</p>
               rotation=0,
               origin={110,0})));
         Connectors.ChemicalInput chemical(final n_lin=n_lin)
-          "Connector to exchange material while advecting translational momentum and enthalpy, with characteristic data as input"
+          "Connector to exchange material while advecting linear momentum and enthalpy, with characteristic data as input"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
       protected
         final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
-          "Number of components of translational momentum";
+          "Number of components of linear momentum";
 
         Connectors.RealOutputInternal u_final
           "Final value of specified condition" annotation (Placement(
@@ -3039,21 +3027,21 @@ model.</p>
       import FCSys.BaseClasses.Utilities.countTrue;
       extends FCSys.Conditions.BaseClasses.Icons.Single;
 
-      // Included components of translational momentum
+      // Included components of linear momentum
       parameter Boolean inclLinX=true "X" annotation (
         HideResult=true,
         choices(__Dymola_checkBox=true),
-        Dialog(group="Axes with translational momentum included", compact=true));
+        Dialog(group="Axes with linear momentum included", compact=true));
 
       parameter Boolean inclLinY=false "Y" annotation (
         HideResult=true,
         choices(__Dymola_checkBox=true),
-        Dialog(group="Axes with translational momentum included", compact=true));
+        Dialog(group="Axes with linear momentum included", compact=true));
 
       parameter Boolean inclLinZ=false "Z" annotation (
         HideResult=true,
         choices(__Dymola_checkBox=true),
-        Dialog(group="Axes with translational momentum included", compact=true));
+        Dialog(group="Axes with linear momentum included", compact=true));
 
       // Included subconnectors
       parameter Boolean inclMechanical=true "Mechanical" annotation (
@@ -3123,8 +3111,8 @@ model.</p>
         final n_lin=countTrue({inclLinX,inclLinY,inclLinZ}),
         inclMechanical=inclMechanical,
         inclThermal=inclThermal)
-        "Single-species connector for translational momentum and heat"
-        annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
+        "Single-species connector for linear momentum and heat" annotation (
+          Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
 
     equation
@@ -3243,8 +3231,8 @@ model.</p>
 
       equation
         mechanical.phi[linAxes[axis]] = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="mechanical");
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="mechanical");
       end Velocity;
 
       model Force "Specify force (measure velocity)"
@@ -3255,8 +3243,8 @@ model.</p>
 
       equation
         mechanical.mPhidot[linAxes[axis]] = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="mechanical");
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="mechanical");
       end Force;
 
       model Custom "Custom expressions"
@@ -3291,16 +3279,16 @@ model.</p>
           // the results.
 
           Connectors.Translational mechanical(final n_lin=n_lin)
-            "Connector to exchange translational momentum"
+            "Connector to exchange linear momentum"
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
         protected
           final parameter Integer cartAxes[n_lin]=index({inclLinX,inclLinY,
               inclLinZ})
-            "Cartesian-axis indices of the components of translational momentum";
+            "Cartesian-axis indices of the components of linear momentum";
           final parameter Integer linAxes[Axis]=enumerate({inclLinX,inclLinY,
               inclLinZ})
-            "Translational momentum component indices of the Cartesian axes";
+            "Linear momentum component indices of the Cartesian axes";
 
         equation
           // Zero values of other flows
@@ -3333,8 +3321,8 @@ model.</p>
 
       equation
         thermal.T = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="thermal");
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="thermal");
       end Temperature;
 
       model HeatRate "Specify heat flow rate (measure temperature)"
@@ -3347,8 +3335,8 @@ model.</p>
 
       equation
         thermal.Qdot = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="thermal");
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="thermal");
       end HeatRate;
 
       model Custom "Custom expressions"
@@ -3405,20 +3393,17 @@ model.</p>
         parameter Boolean inclLinX=true "X" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
-          Dialog(group="Axes with translational momentum included", compact=
-                true));
+          Dialog(group="Axes with linear momentum included", compact=true));
 
         parameter Boolean inclLinY=false "Y" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
-          Dialog(group="Axes with translational momentum included", compact=
-                true));
+          Dialog(group="Axes with linear momentum included", compact=true));
 
         parameter Boolean inclLinZ=false "Z" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
-          Dialog(group="Axes with translational momentum included", compact=
-                true));
+          Dialog(group="Axes with linear momentum included", compact=true));
 
         parameter Boolean internal=true "Use internal specification"
           annotation (
@@ -3452,7 +3437,7 @@ model.</p>
 
       protected
         final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
-          "Number of components of translational momentum";
+          "Number of components of linear momentum";
 
         Connectors.RealOutputInternal u_final
           "Final value of specified condition" annotation (Placement(
@@ -3487,21 +3472,21 @@ model.</p>
       import FCSys.BaseClasses.Utilities.countTrue;
       extends FCSys.Conditions.BaseClasses.Icons.Single;
 
-      // Included components of translational momentum
+      // Included components of linear momentum
       parameter Boolean inclLinX=true "X" annotation (
         HideResult=true,
         choices(__Dymola_checkBox=true),
-        Dialog(group="Axes with translational momentum included", compact=true));
+        Dialog(group="Axes with linear momentum included", compact=true));
 
       parameter Boolean inclLinY=false "Y" annotation (
         HideResult=true,
         choices(__Dymola_checkBox=true),
-        Dialog(group="Axes with translational momentum included", compact=true));
+        Dialog(group="Axes with linear momentum included", compact=true));
 
       parameter Boolean inclLinZ=false "Z" annotation (
         HideResult=true,
         choices(__Dymola_checkBox=true),
-        Dialog(group="Axes with translational momentum included", compact=true));
+        Dialog(group="Axes with linear momentum included", compact=true));
 
       // Conditions
       replaceable Amagat.Pressure amagat(source(k(start=U.atm))) constrainedby
@@ -3569,7 +3554,7 @@ model.</p>
 
       Connectors.InertAmagat inert(final n_lin=countTrue({inclLinX,inclLinY,
             inclLinZ}))
-        "Single-species connector for translational momentum and heat, with additivity of volume"
+        "Single-species connector for linear momentum and heat, with additivity of volume"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
 
@@ -3712,8 +3697,8 @@ model.</p>
 
       equation
         inert.p = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="amagat");
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="amagat");
       end Pressure;
 
       model Volume "Specify volume (measure pressure)"
@@ -3724,8 +3709,8 @@ model.</p>
 
       equation
         inert.V = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="amagat");
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="amagat");
       end Volume;
 
       model Custom "Custom expressions"
@@ -3780,8 +3765,8 @@ model.</p>
 
       equation
         inert.phi[linAxes[axis]] = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="mechanical");
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="mechanical");
       end Velocity;
 
       model Force "Specify force (measure velocity)"
@@ -3792,8 +3777,8 @@ model.</p>
 
       equation
         inert.mPhidot[linAxes[axis]] = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="mechanical");
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="mechanical");
       end Force;
 
       model Custom "Custom expressions"
@@ -3830,10 +3815,10 @@ model.</p>
         protected
           final parameter Integer cartAxes[n_lin]=index({inclLinX,inclLinY,
               inclLinZ})
-            "Cartesian-axis indices of the components of translational momentum";
+            "Cartesian-axis indices of the components of linear momentum";
           final parameter Integer linAxes[Axis]=enumerate({inclLinX,inclLinY,
               inclLinZ})
-            "Translational momentum component indices of the Cartesian axes";
+            "Linear momentum component indices of the Cartesian axes";
 
         equation
           // Zero values of other flows
@@ -3868,8 +3853,8 @@ model.</p>
 
       equation
         inert.T = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="thermal");
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="thermal");
       end Temperature;
 
       model HeatRate "Specify heat flow rate (measure temperature)"
@@ -3882,8 +3867,8 @@ model.</p>
 
       equation
         inert.Qdot = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="thermal");
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="thermal");
       end HeatRate;
 
       model Custom "Custom expressions"
@@ -3936,20 +3921,17 @@ model.</p>
         parameter Boolean inclLinX=true "X" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
-          Dialog(group="Axes with translational momentum included", compact=
-                true));
+          Dialog(group="Axes with linear momentum included", compact=true));
 
         parameter Boolean inclLinY=false "Y" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
-          Dialog(group="Axes with translational momentum included", compact=
-                true));
+          Dialog(group="Axes with linear momentum included", compact=true));
 
         parameter Boolean inclLinZ=false "Z" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
-          Dialog(group="Axes with translational momentum included", compact=
-                true));
+          Dialog(group="Axes with linear momentum included", compact=true));
 
         parameter Boolean internal=true "Use internal specification"
           annotation (
@@ -3981,12 +3963,12 @@ model.</p>
               rotation=0,
               origin={110,0})));
         Connectors.InertAmagat inert(final n_lin=n_lin)
-          "Connector for translational momentum and heat, with additivity of volume"
+          "Connector for linear momentum and heat, with additivity of volume"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
       protected
         final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
-          "Number of components of translational momentum";
+          "Number of components of linear momentum";
 
         Connectors.RealOutputInternal u_final
           "Final value of specified condition" annotation (Placement(
@@ -4021,21 +4003,21 @@ model.</p>
       import FCSys.BaseClasses.Utilities.countTrue;
       extends FCSys.Conditions.BaseClasses.Icons.Single;
 
-      // Included components of translational momentum
+      // Included components of linear momentum
       parameter Boolean inclLinX=true "X" annotation (
         HideResult=true,
         choices(__Dymola_checkBox=true),
-        Dialog(group="Axes with translational momentum included", compact=true));
+        Dialog(group="Axes with linear momentum included", compact=true));
 
       parameter Boolean inclLinY=false "Y" annotation (
         HideResult=true,
         choices(__Dymola_checkBox=true),
-        Dialog(group="Axes with translational momentum included", compact=true));
+        Dialog(group="Axes with linear momentum included", compact=true));
 
       parameter Boolean inclLinZ=false "Z" annotation (
         HideResult=true,
         choices(__Dymola_checkBox=true),
-        Dialog(group="Axes with translational momentum included", compact=true));
+        Dialog(group="Axes with linear momentum included", compact=true));
 
       // Conditions
       replaceable Dalton.Volume dalton(source(k(start=U.cc))) constrainedby
@@ -4101,7 +4083,7 @@ model.</p>
 
       Connectors.InertDalton inert(final n_lin=countTrue({inclLinX,inclLinY,
             inclLinZ}))
-        "Single-species connector for translational momentum and heat, with additivity of pressure"
+        "Single-species connector for linear momentum and heat, with additivity of pressure"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
 
@@ -4244,8 +4226,8 @@ model.</p>
 
       equation
         inert.V = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="dalton");
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="dalton");
       end Volume;
 
       model Pressure "Specify pressure (measure volume)"
@@ -4256,8 +4238,8 @@ model.</p>
 
       equation
         inert.p = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="dalton");
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="dalton");
       end Pressure;
 
       model Custom "Custom expressions"
@@ -4312,8 +4294,8 @@ model.</p>
 
       equation
         inert.phi[linAxes[axis]] = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="mechanical");
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="mechanical");
       end Velocity;
 
       model Force "Specify force (measure velocity)"
@@ -4324,8 +4306,8 @@ model.</p>
 
       equation
         inert.mPhidot[linAxes[axis]] = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="mechanical");
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="mechanical");
       end Force;
 
       model Custom "Custom expressions"
@@ -4362,10 +4344,10 @@ model.</p>
         protected
           final parameter Integer cartAxes[n_lin]=index({inclLinX,inclLinY,
               inclLinZ})
-            "Cartesian-axis indices of the components of translational momentum";
+            "Cartesian-axis indices of the components of linear momentum";
           final parameter Integer linAxes[Axis]=enumerate({inclLinX,inclLinY,
               inclLinZ})
-            "Translational momentum component indices of the Cartesian axes";
+            "Linear momentum component indices of the Cartesian axes";
 
         equation
           // Zero values of other flows
@@ -4400,8 +4382,8 @@ model.</p>
 
       equation
         inert.T = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="thermal");
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="thermal");
       end Temperature;
 
       model HeatRate "Specify heat flow rate (measure temperature)"
@@ -4414,8 +4396,8 @@ model.</p>
 
       equation
         inert.Qdot = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="thermal");
+        annotation (defaultComponentPrefixes="replaceable",defaultComponentName
+            ="thermal");
       end HeatRate;
 
       model Custom "Custom expressions"
@@ -4468,20 +4450,17 @@ model.</p>
         parameter Boolean inclLinX=true "X" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
-          Dialog(group="Axes with translational momentum included", compact=
-                true));
+          Dialog(group="Axes with linear momentum included", compact=true));
 
         parameter Boolean inclLinY=false "Y" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
-          Dialog(group="Axes with translational momentum included", compact=
-                true));
+          Dialog(group="Axes with linear momentum included", compact=true));
 
         parameter Boolean inclLinZ=false "Z" annotation (
           HideResult=true,
           choices(__Dymola_checkBox=true),
-          Dialog(group="Axes with translational momentum included", compact=
-                true));
+          Dialog(group="Axes with linear momentum included", compact=true));
 
         parameter Boolean internal=true "Use internal specification"
           annotation (
@@ -4513,12 +4492,12 @@ model.</p>
               rotation=0,
               origin={110,0})));
         Connectors.InertDalton inert(final n_lin=n_lin)
-          "Connector for translational momentum and heat, with additivity of pressure"
+          "Connector for linear momentum and heat, with additivity of pressure"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
       protected
         final parameter Integer n_lin=countTrue({inclLinX,inclLinY,inclLinZ})
-          "Number of components of translational momentum";
+          "Number of components of linear momentum";
 
         Connectors.RealOutputInternal u_final
           "Final value of specified condition" annotation (Placement(
@@ -4571,7 +4550,7 @@ model.</p>
                 -10,-10},{10,10}})));
 
       Connectors.FaceBus face
-        "Connector for translational momentum and heat of multiple species"
+        "Connector for linear momentum and heat of multiple species"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
       Connectors.RealInputBus u "Bus of inputs to specify conditions"
@@ -5126,7 +5105,7 @@ model.</p>
           extends FCSys.Conditions.BaseClasses.Icons.Single;
 
           Connectors.FaceBus face
-            "Multi-species connector for translational momentum and heat"
+            "Multi-species connector for linear momentum and heat"
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
           Connectors.RealInputBus u
             "Input bus for values of specified conditions" annotation (
@@ -5194,8 +5173,8 @@ model.</p>
       // parameter k.
 
       Connectors.Face face
-        "Single-species connector for translational momentum and heat"
-        annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
+        "Single-species connector for linear momentum and heat" annotation (
+          Placement(transformation(extent={{-10,-50},{10,-30}}),
             iconTransformation(extent={{-10,-50},{10,-30}})));
 
       Connectors.RealInputBus u "Input bus for values of specified conditions"
@@ -5365,8 +5344,7 @@ model.</p>
 
         equation
           // No flows of other quantities
-          face.mPhidot = {0,0}
-            "Translational momentum in transverse directions";
+          face.mPhidot = {0,0} "Linear momentum in transverse directions";
           face.Qdot = 0 "Heat";
           annotation (defaultComponentName="normal");
         end PartialCondition;
@@ -5432,7 +5410,7 @@ model.</p>
           extends Face.BaseClasses.PartialCondition;
 
           parameter Orientation orientation=Orientation.preceding
-            "Orientation of translational momentum";
+            "Orientation of linear momentum";
 
           constant ConditionType conditionType "Type of condition";
           // Note:  This is included so that the type of condition is recorded with
@@ -5442,7 +5420,7 @@ model.</p>
           // No flows of other quantities
           face.Ndot = 0 "Material";
           face.mPhidot[mod1(orientation + 1, 2)] = 0
-            "Translational momentum in the other transverse direction";
+            "Linear momentum in the other transverse direction";
           face.Qdot = 0 "Heat";
           annotation (defaultComponentName="transverse");
         end PartialCondition;
@@ -5513,8 +5491,7 @@ model.</p>
         equation
           // No flows of other quantities
           face.Ndot = 0 "Material";
-          face.mPhidot = {0,0}
-            "Translational momentum in transverse directions";
+          face.mPhidot = {0,0} "Linear momentum in transverse directions";
           annotation (defaultComponentName="thermal");
         end PartialCondition;
 
@@ -5566,7 +5543,7 @@ model.</p>
               origin={110,0})));
 
         Connectors.Face face
-          "Connector to transport translational momentum and heat of a single species"
+          "Connector to transport linear momentum and heat of a single species"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
       protected
@@ -5622,14 +5599,14 @@ model.</p>
                 -10,-10},{10,10}})));
 
       Connectors.FaceBus negative
-        "Negative-side multi-species connector for translational momentum and heat"
+        "Negative-side multi-species connector for linear momentum and heat"
         annotation (Placement(transformation(extent={{-110,-10},{-90,10}}),
             iconTransformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-100,0})));
       Connectors.FaceBus positive
-        "Positive-side multi-species connector for translational momentum and heat"
+        "Positive-side multi-species connector for linear momentum and heat"
         annotation (Placement(transformation(extent={{90,-10},{110,10}}),
             iconTransformation(
             extent={{-10,-10},{10,10}},
@@ -6274,11 +6251,11 @@ model.</p>
           extends FCSys.Conditions.BaseClasses.Icons.Double;
 
           Connectors.FaceBus negative
-            "Negative-side multi-species connector for translational momentum and heat"
+            "Negative-side multi-species connector for linear momentum and heat"
             annotation (Placement(transformation(extent={{-110,-10},{-90,10}}),
                 iconTransformation(extent={{-110,-10},{-90,10}})));
           Connectors.FaceBus positive
-            "Positive-side multi-species connector for translational momentum and heat"
+            "Positive-side multi-species connector for linear momentum and heat"
             annotation (Placement(transformation(extent={{90,-10},{110,10}}),
                 iconTransformation(extent={{90,-10},{110,10}})));
           Connectors.RealInputBus u
@@ -6349,7 +6326,7 @@ model.</p>
       // parameter k.
 
       Connectors.Face negative
-        "Negative-side single-species connector for translational momentum and heat"
+        "Negative-side single-species connector for linear momentum and heat"
         annotation (Placement(transformation(extent={{-110,-10},{-90,10}}),
             iconTransformation(
             extent={{-10,-10},{10,10}},
@@ -6357,7 +6334,7 @@ model.</p>
             origin={-100,0})));
 
       Connectors.Face positive
-        "Positive-side single-species connector for translational momentum and heat"
+        "Positive-side single-species connector for linear momentum and heat"
         annotation (Placement(transformation(extent={{90,-10},{110,10}}),
             iconTransformation(extent={{90,-10},{110,10}})));
 
@@ -6555,7 +6532,7 @@ model.</p>
 
           // No flows of other quantities
           // ----------------------------
-          // Translational momentum in transverse directions
+          // Linear momentum in transverse directions
           negative.mPhidot = {0,0};
           positive.mPhidot = {0,0};
           //
@@ -6578,7 +6555,7 @@ model.</p>
       extends Modelica.Icons.Package;
 
       model Velocity
-        "Specify velocity difference (measure shear force), with conversation of translational momentum"
+        "Specify velocity difference (measure shear force), with conversation of linear momentum"
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Velocity,
           u(final unit="l/T"),
@@ -6591,7 +6568,7 @@ model.</p>
       end Velocity;
 
       model Force
-        "Specify shear force (measure velocity difference), with conversation of translational momentum"
+        "Specify shear force (measure velocity difference), with conversation of linear momentum"
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Force,
           u(final unit="l.m/T2"),
@@ -6629,23 +6606,23 @@ model.</p>
           extends FacePair.BaseClasses.PartialCondition;
 
           parameter Orientation orientation=Orientation.preceding
-            "Orientation of translational momentum";
+            "Orientation of linear momentum";
 
           constant ConditionType conditionType "Type of condition";
           // Note:  This is included so that the type of condition is recorded with
           // the results.
 
         equation
-          // Conservation of translational momentum in the present transverse direction
+          // Conservation of linear momentum in the present transverse direction
           0 = negative.mPhidot[orientation] + positive.mPhidot[orientation];
 
           // No flows of other quantities
           // ----------------------------
-          // Translational momentum in normal direction
+          // Linear momentum in normal direction
           negative.mPhidot_0 = 0;
           positive.mPhidot_0 = 0;
           //
-          // Translational momentum in the other transverse direction
+          // Linear momentum in the other transverse direction
           negative.mPhidot[mod1(orientation + 1, 2)] = 0;
           positive.mPhidot[mod1(orientation + 1, 2)] = 0;
           //
@@ -6728,11 +6705,11 @@ model.</p>
 
           // No flows of other quantities
           // ----------------------------
-          // Translational momentum in normal direction
+          // Linear momentum in normal direction
           negative.mPhidot_0 = 0;
           positive.mPhidot_0 = 0;
           //
-          // Translational momentum in transverse directions
+          // Linear momentum in transverse directions
           negative.mPhidot = {0,0};
           positive.mPhidot = {0,0};
           annotation (defaultComponentName="thermal");
@@ -6788,10 +6765,10 @@ model.</p>
               origin={0,-50})));
 
         Connectors.Face negative
-          "Negative-side connector to transport translational momentum and heat of a single species"
+          "Negative-side connector to transport linear momentum and heat of a single species"
           annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
         Connectors.Face positive
-          "Positive-side connector to transport translational momentum and heat of a single species"
+          "Positive-side connector to transport linear momentum and heat of a single species"
           annotation (Placement(transformation(extent={{90,-10},{110,10}})));
 
       protected
@@ -6931,10 +6908,9 @@ connected to <code>positive1</code>, as shown by Figure 1b.</p>
       displayUnit="%") = 0.208
       "<html>Dry gas O<sub>2</sub> fraction (<i>y</i><sub>O2 dry</sub>)</html>";
     // Value from http://en.wikipedia.org/wiki/Oxygen
-    parameter Q.Acceleration a[Axis]={0,Modelica.Constants.g_n*U.m/U.s^2,0}
+    parameter Q.Acceleration a[Axis]={0,0,0}
       "Acceleration of the reference frame";
-    // The gravity component is positive because it's added to the transient
-    // term in the Species model.
+
     final parameter Q.NumberAbsolute x_H2O(
       final max=1,
       displayUnit="%") = 0.2
@@ -6963,16 +6939,16 @@ The default global conditions and defaults will be used for the current simulati
               lineColor={255,255,255},
               fillPattern=FillPattern.HorizontalCylinder,
               fillColor={170,170,255}),Rectangle(
-              extent={{-72,-60},{72,-100}},
+              extent={{-72,-60},{70,-100}},
               fillPattern=FillPattern.Solid,
               fillColor={255,255,255},
               pattern=LinePattern.None,
               lineColor={0,0,0}),Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
             Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),Ellipse(
-              extent={{32,8},{48,-8}},
+              extent={{30,10},{50,-10}},
               pattern=LinePattern.None,
               lineColor={255,255,255},
-              fillColor={0,0,0},
+              fillColor={240,0,0},
               fillPattern=FillPattern.Sphere),Line(points={{-66,-90},{-36,-60}},
             color={0,0,0}),Line(points={{2,-90},{32,-60}}, color={0,0,0}),Line(
             points={{36,-90},{66,-60}}, color={0,0,0}),Line(points={{-32,-90},{
@@ -6987,7 +6963,7 @@ The default global conditions and defaults will be used for the current simulati
               fillColor={255,255,255},
               pattern=LinePattern.None,
               lineColor={0,0,0}),Rectangle(
-              extent={{-80,60},{80,-100}},
+              extent={{-82,60},{78,-100}},
               lineColor={0,0,0},
               pattern=LinePattern.Dash)}));
 

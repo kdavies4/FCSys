@@ -73,14 +73,13 @@ package Figures "Graphical layouts for documentation"
               points={{-1,-40},{-10,-40},{-10,6.10623e-16},{-19,6.10623e-16}},
               color={0,0,127},
               smooth=Smooth.None));
-
           connect(imperative_vi.v, pulse.y) annotation (Line(
               points={{-1,6.10623e-16},{-5.5,6.10623e-16},{-5.5,6.10623e-16},{-10,
                   6.10623e-16},{-10,6.10623e-16},{-19,6.10623e-16}},
               color={0,0,127},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
+                  ={{-100,-100},{100,100}}),graphics), experiment(StopTime=2));
         end Test_vi;
 
         model Test_iv
@@ -112,9 +111,8 @@ package Figures "Graphical layouts for documentation"
               points={{-1,-40},{-10,-40},{-10,6.10623e-16},{-19,6.10623e-16}},
               color={0,0,127},
               smooth=Smooth.None));
-
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
+                  ={{-100,-100},{100,100}}),graphics), experiment(StopTime=2));
         end Test_iv;
 
         model Declarative
@@ -168,7 +166,7 @@ package Figures "Graphical layouts for documentation"
               color={0,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-80,-60},{80,60}}), graphics));
+                  ={{-80,-60},{80,60}}),graphics));
         end Declarative;
 
       end Examples;
@@ -493,7 +491,7 @@ package Figures "Graphical layouts for documentation"
 
       equation
         connect(res2.u, ind.y) annotation (Line(
-            points={{-12,-70},{-60,-70},{-60,-30},{-11,-30}},
+            points={{-12,-70},{-20,-70},{-20,-30},{-11,-30}},
             color={0,200,0},
             smooth=Smooth.None));
         connect(diff2.y, ind.u) annotation (Line(
@@ -661,14 +659,12 @@ package Figures "Graphical layouts for documentation"
               points={{-19,6.10623e-16},{-10,6.10623e-16},{-10,-60},{-1,-60}},
               color={0,0,127},
               smooth=Smooth.None));
-
           connect(imperativeABTF.vIn, pulse.y) annotation (Line(
               points={{-1,-20},{-10,-20},{-10,6.10623e-16},{-19,6.10623e-16}},
               color={0,0,127},
               smooth=Smooth.None));
-
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
+                  ={{-100,-100},{100,100}}),graphics), experiment(StopTime=2));
         end Test;
 
       end Examples;
@@ -1120,7 +1116,6 @@ package Figures "Graphical layouts for documentation"
             points={{-62,-46},{-70,-46},{-70,-60},{70,-60},{70,-40},{61,-40}},
             color={200,0,0},
             smooth=Smooth.None));
-
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-120,-80},{120,80}}), graphics={Rectangle(
                       extent={{-15,7},{15,-7}},

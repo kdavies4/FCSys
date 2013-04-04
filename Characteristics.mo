@@ -179,8 +179,12 @@ package Characteristics
           points={{41,-26},{60,-26}},
           color={0,0,127},
           smooth=Smooth.None));
-      annotation (experiment, Commands(file=
-              "resources/scripts/Dymola/Characteristics.Examples.Correlations.mos"));
+      annotation (
+        experiment,
+        Commands(file=
+              "resources/scripts/Dymola/Characteristics.Examples.Correlations.mos"),
+
+        Icon(graphics));
     end Correlations;
 
   end Examples;
@@ -882,35 +886,27 @@ package Characteristics
       algorithm
         alpha := 3*U.pi*d^2*U.q*sqrt(U.pi*m/T)/2 annotation (Inline=true);
         annotation (Documentation(info="<html>
-  <p>This function is independent of pressure or specific volume.  It is based on the kinetic theory of gases
-  under the following assumptions [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
-  <ol>
-    <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the \"billiard-ball\"
-    assumption, and it implies among other things that the collisions are instantaneous and conserve kinetic
-    energy.</li>
-    <li>Between collisions particles have no influence on one another.</li>
-    <li>The mean free path, or average distance a particle travels between collisions, is much larger than the
-    diameter of a particle.</li>
-    <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
-    <li> The spatial distributions of properties are first-order.</li>
-  </ol></p>
-  </html>"));
+  <p>This function is based on the kinetic theory of gases with the rigid-sphere (\"billiard-ball\")
+  assumption.  It is
+  independent of pressure or specific volume.  According to Present
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>], this independence very accurately matches the measured
+  fluidity of gases.  However, the fluidity varies by species and
+  generally falls more rapidly with temperature than indicated
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 41].</p></html>"));
       end alpha;
 
-      partial function Dt
-        "<html>Collision interval as a function of temperature and pressure (D<i>t</i>)</html>"
+      partial function tau
+        "<html>Base exchange coefficient as a function of temperature and specific volume (&tau;)</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=U.atm "Pressure";
-        output Q.TimeAbsolute Dt "Mean time between collisions";
+        input Q.VolumeSpecificAbsolute v=298.15*U.K/U.atm "Specific volume";
+        output Q.TimeAbsolute tau "Base exchange coefficient";
 
       algorithm
-        Dt := m/(p*alpha(T, p)) annotation (Inline=true);
-        // **write directly, derive alpha from Dt rather than vice versacoff
+        tau := 2*v*sqrt(m/(U.pi*T))/(3*U.pi*d^2*U.q) annotation (Inline=true);
         annotation (Documentation(info="<html>
-  <p>**List assumptions (those of alpha + ideal gas).
-  This is the mean time between collisions**
+  <p>This is the mean time between collisions**
   **Note that alpha and tau are related through Einstein relation
   This function is based on the kinetic theory of gases with the rigid-sphere (\"billiard-ball\")
   assumption.  It is
@@ -919,7 +915,7 @@ package Characteristics
   fluidity of gases.  However, the fluidity varies by species and
   generally falls more rapidly with temperature than indicated
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 41].</p></html>"));
-      end Dt;
+      end tau;
 
     public
       function c_p
@@ -1098,8 +1094,9 @@ package Characteristics
       algorithm
         eta := alpha(T)/v_Tp(T, p) annotation (Inline=true);
         annotation (Documentation(info="<html>
-  <p>This function is based on kinetic theory using the assumptions listed in
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.alpha\">alpha</a>().</p>
+<p>\"**Dynamic compressibility\" is defined here as the reciprocal of the volume,
+second, or bulk dynamic viscosity and specific volume (see
+<a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).</p>
 </html>"));
       end eta;
 
@@ -1241,7 +1238,7 @@ package Characteristics
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
         input Q.PressureAbsolute p=U.atm "Pressure";
         // Note:  Pressure isn't used here but is included for generality.
-        output Real beta "Dynamic compressibility";
+        output Real beta "Kinematic compressibility";
         // **Dimension
 
       algorithm
@@ -1250,11 +1247,6 @@ package Characteristics
 <p>\"**Dynamic compressibility\" is defined here as the reciprocal of the volume,
 second, or bulk dynamic viscosity and specific volume (see
 <a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).</p>
-
-  <p>This function is based on kinetic theory using the assumptions listed in
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.alpha\">alpha</a>() and
-  that dynamic compressibility is equal to fluidity.  Although pressure is an input, the result is independent of
-  pressure.</p>
 </html>"));
       end beta;
 
@@ -1267,7 +1259,7 @@ second, or bulk dynamic viscosity and specific volume (see
         output Q.Mobility mu "Mobility";
 
       algorithm
-        mu := tau(T, p)/m annotation (Inline=true);
+        mu := alpha(T) annotation (Inline=true);
         // **fix
         annotation (Documentation(info="<html>
 <p>\"**Dynamic compressibility\" is defined here as the reciprocal of the volume,
@@ -1281,11 +1273,11 @@ second, or bulk dynamic viscosity and specific volume (see
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=U.atm "Pressure";
+        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
         output Q.TimeAbsolute nu "Thermal independence";
 
       algorithm
-        nu := tau(T, p)/c_p(T, p) annotation (Inline=true);
+        nu := tau(T, v)/c_v(T, p_Tv(T, v)) annotation (Inline=true);
         annotation (Documentation(info="<html>
 <p>\"**Dynamic compressibility\" is defined here as the reciprocal of the volume,
 second, or bulk dynamic viscosity and specific volume (see
@@ -1335,9 +1327,7 @@ second, or bulk dynamic viscosity and specific volume (see
 
       algorithm
         theta := alpha(T)/c_v(T, p) annotation (Inline=true);
-        annotation (info="<html><p>This function is based on kinetic theory using the assumptions listed in
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.alpha\">alpha</a>().</p>
-  </html>");
+
       end theta;
 
       function s "Specific entropy as a function of temperature and pressure"
@@ -1487,18 +1477,9 @@ second, or bulk dynamic viscosity and specific volume (see
       algorithm
         zeta := alpha(T)/m annotation (Inline=true);
         annotation (Documentation(info="<html>
-<p>Fluidity is defined as the reciprocal of dynamic viscosity
+<p>Note that fluidity is defined as the reciprocal of viscosity&mdash;specifically dynamic viscosity
 (see <a href=\"http://en.wikipedia.org/wiki/Viscosity#Fluidity\">http://en.wikipedia.org/wiki/Viscosity#Fluidity</a>).</p>
-
-  <p>This function is based on kinetic theory using the assumptions listed in
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.alpha\">alpha</a>(). Although
-  pressure is an input, the result is independent of pressure.
-  According to Present
-  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>], this independence very accurately matches the measured
-  fluidity of gases.  However, the fluidity varies by species and
-  generally falls more rapidly with temperature than indicated
-  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 41].</p>
-  </html>"));
+</html>"));
       end zeta;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
     <p>This package is compatible with NASA CEA thermodynamic data

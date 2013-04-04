@@ -16,8 +16,12 @@ package Assemblies "Combinations of regions (e.g., cells)"
           annotation (Placement(transformation(extent={{24,-8},{44,12}})));
         replaceable Cells.CellSSIC cell annotation (__Dymola_choicesFromPackage
             =true, Placement(transformation(extent={{-10,-10},{10,10}})));
-        annotation (experiment(StopTime=1e-24, Tolerance=1e-06), Commands(file=
-                "resources/scripts/Dymola/Assemblies.Cells.Examples.Cell.mos"));
+        annotation (
+          experiment(StopTime=1e-24, Tolerance=1e-06),
+          Commands(file=
+                "resources/scripts/Dymola/Assemblies.Cells.Examples.Cell.mos"),
+
+          Icon(graphics));
 
       end Cell;
       extends Modelica.Icons.ExamplesPackage;
@@ -75,7 +79,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
                 "resources/scripts/Dymola/Assemblies.Cells.Examples.CellProfile.mos"),
 
           experiment(StopTime=600, Tolerance=1e-08));
-
       end CellProfile;
 
       model Polarization "Run a cell polarization"
@@ -119,8 +122,12 @@ package Assemblies "Combinations of regions (e.g., cells)"
             color={0,0,127},
             thickness=0.5,
             smooth=Smooth.None));
-        annotation (experiment(StopTime=600, Tolerance=1e-08), Commands(file=
-                "resources/scripts/Dymola/Assemblies.Examples.CellPolarizationstoich.mos"));
+        annotation (
+          experiment(StopTime=600, Tolerance=1e-08),
+          Commands(file=
+                "resources/scripts/Dymola/Assemblies.Examples.CellPolarizationstoich.mos"),
+
+          Icon(graphics));
       end CellProfileIO;
 
       model CellModelica
@@ -450,62 +457,60 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                   visible=inclX,
                   thickness=0.5)}),
         experiment(StopTime=120, Tolerance=1e-06));
-
     end Cell;
 
     model CalibratedCell
       "Cell model with calibration parameters for exchange and transport"
       import FCSys.Subregions.Species;
 
-      // Exchange of translational momentum
+      // Exchange of linear momentum
       parameter Q.NumberAbsolute 'k_alpha_F_C+'(
         final min=0,
         final nominal=1) = 1
         "<html>For C (<i>k</i><sub>&alpha; &Phi; C</sub>)</html>" annotation (
-          Dialog(tab="Calibration factors",group=
-              "Exchange of translational momentum"));
+          Dialog(tab="Calibration factors", group="Exchange of linear momentum"));
       parameter Q.NumberAbsolute k_alpha_tau_C19HF37O5S(
         final min=0,
         final nominal=1) = 1
         "<html>For C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S (<i>k</i><sub>&alpha; &Phi; C19HF37O5S</sub>)</html>"
         annotation (Dialog(tab="Calibration factors", group=
-              "Exchange of translational momentum"));
+              "Exchange of linear momentum"));
       parameter Q.NumberAbsolute 'k_alpha_tau_e-'(
         final min=0,
         final nominal=1) = 1
         "<html>For e<sup>-</sup> (<i>k</i><sub>&alpha; &Phi; e-</sub>)</html>"
         annotation (Dialog(tab="Calibration factors", group=
-              "Exchange of translational momentum"));
+              "Exchange of linear momentum"));
       parameter Q.NumberAbsolute k_alpha_tau_H2(
         final min=0,
         final nominal=1) = 1
         "<html>For H<sub>2</sub> (<i>k</i><sub>&alpha; &Phi; H2</sub>)</html>"
         annotation (Dialog(tab="Calibration factors", group=
-              "Exchange of translational momentum"));
+              "Exchange of linear momentum"));
       parameter Q.NumberAbsolute k_alpha_tau_H2O(
         final min=0,
         final nominal=1) = 1
         "<html>For H<sub>2</sub>O (<i>k</i><sub>&alpha; &Phi; H2O</sub>)</html>"
         annotation (Dialog(tab="Calibration factors", group=
-              "Exchange of translational momentum"));
+              "Exchange of linear momentum"));
       parameter Q.NumberAbsolute 'k_alpha_tau_H+'(
         final min=0,
         final nominal=1) = 1
         "<html>For H<sup>+</sup> (<i>k</i><sub>&alpha; &Phi; H+</sub>)</html>"
         annotation (Dialog(tab="Calibration factors", group=
-              "Exchange of translational momentum"));
+              "Exchange of linear momentum"));
       parameter Q.NumberAbsolute k_alpha_tau_N2(
         final min=0,
         final nominal=1) = 1
         "<html>For N<sub>2</sub> (<i>k</i><sub>&alpha; &Phi; N2</sub>)</html>"
         annotation (Dialog(tab="Calibration factors", group=
-              "Exchange of translational momentum"));
+              "Exchange of linear momentum"));
       parameter Q.NumberAbsolute k_alpha_tau_O2(
         final min=0,
         final nominal=1) = 1
         "<html>For O<sub>2</sub> (<i>k</i><sub>&alpha; &Phi; O2</sub>)</html>"
         annotation (Dialog(tab="Calibration factors", group=
-              "Exchange of translational momentum"));
+              "Exchange of linear momentum"));
 
       // Thermal exchange
       parameter Q.NumberAbsolute k_alpha_Qdot_C(
@@ -598,18 +603,18 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         annotation (Dialog(tab="Calibration factors", group=
               "Material transport"));
 
-      // Transport of translational momentum
+      // Transport of linear momentum
       /*
   parameter Q.NumberAbsolute 'k_alpha_F_C+'(
     final min=0,
     final nominal=1) = 1 "<html>For C (<i>k</i><sub>&Phi; C</sub>)</html>"
-    annotation (Dialog(tab="Calibration factors", group="Transport of translational momentum"))
+    annotation (Dialog(tab="Calibration factors", group="Transport of linear momentum"))
     ;
   parameter Q.NumberAbsolute 'k_alpha_F_C+'19HF37O5S-(
     final min=0,
     final nominal=1) = 1
     "<html>For C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S (<i>k</i><sub>&Phi; C19HF37O5S-</sub>)</html>"
-    annotation (Dialog(tab="Calibration factors", group="Transport of translational momentum"))
+    annotation (Dialog(tab="Calibration factors", group="Transport of linear momentum"))
     ;
   */
 
@@ -1160,7 +1165,6 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                   color={127,127,127},
                   visible=inclX,
                   thickness=0.5)}));
-
     end IntegratedCell;
 
     model CellSSIC
