@@ -31,13 +31,13 @@ package Connectors "Declarative and imperative connectors"
             fillColor={255,255,255},
             fillPattern=FillPattern.Solid)}),
       Diagram(graphics={Polygon(
-              points={{0,50},{100,0},{0,-50},{0,50}},
-              lineColor={208,104,0},
-              fillColor={255,128,0},
-              fillPattern=FillPattern.Solid),Text(
-              extent={{-200,50},{200,90}},
-              textString="%name",
-              lineColor={0,0,0})}));
+            points={{0,50},{100,0},{0,-50},{0,50}},
+            lineColor={208,104,0},
+            fillColor={255,128,0},
+            fillPattern=FillPattern.Solid), Text(
+            extent={{-200,50},{200,90}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end ChemicalInput;
 
@@ -68,13 +68,13 @@ package Connectors "Declarative and imperative connectors"
             fillColor={255,128,0},
             fillPattern=FillPattern.Solid)}),
       Diagram(graphics={Text(
-              extent={{-100,50},{100,90}},
-              textString="%name",
-              lineColor={0,0,0}),Polygon(
-              points={{-100,50},{0,0},{-100,-50},{-100,50}},
-              lineColor={208,104,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid)}));
+            extent={{-100,50},{100,90}},
+            textString="%name",
+            lineColor={0,0,0}), Polygon(
+            points={{-100,50},{0,0},{-100,-50},{-100,50}},
+            lineColor={208,104,0},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid)}));
 
   end ChemicalOutput;
 
@@ -102,15 +102,15 @@ package Connectors "Declarative and imperative connectors"
             pattern=LinePattern.Solid)}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics={Text(
-              extent={{-100,36},{100,76}},
-              textString="%name",
-              lineColor={0,0,0}),Ellipse(
-              extent={{-30,30},{30,-30}},
-              lineColor={208,104,0},
-              fillColor={255,128,0},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.Solid,
-              lineThickness=0.5)}));
+            extent={{-100,36},{100,76}},
+            textString="%name",
+            lineColor={0,0,0}), Ellipse(
+            extent={{-30,30},{30,-30}},
+            lineColor={208,104,0},
+            fillColor={255,128,0},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.Solid,
+            lineThickness=0.5)}));
 
   end ChemicalBus;
 
@@ -210,14 +210,14 @@ Interfaces:
             lineThickness=0.5)}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics={Text(
-              extent={{-100,36},{100,76}},
-              textString="%name",
-              lineColor={0,0,0}),Ellipse(
-              extent={{-30,30},{30,-30}},
-              lineColor={127,127,127},
-              fillColor={191,191,191},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5)}));
+            extent={{-100,36},{100,76}},
+            textString="%name",
+            lineColor={0,0,0}), Ellipse(
+            extent={{-30,30},{30,-30}},
+            lineColor={127,127,127},
+            fillColor={191,191,191},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5)}));
 
   end FaceBus;
 
@@ -270,10 +270,10 @@ Interfaces:
 
       Diagram(coordinateSystem(preserveAspectRatio=true,extent={{-100,-100},{
               100,100}}), graphics={Ellipse(
-              extent={{-30,30},{30,-30}},
-              lineColor={127,127,127},
-              fillColor={191,191,191},
-              fillPattern=FillPattern.Solid)}),
+            extent={{-30,30},{30,-30}},
+            lineColor={127,127,127},
+            fillColor={191,191,191},
+            fillPattern=FillPattern.Solid)}),
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={Ellipse(
             extent={{-100,100},{100,-100}},
@@ -301,26 +301,18 @@ Interfaces:
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
       Diagram(graphics={Text(
-              extent={{-100,36},{100,76}},
-              textString="%name",
-              lineColor={0,0,0}),Ellipse(
-              extent={{-30,30},{30,-30}},
-              lineColor={72,90,180},
-              fillPattern=FillPattern.Solid,
-              fillColor={102,128,255}),Ellipse(
-              extent={{-18,18},{18,-18}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineColor={72,90,180})}),
-      Icon(graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
+            extent={{-100,36},{100,76}},
+            textString="%name",
+            lineColor={0,0,0}), Ellipse(
+            extent={{-30,30},{30,-30}},
             lineColor={72,90,180},
             fillPattern=FillPattern.Solid,
-            fillColor={102,128,255}), Ellipse(
-            extent={{-60,60},{60,-60}},
-            fillColor={255,255,255},
+            fillColor={102,128,255})}),
+      Icon(graphics={Ellipse(
+            extent={{-100,100},{100,-100}},
+            lineColor={134,134,201},
             fillPattern=FillPattern.Solid,
-            lineColor={72,90,180})}));
+            fillColor={102,128,255})}));
 
   end Inert;
 
@@ -363,14 +355,24 @@ Interfaces:
     the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Diagram(graphics={Ellipse(
-              extent={{-30,30},{30,-30}},
-              lineColor={72,90,180},
-              fillPattern=FillPattern.Solid,
-              fillColor={102,128,255}),Text(
-              extent={{-30,20},{30,-20}},
-              lineColor={0,0,0},
-              textString="A")}),
+      Diagram(graphics={
+          Ellipse(
+            extent={{-30,30},{30,-30}},
+            lineColor={72,90,180},
+            fillPattern=FillPattern.Solid,
+            fillColor={102,128,255}),
+          Text(
+            extent={{-28,26},{24,-26}},
+            lineColor={255,255,255},
+            textString="A"),
+          Text(
+            extent={{-24,26},{28,-26}},
+            lineColor={255,255,255},
+            textString="A"),
+          Text(
+            extent={{-26,26},{26,-26}},
+            lineColor={255,255,255},
+            textString="A")}),
       Icon(graphics={
           Ellipse(
             extent={{-100,100},{100,-100}},
@@ -379,8 +381,16 @@ Interfaces:
             fillColor={102,128,255}),
           Ellipse(extent={{-100,100},{100,-100}}, lineColor={72,90,180}),
           Text(
-            extent={{-100,80},{100,-90}},
-            lineColor={0,0,0},
+            extent={{-100,96},{100,-96}},
+            lineColor={255,255,255},
+            textString="A"),
+          Text(
+            extent={{-96,96},{104,-96}},
+            lineColor={255,255,255},
+            textString="A"),
+          Text(
+            extent={{-92,96},{108,-96}},
+            lineColor={255,255,255},
             textString="A")}));
 
   end InertAmagat;
@@ -415,24 +425,58 @@ Interfaces:
     the documentation in the
   <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
 
-      Diagram(graphics={Ellipse(
-              extent={{-30,30},{30,-30}},
-              lineColor={72,90,180},
-              fillPattern=FillPattern.Solid,
-              fillColor={102,128,255}),Text(
-              extent={{-30,20},{30,-20}},
-              lineColor={0,0,0},
-              textString="D")}),
+      Diagram(graphics={
+          Ellipse(
+            extent={{-30,30},{30,-30}},
+            lineColor={72,90,180},
+            fillPattern=FillPattern.Solid,
+            fillColor={102,128,255}),
+          Text(
+            extent={{-24,26},{28,-26}},
+            lineColor={255,255,255},
+            textString="D"),
+          Text(
+            extent={{-22,26},{30,-26}},
+            lineColor={255,255,255},
+            textString="D"),
+          Text(
+            extent={{-24,24},{28,-28}},
+            lineColor={255,255,255},
+            textString="D"),
+          Text(
+            extent={{-22,24},{30,-28}},
+            lineColor={255,255,255},
+            textString="D")}),
       Icon(graphics={
           Ellipse(
             extent={{-100,100},{100,-100}},
             lineColor={72,90,180},
             fillPattern=FillPattern.Solid,
             fillColor={102,128,255}),
+          Text(
+            extent={{-94,92},{106,-88}},
+            lineColor={255,255,255},
+            textString="D"),
           Ellipse(extent={{-100,100},{100,-100}}, lineColor={72,90,180}),
           Text(
-            extent={{-100,80},{100,-90}},
-            lineColor={0,0,0},
+            extent={{-90,92},{110,-88}},
+            lineColor={255,255,255},
+            textString="D"),
+          Text(
+            extent={{-84,92},{116,-88}},
+            lineColor={255,255,255},
+            textString="D"),
+          Text(
+            extent={{-84,86},{116,-94}},
+            lineColor={255,255,255},
+            textString="D"),
+          Text(
+            extent={{-88,86},{112,-94}},
+            lineColor={255,255,255},
+            textString="D"),
+          Text(
+            extent={{-94,86},{106,-94}},
+            lineColor={255,255,255},
             textString="D")}));
 
   end InertDalton;
@@ -470,23 +514,15 @@ Interfaces:
             extent={{-100,100},{100,-100}},
             lineColor={72,90,180},
             fillPattern=FillPattern.Solid,
-            fillColor={102,128,255}), Ellipse(
-            extent={{-60,60},{60,-60}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            lineColor={72,90,180})}),
+            fillColor={102,128,255})}),
       Diagram(graphics={Ellipse(
-              extent={{-10,10},{10,-10}},
-              lineColor={72,90,180},
-              fillPattern=FillPattern.Solid,
-              fillColor={102,128,255}),Text(
-              extent={{-100,20},{100,60}},
-              textString="%name",
-              lineColor={0,0,0}),Ellipse(
-              extent={{-4,4},{4,-4}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              lineColor={72,90,180})}));
+            extent={{-10,10},{10,-10}},
+            lineColor={72,90,180},
+            fillPattern=FillPattern.Solid,
+            fillColor={102,128,255}), Text(
+            extent={{-100,20},{100,60}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end InertInternal;
 
@@ -536,10 +572,10 @@ Interfaces:
             fillColor={255,255,255},
             fillPattern=FillPattern.Solid)}),
       Diagram(graphics={Ellipse(
-              extent={{-30,30},{30,-30}},
-              lineColor={127,127,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid)}));
+            extent={{-30,30},{30,-30}},
+            lineColor={127,127,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid)}));
 
     // Note:  The icon doesn't contain a "%name" tag because it overlaps
     // with the tag in the Mechanical connector when both are included in

@@ -1950,8 +1950,8 @@ package Subregions
           color={72,90,180},
           smooth=Smooth.None));
       connect(O2.inert, phaseBoundary.inertD) annotation (Line(
-          points={{3.578,-7.155},{3.578,-7.155},{3.578,-7.155},{3.578,-7.155}},
-
+          points={{3.578,-7.155},{3.578,-7.155},{3.578,-7.155},{3.578,-7.155},{
+              3.578,-7.155},{3.578,-7.155}},
           color={72,90,180},
           smooth=Smooth.None));
 
@@ -1994,7 +1994,8 @@ package Subregions
 <p>For more information, see the
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
-        Icon(graphics));
+        Icon(graphics),
+        Diagram(graphics));
     end Gas;
 
     model Graphite "Graphite phase"
@@ -4025,7 +4026,8 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
 
 <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"),
 
-            Diagram(graphics));
+            Diagram(graphics),
+            Icon(graphics));
 
         end Fixed;
 
@@ -4319,6 +4321,8 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       Q.ResistivityThermal theta(nominal=10*U.cm/U.A) = Data.theta(T, p)
         "<html>Thermal resistivity (&theta;)</html>"
         annotation (Dialog(group="Material properties"));
+      // **use collision time directly here, not the specialized functions (mu, nu, eta, etc.)
+      // (for computational efficiency)
 
       // Preferred states
       Q.Amount N(
@@ -4776,7 +4780,7 @@ Choose a condition besides None.");
 
     equation
       /*
-
+**Add Nusselt numbers to lin mom and thermal diffusion eqs.
       equation
   // Chemical equilibrium
   0 = nu*chemical.mu;
@@ -4930,15 +4934,15 @@ Choose a condition besides None.");
             // occur due to an assertion.
           end if;
         else
-          der(M*phi[axis])/U.s = chemical.mPhidot[axis] + common.mechanical.mPhidot[
+          der(M*phi[axis])/U.s + M*environment.a[cartAxes[axis]] + N*Data.z*
+            environment.E[cartAxes[axis]] = chemical.mPhidot[axis] + common.mechanical.mPhidot[
             axis] + inert.mPhidot[axis] + Delta(faces[cartAxes[axis], :].p)*A[
             cartAxes[axis]] + Data.m*(phi_face_0[cartAxes[axis], :]*faces[
             cartAxes[axis], :].Ndot) + sum(Data.m*(faces[cartWrap(cartAxes[axis]
              - orientation), :].phi[orientation]*faces[cartWrap(cartAxes[axis]
              - orientation), :].Ndot) + Sigma(faces[cartWrap(cartAxes[axis] -
             orientation), :].mPhidot[orientation]) for orientation in
-            Orientation) + M*environment.a[cartAxes[axis]] + N*Data.z*
-            environment.E[cartAxes[axis]] "Conservation of linear momentum";
+            Orientation) "Conservation of linear momentum";
           // **temp last terms
         end if;
       end for;
@@ -4990,6 +4994,7 @@ Choose a condition besides None.");
           faces.phi[orientation] .* faces.mPhidot[orientation]) for orientation
            in Orientation) + sum(faces.Qdot) "Energy conservation";
         // **Update KE terms (LHS and RHS) to match dissertation.
+        // **check the rest against dissertation
       end if;
       // **note in doc here or in characteristics: self diffusivity is a modified self diffusivity (2/2/13 notes)
       annotation (

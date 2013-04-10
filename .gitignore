@@ -6,7 +6,11 @@
 .~lock*
 .fuse_hidden*
 
-# Simulation files (just in case they're generated here)
+# Simulation folder
+simulations
+
+# Simulation files (in case they're generated elsewhere)
+simulations
 dsin.txt
 dsfinal.txt
 dsu.txt

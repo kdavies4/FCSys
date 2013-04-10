@@ -1,5 +1,5 @@
 // Set the current directory.
-cd("../");
+cd("simulations");
 
 // Establish the system of units.
 RunScript("FCSys/resources/scripts/units.mos");
