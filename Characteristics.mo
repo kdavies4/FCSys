@@ -98,8 +98,8 @@ package Characteristics
       // Note that p_H2O diverges from p in Dymola 7.4 due to the large
       // coefficients in the second row of DataH2O.b_v, which cause numerical
       // errors.
-      output Q.PressureAbsolute p_H2O_liquid=DataH2OLiquid.p_Tv(T, v_H2O_liquid)
-        if DataH2OLiquid.isCompressible;
+      output Q.PressureAbsolute p_H2O_liquid=DataH2OLiquid.p_Tv(T, v_H2O_liquid) if
+           DataH2OLiquid.isCompressible;
       output Q.PressureAbsolute p_N2=DataN2.p_Tv(T, v_N2) if DataN2.isCompressible;
       output Q.PressureAbsolute p_O2=DataO2.p_Tv(T, v_O2) if DataO2.isCompressible;
       output Q.PressureAbsolute p_IG=DataH2IG.p_Tv(T, v_IG) if DataH2IG.isCompressible
@@ -183,7 +183,6 @@ package Characteristics
         experiment,
         Commands(file=
               "resources/scripts/Dymola/Characteristics.Examples.Correlations.mos"),
-
         Icon(graphics));
     end Correlations;
 
@@ -470,7 +469,6 @@ package Characteristics
         b_zeta={fromNASAViscosity({0.74553182,43.555109,-3.2579340e3,0.13556243}),
             fromNASAViscosity({0.96730605,679.31897,-2.1025179e5,-1.8251697}),
             fromNASAViscosity({1.0126129,1.4973739e3,-1.4428484e6,-2.3254928})},
-
         b_theta={fromNASAThermalConductivity({1.0059461,279.51262,-2.9792018e4,
             1.1996252}),fromNASAThermalConductivity({1.0582450,248.75372,
             1.1736907e4,0.82758695}),fromNASAThermalConductivity({-0.22364420,-6.9650442e3,
@@ -519,7 +517,6 @@ package Characteristics
         b_zeta={fromNASAViscosity({0.50019557,-697.12796,8.8163892e4,3.0836508}),
             fromNASAViscosity({0.58988538,-537.69814,5.4263513e4,2.3386375}),
             fromNASAViscosity({0.64330087,-95.668913,-3.7742283e5,1.8125190})},
-
         b_theta={fromNASAThermalConductivity({1.0966389,-555.13429,1.0623408e5,
             -0.24664550}),fromNASAThermalConductivity({0.39367933,-2.2524226e3,
             6.1217458e5,5.8011317}),fromNASAThermalConductivity({-0.41858737,-1.4096649e4,
@@ -621,7 +618,6 @@ package Characteristics
         b_zeta={fromNASAViscosity({0.62526577,-31.779652,-1.6407983e3,1.7454992}),
             fromNASAViscosity({0.87395209,561.52222,-1.7394809e5,-0.39335958}),
             fromNASAViscosity({0.88503551,909.02171,-7.3129061e5,-0.53503838})},
-
         b_theta={fromNASAThermalConductivity({0.85439436,105.73224,-1.2347848e4,
             0.47793128}),fromNASAThermalConductivity({0.88407146,133.57293,-1.1429640e4,
             0.24417019}),fromNASAThermalConductivity({2.4176185,8.0477749e3,
@@ -672,7 +668,6 @@ package Characteristics
         b_zeta={fromNASAViscosity({0.60916180,-52.244847,-599.74009,2.0410801}),
             fromNASAViscosity({0.72216486,175.50839,-5.7974816e4,1.0901044}),
             fromNASAViscosity({0.73981127,391.94906,-3.7833168e5,0.90931780})},
-
         b_theta={fromNASAThermalConductivity({0.77229167,6.8463210,-5.8933377e3,
             1.2210365}),fromNASAThermalConductivity({0.90917351,291.24182,-7.9650171e4,
             0.064851631}),fromNASAThermalConductivity({-1.1218262,-1.9286378e4,
@@ -758,8 +753,8 @@ package Characteristics
         //     "Error, not all "end" could be expanded."
 
         zeta := smooth(0, exp(sum(if (T_lim_zeta_theta[i] <= T or i == 1) and (
-          T < T_lim_zeta_theta[i + 1] or i == size(T_lim_zeta_theta, 1) - 1)
-           then b_zeta[i, 1]*log(T) + (b_zeta[i, 2] + b_zeta[i, 3]/T)/T +
+          T < T_lim_zeta_theta[i + 1] or i == size(T_lim_zeta_theta, 1) - 1) then
+                b_zeta[i, 1]*log(T) + (b_zeta[i, 2] + b_zeta[i, 3]/T)/T +
           b_zeta[i, 4] else 0 for i in 1:size(T_lim_zeta_theta, 1) - 1)))
           annotation (
           InlineNoEvent=true,
@@ -795,8 +790,8 @@ package Characteristics
         //     "Error, not all "end" could be expanded."
 
         theta := smooth(0, exp(sum(if (T_lim_zeta_theta[i] <= T or i == 1) and
-          (T < T_lim_zeta_theta[i + 1] or i == size(T_lim_zeta_theta, 1) - 1)
-           then b_theta[i, 1]*log(T) + (b_theta[i, 2] + b_theta[i, 3]/T)/T +
+          (T < T_lim_zeta_theta[i + 1] or i == size(T_lim_zeta_theta, 1) - 1) then
+                b_theta[i, 1]*log(T) + (b_theta[i, 2] + b_theta[i, 3]/T)/T +
           b_theta[i, 4] else 0 for i in 1:size(T_lim_zeta_theta, 1) - 1)))
           annotation (
           InlineNoEvent=true,
@@ -865,12 +860,12 @@ package Characteristics
     protected
       constant Integer pressPow[2]={specVolPow[1] - size(b_v, 1) + 1,specVolPow[
           2] + 1} "Powers of v and T for 1st row and column of b_p";
-      final constant Real b_p[size(b_v, 1), size(b_v, 2)]=if size(b_v, 1) == 1
-           then b_v .^ (-pressPow[1]) else {(if specVolPow[1] + i == 0 or
+      final constant Real b_p[size(b_v, 1), size(b_v, 2)]=if size(b_v, 1) == 1 then
+                b_v .^ (-pressPow[1]) else {(if specVolPow[1] + i == 0 or
           specVolPow[1] + i == 1 or size(b_v, 1) == 1 then b_v[i, :] else (if
           specVolPow[1] + i == 2 and specVolPow[1] <= 0 then b_v[i, :] + b_v[i
-           - 1, :] .^ 2 else (if specVolPow[1] + i == 3 and specVolPow[1] <= 0
-           then b_v[i, :] + b_v[i - 2, :] .* (b_v[i - 2, :] .^ 2 + 3*b_v[i - 1,
+           - 1, :] .^ 2 else (if specVolPow[1] + i == 3 and specVolPow[1] <= 0 then
+                b_v[i, :] + b_v[i - 2, :] .* (b_v[i - 2, :] .^ 2 + 3*b_v[i - 1,
           :]) else zeros(size(b_v, 2))))) for i in size(b_v, 1):-1:1}
         "Coefficients of p as a polynomial in v and T";
       // Note:  This is from [Dymond2002, p. 2].  If necessary, additional terms
@@ -1216,8 +1211,8 @@ package Characteristics
         h := smooth(1, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i +
           1] or i == size(b_c, 1)) then h0_i(T, i) else 0 for i in 1:size(b_c,
           1))) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K then
-          Deltah0 else 0) - (if referenceEnthalpy <> ReferenceEnthalpy.EnthalpyOfFormationAt25degC
-           then Deltah0_f else 0) + h_offset + h_resid(T, p) - (if phase <>
+          Deltah0 else 0) - (if referenceEnthalpy <> ReferenceEnthalpy.EnthalpyOfFormationAt25degC then
+                Deltah0_f else 0) + h_offset + h_resid(T, p) - (if phase <>
           "gas" then h_resid(T, p0) else h_resid(
                 T,
                 p0,
@@ -1405,8 +1400,8 @@ second, or bulk dynamic viscosity and specific volume (see
                     p,
                     {Polynomial.f(
                       T,
-                      b_v[i, :] .* {specVolPow[1] - specVolPow[2] + i - j for j
-                 in 1:size(b_v, 2)},
+                      b_v[i, :] .* {specVolPow[1] - specVolPow[2] + i - j for j in
+                    1:size(b_v, 2)},
                       specVolPow[2] - specVolPow[1] - i) for i in rowLimits[1]:
               rowLimits[2]},
                     specVolPow[1] + rowLimits[1] - 1) annotation (Inline=true);

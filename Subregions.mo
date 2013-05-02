@@ -485,7 +485,7 @@ package Subregions
       parameter Integer n_lin(
         final min=1,
         final max=3) = 1
-        "<html>Number of components of linear momentum (<i>n</i><sub>lin</sub>)</html>";
+        "<html>Number of components of translational momentum (<i>n</i><sub>lin</sub>)</html>";
 
       Reaction reaction(n_spec=3)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
@@ -2730,14 +2730,15 @@ package Subregions
         final inner parameter Q.Length Lstar_trans[:]=k .* A ./ L if n_spec > 0
           "Effective cross-sectional area per length";
         outer parameter Boolean inclLin[Axis]
-          "true, if each component of linear momentum is included" annotation (
-            missingInnerMessage=
-              "This model should be used within a subregion model.");
-        outer parameter Integer n_lin "Number of components of linear momentum"
+          "true, if each component of translational momentum is included"
           annotation (missingInnerMessage=
               "This model should be used within a subregion model.");
+        outer parameter Integer n_lin
+          "Number of components of translational momentum" annotation (
+            missingInnerMessage=
+              "This model should be used within a subregion model.");
         outer parameter Integer cartAxes[:]
-          "Cartesian-axis indices of the components of linear momentum"
+          "Cartesian-axis indices of the components of translational momentum"
           annotation (missingInnerMessage=
               "This model should be used within a subregion model.");
 
@@ -2797,7 +2798,7 @@ package Subregions
     along each axis, where &epsilon; is the volumetric porosity (or volumetric fill factor
     of the gas).<sup><a href=\"#fn1\" id=\"ref1\">1</a></sup></p>
 
-    <p>The x-axis component of linear momentum is included by default.  At least one component must be included.</p>
+    <p>The x-axis component of translational momentum is included by default.  At least one component must be included.</p>
 
     <hr>
 
@@ -2857,7 +2858,7 @@ package Subregions
   end Phases;
 
   package Species
-    "Models for single-species storage, transport, and exchange of material, linear momentum, and energy"
+    "Models for single-species storage, transport, and exchange of material, translational momentum, and energy"
     extends Modelica.Icons.Package;
     package 'C+' "C"
       extends Modelica.Icons.Package;
@@ -4407,12 +4408,12 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       output Q.Time tau_trans_normal[n_lin](each stateSelect=StateSelect.never)
          = fill(halfalpha_beta*N, n_lin) ./ Lstar_trans[cartAxes] if
         environment.analysis "Time constants for normal mechanical transport";
-      // **Note that only for the axes with linear momentum included; others are
+      // **Note that only for the axes with translational momentum included; others are
       // infinite
       output Q.Time tau_trans_transverse[n_lin](each stateSelect=StateSelect.never)
          = fill(halfalpha_F*N, n_lin) ./ Lstar_trans[cartAxes] if environment.analysis
         "Time constants for transverse mechanical transport";
-      // **Note that only for the axes with linear momentum included; others are
+      // **Note that only for the axes with translational momentum included; others are
       // infinite
       output Q.Time tau_trans_thermal[Axis](each stateSelect=StateSelect.never)
          = fill(halfalpha_R*N, 3) ./ Lstar_trans if environment.analysis
@@ -4426,7 +4427,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
     "Range of time constants in order of magnitude";
 */
       //
-      // Peclet numbers (only for the axes with linear momentum included; others
+      // Peclet numbers (only for the axes with translational momentum included; others
       // are zero)
       output Q.Number Pe_0[n_lin](each stateSelect=StateSelect.never) = I*
         halfalpha_beta ./ Lstar_trans[cartAxes] if environment.analysis
@@ -4449,7 +4450,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       output Q.Power TsI[n_lin](each stateSelect=StateSelect.never) = T*s*I if
         environment.analysis "Bulk rate of thermal advection";
       //
-      // Linear momentum balance
+      // Translational momentum balance
       output Q.Force Ma[n_lin](each stateSelect=StateSelect.never) = M*(der(phi)
         /U.s - environment.a[cartAxes]) if environment.analysis
         "Acceleration force relative to the frame of reference (constant mass)";
@@ -4466,9 +4467,9 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
          in Orientation) for axis in 1:n_lin} if environment.analysis
         "Acceleration force due to advective transport";
       output Q.Force f_trans_diff[n_lin](each stateSelect=StateSelect.never) =
-        {Delta(faces[cartAxes[axis], :].p)*A[cartAxes[axis]] + sum(Sigma(faces[
-        cartWrap(cartAxes[axis] - orientation), :].mPhidot[orientation]) for
-        orientation in Orientation) for axis in 1:n_lin} if environment.analysis
+        {sum(Sigma(faces[cartWrap(cartAxes[axis] - orientation), :].mPhidot[
+        orientation]) for orientation in Orientation) - Delta(faces[cartAxes[
+        axis], :].p)*A[cartAxes[axis]] for axis in 1:n_lin} if environment.analysis
         "Friction from other subregions (diffusive transport; includes volume viscosity)";
       //
       // Energy balance
@@ -4502,7 +4503,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       // they are included.
 
       Connectors.ChemicalInput chemI[n_react]
-        "Connector to exchange material while advecting linear momentum and energy"
+        "Connector to exchange material while advecting translational momentum and energy"
         annotation (Placement(transformation(extent={{-34,-10},{-14,10}}),
             iconTransformation(extent={{-81.55,45.78},{-61.55,25.78}})));
       Connectors.Inert common(
@@ -4514,7 +4515,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
             iconTransformation(extent={{61.55,-25.78},{81.55,-45.78}})));
       Connectors.Chemical chemical[n_react](final n_lin=n_lin, phi(final start=
               phi_IC[cartAxes]))
-        "Connector to exchange material while advecting linear momentum and energy"
+        "Connector to exchange material while advecting translational momentum and energy"
         annotation (Placement(transformation(extent={{-10,10},{10,30}}),
             iconTransformation(extent={{-25.78,61.55},{-45.78,81.55}})));
       Connectors.InertDalton inert(
@@ -4526,7 +4527,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         p(final start=p_IC, final fixed=false),
         phi(start=phi_IC[cartAxes]),
         T(start=T_IC))
-        "Connector to exchange linear momentum and heat by diffusion, with additivity of pressure"
+        "Connector to exchange translational momentum and heat by diffusion, with additivity of pressure"
         annotation (Placement(transformation(extent={{-10,-30},{10,-10}}),
             iconTransformation(extent={{25.78,-61.55},{45.78,-81.55}})));
       Connectors.Face faces[Axis, Side](
@@ -4537,7 +4538,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         mPhidot(each start=0),
         T(each start=T_IC),
         Qdot(each start=0))
-        "Face connectors to transport material, linear momentum, and heat"
+        "Face connectors to transport material, translational momentum, and heat"
         annotation (Placement(transformation(extent={{-10,-10},{10,10}}),
             iconTransformation(extent={{-10,-10},{10,10}})));
 
@@ -4553,23 +4554,24 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         "Effective cross-sectional area per length" annotation (
           missingInnerMessage="This model should be used within a phase model.");
       outer parameter Boolean inclLin[Axis]
-        "true, if each component of linear momentum is included" annotation (
-          missingInnerMessage=
+        "true, if each component of translational momentum is included"
+        annotation (missingInnerMessage=
             "This model should be used within a subregion model.");
       // **={true,true,true}
       // Even though this parameter is set as final within the constrainedby
       // clauses of the models in the Phases package, Dymola 7.4 still shows
       // it in the parameter dialog (hence the "Do not adjust").
       //
-      outer parameter Integer n_lin "Number of components of linear momentum"
-        annotation (missingInnerMessage=
-            "This model should be used within a subregion model.");
-      outer parameter Integer linAxes[:]
-        "Linear momentum component indices of the Cartesian axes" annotation (
+      outer parameter Integer n_lin
+        "Number of components of translational momentum" annotation (
           missingInnerMessage=
             "This model should be used within a subregion model.");
+      outer parameter Integer linAxes[:]
+        "Translational momentum component indices of the Cartesian axes"
+        annotation (missingInnerMessage=
+            "This model should be used within a subregion model.");
       outer parameter Integer cartAxes[:]
-        "Cartesian-axis indices of the components of linear momentum"
+        "Cartesian-axis indices of the components of translational momentum"
         annotation (missingInnerMessage=
             "This model should be used within a subregion model.");
       // Note:  The size is n_lin, but it can't be specified here due to an error
@@ -4578,7 +4580,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         "true, if each Cartesian axis uses upstream discretization"
         annotation (HideResult=true);
       final parameter Boolean setVel[Axis]={setVelX,setVelY,setVelZ}
-        "true, if each component of linear momentum is prescribed";
+        "true, if each component of translational momentum is prescribed";
       final parameter BaseClasses.InitMethVelocity initMethVel[Axis]={initMethX,
           initMethY,initMethZ} "Initialization methods for velocity"
         annotation (HideResult=true);
@@ -4715,7 +4717,7 @@ Choose a condition besides None.");
             // Ensure that a condition is selected, since the state is
             // prescribed.
             assert(initMethVel[axis] <> InitMethVelocity.None,
-              "The state for the " + {"x","y","z"}[axis] + "-axis component of linear momentum is prescribed,
+              "The state for the " + {"x","y","z"}[axis] + "-axis component of translational momentum is prescribed,
 yet its condition is not defined.
 Choose any condition besides None.");
           else
@@ -4787,7 +4789,7 @@ Choose a condition besides None.");
 
   // Conservation (no storage)
   nu[1:n_spec]*Ndot = chemical.Ndot "Material";
-  zeros(n_lin) = sum(chemical[i].mPhidot for i in 1:n_spec) "Linear momentum";
+  zeros(n_lin) = sum(chemical[i].mPhidot for i in 1:n_spec) "Translational momentum";
   0 = sum(chemical.Hdot) "Energy";
 
   // Ideal mixing/upstream discretization
@@ -4796,7 +4798,7 @@ Choose a condition besides None.");
     chemical[i].mPhidot = semiLinear(
       chemical[i].m*chemical[i].Ndot,
       chemical[i].phi,
-      phi) "Linear momentum";
+      phi) "Translational momentum";
     chemical[i].Hdot = semiLinear(
       chemical[i].m*chemical[i].Ndot,
       chemical[i].hbar,
@@ -4918,7 +4920,7 @@ Choose a condition besides None.");
       // Mechanical dynamics
       for axis in 1:n_lin loop
         if setVel[cartAxes[axis]] then
-          // Apply the IC for all time (linear momentum isn't conserved along
+          // Apply the IC for all time (translational momentum isn't conserved along
           // this axis).
           if initMethVel[cartAxes[axis]] == InitMethVelocity.Velocity then
             phi[axis] = phi_IC[cartAxes[axis]];
@@ -4935,15 +4937,17 @@ Choose a condition besides None.");
           end if;
         else
           der(M*phi[axis])/U.s + M*environment.a[cartAxes[axis]] + N*Data.z*
-            environment.E[cartAxes[axis]] = chemical.mPhidot[axis] + common.mechanical.mPhidot[
-            axis] + inert.mPhidot[axis] + Delta(faces[cartAxes[axis], :].p)*A[
-            cartAxes[axis]] + Data.m*(phi_face_0[cartAxes[axis], :]*faces[
-            cartAxes[axis], :].Ndot) + sum(Data.m*(faces[cartWrap(cartAxes[axis]
-             - orientation), :].phi[orientation]*faces[cartWrap(cartAxes[axis]
-             - orientation), :].Ndot) + Sigma(faces[cartWrap(cartAxes[axis] -
-            orientation), :].mPhidot[orientation]) for orientation in
-            Orientation) "Conservation of linear momentum";
+            environment.E[cartAxes[axis]] + Delta(faces[cartAxes[axis], :].p)*A[
+            cartAxes[axis]] = chemical.mPhidot[axis] + common.mechanical.mPhidot[
+            axis] + inert.mPhidot[axis] + Data.m*(phi_face_0[cartAxes[axis], :]
+            *faces[cartAxes[axis], :].Ndot) + sum(Data.m*(faces[cartWrap(
+            cartAxes[axis] - orientation), :].phi[orientation]*faces[cartWrap(
+            cartAxes[axis] - orientation), :].Ndot) + Sigma(faces[cartWrap(
+            cartAxes[axis] - orientation), :].mPhidot[orientation]) for
+            orientation in Orientation)
+            "Conservation of translational momentum";
           // **temp last terms
+          // **try option for static momentum balance (remove der(...) term).  Does it create nonlinear eqs?
         end if;
       end for;
 
@@ -5015,8 +5019,8 @@ Choose a condition besides None.");
        <li>The factors that may cause anisotropic behavior (<b><i>k</i></b>)
           are common to material, mechanical, and thermal transport.</li>
        <li>There is no radiative heat transfer.</li>
-       <li>Angular momentum is not exchanged, transported, or stored.</li>
-       <li>For the purpose of the material, linear momentum, and energy balances, the
+       <li>Rotational momentum is not exchanged, transported, or stored.</li>
+       <li>For the purpose of the material, translational momentum, and energy balances, the
        cross sectional areas of the faces are assumed to be the full cross-sectional
        areas of the subregion.  If multiple phases are present, then areas are
        actually smaller.</li>
@@ -5027,11 +5031,11 @@ Choose a condition besides None.");
     <a href=\"modelica://FCSys.Subregions.Species\">Species</a> models (derived from this
     model) are
     connected within a <a href=\"modelica://FCSys.Subregions\">Subregion</a>.  The
-    generalized resistances (<i>R</i>) affect the flow rates of linear momentum and
+    generalized resistances (<i>R</i>) affect the flow rates of translational momentum and
     heat associated with differences in velocity and temperature (respectively) between
     each species and a common node.  This exchange is diffusive.
 
-    <p>Linear momentum and enthalpy are advected as material is exchanged in a chemical
+    <p>Translational momentum and enthalpy are advected as material is exchanged in a chemical
     reaction.  This occurs at the velocity and massic enthalpy of the reactants (source
     species), where the reactant/product designation depends on the current conditions.
     If species are connected through
@@ -5045,13 +5049,13 @@ Choose a condition besides None.");
     the transport equations.</p>
 
     <p align=center><img src=\"modelica://FCSys/resources/documentation/Subregions/Species/Species/Exchange.png\">
-<br>Figure 1:  Exchange of a quantity (linear momentum or heat) among species
+<br>Figure 1:  Exchange of a quantity (translational momentum or heat) among species
     (A, B, and C) within a subregion.</p>
 
     <p>Figure 2 shows how <a href=\"modelica://FCSys.Subregions.Species\">Species</a>
     instances of the same type are connected between neighboring
     <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a> instances.
-    Normal and transverse linear momentum and heat are transported by both advection and diffusion.
+    Normal and transverse translational momentum and heat are transported by both advection and diffusion.
     Upstream discretization is applied if it is enabled via the <code>upstreamX</code>,
     etc. parameters.</p>
 
@@ -5085,8 +5089,8 @@ Choose a condition besides None.");
       </tr>
     </table>
 
-  <p>**Linear momentum and energy are advected using the <code>semiLinear</code> operator.
-  The rate of advection of linear momentum is the
+  <p>**Translational momentum and energy are advected using the <code>semiLinear</code> operator.
+  The rate of advection of translational momentum is the
   product of the velocity of the source and the rate of mass
   (<i>m</i> &phi; <i>N&#775;</i>).  The rate of thermal advection is the
   product of the massic enthalpy of the source and the rate of mass
@@ -5113,7 +5117,7 @@ Choose a condition besides None.");
     The factor may reflect anisotropic properties; it is a vector with independent components
     for each axis. It affects all of the diffusive transport rates (normal, transverse, and
     thermal) by the same factor.  By default, its components are unity.</li>
-    <li>By default, only the x-axis component of linear momentum is included.</li>
+    <li>By default, only the x-axis component of translational momentum is included.</li>
     <li>If a state is prescribed, then the
     associated initial condition (IC) will be applied for all time.  The
     corresponding conservation equation will not be imposed.
@@ -5203,7 +5207,7 @@ Choose a condition besides None.");
           Acceleration "Initialize the acceleration.",
           Current "Initialize the current.",
           CurrentRate "Initialize the rate of ditto.")
-        "Methods of initializing linear momentum";
+        "Methods of initializing translational momentum";
 
     end BaseClasses;
 
@@ -5215,17 +5219,18 @@ Choose a condition besides None.");
     // extends FCSys.BaseClasses.Icons.Names.Top7;
 
     Connectors.InertAmagat inertA(final n_lin=n_lin)
-      "Connector for volume, linear momentum, and heat&mdash;with Amagat's law"
+      "Connector for volume, translational momentum, and heat&mdash;with Amagat's law"
       annotation (Placement(transformation(extent={{60,-80},{80,-60}}),
           iconTransformation(extent={{52,-132},{72,-112}})));
     Connectors.InertDalton inertD(final n_lin=n_lin)
-      "Connector for volume, linear momentum, and heat&mdash;with Dalton's law"
+      "Connector for volume, translational momentum, and heat&mdash;with Dalton's law"
       annotation (Placement(transformation(extent={{30,-50},{50,-30}}),
           iconTransformation(extent={{25.78,-81.55},{45.78,-61.55}})));
 
   protected
-    outer parameter Integer n_lin "Number of components of linear momentum"
-      annotation (missingInnerMessage=
+    outer parameter Integer n_lin
+      "Number of components of translational momentum" annotation (
+        missingInnerMessage=
           "This model should be used within a subregion model.");
 
   equation
@@ -5238,7 +5243,7 @@ Choose a condition besides None.");
     0 = inertA.V + inertD.V "Volume";
 
     // Conservation (no storage or generation)
-    zeros(n_lin) = inertA.mPhidot + inertD.mPhidot "Linear momentum";
+    zeros(n_lin) = inertA.mPhidot + inertD.mPhidot "Translational momentum";
     0 = inertA.Qdot + inertD.Qdot "Energy";
     annotation (
       Documentation(info="<html><p>This model is essentially an
@@ -5349,7 +5354,7 @@ Choose a condition besides None.");
     // extends FCSys.BaseClasses.Icons.Names.Top7;
 
     Connectors.InertAmagat inert(final n_lin=n_lin)
-      "Connector for linear momentum and heat, with additivity of volume"
+      "Connector for translational momentum and heat, with additivity of volume"
       annotation (Placement(transformation(extent={{60,-80},{80,-60}}),
           iconTransformation(extent={{100,-120},{120,-100}})));
 
@@ -5360,8 +5365,9 @@ Choose a condition besides None.");
     // instead.
 
   protected
-    outer parameter Integer n_lin "Number of components of linear momentum"
-      annotation (missingInnerMessage=
+    outer parameter Integer n_lin
+      "Number of components of translational momentum" annotation (
+        missingInnerMessage=
           "This model should be used within a subregion model.");
 
   equation
@@ -5369,7 +5375,7 @@ Choose a condition besides None.");
     V = inert.V;
 
     // Conservation (no storage or generation)
-    zeros(n_lin) = inert.mPhidot "Linear momentum";
+    zeros(n_lin) = inert.mPhidot "Translational momentum";
     0 = inert.Qdot "Energy";
     annotation (
       Documentation(info="<html><p>This model uses an <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector that imposes
@@ -5419,21 +5425,21 @@ Choose a condition besides None.");
 
       // Assumptions
       // -----------
-      // Included components of linear momentum
+      // Included components of translational momentum
       parameter Boolean inclLinX=true "X" annotation (choices(__Dymola_checkBox
             =true), Dialog(
           tab="Assumptions",
-          group="Axes with linear momentum included",
+          group="Axes with translational momentum included",
           compact=true));
       parameter Boolean inclLinY=true "Y" annotation (choices(__Dymola_checkBox
             =true), Dialog(
           tab="Assumptions",
-          group="Axes with linear momentum included",
+          group="Axes with translational momentum included",
           compact=true));
       parameter Boolean inclLinZ=true "Z" annotation (choices(__Dymola_checkBox
             =true), Dialog(
           tab="Assumptions",
-          group="Axes with linear momentum included",
+          group="Axes with translational momentum included",
           compact=true));
       //
       // Included faces
@@ -5490,20 +5496,20 @@ Choose a condition besides None.");
       final inner parameter Q.Area A[Axis]={L[cartWrap(axis + 1)]*L[cartWrap(
           axis + 2)] for axis in Axis} "Cross-sectional areas";
       final inner parameter Boolean inclLin[Axis]={inclLinX,inclLinY,inclLinZ}
-        "true, if each component of linear momentum is included";
+        "true, if each component of translational momentum is included";
       final inner parameter Integer n_lin=countTrue(inclLin)
-        "Number of components of linear momentum";
+        "Number of components of translational momentum";
       final inner parameter Integer cartAxes[:]=index(inclLin)
-        "Cartesian-axis indices of the components of linear momentum";
+        "Cartesian-axis indices of the components of translational momentum";
       final inner parameter Integer linAxes[Axis]=enumerate(inclLin)
-        "Linear momentum component indices of the Cartesian axes";
+        "Translational momentum component indices of the Cartesian axes";
       Volume volume "Model to establish space for species"
         annotation (Placement(transformation(extent={{-16,-16},{16,16}})));
       annotation (Documentation(info="<html>
   <p>This model must be be extended so that models can be added for
   relevant species, phases, and reactions.</p>
 
-  <p>All of the component of linear momentum are included by default.  At least one component must be included.</p>
+  <p>All of the component of translational momentum are included by default.  At least one component must be included.</p>
   </html>"), Icon(graphics={Line(
                   points={{-100,0},{-40,0}},
                   color={127,127,127},

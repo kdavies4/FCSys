@@ -81,7 +81,7 @@ package UsersGuide "User's Guide"
             <li><a href=\"modelica://FCSys.Connectors.InertDalton\">FCSys.Connectors.InertDalton</a> connector:
             Introduction to the \"additivity of pressure\" concept</li>
             <li><a href=\"modelica://FCSys.Subregions.Species.Species\">FCSys.Subregions.Species.Species</a> model:
-            Details about the exchange, transport, and storage of material, volume, linear momentum, and
+            Details about the exchange, transport, and storage of material, volume, translational momentum, and
             energy</li>
             <li><a href=\"modelica://FCSys.Subregions.Reaction\">FCSys.Subregions.Reaction</a> model:
             Summary of the connections for a chemical reaction</li>

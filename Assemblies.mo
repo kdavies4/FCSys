@@ -14,13 +14,12 @@ package Assemblies "Combinations of regions (e.g., cells)"
           p=149.6*U.kPa,
           T=333.15*U.K)
           annotation (Placement(transformation(extent={{24,-8},{44,12}})));
-        replaceable Cells.CellSSIC cell annotation (__Dymola_choicesFromPackage
-            =true, Placement(transformation(extent={{-10,-10},{10,10}})));
+        replaceable Cells.CellSSIC cell annotation (__Dymola_choicesFromPackage=
+             true, Placement(transformation(extent={{-10,-10},{10,10}})));
         annotation (
           experiment(StopTime=1e-24, Tolerance=1e-06),
           Commands(file=
                 "resources/scripts/Dymola/Assemblies.Cells.Examples.Cell.mos"),
-
           Icon(graphics));
 
       end Cell;
@@ -77,7 +76,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
           experiment(StopTime=100, Tolerance=1e-06),
           Commands(file=
                 "resources/scripts/Dymola/Assemblies.Cells.Examples.CellProfile.mos"),
-
           experiment(StopTime=600, Tolerance=1e-08));
       end CellProfile;
 
@@ -126,7 +124,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
           experiment(StopTime=600, Tolerance=1e-08),
           Commands(file=
                 "resources/scripts/Dymola/Assemblies.Examples.CellPolarizationstoich.mos"),
-
           Icon(graphics));
       end CellProfileIO;
 
@@ -237,25 +234,25 @@ package Assemblies "Combinations of regions (e.g., cells)"
         cartWrap(ax + 2)]*L[cartWrap(ax + 2)] for ax in 1:3} if environment.analysis
         "Cross-sectional areas";
       final parameter Q.Volume V=product(L) if environment.analysis "Volume";
-      output Q.Potential Deltav_x_seg[n_y, n_z](each stateSelect=StateSelect.never)
-         = caFP.subregions[caFP.n_x, :, :].graphite.'e-'.mu_face[1, 2] - anFP.subregions[
+      output Q.Potential Deltav_x_seg[n_y, n_z](each stateSelect=StateSelect.never)=
+           caFP.subregions[caFP.n_x, :, :].graphite.'e-'.mu_face[1, 2] - anFP.subregions[
         1, :, :].graphite.'e-'.mu_face[1, 1] if environment.analysis
         "Electrical potential differences of the segments (x axis)";
-      output Q.Power 'Wdot_e-_x'[n_y, n_z](each stateSelect=StateSelect.never)
-         = -(anFP.subregions[1, :, :].graphite.'e-'.mu_face[1, 1] .* anFP.subregions[
+      output Q.Power 'Wdot_e-_x'[n_y, n_z](each stateSelect=StateSelect.never)=
+           -(anFP.subregions[1, :, :].graphite.'e-'.mu_face[1, 1] .* anFP.subregions[
         1, :, :].graphite.'e-'.Ndot_face[1, 1] + caFP.subregions[caFP.n_x, :, :].graphite.
         'e-'.mu_face[1, 2] .* caFP.subregions[caFP.n_x, :, :].graphite.'e-'.Ndot_face[
         1, 2]) if environment.analysis
         "Electrical power of the segments (x axis)";
-      output Q.Current I_x_seg[n_y, n_z](each stateSelect=StateSelect.never) =
+      output Q.Current I_x_seg[n_y, n_z](each stateSelect=StateSelect.never)=
         (caFP.subregions[caFP.n_x, :, :].graphite.'e-'.Ndot_face[1, 2] - anFP.subregions[
         1, :, :].graphite.'e-'.Ndot_face[1, 1])/2 if environment.analysis
         "Electrical currents of the segments (x axis)";
       output Q.CurrentAreic Iprimeprime_x[n_y, n_z](each stateSelect=
-            StateSelect.never) = {I_x_seg[i_y, i_z]/(L_y[i_y]*L_z[i_z]) for i_z
-         in 1:n_z, i_y in 1:n_y} if environment.analysis
+            StateSelect.never) = {I_x_seg[i_y, i_z]/(L_y[i_y]*L_z[i_z]) for i_z in
+            1:n_z, i_y in 1:n_y} if environment.analysis
         "Areic electrical current of the segments (x axis)";
-      output Q.CurrentAreic Iprimeprime_x_avg(stateSelect=StateSelect.never) =
+      output Q.CurrentAreic Iprimeprime_x_avg(stateSelect=StateSelect.never)=
         I/A[1] if environment.analysis
         "Average areic electrical current (x axis)";
       output Q.Current Ndot_H2(stateSelect=StateSelect.never) = sum(anFP.subregions[
@@ -419,7 +416,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
         Documentation(info="
 <html><p>This model presents a single-cell proton exchange membrane fuel cell (PEMFC).  An overview
 of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys\">FCSys</a>.</html>"),
-
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-80,-20},{
                 80,20}}), graphics),
         Icon(coordinateSystem(
@@ -463,54 +459,54 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
       "Cell model with calibration parameters for exchange and transport"
       import FCSys.Subregions.Species;
 
-      // Exchange of linear momentum
+      // Exchange of translational momentum
       parameter Q.NumberAbsolute 'k_alpha_F_C+'(
         final min=0,
         final nominal=1) = 1
         "<html>For C (<i>k</i><sub>&alpha; &Phi; C</sub>)</html>" annotation (
-          Dialog(tab="Calibration factors", group="Exchange of linear momentum"));
+          Dialog(tab="Calibration factors", group="Exchange of translational momentum"));
       parameter Q.NumberAbsolute k_alpha_tau_C19HF37O5S(
         final min=0,
         final nominal=1) = 1
         "<html>For C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S (<i>k</i><sub>&alpha; &Phi; C19HF37O5S</sub>)</html>"
         annotation (Dialog(tab="Calibration factors", group=
-              "Exchange of linear momentum"));
+              "Exchange of translational momentum"));
       parameter Q.NumberAbsolute 'k_alpha_tau_e-'(
         final min=0,
         final nominal=1) = 1
         "<html>For e<sup>-</sup> (<i>k</i><sub>&alpha; &Phi; e-</sub>)</html>"
         annotation (Dialog(tab="Calibration factors", group=
-              "Exchange of linear momentum"));
+              "Exchange of translational momentum"));
       parameter Q.NumberAbsolute k_alpha_tau_H2(
         final min=0,
         final nominal=1) = 1
         "<html>For H<sub>2</sub> (<i>k</i><sub>&alpha; &Phi; H2</sub>)</html>"
         annotation (Dialog(tab="Calibration factors", group=
-              "Exchange of linear momentum"));
+              "Exchange of translational momentum"));
       parameter Q.NumberAbsolute k_alpha_tau_H2O(
         final min=0,
         final nominal=1) = 1
         "<html>For H<sub>2</sub>O (<i>k</i><sub>&alpha; &Phi; H2O</sub>)</html>"
         annotation (Dialog(tab="Calibration factors", group=
-              "Exchange of linear momentum"));
+              "Exchange of translational momentum"));
       parameter Q.NumberAbsolute 'k_alpha_tau_H+'(
         final min=0,
         final nominal=1) = 1
         "<html>For H<sup>+</sup> (<i>k</i><sub>&alpha; &Phi; H+</sub>)</html>"
         annotation (Dialog(tab="Calibration factors", group=
-              "Exchange of linear momentum"));
+              "Exchange of translational momentum"));
       parameter Q.NumberAbsolute k_alpha_tau_N2(
         final min=0,
         final nominal=1) = 1
         "<html>For N<sub>2</sub> (<i>k</i><sub>&alpha; &Phi; N2</sub>)</html>"
         annotation (Dialog(tab="Calibration factors", group=
-              "Exchange of linear momentum"));
+              "Exchange of translational momentum"));
       parameter Q.NumberAbsolute k_alpha_tau_O2(
         final min=0,
         final nominal=1) = 1
         "<html>For O<sub>2</sub> (<i>k</i><sub>&alpha; &Phi; O2</sub>)</html>"
         annotation (Dialog(tab="Calibration factors", group=
-              "Exchange of linear momentum"));
+              "Exchange of translational momentum"));
 
       // Thermal exchange
       parameter Q.NumberAbsolute k_alpha_Qdot_C(
@@ -603,18 +599,18 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         annotation (Dialog(tab="Calibration factors", group=
               "Material transport"));
 
-      // Transport of linear momentum
+      // Transport of translational momentum
       /*
   parameter Q.NumberAbsolute 'k_alpha_F_C+'(
     final min=0,
     final nominal=1) = 1 "<html>For C (<i>k</i><sub>&Phi; C</sub>)</html>"
-    annotation (Dialog(tab="Calibration factors", group="Transport of linear momentum"))
+    annotation (Dialog(tab="Calibration factors", group="Transport of translational momentum"))
     ;
   parameter Q.NumberAbsolute 'k_alpha_F_C+'19HF37O5S-(
     final min=0,
     final nominal=1) = 1
     "<html>For C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S (<i>k</i><sub>&Phi; C19HF37O5S-</sub>)</html>"
-    annotation (Dialog(tab="Calibration factors", group="Transport of linear momentum"))
+    annotation (Dialog(tab="Calibration factors", group="Transport of translational momentum"))
     ;
   */
 
@@ -942,12 +938,12 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
       final parameter Q.Area A[Axis]={L[cartWrap(ax + 2)]*L[cartWrap(ax + 2)]
           for ax in 1:3} if environment.analysis "Cross-sectional areas";
       final parameter Q.Volume V=product(L) if environment.analysis "Volume";
-      output Q.Potential Deltav_x[n_y, n_z](each stateSelect=StateSelect.never)
-         = caFP.subregions[caFP.n_x, :, :].graphite.'e-'.mu_face[1, 2] - anFP.subregions[
+      output Q.Potential Deltav_x[n_y, n_z](each stateSelect=StateSelect.never)=
+           caFP.subregions[caFP.n_x, :, :].graphite.'e-'.mu_face[1, 2] - anFP.subregions[
         1, :, :].graphite.'e-'.mu_face[1, 1] if environment.analysis
         "Electrical potential differences of the segments (x axis)";
-      output Q.Power 'Wdot_e-_x'[n_y, n_z](each stateSelect=StateSelect.never)
-         = anFP.subregions[1, :, :].graphite.'e-'.Ndot_face[1, 1] .* anFP.subregions[
+      output Q.Power 'Wdot_e-_x'[n_y, n_z](each stateSelect=StateSelect.never)=
+           anFP.subregions[1, :, :].graphite.'e-'.Ndot_face[1, 1] .* anFP.subregions[
         1, :, :].graphite.'e-'.mu_face[1, 1] + caFP.subregions[caFP.n_x, :, :].graphite.
         'e-'.Ndot_face[1, 2] .* caFP.subregions[caFP.n_x, :, :].graphite.'e-'.mu_face[
         1, 2] if environment.analysis
@@ -962,7 +958,7 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
             StateSelect.never) = {I_x[i_y, i_z]/(L_y[i_y]*L_z[i_z]) for i_z in
         1:n_z, i_y in 1:n_y} if environment.analysis
         "Areic electrical current of the segments (x axis)";
-      output Q.CurrentAreic Iprimeprime_x_avg(stateSelect=StateSelect.never) =
+      output Q.CurrentAreic Iprimeprime_x_avg(stateSelect=StateSelect.never)=
         I_x_tot/A[1] if environment.analysis
         "Average areic electrical current (x axis)";
       output Q.Current Ndot_H2(stateSelect=StateSelect.never) = sum(anFP.subregions[
@@ -1128,7 +1124,6 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
 
 <html><p>See the
   <a href=\"modelica://FCSys.Assemblies.Cells.Cell\">Cell</a> model.</p></html>"),
-
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-60,-20},{
                 60,20}}), graphics),
         Icon(coordinateSystem(
@@ -1172,16 +1167,12 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
 
       extends Cell(
         anFP(subregions(each graphite('e-'(initMethPartNum=InitMethScalar.None)))),
-
         anGDL(subregions(each graphite('e-'(initMethPartNum=InitMethScalar.None)))),
-
         anCL(subregions(each graphite('e-'(final Ndot_IC=0, final
                   initMethPartNum=InitMethScalar.ReactionRate)), each ionomer(
                 'H+'(initMethPartNum=InitMethScalar.None)))),
         pEM(subregions(each ionomer('H+'(final initMethPartNum=InitMethScalar.None)))),
-
         caCL(subregions(each ionomer('H+'(initMethPartNum=InitMethScalar.Amount)))),
-
         caGDL(subregions(each graphite('e-'(final initMethPartNum=
                     InitMethScalar.None)))),
         caFP(subregions(each graphite('e-'(final initMethPartNum=InitMethScalar.None)))));
