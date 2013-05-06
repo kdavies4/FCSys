@@ -1,5 +1,72 @@
-// Open this package.
+// Script to load the FCSys library in Dymola, with custom settings
+
+// ------------
+// Settings
+// ------------
+
+// Establish the system of units.
+RunScript("FCSys/resources/scripts/units.mos");
+
+// Note:  Dymola's list() function lists all possible settings.
+// The settings below are all the non-default ones.  Comment the lines to use
+// the defaults.
+
+// Options to increase simulation performance
+Advanced.CancelFactors = true "Try to eliminate possible divisions by zero when solving equations";
+Advanced.Define.AutoRemoveAuxiliaries = true "Automatically remove code to compute auxilaries that are not needed";
+Advanced.IncludeLibrariesForSimulink = false "Also link with libraries in Simulink";
+Advanced.SimplifySemiLinearCondition = true "Exploit asserts to simplify semiLinear conditions";
+Advanced.SubstituteVariablesUsedOnce = true "Substitute variables used only once";
+//Evaluate = true "Evaluate parameters to reduce models (improves simulation speed).";
+//Advanced.AllowNumericDifferentiation = true "Allow numeric differentiation for computing Jacobian for non-linear solver";
+//Advanced.EvaluateParametersDuringSimulation = true "Generate code for evaluation of parameters during simulations";
+//Advanced.GuardedSqrt = false "Generate error for sqrt of negative numbers";
+//Advanced.NewStateSelection = true "Use new approach to state selection";
+//Advanced.ParameterExpressionTearing = true "Assume parameter expressions being non-zero at tearing";
+//Advanced.GenerateAnalyticJacobian = true "Generate analytic Jacobian for the ODE problem";
+//Advanced.ParameterTearing = true "Assume parameters being non-zero at tearing";
+//Advanced.SmoothEvent = 0 "How smooth generates events (0 - never, 1 - smart, 2 always)";
+//Advanced.Define.AimForHighAccuracy = false "Aim for high accuracy in non-linear solver";
+
+// Debugging and develpment options
+Advanced.CheckUnits = false "Check unit consistency of equations";
+LogStateSelection = true "List continuous time states selected";
+OutputCPUtime = true "Include a variable for elapsed CPU time during simulation";
+LogDefaultInitialConditions = true "Log selected default initial conditions";
+Advanced.OutputModelicaCode = true "Output dsmodel in Modelica style";
+Advanced.StoreProtectedVariables = true "Store protected variables when simulating";
+Advanced.HighlightReplaceable = false "Highlight replaceable and redeclared components in diagram";
+Advanced.Legend.Horizontal = false "Horizontal layout of plot legend by default";
+Advanced.Legend.Location = 5 "Default location of plot legend (1-7)";
+Advanced.OutputModelicaCodeWithAliasVariables = true "List eliminated alias variables when outputting dsmodel in Modelica style";
+Advanced.AutoFormatting = true "Automatic indentation of code. Can be changed without new translation of model";
+//OutputFlatModelica = true "Generate listing of flat Modelica code in .mof file";
+//Advanced.AssertAllInsideMinMax = true "Generate asserts that all variables are inside min/max";
+//Advanced.AssertNonLinearInsideMinMax = true "Generate asserts that variables in non-linear systems are inside min/max";
+//Advanced.LogDefaultInitialConditionsForDiscreteNonStates = true "Log selected default initial conditions for discrete non-states";
+//Advanced.LogStartValuesForIterationVariables = true "Logs start values for iteration variables";
+//Advanced.LogStructuredEvaluation = true "Log evaluation of structural parameters";
+//Advanced.OutputModelicaCodeWithAliasVariables = true "List eliminated alias variables when outputting dsmodel in Modelica style";
+//Advanced.OutputModelicaCodeWithJacobians = true "Include Jacobians for algebraic loops when outputting dsmodel in Modelica style";
+//LogDefaultInitialConditions = true "Log selected default initial conditions";
+//LogDifferentiatedEquations = true "Output information when differentiating for index reduction";
+
+// Other options
+//Advanced.DefaultSteadyStateInitialization = true "Initialize in steady state as default.";
+
+// ------------
+// Startup
+// ------------
+// Load packages.
 openModel("package.mo");
 
-// Load settings (including units).
-RunScript("resources/scripts/settings.mos", silent=true);
+// Work in the simulations folder (create it if it doesn't exist).
+// Commented out because this causes the compiled functions (e.g.,
+// Utilities.Chemistry.charge) to fail on Linux with Dymola 7.4.
+//if not cd("simulations") then
+//    Modelica.Utilities.Files.createDirectory("simulations");
+//    cd("simulations");
+//end if;
+
+// Work in the directory above.
+cd("..")
