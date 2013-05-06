@@ -117,6 +117,7 @@ package Subregions
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
+
       annotation (experiment(StopTime=1000, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionHOR.mos"));
@@ -473,6 +474,7 @@ package Subregions
           points={{30,-20},{30,-10},{5.55112e-16,-10},{5.55112e-16,0.666667}},
           color={208,104,0},
           smooth=Smooth.None));
+
       annotation (experiment(StopTime=36000), Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ReactionRamp.mos"));
     end ReactionRamp;
@@ -538,6 +540,7 @@ package Subregions
           points={{30,-20},{30,-10},{5.55112e-16,-10},{5.55112e-16,0.666667}},
           color={208,104,0},
           smooth=Smooth.None));
+
       annotation (experiment(StopTime=100), Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.Reaction.mos"));
     end Reaction;
@@ -592,6 +595,7 @@ package Subregions
               6.10623e-16}},
           color={127,127,127},
           smooth=Smooth.None));
+
       annotation (
         Placement(transformation(extent={{70,70},{90,90}})),
         experiment(StopTime=10),
@@ -937,6 +941,7 @@ package Subregions
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
+
       annotation (experiment(StopTime=1000, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionHOR.mos"));
@@ -1157,6 +1162,7 @@ package Subregions
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
+
     connect(gas.yNegative, yNegative.gas) annotation (Line(
         points={{6.10623e-16,-8.4},{6.10623e-16,-40},{5.55112e-16,-40}},
         color={127,127,127},
@@ -1200,6 +1206,7 @@ package Subregions
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
+
     connect(graphite.yNegative, yNegative.graphite) annotation (Line(
         points={{6.10623e-16,-8.4},{6.10623e-16,-40},{5.55112e-16,-40}},
         color={127,127,127},
@@ -1243,6 +1250,7 @@ package Subregions
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
+
     connect(ionomer.yNegative, yNegative.ionomer) annotation (Line(
         points={{6.10623e-16,-8.4},{6.10623e-16,-40},{5.55112e-16,-40}},
         color={127,127,127},
@@ -1281,6 +1289,7 @@ package Subregions
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
+
     connect(liquid.xPositive, xPositive.liquid) annotation (Line(
         points={{8,6.10623e-16},{8,-4.87687e-22},{40,-4.87687e-22},{40,
             5.55112e-16}},
@@ -1288,6 +1297,7 @@ package Subregions
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
+
     connect(liquid.yNegative, yNegative.liquid) annotation (Line(
         points={{6.10623e-16,-8.4},{-4.87687e-22,-8.4},{-4.87687e-22,-40},{
             5.55112e-16,-40}},
@@ -1327,6 +1337,7 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
+
   end Subregion;
 
   model SubregionIonomerOnly "Subregion with only the ionomer phase"
@@ -1391,6 +1402,7 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
+
   end SubregionIonomerOnly;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
@@ -1592,6 +1604,7 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
+
   end SubregionNoIonomer;
 
   package Phases "Phases or mixtures of species"
@@ -1994,8 +2007,8 @@ package Subregions
 <p>For more information, see the
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
-        Icon(graphics),
-        Diagram(graphics));
+        Icon(graphics));
+
     end Gas;
 
     model Graphite "Graphite phase"
@@ -2200,6 +2213,7 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
+
     end Graphite;
 
     model Ionomer "Ionomer phase"
@@ -2512,6 +2526,7 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
+
     end Ionomer;
 
     model Liquid "Liquid phase"
@@ -2620,6 +2635,7 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Icon(graphics));
+
     end Liquid;
 
     package BaseClasses "Base classes (not generally for direct use)"
@@ -2789,7 +2805,7 @@ package Subregions
     <p>The area fill factor (<code>k</code>) is a vector which adjusts (inversely) all
     the transport coefficients (&eta;, &beta;, &zeta;, and &theta;) of all of the species
     within the phase.  It can be used to introduce minor head loss or the effects of
-    porosity or torousity.  These effects may be anisotropic.</p>
+    porosity or tortousity.  These effects may be anisotropic.</p>
 
     <p>Porosity is often quoted in material data sheets (e.g.,
     [<a href=\"modelica://FCSys.UsersGuide.References\">Toray2010</a>]) as volumetric porosity.  Using the
@@ -3191,6 +3207,7 @@ package Subregions
             redeclare parameter Q.CompressibilityDynamic beta=Data.beta(),
             redeclare parameter Q.FluidityDynamic F=Data.zeta(),
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(0.1661*U.W));
+
           /*
     *Are the trivial Data modifications necessary?
     (
@@ -3290,7 +3307,7 @@ package Subregions
         model Calibrated "Correlations with adjustment factors"
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.H2.Gas (
-                  b_v=[1], specVolPow={-1,0}),
+                  b_v=[1],specVolPow={-1,0}),
             beta=k_beta*Data.beta(T),
             zeta=k_zeta*Data.zeta(T),
             theta=k_theta*Data.theta(T));
@@ -3318,7 +3335,7 @@ package Subregions
         model Correlated "Correlated properties"
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.H2.Gas (
-                  b_v=[1], specVolPow={-1,0}),
+                  b_v=[1],specVolPow={-1,0}),
             beta=Data.beta(T),
             F=Data.zeta(T),
             R=Data.theta(T));
@@ -3336,7 +3353,7 @@ package Subregions
         model Fixed "Fixed properties"
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.H2.Gas (
-                  b_v=[1], specVolPow={-1,0}),
+                  b_v=[1],specVolPow={-1,0}),
             redeclare parameter Q.CompressibilityDynamic beta=Data.beta(),
             redeclare parameter Q.FluidityDynamic F=1/(89.6e-7*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(183e-3*U.W));
@@ -3583,7 +3600,7 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
         model Calibrated "Correlations with adjustment factors"
           extends Species(
             redeclare replaceable package Data = Characteristics.H2O.Ionomer (
-                  b_v=[1], specVolPow={-1,0}),
+                  b_v=[1],specVolPow={-1,0}),
             beta=k_beta*Data.beta(T),
             zeta=k_zeta*Data.zeta(T),
             theta=k_theta*Data.theta(T));
@@ -3611,7 +3628,7 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
         model Correlated "Correlated properties"
           extends Species(
             redeclare replaceable package Data = Characteristics.H2O.Ionomer (
-                  b_v=[1], specVolPow={-1,0}),
+                  b_v=[1],specVolPow={-1,0}),
             beta=Data.beta(T),
             F=Data.zeta(T),
             R=Data.theta(T));
@@ -3629,7 +3646,7 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
         model Fixed "Fixed properties"
           extends Species(
             redeclare replaceable package Data = Characteristics.H2O.Ionomer (
-                  b_v=[1], specVolPow={-1,0}),
+                  b_v=[1],specVolPow={-1,0}),
             redeclare parameter Q.CompressibilityDynamic beta=Data.beta(),
             redeclare parameter Q.FluidityDynamic F=Data.zeta(),
             redeclare parameter Q.ResistivityThermal R=Data.R());
@@ -3795,7 +3812,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         model Calibrated "Correlations with adjustment factors"
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.N2.Gas (
-                  b_v=[1], specVolPow={-1,0}),
+                  b_v=[1],specVolPow={-1,0}),
             beta=k_beta*Data.beta(T),
             zeta=k_zeta*Data.zeta(T),
             theta=k_theta*Data.theta(T));
@@ -3823,7 +3840,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         model Correlated "Correlated properties"
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.N2.Gas (
-                  b_v=[1], specVolPow={-1,0}),
+                  b_v=[1],specVolPow={-1,0}),
             beta=Data.beta(T),
             F=Data.zeta(T),
             R=Data.theta(T));
@@ -3924,7 +3941,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         model Calibrated "Correlations with adjustment factors"
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
-                  b_v=[1], specVolPow={-1,0}),
+                  b_v=[1],specVolPow={-1,0}),
             beta=k_beta*Data.beta(T),
             zeta=k_zeta*Data.zeta(T),
             theta=k_theta*Data.theta(T));
@@ -3952,7 +3969,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         model Correlated "Correlated properties"
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
-                  b_v=[1], specVolPow={-1,0}),
+                  b_v=[1],specVolPow={-1,0}),
             beta=Data.beta(T),
             F=Data.zeta(T),
             R=Data.theta(T));
@@ -3970,7 +3987,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         model Fixed "Fixed properties"
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
-                  b_v=[1], specVolPow={-1,0}),
+                  b_v=[1],specVolPow={-1,0}),
             redeclare parameter Q.CompressibilityDynamic beta=Data.beta(),
             redeclare parameter Q.FluidityDynamic F=1/(207.2e-7*U.Pa*U.s),
             redeclare parameter Q.ResistivityThermal R=U.m*U.K/(26.8e-3*U.W));
@@ -4027,7 +4044,6 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
 
 <p>For more information, see the <a href=\"modelica://FCSys.Subregions.Specues,Species\">Species</a> model.</p></html>"),
 
-            Diagram(graphics),
             Icon(graphics));
 
         end Fixed;
@@ -4513,6 +4529,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         "Connector to directly couple velocities and temperatures of multiple species"
         annotation (Placement(transformation(extent={{10,-10},{30,10}}),
             iconTransformation(extent={{61.55,-25.78},{81.55,-45.78}})));
+
       Connectors.Chemical chemical[n_react](final n_lin=n_lin, phi(final start=
               phi_IC[cartAxes]))
         "Connector to exchange material while advecting translational momentum and energy"
@@ -4783,6 +4800,7 @@ Choose a condition besides None.");
     equation
       /*
 **Add Nusselt numbers to lin mom and thermal diffusion eqs.
+
       equation
   // Chemical equilibrium
   0 = nu*chemical.mu;
@@ -4856,7 +4874,7 @@ Choose a condition besides None.");
           // **Make connectors non-conditional, remove alias variables
           // **Include bulk viscosity in Peclet number
           // **Material resistance/ivity->Self resistance/ivity
-          // **update peclet numbers in these transport equations and the outputs above--see dissertation.
+          // **update Peclet numbers in these transport equations and the outputs above--see dissertation.
           // Transverse
           for orientation in Orientation loop
             F*faces[axis, side].mPhidot[orientation] = Lstar_trans[axis]*(faces[
@@ -5304,6 +5322,7 @@ Choose a condition besides None.");
               extent={{-170,140},{170,180}},
               textString="%name",
               lineColor={0,0,0})}));
+
   end PhaseBoundary;
 
   model Reaction
@@ -5403,6 +5422,7 @@ Choose a condition besides None.");
               lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics));
+
   end Volume;
 
   package BaseClasses "Base classes (not generally for direct use)"
@@ -5418,8 +5438,8 @@ Choose a condition besides None.");
       // extends FCSys.BaseClasses.Icons.Names.Top3;
 
       // Geometric parameters
-      inner parameter Q.Length L[Axis](each min=Modelica.Constants.small,start=
-            ones(3)*U.cm) "<html>Length (<b>L</b>)</html>"
+      inner parameter Q.Length L[Axis](each min=Modelica.Constants.small, start
+          =ones(3)*U.cm) "<html>Length (<b>L</b>)</html>"
         annotation (Dialog(group="Geometry"));
       final inner parameter Q.Volume V=product(L) "Volume";
 

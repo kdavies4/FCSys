@@ -2,7 +2,7 @@ within ;
 package FCSys "Modelica library of fuel cell models"
 
 // Maximum line width before a new word is wrapped in the code listing in
-// the LaTeX document (76 characters, including leading spaces and // )
+// the LaTeX document (76 characters, including leading spaces and //)
 // ------------------------------------------------------------------------
 
 
@@ -132,7 +132,7 @@ package UsersGuide "User's Guide"
     </ol></p>
 
     <p>These references are cited throughout the library:</p>
-    <table border=0 cellspacing=0 cellpadding=2 class=noBorder>     
+    <table border=0 cellspacing=0 cellpadding=2 class=noBorder>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Aronsson2009\" class=bookmark>Aronsson2009</a>]</td>
       <td valign=top class=noBorder>P. Aronsson and D. Broman, \"<a href=\"http://www.ep.liu.se/ecp_article/index.en.aspx?issue=043;article=105\">Extendable Physical Unit Checking with Understandable Error Reporting</a>,\"  in <i>Modelica Conference</i> (Como, Italy), Modelica Assoc., Sep. 2009.</td>
@@ -192,7 +192,7 @@ package UsersGuide "User's Guide"
     <tr>
       <td valign=top class=noBorder>[<a name=\"Greiner1995\" class=bookmark>Greiner1995</a>]</td>
       <td valign=top class=noBorder>W. Greiner, L. Neisem and H. St&ouml;cker, \"<a href=\http://books.google.com/books?id=12DKsFtFTgYC\">A Mathematical Model of the Solid-Polymer-Electrolyte Fuel Cell</a>,\" <i>J. Electrochem. Soc.</i>, vol. 139, no. 9, pp. 2477&ndash;2491, Sep. 1992.</td>
-    </tr>    
+    </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Gurau1998\" class=bookmark>Gurau1998</a>]</td>
       <td valign=top class=noBorder>V. Gurau, H. Liu, and S. Kaka, \"<a href=\"http://dx.doi.org/10.1002/aic.690441109\">Two-Dimensional Model for Proton Exchange Membrane Fuel Cells</a>,\" <i>AIChE J.</i>, vol. 44, no. 11, pp. 2410&ndash;2422, Nov. 1998.</td>
@@ -268,7 +268,7 @@ package UsersGuide "User's Guide"
     <tr>
       <td valign=top class=noBorder>[<a name=\"Rapaport2004\" class=bookmark>Rapaport2004</a>]</td>
       <td valign=top class=noBorder>D. C. Rapaport, <i>The Art of Molecular Dynamics Simulation</i>, Cambridge University Press, 2nd ed., 2004.</td>
-    </tr>   
+    </tr>
     <tr>
       <td valign=top class=noBorder>[<a name=\"Reichert2010\" class=bookmark>Reichert2010</a>]</td>
       <td valign=top class=noBorder>P. Reichert and N. Schuwirth, \"<a href=\"http://dx.doi.org/10.1016/j.envsoft.2010.03.002\">A Generic Framework for Deriving Process Stoichiometry in Environmental Models</a>,\" <i>Environmental Modelling &amp; Software</i>, vol. 25, pp. 1241&ndash;1251, 2010.</td>
@@ -914,6 +914,19 @@ printing and shipping costs may be recovered.</p>
   annotation (preferedView="info", DocumentationClass=true);
 
   end UsersGuide;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 annotation (

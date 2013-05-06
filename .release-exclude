@@ -72,6 +72,9 @@ javascripts
 install
 test
 
+# Systems folder (in resources/documentation)
+Systems
+
 # Work in progress
 WorkInProgress.mo
 help/FCSys_WorkInProgress*.html

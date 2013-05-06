@@ -73,13 +73,14 @@ package Figures "Graphical layouts for documentation"
               points={{-1,-40},{-10,-40},{-10,6.10623e-16},{-19,6.10623e-16}},
               color={0,0,127},
               smooth=Smooth.None));
+
           connect(imperative_vi.v, pulse.y) annotation (Line(
-              points={{-1,6.10623e-16},{-5.5,6.10623e-16},{-5.5,6.10623e-16},{
-                  -10,6.10623e-16},{-10,6.10623e-16},{-19,6.10623e-16}},
+              points={{-1,6.10623e-16},{-5.5,6.10623e-16},{-5.5,6.10623e-16},{-10,
+                  6.10623e-16},{-10,6.10623e-16},{-19,6.10623e-16}},
               color={0,0,127},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}),graphics), experiment(StopTime=2));
+                  ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
         end Test_vi;
 
         model Test_iv
@@ -103,16 +104,17 @@ package Figures "Graphical layouts for documentation"
               color={0,0,127},
               smooth=Smooth.None));
           connect(imperative_iv.i, pulse.y) annotation (Line(
-              points={{-1,6.10623e-16},{-5.5,6.10623e-16},{-5.5,6.10623e-16},{
-                  -10,6.10623e-16},{-10,6.10623e-16},{-19,6.10623e-16}},
+              points={{-1,6.10623e-16},{-5.5,6.10623e-16},{-5.5,6.10623e-16},{-10,
+                  6.10623e-16},{-10,6.10623e-16},{-19,6.10623e-16}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(imperativeTF_iv.i, pulse.y) annotation (Line(
               points={{-1,-40},{-10,-40},{-10,6.10623e-16},{-19,6.10623e-16}},
               color={0,0,127},
               smooth=Smooth.None));
+
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}),graphics), experiment(StopTime=2));
+                  ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
         end Test_iv;
 
         model Declarative
@@ -166,7 +168,7 @@ package Figures "Graphical layouts for documentation"
               color={0,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-80,-60},{80,60}}),graphics));
+                  ={{-80,-60},{80,60}}), graphics));
         end Declarative;
 
       end Examples;
@@ -332,8 +334,8 @@ package Figures "Graphical layouts for documentation"
             color={0,0,255},
             smooth=Smooth.None));
         connect(res1.n, cap.p) annotation (Line(
-            points={{30,1.22125e-15},{30,-2.5},{30,-2.5},{30,-5},{30,-10},{30,
-                -10}},
+            points={{30,1.22125e-15},{30,-2.5},{30,-2.5},{30,-5},{30,-10},{30,-10}},
+
             color={0,0,255},
             smooth=Smooth.None));
 
@@ -439,33 +441,28 @@ package Figures "Graphical layouts for documentation"
             color={200,0,0},
             smooth=Smooth.None));
         connect(res2.y, diff2.u2) annotation (Line(
-            points={{41,6.10623e-16},{50,6.10623e-16},{50,-20},{-70,-20},{-70,
-                -6},{-62,-6}},
+            points={{41,6.10623e-16},{50,6.10623e-16},{50,-20},{-70,-20},{-70,-6},
+                {-62,-6}},
             color={200,0,0},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
-                  {-100,-100},{100,100}}), graphics={
-              Line(
-                points={{62,76},{70,76}},
-                color={200,0,0},
-                smooth=Smooth.None),
-              Rectangle(
-                extent={{-16,8},{16,-8}},
-                lineColor={0,0,0},
-                origin={74,72},
-                rotation=180),
-              Text(
-                extent={{70,78},{88,74}},
-                lineColor={0,0,0},
-                textString="Voltage"),
-              Text(
-                extent={{70,70},{88,66}},
-                lineColor={0,0,0},
-                textString="Current"),
-              Line(
-                points={{62,68},{70,68}},
-                color={0,200,0},
-                smooth=Smooth.None)}));
+                  {-100,-100},{100,100}}), graphics={Line(
+                      points={{62,76},{70,76}},
+                      color={200,0,0},
+                      smooth=Smooth.None),Rectangle(
+                      extent={{-16,8},{16,-8}},
+                      lineColor={0,0,0},
+                      origin={74,72},
+                      rotation=180),Text(
+                      extent={{70,78},{88,74}},
+                      lineColor={0,0,0},
+                      textString="Voltage"),Text(
+                      extent={{70,70},{88,66}},
+                      lineColor={0,0,0},
+                      textString="Current"),Line(
+                      points={{62,68},{70,68}},
+                      color={0,200,0},
+                      smooth=Smooth.None)}));
       end Imperative_vi;
 
       model Imperative_iv "Imperative circuit with current in, voltage out"
@@ -540,28 +537,23 @@ package Figures "Graphical layouts for documentation"
             color={200,0,0},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
-                  {-100,-100},{100,100}}), graphics={
-              Line(
-                points={{60,58},{68,58}},
-                color={200,0,0},
-                smooth=Smooth.None),
-              Rectangle(
-                extent={{-16,8},{16,-8}},
-                lineColor={0,0,0},
-                origin={72,54},
-                rotation=180),
-              Text(
-                extent={{68,60},{86,56}},
-                lineColor={0,0,0},
-                textString="Voltage"),
-              Text(
-                extent={{68,52},{86,48}},
-                lineColor={0,0,0},
-                textString="Current"),
-              Line(
-                points={{60,50},{68,50}},
-                color={0,200,0},
-                smooth=Smooth.None)}));
+                  {-100,-100},{100,100}}), graphics={Line(
+                      points={{60,58},{68,58}},
+                      color={200,0,0},
+                      smooth=Smooth.None),Rectangle(
+                      extent={{-16,8},{16,-8}},
+                      lineColor={0,0,0},
+                      origin={72,54},
+                      rotation=180),Text(
+                      extent={{68,60},{86,56}},
+                      lineColor={0,0,0},
+                      textString="Voltage"),Text(
+                      extent={{68,52},{86,48}},
+                      lineColor={0,0,0},
+                      textString="Current"),Line(
+                      points={{60,50},{68,50}},
+                      color={0,200,0},
+                      smooth=Smooth.None)}));
       end Imperative_iv;
 
       model ImperativeTF_vi
@@ -669,12 +661,14 @@ package Figures "Graphical layouts for documentation"
               points={{-19,6.10623e-16},{-10,6.10623e-16},{-10,-60},{-1,-60}},
               color={0,0,127},
               smooth=Smooth.None));
+
           connect(imperativeABTF.vIn, pulse.y) annotation (Line(
               points={{-1,-20},{-10,-20},{-10,6.10623e-16},{-19,6.10623e-16}},
               color={0,0,127},
               smooth=Smooth.None));
+
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}),graphics), experiment(StopTime=2));
+                  ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
         end Test;
 
       end Examples;
@@ -726,8 +720,8 @@ package Figures "Graphical layouts for documentation"
             color={0,0,255},
             smooth=Smooth.None));
         connect(vIn, voltageSource.v) annotation (Line(
-            points={{-90,5.55112e-16},{-82,5.55112e-16},{-82,0},{-70,0},{-70,
-                -20},{-57,-20}},
+            points={{-90,5.55112e-16},{-82,5.55112e-16},{-82,0},{-70,0},{-70,-20},
+                {-57,-20}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(voltageSource.n, ground.p) annotation (Line(
@@ -875,8 +869,8 @@ package Figures "Graphical layouts for documentation"
             color={0,0,255},
             smooth=Smooth.None));
         connect(vIn, voltageSource.v) annotation (Line(
-            points={{-90,5.55112e-16},{-82,5.55112e-16},{-82,0},{-70,0},{-70,
-                -20},{-57,-20}},
+            points={{-90,5.55112e-16},{-82,5.55112e-16},{-82,0},{-70,0},{-70,-20},
+                {-57,-20}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(res3.p, res2.n) annotation (Line(
@@ -948,8 +942,8 @@ package Figures "Graphical layouts for documentation"
             color={0,200,0},
             smooth=Smooth.None));
         connect(res1.u, vIn) annotation (Line(
-            points={{-122,6.66134e-16},{-134,6.66134e-16},{-134,5.55112e-16},{
-                -150,5.55112e-16}},
+            points={{-122,6.66134e-16},{-134,6.66134e-16},{-134,5.55112e-16},{-150,
+                5.55112e-16}},
             color={200,0,0},
             smooth=Smooth.None));
 
@@ -959,30 +953,25 @@ package Figures "Graphical layouts for documentation"
             color={200,0,0},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
-                  {-160,-40},{160,40}}), graphics={
-              Rectangle(
-                extent={{-15,7},{15,-7}},
-                lineColor={0,0,0},
-                origin={-5,27},
-                rotation=180,
-                fillPattern=FillPattern.Solid,
-                fillColor={255,255,255}),
-              Line(
-                points={{-16,30},{-10,30}},
-                color={200,0,0},
-                smooth=Smooth.None),
-              Text(
-                extent={{-10,32},{10,28}},
-                lineColor={0,0,0},
-                textString="Voltage"),
-              Text(
-                extent={{-10,26},{10,22}},
-                lineColor={0,0,0},
-                textString="Current"),
-              Line(
-                points={{-16,24},{-10,24}},
-                color={0,200,0},
-                smooth=Smooth.None)}), Icon(coordinateSystem(
+                  {-160,-40},{160,40}}), graphics={Rectangle(
+                      extent={{-15,7},{15,-7}},
+                      lineColor={0,0,0},
+                      origin={-5,27},
+                      rotation=180,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={255,255,255}),Line(
+                      points={{-16,30},{-10,30}},
+                      color={200,0,0},
+                      smooth=Smooth.None),Text(
+                      extent={{-10,32},{10,28}},
+                      lineColor={0,0,0},
+                      textString="Voltage"),Text(
+                      extent={{-10,26},{10,22}},
+                      lineColor={0,0,0},
+                      textString="Current"),Line(
+                      points={{-16,24},{-10,24}},
+                      color={0,200,0},
+                      smooth=Smooth.None)}), Icon(coordinateSystem(
                 preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
               graphics));
       end ImperativeA;
@@ -1036,30 +1025,25 @@ package Figures "Graphical layouts for documentation"
             color={200,0,0},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
-                  {-160,-40},{160,40}}), graphics={
-              Rectangle(
-                extent={{-15,7},{15,-7}},
-                lineColor={0,0,0},
-                origin={135,27},
-                rotation=180,
-                fillPattern=FillPattern.Solid,
-                fillColor={255,255,255}),
-              Line(
-                points={{124,30},{130,30}},
-                color={200,0,0},
-                smooth=Smooth.None),
-              Text(
-                extent={{130,32},{150,28}},
-                lineColor={0,0,0},
-                textString="Voltage"),
-              Text(
-                extent={{130,26},{150,22}},
-                lineColor={0,0,0},
-                textString="Current"),
-              Line(
-                points={{124,24},{130,24}},
-                color={0,200,0},
-                smooth=Smooth.None)}), Icon(coordinateSystem(
+                  {-160,-40},{160,40}}), graphics={Rectangle(
+                      extent={{-15,7},{15,-7}},
+                      lineColor={0,0,0},
+                      origin={135,27},
+                      rotation=180,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={255,255,255}),Line(
+                      points={{124,30},{130,30}},
+                      color={200,0,0},
+                      smooth=Smooth.None),Text(
+                      extent={{130,32},{150,28}},
+                      lineColor={0,0,0},
+                      textString="Voltage"),Text(
+                      extent={{130,26},{150,22}},
+                      lineColor={0,0,0},
+                      textString="Current"),Line(
+                      points={{124,24},{130,24}},
+                      color={0,200,0},
+                      smooth=Smooth.None)}), Icon(coordinateSystem(
                 preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
               graphics));
       end ImperativeB;
@@ -1136,31 +1120,27 @@ package Figures "Graphical layouts for documentation"
             points={{-62,-46},{-70,-46},{-70,-60},{70,-60},{70,-40},{61,-40}},
             color={200,0,0},
             smooth=Smooth.None));
+
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
-                  {-120,-80},{120,80}}), graphics={
-              Rectangle(
-                extent={{-15,7},{15,-7}},
-                lineColor={0,0,0},
-                origin={95,-67},
-                rotation=180,
-                fillPattern=FillPattern.Solid,
-                fillColor={255,255,255}),
-              Line(
-                points={{84,-64},{90,-64}},
-                color={200,0,0},
-                smooth=Smooth.None),
-              Text(
-                extent={{90,-62},{110,-66}},
-                lineColor={0,0,0},
-                textString="Voltage"),
-              Text(
-                extent={{90,-68},{110,-72}},
-                lineColor={0,0,0},
-                textString="Current"),
-              Line(
-                points={{84,-70},{90,-70}},
-                color={0,200,0},
-                smooth=Smooth.None)}));
+                  {-120,-80},{120,80}}), graphics={Rectangle(
+                      extent={{-15,7},{15,-7}},
+                      lineColor={0,0,0},
+                      origin={95,-67},
+                      rotation=180,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={255,255,255}),Line(
+                      points={{84,-64},{90,-64}},
+                      color={200,0,0},
+                      smooth=Smooth.None),Text(
+                      extent={{90,-62},{110,-66}},
+                      lineColor={0,0,0},
+                      textString="Voltage"),Text(
+                      extent={{90,-68},{110,-72}},
+                      lineColor={0,0,0},
+                      textString="Current"),Line(
+                      points={{84,-70},{90,-70}},
+                      color={0,200,0},
+                      smooth=Smooth.None)}));
       end ImperativeAB;
 
       model ImperativeABIncorrect
@@ -1238,30 +1218,25 @@ package Figures "Graphical layouts for documentation"
             color={200,0,0},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
-                  {-160,-40},{160,40}}), graphics={
-              Rectangle(
-                extent={{-15,7},{15,-7}},
-                lineColor={0,0,0},
-                origin={135,27},
-                rotation=180,
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid),
-              Text(
-                extent={{130,32},{150,28}},
-                lineColor={0,0,0},
-                textString="Voltage"),
-              Line(
-                points={{124,30},{130,30}},
-                color={200,0,0},
-                smooth=Smooth.None),
-              Text(
-                extent={{130,26},{150,22}},
-                lineColor={0,0,0},
-                textString="Current"),
-              Line(
-                points={{124,24},{130,24}},
-                color={0,200,0},
-                smooth=Smooth.None)}));
+                  {-160,-40},{160,40}}), graphics={Rectangle(
+                      extent={{-15,7},{15,-7}},
+                      lineColor={0,0,0},
+                      origin={135,27},
+                      rotation=180,
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid),Text(
+                      extent={{130,32},{150,28}},
+                      lineColor={0,0,0},
+                      textString="Voltage"),Line(
+                      points={{124,30},{130,30}},
+                      color={200,0,0},
+                      smooth=Smooth.None),Text(
+                      extent={{130,26},{150,22}},
+                      lineColor={0,0,0},
+                      textString="Current"),Line(
+                      points={{124,24},{130,24}},
+                      color={0,200,0},
+                      smooth=Smooth.None)}));
       end ImperativeABIncorrect;
 
       model ImperativeABTF
@@ -1340,11 +1315,11 @@ package Figures "Graphical layouts for documentation"
   model Logo
     extends FCSys.BaseClasses.Icons.Cell;
     annotation (Icon(graphics={Rectangle(
-            extent={{-100,100},{100,65}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0})}));
+              extent={{-100,100},{100,65}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0})}));
 
   end Logo;
 
@@ -1656,13 +1631,13 @@ package Figures "Graphical layouts for documentation"
       // Material conservation
       der(N)/U.s = -nu*Xidot "stoichiometry";
       annotation (Icon(graphics={Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid), Text(
-              extent={{-100,40},{100,80}},
-              textString="%name",
-              lineColor={0,0,0})}));
+                  extent={{-100,100},{100,-100}},
+                  lineColor={0,0,0},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Text(
+                  extent={{-100,40},{100,80}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
     end TraditionalReaction;
 
     model Reaction
@@ -1684,13 +1659,13 @@ package Figures "Graphical layouts for documentation"
       nu*material.rho = 0 - 1 "Equilibrium";
       material.Ndot = nu*Xidot "stoichiometry";
       annotation (Icon(graphics={Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid), Text(
-              extent={{-100,40},{100,80}},
-              textString="%name",
-              lineColor={0,0,0})}));
+                  extent={{-100,100},{100,-100}},
+                  lineColor={0,0,0},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Text(
+                  extent={{-100,40},{100,80}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
     end Reaction;
 
     model Species
@@ -1725,13 +1700,13 @@ package Figures "Graphical layouts for documentation"
       // Material conservation
       der(N)/U.s = material.Ndot;
       annotation (Icon(graphics={Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid), Text(
-              extent={{-100,40},{100,80}},
-              textString="%name",
-              lineColor={0,0,0})}));
+                  extent={{-100,100},{100,-100}},
+                  lineColor={0,0,0},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),Text(
+                  extent={{-100,40},{100,80}},
+                  textString="%name",
+                  lineColor={0,0,0})}));
     end Species;
 
     connector Material "Connector for density-driven reaction"
@@ -1749,286 +1724,225 @@ package Figures "Graphical layouts for documentation"
     Connectors.Face Face annotation (Placement(transformation(extent={{-58,-16},
               {-38,4}}), iconTransformation(extent={{-10,-10},{10,10}})));
     annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
-              -60},{100,60}}), graphics={
-          Line(
-            points={{62,-8},{84,-30}},
-            color={191,191,191},
-            smooth=Smooth.None,
-            arrow={Arrow.Filled,Arrow.None}),
-          Line(
-            points={{36,-6},{36,-30}},
-            color={0,0,0},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{14,-8},{36,-30}},
-            color={191,191,191},
-            smooth=Smooth.None,
-            arrow={Arrow.Filled,Arrow.None}),
-          Line(
-            points={{58,-8},{36,-30}},
-            color={191,191,191},
-            smooth=Smooth.None,
-            arrow={Arrow.Filled,Arrow.None}),
-          Line(
-            points={{-10,-8},{36,-30}},
-            color={191,191,191},
-            smooth=Smooth.None,
-            arrow={Arrow.Filled,Arrow.None}),
-          Line(
-            points={{-14,-8},{-36,-30}},
-            color={191,191,191},
-            smooth=Smooth.None,
-            arrow={Arrow.Filled,Arrow.None}),
-          Line(
-            points={{10,-8},{-36,-30}},
-            color={191,191,191},
-            smooth=Smooth.None,
-            arrow={Arrow.Filled,Arrow.None}),
-          Line(
-            points={{36,-6},{-36,-30}},
-            color={0,0,0},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{60,-8.5},{60,-30}},
-            color={191,191,191},
-            smooth=Smooth.None,
-            arrow={Arrow.Filled,Arrow.None}),
-          Line(
-            points={{12,-8.5},{12,-30}},
-            color={191,191,191},
-            smooth=Smooth.None,
-            arrow={Arrow.Filled,Arrow.None}),
-          Line(
-            points={{-12,-8.5},{-12,-30}},
-            color={191,191,191},
-            smooth=Smooth.None,
-            arrow={Arrow.Filled,Arrow.None}),
-          Rectangle(
-            extent={{56,32},{92,12}},
-            lineColor={0,0,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Line(
-            points={{-48,18},{-48,-6}},
-            color={191,191,191},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{-48,-8.5},{-48,-38},{16,-36},{34,-30}},
-            color={191,191,191},
-            smooth=Smooth.Bezier,
-            arrow={Arrow.Filled,Arrow.None}),
-          Line(
-            points={{-50,-8},{-60,-30}},
-            color={191,191,191},
-            smooth=Smooth.None,
-            arrow={Arrow.Filled,Arrow.None}),
-          Line(
-            points={{-46,-8},{-36,-30}},
-            color={191,191,191},
-            smooth=Smooth.None,
-            arrow={Arrow.Filled,Arrow.None}),
-          Line(
-            points={{-80,24},{-80,-26}},
-            color={0,0,0},
-            smooth=Smooth.None),
-          Line(
-            points={{-82,20},{-80,24},{-78,20}},
-            color={0,0,0},
-            smooth=Smooth.None),
-          Text(
-            extent={{-92,30},{-68,25.8}},
-            lineColor={0,0,0},
-            textString="Composite"),
-          Text(
-            extent={{-94,-28},{-66,-32}},
-            lineColor={0,0,0},
-            textString="Basic"),
-          Text(
-            extent={{-56,30},{-40,26}},
-            lineColor={0,0,0},
-            textString="Face"),
-          Text(
-            extent={{-56,26},{-40,22}},
-            lineColor={0,0,0},
-            textString="Bus"),
-          Ellipse(
-            extent={{-51,21},{-45,15}},
-            lineColor={127,127,127},
-            fillColor={191,191,191},
-            fillPattern=FillPattern.Solid,
-            lineThickness=0.5),
-          Text(
-            extent={{61.5,18},{96,14}},
-            lineColor={0,0,0},
-            textString="    Instantiation"),
-          Text(
-            extent={{62,19.8},{96,24}},
-            lineColor={0,0,0},
-            textString=" Expansion"),
-          Text(
-            extent={{62,30},{96,26}},
-            lineColor={0,0,0},
-            textString="Extension"),
-          Ellipse(
-            extent={{-63,-27},{-57,-33}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Text(
-            extent={{-72,-22},{-48,-26}},
-            lineColor={0,0,0},
-            textString="Diffusion"),
-          Text(
-            extent={{-48,-18},{-24,-22}},
-            lineColor={0,0,0},
-            textString="Thermal"),
-          Ellipse(
-            extent={{-39,-27},{-33,-33}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Text(
-            extent={{50,2},{70,-2}},
-            lineColor={0,0,0},
-            textString="Chemical"),
-          Ellipse(
-            extent={{57,-3},{63,-9}},
-            lineColor={208,104,0},
-            fillColor={255,128,0},
-            fillPattern=FillPattern.Solid),
-          Ellipse(
-            extent={{57,-27},{63,-33}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Text(
-            extent={{24,6},{48,2}},
-            lineColor={0,0,0},
-            textString="Inert and"),
-          Text(
-            extent={{24,2},{48,-2}},
-            lineColor={0,0,0},
-            textString="Inert Internal"),
-          Ellipse(
-            extent={{33,-3},{39,-9}},
-            lineColor={72,90,180},
-            fillColor={102,128,255},
-            fillPattern=FillPattern.Solid),
-          Ellipse(
-            extent={{34,-4},{38,-8}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            lineColor={72,90,180}),
-          Text(
-            extent={{-20,6},{-4,2}},
-            lineColor={0,0,0},
-            textString="Inert"),
-          Text(
-            extent={{-20,2},{-4,-2.2}},
-            lineColor={0,0,0},
-            textString="Amagat"),
-          Ellipse(
-            extent={{-15,-3},{-9,-9}},
-            lineColor={72,90,180},
-            fillColor={102,128,255},
-            fillPattern=FillPattern.Solid),
-          Text(
-            extent={{-16,-4},{-8,-8}},
-            lineColor={0,0,0},
-            textString="A"),
-          Text(
-            extent={{4,6},{20,2}},
-            lineColor={0,0,0},
-            textString="Inert"),
-          Text(
-            extent={{4,2},{20,-2}},
-            lineColor={0,0,0},
-            textString="Dalton"),
-          Ellipse(
-            extent={{9,-3},{15,-9}},
-            lineColor={72,90,180},
-            fillColor={102,128,255},
-            fillPattern=FillPattern.Solid),
-          Text(
-            extent={{8,-4},{16,-8}},
-            lineColor={0,0,0},
-            textString="D"),
-          Ellipse(
-            extent={{33,-27},{39,-33}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Text(
-            extent={{48,-22},{72,-26}},
-            lineColor={0,0,0},
-            textString="Summation"),
-          Ellipse(
-            extent={{9,-27},{15,-33}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Text(
-            extent={{74,-22},{94,-26}},
-            lineColor={0,0,0},
-            textString="Advection"),
-          Text(
-            extent={{24,-22},{48,-26}},
-            lineColor={0,0,0},
-            textString="Translational"),
-          Text(
-            extent={{-24,-22},{0,-26.2}},
-            lineColor={0,0,0},
-            textString="Amagat"),
-          Text(
-            extent={{0,-22},{24,-26}},
-            lineColor={0,0,0},
-            textString="Dalton"),
-          Ellipse(
-            extent={{81,-27},{87,-33}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Ellipse(
-            extent={{-15,-27},{-9,-33}},
-            lineColor={127,127,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Line(
-            points={{58,22},{68,22}},
-            color={191,191,191},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{68,16},{58,16}},
-            color={0,0,0},
-            smooth=Smooth.None,
-            pattern=LinePattern.Dash),
-          Line(
-            points={{3,0},{-7,0}},
-            color={191,191,191},
-            smooth=Smooth.None,
-            arrow={Arrow.Filled,Arrow.None},
-            origin={65,28},
-            rotation=360),
-          Text(
-            extent={{76,-18},{92,-22}},
-            lineColor={0,0,0},
-            textString="Thermal"),
-          Text(
-            extent={{-48,-22},{-24,-26}},
-            lineColor={0,0,0},
-            textString="Diffusion"),
-          Text(
-            extent={{-72,-18},{-48,-22}},
-            lineColor={0,0,0},
-            textString="Material"),
-          Text(
-            extent={{48,-18},{72,-22.2}},
-            lineColor={0,0,0},
-            textString="Entropy")}));
+              -60},{100,60}}), graphics={Line(
+              points={{62,-8},{84,-30}},
+              color={191,191,191},
+              smooth=Smooth.None,
+              arrow={Arrow.Filled,Arrow.None}),Line(
+              points={{36,-6},{36,-30}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{14,-8},{36,-30}},
+              color={191,191,191},
+              smooth=Smooth.None,
+              arrow={Arrow.Filled,Arrow.None}),Line(
+              points={{58,-8},{36,-30}},
+              color={191,191,191},
+              smooth=Smooth.None,
+              arrow={Arrow.Filled,Arrow.None}),Line(
+              points={{-10,-8},{36,-30}},
+              color={191,191,191},
+              smooth=Smooth.None,
+              arrow={Arrow.Filled,Arrow.None}),Line(
+              points={{-14,-8},{-36,-30}},
+              color={191,191,191},
+              smooth=Smooth.None,
+              arrow={Arrow.Filled,Arrow.None}),Line(
+              points={{10,-8},{-36,-30}},
+              color={191,191,191},
+              smooth=Smooth.None,
+              arrow={Arrow.Filled,Arrow.None}),Line(
+              points={{36,-6},{-36,-30}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{60,-8.5},{60,-30}},
+              color={191,191,191},
+              smooth=Smooth.None,
+              arrow={Arrow.Filled,Arrow.None}),Line(
+              points={{12,-8.5},{12,-30}},
+              color={191,191,191},
+              smooth=Smooth.None,
+              arrow={Arrow.Filled,Arrow.None}),Line(
+              points={{-12,-8.5},{-12,-30}},
+              color={191,191,191},
+              smooth=Smooth.None,
+              arrow={Arrow.Filled,Arrow.None}),Rectangle(
+              extent={{56,32},{92,12}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Line(
+              points={{-48,18},{-48,-6}},
+              color={191,191,191},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{-48,-8.5},{-48,-38},{16,-36},{34,-30}},
+              color={191,191,191},
+              smooth=Smooth.Bezier,
+              arrow={Arrow.Filled,Arrow.None}),Line(
+              points={{-50,-8},{-60,-30}},
+              color={191,191,191},
+              smooth=Smooth.None,
+              arrow={Arrow.Filled,Arrow.None}),Line(
+              points={{-46,-8},{-36,-30}},
+              color={191,191,191},
+              smooth=Smooth.None,
+              arrow={Arrow.Filled,Arrow.None}),Line(
+              points={{-80,24},{-80,-26}},
+              color={0,0,0},
+              smooth=Smooth.None),Line(
+              points={{-82,20},{-80,24},{-78,20}},
+              color={0,0,0},
+              smooth=Smooth.None),Text(
+              extent={{-92,30},{-68,25.8}},
+              lineColor={0,0,0},
+              textString="Composite"),Text(
+              extent={{-94,-28},{-66,-32}},
+              lineColor={0,0,0},
+              textString="Basic"),Text(
+              extent={{-56,30},{-40,26}},
+              lineColor={0,0,0},
+              textString="Face"),Text(
+              extent={{-56,26},{-40,22}},
+              lineColor={0,0,0},
+              textString="Bus"),Ellipse(
+              extent={{-51,21},{-45,15}},
+              lineColor={127,127,127},
+              fillColor={191,191,191},
+              fillPattern=FillPattern.Solid,
+              lineThickness=0.5),Text(
+              extent={{61.5,18},{96,14}},
+              lineColor={0,0,0},
+              textString="    Instantiation"),Text(
+              extent={{62,19.8},{96,24}},
+              lineColor={0,0,0},
+              textString=" Expansion"),Text(
+              extent={{62,30},{96,26}},
+              lineColor={0,0,0},
+              textString="Extension"),Ellipse(
+              extent={{-63,-27},{-57,-33}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Text(
+              extent={{-72,-22},{-48,-26}},
+              lineColor={0,0,0},
+              textString="Diffusion"),Text(
+              extent={{-48,-18},{-24,-22}},
+              lineColor={0,0,0},
+              textString="Thermal"),Ellipse(
+              extent={{-39,-27},{-33,-33}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Text(
+              extent={{50,2},{70,-2}},
+              lineColor={0,0,0},
+              textString="Chemical"),Ellipse(
+              extent={{57,-3},{63,-9}},
+              lineColor={208,104,0},
+              fillColor={255,128,0},
+              fillPattern=FillPattern.Solid),Ellipse(
+              extent={{57,-27},{63,-33}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Text(
+              extent={{24,6},{48,2}},
+              lineColor={0,0,0},
+              textString="Inert and"),Text(
+              extent={{24,2},{48,-2}},
+              lineColor={0,0,0},
+              textString="Inert Internal"),Ellipse(
+              extent={{33,-3},{39,-9}},
+              lineColor={72,90,180},
+              fillColor={102,128,255},
+              fillPattern=FillPattern.Solid),Ellipse(
+              extent={{34,-4},{38,-8}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              lineColor={72,90,180}),Text(
+              extent={{-20,6},{-4,2}},
+              lineColor={0,0,0},
+              textString="Inert"),Text(
+              extent={{-20,2},{-4,-2.2}},
+              lineColor={0,0,0},
+              textString="Amagat"),Ellipse(
+              extent={{-15,-3},{-9,-9}},
+              lineColor={72,90,180},
+              fillColor={102,128,255},
+              fillPattern=FillPattern.Solid),Text(
+              extent={{-16,-4},{-8,-8}},
+              lineColor={0,0,0},
+              textString="A"),Text(
+              extent={{4,6},{20,2}},
+              lineColor={0,0,0},
+              textString="Inert"),Text(
+              extent={{4,2},{20,-2}},
+              lineColor={0,0,0},
+              textString="Dalton"),Ellipse(
+              extent={{9,-3},{15,-9}},
+              lineColor={72,90,180},
+              fillColor={102,128,255},
+              fillPattern=FillPattern.Solid),Text(
+              extent={{8,-4},{16,-8}},
+              lineColor={0,0,0},
+              textString="D"),Ellipse(
+              extent={{33,-27},{39,-33}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Text(
+              extent={{48,-22},{72,-26}},
+              lineColor={0,0,0},
+              textString="Summation"),Ellipse(
+              extent={{9,-27},{15,-33}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Text(
+              extent={{74,-22},{94,-26}},
+              lineColor={0,0,0},
+              textString="Advection"),Text(
+              extent={{24,-22},{48,-26}},
+              lineColor={0,0,0},
+              textString="Translational"),Text(
+              extent={{-24,-22},{0,-26.2}},
+              lineColor={0,0,0},
+              textString="Amagat"),Text(
+              extent={{0,-22},{24,-26}},
+              lineColor={0,0,0},
+              textString="Dalton"),Ellipse(
+              extent={{81,-27},{87,-33}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Ellipse(
+              extent={{-15,-27},{-9,-33}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),Line(
+              points={{58,22},{68,22}},
+              color={191,191,191},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{68,16},{58,16}},
+              color={0,0,0},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dash),Line(
+              points={{3,0},{-7,0}},
+              color={191,191,191},
+              smooth=Smooth.None,
+              arrow={Arrow.Filled,Arrow.None},
+              origin={65,28},
+              rotation=360),Text(
+              extent={{76,-18},{92,-22}},
+              lineColor={0,0,0},
+              textString="Thermal"),Text(
+              extent={{-48,-22},{-24,-26}},
+              lineColor={0,0,0},
+              textString="Diffusion"),Text(
+              extent={{-72,-18},{-48,-22}},
+              lineColor={0,0,0},
+              textString="Material"),Text(
+              extent={{48,-18},{72,-22.2}},
+              lineColor={0,0,0},
+              textString="Entropy")}));
 
   end ConnectorHierarchy;
 

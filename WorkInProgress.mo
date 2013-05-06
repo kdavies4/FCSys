@@ -1351,6 +1351,7 @@ package WorkInProgress "Incomplete classes under development"
           Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics),
           experiment(StopTime=50));
+
       end RossiterExample2MPC;
 
       model RossiterExample2MPCNoRej "Example2_mimo.m in Rossiter (2003)"
@@ -1434,6 +1435,7 @@ package WorkInProgress "Incomplete classes under development"
           Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics),
           experiment(StopTime=139));
+
       end RossiterExample2MPCNoRej;
 
       model PendulumMPC
@@ -2944,6 +2946,7 @@ This is discussed in the description of package
               experiment(StopTime=2),
               Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                       -100},{100,100}}), graphics));
+
           end QPSolverFerreauExample;
 
         end Examples;
@@ -3559,6 +3562,7 @@ This is discussed in the description of package
                                 textString="QP")}),
                 Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                         -100},{100,100}}), graphics)));
+
           end QPSolver;
 
           function GetInfo "<html>Get information about the solution of a quadratic programming problem to find <b>x</b> that minimizes:
@@ -4703,6 +4707,7 @@ the output y is identical to parameter yStart.</p>
 via parameter <b>samplePeriod</b>.</p>
 </html>
 "));
+
       end Sampler;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -5972,21 +5977,6 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               index=-1,
               extent={{-6,3},{-6,3}}));
 
-          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
-                  preserveAspectRatio=true, extent={{-60,-40},{60,40}}),
-                graphics={Rectangle(
-                          extent={{-40,40},{40,-40}},
-                          fillColor={255,255,255},
-                          fillPattern=FillPattern.Solid,
-                          pattern=LinePattern.Dash,
-                          lineColor={0,0,0}),Line(
-                          points={{-34,-4},{20,-4}},
-                          color={0,0,127},
-                          smooth=Smooth.None),Line(
-                          points={{-28,4},{20,4}},
-                          color={0,0,127},
-                          smooth=Smooth.None)}));
         end SenBusToArray;
 
       end Interfaces;
@@ -6181,21 +6171,6 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               index=-1,
               extent={{-6,3},{-6,3}}));
 
-          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
-                  preserveAspectRatio=true, extent={{-60,-40},{60,40}}),
-                graphics={Rectangle(
-                          extent={{-40,40},{40,-40}},
-                          fillColor={255,255,255},
-                          fillPattern=FillPattern.Solid,
-                          pattern=LinePattern.Dash,
-                          lineColor={0,0,0}),Line(
-                          points={{-34,-4},{20,-4}},
-                          color={0,0,127},
-                          smooth=Smooth.None),Line(
-                          points={{-28,4},{20,4}},
-                          color={0,0,127},
-                          smooth=Smooth.None)}));
         end SenBusToArray;
 
       end Interfaces;
@@ -6677,21 +6652,6 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               index=-1,
               extent={{-6,3},{-6,3}}));
 
-          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
-                  preserveAspectRatio=true, extent={{-60,-40},{60,40}}),
-                graphics={Rectangle(
-                          extent={{-40,40},{40,-40}},
-                          fillColor={255,255,255},
-                          fillPattern=FillPattern.Solid,
-                          pattern=LinePattern.Dash,
-                          lineColor={0,0,0}),Line(
-                          points={{-34,-4},{20,-4}},
-                          color={0,0,127},
-                          smooth=Smooth.None),Line(
-                          points={{-28,4},{20,4}},
-                          color={0,0,127},
-                          smooth=Smooth.None)}));
         end SenBusToArray;
 
       end Interfaces;
@@ -6808,21 +6768,10 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               string="%second",
               index=1,
               extent={{6,3},{6,3}}));
-          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
-                  preserveAspectRatio=true, extent={{-60,-40},{60,40}}),
-                graphics={Rectangle(
-                          extent={{-40,40},{40,-40}},
-                          fillColor={255,255,255},
-                          fillPattern=FillPattern.Solid,
-                          pattern=LinePattern.Dash,
-                          lineColor={0,0,0}),Line(
-                          points={{-28,4},{28,4}},
-                          color={0,0,127},
-                          smooth=Smooth.None),Line(
-                          points={{-28,-4},{34,-4}},
-                          color={0,0,127},
-                          smooth=Smooth.None)}));
+          annotation (
+            Diagram(coordinateSystem(preserveAspectRatio=true), graphics),
+            Icon(coordinateSystem),
+            graphics);
         end ActArrayToBus;
 
         model SenBusToArray
@@ -6860,21 +6809,6 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               index=-1,
               extent={{-6,3},{-6,3}}));
 
-          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
-                  preserveAspectRatio=true, extent={{-60,-40},{60,40}}),
-                graphics={Rectangle(
-                          extent={{-40,40},{40,-40}},
-                          fillColor={255,255,255},
-                          fillPattern=FillPattern.Solid,
-                          pattern=LinePattern.Dash,
-                          lineColor={0,0,0}),Line(
-                          points={{-34,-4},{20,-4}},
-                          color={0,0,127},
-                          smooth=Smooth.None),Line(
-                          points={{-28,4},{20,4}},
-                          color={0,0,127},
-                          smooth=Smooth.None)}));
         end SenBusToArray;
 
       end Interfaces;
@@ -7068,21 +7002,6 @@ a simple model of a variable pressure loss is needed.</p>
               index=-1,
               extent={{-6,3},{-6,3}}));
 
-          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
-                  preserveAspectRatio=true, extent={{-60,-40},{60,40}}),
-                graphics={Rectangle(
-                          extent={{-40,40},{40,-40}},
-                          fillColor={255,255,255},
-                          fillPattern=FillPattern.Solid,
-                          pattern=LinePattern.Dash,
-                          lineColor={0,0,0}),Line(
-                          points={{-34,-4},{20,-4}},
-                          color={0,0,127},
-                          smooth=Smooth.None),Line(
-                          points={{-28,4},{20,4}},
-                          color={0,0,127},
-                          smooth=Smooth.None)}));
         end SenBusToArray;
 
       end Interfaces;
