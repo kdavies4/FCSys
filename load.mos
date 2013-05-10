@@ -4,9 +4,6 @@
 // Settings
 // ------------
 
-// Establish the system of units.
-RunScript("FCSys/resources/scripts/units.mos");
-
 // Note:  Dymola's list() function lists all possible settings.
 // The settings below are all the non-default ones.  Comment the lines to use
 // the defaults.
@@ -57,16 +54,19 @@ Advanced.AutoFormatting = true "Automatic indentation of code. Can be changed wi
 // ------------
 // Startup
 // ------------
-// Load packages.
+// Load the FCSys package.
 openModel("package.mo");
 
-// Work in the simulations folder (create it if it doesn't exist).
-// Commented out because this causes the compiled functions (e.g.,
-// Utilities.Chemistry.charge) to fail on Linux with Dymola 7.4.
-//if not cd("simulations") then
-//    Modelica.Utilities.Files.createDirectory("simulations");
-//    cd("simulations");
-//end if;
+// Set up units.
+FCSys.Units.setup();
 
-// Work in the directory above.
+// Work in the directory above the FCSys package.
 cd("..")
+
+// Save a static, translated copy of the values of all the constants and units.
+// The constants and units will be available in the workspace, but only until
+// the next model is simulated.  To load the and retain the variables until
+// Dymola is closed, translate a model besides Units.Evaluate and then run
+// "units-values.mos" as a script.
+translateModel("FCSys.Units.Examples.Evaluate");
+Modelica.Utilities.Files.copy("dsmodel.mof", "units.mos", true);

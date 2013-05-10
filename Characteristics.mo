@@ -248,7 +248,7 @@ package Characteristics
 
       extends BaseClasses.Characteristic(
         final formula="C9HF17O5S-",
-        final phase="solid",
+        final phase=Phase.solid,
         p0=U.atm,
         m=1044.214*U.g/U.mol - 'H+'.Ionomer.m,
         specVolPow={0,0},
@@ -307,7 +307,7 @@ package Characteristics
 
       extends BaseClasses.Characteristic(
         final formula="e-",
-        phase="gas",
+        phase=Phase.gas,
         m=Data.MM*U.kg/U.mol,
         b_v=[1],
         specVolPow={-1,0},
@@ -379,7 +379,7 @@ package Characteristics
 
       extends BaseClasses.Characteristic(
         final formula="H+",
-        phase="gas",
+        phase=Phase.gas,
         final m=Data.MM*U.kg/U.mol,
         b_v=[1],
         specVolPow={-1,0},
@@ -424,7 +424,7 @@ package Characteristics
     package Ionomer "H+ in ionomer"
 
       extends Gas(
-        final phase="solid",
+        final phase=Phase.solid,
         specVolPow={0,0},
         b_v=[1/(0.95*U.M)]);
       annotation (Documentation(info="<html>
@@ -448,7 +448,7 @@ package Characteristics
 
       extends BaseClasses.CharacteristicNASA(
         final formula=Data.name,
-        final phase="gas",
+        final phase=Phase.gas,
         final m=Data.MM*U.kg/U.mol,
         specVolPow={-1,-3},
         b_v={{0,0,0,1},{8.0282e6*U.K^3,-2.6988e5*U.K^2,-129.26*U.K,17.472}*U.cm
@@ -498,7 +498,7 @@ package Characteristics
 
       extends BaseClasses.CharacteristicNASA(
         final formula=Data.name,
-        final phase="gas",
+        final phase=Phase.gas,
         final m=Data.MM*U.kg/U.mol,
         specVolPow={-1,-3},
         b_v={{0,0,0,1},{-5.6932e10*U.K^3,1.8189e8*U.K^2,-3.0107e5*U.K,158.83}*U.cm
@@ -556,7 +556,7 @@ package Characteristics
 
       extends BaseClasses.Characteristic(
         final formula="H2O",
-        final phase="liquid",
+        final phase=Phase.liquid,
         final m=0.01801528*U.kg/U.mol,
         p0=U.atm,
         specVolPow={0,0},
@@ -599,7 +599,7 @@ package Characteristics
 
       extends BaseClasses.CharacteristicNASA(
         final formula=Data.name,
-        final phase="gas",
+        final phase=Phase.gas,
         final m=Data.MM*U.kg/U.mol,
         specVolPow={-1,-4},
         b_v={{0,0,0,0,1},{-2.7198e9*U.K^4,6.1253e7*U.K^3,-1.4164e6*U.K^2,-9.3378e3
@@ -650,7 +650,7 @@ package Characteristics
 
       extends BaseClasses.CharacteristicNASA(
         final formula=Data.name,
-        final phase="gas",
+        final phase=Phase.gas,
         final m=Data.MM*U.kg/U.mol,
         specVolPow={-1,-4},
         b_v={{0,0,0,0,1},{5.0855e9*U.K^4,-1.6393e8*U.K^3,5.2007e5*U.K^2,-1.7696e4
@@ -818,7 +818,7 @@ package Characteristics
       extends Modelica.Icons.MaterialPropertiesPackage;
 
       constant String formula "Chemical formula";
-      constant String phase "Material phase";
+      constant Phase phase "Material phase";
       constant Q.MassSpecific m(min=Modelica.Constants.small) "Specific mass";
       // Note:  The positive minimum value prevents a structural singularity
       // when checking FCSys.Subregions.Species.SpeciesInertStagnant in Dymola
@@ -826,7 +826,7 @@ package Characteristics
       constant Q.LengthSpecific d "Specific diameter" annotation (Dialog);
       final constant Integer z=charge(formula) "Charge number";
       constant Q.PressureAbsolute p0=U.bar
-        "<html>Reference pressure (<i>p</i>&deg;)</html>";
+        "<html>Reference pressure (<i>p</i><sup>o</sup>)</html>";
       constant Real b_v[:, :]=[1]
         "<html>Coefficients for specific volume as a polynomial in <i>p</i>/<i>T</i> and <i>T</i> (<i>b</i><sub><i>v</i></sub>)</html>";
       // Note:  p/T is the argument instead of p so that b_p will have the
@@ -835,9 +835,9 @@ package Characteristics
       constant Integer specVolPow[2]={-1,0}
         "<html>Powers of <i>p</i>/<i>T</i> and <i>T</i> for 1<sup>st</sup> row and column of <i>b</i><sub><i>v</i></sub></html>";
       constant Q.PotentialChemical Deltah0_f
-        "<html>Enthalpy of formation at 298.15 K, <i>p</i>&deg; (&Delta;<i>h</i>&deg;<sub>f</sub>)</html>";
+        "<html>Enthalpy of formation at 298.15 K, <i>p</i><sup>o</sup> (&Delta;<i>h</i><sup>o</sup><sub>f</sub>)</html>";
       constant Q.PotentialChemical Deltah0
-        "<html><i>h</i>&deg;(298.15 K) - <i>h</i>&deg;(0 K) (&Delta;<i>h</i>&deg;)</html>";
+        "<html><i>h</i><sup>o</sup>(298.15 K) - <i>h</i><sup>o</sup>(0 K) (&Delta;<i>h</i><sup>o</sup>)</html>";
       constant Q.PotentialChemical h_offset=0
         "<html>Additional enthalpy offset (<i>h</i><sub>offset</sub>)</html>";
       constant Integer specHeatCapPow=-2
@@ -845,18 +845,18 @@ package Characteristics
       constant Q.TemperatureAbsolute T_lim_c[:]={0,Modelica.Constants.inf}
         "<html>Temperature limits for the rows of <i>b</i><sub><i>c</i></sub> and <i>B</i><sub><i>c</i></sub> (<i>T</i><sub>lim <i>c</i></sub>)</html>";
       constant Real b_c[size(T_lim_c, 1) - 1, :]
-        "<html>Coefficients of isobaric specific heat capacity at <i>p</i>&deg; as a polynomial in <i>T</i> (<i>b</i><sub><i>c</i></sub>)</html>";
+        "<html>Coefficients of isobaric specific heat capacity at <i>p</i><sup>o</sup> as a polynomial in <i>T</i> (<i>b</i><sub><i>c</i></sub>)</html>";
       constant Real B_c[size(T_lim_c, 1) - 1, 2]
         "<html>Integration constants for specific enthalpy and entropy (<i>B</i><sub><i>c</i></sub>)</html>";
 
       final constant Boolean isCompressible=anyTrue({anyTrue({abs(b_v[i, j]) >
           Modelica.Constants.small and specVolPow[1] + i - 1 <> 0 for i in 1:
           size(b_v, 1)}) for j in 1:size(b_v, 2)})
-        "true, if specific volume depends on pressure";
+        "true, if density depends on pressure";
       final constant Boolean hasThermalExpansion=anyTrue({anyTrue({abs(b_v[i, j])
            > Modelica.Constants.small and specVolPow[2] + j - specVolPow[1] - i
            <> 0 for i in 1:size(b_v, 1)}) for j in 1:size(b_v, 2)})
-        "true, if specific volume depends on temperature";
+        "true, if density depends on temperature";
 
     protected
       constant Integer pressPow[2]={specVolPow[1] - size(b_v, 1) + 1,specVolPow[
@@ -990,8 +990,8 @@ package Characteristics
         end c_p_resid;
 
       algorithm
-        c_p := c0_p(T) + c_p_resid(T, p) - (if phase <> "gas" then c_p_resid(T,
-          p0) else c_p_resid(
+        c_p := c0_p(T) + c_p_resid(T, p) - (if phase <> Phase.gas then
+          c_p_resid(T, p0) else c_p_resid(
                 T,
                 p0,
                 {1,-specVolPow[1]})) annotation (Inline=true);
@@ -1097,6 +1097,7 @@ package Characteristics
 
       algorithm
         eta := alpha(T)/v_Tp(T, p) annotation (Inline=true);
+        // **3*tau/lambda^2
         annotation (Documentation(info="<html>
   <p>This function is based on kinetic theory using the assumptions listed in
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.alpha\">alpha</a>().</p>
@@ -1214,7 +1215,7 @@ package Characteristics
           1))) + (if referenceEnthalpy == ReferenceEnthalpy.ZeroAt0K then
           Deltah0 else 0) - (if referenceEnthalpy <> ReferenceEnthalpy.EnthalpyOfFormationAt25degC
            then Deltah0_f else 0) + h_offset + h_resid(T, p) - (if phase <>
-          "gas" then h_resid(T, p0) else h_resid(
+          Phase.gas then h_resid(T, p0) else h_resid(
                 T,
                 p0,
                 {1,-specVolPow[1]}))
@@ -1246,14 +1247,15 @@ package Characteristics
 
       algorithm
         beta := alpha(T)/m annotation (Inline=true);
+        // **3*tau/lambda^2/rho/m
         annotation (Documentation(info="<html>
-<p>\"**Dynamic compressibility\" is defined here as the reciprocal of the volume,
-second, or bulk dynamic viscosity and specific volume (see
+<p><i>Dynamic compressibility</i> is defined in <a href=\"modelica://FCSys\">FCSys</a> as the reciprocal of the volume,
+second, or bulk dynamic viscosity (see
 <a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).</p>
 
   <p>This function is based on kinetic theory using the assumptions listed in
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.alpha\">alpha</a>() and
-  that dynamic compressibility is equal to fluidity.  Although pressure is an input, the result is independent of
+  the assumption that dynamic compressibility is equal to fluidity.  Although pressure is an input, the result is independent of
   pressure.</p>
 </html>"));
       end beta;
@@ -1268,16 +1270,13 @@ second, or bulk dynamic viscosity and specific volume (see
 
       algorithm
         mu := tau(T, p)/m annotation (Inline=true);
-        // **fix
-        annotation (Documentation(info="<html>
-<p>\"**Dynamic compressibility\" is defined here as the reciprocal of the volume,
-second, or bulk dynamic viscosity and specific volume (see
-<a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).</p>
-</html>"));
+        // 8*pi*tau/3/m
+        annotation (Documentation(info="<html><p>This function is based on kinetic theory using the assumptions listed in
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.alpha\">alpha</a>().</p></html>"));
       end mu;
 
       replaceable function nu
-        "<html>Thermal independence (&nu;) as a function of temperature and specific volume</html>"
+        "<html>Thermal independity (&nu;) as a function of temperature and specific volume</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
@@ -1286,10 +1285,13 @@ second, or bulk dynamic viscosity and specific volume (see
 
       algorithm
         nu := tau(T, p)/c_p(T, p) annotation (Inline=true);
+        // 8*pi*tau/3/s **should this be c_v instead?
         annotation (Documentation(info="<html>
-<p>\"**Dynamic compressibility\" is defined here as the reciprocal of the volume,
-second, or bulk dynamic viscosity and specific volume (see
-<a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).</p>
+<p><i>Thermal independity</i> describes the extent to which an exchange of thermal energy between species causes or requires a 
+temperature difference.</p>
+
+<p>This function is based on kinetic theory using the assumptions listed in
+<a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.alpha\">alpha</a>().</p>
 </html>"));
       end nu;
 
@@ -1318,7 +1320,7 @@ second, or bulk dynamic viscosity and specific volume (see
           Inline=true,
           inverse(v=v_Tp(T, p)),
           derivative=dp_Tv);
-        annotation (Documentation(info="<html><p>If the species is incompressible, then <i>p</i>(<i>T</i>, <i>v</i>) is undefined,
+        annotation (Documentation(info="<html><p>If the species is incompressible then <i>p</i>(<i>T</i>, <i>v</i>) is undefined,
   and the function will return a value of zero.</p>
 
 <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a>().</p></html>"));
@@ -1335,9 +1337,10 @@ second, or bulk dynamic viscosity and specific volume (see
 
       algorithm
         theta := alpha(T)/c_v(T, p) annotation (Inline=true);
-        annotation (info="<html><p>This function is based on kinetic theory using the assumptions listed in
+        // **3*tau/lambda^2/rho/c_v
+        annotation (Documentation(info="<html><p>This function is based on kinetic theory using the assumptions listed in
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.alpha\">alpha</a>().</p>
-  </html>");
+  </html>"));
       end theta;
 
       function s "Specific entropy as a function of temperature and pressure"
@@ -1424,8 +1427,8 @@ second, or bulk dynamic viscosity and specific volume (see
 
         s := smooth(1, sum(if (T_lim_c[i] <= T or i == 1) and (T < T_lim_c[i +
           1] or i == size(b_c, 1)) then s0_i(T, i) else 0 for i in 1:size(b_c,
-          1))) + s_resid(T, p) - (if phase <> "gas" then s_resid(T, p0) else
-          s_resid(
+          1))) + s_resid(T, p) - (if phase <> Phase.gas then s_resid(T, p0)
+           else s_resid(
                 T,
                 p0,
                 {1,-specVolPow[1]}))
@@ -1475,7 +1478,7 @@ second, or bulk dynamic viscosity and specific volume (see
       end v_Tp;
 
       replaceable function zeta
-        "<html>Fluidity (&zeta;) as a function of temperature</html>"
+        "<html>Fluidity (&zeta;) as a function of temperature and pressure</html>"
 
         extends Modelica.Icons.Function;
 
@@ -1486,6 +1489,7 @@ second, or bulk dynamic viscosity and specific volume (see
 
       algorithm
         zeta := alpha(T)/m annotation (Inline=true);
+        // **3*tau/lambda^2/rho/m
         annotation (Documentation(info="<html>
 <p>Fluidity is defined as the reciprocal of dynamic viscosity
 (see <a href=\"http://en.wikipedia.org/wiki/Viscosity#Fluidity\">http://en.wikipedia.org/wiki/Viscosity#Fluidity</a>).</p>
@@ -1513,9 +1517,11 @@ second, or bulk dynamic viscosity and specific volume (see
 <p>Notes regarding the constants:
     <ul>
     <li>Currently, <code>formula</code> may not contain parentheses or brackets.</li>
+    
     <li><code>d</code> is the Van der Waals diameter or the diameter for the
     rigid-sphere (\"billiard-ball\") approximation of the kinetic theory of gases
     [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>].</li>
+    
     <li><code>b_v</code>: The powers of <i>p</i>/<i>T</i> increase by row.  The powers of
     <i>T</i> increase by column.  If <code>specVolPow[1] == -1</code>, then the rows
     of <code>b_v</code> correspond to 1, <i>B</i><sup>*</sup><i>T</i>,
@@ -1528,7 +1534,9 @@ second, or bulk dynamic viscosity and specific volume (see
     Currently,
     virial equations of state are supported up to the fourth coefficient (<i>D</i><sup>*</sup>).
     If additional terms are required, review and modify the definition of <code>b_p</code>.</li>
+    
     <li>The defaults for <code>b_v</code> and <code>specVolPow</code> represent ideal gas.</li>
+    
     <li><code>b_c</code>: The rows give the coefficients for the temperature intervals bounded
     by the values in <code>T_lim_c</code>.
     The powers of <i>T</i> increase
@@ -1539,6 +1547,7 @@ second, or bulk dynamic viscosity and specific volume (see
     for each row, where L is length, M is mass, N is particle number, and T is time. (In <a href=\"modelica://FCSys\">FCSys</a>,
     temperature is a potential with dimension L2.M/(N.T2); see
     the <a href=\"modelica://FCSys.Units\">Units</a> package.)</li>
+    
     <li><code>B_c</code>: As in <code>b_c</code>, the rows correspond to different
     temperature intervals.  The first column is for specific enthalpy and has dimensionality
     L2.M/(N.T2).  The second is for specific entropy and is dimensionless.
@@ -1546,18 +1555,20 @@ second, or bulk dynamic viscosity and specific volume (see
     25 &deg;C is the specific enthalpy of formation at that temperature and reference pressure
     [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>, p. 2].
     The integration constants for specific entropy are defined such that specific entropy is absolute.</li>
+    
     <li><code>T_lim_c</code>: The first and last entries are the minimum and
     maximum valid temperatures.  The intermediate entries are the thresholds
     between rows of <code>b_c</code> (and <code>B_c</code>).  Therefore, if there are <i>n</i> temperature intervals
     (and rows in <code>b_c</code> and <code>B_c</code>), then <code>T_lim_c</code> must
     have <i>n</i> + 1 entries.</li>
+    
     <li>The reference pressure is <code>p0</code>.   In the
     NASA CEA data [<a href=\"modelica://FCSys.UsersGuide.References\">McBride2002</a>], it is 1 bar for gases and 1 atm for condensed
     species.  For gases, the reference state is the ideal gas at <code>p0</code>.
     For example, the enthalpy of a non-ideal (real) gas at 25 &deg;C and <code>p0</code> with
-    <code>ReferenceEnthalpy.ZeroAt25degC</code> selected is not exactly zero.
-    </li>
-    <li>If the material is gaseous (<code>phase == \"gas\"</code>), then the first virial coefficient
+    <code>ReferenceEnthalpy.ZeroAt25degC</code> selected is not exactly zero.</li>
+    
+    <li>If the material is gaseous (<code>phase == Phase.gas</code>), then the first virial coefficient
     must be independent of temperature.  Otherwise, the function for specific enthalpy
     (<a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.h\">h</a>) will be ill-posed.
     Typically the first virial coefficient is one (or equivalently <code>U.R</code>), which satisfies
@@ -1566,6 +1577,10 @@ second, or bulk dynamic viscosity and specific volume (see
 
     end Characteristic;
 
+    type Phase = enumeration(
+        gas "Gas",
+        solid "Solid",
+        liquid "Liquid") "Enumeration for material phases";
     type ReferenceEnthalpy = enumeration(
         ZeroAt0K "Enthalpy at 0 K and p0 is 0 (if no additional offset)",
         ZeroAt25degC

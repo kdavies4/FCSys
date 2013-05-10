@@ -24,7 +24,7 @@ package Blocks "Imperative models (inputs and outputs only)"
             displayUnit="U.K"));
 
     equation
-      y = U.to_degC(u);
+      y = FCSys.Units.to_degC(u);
       annotation (Documentation(info="<html>
     <p>See the documentation in the
     <a href=\"modelica://FCSys.Blocks.UnitConversions\">UnitConversions</a> package.</p>
@@ -47,7 +47,7 @@ package Blocks "Imperative models (inputs and outputs only)"
       extends BaseClasses.PartialUnitConversion(u(final unit="m/(l.T2)"));
 
     equation
-      y = U.to_kPag(u);
+      y = FCSys.Units.to_kPag(u);
       annotation (Documentation(info="<html>
     <p>See the documentation in the
     <a href=\"modelica://FCSys.Blocks.UnitConversions\">UnitConversions</a> package.</p>

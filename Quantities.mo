@@ -21,7 +21,7 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.Acceleration Acceleration=1*U.m/U.s^2 "Acceleration";
       parameter Q.Amount Amount=1*U.C "Amount";
       parameter Q.AmountReciprocal AmountReciprocal=1/U.C "Reciprocal amount";
-      parameter Q.AmountVolumic AmountVolumic=1*U.C/U.m^3 "Volumic amount";
+      parameter Q.Density Density=1*U.C/U.m^3 "Volumic amount";
       parameter Q.Angle Angle=1*U.rad "Angle";
       parameter Q.Angle2 Angle2=1*U.sr "Solid angle";
       parameter Q.Area Area=1*U.m^2 "Area";
@@ -35,7 +35,7 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.CurrentAreic CurrentAreic=1*U.A/U.m^2 "Areic current";
       parameter Q.CurrentRate CurrentRate=1*U.A/U.s "Rate of current";
       parameter Q.Energy Energy=1*U.J "Energy";
-      parameter Q.Fluidity Fluidity=1/(U.Pa*U.s) "Dynamic fluidity";
+      parameter Q.Fluidity Fluidity=1/(U.Pa*U.s) "Fluidity";
       parameter Q.Force Force=1*U.N "Force";
       parameter Q.Frequency Frequency=1*U.rad/U.s "Frequency";
       parameter Q.Inductance Inductance=1*U.H "Inductance";
@@ -96,13 +96,11 @@ package Quantities "Quantities to represent physical properties"
   extends Modelica.Icons.Package;
   import Modelica.Icons.TypeReal;
 
-  // Generated from FCSys/resources/quantities.xls, 2013-2-9
+  // Generated from FCSys/resources/quantities.xls, 2013-5-10
   type Acceleration = Modelica.Icons.TypeReal (final unit="l/T2");
   type Amount = Modelica.Icons.TypeReal (final unit="N", min=0);
   type AmountReciprocal = Modelica.Icons.TypeReal (final unit="1/N", min=0)
     "Reciprocal amount";
-  type AmountVolumic = Modelica.Icons.TypeReal (final unit="N/l3", min=0)
-    "Volumic amount";
   type Angle = Modelica.Icons.TypeReal (final unit="A");
   type Angle2 = Modelica.Icons.TypeReal (final unit="A2") "Solid angle";
   type Area = Modelica.Icons.TypeReal (final unit="l2", min=0);
@@ -118,13 +116,14 @@ package Quantities "Quantities to represent physical properties"
     "Areic current";
   type CurrentRate = Modelica.Icons.TypeReal (final unit="N/T2")
     "Rate of current";
+  type Density = Modelica.Icons.TypeReal (final unit="N/l3", min=0);
+  type DensityRate = Modelica.Icons.TypeReal (final unit="N/(l3.T)");
   type Energy = Modelica.Icons.TypeReal (final unit="l2.m/T2");
   type Fluidity = Modelica.Icons.TypeReal (final unit="l.T/m", min=0)
-    "Dynamic fluidity";
+    "Fluidity";
   type Force = Modelica.Icons.TypeReal (final unit="l.m/T2");
   type Frequency = Modelica.Icons.TypeReal (final unit="A/T");
   type Inductance = Modelica.Icons.TypeReal (final unit="l2.m/N2", min=0);
-  type Isolation = Modelica.Icons.TypeReal (final unit="1/T", min=0);
   type Length = Modelica.Icons.TypeReal (final unit="l", min=0);
   type LengthSpecific = Modelica.Icons.TypeReal (final unit="l/N", min=0)
     "Specific length";
@@ -172,7 +171,8 @@ package Quantities "Quantities to represent physical properties"
   type ResistanceElectrical = Modelica.Icons.TypeReal (final unit="l2.m/(N2.T)",
         min=0) "Electrical resistance";
   type Resistivity = Modelica.Icons.TypeReal (final unit="l.T/N", min=0);
-  type ResistivityMaterial = Modelica.Icons.TypeReal (final unit="T/l2", min=0);
+  type ResistivityMaterial = Modelica.Icons.TypeReal (final unit="T/l2", min=0)
+    "Material resistivity";
   type Time = Modelica.Icons.TypeReal (final unit="T");
   type TimeAbsolute = Modelica.Icons.TypeReal (final unit="T", min=0);
   type Velocity = Modelica.Icons.TypeReal (final unit="l/T");

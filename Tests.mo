@@ -359,8 +359,8 @@ package Tests "Models and functions for test and validation"
                   p[i],
                   p_sat[i],
                   eps=0.01*p_sat[i],
-                  name="of saturation pressure at " + String(U.to_degC(T[i]))
-               + " deg C");
+                  name="of saturation pressure at " + String(
+              FCSys.Units.to_degC(T[i])) + " deg C");
         end for;
 
       equation
@@ -1254,13 +1254,13 @@ package Tests "Models and functions for test and validation"
 
       // Inverses
       assertValue(
-            to_degC(from_degC(1)),
+            FCSys.Units.to_degC(from_degC(1)),
             1,
-            name="to_degC");
+            name="degC");
       assertValue(
-            to_kPag(from_kPag(1)),
+            FCSys.Units.to_kPag(from_kPag(1)),
             1,
-            name="to_kPag");
+            name="kPag");
 
       ok := true;
       annotation (Documentation(info="<html><p>This function call will fail if any of the functions return an

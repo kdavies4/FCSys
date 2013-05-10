@@ -17,6 +17,7 @@ import Q = FCSys.Quantities;
 import FCSys.BaseClasses.Axis;
 import FCSys.BaseClasses.Orientation;
 import FCSys.BaseClasses.Side;
+import FCSys.Characteristics.BaseClasses.Phase;
 import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
 import FCSys.Subregions.Species.BaseClasses.InitMethVelocity;
 import FCSys.Subregions.Species.BaseClasses.InitMethScalar;
@@ -59,8 +60,9 @@ package UsersGuide "User's Guide"
         <li>Read the overview in the top-level documentation of <a href=\"modelica://FCSys\">FCSys</a>.</li>
         <li>Browse the subpackages of <a href=\"modelica://FCSys\">FCSys</a>.  In general, the packages are
         ordered by level of model and physical hierarchy (high-level at the top).
-        <li>Run the \"FCSys/resources/scripts/units.mos\" script to establish the display units (see below).  This is
-        automatic if <a href=\"modelica://FCSys\">FCSys</a> is loaded via the \"FCSys/load.mos\" script.
+        <li>Call the <a href=\"modelica://FCSys.Units.setup\">FCSys.Units.setup</a> function to 
+        establish the display units.  This is automatic if <a href=\"modelica://FCSys\">FCSys</a> 
+        is loaded via the \"FCSys/load.mos\" script.
         <li>Simulate the <a href=\"modelica://FCSys.Assemblies.Cells.Examples.CellProfile\">FCSys.Assemblies.Cells.Examples.CellProfile</a>
         model.
         There are scripts in \"FCSys/resources/scripts/Dymola/\" to create plots of that model and others.
@@ -115,6 +117,34 @@ package UsersGuide "User's Guide"
     </html>"));
 
     end GettingStarted;
+
+  model Glossary "Glossary"
+    extends Modelica.Icons.Information;
+    annotation (
+      preferedView="info",
+      DocumentationClass=true,
+      Documentation(info="<html><p>The following terms appear in this library with meanings that are new or should be clarified:
+    <ul>    
+      <li><b>configuration</b>&mdash;a species in a certain phase within a subregion<br>
+      
+      <li><b>dynamic compressibility</b>&mdash;reciprocal of the volume, second, or bulk viscosity 
+      (see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.beta\">FCSys.Characteristics.BaseClasses.Characteristic.beta</a>)<br>
+
+      <li><b>exchange</b>&mdash;transfer of a conserved quantity among configurations within a region<br>
+   
+      <li><b>specific</b>&mdash;adjective that indicates the quotient of the following quantity and its associated particle number<br>
+      
+      <li><b>thermal independity</b>&mdash;extent to which an exchange of thermal energy between species causes or requires a temperature difference 
+      (see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.nu\">FCSys.Characteristics.BaseClasses.Characteristic.nu</a>)<br>
+      
+      <li><b>translational Nusselt number</b>&mdash;correction to Newton's law of viscous shear for the shape of the flow profile<br>
+      
+      <li><b>transport</b>&mdash;transfer of a conserved quantity between adjacent regions
+    </ul></p>
+    </table>
+    </html>"));
+
+    end Glossary;
 
   class References "References"
     extends Modelica.Icons.References;
@@ -1229,7 +1259,7 @@ margin-right: auto;\" class=noBorder>
         fillPattern=FillPattern.Solid,
         fillColor={0,0,0},
         pattern=LinePattern.None)}),
-  Commands(file="resources/scripts/units.mos" "Re-initialize the units."),
+  Commands(executeCall=FCSys.Units.setup() "Re-initialize the units."),
   version="2.0 alpha",
   versionBuild=0,
   dateModified="",
