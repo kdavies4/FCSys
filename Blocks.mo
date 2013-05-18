@@ -16,7 +16,6 @@ package Blocks "Imperative models (inputs and outputs only)"
     <p>See the documentation in the
     <a href=\"modelica://FCSys.Blocks.UnitConversions\">UnitConversions</a> package.</p>
     </html>"));
-
     end From_degC;
 
     block To_degC
@@ -30,7 +29,6 @@ package Blocks "Imperative models (inputs and outputs only)"
     <p>See the documentation in the
     <a href=\"modelica://FCSys.Blocks.UnitConversions\">UnitConversions</a> package.</p>
     </html>"));
-
     end To_degC;
 
     block From_kPag
@@ -43,7 +41,6 @@ package Blocks "Imperative models (inputs and outputs only)"
     <p>See the documentation in the
     <a href=\"modelica://FCSys.Blocks.UnitConversions\">UnitConversions</a> package.</p>
     </html>"));
-
     end From_kPag;
 
     block To_kPag "Convert absolute pressure to gauge pressure in kilopascals"
@@ -55,15 +52,15 @@ package Blocks "Imperative models (inputs and outputs only)"
     <p>See the documentation in the
     <a href=\"modelica://FCSys.Blocks.UnitConversions\">UnitConversions</a> package.</p>
     </html>"));
-
     end To_kPag;
 
     block UnitConversion
       "Generic block to convert to or from quantities expressed in units"
       extends BaseClasses.PartialUnitConversion;
 
-      replaceable function f = U.from_degC "Conversion function" annotation (
-          __Dymola_choicesFromPackage=true);
+      replaceable function f = U.from_degC constrainedby
+        Modelica.SIunits.Conversions.ConversionIcon "Conversion function"
+        annotation (__Dymola_choicesFromPackage=true);
 
     equation
       y = f(u);
@@ -71,7 +68,6 @@ package Blocks "Imperative models (inputs and outputs only)"
     <p>See the documentation in the
     <a href=\"modelica://FCSys.Blocks.UnitConversions\">UnitConversions</a> package.</p>
     </html>"));
-
     end UnitConversion;
 
     package BaseClasses "Base classes (not generally for direct use)"

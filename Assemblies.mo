@@ -1164,20 +1164,17 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
       "Cell model with steady state initial conditions (no reaction)"
 
       extends Cell(
-        anFP(subregions(each graphite('e-'(initMethPartNum=InitMethScalar.None)))),
+        anFP(subregions(each graphite('e-'(initMaterial=InitScalar.None)))),
+        anGDL(subregions(each graphite('e-'(initMaterial=InitScalar.None)))),
+        anCL(subregions(each graphite('e-'(final Ndot_IC=0, final initMaterial=
+                    InitScalar.ReactionRate)), each ionomer('H+'(initMaterial=
+                    InitScalar.None)))),
+        pEM(subregions(each ionomer('H+'(final initMaterial=InitScalar.None)))),
 
-        anGDL(subregions(each graphite('e-'(initMethPartNum=InitMethScalar.None)))),
+        caCL(subregions(each ionomer('H+'(initMaterial=InitScalar.Amount)))),
+        caGDL(subregions(each graphite('e-'(final initMaterial=InitScalar.None)))),
 
-        anCL(subregions(each graphite('e-'(final Ndot_IC=0, final
-                  initMethPartNum=InitMethScalar.ReactionRate)), each ionomer(
-                'H+'(initMethPartNum=InitMethScalar.None)))),
-        pEM(subregions(each ionomer('H+'(final initMethPartNum=InitMethScalar.None)))),
-
-        caCL(subregions(each ionomer('H+'(initMethPartNum=InitMethScalar.Amount)))),
-
-        caGDL(subregions(each graphite('e-'(final initMethPartNum=
-                    InitMethScalar.None)))),
-        caFP(subregions(each graphite('e-'(final initMethPartNum=InitMethScalar.None)))));
+        caFP(subregions(each graphite('e-'(final initMaterial=InitScalar.None)))));
 
     initial equation
       // Equipotential

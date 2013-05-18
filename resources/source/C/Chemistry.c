@@ -114,23 +114,20 @@ static int countElements(const char* formula)
     return n;
 }
 
-static void readElement(const char* formula, int startIndex, char** symbol,
-                        int* coeff, int* z, int* nextIndex)
+static void readElement(const char* formula, char** symbol, int* n, int* z,
+                        char** remainder)
 {
-    // Read the symbol, coefficient, and charge of an element at an index in a
-    // chemical formula.
-    //
-    // Note: startIndex and nextIndex are 1-based indices (Modelica format), but
-    // all other indices are 0-based (C format).
+    // Read the symbol, coefficient, and charge of an element from a chemical
+    // formula.  Also return the remainder of the formula
 
     int i, symbol_length;
 
     // Ignore leading whitespace.
-    int symbol_start = ModelicaStrings_skipWhiteSpace(formula, startIndex) - 1;
+    int symbol_start = ModelicaStrings_skipWhiteSpace(formula, 1) - 1;
 
     // Check that the symbol begins with a letter.
     if (!isalpha(formula[symbol_start])) {
-        *nextIndex = 0; // Error
+        *symbol = ""; // Indicate an error.
         return;
     }
 
@@ -146,10 +143,10 @@ static void readElement(const char* formula, int startIndex, char** symbol,
 
     // Read the coefficient.
     if (formula[i] != '\0' && isdigit(formula[i])) {
-        *coeff = atoi(formula + i); // Continues until nondigit
+        *n = atoi(formula + i); // Continues until nondigit
         while (formula[++i] != '\0' && isdigit(formula[i]));
     } else
-        *coeff = 1;
+        *n = 1;
 
     // Read the charge.
     if (formula[i] != '\0' && (formula[i] == '+' || formula[i] == '-')) {
@@ -164,8 +161,8 @@ static void readElement(const char* formula, int startIndex, char** symbol,
     } else
         *z = 0;
 
-    // Return the index by reference.
-    *nextIndex = i + 1; // Plus one for Modelica format
+    // Return the remainer too.
+    *remainder = &formula[i];
     return;
 }
 

@@ -5,6 +5,7 @@ package FCSys "Modelica library of fuel cell models"
 // the LaTeX document (76 characters, including leading spaces and // )
 // ------------------------------------------------------------------------
 
+
 extends Modelica.Icons.Package;
 // extends FCSys.BaseClasses.Icons.Cell;
 
@@ -18,8 +19,11 @@ import FCSys.BaseClasses.Orientation;
 import FCSys.BaseClasses.Side;
 import FCSys.Characteristics.BaseClasses.Phase;
 import FCSys.Characteristics.BaseClasses.ReferenceEnthalpy;
-import FCSys.Subregions.Species.BaseClasses.InitMethVelocity;
-import FCSys.Subregions.Species.BaseClasses.InitMethScalar;
+import FCSys.Subregions.BaseClasses.InitElectrical;
+import FCSys.Subregions.Species.BaseClasses.Conservation;
+import FCSys.Subregions.Species.BaseClasses.InitScalar;
+import FCSys.Subregions.Species.BaseClasses.InitTranslational;
+
 
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
@@ -41,7 +45,7 @@ package UsersGuide "User's Guide"
         <a href=\"modelica://FCSys\">FCSys</a> should be compatible with any
         modeling environment that supports Modelica 3.1.  The following tools have been tested:
         <ul>
-          <li>Dymola: Supported by versions 7.4 and 2012 FD01.
+          <li>Dymola: Supported by versions 7.4, 2012 FD01, and 2013 FD01.
           Dymola's annotations for parameter dialogs and replaceable choices are included.</li>
           <li>MapleSim: Not supported as of version 4.5</li>
           <li>MWorks: Not supported as of version 2.6.10</li>
@@ -83,13 +87,11 @@ package UsersGuide "User's Guide"
             <li><a href=\"modelica://FCSys.Subregions.Species.Species\">FCSys.Subregions.Species.Species</a> model:
             Details about the exchange, transport, and storage of material, volume, translational momentum, and
             energy</li>
-            <li><a href=\"modelica://FCSys.Subregions.Reaction\">FCSys.Subregions.Reaction</a> model:
-            Summary of the connections for a chemical reaction</li>
             <li>A region or layer model such as <a href=\"modelica://FCSys.Regions.AnFPs.AnFP\">FCSys.Regions.AnFPs.AnFP</a>:
             Information about the geometric orientation of the cell</li>
         </ul>
         In general, overviews are given in the documentation of containing packages and
-        specific information is given at the appropriate level of inheritance.  If a model does not
+        detailed information is given at the appropriate level of inheritance.  If a model does not
         have sufficient documentation, please look at its base model(s) and the package(s) that
         contain it.  Assumptions are only listed at the lowest level of inheritance at which they apply.  Therefore, the
         list of assumptions in a model should be considered in conjunction with the assumptions in all
@@ -105,9 +107,9 @@ package UsersGuide "User's Guide"
         <li>Develop your own classes.  It should be possible to model other electrochemical
         devices (solid oxide fuel cells, lithium ion batteries, flow batteries/regenerative fuel cells, etc.) by
         extending the existing classes and
-        following the existing framework.  It will be necessary to add species (Li<sup>+</sup>, O<sup>2-</sup>, etc.) and reactions with the
-        proper stoichiometries.</li>
-        <li>Please share your additions and/or modifications to the source code so that the library
+        following the existing framework.  It will be necessary to add species models
+        (Li<sup>+</sup>, O<sup>2-</sup>, etc.).</li>
+        <li>Please share your additions or modifications to the source code so that the library
         can be improved and others may benefit.  The best way is to create a fork from the
         development page at <a href=\"https://github.com/kdavies4/FCSys\">https://github.com/kdavies4/FCSys</a>.
         Please also feel free to use the <a href=\"modelica://FCSys.UsersGuide.Contact\">contact information</a>.</li>
@@ -125,19 +127,19 @@ package UsersGuide "User's Guide"
     <ul>
       <li><b>configuration</b>&mdash;a species in a certain phase within a subregion<br>
 
-      <li><b>dynamic compressibility</b>&mdash;reciprocal of the volume, second, or bulk viscosity
-      (see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.beta\">FCSys.Characteristics.BaseClasses.Characteristic.beta</a>)<br>
+      <li><b>dynamic compressibility</b>&mdash;reciprocal of volume, second, or bulk viscosity
+      (see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.beta\">&beta;</a>())<br>
 
       <li><b>exchange</b>&mdash;transfer of a conserved quantity among configurations within a region<br>
 
       <li><b>specific</b>&mdash;adjective that indicates the quotient of the following quantity and its associated particle number<br>
 
       <li><b>thermal independity</b>&mdash;extent to which an exchange of thermal energy between species causes or requires a temperature difference
-      (see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.nu\">FCSys.Characteristics.BaseClasses.Characteristic.nu</a>)<br>
+      (see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.nu\">&nu;</a>())<br>
 
       <li><b>translational Nusselt number</b>&mdash;correction to Newton's law of viscous shear for the shape of the flow profile<br>
 
-      <li><b>transport</b>&mdash;transfer of a conserved quantity between adjacent regions
+      <li><b>transport</b>&mdash;transfer of a conserved quantity between adjacent subregions
     </ul></p>
     </table>
     </html>"));
@@ -942,6 +944,21 @@ printing and shipping costs may be recovered.</p>
   annotation (preferedView="info", DocumentationClass=true);
 
   end UsersGuide;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 annotation (
   uses(Modelica(version="3.2")),
   preferedView="info",
@@ -1247,5 +1264,4 @@ margin-right: auto;\" class=noBorder>
   versionBuild=0,
   dateModified="",
   revisionID="");
-
 end FCSys;

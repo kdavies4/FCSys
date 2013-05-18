@@ -180,7 +180,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           StopTime=20,
           Tolerance=1e-06,
           Algorithm="Dassl"));
-
     end FPToFP;
 
     model GDLToGDL "Test one GDL to the other"
@@ -287,7 +286,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           StopTime=30,
           Tolerance=1e-06,
           Algorithm="Dassl"));
-
     end GDLToGDL;
 
     model CLToCL "Test one catalyst layer to the other"
@@ -382,7 +380,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           StopTime=25,
           Tolerance=1e-06,
           Algorithm="Dassl"));
-
     end CLToCL;
 
     model AnFP "Test the anode flow plate"
@@ -478,7 +475,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
       annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.AnFP.mos"));
-
     end AnFP;
 
     model AnGDL "Test the anode gas diffusion layer"
@@ -546,7 +542,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
       annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.AnGDL.mos"));
-
     end AnGDL;
 
     model AnCL "Test the anode catalyst layer"
@@ -627,7 +622,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           Tolerance=1e-06),
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.AnCL.mos"));
-
     end AnCL;
 
     model PEM "Test the proton exchange membrane"
@@ -682,7 +676,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
       annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.PEM.mos"));
-
     end PEM;
 
     model CaCL "Test the cathode catalyst layer"
@@ -769,7 +762,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
           Algorithm="Dassl"),
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.CaCL.mos"));
-
     end CaCL;
 
     model CaGDL "Test the cathode gas diffusion layer"
@@ -841,7 +833,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
       annotation (experiment(StopTime=10, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.CaGDL.mos"));
-
     end CaGDL;
 
     model CaFP "Test the cathode flow plate"
@@ -943,7 +934,6 @@ package Regions "3D arrays of discrete, interconnected subregions"
       annotation (experiment(StopTime=10, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.CaFP.mos"));
-
     end CaFP;
 
     model AnFPAlone "Test the anode flow plate"
@@ -991,8 +981,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
         inclFacesZ=false,
         redeclare FCSys.Subregions.SubregionNoIonomer subregions[n_x, n_y, n_z]
           (
-          each inclLinX=false,
-          each inclLinY=true,
+          each inclTransX=false,
+          each inclTransY=true,
           each gas(
             inclH2=true,
             inclH2O=true,
@@ -1072,9 +1062,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       //         @ 300K, 0.03531 bar (saturation pressure): 9.09e-6 Pa.s
       //         @ 350K, 0.4163 bar (saturation pressure): 1.109e-5 Pa.s
 
-      outer Conditions.Environment environment "Environmental conditions"
-        annotation (Placement(transformation(extent={{40,40},{60,60}}),
-            iconTransformation(extent={{-10,90},{10,110}})));
+      outer Conditions.Environment environment "Environmental conditions";
       annotation (
         defaultComponentPrefixes="replaceable",
         Documentation(info="<html>
@@ -1248,7 +1236,7 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
         inclFacesZ=false,
         redeclare FCSys.Subregions.SubregionNoIonomer subregions[n_x, n_y, n_z]
           (
-          each inclLinX=false,
+          each inclTransX=false,
           each gas(
             inclH2=true,
             inclH2O=true,
@@ -1302,9 +1290,7 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
       // Teflon: 0.45 W/(m.K) at 400 K [Incropera2002, p. 916]
 
     protected
-      outer Conditions.Environment environment "Environmental conditions"
-        annotation (Placement(transformation(extent={{40,40},{60,60}}),
-            iconTransformation(extent={{-10,90},{10,110}})));
+      outer Conditions.Environment environment "Environmental conditions";
       annotation (
         defaultComponentPrefixes="replaceable",
         Documentation(info="<html>
@@ -1578,7 +1564,7 @@ the z axis extends across the width of the channel.</p></html>"),
         inclFacesY=false,
         inclFacesZ=false,
         redeclare FCSys.Subregions.Subregion subregions[n_x, n_y, n_z](
-          each inclLinX=false,
+          each inclTransX=false,
           each gas(
             inclH2=true,
             inclH2O=true,
@@ -1687,9 +1673,7 @@ the z axis extends across the width of the channel.</p></html>"),
       // (1 - epsilon) is the volume fraction of the conducting solid, and the power of (1 - epsilon)^(3/2) is the area fraction of the conducting solid.
 
     protected
-      outer Conditions.Environment environment "Environmental conditions"
-        annotation (Placement(transformation(extent={{40,40},{60,60}}),
-            iconTransformation(extent={{-10,90},{10,110}})));
+      outer Conditions.Environment environment "Environmental conditions";
       annotation (
         defaultComponentPrefixes="replaceable",
         Documentation(info="<html>
@@ -1832,11 +1816,11 @@ the z axis extends across the width of the channel.</p>
         inclFacesY=false,
         inclFacesZ=false,
         redeclare FCSys.Subregions.SubregionIonomerOnly subregions[n_x, n_y,
-          n_z](each inclLinX=false, each ionomer(
+          n_z](each inclTransX=false, each ionomer(
             'inclC19HF37O5S-'=true,
             'inclH+'=true,
             inclH2O=true,
-            'C19HF37O5S-'(initMethPartNum=InitMethScalar.Pressure, p_IC=0),
+            'C19HF37O5S-'(initMaterial=InitScalar.Pressure, p_IC=0),
             'H+'(xNegative(isobaric=false), xPositive(isobaric=false)),
             H2O(xNegative(isobaric=false), xPositive(isobaric=false)))));
 
@@ -1877,9 +1861,7 @@ the z axis extends across the width of the channel.</p>
       // TODO:  Add proper value of beta for H+.
 
     protected
-      outer Conditions.Environment environment "Environmental conditions"
-        annotation (Placement(transformation(extent={{40,40},{60,60}}),
-            iconTransformation(extent={{-10,90},{10,110}})));
+      outer Conditions.Environment environment "Environmental conditions";
 
     initial equation
       // subregions.gas.H2O.N = subregions.ionomer.'C19HF37O5S-'.N*lambda_IC;
@@ -1971,7 +1953,6 @@ the z axis extends across the width of the channel.</p>
                   textString="%name",
                   visible=not inclFacesY,
                   lineColor={0,0,0})}));
-
     end PEM;
 
     model DuPontN112 "<html>DuPont<sup>TM</sup> Nafion&reg; N-112</html>"
@@ -2081,7 +2062,7 @@ the z axis extends across the width of the channel.</p>
         inclFacesY=false,
         inclFacesZ=false,
         redeclare FCSys.Subregions.Subregion subregions[n_x, n_y, n_z](
-          each inclLinX=false,
+          each inclTransX=false,
           each gas(
             inclH2O=true,
             inclN2=true,
@@ -2124,7 +2105,7 @@ the z axis extends across the width of the channel.</p>
       //
       //
 
-      // initMethPartNum=InitMethScalar.ReactionRate
+      // initMaterial=InitScalar.ReactionRate
 
       // See AnCLs.AnCL for data on additional materials.
 
@@ -2156,9 +2137,7 @@ the z axis extends across the width of the channel.</p>
       final parameter Q.Volume xV=x*V "Gas volume";
 
     protected
-      outer Conditions.Environment environment "Environmental conditions"
-        annotation (Placement(transformation(extent={{40,40},{60,60}}),
-            iconTransformation(extent={{-10,90},{10,110}})));
+      outer Conditions.Environment environment "Environmental conditions";
       annotation (
         defaultComponentPrefixes="replaceable",
         Documentation(info="<html>
@@ -2305,7 +2284,7 @@ the z axis extends across the width of the channel.</p>
         inclFacesZ=false,
         redeclare FCSys.Subregions.SubregionNoIonomer subregions[n_x, n_y, n_z]
           (
-          each inclLinX=false,
+          each inclTransX=false,
           each gas(
             inclH2O=true,
             inclN2=true,
@@ -2358,9 +2337,7 @@ the z axis extends across the width of the channel.</p>
       // See AnGDLs.AnGDL for additional notes and data.
 
     protected
-      outer Conditions.Environment environment "Environmental conditions"
-        annotation (Placement(transformation(extent={{40,40},{60,60}}),
-            iconTransformation(extent={{-10,90},{10,110}})));
+      outer Conditions.Environment environment "Environmental conditions";
       annotation (
         defaultComponentPrefixes="replaceable",
         Documentation(info="<html>
@@ -2639,8 +2616,8 @@ the z axis extends across the width of the channel.</p>
         inclFacesZ=false,
         redeclare FCSys.Subregions.SubregionNoIonomer subregions[n_x, n_y, n_z]
           (
-          each inclLinX=false,
-          each inclLinY=true,
+          each inclTransX=false,
+          each inclTransY=true,
           each gas(
             inclH2O=true,
             inclN2=true,
@@ -2730,9 +2707,7 @@ the z axis extends across the width of the channel.</p>
       // See AnFPs.AnFP for data on additional materials.
 
     protected
-      outer Conditions.Environment environment "Environmental conditions"
-        annotation (Placement(transformation(extent={{40,40},{60,60}}),
-            iconTransformation(extent={{-10,90},{10,110}})));
+      outer Conditions.Environment environment "Environmental conditions";
       annotation (
         defaultComponentPrefixes="replaceable",
         Documentation(info="<html>
@@ -3052,7 +3027,6 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
               textString="%name",
               visible=not inclFacesY,
               lineColor={0,0,0})}));
-
   end Region;
   annotation (Documentation(info="<html>
 <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>

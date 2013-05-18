@@ -7,7 +7,7 @@ package Quantities "Quantities to represent physical properties"
       extends Modelica.Icons.Example;
 
       ExampleModel doubleClickMe annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
+            extent={{-20,-10},{20,10}},
             rotation=0,
             origin={0,0})));
       annotation (Diagram(graphics));
@@ -26,8 +26,6 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.Area Area=1*U.m^2 "Area";
       parameter Q.AreaSpecific AreaSpecific=1*U.m^2/U.C "Specific area";
       parameter Q.Capacitance Capacitance=1*U.F "Capacitance";
-      parameter Q.CompressibilityDynamic CompressibilityDynamic=1*U.mol/(U.J*U.s)
-        "Dynamic compressibility";
       parameter Q.ConductanceElectrical ConductanceElectrical=1*U.S
         "Electrical conductance";
       parameter Q.Current Current=1*U.A "Current";
@@ -97,6 +95,9 @@ package Quantities "Quantities to represent physical properties"
         "Rate of specific volume";
       parameter Q.Wavenumber Wavenumber=1*U.rad/U.m "Wavenumber";
 
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+                -100,-100},{100,100}})), Icon(coordinateSystem(
+              preserveAspectRatio=false, extent={{-100,-100},{100,100}})));
     end ExampleModel;
 
   end Examples;
@@ -116,8 +117,6 @@ package Quantities "Quantities to represent physical properties"
   type AreaSpecific = Modelica.Icons.TypeReal (final unit="l2/N", min=0)
     "Specific area";
   type Capacitance = Modelica.Icons.TypeReal (final unit="N2.T2/(l2.m)", min=0);
-  type CompressibilityDynamic = Modelica.Icons.TypeReal (final unit=
-          "N.T/(l2.m)", min=0) "Dynamic compressibility";
   type ConductanceElectrical = Modelica.Icons.TypeReal (final unit=
           "N2.T/(l2.m)", min=0) "Electrical conductance";
   type Current = Modelica.Icons.TypeReal (final unit="N/T");
@@ -149,6 +148,8 @@ package Quantities "Quantities to represent physical properties"
   type Mobility = Modelica.Icons.TypeReal (final unit="N.T/m", min=0);
   type MomentumRotational = Modelica.Icons.TypeReal (final unit="l2.m/(A.T)")
     "Rotational momentum";
+  type MomentumTranslationalSpecific = Modelica.Icons.TypeReal (final unit=
+          "l.m/(N.T)") "Specific translational momentum";
   type Number = Modelica.Icons.TypeReal (final unit="1");
   type NumberAbsolute = Modelica.Icons.TypeReal (final unit="1", min=0)
     "Absolute number";
