@@ -890,7 +890,7 @@ package Tests "Models and functions for test and validation"
 
         equation
           y1 = Data.v_Tp(T, p);
-          der(y2) = Data.dv_Tp(
+          der(y2) = FCSys.Characteristics.BaseClasses.Characteristic.dv_Tp(
                     T,
                     p,
                     der(T),

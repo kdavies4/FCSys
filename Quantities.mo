@@ -17,14 +17,14 @@ package Quantities "Quantities to represent physical properties"
     model ExampleModel "Model that uses all of the quantities"
       extends FCSys.BaseClasses.Icons.Blocks.Continuous;
 
-      // Generated from FCSys/resources/quantities.xls, 2013-3-26
+      // Generated from FCSys/resources/quantities.xls, 2013-5-17
       parameter Q.Acceleration Acceleration=1*U.m/U.s^2 "Acceleration";
       parameter Q.Amount Amount=1*U.C "Amount";
       parameter Q.AmountReciprocal AmountReciprocal=1/U.C "Reciprocal amount";
-      parameter Q.Density Density=1*U.C/U.m^3 "Volumic amount";
       parameter Q.Angle Angle=1*U.rad "Angle";
       parameter Q.Angle2 Angle2=1*U.sr "Solid angle";
       parameter Q.Area Area=1*U.m^2 "Area";
+      parameter Q.AreaSpecific AreaSpecific=1*U.m^2/U.C "Specific area";
       parameter Q.Capacitance Capacitance=1*U.F "Capacitance";
       parameter Q.CompressibilityDynamic CompressibilityDynamic=1*U.mol/(U.J*U.s)
         "Dynamic compressibility";
@@ -34,6 +34,8 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.CurrentAbsolute CurrentAbsolute=1*U.A "Absolute current";
       parameter Q.CurrentAreic CurrentAreic=1*U.A/U.m^2 "Areic current";
       parameter Q.CurrentRate CurrentRate=1*U.A/U.s "Rate of current";
+      parameter Q.Density Density=1*U.C/U.m^3 "Density";
+      parameter Q.DensityRate DensityRate=1*U.C/(U.m^3*U.s) "DensityRate";
       parameter Q.Energy Energy=1*U.J "Energy";
       parameter Q.Fluidity Fluidity=1/(U.Pa*U.s) "Fluidity";
       parameter Q.Force Force=1*U.N "Force";
@@ -48,6 +50,7 @@ package Quantities "Quantities to represent physical properties"
         "Reciprocal magnetic flux";
       parameter Q.Mass Mass=1*U.kg "Mass";
       parameter Q.MassSpecific MassSpecific=1*U.micro*U.g/U.C "Specific mass";
+      parameter Q.Mobility Mobility=1*U.C*U.s/U.g "Mobility";
       parameter Q.MomentumRotational MomentumRotational=1*U.J*U.s/U.rad
         "Rotational momentum";
       parameter Q.Number Number=1 "Number";
@@ -73,13 +76,18 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.PressureAbsolute PressureAbsolute=1*U.Pa "Absolute pressure";
       parameter Q.PressureRate PressureRate=1*U.Pa/U.s "Rate of pressure";
       parameter Q.PressureReciprocal PressureReciprocal=1/U.Pa
-        "Reciprocal of pressure";
+        "Reciprocal pressure";
       parameter Q.ResistanceElectrical ResistanceElectrical=1*U.ohm
         "Electrical resistance";
       parameter Q.Resistivity Resistivity=1*U.m/U.A "Resistivity";
+      parameter Q.ResistivityMaterial ResistivityMaterial=1*U.s/U.m^2
+        "Material resistivity";
       parameter Q.Time Time=1*U.s "Time";
+      parameter Q.TimeAbsolute TimeAbsolute=1*U.s "TimeAbsolute";
       parameter Q.Velocity Velocity=1*U.m/U.s "Velocity";
       parameter Q.Velocity2 Velocity2=1*U.Sv "Squared velocity";
+      parameter Q.VelocityReciprocal VelocityReciprocal=1*U.s/U.m
+        "Reciprocal velocity";
       parameter Q.Volume Volume=1*U.m^3 "Volume";
       parameter Q.VolumeRate VolumeRate=1*U.m^3/U.s "Rate of volume";
       parameter Q.VolumeSpecific VolumeSpecific=1*U.m^3/U.C "Specific volume";
@@ -96,7 +104,8 @@ package Quantities "Quantities to represent physical properties"
   extends Modelica.Icons.Package;
   import Modelica.Icons.TypeReal;
 
-  // Generated from FCSys/resources/quantities.xls, 2013-5-10
+  // Generated from FCSys/resources/quantities.xls, 2013-5-17
+
   type Acceleration = Modelica.Icons.TypeReal (final unit="l/T2");
   type Amount = Modelica.Icons.TypeReal (final unit="N", min=0);
   type AmountReciprocal = Modelica.Icons.TypeReal (final unit="1/N", min=0)
@@ -104,6 +113,8 @@ package Quantities "Quantities to represent physical properties"
   type Angle = Modelica.Icons.TypeReal (final unit="A");
   type Angle2 = Modelica.Icons.TypeReal (final unit="A2") "Solid angle";
   type Area = Modelica.Icons.TypeReal (final unit="l2", min=0);
+  type AreaSpecific = Modelica.Icons.TypeReal (final unit="l2/N", min=0)
+    "Specific area";
   type Capacitance = Modelica.Icons.TypeReal (final unit="N2.T2/(l2.m)", min=0);
   type CompressibilityDynamic = Modelica.Icons.TypeReal (final unit=
           "N.T/(l2.m)", min=0) "Dynamic compressibility";
@@ -119,8 +130,7 @@ package Quantities "Quantities to represent physical properties"
   type Density = Modelica.Icons.TypeReal (final unit="N/l3", min=0);
   type DensityRate = Modelica.Icons.TypeReal (final unit="N/(l3.T)");
   type Energy = Modelica.Icons.TypeReal (final unit="l2.m/T2");
-  type Fluidity = Modelica.Icons.TypeReal (final unit="l.T/m", min=0)
-    "Fluidity";
+  type Fluidity = Modelica.Icons.TypeReal (final unit="l.T/m", min=0);
   type Force = Modelica.Icons.TypeReal (final unit="l.m/T2");
   type Frequency = Modelica.Icons.TypeReal (final unit="A/T");
   type Inductance = Modelica.Icons.TypeReal (final unit="l2.m/N2", min=0);
@@ -167,7 +177,7 @@ package Quantities "Quantities to represent physical properties"
   type PressureRate = Modelica.Icons.TypeReal (final unit="m/(l.T3)")
     "Rate of pressure";
   type PressureReciprocal = Modelica.Icons.TypeReal (final unit="l.T2/m", min=0)
-    "Reciprocal of pressure";
+    "Reciprocal pressure";
   type ResistanceElectrical = Modelica.Icons.TypeReal (final unit="l2.m/(N2.T)",
         min=0) "Electrical resistance";
   type Resistivity = Modelica.Icons.TypeReal (final unit="l.T/N", min=0);
@@ -178,6 +188,8 @@ package Quantities "Quantities to represent physical properties"
   type Velocity = Modelica.Icons.TypeReal (final unit="l/T");
   type Velocity2 = Modelica.Icons.TypeReal (final unit="l2/T2")
     "Squared velocity";
+  type VelocityReciprocal = Modelica.Icons.TypeReal (final unit="T/l")
+    "Reciprocal velocity";
   type Volume = Modelica.Icons.TypeReal (final unit="l3", min=0);
   type VolumeRate = Modelica.Icons.TypeReal (final unit="l3/T")
     "Rate of volume";

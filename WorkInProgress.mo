@@ -7359,7 +7359,7 @@ public
     output Q.PressureReciprocal beta_T "Isothermal compressibility";
 
   algorithm
-    beta_T := -Characteristics.BaseClasses.Characteristic.dv_Tp(
+    beta_T := -FCSys.Characteristics.BaseClasses.Characteristic.dv_Tp(
         T=T,
         p=p,
         dT=0,

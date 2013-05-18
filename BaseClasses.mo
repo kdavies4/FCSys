@@ -68,7 +68,6 @@ package BaseClasses "Base classes (not generally for direct use)"
       "Icons labeled with the name of the class at various positions"
       extends Modelica.Icons.Package;
       partial class Top12
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                       extent={{-100,240},{100,280}},
@@ -82,7 +81,6 @@ package BaseClasses "Base classes (not generally for direct use)"
       end Top12;
 
       partial class Top11
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                       extent={{-100,220},{100,260}},
@@ -96,7 +94,6 @@ package BaseClasses "Base classes (not generally for direct use)"
       end Top11;
 
       partial class Top10
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                       extent={{-100,200},{100,240}},
@@ -110,7 +107,6 @@ package BaseClasses "Base classes (not generally for direct use)"
       end Top10;
 
       partial class Top9
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                       extent={{-100,180},{100,220}},
@@ -124,7 +120,6 @@ package BaseClasses "Base classes (not generally for direct use)"
       end Top9;
 
       partial class Top8
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                       extent={{-100,160},{100,200}},
@@ -138,7 +133,6 @@ package BaseClasses "Base classes (not generally for direct use)"
       end Top8;
 
       partial class Top7
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                       extent={{-100,140},{100,180}},
@@ -152,7 +146,6 @@ package BaseClasses "Base classes (not generally for direct use)"
       end Top7;
 
       partial class Top6
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                       extent={{-100,120},{100,160}},
@@ -166,7 +159,6 @@ package BaseClasses "Base classes (not generally for direct use)"
       end Top6;
 
       partial class Top5
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                       extent={{-100,100},{100,140}},
@@ -180,7 +172,6 @@ package BaseClasses "Base classes (not generally for direct use)"
       end Top5;
 
       partial class Top4
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                 extent={{-100,80},{100,120}},
@@ -194,7 +185,6 @@ package BaseClasses "Base classes (not generally for direct use)"
       end Top4;
 
       partial class Top3
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                 extent={{-100,60},{100,100}},
@@ -208,7 +198,6 @@ package BaseClasses "Base classes (not generally for direct use)"
       end Top3;
 
       partial class Top2
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                 extent={{-100,40},{100,80}},
@@ -222,7 +211,6 @@ package BaseClasses "Base classes (not generally for direct use)"
       end Top2;
 
       partial class Top1
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                       extent={{-100,20},{100,60}},
@@ -236,7 +224,6 @@ package BaseClasses "Base classes (not generally for direct use)"
       end Top1;
 
       partial class Middle
-
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
                       extent={{-100,-20},{100,20}},
@@ -546,6 +533,7 @@ package BaseClasses "Base classes (not generally for direct use)"
   <p><b>Example:</b><br>
   <code>(symbols, coeffs) = elements(\"C19HF37O5S-\")</code> returns
   <code>symbols={\"C\", \"H\", \"F\", \"O\", \"S\", \"e-\"}</code> and <code>coeffs={19, 1, 37, 5, 1, 1}</code>.</p></html>"));
+
       end elements;
 
       function readElement
@@ -682,6 +670,7 @@ An unrelated species may be included.");
   <code>stoich({\"e-\",\"H+\",\"O2\",\"H2O\"})</code> returns <code>{-4,-4,-1,2}</code>,
   which indicates the reaction 4e<sup>-</sup> + 4H<sup>+</sup> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O.</p>
   </html>"));
+
       end stoich;
 
     end Chemistry;
@@ -711,6 +700,7 @@ An unrelated species may be included.");
   (with <code>a</code> constant)
   is <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.f\">f</a>().  The complete derivative,
   however, is <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.dF\">dF</a>().</p></html>"));
+
       end F;
 
       function dF
@@ -793,6 +783,7 @@ An unrelated species may be included.");
 
   <p>The derivative of this function is
   <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.df\">df</a>().</p></html>"));
+
       end f;
 
       function df
@@ -818,6 +809,7 @@ An unrelated species may be included.");
         annotation (Documentation(info="<html>
 <p>The derivative of this function is
   <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.d2f\">d2f</a>().</p></html>"));
+
       end df;
 
       function d2f
@@ -875,6 +867,7 @@ An unrelated species may be included.");
         annotation (Inline=true);
       annotation (Documentation(info="<html><p><b>Example:</b><br>
     <code>countTrue({true,false,true})</code> returns 2.</p></html>"));
+
     end countTrue;
 
     function Delta
@@ -913,6 +906,7 @@ An unrelated species may be included.");
       end for;
       annotation (Inline=true,Documentation(info="<html><p><b>Example:</b><br>
   <code>enumerate({true,false,true})</code> returns <code>{1,0,2}</code>.</p></html>"));
+
     end enumerate;
 
     function index
@@ -938,6 +932,7 @@ An unrelated species may be included.");
 
 <p><b>Example:</b><br>
   <code>index({true,false,true})</code> returns <code>{1,3}</code>.</html>"));
+
     end index;
 
     function inSign
@@ -953,6 +948,7 @@ An unrelated species may be included.");
   <code>inSign(FCSys.BaseClasses.Side.n)</code> returns 1 and
   <code>inSign(FCSys.BaseClasses.Side.p)</code> returns -1.
   </html>"));
+
     end inSign;
 
     function mod1
@@ -983,6 +979,7 @@ An unrelated species may be included.");
       y := integer(u + 0.5) annotation (Inline=true);
       annotation (Documentation(info="<html><p><b>Example:</b><br>
   <code>round(1.6)</code> returns 2 as an <code>Integer</code>.</p></html>"));
+
     end round;
 
     function Sigma

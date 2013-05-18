@@ -81,6 +81,7 @@ package Figures "Graphical layouts for documentation"
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
                   ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
+
         end Test_vi;
 
         model Test_iv
@@ -112,9 +113,9 @@ package Figures "Graphical layouts for documentation"
               points={{-1,-40},{-10,-40},{-10,6.10623e-16},{-19,6.10623e-16}},
               color={0,0,127},
               smooth=Smooth.None));
-
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
                   ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
+
         end Test_iv;
 
         model Declarative
@@ -169,6 +170,7 @@ package Figures "Graphical layouts for documentation"
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
                   ={{-80,-60},{80,60}}), graphics));
+
         end Declarative;
 
       end Examples;
@@ -271,6 +273,7 @@ package Figures "Graphical layouts for documentation"
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-80,-60},{80,60}}), graphics));
+
       end Declarative_vi;
 
       model Declarative_iv
@@ -370,6 +373,7 @@ package Figures "Graphical layouts for documentation"
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics), Diagram(coordinateSystem(
                 preserveAspectRatio=true, extent={{-80,-60},{80,60}}), graphics));
+
       end Declarative_iv;
 
       model Imperative_vi "Imperative circuit with voltage in, current out"
@@ -463,6 +467,7 @@ package Figures "Graphical layouts for documentation"
                       points={{62,68},{70,68}},
                       color={0,200,0},
                       smooth=Smooth.None)}));
+
       end Imperative_vi;
 
       model Imperative_iv "Imperative circuit with current in, voltage out"
@@ -554,6 +559,7 @@ package Figures "Graphical layouts for documentation"
                       points={{60,50},{68,50}},
                       color={0,200,0},
                       smooth=Smooth.None)}));
+
       end Imperative_iv;
 
       model ImperativeTF_vi
@@ -581,6 +587,7 @@ package Figures "Graphical layouts for documentation"
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-100,-100},{100,100}}), graphics));
+
       end ImperativeTF_vi;
 
       model ImperativeTF_iv
@@ -610,6 +617,7 @@ package Figures "Graphical layouts for documentation"
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-100,-100},{100,100}}), graphics));
+
       end ImperativeTF_iv;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -666,9 +674,9 @@ package Figures "Graphical layouts for documentation"
               points={{-1,-20},{-10,-20},{-10,6.10623e-16},{-19,6.10623e-16}},
               color={0,0,127},
               smooth=Smooth.None));
-
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
                   ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
+
         end Test;
 
       end Examples;
@@ -742,6 +750,7 @@ package Figures "Graphical layouts for documentation"
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-100,-60},{100,60}}), graphics));
+
       end DeclarativeA;
 
       model DeclarativeB "First circuit in declarative formalism"
@@ -812,6 +821,7 @@ package Figures "Graphical layouts for documentation"
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-100,-60},{100,60}}), graphics));
+
       end DeclarativeB;
 
       model DeclarativeAB
@@ -907,6 +917,7 @@ package Figures "Graphical layouts for documentation"
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-100,-60},{100,60}}), graphics));
+
       end DeclarativeAB;
 
       model ImperativeA "First circuit in imperative formalism"
@@ -974,6 +985,7 @@ package Figures "Graphical layouts for documentation"
                       smooth=Smooth.None)}), Icon(coordinateSystem(
                 preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
               graphics));
+
       end ImperativeA;
 
       model ImperativeB "Second circuit in imperative formalism"
@@ -1046,6 +1058,7 @@ package Figures "Graphical layouts for documentation"
                       smooth=Smooth.None)}), Icon(coordinateSystem(
                 preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
               graphics));
+
       end ImperativeB;
 
       model ImperativeAB
@@ -1120,7 +1133,6 @@ package Figures "Graphical layouts for documentation"
             points={{-62,-46},{-70,-46},{-70,-60},{70,-60},{70,-40},{61,-40}},
             color={200,0,0},
             smooth=Smooth.None));
-
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-120,-80},{120,80}}), graphics={Rectangle(
                       extent={{-15,7},{15,-7}},
@@ -1141,6 +1153,7 @@ package Figures "Graphical layouts for documentation"
                       points={{84,-70},{90,-70}},
                       color={0,200,0},
                       smooth=Smooth.None)}));
+
       end ImperativeAB;
 
       model ImperativeABIncorrect
@@ -1237,6 +1250,7 @@ package Figures "Graphical layouts for documentation"
                       points={{124,24},{130,24}},
                       color={0,200,0},
                       smooth=Smooth.None)}));
+
       end ImperativeABIncorrect;
 
       model ImperativeABTF
@@ -1264,6 +1278,7 @@ package Figures "Graphical layouts for documentation"
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-120,-80},{120,80}}), graphics));
+
       end ImperativeABTF;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -1485,6 +1500,7 @@ package Figures "Graphical layouts for documentation"
         smooth=Smooth.None,
         thickness=0.5));
     annotation (Diagram(graphics));
+
   end Matrix3D;
 
   model SubregionIcon

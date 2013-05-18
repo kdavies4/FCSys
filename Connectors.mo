@@ -77,7 +77,6 @@ package Connectors "Declarative and imperative connectors"
     // Thermal advection
     Q.PotentialAbsolute Ts(nominal=U.V) "Temperature-specific entropy product";
     flow Q.Power Qdot(nominal=U.W) "Rate of thermal advection";
-
     annotation (
       Documentation(info="<html><p>See the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
@@ -97,7 +96,6 @@ package Connectors "Declarative and imperative connectors"
 
   expandable connector FaceBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors (for multiple configurations)</html>"
-
     annotation (
       defaultComponentName="face",
       Documentation(info="<html><p>There is no minimal set of variables.  Species are included by connecting instances
@@ -137,7 +135,7 @@ package Connectors "Declarative and imperative connectors"
     // Thermal diffusion
     extends ThermalDiffusion;
     annotation (
-      Documentation(info="<html><p>This connector applies to a single species in a single phase.  
+      Documentation(info="<html><p>This connector applies to a single species in a single phase.
     For multiple species or phases, use the <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>
     connector.  For more information, see the documentation in the
     <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
@@ -516,7 +514,6 @@ package Connectors "Declarative and imperative connectors"
 </html>"));
   expandable connector RealInputBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.RealInput\">RealInput</a> connectors</html>"
-
     annotation (
       defaultComponentName="u",
       Documentation(info="<html><p>There is no minimal set of variables.
@@ -551,7 +548,6 @@ package Connectors "Declarative and imperative connectors"
 
   expandable connector RealInputBusInternal
     "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.RealInput\">RealInput</a> connectors</html>"
-
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="u",
@@ -639,7 +635,6 @@ package Connectors "Declarative and imperative connectors"
 </html>"));
   expandable connector RealOutputBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.RealOutput\">RealOutput</a> connectors</html>"
-
     annotation (
       defaultComponentName="y",
       Documentation(info="<html><p>There is no minimal set of variables.
@@ -672,7 +667,6 @@ package Connectors "Declarative and imperative connectors"
 
   expandable connector RealOutputBusInternal
     "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.RealOutput\">RealOutput</a> connectors</html>"
-
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="y",
@@ -708,8 +702,8 @@ package Connectors "Declarative and imperative connectors"
   The chemical connectors (<a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a>,
   <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a>, and
   <a href=\"modelica://FCSys.Connectors.ChemicalBusInternal\">ChemicalBusInternal</a>)
-  represent advective exchange among configurations (i.e., species in a particular phase) that 
-  react chemically or by phase change 
+  represent advective exchange among configurations (i.e., species in a particular phase) that
+  react chemically or by phase change
   within a subregion.  The inert connectors
   (<a href=\"modelica://FCSys.Connectors.Inert\">Inert</a>,
   <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a>,

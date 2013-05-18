@@ -180,6 +180,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           StopTime=20,
           Tolerance=1e-06,
           Algorithm="Dassl"));
+
     end FPToFP;
 
     model GDLToGDL "Test one GDL to the other"
@@ -286,6 +287,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           StopTime=30,
           Tolerance=1e-06,
           Algorithm="Dassl"));
+
     end GDLToGDL;
 
     model CLToCL "Test one catalyst layer to the other"
@@ -380,6 +382,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           StopTime=25,
           Tolerance=1e-06,
           Algorithm="Dassl"));
+
     end CLToCL;
 
     model AnFP "Test the anode flow plate"
@@ -475,6 +478,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.AnFP.mos"));
+
     end AnFP;
 
     model AnGDL "Test the anode gas diffusion layer"
@@ -542,6 +546,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.AnGDL.mos"));
+
     end AnGDL;
 
     model AnCL "Test the anode catalyst layer"
@@ -622,6 +627,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           Tolerance=1e-06),
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.AnCL.mos"));
+
     end AnCL;
 
     model PEM "Test the proton exchange membrane"
@@ -676,6 +682,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       annotation (experiment(Tolerance=1e-06, StopTime=10), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.PEM.mos"));
+
     end PEM;
 
     model CaCL "Test the cathode catalyst layer"
@@ -762,6 +769,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
           Algorithm="Dassl"),
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.CaCL.mos"));
+
     end CaCL;
 
     model CaGDL "Test the cathode gas diffusion layer"
@@ -833,6 +841,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       annotation (experiment(StopTime=10, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.CaGDL.mos"));
+
     end CaGDL;
 
     model CaFP "Test the cathode flow plate"
@@ -934,6 +943,7 @@ package Regions "3D arrays of discrete, interconnected subregions"
       annotation (experiment(StopTime=10, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Regions.Examples.CaFP.mos"));
+
     end CaFP;
 
     model AnFPAlone "Test the anode flow plate"
@@ -1961,6 +1971,7 @@ the z axis extends across the width of the channel.</p>
                   textString="%name",
                   visible=not inclFacesY,
                   lineColor={0,0,0})}));
+
     end PEM;
 
     model DuPontN112 "<html>DuPont<sup>TM</sup> Nafion&reg; N-112</html>"
@@ -3041,6 +3052,7 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
               textString="%name",
               visible=not inclFacesY,
               lineColor={0,0,0})}));
+
   end Region;
   annotation (Documentation(info="<html>
 <p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>

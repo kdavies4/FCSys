@@ -192,7 +192,7 @@ package Characteristics
 
       extends BaseClasses.Characteristic(
         final formula="C+",
-        final phase="graphite",
+        final phase=Phase.solid,
         p0=U.atm,
         specVolPow={0,0},
         b_v=[U.cc*m/(2.2210*U.g)],
@@ -208,7 +208,7 @@ package Characteristics
              - i) for i in 1:7}, size(T_lim_c, 1) - 1),
         B_c=[8.943859760e3*U.K, -7.295824740e1; 1.398412456e4*U.K, -4.477183040e1;
             5.848134850e3, -2.350925275e1] - b_c[:, 2:3]*log(U.K),
-        r=170*U.pico*U.m/U.q);
+        d=340*U.pico*U.m/U.q);
       annotation (Documentation(info="<html>
 
      <p>Assumptions:
@@ -259,7 +259,7 @@ package Characteristics
         T_lim_c={0,Modelica.Constants.inf},
         b_c=[4188*U.J*m/(U.kg*U.K)],
         B_c=[-298.15*U.K*b_c[1, 1] + Deltah0_f, 0],
-        r=(147 + 2259.8/2)*U.pico*U.m/U.q);
+        d=(294 + 2259.8)*U.pico*U.m/U.q);
       annotation (Documentation(info="<html>
        <p>Assumptions:
      <ol>
@@ -318,7 +318,8 @@ package Characteristics
             size(T_lim_c, 1) - 1),
         B_c={Data.blow} .* fill({U.K,1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*
             log(U.K),
-        r=U.k_A/m);
+        d=2*U.k_A/m);
+
       annotation (Documentation(info="<html>
      <p>Notes:
      <ul>
@@ -355,7 +356,7 @@ package Characteristics
 
     package Graphite "e- in graphite"
       extends Gas(
-        final phase="graphite",
+        final phase=Phase.solid,
         specVolPow='C+'.Graphite.specVolPow,
         b_v='C+'.Graphite.b_v);
       annotation (Documentation(info="<html>
@@ -391,7 +392,8 @@ package Characteristics
             size(T_lim_c, 1) - 1),
         B_c={Data.blow} .* fill({U.K,1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*
             log(U.K),
-        r=120*U.pico*U.m/U.q);
+        d=240*U.pico*U.m/U.q);
+
       annotation (Documentation(info="<html>
          <p>Assumptions:
      <ol>
@@ -461,7 +463,7 @@ package Characteristics
              - i) for i in 1:size(Data.alow, 1)}, size(T_lim_c, 1) - 1),
         B_c={Data.blow,Data.bhigh,{2.488433516e6,-669.5728110}} .* fill({U.K,1},
             size(T_lim_c, 1) - 1) - b_c[:, 2:3]*log(U.K),
-        r=(120 + 100.3/2)*U.pico*U.m/U.q,
+        d=(240 + 100.3)*U.pico*U.m/U.q,
         T_lim_zeta_theta={200.0,1000.0,5000.0,15000.0}*U.K,
         b_zeta={fromNASAViscosity({0.74553182,43.555109,-3.2579340e3,0.13556243}),
             fromNASAViscosity({0.96730605,679.31897,-2.1025179e5,-1.8251697}),
@@ -510,7 +512,7 @@ package Characteristics
             1)}, size(T_lim_c, 1) - 1),
         B_c={Data.blow,Data.bhigh} .* fill({U.K,1}, size(T_lim_c, 1) - 1) - b_c[
             :, 2:3]*log(U.K),
-        r=(282/2)*U.pico*U.m/U.q,
+        d=282*U.pico*U.m/U.q,
         T_lim_zeta_theta={373.2,1073.2,5000.0,15000.0}*U.K,
         b_zeta={fromNASAViscosity({0.50019557,-697.12796,8.8163892e4,3.0836508}),
             fromNASAViscosity({0.58988538,-537.69814,5.4263513e4,2.3386375}),
@@ -571,7 +573,7 @@ package Characteristics
              - 1),
         B_c=[1.101760476e8*U.K, -9.779700970e5; 8.113176880e7*U.K, -5.134418080e5]
              - b_c[:, 2:3]*log(U.K),
-        r=(282/2)*U.pico*U.m/U.q);
+        d=282*U.pico*U.m/U.q);
       annotation (Documentation(info="<html>     <p>Assumptions:
      <ol>
      <li>Constant specific volume (i.e., incompressible and without
@@ -612,7 +614,7 @@ package Characteristics
              - i) for i in 1:size(Data.alow, 1)}, size(T_lim_c, 1) - 1),
         B_c={Data.blow,Data.bhigh,{4.938707040e6,-1.672099740e3}} .* fill({U.K,
             1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*log(U.K),
-        r=(155 + 145.2/2)*U.pico*U.m/U.q,
+        d=(310 + 145.2)*U.pico*U.m/U.q,
         T_lim_zeta_theta={200.0,1000.0,5000.0,15000.0}*U.K,
         b_zeta={fromNASAViscosity({0.62526577,-31.779652,-1.6407983e3,1.7454992}),
             fromNASAViscosity({0.87395209,561.52222,-1.7394809e5,-0.39335958}),
@@ -663,7 +665,7 @@ package Characteristics
              - i) for i in 1:size(Data.alow, 1)}, size(T_lim_c, 1) - 1),
         B_c={Data.blow,Data.bhigh,{2.293554027e6,-5.530621610e2}} .* fill({U.K,
             1}, size(T_lim_c, 1) - 1) - b_c[:, 2:3]*log(U.K),
-        r=(152 + 128.2/2)*U.pico*U.m/U.q,
+        d=(304 + 128.2)*U.pico*U.m/U.q,
         T_lim_zeta_theta={200.0,1000.0,5000.0,15000.0}*U.K,
         b_zeta={fromNASAViscosity({0.60916180,-52.244847,-599.74009,2.0410801}),
             fromNASAViscosity({0.72216486,175.50839,-5.7974816e4,1.0901044}),
@@ -737,8 +739,8 @@ package Characteristics
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=U.atm "Pressure";
-        // Note:  Pressure isn't used here but is included for generality.
+        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
+        // Note:  Specific volume isn't used here but is included for generality.
         output Q.Fluidity zeta "Fluidity";
 
       algorithm
@@ -764,18 +766,19 @@ package Characteristics
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p>
 
-  <p>For more information, see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.zeta\">Characteristic.zeta</a>().</p>
+  <p>Although specific volume is an input to this function, the result is independent of
+  specific volume.</p>
   </html>"));
       end zeta;
 
       redeclare function theta
-        "<html>Thermal resistivity (&theta;) as a function of temperature and pressure</html>"
+        "<html>Thermal resistivity (&theta;) as a function of temperature</html>"
         import Modelica.Math.log;
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=U.atm "Pressure";
-        // Note:  Pressure isn't used here but is included for generality.
+        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
+        // Note:  Specific volume isn't used here but is included for generality.
         output Q.ResistivityThermal theta "Thermal resistivity";
 
       algorithm
@@ -801,8 +804,9 @@ package Characteristics
         annotation (Documentation(info="<html><p>This function is based on based on NASA CEA
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>, <a href=\"modelica://FCSys.UsersGuide.References\">Svehla1995</a>]</p>
 
-    <p>For more information, see <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.theta\">Characteristic.theta</a>().</p>
-    </html>"));
+  <p>Although specific volume is an input to this function, the result is independent of
+  specific volume.</p>
+  </html>"));
       end theta;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html><p>The correlations for transport properties are available in
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>,
@@ -871,55 +875,32 @@ package Characteristics
         "Coefficients of p as a polynomial in v and T";
       // Note:  This is from [Dymond2002, p. 2].  If necessary, additional terms
       // can be computed using FCSys/resources/virial-relations.cdf.
+      constant Q.VelocityReciprocal alpha=3*sqrt(U.pi)*d^2*U.q/2
+        "<html>Scaled specific intercept area (&alpha;)</html>";
 
-      partial function alpha
-        "<html>Base transport coefficient as a function of temperature (&alpha;)</html>"
+      function omega
+        "<html>Rescaled reciprocal of thermal speed (&omega; = &pi;&middot;sqrt(<i>m</i>/<i>T</i>)) as a function of temperature</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        output Q.Resistivity alpha "Base transport coefficient";
+        output Q.VelocityReciprocal omega
+          "Rescaled reciprocal of thermal speed";
 
       algorithm
-        alpha := 3*U.pi*d^2*U.q*sqrt(U.pi*m/T)/2 annotation (Inline=true);
+        omega := U.pi*sqrt(m/T) annotation (Inline=true);
         annotation (Documentation(info="<html>
-  <p>This function is independent of pressure or specific volume.  It is based on the kinetic theory of gases
-  under the following assumptions [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
-  <ol>
-    <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the \"billiard-ball\"
-    assumption, and it implies among other things that the collisions are instantaneous and conserve kinetic
-    energy.</li>
-    <li>Between collisions particles have no influence on one another.</li>
-    <li>The mean free path, or average distance a particle travels between collisions, is much larger than the
-    diameter of a particle.</li>
-    <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
-    <li> The spatial distributions of properties are first-order.</li>
-  </ol></p>
+  <p>This function outputs the quotient of &pi; and the root mean square of the thermal 
+  velocity in one dimension, assuming the speeds of the particles follow the 
+  Maxwell-Boltzmann distribution.  In combination with &alpha;, this refactorization is 
+  convenient for calculating 
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.mu\">&mu;</a>, 
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.nu\">&nu;</a>, 
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.eta\">&eta;</a>, 
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.beta\">&beta;</a>, 
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.zeta\">&zeta;</a>, and
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.theta\">&theta;</a>.</p>
   </html>"));
-      end alpha;
-
-      partial function Dt
-        "<html>Collision interval as a function of temperature and pressure (D<i>t</i>)</html>"
-        extends Modelica.Icons.Function;
-
-        input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=U.atm "Pressure";
-        output Q.TimeAbsolute Dt "Mean time between collisions";
-
-      algorithm
-        Dt := m/(p*alpha(T, p)) annotation (Inline=true);
-        // **write directly, derive alpha from Dt rather than vice versacoff
-        annotation (Documentation(info="<html>
-  <p>**List assumptions (those of alpha + ideal gas).
-  This is the mean time between collisions**
-  **Note that alpha and tau are related through Einstein relation
-  This function is based on the kinetic theory of gases with the rigid-sphere (\"billiard-ball\")
-  assumption.  It is
-  independent of pressure or specific volume.  According to Present
-  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>], this independence very accurately matches the measured
-  fluidity of gases.  However, the fluidity varies by species and
-  generally falls more rapidly with temperature than indicated
-  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 41].</p></html>"));
-      end Dt;
+      end omega;
 
     public
       function c_p
@@ -1088,24 +1069,36 @@ package Characteristics
       end dv_Tp;
 
       replaceable function eta
-        "<html>Material resistivity (&eta;) as a function of temperature and pressure</html>"
+        "<html>Material resistivity (&eta;) as a function of temperature and specific volume</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=U.atm "Pressure";
+        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
         output Q.ResistivityMaterial eta "Material resistivity";
 
       algorithm
-        eta := alpha(T)/v_Tp(T, p) annotation (Inline=true);
-        // **3*tau/lambda^2
+        eta := omega(T)*alpha/v annotation (Inline=true);
+
         annotation (Documentation(info="<html>
-  <p>This function is based on kinetic theory using the assumptions listed in
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.alpha\">alpha</a>().</p>
+  <p>This function is based on the kinetic theory of gases under the following assumptions 
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
+  <ol>
+    <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the 
+    \"billiard-ball\"
+    assumption, and it implies that the collisions are instantaneous and conserve kinetic
+    energy.</li>
+    <li>Between collisions particles have no influence on one another.</li>
+    <li>The mean free path, or average distance a particle travels between collisions, is much larger than the
+    diameter of a particle.</li>
+    <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
+    <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>  
+  </ol>
+  </p>
 </html>"));
+
       end eta;
 
       function g "Gibbs potential as a function of temperature and pressure"
-
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
@@ -1236,43 +1229,59 @@ package Characteristics
       end h;
 
       replaceable function beta
-        "<html>Dynamic compressibility (&beta;) as a function of temperature and pressure</html>"
+        "<html>Dynamic compressibility (&beta;) as a function of temperature</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=U.atm "Pressure";
-        // Note:  Pressure isn't used here but is included for generality.
-        output Real beta "Dynamic compressibility";
-        // **Dimension
+        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
+        // Note:  Specific volume isn't used here but is included for generality.
+        output Q.Fluidity beta "Dynamic compressibility";
 
       algorithm
-        beta := alpha(T)/m annotation (Inline=true);
-        // **3*tau/lambda^2/rho/m
-        annotation (Documentation(info="<html>
-<p><i>Dynamic compressibility</i> is defined in <a href=\"modelica://FCSys\">FCSys</a> as the reciprocal of the volume,
-second, or bulk dynamic viscosity (see
-<a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).</p>
+        beta := omega(T)*alpha/m annotation (Inline=true);
 
-  <p>This function is based on kinetic theory using the assumptions listed in
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.alpha\">alpha</a>() and
-  the assumption that dynamic compressibility is equal to fluidity.  Although pressure is an input, the result is independent of
-  pressure.</p>
+        annotation (Documentation(info="<html>
+  <p><i>Dynamic compressibility</i> is the reciprocal of the volume, second, or bulk dynamic viscosity (see
+  <a href=\"http://en.wikipedia.org/wiki/Volume_viscosity\">http://en.wikipedia.org/wiki/Volume_viscosity</a>).</p>
+
+  <p>Although specific volume is an input to this function, the result is independent of
+  specific volume.</p>
+  
+  <p>This function is based on the assumption that dynamic compressibility is equal to fluidity.  See
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.zeta\">zeta</a>() for the additional
+  assumptions used to calculate fluidity.
+  </p>
 </html>"));
       end beta;
 
       replaceable function mu
-        "<html>Mobility (&mu;) as a function of temperature and pressure</html>"
+        "<html>Mobility (&mu;) as a function of temperature and specific volume</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=U.atm "Pressure";
+        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
         output Q.Mobility mu "Mobility";
 
       algorithm
-        mu := tau(T, p)/m annotation (Inline=true);
-        // 8*pi*tau/3/m
-        annotation (Documentation(info="<html><p>This function is based on kinetic theory using the assumptions listed in
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.alpha\">alpha</a>().</p></html>"));
+        mu := omega(T)*v/(alpha*m) annotation (Inline=true);
+
+        annotation (Documentation(info="<html>
+  <p>This function is based on the kinetic theory of gases under the following assumptions 
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
+  <ol>
+    <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the 
+    \"billiard-ball\"
+    assumption, and it implies that the collisions are instantaneous and conserve kinetic
+    energy.</li>
+    <li>Between collisions particles have no influence on one another.</li>
+    <li>The mean free path, or average distance a particle travels between collisions, is much larger than the
+    diameter of a particle.</li>
+    <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
+    <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>  
+  </ol>
+  Also, it is assumed that the Einstein relation applies.
+  </p>
+</html>"));
       end mu;
 
       replaceable function nu
@@ -1280,18 +1289,31 @@ second, or bulk dynamic viscosity (see
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=U.atm "Pressure";
+        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
         output Q.TimeAbsolute nu "Thermal independence";
 
       algorithm
-        nu := tau(T, p)/c_p(T, p) annotation (Inline=true);
-        // 8*pi*tau/3/s **should this be c_v instead?
+        nu := omega(T)*v/(alpha*c_p(T, p_Tv(T, v))) annotation (Inline=true);
+
         annotation (Documentation(info="<html>
 <p><i>Thermal independity</i> describes the extent to which an exchange of thermal energy between species causes or requires a 
 temperature difference.</p>
 
-<p>This function is based on kinetic theory using the assumptions listed in
-<a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.alpha\">alpha</a>().</p>
+  <p>This function is based on the kinetic theory of gases under the following assumptions 
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
+  <ol>
+    <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the 
+    \"billiard-ball\"
+    assumption, and it implies that the collisions are instantaneous and conserve kinetic
+    energy.</li>
+    <li>Between collisions particles have no influence on one another.</li>
+    <li>The mean free path, or average distance a particle travels between collisions, is much larger than the
+    diameter of a particle.</li>
+    <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
+    <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>  
+  </ol>
+  Also, it is assumed that the Einstein relation applies.
+  </p>
 </html>"));
       end nu;
 
@@ -1319,28 +1341,41 @@ temperature difference.</p>
                 pressPow[1]) else p0 annotation (
           Inline=true,
           inverse(v=v_Tp(T, p)),
-          derivative=dp_Tv);
+          derivative=dp_Tv,
+          smoothOrder=999);
         annotation (Documentation(info="<html><p>If the species is incompressible then <i>p</i>(<i>T</i>, <i>v</i>) is undefined,
   and the function will return a value of zero.</p>
 
-<p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp\">dp</a>().</p></html>"));
+<p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp_Tv\">dp_Tv</a>().</p></html>"));
       end p_Tv;
 
       replaceable function theta
-        "<html>Thermal resistivity (&theta;) as a function of temperature and pressure</html>"
-
+        "<html>Thermal resistivity (&theta;) as a function of temperature and specific volume</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=U.atm "Pressure";
+        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
         output Q.Resistivity theta "Thermal resistivity";
 
       algorithm
-        theta := alpha(T)/c_v(T, p) annotation (Inline=true);
-        // **3*tau/lambda^2/rho/c_v
-        annotation (Documentation(info="<html><p>This function is based on kinetic theory using the assumptions listed in
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.alpha\">alpha</a>().</p>
-  </html>"));
+        theta := omega(T)*alpha/c_v(T, p_Tv(T, v)) annotation (Inline=true);
+
+        annotation (Documentation(info="<html>
+  <p>This function is based on the kinetic theory of gases under the following assumptions 
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
+  <ol>
+    <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the 
+    \"billiard-ball\"
+    assumption, and it implies that the collisions are instantaneous and conserve kinetic
+    energy.</li>
+    <li>Between collisions particles have no influence on one another.</li>
+    <li>The mean free path, or average distance a particle travels between collisions, is much larger than the
+    diameter of a particle.</li>
+    <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
+    <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>  
+  </ol>
+  </p>
+</html>"));
       end theta;
 
       function s "Specific entropy as a function of temperature and pressure"
@@ -1474,35 +1509,47 @@ temperature difference.</p>
           derivative=dv_Tp);
         annotation (Documentation(info="<html>
   <p>The derivative of this function is
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv\">dv</a>().</p></html>"));
+  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv_Tp\">dv_Tp</a>().</p></html>"));
       end v_Tp;
 
       replaceable function zeta
-        "<html>Fluidity (&zeta;) as a function of temperature and pressure</html>"
-
+        "<html>Fluidity (&zeta;) as a function of temperature</html>"
         extends Modelica.Icons.Function;
 
         input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
-        input Q.PressureAbsolute p=U.atm "Pressure";
-        // Note:  Pressure isn't used here but is included for generality.
+        input Q.VolumeSpecific v=298.15*U.K/U.atm "Specific volume";
+        // Note:  Specific volume isn't used here but is included for generality.
         output Q.Fluidity zeta "Fluidity";
 
       algorithm
-        zeta := alpha(T)/m annotation (Inline=true);
-        // **3*tau/lambda^2/rho/m
+        zeta := omega(T)*alpha/m annotation (Inline=true);
         annotation (Documentation(info="<html>
-<p>Fluidity is defined as the reciprocal of dynamic viscosity
-(see <a href=\"http://en.wikipedia.org/wiki/Viscosity#Fluidity\">http://en.wikipedia.org/wiki/Viscosity#Fluidity</a>).</p>
+  <p>Fluidity is defined as the reciprocal of dynamic viscosity
+  (see <a href=\"http://en.wikipedia.org/wiki/Viscosity#Fluidity\">http://en.wikipedia.org/wiki/Viscosity#Fluidity</a>).</p>
 
-  <p>This function is based on kinetic theory using the assumptions listed in
-  <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.alpha\">alpha</a>(). Although
-  pressure is an input, the result is independent of pressure.
-  According to Present
-  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>], this independence very accurately matches the measured
-  fluidity of gases.  However, the fluidity varies by species and
+  <p>Although specific volume is an input to this function, the result is independent of
+  specific volume.  According to Present
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>], this independence very accurately 
+  matches the measured fluidity of gases.  However, the fluidity varies by species and
   generally falls more rapidly with temperature than indicated
   [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>, p. 41].</p>
+    
+  <p>This function is based on the kinetic theory of gases under the following assumptions 
+  [<a href=\"modelica://FCSys.UsersGuide.References\">Present1958</a>]:
+  <ol>
+    <li>The particles are smooth and rigid but elastic spheres with identical radii.  This is the 
+    \"billiard-ball\"
+    assumption, and it implies that the collisions are instantaneous and conserve kinetic
+    energy.</li>
+    <li>Between collisions particles have no influence on one another.</li>
+    <li>The mean free path, or average distance a particle travels between collisions, is much larger than the
+    diameter of a particle.</li>
+    <li>The properties carried by a particle depend only on those of the last particle with which it collided.</li>
+    <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>  
+  </ol>
+  </p>
   </html>"));
+
       end zeta;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
     <p>This package is compatible with NASA CEA thermodynamic data

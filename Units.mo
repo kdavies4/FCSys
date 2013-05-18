@@ -11,7 +11,7 @@ package Units "Constants and units of physical measure"
 
     // If units other than those in the displayUnit attribute of the
     // quantities in FCSys.Quantities should be used by default, then specify
-    // them here.  Be sure that the desired unit is included in a
+    // them here.  Be sure that the desired unit's included in a
     // defineUnitConversion command below.
     // Generated from FCSys/resources/quantities.xls, 2013-1-20
     defineDefaultDisplayUnit("1/N", "1/mol") "Reciprocal amount";
@@ -577,9 +577,9 @@ package Units "Constants and units of physical measure"
         1/s) "Time";
 
     Modelica.Utilities.Streams.print("Done.");
-
-    annotation (Documentation(info="<html><p>This has no inputs or outputs.  For more information, see the documentation in 
+    annotation (Documentation(info="<html><p>This has no inputs or outputs.  For more information, see the documentation in
 <a href=\"modelica://FCSys.Units\">FCSys.Units</a>.</p></html>"));
+
   end setup;
 
   package Examples "Examples"
@@ -729,7 +729,7 @@ package Units "Constants and units of physical measure"
       final constant Q.Number '%'=U.'%' "percent";
       final constant Q.Density M=U.M "molar";
       final constant Q.Volume cc=U.cc "cubic centimeter";
-      annotation (Documentation(info="<html><p>This model may be used to calculate the values of the 
+      annotation (Documentation(info="<html><p>This model may be used to calculate the values of the
   constants and units.</p>
 
 <p>For more information, see the documentation in the
@@ -737,6 +737,7 @@ package Units "Constants and units of physical measure"
           Commands(executeCall=FCSys.Units.setup() "Re-initialize the units."));
 
     end Evaluate;
+
   end Examples;
   import arccos = Modelica.Math.acos;
   // Note:  The command line of Dymola 7.4 recognizes arccos() rather than
@@ -1455,7 +1456,6 @@ encompass other systems of units.</p>
   final constant Q.Number '%'=centi "percent (%)";
   final constant Q.Density M=U.mol/U.L "molar";
   final constant Q.Volume cc=U.cm^3 "cubic centimeter";
-
   annotation (Documentation(info="<html>
   <p>The <a href=\"modelica://FCSys.Units\">Units</a> package is abbreviated as <code>U</code> for convenience throughout
   the rest of <a href=\"modelica://FCSys.FCSys\">FCSys</a>.  For example, an initial pressure might be defined as
@@ -1619,17 +1619,17 @@ first section of the Modelica definition of this package establishes mathematica
  it involves an offset.  Other convenient units are included for the system at hand (e.g.,
  atm).</p>
 
-<p>The <a href=\"modelica://FCSys.Units.setup\">Units.setup</a> function establishes unit conversions 
-using the values of the units, constants, and prefixes.  These unit conversions may include offsets.  
-The function also sets the default display units.  It is automatically called when 
+<p>The <a href=\"modelica://FCSys.Units.setup\">Units.setup</a> function establishes unit conversions
+using the values of the units, constants, and prefixes.  These unit conversions may include offsets.
+The function also sets the default display units.  It is automatically called when
 <a href=\"modelica://FCSys\">FCSys</a> is
-loaded from the \"FCSys/load.mos\" script.  It can also be called manually from the 
-\"Re-initialize the units\" command available in Dymola from the 
-<a href=\"modelica://FCSys.Units\">Units</a> package or any subpackage.  A spreadsheet 
+loaded from the \"FCSys/load.mos\" script.  It can also be called manually from the
+\"Re-initialize the units\" command available in Dymola from the
+<a href=\"modelica://FCSys.Units\">Units</a> package or any subpackage.  A spreadsheet
 (\"FCSys/resources/quantities.xls\") is available to help
 maintain the quantities, default units, and the setup function.</p>
 
-<p>The values of the units, constants, and prefixes can be evaluated by translating the 
+<p>The values of the units, constants, and prefixes can be evaluated by translating the
 <a href=\"modelica://FCSys.Units.Examples.Evaluate\">Units.Examples.Evaluate</a> model.  This
 defines the values in the Dymola workspace.  For convenience, the \"FCSys/load.mos\" script automatically
 does this and saves the result as \"units.mos\" in the working directory.</p>
@@ -1677,4 +1677,5 @@ most prefixes must be given as explicit factors (e.g., <code>kilo*m</code>).</p>
   FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
   http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"),
       Commands(executeCall=FCSys.Units.setup() "Re-initialize the units."));
+
 end Units;
