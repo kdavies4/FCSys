@@ -19,15 +19,13 @@ buildlog.txt
 request
 status
 *.exe
+*.mat
 
 # Internal link to demos
 /resources/source/Python/fcres/examples
 
 # Mathematica notebooks
 *.nb
-
-# MATLAB data files
-*.mat
 
 # Excel spreadsheets
 *.xls
@@ -47,14 +45,10 @@ build/
 *.gif
 *.ico
 
-# Python generated and compiled files
+# Python-generated and compiled files
 MANIFEST
 *.pyc
 
 # Georgia Tech files
 # TODO:  Ask Chris Paredis if they can be shared, and include them.
 /test/Morris
-
-# Eclipse project files
-/resources/source/Python/fcres/.project
-/resources/source/Python/fcres/.pydevproject

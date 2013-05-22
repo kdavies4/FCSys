@@ -79,8 +79,8 @@ package Figures "Graphical layouts for documentation"
                   6.10623e-16},{-10,6.10623e-16},{-19,6.10623e-16}},
               color={0,0,127},
               smooth=Smooth.None));
-          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent=
+                   {{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
         end Test_vi;
 
         model Test_iv
@@ -112,8 +112,8 @@ package Figures "Graphical layouts for documentation"
               points={{-1,-40},{-10,-40},{-10,6.10623e-16},{-19,6.10623e-16}},
               color={0,0,127},
               smooth=Smooth.None));
-          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent=
+                   {{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
         end Test_iv;
 
         model Declarative
@@ -166,8 +166,8 @@ package Figures "Graphical layouts for documentation"
               points={{30,-30},{30,-35},{30,-35},{30,-40}},
               color={0,0,255},
               smooth=Smooth.None));
-          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-80,-60},{80,60}}), graphics));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent=
+                   {{-80,-60},{80,60}}), graphics));
         end Declarative;
 
       end Examples;
@@ -334,7 +334,6 @@ package Figures "Graphical layouts for documentation"
             smooth=Smooth.None));
         connect(res1.n, cap.p) annotation (Line(
             points={{30,1.22125e-15},{30,-2.5},{30,-2.5},{30,-5},{30,-10},{30,-10}},
-
             color={0,0,255},
             smooth=Smooth.None));
 
@@ -665,8 +664,8 @@ package Figures "Graphical layouts for documentation"
               points={{-1,-20},{-10,-20},{-10,6.10623e-16},{-19,6.10623e-16}},
               color={0,0,127},
               smooth=Smooth.None));
-          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent=
+                   {{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
         end Test;
 
       end Examples;
@@ -1541,7 +1540,7 @@ package Figures "Graphical layouts for documentation"
       annotation (Placement(transformation(extent={{-22,-16},{-2,4}})));
     Connectors.InertDalton Dalton
       annotation (Placement(transformation(extent={{2,-16},{22,4}})));
-    FCSys.Connectors.ChemicalPotentialSpecies Chemical
+    FCSys.Connectors.ChemicalSpecies Chemical
       annotation (Placement(transformation(extent={{50,-16},{70,4}})));
     annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
               -60},{100,60}}), graphics={Line(

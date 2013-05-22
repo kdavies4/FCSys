@@ -105,8 +105,7 @@ package WorkInProgress "Incomplete classes under development"
 <li>[Carnegie Mellon, 2009]:<br/>Original example for MATLAB</li>
 <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/12/9:<br/>Implemented in Modelica</li>
 </ul></p>
-</html>"),
-          Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
+</html>"),Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics),
           Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics),
@@ -199,11 +198,9 @@ package WorkInProgress "Incomplete classes under development"
         FCSys.WorkInProgress.Blocks.Discrete.Controllers.MPCWRej controller(
           samplePeriod=samplePeriod,
           K_ff=[0.37916203293428, 1.62844416370545; 0.487563244325183, -0.952185693944061],
-
           K_fb=[2.02221906314084, 0.1668357018389, 0.0994845626559192,
               0.37916203293428, 1.62844416370545; 1.22064368996494,
               0.730619101772674, 0.0430546102350298, 0.487563244325183, -0.952185693944061],
-
           K_opt=[2.02221906314084, 0.1668357018389, 0.0994845626559192,
               0.37916203293428, 1.62844416370545, -0.37916203293428, -1.62844416370545;
               1.22064368996494, 0.730619101772674, 0.0430546102350298,
@@ -1340,7 +1337,6 @@ package WorkInProgress "Incomplete classes under development"
 </td></tr></code></table>
   </html>", revisions="<html><ul><li>J. A. Rossiter, <a href=\"http://www.mathworks.com/matlabcentral/fileexchange/3410-model-based-predictive-control-a-practical-approach\">http://www.mathworks.com/matlabcentral/fileexchange/3410-model-based-predictive-control-a-practical-approach</a>, accessed 2009/12/3:<br>Original example for MATLAB (example2_mimo.m)</li>
   <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/12/9:<br>Adapted for use with Modelica</li></ul></html>"),
-
           Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics),
           experiment(StopTime=50));
@@ -1421,7 +1417,6 @@ package WorkInProgress "Incomplete classes under development"
 </td></tr></code></table>
   </html>", revisions="<html><ul><li>J. A. Rossiter, <a href=\"http://www.mathworks.com/matlabcentral/fileexchange/3410-model-based-predictive-control-a-practical-approach\">http://www.mathworks.com/matlabcentral/fileexchange/3410-model-based-predictive-control-a-practical-approach</a>, accessed 2009/12/3:<br>Original example for MATLAB (example2_mimo.m)</li>
   <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/12/9:<br>Adapted for use with Modelica</li></ul></html>"),
-
           Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics),
           experiment(StopTime=139));
@@ -1896,8 +1891,7 @@ results in the following equations:
                              [x[2]]            [u[2]]
 </pre>
 </html>
-",
-              Icon(coordinateSystem(
+",            Icon(coordinateSystem(
                   preserveAspectRatio=true,
                   extent={{-100,-100},{100,100}},
                   grid={2,2}), graphics={Text(
@@ -2016,8 +2010,8 @@ results in the following equations:
               color={135,135,135},
               smooth=Smooth.None,
               thickness=0.5));
-          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent=
+                   {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
                   preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
                 graphics={Rectangle(
                           extent={{-100,-100},{100,100}},
@@ -2124,8 +2118,7 @@ assembled system.
 
 <IMG src=\"modelica://Modelica/Resources/Images/MultiBody/Examples/Elementary/Pendulum.png\"
 ALT=\"model Examples.Elementary.Pendulum\">
-</html>"),
-            Icon(graphics={Ellipse(
+</html>"),  Icon(graphics={Ellipse(
                           extent={{10,80},{30,60}},
                           lineColor={215,215,215},
                           fillColor={0,0,0},
@@ -2211,8 +2204,8 @@ ALT=\"model Examples.Elementary.Pendulum\">
           final parameter Real mu_internal[n_out]=(if size(mu, 1) == 1 then mu[
               1]*ones(n_out) else mu)
             "Mean or expected value(s) of random signal(s), with entries for every signal";
-          final parameter Real sigma_internal[n_out]=(if size(sigma, 1) == 1
-               then sigma[1]*ones(n_out) else sigma)
+          final parameter Real sigma_internal[n_out]=(if size(sigma, 1) == 1 then
+                    sigma[1]*ones(n_out) else sigma)
             "Standard deviation(s) of random signal(s), with entries for every signal";
           final parameter Integer n_s=integer(T_end/T_s) + 1
             "Number of samples";
@@ -2264,8 +2257,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
 <p><ul>
 <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2010/1/6:<br/>Original version using the Box-Muller transform; copied and modified portions of code from Modelica.Blocks.Sources.CombiTimeTable</li>
 </ul></p>
-</html>"),
-            Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
+</html>"),  Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}),graphics={Polygon(
                           points={{-80,98},{-88,76},{-72,76},{-80,98}},
                           lineColor={192,192,192},
@@ -2324,11 +2316,11 @@ ALT=\"model Examples.Elementary.Pendulum\">
             "Smoothness of sample interpolation"
             annotation (Dialog(group="Advanced"));
         protected
-          final parameter Real x_min_internal[n_out]=(if size(x_min, 1) == 1
-               then ones(n_out)*x_min[1] else x_min)
+          final parameter Real x_min_internal[n_out]=(if size(x_min, 1) == 1 then
+                    ones(n_out)*x_min[1] else x_min)
             "Lower bound(s) of random signal(s), with entries for every signal";
-          final parameter Real x_max_internal[n_out]=(if size(x_max, 1) == 1
-               then ones(n_out)*x_max[1] else x_max)
+          final parameter Real x_max_internal[n_out]=(if size(x_max, 1) == 1 then
+                    ones(n_out)*x_max[1] else x_max)
             "Upper bound(s) of random signal(s), with entries for every signal";
           final parameter Integer n_s=integer(T_end/T_s) + 1
             "Number of samples";
@@ -2386,8 +2378,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
 <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/12/15:<br/>Original version; extended from Modelica.Blocks.Sources.CombiTimeTable</li>
 <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2010/1/6:<br/>Copied and modified portions of code from Modelica.Blocks.Sources.CombiTimeTable</li>
 </ul></p>
-</html>"),
-            Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
+</html>"),  Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}),graphics={Polygon(
                           points={{-80,98},{-88,76},{-72,76},{-80,98}},
                           lineColor={192,192,192},
@@ -2556,8 +2547,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
       initial equation
         if initType == Init.SteadyState then
           der(y)/U.s = zeros(n);
-        elseif initType == Init.InitialState or initType == Init.InitialOutput
-             then
+        elseif initType == Init.InitialState or initType == Init.InitialOutput then
           y = y_0;
         end if;
       equation
@@ -2586,8 +2576,7 @@ Example:
 </pre>
 
 </html>
-",
-            Icon(coordinateSystem(
+",          Icon(coordinateSystem(
                 preserveAspectRatio=true,
                 extent={{-100,-100},{100,100}},
                 grid={2,2}), graphics={Line(points={{-80,78},{-80,-90}}, color=
@@ -2646,8 +2635,7 @@ Example:
       initial equation
         if initType == Init.SteadyState then
           der(y)/U.s = zeros(n);
-        elseif initType == Init.InitialState or initType == Init.InitialOutput
-             then
+        elseif initType == Init.InitialState or initType == Init.InitialOutput then
           y = y_0;
         end if;
       equation
@@ -2668,8 +2656,7 @@ This is discussed in the description of package
 <a href=\"Modelica://Modelica.Blocks.Continuous#info\">Continuous</a>.</p>
 
 </html>
-",
-            Icon(coordinateSystem(
+",          Icon(coordinateSystem(
                 preserveAspectRatio=true,
                 extent={{-100,-100},{100,100}},
                 grid={2,2}), graphics={Line(points={{-80,78},{-80,-90}}, color=
@@ -2780,8 +2767,8 @@ This is discussed in the description of package
                   {19.5,1.27676e-15},{19.5,6.10623e-16},{1,6.10623e-16}},
               color={0,0,127},
               smooth=Smooth.None));
-          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}), graphics), experiment(Algorithm=
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent=
+                   {{-100,-100},{100,100}}), graphics), experiment(Algorithm=
                   "Dassl"));
         end Sampler;
       end Examples;
@@ -2810,7 +2797,6 @@ This is discussed in the description of package
             annotation (Documentation(
                 info=
                     "<html><p>This should give a solution of <code>qPSolver.y = {0.6667, 1.3333}</code>.</p></html>",
-
                 experiment,
                 Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                         -100},{100,100}}), graphics)));
@@ -2882,7 +2868,6 @@ This is discussed in the description of package
             annotation (
               Documentation(revisions=
                     "<html><ul><li>Implemented in Modelica by K. L. Davies, 12/11/09</li></ul></html>"),
-
               Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                       -100},{100,100}}), graphics),
               experiment(StopTime=2),
@@ -2955,8 +2940,8 @@ This is discussed in the description of package
           FCSys.WorkInProgress.Blocks.Math.AddSkipInclIncl addSkipInclIncl3(
               final isPos2=false, final n=n_x)
             annotation (Placement(transformation(extent={{100,-10},{80,10}})));
-          FCSys.WorkInProgress.Blocks.Continuous.Sources.Constant xConst(final
-              k=x_SS) annotation (Placement(transformation(extent={{120,-40},{
+          FCSys.WorkInProgress.Blocks.Continuous.Sources.Constant xConst(final k=
+                x_SS) annotation (Placement(transformation(extent={{120,-40},{
                     100,-20}})));
           Modelica.Blocks.Math.MatrixGain LGain(final K=L)
             annotation (Placement(transformation(extent={{70,-10},{50,10}})));
@@ -3067,7 +3052,6 @@ This is discussed in the description of package
               thickness=0.5));
           connect(addSkipInclIncl1.y, unitDelay.u) annotation (Line(
               points={{-79,6.10623e-16},{-110,6.10623e-16},{-110,40},{-101,40}},
-
               color={0,0,127},
               smooth=Smooth.None,
               thickness=0.5));
@@ -3474,7 +3458,6 @@ This is discussed in the description of package
   </ul>
   where <b>x</b> consists of <b>n_x/n_y</b> repetitions of <b>y</b> (<b>x = {y, y, &hellip;}</b>).  <b>n_y</b> is a parameter and <b>n_x</b> is determined by the size of <b>H</b>.
   <p><b>y</b> is a dynamic output.  <b>H</b> and <b>A</b> are parameters.  <b>J</b>, <b>y_min</b>, <b>y_max</b>, <b>xA_min</b>, and <b>xA_max</b> can be chosen as parameters or as dynamic inputs.</p></html>",
-
                 Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                         -100},{100,100}}), graphics),
                 experiment(StopTime=2),
@@ -3921,8 +3904,7 @@ results in the following equations:
                              [pre(x[2])]            [u[2]]
 </pre>
 </html>
-",
-              Icon(coordinateSystem(
+",            Icon(coordinateSystem(
                   preserveAspectRatio=true,
                   extent={{-100,-100},{100,100}},
                   grid={2,2}), graphics={Text(
@@ -3966,8 +3948,8 @@ results in the following equations:
           // final parameter Integer n_out=size(C, 1) "Number of sensors";
           parameter Real x_0[n_x]=zeros(n_x) "Initial states of the plant"
             annotation (Dialog(group="Initial Conditions"));
-          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent=
+                   {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
                   preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
                 graphics));
         end StateSpaceWNoise;
@@ -3976,8 +3958,8 @@ results in the following equations:
           extends
             FCSys.WorkInProgress.Blocks.Discrete.Plants.BaseClasses.PartialPlant(
               redeclare Continuous.Plants.Pendulum plant);
-          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent=
+                   {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
                   preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
                 graphics={Ellipse(
                           extent={{10,80},{30,60}},
@@ -4108,8 +4090,8 @@ results in the following equations:
           final parameter Real mu_internal[n_out]=(if size(mu, 1) == 1 then mu[
               1]*ones(n_out) else mu)
             "Mean or expected value(s) of random signal(s), with entries for every signal";
-          final parameter Real sigma_internal[n_out]=(if size(sigma, 1) == 1
-               then sigma[1]*ones(n_out) else sigma)
+          final parameter Real sigma_internal[n_out]=(if size(sigma, 1) == 1 then
+                    sigma[1]*ones(n_out) else sigma)
             "Standard deviation(s) of random signal(s), with entries for every signal";
           Real table[n_s, n_out](start=zeros(n_s, n_out), fixed=true)
             "Matrix of normal random numbers (the first column is time /s)";
@@ -4217,11 +4199,11 @@ results in the following equations:
           parameter Integer n_s=500 "Number of samples"
             annotation (Dialog(group="Advanced"));
         protected
-          final parameter Real x_min_internal[n_out]=(if size(x_min, 1) == 1
-               then ones(n_out)*x_min[1] else x_min)
+          final parameter Real x_min_internal[n_out]=(if size(x_min, 1) == 1 then
+                    ones(n_out)*x_min[1] else x_min)
             "Lower bound(s) of random signal(s), with entries for every signal";
-          final parameter Real x_max_internal[n_out]=(if size(x_max, 1) == 1
-               then ones(n_out)*x_max[1] else x_max)
+          final parameter Real x_max_internal[n_out]=(if size(x_max, 1) == 1 then
+                    ones(n_out)*x_max[1] else x_max)
             "Upper bound(s) of random signal(s), with entries for every signal";
           Real table[n_s, n_out] "Matrix of uniform random numbers";
         equation
@@ -4465,8 +4447,7 @@ states can be set as start values of <b>x</b>.<p><p>Example:</p>
     Realized based on a corresponding model of Dieter Moormann
     and Hilding Elmqvist.</li>
 </ul>
-</html>"),
-          Icon(coordinateSystem(
+</html>"),Icon(coordinateSystem(
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
               grid={2,2}), graphics={Line(points={{82,0},{-84,0}}, color={0,0,
@@ -4520,8 +4501,7 @@ previous sample instant. Before the second sample instant,
 the output y is identical to parameter yStart.</p>
 
 </html>
-",
-            Icon(coordinateSystem(
+",          Icon(coordinateSystem(
                 preserveAspectRatio=true,
                 extent={{-100,-100},{100,100}},
                 grid={2,2}), graphics={Line(points={{-30,0},{30,0}}, color={0,0,
@@ -4652,8 +4632,7 @@ three input signals <b>u_1</b>, <b>u_2</b> and <b>u_3</b>:
 </pre></p>
 
 </html>
-",
-            Icon(coordinateSystem(
+",          Icon(coordinateSystem(
                 preserveAspectRatio=true,
                 extent={{-100,-100},{100,100}},
                 grid={2,2}), graphics={Text(
@@ -4711,8 +4690,7 @@ three input signals <b>u_1</b>, <b>u_2</b> and <b>u_3</b>:</p>
 </pre>
 
 </html>
-",
-            Icon(coordinateSystem(
+",          Icon(coordinateSystem(
                 preserveAspectRatio=true,
                 extent={{-100,-100},{100,100}},
                 grid={2,2}), graphics={Text(
@@ -5118,8 +5096,7 @@ as long as the input is within the specified upper and lower
 limits. If this is not the case, the corresponding limits are passed
 as output.</p>
 </html>
-",
-            Icon(coordinateSystem(
+",          Icon(coordinateSystem(
                 preserveAspectRatio=true,
                 extent={{-100,-100},{100,100}},
                 grid={2,2}), graphics={Line(points={{0,-90},{0,68}}, color={192,
@@ -5172,8 +5149,7 @@ This is discussed in the description of package
 <a href=\"Modelica://Modelica.Blocks.Continuous#info\">Continuous</a>.</p>
 
 </html>
-",
-            Icon(coordinateSystem(
+",          Icon(coordinateSystem(
                 preserveAspectRatio=true,
                 extent={{-100,-100},{100,100}},
                 grid={2,2}), graphics={Rectangle(extent={{-20,80},{0,40}},
@@ -5484,14 +5460,14 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               extent={{10,-10},{-10,10}},
               rotation=270,
               origin={174,-12})));
-        Assemblies.OpenTank H2OTank annotation (Placement(transformation(extent
-                ={{-30,10},{-10,30}}, rotation=0)));
+        Assemblies.OpenTank H2OTank annotation (Placement(transformation(extent=
+                 {{-30,10},{-10,30}}, rotation=0)));
         FCSys.WorkInProgress.Systems.Pump.Pump compressor annotation (Placement(
               transformation(extent={{-110,-60},{-90,-40}}, rotation=0)));
         FCSys.WorkInProgress.Systems.Pump.Pump condensatePump annotation (
             Placement(transformation(extent={{-110,22},{-90,42}}, rotation=0)));
-        Connectors.FaceBus ambientN annotation (Placement(transformation(extent
-                ={{-210,70},{-190,90}}), iconTransformation(extent={{-110,50},{
+        Connectors.FaceBus ambientN annotation (Placement(transformation(extent=
+                 {{-210,70},{-190,90}}), iconTransformation(extent={{-110,50},{
                   -90,70}})));
         outer FCSys.WorkInProgress.Systems.FC.Interfaces.ActBusIn actBusIn
           annotation (Placement(transformation(extent={{-210,-90},{-190,-70}}),
@@ -5513,8 +5489,8 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           annotation (Placement(transformation(extent={{-50,-54},{-30,-34}})));
         FCSys.WorkInProgress.AssembliesHeatExchanger radiator
           annotation (Placement(transformation(extent={{-60,66},{-40,86}})));
-        Connectors.FaceBus ambientP annotation (Placement(transformation(extent
-                ={{190,70},{210,90}}), iconTransformation(extent={{-110,50},{-90,
+        Connectors.FaceBus ambientP annotation (Placement(transformation(extent=
+                 {{190,70},{210,90}}), iconTransformation(extent={{-110,50},{-90,
                   70}})));
       equation
         v = pinP.v - pinP.v;
@@ -5636,7 +5612,6 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
             smooth=Smooth.None));
         connect(stack.coolantPipeN, coolingPump.pipeN) annotation (Line(
             points={{10,-30},{-10,-30},{-10,-70},{-140,-70},{-140,62},{-110,62}},
-
             color={192,0,192},
             smooth=Smooth.None));
 
@@ -5757,8 +5732,8 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               string="%second",
               index=1,
               extent={{6,3},{6,3}}));
-          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent=
+                   {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
                   preserveAspectRatio=true, extent={{-60,-40},{60,40}}),
                 graphics={Rectangle(
                           extent={{-40,40},{40,-40}},
@@ -5799,7 +5774,6 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               extent={{-6,3},{-6,3}}));
           connect(senBusIn.current, senOut[1]) annotation (Line(
               points={{-100,5.55112e-16},{0,5.55112e-16},{0,-6.66667},{100,-6.66667}},
-
               color={0,0,127},
               smooth=Smooth.None), Text(
               string="%first",
@@ -5935,8 +5909,8 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               string="%second",
               index=1,
               extent={{6,3},{6,3}}));
-          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent=
+                   {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
                   preserveAspectRatio=true, extent={{-60,-40},{60,40}}),
                 graphics={Rectangle(
                           extent={{-40,40},{40,-40}},
@@ -5977,7 +5951,6 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               extent={{-6,3},{-6,3}}));
           connect(senBusIn.current, senOut[1]) annotation (Line(
               points={{-100,5.55112e-16},{0,5.55112e-16},{0,-6.66667},{100,-6.66667}},
-
               color={0,0,127},
               smooth=Smooth.None), Text(
               string="%first",
@@ -6082,23 +6055,17 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           end if;
         end if;
         // Governing linear equation
-        if (LHS == BaseClasses.LHSchoice.Delta_v1 and RHS == BaseClasses.RHSchoice.Delta_v2)
-             then
+        if (LHS == BaseClasses.LHSchoice.Delta_v1 and RHS == BaseClasses.RHSchoice.Delta_v2) then
           Delta_v1 = k_internal*Delta_v2;
-        elseif (LHS == BaseClasses.LHSchoice.Delta_v1 and RHS == BaseClasses.RHSchoice.Delta_qdot2)
-             then
+        elseif (LHS == BaseClasses.LHSchoice.Delta_v1 and RHS == BaseClasses.RHSchoice.Delta_qdot2) then
           Delta_v1 = k_internal*Delta_qdot2;
-        elseif (LHS == BaseClasses.LHSchoice.Delta_qdot1 and RHS == BaseClasses.RHSchoice.Delta_v2)
-             then
+        elseif (LHS == BaseClasses.LHSchoice.Delta_qdot1 and RHS == BaseClasses.RHSchoice.Delta_v2) then
           Delta_qdot1 = k_internal*Delta_v2;
-        elseif (LHS == BaseClasses.LHSchoice.Delta_qdot1 and RHS == BaseClasses.RHSchoice.Delta_qdot2)
-             then
+        elseif (LHS == BaseClasses.LHSchoice.Delta_qdot1 and RHS == BaseClasses.RHSchoice.Delta_qdot2) then
           Delta_qdot1 = k_internal*Delta_qdot2;
-        elseif (LHS == BaseClasses.LHSchoice.Delta_v1 and RHS == BaseClasses.RHSchoice.unity)
-             then
+        elseif (LHS == BaseClasses.LHSchoice.Delta_v1 and RHS == BaseClasses.RHSchoice.unity) then
           Delta_v1 = k_internal;
-        elseif (LHS == BaseClasses.LHSchoice.Delta_qdot1 and RHS == BaseClasses.RHSchoice.unity)
-             then
+        elseif (LHS == BaseClasses.LHSchoice.Delta_qdot1 and RHS == BaseClasses.RHSchoice.unity) then
           Delta_qdot1 = k_internal;
         end if;
         annotation (Icon(coordinateSystem(
@@ -6218,8 +6185,8 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               rotation=90,
               origin={0,-80})));
       protected
-        Connectors.RealInput k_internal(final unit=if (LHS == RHS) then "1"
-               else if (LHS == 1 and RHS == 2) then "1/Q2" else if (LHS == 2
+        Connectors.RealInput k_internal(final unit=if (LHS == RHS) then "1" else
+                    if (LHS == 1 and RHS == 2) then "1/Q2" else if (LHS == 2
                and RHS == 1) then "Q2" else if (LHS == 1 and RHS == 3) then
               "1/(Q.T)" else "Q/T", displayUnit=if (LHS == RHS) then "1" else
               if (LHS == 1 and RHS == 2) then "ohm" else if (LHS == 2 and RHS
@@ -6259,23 +6226,17 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           end if;
         end if;
         // Governing linear equation
-        if (LHS == BaseClasses.LHSchoice.Delta_v1 and RHS == BaseClasses.RHSchoice.Delta_v2)
-             then
+        if (LHS == BaseClasses.LHSchoice.Delta_v1 and RHS == BaseClasses.RHSchoice.Delta_v2) then
           Delta_v1 = k_internal*Delta_v2;
-        elseif (LHS == BaseClasses.LHSchoice.Delta_v1 and RHS == BaseClasses.RHSchoice.Delta_qdot2)
-             then
+        elseif (LHS == BaseClasses.LHSchoice.Delta_v1 and RHS == BaseClasses.RHSchoice.Delta_qdot2) then
           Delta_v1 = k_internal*Delta_qdot2;
-        elseif (LHS == BaseClasses.LHSchoice.Delta_qdot1 and RHS == BaseClasses.RHSchoice.Delta_v2)
-             then
+        elseif (LHS == BaseClasses.LHSchoice.Delta_qdot1 and RHS == BaseClasses.RHSchoice.Delta_v2) then
           Delta_qdot1 = k_internal*Delta_v2;
-        elseif (LHS == BaseClasses.LHSchoice.Delta_qdot1 and RHS == BaseClasses.RHSchoice.Delta_qdot2)
-             then
+        elseif (LHS == BaseClasses.LHSchoice.Delta_qdot1 and RHS == BaseClasses.RHSchoice.Delta_qdot2) then
           Delta_qdot1 = k_internal*Delta_qdot2;
-        elseif (LHS == BaseClasses.LHSchoice.Delta_v1 and RHS == BaseClasses.RHSchoice.unity)
-             then
+        elseif (LHS == BaseClasses.LHSchoice.Delta_v1 and RHS == BaseClasses.RHSchoice.unity) then
           Delta_v1 = k_internal;
-        elseif (LHS == BaseClasses.LHSchoice.Delta_qdot1 and RHS == BaseClasses.RHSchoice.unity)
-             then
+        elseif (LHS == BaseClasses.LHSchoice.Delta_qdot1 and RHS == BaseClasses.RHSchoice.unity) then
           Delta_qdot1 = k_internal;
         end if;
         connect(k_set, k_internal) annotation (Line(
@@ -6376,8 +6337,8 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               string="%second",
               index=1,
               extent={{6,3},{6,3}}));
-          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent=
+                   {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
                   preserveAspectRatio=true, extent={{-60,-40},{60,40}}),
                 graphics={Rectangle(
                           extent={{-40,40},{40,-40}},
@@ -6418,7 +6379,6 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               extent={{-6,3},{-6,3}}));
           connect(senBusIn.current, senOut[1]) annotation (Line(
               points={{-100,5.55112e-16},{0,5.55112e-16},{0,-6.66667},{100,-6.66667}},
-
               color={0,0,127},
               smooth=Smooth.None), Text(
               string="%first",
@@ -6561,7 +6521,6 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               extent={{-6,3},{-6,3}}));
           connect(senBusIn.current, senOut[1]) annotation (Line(
               points={{-100,5.55112e-16},{0,5.55112e-16},{0,-6.66667},{100,-6.66667}},
-
               color={0,0,127},
               smooth=Smooth.None), Text(
               string="%first",
@@ -6697,8 +6656,8 @@ a simple model of a variable pressure loss is needed.</p>
               string="%second",
               index=1,
               extent={{6,3},{6,3}}));
-          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
-                  ={{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent=
+                   {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
                   preserveAspectRatio=true, extent={{-60,-40},{60,40}}),
                 graphics={Rectangle(
                           extent={{-40,40},{40,-40}},
@@ -6739,7 +6698,6 @@ a simple model of a variable pressure loss is needed.</p>
               extent={{-6,3},{-6,3}}));
           connect(senBusIn.current, senOut[1]) annotation (Line(
               points={{-100,5.55112e-16},{0,5.55112e-16},{0,-6.66667},{100,-6.66667}},
-
               color={0,0,127},
               smooth=Smooth.None), Text(
               string="%first",
@@ -7015,14 +6973,14 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
       annotation (Placement(transformation(extent={{60,-50},{40,-30}})));
     Modelica.Fluid.Interfaces.FluidPort_b fluidPort(redeclare final package
         Medium = Medium) "Modelica fluid port" annotation (Placement(
-          transformation(extent={{70,-50},{90,-30}}), iconTransformation(extent
-            ={{70,-50},{90,-30}})));
+          transformation(extent={{70,-50},{90,-30}}), iconTransformation(extent=
+             {{70,-50},{90,-30}})));
     Modelica.Electrical.Analog.Interfaces.NegativePin pin
       "Modelica electrical pin" annotation (Placement(transformation(extent={{
               70,30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
   equation
-    connect('C19HF37O5S-'.face.thermal, face.'C19HF37O5S-'.thermal) annotation
-      (Line(
+    connect('C19HF37O5S-'.face.thermal, face.'C19HF37O5S-'.thermal) annotation (
+       Line(
         points={{-8,20},{-40,20},{-40,5.55112e-16},{-80,5.55112e-16}},
         color={127,127,127},
         smooth=Smooth.None));
@@ -7106,7 +7064,7 @@ public
     Q.Velocity phi "Conversion velocity";
     Q.Temperature Ts "Conversion temperature-specific entropy product";
 
-    FCSys.Connectors.ChemicalPotentialSpecies chemical[n_spec]
+    FCSys.Connectors.ChemicalSpecies chemical[         n_spec]
       "Connectors to the species"
       annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 

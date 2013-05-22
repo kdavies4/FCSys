@@ -84,6 +84,8 @@ package UsersGuide "User's Guide"
             Introduction to the \"additivity of volume\" concept</li>
             <li><a href=\"modelica://FCSys.Connectors.InertDalton\">FCSys.Connectors.InertDalton</a> connector:
             Introduction to the \"additivity of pressure\" concept</li>
+            <li><a href=\"modelica://FCSys.Subregions.Reaction\">FCSys.Subregions.Reaction</a> package:
+            Details about the formulation of the electrochemical reaction</li>
             <li><a href=\"modelica://FCSys.Subregions.Species.Species\">FCSys.Subregions.Species.Species</a> model:
             Details about the exchange, transport, and storage of material, volume, translational momentum, and
             energy</li>

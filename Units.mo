@@ -1,19 +1,19 @@
 within FCSys;
 package Units "Constants and units of physical measure"
   function setup "Establish conversions to display quantities in units"
+    import Modelica.Utilities.Streams.print;
 
   algorithm
-    Modelica.Utilities.Streams.print("Setting up display units...");
+    print("Establishing display units...");
 
-    // ***********************************************************************
+    // ------------------------------------------------------------------------
     // Default display units
-    // ***********************************************************************
-
+    // ------------------------------------------------------------------------
     // If units other than those in the displayUnit attribute of the
     // quantities in FCSys.Quantities should be used by default, then specify
     // them here.  Be sure that the desired unit is included in a
     // defineUnitConversion command below.
-    // Generated from FCSys/resources/quantities.xls, 2013-5-18
+    // Generated from FCSys/resources/quantities.xls, 2013-5-23
 
     defineDefaultDisplayUnit("l/(T.s)", "cm/s2")
       "for derivative of velocity in Dymola";
@@ -25,8 +25,6 @@ package Units "Constants and units of physical measure"
     defineDefaultDisplayUnit("l2", "cm2") "Area";
     defineDefaultDisplayUnit("l2/N", "m2/C") "Specific area";
     defineDefaultDisplayUnit("N2.T2/(l2.m)", "uF") "Capacitance";
-    defineDefaultDisplayUnit("N.T/(l2.m)", "mol/(J.s)")
-      "Dynamic compressibility";
     defineDefaultDisplayUnit("N2.T/(l2.m)", "S") "Electrical conductance";
     defineDefaultDisplayUnit("N/s", "A") "for derivative of amount in Dymola";
     defineDefaultDisplayUnit("N/T", "A") "Current";
@@ -50,11 +48,12 @@ package Units "Constants and units of physical measure"
     defineDefaultDisplayUnit("m/N", "g/mol") "Specific mass";
     defineDefaultDisplayUnit("N.T/m", "cm2/(V.s)") "Mobility";
     defineDefaultDisplayUnit("l2.m/(A.T)", "J.s/rad") "Rotational momentum";
+    defineDefaultDisplayUnit("l.m/(N.T)", "kg.m/(C.s)")
+      "Specific translational momentum";
     defineDefaultDisplayUnit("l.m/N2", "H/m") "Permeability";
     defineDefaultDisplayUnit("N2.T2/(l3.m)", "F/m") "Permittivity";
     defineDefaultDisplayUnit("l3.m/(N2.T2)", "m/H") "Reciprocal permittivity";
     defineDefaultDisplayUnit("l2.m/(N.T2)", "V") "Potential";
-    defineDefaultDisplayUnit("l2.m/(N.T2)", "K") "Absolute potential";
     defineDefaultDisplayUnit("l3.m/(A.N.T2)", "V.m/rad")
       "Potential per wavenumber";
     defineDefaultDisplayUnit("l2.m/(N.T2.s)", "V/s")
@@ -84,9 +83,9 @@ package Units "Constants and units of physical measure"
     defineDefaultDisplayUnit("l3/(N.T)", "cc/(C.s)") "Rate of specific volume";
     defineDefaultDisplayUnit("A/l", "rad/m") "Wavenumber";
 
-    // ***********************************************************************
+    // -----------------------------------------------------------------------
     // Conversions to display quantities in units
-    // ***********************************************************************
+    // -----------------------------------------------------------------------
 
     defineUnitConversion(
         "l/(T.s)",
@@ -602,7 +601,7 @@ package Units "Constants and units of physical measure"
         "rad/m",
         m/rad) "Wavenumber";
 
-    Modelica.Utilities.Streams.print("Done.");
+    print("Done.");
     annotation (Documentation(info="<html><p>This has no inputs or outputs.  For more information, see the documentation in
 <a href=\"modelica://FCSys.Units\">FCSys.Units</a>.</p></html>"));
   end setup;
@@ -1135,9 +1134,6 @@ encompass other systems of units.</p>
 
   end Bases;
 
-  // ------------------------------------------------------------------------
-  // Mathematical constants
-
   function from_degC "Convert from temperature in degree Celsius"
     extends Modelica.SIunits.Conversions.ConversionIcon;
 
@@ -1185,6 +1181,10 @@ encompass other systems of units.</p>
 
   end to_kPag;
 
+  // ------------------------------------------------------------------------
+  // Mathematical constants
+  // ------------------------------------------------------------------------
+
   final constant Q.Number pi=2*arccos(0) "<html>pi (<i>&pi;</i>)</html>";
   // Circumference per unit diameter
   final constant Q.Number e=exp(1) "Euler number";
@@ -1192,6 +1192,7 @@ encompass other systems of units.</p>
 
   // ------------------------------------------------------------------------
   // Base physical constants and units
+  // ------------------------------------------------------------------------
 
   replaceable constant Bases.ScaledFC base constrainedby Bases.Base
     "Scalable base constants and units";
@@ -1214,6 +1215,7 @@ encompass other systems of units.</p>
 
   // ------------------------------------------------------------------------
   // Empirical units
+  // ------------------------------------------------------------------------
   // Note:  The values are currently based on the those from [NIST2010].
   // The measured values are used rather than conventional values (where
   // they exist).
@@ -1261,6 +1263,7 @@ encompass other systems of units.</p>
 
   // ------------------------------------------------------------------------
   // SI base units [BIPM2006, Table 1] and intermediate units
+  // ------------------------------------------------------------------------
   // Note:  Only A and kg  are remaining (s, m, S, K, mol, and cd
   // already defined).
 
@@ -1282,6 +1285,7 @@ encompass other systems of units.</p>
 
   // ------------------------------------------------------------------------
   // SI prefixes [BIPM2006, Table 5]
+  // ------------------------------------------------------------------------
 
   final constant Q.Number yotta=1e24 "yotta (Y)";
   final constant Q.Number zetta=1e21 "zetta (Z)";
@@ -1305,8 +1309,8 @@ encompass other systems of units.</p>
   final constant Q.Number yocto=1e-24 "yocto (y)";
 
   // ------------------------------------------------------------------------
-  // Coherent derived units in SI with special names and symbols
-  // [BIPM2006, Table 3]
+  // Derived units in SI with special names and symbols [BIPM2006, Table 3]
+  // ------------------------------------------------------------------------
   // Note:  rad, S, C, Wb, V, J, and Sv have already been defined.  Degree
   // Celsius is only defined in setup(), degC(), and from_degC() since it
   // includes an offset.
@@ -1359,6 +1363,7 @@ encompass other systems of units.</p>
 
   // ------------------------------------------------------------------------
   // Non-SI units accepted for use with SI units [BIPM2006, Table 6]
+  // ------------------------------------------------------------------------
 
   final constant Q.Time min=60*s "minute";
   final constant Q.Time hr=60*min "hour";
@@ -1368,6 +1373,7 @@ encompass other systems of units.</p>
 
   // ------------------------------------------------------------------------
   // Derived physical constants
+  // ------------------------------------------------------------------------
   // Note:  These are established by definition, but may include
   // transcendental mathematical constants.
 
@@ -1467,6 +1473,7 @@ encompass other systems of units.</p>
 
   // ------------------------------------------------------------------------
   // Selected other non-SI units from [BIPM2006, Table 8]
+  // ------------------------------------------------------------------------
   // Note:  Logarithmic ratios have been excluded because they can't be
   // represented in Dymola's unit conversion GUI.
 
@@ -1475,6 +1482,7 @@ encompass other systems of units.</p>
 
   // ------------------------------------------------------------------------
   // Additional units that are useful for fuel cells
+  // ------------------------------------------------------------------------
 
   final constant Q.Pressure atm=101325*Pa "atmosphere";
   // Value from "standard atmosphere" [NIST2010]

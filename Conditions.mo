@@ -45,8 +45,8 @@ package Conditions "Models to specify and measure operating conditions"
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
       // Geometric parameters
-      inner parameter Q.Length L[Axis](each min=Modelica.Constants.small, start
-          =ones(3)*U.cm) "<html>Length (<b>L</b>)</html>"
+      inner parameter Q.Length L[Axis](each min=Modelica.Constants.small, start=
+           ones(3)*U.cm) "<html>Length (<b>L</b>)</html>"
         annotation (Dialog(group="Geometry"));
       final inner parameter Q.Area A[Axis]={L[cartWrap(axis + 1)]*L[cartWrap(
           axis + 2)] for axis in Axis} "Cross-sectional area";
@@ -602,8 +602,8 @@ package Conditions "Models to specify and measure operating conditions"
               Characteristics.'C+'.Graphite)
           annotation (Placement(transformation(extent={{-10,10},{10,30}})));
         Modelica.Electrical.Analog.Interfaces.NegativePin pin
-          "Modelica electrical pin" annotation (Placement(transformation(extent
-                ={{70,30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
+          "Modelica electrical pin" annotation (Placement(transformation(extent=
+                 {{70,30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
 
       equation
         // C
@@ -746,8 +746,8 @@ package Conditions "Models to specify and measure operating conditions"
           "Side of the interface w.r.t. this component";
 
         Modelica.Electrical.Analog.Interfaces.NegativePin pin
-          "Modelica electrical pin" annotation (Placement(transformation(extent
-                ={{70,30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
+          "Modelica electrical pin" annotation (Placement(transformation(extent=
+                 {{70,30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
 
       equation
         // Efforts
@@ -875,8 +875,7 @@ package Conditions "Models to specify and measure operating conditions"
           annotation (
             defaultComponentName="species",
             Documentation(info="<html><p>Note that shear force is not included.</p>
-  </html>"),
-            Icon(graphics={Line(
+  </html>"),Icon(graphics={Line(
                           points={{0,0},{-80,0}},
                           color={127,127,127},
                           smooth=Smooth.None),Line(
@@ -1180,13 +1179,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends Modelica.Media.IdealGases.Common.MixtureGasNasa(
           mediumName="AnodeGas",
           data={Modelica.Media.IdealGases.Common.SingleGasesData.H2,Modelica.Media.IdealGases.Common.SingleGasesData.H2O},
-
           fluidConstants={Modelica.Media.IdealGases.Common.FluidData.H2,
               Modelica.Media.IdealGases.Common.FluidData.H2O},
           substanceNames={"H2","H2O"},
           reference_X=fill(1/nX, nX),
           referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
-
           excludeEnthalpyOfFormation=false);
 
         annotation (Documentation(info="<html>
@@ -1202,11 +1199,9 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               Modelica.Media.IdealGases.Common.SingleGasesData.O2},
           fluidConstants={Modelica.Media.IdealGases.Common.FluidData.H2O,
               Modelica.Media.IdealGases.Common.FluidData.N2,Modelica.Media.IdealGases.Common.FluidData.O2},
-
           substanceNames={"H2O","N2","O2"},
           reference_X=fill(1/nX, nX),
           referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
-
           excludeEnthalpyOfFormation=false);
 
         annotation (Documentation(info="<html>
@@ -1375,8 +1370,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-94,-60})));
-      Connectors.RealOutputInternal p_anFPPosY(final unit="m/(l.T2)", final min
-          =0) "Pressure anode outlet" annotation (Placement(transformation(
+      Connectors.RealOutputInternal p_anFPPosY(final unit="m/(l.T2)", final min=
+           0) "Pressure anode outlet" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-74,-60})));
@@ -1385,8 +1380,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-54,-60})));
-      Connectors.RealOutputInternal p_caFPPosY(final unit="m/(l.T2)", final min
-          =0) "Pressure anode outlet" annotation (Placement(transformation(
+      Connectors.RealOutputInternal p_caFPPosY(final unit="m/(l.T2)", final min=
+           0) "Pressure anode outlet" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-34,-60})));
@@ -1608,7 +1603,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       // Summations
       connect(sumAnMFC.y, from1_LPM.u) annotation (Line(
           points={{-14,19},{-14,9.75},{-14,9.75},{-14,0.5},{-14,-18},{-14,-18}},
-
           color={0,0,127},
           smooth=Smooth.None));
 
@@ -1775,8 +1769,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{-10,-10},{10,10}},
               rotation=90,
               origin={136,0})));
-        Conditions.FaceBus.SubregionFlows anSourceCondition[n_x_an, n_z](each
-            gas(inclH2=true, inclH2O=true)) annotation (Placement(
+        Conditions.FaceBus.SubregionFlows anSourceCondition[n_x_an, n_z](each gas(
+                inclH2=true, inclH2O=true)) annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
@@ -1786,8 +1780,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{-10,-10},{10,10}},
               rotation=180,
               origin={-40,136})));
-        Conditions.FaceBus.SubregionFlows caSourceCondition[n_x_ca, n_z](each
-            gas(
+        Conditions.FaceBus.SubregionFlows caSourceCondition[n_x_ca, n_z](each gas(
             inclH2O=true,
             inclN2=true,
             inclO2=true)) annotation (Placement(transformation(
@@ -1861,7 +1854,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         connect(current.negative, anEnd) annotation (Line(
             points={{-140,30},{-150,30},{-150,5.55112e-16},{-160,5.55112e-16}},
-
             color={127,127,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1873,7 +1865,6 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             smooth=Smooth.None));
         connect(voltage.negative, anEndCondition.face) annotation (Line(
             points={{120,-30},{-150,-30},{-150,1.23436e-15},{-140,1.23436e-15}},
-
             color={127,127,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1939,8 +1930,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={30,0})));
-        Conditions.FaceBus.SubregionFlows anSource[n_x_an, n_z](each gas(inclH2
-              =true, inclH2O=true)) annotation (Placement(transformation(
+        Conditions.FaceBus.SubregionFlows anSource[n_x_an, n_z](each gas(inclH2=
+               true, inclH2O=true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=180,
               origin={-20,-30})));
@@ -2485,7 +2476,7 @@ model.</p>
         Placement(transformation(extent={{-60,40},{-40,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
 
-      FCSys.Connectors.ChemicalPotentialSpecies chemical(final n_trans=
+      FCSys.Connectors.ChemicalSpecies chemical(         final n_trans=
             countTrue({inclTransX,inclTransY,inclTransZ}))
         "Connector to exchange material while advecting translational momentum and enthalpy, with characteristic data as output"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
@@ -2512,7 +2503,7 @@ model.</p>
         parameter Integer n_trans
           "Number of components of translational momentum";
 
-        FCSys.Connectors.ChemicalPotentialSpecies chemical(final n_trans=
+        FCSys.Connectors.ChemicalSpecies chemical(         final n_trans=
               n_trans)
           "Connector to exchange material while advecting translational momentum and enthalpy, with characteristic data as output"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
@@ -2570,7 +2561,6 @@ model.</p>
         "Specify quotient of potential and temperature (measure current)"
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.PotentialPerTemperature,
-
           u(final unit="1"),
           final y(final unit="N/T") = chemical.Ndot);
 
@@ -2644,19 +2634,19 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Velocity,
           u(final unit="l/T"),
-          final y(final unit="l.m/T2") = chemical.mPhidot[linAxes[axis]]);
+          final y(final unit="l.m/T2") = chemical.mPhidot[transAxes[axis]]);
 
       equation
-        chemical.phi[linAxes[axis]] = u_final;
+        chemical.phi[transAxes[axis]] = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="translational");
       end Velocity;
 
       model Custom "Custom expressions"
         extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=chemical.mPhidot[linAxes[axis]]);
+            y=chemical.mPhidot[transAxes[axis]]);
 
-        Real x=chemical.phi[linAxes[axis]]
+        Real x=chemical.phi[transAxes[axis]]
           "Expression to which the condition is applied"
           annotation (Dialog(group="Specification"));
 
@@ -2687,9 +2677,9 @@ model.</p>
           final parameter Integer cartAxes[n_trans]=index({inclTransX,
               inclTransY,inclTransZ})
             "Cartesian-axis indices of the components of translational momentum";
-          final parameter Integer linAxes[Axis]=enumerate({inclTransX,
+          final parameter Integer transAxes[Axis]=enumerate({inclTransX,
               inclTransY,inclTransZ})
-            "Translational momentum component indices of the Cartesian axes";
+            "Translational-momentum-component indices of the Cartesian axes";
 
         equation
           // Zero values of other flows
@@ -3245,10 +3235,10 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Velocity,
           u(final unit="l/T"),
-          final y(final unit="l.m/T2") = translational.mPhidot[linAxes[axis]]);
+          final y(final unit="l.m/T2") = translational.mPhidot[transAxes[axis]]);
 
       equation
-        translational.phi[linAxes[axis]] = u_final;
+        translational.phi[transAxes[axis]] = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="translational");
       end Velocity;
@@ -3257,19 +3247,19 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Force,
           u(final unit="l.m/T2"),
-          final y(final unit="l/T") = translational.phi[linAxes[axis]]);
+          final y(final unit="l/T") = translational.phi[transAxes[axis]]);
 
       equation
-        translational.mPhidot[linAxes[axis]] = u_final;
+        translational.mPhidot[transAxes[axis]] = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="translational");
       end Force;
 
       model Custom "Custom expressions"
         extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=translational.mPhidot[linAxes[axis]]);
+            y=translational.mPhidot[transAxes[axis]]);
 
-        Real x=translational.phi[linAxes[axis]]
+        Real x=translational.phi[transAxes[axis]]
           "Expression to which the condition is applied"
           annotation (Dialog(group="Specification"));
 
@@ -3296,17 +3286,17 @@ model.</p>
           // Note:  This is included so that the type of condition is recorded with
           // the results.
 
-          FCSys.Connectors.TranslationalDiffusion translational(final n_trans=
-                n_trans) "Connector to exchange translational momentum"
+          FCSys.Connectors.Translational translational(final n_trans=n_trans)
+            "Connector to exchange translational momentum"
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
         protected
           final parameter Integer cartAxes[n_trans]=index({inclTransX,
               inclTransY,inclTransZ})
             "Cartesian-axis indices of the components of translational momentum";
-          final parameter Integer linAxes[Axis]=enumerate({inclTransX,
+          final parameter Integer transAxes[Axis]=enumerate({inclTransX,
               inclTransY,inclTransZ})
-            "Translational momentum component indices of the Cartesian axes";
+            "Translational-momentum-component indices of the Cartesian axes";
 
         equation
           // Zero values of other flows
@@ -3788,10 +3778,10 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Velocity,
           u(final unit="l/T"),
-          final y(final unit="l.m/T2") = inert.mPhidot[linAxes[axis]]);
+          final y(final unit="l.m/T2") = inert.mPhidot[transAxes[axis]]);
 
       equation
-        inert.phi[linAxes[axis]] = u_final;
+        inert.phi[transAxes[axis]] = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="translational");
       end Velocity;
@@ -3800,19 +3790,19 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Force,
           u(final unit="l.m/T2"),
-          final y(final unit="l/T") = inert.phi[linAxes[axis]]);
+          final y(final unit="l/T") = inert.phi[transAxes[axis]]);
 
       equation
-        inert.mPhidot[linAxes[axis]] = u_final;
+        inert.mPhidot[transAxes[axis]] = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="translational");
       end Force;
 
       model Custom "Custom expressions"
         extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=inert.mPhidot[linAxes[axis]]);
+            y=inert.mPhidot[transAxes[axis]]);
 
-        Real x=inert.phi[linAxes[axis]]
+        Real x=inert.phi[transAxes[axis]]
           "Expression to which the condition is applied"
           annotation (Dialog(group="Specification"));
 
@@ -3843,9 +3833,9 @@ model.</p>
           final parameter Integer cartAxes[n_trans]=index({inclTransX,
               inclTransY,inclTransZ})
             "Cartesian-axis indices of the components of translational momentum";
-          final parameter Integer linAxes[Axis]=enumerate({inclTransX,
+          final parameter Integer transAxes[Axis]=enumerate({inclTransX,
               inclTransY,inclTransZ})
-            "Translational momentum component indices of the Cartesian axes";
+            "Translational-momentum-component indices of the Cartesian axes";
 
         equation
           // Zero values of other flows
@@ -4320,10 +4310,10 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Velocity,
           u(final unit="l/T"),
-          final y(final unit="l.m/T2") = inert.mPhidot[linAxes[axis]]);
+          final y(final unit="l.m/T2") = inert.mPhidot[transAxes[axis]]);
 
       equation
-        inert.phi[linAxes[axis]] = u_final;
+        inert.phi[transAxes[axis]] = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="translational");
       end Velocity;
@@ -4332,19 +4322,19 @@ model.</p>
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.Force,
           u(final unit="l.m/T2"),
-          final y(final unit="l/T") = inert.phi[linAxes[axis]]);
+          final y(final unit="l/T") = inert.phi[transAxes[axis]]);
 
       equation
-        inert.mPhidot[linAxes[axis]] = u_final;
+        inert.mPhidot[transAxes[axis]] = u_final;
         annotation (defaultComponentPrefixes="replaceable",
             defaultComponentName="translational");
       end Force;
 
       model Custom "Custom expressions"
         extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=inert.mPhidot[linAxes[axis]]);
+            y=inert.mPhidot[transAxes[axis]]);
 
-        Real x=inert.phi[linAxes[axis]]
+        Real x=inert.phi[transAxes[axis]]
           "Expression to which the condition is applied"
           annotation (Dialog(group="Specification"));
 
@@ -4375,9 +4365,9 @@ model.</p>
           final parameter Integer cartAxes[n_trans]=index({inclTransX,
               inclTransY,inclTransZ})
             "Cartesian-axis indices of the components of translational momentum";
-          final parameter Integer linAxes[Axis]=enumerate({inclTransX,
+          final parameter Integer transAxes[Axis]=enumerate({inclTransX,
               inclTransY,inclTransZ})
-            "Translational momentum component indices of the Cartesian axes";
+            "Translational-momentum-component indices of the Cartesian axes";
 
         equation
           // Zero values of other flows
@@ -4683,8 +4673,8 @@ model.</p>
       extends FaceBus.Subregion(
         gas(
           H2(
-            redeclare replaceable Face.Material.Current material(source(k(start
-                    =0))),
+            redeclare replaceable Face.Material.Current material(source(k(start=
+                     0))),
             redeclare replaceable Face.Transverse.Force transverse1(source(k(
                     start=0))),
             redeclare replaceable Face.Transverse.Force transverse2(source(k(
@@ -4692,8 +4682,8 @@ model.</p>
             redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
                       0)))),
           H2O(
-            redeclare replaceable Face.Material.Current material(source(k(start
-                    =0))),
+            redeclare replaceable Face.Material.Current material(source(k(start=
+                     0))),
             redeclare replaceable Face.Transverse.Force transverse1(source(k(
                     start=0))),
             redeclare replaceable Face.Transverse.Force transverse2(source(k(
@@ -4701,8 +4691,8 @@ model.</p>
             redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
                       0)))),
           N2(
-            redeclare replaceable Face.Material.Current material(source(k(start
-                    =0))),
+            redeclare replaceable Face.Material.Current material(source(k(start=
+                     0))),
             redeclare replaceable Face.Transverse.Force transverse1(source(k(
                     start=0))),
             redeclare replaceable Face.Transverse.Force transverse2(source(k(
@@ -4710,8 +4700,8 @@ model.</p>
             redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
                       0)))),
           O2(
-            redeclare replaceable Face.Material.Current material(source(k(start
-                    =0))),
+            redeclare replaceable Face.Material.Current material(source(k(start=
+                     0))),
             redeclare replaceable Face.Transverse.Force transverse1(source(k(
                     start=0))),
             redeclare replaceable Face.Transverse.Force transverse2(source(k(
@@ -4719,16 +4709,16 @@ model.</p>
             redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
                       0))))),
         graphite('C+'(
-            redeclare replaceable Face.Material.Current material(source(k(start
-                    =0))),
+            redeclare replaceable Face.Material.Current material(source(k(start=
+                     0))),
             redeclare replaceable Face.Transverse.Force transverse1(source(k(
                     start=0))),
             redeclare replaceable Face.Transverse.Force transverse2(source(k(
                     start=0))),
             redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
                       0)))), 'e-'(
-            redeclare replaceable Face.Material.Current material(source(k(start
-                    =0))),
+            redeclare replaceable Face.Material.Current material(source(k(start=
+                     0))),
             redeclare replaceable Face.Transverse.Force transverse1(source(k(
                     start=0))),
             redeclare replaceable Face.Transverse.Force transverse2(source(k(
@@ -4737,8 +4727,8 @@ model.</p>
                       0))))),
         ionomer(
           'C19HF37O5S-'(
-            redeclare replaceable Face.Material.Current material(source(k(start
-                    =0))),
+            redeclare replaceable Face.Material.Current material(source(k(start=
+                     0))),
             redeclare replaceable Face.Transverse.Force transverse1(source(k(
                     start=0))),
             redeclare replaceable Face.Transverse.Force transverse2(source(k(
@@ -4746,8 +4736,8 @@ model.</p>
             redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
                       0)))),
           'H+'(
-            redeclare replaceable Face.Material.Current material(source(k(start
-                    =0))),
+            redeclare replaceable Face.Material.Current material(source(k(start=
+                     0))),
             redeclare replaceable Face.Transverse.Force transverse1(source(k(
                     start=0))),
             redeclare replaceable Face.Transverse.Force transverse2(source(k(
@@ -4755,8 +4745,8 @@ model.</p>
             redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
                       0)))),
           H2O(
-            redeclare replaceable Face.Material.Current material(source(k(start
-                    =0))),
+            redeclare replaceable Face.Material.Current material(source(k(start=
+                     0))),
             redeclare replaceable Face.Transverse.Force transverse1(source(k(
                     start=0))),
             redeclare replaceable Face.Transverse.Force transverse2(source(k(
@@ -4764,8 +4754,8 @@ model.</p>
             redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
                       0))))),
         liquid(H2O(
-            redeclare replaceable Face.Material.Current material(source(k(start
-                    =0))),
+            redeclare replaceable Face.Material.Current material(source(k(start=
+                     0))),
             redeclare replaceable Face.Transverse.Force transverse1(source(k(
                     start=0))),
             redeclare replaceable Face.Transverse.Force transverse2(source(k(
@@ -6902,27 +6892,31 @@ connected to <code>positive1</code>, as shown by Figure 1b.</p>
         <td colspan=2 align=center>Figure 1: Modes of connection.</td>
       </tr>
     </table>
-</html>"), Icon(graphics={Line(
-              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier),Line(
-              points={{-80,40},{80,40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-80,-40},{80,-40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier)}));
+</html>"), Icon(graphics={
+          Line(
+            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier),
+          Line(
+            points={{-80,40},{80,40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{80,-40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier)}));
   end Router;
 
   record Environment "Environmental properties for a model"
@@ -6944,9 +6938,11 @@ connected to <code>positive1</code>, as shown by Figure 1b.</p>
       "<html>Dry gas O<sub>2</sub> fraction (<i>y</i><sub>O2 dry</sub>)</html>";
     // Value from http://en.wikipedia.org/wiki/Oxygen
     parameter Q.Acceleration a[Axis]={0,Modelica.Constants.g_n*U.m/U.s^2,0}
-      "Acceleration of the reference frame";
+      "Acceleration due to body forces";
     // The gravity component is positive because it's added to the transient
     // term in the Species model.
+    parameter Real E[Axis]={0,0,0} "Electric field";
+    // **PotentiaLineic
     final parameter Q.NumberAbsolute x_H2O(
       final max=1,
       displayUnit="%") = 0.2
@@ -6958,54 +6954,63 @@ connected to <code>positive1</code>, as shown by Figure 1b.</p>
       missingInnerMessage="
 Your model is using an outer \"environment\" record, but an inner 
 \"environment\" record is not defined.  For simulation, drag 
-FCSys.Conditions.Environment into your model to specify global 
-conditions and defaults.  The default global conditions and 
-defaults will be used for the current simulation.
-",
-      Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-              100}}), graphics={Rectangle(
-              extent={{-120,60},{120,100}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Text(
-              extent={{-120,60},{120,100}},
-              textString="%name",
-              lineColor={0,0,0}),Rectangle(
-              extent={{-80,60},{80,-100}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Rectangle(
-              extent={{-70,50},{70,-98}},
-              lineColor={255,255,255},
-              fillPattern=FillPattern.HorizontalCylinder,
-              fillColor={170,170,255}),Rectangle(
-              extent={{-72,-60},{72,-100}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
-            Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),Ellipse(
-              extent={{32,8},{48,-8}},
-              pattern=LinePattern.None,
-              lineColor={255,255,255},
-              fillColor={50,50,50},
-              fillPattern=FillPattern.Sphere),Line(points={{-66,-90},{-36,-60}},
-            color={0,0,0}),Line(points={{2,-90},{32,-60}}, color={0,0,0}),Line(
-            points={{36,-90},{66,-60}}, color={0,0,0}),Line(points={{-32,-90},{
-            -2,-60}}, color={0,0,0}),Rectangle(
-              extent={{70,50},{76,-60}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),Rectangle(
-              extent={{-76,50},{-70,-60}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),Rectangle(
-              extent={{-80,60},{80,-100}},
-              lineColor={0,0,0},
-              pattern=LinePattern.Dash)}));
+FCSys.Conditions.Environment into your model to specify global conditions 
+and defaults.  Otherwise the default settings will be used.
+",    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
+              100}}), graphics={
+          Rectangle(
+            extent={{-120,60},{120,100}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Text(
+            extent={{-120,60},{120,100}},
+            textString="%name",
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-80,60},{80,-100}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Rectangle(
+            extent={{-70,50},{70,-98}},
+            lineColor={255,255,255},
+            fillPattern=FillPattern.HorizontalCylinder,
+            fillColor={170,170,255}),
+          Rectangle(
+            extent={{-72,-60},{72,-100}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0}),
+          Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
+          Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),
+          Ellipse(
+            extent={{32,8},{48,-8}},
+            pattern=LinePattern.None,
+            lineColor={255,255,255},
+            fillColor={50,50,50},
+            fillPattern=FillPattern.Sphere),
+          Line(points={{-66,-90},{-36,-60}}, color={0,0,0}),
+          Line(points={{2,-90},{32,-60}}, color={0,0,0}),
+          Line(points={{36,-90},{66,-60}}, color={0,0,0}),
+          Line(points={{-32,-90},{-2,-60}}, color={0,0,0}),
+          Rectangle(
+            extent={{70,50},{76,-60}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-76,50},{-70,-60}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-80,60},{80,-100}},
+            lineColor={0,0,0},
+            pattern=LinePattern.Dash)}));
 
   end Environment;
 
