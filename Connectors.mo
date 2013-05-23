@@ -65,19 +65,31 @@ package Connectors "Declarative and imperative connectors"
   connector ChemicalSpecies
     "Connector to exchange material while advecting translational momentum and thermal energy**"
 
-    output String formula "Chemical formula of the species";
-    output Q.MassSpecific m "Specific mass";
-    input Axis axis "Axis of the electric field";
+    parameter Integer n_trans(
+      final min=0,
+      final max=3) = 1
+      "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
+      annotation (HideResult=true);
+    /*
 
+
+  output String formula "Chemical formula of the species";
+  output Q.MassSpecific m "Specific mass";
+  input Axis axis "Axis of the electric field";
+*/
     // Material exchange
-    Q.Potential mu(nominal=U.V) "Electrochemical potential";
     flow Q.Current Ndot(nominal=U.A) "Diffusion current";
+    Q.Potential mu(nominal=U.V) "Electrochemical potential";
 
     // Translational advection
-    extends Translational;
+    stream Q.Velocity phi[n_trans](each nominal=U.cm/U.s) "Velocity";
+    //extends Translational;
 
     // Thermal advection
-    extends ThermalAdvection;
+    //extends ThermalAdvection;
+    stream Q.PotentialAbsolute sT(nominal=U.V)
+      "Specific entropy-temperature product";
+
     annotation (
       defaultComponentName="chemical",
       Documentation(info="<html><p>See the documentation in the
