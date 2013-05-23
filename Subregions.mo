@@ -1355,7 +1355,6 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
-
   end Subregion;
 
   model SubregionIonomerOnly "Subregion with only the ionomer phase"
@@ -1422,7 +1421,6 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
-
   end SubregionIonomerOnly;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
@@ -1615,7 +1613,6 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
-
   end SubregionNoIonomer;
 
   package Phases "Phases or mixtures of species"
@@ -1753,39 +1750,29 @@ package Subregions
           enable=inclO2),
         Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      Connectors.ChemicalBus CondEvap "H2O condensation and evaporation"
-        annotation (Placement(transformation(extent={{-30,50},{-10,70}}),
-            iconTransformation(extent={{-40,76},{-20,96}})));
-      Connectors.ChemicalBus Hydration "PEM hydration and drying" annotation (
-          Placement(transformation(extent={{-43.33,36.66},{-23.33,56.66}}),
-            iconTransformation(extent={{-52,56},{-32,76}})));
+      Connectors.ChemicalBus PC "Phase change" annotation (Placement(
+            transformation(extent={{-30,50},{-10,70}}), iconTransformation(
+              extent={{-40,76},{-20,96}})));
       Connectors.ChemicalBus HOR "Hydrogen oxidation reaction" annotation (
-          Placement(transformation(extent={{-56.66,23.33},{-36.66,43.33}}),
+          Placement(transformation(extent={{-49.66,30.33},{-29.66,50.33}}),
             iconTransformation(extent={{-64,36},{-44,56}})));
       Connectors.ChemicalBus ORR "Oxygen reduction reaction" annotation (
           Placement(transformation(extent={{-70,10},{-50,30}}),
             iconTransformation(extent={{-76,16},{-56,36}})));
 
     equation
-      // Phase change and reactions
-      // --------------------------
-      // Condensation/evaporation
-      connect(CondEvap.gas, H2O.chemical[1]) annotation (Line(
+      // Phase change
+      connect(PC.H2O, H2O.chemical[1]) annotation (Line(
           points={{-20,60},{-5.578,5.555}},
-          color={208,104,0},
-          smooth=Smooth.None));
-      // Hydration/drying
-      connect(Hydration.gas, H2O.chemical[2]) annotation (Line(
-          points={{-33.33,46.66},{-5.578,5.555}},
           color={208,104,0},
           smooth=Smooth.None));
       // HOR
       connect(HOR.H2, H2.chemical[1]) annotation (Line(
-          points={{-46.66,33.33},{-5.578,5.555}},
+          points={{-39.66,40.33},{-5.578,5.555}},
           color={208,104,0},
           smooth=Smooth.None));
       // ORR
-      connect(ORR.H2O, H2O.chemical[1]) annotation (Line(
+      connect(ORR.H2O, H2O.chemical[2]) annotation (Line(
           points={{-60,20},{-5.578,5.555}},
           color={208,104,0},
           smooth=Smooth.None));
@@ -2060,18 +2047,16 @@ package Subregions
         Placement(transformation(extent={{-10,-10},{10,10}})));
 
       Connectors.ChemicalBus HOR "Hydrogen oxidation reaction" annotation (
-          Placement(transformation(extent={{-56.66,23.33},{-36.66,43.33}}),
+          Placement(transformation(extent={{-49.66,30.33},{-29.66,50.33}}),
             iconTransformation(extent={{-64,36},{-44,56}})));
       Connectors.ChemicalBus ORR "Oxygen reduction reaction" annotation (
           Placement(transformation(extent={{-70,10},{-50,30}}),
             iconTransformation(extent={{-76,16},{-56,36}})));
 
     equation
-      // Phase change and reactions
-      // --------------------------
       // HOR
       connect(HOR.'e-', 'e-'.chemical[1]) annotation (Line(
-          points={{-46.66,33.33},{-5.578,5.555}},
+          points={{-39.66,40.33},{-5.578,5.555}},
           color={208,104,0},
           smooth=Smooth.None));
       // ORR
@@ -2287,27 +2272,25 @@ package Subregions
           enable=inclH2O),
         Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      Connectors.ChemicalBus Hydration "PEM hydration and drying" annotation (
-          Placement(transformation(extent={{-43.33,36.66},{-23.33,56.66}}),
-            iconTransformation(extent={{-52,56},{-32,76}})));
+      Connectors.ChemicalBus PC "Phase change" annotation (Placement(
+            transformation(extent={{-30,50},{-10,70}}),iconTransformation(
+              extent={{-52,56},{-32,76}})));
       Connectors.ChemicalBus HOR "Hydrogen oxidation reaction" annotation (
-          Placement(transformation(extent={{-56.66,23.33},{-36.66,43.33}}),
+          Placement(transformation(extent={{-49.66,30.33},{-29.66,50.33}}),
             iconTransformation(extent={{-64,36},{-44,56}})));
       Connectors.ChemicalBus ORR "Oxygen reduction reaction" annotation (
           Placement(transformation(extent={{-70,10},{-50,30}}),
             iconTransformation(extent={{-76,16},{-56,36}})));
 
     equation
-      // Phase change and reactions
-      // --------------------------
-      // Hydration
-      connect(Hydration.solid, H2O.chemical[1]) annotation (Line(
-          points={{-33.33,46.66},{-5.578,5.555}},
+      // Phase change
+      connect(PC.H2O, H2O.chemical[1]) annotation (Line(
+          points={{-20,60},{-5.578,5.555}},
           color={208,104,0},
           smooth=Smooth.None));
       // HOR
       connect(HOR.'H+', 'H+'.chemical[1]) annotation (Line(
-          points={{-46.66,33.33},{-5.578,5.555}},
+          points={{-39.66,40.33},{-5.578,5.555}},
           color={208,104,0},
           smooth=Smooth.None));
       // ORR
@@ -2526,15 +2509,13 @@ package Subregions
           enable=inclH2O),
         Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      Connectors.ChemicalBus CondEvap "H2O condensation and evaporation"
-        annotation (Placement(transformation(extent={{-30,50},{-10,70}}),
-            iconTransformation(extent={{-40,76},{-20,96}})));
+      Connectors.ChemicalBus PC "Phase change" annotation (Placement(
+            transformation(extent={{-30,50},{-10,70}}), iconTransformation(
+              extent={{-40,76},{-20,96}})));
 
     equation
-      // Phase change and reactions
-      // --------------------------
-      // Condensation/evaporation
-      connect(CondEvap.liquid, H2O.chemical[1]) annotation (Line(
+      // Phase change
+      connect(PC.H2O, H2O.chemical[1]) annotation (Line(
           points={{-20,60},{-5.578,5.555}},
           color={208,104,0},
           smooth=Smooth.None));
@@ -5163,7 +5144,6 @@ Choose a condition besides None.");
             extent={{-170,140},{170,180}},
             textString="%name",
             lineColor={0,0,0})}));
-
   end PhaseBoundary;
 
   model Reaction "Electrochemical reaction"
@@ -5381,7 +5361,6 @@ Choose a condition besides None.");
             lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics));
-
   end Volume;
 
   package BaseClasses "Base classes (not generally for direct use)"
