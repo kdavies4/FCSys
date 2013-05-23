@@ -117,6 +117,7 @@ package Subregions
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
+
       annotation (experiment(StopTime=1000, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionHOR.mos"));
@@ -542,43 +543,95 @@ package Subregions
               "resources/scripts/Dymola/Subregions.Examples.Reaction.mos"));
     end Reaction;
 
-    model SpeciesH2 "Test a species"
-      import FCSys.BaseClasses.Utilities.cartWrap;
+    model TestSpecies "Test the Species model"
       extends Modelica.Icons.Example;
-      extends Modelica.Icons.UnderConstruction;
+
+      import FCSys.BaseClasses.Utilities.cartWrap;
+      import FCSys.BaseClasses.Utilities.countTrue;
+      import FCSys.BaseClasses.Utilities.enumerate;
+      import FCSys.BaseClasses.Utilities.index;
+      // extends FCSys.BaseClasses.Icons.Names.Top3;
 
       // Geometric parameters
-      inner parameter Q.Length L[Axis](each min=Modelica.Constants.small) =
-        ones(3)*U.cm "<html>Length (<b>L</b>)</html>"
+      inner parameter Q.Length L[Axis](each min=Modelica.Constants.small) = {U.cm,
+        U.cm,U.cm} "<html>Length (<b>L</b>)</html>"
         annotation (Dialog(group="Geometry"));
-      final inner parameter Q.Area A[Axis]={L[cartWrap(ax + 1)]*L[cartWrap(ax
-           + 2)] for ax in 1:3} "Cross-sectional area";
-      final parameter Q.Volume V=product(L) "Volume";
+      final inner parameter Q.Volume V=product(L) "Volume";
+      parameter Q.NumberAbsolute k[Axis](
+        each min=Modelica.Constants.small,
+        each final nominal=1) = {1,1,1}
+        "<html>Area fill factor (<b>k</b>)</html>"
+        annotation (Dialog(group="Geometry"));
 
-      inner FCSys.Conditions.Environment environment(analysis=false)
-        annotation (Placement(transformation(extent={{20,20},{40,40}})));
-      replaceable Species.H2.Gas.Fixed species constrainedby Species.Species
+      // Assumptions
+      // -----------
+      // Included components of translational momentum
+      parameter Boolean inclTransX=true "X" annotation (choices(
+            __Dymola_checkBox=true), Dialog(
+          tab="Assumptions",
+          group="Axes with translational momentum included",
+          compact=true));
+      parameter Boolean inclTransY=false "Y" annotation (choices(
+            __Dymola_checkBox=true), Dialog(
+          tab="Assumptions",
+          group="Axes with translational momentum included",
+          compact=true));
+      parameter Boolean inclTransZ=true "Z" annotation (choices(
+            __Dymola_checkBox=true), Dialog(
+          tab="Assumptions",
+          group="Axes with translational momentum included",
+          compact=true));
+
+      replaceable FCSys.Subregions.Species.Species species(redeclare package
+          Data = FCSys.Characteristics.H2.Gas) constrainedby
+        FCSys.Subregions.Species.Species
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-      Conditions.InertDalton.Species inertCondition annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=225,
-            origin={20,-20})));
 
+    protected
+      final inner parameter Q.Length Lprime[:]=k .* A ./ L
+        "Effective cross-sectional area per length";
+      final inner parameter Q.Area A[Axis]={L[cartWrap(axis + 1)]*L[cartWrap(
+          axis + 2)] for axis in Axis} "Cross-sectional areas";
+      final inner parameter Boolean inclTrans[Axis]={inclTransX,inclTransY,
+          inclTransZ}
+        "true, if each component of translational momentum is included";
+      final inner parameter Integer n_trans=countTrue(inclTrans)
+        "Number of components of translational momentum";
+      final inner parameter Integer cartAxes[:]=index(inclTrans)
+        "Cartesian-axis indices of the components of translational momentum";
+      final inner parameter Integer transAxes[Axis]=enumerate(inclTrans)
+        "Translational-momentum-component indices of the Cartesian axes";
+
+      Volume volume "Model to establish a fixed total volume"
+        annotation (Placement(transformation(extent={{-16,-92},{16,-60}})));
+      PhaseBoundary phaseBoundary "Phase boundary" annotation (Placement(
+            transformation(
+            extent={{-18,-18},{18,18}},
+            rotation=0,
+            origin={0,-36})));
+    public
+      inner Conditions.Environment environment(analysis=true)
+        annotation (Placement(transformation(extent={{70,72},{90,92}})));
     equation
-      connect(inertCondition.inert, species.inert) annotation (Line(
-          points={{17.1716,-17.1716},{3.578,-7.155}},
+
+      connect(phaseBoundary.inertAmagat, volume.inert) annotation (Line(
+          points={{6.2,-48.2},{6.2,-56.1},{11,-56.1},{11,-87}},
           color={72,90,180},
           smooth=Smooth.None));
-      annotation (Placement(transformation(extent={{70,70},{90,90}})),
-          experiment(StopTime=10));
-    end SpeciesH2;
+      connect(species.inertDalton, phaseBoundary.inertDalton) annotation (Line(
+          points={{3.578,-7.155},{3.578,-16.155},{3.578,-16.155},{3.578,-25.155},
+              {3.578,-43.155},{3.578,-43.155}},
+          color={72,90,180},
+          smooth=Smooth.None));
+      annotation (Diagram(graphics));
+    end TestSpecies;
 
     model Specieseminus "Test a species"
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
 
-      extends SpeciesH2(redeclare Species.'e-'.Graphite.Fixed species);
+      extends FCSys.Subregions.Examples.TestSpecies(redeclare
+          Species.'e-'.Graphite.Fixed species);
       Conditions.Face.BaseClasses.PartialSpecies faceCondition(redeclare
           Conditions.Face.Material.Pressure material) annotation (Placement(
             transformation(
@@ -592,6 +645,7 @@ package Subregions
               6.10623e-16}},
           color={127,127,127},
           smooth=Smooth.None));
+
       annotation (
         Placement(transformation(extent={{70,70},{90,90}})),
         experiment(StopTime=10),
@@ -937,6 +991,7 @@ package Subregions
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
+
       annotation (experiment(StopTime=1000, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionHOR.mos"));
@@ -1300,6 +1355,7 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
+
   end Subregion;
 
   model SubregionIonomerOnly "Subregion with only the ionomer phase"
@@ -1366,6 +1422,7 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
+
   end SubregionIonomerOnly;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
@@ -1558,6 +1615,7 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
+
   end SubregionNoIonomer;
 
   package Phases "Phases or mixtures of species"
@@ -1587,13 +1645,13 @@ package Subregions
 
       replaceable Species.H2.Gas.Fixed H2 if inclH2 constrainedby
         Species.Species(
-        initTransX=if initTransX and reduceVel then InitTranslational.None
-             else InitTranslational.Velocity,
-        initTransY=if initTransY and reduceVel then InitTranslational.None
-             else InitTranslational.Velocity,
-        initTransZ=if initTransZ and reduceVel then InitTranslational.None
-             else InitTranslational.Velocity,
-        initEnergy=if initEnergy and reduceTemp then InitScalar.None else
+        initTransX=if initVelX and reduceVel then InitTranslational.None else
+            InitTranslational.Velocity,
+        initTransY=if initVelY and reduceVel then InitTranslational.None else
+            InitTranslational.Velocity,
+        initTransZ=if initVelZ and reduceVel then InitTranslational.None else
+            InitTranslational.Velocity,
+        initEnergy=if initTemp and reduceTemp then InitScalar.None else
             InitScalar.Temperature,
         phi(each stateSelect=if reduceVel then StateSelect.default else
               StateSelect.prefer),
@@ -1617,13 +1675,13 @@ package Subregions
 
       replaceable Species.H2O.Gas.Fixed H2O if inclH2O constrainedby
         Species.Species(
-        initTransX=if initTransX and reduceVel then InitTranslational.None
-             else InitTranslational.Velocity,
-        initTransY=if initTransY and reduceVel then InitTranslational.None
-             else InitTranslational.Velocity,
-        initTransZ=if initTransZ and reduceVel then InitTranslational.None
-             else InitTranslational.Velocity,
-        initEnergy=if initEnergy and reduceTemp then InitScalar.None else
+        initTransX=if initVelX and reduceVel then InitTranslational.None else
+            InitTranslational.Velocity,
+        initTransY=if initVelY and reduceVel then InitTranslational.None else
+            InitTranslational.Velocity,
+        initTransZ=if initVelZ and reduceVel then InitTranslational.None else
+            InitTranslational.Velocity,
+        initEnergy=if initTemp and reduceTemp then InitScalar.None else
             InitScalar.Temperature,
         phi(each stateSelect=if reduceVel then StateSelect.default else
               StateSelect.prefer),
@@ -1647,13 +1705,13 @@ package Subregions
 
       replaceable Species.N2.Gas.Fixed N2 if inclN2 constrainedby
         Species.Species(
-        initTransX=if initTransX and reduceVel then InitTranslational.None
-             else InitTranslational.Velocity,
-        initTransY=if initTransY and reduceVel then InitTranslational.None
-             else InitTranslational.Velocity,
-        initTransZ=if initTransZ and reduceVel then InitTranslational.None
-             else InitTranslational.Velocity,
-        initEnergy=if initEnergy and reduceTemp then InitScalar.None else
+        initTransX=if initVelX and reduceVel then InitTranslational.None else
+            InitTranslational.Velocity,
+        initTransY=if initVelY and reduceVel then InitTranslational.None else
+            InitTranslational.Velocity,
+        initTransZ=if initVelZ and reduceVel then InitTranslational.None else
+            InitTranslational.Velocity,
+        initEnergy=if initTemp and reduceTemp then InitScalar.None else
             InitScalar.Temperature,
         phi(each stateSelect=if reduceVel then StateSelect.default else
               StateSelect.prefer),
@@ -1676,13 +1734,13 @@ package Subregions
           __Dymola_joinNext=true));
       replaceable Species.O2.Gas.Fixed O2 if inclO2 constrainedby
         Species.Species(
-        initTransX=if initTransX and reduceVel then InitTranslational.None
-             else InitTranslational.Velocity,
-        initTransY=if initTransY and reduceVel then InitTranslational.None
-             else InitTranslational.Velocity,
-        initTransZ=if initTransZ and reduceVel then InitTranslational.None
-             else InitTranslational.Velocity,
-        initEnergy=if initEnergy and reduceTemp then InitScalar.None else
+        initTransX=if initVelX and reduceVel then InitTranslational.None else
+            InitTranslational.Velocity,
+        initTransY=if initVelY and reduceVel then InitTranslational.None else
+            InitTranslational.Velocity,
+        initTransZ=if initVelZ and reduceVel then InitTranslational.None else
+            InitTranslational.Velocity,
+        initEnergy=if initTemp and reduceTemp then InitScalar.None else
             InitScalar.Temperature,
         phi(each stateSelect=if reduceVel then StateSelect.default else
               StateSelect.prefer),
@@ -1694,8 +1752,6 @@ package Subregions
           __Dymola_descriptionLabel=true,
           enable=inclO2),
         Placement(transformation(extent={{-10,-10},{10,10}})));
-
-      // **Clean up diagram for this and other phases.
 
       Connectors.ChemicalBus CondEvap "H2O condensation and evaporation"
         annotation (Placement(transformation(extent={{-30,50},{-10,70}}),
@@ -1714,43 +1770,43 @@ package Subregions
       // Phase change and reactions
       // --------------------------
       // Condensation/evaporation
-      connect(CondEvap.gas, H2O.chemicalAct[1]) annotation (Line(
-          points={{-20,60},{-3.6,7.2}},
+      connect(CondEvap.gas, H2O.chemical[1]) annotation (Line(
+          points={{-20,60},{-5.578,5.555}},
           color={208,104,0},
           smooth=Smooth.None));
       // Hydration/drying
-      connect(Hydration.gas, H2O.chemicalAct[2]) annotation (Line(
-          points={{-33.33,46.66},{-3.6,7.2}},
+      connect(Hydration.gas, H2O.chemical[2]) annotation (Line(
+          points={{-33.33,46.66},{-5.578,5.555}},
           color={208,104,0},
           smooth=Smooth.None));
       // HOR
-      connect(HOR.H2, H2.chemicalPot[1]) annotation (Line(
-          points={{-46.66,33.33},{-7.178,3.555}},
+      connect(HOR.H2, H2.chemical[1]) annotation (Line(
+          points={{-46.66,33.33},{-5.578,5.555}},
           color={208,104,0},
           smooth=Smooth.None));
       // ORR
-      connect(ORR.H2O, H2O.chemicalPot[1]) annotation (Line(
-          points={{-60,20},{-7.178,3.555}},
+      connect(ORR.H2O, H2O.chemical[1]) annotation (Line(
+          points={{-60,20},{-5.578,5.555}},
           color={208,104,0},
           smooth=Smooth.None));
-      connect(ORR.O2, O2.chemicalPot[1]) annotation (Line(
-          points={{-60,20},{-7.178,3.555}},
+      connect(ORR.O2, O2.chemical[1]) annotation (Line(
+          points={{-60,20},{-5.578,5.555}},
           color={208,104,0},
           smooth=Smooth.None));
 
       // H2
       // --
       // Exchange
-      connect(H2.common.translational, common.translational) annotation (Line(
+      connect(H2.inert.translational, inert.translational) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect(H2.common.thermal, common.thermal) annotation (Line(
+      connect(H2.inert.thermal, inert.thermal) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect(H2.inert, phaseBoundary.inertD) annotation (Line(
-          points={{7.155,-3.578},{4,-8},{4,-7.155},{3.578,-7.155}},
+      connect(H2.inertDalton, phaseBoundary.inertDalton) annotation (Line(
+          points={{3.578,-7.155},{4,-8},{4,-7.155},{3.578,-7.155}},
           color={72,90,180},
           smooth=Smooth.None));
       // Transport
@@ -1788,16 +1844,16 @@ package Subregions
       // H2O
       // ---
       // Exchange
-      connect(H2O.common.translational, common.translational) annotation (Line(
+      connect(H2O.inert.translational, inert.translational) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect(H2O.common.thermal, common.thermal) annotation (Line(
+      connect(H2O.inert.thermal, inert.thermal) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect(H2O.inert, phaseBoundary.inertD) annotation (Line(
-          points={{7.155,-3.578},{4,-8},{4,-7.155},{3.578,-7.155}},
+      connect(H2O.inertDalton, phaseBoundary.inertDalton) annotation (Line(
+          points={{3.578,-7.155},{4,-8},{4,-7.155},{3.578,-7.155}},
           color={72,90,180},
           smooth=Smooth.None));
       // Transport
@@ -1835,16 +1891,16 @@ package Subregions
       // N2
       // --
       // Exchange
-      connect(N2.common.translational, common.translational) annotation (Line(
+      connect(N2.inert.translational, inert.translational) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect(N2.common.thermal, common.thermal) annotation (Line(
+      connect(N2.inert.thermal, inert.thermal) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect(N2.inert, phaseBoundary.inertD) annotation (Line(
-          points={{7.155,-3.578},{4,-8},{4,-7.155},{3.578,-7.155}},
+      connect(N2.inertDalton, phaseBoundary.inertDalton) annotation (Line(
+          points={{3.578,-7.155},{4,-8},{4,-7.155},{3.578,-7.155}},
           color={72,90,180},
           smooth=Smooth.None));
       // Transport
@@ -1882,16 +1938,16 @@ package Subregions
       // O2
       // --
       // Exchange
-      connect(O2.common.translational, common.translational) annotation (Line(
+      connect(O2.inert.translational, inert.translational) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect(O2.common.thermal, common.thermal) annotation (Line(
+      connect(O2.inert.thermal, inert.thermal) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect(O2.inert, phaseBoundary.inertD) annotation (Line(
-          points={{7.155,-3.578},{3.578,-7.155},{3.578,-7.155},{3.578,-7.155},{
+      connect(O2.inertDalton, phaseBoundary.inertDalton) annotation (Line(
+          points={{3.578,-7.155},{3.578,-7.155},{3.578,-7.155},{3.578,-7.155},{
               3.578,-7.155},{3.578,-7.155}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -1937,13 +1993,16 @@ package Subregions
 
         Icon(graphics),
         Diagram(graphics));
+
     end Gas;
 
     model Graphite "Graphite phase"
       import FCSys.BaseClasses.Utilities.countTrue;
-      extends BaseClasses.NullPhase(final n_spec=countTrue({'inclC+','incle-'}),
-          common(translational(phi(fixed=if 'inclC+' then fill(false, n_trans)
-                   else {initTransX,initTransY,initTransZ}[cartAxes]))));
+      extends BaseClasses.NullPhase(
+        final n_spec=countTrue({'inclC+','incle-'}),
+        initVelX=not 'inclC+',
+        initVelY=not 'inclC+',
+        initVelZ=not 'inclC+');
 
       // Conditionally include species.
       parameter Boolean 'inclC+'=false
@@ -1957,7 +2016,7 @@ package Subregions
 
       replaceable Species.'C+'.Graphite.Fixed 'C+' if 'inclC+' constrainedby
         Species.Species(
-        initEnergy=if initEnergy and reduceTemp then InitScalar.None else
+        initEnergy=if initTemp and reduceTemp then InitScalar.None else
             InitScalar.Temperature,
         phi(each stateSelect=if reduceVel then StateSelect.default else
               StateSelect.prefer),
@@ -1987,7 +2046,7 @@ package Subregions
             InitTranslational.None else InitTranslational.Velocity,
         initTransZ=if (initTransZ or 'inclC+') and reduceVel then
             InitTranslational.None else InitTranslational.Velocity,
-        initEnergy=if initEnergy and reduceTemp then InitScalar.None else
+        initEnergy=if initTemp and reduceTemp then InitScalar.None else
             InitScalar.Temperature,
         phi(each stateSelect=if reduceVel then StateSelect.default else
               StateSelect.prefer),
@@ -2011,28 +2070,28 @@ package Subregions
       // Phase change and reactions
       // --------------------------
       // HOR
-      connect(HOR.'e-', 'e-'.chemicalPot[1]) annotation (Line(
-          points={{-46.66,33.33},{-7.178,3.555}},
+      connect(HOR.'e-', 'e-'.chemical[1]) annotation (Line(
+          points={{-46.66,33.33},{-5.578,5.555}},
           color={208,104,0},
           smooth=Smooth.None));
       // ORR
-      connect(ORR.'e-', 'e-'.chemicalPot[2]) annotation (Line(
-          points={{-60,20},{-7.178,3.555}},
+      connect(ORR.'e-', 'e-'.chemical[2]) annotation (Line(
+          points={{-60,20},{-5.578,5.555}},
           color={208,104,0},
           smooth=Smooth.None));
 
       // C+
       // --
       // Exchange
-      connect('C+'.common.translational, common.translational) annotation (Line(
+      connect('C+'.inert.translational, inert.translational) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect('C+'.common.thermal, common.thermal) annotation (Line(
+      connect('C+'.inert.thermal, inert.thermal) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect('C+'.inert, phaseBoundary.inertD) annotation (Line(
+      connect('C+'.inertDalton, phaseBoundary.inertD) annotation (Line(
           points={{7.155,-3.578},{3.578,-7.155},{3.578,-7.155}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -2049,8 +2108,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect('C+'.faces[Axis.y, Side.n], yNegative.'C+') annotation (Line(
-          points={{6.10623e-16,6.10623e-16},{-4.87687e-22,6.10623e-16},{-4.87687e-22,
-              -40},{5.55112e-16,-40}},
+          points={{6.10623e-16,6.10623e-16},{-4.87687e-22,6.10623e-16},{
+              -4.87687e-22,-40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
@@ -2071,15 +2130,15 @@ package Subregions
       // e-
       // --
       // Exchange
-      connect('e-'.common.translational, common.translational) annotation (Line(
+      connect('e-'.inert.translational, inert.translational) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect('e-'.common.thermal, common.thermal) annotation (Line(
+      connect('e-'.inert.thermal, inert.thermal) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect('e-'.inert, phaseBoundary.inertD) annotation (Line(
+      connect('e-'.inertDalton, phaseBoundary.inertD) annotation (Line(
           points={{7.155,-3.578},{3.578,-7.155},{3.578,-7.155}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -2096,8 +2155,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect('e-'.faces[Axis.y, Side.n], yNegative.'e-') annotation (Line(
-          points={{6.10623e-16,6.10623e-16},{-4.87687e-22,6.10623e-16},{-4.87687e-22,
-              -40},{5.55112e-16,-40}},
+          points={{6.10623e-16,6.10623e-16},{-4.87687e-22,6.10623e-16},{
+              -4.87687e-22,-40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
@@ -2130,14 +2189,16 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
+
     end Graphite;
 
     model Ionomer "Ionomer phase"
       import FCSys.BaseClasses.Utilities.countTrue;
-      extends BaseClasses.NullPhase(final n_spec=countTrue({'inclC19HF37O5S-',
-            'inclH+',inclH2O}), common(translational(phi(fixed=if
-                  'inclC19HF37O5S-' then fill(false, n_trans) else {initTransX,
-                  initTransY,initTransZ}[cartAxes]))));
+      extends BaseClasses.NullPhase(
+        final n_spec=countTrue({'inclC19HF37O5S-','inclH+',inclH2O}),
+        initVelX=not 'inclC19HF37O5S-',
+        initVelY=not 'inclC19HF37O5S-',
+        initVelZ=not 'inclC19HF37O5S-');
 
       // Conditionally include species.
       parameter Boolean 'inclC19HF37O5S-'=false
@@ -2152,7 +2213,7 @@ package Subregions
 
       replaceable Species.'C19HF37O5S-'.Ionomer.Fixed 'C19HF37O5S-' if
         'inclC19HF37O5S-' constrainedby Species.Species(
-        initEnergy=if initEnergy and reduceTemp then InitScalar.None else
+        initEnergy=if initTemp and reduceTemp then InitScalar.None else
             InitScalar.Temperature,
         phi(each stateSelect=if reduceVel then StateSelect.default else
               StateSelect.prefer),
@@ -2177,13 +2238,13 @@ package Subregions
 
       replaceable Species.'H+'.Ionomer.Fixed 'H+' if 'inclH+' constrainedby
         Species.Species(
-        initTransX=if initTransX and reduceVel then InitTranslational.None
-             else InitTranslational.Velocity,
-        initTransY=if initTransY and reduceVel then InitTranslational.None
-             else InitTranslational.Velocity,
-        initTransZ=if initTransZ and reduceVel then InitTranslational.None
-             else InitTranslational.Velocity,
-        initEnergy=if initEnergy and reduceTemp then InitScalar.None else
+        initTransX=if initVelX and reduceVel then InitTranslational.None else
+            InitTranslational.Velocity,
+        initTransY=if initVelY and reduceVel then InitTranslational.None else
+            InitTranslational.Velocity,
+        initTransZ=if initVelZ and reduceVel then InitTranslational.None else
+            InitTranslational.Velocity,
+        initEnergy=if initTemp and reduceTemp then InitScalar.None else
             InitScalar.Temperature,
         phi(each stateSelect=if reduceVel then StateSelect.default else
               StateSelect.prefer),
@@ -2213,7 +2274,7 @@ package Subregions
             InitTranslational.None else InitTranslational.Velocity,
         initTransZ=if (initTransZ or 'inclC19HF37O5S-') and reduceVel then
             InitTranslational.None else InitTranslational.Velocity,
-        initEnergy=if initEnergy and reduceTemp then InitScalar.None else
+        initEnergy=if initTemp and reduceTemp then InitScalar.None else
             InitScalar.Temperature,
         phi(each stateSelect=if reduceVel then StateSelect.default else
               StateSelect.prefer),
@@ -2240,35 +2301,36 @@ package Subregions
       // Phase change and reactions
       // --------------------------
       // Hydration
-      connect(Hydration.solid, H2O.chemicalAct[1]) annotation (Line(
-          points={{-33.33,46.66},{-3.6,7.2}},
+      connect(Hydration.solid, H2O.chemical[1]) annotation (Line(
+          points={{-33.33,46.66},{-5.578,5.555}},
           color={208,104,0},
           smooth=Smooth.None));
       // HOR
-      connect(HOR.'H+', 'H+'.chemicalPot[1]) annotation (Line(
-          points={{-46.66,33.33},{-7.178,3.555}},
+      connect(HOR.'H+', 'H+'.chemical[1]) annotation (Line(
+          points={{-46.66,33.33},{-5.578,5.555}},
           color={208,104,0},
           smooth=Smooth.None));
       // ORR
-      connect(ORR.'H+', 'H+'.chemicalPot[2]) annotation (Line(
-          points={{-60,20},{-7.178,3.555}},
+      connect(ORR.'H+', 'H+'.chemical[2]) annotation (Line(
+          points={{-60,20},{-5.578,5.555}},
           color={208,104,0},
           smooth=Smooth.None));
 
       // C19HF37O5S-
       // -----------
       // Exchange
-      connect('C19HF37O5S-'.common.translational, common.translational)
+      connect('C19HF37O5S-'.inert.translational, inert.translational)
         annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect('C19HF37O5S-'.common.thermal, common.thermal) annotation (Line(
+      connect('C19HF37O5S-'.inert.thermal, inert.thermal) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect('C19HF37O5S-'.inert, phaseBoundary.inertD) annotation (Line(
-          points={{7.155,-3.578},{7,-7},{7,-7.155},{3.578,-7.155}},
+      connect('C19HF37O5S-'.inertDalton, phaseBoundary.inertDalton) annotation
+        (Line(
+          points={{3.578,-7.155},{7,-7},{7,-7.155},{3.578,-7.155}},
           color={72,90,180},
           smooth=Smooth.None));
       // Transport
@@ -2314,16 +2376,16 @@ package Subregions
       // 'H+'
       // ----
       // Exchange
-      connect('H+'.common.translational, common.translational) annotation (Line(
+      connect('H+'.inert.translational, inert.translational) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect('H+'.common.thermal, common.thermal) annotation (Line(
+      connect('H+'.inert.thermal, inert.thermal) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect('H+'.inert, phaseBoundary.inertD) annotation (Line(
-          points={{7.155,-3.578},{7,-7},{7,-7.155},{3.578,-7.155}},
+      connect('H+'.inertDalton, phaseBoundary.inertDalton) annotation (Line(
+          points={{3.578,-7.155},{7,-7},{7,-7.155},{3.578,-7.155}},
           color={72,90,180},
           smooth=Smooth.None));
       // Transport
@@ -2363,16 +2425,16 @@ package Subregions
       // H2O
       // ---
       // Exchange
-      connect(H2O.common.translational, common.translational) annotation (Line(
+      connect(H2O.inert.translational, inert.translational) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect(H2O.common.thermal, common.thermal) annotation (Line(
+      connect(H2O.inert.thermal, inert.thermal) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect(H2O.inert, phaseBoundary.inertD) annotation (Line(
-          points={{7.155,-3.578},{7,-7},{7,-7.155},{3.578,-7.155}},
+      connect(H2O.inertDalton, phaseBoundary.inertDalton) annotation (Line(
+          points={{3.578,-7.155},{7,-7},{7,-7.155},{3.578,-7.155}},
           color={72,90,180},
           smooth=Smooth.None));
       // Transport
@@ -2427,6 +2489,7 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Diagram(graphics));
+
     end Ionomer;
 
     model Liquid "Liquid phase"
@@ -2444,13 +2507,13 @@ package Subregions
           __Dymola_joinNext=true));
       replaceable Species.H2O.Liquid.Fixed H2O if inclH2O constrainedby
         Species.Species(
-        initTransX=if initTransX and reduceVel then InitTranslational.None
-             else InitTranslational.Velocity,
-        initTransY=if initTransY and reduceVel then InitTranslational.None
-             else InitTranslational.Velocity,
-        initTransZ=if initTransZ and reduceVel then InitTranslational.None
-             else InitTranslational.Velocity,
-        initEnergy=if initEnergy and reduceTemp then InitScalar.None else
+        initTransX=if initVelX and reduceVel then InitTranslational.None else
+            InitTranslational.Velocity,
+        initTransY=if initVelY and reduceVel then InitTranslational.None else
+            InitTranslational.Velocity,
+        initTransZ=if initVelZ and reduceVel then InitTranslational.None else
+            InitTranslational.Velocity,
+        initEnergy=if initTemp and reduceTemp then InitScalar.None else
             InitScalar.Temperature,
         phi(each stateSelect=if reduceVel then StateSelect.default else
               StateSelect.prefer),
@@ -2471,23 +2534,23 @@ package Subregions
       // Phase change and reactions
       // --------------------------
       // Condensation/evaporation
-      connect(CondEvap.liquid, H2O.chemicalAct[1]) annotation (Line(
-          points={{-20,60},{-3.6,7.2}},
+      connect(CondEvap.liquid, H2O.chemical[1]) annotation (Line(
+          points={{-20,60},{-5.578,5.555}},
           color={208,104,0},
           smooth=Smooth.None));
 
       // H2O
       // ---
       // Exchange
-      connect(H2O.common.translational, common.translational) annotation (Line(
+      connect(H2O.inert.translational, inert.translational) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect(H2O.common.thermal, common.thermal) annotation (Line(
+      connect(H2O.inert.thermal, inert.thermal) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
           color={72,90,180},
           smooth=Smooth.None));
-      connect(H2O.inert, phaseBoundary.inertD) annotation (Line(
+      connect(H2O.inertDalton, phaseBoundary.inertD) annotation (Line(
           points={{7.155,-3.578},{3.8,-7},{3.8,-7.155},{3.578,-7.155}},
           color={72,90,180},
           smooth=Smooth.None));
@@ -2531,11 +2594,13 @@ package Subregions
 
         Icon(graphics),
         Diagram(graphics));
+
     end Liquid;
 
     package BaseClasses "Base classes (not generally for direct use)"
       extends Modelica.Icons.BasesPackage;
       model NullPhase "Model for a phase with no species or reactions"
+        import FCSys.BaseClasses.Utilities.index;
         // extends FCSys.BaseClasses.Icons.Names.Middle;
 
         // Geometric parameters
@@ -2606,7 +2671,7 @@ package Subregions
             enable=reduceTemp));
         // This is always enabled in the dialog since it's used as a guess value.
 
-        Connectors.InertAmagat inert(final n_trans=n_trans) if n_spec > 0
+        Connectors.InertAmagat inertAmagat(final n_trans=n_trans) if n_spec > 0
           annotation (Placement(transformation(extent={{3.33,-36.67},{23.33,-16.67}}),
               iconTransformation(extent={{70,-90},{90,-70}})));
         Connectors.FaceBus xPositive if n_spec > 0
@@ -2645,7 +2710,7 @@ package Subregions
 
       protected
         parameter Integer n_spec(start=0) "Number of species";
-        final inner parameter Q.Length Lprime[:]=k .* A ./ L if n_spec > 0
+        final inner parameter Q.Length Lprime[Axis]=k .* A ./ L if n_spec > 0
           "Effective cross-sectional area per length";
         outer parameter Integer n_trans
           "Number of components of translational momentum" annotation (
@@ -2655,9 +2720,12 @@ package Subregions
           "Cartesian-axis indices of the components of translational momentum"
           annotation (missingInnerMessage=
               "This model should be used within a subregion model.");
+        outer parameter Boolean inclTrans[Axis]
+          "true, if each component of translational momentum is included"
+          annotation (missingInnerMessage=
+              "This model should be used within a subregion model.");
 
         outer Conditions.Environment environment "Environmental conditions";
-
         PhaseBoundary phaseBoundary if n_spec > 0 "Phase boundary" annotation (
             Placement(transformation(
               extent={{-18,-18},{18,18}},
@@ -2667,14 +2735,14 @@ package Subregions
         // when two or more empty phases (without any species included) are
         // connected.
 
-        Connectors.InertInternal common(
+        Connectors.InertInternal inert(
           n_trans=n_trans,
           final inclTranslational=reduceVel,
           final inclThermal=reduceTemp,
           translational(phi(
               each stateSelect=StateSelect.prefer,
               final start=phi_IC[cartAxes],
-              final fixed={initVelX,initVelY,initVelZ}[cartAxes])),
+              final fixed={initVelX,initVelY,initVelZ}[index(inclTrans)])),
           thermal(T(
               stateSelect=StateSelect.prefer,
               final start=T_IC,
@@ -2684,10 +2752,12 @@ package Subregions
           annotation (Placement(transformation(extent={{-10,-10},{10,10}},
                 origin={26.67,-13.33}), iconTransformation(extent={{-10,-10},{
                   10,10}}, origin={26,-14})));
-
+        // Note:  It would be simpler to use {initVelX, initVelY, initVelZ}[cartAxes]
+        // for the fixed attribute of inert.translational, but Dymola 7.4 refuses to
+        // accept it.
       equation
         // Inert interactions
-        connect(phaseBoundary.inertA, inert) annotation (Line(
+        connect(phaseBoundary.inertAmagat, inertAmagat) annotation (Line(
             points={{6.2,-12.2},{13.33,-26.67}},
             color={72,90,180},
             smooth=Smooth.None));
@@ -2772,7 +2842,8 @@ package Subregions
               Text(
                 extent={{-100,-20},{100,20}},
                 textString="%name",
-                lineColor={0,0,0})}));
+                lineColor={0,0,0})}),
+          Diagram(graphics));
       end NullPhase;
 
     end BaseClasses;
@@ -2788,7 +2859,7 @@ package Subregions
         extends Modelica.Icons.Package;
         model Calibrated "Correlations with adjustment factors"
           extends SpeciesSolid(redeclare replaceable package Data =
-                Characteristics.'C+'.Graphite, theta=k_theta*Data.theta(T));
+                Characteristics.'C+'.Graphite, theta=k_theta*Data.theta(T, v));
           // Note:  In Dymola 7.4,
           // "redeclare replaceable package Data = FCSys.Characteristics.C.Graphite"
           // must be used instead of
@@ -2809,15 +2880,15 @@ package Subregions
                     {100,100}}), graphics),
             Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics={Text(
-                  extent={{-150,90},{-118,52}},
-                  lineColor={0,0,255},
-                  textString="%t.test")}));
+                          extent={{-150,90},{-118,52}},
+                          lineColor={0,0,255},
+                          textString="%t.test")}));
 
         end Calibrated;
 
         model Correlated "Correlated properties"
           extends SpeciesSolid(redeclare replaceable package Data =
-                Characteristics.'C+'.Graphite, R=Data.theta(T));
+                Characteristics.'C+'.Graphite);
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="C",
@@ -2832,9 +2903,9 @@ package Subregions
           import Modelica.Math.log;
           import FCSys.BaseClasses.Utilities.Polynomial;
 
-          // **extends SpeciesSolid
           extends SpeciesSolid(redeclare replaceable package Data =
-                Characteristics.'C+'.Graphite,final inclElectrical=false);
+                Characteristics.'C+'.Graphite,redeclare parameter
+              Q.ResistivityThermal theta=Data.theta());
           /* **
 (
         Deltah0_f=0,
@@ -2848,7 +2919,7 @@ package Subregions
             298.15*U.K,
             Characteristics.'C+'.Graphite.b_c[1, :],
             -3) + FCSys.Characteristics.'C+'.Graphite.B_c[1, 2] - Data.b_c[1, 1]
-            *lnog298.15*U.K)]), redeclare parameter Q.Resistivity R=U.m*U.K/(5.70
+            *lnog298.15*U.K)]), redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(5.70
         *U.W)*/
           // See the documentation for a table of values.
           // Note:  Parameter expressions (e.g., involving environment.T) are not
@@ -2863,7 +2934,7 @@ package Subregions
     </ol></p>
 
     <p>The default isobaric specific heat capacity (<code>b_c=[0, 935*U.J*Data.m/(U.kg*U.K)]</code>) and thermal
-   resistivity (<code>alpha_Qdot=U.m*U.K/(11.1*U.W)</code>) is based on data of graphite fiber epoxy (25% vol)<br>composite at 300 K from
+   resistivity (<code>theta=U.m*U.K/(11.1*U.W)</code>) is based on data of graphite fiber epoxy (25% vol)<br>composite at 300 K from
    Incropera and DeWitt [<a href=\"modelica://FCSys.UsersGuide.References\">Incropera2002</a>, p. 909].
    Related data is listed in <a href=\"#Tab1\">Table 1</a>.</p>
 
@@ -2920,7 +2991,7 @@ package Subregions
         model Calibrated "Correlations with adjustment factors"
           extends SpeciesSolid(redeclare replaceable package Data =
                 Characteristics.'C19HF37O5S-'.Ionomer, theta=k_theta*Data.theta(
-                T));
+                T, v));
 
           parameter Q.NumberAbsolute k_theta(final nominal=1) = 1
             "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&theta;</sub>)</html>"
@@ -2937,7 +3008,7 @@ package Subregions
 
         model Correlated "Correlated properties"
           extends SpeciesSolid(redeclare replaceable package Data =
-                Characteristics.'C19HF37O5S-'.Ionomer, R=Data.theta(T));
+                Characteristics.'C19HF37O5S-'.Ionomer);
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="C19HF37O5S",
@@ -2949,7 +3020,7 @@ package Subregions
         model Fixed "Fixed properties"
           extends SpeciesSolid(redeclare replaceable package Data =
                 Characteristics.'C19HF37O5S-'.Ionomer, redeclare parameter
-              Q.ResistivityThermal R=Data.R());
+              Q.ResistivityThermal theta=Data.theta());
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="C19HF37O5S",
@@ -2980,9 +3051,9 @@ package Subregions
           extends Species(
             redeclare replaceable package Data = Characteristics.'e-'.Graphite,
 
-            beta=k_beta*Data.beta(T),
-            zeta=k_zeta*Data.zeta(T),
-            theta=k_theta*Data.theta(T));
+            beta=k_beta*Data.beta(T, v),
+            zeta=k_zeta*Data.zeta(T, v),
+            theta=k_theta*Data.theta(T, v));
 
           parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
             "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
@@ -2991,23 +3062,19 @@ package Subregions
             "<html>Adjustment factor for fluidity (<i>k</i><sub>&zeta;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_theta(final nominal=1) = 1
-            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S&#775;</i></sub>)</html>"
+            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&theta;</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'e-'",
             Documentation(info=
                   "<html><p>See the information in the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
-
+          // **Add parameters k_mu, k_nu, k_eta for this and all calibrated species.
         end Calibrated;
 
         model Correlated "Correlated properties"
-          extends Species(
-            redeclare replaceable package Data = Characteristics.'e-'.Graphite,
-
-            beta=Data.beta(T),
-            F=Data.zeta(T),
-            R=Data.theta(T));
+          extends Species(redeclare replaceable package Data =
+                Characteristics.'e-'.Graphite);
 
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -3021,9 +3088,9 @@ package Subregions
           extends Species(
             redeclare replaceable package Data = Characteristics.'e-'.Graphite,
 
-            redeclare parameter Q.CompressibilityDynamic beta=Data.beta(),
-            redeclare parameter Q.FluidityDynamic F=Data.zeta(),
-            redeclare parameter Q.ResistivityThermal R=Data.R());
+            redeclare parameter Q.Fluidity beta=Data.beta(),
+            redeclare parameter Q.Fluidity zeta=Data.zeta(),
+            redeclare parameter Q.ResistivityThermal theta=Data.theta());
 
           annotation (
             group="Material properties",
@@ -3034,7 +3101,7 @@ package Subregions
 
             Diagram(graphics));
 
-          // **set R=0 (final), F=0 (final), use small Lstar factor to reduce thermal and translational coupling with solid
+          // **set theta=0 (final), zeta=0 (final), use small Lprime factor to reduce thermal and translational coupling with solid
 
         end Fixed;
 
@@ -3051,9 +3118,9 @@ package Subregions
             redeclare replaceable package Data = Characteristics.'H+'.Ionomer (
                   n_v=FCSys.Characteristics.'C19HF37O5S-'.Ionomer.n_v, b_v=
                     FCSys.Characteristics.'C19HF37O5S-'.Ionomer.b_v),
-            beta=k_beta*Data.beta(T),
-            zeta=k_zeta*Data.zeta(T),
-            theta=k_theta*Data.theta(T));
+            beta=k_beta*Data.beta(T, v),
+            zeta=k_zeta*Data.zeta(T, v),
+            theta=k_theta*Data.theta(T, v));
 
           parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
             "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
@@ -3062,7 +3129,7 @@ package Subregions
             "<html>Adjustment factor for fluidity (<i>k</i><sub>&zeta;</sub>)</html>"
             annotation (Dialog(group="Material properties"));
           parameter Q.NumberAbsolute k_theta(final nominal=1) = 1
-            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&alpha; <i>S&#775;</i></sub>)</html>"
+            "<html>Adjustment factor for thermal resistivity (<i>k</i><sub>&theta;</i></sub>)</html>"
             annotation (Dialog(group="Material properties"));
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -3082,13 +3149,10 @@ package Subregions
         end Calibrated;
 
         model Correlated "Correlated properties"
-          extends Species(
-            redeclare replaceable package Data = Characteristics.'H+'.Ionomer (
-                  n_v=FCSys.Characteristics.'C19HF37O5S-'.Ionomer.n_v, b_v=
-                    FCSys.Characteristics.'C19HF37O5S-'.Ionomer.b_v),
-            beta=Data.beta(T),
-            F=Data.zeta(T),
-            R=Data.theta(T));
+          extends Species(redeclare replaceable package Data =
+                Characteristics.'H+'.Ionomer (n_v=FCSys.Characteristics.
+                    'C19HF37O5S-'.Ionomer.n_v, b_v=FCSys.Characteristics.
+                    'C19HF37O5S-'.Ionomer.b_v));
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'H+'",
@@ -3110,9 +3174,9 @@ package Subregions
           extends Species(
             redeclare replaceable package Data = Characteristics.'H+'.Ionomer,
             initMaterial=InitScalar.None,
-            redeclare parameter Q.CompressibilityDynamic beta=Data.beta(),
-            redeclare parameter Q.FluidityDynamic F=Data.zeta(),
-            redeclare parameter Q.ResistivityThermal R=U.m*U.K/(0.1661*U.W));
+            redeclare parameter Q.Fluidity beta=Data.beta(),
+            redeclare parameter Q.Fluidity zeta=Data.zeta(),
+            redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.1661*U.W));
 
           /*
     *Are the trivial Data modifications necessary?
@@ -3214,9 +3278,9 @@ package Subregions
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.H2.Gas (
                   b_v=[1],n_v={-1,0}),
-            beta=k_beta*Data.beta(T),
-            zeta=k_zeta*Data.zeta(T),
-            theta=k_theta*Data.theta(T));
+            beta=k_beta*Data.beta(T, v),
+            zeta=k_zeta*Data.zeta(T, v),
+            theta=k_theta*Data.theta(T, v));
 
           parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
             "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
@@ -3239,12 +3303,8 @@ package Subregions
         end Calibrated;
 
         model Correlated "Correlated properties"
-          extends Species(
-            redeclare replaceable package Data = FCSys.Characteristics.H2.Gas (
-                  b_v=[1],n_v={-1,0}),
-            beta=Data.beta(T),
-            F=Data.zeta(T),
-            R=Data.theta(T));
+          extends Species(redeclare replaceable package Data =
+                FCSys.Characteristics.H2.Gas (b_v=[1], n_v={-1,0}));
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2",
@@ -3260,9 +3320,9 @@ package Subregions
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.H2.Gas (
                   b_v=[1],n_v={-1,0}),
-            redeclare parameter Q.CompressibilityDynamic beta=Data.beta(),
-            redeclare parameter Q.FluidityDynamic F=1/(89.6e-7*U.Pa*U.s),
-            redeclare parameter Q.ResistivityThermal R=U.m*U.K/(183e-3*U.W));
+            redeclare parameter Q.Fluidity beta=Data.beta(),
+            redeclare parameter Q.Fluidity zeta=1/(89.6e-7*U.Pa*U.s),
+            redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(183e-3*U.W));
           // See the documentation for a table of values.
           annotation (
             defaultComponentPrefixes="replaceable",
@@ -3337,9 +3397,9 @@ and <code>theta=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> 
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas
                 (b_v=[1], n_v={-1,0}),
-            beta=k_beta*Data.beta(T),
-            zeta=k_zeta*Data.zeta(T),
-            theta=k_theta*Data.theta(T));
+            beta=k_beta*Data.beta(T, v),
+            zeta=k_zeta*Data.zeta(T, v),
+            theta=k_theta*Data.theta(T, v));
 
           parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
             "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
@@ -3362,12 +3422,8 @@ and <code>theta=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> 
         end Calibrated;
 
         model Correlated "Correlated properties"
-          extends Species(
-            redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas
-                (b_v=[1], n_v={-1,0}),
-            beta=Data.beta(T),
-            F=Data.zeta(T),
-            R=Data.theta(T));
+          extends Species(redeclare replaceable package Data =
+                FCSys.Characteristics.H2O.Gas (b_v=[1], n_v={-1,0}));
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2O",
@@ -3383,9 +3439,9 @@ and <code>theta=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> 
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.H2O.Gas
                 (b_v=[1], n_v={-1,0}),
-            redeclare parameter Q.CompressibilityDynamic beta=Data.beta(),
-            redeclare parameter Q.FluidityDynamic F=1/(9.09e-6*U.Pa*U.s),
-            redeclare parameter Q.ResistivityThermal R=U.m*U.K/(19.6e-3*U.W));
+            redeclare parameter Q.Fluidity beta=Data.beta(),
+            redeclare parameter Q.Fluidity zeta=1/(9.09e-6*U.Pa*U.s),
+            redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(19.6e-3*U.W));
 
           // See the documentation for tables of values.
           annotation (
@@ -3506,10 +3562,10 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
         model Calibrated "Correlations with adjustment factors"
           extends Species(
             redeclare replaceable package Data = Characteristics.H2O.Ionomer (
-                  b_v=[1],n_v={-1,0}),
-            beta=k_beta*Data.beta(T),
-            zeta=k_zeta*Data.zeta(T),
-            theta=k_theta*Data.theta(T));
+                  b_v=[1], n_v={-1,0}),
+            beta=k_beta*Data.beta(T, v),
+            zeta=k_zeta*Data.zeta(T, v),
+            theta=k_theta*Data.theta(T, v));
 
           parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
             "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
@@ -3532,12 +3588,8 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
         end Calibrated;
 
         model Correlated "Correlated properties"
-          extends Species(
-            redeclare replaceable package Data = Characteristics.H2O.Ionomer (
-                  b_v=[1],n_v={-1,0}),
-            beta=Data.beta(T),
-            F=Data.zeta(T),
-            R=Data.theta(T));
+          extends Species(redeclare replaceable package Data =
+                Characteristics.H2O.Ionomer (b_v=[1], n_v={-1,0}));
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2O",
@@ -3552,10 +3604,10 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
         model Fixed "Fixed properties"
           extends Species(
             redeclare replaceable package Data = Characteristics.H2O.Ionomer (
-                  b_v=[1],n_v={-1,0}),
-            redeclare parameter Q.CompressibilityDynamic beta=Data.beta(),
-            redeclare parameter Q.FluidityDynamic F=Data.zeta(),
-            redeclare parameter Q.ResistivityThermal R=Data.R());
+                  b_v=[1], n_v={-1,0}),
+            redeclare parameter Q.Fluidity beta=Data.beta(),
+            redeclare parameter Q.Fluidity zeta=Data.zeta(),
+            redeclare parameter Q.ResistivityThermal theta=Data.theta());
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2O",
@@ -3575,9 +3627,9 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
         model Calibrated "Correlations with adjustment factors"
           extends SpeciesIncompressible(
             redeclare replaceable package Data = Characteristics.H2O.Liquid,
-            beta=k_beta*Data.beta(T),
-            zeta=k_zeta*Data.zeta(T),
-            theta=k_theta*Data.theta(T));
+            beta=k_beta*Data.beta(T, v),
+            zeta=k_zeta*Data.zeta(T, v),
+            theta=k_theta*Data.theta(T, v));
 
           parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
             "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
@@ -3597,11 +3649,8 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
         end Calibrated;
 
         model Correlated "Correlated properties"
-          extends SpeciesIncompressible(
-            redeclare replaceable package Data = Characteristics.H2O.Liquid,
-            beta=Data.beta(T),
-            F=Data.zeta(T),
-            R=Data.theta(T));
+          extends SpeciesIncompressible(redeclare replaceable package Data =
+                Characteristics.H2O.Liquid);
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2O",
@@ -3613,9 +3662,9 @@ and <code>theta=U.m*U.K/(19.6e-3*U.W)</code>) are of H<sub>2</sub>O gas at satur
         model Fixed "Fixed properties"
           extends SpeciesIncompressible(
             redeclare replaceable package Data = Characteristics.H2O.Liquid,
-            redeclare parameter Q.CompressibilityDynamic beta=Data.beta(),
-            redeclare parameter Q.FluidityDynamic F=1/(855e-6*U.Pa*U.s),
-            redeclare parameter Q.ResistivityThermal R=U.m*U.K/(613e-3*U.W));
+            redeclare parameter Q.Fluidity beta=Data.beta(),
+            redeclare parameter Q.Fluidity zeta=1/(855e-6*U.Pa*U.s),
+            redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(613e-3*U.W));
 
           // See the documentation for tables of values.
           annotation (
@@ -3719,9 +3768,9 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.N2.Gas (
                   b_v=[1],n_v={-1,0}),
-            beta=k_beta*Data.beta(T),
-            zeta=k_zeta*Data.zeta(T),
-            theta=k_theta*Data.theta(T));
+            beta=k_beta*Data.beta(T, v),
+            zeta=k_zeta*Data.zeta(T, v),
+            theta=k_theta*Data.theta(T, v));
 
           parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
             "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
@@ -3744,12 +3793,8 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         end Calibrated;
 
         model Correlated "Correlated properties"
-          extends Species(
-            redeclare replaceable package Data = FCSys.Characteristics.N2.Gas (
-                  b_v=[1],n_v={-1,0}),
-            beta=Data.beta(T),
-            F=Data.zeta(T),
-            R=Data.theta(T));
+          extends Species(redeclare replaceable package Data =
+                FCSys.Characteristics.N2.Gas (b_v=[1], n_v={-1,0}));
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="N2",
@@ -3778,9 +3823,9 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
                             Characteristics.N2.Gas.b_c[1, :],
                             -3) + FCSys.Characteristics.N2.Gas.B_c[1, 2] - Data.b_c[
                     1, 1]*log(298.15*U.K)]),
-            redeclare parameter Q.CompressibilityDynamic beta=Data.beta(),
-            redeclare parameter Q.FluidityDynamic F=1/(178.2e-7*U.Pa*U.s),
-            redeclare parameter Q.ResistivityThermal R=U.m*U.K/(25.9e-3*U.W));
+            redeclare parameter Q.Fluidity beta=Data.beta(),
+            redeclare parameter Q.Fluidity zeta=1/(178.2e-7*U.Pa*U.s),
+            redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(25.9e-3*U.W));
           // **Add table from [Present1958, p. 263] to the documentation (see Tests.Characteristics.N2.eta).
 
           // See the documentation for a table of values.
@@ -3848,9 +3893,9 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
                   b_v=[1],n_v={-1,0}),
-            beta=k_beta*Data.beta(T),
-            zeta=k_zeta*Data.zeta(T),
-            theta=k_theta*Data.theta(T));
+            beta=k_beta*Data.beta(T, v),
+            zeta=k_zeta*Data.zeta(T, v),
+            theta=k_theta*Data.theta(T, v));
 
           parameter Q.NumberAbsolute k_beta(final nominal=1) = 1
             "<html>Adjustment factor for dynamic compressibility (<i>k</i><sub>&beta;</sub>)</html>"
@@ -3873,12 +3918,8 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         end Calibrated;
 
         model Correlated "Correlated properties"
-          extends Species(
-            redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
-                  b_v=[1],n_v={-1,0}),
-            beta=Data.beta(T),
-            F=Data.zeta(T),
-            R=Data.theta(T));
+          extends Species(redeclare replaceable package Data =
+                FCSys.Characteristics.O2.Gas (b_v=[1], n_v={-1,0}));
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="O2",
@@ -3894,9 +3935,9 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
           extends Species(
             redeclare replaceable package Data = FCSys.Characteristics.O2.Gas (
                   b_v=[1],n_v={-1,0}),
-            redeclare parameter Q.CompressibilityDynamic beta=Data.beta(),
-            redeclare parameter Q.FluidityDynamic F=1/(207.2e-7*U.Pa*U.s),
-            redeclare parameter Q.ResistivityThermal R=U.m*U.K/(26.8e-3*U.W));
+            redeclare parameter Q.Fluidity beta=Data.beta(),
+            redeclare parameter Q.Fluidity zeta=1/(207.2e-7*U.Pa*U.s),
+            redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(26.8e-3*U.W));
           // **Add table from Present1958 p. 263 to the documentation (see Tests.Characteristics.O2.eta).
 
           // See the documentation for a table of values.
@@ -3964,16 +4005,12 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         final upstreamX=false,
         final upstreamY=false,
         final upstreamZ=false,
-        final Ndot_IC=0,
+        final eta=0,
+        final beta=0,
+        final zeta=0,
         final phi_IC=zeros(3),
-        final derphi_IC,
         final I_IC,
-        final derI_IC,
         invertEOS=false);
-      // **final x=0,
-      // **final beta=0,
-      // **final F=0,
-      // **temp 0.1s instead of 0s
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="species",
@@ -4054,6 +4091,8 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       parameter Conservation consEnergy=Conservation.Dynamic "Energy"
         annotation (Evaluate=true, Dialog(tab="Assumptions", group=
               "Formulation of conservation equations"));
+      // **If the static option isn't useful, remove it and go back
+      // to Boolean setMaterial, setTransX, etc.
       //
       // Flow conditions
       Q.NumberAbsolute Nu_Phi[Axis]={4,4,4}
@@ -4119,7 +4158,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       parameter Q.PressureAbsolute p_IC(start=environment.p)
         "<html>Initial pressure (<i>p</i><sub>IC</sub>)</html>"
         annotation (Dialog(tab="Initialization",group="Material and energy"));
-      parameter Q.TemperatureAbsolute T_IC(nominal=300*U.K, start=environment.T)
+      parameter Q.TemperatureAbsolute T_IC(start=environment.T)
         "<html>Initial temperature (<i>T</i><sub>IC</sub>)</html>"
         annotation (Dialog(tab="Initialization",group="Material and energy"));
       parameter Q.Potential h_IC(start=Data.h(T_IC, p_IC))
@@ -4204,19 +4243,17 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       Q.PressureAbsolute p(
         nominal=U.atm,
         final start=p_IC,
-        final fixed=false) "Pressure";
+        final fixed=false,
+        stateSelect=StateSelect.never) "Pressure";
+      // StateSelect.never is necessary to avoid dynamic state selection
+      // in Dymola 7.4.
       Q.PressureAbsolute p_faces[Axis, Side](each nominal=U.atm, each final
           start=p_IC) "Pressures at the faces";
-      Q.TemperatureAbsolute sT(
+      Q.PotentialAbsolute sT(
         nominal=3000*U.K,
         final start=h_IC - g_IC,
-        final fixed=false,
-        stateSelect=StateSelect.prefer)
-        "Product of specific entropy and temperature";
-      Q.Mass M(
-        nominal=1e-3*U.g,
-        start=Data.m*N_IC,
-        final fixed=false) "Mass";
+        final fixed=false) "Product of specific entropy and temperature";
+      Q.Mass M(nominal=1e-3*U.g, start=Data.m*N_IC) "Mass";
       Q.Volume V(
         nominal=U.cc,
         final start=V_IC,
@@ -4232,7 +4269,10 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       Q.Potential h(
         nominal=U.V,
         final start=h_IC,
-        final fixed=false) "Specific enthalpy";
+        final fixed=false,
+        stateSelect=StateSelect.never) "Specific enthalpy";
+      // StateSelect.never is necessary to avoid dynamic state selection
+      // in Dymola 7.4.
       Q.Current I[n_trans](
         each nominal=U.A,
         final start=I_IC[cartAxes],
@@ -4379,7 +4419,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         final sT(each start=h_IC - g_IC) = chemical_sT,
         final Qdot=chemical_Qdot) "Connector for phase change and reactions"
         annotation (Placement(transformation(extent={{-24,4},{-4,24}}),
-            iconTransformation(extent={{-61.78,25.55},{-81.78,45.55}})));
+            iconTransformation(extent={{-45.78,45.55},{-65.78,65.55}})));
 
       Connectors.Inert inert(
         final n_trans=n_trans,
@@ -5020,83 +5060,6 @@ Choose a condition besides None.");
 
     end BaseClasses;
 
-    model Test
-      extends Modelica.Icons.Example;
-
-      import FCSys.BaseClasses.Utilities.cartWrap;
-      import FCSys.BaseClasses.Utilities.countTrue;
-      import FCSys.BaseClasses.Utilities.enumerate;
-      import FCSys.BaseClasses.Utilities.index;
-      // extends FCSys.BaseClasses.Icons.Names.Top3;
-
-      // Geometric parameters
-      inner parameter Q.Length L[Axis](each min=Modelica.Constants.small) = {U.cm,
-        U.cm,U.cm} "<html>Length (<b>L</b>)</html>"
-        annotation (Dialog(group="Geometry"));
-      final inner parameter Q.Volume V=product(L) "Volume";
-      parameter Q.NumberAbsolute k[Axis](
-        each min=Modelica.Constants.small,
-        each final nominal=1) = {1,1,1}
-        "<html>Area fill factor (<b>k</b>)</html>"
-        annotation (Dialog(group="Geometry"));
-
-      // Assumptions
-      // -----------
-      // Included components of translational momentum
-      parameter Boolean inclTransX=true "X" annotation (choices(
-            __Dymola_checkBox=true), Dialog(
-          tab="Assumptions",
-          group="Axes with translational momentum included",
-          compact=true));
-      parameter Boolean inclTransY=true "Y" annotation (choices(
-            __Dymola_checkBox=true), Dialog(
-          tab="Assumptions",
-          group="Axes with translational momentum included",
-          compact=true));
-      parameter Boolean inclTransZ=true "Z" annotation (choices(
-            __Dymola_checkBox=true), Dialog(
-          tab="Assumptions",
-          group="Axes with translational momentum included",
-          compact=true));
-
-    protected
-      final inner parameter Q.Length Lprime[:]=k .* A ./ L
-        "Effective cross-sectional area per length";
-      final inner parameter Q.Area A[Axis]={L[cartWrap(axis + 1)]*L[cartWrap(
-          axis + 2)] for axis in Axis} "Cross-sectional areas";
-      final inner parameter Boolean inclTrans[Axis]={inclTransX,inclTransY,
-          inclTransZ}
-        "true, if each component of translational momentum is included";
-      final inner parameter Integer n_trans=countTrue(inclTrans)
-        "Number of components of translational momentum";
-      final inner parameter Integer cartAxes[:]=index(inclTrans)
-        "Cartesian-axis indices of the components of translational momentum";
-      final inner parameter Integer transAxes[Axis]=enumerate(inclTrans)
-        "Translational-momentum-component indices of the Cartesian axes";
-
-      Volume volume "Model to establish a fixed total volume"
-        annotation (Placement(transformation(extent={{-16,-92},{16,-60}})));
-      PhaseBoundary phaseBoundary "Phase boundary" annotation (Placement(
-            transformation(
-            extent={{-18,-18},{18,18}},
-            rotation=0,
-            origin={0,-36})));
-    public
-      replaceable Species species(redeclare package Data =
-            FCSys.Characteristics.H2.Gas)
-        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-      annotation (Diagram(graphics));
-    equation
-      connect(species.inertDalton, phaseBoundary.inertDalton) annotation (Line(
-          points={{3.578,-7.155},{3.578,-43.155}},
-          color={72,90,180},
-          smooth=Smooth.None));
-
-      connect(phaseBoundary.inertAmagat, volume.inert) annotation (Line(
-          points={{6.2,-48.2},{6.2,-56.1},{11,-56.1},{11,-87}},
-          color={72,90,180},
-          smooth=Smooth.None));
-    end Test;
   end Species;
 
   model PhaseBoundary
@@ -5200,6 +5163,7 @@ Choose a condition besides None.");
             extent={{-170,140},{170,180}},
             textString="%name",
             lineColor={0,0,0})}));
+
   end PhaseBoundary;
 
   model Reaction "Electrochemical reaction"
@@ -5417,6 +5381,7 @@ Choose a condition besides None.");
             lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics));
+
   end Volume;
 
   package BaseClasses "Base classes (not generally for direct use)"
@@ -5512,7 +5477,7 @@ Choose a condition besides None.");
         "true, if each component of translational momentum is included";
       final inner parameter Integer n_trans=countTrue(inclTrans)
         "Number of components of translational momentum";
-      final inner parameter Integer cartAxes[:]=index(inclTrans)
+      final inner parameter Integer cartAxes[n_trans]=index(inclTrans)
         "Cartesian-axis indices of the components of translational momentum";
       final inner parameter Integer transAxes[Axis]=enumerate(inclTrans)
         "Translational-momentum-component indices of the Cartesian axes";

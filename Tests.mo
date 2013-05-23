@@ -258,7 +258,7 @@ package Tests "Models and functions for test and validation"
           parameter Q.NumberAbsolute eps=0.2 "Relative error tolerance";
           parameter Q.TemperatureAbsolute T[:]={200,250,300,350,400,600,800,
               1000,2000}*U.K "Temperatures";
-          parameter Q.ResistivityThermal R_table[size(T, 1)]={1/0.131,1/0.131,1
+          parameter Q.ResistivityThermal theta_table[size(T, 1)]={1/0.131,1/0.131,1
               /0.183,1/0.204,1/0.226,1/0.305,1/0.378,1/0.448,1/0.878}*U.m*U.K/U.W
             "Tabulated thermal resistivity";
         initial equation
@@ -785,7 +785,7 @@ package Tests "Models and functions for test and validation"
           package Data = FCSys.Characteristics.BaseClasses.Characteristic (m=
                   DataH2.m, r=DataH2.r)
             "Properties to estimate fluidity via rigid-sphere assumption";
-          constant Q.FluidityDynamic F=Data.zeta(300*U.K);
+          constant Q.Fluidity zeta=Data.zeta(300*U.K);
         initial equation
           assertLogValue(
                     actual=F,

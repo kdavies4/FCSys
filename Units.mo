@@ -45,6 +45,7 @@ package Units "Constants and units of physical measure"
     defineDefaultDisplayUnit("m/(A.N.T)", "T") "Areic magnetic flux";
     defineDefaultDisplayUnit("A.N.T/(l2.m)", "1/Wb") "Reciprocal magnetic flux";
     defineDefaultDisplayUnit("m", "g") "Mass";
+    defineDefaultDisplayUnit("m/s", "g/s") "for derivative of mass in Dymola";
     defineDefaultDisplayUnit("m/N", "g/mol") "Specific mass";
     defineDefaultDisplayUnit("N.T/m", "cm2/(V.s)") "Mobility";
     defineDefaultDisplayUnit("l2.m/(A.T)", "J.s/rad") "Rotational momentum";
@@ -68,6 +69,8 @@ package Units "Constants and units of physical measure"
     defineDefaultDisplayUnit("m/(l.T2)", "kPa") "Pressure";
     defineDefaultDisplayUnit("m/(l.T2.s)", "Pa/s")
       "for derivative of pressure in Dymola";
+    defineDefaultDisplayUnit("m/(T2.l.s)", "Pa/s")
+      "for derivative of pressure in Dymola";
     defineDefaultDisplayUnit("m/(l.T3)", "Pa/s") "Rate of pressure";
     defineDefaultDisplayUnit("l.T2/m", "1/kPa") "Reciprocal pressure";
     defineDefaultDisplayUnit("l2.m/(N2.T)", "ohm") "Electrical resistance";
@@ -81,6 +84,8 @@ package Units "Constants and units of physical measure"
     defineDefaultDisplayUnit("l3/T", "L/min") "Rate of volume";
     defineDefaultDisplayUnit("l3/N", "cc/C") "Specific volume";
     defineDefaultDisplayUnit("l3/(N.T)", "cc/(C.s)") "Rate of specific volume";
+    defineDefaultDisplayUnit("l3/(N.s)", "cc/(C.s)")
+      "for derivative of specific volume in Dymola";
     defineDefaultDisplayUnit("A/l", "rad/m") "Wavenumber";
 
     // -----------------------------------------------------------------------
@@ -92,13 +97,13 @@ package Units "Constants and units of physical measure"
         "cm/s2",
         s/cm) "for derivative of velocity in Dymola";
     defineUnitConversion(
-        "l/(T.s)",
-        "m/s2",
-        s/m) "for derivative of velocity in Dymola";
-    defineUnitConversion(
         "l/T2",
         "cm/s2",
         s^2/cm) "Acceleration";
+    defineUnitConversion(
+        "l/(T.s)",
+        "m/s2",
+        s/m) "for derivative of velocity in Dymola";
     defineUnitConversion(
         "l/T2",
         "m/s2",
@@ -109,16 +114,16 @@ package Units "Constants and units of physical measure"
         1/C) "Amount";
     defineUnitConversion(
         "N",
-        "J/K",
-        K/J) "Amount";
-    defineUnitConversion(
-        "N",
         "mol",
         1/mol) "Amount";
     defineUnitConversion(
         "N",
         "q",
         1/q) "Amount";
+    defineUnitConversion(
+        "N",
+        "J/K",
+        K/J) "Amount";
     defineUnitConversion(
         "1/N",
         "1/C",
@@ -160,10 +165,6 @@ package Units "Constants and units of physical measure"
         "uF",
         1/(micro*F)) "Capacitance";
     defineUnitConversion(
-        "N.T/(l2.m)",
-        "mol/(J.s)",
-        J*s/mol) "Dynamic compressibility";
-    defineUnitConversion(
         "N2.T/(l2.m)",
         "S",
         1/S) "Electrical conductance";
@@ -172,38 +173,37 @@ package Units "Constants and units of physical measure"
         "A",
         1/C) "for derivative of amount in Dymola";
     defineUnitConversion(
+        "N/T",
+        "A",
+        1/A) "Current";
+    defineUnitConversion(
         "N/s",
         "kat",
         1/mol) "for derivative of amount in Dymola";
+    defineUnitConversion(
+        "N/T",
+        "kat",
+        1/kat) "Current";
     defineUnitConversion(
         "N/s",
         "W/K",
         K/J) "for derivative of amount in Dymola";
     defineUnitConversion(
         "N/T",
-        "A",
-        1/A) "Current";
-    defineUnitConversion(
-        "N/T",
-        "kat",
-        1/kat) "Current";
-    defineUnitConversion(
-        "N/T",
         "W/K",
         K/W) "Current";
-
     defineUnitConversion(
         "N/(l2.T)",
         "A/cm2",
         cm^2/A) "Areic current";
     defineUnitConversion(
         "N/(l2.T)",
-        "A/m2",
-        m^2/A) "Areic current";
-    defineUnitConversion(
-        "N/(l2.T)",
         "kat/cm2",
         cm^2/kat) "Areic current";
+    defineUnitConversion(
+        "N/(l2.T)",
+        "A/m2",
+        m^2/A) "Areic current";
     defineUnitConversion(
         "N/(l2.T)",
         "kat/m2",
@@ -213,17 +213,21 @@ package Units "Constants and units of physical measure"
         "A/s",
         1/A) "for derivative of current in Dymola";
     defineUnitConversion(
+        "N/T2",
+        "A/s",
+        s/A) "Rate of current";
+    defineUnitConversion(
         "N/(T.s)",
         "kat/s",
         1/kat) "for derivative of current in Dymola";
     defineUnitConversion(
         "N/T2",
-        "A/s",
-        s/A) "Rate of current";
-    defineUnitConversion(
-        "N/T2",
         "kat/s",
         s/kat) "Rate of current";
+    defineUnitConversion(
+        "N/l3",
+        "M",
+        1/M) "Density";
     defineUnitConversion(
         "N/l3",
         "C/cc",
@@ -232,10 +236,6 @@ package Units "Constants and units of physical measure"
         "N/l3",
         "C/m3",
         m^3/C) "Density";
-    defineUnitConversion(
-        "N/l3",
-        "M",
-        1/M) "Density";
     defineUnitConversion(
         "N/(l3.T)",
         "C/(cc.s)",
@@ -317,6 +317,18 @@ package Units "Constants and units of physical measure"
         "kg",
         1/kg) "Mass";
     defineUnitConversion(
+        "m/s",
+        "g/s",
+        s/g) "for derivative of mass in Dymola";
+    defineUnitConversion(
+        "m/s",
+        "kg/s",
+        s/kg) "for derivative of mass in Dymola";
+    defineUnitConversion(
+        "m/N",
+        "ug/C",
+        C/(micro*g)) "Specific mass";
+    defineUnitConversion(
         "m/N",
         "g/mol",
         mol/g) "Specific mass";
@@ -324,10 +336,6 @@ package Units "Constants and units of physical measure"
         "m/N",
         "kg/mol",
         mol/kg) "Specific mass";
-    defineUnitConversion(
-        "m/N",
-        "ug/C",
-        C/(micro*g)) "Specific mass";
     defineUnitConversion(
         "N.T/m",
         "C.s/g",
@@ -341,10 +349,17 @@ package Units "Constants and units of physical measure"
         "J.s/rad",
         rad/(J*s)) "Rotational momentum";
     defineUnitConversion(
+        "l.m/(N.T)",
+        "kg.m/(C.s)",
+        C*s/(kg*m)) "Specific translational momentum";
+    defineUnitConversion(
+        "l.m/(N.T)",
+        "kg.m/(C.s)",
+        C*s/(kg*m)) "Specific translational momentum";
+    defineUnitConversion(
         "1",
         "%",
         1/'%') "Number";
-
     defineUnitConversion(
         "1",
         "J/(mol.K)",
@@ -363,12 +378,12 @@ package Units "Constants and units of physical measure"
         H/m) "Reciprocal permittivity";
     defineUnitConversion(
         "l2.m/(N.T2)",
-        "J/mol",
-        mol/J) "Potential";
-    defineUnitConversion(
-        "l2.m/(N.T2)",
         "V",
         1/V) "Potential";
+    defineUnitConversion(
+        "l2.m/(N.T2)",
+        "J/mol",
+        mol/J) "Potential";
     defineUnitConversion(
         "l2.m/(N.T2)",
         "K",
@@ -386,13 +401,13 @@ package Units "Constants and units of physical measure"
         "K/s",
         1/K) "for derivative of potential in Dymola";
     defineUnitConversion(
-        "l2.m/(N.T2.s)",
-        "V/s",
-        1/V) "for derivative of potential in Dymola";
-    defineUnitConversion(
         "l2.m/(N.T3)",
         "K/s",
         s/K) "Rate of potential";
+    defineUnitConversion(
+        "l2.m/(N.T2.s)",
+        "V/s",
+        1/V) "for derivative of potential in Dymola";
     defineUnitConversion(
         "l2.m/(N.T3)",
         "V/s",
@@ -445,9 +460,12 @@ package Units "Constants and units of physical measure"
         "m/(l.T2)",
         "Pa",
         1/Pa) "Pressure";
-
     defineUnitConversion(
         "m/(l.T2.s)",
+        "Pa/s",
+        1/Pa) "for derivative of pressure in Dymola";
+    defineUnitConversion(
+        "m/(T2.l.s)",
         "Pa/s",
         1/Pa) "for derivative of pressure in Dymola";
     defineUnitConversion(
@@ -510,7 +528,6 @@ package Units "Constants and units of physical measure"
         "T",
         "s",
         1/s) "Time";
-
     defineUnitConversion(
         "l/T",
         "cm/s",
@@ -545,24 +562,24 @@ package Units "Constants and units of physical measure"
         1/m^3) "Volume";
     defineUnitConversion(
         "l3/s",
-        "cc/s",
-        1/(centi*m)^3) "for derivative of volume in Dymola";
-    defineUnitConversion(
-        "l3/s",
         "L/min",
         min/(L*s)) "for derivative of volume in Dymola";
     defineUnitConversion(
+        "l3/T",
+        "L/min",
+        min/L) "Rate of volume";
+    defineUnitConversion(
         "l3/s",
-        "m3/s",
-        1/m^3) "for derivative of volume in Dymola";
+        "cc/s",
+        1/(centi*m)^3) "for derivative of volume in Dymola";
     defineUnitConversion(
         "l3/T",
         "cc/s",
         s/cc) "Rate of volume";
     defineUnitConversion(
-        "l3/T",
-        "L/min",
-        min/L) "Rate of volume";
+        "l3/s",
+        "m3/s",
+        1/m^3) "for derivative of volume in Dymola";
     defineUnitConversion(
         "l3/T",
         "m3/s",
@@ -593,6 +610,18 @@ package Units "Constants and units of physical measure"
         "m3/(mol.s)",
         mol*s/m^3) "Rate of specific volume";
     defineUnitConversion(
+        "l3/(N.s)",
+        "cc/(C.s)",
+        C*s/cc) "for derivative of specific volume in Dymola";
+    defineUnitConversion(
+        "l3/(N.s)",
+        "m3/(C.s)",
+        C*s/m^3) "for derivative of specific volume in Dymola";
+    defineUnitConversion(
+        "l3/(N.s)",
+        "m3/(mol.s)",
+        mol*s/m^3) "for derivative of specific volume in Dymola";
+    defineUnitConversion(
         "A/l",
         "cyc/m",
         m/cyc) "Wavenumber";
@@ -602,7 +631,11 @@ package Units "Constants and units of physical measure"
         m/rad) "Wavenumber";
 
     print("Done.");
-    annotation (Documentation(info="<html><p>This has no inputs or outputs.  For more information, see the documentation in
+    annotation (Documentation(info="<html><p>This has no inputs or outputs.  
+The <code>defineDefaultDisplayUnit</code> and <code>defineUnitConversion</code> functions
+used by this function are not defined in the Modelica language (as of version 3.3) but are 
+recognized by Dymola.
+For more information, see the documentation in
 <a href=\"modelica://FCSys.Units\">FCSys.Units</a>.</p></html>"));
   end setup;
 

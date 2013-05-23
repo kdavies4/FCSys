@@ -1,8 +1,8 @@
 # Temporary, locked, and synchronization files
 *~
-*.bak-mo
 *.asv
 *.bak
+*.bak-mo
 .~lock*
 .fuse_hidden*
 
@@ -23,9 +23,6 @@ status
 
 # Internal link to demos
 /resources/source/Python/fcres/examples
-
-# Mathematica notebooks
-*.nb
 
 # Excel spreadsheets
 *.xls

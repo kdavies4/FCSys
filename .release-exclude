@@ -32,11 +32,8 @@ resources/source/MATLAB
 test/MPC
 *qpOASES*
 
-# Program to translate Dymosim initialization files (needed only for MATLAB
-# scripts; may be copyrighted by Dassault Systemes)
-resources/source/alist.exe
-
-# Simulation files (in case they're in the directory by mistake)
+# Simulation files (in case they're generated inside the library)
+simulations
 dsin.txt
 dsfinal.txt
 dsu.txt
@@ -44,11 +41,14 @@ dslog.txt
 dsmodel.c
 dsmodel.mof
 dymosim
+buildlog.txt
+request
+status
+*.exe
+*.mat
 
 # Scripts for development
 00-*
-resources/source/Python/fcres/00-autoformat.sh
-resources/source/Python/fcres/tictoc.sh
 
 # Scripts and other files to create documentation
 resources/source/Python/doc/*.rst
@@ -57,10 +57,14 @@ resources/source/Python/doc/Makefile
 resources/source/Python/doc/_templates
 resources/source/Python/MANIFEST*
 
-# Hidden, synchronization, temporary, and backup files
+# Temporary, locked, and synchronization files
 .*
-SyncToy_*.dat
+*~
 *.bak
+*.bak-mo
+*.asv
+.~lock*
+.fuse_hidden*
 resources/source/Python/fcres/temp_plot.pdf
 resources/source/Python/fcres/temp_plot.png
 
@@ -75,15 +79,15 @@ test
 # Systems folder (in resources/documentation)
 Systems
 
+# Duplicate of FCRes examples
+resources/source/Python/fcres/examples
+
 # Work in progress
 WorkInProgress.mo
 help/FCSys_WorkInProgress*.html
 help/FCSys.WorkInProgress*.png
 old
 resources/*.xls
-resources/*.m
-resources/*.nb
-resources/*.cdf
 resources/source/Python/bin/killall-fcsysres.sh
 resources/source/Python/bin/run-exps.py
 resources/source/Python/fcres/EOS-fit.py

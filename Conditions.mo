@@ -45,8 +45,8 @@ package Conditions "Models to specify and measure operating conditions"
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
       // Geometric parameters
-      inner parameter Q.Length L[Axis](each min=Modelica.Constants.small, start=
-           ones(3)*U.cm) "<html>Length (<b>L</b>)</html>"
+      inner parameter Q.Length L[Axis](each min=Modelica.Constants.small, start
+          =ones(3)*U.cm) "<html>Length (<b>L</b>)</html>"
         annotation (Dialog(group="Geometry"));
       final inner parameter Q.Area A[Axis]={L[cartWrap(axis + 1)]*L[cartWrap(
           axis + 2)] for axis in Axis} "Cross-sectional area";
@@ -602,8 +602,8 @@ package Conditions "Models to specify and measure operating conditions"
               Characteristics.'C+'.Graphite)
           annotation (Placement(transformation(extent={{-10,10},{10,30}})));
         Modelica.Electrical.Analog.Interfaces.NegativePin pin
-          "Modelica electrical pin" annotation (Placement(transformation(extent=
-                 {{70,30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
+          "Modelica electrical pin" annotation (Placement(transformation(extent
+                ={{70,30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
 
       equation
         // C
@@ -746,8 +746,8 @@ package Conditions "Models to specify and measure operating conditions"
           "Side of the interface w.r.t. this component";
 
         Modelica.Electrical.Analog.Interfaces.NegativePin pin
-          "Modelica electrical pin" annotation (Placement(transformation(extent=
-                 {{70,30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
+          "Modelica electrical pin" annotation (Placement(transformation(extent
+                ={{70,30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
 
       equation
         // Efforts
@@ -875,7 +875,8 @@ package Conditions "Models to specify and measure operating conditions"
           annotation (
             defaultComponentName="species",
             Documentation(info="<html><p>Note that shear force is not included.</p>
-  </html>"),Icon(graphics={Line(
+  </html>"),
+            Icon(graphics={Line(
                           points={{0,0},{-80,0}},
                           color={127,127,127},
                           smooth=Smooth.None),Line(
@@ -1179,11 +1180,13 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
         extends Modelica.Media.IdealGases.Common.MixtureGasNasa(
           mediumName="AnodeGas",
           data={Modelica.Media.IdealGases.Common.SingleGasesData.H2,Modelica.Media.IdealGases.Common.SingleGasesData.H2O},
+
           fluidConstants={Modelica.Media.IdealGases.Common.FluidData.H2,
               Modelica.Media.IdealGases.Common.FluidData.H2O},
           substanceNames={"H2","H2O"},
           reference_X=fill(1/nX, nX),
           referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
+
           excludeEnthalpyOfFormation=false);
 
         annotation (Documentation(info="<html>
@@ -1199,9 +1202,11 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               Modelica.Media.IdealGases.Common.SingleGasesData.O2},
           fluidConstants={Modelica.Media.IdealGases.Common.FluidData.H2O,
               Modelica.Media.IdealGases.Common.FluidData.N2,Modelica.Media.IdealGases.Common.FluidData.O2},
+
           substanceNames={"H2O","N2","O2"},
           reference_X=fill(1/nX, nX),
           referenceChoice=Modelica.Media.Interfaces.PartialMedium.Choices.ReferenceEnthalpy.ZeroAt25C,
+
           excludeEnthalpyOfFormation=false);
 
         annotation (Documentation(info="<html>
@@ -1370,8 +1375,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-94,-60})));
-      Connectors.RealOutputInternal p_anFPPosY(final unit="m/(l.T2)", final min=
-           0) "Pressure anode outlet" annotation (Placement(transformation(
+      Connectors.RealOutputInternal p_anFPPosY(final unit="m/(l.T2)", final min
+          =0) "Pressure anode outlet" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-74,-60})));
@@ -1380,8 +1385,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-54,-60})));
-      Connectors.RealOutputInternal p_caFPPosY(final unit="m/(l.T2)", final min=
-           0) "Pressure anode outlet" annotation (Placement(transformation(
+      Connectors.RealOutputInternal p_caFPPosY(final unit="m/(l.T2)", final min
+          =0) "Pressure anode outlet" annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-34,-60})));
@@ -1603,6 +1608,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
       // Summations
       connect(sumAnMFC.y, from1_LPM.u) annotation (Line(
           points={{-14,19},{-14,9.75},{-14,9.75},{-14,0.5},{-14,-18},{-14,-18}},
+
           color={0,0,127},
           smooth=Smooth.None));
 
@@ -1769,8 +1775,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{-10,-10},{10,10}},
               rotation=90,
               origin={136,0})));
-        Conditions.FaceBus.SubregionFlows anSourceCondition[n_x_an, n_z](each gas(
-                inclH2=true, inclH2O=true)) annotation (Placement(
+        Conditions.FaceBus.SubregionFlows anSourceCondition[n_x_an, n_z](each
+            gas(inclH2=true, inclH2O=true)) annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
@@ -1780,7 +1786,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{-10,-10},{10,10}},
               rotation=180,
               origin={-40,136})));
-        Conditions.FaceBus.SubregionFlows caSourceCondition[n_x_ca, n_z](each gas(
+        Conditions.FaceBus.SubregionFlows caSourceCondition[n_x_ca, n_z](each
+            gas(
             inclH2O=true,
             inclN2=true,
             inclO2=true)) annotation (Placement(transformation(
@@ -1854,6 +1861,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
 
         connect(current.negative, anEnd) annotation (Line(
             points={{-140,30},{-150,30},{-150,5.55112e-16},{-160,5.55112e-16}},
+
             color={127,127,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1865,6 +1873,7 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
             smooth=Smooth.None));
         connect(voltage.negative, anEndCondition.face) annotation (Line(
             points={{120,-30},{-150,-30},{-150,1.23436e-15},{-140,1.23436e-15}},
+
             color={127,127,127},
             thickness=0.5,
             smooth=Smooth.None));
@@ -1930,8 +1939,8 @@ but that of the third pure substance (Medium3) is \"" + Medium3.extraPropertiesN
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={30,0})));
-        Conditions.FaceBus.SubregionFlows anSource[n_x_an, n_z](each gas(inclH2=
-               true, inclH2O=true)) annotation (Placement(transformation(
+        Conditions.FaceBus.SubregionFlows anSource[n_x_an, n_z](each gas(inclH2
+              =true, inclH2O=true)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=180,
               origin={-20,-30})));
@@ -2476,8 +2485,8 @@ model.</p>
         Placement(transformation(extent={{-60,40},{-40,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
 
-      FCSys.Connectors.ChemicalSpecies chemical(         final n_trans=
-            countTrue({inclTransX,inclTransY,inclTransZ}))
+      FCSys.Connectors.ChemicalSpecies chemical(final n_trans=countTrue({
+            inclTransX,inclTransY,inclTransZ}))
         "Connector to exchange material while advecting translational momentum and enthalpy, with characteristic data as output"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -2503,8 +2512,7 @@ model.</p>
         parameter Integer n_trans
           "Number of components of translational momentum";
 
-        FCSys.Connectors.ChemicalSpecies chemical(         final n_trans=
-              n_trans)
+        FCSys.Connectors.ChemicalSpecies chemical(final n_trans=n_trans)
           "Connector to exchange material while advecting translational momentum and enthalpy, with characteristic data as output"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -2561,6 +2569,7 @@ model.</p>
         "Specify quotient of potential and temperature (measure current)"
         extends BaseClasses.PartialCondition(
           final conditionType=BaseClasses.ConditionType.PotentialPerTemperature,
+
           u(final unit="1"),
           final y(final unit="N/T") = chemical.Ndot);
 
@@ -4673,8 +4682,8 @@ model.</p>
       extends FaceBus.Subregion(
         gas(
           H2(
-            redeclare replaceable Face.Material.Current material(source(k(start=
-                     0))),
+            redeclare replaceable Face.Material.Current material(source(k(start
+                    =0))),
             redeclare replaceable Face.Transverse.Force transverse1(source(k(
                     start=0))),
             redeclare replaceable Face.Transverse.Force transverse2(source(k(
@@ -4682,8 +4691,8 @@ model.</p>
             redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
                       0)))),
           H2O(
-            redeclare replaceable Face.Material.Current material(source(k(start=
-                     0))),
+            redeclare replaceable Face.Material.Current material(source(k(start
+                    =0))),
             redeclare replaceable Face.Transverse.Force transverse1(source(k(
                     start=0))),
             redeclare replaceable Face.Transverse.Force transverse2(source(k(
@@ -4691,8 +4700,8 @@ model.</p>
             redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
                       0)))),
           N2(
-            redeclare replaceable Face.Material.Current material(source(k(start=
-                     0))),
+            redeclare replaceable Face.Material.Current material(source(k(start
+                    =0))),
             redeclare replaceable Face.Transverse.Force transverse1(source(k(
                     start=0))),
             redeclare replaceable Face.Transverse.Force transverse2(source(k(
@@ -4700,8 +4709,8 @@ model.</p>
             redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
                       0)))),
           O2(
-            redeclare replaceable Face.Material.Current material(source(k(start=
-                     0))),
+            redeclare replaceable Face.Material.Current material(source(k(start
+                    =0))),
             redeclare replaceable Face.Transverse.Force transverse1(source(k(
                     start=0))),
             redeclare replaceable Face.Transverse.Force transverse2(source(k(
@@ -4709,16 +4718,16 @@ model.</p>
             redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
                       0))))),
         graphite('C+'(
-            redeclare replaceable Face.Material.Current material(source(k(start=
-                     0))),
+            redeclare replaceable Face.Material.Current material(source(k(start
+                    =0))),
             redeclare replaceable Face.Transverse.Force transverse1(source(k(
                     start=0))),
             redeclare replaceable Face.Transverse.Force transverse2(source(k(
                     start=0))),
             redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
                       0)))), 'e-'(
-            redeclare replaceable Face.Material.Current material(source(k(start=
-                     0))),
+            redeclare replaceable Face.Material.Current material(source(k(start
+                    =0))),
             redeclare replaceable Face.Transverse.Force transverse1(source(k(
                     start=0))),
             redeclare replaceable Face.Transverse.Force transverse2(source(k(
@@ -4727,8 +4736,8 @@ model.</p>
                       0))))),
         ionomer(
           'C19HF37O5S-'(
-            redeclare replaceable Face.Material.Current material(source(k(start=
-                     0))),
+            redeclare replaceable Face.Material.Current material(source(k(start
+                    =0))),
             redeclare replaceable Face.Transverse.Force transverse1(source(k(
                     start=0))),
             redeclare replaceable Face.Transverse.Force transverse2(source(k(
@@ -4736,8 +4745,8 @@ model.</p>
             redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
                       0)))),
           'H+'(
-            redeclare replaceable Face.Material.Current material(source(k(start=
-                     0))),
+            redeclare replaceable Face.Material.Current material(source(k(start
+                    =0))),
             redeclare replaceable Face.Transverse.Force transverse1(source(k(
                     start=0))),
             redeclare replaceable Face.Transverse.Force transverse2(source(k(
@@ -4745,8 +4754,8 @@ model.</p>
             redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
                       0)))),
           H2O(
-            redeclare replaceable Face.Material.Current material(source(k(start=
-                     0))),
+            redeclare replaceable Face.Material.Current material(source(k(start
+                    =0))),
             redeclare replaceable Face.Transverse.Force transverse1(source(k(
                     start=0))),
             redeclare replaceable Face.Transverse.Force transverse2(source(k(
@@ -4754,8 +4763,8 @@ model.</p>
             redeclare replaceable Face.Thermal.HeatRate thermal(source(k(start=
                       0))))),
         liquid(H2O(
-            redeclare replaceable Face.Material.Current material(source(k(start=
-                     0))),
+            redeclare replaceable Face.Material.Current material(source(k(start
+                    =0))),
             redeclare replaceable Face.Transverse.Force transverse1(source(k(
                     start=0))),
             redeclare replaceable Face.Transverse.Force transverse2(source(k(
@@ -6956,7 +6965,8 @@ Your model is using an outer \"environment\" record, but an inner
 \"environment\" record is not defined.  For simulation, drag 
 FCSys.Conditions.Environment into your model to specify global conditions 
 and defaults.  Otherwise the default settings will be used.
-",    Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
+",
+      Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
               100}}), graphics={
           Rectangle(
             extent={{-120,60},{120,100}},
@@ -7048,21 +7058,25 @@ and defaults.  Otherwise the default settings will be used.
 
       partial class Single "Icon for a single-connector boundary condition"
         // extends Names.Middle;
-        annotation (Icon(graphics={Rectangle(
-                      extent={{-100,40},{100,-40}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Line(
-                      points={{-100,-40},{-100,40},{100,40},{100,-40}},
-                      pattern=LinePattern.None,
-                      smooth=Smooth.None),Line(
-                      points={{-100,-40},{100,-40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+        annotation (Icon(graphics={
+              Rectangle(
+                extent={{-100,40},{100,-40}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None),
+              Line(
+                points={{-100,-40},{-100,40},{100,40},{100,-40}},
+                pattern=LinePattern.None,
+                smooth=Smooth.None),
+              Line(
+                points={{-100,-40},{100,-40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}));
 
       end Single;
 
