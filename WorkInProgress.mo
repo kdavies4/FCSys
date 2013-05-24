@@ -73,6 +73,7 @@ package WorkInProgress "Incomplete classes under development"
           C=C,
           L=L)
           annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
       equation
         connect(reference.y, controller.ref) annotation (Line(
             points={{-30,-59},{-30,-55.5},{-30,-51},{-30,-51}},
@@ -112,6 +113,7 @@ package WorkInProgress "Incomplete classes under development"
           experiment(StopTime=2),
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                   100,100}})));
+
       end MagneticBall;
 
       model MaciejowskiAircraftMPC
@@ -138,6 +140,7 @@ package WorkInProgress "Incomplete classes under development"
               extent={{10,10},{-10,-10}},
               rotation=270,
               origin={-30,-70})));
+
       equation
         controller.x = aircraft.x;
         connect(controller.act, aircraft.u) annotation (Line(
@@ -170,6 +173,7 @@ package WorkInProgress "Incomplete classes under development"
 <br>[A,B,C,D] = ssdata(dsys) % where A,B,C,D are now the matrices of the discrete-time model</code>
  </td></tr></code></table></html>", revisions="<html><ul><li>Jan Gall, 2009/12/7:<br>Initial version</li>
   <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/12/11:<br>Modified</li></ul></html>"));
+
       end MaciejowskiAircraftMPC;
 
       model RossiterExample2MPC "Example2_mimo.m in Rossiter (2003)"
@@ -1292,6 +1296,7 @@ package WorkInProgress "Incomplete classes under development"
               extent={{10,10},{-10,-10}},
               rotation=270,
               origin={-30,-60})));
+
       equation
         connect(observer.x, controller.x) annotation (Line(
             points={{6.10623e-16,-11},{6.10623e-16,-30},{-19,-30}},
@@ -1340,6 +1345,7 @@ package WorkInProgress "Incomplete classes under development"
           Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics),
           experiment(StopTime=50));
+
       end RossiterExample2MPC;
 
       model RossiterExample2MPCNoRej "Example2_mimo.m in Rossiter (2003)"
@@ -1372,6 +1378,7 @@ package WorkInProgress "Incomplete classes under development"
               extent={{10,10},{-10,-10}},
               rotation=270,
               origin={-30,-60})));
+
       equation
         connect(observer.x, controller.x) annotation (Line(
             points={{6.10623e-16,-11},{6.10623e-16,-30},{-19,-30}},
@@ -1420,6 +1427,7 @@ package WorkInProgress "Incomplete classes under development"
           Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                   {100,100}}), graphics),
           experiment(StopTime=139));
+
       end RossiterExample2MPCNoRej;
 
       model PendulumMPC
@@ -1454,6 +1462,7 @@ package WorkInProgress "Incomplete classes under development"
               extent={{-10,-10},{10,10}},
               rotation=90,
               origin={-10,-70})));
+
       equation
         connect(observer.x, controller.x) annotation (Line(
             points={{6.10623e-16,-11},{6.10623e-16,-30},{-19,-30}},
@@ -1497,7 +1506,9 @@ assembled system.
 <IMG src=\"modelica://Modelica/Resources/Images/MultiBody/Examples/Elementary/Pendulum.png\"
 ALT=\"model Examples.Elementary.Pendulum\">
 </html>"));
+
       end PendulumMPC;
+
     end Examples;
 
     package Continuous
@@ -1554,6 +1565,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
               StopTime=10,
               NumberOfIntervals=5000,
               Algorithm="Dassl"));
+
         end RandomTest;
 
         model Pendulum
@@ -1562,6 +1574,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
             annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
           FCSys.WorkInProgress.Blocks.Continuous.Plants.Pendulum pendulum
             annotation (Placement(transformation(extent={{10,-10},{30,10}})));
+
         equation
           connect(ForceProfile.y, pendulum.u[1]) annotation (Line(
               points={{-9,6.10623e-16},{-4.5,6.10623e-16},{-4.5,1.16573e-15},{0,
@@ -1583,7 +1596,9 @@ assembled system.
 <IMG src=\"modelica://Modelica/Resources/Images/MultiBody/Examples/Elementary/Pendulum.png\"
 ALT=\"model Examples.Elementary.Pendulum\">
 </html>"));
+
         end Pendulum;
+
       end Examples;
       extends Modelica.Icons.Package;
       package Controllers
@@ -1640,6 +1655,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
                 extent={{-10,-10},{10,10}},
                 rotation=90,
                 origin={0,-30})));
+
         equation
           connect(NbarGain.u, ref) annotation (Line(
               points={{-2.90675e-16,-42},{5.55112e-16,-100}},
@@ -1674,7 +1690,9 @@ ALT=\"model Examples.Elementary.Pendulum\">
                     -100,-100},{100,100}}), graphics), Diagram(coordinateSystem(
                   preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
                 graphics));
+
         end Controller;
+
       end Controllers;
 
       package Observers
@@ -1739,6 +1757,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
           FCSys.WorkInProgress.Blocks.Math.AddSkipInclIncl addSkipInclIncl2(
               final isPos2=false, final n=n_sen)
             annotation (Placement(transformation(extent={{80,-10},{60,10}})));
+
         equation
           connect(addInclSkipIncl.y, xInt.u) annotation (Line(
               points={{10,-9},{10,-13.5},{10,-19},{10,-19}},
@@ -1811,7 +1830,9 @@ ALT=\"model Examples.Elementary.Pendulum\">
                     -100,-100},{100,100}}), graphics), Diagram(coordinateSystem(
                   preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
                 graphics));
+
         end Observer;
+
       end Observers;
 
       package Plants
@@ -1840,9 +1861,11 @@ ALT=\"model Examples.Elementary.Pendulum\">
             FCSys.WorkInProgress.Blocks.Continuous.Plants.BaseClasses.PartialPlant(
               final n_in=size(B, 2),final n_out=size(C, 1));
           output Real x[size(A, 1)](start=x_0) "State vector";
+
         protected
           final parameter Integer n_x=size(A, 1) "number of states";
           final parameter Integer n_y=size(C, 1) "number of outputs";
+
         initial equation
           if initType == Init.SteadyState then
             der(x)/U.s = zeros(n_x);
@@ -1855,6 +1878,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
                       C,
                       y_0 - D*u);
           end if;
+
         equation
           der(x)/U.s = A*x + B*u;
           y = C*x + D*u;
@@ -1913,6 +1937,7 @@ results in the following equations:
                   preserveAspectRatio=true,
                   extent={{-100,-100},{100,100}},
                   grid={2,2}), graphics)));
+
         end StateSpace;
 
         model StateSpaceWNoise
@@ -1962,6 +1987,7 @@ results in the following equations:
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={60,0})));
+
         equation
           connect(addDisturbance.y, stateSpace.u) annotation (Line(
               points={{-11,6.10623e-16},{-6.25,6.10623e-16},{-6.25,1.27676e-15},
@@ -2018,6 +2044,7 @@ results in the following equations:
                           lineColor={0,0,127},
                           fillColor={255,255,255},
                           fillPattern=FillPattern.Solid)}));
+
         end StateSpaceWNoise;
 
         model Pendulum "Simple pendulum with one revolute joint and one body"
@@ -2050,6 +2077,7 @@ results in the following equations:
                   extent={{-40,-90},{-20,-70}})));
           Modelica.Mechanics.Translational.Sources.Force2 force annotation (
               Placement(transformation(extent={{-40,-30},{-20,-10}})));
+
         equation
           connect(damper.flange_b, joint.axis) annotation (Line(points={{40,-40},
                   {50,-40},{50,-60},{30,-60},{30,-70}}, color={0,0,0}));
@@ -2151,6 +2179,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
                           fillColor={255,255,255},
                           fillPattern=FillPattern.Solid,
                           lineThickness=0.5)}));
+
         end Pendulum;
 
         model PendulumDummy
@@ -2165,6 +2194,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
   matrices with have NaN entries that Dymola cannot handle.
   */
           annotation (Diagram(graphics));
+
         end PendulumDummy;
 
         package BaseClasses "Base classes (not generally for direct use)"
@@ -2177,8 +2207,11 @@ ALT=\"model Examples.Elementary.Pendulum\">
                     extent={{-100,-100},{100,100}}), graphics), Icon(
                   coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                       {100,100}}), graphics));
+
           end PartialPlant;
+
         end BaseClasses;
+
       end Plants;
 
       package Sources
@@ -2200,6 +2233,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
           parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative
             "Smoothness of sample interpolation"
             annotation (Dialog(group="Advanced"));
+
         protected
           final parameter Real mu_internal[n_out]=(if size(mu, 1) == 1 then mu[
               1]*ones(n_out) else mu)
@@ -2212,10 +2246,12 @@ ALT=\"model Examples.Elementary.Pendulum\">
           Real table[n_s, n_out + 1]
             "Matrix of normal random numbers (the first column is time /s)";
           Integer tableID "table identification number";
+
         public
           Connectors.RealOutput y[n_out] "Connector of Real output signals"
             annotation (Placement(transformation(extent={{90,-10},{110,10}},
                   rotation=0), iconTransformation(extent={{100,-10},{120,10}})));
+
         equation
           // Interpolate data from the table
           for i in 1:n_out loop
@@ -2298,6 +2334,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
                   {82,-60}}, color={192,192,192})}),
             Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics));
+
         end RandomNormal;
 
         model RandomUniform
@@ -2315,6 +2352,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
           parameter Modelica.Blocks.Types.Smoothness smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative
             "Smoothness of sample interpolation"
             annotation (Dialog(group="Advanced"));
+
         protected
           final parameter Real x_min_internal[n_out]=(if size(x_min, 1) == 1 then
                     ones(n_out)*x_min[1] else x_min)
@@ -2327,10 +2365,12 @@ ALT=\"model Examples.Elementary.Pendulum\">
           Real table[n_s, n_out + 1]
             "Matrix of uniform random numbers (the first column is time /s)";
           Integer tableID "table identification number";
+
         public
           Connectors.RealOutput y[n_out] "Connector of Real output signals"
             annotation (Placement(transformation(extent={{90,-10},{110,10}},
                   rotation=0), iconTransformation(extent={{100,-10},{120,10}})));
+
         equation
           // Interpolate data from the table
           for i in 1:n_out loop
@@ -2420,6 +2460,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
                   {82,-60}}, color={192,192,192})}),
             Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics));
+
         end RandomUniform;
 
         package BaseClasses "Base classes (not generally for direct use)"
@@ -2448,6 +2489,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
 <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/1/7:<br/>Original version; copied from Modelica.Blocks.Sources.CombiTimeTable</li>
 </ul></p>
 </html>"), Library="ModelicaExternalC");
+
           end tableTimeInit;
 
           function tableTimeIpo
@@ -2466,6 +2508,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
 <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/1/7:<br/>Original version; copied from Modelica.Blocks.Sources.CombiTimeTable</li>
 </ul></p>
 </html>"), Library="ModelicaExternalC");
+
           end tableTimeIpo;
 
           function tableTimeTmin
@@ -2479,6 +2522,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
 <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/1/7:<br/>Original version; copied from Modelica.Blocks.Sources.CombiTimeTable</li>
 </ul></p>
 </html>"), Library="ModelicaExternalC");
+
           end tableTimeTmin;
 
           function tableTimeTmax
@@ -2492,7 +2536,9 @@ ALT=\"model Examples.Elementary.Pendulum\">
 <li><a href=\"mailto:kdavies4@gmail.com\">Kevin Davies</a>, 2009/1/7:<br/>Original version; copied from Modelica.Blocks.Sources.CombiTimeTable</li>
 </ul></p>
 </html>"), Library="ModelicaExternalC");
+
           end tableTimeTmax;
+
         end BaseClasses;
 
         block Constant "Generate constant signal of type Real"
@@ -2500,6 +2546,7 @@ ALT=\"model Examples.Elementary.Pendulum\">
           parameter Real k[:] "Constant output value(s)";
           extends FCSys.WorkInProgress.Blocks.BaseClasses.MO(final n_out=size(k,
                 1));
+
         equation
           y = k;
           annotation (
@@ -2526,7 +2573,9 @@ ALT=\"model Examples.Elementary.Pendulum\">
                 preserveAspectRatio=true,
                 extent={{-100,-100},{100,100}},
                 grid={2,2}), graphics));
+
         end Constant;
+
       end Sources;
 
       block FirstOrder "First order transport function block (= 1 pole)"
@@ -2544,12 +2593,14 @@ ALT=\"model Examples.Elementary.Pendulum\">
         extends FCSys.WorkInProgress.Blocks.BaseClasses.MI(final n_in=n);
         extends FCSys.WorkInProgress.Blocks.BaseClasses.MO(y(final start=y_0),
             final n_out=n);
+
       initial equation
         if initType == Init.SteadyState then
           der(y)/U.s = zeros(n);
         elseif initType == Init.InitialState or initType == Init.InitialOutput then
           y = y_0;
         end if;
+
       equation
         der(y)/U.s = (k*u - y)/T;
         annotation (Documentation(
@@ -2613,6 +2664,7 @@ Example:
                   color={0,0,0}),Rectangle(extent={{-60,60},{60,-60}},
                   lineColor={0,0,255}),Line(points={{-100,0},{-60,0}}, color={0,
                   0,255}),Line(points={{60,0},{100,0}}, color={0,0,255})})));
+
       end FirstOrder;
 
       block Integrator "Output the integral of the input signal"
@@ -2632,12 +2684,14 @@ Example:
         extends FCSys.WorkInProgress.Blocks.BaseClasses.MO(y(final start=y_0),
             final n_out=n);
         parameter Integer n=1 "Number of signals";
+
       initial equation
         if initType == Init.SteadyState then
           der(y)/U.s = zeros(n);
         elseif initType == Init.InitialState or initType == Init.InitialOutput then
           y = y_0;
         end if;
+
       equation
         der(y)/U.s = k .* u;
         annotation (Documentation(
@@ -2690,7 +2744,9 @@ This is discussed in the description of package
                         lineColor={0,0,0},
                         textString="s"),Line(points={{-46,0},{46,0}}, color={0,
                   0,0})})));
+
       end Integrator;
+
     end Continuous;
 
     package Discrete
@@ -2745,6 +2801,7 @@ This is discussed in the description of package
               StopTime=100,
               NumberOfIntervals=50000,
               Algorithm="Dassl"));
+
         end RandomTest;
 
         model Sampler
@@ -2755,6 +2812,7 @@ This is discussed in the description of package
             annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
           Modelica.Blocks.Discrete.FirstOrderHold hold(samplePeriod=1/40)
             annotation (Placement(transformation(extent={{40,-10},{60,10}})));
+
         equation
           connect(source.y, sample.u) annotation (Line(
               points={{-59,6.10623e-16},{-49.75,6.10623e-16},{-49.75,
@@ -2770,7 +2828,9 @@ This is discussed in the description of package
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent=
                    {{-100,-100},{100,100}}), graphics), experiment(Algorithm=
                   "Dassl"));
+
         end Sampler;
+
       end Examples;
       extends Modelica.Icons.Package;
       package Controllers
@@ -2843,6 +2903,7 @@ This is discussed in the description of package
               height={-1},
               offset={-1}) annotation (Placement(transformation(extent={{60,-40},
                       {40,-20}})));
+
           equation
             connect(J.y, qPSolver.J_set) annotation (Line(
                 points={{39,60},{20,60},{20,8},{-11,8}},
@@ -2873,7 +2934,9 @@ This is discussed in the description of package
               experiment(StopTime=2),
               Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                       -100},{100,100}}), graphics));
+
           end QPSolverFerreauExample;
+
         end Examples;
 
         block MPC "Model predictive controller"
@@ -2984,6 +3047,7 @@ This is discussed in the description of package
           FCSys.WorkInProgress.Blocks.Math.AddInclInclSkip addSkipInclIncl1(
               final n=n_act)
             annotation (Placement(transformation(extent={{-60,-10},{-80,10}})));
+
         equation
           connect(addInclInclIncl.y, G_partGain.u) annotation (Line(
               points={{21,6.10623e-16},{18.75,6.10623e-16},{18.75,1.27676e-15},
@@ -3082,6 +3146,7 @@ This is discussed in the description of package
                           textString="MPC")}), Diagram(coordinateSystem(
                   preserveAspectRatio=true, extent={{-140,-100},{140,100}}),
                 graphics));
+
         end MPC;
 
         block MPCWRej "Model predictive controller with disturbance rejection"
@@ -3163,6 +3228,7 @@ This is discussed in the description of package
             annotation (Placement(transformation(extent={{-30,-60},{-50,-40}})));
           Modelica.Blocks.Math.MatrixGain feedbackGain(final K=-K_fb)
             annotation (Placement(transformation(extent={{-30,40},{-50,60}})));
+
         equation
           connect(feedbackGain.u, x) annotation (Line(
               points={{-28,50},{80,50},{80,5.55112e-16},{100,5.55112e-16}},
@@ -3238,6 +3304,7 @@ This is discussed in the description of package
                           textString="MPC")}), Diagram(coordinateSystem(
                   preserveAspectRatio=true, extent={{-100,-80},{100,80}}),
                 graphics));
+
         end MPCWRej;
 
         package BaseClasses "Base classes (not generally for direct use)"
@@ -3328,6 +3395,7 @@ This is discussed in the description of package
                   extent={{-10,-10},{10,10}},
                   rotation=0,
                   origin={100,0}), iconTransformation(extent={{100,-10},{120,10}})));
+
           protected
             Real x_min[n_x] "<html>Lower bound of <b>x</b></html>";
             Real x_max[n_x] "<html>Upper bound of <b>x</b></html>";
@@ -3373,6 +3441,7 @@ This is discussed in the description of package
                   extent={{-10,-10},{10,10}},
                   rotation=0,
                   origin={-70,-80}),iconTransformation(extent={{120,-20},{80,20}})));
+
           algorithm
             when (sampleTrigger) then
               for i in 1:integer(n_x/n_y) loop
@@ -3405,6 +3474,7 @@ This is discussed in the description of package
                           n_bG=n_bG);
               y := x[1:n_y];
             end when;
+
           equation
             if JAsParam then
               J_internal = J;
@@ -3473,6 +3543,7 @@ This is discussed in the description of package
                                 textString="QP")}),
                 Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                         -100},{100,100}}), graphics)));
+
           end QPSolver;
 
           function GetInfo "<html>Get information about the solution of a quadratic programming problem to find <b>x</b> that minimizes:
@@ -3508,6 +3579,7 @@ This is discussed in the description of package
    and this in Linux:
     Library="qpOASES"
   */
+
           end GetInfo;
 
           function Hotstart "<html>Restart a quadratic programming problem to find <b>x</b> that minimizes:
@@ -3549,6 +3621,7 @@ This is discussed in the description of package
    and this in Linux:
     Library="qpOASES"
   */
+
           end Hotstart;
 
           function Init "<html>Initialize a quadratic programming problem to find <b>x</b> that minimizes:
@@ -3599,6 +3672,7 @@ This is discussed in the description of package
    and this in Linux:
     Library="qpOASES"
   */
+
           end Init;
 
           class qpOASESmem
@@ -3633,6 +3707,7 @@ This is discussed in the description of package
    and this in Linux:
     Library="qpOASES"
   */
+
             end constructor;
 
             function destructor
@@ -3650,7 +3725,9 @@ This is discussed in the description of package
    and this in Linux:
     Library="qpOASES"
   */
+
             end destructor;
+
           end qpOASESmem;
 
           function ObservabilityMatrix "Calculate observability matrix"
@@ -3659,8 +3736,10 @@ This is discussed in the description of package
             input Real[:, size(A, 1)] C "Output matrix";
             input Integer n_p "Prediction horizon";
             output Real[n_p*size(C, 1), size(A, 1)] L "Observability matrix";
+
           protected
             constant Integer n_sen=size(C, 1) "Number of sensors";
+
           algorithm
             // Only suitable for stable plants, since numerical problems for computing A^i may/will arise for unstable systems
             // see Maciejowski, p. 56 (and [RWR98])
@@ -3669,6 +3748,7 @@ This is discussed in the description of package
               L[(i - 1)*n_sen + 1:i*n_sen, :] := L[(i - 2)*n_sen + 1:(i - 1)*
                 n_sen, :]*A;
             end for;
+
           end ObservabilityMatrix;
 
           function ThetaPredictionMatrix "Calculate Theta prediction matrix"
@@ -3677,15 +3757,18 @@ This is discussed in the description of package
             input Integer n_c "Control horizon";
             input Integer n_p "Prediction horizon";
             output Real[size(Y, 1), n_c*size(Y, 2)] Theta;
+
           protected
             constant Integer n_act=size(Y, 2) "Number of actuators";
             constant Integer n_sen=integer(size(Y, 1)/n_p) "Number of sensors";
+
           algorithm
             Theta := zeros(size(Theta, 1), size(Theta, 2));
             for i in 1:n_c loop
               Theta[(i - 1)*n_sen + 1:size(Theta, 1), (i - 1)*n_act + 1:i*n_act]
                 := Y[1:size(Y, 1) - (i - 1)*n_sen, :];
             end for;
+
           end ThetaPredictionMatrix;
 
           function YPredictionMatrix "Calculate Y prediction matrix"
@@ -3695,12 +3778,14 @@ This is discussed in the description of package
             input Real[:, size(A, 1)] C "Output matrix";
             input Integer n_p "Prediction horizon";
             output Real[n_p*size(C, 1), size(B, 2)] Y;
+
           protected
             constant Integer n_act=size(B, 2) "Number of actuators";
             constant Integer n_x=size(A, 1) "Number of states";
             constant Integer n_sen=size(C, 1) "Number of sensors";
             Real[n_sen, n_act] Y_new_part=zeros(n_sen, n_act);
             Real[n_x, n_x] A_raised_i=identity(n_x);
+
           algorithm
             // Only suitable for stable plants, since numerical problems for computing A^i may/will arise for unstable systems
             // see Maciejowski, p. 56 (and [RWR98])
@@ -3709,8 +3794,11 @@ This is discussed in the description of package
               Y[i*n_sen + 1:(i + 1)*n_sen, :] := Y_new_part;
               A_raised_i := A*A_raised_i;
             end for;
+
           end YPredictionMatrix;
+
         end BaseClasses;
+
       end Controllers;
 
       package Observers
@@ -3778,6 +3866,7 @@ This is discussed in the description of package
           FCSys.WorkInProgress.Blocks.Math.AddSkipInclIncl addSkipInclIncl2(
               final isPos2=false, final n=n_sen)
             annotation (Placement(transformation(extent={{80,-10},{60,10}})));
+
         equation
           connect(addInclSkipIncl.y, xDelay.u) annotation (Line(
               points={{10,-9},{10,-14},{10,-19},{10,-19}},
@@ -3850,7 +3939,9 @@ This is discussed in the description of package
                     -100,-100},{100,100}}), graphics), Diagram(coordinateSystem(
                   preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
                 graphics));
+
         end Observer;
+
       end Observers;
 
       package Plants
@@ -3864,6 +3955,7 @@ This is discussed in the description of package
           extends Modelica.Blocks.Interfaces.DiscreteMIMO(final nin=size(B, 2),
               final nout=size(C, 1));
           output Real x[size(A, 1)] "State vector";
+
         equation
           when sampleTrigger then
             x = A*pre(x) + B*u;
@@ -3927,6 +4019,7 @@ results in the following equations:
                   preserveAspectRatio=true,
                   extent={{-100,-100},{100,100}},
                   grid={2,2}), graphics)));
+
         end StateSpace;
 
         model StateSpaceWNoise
@@ -3952,6 +4045,7 @@ results in the following equations:
                    {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
                   preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
                 graphics));
+
         end StateSpaceWNoise;
 
         model Pendulum
@@ -3994,6 +4088,7 @@ results in the following equations:
                           fillColor={255,255,255},
                           fillPattern=FillPattern.Solid,
                           lineThickness=0.5)}));
+
         end Pendulum;
 
         package BaseClasses "Base classes (not generally for direct use)"
@@ -4028,6 +4123,7 @@ results in the following equations:
               gas.H2.Data.zetaCSys.Blocks.Continuous.Plants.BaseClasses.PartialPlant
               annotation (choicesInPackage=true, Placement(transformation(
                     extent={{-40,-10},{-20,10}})));
+
           equation
             connect(antiAliasing.y, sample.u) annotation (Line(
                 points={{41,6.10623e-16},{45.25,6.10623e-16},{45.25,1.27676e-15},
@@ -4066,8 +4162,11 @@ results in the following equations:
                     extent={{-100,-100},{100,100}}), graphics), Icon(
                   coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                       {100,100}}), graphics));
+
           end PartialPlant;
+
         end BaseClasses;
+
       end Plants;
 
       package Sources
@@ -4086,6 +4185,7 @@ results in the following equations:
           // Note KLD 1/8/10: without annotation(Evaluate=true), Dymola doesn't seem to recognize internal_twister_uniform() when sigma=ones(n_out)
           parameter Integer n_s=500 "Number of samples"
             annotation (Dialog(group="Advanced"));
+
         protected
           final parameter Real mu_internal[n_out]=(if size(mu, 1) == 1 then mu[
               1]*ones(n_out) else mu)
@@ -4095,6 +4195,7 @@ results in the following equations:
             "Standard deviation(s) of random signal(s), with entries for every signal";
           Real table[n_s, n_out](start=zeros(n_s, n_out), fixed=true)
             "Matrix of normal random numbers (the first column is time /s)";
+
         equation
           when firstTrigger then
             // (Re)generate the table of random numbers
@@ -4185,6 +4286,7 @@ results in the following equations:
                   lineColor={0,0,127}),Ellipse(extent={{36,78},{44,70}},
                   lineColor={0,0,127}),Ellipse(extent={{56,44},{64,36}},
                   lineColor={0,0,127})}));
+
         end RandomNormal;
 
         model RandomUniform "Generate a sequence of uniform random numbers"
@@ -4198,6 +4300,7 @@ results in the following equations:
             "Upper bound(s) of the random signal(s)";
           parameter Integer n_s=500 "Number of samples"
             annotation (Dialog(group="Advanced"));
+
         protected
           final parameter Real x_min_internal[n_out]=(if size(x_min, 1) == 1 then
                     ones(n_out)*x_min[1] else x_min)
@@ -4206,6 +4309,7 @@ results in the following equations:
                     ones(n_out)*x_max[1] else x_max)
             "Upper bound(s) of random signal(s), with entries for every signal";
           Real table[n_s, n_out] "Matrix of uniform random numbers";
+
         equation
           when firstTrigger then
             // Check the min/max range
@@ -4303,7 +4407,9 @@ results in the following equations:
                   lineColor={0,0,127}),Ellipse(extent={{36,78},{44,70}},
                   lineColor={0,0,127}),Ellipse(extent={{56,44},{64,36}},
                   lineColor={0,0,127})}));
+
         end RandomUniform;
+
       end Sources;
 
       block ZeroOrderHold "Zero order hold of a sampled-data system"
@@ -4313,6 +4419,7 @@ results in the following equations:
         output Real y_sample[n](start=y_0, fixed=true);
         parameter Real y_0[:]=zeros(1) "Initial value of output signal";
         final parameter Integer n=size(y_0, 1) "Number of signals";
+
       equation
         when {sampleTrigger,initial()} then
           y_sample = u;
@@ -4333,6 +4440,7 @@ time instants and holds the output at the value of the last
 sample instant during the sample points.</p>
 </html>
 "));
+
       end ZeroOrderHold;
 
       block FirstOrderHold "First order hold of a sampled-data system"
@@ -4342,10 +4450,12 @@ sample instant during the sample points.</p>
         parameter Integer n=1 "Number of signals";
         parameter Real y_0[n]=zeros(n) "Initial condition of input";
         parameter Real c0[n]=zeros(n) "Initial condition of Delta_y/Delta_t";
+
       protected
         Real y_sample[n](start=y_0,fixed=true);
         Modelica.SIunits.Time t_sample;
         Real c[n](start=c0,fixed=true) "Delta_y/Delta_t";
+
       equation
         when sampleTrigger then
           y_sample = u;
@@ -4370,6 +4480,7 @@ sample instant during the sample points.</p>
 values of the last two sampled input signals.</p>
 </html>
 "));
+
       end FirstOrderHold;
 
       block TransportFunction "Discrete Transport Function block"
@@ -4381,6 +4492,7 @@ values of the last two sampled input signals.</p>
         output Real x[size(a, 1) - 1, n](each start=0,each fixed=true)
           "State of transport function from controller canonical form";
         parameter Integer n=1 "Number of signals";
+
       protected
         parameter Integer n_b=size(b, 1)
           "Size of Numerator of transport function";
@@ -4388,6 +4500,7 @@ values of the last two sampled input signals.</p>
           "Size of Denominator of transport function";
         Real x_1[n];
         Real x_ext[size(a, 1), n];
+
       equation
         when sampleTrigger then
           /* State variables x are defined according to
@@ -4473,6 +4586,7 @@ states can be set as start values of <b>x</b>.<p><p>Example:</p>
                       lineColor={0,0,0},
                       textString="a(z)"),Line(points={{-100,0},{-60,0}}, color=
                 {0,0,255}),Line(points={{60,0},{100,0}}, color={0,0,255})}));
+
       end TransportFunction;
 
       block UnitDelay "Unit Delay Block"
@@ -4482,10 +4596,12 @@ states can be set as start values of <b>x</b>.<p><p>Example:</p>
         extends FCSys.WorkInProgress.Blocks.BaseClasses.MO(final n_out=n);
         extends FCSys.WorkInProgress.Blocks.Discrete.BaseClasses.DiscreteBlock;
         final parameter Integer n=size(y_0, 1) "Number of signals";
+
       equation
         when sampleTrigger then
           y = pre(u);
         end when;
+
       initial equation
         //  y = y_0;
         annotation (Documentation(
@@ -4531,6 +4647,7 @@ the output y is identical to parameter yStart.</p>
                         extent={{-55,-5},{55,-55}},
                         lineColor={0,0,0},
                         textString="z")})));
+
       end UnitDelay;
 
       block Sampler "Ideal sampling of continuous signals"
@@ -4538,6 +4655,7 @@ the output y is identical to parameter yStart.</p>
         extends FCSys.WorkInProgress.Blocks.BaseClasses.MO(final n_out=n);
         extends FCSys.WorkInProgress.Blocks.Discrete.BaseClasses.DiscreteBlock;
         parameter Integer n=1 "Number of signals";
+
       equation
         when {sampleTrigger,initial()} then
           y = u;
@@ -4572,6 +4690,7 @@ the output y is identical to parameter yStart.</p>
 via parameter <b>samplePeriod</b>.</p>
 </html>
 "));
+
       end Sampler;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -4581,17 +4700,22 @@ via parameter <b>samplePeriod</b>.</p>
           parameter SI.Time samplePeriod(min=100*Modelica.Constants.eps, start=
                 0.1) "Sample period of species";
           parameter SI.Time startTime=0 "First sample time instant";
+
         protected
           output Boolean sampleTrigger "true, if sample time instant";
           output Boolean firstTrigger
             "Rising edge signals first sample instant";
+
         equation
           sampleTrigger = sample(startTime, samplePeriod);
           when sampleTrigger then
             firstTrigger = time <= startTime + samplePeriod/2;
           end when;
+
         end DiscreteBlock;
+
       end BaseClasses;
+
     end Discrete;
 
     package Math
@@ -4610,6 +4734,7 @@ via parameter <b>samplePeriod</b>.</p>
           "Connector 2 of Real input signals" annotation (Placement(
               transformation(extent={{-110,-70},{-90,-50}}, rotation=0),
               iconTransformation(extent={{-120,-70},{-100,-50}})));
+
       equation
         y = k_1*u_1 + k_2*u_2;
         annotation (Documentation(
@@ -4649,6 +4774,7 @@ three input signals <b>u_1</b>, <b>u_2</b> and <b>u_3</b>:
                 preserveAspectRatio=true,
                 extent={{-100,-100},{100,100}},
                 grid={2,2}), graphics)));
+
       end Add2;
 
       block Add3 "Output the weighted sum of three inputs"
@@ -4670,6 +4796,7 @@ three input signals <b>u_1</b>, <b>u_2</b> and <b>u_3</b>:
           "Connector 3 of Real input signals" annotation (Placement(
               transformation(extent={{-110,-90},{-90,-70}}, rotation=0),
               iconTransformation(extent={{-120,-70},{-100,-50}})));
+
       equation
         y = k_1*u_1 + k_2*u_2 + k_3*u_3;
         annotation (Documentation(
@@ -4710,6 +4837,7 @@ three input signals <b>u_1</b>, <b>u_2</b> and <b>u_3</b>:</p>
                 preserveAspectRatio=true,
                 extent={{-100,-100},{100,100}},
                 grid={2,2}), graphics)));
+
       end Add3;
 
       block AddSkipInclIncl "Add or subtract two inputs"
@@ -4738,6 +4866,7 @@ three input signals <b>u_1</b>, <b>u_2</b> and <b>u_3</b>:</p>
         output FCSys.Connectors.RealOutput y[n] annotation (Placement(
               transformation(extent={{80,-10},{100,10}}, rotation=0),
               iconTransformation(extent={{80,-10},{100,10}})));
+
       equation
         y = (if isPos1 then u_1 else -u_1) + (if isPos2 then u_2 else -u_2);
         annotation (Documentation(info="
@@ -4788,6 +4917,7 @@ input <b>u_2</b>:</p>
                       points={{20,0},{80,0}},
                       color={0,0,127},
                       thickness=0.5)}));
+
       end AddSkipInclIncl;
 
       block AddInclInclIncl "Add or subtract three inputs"
@@ -4827,6 +4957,7 @@ input <b>u_2</b>:</p>
               extent={{-10,-10},{10,10}},
               rotation=90,
               origin={0,-90})));
+
       equation
         y = (if isPos1 then u_1 else -u_1) + (if isPos2 then u_2 else -u_2) + (
           if isPos3 then u_3 else -u_3);
@@ -4891,6 +5022,7 @@ input <b>u_2</b>:</p>
                       lineColor={0,0,0},
                       textString="-",
                       visible=not isPos3)}));
+
       end AddInclInclIncl;
 
       block AddInclInclSkip "Add or subtract two inputs"
@@ -4919,6 +5051,7 @@ input <b>u_2</b>:</p>
         output FCSys.Connectors.RealOutput y[n] annotation (Placement(
               transformation(extent={{80,-10},{100,10}}, rotation=0),
               iconTransformation(extent={{80,-10},{100,10}})));
+
       equation
         y = (if isPos1 then u_1 else -u_1) + (if isPos2 then u_2 else -u_2);
         annotation (Documentation(info="
@@ -4971,6 +5104,7 @@ input <b>u_2</b>:</p>
                       points={{20,0},{80,0}},
                       color={0,0,127},
                       thickness=0.5)}));
+
       end AddInclInclSkip;
 
       block AddInclSkipIncl "Add or subtract two inputs"
@@ -5002,6 +5136,7 @@ input <b>u_2</b>:</p>
         output FCSys.Connectors.RealOutput y[n] annotation (Placement(
               transformation(extent={{80,-10},{100,10}}, rotation=0),
               iconTransformation(extent={{80,-10},{100,10}})));
+
       equation
         y = (if isPos1 then u_1 else -u_1) + (if isPos2 then u_2 else -u_2);
         annotation (Documentation(info="
@@ -5054,6 +5189,7 @@ input <b>u_2</b>:</p>
                       points={{20,0},{80,0}},
                       color={0,0,127},
                       thickness=0.5)}));
+
       end AddInclSkipIncl;
 
       block Limiter "Limit the range of a signal"
@@ -5065,6 +5201,7 @@ input <b>u_2</b>:</p>
         extends FCSys.BaseClasses.Icons.Blocks.Continuous;
         extends FCSys.WorkInProgress.Blocks.BaseClasses.MI(final n_in=n);
         extends FCSys.WorkInProgress.Blocks.BaseClasses.MO(final n_out=n);
+
       equation
         for i in 1:n loop
           assert(u_max[i] >= u_min[i],
@@ -5118,7 +5255,9 @@ as output.</p>
                 preserveAspectRatio=true,
                 extent={{-100,-100},{100,100}},
                 grid={2,2}), graphics)));
+
       end Limiter;
+
     end Math;
 
     package Routing
@@ -5129,6 +5268,7 @@ as output.</p>
         extends FCSys.WorkInProgress.Blocks.BaseClasses.MO(final n_out=n_in*
               n_dup);
         parameter Integer n_dup=1 "Number of duplications";
+
       equation
         for i in 1:n_dup loop
           y[n_in*(i - 1) + 1:n_in*i] = u;
@@ -5194,7 +5334,9 @@ This is discussed in the description of package
                 preserveAspectRatio=true,
                 extent={{-100,-100},{100,100}},
                 grid={2,2}), graphics)));
+
       end Duplicate;
+
     end Routing;
 
     package BaseClasses "Base classes (not generally for direct use)"
@@ -5207,6 +5349,7 @@ This is discussed in the description of package
 <p>Block has one continuous Real input and one continuous Real output signal.</p>
 </html>", Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics)));
+
       end SI;
 
       partial block MI "Multiple Input block"
@@ -5220,6 +5363,7 @@ The signal sizes of the input and output vector may be different.</p>
 </html>
 ", Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
                     100}}), graphics)));
+
       end MI;
 
       partial block SO "Single Output block"
@@ -5232,6 +5376,7 @@ The signal sizes of the input and output vector may be different.</p>
               grid={2,2}), graphics), Documentation(info="<html>
 <p>Block has one continuous Real output signal.</p>
 </html>"));
+
       end SO;
 
       partial block MO "Multiple Output block"
@@ -5243,6 +5388,7 @@ The signal sizes of the input and output vector may be different.</p>
 <p>Block has one continuous Real output signal vector.</p>
 </html>", Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
                     {100,100}}), graphics)));
+
       end MO;
 
       function randu "Return a vector of uniform random numbers"
@@ -5251,9 +5397,11 @@ The signal sizes of the input and output vector may be different.</p>
         input Real x_max=0.5 "Upper bound of random number(s)";
         input Integer n=1 "Number of random numbers";
         output Real x[n] "Uniform random number(s)";
+
       protected
         Real Delta;
         Real Sigma;
+
       algorithm
         Delta := x_max - x_min;
         Sigma := x_max + x_min;
@@ -5261,6 +5409,7 @@ The signal sizes of the input and output vector may be different.</p>
         annotation (Documentation(info="<html><p>This function uses <code>internal_twister_uniform()</code>
   to generate uniform random numbers, which in turn uses the Mersenne twister pseudorandom number
   generator and is specific to Dymola (i.e., not general to Modelica).</p></html>"));
+
       end randu;
 
       function randn "Return a vector of normal random numbers"
@@ -5270,8 +5419,10 @@ The signal sizes of the input and output vector may be different.</p>
         input Real sigma=1 "Standard deviation";
         input Integer n=1 "Number of random numbers";
         output Real x[n] "Normal random number(s)";
+
       protected
         Real x_0[n];
+
       algorithm
         x_0 := sqrt(-2*log(FCSys.WorkInProgress.Blocks.BaseClasses.randu(
                 x_min=0,
@@ -5286,7 +5437,9 @@ The signal sizes of the input and output vector may be different.</p>
   It uses <code>internal_twister_uniform()</code> to generate uniform random numbers,
   which in turn uses the Mersenne twister pseudorandom number generator and is
   specific to Dymola (i.e., not general to Modelica).</p></html>"));
+
       end randn;
+
     end BaseClasses;
     annotation (Documentation(info="<html><p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
 Copyright 2007&ndash;2012, Georgia Tech Research Corporation.</p>
@@ -5296,6 +5449,7 @@ it can be redistributed and/or modified under the terms of the Modelica License 
 disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.ModelicaLicense2\">
 FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
+
   end Blocks;
 
   package Systems
@@ -5379,6 +5533,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               origin={-30,50},
               extent={{-10,-10},{10,10}},
               rotation=270)));
+
       equation
         connect(valveSetpoint.y, fCPlant.exitValvePosAn) annotation (Line(
               points={{-79,-60},{42,-60},{42,2}}, color={0,0,127}));
@@ -5412,7 +5567,9 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           annotation (Line(points={{-30,10},{0,10}}, color={0,127,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-100,-100},{100,100}}), graphics));
+
       end FCPlantNoRecirc;
+
     end Examples;
 
     package FC
@@ -5492,6 +5649,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
         Connectors.FaceBus ambientP annotation (Placement(transformation(extent=
                  {{190,70},{210,90}}), iconTransformation(extent={{-110,50},{-90,
                   70}})));
+
       equation
         v = pinP.v - pinP.v;
         connect(condensatePump.actBusIn, actBusIn);
@@ -5662,6 +5820,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
             Algorithm="Dassl"),
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                   100,100}}), graphics));
+
       end FCNoRecirc;
 
       package Interfaces
@@ -5680,6 +5839,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           input Real qdot_coolingPump;
           annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{
                     -100,-100},{100,100}}), graphics));
+
         end ActBusIn;
 
         expandable connector ActBusOut
@@ -5689,6 +5849,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           output SI.Current current_ref;
           annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{
                     -100,-100},{100,100}}), graphics));
+
         end ActBusOut;
 
         expandable connector SenBusIn
@@ -5699,6 +5860,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           input Q.RotationalVelocity speed;
           annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{
                     -100,-100},{100,100}}), graphics));
+
         end SenBusIn;
 
         expandable connector SenBusOut
@@ -5710,6 +5872,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           output Q.RotationalVelocity speed;
           annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{
                     -100,-100},{100,100}}), graphics));
+
         end SenBusOut;
 
         model ActArrayToBus
@@ -5724,6 +5887,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           Connectors.RealInput actIN[1] annotation (Placement(transformation(
                   extent={{-110,-10},{-90,10}}), iconTransformation(extent={{-60,
                     -20},{-20,20}})));
+
         equation
           connect(actIN[1], actBusOut.current_ref) annotation (Line(
               points={{-100,0},{-4,0},{-4,5.55112e-16},{100,5.55112e-16}},
@@ -5747,6 +5911,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
                           points={{-28,-4},{34,-4}},
                           color={0,0,127},
                           smooth=Smooth.None)}));
+
         end ActArrayToBus;
 
         model SenBusToArray
@@ -5756,6 +5921,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           Connectors.RealOutput senOut[3] annotation (Placement(transformation(
                   extent={{90,-10},{110,10}}), iconTransformation(extent={{20,-20},
                     {60,20}})));
+
         equation
           connect(senBusIn.angle, senOut[3]) annotation (Line(
               points={{-100,5.55112e-16},{0,5.55112e-16},{0,6.66667},{100,
@@ -5781,7 +5947,9 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               extent={{-6,3},{-6,3}}));
 
         end SenBusToArray;
+
       end Interfaces;
+
     end FC;
 
     package Humidifier
@@ -5839,6 +6007,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
                       rotation=90)}), Diagram(coordinateSystem(
                 preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
               graphics));
+
       end Humidifier;
 
       package Interfaces
@@ -5857,6 +6026,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           input Real qdot_coolingPump;
           annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{
                     -100,-100},{100,100}}), graphics));
+
         end ActBusIn;
 
         expandable connector ActBusOut
@@ -5866,6 +6036,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           output SI.Current current_ref;
           annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{
                     -100,-100},{100,100}}), graphics));
+
         end ActBusOut;
 
         expandable connector SenBusIn
@@ -5876,6 +6047,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           input Q.RotationalVelocity speed;
           annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{
                     -100,-100},{100,100}}), graphics));
+
         end SenBusIn;
 
         expandable connector SenBusOut
@@ -5887,6 +6059,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           output Q.RotationalVelocity speed;
           annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{
                     -100,-100},{100,100}}), graphics));
+
         end SenBusOut;
 
         model ActArrayToBus
@@ -5901,6 +6074,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           Connectors.RealInput actIN[1] annotation (Placement(transformation(
                   extent={{-110,-10},{-90,10}}), iconTransformation(extent={{-60,
                     -20},{-20,20}})));
+
         equation
           connect(actIN[1], actBusOut.current_ref) annotation (Line(
               points={{-100,0},{-4,0},{-4,5.55112e-16},{100,5.55112e-16}},
@@ -5924,6 +6098,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
                           points={{-28,-4},{34,-4}},
                           color={0,0,127},
                           smooth=Smooth.None)}));
+
         end ActArrayToBus;
 
         model SenBusToArray
@@ -5933,6 +6108,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           Connectors.RealOutput senOut[3] annotation (Placement(transformation(
                   extent={{90,-10},{110,10}}), iconTransformation(extent={{20,-20},
                     {60,20}})));
+
         equation
           connect(senBusIn.angle, senOut[3]) annotation (Line(
               points={{-100,5.55112e-16},{0,5.55112e-16},{0,6.66667},{100,
@@ -5958,7 +6134,9 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               extent={{-6,3},{-6,3}}));
 
         end SenBusToArray;
+
       end Interfaces;
+
     end Humidifier;
 
     package DCDC
@@ -6025,6 +6203,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
         Connectors.FaceBus wireP1 annotation (Placement(transformation(extent={
                   {94,-66},{106,-54}}), iconTransformation(extent={{90,-70},{
                   110,-50}})));
+
       equation
         Delta_v1 = chargeP1.v - chargeN1.v;
         Delta_qdot1 = chargeP1.qdot - chargeN1.qdot;
@@ -6111,6 +6290,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
               grid={2,2}), graphics));
+
       end DCDC;
 
       model IdealDCDC
@@ -6124,6 +6304,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           final k_Delta_v1=1,
           final k_Delta_qdot1=1);
         annotation (Icon(graphics));
+
       end IdealDCDC;
 
       model ElecElec
@@ -6184,6 +6365,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               extent={{-20,-20},{20,20}},
               rotation=90,
               origin={0,-80})));
+
       protected
         Connectors.RealInput k_internal(final unit=if (LHS == RHS) then "1" else
                     if (LHS == 1 and RHS == 2) then "1/Q2" else if (LHS == 2
@@ -6196,6 +6378,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               origin={0,-80},
               extent={{-20,-20},{20,20}},
               rotation=90)));
+
       equation
         Delta_v1 = elecP1.Phidot_d - elecN1.Phidot_d;
         Delta_qdot1 = elecP1.qdot_t - elecN1.qdot_t;
@@ -6267,6 +6450,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
               grid={2,2}), graphics));
+
       end ElecElec;
 
       package Interfaces
@@ -6285,6 +6469,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           input Real qdot_coolingPump;
           annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{
                     -100,-100},{100,100}}), graphics));
+
         end ActBusIn;
 
         expandable connector ActBusOut
@@ -6294,6 +6479,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           output SI.Current current_ref;
           annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{
                     -100,-100},{100,100}}), graphics));
+
         end ActBusOut;
 
         expandable connector SenBusIn
@@ -6304,6 +6490,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           input Q.RotationalVelocity speed;
           annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{
                     -100,-100},{100,100}}), graphics));
+
         end SenBusIn;
 
         expandable connector SenBusOut
@@ -6315,6 +6502,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           output Q.RotationalVelocity speed;
           annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{
                     -100,-100},{100,100}}), graphics));
+
         end SenBusOut;
 
         model ActArrayToBus
@@ -6329,6 +6517,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           Connectors.RealInput actIN[1] annotation (Placement(transformation(
                   extent={{-110,-10},{-90,10}}), iconTransformation(extent={{-60,
                     -20},{-20,20}})));
+
         equation
           connect(actIN[1], actBusOut.current_ref) annotation (Line(
               points={{-100,0},{-4,0},{-4,5.55112e-16},{100,5.55112e-16}},
@@ -6352,6 +6541,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
                           points={{-28,-4},{34,-4}},
                           color={0,0,127},
                           smooth=Smooth.None)}));
+
         end ActArrayToBus;
 
         model SenBusToArray
@@ -6361,6 +6551,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           Connectors.RealOutput senOut[3] annotation (Placement(transformation(
                   extent={{90,-10},{110,10}}), iconTransformation(extent={{20,-20},
                     {60,20}})));
+
         equation
           connect(senBusIn.angle, senOut[3]) annotation (Line(
               points={{-100,5.55112e-16},{0,5.55112e-16},{0,6.66667},{100,
@@ -6386,7 +6577,9 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               extent={{-6,3},{-6,3}}));
 
         end SenBusToArray;
+
       end Interfaces;
+
     end DCDC;
 
     package Pump
@@ -6428,6 +6621,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
                       points={{-90,0},{-20,0}},
                       color={0,0,0},
                       smooth=Smooth.None)}));
+
       end Pump;
 
       package Interfaces
@@ -6438,6 +6632,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           input SI.Current current_ref;
           annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{
                     -100,-100},{100,100}}), graphics));
+
         end ActBusIn;
 
         expandable connector ActBusOut
@@ -6447,6 +6642,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           output SI.Current current_ref;
           annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{
                     -100,-100},{100,100}}), graphics));
+
         end ActBusOut;
 
         expandable connector SenBusIn
@@ -6457,6 +6653,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           input Q.RotationalVelocity speed;
           annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{
                     -100,-100},{100,100}}), graphics));
+
         end SenBusIn;
 
         expandable connector SenBusOut
@@ -6468,6 +6665,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           output Q.RotationalVelocity speed;
           annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{
                     -100,-100},{100,100}}), graphics));
+
         end SenBusOut;
 
         model ActArrayToBus
@@ -6482,6 +6680,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           Connectors.RealInput actIN[1] annotation (Placement(transformation(
                   extent={{-110,-10},{-90,10}}), iconTransformation(extent={{-60,
                     -20},{-20,20}})));
+
         equation
           connect(actIN[1], actBusOut.current_ref) annotation (Line(
               points={{-100,0},{-4,0},{-4,5.55112e-16},{100,5.55112e-16}},
@@ -6494,6 +6693,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
             Diagram(coordinateSystem(preserveAspectRatio=true), graphics),
             Icon(coordinateSystem),
             graphics);
+
         end ActArrayToBus;
 
         model SenBusToArray
@@ -6503,6 +6703,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
           Connectors.RealOutput senOut[3] annotation (Placement(transformation(
                   extent={{90,-10},{110,10}}), iconTransformation(extent={{20,-20},
                     {60,20}})));
+
         equation
           connect(senBusIn.angle, senOut[3]) annotation (Line(
               points={{-100,5.55112e-16},{0,5.55112e-16},{0,6.66667},{100,
@@ -6528,7 +6729,9 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               extent={{-6,3},{-6,3}}));
 
         end SenBusToArray;
+
       end Interfaces;
+
     end Pump;
 
     package Valve
@@ -6585,6 +6788,7 @@ a simple model of a variable pressure loss is needed.</p>
        Adapted from the ThermoPower library.</li>
 </ul>
 </html>"));
+
       end Valve;
 
       package Interfaces
@@ -6604,6 +6808,7 @@ a simple model of a variable pressure loss is needed.</p>
           input Real qdot_coolingPump;
           annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{
                     -100,-100},{100,100}}), graphics));
+
         end ActBusIn;
 
         expandable connector ActBusOut
@@ -6613,6 +6818,7 @@ a simple model of a variable pressure loss is needed.</p>
           output SI.Current current_ref;
           annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{
                     -100,-100},{100,100}}), graphics));
+
         end ActBusOut;
 
         expandable connector SenBusIn
@@ -6623,6 +6829,7 @@ a simple model of a variable pressure loss is needed.</p>
           input Q.RotationalVelocity speed;
           annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{
                     -100,-100},{100,100}}), graphics));
+
         end SenBusIn;
 
         expandable connector SenBusOut
@@ -6634,6 +6841,7 @@ a simple model of a variable pressure loss is needed.</p>
           output Q.RotationalVelocity speed;
           annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{
                     -100,-100},{100,100}}), graphics));
+
         end SenBusOut;
 
         model ActArrayToBus
@@ -6648,6 +6856,7 @@ a simple model of a variable pressure loss is needed.</p>
           Connectors.RealInput actIN[1] annotation (Placement(transformation(
                   extent={{-110,-10},{-90,10}}), iconTransformation(extent={{-60,
                     -20},{-20,20}})));
+
         equation
           connect(actIN[1], actBusOut.current_ref) annotation (Line(
               points={{-100,0},{-4,0},{-4,5.55112e-16},{100,5.55112e-16}},
@@ -6671,6 +6880,7 @@ a simple model of a variable pressure loss is needed.</p>
                           points={{-28,-4},{34,-4}},
                           color={0,0,127},
                           smooth=Smooth.None)}));
+
         end ActArrayToBus;
 
         model SenBusToArray
@@ -6680,6 +6890,7 @@ a simple model of a variable pressure loss is needed.</p>
           Connectors.RealOutput senOut[3] annotation (Placement(transformation(
                   extent={{90,-10},{110,10}}), iconTransformation(extent={{20,-20},
                     {60,20}})));
+
         equation
           connect(senBusIn.angle, senOut[3]) annotation (Line(
               points={{-100,5.55112e-16},{0,5.55112e-16},{0,6.66667},{100,
@@ -6705,7 +6916,9 @@ a simple model of a variable pressure loss is needed.</p>
               extent={{-6,3},{-6,3}}));
 
         end SenBusToArray;
+
       end Interfaces;
+
     end Valve;
 
     package FluidHeater
@@ -6732,6 +6945,7 @@ a simple model of a variable pressure loss is needed.</p>
         FCSys.WorkInProgress.Systems.Valve.Interfaces.SenBusOut senBusOut
           annotation (Placement(transformation(extent={{30,-70},{50,-50}}),
               iconTransformation(extent={{10,-90},{30,-70}})));
+
       equation
         connect(fCConvection.matN1, fCConvection.matP1) annotation (Line(
             points={{90,122},{110,122}},
@@ -6774,7 +6988,9 @@ a simple model of a variable pressure loss is needed.</p>
                       smooth=Smooth.None)}), Diagram(coordinateSystem(
                 preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
               graphics));
+
       end FluidHeater;
+
     end FluidHeater;
 
     package BaseClasses "Base classes (not generally for direct use)"
@@ -6866,6 +7082,7 @@ a simple model of a variable pressure loss is needed.</p>
               Documentation(info="<html>
 <p>This icon is designed for a <b>signal bus</b> connector.</p>
 </html>"));
+
           end Bidirectional;
 
           partial class In "Icon for a bus input"
@@ -6891,6 +7108,7 @@ a simple model of a variable pressure loss is needed.</p>
                               origin={80,-8},
                               rotation=90,
                               lineColor={255,204,51})}));
+
           end In;
 
           partial class Out "Icon for a bus output"
@@ -6916,9 +7134,13 @@ a simple model of a variable pressure loss is needed.</p>
                               rotation=270,
                               fillColor={255,255,255},
                               fillPattern=FillPattern.Solid)}));
+
           end Out;
+
         end SignalBuses;
+
       end Icons;
+
     end BaseClasses;
     annotation (Documentation(info="<html><p><b>Licensed by the Georgia Tech Research Corporation under the Modelica License 2</b><br>
 Copyright 2007&ndash;2013, Georgia Tech Research Corporation.</p>
@@ -6928,6 +7150,7 @@ it can be redistributed and/or modified under the terms of the Modelica License 
 disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.ModelicaLicense2\">
 FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
+
   end Systems;
 
   model ConditionsAdaptersSpeciesFluid
@@ -6937,6 +7160,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
     Modelica.Electrical.Analog.Interfaces.NegativePin pin if Data.z <> 0
       "Modelica electrical pin" annotation (Placement(transformation(extent={{
               70,30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
+
   equation
     // **Add electrical equations.
     annotation (Documentation(info="<html><p>The electrical connector (<code>pin</code>) is only included
@@ -6953,6 +7177,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               color={0,0,0},
               smooth=Smooth.None,
               pattern=LinePattern.Dash)}));
+
   end ConditionsAdaptersSpeciesFluid;
 
   model ConditionsAdaptersPhasesIonomer
@@ -6978,6 +7203,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
     Modelica.Electrical.Analog.Interfaces.NegativePin pin
       "Modelica electrical pin" annotation (Placement(transformation(extent={{
               70,30},{90,50}}), iconTransformation(extent={{70,30},{90,50}})));
+
   equation
     connect('C19HF37O5S-'.face.thermal, face.'C19HF37O5S-'.thermal) annotation (
        Line(
@@ -7028,6 +7254,7 @@ http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p></html>"));
               points={{0,-40},{80,-40}},
               color={0,127,255},
               smooth=Smooth.None)}));
+
   end ConditionsAdaptersPhasesIonomer;
 
 public
@@ -7037,6 +7264,7 @@ public
     input Q.TemperatureAbsolute T=298.15*U.K "Temperature";
     input Q.PressureAbsolute p=U.atm "Pressure";
     output Q.PressureReciprocal beta_T "Isothermal compressibility";
+
   algorithm
     beta_T := -FCSys.Characteristics.BaseClasses.Characteristic.dv_Tp(
         T=T,
@@ -7052,6 +7280,7 @@ public
   <p>For an ideal gas, this function is independent of temperature
   (although temperature remains as a valid input).</p>
   </html>"));
+
   end Characteristics_BaseClasses_Characteristic_kappa_T;
 
   model ChemicalReaction "Model of a chemical reaction"
@@ -7064,7 +7293,7 @@ public
     Q.Velocity phi "Conversion velocity";
     Q.Temperature Ts "Conversion temperature-specific entropy product";
 
-    FCSys.Connectors.ChemicalSpecies chemical[         n_spec]
+    Connectors.ChemicalSpecies chemical[         n_spec]
       "Connectors to the species"
       annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
@@ -7115,10 +7344,11 @@ public
               extent={{-100,-16},{100,-40}},
               lineColor={127,127,127},
               textString="%formulas")}));
-  end ChemicalReaction;
 
+  end ChemicalReaction;
   annotation (Commands(file="../units.mos"
         "Establish the constants and units in the workspace (first translate a model besides Units.Evaluate).",
         file="test/check.mos"
         "Check all of FCSys using Dymola's check function."));
+
 end WorkInProgress;

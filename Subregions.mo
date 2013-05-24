@@ -117,10 +117,10 @@ package Subregions
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
-
       annotation (experiment(StopTime=1000, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionHOR.mos"));
+
     end SubregionHOR;
 
     model SubregionORR
@@ -281,6 +281,7 @@ package Subregions
           Algorithm="Dassl"),
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.Subregions.mos"));
+
     end Subregions;
 
     model SubregionsCAndH2
@@ -386,7 +387,6 @@ package Subregions
         redeclare FCSys.Conditions.FaceBus.SubregionClosedAdiabatic condition1,
 
         redeclare FCSys.Conditions.FaceBus.SubregionClosedAdiabatic condition2);
-
       annotation (Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ThermalConduction.mos"),
           experiment(StopTime=298.15, Algorithm="Dassl"));
@@ -415,7 +415,6 @@ package Subregions
         redeclare FCSys.Conditions.FaceBus.SubregionClosedAdiabatic condition1,
 
         redeclare FCSys.Conditions.FaceBus.SubregionClosedAdiabatic condition2);
-
       annotation (Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ThermalConductionConvection.mos"),
           experiment(StopTime=200, Algorithm="Dassl"));
@@ -476,6 +475,7 @@ package Subregions
           smooth=Smooth.None));
       annotation (experiment(StopTime=36000), Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ReactionRamp.mos"));
+
     end ReactionRamp;
 
     model Reaction "Test an electrochemical reaction"
@@ -541,6 +541,7 @@ package Subregions
           smooth=Smooth.None));
       annotation (experiment(StopTime=100), Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.Reaction.mos"));
+
     end Reaction;
 
     model TestSpecies "Test the Species model"
@@ -571,7 +572,7 @@ package Subregions
           tab="Assumptions",
           group="Axes with translational momentum included",
           compact=true));
-      parameter Boolean inclTransY=true "Y" annotation (choices(
+      parameter Boolean inclTransY=false "Y" annotation (choices(
             __Dymola_checkBox=true), Dialog(
           tab="Assumptions",
           group="Axes with translational momentum included",
@@ -609,11 +610,13 @@ package Subregions
             extent={{-18,-18},{18,18}},
             rotation=0,
             origin={0,-36})));
+
     public
       inner Conditions.Environment environment(analysis=true)
         annotation (Placement(transformation(extent={{70,72},{90,92}})));
+
     equation
-      //species.chemical[1].axis = 1;
+      species.chemical[1].axis = 1;
       connect(phaseBoundary.inertAmagat, volume.inert) annotation (Line(
           points={{6.2,-48.2},{6.2,-56.1},{11,-56.1},{11,-87}},
           color={72,90,180},
@@ -624,6 +627,7 @@ package Subregions
           color={72,90,180},
           smooth=Smooth.None));
       annotation (Diagram(graphics));
+
     end TestSpecies;
 
     model Specieseminus "Test a species"
@@ -645,12 +649,12 @@ package Subregions
               6.10623e-16}},
           color={127,127,127},
           smooth=Smooth.None));
-
       annotation (
         Placement(transformation(extent={{70,70},{90,90}})),
         experiment(StopTime=10),
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionH2.mos"));
+
     end Specieseminus;
 
     model SubregionsCell "Test a one-dimensional array of subregions"
@@ -864,6 +868,7 @@ package Subregions
           Algorithm="Dassl"),
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionsH2.mos"));
+
     end SubregionsCell;
 
     model SubregionH2PipeTest
@@ -991,10 +996,10 @@ package Subregions
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
-
       annotation (experiment(StopTime=1000, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionHOR.mos"));
+
     end SubregionEvaporation;
 
   end Examples;
@@ -1355,6 +1360,7 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
+
   end Subregion;
 
   model SubregionIonomerOnly "Subregion with only the ionomer phase"
@@ -1421,6 +1427,7 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
+
   end SubregionIonomerOnly;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
@@ -1613,6 +1620,7 @@ package Subregions
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
+
   end SubregionNoIonomer;
 
   package Phases "Phases or mixtures of species"
@@ -1763,6 +1771,7 @@ package Subregions
       Connectors.ChemicalBus ORR "Oxygen reduction reaction" annotation (
           Placement(transformation(extent={{-70,10},{-50,30}}),
             iconTransformation(extent={{-74,18},{-54,38}})));
+
     protected
       Connectors.ChemicalSpecies chemical4(n_trans=n_trans)
         annotation (Placement(transformation(extent={{-36,18},{-16,38}})));
@@ -1772,6 +1781,7 @@ package Subregions
         annotation (Placement(transformation(extent={{-30,34},{-10,54}})));
       Connectors.ChemicalSpecies chemical3(n_trans=n_trans)
         annotation (Placement(transformation(extent={{-50,0},{-30,20}})));
+
     equation
       // Phase change
       connect(chemical1, H2O.chemical[1]) annotation (Line(
@@ -2006,8 +2016,8 @@ package Subregions
 <p>For more information, see the
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
-        Icon(graphics),
-        Diagram(graphics));
+        Icon(graphics));
+
     end Gas;
 
     model Graphite "Graphite phase"
@@ -2202,8 +2212,8 @@ package Subregions
     <p>For more information, see the
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
-        Diagram(graphics),
         Icon(graphics));
+
     end Graphite;
 
     model Ionomer "Ionomer phase"
@@ -2503,8 +2513,8 @@ package Subregions
     <p>For more information, see the
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
-        Diagram(graphics),
         Icon(graphics));
+
     end Ionomer;
 
     model Liquid "Liquid phase"
@@ -2606,8 +2616,8 @@ package Subregions
         Documentation(info="<html><p>See the information in the
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
-        Icon(graphics),
-        Diagram(graphics));
+        Icon(graphics));
+
     end Liquid;
 
     package BaseClasses "Base classes (not generally for direct use)"
@@ -2768,6 +2778,7 @@ package Subregions
         // Note:  It would be simpler to use {initVelX, initVelY, initVelZ}[cartAxes]
         // for the fixed attribute of inert.translational, but Dymola 7.4 refuses to
         // accept it.
+
       equation
         // Inert interactions
         connect(phaseBoundary.inertAmagat, inertAmagat) annotation (Line(
@@ -2795,7 +2806,7 @@ package Subregions
     the area fill factor for the solid should be set to (1 - &epsilon;)<sup>3/2</sup>
     along each axis, where &epsilon; is the volumetric porosity (or volumetric fill factor
     of the gas).<sup><a href=\"#fn1\" id=\"ref1\">1</a></sup></p>
-    
+
     <hr>
 
     <small>
@@ -2855,8 +2866,8 @@ package Subregions
               Text(
                 extent={{-100,-20},{100,20}},
                 textString="%name",
-                lineColor={0,0,0})}),
-          Diagram(graphics));
+                lineColor={0,0,0})}));
+
       end NullPhase;
 
     end BaseClasses;
@@ -3083,12 +3094,12 @@ package Subregions
             Documentation(info=
                   "<html><p>See the information in the <a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model.</p></html>"));
           // **Add parameters k_mu, k_nu, k_eta for this and all calibrated species.
+
         end Calibrated;
 
         model Correlated "Correlated properties"
           extends Species(redeclare replaceable package Data =
                 Characteristics.'e-'.Graphite);
-
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="'e-'",
@@ -3104,7 +3115,6 @@ package Subregions
             redeclare parameter Q.Fluidity beta=Data.beta(),
             redeclare parameter Q.Fluidity zeta=Data.zeta(),
             redeclare parameter Q.ResistivityThermal theta=Data.theta());
-
           annotation (
             group="Material properties",
             defaultComponentPrefixes="replaceable",
@@ -3130,7 +3140,7 @@ package Subregions
           extends Species(
             redeclare replaceable package Data = Characteristics.'H+'.Ionomer (
                   n_v=FCSys.Characteristics.'C19HF37O5S-'.Ionomer.n_v, b_v=
-                    FCSys.Characteristics.'C19HF37O5S-'.Ionomer.b_v),
+                    Characteristics.'C19HF37O5S-'.Ionomer.b_v),
             beta=k_beta*Data.beta(T, v),
             zeta=k_zeta*Data.zeta(T, v),
             theta=k_theta*Data.theta(T, v));
@@ -3317,7 +3327,7 @@ package Subregions
 
         model Correlated "Correlated properties"
           extends Species(redeclare replaceable package Data =
-                FCSys.Characteristics.H2.Gas (b_v=[1], n_v={-1,0}));
+                Characteristics.H2.Gas (b_v=[1], n_v={-1,0}));
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2",
@@ -3436,7 +3446,7 @@ and <code>theta=U.m*U.K/(183e-3*U.W)</code>) are based on data of H<sub>2</sub> 
 
         model Correlated "Correlated properties"
           extends Species(redeclare replaceable package Data =
-                FCSys.Characteristics.H2O.Gas (b_v=[1], n_v={-1,0}));
+                Characteristics.H2O.Gas (b_v=[1], n_v={-1,0}));
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="H2O",
@@ -3807,7 +3817,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
 
         model Correlated "Correlated properties"
           extends Species(redeclare replaceable package Data =
-                FCSys.Characteristics.N2.Gas (b_v=[1], n_v={-1,0}));
+                Characteristics.N2.Gas (b_v=[1], n_v={-1,0}));
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="N2",
@@ -3932,7 +3942,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
 
         model Correlated "Correlated properties"
           extends Species(redeclare replaceable package Data =
-                FCSys.Characteristics.O2.Gas (b_v=[1], n_v={-1,0}));
+                Characteristics.O2.Gas (b_v=[1], n_v={-1,0}));
           annotation (
             defaultComponentPrefixes="replaceable",
             defaultComponentName="O2",
@@ -4062,7 +4072,6 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       import FCSys.BaseClasses.Utilities.inSign;
       import FCSys.BaseClasses.Utilities.Delta;
       import FCSys.BaseClasses.Utilities.Sigma;
-      import FCSys;
       extends FCSys.BaseClasses.Icons.Names.Top4;
 
       // Material properties
@@ -4097,9 +4106,11 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         annotation (Dialog(group="Material properties"));
 
       // Reactions
-      parameter Integer n_react(min=0) = 1
+      parameter Integer n_react(min=1) = 1
         "<html>Number of interactions (<i>n</i><sub>react</sub>)</html>"
         annotation (Dialog(group="Reactions and phase change"), HideResult=true);
+      // The minimum is 1 in Dymola 7.4 due to "[m]issing support for the
+      // zero-sized connector variable (with complex modifiers) chemical"
       Q.CurrentAbsolute Ndot_0[n_react](each nominal=1e-3*U.A) = fill(1e-6*U.A,
         n_react) "<html>Exchange currents (<i>N&#775;</i><sub>0</sub>)</html>"
         annotation (Dialog(group="Reactions and phase change"));
@@ -4287,6 +4298,8 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         each nominal=U.A,
         final start=I_IC[cartAxes],
         each final fixed=false) "Current";
+      Q.Force chemical_mPhidot[n_trans]
+        "Force through the chemical connector (advective)";
 
       // Auxiliary variables (for analysis)
       // ----------------------------------
@@ -4418,18 +4431,15 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
   // they are included.
 */
 
-      FCSys.Connectors.ChemicalSpecies chemical[n_react](
+      Connectors.ChemicalSpecies chemical[n_react](
         each final n_trans=n_trans,
+        each final formula=Data.formula,
+        each final m=Data.m,
         mu(each start=g_IC),
+        phi(start=fill(phi_IC[cartAxes], n_react)),
         sT(each start=h_IC - g_IC)) "Connector for phase change and reactions"
         annotation (Placement(transformation(extent={{-24,4},{-4,24}}),
             iconTransformation(extent={{-45.78,45.55},{-65.78,65.55}})));
-      // each final formula=Data.formula,
-      // each final m=Data.m,
-
-      //each final phi=phi,
-
-      //   ** final phi(start=fill(phi_IC[cartAxes], n_react)) = chemical_phi,
 
       Connectors.Inert inert(
         final n_trans=n_trans,
@@ -4464,6 +4474,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       //    phi(start={{fill(phi_IC[cartWrap(axis + orientation - 1)], 2) for         orientation in Orientation} for axis in Axis}),
 
       // Geometric parameters
+
     protected
       outer parameter Q.Length L[Axis] "Length" annotation (missingInnerMessage
           ="This model should be used within a subregion model.");
@@ -4500,17 +4511,6 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       final parameter InitTranslational initTrans[Axis]={initTransX,initTransY,
           initTransZ} "Initialization methods for translational momentum"
         annotation (HideResult=true);
-
-      // Aliases to the chemical connector variables
-      // These are necessary because Dymola does not fully support zero-sized
-      // connectors.
-      //Q.Potential chemical_mu[n_react](each start=g_IC) "Electrochemical potential";
-      //Q.Current chemical_Ndot[n_react] "Diffusion current";
-      //Q.Velocity chemical_phi[n_react, n_trans](start=fill(phi_IC[cartAxes],
-      //      n_react)) "Velocity";
-      Q.Force chemical_mPhidot[n_react, n_trans] "Advective force";
-      //Q.PotentialAbsolute chemical_sT[n_react](each start=h_IC - g_IC) "Specific entropy-temperature product";
-      //Q.Power chemical_Qdot[n_react] "Rate of thermal advection";
 
       outer Conditions.Environment environment "Environmental conditions";
 
@@ -4571,9 +4571,9 @@ Choose a condition besides None.");
         elseif initMaterial == InitScalar.PotentialGibbs then
           h - sT = g_IC;
         else
-          //if initMaterial == InitScalar.PotentialGibbsSS then
+          // if initMaterial == InitScalar.PotentialGibbsSS then
           der(h - sT) = 0;
-          // Else there is no initial equation because
+          // Else there's no initial equation because
           // initMaterial == InitScalar.None or
           // consMaterial == Conservation.Static.
         end if;
@@ -4599,7 +4599,7 @@ Choose any condition besides None.");
               I[transAxes[axis]] = I_IC[axis];
             elseif initTrans[axis] == InitTranslational.CurrentSS then
               der(I[transAxes[axis]]) = 0;
-              // Else there is no initial equation because
+              // Else there's no initial equation because
               // initTrans[axis] == InitTranslational.None or
               // initTrans[axis] == Conservation.Static.
             end if;
@@ -4642,24 +4642,24 @@ Choose a condition besides None.");
         elseif initEnergy == InitScalar.PotentialGibbs then
           h - sT = g_IC;
         else
-          //if initEnergy == InitScalar.PotentialGibbsSS then
+          // if initEnergy == InitScalar.PotentialGibbsSS then
           der(h - sT) = 0;
-          // Else there is no initial equation because
+          // Else there's no initial equation because
           // initEnergy == InitScalar.None or
           // consEnergy == Conservation.Static.
         end if;
       end if;
 
     equation
-      // Aliases (only for clarity)
+      // Aliases (only to clarify and simplify other expressions)
       p = inertDalton.p;
       V = inertDalton.V;
-      V = v*N;
-      1 = rho*v;
-      M = Data.m*N;
       T = inert.thermal.T;
       phi = inert.translational.phi;
-      N*phi = L[cartAxes] .* I;
+      v*N = V;
+      rho*v = 1;
+      M = Data.m*N;
+      I .* L[cartAxes] = N*phi;
       p_faces = {{Data.p_Tv(faces[axis, side].T, 1/faces[axis, side].rho) for
         side in Side} for axis in Axis};
 
@@ -4691,8 +4691,12 @@ Choose a condition besides None.");
       // Translational momentum
       for i in 1:n_react loop
         chemical[i].phi = phi "Advected property upon outflow";
-        chemical_mPhidot[i, :] = Data.m*actualStream(chemical[i].phi)*chemical[
-          i].Ndot "Advection";
+        chemical_mPhidot = Data.m*sum(actualStream(chemical[i].phi)*chemical[i].Ndot
+          for i in 1:n_react) "Advection";
+        // This intermediate chemical_mPhidot variable is necessary even
+        // though it's only used once (in the conservation of translational
+        // momentum) due to the following error in Dymola 7.4:
+        //   "Argument for the operator actualStream isn't supported".
       end for;
       mu*inertDalton.mPhidot = N*(inertDalton.phi - phi) "Diffusion";
       //
@@ -4700,7 +4704,8 @@ Choose a condition besides None.");
       chemical.sT = fill(sT, n_react) "Advected property upon outflow";
       nu*inertDalton.Qdot = N*(inertDalton.T - T) "Diffusion";
 
-      // Transport
+      // Diffusive transport
+      // (Advection is included directly in the conservation equations.)
       for axis in Axis loop
         for side in Side loop
           // Material
@@ -4762,7 +4767,7 @@ Choose a condition besides None.");
         elseif initMaterial == InitScalar.PotentialGibbs then
           h - sT = g_IC;
         else
-          //if initMaterial == InitScalar.PotentialGibbsSS then
+          // if initMaterial == InitScalar.PotentialGibbsSS then
           der(h - sT) = 0;
           // Note:  initMaterial == InitScalar.None can't occur due to an
           // assertion.
@@ -4792,7 +4797,7 @@ Choose a condition besides None.");
           (if consTrans[cartAxes[axis]] == Conservation.Dynamic then der(M*phi[
             axis])/U.s else 0) + Delta(p_faces[cartAxes[axis], :])*A[cartAxes[
             axis]] + M*environment.a[cartAxes[axis]] + N*Data.z*environment.E[
-            cartAxes[axis]] = sum(chemical_mPhidot[:, axis]) + inert.translational.mPhidot[
+            cartAxes[axis]] = chemical_mPhidot[axis] + inert.translational.mPhidot[
             axis] + inertDalton.mPhidot[axis] + sum(faces[cartWrap(cartAxes[
             axis] - orientation + 1), :].phi[orientation]*faces[cartWrap(
             cartAxes[axis] - orientation + 1), :].Ndot*Data.m + Sigma(faces[
@@ -4832,26 +4837,27 @@ Choose a condition besides None.");
         elseif initEnergy == InitScalar.PotentialGibbs then
           h - sT = g_IC;
         else
-          //if initEnergy == InitScalar.PotentialGibbsSS then
+          // if initEnergy == InitScalar.PotentialGibbsSS then
           der(h - sT) = 0;
           // Note:  initEnergy == InitScalar.None can't occur due to an
           // assertion.
         end if;
       else
         (if consEnergy == Conservation.Dynamic then (der(N*h) - V*der(p) + der(
-          M*phi*phi)/2)/U.s else 0) = (chemical.mu)*chemical.Ndot + sum(
-          actualStream(chemical[i].sT)*chemical[i].Ndot for i in 1:n_react) +
-          inert.translational.phi*inert.translational.mPhidot + inert.thermal.Qdot
-           + inertDalton.phi*inertDalton.mPhidot + inertDalton.Qdot + sum(sum((
-          Data.h(faces[axis, side].T, p_faces[axis, side]) + faces[axis, side].phi
-          *faces[axis, side].phi*Data.m/2)*faces[axis, side].Ndot + faces[axis,
-          side].phi*faces[axis, side].mPhidot for side in Side) for axis in
-          Axis) + sum(faces.Qdot) "Energy conservation";
-        //**+ sum(chemical_phi[:, ax] .^ 2 for ax in 1:n_trans)*(Data.m/2)
+          M*phi*phi)/2)/U.s else 0) = chemical.mu*chemical.Ndot + sum(sum(
+          actualStream(chemical[i].phi)*actualStream(chemical[i].phi)*chemical[
+          i].Ndot for i in 1:n_react))*Data.m/2 + sum(actualStream(chemical[i].sT)
+          *chemical[i].Ndot for i in 1:n_react) + inert.translational.phi*inert.translational.mPhidot
+           + inert.thermal.Qdot + inertDalton.phi*inertDalton.mPhidot +
+          inertDalton.Qdot + sum(sum((Data.h(faces[axis, side].T, p_faces[axis,
+          side]) + faces[axis, side].phi*faces[axis, side].phi*Data.m/2)*faces[
+          axis, side].Ndot + faces[axis, side].phi*faces[axis, side].mPhidot
+          for side in Side) for axis in Axis) + sum(faces.Qdot)
+          "Energy conservation";
+        // Note:  The actualStream summations can't be vectorized in Dymola 7.4,
+        // e.g.,
         // sum(actualStream(chemical[i].sT)*chemical[i].Ndot for i in 1:n_react)
-        // is used because Dymola 7.4 isn't able to interpret the vectorized
-        // form, actualStream(chemical.sT)*chemical.Ndot.
-
+        // must be used instead of actualStream(chemical.sT)*chemical.Ndot.
       end if;
       annotation (
         defaultComponentPrefixes="replaceable",
@@ -5027,6 +5033,7 @@ Choose a condition besides None.");
               pattern=LinePattern.Dash,
               fillColor={225,225,225},
               fillPattern=FillPattern.Solid)}));
+
     end Species;
 
     package BaseClasses "Base classes (not generally for direct use)"
@@ -5070,19 +5077,24 @@ Choose a condition besides None.");
 
       Connectors.ChemicalSpecies chemical(formula="",m=1)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
     equation
       chemical.Ndot = chemical.mu;
       actualStream(chemical.sT) = 1;
       chemical.sT = 1;
+
     end Test;
 
     model TestTest
 
       Test test
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
     equation
       test.chemical.axis = 1;
+
     end TestTest;
+
   end Species;
 
   model PhaseBoundary
@@ -5186,7 +5198,63 @@ Choose a condition besides None.");
             extent={{-170,140},{170,180}},
             textString="%name",
             lineColor={0,0,0})}));
+
   end PhaseBoundary;
+
+  model PhaseChange "Phase change"
+    extends FCSys.BaseClasses.Icons.Names.Top2;
+
+    parameter Integer n_spec(min=1) = 0 "Number of species"
+      annotation (Dialog(connectorSizing=true));
+    // The default is zero for connectorSizing.
+
+    Q.MomentumTranslationalSpecific phi[n_trans]
+      "Conversion specific mass-velocity product";
+    Q.PotentialAbsolute sT "Conversion specific entropy-temperature product";
+
+    Connectors.ChemicalReaction chemical[n_spec](each final n_trans=n_trans,
+        each final axis=0) "Connectors for the species"
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+    // The axis doesn't matter.
+
+  protected
+    outer parameter Integer n_trans
+      "Number of components of translational momentum" annotation (
+        missingInnerMessage=
+          "This model should be used within a subregion model.");
+
+  initial equation
+    for i in 1:n_spec - 1 loop
+      assert(chemical[i].formula == chemical[i + i].formula,
+        "The species must be of the same type.");
+    end for;
+
+  equation
+    // Properties upon outflow
+    chemical.phi = fill(phi, n_spec);
+    chemical.sT = fill(sT, n_spec);
+
+    // Conservation (without storage)
+    0 = sum(chemical.Ndot) "Material";
+    for ax in 1:n_trans loop
+      zeros(n_trans) = sum(actualStream(chemical[i].phi)*chemical[i].Ndot for i
+         in 1:n_spec) "Translational momentum";
+      // This assumes that the specific masses are identical.
+    end for;
+    0 = sum(actualStream(chemical[i].sT)*chemical[i].Ndot for i in 1:n_spec)
+      "Energy";
+
+    // This model is structurally incomplete because n_spec=0 by default.
+    annotation (
+      structurallyIncomplete=true,
+      Icon(graphics={Ellipse(
+            extent={{-80,40},{80,-40}},
+            lineColor={127,127,127},
+            pattern=LinePattern.Dash,
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid)}));
+
+  end PhaseChange;
 
   model Reaction "Electrochemical reaction"
     import FCSys.BaseClasses.Utilities.Chemistry.charge;
@@ -5229,14 +5297,15 @@ Choose a condition besides None.");
     Quantities.PotentialAbsolute sT
       "Conversion specific entropy-temperature product";
 
-    FCSys.Connectors.ChemicalReaction positive(final n_trans=n_trans, final
-        axis=axis) "Connector for the charged species on the positive side"
+    Connectors.ChemicalReaction positive(final n_trans=n_trans, final axis=axis)
+      "Connector for the charged species on the positive side"
       annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-    FCSys.Connectors.ChemicalReaction chemical[n_neut](each final n_trans=
-          n_trans) "Connectors for the neutral species"
+    Connectors.ChemicalReaction chemical[n_neut](each final n_trans=n_trans,
+        each final axis=0) "Connectors for the neutral species"
       annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-    FCSys.Connectors.ChemicalReaction negative(final n_trans=n_trans, final
-        axis=axis) "Connector for the charged species on the negative side"
+    // The axis doesn't matter.
+    Connectors.ChemicalReaction negative(final n_trans=n_trans, final axis=axis)
+      "Connector for the charged species on the negative side"
       annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
 
   protected
@@ -5249,7 +5318,7 @@ Choose a condition besides None.");
           {positive.formula},
           chemical.formula,
           {negative.formula})) "Stoichiometric coefficients";
-    // This cannot be a constant Integer in Dymola 7.4 since the formulas
+    // This can't be a constant Integer in Dymola 7.4 since the formulas
     // are propagated through the connectors.
 
   initial equation
@@ -5269,33 +5338,15 @@ Choose a condition besides None.");
     positive.mu = alpha*(n[2:n_spec - 1]*chemical.mu + w);
     negative.mu = (alpha - 1)*(n[2:n_spec - 1]*chemical.mu + w);
 
-    // Advection
-    positive.mPhidot = positive.m*semiLinear(
-        positive.Ndot,
-        phi,
-        positive.phi) "Translational momentum";
-    positive.Qdot = semiLinear(
-        positive.Ndot,
-        sT,
-        positive.sT) "Thermal energy";
+    // Properties upon outflow
+    positive.phi = phi;
+    positive.sT = sT;
     for i in 1:n_neut loop
-      chemical[i].mPhidot = chemical[i].m*semiLinear(
-          chemical[i].Ndot,
-          phi,
-          chemical[i].phi) "Translational momentum";
-      chemical[i].Qdot = semiLinear(
-          chemical[i].Ndot,
-          sT,
-          chemical[i].sT) "Thermal energy";
+      chemical[i].phi = phi;
+      chemical[i].sT = sT;
     end for;
-    negative.mPhidot = negative.m*semiLinear(
-        negative.Ndot,
-        phi,
-        negative.phi) "Translational momentum";
-    negative.Qdot = semiLinear(
-        negative.Ndot,
-        sT,
-        negative.sT) "Thermal energy";
+    negative.phi = phi;
+    negative.sT = sT;
 
     // Conservation
     der(Z) = charge(positive.formula)*(positive.Ndot + n[1]*Ndot)
@@ -5304,22 +5355,19 @@ Choose a condition besides None.");
       "Neutral species (no storage)";
     der(Z) = -charge(negative.formula)*(negative.Ndot + n[n_spec]*Ndot)
       "Charged species on negative side";
-    for ax in 1:n_trans loop
-      0 = positive.mPhidot[ax] + sum(chemical.mPhidot[ax]) + negative.mPhidot[
-        ax] "Translational momentum (no storage)";
-    end for;
-    0 = positive.Qdot + sum(chemical.Qdot) + negative.Qdot
+    zeros(n_trans) = positive.m*actualStream(positive.phi)*positive.Ndot + sum(
+      chemical[i].m*actualStream(chemical[i].phi)*chemical[i].Ndot for i in 1:
+      n_neut) + negative.m*actualStream(negative.phi)*negative.Ndot
+      "Translational momentum (no storage)";
+    0 = actualStream(positive.sT)*positive.Ndot + sum(actualStream(chemical[i].sT)
+      *chemical[i].Ndot for i in 1:n_neut) + actualStream(negative.sT)*negative.Ndot
       "Energy (no storage)";
-
-    // This model is marked as structurally incomplete because n_neut=0 by
-    // default for connectorSizing.
     annotation (
-      structurallyIncomplete=true,
       Documentation(info="<html>
-    <p>The charge species are stored but without their associated translational momentum
+    <p>The charged species are stored but without their associated translational momentum
     and thermal energy.  The translational momentum and thermal energy is immediately
     advected from the reactants to the products.</p>
-    
+
     <p>The stoichiometry is determined automatically from the chemical formulas
     of the connected species.  No intermediate species are considered.  Each reaction must be
     completely and uniquely defined by the connected species.
@@ -5343,8 +5391,8 @@ Choose a condition besides None.");
             points={{20,40},{20,-40}},
             color={208,104,0},
             smooth=Smooth.None,
-            thickness=0.5)}),
-      Diagram(graphics));
+            thickness=0.5)}));
+
   end Reaction;
 
   model Volume "Model to establish a fixed total volume"
@@ -5403,6 +5451,7 @@ Choose a condition besides None.");
             lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics));
+
   end Volume;
 
   package BaseClasses "Base classes (not generally for direct use)"
@@ -5505,7 +5554,6 @@ Choose a condition besides None.");
 
       Volume volume "Model to establish a fixed total volume"
         annotation (Placement(transformation(extent={{-16,-16},{16,16}})));
-
       annotation (
         defaultComponentName="subregion",
         Documentation(info="<html>
@@ -5629,4 +5677,5 @@ disclaimer of warranty) see <a href=\"modelica://FCSys.UsersGuide.ModelicaLicens
 FCSys.UsersGuide.ModelicaLicense2</a> or visit <a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">
 http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
 </html>"));
+
 end Subregions;

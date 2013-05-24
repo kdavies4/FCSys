@@ -75,6 +75,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
                 "resources/scripts/Dymola/Assemblies.Cells.Examples.CellProfile.mos"),
 
           experiment(StopTime=600, Tolerance=1e-08));
+
       end CellProfile;
 
       model Polarization "Run a cell polarization"
@@ -120,6 +121,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
             smooth=Smooth.None));
         annotation (experiment(StopTime=600, Tolerance=1e-08), Commands(file=
                 "resources/scripts/Dymola/Assemblies.Examples.CellPolarizationstoich.mos"));
+
       end CellProfileIO;
 
       model CellModelica
@@ -176,6 +178,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
             color={0,0,255},
             smooth=Smooth.None));
         annotation (experiment(StopTime=1000));
+
       end CellModelica;
 
       function plot "\"**\""
@@ -449,6 +452,7 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                   visible=inclX,
                   thickness=0.5)}),
         experiment(StopTime=120, Tolerance=1e-06));
+
     end Cell;
 
     model CalibratedCell
@@ -1158,6 +1162,7 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                   color={127,127,127},
                   visible=inclX,
                   thickness=0.5)}));
+
     end IntegratedCell;
 
     model CellSSIC

@@ -475,12 +475,12 @@ package BaseClasses "Base classes (not generally for direct use)"
             Documentation(info="<html><p>This function returns the symbol (<code>symbol</code>),
   stoichiometric coefficient (<code>n</code>), and
   electrical charge (<code>z</code>) associated with an element as it appears in a chemical
-  formula (<code>formula</code>).  After any initial whitespace in the <code>formula</code> string, 
-  which is ignored, the symbol must begin with a letter and may continue with lowercase letters.  
+  formula (<code>formula</code>).  After any initial whitespace in the <code>formula</code> string,
+  which is ignored, the symbol must begin with a letter and may continue with lowercase letters.
   The symbol may be
   followed by a positive integer and then a charge number (both independently optional).
   If present, the charge number must begin with \"+\" or \"-\" and may be followed by optional digits.
-  The <code>remainder</code> output gives the remainder of the <code>formula</code> string after the symbol, 
+  The <code>remainder</code> output gives the remainder of the <code>formula</code> string after the symbol,
   coefficient, and charge have been extracted.</p>
 
   <p>If the coefficient is not explicitly given, then it is assumed to be one.  If the charge number is
@@ -541,6 +541,7 @@ package BaseClasses "Base classes (not generally for direct use)"
   <p><b>Example:</b><br>
   <code>(symbols, coeffs) = readSpecies(\"C19HF37O5S-\")</code> returns
   <code>symbols={\"C\", \"H\", \"F\", \"O\", \"S\", \"e-\"}</code> and <code>coeffs={19, 1, 37, 5, 1, 1}</code>.</p></html>"));
+
       end readSpecies;
 
       function stoich
@@ -635,6 +636,7 @@ An unrelated species may be included.");
   <code>stoich({\"e-\",\"H+\",\"O2\",\"H2O\"})</code> returns <code>{-4,-4,-1,2}</code>,
   which indicates the reaction 4e<sup>-</sup> + 4H<sup>+</sup> + O<sub>2</sub> &#8652; 2H<sub>2</sub>O.</p>
   </html>"));
+
       end stoich;
 
     end Chemistry;
@@ -664,6 +666,7 @@ An unrelated species may be included.");
   (with <code>a</code> constant)
   is <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.f\">f</a>().  The complete derivative,
   however, is <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.dF\">dF</a>().</p></html>"));
+
       end F;
 
       function dF
@@ -746,6 +749,7 @@ An unrelated species may be included.");
 
   <p>The derivative of this function is
   <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.df\">df</a>().</p></html>"));
+
       end f;
 
       function df
@@ -771,6 +775,7 @@ An unrelated species may be included.");
         annotation (Documentation(info="<html>
 <p>The derivative of this function is
   <a href=\"modelica://FCSys.BaseClasses.Utilities.Polynomial.d2f\">d2f</a>().</p></html>"));
+
       end df;
 
       function d2f
@@ -809,6 +814,7 @@ An unrelated species may be included.");
       average := sum(u)/size(u, 1) annotation (Inline=true);
       annotation (Documentation(info="<html><p><b>Example:</b><br>
     <code>average({1,2,3})</code> returns 2.</p></html>"));
+
     end average;
 
     function cartWrap = mod1 (final den=Axis.z)
@@ -828,6 +834,7 @@ An unrelated species may be included.");
         annotation (Inline=true);
       annotation (Documentation(info="<html><p><b>Example:</b><br>
     <code>countTrue({true,false,true})</code> returns 2.</p></html>"));
+
     end countTrue;
 
     function Delta
@@ -841,6 +848,7 @@ An unrelated species may be included.");
       Delta := u[2] - u[1] annotation (Inline=true);
       annotation (Documentation(info="<html><p>The translator should automatically
   vectorize (or \"matricize\") this function.  For example, <code>Delta([1,2;3,4])</code> returns <code>{1,1}</code>.</p></html>"));
+
     end Delta;
 
     function enumerate
@@ -866,6 +874,7 @@ An unrelated species may be included.");
       end for;
       annotation (Inline=true,Documentation(info="<html><p><b>Example:</b><br>
   <code>enumerate({true,false,true})</code> returns <code>{1,0,2}</code>.</p></html>"));
+
     end enumerate;
 
     function index
@@ -891,6 +900,7 @@ An unrelated species may be included.");
 
 <p><b>Example:</b><br>
   <code>index({true,false,true})</code> returns <code>{1,3}</code>.</html>"));
+
     end index;
 
     function inSign
@@ -906,6 +916,7 @@ An unrelated species may be included.");
   <code>inSign(FCSys.BaseClasses.Side.n)</code> returns 1 and
   <code>inSign(FCSys.BaseClasses.Side.p)</code> returns -1.
   </html>"));
+
     end inSign;
 
     function mod1
@@ -922,6 +933,7 @@ An unrelated species may be included.");
   <code>mod1(4,3)</code> returns
   1.  <code>mod1(3,3)</code> returns 3, but <code>mod(3,3)</code> returns 0 (where
   <code>mod</code> is the built-in modulo operator).</html>"));
+
     end mod1;
 
     function round
@@ -935,6 +947,7 @@ An unrelated species may be included.");
       y := integer(u + 0.5) annotation (Inline=true);
       annotation (Documentation(info="<html><p><b>Example:</b><br>
   <code>round(1.6)</code> returns 2 as an <code>Integer</code>.</p></html>"));
+
     end round;
 
     function Sigma
@@ -949,6 +962,7 @@ An unrelated species may be included.");
       annotation (Documentation(info="<html><p>The translator should automatically
   vectorize (or \"matricize\") this function.  For example, <code>Sigma([1,2;3,4])</code> returns <code>{3,7}</code>.
   In contrast, <code>sum([1,2;3,4])</code> returns 10.</p></html>"));
+
     end Sigma;
 
   end Utilities;

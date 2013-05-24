@@ -93,7 +93,7 @@ rpls = [# Remove tabs.
         ('(// .*)will not', r"\1won't"),
         ('(// .*)cannot', r"\1can't"),
         ('(// .*)there is', r"\1there's"),
-        (r"(// .*)it is ", r"\1it's "), # Trailing space prevents mixup with "isn't"
+        (r"(// .*\s)it is ", r"\1it's "), # Trailing space prevents mixup with "isn't"
         # Indent the HTML for paragraphs by 2 spaces past the annotation. **doesn't work yet
         #(r'( *)(annotation *\(.*(?:\n.*).*?\n *Documentation\(info="<html>.*(?:\n.*)*?\n) *(<p>.*(?:\n.*).*?\n.*</p>)', r'\1\2\1  \3'),
        ]

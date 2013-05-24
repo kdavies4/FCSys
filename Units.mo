@@ -631,12 +631,13 @@ package Units "Constants and units of physical measure"
         m/rad) "Wavenumber";
 
     print("Done.");
-    annotation (Documentation(info="<html><p>This has no inputs or outputs.  
+    annotation (Documentation(info="<html><p>This has no inputs or outputs.
 The <code>defineDefaultDisplayUnit</code> and <code>defineUnitConversion</code> functions
-used by this function are not defined in the Modelica language (as of version 3.3) but are 
+used by this function are not defined in the Modelica language (as of version 3.3) but are
 recognized by Dymola.
 For more information, see the documentation in
 <a href=\"modelica://FCSys.Units\">FCSys.Units</a>.</p></html>"));
+
   end setup;
 
   package Examples "Examples"

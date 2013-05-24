@@ -94,10 +94,10 @@ package Quantities "Quantities to represent physical properties"
       parameter Q.VolumeSpecificRate VolumeSpecificRate=1*U.m^3/(U.C*U.s)
         "Rate of specific volume";
       parameter Q.Wavenumber Wavenumber=1*U.rad/U.m "Wavenumber";
-
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
                 -100,-100},{100,100}})), Icon(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}})));
+
     end ExampleModel;
 
   end Examples;
