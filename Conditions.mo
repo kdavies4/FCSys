@@ -2503,8 +2503,8 @@ model.</p>
         Placement(transformation(extent={{-60,40},{-40,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
 
-      Connectors.ChemicalSpecies chemical(final n_trans=countTrue({
-            inclTransX,inclTransY,inclTransZ}))
+      Connectors.ReactionA chemical(final n_trans=countTrue({inclTransX,
+            inclTransY,inclTransZ}))
         "Connector to exchange material while advecting translational momentum and enthalpy, with characteristic data as output"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -2530,7 +2530,7 @@ model.</p>
         parameter Integer n_trans
           "Number of components of translational momentum";
 
-        Connectors.ChemicalSpecies chemical(final n_trans=n_trans)
+        Connectors.ReactionA chemical(final n_trans=n_trans)
           "Connector to exchange material while advecting translational momentum and enthalpy, with characteristic data as output"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 

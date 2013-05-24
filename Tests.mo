@@ -286,9 +286,9 @@ package Tests "Models and functions for test and validation"
           parameter Q.NumberAbsolute eps=0.2 "Relative error tolerance";
           parameter Q.TemperatureAbsolute T[:]={200,250,300,350,400,600,800,
               1000,2000}*U.K "Temperatures";
-          parameter Q.ResistivityThermal theta_table[size(T, 1)]={1/0.131,1/0.131,1
-              /0.183,1/0.204,1/0.226,1/0.305,1/0.378,1/0.448,1/0.878}*U.m*U.K/U.W
-            "Tabulated thermal resistivity";
+          parameter Q.ResistivityThermal theta_table[size(T, 1)]={1/0.131,1/
+              0.131,1/0.183,1/0.204,1/0.226,1/0.305,1/0.378,1/0.448,1/0.878}*U.m
+              *U.K/U.W "Tabulated thermal resistivity";
 
         initial equation
           for i in 1:size(T, 1) loop

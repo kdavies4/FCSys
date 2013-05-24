@@ -174,13 +174,13 @@ package BaseClasses "Base classes (not generally for direct use)"
       partial class Top4
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-                extent={{-100,80},{100,120}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None), Text(
-                extent={{-100,80},{100,120}},
-                textString="%name",
-                lineColor={0,0,0})}));
+                      extent={{-100,80},{100,120}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Text(
+                      extent={{-100,80},{100,120}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Top4;
 

@@ -4,7 +4,6 @@ package Connectors "Declarative and imperative connectors"
 
   expandable connector ChemicalBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> connectors</html>**Activity and Potential"
-    ChemicalSpecies chemical "Subconnector for the reaction";
     annotation (
       defaultComponentName="chemical",
       Documentation(info="<html><p>See the documentation in the
@@ -19,22 +18,21 @@ package Connectors "Declarative and imperative connectors"
             lineThickness=0.5,
             pattern=LinePattern.Solid)}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
-              100,100}}), graphics={Text(
-              extent={{-100,36},{100,76}},
-              textString="%name",
-              lineColor={0,0,0}),Ellipse(
-              extent={{-30,30},{30,-30}},
-              lineColor={208,104,0},
-              fillColor={255,128,0},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.Solid,
-              lineThickness=0.5)}));
+              100,100}}), graphics={Ellipse(
+            extent={{-30,30},{30,-30}},
+            lineColor={208,104,0},
+            fillColor={255,128,0},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.Solid,
+            lineThickness=0.5), Text(
+            extent={{-120,36},{120,76}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end ChemicalBus;
 
   expandable connector ChemicalBusInternal
     "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.Chemical\">Chemical</a> connectors</html>**Activity and Potential"
-    ChemicalSpecies chemical "Subconnector for the reaction";
     annotation (
       defaultComponentName="chemical",
       Documentation(info="<html><p>This is copy of the <a href=\"modelica://FCSys.Connectors.ChemicalBus\">ChemicalBus</a> connector, except that it
@@ -51,18 +49,18 @@ package Connectors "Declarative and imperative connectors"
             pattern=LinePattern.Solid)}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics={Ellipse(
-              extent={{-10,10},{10,-10}},
-              lineColor={208,104,0},
-              fillColor={255,128,0},
-              fillPattern=FillPattern.Solid,
-              lineThickness=0.5),Text(
-              extent={{-100,20},{100,60}},
-              textString="%name",
-              lineColor={0,0,0})}));
+            extent={{-10,10},{10,-10}},
+            lineColor={208,104,0},
+            fillColor={255,128,0},
+            fillPattern=FillPattern.Solid,
+            lineThickness=0.5), Text(
+            extent={{-120,20},{120,60}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end ChemicalBusInternal;
 
-  connector ChemicalReaction
+  connector PhaseChange
     "Connector to exchange material while advecting translational momentum and thermal energy**"
 
     parameter Integer n_trans(
@@ -71,13 +69,11 @@ package Connectors "Declarative and imperative connectors"
       "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
       annotation (HideResult=true);
 
-    input String formula(start="") "Chemical formula of the species";
+    parameter String formula(start="") "Chemical formula of the species";
     // The start value prevents a warning in Dymola 7.4.
-    input Q.MassSpecific m "Specific mass";
-    output Axis axis "Axis of the electric field";
 
     // Material exchange
-    Q.Potential mu(nominal=U.V) "Electrochemical potential";
+    Q.Potential a(nominal=1) "Activity";
     flow Q.Current Ndot(nominal=U.A) "Diffusion current";
 
     // For translational advection
@@ -87,61 +83,6 @@ package Connectors "Declarative and imperative connectors"
     stream Q.PotentialAbsolute sT(nominal=U.V)
       "Specific entropy-temperature product";
     annotation (
-      defaultComponentName="chemical",
-      Documentation(info="<html>
-    <p>The <code>axis</code> variable is only applicable if the
-    species is charged.  Then the electrochemical potential (<code>mu</code>) includes an electrical
-    term.</p>
-
-<p>See the documentation in the
-    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
-
-      Icon(graphics={Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={208,104,0},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,128,0}), Ellipse(
-            extent={{-50,50},{50,-50}},
-            lineColor={208,104,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid)}),
-      Diagram(graphics={Ellipse(
-            extent={{-30,30},{30,-30}},
-            lineColor={208,104,0},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,128,0}), Ellipse(
-            extent={{-16,16},{16,-16}},
-            lineColor={208,104,0},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid)}));
-
-  end ChemicalReaction;
-
-  connector ChemicalSpecies
-    "Connector to exchange material while advecting translational momentum and thermal energy**"
-
-    parameter Integer n_trans(
-      final min=0,
-      final max=3) = 1
-      "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
-      annotation (HideResult=true);
-
-    output String formula "Chemical formula of the species";
-    output Q.MassSpecific m "Specific mass";
-    input Axis axis "Axis of the electric field";
-
-    // Material exchange
-    flow Q.Current Ndot(nominal=U.A) "Diffusion current";
-    Q.Potential mu(nominal=U.V) "Electrochemical potential";
-
-    // For translational advection
-    stream Q.Velocity phi[n_trans](each nominal=U.cm/U.s) "Velocity";
-
-    // For thermal advection
-    stream Q.PotentialAbsolute sT(nominal=U.V)
-      "Specific entropy-temperature product";
-    annotation (
-      defaultComponentName="chemical",
       Documentation(info="<html>
     <p>The <code>axis</code> variable is only applicable if the
     species is charged.  Then the electrochemical potential (<code>mu</code>) includes an electrical
@@ -159,9 +100,135 @@ package Connectors "Declarative and imperative connectors"
             extent={{-30,30},{30,-30}},
             lineColor={208,104,0},
             fillPattern=FillPattern.Solid,
-            fillColor={255,128,0})}));
+            fillColor={255,128,0}), Text(
+            extent={{-120,36},{120,76}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
-  end ChemicalSpecies;
+  end PhaseChange;
+
+  connector ReactionA
+    "Connector to exchange material while advecting translational momentum and thermal energy**"
+
+    parameter Integer n_trans(
+      final min=0,
+      final max=3) = 1
+      "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
+      annotation (HideResult=true);
+
+    output String formula "Chemical formula of the species";
+    output Q.MassSpecific m "Specific mass";
+    input Axis axis "Axis of the electric field";
+    input Q.CurrentAbsolute Ndot_0 "Exchange current";
+
+    // Material exchange
+    Q.Potential mu(nominal=U.V) "Electrochemical potential";
+    flow Q.Current Ndot(nominal=U.A) "Diffusion current";
+
+    // For translational advection
+    stream Q.Velocity phi[n_trans](each nominal=U.cm/U.s) "Velocity";
+
+    // For thermal advection
+    stream Q.PotentialAbsolute sT(nominal=U.V)
+      "Specific entropy-temperature product";
+    annotation (
+      defaultComponentName="reaction",
+      Documentation(info="<html>
+    <p>The <code>axis</code> variable is only applicable if the
+    species is charged.  Then the electrochemical potential (<code>mu</code>) includes an electrical
+    term.</p>
+
+<p>See the documentation in the
+    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
+
+      Icon(graphics={Ellipse(
+            extent={{-100,100},{100,-100}},
+            lineColor={208,104,0},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,128,0}), Ellipse(
+            extent={{-50,50},{50,-50}},
+            lineColor={208,104,0},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid)}),
+      Diagram(graphics={
+          Ellipse(
+            extent={{-30,30},{30,-30}},
+            lineColor={208,104,0},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,128,0}),
+          Text(
+            extent={{-100,36},{100,76}},
+            textString="%name",
+            lineColor={0,0,0}),
+          Ellipse(
+            extent={{-16,16},{16,-16}},
+            lineColor={208,104,0},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid)}));
+
+  end ReactionA;
+
+  connector ReactionB
+    "Connector to exchange material while advecting translational momentum and thermal energy**"
+
+    parameter Integer n_trans(
+      final min=0,
+      final max=3) = 1
+      "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
+      annotation (HideResult=true);
+
+    input String formula(start="") "Chemical formula of the species";
+    // The start value prevents a warning in Dymola 7.4.
+    input Q.MassSpecific m "Specific mass";
+    output Axis axis "Axis of the electric field";
+    output Q.CurrentAbsolute Ndot_0 "Exchange current";
+
+    // Material exchange
+    Q.Potential mu(nominal=U.V) "Electrochemical potential";
+    flow Q.Current Ndot(nominal=U.A) "Diffusion current";
+
+    // For translational advection
+    stream Q.Velocity phi[n_trans](each nominal=U.cm/U.s) "Velocity";
+
+    // For thermal advection
+    stream Q.PotentialAbsolute sT(nominal=U.V)
+      "Specific entropy-temperature product";
+    annotation (
+      defaultComponentName="reaction",
+      Documentation(info="<html>
+    <p>The <code>axis</code> variable is only applicable if the
+    species is charged.  Then the electrochemical potential (<code>mu</code>) includes an electrical
+    term.</p>
+
+<p>See the documentation in the
+    <a href=\"modelica://FCSys.Connectors\">Connectors</a> package.</p></html>"),
+
+      Icon(graphics={Ellipse(
+            extent={{-100,100},{100,-100}},
+            lineColor={208,104,0},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255}), Ellipse(
+            extent={{-50,50},{50,-50}},
+            lineColor={208,104,0},
+            fillColor={255,128,0},
+            fillPattern=FillPattern.Solid)}),
+      Diagram(graphics={
+          Ellipse(
+            extent={{-30,30},{30,-30}},
+            lineColor={208,104,0},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255}),
+          Ellipse(
+            extent={{-16,16},{16,-16}},
+            lineColor={208,104,0},
+            fillColor={255,128,0},
+            fillPattern=FillPattern.Solid),
+          Text(
+            extent={{-100,36},{100,76}},
+            textString="%name",
+            lineColor={0,0,0})}));
+
+  end ReactionB;
 
   expandable connector FaceBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors (for multiple configurations)</html>"
@@ -193,15 +260,15 @@ package Connectors "Declarative and imperative connectors"
   connector Face
     "Connector to transport material, translational momentum, and thermal energy by diffusion"
 
-    // Material diffusion
+    // Material
     Q.Density rho(nominal=300*U.K/U.atm) "Density";
     flow Q.Current Ndot(nominal=U.A) "Diffusion current";
 
-    // Translational diffusion
+    // Translational
     Q.Velocity phi[3](each nominal=U.cm/U.s) "Velocity";
     flow Q.Force mPhidot[3](each nominal=U.N) "Force";
 
-    // Thermal diffusion
+    // Thermal
     extends Thermal;
     annotation (
       Documentation(info="<html><p>This connector applies to a single species in a single phase.
@@ -454,13 +521,13 @@ package Connectors "Declarative and imperative connectors"
             fillPattern=FillPattern.Solid,
             fillColor={102,128,255})}),
       Diagram(graphics={Ellipse(
-              extent={{-10,10},{10,-10}},
-              lineColor={72,90,180},
-              fillPattern=FillPattern.Solid,
-              fillColor={102,128,255}),Text(
-              extent={{-100,20},{100,60}},
-              textString="%name",
-              lineColor={0,0,0})}));
+            extent={{-10,10},{10,-10}},
+            lineColor={72,90,180},
+            fillPattern=FillPattern.Solid,
+            fillColor={102,128,255}), Text(
+            extent={{-100,20},{100,60}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end InertInternal;
 
