@@ -120,7 +120,6 @@ package Subregions
       annotation (experiment(StopTime=1000, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionHOR.mos"));
-
     end SubregionHOR;
 
     model SubregionORR
@@ -281,7 +280,6 @@ package Subregions
           Algorithm="Dassl"),
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.Subregions.mos"));
-
     end Subregions;
 
     model SubregionsCAndH2
@@ -387,6 +385,7 @@ package Subregions
         redeclare FCSys.Conditions.FaceBus.SubregionClosedAdiabatic condition1,
 
         redeclare FCSys.Conditions.FaceBus.SubregionClosedAdiabatic condition2);
+
       annotation (Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ThermalConduction.mos"),
           experiment(StopTime=298.15, Algorithm="Dassl"));
@@ -415,6 +414,7 @@ package Subregions
         redeclare FCSys.Conditions.FaceBus.SubregionClosedAdiabatic condition1,
 
         redeclare FCSys.Conditions.FaceBus.SubregionClosedAdiabatic condition2);
+
       annotation (Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ThermalConductionConvection.mos"),
           experiment(StopTime=200, Algorithm="Dassl"));
@@ -427,7 +427,7 @@ package Subregions
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
 
-      Reaction reaction(n_spec=3)
+      FCSys.Subregions.Examples.TestReaction reaction(n_spec=3)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       Conditions.Chemical.Species species1(redeclare
           Characteristics.'e-'.Graphite Data, material=FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMaterial.PotentialPerTemperature)
@@ -460,25 +460,24 @@ package Subregions
       connect(species1.chemical, reaction.chemical[1]) annotation (Line(
           points={{-30,-20},{-30,-10},{5.55112e-16,-10},{5.55112e-16,-0.666667}},
 
-          color={208,104,0},
+          color={239,142,1},
           smooth=Smooth.None));
 
       connect(species2.chemical, reaction.chemical[2]) annotation (Line(
           points={{-1.11528e-16,-20},{0,-20},{0,5.55112e-16},{5.55112e-16,
               5.55112e-16}},
-          color={208,104,0},
+          color={239,142,1},
           smooth=Smooth.None));
 
       connect(species3.chemical, reaction.chemical[3]) annotation (Line(
           points={{30,-20},{30,-10},{5.55112e-16,-10},{5.55112e-16,0.666667}},
-          color={208,104,0},
+          color={239,142,1},
           smooth=Smooth.None));
       annotation (experiment(StopTime=36000), Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.ReactionRamp.mos"));
-
     end ReactionRamp;
 
-    model Reaction "Test an electrochemical reaction"
+    model TestReaction "Test an electrochemical reaction"
 
       extends Modelica.Icons.Example;
       extends Modelica.Icons.UnderConstruction;
@@ -488,7 +487,7 @@ package Subregions
         final max=3) = 1
         "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>";
 
-      Reaction reaction(n_spec=3)
+      Reaction reaction(n_spec=3, n_neut=1)
         annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       Conditions.Chemical.Species 'e-'(
         material=FCSys.Conditions.Chemical.BaseClasses.ConditionTypeMaterial.PotentialPerTemperature,
@@ -523,26 +522,24 @@ package Subregions
         annotation (Placement(transformation(extent={{-90,70},{-70,90}})));
 
     equation
-      connect('e-'.chemical, reaction.chemical[1]) annotation (Line(
-          points={{-30,-20},{-30,-10},{5.55112e-16,-10},{5.55112e-16,-0.666667}},
+      connect(reaction.negative, 'e-'.chemical) annotation (Line(
+          points={{-10,6.10623e-16},{-22,6.10623e-16},{-22,0},{-30,0},{-30,-20}},
 
-          color={208,104,0},
+          color={239,142,1},
           smooth=Smooth.None));
 
-      connect('H+'.chemical, reaction.chemical[2]) annotation (Line(
-          points={{-1.11528e-16,-20},{0,-20},{0,5.55112e-16},{5.55112e-16,
-              5.55112e-16}},
-          color={208,104,0},
+      connect(reaction.positive, H2.chemical) annotation (Line(
+          points={{10,6.10623e-16},{20,6.10623e-16},{20,0},{30,0},{30,-20}},
+          color={239,142,1},
           smooth=Smooth.None));
-
-      connect(H2.chemical, reaction.chemical[3]) annotation (Line(
-          points={{30,-20},{30,-10},{5.55112e-16,-10},{5.55112e-16,0.666667}},
-          color={208,104,0},
+      connect(reaction.chemical[1], 'H+'.chemical) annotation (Line(
+          points={{5.55112e-16,-0.666667},{5.55112e-16,-10},{9.89443e-16,-10},{
+              9.89443e-16,-20}},
+          color={239,142,1},
           smooth=Smooth.None));
       annotation (experiment(StopTime=100), Commands(file=
               "resources/scripts/Dymola/Subregions.Examples.Reaction.mos"));
-
-    end Reaction;
+    end TestReaction;
 
     model TestSpecies "Test the Species model"
       extends Modelica.Icons.Example;
@@ -620,15 +617,14 @@ package Subregions
       species.reaction.Ndot_0 = 1e-6*U.A;
       connect(phaseBoundary.inertAmagat, volume.inert) annotation (Line(
           points={{6.2,-48.2},{6.2,-56.1},{11,-56.1},{11,-87}},
-          color={72,90,180},
+          color={11,43,197},
           smooth=Smooth.None));
       connect(species.inertDalton, phaseBoundary.inertDalton) annotation (Line(
           points={{3.578,-7.155},{3.578,-16.155},{3.578,-16.155},{3.578,-25.155},
               {3.578,-43.155},{3.578,-43.155}},
-          color={72,90,180},
+          color={11,43,197},
           smooth=Smooth.None));
       annotation (Diagram(graphics));
-
     end TestSpecies;
 
     model Specieseminus "Test a species"
@@ -655,7 +651,6 @@ package Subregions
         experiment(StopTime=10),
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionH2.mos"));
-
     end Specieseminus;
 
     model SubregionsCell "Test a one-dimensional array of subregions"
@@ -869,7 +864,6 @@ package Subregions
           Algorithm="Dassl"),
         Commands(file(ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionsH2.mos"));
-
     end SubregionsCell;
 
     model SubregionH2PipeTest
@@ -1000,8 +994,317 @@ package Subregions
       annotation (experiment(StopTime=1000, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionHOR.mos"));
-
     end SubregionEvaporation;
+
+    model TestSpeciesReaction "Test the Species model"
+      extends Modelica.Icons.Example;
+
+      import FCSys.BaseClasses.Utilities.cartWrap;
+      import FCSys.BaseClasses.Utilities.countTrue;
+      import FCSys.BaseClasses.Utilities.enumerate;
+      import FCSys.BaseClasses.Utilities.index;
+      // extends FCSys.BaseClasses.Icons.Names.Top3;
+
+      // Geometric parameters
+      inner parameter Q.Length L[Axis](each min=Modelica.Constants.small) = {U.cm,
+        U.cm,U.cm} "<html>Length (<b>L</b>)</html>"
+        annotation (Dialog(group="Geometry"));
+      final inner parameter Q.Volume V=product(L) "Volume";
+      parameter Q.NumberAbsolute k[Axis](
+        each min=Modelica.Constants.small,
+        each final nominal=1) = {1,1,1}
+        "<html>Area fill factor (<b>k</b>)</html>"
+        annotation (Dialog(group="Geometry"));
+
+      // Assumptions
+      // -----------
+      // Included components of translational momentum
+      parameter Boolean inclTransX=true "X" annotation (choices(
+            __Dymola_checkBox=true), Dialog(
+          tab="Assumptions",
+          group="Axes with translational momentum included",
+          compact=true));
+      parameter Boolean inclTransY=false "Y" annotation (choices(
+            __Dymola_checkBox=true), Dialog(
+          tab="Assumptions",
+          group="Axes with translational momentum included",
+          compact=true));
+      parameter Boolean inclTransZ=true "Z" annotation (choices(
+            __Dymola_checkBox=true), Dialog(
+          tab="Assumptions",
+          group="Axes with translational momentum included",
+          compact=true));
+
+      replaceable Species.H2.Gas.Fixed H2 constrainedby
+        FCSys.Subregions.Species.Species
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+    protected
+      final inner parameter Q.Length Lprime[:]=k .* A ./ L
+        "Effective cross-sectional area per length";
+      final inner parameter Q.Area A[Axis]={L[cartWrap(axis + 1)]*L[cartWrap(
+          axis + 2)] for axis in Axis} "Cross-sectional areas";
+      final inner parameter Boolean inclTrans[Axis]={inclTransX,inclTransY,
+          inclTransZ}
+        "true, if each component of translational momentum is included";
+      final inner parameter Integer n_trans=countTrue(inclTrans)
+        "Number of components of translational momentum";
+      final inner parameter Integer cartAxes[:]=index(inclTrans)
+        "Cartesian-axis indices of the components of translational momentum";
+      final inner parameter Integer transAxes[Axis]=enumerate(inclTrans)
+        "Translational-momentum-component indices of the Cartesian axes";
+
+      Volume volume "Model to establish a fixed total volume"
+        annotation (Placement(transformation(extent={{-16,-92},{16,-60}})));
+      PhaseBoundary phaseBoundary "Phase boundary" annotation (Placement(
+            transformation(
+            extent={{-18,-18},{18,18}},
+            rotation=0,
+            origin={0,-36})));
+
+    public
+      inner Conditions.Environment environment(analysis=true)
+        annotation (Placement(transformation(extent={{70,72},{90,92}})));
+
+      replaceable Species.'e-'.Graphite.Fixed 'e-' constrainedby
+        FCSys.Subregions.Species.Species
+        annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
+      replaceable FCSys.Subregions.Species.'H+'.Ionomer.Fixed 'H+'
+        constrainedby FCSys.Subregions.Species.Species
+        annotation (Placement(transformation(extent={{30,-10},{50,10}})));
+      FCSys.Subregions.Reaction reaction(n_neut=1, n_trans=2)
+        annotation (Placement(transformation(extent={{-10,30},{10,50}})));
+
+    equation
+      connect(volume.inertAmagat, phaseBoundary.inertAmagat) annotation (Line(
+          points={{11,-87},{11,-55.5},{6.2,-55.5},{6.2,-48.2}},
+          color={11,43,197},
+          smooth=Smooth.None));
+      connect(H2.inertDalton, phaseBoundary.inertDalton) annotation (Line(
+          points={{3.578,-7.155},{3.578,-16.155},{3.578,-16.155},{3.578,-25.155},
+              {3.578,-43.155},{3.578,-43.155}},
+          color={11,43,197},
+          smooth=Smooth.None));
+      connect('e-'.inertDalton, phaseBoundary.inertDalton) annotation (Line(
+          points={{-36.422,-7.155},{-37.211,-7.155},{-37.211,-43.155},{3.578,-43.155}},
+
+          color={11,43,197},
+          smooth=Smooth.None));
+
+      connect('H+'.inertDalton, phaseBoundary.inertDalton) annotation (Line(
+          points={{43.578,-7.155},{42.789,-7.155},{42.789,-43.155},{3.578,-43.155}},
+
+          color={11,43,197},
+          smooth=Smooth.None));
+
+      connect(reaction.chemical[1], H2.reaction) annotation (Line(
+          points={{5.55112e-16,40},{-2,40},{-2,7.155},{-3.578,7.155}},
+          color={239,142,1},
+          smooth=Smooth.None));
+      connect(reaction.positive, 'H+'.reaction) annotation (Line(
+          points={{10,40},{24,40},{24,7.155},{36.422,7.155}},
+          color={239,142,1},
+          smooth=Smooth.None));
+      connect(reaction.negative, 'e-'.reaction) annotation (Line(
+          points={{-10,40},{-28,40},{-28,7.155},{-43.578,7.155}},
+          color={239,142,1},
+          smooth=Smooth.None));
+      annotation (Diagram(graphics));
+    end TestSpeciesReaction;
+
+    model TestReaction2 "Test an electrochemical reaction"
+
+      extends Modelica.Icons.Example;
+      parameter Boolean transMomCat=false
+        "Pass translational momentum through the catalyst" annotation (Dialog(
+            Evaluate=true, tab="Assumptions"), choices(__Dymola_checkBox=true));
+
+      inner parameter Integer n_trans=3
+        "Number of components of translational momentum";
+      Reaction reaction(n_spec=3, transMomCat=transMomCat)
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+      NegativeBC negBC(m=1*U.g/U.mol)
+        annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
+      PositiveBC posBC(m=1*U.g/U.mol)
+        annotation (Placement(transformation(extent={{20,20},{40,40}})));
+
+      FCSys.Subregions.Examples.Catalyst catalyst(transMomCat=transMomCat)
+        annotation (Placement(transformation(extent={{-10,-40},{10,-20}})));
+      CurrentBC currentBC(m=4*U.g/U.mol)
+        annotation (Placement(transformation(extent={{-10,40},{10,60}})));
+      Boundary bC1
+        annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+      Boundary bC2
+        annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+
+      inner Conditions.Environment environment(analysis=true)
+        annotation (Placement(transformation(extent={{70,72},{90,92}})));
+
+    equation
+      connect(negBC.chemical, reaction.chemical[1]) annotation (Line(
+          points={{-30,30},{0,30},{0,-0.666667},{5.55112e-16,-0.666667}},
+          color={239,142,1},
+          smooth=Smooth.None));
+      connect(currentBC.chemical, reaction.chemical[2]) annotation (Line(
+          points={{6.10623e-16,50},{0,30},{0,5.55112e-16},{5.55112e-16,
+              5.55112e-16}},
+          color={239,142,1},
+          smooth=Smooth.None));
+
+      connect(posBC.chemical, reaction.chemical[3]) annotation (Line(
+          points={{30,30},{0,30},{0,0.666667},{5.55112e-16,0.666667}},
+          color={239,142,1},
+          smooth=Smooth.None));
+      connect(bC1.face, reaction.negative) annotation (Line(
+          points={{-30,6.10623e-16},{-20,0},{-10,0},{-10,6.10623e-16}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect(bC2.face, reaction.positive) annotation (Line(
+          points={{30,6.10623e-16},{25,6.10623e-16},{25,1.22125e-15},{20,
+              1.22125e-15},{20,6.10623e-16},{10,6.10623e-16}},
+          color={127,127,127},
+          smooth=Smooth.None));
+      connect(reaction.catalyst, catalyst.inert) annotation (Line(
+          points={{6.10623e-16,-6},{-3.36456e-22,-32},{6.10623e-16,-32},{
+              6.10623e-16,-30}},
+          color={134,134,201},
+          smooth=Smooth.None));
+
+      annotation (
+        experiment(StopTime=120),
+        Commands(file=
+              "resources/scripts/Dymola/Subregions.Examples.Reaction.mos"),
+        experimentSetupOutput,
+        Diagram(graphics));
+    end TestReaction2;
+
+    model NegativeBC
+      parameter String formula="e-";
+      parameter Q.MassSpecific m=U.g/U.mol;
+      parameter Integer n_trans=3
+        "Number of components of translational momentum" annotation (
+          missingInnerMessage=
+            "This model should be used within a subregion model.\n");
+
+      Connectors.ChemicalA chemical(
+        final formula=formula,
+        final m=m,
+        final n_trans=n_trans)
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+    equation
+      chemical.mu = 0;
+      chemical.phi = ones(n_trans);
+      chemical.sT = 1;
+      annotation (Diagram(graphics));
+    end NegativeBC;
+
+    model PositiveBC
+      parameter String formula="H+";
+      parameter Q.MassSpecific m=U.g/U.mol;
+      parameter Integer n_trans=3
+        "Number of components of translational momentum" annotation (
+          missingInnerMessage=
+            "This model should be used within a subregion model.\n");
+
+      Connectors.ChemicalA chemical(
+        final formula=formula,
+        final m=m,
+        final n_trans=n_trans)
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+    equation
+      chemical.mu = 1.2*U.V;
+      chemical.phi = ones(n_trans);
+      chemical.sT = 1;
+
+    end PositiveBC;
+
+    model CurrentBC
+      parameter String formula="H2";
+      parameter Q.MassSpecific m=U.g/U.mol;
+      parameter Integer n_trans=3
+        "Number of components of translational momentum" annotation (
+          missingInnerMessage=
+            "This model should be used within a subregion model.\n");
+
+      Connectors.ChemicalA chemical(
+        final formula=formula,
+        final m=m,
+        final n_trans=n_trans)
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+      Modelica.Blocks.Sources.Ramp source(height=100*U.A, duration=100)
+        annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
+
+    equation
+      chemical.Ndot = source.y;
+      chemical.phi = ones(n_trans);
+      chemical.sT = 3;
+      annotation (Diagram(graphics));
+    end CurrentBC;
+
+    model Catalyst
+      parameter Integer n_trans=3
+        "Number of components of translational momentum" annotation (
+          missingInnerMessage=
+            "This model should be used within a subregion model.\n");
+      parameter Boolean transMomCat=true
+        "Pass translational momentum through the catalyst" annotation (Dialog(
+            Evaluate=true, tab="Assumptions"), choices(__Dymola_checkBox=true));
+
+      Connectors.InertCond inert(
+        final n_trans=n_trans,
+        inclTranslational=transMomCat,
+        translational(phi=zeros(n_trans)))
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+    equation
+      inert.thermal.T = 360*U.K;
+      annotation (Diagram(graphics));
+    end Catalyst;
+
+    model Boundary
+
+      Connectors.Face face
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+    equation
+      face.rho = 4*U.C/U.cc;
+      face.mPhidot = {0,0,0};
+      face.T = 300*U.K;
+      annotation (Diagram(graphics));
+    end Boundary;
+
+    model TestFluid
+      Modelica.Fluid.Pipes.StaticPipe pipe(
+        redeclare package Medium = Modelica.Media.Air.SimpleAir,
+        length=1,
+        diameter=.1)
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+      Modelica.Fluid.Sources.Boundary_pT boundary(
+        nPorts=1,
+        redeclare package Medium = Modelica.Media.Air.SimpleAir,
+        p=110000)
+        annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+      Modelica.Fluid.Sources.Boundary_pT boundary1(nPorts=1, redeclare package
+          Medium = Modelica.Media.Air.SimpleAir)
+        annotation (Placement(transformation(extent={{40,-10},{20,10}})));
+
+    equation
+      connect(boundary.ports[1], pipe.port_a) annotation (Line(
+          points={{-20,6.66134e-16},{-16,6.66134e-16},{-16,6.10623e-16},{-10,
+              6.10623e-16}},
+          color={0,127,255},
+          smooth=Smooth.None));
+      connect(boundary1.ports[1], pipe.port_b) annotation (Line(
+          points={{20,6.66134e-16},{16,6.66134e-16},{16,6.10623e-16},{10,
+              6.10623e-16}},
+          color={0,127,255},
+          smooth=Smooth.None));
+      annotation (Diagram(graphics));
+    end TestFluid;
 
   end Examples;
 
@@ -1014,19 +1317,22 @@ package Subregions
       choices(__Dymola_checkBox=true));
     // Note:  This is listed above the extends clause so that it's listed
     // first in the parameter dialog.
-    extends BaseClasses.PartialSubregion;
+    extends BaseClasses.PartialSubregion(final hasSpecies=gas.n_spec + graphite.n_spec
+           + ionomer.n_spec + liquid.n_spec > 0);
 
-    Phases.Gas gas(inclH2O=true,final inclReact=inclReact) "Gas" annotation (
-        Dialog(group="Phases (click to edit)"), Placement(transformation(extent
-            ={{-10,-10},{10,10}})));
+    Phases.Gas gas "Gas" annotation (Dialog(group="Phases (click to edit)"),
+        Placement(transformation(extent={{-10,-10},{10,10}})));
     Phases.Graphite graphite('e-'(initMaterial=if inclHOR or inclORR then
             InitScalar.None else InitScalar.Pressure)) "Graphite" annotation (
         Dialog(group="Phases (click to edit)"), Placement(transformation(extent
             ={{-10,-10},{10,10}})));
     Phases.Ionomer ionomer('C19HF37O5S-'(
-        setVelX=not graphite.'inclC+',
-        setVelY=not graphite.'inclC+',
-        setVelZ=not graphite.'inclC+',
+        consTransX=if graphite.'inclC+' then Conservation.Dynamic else
+            Conservation.IC,
+        consTransY=if graphite.'inclC+' then Conservation.Dynamic else
+            Conservation.IC,
+        consTransZ=if graphite.'inclC+' then Conservation.Dynamic else
+            Conservation.IC,
         initTransX=if graphite.'inclC+' then InitTranslational.None else
             InitTranslational.Velocity,
         initTransY=if graphite.'inclC+' then InitTranslational.None else
@@ -1035,142 +1341,80 @@ package Subregions
             InitTranslational.Velocity)) "Ionomer" annotation (Dialog(group=
             "Phases (click to edit)"), Placement(transformation(extent={{-10,-10},
               {10,10}})));
-
     Phases.Liquid liquid "Liquid" annotation (Dialog(group=
             "Phases (click to edit)"), Placement(transformation(extent={{-10,-10},
               {10,10}})));
 
-  protected
-    final parameter Boolean inclHOR=inclReact and (graphite.'incle-' and
-        ionomer.'inclH+' and gas.inclH2 and not (gas.inclO2 and gas.inclH2O))
-      "true, if HOR is included" annotation (HideResult=true);
-    final parameter Boolean inclORR=inclReact and (graphite.'incle-' and
-        ionomer.'inclH+' and gas.inclO2 and gas.inclH2O and not gas.inclH2)
-      "true, if ORR is included" annotation (HideResult=true);
-    Reaction hOR(n_neut=1) if inclHOR "Hydrogen oxidation reaction" annotation
-      (Placement(transformation(extent={{-66.66,33.33},{-46.66,53.33}})));
-    Reaction oRR(n_neut=2) if inclORR "Oxygen reduction reaction"
-      annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
-    // Note:  The additional condition (not gas.inclH2O) prevents a singularity
-    // if water is included as gas, liquid, and in ionomer.
+    // **explain
+    /*
+  Modelica.Blocks.Interfaces.IntegerOutput axis=0 "Axis of the electric field"
+    annotation (HideResult=true);
+  Modelica.Blocks.Interfaces.RealOutput Ndot_0=1 "Exchange current"
+    annotation (HideResult=true);
+*/
 
-    Connectors.ChemicalBusInternal CondEvap
-      "Connector for H2O condensation and evaporation" annotation (Placement(
-          transformation(extent={{-30,50},{-10,70}}), iconTransformation(extent
-            ={{-76,16},{-56,36}})));
-    Connectors.ChemicalBusInternal Hydration
-      "Connector for ionomer hydration and drying" annotation (Placement(
-          transformation(extent={{-43.33,36.66},{-23.33,56.66}}),
-          iconTransformation(extent={{-52,56},{-32,76}})));
-    Connectors.ChemicalBusInternal HOR
-      "Connector for hydrogen oxidation reaction" annotation (Placement(
-          transformation(extent={{-56.66,23.33},{-36.66,43.33}}),
+    final parameter Boolean inclHOR=inclReact and (graphite.'incle-' and
+        ionomer.'inclH+' and gas.inclH2) "true, if HOR is included"
+      annotation (HideResult=true);
+    final parameter Boolean inclORR=inclReact and (graphite.'incle-' and
+        ionomer.'inclH+' and gas.inclO2 and gas.inclH2O)
+      "true, if ORR is included" annotation (HideResult=true);
+    /*
+  Reaction oRR(n_neut=2) if inclORR "Oxygen reduction reaction"
+    annotation (Placement(transformation(extent={{-30,50},{-10,70}})));
+*/
+
+  protected
+    Connectors.PhysicalBusInternal physical "Connector for phase change"
+      annotation (Placement(transformation(extent={{-37,3},{-17,23}}),
           iconTransformation(extent={{-64,36},{-44,56}})));
-    Connectors.ChemicalBusInternal ORR
-      "Connector for oxygen reduction reaction" annotation (Placement(
-          transformation(extent={{-70,10},{-50,30}}), iconTransformation(extent
-            ={{-40,76},{-20,96}})));
+
+  public
+    HOR hOR if inclHOR
+      annotation (Placement(transformation(extent={{-56,38},{-36,58}})));
 
   equation
     // Chemical reactions
     // ------------------
-    // Condensation/evaporation
-    connect(CondEvap, gas.CondEvap) annotation (Line(
-        points={{-20,60},{-3,8.6}},
-        color={208,104,0},
-        pattern=LinePattern.Solid,
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(CondEvap, liquid.CondEvap) annotation (Line(
-        points={{-20,60},{-3,8.6}},
-        color={208,104,0},
-        pattern=LinePattern.Solid,
-        thickness=0.5,
-        smooth=Smooth.None));
     // HOR
-    connect(HOR, gas.HOR) annotation (Line(
-        points={{-46.66,33.33},{-4.9,5.7}},
-        color={208,104,0},
-        pattern=LinePattern.Solid,
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(HOR, graphite.HOR) annotation (Line(
-        points={{-46.66,33.33},{-4.9,5.7}},
-        color={208,104,0},
-        pattern=LinePattern.Solid,
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(HOR, ionomer.HOR) annotation (Line(
-        points={{-46.66,33.33},{-4.9,5.7}},
-        color={208,104,0},
-        pattern=LinePattern.Solid,
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(hOR.positive, HOR.'H+') annotation (Line(
-        points={{-46.66,43.33},{-46.66,33.33}},
-        color={208,104,0},
-        smooth=Smooth.None));
-    connect(hOR.chemical[2], HOR.H2) annotation (Line(
-        points={{-56.66,43.33},{-46.66,33.33}},
-        color={208,104,0},
-        smooth=Smooth.None));
-    connect(hOR.negative, HOR.'e-') annotation (Line(
-        points={{-66.66,43.33},{-46.66,33.33}},
-        color={208,104,0},
-        smooth=Smooth.None));
-    // Hydration/drying
-    connect(Hydration, gas.Hydration) annotation (Line(
-        points={{-33.33,46.66},{-4.2,6.6}},
-        color={208,104,0},
-        pattern=LinePattern.Solid,
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(Hydration, ionomer.Hydration) annotation (Line(
-        points={{-33.33,46.66},{-4.2,6.6}},
-        color={208,104,0},
-        pattern=LinePattern.Solid,
-        thickness=0.5,
-        smooth=Smooth.None));
+    /*
+  if not (inclHOR or inclORR) then
+    connect(axis, gas.H2.reaction.axis);
+    connect(Ndot_0, gas.H2.reaction.Ndot_0);
+  end if;
+*/
     // ORR
-    connect(ORR, gas.ORR) annotation (Line(
-        points={{-60,20},{-6.4,2.8}},
-        color={208,104,0},
-        pattern=LinePattern.Solid,
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(ORR, graphite.ORR) annotation (Line(
-        points={{-60,20},{-6.4,2.8}},
-        color={208,104,0},
-        pattern=LinePattern.Solid,
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(ORR, ionomer.ORR) annotation (Line(
-        points={{-60,20},{-6.4,2.8}},
-        color={208,104,0},
-        pattern=LinePattern.Solid,
-        thickness=0.5,
-        smooth=Smooth.None));
-    connect(oRR.positive, ORR.'e-') annotation (Line(
-        points={{-60,30},{-60,20}},
-        color={208,104,0},
-        smooth=Smooth.None));
-    connect(oRR.chemical[1], ORR.O2) annotation (Line(
-        points={{-70,29.5},{-60,20}},
-        color={208,104,0},
-        smooth=Smooth.None));
-    connect(oRR.chemical[2], ORR.H2O) annotation (Line(
-        points={{-70,30.5},{-60,20}},
-        color={208,104,0},
-        smooth=Smooth.None));
-    connect(oRR.negative, ORR.'H+') annotation (Line(
-        points={{-80,30},{-60,20}},
-        color={208,104,0},
-        smooth=Smooth.None));
+    /*
+  connect(oRR.positive, reaction.'e-') annotation (Line(
+      points={{-10,60},{-10,27},{-13,27}},
+      color={239,142,1},
+      smooth=Smooth.None));
+  connect(oRR.chemical[1], reaction.O2) annotation (Line(
+      points={{-20,59.5},{-20,27},{-13,27}},
+      color={239,142,1},
+      smooth=Smooth.None));
+  connect(oRR.chemical[2], reaction.H2O) annotation (Line(
+      points={{-20,60.5},{-20,27},{-13,27}},
+      color={239,142,1},
+      smooth=Smooth.None));
+  connect(oRR.negative, reaction.'H+') annotation (Line(
+      points={{-30,60},{-13,27}},
+      color={239,142,1},
+      smooth=Smooth.None));
+*/
 
     // Gas
-    connect(gas.inert, volume.inert) annotation (Line(
+    connect(gas.physical, physical) annotation (Line(
+        points={{-5.8,4},{-27,13}},
+        color={239,142,1},
+        smooth=Smooth.None));
+    connect(gas.reaction, hOR.reaction) annotation (Line(
+        points={{-3.8,7.4},{-53.2,51.2}},
+        color={239,142,1},
+        smooth=Smooth.None));
+    connect(gas.inertAmagat, volume.inertAmagat) annotation (Line(
         points={{8,-8},{11,-11}},
-        color={72,90,180},
+        color={47,107,251},
         smooth=Smooth.None));
     connect(gas.xNegative, xNegative.gas) annotation (Line(
         points={{-8,6.10623e-16},{-40,5.55112e-16}},
@@ -1210,11 +1454,14 @@ package Subregions
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
-
     // Graphite
-    connect(graphite.inert, volume.inert) annotation (Line(
+    connect(graphite.reaction, hOR.reaction) annotation (Line(
+        points={{-3.8,7.4},{-46,48}},
+        color={239,142,1},
+        smooth=Smooth.None));
+    connect(graphite.inertAmagat, volume.inertAmagat) annotation (Line(
         points={{8,-8},{11,-11}},
-        color={72,90,180},
+        color={47,107,251},
         smooth=Smooth.None));
     connect(graphite.xNegative, xNegative.graphite) annotation (Line(
         points={{-8,6.10623e-16},{-40,5.55112e-16}},
@@ -1254,11 +1501,19 @@ package Subregions
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
-
     // Ionomer
-    connect(ionomer.inert, volume.inert) annotation (Line(
+    connect(ionomer.physical, physical) annotation (Line(
+        points={{-5.8,4},{-27,13}},
+        color={239,142,1},
+        smooth=Smooth.None));
+    connect(ionomer.reaction, hOR.reaction) annotation (Line(
+        points={{-3.8,7.4},{-46,48}},
+        color={255,195,38},
+        smooth=Smooth.None,
+        thickness=0.5));
+    connect(ionomer.inertAmagat, volume.inertAmagat) annotation (Line(
         points={{8,-8},{11,-11}},
-        color={72,90,180},
+        color={47,107,251},
         smooth=Smooth.None));
     connect(ionomer.xNegative, xNegative.ionomer) annotation (Line(
         points={{-8,6.10623e-16},{-40,5.55112e-16}},
@@ -1298,16 +1553,18 @@ package Subregions
         pattern=LinePattern.None,
         thickness=0.5,
         smooth=Smooth.None));
-
     // Liquid
-    connect(liquid.inert, volume.inert) annotation (Line(
-        points={{8,-8},{11,-11}},
-        color={0,180,0},
+    connect(liquid.physical, physical) annotation (Line(
+        points={{-5.8,4},{-27,13}},
+        color={38,196,52},
         smooth=Smooth.None,
         thickness=0.5));
+    connect(liquid.inertAmagat, volume.inertAmagat) annotation (Line(
+        points={{8,-8},{11,-11}},
+        color={47,107,251},
+        smooth=Smooth.None));
     connect(liquid.xNegative, xNegative.liquid) annotation (Line(
-        points={{-8,6.10623e-16},{-8,6.10623e-16},{-8,5.55112e-16},{-40,
-            5.55112e-16}},
+        points={{-8,6.10623e-16},{-8,5.55112e-16},{-40,5.55112e-16}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
@@ -1329,8 +1586,7 @@ package Subregions
         thickness=0.5,
         smooth=Smooth.None));
     connect(liquid.yPositive, yPositive.liquid) annotation (Line(
-        points={{6.10623e-16,10},{0,10},{0,10},{-4.87687e-22,40},{5.55112e-16,
-            40}},
+        points={{6.10623e-16,10},{0,10},{-4.87687e-22,40},{5.55112e-16,40}},
         color={127,127,127},
         pattern=LinePattern.None,
         thickness=0.5,
@@ -1350,22 +1606,342 @@ package Subregions
         smooth=Smooth.None));
     annotation (
       defaultComponentPrefixes="replaceable",
-      Documentation(info="<html><p>Notes:<ul>
-    <li>The <code>inclReact</code> parameter may be set to
+      Documentation(info="<html><p>The <code>inclReact</code> parameter may be set to
     <code>false</code>
-    to eliminate unnecessary equations.</li>
-  <li>H<sub>2</sub>O vapor is included by default, since at least one species
-  must be included.</li></ul></p>
+    to eliminate unnecessary equations.</p>
 
 <p>For more information, see the
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
-
   end Subregion;
 
+  model Subregion2 "Subregion with all phases"
+
+    parameter Boolean inclReact=true "Include reactions (as appropriate)"
+      annotation (
+      HideResult=true,
+      Dialog(tab="Assumptions"),
+      choices(__Dymola_checkBox=true));
+    // Note:  This is listed above the extends clause so that it's listed
+    // first in the parameter dialog.
+    extends BaseClasses.PartialSubregion(final hasSpecies=gas.n_spec + graphite.n_spec
+           + ionomer.n_spec + liquid.n_spec > 0);
+
+    Phases.Gas gas "Gas" annotation (Dialog(group="Phases (click to edit)"),
+        Placement(transformation(extent={{-10,-10},{10,10}})));
+    Phases.Graphite graphite('e-'(initMaterial=if inclHOR or inclORR then
+            InitScalar.None else InitScalar.Pressure)) "Graphite" annotation (
+        Dialog(group="Phases (click to edit)"), Placement(transformation(extent
+            ={{-10,-10},{10,10}})));
+    Phases.Ionomer ionomer('C19HF37O5S-'(
+        consTransX=if graphite.'inclC+' then Conservation.Dynamic else
+            Conservation.IC,
+        consTransY=if graphite.'inclC+' then Conservation.Dynamic else
+            Conservation.IC,
+        consTransZ=if graphite.'inclC+' then Conservation.Dynamic else
+            Conservation.IC,
+        initTransX=if graphite.'inclC+' then InitTranslational.None else
+            InitTranslational.Velocity,
+        initTransY=if graphite.'inclC+' then InitTranslational.None else
+            InitTranslational.Velocity,
+        initTransZ=if graphite.'inclC+' then InitTranslational.None else
+            InitTranslational.Velocity)) "Ionomer" annotation (Dialog(group=
+            "Phases (click to edit)"), Placement(transformation(extent={{-10,-10},
+              {10,10}})));
+    Phases.Liquid liquid "Liquid" annotation (Dialog(group=
+            "Phases (click to edit)"), Placement(transformation(extent={{-10,-10},
+              {10,10}})));
+
+    // **explain
+    /*
+  Modelica.Blocks.Interfaces.IntegerOutput axis=0 "Axis of the electric field"
+    annotation (HideResult=true);
+  Modelica.Blocks.Interfaces.RealOutput Ndot_0=1 "Exchange current"
+    annotation (HideResult=true);
+*/
+
+    final parameter Boolean inclHOR=inclReact and (graphite.'incle-' and
+        ionomer.'inclH+' and gas.inclH2) "true, if HOR is included"
+      annotation (HideResult=true);
+    final parameter Boolean inclORR=inclReact and (graphite.'incle-' and
+        ionomer.'inclH+' and gas.inclO2 and gas.inclH2O)
+      "true, if ORR is included" annotation (HideResult=true);
+    /*
+  Reaction oRR(n_neut=2) if inclORR "Oxygen reduction reaction"
+    annotation (Placement(transformation(extent={{-30,50},{-10,70}})));
+*/
+
+  protected
+    Connectors.PhysicalBusInternal physical "Connector for phase change"
+      annotation (Placement(transformation(extent={{-37,3},{-17,23}}),
+          iconTransformation(extent={{-64,36},{-44,56}})));
+    Connectors.ChemicalBusInternal chemical if inclHOR or inclORR
+      "Connector for reactions" annotation (Placement(transformation(extent={{-23,
+              17},{-3,37}}), iconTransformation(extent={{-64,36},{-44,56}})));
+
+  public
+    Reaction hOR
+      annotation (Placement(transformation(extent={{-56,40},{-36,60}})));
+
+  equation
+    // Chemical reactions
+    // ------------------
+    // HOR
+    /*
+  if not (inclHOR or inclORR) then
+    connect(axis, gas.H2.reaction.axis);
+    connect(Ndot_0, gas.H2.reaction.Ndot_0);
+  end if;
+*/
+    // ORR
+    /*
+  connect(oRR.positive, reaction.'e-') annotation (Line(
+      points={{-10,60},{-10,27},{-13,27}},
+      color={239,142,1},
+      smooth=Smooth.None));
+  connect(oRR.chemical[1], reaction.O2) annotation (Line(
+      points={{-20,59.5},{-20,27},{-13,27}},
+      color={239,142,1},
+      smooth=Smooth.None));
+  connect(oRR.chemical[2], reaction.H2O) annotation (Line(
+      points={{-20,60.5},{-20,27},{-13,27}},
+      color={239,142,1},
+      smooth=Smooth.None));
+  connect(oRR.negative, reaction.'H+') annotation (Line(
+      points={{-30,60},{-13,27}},
+      color={239,142,1},
+      smooth=Smooth.None));
+*/
+
+    // Gas
+    connect(gas.physical, physical) annotation (Line(
+        points={{-5.8,4},{-27,13}},
+        color={239,142,1},
+        smooth=Smooth.None));
+    connect(gas.reaction, chemical) annotation (Line(
+        points={{-3.8,7.4},{-13,27}},
+        color={239,142,1},
+        smooth=Smooth.None));
+    connect(gas.inertAmagat, volume.inertAmagat) annotation (Line(
+        points={{8,-8},{11,-11}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(gas.xNegative, xNegative.gas) annotation (Line(
+        points={{-8,6.10623e-16},{-40,5.55112e-16}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(gas.xPositive, xPositive.gas) annotation (Line(
+        points={{8,6.10623e-16},{8,-4.87687e-22},{40,-4.87687e-22},{40,
+            5.55112e-16}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+
+    connect(gas.yNegative, yNegative.gas) annotation (Line(
+        points={{6.10623e-16,-8.4},{6.10623e-16,-40},{5.55112e-16,-40}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(gas.yPositive, yPositive.gas) annotation (Line(
+        points={{6.10623e-16,10},{0,10},{0,40},{5.55112e-16,40}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(gas.zNegative, zNegative.gas) annotation (Line(
+        points={{5,5},{20,20}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(gas.zPositive, zPositive.gas) annotation (Line(
+        points={{-8,-8},{-20,-20}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    // Graphite
+    connect(graphite.reaction, chemical) annotation (Line(
+        points={{-3.8,7.4},{-13,27}},
+        color={239,142,1},
+        smooth=Smooth.None));
+    connect(graphite.inertAmagat, volume.inertAmagat) annotation (Line(
+        points={{8,-8},{11,-11}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(graphite.xNegative, xNegative.graphite) annotation (Line(
+        points={{-8,6.10623e-16},{-40,5.55112e-16}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(graphite.xPositive, xPositive.graphite) annotation (Line(
+        points={{8,6.10623e-16},{8,-4.87687e-22},{40,-4.87687e-22},{40,
+            5.55112e-16}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+
+    connect(graphite.yNegative, yNegative.graphite) annotation (Line(
+        points={{6.10623e-16,-8.4},{6.10623e-16,-40},{5.55112e-16,-40}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(graphite.yPositive, yPositive.graphite) annotation (Line(
+        points={{6.10623e-16,10},{0,10},{0,40},{5.55112e-16,40}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(graphite.zNegative, zNegative.graphite) annotation (Line(
+        points={{5,5},{20,20}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(graphite.zPositive, zPositive.graphite) annotation (Line(
+        points={{-8,-8},{-20,-20}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    // Ionomer
+    connect(ionomer.physical, physical) annotation (Line(
+        points={{-5.8,4},{-27,13}},
+        color={239,142,1},
+        smooth=Smooth.None));
+    connect(ionomer.reaction, chemical) annotation (Line(
+        points={{-3.8,7.4},{-13,27}},
+        color={255,195,38},
+        smooth=Smooth.None));
+    connect(ionomer.inertAmagat, volume.inertAmagat) annotation (Line(
+        points={{8,-8},{11,-11}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(ionomer.xNegative, xNegative.ionomer) annotation (Line(
+        points={{-8,6.10623e-16},{-40,5.55112e-16}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(ionomer.xPositive, xPositive.ionomer) annotation (Line(
+        points={{8,6.10623e-16},{8,-4.87687e-22},{40,-4.87687e-22},{40,
+            5.55112e-16}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+
+    connect(ionomer.yNegative, yNegative.ionomer) annotation (Line(
+        points={{6.10623e-16,-8.4},{6.10623e-16,-40},{5.55112e-16,-40}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(ionomer.yPositive, yPositive.ionomer) annotation (Line(
+        points={{6.10623e-16,10},{5.55112e-16,40}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(ionomer.zNegative, zNegative.ionomer) annotation (Line(
+        points={{5,5},{20,20}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(ionomer.zPositive, zPositive.ionomer) annotation (Line(
+        points={{-8,-8},{-20,-20}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    // Liquid
+    connect(liquid.physical, physical) annotation (Line(
+        points={{-5.8,4},{-27,13}},
+        color={38,196,52},
+        smooth=Smooth.None,
+        thickness=0.5));
+    connect(liquid.inertAmagat, volume.inertAmagat) annotation (Line(
+        points={{8,-8},{11,-11}},
+        color={47,107,251},
+        smooth=Smooth.None));
+    connect(liquid.xNegative, xNegative.liquid) annotation (Line(
+        points={{-8,6.10623e-16},{-8,5.55112e-16},{-40,5.55112e-16}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+
+    connect(liquid.xPositive, xPositive.liquid) annotation (Line(
+        points={{8,6.10623e-16},{8,-4.87687e-22},{40,-4.87687e-22},{40,
+            5.55112e-16}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+
+    connect(liquid.yNegative, yNegative.liquid) annotation (Line(
+        points={{6.10623e-16,-8.4},{-4.87687e-22,-8.4},{-4.87687e-22,-40},{
+            5.55112e-16,-40}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(liquid.yPositive, yPositive.liquid) annotation (Line(
+        points={{6.10623e-16,10},{0,10},{-4.87687e-22,40},{5.55112e-16,40}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+
+    connect(liquid.zNegative, zNegative.liquid) annotation (Line(
+        points={{5,5},{20,20}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+    connect(liquid.zPositive, zPositive.liquid) annotation (Line(
+        points={{-8,-8},{-20,-20}},
+        color={127,127,127},
+        pattern=LinePattern.None,
+        thickness=0.5,
+        smooth=Smooth.None));
+
+    connect(hOR.chemical[1], chemical.H2) annotation (Line(
+        points={{-46,50},{-46,27},{-13,27}},
+        color={255,195,38},
+        smooth=Smooth.None));
+
+    connect(hOR.negative, chemical.'e-') annotation (Line(
+        points={{-56,50},{-30,50},{-30,27},{-13,27}},
+        color={255,195,38},
+        smooth=Smooth.None));
+    connect(hOR.positive, chemical.'H+') annotation (Line(
+        points={{-36,50},{-76,50},{-76,27},{-13,27}},
+        color={255,195,38},
+        smooth=Smooth.None));
+    annotation (
+      defaultComponentPrefixes="replaceable",
+      Documentation(info="<html><p>The <code>inclReact</code> parameter may be set to
+    <code>false</code>
+    to eliminate unnecessary equations.</p>
+
+<p>For more information, see the
+   <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
+
+      Diagram(graphics));
+  end Subregion2;
+
   model SubregionIonomerOnly "Subregion with only the ionomer phase"
-    extends BaseClasses.PartialSubregion;
+    extends BaseClasses.PartialSubregion(final hasSpecies=ionomer.n_spec > 0);
 
     Phases.Ionomer ionomer(inclH2O=true, final inclTrans={inclTransX,inclTransY,
           inclTransZ}) "Ionomer" annotation (Dialog(group=
@@ -1374,10 +1950,9 @@ package Subregions
 
   equation
     // Ionomer
-    connect(ionomer.chemical, chemical.ionomer);
     connect(ionomer.inert, volume.inert) annotation (Line(
         points={{8,-8},{11,-11}},
-        color={72,90,180},
+        color={47,107,251},
         smooth=Smooth.None));
     connect(ionomer.xNegative, xNegative.ionomer) annotation (Line(
         points={{-8,6.10623e-16},{-8,1.16573e-15},{-25,1.16573e-15},{-25,
@@ -1420,15 +1995,11 @@ package Subregions
     annotation (
       defaultComponentPrefixes="replaceable",
       defaultComponentName="subregion",
-      Documentation(info="<html><p>Notes:<ul>
-  <li>H<sub>2</sub>O is included by default, since at least one species
-  must be included.</li></ul></p>
-
+      Documentation(info="<html>
 <p>For more information, see the
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
-
   end SubregionIonomerOnly;
 
   model SubregionNoIonomer "Subregion with all phases except ionomer"
@@ -1440,7 +2011,8 @@ package Subregions
 
     // Note:  This is listed above the extends clause so that it's listed
     // first in the parameter dialog.
-    extends BaseClasses.PartialSubregion;
+    extends BaseClasses.PartialSubregion(final hasSpecies=gas.n_spec + graphite.n_spec
+           + liquid.n_spec > 0);
 
     Phases.Gas gas(inclH2O=true, inclReact=inclReact) "Gas" annotation (Dialog(
           group="Phases (click to edit)"), Placement(transformation(extent={{-10,
@@ -1454,20 +2026,19 @@ package Subregions
               {10,10}})));
 
   protected
-    Connectors.ChemicalBusInternal CondEvap
-      "Connector for H2O condensation and evaporation" annotation (Placement(
-          transformation(extent={{-30,10},{-10,30}}), iconTransformation(extent
-            ={{-76,16},{-56,36}})));
+    Connectors.PhysicalBusInternal physical "Connector for phase change"
+      annotation (Placement(transformation(extent={{-30,10},{-10,30}}),
+          iconTransformation(extent={{-76,16},{-56,36}})));
 
   equation
     // Chemical interactions (not shown graphically)
 
     // Gas
-    connect(gas.chemical, chemical.gas);
+    connect(gas.physical, physical);
 
     connect(gas.inert, volume.inert) annotation (Line(
         points={{8,-8},{11,-11}},
-        color={72,90,180},
+        color={47,107,251},
         smooth=Smooth.None));
     connect(gas.xNegative, xNegative.gas) annotation (Line(
         points={{-8,6.10623e-16},{-8,1.16573e-15},{-25,1.16573e-15},{-25,
@@ -1509,11 +2080,11 @@ package Subregions
         smooth=Smooth.None));
 
     // Graphite
-    connect(graphite.chemical, chemical.graphite);
+    connect(graphite.physical, physical);
 
     connect(graphite.inert, volume.inert) annotation (Line(
         points={{8,-8},{11,-11}},
-        color={72,90,180},
+        color={47,107,251},
         smooth=Smooth.None));
     connect(graphite.xNegative, xNegative.graphite) annotation (Line(
         points={{-8,6.10623e-16},{-8,1.16573e-15},{-25,1.16573e-15},{-25,
@@ -1555,13 +2126,12 @@ package Subregions
         smooth=Smooth.None));
 
     // Liquid
-    connect(liquid.chemical, chemical.liquid);
+    connect(liquid.physical, physical);
 
     connect(liquid.inert, volume.inert) annotation (Line(
         points={{8,-8},{11,-11}},
-        color={0,180,0},
-        smooth=Smooth.None,
-        thickness=0.5));
+        color={47,107,251},
+        smooth=Smooth.None));
     connect(liquid.xNegative, xNegative.liquid) annotation (Line(
         points={{-8,6.10623e-16},{-8,1.16573e-15},{-25,1.16573e-15},{-25,
             5.55112e-16},{-40,5.55112e-16}},
@@ -1601,31 +2171,28 @@ package Subregions
         thickness=0.5,
         smooth=Smooth.None));
 
-    connect(CondEvap, liquid.CondEvap) annotation (Line(
+    connect(physical, liquid.CondEvap) annotation (Line(
         points={{-20,20},{-3,8.6}},
-        color={208,104,0},
-        pattern=LinePattern.Solid,
-        thickness=0.5,
-        smooth=Smooth.None));
+        color={38,196,52},
+        smooth=Smooth.None,
+        thickness=0.5));
     annotation (
       defaultComponentPrefixes="replaceable",
       defaultComponentName="subregion",
-      Documentation(info="<html><p>Notes:<ul>
-    <li>The <code>inclReact</code> parameter may be set to
+      Documentation(info="<html><p>The <code>inclReact</code> parameter may be set to
     <code>false</code>
-    to eliminate unnecessary equations.</li>
-  <li>H<sub>2</sub>O vapor is included by default, since at least one species
-  must be included.</li></ul></p>
+    to eliminate unnecessary equations.</p>
 
 <p>For more information, see the
    <a href=\"modelica://FCSys.Subregions.BaseClasses.PartialSubregion\">PartialSubregion</a> model.</p></html>"),
 
       Diagram(graphics));
-
   end SubregionNoIonomer;
 
   package Phases "Phases or mixtures of species"
     extends Modelica.Icons.Package;
+
+    // **The graphite, ionomer, and liquid phases can only be used with a compressible phase (gas).
 
     model Gas "Gas phase"
       import FCSys.BaseClasses.Utilities.countTrue;
@@ -1633,14 +2200,8 @@ package Subregions
       extends BaseClasses.NullPhase(final n_spec=countTrue({inclH2,inclH2O,
             inclN2,inclO2}));
 
-      parameter Boolean inclReact=true "Include reactions (as appropriate)"
-        annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(tab="Assumptions"));
-
       // Conditionally include species.
-      parameter Boolean inclH2=false "<html>Hydrogen (H<sub>2</sub>)</html>"
+      parameter Boolean inclH2=true "<html>Hydrogen (H<sub>2</sub>)</html>"
         annotation (
         HideResult=true,
         choices(__Dymola_checkBox=true),
@@ -1759,35 +2320,32 @@ package Subregions
           enable=inclO2),
         Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      Connectors.ChemicalBus phaseChange "Phase change" annotation (Placement(
-            transformation(extent={{-70,10},{-50,30}}), iconTransformation(
-              extent={{-42,74},{-22,94}})));
-      Connectors.ChemicalBus HOR "Hydrogen oxidation reaction" annotation (
-          Placement(transformation(extent={{-29.66,50.33},{-9.66,70.33}}),
-            iconTransformation(extent={{-59,47},{-39,67}})));
-      Connectors.ChemicalBus ORR "Oxygen reduction reaction" annotation (
-          Placement(transformation(extent={{-50,30},{-30,50}}),
-            iconTransformation(extent={{-74,18},{-54,38}})));
+      Connectors.PhysicalBus physical "Connector for phase change" annotation (
+          Placement(transformation(extent={{-37,3},{-17,23}}),
+            iconTransformation(extent={{-68,30},{-48,50}})));
 
+      Connectors.ChemicalBus chemical annotation (Placement(transformation(
+              extent={{-24,16},{-4,36}}), iconTransformation(extent={{-48,64},{
+                -28,84}})));
     equation
       // Phase change
-      connect(phaseChange.H2O, H2O.phaseChange) annotation (Line(
-          points={{-60,20},{-7.178,3.555}},
-          color={208,104,0},
+      connect(physical.H2O, H2O.physical) annotation (Line(
+          points={{-27,13},{-7.178,3.555}},
+          smooth=Smooth.None,
+          color={38,196,52}));
+
+      // Reaction
+      connect(H2.chemical, chemical.H2) annotation (Line(
+          points={{-3.578,7.155},{-14,26}},
+          color={255,195,38},
           smooth=Smooth.None));
-      // HOR
-      connect(HOR.H2, H2.reaction) annotation (Line(
-          points={{-19.66,60.33},{-3.578,7.155}},
-          color={208,104,0},
+      connect(H2O.chemical, chemical.H2O) annotation (Line(
+          points={{-3.578,7.155},{-14,26}},
+          color={255,195,38},
           smooth=Smooth.None));
-      // ORR
-      connect(ORR.H2O, H2O.reaction) annotation (Line(
-          points={{-40,40},{-3.578,7.155}},
-          color={208,104,0},
-          smooth=Smooth.None));
-      connect(ORR.O2, O2.reaction) annotation (Line(
-          points={{-40,40},{-3.578,7.155}},
-          color={208,104,0},
+      connect(O2.chemical, chemical.O2) annotation (Line(
+          points={{-3.578,7.155},{-14,26}},
+          color={255,195,38},
           smooth=Smooth.None));
 
       // H2
@@ -1795,15 +2353,15 @@ package Subregions
       // Exchange
       connect(H2.inert.translational, inert.translational) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
-          color={72,90,180},
+          color={11,43,197},
           smooth=Smooth.None));
       connect(H2.inert.thermal, inert.thermal) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
-          color={72,90,180},
+          color={11,43,197},
           smooth=Smooth.None));
       connect(H2.inertDalton, phaseBoundary.inertDalton) annotation (Line(
           points={{3.578,-7.155},{4,-8},{4,-7.155},{3.578,-7.155}},
-          color={72,90,180},
+          color={11,43,197},
           smooth=Smooth.None));
       // Transport
       connect(H2.faces[Axis.x, Side.n], xNegative.H2) annotation (Line(
@@ -1842,15 +2400,15 @@ package Subregions
       // Exchange
       connect(H2O.inert.translational, inert.translational) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
-          color={72,90,180},
+          color={11,43,197},
           smooth=Smooth.None));
       connect(H2O.inert.thermal, inert.thermal) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
-          color={72,90,180},
+          color={11,43,197},
           smooth=Smooth.None));
       connect(H2O.inertDalton, phaseBoundary.inertDalton) annotation (Line(
           points={{3.578,-7.155},{4,-8},{4,-7.155},{3.578,-7.155}},
-          color={72,90,180},
+          color={11,43,197},
           smooth=Smooth.None));
       // Transport
       connect(H2O.faces[Axis.x, Side.n], xNegative.H2O) annotation (Line(
@@ -1889,15 +2447,15 @@ package Subregions
       // Exchange
       connect(N2.inert.translational, inert.translational) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
-          color={72,90,180},
+          color={11,43,197},
           smooth=Smooth.None));
       connect(N2.inert.thermal, inert.thermal) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
-          color={72,90,180},
+          color={11,43,197},
           smooth=Smooth.None));
       connect(N2.inertDalton, phaseBoundary.inertDalton) annotation (Line(
           points={{3.578,-7.155},{4,-8},{4,-7.155},{3.578,-7.155}},
-          color={72,90,180},
+          color={11,43,197},
           smooth=Smooth.None));
       // Transport
       connect(N2.faces[Axis.x, Side.n], xNegative.N2) annotation (Line(
@@ -1936,16 +2494,16 @@ package Subregions
       // Exchange
       connect(O2.inert.translational, inert.translational) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
-          color={72,90,180},
+          color={11,43,197},
           smooth=Smooth.None));
       connect(O2.inert.thermal, inert.thermal) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
-          color={72,90,180},
+          color={47,107,251},
           smooth=Smooth.None));
       connect(O2.inertDalton, phaseBoundary.inertDalton) annotation (Line(
           points={{3.578,-7.155},{3.578,-7.155},{3.578,-7.155},{3.578,-7.155},{
               3.578,-7.155},{3.578,-7.155}},
-          color={72,90,180},
+          color={11,43,197},
           smooth=Smooth.None));
 
       // Transport
@@ -1980,15 +2538,12 @@ package Subregions
           smooth=Smooth.None));
       annotation (
         defaultComponentPrefixes="replaceable",
-        Documentation(info="<html><p>Notes:<ul><li>The <code>inclReact</code> parameter may be set to
-    <code>false</code>
-    to eliminate unnecessary equations.</li></ul></p>
-
+        Documentation(info="<html>
 <p>For more information, see the
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
-        Icon(graphics));
-
+        Icon(graphics),
+        Diagram(graphics));
     end Gas;
 
     model Graphite "Graphite phase"
@@ -2000,7 +2555,7 @@ package Subregions
         initVelZ=not 'inclC+');
 
       // Conditionally include species.
-      parameter Boolean 'inclC+'=false
+      parameter Boolean 'inclC+'=true
         "<html>Carbon plus (C<sup>+</sup>)</html>" annotation (
         HideResult=true,
         choices(__Dymola_checkBox=true),
@@ -2024,7 +2579,7 @@ package Subregions
           enable='inclC+'),
         Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      parameter Boolean 'incle-'=false "<html>Electrons (e<sup>-</sup>)</html>"
+      parameter Boolean 'incle-'=true "<html>Electrons (e<sup>-</sup>)</html>"
         annotation (
         HideResult=true,
         choices(__Dymola_checkBox=true),
@@ -2035,11 +2590,11 @@ package Subregions
 
       replaceable Species.'e-'.Graphite.Fixed 'e-' if 'incle-' constrainedby
         Species.Species(
-        initTransX=if (initTransX or 'inclC+') and reduceVel then
+        initTransX=if (initVelX or 'inclC+') and reduceVel then
             InitTranslational.None else InitTranslational.Velocity,
-        initTransY=if (initTransY or 'inclC+') and reduceVel then
+        initTransY=if (initVelY or 'inclC+') and reduceVel then
             InitTranslational.None else InitTranslational.Velocity,
-        initTransZ=if (initTransZ or 'inclC+') and reduceVel then
+        initTransZ=if (initVelZ or 'inclC+') and reduceVel then
             InitTranslational.None else InitTranslational.Velocity,
         initEnergy=if initTemp and reduceTemp then InitScalar.None else
             InitScalar.Temperature,
@@ -2054,23 +2609,14 @@ package Subregions
           enable='incle-'),
         Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      Connectors.ChemicalBus HOR "Hydrogen oxidation reaction" annotation (
-          Placement(transformation(extent={{-29.66,50.33},{-9.66,70.33}}),
-            iconTransformation(extent={{-59,47},{-39,67}})));
-      Connectors.ChemicalBus ORR "Oxygen reduction reaction" annotation (
-          Placement(transformation(extent={{-50,30},{-30,50}}),
-            iconTransformation(extent={{-74,18},{-54,38}})));
-
+      Connectors.ChemicalBus chemical annotation (Placement(transformation(
+              extent={{-24,16},{-4,36}}), iconTransformation(extent={{-48,64},{
+                -28,84}})));
     equation
-      // HOR
-      connect(HOR.'e-', 'e-'.reaction) annotation (Line(
-          points={{-19.66,60.33},{-3.578,7.155}},
-          color={208,104,0},
-          smooth=Smooth.None));
-      // ORR
-      connect(ORR.'e-', 'e-'.reaction) annotation (Line(
-          points={{-40,40},{-3.578,7.155}},
-          color={208,104,0},
+      // Reaction
+      connect('e-'.chemical, chemical.'e-') annotation (Line(
+          points={{-3.578,7.155},{-14,26}},
+          color={255,195,38},
           smooth=Smooth.None));
 
       // C+
@@ -2078,15 +2624,15 @@ package Subregions
       // Exchange
       connect('C+'.inert.translational, inert.translational) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
-          color={72,90,180},
+          color={11,43,197},
           smooth=Smooth.None));
       connect('C+'.inert.thermal, inert.thermal) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
-          color={72,90,180},
+          color={11,43,197},
           smooth=Smooth.None));
-      connect('C+'.inertDalton, phaseBoundary.inertD) annotation (Line(
-          points={{7.155,-3.578},{3.578,-7.155},{3.578,-7.155}},
-          color={72,90,180},
+      connect('C+'.inertDalton, phaseBoundary.inertDalton) annotation (Line(
+          points={{3.578,-7.155},{3.578,-7.155},{3.578,-7.155}},
+          color={11,43,197},
           smooth=Smooth.None));
       // Transport
       connect('C+'.faces[Axis.x, Side.n], xNegative.'C+') annotation (Line(
@@ -2101,8 +2647,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect('C+'.faces[Axis.y, Side.n], yNegative.'C+') annotation (Line(
-          points={{6.10623e-16,6.10623e-16},{-4.87687e-22,6.10623e-16},{
-              -4.87687e-22,-40},{5.55112e-16,-40}},
+          points={{6.10623e-16,6.10623e-16},{-4.87687e-22,6.10623e-16},{-4.87687e-22,
+              -40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
@@ -2125,15 +2671,15 @@ package Subregions
       // Exchange
       connect('e-'.inert.translational, inert.translational) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
-          color={72,90,180},
+          color={11,43,197},
           smooth=Smooth.None));
       connect('e-'.inert.thermal, inert.thermal) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
-          color={72,90,180},
+          color={47,107,251},
           smooth=Smooth.None));
-      connect('e-'.inertDalton, phaseBoundary.inertD) annotation (Line(
-          points={{7.155,-3.578},{3.578,-7.155},{3.578,-7.155}},
-          color={72,90,180},
+      connect('e-'.inertDalton, phaseBoundary.inertDalton) annotation (Line(
+          points={{3.578,-7.155},{3.578,-7.155},{3.578,-7.155}},
+          color={11,43,197},
           smooth=Smooth.None));
       // Transport
       connect('e-'.faces[Axis.x, Side.n], xNegative.'e-') annotation (Line(
@@ -2148,8 +2694,8 @@ package Subregions
           smooth=Smooth.None));
 
       connect('e-'.faces[Axis.y, Side.n], yNegative.'e-') annotation (Line(
-          points={{6.10623e-16,6.10623e-16},{-4.87687e-22,6.10623e-16},{
-              -4.87687e-22,-40},{5.55112e-16,-40}},
+          points={{6.10623e-16,6.10623e-16},{-4.87687e-22,6.10623e-16},{-4.87687e-22,
+              -40},{5.55112e-16,-40}},
           color={127,127,127},
           smooth=Smooth.None));
 
@@ -2182,7 +2728,6 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Icon(graphics));
-
     end Graphite;
 
     model Ionomer "Ionomer phase"
@@ -2194,7 +2739,7 @@ package Subregions
         initVelZ=not 'inclC19HF37O5S-');
 
       // Conditionally include species.
-      parameter Boolean 'inclC19HF37O5S-'=false
+      parameter Boolean 'inclC19HF37O5S-'=true
         "<html>Nafion sulfonate minus (C<sub>19</sub>HF<sub>37</sub>O<sub>5</sub>S<sup>-</sup>)</html>"
         annotation (
         HideResult=true,
@@ -2220,7 +2765,7 @@ package Subregions
           enable='inclC19HF37O5S-'),
         Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      parameter Boolean 'inclH+'=false "<html>Protons (H<sup>+</sup>)</html>"
+      parameter Boolean 'inclH+'=true "<html>Protons (H<sup>+</sup>)</html>"
         annotation (
         HideResult=true,
         choices(__Dymola_checkBox=true),
@@ -2280,31 +2825,24 @@ package Subregions
           enable=inclH2O),
         Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      Connectors.ChemicalBus PC "Phase change" annotation (Placement(
-            transformation(extent={{-70,10},{-50,30}}), iconTransformation(
-              extent={{-42,74},{-22,94}})));
-      Connectors.ChemicalBus HOR "Hydrogen oxidation reaction" annotation (
-          Placement(transformation(extent={{-29.66,50.33},{-9.66,70.33}}),
-            iconTransformation(extent={{-59,47},{-39,67}})));
-      Connectors.ChemicalBus ORR "Oxygen reduction reaction" annotation (
-          Placement(transformation(extent={{-50,30},{-30,50}}),
-            iconTransformation(extent={{-74,18},{-54,38}})));
+      Connectors.PhysicalBus physical if inclH2O "Connector for phase change"
+        annotation (Placement(transformation(extent={{-37,3},{-17,23}}),
+            iconTransformation(extent={{-68,30},{-48,50}})));
 
+      Connectors.ChemicalBus chemical annotation (Placement(transformation(
+              extent={{-24,16},{-4,36}}), iconTransformation(extent={{-48,64},{
+                -28,84}})));
     equation
       // Phase change
-      connect(PC.H2O, H2O.phasChange) annotation (Line(
-          points={{-60,20},{-5.578,5.555}},
-          color={208,104,0},
+      connect(physical.H2O, H2O.physical) annotation (Line(
+          points={{-27,13},{-7.178,3.555}},
+          color={38,196,52},
           smooth=Smooth.None));
-      // HOR
-      connect(HOR.'H+', 'H+'.reaction) annotation (Line(
-          points={{-19.66,60.33},{-3.578,7.155}},
-          color={208,104,0},
-          smooth=Smooth.None));
-      // ORR
-      connect(ORR.'H+', 'H+'.reaction) annotation (Line(
-          points={{-40,40},{-3.578,7.155}},
-          color={208,104,0},
+
+      // Reaction
+      connect('H+'.chemical, chemical.'H+') annotation (Line(
+          points={{-3.578,7.155},{-14,26}},
+          color={255,195,38},
           smooth=Smooth.None));
 
       // C19HF37O5S-
@@ -2313,16 +2851,16 @@ package Subregions
       connect('C19HF37O5S-'.inert.translational, inert.translational)
         annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
-          color={72,90,180},
+          color={11,43,197},
           smooth=Smooth.None));
       connect('C19HF37O5S-'.inert.thermal, inert.thermal) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
-          color={72,90,180},
+          color={11,43,197},
           smooth=Smooth.None));
       connect('C19HF37O5S-'.inertDalton, phaseBoundary.inertDalton) annotation
         (Line(
-          points={{3.578,-7.155},{7,-7},{7,-7.155},{3.578,-7.155}},
-          color={72,90,180},
+          points={{3.578,-7.155},{4,-8},{3.578,-7.155}},
+          color={11,43,197},
           smooth=Smooth.None));
       // Transport
       connect('C19HF37O5S-'.faces[Axis.x, Side.n], xNegative.'C19HF37O5S-')
@@ -2369,15 +2907,15 @@ package Subregions
       // Exchange
       connect('H+'.inert.translational, inert.translational) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
-          color={72,90,180},
+          color={11,43,197},
           smooth=Smooth.None));
       connect('H+'.inert.thermal, inert.thermal) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
-          color={72,90,180},
+          color={11,43,197},
           smooth=Smooth.None));
       connect('H+'.inertDalton, phaseBoundary.inertDalton) annotation (Line(
-          points={{3.578,-7.155},{7,-7},{7,-7.155},{3.578,-7.155}},
-          color={72,90,180},
+          points={{3.578,-7.155},{3.578,-7.155},{3.578,-7.155}},
+          color={11,43,197},
           smooth=Smooth.None));
       // Transport
       connect('H+'.faces[Axis.x, Side.n], xNegative.'H+') annotation (Line(
@@ -2418,15 +2956,15 @@ package Subregions
       // Exchange
       connect(H2O.inert.translational, inert.translational) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
-          color={72,90,180},
+          color={11,43,197},
           smooth=Smooth.None));
       connect(H2O.inert.thermal, inert.thermal) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
-          color={72,90,180},
+          color={47,107,251},
           smooth=Smooth.None));
       connect(H2O.inertDalton, phaseBoundary.inertDalton) annotation (Line(
-          points={{3.578,-7.155},{7,-7},{7,-7.155},{3.578,-7.155}},
-          color={72,90,180},
+          points={{3.578,-7.155},{3.578,-7.155},{3.578,-7.155}},
+          color={11,43,197},
           smooth=Smooth.None));
       // Transport
       connect(H2O.faces[Axis.x, Side.n], xNegative.H2O) annotation (Line(
@@ -2480,7 +3018,6 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Icon(graphics));
-
     end Ionomer;
 
     model Liquid "Liquid phase"
@@ -2517,15 +3054,15 @@ package Subregions
           enable=inclH2O),
         Placement(transformation(extent={{-10,-10},{10,10}})));
 
-      Connectors.ChemicalBus PC "Phase change" annotation (Placement(
-            transformation(extent={{-70,10},{-50,30}}), iconTransformation(
-              extent={{-42,74},{-22,94}})));
+      Connectors.PhysicalBus physical if inclH2O "Connector for phase change"
+        annotation (Placement(transformation(extent={{-37,3},{-17,23}}),
+            iconTransformation(extent={{-68,30},{-48,50}})));
 
     equation
       // Phase change
-      connect(PC.H2O, H2O.phasChange) annotation (Line(
-          points={{-60,20},{-5.578,5.555}},
-          color={208,104,0},
+      connect(physical.H2O, H2O.physical) annotation (Line(
+          points={{-27,13},{-7.178,3.555}},
+          color={38,196,52},
           smooth=Smooth.None));
 
       // H2O
@@ -2533,15 +3070,15 @@ package Subregions
       // Exchange
       connect(H2O.inert.translational, inert.translational) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
-          color={72,90,180},
+          color={11,43,197},
           smooth=Smooth.None));
       connect(H2O.inert.thermal, inert.thermal) annotation (Line(
           points={{7.155,-3.578},{26.67,-13.33}},
-          color={72,90,180},
+          color={47,107,251},
           smooth=Smooth.None));
-      connect(H2O.inertDalton, phaseBoundary.inertD) annotation (Line(
+      connect(H2O.inertDalton, phaseBoundary.inertDalton) annotation (Line(
           points={{3.578,-7.155},{3.8,-7},{3.8,-7.155},{3.578,-7.155}},
-          color={72,90,180},
+          color={11,43,197},
           smooth=Smooth.None));
       // Transport
       connect(H2O.faces[Axis.x, Side.n], xNegative.H2O) annotation (Line(
@@ -2582,7 +3119,6 @@ package Subregions
  <a href=\"modelica://FCSys.Subregions.Phases.BaseClasses.NullPhase\">NullPhase</a> model.</p></html>"),
 
         Icon(graphics));
-
     end Liquid;
 
     package BaseClasses "Base classes (not generally for direct use)"
@@ -2590,6 +3126,8 @@ package Subregions
       model NullPhase "Model for a phase with no species or reactions"
         import FCSys.BaseClasses.Utilities.index;
         // extends FCSys.BaseClasses.Icons.Names.Middle;
+
+        parameter Integer n_spec(start=0) "Number of species";
 
         // Geometric parameters
         parameter Q.NumberAbsolute k[Axis](
@@ -2659,6 +3197,15 @@ package Subregions
             enable=reduceTemp));
         // This is always enabled in the dialog since it's used as a guess value.
 
+        /*
+  Connectors.PhaseChangeBus physical
+    "Connector for phase change interactions" annotation (Placement(
+        transformation(extent={{-37,3},{-17,23}}), iconTransformation(extent={{-68,
+            30},{-48,50}})));
+  Connectors.ReactionBus reaction "Connector for reactions" annotation (
+      Placement(transformation(extent={{-23,17},{-3,37}}), iconTransformation(
+          extent={{-48,64},{-28,84}})));
+ */
         Connectors.InertAmagat inertAmagat(final n_trans=n_trans) if n_spec > 0
           annotation (Placement(transformation(extent={{3.33,-36.67},{23.33,-16.67}}),
               iconTransformation(extent={{70,-90},{90,-70}})));
@@ -2689,29 +3236,28 @@ package Subregions
 
         outer parameter Q.Length L[Axis] if n_spec > 0 "Length" annotation (
             HideResult=true,missingInnerMessage=
-              "This model should be used within a subregion model.");
+              "This model should be used within a subregion model.\n");
         outer parameter Q.Area A[Axis] if n_spec > 0 "Cross-sectional area"
           annotation (HideResult=true,missingInnerMessage=
-              "This model should be used within a subregion model.");
+              "This model should be used within a subregion model.\n");
         // Note:  These must be public in Dymola 7.4, so HideResult is set true
         // instead.
 
       protected
-        parameter Integer n_spec(start=0) "Number of species";
         final inner parameter Q.Length Lprime[Axis]=k .* A ./ L if n_spec > 0
           "Effective cross-sectional area per length";
         outer parameter Integer n_trans
           "Number of components of translational momentum" annotation (
             missingInnerMessage=
-              "This model should be used within a subregion model.");
+              "This model should be used within a subregion model.\n");
         outer parameter Integer cartAxes[:]
           "Cartesian-axis indices of the components of translational momentum"
           annotation (missingInnerMessage=
-              "This model should be used within a subregion model.");
+              "This model should be used within a subregion model.\n");
         outer parameter Boolean inclTrans[Axis]
           "true, if each component of translational momentum is included"
           annotation (missingInnerMessage=
-              "This model should be used within a subregion model.");
+              "This model should be used within a subregion model.\n");
 
         outer Conditions.Environment environment "Environmental conditions";
         PhaseBoundary phaseBoundary if n_spec > 0 "Phase boundary" annotation (
@@ -2734,7 +3280,7 @@ package Subregions
           thermal(T(
               stateSelect=StateSelect.prefer,
               final start=T_IC,
-              final fixed=initTemp))) if n_spec > 0 and (reduceVel or
+              final fixed=initTemp))) if n_spec > 1 and (reduceVel or
           reduceTemp)
           "Internal connector to directly couple velocities and/or temperatures"
           annotation (Placement(transformation(extent={{-10,-10},{10,10}},
@@ -2748,7 +3294,7 @@ package Subregions
         // Inert interactions
         connect(phaseBoundary.inertAmagat, inertAmagat) annotation (Line(
             points={{6.2,-12.2},{13.33,-26.67}},
-            color={72,90,180},
+            color={11,43,197},
             smooth=Smooth.None));
         annotation (
           defaultComponentPrefixes="replaceable",
@@ -2832,7 +3378,6 @@ package Subregions
                 extent={{-100,-20},{100,20}},
                 textString="%name",
                 lineColor={0,0,0})}));
-
       end NullPhase;
 
     end BaseClasses;
@@ -3079,7 +3624,10 @@ package Subregions
 
             redeclare parameter Q.Fluidity beta=Data.beta(),
             redeclare parameter Q.Fluidity zeta=Data.zeta(),
-            redeclare parameter Q.ResistivityThermal theta=Data.theta());
+            redeclare parameter Q.ResistivityThermal theta=Data.theta(),
+            invertEOS=false,
+            initMaterial=InitScalar.None);
+
           annotation (
             group="Material properties",
             defaultComponentPrefixes="replaceable",
@@ -3161,10 +3709,17 @@ package Subregions
         model Fixed "Fixed properties"
           extends Species(
             redeclare replaceable package Data = Characteristics.'H+'.Ionomer,
-            initMaterial=InitScalar.None,
             redeclare parameter Q.Fluidity beta=Data.beta(),
             redeclare parameter Q.Fluidity zeta=Data.zeta(),
-            redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.1661*U.W));
+            redeclare parameter Q.ResistivityThermal theta=U.m*U.K/(0.1661*U.W),
+
+            invertEOS=false,
+            initMaterial=InitScalar.None);
+
+          // consMaterial=Conservation.IC,
+          // initMaterial=InitScalar.Pressure,
+
+          // initMaterial=InitScalar.None,
 
           /*
     *Are the trivial Data modifications necessary?
@@ -3998,7 +4553,11 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         final zeta=0,
         final phi_IC=zeros(3),
         final I_IC,
-        invertEOS=false);
+        consMaterial=Conservation.IC,
+        initMaterial=InitScalar.Volume,
+        consTransX=Conservation.IC,
+        consTransY=Conservation.IC,
+        consTransZ=Conservation.IC);
       annotation (
         defaultComponentPrefixes="replaceable",
         defaultComponentName="species",
@@ -4019,7 +4578,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
 
     model SpeciesIncompressible
       "<html><a href=\"modelica://FCSys.Subregions.Species.Species\">Species</a> model for an incompressible fluid</html>"
-      extends Species(initMaterial=InitScalar.Volume);
+      extends Species(initMaterial=InitScalar.Volume,invertEOS=false);
       // Note:  The default, pressure, can't be used to initialize an
       // incompressible species.
       annotation (
@@ -4063,6 +4622,9 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       Q.Fluidity beta(nominal=10*U.cm*U.s/U.g) = Data.beta(T, v)
         "<html>Dynamic compressibility (&beta;)</html>"
         annotation (Dialog(group="Material properties"));
+      Q.CurrentAbsolute tauprime(nominal=1e-6*U.s) = 1e-6*U.s
+        "<html>Effective collision interval (&tau;')</html>"
+        annotation (Dialog(group="Material properties"));
       Q.Fluidity zeta(nominal=10*U.cm*U.s/U.g) = Data.zeta(T, v)
         "<html>Fluidity (&zeta;)</html>"
         annotation (Dialog(group="Material properties"));
@@ -4070,13 +4632,34 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         "<html>Thermal resistivity (&theta;)</html>"
         annotation (Dialog(group="Material properties"));
 
-      // Reactions
-      Q.CurrentAbsolute tauprime(each nominal=1e-6*U.s) = 1e-6*U.s
-        "<html>Exchange current (<i>tau;'</i><sub>0</sub>)</html>"
-        annotation (Dialog(group="Reactions and phase change"));
-
       // Assumptions
       // -----------
+      // Upstream discretization
+      parameter Boolean upstreamX=true "X" annotation (
+        Evaluate=true,
+        Dialog(
+          tab="Assumptions",
+          group="Axes with upstream discretization",
+          enable=inclTrans[1],
+          compact=true),
+        choices(__Dymola_checkBox=true));
+      parameter Boolean upstreamY=true "Y" annotation (
+        Evaluate=true,
+        Dialog(
+          tab="Assumptions",
+          group="Axes with upstream discretization",
+          enable=inclTrans[2],
+          compact=true),
+        choices(__Dymola_checkBox=true));
+      parameter Boolean upstreamZ=true "Z" annotation (
+        Evaluate=true,
+        Dialog(
+          tab="Assumptions",
+          group="Axes with upstream discretization",
+          enable=inclTrans[3],
+          compact=true),
+        choices(__Dymola_checkBox=true));
+      //
       // Dynamics
       parameter Conservation consMaterial=Conservation.Dynamic "Material"
         annotation (Dialog(
@@ -4111,32 +4694,6 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       Q.NumberAbsolute Nu_Q=3.66
         "<html>Thermal Nusselt number (<i>Nu</i><sub><i>Q</i></sub>)</html>"
         annotation (Dialog(tab="Assumptions",group="Flow conditions"));
-      //
-      // Upstream discretization
-      parameter Boolean upstreamX=true "X" annotation (
-        Evaluate=true,
-        Dialog(
-          tab="Assumptions",
-          group="Axes with upstream discretization",
-          enable=inclTrans[1],
-          compact=true),
-        choices(__Dymola_checkBox=true));
-      parameter Boolean upstreamY=true "Y" annotation (
-        Evaluate=true,
-        Dialog(
-          tab="Assumptions",
-          group="Axes with upstream discretization",
-          enable=inclTrans[2],
-          compact=true),
-        choices(__Dymola_checkBox=true));
-      parameter Boolean upstreamZ=true "Z" annotation (
-        Evaluate=true,
-        Dialog(
-          tab="Assumptions",
-          group="Axes with upstream discretization",
-          enable=inclTrans[3],
-          compact=true),
-        choices(__Dymola_checkBox=true));
 
       // Initialization parameters
       // -------------------------
@@ -4226,8 +4783,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         final start=p_IC,
         final fixed=false,
         stateSelect=StateSelect.never) "Pressure";
-      // StateSelect.never is necessary to avoid dynamic state selection
-      // in Dymola 7.4.
+      // StateSelect.never avoids dynamic state selection in Dymola 7.4.
       Q.PressureAbsolute p_faces[Axis, Side](each nominal=U.atm, each final
           start=p_IC) "Pressures at the faces";
       Q.PotentialAbsolute sT(
@@ -4252,8 +4808,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
         final start=h_IC,
         final fixed=false,
         stateSelect=StateSelect.never) "Specific enthalpy";
-      // StateSelect.never is necessary to avoid dynamic state selection
-      // in Dymola 7.4.
+      // StateSelect.never avoids dynamic state selection Dymola 7.4.
       Q.Current I[n_trans](
         each nominal=U.A,
         final start=I_IC[cartAxes],
@@ -4263,7 +4818,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       // ----------------------------------
       // Misc. properties and conditions
       /*
-  output Q.Potential g(stateSelect=StateSelect.never) = reaction.mu if
+  output Q.Potential g(stateSelect=StateSelect.never) = chemical.mu if
     environment.analysis "Electrochemical potential";
   */
       /* **
@@ -4343,7 +4898,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
      - environment.a[cartAxes]) if environment.analysis
     "Acceleration force relative to the frame of reference (constant mass)";
   output Q.Force f_exch_adv[n_trans](each stateSelect=StateSelect.never) =
-    reaction.mPhidot - Data.m*phi*reaction.Ndot if environment.analysis
+    chemical.mPhidot - Data.m*phi*chemical.Ndot if environment.analysis
     "Acceleration force due to advective exchange";
   output Q.Force f_exch_diff[n_trans](each stateSelect=StateSelect.never) =
     inert.translational.mPhidot + inertDalton.mPhidot if environment.analysis
@@ -4364,8 +4919,8 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
   output Q.Power Ndere(stateSelect=StateSelect.never) = (M*der(phi*phi)/2 + N*
     der(h) - V*der(p))/U.s if environment.analysis
     "Rate of energy storage (internal and kinetic) at constant mass";
-  output Q.Power Wdot_exch(stateSelect=StateSelect.never) = -(reaction.mphi*
-    reaction.mPhidot/(2*Data.m) + (Data.m*(reaction.hbar - phi*phi/2) - h)*reaction.Ndot)
+  output Q.Power Wdot_exch(stateSelect=StateSelect.never) = -(chemical.mphi*
+    chemical.mPhidot/(2*Data.m) + (Data.m*(chemical.hbar - phi*phi/2) - h)*chemical.Ndot)
     if environment.analysis
     "Relative rate of work (internal, flow, and kinetic) done by chemical exchange (advection)";
   output Q.Power Qdot_gen_exch(stateSelect=StateSelect.never) = phi*inert.translational.mPhidot
@@ -4389,24 +4944,24 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
   // they are included.
 */
 
-      Connectors.PhaseChange phaseChange(
-        final n_trans=n_trans,
-        final formula=Data.formula,
-        a(start=exp(g_IC/T_IC)),
-        final phi(start=phi_IC[cartAxes]) = phi,
-        final sT(start=h_IC - g_IC) = sT) "Connector for phase change"
-        annotation (Placement(transformation(extent={{-30,-10},{-10,10}}),
-            iconTransformation(extent={{-61.78,25.55},{-81.78,45.55}})));
-      Connectors.ReactionA reaction(
+      Connectors.ChemicalA chemical(
         final n_trans=n_trans,
         final formula=Data.formula,
         final m=Data.m,
         mu(start=g_IC),
-        final phi(start=phi_IC[cartAxes]) = phi,
-        final sT(start=h_IC - g_IC) = sT)
-        "Connector for electrochemical reactions" annotation (Placement(
-            transformation(extent={{-10,10},{10,30}}), iconTransformation(
-              extent={{-25.78,61.55},{-45.78,81.55}})));
+        phi(start=phi_IC[cartAxes]),
+        sT(start=h_IC - g_IC)) "Connector for electrochemical reactions"
+        annotation (Placement(transformation(extent={{-10,10},{10,30}}),
+            iconTransformation(extent={{-25.78,61.55},{-45.78,81.55}})));
+      Connectors.Physical physical(
+        final n_trans=n_trans,
+        final formula=Data.formula,
+        a(start=exp(g_IC/T_IC)),
+        phi(start=phi_IC[cartAxes]),
+        sT(start=h_IC - g_IC)) "Connector for phase change" annotation (
+          Placement(transformation(extent={{-30,-10},{-10,10}}),
+            iconTransformation(extent={{-61.78,25.55},{-81.78,45.55}})));
+
       Connectors.Inert inert(
         final n_trans=n_trans,
         translational(phi(final start=phi_IC[cartAxes], each final fixed=false)),
@@ -4439,33 +4994,35 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
             iconTransformation(extent={{-10,-10},{10,10}})));
       //    phi(start={{fill(phi_IC[cartWrap(axis + orientation - 1)], 2) for         orientation in Orientation} for axis in Axis}),
 
+      parameter Real Ndot_0=1;
+
       // Geometric parameters
 
     protected
       outer parameter Q.Length L[Axis] "Length" annotation (missingInnerMessage
-          ="This model should be used within a subregion model.");
+          ="This model should be used within a subregion model.\n");
       outer parameter Q.Area A[Axis] "Cross-sectional area" annotation (
           missingInnerMessage=
-            "This model should be used within a subregion model.");
+            "This model should be used within a subregion model.\n");
       outer parameter Q.Length Lprime[Axis]
         "Effective cross-sectional area per length" annotation (
           missingInnerMessage="This model should be used within a phase model.");
       outer parameter Boolean inclTrans[Axis]
         "true, if each component of translational momentum is included"
         annotation (missingInnerMessage=
-            "This model should be used within a subregion model.");
+            "This model should be used within a subregion model.\n");
       outer parameter Integer n_trans
         "Number of components of translational momentum" annotation (
           missingInnerMessage=
-            "This model should be used within a subregion model.");
+            "This model should be used within a subregion model.\n");
       outer parameter Integer transAxes[:]
         "Translational-momentum-component indices of the Cartesian axes"
         annotation (missingInnerMessage=
-            "This model should be used within a subregion model.");
+            "This model should be used within a subregion model.\n");
       outer parameter Integer cartAxes[:]
         "Cartesian-axis indices of the components of translational momentum"
         annotation (missingInnerMessage=
-            "This model should be used within a subregion model.");
+            "This model should be used within a subregion model.\n");
       // Note:  The size is n_trans, but it can't be specified here due to an error
       // in Dymola 7.4.
       final parameter Boolean upstream[Axis]={upstreamX,upstreamY,upstreamZ}
@@ -4617,6 +5174,12 @@ Choose a condition besides None.");
       end if;
 
     equation
+      // if cardinality(reaction) == 0 then
+      // In this case, these imperative variables don't matter.
+      // chemical.axis = 0;
+      // chemical.Ndot_0 = 1;
+      // end if;
+
       // Aliases (only to clarify and simplify other equations)
       p = inertDalton.p;
       V = inertDalton.V;
@@ -4639,14 +5202,17 @@ Choose a condition besides None.");
       sT = Data.s(T, p)*T;
 
       // Phase change
-      tauprime*phaseChange.Ndot = N*(phaseChange.a - exp((h - sT)/T));
+      tauprime*physical.Ndot = N*(physical.a - exp((h - sT)/T));
 
       // Electrochemical reaction
       if Data.z <> 0 then
-        Data.z*reaction.Ndot = reaction.Ndot_0*(exp(reaction.mu/T) - exp((h -
-          sT)/T)) "Charged species";
+        //  if Data.z == -1 then
+        //    Data.z*chemical.Ndot = chemical.Ndot_0*(exp(chemical.mu/T) - exp((h - sT)/T))
+        Data.z*chemical.Ndot = Ndot_0*(exp(chemical.mu/T) - 1)
+          "Charged species";
+        // Options: 1) BV entirely in H+ species, 2) separate charge species model
       else
-        reaction.mu = h - sT "Neutral species";
+        chemical.mu = h - sT "Neutral species";
         // This is just the result of the previous equation when Data.z=0,
         // but Dymola 7.4 can't derive it automatically.
       end if;
@@ -4655,6 +5221,11 @@ Choose a condition besides None.");
       mu*inertDalton.mPhidot = N*(inertDalton.phi - phi)
         "Translational momentum";
       nu*inertDalton.Qdot = N*(inertDalton.T - T) "Thermal energy";
+
+      physical.phi = phi;
+      chemical.phi = phi;
+      physical.sT = sT;
+      chemical.sT = sT;
 
       // Diffusive transport
       // (Advection is included directly in the conservation equations.)
@@ -4680,6 +5251,7 @@ Choose a condition besides None.");
             transAxes[cartWrap(axis + 2)]] else 0))*(if inclTrans[axis] and
             upstream[axis] then 1 + exp(-inSign(side)*I[transAxes[axis]]*zeta*
             Data.m/(2*Lprime[axis])) else 2) "2nd transverse";
+          // **Remap with zero torque according to dissertation.
 
           // Thermal energy
           theta*faces[axis, side].Qdot = Nu_Q*Lprime[axis]*(faces[axis, side].T
@@ -4726,7 +5298,7 @@ Choose a condition besides None.");
         end if;
       else
         (if consMaterial == Conservation.Dynamic then der(N)/U.s else 0) =
-          phaseChange.Ndot + reaction.Ndot + sum(faces.Ndot)
+          physical.Ndot + chemical.Ndot + sum(faces.Ndot)
           "Material conservation";
       end if;
 
@@ -4750,19 +5322,19 @@ Choose a condition besides None.");
           (if consTrans[cartAxes[axis]] == Conservation.Dynamic then der(M*phi[
             axis])/U.s else 0) + Delta(p_faces[cartAxes[axis], :])*A[cartAxes[
             axis]] + M*environment.a[cartAxes[axis]] + N*Data.z*environment.E[
-            cartAxes[axis]] = Data.m*((actualStream(phaseChange.phi) .*
-            phaseChange.Ndot)[axis] + (actualStream(reaction.phi) .* reaction.Ndot)
-            [axis]) + inert.translational.mPhidot[axis] + inertDalton.mPhidot[
-            axis] + sum(faces[cartWrap(cartAxes[axis] - orientation + 1), :].phi[
+            cartAxes[axis]] = Data.m*((actualStream(physical.phi) .* physical.Ndot)
+            [axis] + (actualStream(chemical.phi) .* chemical.Ndot)[axis]) +
+            inert.translational.mPhidot[axis] + inertDalton.mPhidot[axis] + sum(
+            faces[cartWrap(cartAxes[axis] - orientation + 1), :].phi[
             orientation]*faces[cartWrap(cartAxes[axis] - orientation + 1), :].Ndot
             *Data.m + Sigma(faces[cartWrap(cartAxes[axis] - orientation + 1), :].mPhidot[
             orientation]) for orientation in Orientation)
             "Conservation of translational momentum";
           // In Dymola 7.4 it isn't possible to individually index the components
           // of advective exchange, e.g.,
-          // (actualStream(phaseChange.phi) .* phaseChange.Ndot)[axis]
+          // (actualStream(physical.phi) .* physical.Ndot)[axis]
           // must be used instead of
-          // actualStream(phaseChange.phi[axis])*phaseChange.Ndot[axis].
+          // actualStream(physical.phi[axis])*physical.Ndot[axis].
         end if;
       end for;
 
@@ -4803,17 +5375,15 @@ Choose a condition besides None.");
         end if;
       else
         (if consEnergy == Conservation.Dynamic then (der(N*h) - V*der(p) + der(
-          M*phi*phi)/2)/U.s else 0) = reaction.mu*reaction.Ndot + sum(
-          actualStream(reaction.phi) .* actualStream(reaction.phi)*reaction.Ndot)
-          *Data.m/2 + actualStream(reaction.sT)*reaction.Ndot + inert.translational.phi
+          M*phi*phi)/2)/U.s else 0) = chemical.mu*chemical.Ndot + sum(
+          actualStream(chemical.phi) .* actualStream(chemical.phi)*chemical.Ndot)
+          *Data.m/2 + actualStream(chemical.sT)*chemical.Ndot + inert.translational.phi
           *inert.translational.mPhidot + inert.thermal.Qdot + inertDalton.phi*
           inertDalton.mPhidot + inertDalton.Qdot + sum(sum((Data.h(faces[axis,
           side].T, p_faces[axis, side]) + faces[axis, side].phi*faces[axis,
           side].phi*Data.m/2)*faces[axis, side].Ndot + faces[axis, side].phi*
           faces[axis, side].mPhidot for side in Side) for axis in Axis) + sum(
           faces.Qdot) "Energy conservation";
-        // Note:  The actualStream summations can't be vectorized in Dymola 7.4,
-        // e.g.,
       end if;
       annotation (
         defaultComponentPrefixes="replaceable",
@@ -4989,7 +5559,6 @@ Choose a condition besides None.");
               pattern=LinePattern.Dash,
               fillColor={225,225,225},
               fillPattern=FillPattern.Solid)}));
-
     end Species;
 
     package BaseClasses "Base classes (not generally for direct use)"
@@ -5049,7 +5618,7 @@ Choose a condition besides None.");
     outer parameter Integer n_trans
       "Number of components of translational momentum" annotation (
         missingInnerMessage=
-          "This model should be used within a subregion model.");
+          "This model should be used within a subregion model.\n");
 
   equation
     // Equal intensive properties
@@ -5132,166 +5701,19 @@ Choose a condition besides None.");
             extent={{-170,140},{170,180}},
             textString="%name",
             lineColor={0,0,0})}));
-
   end PhaseBoundary;
-
-  model Reaction "Electrochemical reaction"
-    import FCSys.BaseClasses.Utilities.Chemistry.charge;
-    import FCSys.BaseClasses.Utilities.Chemistry.stoich;
-    extends FCSys.BaseClasses.Icons.Names.Top2;
-
-    // General parameters
-    parameter Axis axis=Axis.x "Axis of the electric field";
-    // This is merely propagated to the charged species for their momentum
-    // balances.
-    Q.CurrentAbsolute Ndot_0(each nominal=1e-6*U.A) = 1e-6*U.A
-      "<html>Exchange current (<i>N&#775;</i><sub>0</sub>)</html>"
-      annotation (Dialog(group="Reactions and phase change"));
-    parameter Quantities.Capacitance C=U.F "Electrical capacitance";
-    parameter Q.Number alpha=0.5
-      "<html>Charge transfer coefficient (&alpha;)</html>";
-    parameter Integer n_neut(min=1) = 0 "Number of neutral species"
-      annotation (Dialog(connectorSizing=true));
-    // The default is zero for connectorSizing.
-    final parameter Integer n_spec=n_neut + 2 "Number of species";
-
-    // Initialization parameters
-    parameter InitElectrical init=InitElectrical.SS "Method of initialization"
-      annotation (Evaluate=true, Dialog(tab="Initialization"));
-    parameter Quantities.Amount Z_IC(start=0)
-      "<html>Initial charge (<i>Z</i><sub>IC</sub>)</html>"
-      annotation (Dialog(tab="Initialization"));
-    parameter Quantities.Potential w_IC(start=0)
-      "<html>Initial potential (<i>w</i><sub>IC</sub>)</html>"
-      annotation (Dialog(tab="Initialization"));
-    // Note:  These parameters are left enabled even if they aren't used to
-    // explicitly initialize the state, since they're used as guess values.
-
-    Quantities.Amount Z(
-      min=-Modelica.Constants.inf,
-      final start=Z_IC,
-      final fixed=false) "Charge";
-    Quantities.Potential w(final start=w_IC,final fixed=false)
-      "Electrical potential";
-    Quantities.Current Ndot "Reaction rate";
-    Quantities.MomentumTranslationalSpecific phi[n_trans]
-      "Conversion specific mass-velocity product";
-    Quantities.PotentialAbsolute sT
-      "Conversion specific entropy-temperature product";
-
-    Connectors.ReactionB positive(
-      final n_trans=n_trans,
-      final axis=axis,
-      final Ndot_0=Ndot_0)
-      "Connector for the charged species on the positive side"
-      annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-    Connectors.ReactionB chemical[n_neut](each final n_trans=n_trans,
-        each final axis=0) "Connectors for the neutral species"
-      annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
-    // The axis doesn't matter.
-    Connectors.ReactionB negative(
-      final n_trans=n_trans,
-      final axis=axis,
-      final Ndot_0=Ndot_0)
-      "Connector for the charged species on the negative side"
-      annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-
-  protected
-    outer parameter Integer n_trans
-      "Number of components of translational momentum" annotation (
-        missingInnerMessage=
-          "This model should be used within a subregion model.");
-    final Real n[n_spec]=stoich(cat(
-          1,
-          {positive.formula},
-          chemical.formula,
-          {negative.formula})) "Stoichiometric coefficients";
-    // This can't be a constant Integer in Dymola 7.4 since the formulas
-    // are propagated through the connectors.
-
-  initial equation
-    if init == InitElectrical.SS then
-      der(Z) = 0;
-    elseif init == InitElectrical.Charge then
-      Z = Z_IC;
-    elseif init == InitElectrical.Potential then
-      w = w_IC;
-    end if;
-
-  equation
-    // Capacitor
-    C*w = Z;
-
-    // Electrochemical potentials
-    positive.mu = alpha*(n[2:n_spec - 1]*chemical.mu + w);
-    negative.mu = (alpha - 1)*(n[2:n_spec - 1]*chemical.mu + w);
-
-    // Properties upon outflow
-    positive.phi = phi;
-    positive.sT = sT;
-    for i in 1:n_neut loop
-      chemical[i].phi = phi;
-      chemical[i].sT = sT;
-    end for;
-    negative.phi = phi;
-    negative.sT = sT;
-
-    // Conservation
-    der(Z) = charge(positive.formula)*(positive.Ndot + n[1]*Ndot)
-      "Charged species on positive side";
-    zeros(n_neut) = chemical.Ndot + n[2:n_spec - 1]*Ndot
-      "Neutral species (no storage)";
-    der(Z) = -charge(negative.formula)*(negative.Ndot + n[n_spec]*Ndot)
-      "Charged species on negative side";
-    zeros(n_trans) = positive.m*actualStream(positive.phi)*positive.Ndot + sum(
-      chemical[i].m*actualStream(chemical[i].phi)*chemical[i].Ndot for i in 1:
-      n_neut) + negative.m*actualStream(negative.phi)*negative.Ndot
-      "Translational momentum (no storage)";
-    0 = actualStream(positive.sT)*positive.Ndot + sum(actualStream(chemical[i].sT)
-      *chemical[i].Ndot for i in 1:n_neut) + actualStream(negative.sT)*negative.Ndot
-      "Energy (no storage)";
-    annotation (Documentation(info="<html>
-    <p>The charged species are stored but without their associated translational momentum
-    and thermal energy.  Those quantities are immediately
-    advected from the reactants to the products.</p>
-
-    <p>The stoichiometry is determined automatically from the chemical formulas
-    of the connected species.  No intermediate species are considered.  Each reaction must be
-    completely and uniquely defined by the connected species.
-    Otherwise an error message is given.</p>
-    </html>"), Icon(graphics={
-          Line(
-            points={{-90,0},{-20,0}},
-            color={208,104,0},
-            smooth=Smooth.None),
-          Line(
-            points={{-20,40},{-20,-40}},
-            color={208,104,0},
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{20,0},{90,0}},
-            color={208,104,0},
-            smooth=Smooth.None),
-          Line(
-            points={{20,40},{20,-40}},
-            color={208,104,0},
-            smooth=Smooth.None,
-            thickness=0.5)}));
-
-  end Reaction;
 
   model Volume "Model to establish a fixed total volume"
     // extends FCSys.BaseClasses.Icons.Names.Top7;
 
-    Connectors.InertAmagat inert(final n_trans=n_trans)
+    Connectors.InertAmagat inertAmagat(final n_trans=n_trans)
       "Connector for translational momentum and thermal energy, with additivity of volume"
       annotation (Placement(transformation(extent={{60,-80},{80,-60}}),
           iconTransformation(extent={{100,-120},{120,-100}})));
 
     outer parameter Q.Volume V "Volume" annotation (HideResult=true,
         missingInnerMessage=
-          "This model should be used within a subregion model.");
+          "This model should be used within a subregion model.\n");
     // Note:  These must be public in Dymola 7.4, so HideResult is set true
     // instead.
 
@@ -5299,15 +5721,15 @@ Choose a condition besides None.");
     outer parameter Integer n_trans
       "Number of components of translational momentum" annotation (
         missingInnerMessage=
-          "This model should be used within a subregion model.");
+          "This model should be used within a subregion model.\n");
 
   equation
     // Specified volume
-    V = inert.V;
+    V = inertAmagat.V;
 
     // Conservation (without storage)
-    zeros(n_trans) = inert.mPhidot "Translational momentum";
-    0 = inert.Qdot "Energy";
+    zeros(n_trans) = inertAmagat.mPhidot "Translational momentum";
+    0 = inertAmagat.Qdot "Energy";
     annotation (
       Documentation(info="<html><p>This model uses an <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector that imposes
     additivity of volume.  In order to convert to additivity of pressure, use
@@ -5337,8 +5759,207 @@ Choose a condition besides None.");
             lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics));
-
   end Volume;
+
+  model Reaction "Electrochemical reaction"
+    import FCSys.BaseClasses.Utilities.Chemistry.charge;
+    import FCSys.BaseClasses.Utilities.Chemistry.stoich;
+    extends FCSys.BaseClasses.Icons.Names.Top3;
+
+    parameter Q.Area A=100*U.cm^2 "Geometric area";
+    parameter Q.CurrentAreicAbsolute J_0=1e-5*U.A/U.cm^2
+      "<html>Exchange current density (<i>J</i><sub>0</sub>)</html>";
+    parameter Q.NumberAbsolute alpha(max=1) = 0.5
+      "<html>Charge transfer coefficient (&alpha;)</html>";
+    parameter Integer n_spec(min=3) = 0 "Number of species"
+      annotation (Dialog(connectorSizing=true));
+    parameter Boolean transMomCat=true
+      "Pass translational momentum through the catalyst" annotation (Dialog(
+          Evaluate=true, tab="Assumptions"), choices(__Dymola_checkBox=true));
+
+    // Auxiliary variables (for analysis)
+    output Q.Current Ndot(stateSelect=StateSelect.never) = reaction.reaction.Ndot
+      if environment.analysis "Reaction rate";
+    output Q.Potential mu=-reaction.reaction.mu if environment.analysis
+      "Chemical potential";
+    output Q.Potential w=(positive.mPhidot[1]/(reaction.z[1]*positive.rho) +
+        negative.mPhidot[1]/(reaction.z[2]*negative.rho))/A if environment.analysis
+      "Applied electrical potential";
+
+    Connectors.ChemicalB chemical[n_spec](each final n_trans=n_trans)
+      "Connectors for the reactants and products" annotation (Placement(
+          transformation(extent={{-10,50},{10,70}}), iconTransformation(extent=
+              {{-10,-10},{10,10}})));
+    Connectors.Face negative
+      "Outside of the minority region on the negative side"
+      annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+    Connectors.Face positive
+      "Outside of the minority region on the positive side"
+      annotation (Placement(transformation(extent={{90,-10},{110,10}})));
+    Connectors.Inert catalyst(final n_trans=n_trans)
+      "Interface with the catalyst" annotation (Placement(transformation(extent
+            ={{50,20},{70,40}}),iconTransformation(extent={{-10,-70},{10,-50}})));
+
+  protected
+    outer parameter Integer n_trans
+      "Number of components of translational momentum" annotation (
+        missingInnerMessage=
+          "This model should be used within a subregion model.\n");
+    outer Conditions.Environment environment;
+    BaseClasses.Interchange interchange[n_spec](n=stoich(chemical.formula),
+        each n_trans=n_trans) if n_spec > 0
+      "Submodel to resolve stoichiometry and conversion properties"
+      annotation (Placement(transformation(extent={{-10,34},{10,54}})));
+    BaseClasses.ButlerVolmer reaction(
+      final J_0=J_0,
+      final A=A,
+      final alpha=alpha,
+      final z=charge({chemical[n_spec].formula,chemical[1].formula}))
+      "Submodel for reaction rate and heat generation"
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+    Conditions.Deal translational(final n_trans=n_trans) if transMomCat
+      annotation (Placement(transformation(extent={{40,10},{20,30}})));
+    // These three submodels are necessary because Dymola 7.4 doesn't fully
+    // support arrays of stream connectors.
+
+  initial equation
+    assert(n_spec > 2,
+      "At least three species must be connected to the chemical connector.");
+    assert(charge(chemical[1].formula) <> 0, "The first species connected to the chemical connector must be the
+charge carrier that is also connected to the positive boundary.");
+    assert(charge(chemical[n_spec].formula) <> 0, "The last species connected to the chemical connector must be the
+charge carrier that is also connected to the negative boundary.");
+
+  equation
+    for i in 1:n_spec loop
+      connect(interchange[i].reaction, reaction.reaction) annotation (Line(
+          points={{6.10623e-16,40},{0,6.10623e-16},{6.10623e-16,6.10623e-16}},
+          color={255,195,38},
+          smooth=Smooth.None));
+    end for;
+
+    // Exchange among reactants and products (not shown on diagram)
+    connect(interchange[1:n_spec - 1].inert, interchange[2:n_spec].inert)
+      "Translational momentum and heat generation";
+    connect(interchange[1:n_spec - 1].thermalAdv, interchange[2:n_spec].thermalAdv)
+      "Advected thermal energy";
+    // end exchange
+
+    connect(chemical, interchange.species) annotation (Line(
+        points={{5.55112e-16,60},{6.10623e-16,60},{6.10623e-16,48}},
+        color={255,195,38},
+        smooth=Smooth.None));
+    connect(negative, reaction.negative) annotation (Line(
+        points={{-100,5.55112e-16},{-10,6.10623e-16}},
+        color={127,127,127},
+        smooth=Smooth.None));
+    connect(positive, reaction.positive) annotation (Line(
+        points={{100,5.55112e-16},{10,6.10623e-16}},
+        color={127,127,127},
+        smooth=Smooth.None));
+    connect(interchange[1].inert.translational, translational.transSingle)
+      annotation (Line(
+        points={{6,40},{6,20},{28,20}},
+        color={127,127,127},
+        smooth=Smooth.None));
+    connect(translational.trans, catalyst.translational) annotation (Line(
+        points={{32,20},{60,20},{60,30}},
+        color={127,127,127},
+        smooth=Smooth.None));
+    connect(interchange[1].inert.thermal, catalyst.thermal) annotation (Line(
+        points={{6,40},{6,30},{60,30}},
+        color={221,23,47},
+        smooth=Smooth.None));
+
+    annotation (
+      missingInnerMessage=
+          "This model should be used within a subregion model.\n",
+      Documentation(info="<html><p>The <code>negative</code> and <code>positive</code> connectors
+    represent the outer boundaries of the minority regions.
+    The first species connected to the <code>chemical</code> connector
+    must be the charged species that is also connected to the <code>positive</code> boundary.
+    The last species
+    connected to the <code>chemical</code> connector
+    must be the charged species that is also connected to the <code>negative</code> boundary.</p>
+
+    <p>The exchange current density (<i>J</i><sub>0</sub>) is the exchange current per unit geometric area (not per
+    unit of catalyst surface area).</p>
+    
+    <p>The generated heat is rejected through the <code>catalyst</code> connector.</p>
+
+    <p>If <code>transMomCat</code> is <code>true</code>, then the translational momentum of the 
+    reactants is passed to the catalyst through the <code>catalyst</code>
+    connector and the products are produced at the velocity of the catalyst (typically
+    zero).  If it is <code>false</code>, then translational momentum is passed
+    directly from the reactants to the products.  
+    </p></html>"),
+      Icon(graphics={
+          Ellipse(
+            extent={{-100,60},{100,-60}},
+            lineColor={127,127,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.Dash),
+          Line(
+            points={{20,26},{20,-26}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{20,0},{90,0}},
+            color={127,127,127},
+            smooth=Smooth.None),
+          Line(
+            points={{-20,26},{-20,-26}},
+            color={127,127,127},
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-90,0},{-20,0}},
+            color={127,127,127},
+            smooth=Smooth.None),
+          Text(
+            extent={{-30,-16},{30,-46}},
+            lineColor={191,191,191},
+            textString="%n_spec")}),
+      Diagram(graphics={Text(
+            extent={{16,18},{44,14}},
+            lineColor={240,0,0},
+            pattern=LinePattern.Dash,
+            textString="(if transMomCat)")}));
+    connect(reaction.catalyst, catalyst) annotation (Line(
+        points={{6.10623e-16,-4},{0,-4},{0,-20},{60,-20},{60,30}},
+        color={47,107,251},
+        smooth=Smooth.None));
+
+  end Reaction;
+
+  model HOR
+
+    Connectors.ChemicalBus reaction annotation (Placement(transformation(extent
+            ={{-10,30},{10,50}}), iconTransformation(extent={{-10,-10},{10,10}})));
+    Reaction hOR(n_spec=3)
+      annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+  equation
+    connect(hOR.chemical[1], reaction.'e-') annotation (Line(
+        points={{5.55112e-16,-0.666667},{-4.87687e-22,20},{0,20},{5.55112e-16,
+            40}},
+        color={239,142,1},
+        smooth=Smooth.None));
+    connect(hOR.chemical[2], reaction.H2) annotation (Line(
+        points={{5.55112e-16,5.55112e-16},{-4.87687e-22,20},{0,20},{5.55112e-16,
+            40}},
+        color={255,195,38},
+        smooth=Smooth.None));
+    connect(hOR.chemical[3], reaction.'H+') annotation (Line(
+        points={{5.55112e-16,0.666667},{0,40},{5.55112e-16,40}},
+        color={255,195,38},
+        smooth=Smooth.None));
+
+    annotation (Icon(graphics), Diagram(graphics));
+  end HOR;
+
 
   package BaseClasses "Base classes (not generally for direct use)"
 
@@ -5426,6 +6047,7 @@ Choose a condition besides None.");
                 60}})));
 
     protected
+      parameter Boolean hasSpecies "true, any species are included";
       final inner parameter Q.Area A[Axis]={L[cartWrap(axis + 1)]*L[cartWrap(
           axis + 2)] for axis in Axis} "Cross-sectional areas";
       final inner parameter Boolean inclTrans[Axis]={inclTransX,inclTransY,
@@ -5438,7 +6060,7 @@ Choose a condition besides None.");
       final inner parameter Integer transAxes[Axis]=enumerate(inclTrans)
         "Translational-momentum-component indices of the Cartesian axes";
 
-      Volume volume "Model to establish a fixed total volume"
+      Volume volume if hasSpecies "Model to establish a fixed total volume"
         annotation (Placement(transformation(extent={{-16,-16},{16,16}})));
       annotation (
         defaultComponentName="subregion",
@@ -5544,6 +6166,173 @@ Choose a condition besides None.");
               lineColor={0,0,0})}));
 
     end PartialSubregion;
+
+    model ButlerVolmer
+      "Rate of and heat generation due to electrochemical reaction"
+      extends FCSys.BaseClasses.Icons.Names.Top2;
+      Q.Number z[2]={-1,1} "Charge numbers" annotation (Dialog);
+      // These can't be constant integers in Dymola 7.4 since the stoichiometry
+      // is determined from the formulas which are propagated through the
+      // connectors.
+      parameter Q.Area A=100*U.cm^2 "Area";
+      parameter Q.CurrentAreicAbsolute J_0=1e-5*U.A/U.cm^2
+        "<html>Exchange current density (<i>J</i><sub>0</sub>)</html>";
+      parameter Q.NumberAbsolute alpha(max=1) = 0.5
+        "<html>Charge transfer coefficient (&alpha;)</html>";
+
+      Q.Number Pe(start=0) "Peclet number";
+      Connectors.ChemicalReaction reaction "Common connector for the reaction"
+        annotation (Placement(transformation(extent={{-10,-10},{10,10}}),
+            iconTransformation(extent={{-10,-10},{10,10}})));
+      Connectors.Face negative
+        "Outside of the minority region on the negative side" annotation (
+          Placement(transformation(extent={{-50,-10},{-30,10}}),
+            iconTransformation(extent={{-110,-10},{-90,10}})));
+      Connectors.Face positive
+        "Outside of the minority region on the positive side" annotation (
+          Placement(transformation(extent={{30,-10},{50,10}}),
+            iconTransformation(extent={{90,-10},{110,10}})));
+
+      Connectors.Inert catalyst
+        "Thermal and translational interface with the catalyst"
+        annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
+
+    protected
+      outer parameter Integer n_trans
+        "Number of components of translational momentum" annotation (
+          missingInnerMessage=
+            "This model should be used within a subregion model.\n");
+      outer parameter Integer cartAxes[:]
+        "Cartesian-axis indices of the components of translational momentum"
+        annotation (missingInnerMessage=
+            "This model should be used within a subregion model.\n");
+      // Note:  The size is n_trans, but it can't be specified here due to an error
+      // in Dymola 7.4.
+
+    equation
+      Pe*catalyst.thermal.T = reaction.mu + (negative.mPhidot[1]/(z[1]*negative.rho)
+         + positive.mPhidot[1]/(z[2]*positive.rho))/A;
+      reaction.Ndot = J_0*A*(exp(alpha*Pe) - exp((alpha - 1)*Pe))
+        "Reaction rate";
+
+      // Conservation (without storage)
+      zeros(n_trans) = catalyst.translational.mPhidot + negative.mPhidot[
+        cartAxes] + positive.mPhidot[cartAxes] "Translational momentum";
+      0 = reaction.mu*reaction.Ndot + catalyst.thermal.Qdot "Energy";
+
+      // No diffusion through the outside of the minority regions
+      negative.Ndot = 0;
+      positive.Ndot = 0;
+      negative.phi = {0,0,0};
+      positive.phi = {0,0,0};
+      negative.Qdot = 0;
+      positive.Qdot = 0;
+      annotation (
+        Documentation(info=
+              "<html><p>The temperature (<i>T</i>) may be time-varying.</p></html>"),
+
+        Icon(graphics={
+            Ellipse(
+              extent={{-100,40},{100,-40}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.Dash),
+            Line(
+              points={{20,26},{20,-26}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5),
+            Line(
+              points={{20,0},{90,0}},
+              color={127,127,127},
+              smooth=Smooth.None),
+            Line(
+              points={{-90,0},{-20,0}},
+              color={127,127,127},
+              smooth=Smooth.None),
+            Line(
+              points={{-20,26},{-20,-26}},
+              color={127,127,127},
+              smooth=Smooth.None,
+              thickness=0.5)}),
+        Diagram(graphics));
+
+    end ButlerVolmer;
+
+    model Interchange
+      "Model to impose stoichiometry and conversion properties on a species in a reaction"
+      // extends FCSys.BaseClasses.Icons.Names.Middle;
+
+      parameter Integer n_trans(
+        final min=0,
+        final max=3) = 1
+        "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
+        annotation (HideResult=true);
+
+      Q.Number n=1 "Stoichiometric coefficient" annotation (Dialog);
+      // This can't be a constant integer in Dymola 7.4 since the stoichiometry
+      // is determined from the formulas which are propagated through the
+      // connectors.
+
+      // Auxiliary variables (for analysis)
+      output Q.Velocity phi_actualStream[n_trans](each stateSelect=StateSelect.never)
+         = actualStream(species.phi) if environment.analysis
+        "Velocity of the actual stream";
+      output Q.PotentialAbsolute sT_actualStream(stateSelect=StateSelect.never)
+         = actualStream(species.sT) if environment.analysis
+        "Specific entropy-temperature product of the actual stream";
+
+      Connectors.ChemicalReaction reaction "Reaction-side connector"
+        annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
+            iconTransformation(extent={{-10,-50},{10,-30}})));
+      Connectors.ChemicalB species(final n_trans=n_trans)
+        "Species-side connector" annotation (Placement(transformation(extent={{
+                -10,30},{10,50}}), iconTransformation(extent={{-10,30},{10,50}})));
+      Connectors.Inert2 inert(final n_trans=n_trans)
+        annotation (Placement(transformation(extent={{50,-50},{70,-30}})));
+      Connectors.ThermalAdvection thermalAdv
+        "Connector for advection of thermal energy" annotation (Placement(
+            transformation(extent={{-70,-50},{-50,-30}}), iconTransformation(
+              extent={{-70,-50},{-50,-30}})));
+
+      //  outer parameter Integer n_trans
+      //    "Number of components of translational momentum" annotation (
+      //      missingInnerMessage="This model should be used within a reaction model.");
+      // This doesn't work in Dymola 7.4.
+    protected
+      outer Conditions.Environment environment;
+
+    equation
+      // Intensive properties
+      reaction.mu = n*species.mu;
+      species.phi = inert.translational.phi;
+      species.sT = thermalAdv.sT;
+
+      // Conservation (without storage)
+      0 = species.Ndot + n*reaction.Ndot "Material";
+      zeros(n_trans) = species.m*actualStream(species.phi)*species.Ndot + inert.translational.mPhidot
+        "Translational momentum";
+      0 = actualStream(species.sT)*species.Ndot + thermalAdv.Qdot
+        "Advected thermal energy";
+      0 = -inert.translational.mPhidot*actualStream(species.phi)/2 + inert.thermal.Qdot
+        "Component of heat generation";
+      annotation (
+        Documentation(info="<html><p>This model should be instantiated once for each species in 
+    a chemical reaction.  Thermal energy is advected among the species through their
+    <code>thermalAdv</code> connectors.  The total heat flow rate out of the <code>inert</code> 
+    connectors is the rate of heat generation.</p></html>"),
+        Icon(graphics={Rectangle(
+              extent={{-100,40},{100,-40}},
+              lineColor={127,127,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.Dash), Text(
+              extent={{-98,-20},{98,20}},
+              textString="%name",
+              lineColor={0,0,0})}),
+        Diagram(graphics));
+    end Interchange;
 
     type InitElectrical = enumeration(
         None "No initialization",

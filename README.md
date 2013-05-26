@@ -1,6 +1,6 @@
 FCSys
 -----
-**Warning!**  This package is still in development.  Changes at this point may
+**Warning!**  This package is still in development.  Changes may be made that
 affect the public interfaces of the classes.  The package is not yet under full
 version control and conversion scripts are not being provided for these
 changes.  Some models still have issues or are incomplete.  These models should
@@ -21,10 +21,8 @@ documentation and can be safely removed (but may be helpful for debugging).
 
 ### License terms
 
-FCSys is published under the liberal terms of the Modelica License 2 (see
-the User's Guide, the [ModelicaLicense2.html]
-(resources/documentation/ModelicaLicense2.html) file, or [online]
-(http://kdavies4.github.com/FCSys/FCSys_UsersGuide.html#FCSys.UsersGuide.ModelicaLicense2).
-Although it is not required, you are invited and encouraged to share any
-modifications you make (preferably in a Github fork from
-https://github.com/kdavies4/FCSys).
+FCSys is published under the Modelica License 2 (see the User's Guide, the
+[ModelicaLicense2.html](resources/documentation/ModelicaLicense2.html) file, or
+[online](http://kdavies4.github.com/FCSys/FCSys_UsersGuide.html#FCSys.UsersGuide.ModelicaLicense2).
+Please share any modifications you make (preferably on a Github fork from
+https://github.com/kdavies4/FCSys) so that others may benefit from your work.

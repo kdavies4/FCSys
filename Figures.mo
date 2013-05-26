@@ -81,7 +81,6 @@ package Figures "Graphical layouts for documentation"
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
                   ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
-
         end Test_vi;
 
         model Test_iv
@@ -115,7 +114,6 @@ package Figures "Graphical layouts for documentation"
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
                   ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
-
         end Test_iv;
 
         model Declarative
@@ -170,7 +168,6 @@ package Figures "Graphical layouts for documentation"
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
                   ={{-80,-60},{80,60}}), graphics));
-
         end Declarative;
 
       end Examples;
@@ -273,7 +270,6 @@ package Figures "Graphical layouts for documentation"
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-80,-60},{80,60}}), graphics));
-
       end Declarative_vi;
 
       model Declarative_iv
@@ -373,7 +369,6 @@ package Figures "Graphical layouts for documentation"
         annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                   -100},{100,100}}), graphics), Diagram(coordinateSystem(
                 preserveAspectRatio=true, extent={{-80,-60},{80,60}}), graphics));
-
       end Declarative_iv;
 
       model Imperative_vi "Imperative circuit with voltage in, current out"
@@ -403,7 +398,7 @@ package Figures "Graphical layouts for documentation"
       equation
         connect(diff1.y, res1.u) annotation (Line(
             points={{-39,60},{-22,60}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(sum.y, i) annotation (Line(
             points={{71,30},{90,30}},
@@ -412,7 +407,7 @@ package Figures "Graphical layouts for documentation"
         connect(diff2.y, ind.u) annotation (Line(
             points={{-39,6.10623e-16},{-34,0},{-30,1.27676e-15},{-30,
                 6.66134e-16},{-22,6.66134e-16}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(cap.u, res1.y) annotation (Line(
             points={{18,60},{1,60}},
@@ -426,11 +421,11 @@ package Figures "Graphical layouts for documentation"
 
         connect(diff1.u2, v) annotation (Line(
             points={{-62,54},{-70,54},{-70,30},{-90,30}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(diff2.u1, v) annotation (Line(
             points={{-62,6},{-70,6},{-70,30},{-90,30}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(ind.y, sum.u2) annotation (Line(
             points={{1,6.10623e-16},{10,6.10623e-16},{10,24},{48,24}},
@@ -442,17 +437,17 @@ package Figures "Graphical layouts for documentation"
             smooth=Smooth.None));
         connect(cap.y, diff1.u1) annotation (Line(
             points={{41,60},{50,60},{50,80},{-70,80},{-70,66},{-62,66}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(res2.y, diff2.u2) annotation (Line(
             points={{41,6.10623e-16},{50,6.10623e-16},{50,-20},{-70,-20},{-70,-6},
                 {-62,-6}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-100,-100},{100,100}}), graphics={Line(
                       points={{62,76},{70,76}},
-                      color={255,128,0},
+                      color={255,195,38},
                       smooth=Smooth.None),Rectangle(
                       extent={{-16,8},{16,-8}},
                       lineColor={0,0,0},
@@ -467,7 +462,6 @@ package Figures "Graphical layouts for documentation"
                       points={{62,68},{70,68}},
                       color={0,200,0},
                       smooth=Smooth.None)}));
-
       end Imperative_vi;
 
       model Imperative_iv "Imperative circuit with current in, voltage out"
@@ -503,7 +497,7 @@ package Figures "Graphical layouts for documentation"
             smooth=Smooth.None));
         connect(diff2.y, ind.u) annotation (Line(
             points={{29,-30},{12,-30}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(i, diff1.u1) annotation (Line(
             points={{-90,30},{-70,30},{-70,36},{-52,36}},
@@ -515,11 +509,11 @@ package Figures "Graphical layouts for documentation"
             smooth=Smooth.None));
         connect(cap.u, diff1.y) annotation (Line(
             points={{-12,50},{-20,50},{-20,30},{-29,30}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(diff1.y, res1.u) annotation (Line(
             points={{-29,30},{-20,30},{-20,10},{-12,10}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(cap.y, sum.u1) annotation (Line(
             points={{11,50},{20,50},{20,36},{28,36}},
@@ -531,20 +525,20 @@ package Figures "Graphical layouts for documentation"
             smooth=Smooth.None));
         connect(diff2.u2, res2.y) annotation (Line(
             points={{52,-36},{60,-36},{60,-70},{11,-70}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(sum.y, diff2.u1) annotation (Line(
             points={{51,30},{60,30},{60,-24},{52,-24}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(sum.y, v) annotation (Line(
             points={{51,30},{90,30}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-100,-100},{100,100}}), graphics={Line(
                       points={{60,58},{68,58}},
-                      color={255,128,0},
+                      color={255,195,38},
                       smooth=Smooth.None),Rectangle(
                       extent={{-16,8},{16,-8}},
                       lineColor={0,0,0},
@@ -559,7 +553,6 @@ package Figures "Graphical layouts for documentation"
                       points={{60,50},{68,50}},
                       color={0,200,0},
                       smooth=Smooth.None)}));
-
       end Imperative_iv;
 
       model ImperativeTF_vi
@@ -579,7 +572,7 @@ package Figures "Graphical layouts for documentation"
       equation
         connect(v, transferFunction.u) annotation (Line(
             points={{-90,30},{-12,30}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(transferFunction.y, i) annotation (Line(
             points={{11,30},{90,30}},
@@ -587,7 +580,6 @@ package Figures "Graphical layouts for documentation"
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-100,-100},{100,100}}), graphics));
-
       end ImperativeTF_vi;
 
       model ImperativeTF_iv
@@ -609,7 +601,7 @@ package Figures "Graphical layouts for documentation"
       equation
         connect(transferFunction.y, v) annotation (Line(
             points={{11,30},{90,30}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(transferFunction.u, i) annotation (Line(
             points={{-12,30},{-90,30}},
@@ -617,7 +609,6 @@ package Figures "Graphical layouts for documentation"
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-100,-100},{100,100}}), graphics));
-
       end ImperativeTF_iv;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -676,7 +667,6 @@ package Figures "Graphical layouts for documentation"
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent
                   ={{-100,-100},{100,100}}), graphics), experiment(StopTime=2));
-
         end Test;
 
       end Examples;
@@ -750,7 +740,6 @@ package Figures "Graphical layouts for documentation"
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-100,-60},{100,60}}), graphics));
-
       end DeclarativeA;
 
       model DeclarativeB "First circuit in declarative formalism"
@@ -821,7 +810,6 @@ package Figures "Graphical layouts for documentation"
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-100,-60},{100,60}}), graphics));
-
       end DeclarativeB;
 
       model DeclarativeAB
@@ -917,7 +905,6 @@ package Figures "Graphical layouts for documentation"
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-100,-60},{100,60}}), graphics));
-
       end DeclarativeAB;
 
       model ImperativeA "First circuit in imperative formalism"
@@ -940,12 +927,12 @@ package Figures "Graphical layouts for documentation"
         connect(KVL1.y, vOut) annotation (Line(
             points={{-9,6.10623e-16},{-10,6.10623e-16},{-10,5.55112e-16},{10,
                 5.55112e-16}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
 
         connect(ind.y, KVL1.u1) annotation (Line(
             points={{-59,6.10623e-16},{-50,6.10623e-16},{-50,6},{-32,6}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(res1.y, ind.u) annotation (Line(
             points={{-99,6.10623e-16},{-94,6.10623e-16},{-94,0},{-90,0},{-90,
@@ -955,13 +942,13 @@ package Figures "Graphical layouts for documentation"
         connect(res1.u, vIn) annotation (Line(
             points={{-122,6.66134e-16},{-134,6.66134e-16},{-134,5.55112e-16},{-150,
                 5.55112e-16}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
 
         connect(KVL1.u2, vIn) annotation (Line(
             points={{-32,-6},{-40,-6},{-40,-20},{-130,-20},{-130,5.55112e-16},{
                 -150,5.55112e-16}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-160,-40},{160,40}}), graphics={Rectangle(
@@ -972,7 +959,7 @@ package Figures "Graphical layouts for documentation"
                       fillPattern=FillPattern.Solid,
                       fillColor={255,255,255}),Line(
                       points={{-16,30},{-10,30}},
-                      color={255,128,0},
+                      color={255,195,38},
                       smooth=Smooth.None),Text(
                       extent={{-10,32},{10,28}},
                       lineColor={0,0,0},
@@ -985,7 +972,6 @@ package Figures "Graphical layouts for documentation"
                       smooth=Smooth.None)}), Icon(coordinateSystem(
                 preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
               graphics));
-
       end ImperativeA;
 
       model ImperativeB "Second circuit in imperative formalism"
@@ -1012,7 +998,7 @@ package Figures "Graphical layouts for documentation"
         connect(res3.y, vOut) annotation (Line(
             points={{121,6.10623e-16},{136,6.10623e-16},{136,5.55112e-16},{150,
                 5.55112e-16}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
 
         connect(res2.y, res3.u) annotation (Line(
@@ -1024,17 +1010,17 @@ package Figures "Graphical layouts for documentation"
         connect(KVL2.y, res2.u) annotation (Line(
             points={{41,6.10623e-16},{46,0},{50,1.27676e-15},{50,6.66134e-16},{
                 58,6.66134e-16}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
 
         connect(KVL2.u1, vIn) annotation (Line(
             points={{18,6},{0,6},{0,5.55112e-16},{-20,5.55112e-16}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(KVL2.u2, res3.y) annotation (Line(
             points={{18,-6},{10,-6},{10,-20},{130,-20},{130,6.10623e-16},{121,
                 6.10623e-16}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-160,-40},{160,40}}), graphics={Rectangle(
@@ -1045,7 +1031,7 @@ package Figures "Graphical layouts for documentation"
                       fillPattern=FillPattern.Solid,
                       fillColor={255,255,255}),Line(
                       points={{124,30},{130,30}},
-                      color={255,128,0},
+                      color={255,195,38},
                       smooth=Smooth.None),Text(
                       extent={{130,32},{150,28}},
                       lineColor={0,0,0},
@@ -1058,7 +1044,6 @@ package Figures "Graphical layouts for documentation"
                       smooth=Smooth.None)}), Icon(coordinateSystem(
                 preserveAspectRatio=true, extent={{-100,-100},{100,100}}),
               graphics));
-
       end ImperativeB;
 
       model ImperativeAB
@@ -1089,15 +1074,15 @@ package Figures "Graphical layouts for documentation"
       equation
         connect(res3.y, vOut) annotation (Line(
             points={{61,-40},{70,-40},{70,40},{90,40}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(KVL1.u1, vIn) annotation (Line(
             points={{-62,46},{-80,46},{-80,40},{-100,40}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(cap.y, KVL1.u2) annotation (Line(
             points={{-61,6.10623e-16},{-70,6.10623e-16},{-70,34},{-62,34}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(KCL.u1, res1.y) annotation (Line(
             points={{2,6},{10,6},{10,40},{1,40}},
@@ -1110,11 +1095,11 @@ package Figures "Graphical layouts for documentation"
             smooth=Smooth.None));
         connect(KVL1.y, res1.u) annotation (Line(
             points={{-39,40},{-22,40}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(KVL2.y, res2.u) annotation (Line(
             points={{-39,-40},{-22,-40}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(res2.y, res3.u) annotation (Line(
             points={{1,-40},{38,-40}},
@@ -1126,12 +1111,12 @@ package Figures "Graphical layouts for documentation"
             smooth=Smooth.None));
         connect(KVL2.u1, cap.y) annotation (Line(
             points={{-62,-34},{-70,-34},{-70,6.10623e-16},{-61,6.10623e-16}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
 
         connect(KVL2.u2, res3.y) annotation (Line(
             points={{-62,-46},{-70,-46},{-70,-60},{70,-60},{70,-40},{61,-40}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-120,-80},{120,80}}), graphics={Rectangle(
@@ -1142,7 +1127,7 @@ package Figures "Graphical layouts for documentation"
                       fillPattern=FillPattern.Solid,
                       fillColor={255,255,255}),Line(
                       points={{84,-64},{90,-64}},
-                      color={255,128,0},
+                      color={255,195,38},
                       smooth=Smooth.None),Text(
                       extent={{90,-62},{110,-66}},
                       lineColor={0,0,0},
@@ -1153,7 +1138,6 @@ package Figures "Graphical layouts for documentation"
                       points={{84,-70},{90,-70}},
                       color={0,200,0},
                       smooth=Smooth.None)}));
-
       end ImperativeAB;
 
       model ImperativeABIncorrect
@@ -1186,7 +1170,7 @@ package Figures "Graphical layouts for documentation"
       equation
         connect(ind.y, KVL1.u1) annotation (Line(
             points={{-59,6.10623e-16},{-50,6.10623e-16},{-50,6},{-32,6}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(res1.y, ind.u) annotation (Line(
             points={{-99,6.10623e-16},{-94,0},{-90,1.27676e-15},{-90,
@@ -1196,12 +1180,12 @@ package Figures "Graphical layouts for documentation"
         connect(vIn, res1.u) annotation (Line(
             points={{-150,5.55112e-16},{-144,0},{-136,1.22125e-15},{-136,
                 6.66134e-16},{-122,6.66134e-16}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(vIn, KVL1.u2) annotation (Line(
             points={{-150,5.55112e-16},{-130,5.55112e-16},{-130,-20},{-40,-20},
                 {-40,-6},{-32,-6}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(res2.y, res3.u) annotation (Line(
             points={{81,6.10623e-16},{86,0},{90,1.27676e-15},{90,6.66134e-16},{
@@ -1218,17 +1202,17 @@ package Figures "Graphical layouts for documentation"
         connect(KVL2.u2, res3.y) annotation (Line(
             points={{18,-6},{10,-6},{10,-20},{130,-20},{130,6.10623e-16},{121,
                 6.10623e-16}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
 
         connect(KVL1.y, KVL2.u1) annotation (Line(
             points={{-9,6.10623e-16},{0,6.10623e-16},{0,6},{18,6}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(res3.y, vOut) annotation (Line(
             points={{121,6.10623e-16},{132.5,6.10623e-16},{132.5,5.55112e-16},{
                 150,5.55112e-16}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-160,-40},{160,40}}), graphics={Rectangle(
@@ -1242,7 +1226,7 @@ package Figures "Graphical layouts for documentation"
                       lineColor={0,0,0},
                       textString="Voltage"),Line(
                       points={{124,30},{130,30}},
-                      color={255,128,0},
+                      color={255,195,38},
                       smooth=Smooth.None),Text(
                       extent={{130,26},{150,22}},
                       lineColor={0,0,0},
@@ -1250,7 +1234,6 @@ package Figures "Graphical layouts for documentation"
                       points={{124,24},{130,24}},
                       color={0,200,0},
                       smooth=Smooth.None)}));
-
       end ImperativeABIncorrect;
 
       model ImperativeABTF
@@ -1270,15 +1253,14 @@ package Figures "Graphical layouts for documentation"
       equation
         connect(transferFunction.y, vOut) annotation (Line(
             points={{1,40},{90,40}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         connect(transferFunction.u, vIn) annotation (Line(
             points={{-22,40},{-100,40}},
-            color={255,128,0},
+            color={255,195,38},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={
                   {-120,-80},{120,80}}), graphics));
-
       end ImperativeABTF;
 
       package BaseClasses "Base classes (not generally for direct use)"
@@ -1500,7 +1482,6 @@ package Figures "Graphical layouts for documentation"
         smooth=Smooth.None,
         thickness=0.5));
     annotation (Diagram(graphics));
-
   end Matrix3D;
 
   model SubregionIcon
@@ -1560,7 +1541,7 @@ package Figures "Graphical layouts for documentation"
       annotation (Placement(transformation(extent={{-22,-16},{-2,4}})));
     Connectors.InertDalton Dalton
       annotation (Placement(transformation(extent={{2,-16},{22,4}})));
-    Connectors.ReactionA Chemical
+    Connectors.ChemicalA Chemical
       annotation (Placement(transformation(extent={{50,-16},{70,4}})));
     annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
               -60},{100,60}}), graphics={Line(
@@ -1678,13 +1659,13 @@ package Figures "Graphical layouts for documentation"
               lineColor={0,0,0},
               textString="Inert Internal"),Ellipse(
               extent={{33,-3},{39,-9}},
-              lineColor={72,90,180},
-              fillColor={102,128,255},
+              lineColor={11,43,197},
+              fillColor={47,107,251},
               fillPattern=FillPattern.Solid),Ellipse(
               extent={{34,-4},{38,-8}},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
-              lineColor={72,90,180}),Text(
+              lineColor={11,43,197}),Text(
               extent={{-20,6},{-4,2}},
               lineColor={0,0,0},
               textString="Inert"),Text(

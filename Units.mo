@@ -637,7 +637,6 @@ used by this function are not defined in the Modelica language (as of version 3.
 recognized by Dymola.
 For more information, see the documentation in
 <a href=\"modelica://FCSys.Units\">FCSys.Units</a>.</p></html>"));
-
   end setup;
 
   package Examples "Examples"

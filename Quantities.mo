@@ -124,6 +124,8 @@ package Quantities "Quantities to represent physical properties"
     "Absolute current";
   type CurrentAreic = Modelica.Icons.TypeReal (final unit="N/(l2.T)")
     "Areic current";
+  type CurrentAreicAbsolute = Modelica.Icons.TypeReal (final unit="N/(l2.T)",
+        min=0) "Absolute areic current";
   type CurrentRate = Modelica.Icons.TypeReal (final unit="N/T2")
     "Rate of current";
   type Density = Modelica.Icons.TypeReal (final unit="N/l3", min=0);

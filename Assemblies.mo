@@ -50,13 +50,13 @@ package Assemblies "Combinations of regions (e.g., cells)"
 
         connect(anSource.face, cell.anFPNegY) annotation (Line(
             points={{-20,-26},{-20,-20.5},{-4,-20.5},{-4,-10}},
-            color={240,0,0},
+            color={253,52,56},
             thickness=0.5,
             smooth=Smooth.None));
 
         connect(cell.anFPPosY, anSink.face) annotation (Line(
             points={{-4,10},{-4,20},{-20,20},{-20,26}},
-            color={240,0,0},
+            color={253,52,56},
             thickness=0.5,
             smooth=Smooth.None));
         connect(caSink.face, cell.caFPPosY) annotation (Line(
@@ -75,7 +75,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
                 "resources/scripts/Dymola/Assemblies.Cells.Examples.CellProfile.mos"),
 
           experiment(StopTime=600, Tolerance=1e-08));
-
       end CellProfile;
 
       model Polarization "Run a cell polarization"
@@ -121,7 +120,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
             smooth=Smooth.None));
         annotation (experiment(StopTime=600, Tolerance=1e-08), Commands(file=
                 "resources/scripts/Dymola/Assemblies.Examples.CellPolarizationstoich.mos"));
-
       end CellProfileIO;
 
       model CellModelica
@@ -178,7 +176,6 @@ package Assemblies "Combinations of regions (e.g., cells)"
             color={0,0,255},
             smooth=Smooth.None));
         annotation (experiment(StopTime=1000));
-
       end CellModelica;
 
       function plot "\"**\""
@@ -323,7 +320,7 @@ package Assemblies "Combinations of regions (e.g., cells)"
         "Anode catalyst layer" annotation (Dialog(group="Layers"), Placement(
             transformation(extent={{-30,-10},{-10,10}})));
 
-      replaceable FCSys.Regions.PEMs.PEM pEM(final L_y=L_y, final L_z=L_z)
+      replaceable FCSys.Regions.PEMs.PEM PEM(final L_y=L_y, final L_z=L_z)
         "Proton exchange membrane" annotation (Dialog(group="Layers"),
           Placement(transformation(extent={{-10,-10},{10,10}})));
 
@@ -355,12 +352,12 @@ package Assemblies "Combinations of regions (e.g., cells)"
           color={240,0,0},
           smooth=Smooth.None,
           thickness=0.5));
-      connect(anCL.xPositive, pEM.xNegative) annotation (Line(
+      connect(anCL.xPositive, PEM.xNegative) annotation (Line(
           points={{-10,6.10623e-16},{-10,6.10623e-16}},
           color={240,0,0},
           smooth=Smooth.None,
           thickness=0.5));
-      connect(pEM.xPositive, caCL.xNegative) annotation (Line(
+      connect(PEM.xPositive, caCL.xNegative) annotation (Line(
           points={{10,6.10623e-16},{16,-3.36456e-22},{10,6.10623e-16}},
           color={0,0,240},
           smooth=Smooth.None,
@@ -452,7 +449,6 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                   visible=inclX,
                   thickness=0.5)}),
         experiment(StopTime=120, Tolerance=1e-06));
-
     end Cell;
 
     model CalibratedCell
@@ -1041,7 +1037,7 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
         Dialog(group="Layers"),
         Placement(transformation(extent={{-30,-10},{-10,10}})));
 
-      replaceable FCSys.Regions.PEMs.PEM pEM(final L_y=L_y,final L_z=L_z) "PEM"
+      replaceable FCSys.Regions.PEMs.PEM PEM(final L_y=L_y,final L_z=L_z) "PEM"
         annotation (
         __Dymola_choicesFromPackage=true,
         Dialog(group="Layers"),
@@ -1069,12 +1065,12 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
           color={240,0,0},
           smooth=Smooth.None,
           thickness=0.5));
-      connect(anCGDL.xPositive, pEM.xNegative) annotation (Line(
+      connect(anCGDL.xPositive, PEM.xNegative) annotation (Line(
           points={{-10,6.10623e-16},{-10,6.10623e-16}},
           color={240,0,0},
           smooth=Smooth.None,
           thickness=0.5));
-      connect(pEM.xPositive, caCGDL.xNegative) annotation (Line(
+      connect(PEM.xPositive, caCGDL.xNegative) annotation (Line(
           points={{10,6.10623e-16},{10,6.10623e-16},{10,6.10623e-16},{10,
               6.10623e-16}},
           color={0,0,240},
@@ -1133,12 +1129,12 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
             extent={{-100,-100},{100,100}},
             initialScale=0.1), graphics={Line(
                   points={{-40,100},{-40,60}},
-                  color={255,128,0},
+                  color={240,0,0},
                   visible=inclY,
                   smooth=Smooth.None,
                   thickness=0.5),Line(
                   points={{-8,-1},{44,-1}},
-                  color={0,128,255},
+                  color={0,0,240},
                   visible=inclX,
                   thickness=0.5,
                   origin={39,56},
@@ -1148,13 +1144,13 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                   visible=inclX,
                   thickness=0.5),Line(
                   points={{-8,-1},{28,-1}},
-                  color={0,128,255},
+                  color={0,0,240},
                   visible=inclX,
                   thickness=0.5,
                   origin={39,-92},
                   rotation=90),Line(
                   points={{-40,-58},{-40,-100}},
-                  color={255,128,0},
+                  color={240,0,0},
                   visible=inclY,
                   smooth=Smooth.None,
                   thickness=0.5),Line(
@@ -1162,7 +1158,6 @@ of a PEMFC is given in the top-level documentation of <a href=\"modelica://FCSys
                   color={127,127,127},
                   visible=inclX,
                   thickness=0.5)}));
-
     end IntegratedCell;
 
     model CellSSIC

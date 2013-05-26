@@ -1137,16 +1137,16 @@ margin-right: auto;\" class=noBorder>
         fillPattern=FillPattern.Solid),
       Rectangle(
         extent={{-5.21774,-5.2196},{-33.502,-33.5042}},
-        lineColor={170,0,0},
+        lineColor={196,11,40},
         fillPattern=FillPattern.HorizontalCylinder,
         rotation=45,
-        fillColor={240,0,0},
+        fillColor={253,52,56},
         origin={-40.001,69.3803}),
       Rectangle(
         extent={{-70,32},{-30,-62}},
-        lineColor={170,0,0},
+        lineColor={196,11,40},
         fillPattern=FillPattern.VerticalCylinder,
-        fillColor={240,0,0}),
+        fillColor={253,52,56}),
       Rectangle(
         extent={{-70,32},{-50,-64}},
         fillPattern=FillPattern.Solid,
@@ -1194,7 +1194,7 @@ margin-right: auto;\" class=noBorder>
       Ellipse(
         extent={{-54,52},{-46,48}},
         lineColor={135,135,135},
-        fillColor={240,0,0},
+        fillColor={253,52,56},
         fillPattern=FillPattern.Sphere),
       Ellipse(
         extent={{26,40},{34,36}},

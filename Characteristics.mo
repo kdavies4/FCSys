@@ -176,7 +176,6 @@ package Characteristics
           smooth=Smooth.None));
       annotation (experiment, Commands(file=
               "resources/scripts/Dymola/Characteristics.Examples.Correlations.mos"));
-
     end Correlations;
 
   end Examples;
@@ -461,6 +460,7 @@ package Characteristics
             1.1996252}),fromNASAThermalConductivity({1.0582450,248.75372,
             1.1736907e4,0.82758695}),fromNASAThermalConductivity({-0.22364420,-6.9650442e3,
             -7.7771313e4,13.189369})});
+
       annotation (Documentation(info="<html>
             <p>Notes:
      <ul>
@@ -508,6 +508,7 @@ package Characteristics
             -0.24664550}),fromNASAThermalConductivity({0.39367933,-2.2524226e3,
             6.1217458e5,5.8011317}),fromNASAThermalConductivity({-0.41858737,-1.4096649e4,
             1.9179190e7,14.345613})});
+
       annotation (Documentation(info="<html>
         <p>Notes:
      <ul>
@@ -607,6 +608,7 @@ package Characteristics
             0.47793128}),fromNASAThermalConductivity({0.88407146,133.57293,-1.1429640e4,
             0.24417019}),fromNASAThermalConductivity({2.4176185,8.0477749e3,
             3.1055802e6,-14.517761})});
+
       annotation (Documentation(info="<html>
                   <p>Notes:
      <ul>
@@ -656,6 +658,7 @@ package Characteristics
             1.2210365}),fromNASAThermalConductivity({0.90917351,291.24182,-7.9650171e4,
             0.064851631}),fromNASAThermalConductivity({-1.1218262,-1.9286378e4,
             2.3295011e7,20.342043})});
+
       annotation (Documentation(info="<html><p>Notes:<ul>
   <li>According to [<a href=\"modelica://FCSys.UsersGuide.References\">Avogadro1.03</a>], the (center-to-center)
    bond length of O-O is 128.2 pm.  The radius of O is from
@@ -745,7 +748,6 @@ package Characteristics
   <p>Although specific volume is an input to this function, the result is independent of
   specific volume.</p>
   </html>"));
-
       end zeta;
 
       redeclare function theta
@@ -782,7 +784,6 @@ package Characteristics
   <p>Although specific volume is an input to this function, the result is independent of
   specific volume.</p>
   </html>"));
-
       end theta;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html><p>The correlations for transport properties are available in
   [<a href=\"modelica://FCSys.UsersGuide.References\">McBride1996</a>,
@@ -872,7 +873,6 @@ package Characteristics
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.zeta\">&zeta;</a>, and
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.theta\">&theta;</a>.</p>
   </html>"));
-
       end omega;
 
     public
@@ -951,7 +951,6 @@ package Characteristics
   <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
   </html>"));
-
       end c_p;
 
       function c_v
@@ -978,7 +977,6 @@ package Characteristics
   <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
   </html>"));
-
       end c_v;
 
       function dp_Tv
@@ -1157,7 +1155,6 @@ package Characteristics
   <p>For an ideal gas, this function is independent of pressure
   (although pressure remains as a valid input).</p>
     </html>"));
-
       end h;
 
       function p_Tv "Pressure as a function of temperature and specific volume"
@@ -1188,7 +1185,6 @@ package Characteristics
   and the function will return a value of zero.</p>
 
 <p>The derivative of this function is <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dp_Tv\">dp_Tv</a>().</p></html>"));
-
       end p_Tv;
 
       function s "Specific entropy as a function of temperature and pressure"
@@ -1315,7 +1311,6 @@ package Characteristics
         annotation (Documentation(info="<html>
   <p>The derivative of this function is
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.dv_Tp\">dv_Tp</a>().</p></html>"));
-
       end v_Tp;
 
       replaceable function beta
@@ -1339,7 +1334,6 @@ package Characteristics
   <a href=\"modelica://FCSys.Characteristics.BaseClasses.Characteristic.zeta\">zeta</a>() for the additional
   assumptions used to calculate fluidity.</p>
 </html>"));
-
       end beta;
 
       replaceable function zeta
@@ -1377,7 +1371,6 @@ package Characteristics
     <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
   </ol></p>
   </html>"));
-
       end zeta;
 
       replaceable function eta
@@ -1404,7 +1397,6 @@ package Characteristics
     <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
   </ol></p>
 </html>"));
-
       end eta;
 
       replaceable function theta
@@ -1431,7 +1423,6 @@ package Characteristics
     <li>The speeds of the particles follow the Maxwell-Boltzmann distribution.</li>
   </ol></p>
 </html>"));
-
       end theta;
 
       replaceable function mu
@@ -1459,7 +1450,6 @@ package Characteristics
   </ol>
   Also, it is assumed that the Einstein relation applies.</p>
 </html>"));
-
       end mu;
 
       replaceable function nu
@@ -1490,7 +1480,6 @@ temperature difference.</p>
   </ol>
   Also, it is assumed that the Einstein relation applies.</p>
 </html>"));
-
       end nu;
       annotation (defaultComponentPrefixes="replaceable",Documentation(info="<html>
     <p>This package is compatible with NASA CEA thermodynamic data
