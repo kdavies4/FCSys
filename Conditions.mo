@@ -6942,10 +6942,10 @@ connected to <code>positive1</code>, as shown by Figure 1b.</p>
     parameter Q.TemperatureAbsolute T(nominal=300*U.K) = 298.15*U.K
       "Temperature";
     parameter Q.NumberAbsolute RH(displayUnit="%") = 1 "Relative humidity";
-    parameter Q.NumberAbsolute x_O2_dry(
+    parameter Q.NumberAbsolute n_O2_dry(
       final max=1,
       displayUnit="%") = 0.208
-      "<html>Dry gas O<sub>2</sub> fraction (<i>y</i><sub>O2 dry</sub>)</html>";
+      "<html>Dry gas O<sub>2</sub> fraction (<i>n</i><sub>O2 dry</sub>)</html>";
     // Value from http://en.wikipedia.org/wiki/Oxygen
     parameter Q.Acceleration a[Axis]={0,Modelica.Constants.g_n*U.m/U.s^2,0}
       "Acceleration due to body forces";
@@ -6953,10 +6953,10 @@ connected to <code>positive1</code>, as shown by Figure 1b.</p>
     // term in the Species model.
     parameter Real E[Axis]={0,0,0} "Electric field";
     // **PotentiaLineic
-    final parameter Q.NumberAbsolute x_H2O(
+    final parameter Q.NumberAbsolute n_H2O(
       final max=1,
       displayUnit="%") = 0.2
-      "<html>Gas H<sub>2</sub>O fraction (<i>y</i><sub>H2O</sub>)</html>";
+      "<html>Gas H<sub>2</sub>O fraction (<i>n</i><sub>H2O</sub>)</html>";
     // TODO:  Cast this in terms of relative humidity.
     annotation (
       defaultComponentName="environment",
@@ -7059,48 +7059,31 @@ settings will be used.
 
       partial class Single "Icon for a single-connector boundary condition"
         // extends Names.Middle;
-        annotation (Icon(graphics={Rectangle(
-                      extent={{-100,40},{100,-40}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Line(
-                      points={{-100,-40},{-100,40},{100,40},{100,-40}},
-                      pattern=LinePattern.None,
-                      smooth=Smooth.None),Line(
-                      points={{-100,-40},{100,-40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+        annotation (Icon(graphics={
+              Rectangle(
+                extent={{-100,40},{100,-40}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None),
+              Line(
+                points={{-100,-40},{-100,40},{100,40},{100,-40}},
+                pattern=LinePattern.None,
+                smooth=Smooth.None),
+              Line(
+                points={{-100,-40},{100,-40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}));
 
       end Single;
 
     end Icons;
 
   end BaseClasses;
-  annotation (Documentation(info="<html>
-  <p>The <a href=\"modelica://FCSys.Conditions.Chemical\">Chemical</a>,
-  <a href=\"modelica://FCSys.Conditions.ChemicalBus\">ChemicalBus</a>, <a href=\"modelica://FCSys.Conditions.InertAmagat\">Inert</a>,
-  <a href=\"modelica://FCSys.Conditions.InertAmagat\">InertAmagat</a>,
-  <a href=\"modelica://FCSys.Conditions.InertDalton\">InertDalton</a>, <a href=\"modelica://FCSys.Conditions.Face\">Face</a>, and
-  <a href=\"modelica://FCSys.Conditions.FaceBus\">FaceBus</a> packages contain models to specify conditions on the
-  connectors with the same names (<a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> or
-  <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a>, <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> or
-  <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a>,
-  <a href=\"modelica://FCSys.Conditions.InertAmagat\">InertAmagat</a>,
-  <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a>, <a href=\"modelica://FCSys.Conditions.Face\">Face</a>, and
-  <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>).
-  The <a href=\"modelica://FCSys.Conditions.FaceDifferential\">FacePair</a> and
-  <a href=\"modelica://FCSys.Conditions.FaceBusPair\">FaceBusPair</a> packages contain models
-  for pairs of <a href=\"modelica://FCSys.Conditions.Face\">Face</a> and
-  <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connectors.  Each model is given the same name as the
-  model from the <a href=\"modelica://FCSys.Subregions\">Subregions</a> package that it may be used to represent.  For
-  example, the model to interface with the <a href=\"modelica://FCSys.Conditions.Face\">Face</a> connector
-  is named <a href=\"modelica://FCSys.Conditions.Face.Species\">Species</a> (in the
-  <a href=\"modelica://FCSys.Conditions.Face\">Conditions.Face</a> package).</p>
-</html>"));
 
   model Deal
     "<html>Adapter between the <a href=\"modelica://FCSys.Connectors.Translational\">Translational</a> and <a href=\"modelica://FCSys.Connectors.TranslationalSingle\">TranslationalSingle</a> connectors</html>"
@@ -7128,4 +7111,25 @@ settings will be used.
             color={127,127,127},
             smooth=Smooth.None)}));
   end Deal;
+  annotation (Documentation(info="<html>
+  <p>The <a href=\"modelica://FCSys.Conditions.Chemical\">Chemical</a>,
+  <a href=\"modelica://FCSys.Conditions.ChemicalBus\">ChemicalBus</a>, <a href=\"modelica://FCSys.Conditions.InertAmagat\">Inert</a>,
+  <a href=\"modelica://FCSys.Conditions.InertAmagat\">InertAmagat</a>,
+  <a href=\"modelica://FCSys.Conditions.InertDalton\">InertDalton</a>, <a href=\"modelica://FCSys.Conditions.Face\">Face</a>, and
+  <a href=\"modelica://FCSys.Conditions.FaceBus\">FaceBus</a> packages contain models to specify conditions on the
+  connectors with the same names (<a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> or
+  <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a>, <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> or
+  <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a>,
+  <a href=\"modelica://FCSys.Conditions.InertAmagat\">InertAmagat</a>,
+  <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a>, <a href=\"modelica://FCSys.Conditions.Face\">Face</a>, and
+  <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>).
+  The <a href=\"modelica://FCSys.Conditions.FaceDifferential\">FacePair</a> and
+  <a href=\"modelica://FCSys.Conditions.FaceBusPair\">FaceBusPair</a> packages contain models
+  for pairs of <a href=\"modelica://FCSys.Conditions.Face\">Face</a> and
+  <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a> connectors.  Each model is given the same name as the
+  model from the <a href=\"modelica://FCSys.Subregions\">Subregions</a> package that it may be used to represent.  For
+  example, the model to interface with the <a href=\"modelica://FCSys.Conditions.Face\">Face</a> connector
+  is named <a href=\"modelica://FCSys.Conditions.Face.Species\">Species</a> (in the
+  <a href=\"modelica://FCSys.Conditions.Face\">Conditions.Face</a> package).</p>
+</html>"));
 end Conditions;

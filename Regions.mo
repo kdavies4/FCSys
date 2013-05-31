@@ -986,8 +986,8 @@ package Regions "3D arrays of discrete, interconnected subregions"
           each gas(
             inclH2=true,
             inclH2O=true,
-            H2(p_IC=(1 - environment.x_H2O)*environment.p),
-            H2O(p_IC=environment.x_H2O*environment.p)),
+            H2(p_IC=(1 - environment.n_H2O)*environment.p),
+            H2O(p_IC=environment.n_H2O*environment.p)),
           each graphite(
             'inclC+'=true,
             'incle-'=true,
@@ -1001,14 +1001,14 @@ package Regions "3D arrays of discrete, interconnected subregions"
       parameter Q.NumberAbsolute x(nominal=1) = 0.1 "Volumetric porosity";
 
       // Auxiliary variables (for analysis)
-      output Q.Number x_H2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+      output Q.Number n_H2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
          = subregions.gas.H2.N ./ (subregions.gas.H2.N + subregions.gas.H2O.N)
         if environment.analysis and hasSubregions "Molar concentration of H2";
-      output Q.Number x_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+      output Q.Number n_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
          = ones(
             n_x,
             n_y,
-            n_z) - x_H2 if environment.analysis and hasSubregions
+            n_z) - n_H2 if environment.analysis and hasSubregions
         "Molar concentration of H2O";
 
     protected
@@ -1259,23 +1259,13 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
           each gas(
             inclH2=true,
             inclH2O=true,
-            H2(
-              p_IC=(1 - environment.x_H2O)*environment.p,
-              xNegative(isobaric=false,inviscidY=false),
-              xPositive(isobaric=false)),
-            H2O(
-              p_IC=environment.x_H2O*environment.p,
-              xNegative(isobaric=true, inviscidY=false),
-              xPositive(isobaric=false))),
+            H2(p_IC=(1 - environment.n_H2O)*environment.p),
+            H2O(p_IC=environment.n_H2O*environment.p)),
           each graphite(
             'inclC+'=true,
             'incle-'=true,
-            'C+'(V_IC=V - xV),
-            'e-'(xNegative(isobaric=false), xPositive(isobaric=false))),
-          each liquid(inclH2O=true, H2O(
-              V_IC=0,
-              xNegative(isobaric=false,inviscidY=false),
-              xPositive(isobaric=false)))));
+            'C+'(V_IC=V - xV)),
+          each liquid(inclH2O=true, H2O(V_IC=0))));
 
       parameter Q.NumberAbsolute x(nominal=1) = 0.76 "Volumetric porosity";
       // The default porosity is for Sigracet 24 BC.
@@ -1290,14 +1280,14 @@ In reality, there are cut-outs and holes for thermocouples, hardware, etc.</li>
       // and Verbrugge give x = 0.4 [Bernardi1992, p. 2483, Table 3].
 
       // Auxiliary variables (for analysis)
-      output Q.Number x_H2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+      output Q.Number n_H2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
          = subregions.gas.H2.N ./ (subregions.gas.H2.N + subregions.gas.H2O.N)
         if environment.analysis and hasSubregions "Molar concentration of H2";
-      output Q.Number x_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+      output Q.Number n_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
          = ones(
             n_x,
             n_y,
-            n_z) - x_H2 if environment.analysis and hasSubregions
+            n_z) - n_H2 if environment.analysis and hasSubregions
         "Molar concentration of H2O";
 
     protected
@@ -1597,29 +1587,18 @@ the z axis extends across the width of the channel.</p></html>"),
         inclFacesY=false,
         inclFacesZ=false,
         redeclare FCSys.Subregions.Subregion subregions[n_x, n_y, n_z](
-          each inclTransX=false,
           each gas(
             inclH2=true,
-            inclH2O=true,
-            H2(
-              p_IC=(1 - environment.x_H2O)*environment.p,
-              xNegative(isobaric=false),
-              xPositive(isobaric=false)),
-            H2O(
-              p_IC=environment.x_H2O*environment.p,
-              xNegative(isobaric=false),
-              xPositive(isobaric=false))),
+            inclH2O=false,
+            H2(p_IC=(1 - environment.n_H2O)*environment.p),
+            H2O(p_IC=environment.n_H2O*environment.p)),
           each ionomer(
             'inclC19HF37O5S-'=true,
             'inclH+'=true,
             inclH2O=true,
             'C19HF37O5S-'(V_IC=V - xV)),
-          'H+'(xNegative(isobaric=false), xPositive(isobaric=false)),
-          H2O(xNegative(isobaric=false), xPositive(isobaric=false))),
-        each liquid(inclH2O=true, H2O(
-            V_IC=0,
-            xNegative(isobaric=false),
-            xPositive(isobaric=false))));
+          each liquid(inclH2O=true, H2O(V_IC=0))));
+      //each inclTransX=false,
       // **Use e- and H+ as gases (here and in CaCL)
 
       // 'e-'( xPositive(isobaric=true),
@@ -1635,14 +1614,14 @@ the z axis extends across the width of the channel.</p></html>"),
         annotation (Dialog(group="Initialization"));
 
       // Auxiliary variables (for analysis)
-      output Q.Number x_H2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+      output Q.Number n_H2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
          = subregions.gas.H2.N ./ (subregions.gas.H2.N + subregions.gas.H2O.N)
         if environment.analysis and hasSubregions "Molar concentration of H2";
-      output Q.Number x_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+      output Q.Number n_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
          = ones(
             n_x,
             n_y,
-            n_z) - x_H2 if environment.analysis and hasSubregions
+            n_z) - n_H2 if environment.analysis and hasSubregions
         "Molar concentration of H2O";
 
     protected
@@ -1872,9 +1851,7 @@ the z axis extends across the width of the channel.</p>
             'inclC19HF37O5S-'=true,
             'inclH+'=true,
             inclH2O=true,
-            'C19HF37O5S-'(initMaterial=InitScalar.Pressure, p_IC=0),
-            'H+'(xNegative(isobaric=false), xPositive(isobaric=false)),
-            H2O(xNegative(isobaric=false), xPositive(isobaric=false)))));
+            'C19HF37O5S-'(initMaterial=InitScalar.Pressure, p_IC=0))));
 
       parameter Q.NumberAbsolute lambda_IC=14
         "<html>Initial molar ratio of H<sub>2</sub>O to SO<sub>3</sub>H (&lambda;<sub>IC</sub>)</html>"
@@ -1919,6 +1896,7 @@ the z axis extends across the width of the channel.</p>
       // subregions.gas.H2O.N = subregions.ionomer.'C19HF37O5S-'.N*lambda_IC;
       annotation (
         defaultComponentPrefixes="replaceable",
+        defaultComponentName="PEM",
         Documentation(info="<html>
 <p>This model describes the storage and transport of
 chemical/electrochemical species in and through the proton exchange membrane of a PEMFC.
@@ -2028,7 +2006,7 @@ the z axis extends across the width of the channel.</p>
       //     Density: (100 g/m2)/(51 um) = 1.9608 g/cm3
       annotation (
         defaultComponentPrefixes="replaceable",
-        defaultComponentName="pEM",
+        defaultComponentName="PEM",
         Documentation(info="<html><p>See the information in the
           <a href=\"modelica://FCSys.Regions.PEMs.PEM\">PEM</a> model.</p></html>"));
 
@@ -2041,7 +2019,7 @@ the z axis extends across the width of the channel.</p>
       //     Density: (250 g/m2)/(127 um) = 1.9685 g/cm3
       annotation (
         defaultComponentPrefixes="replaceable",
-        defaultComponentName="pEM",
+        defaultComponentName="PEM",
         Documentation(info="<html><p>See the information in the
                 <a href=\"modelica://FCSys.Regions.PEMs.PEM\">PEM</a> model.</p></html>"));
 
@@ -2054,7 +2032,7 @@ the z axis extends across the width of the channel.</p>
       //     Density: (360 g/m2)/(183 um) = 1.9672 g/cm3
       annotation (
         defaultComponentPrefixes="replaceable",
-        defaultComponentName="pEM",
+        defaultComponentName="PEM",
         Documentation(info="<html><p>See the information in the
                 <a href=\"modelica://FCSys.Regions.PEMs.PEM\">PEM</a> model.</p></html>"));
 
@@ -2067,7 +2045,7 @@ the z axis extends across the width of the channel.</p>
       //     Density: (500 g/m2)/(254 um) = 1.9685 g/cm3
       annotation (
         defaultComponentPrefixes="replaceable",
-        defaultComponentName="pEM",
+        defaultComponentName="PEM",
         Documentation(info="<html><p>See the information in the
                 <a href=\"modelica://FCSys.Regions.PEMs.PEM\">PEM</a> model.</p></html>"));
 
@@ -2080,7 +2058,7 @@ the z axis extends across the width of the channel.</p>
       //     Density: (190 g/m2)/(89 um) = 2.1348 g/cm3
       annotation (
         defaultComponentPrefixes="replaceable",
-        defaultComponentName="pEM",
+        defaultComponentName="PEM",
         Documentation(info="<html><p>See the information in the
                 <a href=\"modelica://FCSys.Regions.PEMs.PEM\">PEM</a> model.</p></html>"));
 
@@ -2093,7 +2071,7 @@ the z axis extends across the width of the channel.</p>
       //     Density: (50 g/m2)/(25.4 um) = 1.9685 g/cm3
       annotation (
         defaultComponentPrefixes="replaceable",
-        defaultComponentName="pEM",
+        defaultComponentName="PEM",
         Documentation(info="<html><p>See the information in the
                 <a href=\"modelica://FCSys.Regions.PEMs.PEM\">PEM</a> model.</p></html>"));
 
@@ -2106,7 +2084,7 @@ the z axis extends across the width of the channel.</p>
       //     Density: (100 g/m2)/(50.8 um) = 1.9685 g/cm3
       annotation (
         defaultComponentPrefixes="replaceable",
-        defaultComponentName="pEM",
+        defaultComponentName="PEM",
         Documentation(info="<html><p>See the information in the
                 <a href=\"modelica://FCSys.Regions.PEMs.PEM\">PEM</a> model.</p></html>"));
 
@@ -2133,34 +2111,21 @@ the z axis extends across the width of the channel.</p>
             inclH2O=true,
             inclN2=true,
             inclO2=true,
-            H2O(
-              p_IC=environment.x_H2O*environment.p,
-              xNegative(isobaric=true),
-              xPositive(isobaric=false)),
-            N2(
-              p_IC=(1 - environment.x_H2O)*(1 - environment.x_O2_dry)*
-                  environment.p,
-              xNegative(isobaric=false),
-              xPositive(isobaric=false)),
-            O2(
-              p_IC=(1 - environment.x_H2O)*environment.x_O2_dry*environment.p,
-              xNegative(isobaric=false),
-              xPositive(isobaric=false))),
+            H2O(p_IC=environment.n_H2O*environment.p),
+            N2(p_IC=(1 - environment.n_H2O)*(1 - environment.n_O2_dry)*
+                  environment.p),
+            O2(p_IC=(1 - environment.n_H2O)*environment.n_O2_dry*environment.p)),
+
           each graphite(
             'inclC+'=true,
             'incle-'=true,
-            'C+'(V_IC=V - xV),
-            'e-'(xNegative(isobaric=false), xPositive(isobaric=false))),
+            'C+'(V_IC=V - xV)),
           each ionomer(
             'inclC19HF37O5S-'=true,
+            inclH2O=false,
             'inclH+'=true,
-            'C19HF37O5S-'(V_IC=V - xV),
-            'H+'(xNegative(isobaric=false), xPositive(isobaric=false)),
-            H2O(xNegative(isobaric=false), xPositive(isobaric=false))),
-          each liquid(inclH2O=true, H2O(
-              V_IC=0,
-              xNegative(isobaric=false),
-              xPositive(isobaric=false)))));
+            'C19HF37O5S-'(V_IC=V - xV)),
+          each liquid(inclH2O=true, H2O(V_IC=0))));
 
       // 'e-'(xNegative(isobaric=true),
       // 'H+'(xPositive(isobaric=true),
@@ -2184,19 +2149,19 @@ the z axis extends across the width of the channel.</p>
       // Assume zero volume of H2O in the ionomer?
 
       // Auxiliary variables (for analysis)
-      output Q.Number x_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+      output Q.Number n_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
          = subregions.gas.H2O.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N
          + subregions.gas.O2.N) if environment.analysis and hasSubregions
         "Molar concentration of H2";
-      output Q.Number x_N2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+      output Q.Number n_N2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
          = subregions.gas.N2.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N
          + subregions.gas.O2.N) if environment.analysis and hasSubregions
         "Molar concentration of N2";
-      output Q.Number x_O2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+      output Q.Number n_O2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
          = ones(
             n_x,
             n_y,
-            n_z) - x_H2O - x_N2 if environment.analysis and hasSubregions
+            n_z) - n_H2O - n_N2 if environment.analysis and hasSubregions
         "Molar concentration of O2";
 
     protected
@@ -2374,46 +2339,34 @@ the z axis extends across the width of the channel.</p>
             inclH2O=true,
             inclN2=true,
             inclO2=true,
-            H2O(
-              p_IC=environment.x_H2O*environment.p,
-              xNegative(isobaric=true),
-              xPositive(isobaric=false,inviscidY=false)),
-            N2(
-              p_IC=(1 - environment.x_H2O)*(1 - environment.x_O2_dry)*
-                  environment.p,
-              xNegative(isobaric=false),
-              xPositive(isobaric=false,inviscidY=false)),
-            O2(
-              p_IC=(1 - environment.x_H2O)*environment.x_O2_dry*environment.p,
-              xNegative(isobaric=false),
-              xPositive(isobaric=false,inviscidY=false))),
+            H2O(p_IC=environment.n_H2O*environment.p),
+            N2(p_IC=(1 - environment.n_H2O)*(1 - environment.n_O2_dry)*
+                  environment.p),
+            O2(p_IC=(1 - environment.n_H2O)*environment.n_O2_dry*environment.p)),
+
           each graphite(
             'inclC+'=true,
             'incle-'=true,
-            'C+'(V_IC=V - xV),
-            'e-'(xNegative(isobaric=false), xPositive(isobaric=false))),
-          each liquid(inclH2O=true, H2O(
-              V_IC=0,
-              xNegative(isobaric=false),
-              xPositive(isobaric=false,inviscidY=false)))));
+            'C+'(V_IC=V - xV)),
+          each liquid(inclH2O=true, H2O(V_IC=0))));
 
       parameter Q.NumberAbsolute x(nominal=1) = 0.76 "Volumetric porosity";
       // The default porosity is for Sigracet 24 BC.
 
       // Auxiliary variables (for analysis)
-      output Q.Number x_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+      output Q.Number n_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
          = subregions.gas.H2O.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N
          + subregions.gas.O2.N) if environment.analysis and hasSubregions
         "Molar concentration of H2";
-      output Q.Number x_N2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+      output Q.Number n_N2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
          = subregions.gas.N2.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N
          + subregions.gas.O2.N) if environment.analysis and hasSubregions
         "Molar concentration of N2";
-      output Q.Number x_O2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+      output Q.Number n_O2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
          = ones(
             n_x,
             n_y,
-            n_z) - x_H2O - x_N2 if environment.analysis and hasSubregions
+            n_z) - n_H2O - n_N2 if environment.analysis and hasSubregions
         "Molar concentration of O2";
 
     protected
@@ -2721,77 +2674,35 @@ the z axis extends across the width of the channel.</p>
             inclH2O=true,
             inclN2=true,
             inclO2=true,
-            H2O(
-              p_IC=environment.x_H2O*environment.p,
-              xNegative(isobaric=false),
-              xPositive(
-                isobaric=true,
-                inviscidY=true,
-                inviscidZ=true),
-              yNegative(isobaric=false),
-              yPositive(isobaric=false)),
-            N2(
-              p_IC=(1 - environment.x_H2O)*(1 - environment.x_O2_dry)*
-                  environment.p,
-              xNegative(isobaric=false),
-              xPositive(
-                isobaric=true,
-                inviscidY=true,
-                inviscidZ=true),
-              yNegative(isobaric=false),
-              yPositive(isobaric=false)),
-            O2(
-              p_IC=(1 - environment.x_H2O)*environment.x_O2_dry*environment.p,
-              xNegative(isobaric=false),
-              xPositive(
-                isobaric=true,
-                inviscidY=true,
-                inviscidZ=true),
-              yNegative(isobaric=false),
-              yPositive(isobaric=false))),
+            H2O(p_IC=environment.n_H2O*environment.p),
+            N2(p_IC=(1 - environment.n_H2O)*(1 - environment.n_O2_dry)*
+                  environment.p),
+            O2(p_IC=(1 - environment.n_H2O)*environment.n_O2_dry*environment.p)),
+
           each graphite(
             'inclC+'=true,
             'incle-'=true,
-            'C+'(V_IC=V - xV),
-            'e-'(
-              xNegative(isobaric=false),
-              xPositive(isobaric=false),
-              yNegative(
-                isobaric=true,
-                inviscidZ=true,
-                inviscidX=true),
-              yPositive(
-                isobaric=true,
-                inviscidZ=true,
-                inviscidX=true))),
-          each liquid(inclH2O=true, H2O(
-              V_IC=0,
-              xNegative(isobaric=false),
-              xPositive(
-                isobaric=true,
-                inviscidY=true,
-                inviscidZ=true),
-              yNegative(isobaric=false),
-              yPositive(isobaric=false)))));
+            'C+'(V_IC=V - xV)),
+          each liquid(inclH2O=true, H2O(V_IC=0))));
 
       // **for e-: setVelY=true,
 
       parameter Q.NumberAbsolute x(nominal=1) = 0.1 "Volumetric porosity";
 
       // Auxiliary variables (for analysis)
-      output Q.Number x_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+      output Q.Number n_H2O[n_x, n_y, n_z](each stateSelect=StateSelect.never)
          = subregions.gas.H2O.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N
          + subregions.gas.O2.N) if environment.analysis and hasSubregions
         "Molar concentration of H2";
-      output Q.Number x_N2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+      output Q.Number n_N2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
          = subregions.gas.N2.N ./ (subregions.gas.H2O.N + subregions.gas.N2.N
          + subregions.gas.O2.N) if environment.analysis and hasSubregions
         "Molar concentration of N2";
-      output Q.Number x_O2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
+      output Q.Number n_O2[n_x, n_y, n_z](each stateSelect=StateSelect.never)
          = ones(
             n_x,
             n_y,
-            n_z) - x_H2O - x_N2 if environment.analysis and hasSubregions
+            n_z) - n_H2O - n_N2 if environment.analysis and hasSubregions
         "Molar concentration of O2";
 
     protected
