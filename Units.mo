@@ -830,20 +830,6 @@ encompass other systems of units.</p>
         final c=25812.8074434/(2*pi*299792458*1e-7),
         final k_J=1/pi,
         final R_K=2*pi);
-
-      // R_inf = pi*(299792458*1e-7/25812.8074434)^2
-
-      // **need to update R_inf
-      // Use:
-      // h = 2*pi
-      // q = 1
-      // k_B = 1
-      // 2*R_inf*h/(q*c*alpha^2) = 1
-
-      // 2*Phi_0 = 2*pi
-      // G_0*Phi_0 = 1
-      // k_B = 1
-      // 4*R_inf/alpha^2 = k_J
       annotation (Documentation(info="<html><p>The candela (<code>'cd'</code>)
   is not final because luminous intensity is not included in Hartree units.</p>
 
@@ -1227,7 +1213,7 @@ encompass other systems of units.</p>
   // Base physical constants and units
   // ------------------------------------------------------------------------
 
-  replaceable constant Bases.ScaledFC base constrainedby Bases.Base
+  replaceable constant Bases.Hartree base constrainedby Bases.Base
     "Scalable base constants and units";
   // Note:  The base constants and units may be replaced to suit the scale
   // of the physical system.

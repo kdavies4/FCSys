@@ -5,6 +5,7 @@ package FCSys "Modelica library of fuel cell models"
 // the LaTeX document (76 characters, including leading spaces and // )
 // ------------------------------------------------------------------------
 
+
 extends Modelica.Icons.Package;
 // extends FCSys.BaseClasses.Icons.Cell;
 
@@ -22,6 +23,7 @@ import FCSys.Subregions.BaseClasses.InitElectrical;
 import FCSys.Subregions.Species.BaseClasses.Conservation;
 import FCSys.Subregions.Species.BaseClasses.InitScalar;
 import FCSys.Subregions.Species.BaseClasses.InitTranslational;
+
 
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
@@ -78,10 +80,8 @@ package UsersGuide "User's Guide"
             than <a href=\"modelica://Modelica.SIunits\">Modelica.SIunits</a></li>
             <li><a href=\"modelica://FCSys.Connectors\">FCSys.Connectors</a> package:
             Overview of the connectors and an explanation of the effort and flow variables in terms of thermodynamics</li>
-            <li><a href=\"modelica://FCSys.Connectors.InertAmagat\">FCSys.Connectors.InertAmagat</a> connector:
-            Introduction to the \"additivity of volume\" concept</li>
-            <li><a href=\"modelica://FCSys.Connectors.InertDalton\">FCSys.Connectors.InertDalton</a> connector:
-            Introduction to the \"additivity of pressure\" concept</li>
+            <li><a href=\"modelica://FCSys.Subregions.Volume\">FCSys.Subregions.Volume</a> model:
+            Discussion of how species are mixed within phases and how phases are combined within subregions</li>
             <li><a href=\"modelica://FCSys.Subregions.Reaction\">FCSys.Subregions.Reaction</a> package:
             Details about the formulation of the electrochemical reaction</li>
             <li><a href=\"modelica://FCSys.Subregions.Species.Species\">FCSys.Subregions.Species.Species</a> model:
@@ -944,6 +944,8 @@ printing and shipping costs may be recovered.</p>
   annotation (preferedView="info", DocumentationClass=true);
 
   end UsersGuide;
+
+
 annotation (
   uses(Modelica(version="3.2")),
   preferedView="info",
@@ -1249,5 +1251,4 @@ margin-right: auto;\" class=noBorder>
   versionBuild=0,
   dateModified="",
   revisionID="");
-
 end FCSys;

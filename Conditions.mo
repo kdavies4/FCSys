@@ -2485,7 +2485,7 @@ model.</p>
         Placement(transformation(extent={{-60,40},{-40,60}}),
             iconTransformation(extent={{-10,90},{10,110}})));
 
-      Connectors.ChemicalA chemical(final n_trans=countTrue({inclTransX,
+      Connectors.ChemicalSpecies chemical(final n_trans=countTrue({inclTransX,
             inclTransY,inclTransZ}))
         "Connector to exchange material while advecting translational momentum and enthalpy, with characteristic data as output"
         annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
@@ -2512,7 +2512,7 @@ model.</p>
         parameter Integer n_trans
           "Number of components of translational momentum";
 
-        Connectors.ChemicalA chemical(final n_trans=n_trans)
+        Connectors.ChemicalSpecies chemical(final n_trans=n_trans)
           "Connector to exchange material while advecting translational momentum and enthalpy, with characteristic data as output"
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
 
@@ -3381,8 +3381,7 @@ model.</p>
           // Note:  This is included so that the type of condition is recorded with
           // the results.
 
-          FCSys.Connectors.ThermalDiffusion thermal
-            "Connector to exchange heat"
+          Connectors.ThermalDiffusion thermal "Connector to exchange heat"
             annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
           annotation (defaultComponentName="thermal", Diagram(graphics={Text(
                           extent={{-8,-32},{8,-36}},
@@ -6902,31 +6901,27 @@ connected to <code>positive1</code>, as shown by Figure 1b.</p>
         <td colspan=2 align=center>Figure 1: Modes of connection.</td>
       </tr>
     </table>
-</html>"), Icon(graphics={
-          Line(
-            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=crossOver,
-            smooth=Smooth.Bezier),
-          Line(
-            points={{-80,40},{80,40}},
-            color={127,127,127},
-            visible=not crossOver,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{-80,-40},{80,-40}},
-            color={127,127,127},
-            visible=not crossOver,
-            smooth=Smooth.None,
-            thickness=0.5),
-          Line(
-            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-            color={127,127,127},
-            thickness=0.5,
-            visible=crossOver,
-            smooth=Smooth.Bezier)}));
+</html>"), Icon(graphics={Line(
+              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=crossOver,
+              smooth=Smooth.Bezier),Line(
+              points={{-80,40},{80,40}},
+              color={127,127,127},
+              visible=not crossOver,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{-80,-40},{80,-40}},
+              color={127,127,127},
+              visible=not crossOver,
+              smooth=Smooth.None,
+              thickness=0.5),Line(
+              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+              color={127,127,127},
+              thickness=0.5,
+              visible=crossOver,
+              smooth=Smooth.Bezier)}));
   end Router;
 
   record Environment "Environmental properties for a model"
@@ -6968,60 +6963,49 @@ your model to specify global conditions and defaults.  Otherwise the default
 settings will be used.
 ",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-              100}}), graphics={
-          Rectangle(
-            extent={{-120,60},{120,100}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Text(
-            extent={{-120,60},{120,100}},
-            textString="%name",
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-80,60},{80,-100}},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            pattern=LinePattern.None),
-          Rectangle(
-            extent={{-70,50},{70,-98}},
-            lineColor={255,255,255},
-            fillPattern=FillPattern.HorizontalCylinder,
-            fillColor={170,170,255}),
-          Rectangle(
-            extent={{-72,-60},{72,-100}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0}),
-          Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
-          Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),
-          Ellipse(
-            extent={{32,8},{48,-8}},
-            pattern=LinePattern.None,
-            lineColor={255,255,255},
-            fillColor={50,50,50},
-            fillPattern=FillPattern.Sphere),
-          Line(points={{-66,-90},{-36,-60}}, color={0,0,0}),
-          Line(points={{2,-90},{32,-60}}, color={0,0,0}),
-          Line(points={{36,-90},{66,-60}}, color={0,0,0}),
-          Line(points={{-32,-90},{-2,-60}}, color={0,0,0}),
-          Rectangle(
-            extent={{70,50},{76,-60}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-76,50},{-70,-60}},
-            fillPattern=FillPattern.Solid,
-            fillColor={255,255,255},
-            pattern=LinePattern.None,
-            lineColor={0,0,0}),
-          Rectangle(
-            extent={{-80,60},{80,-100}},
-            lineColor={0,0,0},
-            pattern=LinePattern.Dash)}));
+              100}}), graphics={Rectangle(
+              extent={{-120,60},{120,100}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Text(
+              extent={{-120,60},{120,100}},
+              textString="%name",
+              lineColor={0,0,0}),Rectangle(
+              extent={{-80,60},{80,-100}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),Rectangle(
+              extent={{-70,50},{70,-98}},
+              lineColor={255,255,255},
+              fillPattern=FillPattern.HorizontalCylinder,
+              fillColor={170,170,255}),Rectangle(
+              extent={{-72,-60},{72,-100}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
+            Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),Ellipse(
+              extent={{32,8},{48,-8}},
+              pattern=LinePattern.None,
+              lineColor={255,255,255},
+              fillColor={50,50,50},
+              fillPattern=FillPattern.Sphere),Line(points={{-66,-90},{-36,-60}},
+            color={0,0,0}),Line(points={{2,-90},{32,-60}}, color={0,0,0}),Line(
+            points={{36,-90},{66,-60}}, color={0,0,0}),Line(points={{-32,-90},{
+            -2,-60}}, color={0,0,0}),Rectangle(
+              extent={{70,50},{76,-60}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),Rectangle(
+              extent={{-76,50},{-70,-60}},
+              fillPattern=FillPattern.Solid,
+              fillColor={255,255,255},
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),Rectangle(
+              extent={{-80,60},{80,-100}},
+              lineColor={0,0,0},
+              pattern=LinePattern.Dash)}));
 
   end Environment;
 
@@ -7059,58 +7043,27 @@ settings will be used.
 
       partial class Single "Icon for a single-connector boundary condition"
         // extends Names.Middle;
-        annotation (Icon(graphics={
-              Rectangle(
-                extent={{-100,40},{100,-40}},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None),
-              Line(
-                points={{-100,-40},{-100,40},{100,40},{100,-40}},
-                pattern=LinePattern.None,
-                smooth=Smooth.None),
-              Line(
-                points={{-100,-40},{100,-40}},
-                color={0,0,0},
-                smooth=Smooth.None,
-                pattern=LinePattern.Dash),
-              Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+        annotation (Icon(graphics={Rectangle(
+                      extent={{-100,40},{100,-40}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      pattern=LinePattern.None),Line(
+                      points={{-100,-40},{-100,40},{100,40},{100,-40}},
+                      pattern=LinePattern.None,
+                      smooth=Smooth.None),Line(
+                      points={{-100,-40},{100,-40}},
+                      color={0,0,0},
+                      smooth=Smooth.None,
+                      pattern=LinePattern.Dash),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
 
       end Single;
 
     end Icons;
 
   end BaseClasses;
-
-  model Deal
-    "<html>Adapter between the <a href=\"modelica://FCSys.Connectors.Translational\">Translational</a> and <a href=\"modelica://FCSys.Connectors.TranslationalSingle\">TranslationalSingle</a> connectors</html>"
-    extends FCSys.BaseClasses.Icons.Names.Top1;
-
-    parameter Integer n_trans(
-      final min=0,
-      final max=3) = 1
-      "<html>Number of components of translational momentum (<i>n</i><sub>trans</sub>)</html>"
-      annotation (HideResult=true);
-
-    Connectors.Translational trans(final n_trans=n_trans)
-      "Translational connector"
-      annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
-    Connectors.TranslationalSingle transSingle[n_trans]
-      "Array of TranslationalSingle connectors"
-      annotation (Placement(transformation(extent={{10,-10},{30,10}})));
-
-  equation
-    trans.phi = transSingle.phi;
-    zeros(n_trans) = trans.mPhidot + transSingle.mPhidot;
-
-    annotation (Diagram(graphics), Icon(graphics={Line(
-            points={{-10,0},{10,0}},
-            color={127,127,127},
-            smooth=Smooth.None)}));
-  end Deal;
   annotation (Documentation(info="<html>
   <p>The <a href=\"modelica://FCSys.Conditions.Chemical\">Chemical</a>,
   <a href=\"modelica://FCSys.Conditions.ChemicalBus\">ChemicalBus</a>, <a href=\"modelica://FCSys.Conditions.InertAmagat\">Inert</a>,
@@ -7132,4 +7085,5 @@ settings will be used.
   is named <a href=\"modelica://FCSys.Conditions.Face.Species\">Species</a> (in the
   <a href=\"modelica://FCSys.Conditions.Face\">Conditions.Face</a> package).</p>
 </html>"));
+
 end Conditions;

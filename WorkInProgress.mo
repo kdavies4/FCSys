@@ -7281,7 +7281,7 @@ public
     Q.Velocity phi "Conversion velocity";
     Q.Temperature Ts "Conversion temperature-specific entropy product";
 
-    Connectors.ChemicalA chemical[n_spec] "Connectors to the species"
+    Connectors.ChemicalSpecies chemical[n_spec] "Connectors to the species"
       annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
   protected
