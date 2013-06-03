@@ -114,6 +114,7 @@ package Subregions
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
+
       annotation (experiment(StopTime=1000, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionHOR.mos"));
@@ -643,6 +644,7 @@ package Subregions
               6.10623e-16}},
           color={127,127,127},
           smooth=Smooth.None));
+
       annotation (
         Placement(transformation(extent={{70,70},{90,90}})),
         experiment(StopTime=10),
@@ -988,6 +990,7 @@ package Subregions
           color={127,127,127},
           thickness=0.5,
           smooth=Smooth.None));
+
       annotation (experiment(StopTime=1000, Tolerance=1e-06), Commands(file(
               ensureSimulated=true) =
             "resources/scripts/Dymola/Subregions.Examples.SubregionHOR.mos"));
@@ -1311,6 +1314,7 @@ package Subregions
               6.10623e-16}},
           color={0,127,255},
           smooth=Smooth.None));
+
       annotation (Diagram(graphics));
     end TestFluid;
 
@@ -3423,58 +3427,50 @@ package Subregions
     raised to the two-thirds power (not three halfs).<a href=\"#ref1\" title=\"Jump back to footnote 1 in the text.\">&#8629;</a></p>
 
 </html>"),
-          Icon(graphics={
-              Ellipse(
-                extent={{-40,100},{40,20}},
-                lineColor={127,127,127},
-                startAngle=30,
-                endAngle=149,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{20,-4},{100,-84}},
-                lineColor={127,127,127},
-                startAngle=270,
-                endAngle=390,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Ellipse(
-                extent={{-100,-4},{-20,-84}},
-                lineColor={127,127,127},
-                startAngle=149,
-                endAngle=270,
-                pattern=LinePattern.Dash,
-                fillPattern=FillPattern.Solid,
-                fillColor={225,225,225}),
-              Polygon(
-                points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,80},{
-                    94.5,-24},{60,-84}},
-                pattern=LinePattern.None,
-                fillPattern=FillPattern.Sphere,
-                smooth=Smooth.None,
-                fillColor={225,225,225},
-                lineColor={0,0,0}),
-              Line(
-                points={{-60,-84},{60,-84}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{34.5,80},{94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Line(
-                points={{-34.5,80},{-94.5,-24}},
-                color={127,127,127},
-                pattern=LinePattern.Dash,
-                smooth=Smooth.None),
-              Text(
-                extent={{-100,-20},{100,20}},
-                textString="%name",
-                lineColor={0,0,0})}));
+          Icon(graphics={Ellipse(
+                      extent={{-40,100},{40,20}},
+                      lineColor={127,127,127},
+                      startAngle=30,
+                      endAngle=149,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{20,-4},{100,-84}},
+                      lineColor={127,127,127},
+                      startAngle=270,
+                      endAngle=390,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Ellipse(
+                      extent={{-100,-4},{-20,-84}},
+                      lineColor={127,127,127},
+                      startAngle=149,
+                      endAngle=270,
+                      pattern=LinePattern.Dash,
+                      fillPattern=FillPattern.Solid,
+                      fillColor={225,225,225}),Polygon(
+                      points={{60,-84},{-60,-84},{-94.5,-24},{-34.5,80},{34.5,
+                  80},{94.5,-24},{60,-84}},
+                      pattern=LinePattern.None,
+                      fillPattern=FillPattern.Sphere,
+                      smooth=Smooth.None,
+                      fillColor={225,225,225},
+                      lineColor={0,0,0}),Line(
+                      points={{-60,-84},{60,-84}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{34.5,80},{94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Line(
+                      points={{-34.5,80},{-94.5,-24}},
+                      color={127,127,127},
+                      pattern=LinePattern.Dash,
+                      smooth=Smooth.None),Text(
+                      extent={{-100,-20},{100,20}},
+                      textString="%name",
+                      lineColor={0,0,0})}));
       end NullPhase;
 
     end BaseClasses;
@@ -4784,7 +4780,7 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       parameter Conservation consEnergy=Conservation.Dynamic "Energy"
         annotation (Evaluate=true, Dialog(tab="Assumptions", group=
               "Formulation of conservation equations"));
-      // **If the static option isn't useful, remove it and go back
+      // TODO:  If the static option isn't useful, remove it and go back
       // to Boolean setMaterial, setTransX, etc.
       //
       // Flow conditions
@@ -5099,8 +5095,6 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
             iconTransformation(extent={{-10,-10},{10,10}})));
       //    phi(start={{fill(phi_IC[cartWrap(axis + orientation - 1)], 2) for         orientation in Orientation} for axis in Axis}),
 
-      parameter Real Ndot_0=1;
-
       // Geometric parameters
 
     protected
@@ -5140,6 +5134,9 @@ and <code>theta=U.m*U.K/(613e-3*U.W)</code>) are of H<sub>2</sub>O liquid at sat
       final parameter InitTranslational initTrans[Axis]={initTransX,initTransY,
           initTransZ} "Initialization methods for translational momentum"
         annotation (HideResult=true);
+
+      Q.Force faces_mPhidot[Axis, Side, 2]
+        "Directly-calculated shear forces (before torque resolution)";
 
       outer Conditions.Environment environment "Environmental conditions";
 
@@ -5198,9 +5195,9 @@ Choose a condition besides None.");
         elseif initMaterial == InitScalar.SpecificEnthalpySS then
           der(h) = 0;
         elseif initMaterial == InitScalar.PotentialGibbs then
-          h - sT = g_IC;
+          chemical.mu = g_IC;
         elseif initMaterial == InitScalar.PotentialGibbsSS then
-          der(h - sT) = 0;
+          der(chemical.mu) = 0;
           // Else there's no initial equation because
           // initMaterial == InitScalar.None or
           // consMaterial == Conservation.Static.
@@ -5268,9 +5265,9 @@ Choose a condition besides None.");
         elseif initEnergy == InitScalar.SpecificEnthalpySS then
           der(h) = 0;
         elseif initEnergy == InitScalar.PotentialGibbs then
-          h - sT = g_IC;
+          chemical.mu = g_IC;
         elseif initEnergy == InitScalar.PotentialGibbsSS then
-          der(h - sT) = 0;
+          der(chemical.mu) = 0;
           // Else there's no initial equation because
           // initEnergy == InitScalar.None or
           // consEnergy == Conservation.Static.
@@ -5278,12 +5275,6 @@ Choose a condition besides None.");
       end if;
 
     equation
-      // if cardinality(reaction) == 0 then
-      // In this case, these imperative variables don't matter.
-      // chemical.axis = 0;
-      // chemical.Ndot_0 = 1;
-      // end if;
-
       // Aliases (only to clarify and simplify other equations)
       p = inertDalton.p;
       V = inertDalton.V;
@@ -5294,6 +5285,7 @@ Choose a condition besides None.");
       I .* L[cartAxes] = N*phi;
       p_faces = {{Data.p_Tv(faces[axis, side].T, 1/faces[axis, side].rho) for
         side in Side} for axis in Axis};
+      chemical.mu = h - sT;
 
       // Thermodynamic correlations
       if invertEOS then
@@ -5304,34 +5296,20 @@ Choose a condition besides None.");
       h = Data.h(T, p);
       sT = Data.s(T, p)*T;
 
-      // Phase change
-      tauprime*physical.Ndot = N*(physical.a - exp((h - sT)/T));
-
-      // Electrochemical reaction
-      if Data.z <> 0 then
-        //  if Data.z == -1 then
-        //    Data.z*chemical.Ndot = chemical.Ndot_0*(exp(chemical.mu/T) - exp((h - sT)/T))
-        Data.z*chemical.Ndot = Ndot_0*(exp(chemical.mu/T) - 1)
-          "Charged species";
-        // Options: 1) BV entirely in H+ species, 2) separate charge species model
-      else
-        chemical.mu = h - sT "Neutral species";
-        // This is just the result of the previous equation when Data.z=0,
-        // but Dymola 7.4 can't derive it automatically.
-      end if;
-
-      // Other diffusive exchange
+      // Diffusive exchange
+      tauprime*physical.Ndot = N*(physical.a - exp((chemical.mu)/T))
+        "Phase change";
       mu*inertDalton.mPhidot = N*(inertDalton.phi - phi)
         "Translational momentum";
       nu*inertDalton.Qdot = N*(inertDalton.T - T) "Thermal energy";
 
+      // Properties upon outflow due to phase change and reaction
       physical.phi = phi;
       chemical.phi = phi;
       physical.sT = sT;
       chemical.sT = sT;
 
       // Diffusive transport
-      // (Advection is included directly in the conservation equations.)
       for axis in Axis loop
         for side in Side loop
           // Material
@@ -5344,17 +5322,16 @@ Choose a condition besides None.");
             1] - (if inclTrans[axis] then phi[transAxes[axis]] else 0))*(if
             inclTrans[axis] and upstream[axis] then 1 + exp(-inSign(side)*I[
             transAxes[axis]]*beta*Data.m/(2*Lprime[axis])) else 2) "Normal";
-          zeta*faces[axis, side].mPhidot[2] = Nu_Phi[axis]*Lprime[axis]*(faces[
+          zeta*faces_mPhidot[axis, side, 2] = Nu_Phi[axis]*Lprime[axis]*(faces[
             axis, side].phi[2] - (if inclTrans[cartWrap(axis + 1)] then phi[
             transAxes[cartWrap(axis + 1)]] else 0))*(if inclTrans[axis] and
             upstream[axis] then 1 + exp(-inSign(side)*I[transAxes[axis]]*zeta*
             Data.m/(2*Lprime[axis])) else 2) "1st transverse";
-          zeta*faces[axis, side].mPhidot[3] = Nu_Phi[axis]*Lprime[axis]*(faces[
+          zeta*faces_mPhidot[axis, side, 3] = Nu_Phi[axis]*Lprime[axis]*(faces[
             axis, side].phi[3] - (if inclTrans[cartWrap(axis + 2)] then phi[
             transAxes[cartWrap(axis + 2)]] else 0))*(if inclTrans[axis] and
             upstream[axis] then 1 + exp(-inSign(side)*I[transAxes[axis]]*zeta*
             Data.m/(2*Lprime[axis])) else 2) "2nd transverse";
-          // **Remap with zero torque according to dissertation.
 
           // Thermal energy
           theta*faces[axis, side].Qdot = Nu_Q*Lprime[axis]*(faces[axis, side].T
@@ -5362,6 +5339,24 @@ Choose a condition besides None.");
             side)*I[transAxes[axis]]*theta*Data.c_v(T, p)/(2*Lprime[axis]))
              else 2);
         end for;
+
+        // Remap shear force for zero torque
+        0 = Delta(faces[cartWrap(axis + 1), :].mPhidot[Orientation.following])*
+          L[cartWrap(axis + 1)] - Delta(faces[cartWrap(axis - 1), :].mPhidot[
+          Orientation.preceding])*L[cartWrap(axis - 1)]
+          "Zero torque (conservation of rotational momentum without storage)";
+        Sigma(faces[cartWrap(axis + 1), :].mPhidot[Orientation.following]) =
+          Sigma(faces_mPhidot[cartWrap(axis + 1), :, Orientation.following - 1])
+          "Total 1st transverse force is as calculated";
+        Sigma(faces[cartWrap(axis - 1), :].mPhidot[Orientation.preceding]) =
+          Sigma(faces_mPhidot[cartWrap(axis - 1), :, Orientation.preceding - 1])
+          "Total 2nd transverse force is as calculated";
+        0 = (Delta(faces[cartWrap(axis - 1), :].mPhidot[Orientation.preceding])
+           - Delta(faces_mPhidot[cartWrap(axis - 1), :, Orientation.preceding
+           - 1]))*L[cartWrap(axis - 1)] + (Delta(faces[cartWrap(axis + 1), :].mPhidot[
+          Orientation.following]) - Delta(faces_mPhidot[cartWrap(axis + 1), :,
+          Orientation.following - 1]))*L[cartWrap(axis + 1)]
+          "Opposing torque is as calculated";
       end for;
 
       // Material dynamics
@@ -5392,10 +5387,10 @@ Choose a condition besides None.");
         elseif initMaterial == InitScalar.SpecificEnthalpySS then
           der(h) = 0;
         elseif initMaterial == InitScalar.PotentialGibbs then
-          h - sT = g_IC;
+          chemical.mu = g_IC;
         else
           // if initMaterial == InitScalar.PotentialGibbsSS then
-          der(h - sT) = 0;
+          der(chemical.mu) = 0;
           // Note:  initMaterial == InitScalar.None can't occur due to an
           // assertion.
         end if;
@@ -5470,10 +5465,10 @@ Choose a condition besides None.");
         elseif initEnergy == InitScalar.SpecificEnthalpySS then
           der(h) = 0;
         elseif initEnergy == InitScalar.PotentialGibbs then
-          h - sT = g_IC;
+          chemical.mu = g_IC;
         else
           // if initEnergy == InitScalar.PotentialGibbsSS then
-          der(h - sT) = 0;
+          der(chemical.mu) = 0;
           // Note:  initEnergy == InitScalar.None can't occur due to an
           // assertion.
         end if;
@@ -5557,7 +5552,7 @@ Choose a condition besides None.");
     in Figure 3a.  The pressures are additive, and each species is assumed to exist at the
     total extensive volume of the phase.  Within a <a href=\"modelica://FCSys.Subregions.Subregion\">Subregion</a>,
     the <a href=\"modelica://FCSys.Subregions.Phases\">Phases</a> are combined by Amagat's law (see the
-    <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector), as shown
+    <a href=\"modelica://FCSys.Subregions.Volume\">Volume</a> model), as shown
     in Figure 3b.  The volumes are additive, and each species is assumed to exist at the
     total pressure in the subregion.</p>
 
@@ -5658,11 +5653,11 @@ Choose a condition besides None.");
             extent={{-100,-100},{100,100}},
             initialScale=0.1), graphics),
         Icon(graphics={Ellipse(
-                  extent={{-80,80},{80,-80}},
-                  lineColor={127,127,127},
-                  pattern=LinePattern.Dash,
-                  fillColor={225,225,225},
-                  fillPattern=FillPattern.Solid)}));
+              extent={{-80,80},{80,-80}},
+              lineColor={127,127,127},
+              pattern=LinePattern.Dash,
+              fillColor={225,225,225},
+              fillPattern=FillPattern.Solid)}));
     end Species;
 
     package BaseClasses "Base classes (not generally for direct use)"
@@ -6006,7 +6001,6 @@ Choose a condition besides None.");
             lineColor={0,0,0})}),
       Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
               100,100}}), graphics));
-
   end Volume;
 
   package BaseClasses "Base classes (not generally for direct use)"
@@ -6030,17 +6024,17 @@ Choose a condition besides None.");
       // Assumptions
       // -----------
       // Included components of translational momentum
-      parameter Boolean inclTransX=true "X" annotation (choices(
+      parameter Boolean inclTransX=false "X" annotation (choices(
             __Dymola_checkBox=true), Dialog(
           tab="Assumptions",
           group="Axes with translational momentum included",
           compact=true));
-      parameter Boolean inclTransY=true "Y" annotation (choices(
+      parameter Boolean inclTransY=false "Y" annotation (choices(
             __Dymola_checkBox=true), Dialog(
           tab="Assumptions",
           group="Axes with translational momentum included",
           compact=true));
-      parameter Boolean inclTransZ=true "Z" annotation (choices(
+      parameter Boolean inclTransZ=false "Z" annotation (choices(
             __Dymola_checkBox=true), Dialog(
           tab="Assumptions",
           group="Axes with translational momentum included",
@@ -6114,10 +6108,10 @@ Choose a condition besides None.");
         defaultComponentName="subregion",
         Documentation(info="<html>
   <p>This model must be be extended so that models can be added for
-  relevant species, phases, and reactions.</p>
+  relevant phases and reactions.</p>
 
   <p>All of the components of translational momentum are included by default.  At least one component must be included.</p>
-  **is this still true?</html>"),
+  </html>"),
         Icon(graphics={
             Line(
               points={{-100,0},{-40,0}},

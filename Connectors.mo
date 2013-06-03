@@ -52,11 +52,12 @@ package Connectors "Declarative and imperative connectors"
     flow Q.Current Ndot(nominal=U.A) "Diffusion current";
 
     // For translational advection
-    stream Q.Velocity phi[n_trans](each nominal=U.cm/U.s) "Velocity";
+    stream Q.Velocity phi[n_trans](each nominal=U.cm/U.s)
+      "Velocity upon outflow";
 
     // For thermal advection
     stream Q.PotentialAbsolute sT(nominal=U.V)
-      "Specific entropy-temperature product";
+      "Specific entropy-temperature product upon outflow";
     annotation (
       defaultComponentName="chemical",
       Documentation(info="<html>
@@ -100,6 +101,7 @@ package Connectors "Declarative and imperative connectors"
 
   expandable connector PhysicalBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.Physical\">Physical</a> connectors</html>"
+
     annotation (
       defaultComponentName="physical",
       Documentation(info="<html><p>There is no minimal set of variables.  Species are included by connecting instances
@@ -134,6 +136,7 @@ package Connectors "Declarative and imperative connectors"
 
   expandable connector PhysicalBusInternal
     "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.Physical\">Physical</a> connectors</html>"
+
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="physical",
@@ -178,11 +181,12 @@ package Connectors "Declarative and imperative connectors"
     flow Q.Current Ndot(nominal=U.A) "Diffusion current";
 
     // For translational advection
-    stream Q.Velocity phi[n_trans](each nominal=U.cm/U.s) "Velocity";
+    stream Q.Velocity phi[n_trans](each nominal=U.cm/U.s)
+      "Velocity upon outflow";
 
     // For thermal advection
     stream Q.PotentialAbsolute sT(nominal=U.V)
-      "Specific entropy-temperature product";
+      "Specific entropy-temperature product upon outflow";
     annotation (
       defaultComponentName="physical",
       Documentation(info="<html>
@@ -196,18 +200,19 @@ package Connectors "Declarative and imperative connectors"
             fillPattern=FillPattern.Solid,
             fillColor={38,196,52})}),
       Diagram(graphics={Ellipse(
-              extent={{-30,30},{30,-30}},
-              lineColor={2,157,21},
-              fillPattern=FillPattern.Solid,
-              fillColor={38,196,52}),Text(
-              extent={{-120,36},{120,76}},
-              textString="%name",
-              lineColor={0,0,0})}));
+            extent={{-30,30},{30,-30}},
+            lineColor={2,157,21},
+            fillPattern=FillPattern.Solid,
+            fillColor={38,196,52}), Text(
+            extent={{-120,36},{120,76}},
+            textString="%name",
+            lineColor={0,0,0})}));
 
   end Physical;
 
   expandable connector FaceBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.Face\">Face</a> connectors (for multiple configurations)</html>"
+
     annotation (
       defaultComponentName="face",
       Documentation(info="<html><p>There is no minimal set of variables.  Species are included by connecting instances
@@ -278,8 +283,7 @@ package Connectors "Declarative and imperative connectors"
 
     Translational translational(final n_trans=n_trans)
       "Subconnector for translational diffusion";
-    Connectors.ThermalDiffusion thermal
-      "Subconnector for thermal diffusion";
+    Connectors.ThermalDiffusion thermal "Subconnector for thermal diffusion";
     annotation (
       Documentation(info="<html>
     <p>Please see the documentation in the
@@ -548,6 +552,7 @@ package Connectors "Declarative and imperative connectors"
 </html>"));
   expandable connector RealInputBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.RealInput\">RealInput</a> connectors</html>"
+
     annotation (
       defaultComponentName="u",
       Documentation(info="<html><p>There is no minimal set of variables.
@@ -582,6 +587,7 @@ package Connectors "Declarative and imperative connectors"
 
   expandable connector RealInputBusInternal
     "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.RealInput\">RealInput</a> connectors</html>"
+
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="u",
@@ -669,6 +675,7 @@ package Connectors "Declarative and imperative connectors"
 </html>"));
   expandable connector RealOutputBus
     "<html>Bus of <a href=\"modelica://FCSys.Connectors.RealOutput\">RealOutput</a> connectors</html>"
+
     annotation (
       defaultComponentName="y",
       Documentation(info="<html><p>There is no minimal set of variables.
@@ -701,6 +708,7 @@ package Connectors "Declarative and imperative connectors"
 
   expandable connector RealOutputBusInternal
     "<html>Internal bus of <a href=\"modelica://FCSys.Connectors.RealOutput\">RealOutput</a> connectors</html>"
+
     annotation (
       defaultComponentPrefixes="protected",
       defaultComponentName="y",
@@ -770,18 +778,21 @@ package Connectors "Declarative and imperative connectors"
   conditionally-instantiated subconnectors to directly couple the velocities or temperatures
   of configurations within a subregion.  Each icon on the bottom row represents a single effort/flow
   pair.</p>
-
+  
   <p>In addition to the connectors on the bottom row, the
   <a href=\"modelica://FCSys.Connectors.ChemicalSpecies\">ChemicalSpecies</a>
   and <a href=\"modelica://FCSys.Connectors.Physical\">Physical</a> connectors
   have stream variables to represent the advection of translational momentum and
-  thermal energy.</p>
+  thermal energy.  </p>
 
   <p>The <a href=\"modelica://FCSys.Connectors.ChemicalSpecies\">ChemicalSpecies</a>
   connector is used for a single species in a reaction.  It expresses the rate of
   consumption or generation of a species at a electrochemical potential.  The
   <a href=\"modelica://FCSys.Connectors.ChemicalReaction\">ChemicalReaction</a> connector is
-  used for the chemical reaction as a whole.
+  used for the chemical reaction as a whole.  It has electrochemical potential as a 
+  flow and current as an effort (opposite designations of the 
+  <a href=\"modelica://FCSys.Connectors.ChemicalSpecies\">ChemicalSpecies</a>
+  connector).
   It sums the stoichiometrically-weighted electrochemical potentials of the species
   participating in a reaction.  Its effort variable is the
   stoichiometrically-normalized rate of the reaction.</p>
@@ -789,7 +800,8 @@ package Connectors "Declarative and imperative connectors"
   <p>The <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector has one
   more effort/flow pair than the <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> and
   <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a> connectors.
-  It applies Dalton's law of partial pressures to mix species within a phase.</p>
+  It applies <a href=\"http://en.wikipedia.org/wiki/Dalton's_law\">Dalton's law of partial pressures</a> 
+  to mix species within a phase.</p>
 
   <p align=center id=\"Fig1\"><img src=\"modelica://FCSys/resources/documentation/Connectors/ConnectorHierarchy.png\">
 <br>Figure 1: Hierarchy of the connectors.</p>
@@ -860,14 +872,13 @@ package Connectors "Declarative and imperative connectors"
     the flow.  In this case,
     the most appropriate effort variable is pressure.  The relationship among pressure,
     specific volume, and temperature is given by an equation of state.
-    This \"additivity of volume\" interaction occurs through the
-    <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector.</p>
+    This additivity-of-volume interaction occurs in the
+    <a href=\"modelica://FCSys.Subregions.Volume\">FCSys.Subregions.Volume</a> model.</p>
 
     <p>If the species are mixed, it may be more appropriate to assume that the pressures
-    of the components of a mixture sum to the total pressure of the mixture.  This \"additivity of pressure\"
+    of the components of a mixture sum to the total pressure of the mixture.  This additivity of pressure
     is described by connections of the
-    <a href=\"modelica://FCSys.Connectors.InertDelton\">InertDalton</a> connector (instead of
-    instead of <a href=\"modelica://FCSys.Connectors.InertDelton\">InertAmagat</a>).</p>
+    <a href=\"modelica://FCSys.Connectors.InertDelton\">InertDalton</a> connector.</p>
 
     <hr>
 

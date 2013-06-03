@@ -3483,546 +3483,6 @@ model.</p>
 
   end Inert;
 
-  package InertAmagat
-    "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector</html>"
-    extends Modelica.Icons.Package;
-
-    model Phase
-      "<html>Condition for a <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector (e.g., as in a <a href=\"modelica://FCSys.Subregions.Phases\">Phase</a> model), with efforts by default</html>"
-      import FCSys.BaseClasses.Utilities.countTrue;
-      extends FCSys.Conditions.BaseClasses.Icons.Single;
-
-      // Included components of translational momentum
-      parameter Boolean inclTransX=true "X" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(group="Axes with translational momentum included", compact=true));
-
-      parameter Boolean inclTransY=false "Y" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(group="Axes with translational momentum included", compact=true));
-
-      parameter Boolean inclTransZ=false "Z" annotation (
-        HideResult=true,
-        choices(__Dymola_checkBox=true),
-        Dialog(group="Axes with translational momentum included", compact=true));
-
-      // Conditions
-      replaceable Amagat.Pressure amagat(source(k(start=U.atm))) constrainedby
-        Amagat.BaseClasses.PartialCondition(
-        final inclTransX=inclTransX,
-        final inclTransY=inclTransY,
-        final inclTransZ=inclTransZ) "Amagat" annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(group="Conditions"),
-        Placement(transformation(extent={{-74,20},{-54,40}})));
-      replaceable FCSys.Conditions.InertAmagat.Translational.Velocity
-        translationalX(source(k(start=0))) if inclTransX constrainedby
-        Conditions.InertAmagat.Translational.BaseClasses.PartialCondition(
-        final inclTransX=inclTransX,
-        final inclTransY=inclTransY,
-        final inclTransZ=inclTransZ,
-        final axis=Axis.x) "X-axis translational" annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(group="Conditions",enable=inclTransX),
-        Placement(transformation(extent={{-42,8},{-22,28}})));
-      replaceable FCSys.Conditions.InertAmagat.Translational.Velocity
-        translationalY(source(k(start=0))) if inclTransY constrainedby
-        Conditions.InertAmagat.Translational.BaseClasses.PartialCondition(
-        final inclTransX=inclTransX,
-        final inclTransY=inclTransY,
-        final inclTransZ=inclTransZ,
-        final axis=Axis.y) "Y-axis translational" annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(group="Conditions",enable=inclTransY),
-        Placement(transformation(extent={{-10,-4},{10,16}})));
-      replaceable FCSys.Conditions.InertAmagat.Translational.Velocity
-        translationalZ(source(k(start=0))) if inclTransZ constrainedby
-        Conditions.InertAmagat.Translational.BaseClasses.PartialCondition(
-        final inclTransX=inclTransX,
-        final inclTransY=inclTransY,
-        final inclTransZ=inclTransZ,
-        final axis=Axis.z) "Z-axis translational" annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(group="Conditions",enable=inclTransZ),
-        Placement(transformation(extent={{22,-16},{42,4}})));
-      replaceable Thermal.Temperature thermal(source(k(start=298.15*U.K)))
-        constrainedby Thermal.BaseClasses.PartialCondition(
-        final inclTransX=inclTransX,
-        final inclTransY=inclTransY,
-        final inclTransZ=inclTransZ) "Thermal" annotation (
-        __Dymola_choicesFromPackage=true,
-        Dialog(group="Conditions"),
-        Placement(transformation(extent={{54,-30},{74,-10}})));
-
-      Connectors.RealInputBus u "Input bus for values of specified conditions"
-        annotation (HideResult=not (internalVolume or internalLinX or
-            internalLinY or internalLinZ or internalThermal), Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={-110,0}), iconTransformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={-110,0})));
-      Connectors.RealOutputBus y "Output bus of measurements" annotation (
-          Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={110,0}),iconTransformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={110,0})));
-
-      Connectors.InertAmagat inert(final n_trans=countTrue({inclTransX,
-            inclTransY,inclTransZ}))
-        "Single-species connector for translational momentum and heat, with additivity of volume"
-        annotation (Placement(transformation(extent={{-10,-50},{10,-30}}),
-            iconTransformation(extent={{-10,-50},{10,-30}})));
-
-    equation
-      // Amagat
-      connect(amagat.inert, inert) annotation (Line(
-          points={{-64,26},{-64,-30},{5.55112e-16,-30},{5.55112e-16,-40}},
-          color={11,43,197},
-          smooth=Smooth.None));
-      connect(u.amagat, amagat.u) annotation (Line(
-          points={{-110,5.55112e-16},{-110,0},{-88,0},{-88,30},{-75,30}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%first",
-          index=-1,
-          extent={{-2,3},{-2,3}}));
-      connect(amagat.y, y.amagat) annotation (Line(
-          points={{-53,30},{90,30},{90,5.55112e-16},{110,5.55112e-16}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%second",
-          index=1,
-          extent={{2,3},{2,3}}));
-
-      // X-axis translational
-      connect(translationalX.inert, inert) annotation (Line(
-          points={{-32,14},{-32,-30},{5.55112e-16,-30},{5.55112e-16,-40}},
-          color={11,43,197},
-          smooth=Smooth.None));
-      connect(u.translationalX, translationalX.u) annotation (Line(
-          points={{-110,5.55112e-16},{-110,0},{-88,0},{-88,18},{-43,18}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%first",
-          index=-1,
-          extent={{-2,3},{-2,3}}));
-      connect(translationalX.y, y.translationalX) annotation (Line(
-          points={{-21,18},{90,18},{90,5.55112e-16},{110,5.55112e-16}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%second",
-          index=1,
-          extent={{2,3},{2,3}}));
-
-      // Y-axis translational
-      connect(translationalY.inert, inert) annotation (Line(
-          points={{6.10623e-16,2},{6.10623e-16,-30},{5.55112e-16,-30},{
-              5.55112e-16,-40}},
-          color={11,43,197},
-          smooth=Smooth.None));
-
-      connect(u.translationalY, translationalY.u) annotation (Line(
-          points={{-110,5.55112e-16},{-110,0},{-88,0},{-88,6},{-11,6}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%first",
-          index=-1,
-          extent={{-2,3},{-2,3}}));
-      connect(translationalY.y, y.translationalY) annotation (Line(
-          points={{11,6},{90,6},{90,5.55112e-16},{110,5.55112e-16}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%second",
-          index=1,
-          extent={{2,3},{2,3}}));
-
-      // Z-axis translational
-      connect(translationalZ.inert, inert) annotation (Line(
-          points={{32,-10},{32,-30},{5.55112e-16,-30},{5.55112e-16,-40}},
-          color={11,43,197},
-          smooth=Smooth.None));
-      connect(u.translationalZ, translationalZ.u) annotation (Line(
-          points={{-110,5.55112e-16},{-110,0},{-88,0},{-88,-6},{21,-6}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%first",
-          index=-1,
-          extent={{-2,3},{-2,3}}));
-      connect(translationalZ.y, y.translationalZ) annotation (Line(
-          points={{43,-6},{90,-6},{90,5.55112e-16},{110,5.55112e-16}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%second",
-          index=1,
-          extent={{2,3},{2,3}}));
-
-      // Thermal
-      connect(thermal.inert, inert) annotation (Line(
-          points={{64,-24},{64,-30},{0,-30},{0,-40},{5.55112e-16,-40}},
-          color={11,43,197},
-          smooth=Smooth.None));
-      connect(u.thermal, thermal.u) annotation (Line(
-          points={{-110,5.55112e-16},{-110,0},{-88,0},{-88,-20},{53,-20}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%first",
-          index=-1,
-          extent={{-2,3},{-2,3}}));
-      connect(thermal.y, y.thermal) annotation (Line(
-          points={{75,-20},{90,-20},{90,5.55112e-16},{110,5.55112e-16}},
-          color={0,0,127},
-          smooth=Smooth.None), Text(
-          string="%second",
-          index=1,
-          extent={{2,3},{2,3}}));
-      annotation (Documentation(info="<html>
-  <p>If the source of an internal specification is redeclared to a block besides
-  <a href=\"modelica://Modelica.Blocks.Sources.Constant\">Modelica.Blocks.Sources.Constant</a>,
-  then the related condition must be redeclared as well.  For example, use:<br>
-  <code>redeclare Conditions.InertAmagat.Amagat.Volume amagat(redeclare Modelica.Blocks.Sources.Ramp source)</code><br>
-  rather than simply:<br>
-  <code>amagat(redeclare Modelica.Blocks.Sources.Ramp source)</code></p>
-  </html>"));
-    end Phase;
-
-    model PhaseFlow
-      "<html>Condition for a <a href=\"modelica://FCSys.Connectors.InertAmagat\">InertAmagat</a> connector (e.g., as in a <a href=\"modelica://FCSys.Subregions.Phases\">Phase</a> model), with flows by default</html>"
-
-      extends Phase(
-        redeclare Amagat.Volume amagat(source(k(start=-U.cc))),
-        redeclare FCSys.Conditions.InertAmagat.Translational.Force
-          translationalX(source(k(start=0))),
-        redeclare FCSys.Conditions.InertAmagat.Translational.Force
-          translationalY(source(k(start=0))),
-        redeclare FCSys.Conditions.InertAmagat.Translational.Force
-          translationalZ(source(k(start=0))),
-        redeclare Thermal.HeatRate thermal(source(k(start=0))));
-      annotation (defaultComponentName="phase", Documentation(info="<html>
-<p>See the <a href=\"modelica://FCSys.Conditions.InertAmagat.Phase\">Phase</a>
-model.</p>
-</html>"));
-
-    end PhaseFlow;
-
-    package Amagat "Conditions for additivity of volume"
-      extends Modelica.Icons.Package;
-
-      model Pressure "Specify pressure (measure volume)"
-        extends BaseClasses.PartialCondition(
-          final conditionType=BaseClasses.ConditionType.Pressure,
-          u(final unit="m/(l.T2)"),
-          final y(final unit="l3") = inert.V);
-
-      equation
-        inert.p = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="amagat");
-      end Pressure;
-
-      model Volume "Specify volume (measure pressure)"
-        extends BaseClasses.PartialCondition(
-          final conditionType=BaseClasses.ConditionType.Volume,
-          u(final unit="l3"),
-          final y(final unit="m/(l.T2)") = inert.p);
-
-      equation
-        inert.V = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="amagat");
-      end Volume;
-
-      model Custom "Custom expressions"
-        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=inert.V);
-
-        Real x=inert.p "Expression to which the condition is applied"
-          annotation (Dialog(group="Specification"));
-
-      equation
-        x = u_final;
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="amagat",
-          Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
-    must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p></html>"));
-      end Custom;
-
-      package BaseClasses "Base classes (not generally for direct use)"
-        extends Modelica.Icons.BasesPackage;
-        partial model PartialCondition
-          "Partial model of pressure/volume condition"
-          extends InertAmagat.BaseClasses.PartialCondition;
-
-          constant ConditionType conditionType "Type of condition";
-          // Note:  This is included so that the type of condition is recorded with
-          // the results.
-
-        equation
-          // Zero values of other flows
-          inert.mPhidot = zeros(n_trans) "Force";
-          inert.Qdot = 0 "Heat flow rate";
-          annotation (defaultComponentName="volumeCondition");
-        end PartialCondition;
-
-        type ConditionType = enumeration(
-            Volume "Specify volume (measure pressure)",
-            Pressure "Specify pressure (measure volume)",
-            Custom "Custom expressions") "Types of conditions";
-
-      end BaseClasses;
-
-    end Amagat;
-
-    package Translational "Translational conditions"
-      extends Modelica.Icons.Package;
-      model Velocity "Specify velocity (measure force)"
-        extends BaseClasses.PartialCondition(
-          final conditionType=BaseClasses.ConditionType.Velocity,
-          u(final unit="l/T"),
-          final y(final unit="l.m/T2") = inert.mPhidot[transAxes[axis]]);
-
-      equation
-        inert.phi[transAxes[axis]] = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="translational");
-      end Velocity;
-
-      model Force "Specify force (measure velocity)"
-        extends BaseClasses.PartialCondition(
-          final conditionType=BaseClasses.ConditionType.Force,
-          u(final unit="l.m/T2"),
-          final y(final unit="l/T") = inert.phi[transAxes[axis]]);
-
-      equation
-        inert.mPhidot[transAxes[axis]] = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="translational");
-      end Force;
-
-      model Custom "Custom expressions"
-        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=inert.mPhidot[transAxes[axis]]);
-
-        Real x=inert.phi[transAxes[axis]]
-          "Expression to which the condition is applied"
-          annotation (Dialog(group="Specification"));
-
-      equation
-        x = u_final;
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="translational",
-          Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
-    must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p></html>"));
-      end Custom;
-
-      package BaseClasses "Base classes (not generally for direct use)"
-        extends Modelica.Icons.BasesPackage;
-        partial model PartialCondition
-          "Partial model for a translational condition"
-          import FCSys.BaseClasses.Utilities.enumerate;
-          import FCSys.BaseClasses.Utilities.index;
-          extends InertAmagat.BaseClasses.PartialCondition;
-
-          parameter Axis axis=Axis.x "Axis" annotation (HideResult=true);
-
-          constant ConditionType conditionType "Type of condition";
-          // Note:  This is included so that the type of condition is recorded with
-          // the results.
-
-        protected
-          final parameter Integer cartAxes[n_trans]=index({inclTransX,
-              inclTransY,inclTransZ})
-            "Cartesian-axis indices of the components of translational momentum";
-          final parameter Integer transAxes[Axis]=enumerate({inclTransX,
-              inclTransY,inclTransZ})
-            "Translational-momentum-component indices of the Cartesian axes";
-
-        equation
-          // Zero values of other flows
-          inert.V = 0 "Volume";
-          for i in 1:n_trans loop
-            if cartAxes[i] <> axis then
-              inert.mPhidot[i] = 0 "Force along the other axes";
-            end if;
-          end for;
-          inert.Qdot = 0 "Heat flow rate";
-          annotation (defaultComponentName="translationalCondition");
-        end PartialCondition;
-
-        type ConditionType = enumeration(
-            Velocity "Specify velocity (measure force)",
-            Force "Specify force (measure velocity)",
-            Custom "Custom expressions") "Types of conditions";
-
-      end BaseClasses;
-
-    end Translational;
-
-    package Thermal "Thermal conditions"
-      extends Modelica.Icons.Package;
-
-      model Temperature "Specify temperature (measure heat flow rate)"
-        extends BaseClasses.PartialCondition(
-          final conditionType=BaseClasses.ConditionType.Temperature,
-          u(final unit="l2.m/(N.T2)", displayUnit="K"),
-          source(k(start=298.15*U.K)),
-          final y(final unit="l2.m/T3") = inert.Qdot);
-
-      equation
-        inert.T = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="thermal");
-      end Temperature;
-
-      model HeatRate "Specify heat flow rate (measure temperature)"
-        extends BaseClasses.PartialCondition(
-          final conditionType=BaseClasses.ConditionType.HeatRate,
-          u(final unit="l2.m/T3"),
-          final y(
-            final unit="l2.m/(N.T2)",
-            displayUnit="K") = inert.T);
-
-      equation
-        inert.Qdot = u_final;
-        annotation (defaultComponentPrefixes="replaceable",
-            defaultComponentName="thermal");
-      end HeatRate;
-
-      model Custom "Custom expressions"
-        extends BaseClasses.PartialCondition(final conditionType=BaseClasses.ConditionType.Custom,
-            y=inert.Qdot);
-
-        Real x=inert.T "Expression to which the condition is applied"
-          annotation (Dialog(group="Specification"));
-
-      equation
-        x = u_final;
-        annotation (
-          defaultComponentPrefixes="replaceable",
-          defaultComponentName="thermal",
-          Documentation(info="<html><p>The expression to which the condition is applied (<code>x</code>)
-    must involve <code>face.T</code> and/or <code>face.Qdot</code>.</p></html>"));
-      end Custom;
-
-      package BaseClasses "Base classes (not generally for direct use)"
-        extends Modelica.Icons.BasesPackage;
-        partial model PartialCondition "Partial model for a thermal condition"
-          extends InertAmagat.BaseClasses.PartialCondition;
-
-          constant ConditionType conditionType "Type of condition";
-          // Note:  This is included so that the type of condition is recorded with
-          // the results.
-
-        equation
-          // Zero values of other flows
-          inert.V = 0 "Volume";
-          inert.mPhidot = zeros(n_trans) "Force";
-          annotation (defaultComponentName="thermal");
-        end PartialCondition;
-
-        type ConditionType = enumeration(
-            Temperature "Specify temperature (measure heat flow rate)",
-            HeatRate "Specify heat flow rate (measure temperature)",
-            Custom "Custom expressions") "Types of conditions";
-
-      end BaseClasses;
-
-    end Thermal;
-
-    package BaseClasses "Base classes (not generally for direct use)"
-      extends Modelica.Icons.BasesPackage;
-      partial model PartialCondition "Partial model of a condition"
-        import FCSys.BaseClasses.Utilities.countTrue;
-        extends FCSys.Conditions.BaseClasses.Icons.Single;
-
-        parameter Boolean inclTransX=true "X" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(group="Axes with translational momentum included", compact=
-                true));
-
-        parameter Boolean inclTransY=false "Y" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(group="Axes with translational momentum included", compact=
-                true));
-
-        parameter Boolean inclTransZ=false "Z" annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(group="Axes with translational momentum included", compact=
-                true));
-
-        parameter Boolean internal=true "Use internal specification"
-          annotation (
-          HideResult=true,
-          choices(__Dymola_checkBox=true),
-          Dialog(group="Specification"));
-
-        replaceable Modelica.Blocks.Sources.Constant source if internal
-          constrainedby Modelica.Blocks.Interfaces.SO
-          "Source of internal specification" annotation (
-          __Dymola_choicesFromPackage=true,
-          Dialog(group="Specification",enable=internal),
-          Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-70,30})));
-        Connectors.RealInput u if not internal "Value of specified condition"
-          annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-110,0})));
-
-        Connectors.RealOutput y "Measurement expression" annotation (Dialog(
-              group="Measurement"), Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,0}), iconTransformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={110,0})));
-        Connectors.InertAmagat inert(final n_trans=n_trans)
-          "Connector for translational momentum and heat, with additivity of volume"
-          annotation (Placement(transformation(extent={{-10,-50},{10,-30}})));
-
-      protected
-        final parameter Integer n_trans=countTrue({inclTransX,inclTransY,
-            inclTransZ}) "Number of components of translational momentum";
-
-        Connectors.RealOutputInternal u_final
-          "Final value of specified condition" annotation (Placement(
-              transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={-20,0})));
-
-      equation
-        connect(source.y, u_final) annotation (Line(
-            points={{-59,30},{-40,30},{-40,5.55112e-16},{-20,5.55112e-16}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(u, u_final) annotation (Line(
-            points={{-110,5.55112e-16},{-88,0},{-66,1.11022e-15},{-66,
-                5.55112e-16},{-20,5.55112e-16}},
-            color={0,0,127},
-            smooth=Smooth.None));
-
-      end PartialCondition;
-
-    end BaseClasses;
-
-  end InertAmagat;
-
   package InertDalton
     "<html>Conditions for a <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a> connector</html>"
     extends Modelica.Icons.Package;
@@ -6901,27 +6361,31 @@ connected to <code>positive1</code>, as shown by Figure 1b.</p>
         <td colspan=2 align=center>Figure 1: Modes of connection.</td>
       </tr>
     </table>
-</html>"), Icon(graphics={Line(
-              points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier),Line(
-              points={{-80,40},{80,40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-80,-40},{80,-40}},
-              color={127,127,127},
-              visible=not crossOver,
-              smooth=Smooth.None,
-              thickness=0.5),Line(
-              points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
-              color={127,127,127},
-              thickness=0.5,
-              visible=crossOver,
-              smooth=Smooth.Bezier)}));
+</html>"), Icon(graphics={
+          Line(
+            points={{-80,40},{-40,40},{0,0},{40,-40},{80,-40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier),
+          Line(
+            points={{-80,40},{80,40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{80,-40}},
+            color={127,127,127},
+            visible=not crossOver,
+            smooth=Smooth.None,
+            thickness=0.5),
+          Line(
+            points={{-80,-40},{-40,-40},{0,0},{40,40},{80,40}},
+            color={127,127,127},
+            thickness=0.5,
+            visible=crossOver,
+            smooth=Smooth.Bezier)}));
   end Router;
 
   record Environment "Environmental properties for a model"
@@ -6963,49 +6427,60 @@ your model to specify global conditions and defaults.  Otherwise the default
 settings will be used.
 ",
       Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-              100}}), graphics={Rectangle(
-              extent={{-120,60},{120,100}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Text(
-              extent={{-120,60},{120,100}},
-              textString="%name",
-              lineColor={0,0,0}),Rectangle(
-              extent={{-80,60},{80,-100}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),Rectangle(
-              extent={{-70,50},{70,-98}},
-              lineColor={255,255,255},
-              fillPattern=FillPattern.HorizontalCylinder,
-              fillColor={170,170,255}),Rectangle(
-              extent={{-72,-60},{72,-100}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
-            Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),Ellipse(
-              extent={{32,8},{48,-8}},
-              pattern=LinePattern.None,
-              lineColor={255,255,255},
-              fillColor={50,50,50},
-              fillPattern=FillPattern.Sphere),Line(points={{-66,-90},{-36,-60}},
-            color={0,0,0}),Line(points={{2,-90},{32,-60}}, color={0,0,0}),Line(
-            points={{36,-90},{66,-60}}, color={0,0,0}),Line(points={{-32,-90},{
-            -2,-60}}, color={0,0,0}),Rectangle(
-              extent={{70,50},{76,-60}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),Rectangle(
-              extent={{-76,50},{-70,-60}},
-              fillPattern=FillPattern.Solid,
-              fillColor={255,255,255},
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),Rectangle(
-              extent={{-80,60},{80,-100}},
-              lineColor={0,0,0},
-              pattern=LinePattern.Dash)}));
+              100}}), graphics={
+          Rectangle(
+            extent={{-120,60},{120,100}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Text(
+            extent={{-120,60},{120,100}},
+            textString="%name",
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-80,60},{80,-100}},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            pattern=LinePattern.None),
+          Rectangle(
+            extent={{-70,50},{70,-98}},
+            lineColor={255,255,255},
+            fillPattern=FillPattern.HorizontalCylinder,
+            fillColor={170,170,255}),
+          Rectangle(
+            extent={{-72,-60},{72,-100}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0}),
+          Line(points={{-70,-60},{70,-60}}, color={0,0,0}),
+          Line(points={{-40,-20},{-10,-50},{40,0}}, color={0,0,0}),
+          Ellipse(
+            extent={{32,8},{48,-8}},
+            pattern=LinePattern.None,
+            lineColor={255,255,255},
+            fillColor={50,50,50},
+            fillPattern=FillPattern.Sphere),
+          Line(points={{-66,-90},{-36,-60}}, color={0,0,0}),
+          Line(points={{2,-90},{32,-60}}, color={0,0,0}),
+          Line(points={{36,-90},{66,-60}}, color={0,0,0}),
+          Line(points={{-32,-90},{-2,-60}}, color={0,0,0}),
+          Rectangle(
+            extent={{70,50},{76,-60}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-76,50},{-70,-60}},
+            fillPattern=FillPattern.Solid,
+            fillColor={255,255,255},
+            pattern=LinePattern.None,
+            lineColor={0,0,0}),
+          Rectangle(
+            extent={{-80,60},{80,-100}},
+            lineColor={0,0,0},
+            pattern=LinePattern.Dash)}));
 
   end Environment;
 
@@ -7043,21 +6518,25 @@ settings will be used.
 
       partial class Single "Icon for a single-connector boundary condition"
         // extends Names.Middle;
-        annotation (Icon(graphics={Rectangle(
-                      extent={{-100,40},{100,-40}},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid,
-                      pattern=LinePattern.None),Line(
-                      points={{-100,-40},{-100,40},{100,40},{100,-40}},
-                      pattern=LinePattern.None,
-                      smooth=Smooth.None),Line(
-                      points={{-100,-40},{100,-40}},
-                      color={0,0,0},
-                      smooth=Smooth.None,
-                      pattern=LinePattern.Dash),Text(
-                      extent={{-100,-20},{100,20}},
-                      textString="%name",
-                      lineColor={0,0,0})}));
+        annotation (Icon(graphics={
+              Rectangle(
+                extent={{-100,40},{100,-40}},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                pattern=LinePattern.None),
+              Line(
+                points={{-100,-40},{-100,40},{100,40},{100,-40}},
+                pattern=LinePattern.None,
+                smooth=Smooth.None),
+              Line(
+                points={{-100,-40},{100,-40}},
+                color={0,0,0},
+                smooth=Smooth.None,
+                pattern=LinePattern.Dash),
+              Text(
+                extent={{-100,-20},{100,20}},
+                textString="%name",
+                lineColor={0,0,0})}));
 
       end Single;
 
@@ -7066,14 +6545,12 @@ settings will be used.
   end BaseClasses;
   annotation (Documentation(info="<html>
   <p>The <a href=\"modelica://FCSys.Conditions.Chemical\">Chemical</a>,
-  <a href=\"modelica://FCSys.Conditions.ChemicalBus\">ChemicalBus</a>, <a href=\"modelica://FCSys.Conditions.InertAmagat\">Inert</a>,
-  <a href=\"modelica://FCSys.Conditions.InertAmagat\">InertAmagat</a>,
+  <a href=\"modelica://FCSys.Conditions.ChemicalBus\">ChemicalBus</a>, 
   <a href=\"modelica://FCSys.Conditions.InertDalton\">InertDalton</a>, <a href=\"modelica://FCSys.Conditions.Face\">Face</a>, and
   <a href=\"modelica://FCSys.Conditions.FaceBus\">FaceBus</a> packages contain models to specify conditions on the
   connectors with the same names (<a href=\"modelica://FCSys.Connectors.ChemicalInput\">ChemicalInput</a> or
   <a href=\"modelica://FCSys.Connectors.ChemicalOutput\">ChemicalOutput</a>, <a href=\"modelica://FCSys.Connectors.Inert\">Inert</a> or
   <a href=\"modelica://FCSys.Connectors.InertInternal\">InertInternal</a>,
-  <a href=\"modelica://FCSys.Conditions.InertAmagat\">InertAmagat</a>,
   <a href=\"modelica://FCSys.Connectors.InertDalton\">InertDalton</a>, <a href=\"modelica://FCSys.Conditions.Face\">Face</a>, and
   <a href=\"modelica://FCSys.Connectors.FaceBus\">FaceBus</a>).
   The <a href=\"modelica://FCSys.Conditions.FaceDifferential\">FacePair</a> and
